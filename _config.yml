@@ -1,0 +1,13 @@
+# Site settings
+title: College Choice
+
+description:
+  Write an awesome description for your new site here.
+
+baseurl: "" # the subpath of your site, e.g. /blog/
+
+# Build settings
+markdown: kramdown
+
+sass:
+    style: :nested
