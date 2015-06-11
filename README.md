@@ -2,14 +2,15 @@
 We should say something about this project here.
 
 ## Installation
-This site is made with [Jekyll], which you can install with:
+This site is made with [Jekyll]. Once you've got [Ruby] on your computer, you
+can run:
 
 ```sh
 gem install github-pages
 ```
 
-(Note: depending on how Ruby was installed on your computer, you may need to
-prefix the above command with `sudo`.)
+(Note: depending on how Ruby was installed, you may need to prefix the above
+command with `sudo`.)
 
 To start up the local server, run:
 
@@ -30,3 +31,4 @@ the source files.
 [Jekyll]: http://jekyllrb.com/
 [Sass]: http://sass-lang.com/
 [D3]: http://d3js.org/
+[Ruby]: https://www.ruby-lang.org/
