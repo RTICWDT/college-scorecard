@@ -1,7 +1,90 @@
 <section>
 
   <form>
-  	<h1>Find Schools By:</h1>
+    <h1>Find Schools By:</h1>
+    <p>Enter as many criteria as you want!</p>
+
+    <fieldset>
+      <h2>Name</h2>
+
+      <p>
+        <input name="name" type="text" placeholder="Name of School">
+        <button class="add" data-input="name">
+          <strong>+</strong> Add School
+        </button>
+      </p>
+
+    </fieldset>
+
+    <fieldset>
+      <h2>Location</h2>
+
+      <p>
+        <select name="state">
+          <option value="">Select a State</option>
+          {% for state in site.data.states|sort('name') %}
+          <option value="{{ state.abbr }}">{{ state.name }}</option>
+          {% endfor %}
+        </select>
+
+        <button class="add" data-input="state">
+          <strong>+</strong> Add State
+        </button>
+      </p>
+
+      <p>
+        <select name="region">
+          <option value="">Select a Region</option>
+          {% for region in site.data.regions|sort('name') %}
+          <option value="{{ region.id }}">{{ region.name }} ({{ region.states }})</option>
+          {% endfor %}
+        </select>
+      </p>
+
+      <p>
+        <input name="zip_code" type="number" placeholder="Zip Code">
+        <input name="search_radius" type="number" step=".1" placeholder="Mile Radius">
+      </p>
+
+    </fieldset>
+
+    <fieldset>
+
+      <h2>Major/Degree</h2>
+
+      <p>
+        <input name="major" type="text" placeholder="Enter a Major or Keyword">
+      </p>
+
+      <p>
+        <select name="major_type">
+          <option value="">Select a Type of Degree</option>
+          <option>???</option>
+        </select>
+      </p>
+
+    </fieldset>
+
+    <fieldset>
+
+      <h2>Size</h2>
+
+      <h3>Undergraduate Student Body</h3>
+      <ul>
+        <li><label><input type="checkbox" name="size" value="small"> Small (&lt; 2,000)</label></li>
+        <li><label><input type="checkbox" name="size" value="medium"> Medium (2,000&ndash;15,000)</label></li>
+        <li><label><input type="checkbox" name="size" value="large"> Medium (&gt; 15,000)</label></li>
+      </ul>
+
+      <h3>Student-to-Faculty Ratio</h3>
+      <ul>
+        <li><label><input type="checkbox" name="sf_ratio" value="low"> Low (&lt; 20:1)</label></li>
+        <li><label><input type="checkbox" name="sf_ratio" value="medium"> Medium (20:1&ndash;50:1)</label></li>
+        <li><label><input type="checkbox" name="sf_ratio" value="high"> High (&gt; 50:1)</label></li>
+      </ul>
+
+    </fieldset>
+
   </form>
 
 </section>
