@@ -1,17 +1,3 @@
----
-# Jekyll needs this to render Sass
----
-
-// include Bourbon & Neat
-@import "bourbon/bourbon";
-@import "neat/neat";
-
-@import "colors";
-@import "mixins";
-@import "typography";
-
-// include fonts (and @import font-face declarations from /css/fonts)
-@import "fonts";
 
 $pad-less: .5em;
 $pad-more: 1em;

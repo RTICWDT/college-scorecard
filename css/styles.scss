@@ -1,0 +1,16 @@
+---
+# Jekyll needs this to render Sass
+---
+
+// include Bourbon & Neat
+@import "bourbon/bourbon";
+@import "neat/neat";
+
+// include site specific base styles
+@import "base/base";
+
+// include fonts (and @import font-face declarations from /css/fonts)
+@import "base/fonts";
+
+// import site-specific custom styles
+@import 'main';
