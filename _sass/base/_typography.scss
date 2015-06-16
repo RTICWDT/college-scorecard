@@ -7,7 +7,7 @@ body {
   -webkit-font-smoothing: antialiased;
   color: $base-font-color;
   font-family: $base-font-family;
-  line-height: $unitless-line-height;
+  line-height: $base-line-height;
 }
 
 // Typeographic multipliers
@@ -19,10 +19,9 @@ $h5: 1.1;
 $h6: 1;
 
 h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4 {
+.h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: $header-font-family;
   font-weight: inherit;
-  line-height: 1.4;
   margin: 0;
   text-rendering: optimizeLegibility;
   // ^^ Fix character spacing for headings
@@ -30,31 +29,31 @@ h1, h2, h3, h4, h5, h6,
 
 h1,
 .h1 {
-  @include font-size($base-font-size * $h1);
+  @include font-size($h1);
 }
 
 h2,
 .h2 {
-  @include font-size($base-font-size * $h2);
+  @include font-size($h2);
 }
 
 h3,
 .h3 {
-  @include font-size($base-font-size * $h3);
+  @include font-size($h3);
 }
 
 h4,
 .h4 {
-  @include font-size($base-font-size * $h4);
+  @include font-size($h4);
 }
 
 h5,
 .h5 {
-  @include font-size($base-font-size * $h5);
+  @include font-size($h5);
 }
 
 h6,
 .h6 {
-  @include font-size($base-font-size * $h6);
+  @include font-size($h6);
   font-weight: normal;
 }

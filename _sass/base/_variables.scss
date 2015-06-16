@@ -6,12 +6,9 @@ $header-font-family: $base-font-family;
 $secondary-font-family: Arial, sans-serif;
 
 // Sizes
-$base-font-size: 1rem;
-$base-line-height: $base-font-size * 1.5;
-$unitless-line-height: $base-line-height / ($base-line-height * 0 + 1);
-// ^^ Strip units from line-height
-// https://developer.mozilla.org/en-US/docs/Web/CSS/line-height#Prefer_unitless_numbers_for_line-height_values
-$header-line-height: $base-font-size * 1.25;
+$base-font-size: 1.6;
+$base-line-height: 1.5;
+// $header-line-height: $base-font-size * 1.25;
 
 // Colors
 $white: #ffffff;
