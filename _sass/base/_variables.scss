@@ -1,4 +1,47 @@
-$white: #fff;
-$black: #000;
-$dark-blue: #11375A;
-$medium-blue: #2E618F;
+// Typography
+$sans-serif: Montserrat, "Helvetica Neue", Helvetica, arial, sans-serif;
+$serif: $georgia;
+$base-font-family: $sans-serif;
+$header-font-family: $base-font-family;
+$secondary-font-family: Arial, sans-serif;
+
+// Sizes
+$base-font-size: 1rem;
+$base-line-height: $base-font-size * 1.5;
+$unitless-line-height: $base-line-height / ($base-line-height * 0 + 1);
+// ^^ Strip units from line-height
+// https://developer.mozilla.org/en-US/docs/Web/CSS/line-height#Prefer_unitless_numbers_for_line-height_values
+$header-line-height: $base-font-size * 1.25;
+
+// Colors
+$white: #ffffff;
+$black: #000000;
+$dark-blue: #11375a;
+$medium-blue: #2e618f;
+
+// Background Color
+// $base-background-color: $deep-gray;
+
+// Font Colors
+$base-font-color: $black;
+$base-accent-color: $medium-blue;
+
+// // Link Colors
+// $base-link-color: $base-font-color;
+// $hover-link-color: 
+// $base-button-color: $base-link-color;
+// $hover-button-color: $hover-link-color;
+
+// // Border color
+// $base-border-color: $light-gray;
+
+// // Forms
+// $form-border-color: $base-border-color;
+// $form-border-color-hover: darken($base-border-color, 10);
+// $form-border-color-focus: $base-accent-color;
+// $form-border-radius: $base-border-radius;
+// $form-box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+// $form-box-shadow-focus: $form-box-shadow, 0 0 5px rgba(darken($form-border-color-focus, 5), 0.7);
+// $form-font-size: $base-font-size;
+// $form-font-family: $base-font-family;
+

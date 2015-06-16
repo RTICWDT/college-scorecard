@@ -1,19 +1,60 @@
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1.4em;
-  margin: 0;
+// To ensure .1 rem unit equals 1px:
+html {
+  font-size: 62.5%;
 }
 
-h1 { font-size: 2em; }
+body {
+  -webkit-font-smoothing: antialiased;
+  color: $base-font-color;
+  font-family: $base-font-family;
+  line-height: $unitless-line-height;
+}
 
-h2 { font-size: 1.5em; }
+// Typeographic multipliers
+$h1: 2;
+$h2: 1.5;
+$h3: 1.25;
+$h4: 1.2;
+$h5: 1.1;
+$h6: 1;
 
-h3 { font-size: 1.25em; }
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4 {
+  font-family: $header-font-family;
+  font-weight: inherit;
+  line-height: 1.4;
+  margin: 0;
+  text-rendering: optimizeLegibility;
+  // ^^ Fix character spacing for headings
+}
 
-h4 { font-size: 1.2em; }
+h1,
+.h1 {
+  @include font-size($base-font-size * $h1);
+}
 
-h5 { font-size: 1.1em; }
+h2,
+.h2 {
+  @include font-size($base-font-size * $h2);
+}
 
-h6 {
-  font-size: 1em;
+h3,
+.h3 {
+  @include font-size($base-font-size * $h3);
+}
+
+h4,
+.h4 {
+  @include font-size($base-font-size * $h4);
+}
+
+h5,
+.h5 {
+  @include font-size($base-font-size * $h5);
+}
+
+h6,
+.h6 {
+  @include font-size($base-font-size * $h6);
   font-weight: normal;
 }

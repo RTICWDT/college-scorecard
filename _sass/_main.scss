@@ -1,7 +1,11 @@
-
+// Utility classes (hopefully temporary)
+//============================================
 $pad-less: .5em;
 $pad-more: 1em;
 
+
+// Site-wide
+//============================================
 * {
   box-sizing: border-box;
 }
@@ -9,21 +13,6 @@ $pad-more: 1em;
 body {
   margin: 0;
   padding: 0;
-}
-
-.banner {
-  color: $white;
-  background: $dark-blue;
-  padding: $pad-less $pad-more;
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  p {
-    margin: 0;
-  }
 }
 
 header {
@@ -41,4 +30,23 @@ header {
 
 main {
   padding: $pad-more;
+}
+
+
+// Modules
+//============================================
+
+.banner {
+  color: $white;
+  background: $dark-blue;
+  padding: $pad-less $pad-more;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  p {
+    margin: 0;
+  }
 }
