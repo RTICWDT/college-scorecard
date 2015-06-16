@@ -15,7 +15,7 @@ command with `sudo`.)
 To start up the local server, run:
 
 ```sh
-jekyll serve -w
+jekyll serve --baseurl='' -w
 ```
 
 Then visit [http://localhost:4000](http://localhost:4000) to view it. The `-w`
