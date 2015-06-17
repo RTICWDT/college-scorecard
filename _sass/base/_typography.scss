@@ -17,7 +17,6 @@ $h1: 1.5;
 $h2: 1.313;
 $h3: 1.125;
 
-
 // Heading styles
 h1, h2, h3,
 .h1, .h2, .h3 {
@@ -44,6 +43,19 @@ h3,
   @include font-size($h3);
 }
 
+// Other type
+.search {
+	@include font-size($h1);
+}
+
+.key-fact {
+	@include font-size($h3);
+}
+
+.supporting {
+	@include font-size(0.875);
+}
+
 // Testing this approach to modularizing styles
 // From http://thesassway.com/advanced/modular-css-typography
 .quiet { font-color: $base-font-color; }
@@ -64,9 +76,6 @@ h3,
   h1, .h1 { @extend .h1; margin: 1em 0 0.5em; }
   h2, .h2 { @extend .h2; margin: 1em 0 0.5em; }
   h3, .h3 { @extend .h3; margin: 1em 0 0.5em; }
-  h4, .h4 { @extend .h4; margin: 1em 0 0.5em; }
-  h5, .h5 { @extend .h5; margin: 1em 0 0.5em; }
-  h6, .h6 { @extend .h6; margin: 1em 0 0.5em; }
 
   p, ul, ol, pre { @extend .block-margins; }
 

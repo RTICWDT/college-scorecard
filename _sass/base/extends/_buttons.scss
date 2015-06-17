@@ -8,7 +8,7 @@
   font-weight: bold;
   letter-spacing: 1px;
   line-height: 1;
-  padding: .85em 2.1em;
+  padding: $base-button-padding;
   text-decoration: none;
   text-transform: uppercase;
   @include transition-property(background-color);

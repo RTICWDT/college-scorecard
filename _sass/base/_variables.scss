@@ -2,7 +2,6 @@
 $sans-serif: Montserrat, "Helvetica Neue", Helvetica, arial, sans-serif;
 $base-font-family: $sans-serif;
 $header-font-family: $base-font-family;
-//$secondary-font-family: Arial, sans-serif;
 $base-font-weight: normal;
 
 // Sizes
@@ -33,14 +32,16 @@ $base-accent-color: $mid-blue;
 $base-padding: 1.8em;
 
 // Link Colors
-$base-link-color: $base-font-color;
-$hover-link-color: $base-font-color;
+$base-link-color: $green;
+$hover-link-color: $darker-green;
 
-// Button Colors
+// Buttons
 $base-button-color: $green;
 $hover-button-color: $darker-green;
 $secondary-button-color: $red;
 $secondary-hover-button-color: $darker-red;
+$base-button-padding: .85em 2.1em;
+$secondary-button-padding: .5em 2.1em;
 
 // Radius
 $base-border-radius: 3px;

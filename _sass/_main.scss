@@ -10,6 +10,14 @@ $pad-more: 1em;
   box-sizing: border-box;
 }
 
+a {
+	.expand, 
+	.more {
+		@include font-size(0.75);
+		text-transform: uppercase;
+	}
+}
+
 header {
   color: $white;
   background: $mid-blue;
