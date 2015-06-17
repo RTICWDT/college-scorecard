@@ -1,4 +1,4 @@
-// To ensure .1 rem unit equals 1px:
+// Ensures .1 rem unit equals 1px
 html {
   font-size: 62.5%;
 }
@@ -6,8 +6,10 @@ html {
 body {
   -webkit-font-smoothing: antialiased;
   color: $base-font-color;
+  font-size: font-size($base-font-size);
   font-family: $base-font-family;
   line-height: $base-line-height;
+  font-weight: $base-font-weight;
 }
 
 // Typeographic multipliers
@@ -18,6 +20,8 @@ $h4: 1.2;
 $h5: 1.1;
 $h6: 1;
 
+
+// Heading styles
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: $header-font-family;
@@ -27,6 +31,7 @@ h1, h2, h3, h4, h5, h6,
   // ^^ Fix character spacing for headings
 }
 
+// Classes for use with @extend
 h1,
 .h1 {
   @include font-size($h1);
@@ -56,4 +61,34 @@ h6,
 .h6 {
   @include font-size($h6);
   font-weight: normal;
+}
+
+// Testing this approach to modularizing styles
+// From http://thesassway.com/advanced/modular-css-typography
+.quiet { font-color: $base-font-color; }
+.loud  { font-color: $base-accent-color; }
+
+.italic { font-style: italic; }
+.bold   { font-weight: 700; @extend .loud; }
+
+.block-margins { margin: 1em 0; }
+
+.unordered-list { list-style-type: disc; }
+.ordered-list { list-style: decimal; }
+
+.typography {
+  i, em { @extend .italic; }
+  b, strong { @extend .bold; }
+
+  h1, .h1 { @extend .h1; margin: 1em 0 0.5em; }
+  h2, .h2 { @extend .h2; margin: 1em 0 0.5em; }
+  h3, .h3 { @extend .h3; margin: 1em 0 0.5em; }
+  h4, .h4 { @extend .h4; margin: 1em 0 0.5em; }
+  h5, .h5 { @extend .h5; margin: 1em 0 0.5em; }
+  h6, .h6 { @extend .h6; margin: 1em 0 0.5em; }
+
+  p, ul, ol, pre { @extend .block-margins; }
+
+  ul { @extend .unordered-list; }
+  ol { @extend .ordered-list; }
 }

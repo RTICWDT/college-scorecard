@@ -1,14 +1,13 @@
 // Typography
 $sans-serif: Montserrat, "Helvetica Neue", Helvetica, arial, sans-serif;
-$serif: $georgia;
 $base-font-family: $sans-serif;
 $header-font-family: $base-font-family;
-$secondary-font-family: Arial, sans-serif;
+//$secondary-font-family: Arial, sans-serif;
+$base-font-weight: normal;
 
 // Sizes
 $base-font-size: 1.6;
 $base-line-height: 1.5;
-// $header-line-height: $base-font-size * 1.25;
 
 // Colors
 $white: #ffffff;
