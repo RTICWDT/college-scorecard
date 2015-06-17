@@ -6,7 +6,6 @@ input[type="submit"] {
   cursor: pointer;
   user-select: none;
   vertical-align: middle;
-  white-space: nowrap;
 
   &.secondary {
     background-color: $secondary-button-color;
@@ -25,7 +24,13 @@ input[type="submit"] {
   &.wizard {
     background-color: transparent;
     border: 1px solid $white;
+    margin-top: 0.8em;
+    margin-bottom: 0.4em;
     padding: .75em;
+
+    &:hover {
+      background-color: $lighter-blue;
+    }
   }
 
 }

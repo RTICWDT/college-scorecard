@@ -18,18 +18,19 @@ a {
   }
 }
 
-
-
 section {
   padding: $base-padding;
-  h1 {
-    @extend .h2;
+  text-align: center;
+
+  &.secondary {
+    background-color: $secondary-background-color;
+    color: $white;
+
   }
 }
 
-.dark-bg {
-  background-color: $mid-gray;
-}
+
+
 
 
 

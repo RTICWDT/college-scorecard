@@ -15,6 +15,7 @@ $dark-gray: #666666;
 $mid-gray: #e1e1e1;
 $dark-blue: #0e365b;
 $mid-blue: #2b6091;
+$lighter-blue: tint($dark-blue, 6%);
 $green: #2c8511;
 $darker-green: #216d09;
 $darkest-green: #174b06;
@@ -22,7 +23,7 @@ $red: #d44116;
 $darker-red: #b93610;
 
 // Background Color
-// $base-background-color: $deep-gray;
+$secondary-background-color: $dark-blue;
 
 // Font Colors
 $base-font-color: $black;
