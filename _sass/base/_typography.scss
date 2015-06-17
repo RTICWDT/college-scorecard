@@ -1,7 +1,7 @@
-// Ensures .1 rem unit equals 1px
-html {
-  font-size: 62.5%;
-}
+// // Ensures .1 rem unit equals 1px
+// html {
+//   font-size: 62.5%;
+// }
 
 body {
   -webkit-font-smoothing: antialiased;
@@ -13,17 +13,14 @@ body {
 }
 
 // Typeographic multipliers
-$h1: 2;
-$h2: 1.4;
-$h3: 1.25;
-$h4: 1.2;
-$h5: 1.1;
-$h6: 1;
+$h1: 1.5;
+$h2: 1.313;
+$h3: 1.125;
 
 
 // Heading styles
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+h1, h2, h3,
+.h1, .h2, .h3 {
   font-family: $header-font-family;
   font-weight: inherit;
   margin: 0;
@@ -45,22 +42,6 @@ h2,
 h3,
 .h3 {
   @include font-size($h3);
-}
-
-h4,
-.h4 {
-  @include font-size($h4);
-}
-
-h5,
-.h5 {
-  @include font-size($h5);
-}
-
-h6,
-.h6 {
-  @include font-size($h6);
-  font-weight: normal;
 }
 
 // Testing this approach to modularizing styles
