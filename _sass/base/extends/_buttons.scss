@@ -12,9 +12,9 @@
   text-decoration: none;
   text-transform: uppercase;
   @include transition-property(background-color);
-	@include transition-duration(0.25s);
-	@include transition-timing-function(ease-out);
-	@include transition-delay(0s);
+  @include transition-duration(0.25s);
+  @include transition-timing-function(ease-out);
+  @include transition-delay(0s);
 
   &:hover {
     background-color: $hover-button-color;
