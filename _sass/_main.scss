@@ -18,19 +18,7 @@ a {
   }
 }
 
-header {
-  color: $white;
-  background: $mid-blue;
-  padding: $base-padding;
 
-  h1 {
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-  }
-
-}
 
 section {
   padding: $base-padding;
@@ -62,9 +50,22 @@ section {
       background-size: 100%;
       display: inline-block;
       height: 20px;
-      margin-top: 0.8em;
       margin-bottom: -0.2em;
       width: 20px;
+    }
+  }
+}
+
+header {
+  color: $white;
+  background: $mid-blue;
+  padding: 0.8em $base-padding;
+
+  h1 {
+
+    a {
+      color: inherit;
+      text-decoration: none;
     }
   }
 }
