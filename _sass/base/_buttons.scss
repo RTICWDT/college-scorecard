@@ -9,23 +9,23 @@ input[type="submit"] {
   white-space: nowrap;
 
   &.secondary {
-		background-color: $secondary-button-color;
-		padding: $secondary-button-padding;
+    background-color: $secondary-button-color;
+    padding: $secondary-button-padding;
 
-		&:hover {
-    	background-color: $secondary-hover-button-color;
-	  }
-	}
+    &:hover {
+      background-color: $secondary-hover-button-color;
+    }
+  }
 
   &.compare {
-		border-radius: 0;
-		padding: $secondary-button-padding;
+    border-radius: 0;
+    padding: $secondary-button-padding;
   }
 
   &.wizard {
-  	background-color: transparent;
-  	border: 1px solid $white;
-  	padding: .75em;
+    background-color: transparent;
+    border: 1px solid $white;
+    padding: .75em;
   }
 
 }
