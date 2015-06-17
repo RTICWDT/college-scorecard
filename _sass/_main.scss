@@ -10,9 +10,17 @@ $pad-more: 1em;
   box-sizing: border-box;
 }
 
+a {
+  .expand, 
+  .more {
+    @include font-size(0.75);
+    text-transform: uppercase;
+  }
+}
+
 header {
   color: $white;
-  background: $medium-blue;
+  background: $mid-blue;
   padding: $base-padding;
 
   h1 {
@@ -25,14 +33,14 @@ header {
 }
 
 section {
-	padding: $base-padding;
-	h1 {
-		@extend .h2;
-	}
+  padding: $base-padding;
+  h1 {
+    @extend .h2;
+  }
 }
 
 .dark-bg {
-	background-color: $mid-gray;
+  background-color: $mid-gray;
 }
 
 

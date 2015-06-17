@@ -1,25 +1,25 @@
-// To ensure .1 rem unit equals 1px:
-html {
-  font-size: 62.5%;
-}
+// // Ensures .1 rem unit equals 1px
+// html {
+//   font-size: 62.5%;
+// }
 
 body {
   -webkit-font-smoothing: antialiased;
   color: $base-font-color;
+  font-size: font-size($base-font-size);
   font-family: $base-font-family;
   line-height: $base-line-height;
+  font-weight: $base-font-weight;
 }
 
 // Typeographic multipliers
-$h1: 2;
-$h2: 1.4;
-$h3: 1.25;
-$h4: 1.2;
-$h5: 1.1;
-$h6: 1;
+$h1: 1.5;
+$h2: 1.313;
+$h3: 1.125;
 
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+// Heading styles
+h1, h2, h3,
+.h1, .h2, .h3 {
   font-family: $header-font-family;
   font-weight: inherit;
   margin: 0;
@@ -27,6 +27,7 @@ h1, h2, h3, h4, h5, h6,
   // ^^ Fix character spacing for headings
 }
 
+// Classes for use with @extend
 h1,
 .h1 {
   @include font-size($h1);
@@ -42,18 +43,42 @@ h3,
   @include font-size($h3);
 }
 
-h4,
-.h4 {
-  @include font-size($h4);
+// Other type
+.search {
+	@include font-size($h1);
 }
 
-h5,
-.h5 {
-  @include font-size($h5);
+.key-fact {
+	@include font-size($h3);
 }
 
-h6,
-.h6 {
-  @include font-size($h6);
-  font-weight: normal;
+.supporting {
+	@include font-size(0.875);
+}
+
+// Testing this approach to modularizing styles
+// From http://thesassway.com/advanced/modular-css-typography
+.quiet { font-color: $base-font-color; }
+.loud  { font-color: $base-accent-color; }
+
+.italic { font-style: italic; }
+.bold   { font-weight: 700; @extend .loud; }
+
+.block-margins { margin: 1em 0; }
+
+.unordered-list { list-style-type: disc; }
+.ordered-list { list-style: decimal; }
+
+.typography {
+  i, em { @extend .italic; }
+  b, strong { @extend .bold; }
+
+  h1, .h1 { @extend .h1; margin: 1em 0 0.5em; }
+  h2, .h2 { @extend .h2; margin: 1em 0 0.5em; }
+  h3, .h3 { @extend .h3; margin: 1em 0 0.5em; }
+
+  p, ul, ol, pre { @extend .block-margins; }
+
+  ul { @extend .unordered-list; }
+  ol { @extend .ordered-list; }
 }
