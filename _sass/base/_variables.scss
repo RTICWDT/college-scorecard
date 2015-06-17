@@ -11,26 +11,39 @@ $base-line-height: 1.5;
 
 // Colors
 $white: #ffffff;
-$black: #000000;
-$dark-blue: #11375a;
-$medium-blue: #2e618f;
-$mid-gray: #dcdcdc;
+$black: #040404;
+$dark-gray: #666666;
+$mid-gray: #e1e1e1;
+$dark-blue: #0e365b;
+$mid-blue: #2b6091;
+$green: #2c8511;
+$darker-green: #216d09;
+$darkest-green: #174b06;
+$red: #d44116;
+$darker-red: #b93610;
 
 // Background Color
 // $base-background-color: $deep-gray;
 
 // Font Colors
 $base-font-color: $black;
-$base-accent-color: $medium-blue;
+$base-accent-color: $mid-blue;
 
 // Padding
 $base-padding: 1.8em;
 
-// // Link Colors
-// $base-link-color: $base-font-color;
-// $hover-link-color: 
-// $base-button-color: $base-link-color;
-// $hover-button-color: $hover-link-color;
+// Link Colors
+$base-link-color: $base-font-color;
+$hover-link-color: $base-font-color;
+
+// Button Colors
+$base-button-color: $green;
+$hover-button-color: $darker-green;
+$secondary-button-color: $red;
+$secondary-hover-button-color: $darker-red;
+
+// Radius
+$base-border-radius: 3px;
 
 // // Border color
 // $base-border-color: $light-gray;
