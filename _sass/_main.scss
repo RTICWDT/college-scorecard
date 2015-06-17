@@ -10,15 +10,10 @@ $pad-more: 1em;
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-}
-
 header {
   color: $white;
   background: $medium-blue;
-  padding: $pad-less $pad-more;
+  padding: $base-padding;
 
   h1 {
     a {
@@ -26,11 +21,20 @@ header {
       text-decoration: none;
     }
   }
+
 }
 
-main {
-  padding: $pad-more;
+section {
+	padding: $base-padding;
+	h1 {
+		@extend .h2;
+	}
 }
+
+.dark-bg {
+	background-color: $mid-gray;
+}
+
 
 
 // Modules
@@ -39,7 +43,7 @@ main {
 .banner {
   color: $white;
   background: $dark-blue;
-  padding: $pad-less $pad-more;
+  padding: 1em $base-padding;
 
   a {
     color: inherit;
