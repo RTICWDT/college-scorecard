@@ -45,15 +45,15 @@ h3,
 
 // Other type
 .search {
-	@include font-size($h1);
+  @include font-size($h1);
 }
 
 .key-fact {
-	@include font-size($h3);
+  @include font-size($h3);
 }
 
 .supporting {
-	@include font-size(0.875);
+  @include font-size(0.875);
 }
 
 // Testing this approach to modularizing styles

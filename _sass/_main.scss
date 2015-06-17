@@ -51,14 +51,20 @@ section {
 .banner {
   color: $white;
   background: $dark-blue;
-  padding: 1em $base-padding;
+  padding: 0.2em $base-padding;
 
   a {
     color: inherit;
     text-decoration: none;
-  }
 
-  p {
-    margin: 0;
+    span.ed-logo {
+      background: url(/img/US-DeptOfEducation-Seal.svg) no-repeat top left;
+      background-size: 100%;
+      display: inline-block;
+      height: 20px;
+      margin-top: 0.8em;
+      margin-bottom: -0.2em;
+      width: 20px;
+    }
   }
 }
