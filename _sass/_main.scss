@@ -66,6 +66,21 @@ section {
   &.quaternary {
     background-color: $quaternary-background-color;
     color: $white;
+
+    video {
+      // needs to be full-width
+      background-color: $mid-gray;
+    }
+
+    figcaption {
+
+      h1 {
+        @extend .h2;
+        padding-bottom: 0;
+      }
+
+    }
+
   }
 }
 
