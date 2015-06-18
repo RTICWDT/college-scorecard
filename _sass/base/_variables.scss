@@ -24,6 +24,8 @@ $darker-red: #b93610;
 
 // Background Color
 $secondary-background-color: $dark-blue;
+$tertiary-background-color: $mid-gray;
+$quaternary-background-color: $mid-blue;
 
 // Font Colors
 $base-font-color: $black;
@@ -47,8 +49,10 @@ $secondary-button-padding: .5em 2.1em;
 // Radius
 $base-border-radius: 3px;
 
-// // Border color
-// $base-border-color: $light-gray;
+// Border
+$base-border-color: $mid-gray;
+$thin-border-size: 3px;
+$thick-border-size: 8px;
 
 // // Forms
 // $form-border-color: $base-border-color;

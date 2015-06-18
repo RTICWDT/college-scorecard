@@ -21,7 +21,7 @@ $h3: 1.125;
 h1, h2, h3,
 .h1, .h2, .h3 {
   font-family: $header-font-family;
-  font-weight: bold;
+  font-weight: 700;
   margin: 0;
   text-rendering: optimizeLegibility;
   // ^^ Fix character spacing for headings

@@ -10,6 +10,10 @@ $pad-more: 1em;
   box-sizing: border-box;
 }
 
+strong {
+  font-weight: 700;
+}
+
 a {
   .expand, 
   .more {
@@ -25,7 +29,39 @@ section {
   &.secondary {
     background-color: $secondary-background-color;
     color: $white;
+  }
 
+  &.tertiary {
+    background-color: $tertiary-background-color;
+    padding-left: 1em;
+    padding-right: 1em;
+
+    h1 {
+      padding: 0.6em;
+    }
+
+    > div {
+      background-color: $white;
+      border-radius: 0.4em;
+    }
+
+    li {
+      padding: 1.1em 2.3em ;
+      border-bottom: 1px solid $base-border-color;
+
+      &:first-of-type {
+        border-top: 1px solid $base-border-color;
+      }
+    }
+
+    ul {
+      padding-bottom: 2em;
+    }
+  }
+
+  &.quaternary {
+    background-color: $quaternary-background-color;
+    color: $white;
   }
 }
 
