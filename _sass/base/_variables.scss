@@ -20,6 +20,9 @@ $lighter-blue: tint($dark-blue, 6%);
 $green: #2c8511;
 $darker-green: #216d09;
 $darkest-green: #174b06;
+$yellow: #f0d704;
+$darker-yellow: #eeba28;
+// Likely no longer in play:
 $red: #d44116;
 $darker-red: #b93610;
 
@@ -42,8 +45,8 @@ $hover-link-color: $darker-green;
 // Buttons
 $base-button-color: $green;
 $hover-button-color: $darker-green;
-$secondary-button-color: $red;
-$secondary-hover-button-color: $darker-red;
+$secondary-button-color: $yellow;
+$secondary-hover-button-color: $darker-yellow;
 $base-button-padding: .85em 2.1em;
 $secondary-button-padding: .7em 2.1em;
 
