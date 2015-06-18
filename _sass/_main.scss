@@ -66,10 +66,18 @@ section {
   &.quaternary {
     background-color: $quaternary-background-color;
     color: $white;
+    padding-left: 0;
+    padding-right: 0;
+
+    h1 {
+      padding-left: $base-padding * 2;
+      padding-right: $base-padding * 2;
+    }
 
     video {
-      // needs to be full-width
       background-color: $mid-gray;
+      height: auto;
+      width: 100%;
     }
 
     figcaption {
@@ -78,13 +86,9 @@ section {
         @extend .h2;
         padding-bottom: 0;
       }
-
     }
-
   }
 }
-
-
 
 
 
