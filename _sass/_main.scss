@@ -26,6 +26,10 @@ section {
   padding: $base-padding;
   text-align: center;
 
+  h1 {
+    padding: 0 0.6em 0.6em 0.6em;
+  }
+
   &.secondary {
     background-color: $secondary-background-color;
     color: $white;
@@ -37,7 +41,7 @@ section {
     padding-right: 1em;
 
     h1 {
-      padding: 0.6em;
+      padding-top: 0.6em;
     }
 
     > div {

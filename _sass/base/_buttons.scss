@@ -9,7 +9,9 @@ input[type="submit"] {
 
   &.secondary {
     background-color: $secondary-button-color;
+    margin-bottom: 0.8em;
     padding: $secondary-button-padding;
+    @include font-size(0.9);
 
     &:hover {
       background-color: $secondary-hover-button-color;
