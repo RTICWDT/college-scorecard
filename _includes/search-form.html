@@ -36,7 +36,7 @@
       <select name="region" id="select-region">
         <option value="">Select a Region</option>
         {% for region in site.data.regions|sort('name') %}
-        <option value="{{ region.id }}">{{ region.name }} ({{ region.states }})</option>
+        <option value="{{ region.id }}" data-states="{{ region.states }}">{{ region.name }}</option>
         {% endfor %}
       </select>
 
