@@ -6,14 +6,17 @@ input[type="submit"] {
   cursor: pointer;
   user-select: none;
   vertical-align: middle;
-  white-space: nowrap;
 
   &.secondary {
     background-color: $secondary-button-color;
+    color: $black;
+    margin-bottom: 0.8em;
     padding: $secondary-button-padding;
+    @include font-size(0.9);
 
     &:hover {
       background-color: $secondary-hover-button-color;
+      color: $black;
     }
   }
 
@@ -25,7 +28,23 @@ input[type="submit"] {
   &.wizard {
     background-color: transparent;
     border: 1px solid $white;
+    margin-top: 0.8em;
+    margin-bottom: 0.4em;
     padding: .75em;
+
+    &:hover {
+      background-color: $lighter-blue;
+    }
+  }
+
+  &.add {
+    background-color: transparent;
+    color: $green;
+
+    &:hover {
+      background-color: transparent;
+      color: $darker-green;
+    }
   }
 
 }

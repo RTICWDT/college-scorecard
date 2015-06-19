@@ -2,12 +2,13 @@
   -webkit-font-smoothing: antialiased;
   background-color: $base-button-color;
   border-radius: 500px;
-  color: white;
+  color: $white;
   display: inline-block;
-  font-size: $base-font-size;
+  @include font-size(1.1);
   font-weight: bold;
   letter-spacing: 1px;
-  line-height: 1;
+  line-height: 1.3;
+  width: 300px;
   padding: $base-button-padding;
   text-decoration: none;
   text-transform: uppercase;
@@ -18,6 +19,6 @@
 
   &:hover {
     background-color: $hover-button-color;
-    color: white;
+    color: $white;
   }
 }

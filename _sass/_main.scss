@@ -13,6 +13,10 @@ $pad-more: 1em;
   box-sizing: border-box;
 }
 
+strong {
+  font-weight: 700;
+}
+
 a {
   .expand, 
   .more {
@@ -21,29 +25,98 @@ a {
   }
 }
 
-header {
-  color: $white;
-  background: $mid-blue;
-  padding: $base-padding;
+section {
+  text-align: center;
 
-  h1 {
-    a {
-      color: inherit;
-      text-decoration: none;
+  > h1 {
+    padding: 0 0.6em 0.6em 0.6em;
+  }
+
+  &.standard {
+    padding: $base-padding;
+  }
+
+  &.secondary {
+    padding: $base-padding;
+    background-color: $secondary-background-color;
+    color: $white;
+  }
+
+  &.tertiary {
+    background-color: $tertiary-background-color;
+    padding: $base-padding 1em;
+
+    h1 {
+      padding-top: 0.6em;
+    }
+
+    > div {
+      background-color: $white;
+      border-radius: 0.4em;
+    }
+
+    li {
+      padding: 1.1em 2.3em ;
+      border-bottom: $thin-border-size solid $base-border-color;
+
+      &:first-of-type {
+        border-top: $thin-border-size solid $base-border-color;
+      }
+    }
+
+    ul {
+      padding-bottom: 2em;
     }
   }
 
-}
+  &.quaternary {
+    background-color: $quaternary-background-color;
+    color: $white;
+    padding: $base-padding 0;
 
-section {
-  padding: $base-padding;
-  h1 {
-    @extend .h2;
+    h1 {
+      padding-left: $base-padding * 2;
+      padding-right: $base-padding * 2;
+    }
+
+    video {
+      background-color: $mid-gray;
+      height: auto;
+      width: 100%;
+    }
+
+    figcaption {
+
+      h1 {
+        @extend .h2;
+        padding-bottom: 0;
+      }
+    }
   }
 }
 
-.dark-bg {
-  background-color: $mid-gray;
+form {
+  text-align: left;
+
+  > h1 {
+    padding: 0.8em $base-padding/1.5 0.2em $base-padding/1.5;
+    // ^^em is acting strangly in the h1/form. Magic number. Fix.
+  }
+
+  p {
+    padding: 0 $base-padding 1em $base-padding;
+  }
+
+  fieldset {
+
+    padding: 0.6em $base-padding 1.2em $base-padding;
+
+    h1 {
+      @include font-size($h1);
+      font-weight: 300;
+      padding-bottom: 0.5em;
+    }
+  }
 }
 
 
@@ -54,14 +127,46 @@ section {
 .banner {
   color: $white;
   background: $dark-blue;
-  padding: 1em $base-padding;
+  padding: 0.2em $base-padding;
 
   a {
     color: inherit;
     text-decoration: none;
+
+    span.ed-logo {
+      background: url(/img/US-DeptOfEducation-Seal.svg) no-repeat top left;
+      background-size: 100%;
+      display: inline-block;
+      height: 20px;
+      margin-bottom: -0.2em;
+      width: 20px;
+    }
   }
+}
+
+header {
+  color: $white;
+  background: $mid-blue;
+  padding: 0.8em $base-padding;
+
+  h1 {
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+}
+
+footer {
+  @include font-size(0.8);
+  border-top: $thick-border-size solid $base-border-color;
+  text-align: center;
+  padding-top: $base-padding;
+  padding-bottom: $base-padding * 2;
 
   p {
-    margin: 0;
+    color: $dark-gray;
+    text-transform: uppercase;
   }
 }

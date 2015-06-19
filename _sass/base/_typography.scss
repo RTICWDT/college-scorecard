@@ -21,7 +21,8 @@ $h3: 1.125;
 h1, h2, h3,
 .h1, .h2, .h3 {
   font-family: $header-font-family;
-  font-weight: inherit;
+  font-weight: 700;
+  line-height: $base-heading-line-height;
   margin: 0;
   text-rendering: optimizeLegibility;
   // ^^ Fix character spacing for headings
@@ -45,15 +46,15 @@ h3,
 
 // Other type
 .search {
-	@include font-size($h1);
+  @include font-size($h1);
 }
 
 .key-fact {
-	@include font-size($h3);
+  @include font-size($h3);
 }
 
 .supporting {
-	@include font-size(0.875);
+  @include font-size(0.875);
 }
 
 // Testing this approach to modularizing styles
