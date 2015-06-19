@@ -37,4 +37,14 @@ input[type="submit"] {
     }
   }
 
+  &.add {
+    background-color: transparent;
+    color: $green;
+
+    &:hover {
+      background-color: transparent;
+      color: $darker-green;
+    }
+  }
+
 }
