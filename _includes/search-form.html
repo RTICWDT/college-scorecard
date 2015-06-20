@@ -4,105 +4,99 @@
   <h1>Find Schools</h1>
   <p>Enter the criteria that are important to you.</p>
 
-    <h1>Find Schools By:</h1>
-    <p>Enter criteria that is important to you</p>
+  <fieldset>
 
-    <fieldset>
+    <h2>School Name</h2>
+    <label for="name-school">Specify a School Name</label>
+    <input name="name" type="text" placeholder="Name of School" id="name-school" {{ common_input_attributes }}>
 
-      <legend>Name</legend>
+  </fieldset>
 
-      <label for="name-school">Search by School Name</label>
-      <input name="name" type="text" placeholder="Name of School" id="name-school" {{ common_input_attributes }}>
+  <fieldset>
 
-    </fieldset>
+    <h2>Location</h2>
 
-    <fieldset>
-
-      <legend>Location</legend>
-
-      <div class="input-add">
-        <label for="select-state">Select a State</label>
-        <select name="state" id="select-state">
-          <option value=""></option>
-          {% for state in site.data.states|sort('name') %}
-          <option value="{{ state.abbr }}">{{ state.name }}</option>
-          {% endfor %}
-        </select>
-        <button class="add" data-input="state">
-          Add State
-        </button>
-      </div>
-
-      <label for="select-region">Select a Region</label>
-      <select name="region" id="select-region">
-        <option value="">Select a Region</option>
-        {% for region in site.data.regions|sort('name') %}
-        <option value="{{ region.id }}" data-states="{{ region.states }}">{{ region.name }}</option>
+    <div class="input-add">
+      <label for="select-state">Select a State</label>
+      <select name="state" id="select-state">
+        <option value=""></option>
+        {% for state in site.data.states|sort('name') %}
+        <option value="{{ state.abbr }}">{{ state.name }}</option>
         {% endfor %}
       </select>
+      <button class="add" data-input="state">
+        Add State
+      </button>
+    </div>
 
-      <label for="zip-code">ZIP Code</label>
-      <input name="zip_code" type="number" placeholder="e.g. 45400" id="zip-code" {{ common_input_attributes }}>
+    <label for="select-region">Select a Region</label>
+    <select name="region" id="select-region">
+      <option value=""></option>
+      {% for region in site.data.regions|sort('name') %}
+      <option value="{{ region.id }}" data-states="{{ region.states }}">{{ region.name }}</option>
+      {% endfor %}
+    </select>
 
-      <label for="search-radius">Mile Radius</label>
-      <input name="search_radius" type="number" step=".1" placeholder="no limit" id="search-radius" {{ common_input_attributes }}>
+    <label for="zip-code">Enter a ZIP Code</label>
+    <input name="zip_code" type="number" placeholder="e.g. 45400" id="zip-code" {{ common_input_attributes }}>
+
+    <label for="search-radius">Specify a Search Radius in Miles</label>
+    <input name="search_radius" type="number" step=".1" placeholder="no limit" id="search-radius" {{ common_input_attributes }}>
+
+  </fieldset>
+
+  <fieldset>
+
+    <h2>Major or Degree</h2>
+
+    <label for="major">Specify a Major or Degree</label>
+    <input name="major" type="text" placeholder="e.g. Political Science" id="major" {{ common_input_attributes }}>
+
+    <label for="major-type">Select a Type of Degree</label>
+    <select name="major_type" id="major-type">
+      <option value="">Select a Type of Degree</option>
+      <option>???</option>
+    </select>
+
+  </fieldset>
+
+  <fieldset>
+
+    <h2>School Size</h2>
+
+    <fieldset>
+
+      <h3>Undergraduate Student Body</h3>
+
+      <ul>
+        <li>
+          <input type="checkbox" name="size" value="small" title="Small (under 2,000)"> Small (&lt; 2,000)
+        </li>
+        <li>
+          <input type="checkbox" name="size" value="medium" title="Medium (between 2,000 and 15,000)"> Medium (2,000&ndash;15,000)
+        </li>
+        <li>
+          <input type="checkbox" name="size" value="large" title="Large (over 15,000)"> Large (&gt; 15,000)
+        </li>
+      </ul>
 
     </fieldset>
 
     <fieldset>
 
-      <legend>Major/Degree</legend>
+      <h3>Student-to-Faculty Ratio</h3>
 
-      <label for="major">Major/Degree</label>
-      <input name="major" type="text" placeholder="e.g. Political Science" id="major" {{ common_input_attributes }}>
-
-      <label for="major-type">Select a Type of Degree</label>
-      <select name="major_type" id="major-type">
-        <option value="">Select a Type of Degree</option>
-        <option>???</option>
-      </select>
-
-    </fieldset>
-
-    <fieldset>
-
-      <legend>Size</legend>
-
-      <fieldset>
-
-        <legend>Undergraduate Student Body</legend>
-
-        <ul>
-          <li>
-            <input type="checkbox" name="size" value="small" title="Small (under 2,000)"> Small (&lt; 2,000)
-          </li>
-          <li>
-            <input type="checkbox" name="size" value="medium" title="Medium (between 2,000 and 15,000)"> Medium (2,000&ndash;15,000)
-          </li>
-          <li>
-            <input type="checkbox" name="size" value="large" title="Large (over 15,000)"> Large (&gt; 15,000)
-          </li>
-        </ul>
-
-      </fieldset>
-
-      <fieldset>
-
-        <legend>Student-to-Faculty Ratio</legend>
-
-        <ul>
-          <li>
-            <input type="checkbox" name="sf_ratio" value="low" title="Low (less than 20-to-1)"> Low (&lt; 20:1)
-          </li>
-          <li>
-            <input type="checkbox" name="sf_ratio" value="medium" title="Medium (between 20-to-1 and 50-to-1)"> Medium (20:1&ndash;50:1)
-          </li>
-          <li>
-            <input type="checkbox" name="sf_ratio" value="high" title="High (more than 50-to-1)"> High (&gt; 50:1)
-          </li>
-        </ul>
-
-      </fieldset>
+      <ul>
+        <li>
+          <input type="checkbox" name="sf_ratio" value="low" title="Low (less than 20-to-1)"> Low (&lt; 20:1)
+        </li>
+        <li>
+          <input type="checkbox" name="sf_ratio" value="medium" title="Medium (between 20-to-1 and 50-to-1)"> Medium (20:1&ndash;50:1)
+        </li>
+        <li>
+          <input type="checkbox" name="sf_ratio" value="high" title="High (more than 50-to-1)"> High (&gt; 50:1)
+        </li>
+      </ul>
 
     </fieldset>
 
