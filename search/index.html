@@ -1,0 +1,23 @@
+---
+title: Search
+layout: default
+permalink: /search/
+---
+
+<!-- Search results -->
+<section class="search-results">
+  <h1>Search Results</h1>
+  <ul id="results-list">
+    <li class="search-result">
+      <h2 class="school-name" data-bind="school_name">School Name</h2>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <!-- Find schools form -->
+  {% include search-form.html %}
+</section>
+
+<!-- anything else? -->
+<script src="{{ site.baseurl }}js/search.js"></script>
