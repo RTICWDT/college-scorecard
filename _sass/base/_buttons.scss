@@ -3,7 +3,9 @@ button,
 .button,
 input[type="submit"] {
   @extend %button;
-  max-width: 100%;
+
+  // max-width: 100%;
+  width: auto;
 
   @include appearance(none);
   border: none;
