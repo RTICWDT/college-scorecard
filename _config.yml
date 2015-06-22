@@ -10,4 +10,8 @@ baseurl: "/college-choice/" # the subpath of your site, e.g. /blog/
 markdown: kramdown
 
 sass:
-    style: :nested
+  style: nested
+
+exclude:
+  - js/vendor/node_modules
+  - js/vendor/package.json
