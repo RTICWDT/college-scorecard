@@ -11,4 +11,14 @@
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+
+  <!-- site scripts -->
+  {% for script in site.scripts %}
+  <script src="{{ site.baseurl|default:'/' }}js/{{ script }}"></script>
+  {% endfor %}
+
+  {% if page.scripts %}<!-- page scripts -->
+  {% for script in page.scripts %}
+  <script src="{{ site.baseurl|default:'/' }}js/{{ script }}"></script>
+  {% endfor %}{% endif %}
 </head>
