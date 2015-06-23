@@ -2,6 +2,11 @@
 title: Search
 layout: default
 permalink: /search/
+scripts:
+  - vendor/formdb.min.js
+  - vendor/tagalong.min.js
+body_scripts:
+  - search.js
 ---
 
 <!-- Search results -->
@@ -18,6 +23,3 @@ permalink: /search/
   <!-- Find schools form -->
   {% include search-form.html %}
 </section>
-
-<!-- anything else? -->
-<script src="{{ site.baseurl }}js/search.js"></script>
