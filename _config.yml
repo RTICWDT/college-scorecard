@@ -12,6 +12,20 @@ markdown: kramdown
 sass:
   style: nested
 
+# common site scripts, relative to `{{ site.baseurl }}js/`
+scripts:
+  - vendor/d3.min.js
+  - vendor/querystring.min.js
+  - api.js
+
+# API configuration
+api:
+  baseurl: http://127.0.0.1:3000/
+  search: query/
+
+# specify paths to exclude from copying to _site
+# Note: files and directories with the '_' prefix are excluded
+# automatically
 exclude:
   - js/vendor/node_modules
   - js/vendor/package.json
