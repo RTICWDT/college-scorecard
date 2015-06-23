@@ -1,6 +1,12 @@
+// TODO: qualify button with a class? or specify as .button?
 button,
+.button,
 input[type="submit"] {
   @extend %button;
+
+  // max-width: 100%;
+  width: auto;
+
   @include appearance(none);
   border: none;
   cursor: pointer;
@@ -46,5 +52,4 @@ input[type="submit"] {
       color: $darker-green;
     }
   }
-
 }
