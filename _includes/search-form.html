@@ -1,4 +1,4 @@
-<form is="search-form" action="{{ site.baseurl }}search/" method="GET">
+<form id="search-form" is="search-form" action="{{ site.baseurl }}search/" method="GET">
   {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
 
   <h1>Find Schools</h1>
@@ -8,7 +8,7 @@
 
     <h2>School Name</h2>
     <label for="name-school">Specify a School Name</label>
-    <input name="name" type="text" placeholder="Name of School" id="name-school" {{ common_input_attributes }}>
+    <input id="name-school" name="school_name" type="text" placeholder="Name of School" {{ common_input_attributes }}>
 
   </fieldset>
 
@@ -70,13 +70,13 @@
 
       <ul>
         <li>
-          <input type="checkbox" name="size" value="small" title="Small (under 2,000)"> Small (&lt; 2,000)
+          <label for="size-small"><input id="size-small" type="checkbox" name="size" value="small" title="Small (under 2,000)"> Small (&lt; 2,000)</label>
         </li>
         <li>
-          <input type="checkbox" name="size" value="medium" title="Medium (between 2,000 and 15,000)"> Medium (2,000&ndash;15,000)
+          <label for="size-medium"><input id="size-medium" type="checkbox" name="size" value="medium" title="Medium (between 2,000 and 15,000)"> Medium (2,000&ndash;15,000)</label>
         </li>
         <li>
-          <input type="checkbox" name="size" value="large" title="Large (over 15,000)"> Large (&gt; 15,000)
+          <label for="size-large"><input id="size-large" type="checkbox" name="size" value="large" title="Large (over 15,000)"> Large (&gt; 15,000)</label>
         </li>
       </ul>
 
@@ -88,13 +88,13 @@
 
       <ul>
         <li>
-          <input type="checkbox" name="sf_ratio" value="low" title="Low (less than 20-to-1)"> Low (&lt; 20:1)
+          <label for="ratio-small"><input id="ratio-small" type="checkbox" name="sf_ratio" value="low" title="Low (less than 20-to-1)"> Low (&lt; 20:1)</label>
         </li>
         <li>
-          <input type="checkbox" name="sf_ratio" value="medium" title="Medium (between 20-to-1 and 50-to-1)"> Medium (20:1&ndash;50:1)
+          <label for="ratio-medium"><input id="ratio-medium" type="checkbox" name="sf_ratio" value="medium" title="Medium (between 20-to-1 and 50-to-1)"> Medium (20:1&ndash;50:1)</label>
         </li>
         <li>
-          <input type="checkbox" name="sf_ratio" value="high" title="High (more than 50-to-1)"> High (&gt; 50:1)
+          <label for="ratio-large"><input id="ratio-large" type="checkbox" name="sf_ratio" value="high" title="High (more than 50-to-1)"> High (&gt; 50:1)</label>
         </li>
       </ul>
 
