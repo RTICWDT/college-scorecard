@@ -1,0 +1,109 @@
+---
+layout: default
+---
+
+<form is="search-form" action="{{ site.baseurl }}search/" method="GET">
+  {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
+
+  <h1>Form Styleguide</h1>
+  <p>To test for visual and 508 compliance...at the same time!</p>
+
+  <fieldset>
+
+    <h1>Input</h1>
+
+    <label for="name-school">Type: Text</label>
+    <input name="name" type="text" placeholder="Name of School" id="name-school" {{ common_input_attributes }}>
+
+    <label for="zip-code">Type: Number</label>
+    <input name="zip_code" type="number" placeholder="e.g. 45400" id="zip-code" {{ common_input_attributes }}>
+
+  </fieldset>
+
+  <fieldset>
+
+    <h1>Dropdown</h1>
+
+    <div class="input-add">
+      <label for="select-state">Select a State</label>
+      <select name="state" id="select-state">
+        <option value=""></option>
+        {% for state in site.data.states|sort('name') %}
+        <option value="{{ state.abbr }}">{{ state.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+  </fieldset>
+
+  <fieldset>
+
+    <h1>Checkboxes (and nested fieldsets)</h1>
+
+    <fieldset>
+
+      <h1>Undergraduate Student Body</h1>
+
+      <ul>
+        <li>
+          <input type="checkbox" name="size" value="small" title="Small (under 2,000)"> Small (&lt; 2,000)
+        </li>
+        <li>
+          <input type="checkbox" name="size" value="medium" title="Medium (between 2,000 and 15,000)"> Medium (2,000&ndash;15,000)
+        </li>
+        <li>
+          <input type="checkbox" name="size" value="large" title="Large (over 15,000)"> Large (&gt; 15,000)
+        </li>
+      </ul>
+
+    </fieldset>
+
+    <fieldset>
+
+      <h1>Student-to-Faculty Ratio</h1>
+
+      <ul>
+        <li>
+          <input type="checkbox" name="sf_ratio" value="low" title="Low (less than 20-to-1)"> Low (&lt; 20:1)
+        </li>
+        <li>
+          <input type="checkbox" name="sf_ratio" value="medium" title="Medium (between 20-to-1 and 50-to-1)"> Medium (20:1&ndash;50:1)
+        </li>
+        <li>
+          <input type="checkbox" name="sf_ratio" value="high" title="High (more than 50-to-1)"> High (&gt; 50:1)
+        </li>
+      </ul>
+
+    </fieldset>
+
+  </fieldset>
+
+  <fieldset>
+
+    <h1>Radio buttons</h1>
+
+    <ul>
+      <li>
+        <input type="radio" name="soup" value="pea" id="peasoup" title="Pea Soup"> Pea Soup
+      </li>
+      <li>
+        <input type="radio" name="soup" value="chicken" id="chicken" title="Chicken Noodle"> Chicken Noodle
+      </li>
+      <li>
+        <input type="radio" name="soup" value="tomato" id="tomato" title="Tomato Soup"> Tomato
+      </li>
+    </ul>
+
+  </fieldset>
+
+  <fieldset>
+
+    <h1>Submit</h1>
+
+    <button>
+      Submit
+    </button>
+
+  </fieldset>
+
+</form>
