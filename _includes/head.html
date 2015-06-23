@@ -14,11 +14,11 @@
 
   <!-- site scripts -->
   {% for script in site.scripts %}
-  <script src="{{ site.baseurl|default:'/' }}js/{{ script }}"></script>
+  <script src="{{ site.baseurl }}js/{{ script }}"></script>
   {% endfor %}
 
   {% if page.scripts %}<!-- page scripts -->
   {% for script in page.scripts %}
-  <script src="{{ site.baseurl|default:'/' }}js/{{ script }}"></script>
+  <script src="{{ site.baseurl }}js/{{ script }}"></script>
   {% endfor %}{% endif %}
 </head>

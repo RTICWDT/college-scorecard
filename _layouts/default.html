@@ -9,7 +9,7 @@
     {% include footer.html %}
 
     {% for script in page.body_scripts %}
-    <script src="{{ site.baseurl|default:'/' }}js/{{ script }}" data-src="{{ script }}"></script>
+    <script src="{{ site.baseurl }}js/{{ script }}" data-src="{{ script }}"></script>
     {% endfor %}
   </body>
 </html>
