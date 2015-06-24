@@ -70,9 +70,30 @@ input[type="search"] {
 
 input[type="checkbox"],
 input[type="radio"] {
-  display: inline;
-  margin-right: $base-line-height / 4;
-  margin-bottom: 1em;
+  @include appearance(none);
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid $form-border-color;
+  border-radius: $form-border-radius;
+  margin-top: 0;
+  margin-bottom: 0;
+  vertical-align: -4px;
+
+  + label {
+    display: inline-block;
+    font-weight: 400;
+  }
+
+  &:checked {
+    background-color: $green;
+  //background-image: url('../img/checked.png'); // Fallback in case no svg background
+  //background-image: url('../img/checked.svg');
+  }
+}
+
+input[type="radio"] {
+  border-radius: 500px;
 }
 
 input[type="file"] {
@@ -82,7 +103,29 @@ input[type="file"] {
 }
 
 select {
+  @include appearance(none);
+  height: 3rem;
   width: auto;
   max-width: 100%;
+  background-image: url('../img/angle-down.png'); // Fallback in case no svg background
+  //background-image: url('../img/angle-down.svg');
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+  background-size: 2rem;
+  background-color: #fff;
+  border: 1px solid $form-border-color;
+  border-radius: $form-border-radius;
+  color: $dark-gray;
   margin-bottom: 1em;
+  overflow: hidden;
+  padding: 0 4rem 0 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  &:focus {
+    outline: 3px solid $green;
+  }
+
+  &::-ms-expand {
+    display: none;
+  }
 }
