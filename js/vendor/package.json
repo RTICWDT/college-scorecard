@@ -1,0 +1,20 @@
+{
+  "name": "college-choice-scripts",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "18F",
+  "license": "CC0",
+  "dependencies": {
+    "aight": "^2.1.1",
+    "browserify": "^10.2.4",
+    "d3": "^3.5.5",
+    "es6-promise": "^2.3.0",
+    "formdb": "^0.2.0",
+    "qs": "^3.1.0",
+    "tagalong": "^0.1.0"
+  }
+}
