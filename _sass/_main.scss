@@ -124,10 +124,20 @@ form {
 
     padding: 0.6em $base-padding 1.2em $base-padding;
 
+    > fieldset h1 {
+      @extend .h2;
+    }
+
     h1 {
-      @include font-size($h1);
+      @extend .h1;
       font-weight: 400;
+      padding-top: 0.3em;
       padding-bottom: 0.5em;
+    }
+
+    label {
+      font-weight: 600;
+      letter-spacing: 0.04em;
     }
   }
 }

@@ -1,5 +1,9 @@
 fieldset {
   border-top: $regular-border-size solid $base-border-color;
+
+  > fieldset {
+    border-top: none;
+  }
 }
 
 input,
@@ -41,7 +45,7 @@ select[multiple=multiple] {
   border: 1px solid $form-border-color;
   box-shadow: $form-box-shadow;
   font-family: $form-font-family;
-  margin-bottom: 0.6em;
+  margin-bottom: 1em;
   padding: 1em;
   width: 100%;
 
@@ -68,6 +72,7 @@ input[type="checkbox"],
 input[type="radio"] {
   display: inline;
   margin-right: $base-line-height / 4;
+  margin-bottom: 1em;
 }
 
 input[type="file"] {
@@ -79,5 +84,5 @@ input[type="file"] {
 select {
   width: auto;
   max-width: 100%;
-  margin-bottom: $base-line-height;
+  margin-bottom: 1em;
 }
