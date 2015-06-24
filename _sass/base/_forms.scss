@@ -68,27 +68,60 @@ input[type="search"] {
   @include appearance(none);
 }
 
+label.checkbox {
+  display: inline-block;
+  font-weight: 400;
+
+  input[type="checkbox"] + span {
+    border: 1px solid $dark-gray;
+    border-radius: $form-border-radius;
+    display: inline-block;
+    height: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+    vertical-align: -4px;
+    width: 20px;
+  }
+}
+
+label.checkbox :checked + span {
+  background-color: $green;
+  vertical-align: -4px;
+
+  &::after {
+    color: $white;
+    content:"✓";
+    font-weight: 600;
+    margin-left: 3px;
+  }
+}
+
 input[type="checkbox"],
 input[type="radio"] {
   @include appearance(none);
   display: inline-block;
   width: 20px;
   height: 20px;
-  border: 1px solid $form-border-color;
-  border-radius: $form-border-radius;
   margin-top: 0;
   margin-bottom: 0;
   vertical-align: -4px;
 
-  + label {
-    display: inline-block;
-    font-weight: 400;
-  }
+  // to hide checkbox from visual but display to screenreaders
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 
-  &:checked {
-    background-color: $green;
-  //background-image: url('../img/checked.png'); // Fallback in case no svg background
-  //background-image: url('../img/checked.svg');
+  &:focus {
+    + .checkbox-focus {
+      border-color: #9ecaed;
+      box-shadow: 0 0 10px #9ecaed;
+      outline: none;
+    }
   }
 }
 

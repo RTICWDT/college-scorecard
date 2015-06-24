@@ -55,16 +55,25 @@ layout: default
 
       <ul>
         <li>
-          <input id="size-small" aria-describedby="size-small" type="checkbox" name="size" value="small">
-          <label for="size-small">Small (&lt; 2,000)</label>
+          <label for="size-small" class="checkbox">
+            <input id="size-small" aria-describedby="size-small" class="hidden" type="checkbox" name="size" value="small"tabindex="0">
+            <span role="checkbox" tabindex="-1" class="checkbox-focus"></span>
+            Small (&lt; 2,000)
+          </label>
         </li>
         <li>
-          <input id="size-medium" aria-describedby="size-medium" type="checkbox" name="size" value="medium">
-          <label for="size-medium">Medium (2,000&ndash;15,000)</label>
+          <label for="size-medium" class="checkbox">
+            <input id="size-medium" aria-describedby="size-medium" class="hidden" type="checkbox" name="size" value="medium" tabindex="0">
+            <span role="checkbox" tabindex="-1" class="checkbox-focus"></span>
+            Medium (2,000&ndash;15,000)
+          </label>
         </li>
         <li>
-          <input id="size-large" aria-describedby="size-large" type="checkbox" name="size" value="large" title="Large (over 15,000)">
-          <label for="size-large">Large (&gt; 15,000)</label>
+          <label for="size-large" class="checkbox">
+            <input id="size-large" aria-describedby="size-large" class="hidden" type="checkbox" name="size" value="large" tabindex="0">
+            <span role="checkbox" tabindex="-1" class="checkbox-focus"></span>
+            Large (&gt; 15,000)
+          </label>
         </li>
       </ul>
 
@@ -77,16 +86,25 @@ layout: default
 
       <ul>
         <li>
-          <input id="ratio-low" aria-describedby="ratio-low" type="checkbox" name="sf_ratio" value="low">
-          <label for="ratio-low">Low (&lt; 20:1)</label>
+          <label for="ratio-low" class="checkbox">
+            <input id="ratio-low" aria-describedby="ratio-low" class="hidden" type="checkbox" name="sf_ratio" value="low" tabindex="0">
+            <span role="checkbox" tabindex="-1" class="checkbox-focus"></span>
+            Low (&lt; 20:1)
+          </label>
         </li>
         <li>
-          <input id="ratio-medium" aria-describedby="ratio-medium" type="checkbox" name="sf_ratio" value="medium">
-          <label for="ratio-medium">Medium (20:1&ndash;50:1)</label>
+          <label for="ratio-medium" class="checkbox">
+            <input id="ratio-medium" aria-describedby="ratio-medium" type="checkbox" name="sf_ratio" value="medium" tabindex="0">
+            <span role="checkbox" tabindex="-1" class="checkbox-focus"></span>
+            Medium (20:1&ndash;50:1)
+          </label>
         </li>
         <li>
-          <input id="ratio-high" aria-describedby="ratio-high" type="checkbox" name="sf_ratio" value="high">
-          <label for="ratio-high">High (&gt; 50:1)</label>
+          <label for="ratio-high" class="checkbox">
+            <input id="ratio-high" aria-describedby="ratio-high" class="hidden" type="checkbox" name="sf_ratio" value="high" tabindex="0">
+            <span role="checkbox" tabindex="-1" class="checkbox-focus"></span>
+            High (&gt; 50:1)
+          </label>
         </li>
       </ul>
 
