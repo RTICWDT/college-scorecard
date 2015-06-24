@@ -14,15 +14,15 @@ layout: default
     <h1>Input</h1>
 
     <label for="name-school">Type: Text
-      <input id="name-school" aria-describedby="name-school" name="name" type="text" placeholder="Name of School"  {{ common_input_attributes }}>
+      <input id="name-school" name="name" type="text" placeholder="Name of School"  {{ common_input_attributes }}>
     </label>
 
     <label for="zip-code">Type: Number
-      <input id="zip-code" aria-describedby="zip-code" name="zip_code" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>
+      <input id="zip-code" name="zip_code" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>
     </label>
 
     <label for="comment">Type: Text Area
-      <textarea id="comment" aria-describedby="comment" name="comment" placeholder="Type your comment here."></textarea>
+      <textarea id="comment" name="comment" placeholder="Type your comment here."></textarea>
     </label>
 
   </fieldset>
@@ -33,7 +33,7 @@ layout: default
     <h1>Dropdown</h1>
 
     <label for="select-state">Select a State
-      <select id="select-state" aria-describedby="select-state" name="state">
+      <select id="select-state" name="state">
         <option value=""></option>
         {% for state in site.data.states|sort('name') %}
         <option value="{{ state.abbr }}">{{ state.name }}</option>
@@ -56,22 +56,22 @@ layout: default
       <ul>
         <li>
           <label for="size-small" class="checkbox">
-            <input id="size-small" aria-describedby="size-small" class="hidden" type="checkbox" name="size" value="small"tabindex="0">
-            <span role="checkbox" tabindex="-1" class="checkbox-focus"></span>
+            <input id="size-small" class="hidden" type="checkbox" name="size" value="small"tabindex="0">
+            <span tabindex="-1" class="checkbox-focus"></span>
             Small (&lt; 2,000)
           </label>
         </li>
         <li>
           <label for="size-medium" class="checkbox">
-            <input id="size-medium" aria-describedby="size-medium" class="hidden" type="checkbox" name="size" value="medium" tabindex="0">
-            <span role="checkbox" tabindex="-1" class="checkbox-focus"></span>
+            <input id="size-medium" class="hidden" type="checkbox" name="size" value="medium" tabindex="0">
+            <span tabindex="-1" class="checkbox-focus"></span>
             Medium (2,000&ndash;15,000)
           </label>
         </li>
         <li>
           <label for="size-large" class="checkbox">
-            <input id="size-large" aria-describedby="size-large" class="hidden" type="checkbox" name="size" value="large" tabindex="0">
-            <span role="checkbox" tabindex="-1" class="checkbox-focus"></span>
+            <input id="size-large" class="hidden" type="checkbox" name="size" value="large" tabindex="0">
+            <span tabindex="-1" class="checkbox-focus"></span>
             Large (&gt; 15,000)
           </label>
         </li>
@@ -87,22 +87,22 @@ layout: default
       <ul>
         <li>
           <label for="ratio-low" class="checkbox">
-            <input id="ratio-low" aria-describedby="ratio-low" class="hidden" type="checkbox" name="sf_ratio" value="low" tabindex="0">
-            <span role="checkbox" tabindex="-1" class="checkbox-focus"></span>
+            <input id="ratio-low" class="hidden" type="checkbox" name="sf_ratio" value="low" tabindex="0">
+            <span tabindex="-1" class="checkbox-focus"></span>
             Low (&lt; 20:1)
           </label>
         </li>
         <li>
           <label for="ratio-medium" class="checkbox">
-            <input id="ratio-medium" aria-describedby="ratio-medium" type="checkbox" name="sf_ratio" value="medium" tabindex="0">
-            <span role="checkbox" tabindex="-1" class="checkbox-focus"></span>
+            <input id="ratio-medium" type="checkbox" name="sf_ratio" value="medium" tabindex="0">
+            <span tabindex="-1" class="checkbox-focus"></span>
             Medium (20:1&ndash;50:1)
           </label>
         </li>
         <li>
           <label for="ratio-high" class="checkbox">
-            <input id="ratio-high" aria-describedby="ratio-high" class="hidden" type="checkbox" name="sf_ratio" value="high" tabindex="0">
-            <span role="checkbox" tabindex="-1" class="checkbox-focus"></span>
+            <input id="ratio-high" class="hidden" type="checkbox" name="sf_ratio" value="high" tabindex="0">
+            <span tabindex="-1" class="checkbox-focus"></span>
             High (&gt; 50:1)
           </label>
         </li>
@@ -119,15 +119,15 @@ layout: default
 
     <ul>
       <li>
-        <input id="peasoup" aria-describedby="peasoup" type="radio" name="soup" value="pea">
+        <input id="peasoup" type="radio" name="soup" value="pea">
         <label for="peasoup">Pea Soup</label>
       </li>
       <li>
-        <input id="chicken" aria-describedby="chicken" type="radio" name="soup" value="chicken">
+        <input id="chicken" type="radio" name="soup" value="chicken">
         <label for="chicken">Chicken Noodle</label>
       </li>
       <li>
-        <input id="tomato" aria-describedby="tomato" type="radio" name="soup" value="tomato">
+        <input id="tomato" type="radio" name="soup" value="tomato">
         <label for="tomato">Tomato</label>
       </li>
     </ul>
