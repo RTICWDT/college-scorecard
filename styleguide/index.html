@@ -1,0 +1,134 @@
+---
+layout: default
+---
+
+<form is="search-form" action="{{ site.baseurl }}search/" method="GET">
+  {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
+
+  <h1>Form Styleguide</h1>
+  <p>To test for visual and 508 compliance...at the same time!</p>
+
+  <fieldset>
+
+    <legend>Input</legend>
+    <h1>Input</h1>
+
+    <label for="name-school">Type: Text
+      <input id="name-school" aria-describedby="name-school" name="name" type="text" placeholder="Name of School"  {{ common_input_attributes }}>
+    </label>
+
+    <label for="zip-code">Type: Number
+      <input id="zip-code" aria-describedby="zip-code" name="zip_code" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>
+    </label>
+
+  </fieldset>
+
+  <fieldset>
+
+    <legend>Dropdown</legend>
+    <h1>Dropdown</h1>
+
+    <label for="select-state">Select a State
+      <select id="select-state" aria-describedby="select-state" name="state">
+        <option value=""></option>
+        {% for state in site.data.states|sort('name') %}
+        <option value="{{ state.abbr }}">{{ state.name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+  </fieldset>
+
+  <fieldset>
+
+    <legend>Checkboxes (and nested fieldsets)</legend>
+    <h1>Checkboxes (and nested fieldsets)</h1>
+
+    <fieldset>
+
+      <legend>Undergraduate Student Body</legend>
+      <h1>Undergraduate Student Body</h1>
+
+      <ul>
+        <li>
+          <input id="size-small" aria-describedby="size-small" type="checkbox" name="size" value="small">
+          <label for="size-small">Small (&lt; 2,000)</label>
+        </li>
+        <li>
+          <input id="size-medium" aria-describedby="size-medium" type="checkbox" name="size" value="medium">
+          <label for="size-medium">Medium (2,000&ndash;15,000)</label>
+        </li>
+        <li>
+          <input id="size-large" aria-describedby="size-large" type="checkbox" name="size" value="large" title="Large (over 15,000)">
+          <label for="size-large">Large (&gt; 15,000)</label>
+        </li>
+      </ul>
+
+    </fieldset>
+
+    <fieldset>
+
+      <legend>Student-to-Faculty Ratio</legend>
+      <h1>Student-to-Faculty Ratio</h1>
+
+      <ul>
+        <li>
+          <input id="ratio-low" aria-describedby="ratio-low" type="checkbox" name="sf_ratio" value="low">
+          <label for="ratio-low">Low (&lt; 20:1)</label>
+        </li>
+        <li>
+          <input id="ratio-medium" aria-describedby="ratio-medium" type="checkbox" name="sf_ratio" value="medium">
+          <label for="ratio-medium">Medium (20:1&ndash;50:1)</label>
+        </li>
+        <li>
+          <input id="ratio-high" aria-describedby="ratio-high" type="checkbox" name="sf_ratio" value="high">
+          <label for="ratio-high">High (&gt; 50:1)</label>
+        </li>
+      </ul>
+
+    </fieldset>
+
+  </fieldset>
+
+  <fieldset>
+
+    <legend>Radio buttons</legend>
+    <h1>Radio buttons</h1>
+
+    <ul>
+      <li>
+        <input id="peasoup" aria-describedby="peasoup" type="radio" name="soup" value="pea">
+        <label for="peasoup">Pea Soup</label>
+      </li>
+      <li>
+        <input id="chicken" aria-describedby="chicken" type="radio" name="soup" value="chicken">
+        <label for="chicken">Chicken Noodle</label>
+      </li>
+      <li>
+        <input id="tomato" aria-describedby="tomato" type="radio" name="soup" value="tomato">
+        <label for="tomato">Tomato</label>
+      </li>
+    </ul>
+
+  </fieldset>
+
+  <fieldset>
+
+    <legend>Submit</legend>
+    <h1>Submit</h1>
+
+    <button>
+      Submit
+    </button>
+
+  </fieldset>
+
+<!-- <div>
+  <h1>Notes</h1>
+  <ul>
+    <li>In order to support both older assistive technologies and newer ARIA standards, all inputs should have a <strong>for</strong>, <strong>id</strong>, and <strong>aria-describedby</strong> equal to the same value.</li>
+    <li>Everything should be accessible via tab-and-enter.</li>
+  </ul>
+</div> -->
+
+</form>
