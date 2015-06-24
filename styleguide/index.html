@@ -51,13 +51,16 @@ layout: default
 
       <ul>
         <li>
-          <input type="checkbox" name="size" value="small" title="Small (under 2,000)"> <label>Small (&lt; 2,000)</label>
+          <input id="size-small" aria-describedby="size-small" type="checkbox" name="size" value="small">
+          <label for="size-small">Small (&lt; 2,000)</label>
         </li>
         <li>
-          <input type="checkbox" name="size" value="medium" title="Medium (between 2,000 and 15,000)"> <label>Medium (2,000&ndash;15,000)</label>
+          <input id="size-medium" aria-describedby="size-medium" type="checkbox" name="size" value="medium">
+          <label for="size-medium">Medium (2,000&ndash;15,000)</label>
         </li>
         <li>
-          <input type="checkbox" name="size" value="large" title="Large (over 15,000)"> <label>Large (&gt; 15,000)</label>
+          <input id="size-large" aria-describedby="size-large" type="checkbox" name="size" value="large" title="Large (over 15,000)">
+          <label for="size-large">Large (&gt; 15,000)</label>
         </li>
       </ul>
 
@@ -70,13 +73,16 @@ layout: default
 
       <ul>
         <li>
-          <input type="checkbox" name="sf_ratio" value="low" title="Low (less than 20-to-1)"> <label>Low (&lt; 20:1)</label>
+          <input id="ratio-low" aria-describedby="ratio-low" type="checkbox" name="sf_ratio" value="low">
+          <label for="ratio-low">Low (&lt; 20:1)</label>
         </li>
         <li>
-          <input type="checkbox" name="sf_ratio" value="medium" title="Medium (between 20-to-1 and 50-to-1)"> <label>Medium (20:1&ndash;50:1)</label>
+          <input id="ratio-medium" aria-describedby="ratio-medium" type="checkbox" name="sf_ratio" value="medium">
+          <label for="ratio-medium">Medium (20:1&ndash;50:1)</label>
         </li>
         <li>
-          <input type="checkbox" name="sf_ratio" value="high" title="High (more than 50-to-1)"> <label>High (&gt; 50:1)</label>
+          <input id="ratio-high" aria-describedby="ratio-high" type="checkbox" name="sf_ratio" value="high">
+          <label for="ratio-high">High (&gt; 50:1)</label>
         </li>
       </ul>
 
@@ -91,13 +97,16 @@ layout: default
 
     <ul>
       <li>
-        <input type="radio" name="soup" value="pea" id="peasoup" title="Pea Soup"> <label>Pea Soup</label>
+        <input id="peasoup" aria-describedby="peasoup" type="radio" name="soup" value="pea">
+        <label for="peasoup">Pea Soup</label>
       </li>
       <li>
-        <input type="radio" name="soup" value="chicken" id="chicken" title="Chicken Noodle"> <label>Chicken Noodle</label>
+        <input id="chicken" aria-describedby="chicken" type="radio" name="soup" value="chicken">
+        <label for="chicken">Chicken Noodle</label>
       </li>
       <li>
-        <input type="radio" name="soup" value="tomato" id="tomato" title="Tomato Soup"> <label>Tomato</label>
+        <input id="tomato" aria-describedby="tomato" type="radio" name="soup" value="tomato">
+        <label for="tomato">Tomato</label>
       </li>
     </ul>
 
