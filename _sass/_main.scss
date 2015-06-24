@@ -6,6 +6,15 @@ $pad-more: 1em;
   color: yellow;
 }
 
+.hidden {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: px;
+  overflow: hidden; 
+}
+
 
 // Site-wide
 //============================================
@@ -98,6 +107,10 @@ section {
 form {
   text-align: left;
 
+  legend {
+    @extend .hidden;
+  }
+
   > h1 {
     padding: 0.8em $base-padding/1.5 0.2em $base-padding/1.5;
     // ^^em is acting strangly in the h1/form. Magic number. Fix.
@@ -111,10 +124,20 @@ form {
 
     padding: 0.6em $base-padding 1.2em $base-padding;
 
+    > fieldset h1 {
+      @extend .h2;
+    }
+
     h1 {
-      @include font-size($h1);
-      font-weight: 300;
+      @extend .h1;
+      font-weight: 400;
+      padding-top: 0.3em;
       padding-bottom: 0.5em;
+    }
+
+    label {
+      font-weight: 600;
+      letter-spacing: 0.04em;
     }
   }
 }
