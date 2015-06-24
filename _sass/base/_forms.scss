@@ -68,13 +68,25 @@ input[type="search"] {
   @include appearance(none);
 }
 
-label.checkbox {
+label.checkbox,
+label.radio {
   display: inline-block;
   font-weight: 400;
 
   input[type="checkbox"] + span {
     border: 1px solid $dark-gray;
     border-radius: $form-border-radius;
+    display: inline-block;
+    height: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+    vertical-align: -4px;
+    width: 20px;
+  }
+
+  input[type="radio"] + span {
+    border: 1px solid $dark-gray;
+    border-radius: 500px;
     display: inline-block;
     height: 20px;
     margin-top: 0;
@@ -96,17 +108,21 @@ label.checkbox :checked + span {
   }
 }
 
+label.radio :checked + span {
+  background-color: $green;
+  vertical-align: -4px;
+}
+
 input[type="checkbox"],
 input[type="radio"] {
   @include appearance(none);
   display: inline-block;
   width: 20px;
   height: 20px;
-  margin-top: 0;
-  margin-bottom: 0;
   vertical-align: -4px;
 
-  // to hide checkbox from visual but display to screenreaders
+  // to hide checkbox/radio from visual but 
+  // still read to screenreaders
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -125,10 +141,6 @@ input[type="radio"] {
   }
 }
 
-input[type="radio"] {
-  border-radius: 500px;
-}
-
 input[type="file"] {
   margin-bottom: $base-line-height / 2;
   padding-bottom: ($base-line-height / 3);
@@ -140,8 +152,7 @@ select {
   height: 3rem;
   width: auto;
   max-width: 100%;
-  background-image: url('../img/angle-down.png'); // Fallback in case no svg background
-  //background-image: url('../img/angle-down.svg');
+  background-image: url('../img/angle-down.png');
   background-repeat: no-repeat;
   background-position: 95% 50%;
   background-size: 2rem;

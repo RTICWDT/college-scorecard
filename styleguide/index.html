@@ -56,21 +56,21 @@ layout: default
       <ul>
         <li>
           <label for="size-small" class="checkbox">
-            <input id="size-small" class="hidden" type="checkbox" name="size" value="small"tabindex="0">
+            <input id="size-small" type="checkbox" name="size" value="small"tabindex="0">
             <span tabindex="-1" class="checkbox-focus"></span>
             Small (&lt; 2,000)
           </label>
         </li>
         <li>
           <label for="size-medium" class="checkbox">
-            <input id="size-medium" class="hidden" type="checkbox" name="size" value="medium" tabindex="0">
+            <input id="size-medium" type="checkbox" name="size" value="medium" tabindex="0">
             <span tabindex="-1" class="checkbox-focus"></span>
             Medium (2,000&ndash;15,000)
           </label>
         </li>
         <li>
           <label for="size-large" class="checkbox">
-            <input id="size-large" class="hidden" type="checkbox" name="size" value="large" tabindex="0">
+            <input id="size-large" type="checkbox" name="size" value="large" tabindex="0">
             <span tabindex="-1" class="checkbox-focus"></span>
             Large (&gt; 15,000)
           </label>
@@ -87,7 +87,7 @@ layout: default
       <ul>
         <li>
           <label for="ratio-low" class="checkbox">
-            <input id="ratio-low" class="hidden" type="checkbox" name="sf_ratio" value="low" tabindex="0">
+            <input id="ratio-low" type="checkbox" name="sf_ratio" value="low" tabindex="0">
             <span tabindex="-1" class="checkbox-focus"></span>
             Low (&lt; 20:1)
           </label>
@@ -101,7 +101,7 @@ layout: default
         </li>
         <li>
           <label for="ratio-high" class="checkbox">
-            <input id="ratio-high" class="hidden" type="checkbox" name="sf_ratio" value="high" tabindex="0">
+            <input id="ratio-high" type="checkbox" name="sf_ratio" value="high" tabindex="0">
             <span tabindex="-1" class="checkbox-focus"></span>
             High (&gt; 50:1)
           </label>
@@ -119,16 +119,25 @@ layout: default
 
     <ul>
       <li>
-        <input id="peasoup" type="radio" name="soup" value="pea">
-        <label for="peasoup">Pea Soup</label>
+        <label for="peasoup" class="radio">
+          <input id="peasoup" type="radio" name="soup" value="pea" tabindex="0">
+          <span tabindex="-1" class="checkbox-focus"></span>
+          Pea Soup
+        </label>
       </li>
       <li>
-        <input id="chicken" type="radio" name="soup" value="chicken">
-        <label for="chicken">Chicken Noodle</label>
+        <label for="chicken" class="radio">
+          <input id="chicken" type="radio" name="soup" value="chicken" tabindex="0">
+          <span tabindex="-1" class="checkbox-focus"></span>
+          Chicken Noodle
+        </label>
       </li>
       <li>
-        <input id="tomato" type="radio" name="soup" value="tomato">
-        <label for="tomato">Tomato</label>
+        <label for="tomato" class="radio">
+          <input id="tomato" type="radio" name="soup" value="tomato" tabindex="0">
+          <span tabindex="-1" class="checkbox-focus"></span>
+          Tomato
+        </label>
       </li>
     </ul>
 
