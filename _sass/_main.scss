@@ -6,6 +6,15 @@ $pad-more: 1em;
   color: yellow;
 }
 
+.hidden {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: px;
+  overflow: hidden; 
+}
+
 
 // Site-wide
 //============================================
@@ -97,6 +106,10 @@ section {
 
 form {
   text-align: left;
+
+  legend {
+    @extend .hidden;
+  }
 
   > h1 {
     padding: 0.8em $base-padding/1.5 0.2em $base-padding/1.5;

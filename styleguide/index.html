@@ -10,38 +10,43 @@ layout: default
 
   <fieldset>
 
+    <legend>Input</legend>
     <h1>Input</h1>
 
-    <label for="name-school">Type: Text</label>
-    <input name="name" type="text" placeholder="Name of School" id="name-school" {{ common_input_attributes }}>
+    <label for="name-school">Type: Text
+      <input id="name-school" aria-describedby="name-school" name="name" type="text" placeholder="Name of School"  {{ common_input_attributes }}>
+    </label>
 
-    <label for="zip-code">Type: Number</label>
-    <input name="zip_code" type="number" placeholder="e.g. 45400" id="zip-code" {{ common_input_attributes }}>
+    <label for="zip-code">Type: Number
+      <input id="zip-code" aria-describedby="zip-code" name="zip_code" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>
+    </label>
 
   </fieldset>
 
   <fieldset>
 
+    <legend>Dropdown</legend>
     <h1>Dropdown</h1>
 
-    <div class="input-add">
-      <label for="select-state">Select a State</label>
-      <select name="state" id="select-state">
+    <label for="select-state">Select a State
+      <select id="select-state" aria-describedby="select-state" name="state">
         <option value=""></option>
         {% for state in site.data.states|sort('name') %}
         <option value="{{ state.abbr }}">{{ state.name }}</option>
         {% endfor %}
       </select>
-    </div>
+    </label>
 
   </fieldset>
 
   <fieldset>
 
+    <legend>Checkboxes (and nested fieldsets)</legend>
     <h1>Checkboxes (and nested fieldsets)</h1>
 
     <fieldset>
 
+      <legend>Undergraduate Student Body</legend>
       <h1>Undergraduate Student Body</h1>
 
       <ul>
@@ -60,6 +65,7 @@ layout: default
 
     <fieldset>
 
+      <legend>Student-to-Faculty Ratio</legend>
       <h1>Student-to-Faculty Ratio</h1>
 
       <ul>
@@ -80,6 +86,7 @@ layout: default
 
   <fieldset>
 
+    <legend>Radio buttons</legend>
     <h1>Radio buttons</h1>
 
     <ul>
@@ -98,6 +105,7 @@ layout: default
 
   <fieldset>
 
+    <legend>Submit</legend>
     <h1>Submit</h1>
 
     <button>
@@ -105,5 +113,13 @@ layout: default
     </button>
 
   </fieldset>
+
+<div>
+  <h1>Notes</h1>
+  <ul>
+    <li>In order to support both older assistive technologies and newer ARIA standards, all inputs should have a <strong>for</strong>, <strong>id</strong>, and <strong>aria-describedby</strong> equal to the same value.</li>
+    <li>Everything should be accessible via tab-and-enter.</li>
+  </ul>
+</div>
 
 </form>
