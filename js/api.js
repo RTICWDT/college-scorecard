@@ -25,7 +25,7 @@
   API.load = function(uri, done) {
     var ext = uri.split('.').pop();
     var load = d3[ext || 'json'];
-    return load(url, done);
+    return load(uri, done);
   };
 
   API.endpoint = function(uri) {
