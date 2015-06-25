@@ -12,7 +12,7 @@ section.guide {
     }
 
   > section {
-    @include outer-container($local-max-width: 100%);
+    @include outer-container($local-max-width: 98%);
     margin-top: 3em;
     text-align: left;
     > h1 {
@@ -21,7 +21,7 @@ section.guide {
       text-transform: uppercase;
     }
 
-    > .guide-typography {
+    .guide-typography {
       @include span-columns(4);
 
       .link-expand,
@@ -55,7 +55,8 @@ section.guide {
       }
     }
 
-    > .guide-color {
+    .guide-color {
+      @include span-columns(12);
 
       > ul {
         margin-bottom: 10px;
@@ -106,10 +107,54 @@ section.guide {
         }
 
         &:nth-of-type(4) {
-          color: $white;
           background-color: $red;
+          border: none;
+          color: $white;
         }
       }
+    }
+
+    .guide-buttons {
+      @include span-columns(3);
+      text-align: center;
+
+      > h1 {
+        @extend .h4;
+        color: $dark-gray;
+        padding-bottom: 1.2em;
+        text-transform: uppercase;
+      }
+
+      &:first-of-type {
+        padding-left: $base-padding;
+      }
+
+      .primary-hover {
+        background-color: $hover-button-color;
+        color: $white;
+      }
+
+      .secondary-hover {
+        background-color: $secondary-hover-button-color;
+        color: $black;
+      }
+
+      .compare-hover {
+
+      }
+
+      .wizard-hover {
+        background-color: $lighter-blue;
+      }
+
+      .wizard-bg {
+        background-color: $mid-blue;
+        padding-top: 0.6em;
+      }
+    }
+
+    .guide-inputs {
+
     }
   }
 }

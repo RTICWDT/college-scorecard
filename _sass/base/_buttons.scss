@@ -3,24 +3,28 @@ button,
 .button,
 input[type="submit"] {
   @extend %button;
-
-  // max-width: 100%;
-  width: auto;
-
   @include appearance(none);
   border: none;
   cursor: pointer;
+  height: 46px;
+  margin-bottom: 0.6em;
   user-select: none;
   vertical-align: middle;
+  width: 280px;
+
+  &.secondary,
+  &.compare {
+    height: 40px;
+    margin-bottom: 1.6em
+  }
 
   &.secondary {
     background-color: $secondary-button-color;
     color: $black;
-    margin-bottom: 0.8em;
-    padding: $secondary-button-padding;
-    @include font-size(0.9);
+    width: 230px;
 
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: $secondary-hover-button-color;
       color: $black;
     }
@@ -28,17 +32,17 @@ input[type="submit"] {
 
   &.compare {
     border-radius: 0;
-    padding: $secondary-button-padding;
   }
 
   &.wizard {
     background-color: transparent;
     border: 1px solid $white;
-    margin-top: 0.8em;
-    margin-bottom: 0.4em;
-    padding: .75em;
+    height: 100%;
+    padding-top: 0.9em;
+    padding-bottom: 0.8em;
 
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: $lighter-blue;
     }
   }
@@ -47,7 +51,8 @@ input[type="submit"] {
     background-color: transparent;
     color: $green;
 
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: transparent;
       color: $darker-green;
     }
