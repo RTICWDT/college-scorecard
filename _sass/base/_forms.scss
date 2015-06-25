@@ -57,7 +57,6 @@ select[multiple=multiple] {
   }
 
   &:focus {
-    border-color: $form-border-color-focus;
     box-shadow: $form-box-shadow-focus;
     outline: none;
   }
@@ -140,8 +139,7 @@ input[type="radio"] {
 
   &:focus {
     + .checkbox-focus {
-      border-color: #9ecaed;
-      box-shadow: 0 0 10px #9ecaed;
+      box-shadow: $form-box-shadow-focus;
       outline: none;
     }
   }
@@ -172,7 +170,8 @@ select {
   text-overflow: ellipsis;
   white-space: nowrap;
   &:focus {
-    outline: 3px solid $green;
+    box-shadow: $form-box-shadow-focus;
+    outline: none;
   }
 
   &::-ms-expand {
