@@ -9,17 +9,9 @@ fieldset {
 input,
 label,
 select {
+  @include font-size(1);
   display: block;
   font-family: $form-font-family;
-}
-
-input,
-select,
-textarea {
-  @include font-size(1);
-  @include placeholder {
-    color: $form-input-color;
-  }
 }
 
 label {
@@ -40,6 +32,11 @@ textarea,
 select[multiple=multiple] {
   @include box-sizing(border-box);
   @include font-size(1);
+  @include placeholder {
+    color: $form-input-color;
+    opacity: 1;
+    font-weight: 400;
+  }
   @include transition(border-color);
   background-color: white;
   border-radius: $form-border-radius;
@@ -177,6 +174,10 @@ select {
 
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }
