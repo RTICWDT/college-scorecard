@@ -6,6 +6,10 @@ fieldset {
   }
 }
 
+legend {
+  @extend .hidden;
+}
+
 input,
 label,
 select {
@@ -15,7 +19,8 @@ select {
 }
 
 label {
-  font-weight: bold;
+  @include font-size(0.875);
+  font-weight: 600;
   margin-bottom: $base-line-height / 4;
 
   &.required:after {
