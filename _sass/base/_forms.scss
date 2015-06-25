@@ -85,6 +85,7 @@ label.radio {
     margin-right: 0.5em;
     margin-bottom: 0;
     vertical-align: -4px;
+    padding-top: 4px; //compensate for FA vertical-align
     width: 20px;
   }
 
@@ -103,22 +104,23 @@ label.radio {
 
 label.checkbox :checked + span {
   background-color: $green;
-  //vertical-align: -4px;
+  border: 1px solid $dark-gray;
+  box-shadow: none;
   position: relative;
 
   &:after {
     color: $white;
     font-family: "FontAwesome";
-    //content: $fa-var-check;
-    //position: relative;
-    left: 1px;
-    top: -3px;
+    content: $fa-var-check;
+    position: relative;
+    left: 2px;
+    top: -6px;
   }
 }
 
 label.radio :checked + span {
   background-color: $black;
-  border: 5px solid $white !important;
+  border: 6px solid $white !important;
   box-shadow: 0 0 1px $black;
   vertical-align: -4px;
   position: relative;
