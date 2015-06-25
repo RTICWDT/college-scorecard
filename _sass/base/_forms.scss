@@ -7,7 +7,7 @@ fieldset {
 }
 
 legend {
-  @extend .hidden;
+  @extend .sr-only;
 }
 
 input,
@@ -77,7 +77,7 @@ label.radio {
   margin-bottom: 0.5em;
 
   input[type="checkbox"] + span {
-    border: 1px solid $dark-gray;
+    box-shadow: 0 0 1px $black;
     border-radius: 1px;
     display: inline-block;
     height: 20px;
@@ -103,14 +103,14 @@ label.radio {
 
 label.checkbox :checked + span {
   background-color: $green;
-  vertical-align: -4px;
+  //vertical-align: -4px;
   position: relative;
 
   &:after {
     color: $white;
     font-family: "FontAwesome";
-    content: $fa-var-check;
-    position: relative;
+    //content: $fa-var-check;
+    //position: relative;
     left: 1px;
     top: -3px;
   }
