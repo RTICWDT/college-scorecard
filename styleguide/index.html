@@ -66,30 +66,30 @@ layout: default
 
       <div class="guide-buttons">
         <h1>Primary</h1>
-        <button>
+        <button class="button-primary">
           Find Schools
         </button>
-        <button class="primary-hover">
+        <button class="button-primary button-primary-hover">
           Find Schools
         </button>
       </div>
 
       <div class="guide-buttons">
         <h1>Secondary</h1>
-        <button class="secondary">
+        <button class="button-secondary">
           Button
         </button>
-        <button class="secondary secondary-hover">
+        <button class="button-secondary button-secondary-hover">
           Button
         </button>
       </div>
 
       <div class="guide-buttons">
         <h1>Compare</h1>
-        <button class="compare">
+        <button class="button-compare">
           Compare
         </button>
-        <button class="compare">
+        <button class="button-compare">
           Compare
         </button>
       </div>
@@ -97,10 +97,10 @@ layout: default
       <div class="guide-buttons">
         <h1>Wizard</h1>
         <div class="wizard-bg">
-          <button class="wizard">
+          <button class="button-wizard">
             Help me find schools best suited to me
           </button>
-          <button class="wizard wizard-hover">
+          <button class="button-wizard button-wizard-hover">
             Help me find schools best suited to me
           </button>
         </div>
@@ -122,9 +122,13 @@ layout: default
     <legend>Input</legend>
     <h1>Input</h1>
 
-    <label for="name-school">Type: Text
-      <input id="name-school" name="name" type="text" placeholder="Name of School"  {{ common_input_attributes }}>
+    <label for="name-state">Type: Text
+      <input id="name-state" name="name" type="text" placeholder="Name of State"  {{ common_input_attributes }}>
     </label>
+
+    <button class="button-add">
+      Add State
+    </button>
 
     <label for="zip-code">Type: Number
       <input id="zip-code" name="zip_code" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>

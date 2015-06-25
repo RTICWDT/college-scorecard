@@ -3,20 +3,9 @@
   @include transition-duration(0.25s);
   @include transition-timing-function(ease-out);
   @include transition-delay(0s);
-  background-color: $base-button-color;
   border-radius: 500px;
-  color: $white;
   display: inline-block;
-  font-weight: bold;
-  letter-spacing: 2px;
   line-height: 1.3;
   text-decoration: none;
   text-transform: uppercase;
-  width: 300px;
-
-  &:hover,
-  &:focus {
-    background-color: $hover-button-color;
-    color: $white;
-  }
 }
