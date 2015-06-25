@@ -4,7 +4,6 @@
 // }
 
 body {
-  -webkit-font-smoothing: antialiased;
   color: $base-font-color;
   font-size: font-size($base-font-size);
   font-family: $base-font-family;
@@ -28,6 +27,8 @@ h1, h2, h3, h4
   padding-top: 0.7em; 
   text-rendering: optimizeLegibility;
   // ^^ Fix character spacing for headings
+  // by enabling ligatures in text smaller than 20px
+  // if they are available in the font
 }
 
 // Classes for use with @extend
