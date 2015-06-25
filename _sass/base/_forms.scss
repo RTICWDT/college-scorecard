@@ -14,7 +14,8 @@ select {
 }
 
 input,
-select {
+select,
+textarea {
   @include font-size(1);
   @include placeholder {
     color: $form-input-color;
@@ -172,4 +173,10 @@ select {
   &::-ms-expand {
     display: none;
   }
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
