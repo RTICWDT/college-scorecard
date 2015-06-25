@@ -49,7 +49,7 @@ select[multiple=multiple] {
   box-shadow: $form-box-shadow;
   font-family: $form-font-family;
   margin-bottom: 1em;
-  padding: 1em;
+  padding: 0.6em 0.8em;
   width: 100%;
 
   &:hover {
@@ -161,7 +161,6 @@ input[type="file"] {
 
 select {
   @include appearance(none);
-  height: 3rem;
   width: auto;
   max-width: 100%;
   background-image: url('../img/angle-down.png');
@@ -174,9 +173,10 @@ select {
   color: $dark-gray;
   margin-bottom: 1em;
   overflow: hidden;
-  padding: 0 4rem 0 1rem;
+  padding: 0.5em 7rem 0.5em 0.8rem;
   text-overflow: ellipsis;
   white-space: nowrap;
+
   &:focus {
     box-shadow: $form-box-shadow-focus;
     outline: none;
