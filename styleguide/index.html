@@ -2,11 +2,21 @@
 layout: default
 ---
 
-<form is="search-form" action="{{ site.baseurl }}search/" method="GET">
+<section class="guide">
+
+  <h1>Component Styleguide</h1>
+  <p>To test for visual and 508 compliance...at the same time!</p>
+
+  <section>
+
+    <h1>Typography</h1>
+
+  </section>
+
+  <form is="search-form" action="{{ site.baseurl }}search/" method="GET">
   {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
 
-  <h1>Form Styleguide</h1>
-  <p>To test for visual and 508 compliance...at the same time!</p>
+
 
   <fieldset>
 
@@ -163,3 +173,5 @@ layout: default
 </div> -->
 
 </form>
+
+</section>

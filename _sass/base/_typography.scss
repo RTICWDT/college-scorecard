@@ -16,10 +16,11 @@ body {
 $h1: 1.5;
 $h2: 1.313;
 $h3: 1.125;
+$h4: 1;
 
 // Heading styles
-h1, h2, h3,
-.h1, .h2, .h3 {
+h1, h2, h3, h4
+.h1, .h2, .h3, .h4 {
   font-family: $header-font-family;
   font-weight: 700;
   line-height: $base-heading-line-height;
@@ -42,6 +43,11 @@ h2,
 h3,
 .h3 {
   @include font-size($h3);
+}
+
+h4,
+.h4 {
+  @include font-size($h4);
 }
 
 // Other type

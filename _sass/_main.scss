@@ -41,6 +41,19 @@ section {
     padding: 0 0.6em 0.6em 0.6em;
   }
 
+  &.guide {
+    text-align: left;
+
+    section {
+      text-align: left;
+
+      h1 {
+        @extend .h4;
+        text-transform: uppercase;
+      }
+    }
+  }
+
   &.standard {
     padding: $base-padding;
   }
