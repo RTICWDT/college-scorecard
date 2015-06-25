@@ -44,10 +44,11 @@
     return {
       dollars: formatter('$,d', '$0'),
       percent: formatter('%.0f', '--'),
+      number: formatter('d', '0'),
       plural: function(key, plural) {
         if (!plural) plural = 's';
         return function(d) {
-          return d[key] == 1 ? '' : plural;
+          return d[key] == 1 ? '' : this.getAttribute('data-plural') || plural;
         };
       }
     };
@@ -56,7 +57,8 @@
   // these directives tell the template renderer how to format specific keys in
   // the data, for instance as dollars or percentages.
   var directives = {
-    branches_plural:  format.plural('NUMBRANCH'),
+    branches:         format.number('NUMBRANCH', '0'),
+    branches_plural:  format.plural('NUMBRANCH', 'es'),
     tuition_in:       format.dollars('TUITIONFEE_IN'),
     tuition_out:      format.dollars('TUITIONFEE_OUT'),
     pct_pell:         format.percent('PCTPELL'),
@@ -65,7 +67,7 @@
   };
 
   resultsRoot.classList.add('js-loading');
-  API.load('../data/schools-sample.csv', function(error, rows) {
+  API.load('../data/schools-sample.json', function(error, rows) {
     resultsRoot.classList.remove('js-loading');
     if (error) {
       return showError(error);

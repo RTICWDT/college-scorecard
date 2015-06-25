@@ -15,19 +15,13 @@ body_scripts:
   <div class="error hidden"></div>
   <ul class="schools-list">
     <li class="school-item">
-      <h2 class="name" data-bind="INSTNM_MAIN">School Name</h2>
+      <h2 class="name">School Name</h2>
       <h3 class="location">
-        <span data-bind="CITY_MAIN">City</span>,
-        <span data-bind="STABBR_MAIN">State</span>
-        @ <tt><span data-bind="LONGITUDE_MAIN"></span>&deg;W,<span data-bind="LATITUDE_MAIN"></span>&deg;N</tt>
-        (region <b data-bind="REGION_MAIN">X</b>)
+        <span data-bind="city">City</span>,
+        <span data-bind="state">State</span>
+        @ <tt><span data-bind="longitude"></span>&deg;W,<span data-bind="latitude"></span>&deg;N</tt>
+        (region <b data-bind="region">X</b>)
       </h3>
-      <ul class="properties">
-        <li><b data-bind="NUMBRANCH"></b> branch<span data-toggle class="branches_plural">es</span></li>
-        <li>Tuition fees: <b>in: <span data-bind="tuition_in"></span></b>, <b>out: <span class="tuition_out"></span></b></li>
-        <li>Loan stats: <b>Pell Grants: <span data-bind="pct_pell">???</span></b>, <b>Federal Loans: <span class="pct_fed_loan"></span></b></li>
-        <li>Avg. faculty salary: <b data-bind="avg_fac_salary"></b></li>
-      </ul>
     </li>
   </ul>
 </section>
