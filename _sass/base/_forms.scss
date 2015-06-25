@@ -101,11 +101,13 @@ label.checkbox :checked + span {
   background-color: $green;
   vertical-align: -4px;
 
-  &::after {
+  &:after {
     color: $white;
-    content:"✓";
-    font-weight: 600;
-    margin-left: 3px;
+    font-family: "FontAwesome";
+    content: $fa-var-check;
+    position: relative;
+    left: 1px;
+    top: -3px;
   }
 }
 
