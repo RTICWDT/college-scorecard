@@ -1,0 +1,98 @@
+section.guide {
+  padding-top: $base-padding;
+  text-align: left;
+
+  > h1 {
+    padding-left: 1.1em;
+    // ^^em is acting strangly in the h1/form. Magic number. Fix.
+  }
+
+  > p {
+      padding-left: $base-padding;
+    }
+
+  > section {
+    @include outer-container($local-max-width: 100%);
+    margin-top: 3em;
+    text-align: left;
+
+    > h1 {
+      @extend .h4;
+      padding-left: $base-padding;
+      text-transform: uppercase;
+    }
+
+    > .guide-typography {
+      @include span-columns(4);
+
+      &:first-of-type {
+        padding-left: $base-padding;
+      }
+
+      &:last-of-type {
+        @include omega();
+      }
+
+      + .wide {
+        @include span-columns(8);
+      }
+    }
+
+    > .guide-color {
+
+      > ul {
+        margin-bottom: 10px;
+        padding-left: $base-padding;
+
+        li {
+          color: $white;
+          display: inline-block;
+          height: 50px;
+          padding-top: 15px;
+          text-align: center;
+          width: 220px;
+
+          &:nth-of-type(1) {
+            background-color: $black;
+          }
+
+          &:nth-of-type(2) {
+            background-color: $dark-gray;
+          }
+
+          &:nth-of-type(3) {
+            background-color: $mid-gray;
+            color: $black;
+          }
+
+          &:nth-of-type(4) {
+            background-color: $white;
+            border: 1px solid $mid-gray;
+            color: $black;
+          }
+        }
+      }
+
+      > ul.second-row li {
+
+        &:nth-of-type(1) {
+          background-color: $dark-blue;
+        }
+
+        &:nth-of-type(2) {
+          background-color: $mid-blue;
+        }
+
+        &:nth-of-type(3) {
+          color: $white;
+          background-color: $green;
+        }
+
+        &:nth-of-type(4) {
+          color: $white;
+          background-color: $red;
+        }
+      }
+    }
+  }
+}
