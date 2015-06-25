@@ -21,7 +21,7 @@ section.guide {
       text-transform: uppercase;
     }
 
-    > .guide-typography {
+    .guide-typography {
       @include span-columns(4);
 
       .link-expand,
@@ -55,7 +55,7 @@ section.guide {
       }
     }
 
-    > .guide-color {
+    .guide-color {
       @include span-columns(12);
 
       > ul {
@@ -114,7 +114,7 @@ section.guide {
       }
     }
 
-    > .guide-buttons {
+    .guide-buttons {
       @include span-columns(3);
       text-align: center;
 
@@ -151,6 +151,10 @@ section.guide {
         background-color: $mid-blue;
         padding-top: 0.6em;
       }
+    }
+
+    .guide-inputs {
+
     }
   }
 }
