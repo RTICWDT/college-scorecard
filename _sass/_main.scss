@@ -15,6 +15,14 @@ $pad-more: 1em;
   overflow: hidden; 
 }
 
+.wrapper {
+  @include clearfix;
+}
+
+.float-left {
+  float: left;
+}
+
 
 // Site-wide
 //============================================

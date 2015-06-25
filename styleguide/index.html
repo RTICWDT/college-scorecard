@@ -122,13 +122,15 @@ layout: default
     <legend>Input</legend>
     <h1>Input</h1>
 
-    <label for="name-state">Type: Text
-      <input id="name-state" name="name" type="text" placeholder="Name of State"  {{ common_input_attributes }}>
-    </label>
+    <div class="wrapper">
+      <label for="name-state" class="float-left">Type: Text
+        <input id="name-state" name="name" type="text" placeholder="Name of State"  {{ common_input_attributes }}>
+      </label>
 
-    <button class="button-add">
-      Add State
-    </button>
+      <button class="button-add">
+        Add State
+      </button>
+    </div>
 
     <label for="zip-code">Type: Number
       <input id="zip-code" name="zip_code" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>

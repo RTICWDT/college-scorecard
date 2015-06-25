@@ -76,7 +76,9 @@ input[type="submit"] {
     background-color: $white;
     color: $green;
     display: inline-block;
+    float: right;
     letter-spacing: 0;
+    margin-top: 20px;
     width: 70px;
 
     &:hover,
