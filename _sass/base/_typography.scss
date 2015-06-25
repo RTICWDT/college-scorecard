@@ -12,7 +12,7 @@ body {
   font-weight: $base-font-weight;
 }
 
-// Typeographic multipliers
+// Typeographic multipliers, base 16
 $h1: 1.5;
 $h2: 1.313;
 $h3: 1.125;
@@ -25,6 +25,7 @@ h1, h2, h3, h4
   font-weight: 700;
   line-height: $base-heading-line-height;
   margin: 0;
+  padding-top: 0.7em; 
   text-rendering: optimizeLegibility;
   // ^^ Fix character spacing for headings
 }
@@ -51,17 +52,35 @@ h4,
 }
 
 // Other type
-.search {
+
+.search_categories {
   @include font-size($h1);
+  font-weight: 400;
 }
 
-.key-fact {
+.key_fact {
   @include font-size($h3);
+  font-weight: 400;
 }
 
-.supporting {
+.supporting_copy {
   @include font-size(0.875);
 }
+
+.link-expand,
+.link-more {
+  @include font-size(0.75);
+  color: $green;
+  font-weight: 800;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &:hover,
+  &:focus {
+    color: $darker-green;
+  }
+}
+
 
 // Testing this approach to modularizing styles
 // From http://thesassway.com/advanced/modular-css-typography

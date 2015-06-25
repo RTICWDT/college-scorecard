@@ -15,7 +15,6 @@ section.guide {
     @include outer-container($local-max-width: 100%);
     margin-top: 3em;
     text-align: left;
-
     > h1 {
       @extend .h4;
       padding-left: $base-padding;
@@ -24,6 +23,24 @@ section.guide {
 
     > .guide-typography {
       @include span-columns(4);
+
+      .link-expand,
+      .link-more {
+
+        &:first-of-type {
+          display: block;
+          margin-top: 2.2em;
+        }
+      }
+
+      .link-expand-hover,
+      .link-more-hover {
+        color: $darker-green;
+      }
+
+      p {
+        padding-top: 0.7em;
+      }
 
       &:first-of-type {
         padding-left: $base-padding;
