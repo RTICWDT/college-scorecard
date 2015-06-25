@@ -100,6 +100,7 @@ label.radio {
 label.checkbox :checked + span {
   background-color: $green;
   vertical-align: -4px;
+  position: relative;
 
   &:after {
     color: $white;
@@ -114,6 +115,7 @@ label.checkbox :checked + span {
 label.radio :checked + span {
   background-color: $green;
   vertical-align: -4px;
+  position: relative;
 }
 
 input[type="checkbox"],
