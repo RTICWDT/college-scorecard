@@ -89,7 +89,7 @@ label.radio {
   }
 
   input[type="radio"] + span {
-    border: 1px solid $dark-gray;
+    box-shadow: 0 0 1px $black;
     border-radius: 500px;
     display: inline-block;
     height: 20px;
@@ -117,7 +117,9 @@ label.checkbox :checked + span {
 }
 
 label.radio :checked + span {
-  background-color: $green;
+  background-color: $black;
+  border: 5px solid $white !important;
+  box-shadow: 0 0 1px $black;
   vertical-align: -4px;
   position: relative;
 }
