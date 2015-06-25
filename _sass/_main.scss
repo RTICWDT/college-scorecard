@@ -129,8 +129,7 @@ form {
     }
 
     h1 {
-      @extend .h1;
-      font-weight: 400;
+      @extend .search_categories;
       padding-top: 0.3em;
       padding-bottom: 0.5em;
     }
