@@ -1,23 +1,21 @@
 %button {
-  -webkit-font-smoothing: antialiased;
-  background-color: $base-button-color;
-  border-radius: 500px;
-  color: $white;
-  display: inline-block;
-  @include font-size(1.1);
-  font-weight: bold;
-  letter-spacing: 2px;
-  line-height: 1.3;
-  width: 300px;
-  padding: $base-button-padding;
-  text-decoration: none;
-  text-transform: uppercase;
   @include transition-property(background-color);
   @include transition-duration(0.25s);
   @include transition-timing-function(ease-out);
   @include transition-delay(0s);
+  background-color: $base-button-color;
+  border-radius: 500px;
+  color: $white;
+  display: inline-block;
+  font-weight: bold;
+  letter-spacing: 2px;
+  line-height: 1.3;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 300px;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: $hover-button-color;
     color: $white;
   }

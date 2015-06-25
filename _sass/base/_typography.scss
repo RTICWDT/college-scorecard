@@ -52,6 +52,27 @@ h4,
   @include font-size($h4);
 }
 
+// Buttons
+
+button {
+  @include font-size(1.125);
+  font-family: $base-font-family;
+  font-weight: bold;
+  letter-spacing: 3.6;
+
+  &.secondary,
+  &.compare {
+    @include font-size(1);
+    letter-spacing: 3.2;
+  }
+
+  &.wizard {
+    @include font-size(0.875);
+    letter-spacing: 2.8;
+    line-height: 18px;
+  }
+}
+
 // Other type
 
 .search_categories {
