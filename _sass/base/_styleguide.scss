@@ -107,8 +107,9 @@ section.guide {
         }
 
         &:nth-of-type(4) {
-          color: $white;
           background-color: $red;
+          border: none;
+          color: $white;
         }
       }
     }
