@@ -70,13 +70,15 @@ label.checkbox,
 label.radio {
   display: inline-block;
   font-weight: 400;
+  margin-bottom: 0.5em;
 
   input[type="checkbox"] + span {
     border: 1px solid $dark-gray;
-    border-radius: $form-border-radius;
+    border-radius: 1px;
     display: inline-block;
     height: 20px;
     margin-top: 0;
+    margin-right: 0.5em;
     margin-bottom: 0;
     vertical-align: -4px;
     width: 20px;
@@ -88,6 +90,7 @@ label.radio {
     display: inline-block;
     height: 20px;
     margin-top: 0;
+    margin-right: 0.5em;
     margin-bottom: 0;
     vertical-align: -4px;
     width: 20px;
@@ -115,8 +118,8 @@ input[type="checkbox"],
 input[type="radio"] {
   @include appearance(none);
   display: inline-block;
-  width: 20px;
   height: 20px;
+  width: 20px;
   vertical-align: -4px;
 
   // to hide checkbox/radio from visual but 
