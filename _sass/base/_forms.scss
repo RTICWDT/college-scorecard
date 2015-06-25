@@ -7,7 +7,11 @@ fieldset {
 }
 
 legend {
+<<<<<<< HEAD
   @extend .sr-only;
+=======
+  @extend .hidden;
+>>>>>>> 8e706657241e7e675ea6e9db088fe1971cb7c0cf
 }
 
 input,
