@@ -67,7 +67,7 @@
   };
 
   resultsRoot.classList.add('js-loading');
-  API.load('../data/schools-sample.json', function(error, rows) {
+  API.search({name: data.name}, function(error, rows) {
     resultsRoot.classList.remove('js-loading');
     if (error) {
       return showError(error);
