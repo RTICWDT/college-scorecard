@@ -44,7 +44,7 @@
     return {
       dollars: formatter('$,d', '$0'),
       percent: formatter('%.0f', '--'),
-      number: formatter('d', '0'),
+      number: formatter(',d', '0'),
       plural: function(key, plural) {
         if (!plural) plural = 's';
         return function(d) {
@@ -57,36 +57,41 @@
   // these directives tell the template renderer how to format specific keys in
   // the data, for instance as dollars or percentages.
   var directives = {
-    branches:         format.number('NUMBRANCH', '0'),
-    branches_plural:  format.plural('NUMBRANCH', 'es'),
-    tuition_in:       format.dollars('TUITIONFEE_IN'),
-    tuition_out:      format.dollars('TUITIONFEE_OUT'),
-    pct_pell:         format.percent('PCTPELL'),
-    pct_fed_loan:     format.percent('PCTFLOAN'),
-    avg_fac_salary:   format.dollars('AVGFACSAL'),
+    count: format.number('count', '0'),
+    schools: {
+      branches:         format.number('NUMBRANCH', '0'),
+      branches_plural:  format.plural('NUMBRANCH', 'es'),
+      tuition_in:       format.dollars('TUITIONFEE_IN'),
+      tuition_out:      format.dollars('TUITIONFEE_OUT'),
+      pct_pell:         format.percent('PCTPELL'),
+      pct_fed_loan:     format.percent('PCTFLOAN'),
+      avg_fac_salary:   format.dollars('AVGFACSAL'),
+    }
   };
 
   resultsRoot.classList.add('js-loading');
-  API.load('../data/schools-sample.json', function(error, rows) {
+  API.search({name: data.name}, function(error, rows) {
     resultsRoot.classList.remove('js-loading');
     if (error) {
       return showError(error);
     }
     console.log('loaded schools:', rows);
     resultsRoot.classList.add('js-loaded');
-    var list = resultsRoot.querySelector('.schools-list');
 
     console.time('[render]');
 
     console.time('[render] template');
     // render the basic DOM template for each school
-    tagalong(list, rows, directives);
+    tagalong(resultsRoot, {
+      count: rows.length,
+      schools: rows
+    }, directives);
     console.timeEnd('[render] template');
 
     console.time('[render] charts');
     // bind all of the data to elements in d3, then
     // call renderCharts() on the selection
-    d3.select(list)
+    d3.select(resultsRoot)
       .selectAll('.school-item')
       .data(rows)
       .call(renderCharts);
@@ -96,7 +101,11 @@
   });
 
   function renderCharts(selection) {
-    // TODO
+    selection.select('a.name')
+      .attr('href', function(d) {
+        var name = d.name.replace(/\W+/g, '-');
+        return ['../school/?', d.id, '-', name].join('');
+      });
   }
 
   function showError(error) {

@@ -1,0 +1,36 @@
+---
+title: School
+layout: default
+permalink: /school/
+scripts:
+  - vendor/tagalong.min.js
+body_scripts:
+  - school.js
+---
+
+<section id="error" class="hidden">
+  <h2>Error</h2>
+  <p class="error-message"></p>
+  <form target="../search/" method="GET">
+    <label for="name-school" >Try searching for a school by name:</h2>
+    <input id="name-school" name="name" type="text" placeholder="Name of School" autocomplete="off" autocorrect="off" autocapitalize="off">
+    <input type="submit" value="Search">
+  </form>
+</section>
+
+<!-- Search results -->
+<section id="school" class="hidden">
+  <h1 class="name">School Name</h1>
+  <h2 class="location">
+    <span data-bind="city">City</span>,
+    <span data-bind="state">State</span>
+    @ <tt><span data-bind="longitude"></span>&deg;W,<span data-bind="latitude"></span>&deg;N</tt>
+    (region <b data-bind="region">X</b>)
+  </h2>
+</section>
+
+<!--
+<section>
+  {% include search-form.html %}
+</section>
+-->
