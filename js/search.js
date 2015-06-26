@@ -96,7 +96,11 @@
   });
 
   function renderCharts(selection) {
-    // TODO
+    selection.select('a.name')
+      .attr('href', function(d) {
+        var name = d.name.replace(/\W+/g, '-');
+        return ['../school/?', d.id, '-', name].join('');
+      });
   }
 
   function showError(error) {
