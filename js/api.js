@@ -34,7 +34,20 @@
     };
   };
 
-  API.search = API.endpoint('{{ site.api.search }}');
+  var schoolEndpoint = 'school/';
+  var idField = 'id';
+
+  API.search = API.endpoint(schoolEndpoint);
+
+  API.getSchool = function(id, done) {
+    var data = {};
+    data[idField] = id;
+    return API.get(schoolEndpoint, data, function(error, schools) {
+      return error || !schools.length
+        ? done(error ? error.responseText : 'No such school found.')
+        : done(null, schools[0]);
+    });
+  };
 
   exports.API = API;
 
