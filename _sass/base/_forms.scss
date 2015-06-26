@@ -6,6 +6,10 @@ fieldset {
   }
 }
 
+legend {
+  @extend .sr-only;
+}
+
 input,
 label,
 select {
@@ -15,7 +19,8 @@ select {
 }
 
 label {
-  font-weight: bold;
+  @include font-size(0.875);
+  font-weight: 600;
   margin-bottom: $base-line-height / 4;
 
   &.required:after {
@@ -44,7 +49,7 @@ select[multiple=multiple] {
   box-shadow: $form-box-shadow;
   font-family: $form-font-family;
   margin-bottom: 1em;
-  padding: 1em;
+  padding: 0.6em 0.8em;
   width: 100%;
 
   &:hover {
@@ -52,7 +57,6 @@ select[multiple=multiple] {
   }
 
   &:focus {
-    border-color: $form-border-color-focus;
     box-shadow: $form-box-shadow-focus;
     outline: none;
   }
@@ -73,7 +77,7 @@ label.radio {
   margin-bottom: 0.5em;
 
   input[type="checkbox"] + span {
-    border: 1px solid $dark-gray;
+    box-shadow: 0 0 1px $black;
     border-radius: 1px;
     display: inline-block;
     height: 20px;
@@ -81,11 +85,12 @@ label.radio {
     margin-right: 0.5em;
     margin-bottom: 0;
     vertical-align: -4px;
+    padding-top: 4px; //compensate for FA vertical-align
     width: 20px;
   }
 
   input[type="radio"] + span {
-    border: 1px solid $dark-gray;
+    box-shadow: 0 0 1px $black;
     border-radius: 500px;
     display: inline-block;
     height: 20px;
@@ -99,7 +104,8 @@ label.radio {
 
 label.checkbox :checked + span {
   background-color: $green;
-  vertical-align: -4px;
+  border: 1px solid $dark-gray;
+  box-shadow: none;
   position: relative;
 
   &:after {
@@ -107,13 +113,15 @@ label.checkbox :checked + span {
     font-family: "FontAwesome";
     content: $fa-var-check;
     position: relative;
-    left: 1px;
-    top: -3px;
+    left: 2px;
+    top: -6px;
   }
 }
 
 label.radio :checked + span {
-  background-color: $green;
+  background-color: $black;
+  border: 6px solid $white !important;
+  box-shadow: 0 0 1px $black;
   vertical-align: -4px;
   position: relative;
 }
@@ -139,8 +147,7 @@ input[type="radio"] {
 
   &:focus {
     + .checkbox-focus {
-      border-color: #9ecaed;
-      box-shadow: 0 0 10px #9ecaed;
+      box-shadow: $form-box-shadow-focus;
       outline: none;
     }
   }
@@ -154,7 +161,6 @@ input[type="file"] {
 
 select {
   @include appearance(none);
-  height: 3rem;
   width: auto;
   max-width: 100%;
   background-image: url('../img/angle-down.png');
@@ -167,11 +173,13 @@ select {
   color: $dark-gray;
   margin-bottom: 1em;
   overflow: hidden;
-  padding: 0 4rem 0 1rem;
+  padding: 0.5em 7rem 0.5em 0.8rem;
   text-overflow: ellipsis;
   white-space: nowrap;
+
   &:focus {
-    outline: 3px solid $green;
+    box-shadow: $form-box-shadow-focus;
+    outline: none;
   }
 
   &::-ms-expand {
