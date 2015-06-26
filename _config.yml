@@ -21,7 +21,7 @@ scripts:
 
 # API configuration
 api:
-  baseurl: http://ccapi-staging.cf.18f.us/
+  baseurl: https://ccapi-staging.18f.gov/
   search: school/
 
 # specify paths to exclude from copying to _site
