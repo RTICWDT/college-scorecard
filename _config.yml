@@ -21,7 +21,7 @@ scripts:
 
 # API configuration
 api:
-  baseurl: http://127.0.0.1:3000/
+  baseurl: http://ccapi-staging.cf.18f.us/
   search: school/
 
 # specify paths to exclude from copying to _site
