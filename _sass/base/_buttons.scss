@@ -12,13 +12,26 @@ input[type="submit"] {
   vertical-align: middle;
   width: 280px;
 
-  &.secondary,
-  &.compare {
+  &.button-primary {
+    background-color: $base-button-color;
+    color: $white;
+    width: 300px;
+    -webkit-font-smoothing: antialiased;
+
+    &:hover,
+    &:focus {
+      background-color: $hover-button-color;
+      color: $white;
+    }
+  }
+
+  &.button-secondary,
+  &.button-compare {
     height: 40px;
     margin-bottom: 1.6em
   }
 
-  &.secondary {
+  &.button-secondary {
     background-color: $secondary-button-color;
     color: $black;
     width: 230px;
@@ -30,16 +43,27 @@ input[type="submit"] {
     }
   }
 
-  &.compare {
+  &.button-compare {
+    background-color: $base-button-color;
     border-radius: 0;
+    color: $white;
+    -webkit-font-smoothing: antialiased;
+
+    &:hover,
+    &:focus {
+      background-color: $hover-button-color;
+      color: $white;
+    }
   }
 
-  &.wizard {
+  &.button-wizard {
     background-color: transparent;
     border: 1px solid $white;
+    color: $white;
     height: 100%;
     padding-top: 0.9em;
     padding-bottom: 0.8em;
+    -webkit-font-smoothing: antialiased;
 
     &:hover,
     &:focus {
@@ -47,13 +71,19 @@ input[type="submit"] {
     }
   }
 
-  &.add {
-    background-color: transparent;
+  &.button-add {
+    @extend .link-more;
+    background-color: $white;
     color: $green;
+    display: inline-block;
+    float: right;
+    letter-spacing: 0;
+    margin-top: 20px;
+    width: 70px;
 
     &:hover,
     &:focus {
-      background-color: transparent;
+      background-color: $white;
       color: $darker-green;
     }
   }

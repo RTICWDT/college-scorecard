@@ -66,30 +66,30 @@ layout: default
 
       <div class="guide-buttons">
         <h1>Primary</h1>
-        <button>
+        <button class="button-primary">
           Find Schools
         </button>
-        <button class="primary-hover">
+        <button class="button-primary button-primary-hover">
           Find Schools
         </button>
       </div>
 
       <div class="guide-buttons">
         <h1>Secondary</h1>
-        <button class="secondary">
+        <button class="button-secondary">
           Button
         </button>
-        <button class="secondary secondary-hover">
+        <button class="button-secondary button-secondary-hover">
           Button
         </button>
       </div>
 
       <div class="guide-buttons">
         <h1>Compare</h1>
-        <button class="compare">
+        <button class="button-compare">
           Compare
         </button>
-        <button class="compare">
+        <button class="button-compare">
           Compare
         </button>
       </div>
@@ -97,10 +97,10 @@ layout: default
       <div class="guide-buttons">
         <h1>Wizard</h1>
         <div class="wizard-bg">
-          <button class="wizard">
+          <button class="button-wizard">
             Help me find schools best suited to me
           </button>
-          <button class="wizard wizard-hover">
+          <button class="button-wizard button-wizard-hover">
             Help me find schools best suited to me
           </button>
         </div>
@@ -117,14 +117,20 @@ layout: default
 
 
 
-  <fieldset>
+  <fieldset class="guide-forms">
 
     <legend>Input</legend>
     <h1>Input</h1>
 
-    <label for="name-school">Type: Text
-      <input id="name-school" name="name" type="text" placeholder="Name of School"  {{ common_input_attributes }}>
-    </label>
+    <div class="wrapper">
+      <label for="name-state" class="float-left">Type: Text
+        <input id="name-state" name="name" type="text" placeholder="Name of State"  {{ common_input_attributes }}>
+      </label>
+
+      <button class="button-add">
+        Add State
+      </button>
+    </div>
 
     <label for="zip-code">Type: Number
       <input id="zip-code" name="zip_code" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>
@@ -136,7 +142,18 @@ layout: default
 
   </fieldset>
 
-  <fieldset>
+  <fieldset class="guide-forms">
+
+    <legend>Errors</legend>
+    <h1>Errors</h1>
+
+    <label for="name-school">Type: Text
+      <input id="name-school" name="name" type="text" placeholder="Name of School"  {{ common_input_attributes }}>
+    </label>
+
+  </fieldset>
+
+  <fieldset class="guide-forms">
 
     <legend>Dropdown</legend>
     <h1>Dropdown</h1>
@@ -147,12 +164,13 @@ layout: default
         {% for state in site.data.states|sort('name') %}
         <option value="{{ state.abbr }}">{{ state.name }}</option>
         {% endfor %}
+        <i class="fa fa-chevron-down"></i>
       </select>
     </label>
 
   </fieldset>
 
-  <fieldset>
+  <fieldset class="guide-forms">
 
     <legend>Checkboxes (and nested fieldsets)</legend>
     <h1>Checkboxes (and nested fieldsets)</h1>
@@ -165,7 +183,7 @@ layout: default
       <ul>
         <li>
           <label for="size-small" class="checkbox">
-            <input id="size-small" type="checkbox" name="size" value="small"tabindex="0">
+            <input id="size-small" type="checkbox" checked name="size" value="small"tabindex="0">
             <span tabindex="-1" class="checkbox-focus"></span>Small (&lt; 2,000)
           </label>
         </li>
@@ -215,7 +233,7 @@ layout: default
 
   </fieldset>
 
-  <fieldset>
+  <fieldset class="guide-forms">
 
     <legend>Radio buttons</legend>
     <h1>Radio buttons</h1>
@@ -223,7 +241,7 @@ layout: default
     <ul>
       <li>
         <label for="peasoup" class="radio">
-          <input id="peasoup" type="radio" name="soup" value="pea" tabindex="0">
+          <input id="peasoup" type="radio" checked name="soup" value="pea" tabindex="0">
           <span tabindex="-1" class="checkbox-focus"></span>Pea Soup
         </label>
       </li>

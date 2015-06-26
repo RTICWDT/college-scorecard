@@ -6,13 +6,21 @@ $pad-more: 1em;
   color: yellow;
 }
 
-.hidden {
+.sr-only {
   position: absolute;
   left: -10000px;
   top: auto;
   width: 1px;
   height: px;
   overflow: hidden; 
+}
+
+.wrapper {
+  @include clearfix;
+}
+
+.float-left {
+  float: left;
 }
 
 
@@ -107,36 +115,19 @@ section {
 form {
   text-align: left;
 
-  legend {
-    @extend .hidden;
-  }
-
-  > h1 {
-    padding: 0.8em $base-padding/1.5 0.2em $base-padding/1.5;
-    // ^^em is acting strangly in the h1/form. Magic number. Fix.
-  }
-
-  p {
-    padding: 0 $base-padding 1em $base-padding;
-  }
-
-  fieldset {
+  > fieldset {
 
     padding: 0.6em $base-padding 1.2em $base-padding;
 
     > fieldset h1 {
-      @extend .h2;
+      @extend .h3;
+      font-weight: 400;
     }
 
     h1 {
       @extend .search_categories;
       padding-top: 0.3em;
       padding-bottom: 0.5em;
-    }
-
-    label {
-      font-weight: 600;
-      letter-spacing: 0.04em;
     }
   }
 }
