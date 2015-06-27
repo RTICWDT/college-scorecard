@@ -139,7 +139,7 @@ form {
 
 
 // Header
-//========
+//--------------------------------------------
 
 header {
   color: $white;
@@ -192,16 +192,21 @@ header {
   }
 }
 
+// Footer
+//--------------------------------------------
 
 footer {
   @include font-size(0.8);
-  border-top: $thick-border-size solid $base-border-color;
+  background-color: $mid-gray;
   text-align: center;
-  padding-top: $base-padding;
+  padding-top: $base-padding * 2;
   padding-bottom: $base-padding * 2;
 
   p {
-    color: $dark-gray;
+    color: $black;
     text-transform: uppercase;
   }
 }
+
+// Next here
+//--------------------------------------------
