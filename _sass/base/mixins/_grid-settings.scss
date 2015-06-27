@@ -1,21 +1,19 @@
-@import '../neat/neat-helpers';
+@import '../../neat/neat-helpers';
 
-$max-width: em(960);
+$max-width: em(990) !default;
 
-// Neat Breakpoints
+// Breakpoints
 $tiny: em(480);
 $small: em(600);
 $medium: em(768);
 $large: em(990);
-$largest: em(1088);
-$huge: em(1250);
+$huge: em(1249);
 
 $tiny-down: new-breakpoint(max-width $tiny);
 $tiny-up: new-breakpoint(min-width $tiny);
 $small-up: new-breakpoint(min-width $small);
 $medium-up: new-breakpoint(min-width $medium);
 $large-up: new-breakpoint(min-width $large);
-$largest-up: new-breakpoint(min-width $largest);
 $huge-up: new-breakpoint(min-width $huge);
 
 @mixin respond-to($media) {
@@ -34,10 +32,31 @@ $huge-up: new-breakpoint(min-width $huge);
   @else if $media == large-up {
     @media only screen and (min-width: $large) { @content; }
   }
-  @else if $media == largest-up {
-    @media only screen and (min-width: $largest) { @content; }
-  }
   @else if $media == huge-up {
     @media only screen and (min-width: $huge) { @content; }
+  }
+}
+
+// Outer container with padding based on media queries
+
+@mixin padded-container {
+  @include outer-container();
+  padding: {
+    left: em(10);
+    right: em(10);
+  }
+
+  @include respond-to(tiny-up) {
+    padding: {
+      left: em(20);
+      right: em(20);
+    }
+  }
+
+  @include respond-to(medium-up) {
+    padding: {
+      left: em(30);
+      right: em(30);
+    }
   }
 }

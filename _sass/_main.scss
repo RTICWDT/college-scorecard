@@ -112,74 +112,80 @@ section {
   }
 }
 
-form {
-  text-align: left;
 
-  > fieldset {
-
-    padding: 0.6em $base-padding 1.2em $base-padding;
-
-    > fieldset h1 {
-      @extend .h3;
-      font-weight: 400;
-    }
-
-    h1 {
-      @extend .search_categories;
-      padding-top: 0.3em;
-      padding-bottom: 0.5em;
-    }
-  }
-}
-
-
-
-// Modules
+// Header
 //============================================
 
-.banner {
+header {
   color: $white;
-  background: $dark-blue;
-  padding: 0.2em $base-padding;
 
   a {
     color: inherit;
     text-decoration: none;
+  }
+}
+
+.banner {
+  background: $dark-blue;
+
+  > div {
+    @include padded-container();
+  }
+
+  a {
+    @include font-size(0.70);
+
+    color: inherit;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
 
     span.ed-logo {
-      background: url(../img/US-DeptOfEducation-Seal.svg) no-repeat top left;
-      background-size: 100%;
+      background: url(../img/US-DeptOfEducation-Seal.svg);
+      background-repeat: no-repeat;
+      background-size: 85%;
       display: inline-block;
       height: 20px;
-      margin-bottom: -0.2em;
+      margin-right: em(2);
+      vertical-align: em(-8);
       width: 20px;
     }
   }
 }
 
-header {
-  color: $white;
+.title {
   background: $mid-blue;
-  padding: 0.8em $base-padding;
+
+  > div {
+    @include padded-container();
+  }
 
   h1 {
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    padding: em(12) 0;
+    -webkit-font-smoothing: antialiased;
   }
 }
+
+
+// Footer
+//============================================
 
 footer {
   @include font-size(0.8);
-  border-top: $thick-border-size solid $base-border-color;
+  background-color: $mid-gray;
   text-align: center;
-  padding-top: $base-padding;
+  padding-top: $base-padding * 2;
   padding-bottom: $base-padding * 2;
 
   p {
-    color: $dark-gray;
+    color: $black;
     text-transform: uppercase;
   }
 }
+
+
+// Next here
+//============================================
+
+

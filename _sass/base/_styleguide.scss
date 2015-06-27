@@ -12,9 +12,10 @@ section.guide {
     }
 
   > section {
-    @include outer-container($local-max-width: 98%);
+    @include outer-container();
     margin-top: 3em;
     text-align: left;
+    
     > h1 {
       @extend .h4;
       padding-left: $base-padding;
@@ -107,9 +108,8 @@ section.guide {
         }
 
         &:nth-of-type(4) {
-          background-color: $red;
+          background-color: $yellow;
           border: none;
-          color: $white;
         }
       }
     }

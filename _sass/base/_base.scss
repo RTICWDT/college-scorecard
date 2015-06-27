@@ -9,6 +9,7 @@
 
 // Mixins
 @import 'mixins/font-size';
+@import 'mixins/grid-settings';
 
 // Extends
 @import 'extends/buttons';
@@ -17,6 +18,5 @@
 @import 'buttons';
 @import 'fonts';
 @import 'forms';
-@import 'grid-settings';
 @import 'styleguide';
 @import 'typography';
