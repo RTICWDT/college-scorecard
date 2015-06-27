@@ -112,34 +112,9 @@ section {
   }
 }
 
-form {
-  text-align: left;
-
-  > fieldset {
-
-    padding: 0.6em $base-padding 1.2em $base-padding;
-
-    > fieldset h1 {
-      @extend .h3;
-      font-weight: 400;
-    }
-
-    h1 {
-      @extend .search_categories;
-      padding-top: 0.3em;
-      padding-bottom: 0.5em;
-    }
-  }
-}
-
-
-
-// Modules
-//============================================
-
 
 // Header
-//--------------------------------------------
+//============================================
 
 header {
   color: $white;
@@ -192,8 +167,9 @@ header {
   }
 }
 
+
 // Footer
-//--------------------------------------------
+//============================================
 
 footer {
   @include font-size(0.8);
@@ -208,5 +184,8 @@ footer {
   }
 }
 
+
 // Next here
-//--------------------------------------------
+//============================================
+
+

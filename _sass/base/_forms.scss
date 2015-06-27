@@ -1,3 +1,14 @@
+form,
+fieldset {
+  > div {
+    @include padded-container();
+  }
+}
+
+form {
+  text-align: left;
+}
+
 fieldset {
   border-top: $regular-border-size solid $base-border-color;
 
