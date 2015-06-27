@@ -3,19 +3,17 @@
 $max-width: em(960);
 
 // Neat Breakpoints
-$tiny: em(480);
-$small: em(600);
-$medium: em(768);
-$large: em(990);
-$largest: em(1088);
-$huge: em(1250);
+$tiny: 30em;
+$small: 37.5em;
+$medium: 48em;
+$large: 61.875em;
+$huge: 78.125em;
 
 $tiny-down: new-breakpoint(max-width $tiny);
 $tiny-up: new-breakpoint(min-width $tiny);
 $small-up: new-breakpoint(min-width $small);
 $medium-up: new-breakpoint(min-width $medium);
 $large-up: new-breakpoint(min-width $large);
-$largest-up: new-breakpoint(min-width $largest);
 $huge-up: new-breakpoint(min-width $huge);
 
 @mixin respond-to($media) {
@@ -33,9 +31,6 @@ $huge-up: new-breakpoint(min-width $huge);
   }
   @else if $media == large-up {
     @media only screen and (min-width: $large) { @content; }
-  }
-  @else if $media == largest-up {
-    @media only screen and (min-width: $largest) { @content; }
   }
   @else if $media == huge-up {
     @media only screen and (min-width: $huge) { @content; }
