@@ -13,6 +13,7 @@
 
     > h1 {
       @extend .h4;
+      padding: 0 0 1em 0;
       text-transform: uppercase;
     }
   }
