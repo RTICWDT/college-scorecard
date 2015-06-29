@@ -168,8 +168,7 @@ input[type="file"] {
 
 select {
   @include appearance(none);
-  width: auto;
-  max-width: 100%;
+  width: 100%;
   background-image: url('../img/angle-down.png');
   background-repeat: no-repeat;
   background-position: 99% 50%;

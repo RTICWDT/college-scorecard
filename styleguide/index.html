@@ -4,14 +4,14 @@ layout: default
 
 <section class="guide">
 
-  <div class="container">
+  <div class="guide-container">
 
     <h1>Component Styleguide</h1>
     <p>To test for visual and 508 compliance...at the same time!</p>
 
   </div>
 
-  <section class="container">
+  <section class="guide-container">
 
     <h1>Typography</h1>
 
@@ -40,7 +40,7 @@ layout: default
 
   </section>
 
-  <section class="container">
+  <section class="guide-container">
 
     <h1>Color</h1>
 
@@ -64,7 +64,7 @@ layout: default
 
   </section>
 
-  <section class="container">
+  <section class="guide-container">
 
     <h1>Buttons</h1>
 
@@ -102,17 +102,17 @@ layout: default
         <h1>Wizard</h1>
         <div class="wizard-bg">
           <button class="button-wizard">
-            Help me find schools best suited to me
+            Help me find schools <br>best suited to me
           </button>
           <button class="button-wizard button-wizard-hover">
-            Help me find schools best suited to me
+            Help me find schools <br>best suited to me
           </button>
         </div>
       </div>
 
   </section>
 
-  <section class="container">
+  <section class="guide-container">
 
     <h1 class="search_category">Forms</h1>
 
@@ -124,13 +124,13 @@ layout: default
         <legend>Inputs</legend>
         <h1 class="search_category">Input</h1>
 
-        <div class="wrapper">
-
-          <label for="name-state" class="float-left">Type: Text
+        <div class="group_inline">
+          
+          <label for="name-state" class="group_inline-left">Type: Text
             <input id="name-state" name="name" type="text" placeholder="Name of State"  {{ common_input_attributes }}>
           </label>
-
-          <button class="button-add">
+         
+          <button class="button-add group_inline-right">
             Add State
           </button>
           
