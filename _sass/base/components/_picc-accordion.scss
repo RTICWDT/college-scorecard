@@ -1,0 +1,42 @@
+picc-accordion,
+[is="picc-accordion"] {
+  display: block;
+  border: 1px solid red;
+  min-height: 50px;
+  transition: height .5s;
+
+  .picc-accordion-title {
+    cursor: pointer;
+    position: relative;
+  }
+
+  .picc-accordion-title:after {
+    content: "+";
+    font-size: 40px;
+    line-height: 44px;
+    font-weight: normal;
+    display: inline-block;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #999;
+    background: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid #e3e3e3;
+  }
+
+  &[open] .picc-accordion-title:after {
+    content: "\2212";
+  }
+
+  .picc-accordion-content {
+    display: none;
+  }
+
+  &[open] .picc-accordion-content {
+    display: block;
+  }
+}
