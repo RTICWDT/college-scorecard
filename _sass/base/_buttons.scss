@@ -1,4 +1,5 @@
 // TODO: qualify button with a class? or specify as .button?
+button,
 .button,
 input[type="submit"] {
   @extend %button;
@@ -85,4 +86,13 @@ input[type="submit"] {
       color: $darker-green;
     }
   }
+}
+
+button.block {
+  @include appearance(none);
+  // @include reset();
+  border: none;
+  height: auto;
+  margin-bottom: 0;
+  width: auto;
 }
