@@ -125,7 +125,7 @@ label.checkbox :checked + span {
 }
 
 label.radio :checked + span {
-  background-color: $black;
+  background-color: $green;
   border: 6px solid $white !important;
   box-shadow: 0 0 1px $black;
   vertical-align: -4px;
@@ -172,7 +172,7 @@ select {
   max-width: 100%;
   background-image: url('../img/angle-down.png');
   background-repeat: no-repeat;
-  background-position: 95% 50%;
+  background-position: 99% 50%;
   background-size: 2rem;
   background-color: #fff;
   border: 1px solid $form-border-color;
