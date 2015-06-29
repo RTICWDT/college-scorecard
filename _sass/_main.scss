@@ -27,6 +27,14 @@ $pad-more: 1em;
   float: left;
 }
 
+.group-inline {
+  @include clearfix;
+  display: inline-block;
+  float: right;
+  //margin-top: 20px;
+  //width: 70px;
+}
+
 
 // Site-wide
 //============================================
