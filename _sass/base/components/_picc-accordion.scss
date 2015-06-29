@@ -46,8 +46,12 @@ picc-accordion,
     top: 0;
   }
 
-  &[open] a[aria-controls]:after {
+  &[data-expanded="true"] a[aria-controls]:after {
     content: "\2212";
+  }
+
+  a[aria-controls]:hover:after {
+    color: #333; // TODO
   }
 
   .picc-accordion-content {
