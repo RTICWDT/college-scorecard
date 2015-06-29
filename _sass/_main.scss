@@ -141,6 +141,7 @@ header {
 
 .banner {
   background: $dark-blue;
+  height: 24px;
 
   > div {
     @include padded-container();
@@ -151,6 +152,7 @@ header {
 
     color: inherit;
     font-weight: bold;
+    letter-spacing: 0.3px;
     text-decoration: none;
     text-transform: uppercase;
     -webkit-font-smoothing: antialiased;
@@ -170,13 +172,16 @@ header {
 
 .title {
   background: $mid-blue;
+  height: 76px;
 
   > div {
     @include padded-container();
   }
 
   h1 {
-    padding: em(12) 0;
+    @extend .title_heading;
+    font-weight: 400;
+    line-height: 0.7;
     -webkit-font-smoothing: antialiased;
   }
 }
@@ -188,12 +193,13 @@ header {
 footer {
   @include font-size(0.8);
   background-color: $mid-gray;
+  height: 100px;
   text-align: center;
-  padding-top: $base-padding * 2;
-  padding-bottom: $base-padding * 2;
+  padding-top: $base-padding * 1.75;
 
   p {
-    color: $black;
+    color: $dark-gray;
+    letter-spacing: 0.3px;
     text-transform: uppercase;
   }
 }
@@ -219,7 +225,8 @@ footer {
 //============================================
 
 .school {
-  section {
+  section,
+  div {
     text-align: left;
   }
 }

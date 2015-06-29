@@ -75,6 +75,10 @@ button {
 
 // Other type
 
+.title_heading {
+  @include font-size(2.25);
+}
+
 .search_category {
   @include font-size($h1);
   font-weight: 400;
