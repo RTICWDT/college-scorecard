@@ -8,14 +8,14 @@ layout: default
 
     
 
-    {% for school in site.data.schools|sort('insti') %}
+    {% for school in site.data.schools %}
 
       <section>
 
-        <h1>{{ school.insti }}</h1>
+        <h1>{{ school.name }}</h1>
 
         <ul>
-          <li>{{ school.name }}, {{ school.abbr }}</li>
+          <li>{{ school.city }}, {{ school.abbr }}</li>
           <li>{{ school.year }}-year institution</li>
           <li>{{ school.students }} undergraduate students</li>
         <ul>
