@@ -1,27 +1,31 @@
 <form id="search-form" is="search-form" action="{{ site.baseurl }}search/" method="GET">
   {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
 
-  <div>
+  <div class="container">
+
     <legend>Find Schools By:</legend>
     <h1>Find Schools By:</h1>
     <p>Enter criteria that is important to you</p>
+    
   </div>
 
 
   <fieldset>
 
-    <div>
+    <div class="container">
+
       <legend>Name</legend>
       <h1 class="search_category">Name</h1>
       <label for="name-school">School name</label>
       <input id="name-school" name="school_name" type="text" placeholder="" {{ common_input_attributes }}>
+
     </div>
 
   </fieldset>
 
   <fieldset>
 
-    <div>
+    <div class="container">
 
       <legend>Location</legend>
       <h1 class="search_category">Location</h1>
@@ -68,7 +72,7 @@
 
   <fieldset>
 
-    <div>
+    <div class="container">
 
       <legend>Major/Degree</legend>
       <h1 class="search_category">Major/Degree</h1>
@@ -90,7 +94,7 @@
 
   <fieldset>
 
-    <div>
+    <div class="container">
 
       <legend>Size</legend>
       <h1 class="search_category">Size</h1>

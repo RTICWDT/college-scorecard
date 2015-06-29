@@ -2,11 +2,6 @@
   padding-top: $base-padding;
   text-align: left;
 
-  > div,
-  > section {
-    @include padded-container();
-  }
-
   > section {
     margin-top: 3em;
     text-align: left;
