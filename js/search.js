@@ -70,7 +70,7 @@
     tagalong(resultsRoot, {
       count: rows.length,
     }, {
-      results_plural: format.plural('count', ''),
+      results: format.plural('count', 'Result'),
       count: format.number('count', '0')
     });
 
