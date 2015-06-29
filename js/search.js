@@ -9,9 +9,10 @@
 
   // TODO: include formdb, querystring, and tagalong
   var form = new formdb.Form('#search-form');
-  var data = querystring.parse(query.substr(1));
-  console.debug('[search] form data:', data);
-  form.setData(data);
+  var values = querystring.parse(query.substr(1));
+  removeEmptyValues(values);
+  console.debug('[search] form values:', values);
+  form.setData(values);
 
   /**
    * This is our format generator. Its methods are format generators for
@@ -44,49 +45,51 @@
     return {
       dollars: formatter('$,d', '$0'),
       percent: formatter('%.0f', '--'),
-      number: formatter('d', '0'),
-      plural: function(key, plural) {
-        if (!plural) plural = 's';
+      number: formatter(',d', '0'),
+      plural: function(key, singular, plural) {
+        if (!plural) plural = singular + 's';
         return function(d) {
-          return d[key] == 1 ? '' : this.getAttribute('data-plural') || plural;
+          return d[key] == 1 ? singular : plural;
         };
       }
     };
   })();
 
-  // these directives tell the template renderer how to format specific keys in
-  // the data, for instance as dollars or percentages.
-  var directives = {
-    branches:         format.number('NUMBRANCH', '0'),
-    branches_plural:  format.plural('NUMBRANCH', 'es'),
-    tuition_in:       format.dollars('TUITIONFEE_IN'),
-    tuition_out:      format.dollars('TUITIONFEE_OUT'),
-    pct_pell:         format.percent('PCTPELL'),
-    pct_fed_loan:     format.percent('PCTFLOAN'),
-    avg_fac_salary:   format.dollars('AVGFACSAL'),
-  };
-
   resultsRoot.classList.add('js-loading');
-  API.search({name: data.name}, function(error, rows) {
+  API.search(values, function(error, rows) {
     resultsRoot.classList.remove('js-loading');
     if (error) {
       return showError(error);
     }
     console.log('loaded schools:', rows);
     resultsRoot.classList.add('js-loaded');
-    var list = resultsRoot.querySelector('.schools-list');
 
     console.time('[render]');
 
     console.time('[render] template');
     // render the basic DOM template for each school
-    tagalong(list, rows, directives);
+    tagalong(resultsRoot, {
+      count: rows.length,
+    }, {
+      results: format.plural('count', 'Result'),
+      count: format.number('count', '0')
+    });
+
+    var resultsList = resultsRoot.querySelector('.schools-list');
+    tagalong(resultsList, rows, {
+      link: {
+        '@href': function(d) {
+          var name = d.name.replace(/\W+/g, '-');
+          return ['../school/?', d.id, '-', name].join('');
+        }
+      }
+    });
     console.timeEnd('[render] template');
 
     console.time('[render] charts');
     // bind all of the data to elements in d3, then
     // call renderCharts() on the selection
-    d3.select(list)
+    d3.select(resultsRoot)
       .selectAll('.school-item')
       .data(rows)
       .call(renderCharts);
@@ -96,7 +99,6 @@
   });
 
   function renderCharts(selection) {
-    // TODO
   }
 
   function showError(error) {
@@ -105,6 +107,18 @@
     var out = resultsRoot.querySelector('.error');
     out.classList.remove('hidden');
     out.textContent = String(error);
+  }
+
+  function removeEmptyValues(obj) {
+    var empty = function(v) {
+      return v === null || v === '';
+    };
+    for (var key in obj) {
+      if (empty(obj[key])) {
+        delete obj[key];
+      }
+    }
+    return obj;
   }
 
 })(this);

@@ -11,11 +11,20 @@ body_scripts:
 
 <!-- Search results -->
 <section class="search-results">
-  <h1>Search Results</h1>
-  <div class="error hidden"></div>
-  <ul class="schools-list">
+  <div class="header">
+    <h1><span class="results-count" data-bind="count">0</span> <span data-bind="results">Results</span> Based on Your Criteria</h1>
+    <p>
+      <a href="#search-form" class="link-more">&lt; Edit Criteria</a>
+    </p>
+  </div>
+
+  <div class="error hidden">
+    <p class="error-message"></p>
+  </div>
+
+  <ul class="schools-list" data-bind="schools">
     <li class="school-item">
-      <h2 class="name">School Name</h2>
+      <h2><a class="name" data-bind="link">School Name</a></h2>
       <h3 class="location">
         <span data-bind="city">City</span>,
         <span data-bind="state">State</span>

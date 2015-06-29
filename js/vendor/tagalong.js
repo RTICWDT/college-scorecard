@@ -13,7 +13,6 @@ var tagalong = function(node, data, directives) {
 
   if (typeof directives === 'object') {
     directives = expandKeys(directives);
-    applyDirectives(node, data, directives);
   } else if (typeof directives === 'function') {
     directives = directives.call(node, data) || {};
   } else {
@@ -22,7 +21,11 @@ var tagalong = function(node, data, directives) {
 
   if (Array.isArray(data)) {
     return bindArray(node, data, directives);
-  } else if (typeof data === 'object') {
+  } else {
+    applyDirectives(node, data, directives);
+  }
+
+  if (typeof data === 'object') {
     return bindObject(node, data, directives);
   }
 
@@ -111,34 +114,45 @@ function getChildren(node) {
   return children;
 }
 
-function access(getter, data, thisArg) {
-  if (typeof getter === 'function') {
-    return getter.call(thisArg, data);
-  }
-  return data[getter];
-}
-
 function applyDirectives(node, data, directives) {
+  function access(key, attr) {
+    var value = directives[key];
+    if (typeof value === 'function') {
+      return value.call(node, data);
+    } if (value === true) {
+      return data[attr || key];
+    }
+    return (typeof value === 'object')
+      ? value
+      : data[value];
+  }
+
   var interpolated;
   for (var key in directives) {
     if (key.charAt(0) === '@') {
       var attr = key.substr(1);
-      var value = directives[key] === true
-        ? data[attr]
-        : access(directives[key], data, node);
+      var value = access(key, attr) || '';
       node.setAttribute(attr, value);
     } else {
-      // only interpolate scalars and functions;
-      // nested directives apply to children
-      if (typeof directives[key] !== 'object') {
+      switch (key) {
+        case 'text':
+          node.textContent = access(key) || '';
+          break;
+      }
+      if (typeof directives[key] === 'object') {
+        bindKey(node, key, data, directives[key]);
+      } else {
         if (!interpolated) interpolated = {};
-        interpolated[key] = access(directives[key], data, node);
+        interpolated[key] = access(key);
       }
     }
   }
+
   if (interpolated) {
-    tagalong(node, interpolated);
+    return tagalong(node, interpolated);
   }
+
+  return node;
 }
 
 function expandKeys(obj) {

@@ -6,6 +6,10 @@ $pad-more: 1em;
   color: yellow;
 }
 
+.hidden {
+  display: none;
+}
+
 .sr-only {
   position: absolute;
   left: -10000px;
