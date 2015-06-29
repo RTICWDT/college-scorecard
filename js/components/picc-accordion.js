@@ -2,17 +2,25 @@
 
   var PICCAccordion = document.registerElement('picc-accordion', createPrototype({
     createdCallback: function() {
-      var toggle = this.getElementsByClassName(PICCAccordion.TOGGLE_CLASS)[0];
-      if (!toggle) {
-        toggle = this.appendChild(document.createElement('button'));
-        toggle.className = PICCAccordion.TOGGLE_CLASS;
-      } else if (toggle.nodeName !== 'BUTTON') {
-        toggle.classList.remove(PICCAccordion.TOGGLE_CLASS);
-        toggle.classList.add(PICCAccordion.TOGGLE_CLASS + '-container');
-        var button = toggle.appendChild(document.createElement('button'));
+      var target = this.getElementsByClassName(PICCAccordion.TOGGLE_CLASS)[0];
+      if (!target) {
+        target = this.appendChild(document.createElement('button'));
+        target.className = PICCAccordion.TOGGLE_CLASS;
+      } else if (target.nodeName !== 'BUTTON') {
+        target.classList.remove(PICCAccordion.TOGGLE_CLASS);
+        target.classList.add(PICCAccordion.TOGGLE_CLASS + '-container');
+        var button = target.appendChild(document.createElement('button'));
         button.className = PICCAccordion.TOGGLE_CLASS;
       }
-      toggle.addEventListener('click', this.toggle.bind(this));
+
+      var self = this;
+      var toggle = function(e) {
+        self.toggle();
+        e.preventDefault();
+        return false;
+      };
+
+      target.addEventListener('click', toggle);
     },
 
     attachedCallback: function() {
@@ -45,7 +53,7 @@
 
     toggle: function() {
       console.log('toggle:', this.open);
-      this.open = !this.open;
+      return this.open = !this.open;
     }
   }));
 
