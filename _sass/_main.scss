@@ -60,7 +60,7 @@ section {
   text-align: center;
 
   > h1 {
-    padding: 0 0.6em 0.6em 0.6em;
+    padding: 0 0.6em 0.6em 0;
   }
 
   &.standard {
@@ -214,4 +214,23 @@ footer {
     padding-bottom: $base-padding;
   }
 }
+
+// Individual school pages
+//============================================
+
+.school {
+  section {
+    text-align: left;
+  }
+}
+
+.school-section {
+  border-bottom: $regular-border-size solid $base-border-color;
+}
+
+
+
+
+
+
 
