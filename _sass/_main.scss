@@ -23,20 +23,20 @@ $pad-more: 1em;
   overflow: hidden; 
 }
 
-.wrapper {
-  @include clearfix;
-}
-
-.float-left {
-  float: left;
-}
-
-.group-inline {
-  @include clearfix;
+.group_inline {
   display: inline-block;
+  width: 100%;
+}
+
+.group_inline-right {
   float: right;
-  //margin-top: 20px;
-  //width: 70px;
+}
+
+.group_inline-left {
+  float: left;
+  width: 88%;
+  // This sets the width of the first group item
+  // Would like a way to set this programatically
 }
 
 
