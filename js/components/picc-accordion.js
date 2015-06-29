@@ -8,39 +8,61 @@
       content: null
     };
 
-    var accordion = function() {
-      var root = d3.select(this);
+    var accordion = function(selection) {
+      selection.each(function() {
+        var root = d3.select(this);
 
-      var button = root.select(selectors.button);
-      if (button.empty()) {
-        console.warn('no <button aria-controls="..."> found in:', this);
-        return;
-      }
+        var button = root.select(selectors.button);
+        if (button.empty()) {
+          console.warn('no <button aria-controls="..."> found in:', this);
+          return;
+        }
 
-      var content = root.select(contentSelector(button));
-      if (!content) {
-        console.error('no element with id: "%s" found in:', button.attr('aria-controls'), this);
-        return;
-      }
+        /*
+        if (button.property('nodeName') === 'A') {
+          button.attr('aria-role', 'button');
+        }
+        */
 
-      button.on('click', function() {
-        root.call(accordion.toggle);
-        d3.event.preventDefault();
+        var content = root.select(contentSelector(button));
+        if (!content) {
+          console.error('no element with id: "%s" found in:', button.attr('aria-controls'), this);
+          return;
+        }
+
+        button.on('click', function() {
+          root.call(accordion.toggle);
+          d3.event.preventDefault();
+        });
+
+        root.each(update);
       });
-
-      root.each(update);
     };
 
     accordion.expanded = function(el) {
       return d3.select(el)
         .select(selectors.button)
-          .attr('aria-expanded') === 'true';
+          .attr('data-expanded') === 'true';
     };
 
     accordion.toggle = function(selection) {
       selection.each(function() {
         var root = d3.select(this);
         root.attr('data-expanded', root.attr('data-expanded') !== 'true');
+        update.call(this);
+      });
+    };
+
+    accordion.open = function(selection) {
+      selection.each(function() {
+        this.setAttribute('data-expanded', 'true');
+        update.call(this);
+      });
+    };
+
+    accordion.close = function(selection) {
+      selection.each(function() {
+        this.setAttribute('data-expanded', 'false');
         update.call(this);
       });
     };
@@ -62,9 +84,6 @@
       var expanded = root.attr('data-expanded') === 'true';
       var button = root.select(selectors.button);
       var content = root.select(contentSelector(button));
-
-      root
-        .attr('open', expanded || null);
 
       button
         .attr('aria-expanded', expanded)
@@ -99,7 +118,7 @@
 
   window.addEventListener('load', function() {
     d3.selectAll('.picc-accordion')
-      .each(picc.accordion());
+      .call(picc.accordion());
   });
 
 })(this);
