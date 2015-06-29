@@ -1,5 +1,4 @@
 // TODO: qualify button with a class? or specify as .button?
-button,
 .button,
 input[type="submit"] {
   @extend %button;

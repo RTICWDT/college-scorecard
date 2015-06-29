@@ -12,12 +12,18 @@
 
   <fieldset>
 
-    <div class="container">
+    <div class="container picc-accordion">
 
       <legend>Name</legend>
-      <h1 class="search_category">Name</h1>
-      <label for="name-school">School name</label>
-      <input id="name-school" name="name" type="text" placeholder="" {{ common_input_attributes }}>
+      <h1 class="search_category">
+        <a aria-expanded="false" aria-controls="name-content">
+          Name
+        </a>
+      </h1>
+      <div id="name-content" aria-hidden="true">
+        <label for="name-school">School name</label>
+        <input id="name-school" name="name" type="text" placeholder="" {{ common_input_attributes }}>
+      </div>
 
     </div>
 
@@ -25,68 +31,79 @@
 
   <fieldset>
 
-    <div class="container">
+    <div class="container picc-accordion">
 
       <legend>Location</legend>
-      <h1 class="search_category">Location</h1>
+      <h1 class="search_category">
+        <a aria-expanded="false" aria-controls="location-content">
+          Location
+        </a>
+      </h1>
 
-      <div class="input-add">
+      <div id="location-content">
+        <div class="input-add">
 
-        <label for="select-state">Select a state
-          <select id="select-state" name="state">
+          <label for="select-state">Select a state
+            <select id="select-state" name="state">
+              <option value=""></option>
+              {% for state in site.data.states|sort('name') %}
+              <option value="{{ state.abbr }}">{{ state.name }}</option>
+              {% endfor %}
+              <i class="fa fa-chevron-down"></i>
+            </select>
+          </label>
+
+          <button class="button button-add" data-input="state">
+            Add State
+          </button>
+
+        </div>
+
+        <label for="select-region">Select a region
+          <select name="region" id="select-region">
             <option value=""></option>
-            {% for state in site.data.states|sort('name') %}
-            <option value="{{ state.abbr }}">{{ state.name }}</option>
+            {% for region in site.data.regions|sort('name') %}
+            <option value="{{ region.id }}" data-states="{{ region.states }}">{{ region.name }}</option>
             {% endfor %}
-            <i class="fa fa-chevron-down"></i>
           </select>
         </label>
 
-        <button class="add" data-input="state">
-          Add State
-        </button>
+        <label for="zip-code">Enter a ZIP Code
+          <input id="zip-code" name="zip_code" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>
+        </label>
 
+        <label for="search-radius">Specify a search radius in miles
+          <input name="search_radius" type="number" step=".1" placeholder="no limit" id="search-radius" {{ common_input_attributes }}>
+        </label>
       </div>
 
-      <label for="select-region">Select a region
-        <select name="region" id="select-region">
-          <option value=""></option>
-          {% for region in site.data.regions|sort('name') %}
-          <option value="{{ region.id }}" data-states="{{ region.states }}">{{ region.name }}</option>
-          {% endfor %}
-        </select>
-      </label>
-
-      
-      <label for="zip-code">Enter a ZIP Code
-        <input id="zip-code" name="zip_code" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>
-      </label>
-
-      <label for="search-radius">Specify a search radius in miles
-        <input name="search_radius" type="number" step=".1" placeholder="no limit" id="search-radius" {{ common_input_attributes }}>
-      </label>
-
     </div>
 
   </fieldset>
 
   <fieldset>
 
-    <div class="container">
+    <div class="container picc-accordion">
 
       <legend>Major/Degree</legend>
-      <h1 class="search_category">Major/Degree</h1>
+      <h1 class="search_category">
+        <a aria-expanded="false" aria-controls="major-content">
+          Major/Degree
+        </a>
+      </h1>
+      <div id="major-content" class="picc-accordion-content">
 
-      <label for="major">Specify a major or degree
-        <input id="major" name="major" type="text" placeholder="e.g. Political Science" {{ common_input_attributes }}>
-      </label>
+        <label for="major">Specify a major or degree
+          <input id="major" name="major" type="text" placeholder="e.g. Political Science" {{ common_input_attributes }}>
+        </label>
 
-      <label for="major-type">Select a type of degree
-        <select id="major-type" name="major_type">
-          <option value=""></option>
-          <option>???</option>
-        </select>
-      </label>
+        <label for="major-type">Select a type of degree
+          <select id="major-type" name="major_type">
+            <option value=""></option>
+            <option>???</option>
+          </select>
+        </label>
+      </div>
 
     </div>
 
@@ -94,66 +111,72 @@
 
   <fieldset>
 
-    <div class="container">
+    <div class="container picc-accordion">
 
       <legend>Size</legend>
-      <h1 class="search_category">Size</h1>
+      <h1 class="search_category">
+        <a aria-expanded="false" aria-controls="size-content">
+          Size
+        </a>
+      </h1>
 
-      <fieldset class="nested_fieldset">
+      <div id="size-content" class="picc-accordion-content">
+        <fieldset class="nested_fieldset">
 
-        <legend>Undergraduate Student Body</legend>
-        <h1>Undergraduate Student Body</h1>
+          <legend>Undergraduate Student Body</legend>
+          <h1>Undergraduate Student Body</h1>
 
-        <ul>
-          <li>
-            <label for="size-small" class="checkbox">
-              <input id="size-small" type="checkbox" checked name="size" value="small"tabindex="0">
-              <span tabindex="-1" class="checkbox-focus"></span>Small (&lt; 2,000)
-            </label>
-          </li>
-          <li>
-            <label for="size-medium" class="checkbox">
-              <input id="size-medium" type="checkbox" name="size" value="medium" tabindex="0">
-              <span tabindex="-1" class="checkbox-focus"></span>Medium (2,000&ndash;15,000)
-            </label>
-          </li>
-          <li>
-            <label for="size-large" class="checkbox">
-              <input id="size-large" type="checkbox" name="size" value="large" tabindex="0">
-              <span tabindex="-1" class="checkbox-focus"></span>Large (&gt; 15,000)
-            </label>
-          </li>
-        </ul>
+          <ul>
+            <li>
+              <label for="size-small" class="checkbox">
+                <input id="size-small" type="checkbox" checked name="size" value="small"tabindex="0">
+                <span tabindex="-1" class="checkbox-focus"></span>Small (&lt; 2,000)
+              </label>
+            </li>
+            <li>
+              <label for="size-medium" class="checkbox">
+                <input id="size-medium" type="checkbox" name="size" value="medium" tabindex="0">
+                <span tabindex="-1" class="checkbox-focus"></span>Medium (2,000&ndash;15,000)
+              </label>
+            </li>
+            <li>
+              <label for="size-large" class="checkbox">
+                <input id="size-large" type="checkbox" name="size" value="large" tabindex="0">
+                <span tabindex="-1" class="checkbox-focus"></span>Large (&gt; 15,000)
+              </label>
+            </li>
+          </ul>
 
-      </fieldset>
+        </fieldset>
 
-      <fieldset class="nested_fieldset">
+        <fieldset class="nested_fieldset">
 
-        <legend>Student-to-Faculty Ratio</legend>
-        <h1>Student-to-Faculty Ratio</h1>
+          <legend>Student-to-Faculty Ratio</legend>
+          <h1>Student-to-Faculty Ratio</h1>
 
-        <ul>
-          <li>
-            <label for="ratio-low" class="checkbox">
-              <input id="ratio-low" type="checkbox" name="sf_ratio" value="low" tabindex="0">
-              <span tabindex="-1" class="checkbox-focus"></span>Low (&lt; 20:1)
-            </label>
-          </li>
-          <li>
-            <label for="ratio-medium" class="checkbox">
-              <input id="ratio-medium" type="checkbox" name="sf_ratio" value="medium" tabindex="0">
-              <span tabindex="-1" class="checkbox-focus"></span>Medium (20:1&ndash;50:1)
-            </label>
-          </li>
-          <li>
-            <label for="ratio-high" class="checkbox">
-              <input id="ratio-high" type="checkbox" name="sf_ratio" value="high" tabindex="0">
-              <span tabindex="-1" class="checkbox-focus"></span>High (&gt; 50:1)
-            </label>
-          </li>
-        </ul>
+          <ul>
+            <li>
+              <label for="ratio-low" class="checkbox">
+                <input id="ratio-low" type="checkbox" name="sf_ratio" value="low" tabindex="0">
+                <span tabindex="-1" class="checkbox-focus"></span>Low (&lt; 20:1)
+              </label>
+            </li>
+            <li>
+              <label for="ratio-medium" class="checkbox">
+                <input id="ratio-medium" type="checkbox" name="sf_ratio" value="medium" tabindex="0">
+                <span tabindex="-1" class="checkbox-focus"></span>Medium (20:1&ndash;50:1)
+              </label>
+            </li>
+            <li>
+              <label for="ratio-high" class="checkbox">
+                <input id="ratio-high" type="checkbox" name="sf_ratio" value="high" tabindex="0">
+                <span tabindex="-1" class="checkbox-focus"></span>High (&gt; 50:1)
+              </label>
+            </li>
+          </ul>
 
-      </fieldset>
+        </fieldset>
+      </div>
 
     </div>
 
@@ -161,10 +184,10 @@
 
 </form>
 
-<button class="button-primary">
+<button class="button button-primary">
   Find Schools
 </button>
 
-<button class="button-add">
+<button class="button button-add">
   Advanced Search <i class="fa fa-plus"></i>
 </button>

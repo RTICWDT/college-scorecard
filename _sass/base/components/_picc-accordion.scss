@@ -1,7 +1,8 @@
 picc-accordion,
+.picc-accordion,
 [is="picc-accordion"] {
   $button-size: 34px;
-  $button-margin: 5px;
+  $button-margin: 16px;
 
   display: block;
   overflow: hidden;
@@ -9,27 +10,44 @@ picc-accordion,
 
   @include transition(height 1s linear);
 
+  button[aria-controls],
+  a[aria-controls] {
+    display: block;
+    cursor: pointer;
+    position: relative;
+  }
+
   .picc-accordion-toggle-container {
     cursor: pointer;
     position: relative;
+  }
 
-    .picc-accordion-toggle {
-      position: absolute;
-      font-size: $button-size;
-      line-height: $button-size * 1.05;
-      font-weight: normal;
-      display: inline-block;
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      color: #999;
-      background: #fff;
-      width: $button-size;
-      height: $button-size;
-      border-radius: $button-size;
-      text-align: center;
-      border: 1px solid #e3e3e3;
-    }
+  a[aria-controls]:after,
+  .picc-accordion-toggle {
+    position: absolute;
+    font-size: $button-size;
+    line-height: $button-size * 1.05;
+    font-weight: normal;
+    display: inline-block;
+    position: absolute;
+    top: $button-margin;
+    right: 0; // XXX
+    color: #999;
+    background: #fff;
+    width: $button-size;
+    height: $button-size;
+    border-radius: $button-size;
+    text-align: center;
+    border: 1px solid #e3e3e3;
+  }
+
+  a[aria-controls]:after {
+    content: "+";
+    top: 0;
+  }
+
+  &[open] a[aria-controls]:after {
+    content: "\2212";
   }
 
   .picc-accordion-content {

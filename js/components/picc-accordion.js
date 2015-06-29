@@ -1,97 +1,105 @@
 (function(exports) {
 
-  var PICCAccordion = document.registerElement('picc-accordion', createPrototype({
-    createdCallback: function() {
-      var target = this.getElementsByClassName(PICCAccordion.TOGGLE_CLASS)[0];
-      if (!target) {
-        target = this.appendChild(document.createElement('button'));
-        target.className = PICCAccordion.TOGGLE_CLASS;
-      } else if (target.nodeName !== 'BUTTON') {
-        target.classList.remove(PICCAccordion.TOGGLE_CLASS);
-        target.classList.add(PICCAccordion.TOGGLE_CLASS + '-container');
-        var button = target.appendChild(document.createElement('button'));
-        button.className = PICCAccordion.TOGGLE_CLASS;
-      }
+  var picc = exports.picc || (exports.picc = {});
 
-      var self = this;
-      var toggle = function(e) {
-        self.toggle();
-        e.preventDefault();
-        return false;
-      };
-
-      target.addEventListener('click', toggle);
-    },
-
-    attachedCallback: function() {
-      update.call(this);
-    },
-
-    attributeChangedCallback: function(attr, old, value) {
-    },
-
-    open: {
-      get: function() {
-        return this.hasAttribute('open') && this.getAttribute('open') !== 'false';
-      },
-      set: function(value) {
-        var changed = false;
-        if (this.open && !value) {
-          this.removeAttribute('open');
-          changed = true;
-        } else if (!this.open && value) {
-          this.setAttribute('open', true);
-          changed = true;
-        }
-
-        if (changed) {
-          update.call(this);
-          this.dispatchEvent(new CustomEvent(this.open ? 'open' : 'close'));
-        }
-      }
-    },
-
-    toggle: function() {
-      console.log('toggle:', this.open);
-      return this.open = !this.open;
-    }
-  }));
-
-  PICCAccordion.TOGGLE_CLASS = 'picc-accordion-toggle';
-  PICCAccordion.CONTENT_CLASS = 'picc-accordion-content';
-
-  exports.PICCAccordion = PICCAccordion;
-
-  function update() {
-    var toggle = this.getElementsByClassName(PICCAccordion.TOGGLE_CLASS)[0];
-    if (toggle) {
-      toggle.innerHTML = this.open
-        ? '&minus;'
-        : '&plus;';
-    }
-
-    var content = this.getElementsByClassName(PICCAccordion.CONTENT_CLASS)[0];
-    if (content) {
-      if (this.open) {
-        content.classList.add('picc-accordion-content-open');
-        content.classList.remove('picc-accordion-content-closed');
-      } else {
-        content.classList.remove('picc-accordion-content-open');
-        content.classList.add('picc-accordion-content-closed');
-      }
-    }
-  }
-
-  function createPrototype(proto, parent) {
-    if (!parent) parent = HTMLElement;
-    for (var key in proto) {
-      if (typeof proto[key] === 'function') {
-        proto[key] = {value: proto[key]};
-      }
-    }
-    return {
-      prototype: Object.create(parent.prototype, proto)
+  picc.accordion = function() {
+    var selectors = {
+      button: '.accordion-toggle, button[aria-controls], a[aria-controls]',
+      content: null
     };
-  }
+
+    var accordion = function() {
+      var root = d3.select(this);
+
+      var button = root.select(selectors.button);
+      if (button.empty()) {
+        console.warn('no <button aria-controls="..."> found in:', this);
+        return;
+      }
+
+      var content = root.select(contentSelector(button));
+      if (!content) {
+        console.error('no element with id: "%s" found in:', button.attr('aria-controls'), this);
+        return;
+      }
+
+      button.on('click', function() {
+        root.call(accordion.toggle);
+        d3.event.preventDefault();
+      });
+
+      root.each(update);
+    };
+
+    accordion.expanded = function(el) {
+      return d3.select(el)
+        .select(selectors.button)
+          .attr('aria-expanded') === 'true';
+    };
+
+    accordion.toggle = function(selection) {
+      selection.each(function() {
+        var root = d3.select(this);
+        root.attr('data-expanded', root.attr('data-expanded') !== 'true');
+        update.call(this);
+      });
+    };
+
+    accordion.button = function(selector) {
+      if (!arguments.length) return selectors.button;
+      selectors.button = selector;
+      return accordion;
+    };
+
+    accordion.content = function(selector) {
+      if (!arguments.length) return selectors.content;
+      selectors.content = selector;
+      return accordion;
+    };
+
+    function update() {
+      var root = d3.select(this);
+      var expanded = root.attr('data-expanded') === 'true';
+      var button = root.select(selectors.button);
+      var content = root.select(contentSelector(button));
+
+      root
+        .attr('open', expanded || null);
+
+      button
+        .attr('aria-expanded', expanded)
+        .attr('title', buttonTitle(expanded));
+
+      content
+        .attr('aria-hidden', !expanded)
+        .classed('hidden', !expanded);
+    }
+
+    function contentSelector(button) {
+      return selectors.content || ('#' + button.attr('aria-controls'));
+    }
+
+    function buttonTitle(expanded) {
+      return function() {
+        if (expanded && this.hasAttribute('data-expanded-title')) {
+          return this.getAttribute('data-expanded-title');
+        } else if (!expanded && this.hasAttribute('data-collapsed-title')) {
+          return this.getAttribute('data-collapsed-title');
+        }
+        return [
+          expanded ? 'Collapse' : 'Expand',
+          this.textContent.trim()
+        ].join(' ')
+      };
+    }
+
+    return accordion;
+  };
+
+
+  window.addEventListener('load', function() {
+    d3.selectAll('.picc-accordion')
+      .each(picc.accordion());
+  });
 
 })(this);
