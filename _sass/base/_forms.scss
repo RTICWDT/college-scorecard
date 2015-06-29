@@ -62,6 +62,7 @@ select[multiple=multiple] {
   }
 
   &:focus {
+    border: 1px solid $white;
     box-shadow: $form-box-shadow-focus;
     outline: none;
   }
@@ -109,8 +110,8 @@ label.radio {
 
 label.checkbox :checked + span {
   background-color: $green;
-  border: 1px solid $dark-gray;
-  box-shadow: none;
+  border: 1px solid $green;
+  box-shadow: 0 0 0 0 $white;
   position: relative;
 
   &:after {
@@ -119,7 +120,7 @@ label.checkbox :checked + span {
     content: $fa-var-check;
     position: relative;
     left: 2px;
-    top: -6px;
+    top: -5px;
   }
 }
 
@@ -152,6 +153,7 @@ input[type="radio"] {
 
   &:focus {
     + .checkbox-focus {
+      border: 1px solid $white;
       box-shadow: $form-box-shadow-focus;
       outline: none;
     }
@@ -183,6 +185,7 @@ select {
   white-space: nowrap;
 
   &:focus {
+    border: 1px solid $white;
     box-shadow: $form-box-shadow-focus;
     outline: none;
   }
