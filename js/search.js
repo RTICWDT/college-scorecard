@@ -9,9 +9,10 @@
 
   // TODO: include formdb, querystring, and tagalong
   var form = new formdb.Form('#search-form');
-  var data = querystring.parse(query.substr(1));
-  console.debug('[search] form data:', data);
-  form.setData(data);
+  var values = querystring.parse(query.substr(1));
+  removeEmptyValues(values);
+  console.debug('[search] form values:', values);
+  form.setData(values);
 
   /**
    * This is our format generator. Its methods are format generators for
@@ -55,7 +56,7 @@
   })();
 
   resultsRoot.classList.add('js-loading');
-  API.search({name: data.name}, function(error, rows) {
+  API.search(values, function(error, rows) {
     resultsRoot.classList.remove('js-loading');
     if (error) {
       return showError(error);
@@ -106,6 +107,18 @@
     var out = resultsRoot.querySelector('.error');
     out.classList.remove('hidden');
     out.textContent = String(error);
+  }
+
+  function removeEmptyValues(obj) {
+    var empty = function(v) {
+      return v === null || v === '';
+    };
+    for (var key in obj) {
+      if (empty(obj[key])) {
+        delete obj[key];
+      }
+    }
+    return obj;
   }
 
 })(this);
