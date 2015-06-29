@@ -13,6 +13,10 @@
   }
 }
 
+.guide-container {
+  @include padded-container(em(1400));
+}
+
 .guide-typography {
   @include span-columns(4);
 

@@ -66,6 +66,7 @@ select[multiple=multiple] {
   }
 
   &:focus {
+    border: 1px solid $white;
     box-shadow: $form-box-shadow-focus;
     outline: none;
   }
@@ -113,8 +114,8 @@ label.radio {
 
 label.checkbox :checked + span {
   background-color: $green;
-  border: 1px solid $dark-gray;
-  box-shadow: none;
+  border: 1px solid $green;
+  box-shadow: 0 0 0 0 $white;
   position: relative;
 
   &:after {
@@ -123,12 +124,12 @@ label.checkbox :checked + span {
     content: $fa-var-check;
     position: relative;
     left: 2px;
-    top: -6px;
+    top: -5px;
   }
 }
 
 label.radio :checked + span {
-  background-color: $black;
+  background-color: $green;
   border: 6px solid $white !important;
   box-shadow: 0 0 1px $black;
   vertical-align: -4px;
@@ -156,6 +157,7 @@ input[type="radio"] {
 
   &:focus {
     + .checkbox-focus {
+      border: 1px solid $white;
       box-shadow: $form-box-shadow-focus;
       outline: none;
     }
@@ -170,11 +172,10 @@ input[type="file"] {
 
 select {
   @include appearance(none);
-  width: auto;
-  max-width: 100%;
+  width: 100%;
   background-image: url('../img/angle-down.png');
   background-repeat: no-repeat;
-  background-position: 95% 50%;
+  background-position: 99% 50%;
   background-size: 2rem;
   background-color: #fff;
   border: 1px solid $form-border-color;
@@ -187,6 +188,7 @@ select {
   white-space: nowrap;
 
   &:focus {
+    border: 1px solid $white;
     box-shadow: $form-box-shadow-focus;
     outline: none;
   }
