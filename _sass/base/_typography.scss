@@ -75,9 +75,10 @@ button {
 
 // Other type
 
-.search_categories {
+.search_category {
   @include font-size($h1);
   font-weight: 400;
+  margin-bottom: 0.3em;
 }
 
 .key_fact {
@@ -85,7 +86,8 @@ button {
   font-weight: 400;
 }
 
-.supporting_copy {
+.supporting_copy,
+.nested_fieldset {
   @include font-size(0.875);
 }
 

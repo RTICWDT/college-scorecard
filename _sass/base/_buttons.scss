@@ -5,6 +5,9 @@ input[type="submit"] {
   @extend %button;
   @include appearance(none);
   border: none;
+  box-sizing: border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
   cursor: pointer;
   height: 46px;
   margin-bottom: 0.6em;
@@ -67,7 +70,7 @@ input[type="submit"] {
 
     &:hover,
     &:focus {
-      background-color: $lighter-blue;
+    box-shadow: 0 0 0 2px $white;
     }
   }
 

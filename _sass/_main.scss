@@ -43,6 +43,8 @@ a {
 }
 
 section {
+  padding-top: $base-padding;
+  padding-bottom: $base-padding;
   text-align: center;
 
   > h1 {
@@ -50,18 +52,17 @@ section {
   }
 
   &.standard {
-    padding: $base-padding;
   }
 
   &.secondary {
-    padding: $base-padding;
     background-color: $secondary-background-color;
     color: $white;
   }
 
   &.tertiary {
     background-color: $tertiary-background-color;
-    padding: $base-padding 1em;
+    padding-right: 1em;
+    padding-left: 1em;
 
     h1 {
       padding-top: 0.6em;
@@ -89,7 +90,8 @@ section {
   &.quaternary {
     background-color: $quaternary-background-color;
     color: $white;
-    padding: $base-padding 0;
+    padding-right: 0;
+    padding-left: 0;
 
     h1 {
       padding-left: $base-padding * 2;
@@ -185,7 +187,19 @@ footer {
 }
 
 
-// Next here
+// Search form
+// For styles that are specific to 
+// the home search. General form styles
+// are in _forms.scss.
 //============================================
 
+.search_form {
+  padding-top: 0.4em;
+
+  p {
+    @extend .supporting_copy;
+    padding-top: 0.3em;
+    padding-bottom: $base-padding;
+  }
+}
 

@@ -132,11 +132,11 @@
   }
 
   .button-wizard-hover {
-    background-color: $lighter-blue;
+    box-shadow: 0 0 0 2px $white;
   }
 
   .wizard-bg {
-    background-color: $mid-blue;
+    background-color: $dark-blue;
     padding-top: 0.6em;
   }
 }

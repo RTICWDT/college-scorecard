@@ -42,15 +42,8 @@ $huge-up: new-breakpoint(min-width $huge);
 @mixin padded-container($local-max-width: $max-width) {
   @include outer-container($local-max-width);
   padding: {
-    left: em(10);
-    right: em(10);
-  }
-
-  @include respond-to(tiny-up) {
-    padding: {
-      left: em(20);
-      right: em(20);
-    }
+    left: em(20);
+    right: em(20);
   }
 
   @include respond-to(medium-up) {
