@@ -1,35 +1,35 @@
 picc-accordion,
 [is="picc-accordion"] {
-  display: block;
-  border: 1px solid red;
-  min-height: 50px;
-  transition: height .5s;
+  $button-size: 34px;
+  $button-margin: 5px;
 
-  .picc-accordion-title {
+  display: block;
+  overflow: hidden;
+  min-height: $button-size + ($button-margin * 2);
+
+  @include transition(height 1s linear);
+
+  .picc-accordion-toggle-container {
     cursor: pointer;
     position: relative;
-  }
 
-  .picc-accordion-title:after {
-    content: "+";
-    font-size: 40px;
-    line-height: 44px;
-    font-weight: normal;
-    display: inline-block;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    color: #999;
-    background: #fff;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    text-align: center;
-    border: 1px solid #e3e3e3;
-  }
-
-  &[open] .picc-accordion-title:after {
-    content: "\2212";
+    .picc-accordion-toggle {
+      position: absolute;
+      font-size: $button-size;
+      line-height: $button-size * 1.05;
+      font-weight: normal;
+      display: inline-block;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      color: #999;
+      background: #fff;
+      width: $button-size;
+      height: $button-size;
+      border-radius: $button-size;
+      text-align: center;
+      border: 1px solid #e3e3e3;
+    }
   }
 
   .picc-accordion-content {

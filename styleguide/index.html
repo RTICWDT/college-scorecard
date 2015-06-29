@@ -273,9 +273,16 @@ layout: default
 
   <section id="accordion">
     <picc-accordion>
-      <h1 class="picc-accordion-title">Hello, accordion!</h1>
+      <h1 class="picc-accordion-toggle">Closed Accordion</h1>
       <div class="picc-accordion-content">
-        <p>This should not show up now.</p>
+        <p>This should not show up by default.</p>
+        <p>Here is some more stuff to flow.</p>
+      </div>
+    </picc-accordion>
+    <picc-accordion open>
+      <h1 class="picc-accordion-toggle">Open Accordion</h1>
+      <div class="picc-accordion-content">
+        <p>This <i>should</i> show up by default.</p>
       </div>
     </picc-accordion>
   </section>

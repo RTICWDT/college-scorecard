@@ -2,18 +2,21 @@
 
   var PICCAccordion = document.registerElement('picc-accordion', createPrototype({
     createdCallback: function() {
-      console.log('created:', this);
+      var toggle = this.getElementsByClassName(PICCAccordion.TOGGLE_CLASS)[0];
+      if (!toggle) {
+        toggle = this.appendChild(document.createElement('button'));
+        toggle.className = PICCAccordion.TOGGLE_CLASS;
+      } else if (toggle.nodeName !== 'BUTTON') {
+        toggle.classList.remove(PICCAccordion.TOGGLE_CLASS);
+        toggle.classList.add(PICCAccordion.TOGGLE_CLASS + '-container');
+        var button = toggle.appendChild(document.createElement('button'));
+        button.className = PICCAccordion.TOGGLE_CLASS;
+      }
+      toggle.addEventListener('click', this.toggle.bind(this));
     },
 
     attachedCallback: function() {
-      var toggle = this.querySelector(PICCAccordion.TOGGLE_SELECTOR);
-      if (!toggle) {
-        console.warn('no toggle found for "%s" in:', toggleSelector, this);
-        return;
-      }
-
-      console.log('init:', this);
-      toggle.addEventListener('click', this.toggle.bind(this));
+      update.call(this);
     },
 
     attributeChangedCallback: function(attr, old, value) {
@@ -34,17 +37,8 @@
         }
 
         if (changed) {
+          update.call(this);
           this.dispatchEvent(new CustomEvent(this.open ? 'open' : 'close'));
-          var content = this.querySelector(PICCAccordion.CONTENT_SELECTOR);
-          if (content) {
-            if (this.open) {
-              content.classList.add('picc-accordion-content-open');
-              content.classList.remove('picc-accordion-content-closed');
-            } else {
-              content.classList.remove('picc-accordion-content-open');
-              content.classList.add('picc-accordion-content-closed');
-            }
-          }
         }
       }
     },
@@ -55,10 +49,30 @@
     }
   }));
 
-  PICCAccordion.TOGGLE_SELECTOR = '.picc-accordion-title';
-  PICCAccordion.CONTENT_SELECTOR = '.picc-accordion-content';
+  PICCAccordion.TOGGLE_CLASS = 'picc-accordion-toggle';
+  PICCAccordion.CONTENT_CLASS = 'picc-accordion-content';
 
   exports.PICCAccordion = PICCAccordion;
+
+  function update() {
+    var toggle = this.getElementsByClassName(PICCAccordion.TOGGLE_CLASS)[0];
+    if (toggle) {
+      toggle.innerHTML = this.open
+        ? '&minus;'
+        : '&plus;';
+    }
+
+    var content = this.getElementsByClassName(PICCAccordion.CONTENT_CLASS)[0];
+    if (content) {
+      if (this.open) {
+        content.classList.add('picc-accordion-content-open');
+        content.classList.remove('picc-accordion-content-closed');
+      } else {
+        content.classList.remove('picc-accordion-content-open');
+        content.classList.add('picc-accordion-content-closed');
+      }
+    }
+  }
 
   function createPrototype(proto, parent) {
     if (!parent) parent = HTMLElement;
