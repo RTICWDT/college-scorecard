@@ -45,29 +45,14 @@
       dollars: formatter('$,d', '$0'),
       percent: formatter('%.0f', '--'),
       number: formatter(',d', '0'),
-      plural: function(key, plural) {
-        if (!plural) plural = 's';
+      plural: function(key, singular, plural) {
+        if (!plural) plural = singular + 's';
         return function(d) {
-          return d[key] == 1 ? '' : this.getAttribute('data-plural') || plural;
+          return d[key] == 1 ? singular : plural;
         };
       }
     };
   })();
-
-  // these directives tell the template renderer how to format specific keys in
-  // the data, for instance as dollars or percentages.
-  var directives = {
-    count: format.number('count', '0'),
-    schools: {
-      branches:         format.number('NUMBRANCH', '0'),
-      branches_plural:  format.plural('NUMBRANCH', 'es'),
-      tuition_in:       format.dollars('TUITIONFEE_IN'),
-      tuition_out:      format.dollars('TUITIONFEE_OUT'),
-      pct_pell:         format.percent('PCTPELL'),
-      pct_fed_loan:     format.percent('PCTFLOAN'),
-      avg_fac_salary:   format.dollars('AVGFACSAL'),
-    }
-  };
 
   resultsRoot.classList.add('js-loading');
   API.search({name: data.name}, function(error, rows) {
@@ -84,8 +69,20 @@
     // render the basic DOM template for each school
     tagalong(resultsRoot, {
       count: rows.length,
-      schools: rows
-    }, directives);
+    }, {
+      results_plural: format.plural('count', ''),
+      count: format.number('count', '0')
+    });
+
+    var resultsList = resultsRoot.querySelector('.schools-list');
+    tagalong(resultsList, rows, {
+      link: {
+        '@href': function(d) {
+          var name = d.name.replace(/\W+/g, '-');
+          return ['../school/?', d.id, '-', name].join('');
+        }
+      }
+    });
     console.timeEnd('[render] template');
 
     console.time('[render] charts');
@@ -101,11 +98,6 @@
   });
 
   function renderCharts(selection) {
-    selection.select('a.name')
-      .attr('href', function(d) {
-        var name = d.name.replace(/\W+/g, '-');
-        return ['../school/?', d.id, '-', name].join('');
-      });
   }
 
   function showError(error) {
