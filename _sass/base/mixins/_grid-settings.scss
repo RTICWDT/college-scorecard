@@ -39,8 +39,8 @@ $huge-up: new-breakpoint(min-width $huge);
 
 // Outer container with padding based on media queries
 
-@mixin padded-container {
-  @include outer-container();
+@mixin padded-container($local-max-width: $max-width) {
+  @include outer-container($local-max-width);
   padding: {
     left: em(10);
     right: em(10);
