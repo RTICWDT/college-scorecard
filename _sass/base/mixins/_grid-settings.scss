@@ -1,6 +1,6 @@
 @import '../../neat/neat-helpers';
 
-$max-width: em(990) !default;
+$max-width: em(1249) !default;
 
 // Breakpoints
 $tiny: em(480);
@@ -39,18 +39,11 @@ $huge-up: new-breakpoint(min-width $huge);
 
 // Outer container with padding based on media queries
 
-@mixin padded-container {
-  @include outer-container();
+@mixin padded-container($local-max-width: $max-width) {
+  @include outer-container($local-max-width);
   padding: {
-    left: em(10);
-    right: em(10);
-  }
-
-  @include respond-to(tiny-up) {
-    padding: {
-      left: em(20);
-      right: em(20);
-    }
+    left: em(20);
+    right: em(20);
   }
 
   @include respond-to(medium-up) {

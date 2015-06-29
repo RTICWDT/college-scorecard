@@ -1,161 +1,141 @@
-section.guide {
+.guide {
   padding-top: $base-padding;
   text-align: left;
 
-  > h1 {
-    padding-left: 1.1em;
-    // ^^em is acting strangly in the h1/form. Magic number. Fix.
-  }
-
-  > p {
-      padding-left: $base-padding;
-    }
-
   > section {
-    @include outer-container();
-    margin-top: 3em;
     text-align: left;
-    
+
     > h1 {
       @extend .h4;
-      padding-left: $base-padding;
+      padding: 0 0 1em 0;
       text-transform: uppercase;
     }
+  }
+}
 
-    .guide-typography {
-      @include span-columns(4);
+.guide-typography {
+  @include span-columns(4);
 
-      .link-expand,
-      .link-more {
+  .link-expand,
+  .link-more {
 
-        &:first-of-type {
-          display: block;
-          margin-top: 2.2em;
-        }
-      }
-
-      .link-expand-hover,
-      .link-more-hover {
-        color: $darker-green;
-      }
-
-      p {
-        padding-top: 0.7em;
-      }
-
-      &:first-of-type {
-        padding-left: $base-padding;
-      }
-
-      &:last-of-type {
-        @include omega();
-      }
-
-      + .wide {
-        @include span-columns(8);
-      }
+    &:first-of-type {
+      display: block;
+      margin-top: 2.2em;
     }
+  }
 
-    .guide-color {
-      @include span-columns(12);
+  .link-expand-hover,
+  .link-more-hover {
+    color: $darker-green;
+  }
 
-      > ul {
-        margin-bottom: 10px;
-        padding-left: $base-padding;
+  p {
+    padding-top: 0.7em;
+  }
 
-        li {
-          color: $white;
-          display: inline-block;
-          height: 50px;
-          padding-top: 15px;
-          text-align: center;
-          width: 220px;
+  &:last-of-type {
+    @include omega();
+  }
 
-          &:nth-of-type(1) {
-            background-color: $black;
-          }
+  + .wide {
+    @include span-columns(8);
+  }
+}
 
-          &:nth-of-type(2) {
-            background-color: $dark-gray;
-          }
+.guide-color {
+  @include span-columns(12);
 
-          &:nth-of-type(3) {
-            background-color: $mid-gray;
-            color: $black;
-          }
+  > ul {
+    margin-bottom: 10px;
 
-          &:nth-of-type(4) {
-            background-color: $white;
-            border: 1px solid $mid-gray;
-            color: $black;
-          }
-        }
-      }
-
-      > ul.second-row li {
-
-        &:nth-of-type(1) {
-          background-color: $dark-blue;
-        }
-
-        &:nth-of-type(2) {
-          background-color: $mid-blue;
-        }
-
-        &:nth-of-type(3) {
-          color: $white;
-          background-color: $green;
-        }
-
-        &:nth-of-type(4) {
-          background-color: $yellow;
-          border: none;
-        }
-      }
-    }
-
-    .guide-buttons {
-      @include span-columns(3);
+    li {
+      color: $white;
+      display: inline-block;
+      height: 50px;
+      padding-top: 15px;
       text-align: center;
+      width: 220px;
 
-      > h1 {
-        @extend .h4;
-        color: $dark-gray;
-        padding-bottom: 1.2em;
-        text-transform: uppercase;
+      &:nth-of-type(1) {
+        background-color: $black;
       }
 
-      &:first-of-type {
-        padding-left: $base-padding;
+      &:nth-of-type(2) {
+        background-color: $dark-gray;
       }
 
-      .button-primary-hover {
-        background-color: $hover-button-color;
-        color: $white;
-      }
-
-      .button-secondary-hover {
-        background-color: $secondary-hover-button-color;
+      &:nth-of-type(3) {
+        background-color: $mid-gray;
         color: $black;
       }
 
-      .button-compare-hover {
-
+      &:nth-of-type(4) {
+        background-color: $white;
+        border: 1px solid $mid-gray;
+        color: $black;
       }
-
-      .button-wizard-hover {
-        background-color: $lighter-blue;
-      }
-
-      .wizard-bg {
-        background-color: $mid-blue;
-        padding-top: 0.6em;
-      }
-    }
-
-    .guide-forms {
-      @include span-columns(4);
-      @include omega(3n);
     }
   }
+
+  > ul.second-row li {
+
+    &:nth-of-type(1) {
+      background-color: $dark-blue;
+    }
+
+    &:nth-of-type(2) {
+      background-color: $mid-blue;
+    }
+
+    &:nth-of-type(3) {
+      color: $white;
+      background-color: $green;
+    }
+
+    &:nth-of-type(4) {
+      background-color: $yellow;
+      border: none;
+    }
+  }
+}
+
+.guide-buttons {
+  @include span-columns(3);
+  text-align: center;
+
+  > h1 {
+    @extend .h4;
+    color: $dark-gray;
+    padding-bottom: 1.2em;
+    text-transform: uppercase;
+  }
+
+  .button-primary-hover {
+    background-color: $hover-button-color;
+    color: $white;
+  }
+
+  .button-secondary-hover {
+    background-color: $secondary-hover-button-color;
+    color: $black;
+  }
+
+  .button-compare-hover {
+
+  }
+
+  .button-wizard-hover {
+    box-shadow: 0 0 0 2px $white;
+  }
+
+  .wizard-bg {
+    background-color: $dark-blue;
+    padding-top: 0.6em;
+  }
+}
+
+.guide-forms {
+  @include span-columns(4);
+  @include omega(3n);
 }
