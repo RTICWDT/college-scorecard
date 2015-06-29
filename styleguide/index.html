@@ -4,10 +4,14 @@ layout: default
 
 <section class="guide">
 
-  <h1>Component Styleguide</h1>
-  <p>To test for visual and 508 compliance...at the same time!</p>
+  <div class="container">
 
-  <section>
+    <h1>Component Styleguide</h1>
+    <p>To test for visual and 508 compliance...at the same time!</p>
+
+  </div>
+
+  <section class="container">
 
     <h1>Typography</h1>
 
@@ -36,7 +40,7 @@ layout: default
 
   </section>
 
-  <section>
+  <section class="container">
 
     <h1>Color</h1>
 
@@ -60,7 +64,7 @@ layout: default
 
   </section>
 
-  <section>
+  <section class="container">
 
     <h1>Buttons</h1>
 
@@ -108,19 +112,20 @@ layout: default
 
   </section>
 
-  <section>
+  <section class="container">
 
-    <h1>Forms</h1>
+    <h1 class="search_category">Forms</h1>
 
     <form is="search-form" action="{{ site.baseurl }}search/" method="GET">
     {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
 
       <fieldset class="guide-forms">
 
-        <legend>Input</legend>
-        <h1>Input</h1>
+        <legend>Inputs</legend>
+        <h1 class="search_category">Input</h1>
 
         <div class="wrapper">
+
           <label for="name-state" class="float-left">Type: Text
             <input id="name-state" name="name" type="text" placeholder="Name of State"  {{ common_input_attributes }}>
           </label>
@@ -128,6 +133,7 @@ layout: default
           <button class="button-add">
             Add State
           </button>
+
         </div>
 
         <label for="zip-code">Type: Number
@@ -143,7 +149,7 @@ layout: default
       <fieldset class="guide-forms">
 
         <legend>Errors</legend>
-        <h1>Errors</h1>
+        <h1 class="search_category">Errors</h1>
 
         <label for="name-school">Type: Text
           <input id="name-school" name="name" type="text" placeholder="Name of School"  {{ common_input_attributes }}>
@@ -154,7 +160,7 @@ layout: default
       <fieldset class="guide-forms">
 
         <legend>Dropdown</legend>
-        <h1>Dropdown</h1>
+        <h1 class="search_category">Dropdown</h1>
 
         <label for="select-state">Select a State
           <select id="select-state" name="state">
@@ -171,9 +177,9 @@ layout: default
       <fieldset class="guide-forms">
 
         <legend>Checkboxes (and nested fieldsets)</legend>
-        <h1>Checkboxes (and nested fieldsets)</h1>
+        <h1 class="search_category">Checkboxes (and nested fieldsets)</h1>
 
-        <fieldset>
+        <fieldset class="nested_fieldset">
 
           <legend>Undergraduate Student Body</legend>
           <h1>Undergraduate Student Body</h1>
@@ -201,7 +207,7 @@ layout: default
 
         </fieldset>
 
-        <fieldset>
+        <fieldset class="nested_fieldset">
 
           <legend>Student-to-Faculty Ratio</legend>
           <h1>Student-to-Faculty Ratio</h1>
@@ -234,7 +240,7 @@ layout: default
       <fieldset class="guide-forms">
 
         <legend>Radio buttons</legend>
-        <h1>Radio buttons</h1>
+        <h1 class="search_category">Radio buttons</h1>
 
         <ul>
           <li>
@@ -259,32 +265,35 @@ layout: default
 
       </fieldset>
 
-    <!-- <div>
-      <h1>Notes</h1>
-      <ul>
-        <li>In order to support both older assistive technologies and newer ARIA standards, all inputs should have a <strong>for</strong>, <strong>id</strong>, and <strong>aria-describedby</strong> equal to the same value.</li>
-        <li>Everything should be accessible via tab-and-enter.</li>
-      </ul>
-    </div> -->
-
     </form>
 
   </section>
 
-  <section id="accordion">
-    <picc-accordion>
-      <h1 class="picc-accordion-toggle">Closed Accordion</h1>
-      <div class="picc-accordion-content">
+  <section id="accordion" class="container">
+
+    <div class="picc-accordion">
+      <h1>
+        <a tab-index="0" aria-expanded="false" aria-controls="pa1-content">
+          Closed Accordion
+        </a>
+      </h1>
+      <div id="pa1-content">
         <p>This should not show up by default.</p>
         <p>Here is some more stuff to flow.</p>
       </div>
-    </picc-accordion>
-    <picc-accordion open>
-      <h1 class="picc-accordion-toggle">Open Accordion</h1>
-      <div class="picc-accordion-content">
+    </div>
+
+    <div class="picc-accordion" data-expanded="true">
+      <h1>
+        <a aria-expanded="true" aria-controls="pa2-content">
+          Open Accordion
+        </a>
+      </h1>
+      <div id="pa2-content">
         <p>This <i>should</i> show up by default.</p>
       </div>
-    </picc-accordion>
+    </div>
+
   </section>
 
 </section>
