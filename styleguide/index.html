@@ -4,8 +4,12 @@ layout: default
 
 <section class="guide">
 
-  <h1>Component Styleguide</h1>
-  <p>To test for visual and 508 compliance...at the same time!</p>
+  <div>
+
+    <h1>Component Styleguide</h1>
+    <p>To test for visual and 508 compliance...at the same time!</p>
+
+  </div>
 
   <section>
 
@@ -112,165 +116,157 @@ layout: default
 
     <h1>Forms</h1>
 
-  <form is="search-form" action="{{ site.baseurl }}search/" method="GET">
-  {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
+    <form is="search-form" action="{{ site.baseurl }}search/" method="GET">
+    {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
 
+      <fieldset class="guide-forms">
 
+        <legend>Input</legend>
+        <h1>Input</h1>
 
-  <fieldset class="guide-forms">
-
-    <legend>Input</legend>
-    <h1>Input</h1>
-
-    <div class="wrapper">
-      <label for="name-state" class="float-left">Type: Text
-        <input id="name-state" name="name" type="text" placeholder="Name of State"  {{ common_input_attributes }}>
-      </label>
-
-      <button class="button-add">
-        Add State
-      </button>
-    </div>
-
-    <label for="zip-code">Type: Number
-      <input id="zip-code" name="zip_code" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>
-    </label>
-
-    <label for="comment">Type: Text Area
-      <textarea id="comment" name="comment" placeholder="Type your comment here."></textarea>
-    </label>
-
-  </fieldset>
-
-  <fieldset class="guide-forms">
-
-    <legend>Errors</legend>
-    <h1>Errors</h1>
-
-    <label for="name-school">Type: Text
-      <input id="name-school" name="name" type="text" placeholder="Name of School"  {{ common_input_attributes }}>
-    </label>
-
-  </fieldset>
-
-  <fieldset class="guide-forms">
-
-    <legend>Dropdown</legend>
-    <h1>Dropdown</h1>
-
-    <label for="select-state">Select a State
-      <select id="select-state" name="state">
-        <option value=""></option>
-        {% for state in site.data.states|sort('name') %}
-        <option value="{{ state.abbr }}">{{ state.name }}</option>
-        {% endfor %}
-        <i class="fa fa-chevron-down"></i>
-      </select>
-    </label>
-
-  </fieldset>
-
-  <fieldset class="guide-forms">
-
-    <legend>Checkboxes (and nested fieldsets)</legend>
-    <h1>Checkboxes (and nested fieldsets)</h1>
-
-    <fieldset>
-
-      <legend>Undergraduate Student Body</legend>
-      <h1>Undergraduate Student Body</h1>
-
-      <ul>
-        <li>
-          <label for="size-small" class="checkbox">
-            <input id="size-small" type="checkbox" checked name="size" value="small"tabindex="0">
-            <span tabindex="-1" class="checkbox-focus"></span>Small (&lt; 2,000)
+        <div class="wrapper">
+          <label for="name-state" class="float-left">Type: Text
+            <input id="name-state" name="name" type="text" placeholder="Name of State"  {{ common_input_attributes }}>
           </label>
-        </li>
-        <li>
-          <label for="size-medium" class="checkbox">
-            <input id="size-medium" type="checkbox" name="size" value="medium" tabindex="0">
-            <span tabindex="-1" class="checkbox-focus"></span>Medium (2,000&ndash;15,000)
-          </label>
-        </li>
-        <li>
-          <label for="size-large" class="checkbox">
-            <input id="size-large" type="checkbox" name="size" value="large" tabindex="0">
-            <span tabindex="-1" class="checkbox-focus"></span>Large (&gt; 15,000)
-          </label>
-        </li>
-      </ul>
 
-    </fieldset>
+          <button class="button-add">
+            Add State
+          </button>
+        </div>
 
-    <fieldset>
-
-      <legend>Student-to-Faculty Ratio</legend>
-      <h1>Student-to-Faculty Ratio</h1>
-
-      <ul>
-        <li>
-          <label for="ratio-low" class="checkbox">
-            <input id="ratio-low" type="checkbox" name="sf_ratio" value="low" tabindex="0">
-            <span tabindex="-1" class="checkbox-focus"></span>Low (&lt; 20:1)
-          </label>
-        </li>
-        <li>
-          <label for="ratio-medium" class="checkbox">
-            <input id="ratio-medium" type="checkbox" name="sf_ratio" value="medium" tabindex="0">
-            <span tabindex="-1" class="checkbox-focus"></span>Medium (20:1&ndash;50:1)
-          </label>
-        </li>
-        <li>
-          <label for="ratio-high" class="checkbox">
-            <input id="ratio-high" type="checkbox" name="sf_ratio" value="high" tabindex="0">
-            <span tabindex="-1" class="checkbox-focus"></span>High (&gt; 50:1)
-          </label>
-        </li>
-      </ul>
-
-    </fieldset>
-
-  </fieldset>
-
-  <fieldset class="guide-forms">
-
-    <legend>Radio buttons</legend>
-    <h1>Radio buttons</h1>
-
-    <ul>
-      <li>
-        <label for="peasoup" class="radio">
-          <input id="peasoup" type="radio" checked name="soup" value="pea" tabindex="0">
-          <span tabindex="-1" class="checkbox-focus"></span>Pea Soup
+        <label for="zip-code">Type: Number
+          <input id="zip-code" name="zip_code" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>
         </label>
-      </li>
-      <li>
-        <label for="chicken" class="radio">
-          <input id="chicken" type="radio" name="soup" value="chicken" tabindex="0">
-          <span tabindex="-1" class="checkbox-focus"></span>Chicken Noodle
+
+        <label for="comment">Type: Text Area
+          <textarea id="comment" name="comment" placeholder="Type your comment here."></textarea>
         </label>
-      </li>
-      <li>
-        <label for="tomato" class="radio">
-          <input id="tomato" type="radio" name="soup" value="tomato" tabindex="0">
-          <span tabindex="-1" class="checkbox-focus"></span>Tomato
+
+      </fieldset>
+
+      <fieldset class="guide-forms">
+
+        <legend>Errors</legend>
+        <h1>Errors</h1>
+
+        <label for="name-school">Type: Text
+          <input id="name-school" name="name" type="text" placeholder="Name of School"  {{ common_input_attributes }}>
         </label>
-      </li>
-    </ul>
 
-  </fieldset>
+      </fieldset>
 
-</section>
+      <fieldset class="guide-forms">
 
-<!-- <div>
-  <h1>Notes</h1>
-  <ul>
-    <li>In order to support both older assistive technologies and newer ARIA standards, all inputs should have a <strong>for</strong>, <strong>id</strong>, and <strong>aria-describedby</strong> equal to the same value.</li>
-    <li>Everything should be accessible via tab-and-enter.</li>
-  </ul>
-</div> -->
+        <legend>Dropdown</legend>
+        <h1>Dropdown</h1>
 
-</form>
+        <label for="select-state">Select a State
+          <select id="select-state" name="state">
+            <option value=""></option>
+            {% for state in site.data.states|sort('name') %}
+            <option value="{{ state.abbr }}">{{ state.name }}</option>
+            {% endfor %}
+            <i class="fa fa-chevron-down"></i>
+          </select>
+        </label>
+
+      </fieldset>
+
+      <fieldset class="guide-forms">
+
+        <legend>Checkboxes (and nested fieldsets)</legend>
+        <h1>Checkboxes (and nested fieldsets)</h1>
+
+        <fieldset>
+
+          <legend>Undergraduate Student Body</legend>
+          <h1>Undergraduate Student Body</h1>
+
+          <ul>
+            <li>
+              <label for="size-small" class="checkbox">
+                <input id="size-small" type="checkbox" checked name="size" value="small"tabindex="0">
+                <span tabindex="-1" class="checkbox-focus"></span>Small (&lt; 2,000)
+              </label>
+            </li>
+            <li>
+              <label for="size-medium" class="checkbox">
+                <input id="size-medium" type="checkbox" name="size" value="medium" tabindex="0">
+                <span tabindex="-1" class="checkbox-focus"></span>Medium (2,000&ndash;15,000)
+              </label>
+            </li>
+            <li>
+              <label for="size-large" class="checkbox">
+                <input id="size-large" type="checkbox" name="size" value="large" tabindex="0">
+                <span tabindex="-1" class="checkbox-focus"></span>Large (&gt; 15,000)
+              </label>
+            </li>
+          </ul>
+
+        </fieldset>
+
+        <fieldset>
+
+          <legend>Student-to-Faculty Ratio</legend>
+          <h1>Student-to-Faculty Ratio</h1>
+
+          <ul>
+            <li>
+              <label for="ratio-low" class="checkbox">
+                <input id="ratio-low" type="checkbox" name="sf_ratio" value="low" tabindex="0">
+                <span tabindex="-1" class="checkbox-focus"></span>Low (&lt; 20:1)
+              </label>
+            </li>
+            <li>
+              <label for="ratio-medium" class="checkbox">
+                <input id="ratio-medium" type="checkbox" name="sf_ratio" value="medium" tabindex="0">
+                <span tabindex="-1" class="checkbox-focus"></span>Medium (20:1&ndash;50:1)
+              </label>
+            </li>
+            <li>
+              <label for="ratio-high" class="checkbox">
+                <input id="ratio-high" type="checkbox" name="sf_ratio" value="high" tabindex="0">
+                <span tabindex="-1" class="checkbox-focus"></span>High (&gt; 50:1)
+              </label>
+            </li>
+          </ul>
+
+        </fieldset>
+
+      </fieldset>
+
+      <fieldset class="guide-forms">
+
+        <legend>Radio buttons</legend>
+        <h1>Radio buttons</h1>
+
+        <ul>
+          <li>
+            <label for="peasoup" class="radio">
+              <input id="peasoup" type="radio" checked name="soup" value="pea" tabindex="0">
+              <span tabindex="-1" class="checkbox-focus"></span>Pea Soup
+            </label>
+          </li>
+          <li>
+            <label for="chicken" class="radio">
+              <input id="chicken" type="radio" name="soup" value="chicken" tabindex="0">
+              <span tabindex="-1" class="checkbox-focus"></span>Chicken Noodle
+            </label>
+          </li>
+          <li>
+            <label for="tomato" class="radio">
+              <input id="tomato" type="radio" name="soup" value="tomato" tabindex="0">
+              <span tabindex="-1" class="checkbox-focus"></span>Tomato
+            </label>
+          </li>
+        </ul>
+
+      </fieldset>
+
+    </form>
+
+  </section>
+
+  <!-- </div> -->
 
 </section>
