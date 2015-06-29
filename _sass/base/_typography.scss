@@ -86,10 +86,20 @@ button {
   font-weight: 400;
 }
 
-.supporting_copy,
-.nested_fieldset {
+.supporting_copy {
   @include font-size(0.875);
 }
+
+.nested_fieldset {
+  border-top: none;
+
+  h1 {
+    @include font-size($h3);
+    font-weight: 400;
+    margin-bottom: 0.5em;
+  }
+}
+
 
 .link-expand,
 .link-more {
