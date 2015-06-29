@@ -114,31 +114,3 @@ button {
     color: $darker-green;
   }
 }
-
-
-// Testing this approach to modularizing styles
-// From http://thesassway.com/advanced/modular-css-typography
-.quiet { font-color: $base-font-color; }
-.loud  { font-color: $base-accent-color; }
-
-.italic { font-style: italic; }
-.bold   { font-weight: 700; @extend .loud; }
-
-.block-margins { margin: 1em 0; }
-
-.unordered-list { list-style-type: disc; }
-.ordered-list { list-style: decimal; }
-
-.typography {
-  i, em { @extend .italic; }
-  b, strong { @extend .bold; }
-
-  h1, .h1 { @extend .h1; margin: 1em 0 0.5em; }
-  h2, .h2 { @extend .h2; margin: 1em 0 0.5em; }
-  h3, .h3 { @extend .h3; margin: 1em 0 0.5em; }
-
-  p, ul, ol, pre { @extend .block-margins; }
-
-  ul { @extend .unordered-list; }
-  ol { @extend .ordered-list; }
-}
