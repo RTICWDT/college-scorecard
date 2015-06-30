@@ -37,6 +37,7 @@ $pad-more: 1em;
   width: 88%;
   // This sets the width of the first group item
   // Would like a way to set this programatically
+  // This is also not responsive. Fix.
 }
 
 
@@ -64,7 +65,7 @@ section {
   text-align: center;
 
   > h1 {
-    padding: 0 0.6em 0.6em 0.6em;
+    padding: 0 0.6em 0.6em 0;
   }
 
   &.standard {
@@ -77,30 +78,33 @@ section {
 
   &.tertiary {
     background-color: $tertiary-background-color;
-    padding-right: 1em;
-    padding-left: 1em;
 
     h1 {
-      padding-top: 0.6em;
+      padding-top: $base-padding;
+      padding-bottom: $base-padding;
     }
 
-    > div {
+    > div > div {
       background-color: $white;
       border-radius: 0.4em;
+      margin-top: $base-padding;
+      margin-bottom: $base-padding;
     }
 
-    li {
-      padding: 1.1em 2.3em ;
-      border-bottom: $thin-border-size solid $base-border-color;
+    ul.tertiary-home {
+      padding-bottom: $base-padding-extra;
 
-      &:first-of-type {
-        border-top: $thin-border-size solid $base-border-color;
+      li {
+        padding: $base-padding $base-padding-extra;
+        border-bottom: $thin-border-size solid $base-border-color;
+
+        &:first-of-type {
+          border-top: $thin-border-size solid $base-border-color;
+        }
       }
     }
 
-    ul {
-      padding-bottom: 2em;
-    }
+    
   }
 
   &.quaternary {
@@ -145,6 +149,7 @@ header {
 
 .banner {
   background: $dark-blue;
+  height: 24px;
 
   > div {
     @include padded-container();
@@ -155,6 +160,7 @@ header {
 
     color: inherit;
     font-weight: bold;
+    letter-spacing: 0.3px;
     text-decoration: none;
     text-transform: uppercase;
     -webkit-font-smoothing: antialiased;
@@ -174,13 +180,16 @@ header {
 
 .title {
   background: $mid-blue;
+  height: 76px;
 
   > div {
     @include padded-container();
   }
 
   h1 {
-    padding: em(12) 0;
+    @extend .title_heading;
+    font-weight: 400;
+    line-height: 0.7;
     -webkit-font-smoothing: antialiased;
   }
 }
@@ -192,12 +201,13 @@ header {
 footer {
   @include font-size(0.8);
   background-color: $mid-gray;
+  height: 100px;
   text-align: center;
-  padding-top: $base-padding * 2;
-  padding-bottom: $base-padding * 2;
+  padding-top: $base-padding * 1.75;
 
   p {
-    color: $black;
+    color: $dark-gray;
+    letter-spacing: 0.3px;
     text-transform: uppercase;
   }
 }
@@ -218,4 +228,55 @@ footer {
     padding-bottom: $base-padding;
   }
 }
+
+// Individual school pages
+//============================================
+
+.school {
+  section,
+  div {
+    text-align: left;
+  }
+}
+
+.school-section {
+  border-bottom: $regular-border-size solid $base-border-color;
+}
+
+
+// Search results
+//============================================
+
+.results {
+  @extend .school;
+
+  div:first-of-type {
+    padding-bottom: $base-padding;
+
+    h1 {
+      padding-bottom: $base-padding-lite;
+    }
+  }
+}
+
+.results-cards {
+  padding: $base-padding;
+
+  ul {
+    border-bottom: $thin-border-size solid $base-border-color;
+    margin-bottom: $base-padding;
+    padding-bottom: $base-padding;
+  }
+}
+
+.tertiary .results-cards h1 {
+  padding-top: 0;
+  padding-bottom: $base-padding-lite;
+}
+
+
+
+
+
+
 
