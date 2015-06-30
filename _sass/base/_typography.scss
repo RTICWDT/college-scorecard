@@ -76,7 +76,11 @@ button {
 // Other type
 
 .title_heading {
-  @include font-size(2.25);
+  @include font-size($h1);
+
+  @include respond-to(tiny-up) {
+    @include font-size(2.25);
+  }
 }
 
 .search_category {
