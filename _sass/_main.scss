@@ -73,20 +73,21 @@ section {
 
   &.tertiary {
     background-color: $tertiary-background-color;
-    padding-right: 1em;
-    padding-left: 1em;
 
     h1 {
-      padding-top: 0.6em;
+      padding-top: $base-padding;
+      padding-bottom: $base-padding;
     }
 
-    > div {
+    > div > div {
       background-color: $white;
       border-radius: 0.4em;
+      margin-top: $base-padding;
+      margin-bottom: $base-padding;
     }
 
     li {
-      padding: 1.1em 2.3em ;
+      padding: $base-padding $base-padding-extra;
       border-bottom: $thin-border-size solid $base-border-color;
 
       &:first-of-type {
@@ -95,7 +96,7 @@ section {
     }
 
     ul {
-      padding-bottom: 2em;
+      padding-bottom: $base-padding-extra;
     }
   }
 
@@ -224,7 +225,8 @@ footer {
 // Individual school pages
 //============================================
 
-.school {
+.school,
+.results {
   section,
   div {
     text-align: left;
