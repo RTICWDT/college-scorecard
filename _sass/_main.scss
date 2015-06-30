@@ -25,20 +25,17 @@ $pad-more: 1em;
 
 .group_inline {
   display: inline-block;
-  width: 100%;
+}
+
+.group_inline-left {
+  float: left;
 }
 
 .group_inline-right {
   float: right;
 }
 
-.group_inline-left {
-  float: left;
-  width: 88%;
-  // This sets the width of the first group item
-  // Would like a way to set this programatically
-  // This is also not responsive. Fix.
-}
+
 
 
 // Site-wide
