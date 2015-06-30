@@ -48,22 +48,23 @@
     accordion.toggle = function(selection) {
       selection.each(function() {
         var root = d3.select(this);
-        root.attr('data-expanded', root.attr('data-expanded') !== 'true');
-        update.call(this);
+        var expanded = root.attr('data-expanded') !== 'true';
+        root.attr('data-expanded', expanded);
+        update.call(this, true);
       });
     };
 
     accordion.open = function(selection) {
       selection.each(function() {
         this.setAttribute('data-expanded', 'true');
-        update.call(this);
+        update.call(this, true);
       });
     };
 
     accordion.close = function(selection) {
       selection.each(function() {
         this.setAttribute('data-expanded', 'false');
-        update.call(this);
+        update.call(this, true);
       });
     };
 
@@ -79,7 +80,7 @@
       return accordion;
     };
 
-    function update() {
+    function update(dispatch) {
       var root = d3.select(this);
       var expanded = root.attr('data-expanded') === 'true';
       var button = root.select(selectors.button);
@@ -92,6 +93,11 @@
       content
         .attr('aria-hidden', !expanded)
         .classed('hidden', !expanded);
+
+
+      if (dispatch) {
+        this.dispatchEvent(new CustomEvent(expanded ? 'open' : 'close'));
+      }
     }
 
     function contentSelector(button) {
@@ -118,7 +124,11 @@
 
   window.addEventListener('load', function() {
     d3.selectAll('.picc-accordion')
-      .call(picc.accordion());
+      .call(picc.accordion())
+      .on('open', function() {
+        var af = this.querySelector('[autofocus]');
+        if (af) af.focus();
+      });
   });
 
 })(this);
