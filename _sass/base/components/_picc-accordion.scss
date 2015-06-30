@@ -1,0 +1,64 @@
+picc-accordion,
+.picc-accordion,
+[is="picc-accordion"] {
+  $button-size: 34px;
+  $button-margin: 16px;
+
+  display: block;
+  overflow: hidden;
+  min-height: $button-size + ($button-margin * 2);
+
+  @include transition(height 1s linear);
+
+  button[aria-controls],
+  a[aria-controls] {
+    display: block;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .picc-accordion-toggle-container {
+    cursor: pointer;
+    position: relative;
+  }
+
+  a[aria-controls]:after,
+  .picc-accordion-toggle {
+    position: absolute;
+    font-size: $button-size;
+    line-height: $button-size * 1.05;
+    font-weight: normal;
+    display: inline-block;
+    position: absolute;
+    top: $button-margin;
+    right: 0; // XXX
+    color: #999;
+    background: #fff;
+    width: $button-size;
+    height: $button-size;
+    border-radius: $button-size;
+    text-align: center;
+    border: 1px solid #e3e3e3;
+  }
+
+  a[aria-controls]:after {
+    content: "+";
+    top: 0;
+  }
+
+  &[data-expanded="true"] a[aria-controls]:after {
+    content: "\2212";
+  }
+
+  a[aria-controls]:hover:after {
+    color: #333; // TODO
+  }
+
+  .picc-accordion-content {
+    display: none;
+  }
+
+  &[open] .picc-accordion-content {
+    display: block;
+  }
+}

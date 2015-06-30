@@ -133,7 +133,7 @@ layout: default
           <button class="button-add group_inline-right">
             Add State
           </button>
-          
+
         </div>
 
         <label for="zip-code">Type: Number
@@ -187,7 +187,7 @@ layout: default
           <ul>
             <li>
               <label for="size-small" class="checkbox">
-                <input id="size-small" type="checkbox" checked name="size" value="small"tabindex="0">
+                <input id="size-small" type="checkbox" checked name="size" value="small" tabindex="0">
                 <span tabindex="-1" class="checkbox-focus"></span>Small (&lt; 2,000)
               </label>
             </li>
@@ -265,7 +265,38 @@ layout: default
 
       </fieldset>
 
+      <p>
+        <input class="button-primary" type="submit" value="Submit">
+      </p>
+
     </form>
+
+  </section>
+
+  <section id="accordion" class="guide-container">
+
+    <div class="picc-accordion">
+      <h1>
+        <a aria-expanded="false" aria-controls="pa1-content">
+          Closed Accordion
+        </a>
+      </h1>
+      <div id="pa1-content">
+        <p>This should not show up by default.</p>
+        <p>Here is some more stuff to flow.</p>
+      </div>
+    </div>
+
+    <div class="picc-accordion" data-expanded="true">
+      <h1>
+        <a aria-expanded="true" aria-controls="pa2-content">
+          Open Accordion
+        </a>
+      </h1>
+      <div id="pa2-content">
+        <p>This <i>should</i> show up by default.</p>
+      </div>
+    </div>
 
   </section>
 

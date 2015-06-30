@@ -89,3 +89,12 @@ input[type="submit"] {
     }
   }
 }
+
+button.block {
+  @include appearance(none);
+  // @include reset();
+  border: none;
+  height: auto;
+  margin-bottom: 0;
+  width: auto;
+}

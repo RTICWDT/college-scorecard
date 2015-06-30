@@ -19,6 +19,10 @@ node_modules:
 querystring.js: node_modules
 	echo "window.querystring = require('querystring');" | $(bin)/browserify - > $@
 
+# document-register-element is a lightweight custom elements polyfill
+document-register-element.js: node_modules
+	cp node_modules/document-register-element/build/document-register-element.max.js $@
+
 # this handy target minifies any scripts that are either built using browserify
 # or are distributed as un-minified browser builds
 %.min.js: %.js

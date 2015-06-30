@@ -4,10 +4,14 @@ form {
 
 fieldset {
   border-top: $regular-border-size solid $base-border-color;
-  padding-bottom: 1em;
+  // padding-bottom: 1em;
 
   > fieldset {
     border-top: none;
+  }
+
+  .picc-accordion[data-expanded="true"] {
+    padding-bottom: 1em;
   }
 }
 
