@@ -10,30 +10,45 @@ body_scripts:
 ---
 
 <!-- Search results -->
-<section class="search-results">
-  <div class="header">
-    <h1><span class="results-count" data-bind="count">0</span> <span data-bind="results">Results</span> Based on Your Criteria</h1>
-    <p>
-      <a href="#search-form" class="link-more">&lt; Edit Criteria</a>
-    </p>
+<section class="results search-results">
+
+  <div class="container">
+    <h1>
+      <span class="results-count" data-bind="count">0</span>
+      <span data-bind="results">Results</span>
+      Based on Your Criteria
+    </h1>
+    <a href="#search-form" class="link-more">&lt; Edit Criteria</a>
   </div>
 
   <div class="error hidden">
     <p class="error-message"></p>
   </div>
 
-  <ul class="schools-list" data-bind="schools">
-    <li class="school-item">
-      <h2><a class="name" data-bind="link">School Name</a></h2>
-      <h3 class="location">
-        <span data-bind="city">City</span>,
-        <span data-bind="state">State</span>
-        @ <tt><span data-bind="longitude"></span>&deg;W,<span data-bind="latitude"></span>&deg;N</tt>
-        (region <b data-bind="region">X</b>)
-      </h3>
-    </li>
-  </ul>
-</section>
+  <section class="tertiary">
+    <div class="schools-list container" data-bind="schools">
+      <div class="school results-cards">
+        <h1 class="name">School Name</h1>
+        <ul class="school-info">
+          <li class="location">
+            <span data-bind="city">City</span>,
+            <span data-bind="state">State</span>
+            (region <b data-bind="region">X</b>)
+          </li>
+          <li class="institution-category">
+            <span data-bind="category">category here</span>
+          </li>
+          <li>
+            <span data-bind="size">x</span> undergraduate students
+          </li>
+        </ul>
+
+        <a data-bind="link" class="link-more">
+          View more details <i class="fa fa-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
 
 <section>
   <!-- Find schools form -->
