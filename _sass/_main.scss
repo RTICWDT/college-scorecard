@@ -33,6 +33,7 @@ $pad-more: 1em;
   width: 88%;
   // This sets the width of the first group item
   // Would like a way to set this programatically
+  // This is also not responsive. Fix.
 }
 
 
@@ -86,18 +87,20 @@ section {
       margin-bottom: $base-padding;
     }
 
-    li {
-      padding: $base-padding $base-padding-extra;
-      border-bottom: $thin-border-size solid $base-border-color;
+    ul.tertiary-home {
+      padding-bottom: $base-padding-extra;
 
-      &:first-of-type {
-        border-top: $thin-border-size solid $base-border-color;
+      li {
+        padding: $base-padding $base-padding-extra;
+        border-bottom: $thin-border-size solid $base-border-color;
+
+        &:first-of-type {
+          border-top: $thin-border-size solid $base-border-color;
+        }
       }
     }
 
-    ul {
-      padding-bottom: $base-padding-extra;
-    }
+    
   }
 
   &.quaternary {
@@ -225,8 +228,7 @@ footer {
 // Individual school pages
 //============================================
 
-.school,
-.results {
+.school {
   section,
   div {
     text-align: left;
@@ -235,6 +237,37 @@ footer {
 
 .school-section {
   border-bottom: $regular-border-size solid $base-border-color;
+}
+
+
+// Search results
+//============================================
+
+.results {
+  @extend .school;
+
+  div:first-of-type {
+    padding-bottom: $base-padding;
+
+    h1 {
+      padding-bottom: $base-padding-lite;
+    }
+  }
+}
+
+.results-cards {
+  padding: $base-padding;
+
+  ul {
+    border-bottom: $thin-border-size solid $base-border-color;
+    margin-bottom: $base-padding;
+    padding-bottom: $base-padding;
+  }
+}
+
+.tertiary .results-cards h1 {
+  padding-top: 0;
+  padding-bottom: $base-padding-lite;
 }
 
 

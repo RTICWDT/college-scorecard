@@ -8,26 +8,34 @@ layout: default
 
     <h1>5 Results Based on Your Criteria</h1>
 
-  </div>
-
-  <div class="container">
-
-    {% for school in site.data.schools %}
-
-      <section>
-
-        <h1>{{ school.name }}</h1>
-
-        <ul>
-          <li>{{ school.city }}, {{ school.abbr }}</li>
-          <li>{{ school.year }}-year institution</li>
-          <li>{{ school.students }} undergraduate students</li>
-        <ul>
-
-      </section>
-
-    {% endfor %}
+    <a href="{{ site.baseurl }}styleguide/index.html" class="link-more"><i class="fa fa-chevron-left"></i> Edit Criteria</a>
 
   </div>
+
+  <section class="tertiary">
+
+    <div class="container">
+
+      {% for school in site.data.schools %}
+
+        <div class="results-cards">
+
+          <h1>{{ school.name }}</h1>
+
+          <ul>
+            <li>{{ school.city }}, {{ school.abbr }}</li>
+            <li>{{ school.year }}-year institution</li>
+            <li>{{ school.students }} undergraduate students</li>
+          </ul>
+
+          <a href="#" class="link-more">View more details <i class="fa fa-chevron-right"></i></a>
+
+        </div>
+
+      {% endfor %}
+
+    </div>
+
+  </section>
 
 </section>
