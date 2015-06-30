@@ -164,6 +164,7 @@ header {
     text-decoration: none;
     text-transform: uppercase;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
     span.ed-logo {
       background: url(../img/US-DeptOfEducation-Seal.svg);
@@ -191,6 +192,7 @@ header {
     font-weight: 400;
     line-height: 0.7;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
@@ -203,7 +205,7 @@ footer {
   background-color: $mid-gray;
   height: 100px;
   text-align: center;
-  padding-top: $base-padding * 1.75;
+  padding-top: 11.75%;
 
   p {
     color: $dark-gray;
