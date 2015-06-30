@@ -23,7 +23,7 @@ scripts:
 
 # API configuration
 api:
-  baseurl: https://ccapi-open.18f.gov/
+  baseurl: https://api.data.gov/TEST/ed/
 
 # specify paths to exclude from copying to _site
 # Note: files and directories with the '_' prefix are excluded
