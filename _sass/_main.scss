@@ -24,11 +24,8 @@ $pad-more: 1em;
 }
 
 .group_inline {
-  display: inline-table;
-}
-
-.group_inline-row {
-  display: table-row;
+  display: table;
+  width: 100%;
 }
 
 .group_inline-left {
