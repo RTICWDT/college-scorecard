@@ -20,10 +20,15 @@
           Name
         </a>
       </h1>
+
       <div id="name-content" aria-hidden="true">
         <label for="name-school">School name</label>
         <input id="name-school" name="name" type="text" placeholder="" {{ common_input_attributes }}>
       </div>
+
+      <button class="button-add">
+        Add State
+      </button>
 
     </div>
 
@@ -41,9 +46,10 @@
       </h1>
 
       <div id="location-content">
-        <div class="input-add">
 
-          <label for="select-state">Select a state
+        <div class="input-add group_inline">
+
+          <label for="select-state" class="group_inline-left">Select a state
             <select id="select-state" name="state">
               <option value=""></option>
               {% for state in site.data.states|sort('name') %}
@@ -53,7 +59,7 @@
             </select>
           </label>
 
-          <button class="button button-add" data-input="state">
+          <button class="button button-add group_inline-right" data-input="state">
             Add State
           </button>
 
