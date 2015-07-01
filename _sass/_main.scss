@@ -228,6 +228,20 @@ footer {
     @extend .supporting_copy;
     padding-top: 0.3em;
     padding-bottom: $base-padding;
+  } 
+}
+
+.search_form-submit {
+  border-top: $thick-border-size solid $base-border-color;
+  padding-top: $base-padding-large;
+  text-align: center;
+
+  a {
+    padding-top: $base-padding;
+  }
+
+  div {
+    display: block;
   }
 }
 
