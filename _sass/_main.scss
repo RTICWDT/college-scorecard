@@ -36,6 +36,10 @@ $pad-more: 1em;
   margin-left: 5px;
 }
 
+.new_line {
+  display: block;
+}
+
 
 
 
@@ -242,7 +246,7 @@ footer {
   }
 
   div {
-    display: block;
+    @extend .new_line;
   }
 }
 
