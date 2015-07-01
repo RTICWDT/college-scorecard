@@ -71,3 +71,7 @@ $form-box-shadow: none;
 $form-box-shadow-focus: 0 0 0 2px $mid-blue;
 $form-font-family: $base-font-family;
 $form-input-color: $dark-gray;
+
+// loadable states
+$loadable-states: (loading, loaded, error);
+
