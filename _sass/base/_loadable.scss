@@ -1,18 +1,14 @@
 // loadable components may contain elements that should be shown or
 // hidden in specific states.
 .loadable {
-  @each $state in loading, loaded, error {
-    .show-#{$state} {
+  @each $state in $loadable-states {
+    .show-#{$state},
+    &.js-#{$state} .hide-#{$state} {
       display: none;
     }
 
-    &.js-#{$state} {
-      .show-#{$state} {
-        display: block;
-      }
-      .hide-#{$state} {
-        display: none;
-      }
+    &.js-#{$state} .show-#{$state} {
+      display: block;
     }
   }
 }
