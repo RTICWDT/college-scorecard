@@ -24,16 +24,25 @@ $pad-more: 1em;
 }
 
 .group_inline {
-  display: inline-block;
+  display: inline-table;
+}
+
+.group_inline-row {
+  display: table-row;
 }
 
 .group_inline-left {
-  float: left;
+  display: table-cell;
+  padding-right: 8px;
 }
 
 .group_inline-right {
-  float: right;
-  margin-left: 5px;
+  display: table-cell;
+  vertical-align: middle;
+
+  .button-add {
+    margin-top: 17px;
+  }
 }
 
 .new_line {
