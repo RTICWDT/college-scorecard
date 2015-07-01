@@ -3,7 +3,7 @@
   var resultsRoot = document.querySelector('.search-results');
   var query = location.search;
   if (!query) {
-    resultsRoot.classList.add('js-empty');
+    resultsRoot.classList.add('hidden');
     return;
   }
 
@@ -59,10 +59,13 @@
 
   resultsRoot.classList.add('js-loading');
   API.search(values, function(error, rows) {
+    resultsRoot.classList.remove('hidden');
     resultsRoot.classList.remove('js-loading');
+
     if (error) {
       return showError(error);
     }
+
     console.log('loaded schools:', rows);
     resultsRoot.classList.add('js-loaded');
 
@@ -91,8 +94,8 @@
     console.time('[render] charts');
     // bind all of the data to elements in d3, then
     // call renderCharts() on the selection
-    d3.select(resultsRoot)
-      .selectAll('.school-item')
+    d3.select(resultsList)
+      .selectAll('.school')
       .data(rows)
       .call(renderCharts);
     console.timeEnd('[render] charts');
@@ -101,11 +104,13 @@
   });
 
   function renderCharts(selection) {
+    selection.select('.size')
+      .text(format.number('size'));
   }
 
   function showError(error) {
     console.error('error:', error);
-    resultsRoot.classList.add('error');
+    resultsRoot.classList.add('js-error');
     var out = resultsRoot.querySelector('.error');
     out.classList.remove('hidden');
     out.textContent = String(error);

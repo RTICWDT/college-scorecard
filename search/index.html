@@ -10,9 +10,16 @@ body_scripts:
 ---
 
 <!-- Search results -->
-<section class="results search-results">
+<section class="results search-results loadable">
+  <h1 class="show-loading">
+    Loading...
+  </h1>
 
-  <div class="container">
+  <div class="show-error">
+    <p class="error-message"></p>
+  </div>
+
+  <div class="container show-loaded">
     <h1>
       <span class="results-count" data-bind="count">0</span>
       <span data-bind="results">Results</span>
@@ -21,17 +28,13 @@ body_scripts:
     <a href="#search-form" class="link-more">&lt; Edit Criteria</a>
   </div>
 
-  <div class="error hidden">
-    <p class="error-message"></p>
-  </div>
-
-  <section class="tertiary">
+  <section class="tertiary show-loaded">
 
     <div class="schools-list container" data-bind="schools">
       <!-- this element is the template for the results listing -->
       <div class="school results-cards">
         <h1 class="name">School Name</h1>
-        <ul class="school-info">
+        <ul class="school-info" data-bind="info">
           <li class="location">
             <span data-bind="city">City</span>,
             <span data-bind="state">State</span>
@@ -41,11 +44,11 @@ body_scripts:
             <span data-bind="category">category here</span>
           </li>
           <li>
-            <span data-bind="size">x</span> undergraduate students
+            <span class="size">x</span> undergraduate students
           </li>
         </ul>
 
-        <a data-bind="link" class="link-more">
+        <a class="link link-more">
           View more details <i class="fa fa-chevron-right"></i>
         </a>
       </div>

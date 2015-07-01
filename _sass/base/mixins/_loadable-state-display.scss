@@ -1,0 +1,21 @@
+// override the display property for a loadable
+// state element:
+// 
+// .foo {
+//   @include loadable-state-display(inline-block);
+// }
+//
+// or optionally specify a list of states:
+// 
+// .foo {
+//   @include loadable-state-display(inline-block, (error,));
+// }
+// 
+@mixin loadable-state-display($display, $states:$loadable-states) {
+  @each $state in $states {
+    .loadable.js-#{$state} .show-#{$state} {
+      display: $display;
+    }
+  }
+}
+

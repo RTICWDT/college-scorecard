@@ -10,6 +10,7 @@
 // Mixins
 @import 'mixins/font-size';
 @import 'mixins/grid-settings';
+@import 'mixins/loadable-state-display';
 
 // Extends
 @import 'extends/buttons';
@@ -20,6 +21,9 @@
 @import 'forms';
 @import 'styleguide';
 @import 'typography';
+
+// general-purpose classes
+@import 'loadable';
 
 // Web Components
 @import 'components/components';
