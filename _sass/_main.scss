@@ -150,6 +150,7 @@ header {
 
   > div {
     @include padded-container();
+    position: relative;
   }
 
   a {
@@ -158,8 +159,10 @@ header {
     color: inherit;
     font-weight: bold;
     letter-spacing: 0.4px;
+    position: absolute;
     text-decoration: none;
     text-transform: uppercase;
+    top: 4px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
@@ -170,7 +173,9 @@ header {
       display: inline-block;
       height: 20px;
       margin-right: em(2);
-      vertical-align: em(-8);
+      // position: absolute;
+      // top: 5px;
+      vertical-align: -7px;
       width: 20px;
     }
   }
