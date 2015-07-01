@@ -20,6 +20,7 @@
           Name
         </a>
       </h1>
+
       <div id="name-content" aria-hidden="true">
         <label for="name-school">School name</label>
         <input id="name-school" name="name" type="text" placeholder="" {{ common_input_attributes }}>
@@ -41,9 +42,10 @@
       </h1>
 
       <div id="location-content">
-        <div class="input-add">
 
-          <label for="select-state">Select a state
+        <div class="input-add group_inline">
+
+          <label for="select-state" class="group_inline-left">Select a state
             <select id="select-state" name="state">
               <option value=""></option>
               {% for state in site.data.states|sort('name') %}
@@ -53,9 +55,11 @@
             </select>
           </label>
 
-          <button class="button button-add" data-input="state">
-            Add State
-          </button>
+          <div class="group_inline-right">
+            <button class="button button-add" data-input="state">
+              Add State
+            </button>
+          </div>
 
         </div>
 
@@ -68,13 +72,23 @@
           </select>
         </label>
 
-        <label for="zip-code">Enter a ZIP Code
-          <input id="zip-code" name="zip_code" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>
+        <div class="group_inline">
+
+          <label for="zip-code" class="group_inline-left">Enter a ZIP Code
+            <input id="zip-code" name="zip_code" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>
+          </label>
+
+          <label for="search-radius" class="group_inline-right">Mile radius
+            <input name="search_radius" type="number" step=".1" placeholder="no limit" id="search-radius" {{ common_input_attributes }}>
+          </label>
+
+        </div>
+
+        <label for="online" class="checkbox">
+          <input id="online" type="checkbox" name="size" value="online" tabindex="0">
+          <span tabindex="-1" class="checkbox-focus"></span>Include Online Schools
         </label>
 
-        <label for="search-radius">Specify a search radius in miles
-          <input name="search_radius" type="number" step=".1" placeholder="no limit" id="search-radius" {{ common_input_attributes }}>
-        </label>
       </div>
 
     </div>
@@ -183,14 +197,18 @@
 
   </fieldset>
 
-  <div class="container">
+  <div class="container search_form-submit">
+
     <button class="button button-primary">
       Find Schools
     </button>
 
-    <button class="button button-add">
-      Advanced Search <i class="fa fa-plus"></i>
-    </button>
+    <div>
+      <a class="button link-more">
+        Advanced Search <i class="fa fa-plus"></i>
+      </a>
+    </div>
+
   </div>
 
 </form>

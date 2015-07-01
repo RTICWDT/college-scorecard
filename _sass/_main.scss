@@ -24,15 +24,26 @@ $pad-more: 1em;
 }
 
 .group_inline {
-  display: inline-block;
+  display: table;
+  width: 100%;
 }
 
 .group_inline-left {
-  float: left;
+  display: table-cell;
+  padding-right: 8px;
 }
 
 .group_inline-right {
-  float: right;
+  display: table-cell;
+  vertical-align: middle;
+
+  .button-add {
+    margin-top: 17px;
+  }
+}
+
+.new_line {
+  display: block;
 }
 
 
@@ -233,6 +244,20 @@ footer {
     @extend .supporting_copy;
     padding-top: 0.3em;
     padding-bottom: $base-padding;
+  } 
+}
+
+.search_form-submit {
+  border-top: $thick-border-size solid $base-border-color;
+  padding-top: $base-padding-large;
+  text-align: center;
+
+  a {
+    padding-top: $base-padding;
+  }
+
+  div {
+    @extend .new_line;
   }
 }
 
