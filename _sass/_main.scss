@@ -74,7 +74,7 @@ a {
 // Sections
 //============================================
 
-.home_section {
+.section {
   padding-top: $base-padding;
   padding-bottom: $base-padding;
   text-align: center;
@@ -84,12 +84,7 @@ a {
   }
 }
 
-.home_section-start {
-  background-color: $secondary-background-color;
-  color: $white;
-}
-
-.home_section-numbers {
+.section-card {
   background-color: $tertiary-background-color;
 
   h1 {
@@ -103,6 +98,19 @@ a {
     margin-top: $base-padding;
     margin-bottom: $base-padding;
   }
+}
+
+
+// Sections, Home
+//============================================
+
+.section-home-start {
+  background-color: $secondary-background-color;
+  color: $white;
+}
+
+.section-home-numbers {
+  @extend .section-card;
 
   img {
     @extend .new_line;
@@ -126,7 +134,7 @@ a {
   }
 }
 
-.home_section-paying {
+.section-home-paying {
   > div > div {
     margin-right: auto;
     margin-left: auto;
@@ -136,7 +144,7 @@ a {
   }
 }
 
-.home_section-decision {
+.section-home-decision {
   background-color: $quaternary-background-color;
   color: $white;
   padding-right: 0;
@@ -312,7 +320,7 @@ footer {
 .results {
   @extend .school;
 
-  div:first-of-type {
+  div.container {
     padding-bottom: $base-padding;
 
     h1 {
@@ -331,7 +339,7 @@ footer {
   }
 }
 
-.tertiary .results-card h1 {
+.section-card .results-card h1 {
   padding-top: 0;
   padding-bottom: $base-padding-lite;
 }

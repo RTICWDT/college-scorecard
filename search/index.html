@@ -10,12 +10,12 @@ body_scripts:
 ---
 
 <!-- Search results -->
-<section class="results search-results loadable">
-  <h1 class="show-loading">
-    Loading...
-  </h1>
+<section class="section results search-results loadable">
+  <div class="container show-loading">
+    <h1>Loading...</h1>
+  </div>
 
-  <div class="show-error">
+  <div class="container show-error">
     <p class="error-message"></p>
   </div>
 
@@ -28,7 +28,7 @@ body_scripts:
     <a href="#search-form" class="link-more"><i class="fa fa-chevron-left"></i> Edit Criteria</a>
   </div>
 
-  <section class="tertiary show-loaded">
+  <section class="section section-card show-loaded">
 
     <div class="schools-list container" data-bind="results">
       <!-- this element is the template for the results listing -->
