@@ -162,7 +162,7 @@ header {
   > div {
     @include padded-container();
     position: relative;
-  }
+  } 
 
   a {
     @include font-size(0.70);
@@ -184,8 +184,6 @@ header {
       display: inline-block;
       height: 20px;
       margin-right: em(2);
-      // position: absolute;
-      // top: 5px;
       vertical-align: -7px;
       width: 20px;
     }
@@ -217,15 +215,20 @@ header {
 //============================================
 
 footer {
-  @include font-size(0.8);
-  background-color: $mid-gray;
-  height: 100px;
+  @include font-size($h6);
+  background-color: #eeeeee;
+  height: 60px;
   text-align: center;
-  padding-top: 41px;
+  padding-top: 25px;
+  @include respond-to(tiny-up) {
+    @include font-size($h5);
+    height: 100px;
+    padding-top: 41px;
+  }
 
   p {
     color: $dark-gray;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.4px;
     text-transform: uppercase;
   }
 }
