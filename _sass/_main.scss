@@ -74,66 +74,67 @@ a {
   padding-bottom: $base-padding;
   text-align: center;
 
-  &.standard {
+  h1 {
+    padding-bottom: $base-padding-lite;
+  }
+}
+
+.home_section-secondary {
+  background-color: $secondary-background-color;
+  color: $white;
+}
+
+.home_section-tertiary {
+  background-color: $tertiary-background-color;
+
+  h1 {
+    padding-top: $base-padding;
+    padding-bottom: $base-padding;
   }
 
-  &.secondary {
-    background-color: $secondary-background-color;
-    color: $white;
+  > div > div {
+    background-color: $white;
+    border-radius: 0.4em;
+    margin-top: $base-padding;
+    margin-bottom: $base-padding;
   }
 
-  &.tertiary {
-    background-color: $tertiary-background-color;
+  ul {
+    padding-bottom: $base-padding-extra;
 
-    h1 {
-      padding-top: $base-padding;
-      padding-bottom: $base-padding;
-    }
+    li {
+      padding: $base-padding $base-padding-extra;
+      border-bottom: $thin-border-size solid $base-border-color;
 
-    > div > div {
-      background-color: $white;
-      border-radius: 0.4em;
-      margin-top: $base-padding;
-      margin-bottom: $base-padding;
-    }
-
-    ul.tertiary-home {
-      padding-bottom: $base-padding-extra;
-
-      li {
-        padding: $base-padding $base-padding-extra;
-        border-bottom: $thin-border-size solid $base-border-color;
-
-        &:first-of-type {
-          border-top: $thin-border-size solid $base-border-color;
-        }
+      &:first-of-type {
+        border-top: $thin-border-size solid $base-border-color;
       }
     }
   }
+}
 
-  &.quaternary {
-    background-color: $quaternary-background-color;
-    color: $white;
-    padding-right: 0;
-    padding-left: 0;
+.home_section-quaternary {
+  background-color: $quaternary-background-color;
+  color: $white;
+  padding-right: 0;
+  padding-left: 0;
+
+  h1 {
+    padding-left: $base-padding * 2;
+    padding-right: $base-padding * 2;
+  }
+
+  video {
+    background-color: $mid-gray;
+    height: auto;
+    width: 100%;
+  }
+
+  figcaption {
 
     h1 {
-      padding-left: $base-padding * 2;
-      padding-right: $base-padding * 2;
-    }
-
-    video {
-      background-color: $mid-gray;
-      height: auto;
-      width: 100%;
-    }
-
-    figcaption {
-
-      h1 {
-        @extend .h2;
-        padding-bottom: 0;
-      }
+      @extend .h2;
+      padding-bottom: 0;
     }
   }
 }
