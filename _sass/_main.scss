@@ -74,7 +74,7 @@ a {
 // Sections
 //============================================
 
-.home_section {
+.section {
   padding-top: $base-padding;
   padding-bottom: $base-padding;
   text-align: center;
@@ -84,12 +84,12 @@ a {
   }
 }
 
-.home_section-start {
+.section-home-start {
   background-color: $secondary-background-color;
   color: $white;
 }
 
-.home_section-numbers {
+.section-home-numbers {
   background-color: $tertiary-background-color;
 
   h1 {
@@ -126,7 +126,7 @@ a {
   }
 }
 
-.home_section-paying {
+.section-home-paying {
   > div > div {
     margin-right: auto;
     margin-left: auto;
@@ -136,7 +136,7 @@ a {
   }
 }
 
-.home_section-decision {
+.section-home-decision {
   background-color: $quaternary-background-color;
   color: $white;
   padding-right: 0;
