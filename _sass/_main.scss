@@ -1,7 +1,6 @@
 // Utility classes (hopefully temporary)
 //============================================
-$pad-less: .5em;
-$pad-more: 1em;
+
 .test {
   color: yellow;
 }
@@ -47,10 +46,9 @@ $pad-more: 1em;
 }
 
 
-
-
 // Site-wide
 //============================================
+
 * {
   box-sizing: border-box;
 }
@@ -67,14 +65,14 @@ a {
   }
 }
 
-section {
+
+// Sections
+//============================================
+
+.home_section {
   padding-top: $base-padding;
   padding-bottom: $base-padding;
   text-align: center;
-
-  > h1 {
-    padding: 0 0.6em 0.6em 0;
-  }
 
   &.standard {
   }
@@ -111,8 +109,6 @@ section {
         }
       }
     }
-
-    
   }
 
   &.quaternary {
