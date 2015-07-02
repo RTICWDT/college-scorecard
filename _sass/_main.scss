@@ -45,6 +45,11 @@
   display: block;
 }
 
+.light_on_dark {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 
 // Site-wide
 //============================================
@@ -121,6 +126,15 @@ a {
   }
 }
 
+.home_section-paying {
+  > div > div {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 300px;
+    padding-top: $base-padding;
+  }
+}
+
 .home_section-decision {
   background-color: $quaternary-background-color;
   color: $white;
@@ -128,6 +142,7 @@ a {
   padding-left: 0;
 
   h1 {
+    @extend .light_on_dark;
     padding-right: $base-padding;
     padding-bottom: $base-padding;
     padding-left: $base-padding;
@@ -150,15 +165,6 @@ a {
       @extend .h2;
       padding-bottom: 0;
     }
-  }
-}
-
-.home_section-paying {
-  > div > div {
-    margin-right: auto;
-    margin-left: auto;
-    max-width: 300px;
-    padding-top: $base-padding;
   }
 }
 
