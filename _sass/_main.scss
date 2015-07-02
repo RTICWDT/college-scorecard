@@ -222,7 +222,7 @@ footer {
   background-color: #eeeeee;
   height: 60px;
   text-align: center;
-  padding-top: 25px;
+  padding-top: 22px;
   @include respond-to(tiny-up) {
     @include font-size($h5);
     height: 100px;
