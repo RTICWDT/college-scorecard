@@ -99,11 +99,19 @@ a {
     margin-bottom: $base-padding;
   }
 
+  img {
+    @extend .new_line;
+    opacity: 0.4;
+    margin-right: auto;
+    margin-left: auto;
+    width: 40px;
+  }
+
   ul {
     padding-bottom: $base-padding-extra;
 
     li {
-      padding: $base-padding $base-padding-extra;
+      padding: $base-padding-lite $base-padding-extra $base-padding;
       border-bottom: $thin-border-size solid $base-border-color;
 
       &:first-of-type {
