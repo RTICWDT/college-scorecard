@@ -58,7 +58,7 @@
   })();
 
   resultsRoot.classList.add('js-loading');
-  API.search(values, function(error, rows) {
+  API.search(values, function(error, data) {
     resultsRoot.classList.remove('hidden');
     resultsRoot.classList.remove('js-loading');
 
@@ -66,22 +66,25 @@
       return showError(error);
     }
 
-    console.log('loaded schools:', rows);
+    console.log('loaded schools:', data);
     resultsRoot.classList.add('js-loaded');
 
     console.time('[render]');
 
     console.time('[render] template');
     // render the basic DOM template for each school
-    tagalong(resultsRoot, {
-      count: rows.length,
-    }, {
-      results: format.plural('count', 'Result'),
-      count: format.number('count', '0')
+    tagalong(resultsRoot, data, {
+      results_word: format.plural('total', 'Result')
     });
 
+    d3.select(resultsRoot)
+      .datum(data)
+      .select('[data-bind="total"]')
+        .text(format.number('total', '0'));
+
     var resultsList = resultsRoot.querySelector('.schools-list');
-    tagalong(resultsList, rows, {
+    tagalong(resultsList, data.results, {
+      size: format.number('size'),
       link: {
         '@href': function(d) {
           var name = d.name.replace(/\W+/g, '-');
@@ -96,7 +99,7 @@
     // call renderCharts() on the selection
     d3.select(resultsList)
       .selectAll('.school')
-      .data(rows)
+      .data(data.results)
       .call(renderCharts);
     console.timeEnd('[render] charts');
 
@@ -104,7 +107,7 @@
   });
 
   function renderCharts(selection) {
-    selection.select('.size')
+    selection.select('[data-bind="size"]')
       .text(format.number('size'));
   }
 

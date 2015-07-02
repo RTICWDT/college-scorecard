@@ -21,8 +21,8 @@ body_scripts:
 
   <div class="container show-loaded">
     <h1>
-      <span class="results-count" data-bind="count">0</span>
-      <span data-bind="results">Results</span>
+      <span class="results-count" data-bind="total">0</span>
+      <span data-bind="results_word">Results</span>
       Based on Your Criteria
     </h1>
     <a href="#search-form" class="link-more">&lt; Edit Criteria</a>
@@ -30,11 +30,11 @@ body_scripts:
 
   <section class="tertiary show-loaded">
 
-    <div class="schools-list container" data-bind="schools">
+    <div class="schools-list container" data-bind="results">
       <!-- this element is the template for the results listing -->
-      <div class="school results-cards">
+      <div class="school results-card">
         <h1 class="name">School Name</h1>
-        <ul class="school-info" data-bind="info">
+        <ul class="school-info">
           <li class="location">
             <span data-bind="city">City</span>,
             <span data-bind="state">State</span>
@@ -44,7 +44,7 @@ body_scripts:
             <span data-bind="category">category here</span>
           </li>
           <li>
-            <span class="size">x</span> undergraduate students
+            <span data-bind="size">x</span> undergraduate students
           </li>
         </ul>
 
