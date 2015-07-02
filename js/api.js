@@ -42,10 +42,10 @@
   API.getSchool = function(id, done) {
     var data = {};
     data[idField] = id;
-    return API.get(schoolEndpoint, data, function(error, schools) {
-      return error || !schools.length
+    return API.get(schoolEndpoint, data, function(error, res) {
+      return error || !res.total
         ? done(error ? error.responseText : 'No such school found.')
-        : done(null, schools[0]);
+        : done(null, res.results[0]);
     });
   };
 
