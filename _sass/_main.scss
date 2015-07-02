@@ -84,12 +84,7 @@ a {
   }
 }
 
-.section-home-start {
-  background-color: $secondary-background-color;
-  color: $white;
-}
-
-.section-home-numbers {
+.section-card {
   background-color: $tertiary-background-color;
 
   h1 {
@@ -103,6 +98,19 @@ a {
     margin-top: $base-padding;
     margin-bottom: $base-padding;
   }
+}
+
+
+// Sections, Home
+//============================================
+
+.section-home-start {
+  background-color: $secondary-background-color;
+  color: $white;
+}
+
+.section-home-numbers {
+  @extend .section-card;
 
   img {
     @extend .new_line;
@@ -331,7 +339,7 @@ footer {
   }
 }
 
-.tertiary .results-card h1 {
+.section-card .results-card h1 {
   padding-top: 0;
   padding-bottom: $base-padding-lite;
 }
