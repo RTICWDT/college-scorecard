@@ -1,7 +1,6 @@
 // Utility classes (hopefully temporary)
 //============================================
-$pad-less: .5em;
-$pad-more: 1em;
+
 .test {
   color: yellow;
 }
@@ -46,11 +45,15 @@ $pad-more: 1em;
   display: block;
 }
 
-
+.light_on_dark {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 
 // Site-wide
 //============================================
+
 * {
   box-sizing: border-box;
 }
@@ -67,77 +70,101 @@ a {
   }
 }
 
-section {
+
+// Sections
+//============================================
+
+.home_section {
   padding-top: $base-padding;
   padding-bottom: $base-padding;
   text-align: center;
 
-  > h1 {
-    padding: 0 0.6em 0.6em 0;
+  h1 {
+    padding-bottom: $base-padding-lite;
+  }
+}
+
+.home_section-start {
+  background-color: $secondary-background-color;
+  color: $white;
+}
+
+.home_section-numbers {
+  background-color: $tertiary-background-color;
+
+  h1 {
+    padding-top: $base-padding;
+    padding-bottom: $base-padding;
   }
 
-  &.standard {
+  > div > div {
+    background-color: $white;
+    border-radius: 0.4em;
+    margin-top: $base-padding;
+    margin-bottom: $base-padding;
   }
 
-  &.secondary {
-    background-color: $secondary-background-color;
-    color: $white;
+  img {
+    @extend .new_line;
+    opacity: 0.4;
+    margin-right: auto;
+    margin-left: auto;
+    width: 40px;
   }
 
-  &.tertiary {
-    background-color: $tertiary-background-color;
+  ul {
+    padding-bottom: $base-padding-extra;
 
-    h1 {
-      padding-top: $base-padding;
-      padding-bottom: $base-padding;
-    }
+    li {
+      padding: $base-padding-lite $base-padding-extra $base-padding;
+      border-bottom: $thin-border-size solid $base-border-color;
 
-    > div > div {
-      background-color: $white;
-      border-radius: 0.4em;
-      margin-top: $base-padding;
-      margin-bottom: $base-padding;
-    }
-
-    ul.tertiary-home {
-      padding-bottom: $base-padding-extra;
-
-      li {
-        padding: $base-padding $base-padding-extra;
-        border-bottom: $thin-border-size solid $base-border-color;
-
-        &:first-of-type {
-          border-top: $thin-border-size solid $base-border-color;
-        }
+      &:first-of-type {
+        border-top: $thin-border-size solid $base-border-color;
       }
     }
+  }
+}
 
-    
+.home_section-paying {
+  > div > div {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 300px;
+    padding-top: $base-padding;
+    padding-bottom: $base-padding;
+  }
+}
+
+.home_section-decision {
+  background-color: $quaternary-background-color;
+  color: $white;
+  padding-right: 0;
+  padding-left: 0;
+
+  h1 {
+    @extend .light_on_dark;
+    padding-right: $base-padding;
+    padding-bottom: $base-padding;
+    padding-left: $base-padding;
+
+    @include respond-to(tiny-up) {
+      padding-right: $base-padding * 2.2;
+      padding-left: $base-padding * 2.2;
+    }
   }
 
-  &.quaternary {
-    background-color: $quaternary-background-color;
-    color: $white;
-    padding-right: 0;
-    padding-left: 0;
+  video {
+    background-color: $mid-gray;
+    height: auto;
+    width: 100%;
+  }
+
+  figcaption {
 
     h1 {
-      padding-left: $base-padding * 2;
-      padding-right: $base-padding * 2;
-    }
-
-    video {
-      background-color: $mid-gray;
-      height: auto;
-      width: 100%;
-    }
-
-    figcaption {
-
-      h1 {
-        @extend .h2;
-        padding-bottom: 0;
-      }
+      @extend .h2;
+      padding-bottom: 0;
     }
   }
 }
@@ -219,7 +246,7 @@ footer {
   background-color: #eeeeee;
   height: 60px;
   text-align: center;
-  padding-top: 25px;
+  padding-top: 22px;
   @include respond-to(tiny-up) {
     @include font-size($h5);
     height: 100px;
