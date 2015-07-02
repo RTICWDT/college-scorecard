@@ -79,12 +79,12 @@ a {
   }
 }
 
-.home_section-secondary {
+.home_section-start {
   background-color: $secondary-background-color;
   color: $white;
 }
 
-.home_section-tertiary {
+.home_section-numbers {
   background-color: $tertiary-background-color;
 
   h1 {
@@ -113,7 +113,7 @@ a {
   }
 }
 
-.home_section-quaternary {
+.home_section-decision {
   background-color: $quaternary-background-color;
   color: $white;
   padding-right: 0;
@@ -142,6 +142,15 @@ a {
       @extend .h2;
       padding-bottom: 0;
     }
+  }
+}
+
+.home_section-paying {
+  > div > div {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 300px;
+    padding-top: $base-padding;
   }
 }
 
