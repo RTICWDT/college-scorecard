@@ -320,7 +320,7 @@ footer {
 .results {
   @extend .school;
 
-  div:first-of-type {
+  div.container {
     padding-bottom: $base-padding;
 
     h1 {
