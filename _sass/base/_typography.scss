@@ -57,14 +57,14 @@ h4,
 // Buttons
 
 button {
-  @include font-size(1.125);
+  @include font-size($h3);
   font-family: $base-font-family;
   font-weight: bold;
   letter-spacing: 3.6px;
 
   &.button-secondary,
   &.button-compare {
-    @include font-size(1);
+    @include font-size($h6);
     letter-spacing: 2px;
   }
 
@@ -88,7 +88,6 @@ button {
 .search_category {
   @include font-size($h1);
   font-weight: 400;
-  //margin-bottom: 0.3em;
   padding-top: 0.45em;
 }
 
