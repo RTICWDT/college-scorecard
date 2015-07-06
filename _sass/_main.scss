@@ -227,7 +227,10 @@ header {
 
 .title {
   background: $mid-blue;
-  height: 76px;
+  height: 59px;
+  @include respond-to(tiny-up) {
+      height: 76px;
+    }
 
   > div {
     @include padded-container();
@@ -236,7 +239,7 @@ header {
   h1 {
     @extend .title_heading;
     font-weight: 400;
-    line-height: 1.7;
+    line-height: 1;
     @include respond-to(tiny-up) {
       line-height: 0.7;
     }
