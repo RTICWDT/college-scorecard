@@ -116,7 +116,7 @@ layout: default
 
     <h1 class="search_category">Forms</h1>
 
-    <form is="search-form" action="{{ site.baseurl }}search/" method="GET">
+    <form is="search-form" action="{{ site.baseurl }}/search/" method="GET">
     {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
 
       <fieldset class="guide-forms">
@@ -276,6 +276,7 @@ layout: default
   </section>
 
   <section id="accordion" class="guide-container">
+    <h1>Accordions</h1>
 
     <div class="picc-accordion">
       <h1>
@@ -302,13 +303,51 @@ layout: default
 
   </section>
 
+  <section id="load-states" class="container">
+
+    <h1>Loadable State Classes</h1>
+
+    <div class="loadable">
+      <h2>No State</h2>
+      <p>There should be no text below this paragraph.</p>
+      <p class="show-error">This error should <u>not</u> be visible.</p>
+      <p class="show-loading">This loading message should <u>not</u> be visible.</p>
+      <p class="show-loaded">This loaded message should <u>not</u> be visible.</p>
+    </div>
+
+    <div class="loadable js-loading">
+      <h2>Loading State</h2>
+      <p class="show-error">This error should <u>not</u> be visible.</p>
+      <p class="show-loading">This loading message <u>should</u> be visible.</p>
+      <p class="show-loaded">This loaded message should <u>not</u> be visible.</p>
+      <p class="hide-loading">This hidden loading message should <u>not</u> be visible.</p>
+    </div>
+
+    <div class="loadable js-loaded">
+      <h2>Loaded State</h2>
+      <p class="show-error">This error should <u>not</u> be visible.</p>
+      <p class="show-loading">This loading message should <u>not</u> be visible.</p>
+      <p class="show-loaded">This loaded message <u>should</u> be visible.</p>
+      <p class="hide-loaded">This hidden loaded message should <u>not</u> be visible.</p>
+    </div>
+
+    <div class="loadable js-error">
+      <h2>Error State</h2>
+      <p class="show-error">This error <u>should</u> be visible.</p>
+      <p class="show-loading">This loading message should <u>not</u> be visible.</p>
+      <p class="show-loaded">This loaded message should <u>not</u> be visible.</p>
+      <p class="hide-error">This hidden error message should <u>not</u> be visible.</p>
+    </div>
+
+  </section>
+
   <section class="guide-container">
 
     <h1>Templates</h1>
 
-    <h2><a href="{{ site.baseurl }}styleguide/school.html">Individual School</a></h2>
+    <h2><a href="school.html">Individual School</a></h2>
 
-    <h2><a href="{{ site.baseurl }}styleguide/results.html">Search Results</a></h2>
+    <h2><a href="results.html">Search Results</a></h2>
 
   </section>
 

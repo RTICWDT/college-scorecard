@@ -1,7 +1,6 @@
 // Utility classes (hopefully temporary)
 //============================================
-$pad-less: .5em;
-$pad-more: 1em;
+
 .test {
   color: yellow;
 }
@@ -46,11 +45,15 @@ $pad-more: 1em;
   display: block;
 }
 
-
+.light_on_dark {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 
 // Site-wide
 //============================================
+
 * {
   box-sizing: border-box;
 }
@@ -67,77 +70,109 @@ a {
   }
 }
 
-section {
+
+// Sections
+//============================================
+
+.section {
   padding-top: $base-padding;
   padding-bottom: $base-padding;
   text-align: center;
 
-  > h1 {
-    padding: 0 0.6em 0.6em 0;
+  h1 {
+    padding-bottom: $base-padding-lite;
+  }
+}
+
+.section-card {
+  background-color: $tertiary-background-color;
+
+  h1 {
+    padding-top: $base-padding;
+    padding-bottom: $base-padding;
   }
 
-  &.standard {
+  > div > div {
+    background-color: $white;
+    border-radius: 0.4em;
+    margin-top: $base-padding;
+    margin-bottom: $base-padding;
+  }
+}
+
+
+// Sections, Home
+//============================================
+
+.section-home-start {
+  background-color: $secondary-background-color;
+  color: $white;
+}
+
+.section-home-numbers {
+  @extend .section-card;
+
+  img {
+    @extend .new_line;
+    opacity: 0.4;
+    margin-right: auto;
+    margin-left: auto;
+    width: 40px;
   }
 
-  &.secondary {
-    background-color: $secondary-background-color;
-    color: $white;
-  }
+  ul {
+    padding-bottom: $base-padding-extra;
 
-  &.tertiary {
-    background-color: $tertiary-background-color;
+    li {
+      padding: $base-padding-lite+0.2em $base-padding-extra $base-padding;
+      border-bottom: $thin-border-size solid $base-border-color;
 
-    h1 {
-      padding-top: $base-padding;
-      padding-bottom: $base-padding;
-    }
-
-    > div > div {
-      background-color: $white;
-      border-radius: 0.4em;
-      margin-top: $base-padding;
-      margin-bottom: $base-padding;
-    }
-
-    ul.tertiary-home {
-      padding-bottom: $base-padding-extra;
-
-      li {
-        padding: $base-padding $base-padding-extra;
-        border-bottom: $thin-border-size solid $base-border-color;
-
-        &:first-of-type {
-          border-top: $thin-border-size solid $base-border-color;
-        }
+      &:first-of-type {
+        border-top: $thin-border-size solid $base-border-color;
       }
     }
+  }
+}
 
-    
+.section-home-paying {
+  > div > div {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 300px;
+    padding-top: $base-padding;
+    padding-bottom: $base-padding;
+  }
+}
+
+.section-home-decision {
+  background-color: $quaternary-background-color;
+  color: $white;
+  padding-right: 0;
+  padding-left: 0;
+
+  h1 {
+    @extend .light_on_dark;
+    padding-right: $base-padding;
+    padding-bottom: $base-padding;
+    padding-left: $base-padding;
+
+    @include respond-to(tiny-up) {
+      padding-right: $base-padding * 2.2;
+      padding-left: $base-padding * 2.2;
+    }
   }
 
-  &.quaternary {
-    background-color: $quaternary-background-color;
-    color: $white;
-    padding-right: 0;
-    padding-left: 0;
+  video {
+    background-color: $mid-gray;
+    height: auto;
+    width: 100%;
+  }
+
+  figcaption {
 
     h1 {
-      padding-left: $base-padding * 2;
-      padding-right: $base-padding * 2;
-    }
-
-    video {
-      background-color: $mid-gray;
-      height: auto;
-      width: 100%;
-    }
-
-    figcaption {
-
-      h1 {
-        @extend .h2;
-        padding-bottom: 0;
-      }
+      @extend .h2;
+      padding-bottom: 0;
     }
   }
 }
@@ -162,7 +197,7 @@ header {
   > div {
     @include padded-container();
     position: relative;
-  }
+  } 
 
   a {
     @include font-size(0.70);
@@ -184,8 +219,6 @@ header {
       display: inline-block;
       height: 20px;
       margin-right: em(2);
-      // position: absolute;
-      // top: 5px;
       vertical-align: -7px;
       width: 20px;
     }
@@ -194,7 +227,10 @@ header {
 
 .title {
   background: $mid-blue;
-  height: 76px;
+  height: 59px;
+  @include respond-to(tiny-up) {
+      height: 76px;
+    }
 
   > div {
     @include padded-container();
@@ -203,7 +239,7 @@ header {
   h1 {
     @extend .title_heading;
     font-weight: 400;
-    line-height: 1.7;
+    line-height: 1;
     @include respond-to(tiny-up) {
       line-height: 0.7;
     }
@@ -217,15 +253,21 @@ header {
 //============================================
 
 footer {
-  @include font-size(0.8);
-  background-color: $mid-gray;
-  height: 100px;
+  @include font-size($h6);
+  background-color: #eeeeee;
+  height: 60px;
   text-align: center;
-  padding-top: 41px;
+  padding-top: 22px;
+  @include respond-to(tiny-up) {
+    @include font-size($h5);
+    height: 100px;
+    padding-top: 41px;
+  }
 
   p {
     color: $dark-gray;
-    letter-spacing: 0.3px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
     text-transform: uppercase;
   }
 }
@@ -282,7 +324,7 @@ footer {
 .results {
   @extend .school;
 
-  div:first-of-type {
+  div.container {
     padding-bottom: $base-padding;
 
     h1 {
@@ -291,7 +333,7 @@ footer {
   }
 }
 
-.results-cards {
+.results-card {
   padding: $base-padding;
 
   ul {
@@ -301,7 +343,7 @@ footer {
   }
 }
 
-.tertiary .results-cards h1 {
+.section-card .results-card h1 {
   padding-top: 0;
   padding-bottom: $base-padding-lite;
 }
