@@ -124,7 +124,7 @@ a {
     padding-bottom: $base-padding-extra;
 
     li {
-      padding: $base-padding-lite $base-padding-extra $base-padding;
+      padding: $base-padding-lite+0.2em $base-padding-extra $base-padding;
       border-bottom: $thin-border-size solid $base-border-color;
 
       &:first-of-type {
