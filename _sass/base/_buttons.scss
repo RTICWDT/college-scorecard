@@ -18,6 +18,7 @@ input[type="submit"] {
   &.button-primary {
     background-color: $base-button-color;
     color: $white;
+    height: 55px;
     width: 300px;
     -webkit-font-smoothing: antialiased;
 
