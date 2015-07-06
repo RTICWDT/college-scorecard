@@ -88,7 +88,8 @@ button {
 .search_category {
   @include font-size($h1);
   font-weight: 400;
-  margin-bottom: 0.3em;
+  //margin-bottom: 0.3em;
+  padding-top: 0.45em;
 }
 
 .key_fact {
