@@ -149,10 +149,10 @@ a {
   }
 
   ul {
-    padding-bottom: $base-padding+0.5em;
+    padding-bottom: ($base-padding + 0.5em);
 
     li {
-      padding: $base-padding-lite+0.1em $base-padding-extra $base-padding/1.5;
+      padding: ($base-padding-lite + 0.1em) $base-padding-extra ($base-padding / 1.5);
       border-bottom: $thin-border-size solid $base-border-color;
 
       &:first-of-type {
@@ -185,8 +185,8 @@ a {
     padding-left: $base-padding;
 
     @include respond-to(tiny-up) {
-      padding-right: $base-padding * 2.2;
-      padding-left: $base-padding * 2.2;
+      padding-right: ($base-padding * 2.2);
+      padding-left: ($base-padding * 2.2);
     }
   }
 
