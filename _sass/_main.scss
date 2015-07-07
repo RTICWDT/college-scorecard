@@ -103,6 +103,39 @@ a {
   color: $white;
 }
 
+.section-home-facts {
+  ul {
+    
+  }
+
+  li {
+    border-bottom: $thin-border-size solid $base-border-color;
+    margin: $base-padding $base-padding-extra;
+    padding-bottom: $base-padding;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+
+  span {
+    color: $lime-green;
+    display: block;
+
+    &:first-of-type {
+      @include font-size(5);
+      font-weight: bold;
+      line-height: 1;
+    }
+    &:nth-of-type(2) {
+      @include font-size($h1);
+      line-height: 0.9;
+      padding-bottom: $base-padding-lite;
+    }
+  }
+
+}
+
 .section-home-numbers {
   @extend .section-card;
   background-color: $tertiary-background-color;
