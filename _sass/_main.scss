@@ -149,10 +149,10 @@ a {
   }
 
   ul {
-    padding-bottom: $base-padding-extra;
+    padding-bottom: $base-padding+0.5em;
 
     li {
-      padding: $base-padding-lite+0.1em $base-padding-extra $base-padding;
+      padding: $base-padding-lite+0.1em $base-padding-extra $base-padding/1.5;
       border-bottom: $thin-border-size solid $base-border-color;
 
       &:first-of-type {
