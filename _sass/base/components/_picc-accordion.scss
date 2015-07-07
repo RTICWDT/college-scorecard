@@ -24,26 +24,25 @@ picc-accordion,
 
   a[aria-controls]:after,
   .picc-accordion-toggle {
-    position: absolute;
-    font-size: $button-size;
-    line-height: $button-size * 1.05;
-    font-weight: normal;
-    display: inline-block;
-    position: absolute;
-    top: $button-margin;
-    right: 0; // XXX
     color: #999;
     background: #fff;
-    width: $button-size;
-    height: $button-size;
-    border-radius: $button-size;
-    text-align: center;
     border: 1px solid #e3e3e3;
+    border-radius: $button-size;
+    display: inline-block;
+    font-size: $button-size;
+    font-weight: normal;
+    height: $button-size;
+    line-height: 1;
+    position: absolute;
+    text-align: center;
+    top: $button-margin;
+    right: 0; // XXX
+    width: $button-size;
   }
 
   a[aria-controls]:after {
     content: "+";
-    top: 0;
+    top: -2px;
   }
 
   &[data-expanded="true"] a[aria-controls]:after {
