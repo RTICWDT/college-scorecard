@@ -11,6 +11,11 @@ body {
   font-weight: $base-font-weight;
 }
 
+.light_on_dark {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 // Typeographic multipliers, base 16
 $h1: 1.5; //24px
 $h2: 1.313; //21px
@@ -112,7 +117,8 @@ button {
 
 .link-expand,
 .link-more {
-  @include font-size(0.75);
+  @extend .light_on_dark;
+  @include font-size($h6);
   color: $green;
   font-weight: 800;
   text-decoration: none;
