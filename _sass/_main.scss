@@ -85,7 +85,6 @@ a {
 }
 
 .section-card {
-  background-color: $tertiary-background-color;
 
   h1 {
     padding-top: $base-padding;
@@ -111,6 +110,7 @@ a {
 
 .section-home-numbers {
   @extend .section-card;
+  background-color: $tertiary-background-color;
 
   img {
     @extend .new_line;
@@ -315,6 +315,21 @@ footer {
 
 .school-section {
   border-bottom: $regular-border-size solid $base-border-color;
+}
+
+.school-card {
+  @extend .section-card;
+  text-align: left;
+
+  h1 {
+    padding: 0;
+  }
+
+  > div > div {
+    border: $thin-border-size solid $base-border-color;
+    margin-bottom: 0;
+    padding: $base-padding;
+  }
 }
 
 
