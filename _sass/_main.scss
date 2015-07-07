@@ -377,6 +377,11 @@ footer {
 }
 
 .results-card {
+  @extend .section-card;
+  background-color: $tertiary-background-color;
+}
+
+.results-card-div {
   padding: $base-padding;
 
   ul {
