@@ -13,13 +13,19 @@ input[type="submit"] {
   margin-bottom: 0.6em;
   user-select: none;
   vertical-align: middle;
-  width: 280px;
+  width: 100%;
+  @include respond-to(tiny-up) {
+    width: 280px;
+  }
 
   &.button-primary {
     background-color: $base-button-color;
     color: $white;
     height: 55px;
-    width: 300px;
+    width: 100%;
+    @include respond-to(tiny-up) {
+      width: 300px;
+    }
     -webkit-font-smoothing: antialiased;
 
     &:hover,
