@@ -1,0 +1,44 @@
+picc-meter {
+  display: block;
+  position: relative;
+  overflow: hidden;
+
+  height: 180px;
+
+  background-color: #EAEAEA; // FIXME
+
+  .picc-meter-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 0%;
+    @include transition(height .5s);
+    background-color: #999;
+  }
+
+  @each $meter-type, $meter-color in (
+    cost: #77B713,
+    grad_rate: #5C48C9,
+    salary: #00ADF2,
+    accept_rate: #13B79E
+  ) {
+    &.#{$meter-type} .picc-meter-bar {
+      background-color: $meter-color;
+    }
+  }
+
+  .picc-meter-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: #000;
+    background-color: rgba(0,0,0,.8); // FIXME
+
+    bottom: 0%;
+    @include transition(bottom .5s);
+  }
+
+}

@@ -1,0 +1,14 @@
+figure.meter {
+  display: inline-block;
+  margin-left: 1em;
+  margin-right: 1em;
+  width: 120px;
+
+  text-align: center;
+
+  figcaption {
+    display: block;
+    padding-top: .4em;
+  }
+}
+
