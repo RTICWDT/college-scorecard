@@ -1,6 +1,8 @@
 # npm puts its binaries here
 bin ?= ./node_modules/.bin
 
+css_path ?= ../../css/vendor
+
 # list all of the vendor scripts that need to be copied or built here
 # note: any *.min.js file that isn't distributed with its module can be built
 # with UglifyJS in the `%.min.js` target
@@ -8,6 +10,10 @@ all: \
 	aight.min.js \
 	d3.min.js \
 	formdb.min.js \
+	leaflet.js \
+	leaflet-css \
+	pinpoint.min.js \
+	pinpoint-css \
 	querystring.min.js \
 	tagalong.min.js
 
@@ -18,6 +24,18 @@ node_modules:
 # querystring is a Node.js built-in, but we can build it with browserify
 querystring.js: node_modules
 	echo "window.querystring = require('querystring');" | $(bin)/browserify - > $@
+
+leaflet.js: node_modules
+	cp node_modules/leaflet/dist/leaflet.js $@
+
+leaflet-css:
+	cp node_modules/leaflet/dist/leaflet.css $(css_path)
+
+pinpoint.js:
+	curl https://raw.githubusercontent.com/dowjones/pinpoint/master/dist/pinpoint.js > $@
+
+pinpoint-css:
+	curl https://raw.githubusercontent.com/dowjones/pinpoint/master/dist/pinpoint.min.css > $(css_path)/pinpoint.css
 
 # document-register-element is a lightweight custom elements polyfill
 document-register-element.js: node_modules
