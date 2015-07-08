@@ -11,8 +11,16 @@
 
   var root = document.querySelector('#school');
 
+  var format = picc.format;
+
   var directives = {
-    size_pretty: picc.format.number('size'),
+    size_number: format.number('size'),
+    control: format.control('ownership'),
+    locale_name: format.locale('locale'),
+    years: format.preddeg('common_degree'),
+    size_category: format.sizeCategory('size'),
+
+    // for debugging
     map: {
       '@data-latitude': function(d) {
         return d.location.lat;
