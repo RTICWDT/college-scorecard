@@ -12,6 +12,15 @@
   var root = document.querySelector('#school');
 
   var directives = {
+    size_pretty: picc.format.number('size'),
+    map: {
+      '@data-latitude': function(d) {
+        return d.location.lat;
+      },
+      '@data-longitude': function(d) {
+        return d.location.lon;
+      }
+    }
   };
 
   API.getSchool(id, function(error, school) {
@@ -22,6 +31,23 @@
     console.log('got school:', school);
     root.classList.remove('hidden');
     tagalong(root, school, directives);
+
+    var map = L.map(
+      root.querySelector('.school-map'),
+      {
+        center: L.latLng(
+          +school.location.lat,
+          +school.location.lon
+        ),
+        zoom: 13,
+        zoomControl: false,
+        panControl: false,
+        attributionControl: false
+      }
+    );
+
+    L.tileLayer('http://tile.stamen.com/terrain/{z}/{x}/{y}.png')
+      .addTo(map);
   });
 
   function getSchoolId() {
