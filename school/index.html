@@ -4,6 +4,9 @@ layout: default
 permalink: /school/
 scripts:
   - vendor/tagalong.min.js
+  - vendor/leaflet.js
+stylesheets:
+  - vendor/leaflet.css
 body_scripts:
   - school.js
 ---
@@ -25,21 +28,40 @@ body_scripts:
 
     <section class="section school-section">
 
-      <h1 class="name">School Name</h1>
+      <div class="school-heading">
+        <h1 class="name">School Name</h1>
 
-      <ul class="school-info">
-        <li class="location">
+        <h2 class="location">
           <span data-bind="city">City</span>,
           <span data-bind="state">State</span>
-          (region <b data-bind="region">X</b>)
-        </li>
-        <li class="institution-category">
-          <span data-bind="category">category here</span>
-        </li>
-        <li>
-          <span data-bind="size">x</span> undergraduate students
-        </li>
-      </ul>
+        </h2>
+
+        <h2 class="population">
+          <span data-bind="size_pretty">X</span> Students
+        </h2>
+
+        <ul class="key-figures">
+          <li class="years">
+            <b data-bind="years">X</b>
+            <span>Years</span>
+          </li>
+          <li class="public-private">
+            <i class="fa fa-institution"></i>
+            <span data-bind="ownership">Public</span>
+          </li>
+          <li class="locale">
+            <i class="fa fa-building"></i>
+            <span data-bind="setting">Urban</span>
+          </li>
+          <li class="population">
+            <i class="fa fa-group"></i>
+            <span data-bind="size_category">Small</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="school-map" data-bind="map">
+      </div>
 
     </section>
 
@@ -56,8 +78,40 @@ body_scripts:
 
 </section>
 
+<section class="section school-card">
+
+  <div class="container picc-accordion">
+    <div>
+      <h1 class="search_category">
+        <a aria-expanded="false" aria-controls="selectivity-content">
+          Selectivity
+        </a>
+      </h1>
+
+      <div id="selectivity-content" aria-hidden="true">
+        <p>Text here</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container picc-accordion">
+    <div>
+      <h1 class="search_category">
+        <a aria-expanded="false" aria-controls="graduation-content">
+          Graduation &amp; Retention
+        </a>
+      </h1>
+
+      <div id="graduation-content" aria-hidden="true">
+        <p>Text here</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
 <!--
 <section>
-  {% include search-form.html %}
+  {# include search-form.html #}
 </section>
 -->
