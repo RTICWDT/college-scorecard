@@ -376,26 +376,26 @@ footer {
   }
 }
 
-.results-card {
+.results-card-container {
   @extend .section-card;
   background-color: $tertiary-background-color;
-}
 
-.results-card-div {
-  padding: $base-padding;
+  .results-card {
+    padding: $base-padding;
 
-  ul {
-    border-bottom: $thin-border-size solid $base-border-color;
-    margin-bottom: $base-padding;
-    padding-bottom: $base-padding;
+    ul {
+      border-bottom: $thin-border-size solid $base-border-color;
+      margin-bottom: $base-padding;
+      padding-bottom: $base-padding;
+    }
+
+    h1 {
+      padding-top: 0;
+      padding-bottom: $base-padding-lite;
+    }
   }
-}
 
-.section-card .results-card h1 {
-  padding-top: 0;
-  padding-bottom: $base-padding-lite;
 }
-
 
 
 
