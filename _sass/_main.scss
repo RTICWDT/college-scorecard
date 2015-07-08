@@ -86,7 +86,8 @@ a {
     padding-bottom: $base-padding;
   }
 
-  > div > div {
+  > div > div,
+  .contained {
     background-color: $white;
     border-radius: 0.4em;
     margin-top: $base-padding;
@@ -343,6 +344,14 @@ footer {
 
 .school-section {
   border-bottom: $regular-border-size solid $base-border-color;
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    font-size: font-size($h4);
+    font-weight: normal;
+  }
 }
 
 .school-card {
@@ -396,9 +405,6 @@ footer {
   padding-bottom: $base-padding-lite;
 }
 
-
-
-
-
-
-
+.school-map {
+  height: 200px;
+}
