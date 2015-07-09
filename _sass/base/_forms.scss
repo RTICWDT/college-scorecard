@@ -44,7 +44,7 @@ label {
 textarea,
 #{$all-text-inputs},
 select[multiple=multiple] {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
   @include font-size(1);
   @include placeholder {
     color: $form-input-color;
