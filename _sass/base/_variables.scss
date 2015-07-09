@@ -19,14 +19,26 @@ $mid-gray: #e1e1e1;
 $dark-blue: #0e365b;
 $mid-blue: #2b6091;
 $lighter-blue: tint($dark-blue, 6%);
+$sky-blue: #00adf2;
 $green: #2c8511;
 $darker-green: #216d09;
 $darkest-green: #174b06;
 $lime-green: #77b713;
+$emerald-green: #13b79e;
 $yellow: #f0d704;
 $darker-yellow: #eeba28;
 $red: #d44116;
 $darker-red: #b93610;
+$purple: #5c48c9;
+$amethyst-purple: #9384e9;
+
+$meter-colors: (
+  cost: $lime-green,
+  graduation: $purple,
+  earnings: $sky-blue,
+  acceptance: $emerald-green,
+  return: $amethyst-purple
+);
 
 // Background Color
 $secondary-background-color: $dark-blue;

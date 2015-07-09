@@ -14,7 +14,7 @@ picc-meter {
     right: 0;
     bottom: 0;
     height: 0%;
-    @include transition(height .5s);
+    transition: height .5s;
     background-color: #999;
   }
 
@@ -27,7 +27,7 @@ picc-meter {
     background-color: #000;
     background-color: rgba(0,0,0,.8);
     bottom: 0%;
-    @include transition(bottom .5s);
+    transition: bottom .5s;
 
     &:after {
       content: "";
@@ -40,7 +40,7 @@ picc-meter {
       right: 0;
       background-color: #fff;
       opacity: 0;
-      @include transition(opacity .5s);
+      transition: opacity .5s;
     }
   }
 
@@ -50,14 +50,8 @@ picc-meter {
     }
   }
 
-  @each $meter-type, $meter-color in (
-    cost: #77B713,
-    graduation: #5C48C9,
-    earnings: #00ADF2,
-    acceptance: #13B79E,
-    return: #9384E9,
-  ) {
-    &.#{$meter-type} {
+  @each $meter-class, $meter-color in $meter-colors {
+    &.#{$meter-class} {
       .picc-meter-bar {
         background-color: $meter-color;
       }
