@@ -13,6 +13,10 @@
   @include padded-container();
 }
 
+.centered {
+  text-align: center;
+}
+
 .sr-only {
   position: absolute;
   left: -10000px;
@@ -53,7 +57,6 @@ a {
 .section {
   padding-top: $base-padding;
   padding-bottom: $base-padding;
-  text-align: center;
 
   h1 {
     padding-bottom: $base-padding-lite;
@@ -100,11 +103,15 @@ a {
 //============================================
 
 .section-home-start {
+  @extend .centered;
+
   background-color: $secondary-background-color;
   color: $white;
 }
 
 .section-home-facts {
+  @extend .centered;
+
   li {
     border-bottom: $thin-border-size solid $base-border-color;
     margin: $base-padding $base-padding-extra;
@@ -124,6 +131,7 @@ a {
       font-weight: bold;
       line-height: 1;
     }
+
     &:nth-of-type(2) {
       @include font-size($h1);
       line-height: 0.9;
@@ -134,7 +142,9 @@ a {
 }
 
 .section-home-numbers {
+  @extend .centered;
   @extend .section-card_container;
+
   background-color: $tertiary-background-color;
 
   img {
@@ -160,6 +170,8 @@ a {
 }
 
 .section-home-paying {
+  @extend .centered;
+
   > div > div {
     margin-right: auto;
     margin-left: auto;
@@ -170,6 +182,8 @@ a {
 }
 
 .section-home-decision {
+  @extend .centered;
+
   background-color: $quaternary-background-color;
   color: $white;
   padding-right: 0;
@@ -220,6 +234,8 @@ a {
 }
 
 .search_form-submit {
+  @extend .centered;
+
   border-top: $thick-border-size solid $base-border-color;
   padding-top: $base-padding-large;
   text-align: center;
@@ -229,7 +245,7 @@ a {
   }
 
   div {
-    @extend .new_line;
+    // @extend .new_line;
   }
 }
 
