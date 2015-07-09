@@ -107,8 +107,13 @@ a {
 .section-home-facts {
   li {
     border-bottom: $thin-border-size solid $base-border-color;
+    display: inline-block;
     margin: $base-padding $base-padding-extra;
     padding-bottom: $base-padding;
+
+    @include respond-to(tiny-up) {
+      border-bottom: none;
+    }
 
     &:last-of-type {
       border-bottom: none;
