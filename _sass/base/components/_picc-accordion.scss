@@ -7,6 +7,9 @@ picc-accordion,
   display: block;
   overflow: hidden;
   min-height: $button-size + ($button-margin * 2);
+  @include respond-to(tiny-up) {
+    min-height: $button-size + ($button-margin * 3);
+  }
 
   @include transition(height 1s linear);
 
