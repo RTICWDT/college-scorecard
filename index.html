@@ -38,10 +38,10 @@ layout: default
     </a>
 
     <ul>
-
+      {% for i in (1..3) %}
       <li>
         College graduates earn 
-        <span>85%</span><span>more</span> 
+        <b class="big">85%</b> <b>more</b> 
         than those with just a <br>high school diploma
 
         <!-- <div class="share">
@@ -49,29 +49,7 @@ layout: default
           <a>Twitter</a>
         </div> -->
       </li>
-
-      <li>
-        College graduates earn 
-        <span>85%</span><span>more</span> 
-        than those with just a <br>high school diploma
-
-        <!-- <div class="share">
-          <a>Facebook</a>
-          <a>Twitter</a>
-        </div> -->
-      </li>
-
-      <li>
-        College graduates earn 
-        <span>85%</span><span>more</span> 
-        than those with just a <br>high school diploma
-
-        <!-- <div class="share">
-          <a>Facebook</a>
-          <a>Twitter</a>
-        </div> -->
-      </li>
-
+      {% endfor %}
     </ul>
 
   </div>
