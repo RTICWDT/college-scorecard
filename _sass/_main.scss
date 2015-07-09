@@ -102,6 +102,36 @@ a {
 .section-home-start {
   background-color: $secondary-background-color;
   color: $white;
+
+  @include respond-to(medium-up) {
+    border-radius: 0 0 $base-border-radius $base-border-radius;
+    padding-bottom: 14px;
+
+    h1 {
+      @include font-size($h1);
+      padding: 0;
+    }
+
+    .button-wizard {
+      height: 60px;
+      padding-top: 0.8em;
+    }
+
+    .section-home-start-group {
+      display: table;
+      width: 100%;
+    }
+
+    .section-home-start-group-left {
+      display: table-cell;
+      padding-right: 8px;
+    }
+
+    .section-home-start-group-right {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
 }
 
 .section-home-facts {
@@ -267,7 +297,7 @@ a {
   margin-top: -$splash-height;
 
   @include respond-to(medium-up) {
-    margin-top: -480px;
+    margin-top: (-$splash-height + $base-padding);
     margin-right: auto;
     margin-left: auto;
     max-width: 650px;
