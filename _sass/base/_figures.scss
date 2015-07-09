@@ -1,10 +1,25 @@
 figure.meter {
   display: inline-block;
-  margin-left: 1em;
-  margin-right: 1em;
-  width: 120px;
+  margin-left: .5em;
+  margin-right: .5em;
+  margin-bottom: 2em;
 
   text-align: center;
+
+  @include respond-to(medium-up) {
+    width: 150px;
+    margin-bottom: 0;
+  }
+
+  .figure-heading,
+  figcaption {
+    @include font-size($h2);
+    font-weight: bold;
+  }
+
+  .figure-heading {
+    margin-bottom: .4em;
+  }
 
   figcaption {
     display: block;
