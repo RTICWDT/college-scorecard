@@ -344,6 +344,11 @@ footer {
 
 .school-section {
   border-bottom: $regular-border-size solid $base-border-color;
+  @include outer-container();
+
+  h1 {
+    padding-top: 0;
+  }
 
   h2 {
     margin-top: 0;
@@ -355,6 +360,13 @@ footer {
 
   .meters {
     text-align: center;
+  }
+
+  @include respond-to(large-up) {
+    .school-heading,
+    .school-map {
+      @include span-columns(6);
+    }
   }
 }
 
