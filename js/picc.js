@@ -21,8 +21,9 @@
         if (typeof empty === 'string') {
           empty = d3.functor(empty);
         }
+        key = picc.accessor(key);
         return function(d) {
-          var value = d[key];
+          var value = key.call(this, d);
           return (!value && empty)
             ? empty.call(d)
             : fmt.call(d, +value, key);
@@ -110,5 +111,11 @@
       }, 'unknown'))
     };
   })();
+
+  picc.accessor = function(key) {
+    return (typeof key === 'function')
+      ? key
+      : function(d) { return d[key]; };
+  };
 
 })(this);
