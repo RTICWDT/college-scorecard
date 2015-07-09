@@ -153,6 +153,10 @@ a {
   ul {
     padding-bottom: ($base-padding + 0.5em);
 
+    @include respond-to(tiny-up) {
+      text-align: left;
+    }
+
     li {
       padding: ($base-padding-lite + 0.1em) $base-padding-extra ($base-padding / 1.5);
       border-bottom: $thin-border-size solid $base-border-color;
@@ -160,6 +164,23 @@ a {
       &:first-of-type {
         border-top: $thin-border-size solid $base-border-color;
       }
+    }
+  }
+
+  @include respond-to(tiny-up) {
+    .section-home-numbers-group {
+      display: table;
+      width: 100%;
+    }
+
+    .section-home-numbers-group-left {
+      display: table-cell;
+      padding-right: 8px;
+    }
+
+    .section-home-numbers-group-right {
+      display: table-cell;
+      vertical-align: middle;
     }
   }
 }
