@@ -244,7 +244,9 @@ a {
   background: url(../img/unsplash_placeholder.jpg) center center no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  height: 500px;
+  height: $splash-height;
+  //TODO add query that doesn't load image at small sizes
+  //right now it is just covered, but still exists
 }
 
 .home-bg-gray {
@@ -259,13 +261,33 @@ a {
 //============================================
 
 .search_form {
+  background-color: $white;
+  border-radius: $base-border-radius $base-border-radius 0 0;
   padding-top: 0.4em;
+  margin-top: -$splash-height;
+
+  @include respond-to(medium-up) {
+    margin-top: -480px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 650px;
+    padding-top: $base-padding;
+    padding-bottom: $base-padding;
+
+    .large_heading {
+      text-align: center;
+    }
+  }
 
   p {
     @extend .supporting_copy;
     padding-top: 0.3em;
     padding-bottom: $base-padding;
-  } 
+
+    @include respond-to(medium-up) {
+      text-align: center;
+    }
+  }
 }
 
 .search_form-submit {

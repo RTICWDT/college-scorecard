@@ -100,6 +100,12 @@ button {
   }
 }
 
+.large_heading {
+  @include respond-to(medium-up) {
+    @include font-size($h1-huge);
+  }
+}
+
 .search_category {
   @include font-size($h1);
   font-weight: 400;
