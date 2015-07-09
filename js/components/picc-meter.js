@@ -54,6 +54,12 @@
           bar.style.setProperty('height', percent(this.value));
           line.style.setProperty('bottom', percent(this.average));
 
+          var aboveAverage = this.value >= this.average;
+          classify(this, {
+            'above-average': aboveAverage,
+            'below-average': !aboveAverage
+          });
+
           delete this.__timeout;
         }},
 
@@ -119,6 +125,12 @@
   function number(value, fallback) {
     var num = +value;
     return isNaN(value) ? (fallback || 0) : num;
+  }
+
+  function classify(el, classes) {
+    for (var klass in classes) {
+      el.classList[classes[klass] ? 'add' : 'remove'](klass);
+    }
   }
 
 })(this);
