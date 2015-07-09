@@ -20,6 +20,15 @@
     years: format.preddeg('common_degree'),
     size_category: format.sizeCategory('size'),
 
+    average_cost: format.dollars('avg_net_price'),
+    average_cost_meter: {
+      '@max':     d3.functor(100000),
+      '@average': d3.functor(20000),
+      '@value':   function(d) {
+        return Math.floor(Math.random() * 100000);
+      }
+    },
+
     // for debugging
     map: {
       '@data-latitude': function(d) {
