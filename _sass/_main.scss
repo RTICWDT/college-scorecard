@@ -80,7 +80,6 @@ a {
 
 .section-card_container-school {
   @extend .section-card_container;
-  text-align: left;
 
   h1 {
     padding: 0;
@@ -254,11 +253,6 @@ a {
 //============================================
 
 .results {
-  section,
-  div {
-    text-align: left;
-  }
-
   div.container {
     padding-bottom: $base-padding;
 
@@ -286,13 +280,6 @@ a {
 
 // Individual school pages
 //============================================
-
-.school {
-  section,
-  div {
-    text-align: left;
-  }
-}
 
 .school-section {
   border-bottom: $regular-border-size solid $base-border-color;
