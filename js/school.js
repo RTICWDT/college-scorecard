@@ -40,22 +40,36 @@
     root.classList.remove('hidden');
     tagalong(root, school, directives);
 
-    var map = L.map(
-      root.querySelector('.school-map'),
-      {
-        center: L.latLng(
-          +school.location.lat,
-          +school.location.lon
-        ),
-        zoom: 13,
-        zoomControl: false,
-        panControl: false,
-        attributionControl: false
-      }
+    var center = L.latLng(
+      +school.location.lat,
+      +school.location.lon
     );
+
+    var map = L.map(root.querySelector('.school-map'), {
+        zoomControl:        false,
+        panControl:         false,
+        attributionControl: false,
+        dragging:           false,
+        scrollWheelZoom:    false,
+        touchZoom:          false,
+        doubleClickZoom:    false,
+        boxZoom:            false
+      })
+      .setView(center, 13);
 
     L.tileLayer('http://tile.stamen.com/terrain/{z}/{x}/{y}.png')
       .addTo(map);
+
+    var marker = L.circle(center, 200, {
+        color: 'black',
+        opacity: 1,
+        strokeWidth: 1,
+        fillColor: 'white',
+        fillOpacity: 1
+      })
+      .addTo(map);
+
+    marker.bindPopup(school.name);
   });
 
   function getSchoolId() {
