@@ -240,6 +240,13 @@ a {
   }
 }
 
+.home-splash {
+  background: url(../img/unsplash_placeholder.jpg) center center no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 500px;
+}
+
 .home-bg-gray {
   background-color: $tertiary-background-color;
 }
