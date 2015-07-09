@@ -362,10 +362,16 @@ footer {
     text-align: center;
   }
 
-  @include respond-to(large-up) {
-    .school-heading,
+  .school-map {
+    height: 250px;
+  }
+
+  @include respond-to(medium-up) {
+    .school-heading {
+      @include span-columns(7);
+    }
     .school-map {
-      @include span-columns(6);
+      @include span-columns(5);
     }
   }
 }
@@ -419,8 +425,4 @@ footer {
 .section-card .results-card h1 {
   padding-top: 0;
   padding-bottom: $base-padding-lite;
-}
-
-.school-map {
-  height: 200px;
 }
