@@ -13,10 +13,6 @@
   @include padded-container();
 }
 
-.centered {
-  text-align: center;
-}
-
 .sr-only {
   position: absolute;
   left: -10000px;
