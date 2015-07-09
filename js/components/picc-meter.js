@@ -23,13 +23,16 @@
         }},
 
         attributeChangedCallback: {value: function(attr, prev, value) {
+          // pass through attribute settings to
+          // properties for min, max, value an
+          // average
           switch (attr) {
             case 'min':
-              this.min = value;
-              break;
             case 'max':
-              this.max = value;
-              break;
+            case 'value':
+            case 'average':
+              this[attr] = value;
+              return;
           }
         }},
 
