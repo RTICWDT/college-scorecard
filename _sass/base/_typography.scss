@@ -17,6 +17,8 @@ body {
 }
 
 // Typeographic multipliers, base 16
+$h1-huge: 2.625; //42px
+$h1-large: 1.75; //28px
 $h1: 1.5; //24px
 $h2: 1.313; //21px
 $h3: 1.125; //18px
@@ -42,11 +44,19 @@ h1, h2, h3, h4
 h1,
 .h1 {
   @include font-size($h1);
+
+  @include respond-to(tiny-up) {
+    @include font-size($h1-large);
+  }
 }
 
 h2,
 .h2 {
   @include font-size($h2);
+
+  @include respond-to(tiny-up) {
+    @include font-size($h1);
+  }
 }
 
 h3,
@@ -94,6 +104,10 @@ button {
   @include font-size($h1);
   font-weight: 400;
   padding-top: 0.45em;
+
+  @include respond-to(tiny-up) {
+    @include font-size($h1-large);
+  }
 }
 
 .key_fact {
