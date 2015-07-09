@@ -141,6 +141,11 @@ a {
 .section-home-numbers {
   @extend .section-card_container;
   background-color: $tertiary-background-color;
+  @include span-columns(12);
+
+  @include respond-to(medium-up) {
+    @include span-columns(6);
+  }
 
   img {
     @extend .new_line;
@@ -186,7 +191,14 @@ a {
 }
 
 .section-home-paying {
-  > div > div {
+  @extend .section-card_container;
+  @include span-columns(12);
+
+  @include respond-to(medium-up) {
+    @include span-columns(6);
+  }
+
+  .section-home-paying-buttons {
     margin-right: auto;
     margin-left: auto;
     max-width: 300px;
@@ -226,6 +238,10 @@ a {
       padding-bottom: 0;
     }
   }
+}
+
+.home-bg-gray {
+  background-color: $tertiary-background-color;
 }
 
 
