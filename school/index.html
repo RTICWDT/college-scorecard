@@ -78,6 +78,41 @@ body_scripts:
 
 </section>
 
+<section id="key-stats" class="section school-section">
+
+  <div class="meters container">
+
+    <figure class="meter">
+      <h2>Average Cost Per Year</h2>
+      <picc-meter class="cost" data-bind="average_cost_meter">
+      </picc-meter>
+      <figcaption>
+        <span data-bind="average_cost">$XX,XXXX</span>
+      </figcaption>
+    </figure>
+
+    <figure class="meter">
+      <h2>Graduation Rate</h2>
+      <picc-meter class="grad_rate">
+      </picc-meter>
+      <figcaption>
+        <span data-bind="graduation_rate">XX%</span>
+      </figcaption>
+    </figure>
+
+    <figure class="meter">
+      <h2>Average Salary</h2>
+      <picc-meter class="salary">
+      </picc-meter>
+      <figcaption>
+        <span data-bind="average_salary">$XX,XXXX</span>
+      </figcaption>
+    </figure>
+
+  </div>
+
+</section>
+
 <section class="section school-card">
 
   <div class="container picc-accordion">
