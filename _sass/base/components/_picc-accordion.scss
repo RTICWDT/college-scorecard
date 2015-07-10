@@ -1,6 +1,6 @@
 picc-accordion,
 .picc-accordion,
-[is="picc-accordion"] {
+[is='picc-accordion'] {
   $button-size: 34px;
   $button-margin: 9px;
 
@@ -44,12 +44,12 @@ picc-accordion,
   }
 
   a[aria-controls]:after {
-    content: "+";
+    content: '+';
     top: -2px;
   }
 
-  &[data-expanded="true"] a[aria-controls]:after {
-    content: "\2212";
+  &[data-expanded='true'] a[aria-controls]:after {
+    content: '\2212';
   }
 
   a[aria-controls]:hover:after {
@@ -66,5 +66,5 @@ picc-accordion,
 }
 
 .picc-accordion-div {
-  padding-top: $base-padding/2;
+  padding-top: ($base-padding / 2);
 }

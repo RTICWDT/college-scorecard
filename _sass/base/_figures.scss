@@ -1,0 +1,29 @@
+figure.meter {
+  @extend .centered;
+
+  display: inline-block;
+  margin-bottom: 2em;
+  margin-left: .5em;
+  margin-right: .5em;
+
+  .figure-heading,
+  figcaption {
+    @include font-size($h2);
+    font-weight: bold;
+  }
+
+  .figure-heading {
+    margin-bottom: .4em;
+  }
+
+  figcaption {
+    display: block;
+    padding-top: .4em;
+  }
+
+  @include respond-to(medium-up) {
+    width: 150px;
+    margin-bottom: 0;
+  }
+}
+

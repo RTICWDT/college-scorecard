@@ -4,6 +4,9 @@ layout: default
 permalink: /school/
 scripts:
   - vendor/tagalong.min.js
+  - vendor/leaflet.js
+stylesheets:
+  - vendor/leaflet.css
 body_scripts:
   - school.js
 ---
@@ -25,21 +28,40 @@ body_scripts:
 
     <section class="section school-section">
 
-      <h1 class="name">School Name</h1>
+      <div class="school-heading">
+        <h1 class="name">School Name</h1>
 
-      <ul class="school-info">
-        <li class="location">
+        <h2 class="location">
           <span data-bind="city">City</span>,
           <span data-bind="state">State</span>
-          (region <b data-bind="region">X</b>)
-        </li>
-        <li class="institution-category">
-          <span data-bind="category">category here</span>
-        </li>
-        <li>
-          <span data-bind="size">x</span> undergraduate students
-        </li>
-      </ul>
+        </h2>
+
+        <h2 class="population">
+          <span data-bind="size_number">X</span> students
+        </h2>
+
+        <ul class="key-figures">
+          <li class="years">
+            <b data-bind="years">X</b>
+            <span>Years</span>
+          </li>
+          <li class="public-private">
+            <i class="fa fa-institution"></i>
+            <span data-bind="control">Public</span>
+          </li>
+          <li class="setting">
+            <i class="fa fa-building"></i>
+            <span data-bind="locale_name">Urban</span>
+          </li>
+          <li class="population">
+            <i class="fa fa-group"></i>
+            <span data-bind="size_category">Small</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="school-map" data-bind="map">
+      </div>
 
     </section>
 
@@ -48,10 +70,104 @@ body_scripts:
   <div class="container">
 
     <section id="more-details" class="section school-section">
-      <p data-bind="description">School description here.</p>
+      <p data-bind="description">
+        Lorem ipsum dolor sit amet, consectetur
+        adipiscing elit. Suspendisse sagittis leo
+        ac nisi egestas semper. Suspendisse a
+        purus felis. Suspendisse sollicitudin
+        vitae ante sit amet vestibulum. Fusce id
+        turpis at magna eleifend maximus vitae
+        vitae felis. Quisque eget eros ac urna
+        dictum tincidunt in at nunc. Vivamus
+        tincidunt dictum urna. Donec ac malesuada
+        lacus. Nunc felis lacus, aliquet eu
+        finibus eget, blandit dapibus mi. Praesent
+        euismod odio id elit maximus, quis
+        facilisis massa efficitur. Praesent mi
+        orci, mattis vel arcu ac, feugiat
+        scelerisque eros.
+      </p>
 
+      <!--
       <a data-bind="more_link" class="link-more">Read more <i class="fa fa-plus"></i></a>
+      -->
     </section>
+  </div>
+
+</section>
+
+<section id="key-stats" class="section school-section">
+
+  <div class="meters container">
+
+    <figure class="meter">
+      <h2 class="figure-heading">Average Cost Per Year</h2>
+      <picc-meter class="cost" data-bind="average_cost_meter"
+        max="100000"
+        value="33209"
+        average="60000">
+      </picc-meter>
+      <figcaption>
+        <span data-bind="average_cost">$33,209</span>
+      </figcaption>
+    </figure>
+
+    <figure class="meter">
+      <h2 class="figure-heading">Graduation Rate</h2>
+      <picc-meter class="graduation"
+        max="150"
+        value="60"
+        average="70">
+      </picc-meter>
+      <figcaption>
+        <span data-bind="graduation_rate">60%</span>
+      </figcaption>
+    </figure>
+
+    <figure class="meter">
+      <h2 class="figure-heading">Average Salary</h2>
+      <picc-meter class="earnings"
+        max="80000"
+        value="43900"
+        average="36000">
+      </picc-meter>
+      <figcaption>
+        <span data-bind="average_salary">$43,900</span>
+      </figcaption>
+    </figure>
+
+  </div>
+
+</section>
+
+<section class="section section-card_container-school">
+
+  <div class="container picc-accordion">
+    <div>
+      <h1 class="search_category">
+        <a aria-expanded="false" aria-controls="selectivity-content">
+          Selectivity
+        </a>
+      </h1>
+
+      <div id="selectivity-content" aria-hidden="true">
+        <p>Text here</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container picc-accordion">
+    <div>
+      <h1 class="search_category">
+        <a aria-expanded="false" aria-controls="graduation-content">
+          Graduation &amp; Retention
+        </a>
+      </h1>
+
+      <div id="graduation-content" aria-hidden="true">
+        <p>Text here</p>
+      </div>
+    </div>
   </div>
 
 </section>

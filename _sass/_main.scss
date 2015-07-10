@@ -66,7 +66,8 @@ a {
     padding-bottom: $base-padding;
   }
 
-  > div > div {
+  > div > div,
+  .contained {
     background-color: $white;
     border-radius: 0.4em;
     margin-top: $base-padding;
@@ -388,10 +389,40 @@ a {
   }
 }
 
-
 // Individual school pages
 //============================================
 
 .school-section {
   border-bottom: $regular-border-size solid $base-border-color;
+  @include outer-container();
+
+  h1 {
+    padding-top: 0;
+  }
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    font-size: font-size($h4);
+    font-weight: normal;
+  }
+
+  .meters {
+    text-align: center;
+  }
+
+  .school-map {
+    height: 250px;
+  }
+
+  @include respond-to(medium-up) {
+    .school-heading {
+      @include span-columns(7);
+    }
+    .school-map {
+      @include span-columns(5);
+    }
+  }
 }
+
