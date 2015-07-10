@@ -102,6 +102,36 @@ a {
 
   background-color: $secondary-background-color;
   color: $white;
+
+  @include respond-to(medium-up) {
+    border-radius: 0 0 $base-border-radius $base-border-radius;
+    padding-bottom: 14px;
+
+    h1 {
+      @include font-size($h1);
+      padding: 0;
+    }
+
+    .button-wizard {
+      height: 60px;
+      padding-top: 0.8em;
+    }
+
+    .section-home-start-group {
+      display: table;
+      width: 100%;
+    }
+
+    .section-home-start-group-left {
+      display: table-cell;
+      padding-right: 8px;
+    }
+
+    .section-home-start-group-right {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
 }
 
 .section-home-facts {
@@ -109,8 +139,13 @@ a {
 
   li {
     border-bottom: $thin-border-size solid $base-border-color;
+    display: inline-block;
     margin: $base-padding $base-padding-extra;
     padding-bottom: $base-padding;
+
+    @include respond-to(tiny-up) {
+      border-bottom: none;
+    }
 
     &:last-of-type {
       border-bottom: none;
@@ -141,6 +176,11 @@ a {
   @extend .section-card_container;
 
   background-color: $tertiary-background-color;
+  @include span-columns(12);
+
+  @include respond-to(medium-up) {
+    @include span-columns(6);
+  }
 
   img {
     @extend .new_line;
@@ -153,6 +193,10 @@ a {
   ul {
     padding-bottom: ($base-padding + 0.5em);
 
+    @include respond-to(tiny-up) {
+      text-align: left;
+    }
+
     li {
       padding: ($base-padding-lite + 0.1em) $base-padding-extra ($base-padding / 1.5);
       border-bottom: $thin-border-size solid $base-border-color;
@@ -162,12 +206,45 @@ a {
       }
     }
   }
+
+  @include respond-to(tiny-up) {
+    .section-home-numbers-group {
+      display: table;
+      width: 100%;
+    }
+
+    .section-home-numbers-group-left {
+      display: table-cell;
+      padding-right: 8px;
+    }
+
+    .section-home-numbers-group-right {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
 }
 
 .section-home-paying {
   @extend .centered;
+  @extend .section-card_container;
+  @include span-columns(12);
+  padding-top: 0;
 
   > div > div {
+    margin-top: 0;
+  }
+
+  @include respond-to(medium-up) {
+    @include span-columns(6);
+    padding-top: $base-padding;
+
+    > div > div {
+      margin-top: $base-padding;
+    }
+  }
+
+  .section-home-paying-buttons {
     margin-right: auto;
     margin-left: auto;
     max-width: 300px;
@@ -200,6 +277,10 @@ a {
     background-color: $mid-gray;
     height: auto;
     width: 100%;
+
+    @include respond-to(medium-up) {
+      width: 400px;
+    }
   }
 
   figcaption {
@@ -211,6 +292,19 @@ a {
   }
 }
 
+.home-splash {
+  background: url(../img/unsplash_placeholder.jpg) center center no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: $splash-height;
+  //TODO add query that doesn't load image at small sizes
+  //right now it is just covered, but still exists
+}
+
+.home-bg-gray {
+  background-color: $tertiary-background-color;
+}
+
 
 // Search form
 // For styles that are specific to 
@@ -219,13 +313,34 @@ a {
 //============================================
 
 .search_form {
+  background-color: $white;
+  border-radius: $base-border-radius $base-border-radius 0 0;
   padding-top: 0.4em;
+  margin-top: -$splash-height;
+
+  @include respond-to(medium-up) {
+    margin-top: (-$splash-height + $base-padding);
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 650px;
+    padding-top: $base-padding;
+    padding-bottom: $base-padding;
+
+    .large_heading {
+      padding-top: $base-padding-lite;
+      text-align: center;
+    }
+  }
 
   p {
     @extend .supporting_copy;
     padding-top: 0.3em;
     padding-bottom: $base-padding;
-  } 
+
+    @include respond-to(medium-up) {
+      text-align: center;
+    }
+  }
 }
 
 .search_form-submit {
