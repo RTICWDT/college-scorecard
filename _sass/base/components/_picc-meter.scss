@@ -1,12 +1,10 @@
 picc-meter {
+  background-color: $light-gray;
   display: block;
-  position: relative;
-
-  max-width: 125px;
   height: 180px;
+  max-width: 125px;
   margin: 0 auto;
-
-  background-color: #EAEAEA; // FIXME
+  position: relative;
 
   .picc-meter-bar {
     position: absolute;
