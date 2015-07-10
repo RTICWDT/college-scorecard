@@ -223,9 +223,19 @@ a {
 .section-home-paying {
   @extend .section-card_container;
   @include span-columns(12);
+  padding-top: 0;
+
+  > div > div {
+    margin-top: 0;
+  }
 
   @include respond-to(medium-up) {
     @include span-columns(6);
+    padding-top: $base-padding;
+
+    > div > div {
+      margin-top: $base-padding;
+    }
   }
 
   .section-home-paying-buttons {
@@ -305,6 +315,7 @@ a {
     padding-bottom: $base-padding;
 
     .large_heading {
+      padding-top: $base-padding-lite;
       text-align: center;
     }
   }
