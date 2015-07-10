@@ -4,14 +4,14 @@ picc-accordion,
   $button-size: 34px;
   $button-margin: 9px;
 
+  @include transition(height 1s linear);
+
   display: block;
   overflow: hidden;
   min-height: $button-size + ($button-margin * 2);
   @include respond-to(tiny-up) {
     min-height: $button-size + ($button-margin * 3);
   }
-
-  @include transition(height 1s linear);
 
   button[aria-controls],
   a[aria-controls] {
@@ -30,12 +30,13 @@ picc-accordion,
     color: #999;
     background: #fff;
     border: 1px solid #e3e3e3;
-    border-radius: $button-size;
+    border-radius: 500px;
     display: inline-block;
     font-size: $button-size;
     font-weight: normal;
     height: $button-size;
-    line-height: 1;
+    line-height: 1.075;
+    padding-left: 0.02em;
     position: absolute;
     text-align: center;
     top: $button-margin;
@@ -44,7 +45,7 @@ picc-accordion,
   }
 
   a[aria-controls]:after {
-    content: '+';
+    content: '\002B';
     top: -2px;
   }
 
