@@ -1,15 +1,10 @@
 figure.meter {
+  @extend .centered;
+
   display: inline-block;
+  margin-bottom: 2em;
   margin-left: .5em;
   margin-right: .5em;
-  margin-bottom: 2em;
-
-  text-align: center;
-
-  @include respond-to(medium-up) {
-    width: 150px;
-    margin-bottom: 0;
-  }
 
   .figure-heading,
   figcaption {
@@ -24,6 +19,11 @@ figure.meter {
   figcaption {
     display: block;
     padding-top: .4em;
+  }
+
+  @include respond-to(medium-up) {
+    width: 150px;
+    margin-bottom: 0;
   }
 }
 
