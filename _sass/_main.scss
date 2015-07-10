@@ -269,6 +269,10 @@ a {
     background-color: $mid-gray;
     height: auto;
     width: 100%;
+
+    @include respond-to(medium-up) {
+      width: 400px;
+    }
   }
 
   figcaption {
