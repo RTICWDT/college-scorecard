@@ -53,7 +53,6 @@ a {
 .section {
   padding-top: $base-padding;
   padding-bottom: $base-padding;
-  text-align: center;
 
   h1 {
     padding-bottom: $base-padding-lite;
@@ -77,7 +76,6 @@ a {
 
 .section-card_container-school {
   @extend .section-card_container;
-  text-align: left;
 
   h1 {
     padding: 0;
@@ -100,6 +98,8 @@ a {
 //============================================
 
 .section-home-start {
+  @extend .centered;
+
   background-color: $secondary-background-color;
   color: $white;
 
@@ -135,6 +135,8 @@ a {
 }
 
 .section-home-facts {
+  @extend .centered;
+
   li {
     border-bottom: $thin-border-size solid $base-border-color;
     display: inline-block;
@@ -150,7 +152,7 @@ a {
     }
   }
 
-  span {
+  strong {
     color: $lime-green;
     display: block;
 
@@ -159,6 +161,7 @@ a {
       font-weight: bold;
       line-height: 1;
     }
+
     &:nth-of-type(2) {
       @include font-size($h1);
       line-height: 0.9;
@@ -169,7 +172,9 @@ a {
 }
 
 .section-home-numbers {
+  @extend .centered;
   @extend .section-card_container;
+
   background-color: $tertiary-background-color;
   @include span-columns(12);
 
@@ -221,6 +226,7 @@ a {
 }
 
 .section-home-paying {
+  @extend .centered;
   @extend .section-card_container;
   @include span-columns(12);
   padding-top: 0;
@@ -248,6 +254,8 @@ a {
 }
 
 .section-home-decision {
+  @extend .centered;
+
   background-color: $quaternary-background-color;
   color: $white;
   padding-right: 0;
@@ -336,6 +344,8 @@ a {
 }
 
 .search_form-submit {
+  @extend .centered;
+
   border-top: $thick-border-size solid $base-border-color;
   padding-top: $base-padding-large;
   text-align: center;
@@ -345,7 +355,7 @@ a {
   }
 
   div {
-    @extend .new_line;
+    // @extend .new_line;
   }
 }
 
@@ -354,11 +364,6 @@ a {
 //============================================
 
 .results {
-  section,
-  div {
-    text-align: left;
-  }
-
   div.container {
     padding-bottom: $base-padding;
 
@@ -386,13 +391,6 @@ a {
 
 // Individual school pages
 //============================================
-
-.school {
-  section,
-  div {
-    text-align: left;
-  }
-}
 
 .school-section {
   border-bottom: $regular-border-size solid $base-border-color;
