@@ -19,7 +19,11 @@
 }
 
 .guide-typography {
-  @include span-columns(4);
+  @include span-columns(12);
+
+  @include respond-to(huge-up) {
+    @include span-columns(4);
+  }
 
   .link-expand,
   .link-more {
@@ -44,7 +48,13 @@
   }
 
   + .wide {
-    @include span-columns(8);
+    @include span-columns(12);
+    padding-top: $base-padding;
+
+    @include respond-to(huge-up) {
+      @include span-columns(8);
+      padding-top: 0;
+    }
   }
 }
 
