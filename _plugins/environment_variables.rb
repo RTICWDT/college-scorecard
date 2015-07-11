@@ -11,9 +11,9 @@ module Jekyll
       if ENV['API_KEY']
         site.config['api']['key'] = ENV['API_KEY']
       end
-      puts "API: ------------------"
-      puts site.config['api']
-      puts "------------------"
+      # puts "API: ------------------"
+      # puts site.config['api']
+      # puts "------------------"
     end
 
   end
