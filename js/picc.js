@@ -2,6 +2,16 @@
 
   var picc = exports.picc = {};
 
+  var SPECIAL_DESIGNATIONS = {
+    aanipi:               'Alaskan American/Native Indian/Pacific Islander',
+    hispanic:             'Hispanic',
+    historically_black:   'Historically Black',
+    predominantly_black:  'Predominantly Black',
+    tribal:               'Tribal',
+    women_only:           'Women Only',
+    men_only:             'Men Only'
+  };
+
   /**
    * This is our format generator. Its methods are format generators for
    * specific types of values, and they take a key in the data object to
@@ -24,7 +34,7 @@
         key = picc.accessor(key);
         return function(d) {
           var value = key.call(this, d);
-          return (!value && empty)
+          return ((!value || isNaN(+value)) && empty)
             ? empty.call(d)
             : fmt.call(d, +value, key);
         };
@@ -79,20 +89,21 @@
         '1': 'Public',
         '2': 'Private non-profit',
         '3': 'Private for-profit'
-      }, 'unknown')),
+      }, 'control unknown')),
 
       // format.preddeg('deg')({deg: 2}) === '2-year'
       // format.preddeg('deg')({deg: 3}) === '4-year'
       preddeg: formatter(map({
         '2': '2-year',
-        '3': '4-year'
-      }), ''),
+        '3': '4-year',
+        // '4': '???'
+      }, 'other degree designation')),
 
       sizeCategory: formatter(range([
         [0, 2000, 'Small'],
         [2000, 15000, 'Medium'],
         [15000, Infinity, 'Large']
-      ])),
+      ]), 'size unknown'),
 
       // format.locale('locale')({locale: 11}) === 'City: Large'
       locale: formatter(map({
@@ -108,7 +119,27 @@
         '41': 'Rural: Fringe',
         '42': 'Rural: Distant',
         '43': 'Rural: Remote'
-      }, 'unknown'))
+      }, 'locale unknown')),
+
+      specialDesignation: function(d) {
+        var designations = [];
+
+        if (+d.women_only) {
+          designations.push(SPECIAL_DESIGNATIONS.women_only);
+        } else if (+d.men_only) {
+          designations.push(SPECIAL_DESIGNATIONS.men_only);
+        }
+
+        if (d.minority_serving) {
+          for (var key in SPECIAL_DESIGNATIONS) {
+            if (+d.minority_serving[key]) {
+              designations.push(SPECIAL_DESIGNATIONS[key]);
+            }
+          }
+        }
+
+        return designations.join(', ');
+      }
     };
   })();
 

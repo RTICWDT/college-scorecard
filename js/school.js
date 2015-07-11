@@ -20,6 +20,11 @@
     years: format.preddeg('common_degree'),
     size_category: format.sizeCategory('size'),
 
+    // this is a direct accessor because some designations
+    // (e.g. `women_only`) are at the object root, rather than
+    // nested in `minority_serving`.
+    special_designation: format.specialDesignation,
+
     average_cost: format.dollars('avg_net_price'),
     average_cost_meter: {
       '@max':     d3.functor(100000),
