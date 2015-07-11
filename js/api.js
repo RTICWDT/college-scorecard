@@ -4,7 +4,8 @@
 (function(exports) {
   
   var API = {
-    url: '{{ site.api.baseurl }}'
+    url: '{{ site.api.baseurl }}',
+    key: '{{ site.api.key }}'
   };
 
   API.get = function(uri, params, done) {
@@ -13,12 +14,15 @@
       done = params;
     } else if (params) {
       if (typeof params === 'object') {
+        if (API.key) params.api_key = API.key;
         params = querystring.stringify(params);
+      } else if (API.key) {
+        params += '&api_key=' + API.key;
       }
       uri = join([uri, params], '?');
     }
     var url = join([API.url, uri], '/');
-    console.debug('[API] getting: "%s"', url);
+    console.debug('[API] get: "%s"', url);
     return d3.json(url, done);
   };
 
