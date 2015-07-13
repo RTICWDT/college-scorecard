@@ -1,0 +1,77 @@
+picc-range {
+  $label-offset: 1em;
+  $label-height: 1em;
+  $label-margin: $label-offset + $label-height;
+  $label-width: 5em;
+
+  background-color: $light-gray;
+  display: block;
+  height: 8px;
+  margin-top: $label-margin;
+  margin-bottom: $label-margin + 1em;
+  position: relative;
+  max-width: 500px;
+
+  .picc-range-bar {
+    background-color: $emerald-green;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: left .5s, right .5s;
+  }
+
+  .picc-range-label {
+    position: absolute;
+    top: 0;
+    height: 16px;
+
+    transition: left .5s;
+
+    span {
+      position: absolute;
+      top: $label-height;
+      width: $label-width;
+    }
+
+    &.picc-range-label-min,
+    &.picc-range-label-max,
+    &.picc-range-label-middle {
+      color: $dark-gray;
+    }
+
+    &.picc-range-label-max,
+    &.picc-range-label-lower {
+      span {
+        right: 0;
+        text-align: right;
+      }
+    }
+
+    &.picc-range-label-middle,
+    &.picc-range-label-lower,
+    &.picc-range-label-upper {
+      border: 1px solid black;
+    }
+
+    &.picc-range-label-middle {
+      border-width: 2px;
+      top: auto;
+      bottom: 0;
+      span {
+        bottom: 100%;
+        top: auto;
+        margin-left: -($label-width / 2);
+        text-align: center;
+      }
+    }
+
+    &.picc-range-label-lower,
+    &.picc-range-label-upper {
+      span {
+      }
+    }
+  }
+
+}
