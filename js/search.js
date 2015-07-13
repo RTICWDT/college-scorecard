@@ -19,7 +19,7 @@
   var format = picc.format;
 
   resultsRoot.classList.add('js-loading');
-  API.search(values, function(error, data) {
+  picc.API.search(values, function(error, data) {
     resultsRoot.classList.remove('hidden');
     resultsRoot.classList.remove('js-loading');
 

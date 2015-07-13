@@ -45,7 +45,7 @@
     }
   };
 
-  API.getSchool(id, function(error, school) {
+  picc.API.getSchool(id, function(error, school) {
     if (error) {
       return showError(error);
     }

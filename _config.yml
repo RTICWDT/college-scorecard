@@ -21,7 +21,6 @@ scripts:
   - components/picc-accordion.js
   - components/picc-meter.js
   - picc.js
-  - api.js
 
 stylesheets:
   - styles.css
