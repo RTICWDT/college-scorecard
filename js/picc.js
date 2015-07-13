@@ -2,6 +2,13 @@
 
   var picc = exports.picc = {};
 
+  /*
+   * This is a dictionary for the various "special designation"
+   * columns. The race/ethnicity ones are all nested under the
+   * `minority_serving` property, whereas the `women_only` and
+   * `men_only` are top-level properties of each school API response
+   * object.
+   */
   var SPECIAL_DESIGNATIONS = {
     aanipi:               'Alaskan American/Native Indian/Pacific Islander',
     hispanic:             'Hispanic',
