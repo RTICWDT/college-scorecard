@@ -1,0 +1,19 @@
+footer {
+  @include font-size($h6);
+  background-color: #eeeeee;
+  height: 60px;
+  text-align: center;
+  padding-top: 22px;
+  @include respond-to(tiny-up) {
+    @include font-size($h5);
+    height: 100px;
+    padding-top: 41px;
+  }
+
+  p {
+    color: $dark-gray;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+}

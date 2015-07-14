@@ -19,7 +19,11 @@ scripts:
   - vendor/querystring.min.js
   - vendor/document-register-element.min.js
   - components/picc-accordion.js
-  - api.js
+  - components/picc-meter.js
+  - picc.js
+
+stylesheets:
+  - styles.css
 
 # API configuration
 api:

@@ -1,0 +1,60 @@
+---
+layout: default
+meter_types:
+  cost:
+    title: Cost
+    value: .38
+    average: .4
+    value_string: $38,000
+  grad_rate:
+    title: Graduation Rate
+    average: .5
+    value: .68
+    value_string: 68%
+  accept_rate:
+    title: Acceptance Rate
+    average: .4
+    value: .51
+    value_string: 51%
+  salary:
+    title: Salary
+    average: .7
+    value: .8
+    value_string: $80,000
+---
+<section class="guide">
+
+  <div class="guide-container">
+    {% for meter_type in page.meter_types %}
+      {% assign type = meter_type[0] %}
+      {% assign meter = meter_type[1] %}
+    <figure class="meter">
+      <h2>{{ meter.title }}</h2>
+      <picc-meter class="{{ type }}"
+        value="{{ meter.value|default:.25 }}"
+        average="{{ meter.average|default:.5 }}">
+      </picc-meter>
+      <figcaption>
+        {{ meter.value_string|default:meter.value }}
+      </figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+
+  <div class="guide-container">
+
+    <figure class="meter">
+      <h2>max: 100, value: 60, avg: 50</h2>
+      <picc-meter max="100" value="60" average="50">
+      </picc-meter>
+    </figure>
+
+    <figure class="meter">
+      <h2>max: 50k, value: 40k, avg: 20k</h2>
+      <picc-meter max="50000" value="40000" average="20000">
+      </picc-meter>
+    </figure>
+
+  </div>
+
+</section>

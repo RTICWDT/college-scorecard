@@ -1,14 +1,17 @@
 picc-accordion,
 .picc-accordion,
-[is="picc-accordion"] {
+[is='picc-accordion'] {
   $button-size: 34px;
   $button-margin: 9px;
+
+  @include transition(height 1s linear);
 
   display: block;
   overflow: hidden;
   min-height: $button-size + ($button-margin * 2);
-
-  @include transition(height 1s linear);
+  @include respond-to(tiny-up) {
+    min-height: $button-size + ($button-margin * 3);
+  }
 
   button[aria-controls],
   a[aria-controls] {
@@ -24,30 +27,30 @@ picc-accordion,
 
   a[aria-controls]:after,
   .picc-accordion-toggle {
-    position: absolute;
-    font-size: $button-size;
-    line-height: $button-size * 1.05;
-    font-weight: normal;
-    display: inline-block;
-    position: absolute;
-    top: $button-margin;
-    right: 0; // XXX
     color: #999;
     background: #fff;
-    width: $button-size;
-    height: $button-size;
-    border-radius: $button-size;
-    text-align: center;
     border: 1px solid #e3e3e3;
+    border-radius: 500px;
+    display: inline-block;
+    font-size: $button-size;
+    font-weight: normal;
+    height: $button-size;
+    line-height: 1.075;
+    padding-left: 0.02em;
+    position: absolute;
+    text-align: center;
+    top: $button-margin;
+    right: 0; // XXX
+    width: $button-size;
   }
 
   a[aria-controls]:after {
-    content: "+";
-    top: 0;
+    content: '\002B';
+    top: -2px;
   }
 
-  &[data-expanded="true"] a[aria-controls]:after {
-    content: "\2212";
+  &[data-expanded='true'] a[aria-controls]:after {
+    content: '\2212';
   }
 
   a[aria-controls]:hover:after {
@@ -61,4 +64,8 @@ picc-accordion,
   &[open] .picc-accordion-content {
     display: block;
   }
+}
+
+.picc-accordion-div {
+  padding-top: ($base-padding / 2);
 }

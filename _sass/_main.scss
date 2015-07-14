@@ -1,4 +1,4 @@
-// Utility classes (hopefully temporary)
+// Utility classes
 //============================================
 
 .test {
@@ -22,32 +22,8 @@
   overflow: hidden; 
 }
 
-.group_inline {
-  display: table;
-  width: 100%;
-}
-
-.group_inline-left {
-  display: table-cell;
-  padding-right: 8px;
-}
-
-.group_inline-right {
-  display: table-cell;
-  vertical-align: middle;
-
-  .button-add {
-    margin-top: 17px;
-  }
-}
-
 .new_line {
   display: block;
-}
-
-.light_on_dark {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 
@@ -77,22 +53,21 @@ a {
 .section {
   padding-top: $base-padding;
   padding-bottom: $base-padding;
-  text-align: center;
 
   h1 {
     padding-bottom: $base-padding-lite;
   }
 }
 
-.section-card {
-  background-color: $tertiary-background-color;
+.section-card_container {
 
   h1 {
     padding-top: $base-padding;
     padding-bottom: $base-padding;
   }
 
-  > div > div {
+  > div > div,
+  .contained {
     background-color: $white;
     border-radius: 0.4em;
     margin-top: $base-padding;
@@ -100,17 +75,113 @@ a {
   }
 }
 
+.section-card_container-school {
+  @extend .section-card_container;
 
-// Sections, Home
+  h1 {
+    padding: 0;
+  }
+
+  > div > div {
+    border: $thin-border-size solid $base-border-color;
+    margin-bottom: 0;
+    padding: $base-padding;
+  }
+}
+
+.section-card_container-results {
+  @extend .section-card_container;
+  background-color: $tertiary-background-color;
+}
+
+
+// Home
 //============================================
 
 .section-home-start {
+  @extend .centered;
+
   background-color: $secondary-background-color;
   color: $white;
+
+  @include respond-to(medium-up) {
+    border-radius: 0 0 $base-border-radius $base-border-radius;
+    padding-bottom: 14px;
+
+    h1 {
+      @include font-size($h1);
+      padding: 0;
+    }
+
+    .button-wizard {
+      height: 60px;
+      padding-top: 0.8em;
+    }
+
+    .section-home-start-group {
+      display: table;
+      width: 100%;
+    }
+
+    .section-home-start-group-left {
+      display: table-cell;
+      padding-right: 8px;
+    }
+
+    .section-home-start-group-right {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+}
+
+.section-home-facts {
+  @extend .centered;
+
+  li {
+    border-bottom: $thin-border-size solid $base-border-color;
+    display: inline-block;
+    margin: $base-padding $base-padding-extra;
+    padding-bottom: $base-padding;
+
+    @include respond-to(tiny-up) {
+      border-bottom: none;
+    }
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+
+  strong {
+    color: $lime-green;
+    display: block;
+
+    &:first-of-type {
+      @include font-size(5);
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    &:nth-of-type(2) {
+      @include font-size($h1);
+      line-height: 0.9;
+      padding-bottom: $base-padding-lite;
+    }
+  }
+
 }
 
 .section-home-numbers {
-  @extend .section-card;
+  @extend .centered;
+  @extend .section-card_container;
+
+  background-color: $tertiary-background-color;
+  @include span-columns(12);
+
+  @include respond-to(medium-up) {
+    @include span-columns(6);
+  }
 
   img {
     @extend .new_line;
@@ -121,10 +192,14 @@ a {
   }
 
   ul {
-    padding-bottom: $base-padding-extra;
+    padding-bottom: ($base-padding + 0.5em);
+
+    @include respond-to(tiny-up) {
+      text-align: left;
+    }
 
     li {
-      padding: $base-padding-lite+0.2em $base-padding-extra $base-padding;
+      padding: ($base-padding-lite + 0.1em) $base-padding-extra ($base-padding / 1.5);
       border-bottom: $thin-border-size solid $base-border-color;
 
       &:first-of-type {
@@ -132,10 +207,45 @@ a {
       }
     }
   }
+
+  @include respond-to(tiny-up) {
+    .section-home-numbers-group {
+      display: table;
+      width: 100%;
+    }
+
+    .section-home-numbers-group-left {
+      display: table-cell;
+      padding-right: 8px;
+    }
+
+    .section-home-numbers-group-right {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
 }
 
 .section-home-paying {
+  @extend .centered;
+  @extend .section-card_container;
+  @include span-columns(12);
+  padding-top: 0;
+
   > div > div {
+    margin-top: 0;
+  }
+
+  @include respond-to(medium-up) {
+    @include span-columns(6);
+    padding-top: $base-padding;
+
+    > div > div {
+      margin-top: $base-padding;
+    }
+  }
+
+  .section-home-paying-buttons {
     margin-right: auto;
     margin-left: auto;
     max-width: 300px;
@@ -145,6 +255,8 @@ a {
 }
 
 .section-home-decision {
+  @extend .centered;
+
   background-color: $quaternary-background-color;
   color: $white;
   padding-right: 0;
@@ -157,8 +269,8 @@ a {
     padding-left: $base-padding;
 
     @include respond-to(tiny-up) {
-      padding-right: $base-padding * 2.2;
-      padding-left: $base-padding * 2.2;
+      padding-right: ($base-padding * 2.2);
+      padding-left: ($base-padding * 2.2);
     }
   }
 
@@ -166,6 +278,10 @@ a {
     background-color: $mid-gray;
     height: auto;
     width: 100%;
+
+    @include respond-to(medium-up) {
+      width: 400px;
+    }
   }
 
   figcaption {
@@ -177,99 +293,17 @@ a {
   }
 }
 
-
-// Header
-//============================================
-
-header {
-  color: $white;
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
+.home-splash {
+  background: url(../img/unsplash_placeholder.jpg) center center no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: $splash-height;
+  //TODO add query that doesn't load image at small sizes
+  //right now it is just covered, but still exists
 }
 
-.banner {
-  background: $dark-blue;
-  height: 25px;
-
-  > div {
-    @include padded-container();
-    position: relative;
-  } 
-
-  a {
-    @include font-size(0.70);
-
-    color: inherit;
-    font-weight: bold;
-    letter-spacing: 0.4px;
-    position: absolute;
-    text-decoration: none;
-    text-transform: uppercase;
-    top: 4px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
-    span.ed-logo {
-      background: url(../img/US-DeptOfEducation-Seal.svg);
-      background-repeat: no-repeat;
-      background-size: 85%;
-      display: inline-block;
-      height: 20px;
-      margin-right: em(2);
-      vertical-align: -7px;
-      width: 20px;
-    }
-  }
-}
-
-.title {
-  background: $mid-blue;
-  height: 59px;
-  @include respond-to(tiny-up) {
-      height: 76px;
-    }
-
-  > div {
-    @include padded-container();
-  }
-
-  h1 {
-    @extend .title_heading;
-    font-weight: 400;
-    line-height: 1;
-    @include respond-to(tiny-up) {
-      line-height: 0.7;
-    }
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-}
-
-
-// Footer
-//============================================
-
-footer {
-  @include font-size($h6);
-  background-color: #eeeeee;
-  height: 60px;
-  text-align: center;
-  padding-top: 22px;
-  @include respond-to(tiny-up) {
-    @include font-size($h5);
-    height: 100px;
-    padding-top: 41px;
-  }
-
-  p {
-    color: $dark-gray;
-    font-weight: 600;
-    letter-spacing: 0.4px;
-    text-transform: uppercase;
-  }
+.home-bg-gray {
+  background-color: $tertiary-background-color;
 }
 
 
@@ -280,16 +314,39 @@ footer {
 //============================================
 
 .search_form {
+  background-color: $white;
+  border-radius: $base-border-radius $base-border-radius 0 0;
   padding-top: 0.4em;
+  margin-top: -$splash-height;
+
+  @include respond-to(medium-up) {
+    margin-top: (-$splash-height + $base-padding);
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 650px;
+    padding-top: $base-padding;
+    padding-bottom: $base-padding;
+
+    .large_heading {
+      padding-top: $base-padding-lite;
+      text-align: center;
+    }
+  }
 
   p {
     @extend .supporting_copy;
     padding-top: 0.3em;
     padding-bottom: $base-padding;
-  } 
+
+    @include respond-to(medium-up) {
+      text-align: center;
+    }
+  }
 }
 
 .search_form-submit {
+  @extend .centered;
+
   border-top: $thick-border-size solid $base-border-color;
   padding-top: $base-padding-large;
   text-align: center;
@@ -299,31 +356,15 @@ footer {
   }
 
   div {
-    @extend .new_line;
+    // @extend .new_line;
   }
 }
 
-// Individual school pages
-//============================================
 
-.school {
-  section,
-  div {
-    text-align: left;
-  }
-}
-
-.school-section {
-  border-bottom: $regular-border-size solid $base-border-color;
-}
-
-
-// Search results
+// Search results page
 //============================================
 
 .results {
-  @extend .school;
-
   div.container {
     padding-bottom: $base-padding;
 
@@ -341,16 +382,47 @@ footer {
     margin-bottom: $base-padding;
     padding-bottom: $base-padding;
   }
+
+  h1 {
+    padding-top: 0;
+    padding-bottom: $base-padding-lite;
+  }
 }
 
-.section-card .results-card h1 {
-  padding-top: 0;
-  padding-bottom: $base-padding-lite;
+// Individual school pages
+//============================================
+
+.school-section {
+  border-bottom: $regular-border-size solid $base-border-color;
+  @include outer-container();
+
+  h1 {
+    padding-top: 0;
+  }
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    font-size: font-size($h4);
+    font-weight: normal;
+  }
+
+  .meters {
+    text-align: center;
+  }
+
+  .school-map {
+    height: 250px;
+  }
+
+  @include respond-to(medium-up) {
+    .school-heading {
+      @include span-columns(7);
+    }
+    .school-map {
+      @include span-columns(5);
+    }
+  }
 }
-
-
-
-
-
-
 

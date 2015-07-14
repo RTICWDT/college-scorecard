@@ -14,16 +14,25 @@
 
 // Extends
 @import 'extends/buttons';
+@import 'extends/centered';
 
 // Typography and Elements
 @import 'buttons';
 @import 'fonts';
 @import 'forms';
-@import 'styleguide';
 @import 'typography';
 
-// general-purpose classes
-@import 'loadable';
+// General-Purpose Classes
+@import 'general/inline';
+@import 'general/loadable';
+
+// Blocks
+@import 'blocks/footer';
+@import 'blocks/header';
+@import 'blocks/styleguide';
 
 // Web Components
 @import 'components/components';
+
+// Charts and Figures
+@import 'figures';
