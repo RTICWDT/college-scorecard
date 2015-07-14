@@ -1,34 +1,3 @@
 # Project Inform College Choice
-We should say something about this project here.
 
-## Installation
-This site is made with [Jekyll]. Once you've got [Ruby] on your computer, you
-can run:
-
-```sh
-gem install github-pages
-```
-
-(Note: depending on how Ruby was installed, you may need to prefix the above
-command with `sudo`.)
-
-To start up the local server, run:
-
-```sh
-jekyll serve --baseurl='' -w
-```
-
-Then visit [http://localhost:4000](http://localhost:4000) to view it. The `-w`
-(or `--watch`) flag tells Jekyll to rebuild the relevant pages when you edit
-the source files.
-
-## Frontend Tools
-- Styles: we're using [Sass], which is bundled with [Jekyll].
-- Font: [Montserrat] hosted on [Google Fonts](https://www.google.com/fonts/).
-- Charts will be rendered with [D3].
-
-[Montserrat]: https://www.google.com/fonts/specimen/Montserrat
-[Jekyll]: http://jekyllrb.com/
-[Sass]: http://sass-lang.com/
-[D3]: http://d3js.org/
-[Ruby]: https://www.ruby-lang.org/
+The `18f-pages-staging` branch is deprecated. Please push to [master](https://github.com/18F/college-choice/tree/master).
