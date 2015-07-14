@@ -1,7 +1,9 @@
-require "rack/jekyll"
+require 'vienna'
 
+ENV['AUTH'] ||= ""
+user, pass = ENV['AUTH'].split(',')
 use Rack::Auth::Basic do |username, password|
-  username == 'test' and password == 'test'
+  username == user and password == pass
 end
 
-run Rack::Jekyll.new
+run Vienna::Application.new('_site')

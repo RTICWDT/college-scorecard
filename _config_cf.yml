@@ -1,0 +1,3 @@
+# configuration for deploying on cloud foundry
+
+baseurl: "" # the subpath of your site, e.g. /blog
