@@ -392,9 +392,22 @@ a {
 // Individual school pages
 //============================================
 
+.school-bg {
+  background-color: $mid-gray;
+}
+
+.school-left {
+  @include span-columns(8);
+}
+
+.school-right {
+  @include span-columns(4);
+  @include omega();
+}
+
 .school-section {
-  border-bottom: $regular-border-size solid $base-border-color;
-  @include outer-container();
+  //border-bottom: $regular-border-size solid $base-border-color;
+  //@include outer-container();
 
   h1 {
     padding-top: 0;
@@ -416,13 +429,13 @@ a {
     height: 250px;
   }
 
-  @include respond-to(medium-up) {
-    .school-heading {
-      @include span-columns(7);
-    }
-    .school-map {
-      @include span-columns(5);
-    }
-  }
+  // @include respond-to(medium-up) {
+  //   .school-heading {
+  //     @include span-columns(7);
+  //   }
+  //   .school-map {
+  //     @include span-columns(5);
+  //   }
+  // }
 }
 
