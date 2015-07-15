@@ -396,6 +396,10 @@ a {
   background-color: $mid-gray;
 }
 
+.school-back {
+  padding-top: $base-padding;
+}
+
 .school-left {
   @include span-columns(8);
 }
