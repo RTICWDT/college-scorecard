@@ -1,6 +1,17 @@
 .guide {
   padding-top: $base-padding;
+  padding-bottom: $base-padding-extra;
   text-align: left;
+
+  h2 a {
+    color: $green;
+
+    &:hover,
+    &:focus {
+      color: $darker-green;
+      text-decoration: none;
+    }
+  }
 
   > section {
     margin-top: $base-padding-extra;
