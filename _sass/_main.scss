@@ -394,6 +394,7 @@ a {
 
 .school-bg {
   background-color: $mid-gray;
+  padding-bottom: $base-padding-extra;
 }
 
 .school-back {
@@ -412,8 +413,6 @@ a {
 }
 
 .school-section {
-  //border-bottom: $regular-border-size solid $base-border-color;
-  //@include outer-container();
 
   h1 {
     padding-top: 0;
@@ -447,6 +446,10 @@ a {
       @include span-columns(5 of 12);
       @include omega();
     }
+  }
+
+  .school-two_col {
+    @include span-columns(12 of 12);
   }
 }
 
