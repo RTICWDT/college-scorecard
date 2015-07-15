@@ -1,4 +1,7 @@
+require 'rack/ssl-enforcer'
 require 'vienna'
+
+use Rack::SslEnforcer
 
 ENV['AUTH'] ||= ""
 user, pass = ENV['AUTH'].split(',')
