@@ -402,14 +402,17 @@ a {
 }
 
 .school-left {
-  @include span-columns(9);
+  @include respond-to(medium-up) {
+    @include span-columns(9);
+  }
 }
 
 .school-right {
-  @include span-columns(3);
-  @include omega();
-
-  margin-top: ($base-padding-extra * 2);
+  @include respond-to(medium-up) {
+    @include span-columns(3);
+    @include omega();
+    margin-top: ($base-padding-extra * 2);
+  }
 }
 
 .school-section {
@@ -426,26 +429,29 @@ a {
     font-weight: normal;
   }
 
+  .school-heading {
+    h1 {
+      padding-bottom: $base-padding-lite;
+    }
+    @include respond-to(medium-up) {
+      @include span-columns(7 of 12);
+    }
+  }
+
+  .school-map {
+    height: 250px;
+    @include respond-to(medium-up) {
+      @include span-columns(5 of 12);
+      @include omega();
+    }
+  }
+
   .school-meters {
     @include span-columns(12 of 12);
     border-top : $regular-border-size solid $base-border-color;
     margin-top: $base-padding;
     padding-top: $base-padding;
     text-align: center;
-  }
-
-  .school-map {
-    height: 250px;
-  }
-
-  @include respond-to(medium-up) {
-    .school-heading {
-      @include span-columns(7 of 12);
-    }
-    .school-map {
-      @include span-columns(5 of 12);
-      @include omega();
-    }
   }
 
   .school-two_col {
