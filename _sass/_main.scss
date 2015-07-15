@@ -429,13 +429,14 @@ a {
     height: 250px;
   }
 
-  // @include respond-to(medium-up) {
-  //   .school-heading {
-  //     @include span-columns(7);
-  //   }
-  //   .school-map {
-  //     @include span-columns(5);
-  //   }
-  // }
+  @include respond-to(medium-up) {
+    .school-heading {
+      @include span-columns(7 of 12);
+    }
+    .school-map {
+      @include span-columns(5 of 12);
+      @include omega();
+    }
+  }
 }
 
