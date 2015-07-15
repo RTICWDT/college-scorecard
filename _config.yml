@@ -20,6 +20,7 @@ scripts:
   - vendor/document-register-element.min.js
   - components/picc-accordion.js
   - components/picc-meter.js
+  - components/picc-range.js
   - picc.js
 
 stylesheets:
