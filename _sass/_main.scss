@@ -431,11 +431,11 @@ a {
 }
 
 .school-right {
+  margin-top: $base-padding;
   padding-left: $base-padding;
   padding-right: $base-padding;
 
   h2 {
-    @extend .h3;
     padding-bottom: $base-padding;
   }
 
@@ -460,6 +460,10 @@ a {
     padding-left: 0;
     padding-right: 0;
     margin-top: $base-padding;
+
+    h2 {
+      @include font-size($h3);
+    }
   }
 }
 
