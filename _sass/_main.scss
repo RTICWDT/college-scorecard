@@ -401,12 +401,14 @@ a {
 }
 
 .school-left {
-  @include span-columns(8);
+  @include span-columns(9);
 }
 
 .school-right {
-  @include span-columns(4);
+  @include span-columns(3);
   @include omega();
+
+  margin-top: ($base-padding-extra * 2);
 }
 
 .school-section {
@@ -425,7 +427,11 @@ a {
     font-weight: normal;
   }
 
-  .meters {
+  .school-meters {
+    @include span-columns(12 of 12);
+    border-top : $regular-border-size solid $base-border-color;
+    margin-top: $base-padding;
+    padding-top: $base-padding;
     text-align: center;
   }
 
