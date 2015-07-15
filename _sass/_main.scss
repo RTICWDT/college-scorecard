@@ -433,12 +433,33 @@ a {
 .school-right {
   padding-left: $base-padding;
   padding-right: $base-padding;
+
+  h2 {
+    @extend .h3;
+    padding-bottom: $base-padding;
+  }
+
+  img {
+    padding-bottom: $base-padding-lite;
+    width: 100%;
+  }
+
+  p {
+    @extend .supporting_copy;
+    padding-bottom: $base-padding-lite;
+  }
+
+  .link-more {
+    display: inline-block;
+    padding-top: $base-padding-lite;
+  }
+
   @include respond-to(medium-up) {
     @include span-columns(3);
     @include omega();
     padding-left: 0;
     padding-right: 0;
-    margin-top: ($base-padding-extra * 2);
+    margin-top: $base-padding;
   }
 }
 
