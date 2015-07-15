@@ -149,3 +149,12 @@ button {
     color: $darker-green;
   }
 }
+
+.special {
+  background-color: #f6e768;
+  display: inline-block;
+  line-height: 0.8;
+  margin-top: $base-padding;
+  padding: 0.2em;
+  text-transform: uppercase;
+}

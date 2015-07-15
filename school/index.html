@@ -22,132 +22,147 @@ body_scripts:
 </section>
 
 <!-- Search results -->
-<section id="school" class="section school hidden">
+<div class="school-bg">
 
-  <div class="container">
+  <div class="container school-back">
+    <a href="#" class="link-more"><i class="fa fa-chevron-left"></i> Back to search results</a>
+  </div>
 
-    <section class="section school-section">
+  <div class="container container-collapse section-card_container-school">
 
-      <div class="school-heading">
-        <h1 class="name">School Name</h1>
+    <div id="school" class="school-left school-section">
 
-        <h2 class="location">
-          <span data-bind="city">City</span>,
-          <span data-bind="state">State</span>
-        </h2>
+      <div class="container section contained-no-radius">
 
-        <h2 class="population">
-          <span data-bind="size_number">X</span> students
-        </h2>
+        <div class="school-heading">
+          <h1 class="name">School Name</h1>
 
-        <ul class="key-figures">
-          <li class="years">
-            <b data-bind="years">X</b>
-            <span>Years</span>
-          </li>
-          <li class="public-private">
-            <i class="fa fa-institution"></i>
-            <span data-bind="control">Public</span>
-          </li>
-          <li class="setting">
-            <i class="fa fa-building"></i>
-            <span data-bind="locale_name">Urban</span>
-          </li>
-          <li class="population">
-            <i class="fa fa-group"></i>
-            <span data-bind="size_category">Small</span>
-          </li>
-        </ul>
+          <h2 class="location">
+            <span data-bind="city">City</span>,
+            <span data-bind="state">State</span>
+          </h2>
 
-        <h3 data-bind="special_designation">
-          Special Designation
-        </h3>
+          <h2 class="population">
+            <span data-bind="size_number">X</span> students
+          </h2>
+
+          <ul class="school-key_figures key-figures">
+            <li class="years">
+              <b data-bind="years">X</b>
+              <span>Years</span>
+            </li>
+            <li class="public-private">
+              <i class="fa fa-institution"></i>
+              <span data-bind="control">Public</span>
+            </li>
+            <li class="setting">
+              <i class="fa fa-building"></i>
+              <span data-bind="locale_name">Urban</span>
+            </li>
+            <li class="population">
+              <i class="fa fa-group"></i>
+              <span data-bind="size_category">Small</span>
+            </li>
+          </ul>
+
+          <h3 class="special" data-bind="special_designation">
+            Special Designation
+          </h3>
+        </div>
+
+        <div class="school-map" data-bind="map">
+        </div>
+
+        <div id="key-stats" class="school-meters">
+          <figure class="meter">
+            <h2 class="figure-heading">Average Cost Per Year</h2>
+            <picc-meter class="cost" data-bind="average_cost_meter"
+              max="100000"
+              value="33209"
+              average="60000">
+            </picc-meter>
+            <figcaption>
+              <span data-bind="average_cost">$33,209</span>
+            </figcaption>
+          </figure>
+
+          <figure class="meter">
+            <h2 class="figure-heading">Graduation Rate</h2>
+            <picc-meter class="graduation"
+              max="150"
+              value="60"
+              average="70">
+            </picc-meter>
+            <figcaption>
+              <span data-bind="graduation_rate">60%</span>
+            </figcaption>
+          </figure>
+
+          <figure class="meter">
+            <h2 class="figure-heading">Average Salary</h2>
+            <picc-meter class="earnings"
+              max="80000"
+              value="43900"
+              average="36000">
+            </picc-meter>
+            <figcaption>
+              <span data-bind="average_salary">$43,900</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="section-card_container-school">
+          <div class="picc-accordion school-two_col">
+            <div>
+              <h1 class="search_category">
+                <a aria-expanded="false" aria-controls="selectivity-content">
+                  Selectivity
+                </a>
+              </h1>
+
+              <div id="selectivity-content" aria-hidden="true">
+                <p>Text here</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-card_container-school">
+          <div class="picc-accordion school-two_col">
+            <div>
+              <h1 class="search_category">
+                <a aria-expanded="false" aria-controls="graduation-content">
+                  Graduation &amp; Retention
+                </a>
+              </h1>
+
+              <div id="graduation-content" aria-hidden="true">
+                <p>Text here</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <div class="school-map" data-bind="map">
-      </div>
+    </div> <!-- END school card-->
 
-    </section>
+    <aside class="school-right">
+
+      <h2>Paying for College</h2>
+
+      <img src="/img/cfpb.png" alt="consumer finance protection bureau">
+
+      <p>Get help to make informed financial decisions about how to pay for college. Start by comparing financial aid offers or understanding student loan repayment options.</p>
+
+      <a href="http://www.consumerfinance.gov/paying-for-college/" class="link-more">Go to the consumer finance protection bureau <i class="fa fa-chevron-right"></i></a>
+
+    </aside>
 
   </div>
 
-</section>
+</div>
 
-<section id="key-stats" class="section school-section">
-
-  <div class="meters container">
-
-    <figure class="meter">
-      <h2 class="figure-heading">Average Cost Per Year</h2>
-      <picc-meter class="cost" data-bind="average_cost_meter"
-        max="100000"
-        value="33209"
-        average="60000">
-      </picc-meter>
-      <figcaption>
-        <span data-bind="average_cost">$33,209</span>
-      </figcaption>
-    </figure>
-
-    <figure class="meter">
-      <h2 class="figure-heading">Graduation Rate</h2>
-      <picc-meter class="graduation"
-        max="150"
-        value="60"
-        average="70">
-      </picc-meter>
-      <figcaption>
-        <span data-bind="graduation_rate">60%</span>
-      </figcaption>
-    </figure>
-
-    <figure class="meter">
-      <h2 class="figure-heading">Average Salary</h2>
-      <picc-meter class="earnings"
-        max="80000"
-        value="43900"
-        average="36000">
-      </picc-meter>
-      <figcaption>
-        <span data-bind="average_salary">$43,900</span>
-      </figcaption>
-    </figure>
-
-  </div>
-
-</section>
-
-<section class="section section-card_container-school">
-
-  <div class="container picc-accordion">
-    <div>
-      <h1 class="search_category">
-        <a aria-expanded="false" aria-controls="selectivity-content">
-          Selectivity
-        </a>
-      </h1>
-
-      <div id="selectivity-content" aria-hidden="true">
-        <p>Text here</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="container picc-accordion">
-    <div>
-      <h1 class="search_category">
-        <a aria-expanded="false" aria-controls="graduation-content">
-          Graduation &amp; Retention
-        </a>
-      </h1>
-
-      <div id="graduation-content" aria-hidden="true">
-        <p>Text here</p>
-      </div>
-    </div>
-  </div>
-
-</section>
 
 <!--
 <section>

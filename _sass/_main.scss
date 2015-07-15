@@ -13,6 +13,20 @@
   @include padded-container();
 }
 
+.container-collapse {
+  padding: {
+    left: 0;
+    right: 0;
+  }
+
+  @include respond-to(medium-up) {
+    padding: {
+      left: em(30);
+      right: em(30);
+    }
+  }
+}
+
 .sr-only {
   position: absolute;
   left: -10000px;
@@ -73,6 +87,15 @@ a {
     margin-top: $base-padding;
     margin-bottom: $base-padding;
   }
+}
+
+//TODO not an elegant solution
+//likely need to remove the >div>div above
+.contained-no-radius {
+  border-radius: 0 !important;
+  @include respond-to(medium-up) {
+    border-radius: 0.4em !important;
+  }   
 }
 
 .section-card_container-school {
@@ -392,10 +415,59 @@ a {
 // Individual school pages
 //============================================
 
-.school-section {
-  border-bottom: $regular-border-size solid $base-border-color;
-  @include outer-container();
+.school-bg {
+  background-color: $mid-gray;
+  padding-bottom: $base-padding-extra;
+}
 
+.school-back {
+  padding-top: $base-padding;
+}
+
+.school-left {
+  @include respond-to(medium-up) {
+    @include span-columns(9);
+  }
+}
+
+.school-right {
+  margin-top: $base-padding;
+  padding-left: $base-padding;
+  padding-right: $base-padding;
+
+  h2 {
+    padding-bottom: $base-padding;
+  }
+
+  img {
+    padding-bottom: $base-padding-lite;
+    width: 100%;
+  }
+
+  p {
+    @extend .supporting_copy;
+    padding-bottom: $base-padding-lite;
+  }
+
+  .link-more {
+    display: inline-block;
+    padding-top: $base-padding-lite;
+  }
+
+  @include respond-to(medium-up) {
+    @include span-columns(3);
+    @include omega();
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: $base-padding;
+
+    h2 {
+      @include font-size($h3);
+    }
+  }
+}
+
+.school-section {
   h1 {
     padding-top: 0;
   }
@@ -408,21 +480,39 @@ a {
     font-weight: normal;
   }
 
-  .meters {
-    text-align: center;
+  .school-heading {
+    h1 {
+      padding-bottom: $base-padding-lite;
+    }
+    @include respond-to(medium-up) {
+      @include span-columns(7 of 12);
+    }
+  }
+
+  .school-key_figures {
+    margin-top: $base-padding;
   }
 
   .school-map {
-    height: 250px;
+    height: 280px;
+    margin-top: $base-padding;
+    @include respond-to(medium-up) {
+      @include span-columns(5 of 12);
+      @include omega();
+      margin-top: 0;
+    }
   }
 
-  @include respond-to(medium-up) {
-    .school-heading {
-      @include span-columns(7);
-    }
-    .school-map {
-      @include span-columns(5);
-    }
+  .school-meters {
+    @include span-columns(12 of 12);
+    border-top : $regular-border-size solid $base-border-color;
+    margin-top: $base-padding;
+    padding-top: $base-padding;
+    text-align: center;
+  }
+
+  .school-two_col {
+    @include span-columns(12 of 12);
   }
 }
 
