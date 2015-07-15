@@ -259,6 +259,15 @@ a {
     margin-top: 0;
   }
 
+  .section-home-paying-content {
+    padding: $base-padding $base-padding-large $base-padding-large $base-padding-large;
+    text-align: left;
+
+    p {
+      padding-bottom: $base-padding-lite;
+    }
+  }
+
   @include respond-to(medium-up) {
     @include span-columns(6);
     padding-top: $base-padding;
@@ -266,14 +275,6 @@ a {
     > div > div {
       margin-top: $base-padding;
     }
-  }
-
-  .section-home-paying-buttons {
-    margin-right: auto;
-    margin-left: auto;
-    max-width: 300px;
-    padding-top: $base-padding;
-    padding-bottom: $base-padding;
   }
 }
 
