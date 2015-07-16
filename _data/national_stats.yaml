@@ -18,3 +18,7 @@ completion_rate_l4:
   min: 0
   max: 1
   median: 0.61
+median_earnings:
+  min: null
+  max: null
+  median: null

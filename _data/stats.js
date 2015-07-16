@@ -8,11 +8,12 @@ var write = tito.createWriteStream('csv');
 var valuesByColumn = {};
 
 var columns = {
-  'SAT_avg':    'SAT_avg',
-  'NPT4_PUB':   'average_price_public',
-  'NPT4_PRIV':  'average_price_private',
-  'C150_4':     'completion_rate_4',
-  'C150_L4':    'completion_rate_l4',
+  'SAT_avg':        'SAT_avg',
+  'NPT4_PUB':       'average_price_public',
+  'NPT4_PRIV':      'average_price_private',
+  'C150_4':         'completion_rate_4',
+  'C150_L4':        'completion_rate_l4',
+  'earn_2002_p10':  'median_earnings'
 };
 
 for (var src in columns) {
