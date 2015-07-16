@@ -2,14 +2,13 @@ figure.meter {
   @extend .centered;
 
   display: inline-block;
-  margin-bottom: 2em;
+  margin-bottom: $base-padding;
   margin-left: .5em;
   margin-right: .5em;
 
   .figure-heading,
   figcaption {
-    @include font-size($h2);
-    font-weight: bold;
+    @extend .h2;
   }
 
   .figure-heading {
@@ -22,8 +21,7 @@ figure.meter {
   }
 
   @include respond-to(medium-up) {
-    width: 150px;
-    margin-bottom: 0;
+    width: 165px;
   }
 }
 

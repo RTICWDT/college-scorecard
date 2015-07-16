@@ -1,0 +1,149 @@
+// Individual school pages
+//============================================
+
+.school-bg {
+  background-color: $mid-gray;
+  padding-bottom: $base-padding-extra;
+}
+
+.school-back {
+  padding-top: $base-padding;
+}
+
+.school-left {
+  @include respond-to(medium-up) {
+    @include span-columns(9);
+  }
+}
+
+.school-right {
+  margin-top: $base-padding;
+  padding-left: $base-padding;
+  padding-right: $base-padding;
+
+  h2 {
+    padding-bottom: $base-padding;
+  }
+
+  img {
+    padding-bottom: $base-padding-lite;
+    width: 100%;
+  }
+
+  p {
+    @extend .supporting_copy;
+    padding-bottom: $base-padding-lite;
+  }
+
+  .link-more {
+    display: inline-block;
+    padding-top: $base-padding-lite;
+  }
+
+  @include respond-to(medium-up) {
+    @include span-columns(3);
+    @include omega();
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: $base-padding;
+
+    h2 {
+      @include font-size($h3);
+    }
+  }
+}
+
+.school-section {
+
+  h1 {
+    padding-top: 0;
+  }
+
+  .school-heading {
+    h1 {
+      padding-bottom: $base-padding-lite;
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-top: 0;
+      font-size: font-size($h4);
+      font-weight: normal;
+    }
+
+    @include respond-to(medium-up) {
+      @include span-columns(7 of 12);
+    }
+  }
+
+  .school-key_figures {
+    margin-top: $base-padding;
+  }
+
+  .school-map {
+    height: 280px;
+    margin-top: $base-padding;
+    @include respond-to(medium-up) {
+      @include span-columns(5 of 12);
+      @include omega();
+      margin-top: 0;
+    }
+  }
+
+  .school-meters {
+    @include span-columns(12 of 12);
+    border-top : $regular-border-size solid $base-border-color;
+    margin-top: $base-padding;
+    padding-top: $base-padding;
+    text-align: center;
+  }
+
+  .school-two_col {
+
+    p {
+      padding-top: em(3);
+      padding-bottom: $base-padding;
+      text-align: left;
+    }
+
+    @include span-columns(12 of 12);
+  }
+
+  .school-two_col-left {
+    padding-top: $base-padding;
+
+    @include span-columns(12 of 12);
+    @include respond-to(medium-up) {
+      @include span-columns(6 of 12);
+    }
+  }
+
+  .school-two_col-right {
+    padding-top: $base-padding;
+
+    @include span-columns(12 of 12);
+    @include respond-to(medium-up) {
+      @include span-columns(6 of 12);
+      @include omega();
+    }
+  }
+}
+
+.school-table {
+  width: 100%;
+
+  td, th {
+    padding: em(5);
+    text-align: left;
+  }
+
+  tr {
+    border-bottom: $thin-border-size solid $base-border-color;
+  }
+
+  td:last-of-type {
+    font-weight: 700;
+  }
+
+}
