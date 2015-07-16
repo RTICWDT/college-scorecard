@@ -99,12 +99,59 @@
     text-align: center;
   }
 
+  .school-fact_list {
+
+    > div {
+      border-top: $thin-border-size solid $base-border-color;
+      padding-top: $base-padding-lite;
+
+      &:first-of-type {
+        border-top: none;
+        padding-top: 0;
+      }
+    }
+
+    img {
+      opacity: $icon-opacity;
+      width: 40px;
+    }
+
+    ul {
+      padding-bottom: $base-padding;
+    }
+
+    
+  }
+
+  .fact_number {
+    @include font-size(3.5);
+    padding: {
+      top: 8px;
+      bottom: 8px;
+    }
+
+    span {
+      font-weight: normal;
+    }
+  }
+
+  .button-primary {
+    width: 100%;
+    // @include respond-to(tiny-up) {
+    //   width: 300px;
+    // }
+  }
+
   .school-two_col {
 
     p {
       padding-top: $base-padding-lite;
       padding-bottom: $base-padding;
       text-align: left;
+
+      + ul {
+        margin-top: -$base-padding-lite;
+      }
 
       @include respond-to(medium-up) {
         padding-top: em(3);
@@ -117,18 +164,18 @@
   .school-two_col-left {
     padding-top: $base-padding;
 
-    @include span-columns(12 of 12);
-    @include respond-to(medium-up) {
-      @include span-columns(6 of 12);
+    @include span-columns(6 of 6);
+    @include respond-to(large-up) {
+      @include span-columns(3 of 6);
     }
   }
 
   .school-two_col-right {
     padding-top: $base-padding;
 
-    @include span-columns(12 of 12);
-    @include respond-to(medium-up) {
-      @include span-columns(6 of 12);
+    @include span-columns(6 of 6);
+    @include respond-to(large-up) {
+      @include span-columns(3 of 6);
       @include omega();
     }
   }
@@ -150,4 +197,10 @@
     font-weight: 700;
   }
 
+}
+
+.school-callout {
+  background-color: $sky-blue-light;
+  border-radius: $base-border-radius;
+  padding-bottom: $base-padding;
 }

@@ -189,6 +189,85 @@ body_scripts:
           <div class="picc-accordion school-two_col">
             <div>
               <h1 class="search_category">
+                <a aria-expanded="false" aria-controls="finaid-content">
+                  Financial Aid &amp; Debt
+                </a>
+              </h1>
+
+              <div id="finaid-content" aria-hidden="true">
+
+                <div class="school-two_col-left centered">
+
+                  <figure class="meter">
+                    <h2 class="figure-heading">Students Who Have Defaulted on Loans</h2>
+                    <picc-meter class="cost" data-bind="average_cost_meter"
+                      max="100000"
+                      value="33209"
+                      average="60000">
+                    </picc-meter>
+                    <figcaption>
+                      <span data-bind="average_cost">12%</span>
+                    </figcaption>
+                  </figure>
+
+                  <div class="container school-callout">
+
+                    <h2>Get Help Paying for College</h2>
+                    <p>Submit a free application for Federal Student Aid. It only takes 20 minutes!</p>
+                    <button class="button button-primary">
+                      Start My Application
+                    </button>
+
+                  </div>
+
+                </div>
+
+                <div class="school-two_col-right school-fact_list">
+
+                  <div>
+                    <h2>Average Total Debt</h2>
+                    <strong class="fact_number">$60,000</strong>
+                    <p>For those students who graduated</p>
+                  </div>
+
+                  <div>
+                    <h2>Average Monthly Loan Payment</h2>
+                    <strong class="fact_number">$250<span>/mo</span></strong>
+                    <p>This is about equal to:</p>
+
+                    <ul class="group_inline">
+                      <li>
+                        <div class="group_inline-left"><img src="{{ site.baseurl }}/img/education.svg" alt="Education"></div>
+                        <div class="group_inline-right">18% of your monthly salary</div>
+                      </li>
+                      <li>
+                        <div class="group_inline-left"><img src="{{ site.baseurl }}/img/education.svg" alt= class="school-callout""Education"></div>
+                        <div class="group_inline-right">A monthly car payment</div>
+                      </li>
+                      <li>
+                        <div class="group_inline-left"><img src="{{ site.baseurl }}/img/education.svg" alt="Education"></div>
+                        <div class="group_inline-right">Half of a month's rent</div>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h2>Students Receiving Federal Aid</h2>
+                    <strong class="fact_number">70%</strong>
+                    <p>Brief explanation of what federal aid is and means. Nunc eu consectutur purus.</p>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-card_container-school">
+          <div class="picc-accordion school-two_col">
+            <div>
+              <h1 class="search_category">
                 <a aria-expanded="false" aria-controls="selectivity-content">
                   Selectivity
                 </a>

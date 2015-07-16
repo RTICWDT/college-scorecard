@@ -21,6 +21,7 @@ $dark-blue: #0e365b;
 $mid-blue: #2b6091;
 $lighter-blue: tint($dark-blue, 6%);
 $sky-blue: #00adf2;
+$sky-blue-light: #d2eefc;
 $green: #2c8511;
 $darker-green: #216d09;
 $darkest-green: #174b06;
@@ -91,4 +92,7 @@ $loadable-states: (loading, loaded, error);
 
 // Splash
 $splash-height: 37em;
+
+// Icons
+$icon-opacity: 0.4;
 
