@@ -305,8 +305,8 @@
       }
 
       return meter.classList.contains('above-average')
-        ? 'fa fa-arrow-down'
-        : 'fa fa-arrow-up';
+        ? 'fa fa-arrow-up'
+        : 'fa fa-arrow-down';
     };
   };
 
