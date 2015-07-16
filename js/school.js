@@ -9,6 +9,21 @@
     return showError('No school ID provided');
   }
 
+  // TODO: this should be much easier with aria-accordion
+  window.addEventListener('load', function() {
+    var sectionId = location.hash.substr(1);
+    d3.selectAll('.picc-accordion')
+      .each(function() {
+        if (this.id === sectionId) {
+          var button = this.querySelector('[aria-controls]');
+          button.setAttribute('aria-expanded', 'true');
+          var content = document.getElementById(button.getAttribute('aria-controls'));
+          content.setAttribute('aria-hidden', 'false');
+          content.classList.remove('hidden');
+        }
+      });
+  });
+
   var root = document.querySelector('#school');
 
   var format = picc.format;
