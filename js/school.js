@@ -73,7 +73,16 @@
 
     console.log('got school:', school);
     root.classList.remove('hidden');
-    tagalong(root, school, directives);
+
+    // this is necessary because tagalong only binds to
+    // the first instance for each data or directive key
+    var sections = root.querySelectorAll('.section-card_container-school');
+    [root]
+      .concat([].slice.call(sections))
+      .forEach(function(node) {
+        // console.log('binding to:', node);
+        tagalong(node, school, directives);
+      });
 
     var center = L.latLng(
       +school.location.lat,
