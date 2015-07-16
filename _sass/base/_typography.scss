@@ -158,3 +158,11 @@ button {
   padding: 0.2em;
   text-transform: uppercase;
 }
+
+.fact_number {
+  color: $lime-green;
+  display: block;
+  @include font-size(5);
+  font-weight: bold;
+  line-height: 1;
+}

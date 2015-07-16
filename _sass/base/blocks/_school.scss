@@ -99,12 +99,50 @@
     text-align: center;
   }
 
+  .school-fact_list {
+
+    > div {
+      border-top: $thin-border-size solid $base-border-color;
+
+      &:first-of-type {
+        border-top: none;
+      }
+    }
+
+    img {
+      opacity: $icon-opacity;
+      width: 40px;
+    }
+
+    ul {
+      padding-bottom: $base-padding;
+    }
+
+    
+  }
+
+  .fact_number {
+    @include font-size(3.5);
+    padding: {
+      top: 8px;
+      bottom: 8px;
+    }
+
+    span {
+      font-weight: normal;
+    }
+  }
+
   .school-two_col {
 
     p {
       padding-top: $base-padding-lite;
       padding-bottom: $base-padding;
       text-align: left;
+
+      + ul {
+        margin-top: -$base-padding-lite;
+      }
 
       @include respond-to(medium-up) {
         padding-top: em(3);
