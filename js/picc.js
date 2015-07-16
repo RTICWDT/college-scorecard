@@ -288,6 +288,28 @@
     return designations.join(', ');
   };
 
+  picc.accessor.meterArrowClass = function(parentClass) {
+    var match = parentClass
+      ? function(node) { return node.classList.contains(parentClass); }
+      : function(node) { return node.nodeName === 'FIGURE'; };
+    return function(d) {
+      var parent = this;
+      do {
+        parent = parent.parentNode;
+      } while (parent && !match(parent));
+      if (!parent) return;
+
+      var meter = parent.querySelector('picc-meter');
+      if (!meter || !meter.getAttribute('average')) {
+        return '';
+      }
+
+      return meter.classList.contains('above-average')
+        ? 'fa fa-arrow-down'
+        : 'fa fa-arrow-up';
+    };
+  };
+
   picc.nullify = function(value) {
     return value === 'NULL' ? null : value;
   };
