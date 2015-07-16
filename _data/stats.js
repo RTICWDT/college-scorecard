@@ -8,9 +8,11 @@ var write = tito.createWriteStream('csv');
 var valuesByColumn = {};
 
 var columns = {
+  'SAT_avg':    'SAT_avg',
   'NPT4_PUB':   'average_price_public',
   'NPT4_PRIV':  'average_price_private',
-  'SAT_avg':    'SAT_avg'
+  'C150_4':     'completion_rate_4',
+  'C150_L4':    'completion_rate_l4',
 };
 
 for (var src in columns) {
@@ -28,7 +30,7 @@ process.stdin
   .on('data', function(d) {
     // console.log('read row:', JSON.stringify(d).substr(0, 100), '...');
     for (var src in columns) {
-      var value = nullify(d[src]);
+      var value = number(d[src]);
       valuesByColumn[columns[src]].push(value);
     }
   })
@@ -37,7 +39,17 @@ process.stdin
 function output() {
   var result = {};
   for (var column in valuesByColumn) {
-    result[column] = getStats(valuesByColumn[column]);
+    var values = valuesByColumn[column]
+      .filter(function(n) { return n !== null; })
+      .sort(ascending);
+    if (values[0] === values[values.length - 1]) {
+      console.warn('value for "%s":', column, values[0]);
+    } else {
+      console.warn('values for "%s":', column,
+                   values.slice(0, 3), '...',
+                   values.slice(-3));
+    }
+    result[column] = getStats(values);
   }
 
   var out = process.stdout;
@@ -45,14 +57,25 @@ function output() {
 }
 
 function getStats(values) {
-  values = values.filter(function(d) { return !isNaN(d); });
+  // values = values.filter(function(d) { return !isNaN(d); });
   var result = {};
   for (var stat in stats) {
-    result[stat] = values.length ? stats[stat](values) : null;
+    var value = stats[stat](values);
+    result[stat] = isNaN(value) ? null : round(value);
   }
   return result;
 }
 
-function nullify(value) {
-  return value === 'NULL' ? null : +value;
+function number(value) {
+  return value === 'NULL' || isNaN(value)
+    ? null
+    : +value;
+}
+
+function round(n) {
+  return n % 1 ? +n.toFixed(2) : n;
+}
+
+function ascending(a, b) {
+  return a > b ? 1 : a < b ? -1 : 0;
 }
