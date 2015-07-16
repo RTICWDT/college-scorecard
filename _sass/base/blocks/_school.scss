@@ -103,9 +103,11 @@
 
     > div {
       border-top: $thin-border-size solid $base-border-color;
+      padding-top: $base-padding-lite;
 
       &:first-of-type {
         border-top: none;
+        padding-top: 0;
       }
     }
 
@@ -155,18 +157,18 @@
   .school-two_col-left {
     padding-top: $base-padding;
 
-    @include span-columns(12 of 12);
+    @include span-columns(6 of 6);
     @include respond-to(medium-up) {
-      @include span-columns(6 of 12);
+      @include span-columns(3 of 6);
     }
   }
 
   .school-two_col-right {
     padding-top: $base-padding;
 
-    @include span-columns(12 of 12);
+    @include span-columns(6 of 6);
     @include respond-to(medium-up) {
-      @include span-columns(6 of 12);
+      @include span-columns(3 of 6);
       @include omega();
     }
   }
@@ -188,4 +190,10 @@
     font-weight: 700;
   }
 
+}
+
+.school-callout {
+  background-color: $sky-blue-light;
+  border-radius: $base-border-radius;
+  padding-bottom: $base-padding;
 }
