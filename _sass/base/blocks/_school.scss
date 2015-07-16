@@ -135,6 +135,13 @@
     }
   }
 
+  .button-primary {
+    width: 100%;
+    // @include respond-to(tiny-up) {
+    //   width: 300px;
+    // }
+  }
+
   .school-two_col {
 
     p {
@@ -158,7 +165,7 @@
     padding-top: $base-padding;
 
     @include span-columns(6 of 6);
-    @include respond-to(medium-up) {
+    @include respond-to(large-up) {
       @include span-columns(3 of 6);
     }
   }
@@ -167,7 +174,7 @@
     padding-top: $base-padding;
 
     @include span-columns(6 of 6);
-    @include respond-to(medium-up) {
+    @include respond-to(large-up) {
       @include span-columns(3 of 6);
       @include omega();
     }
