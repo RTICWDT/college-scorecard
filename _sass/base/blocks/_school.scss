@@ -102,9 +102,13 @@
   .school-two_col {
 
     p {
-      padding-top: em(3);
+      padding-top: $base-padding-lite;
       padding-bottom: $base-padding;
       text-align: left;
+
+      @include respond-to(medium-up) {
+        padding-top: em(3);
+      }
     }
 
     @include span-columns(12 of 12);
