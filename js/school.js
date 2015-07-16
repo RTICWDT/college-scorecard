@@ -12,26 +12,44 @@
   var root = document.querySelector('#school');
 
   var format = picc.format;
+  var access = picc.accessor;
 
   var directives = {
-    size_number: format.number('size'),
-    control: format.control('ownership'),
-    locale_name: format.locale('locale'),
-    years: format.preddeg('common_degree'),
-    size_category: format.sizeCategory('size'),
+    size_number:    format.number('size'),
+    control:        format.control('ownership'),
+    locale_name:    format.locale('locale'),
+    years:          format.preddeg('common_degree'),
+    size_category:  format.sizeCategory('size'),
 
     // this is a direct accessor because some designations
     // (e.g. `women_only`) are at the object root, rather than
     // nested in `minority_serving`.
-    special_designation: format.specialDesignation,
+    special_designation: access.specialDesignation,
 
-    average_cost: format.dollars('avg_net_price'),
+    SAT_avg: function(d) {
+      return picc.nullify(d.SAT_avg) || '?';
+    },
+    SAT_meter: {
+      // TODO
+    },
+
+    average_cost: format.dollars(access.averageCost),
     average_cost_meter: {
-      '@max':     d3.functor(100000),
-      '@average': d3.functor(20000),
-      '@value':   function(d) {
-        return Math.floor(Math.random() * 100000);
-      }
+      '@max':     access.nationalStat('max', access.publicPrivate),
+      '@average': access.nationalStat('median', access.publicPrivate),
+      '@value':   access.averageCost
+    },
+
+    completion_rate: format.percent(access.completionRate),
+    completion_rate_meter: {
+      '@max':     access.nationalStat('max', access.yearDesignation),
+      '@average': access.nationalStat('median', access.yearDesignation),
+      '@value':   access.completionRate
+    },
+
+    median_earnings: format.dollars(access.medianEarnings),
+    median_earnings_meter: {
+      '@value': access.medianEarnings
     },
 
     // for debugging
