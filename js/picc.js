@@ -91,6 +91,8 @@
     men_only:             'Men Only'
   };
 
+  var NA = '--';
+
   /**
    * This is our format generator. Its methods are format generators for
    * specific types of values, and they take a key in the data object to
@@ -113,7 +115,7 @@
         key = picc.accessor(key);
         return function(d) {
           var value = key.call(this, d);
-          return ((!value || isNaN(+value)) && empty)
+          return ((!value || isNaN(value)) && empty)
             ? empty.call(d)
             : fmt.call(d, +value, key);
         };
@@ -142,10 +144,10 @@
 
     return {
       // format.dollars('x')({x: 1000}) === '$1,000'
-      dollars: formatter('$,d', '$0'),
+      dollars: formatter('$,d', NA),
       // format.percent('y')({x: 1000}) === '$1,000'
-      percent: formatter('%.0f', '--'),
-      number: formatter(',d', '0'),
+      percent: formatter('%.0f', NA),
+      number: formatter(',d', NA),
 
       // format.plural('x', 'foo')({x: 1}) === 'foo'
       // format.plural('x', 'foo')({x: 2}) === 'foos'
