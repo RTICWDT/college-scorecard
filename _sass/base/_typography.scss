@@ -160,9 +160,9 @@ button {
 }
 
 .fact_number {
+  @include font-size(5);
   color: $lime-green;
   display: block;
-  @include font-size(5);
   font-weight: bold;
   line-height: 1;
 }
