@@ -204,3 +204,8 @@
   border-radius: $base-border-radius;
   padding-bottom: $base-padding;
 }
+
+// color the up arrows red
+.fa.above-average {
+  color: $red;
+}
