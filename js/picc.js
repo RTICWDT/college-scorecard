@@ -198,27 +198,8 @@
         '41': 'Rural: Fringe',
         '42': 'Rural: Distant',
         '43': 'Rural: Remote'
-      }, 'locale unknown')),
+      }, 'locale unknown'))
 
-      specialDesignation: function(d) {
-        var designations = [];
-
-        if (+d.women_only) {
-          designations.push(SPECIAL_DESIGNATIONS.women_only);
-        } else if (+d.men_only) {
-          designations.push(SPECIAL_DESIGNATIONS.men_only);
-        }
-
-        if (d.minority_serving) {
-          for (var key in SPECIAL_DESIGNATIONS) {
-            if (+d.minority_serving[key]) {
-              designations.push(SPECIAL_DESIGNATIONS[key]);
-            }
-          }
-        }
-
-        return designations.join(', ');
-      }
     };
   })();
 
@@ -226,6 +207,87 @@
     return (typeof key === 'function')
       ? key
       : function(d) { return d[key]; };
+  };
+
+  picc.accessor.publicPrivate = function(d) {
+    switch (+d.ownership) {
+      case 1: // public
+        return 'public';
+
+      case 2: // private
+      case 3:
+        return 'private';
+    }
+    return null;
+  };
+
+  picc.accessor.nationalStat = function(stat, suffix) {
+    if (suffix) {
+      suffix = picc.accessor(suffix);
+      return function(d) {
+        var key = suffix.apply(this, arguments);
+        return this.getAttribute([
+          'data', stat, key
+        ].join('-'));
+      };
+    } else {
+      return function() {
+        return this.getAttribute('data-' + key);
+      };
+    }
+  };
+
+  picc.accessor.averageCost = function(d) {
+    var key = picc.accessor.publicPrivate(d);
+    return key
+      ? picc.nullify(d.avg_net_price[key])
+      : null;
+  };
+
+  picc.accessor.yearDesignation = function(d) {
+    switch (d.common_degree) {
+      case '2': // 2-year (AKA less than 4-year)
+        return 'lt_four_year';
+      case '3': // 4-year
+        return 'four_year';
+    }
+    // FIXME
+    return 'other';
+  };
+
+  picc.accessor.medianEarnings = function(d) {
+    return picc.nullify(d.median_earnings);
+  };
+
+  picc.accessor.completionRate = function(d) {
+    var designation = picc.accessor.yearDesignation(d);
+    return designation
+      ? picc.nullify(d.completion_rate[designation])
+      : null;
+  };
+
+  picc.accessor.specialDesignation = function(d) {
+    var designations = [];
+
+    if (+d.women_only) {
+      designations.push(SPECIAL_DESIGNATIONS.women_only);
+    } else if (+d.men_only) {
+      designations.push(SPECIAL_DESIGNATIONS.men_only);
+    }
+
+    if (d.minority_serving) {
+      for (var key in SPECIAL_DESIGNATIONS) {
+        if (+d.minority_serving[key]) {
+          designations.push(SPECIAL_DESIGNATIONS[key]);
+        }
+      }
+    }
+
+    return designations.join(', ');
+  };
+
+  picc.nullify = function(value) {
+    return value === 'NULL' ? null : value;
   };
 
 })(this);
