@@ -37,19 +37,22 @@
     average_cost_meter: {
       '@max':     access.nationalStat('max', access.publicPrivate),
       '@average': access.nationalStat('median', access.publicPrivate),
-      '@value':   access.averageCost
+      '@value':   access.averageCost,
+      '@title':   debugMeterTitle
     },
 
-    completion_rate: format.percent(access.completionRate),
-    completion_rate_meter: {
+    grad_rate: format.percent(access.completionRate),
+    grad_rate_meter: {
       '@max':     access.nationalStat('max', access.yearDesignation),
       '@average': access.nationalStat('median', access.yearDesignation),
-      '@value':   access.completionRate
+      '@value':   access.completionRate,
+      '@title':   debugMeterTitle
     },
 
-    median_earnings: format.dollars(access.medianEarnings),
-    median_earnings_meter: {
-      '@value': access.medianEarnings
+    average_salary: format.dollars(access.medianEarnings),
+    average_salary_meter: {
+      '@value': access.medianEarnings,
+      '@title': debugMeterTitle
     },
 
     // for debugging
@@ -120,6 +123,13 @@
     var target = container.querySelector('.error-message') || container;
     target.textContent = message;
     return target;
+  }
+
+  function debugMeterTitle(d) {
+    return [
+      'value: ', this.getAttribute('value'), '\n',
+      'median: ', this.getAttribute('average')
+    ].join('');
   }
 
 })(this);
