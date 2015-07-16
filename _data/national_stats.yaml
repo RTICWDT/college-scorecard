@@ -1,0 +1,12 @@
+average_price_public:
+  min: -6359
+  max: 32921
+  median: 0
+average_price_private:
+  min: -19360
+  max: 87414
+  median: 10889
+SAT_avg:
+  min: null
+  max: null
+  median: null
