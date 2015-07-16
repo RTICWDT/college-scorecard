@@ -62,17 +62,8 @@
     },
     average_salary_arrow: {
       '@class': access.meterArrowClass()
-    },
-
-    // for debugging
-    map: {
-      '@data-latitude': function(d) {
-        return d.location.lat;
-      },
-      '@data-longitude': function(d) {
-        return d.location.lon;
-      }
     }
+
   };
 
   picc.API.getSchool(id, function(error, school) {
