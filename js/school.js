@@ -40,6 +40,9 @@
       '@value':   access.averageCost,
       '@title':   debugMeterTitle
     },
+    average_cost_arrow: {
+      '@class': access.meterArrowClass()
+    },
 
     grad_rate: format.percent(access.completionRate),
     grad_rate_meter: {
@@ -48,11 +51,17 @@
       '@value':   access.completionRate,
       '@title':   debugMeterTitle
     },
+    grad_rate_arrow: {
+      '@class': access.meterArrowClass()
+    },
 
     average_salary: format.dollars(access.medianEarnings),
     average_salary_meter: {
       '@value': access.medianEarnings,
       '@title': debugMeterTitle
+    },
+    average_salary_arrow: {
+      '@class': access.meterArrowClass()
     },
 
     // for debugging
