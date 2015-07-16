@@ -118,7 +118,7 @@ body_scripts:
 
         <div class="section-card_container-school">
 
-          <div class="picc-accordion school-two_col">
+          <div id="cost" class="picc-accordion school-two_col">
 
             <div>
 
@@ -142,6 +142,7 @@ body_scripts:
                       data-median-private="{{ site.data.national_stats.average_price_private.median }}">
                     </picc-meter>
                     <figcaption>
+                      <i data-bind="average_cost_arrow"></i>
                       <span data-bind="average_cost"></span>
                     </figcaption>
                   </figure>
