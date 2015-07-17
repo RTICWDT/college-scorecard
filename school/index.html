@@ -318,7 +318,33 @@ body_scripts:
               </h1>
 
               <div id="earnings-content" aria-hidden="true">
-                <p>Text here</p>
+                <div class="school-two_col-left centered">
+                  <figure class="meter">
+                    <h2 class="figure-heading">Average Salary <br>After Leaving School</h2>
+                    <picc-meter class="cost" data-bind="average_cost_meter"
+                      max="100000"
+                      value="33209"
+                      average="60000">
+                    </picc-meter>
+                    <figcaption>
+                      <span data-bind="average_cost">$43,900</span>
+                    </figcaption>
+                  </figure>
+                </div>
+
+                <div class="school-two_col-right centered">
+                  <figure class="meter">
+                    <h2 class="figure-heading">Former Students <br>Earning Less Than $25K</h2>
+                    <picc-meter class="cost" data-bind="average_cost_meter"
+                      max="100000"
+                      value="33209"
+                      average="60000">
+                    </picc-meter>
+                    <figcaption>
+                      <span data-bind="average_cost">15%</span>
+                    </figcaption>
+                  </figure>
+                </div>
               </div>
             </div>
           </div>
