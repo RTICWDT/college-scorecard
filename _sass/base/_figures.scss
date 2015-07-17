@@ -21,7 +21,13 @@ figure.meter {
   }
 
   @include respond-to(medium-up) {
-    width: 165px;
+    picc-meter {
+      width: 165px;
+    }
+
+    .constrain_width {
+      width: 180px;
+    }
   }
 }
 

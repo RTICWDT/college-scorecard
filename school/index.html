@@ -75,7 +75,7 @@ body_scripts:
 
         <div id="key-stats" class="school-meters">
           <figure class="meter">
-            <h2 class="figure-heading">Average Cost Per Year</h2>
+            <h2 class="figure-heading constrain_width">Average Cost Per Year</h2>
             <picc-meter class="cost" data-bind="average_cost_meter"
               max="100000"
               value="33209"
@@ -87,7 +87,7 @@ body_scripts:
           </figure>
 
           <figure class="meter">
-            <h2 class="figure-heading">Graduation Rate</h2>
+            <h2 class="figure-heading constrain_width">Graduation Rate</h2>
             <picc-meter class="graduation"
               max="150"
               value="60"
@@ -99,7 +99,7 @@ body_scripts:
           </figure>
 
           <figure class="meter">
-            <h2 class="figure-heading">Average Salary</h2>
+            <h2 class="figure-heading constrain_width">Average Salary</h2>
             <picc-meter class="earnings"
               max="80000"
               value="43900"
@@ -274,7 +274,35 @@ body_scripts:
               </h1>
 
               <div id="graduation-content" aria-hidden="true">
-                <p>Text here</p>
+
+                <div class="school-two_col-left centered">
+                  <figure class="meter">
+                    <h2 class="figure-heading constrain_width">Graduation Rate</h2>
+                    <picc-meter class="cost" data-bind="average_cost_meter"
+                      max="100000"
+                      value="33209"
+                      average="60000">
+                    </picc-meter>
+                    <figcaption>
+                      <span data-bind="average_cost">60%</span>
+                    </figcaption>
+                  </figure>
+                </div>
+
+                <div class="school-two_col-right centered">
+                  <figure class="meter">
+                    <h2 class="figure-heading">Students Who Return <br>After Their First Year</h2>
+                    <picc-meter class="cost" data-bind="average_cost_meter"
+                      max="100000"
+                      value="33209"
+                      average="60000">
+                    </picc-meter>
+                    <figcaption>
+                      <span data-bind="average_cost">82%</span>
+                    </figcaption>
+                  </figure>
+                </div>
+
               </div>
             </div>
           </div>
