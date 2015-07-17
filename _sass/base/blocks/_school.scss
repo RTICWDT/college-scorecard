@@ -199,6 +199,18 @@
 
 }
 
+.school-long_list {
+  border-top: $thin-border-size solid $base-border-color;
+  height: 375px;
+  margin-top: $base-padding-lite;
+  overflow-y: scroll;
+
+  li {
+    border-bottom: $thin-border-size solid $base-border-color;
+    padding: em(5);
+  }
+}
+
 .school-callout {
   background-color: $sky-blue-light;
   border-radius: $base-border-radius;
