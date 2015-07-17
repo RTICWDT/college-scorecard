@@ -40,6 +40,18 @@
   display: block;
 }
 
+ol.decimal {
+  list-style-type: decimal;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: $base-padding;
+
+  li {
+    padding-bottom: $base-padding-lite;
+  }
+}
+
 
 // Site-wide
 //============================================
