@@ -134,7 +134,7 @@ body_scripts:
 
                   <figure class="meter">
                     <h2 class="figure-heading">Average Net Price</h2>
-                    <picc-meter class="cost"
+                    <picc-meter id="cost-meter" class="cost"
                       data-bind="average_cost_meter"
                       data-max-public="{{ site.data.national_stats.average_price_public.max }}"
                       data-max-private="{{ site.data.national_stats.average_price_private.max }}"
@@ -142,7 +142,7 @@ body_scripts:
                       data-median-private="{{ site.data.national_stats.average_price_private.median }}">
                     </picc-meter>
                     <figcaption>
-                      <i data-bind="average_cost_arrow"></i>
+                      <i class="fa average-arrow" data-meter="cost-meter"></i>
                       <span data-bind="average_cost"></span>
                     </figcaption>
                   </figure>
