@@ -14,8 +14,6 @@ all: \
 	formdb.min.js \
 	leaflet.js \
 	leaflet-css \
-	pinpoint.min.js \
-	pinpoint-css \
 	querystring.min.js \
 	tagalong.min.js
 
