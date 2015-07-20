@@ -40,9 +40,6 @@
       '@value':   access.averageCost,
       '@title':   debugMeterTitle
     },
-    average_cost_arrow: {
-      '@class': access.meterArrowClass()
-    },
 
     grad_rate: format.percent(access.completionRate),
     grad_rate_meter: {
@@ -51,17 +48,11 @@
       '@value':   access.completionRate,
       '@title':   debugMeterTitle
     },
-    grad_rate_arrow: {
-      '@class': access.meterArrowClass()
-    },
 
     average_salary: format.dollars(access.medianEarnings),
     average_salary_meter: {
       '@value': access.medianEarnings,
       '@title': debugMeterTitle
-    },
-    average_salary_arrow: {
-      '@class': access.meterArrowClass()
     }
 
   };
@@ -73,6 +64,20 @@
 
     console.log('got school:', school);
     root.classList.remove('hidden');
+
+    d3.selectAll('i.average-arrow')
+      .each(function() {
+        if (!this.hasAttribute('data-meter')) return;
+        var icon = d3.select(this);
+        var meter = d3.select('#' + this.getAttribute('data-meter'))
+          .on('update', function() {
+            var above = this.classList.contains('above-average');
+            icon
+              .classed('above-average fa-arrow-up', above)
+              .classed('below-average fa-arrow-down', !above);
+            // console.log('update:', this.className, above, icon.attr('class'));
+          });
+      });
 
     // this is necessary because tagalong only binds to
     // the first instance for each data or directive key
