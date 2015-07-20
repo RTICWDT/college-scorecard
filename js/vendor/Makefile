@@ -1,5 +1,7 @@
+# the node_modules path
+node_modules ?= ../../node_modules
 # npm puts its binaries here
-bin ?= ./node_modules/.bin
+bin ?= $(node_modules)/.bin
 
 css_path ?= ../../css/vendor
 
@@ -18,18 +20,18 @@ all: \
 	tagalong.min.js
 
 # install node modules
-node_modules:
+$(node_modules):
 	npm install
 
 # querystring is a Node.js built-in, but we can build it with browserify
-querystring.js: node_modules
+querystring.js: $(node_modules)
 	echo "window.querystring = require('querystring');" | $(bin)/browserify - > $@
 
-leaflet.js: node_modules
-	cp node_modules/leaflet/dist/leaflet.js $@
+leaflet.js: $(node_modules)
+	cp $(node_modules)/leaflet/dist/leaflet.js $@
 
 leaflet-css:
-	cp node_modules/leaflet/dist/leaflet.css $(css_path)
+	cp $(node_modules)/leaflet/dist/leaflet.css $(css_path)
 
 pinpoint.js:
 	curl https://raw.githubusercontent.com/dowjones/pinpoint/master/dist/pinpoint.js > $@
@@ -38,8 +40,8 @@ pinpoint-css:
 	curl https://raw.githubusercontent.com/dowjones/pinpoint/master/dist/pinpoint.min.css > $(css_path)/pinpoint.css
 
 # document-register-element is a lightweight custom elements polyfill
-document-register-element.js: node_modules
-	cp node_modules/document-register-element/build/document-register-element.max.js $@
+document-register-element.js: $(node_modules)
+	cp $(node_modules)/document-register-element/build/document-register-element.max.js $@
 
 # this handy target minifies any scripts that are either built using browserify
 # or are distributed as un-minified browser builds
@@ -48,5 +50,5 @@ document-register-element.js: node_modules
 
 # most node modules with browser-ready .js files will package these up in the
 # root directory as module.js and/or module.min.js
-%.js: node_modules
-	cp node_modules/$(subst .min,,$(basename $@))/$@ $@
+%.js: $(node_modules)
+	cp $(node_modules)/$(subst .min,,$(basename $@))/$@ $@
