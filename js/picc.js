@@ -112,7 +112,7 @@
         if (typeof empty === 'string') {
           empty = d3.functor(empty);
         }
-        key = picc.accessor(key);
+        key = picc.access(key);
         return function(d) {
           var value = key.call(this, d);
           return ((!value || isNaN(value)) && empty)
@@ -205,13 +205,13 @@
     };
   })();
 
-  picc.accessor = function(key) {
+  picc.access = function(key) {
     return (typeof key === 'function')
       ? key
       : function(d) { return d[key]; };
   };
 
-  picc.accessor.publicPrivate = function(d) {
+  picc.access.publicPrivate = function(d) {
     switch (+d.ownership) {
       case 1: // public
         return 'public';
@@ -223,9 +223,9 @@
     return null;
   };
 
-  picc.accessor.nationalStat = function(stat, suffix) {
+  picc.access.nationalStat = function(stat, suffix) {
     if (suffix) {
-      suffix = picc.accessor(suffix);
+      suffix = picc.access(suffix);
       return function(d) {
         var key = suffix.apply(this, arguments);
         return this.getAttribute([
@@ -239,14 +239,14 @@
     }
   };
 
-  picc.accessor.averageCost = function(d) {
-    var key = picc.accessor.publicPrivate(d);
+  picc.access.averageCost = function(d) {
+    var key = picc.access.publicPrivate(d);
     return key
       ? picc.nullify(d.avg_net_price[key])
       : null;
   };
 
-  picc.accessor.yearDesignation = function(d) {
+  picc.access.yearDesignation = function(d) {
     switch (d.common_degree) {
       case '2': // 2-year (AKA less than 4-year)
         return 'lt_four_year';
@@ -257,18 +257,18 @@
     return 'other';
   };
 
-  picc.accessor.medianEarnings = function(d) {
+  picc.access.medianEarnings = function(d) {
     return picc.nullify(d.median_earnings);
   };
 
-  picc.accessor.completionRate = function(d) {
-    var designation = picc.accessor.yearDesignation(d);
+  picc.access.completionRate = function(d) {
+    var designation = picc.access.yearDesignation(d);
     return designation
       ? picc.nullify(d.completion_rate[designation])
       : null;
   };
 
-  picc.accessor.specialDesignation = function(d) {
+  picc.access.specialDesignation = function(d) {
     var designations = [];
 
     if (+d.women_only) {

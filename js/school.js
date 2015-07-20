@@ -12,7 +12,7 @@
   var root = document.querySelector('#school');
 
   var format = picc.format;
-  var access = picc.accessor;
+  var access = picc.access;
 
   var directives = {
     size_number:    format.number('size'),
