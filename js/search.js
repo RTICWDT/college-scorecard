@@ -75,9 +75,8 @@
   function showError(error) {
     console.error('error:', error);
     resultsRoot.classList.add('js-error');
-    var out = resultsRoot.querySelector('.error');
-    out.classList.remove('hidden');
-    out.textContent = String(error);
+    var message = resultsRoot.querySelector('.error-message');
+    message.textContent = String(error);
   }
 
   function removeEmptyValues(obj) {
