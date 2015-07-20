@@ -91,6 +91,8 @@
     men_only:             'Men Only'
   };
 
+  var NA = '--';
+
   /**
    * This is our format generator. Its methods are format generators for
    * specific types of values, and they take a key in the data object to
@@ -110,10 +112,10 @@
         if (typeof empty === 'string') {
           empty = d3.functor(empty);
         }
-        key = picc.accessor(key);
+        key = picc.access(key);
         return function(d) {
           var value = key.call(this, d);
-          return ((!value || isNaN(+value)) && empty)
+          return ((!value || isNaN(value)) && empty)
             ? empty.call(d)
             : fmt.call(d, +value, key);
         };
@@ -142,10 +144,10 @@
 
     return {
       // format.dollars('x')({x: 1000}) === '$1,000'
-      dollars: formatter('$,d', '$0'),
+      dollars: formatter('$,d', NA),
       // format.percent('y')({x: 1000}) === '$1,000'
-      percent: formatter('%.0f', '--'),
-      number: formatter(',d', '0'),
+      percent: formatter('%.0f', NA),
+      number: formatter(',d', NA),
 
       // format.plural('x', 'foo')({x: 1}) === 'foo'
       // format.plural('x', 'foo')({x: 2}) === 'foos'
@@ -198,34 +200,96 @@
         '41': 'Rural: Fringe',
         '42': 'Rural: Distant',
         '43': 'Rural: Remote'
-      }, 'locale unknown')),
+      }, 'locale unknown'))
 
-      specialDesignation: function(d) {
-        var designations = [];
-
-        if (+d.women_only) {
-          designations.push(SPECIAL_DESIGNATIONS.women_only);
-        } else if (+d.men_only) {
-          designations.push(SPECIAL_DESIGNATIONS.men_only);
-        }
-
-        if (d.minority_serving) {
-          for (var key in SPECIAL_DESIGNATIONS) {
-            if (+d.minority_serving[key]) {
-              designations.push(SPECIAL_DESIGNATIONS[key]);
-            }
-          }
-        }
-
-        return designations.join(', ');
-      }
     };
   })();
 
-  picc.accessor = function(key) {
+  picc.access = function(key) {
     return (typeof key === 'function')
       ? key
       : function(d) { return d[key]; };
+  };
+
+  picc.access.publicPrivate = function(d) {
+    switch (+d.ownership) {
+      case 1: // public
+        return 'public';
+
+      case 2: // private
+      case 3:
+        return 'private';
+    }
+    return null;
+  };
+
+  picc.access.nationalStat = function(stat, suffix) {
+    if (suffix) {
+      suffix = picc.access(suffix);
+      return function(d) {
+        var key = suffix.apply(this, arguments);
+        return this.getAttribute([
+          'data', stat, key
+        ].join('-'));
+      };
+    } else {
+      return function() {
+        return this.getAttribute('data-' + key);
+      };
+    }
+  };
+
+  picc.access.averageCost = function(d) {
+    var key = picc.access.publicPrivate(d);
+    return key
+      ? picc.nullify(d.avg_net_price[key])
+      : null;
+  };
+
+  picc.access.yearDesignation = function(d) {
+    switch (d.common_degree) {
+      case '2': // 2-year (AKA less than 4-year)
+        return 'lt_four_year';
+      case '3': // 4-year
+        return 'four_year';
+    }
+    // FIXME
+    return 'other';
+  };
+
+  picc.access.medianEarnings = function(d) {
+    return picc.nullify(d.median_earnings);
+  };
+
+  picc.access.completionRate = function(d) {
+    var designation = picc.access.yearDesignation(d);
+    return designation
+      ? picc.nullify(d.completion_rate[designation])
+      : null;
+  };
+
+  picc.access.specialDesignation = function(d) {
+    var designations = [];
+
+    if (+d.women_only) {
+      designations.push(SPECIAL_DESIGNATIONS.women_only);
+    } else if (+d.men_only) {
+      designations.push(SPECIAL_DESIGNATIONS.men_only);
+    }
+
+    if (d.minority_serving) {
+      for (var key in SPECIAL_DESIGNATIONS) {
+        if (+d.minority_serving[key]) {
+          designations.push(SPECIAL_DESIGNATIONS[key]);
+        }
+      }
+    }
+
+    return designations.join(', ');
+  };
+
+  picc.nullify = function(value) {
+    return value === 'NULL' ? null : value;
   };
 
 })(this);

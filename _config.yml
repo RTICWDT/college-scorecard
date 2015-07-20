@@ -34,6 +34,8 @@ api:
 # Note: files and directories with the '_' prefix are excluded
 # automatically
 exclude:
-  - js/vendor/node_modules
-  - js/vendor/package.json
-  - js/vendor/Makefile
+  - package.json
+  - node_modules
+  - '**/Makefile'
+  - 'Gemfile*'
+  - config.ru

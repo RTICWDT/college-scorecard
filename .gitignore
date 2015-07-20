@@ -1,2 +1,4 @@
-_site
+.env
 .sass-cache
+_config.local.yml
+_site

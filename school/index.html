@@ -76,44 +76,49 @@ body_scripts:
         <div id="key-stats" class="school-meters">
           <figure class="meter">
             <h2 class="figure-heading constrain_width">Average Cost Per Year</h2>
-            <picc-meter class="cost" data-bind="average_cost_meter"
-              max="100000"
-              value="33209"
-              average="60000">
+            <picc-meter class="cost"
+              data-bind="average_cost_meter"
+              data-max-public="{{ site.data.national_stats.average_price_public.max }}"
+              data-max-private="{{ site.data.national_stats.average_price_private.max }}"
+              data-median-public="{{ site.data.national_stats.average_price_public.median }}"
+              data-median-private="{{ site.data.national_stats.average_price_private.median }}">
             </picc-meter>
             <figcaption>
-              <span data-bind="average_cost">$33,209</span>
+              <span data-bind="average_cost"></span>
             </figcaption>
           </figure>
 
           <figure class="meter">
             <h2 class="figure-heading constrain_width">Graduation Rate</h2>
             <picc-meter class="graduation"
-              max="150"
-              value="60"
-              average="70">
+              data-bind="grad_rate_meter"
+              max="1"
+              data-max-four_year="{{ site.data.national_stats.completion_rate_4.max }}"
+              data-max-lt_four_year="{{ site.data.national_stats.completion_rate_l4.max }}"
+              data-median-four_year="{{ site.data.national_stats.completion_rate_4.median }}"
+              data-median-lt_four_year="{{ site.data.national_stats.completion_rate_l4.median }}">
             </picc-meter>
             <figcaption>
-              <span data-bind="graduation_rate">60%</span>
+              <span data-bind="grad_rate"></span>
             </figcaption>
           </figure>
 
           <figure class="meter">
             <h2 class="figure-heading constrain_width">Average Salary</h2>
             <picc-meter class="earnings"
-              max="80000"
-              value="43900"
-              average="36000">
+              data-bind="average_salary_meter"
+              max="{{ site.data.median_earnings.max }}"
+              average="{{ site.data.median_earnings.median }}">
             </picc-meter>
             <figcaption>
-              <span data-bind="average_salary">$43,900</span>
+              <span data-bind="average_salary"></span>
             </figcaption>
           </figure>
         </div>
 
         <div class="section-card_container-school">
 
-          <div class="picc-accordion school-two_col">
+          <div id="cost" class="picc-accordion school-two_col">
 
             <div>
 
@@ -129,13 +134,16 @@ body_scripts:
 
                   <figure class="meter">
                     <h2 class="figure-heading">Average Net Price</h2>
-                    <picc-meter class="cost" data-bind="average_cost_meter"
-                      max="100000"
-                      value="33209"
-                      average="60000">
+                    <picc-meter id="cost-meter" class="cost"
+                      data-bind="average_cost_meter"
+                      data-max-public="{{ site.data.national_stats.average_price_public.max }}"
+                      data-max-private="{{ site.data.national_stats.average_price_private.max }}"
+                      data-median-public="{{ site.data.national_stats.average_price_public.median }}"
+                      data-median-private="{{ site.data.national_stats.average_price_private.median }}">
                     </picc-meter>
                     <figcaption>
-                      <span data-bind="average_cost">$33,209</span>
+                      <i class="fa average-arrow" data-meter="cost-meter"></i>
+                      <span data-bind="average_cost"></span>
                     </figcaption>
                   </figure>
                   <p>Assumes <strong>$XX,XXX</strong> in tuition and fees, <strong>$X,XXX</strong> in other costs like room and board, books and supplies, and other personal expenses.</p>

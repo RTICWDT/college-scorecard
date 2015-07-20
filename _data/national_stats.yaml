@@ -1,0 +1,24 @@
+SAT_avg:
+  min: null
+  max: null
+  median: null
+average_price_public:
+  min: -6359
+  max: 32921
+  median: 8446
+average_price_private:
+  min: -19360
+  max: 87414
+  median: 17706
+completion_rate_4:
+  min: 0
+  max: 1
+  median: 0.47
+completion_rate_l4:
+  min: 0
+  max: 1
+  median: 0.61
+median_earnings:
+  min: null
+  max: null
+  median: null

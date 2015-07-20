@@ -61,6 +61,8 @@
           });
 
           delete this.__timeout;
+
+          this.dispatchEvent(new CustomEvent('update'));
         }},
 
         min: {
