@@ -76,7 +76,8 @@
     console.error('error:', error);
     resultsRoot.classList.add('js-error');
     var message = resultsRoot.querySelector('.error-message');
-    message.textContent = String(error);
+    console.log('error:', error);
+    message.textContent = String(error.responseText || 'There was an unexpected API error.');
   }
 
   function removeEmptyValues(obj) {
