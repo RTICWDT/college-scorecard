@@ -65,16 +65,20 @@
     console.log('got school:', school);
     root.classList.remove('hidden');
 
-    d3.selectAll('i.average-arrow')
+    // update the above/below average icons whenever the
+    // corresponding meters update
+    d3.selectAll('i.average-arrow[data-meter]')
       .each(function() {
-        if (!this.hasAttribute('data-meter')) return;
         var icon = d3.select(this);
         var meter = d3.select('#' + this.getAttribute('data-meter'))
           .on('update', function() {
             var above = this.classList.contains('above-average');
             icon
               .classed('above-average fa-arrow-up', above)
-              .classed('below-average fa-arrow-down', !above);
+              .classed('below-average fa-arrow-down', !above)
+              .attr('title', above
+                ? 'above average'
+                : 'below average');
             // console.log('update:', this.className, above, icon.attr('class'));
           });
       });
