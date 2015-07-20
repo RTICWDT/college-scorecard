@@ -11,13 +11,13 @@ body_scripts:
   - school.js
 ---
 
-<section id="error" class="hidden">
+<section id="error" class="container hidden">
   <h2>Error</h2>
   <p class="error-message"></p>
   <form target="../search/" method="GET">
     <label for="name-school" >Try searching for a school by name:</h2>
     <input id="name-school" name="name" type="text" placeholder="Name of School" autocomplete="off" autocorrect="off" autocapitalize="off">
-    <input type="submit" value="Search">
+    <input type="submit" value="Search" class="button-primary">
   </form>
 </section>
 
@@ -75,7 +75,7 @@ body_scripts:
 
         <div id="key-stats" class="school-meters">
           <figure class="meter">
-            <h2 class="figure-heading">Average Net Price</h2>
+            <h2 class="figure-heading constrain_width">Average Cost Per Year</h2>
             <picc-meter class="cost"
               data-bind="average_cost_meter"
               data-max-public="{{ site.data.national_stats.average_price_public.max }}"
@@ -89,7 +89,7 @@ body_scripts:
           </figure>
 
           <figure class="meter">
-            <h2 class="figure-heading">Graduation Rate</h2>
+            <h2 class="figure-heading constrain_width">Graduation Rate</h2>
             <picc-meter class="graduation"
               data-bind="grad_rate_meter"
               max="1"
@@ -104,7 +104,7 @@ body_scripts:
           </figure>
 
           <figure class="meter">
-            <h2 class="figure-heading">Average Salary</h2>
+            <h2 class="figure-heading constrain_width">Average Salary</h2>
             <picc-meter class="earnings"
               data-bind="average_salary_meter"
               max="{{ site.data.median_earnings.max }}"
@@ -276,12 +276,98 @@ body_scripts:
           <div class="picc-accordion school-two_col">
             <div>
               <h1 class="search_category">
-                <a aria-expanded="false" aria-controls="selectivity-content">
-                  Selectivity
+                <a aria-expanded="false" aria-controls="graduation-content">
+                  Graduation &amp; Retention
                 </a>
               </h1>
 
-              <div id="selectivity-content" aria-hidden="true">
+              <div id="graduation-content" aria-hidden="true">
+
+                <div class="school-two_col-left centered">
+                  <figure class="meter">
+                    <h2 class="figure-heading constrain_width">Graduation Rate</h2>
+                    <picc-meter class="cost" data-bind="average_cost_meter"
+                      max="100000"
+                      value="33209"
+                      average="60000">
+                    </picc-meter>
+                    <figcaption>
+                      <span data-bind="average_cost">60%</span>
+                    </figcaption>
+                  </figure>
+                </div>
+
+                <div class="school-two_col-right centered">
+                  <figure class="meter">
+                    <h2 class="figure-heading">Students Who Return <br>After Their First Year</h2>
+                    <picc-meter class="cost" data-bind="average_cost_meter"
+                      max="100000"
+                      value="33209"
+                      average="60000">
+                    </picc-meter>
+                    <figcaption>
+                      <span data-bind="average_cost">82%</span>
+                    </figcaption>
+                  </figure>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-card_container-school">
+          <div class="picc-accordion school-two_col">
+            <div>
+              <h1 class="search_category">
+                <a aria-expanded="false" aria-controls="earnings-content">
+                  Earnings
+                </a>
+              </h1>
+
+              <div id="earnings-content" aria-hidden="true">
+                <div class="school-two_col-left centered">
+                  <figure class="meter">
+                    <h2 class="figure-heading">Average Salary <br>After Leaving School</h2>
+                    <picc-meter class="cost" data-bind="average_cost_meter"
+                      max="100000"
+                      value="33209"
+                      average="60000">
+                    </picc-meter>
+                    <figcaption>
+                      <span data-bind="average_cost">$43,900</span>
+                    </figcaption>
+                  </figure>
+                </div>
+
+                <div class="school-two_col-right centered">
+                  <figure class="meter">
+                    <h2 class="figure-heading">Former Students <br>Earning Less Than $25K</h2>
+                    <picc-meter class="cost" data-bind="average_cost_meter"
+                      max="100000"
+                      value="33209"
+                      average="60000">
+                    </picc-meter>
+                    <figcaption>
+                      <span data-bind="average_cost">15%</span>
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-card_container-school">
+          <div class="picc-accordion school-two_col">
+            <div>
+              <h1 class="search_category">
+                <a aria-expanded="false" aria-controls="student-content">
+                  Student Body
+                </a>
+              </h1>
+
+              <div id="student-content" aria-hidden="true">
                 <p>Text here</p>
               </div>
             </div>
@@ -292,17 +378,90 @@ body_scripts:
           <div class="picc-accordion school-two_col">
             <div>
               <h1 class="search_category">
-                <a aria-expanded="false" aria-controls="graduation-content">
-                  Graduation &amp; Retention
+                <a aria-expanded="false" aria-controls="selectivity-content">
+                  Selectivity
                 </a>
               </h1>
 
-              <div id="graduation-content" aria-hidden="true">
-                <p>Text here</p>
+              <div id="selectivity-content" aria-hidden="true">
+                <div class="school-two_col-left centered">
+                  <h2>Acceptance Rate</h2>
+                  <strong class="fact_number">Somewhat Selective</strong>
+                  <p>[chart here]</p>
+                </div>
+
+                <div class="school-two_col-right">
+
+                  <h2>Test Scores</h2>
+                  <p>Students who were admitted typically had standardized test score in these ranges.</p>
+
+                  <h3 class="h2">SAT</h3>
+                  <picc-range min="0" max="2400" lower="840" upper="1820" middle="1105">
+                  </picc-range>
+
+                  <h3 class="h2">ACT</h3>
+                  <picc-range min="1" max="36" lower="19" upper="25" middle="22">
+                  </picc-range>
+
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        <div class="section-card_container-school">
+          <div class="picc-accordion school-two_col">
+            <div>
+              <h1 class="search_category">
+                <a aria-expanded="false" aria-controls="academics-content">
+                  Academics
+                </a>
+              </h1>
+
+              <div id="academics-content" aria-hidden="true">
+                <div class="school-two_col-left">
+
+                  <div class="school-academics-fact group_inline">
+                    <div class="group_inline-left"><strong class="fact_number">87</strong></div>
+                    <div class="group_inline-right"><h2>Programs Offered</h2></div>
+                  </div>
+                  
+                  <h2>Most Popular Programs</h2>
+                  <ol class="decimal school-programs">
+                    <li>Management</li>
+                    <li>Nursing</li>
+                    <li>Psychology</li>
+                    <li>Biology</li>
+                    <li>Computer Science</li>
+                  </ol>
+                </div>
+
+                <div class="school-two_col-right">
+                
+                  <h2>Available Area of Study</h2>
+                  <ul class="school-long_list">
+                    <li>Accounting</li>
+                    <li>Accounting and Business Management</li>
+                    <li>Acting</li>
+                    <li>American Indian/Native American Studies</li>
+                    <li>Area Studies</li>
+                    <li>Art History, Criticism, and Conservation</li>
+                    <li>Biology/Biological Sciences</li>
+                    <li>Biopsychology</li>
+                    <li>Business Administration and Management</li>
+                    <li>Business Administration, Management, and Operations</li>
+                    <li>Accounting</li>
+                    <li>Accounting and Business Management</li>
+                    <li>Acting</li>
+                  </ul>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
 
       </div>
 
