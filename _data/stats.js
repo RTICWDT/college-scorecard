@@ -9,8 +9,21 @@ var valuesByColumn = {};
 
 var columns = {
   'SAT_avg':        'SAT_avg',
-  'NPT4_PUB':       'average_price_public',
-  'NPT4_PRIV':      'average_price_private',
+
+  'NPT4_PUB':       'net_price_public',
+  'NPT41_PUB':      'net_price_public_income1',
+  'NPT42_PUB':      'net_price_public_income2',
+  'NPT43_PUB':      'net_price_public_income3',
+  'NPT44_PUB':      'net_price_public_income4',
+  'NPT45_PUB':      'net_price_public_income5',
+
+  'NPT4_PRIV':      'net_price_private',
+  'NPT41_PRIV':     'net_price_private_income1',
+  'NPT42_PRIV':     'net_price_private_income2',
+  'NPT43_PRIV':     'net_price_private_income3',
+  'NPT44_PRIV':     'net_price_private_income4',
+  'NPT45_PRIV':     'net_price_private_income5',
+
   'C150_4':         'completion_rate_4',
   'C150_L4':        'completion_rate_l4',
   'earn_2002_p10':  'median_earnings'
