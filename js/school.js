@@ -128,6 +128,7 @@
   window.addEventListener('load', function() {
     var sectionId = location.hash.substr(1);
     if (!sectionId) return;
+    var found;
     d3.selectAll('.picc-accordion')
       .each(function() {
         if (this.id === sectionId) {
@@ -136,8 +137,14 @@
           var content = document.getElementById(button.getAttribute('aria-controls'));
           content.setAttribute('aria-hidden', 'false');
           content.classList.remove('hidden');
+          found = this;
         }
       });
+
+      if (found) {
+        location.hash = '';
+        location.hash = '#' + found.id;
+      }
   });
 
   function getSchoolId() {
