@@ -43,7 +43,6 @@
 
     grad_rate: format.percent(access.completionRate),
     grad_rate_meter: {
-      '@max':     access.nationalStat('max', access.yearDesignation),
       '@average': access.nationalStat('median', access.yearDesignation),
       '@value':   access.completionRate,
       '@title':   debugMeterTitle
