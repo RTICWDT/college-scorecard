@@ -239,11 +239,22 @@
     }
   };
 
-  picc.access.averageCost = function(d) {
+  picc.access.netPrice = function(d) {
     var key = picc.access.publicPrivate(d);
     return key
-      ? picc.nullify(d.avg_net_price[key])
+      ? d.avg_net_price
+        ? picc.nullify(d.avg_net_price[key])
+        : picc.nullify(d.net_price[key].average)
       : null;
+  };
+
+  picc.access.netPriceByIncomeLevel = function(level) {
+    return function(d) {
+      var key = picc.access.publicPrivate(d);
+      return d.net_price
+        ? picc.nullify(d.net_price[key].by_income_level[level])
+        : null;
+    };
   };
 
   picc.access.yearDesignation = function(d) {
