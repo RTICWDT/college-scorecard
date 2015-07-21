@@ -92,7 +92,7 @@ defaults:
             {{ average_cost_meter }}>
             </picc-meter>
             <figcaption>
-              <span data-bind="average_cost"></span>
+              <span data-bind="average_cost">$XX,XXX</span>
             </figcaption>
           </figure>
 
@@ -109,7 +109,7 @@ defaults:
             {{ grad_rate_meter }}>
             </picc-meter>
             <figcaption>
-              <span data-bind="grad_rate"></span>
+              <span data-bind="grad_rate">XX%</span>
             </figcaption>
           </figure>
 
@@ -125,7 +125,7 @@ defaults:
             {{ average_salary_meter }}>
             </picc-meter>
             <figcaption>
-              <span data-bind="average_salary"></span>
+              <span data-bind="average_salary">$XX,XXX</span>
             </figcaption>
           </figure>
         </div>
@@ -288,7 +288,7 @@ defaults:
         </div>
 
         <div class="section-card_container-school">
-          <div class="picc-accordion school-two_col">
+          <div id="graduation" class="picc-accordion school-two_col">
             <div>
               <h1 class="search_category">
                 <a aria-expanded="false" aria-controls="graduation-content">
@@ -301,13 +301,12 @@ defaults:
                 <div class="school-two_col-left centered">
                   <figure class="meter">
                     <h2 class="figure-heading constrain_width">Graduation Rate</h2>
-                    <picc-meter class="cost" data-bind="average_cost_meter"
-                      max="100000"
-                      value="33209"
-                      average="60000">
+                    <picc-meter id="grad-meter"
+                      {{ grad_rate_meter }}>
                     </picc-meter>
                     <figcaption>
-                      <span data-bind="average_cost">60%</span>
+                      <i class="fa average-arrow" data-meter="grad-meter"></i>
+                      <span data-bind="grad_rate">60%</span>
                     </figcaption>
                   </figure>
                 </div>
@@ -315,13 +314,16 @@ defaults:
                 <div class="school-two_col-right centered">
                   <figure class="meter">
                     <h2 class="figure-heading">Students Who Return <br>After Their First Year</h2>
-                    <picc-meter class="cost" data-bind="average_cost_meter"
-                      max="100000"
-                      value="33209"
-                      average="60000">
+                    <picc-meter id="return-meter"
+                      class="return"
+                      data-bind="return_rate_meter"
+                      max="{# TODO #}"
+                      value="{# TODO #}"
+                      average="{# TODO #}">
                     </picc-meter>
                     <figcaption>
-                      <span data-bind="average_cost">82%</span>
+                      <i class="fa average-cost" data-meter="return-meter"></i>
+                      <span data-bind="return_rate">XX%</span>
                     </figcaption>
                   </figure>
                 </div>
