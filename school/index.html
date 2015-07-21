@@ -80,12 +80,16 @@ defaults:
         <div id="key-stats" class="school-meters">
           <figure class="meter">
             <h2 class="figure-heading constrain_width">Average Cost Per Year</h2>
-            <picc-meter class="cost"
+            <picc-meter
+            {% capture average_cost_meter %}
+              class="cost"
               data-bind="average_cost_meter"
-              data-max-public="{{ site.data.national_stats.average_price_public.max|default:80000 }}"
-              data-max-private="{{ site.data.national_stats.average_price_private.max|default:80000 }}"
+              data-max-public="{{ site.data.national_stats.average_price_public.max }}"
+              data-max-private="{{ site.data.national_stats.average_price_private.max }}"
               data-median-public="{{ site.data.national_stats.average_price_public.median }}"
-              data-median-private="{{ site.data.national_stats.average_price_private.median }}">
+              data-median-private="{{ site.data.national_stats.average_price_private.median }}"
+            {% endcapture %}
+            {{ average_cost_meter }}>
             </picc-meter>
             <figcaption>
               <span data-bind="average_cost"></span>
@@ -94,11 +98,15 @@ defaults:
 
           <figure class="meter">
             <h2 class="figure-heading constrain_width">Graduation Rate</h2>
-            <picc-meter class="graduation"
+            <picc-meter
+            {% capture grad_rate_meter %}
+              class="graduation"
               data-bind="grad_rate_meter"
               max="1"
               data-median-four_year="{{ site.data.national_stats.completion_rate_4.median }}"
-              data-median-lt_four_year="{{ site.data.national_stats.completion_rate_l4.median }}">
+              data-median-lt_four_year="{{ site.data.national_stats.completion_rate_l4.median }}"
+            {% endcapture %}
+            {{ grad_rate_meter }}>
             </picc-meter>
             <figcaption>
               <span data-bind="grad_rate"></span>
@@ -107,10 +115,14 @@ defaults:
 
           <figure class="meter">
             <h2 class="figure-heading constrain_width">Average Salary</h2>
-            <picc-meter class="earnings"
+            <picc-meter
+            {% capture average_salary_meter %}
+              class="earnings"
               data-bind="average_salary_meter"
               {% if site.data.median_earnings.max %}max="{{ site.data.median_earnings.max }}"{% else %}max="{{ page.defaults.median_earnings.max }}"{% endif %}
-              average="{{ site.data.median_earnings.median }}">
+              average="{{ site.data.median_earnings.median }}"
+            {% endcapture %}
+            {{ average_salary_meter }}>
             </picc-meter>
             <figcaption>
               <span data-bind="average_salary"></span>
@@ -136,12 +148,8 @@ defaults:
 
                   <figure class="meter">
                     <h2 class="figure-heading">Average Net Price</h2>
-                    <picc-meter id="cost-meter" class="cost"
-                      data-bind="average_cost_meter"
-                      data-max-public="{{ site.data.national_stats.average_price_public.max }}"
-                      data-max-private="{{ site.data.national_stats.average_price_private.max }}"
-                      data-median-public="{{ site.data.national_stats.average_price_public.median }}"
-                      data-median-private="{{ site.data.national_stats.average_price_private.median }}">
+                    <picc-meter id="cost-meter"
+                      {{ average_cost_meter }}>
                     </picc-meter>
                     <figcaption>
                       <i class="fa average-arrow" data-meter="cost-meter"></i>
