@@ -334,7 +334,7 @@ defaults:
         </div>
 
         <div class="section-card_container-school">
-          <div class="picc-accordion school-two_col">
+          <div id="earnings" class="picc-accordion school-two_col">
             <div>
               <h1 class="search_category">
                 <a aria-expanded="false" aria-controls="earnings-content">
@@ -346,13 +346,12 @@ defaults:
                 <div class="school-two_col-left centered">
                   <figure class="meter">
                     <h2 class="figure-heading">Average Salary <br>After Leaving School</h2>
-                    <picc-meter class="cost" data-bind="average_cost_meter"
-                      max="100000"
-                      value="33209"
-                      average="60000">
+                    <picc-meter id="salary-meter"
+                      {{ average_salary_meter }}>
                     </picc-meter>
                     <figcaption>
-                      <span data-bind="average_cost">$43,900</span>
+                      <i class="fa average-cost" data-meter="salary-meter"></i>
+                      <span data-bind="average_salary">$XX,XXX</span>
                     </figcaption>
                   </figure>
                 </div>
@@ -360,12 +359,15 @@ defaults:
                 <div class="school-two_col-right centered">
                   <figure class="meter">
                     <h2 class="figure-heading">Former Students <br>Earning Less Than $25K</h2>
-                    <picc-meter class="cost" data-bind="average_cost_meter"
-                      max="100000"
-                      value="33209"
-                      average="60000">
+                    <picc-meter class="earnings"
+                      id="low-income-meter"
+                      data-bind="low_income_earnings_meter"
+                      max="{# TODO #}"
+                      value="{# TODO #}"
+                      average="{# TODO #}">
                     </picc-meter>
                     <figcaption>
+                      <i class="fa average-arrow" data-meter="low-income-meter"></i>
                       <span data-bind="average_cost">15%</span>
                     </figcaption>
                   </figure>
