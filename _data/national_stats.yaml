@@ -6,50 +6,10 @@ net_price_public:
   min: -6359
   max: 32921
   median: 8446
-net_price_public_income1:
-  min: -6876
-  max: 30266
-  median: 7373
-net_price_public_income2:
-  min: -9453
-  max: 34428
-  median: 8355
-net_price_public_income3:
-  min: -5973
-  max: 35216
-  median: 10606
-net_price_public_income4:
-  min: -7562
-  max: 31320
-  median: 12627
-net_price_public_income5:
-  min: -5668
-  max: 31217
-  median: 13187
 net_price_private:
   min: -19360
   max: 87414
   median: 17706
-net_price_private_income1:
-  min: -20147
-  max: 85287
-  median: 16114
-net_price_private_income2:
-  min: -19283
-  max: 72484
-  median: 17269.5
-net_price_private_income3:
-  min: -17803
-  max: 89010
-  median: 19539
-net_price_private_income4:
-  min: -15830
-  max: 89010
-  median: 21987
-net_price_private_income5:
-  min: -3076
-  max: 76664
-  median: 23337.5
 completion_rate_4:
   min: 0
   max: 1
