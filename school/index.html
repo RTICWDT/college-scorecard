@@ -9,6 +9,10 @@ stylesheets:
   - vendor/leaflet.css
 body_scripts:
   - school.js
+
+defaults:
+  median_earnings:
+    max: 150000
 ---
 
 <section id="error" class="container hidden">
@@ -78,8 +82,8 @@ body_scripts:
             <h2 class="figure-heading constrain_width">Average Cost Per Year</h2>
             <picc-meter class="cost"
               data-bind="average_cost_meter"
-              data-max-public="{{ site.data.national_stats.average_price_public.max }}"
-              data-max-private="{{ site.data.national_stats.average_price_private.max }}"
+              data-max-public="{{ site.data.national_stats.average_price_public.max|default:80000 }}"
+              data-max-private="{{ site.data.national_stats.average_price_private.max|default:80000 }}"
               data-median-public="{{ site.data.national_stats.average_price_public.median }}"
               data-median-private="{{ site.data.national_stats.average_price_private.median }}">
             </picc-meter>
@@ -93,8 +97,6 @@ body_scripts:
             <picc-meter class="graduation"
               data-bind="grad_rate_meter"
               max="1"
-              data-max-four_year="{{ site.data.national_stats.completion_rate_4.max }}"
-              data-max-lt_four_year="{{ site.data.national_stats.completion_rate_l4.max }}"
               data-median-four_year="{{ site.data.national_stats.completion_rate_4.median }}"
               data-median-lt_four_year="{{ site.data.national_stats.completion_rate_l4.median }}">
             </picc-meter>
@@ -107,7 +109,7 @@ body_scripts:
             <h2 class="figure-heading constrain_width">Average Salary</h2>
             <picc-meter class="earnings"
               data-bind="average_salary_meter"
-              max="{{ site.data.median_earnings.max }}"
+              {% if site.data.median_earnings.max %}max="{{ site.data.median_earnings.max }}"{% else %}max="{{ page.defaults.median_earnings.max }}"{% endif %}
               average="{{ site.data.median_earnings.median }}">
             </picc-meter>
             <figcaption>
