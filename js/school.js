@@ -33,13 +33,19 @@
       // TODO
     },
 
-    average_cost: format.dollars(access.averageCost),
+    average_cost: format.dollars(access.netPrice),
     average_cost_meter: {
       '@max':     access.nationalStat('max', access.publicPrivate),
       '@average': access.nationalStat('median', access.publicPrivate),
-      '@value':   access.averageCost,
+      '@value':   access.netPrice,
       '@title':   debugMeterTitle
     },
+
+    net_price_income1: format.dollars(access.netPriceByIncomeLevel('0-30000')),
+    net_price_income2: format.dollars(access.netPriceByIncomeLevel('30001-48000')),
+    net_price_income3: format.dollars(access.netPriceByIncomeLevel('48001-75000')),
+    net_price_income4: format.dollars(access.netPriceByIncomeLevel('75001-110000')),
+    net_price_income5: format.dollars(access.netPriceByIncomeLevel('110001-plus')),
 
     grad_rate: format.percent(access.completionRate),
     grad_rate_meter: {
