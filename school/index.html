@@ -316,17 +316,17 @@ defaults:
 
                 <div class="school-two_col-right centered">
                   <figure class="meter">
-                    <h2 class="figure-heading">Students Who Return <br>After Their First Year</h2>
-                    <picc-meter id="return-meter"
-                      class="return"
-                      data-bind="return_rate_meter"
-                      max="{# TODO #}"
-                      value="{# TODO #}"
-                      average="{# TODO #}">
+                    <h2 class="figure-heading">Students Who Return <br>Each Year</h2>
+                    <picc-meter id="retention-meter"
+                      class="graduation"
+                      data-bind="retention_rate_meter"
+                      about-threshold=".03"
+                      max="1"
+                      average="{{ site.data.national_stats.retention_rate.median }}">
                     </picc-meter>
                     <figcaption>
-                      <i class="fa average-cost" data-meter="return-meter"></i>
-                      <span data-bind="return_rate">XX%</span>
+                      <i class="fa average-arrow" data-meter="retention-meter"></i>
+                      <span data-bind="retention_rate_value">XX%</span>
                     </figcaption>
                   </figure>
                 </div>
