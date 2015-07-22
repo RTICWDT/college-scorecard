@@ -29,7 +29,7 @@
     @include font-size(1.1);
     margin-top: $base-padding-large;
     margin-bottom: $base-padding;
-    padding-left: $base-padding;
+    padding-left: $base-padding-lite;
   }
 
   .search_category {
@@ -37,15 +37,15 @@
   }
 
   @include respond-to(medium-up) {
-    @include span-columns(3);
+    @include span-columns(3 of 16);
   }
 
   .picc-accordion {
     $button-size: 28px;
     $button-margin: 5px;
-    padding-right: $base-padding;
-    padding-bottom: $base-padding;
-    padding-left: $base-padding;
+    padding-right: $base-padding-lite;
+    padding-bottom: $base-padding-lite;
+    padding-left: $base-padding-lite;
 
     min-height: $button-size + ($button-margin);
     @include respond-to(tiny-up) {
@@ -69,12 +69,19 @@
 .results-main {
   background-color: $mid-gray;
   @include respond-to(medium-up) {
-    @include span-columns(9);
+    @include span-columns(13 of 16);
   }
 }
 
 .results-main-schools {
 
+}
+
+.section-card_container .results-card {
+  h1 {
+    padding-top: 0;
+
+  }
 }
 
 .results-card {
