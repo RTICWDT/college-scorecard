@@ -69,8 +69,7 @@
             difference = value - average;
             line.style.removeProperty('display');
             line.style.setProperty('bottom', percent(this.average));
-            // TODO: get threshold from attribute
-            var aboutThreshold = .05 * (this.max - this.min);
+            var aboutThreshold = getAttr(this, 'about-threshold', .05) * (this.max - this.min);
             classify(this, {
               'above-average': difference > 0,
               'below-average': difference < 0,
