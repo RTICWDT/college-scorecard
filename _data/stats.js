@@ -8,33 +8,39 @@ var write = tito.createWriteStream('csv');
 var valuesByColumn = {};
 
 var columns = {
-  'SAT_avg':        'SAT_avg',
+  'SAT_avg': 'SAT_avg',
 
-  'NPT4_PUB':       'net_price_public',
+  'net_price_public': 'NPT4_PUB',
   /*
-  'NPT41_PUB':      'net_price_public_income1',
-  'NPT42_PUB':      'net_price_public_income2',
-  'NPT43_PUB':      'net_price_public_income3',
-  'NPT44_PUB':      'net_price_public_income4',
-  'NPT45_PUB':      'net_price_public_income5',
+  'net_price_public_income1': 'NPT41_PUB',
+  'net_price_public_income2': 'NPT42_PUB',
+  'net_price_public_income3': 'NPT43_PUB',
+  'net_price_public_income4': 'NPT44_PUB',
+  'net_price_public_income5': 'NPT45_PUB',
   */
 
-  'NPT4_PRIV':      'net_price_private',
+  'net_price_private': 'NPT4_PRIV',
   /*
-  'NPT41_PRIV':     'net_price_private_income1',
-  'NPT42_PRIV':     'net_price_private_income2',
-  'NPT43_PRIV':     'net_price_private_income3',
-  'NPT44_PRIV':     'net_price_private_income4',
-  'NPT45_PRIV':     'net_price_private_income5',
+  'net_price_private_income1': 'NPT41_PRIV',
+  'net_price_private_income2': 'NPT42_PRIV',
+  'net_price_private_income3': 'NPT43_PRIV',
+  'net_price_private_income4': 'NPT44_PRIV',
+  'net_price_private_income5': 'NPT45_PRIV',
   */
 
-  'C150_4':         'completion_rate_4',
-  'C150_L4':        'completion_rate_l4',
-  'earn_2002_p10':  'median_earnings'
+  'completion_rate_4': 'C150_4',
+  'completion_rate_l4': 'C150_L4',
+  'median_earnings': 'earn_2002_p10',
+
+  'retention_rate': function(d) {
+    with (d) {
+      return ((UGDS * (PPTUG_EF || PPTUG_EF2) * (RET_PT4 || RET_PTL4)) + ((UGDS-(UGDS * (PPTUG_EF || PPTUG_EF2))) * (RET_FT4 || RET_FTL4))) / UGDS;
+    }
+  }
 };
 
-for (var src in columns) {
-  valuesByColumn[columns[src]] = [];
+for (var dest in columns) {
+  valuesByColumn[dest] = [];
 }
 
 var stats = {
@@ -47,9 +53,12 @@ process.stdin
   .pipe(read)
   .on('data', function(d) {
     // console.log('read row:', JSON.stringify(d).substr(0, 100), '...');
-    for (var src in columns) {
-      var value = number(d[src]);
-      valuesByColumn[columns[src]].push(value);
+    for (var dest in columns) {
+      var src = columns[dest];
+      var value = number(typeof src === 'function'
+        ? src.call(this, d, dest)
+        : d[src]);
+      valuesByColumn[dest].push(value);
     }
   })
   .on('end', output);
