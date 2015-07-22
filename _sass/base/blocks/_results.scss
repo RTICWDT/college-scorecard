@@ -1,0 +1,59 @@
+// Search results page
+//============================================
+
+.results {
+  background: linear-gradient(
+    to right, 
+    $white 0%, 
+    $white 50%, 
+    $mid-gray 50%, 
+    $mid-gray 100%
+  );
+  margin-top: 0;
+
+  div.container {
+    padding-bottom: $base-padding;
+
+    h1 {
+      padding-bottom: $base-padding-lite;
+    }
+  }
+}
+
+.results-filter {
+  @include respond-to(medium-up) {
+    @include span-columns(3);
+  }
+}
+
+.results-main {
+  background-color: $mid-gray;
+  @include respond-to(medium-up) {
+    @include span-columns(9);
+  }
+}
+
+.results-main-schools {
+
+}
+
+.results-card {
+  padding: $base-padding;
+
+  ul {
+    border-bottom: $thin-border-size solid $base-border-color;
+    margin-bottom: $base-padding;
+    padding-bottom: $base-padding;
+  }
+
+  h1 {
+    padding-top: 0;
+    padding-bottom: $base-padding-lite;
+  }
+
+  @include respond-to(medium-up) {
+    @include span-columns(4);
+    @include omega(3n);
+  }
+}
+
