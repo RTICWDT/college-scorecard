@@ -279,6 +279,19 @@
       : null;
   };
 
+  picc.access.retentionRate = function(d) {
+    var designation = picc.access.yearDesignation(d);
+    var partTimeShare = d.part_time_share[1] || d.part_time_share[2];
+    var retention = d.retention_rate[designation];
+    var partTimeRate = retention ? retention.part_time : 0;
+    var fullTime = retention ? retention.full_time : 0;
+    var size = d.size;
+    return (
+      (size * partTimeShare * partTimeRate) +
+      ((size - size * partTimeShare) * fullTime)
+    ) / size;
+  };
+
   picc.access.specialDesignation = function(d) {
     var designations = [];
 
