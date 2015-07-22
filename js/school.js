@@ -58,6 +58,12 @@
     average_salary_meter: {
       '@value': access.medianEarnings,
       '@title': debugMeterTitle
+    },
+
+    retention_rate_value: format.percent(picc.access.retentionRate),
+    retention_rate_meter: {
+      '@value': picc.access.retentionRate,
+      '@title': debugMeterTitle
     }
 
   };
