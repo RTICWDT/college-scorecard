@@ -129,6 +129,7 @@ a {
 .section-card_container-results {
   @extend .section-card_container;
   background-color: $tertiary-background-color;
+  padding-top: 0;
 }
 
 

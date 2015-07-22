@@ -12,7 +12,7 @@
   margin-top: 0;
 
   div.container {
-    padding-bottom: $base-padding;
+    padding-bottom: 0;
 
     h1 {
       padding-bottom: $base-padding-lite;
@@ -74,11 +74,42 @@
 }
 
 .results-main-schools {
+  .school-info {
+    margin-bottom: $base-padding-lite;
+  }
 
+  .school-meters {
+    figure.meter {
+      @include span-columns(5 of 15);
+      @include omega(3n);
+      margin: 1px;
+
+      h2.figure-heading {
+        @include font-size(0.75);
+        &.constrain_width {
+          margin-left: -5%;
+          width: 110%;
+        }
+      }
+
+      picc-meter {
+        height: 120px;
+        width: 90%;
+      }
+    }
+  }
+
+  .link-more {
+    @include span-columns(12 of 12);
+    border-top: $thin-border-size solid $base-border-color;
+    margin-top: $base-padding;
+    padding-top: $base-padding;
+  }
 }
 
 .section-card_container .results-card {
   h1 {
+    @include font-size(1.4);
     padding-top: 0;
 
   }
@@ -88,7 +119,9 @@
   padding: $base-padding;
 
   ul {
+    @include font-size(0.9);
     border-bottom: $thin-border-size solid $base-border-color;
+    font-weight: bold;
     margin-bottom: $base-padding;
     padding-bottom: $base-padding;
   }
