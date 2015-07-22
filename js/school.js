@@ -33,17 +33,22 @@
       // TODO
     },
 
-    average_cost: format.dollars(access.averageCost),
+    average_cost: format.dollars(access.netPrice),
     average_cost_meter: {
       '@max':     access.nationalStat('max', access.publicPrivate),
       '@average': access.nationalStat('median', access.publicPrivate),
-      '@value':   access.averageCost,
+      '@value':   access.netPrice,
       '@title':   debugMeterTitle
     },
 
+    net_price_income1: format.dollars(access.netPriceByIncomeLevel('0-30000')),
+    net_price_income2: format.dollars(access.netPriceByIncomeLevel('30001-48000')),
+    net_price_income3: format.dollars(access.netPriceByIncomeLevel('48001-75000')),
+    net_price_income4: format.dollars(access.netPriceByIncomeLevel('75001-110000')),
+    net_price_income5: format.dollars(access.netPriceByIncomeLevel('110001-plus')),
+
     grad_rate: format.percent(access.completionRate),
     grad_rate_meter: {
-      '@max':     access.nationalStat('max', access.yearDesignation),
       '@average': access.nationalStat('median', access.yearDesignation),
       '@value':   access.completionRate,
       '@title':   debugMeterTitle
@@ -52,6 +57,12 @@
     average_salary: format.dollars(access.medianEarnings),
     average_salary_meter: {
       '@value': access.medianEarnings,
+      '@title': debugMeterTitle
+    },
+
+    retention_rate_value: format.percent(picc.access.retentionRate),
+    retention_rate_meter: {
+      '@value': picc.access.retentionRate,
       '@title': debugMeterTitle
     }
 
@@ -129,6 +140,7 @@
   window.addEventListener('load', function() {
     var sectionId = location.hash.substr(1);
     if (!sectionId) return;
+    var found;
     d3.selectAll('.picc-accordion')
       .each(function() {
         if (this.id === sectionId) {
@@ -137,8 +149,14 @@
           var content = document.getElementById(button.getAttribute('aria-controls'));
           content.setAttribute('aria-hidden', 'false');
           content.classList.remove('hidden');
+          found = this;
         }
       });
+
+      if (found) {
+        location.hash = '';
+        location.hash = '#' + found.id;
+      }
   });
 
   function getSchoolId() {

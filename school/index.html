@@ -9,6 +9,10 @@ stylesheets:
   - vendor/leaflet.css
 body_scripts:
   - school.js
+
+defaults:
+  median_earnings:
+    max: 150000
 ---
 
 <section id="error" class="container hidden">
@@ -76,42 +80,52 @@ body_scripts:
         <div id="key-stats" class="school-meters">
           <figure class="meter">
             <h2 class="figure-heading constrain_width">Average Cost Per Year</h2>
-            <picc-meter class="cost"
+            <picc-meter
+            {% capture average_cost_meter %}
+              class="cost"
               data-bind="average_cost_meter"
-              data-max-public="{{ site.data.national_stats.average_price_public.max }}"
-              data-max-private="{{ site.data.national_stats.average_price_private.max }}"
-              data-median-public="{{ site.data.national_stats.average_price_public.median }}"
-              data-median-private="{{ site.data.national_stats.average_price_private.median }}">
+              data-max-public="{{ site.data.national_stats.net_price_public.max }}"
+              data-max-private="{{ site.data.national_stats.net_price_private.max }}"
+              data-median-public="{{ site.data.national_stats.net_price_public.median }}"
+              data-median-private="{{ site.data.national_stats.net_price_private.median }}"
+            {% endcapture %}
+            {{ average_cost_meter }}>
             </picc-meter>
             <figcaption>
-              <span data-bind="average_cost"></span>
+              <span data-bind="average_cost">$XX,XXX</span>
             </figcaption>
           </figure>
 
           <figure class="meter">
             <h2 class="figure-heading constrain_width">Graduation Rate</h2>
-            <picc-meter class="graduation"
+            <picc-meter
+            {% capture grad_rate_meter %}
+              class="graduation"
               data-bind="grad_rate_meter"
               max="1"
-              data-max-four_year="{{ site.data.national_stats.completion_rate_4.max }}"
-              data-max-lt_four_year="{{ site.data.national_stats.completion_rate_l4.max }}"
               data-median-four_year="{{ site.data.national_stats.completion_rate_4.median }}"
-              data-median-lt_four_year="{{ site.data.national_stats.completion_rate_l4.median }}">
+              data-median-lt_four_year="{{ site.data.national_stats.completion_rate_l4.median }}"
+            {% endcapture %}
+            {{ grad_rate_meter }}>
             </picc-meter>
             <figcaption>
-              <span data-bind="grad_rate"></span>
+              <span data-bind="grad_rate">XX%</span>
             </figcaption>
           </figure>
 
           <figure class="meter">
             <h2 class="figure-heading constrain_width">Average Salary</h2>
-            <picc-meter class="earnings"
+            <picc-meter
+            {% capture average_salary_meter %}
+              class="earnings"
               data-bind="average_salary_meter"
-              max="{{ site.data.median_earnings.max }}"
-              average="{{ site.data.median_earnings.median }}">
+              {% if site.data.median_earnings.max %}max="{{ site.data.median_earnings.max }}"{% else %}max="{{ page.defaults.median_earnings.max }}"{% endif %}
+              average="{{ site.data.median_earnings.median }}"
+            {% endcapture %}
+            {{ average_salary_meter }}>
             </picc-meter>
             <figcaption>
-              <span data-bind="average_salary"></span>
+              <span data-bind="average_salary">$XX,XXX</span>
             </figcaption>
           </figure>
         </div>
@@ -134,20 +148,17 @@ body_scripts:
 
                   <figure class="meter">
                     <h2 class="figure-heading">Average Net Price</h2>
-                    <picc-meter id="cost-meter" class="cost"
-                      data-bind="average_cost_meter"
-                      data-max-public="{{ site.data.national_stats.average_price_public.max }}"
-                      data-max-private="{{ site.data.national_stats.average_price_private.max }}"
-                      data-median-public="{{ site.data.national_stats.average_price_public.median }}"
-                      data-median-private="{{ site.data.national_stats.average_price_private.median }}">
+                    <picc-meter id="cost-meter"
+                      {{ average_cost_meter }}>
                     </picc-meter>
                     <figcaption>
                       <i class="fa average-arrow" data-meter="cost-meter"></i>
                       <span data-bind="average_cost"></span>
                     </figcaption>
                   </figure>
+                  <!--
                   <p>Assumes <strong>$XX,XXX</strong> in tuition and fees, <strong>$X,XXX</strong> in other costs like room and board, books and supplies, and other personal expenses.</p>
-
+                  -->
                 </div>
 
                 <div class="school-two_col-right">
@@ -164,23 +175,23 @@ body_scripts:
                     <tbody>
                       <tr>
                         <td>$0-$30,000</td>
-                        <td>$5,000</td>
+                        <td data-bind="net_price_income1">$X,XXX</td>
                       </tr>
                       <tr>
                         <td>$30,001-$48,000</td>
-                        <td>$XX,XXX</td>
+                        <td data-bind="net_price_income2">$XX,XXX</td>
                       </tr>
                       <tr>
                         <td>$48,001-$75,000</td>
-                        <td>$XX,XXX</td>
+                        <td data-bind="net_price_income3">$XX,XXX</td>
                       </tr>
                       <tr>
-                        <td>$75,001-$130,000</td>
-                        <td>$XX,XXX</td>
+                        <td>$75,001-$110,000</td>
+                        <td data-bind="net_price_income4">$XX,XXX</td>
                       </tr>
                       <tr>
-                        <td>$130,001+</td>
-                        <td>$XX,XXX</td>
+                        <td>$110,001+</td>
+                        <td data-bind="net_price_income5">$XX,XXX</td>
                       </tr>
                     </tbody>
                   </table>
@@ -194,7 +205,7 @@ body_scripts:
         </div>
 
         <div class="section-card_container-school">
-          <div class="picc-accordion school-two_col">
+          <div id="finaid" class="picc-accordion school-two_col">
             <div>
               <h1 class="search_category">
                 <a aria-expanded="false" aria-controls="finaid-content">
@@ -208,13 +219,16 @@ body_scripts:
 
                   <figure class="meter">
                     <h2 class="figure-heading">Students Who Have Defaulted on Loans</h2>
-                    <picc-meter class="cost" data-bind="average_cost_meter"
-                      max="100000"
-                      value="33209"
-                      average="60000">
+                    <picc-meter id="default-meter"
+                      class="default"
+                      data-bind="default_rate_meter"
+                      max="1"
+                      value="{# TODO #}"
+                      average="{{ site.data.national_stats.default_rate.median }}">
                     </picc-meter>
                     <figcaption>
-                      <span data-bind="average_cost">12%</span>
+                      <i class="fa average-arrow" data-meter="default-meter"></i>
+                      <span data-bind="default_rate">XX%</span>
                     </figcaption>
                   </figure>
 
@@ -234,34 +248,38 @@ body_scripts:
 
                   <div>
                     <h2>Average Total Debt</h2>
-                    <strong class="fact_number">$60,000</strong>
+                    <strong class="fact_number" data-bind="average_total_debt">$XX,XXX</strong>
                     <p>For those students who graduated</p>
                   </div>
 
                   <div>
                     <h2>Average Monthly Loan Payment</h2>
-                    <strong class="fact_number">$250<span>/mo</span></strong>
-                    <p>This is about equal to:</p>
+                    <strong class="fact_number" data-bind="average_monthly_loan_payment">$XXX<span>/mo</span></strong>
 
-                    <ul class="group_inline">
+                    <!--
+                    <p>This is about equal to:</p>
+                    <ul class="group_inline" data-bind="loan_payment_equivalents">
                       <li>
                         <div class="group_inline-left"><img src="{{ site.baseurl }}/img/education.svg" alt="Education"></div>
-                        <div class="group_inline-right">18% of your monthly salary</div>
+                        <div class="group_inline-right" data-bind="text">
+                          XX% of a graduate's monthly salary
+                        </div>
                       </li>
                       <li>
                         <div class="group_inline-left"><img src="{{ site.baseurl }}/img/education.svg" alt= class="school-callout""Education"></div>
-                        <div class="group_inline-right">A monthly car payment</div>
+                        <div class="group_inline-right">X months' car payments</div>
                       </li>
                       <li>
                         <div class="group_inline-left"><img src="{{ site.baseurl }}/img/education.svg" alt="Education"></div>
-                        <div class="group_inline-right">Half of a month's rent</div>
+                        <div class="group_inline-right">XX% of a month's rent</div>
                       </li>
                     </ul>
+                    -->
                   </div>
 
                   <div>
                     <h2>Students Receiving Federal Aid</h2>
-                    <strong class="fact_number">70%</strong>
+                    <strong class="fact_number" data-bind="federal_aid_percentage">XX%</strong>
                     <p>Brief explanation of what federal aid is and means. Nunc eu consectutur purus.</p>
                   </div>
 
@@ -273,7 +291,7 @@ body_scripts:
         </div>
 
         <div class="section-card_container-school">
-          <div class="picc-accordion school-two_col">
+          <div id="graduation" class="picc-accordion school-two_col">
             <div>
               <h1 class="search_category">
                 <a aria-expanded="false" aria-controls="graduation-content">
@@ -286,27 +304,29 @@ body_scripts:
                 <div class="school-two_col-left centered">
                   <figure class="meter">
                     <h2 class="figure-heading constrain_width">Graduation Rate</h2>
-                    <picc-meter class="cost" data-bind="average_cost_meter"
-                      max="100000"
-                      value="33209"
-                      average="60000">
+                    <picc-meter id="grad-meter"
+                      {{ grad_rate_meter }}>
                     </picc-meter>
                     <figcaption>
-                      <span data-bind="average_cost">60%</span>
+                      <i class="fa average-arrow" data-meter="grad-meter"></i>
+                      <span data-bind="grad_rate">60%</span>
                     </figcaption>
                   </figure>
                 </div>
 
                 <div class="school-two_col-right centered">
                   <figure class="meter">
-                    <h2 class="figure-heading">Students Who Return <br>After Their First Year</h2>
-                    <picc-meter class="cost" data-bind="average_cost_meter"
-                      max="100000"
-                      value="33209"
-                      average="60000">
+                    <h2 class="figure-heading">Students Who Return <br>Each Year</h2>
+                    <picc-meter id="retention-meter"
+                      class="graduation"
+                      data-bind="retention_rate_meter"
+                      about-threshold=".03"
+                      max="1"
+                      average="{{ site.data.national_stats.retention_rate.median }}">
                     </picc-meter>
                     <figcaption>
-                      <span data-bind="average_cost">82%</span>
+                      <i class="fa average-arrow" data-meter="retention-meter"></i>
+                      <span data-bind="retention_rate_value">XX%</span>
                     </figcaption>
                   </figure>
                 </div>
@@ -317,7 +337,7 @@ body_scripts:
         </div>
 
         <div class="section-card_container-school">
-          <div class="picc-accordion school-two_col">
+          <div id="earnings" class="picc-accordion school-two_col">
             <div>
               <h1 class="search_category">
                 <a aria-expanded="false" aria-controls="earnings-content">
@@ -329,13 +349,12 @@ body_scripts:
                 <div class="school-two_col-left centered">
                   <figure class="meter">
                     <h2 class="figure-heading">Average Salary <br>After Leaving School</h2>
-                    <picc-meter class="cost" data-bind="average_cost_meter"
-                      max="100000"
-                      value="33209"
-                      average="60000">
+                    <picc-meter id="salary-meter"
+                      {{ average_salary_meter }}>
                     </picc-meter>
                     <figcaption>
-                      <span data-bind="average_cost">$43,900</span>
+                      <i class="fa average-cost" data-meter="salary-meter"></i>
+                      <span data-bind="average_salary">$XX,XXX</span>
                     </figcaption>
                   </figure>
                 </div>
@@ -343,13 +362,16 @@ body_scripts:
                 <div class="school-two_col-right centered">
                   <figure class="meter">
                     <h2 class="figure-heading">Former Students <br>Earning Less Than $25K</h2>
-                    <picc-meter class="cost" data-bind="average_cost_meter"
-                      max="100000"
-                      value="33209"
-                      average="60000">
+                    <picc-meter class="earnings"
+                      id="low-income-meter"
+                      data-bind="low_income_earnings_meter"
+                      max="{# TODO #}"
+                      value="{# TODO #}"
+                      average="{# TODO #}">
                     </picc-meter>
                     <figcaption>
-                      <span data-bind="average_cost">15%</span>
+                      <i class="fa average-arrow" data-meter="low-income-meter"></i>
+                      <span data-bind="low_income_percent">XX%</span>
                     </figcaption>
                   </figure>
                 </div>

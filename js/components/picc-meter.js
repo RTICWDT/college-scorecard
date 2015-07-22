@@ -16,8 +16,8 @@
 
           this.min = getAttr(this, 'min', 0);
           this.max = getAttr(this, 'max', 1);
-          this.value = getAttr(this, 'value', 0);
-          this.average = getAttr(this, 'average', 0);
+          this.value = getAttr(this, 'value');
+          this.average = getAttr(this, 'average');
 
           this.update();
         }},
@@ -49,16 +49,34 @@
           };
 
           var bar = this.querySelector('.' + CLASS_PREFIX + 'bar');
+          // prevent the bar from exceeding the height
+          var value = Math.min(this.value, this.max);
+          bar.style.setProperty('height', percent(value));
+
           var line = this.querySelector('.' + CLASS_PREFIX + 'line');
 
-          bar.style.setProperty('height', percent(this.value));
-          line.style.setProperty('bottom', percent(this.average));
+          var average = this.average;
+          var difference;
+          // console.log('average:', this.getAttribute('average'), '->', average);
+          if (isNaN(average)) {
+            line.style.setProperty('display', 'none');
+            classify(this, {
+              'above-average': false,
+              'below-average': false,
+              'about-average': false
+            });
+          } else {
+            difference = value - average;
+            line.style.removeProperty('display');
+            line.style.setProperty('bottom', percent(this.average));
+            var aboutThreshold = getAttr(this, 'about-threshold', .05) * (this.max - this.min);
+            classify(this, {
+              'above-average': difference > 0,
+              'below-average': difference < 0,
+              'about-average': Math.abs(difference) <= aboutThreshold
+            });
+          }
 
-          var aboveAverage = this.value >= this.average;
-          classify(this, {
-            'above-average': aboveAverage,
-            'below-average': !aboveAverage
-          });
 
           delete this.__timeout;
 
@@ -80,7 +98,7 @@
             return this.__max;
           },
           set: function(value) {
-            this.__max = number(value, 0);
+            this.__max = number(value, 1);
             deferUpdate(this);
           }
         },
@@ -90,7 +108,7 @@
             return this.__value;
           },
           set: function(value) {
-            this.__value = number(value, 0);
+            this.__value = number(value);
             deferUpdate(this);
           }
         },
@@ -100,7 +118,7 @@
             return this.__average;
           },
           set: function(value) {
-            this.__average = number(value, 0);
+            this.__average = number(value);
             deferUpdate(this);
           }
         }
@@ -125,8 +143,10 @@
   }
 
   function number(value, fallback) {
-    var num = +value;
-    return isNaN(value) ? (fallback || 0) : num;
+    var num = String(value).length ? +value : NaN;
+    // console.log('number(', value, ') ->', num);
+    if (arguments.length < 2) fallback = NaN;
+    return isNaN(num) ? fallback : num;
   }
 
   function classify(el, classes) {

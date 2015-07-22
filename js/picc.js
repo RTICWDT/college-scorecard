@@ -239,11 +239,22 @@
     }
   };
 
-  picc.access.averageCost = function(d) {
+  picc.access.netPrice = function(d) {
     var key = picc.access.publicPrivate(d);
     return key
-      ? picc.nullify(d.avg_net_price[key])
+      ? d.avg_net_price
+        ? picc.nullify(d.avg_net_price[key])
+        : picc.nullify(d.net_price[key].average)
       : null;
+  };
+
+  picc.access.netPriceByIncomeLevel = function(level) {
+    return function(d) {
+      var key = picc.access.publicPrivate(d);
+      return d.net_price
+        ? picc.nullify(d.net_price[key].by_income_level[level])
+        : null;
+    };
   };
 
   picc.access.yearDesignation = function(d) {
@@ -266,6 +277,19 @@
     return designation
       ? picc.nullify(d.completion_rate[designation])
       : null;
+  };
+
+  picc.access.retentionRate = function(d) {
+    var designation = picc.access.yearDesignation(d);
+    var partTimeShare = d.part_time_share[1] || d.part_time_share[2];
+    var retention = d.retention_rate[designation];
+    var partTimeRate = retention ? retention.part_time : 0;
+    var fullTime = retention ? retention.full_time : 0;
+    var size = d.size;
+    return (
+      (size * partTimeShare * partTimeRate) +
+      ((size - size * partTimeShare) * fullTime)
+    ) / size;
   };
 
   picc.access.specialDesignation = function(d) {
