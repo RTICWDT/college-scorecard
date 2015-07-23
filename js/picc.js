@@ -295,7 +295,7 @@
     ) / size;
   };
 
-  picc.access.specialDesignation = function(d) {
+  picc.access.specialDesignations = function(d) {
     var designations = [];
 
     if (+d.women_only) {
@@ -312,7 +312,7 @@
       }
     }
 
-    return designations.join(', ');
+    return designations;
   };
 
   picc.nullify = function(value) {
@@ -356,7 +356,7 @@
       // this is a direct accessor because some designations
       // (e.g. `women_only`) are at the object root, rather than
       // nested in `minority_serving`.
-      special_designation: access.specialDesignation,
+      special_designations: access.specialDesignations,
 
       SAT_avg: function(d) {
         return picc.nullify(d.SAT_avg) || NA;
