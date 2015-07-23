@@ -98,6 +98,8 @@
 
 .results-main {
   background-color: $mid-gray;
+  min-height: 500px;
+
   @include respond-to(medium-up) {
     @include span-columns(13 of 16);
   }
