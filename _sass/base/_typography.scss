@@ -153,9 +153,11 @@ button {
 .special {
   background-color: #f6e768;
   display: inline-block;
-  line-height: 0.8;
-  margin-top: $base-padding;
-  padding: 0.2em;
+  font-weight: 600;
+  line-height: 1;
+  margin-right: $base-padding-lite;
+  margin-bottom: 0.2em;
+  padding: 0.3em;
   text-transform: uppercase;
 }
 

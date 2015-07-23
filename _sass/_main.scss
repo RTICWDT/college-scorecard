@@ -129,6 +129,7 @@ a {
 .section-card_container-results {
   @extend .section-card_container;
   background-color: $tertiary-background-color;
+  padding-top: 0;
 }
 
 
@@ -184,33 +185,3 @@ a {
     // @extend .new_line;
   }
 }
-
-
-// Search results page
-//============================================
-
-.results {
-  div.container {
-    padding-bottom: $base-padding;
-
-    h1 {
-      padding-bottom: $base-padding-lite;
-    }
-  }
-}
-
-.results-card {
-  padding: $base-padding;
-
-  ul {
-    border-bottom: $thin-border-size solid $base-border-color;
-    margin-bottom: $base-padding;
-    padding-bottom: $base-padding;
-  }
-
-  h1 {
-    padding-top: 0;
-    padding-bottom: $base-padding-lite;
-  }
-}
-
