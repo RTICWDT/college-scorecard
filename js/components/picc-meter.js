@@ -8,16 +8,6 @@
       {
 
         attachedCallback: {value: function() {
-          if (!this.__bar) {
-            var bar = this.__bar = this.appendChild(document.createElement('div'));
-            bar.className = CLASS_PREFIX + 'bar';
-          }
-
-          if (!this.__line) {
-            var line = this.__line = this.appendChild(document.createElement('div'));
-            line.className = CLASS_PREFIX + 'line';
-          }
-
           this.min = getAttr(this, 'min', 0);
           this.max = getAttr(this, 'max', 1);
           this.value = getAttr(this, 'value');
@@ -52,12 +42,12 @@
             return (scale(v) * 100).toFixed(1) + '%';
           };
 
-          var bar = this.__bar;
+          var bar = getBar(this);
           // prevent the bar from exceeding the height
           var value = Math.min(this.value, this.max);
           bar.style.setProperty('height', percent(value));
 
-          var line = this.__line;
+          var line = getLine(this);
 
           var average = this.average;
           var difference;
@@ -144,6 +134,26 @@
     return node.hasAttribute(attr)
       ? node.getAttribute(attr) || fallback
       : fallback;
+  }
+
+  function getBar(meter) {
+    var bar = meter.querySelector('.' + CLASS_PREFIX + 'bar');
+    if (!bar) {
+      bar = meter.appendChild(document.createElement('div'));
+      bar.className = CLASS_PREFIX + 'bar';
+    }
+    return bar;
+  }
+
+  function getLine(meter) {
+    var line = meter.querySelector('.' + CLASS_PREFIX + 'line');
+    if (!line) {
+      line = meter.appendChild(document.createElement('div'));
+      line.className = CLASS_PREFIX + 'line';
+      line.appendChild(document.createElement('span'))
+        .setAttribute('class', 'label');
+    }
+    return line;
   }
 
   function number(value, fallback) {
