@@ -84,7 +84,9 @@
    * object.
    */
   var SPECIAL_DESIGNATIONS = {
-    aanipi:               'AANAPISI',
+    // TODO: rename 'aanapi' or 'aanapisi'
+    // per <http://www2.ed.gov/programs/aanapi/index.html>
+    aanipi:               'AANAPI',
     hispanic:             'Hispanic',
     historically_black:   'Historically Black',
     predominantly_black:  'Predominantly Black',
