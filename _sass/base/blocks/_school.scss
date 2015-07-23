@@ -283,21 +283,21 @@
   padding-bottom: $base-padding;
 }
 
-.above-is-good .average-arrow.above-average,
-.below-is-good .average-arrow.below-average {
+.above-is-good .average.above-average,
+.below-is-good .average.below-average {
   color: $green;
 }
 
-.above-is-good .average-arrow.below-average,
-.below-is-good .average-arrow.above-average {
+.above-is-good .average.below-average,
+.below-is-good .average.above-average {
   color: $red;
 }
 
-.average-arrow.about-average {
+.average.about-average {
   color: $mid-blue;
 }
 
-.average-display {
+.average-label {
   font-size: .5em;
   font-weight: normal;
 }
