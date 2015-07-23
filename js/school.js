@@ -31,7 +31,6 @@
           .on('update', function() {
             var match = this.className.match(/\b(\w+)-average\b/);
             var state = match ? match[1] : 'na';
-            console.log(this.className, '->', state);
             icon
               .classed('above-average fa-arrow-up', state === 'above')
               .classed('below-average fa-arrow-down', state === 'below')
