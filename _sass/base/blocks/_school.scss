@@ -130,6 +130,11 @@
     margin-top: $base-padding;
     padding-top: $base-padding;
     text-align: center;
+
+    // don't show meter labels for top-level stats
+    picc-meter .label {
+      visibility: hidden;
+    }
   }
 
   .school-fact_list {

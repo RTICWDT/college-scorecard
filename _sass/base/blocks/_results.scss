@@ -129,6 +129,11 @@
       picc-meter {
         height: 120px;
         width: 90%;
+
+        // don't show labels on small meters
+        .label {
+          visibility: hidden;
+        }
       }
     }
   }
