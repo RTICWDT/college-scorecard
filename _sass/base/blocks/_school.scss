@@ -283,7 +283,21 @@
   padding-bottom: $base-padding;
 }
 
-// color the up arrows red
-.fa.above-average {
+.above-is-good .average-arrow.above-average,
+.below-is-good .average-arrow.below-average {
+  color: $green;
+}
+
+.above-is-good .average-arrow.below-average,
+.below-is-good .average-arrow.above-average {
   color: $red;
+}
+
+.average-arrow.about-average {
+  color: $mid-blue;
+}
+
+.average-display {
+  font-size: .5em;
+  font-weight: normal;
 }
