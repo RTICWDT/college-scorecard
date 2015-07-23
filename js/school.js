@@ -8,6 +8,12 @@
 
   var root = document.querySelector('#school');
 
+  var averageLabels = {
+    'above': 'Above average',
+    'below': 'Lower than average',
+    'about': 'About average'
+  };
+
   picc.API.getSchool(id, function(error, school) {
     if (error) {
       return showError(error);
@@ -23,15 +29,20 @@
         var icon = d3.select(this);
         var meter = d3.select('#' + this.getAttribute('data-meter'))
           .on('update', function() {
-            var above = this.classList.contains('above-average');
+            var match = this.className.match(/\b(\w+)-average\b/);
+            var state = match ? match[1] : null;
+            console.log(this.className, '->', state);
             icon
-              .classed('above-average fa-arrow-up', above)
-              .classed('below-average fa-arrow-down', !above)
-              .attr('title', above
-                ? 'above average'
-                : 'below average');
-            // console.log('update:', this.className, above, icon.attr('class'));
+              .classed('above-average fa-arrow-up', state === 'above')
+              .classed('below-average fa-arrow-down', state === 'below')
+              .classed('about-average fa-check', state === 'about');
+
+            var text = averageLabels[state];
+            icon.attr('title', text);
+            display.text(text);
           });
+        var display = d3.select(this.parentNode)
+          .select('.average-display');
       });
 
     // this is necessary because tagalong only binds to
