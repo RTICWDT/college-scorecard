@@ -375,6 +375,7 @@
         '@max':     access.nationalStat('max', access.publicPrivate),
         '@average': access.nationalStat('median', access.publicPrivate),
         '@value':   access.netPrice,
+        label:      format.dollars(access.nationalStat('median', access.publicPrivate)),
         '@title':   debugMeterTitle
       },
 
@@ -389,18 +390,21 @@
       grad_rate_meter: {
         '@average': access.nationalStat('median', access.yearDesignation),
         '@value':   access.completionRate,
+        label:      format.percent(access.nationalStat('median', access.yearDesignation)),
         '@title':   debugMeterTitle
       },
 
       average_salary: format.dollars(access.medianEarnings),
       average_salary_meter: {
         '@value': access.medianEarnings,
+        label:    format.dollars(access.medianEarnings),
         '@title': debugMeterTitle
       },
 
       retention_rate_value: format.percent(picc.access.retentionRate),
       retention_rate_meter: {
-        '@value': picc.access.retentionRate,
+        '@value': access.retentionRate,
+        label:    format.percent(access.retentionRate),
         '@title': debugMeterTitle
       },
 
