@@ -5,6 +5,8 @@
 
   var picc = exports.picc = {};
 
+  picc.BASE_URL = '{{ site.baseurl }}';
+
   picc.API = (function() {
     var API = {
       url: '{{ site.api.baseurl }}',
@@ -175,10 +177,11 @@
       // format.preddeg('deg')({deg: 2}) === '2-year'
       // format.preddeg('deg')({deg: 3}) === '4-year'
       preddeg: formatter(map({
+        '1': 'Certificate',
         '2': '2-year',
         '3': '4-year',
-        // '4': '???'
-      }, 'other degree designation')),
+        '4': 'Graduate'
+      }, NA)),
 
       sizeCategory: formatter(range([
         [0, 2000, 'Small'],
@@ -315,5 +318,108 @@
   picc.nullify = function(value) {
     return value === 'NULL' ? null : value;
   };
+
+  /**
+   * namespace for school-related stuff
+   */
+  picc.school = {};
+
+  /**
+   * common directives for school templates
+   */
+  picc.school.directives = (function() {
+    var access = picc.access;
+    var format = picc.format;
+
+    var href = function(d) {
+      var name = d.name.replace(/\W+/g, '-');
+      return [
+        picc.BASE_URL, '/school/?',
+        d.id, '-', name
+      ].join('');
+    };
+
+    return {
+      title: {
+        link: {
+          text: 'name',
+          '@href': href
+        }
+      },
+
+      size_number:    format.number('size'),
+      control:        format.control('ownership'),
+      locale_name:    format.locale('locale'),
+      years:          format.preddeg('common_degree'),
+      size_category:  format.sizeCategory('size'),
+
+      // this is a direct accessor because some designations
+      // (e.g. `women_only`) are at the object root, rather than
+      // nested in `minority_serving`.
+      special_designation: access.specialDesignation,
+
+      SAT_avg: function(d) {
+        return picc.nullify(d.SAT_avg) || NA;
+      },
+
+      SAT_meter: {
+        // TODO
+      },
+
+      ACT_meter: {
+        // TODO
+      },
+
+      average_cost: format.dollars(access.netPrice),
+      average_cost_meter: {
+        '@max':     access.nationalStat('max', access.publicPrivate),
+        '@average': access.nationalStat('median', access.publicPrivate),
+        '@value':   access.netPrice,
+        label:      format.dollars(access.nationalStat('median', access.publicPrivate)),
+        '@title':   debugMeterTitle
+      },
+
+      // income level net price stats
+      net_price_income1: format.dollars(access.netPriceByIncomeLevel('0-30000')),
+      net_price_income2: format.dollars(access.netPriceByIncomeLevel('30001-48000')),
+      net_price_income3: format.dollars(access.netPriceByIncomeLevel('48001-75000')),
+      net_price_income4: format.dollars(access.netPriceByIncomeLevel('75001-110000')),
+      net_price_income5: format.dollars(access.netPriceByIncomeLevel('110001-plus')),
+
+      grad_rate: format.percent(access.completionRate),
+      grad_rate_meter: {
+        '@average': access.nationalStat('median', access.yearDesignation),
+        '@value':   access.completionRate,
+        label:      format.percent(access.nationalStat('median', access.yearDesignation)),
+        '@title':   debugMeterTitle
+      },
+
+      average_salary: format.dollars(access.medianEarnings),
+      average_salary_meter: {
+        '@value': access.medianEarnings,
+        label:    format.dollars(access.medianEarnings),
+        '@title': debugMeterTitle
+      },
+
+      retention_rate_value: format.percent(picc.access.retentionRate),
+      retention_rate_meter: {
+        '@value': access.retentionRate,
+        label:    format.percent(access.retentionRate),
+        '@title': debugMeterTitle
+      },
+
+      more_link: {
+        '@href': href
+      }
+    };
+
+    function debugMeterTitle(d) {
+      return [
+        'value: ', this.getAttribute('value'), '\n',
+        'median: ', this.getAttribute('average')
+      ].join('');
+    }
+
+  })();
 
 })(this);

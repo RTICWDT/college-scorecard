@@ -129,6 +129,11 @@
       picc-meter {
         height: 120px;
         width: 90%;
+
+        // don't show labels on small meters
+        .label {
+          visibility: hidden;
+        }
       }
     }
   }
@@ -149,6 +154,15 @@
     h1 {
       @include font-size(1.4);
       padding-top: 0;
+
+      a[href] {
+        color: $darkest-blue;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
 
     @include respond-to(small-up) {

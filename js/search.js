@@ -35,24 +35,13 @@
     console.time('[render] template');
     // render the basic DOM template for each school
     tagalong(resultsRoot, data, {
-      results_word: format.plural('total', 'Result')
+      results_word: format.plural('total', 'Result'),
+      results_total: format.number('total', '0')
     });
-
-    d3.select(resultsRoot)
-      .datum(data)
-      .select('[data-bind="total"]')
-        .text(format.number('total', '0'));
 
     var resultsList = resultsRoot.querySelector('.schools-list');
-    tagalong(resultsList, data.results, {
-      size_pretty: format.number('size'),
-      link: {
-        '@href': function(d) {
-          var name = d.name.replace(/\W+/g, '-');
-          return ['../school/?', d.id, '-', name].join('');
-        }
-      }
-    });
+    tagalong(resultsList, data.results, picc.school.directives);
+
     console.timeEnd('[render] template');
 
     console.time('[render] charts');

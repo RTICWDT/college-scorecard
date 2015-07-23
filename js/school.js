@@ -1,6 +1,3 @@
----
-# // hey there
----
 (function(exports) {
 
   var id = getSchoolId();
@@ -10,63 +7,6 @@
   }
 
   var root = document.querySelector('#school');
-
-  var format = picc.format;
-  var access = picc.access;
-
-  var directives = {
-    size_number:    format.number('size'),
-    control:        format.control('ownership'),
-    locale_name:    format.locale('locale'),
-    years:          format.preddeg('common_degree'),
-    size_category:  format.sizeCategory('size'),
-
-    // this is a direct accessor because some designations
-    // (e.g. `women_only`) are at the object root, rather than
-    // nested in `minority_serving`.
-    special_designation: access.specialDesignation,
-
-    SAT_avg: function(d) {
-      return picc.nullify(d.SAT_avg) || '?';
-    },
-    SAT_meter: {
-      // TODO
-    },
-
-    average_cost: format.dollars(access.netPrice),
-    average_cost_meter: {
-      '@max':     access.nationalStat('max', access.publicPrivate),
-      '@average': access.nationalStat('median', access.publicPrivate),
-      '@value':   access.netPrice,
-      '@title':   debugMeterTitle
-    },
-
-    net_price_income1: format.dollars(access.netPriceByIncomeLevel('0-30000')),
-    net_price_income2: format.dollars(access.netPriceByIncomeLevel('30001-48000')),
-    net_price_income3: format.dollars(access.netPriceByIncomeLevel('48001-75000')),
-    net_price_income4: format.dollars(access.netPriceByIncomeLevel('75001-110000')),
-    net_price_income5: format.dollars(access.netPriceByIncomeLevel('110001-plus')),
-
-    grad_rate: format.percent(access.completionRate),
-    grad_rate_meter: {
-      '@average': access.nationalStat('median', access.yearDesignation),
-      '@value':   access.completionRate,
-      '@title':   debugMeterTitle
-    },
-
-    average_salary: format.dollars(access.medianEarnings),
-    average_salary_meter: {
-      '@value': access.medianEarnings,
-      '@title': debugMeterTitle
-    },
-
-    retention_rate_value: format.percent(picc.access.retentionRate),
-    retention_rate_meter: {
-      '@value': picc.access.retentionRate,
-      '@title': debugMeterTitle
-    }
-
-  };
 
   picc.API.getSchool(id, function(error, school) {
     if (error) {
@@ -97,6 +37,10 @@
     // this is necessary because tagalong only binds to
     // the first instance for each data or directive key
     var sections = root.querySelectorAll('.section-card_container-school');
+
+    // common school template directives
+    var directives = picc.school.directives;
+
     [root]
       .concat([].slice.call(sections))
       .forEach(function(node) {
@@ -175,13 +119,6 @@
     var target = container.querySelector('.error-message') || container;
     target.textContent = message;
     return target;
-  }
-
-  function debugMeterTitle(d) {
-    return [
-      'value: ', this.getAttribute('value'), '\n',
-      'median: ', this.getAttribute('average')
-    ].join('');
   }
 
 })(this);

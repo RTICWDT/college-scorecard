@@ -40,6 +40,15 @@ picc-meter {
       opacity: 0;
       transition: opacity .5s;
     }
+
+    .label {
+      height: 1em;
+      left: 100%;
+      line-height: 1em;
+      position: absolute;
+      margin: -.4em 0 0 8px;
+      // border: 1px dotted red;
+    }
   }
 
   &.above-average {
