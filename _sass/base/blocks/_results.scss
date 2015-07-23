@@ -2,13 +2,7 @@
 //============================================
 
 .results {
-  background: linear-gradient(
-    to right, 
-    $white 0%, 
-    $white 50%, 
-    $mid-gray 50%, 
-    $mid-gray 100%
-  );
+  background: $mid-gray;
   margin-top: 0;
 
   div.container {
@@ -18,17 +12,35 @@
       padding-bottom: $base-padding-lite;
     }
   }
+
+  @include respond-to(medium-up) {
+    background: linear-gradient(
+      to right, 
+      $white 0%, 
+      $white 50%, 
+      $mid-gray 50%, 
+      $mid-gray 100%
+    );
+  }
+}
+
+.show-loaded {
+  border-bottom: $regular-border-size solid darken($mid-gray, 10%);
 }
 
 .results-filter {
+  background-color: $white;
+  display: none;
+
   .search-form-intro {
     display: none;
   }
 
   .results-filter-title {
     @include font-size(1.1);
-    margin-top: $base-padding-large;
+    margin-top: ($base-padding-extra + $base-padding-lite);
     margin-bottom: $base-padding;
+    padding-top: $base-padding;
     padding-left: $base-padding-lite;
   }
 
@@ -64,6 +76,10 @@
   .search_form-submit {
     display: none;
   }
+
+  @include respond-to(medium-up) {
+    display: block;
+  }
 }
 
 .results-main {
@@ -74,6 +90,7 @@
 }
 
 .results-main-schools {
+
   .school-info {
     margin-bottom: $base-padding-lite;
   }
@@ -86,6 +103,7 @@
 
       h2.figure-heading {
         @include font-size(0.75);
+        min-height: 54px;
         &.constrain_width {
           margin-left: -5%;
           width: 110%;
@@ -107,11 +125,13 @@
   }
 }
 
-.section-card_container .results-card {
-  h1 {
-    @include font-size(1.4);
-    padding-top: 0;
+.section-card_container {
+  .results-card {
+    h1 {
+      @include font-size(1.4);
+      padding-top: 0;
 
+    }
   }
 }
 
@@ -131,7 +151,16 @@
     padding-bottom: $base-padding-lite;
   }
 
-  @include respond-to(medium-up) {
+  @include span-columns(12);
+  @include omega();
+
+  @include respond-to(small-up) {
+    @include span-columns(6);
+    @include omega(2n);
+  }
+
+  @include respond-to(large-up) {
+    @include omega-reset(2n);
     @include span-columns(4);
     @include omega(3n);
   }
