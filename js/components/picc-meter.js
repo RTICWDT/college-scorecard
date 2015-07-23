@@ -8,11 +8,15 @@
       {
 
         attachedCallback: {value: function() {
-          var bar = this.appendChild(document.createElement('div'));
-          bar.className = CLASS_PREFIX + 'bar';
+          if (!this.__bar) {
+            var bar = this.__bar = this.appendChild(document.createElement('div'));
+            bar.className = CLASS_PREFIX + 'bar';
+          }
 
-          var line = this.appendChild(document.createElement('div'));
-          line.className = CLASS_PREFIX + 'line';
+          if (!this.__line) {
+            var line = this.__line = this.appendChild(document.createElement('div'));
+            line.className = CLASS_PREFIX + 'line';
+          }
 
           this.min = getAttr(this, 'min', 0);
           this.max = getAttr(this, 'max', 1);
@@ -48,12 +52,12 @@
             return (scale(v) * 100).toFixed(1) + '%';
           };
 
-          var bar = this.querySelector('.' + CLASS_PREFIX + 'bar');
+          var bar = this.__bar;
           // prevent the bar from exceeding the height
           var value = Math.min(this.value, this.max);
           bar.style.setProperty('height', percent(value));
 
-          var line = this.querySelector('.' + CLASS_PREFIX + 'line');
+          var line = this.__line;
 
           var average = this.average;
           var difference;
