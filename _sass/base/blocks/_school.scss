@@ -82,7 +82,32 @@
   }
 
   .school-key_figures {
+    $height: 50px;
     margin-top: $base-padding;
+
+    $list: urban, rural, trees, house;
+
+    @each $icon in $list {
+      .icon-#{$icon} {
+        background: url(../img/school-icons/#{$icon}.png) no-repeat;
+        background: url(../img/school-icons/#{$icon}.svg) no-repeat,
+          linear-gradient(transparent, transparent);
+        background-position: top center;
+        background-size: 50px $height;
+      }
+    }
+
+    li {
+      @include hyphens(auto);
+      display: inline-block;
+      font-weight: 600;
+      line-height: 1.1;
+      min-height: $height;
+      padding-top: ($height + 5px);
+      text-align: center;
+      vertical-align: top;
+      width: 70px;
+    }
   }
 
   .school-map {
