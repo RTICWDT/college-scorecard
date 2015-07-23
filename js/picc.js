@@ -177,10 +177,11 @@
       // format.preddeg('deg')({deg: 2}) === '2-year'
       // format.preddeg('deg')({deg: 3}) === '4-year'
       preddeg: formatter(map({
+        '1': 'Certificate',
         '2': '2-year',
         '3': '4-year',
-        // '4': '???'
-      }, 'other degree designation')),
+        '4': 'Graduate'
+      }, NA)),
 
       sizeCategory: formatter(range([
         [0, 2000, 'Small'],
