@@ -390,21 +390,27 @@
       grad_rate_meter: {
         '@average': access.nationalStat('median', access.yearDesignation),
         '@value':   access.completionRate,
-        label:      format.percent(access.nationalStat('median', access.yearDesignation)),
+        label:      format.percent(function() {
+          return this.getAttribute('average');
+        }),
         '@title':   debugMeterTitle
       },
 
       average_salary: format.dollars(access.medianEarnings),
       average_salary_meter: {
         '@value': access.medianEarnings,
-        label:    format.dollars(access.medianEarnings),
+        label:    format.dollars(function() {
+          return this.getAttribute('average');
+        }),
         '@title': debugMeterTitle
       },
 
       retention_rate_value: format.percent(picc.access.retentionRate),
       retention_rate_meter: {
         '@value': access.retentionRate,
-        label:    format.percent(access.retentionRate),
+        label:    format.percent(function() {
+          return this.getAttribute('average');
+        }),
         '@title': debugMeterTitle
       },
 
