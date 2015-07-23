@@ -30,7 +30,7 @@
         var meter = d3.select('#' + this.getAttribute('data-meter'))
           .on('update', function() {
             var match = this.className.match(/\b(\w+)-average\b/);
-            var state = match ? match[1] : null;
+            var state = match ? match[1] : 'na';
             console.log(this.className, '->', state);
             icon
               .classed('above-average fa-arrow-up', state === 'above')
@@ -39,10 +39,14 @@
 
             var text = averageLabels[state];
             icon.attr('title', text);
-            display.text(text);
+            label
+              .classed('above-average', state === 'above')
+              .classed('below-average', state === 'below')
+              .classed('about-average', state === 'about')
+              .text(text);
           });
-        var display = d3.select(this.parentNode)
-          .select('.average-display');
+        var label = d3.select(this.parentNode)
+          .select('.average-label');
       });
 
     // this is necessary because tagalong only binds to
