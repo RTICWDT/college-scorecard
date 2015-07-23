@@ -6,10 +6,19 @@
   margin-top: 0;
 
   div.container {
+    padding-right: 0;
     padding-bottom: 0;
+    padding-left: 0;
 
     h1 {
       padding-bottom: $base-padding-lite;
+    }
+  }
+
+  @include respond-to(small-up) {
+    div.container {
+      padding-right: $base-padding;
+      padding-left: $base-padding;
     }
   }
 
@@ -24,8 +33,13 @@
   }
 }
 
-.show-loaded {
+.results-main-alert {
   border-bottom: $regular-border-size solid darken($mid-gray, 10%);
+  text-align: center;
+
+  @include respond-to(small-up) {
+    text-align: left;
+  }
 }
 
 .results-filter {
@@ -125,12 +139,18 @@
   }
 }
 
-.section-card_container {
+.section-card_container-results {
+
   .results-card {
+    border-radius: 0;
+
     h1 {
       @include font-size(1.4);
       padding-top: 0;
+    }
 
+    @include respond-to(small-up) {
+      border-radius: 0.4em;
     }
   }
 }
