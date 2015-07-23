@@ -84,7 +84,7 @@
    * object.
    */
   var SPECIAL_DESIGNATIONS = {
-    aanipi:               'Alaskan American/Native Indian/Pacific Islander',
+    aanipi:               'AANAPISI',
     hispanic:             'Hispanic',
     historically_black:   'Historically Black',
     predominantly_black:  'Predominantly Black',
