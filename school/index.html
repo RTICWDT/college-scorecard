@@ -194,18 +194,17 @@ defaults:
 
                 <div class="school-two_col-left centered">
 
-                  <figure class="meter below_is_good">
-                    <h2 class="figure-heading">Students Who Have Defaulted on Loans</h2>
-                    <picc-meter id="default-meter"
-                      class="default"
-                      data-bind="default_rate_meter"
+                  <figure class="meter above_is_good">
+                    <h2 class="figure-heading">Students Repaying Their Loans on Time</h2>
+                    <picc-meter id="repayment-meter"
+                      class="debt"
+                      data-bind="repayment_rate_meter"
                       max="1"
-                      value="{# TODO #}"
-                      average="{{ site.data.national_stats.default_rate.median }}">
+                      data-median="{{ site.data.national_stats.repayment_rate.median }}">
                     </picc-meter>
                     <figcaption>
-                      <i class="fa average average-arrow" data-meter="default-meter"></i>
-                      <span data-bind="default_rate">XX%</span>
+                      <i class="fa average average-arrow" data-meter="repayment-meter"></i>
+                      <span data-bind="repayment_rate_percent">XX%</span>
                       <div class="average average-label"></div>
                     </figcaption>
                   </figure>
