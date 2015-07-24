@@ -430,6 +430,9 @@
         })
       },
 
+      average_total_debt: format.dollars('debt.median_completer_total'),
+      average_monthly_loan_payment: format.dollars('debt.median_monthly_payment'),
+
       retention_rate_value: format.percent(picc.access.retentionRate),
       retention_rate_meter: {
         '@value': access.retentionRate,
