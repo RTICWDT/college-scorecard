@@ -339,18 +339,18 @@ defaults:
                 </div>
 
                 <div class="school-two_col-right centered">
-                  <figure class="meter below_is_good">
-                    <h2 class="figure-heading">Former Students <br>Earning Less Than $25K</h2>
+                  <figure class="meter above_is_good">
+                    <h2 class="figure-heading">Former Students <br>Earning More Than $25K</h2>
                     <picc-meter class="earnings"
-                      id="low-income-meter"
-                      data-bind="low_income_earnings_meter"
-                      max="{# TODO #}"
-                      value="{# TODO #}"
-                      average="{# TODO #}">
+                      id="earn25k-meter"
+                      data-bind="earnings_gt_25k_meter"
+                      max="1"
+                      average=".6">
                     </picc-meter>
                     <figcaption>
-                      <i class="fa average average-arrow" data-meter="low-income-meter"></i>
-                      <span data-bind="low_income_percent">XX%</span>
+                      <i class="fa average average-arrow" data-meter="earn25k-meter"></i>
+                      <span data-bind="earnings_gt_25k">XX%</span>
+                      <div class="average average-label"></div>
                     </figcaption>
                   </figure>
                 </div>
