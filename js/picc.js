@@ -482,6 +482,14 @@
       average_total_debt: format.dollars('debt.median_completer_total'),
       average_monthly_loan_payment: format.dollars('debt.median_monthly_payment'),
 
+      federal_aid_percentage: format.percent(function(d) {
+        if (!d.loan_rate) return null;
+        return Math.max(
+          picc.nullify(d.loan_rate.federal),
+          picc.nullify(d.loan_rate.pell)
+        ) || null; // 0 is n/a
+      }),
+
       retention_rate_value: format.percent(picc.access.retentionRate),
       retention_rate_meter: {
         '@value': access.retentionRate,
