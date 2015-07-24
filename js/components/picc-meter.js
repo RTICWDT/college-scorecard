@@ -55,9 +55,9 @@
           if (isNaN(average)) {
             line.style.setProperty('display', 'none');
             classify(this, {
-              'above-average': false,
-              'below-average': false,
-              'about-average': false
+              'above_average': false,
+              'below_average': false,
+              'about_average': false
             });
           } else {
             difference = value - average;
@@ -65,9 +65,9 @@
             line.style.setProperty('bottom', percent(this.average));
             var aboutThreshold = getAttr(this, 'about-threshold', .05) * (this.max - this.min);
             classify(this, {
-              'above-average': difference > 0,
-              'below-average': difference < 0,
-              'about-average': Math.abs(difference) <= aboutThreshold
+              'above_average': difference > 0,
+              'below_average': difference < 0,
+              'about_average': Math.abs(difference) <= aboutThreshold
             });
           }
 

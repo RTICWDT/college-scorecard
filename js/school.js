@@ -29,19 +29,19 @@
         var icon = d3.select(this);
         var meter = d3.select('#' + this.getAttribute('data-meter'))
           .on('update', function() {
-            var match = this.className.match(/\b(\w+)-average\b/);
+            var match = this.className.match(/\b(\w+)_average\b/);
             var state = match ? match[1] : 'na';
             icon
-              .classed('above-average fa-arrow-up', state === 'above')
-              .classed('below-average fa-arrow-down', state === 'below')
-              .classed('about-average fa-check', state === 'about');
+              .classed('above_average fa-arrow-up', state === 'above')
+              .classed('below_average fa-arrow-down', state === 'below')
+              .classed('about_average fa-check', state === 'about');
 
             var text = averageLabels[state];
             icon.attr('title', text);
             label
-              .classed('above-average', state === 'above')
-              .classed('below-average', state === 'below')
-              .classed('about-average', state === 'about')
+              .classed('above_average', state === 'above')
+              .classed('below_average', state === 'below')
+              .classed('about_average', state === 'about')
               .text(text);
           });
         var label = d3.select(this.parentNode)

@@ -283,17 +283,17 @@
   padding-bottom: $base-padding;
 }
 
-.above-is-good .average.above-average,
-.below-is-good .average.below-average {
+.above-is-good .average.above_average,
+.below-is-good .average.below_average {
   color: $green;
 }
 
-.above-is-good .average.below-average,
-.below-is-good .average.above-average {
+.above-is-good .average.below_average,
+.below-is-good .average.above_average {
   color: $red;
 }
 
-.average.about-average {
+.average.about_average {
   color: $mid-blue;
 }
 
