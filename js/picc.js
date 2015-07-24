@@ -13,6 +13,14 @@
       key: '{{ site.api.key }}'
     };
 
+    // use the staging API if we're on Federalist previewing
+    // the staging branch
+    if (location.hostname === 'federalist.18f.gov'
+        && !!location.pathname.match(/\/staging\//)) {
+      API.url = 'http://ccapi-open-staging.cf.18f.us/';
+      API.key = '';
+    }
+
     var schoolEndpoint = 'school/';
     var idField = 'id';
 
