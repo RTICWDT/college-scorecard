@@ -36,7 +36,9 @@ var columns = {
     with (d) {
       return ((UGDS * (PPTUG_EF || PPTUG_EF2) * (RET_PT4 || RET_PTL4)) + ((UGDS-(UGDS * (PPTUG_EF || PPTUG_EF2))) * (RET_FT4 || RET_FTL4))) / UGDS;
     }
-  }
+  },
+
+  'earnings_gt_25k': 'gt_25k_2006_p6'
 };
 
 for (var dest in columns) {
