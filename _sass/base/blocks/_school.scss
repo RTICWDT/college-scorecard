@@ -367,8 +367,12 @@
   }
 
   @include span-columns(12);
-  @include respond-to(medium-up) {
+  @include omega();
+
+  @include respond-to(large-up) {
+    @include omega-reset();
     @include span-columns(4 of 12);
+    @include omega(3n);
   }
 }
 
