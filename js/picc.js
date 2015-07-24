@@ -134,7 +134,9 @@
         if (typeof empty === 'string') {
           empty = d3.functor(empty);
         }
-        key = picc.access(key);
+        key = key
+          ? picc.access(key)
+          : function(v) { return v; };
         return function(d) {
           var value = key.call(this, d);
           return ((!value || isNaN(value)) && empty)
@@ -335,6 +337,25 @@
     return designations.join(', ');
   };
 
+  picc.access.programAreas = function(d, metadata) {
+    if (!metadata) metadata = d.metadata;
+    if (!metadata || !metadata.dictionary) return [];
+
+    var dictionary = metadata.dictionary;
+    return Object.keys(d.program_percentage || {})
+      .map(function(key) {
+        var value = d.program_percentage[key];
+        var dictKey = 'program_percentage.' + key;
+        var name = dictionary[dictKey]
+          ? dictionary[dictKey].description
+          : key;
+        return {
+          program:  name,
+          percent:  value
+        };
+      });
+  };
+
   picc.nullify = function(value) {
     return value === 'NULL' ? null : value;
   };
@@ -426,6 +447,35 @@
         '@value': access.retentionRate,
         label:    format.percent(access.retentionRate),
         '@title': debugMeterTitle
+      },
+
+      available_programs: function(d) {
+        var areas = access.programAreas(d);
+        return areas
+          .sort(function(a, b) {
+            return d3.ascending(a.program, b.program);
+          });
+      },
+
+      num_available_programs: format.number(function(d) {
+        return access.programAreas(d).length;
+      }),
+
+      popular_programs: function(d) {
+        var areas = access.programAreas(d);
+        if (areas.length) {
+          var total = d3.sum(areas, picc.access('percent'));
+          var percent = format.percent();
+          areas.forEach(function(d) {
+            d.value = +d.percent / total;
+            d.percent = percent(d.value);
+          });
+        }
+        return areas
+          .sort(function(a, b) {
+            return d3.descending(a.value, b.value);
+          })
+          .slice(0, 5);
       },
 
       more_link: {
