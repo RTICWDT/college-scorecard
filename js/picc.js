@@ -104,7 +104,9 @@
    * object.
    */
   var SPECIAL_DESIGNATIONS = {
-    aanipi:               'Alaskan American/Native Indian/Pacific Islander',
+    // TODO: rename 'aanapi' or 'aanapisi'
+    // per <http://www2.ed.gov/programs/aanapi/index.html>
+    aanipi:               'AANAPI',
     hispanic:             'Hispanic',
     historically_black:   'Historically Black',
     predominantly_black:  'Predominantly Black',
@@ -317,7 +319,7 @@
     ) / size;
   };
 
-  picc.access.specialDesignation = function(d) {
+  picc.access.specialDesignations = function(d) {
     var designations = [];
 
     if (+d.women_only) {
@@ -334,7 +336,7 @@
       }
     }
 
-    return designations.join(', ');
+    return designations;
   };
 
   picc.access.programAreas = function(d, metadata) {
@@ -397,7 +399,7 @@
       // this is a direct accessor because some designations
       // (e.g. `women_only`) are at the object root, rather than
       // nested in `minority_serving`.
-      special_designation: access.specialDesignation,
+      special_designations: access.specialDesignations,
 
       SAT_avg: function(d) {
         return picc.nullify(d.SAT_avg) || NA;
@@ -431,21 +433,27 @@
       grad_rate_meter: {
         '@average': access.nationalStat('median', access.yearDesignation),
         '@value':   access.completionRate,
-        label:      format.percent(access.nationalStat('median', access.yearDesignation)),
+        label:      format.percent(function() {
+          return this.getAttribute('average');
+        }),
         '@title':   debugMeterTitle
       },
 
       average_salary: format.dollars(access.medianEarnings),
       average_salary_meter: {
         '@value': access.medianEarnings,
-        label:    format.dollars(access.medianEarnings),
+        label:    format.dollars(function() {
+          return this.getAttribute('average');
+        }),
         '@title': debugMeterTitle
       },
 
       retention_rate_value: format.percent(picc.access.retentionRate),
       retention_rate_meter: {
         '@value': access.retentionRate,
-        label:    format.percent(access.retentionRate),
+        label:    format.percent(function() {
+          return this.getAttribute('average');
+        }),
         '@title': debugMeterTitle
       },
 
