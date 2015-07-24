@@ -17,7 +17,7 @@
     // the staging branch
     if (location.hostname === 'federalist.18f.gov'
         && !!location.pathname.match(/\/staging\//)) {
-      API.url = 'http://ccapi-open-staging.cf.18f.us/';
+      API.url = 'https://ccapi-open-staging.18f.gov/';
       API.key = '';
     }
 
