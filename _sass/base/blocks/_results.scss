@@ -117,7 +117,7 @@
       @include omega(3n);
       margin: 1px;
 
-      .testy {
+      figcaption {
         @include font-size(1);
       }
 
