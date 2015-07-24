@@ -117,6 +117,10 @@
       @include omega(3n);
       margin: 1px;
 
+      .testy {
+        @include font-size(1);
+      }
+
       h2.figure-heading {
         @include font-size(0.75);
         min-height: 54px;
