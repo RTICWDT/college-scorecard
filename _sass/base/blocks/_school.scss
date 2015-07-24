@@ -301,3 +301,34 @@
   font-size: .5em;
   font-weight: normal;
 }
+
+.school-student-intro {
+  @include span-columns(12);
+  border-bottom: $thin-border-size solid $base-border-color;
+  display: inline-block;
+  padding-bottom: $base-padding;
+  text-align: center;
+
+  ul.school-key_figures li {
+    margin-right: 10px;
+  }
+
+  li.fact_number {
+    padding-top: 0;
+    width: auto;
+  }
+
+  li.school-key_figures-no_pad {
+    padding-top: 11px;
+  }
+}
+
+.school-student-figures {
+  @include span-columns(12);
+  border-bottom: $thin-border-size solid $base-border-color;
+  padding-top: $base-padding;
+  padding-bottom: $base-padding;
+  height: 200px;
+}
+
+
