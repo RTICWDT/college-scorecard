@@ -38,7 +38,10 @@ var columns = {
     }
   },
 
-  'repayment_rate': 'RPY_3YR_RT_SUPP'
+  'repayment_rate': 'RPY_3YR_RT_SUPP',
+
+  'median_completer_debt': 'GRAD_DEBT_MDN_SUPP',
+  'median_monthly_loan': 'GRAD_DEBT_MDN10YR_SUPP'
 };
 
 for (var dest in columns) {

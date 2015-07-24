@@ -30,3 +30,11 @@ repayment_rate:
   min: 0.05
   max: 1
   median: 0.59
+median_completer_debt:
+  min: 310
+  max: 51375
+  median: 14144
+median_monthly_loan:
+  min: 3.44
+  max: 570.37
+  median: 157.03
