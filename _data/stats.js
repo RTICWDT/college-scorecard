@@ -36,7 +36,9 @@ var columns = {
     with (d) {
       return ((UGDS * (PPTUG_EF || PPTUG_EF2) * (RET_PT4 || RET_PTL4)) + ((UGDS-(UGDS * (PPTUG_EF || PPTUG_EF2))) * (RET_FT4 || RET_FTL4))) / UGDS;
     }
-  }
+  },
+
+  'repayment_rate': 'RPY_3YR_RT_SUPP'
 };
 
 for (var dest in columns) {
