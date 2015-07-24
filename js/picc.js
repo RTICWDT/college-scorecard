@@ -317,8 +317,16 @@
     return 'other';
   };
 
-  picc.access.medianEarnings = function(d) {
-    return picc.nullify(d.median_earnings);
+  picc.access.earningsMedian = function(d) {
+    return picc.nullify(d.earnings
+      ? d.earnings.median
+      : d.median_earnings);
+  };
+
+  picc.access.earnings25k = function(d) {
+    return d.earnings
+      ? picc.nullify(d.earnings.percent_gt_25k)
+      : null;
   };
 
   picc.access.completionRate = function(d) {
@@ -461,9 +469,9 @@
         '@title':   debugMeterTitle
       },
 
-      average_salary: format.dollars(access.medianEarnings),
+      average_salary: format.dollars(access.earningsMedian),
       average_salary_meter: {
-        '@value': access.medianEarnings,
+        '@value': access.earningsMedian,
         label:    format.dollars(function() {
           return this.getAttribute('average');
         }),
@@ -489,6 +497,15 @@
           picc.nullify(d.loan_rate.pell)
         ) || null; // 0 is n/a
       }),
+
+      earnings_gt_25k: format.percent(access.earnings25k),
+      earnings_gt_25k_meter: {
+        '@value': access.earnings25k,
+        label: format.percent(function() {
+          return this.getAttribute('average');
+        }),
+        '@title': debugMeterTitle
+      },
 
       retention_rate_value: format.percent(picc.access.retentionRate),
       retention_rate_meter: {

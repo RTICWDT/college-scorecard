@@ -38,3 +38,7 @@ median_monthly_loan:
   min: 3.44
   max: 570.37
   median: 157.03
+earnings_gt_25k:
+  min: null
+  max: null
+  median: null
