@@ -13,11 +13,19 @@
       key: '{{ site.api.key }}'
     };
 
+    // use the staging API if we're on Federalist previewing
+    // the staging branch
+    if (location.hostname === 'federalist.18f.gov'
+        && !!location.pathname.match(/\/staging\//)) {
+      API.url = 'https://ccapi-open-staging.18f.gov/';
+      API.key = '';
+    }
+
     var schoolEndpoint = 'school/';
     var idField = 'id';
 
     API.get = function(uri, params, done) {
-      console.debug('[API] get("%s", %s)', uri, JSON.stringify(params));
+      // console.debug('[API] get("%s", %s)', uri, JSON.stringify(params));
       if (arguments.length === 2) {
         done = params;
       } else if (params) {
@@ -59,6 +67,26 @@
         }
         return done(null, res.results[0]);
       });
+    };
+
+    API.getAll = function(urls, done) {
+      Object.keys(urls).forEach(function(key) {
+        var url = urls[key];
+        urls[key] = Array.isArray(url)
+          ? function(done) {
+            var method = url.shift();
+            if (typeof method === 'string') {
+              method = API[method];
+            }
+            url.push(done);
+            return method.apply(API, url);
+          }
+          : function(done) {
+            return API.get(url, done);
+          };
+      });
+      // console.log('getAll:', urls);
+      return async.parallel(urls, done);
     };
 
     function join(list, glue) {
@@ -116,7 +144,9 @@
         if (typeof empty === 'string') {
           empty = d3.functor(empty);
         }
-        key = picc.access(key);
+        key = key
+          ? picc.access(key)
+          : function(v) { return v; };
         return function(d) {
           var value = key.call(this, d);
           return ((!value || isNaN(value)) && empty)
@@ -331,6 +361,25 @@
     return designations;
   };
 
+  picc.access.programAreas = function(d, metadata) {
+    if (!metadata) metadata = d.metadata;
+    if (!metadata || !metadata.dictionary) return [];
+
+    var dictionary = metadata.dictionary;
+    return Object.keys(d.program_percentage || {})
+      .map(function(key) {
+        var value = d.program_percentage[key];
+        var dictKey = 'program_percentage.' + key;
+        var name = dictionary[dictKey]
+          ? dictionary[dictKey].description
+          : key;
+        return {
+          program:  name,
+          percent:  value
+        };
+      });
+  };
+
   picc.nullify = function(value) {
     return value === 'NULL' ? null : value;
   };
@@ -440,6 +489,35 @@
           return this.getAttribute('average');
         }),
         '@title': debugMeterTitle
+      },
+
+      available_programs: function(d) {
+        var areas = access.programAreas(d);
+        return areas
+          .sort(function(a, b) {
+            return d3.ascending(a.program, b.program);
+          });
+      },
+
+      num_available_programs: format.number(function(d) {
+        return access.programAreas(d).length;
+      }),
+
+      popular_programs: function(d) {
+        var areas = access.programAreas(d);
+        if (areas.length) {
+          var total = d3.sum(areas, picc.access('percent'));
+          var percent = format.percent();
+          areas.forEach(function(d) {
+            d.value = +d.percent / total;
+            d.percent = percent(d.value);
+          });
+        }
+        return areas
+          .sort(function(a, b) {
+            return d3.descending(a.value, b.value);
+          })
+          .slice(0, 5);
       },
 
       more_link: {

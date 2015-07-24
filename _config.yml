@@ -16,6 +16,7 @@ sass:
 scripts:
   - vendor/aight.min.js
   - vendor/d3.min.js
+  - vendor/async.min.js
   - vendor/querystring.min.js
   - vendor/document-register-element.min.js
   - components/picc-accordion.js
