@@ -8,11 +8,17 @@
 
   var root = document.querySelector('#school');
 
-  picc.API.getSchool(id, function(error, school) {
+  picc.API.getAll({
+    metadata: 'data.json',
+    school: [picc.API.getSchool, id]
+  }, function(error, data) {
+    // console.log('data:', data);
     if (error) {
       return showError(error);
     }
 
+    var school = data.school;
+    school.metadata = data.metadata;
     console.log('got school:', school);
     root.classList.remove('hidden');
 
