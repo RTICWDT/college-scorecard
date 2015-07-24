@@ -332,11 +332,12 @@
 }
 
 .school-student-stats {
-  @include span-columns(12);
 
   h2 {
     padding-bottom: $base-padding-lite;
   }
+
+  @include span-columns(12);
 }
 
 .school-student-stats-col {
@@ -344,6 +345,11 @@
   > div {
     display: inline-block;
     vertical-align: middle;
+  }
+
+  .school-student-stats-col-p {
+    line-height: 1.1;
+    padding-bottom: 0;
   }
 
   .fact_number {
