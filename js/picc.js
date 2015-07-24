@@ -239,7 +239,7 @@
       };
     } else {
       return function() {
-        return this.getAttribute('data-' + key);
+        return this.getAttribute('data-' + stat);
       };
     }
   };
@@ -405,6 +405,15 @@
           return this.getAttribute('average');
         }),
         '@title': debugMeterTitle
+      },
+
+      repayment_rate_percent: format.percent('repayment_rate'),
+      repayment_rate_meter: {
+        '@value': 'repayment_rate',
+        '@average': access.nationalStat('median'),
+        label:    format.percent(function() {
+          return this.getAttribute('average');
+        })
       },
 
       retention_rate_value: format.percent(picc.access.retentionRate),
