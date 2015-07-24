@@ -283,7 +283,21 @@
   padding-bottom: $base-padding;
 }
 
-// color the up arrows red
-.fa.above-average {
+.above_is_good .average.above_average,
+.below_is_good .average.below_average {
+  color: $green;
+}
+
+.above_is_good .average.below_average,
+.below_is_good .average.above_average {
   color: $red;
+}
+
+.average.about_average {
+  color: $mid-blue;
+}
+
+.average-label {
+  font-size: .5em;
+  font-weight: normal;
 }

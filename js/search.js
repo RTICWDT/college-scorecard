@@ -44,22 +44,8 @@
 
     console.timeEnd('[render] template');
 
-    console.time('[render] charts');
-    // bind all of the data to elements in d3, then
-    // call renderCharts() on the selection
-    d3.select(resultsList)
-      .selectAll('.school')
-      .data(data.results)
-      .call(renderCharts);
-    console.timeEnd('[render] charts');
-
     console.timeEnd('[render]');
   });
-
-  function renderCharts(selection) {
-    selection.select('[data-bind="size"]')
-      .text(format.number('size'));
-  }
 
   function showError(error) {
     console.error('error:', error);

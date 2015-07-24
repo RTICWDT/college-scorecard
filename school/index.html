@@ -66,10 +66,8 @@ defaults:
             </li>
           </ul>
 
-          <ul class="school-special_designation">
-            <li class="special">Men Only</li>
-            <!-- <li class="special">Alaskan American/Native Indian/Pacific Islander</li> -->
-            <li class="special">Predominantly Black</li>
+          <ul class="school-special_designation" data-bind="special_designations">
+            <li class="special"></li>
           </ul>
 
           <!-- <h3 class="special" data-bind="special_designation">
@@ -81,51 +79,27 @@ defaults:
         </div>
 
         <div id="key-stats" class="school-meters">
-          <figure class="meter">
+          <figure class="meter below_is_good">
             <h2 class="figure-heading constrain_width">Average Cost Per Year</h2>
-            <picc-meter
-            {% capture average_cost_meter %}
-              class="cost"
-              data-bind="average_cost_meter"
-              data-max-public="{{ site.data.national_stats.net_price_public.max }}"
-              data-max-private="{{ site.data.national_stats.net_price_private.max }}"
-              data-median-public="{{ site.data.national_stats.net_price_public.median }}"
-              data-median-private="{{ site.data.national_stats.net_price_private.median }}"
-            {% endcapture %}
-            {{ average_cost_meter }}>
+            <picc-meter {% include net_price_meter_attributes.html %}>
             </picc-meter>
             <figcaption>
               <span data-bind="average_cost">$XX,XXX</span>
             </figcaption>
           </figure>
 
-          <figure class="meter">
+          <figure class="meter above_is_good">
             <h2 class="figure-heading constrain_width">Graduation Rate</h2>
-            <picc-meter
-            {% capture grad_rate_meter %}
-              class="graduation"
-              data-bind="grad_rate_meter"
-              max="1"
-              data-median-four_year="{{ site.data.national_stats.completion_rate_4.median }}"
-              data-median-lt_four_year="{{ site.data.national_stats.completion_rate_l4.median }}"
-            {% endcapture %}
-            {{ grad_rate_meter }}>
+            <picc-meter {% include graduation_meter_attributes.html %}>
             </picc-meter>
             <figcaption>
               <span data-bind="grad_rate">XX%</span>
             </figcaption>
           </figure>
 
-          <figure class="meter">
+          <figure class="meter above_is_good">
             <h2 class="figure-heading constrain_width">Average Salary</h2>
-            <picc-meter
-            {% capture average_salary_meter %}
-              class="earnings"
-              data-bind="average_salary_meter"
-              {% if site.data.median_earnings.max %}max="{{ site.data.median_earnings.max }}"{% else %}max="{{ page.defaults.median_earnings.max }}"{% endif %}
-              average="{{ site.data.median_earnings.median }}"
-            {% endcapture %}
-            {{ average_salary_meter }}>
+            <picc-meter {% include earnings_meter_attributes.html %}>
             </picc-meter>
             <figcaption>
               <span data-bind="average_salary">$XX,XXX</span>
@@ -149,14 +123,14 @@ defaults:
 
                 <div class="school-two_col-left centered">
 
-                  <figure class="meter">
+                  <figure class="meter below_is_good">
                     <h2 class="figure-heading">Average Net Price</h2>
-                    <picc-meter id="cost-meter"
-                      {{ average_cost_meter }}>
+                    <picc-meter id="cost-meter" {% include net_price_meter_attributes.html %}>
                     </picc-meter>
                     <figcaption>
-                      <i class="fa average-arrow" data-meter="cost-meter"></i>
+                      <i class="fa average average-arrow" data-meter="cost-meter"></i>
                       <span data-bind="average_cost"></span>
+                      <div class="average average-label"></div>
                     </figcaption>
                   </figure>
                   <!--
@@ -220,7 +194,7 @@ defaults:
 
                 <div class="school-two_col-left centered">
 
-                  <figure class="meter">
+                  <figure class="meter below_is_good">
                     <h2 class="figure-heading">Students Who Have Defaulted on Loans</h2>
                     <picc-meter id="default-meter"
                       class="default"
@@ -230,8 +204,9 @@ defaults:
                       average="{{ site.data.national_stats.default_rate.median }}">
                     </picc-meter>
                     <figcaption>
-                      <i class="fa average-arrow" data-meter="default-meter"></i>
+                      <i class="fa average average-arrow" data-meter="default-meter"></i>
                       <span data-bind="default_rate">XX%</span>
+                      <div class="average average-label"></div>
                     </figcaption>
                   </figure>
 
@@ -305,21 +280,21 @@ defaults:
               <div id="graduation-content" aria-hidden="true">
 
                 <div class="school-two_col-left centered">
-                  <figure class="meter">
+                  <figure class="meter above_is_good">
                     <h2 class="figure-heading constrain_width">Graduation Rate</h2>
-                    <picc-meter id="grad-meter"
-                      {{ grad_rate_meter }}>
+                    <picc-meter id="grad-meter" {% include graduation_meter_attributes.html %}>
                     </picc-meter>
                     <figcaption>
-                      <i class="fa average-arrow" data-meter="grad-meter"></i>
+                      <i class="fa average average-arrow" data-meter="grad-meter"></i>
                       <span data-bind="grad_rate">60%</span>
+                      <div class="average average-label"></div>
                     </figcaption>
                   </figure>
                 </div>
 
                 <div class="school-two_col-right centered">
-                  <figure class="meter">
-                    <h2 class="figure-heading">Students Who Return <br>Each Year</h2>
+                  <figure class="meter above_is_good">
+                    <h2 class="figure-heading">Students Who<br>Return Each Year</h2>
                     <picc-meter id="retention-meter"
                       class="graduation"
                       data-bind="retention_rate_meter"
@@ -328,8 +303,9 @@ defaults:
                       average="{{ site.data.national_stats.retention_rate.median }}">
                     </picc-meter>
                     <figcaption>
-                      <i class="fa average-arrow" data-meter="retention-meter"></i>
+                      <i class="fa average average-arrow" data-meter="retention-meter"></i>
                       <span data-bind="retention_rate_value">XX%</span>
+                      <div class="average average-label"></div>
                     </figcaption>
                   </figure>
                 </div>
@@ -350,20 +326,20 @@ defaults:
 
               <div id="earnings-content" aria-hidden="true">
                 <div class="school-two_col-left centered">
-                  <figure class="meter">
+                  <figure class="meter above_is_good">
                     <h2 class="figure-heading">Average Salary <br>After Leaving School</h2>
-                    <picc-meter id="salary-meter"
-                      {{ average_salary_meter }}>
+                    <picc-meter id="salary-meter" {% include earnings_meter_attributes.html %}>
                     </picc-meter>
                     <figcaption>
-                      <i class="fa average-cost" data-meter="salary-meter"></i>
+                      <i class="fa average average-arrow" data-meter="salary-meter"></i>
                       <span data-bind="average_salary">$XX,XXX</span>
+                      <div class="average average-label"></div>
                     </figcaption>
                   </figure>
                 </div>
 
                 <div class="school-two_col-right centered">
-                  <figure class="meter">
+                  <figure class="meter below_is_good">
                     <h2 class="figure-heading">Former Students <br>Earning Less Than $25K</h2>
                     <picc-meter class="earnings"
                       id="low-income-meter"
@@ -373,7 +349,7 @@ defaults:
                       average="{# TODO #}">
                     </picc-meter>
                     <figcaption>
-                      <i class="fa average-arrow" data-meter="low-income-meter"></i>
+                      <i class="fa average average-arrow" data-meter="low-income-meter"></i>
                       <span data-bind="low_income_percent">XX%</span>
                     </figcaption>
                   </figure>
@@ -435,7 +411,7 @@ defaults:
         </div>
 
         <div class="section-card_container-school">
-          <div class="picc-accordion school-two_col">
+          <div id="academics" class="picc-accordion school-two_col">
             <div>
               <h1 class="search_category">
                 <a aria-expanded="false" aria-controls="academics-content">
@@ -447,37 +423,21 @@ defaults:
                 <div class="school-two_col-left">
 
                   <div class="school-academics-fact group_inline">
-                    <div class="group_inline-left"><strong class="fact_number">87</strong></div>
+                    <div class="group_inline-left"><strong class="fact_number" data-bind="num_available_programs">X</strong></div>
                     <div class="group_inline-right"><h2>Programs Offered</h2></div>
                   </div>
                   
                   <h2>Most Popular Programs</h2>
-                  <ol class="decimal school-programs">
-                    <li>Management</li>
-                    <li>Nursing</li>
-                    <li>Psychology</li>
-                    <li>Biology</li>
-                    <li>Computer Science</li>
+                  <ol class="decimal school-programs" data-bind="popular_programs">
+                    <li><span class="program"></span> (<span class="percent"></span>)</li>
                   </ol>
                 </div>
 
                 <div class="school-two_col-right">
                 
                   <h2>Available Area of Study</h2>
-                  <ul class="school-long_list">
-                    <li>Accounting</li>
-                    <li>Accounting and Business Management</li>
-                    <li>Acting</li>
-                    <li>American Indian/Native American Studies</li>
-                    <li>Area Studies</li>
-                    <li>Art History, Criticism, and Conservation</li>
-                    <li>Biology/Biological Sciences</li>
-                    <li>Biopsychology</li>
-                    <li>Business Administration and Management</li>
-                    <li>Business Administration, Management, and Operations</li>
-                    <li>Accounting</li>
-                    <li>Accounting and Business Management</li>
-                    <li>Acting</li>
+                  <ul class="school-long_list" data-bind="available_programs">
+                    <li><span class="program">Management</span></li>
                   </ul>
                 
                 </div>

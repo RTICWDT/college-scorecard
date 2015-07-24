@@ -25,7 +25,7 @@
     var idField = 'id';
 
     API.get = function(uri, params, done) {
-      console.debug('[API] get("%s", %s)', uri, JSON.stringify(params));
+      // console.debug('[API] get("%s", %s)', uri, JSON.stringify(params));
       if (arguments.length === 2) {
         done = params;
       } else if (params) {
@@ -69,6 +69,26 @@
       });
     };
 
+    API.getAll = function(urls, done) {
+      Object.keys(urls).forEach(function(key) {
+        var url = urls[key];
+        urls[key] = Array.isArray(url)
+          ? function(done) {
+            var method = url.shift();
+            if (typeof method === 'string') {
+              method = API[method];
+            }
+            url.push(done);
+            return method.apply(API, url);
+          }
+          : function(done) {
+            return API.get(url, done);
+          };
+      });
+      // console.log('getAll:', urls);
+      return async.parallel(urls, done);
+    };
+
     function join(list, glue) {
       for (var i = 0; i < list.length; i++) {
         var str = String(list[i]);
@@ -92,7 +112,9 @@
    * object.
    */
   var SPECIAL_DESIGNATIONS = {
-    aanipi:               'Alaskan American/Native Indian/Pacific Islander',
+    // TODO: rename 'aanapi' or 'aanapisi'
+    // per <http://www2.ed.gov/programs/aanapi/index.html>
+    aanipi:               'AANAPI',
     hispanic:             'Hispanic',
     historically_black:   'Historically Black',
     predominantly_black:  'Predominantly Black',
@@ -122,7 +144,9 @@
         if (typeof empty === 'string') {
           empty = d3.functor(empty);
         }
-        key = picc.access(key);
+        key = key
+          ? picc.access(key)
+          : function(v) { return v; };
         return function(d) {
           var value = key.call(this, d);
           return ((!value || isNaN(value)) && empty)
@@ -303,7 +327,7 @@
     ) / size;
   };
 
-  picc.access.specialDesignation = function(d) {
+  picc.access.specialDesignations = function(d) {
     var designations = [];
 
     if (+d.women_only) {
@@ -320,7 +344,26 @@
       }
     }
 
-    return designations.join(', ');
+    return designations;
+  };
+
+  picc.access.programAreas = function(d, metadata) {
+    if (!metadata) metadata = d.metadata;
+    if (!metadata || !metadata.dictionary) return [];
+
+    var dictionary = metadata.dictionary;
+    return Object.keys(d.program_percentage || {})
+      .map(function(key) {
+        var value = d.program_percentage[key];
+        var dictKey = 'program_percentage.' + key;
+        var name = dictionary[dictKey]
+          ? dictionary[dictKey].description
+          : key;
+        return {
+          program:  name,
+          percent:  value
+        };
+      });
   };
 
   picc.nullify = function(value) {
@@ -364,7 +407,7 @@
       // this is a direct accessor because some designations
       // (e.g. `women_only`) are at the object root, rather than
       // nested in `minority_serving`.
-      special_designation: access.specialDesignation,
+      special_designations: access.specialDesignations,
 
       SAT_avg: function(d) {
         return picc.nullify(d.SAT_avg) || NA;
@@ -398,22 +441,57 @@
       grad_rate_meter: {
         '@average': access.nationalStat('median', access.yearDesignation),
         '@value':   access.completionRate,
-        label:      format.percent(access.nationalStat('median', access.yearDesignation)),
+        label:      format.percent(function() {
+          return this.getAttribute('average');
+        }),
         '@title':   debugMeterTitle
       },
 
       average_salary: format.dollars(access.medianEarnings),
       average_salary_meter: {
         '@value': access.medianEarnings,
-        label:    format.dollars(access.medianEarnings),
+        label:    format.dollars(function() {
+          return this.getAttribute('average');
+        }),
         '@title': debugMeterTitle
       },
 
       retention_rate_value: format.percent(picc.access.retentionRate),
       retention_rate_meter: {
         '@value': access.retentionRate,
-        label:    format.percent(access.retentionRate),
+        label:    format.percent(function() {
+          return this.getAttribute('average');
+        }),
         '@title': debugMeterTitle
+      },
+
+      available_programs: function(d) {
+        var areas = access.programAreas(d);
+        return areas
+          .sort(function(a, b) {
+            return d3.ascending(a.program, b.program);
+          });
+      },
+
+      num_available_programs: format.number(function(d) {
+        return access.programAreas(d).length;
+      }),
+
+      popular_programs: function(d) {
+        var areas = access.programAreas(d);
+        if (areas.length) {
+          var total = d3.sum(areas, picc.access('percent'));
+          var percent = format.percent();
+          areas.forEach(function(d) {
+            d.value = +d.percent / total;
+            d.percent = percent(d.value);
+          });
+        }
+        return areas
+          .sort(function(a, b) {
+            return d3.descending(a.value, b.value);
+          })
+          .slice(0, 5);
       },
 
       more_link: {

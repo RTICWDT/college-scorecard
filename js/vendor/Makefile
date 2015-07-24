@@ -14,6 +14,7 @@ all: \
 	formdb.min.js \
 	leaflet.js \
 	leaflet-css \
+	async.min.js \
 	querystring.min.js \
 	tagalong.min.js
 
@@ -24,6 +25,10 @@ $(node_modules):
 # querystring is a Node.js built-in, but we can build it with browserify
 querystring.js: $(node_modules)
 	echo "window.querystring = require('querystring');" | $(bin)/browserify - > $@
+
+# async
+async.js: $(node_modules)
+	cp $(node_modules)/async/lib/async.js $@
 
 leaflet.js: $(node_modules)
 	cp $(node_modules)/leaflet/dist/leaflet.js $@

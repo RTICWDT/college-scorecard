@@ -51,7 +51,7 @@ picc-meter {
     }
   }
 
-  &.above-average {
+  &.above_average {
     .picc-meter-line:after {
       opacity: 1;
     }
@@ -63,7 +63,7 @@ picc-meter {
         background-color: $meter-color;
       }
 
-      &.above-average .picc-meter-line:after {
+      &.above_average .picc-meter-line:after {
         background-color: tint($meter-color, 75%);
       }
     }
