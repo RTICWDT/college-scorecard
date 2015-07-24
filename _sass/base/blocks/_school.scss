@@ -331,4 +331,40 @@
   height: 200px;
 }
 
+.school-student-stats {
+  @include span-columns(12);
+
+  h2 {
+    padding-bottom: $base-padding-lite;
+  }
+}
+
+.school-student-stats-col {
+
+  > div {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .fact_number {
+    @include font-size(3);
+    padding-bottom: 0;
+
+    span {
+      @include font-size(1.8);
+    }
+
+    &.divide {
+      @include font-size(4.2);
+      color: darken($mid-gray, 10%);
+      margin-right: 5px;
+      margin-left: -5px;
+    }
+  }
+
+  @include span-columns(12);
+  @include respond-to(medium-up) {
+    @include span-columns(4 of 12);
+  }
+}
 
