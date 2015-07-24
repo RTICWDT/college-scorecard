@@ -306,7 +306,7 @@
   @include span-columns(12);
   border-bottom: $thin-border-size solid $base-border-color;
   display: inline-block;
-  padding-bottom: $base-padding;
+  padding-bottom: $base-padding; //TODO padding bug
   text-align: center;
 
   ul.school-key_figures li {
@@ -347,11 +347,6 @@
     vertical-align: middle;
   }
 
-  .school-student-stats-col-p {
-    line-height: 1.1;
-    padding-bottom: 0;
-  }
-
   .fact_number {
     @include font-size(3);
     padding-bottom: 0;
@@ -372,5 +367,11 @@
   @include respond-to(medium-up) {
     @include span-columns(4 of 12);
   }
+}
+
+.school-section .school-two_col .school-student-stats-col-p {
+  line-height: 1.1;
+  padding-top: 10px;
+  padding-bottom: 0;
 }
 
