@@ -17,7 +17,7 @@
     var idField = 'id';
 
     API.get = function(uri, params, done) {
-      console.debug('[API] get("%s", %s)', uri, JSON.stringify(params));
+      // console.debug('[API] get("%s", %s)', uri, JSON.stringify(params));
       if (arguments.length === 2) {
         done = params;
       } else if (params) {
@@ -59,6 +59,26 @@
         }
         return done(null, res.results[0]);
       });
+    };
+
+    API.getAll = function(urls, done) {
+      Object.keys(urls).forEach(function(key) {
+        var url = urls[key];
+        urls[key] = Array.isArray(url)
+          ? function(done) {
+            var method = url.shift();
+            if (typeof method === 'string') {
+              method = API[method];
+            }
+            url.push(done);
+            return method.apply(API, url);
+          }
+          : function(done) {
+            return API.get(url, done);
+          };
+      });
+      // console.log('getAll:', urls);
+      return async.parallel(urls, done);
     };
 
     function join(list, glue) {
