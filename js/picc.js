@@ -213,8 +213,22 @@
   picc.access = function(key) {
     return (typeof key === 'function')
       ? key
-      : function(d) { return d[key]; };
+      : getter(key);
   };
+
+  function getter(key) {
+    if (key.indexOf('.') > -1) {
+      var bits = key.split('.');
+      var len = bits.length;
+      return function(d) {
+        for (var i = 0; i < len; i++) {
+          d = d[bits[i]];
+        }
+        return d;
+      };
+    }
+    return function(d) { return d[key]; };
+  }
 
   picc.access.publicPrivate = function(d) {
     switch (+d.ownership) {
