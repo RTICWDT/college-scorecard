@@ -62,19 +62,14 @@ body_scripts:
                 <span data-bind="years">year category</span>
               </li>
               <li>
-                <span data-bind="size">x</span> undergraduate students
+                <span data-bind="size_number">x</span> undergraduate students
               </li>
             </ul>
 
             <div id="key-stats" class="school-meters">
               <figure class="meter">
                 <h2 class="figure-heading constrain_width">Average Cost Per Year</h2>
-                <picc-meter class="cost"
-                  data-bind="average_cost_meter"
-                  data-max-public="{{ site.data.national_stats.net_price_public.max }}"
-                  data-max-private="{{ site.data.national_stats.net_price_private.max }}"
-                  data-median-public="{{ site.data.national_stats.net_price_public.median }}"
-                  data-median-private="{{ site.data.national_stats.net_price_private.median }}">
+                <picc-meter {% include net_price_meter_attributes.html %}>
                 </picc-meter>
                 <figcaption>
                   <span data-bind="average_cost"></span>
@@ -83,13 +78,7 @@ body_scripts:
 
               <figure class="meter">
                 <h2 class="figure-heading constrain_width">Graduation Rate</h2>
-                <picc-meter class="graduation"
-                  data-bind="grad_rate_meter"
-                  max="1"
-                  data-max-four_year="{{ site.data.national_stats.completion_rate_4.max }}"
-                  data-max-lt_four_year="{{ site.data.national_stats.completion_rate_l4.max }}"
-                  data-median-four_year="{{ site.data.national_stats.completion_rate_4.median }}"
-                  data-median-lt_four_year="{{ site.data.national_stats.completion_rate_l4.median }}">
+                <picc-meter {% include graduation_meter_attributes.html %}>
                 </picc-meter>
                 <figcaption>
                   <span data-bind="grad_rate"></span>
@@ -98,10 +87,7 @@ body_scripts:
 
               <figure class="meter">
                 <h2 class="figure-heading constrain_width">Average Salary</h2>
-                <picc-meter class="earnings"
-                  data-bind="average_salary_meter"
-                  max="{{ site.data.median_earnings.max }}"
-                  average="{{ site.data.median_earnings.median }}">
+                <picc-meter {% include earnings_meter_attributes.html %}>
                 </picc-meter>
                 <figcaption>
                   <span data-bind="average_salary"></span>
