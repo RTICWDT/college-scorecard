@@ -283,13 +283,13 @@
   padding-bottom: $base-padding;
 }
 
-.above-is-good .average.above_average,
-.below-is-good .average.below_average {
+.above_is_good .average.above_average,
+.below_is_good .average.below_average {
   color: $green;
 }
 
-.above-is-good .average.below_average,
-.below-is-good .average.above_average {
+.above_is_good .average.below_average,
+.below_is_good .average.above_average {
   color: $red;
 }
 
