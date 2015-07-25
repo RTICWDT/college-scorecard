@@ -301,3 +301,83 @@
   font-size: .5em;
   font-weight: normal;
 }
+
+.school-student-intro {
+  @include span-columns(12);
+  border-bottom: $thin-border-size solid $base-border-color;
+  display: inline-block;
+  padding-bottom: $base-padding;
+  text-align: center;
+
+  ul.school-key_figures li {
+    margin-right: 10px;
+  }
+
+  li.school-key_figures-stat {
+    padding-top: 0;
+    width: auto;
+
+    p {
+      @include font-size(1.3);
+      line-height: 1.1;
+      padding-bottom: 0;
+      width: 70%;
+    }
+  }
+}
+
+.school-student-figures {
+  @include span-columns(12);
+  border-bottom: $thin-border-size solid $base-border-color;
+  padding-top: $base-padding;
+  padding-bottom: $base-padding;
+  height: 200px;
+}
+
+.school-student-stats {
+
+  h2 {
+    padding-bottom: $base-padding-lite;
+  }
+
+  @include span-columns(12);
+}
+
+.school-student-stats-col {
+
+  > div {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .fact_number {
+    @include font-size(3);
+    padding-bottom: 0;
+
+    span {
+      @include font-size(1.8);
+    }
+
+    &.divide {
+      @include font-size(4.2);
+      color: darken($mid-gray, 10%);
+      margin-right: 5px;
+      margin-left: -5px;
+    }
+  }
+
+  @include span-columns(12);
+  @include omega();
+
+  @include respond-to(large-up) {
+    @include span-columns(4 of 12);
+    @include omega(3n);
+  }
+}
+
+.school-section .school-two_col .school-student-stats-col-p {
+  line-height: 1.1;
+  padding-top: 10px;
+  padding-bottom: 0;
+}
+
