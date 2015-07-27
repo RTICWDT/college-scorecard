@@ -528,11 +528,46 @@
 
       full_time_percent: format.number(function(d) {
         var pt = access.partTimeShare(d);
-        console.log('part time:', pt);
         return pt === null ? null : (100 - pt);
       }),
 
       part_time_percent: format.number(access.partTimeShare),
+
+      gender_values: function(d) {
+        if (!d.demographics) return [];
+        var female = picc.nullify(d.demographics.female_percent);
+        if (female === null) return [];
+        female = +female;
+        return [
+          {label: 'Female', value: female, percent: percent(female)},
+          {label: 'Male', value: 1 - female, percent: percent(1 - female)}
+        ];
+      },
+
+      race_ethnicity_values: function(d) {
+        if (!d.demographics || !d.metadata) {
+          console.warn('no demographics or metadata:', d);
+          return [];
+        }
+
+        var dictionary = d.metadata.dictionary;
+        var values = d.demographics.race_ethnicity;
+        var prefix = 'demographics.race_ethnicity.';
+        return Object.keys(values)
+          .map(function(key) {
+            var value = picc.nullify(values[key]);
+            var dict = dictionary[prefix + key];
+            return {
+              key: key,
+              label: dict ? dict.label : key,
+              value: value,
+              percent: percent(value)
+            };
+          })
+          .filter(function(d) {
+            return d.value > 0;
+          });
+      },
 
       available_programs: function(d) {
         var areas = access.programAreas(d);
