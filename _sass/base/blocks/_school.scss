@@ -391,5 +391,9 @@ ol.bars {
       background: $purple;
       height: .5em;
     }
+
+    &.bar-female .bar {
+      background: $red;
+    }
   }
 }
