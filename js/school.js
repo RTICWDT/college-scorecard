@@ -68,6 +68,23 @@
         tagalong(node, school, directives);
       });
 
+    // render the bar charts
+    // FIXME this should be possible in tagalong!
+    var bars = d3.selectAll('ol.bars')
+      .selectAll('li')
+        .datum(function() {
+          return +this.querySelector('.value').textContent;
+        })
+        .sort(d3.descending);
+
+    bars.select('.value')
+      .remove();
+
+    bars.select('.bar')
+      .style('width', d3.scale.linear()
+        .domain([0, .01, 1])
+        .range(['0%', '1%', '100%']));
+
     var center = L.latLng(
       +school.location.lat,
       +school.location.lon
