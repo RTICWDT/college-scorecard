@@ -336,9 +336,18 @@
       : null;
   };
 
+  picc.access.partTimeShare = function(d) {
+    if (d.part_time_share) {
+      var share = picc.nullify(d.part_time_share[1]);
+      return share === null ? null : Math.round(+share * 100);
+    }
+    return null;
+  };
+
   picc.access.retentionRate = function(d) {
     var designation = picc.access.yearDesignation(d);
-    var partTimeShare = d.part_time_share[1] || d.part_time_share[2];
+    // FIXME: use partTimeShare() accessor?
+    var partTimeShare = +d.part_time_share[1] || +d.part_time_share[2];
     var retention = d.retention_rate[designation];
     var partTimeRate = retention ? retention.part_time : 0;
     var fullTime = retention ? retention.full_time : 0;
@@ -403,6 +412,7 @@
   picc.school.directives = (function() {
     var access = picc.access;
     var format = picc.format;
+    var percent = format.percent();
 
     var href = function(d) {
       var name = d.name.replace(/\W+/g, '-');
@@ -516,6 +526,14 @@
         '@title': debugMeterTitle
       },
 
+      full_time_percent: format.number(function(d) {
+        var pt = access.partTimeShare(d);
+        console.log('part time:', pt);
+        return pt === null ? null : (100 - pt);
+      }),
+
+      part_time_percent: format.number(access.partTimeShare),
+
       available_programs: function(d) {
         var areas = access.programAreas(d);
         return areas
@@ -532,7 +550,6 @@
         var areas = access.programAreas(d);
         if (areas.length) {
           var total = d3.sum(areas, picc.access('percent'));
-          var percent = format.percent();
           areas.forEach(function(d) {
             d.value = +d.percent / total;
             d.percent = percent(d.value);
