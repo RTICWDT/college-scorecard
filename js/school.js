@@ -75,7 +75,16 @@
         .datum(function() {
           return +this.querySelector('.value').textContent;
         })
-        .sort(d3.descending);
+        .sort(d3.descending)
+        .each(function() {
+          var label = this.querySelector('.label');
+          if (label) {
+            var klass = label.textContent
+              .toLowerCase()
+              .replace(/\W+/g, '-');
+            this.classList.add('bar-' + klass);
+          }
+        });
 
     bars.select('.value')
       .remove();
