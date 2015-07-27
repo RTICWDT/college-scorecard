@@ -9,10 +9,6 @@ stylesheets:
   - vendor/leaflet.css
 body_scripts:
   - school.js
-
-defaults:
-  median_earnings:
-    max: 150000
 ---
 
 <section id="error" class="container hidden">
@@ -385,20 +381,20 @@ defaults:
 
                 </div>
 
-                <div class="school-student-stats">
+                <div class="school-two_col">
 
-                  <div class="school-student-stats-col">
+                  <div class="school-two_col-left">
                     <h2>Gender</h2>
-                    <ul data-bind="gender_values">
-                      <li><strong data-bind="label">Label</strong>: <span data-bind="percent">XX%</span></li>
-                    </ul>
+                    <ol class="bars" data-bind="gender_values">
+                      {% include bar_chart_template_item.html %}
+                    </ol>
                   </div>
 
-                  <div class="school-student-stats-col">
+                  <div class="school-two_col-right">
                     <h2>Race/Ethnicity</h2>
-                    <ul data-bind="race_ethnicity_values">
-                      <li><strong data-bind="label">Label</strong>: <span data-bind="percent">XX%</span></li>
-                    </ul>
+                    <ol class="bars" data-bind="race_ethnicity_values">
+                      {% include bar_chart_template_item.html %}
+                    </ol>
                   </div>
 
                 </div>
