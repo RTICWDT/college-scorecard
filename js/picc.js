@@ -597,6 +597,12 @@
           .slice(0, 5);
       },
 
+      age_entry: function(d) {
+        return d.demographics
+          ? picc.nullify(d.demographics.age_entry)
+          : null;
+      },
+
       more_link: {
         '@href': href
       }
