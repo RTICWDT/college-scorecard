@@ -44,10 +44,17 @@ staff:
         email: example@gsa.gov
 leveraged-authorizations: 
 - https://www.fedramp.gov/marketplace/compliant-systems/amazon-web-services-aws-eastwest-us-public-cloud/
-purpose: url
-components: url
-diagram: url
-user-types: 
-
-
+purpose: https://github.com/18F/college-choice-data
+components: https://github.com/18F/college-choice-data#application-architecture
+diagram: https://github.com/18F/college-choice-data#diagram
+network-architecture: https://github.com/18F/college-choice-data#diagram
+environments:
+- Cloud Foundry
+- Amazon Web Services East / West
+user-types:
+    developer:
+        functions: 
+        - deployment
+        - engineering
+controls: [url]
 ---
