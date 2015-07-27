@@ -381,3 +381,15 @@
   padding-bottom: 0;
 }
 
+
+ol.bars {
+  li {
+    margin-bottom: .5em;
+    position: relative;
+
+    .bar {
+      background: $purple;
+      height: .5em;
+    }
+  }
+}
