@@ -149,7 +149,7 @@
           : function(v) { return v; };
         return function(d) {
           var value = key.call(this, d);
-          return ((!value || isNaN(value)) && empty)
+          return ((value === '' || isNaN(value)) && empty)
             ? empty.call(d)
             : fmt.call(d, +value, key);
         };
