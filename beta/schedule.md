@@ -4,7 +4,7 @@
   + Erie invites participants via email
 + July 31st
   + Participants have all turned in paperwork
-+ August 3
++ August 4
   + Data access is given to the group
   + Github access is given to the group
   + Group listserv starts
