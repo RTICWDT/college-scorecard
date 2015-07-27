@@ -385,8 +385,22 @@ defaults:
 
                 </div>
 
-                <div class="school-student-figures">
-                  <p>This is where the pie charts will go.</p>
+                <div class="school-student-stats">
+
+                  <div class="school-student-stats-col">
+                    <h2>Gender</h2>
+                    <ul data-bind="gender_values">
+                      <li><strong data-bind="label">Label</strong>: <span data-bind="percent">XX%</span></li>
+                    </ul>
+                  </div>
+
+                  <div class="school-student-stats-col">
+                    <h2>Race/Ethnicity</h2>
+                    <ul data-bind="race_ethnicity_values">
+                      <li><strong data-bind="label">Label</strong>: <span data-bind="percent">XX%</span></li>
+                    </ul>
+                  </div>
+
                 </div>
 
                 <div class="school-student-stats">
