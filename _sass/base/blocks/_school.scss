@@ -320,8 +320,44 @@
     p {
       @include font-size(1.3);
       line-height: 1.1;
+      padding-top: 0;
       padding-bottom: 0;
-      width: 70%;
+      text-align: center;
+      //width: 70%;
+
+      @include respond-to(tiny-up) {
+        padding-top: 12px;
+        text-align: left;
+      }
+    }
+  }
+
+  .group_inline {
+    display: inline-block;
+    width: 100%;
+  }
+
+  .group_inline-left {
+    display: inline-block;
+    padding-right: 8px;
+  }
+
+  .group_inline-right {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  @include respond-to(large-up) {
+    .group_inline {
+      display: table;
+    }
+
+    .group_inline-left {
+      display: table-cell;
+    }
+
+    .group_inline-right {
+      display: table-cell;
     }
   }
 }
@@ -364,13 +400,13 @@
     }
   }
 
-  @include span-columns(12);
-  @include omega();
+  // @include span-columns(12);
+  // @include omega();
 
-  @include respond-to(large-up) {
-    @include span-columns(4 of 12);
-    @include omega(3n);
-  }
+  // @include respond-to(large-up) {
+  //   @include span-columns(4 of 12);
+  //   @include omega(3n);
+  // }
 }
 
 .school-section .school-two_col .school-student-stats-col-p {
@@ -380,9 +416,6 @@
 }
 
 .school-student-body {
-  border-bottom: $thin-border-size solid $base-border-color;
-  padding-bottom: $base-padding-large;
-  margin-bottom: $base-padding;
 
   h2 {
     text-align: center;
@@ -415,11 +448,13 @@ ol.bars {
     }
 
     &.bar-female .bar {
-      background: $emerald-green;
+      background: $lime-green;
+      height: 2em;
     }
 
     &.bar-male .bar {
       background: $purple;
+      height: 2em;
     }
 
     .percent {

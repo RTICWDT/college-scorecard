@@ -374,7 +374,7 @@ body_scripts:
                     <li class="school-key_figures-stat">
                       <div class="group_inline">
                         <div class="group_inline-left fact_number" data-bind="size_number">X,XXX</div>
-                        <div class="group_inline-right"><p>undergraduate students</p></div>
+                        <div class="group_inline-right"><p>undergraduate <br>students</p></div>
                       </div>
                     </li>
                   </ul>
@@ -384,22 +384,52 @@ body_scripts:
                 <div class="school-two_col school-student-body">
 
                   <div class="school-two_col-left">
+
                     <h2>Gender</h2>
                     <ol class="bars" data-bind="gender_values">
                       {% include bar_chart_template_item.html %}
                     </ol>
+
+                    <!-- <div class="school-student-stats"> -->
+                    <h2>Other Demographics</h2>
+
+                    <div class="school-student-stats-col">
+
+                      <div>
+                        <span class="fact_number">
+                          <strong data-bind="full_time_percent">XX</strong>
+                          <span>%</span>
+                        </span> Full-time
+                      </div>
+                      <div class="fact_number divide">/</div>
+                      <div>
+                        <span class="fact_number">
+                          <strong data-bind="part_time_percent">XX</strong>
+                          <span>%</span>
+                        </span> Part-time
+                      </div>
+
+                      <div class="group_inline">
+                        <div class="group_inline-left"><span class="fact_number" data-bind="age_entry">XX</span></div>
+                        <div class="group_inline-right"><p class="school-student-stats-col-p">Average age at enrollment</p></div>
+                      </div>
+
+                    </div>
+
                   </div>
 
-                  <div class="school-two_col-right">
-                    <h2>Race/Ethnicity</h2>
-                    <ol class="bars" data-bind="race_ethnicity_values">
-                      {% include bar_chart_template_item.html %}
-                    </ol>
-                  </div>
+                    <!-- </div> -->
+
+                    <div class="school-two_col-right">
+                      <h2>Race/Ethnicity</h2>
+                      <ol class="bars" data-bind="race_ethnicity_values">
+                        {% include bar_chart_template_item.html %}
+                      </ol>
+                    </div>
 
                 </div>
 
-                <div class="school-student-stats">
+                <!-- <div class="school-student-stats">
                   <h2>Other Demographics</h2>
 
                   <div class="school-student-stats-col">
@@ -423,13 +453,13 @@ body_scripts:
                       <div class="group_inline-left"><span class="fact_number" data-bind="age_entry">XX</span></div>
                       <div class="group_inline-right"><p class="school-student-stats-col-p">Average age at enrollment</p></div>
                     </div>
-                  </div>
+                  </div> -->
 
-                  <div class="school-student-stats-col">
+                  <!-- <div class="school-student-stats-col"> -->
                     <!-- Placeholder for future stats -->
-                  </div>
+                  <!-- </div> -->
 
-                </div>
+                <!-- </div> -->
 
               </div>
             </div>
