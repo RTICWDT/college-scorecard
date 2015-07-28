@@ -149,7 +149,7 @@
           : function(v) { return v; };
         return function(d) {
           var value = key.call(this, d);
-          return ((!value || isNaN(value)) && empty)
+          return ((value === '' || isNaN(value)) && empty)
             ? empty.call(d)
             : fmt.call(d, +value, key);
         };
@@ -336,9 +336,18 @@
       : null;
   };
 
+  picc.access.partTimeShare = function(d) {
+    if (d.part_time_share) {
+      var share = picc.nullify(d.part_time_share[1]);
+      return share === null ? null : Math.round(+share * 100);
+    }
+    return null;
+  };
+
   picc.access.retentionRate = function(d) {
     var designation = picc.access.yearDesignation(d);
-    var partTimeShare = d.part_time_share[1] || d.part_time_share[2];
+    // FIXME: use partTimeShare() accessor?
+    var partTimeShare = +d.part_time_share[1] || +d.part_time_share[2];
     var retention = d.retention_rate[designation];
     var partTimeRate = retention ? retention.part_time : 0;
     var fullTime = retention ? retention.full_time : 0;
@@ -403,6 +412,7 @@
   picc.school.directives = (function() {
     var access = picc.access;
     var format = picc.format;
+    var percent = format.percent();
 
     var href = function(d) {
       var name = d.name.replace(/\W+/g, '-');
@@ -516,6 +526,49 @@
         '@title': debugMeterTitle
       },
 
+      full_time_percent: format.number(function(d) {
+        var pt = access.partTimeShare(d);
+        return pt === null ? null : (100 - pt);
+      }),
+
+      part_time_percent: format.number(access.partTimeShare),
+
+      gender_values: function(d) {
+        if (!d.demographics) return [];
+        var female = picc.nullify(d.demographics.female_percent);
+        if (female === null) return [];
+        female = +female;
+        return [
+          {label: 'Female', value: female, percent: percent(female)},
+          {label: 'Male', value: 1 - female, percent: percent(1 - female)}
+        ];
+      },
+
+      race_ethnicity_values: function(d) {
+        if (!d.demographics || !d.metadata) {
+          console.warn('no demographics or metadata:', d);
+          return [];
+        }
+
+        var dictionary = d.metadata.dictionary;
+        var values = d.demographics.race_ethnicity;
+        var prefix = 'demographics.race_ethnicity.';
+        return Object.keys(values)
+          .map(function(key) {
+            var value = picc.nullify(values[key]);
+            var dict = dictionary[prefix + key];
+            return {
+              key: key,
+              label: dict ? dict.label : key,
+              value: value,
+              percent: percent(value)
+            };
+          })
+          .filter(function(d) {
+            return d.value > 0;
+          });
+      },
+
       available_programs: function(d) {
         var areas = access.programAreas(d);
         return areas
@@ -532,7 +585,6 @@
         var areas = access.programAreas(d);
         if (areas.length) {
           var total = d3.sum(areas, picc.access('percent'));
-          var percent = format.percent();
           areas.forEach(function(d) {
             d.value = +d.percent / total;
             d.percent = percent(d.value);
@@ -543,6 +595,12 @@
             return d3.descending(a.value, b.value);
           })
           .slice(0, 5);
+      },
+
+      age_entry: function(d) {
+        return d.demographics
+          ? picc.nullify(d.demographics.age_entry)
+          : null;
       },
 
       more_link: {
