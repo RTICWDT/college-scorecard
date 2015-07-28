@@ -361,8 +361,6 @@
     &.divide {
       @include font-size(4.2);
       color: darken($mid-gray, 10%);
-      margin-right: 5px;
-      margin-left: -5px;
     }
   }
 
@@ -381,19 +379,51 @@
   padding-bottom: 0;
 }
 
+.school-student-body {
+  border-bottom: $thin-border-size solid $base-border-color;
+  padding-bottom: $base-padding-large;
+  margin-bottom: $base-padding;
+
+  h2 {
+    text-align: center;
+    padding-bottom: $base-padding-lite;
+  }
+
+  .school-two_col-left {
+    @include respond-to(large-up) {
+      padding-left: $base-padding-large;
+      padding-right: $base-padding-large;
+    }
+  }
+
+  .school-two_col-right {
+    @include respond-to(large-up) {
+      padding-left: $base-padding-large;
+      padding-right: $base-padding-large;
+    }
+  }
+}
 
 ol.bars {
   li {
-    margin-bottom: .5em;
+    margin-bottom: 0.7em;
     position: relative;
 
     .bar {
-      background: $purple;
-      height: .5em;
+      background: $sky-blue;
+      height: 0.5em;
     }
 
     &.bar-female .bar {
-      background: $red;
+      background: $emerald-green;
+    }
+
+    &.bar-male .bar {
+      background: $purple;
+    }
+
+    .percent {
+      padding-right: 0.5em;
     }
   }
 }
