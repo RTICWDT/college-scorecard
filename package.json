@@ -5,7 +5,7 @@
   "license": "CC0",
   "description": "Scripts for the college-choice project.",
   "scripts": {
-    "test": "nightwatch --config test/nightwatch.json"
+    "test": "nightwatch --config test/nightwatch.json",
     "test:sauce": "nightwatch --config test/nightwatch.json -e saucelabs"
   },
   "dependencies": {
