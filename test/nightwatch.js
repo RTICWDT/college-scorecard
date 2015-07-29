@@ -75,7 +75,7 @@ module.exports = {
     "travis": extend(sauce, {
       "desiredCapabilities": {
         "browserName": "chrome",
-        "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER
+        // "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER
       },
       "globals": {
         "env": "travis"
