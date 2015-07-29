@@ -5,8 +5,9 @@
   "license": "CC0",
   "description": "Scripts for the college-choice project.",
   "scripts": {
-    "test": "nightwatch --config test/nightwatch.json",
-    "test:sauce": "nightwatch --config test/nightwatch.json -e saucelabs"
+    "test": "nightwatch --config ./test/nightwatch.js",
+    "test:sauce": "npm test -- -e sauce",
+    "test:travis": "npm test -- -e travis"
   },
   "dependencies": {
     "aight": "^2.1.1",
@@ -24,6 +25,7 @@
     "tito": "^0.4.0"
   },
   "devDependencies": {
+    "extend": "^3.0.0",
     "nightwatch": "^0.7.9",
     "phantomjs": "^1.9.17",
     "uglify-js": "^2.4.24"
