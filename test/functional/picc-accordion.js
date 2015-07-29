@@ -6,6 +6,7 @@ module.exports = {
     client
       .url(BASE_URL)
       .waitForElementPresent('.picc-accordion', DEFAULT_TIMEOUT)
-      .assert.hidden('.picc-accordion [aria-hidden]');
+      .assert.hidden('.picc-accordion [aria-hidden]')
+      .end();
   }
 };
