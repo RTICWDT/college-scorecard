@@ -4,6 +4,9 @@
   "author": "18F",
   "license": "CC0",
   "description": "Scripts for the college-choice project.",
+  "scripts": {
+    "test": "nightwatch --config test/nightwatch.json"
+  },
   "dependencies": {
     "aight": "^2.1.1",
     "async": "^1.4.0",
@@ -21,12 +24,7 @@
     "tito": "^0.4.0"
   },
   "devDependencies": {
-    "karma": "^0.13.3",
-    "karma-mocha": "^0.2.0",
-    "karma-mocha-reporter": "^1.0.4",
-    "karma-phantomjs-launcher": "^0.2.0",
-    "karma-source-map-support": "^1.0.0",
-    "mocha": "^2.2.5",
+    "nightwatch": "^0.7.9",
     "phantomjs": "^1.9.17"
   }
 }
