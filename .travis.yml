@@ -9,8 +9,8 @@ before_script:
 - jekyll build
 
 script:
-- echo "******* running sauce tests as '${SAUCE_USERNAME}'... *******"
-- npm test -- -e saucelabs
+- echo "******* running sauce tests... *******"
+- npm run test:sauce
 
 env:
   global:

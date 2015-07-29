@@ -6,6 +6,7 @@
   "description": "Scripts for the college-choice project.",
   "scripts": {
     "test": "nightwatch --config test/nightwatch.json"
+    "test:sauce": "nightwatch --config test/nightwatch.json -e saucelabs"
   },
   "dependencies": {
     "aight": "^2.1.1",
