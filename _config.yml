@@ -35,8 +35,12 @@ api:
 # Note: files and directories with the '_' prefix are excluded
 # automatically
 exclude:
+  # Node and JS asset build files
   - package.json
   - node_modules
   - '**/Makefile'
+  # Ruby stuff
   - 'Gemfile*'
   - config.ru
+  # functional testing files
+  - test/**
