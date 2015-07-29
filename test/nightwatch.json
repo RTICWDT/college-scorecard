@@ -2,9 +2,11 @@
   "src_folders": [
     "./test/functional"
   ],
+
   "custom_assertions_path": "",
   "live_output": true,
   "parallel_process_delay": 10,
+
   "selenium": {
     "start_process": false,
     "server_path": "",
@@ -17,7 +19,9 @@
       "webdriver.firefox.profile": ""
     }
   },
+
   "test_settings": {
+
     "default": {
       "launch_url": "http://localhost:4000/college-choice/",
       "selenium_host": "127.0.0.1",
@@ -37,6 +41,7 @@
         "env": "default"
       }
     },
+
     "saucelabs": {
       "selenium_host": "ondemand.saucelabs.com",
       "selenium_port": 80,
@@ -51,8 +56,9 @@
         "path": ""
       },
       "desiredCapabilities": {
-        "name": "test-example",
-        "browserName": "firefox"
+        "name": "college-choice",
+        "browserName": "chrome",
+        "tunnel-identifier": "${TRAVIS_JOB_NUMBER}"
       },
       "globals": {
         "env": "sauce"
@@ -61,30 +67,15 @@
         "start_process": false
       }
     },
+
     "phantomjs": {
       "desiredCapabilities": {
         "browserName": "phantomjs",
         "javascriptEnabled": true,
-        "acceptSslCerts": true,
-        "phantomjs.binary.path": "/path/to/phantomjs"
-      }
-    },
-    "browserstack": {
-      "selenium": {
-        "start_process": false
-      },
-      "selenium_host": "hub.browserstack.com",
-      "selenium_port": 80,
-      "silent": true,
-      "desiredCapabilities": {
-        "name": "test-example",
-        "browserName": "firefox",
-        "browserstack.user": "...",
-        "browserstack.key": "..."
-      },
-      "globals": {
-        "env": "browserstack"
+        "acceptSslCerts": true
       }
     }
+
   }
+
 }
