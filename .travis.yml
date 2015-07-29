@@ -4,7 +4,7 @@ rvm:
   - 2.2.0
 
 before_install:
-  - bundle install
+  - gem install github-pages
 
 before_script:
   - echo "******* building site... *******"
