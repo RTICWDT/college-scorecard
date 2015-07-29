@@ -19,5 +19,14 @@
     "stream-array": "^1.1.0",
     "tagalong": "^0.1.2",
     "tito": "^0.4.0"
+  },
+  "devDependencies": {
+    "karma": "^0.13.3",
+    "karma-mocha": "^0.2.0",
+    "karma-mocha-reporter": "^1.0.4",
+    "karma-phantomjs-launcher": "^0.2.0",
+    "karma-source-map-support": "^1.0.0",
+    "mocha": "^2.2.5",
+    "phantomjs": "^1.9.17"
   }
 }
