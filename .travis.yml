@@ -4,7 +4,8 @@ rvm:
   - 2.2.0
 
 before_install:
-  - gem install github-pages
+  - gem install liquid -v 2.5.1 --no-rdoc --no-ri
+  - gem install jekyll -v 1.0.2 --no-rdoc --no-ri
 
 before_script:
   - echo "******* building site... *******"
