@@ -3,7 +3,6 @@ var extend = require('extend');
 
 module.exports = {
   url: function() {
-    console.log('url:', this.api.launchUrl);
     return this.api.launchUrl;
   },
 
