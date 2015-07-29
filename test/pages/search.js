@@ -1,8 +1,22 @@
+var assert = require('assert');
+
 var searchCommands = {
   submitSearch: function() {
-    return this.waitForElementPresent('@searchSubmit', 5000)
-      .click('@searchSubmit');
-  }
+    return this.waitForElementPresent('@searchSubmit')
+      .click('@searchSubmit')
+      .waitForElementNotPresent('@searchSubmit');
+  },
+
+  assertResultsCount: function(count) {
+    var client = this;
+    var selector = '[data-bind="results_total"]';
+    return this.execute(function(selector, count) {
+      return document.querySelector(selector).textContent;
+    }, [selector, count], function(text) {
+      assert.equal(text.replace(/[^\d]+/g), String(count));
+    });
+  },
+
 };
 
 module.exports = {
@@ -13,13 +27,9 @@ module.exports = {
   commands: [searchCommands],
 
   elements: {
-    searchForm: {
-      selector: '#search-form'
-    },
-    searchSubmit: {
-      selector: '#search-submit'
-    },
-    nameInput: 'input[name="name"]'
+    searchForm: {selector: '#search-form'},
+    searchSubmit: {selector: '#search-submit'},
+    nameInput: {selector: 'input[name="name"]'}
   },
 
   sections: {
