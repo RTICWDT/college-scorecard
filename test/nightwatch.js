@@ -1,4 +1,36 @@
-{
+var extend = require('extend');
+
+var capabilities = {
+  "browserName": "phantomjs",
+  "javascriptEnabled": true,
+  "acceptSslCerts": true
+};
+
+var sauce = {
+  "selenium_host": "ondemand.saucelabs.com",
+  "selenium_port": 80,
+  "username": process.env.SAUCE_USERNAME,
+  "access_key": process.env.SAUCE_ACCESS_KEY,
+  "use_ssl": false,
+  "silent": true,
+  "output": true,
+  "screenshots": {
+    "enabled": false,
+    "on_failure": true,
+    "path": ""
+  },
+  "desiredCapabilities": {
+    "browserName": "chrome"
+  },
+  "globals": {
+    "env": "sauce"
+  },
+  "selenium": {
+    "start_process": false
+  }
+};
+
+module.exports = {
   "src_folders": [
     "./test/functional"
   ],
@@ -32,50 +64,29 @@
         "enabled": false,
         "path": ""
       },
-      "desiredCapabilities": {
-        "browserName": "phantomjs",
-        "javascriptEnabled": true,
-        "acceptSslCerts": true
-      },
+      "desiredCapabilities": capabilities,
       "globals": {
         "env": "default"
       }
     },
 
-    "saucelabs": {
-      "selenium_host": "ondemand.saucelabs.com",
-      "selenium_port": 80,
-      "username": "${SAUCE_USERNAME}",
-      "access_key": "${SAUCE_ACCESS_KEY}",
-      "use_ssl": false,
-      "silent": true,
-      "output": true,
-      "screenshots": {
-        "enabled": false,
-        "on_failure": true,
-        "path": ""
-      },
+    "sauce": sauce,
+
+    "travis": extend(sauce, {
       "desiredCapabilities": {
-        "name": "college-choice",
         "browserName": "chrome",
-        "tunnel-identifier": "${TRAVIS_JOB_NUMBER}"
+        "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER
       },
       "globals": {
-        "env": "sauce"
-      },
-      "selenium": {
-        "start_process": false
+        "env": "travis"
       }
-    },
+    }),
 
     "phantomjs": {
-      "desiredCapabilities": {
-        "browserName": "phantomjs",
-        "javascriptEnabled": true,
-        "acceptSslCerts": true
-      }
+      "desiredCapabilities": extend(capabilities, {
+        "browserName": "phantomjs"
+      })
     }
 
   }
-
-}
+};
