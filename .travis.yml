@@ -10,7 +10,7 @@ before_script:
 
 script:
 - echo "******* running sauce tests... *******"
-- npm run test:sauce
+- npm run test:travis
 
 env:
   global:
