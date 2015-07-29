@@ -35,9 +35,12 @@ module.exports = {
     "./test/functional"
   ],
 
-  "custom_assertions_path": "",
-  "live_output": true,
+  "live_output": false,
+  "output_folder": "",
   "parallel_process_delay": 10,
+
+  "custom_assertions_path": "",
+  "globals_path": "",
 
   "selenium": {
     "start_process": false,
