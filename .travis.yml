@@ -1,20 +1,18 @@
 language: node_js
 
-rvm:
-  - 2.2.0
-
 before_install:
-  - gem install liquid -v 2.5.1 --no-rdoc --no-ri
-  - gem install jekyll -v 1.0.2 --no-rdoc --no-ri
+- gem install liquid -v 2.5.1 --no-rdoc --no-ri
+- gem install jekyll -v 1.0.2 --no-rdoc --no-ri
 
 before_script:
-  - echo "******* building site... *******"
-  - jekyll build
+- echo "******* building site... *******"
+- jekyll build
 
 script:
-  - npm test -- -e saucelabs
+- echo "******* running sauce tests as '${SAUCE_USERNAME}'... *******"
+- npm test -- -e saucelabs
 
 env:
   global:
-    - secure: gpB/dW5CjdX3NKoWYf0R02cWOnpaIPVvKf+LDJxU5lKwStOHIcJlEC1QAxicHAMkiNbVCw+nT4wkKxnkY3tJQErS7M7pGSTCOvOMcHH0SQJ3B5AUxhocOp92S1f7MvVtdfWmlO7tG9ihPDquEEsfhMqrwOrS/PPKzEYwu3U3TLDNJSu9iJz1FspfklnCu665N4xpW+qd30g0UtZH4/w+edcwDTO3SLEFmbjGl2FJiOYB9nVw5NcEgUNCTaOz2EIJQtbGsSPZh8W/QrtX6zYA3y1tzdSSz45Ea/ha84I0QC/usNyS4ljtUTSnTqtHTvY1Madiq1g1B/C+t6GBpgHu1qb4c51RHrq2e6LCiRoS8bh60V6Ol/zx4y3GleuJHKnOoz7JzwYrVAWD54wMF9Qrppc+hEDN2QFoX/V1QpkpiZoArjbN6uvBW9beSoJgnAQPBteGiNLBn03ecmbwpuNX8VOrZ0VD3qnofrtOMbWlJ4pzH4Ar54boM2SrJXzD961G48HWyoYzFtgOX6UlP9AHGvH9DVOAIDW6byoWiBO2g20EDo6WzwHgaaluPNoOk3eUt5ISpn8OeYTDajDvfWSLHt0Z9Y015AYjnXnjJ1KJ/myQjXGdG5BewHFXJc1ZMfSjd1ZgASSfr/IJqt0At5TlklaaTXRdMuNzda5oJrALfDM=
-    - secure: gvaKh+BZ1Nf3Y7XucAa033u78UG+wpm08XN29tlFuAP1+GVWGbcgQHs9f8xbkQFKOwes8I+hlz9psU7w+9yKHMOXRDfzHiaYh/epVYBjR+16DnzQbqrpli3eExK/Tsx30CVFgKuOkLvlSl1SDjFrq4Ys6A+KLibJwH9KM+U+OOxZX1sWeW/mIMUb+rTBSAMsdKjHZAx5cLB/1uwXd/NVJQeKp9zca4NGbgQJT+A3mWKlxAvDObal9x/LOzfC91rz1ZF6+QX8d9BdOuNfWQiqRX5NAKM0rl8gSAvHLGB8ancY7sFUupOCKEit/aoKar7VXMWDGOHmR4s1g4EBtLwZK808+Rls3bOLhbGa4sotdw49TEbSL1KVzoMJ1KRuqwV914Wyfwji6bOm9rjsD2ikVRUUl2UwR+bmC2j9uJufezKmZ+QBTOLl4TjW1fPamTHY7KGj99PhSNy668P454N8JC9FdoIV2NCktBPJnXsbYM/Sll202y0VIC+rBnTk+MK7IzJIimXZ2pb9QN36YwD/GpWvkGTcGvBPPK5MIR4q2rGiPRJtiEe3vadkQ3eWs2751xZLe/68PM67W3sEVqLXtLBcSASSAp5HWB4MQfXbQvMhoOalMMOo6X4WuXEe2Rmwdb5M6Z7z4HmYePCV9AoWl4TW3A3JUMq41RQZwS7RLlg=
+  - secure: kKGFgIOoYIhGy44qRWnxwYNBj+n7lGd79tn6eo9NfD3fNYFRCqZgWLJ8SGui9OW+ySA2UXdKfB2gDYJB1CaXQVRSrVrVJzj62mqE4TxDOmEbhSwCMzOkX1fLkCsZZP8KmWNTHm996XsoXD6zGkN/04KOIIu6V0Va5j/fD2zDi7/SNetggReiCkfYsDqL5JUnWWTlRWiT6XGAyrruKgz2Ds6kI4rd2ci3YtiFlbJx/ShRVBwpH4+LSQD3jLb84Ge4BfA1+ZVjg2eHBeir7CvAIJdCQ1gk9dqVk+m6+exB1Kddiy5H/y6TpntEpYybA8/1Ki1BSgnvBlIroHCUPp/27UCWXaIg9zdITeoQ+x0aEOGgtCNHWVVqSH3nuKlBviRlpiM5B4Dt1pJ2vXWnxbQQhdFiv9duNe1bfP15AHCuXNtgOXYxRAakH3DyZX5EfGGwwHP/DNRjmXCW7/n+/kY8tkI4PgOeK7Dl5Fie9L3iZ5MYYfxp0A76RF+Vi54ABh1W7V2HZFiTRmJSNnrI7WE3ydRrc+I1uKVN6opkutwwxEANAxfHxywyOdFd8HYfoEqeH62RKJuf/nUFcw3oIzt2Cvzg4u0+z2gjTmXC4CBS48Z8y7Nqt5mJl/CyJrwMU1FybEhU/vKDmD+s+gs1UTR2PrbjihcBghN8s7T/CT7s/OE=
+  - secure: kl/vtsIDiLSikbhlOQsjXpEYZ9+n/PY1sBshRwrhfLlVhE5WJwngsa1hFpMCOCI7DKzUADDs57hKSVDYmv6BJFC/oX5L3dZqSxW1J5TY3L0Yhxk1Byjiv5P31hbES1P24QAouxa0oOvQf7mqLEigqO6lv2zmllDwJ665ETjzrs14wxwKEEjr51R6Hl8pb61RdClYibFtbSzEaryZowAlgfp9ogn4c1MesVmpSbdX4khqKJCrcBczP7OJHCTmzbIUj7p+rNpfPm7OM9uUHC+6O80IPyV5141XioKVF8cm+4LaPWNRJrC1PSmPcTL6D614yvNQt8OcCUAhi3WUiPb+HnlnVZWWfhq6QfoTwXn1EZSe61W7KKKRFmiiVzBfoQ5KiTVzw8jXKIDFEvkKu1TSlv2XFl7QBDxjtknZphxM8/c/0OvopgTrP18c3huqrfsUhxxkdS/BNcbgrHVtv1qFzAbimYQkAeEzFVTdHFiycXwx0UoQsrQ1RJF7MY8CxiOyNIag4oOKaUQdaB9vo0cKFuRBQRUbKiZvGqpdSAv4/F/NYSy/iuo/Hw/4TACcJ07SQku4pIwO3dsAIgGg6KwJQ7kanJgdIwvHrFqBfC5Z20ckHDWKtgIPxwkT1bG2m2DPPd1JL1dkFtClYTWVm4h+j4qO7yOjEgBXwb6JS04FPQ8=
