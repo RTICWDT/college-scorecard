@@ -37,6 +37,8 @@ module.exports = {
     "./test/functional"
   ],
 
+  page_objects_path: './test/pages',
+
   live_output: false,
   output_folder: '',
   parallel_process_delay: 10,
