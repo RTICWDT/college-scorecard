@@ -11,6 +11,9 @@ before_script:
   - echo "******* building site... *******"
   - jekyll build
 
+script:
+  - npm test -- -e saucelabs
+
 env:
   global:
     - secure: gpB/dW5CjdX3NKoWYf0R02cWOnpaIPVvKf+LDJxU5lKwStOHIcJlEC1QAxicHAMkiNbVCw+nT4wkKxnkY3tJQErS7M7pGSTCOvOMcHH0SQJ3B5AUxhocOp92S1f7MvVtdfWmlO7tG9ihPDquEEsfhMqrwOrS/PPKzEYwu3U3TLDNJSu9iJz1FspfklnCu665N4xpW+qd30g0UtZH4/w+edcwDTO3SLEFmbjGl2FJiOYB9nVw5NcEgUNCTaOz2EIJQtbGsSPZh8W/QrtX6zYA3y1tzdSSz45Ea/ha84I0QC/usNyS4ljtUTSnTqtHTvY1Madiq1g1B/C+t6GBpgHu1qb4c51RHrq2e6LCiRoS8bh60V6Ol/zx4y3GleuJHKnOoz7JzwYrVAWD54wMF9Qrppc+hEDN2QFoX/V1QpkpiZoArjbN6uvBW9beSoJgnAQPBteGiNLBn03ecmbwpuNX8VOrZ0VD3qnofrtOMbWlJ4pzH4Ar54boM2SrJXzD961G48HWyoYzFtgOX6UlP9AHGvH9DVOAIDW6byoWiBO2g20EDo6WzwHgaaluPNoOk3eUt5ISpn8OeYTDajDvfWSLHt0Z9Y015AYjnXnjJ1KJ/myQjXGdG5BewHFXJc1ZMfSjd1ZgASSfr/IJqt0At5TlklaaTXRdMuNzda5oJrALfDM=
