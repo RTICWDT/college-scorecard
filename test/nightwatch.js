@@ -42,7 +42,7 @@ module.exports = {
   parallel_process_delay: 10,
 
   custom_assertions_path: '',
-  globals_path: '',
+  globals_path: './test/globals.js',
 
   selenium: {
     start_process: false,
