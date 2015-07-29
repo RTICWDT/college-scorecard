@@ -4,6 +4,7 @@ before_install:
   - gem install github-pages --no-rdoc --no-ri
 
 before_script:
+  - echo "******* building site... *******"
   - jekyll build
 
 env:
