@@ -47,11 +47,16 @@
       var min = this.min;
       var max = this.max;
 
-      // enforce bounds
+      // enforce lower/upper crossing
+      if (this.__dragging === this.__left && this.__lower >= this.__upper) {
+        this.__lower = this.__upper - this.step;
+      } else if (this.__dragging === this.__right && this.__upper <= this.__lower) {
+        this.__upper = this.__lower + this.step;
+      }
+
+      // enforce min/max bounds
       this.__lower = Math.min(Math.max(this.__lower, min), max);
       this.__upper = Math.max(Math.min(this.__upper, max), min);
-
-      // TODO: enforce upper/lower crossing
 
       var lower = this.lower;
       var upper = this.upper;
@@ -127,31 +132,17 @@
     var handle = this.__dragging;
     var x = getMouseX.call(this, e);
 
-    var property;
-    var fudge = 10;
-    var valid = true;
+    var property = handle === this.__left ? 'lower' : 'upper';
 
-    if (handle === this.__left) {
-      property = 'lower';
-      var limit = this.__right.getBoundingClientRect().left - fudge;
-      if (x >= limit) valid = false;
-    } else {
-      property = 'upper';
-      var limit = this.__left.getBoundingClientRect().right + fudge;
-      if (x <= limit) valid = false;
-    }
+    var width = this.getBoundingClientRect().width;
+    x = Math.max(0, Math.min(x, width));
 
-    if (valid) {
-      var width = this.getBoundingClientRect().width;
-      x = Math.max(0, Math.min(x, width));
+    var value = this.min + (x / width) * (this.max - this.min);
+    if (this.step) value = roundTo(value, this.step);
+    this[property] = value;
+    this.update();
 
-      var value = this.min + (x / width) * (this.max - this.min);
-      if (this.step) value = roundTo(value, this.step);
-      this[property] = value;
-      this.update();
-
-      this.setAttribute('aria-valuenow', value);
-    }
+    this.setAttribute('aria-valuenow', value);
 
     e.preventDefault();
     return false;
@@ -301,6 +292,11 @@
     var property = handle === this.__left ? 'lower' : 'upper';
     var step = this.step || .1;
     this[property] += step * multiplier;
+  }
+
+  function getCenter(el) {
+    var rect = el.getBoundingClientRect();
+    return rect.left; // + rect.width / 2;
   }
 
   function clamp(x, min, max) {
