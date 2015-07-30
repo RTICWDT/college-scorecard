@@ -46,6 +46,11 @@
     update: function() {
       var min = this.min;
       var max = this.max;
+
+      // enforce bounds
+      this.__lower = Math.max(this.__lower, min);
+      this.__upper = Math.min(this.__upper, max);
+
       var lower = this.lower;
       var upper = this.upper;
 
