@@ -1,29 +1,68 @@
 picc-slider {
+  $slider-height: 6px;
+  $handle-size: 24px;
+  $offset: ($slider-height - $handle-size) / 2;
+  $label-width: 4em;
+
   background: #ccc;
-  border-radius: 5px;
   display: block;
-  height: 8px;
+  height: $slider-height;
+  margin-bottom: 2em;
   margin-left: 10px;
   margin-right: 10px;
+  margin-top: 2em;
   position: relative;
 
-  .handle {
-    background: #eee;
-    border: 1px solid #999;
-    border-radius: 10px;
-    height: 20px;
-    margin-left: -10px;
-    margin-top: -6px;
+  .label {
+    bottom: 100%;
+    display: block;
     position: absolute;
-    width: 20px;
+    text-align: center;
+    width: $label-width;
+    left: (-$label-width / 2);
+
+    &.bump-left {
+      text-align: left;
+    }
+
+    &.bump-right {
+      text-align: right;
+    }
   }
 
   .range {
-    background: green;
+    background: $green;
     bottom: 0;
     left: 0;
     position: absolute;
     right: 0;
     top: 0;
+  }
+
+  .average {
+    border-left: 1px solid black;
+    height: $handle-size;
+    position: absolute;
+    top: $offset;
+    width: 0;
+
+    .label {
+      border: 1px dotted red;
+      bottom: auto;
+      top: 100%;
+      margin-top: $slider-height;
+      left: -($label-width / 2);
+    }
+  }
+
+  .handle {
+    background: #fff;
+    border: 2px solid #838d8f;
+    border-radius: $handle-size;
+    height: $handle-size;
+    margin-left: -($handle-size / 2);
+    margin-top: $offset;
+    position: absolute;
+    width: $handle-size;
   }
 }
