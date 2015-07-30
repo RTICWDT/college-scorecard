@@ -1,0 +1,29 @@
+picc-slider {
+  background: #ccc;
+  border-radius: 5px;
+  display: block;
+  height: 8px;
+  margin-left: 10px;
+  margin-right: 10px;
+  position: relative;
+
+  .handle {
+    background: #eee;
+    border: 1px solid #999;
+    border-radius: 10px;
+    height: 20px;
+    margin-left: -10px;
+    margin-top: -6px;
+    position: absolute;
+    width: 20px;
+  }
+
+  .range {
+    background: green;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
