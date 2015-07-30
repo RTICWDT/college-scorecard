@@ -1,99 +1,5 @@
 (function(exports) {
 
-  var events = {
-    click: function(e) {
-      // ignore right-clicks
-      if (e.button === 2) return false;
-
-      this.__dragging = getClosestHandle.call(this, e);
-      events.move.call(this, e);
-    },
-
-    engage: function(e) {
-      // ignore right-clicks
-      if (e.button === 2) {
-        e.preventDefault();
-        return false;
-      }
-
-      this.__dragging = getClosestHandle.call(this, e);
-      this.classList.add('__dragging');
-
-      window.addEventListener('mousemove', getListener('move', this));
-      window.addEventListener('touchmove', getListener('move', this));
-      window.addEventListener('mouseup', getListener('release', this));
-      window.addEventListener('touchend', getListener('release', this));
-    },
-
-    move: function(e) {
-      if (!this.__dragging) return;
-
-      var handle = this.__dragging;
-      var x = getMouseX.call(this, e);
-
-      var property;
-      var fudge = 10;
-      if (handle === this.__left) {
-        property = 'lower';
-        var limit = this.__right.getBoundingClientRect().left - fudge;
-        if (x >= limit) return;
-      } else {
-        property = 'upper';
-        var limit = this.__left.getBoundingClientRect().right + fudge;
-        if (x <= limit) return;
-      }
-
-      var width = this.getBoundingClientRect().width;
-      x = Math.max(0, Math.min(x, width));
-
-      // console.log('click: ', e.clientX, ', ', rect.left, ' -> ', x);
-      var value = this.min + (x / width) * (this.max - this.min);
-      if (this.step) value = roundTo(value, this.step);
-      this[property] = value;
-      this.update();
-      this.setAttribute('aria-valuenow', value);
-      e.preventDefault();
-      return false;
-    },
-
-    release: function(e) {
-      this.__dragging = false;
-      this.classList.remove('__dragging');
-      this.removeAttribute('aria-valuenow');
-      window.removeEventListener('mousemove', getListener('move', this));
-      window.removeEventListener('touchmove', getListener('move', this));
-      window.removeEventListener('mouseup', getListener('release', this));
-      window.removeEventListener('touchend', getListener('release', this));
-      e.preventDefault();
-      return false;
-    },
-
-    keypress: function(e) {
-      // console.log('keypress:', e);
-      switch (e.keyCode) {
-        case 37: // left
-          nudge.call(this, -1);
-          break;
-        case 39: // right
-          nudge.call(this, +1);
-          break;
-      }
-    },
-
-    focus: function(e) {
-      this.__dragging = e.target;
-      window.addEventListener('keyup', getListener('keypress', this));
-      this.addEventListener('blur', events.blur);
-    },
-
-    blur: function(e) {
-      this.__dragging = false;
-      window.removeEventListener('keyup', getListener('keypress', this));
-      this.removeEventListener('blur', events.blur);
-    }
-
-  };
-
 
   exports.PICCSlider = registerElement('picc-slider', {
     createdCallback: function() {
@@ -110,18 +16,18 @@
     },
 
     attachedCallback: function() {
-      this.addEventListener('click', events.click);
-      this.addEventListener('mousedown', events.engage);
-      this.addEventListener('touchstart', events.engage);
-      this.addEventListener('focus', events.focus, true);
+      this.addEventListener('click', click);
+      this.addEventListener('mousedown', engage);
+      this.addEventListener('touchstart', engage);
+      this.addEventListener('focus', focus, true);
     },
 
     detachedCallback: function() {
       // console.log('picc-slider detached');
-      this.removeEventListener('click', events.click);
-      this.removeEventListener('mousedown', events.enagage);
-      this.removeEventListener('touchstart', events.enagage);
-      this.removeEventListener('focus', events.focus, true);
+      this.removeEventListener('click', click);
+      this.removeEventListener('mousedown', enagage);
+      this.removeEventListener('touchstart', enagage);
+      this.removeEventListener('focus', focus, true);
     },
 
     attributeChangedCallback: function(attr, prev, value) {
@@ -172,20 +78,121 @@
       return v;
     }),
 
-    // parse min and max as numbers
-    min: property('min', Number),
-    max: property('max', Number),
-    lower: property('lower', Number),
-    upper: property('upper', Number),
-
-    // parse snap as a boolean
-    step: property('step', Number)
+    // parse all of these as numbers
+    min:    property('min', Number),
+    max:    property('max', Number),
+    lower:  property('lower', Number),
+    upper:  property('upper', Number),
+    step:   property('step', Number)
   });
 
-  // so that event listeners
-  function getListener(type, obj) {
-    var key = '__' + type;
-    return obj[key] || (obj[key] = events[type].bind(obj));
+  function click(e) {
+    // ignore right-clicks
+    if (e.button === 2) return false;
+    console.log('click');
+    this.__dragging = getClosestHandle.call(this, e);
+    this.__dragging.setAttribute('aria-grabbed', true);
+    move.call(this, e);
+  }
+
+  function engage(e) {
+    // ignore right-clicks
+    if (e.button === 2) {
+      e.preventDefault();
+      return false;
+    }
+    console.log('engage');
+
+    this.__dragging = getClosestHandle.call(this, e);
+    this.__dragging.setAttribute('aria-grabbed', true);
+
+    window.addEventListener('mousemove', getListener(move, this));
+    window.addEventListener('touchmove', getListener(move, this));
+    window.addEventListener('mouseup', getListener(release, this));
+    window.addEventListener('touchend', getListener(release, this));
+  }
+
+  function move(e) {
+    if (!this.__dragging) return;
+
+    console.log('move');
+
+    var handle = this.__dragging;
+    var x = getMouseX.call(this, e);
+
+    var property;
+    var fudge = 10;
+    if (handle === this.__left) {
+      property = 'lower';
+      var limit = this.__right.getBoundingClientRect().left - fudge;
+      if (x >= limit) return;
+    } else {
+      property = 'upper';
+      var limit = this.__left.getBoundingClientRect().right + fudge;
+      if (x <= limit) return;
+    }
+
+    var width = this.getBoundingClientRect().width;
+    x = Math.max(0, Math.min(x, width));
+
+    var value = this.min + (x / width) * (this.max - this.min);
+    if (this.step) value = roundTo(value, this.step);
+    this[property] = value;
+    this.update();
+
+    this.setAttribute('aria-valuenow', value);
+
+    e.preventDefault();
+    return false;
+  }
+
+  function release(e) {
+    console.log('release');
+    if (this.__dragging) {
+      this.__dragging.removeAttribute('aria-grabbed');
+    }
+    this.__dragging = false;
+    this.removeAttribute('aria-valuenow');
+    window.removeEventListener('mousemove', getListener(move, this));
+    window.removeEventListener('touchmove', getListener(move, this));
+    window.removeEventListener('mouseup', getListener(release, this));
+    window.removeEventListener('touchend', getListener(release, this));
+    e.preventDefault();
+    return false;
+  }
+
+  function keypress(e) {
+    console.log('keypress:', e.keyCode);
+    switch (e.keyCode) {
+      case 37: // left
+        nudge.call(this, -1);
+        break;
+      case 39: // right
+        nudge.call(this, +1);
+        break;
+    }
+  }
+
+  function focus(e) {
+    console.log('focus');
+    this.__dragging = e.target;
+    this.__dragging.setAttribute('aria-grabbed', true);
+
+    window.addEventListener('keyup', getListener(keypress, this));
+    this.addEventListener('blur', blur, true);
+  }
+
+  function blur(e) {
+    console.log('blur');
+    release.call(this, e);
+
+    window.removeEventListener('keyup', getListener(keypress, this));
+    this.removeEventListener('blur', blur, true);
+  }
+
+  function getListener(fn, obj) {
+    var key = '__' + fn.name;
+    return obj[key] || (obj[key] = fn.bind(obj));
   }
 
   function registerElement(name, proto, parent) {
@@ -215,10 +222,10 @@
   function property(name, parse) {
     var key = '__' + name;
     return {
-      get: function() {
+      get: function propGetter() {
         return this[key];
       },
-      set: function(value) {
+      set: function propSetter(value) {
         if (parse) value = parse.call(this, value, name);
         if (value !== this[key]) {
           this[key] = value;
