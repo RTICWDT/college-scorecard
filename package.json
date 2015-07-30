@@ -28,6 +28,7 @@
     "extend": "^3.0.0",
     "nightwatch": "^0.7.9",
     "phantomjs": "^1.9.17",
+    "request": "^2.60.0",
     "uglify-js": "^2.4.24"
   }
 }
