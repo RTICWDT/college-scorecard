@@ -81,11 +81,13 @@
     },
 
     focus: function(e) {
+      this.__dragging = e.target;
       window.addEventListener('keyup', getListener('keypress', this));
       this.addEventListener('blur', events.blur);
     },
 
     blur: function(e) {
+      this.__dragging = false;
       window.removeEventListener('keyup', getListener('keypress', this));
       this.removeEventListener('blur', events.blur);
     }
