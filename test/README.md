@@ -60,8 +60,7 @@ can get with [sauceconnect-runner]:
 npm install -g sauceconnect-runner
 ```
 
-Next, [export your credentials](https://docs.saucelabs.com/tutorials/js-unit-testing/#exporting-credentials-on-mac-linux)
-and call `sc-run`:
+Next, [export your credentials][export variables] and call `sc-run`:
 
 ```sh
 export SAUCE_USERNAME=your-username-here
@@ -104,6 +103,15 @@ to run the tests on [Sauce Labs] against those browsers:
 ./test/runner.sh chrome ie9 firefox
 ```
 
+**Note:** If you're already running the Jekyll server (e.g. with
+`jekyll serve -w` to develop the site) and want to run cross-browser
+tests against your local machine with [Sauce Connect], then you can
+instead run:
+
+```sh
+./test/browsers.sh chrome ie9 firefox
+```
+
 If the tests fail to run, check the output for an error like:
 
 ```
@@ -113,15 +121,15 @@ You used username 'username' and access key '...' to authenticate,
 which are not valid Sauce Labs credentials.
 ```
 
-If you see this, make sure that you've exported the `SAUCE_USERNAME`
-and `SAUCE_ACCESS_KEY` environment variables, which [Nightwatch]
-needs to authenticate with Sauce Labs.
+If you see this, make sure that you've [exported][export variables]
+your `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` environment variables,
+which [Nightwatch] needs to authenticate with Sauce Labs.
 
 ## Testing on Travis
 
 On [Travis] we run the the test runner script as-is, and the
 requests are tunneled through [Sauce Connect]. The list of browsers
-to run against are listed in [package.json](package.json)'s
+to run against are listed in the [package.json](../package.json)'s
 `test:all` script directive.
 
 [Nightwatch]: http://nightwatchjs.org/
@@ -135,3 +143,4 @@ to run against are listed in [package.json](package.json)'s
 [sauceconnect-runner]: https://github.com/shawnbot/sauceconnect-runner
 [webdriver-manager]: https://www.npmjs.com/package/webdriver-manager
 [Travis]: https://travis-ci.org/
+[export variables]: https://docs.saucelabs.com/tutorials/js-unit-testing/#exporting-credentials-on-mac-linux
