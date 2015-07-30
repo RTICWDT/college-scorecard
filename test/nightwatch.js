@@ -1,6 +1,10 @@
 var extend = require('extend');
 
-var LAUNCH_URL = process.env.LAUNCH_URL || 'http://localhost:4000/college-choice/';
+var PORT = process.env.LAUNCH_PORT || 4000;
+var LAUNCH_URL = (
+  process.env.LAUNCH_URL
+  || 'http://localhost:' + PORT + '/college-choice/'
+);
 
 var capabilities = {
   browserName: "phantomjs",
@@ -40,7 +44,7 @@ module.exports = {
   page_objects_path: './test/pages',
 
   live_output: false,
-  output_folder: '',
+  output_folder: '/tmp',
   parallel_process_delay: 10,
 
   custom_assertions_path: '',
