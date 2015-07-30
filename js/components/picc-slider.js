@@ -4,6 +4,7 @@
   exports.PICCSlider = registerElement('picc-slider', {
     createdCallback: function() {
       this.__range = createRange.call(this);
+      this.__mark = createMark.call(this, 'average');
       this.__left = createHandle.call(this, 'min');
       this.__right = createHandle.call(this, 'max');
 
@@ -13,6 +14,8 @@
       this.lower = getAttr.call(this, 'lower', 0);
       this.upper = getAttr.call(this, 'upper', 100);
       this.step = getAttr.call(this, 'step', 1);
+      this.average = getAttr.call(this, 'average');
+      this.format = getAttr.call(this, 'format');
     },
 
     attachedCallback: function() {
@@ -20,6 +23,7 @@
       this.addEventListener('mousedown', engage);
       this.addEventListener('touchstart', engage);
       this.addEventListener('focus', focus, true);
+      this.update();
     },
 
     detachedCallback: function() {
@@ -36,6 +40,8 @@
         case 'max':
         case 'value':
         case 'step':
+        case 'average':
+        case 'format':
           // console.log('picc-slider attr: ', attr, ' = ', value);
           this[attr] = value;
           this.update();
@@ -60,6 +66,7 @@
 
       var lower = this.lower;
       var upper = this.upper;
+      var average = this.average;
 
       var x = function(value) {
         return 100 * (value - min) / (max - min);
@@ -73,6 +80,66 @@
 
       this.__range.style.setProperty('left', left);
       this.__range.style.setProperty('right', percent(x(max - upper)));
+
+      var mark = this.__mark;
+
+      var labels = [
+        {el: this.__left.firstChild, value: lower},
+        {el: this.__right.firstChild, value: upper},
+        {el: mark.firstChild, value: average},
+      ];
+
+      var format = function() { return ''; };
+      switch (this.format) {
+        case '%':
+          format = d3.format('%d');
+          break;
+        case '$':
+          format = d3.format('$d');
+          break;
+      }
+
+      var nudgeThreshold = -12;
+      var outerRect = this.getBoundingClientRect();
+      var leftEdge = outerRect.left + nudgeThreshold;
+      var rightEdge = outerRect.right + nudgeThreshold;
+      labels.forEach(function(d, i) {
+        var label = d.el;
+        if (!label) return console.warn('no label:', i);
+        label.textContent = format(d.value);
+
+        var offset = 0;
+        var bump = false;
+        label.style.removeProperty('left');
+        label.style.removeProperty('right');
+
+        var rect = label.getBoundingClientRect();
+        if (rect.left < leftEdge) {
+          bump = 'left';
+          offset = leftEdge - rect.left - rect.width / 2;
+          // console.log('bump left:', rect.left, leftEdge);
+          label.style.setProperty('left', offset + 'px');
+          label.style.removeProperty('right');
+        } else if (rect.right > rightEdge) {
+          bump = 'right';
+          offset = rect.right - rightEdge - label.parentNode.getBoundingClientRect().width;
+          // console.log('bump right:', rect.right, rightEdge);
+          label.style.setProperty('left', 'auto');
+          label.style.setProperty('right', offset + 'px');
+        }
+
+        label.classList.toggle('bump-left', bump === 'left');
+        label.classList.toggle('bump-right', bump === 'right');
+      });
+
+      if (isNaN(average)) {
+        mark.style.setProperty('display', 'none');
+      } else {
+        var p = percent(x(average));
+        // console.log('mark:', average, p);
+        mark.style.setProperty('left', p);
+        mark.style.removeProperty('display');
+      }
 
       this.setAttribute('aria-valuemin', lower);
       this.setAttribute('aria-valuemax', upper);
@@ -95,7 +162,10 @@
     max:    property('max', Number),
     lower:  property('lower', Number),
     upper:  property('upper', Number),
-    step:   property('step', Number)
+    step:   property('step', Number),
+    average: property('average', Number),
+
+    format: property('format', String)
   });
 
   function click(e) {
@@ -256,6 +326,7 @@
     var div = document.createElement('div');
     div.className = 'handle handle_' + which;
     div.setAttribute('tabindex', 0);
+    div.appendChild(createLabel());
     return this.appendChild(div);
   }
 
@@ -263,6 +334,19 @@
     var div = document.createElement('div');
     div.className = 'range';
     return this.appendChild(div);
+  }
+
+  function createMark(klass) {
+    var div = document.createElement('div');
+    div.className = klass;
+    div.appendChild(createLabel());
+    return this.appendChild(div);
+  }
+
+  function createLabel(parent) {
+    var label = document.createElement('span');
+    label.className = 'label';
+    return label;
   }
 
   function getClosestHandle(e) {
