@@ -1,16 +1,32 @@
 var extend = require('extend');
 
-var PORT = process.env.LAUNCH_PORT || 4000;
 var LAUNCH_URL = (
-  process.env.LAUNCH_URL
-  || 'http://localhost:' + PORT + '/college-choice/'
+  process.env.LAUNCH_URL ||
+  'http://localhost:4000/college-choice/'
 );
 
-var capabilities = {
-  browserName: "phantomjs",
-  javascriptEnabled: true,
-  acceptSslCerts: true
+var browsers = {
+  chrome: {browserName: 'chrome'},
+  firefox: {browserName: 'firefox'},
+  ie9: {
+    browserName: 'internet explorer',
+    version: '9.0',
+    platform: 'Windows 7'
+  },
+  ie8: {
+    browserName: 'internet explorer',
+    version: '8.0',
+    platform: 'Windows XP'
+  },
+  phantomjs: {
+    browserName: 'phantomjs'
+  }
 };
+
+var capabilities = extend({
+  javascriptEnabled: true,
+  acceptSslCerts: false
+}, browsers.phantomjs);
 
 var sauce = {
   selenium_host: "ondemand.saucelabs.com",
@@ -25,16 +41,40 @@ var sauce = {
     on_failure: true,
     path: ''
   },
-  desiredCapabilities: {
-    browserName: "chrome"
-  },
   globals: {
     env: "sauce"
   },
+  desiredCapabilities: browsers.chrome,
   selenium: {
     start_process: false
   }
 };
+
+var environments = {
+  'default': {
+    launch_url: LAUNCH_URL,
+    selenium_host: "127.0.0.1",
+    selenium_port: 4444,
+    silent: true,
+    disable_colors: false,
+    screenshots: {
+      enabled: false,
+      path: ''
+    },
+    desiredCapabilities: capabilities,
+    globals: {
+      env: "default"
+    }
+  },
+
+  sauce: sauce
+};
+
+for (var browser in browsers) {
+  environments[browser] = extend({}, sauce, {
+    desiredCapabilities: extend({}, capabilities, browsers[browser])
+  });
+}
 
 module.exports = {
   src_folders: [
@@ -42,6 +82,9 @@ module.exports = {
   ],
 
   page_objects_path: './test/pages',
+
+  // run multiple tests in parallel
+  test_workers: false,
 
   live_output: false,
   output_folder: '/tmp',
@@ -63,42 +106,5 @@ module.exports = {
     }
   },
 
-  test_settings: {
-
-    default: {
-      // 
-      launch_url: LAUNCH_URL,
-      selenium_host: "127.0.0.1",
-      selenium_port: 4444,
-      silent: true,
-      disable_colors: false,
-      screenshots: {
-        enabled: false,
-        path: ''
-      },
-      desiredCapabilities: capabilities,
-      globals: {
-        env: "default"
-      }
-    },
-
-    sauce: sauce,
-
-    travis: extend(sauce, {
-      desiredCapabilities: {
-        browserName: "chrome",
-        // "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER
-      },
-      globals: {
-        env: "travis"
-      }
-    }),
-
-    phantomjs: {
-      desiredCapabilities: extend(capabilities, {
-        browserName: "phantomjs"
-      })
-    }
-
-  }
+  test_settings: environments
 };
