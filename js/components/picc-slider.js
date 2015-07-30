@@ -1,6 +1,5 @@
 (function(exports) {
 
-
   exports.PICCSlider = registerElement('picc-slider', {
     createdCallback: function() {
       this.__range = createRange.call(this);
@@ -92,22 +91,23 @@
       var format = function() { return ''; };
       switch (this.format) {
         case '%':
-          format = d3.format('%d');
+          format = formatPercent;
           break;
         case '$':
-          format = d3.format('$d');
+          format = formatDollars;
           break;
       }
 
-      var nudgeThreshold = -12;
+      var nudgeThreshold = 12;
       var outerRect = this.getBoundingClientRect();
       var leftEdge = outerRect.left + nudgeThreshold;
-      var rightEdge = outerRect.right + nudgeThreshold;
+      var rightEdge = outerRect.right;
       labels.forEach(function(d, i) {
         var label = d.el;
         if (!label) return console.warn('no label:', i);
         label.textContent = format(d.value);
 
+        /*
         var offset = 0;
         var bump = false;
         label.style.removeProperty('left');
@@ -130,6 +130,7 @@
 
         label.classList.toggle('bump-left', bump === 'left');
         label.classList.toggle('bump-right', bump === 'right');
+        */
       });
 
       if (isNaN(average)) {
@@ -395,6 +396,21 @@
 
   function percent(value) {
     return value.toFixed(2) + '%';
+  }
+
+  function formatDollars(n) {
+    if (n >= 1000) {
+      return '$' + roundFloat(n / 1000) + 'K';
+    }
+    return '$' + Math.round(n);
+  }
+
+  function formatPercent(n) {
+    return Math.round(n * 100) + '%';
+  }
+
+  function roundFloat(n) {
+    return n.toFixed(1).replace(/\.0$/, '');
   }
 
 })(this);
