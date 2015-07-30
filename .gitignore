@@ -2,4 +2,4 @@
 .sass-cache
 _config.local.yml
 _site
-tests_output
+npm-debug.log
