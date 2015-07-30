@@ -1,3 +1,5 @@
+var sauce = require('../sauce');
+
 module.exports = {
   'search form exists on the home page': function(client) {
     return client.page.index()
@@ -17,5 +19,7 @@ module.exports = {
 
   after: function(client) {
     client.end();
-  }
+  },
+
+  tearDown: sauce.reportPassed
 };
