@@ -96,7 +96,7 @@
   function click(e) {
     // ignore right-clicks
     if (e.button === 2) return false;
-    console.log('click');
+    // console.log('click');
     this.__dragging = getClosestHandle.call(this, e);
     this.__dragging.setAttribute('aria-grabbed', true);
     move.call(this, e);
@@ -108,7 +108,7 @@
       e.preventDefault();
       return false;
     }
-    console.log('+ engage');
+    // console.log('+ engage');
 
     this.__dragging = getClosestHandle.call(this, e);
     this.__dragging.setAttribute('aria-grabbed', true);
@@ -122,7 +122,7 @@
   function move(e) {
     if (!this.__dragging) return;
 
-    console.log('* move');
+    // console.log('* move');
 
     var handle = this.__dragging;
     var x = getMouseX.call(this, e);
@@ -158,7 +158,7 @@
   }
 
   function release(e) {
-    console.log('- release');
+    // console.log('- release');
     if (this.__dragging) {
       this.__dragging.removeAttribute('aria-grabbed');
     }
@@ -173,7 +173,7 @@
   }
 
   function keypress(e) {
-    console.log('* keypress:', e.keyCode);
+    // console.log('* keypress:', e.keyCode);
     switch (e.keyCode) {
       case 37: // left
         nudge.call(this, -1);
@@ -197,7 +197,7 @@
   }
 
   function focus(e) {
-    console.log('+ focus');
+    // console.log('+ focus');
     this.__dragging = e.target;
     this.__dragging.setAttribute('aria-grabbed', true);
 
@@ -207,12 +207,12 @@
 
   function blur(e) {
     if (this.__dragging === e.target) {
-      console.log('- blur');
+      // console.log('- blur');
       release.call(this, e);
       window.removeEventListener('keyup', getListener(keypress, this));
       this.removeEventListener('blur', blur, true);
     } else {
-      console.log('# invalid blur');
+      // console.log('# invalid blur');
     }
   }
 
