@@ -6,7 +6,7 @@
   "description": "Scripts for the college-choice project.",
   "scripts": {
     "test": "nightwatch --config ./test/nightwatch.js",
-    "test:sauce": "nightwatch --config ./test/nightwatch.js -e sauce",
+    "test:sauce": "npm test -- -e sauce",
     "test:travis": "nightwatch --config ./test/nightwatch.js -e travis"
   },
   "dependencies": {
