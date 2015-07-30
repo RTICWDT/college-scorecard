@@ -48,8 +48,10 @@
       var max = this.max;
 
       // enforce bounds
-      this.__lower = Math.max(this.__lower, min);
-      this.__upper = Math.min(this.__upper, max);
+      this.__lower = Math.min(Math.max(this.__lower, min), max);
+      this.__upper = Math.max(Math.min(this.__upper, max), min);
+
+      // TODO: enforce upper/lower crossing
 
       var lower = this.lower;
       var upper = this.upper;
@@ -106,7 +108,7 @@
       e.preventDefault();
       return false;
     }
-    console.log('engage');
+    console.log('+ engage');
 
     this.__dragging = getClosestHandle.call(this, e);
     this.__dragging.setAttribute('aria-grabbed', true);
@@ -120,39 +122,43 @@
   function move(e) {
     if (!this.__dragging) return;
 
-    console.log('move');
+    console.log('* move');
 
     var handle = this.__dragging;
     var x = getMouseX.call(this, e);
 
     var property;
     var fudge = 10;
+    var valid = true;
+
     if (handle === this.__left) {
       property = 'lower';
       var limit = this.__right.getBoundingClientRect().left - fudge;
-      if (x >= limit) return;
+      if (x >= limit) valid = false;
     } else {
       property = 'upper';
       var limit = this.__left.getBoundingClientRect().right + fudge;
-      if (x <= limit) return;
+      if (x <= limit) valid = false;
     }
 
-    var width = this.getBoundingClientRect().width;
-    x = Math.max(0, Math.min(x, width));
+    if (valid) {
+      var width = this.getBoundingClientRect().width;
+      x = Math.max(0, Math.min(x, width));
 
-    var value = this.min + (x / width) * (this.max - this.min);
-    if (this.step) value = roundTo(value, this.step);
-    this[property] = value;
-    this.update();
+      var value = this.min + (x / width) * (this.max - this.min);
+      if (this.step) value = roundTo(value, this.step);
+      this[property] = value;
+      this.update();
 
-    this.setAttribute('aria-valuenow', value);
+      this.setAttribute('aria-valuenow', value);
+    }
 
     e.preventDefault();
     return false;
   }
 
   function release(e) {
-    console.log('release');
+    console.log('- release');
     if (this.__dragging) {
       this.__dragging.removeAttribute('aria-grabbed');
     }
@@ -167,7 +173,7 @@
   }
 
   function keypress(e) {
-    console.log('keypress:', e.keyCode);
+    console.log('* keypress:', e.keyCode);
     switch (e.keyCode) {
       case 37: // left
         nudge.call(this, -1);
@@ -175,11 +181,23 @@
       case 39: // right
         nudge.call(this, +1);
         break;
+
+      case 36: // end
+      case 35: // home
+        switch (this.__dragging) {
+          case this.__left:
+            this.lower = this.min;
+            break;
+          case this.__right:
+            this.upper = this.max;
+            break;
+        }
+        break;
     }
   }
 
   function focus(e) {
-    console.log('focus');
+    console.log('+ focus');
     this.__dragging = e.target;
     this.__dragging.setAttribute('aria-grabbed', true);
 
@@ -188,11 +206,14 @@
   }
 
   function blur(e) {
-    console.log('blur');
-    release.call(this, e);
-
-    window.removeEventListener('keyup', getListener(keypress, this));
-    this.removeEventListener('blur', blur, true);
+    if (this.__dragging === e.target) {
+      console.log('- blur');
+      release.call(this, e);
+      window.removeEventListener('keyup', getListener(keypress, this));
+      this.removeEventListener('blur', blur, true);
+    } else {
+      console.log('# invalid blur');
+    }
   }
 
   function getListener(fn, obj) {
