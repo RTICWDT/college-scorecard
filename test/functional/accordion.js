@@ -1,3 +1,5 @@
+var sauce = require('../sauce');
+
 module.exports = {
   'accordions are invisible by default': function(client) {
     // there's guaranteed to be an accordion on the
@@ -10,5 +12,7 @@ module.exports = {
 
   after: function(client) {
     client.end();
-  }
+  },
+
+  tearDown: sauce.reportPassed
 };
