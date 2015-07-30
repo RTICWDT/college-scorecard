@@ -4,13 +4,17 @@
   "author": "18F",
   "license": "CC0",
   "description": "Scripts for the college-choice project.",
+  "scripts": {
+    "test": "./test/runner.sh",
+    "test:sauce": "./test/runner.sh sauce",
+    "test:all": "./test/runner.sh chrome ie9 firefox"
+  },
   "dependencies": {
     "aight": "^2.1.1",
     "async": "^1.4.0",
     "browserify": "^10.2.4",
     "d3": "^3.5.5",
     "document-register-element": "^0.4.5",
-    "es6-promise": "^2.3.0",
     "formdb": "^0.2.0",
     "js-yaml": "^3.3.1",
     "leaflet": "^0.7.3",
@@ -19,5 +23,12 @@
     "stream-array": "^1.1.0",
     "tagalong": "^0.1.2",
     "tito": "^0.4.0"
+  },
+  "devDependencies": {
+    "extend": "^3.0.0",
+    "nightwatch": "^0.7.9",
+    "phantomjs": "^1.9.17",
+    "request": "^2.60.0",
+    "uglify-js": "^2.4.24"
   }
 }
