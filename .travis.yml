@@ -4,13 +4,8 @@ before_install:
 - gem install liquid -v 2.5.1 --no-rdoc --no-ri
 - gem install jekyll -v 1.0.2 --no-rdoc --no-ri
 
-before_script:
-- echo "******* building site... *******"
-- jekyll build
-
 script:
-- echo "******* running sauce tests... *******"
-- npm run test:travis
+- ./test/travis.sh :travis
 
 env:
   global:
