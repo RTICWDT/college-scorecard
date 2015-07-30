@@ -1,33 +1,25 @@
 picc-slider {
-  $slider-height: 6px;
   $handle-size: 24px;
-  $offset: ($slider-height - $handle-size) / 2;
-  $label-width: 4em;
+  $horizontal-margin: $handle-size * 1.5;
+  $label-width: 80px;
+  $mark-outset: 4px;
+  $slider-height: 6px;
+  $vertical-margin: 2.5em;
+  $vertical-offset: ($slider-height - $handle-size) / 2;
 
   background: #ccc;
   display: block;
   height: $slider-height;
-  margin-bottom: 2em;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 2em;
+  margin: $vertical-margin $horizontal-margin;
   position: relative;
 
   .label {
     bottom: 100%;
     display: block;
+    left: ($handle-size - $label-width) / 2;
     position: absolute;
     text-align: center;
     width: $label-width;
-    left: (-$label-width / 2);
-
-    &.bump-left {
-      text-align: left;
-    }
-
-    &.bump-right {
-      text-align: right;
-    }
   }
 
   .range {
@@ -41,27 +33,27 @@ picc-slider {
 
   .average {
     border-left: 1px solid black;
-    height: $handle-size;
+    height: $handle-size + $mark-outset;
     position: absolute;
-    top: $offset;
+    top: $vertical-offset - ($mark-outset / 2);
     width: 0;
 
     .label {
-      border: 1px dotted red;
+      // border: 1px dotted red;
       bottom: auto;
       top: 100%;
-      margin-top: $slider-height;
       left: -($label-width / 2);
     }
   }
 
   .handle {
     background: #fff;
-    border: 2px solid #838d8f;
     border-radius: $handle-size;
+    border: 2px solid #838d8f;
+    cursor: pointer;
     height: $handle-size;
     margin-left: -($handle-size / 2);
-    margin-top: $offset;
+    margin-top: $vertical-offset;
     position: absolute;
     width: $handle-size;
   }
