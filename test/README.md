@@ -127,10 +127,15 @@ which [Nightwatch] needs to authenticate with Sauce Labs.
 
 ## Testing on Travis
 
-On [Travis] we run the the test runner script as-is, and the
-requests are tunneled through [Sauce Connect]. The list of browsers
-to run against are listed in the [package.json](../package.json)'s
-`test:all` script directive.
+On [Travis] we run cross-browser tests with:
+
+```sh
+npm run test:all
+```
+
+The requests are tunneled through [Sauce Connect]. The list of
+browsers to run against are listed in the
+[package.json](../package.json)'s `test:all` script directive.
 
 [Nightwatch]: http://nightwatchjs.org/
 [Node.js]: https://nodejs.org/
