@@ -45,9 +45,6 @@ header {
 .title {
   background: $mid-blue;
   height: 59px;
-  @include respond-to(tiny-up) {
-      height: 76px;
-    }
 
   > div {
     @include padded-container();
@@ -64,6 +61,10 @@ header {
     }
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+  
+  @include respond-to(tiny-up) {
+    height: 76px;
   }
 }
 
