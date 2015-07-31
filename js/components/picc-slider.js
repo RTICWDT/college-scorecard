@@ -10,8 +10,8 @@
       this.setAttribute('aria-role', 'slider');
       this.min = getAttr.call(this, 'min', 0);
       this.max = getAttr.call(this, 'max', 100);
-      this.lower = getAttr.call(this, 'lower', 0);
-      this.upper = getAttr.call(this, 'upper', 100);
+      this.lower = getAttr.call(this, 'lower', this.min);
+      this.upper = getAttr.call(this, 'upper', this.max);
       this.step = getAttr.call(this, 'step', 1);
       this.average = getAttr.call(this, 'average');
       this.format = getAttr.call(this, 'format');
@@ -83,9 +83,9 @@
       var mark = this.__mark;
 
       var labels = [
-        {el: this.__left.firstChild, value: lower},
-        {el: this.__right.firstChild, value: upper},
-        {el: mark.firstChild, value: average},
+        {el: getLabel(this.__left), value: lower},
+        {el: getLabel(this.__right), value: upper},
+        {el: getLabel(mark), value: average},
       ];
 
       var format = function() { return ''; };
@@ -344,10 +344,14 @@
     return this.appendChild(div);
   }
 
-  function createLabel(parent) {
+  function createLabel() {
     var label = document.createElement('span');
     label.className = 'label';
     return label;
+  }
+
+  function getLabel(parent) {
+    return parent.querySelector('.label');
   }
 
   function getClosestHandle(e) {
