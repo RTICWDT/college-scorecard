@@ -617,4 +617,36 @@
 
   })();
 
+
+  // form utilities
+  picc.form = {};
+
+  /**
+   * Adds a "submit" listener to the provided formdb.Form
+   * instance (or CSS selector) that intercepts its data,
+   * formats it as a querystring, then does a client-side
+   * redirect with window.location, effectively removing
+   * the query string parameters for empty inputs.
+   */
+  picc.form.minifyQueryString = function(form) {
+
+    // allow form to be a CSS selector
+    if (typeof form !== 'object') {
+      form = new formdb.Form(form);
+    }
+
+    form.on('submit', function(data, e) {
+      var url = [
+        form.element.action,
+        querystring.stringify(data)
+      ].join('?');
+
+      window.location = url;
+      e.preventDefault();
+      return false;
+    });
+
+    return form;
+  };
+
 })(this);
