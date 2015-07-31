@@ -7,7 +7,7 @@
       this.__left = createHandle.call(this, 'min');
       this.__right = createHandle.call(this, 'max');
 
-      this.setAttribute('aria-role', 'slider');
+      this.setAttribute('role', 'slider');
       this.min = getAttr.call(this, 'min', 0);
       this.max = getAttr.call(this, 'max', 100);
       this.lower = getAttr.call(this, 'lower', this.min);
