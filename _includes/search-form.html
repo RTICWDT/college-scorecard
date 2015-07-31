@@ -9,6 +9,56 @@
 
   </div>
 
+  {% if show_search_filters %}
+  <fieldset>
+
+    <div id="search-filters" class="container picc-accordion" data-expanded="true">
+
+      <legend>Filters</legend>
+      <h1 class="search_category">
+        <a aria-expanded="true" aria-controls="filters-content">
+          Filters
+        </a>
+      </h1>
+
+      <div id="filters-content" aria-hidden="false" class="picc-accordion-div">
+
+        <div class="filter_section">
+          <h2>Cost Per Year</h2>
+          <picc-slider format="$" max="50000" average="22000">
+            <input type="hidden" name="average_cost_range">
+          </picc-slider>
+        </div>
+
+
+        <div class="filter_section">
+          <h2>Graduation Rate</h2>
+          <picc-slider format="%" max="1">
+            <input type="hidden" name="graduation_rate_range">
+          </picc-slider>
+        </div>
+
+        <div class="filter_section">
+          <h2>Salary After Graduation</h2>
+          <picc-slider format="$" max="50000" average="25000">
+            <input type="hidden" name="average_salary_range">
+          </picc-slider>
+        </div>
+
+        <div class="filter_section">
+          <h2>Monthly Student Loan Payment</h2>
+          <picc-slider format="$" max="500" average="280">
+            <input type="hidden" name="monthly_loan_payment_range">
+          </picc-slider>
+        </div>
+
+      </div>
+
+    </div>
+
+  </fieldset>
+  {% endif %}
+
 
   <fieldset>
 
