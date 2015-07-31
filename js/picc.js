@@ -671,4 +671,16 @@
       });
   };
 
+  // debounce function
+  picc.debounce = function(fn, delay) {
+    var timeout;
+    return function() {
+      var context = this;
+      var args = arguments;
+      return timeout = setTimeout(function() {
+        fn.apply(context, args);
+      }, delay);
+    };
+  };
+
 })(this);
