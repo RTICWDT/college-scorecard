@@ -1,6 +1,9 @@
 (function(exports) {
 
-  exports.PICCSlider = registerElement('picc-slider', {
+  var ELEMENT_NAME = 'picc-slider';
+  var CLASS_PREFIX = ELEMENT_NAME + '-';
+
+  exports.PICCSlider = registerElement(ELEMENT_NAME, {
     createdCallback: function() {
       this.__range = createRange.call(this);
       this.__mark = createMark.call(this, 'average');
@@ -325,7 +328,8 @@
 
   function createHandle(which) {
     var div = document.createElement('div');
-    div.className = 'handle handle_' + which;
+    div.classList.add(CLASS_PREFIX + 'handle');
+    div.classList.add(CLASS_PREFIX + 'handle_' + which);
     div.setAttribute('tabindex', 0);
     div.appendChild(createLabel());
     return this.appendChild(div);
@@ -333,25 +337,25 @@
 
   function createRange() {
     var div = document.createElement('div');
-    div.className = 'range';
+    div.className = CLASS_PREFIX + 'range';
     return this.appendChild(div);
   }
 
   function createMark(klass) {
     var div = document.createElement('div');
-    div.className = klass;
+    div.className = CLASS_PREFIX + klass;
     div.appendChild(createLabel());
     return this.appendChild(div);
   }
 
   function createLabel() {
     var label = document.createElement('span');
-    label.className = 'label';
+    label.className = CLASS_PREFIX + 'label';
     return label;
   }
 
   function getLabel(parent) {
-    return parent.querySelector('.label');
+    return parent.querySelector('.' + CLASS_PREFIX + 'label');
   }
 
   function getClosestHandle(e) {

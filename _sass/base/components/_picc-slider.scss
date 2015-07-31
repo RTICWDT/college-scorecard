@@ -13,7 +13,7 @@ picc-slider {
   margin: $vertical-margin $horizontal-margin;
   position: relative;
 
-  .label {
+  .picc-slider-label {
     bottom: 100%;
     display: block;
     left: ($handle-size - $label-width) / 2;
@@ -22,7 +22,7 @@ picc-slider {
     width: $label-width;
   }
 
-  .range {
+  .picc-slider-range {
     background: $green;
     bottom: 0;
     left: 0;
@@ -31,14 +31,14 @@ picc-slider {
     top: 0;
   }
 
-  .average {
+  .picc-slider-average {
     border-left: 1px solid black;
     height: $handle-size + $mark-outset;
     position: absolute;
     top: $vertical-offset - ($mark-outset / 2);
     width: 0;
 
-    .label {
+    .picc-slider-label {
       // border: 1px dotted red;
       bottom: auto;
       top: 100%;
@@ -46,7 +46,7 @@ picc-slider {
     }
   }
 
-  .handle {
+  .picc-slider-handle {
     background: #fff;
     border-radius: $handle-size;
     border: 2px solid #838d8f;
