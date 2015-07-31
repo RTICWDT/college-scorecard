@@ -649,4 +649,26 @@
     return form;
   };
 
+
+  // UI tools
+  picc.ui = {};
+
+  picc.ui.expandAccordions = function(selector, expanded) {
+    if (arguments.length === 1) {
+      expanded = selector;
+      selector = null;
+    }
+    if (!selector) {
+      selector = '.picc-accordion';
+    }
+    expanded = d3.functor(expanded);
+    return d3.selectAll(selector)
+      .attr('data-expanded', function() {
+        return !!expanded.apply(this, arguments);
+      })
+      .filter(function() {
+        return this.getAttribute('data-expanded') === 'true';
+      });
+  };
+
 })(this);

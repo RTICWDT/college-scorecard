@@ -14,7 +14,12 @@
   console.debug('[search] form values:', values);
   form.setData(values);
 
-  expandAccordions(values);
+  picc.ui.expandAccordions(function() {
+    var inputs = this.querySelectorAll('[name]');
+    return [].some.call(inputs, function(input) {
+      return values[input.name];
+    });
+  });
 
   var format = picc.format;
 
@@ -64,26 +69,6 @@
       }
     }
     return obj;
-  }
-
-  function expandAccordions(values) {
-    for (var key in values) {
-      if (values[key]) {
-        var el = form.getInputsByName(key)[0];
-        if (!el) {
-          console.warn('no input element for parameter: "%s"', key);
-          continue;
-        }
-        do {
-          el = el.parentNode;
-          if (el.classList.contains('picc-accordion')) {
-            d3.select(el)
-              .attr('data-expanded', 'true');
-            break;
-          }
-        } while (el);
-      }
-    }
   }
 
 })(this);
