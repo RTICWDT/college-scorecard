@@ -3,6 +3,7 @@ title: Search
 layout: default
 permalink: /search/
 scripts:
+  - components/picc-slider.js
   - vendor/formdb.min.js
   - vendor/tagalong.min.js
 body_scripts:
@@ -18,6 +19,7 @@ body_scripts:
       <legend>Edit Search Criteria</legend>
       <h2 class="results-filter-title">Edit Search Criteria</h2>
 
+      {% assign show_search_filters = true %}
       {% include search-form.html %}
 
     </div>
