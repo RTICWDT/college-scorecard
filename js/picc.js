@@ -659,16 +659,14 @@
       selector = null;
     }
     if (!selector) {
-      selector = '.picc-accordion';
+      selector = 'aria-accordion';
     }
     expanded = d3.functor(expanded);
     return d3.selectAll(selector)
-      .attr('data-expanded', function() {
+      .filter(function() {
         return !!expanded.apply(this, arguments);
       })
-      .filter(function() {
-        return this.getAttribute('data-expanded') === 'true';
-      });
+      .property('expanded', true);
   };
 
   // debounce function
