@@ -1,3 +1,9 @@
+// because PhantomJS takes transparent screenshots if the
+// body has no background!
+body {
+  background: white;
+}
+
 // Utility classes
 //============================================
 
@@ -5,6 +11,7 @@
   color: yellow;
 }
 
+[aria-hidden="true"],
 .hidden {
   display: none;
 }
