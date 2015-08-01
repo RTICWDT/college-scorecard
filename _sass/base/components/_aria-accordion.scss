@@ -1,0 +1,58 @@
+aria-accordion {
+  $button-size: 34px;
+  $button-margin: 9px;
+
+  @include transition(height 1s linear);
+
+  display: block;
+  overflow: hidden;
+  min-height: $button-size + ($button-margin * 2);
+  @include respond-to(tiny-up) {
+    min-height: $button-size + ($button-margin * 3);
+  }
+
+  [aria-controls] {
+    display: block;
+    cursor: pointer;
+    position: relative;
+  }
+
+  [aria-controls]:after {
+    color: #999;
+    background: #fff;
+    border: 1px solid #e3e3e3;
+    border-radius: 500px;
+    display: inline-block;
+    font-size: $button-size;
+    font-weight: normal;
+    height: $button-size;
+    line-height: 1.075;
+    padding-left: 0.02em;
+    position: absolute;
+    text-align: center;
+    top: $button-margin;
+    right: 0; // XXX
+    width: $button-size;
+  }
+
+  [aria-controls]:after {
+    content: '\002B';
+    top: -2px;
+  }
+
+  &[aria-expanded='true'] [aria-controls]:after {
+    content: '\2212';
+  }
+
+  [aria-controls]:hover:after {
+    color: #333; // TODO
+  }
+
+  [aria-hidden="true"] {
+    display: none;
+  }
+}
+
+.picc-accordion-div {
+  padding-top: ($base-padding / 2);
+}
