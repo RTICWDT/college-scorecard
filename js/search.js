@@ -29,6 +29,7 @@
 
   function onChange(params) {
     var qs = querystring.stringify(params);
+    // update the URL
     history.pushState(params, 'search', '?' + qs);
 
     if (req) req.cancel();
