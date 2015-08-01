@@ -37,8 +37,8 @@ var sauce = {
   silent: true,
   output: true,
   screenshots: {
-    enabled: true,
-    on_failure: true,
+    enabled: false,
+    on_failure: false
   },
   globals: {
     env: "sauce"
