@@ -51,8 +51,8 @@ aria-accordion {
   [aria-hidden="true"] {
     display: none;
   }
-}
 
-.picc-accordion-div {
-  padding-top: ($base-padding / 2);
+  .accordion-div {
+    padding-top: ($base-padding / 2);
+  }
 }
