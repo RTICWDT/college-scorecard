@@ -39,7 +39,6 @@ var sauce = {
   screenshots: {
     enabled: true,
     on_failure: true,
-    path: 'test/screenshots'
   },
   globals: {
     env: "sauce"
@@ -58,8 +57,9 @@ var environments = {
     silent: true,
     disable_colors: false,
     screenshots: {
-      enabled: false,
-      path: ''
+      enabled: true,
+      on_failure: true,
+      path: 'test/screenshots'
     },
     desiredCapabilities: capabilities,
     globals: {
