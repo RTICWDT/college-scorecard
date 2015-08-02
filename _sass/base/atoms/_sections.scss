@@ -1,0 +1,55 @@
+.section {
+  padding-top: $base-padding;
+  padding-bottom: $base-padding;
+
+  h1 {
+    padding-bottom: $base-padding-lite;
+  }
+}
+
+.section-card_container {
+
+  h1 {
+    padding-top: $base-padding;
+    padding-bottom: $base-padding;
+  }
+
+  > div > div,
+  .contained {
+    background-color: $white;
+    border-radius: 0.4em;
+    margin-top: $base-padding;
+    margin-bottom: $base-padding;
+  }
+}
+
+//TODO not an elegant solution
+//likely need to remove the >div>div above
+.contained-no-radius {
+  border-radius: 0 !important;
+  @include respond-to(medium-up) {
+    border-radius: 0.4em !important;
+  }
+}
+
+.section-card_container-school {
+  @extend .section-card_container;
+
+  h1 {
+    padding: 0;
+  }
+
+  > div > div {
+    border: $thin-border-size solid $base-border-color;
+    display: inline-block;
+    margin-bottom: 0;
+    padding: $base-padding;
+    width: 100%;
+  }
+}
+
+.section-card_container-results {
+  @extend .section-card_container;
+  background-color: $tertiary-background-color;
+  padding-top: 0;
+}
