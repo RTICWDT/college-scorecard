@@ -1,5 +1,5 @@
 (function(exports) {
-  
+
   var EXPANDED = 'aria-expanded';
   var HIDDEN = 'aria-hidden';
   var TOGGLE_EVENTS = ['click', 'touchstart'];
