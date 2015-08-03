@@ -280,11 +280,11 @@ layout: default
 
      <aria-accordion aria-expanded="false">
       <h1>
-        <a aria-controls="pa1-content">
+        <a class="trigger" aria-controls="pa1-content">
           Closed Accordion
         </a>
       </h1>
-      <div id="pa1-content" aria-hidden="true">
+      <div class="content" id="pa1-content" aria-hidden="true">
         <p>This should not show up by default.</p>
         <p>Here is some more stuff to flow.</p>
       </div>
@@ -292,11 +292,11 @@ layout: default
 
     <aria-accordion aria-expanded="true">
       <h1>
-        <a aria-controls="pa2-content">
+        <a class="trigger" aria-controls="pa2-content">
           Open Accordion
         </a>
       </h1>
-      <div id="pa2-content">
+      <div class="content" id="pa2-content">
         <p>This <i>should</i> show up by default.</p>
       </div>
     </aria-accordion>
