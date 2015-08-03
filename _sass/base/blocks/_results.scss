@@ -70,7 +70,7 @@
     @include span-columns(3 of 16);
   }
 
-  .picc-accordion {
+  aria-accordion {
     $button-size: 28px;
     $button-margin: -3px;
     padding-right: $base-padding-lite;
@@ -82,8 +82,7 @@
       min-height: $button-size + ($button-margin);
     }
 
-    a[aria-controls]:after,
-    .picc-accordion-toggle {
+    [aria-controls]:after {
       font-size: $button-size;
       height: $button-size;
       top: $button-margin;
