@@ -203,3 +203,56 @@
 .home-bg-gray {
   background-color: $tertiary-background-color;
 }
+
+// Search form
+// For styles that are specific to
+// the home search. General form styles
+// are in _forms.scss.
+//============================================
+
+.search_form {
+  background-color: $white;
+  border-radius: $base-border-radius $base-border-radius 0 0;
+  padding-top: 0.4em;
+  margin-top: -$splash-height;
+
+  @include respond-to(medium-up) {
+    margin-top: (-$splash-height + $base-padding);
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 650px;
+    padding-top: $base-padding;
+    padding-bottom: $base-padding;
+
+    .large_heading {
+      padding-top: $base-padding-lite;
+      text-align: center;
+    }
+  }
+
+  p {
+    @extend .supporting_copy;
+    padding-top: 0.3em;
+    padding-bottom: $base-padding;
+
+    @include respond-to(medium-up) {
+      text-align: center;
+    }
+  }
+}
+
+.search_form-submit {
+  @extend .centered;
+
+  border-top: $thick-border-size solid $base-border-color;
+  padding-top: $base-padding-large;
+  text-align: center;
+
+  a {
+    padding-top: $base-padding;
+  }
+
+  div {
+    // @extend .new_line;
+  }
+}
