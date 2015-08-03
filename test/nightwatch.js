@@ -91,6 +91,7 @@ module.exports = {
   parallel_process_delay: 10,
 
   custom_assertions_path: '',
+  custom_commands_path: './test/commands',
   globals_path: './test/globals.js',
 
   selenium: {
