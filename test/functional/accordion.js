@@ -6,40 +6,50 @@ module.exports = {
     client.windowSize('current', 1024, 768);
   },
 
-  'collapsed accordions have invisible content by default': function(client) {
+  'loads accordion elements': function(client) {
     client.page.styleguide()
-      .navigate()
-      .waitForElementPresent('@collapsedAccordion')
-      .assert.hidden('@collapsedAccordionContent');
+      .navigate();
+    client
+      .waitForDocumentReady()
+      .execute(function() {
+        var accordion = document.querySelector('aria-accordion[aria-expanded="true"]');
+        return accordion ? accordion.expanded : null;
+      }, [], function(result) {
+        client.assert.equal(result.value, true);
+      });
   },
 
-  'expanded accordions have visible content by default': function(client) {
-    client.page.styleguide()
-      .navigate()
-      .waitForElementPresent('@expandedAccordion')
-      .assert.visible('@expandedAccordionContent');
+  'open accordions should close when clicked': function(client) {
+    var page = client.page.styleguide()
+      .navigate();
+    client.waitForDocumentReady();
+    page
+      .click('@openAccordionTrigger')
+      .assert.hidden('@openAccordionContent');
   },
 
-  /*
-  // FIXME: these don't work because Nightwatch/Selenium
-  // can't find the trigger selectors???
-  'expanded accordions should close when clicked': function(client) {
-    client.page.styleguide()
+  'closed accordions should open when clicked': function(client) {
+    var page = client.page.styleguide()
       .navigate()
-      .waitForElementPresent('@expandedAccordionTrigger')
-      .waitForElementPresent('@expandedAccordionContent')
-      .click('@expandedAccordionTrigger')
-      .assert.hidden('@expandedAccordionContent');
+    client.waitForDocumentReady();
+    page
+      .click('@closedAccordionTrigger')
+      .assert.visible('@closedAccordionContent');
   },
 
-  'collapsed accordions should open when clicked': function(client) {
+  'closed accordions have invisible content by default': function(client) {
     client.page.styleguide()
       .navigate()
-      .waitForElementPresent('@collapsedAccordion')
-      .click('@collapsedAccordionTrigger')
-      .assert.visible('@collapsedAccordionContent');
+      .waitForElementPresent('@closedAccordion')
+      .assert.hidden('@closedAccordionContent');
   },
-  */
+
+  'open accordions have visible content by default': function(client) {
+    client.page.styleguide()
+      .navigate()
+      .waitForElementPresent('@openAccordion')
+      .assert.visible('@openAccordionContent');
+  },
 
   after: function(client) {
     client.end();
