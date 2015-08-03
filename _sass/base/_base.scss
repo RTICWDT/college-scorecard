@@ -23,12 +23,16 @@
 @import 'fonts';
 @import 'typography';
 
-// Atoms (non-web-componant componants)
-@import 'atoms/buttons';
-@import 'atoms/figures';
-@import 'atoms/forms';
-@import 'atoms/loadable';
-@import 'atoms/sections';
+// Components
+@import 'components/buttons';
+@import 'components/figures';
+@import 'components/forms';
+@import 'components/loadable';
+@import 'components/picc-accordion';
+@import 'components/picc-meter';
+@import 'components/picc-range';
+@import 'components/picc-slider';
+@import 'components/sections';
 
 // Blocks
 @import 'blocks/data-home';
@@ -40,4 +44,4 @@
 @import 'blocks/styleguide';
 
 // Web Components
-@import 'components/components';
+// @import 'components/components';
