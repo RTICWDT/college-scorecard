@@ -1,10 +1,19 @@
 @import "../font-awesome/font-awesome/variables";
 
 // Typography
+$weight-light: 200;
+$weight-book: 400;
+$weight-medium: 500;
+$weight-semibold: 600;
+$weight-bold: 700;
+$weight-black: 800;
+
 $sans-serif: Montserrat, "Helvetica Neue", Helvetica, arial, sans-serif;
 $base-font-family: $sans-serif;
 $header-font-family: $base-font-family;
-$base-font-weight: normal;
+$base-font-weight: $weight-book;
+
+
 
 // Sizes
 $base-font-size: 1;

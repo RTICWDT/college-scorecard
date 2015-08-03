@@ -1,4 +1,3 @@
-// TODO: qualify button with a class? or specify as .button?
 button,
 .button,
 input[type="submit"] {
@@ -96,7 +95,6 @@ input[type="submit"] {
 
 button.block {
   @include appearance(none);
-  // @include reset();
   border: none;
   height: auto;
   margin-bottom: 0;

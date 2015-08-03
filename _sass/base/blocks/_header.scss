@@ -23,7 +23,6 @@ header {
     font-weight: bold;
     letter-spacing: 0.4px;
     position: absolute;
-    text-decoration: none;
     text-transform: uppercase;
     top: 4px;
     -webkit-font-smoothing: antialiased;
@@ -53,7 +52,7 @@ header {
   h1 {
     @extend .title_heading;
     float: left;
-    font-weight: 400;
+    font-weight: $weight-book;
     line-height: 1;
 
     @include respond-to(tiny-up) {
@@ -62,7 +61,7 @@ header {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   @include respond-to(tiny-up) {
     height: 76px;
   }
@@ -82,7 +81,7 @@ header {
       @include respond-to(tiny-up) {
         height: 76px;
       }
-      font-weight: 200;
+      font-weight: $weight-light;
 
       padding-top: 2em; //TODO remove padding from typography, and then remove here
       padding-left: $base-padding;
