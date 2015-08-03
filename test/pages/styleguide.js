@@ -1,15 +1,18 @@
+const OPEN = 'aria-accordion.default_open';
+const CLOSED = 'aria-accordion.default_closed';
+
 module.exports = {
   url: function() {
     return this.api.launchUrl + 'styleguide/';
   },
 
   elements: {
-    expandedAccordion:          'aria-accordion[aria-expanded="true"]',
-    expandedAccordionContent:   'aria-accordion[aria-expanded="true"] .content',
-    expandedAccordionTrigger:   'aria-accordion[aria-expanded="true"] .trigger',
-    collapsedAccordion:         'aria-accordion[aria-expanded="false"]',
-    collapsedAccordionContent:  'aria-accordion[aria-expanded="false"] .content',
-    collapsedAccordionTrigger:  'aria-accordion[aria-expanded="false"] .trigger',
+    openAccordion:          OPEN,
+    openAccordionContent:   OPEN + ' .content',
+    openAccordionTrigger:   OPEN + ' .trigger',
+    closedAccordion:        CLOSED,
+    closedAccordionContent: CLOSED + ' .content',
+    closedAccordionTrigger: CLOSED + ' .trigger',
   },
 
   sections: {
