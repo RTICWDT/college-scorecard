@@ -38,8 +38,7 @@ var sauce = {
   output: true,
   screenshots: {
     enabled: false,
-    on_failure: true,
-    path: ''
+    on_failure: false
   },
   globals: {
     env: "sauce"
@@ -58,8 +57,9 @@ var environments = {
     silent: true,
     disable_colors: false,
     screenshots: {
-      enabled: false,
-      path: ''
+      enabled: true,
+      on_failure: true,
+      path: 'test/screenshots'
     },
     desiredCapabilities: capabilities,
     globals: {
@@ -91,6 +91,7 @@ module.exports = {
   parallel_process_delay: 10,
 
   custom_assertions_path: '',
+  custom_commands_path: './test/commands',
   globals_path: './test/globals.js',
 
   selenium: {

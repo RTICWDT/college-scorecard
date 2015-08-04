@@ -28,7 +28,7 @@ module.exports = {
   elements: {
     searchForm: {selector: '#search-form'},
     searchSubmit: {selector: '#search-submit'},
-    nameInput: {selector: 'input[name="name"]'}
+    nameInput: {selector: '#name-school'}
   },
 
   sections: {
