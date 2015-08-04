@@ -31,6 +31,9 @@
       } else if (params) {
         if (typeof params === 'object') {
           if (API.key) params.api_key = API.key;
+          // collapse arrays into comma-separated strings
+          // per the API
+          collapseArrays(params);
           params = querystring.stringify(params);
         } else if (API.key) {
           params += '&api_key=' + API.key;
@@ -99,6 +102,16 @@
         }
       }
       return list.join(glue);
+    }
+
+    function collapseArrays(obj, glue) {
+      if (!glue) glue = ',';
+      for (var key in obj) {
+        if (Array.isArray(obj[key])) {
+          obj[key] = obj[key].join(glue);
+        }
+      }
+      return obj;
     }
 
     return API;
