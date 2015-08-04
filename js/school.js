@@ -130,7 +130,7 @@
     var id = location.hash.substr(1);
     var found = false;
     picc.ui.expandAccordions(function() {
-      return this.id === id;
+      return this.id && this.id === id;
     })
     .each(function() {
       found = this;
