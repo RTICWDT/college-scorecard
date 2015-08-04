@@ -96,7 +96,7 @@
         <div class="input-add group_inline">
 
           <label for="select-state" class="group_inline-left">Select a state
-            <select id="select-state" name="state">
+            <select id="select-state" name="state" multiple="">
               <option value=""></option>
               {% for state in site.data.states|sort('name') %}
               <option value="{{ state.abbr }}">{{ state.name }}</option>
@@ -105,11 +105,13 @@
             </select>
           </label>
 
+          <!--
           <div class="group_inline-right">
             <button class="button button-add" data-input="state">
               Add State
             </button>
           </div>
+          -->
 
         </div>
 
