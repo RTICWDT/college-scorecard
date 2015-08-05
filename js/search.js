@@ -1,5 +1,8 @@
 (function(exports) {
 
+  // History polyfill
+  var location = window.history.location || window.location;
+
   var resultsRoot = document.querySelector('.search-results');
 
   var form = new formdb.Form('#search-form');
