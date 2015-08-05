@@ -21,7 +21,8 @@
           }
           hide(this.__list);
 
-          this.__list.addEventListener('click', this.__onclick = onclick.bind(this));
+          this.__list.addEventListener('click', this.__onclick = onclick.bind(this), true);
+          this.__list.addEventListener('focus', this.__onoptionfocus = onOptionFocus.bind(this), true);
 
           this.__input.addEventListener('focus', this.__onfocus = onfocus.bind(this));
           this.__input.addEventListener('keydown', this.__onkeydown = onkeydown.bind(this));
@@ -33,6 +34,7 @@
 
         detachedCallback: {value: function() {
           this.__list.removeEventListener('click', this.__onclick);
+          this.__list.removeEventListener('focus', this.__onoptionfocus);
 
           this.__input.removeEventListener('focus', this.__onfocus);
           this.__input.removeEventListener('keydown', this.__onkeydown);
@@ -100,6 +102,17 @@
     }, 100);
   }
 
+  function onOptionFocus(e) {
+    cancelHide(this);
+    var target = e.target;
+    getOptions(this)
+      .forEach(function(option) {
+        option.classList.toggle(focusClass, option === target);
+      });
+    setActiveDescendant(this, target);
+    scrollTo(target);
+  }
+
   function cancelHide(el) {
     clearTimeout(el.__hideTimeout);
   }
@@ -127,7 +140,7 @@
   }
 
   function updateVisibleOptions(root) {
-    var value = root.__input.value;
+    var value = root.__input.value.trim();
     var matches = function(text) {
       // console.log('match "%s" with "%s"', value, text);
       return text.toLowerCase().indexOf(value) > -1;
@@ -157,14 +170,7 @@
         if (visible) {
           show(option);
           if (label) {
-            var index = text.toLowerCase().indexOf(value);
-            label.innerHTML = [
-              text.substr(0, index),
-              '<u>',
-              text.substr(index, value.length),
-              '</u>',
-              text.substr(index + value.length)
-            ].join('');
+            label.innerHTML = getHighlightText(text, value);
           }
         } else {
           hide(option);
@@ -172,20 +178,24 @@
         }
         var focus = visible && !focused;
         option.classList.toggle(focusClass, focus);
-        if (focus) focused = focus;
+        if (focus) focused = option;
         return visible;
       });
+
+    setActiveDescendant(root, focused);
     // console.log('%d of %d options visible', visible.length, options.length);
   }
 
   function moveUp(root) {
     var focused = getFocused(root);
-    return move(focused, true);
+    var node = move(focused, true);
+    setActiveDescendant(root, node);
   }
 
   function moveDown(root) {
     var focused = getFocused(root);
-    return move(focused, false);
+    var node = move(focused, false);
+    setActiveDescendant(root, node);
   }
 
   function move(node, up) {
@@ -197,14 +207,13 @@
         break;
       }
     }
-
     if (node && node !== original) {
       original.classList.remove(focusClass);
       node.classList.add(focusClass);
       scrollTo(node);
-      return true;
+      return node;
     }
-    return node;
+    return false;
   }
 
   function isVisible(el) {
@@ -216,12 +225,12 @@
     var outer = parent.getBoundingClientRect();
     var inner = node.getBoundingClientRect();
     var top = inner.top - outer.top;
-    console.log('top:', top, 'scrollTop:', parent.scrollTop);
+    // console.log('top:', top, 'scrollTop:', parent.scrollTop);
     if (inner.bottom > outer.bottom) {
-      console.warn('out of bounds (below)');
+      // console.warn('out of bounds (below)');
       parent.scrollTop += inner.bottom - outer.bottom;
     } else if (inner.top < outer.top) {
-      console.warn('out of bounds (above)');
+      // console.warn('out of bounds (above)');
       parent.scrollTop -= outer.top - inner.top;
     }
   }
@@ -239,6 +248,26 @@
     return [].slice.call(
       root.querySelectorAll('[role="option"]')
     );
+  }
+
+  function setActiveDescendant(root, node) {
+    var input = root.__input;
+    if (node) {
+      input.setAttribute('aria-activedescendant', node.id);
+    } else {
+      input.removeAttribute('aria-activedescendant');
+    }
+  }
+
+  function getHighlightText(text, value) {
+    var index = text.toLowerCase().indexOf(value);
+    return [
+      text.substr(0, index),
+      '<u>',
+      text.substr(index, value.length),
+      '</u>',
+      text.substr(index + value.length)
+    ].join('');
   }
 
 })(this);
