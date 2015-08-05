@@ -1,4 +1,6 @@
-<form id="search-form" is="search-form" action="{{ site.baseurl }}/search/" method="GET">
+<form id="search-form" is="search-form"
+  autocomplete="false"
+  action="{{ site.baseurl }}/search/" method="GET">
   {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
 
   <div class="container search-form-intro">
