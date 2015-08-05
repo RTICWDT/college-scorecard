@@ -1,0 +1,38 @@
+combo-box {
+  display: block;
+  position: relative;
+
+  .combo-box_options {
+    background: $white;
+    border: 1px solid $mid-blue;
+    max-height: 10em;
+    overflow-y: auto;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+
+    .combo-box_option {
+      display: block;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      label {
+        display: block;
+        padding: .5em;
+
+        input {
+          display: inline-block;
+        }
+
+        &:hover {
+          background: $light-gray;
+        }
+      }
+
+      &.combo-box_option_focus {
+        background: $light-blue;
+      }
+    }
+  }
+}
