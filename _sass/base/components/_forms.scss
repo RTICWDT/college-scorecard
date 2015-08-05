@@ -136,8 +136,8 @@ label.radio :checked + span {
   position: relative;
 }
 
-input[type="checkbox"],
-input[type="radio"] {
+label.checkbox input[type="checkbox"],
+label.radio input[type="radio"] {
   @include appearance(none);
   display: inline-block;
   height: 20px;
