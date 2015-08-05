@@ -17,6 +17,7 @@
     "d3": "^3.5.5",
     "document-register-element": "^0.4.5",
     "formdb": "^0.2.0",
+    "html5-history-api": "^4.2.2",
     "js-yaml": "^3.3.1",
     "leaflet": "^0.7.3",
     "qs": "^3.1.0",
