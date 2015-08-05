@@ -199,7 +199,7 @@
   }
 
   function move(node, up) {
-    console.log('move', node, up);
+    // console.log('move', node, up);
     var original = node;
     var prop = up ? 'previousSibling' : 'nextSibling';
     while (node = node[prop]) {
