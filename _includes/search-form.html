@@ -109,7 +109,7 @@
               aria-multiselectable="true">
               {% for state in site.data.states|sort('name') %}
               <li role="option" id="state-option-{{ state.abbr }}">
-                <label>
+                <label tabindex="0">
                   <input type="checkbox" name="state" value="{{ state.abbr }}">
                   <span class="combo-box_label">{{ state.name }}</span>
                 </label>
