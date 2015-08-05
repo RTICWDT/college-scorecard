@@ -14,6 +14,7 @@
     "aight": "^2.1.1",
     "async": "^1.4.0",
     "browserify": "^10.2.4",
+    "corslite": "0.0.7",
     "d3": "^3.5.5",
     "document-register-element": "^0.4.5",
     "formdb": "^0.2.0",
