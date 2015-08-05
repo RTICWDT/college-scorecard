@@ -2,7 +2,7 @@
 window.tagalong = require('./');
 
 },{"./":2}],2:[function(require,module,exports){
-const ARRAY_TEMPLATE = '__array_template__';
+var ARRAY_TEMPLATE = '__array_template__';
 
 var tagalong = function(node, data, directives) {
   if (typeof node === 'string') {
