@@ -100,10 +100,15 @@
           </label>
 
           <combo-box>
-            <input type="text" class="combo-box_search">
-            <ol class="combo-box_options">
+            <input type="text"
+              role="combobox"
+              aria-label="Select one or more states"
+              aria-owns="state-options">
+            <ol id="state-options"
+              role="listbox"
+              aria-multiselectable="true">
               {% for state in site.data.states|sort('name') %}
-              <li class="combo-box_option">
+              <li role="option" id="state-option-{{ state.abbr }}">
                 <label>
                   <input type="checkbox" name="state" value="{{ state.abbr }}">
                   <span class="combo-box_label">{{ state.name }}</span>

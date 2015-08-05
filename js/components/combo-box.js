@@ -10,12 +10,12 @@
         }},
 
         attachedCallback: {value: function() {
-          this.__input = this.querySelector('.combo-box_search, input[type="text"]');
+          this.__input = this.querySelector('[role="combobox"]');
           if (!this.__input) {
             return console.warn('no input found in <combo-box>');
           }
 
-          this.__list = this.querySelector('.combo-box_options');
+          this.__list = this.querySelector('[role="listbox"]');
           if (!this.__list) {
             return console.warn('no list found in <combo-box>');
           }
@@ -237,7 +237,7 @@
 
   function getOptions(root) {
     return [].slice.call(
-      root.querySelectorAll('.combo-box_option')
+      root.querySelectorAll('[role="option"]')
     );
   }
 
