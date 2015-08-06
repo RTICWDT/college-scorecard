@@ -10,7 +10,11 @@
       opacity: 0.7;
 
       &:after {
-        content: '◀';
+        @include font-size(1);
+        content: '▲';
+        left: 5%;
+        position: absolute;
+        top: 90%;
       }
     }
   }
@@ -18,8 +22,11 @@
 
 .tooltip-layout {
   border-radius: $base-border-radius;
+  display: block;
   padding: $base-padding;
-  position: absolute;
+  //left: -100%;
+  position: relative;
+  //top: 100%;
   width: 300px;
 }
 
