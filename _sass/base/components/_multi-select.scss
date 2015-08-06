@@ -1,0 +1,19 @@
+multi-select {
+
+  .multi-select_item {
+
+    .button-add {
+      display: none;
+    }
+
+    &:last-child .button-add {
+      display: inline-block;
+    }
+
+    &:first-child:last-child .button-remove {
+      display: none;
+    }
+
+  }
+
+}
