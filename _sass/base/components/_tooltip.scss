@@ -1,0 +1,38 @@
+.tooltip {
+  position: relative;
+
+  i {
+    color: $mid-blue;
+
+    &:hover,
+    &:focus {
+      color: $black;
+      opacity: 0.7;
+
+      &:after {
+        content: '◀';
+      }
+    }
+  }
+}
+
+.tooltip-layout {
+  border-radius: $base-border-radius;
+  padding: $base-padding;
+  position: absolute;
+  width: 300px;
+}
+
+.tooltip-definition {
+  @include font-size(1);
+  @extend .tooltip-layout;
+  background: $black;
+  color: $white;
+  font-weight: $weight-light;
+  opacity: 0.7;
+}
+
+// TODO
+// set to appear above tip for starters, really want that to be context-dependent
+// set the 'arrow' to appear wherever the icon is independent of where the box shows up
+// set defined width at larger screen sizes, and close to 100% for smaller screen sizes
