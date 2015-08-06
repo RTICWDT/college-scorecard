@@ -97,36 +97,28 @@
 
         <div class="input-add group_inline">
 
-          <label for="select-state" class="group_inline-left">
+          <label for="select-state">
             Select one or more states
           </label>
 
-          <combo-box>
-            <input type="text"
-              role="combobox"
-              aria-label="Select one or more states"
-              aria-owns="state-options">
-            <ol id="state-options"
-              role="listbox"
-              aria-multiselectable="true">
-              {% for state in site.data.states|sort('name') %}
-              <li role="option" id="state-option-{{ state.abbr }}">
-                <label tabindex="0">
-                  <input type="checkbox" name="state" value="{{ state.abbr }}">
-                  <span class="combo-box_label">{{ state.name }}</span>
-                </label>
-              </li>
-              {% endfor %}
-            </ol>
-          </combo-box>
-
-          <!--
-          <div class="group_inline-right">
-            <button class="button button-add" data-input="state">
-              Add State
-            </button>
-          </div>
-          -->
+          <multi-select>
+            <div class="u-group_inline u-group_inline-left">
+              <select name="state">
+                <option value=""></option>
+                {% for state in site.data.states|sort('name') %}
+                <option value="{{ state.abbr }}">{{ state.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="u-group_inline u-group_inline-right u-nowrap">
+              <button class="button button-add">
+                Add State
+              </button>
+              <button class="button button-remove">
+                &times;
+              </button>
+            </div>
+          </multi-select>
 
         </div>
 
