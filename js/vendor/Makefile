@@ -49,7 +49,7 @@ document-register-element.js: $(node_modules)
 # this handy target minifies any scripts that are either built using browserify
 # or are distributed as un-minified browser builds
 %.min.js: %.js
-	uglifyjs $< > $@
+	$(bin)/uglifyjs $< > $@
 
 # most node modules with browser-ready .js files will package these up in the
 # root directory as module.js and/or module.min.js

@@ -9,30 +9,80 @@
 
   </div>
 
+  {% if show_search_filters %}
+  <fieldset>
+
+    <aria-accordion id="search-filters" class="container">
+
+      <legend>Filters</legend>
+      <h1 class="search_category">
+        <a aria-expanded="true" aria-controls="filters-content">
+          Filters
+        </a>
+      </h1>
+
+      <div id="filters-content" aria-hidden="false" class="accordion-div">
+
+        <div class="filter_section">
+          <h2>Cost Per Year</h2>
+          <picc-slider format="$" max="50000" average="22000">
+            <input type="hidden" name="average_cost_range">
+          </picc-slider>
+        </div>
+
+
+        <div class="filter_section">
+          <h2>Graduation Rate</h2>
+          <picc-slider format="%" max="1">
+            <input type="hidden" name="graduation_rate_range">
+          </picc-slider>
+        </div>
+
+        <div class="filter_section">
+          <h2>Salary After Graduation</h2>
+          <picc-slider format="$" max="50000" average="25000">
+            <input type="hidden" name="average_salary_range">
+          </picc-slider>
+        </div>
+
+        <div class="filter_section">
+          <h2>Monthly Student Loan Payment</h2>
+          <picc-slider format="$" max="500" average="280">
+            <input type="hidden" name="monthly_loan_payment_range">
+          </picc-slider>
+        </div>
+
+      </div>
+
+    </aria-accordion>
+
+  </fieldset>
+  {% endif %}
+
 
   <fieldset>
 
-    <div class="container picc-accordion">
+    <aria-accordion id="name-accordion" class="container">
 
       <legend>Name</legend>
       <h1 class="search_category">
-        <a aria-expanded="false" aria-controls="name-content">
+        <a aria-expanded="true" aria-controls="name-content">
           Name
         </a>
       </h1>
 
-      <div id="name-content" aria-hidden="true" class="picc-accordion-div">
+      <div id="name-content" aria-hidden="false" class="accordion-div">
         <label for="name-school">School name</label>
         <input id="name-school" name="name" type="text" placeholder="e.g. USA University" {{ common_input_attributes }}>
       </div>
 
-    </div>
+    </aria-accordion>
 
   </fieldset>
 
   <fieldset>
 
-    <div class="container picc-accordion">
+    <aria-accordion id="location-accordion" class="container">
 
       <legend>Location</legend>
       <h1 class="search_category">
@@ -41,7 +91,7 @@
         </a>
       </h1>
 
-      <div id="location-content" class="picc-accordion-div">
+      <div id="location-content" aria-hidden="true" class="accordion-div">
 
         <div class="input-add group_inline">
 
@@ -91,13 +141,13 @@
 
       </div>
 
-    </div>
+    </aria-accordion>
 
   </fieldset>
 
   <fieldset>
 
-    <div class="container picc-accordion">
+    <aria-accordion id="degree-accordion" class="container">
 
       <legend>Major/Degree</legend>
       <h1 class="search_category">
@@ -105,7 +155,7 @@
           Major/Degree
         </a>
       </h1>
-      <div id="major-content" class="picc-accordion-div">
+      <div id="major-content" aria-hidden="true" class="accordion-div">
 
         <label for="major">Specify a major or degree
           <input id="major" name="major" type="text" placeholder="Type a major" {{ common_input_attributes }}>
@@ -119,13 +169,13 @@
         </label>
       </div>
 
-    </div>
+    </aria-accordion>
 
   </fieldset>
 
   <fieldset>
 
-    <div class="container picc-accordion">
+    <aria-accordion id="size-accordion" class="container">
 
       <legend>Size</legend>
       <h1 class="search_category">
@@ -193,13 +243,13 @@
 
       </div>
 
-    </div>
+    </aria-accordion>
 
   </fieldset>
 
   <div class="container search_form-submit">
 
-    <button class="button button-primary">
+    <button id="search-submit" class="button button-primary">
       Find Schools
     </button>
 

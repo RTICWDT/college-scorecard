@@ -24,10 +24,10 @@
 
   @include respond-to(medium-up) {
     background: linear-gradient(
-      to right, 
-      $white 0%, 
-      $white 50%, 
-      $mid-gray 50%, 
+      to right,
+      $white 0%,
+      $white 50%,
+      $mid-gray 50%,
       $mid-gray 100%
     );
   }
@@ -36,6 +36,10 @@
 .results-main-alert {
   border-bottom: $regular-border-size solid darken($mid-gray, 10%);
   text-align: center;
+
+  h1 {
+    padding-top: 0.7em;
+  }
 
   @include respond-to(small-up) {
     text-align: left;
@@ -66,7 +70,7 @@
     @include span-columns(3 of 16);
   }
 
-  .picc-accordion {
+  aria-accordion {
     $button-size: 28px;
     $button-margin: -3px;
     padding-right: $base-padding-lite;
@@ -78,8 +82,7 @@
       min-height: $button-size + ($button-margin);
     }
 
-    a[aria-controls]:after,
-    .picc-accordion-toggle {
+    [aria-controls]:after {
       font-size: $button-size;
       height: $button-size;
       top: $button-margin;
@@ -116,6 +119,10 @@
       @include span-columns(5 of 15);
       @include omega(3n);
       margin: 1px;
+
+      figcaption {
+        @include font-size(1);
+      }
 
       h2.figure-heading {
         @include font-size(0.75);
@@ -201,4 +208,3 @@
     @include omega(3n);
   }
 }
-

@@ -1,20 +1,8 @@
-// // Ensures .1 rem unit equals 1px
-// html {
-//   font-size: 62.5%;
-// }
-
-body {
-  color: $base-font-color;
-  font-size: font-size($base-font-size);
-  font-family: $base-font-family;
-  line-height: $base-line-height;
-  font-weight: $base-font-weight;
-}
-
-.light_on_dark {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+// Type
+//
+// Typography across the site.
+//
+// Styleguide base.type
 
 // Typeographic multipliers, base 16
 $h1-huge: 2.625; //42px
@@ -26,21 +14,47 @@ $h4: 1; //16px
 $h5: 0.875; //14px
 $h6: 0.75; //12px
 
+// Type extensions
+//
+// Simple typography extensions for use across the site
+//
+// Styleguide base.type.type
+
+@mixin light_on_dark {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.light_on_dark {
+  @include light_on_dark;
+}
+
+// Heading
+//
+// Headings are in the main content, serving as titles to body text.
+//
+// .h1  - First and largest heading size.
+// .h2  - Heading 2.
+// .h3  - Heading 3.
+// .h4  - Heading 4.
+//
+// Styleguide base.type.heading
+
 // Heading styles
 h1, h2, h3, h4
 .h1, .h2, .h3, .h4 {
   font-family: $header-font-family;
-  font-weight: 700;
+  font-weight: $weight-bold;
   line-height: $base-heading-line-height;
   margin: 0;
-  padding-top: 0.7em; 
+  padding: 0;
+  //padding-top: 0.7em;
   text-rendering: optimizeLegibility;
   // ^^ Fix character spacing for headings
   // by enabling ligatures in text smaller than 20px
   // if they are available in the font
 }
 
-// Classes for use with @extend
 h1,
 .h1 {
   @include font-size($h1);
@@ -69,12 +83,17 @@ h4,
   @include font-size($h4);
 }
 
-// Buttons
+// Button type
+//
+// Typography for buttons.
+//
+// Styleguide base.type.other
 
-button {
+button,
+.button {
   @include font-size($h3);
   font-family: $base-font-family;
-  font-weight: bold;
+  font-weight: $weight-bold;
   letter-spacing: 3.6px;
 
   &.button-secondary,
@@ -84,16 +103,51 @@ button {
   }
 
   &.button-wizard {
-    @include font-size(0.875);
+    @include font-size($h5);
     letter-spacing: 2px;
     line-height: 18px;
   }
 }
 
+
+// Links
+//
+// Styles for links throughout stie.
+//
+// Styleguide base.type.links
+
+// a {
+//   .expand,
+//   .more {
+//     @include font-size(0.75);
+//     text-transform: uppercase;
+//   }
+// }
+
+.link-expand,
+.link-more {
+  @extend .light_on_dark;
+  @include font-size($h6);
+  color: $green;
+  font-weight: $weight-black;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &:hover,
+  &:focus {
+    color: $darker-green;
+  }
+}
+
 // Other type
+//
+// Special type cases throughout site.
+//
+// Styleguide base.type.other
 
 .title_heading {
   @include font-size($h1);
+  padding-top: 0.65em;
 
   @include respond-to(tiny-up) {
     @include font-size(2.25);
@@ -108,7 +162,7 @@ button {
 
 .search_category {
   @include font-size($h1);
-  font-weight: 400;
+  font-weight: $weight-book;
   padding-top: 0.45em;
 
   @include respond-to(tiny-up) {
@@ -118,11 +172,11 @@ button {
 
 .key_fact {
   @include font-size($h3);
-  font-weight: 400;
+  font-weight: $weight-book;
 }
 
 .supporting_copy {
-  @include font-size(0.875);
+  @include font-size($h5);
 }
 
 .nested_fieldset {
@@ -130,23 +184,8 @@ button {
 
   h1 {
     @include font-size($h3);
-    font-weight: 400;
+    font-weight: $weight-book;
     margin-bottom: 0.5em;
-  }
-}
-
-.link-expand,
-.link-more {
-  @extend .light_on_dark;
-  @include font-size($h6);
-  color: $green;
-  font-weight: 800;
-  text-decoration: none;
-  text-transform: uppercase;
-
-  &:hover,
-  &:focus {
-    color: $darker-green;
   }
 }
 
@@ -165,6 +204,6 @@ button {
   @include font-size(5);
   color: $lime-green;
   display: block;
-  font-weight: bold;
+  font-weight: $weight-bold;
   line-height: 1;
 }

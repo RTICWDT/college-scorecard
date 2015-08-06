@@ -14,7 +14,7 @@ header {
   > div {
     @include padded-container();
     position: relative;
-  } 
+  }
 
   a {
     @include font-size(0.70);
@@ -23,7 +23,6 @@ header {
     font-weight: bold;
     letter-spacing: 0.4px;
     position: absolute;
-    text-decoration: none;
     text-transform: uppercase;
     top: 4px;
     -webkit-font-smoothing: antialiased;
@@ -45,9 +44,6 @@ header {
 .title {
   background: $mid-blue;
   height: 59px;
-  @include respond-to(tiny-up) {
-      height: 76px;
-    }
 
   > div {
     @include padded-container();
@@ -55,12 +51,46 @@ header {
 
   h1 {
     @extend .title_heading;
-    font-weight: 400;
+    float: left;
+    font-weight: $weight-book;
     line-height: 1;
+
     @include respond-to(tiny-up) {
       line-height: 0.7;
     }
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  @include respond-to(tiny-up) {
+    height: 76px;
+  }
+}
+
+// Data tool
+//=========================================
+
+.title-nav {
+
+  ul {
+    float: right;
+
+    li {
+      display: inline-block;
+      height: 59px;
+      @include respond-to(tiny-up) {
+        height: 76px;
+      }
+      font-weight: $weight-light;
+
+      padding-top: 2em; //TODO remove padding from typography, and then remove here
+      padding-left: $base-padding;
+      padding-right: $base-padding;
+
+      &:hover,
+      &:focus {
+        background: $darker-blue;
+      }
+    }
   }
 }

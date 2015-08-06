@@ -1,0 +1,55 @@
+// Data Tool
+//=============================
+
+.data-home-intro {
+  background: $light-putty;
+
+  h3 {
+    @include font-size($h5);
+    font-weight: 800;
+    letter-spacing: em(2.5);
+    text-transform: uppercase;
+
+    @include respond-to(medium-up) {
+        padding-top: 0;
+    }
+  }
+
+  p {
+    padding-right: $base-padding;
+  }
+
+  ul li {
+    @include font-size(0.8);
+    color: $mid-blue;
+    display: inline-block;
+    padding-top: $base-padding-lite;
+    padding-right: $base-padding-lite;
+
+    i {
+      @include font-size(1);
+      color: $sky-blue;
+    }
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+}
+
+.data-home-intro-col-left {
+  @include span-columns(12);
+
+  @include respond-to(medium-up) {
+    @include span-columns(8);
+  }
+}
+
+.data-home-intro-col-right {
+  @include span-columns(12);
+
+  @include respond-to(medium-up) {
+    @include span-columns(4);
+  }
+}

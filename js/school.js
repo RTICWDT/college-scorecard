@@ -68,6 +68,32 @@
         tagalong(node, school, directives);
       });
 
+    // render the bar charts
+    // FIXME this should be possible in tagalong!
+    var bars = d3.selectAll('ol.bars')
+      .selectAll('li')
+        .datum(function() {
+          return +this.querySelector('.value').textContent;
+        })
+        .sort(d3.descending)
+        .each(function() {
+          var label = this.querySelector('.label');
+          if (label) {
+            var klass = label.textContent
+              .toLowerCase()
+              .replace(/\W+/g, '-');
+            this.classList.add('bar-' + klass);
+          }
+        });
+
+    bars.select('.value')
+      .remove();
+
+    bars.select('.bar')
+      .style('width', d3.scale.linear()
+        .domain([0, .01, 1])
+        .range(['0%', '1%', '100%']));
+
     var center = L.latLng(
       +school.location.lat,
       +school.location.lon
@@ -100,28 +126,25 @@
     marker.bindPopup(school.name);
   });
 
-  // TODO: this should be much easier with aria-accordion
-  window.addEventListener('load', function() {
-    var sectionId = location.hash.substr(1);
-    if (!sectionId) return;
-    var found;
-    d3.selectAll('.picc-accordion')
-      .each(function() {
-        if (this.id === sectionId) {
-          var button = this.querySelector('[aria-controls]');
-          button.setAttribute('aria-expanded', 'true');
-          var content = document.getElementById(button.getAttribute('aria-controls'));
-          content.setAttribute('aria-hidden', 'false');
-          content.classList.remove('hidden');
-          found = this;
-        }
-      });
+  function hashChange() {
+    var id = location.hash.substr(1);
+    var found = false;
+    picc.ui.expandAccordions(function() {
+      return this.id && this.id === id;
+    })
+    .each(function() {
+      found = this;
+    });
+    return found;
+  }
 
-      if (found) {
-        location.hash = '';
-        location.hash = '#' + found.id;
-      }
-  });
+  window.addEventListener('hashchange', hashChange);
+
+  var section = hashChange();
+  if (section) {
+    location.hash = '';
+    location.hash = '#' + section.id;
+  }
 
   function getSchoolId() {
     if (!location.search) return null;

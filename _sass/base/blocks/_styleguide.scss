@@ -3,6 +3,10 @@
   padding-bottom: $base-padding-extra;
   text-align: left;
 
+  h1, h2, h3, h4 {
+    padding-top: 0.7em;
+  }
+
   h2 a {
     color: $green;
 

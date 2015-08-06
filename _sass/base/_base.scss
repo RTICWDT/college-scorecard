@@ -4,8 +4,8 @@
 // Variables
 @import 'variables';
 
-// Neat Settings -- uncomment if using Neat -- must be imported before Neat
-// @import 'grid-settings';
+// Elements
+@import 'elements';
 
 // Mixins
 @import 'mixins/font-size';
@@ -16,17 +16,26 @@
 @import 'extends/buttons';
 @import 'extends/centered';
 
-// Typography and Elements
-@import 'buttons';
+//Utility
+@import 'utility';
+
+// Typography and fonts
 @import 'fonts';
-@import 'forms';
 @import 'typography';
 
-// General-Purpose Classes
-@import 'general/inline';
-@import 'general/loadable';
+// Components
+@import 'components/buttons';
+@import 'components/figures';
+@import 'components/forms';
+@import 'components/loadable';
+@import 'components/aria-accordion';
+@import 'components/picc-meter';
+@import 'components/picc-range';
+@import 'components/picc-slider';
+@import 'components/sections';
 
 // Blocks
+@import 'blocks/data-home';
 @import 'blocks/footer';
 @import 'blocks/header';
 @import 'blocks/home';
@@ -35,7 +44,4 @@
 @import 'blocks/styleguide';
 
 // Web Components
-@import 'components/components';
-
-// Charts and Figures
-@import 'figures';
+// @import 'components/components';
