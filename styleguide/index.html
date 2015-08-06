@@ -351,12 +351,23 @@ layout: default
         class="tooltip"
         role="tooltip">
         <i class="fa fa-info-circle"></i>
-        <span class="tooltip-definition" aria-hidden="false">
+        <span class="tooltip-definition" aria-hidden="true">
           {{ site.data.glossary.fubar.definition }}
         </span>
-        <!-- toggle hidden class in addition to aria-hidden for IE9 -->
       </a>
     </h2>
+
+    <p aria-describedby="{{ site.data.glossary.muskrat.id }}">
+      Average Cost Per Year
+      <a id="{{ site.data.glossary.muskrat.id }}"
+        class="tooltip"
+        role="tooltip">
+        <i class="fa fa-info-circle"></i>
+        <span class="tooltip-definition" aria-hidden="true">
+          {{ site.data.glossary.muskrat.definition }}
+        </span>
+      </a>
+    </p>
 
   </section>
 

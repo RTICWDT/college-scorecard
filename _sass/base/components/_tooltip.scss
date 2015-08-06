@@ -9,24 +9,30 @@
       color: $black;
       opacity: 0.7;
 
-      &:after {
-        @include font-size(1);
-        content: '▲';
-        left: 5%;
-        position: absolute;
-        top: 90%;
-      }
+      // &:after {
+      //   @include font-size(1);
+      //   //content: '▲';
+      //   left: 5%;
+      //   position: absolute;
+      //   top: 90%;
+      // }
+    }
+  }
+
+  &:hover,
+  &:focus {
+    .tooltip-definition {
+      display: block;
     }
   }
 }
 
 .tooltip-layout {
   border-radius: $base-border-radius;
-  display: block;
   padding: $base-padding;
-  //left: -100%;
-  position: relative;
-  //top: 100%;
+  left: -100%;
+  position: absolute;
+  top: 100%;
   width: 300px;
 }
 
@@ -34,9 +40,11 @@
   @include font-size(1);
   @extend .tooltip-layout;
   background: $black;
+  background: rgba(0,0,0,0.7);
   color: $white;
   font-weight: $weight-light;
-  opacity: 0.7;
+  line-height: $base-line-height;
+  z-index: 1000;
 }
 
 // TODO
