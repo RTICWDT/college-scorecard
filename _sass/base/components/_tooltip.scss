@@ -20,7 +20,7 @@
 }
 
 [role="tooltip"] {
-  $tooltip-arrow-size: 1.5em;
+  $tooltip-arrow-size: 1.6em;
 
   @include font-size($h5);
   background: $black;
