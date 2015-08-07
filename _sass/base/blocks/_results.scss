@@ -35,10 +35,45 @@
 
 .results-main-alert {
   border-bottom: $regular-border-size solid darken($mid-gray, 10%);
+  padding-top: $base-padding;
   text-align: center;
 
-  h1 {
-    padding-top: 0.7em;
+  .show-loaded {
+    label {
+      text-transform: uppercase;
+
+      @include respond-to(medium-up) {
+        float: left;
+        position: absolute;
+        top: 18%;
+      }
+    }
+
+    > div {
+      @include span-columns(12);
+
+      @include respond-to(medium-up) {
+        &:first-of-type {
+          @include span-columns(8);
+        }
+
+        &:last-of-type {
+          @include span-columns(4);
+        }
+      }
+    }
+
+    select {
+      @include respond-to(medium-up) {
+        float: right;
+        padding-right: 50px;
+        width: 70%;
+      }
+    }
+
+    .u-group_inline {
+      position: relative;
+    }
   }
 
   @include respond-to(small-up) {
