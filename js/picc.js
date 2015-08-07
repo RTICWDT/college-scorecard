@@ -25,7 +25,7 @@
     var idField = 'id';
 
     API.get = function(uri, params, done) {
-      // console.debug('[API] get("%s", %s)', uri, JSON.stringify(params));
+      // console.log('[API] get("%s", %s)', uri, JSON.stringify(params));
       if (arguments.length === 2) {
         done = params;
       } else if (params) {
@@ -38,8 +38,8 @@
         uri = join([uri, params], '?');
       }
       var url = join([API.url, uri], '/');
-      console.debug('[API] get: "%s"', url);
-      return d3.json(url, done);
+      console.log('[API] get: "%s"', url);
+      return loadJSON(url, done);
     };
 
     API.load = function(uri, done) {
@@ -88,6 +88,14 @@
       // console.log('getAll:', urls);
       return async.parallel(urls, done);
     };
+
+    function loadJSON(url, done) {
+      return corslite(url, function(error, res) {
+        if (error) return done(error);
+        var body = res.responseText;
+        return done(null, JSON.parse(body));
+      });
+    }
 
     function join(list, glue) {
       for (var i = 0; i < list.length; i++) {

@@ -16,6 +16,8 @@ all: \
 	leaflet-css \
 	async.min.js \
 	querystring.min.js \
+	history.min.js \
+	corslite.min.js \
 	tagalong.min.js
 
 # install node modules
@@ -45,6 +47,12 @@ pinpoint-css:
 # document-register-element is a lightweight custom elements polyfill
 document-register-element.js: $(node_modules)
 	cp $(node_modules)/document-register-element/build/document-register-element.max.js $@
+
+history.min.js: $(node_modules)
+	cp $(node_modules)/html5-history-api/history.min.js $@
+
+corslite.min.js: $(node_modules)
+	$(bin)/uglifyjs $(node_modules)/corslite/corslite.js > $@
 
 # this handy target minifies any scripts that are either built using browserify
 # or are distributed as un-minified browser builds

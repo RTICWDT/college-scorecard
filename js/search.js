@@ -1,5 +1,8 @@
 (function(exports) {
 
+  // History polyfill
+  var location = window.history.location || window.location;
+
   var resultsRoot = document.querySelector('.search-results');
 
   var form = new formdb.Form('#search-form');
@@ -48,9 +51,8 @@
       console.log('loaded schools:', data);
       resultsRoot.classList.add('js-loaded');
 
-      console.time('[render]');
+      console.time && console.time('[render]');
 
-      console.time('[render] template');
       // render the basic DOM template for each school
       tagalong(resultsRoot, data, {
         results_word: format.plural('total', 'Result'),
@@ -60,9 +62,7 @@
       var resultsList = resultsRoot.querySelector('.schools-list');
       tagalong(resultsList, data.results, picc.school.directives);
 
-      console.timeEnd('[render] template');
-
-      console.timeEnd('[render]');
+      console.timeEnd && console.timeEnd('[render]');
     });
   }
 
