@@ -34,9 +34,9 @@
 }
 
 .results-main-alert {
-  border-bottom: $regular-border-size solid darken($mid-gray, 10%);
   padding-top: $base-padding-large;
-  text-align: center;
+  padding-right: $base-padding;
+  padding-left: $base-padding;
 
   .show-loaded {
     label {
@@ -80,7 +80,9 @@
   }
 
   @include respond-to(small-up) {
-    text-align: left;
+    border-bottom: $regular-border-size solid darken($mid-gray, 10%);
+    padding-right: 0;
+    padding-left: 0;
   }
 }
 
