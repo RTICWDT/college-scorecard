@@ -70,15 +70,11 @@ body_scripts:
 
             <div id="key-stats" class="school-meters">
               <figure class="meter">
-                <h2 class="figure-heading constrain_width" aria-describedby="{{ site.data.glossary.fubar.id }}">
+                <h2 class="figure-heading constrain_width"
+                  aria-describedby="tip-avg-actual-cost">
                   Average Cost Per Year
-                  <a id="{{ site.data.glossary.fubar.id }}"
-                    class="tooltip"
-                    role="tooltip">
+                  <a class="tooltip-target">
                     <i class="fa fa-info-circle"></i>
-                    <span class="tooltip-definition" aria-hidden="true">
-                      {{ site.data.glossary.fubar.definition }}
-                    </span>
                   </a>
                 </h2>
                 <picc-meter {% include net_price_meter_attributes.html %}>
@@ -89,14 +85,11 @@ body_scripts:
               </figure>
 
               <figure class="meter">
-                <h2 class="figure-heading constrain_width" aria-describedby="{{ site.data.glossary.fubar.id }}">Graduation Rate
-                  <a id="{{ site.data.glossary.fubar.id }}"
-                    class="tooltip"
-                    role="tooltip">
+                <h2 class="figure-heading constrain_width"
+                  aria-describedby="tip-graduation-rate">
+                  Graduation Rate
+                  <a class="tooltip-target">
                     <i class="fa fa-info-circle"></i>
-                    <span class="tooltip-definition" aria-hidden="true">
-                      {{ site.data.glossary.fubar.definition }}
-                    </span>
                   </a>
                 </h2>
                 <picc-meter {% include graduation_meter_attributes.html %}>
@@ -107,14 +100,11 @@ body_scripts:
               </figure>
 
               <figure class="meter">
-                <h2 class="figure-heading constrain_width" aria-describedby="{{ site.data.glossary.fubar.id }}">Average Salary
-                  <a id="{{ site.data.glossary.fubar.id }}"
-                    class="tooltip"
-                    role="tooltip">
+                <h2 class="figure-heading constrain_width"
+                  aria-describedby="tip-avg-salary">
+                  Average Salary
+                  <a class="tooltip-target">
                     <i class="fa fa-info-circle"></i>
-                    <span class="tooltip-definition" aria-hidden="true">
-                      {{ site.data.glossary.fubar.definition }}
-                    </span>
                   </a>
                 </h2>
                 <picc-meter {% include earnings_meter_attributes.html %}>
