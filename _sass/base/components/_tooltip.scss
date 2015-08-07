@@ -19,8 +19,9 @@
 }
 
 [role="tooltip"] {
-  @include font-size(1);
+  $tooltip-arrow-size: 15px;
 
+  @include font-size(1);
   background: $black;
   background: $black-transparent;
   border-radius: $base-border-radius;
@@ -42,17 +43,17 @@
   }
 
   &.tooltip_below .tooltip-arrow {
-    @include triangle(15px, $black-transparent, up);
+    @include triangle($tooltip-arrow-size, $black-transparent, up);
     bottom: 100%;
   }
 
   &.tooltip_above {
-    top: auto;
     bottom: 100%;
+    top: auto;
     margin-bottom: 10px;
 
     .tooltip-arrow {
-      @include triangle(15px, $black-transparent, down);
+      @include triangle($tooltip-arrow-size, $black-transparent, down);
       top: 100%;
     }
   }
