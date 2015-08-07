@@ -13,17 +13,46 @@
           var select = this.querySelector('select');
           if (!select) return console.error('no <select> found in <multi-select>!');
 
-          this.name = select.name;
+          console.warn('<multi-select>');
+
+          // remove the multiple attribute, the clone it
+          select.removeAttribute('multiple');
+          this.__select = select.cloneNode(true);
+
+          // remove the name from the templated one
           select.name = '';
 
+          // then set the multiple attribute
+          this.__select.setAttribute('multiple', 'multiple');
+
           this.createTemplate();
-          this.update();
+          this.insertBefore(this.__select, this.firstChild);
+
+          this.value = select.value;
+
+          // listen for change events, and hide it
+          this.__select.addEventListener('change', this.__onchange = onchange.bind(this));
+          this.__select.style.display = 'none';
+
+          this.__pollID = setInterval(this.__pollSourceSelect.bind(this), 100);
         }},
 
         attributeChangedCallback: {value: function(attr, oldValue, newValue) {
         }},
 
         detachedCallback: {value: function() {
+          this.__select.removeEventListener('change', this.__onchange);
+          clearTimeout(this.__pollID);
+        }},
+
+        __pollSourceSelect: {value: function() {
+          var value = getValue(this.__select);
+          if (this.__value.length > value.length) {
+            value.push(null);
+          }
+          if (!compare(this.__value, value)) {
+            this.value = value;
+          }
         }},
 
         update: {value: function() {
@@ -56,6 +85,7 @@
               return nullish(d) ? '' : String(d);
             })
             .on('change', function(d, i) {
+              console.log('[change %d]', i, this.value);
               values[i] = this.value;
               set(values);
             });
@@ -89,7 +119,6 @@
             values.push(null);
             set(values, true);
           }
-
         }},
 
         createTemplate: {value: function() {
@@ -106,21 +135,6 @@
           return this.__template;
         }},
 
-        type: {
-          get: function() {
-            return 'text';
-          }
-        },
-
-        name: {
-          get: function() {
-            return this.getAttribute('name');
-          },
-          set: function(name) {
-            this.setAttribute('name', name);
-          }
-        },
-
         value: {
           get: function() {
             return Array.isArray(this.__value)
@@ -128,23 +142,59 @@
               : this.__value || [null];
           },
           set: function(value) {
-            // console.log('[set values]:', value);
+            console.log('[set values]:', value);
             if (compare(this.__value, value)) {
               console.warn('no change');
               return;
             }
 
             this.__value = parseValues(value);
-            this.update();
 
-            this.dispatchEvent(new CustomEvent('change', {
-              bubbles: true
-            }));
+            this.__updating = true;
+            this.update();
+            setValue(this.__select, this.__value);
+            this.__updating = false;
           }
         }
       }
     )
   });
+
+  function onchange(e) {
+    if (this.__updating) return;
+    console.log('source select change:', e.target);
+    this.value = getValue(e.target);
+  }
+
+  function getValue(multiselect) {
+    return [].filter.call(
+      multiselect.options, function(option) {
+        return option.selected;
+      })
+      .map(function(option) {
+        return option.value;
+      })
+  }
+
+  function setValue(multiselect, values) {
+    var changed = false;
+    var map = values.reduce(function(map, d) {
+      return map[d] = true, map;
+    }, {});
+
+    [].forEach.call(multiselect.options, function(option) {
+      var selected = !!map[option.value];
+      if (option.selected !== selected) {
+        option.selected = selected;
+        changed = true;
+      }
+    });
+    if (changed) {
+      multiselect.dispatchEvent(new CustomEvent('change', {
+        bubbles: true
+      }));
+    }
+  }
 
   function parseValues(d) {
     return Array.isArray(d)
