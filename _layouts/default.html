@@ -3,10 +3,14 @@
   {% include head.html %}
   <body>
     {% include header.html %}
+
     <main>
       {{ content }}
     </main>
+
     {% include footer.html %}
+
+    {% include glossary.html %}
 
     {% for script in page.body_scripts %}
     <script src="{{ site.baseurl }}/js/{{ script }}" data-src="{{ script }}"></script>

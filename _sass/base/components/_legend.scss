@@ -1,0 +1,27 @@
+$nat_average-height: 25px;
+
+.legend-nat_average {
+  @include font-size(0.8);
+  @include span-columns(9);
+  @include shift(3);
+  padding-top: $base-padding-lite;
+  position: relative;
+}
+
+.legend-nat_average-box {
+  border: 2px solid $mid-gray;
+  border-radius: $base-border-radius;
+  height: $nat_average-height;
+  position: absolute;
+  width: $nat_average-height;
+}
+
+.legend-nat_average-box-line {
+  border-bottom: $thin-border-size solid $black;
+  height: ($nat_average-height * 0.42);
+}
+
+.legend-nat_average-words {
+  padding-top: 3px;
+  padding-left: ($nat_average-height * 1.2);
+}
