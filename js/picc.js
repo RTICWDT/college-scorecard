@@ -559,7 +559,7 @@
 
       race_ethnicity_values: function(d) {
         if (!d.demographics || !d.metadata) {
-          console.warn('no demographics or metadata:', d);
+          // console.warn('no demographics or metadata:', d);
           return [];
         }
 
