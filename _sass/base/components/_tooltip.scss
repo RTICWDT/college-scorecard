@@ -61,9 +61,9 @@
   }
 
   &.tooltip_above {
-    margin-top: -($tooltip-arrow-size / 2);
     top: auto;
     bottom: 100%;
+    margin-bottom: ($tooltip-arrow-size / 2);
 
     .tooltip-content,
     .tooltip-arrow {
