@@ -157,14 +157,17 @@
       </h1>
       <div id="major-content" aria-hidden="true" class="accordion-div">
 
-        <!-- <label for="major">Choose a program
-          <input id="major" name="major" type="text" placeholder="e.g. Engineering" {{ common_input_attributes }}>
-        </label> -->
+        <label for="major">Specify a major
+          <input id="major" name="major" type="text" placeholder="Type a major" {{ common_input_attributes }}>
+        </label>
 
-        <label for="major-type">Choose a program
-          <select id="major-type" name="major_type">
-            <option value=""></option>
-            <option>???</option>
+        <label for="major-type">Select a type of degree
+          <select id="major-type" name="common_degree">
+            <option value="">Any</option>
+            <option value="3">Bachelors</option>
+            <option value="2">Associates</option>
+            <option value="1">Certificate</option>
+            <!-- <option value="4">Graduate</option> -->
           </select>
         </label>
       </div>
