@@ -24,21 +24,65 @@
 
   @include respond-to(medium-up) {
     background: linear-gradient(
-      to right, 
-      $white 0%, 
-      $white 50%, 
-      $mid-gray 50%, 
+      to right,
+      $white 0%,
+      $white 50%,
+      $mid-gray 50%,
       $mid-gray 100%
     );
   }
 }
 
 .results-main-alert {
-  border-bottom: $regular-border-size solid darken($mid-gray, 10%);
-  text-align: center;
+  padding-top: $base-padding-large;
+  padding-right: $base-padding;
+  padding-left: $base-padding;
+
+  .show-loaded {
+    label {
+      display: block;
+      padding-bottom: 4px;
+      padding-left: 3px;
+      text-align: left;
+      text-transform: uppercase;
+
+      @include respond-to(medium-up) {
+        display: table-cell;
+        padding-right: 8px;
+        width: 28%;
+      }
+    }
+
+    > div {
+      @include span-columns(12);
+
+      @include respond-to(medium-up) {
+        &:first-of-type {
+          @include span-columns(8);
+        }
+
+        &:last-of-type {
+          @include span-columns(4);
+        }
+      }
+    }
+
+    select {
+      border-color: darken($mid-gray, 10%);
+      display: block;
+      padding-right: 50px;
+
+      @include respond-to(medium-up) {
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+  }
 
   @include respond-to(small-up) {
-    text-align: left;
+    border-bottom: $regular-border-size solid darken($mid-gray, 10%);
+    padding-right: 0;
+    padding-left: 0;
   }
 }
 
@@ -66,7 +110,7 @@
     @include span-columns(3 of 16);
   }
 
-  .picc-accordion {
+  aria-accordion {
     $button-size: 28px;
     $button-margin: -3px;
     padding-right: $base-padding-lite;
@@ -78,8 +122,7 @@
       min-height: $button-size + ($button-margin);
     }
 
-    a[aria-controls]:after,
-    .picc-accordion-toggle {
+    [aria-controls]:after {
       font-size: $button-size;
       height: $button-size;
       top: $button-margin;
@@ -205,4 +248,3 @@
     @include omega(3n);
   }
 }
-

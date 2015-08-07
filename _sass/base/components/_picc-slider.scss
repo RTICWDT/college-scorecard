@@ -1,0 +1,60 @@
+picc-slider {
+  $handle-size: 24px;
+  $horizontal-margin: $handle-size * 1.5;
+  $label-width: 80px;
+  $mark-outset: 4px;
+  $slider-height: 6px;
+  $vertical-margin: 2.5em;
+  $vertical-offset: ($slider-height - $handle-size) / 2;
+
+  background: #ccc;
+  display: block;
+  height: $slider-height;
+  margin: $vertical-margin $horizontal-margin;
+  position: relative;
+
+  .picc-slider-label {
+    bottom: 100%;
+    display: block;
+    left: ($handle-size - $label-width) / 2;
+    position: absolute;
+    text-align: center;
+    width: $label-width;
+  }
+
+  .picc-slider-range {
+    background: $green;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .picc-slider-average {
+    border-left: 1px solid black;
+    height: $handle-size + $mark-outset;
+    position: absolute;
+    top: $vertical-offset - ($mark-outset / 2);
+    width: 0;
+
+    .picc-slider-label {
+      // border: 1px dotted red;
+      bottom: auto;
+      top: 100%;
+      left: -($label-width / 2);
+    }
+  }
+
+  .picc-slider-handle {
+    background: #fff;
+    border-radius: $handle-size;
+    border: 2px solid #838d8f;
+    cursor: pointer;
+    height: $handle-size;
+    margin-left: -($handle-size / 2);
+    margin-top: $vertical-offset;
+    position: absolute;
+    width: $handle-size;
+  }
+}

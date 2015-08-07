@@ -19,7 +19,7 @@ scripts:
   - vendor/async.min.js
   - vendor/querystring.min.js
   - vendor/document-register-element.min.js
-  - components/picc-accordion.js
+  - components/aria-accordion.js
   - components/picc-meter.js
   - components/picc-range.js
   - picc.js
@@ -35,8 +35,13 @@ api:
 # Note: files and directories with the '_' prefix are excluded
 # automatically
 exclude:
+  # Node and JS asset build files
   - package.json
   - node_modules
   - '**/Makefile'
+  - '*.sh'
+  # Ruby stuff
   - 'Gemfile*'
   - config.ru
+  # functional testing files
+  - test/**

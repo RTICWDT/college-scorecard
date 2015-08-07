@@ -617,4 +617,68 @@
 
   })();
 
+
+  // form utilities
+  picc.form = {};
+
+  /**
+   * Adds a "submit" listener to the provided formdb.Form
+   * instance (or CSS selector) that intercepts its data,
+   * formats it as a querystring, then does a client-side
+   * redirect with window.location, effectively removing
+   * the query string parameters for empty inputs.
+   */
+  picc.form.minifyQueryString = function(form) {
+
+    // allow form to be a CSS selector
+    if (typeof form !== 'object') {
+      form = new formdb.Form(form);
+    }
+
+    form.on('submit', function(data, e) {
+      var url = [
+        form.element.action,
+        querystring.stringify(data)
+      ].join('?');
+
+      window.location = url;
+      e.preventDefault();
+      return false;
+    });
+
+    return form;
+  };
+
+
+  // UI tools
+  picc.ui = {};
+
+  picc.ui.expandAccordions = function(selector, expanded) {
+    if (arguments.length === 1) {
+      expanded = selector;
+      selector = null;
+    }
+    if (!selector) {
+      selector = 'aria-accordion';
+    }
+    expanded = d3.functor(expanded);
+    return d3.selectAll(selector)
+      .filter(function() {
+        return !!expanded.apply(this, arguments);
+      })
+      .property('expanded', true);
+  };
+
+  // debounce function
+  picc.debounce = function(fn, delay) {
+    var timeout;
+    return function() {
+      var context = this;
+      var args = arguments;
+      return timeout = setTimeout(function() {
+        fn.apply(context, args);
+      }, delay);
+    };
+  };
+
 })(this);
