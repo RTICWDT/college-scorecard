@@ -1,8 +1,6 @@
 .tooltip-target {
   position: relative;
 
-  border: 1px dotted green;
-
   i {
     @include font-size($h4);
     color: $mid-blue;
@@ -66,8 +64,6 @@
     margin-top: -($tooltip-arrow-size / 2);
     top: auto;
     bottom: 100%;
-
-    border: 1px solid red;
 
     .tooltip-content,
     .tooltip-arrow {
