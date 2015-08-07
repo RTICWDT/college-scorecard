@@ -6,11 +6,11 @@ multi-select {
       display: none;
     }
 
-    &:last-child .button-add {
+    &:last-of-type .button-add {
       display: inline-block;
     }
 
-    &:first-child:last-child .button-remove {
+    &:first-of-type:last-of-type .button-remove {
       display: none;
     }
 
