@@ -341,6 +341,36 @@ layout: default
 
   </section>
 
+  <section id="tooltips" class="guide-container">
+
+    <h1>Tooltips</h1>
+
+    <h2 aria-describedby="{{ site.data.glossary.fubar.id }}">
+      Average Cost Per Year
+      <a id="{{ site.data.glossary.fubar.id }}"
+        class="tooltip"
+        role="tooltip">
+        <i class="fa fa-info-circle"></i>
+        <span class="tooltip-definition" aria-hidden="true">
+          {{ site.data.glossary.fubar.definition }}
+        </span>
+      </a>
+    </h2>
+
+    <p aria-describedby="{{ site.data.glossary.muskrat.id }}">
+      Average Cost Per Year
+      <a id="{{ site.data.glossary.muskrat.id }}"
+        class="tooltip"
+        role="tooltip">
+        <i class="fa fa-info-circle"></i>
+        <span class="tooltip-definition" aria-hidden="true">
+          {{ site.data.glossary.muskrat.definition }}
+        </span>
+      </a>
+    </p>
+
+  </section>
+
   <section class="guide-container">
 
     <h1>Templates</h1>

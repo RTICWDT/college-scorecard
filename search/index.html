@@ -92,7 +92,13 @@ body_scripts:
 
             <div id="key-stats" class="school-meters">
               <figure class="meter">
-                <h2 class="figure-heading constrain_width">Average Cost Per Year</h2>
+                <h2 class="figure-heading constrain_width"
+                  aria-describedby="tip-avg-actual-cost">
+                  Average Cost Per Year
+                  <a class="tooltip-target u-new_line">
+                    <i class="fa fa-info-circle"></i>
+                  </a>
+                </h2>
                 <picc-meter {% include net_price_meter_attributes.html %}>
                 </picc-meter>
                 <figcaption>
@@ -101,7 +107,13 @@ body_scripts:
               </figure>
 
               <figure class="meter">
-                <h2 class="figure-heading constrain_width">Graduation Rate</h2>
+                <h2 class="figure-heading constrain_width"
+                  aria-describedby="tip-graduation-rate">
+                  Graduation Rate
+                  <a class="tooltip-target u-new_line">
+                    <i class="fa fa-info-circle"></i>
+                  </a>
+                </h2>
                 <picc-meter {% include graduation_meter_attributes.html %}>
                 </picc-meter>
                 <figcaption>
@@ -110,7 +122,13 @@ body_scripts:
               </figure>
 
               <figure class="meter">
-                <h2 class="figure-heading constrain_width">Average Salary</h2>
+                <h2 class="figure-heading constrain_width"
+                  aria-describedby="tip-avg-salary">
+                  Average Salary
+                  <a class="tooltip-target u-new_line">
+                    <i class="fa fa-info-circle"></i>
+                  </a>
+                </h2>
                 <picc-meter {% include earnings_meter_attributes.html %}>
                 </picc-meter>
                 <figcaption>

@@ -1,0 +1,78 @@
+.tooltip-target {
+  position: relative;
+
+  i {
+    @include font-size($h4);
+    color: $mid-blue;
+  }
+}
+
+[aria-describedby^=tip-] {
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    i {
+      color: $black;
+      opacity: 0.7;
+    }
+  }
+}
+
+[role="tooltip"] {
+  $tooltip-arrow-size: 1.6em;
+
+  @include font-size($h5);
+  left: 50%;
+  margin-top: ($tooltip-arrow-size / 2);
+  position: absolute;
+  text-align: left;
+  top: 100%;
+  z-index: 1000;
+
+  .tooltip-content,
+  .tooltip-arrow {
+    position: absolute;
+  }
+
+  .tooltip-content {
+    background: $black;
+    background: $black-transparent;
+    border-radius: $base-border-radius;
+    color: $white;
+    font-weight: $weight-light;
+    left: -50%;
+    line-height: $base-line-height;
+    padding: $base-padding-tb $base-padding;
+    width: 300px;
+  }
+
+  .tooltip-arrow {
+    left: -($tooltip-arrow-size / 2);
+  }
+
+  strong {
+    font-weight: $weight-book;
+  }
+
+  &.tooltip_below .tooltip-arrow {
+    @include triangle($tooltip-arrow-size, $black-transparent, up);
+    bottom: 100%;
+  }
+
+  &.tooltip_above {
+    bottom: 100%;
+    margin-bottom: ($tooltip-arrow-size / 2);
+    top: auto;
+
+    .tooltip-content,
+    .tooltip-arrow {
+      bottom: 100%;
+    }
+
+    .tooltip-arrow {
+      @include triangle($tooltip-arrow-size, $black-transparent, down);
+      top: 100%;
+    }
+  }
+}
