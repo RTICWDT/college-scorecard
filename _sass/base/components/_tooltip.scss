@@ -1,50 +1,61 @@
-.tooltip {
+.tooltip-target {
   position: relative;
 
   i {
     color: $mid-blue;
-
-    &:hover,
-    &:focus {
-      color: $black;
-      opacity: 0.7;
-
-      // &:after {
-      //   @include font-size(1);
-      //   //content: '▲';
-      //   left: 5%;
-      //   position: absolute;
-      //   top: 90%;
-      // }
-    }
   }
+}
+
+[aria-describedby^=tip-] {
+  cursor: pointer;
 
   &:hover,
   &:focus {
-    .tooltip-definition {
-      display: block;
+    i {
+      color: $black;
+      opacity: 0.7;
     }
   }
 }
 
-.tooltip-layout {
+[role="tooltip"] {
+  @include font-size(1);
+
+  background: $black;
+  background: $black-transparent;
   border-radius: $base-border-radius;
+  color: $white;
+  font-weight: $weight-light;
+  left: -50%;
+  line-height: $base-line-height;
+  margin-top: 10px;
   padding: $base-padding;
-  left: -100%;
   position: absolute;
   top: 100%;
   width: 300px;
-}
-
-.tooltip-definition {
-  @include font-size(1);
-  @extend .tooltip-layout;
-  background: $black;
-  background: rgba(0,0,0,0.7);
-  color: $white;
-  font-weight: $weight-light;
-  line-height: $base-line-height;
   z-index: 1000;
+
+  .tooltip-arrow {
+    left: 50%;
+    margin-left: -2px;
+    position: absolute;
+  }
+
+  &.tooltip_below .tooltip-arrow {
+    @include triangle(15px, $black-transparent, up);
+    bottom: 100%;
+  }
+
+  &.tooltip_above {
+    top: auto;
+    bottom: 100%;
+    margin-bottom: 10px;
+
+    .tooltip-arrow {
+      @include triangle(15px, $black-transparent, down);
+      top: 100%;
+    }
+  }
 }
 
 // TODO
