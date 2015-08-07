@@ -1,6 +1,8 @@
 .tooltip-target {
   position: relative;
 
+  border: 1px dotted green;
+
   i {
     @include font-size($h4);
     color: $mid-blue;
@@ -23,29 +25,36 @@
   $tooltip-arrow-size: 1.6em;
 
   @include font-size($h5);
-  background: $black;
-  background: $black-transparent;
-  border-radius: $base-border-radius;
-  color: $white;
-  font-weight: $weight-light;
-  left: -50%;
-  line-height: $base-line-height;
-  margin-top: 10px;
-  padding: $base-padding-tb $base-padding;
+  left: 50%;
+  margin-top: ($tooltip-arrow-size / 2);
   position: absolute;
   text-align: left;
   top: 100%;
-  width: 300px;
   z-index: 1000;
 
-  strong {
-    font-weight: $weight-book;
+  .tooltip-content,
+  .tooltip-arrow {
+    position: absolute;
+  }
+
+  .tooltip-content {
+    background: $black;
+    background: $black-transparent;
+    border-radius: $base-border-radius;
+    color: $white;
+    font-weight: $weight-light;
+    left: -50%;
+    line-height: $base-line-height;
+    padding: $base-padding-tb $base-padding;
+    width: 300px;
   }
 
   .tooltip-arrow {
-    left: 50%;
-    margin-left: -2px;
-    position: absolute;
+    left: -($tooltip-arrow-size / 2);
+  }
+
+  strong {
+    font-weight: $weight-book;
   }
 
   &.tooltip_below .tooltip-arrow {
@@ -54,9 +63,16 @@
   }
 
   &.tooltip_above {
-    bottom: 100%;
+    margin-top: -($tooltip-arrow-size / 2);
     top: auto;
-    margin-bottom: 10px;
+    bottom: 100%;
+
+    border: 1px solid red;
+
+    .tooltip-content,
+    .tooltip-arrow {
+      bottom: 100%;
+    }
 
     .tooltip-arrow {
       @include triangle($tooltip-arrow-size, $black-transparent, down);

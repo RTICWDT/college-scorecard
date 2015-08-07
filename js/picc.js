@@ -716,7 +716,6 @@
         this.tooltip = tooltip;
       }
 
-      clearTimeout(tooltip.__timeout);
       // console.log('show tooltip:', this, tooltip);
       tooltip.setAttribute('aria-hidden', false);
       var ref = this.querySelector('.tooltip-target') || this;
@@ -726,42 +725,45 @@
     hide: function hideTooltip() {
       if (!this.tooltip) return;
       var tooltip = this.tooltip;
-      clearTimeout(tooltip.__timeout);
-      tooltip.__timeout = setTimeout(function() {
-        tooltip.setAttribute('aria-hidden', true);
-      }, 50);
+      tooltip.setAttribute('aria-hidden', true);
     },
 
-    constrain: function(tooltip, ref) {
+    constrain: function(tooltip, parent) {
       // remove the tooltip so we can accurately calculate
       // the outer element's size
-      if (ref === tooltip.parentNode) {
-        ref.removeChild(tooltip);
+      if (parent === tooltip.parentNode) {
+        parent.removeChild(tooltip);
       }
 
-      var outer = ref.getBoundingClientRect();
-      ref.appendChild(tooltip);
+      var content = tooltip.querySelector('.tooltip-content') || tooltip;
+      content.style.removeProperty('left');
 
-      var rect = tooltip.getBoundingClientRect();
+      var outer = parent.getBoundingClientRect();
+      parent.appendChild(tooltip);
+
+      rect = content.getBoundingClientRect();
+
+      var margin = 10;
+      var offsetWidth = (rect.width - outer.width) / 2;
       var halfWidth = rect.width / 2;
-      var off = 0;
+      var bump = -halfWidth;
 
-      var right = outer.right + halfWidth;
-      var left = outer.left - halfWidth;
+      var left = outer.left - offsetWidth;
+      var leftEdge = margin / 2;
+      var right = outer.right + offsetWidth;
+      var rightEdge = window.innerWidth - margin * 2;
 
-      if (right > window.innerWidth) {
-        off -= right - window.innerWidth;
-      } else if (left < 0) {
-        off -= left;
+      if (right > rightEdge) {
+        bump -= right - rightEdge;
+      } else if (left < leftEdge) {
+        bump += leftEdge - left;
       }
 
-      var arrow = tooltip.querySelector('.tooltip-arrow');
-      if (arrow) {
-        arrow.style.left = Math.round(halfWidth - off) + 'px';
+      if (bump) {
+        content.style.left = Math.round(bump) + 'px';
+      } else {
+        content.style.removeProperty('left');
       }
-
-      tooltip.style.left = Math.round(off - halfWidth) + 'px';
-      tooltip.style.visibility = 'visible';
 
       var bottom = outer.bottom + rect.height;
       var above = bottom > window.innerHeight;
