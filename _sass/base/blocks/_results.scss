@@ -40,9 +40,15 @@
 
   .show-loaded {
     label {
+      display: block;
+      padding-bottom: 4px;
+      padding-left: 3px;
+      text-align: left;
       text-transform: uppercase;
 
       @include respond-to(medium-up) {
+        display: table-cell;
+        padding-right: 8px;
         width: 28%;
       }
     }
@@ -62,8 +68,13 @@
     }
 
     select {
+      border-color: darken($mid-gray, 10%);
+      display: block;
+      padding-right: 50px;
+
       @include respond-to(medium-up) {
-        padding-right: 50px;
+        display: table-cell;
+        vertical-align: middle;
       }
     }
   }
