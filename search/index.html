@@ -38,12 +38,34 @@ body_scripts:
         </div>
 
         <div class="container show-loaded">
-          <h1>
-            <span data-bind="results_total">0</span>
-            <span data-bind="results_word">Results</span>
-            Based on Your Criteria
-          </h1>
+          <div>
+            <h1>
+              <span data-bind="results_total">0</span>
+              <span data-bind="results_word">Results</span>
+              Based on Your Criteria
+            </h1>
+          </div>
           <!-- <a href="#search-form" class="link-more"><i class="fa fa-chevron-left"></i> Edit Criteria</a> -->
+          <div>
+
+            <div class="u-group_inline">
+
+              <!-- <div class="u-group_inline-left">Boo!</div> -->
+
+              <!-- <div class="u-group_inline-right"> -->
+                <label for="select-sort">Sort by:</label>
+                <select id="select-sort" name="sort">
+                  <option value="Sort one">Sort one</option>
+                  <option value="Sort two">Sort two</option>
+                  <option value="Sort three">Sort three</option>
+                  <option value="Sort four">This option is super long</option>
+                  <i class="fa fa-chevron-down"></i>
+                </select>
+              <!-- </div> -->
+
+            </div>
+
+          </div>
         </div>
 
       </div>
