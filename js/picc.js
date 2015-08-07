@@ -662,7 +662,6 @@
     return form;
   };
 
-
   // UI tools
   picc.ui = {};
 
@@ -680,6 +679,15 @@
         return !!expanded.apply(this, arguments);
       })
       .property('expanded', true);
+  };
+
+  // this is the equivalent of $(function), aka DOMReady
+  picc.ready = function(callback) {
+    if (document.readyState === 'complete') {
+      return callback();
+    } else {
+      window.addEventListener('load', callback);
+    }
   };
 
   // debounce function
