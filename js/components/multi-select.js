@@ -206,8 +206,13 @@
     return d === null || d === undefined;
   }
 
-  // fast compare
+  // Array comparison
   function compare(a, b) {
+    if (Array.isArray(a) && Array.isArray(b)) {
+      for (var i = 0, len = a.length; i < len; i++) {
+        if (b.indexOf(a[i]) === -1) return false;
+      }
+    }
     return String(a) === String(b);
   }
 
