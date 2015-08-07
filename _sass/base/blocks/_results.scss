@@ -35,7 +35,7 @@
 
 .results-main-alert {
   border-bottom: $regular-border-size solid darken($mid-gray, 10%);
-  padding-top: $base-padding;
+  padding-top: $base-padding-large;
   text-align: center;
 
   .show-loaded {
@@ -43,9 +43,7 @@
       text-transform: uppercase;
 
       @include respond-to(medium-up) {
-        float: left;
-        position: absolute;
-        top: 18%;
+        width: 28%;
       }
     }
 
@@ -65,14 +63,8 @@
 
     select {
       @include respond-to(medium-up) {
-        float: right;
         padding-right: 50px;
-        width: 70%;
       }
-    }
-
-    .u-group_inline {
-      position: relative;
     }
   }
 
