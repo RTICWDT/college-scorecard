@@ -2,6 +2,7 @@
   position: relative;
 
   i {
+    @include font-size($h4);
     color: $mid-blue;
   }
 }
@@ -19,9 +20,9 @@
 }
 
 [role="tooltip"] {
-  $tooltip-arrow-size: 15px;
+  $tooltip-arrow-size: 1.5em;
 
-  @include font-size(1);
+  @include font-size($h5);
   background: $black;
   background: $black-transparent;
   border-radius: $base-border-radius;
@@ -30,11 +31,16 @@
   left: -50%;
   line-height: $base-line-height;
   margin-top: 10px;
-  padding: $base-padding;
+  padding: $base-padding-tb $base-padding;
   position: absolute;
+  text-align: left;
   top: 100%;
   width: 300px;
   z-index: 1000;
+
+  strong {
+    font-weight: $weight-book;
+  }
 
   .tooltip-arrow {
     left: 50%;
@@ -58,8 +64,3 @@
     }
   }
 }
-
-// TODO
-// set to appear above tip for starters, really want that to be context-dependent
-// set the 'arrow' to appear wherever the icon is independent of where the box shows up
-// set defined width at larger screen sizes, and close to 100% for smaller screen sizes

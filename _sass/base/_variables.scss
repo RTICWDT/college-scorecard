@@ -47,7 +47,7 @@ $darker-red: #b93610;
 $purple: #5c48c9;
 $amethyst-purple: #9384e9;
 
-$black-transparent: rgba(0, 0, 0, 0.7);
+$black-transparent: rgba(0, 0, 0, 0.8);
 
 $meter-colors: (
   cost: $lime-green,
@@ -69,6 +69,8 @@ $base-accent-color: $mid-blue;
 
 // Padding
 $base-padding: 1.25em; //20px
+$base-padding-tb: 1.1em;
+//this is for use with $base-padding for a top-bottom shorter view
 $base-padding-lite: $base-padding/3;
 $base-padding-large: 1.875em; //30px
 $base-padding-extra: 3.125em; //50px
