@@ -5,6 +5,14 @@
     @include font-size($h4);
     color: $mid-blue;
   }
+
+  .investigation-minor,
+  .investigation-major {
+    i {
+      color: $red;
+      padding-left: 4px;
+    }
+  }
 }
 
 [aria-describedby^=tip-] {
@@ -33,6 +41,9 @@
   .tooltip-content,
   .tooltip-arrow {
     position: absolute;
+    text-transform: none;
+    // ^^ so we can use this on classes of any type
+    // and still have the tip itself be normal case.
   }
 
   .tooltip-content {

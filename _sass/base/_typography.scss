@@ -207,3 +207,10 @@ button,
   font-weight: $weight-bold;
   line-height: 1;
 }
+
+.investigation-minor {
+  color: $red;
+  font-weight: $weight-bold;
+  padding-top: $base-padding;
+  text-transform: uppercase;
+}
