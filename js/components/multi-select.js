@@ -18,6 +18,7 @@
           // remove the multiple attribute, the clone it
           select.removeAttribute('multiple');
           this.__select = select.cloneNode(true);
+          removeEmptyOption(this.__select);
 
           // remove the name from the templated one
           select.name = '';
@@ -34,7 +35,7 @@
           this.__select.addEventListener('change', this.__onchange = onchange.bind(this));
           this.__select.style.display = 'none';
 
-          this.__pollID = setInterval(this.__pollSourceSelect.bind(this), 100);
+          this.__pollID = setInterval(pollSourceSelect.bind(this), 200);
         }},
 
         attributeChangedCallback: {value: function(attr, oldValue, newValue) {
@@ -43,16 +44,6 @@
         detachedCallback: {value: function() {
           this.__select.removeEventListener('change', this.__onchange);
           clearTimeout(this.__pollID);
-        }},
-
-        __pollSourceSelect: {value: function() {
-          var value = getValue(this.__select);
-          if (this.__value.length > value.length) {
-            value.push(null);
-          }
-          if (!compare(this.__value, value)) {
-            this.value = value;
-          }
         }},
 
         update: {value: function() {
@@ -193,6 +184,22 @@
       multiselect.dispatchEvent(new CustomEvent('change', {
         bubbles: true
       }));
+    }
+  }
+
+  function pollSourceSelect() {
+    var value = getValue(this.__select);
+    if (this.__value.length > value.length) {
+      value.push(null);
+    }
+    if (!compare(this.__value, value)) {
+      this.value = value;
+    }
+  }
+
+  function removeEmptyOption(select) {
+    if (!select.options[0].value) {
+      select.removeChild(select.options[0]);
     }
   }
 
