@@ -260,6 +260,40 @@
     };
   })();
 
+  picc.fields = {
+    NAME:                 'school.name',
+    CITY:                 'school.city',
+    STATE:                'school.state',
+    LOCATION:             'school.location',
+    OWNERSHIP:            'school.ownership',
+    LOCALE:               'school.locale',
+
+    SIZE:                 '2013.student.size',
+
+    PREDOMINANT_DEGREE:   'school.degrees_awarded.predominant',
+    UNDER_INVESTIGATION:  'school.HCM2',
+
+    // net price
+    // FIXME: this should be `net_price`
+    NET_PRICE:            '2013.cost.avg_net_price',
+    NET_PRICE_BY_INCOME:  '2013.cost.net_price',
+
+    // completion rate
+    COMPLETION_RATE:      '2013.completion.rate',
+
+    RETENTION_RATE:       '2013.student.retention_rate',
+
+    // FIXME: get this from the spreadsheet
+    PART_TIME_SHARE:      '2013.student.part_time_share',
+
+    // loan and grant rates
+    LOAN_RATE:            '2013.debt.loan_rate.federal',
+    PELL_RATE:            '2013.debt.loan_rate.pell',
+
+    MEDIAN_EARNINGS:      '2011.earnings.6_yrs_after_entry.median',
+    LOW_INCOME_EARNINGS:  '2011.earnings.6_yrs_after_entry.lowest_tercile',
+  };
+
   picc.access = function(key) {
     return (typeof key === 'function')
       ? key
@@ -273,12 +307,45 @@
       return function(d) {
         for (var i = 0; i < len; i++) {
           d = d[bits[i]];
+          if (d === null || d === undefined) return d;
         }
         return d;
       };
     }
     return function(d) { return d[key]; };
   }
+
+  /**
+   * This is a function composer for nested field accessors. It
+   * takes an arbitrary number of arugments that may be strings,
+   * integers or functions; the latter of which is evaluated to
+   * get a *key* into the current nested object. E.g.:
+   *
+   * @example
+   * var f = picc.access.composed('foo', picc.access.yearDesignation);
+   * assert.equal({common_degree: '2', {foo: {lt_four_year: 1}}}, 1);
+   * assert.equal({common_degree: '3', {foo: {four_year: 1}}}, 1);
+   *
+   * @argument ... key
+   * @return {*}
+   */
+  picc.access.composed = function(key, sub1, sub2, etc) {
+    var keys = [].slice.call(arguments);
+    var len = keys.length;
+    return function nested(d) {
+      var value = d;
+      for (var i = 0; i < len; i++) {
+        var key = keys[i];
+        if (typeof key === 'function') {
+          key = key.call(this, d);
+          if (key === null) return key;
+        }
+        value = value[key];
+        if (value === undefined || value === null) break;
+      }
+      return value;
+    };
+  };
 
   picc.access.publicPrivate = function(d) {
     switch (+d.ownership) {
@@ -288,6 +355,16 @@
       case 2: // private
       case 3:
         return 'private';
+    }
+    return null;
+  };
+
+  picc.access.yearDesignation = function(d) {
+    switch (+d.common_degree) {
+      case 2: // 2-year (AKA less than 4-year)
+        return 'lt_four_year';
+      case 3: // 4-year
+        return 'four_year';
     }
     return null;
   };
@@ -308,75 +385,60 @@
     }
   };
 
-  picc.access.netPrice = function(d) {
-    var key = picc.access.publicPrivate(d);
-    return key
-      ? d.avg_net_price
-        ? picc.nullify(d.avg_net_price[key])
-        : picc.nullify(d.net_price[key].average)
-      : null;
-  };
+  picc.access.netPrice = picc.access.composed(
+    picc.fields.NET_PRICE,
+    picc.access.publicPrivate,
+    'median'
+  );
 
   picc.access.netPriceByIncomeLevel = function(level) {
-    return function(d) {
-      var key = picc.access.publicPrivate(d);
-      return d.net_price
-        ? picc.nullify(d.net_price[key].by_income_level[level])
-        : null;
-    };
+    return picc.access.composed(
+      picc.fields.NET_PRICE_BY_INCOME,
+      picc.access.publicPrivate,
+      'by_income_level',
+      level
+    );
   };
 
-  picc.access.yearDesignation = function(d) {
-    switch (d.common_degree) {
-      case '2': // 2-year (AKA less than 4-year)
-        return 'lt_four_year';
-      case '3': // 4-year
-        return 'four_year';
-    }
-    // FIXME
-    return 'other';
-  };
+  picc.access.earningsMedian = picc.access.composed(
+    picc.fields.MEDIAN_EARNINGS
+  );
 
-  picc.access.earningsMedian = function(d) {
-    return picc.nullify(d.earnings
-      ? d.earnings.median
-      : d.median_earnings);
-  };
+  picc.access.earnings25k = picc.access.composed(
+    picc.fields.LOW_INCOME_EARNINGS
+  );
 
-  picc.access.earnings25k = function(d) {
-    return d.earnings
-      ? picc.nullify(d.earnings.percent_gt_25k)
-      : null;
-  };
+  picc.access.completionRate = picc.access.composed(
+    picc.fields.COMPLETION_RATE,
+    picc.access.yearDesignation
+  );
 
-  picc.access.completionRate = function(d) {
-    var designation = picc.access.yearDesignation(d);
-    return designation
-      ? picc.nullify(d.completion_rate[designation])
-      : null;
-  };
-
-  picc.access.partTimeShare = function(d) {
-    if (d.part_time_share) {
-      var share = picc.nullify(d.part_time_share[1]);
-      return share === null ? null : Math.round(+share * 100);
-    }
-    return null;
-  };
+  picc.access.partTimeShare = picc.access.composed(
+    picc.fields.PART_TIME_SHARE
+  );
 
   picc.access.retentionRate = function(d) {
-    var designation = picc.access.yearDesignation(d);
-    // FIXME: use partTimeShare() accessor?
-    var partTimeShare = +d.part_time_share[1] || +d.part_time_share[2];
-    var retention = d.retention_rate[designation];
-    var partTimeRate = retention ? retention.part_time : 0;
-    var fullTime = retention ? retention.full_time : 0;
-    var size = d.size;
+    var retention = picc.access.composed(
+      picc.fields.RETENTION_RATE,
+      picc.access.yearDesignation
+    )(d);
+    if (!retention) return null;
+
+    var size = picc.access.size(d);
+    if (!size) return null;
+
+    var partTimeShare = picc.access.partTimeShare(d);
     return (
-      (size * partTimeShare * partTimeRate) +
-      ((size - size * partTimeShare) * fullTime)
+      (size * partTimeShare * retention.part_time) +
+      ((size - size * partTimeShare) * retention.full_time)
     ) / size;
   };
+
+  picc.access.size = picc.access.composed(
+    picc.fields.SIZE
+  );
+
+  picc.access.location = picc.access(picc.fields.LOCATION);
 
   picc.access.specialDesignations = function(d) {
     var designations = [];
@@ -433,6 +495,7 @@
     var access = picc.access;
     var format = picc.format;
     var percent = format.percent();
+    var fields = picc.fields;
 
     var href = function(d) {
       var name = d.name.replace(/\W+/g, '-');
@@ -445,16 +508,20 @@
     return {
       title: {
         link: {
-          text: 'name',
+          text: picc.access(fields.NAME),
           '@href': href
         }
       },
 
-      size_number:    format.number('size'),
-      control:        format.control('ownership'),
-      locale_name:    format.locale('locale'),
-      years:          format.preddeg('common_degree'),
-      size_category:  format.sizeCategory('size'),
+      name:           picc.access(fields.NAME),
+      city:           picc.access(fields.CITY),
+      state:          picc.access(fields.STATE),
+
+      size_number:    format.number(fields.SIZE),
+      control:        format.control(fields.OWNERSHIP),
+      locale_name:    format.locale(fields.LOCALE),
+      years:          format.preddeg(fields.PREDOMINANT_DEGREE),
+      size_category:  format.sizeCategory(fields.SIZE),
 
       // this is a direct accessor because some designations
       // (e.g. `women_only`) are at the object root, rather than
