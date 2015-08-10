@@ -295,7 +295,9 @@
     AID_PERCENTAGE:       '2013.debt.loan_rate',
 
     MEDIAN_EARNINGS:      '2011.earnings.6_yrs_after_entry.median',
-    LOW_INCOME_EARNINGS:  '2011.earnings.6_yrs_after_entry.lowest_tercile',
+
+    // FIXME: pending #373
+    EARNINGS_GT_25K:      '2011.earnings.gt_25k_p10',
 
     PROGRAM_PERCENTAGE:   '2013.academics.program_percentage'
   };
@@ -415,7 +417,7 @@
   );
 
   picc.access.earnings25k = picc.access.composed(
-    picc.fields.LOW_INCOME_EARNINGS
+    picc.fields.EARNINGS_GT_25K
   );
 
   picc.access.completionRate = function(d) {
