@@ -234,7 +234,7 @@ $invest_height: 36px;
   position: relative;
   width: 98%;
 
-  &:after {
+  &::after {
     border: ($invest_height / 2) solid $red;
     border-right-color: transparent;
     border-left-width: ($invest_height / 4);
@@ -242,7 +242,7 @@ $invest_height: 36px;
     content: "";
     display: block;
     position: absolute;
-    right: -17px;
+    right: -18px;
     top: 0;
   }
 }
