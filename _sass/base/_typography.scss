@@ -214,3 +214,19 @@ button,
   padding-top: $base-padding;
   text-transform: uppercase;
 }
+
+.investigation-major {
+  @extend .light_on_dark;
+  color: $white;
+  font-weight: $weight-bold;
+  padding-top: $base-padding-lite;
+  padding-bottom: $base-padding-lite;
+  padding-left: $base-padding;
+  text-transform: uppercase;
+}
+
+.investigation-major-wrapper {
+  background-color: $red;
+  margin-bottom: $base-padding;
+  margin-left: -$base-padding;
+}

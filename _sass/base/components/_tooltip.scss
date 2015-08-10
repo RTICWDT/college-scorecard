@@ -13,6 +13,12 @@
       padding-left: 4px;
     }
   }
+
+  .investigation-major {
+    i {
+      color: $white;
+    }
+  }
 }
 
 [aria-describedby^=tip-] {
