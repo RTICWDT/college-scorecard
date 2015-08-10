@@ -301,6 +301,9 @@
   };
 
   function getter(key) {
+    if (typeof key !== 'string') {
+      return function(d) { return d[key]; };
+    }
     if (key.indexOf('.') > -1) {
       var bits = key.split('.');
       var len = bits.length;
@@ -340,7 +343,7 @@
           key = key.call(this, d);
           if (key === null) return key;
         }
-        value = value[key];
+        value = getter(key)(value);
         if (value === undefined || value === null) break;
       }
       return value;
@@ -348,7 +351,8 @@
   };
 
   picc.access.publicPrivate = function(d) {
-    switch (+d.ownership) {
+    var ownership = picc.access(picc.fields.OWNERSHIP)(d);
+    switch (+ownership) {
       case 1: // public
         return 'public';
 
@@ -360,7 +364,8 @@
   };
 
   picc.access.yearDesignation = function(d) {
-    switch (+d.common_degree) {
+    var degree = picc.access(picc.fields.PREDOMINANT_DEGREE)(d);
+    switch (+degree) {
       case 2: // 2-year (AKA less than 4-year)
         return 'lt_four_year';
       case 3: // 4-year
@@ -387,8 +392,7 @@
 
   picc.access.netPrice = picc.access.composed(
     picc.fields.NET_PRICE,
-    picc.access.publicPrivate,
-    'median'
+    picc.access.publicPrivate
   );
 
   picc.access.netPriceByIncomeLevel = function(level) {
