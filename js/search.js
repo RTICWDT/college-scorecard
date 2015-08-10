@@ -31,6 +31,9 @@
   });
 
   function onChange(params) {
+    if (Array.isArray(params.state) && !params.state[0]) {
+      delete params.state;
+    }
     var qs = querystring.stringify(params);
     // update the URL
     history.pushState(params, 'search', '?' + qs);
