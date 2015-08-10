@@ -22,6 +22,10 @@
   @include outer-container;
 }
 
+.u-nowrap {
+  white-space: nowrap;
+}
+
 // Container
 //
 // Wrap content in a max width container plus standard padding.
@@ -157,10 +161,6 @@ ol.decimal,
 .u-group_inline-right {
   display: table-cell;
   vertical-align: middle;
-
-  .button-add { //TODO this shouldn't be in utilities
-    margin-top: 17px;
-  }
 }
 
 // Horizontal & Vertical Block Center

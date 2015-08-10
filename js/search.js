@@ -1,16 +1,19 @@
 (function(exports) {
 
   var resultsRoot = document.querySelector('.search-results');
-
   var form = new formdb.Form('#search-form');
-
   var query = querystring.parse(location.search.substr(1));
-  form.setData(query);
-
   // the current outbound request
   var req;
 
-  onChange(form.getData());
+  picc.ready(function() {
+    // console.warn('setting form data...', query);
+    // console.log('states:', form.get('state'));
+    form.setData(query);
+    // console.log('states:', form.getInputsByName('state'), form.get('state'));
+
+    onChange(form.getData());
+  });
 
   form.on('change', picc.debounce(onChange, 200));
 

@@ -31,6 +31,9 @@
       } else if (params) {
         if (typeof params === 'object') {
           if (API.key) params.api_key = API.key;
+          // collapse arrays into comma-separated strings
+          // per the API
+          collapseArrays(params);
           params = querystring.stringify(params);
         } else if (API.key) {
           params += '&api_key=' + API.key;
@@ -99,6 +102,16 @@
         }
       }
       return list.join(glue);
+    }
+
+    function collapseArrays(obj, glue) {
+      if (!glue) glue = ',';
+      for (var key in obj) {
+        if (Array.isArray(obj[key])) {
+          obj[key] = obj[key].join(glue);
+        }
+      }
+      return obj;
     }
 
     return API;
@@ -546,7 +559,7 @@
 
       race_ethnicity_values: function(d) {
         if (!d.demographics || !d.metadata) {
-          console.warn('no demographics or metadata:', d);
+          // console.warn('no demographics or metadata:', d);
           return [];
         }
 
@@ -649,7 +662,6 @@
     return form;
   };
 
-
   // UI tools
   picc.ui = {};
 
@@ -667,6 +679,15 @@
         return !!expanded.apply(this, arguments);
       })
       .property('expanded', true);
+  };
+
+  // this is the equivalent of $(function), aka DOMReady
+  picc.ready = function(callback) {
+    if (document.readyState === 'complete') {
+      return callback();
+    } else {
+      window.addEventListener('load', callback);
+    }
   };
 
   // debounce function
