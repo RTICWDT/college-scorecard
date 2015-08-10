@@ -125,7 +125,7 @@
         </div>
 
         <label for="select-region">Select a region
-          <select name="region" id="select-region">
+          <select name="region_id" id="select-region">
             <option value=""></option>
             {% for region in site.data.regions|sort('name') %}
             <option value="{{ region.id }}" data-states="{{ region.states }}">{{ region.name }}</option>
