@@ -283,6 +283,8 @@
 
     RETENTION_RATE:       '2013.student.retention_rate',
 
+    REPAYMENT_RATE:       '2013.repayment.3_yr_repayment_suppressed.overall',
+
     // loan and grant rates
     LOAN_RATE:            '2013.debt.loan_rate.federal',
     PELL_RATE:            '2013.debt.loan_rate.pell',
@@ -594,9 +596,9 @@
         '@title': debugMeterTitle
       },
 
-      repayment_rate_percent: format.percent('repayment_rate'),
+      repayment_rate_percent: format.percent(fields.REPAYMENT_RATE),
       repayment_rate_meter: {
-        '@value': 'repayment_rate',
+        '@value': picc.access(fields.REPAYMENT_RATE),
         '@average': access.nationalStat('median'),
         label:    format.percent(function() {
           return this.getAttribute('average');
