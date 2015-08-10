@@ -412,10 +412,22 @@
     picc.fields.LOW_INCOME_EARNINGS
   );
 
-  picc.access.completionRate = picc.access.composed(
-    picc.fields.COMPLETION_RATE,
-    picc.access.yearDesignation
-  );
+  picc.access.completionRate = function(d) {
+    var rate = picc.access(picc.fields.COMPLETION_RATE)(d);
+    var key = picc.access.yearDesignation(d);
+    // FIXME kill this once we deploy a fix for #372
+    switch (key) {
+      case 'four_year':
+        key = 'lt_four_year';
+        break;
+      case 'lt_four_year':
+        key = 'four_year';
+        break;
+      case null:
+        return null;
+    }
+    return rate[key];
+  };
 
   picc.access.partTimeShare = picc.access.composed(
     picc.fields.PART_TIME_SHARE
