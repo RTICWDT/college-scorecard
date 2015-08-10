@@ -25,7 +25,7 @@ var browsers = {
 
 var capabilities = extend({
   javascriptEnabled: true,
-  acceptSslCerts: false
+  acceptSslCerts: true
 }, browsers.phantomjs);
 
 var sauce = {
