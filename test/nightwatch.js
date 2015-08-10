@@ -71,6 +71,9 @@ var environments = {
 };
 
 for (var browser in browsers) {
+  environments[browser + ':local'] = {
+    desiredCapabilities: extend({}, capabilities, browsers[browser])
+  };
   environments[browser] = extend({}, sauce, {
     desiredCapabilities: extend({}, capabilities, browsers[browser])
   });
