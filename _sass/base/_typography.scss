@@ -223,7 +223,6 @@ $invest_height: 36px;
   font-weight: $weight-bold;
   height: $invest_height;
   padding-top: $base-padding-lite;
-  // padding-bottom: $base-padding-lite;
   padding-left: $base-padding;
   text-transform: uppercase;
 }
@@ -245,5 +244,14 @@ $invest_height: 36px;
     position: absolute;
     right: -17px;
     top: 0;
+  }
+}
+
+.school-heading {
+  .investigation-major {
+    padding-left: $base-padding-large;
+  }
+  .investigation-major-wrapper {
+    margin-left: -$base-padding-large;
   }
 }
