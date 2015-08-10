@@ -288,6 +288,9 @@
 
     REPAYMENT_RATE:       '2013.repayment.3_yr_repayment_suppressed.overall',
 
+    AVERAGE_TOTAL_DEBT:   '2013.debt.median_debt_suppressed.completers.overall',
+    MONTHLY_LOAN_PAYMENT: '2013.debt.median_debt_suppressed.completers.monthly_payments',
+
     // loan and grant rates
     LOAN_RATE:            '2013.debt.loan_rate.federal',
     PELL_RATE:            '2013.debt.loan_rate.pell',
@@ -608,8 +611,8 @@
         })
       },
 
-      average_total_debt: format.dollars('debt.median_completer_total'),
-      average_monthly_loan_payment: format.dollars('debt.median_monthly_payment'),
+      average_total_debt: format.dollars(fields.AVERAGE_TOTAL_DEBT),
+      average_monthly_loan_payment: format.dollars(fields.MONTHLY_LOAN_PAYMENT),
 
       federal_aid_percentage: format.percent(function(d) {
         if (!d.loan_rate) return null;
