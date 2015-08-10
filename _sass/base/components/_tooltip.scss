@@ -53,11 +53,12 @@
   }
 
   .tooltip-content {
+    @extend .light_on_dark;
     background: $black;
     background: $black-transparent;
     border-radius: $base-border-radius;
     color: $white;
-    font-weight: $weight-light;
+    font-weight: $weight-book;
     left: -50%;
     line-height: $base-line-height;
     padding: $base-padding-tb $base-padding;
@@ -69,7 +70,7 @@
   }
 
   strong {
-    font-weight: $weight-book;
+    font-weight: $weight-bold;
   }
 
   &.tooltip_below .tooltip-arrow {
