@@ -13,7 +13,7 @@
           var select = this.querySelector('select');
           if (!select) return console.error('no <select> found in <multi-select>!');
 
-          console.warn('<multi-select>');
+          // console.warn('<multi-select>');
 
           // remove the multiple attribute, the clone it
           select.removeAttribute('multiple');
@@ -76,7 +76,7 @@
               return nullish(d) ? '' : String(d);
             })
             .on('change', function(d, i) {
-              console.log('[change %d]', i, this.value);
+              // console.log('[change %d]', i, this.value);
               values[i] = this.value;
               set(values);
             });
@@ -133,9 +133,9 @@
               : this.__value || [null];
           },
           set: function(value) {
-            console.log('[set values]:', value);
+            // console.log('[set values]:', value);
             if (compare(this.__value, value)) {
-              console.warn('no change');
+              // console.warn('no change');
               return;
             }
 
@@ -153,7 +153,7 @@
 
   function onchange(e) {
     if (this.__updating) return;
-    console.log('source select change:', e.target);
+    // console.log('source select change:', e.target);
     this.value = getValue(e.target);
   }
 
