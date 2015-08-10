@@ -13,11 +13,12 @@
           var select = this.querySelector('select');
           if (!select) return console.error('no <select> found in <multi-select>!');
 
-          console.warn('<multi-select>');
+          // console.warn('<multi-select>');
 
           // remove the multiple attribute, the clone it
           select.removeAttribute('multiple');
           this.__select = select.cloneNode(true);
+          removeEmptyOption(this.__select);
 
           // remove the name from the templated one
           select.name = '';
@@ -34,7 +35,7 @@
           this.__select.addEventListener('change', this.__onchange = onchange.bind(this));
           this.__select.style.display = 'none';
 
-          this.__pollID = setInterval(this.__pollSourceSelect.bind(this), 100);
+          this.__pollID = setInterval(pollSourceSelect.bind(this), 200);
         }},
 
         attributeChangedCallback: {value: function(attr, oldValue, newValue) {
@@ -43,16 +44,6 @@
         detachedCallback: {value: function() {
           this.__select.removeEventListener('change', this.__onchange);
           clearTimeout(this.__pollID);
-        }},
-
-        __pollSourceSelect: {value: function() {
-          var value = getValue(this.__select);
-          if (this.__value.length > value.length) {
-            value.push(null);
-          }
-          if (!compare(this.__value, value)) {
-            this.value = value;
-          }
         }},
 
         update: {value: function() {
@@ -85,7 +76,7 @@
               return nullish(d) ? '' : String(d);
             })
             .on('change', function(d, i) {
-              console.log('[change %d]', i, this.value);
+              // console.log('[change %d]', i, this.value);
               values[i] = this.value;
               set(values);
             });
@@ -142,9 +133,9 @@
               : this.__value || [null];
           },
           set: function(value) {
-            console.log('[set values]:', value);
+            // console.log('[set values]:', value);
             if (compare(this.__value, value)) {
-              console.warn('no change');
+              // console.warn('no change');
               return;
             }
 
@@ -162,7 +153,7 @@
 
   function onchange(e) {
     if (this.__updating) return;
-    console.log('source select change:', e.target);
+    // console.log('source select change:', e.target);
     this.value = getValue(e.target);
   }
 
@@ -193,6 +184,22 @@
       multiselect.dispatchEvent(new CustomEvent('change', {
         bubbles: true
       }));
+    }
+  }
+
+  function pollSourceSelect() {
+    var value = getValue(this.__select);
+    if (this.__value.length > value.length) {
+      value.push(null);
+    }
+    if (!compare(this.__value, value)) {
+      this.value = value;
+    }
+  }
+
+  function removeEmptyOption(select) {
+    if (!select.options[0].value) {
+      select.removeChild(select.options[0]);
     }
   }
 

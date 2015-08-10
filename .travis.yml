@@ -5,7 +5,7 @@ before_install:
 - gem install jekyll -v 1.0.2 --no-rdoc --no-ri
 
 script:
-- npm run test:all
+- npm run test:travis
 
 env:
   global:
