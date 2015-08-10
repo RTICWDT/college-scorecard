@@ -292,6 +292,8 @@
 
     MEDIAN_EARNINGS:      '2011.earnings.6_yrs_after_entry.median',
     LOW_INCOME_EARNINGS:  '2011.earnings.6_yrs_after_entry.lowest_tercile',
+
+    PROGRAM_PERCENTAGE:   '2013.academics.program_percentage'
   };
 
   picc.access = function(key) {
@@ -415,16 +417,9 @@
   picc.access.completionRate = function(d) {
     var rate = picc.access(picc.fields.COMPLETION_RATE)(d);
     var key = picc.access.yearDesignation(d);
-    // FIXME kill this once we deploy a fix for #372
-    switch (key) {
-      case 'four_year':
-        key = 'lt_four_year';
-        break;
-      case 'lt_four_year':
-        key = 'four_year';
-        break;
-      case null:
-        return null;
+    if (rate[key] === 0) {
+      console.warn('completion rate key mismatch: expected "%s", but got zero:', key, rate);
+      return rate.four_year || rate.lt_four_year;
     }
     return rate[key];
   };
@@ -481,12 +476,16 @@
     if (!metadata || !metadata.dictionary) return [];
 
     var dictionary = metadata.dictionary;
-    return Object.keys(d.program_percentage || {})
+    var field = picc.fields.PROGRAM_PERCENTAGE;
+    var programs = picc.access(field)(d);
+    // remove the year prefix
+    field = field.replace(/^\d+\./, '');
+    return Object.keys(programs || {})
       .map(function(key) {
-        var value = d.program_percentage[key];
-        var dictKey = 'program_percentage.' + key;
+        var value = programs[key];
+        var dictKey = [field, key].join('.');
         var name = dictionary[dictKey]
-          ? dictionary[dictKey].description
+          ? (dictionary[dictKey].description || key)
           : key;
         return {
           program:  name,
