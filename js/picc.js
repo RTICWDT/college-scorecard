@@ -28,18 +28,11 @@
       // console.debug('[API] get("%s", %s)', uri, JSON.stringify(params));
       if (arguments.length === 2) {
         done = params;
+        params = addAPIKey({});
       } else if (params) {
-        if (typeof params === 'object') {
-          if (API.key) params.api_key = API.key;
-          // collapse arrays into comma-separated strings
-          // per the API
-          collapseArrays(params);
-          params = querystring.stringify(params);
-        } else if (API.key) {
-          params += '&api_key=' + API.key;
-        }
-        uri = join([uri, params], '?');
+        params = addAPIKey(params);
       }
+      if (params) uri = join([uri, params], '?');
       var url = join([API.url, uri], '/');
       console.debug('[API] get: "%s"', url);
       return d3.json(url, done);
@@ -91,6 +84,20 @@
       // console.log('getAll:', urls);
       return async.parallel(urls, done);
     };
+
+    function addAPIKey(params) {
+      var param = 'api_key';
+      if (typeof params === 'object') {
+        if (API.key) params[param] = API.key;
+        // collapse arrays into comma-separated strings
+        // per the API
+        collapseArrays(params);
+        params = querystring.stringify(params);
+      } else if (API.key) {
+        params += ['&', param, '=', API.key].join('');
+      }
+      return params;
+    }
 
     function join(list, glue) {
       for (var i = 0; i < list.length; i++) {
