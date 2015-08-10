@@ -28,7 +28,9 @@ module.exports = {
   elements: {
     searchForm: {selector: '#search-form'},
     searchSubmit: {selector: '#search-submit'},
-    nameInput: {selector: '#name-school'}
+    nameInput: {selector: 'input[name=name]'},
+    locationExpandButton: {selector: '#school-location a[aria-controls]'},
+    stateInput: {selector: '.multi-select_item select.select-state'}
   },
 
   sections: {
