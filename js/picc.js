@@ -283,9 +283,6 @@
 
     RETENTION_RATE:       '2013.student.retention_rate',
 
-    // FIXME: get this from the spreadsheet
-    PART_TIME_SHARE:      '2013.student.part_time_share',
-
     // loan and grant rates
     LOAN_RATE:            '2013.debt.loan_rate.federal',
     PELL_RATE:            '2013.debt.loan_rate.pell',
@@ -424,9 +421,12 @@
     return rate[key];
   };
 
-  picc.access.partTimeShare = picc.access.composed(
-    picc.fields.PART_TIME_SHARE
-  );
+  picc.access.partTimeShare = function(d) {
+    // FIXME: this should be a single field?
+    var prefix = '2013.student.';
+    return +picc.access(prefix + 'PPTUG_EF')(d)
+        || +picc.access(prefix + 'PPTUG_EF2')(d);
+  };
 
   picc.access.retentionRate = function(d) {
     var retention = picc.access.composed(
@@ -438,11 +438,15 @@
     var size = picc.access.size(d);
     if (!size) return null;
 
-    var partTimeShare = picc.access.partTimeShare(d);
-    return (
-      (size * partTimeShare * retention.part_time) +
-      ((size - size * partTimeShare) * retention.full_time)
-    ) / size;
+    var ptShare = picc.access.partTimeShare(d);
+    if (ptShare === null) return null;
+
+    var pt = size * ptShare * retention.part_time;
+    var ft = (size - size * ptShare) * retention.full_time;
+    if (isNaN(pt) || isNaN(ft)) return null;
+
+    console.log('retention:', retention, [pt, ft], 'size:', size);
+    return (pt + ft) / size;
   };
 
   picc.access.size = picc.access.composed(
