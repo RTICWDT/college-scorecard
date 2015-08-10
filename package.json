@@ -8,7 +8,7 @@
     "test": "./test/runner.sh",
     "test:live": "./test/browsers.sh",
     "test:sauce": "./test/runner.sh sauce",
-    "test:all": "./test/runner.sh chrome ie9 firefox"
+    "test:travis": "./test/runner.sh chrome ie9 firefox"
   },
   "dependencies": {
     "aight": "^2.1.1",
