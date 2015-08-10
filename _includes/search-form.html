@@ -78,6 +78,8 @@
         <input id="name-school" name="name" type="text" placeholder="e.g. USA University" {{ common_input_attributes }}>
       </div>
 
+      <input type="submit" class="sr-only">
+
     </aria-accordion>
 
   </fieldset>
@@ -103,7 +105,7 @@
 
           <multi-select>
             <div class="u-group_inline u-group_inline-left">
-              <select name="state">
+              <select name="state" class="select-state">
                 <option value=""></option>
                 {% for state in site.data.states|sort('name') %}
                 <option value="{{ state.abbr }}">{{ state.name }}</option>
