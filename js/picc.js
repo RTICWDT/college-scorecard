@@ -156,7 +156,9 @@
    */
   picc.format = (function() {
     var formatter = function(fmt, _empty) {
+      var round = false;
       if (typeof fmt === 'string') {
+        round = !!fmt.match(/d$/);
         fmt = d3.format(fmt);
       }
       return function(key, empty) {
@@ -169,6 +171,7 @@
           : function(v) { return v; };
         return function(d) {
           var value = key.call(this, d);
+          if (round) value = Math.round(value);
           return ((value === '' || isNaN(value)) && empty)
             ? empty.call(d)
             : fmt.call(d, +value, key);
