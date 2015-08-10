@@ -95,13 +95,14 @@
         .range(['0%', '1%', '100%']));
 
     var location = picc.access.location(school);
+    var mapContainer = root.querySelector('.school-map');
     if (location) {
       var center = L.latLng(
         +location.lat,
         +location.lon
       );
 
-      var map = L.map(root.querySelector('.school-map'), {
+      var map = L.map(mapContainer, {
           zoomControl:        false,
           panControl:         false,
           attributionControl: false,
@@ -111,12 +112,12 @@
           doubleClickZoom:    false,
           boxZoom:            false
         })
-        .setView(center, 13);
+        .setView(center, 10);
 
       L.tileLayer('http://tile.stamen.com/terrain/{z}/{x}/{y}.png')
         .addTo(map);
 
-      var marker = L.circle(center, 200, {
+      var marker = L.circle(center, 1600, {
           color: 'black',
           opacity: 1,
           strokeWidth: 1,
@@ -128,6 +129,7 @@
       marker.bindPopup(school.name);
     } else {
       console.warn('no school location:', school);
+      mapContainer.classList.add('hidden');
     }
   });
 
