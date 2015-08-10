@@ -291,9 +291,8 @@
     AVERAGE_TOTAL_DEBT:   '2013.debt.median_debt_suppressed.completers.overall',
     MONTHLY_LOAN_PAYMENT: '2013.debt.median_debt_suppressed.completers.monthly_payments',
 
-    // loan and grant rates
-    LOAN_RATE:            '2013.debt.loan_rate.federal',
-    PELL_RATE:            '2013.debt.loan_rate.pell',
+    // FIXME: this will be renamed eventually
+    AID_PERCENTAGE:       '2013.debt.loan_rate',
 
     MEDIAN_EARNINGS:      '2011.earnings.6_yrs_after_entry.median',
     LOW_INCOME_EARNINGS:  '2011.earnings.6_yrs_after_entry.lowest_tercile',
@@ -615,11 +614,9 @@
       average_monthly_loan_payment: format.dollars(fields.MONTHLY_LOAN_PAYMENT),
 
       federal_aid_percentage: format.percent(function(d) {
-        if (!d.loan_rate) return null;
-        return Math.max(
-          picc.nullify(d.loan_rate.federal),
-          picc.nullify(d.loan_rate.pell)
-        ) || null; // 0 is n/a
+        var aid = picc.access(fields.AID_PERCENTAGE)(d);
+        if (!aid) return null;
+        return Math.max(aid.federal, aid.pell) || null; // 0 is n/a
       }),
 
       earnings_gt_25k: format.percent(access.earnings25k),
