@@ -209,9 +209,10 @@
       // format.plural('x', 'foo')({x: 1}) === 'foo'
       // format.plural('x', 'foo')({x: 2}) === 'foos'
       plural: function(key, singular, plural) {
+        key = picc.access(key);
         if (!plural) plural = singular + 's';
         return function(d) {
-          return d[key] == 1 ? singular : plural;
+          return key.call(this, d) == 1 ? singular : plural;
         };
       },
 
@@ -509,6 +510,9 @@
           program:  name,
           percent:  value
         };
+      })
+      .filter(function(d) {
+        return +d.percent > 0;
       });
   };
 
@@ -723,6 +727,10 @@
           })
           .slice(0, 5);
       },
+
+      programs_plural: format.plural(function(d) {
+        return access.programAreas(d).length;
+      }, 'Program'),
 
       age_entry: function(d) {
         var age = picc.access(fields.AGE_ENTRY)(d);
