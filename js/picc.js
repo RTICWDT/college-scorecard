@@ -301,6 +301,9 @@
 
     PROGRAM_PERCENTAGE:   '2013.academics.program_percentage',
 
+    // FIXME: will become `2013.student.demographics.female_share`
+    FEMALE_SHARE:         '2013.student.female',
+    RACE_ETHNICITY:       '2013.student.demographics.race_ethnicity',
     AGE_ENTRY:            '2013.student.demographics.age_entry'
   };
 
@@ -649,8 +652,7 @@
       part_time_percent: format.number(access.partTimeShare),
 
       gender_values: function(d) {
-        if (!d.demographics) return [];
-        var female = picc.nullify(d.demographics.female_percent);
+        var female = picc.access(fields.FEMALE_SHARE)(d);
         if (female === null) return [];
         female = +female;
         return [
@@ -660,21 +662,18 @@
       },
 
       race_ethnicity_values: function(d) {
-        if (!d.demographics || !d.metadata) {
-          // console.warn('no demographics or metadata:', d);
-          return [];
-        }
-
+        if (!d.metadata) return [];
         var dictionary = d.metadata.dictionary;
-        var values = d.demographics.race_ethnicity;
-        var prefix = 'demographics.race_ethnicity.';
+        var field = fields.RACE_ETHNICITY;
+        var values = picc.access(field)(d);
+        var prefix = field + '.';
         return Object.keys(values)
           .map(function(key) {
             var value = picc.nullify(values[key]);
             var dict = dictionary[prefix + key];
             return {
               key: key,
-              label: dict ? dict.label : key,
+              label: dict ? (dict.label || key) : key,
               value: value,
               percent: percent(value)
             };
