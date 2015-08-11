@@ -551,6 +551,13 @@
       city:           picc.access(fields.CITY),
       state:          picc.access(fields.STATE),
 
+      under_investigation: {
+        '@aria-hidden': function(d) {
+          var flag = picc.access(fields.UNDER_INVESTIGATION)(d);
+          return +flag !== 1;
+        }
+      },
+
       size_number:    format.number(fields.SIZE),
       control:        format.control(fields.OWNERSHIP),
       locale_name:    format.locale(fields.LOCALE),
