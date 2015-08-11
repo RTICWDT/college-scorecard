@@ -78,12 +78,19 @@ input[type="submit"] {
     }
   }
 
+  &.button-add,
+  &.button-remove {
+    white-space: normal;
+    letter-spacing: 0;
+    width: auto;
+    min-width: 50px;
+  }
+
   &.button-add {
+    width: 50px;
     @extend .link-more;
     background-color: $white;
     color: $green;
-    letter-spacing: 0;
-    width: 50px;
 
     &:hover,
     &:focus {

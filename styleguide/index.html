@@ -278,28 +278,28 @@ layout: default
   <section id="accordion" class="guide-container">
     <h1>Accordions</h1>
 
-    <div class="picc-accordion">
+     <aria-accordion class="default_closed" aria-expanded="false">
       <h1>
-        <a aria-expanded="false" aria-controls="pa1-content">
+        <a class="trigger" aria-controls="pa1-content">
           Closed Accordion
         </a>
       </h1>
-      <div id="pa1-content">
+      <div class="content" id="pa1-content" aria-hidden="true">
         <p>This should not show up by default.</p>
         <p>Here is some more stuff to flow.</p>
       </div>
-    </div>
+    </aria-accordion>
 
-    <div class="picc-accordion" data-expanded="true">
+    <aria-accordion class="default_open" aria-expanded="true">
       <h1>
-        <a aria-expanded="true" aria-controls="pa2-content">
+        <a class="trigger" aria-controls="pa2-content">
           Open Accordion
         </a>
       </h1>
-      <div id="pa2-content">
+      <div class="content" id="pa2-content">
         <p>This <i>should</i> show up by default.</p>
       </div>
-    </div>
+    </aria-accordion>
 
   </section>
 
@@ -338,6 +338,36 @@ layout: default
       <p class="show-loaded">This loaded message should <u>not</u> be visible.</p>
       <p class="hide-error">This hidden error message should <u>not</u> be visible.</p>
     </div>
+
+  </section>
+
+  <section id="tooltips" class="guide-container">
+
+    <h1>Tooltips</h1>
+
+    <h2 aria-describedby="{{ site.data.glossary.fubar.id }}">
+      Average Cost Per Year
+      <a id="{{ site.data.glossary.fubar.id }}"
+        class="tooltip"
+        role="tooltip">
+        <i class="fa fa-info-circle"></i>
+        <span class="tooltip-definition" aria-hidden="true">
+          {{ site.data.glossary.fubar.definition }}
+        </span>
+      </a>
+    </h2>
+
+    <p aria-describedby="{{ site.data.glossary.muskrat.id }}">
+      Average Cost Per Year
+      <a id="{{ site.data.glossary.muskrat.id }}"
+        class="tooltip"
+        role="tooltip">
+        <i class="fa fa-info-circle"></i>
+        <span class="tooltip-definition" aria-hidden="true">
+          {{ site.data.glossary.muskrat.definition }}
+        </span>
+      </a>
+    </p>
 
   </section>
 

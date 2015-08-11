@@ -1,6 +1,4 @@
-picc-accordion,
-.picc-accordion,
-[is='picc-accordion'] {
+aria-accordion {
   $button-size: 34px;
   $button-margin: 9px;
 
@@ -13,20 +11,13 @@ picc-accordion,
     min-height: $button-size + ($button-margin * 3);
   }
 
-  button[aria-controls],
-  a[aria-controls] {
+  [aria-controls] {
     display: block;
     cursor: pointer;
     position: relative;
   }
 
-  .picc-accordion-toggle-container {
-    cursor: pointer;
-    position: relative;
-  }
-
-  a[aria-controls]:after,
-  .picc-accordion-toggle {
+  [aria-controls]:after {
     color: #999;
     background: #fff;
     border: 1px solid #e3e3e3;
@@ -44,28 +35,24 @@ picc-accordion,
     width: $button-size;
   }
 
-  a[aria-controls]:after {
+  [aria-controls]:after {
     content: '\002B';
     top: -2px;
   }
 
-  &[data-expanded='true'] a[aria-controls]:after {
+  &[aria-expanded='true'] [aria-controls]:after {
     content: '\2212';
   }
 
-  a[aria-controls]:hover:after {
+  [aria-controls]:hover:after {
     color: #333; // TODO
   }
 
-  .picc-accordion-content {
+  [aria-hidden="true"] {
     display: none;
   }
 
-  &[open] .picc-accordion-content {
-    display: block;
+  .accordion-div {
+    padding-top: ($base-padding / 2);
   }
-}
-
-.picc-accordion-div {
-  padding-top: ($base-padding / 2);
 }

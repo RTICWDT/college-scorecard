@@ -15,6 +15,7 @@
   }
 
   > div > div,
+  aria-accordion > div,
   .contained {
     background-color: $white;
     border-radius: 0.4em;
@@ -39,7 +40,7 @@
     padding: 0;
   }
 
-  > div > div {
+  aria-accordion > div {
     border: $thin-border-size solid $base-border-color;
     display: inline-block;
     margin-bottom: 0;

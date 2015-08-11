@@ -126,28 +126,25 @@
     marker.bindPopup(school.name);
   });
 
-  // TODO: this should be much easier with aria-accordion
-  window.addEventListener('load', function() {
-    var sectionId = location.hash.substr(1);
-    if (!sectionId) return;
-    var found;
-    d3.selectAll('.picc-accordion')
-      .each(function() {
-        if (this.id === sectionId) {
-          var button = this.querySelector('[aria-controls]');
-          button.setAttribute('aria-expanded', 'true');
-          var content = document.getElementById(button.getAttribute('aria-controls'));
-          content.setAttribute('aria-hidden', 'false');
-          content.classList.remove('hidden');
-          found = this;
-        }
-      });
+  function hashChange() {
+    var id = location.hash.substr(1);
+    var found = false;
+    picc.ui.expandAccordions(function() {
+      return this.id && this.id === id;
+    })
+    .each(function() {
+      found = this;
+    });
+    return found;
+  }
 
-      if (found) {
-        location.hash = '';
-        location.hash = '#' + found.id;
-      }
-  });
+  window.addEventListener('hashchange', hashChange);
+
+  var section = hashChange();
+  if (section) {
+    location.hash = '';
+    location.hash = '#' + section.id;
+  }
 
   function getSchoolId() {
     if (!location.search) return null;

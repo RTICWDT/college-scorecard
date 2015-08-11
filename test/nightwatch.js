@@ -25,7 +25,7 @@ var browsers = {
 
 var capabilities = extend({
   javascriptEnabled: true,
-  acceptSslCerts: false
+  acceptSslCerts: true
 }, browsers.phantomjs);
 
 var sauce = {
@@ -38,8 +38,7 @@ var sauce = {
   output: true,
   screenshots: {
     enabled: false,
-    on_failure: true,
-    path: ''
+    on_failure: false
   },
   globals: {
     env: "sauce"
@@ -58,8 +57,9 @@ var environments = {
     silent: true,
     disable_colors: false,
     screenshots: {
-      enabled: false,
-      path: ''
+      enabled: true,
+      on_failure: true,
+      path: 'test/screenshots'
     },
     desiredCapabilities: capabilities,
     globals: {
@@ -71,6 +71,9 @@ var environments = {
 };
 
 for (var browser in browsers) {
+  environments[browser + ':local'] = {
+    desiredCapabilities: extend({}, capabilities, browsers[browser])
+  };
   environments[browser] = extend({}, sauce, {
     desiredCapabilities: extend({}, capabilities, browsers[browser])
   });
@@ -91,6 +94,7 @@ module.exports = {
   parallel_process_delay: 10,
 
   custom_assertions_path: '',
+  custom_commands_path: './test/commands',
   globals_path: './test/globals.js',
 
   selenium: {

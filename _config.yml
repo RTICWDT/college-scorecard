@@ -19,9 +19,10 @@ scripts:
   - vendor/async.min.js
   - vendor/querystring.min.js
   - vendor/document-register-element.min.js
-  - components/picc-accordion.js
+  - components/aria-accordion.js
   - components/picc-meter.js
   - components/picc-range.js
+  - components/multi-select.js
   - picc.js
 
 stylesheets:
