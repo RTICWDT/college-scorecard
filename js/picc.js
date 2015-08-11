@@ -299,7 +299,9 @@
     // FIXME: pending #373
     EARNINGS_GT_25K:      '2011.earnings.gt_25k_p10',
 
-    PROGRAM_PERCENTAGE:   '2013.academics.program_percentage'
+    PROGRAM_PERCENTAGE:   '2013.academics.program_percentage',
+
+    AGE_ENTRY:            '2013.student.demographics.age_entry'
   };
 
   picc.access = function(key) {
@@ -711,9 +713,8 @@
       },
 
       age_entry: function(d) {
-        return d.demographics
-          ? picc.nullify(d.demographics.age_entry)
-          : null;
+        var age = picc.access(fields.AGE_ENTRY)(d);
+        return age ? age : NA;
       },
 
       more_link: {
