@@ -539,6 +539,13 @@
       ].join('');
     };
 
+    var underInvestigation = {
+      '@aria-hidden': function(d) {
+        var flag = picc.access(fields.UNDER_INVESTIGATION)(d);
+        return +flag !== 1;
+      }
+    };
+
     return {
       title: {
         link: {
@@ -551,12 +558,10 @@
       city:           picc.access(fields.CITY),
       state:          picc.access(fields.STATE),
 
-      under_investigation: {
-        '@aria-hidden': function(d) {
-          var flag = picc.access(fields.UNDER_INVESTIGATION)(d);
-          return +flag !== 1;
-        }
-      },
+      under_investigation: underInvestigation,
+      // FIXME this is a hack to deal with the issue of tagalong
+      // not applying a directive to multiple elements
+      under_investigation2: underInvestigation,
 
       size_number:    format.number(fields.SIZE),
       control:        format.control(fields.OWNERSHIP),
