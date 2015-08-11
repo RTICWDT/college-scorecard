@@ -78,9 +78,12 @@ body_scripts:
           <!-- this element is the template for the results listing -->
           <div class="school results-card">
 
-            <div class="investigation-major-wrapper">
-              <a class="tooltip-target" aria-hidden="false">
-                <p class="investigation-major" aria-describedby="tip-investigation-major">Under investigation <i class="fa fa-info-circle"></i></p>
+            <div class="investigation-major-wrapper"
+              data-bind="under_investigation" aria-hidden="true">
+              <a>
+                <p class="investigation-major" aria-describedby="tip-investigation-major">
+                  Under investigation <i class="tooltip-target fa fa-info-circle"></i>
+                </p>
               </a>
             </div>
 
@@ -96,8 +99,10 @@ body_scripts:
               <li>
                 <span data-bind="size_number">x</span> undergraduate students
               </li>
-              <a class="tooltip-target" aria-hidden="false">
-                <li class="investigation-minor" aria-describedby="tip-investigation-minor">Under investigation <i class="fa fa-info-circle"></i></li>
+              <a data-bind="under_investigation2" aria-hidden="true">
+                <li class="investigation-minor" aria-describedby="tip-investigation-minor">
+                  Under investigation <i class="tooltip-target fa fa-info-circle"></i>
+                </li>
               </a>
             </ul>
 
