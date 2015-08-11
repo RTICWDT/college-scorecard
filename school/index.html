@@ -35,6 +35,16 @@ body_scripts:
       <div class="container section contained-no-radius">
 
         <div class="school-heading">
+
+          <div class="investigation-major-wrapper"
+            data-bind="under_investigation" aria-hidden="true">
+            <a>
+              <p class="investigation-major" aria-describedby="tip-investigation-major">
+                Under investigation <i class="tooltip-target fa fa-info-circle"></i>
+              </p>
+            </a>
+          </div>
+          
           <h1 data-bind="name">School Name</h1>
 
           <h2 class="location">
@@ -137,7 +147,7 @@ body_scripts:
                 <div class="school-two_col-right">
                   <h2>By Family Income</h2>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                  
+
                   <table class="school-table">
                     <thead>
                       <tr>
@@ -348,7 +358,7 @@ body_scripts:
               </h1>
 
               <div id="student-content" aria-hidden="true">
-                
+
                 <div class="school-student-intro">
 
                   <ul class="school-key_figures key-figures">
@@ -501,7 +511,7 @@ body_scripts:
                     <div class="group_inline-left"><strong class="fact_number" data-bind="num_available_programs">X</strong></div>
                     <div class="group_inline-right"><h2>Programs Offered</h2></div>
                   </div>
-                  
+
                   <h2>Most Popular Programs</h2>
                   <ol class="decimal school-programs" data-bind="popular_programs">
                     <li><span class="program"></span> (<span class="percent"></span>)</li>
@@ -509,19 +519,19 @@ body_scripts:
                 </div>
 
                 <div class="school-two_col-right">
-                
+
                   <h2>Available Areas of Study</h2>
                   <ul class="school-long_list" data-bind="available_programs">
                     <li><span class="program">Management</span></li>
                   </ul>
-                
+
                 </div>
               </div>
             </div>
           </aria-accordion>
         </div>
 
-        
+
 
       </div>
 
