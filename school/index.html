@@ -482,11 +482,21 @@ body_scripts:
                   <p>Students who were admitted typically had standardized test score in these ranges.</p>
 
                   <h3 class="h2">SAT</h3>
-                  <picc-range min="0" max="2400" lower="840" upper="1820" middle="1105">
+
+                  <h4>Critical Reading</h4>
+                  <picc-range data-bind="sat_reading_scores" max="800">
+                  </picc-range>
+
+                  <h4>Math</h4>
+                  <picc-range data-bind="sat_math_scores" max="800">
+                  </picc-range>
+
+                  <h4>Writing</h4>
+                  <picc-range data-bind="sat_writing_scores" max="800">
                   </picc-range>
 
                   <h3 class="h2">ACT</h3>
-                  <picc-range min="1" max="36" lower="19" upper="25" middle="22">
+                  <picc-range data-bind="act_scores" min="0" max="36">
                   </picc-range>
 
                 </div>
