@@ -7,15 +7,15 @@
     padding-top: 0.7em;
   }
 
-  h2 a {
-    color: $green;
-
-    &:hover,
-    &:focus {
-      color: $darker-green;
-      text-decoration: none;
-    }
-  }
+  // h2 a {
+  //   color: $green;
+  //
+  //   &:hover,
+  //   &:focus {
+  //     color: $darker-green;
+  //     text-decoration: none;
+  //   }
+  // }
 
   > section {
     margin-top: $base-padding-extra;

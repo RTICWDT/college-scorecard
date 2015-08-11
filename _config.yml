@@ -22,6 +22,7 @@ scripts:
   - components/aria-accordion.js
   - components/picc-meter.js
   - components/picc-range.js
+  - components/multi-select.js
   - picc.js
 
 stylesheets:

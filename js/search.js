@@ -1,21 +1,26 @@
 (function(exports) {
 
   var resultsRoot = document.querySelector('.search-results');
-
   var form = new formdb.Form('#search-form');
-
   var query = querystring.parse(location.search.substr(1));
-  form.setData(query);
-
   // the current outbound request
   var req;
 
-  onChange(form.getData());
+  var change = picc.debounce(onChange, 100);
 
-  form.on('change', picc.debounce(onChange, 200));
+  picc.ready(function() {
+    // console.warn('setting form data...', query);
+    // console.log('states:', form.get('state'));
+    form.setData(query);
+    // console.log('states:', form.getInputsByName('state'), form.get('state'));
+
+    change(form.getData());
+  });
+
+  form.on('change', change);
 
   form.on('submit', function(data, e) {
-    onChange(data);
+    change(data);
     e.preventDefault();
     return false;
   });
@@ -28,6 +33,10 @@
   });
 
   function onChange(params) {
+    // console.log('search params:', params);
+    if (Array.isArray(params.state) && !params.state[0]) {
+      delete params.state;
+    }
     var qs = querystring.stringify(params);
     // update the URL
     history.pushState(params, 'search', '?' + qs);

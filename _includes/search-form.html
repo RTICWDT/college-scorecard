@@ -1,4 +1,6 @@
-<form id="search-form" is="search-form" action="{{ site.baseurl }}/search/" method="GET">
+<form id="search-form" is="search-form"
+  autocomplete="false"
+  action="{{ site.baseurl }}/search/" method="GET">
   {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
 
   <div class="container search-form-intro">
@@ -16,12 +18,12 @@
 
       <legend>Filters</legend>
       <h1 class="search_category">
-        <a aria-expanded="true" aria-controls="filters-content">
+        <a aria-expanded="false" aria-controls="filters-content">
           Filters
         </a>
       </h1>
 
-      <div id="filters-content" aria-hidden="false" class="accordion-div">
+      <div id="filters-content" aria-hidden="true" class="accordion-div">
 
         <div class="filter_section">
           <h2>Cost Per Year</h2>
@@ -62,7 +64,7 @@
 
   <fieldset>
 
-    <aria-accordion id="name-accordion" class="container">
+    <aria-accordion id="school-name" class="container">
 
       <legend>Name</legend>
       <h1 class="search_category">
@@ -76,13 +78,15 @@
         <input id="name-school" name="name" type="text" placeholder="e.g. USA University" {{ common_input_attributes }}>
       </div>
 
+      <input type="submit" class="sr-only">
+
     </aria-accordion>
 
   </fieldset>
 
   <fieldset>
 
-    <aria-accordion id="location-accordion" class="container">
+    <aria-accordion id="school-location" class="container">
 
       <legend>Location</legend>
       <h1 class="search_category">
@@ -95,26 +99,33 @@
 
         <div class="input-add group_inline">
 
-          <label for="select-state" class="group_inline-left">Select a state
-            <select id="select-state" name="state">
-              <option value=""></option>
-              {% for state in site.data.states|sort('name') %}
-              <option value="{{ state.abbr }}">{{ state.name }}</option>
-              {% endfor %}
-              <i class="fa fa-chevron-down"></i>
-            </select>
+          <label for="select-state">
+            Select one or more states
           </label>
 
-          <div class="group_inline-right">
-            <button class="button button-add" data-input="state">
-              Add State
-            </button>
-          </div>
+          <multi-select>
+            <div class="u-group_inline u-group_inline-left">
+              <select name="state" class="select-state">
+                <option value=""></option>
+                {% for state in site.data.states|sort('name') %}
+                <option value="{{ state.abbr }}">{{ state.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="u-group_inline u-group_inline-right u-nowrap">
+              <button class="button button-add">
+                Add State
+              </button>
+              <button class="button button-remove">
+                &times;
+              </button>
+            </div>
+          </multi-select>
 
         </div>
 
         <label for="select-region">Select a region
-          <select name="region" id="select-region">
+          <select name="region_id" id="select-region">
             <option value=""></option>
             {% for region in site.data.regions|sort('name') %}
             <option value="{{ region.id }}" data-states="{{ region.states }}">{{ region.name }}</option>
@@ -136,7 +147,7 @@
 
         <label for="online" class="checkbox">
           <input id="online" type="checkbox" name="size" value="online" tabindex="0">
-          <span tabindex="-1" class="checkbox-focus"></span>Include Online Schools
+          <span tabindex="-1" class="checkbox-focus"></span>Include Online Only Schools
         </label>
 
       </div>
@@ -147,21 +158,21 @@
 
   <fieldset>
 
-    <aria-accordion id="degree-accordion" class="container">
+    <aria-accordion id="school-degree" class="container">
 
-      <legend>Major/Degree</legend>
+      <legend>Area of Study</legend>
       <h1 class="search_category">
         <a aria-expanded="false" aria-controls="major-content">
-          Major/Degree
+          Area of Study
         </a>
       </h1>
       <div id="major-content" aria-hidden="true" class="accordion-div">
 
-        <label for="major">Specify a major or degree
-          <input id="major" name="major" type="text" placeholder="Type a major" {{ common_input_attributes }}>
-        </label>
+        <!-- <label for="major">Choose a program
+          <input id="major" name="major" type="text" placeholder="e.g. Engineering" {{ common_input_attributes }}>
+        </label> -->
 
-        <label for="major-type">Select a type of degree
+        <label for="major-type">Choose a program
           <select id="major-type" name="major_type">
             <option value=""></option>
             <option>???</option>
@@ -175,7 +186,7 @@
 
   <fieldset>
 
-    <aria-accordion id="size-accordion" class="container">
+    <aria-accordion id="school-size" class="container">
 
       <legend>Size</legend>
       <h1 class="search_category">

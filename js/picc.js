@@ -31,6 +31,9 @@
       } else if (params) {
         if (typeof params === 'object') {
           if (API.key) params.api_key = API.key;
+          // collapse arrays into comma-separated strings
+          // per the API
+          collapseArrays(params);
           params = querystring.stringify(params);
         } else if (API.key) {
           params += '&api_key=' + API.key;
@@ -99,6 +102,16 @@
         }
       }
       return list.join(glue);
+    }
+
+    function collapseArrays(obj, glue) {
+      if (!glue) glue = ',';
+      for (var key in obj) {
+        if (Array.isArray(obj[key])) {
+          obj[key] = obj[key].join(glue);
+        }
+      }
+      return obj;
     }
 
     return API;
@@ -546,7 +559,7 @@
 
       race_ethnicity_values: function(d) {
         if (!d.demographics || !d.metadata) {
-          console.warn('no demographics or metadata:', d);
+          // console.warn('no demographics or metadata:', d);
           return [];
         }
 
@@ -649,7 +662,6 @@
     return form;
   };
 
-
   // UI tools
   picc.ui = {};
 
@@ -669,6 +681,15 @@
       .property('expanded', true);
   };
 
+  // this is the equivalent of $(function), aka DOMReady
+  picc.ready = function(callback) {
+    if (document.readyState === 'complete') {
+      return callback();
+    } else {
+      window.addEventListener('load', callback);
+    }
+  };
+
   // debounce function
   picc.debounce = function(fn, delay) {
     var timeout;
@@ -680,5 +701,111 @@
       }, delay);
     };
   };
+
+  picc.delegate = function(root, qualify, event, listener) {
+    if (Array.isArray(event)) {
+      return event.map(function(e) {
+        return picc.delegate(root, qualify, e, listener);
+      });
+    }
+
+    if (typeof event === 'object') {
+      var listeners = {};
+      for (var e in event) {
+        listeners[e] = picc.delegate(root, qualify, e, event[e]);
+      }
+      return listeners;
+    }
+
+    var _listener = function(e) {
+      if (qualify.call(e.target, e)) {
+        listener.call(e.target, e);
+      }
+    };
+    root.addEventListener(event, _listener, true);
+    return listener;
+  };
+
+  picc.tooltip = {
+    show: function showTooltip() {
+      var tooltip = this.tooltip;
+      if (!tooltip) {
+        tooltip = document.getElementById(this.getAttribute('aria-describedby'));
+        if (!tooltip) {
+          return console.warn('no tooltip found for:', this);
+        }
+        this.tooltip = tooltip;
+      }
+
+      // console.log('show tooltip:', this, tooltip);
+      tooltip.setAttribute('aria-hidden', false);
+      var ref = this.querySelector('.tooltip-target') || this;
+      picc.tooltip.constrain(tooltip, ref);
+    },
+
+    hide: function hideTooltip() {
+      if (!this.tooltip) return;
+      var tooltip = this.tooltip;
+      tooltip.setAttribute('aria-hidden', true);
+    },
+
+    constrain: function(tooltip, parent) {
+      // remove the tooltip so we can accurately calculate
+      // the outer element's size
+      if (parent === tooltip.parentNode) {
+        parent.removeChild(tooltip);
+      }
+
+      var content = tooltip.querySelector('.tooltip-content') || tooltip;
+      content.style.removeProperty('left');
+
+      var outer = parent.getBoundingClientRect();
+      parent.appendChild(tooltip);
+
+      rect = content.getBoundingClientRect();
+
+      var margin = 10;
+      var offsetWidth = (rect.width - outer.width) / 2;
+      var halfWidth = rect.width / 2;
+      var bump = -halfWidth;
+
+      var left = outer.left - offsetWidth;
+      var leftEdge = margin / 2;
+      var right = outer.right + offsetWidth;
+      var rightEdge = window.innerWidth - margin * 2;
+
+      if (right > rightEdge) {
+        bump -= right - rightEdge;
+      } else if (left < leftEdge) {
+        bump += leftEdge - left;
+      }
+
+      if (bump) {
+        content.style.left = Math.round(bump) + 'px';
+      } else {
+        content.style.removeProperty('left');
+      }
+
+      var bottom = outer.bottom + rect.height;
+      var above = bottom > window.innerHeight;
+      tooltip.classList.toggle('tooltip_above', above);
+      tooltip.classList.toggle('tooltip_below', !above);
+    }
+  };
+
+  window.addEventListener('load', function() {
+    picc.delegate(
+      document.body,
+      function() {
+        return this.hasAttribute('aria-describedby');
+      },
+      {
+        mouseenter: picc.tooltip.show,
+        mouseleave: picc.tooltip.hide,
+        focus:      picc.tooltip.show,
+        blur:       picc.tooltip.hide
+      }
+    );
+  });
 
 })(this);
