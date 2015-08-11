@@ -914,11 +914,13 @@
     }
   };
 
-  window.addEventListener('load', function() {
+  picc.ready(function() {
+    var described = 'aria-describedby';
     picc.delegate(
       document.body,
       function() {
-        return this.hasAttribute('aria-describedby');
+        return this.hasAttribute(described)
+            && this.getAttribute(described).match(/^tip-/);
       },
       {
         mouseenter: picc.tooltip.show,
