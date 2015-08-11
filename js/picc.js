@@ -305,7 +305,25 @@
     // FIXME: will become `2013.student.demographics.female_share`
     FEMALE_SHARE:         '2013.student.female',
     RACE_ETHNICITY:       '2013.student.demographics.race_ethnicity',
-    AGE_ENTRY:            '2013.student.demographics.age_entry'
+    AGE_ENTRY:            '2013.student.demographics.age_entry',
+
+    ACT_25TH_PCTILE:      '2013.student.act_scores.25th_percentile.cumulative',
+    ACT_75TH_PCTILE:      '2013.student.act_scores.75th_percentile.cumulative',
+    ACT_MIDPOINT:         '2013.student.act_scores.midpoint.cumulative',
+
+    SAT_CUMULATIVE_AVERAGE:   '2013.student.sat_scores.average.overall',
+
+    SAT_READING_25TH_PCTILE:  '2013.student.sat_scores.25th_percentile.critical_reading',
+    SAT_READING_75TH_PCTILE:  '2013.student.sat_scores.75th_percentile.critical_reading',
+    SAT_READING_MIDPOINT:     '2013.student.sat_scores.midpoint.critical_reading',
+
+    SAT_MATH_25TH_PCTILE:     '2013.student.sat_scores.25th_percentile.math',
+    SAT_MATH_75TH_PCTILE:     '2013.student.sat_scores.75th_percentile.math',
+    SAT_MATH_MIDPOINT:        '2013.student.sat_scores.midpoint.math',
+
+    SAT_WRITING_25TH_PCTILE:  '2013.student.sat_scores.25th_percentile.writing',
+    SAT_WRITING_75TH_PCTILE:  '2013.student.sat_scores.75th_percentile.writing',
+    SAT_WRITING_MIDPOINT:     '2013.student.sat_scores.midpoint.writing',
   };
 
   picc.access = function(key) {
@@ -727,6 +745,30 @@
 
       more_link: {
         '@href': href
+      },
+
+      act_scores: {
+        '@lower': access(fields.ACT_25TH_PCTILE),
+        '@upper': access(fields.ACT_75TH_PCTILE),
+        '@middle': access(fields.ACT_MIDPOINT),
+      },
+
+      sat_reading_scores: {
+        '@lower': access(fields.SAT_READING_25TH_PCTILE),
+        '@upper': access(fields.SAT_READING_75TH_PCTILE),
+        '@middle': access(fields.SAT_READING_MIDPOINT),
+      },
+
+      sat_math_scores: {
+        '@lower': access(fields.SAT_MATH_25TH_PCTILE),
+        '@upper': access(fields.SAT_MATH_75TH_PCTILE),
+        '@middle': access(fields.SAT_MATH_MIDPOINT),
+      },
+
+      sat_writing_scores: {
+        '@lower': access(fields.SAT_WRITING_25TH_PCTILE),
+        '@upper': access(fields.SAT_WRITING_75TH_PCTILE),
+        '@middle': access(fields.SAT_WRITING_MIDPOINT),
       }
     };
 
