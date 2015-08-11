@@ -535,7 +535,7 @@
     var fields = picc.fields;
 
     var href = function(d) {
-      var name = picc.access(fields.NAME)(d);
+      var name = access(fields.NAME)(d);
       name = name ? name.replace(/\W+/g, '-') : '(unknown)';
       return [
         picc.BASE_URL, '/school/?',
@@ -545,7 +545,7 @@
 
     var underInvestigation = {
       '@aria-hidden': function(d) {
-        var flag = picc.access(fields.UNDER_INVESTIGATION)(d);
+        var flag = access(fields.UNDER_INVESTIGATION)(d);
         return +flag !== 1;
       }
     };
@@ -553,14 +553,14 @@
     return {
       title: {
         link: {
-          text: picc.access(fields.NAME),
+          text: access(fields.NAME),
           '@href': href
         }
       },
 
-      name:           picc.access(fields.NAME),
-      city:           picc.access(fields.CITY),
-      state:          picc.access(fields.STATE),
+      name:           access(fields.NAME),
+      city:           access(fields.CITY),
+      state:          access(fields.STATE),
 
       under_investigation: underInvestigation,
       // FIXME this is a hack to deal with the issue of tagalong
@@ -577,18 +577,6 @@
       // (e.g. `women_only`) are at the object root, rather than
       // nested in `minority_serving`.
       special_designations: access.specialDesignations,
-
-      SAT_avg: function(d) {
-        return picc.nullify(d.SAT_avg) || NA;
-      },
-
-      SAT_meter: {
-        // TODO
-      },
-
-      ACT_meter: {
-        // TODO
-      },
 
       average_cost: format.dollars(access.netPrice),
       average_cost_meter: {
@@ -627,7 +615,7 @@
 
       repayment_rate_percent: format.percent(fields.REPAYMENT_RATE),
       repayment_rate_meter: {
-        '@value': picc.access(fields.REPAYMENT_RATE),
+        '@value': access(fields.REPAYMENT_RATE),
         '@average': access.nationalStat('median'),
         label:    format.percent(function() {
           return this.getAttribute('average');
@@ -638,7 +626,7 @@
       average_monthly_loan_payment: format.dollars(fields.MONTHLY_LOAN_PAYMENT),
 
       federal_aid_percentage: format.percent(function(d) {
-        var aid = picc.access(fields.AID_PERCENTAGE)(d);
+        var aid = access(fields.AID_PERCENTAGE)(d);
         if (!aid) return null;
         return Math.max(aid.federal, aid.pell) || null; // 0 is n/a
       }),
@@ -652,7 +640,7 @@
         '@title': debugMeterTitle
       },
 
-      retention_rate_value: format.percent(picc.access.retentionRate),
+      retention_rate_value: format.percent(access.retentionRate),
       retention_rate_meter: {
         '@value': access.retentionRate,
         label:    format.percent(function() {
@@ -669,7 +657,7 @@
       part_time_percent: format.number(access.partTimeShare),
 
       gender_values: function(d) {
-        var female = picc.access(fields.FEMALE_SHARE)(d);
+        var female = access(fields.FEMALE_SHARE)(d);
         if (female === null) return [];
         female = +female;
         return [
@@ -682,7 +670,7 @@
         if (!d.metadata) return [];
         var dictionary = d.metadata.dictionary;
         var field = fields.RACE_ETHNICITY;
-        var values = picc.access(field)(d);
+        var values = access(field)(d);
         var prefix = field + '.';
         return Object.keys(values)
           .map(function(key) {
