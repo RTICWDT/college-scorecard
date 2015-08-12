@@ -1,10 +1,16 @@
 #
-# [Enter full school list leader here]
-# [Describe stats here]
+30 4-year schools with the highest graduations rates and lowest cots for students eligible for financial aid
+=<25th percentile of average net price for bottom 2 income quintiles), highest completion rates (=>90th percentile
 #
 
 school-list-item:
-  - name: "Let's Put This In Quotes"
-    stats: 50%
-  - name: "University of Arizona"
-    stats: 30%
+  - name: "Universidad Teologica del Caribe"
+    stats: 100%, $7,026 
+  - name: "Curtis Institute of Music"
+    stats: 100%, $6,286
+  - name: "Franklin W Olin College of Engineering"
+    stats: 99%, $4,077
+  - name: "Princeton University"
+    stats: 97%, $5,720
+  - name: "Amherst College"
+    stats: 96%, $3,739
