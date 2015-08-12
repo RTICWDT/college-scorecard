@@ -30,3 +30,24 @@ school-list-item:
     stats: 93%, $5,648
   - name: "Bowdoin College"
     stats: 93%, $6,731
+  - name: "University of Virginia-Main Campus"
+    stats: 93%, $7,007
+  - name: "Hamilton College"
+    stats: 93%, $7,245
+  - name: "Colby College"
+    stats: 93%, $6,443
+  - name: "Wesleyan University"
+    stats: 92%, $7,455
+  - name: "Rice University"
+    stats: 91%, $7,960
+  - name: "Washington and Lee University"
+    stats: 90%, $7,663
+  - name: "University of North Carolina at Chapel Hill"
+    stats: 90%, $6,543
+  - name: "University of Michigan-Ann Arbor"
+    stats: 90%, $7,156
+  - name: "Yeshiva Shaar Hatorah"
+    stats: 88%, $4,518
+   - name: "University of Florida"
+    stats: 87%, $8,275
+
