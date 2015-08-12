@@ -1,0 +1,10 @@
+#
+# [Enter full school list leader here]
+# [Describe stats here]
+#
+
+school-list-item:
+  - name: "Let's Put This In Quotes"
+    stats: 50%
+  - name: "University of Arizona"
+    stats: 30%
