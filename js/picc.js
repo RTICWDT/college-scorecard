@@ -9,17 +9,9 @@
 
   picc.API = (function() {
     var API = {
-      url: '{{ site.api.baseurl }}',
-      key: '{{ site.api.key }}'
+      url: '{{ site.API.baseurl }}',
+      key: '{{ site.API.key }}'
     };
-
-    // use the staging API if we're on Federalist previewing
-    // the staging branch
-    if (location.hostname === 'federalist.18f.gov'
-        && !!location.pathname.match(/\/staging\//)) {
-      API.url = 'https://ccapi-open-staging.18f.gov/';
-      API.key = '';
-    }
 
     var schoolEndpoint = 'school/';
     var idField = 'id';
