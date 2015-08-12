@@ -239,6 +239,13 @@
         '4': 'Graduate'
       }, NA)),
 
+      zero: function(key) {
+        key = picc.access(key);
+        return function(d) {
+          return key.call(this, d) == 0;
+        };
+      },
+
       sizeCategory: formatter(range([
         [0, 2000, 'Small'],
         [2000, 15000, 'Medium'],
@@ -747,24 +754,36 @@
         '@href': href
       },
 
+      act_scores_visible: {
+        '@aria-hidden': format.zero(fields.ACT_MIDPOINT),
+      },
       act_scores: {
         '@lower': access(fields.ACT_25TH_PCTILE),
         '@upper': access(fields.ACT_75TH_PCTILE),
         '@middle': access(fields.ACT_MIDPOINT),
       },
 
+      sat_reading_scores_visible: {
+        '@aria-hidden': format.zero(fields.SAT_READING_MIDPOINT),
+      },
       sat_reading_scores: {
         '@lower': access(fields.SAT_READING_25TH_PCTILE),
         '@upper': access(fields.SAT_READING_75TH_PCTILE),
         '@middle': access(fields.SAT_READING_MIDPOINT),
       },
 
+      sat_math_scores_visible: {
+        '@aria-hidden': format.zero(fields.SAT_MATH_MIDPOINT),
+      },
       sat_math_scores: {
         '@lower': access(fields.SAT_MATH_25TH_PCTILE),
         '@upper': access(fields.SAT_MATH_75TH_PCTILE),
         '@middle': access(fields.SAT_MATH_MIDPOINT),
       },
 
+      sat_writing_scores_visible: {
+        '@aria-hidden': format.zero(fields.SAT_WRITING_MIDPOINT),
+      },
       sat_writing_scores: {
         '@lower': access(fields.SAT_WRITING_25TH_PCTILE),
         '@upper': access(fields.SAT_WRITING_75TH_PCTILE),

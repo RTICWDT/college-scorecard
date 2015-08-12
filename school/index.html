@@ -483,21 +483,30 @@ body_scripts:
 
                   <h3 class="h2">SAT</h3>
 
-                  <h4>Critical Reading</h4>
-                  <picc-range data-bind="sat_reading_scores" max="800">
-                  </picc-range>
+                  <figure data-bind="sat_reading_scores_visible">
+                    <h4>Critical Reading</h4>
+                    <picc-range data-bind="sat_reading_scores" max="800">
+                    </picc-range>
+                  </figure>
 
-                  <h4>Math</h4>
-                  <picc-range data-bind="sat_math_scores" max="800">
-                  </picc-range>
+                  <figure data-bind="sat_math_scores_visible">
+                    <h4>Math</h4>
+                    <picc-range data-bind="sat_math_scores" max="800">
+                    </picc-range>
+                  </figure>
 
-                  <h4>Writing</h4>
-                  <picc-range data-bind="sat_writing_scores" max="800">
-                  </picc-range>
+                  <figure data-bind="sat_writing_scores_visible">
+                    <h4>Writing</h4>
+                    <picc-range data-bind="sat_writing_scores" max="800">
+                    </picc-range>
+                  </figure>
 
                   <h3 class="h2">ACT</h3>
-                  <picc-range data-bind="act_scores" min="0" max="36">
-                  </picc-range>
+
+                  <figure data-bind="act_scores_visible">
+                    <picc-range data-bind="act_scores" min="0" max="36">
+                    </picc-range>
+                  </figure>
 
                 </div>
               </div>
