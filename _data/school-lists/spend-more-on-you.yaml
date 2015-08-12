@@ -1,0 +1,10 @@
+#
+# [Enter full school list leader here]
+# [Describe stats here]
+#
+
+school-list-item:
+  - name: "Let's Put This In Quotes"
+    stats: 50%, 10, 3.5
+  - name: "Here's a school with three stats"
+    stats: 50%, 5, 3.3

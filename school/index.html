@@ -130,7 +130,7 @@ body_scripts:
                 <div class="school-two_col-left centered">
 
                   <figure class="meter below_is_good">
-                    <h2 class="figure-heading">Average Actual Cost</h2>
+                    <h2 class="figure-heading">Average Cost Per Year</h2>
                     <picc-meter id="cost-meter" {% include net_price_meter_attributes.html %}>
                     </picc-meter>
                     <figcaption>
@@ -146,8 +146,8 @@ body_scripts:
 
                 <div class="school-two_col-right">
                   <h2>By Family Income</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
+                  <p>Depending on the federal, state, or institutional grant aid available, students in your income bracket may pay more or less than the overall average costs.</p>
+                  
                   <table class="school-table">
                     <thead>
                       <tr>
@@ -202,7 +202,7 @@ body_scripts:
                 <div class="school-two_col-left centered">
 
                   <figure class="meter above_is_good">
-                    <h2 class="figure-heading">Students Repaying<br>Loans on Time</h2>
+                    <h2 class="figure-heading">Students Paying<br>Down Their Debt</h2>
                     <picc-meter id="repayment-meter"
                       class="debt"
                       data-bind="repayment_rate_meter"
@@ -231,13 +231,13 @@ body_scripts:
                 <div class="school-two_col-right school-fact_list">
 
                   <div>
-                    <h2>Average Total Debt</h2>
+                    <h2>Typical Total Debt</h2>
                     <strong class="fact_number" data-bind="average_total_debt">$XX,XXX</strong>
-                    <p>For those students who graduated</p>
+                    <p>For undergraduates who complete college</p>
                   </div>
 
                   <div>
-                    <h2>Average Monthly Loan Payment</h2>
+                    <h2>Typical Monthly Loan Payment</h2>
                     <strong class="fact_number">
                       <span data-bind="average_monthly_loan_payment">$XXX</span>/mo
                     </strong>
@@ -246,7 +246,7 @@ body_scripts:
                   <div>
                     <h2>Students Receiving Federal Aid</h2>
                     <strong class="fact_number" data-bind="federal_aid_percentage">XX%</strong>
-                    <p>Brief explanation of what federal aid is and means. Nunc eu consectutur purus.</p>
+                    <p>You may be eligible to receive federal loans, repaid after you leave school, to help pay the costs of college. This is how many students at this school borrowed federal loans last year.</p>
                   </div>
 
                 </div>
@@ -283,7 +283,7 @@ body_scripts:
 
                 <div class="school-two_col-right centered">
                   <figure class="meter above_is_good">
-                    <h2 class="figure-heading">Students Who<br>Return Each Year</h2>
+                    <h2 class="figure-heading">Students Who<br>Return After Their First Year</h2>
                     <picc-meter id="retention-meter"
                       class="graduation"
                       data-bind="retention_rate_meter"
