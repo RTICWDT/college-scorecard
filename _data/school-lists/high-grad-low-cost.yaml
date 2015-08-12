@@ -14,3 +14,19 @@ school-list-item:
     stats: 97%, $5,720
   - name: "Amherst College"
     stats: 96%, $3,739
+  - name: "Pomona College"
+    stats: 96%, $4,935
+  - name: "Williams College"
+    stats: 95%, $8,202
+  - name: "Dartmouth College"
+    stats: 95%, $7,648
+  - name: "Brown University"
+    stats: 95%, $6,104
+  - name: "Vassar College"
+    stats: 94%, $5,062
+  - name: "Middlebury College"
+    stats: 94%, $8,514
+  - name: "Haverford College"
+    stats: 93%, $5,648
+  - name: "Bowdoin College"
+    stats: 93%, $6,731
