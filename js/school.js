@@ -24,6 +24,10 @@
     }
 
     var school = data.school;
+
+    var name = picc.access(picc.fields.NAME)(school);
+    document.title += ' / ' + name;
+
     school.metadata = data.metadata;
     console.log('got school:', school);
     root.classList.remove('hidden');
@@ -94,36 +98,43 @@
         .domain([0, .01, 1])
         .range(['0%', '1%', '100%']));
 
-    var center = L.latLng(
-      +school.location.lat,
-      +school.location.lon
-    );
+    var location = picc.access.location(school);
+    var mapContainer = root.querySelector('.school-map');
+    if (location) {
+      var center = L.latLng(
+        +location.lat,
+        +location.lon
+      );
 
-    var map = L.map(root.querySelector('.school-map'), {
-        zoomControl:        false,
-        panControl:         false,
-        attributionControl: false,
-        dragging:           false,
-        scrollWheelZoom:    false,
-        touchZoom:          false,
-        doubleClickZoom:    false,
-        boxZoom:            false
-      })
-      .setView(center, 13);
+      var map = L.map(mapContainer, {
+          zoomControl:        false,
+          panControl:         false,
+          attributionControl: false,
+          dragging:           false,
+          scrollWheelZoom:    false,
+          touchZoom:          false,
+          doubleClickZoom:    false,
+          boxZoom:            false
+        })
+        .setView(center, 10);
 
-    L.tileLayer('http://tile.stamen.com/terrain/{z}/{x}/{y}.png')
-      .addTo(map);
+      L.tileLayer('http://tile.stamen.com/terrain/{z}/{x}/{y}.png')
+        .addTo(map);
 
-    var marker = L.circle(center, 200, {
-        color: 'black',
-        opacity: 1,
-        strokeWidth: 1,
-        fillColor: 'white',
-        fillOpacity: 1
-      })
-      .addTo(map);
+      var marker = L.circle(center, 1600, {
+          color: 'black',
+          opacity: 1,
+          strokeWidth: 1,
+          fillColor: 'white',
+          fillOpacity: 1
+        })
+        .addTo(map);
 
-    marker.bindPopup(school.name);
+      marker.bindPopup(school.name);
+    } else {
+      console.warn('no school location:', school);
+      mapContainer.classList.add('hidden');
+    }
   });
 
   function hashChange() {

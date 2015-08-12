@@ -35,7 +35,17 @@ body_scripts:
       <div class="container section contained-no-radius">
 
         <div class="school-heading">
-          <h1 class="name">School Name</h1>
+
+          <div class="investigation-major-wrapper"
+            data-bind="under_investigation" aria-hidden="true">
+            <a>
+              <p class="investigation-major" aria-describedby="tip-investigation-major">
+                Under investigation <i class="tooltip-target fa fa-info-circle"></i>
+              </p>
+            </a>
+          </div>
+          
+          <h1 data-bind="name">School Name</h1>
 
           <h2 class="location">
             <span data-bind="city">City</span>,
@@ -228,27 +238,9 @@ body_scripts:
 
                   <div>
                     <h2>Typical Monthly Loan Payment</h2>
-                    <strong class="fact_number" data-bind="average_monthly_loan_payment">$XXX<span>/mo</span></strong>
-
-                    <!--
-                    <p>This is about equal to:</p>
-                    <ul class="group_inline" data-bind="loan_payment_equivalents">
-                      <li>
-                        <div class="group_inline-left"><img src="{{ site.baseurl }}/img/education.svg" alt="Education"></div>
-                        <div class="group_inline-right" data-bind="text">
-                          XX% of a graduate's monthly salary
-                        </div>
-                      </li>
-                      <li>
-                        <div class="group_inline-left"><img src="{{ site.baseurl }}/img/education.svg" alt= class="school-callout""Education"></div>
-                        <div class="group_inline-right">X months' car payments</div>
-                      </li>
-                      <li>
-                        <div class="group_inline-left"><img src="{{ site.baseurl }}/img/education.svg" alt="Education"></div>
-                        <div class="group_inline-right">XX% of a month's rent</div>
-                      </li>
-                    </ul>
-                    -->
+                    <strong class="fact_number">
+                      <span data-bind="average_monthly_loan_payment">$XXX</span>/mo
+                    </strong>
                   </div>
 
                   <div>
@@ -366,7 +358,7 @@ body_scripts:
               </h1>
 
               <div id="student-content" aria-hidden="true">
-                
+
                 <div class="school-student-intro">
 
                   <ul class="school-key_figures key-figures">
@@ -490,12 +482,31 @@ body_scripts:
                   <p>Students who were admitted typically had standardized test score in these ranges.</p>
 
                   <h3 class="h2">SAT</h3>
-                  <picc-range min="0" max="2400" lower="840" upper="1820" middle="1105">
-                  </picc-range>
+
+                  <figure data-bind="sat_reading_scores_visible">
+                    <h4>Critical Reading</h4>
+                    <picc-range data-bind="sat_reading_scores" max="800">
+                    </picc-range>
+                  </figure>
+
+                  <figure data-bind="sat_math_scores_visible">
+                    <h4>Math</h4>
+                    <picc-range data-bind="sat_math_scores" max="800">
+                    </picc-range>
+                  </figure>
+
+                  <figure data-bind="sat_writing_scores_visible">
+                    <h4>Writing</h4>
+                    <picc-range data-bind="sat_writing_scores" max="800">
+                    </picc-range>
+                  </figure>
 
                   <h3 class="h2">ACT</h3>
-                  <picc-range min="1" max="36" lower="19" upper="25" middle="22">
-                  </picc-range>
+
+                  <figure data-bind="act_scores_visible">
+                    <picc-range data-bind="act_scores" min="0" max="36">
+                    </picc-range>
+                  </figure>
 
                 </div>
               </div>
@@ -517,9 +528,9 @@ body_scripts:
 
                   <div class="school-academics-fact group_inline">
                     <div class="group_inline-left"><strong class="fact_number" data-bind="num_available_programs">X</strong></div>
-                    <div class="group_inline-right"><h2>Programs Offered</h2></div>
+                    <div class="group_inline-right"><h2><span data-bind="programs_plural">Programs</span> Offered</h2></div>
                   </div>
-                  
+
                   <h2>Most Popular Programs</h2>
                   <ol class="decimal school-programs" data-bind="popular_programs">
                     <li><span class="program"></span> (<span class="percent"></span>)</li>
@@ -527,19 +538,19 @@ body_scripts:
                 </div>
 
                 <div class="school-two_col-right">
-                
+
                   <h2>Available Areas of Study</h2>
                   <ul class="school-long_list" data-bind="available_programs">
                     <li><span class="program">Management</span></li>
                   </ul>
-                
+
                 </div>
               </div>
             </div>
           </aria-accordion>
         </div>
 
-        
+
 
       </div>
 

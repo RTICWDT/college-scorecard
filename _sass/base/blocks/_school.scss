@@ -241,7 +241,7 @@
   border-top: $thin-border-size solid $base-border-color;
   height: 375px;
   margin-top: $base-padding-lite;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   li {
     border-bottom: $thin-border-size solid $base-border-color;
