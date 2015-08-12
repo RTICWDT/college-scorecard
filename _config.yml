@@ -30,7 +30,7 @@ stylesheets:
   - styles.css
 
 # API configuration
-api:
+API:
   baseurl: https://api.data.gov/TEST/ed/
 
 # specify paths to exclude from copying to _site
