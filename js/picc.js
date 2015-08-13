@@ -124,7 +124,7 @@
    * object.
    */
   var SPECIAL_DESIGNATIONS = {
-    // TODO: rename 'aanapi' or 'aanapisi'
+    // TODO: rename 'aanapi' to 'aanapisi'?
     // per <http://www2.ed.gov/programs/aanapi/index.html>
     aanipi:               'AANAPI',
     hispanic:             'Hispanic',
@@ -272,6 +272,10 @@
     LOCALE:               'school.locale',
 
     SIZE:                 '2013.student.size',
+
+    WOMEN_ONLY:           'school.women_only',
+    MEN_ONLY:             'school.men_only',
+    MINORITY_SERVING:     'school.minority_serving',
 
     PREDOMINANT_DEGREE:   'school.degrees_awarded.predominant',
     UNDER_INVESTIGATION:  'school.HCM2',
@@ -487,18 +491,25 @@
 
   picc.access.location = picc.access(picc.fields.LOCATION);
 
+  /**
+   * Returns an array of special designation strings for a given school object.
+   *
+   * @param {Object} school the school data object
+   * @return {Array} an array of human-readable strings
+   */
   picc.access.specialDesignations = function(d) {
     var designations = [];
 
-    if (+d.women_only) {
+    if (+picc.access(picc.fields.WOMEN_ONLY)(d)) {
       designations.push(SPECIAL_DESIGNATIONS.women_only);
-    } else if (+d.men_only) {
+    } else if (+picc.access(picc.fields.MEN_ONLY)(d)) {
       designations.push(SPECIAL_DESIGNATIONS.men_only);
     }
 
-    if (d.minority_serving) {
+    var minorityServing = picc.access(picc.fields.MINORITY_SERVING)(d);
+    if (minorityServing) {
       for (var key in SPECIAL_DESIGNATIONS) {
-        if (+d.minority_serving[key]) {
+        if (+minorityServing[key]) {
           designations.push(SPECIAL_DESIGNATIONS[key]);
         }
       }
