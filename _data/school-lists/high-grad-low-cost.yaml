@@ -5,49 +5,49 @@
 
 school-list-item:
   - name: "Universidad Teologica del Caribe"
-    stats: 100%, $7,026 
+    stats: "100%", "$7,026" 
   - name: "Curtis Institute of Music"
-    stats: 100%, $6,286
+    stats: "100%", "$6,286"
   - name: "Franklin W Olin College of Engineering"
-    stats: 99%, $4,077
+    stats: "99%", "$4,077"
   - name: "Princeton University"
-    stats: 97%, $5,720
+    stats: "97%", "$5,720"
   - name: "Amherst College"
-    stats: 96%, $3,739
+    stats: "96%", "$3,739"
   - name: "Pomona College"
-    stats: 96%, $4,935
+    stats: "96%", "$4,935"
   - name: "Williams College"
-    stats: 95%, $8,202
+    stats: "95%", "$8,202"
   - name: "Dartmouth College"
-    stats: 95%, $7,648
+    stats: "95%", "$7,648"
   - name: "Brown University"
-    stats: 95%, $6,104
+    stats: "95%", "$6,104"
   - name: "Vassar College"
-    stats: 94%, $5,062
+    stats: "94%", "$5,062"
   - name: "Middlebury College"
-    stats: 94%, $8,514
+    stats: "94%", "$8,514"
   - name: "Haverford College"
-    stats: 93%, $5,648
+    stats: "93%", "$5,648"
   - name: "Bowdoin College"
-    stats: 93%, $6,731
+    stats: "93%", "$6,731"
   - name: "University of Virginia-Main Campus"
-    stats: 93%, $7,007
+    stats: "93%", "$7,007"
   - name: "Hamilton College"
-    stats: 93%, $7,245
+    stats: "93%", "$7,245"
   - name: "Colby College"
-    stats: 93%, $6,443
+    stats: "93%", "$6,443"
   - name: "Wesleyan University"
-    stats: 92%, $7,455
+    stats: "92%", "$7,455"
   - name: "Rice University"
-    stats: 91%, $7,960
+    stats: "91%", "$7,960"
   - name: "Washington and Lee University"
-    stats: 90%, $7,663
+    stats: "90%", "$7,663"
   - name: "University of North Carolina at Chapel Hill"
-    stats: 90%, $6,543
+    stats: "90%", "$6,543"
   - name: "University of Michigan-Ann Arbor"
-    stats: 90%, $7,156
+    stats: "90%", "$7,156"
   - name: "Yeshiva Shaar Hatorah"
-    stats: 88%, $4,518
+    stats: "88%", "$4,518"
    - name: "University of Florida"
-    stats: 87%, $8,275
+    stats: "87%", "$8,275"
 
