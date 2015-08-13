@@ -6,6 +6,9 @@
     return showError('No school ID provided');
   }
 
+  d3.select('#referrer-link')
+    .attr('href', document.referrer || null);
+
   picc.API.getAll({
     metadata: 'data.json',
     school: [picc.API.getSchool, id]
