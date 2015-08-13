@@ -44,22 +44,25 @@
     if (req) req.cancel();
 
     resultsRoot.classList.add('js-loading');
+    resultsRoot.classList.remove('js-loaded');
+    resultsRoot.classList.remove('js-error');
+
     picc.API.search(params, function(error, data) {
-      resultsRoot.classList.remove('hidden');
       resultsRoot.classList.remove('js-loading');
 
       if (error) {
+        resultsRoot.classList.add('js-error');
         return showError(error);
       }
+
+      resultsRoot.classList.add('js-loaded');
 
       var format = picc.format;
 
       console.log('loaded schools:', data);
-      resultsRoot.classList.add('js-loaded');
 
-      console.time('[render]');
+      console.time && console.time('[render]');
 
-      console.time('[render] template');
       // render the basic DOM template for each school
       tagalong(resultsRoot, data, {
         results_word: format.plural('total', 'Result'),
@@ -69,15 +72,12 @@
       var resultsList = resultsRoot.querySelector('.schools-list');
       tagalong(resultsList, data.results, picc.school.directives);
 
-      console.timeEnd('[render] template');
-
-      console.timeEnd('[render]');
+      console.timeEnd && console.timeEnd('[render]');
     });
   }
 
   function showError(error) {
     console.error('error:', error);
-    resultsRoot.classList.add('js-error');
     var message = resultsRoot.querySelector('.error-message');
     message.textContent = String(error.responseText || 'There was an unexpected API error.');
   }
