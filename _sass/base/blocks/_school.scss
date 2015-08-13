@@ -8,6 +8,14 @@
 
 .school-back {
   padding-top: $base-padding;
+
+  .link-more {
+    display: none;
+  }
+
+  .link-more[href] {
+    display: inline-block;
+  }
 }
 
 .school-left {

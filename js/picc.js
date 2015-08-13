@@ -3,19 +3,51 @@
 ---
 (function(exports) {
 
+  // create the global picc namespace
   var picc = exports.picc = {};
 
+  // the base URL is filled in by Jekyll
   picc.BASE_URL = '{{ site.baseurl }}';
 
+  /**
+   * picc.API is a singleton object with methods to query the open-data-maker
+   * JSON API. Its base URL (`picc.API.url`) and API key (`picc.API.key`) are
+   * filled in by Jekyll.
+   *
+   * All of the API's methods are asynchronous, and use "error-first"
+   * (Node.js-style) callbacks:
+   *
+   * @example
+   * picc.API.get('school', {id: 100}, function(error, res) {
+   *   // error is an XMLHttpRequest object
+   *   if (error) return alert("Error: " + error.responseText);
+   *   console.log('got data:', res);
+   * });
+   *
+   */
   picc.API = (function() {
     var API = {
       url: '{{ site.API.baseurl }}',
       key: '{{ site.API.key }}'
     };
 
+    // the API endpoint (URI) at which to find school data
     var schoolEndpoint = 'school/';
+
+    // the school's primary key field
     var idField = 'id';
 
+    /**
+     * get an endpoint with optional query string parameters, and call the
+     * `callback` function when the response is completed.
+     *
+     * @param {String}          uri       the URI to request, relative to
+     *                                    `picc.API.url`
+     * @param {String|Object?}  params    query string
+     * @param {Function}        callback  the error-first callback:
+     *                                    `callback(error, response)`
+     * @return {Object} the d3.xhr() wrapper object
+     */
     API.get = function(uri, params, done) {
       // console.debug('[API] get("%s", %s)', uri, JSON.stringify(params));
       if (arguments.length === 2) {
@@ -30,20 +62,34 @@
       return d3.json(url, done);
     };
 
-    API.load = function(uri, done) {
-      var ext = uri.split('.').pop();
-      var load = d3[ext || 'json'];
-      return load(uri, done);
-    };
-
+    /**
+     * Generate a endpoint function that hits a fixed URI.
+     *
+     * @example
+     * API.search = API.endpoint('search/');
+     *
+     * @param {String}    uri
+     * @return {Function} a function that calls `picc.API.get(uri)` with the
+     *                    provided parameters and callback.
+     */
     API.endpoint = function(uri) {
       return function endpoint(params, done) {
         return API.get(uri, params, done);
       };
     };
 
+    // the search endpoint
     API.search = API.endpoint(schoolEndpoint);
 
+    /**
+     * A helper function to get data for a single school.
+     *
+     * @param {String|Number} id  the school primary key identifier
+     * @param {Function} callback the callback function, as in
+     *                            `picc.API.get()`, that receives a single
+     *                            school's data as its second parameter on
+     *                            success.
+     */
     API.getSchool = function(id, done) {
       var data = {};
       data[idField] = id;
@@ -57,6 +103,26 @@
       });
     };
 
+    /**
+     * Get multiple URIs specified as an object, and call the `callback`
+     * function with a similarly structured object containing data for each
+     * URI.
+     *
+     * @example
+     * picc.API.getAll({
+     *   metadata: 'data.json',
+     *   school: [picc.API.getSchool, 100]
+     * }, function(error, data) {
+     *   console.log('got metadata:', data.metadata);
+     *   console.log('got school:', data.school);
+     * });
+     *
+     * @param {Object}    urls      a map of properties to either URIs or
+     *                              Arrays, in which the first element is the
+     *                              function to call and the rest are arguments.
+     * @param {Function}  callback  the callback function:
+     *                              `callback(error, data)`
+     */
     API.getAll = function(urls, done) {
       Object.keys(urls).forEach(function(key) {
         var url = urls[key];
@@ -77,6 +143,13 @@
       return async.parallel(urls, done);
     };
 
+    /**
+     * add the API key (if set) to either an object or string of query
+     * parameters, and return the parameters as a query string.
+     *
+     * @param {String|Object} params
+     * @return {String}
+     */
     function addAPIKey(params) {
       var param = 'api_key';
       if (typeof params === 'object') {
@@ -91,6 +164,14 @@
       return params;
     }
 
+    /**
+     * Join an array of strings with a `glue` string and de-dupe repeated glue
+     * strings.
+     *
+     * @param {Array} list
+     * @param {String} glue
+     * @return {String}
+     */
     function join(list, glue) {
       for (var i = 0; i < list.length; i++) {
         var str = String(list[i]);
@@ -103,6 +184,14 @@
       return list.join(glue);
     }
 
+    /**
+     * Iterate over the keys of an `object` and replace any that have Array
+     * values with strings joined with `glue`.
+     *
+     * @param {Object} obj
+     * @param {String?} glue
+     * @return {Object} the original object
+     */
     function collapseArrays(obj, glue) {
       if (!glue) glue = ',';
       for (var key in obj) {
@@ -124,7 +213,7 @@
    * object.
    */
   var SPECIAL_DESIGNATIONS = {
-    // TODO: rename 'aanapi' or 'aanapisi'
+    // TODO: rename 'aanapi' to 'aanapisi'?
     // per <http://www2.ed.gov/programs/aanapi/index.html>
     aanipi:               'AANAPI',
     hispanic:             'Hispanic',
@@ -135,6 +224,7 @@
     men_only:             'Men Only'
   };
 
+  // this is our "n/a" string that we display for null numeric values
   var NA = '--';
 
   /**
@@ -272,6 +362,10 @@
     LOCALE:               'school.locale',
 
     SIZE:                 '2013.student.size',
+
+    WOMEN_ONLY:           'school.women_only',
+    MEN_ONLY:             'school.men_only',
+    MINORITY_SERVING:     'school.minority_serving',
 
     PREDOMINANT_DEGREE:   'school.degrees_awarded.predominant',
     UNDER_INVESTIGATION:  'school.HCM2',
@@ -487,18 +581,25 @@
 
   picc.access.location = picc.access(picc.fields.LOCATION);
 
+  /**
+   * Returns an array of special designation strings for a given school object.
+   *
+   * @param {Object} school the school data object
+   * @return {Array} an array of human-readable strings
+   */
   picc.access.specialDesignations = function(d) {
     var designations = [];
 
-    if (+d.women_only) {
+    if (+picc.access(picc.fields.WOMEN_ONLY)(d)) {
       designations.push(SPECIAL_DESIGNATIONS.women_only);
-    } else if (+d.men_only) {
+    } else if (+picc.access(picc.fields.MEN_ONLY)(d)) {
       designations.push(SPECIAL_DESIGNATIONS.men_only);
     }
 
-    if (d.minority_serving) {
+    var minorityServing = picc.access(picc.fields.MINORITY_SERVING)(d);
+    if (minorityServing) {
       for (var key in SPECIAL_DESIGNATIONS) {
-        if (+d.minority_serving[key]) {
+        if (+minorityServing[key]) {
           designations.push(SPECIAL_DESIGNATIONS[key]);
         }
       }
@@ -507,6 +608,16 @@
     return designations;
   };
 
+  /**
+   * Returns an array of program areas for a given school object from the API.
+   *
+   * @param {Object}  school    the school data object
+   * @param {Object?} metadata  the optional API metadata object. If this is
+   *                            falsy, we look for metadata in `school.metadata`.
+   * @return {Array}  an Array of Objects, each with `program` (the name) and
+   *                  `percent` (a decimal number or string representing its
+   *                  share of student enrollment) properties.
+   */
   picc.access.programAreas = function(d, metadata) {
     if (!metadata) metadata = d.metadata;
     if (!metadata || !metadata.dictionary) return [];
@@ -524,8 +635,8 @@
           ? (dictionary[dictKey].description || key)
           : key;
         return {
-          program:  name,
-          percent:  value
+          program: name,
+          percent: value
         };
       })
       .filter(function(d) {
@@ -533,17 +644,19 @@
       });
   };
 
+  /**
+   * @param {*} value
+   * @return {*} `null` if `value === "NULL"`, otherwise the value as-is.
+   */
   picc.nullify = function(value) {
     return value === 'NULL' ? null : value;
   };
 
-  /**
-   * namespace for school-related stuff
-   */
+  // namespace for school-related stuff
   picc.school = {};
 
   /**
-   * common directives for school templates
+   * Common directives for school templates, for use with tagalong.
    */
   picc.school.directives = (function() {
     var access = picc.access;
@@ -797,11 +910,14 @@
   picc.form = {};
 
   /**
-   * Adds a "submit" listener to the provided formdb.Form
-   * instance (or CSS selector) that intercepts its data,
-   * formats it as a querystring, then does a client-side
-   * redirect with window.location, effectively removing
-   * the query string parameters for empty inputs.
+   * Adds a "submit" listener to the provided formdb.Form instance (or CSS
+   * selector) that intercepts its data, formats it as a querystring, then does
+   * a client-side redirect with window.location, effectively removing the
+   * query string parameters for empty inputs.
+   *
+   * @param {String|Object} form  the form CSS selector or `formdb.Form`
+   *                              instance.
+   * @return {Object} the `formdb.Form` instance.
    */
   picc.form.minifyQueryString = function(form) {
 
@@ -824,9 +940,20 @@
     return form;
   };
 
+
   // UI tools
   picc.ui = {};
 
+  /**
+   * Expand all of the accordions on the page (or only those matching the
+   * provided selector) according to an `expanded` value or function.
+   *
+   * @param {String?} selector  an optional CSS selector to find accordions.
+   *                            The default is `"aria-accordion"`.
+   * @param {Boolean|Function} expanded a value or function that should return
+   *                                    `true` for expanded accordions, and
+   *                                    `false` otherwise.
+   */
   picc.ui.expandAccordions = function(selector, expanded) {
     if (arguments.length === 1) {
       expanded = selector;
@@ -843,16 +970,39 @@
       .property('expanded', true);
   };
 
-  // this is the equivalent of $(function), aka DOMReady
+  /**
+   * Calls the `callback` function immediately if `document.readyState ===
+   * 'complete'`, otherwise calls it when the window dispatches a `load` event.
+   *
+   * @param {Function} callback
+   * @return {Boolean} `true` if called immediately, `false` otherwise.
+   */
   picc.ready = function(callback) {
     if (document.readyState === 'complete') {
-      return callback();
+      callback();
+      return true;
     } else {
       window.addEventListener('load', callback);
+      return false;
     }
   };
 
-  // debounce function
+  /**
+   * A function debouncer. This returns a function that will call `fn` after
+   * `delay` milliseconds, and will squash previous calls to avoid race
+   * conditions. In this example, the `update` function will only be called
+   * once, 100ms later:
+   *
+   * @example
+   * var deferredUpdate = picc.debounce(update, 100);
+   * deferredUpdate();
+   * deferredUpdate();
+   *
+   * @param {Function} fn   the function to call
+   * @param {Number} delay  the call delay in milliseconds
+   * @return {Function}     the wrapped function, which returns a
+   *                        `setTimeout()` identifier for canceling.
+   */
   picc.debounce = function(fn, delay) {
     var timeout;
     return function() {
@@ -864,8 +1014,42 @@
     };
   };
 
-  picc.delegate = function(root, qualify, event, listener) {
-    if (Array.isArray(event)) {
+  /**
+   * This is an event delegation helper that allows us to listen for events on
+   * a parent element and call the handler iff (if and only if) the qualify
+   * function returns true for the event's target element.
+   *
+   * The advantage of this approach is that we don't have to add listeners to
+   * specific elements, which means that we don't have to add and remove
+   * listeners whenever templated elements are added and removed from the DOM.
+   *
+   * We use this to implement tooltips by listening for mouseenter/mouseleave
+   * and focus/blur events on the body and only calling the event handler if
+   * the target element has an aria-describedy attribute that begins with
+   * "tip-".
+   *
+   * @example
+   * picc.delegate(document.body, function(target) {
+   *   return target.hasAttribute('data-alert');
+   * }, 'click', function(e) {
+   *   alert(e.target.getAttribute('data-alert'));
+   * });
+   *
+   * @argument {Element} root       the top-most element at which events should
+   *                                be captured
+   * @argument {Function} qualify   this function should return `true` for a
+   *                                given element if the handler is to be called
+   * @argument {*} event            the event or events to listen for, which
+   *                                can be specified as a string (single event),
+   *                                an Array (multiple events), or an Object
+   *                                mapping event types to listeners.
+   * @return {Object|Function}      the delegated event listener(s), which you
+   *                                can pass to `root.removeEventListener()`.
+   *                                The structure matches that of the `event`
+   *                                parameter.
+   */
+  picc.delegate = function(root, qualify, event, listener) { if
+    (Array.isArray(event)) {
       return event.map(function(e) {
         return picc.delegate(root, qualify, e, listener);
       });
@@ -887,7 +1071,6 @@
     root.addEventListener(event, _listener, true);
     return listener;
   };
-
 
   // data tools
   picc.data = {};
@@ -939,7 +1122,15 @@
     }).join(',');
   };
 
+  /**
+   * Tooltip helper functions.
+   */
   picc.tooltip = {
+
+    /**
+     * This is an hover/focus event listener that will attach the corresponding
+     * tooltip to this element's tooltip-target.
+     */
     show: function showTooltip() {
       var tooltip = this.tooltip;
       if (!tooltip) {
@@ -956,12 +1147,23 @@
       picc.tooltip.constrain(tooltip, ref);
     },
 
+    /**
+     * This is an leave/blur event listener that will hide the attached
+     * tooltip, but leave it in place for debugging.
+     */
     hide: function hideTooltip() {
       if (!this.tooltip) return;
       var tooltip = this.tooltip;
       tooltip.setAttribute('aria-hidden', true);
     },
 
+    /**
+     * This helper function positions the tooltip relative to its target
+     * parent by measuring the size of both and their position relative to the
+     * viewport (`window.innerWidth` and `window.innerHeight`) so that the
+     * tooltip's content (`.tooltip-content`) can be shifted left, right, up or
+     * down accordingly.
+     */
     constrain: function(tooltip, parent) {
       // remove the tooltip so we can accurately calculate
       // the outer element's size
@@ -1006,6 +1208,11 @@
     }
   };
 
+  /**
+   * add event listeners for the tooltips by listening for mouseenter,
+   * mouseleave, focus and blur events on elements that have an
+   * aria-describedby attribute that begins with "tip-".
+   */
   picc.ready(function() {
     var described = 'aria-describedby';
     picc.delegate(
