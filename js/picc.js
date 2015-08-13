@@ -477,7 +477,7 @@
     var ft = (size - size * ptShare) * retention.full_time;
     if (isNaN(pt) || isNaN(ft)) return null;
 
-    console.log('retention:', retention, [pt, ft], 'size:', size);
+    // console.log('retention:', retention, [pt, ft], 'size:', size);
     return (pt + ft) / size;
   };
 

@@ -11,6 +11,13 @@ body_scripts:
   - search.js
 ---
 
+{% assign show_search_filters = true %}
+{% assign search_form_nested = true %}
+
+<form id="search-form" is="search-form"
+  autocomplete="false"
+  action="{{ page.permalink }}" method="GET">
+
 <!-- Search results -->
 <section class="results search-results loadable">
 
@@ -20,7 +27,6 @@ body_scripts:
       <legend>Edit Search Criteria</legend>
       <h2 class="results-filter-title">Edit Search Criteria</h2>
 
-      {% assign show_search_filters = true %}
       {% include search-form.html %}
 
     </div>
@@ -56,11 +62,9 @@ body_scripts:
               <!-- <div class="u-group_inline-right"> -->
                 <label for="select-sort">Sort by:</label>
                 <select id="select-sort" name="sort">
-                  <option value="Sort one">Sort one</option>
-                  <option value="Sort two">Sort two</option>
-                  <option value="Sort three">Sort three</option>
-                  <option value="Sort four">This option is super long</option>
-                  <i class="fa fa-chevron-down"></i>
+                  <option selected value="2011.earnings.gt_25k_p10:desc">Earnings</option>
+                  <option value="2013.student.size:asc">Size (small to large)</option>
+                  <option value="2013.student.size:desc">Size (large to small)</option>
                 </select>
               <!-- </div> -->
 
@@ -175,5 +179,6 @@ body_scripts:
 
   </div>
 
-
 </section>
+
+</form>

@@ -1,6 +1,9 @@
+{% if search_form_nested != true %}
 <form id="search-form" is="search-form"
   autocomplete="false"
   action="{{ site.baseurl }}/search/" method="GET">
+{% endif %}
+
   {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
 
   <input type="hidden" name="school.HCM2">
@@ -274,4 +277,6 @@
 
   </div>
 
+{% if search_form_nested != true %}
 </form>
+{% endif %}
