@@ -360,6 +360,7 @@
     LOCATION:             'school.location',
     OWNERSHIP:            'school.ownership',
     LOCALE:               'school.locale',
+    REGION_ID:            'school.region_id',
 
     SIZE:                 '2013.student.size',
 
