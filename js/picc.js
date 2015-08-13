@@ -888,6 +888,57 @@
     return listener;
   };
 
+
+  // data tools
+  picc.data = {};
+
+  picc.data.extend = function(obj, a, b) {
+    for (var i = 1, len = arguments.length; i < len; i++) {
+      var arg = arguments[i];
+      if (typeof arg === 'object') {
+        for (var key in arg) obj[key] = arg[key];
+      }
+    }
+    return obj;
+  };
+
+  picc.data.rangify = function(obj, key, values) {
+    switch (values.length) {
+      case 0:
+        return;
+      case 1:
+        return obj[key] = values[0];
+    }
+
+    values = values.sort(d3.ascending).map(Number);
+
+    var range = [values.shift()];
+    var ranges = [range];
+    while (values.length) {
+      var value = values.shift();
+      var previous = range[range.length - 1];
+      if (value === previous + 1) {
+        range.push(value);
+      } else {
+        ranges.push(range = [value]);
+      }
+    }
+
+    return obj[key + '__range'] = ranges.map(function(range, i) {
+      var min = range.shift();
+      var max = range.length ? range.pop() : min;
+      if (min === max) {
+        switch (i) {
+          case 0:
+            return '..' + min;
+          case ranges.length - 1:
+            return max + '..';
+        }
+      }
+      return [min, max].join('..');
+    }).join(',');
+  };
+
   picc.tooltip = {
     show: function showTooltip() {
       var tooltip = this.tooltip;

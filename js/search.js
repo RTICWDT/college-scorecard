@@ -14,13 +14,13 @@
     form.setData(query);
     // console.log('states:', form.getInputsByName('state'), form.get('state'));
 
-    change(form.getData());
+    change();
   });
 
   form.on('change', change);
 
   form.on('submit', function(data, e) {
-    change(data);
+    change();
     e.preventDefault();
     return false;
   });
@@ -32,11 +32,25 @@
     });
   });
 
-  function onChange(params) {
+  function onChange() {
+    var params = form.getData();
+
     // console.log('search params:', params);
     if (Array.isArray(params.state) && !params.state[0]) {
       delete params.state;
     }
+
+    var query = picc.data.extend({}, params);
+
+    if (query.region) {
+      if (Array.isArray(query.region)) {
+        picc.data.rangify(query, 'region_id', query.region);
+      } else {
+        query.region_id = query.region;
+      }
+      delete query.region;
+    }
+
     var qs = querystring.stringify(params);
     // update the URL
     history.pushState(params, 'search', '?' + qs);
@@ -47,7 +61,7 @@
     resultsRoot.classList.remove('js-loaded');
     resultsRoot.classList.remove('js-error');
 
-    picc.API.search(params, function(error, data) {
+    picc.API.search(query, function(error, data) {
       resultsRoot.classList.remove('js-loading');
 
       if (error) {

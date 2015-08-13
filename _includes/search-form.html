@@ -129,14 +129,32 @@
 
         </div>
 
-        <label for="select-region">Select a region
-          <select name="region_id" id="select-region">
-            <option value=""></option>
-            {% for region in site.data.regions|sort('name') %}
-            <option value="{{ region.id }}" data-states="{{ region.states }}">{{ region.name }}</option>
-            {% endfor %}
-          </select>
-        </label>
+        <div class="input-add group_inline">
+
+          <label for="select-region">
+            Select one or more regions
+          </label>
+
+          <multi-select>
+            <div class="u-group_inline u-group_inline-left">
+              <select name="region" class="select-region">
+                <option value=""></option>
+                {% for region in site.data.regions|sort('name') %}
+                <option value="{{ region.id }}" data-states="{{ region.states }}">{{ region.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="u-group_inline u-group_inline-right u-nowrap">
+              <button class="button button-add">
+                Add Region
+              </button>
+              <button class="button button-remove">
+                &times;
+              </button>
+            </div>
+          </multi-select>
+
+        </div>
 
         <div class="group_inline">
 
