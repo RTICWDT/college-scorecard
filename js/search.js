@@ -68,6 +68,31 @@
       delete query.degree;
     }
 
+    // only query the fields that we care about
+    query.fields = [
+      // basic display fields
+      picc.fields.NAME,
+      picc.fields.CITY,
+      picc.fields.STATE,
+      picc.fields.SIZE,
+      // to get "public" or "private"
+      picc.fields.OWNERSHIP,
+      // to get the "four_year" or "lt_four_year" bit
+      picc.fields.PREDOMINANT_DEGREE,
+      // get both of the net price values
+      picc.fields.NET_PRICE + '.public',
+      picc.fields.NET_PRICE + '.private',
+      // get both of the completion rate values
+      picc.fields.COMPLETION_RATE + '.four_year',
+      picc.fields.COMPLETION_RATE + '.lt_four_year',
+      // this has no sub-fields
+      picc.fields.MEDIAN_EARNINGS,
+      // not sure if we need this, but let's get it anyway
+      picc.fields.EARNINGS_GT_25K,
+      // under investigation flag
+      picc.fields.UNDER_INVESTIGATION
+    ].join(',');
+
     var qs = querystring.stringify(params);
     qs = qs.replace(/^&/, '');
     // update the URL
