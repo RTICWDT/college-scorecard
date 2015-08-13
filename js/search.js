@@ -62,6 +62,7 @@
     }
 
     var qs = querystring.stringify(params);
+    qs = qs.replace(/^&/, '');
     // update the URL
     history.pushState(params, 'search', '?' + qs);
 
@@ -71,8 +72,12 @@
     resultsRoot.classList.remove('js-loaded');
     resultsRoot.classList.remove('js-error');
 
+    console.time && console.time('[load]');
+
     picc.API.search(query, function(error, data) {
       resultsRoot.classList.remove('js-loading');
+
+      console.timeEnd && console.timeEnd('[load]');
 
       if (error) {
         resultsRoot.classList.add('js-error');
