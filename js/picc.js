@@ -434,6 +434,7 @@
       var bits = key.split('.');
       var len = bits.length;
       return function(d) {
+        if (key in d) return d[key];
         for (var i = 0; i < len; i++) {
           d = d[bits[i]];
           if (d === null || d === undefined) return d;
@@ -458,10 +459,21 @@
    * @argument ... key
    * @return {*}
    */
-  picc.access.composed = function(key, sub1, sub2, etc) {
+  picc.access.composed = function(key0, key1, key2) {
     var keys = [].slice.call(arguments);
     var len = keys.length;
     return function nested(d) {
+
+      var _keys = keys.map(function(key) {
+        return (typeof key === 'function')
+          ? key.call(this, d)
+          : key;
+      }, this);
+
+      var _key = _keys.join('.');
+      // console.log('_key:', _key);
+      if (_key in d) return d[_key];
+
       var value = d;
       for (var i = 0; i < len; i++) {
         var key = keys[i];
@@ -539,8 +551,16 @@
   );
 
   picc.access.completionRate = function(d) {
-    var rate = picc.access(picc.fields.COMPLETION_RATE)(d);
     var key = picc.access.yearDesignation(d);
+    var rate = picc.access(picc.fields.COMPLETION_RATE)(d);
+    if (!rate) {
+      // XXX: this is for when the data is accessed as a
+      // "pre-nested" field, which is how Elasticsearch
+      // expresses data when you ask it for specific fields
+      var four = picc.access.composed(picc.fields.COMPLETION_RATE, 'four_year')(d);
+      var less = picc.access.composed(picc.fields.COMPLETION_RATE, 'lt_four_year')(d);
+      return four || less;
+    }
     if (rate[key] === 0) {
       console.warn('completion rate key mismatch: expected "%s", but got zero:', key, rate);
       return rate.four_year || rate.lt_four_year;
