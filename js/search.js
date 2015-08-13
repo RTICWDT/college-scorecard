@@ -3,6 +3,7 @@
   var resultsRoot = document.querySelector('.search-results');
   var form = new formdb.Form('#search-form');
   var query = querystring.parse(location.search.substr(1));
+
   // the current outbound request
   var req;
 
@@ -42,21 +43,27 @@
 
     var query = picc.data.extend({}, params);
 
+    // if the region is specified, add it either as a value or a
+    // range with picc.data.rangify()
     if (query.region) {
-      if (Array.isArray(query.region)) {
-        picc.data.rangify(query, 'region_id', query.region);
-      } else {
-        query.region_id = query.region;
-      }
+      // FIXME: 'region_id' should be `picc.fields.REGION_ID`
+      picc.data.rangify(query, 'region_id', query.region);
       delete query.region;
     }
 
+    // if a size is specified, just pass it along as a range
     if (query.size) {
+      // FIXME: 'size' should be `picc.fields.SIZE`
       query.size__range = query.size;
       delete query.size;
     }
 
+    // set the predominant degree, which can be either a value or
+    // a range (default: '2..3')
     if (query.degree) {
+      // FIXME: when we have support for nested keys,
+      // 'predominant' should be changed to
+      // `picc.fields.PREDOMINANT_DEGREE`
       picc.data.rangify(query, 'predominant', query.degree);
       delete query.degree;
     }
