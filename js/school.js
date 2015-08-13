@@ -162,7 +162,7 @@
       })
       .setView(center, 10);
 
-    L.tileLayer('http://tile.stamen.com/terrain/{z}/{x}/{y}.png')
+    L.tileLayer('http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png')
       .addTo(map);
 
     var marker = L.circle(center, 1600, {
