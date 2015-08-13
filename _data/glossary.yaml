@@ -8,9 +8,9 @@ repayment-rate: <strong>Students Repaying Loans on Time</strong> Percentage of b
 
 avg-debt: <strong>Average Total Debt</strong> The median debt of students who completed. This figure includes only federal Stafford loans; it excludes private student loans and Parent PLUS loans.
 
-avg-loan-payment=: <strong>Average Monthly Loan Payment</strong> The median monthly loan payment for students who completed, if it were repaid over 10 years at a 6 percent interest rate.
+avg-loan-payment: <strong>Average Monthly Loan Payment</strong> The median monthly loan payment for students who completed, if it were repaid over 10 years at a 6 percent interest rate.
 
-student-aid=: <strong>Students Receiving Financial Aid</strong> Percentage of students who receive some form of federal financial aid, be it loans or grants.
+student-aid: <strong>Students Receiving Financial Aid</strong> Percentage of students who receive some form of federal financial aid, be it loans or grants.
 
 retention-rate: <strong>Students Who Return After the First Year</strong> Percentage of students who return to the school after their first year.
 
