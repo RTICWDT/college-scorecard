@@ -51,6 +51,11 @@
       delete query.region;
     }
 
+    if (query.size) {
+      query.size__range = query.size;
+      delete query.size;
+    }
+
     var qs = querystring.stringify(params);
     // update the URL
     history.pushState(params, 'search', '?' + qs);
