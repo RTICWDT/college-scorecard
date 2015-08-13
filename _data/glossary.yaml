@@ -4,6 +4,20 @@ graduation-rate: <strong>Graduation Rate</strong> The rate of completion for ful
 
 avg-salary: <strong>Average Salary</strong> The median earnings of former students who received federal financial aid, at 10 years after entering the school.
 
+repayment-rate: <strong>Students Repaying Loans on Time</strong> Percentage of borrowers who have defaulted on their loan after entering repayment.
+
+avg-debt: <strong>Average Total Debt</strong> The median debt of students who completed. This figure includes only federal Stafford loans; it excludes private student loans and Parent PLUS loans.
+
+avg-loan-payment=: <strong>Average Monthly Loan Payment</strong> The median monthly loan payment for students who completed, if it were repaid over 10 years at a 6 percent interest rate.
+
+student-aid=: <strong>Students Receiving Financial Aid</strong> Percentage of students who receive some form of federal financial aid, be it loans or grants.
+
+retention-rate: <strong>Students Who Return After the First Year</strong> Percentage of students who return to the school after their first year.
+
 typical-earnings: <strong>Typical Earnings</strong> The median earnings of former students who received federal financial aid, at 10 years after entering the school.
+
+earnings-25k: <strong>Former Students Earning More Than $25K</strong> Percentage of students who earn more than $25K (the average salary for those with only a high school diploma) after leaving school.
+
+acceptance-rate: <strong>Acceptance Rate</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse odio velit, mattis at dictum aliquam, vestibulum quis enim. 
 
 hcm2: <strong>Under Investigation</strong> This school is on a Heightened Cash Monitoring, level 2 payment method because of federal compliance or financial issues.
