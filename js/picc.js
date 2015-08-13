@@ -3,19 +3,51 @@
 ---
 (function(exports) {
 
+  // create the global picc namespace
   var picc = exports.picc = {};
 
+  // the base URL is filled in by Jekyll
   picc.BASE_URL = '{{ site.baseurl }}';
 
+  /**
+   * picc.API is a singleton object with methods to query the open-data-maker
+   * JSON API. Its base URL (`picc.API.url`) and API key (`picc.API.key`) are
+   * filled in by Jekyll.
+   *
+   * All of the API's methods are asynchronous, and use "error-first"
+   * (Node.js-style) callbacks:
+   *
+   * @example
+   * picc.API.get('school', {id: 100}, function(error, res) {
+   *   // error is an XMLHttpRequest object
+   *   if (error) return alert("Error: " + error.responseText);
+   *   console.log('got data:', res);
+   * });
+   *
+   */
   picc.API = (function() {
     var API = {
       url: '{{ site.API.baseurl }}',
       key: '{{ site.API.key }}'
     };
 
+    // the API endpoint (URI) at which to find school data
     var schoolEndpoint = 'school/';
+
+    // the school's primary key field
     var idField = 'id';
 
+    /**
+     * get an endpoint with optional query string parameters, and call the
+     * `callback` function when the response is completed.
+     *
+     * @param {String}          uri       the URI to request, relative to
+     *                                    `picc.API.url`
+     * @param {String|Object?}  params    query string
+     * @param {Function}        callback  the error-first callback:
+     *                                    `callback(error, response)`
+     * @return {Object} the d3.xhr() wrapper object
+     */
     API.get = function(uri, params, done) {
       // console.debug('[API] get("%s", %s)', uri, JSON.stringify(params));
       if (arguments.length === 2) {
@@ -30,20 +62,34 @@
       return d3.json(url, done);
     };
 
-    API.load = function(uri, done) {
-      var ext = uri.split('.').pop();
-      var load = d3[ext || 'json'];
-      return load(uri, done);
-    };
-
+    /**
+     * Generate a endpoint function that hits a fixed URI.
+     *
+     * @example
+     * API.search = API.endpoint('search/');
+     *
+     * @param {String}    uri
+     * @return {Function} a function that calls `picc.API.get(uri)` with the
+     *                    provided parameters and callback.
+     */
     API.endpoint = function(uri) {
       return function endpoint(params, done) {
         return API.get(uri, params, done);
       };
     };
 
+    // the search endpoint
     API.search = API.endpoint(schoolEndpoint);
 
+    /**
+     * A helper function to get data for a single school.
+     *
+     * @param {String|Number} id  the school primary key identifier
+     * @param {Function} callback the callback function, as in
+     *                            `picc.API.get()`, that receives a single
+     *                            school's data as its second parameter on
+     *                            success.
+     */
     API.getSchool = function(id, done) {
       var data = {};
       data[idField] = id;
@@ -57,6 +103,26 @@
       });
     };
 
+    /**
+     * Get multiple URIs specified as an object, and call the `callback`
+     * function with a similarly structured object containing data for each
+     * URI.
+     *
+     * @example
+     * picc.API.getAll({
+     *   metadata: 'data.json',
+     *   school: [picc.API.getSchool, 100]
+     * }, function(error, data) {
+     *   console.log('got metadata:', data.metadata);
+     *   console.log('got school:', data.school);
+     * });
+     *
+     * @param {Object}    urls      a map of properties to either URIs or
+     *                              Arrays, in which the first element is the
+     *                              function to call and the rest are arguments.
+     * @param {Function}  callback  the callback function:
+     *                              `callback(error, data)`
+     */
     API.getAll = function(urls, done) {
       Object.keys(urls).forEach(function(key) {
         var url = urls[key];
@@ -77,6 +143,13 @@
       return async.parallel(urls, done);
     };
 
+    /**
+     * add the API key (if set) to either an object or string of query
+     * parameters, and return the parameters as a query string.
+     *
+     * @param {String|Object} params
+     * @return {String}
+     */
     function addAPIKey(params) {
       var param = 'api_key';
       if (typeof params === 'object') {
@@ -91,6 +164,14 @@
       return params;
     }
 
+    /**
+     * Join an array of strings with a `glue` string and de-dupe repeated glue
+     * strings.
+     *
+     * @param {Array} list
+     * @param {String} glue
+     * @return {String}
+     */
     function join(list, glue) {
       for (var i = 0; i < list.length; i++) {
         var str = String(list[i]);
@@ -103,6 +184,14 @@
       return list.join(glue);
     }
 
+    /**
+     * Iterate over the keys of an `object` and replace any that have Array
+     * values with strings joined with `glue`.
+     *
+     * @param {Object} obj
+     * @param {String?} glue
+     * @return {Object} the original object
+     */
     function collapseArrays(obj, glue) {
       if (!glue) glue = ',';
       for (var key in obj) {
@@ -135,6 +224,7 @@
     men_only:             'Men Only'
   };
 
+  // this is our "n/a" string that we display for null numeric values
   var NA = '--';
 
   /**
@@ -925,7 +1015,7 @@
   };
 
   /**
-   * This is an event delegation helper that allows us to listen for events on 
+   * This is an event delegation helper that allows us to listen for events on
    * a parent element and call the handler iff (if and only if) the qualify
    * function returns true for the event's target element.
    *
