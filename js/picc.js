@@ -91,9 +91,9 @@
      *                            success.
      */
     API.getSchool = function(id, done) {
-      var data = {};
-      data[idField] = id;
-      return API.get(schoolEndpoint, data, function(error, res) {
+      var params = {};
+      params[idField] = id;
+      return API.get(schoolEndpoint, params, function(error, res) {
         if (error || !res.total) {
           return done(error.responseText || 'No such school found.');
         } else if (res.total > 1) {
@@ -354,6 +354,7 @@
   })();
 
   picc.fields = {
+    ID:                   'id',
     NAME:                 'school.name',
     CITY:                 'school.city',
     STATE:                'school.state',
