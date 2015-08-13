@@ -56,6 +56,11 @@
       delete query.size;
     }
 
+    if (query.degree) {
+      picc.data.rangify(query, 'predominant', query.degree);
+      delete query.degree;
+    }
+
     var qs = querystring.stringify(params);
     // update the URL
     history.pushState(params, 'search', '?' + qs);

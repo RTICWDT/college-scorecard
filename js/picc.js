@@ -1086,14 +1086,29 @@
   };
 
   picc.data.rangify = function(obj, key, values) {
-    switch (values.length) {
-      case 0:
-        return;
-      case 1:
-        return obj[key] = values[0];
+    if (Array.isArray(values)) {
+      switch (values.length) {
+        case 0:
+          values = '';
+          break;
+        case 1:
+          values = values[0];
+          break;
+      }
     }
 
-    values = values.sort(d3.ascending).map(Number);
+    if (!Array.isArray(values)) {
+      values = String(values);
+      if (values.indexOf('..') > -1) {
+        obj[key + '__range'] = values;
+      } else if (values) {
+        obj[key] = values;
+      }
+      return obj;
+    }
+
+    values = values.map(Number)
+      .sort(d3.ascending);
 
     var range = [values.shift()];
     var ranges = [range];
@@ -1107,7 +1122,7 @@
       }
     }
 
-    return obj[key + '__range'] = ranges.map(function(range, i) {
+    obj[key + '__range'] = ranges.map(function(range, i) {
       var min = range.shift();
       var max = range.length ? range.pop() : min;
       if (min === max) {
@@ -1120,6 +1135,8 @@
       }
       return [min, max].join('..');
     }).join(',');
+
+    return obj;
   };
 
   /**
