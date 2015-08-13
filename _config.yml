@@ -29,6 +29,9 @@ scripts:
 stylesheets:
   - styles.css
 
+# whether to include the Google Analytics & DAP snippets
+analytics: true
+
 # API configuration
 API:
   baseurl: https://api.data.gov/TEST/ed/

@@ -15,7 +15,10 @@
     {% for script in page.body_scripts %}
     <script src="{{ site.baseurl }}/js/{{ script }}" data-src="{{ script }}"></script>
     {% endfor %}
+
+    {% if site.analytics %}
     <script src="{{ site.baseurl }}/js/picc-analytics.js"></script>
     <script src="{{ site.baseurl }}/js/picc-dap.js"></script>
+    {% endif %}
   </body>
 </html>
