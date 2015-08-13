@@ -70,6 +70,8 @@
 
     // only query the fields that we care about
     query.fields = [
+      // we need the id to link it
+      picc.fields.ID,
       // basic display fields
       picc.fields.NAME,
       picc.fields.CITY,
