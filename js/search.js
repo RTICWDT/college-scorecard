@@ -6,7 +6,13 @@
 
   // the current outbound request
   var req;
-  var paging = false;
+
+  // "incremental" updates will only hide the list of schools, and
+  // not any of the other elements (results total, sort, pages)
+  var incremental = false;
+
+  // the maximum # of page links to show
+  var MAX_PAGES = 6;
 
   var change = picc.debounce(onChange, 100);
 
@@ -20,6 +26,12 @@
   });
 
   form.on('change', change);
+
+  // sort is an "incremental" update
+  form.on('change:sort', function() {
+    console.log('change sort!');
+    incremental = true;
+  });
 
   form.on('submit', function(data, e) {
     change();
@@ -100,20 +112,28 @@
 
     if (req) req.cancel();
 
-    resultsRoot.classList.add('js-loading');
-    resultsRoot.classList.remove('js-loaded');
-    resultsRoot.classList.remove('js-error');
+    var list = d3.select(resultsRoot)
+      .select('[data-bind="results"]');
+
+    if (incremental) {
+      list.classed('hidden', true);
+    } else {
+      resultsRoot.classList.add('js-loading');
+      resultsRoot.classList.remove('js-loaded');
+      resultsRoot.classList.remove('js-error');
+    }
 
     var paginator = resultsRoot.querySelector('.pagination');
-    paginator.classList.toggle('show-loading', paging);
+    paginator.classList.toggle('show-loading', incremental);
 
     console.time && console.time('[load]');
 
     picc.API.search(query, function(error, data) {
       resultsRoot.classList.remove('js-loading');
+      list.classed('hidden', false);
 
       paginator.classList.remove('show-loading');
-      paging = false;
+      incremental = false;
 
       console.timeEnd && console.timeEnd('[load]');
 
@@ -148,6 +168,16 @@
           };
         });
 
+      if (pages.length > MAX_PAGES) {
+        var offset = MAX_PAGES / 2;
+        var first = pages.slice(0, offset);
+        var last = pages.slice(pages.length - offset);
+        pages = first.concat([{
+          page: '...',
+          index: false
+        }], last);
+      }
+
       tagalong(paginator, {
         pages: pages
       }, {
@@ -158,7 +188,9 @@
           '@class': function(d) {
             return d.index === page
               ? 'page-selected'
-              : null;
+              : d.index === false
+                ? 'page-break'
+                : null;
           },
           link: {
             text: 'page',
@@ -168,19 +200,31 @@
             '@href': function(d) {
               return d.index === page
                 ? null
-                : '?' + querystring.stringify(picc.data.extend({}, params, {page: d.index}));
+                : d.index === false
+                  ? null
+                  : '?' + querystring.stringify(picc.data.extend({}, params, {page: d.index}));
             }
           }
         }
       });
 
-      d3.selectAll('a.select-page')
+      var pageLinks = d3.selectAll('a.select-page')
         .on('click', function() {
           d3.event.preventDefault();
-          var page = this.getAttribute('data-page');
-          console.log('page:', page);
-          form.set('page', page);
-          paging = true;
+
+          var _page = this.getAttribute('data-page');
+          if (_page === 'false') return;
+
+          pageLinks.each(function() {
+            var p = this.getAttribute('data-page');
+            var selected = p == _page;
+            this.parentNode.classList
+              .toggle('page-selected', selected);
+            // console.log('selected?', p, page, selected, '->', this.parentNode);
+          });
+
+          form.set('page', _page);
+          incremental = true;
           change();
         });
 
