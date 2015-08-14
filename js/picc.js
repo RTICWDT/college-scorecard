@@ -9,6 +9,11 @@
   // the base URL is filled in by Jekyll
   picc.BASE_URL = '{{ site.baseurl }}';
 
+  picc.errors = {
+    NO_SCHOOL_ID: 'No school ID was provided.',
+    NO_SUCH_SCHOOL: 'No school found.'
+  };
+
   /**
    * picc.API is a singleton object with methods to query the open-data-maker
    * JSON API. Its base URL (`picc.API.url`) and API key (`picc.API.key`) are
@@ -36,6 +41,9 @@
       key: '{{ site.API.key }}'
       {% endif %}
     };
+
+    // local alias for errors
+    var errors = picc.errors;
 
     // the API endpoint (URI) at which to find school data
     var schoolEndpoint = 'school/';
@@ -101,7 +109,9 @@
       data[idField] = id;
       return API.get(schoolEndpoint, data, function(error, res) {
         if (error || !res.total) {
-          return done(error.responseText || 'No such school found.');
+          return done(error
+            ? error.responseText || errors.NO_SUCH_SCHOOL
+            : errors.NO_SUCH_SCHOOL);
         } else if (res.total > 1) {
           console.warn('More than one school found for ID: "' + id + '"');
         }
