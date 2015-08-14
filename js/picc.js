@@ -105,9 +105,9 @@
      *                            success.
      */
     API.getSchool = function(id, done) {
-      var data = {};
-      data[idField] = id;
-      return API.get(schoolEndpoint, data, function(error, res) {
+      var params = {};
+      params[idField] = id;
+      return API.get(schoolEndpoint, params, function(error, res) {
         if (error || !res.total) {
           return done(error
             ? error.responseText || errors.NO_SUCH_SCHOOL
@@ -370,12 +370,14 @@
   })();
 
   picc.fields = {
+    ID:                   'id',
     NAME:                 'school.name',
     CITY:                 'school.city',
     STATE:                'school.state',
     LOCATION:             'school.location',
     OWNERSHIP:            'school.ownership',
     LOCALE:               'school.locale',
+    REGION_ID:            'school.region_id',
 
     SIZE:                 '2013.student.size',
 
@@ -449,6 +451,7 @@
       var bits = key.split('.');
       var len = bits.length;
       return function(d) {
+        if (key in d) return d[key];
         for (var i = 0; i < len; i++) {
           d = d[bits[i]];
           if (d === null || d === undefined) return d;
@@ -473,10 +476,21 @@
    * @argument ... key
    * @return {*}
    */
-  picc.access.composed = function(key, sub1, sub2, etc) {
+  picc.access.composed = function(key0, key1, key2) {
     var keys = [].slice.call(arguments);
     var len = keys.length;
     return function nested(d) {
+
+      var _keys = keys.map(function(key) {
+        return (typeof key === 'function')
+          ? key.call(this, d)
+          : key;
+      }, this);
+
+      var _key = _keys.join('.');
+      // console.log('_key:', _key);
+      if (_key in d) return d[_key];
+
       var value = d;
       for (var i = 0; i < len; i++) {
         var key = keys[i];
@@ -554,8 +568,16 @@
   );
 
   picc.access.completionRate = function(d) {
-    var rate = picc.access(picc.fields.COMPLETION_RATE)(d);
     var key = picc.access.yearDesignation(d);
+    var rate = picc.access(picc.fields.COMPLETION_RATE)(d);
+    if (!rate) {
+      // XXX: this is for when the data is accessed as a
+      // "pre-nested" field, which is how Elasticsearch
+      // expresses data when you ask it for specific fields
+      var four = picc.access.composed(picc.fields.COMPLETION_RATE, 'four_year')(d);
+      var less = picc.access.composed(picc.fields.COMPLETION_RATE, 'lt_four_year')(d);
+      return four || less;
+    }
     if (rate[key] === 0) {
       console.warn('completion rate key mismatch: expected "%s", but got zero:', key, rate);
       return rate.four_year || rate.lt_four_year;
@@ -1086,6 +1108,73 @@
     };
     root.addEventListener(event, _listener, true);
     return listener;
+  };
+
+  // data tools
+  picc.data = {};
+
+  picc.data.extend = function(obj, a, b) {
+    for (var i = 1, len = arguments.length; i < len; i++) {
+      var arg = arguments[i];
+      if (typeof arg === 'object') {
+        for (var key in arg) obj[key] = arg[key];
+      }
+    }
+    return obj;
+  };
+
+  picc.data.rangify = function(obj, key, values) {
+    if (Array.isArray(values)) {
+      switch (values.length) {
+        case 0:
+          values = '';
+          break;
+        case 1:
+          values = values[0];
+          break;
+      }
+    }
+
+    if (!Array.isArray(values)) {
+      values = String(values);
+      if (values.indexOf('..') > -1) {
+        obj[key + '__range'] = values;
+      } else if (values) {
+        obj[key] = values;
+      }
+      return obj;
+    }
+
+    values = values.map(Number)
+      .sort(d3.ascending);
+
+    var range = [values.shift()];
+    var ranges = [range];
+    while (values.length) {
+      var value = values.shift();
+      var previous = range[range.length - 1];
+      if (value === previous + 1) {
+        range.push(value);
+      } else {
+        ranges.push(range = [value]);
+      }
+    }
+
+    obj[key + '__range'] = ranges.map(function(range, i) {
+      var min = range.shift();
+      var max = range.length ? range.pop() : min;
+      if (min === max) {
+        switch (i) {
+          case 0:
+            return '..' + min;
+          case ranges.length - 1:
+            return max + '..';
+        }
+      }
+      return [min, max].join('..');
+    }).join(',');
+
+    return obj;
   };
 
   /**

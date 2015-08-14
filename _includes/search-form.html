@@ -129,14 +129,32 @@
 
         </div>
 
-        <label for="select-region">Select a region
-          <select name="region_id" id="select-region">
-            <option value=""></option>
-            {% for region in site.data.regions|sort('name') %}
-            <option value="{{ region.id }}" data-states="{{ region.states }}">{{ region.name }}</option>
-            {% endfor %}
-          </select>
-        </label>
+        <div class="input-add group_inline">
+
+          <label for="select-region">
+            Select one or more regions
+          </label>
+
+          <multi-select>
+            <div class="u-group_inline u-group_inline-left">
+              <select name="region" class="select-region">
+                <option value=""></option>
+                {% for region in site.data.regions|sort('name') %}
+                <option value="{{ region.id }}" data-states="{{ region.states }}">{{ region.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="u-group_inline u-group_inline-right u-nowrap">
+              <button class="button button-add">
+                Add Region
+              </button>
+              <button class="button button-remove">
+                &times;
+              </button>
+            </div>
+          </multi-select>
+
+        </div>
 
         <div class="group_inline">
 
@@ -178,9 +196,10 @@
         </label> -->
 
         <label for="major-type">Choose a program
-          <select id="major-type" name="major_type">
-            <option value=""></option>
-            <option>???</option>
+          <select id="major-type" name="degree">
+            <option value="2..3">Any</option>
+            <option value="2">Associates</option>
+            <option value="3">Bachelors</option>
           </select>
         </label>
       </div>
@@ -209,19 +228,19 @@
           <ul>
             <li>
               <label for="size-small" class="checkbox">
-                <input id="size-small" type="checkbox" name="size" value="small" tabindex="0">
+                <input id="size-small" type="checkbox" name="size" value="..1999" tabindex="0">
                 <span tabindex="-1" class="checkbox-focus"></span>Small (&lt; 2,000)
               </label>
             </li>
             <li>
               <label for="size-medium" class="checkbox">
-                <input id="size-medium" type="checkbox" name="size" value="medium" tabindex="0">
+                <input id="size-medium" type="checkbox" name="size" value="2000..15000" tabindex="0">
                 <span tabindex="-1" class="checkbox-focus"></span>Medium (2,000&ndash;15,000)
               </label>
             </li>
             <li>
               <label for="size-large" class="checkbox">
-                <input id="size-large" type="checkbox" name="size" value="large" tabindex="0">
+                <input id="size-large" type="checkbox" name="size" value="15001.." tabindex="0">
                 <span tabindex="-1" class="checkbox-focus"></span>Large (&gt; 15,000)
               </label>
             </li>

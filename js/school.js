@@ -194,7 +194,7 @@
     L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png')
       .addTo(map);
 
-    var marker = L.circle(center, 1600, {
+    var marker = L.circle(center, 1200, {
         color: 'black',
         opacity: 1,
         strokeWidth: 1,
