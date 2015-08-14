@@ -6,6 +6,7 @@
 
   // the current outbound request
   var req;
+  var paging = false;
 
   var change = picc.debounce(onChange, 100);
 
@@ -103,10 +104,16 @@
     resultsRoot.classList.remove('js-loaded');
     resultsRoot.classList.remove('js-error');
 
+    var paginator = resultsRoot.querySelector('.pagination');
+    paginator.classList.toggle('show-loading', paging);
+
     console.time && console.time('[load]');
 
     picc.API.search(query, function(error, data) {
       resultsRoot.classList.remove('js-loading');
+
+      paginator.classList.remove('show-loading');
+      paging = false;
 
       console.timeEnd && console.timeEnd('[load]');
 
@@ -128,6 +135,54 @@
         results_word: format.plural('total', 'Result'),
         results_total: format.number('total', '0')
       });
+
+      var page = +params.page || 0;
+      var total = data.total;
+      var perPage = data.per_page;
+      var pages = d3.range(0, total, perPage)
+        .map(function(page) {
+          page /= perPage;
+          return {
+            page: page + 1,
+            index: page
+          };
+        });
+
+      tagalong(paginator, {
+        pages: pages
+      }, {
+        pages: {
+          '@data-index': function(d) {
+            return String(d.index);
+          },
+          '@class': function(d) {
+            return d.index === page
+              ? 'page-selected'
+              : null;
+          },
+          link: {
+            text: 'page',
+            '@data-page': function(d) {
+              return String(d.index);
+            },
+            '@href': function(d) {
+              return d.index === page
+                ? null
+                : '?' + querystring.stringify(picc.data.extend({}, params, {page: d.index}));
+            }
+          }
+        }
+      });
+
+      d3.selectAll('a.select-page')
+        .on('click', function() {
+          d3.event.preventDefault();
+          var page = this.getAttribute('data-page');
+          console.log('page:', page);
+          form.set('page', page);
+          paging = true;
+          change();
+        });
 
       var resultsList = resultsRoot.querySelector('.schools-list');
       tagalong(resultsList, data.results, picc.school.directives);
