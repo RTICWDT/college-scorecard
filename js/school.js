@@ -2,27 +2,33 @@
 
   var id = getSchoolId();
 
+  var loadable = d3.select('.loadable');
+
   if (!id) {
-    return showError('No school ID provided');
+    loadable.classed('js-error', true);
+    return showError(picc.errors.NO_SCHOOL_ID);
   }
 
-  var root = document.querySelector('#school');
+  d3.select('#referrer-link')
+    .attr('href', document.referrer || null);
 
-  var averageLabels = {
-    'above': 'Above average',
-    'below': 'Lower than average',
-    'about': 'About average'
-  };
+  loadable.classed('js-loading', true);
 
   picc.API.getAll({
     metadata: 'data.json',
     school: [picc.API.getSchool, id]
-  }, function(error, data) {
+  }, function onSchoolLoad(error, data) {
+    loadable.classed('js-loading', false);
+
     // console.log('data:', data);
     if (error) {
+      loadable.classed('js-error', true);
       return showError(error);
     }
 
+    loadable.classed('js-loaded', true);
+
+    var root = document.querySelector('#school');
     var school = data.school;
 
     var name = picc.access(picc.fields.NAME)(school);
@@ -32,13 +38,19 @@
     console.log('got school:', school);
     root.classList.remove('hidden');
 
+    var averageLabels = {
+      'above': 'Above average',
+      'below': 'Lower than average',
+      'about': 'About average'
+    };
+
     // update the above/below average icons whenever the
     // corresponding meters update
     d3.selectAll('i.average-arrow[data-meter]')
       .each(function() {
         var icon = d3.select(this);
         var meter = d3.select('#' + this.getAttribute('data-meter'))
-          .on('update', function() {
+          .on('update', function updateMeterAverage() {
             var match = this.className.match(/\b(\w+)_average\b/);
             var state = match ? match[1] : 'na';
             icon
@@ -98,45 +110,14 @@
         .domain([0, .01, 1])
         .range(['0%', '1%', '100%']));
 
-    var location = picc.access.location(school);
-    var mapContainer = root.querySelector('.school-map');
-    if (location) {
-      var center = L.latLng(
-        +location.lat,
-        +location.lon
-      );
-
-      var map = L.map(mapContainer, {
-          zoomControl:        false,
-          panControl:         false,
-          attributionControl: false,
-          dragging:           false,
-          scrollWheelZoom:    false,
-          touchZoom:          false,
-          doubleClickZoom:    false,
-          boxZoom:            false
-        })
-        .setView(center, 10);
-
-      L.tileLayer('http://tile.stamen.com/terrain/{z}/{x}/{y}.png')
-        .addTo(map);
-
-      var marker = L.circle(center, 1600, {
-          color: 'black',
-          opacity: 1,
-          strokeWidth: 1,
-          fillColor: 'white',
-          fillOpacity: 1
-        })
-        .addTo(map);
-
-      marker.bindPopup(school.name);
-    } else {
-      console.warn('no school location:', school);
-      mapContainer.classList.add('hidden');
-    }
+    createMap(school, root.querySelector('.school-map'));
   });
 
+  /**
+   * This `hashchange` callback function expands and collapses all of the
+   * accordions when the hash changes to match one of their ids. It returns the
+   * last expanded accordion.
+   */
   function hashChange() {
     var id = location.hash.substr(1);
     var found = false;
@@ -149,30 +130,81 @@
     return found;
   }
 
+  // listen for hashchange events
   window.addEventListener('hashchange', hashChange);
 
+  // expand the accordions once and, if one is expanded, reset the hash to
+  // scroll to that element
   var section = hashChange();
   if (section) {
     location.hash = '';
     location.hash = '#' + section.id;
   }
 
+  // get the school ID from the URL
   function getSchoolId() {
     if (!location.search) return null;
     var match = location.search.match(/^\?(\d+)(\b|-)/);
     return match ? match[1] : null;
   }
 
-  function redirect(uri) {
-    window.location = uri || '../search/';
-  }
-
+  // show an error message
   function showError(message) {
     var container = document.querySelector('#error');
-    container.classList.remove('hidden');
     var target = container.querySelector('.error-message') || container;
     target.textContent = message;
     return target;
+  }
+
+  /**
+   * Create a Leaflet map from a school's location. If there is no location, or
+   * if the location's latitude or longitude are zero, then no map is created.
+   *
+   * @param {Object}          school   the school data object
+   * @return {L.map|Boolean}  an L.map instance if successful, otherwise `false`
+   */
+  function createMap(school, container) {
+    if (!container) {
+      console.error('got null container in createMap(); bailing');
+      return false;
+    }
+
+    var location = picc.access.location(school);
+
+    if (!location || !+location.lat || !+location.lon) {
+      console.warn('missing or invalid location:', location, '; hiding the map');
+      container.classList.add('hidden');
+      return false;
+    }
+
+    var center = L.latLng(location.lat, location.lon);
+
+    var map = L.map(container, {
+        zoomControl:        false,
+        panControl:         false,
+        attributionControl: false,
+        dragging:           false,
+        scrollWheelZoom:    false,
+        touchZoom:          false,
+        doubleClickZoom:    false,
+        boxZoom:            false
+      })
+      .setView(center, 10);
+
+    L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png')
+      .addTo(map);
+
+    var marker = L.circle(center, 1600, {
+        color: 'black',
+        opacity: 1,
+        strokeWidth: 1,
+        fillColor: 'white',
+        fillOpacity: 1
+      })
+      .addTo(map);
+
+    marker.bindPopup(school.name);
+    return map;
   }
 
 })(this);
