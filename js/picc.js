@@ -26,6 +26,7 @@
    *
    */
   picc.API = (function() {
+    // site.branch = '{{ site.branch }}'
     var API = {
       {% if site.API[site.branch] %}
       url: '{{ site.API[site.branch].baseurl }}',
