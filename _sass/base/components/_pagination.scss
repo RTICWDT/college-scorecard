@@ -1,31 +1,42 @@
 .pagination {
+  margin-top: $base-padding;
+
   ol {
     display: block;
 
     li {
-      background: #fff;
       display: inline-block;
-      padding: $base-padding-lite $base-padding-tb;
 
-      &:first-child {
+      a {
+        background: #fff;
+        display: inline-block;
+        padding: $base-padding-lite $base-padding-tb;
+      }
+
+      &:first-child a {
         border-top-left-radius: $base-padding-lite;
         border-bottom-left-radius: $base-padding-lite;
       }
 
-      &:last-child {
+      &:last-child a {
         border-top-right-radius: $base-padding-lite;
         border-bottom-right-radius: $base-padding-lite;
       }
 
       &.page-selected {
-        background: $dark-blue;
-        color: $white;
+        a {
+          color: $white;
+          background: $dark-blue;
+          font-weight: bold;
+          text-decoration: none;
+        }
       }
 
-      a[href=''] {
-        color: inherit;
-        font-weight: bold;
-        text-decoration: none;
+      &.page-break {
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
       }
     }
   }
