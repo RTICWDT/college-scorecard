@@ -1,0 +1,32 @@
+.pagination {
+  ol {
+    display: block;
+
+    li {
+      background: #fff;
+      display: inline-block;
+      padding: $base-padding-lite $base-padding-tb;
+
+      &:first-child {
+        border-top-left-radius: $base-padding-lite;
+        border-bottom-left-radius: $base-padding-lite;
+      }
+
+      &:last-child {
+        border-top-right-radius: $base-padding-lite;
+        border-bottom-right-radius: $base-padding-lite;
+      }
+
+      &.page-selected {
+        background: $dark-blue;
+        color: $white;
+      }
+
+      a[href=''] {
+        color: inherit;
+        font-weight: bold;
+        text-decoration: none;
+      }
+    }
+  }
+}
