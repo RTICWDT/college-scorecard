@@ -1,0 +1,47 @@
+.investigation-minor {
+  color: $red;
+  font-weight: $weight-bold;
+  padding-top: $base-padding;
+  text-transform: uppercase;
+}
+
+$invest_height: 36px;
+
+.investigation-major {
+  @extend .light_on_dark;
+  color: $white;
+  font-weight: $weight-bold;
+  height: $invest_height;
+  padding-top: $base-padding-lite;
+  padding-left: $base-padding;
+  text-transform: uppercase;
+}
+
+.investigation-major-wrapper {
+  background-color: $red;
+  margin-bottom: $base-padding;
+  margin-left: -$base-padding;
+  position: relative;
+  width: 98%;
+
+  &::after {
+    border: ($invest_height / 2) solid $red;
+    border-right-color: transparent;
+    border-left-width: ($invest_height / 4);
+    border-radius: $base-border-radius;
+    content: "";
+    display: block;
+    position: absolute;
+    right: -18px;
+    top: 0;
+  }
+}
+
+.school-heading {
+  .investigation-major {
+    padding-left: $base-padding-large;
+  }
+  .investigation-major-wrapper {
+    margin-left: -$base-padding-large;
+  }
+}

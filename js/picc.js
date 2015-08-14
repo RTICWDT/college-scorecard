@@ -3,68 +3,115 @@
 ---
 (function(exports) {
 
+  // create the global picc namespace
   var picc = exports.picc = {};
 
+  // the base URL is filled in by Jekyll
   picc.BASE_URL = '{{ site.baseurl }}';
 
+  picc.errors = {
+    NO_SCHOOL_ID: 'No school ID was provided.',
+    NO_SUCH_SCHOOL: 'No school found.'
+  };
+
+  /**
+   * picc.API is a singleton object with methods to query the open-data-maker
+   * JSON API. Its base URL (`picc.API.url`) and API key (`picc.API.key`) are
+   * filled in by Jekyll.
+   *
+   * All of the API's methods are asynchronous, and use "error-first"
+   * (Node.js-style) callbacks:
+   *
+   * @example
+   * picc.API.get('school', {id: 100}, function(error, res) {
+   *   // error is an XMLHttpRequest object
+   *   if (error) return alert("Error: " + error.responseText);
+   *   console.log('got data:', res);
+   * });
+   *
+   */
   picc.API = (function() {
+    // site.branch = '{{ site.branch }}'
     var API = {
-      url: '{{ site.api.baseurl }}',
-      key: '{{ site.api.key }}'
+      {% if site.API[site.branch] %}
+      url: '{{ site.API[site.branch].baseurl }}',
+      key: '{{ site.API[site.branch].key }}'
+      {% else %}
+      url: '{{ site.API.baseurl }}',
+      key: '{{ site.API.key }}'
+      {% endif %}
     };
 
-    // use the staging API if we're on Federalist previewing
-    // the staging branch
-    if (location.hostname === 'federalist.18f.gov'
-        && !!location.pathname.match(/\/staging\//)) {
-      API.url = 'https://ccapi-open-staging.18f.gov/';
-      API.key = '';
-    }
+    // local alias for errors
+    var errors = picc.errors;
 
+    // the API endpoint (URI) at which to find school data
     var schoolEndpoint = 'school/';
+
+    // the school's primary key field
     var idField = 'id';
 
+    /**
+     * get an endpoint with optional query string parameters, and call the
+     * `callback` function when the response is completed.
+     *
+     * @param {String}          uri       the URI to request, relative to
+     *                                    `picc.API.url`
+     * @param {String|Object?}  params    query string
+     * @param {Function}        callback  the error-first callback:
+     *                                    `callback(error, response)`
+     * @return {Object} the d3.xhr() wrapper object
+     */
     API.get = function(uri, params, done) {
       // console.debug('[API] get("%s", %s)', uri, JSON.stringify(params));
       if (arguments.length === 2) {
         done = params;
+        params = addAPIKey({});
       } else if (params) {
-        if (typeof params === 'object') {
-          if (API.key) params.api_key = API.key;
-          // collapse arrays into comma-separated strings
-          // per the API
-          collapseArrays(params);
-          params = querystring.stringify(params);
-        } else if (API.key) {
-          params += '&api_key=' + API.key;
-        }
-        uri = join([uri, params], '?');
+        params = addAPIKey(params);
       }
+      if (params) uri = join([uri, params], '?');
       var url = join([API.url, uri], '/');
       console.debug('[API] get: "%s"', url);
       return d3.json(url, done);
     };
 
-    API.load = function(uri, done) {
-      var ext = uri.split('.').pop();
-      var load = d3[ext || 'json'];
-      return load(uri, done);
-    };
-
+    /**
+     * Generate a endpoint function that hits a fixed URI.
+     *
+     * @example
+     * API.search = API.endpoint('search/');
+     *
+     * @param {String}    uri
+     * @return {Function} a function that calls `picc.API.get(uri)` with the
+     *                    provided parameters and callback.
+     */
     API.endpoint = function(uri) {
       return function endpoint(params, done) {
         return API.get(uri, params, done);
       };
     };
 
+    // the search endpoint
     API.search = API.endpoint(schoolEndpoint);
 
+    /**
+     * A helper function to get data for a single school.
+     *
+     * @param {String|Number} id  the school primary key identifier
+     * @param {Function} callback the callback function, as in
+     *                            `picc.API.get()`, that receives a single
+     *                            school's data as its second parameter on
+     *                            success.
+     */
     API.getSchool = function(id, done) {
-      var data = {};
-      data[idField] = id;
-      return API.get(schoolEndpoint, data, function(error, res) {
+      var params = {};
+      params[idField] = id;
+      return API.get(schoolEndpoint, params, function(error, res) {
         if (error || !res.total) {
-          return done(error.responseText || 'No such school found.');
+          return done(error
+            ? error.responseText || errors.NO_SUCH_SCHOOL
+            : errors.NO_SUCH_SCHOOL);
         } else if (res.total > 1) {
           console.warn('More than one school found for ID: "' + id + '"');
         }
@@ -72,6 +119,26 @@
       });
     };
 
+    /**
+     * Get multiple URIs specified as an object, and call the `callback`
+     * function with a similarly structured object containing data for each
+     * URI.
+     *
+     * @example
+     * picc.API.getAll({
+     *   metadata: 'data.json',
+     *   school: [picc.API.getSchool, 100]
+     * }, function(error, data) {
+     *   console.log('got metadata:', data.metadata);
+     *   console.log('got school:', data.school);
+     * });
+     *
+     * @param {Object}    urls      a map of properties to either URIs or
+     *                              Arrays, in which the first element is the
+     *                              function to call and the rest are arguments.
+     * @param {Function}  callback  the callback function:
+     *                              `callback(error, data)`
+     */
     API.getAll = function(urls, done) {
       Object.keys(urls).forEach(function(key) {
         var url = urls[key];
@@ -92,6 +159,35 @@
       return async.parallel(urls, done);
     };
 
+    /**
+     * add the API key (if set) to either an object or string of query
+     * parameters, and return the parameters as a query string.
+     *
+     * @param {String|Object} params
+     * @return {String}
+     */
+    function addAPIKey(params) {
+      var param = 'api_key';
+      if (typeof params === 'object') {
+        if (API.key) params[param] = API.key;
+        // collapse arrays into comma-separated strings
+        // per the API
+        collapseArrays(params);
+        params = querystring.stringify(params);
+      } else if (API.key) {
+        params += ['&', param, '=', API.key].join('');
+      }
+      return params;
+    }
+
+    /**
+     * Join an array of strings with a `glue` string and de-dupe repeated glue
+     * strings.
+     *
+     * @param {Array} list
+     * @param {String} glue
+     * @return {String}
+     */
     function join(list, glue) {
       for (var i = 0; i < list.length; i++) {
         var str = String(list[i]);
@@ -104,6 +200,14 @@
       return list.join(glue);
     }
 
+    /**
+     * Iterate over the keys of an `object` and replace any that have Array
+     * values with strings joined with `glue`.
+     *
+     * @param {Object} obj
+     * @param {String?} glue
+     * @return {Object} the original object
+     */
     function collapseArrays(obj, glue) {
       if (!glue) glue = ',';
       for (var key in obj) {
@@ -125,7 +229,7 @@
    * object.
    */
   var SPECIAL_DESIGNATIONS = {
-    // TODO: rename 'aanapi' or 'aanapisi'
+    // TODO: rename 'aanapi' to 'aanapisi'?
     // per <http://www2.ed.gov/programs/aanapi/index.html>
     aanipi:               'AANAPI',
     hispanic:             'Hispanic',
@@ -136,6 +240,7 @@
     men_only:             'Men Only'
   };
 
+  // this is our "n/a" string that we display for null numeric values
   var NA = '--';
 
   /**
@@ -149,7 +254,9 @@
    */
   picc.format = (function() {
     var formatter = function(fmt, _empty) {
+      var round = false;
       if (typeof fmt === 'string') {
+        round = !!fmt.match(/d$/);
         fmt = d3.format(fmt);
       }
       return function(key, empty) {
@@ -162,6 +269,7 @@
           : function(v) { return v; };
         return function(d) {
           var value = key.call(this, d);
+          if (round) value = Math.round(value);
           return ((value === '' || isNaN(value)) && empty)
             ? empty.call(d)
             : fmt.call(d, +value, key);
@@ -199,9 +307,10 @@
       // format.plural('x', 'foo')({x: 1}) === 'foo'
       // format.plural('x', 'foo')({x: 2}) === 'foos'
       plural: function(key, singular, plural) {
+        key = picc.access(key);
         if (!plural) plural = singular + 's';
         return function(d) {
-          return d[key] == 1 ? singular : plural;
+          return key.call(this, d) == 1 ? singular : plural;
         };
       },
 
@@ -228,6 +337,13 @@
         '4': 'Graduate'
       }, NA)),
 
+      zero: function(key) {
+        key = picc.access(key);
+        return function(d) {
+          return key.call(this, d) == 0;
+        };
+      },
+
       sizeCategory: formatter(range([
         [0, 2000, 'Small'],
         [2000, 15000, 'Medium'],
@@ -253,6 +369,74 @@
     };
   })();
 
+  picc.fields = {
+    ID:                   'id',
+    NAME:                 'school.name',
+    CITY:                 'school.city',
+    STATE:                'school.state',
+    LOCATION:             'school.location',
+    OWNERSHIP:            'school.ownership',
+    LOCALE:               'school.locale',
+    REGION_ID:            'school.region_id',
+
+    SIZE:                 '2013.student.size',
+
+    WOMEN_ONLY:           'school.women_only',
+    MEN_ONLY:             'school.men_only',
+    MINORITY_SERVING:     'school.minority_serving',
+
+    PREDOMINANT_DEGREE:   'school.degrees_awarded.predominant',
+    UNDER_INVESTIGATION:  'school.HCM2',
+
+    // net price
+    // FIXME: this should be `net_price`
+    NET_PRICE:            '2013.cost.avg_net_price',
+    NET_PRICE_BY_INCOME:  '2013.cost.net_price',
+
+    // completion rate
+    COMPLETION_RATE:      '2013.completion.rate',
+
+    RETENTION_RATE:       '2013.student.retention_rate',
+
+    REPAYMENT_RATE:       '2013.repayment.3_yr_repayment_suppressed.overall',
+
+    AVERAGE_TOTAL_DEBT:   '2013.debt.median_debt_suppressed.completers.overall',
+    MONTHLY_LOAN_PAYMENT: '2013.debt.median_debt_suppressed.completers.monthly_payments',
+
+    // FIXME: this will be renamed eventually
+    AID_PERCENTAGE:       '2013.debt.loan_rate',
+
+    MEDIAN_EARNINGS:      '2011.earnings.6_yrs_after_entry.median',
+
+    // FIXME: pending #373
+    EARNINGS_GT_25K:      '2011.earnings.gt_25k_p10',
+
+    PROGRAM_PERCENTAGE:   '2013.academics.program_percentage',
+
+    // FIXME: will become `2013.student.demographics.female_share`
+    FEMALE_SHARE:         '2013.student.female',
+    RACE_ETHNICITY:       '2013.student.demographics.race_ethnicity',
+    AGE_ENTRY:            '2013.student.demographics.age_entry',
+
+    ACT_25TH_PCTILE:      '2013.student.act_scores.25th_percentile.cumulative',
+    ACT_75TH_PCTILE:      '2013.student.act_scores.75th_percentile.cumulative',
+    ACT_MIDPOINT:         '2013.student.act_scores.midpoint.cumulative',
+
+    SAT_CUMULATIVE_AVERAGE:   '2013.student.sat_scores.average.overall',
+
+    SAT_READING_25TH_PCTILE:  '2013.student.sat_scores.25th_percentile.critical_reading',
+    SAT_READING_75TH_PCTILE:  '2013.student.sat_scores.75th_percentile.critical_reading',
+    SAT_READING_MIDPOINT:     '2013.student.sat_scores.midpoint.critical_reading',
+
+    SAT_MATH_25TH_PCTILE:     '2013.student.sat_scores.25th_percentile.math',
+    SAT_MATH_75TH_PCTILE:     '2013.student.sat_scores.75th_percentile.math',
+    SAT_MATH_MIDPOINT:        '2013.student.sat_scores.midpoint.math',
+
+    SAT_WRITING_25TH_PCTILE:  '2013.student.sat_scores.25th_percentile.writing',
+    SAT_WRITING_75TH_PCTILE:  '2013.student.sat_scores.75th_percentile.writing',
+    SAT_WRITING_MIDPOINT:     '2013.student.sat_scores.midpoint.writing',
+  };
+
   picc.access = function(key) {
     return (typeof key === 'function')
       ? key
@@ -260,12 +444,17 @@
   };
 
   function getter(key) {
+    if (typeof key !== 'string') {
+      return function(d) { return d[key]; };
+    }
     if (key.indexOf('.') > -1) {
       var bits = key.split('.');
       var len = bits.length;
       return function(d) {
+        if (key in d) return d[key];
         for (var i = 0; i < len; i++) {
           d = d[bits[i]];
+          if (d === null || d === undefined) return d;
         }
         return d;
       };
@@ -273,14 +462,69 @@
     return function(d) { return d[key]; };
   }
 
+  /**
+   * This is a function composer for nested field accessors. It
+   * takes an arbitrary number of arugments that may be strings,
+   * integers or functions; the latter of which is evaluated to
+   * get a *key* into the current nested object. E.g.:
+   *
+   * @example
+   * var f = picc.access.composed('foo', picc.access.yearDesignation);
+   * assert.equal({common_degree: '2', {foo: {lt_four_year: 1}}}, 1);
+   * assert.equal({common_degree: '3', {foo: {four_year: 1}}}, 1);
+   *
+   * @argument ... key
+   * @return {*}
+   */
+  picc.access.composed = function(key0, key1, key2) {
+    var keys = [].slice.call(arguments);
+    var len = keys.length;
+    return function nested(d) {
+
+      var _keys = keys.map(function(key) {
+        return (typeof key === 'function')
+          ? key.call(this, d)
+          : key;
+      }, this);
+
+      var _key = _keys.join('.');
+      // console.log('_key:', _key);
+      if (_key in d) return d[_key];
+
+      var value = d;
+      for (var i = 0; i < len; i++) {
+        var key = keys[i];
+        if (typeof key === 'function') {
+          key = key.call(this, d);
+          if (key === null) return key;
+        }
+        value = getter(key)(value);
+        if (value === undefined || value === null) break;
+      }
+      return value;
+    };
+  };
+
   picc.access.publicPrivate = function(d) {
-    switch (+d.ownership) {
+    var ownership = picc.access(picc.fields.OWNERSHIP)(d);
+    switch (+ownership) {
       case 1: // public
         return 'public';
 
       case 2: // private
       case 3:
         return 'private';
+    }
+    return null;
+  };
+
+  picc.access.yearDesignation = function(d) {
+    var degree = picc.access(picc.fields.PREDOMINANT_DEGREE)(d);
+    switch (+degree) {
+      case 2: // 2-year (AKA less than 4-year)
+        return 'lt_four_year';
+      case 3: // 4-year
+        return 'four_year';
     }
     return null;
   };
@@ -301,88 +545,99 @@
     }
   };
 
-  picc.access.netPrice = function(d) {
-    var key = picc.access.publicPrivate(d);
-    return key
-      ? d.avg_net_price
-        ? picc.nullify(d.avg_net_price[key])
-        : picc.nullify(d.net_price[key].average)
-      : null;
-  };
+  picc.access.netPrice = picc.access.composed(
+    picc.fields.NET_PRICE,
+    picc.access.publicPrivate
+  );
 
   picc.access.netPriceByIncomeLevel = function(level) {
-    return function(d) {
-      var key = picc.access.publicPrivate(d);
-      return d.net_price
-        ? picc.nullify(d.net_price[key].by_income_level[level])
-        : null;
-    };
+    return picc.access.composed(
+      picc.fields.NET_PRICE_BY_INCOME,
+      picc.access.publicPrivate,
+      'by_income_level',
+      level
+    );
   };
 
-  picc.access.yearDesignation = function(d) {
-    switch (d.common_degree) {
-      case '2': // 2-year (AKA less than 4-year)
-        return 'lt_four_year';
-      case '3': // 4-year
-        return 'four_year';
-    }
-    // FIXME
-    return 'other';
-  };
+  picc.access.earningsMedian = picc.access.composed(
+    picc.fields.MEDIAN_EARNINGS
+  );
 
-  picc.access.earningsMedian = function(d) {
-    return picc.nullify(d.earnings
-      ? d.earnings.median
-      : d.median_earnings);
-  };
-
-  picc.access.earnings25k = function(d) {
-    return d.earnings
-      ? picc.nullify(d.earnings.percent_gt_25k)
-      : null;
-  };
+  picc.access.earnings25k = picc.access.composed(
+    picc.fields.EARNINGS_GT_25K
+  );
 
   picc.access.completionRate = function(d) {
-    var designation = picc.access.yearDesignation(d);
-    return designation
-      ? picc.nullify(d.completion_rate[designation])
-      : null;
+    var key = picc.access.yearDesignation(d);
+    var rate = picc.access(picc.fields.COMPLETION_RATE)(d);
+    if (!rate) {
+      // XXX: this is for when the data is accessed as a
+      // "pre-nested" field, which is how Elasticsearch
+      // expresses data when you ask it for specific fields
+      var four = picc.access.composed(picc.fields.COMPLETION_RATE, 'four_year')(d);
+      var less = picc.access.composed(picc.fields.COMPLETION_RATE, 'lt_four_year')(d);
+      return four || less;
+    }
+    if (rate[key] === 0) {
+      console.warn('completion rate key mismatch: expected "%s", but got zero:', key, rate);
+      return rate.four_year || rate.lt_four_year;
+    }
+    return rate[key];
   };
 
   picc.access.partTimeShare = function(d) {
-    if (d.part_time_share) {
-      var share = picc.nullify(d.part_time_share[1]);
-      return share === null ? null : Math.round(+share * 100);
-    }
-    return null;
+    // FIXME: this should be a single field?
+    var prefix = '2013.student.';
+    return +picc.access(prefix + 'PPTUG_EF')(d)
+        || +picc.access(prefix + 'PPTUG_EF2')(d);
   };
 
   picc.access.retentionRate = function(d) {
-    var designation = picc.access.yearDesignation(d);
-    // FIXME: use partTimeShare() accessor?
-    var partTimeShare = +d.part_time_share[1] || +d.part_time_share[2];
-    var retention = d.retention_rate[designation];
-    var partTimeRate = retention ? retention.part_time : 0;
-    var fullTime = retention ? retention.full_time : 0;
-    var size = d.size;
-    return (
-      (size * partTimeShare * partTimeRate) +
-      ((size - size * partTimeShare) * fullTime)
-    ) / size;
+    var retention = picc.access.composed(
+      picc.fields.RETENTION_RATE,
+      picc.access.yearDesignation
+    )(d);
+    if (!retention) return null;
+
+    var size = picc.access.size(d);
+    if (!size) return null;
+
+    var ptShare = picc.access.partTimeShare(d);
+    if (ptShare === null) return null;
+
+    var pt = size * ptShare * retention.part_time;
+    var ft = (size - size * ptShare) * retention.full_time;
+    if (isNaN(pt) || isNaN(ft)) return null;
+
+    // console.log('retention:', retention, [pt, ft], 'size:', size);
+    return (pt + ft) / size;
   };
 
+  picc.access.size = picc.access.composed(
+    picc.fields.SIZE
+  );
+
+  picc.access.location = picc.access(picc.fields.LOCATION);
+
+  /**
+   * Returns an array of special designation strings for a given school object.
+   *
+   * @param {Object} school the school data object
+   * @return {Array} an array of human-readable strings
+   */
   picc.access.specialDesignations = function(d) {
     var designations = [];
 
-    if (+d.women_only) {
+    if (+picc.access(picc.fields.WOMEN_ONLY)(d)) {
       designations.push(SPECIAL_DESIGNATIONS.women_only);
-    } else if (+d.men_only) {
+    } else if (+picc.access(picc.fields.MEN_ONLY)(d)) {
       designations.push(SPECIAL_DESIGNATIONS.men_only);
     }
 
-    if (d.minority_serving) {
+    var minorityServing = picc.access(picc.fields.MINORITY_SERVING)(d);
+    if (minorityServing) {
       for (var key in SPECIAL_DESIGNATIONS) {
-        if (+d.minority_serving[key]) {
+        if (+minorityServing[key]) {
           designations.push(SPECIAL_DESIGNATIONS[key]);
         }
       }
@@ -391,80 +646,105 @@
     return designations;
   };
 
+  /**
+   * Returns an array of program areas for a given school object from the API.
+   *
+   * @param {Object}  school    the school data object
+   * @param {Object?} metadata  the optional API metadata object. If this is
+   *                            falsy, we look for metadata in `school.metadata`.
+   * @return {Array}  an Array of Objects, each with `program` (the name) and
+   *                  `percent` (a decimal number or string representing its
+   *                  share of student enrollment) properties.
+   */
   picc.access.programAreas = function(d, metadata) {
     if (!metadata) metadata = d.metadata;
     if (!metadata || !metadata.dictionary) return [];
 
     var dictionary = metadata.dictionary;
-    return Object.keys(d.program_percentage || {})
+    var field = picc.fields.PROGRAM_PERCENTAGE;
+    var programs = picc.access(field)(d);
+    // remove the year prefix
+    field = field.replace(/^\d+\./, '');
+    return Object.keys(programs || {})
       .map(function(key) {
-        var value = d.program_percentage[key];
-        var dictKey = 'program_percentage.' + key;
+        var value = programs[key];
+        var dictKey = [field, key].join('.');
         var name = dictionary[dictKey]
-          ? dictionary[dictKey].description
+          ? (dictionary[dictKey].description || key)
           : key;
         return {
-          program:  name,
-          percent:  value
+          program: name,
+          percent: value
         };
+      })
+      .filter(function(d) {
+        return +d.percent > 0;
       });
   };
 
+  /**
+   * @param {*} value
+   * @return {*} `null` if `value === "NULL"`, otherwise the value as-is.
+   */
   picc.nullify = function(value) {
     return value === 'NULL' ? null : value;
   };
 
-  /**
-   * namespace for school-related stuff
-   */
+  // namespace for school-related stuff
   picc.school = {};
 
   /**
-   * common directives for school templates
+   * Common directives for school templates, for use with tagalong.
    */
   picc.school.directives = (function() {
     var access = picc.access;
     var format = picc.format;
     var percent = format.percent();
+    var fields = picc.fields;
 
     var href = function(d) {
-      var name = d.name.replace(/\W+/g, '-');
+      var name = access(fields.NAME)(d);
+      name = name ? name.replace(/\W+/g, '-') : '(unknown)';
       return [
         picc.BASE_URL, '/school/?',
         d.id, '-', name
       ].join('');
     };
 
+    var underInvestigation = {
+      '@aria-hidden': function(d) {
+        var flag = access(fields.UNDER_INVESTIGATION)(d);
+        return +flag !== 1;
+      }
+    };
+
     return {
       title: {
         link: {
-          text: 'name',
+          text: access(fields.NAME),
           '@href': href
         }
       },
 
-      size_number:    format.number('size'),
-      control:        format.control('ownership'),
-      locale_name:    format.locale('locale'),
-      years:          format.preddeg('common_degree'),
-      size_category:  format.sizeCategory('size'),
+      name:           access(fields.NAME),
+      city:           access(fields.CITY),
+      state:          access(fields.STATE),
+
+      under_investigation: underInvestigation,
+      // FIXME this is a hack to deal with the issue of tagalong
+      // not applying a directive to multiple elements
+      under_investigation2: underInvestigation,
+
+      size_number:    format.number(fields.SIZE),
+      control:        format.control(fields.OWNERSHIP),
+      locale_name:    format.locale(fields.LOCALE),
+      years:          format.preddeg(fields.PREDOMINANT_DEGREE),
+      size_category:  format.sizeCategory(fields.SIZE),
 
       // this is a direct accessor because some designations
       // (e.g. `women_only`) are at the object root, rather than
       // nested in `minority_serving`.
       special_designations: access.specialDesignations,
-
-      SAT_avg: function(d) {
-        return picc.nullify(d.SAT_avg) || NA;
-      },
-
-      SAT_meter: {
-        // TODO
-      },
-
-      ACT_meter: {
-        // TODO
-      },
 
       average_cost: format.dollars(access.netPrice),
       average_cost_meter: {
@@ -501,24 +781,22 @@
         '@title': debugMeterTitle
       },
 
-      repayment_rate_percent: format.percent('repayment_rate'),
+      repayment_rate_percent: format.percent(fields.REPAYMENT_RATE),
       repayment_rate_meter: {
-        '@value': 'repayment_rate',
+        '@value': access(fields.REPAYMENT_RATE),
         '@average': access.nationalStat('median'),
         label:    format.percent(function() {
           return this.getAttribute('average');
         })
       },
 
-      average_total_debt: format.dollars('debt.median_completer_total'),
-      average_monthly_loan_payment: format.dollars('debt.median_monthly_payment'),
+      average_total_debt: format.dollars(fields.AVERAGE_TOTAL_DEBT),
+      average_monthly_loan_payment: format.dollars(fields.MONTHLY_LOAN_PAYMENT),
 
       federal_aid_percentage: format.percent(function(d) {
-        if (!d.loan_rate) return null;
-        return Math.max(
-          picc.nullify(d.loan_rate.federal),
-          picc.nullify(d.loan_rate.pell)
-        ) || null; // 0 is n/a
+        var aid = access(fields.AID_PERCENTAGE)(d);
+        if (!aid) return null;
+        return Math.max(aid.federal, aid.pell) || null; // 0 is n/a
       }),
 
       earnings_gt_25k: format.percent(access.earnings25k),
@@ -530,7 +808,7 @@
         '@title': debugMeterTitle
       },
 
-      retention_rate_value: format.percent(picc.access.retentionRate),
+      retention_rate_value: format.percent(access.retentionRate),
       retention_rate_meter: {
         '@value': access.retentionRate,
         label:    format.percent(function() {
@@ -547,8 +825,7 @@
       part_time_percent: format.number(access.partTimeShare),
 
       gender_values: function(d) {
-        if (!d.demographics) return [];
-        var female = picc.nullify(d.demographics.female_percent);
+        var female = access(fields.FEMALE_SHARE)(d);
         if (female === null) return [];
         female = +female;
         return [
@@ -558,21 +835,18 @@
       },
 
       race_ethnicity_values: function(d) {
-        if (!d.demographics || !d.metadata) {
-          // console.warn('no demographics or metadata:', d);
-          return [];
-        }
-
+        if (!d.metadata) return [];
         var dictionary = d.metadata.dictionary;
-        var values = d.demographics.race_ethnicity;
-        var prefix = 'demographics.race_ethnicity.';
+        var field = fields.RACE_ETHNICITY;
+        var values = access(field)(d);
+        var prefix = field + '.';
         return Object.keys(values)
           .map(function(key) {
             var value = picc.nullify(values[key]);
             var dict = dictionary[prefix + key];
             return {
               key: key,
-              label: dict ? dict.label : key,
+              label: dict ? (dict.label || key) : key,
               value: value,
               percent: percent(value)
             };
@@ -610,14 +884,53 @@
           .slice(0, 5);
       },
 
+      programs_plural: format.plural(function(d) {
+        return access.programAreas(d).length;
+      }, 'Program'),
+
       age_entry: function(d) {
-        return d.demographics
-          ? picc.nullify(d.demographics.age_entry)
-          : null;
+        var age = picc.access(fields.AGE_ENTRY)(d);
+        return age ? age : NA;
       },
 
       more_link: {
         '@href': href
+      },
+
+      act_scores_visible: {
+        '@aria-hidden': format.zero(fields.ACT_MIDPOINT),
+      },
+      act_scores: {
+        '@lower': access(fields.ACT_25TH_PCTILE),
+        '@upper': access(fields.ACT_75TH_PCTILE),
+        '@middle': access(fields.ACT_MIDPOINT),
+      },
+
+      sat_reading_scores_visible: {
+        '@aria-hidden': format.zero(fields.SAT_READING_MIDPOINT),
+      },
+      sat_reading_scores: {
+        '@lower': access(fields.SAT_READING_25TH_PCTILE),
+        '@upper': access(fields.SAT_READING_75TH_PCTILE),
+        '@middle': access(fields.SAT_READING_MIDPOINT),
+      },
+
+      sat_math_scores_visible: {
+        '@aria-hidden': format.zero(fields.SAT_MATH_MIDPOINT),
+      },
+      sat_math_scores: {
+        '@lower': access(fields.SAT_MATH_25TH_PCTILE),
+        '@upper': access(fields.SAT_MATH_75TH_PCTILE),
+        '@middle': access(fields.SAT_MATH_MIDPOINT),
+      },
+
+      sat_writing_scores_visible: {
+        '@aria-hidden': format.zero(fields.SAT_WRITING_MIDPOINT),
+      },
+      sat_writing_scores: {
+        '@lower': access(fields.SAT_WRITING_25TH_PCTILE),
+        '@upper': access(fields.SAT_WRITING_75TH_PCTILE),
+        '@middle': access(fields.SAT_WRITING_MIDPOINT),
       }
     };
 
@@ -635,11 +948,14 @@
   picc.form = {};
 
   /**
-   * Adds a "submit" listener to the provided formdb.Form
-   * instance (or CSS selector) that intercepts its data,
-   * formats it as a querystring, then does a client-side
-   * redirect with window.location, effectively removing
-   * the query string parameters for empty inputs.
+   * Adds a "submit" listener to the provided formdb.Form instance (or CSS
+   * selector) that intercepts its data, formats it as a querystring, then does
+   * a client-side redirect with window.location, effectively removing the
+   * query string parameters for empty inputs.
+   *
+   * @param {String|Object} form  the form CSS selector or `formdb.Form`
+   *                              instance.
+   * @return {Object} the `formdb.Form` instance.
    */
   picc.form.minifyQueryString = function(form) {
 
@@ -662,9 +978,20 @@
     return form;
   };
 
+
   // UI tools
   picc.ui = {};
 
+  /**
+   * Expand all of the accordions on the page (or only those matching the
+   * provided selector) according to an `expanded` value or function.
+   *
+   * @param {String?} selector  an optional CSS selector to find accordions.
+   *                            The default is `"aria-accordion"`.
+   * @param {Boolean|Function} expanded a value or function that should return
+   *                                    `true` for expanded accordions, and
+   *                                    `false` otherwise.
+   */
   picc.ui.expandAccordions = function(selector, expanded) {
     if (arguments.length === 1) {
       expanded = selector;
@@ -681,16 +1008,39 @@
       .property('expanded', true);
   };
 
-  // this is the equivalent of $(function), aka DOMReady
+  /**
+   * Calls the `callback` function immediately if `document.readyState ===
+   * 'complete'`, otherwise calls it when the window dispatches a `load` event.
+   *
+   * @param {Function} callback
+   * @return {Boolean} `true` if called immediately, `false` otherwise.
+   */
   picc.ready = function(callback) {
     if (document.readyState === 'complete') {
-      return callback();
+      callback();
+      return true;
     } else {
       window.addEventListener('load', callback);
+      return false;
     }
   };
 
-  // debounce function
+  /**
+   * A function debouncer. This returns a function that will call `fn` after
+   * `delay` milliseconds, and will squash previous calls to avoid race
+   * conditions. In this example, the `update` function will only be called
+   * once, 100ms later:
+   *
+   * @example
+   * var deferredUpdate = picc.debounce(update, 100);
+   * deferredUpdate();
+   * deferredUpdate();
+   *
+   * @param {Function} fn   the function to call
+   * @param {Number} delay  the call delay in milliseconds
+   * @return {Function}     the wrapped function, which returns a
+   *                        `setTimeout()` identifier for canceling.
+   */
   picc.debounce = function(fn, delay) {
     var timeout;
     return function() {
@@ -702,8 +1052,42 @@
     };
   };
 
-  picc.delegate = function(root, qualify, event, listener) {
-    if (Array.isArray(event)) {
+  /**
+   * This is an event delegation helper that allows us to listen for events on
+   * a parent element and call the handler iff (if and only if) the qualify
+   * function returns true for the event's target element.
+   *
+   * The advantage of this approach is that we don't have to add listeners to
+   * specific elements, which means that we don't have to add and remove
+   * listeners whenever templated elements are added and removed from the DOM.
+   *
+   * We use this to implement tooltips by listening for mouseenter/mouseleave
+   * and focus/blur events on the body and only calling the event handler if
+   * the target element has an aria-describedy attribute that begins with
+   * "tip-".
+   *
+   * @example
+   * picc.delegate(document.body, function(target) {
+   *   return target.hasAttribute('data-alert');
+   * }, 'click', function(e) {
+   *   alert(e.target.getAttribute('data-alert'));
+   * });
+   *
+   * @argument {Element} root       the top-most element at which events should
+   *                                be captured
+   * @argument {Function} qualify   this function should return `true` for a
+   *                                given element if the handler is to be called
+   * @argument {*} event            the event or events to listen for, which
+   *                                can be specified as a string (single event),
+   *                                an Array (multiple events), or an Object
+   *                                mapping event types to listeners.
+   * @return {Object|Function}      the delegated event listener(s), which you
+   *                                can pass to `root.removeEventListener()`.
+   *                                The structure matches that of the `event`
+   *                                parameter.
+   */
+  picc.delegate = function(root, qualify, event, listener) { if
+    (Array.isArray(event)) {
       return event.map(function(e) {
         return picc.delegate(root, qualify, e, listener);
       });
@@ -726,7 +1110,82 @@
     return listener;
   };
 
+  // data tools
+  picc.data = {};
+
+  picc.data.extend = function(obj, a, b) {
+    for (var i = 1, len = arguments.length; i < len; i++) {
+      var arg = arguments[i];
+      if (typeof arg === 'object') {
+        for (var key in arg) obj[key] = arg[key];
+      }
+    }
+    return obj;
+  };
+
+  picc.data.rangify = function(obj, key, values) {
+    if (Array.isArray(values)) {
+      switch (values.length) {
+        case 0:
+          values = '';
+          break;
+        case 1:
+          values = values[0];
+          break;
+      }
+    }
+
+    if (!Array.isArray(values)) {
+      values = String(values);
+      if (values.indexOf('..') > -1) {
+        obj[key + '__range'] = values;
+      } else if (values) {
+        obj[key] = values;
+      }
+      return obj;
+    }
+
+    values = values.map(Number)
+      .sort(d3.ascending);
+
+    var range = [values.shift()];
+    var ranges = [range];
+    while (values.length) {
+      var value = values.shift();
+      var previous = range[range.length - 1];
+      if (value === previous + 1) {
+        range.push(value);
+      } else {
+        ranges.push(range = [value]);
+      }
+    }
+
+    obj[key + '__range'] = ranges.map(function(range, i) {
+      var min = range.shift();
+      var max = range.length ? range.pop() : min;
+      if (min === max) {
+        switch (i) {
+          case 0:
+            return '..' + min;
+          case ranges.length - 1:
+            return max + '..';
+        }
+      }
+      return [min, max].join('..');
+    }).join(',');
+
+    return obj;
+  };
+
+  /**
+   * Tooltip helper functions.
+   */
   picc.tooltip = {
+
+    /**
+     * This is an hover/focus event listener that will attach the corresponding
+     * tooltip to this element's tooltip-target.
+     */
     show: function showTooltip() {
       var tooltip = this.tooltip;
       if (!tooltip) {
@@ -743,12 +1202,23 @@
       picc.tooltip.constrain(tooltip, ref);
     },
 
+    /**
+     * This is an leave/blur event listener that will hide the attached
+     * tooltip, but leave it in place for debugging.
+     */
     hide: function hideTooltip() {
       if (!this.tooltip) return;
       var tooltip = this.tooltip;
       tooltip.setAttribute('aria-hidden', true);
     },
 
+    /**
+     * This helper function positions the tooltip relative to its target
+     * parent by measuring the size of both and their position relative to the
+     * viewport (`window.innerWidth` and `window.innerHeight`) so that the
+     * tooltip's content (`.tooltip-content`) can be shifted left, right, up or
+     * down accordingly.
+     */
     constrain: function(tooltip, parent) {
       // remove the tooltip so we can accurately calculate
       // the outer element's size
@@ -793,11 +1263,18 @@
     }
   };
 
-  window.addEventListener('load', function() {
+  /**
+   * add event listeners for the tooltips by listening for mouseenter,
+   * mouseleave, focus and blur events on elements that have an
+   * aria-describedby attribute that begins with "tip-".
+   */
+  picc.ready(function() {
+    var described = 'aria-describedby';
     picc.delegate(
       document.body,
       function() {
-        return this.hasAttribute('aria-describedby');
+        return this.hasAttribute(described)
+            && this.getAttribute(described).match(/^tip-/);
       },
       {
         mouseenter: picc.tooltip.show,
