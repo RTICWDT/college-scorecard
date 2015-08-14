@@ -27,8 +27,13 @@
    */
   picc.API = (function() {
     var API = {
+      {% if site.API[site.branch] %}
+      url: '{{ site.API[site.branch].baseurl }}',
+      key: '{{ site.API[site.branch].key }}'
+      {% else %}
       url: '{{ site.API.baseurl }}',
       key: '{{ site.API.key }}'
+      {% endif %}
     };
 
     // the API endpoint (URI) at which to find school data
