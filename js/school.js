@@ -2,21 +2,31 @@
 
   var id = getSchoolId();
 
+  var loadable = d3.select('.loadable');
+
   if (!id) {
-    return showError('No school ID provided');
+    loadable.classed('js-error', true);
+    return showError(picc.errors.NO_SCHOOL_ID);
   }
 
   d3.select('#referrer-link')
     .attr('href', document.referrer || null);
 
+  loadable.classed('js-loading', true);
+
   picc.API.getAll({
     metadata: 'data.json',
     school: [picc.API.getSchool, id]
   }, function onSchoolLoad(error, data) {
+    loadable.classed('js-loading', false);
+
     // console.log('data:', data);
     if (error) {
+      loadable.classed('js-error', true);
       return showError(error);
     }
+
+    loadable.classed('js-loaded', true);
 
     var root = document.querySelector('#school');
     var school = data.school;
