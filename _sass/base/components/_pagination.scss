@@ -17,16 +17,16 @@
         text-decoration: none;
       }
 
+      &.arrow {
+        a {
+          color: $green;
+        }
+      }
+
       &.page-selected {
         a {
           color: $white;
           background: $dark-blue;
-        }
-      }
-
-      &.arrow {
-        a {
-          color: $green;
         }
       }
     }
