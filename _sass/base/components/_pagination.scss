@@ -3,39 +3,30 @@
 
   ol {
     display: block;
+    background: $white;
+    border-radius: 0.4em;
+    overflow: hidden;
 
     li {
       display: inline-block;
 
       a {
-        background: #fff;
         display: inline-block;
         padding: $base-padding-lite $base-padding-tb;
-      }
-
-      &:first-child a {
-        border-top-left-radius: $base-padding-lite;
-        border-bottom-left-radius: $base-padding-lite;
-      }
-
-      &:last-child a {
-        border-top-right-radius: $base-padding-lite;
-        border-bottom-right-radius: $base-padding-lite;
+        font-weight: bold;
+        text-decoration: none;
       }
 
       &.page-selected {
         a {
           color: $white;
           background: $dark-blue;
-          font-weight: bold;
-          text-decoration: none;
         }
       }
 
-      &.page-break {
+      &.arrow {
         a {
-          color: inherit;
-          text-decoration: none;
+          color: $green;
         }
       }
     }
