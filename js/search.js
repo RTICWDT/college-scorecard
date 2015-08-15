@@ -159,24 +159,8 @@
       var page = +params.page || 0;
       var total = data.total;
       var perPage = data.per_page;
-      var pages = d3.range(0, total, perPage)
-        .map(function(page) {
-          page /= perPage;
-          return {
-            page: page + 1,
-            index: page
-          };
-        });
 
-      if (pages.length > MAX_PAGES) {
-        var offset = MAX_PAGES / 2;
-        var first = pages.slice(0, offset);
-        var last = pages.slice(pages.length - offset);
-        pages = first.concat([{
-          page: '...',
-          index: false
-        }], last);
-      }
+      var pages = getPages(total, perPage, page);
 
       tagalong(paginator, {
         pages: pages
@@ -188,9 +172,7 @@
           '@class': function(d) {
             return d.index === page
               ? 'page-selected'
-              : d.index === false
-                ? 'page-break'
-                : null;
+              : d.arrow ? 'arrow' : null;
           },
           link: {
             text: 'page',
@@ -233,6 +215,66 @@
 
       console.timeEnd && console.timeEnd('[render]');
     });
+  }
+
+  function getPages(total, perPage, page) {
+
+    var numPages = Math.ceil(total / perPage);
+    var previous = false;
+    var next = false;
+
+    if (numPages > MAX_PAGES) {
+      var end = Math.min(page + MAX_PAGES, numPages);
+      var start = end - MAX_PAGES;
+      console.log('pages: %d -> %d', start, end);
+      pages = d3.range(start, start + MAX_PAGES);
+      previous = start > 0;
+      next = end < numPages;
+    } else {
+      pages = d3.range(0, numPages);
+    }
+
+    console.log('pages:', numPages, '->', pages);
+
+    pages = pages.map(function(page) {
+      return {
+        page: page + 1,
+        index: page
+      };
+    });
+
+    if (previous) {
+      var first = pages[0];
+      pages.unshift({
+        index: first.index - 1,
+        page: '<',
+        arrow: true
+      });
+      if (first.index > 1) {
+        pages.unshift({
+          index: 0,
+          page: '<<',
+          arrow: true
+        });
+      }
+    }
+    if (next) {
+      var last = pages[pages.length - 1];
+      pages.push({
+        index: last.index + 1,
+        page: '>',
+        arrow: true
+      });
+      if (last.index < numPages - 1) {
+        pages.push({
+          index: numPages - 1,
+          page: '>>',
+          arrow: true
+        });
+      }
+    }
+
+    return pages;
   }
 
   function showError(error) {
