@@ -226,7 +226,7 @@
     if (numPages > MAX_PAGES) {
       var end = Math.min(page + MAX_PAGES, numPages);
       var start = end - MAX_PAGES;
-      console.log('pages: %d -> %d', start, end);
+      // console.log('pages: %d -> %d', start, end);
       pages = d3.range(start, start + MAX_PAGES);
       previous = start > 0;
       next = end < numPages;
@@ -234,7 +234,7 @@
       pages = d3.range(0, numPages);
     }
 
-    console.log('pages:', numPages, '->', pages);
+    // console.log('pages:', numPages, '->', pages);
 
     pages = pages.map(function(page) {
       return {
