@@ -11,21 +11,13 @@ body_scripts:
   - school.js
 ---
 
-<section id="error" class="container hidden">
-  <h2>Error</h2>
-  <p class="error-message"></p>
-  <form target="../search/" method="GET">
-    <label for="name-school" >Try searching for a school by name:</h2>
-    <input id="name-school" name="name" type="text" placeholder="Name of School" autocomplete="off" autocorrect="off" autocapitalize="off">
-    <input type="submit" value="Search" class="button-primary">
-  </form>
-</section>
-
 <!-- Search results -->
-<div class="school-bg">
+<div class="school-bg loadable">
 
   <div class="container school-back">
-    <a href="#" class="link-more"><i class="fa fa-chevron-left"></i> Back to search results</a>
+    <a id="referrer-link" class="link-more" href="../search/">
+      <i class="fa fa-chevron-left"></i> Back to search results
+    </a>
   </div>
 
   <div class="container container-collapse section-card_container-school">
@@ -34,369 +26,414 @@ body_scripts:
 
       <div class="container section contained-no-radius">
 
-        <div class="school-heading">
-          <h1 class="name">School Name</h1>
-
-          <h2 class="location">
-            <span data-bind="city">City</span>,
-            <span data-bind="state">State</span>
-          </h2>
-
-          <h2 class="population">
-            <span data-bind="size_number">X</span> undergraduate students
-          </h2>
-
-          <ul class="school-key_figures key-figures">
-            <li class="years icon-year">
-              <b data-bind="years">X</b>
-              <span>Years</span>
-            </li>
-            <li class="public-private icon-urban">
-              <span data-bind="control">Public</span>
-            </li>
-            <li class="setting icon-rural">
-              <span data-bind="locale_name">Urban</span>
-            </li>
-            <li class="population icon-house">
-              <span data-bind="size_category">Small</span>
-            </li>
-          </ul>
-
-          <ul class="school-special_designation" data-bind="special_designations">
-            <li class="special"></li>
-          </ul>
-
-          <!-- <h3 class="special" data-bind="special_designation">
-            Special Designation
-          </h3> -->
+        <div id="error" class="show-error">
+          <h2>Something went wrong:</h2>
+          <p class="error-message"></p>
+          <form action="{{ site.baseurl }}/search/" method="GET">
+            <label for="name-school" >Try searching for a school by name:</h2>
+            <input id="name-school" name="name" type="text" placeholder="Name of School" autocomplete="off" autocorrect="off" autocapitalize="off">
+            <input type="submit" value="Search" class="button-primary">
+          </form>
         </div>
 
-        <div class="school-map" data-bind="map">
+        <div class="show-loading">
+          <h1>Loading...</h1>
         </div>
 
-        <div id="key-stats" class="school-meters">
-          <figure class="meter below_is_good">
-            <h2 class="figure-heading constrain_width">Average Cost Per Year</h2>
-            <picc-meter {% include net_price_meter_attributes.html %}>
-            </picc-meter>
-            <figcaption>
-              <span data-bind="average_cost">$XX,XXX</span>
-            </figcaption>
-          </figure>
+        <div class="show-loaded">
+          <div class="school-heading">
 
-          <figure class="meter above_is_good">
-            <h2 class="figure-heading constrain_width">Graduation Rate</h2>
-            <picc-meter {% include graduation_meter_attributes.html %}>
-            </picc-meter>
-            <figcaption>
-              <span data-bind="grad_rate">XX%</span>
-            </figcaption>
-          </figure>
-
-          <figure class="meter above_is_good">
-            <h2 class="figure-heading constrain_width">Average Salary</h2>
-            <picc-meter {% include earnings_meter_attributes.html %}>
-            </picc-meter>
-            <figcaption>
-              <span data-bind="average_salary">$XX,XXX</span>
-            </figcaption>
-          </figure>
-        </div>
-
-        <div class="section-card_container-school">
-
-          <aria-accordion id="cost" class="school-two_col">
-
-            <div>
-
-              <h1 class="search_category">
-                <a aria-expanded="false" aria-controls="costs-content">
-                  Costs
-                </a>
-              </h1>
-
-              <div id="costs-content" aria-hidden="true">
-
-                <div class="school-two_col-left centered">
-
-                  <figure class="meter below_is_good">
-                    <h2 class="figure-heading">Average Actual Cost</h2>
-                    <picc-meter id="cost-meter" {% include net_price_meter_attributes.html %}>
-                    </picc-meter>
-                    <figcaption>
-                      <i class="fa average average-arrow" data-meter="cost-meter"></i>
-                      <span data-bind="average_cost"></span>
-                      <div class="average average-label"></div>
-                    </figcaption>
-                  </figure>
-                  <!--
-                  <p>Assumes <strong>$XX,XXX</strong> in tuition and fees, <strong>$X,XXX</strong> in other costs like room and board, books and supplies, and other personal expenses.</p>
-                  -->
-                </div>
-
-                <div class="school-two_col-right">
-                  <h2>By Family Income</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                  
-                  <table class="school-table">
-                    <thead>
-                      <tr>
-                        <th>Family Income</th>
-                        <th>Average Price</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>$0-$30,000</td>
-                        <td data-bind="net_price_income1">$X,XXX</td>
-                      </tr>
-                      <tr>
-                        <td>$30,001-$48,000</td>
-                        <td data-bind="net_price_income2">$XX,XXX</td>
-                      </tr>
-                      <tr>
-                        <td>$48,001-$75,000</td>
-                        <td data-bind="net_price_income3">$XX,XXX</td>
-                      </tr>
-                      <tr>
-                        <td>$75,001-$110,000</td>
-                        <td data-bind="net_price_income4">$XX,XXX</td>
-                      </tr>
-                      <tr>
-                        <td>$110,001+</td>
-                        <td data-bind="net_price_income5">$XX,XXX</td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                </div>
-
-              </div>
-
+            <div class="investigation-major-wrapper"
+              data-bind="under_investigation" aria-hidden="true">
+              <a>
+                <p class="investigation-major" aria-describedby="tip-investigation-major">
+                  Under investigation <i class="tooltip-target fa fa-info-circle"></i>
+                </p>
+              </a>
             </div>
-          </aria-accordion>
 
-        </div>
+            <h1 data-bind="name">School Name</h1>
 
-        <div class="section-card_container-school">
-          <aria-accordion id="finaid" class="school-two_col">
-            <div>
-              <h1 class="search_category">
-                <a aria-expanded="false" aria-controls="finaid-content">
-                  Financial Aid &amp; Debt
-                </a>
-              </h1>
+            <h2 class="location">
+              <span data-bind="city">City</span>,
+              <span data-bind="state">State</span>
+            </h2>
 
-              <div id="finaid-content" aria-hidden="true">
+            <h2 class="population">
+              <span data-bind="size_number">X</span> undergraduate students
+            </h2>
 
-                <div class="school-two_col-left centered">
+            <ul class="school-key_figures key-figures">
+              <li class="years icon-year">
+                <b data-bind="years">X</b>
+                <span>Years</span>
+              </li>
+              <li class="public-private icon-urban">
+                <span data-bind="control">Public</span>
+              </li>
+              <li class="setting icon-rural">
+                <span data-bind="locale_name">Urban</span>
+              </li>
+              <li class="population icon-house">
+                <span data-bind="size_category">Small</span>
+              </li>
+            </ul>
 
-                  <figure class="meter above_is_good">
-                    <h2 class="figure-heading">Students Repaying<br>Loans on Time</h2>
-                    <picc-meter id="repayment-meter"
-                      class="debt"
-                      data-bind="repayment_rate_meter"
-                      max="1"
-                      data-median="{{ site.data.national_stats.repayment_rate.median }}">
-                    </picc-meter>
-                    <figcaption>
-                      <i class="fa average average-arrow" data-meter="repayment-meter"></i>
-                      <span data-bind="repayment_rate_percent">XX%</span>
-                      <div class="average average-label"></div>
-                    </figcaption>
-                  </figure>
+            <ul class="school-special_designation" data-bind="special_designations">
+              <li class="special"></li>
+            </ul>
 
-                  <div class="container school-callout">
+            <!-- <h3 class="special" data-bind="special_designation">
+              Special Designation
+            </h3> -->
+          </div>
 
-                    <h2>Get Help Paying for College</h2>
-                    <p>Submit a free application for Federal Student Aid. It only takes 20 minutes!</p>
-                    <button class="button button-primary">
-                      Start My Application
-                    </button>
+          <div class="school-map" data-bind="map">
+          </div>
 
-                  </div>
+          <div id="key-stats" class="school-meters">
+            <figure class="meter below_is_good">
+              <h2 class="figure-heading constrain_width">Average Cost Per Year</h2>
+              <picc-meter {% include net_price_meter_attributes.html %}>
+              </picc-meter>
+              <figcaption>
+                <span data-bind="average_cost">$XX,XXX</span>
+              </figcaption>
+            </figure>
 
-                </div>
+            <figure class="meter above_is_good">
+              <h2 class="figure-heading constrain_width">Graduation Rate</h2>
+              <picc-meter {% include graduation_meter_attributes.html %}>
+              </picc-meter>
+              <figcaption>
+                <span data-bind="grad_rate">XX%</span>
+              </figcaption>
+            </figure>
 
-                <div class="school-two_col-right school-fact_list">
+            <figure class="meter above_is_good">
+              <h2 class="figure-heading constrain_width">Average Salary</h2>
+              <picc-meter {% include earnings_meter_attributes.html %}>
+              </picc-meter>
+              <figcaption>
+                <span data-bind="average_salary">$XX,XXX</span>
+              </figcaption>
+            </figure>
+          </div>
 
-                  <div>
-                    <h2>Average Total Debt</h2>
-                    <strong class="fact_number" data-bind="average_total_debt">$XX,XXX</strong>
-                    <p>For those students who graduated</p>
-                  </div>
+          <div class="section-card_container-school">
 
-                  <div>
-                    <h2>Average Monthly Loan Payment</h2>
-                    <strong class="fact_number" data-bind="average_monthly_loan_payment">$XXX<span>/mo</span></strong>
+            <aria-accordion id="cost" class="school-two_col">
 
+              <div>
+
+                <h1 class="search_category">
+                  <a aria-expanded="false" aria-controls="costs-content">
+                    Costs
+                  </a>
+                </h1>
+
+                <div id="costs-content" aria-hidden="true">
+
+                  <div class="school-two_col-left centered">
+
+                    <figure class="meter below_is_good">
+                      <h2 class="figure-heading">Average Cost Per Year</h2>
+                      <picc-meter id="cost-meter" {% include net_price_meter_attributes.html %}>
+                      </picc-meter>
+                      <figcaption>
+                        <i class="fa average average-arrow" data-meter="cost-meter"></i>
+                        <span data-bind="average_cost"></span>
+                        <div class="average average-label"></div>
+                      </figcaption>
+                    </figure>
                     <!--
-                    <p>This is about equal to:</p>
-                    <ul class="group_inline" data-bind="loan_payment_equivalents">
-                      <li>
-                        <div class="group_inline-left"><img src="{{ site.baseurl }}/img/education.svg" alt="Education"></div>
-                        <div class="group_inline-right" data-bind="text">
-                          XX% of a graduate's monthly salary
-                        </div>
-                      </li>
-                      <li>
-                        <div class="group_inline-left"><img src="{{ site.baseurl }}/img/education.svg" alt= class="school-callout""Education"></div>
-                        <div class="group_inline-right">X months' car payments</div>
-                      </li>
-                      <li>
-                        <div class="group_inline-left"><img src="{{ site.baseurl }}/img/education.svg" alt="Education"></div>
-                        <div class="group_inline-right">XX% of a month's rent</div>
-                      </li>
-                    </ul>
+                    <p>Assumes <strong>$XX,XXX</strong> in tuition and fees, <strong>$X,XXX</strong> in other costs like room and board, books and supplies, and other personal expenses.</p>
                     -->
                   </div>
 
-                  <div>
-                    <h2>Students Receiving Federal Aid</h2>
-                    <strong class="fact_number" data-bind="federal_aid_percentage">XX%</strong>
-                    <p>Brief explanation of what federal aid is and means. Nunc eu consectutur purus.</p>
+                  <div class="school-two_col-right">
+                    <h2>By Family Income</h2>
+                    <p>Depending on the federal, state, or institutional grant aid available, students in your income bracket may pay more or less than the overall average costs.</p>
+
+                    <table class="school-table">
+                      <thead>
+                        <tr>
+                          <th>Family Income</th>
+                          <th>Average Price</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>$0-$30,000</td>
+                          <td data-bind="net_price_income1">$X,XXX</td>
+                        </tr>
+                        <tr>
+                          <td>$30,001-$48,000</td>
+                          <td data-bind="net_price_income2">$XX,XXX</td>
+                        </tr>
+                        <tr>
+                          <td>$48,001-$75,000</td>
+                          <td data-bind="net_price_income3">$XX,XXX</td>
+                        </tr>
+                        <tr>
+                          <td>$75,001-$110,000</td>
+                          <td data-bind="net_price_income4">$XX,XXX</td>
+                        </tr>
+                        <tr>
+                          <td>$110,001+</td>
+                          <td data-bind="net_price_income5">$XX,XXX</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
                   </div>
 
                 </div>
 
               </div>
-            </div>
-          </aria-accordion>
+            </aria-accordion>
 
-        </div>
+          </div>
 
-        <div class="section-card_container-school">
-          <aria-accordion id="graduation" class="school-two_col">
-            <div>
-              <h1 class="search_category">
-                <a aria-expanded="false" aria-controls="graduation-content">
-                  Graduation &amp; Retention
-                </a>
-              </h1>
+          <div class="section-card_container-school">
+            <aria-accordion id="finaid" class="school-two_col">
+              <div>
+                <h1 class="search_category">
+                  <a aria-expanded="false" aria-controls="finaid-content">
+                    Financial Aid &amp; Debt
+                  </a>
+                </h1>
 
-              <div id="graduation-content" aria-hidden="true">
+                <div id="finaid-content" aria-hidden="true">
 
-                <div class="school-two_col-left centered">
-                  <figure class="meter above_is_good">
-                    <h2 class="figure-heading constrain_width">Graduation Rate</h2>
-                    <picc-meter id="grad-meter" {% include graduation_meter_attributes.html %}>
-                    </picc-meter>
-                    <figcaption>
-                      <i class="fa average average-arrow" data-meter="grad-meter"></i>
-                      <span data-bind="grad_rate">60%</span>
-                      <div class="average average-label"></div>
-                    </figcaption>
-                  </figure>
-                </div>
+                  <div class="school-two_col-left centered">
 
-                <div class="school-two_col-right centered">
-                  <figure class="meter above_is_good">
-                    <h2 class="figure-heading">Students Who<br>Return Each Year</h2>
-                    <picc-meter id="retention-meter"
-                      class="graduation"
-                      data-bind="retention_rate_meter"
-                      about-threshold=".03"
-                      max="1"
-                      average="{{ site.data.national_stats.retention_rate.median }}">
-                    </picc-meter>
-                    <figcaption>
-                      <i class="fa average average-arrow" data-meter="retention-meter"></i>
-                      <span data-bind="retention_rate_value">XX%</span>
-                      <div class="average average-label"></div>
-                    </figcaption>
-                  </figure>
-                </div>
+                    <figure class="meter above_is_good">
+                      <h2 class="figure-heading">Students Paying<br>Down Their Debt</h2>
+                      <picc-meter id="repayment-meter"
+                        class="debt"
+                        data-bind="repayment_rate_meter"
+                        max="1"
+                        data-median="{{ site.data.national_stats.repayment_rate.median }}">
+                      </picc-meter>
+                      <figcaption>
+                        <i class="fa average average-arrow" data-meter="repayment-meter"></i>
+                        <span data-bind="repayment_rate_percent">XX%</span>
+                        <div class="average average-label"></div>
+                      </figcaption>
+                    </figure>
 
-              </div>
-            </div>
-          </aria-accordion>
-        </div>
+                    <div class="container school-callout">
 
-        <div class="section-card_container-school">
-          <aria-accordion id="earnings" class="school-two_col">
-            <div>
-              <h1 class="search_category">
-                <a aria-expanded="false" aria-controls="earnings-content">
-                  Earnings
-                </a>
-              </h1>
+                      <h2>Get Help Paying for College</h2>
+                      <p>Submit a free application for Federal Student Aid. It only takes 20 minutes!</p>
+                      <button class="button button-primary">
+                        Start My Application
+                      </button>
 
-              <div id="earnings-content" aria-hidden="true">
-                <div class="school-two_col-left centered">
-                  <figure class="meter above_is_good">
-                    <h2 class="figure-heading">Average Salary <br>After Leaving School</h2>
-                    <picc-meter id="salary-meter" {% include earnings_meter_attributes.html %}>
-                    </picc-meter>
-                    <figcaption>
-                      <i class="fa average average-arrow" data-meter="salary-meter"></i>
-                      <span data-bind="average_salary">$XX,XXX</span>
-                      <div class="average average-label"></div>
-                    </figcaption>
-                  </figure>
-                </div>
+                    </div>
 
-                <div class="school-two_col-right centered">
-                  <figure class="meter above_is_good">
-                    <h2 class="figure-heading">Former Students <br>Earning More Than $25K</h2>
-                    <picc-meter class="earnings"
-                      id="earn25k-meter"
-                      data-bind="earnings_gt_25k_meter"
-                      max="1"
-                      average=".6">
-                    </picc-meter>
-                    <figcaption>
-                      <i class="fa average average-arrow" data-meter="earn25k-meter"></i>
-                      <span data-bind="earnings_gt_25k">XX%</span>
-                      <div class="average average-label"></div>
-                    </figcaption>
-                  </figure>
+                  </div>
+
+                  <div class="school-two_col-right school-fact_list">
+
+                    <div>
+                      <h2>Typical Total Debt</h2>
+                      <strong class="fact_number" data-bind="average_total_debt">$XX,XXX</strong>
+                      <p>For undergraduates who complete college</p>
+                    </div>
+
+                    <div>
+                      <h2>Typical Monthly Loan Payment</h2>
+                      <strong class="fact_number">
+                        <span data-bind="average_monthly_loan_payment">$XXX</span>/mo
+                      </strong>
+                    </div>
+
+                    <div>
+                      <h2>Students Receiving Federal Aid</h2>
+                      <strong class="fact_number" data-bind="federal_aid_percentage">XX%</strong>
+                      <p>You may be eligible to receive federal loans, repaid after you leave school, to help pay the costs of college. This is how many students at this school borrowed federal loans last year.</p>
+                    </div>
+
+                  </div>
+
                 </div>
               </div>
-            </div>
-          </aria-accordion>
-        </div>
+            </aria-accordion>
 
-        <div class="section-card_container-school">
-          <aria-accordion id="demographics" class="school-two_col">
-            <div>
-              <h1 class="search_category">
-                <a aria-expanded="false" aria-controls="student-content">
-                  Student Body
-                </a>
-              </h1>
+          </div>
 
-              <div id="student-content" aria-hidden="true">
-                
-                <div class="school-student-intro">
+          <div class="section-card_container-school">
+            <aria-accordion id="graduation" class="school-two_col">
+              <div>
+                <h1 class="search_category">
+                  <a aria-expanded="false" aria-controls="graduation-content">
+                    Graduation &amp; Retention
+                  </a>
+                </h1>
 
-                  <ul class="school-key_figures key-figures">
-                    <li class="public-private icon-urban">
-                      <span data-bind="control">Small</span>
-                    </li>
-                    <li class="school-key_figures-stat">
-                      <div class="group_inline">
-                        <div class="group_inline-left fact_number" data-bind="size_number">X,XXX</div>
-                        <div class="group_inline-right"><p>undergraduate <br>students</p></div>
+                <div id="graduation-content" aria-hidden="true">
+
+                  <div class="school-two_col-left centered">
+                    <figure class="meter above_is_good">
+                      <h2 class="figure-heading constrain_width">Graduation Rate</h2>
+                      <picc-meter id="grad-meter" {% include graduation_meter_attributes.html %}>
+                      </picc-meter>
+                      <figcaption>
+                        <i class="fa average average-arrow" data-meter="grad-meter"></i>
+                        <span data-bind="grad_rate">60%</span>
+                        <div class="average average-label"></div>
+                      </figcaption>
+                    </figure>
+                  </div>
+
+                  <div class="school-two_col-right centered">
+                    <figure class="meter above_is_good">
+                      <h2 class="figure-heading">Students Who<br>Return After Their First Year</h2>
+                      <picc-meter id="retention-meter"
+                        class="graduation"
+                        data-bind="retention_rate_meter"
+                        about-threshold=".03"
+                        max="1"
+                        average="{{ site.data.national_stats.retention_rate.median }}">
+                      </picc-meter>
+                      <figcaption>
+                        <i class="fa average average-arrow" data-meter="retention-meter"></i>
+                        <span data-bind="retention_rate_value">XX%</span>
+                        <div class="average average-label"></div>
+                      </figcaption>
+                    </figure>
+                  </div>
+
+                </div>
+              </div>
+            </aria-accordion>
+          </div>
+
+          <div class="section-card_container-school">
+            <aria-accordion id="earnings" class="school-two_col">
+              <div>
+                <h1 class="search_category">
+                  <a aria-expanded="false" aria-controls="earnings-content">
+                    Earnings
+                  </a>
+                </h1>
+
+                <div id="earnings-content" aria-hidden="true">
+                  <div class="school-two_col-left centered">
+                    <figure class="meter above_is_good">
+                      <h2 class="figure-heading">Average Salary <br>After Leaving School</h2>
+                      <picc-meter id="salary-meter" {% include earnings_meter_attributes.html %}>
+                      </picc-meter>
+                      <figcaption>
+                        <i class="fa average average-arrow" data-meter="salary-meter"></i>
+                        <span data-bind="average_salary">$XX,XXX</span>
+                        <div class="average average-label"></div>
+                      </figcaption>
+                    </figure>
+                  </div>
+
+                  <div class="school-two_col-right centered">
+                    <figure class="meter above_is_good">
+                      <h2 class="figure-heading">Former Students <br>Earning More Than $25K</h2>
+                      <picc-meter class="earnings"
+                        id="earn25k-meter"
+                        data-bind="earnings_gt_25k_meter"
+                        max="1"
+                        average=".6">
+                      </picc-meter>
+                      <figcaption>
+                        <i class="fa average average-arrow" data-meter="earn25k-meter"></i>
+                        <span data-bind="earnings_gt_25k">XX%</span>
+                        <div class="average average-label"></div>
+                      </figcaption>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </aria-accordion>
+          </div>
+
+          <div class="section-card_container-school">
+            <aria-accordion id="demographics" class="school-two_col">
+              <div>
+                <h1 class="search_category">
+                  <a aria-expanded="false" aria-controls="student-content">
+                    Student Body
+                  </a>
+                </h1>
+
+                <div id="student-content" aria-hidden="true">
+
+                  <div class="school-student-intro">
+
+                    <ul class="school-key_figures key-figures">
+                      <li class="public-private icon-urban">
+                        <span data-bind="control">Small</span>
+                      </li>
+                      <li class="school-key_figures-stat">
+                        <div class="group_inline">
+                          <div class="group_inline-left fact_number" data-bind="size_number">X,XXX</div>
+                          <div class="group_inline-right"><p>undergraduate <br>students</p></div>
+                        </div>
+                      </li>
+                    </ul>
+
+                  </div>
+
+                  <div class="school-two_col school-student-body">
+
+                    <div class="school-two_col-left">
+
+                      <h2>Gender</h2>
+                      <ol class="bars" data-bind="gender_values">
+                        {% include bar_chart_template_item.html %}
+                      </ol>
+
+                      <!-- <div class="school-student-stats"> -->
+                      <h2>Other Demographics</h2>
+
+                      <div class="school-student-stats-col">
+
+                        <div>
+                          <span class="fact_number">
+                            <strong data-bind="full_time_percent">XX</strong>
+                            <span>%</span>
+                          </span> Full-time
+                        </div>
+                        <div class="fact_number divide">/</div>
+                        <div>
+                          <span class="fact_number">
+                            <strong data-bind="part_time_percent">XX</strong>
+                            <span>%</span>
+                          </span> Part-time
+                        </div>
+
+                        <div class="group_inline">
+                          <div class="group_inline-left"><span class="fact_number" data-bind="age_entry">XX</span></div>
+                          <div class="group_inline-right"><p class="school-student-stats-col-p">Average age at enrollment</p></div>
+                        </div>
+
                       </div>
-                    </li>
-                  </ul>
 
-                </div>
+                    </div>
 
-                <div class="school-two_col school-student-body">
+                    <!-- </div> -->
 
-                  <div class="school-two_col-left">
+                    <div class="school-two_col-right">
+                      <h2>Race/Ethnicity</h2>
+                      <ol class="bars" data-bind="race_ethnicity_values">
+                        {% include bar_chart_template_item.html %}
+                      </ol>
+                    </div>
 
-                    <h2>Gender</h2>
-                    <ol class="bars" data-bind="gender_values">
-                      {% include bar_chart_template_item.html %}
-                    </ol>
+                  </div>
 
-                    <!-- <div class="school-student-stats"> -->
+                  <!-- <div class="school-student-stats">
                     <h2>Other Demographics</h2>
 
                     <div class="school-student-stats-col">
-
                       <div>
                         <span class="fact_number">
                           <strong data-bind="full_time_percent">XX</strong>
@@ -410,136 +447,117 @@ body_scripts:
                           <span>%</span>
                         </span> Part-time
                       </div>
+                    </div>
 
+                    <div class="school-student-stats-col">
                       <div class="group_inline">
                         <div class="group_inline-left"><span class="fact_number" data-bind="age_entry">XX</span></div>
                         <div class="group_inline-right"><p class="school-student-stats-col-p">Average age at enrollment</p></div>
                       </div>
+                    </div> -->
 
-                    </div>
-
-                  </div>
-
+                    <!-- <div class="school-student-stats-col"> -->
+                      <!-- Placeholder for future stats -->
                     <!-- </div> -->
 
-                    <div class="school-two_col-right">
-                      <h2>Race/Ethnicity</h2>
-                      <ol class="bars" data-bind="race_ethnicity_values">
-                        {% include bar_chart_template_item.html %}
-                      </ol>
-                    </div>
-
-                </div>
-
-                <!-- <div class="school-student-stats">
-                  <h2>Other Demographics</h2>
-
-                  <div class="school-student-stats-col">
-                    <div>
-                      <span class="fact_number">
-                        <strong data-bind="full_time_percent">XX</strong>
-                        <span>%</span>
-                      </span> Full-time
-                    </div>
-                    <div class="fact_number divide">/</div>
-                    <div>
-                      <span class="fact_number">
-                        <strong data-bind="part_time_percent">XX</strong>
-                        <span>%</span>
-                      </span> Part-time
-                    </div>
-                  </div>
-
-                  <div class="school-student-stats-col">
-                    <div class="group_inline">
-                      <div class="group_inline-left"><span class="fact_number" data-bind="age_entry">XX</span></div>
-                      <div class="group_inline-right"><p class="school-student-stats-col-p">Average age at enrollment</p></div>
-                    </div>
-                  </div> -->
-
-                  <!-- <div class="school-student-stats-col"> -->
-                    <!-- Placeholder for future stats -->
                   <!-- </div> -->
 
-                <!-- </div> -->
-
-              </div>
-            </div>
-          </aria-accordion>
-        </div>
-
-        <div class="section-card_container-school">
-          <aria-accordion id="selectivity" class="school-two_col">
-            <div>
-              <h1 class="search_category">
-                <a aria-expanded="false" aria-controls="selectivity-content">
-                  Selectivity
-                </a>
-              </h1>
-
-              <div id="selectivity-content" aria-hidden="true">
-                <div class="school-two_col-left centered">
-                  <h2>Acceptance Rate</h2>
-                  <strong class="fact_number">Somewhat Selective</strong>
-                  <p>[chart here]</p>
-                </div>
-
-                <div class="school-two_col-right">
-
-                  <h2>Test Scores</h2>
-                  <p>Students who were admitted typically had standardized test score in these ranges.</p>
-
-                  <h3 class="h2">SAT</h3>
-                  <picc-range min="0" max="2400" lower="840" upper="1820" middle="1105">
-                  </picc-range>
-
-                  <h3 class="h2">ACT</h3>
-                  <picc-range min="1" max="36" lower="19" upper="25" middle="22">
-                  </picc-range>
-
                 </div>
               </div>
-            </div>
-          </aria-accordion>
-        </div>
+            </aria-accordion>
+          </div>
 
-        <div class="section-card_container-school">
-          <aria-accordion id="academics" class="school-two_col">
-            <div>
-              <h1 class="search_category">
-                <a aria-expanded="false" aria-controls="academics-content">
-                  Academics
-                </a>
-              </h1>
+          <div class="section-card_container-school">
+            <aria-accordion id="selectivity" class="school-two_col">
+              <div>
+                <h1 class="search_category">
+                  <a aria-expanded="false" aria-controls="selectivity-content">
+                    Selectivity
+                  </a>
+                </h1>
 
-              <div id="academics-content" aria-hidden="true">
-                <div class="school-two_col-left">
-
-                  <div class="school-academics-fact group_inline">
-                    <div class="group_inline-left"><strong class="fact_number" data-bind="num_available_programs">X</strong></div>
-                    <div class="group_inline-right"><h2>Programs Offered</h2></div>
+                <div id="selectivity-content" aria-hidden="true">
+                  <div class="school-two_col-left centered">
+                    <h2>Acceptance Rate</h2>
+                    <strong class="fact_number">Somewhat Selective</strong>
+                    <p>[chart here]</p>
                   </div>
-                  
-                  <h2>Most Popular Programs</h2>
-                  <ol class="decimal school-programs" data-bind="popular_programs">
-                    <li><span class="program"></span> (<span class="percent"></span>)</li>
-                  </ol>
-                </div>
 
-                <div class="school-two_col-right">
-                
-                  <h2>Available Areas of Study</h2>
-                  <ul class="school-long_list" data-bind="available_programs">
-                    <li><span class="program">Management</span></li>
-                  </ul>
-                
+                  <div class="school-two_col-right">
+
+                    <h2>Test Scores</h2>
+                    <p>Students who were admitted typically had standardized test score in these ranges.</p>
+
+                    <h3 class="h2">SAT</h3>
+
+                    <figure data-bind="sat_reading_scores_visible">
+                      <h4>Critical Reading</h4>
+                      <picc-range data-bind="sat_reading_scores" max="800">
+                      </picc-range>
+                    </figure>
+
+                    <figure data-bind="sat_math_scores_visible">
+                      <h4>Math</h4>
+                      <picc-range data-bind="sat_math_scores" max="800">
+                      </picc-range>
+                    </figure>
+
+                    <figure data-bind="sat_writing_scores_visible">
+                      <h4>Writing</h4>
+                      <picc-range data-bind="sat_writing_scores" max="800">
+                      </picc-range>
+                    </figure>
+
+                    <h3 class="h2">ACT</h3>
+
+                    <figure data-bind="act_scores_visible">
+                      <picc-range data-bind="act_scores" min="0" max="36">
+                      </picc-range>
+                    </figure>
+
+                  </div>
                 </div>
               </div>
-            </div>
-          </aria-accordion>
-        </div>
+            </aria-accordion>
+          </div>
 
-        
+          <div class="section-card_container-school">
+            <aria-accordion id="academics" class="school-two_col">
+              <div>
+                <h1 class="search_category">
+                  <a aria-expanded="false" aria-controls="academics-content">
+                    Academics
+                  </a>
+                </h1>
+
+                <div id="academics-content" aria-hidden="true">
+                  <div class="school-two_col-left">
+
+                    <div class="school-academics-fact group_inline">
+                      <div class="group_inline-left"><strong class="fact_number" data-bind="num_available_programs">X</strong></div>
+                      <div class="group_inline-right"><h2><span data-bind="programs_plural">Programs</span> Offered</h2></div>
+                    </div>
+
+                    <h2>Most Popular Programs</h2>
+                    <ol class="decimal school-programs" data-bind="popular_programs">
+                      <li><span class="program"></span> (<span class="percent"></span>)</li>
+                    </ol>
+                  </div>
+
+                  <div class="school-two_col-right">
+
+                    <h2>Available Areas of Study</h2>
+                    <ul class="school-long_list" data-bind="available_programs">
+                      <li><span class="program">Management</span></li>
+                    </ul>
+
+                  </div>
+                </div>
+              </div>
+            </aria-accordion>
+          </div>
+
+        </div>
 
       </div>
 

@@ -1,0 +1,23 @@
+#
+# 30 4-year schools with the highest earnings after leaving school and the lowest cost for students who are eligible for financial aid
+# (=<25th percentile of average net price for bottom 2 income quintiles), highest median earnings after 10 years (=>90th percentile)
+#
+
+# school-list-item:
+#   - name: "Massachusetts Maritime Academy"
+#     stats: "$65,985", "$7,519"
+#   - name: "Georgia Institute of Technology-Main Campus"
+#     stats: "$64,562", "$7,875"
+#   - name: "Washington and Lee University"
+#     stats: "$62,495", "$7,663"
+#   - name: "Princeton University"
+#     stats: "$56,248", "$5,720"
+#   - name: "Georgia Health Sciences University"
+#     stats: "$53,856", "$1,347"
+#   - name: "Haverford College"
+#     stats: "$51,822", "$5,648"
+#   - name: "Baptist Memorial College of Health Sciences"
+#     stats: "$51,313", "$5,820"
+#    - name: "Rice University"
+#     stats: "$51,228", "$7,960"
+#

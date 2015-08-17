@@ -2,9 +2,10 @@
 title: College Choice
 
 description:
-  Write an awesome description for your new site here.
+  Helping prospective college students find the right school.
 
-baseurl: "/college-choice" # the subpath of your site, e.g. /blog
+# the subpath of your site, e.g. /blog
+baseurl: /college-choice
 
 # Build settings
 markdown: kramdown
@@ -28,8 +29,11 @@ scripts:
 stylesheets:
   - styles.css
 
+# whether to include the Google Analytics & DAP snippets
+analytics: true
+
 # API configuration
-api:
+API:
   baseurl: https://api.data.gov/TEST/ed/
 
 # specify paths to exclude from copying to _site

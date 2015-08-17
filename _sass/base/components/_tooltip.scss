@@ -5,6 +5,20 @@
     @include font-size($h4);
     color: $mid-blue;
   }
+
+  .investigation-minor,
+  .investigation-major {
+    i {
+      color: $red;
+      padding-left: 4px;
+    }
+  }
+
+  .investigation-major {
+    i {
+      color: $white;
+    }
+  }
 }
 
 [aria-describedby^=tip-] {
@@ -33,14 +47,18 @@
   .tooltip-content,
   .tooltip-arrow {
     position: absolute;
+    text-transform: none;
+    // ^^ so we can use this on classes of any type
+    // and still have the tip itself be normal case.
   }
 
   .tooltip-content {
+    @extend .light_on_dark;
     background: $black;
     background: $black-transparent;
     border-radius: $base-border-radius;
     color: $white;
-    font-weight: $weight-light;
+    font-weight: $weight-book;
     left: -50%;
     line-height: $base-line-height;
     padding: $base-padding-tb $base-padding;
@@ -52,7 +70,7 @@
   }
 
   strong {
-    font-weight: $weight-book;
+    font-weight: $weight-bold;
   }
 
   &.tooltip_below .tooltip-arrow {
