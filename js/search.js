@@ -171,8 +171,8 @@
           },
           '@class': function(d) {
             return d.index === page
-              ? 'page-selected'
-              : d.arrow ? 'arrow' : null;
+              ? 'pagination-page_selected'
+              : d.arrow ? 'pagination-arrow' : null;
           },
           link: {
             text: 'page',
@@ -201,7 +201,7 @@
             var p = this.getAttribute('data-page');
             var selected = p == _page;
             this.parentNode.classList
-              .toggle('page-selected', selected);
+              .toggle('pagination-page_selected', selected);
             // console.log('selected?', p, page, selected, '->', this.parentNode);
           });
 
