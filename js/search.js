@@ -61,9 +61,6 @@
     // set the predominant degree, which can be either a value or
     // a range (default: '2..3')
     if (query.degree) {
-      // FIXME: when we have support for nested keys,
-      // 'predominant' should be changed to
-      // `picc.fields.PREDOMINANT_DEGREE`
       picc.data.rangify(query, picc.fields.PREDOMINANT_DEGREE, query.degree);
       delete query.degree;
     }
