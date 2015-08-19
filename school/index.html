@@ -93,7 +93,12 @@ body_scripts:
 
           <div id="key-stats" class="school-meters">
             <figure class="meter below_is_good">
-              <h2 class="figure-heading constrain_width">Average Cost Per Year</h2>
+              <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year">
+                Average Cost Per Year
+                <a class="tooltip-target u-new_line">
+                  <i class="fa fa-info-circle"></i>
+                </a>
+              </h2>
               <picc-meter {% include net_price_meter_attributes.html %}>
               </picc-meter>
               <figcaption>
@@ -102,7 +107,12 @@ body_scripts:
             </figure>
 
             <figure class="meter above_is_good">
-              <h2 class="figure-heading constrain_width">Graduation Rate</h2>
+              <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year">
+                Graduation Rate
+                <a class="tooltip-target u-new_line">
+                  <i class="fa fa-info-circle"></i>
+                </a>
+              </h2>
               <picc-meter {% include graduation_meter_attributes.html %}>
               </picc-meter>
               <figcaption>
@@ -111,7 +121,12 @@ body_scripts:
             </figure>
 
             <figure class="meter above_is_good">
-              <h2 class="figure-heading constrain_width">Average Salary</h2>
+              <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year">
+                Average Salary
+                <a class="tooltip-target u-new_line">
+                  <i class="fa fa-info-circle"></i>
+                </a>
+              </h2>
               <picc-meter {% include earnings_meter_attributes.html %}>
               </picc-meter>
               <figcaption>
@@ -137,7 +152,12 @@ body_scripts:
                   <div class="school-two_col-left centered">
 
                     <figure class="meter below_is_good">
-                      <h2 class="figure-heading">Average Cost Per Year</h2>
+                      <h2 class="figure-heading" aria-describedby="tip-avg-cost-year">
+                        Average Cost Per Year
+                        <a class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <picc-meter id="cost-meter" {% include net_price_meter_attributes.html %}>
                       </picc-meter>
                       <figcaption>
@@ -209,7 +229,12 @@ body_scripts:
                   <div class="school-two_col-left centered">
 
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading">Students Paying<br>Down Their Debt</h2>
+                      <h2 class="figure-heading" aria-describedby="tip-avg-cost-year">
+                        Students Paying<br>Down Their Debt
+                        <a class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <picc-meter id="repayment-meter"
                         class="debt"
                         data-bind="repayment_rate_meter"
@@ -277,7 +302,12 @@ body_scripts:
 
                   <div class="school-two_col-left centered">
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading constrain_width">Graduation Rate</h2>
+                      <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year">
+                        Graduation Rate
+                        <a class="tooltip-target u-new_line">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <picc-meter id="grad-meter" {% include graduation_meter_attributes.html %}>
                       </picc-meter>
                       <figcaption>
@@ -290,7 +320,12 @@ body_scripts:
 
                   <div class="school-two_col-right centered">
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading">Students Who<br>Return After Their First Year</h2>
+                      <h2 class="figure-heading" aria-describedby="tip-avg-cost-year">
+                        Students Who<br>Return After Their First Year
+                        <a class="tooltip-target u-new_line">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <picc-meter id="retention-meter"
                         class="graduation"
                         data-bind="retention_rate_meter"
@@ -323,7 +358,12 @@ body_scripts:
                 <div id="earnings-content" aria-hidden="true">
                   <div class="school-two_col-left centered">
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading">Average Salary <br>After Leaving School</h2>
+                      <h2 class="figure-heading" aria-describedby="tip-avg-cost-year">
+                        Average Salary <br>After Leaving School
+                        <a class="tooltip-target u-new_line">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <picc-meter id="salary-meter" {% include earnings_meter_attributes.html %}>
                       </picc-meter>
                       <figcaption>
@@ -336,7 +376,12 @@ body_scripts:
 
                   <div class="school-two_col-right centered">
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading">Former Students <br>Earning More Than $25K</h2>
+                      <h2 class="figure-heading" aria-describedby="tip-avg-cost-year">
+                        Former Students <br>Earning More Than $25K
+                        <a class="tooltip-target u-new_line">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <picc-meter class="earnings"
                         id="earn25k-meter"
                         data-bind="earnings_gt_25k_meter"
