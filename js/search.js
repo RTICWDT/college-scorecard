@@ -64,7 +64,7 @@
       // FIXME: when we have support for nested keys,
       // 'predominant' should be changed to
       // `picc.fields.PREDOMINANT_DEGREE`
-      picc.data.rangify(query, 'predominant', query.degree);
+      picc.data.rangify(query, picc.fields.PREDOMINANT_DEGREE, query.degree);
       delete query.degree;
     }
 
