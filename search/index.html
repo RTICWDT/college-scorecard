@@ -62,12 +62,20 @@ body_scripts:
 
               <!-- <div class="u-group_inline-right"> -->
                 <label for="select-sort">Sort by:</label>
-                <select id="select-sort" name="sort">
+
+                <!-- TODO fix merge conflict in sort -->
+                <!-- <select id="select-sort" name="sort">
                   <option selected value="2011.earnings.gt_25k_p10:desc">Earnings</option>
                   <option value="school.name:asc">Name (A to Z)</option>
                   <option value="school.name:desc">Name (Z to A)</option>
                   <option value="2013.student.size:desc">Size (large to small)</option>
                   <option value="2013.student.size:asc">Size (small to large)</option>
+                </select> -->
+
+                <select id="select-sort" name="sort">
+                  <option selected value="2011.earnings.threshold_earnings_percent:desc">Earnings</option>
+                  <option value="2013.student.size:asc">Size (small to large)</option>
+                  <option value="2013.student.size:desc">Size (large to small)</option>
                 </select>
               <!-- </div> -->
 
