@@ -7,6 +7,13 @@
   // the current outbound request
   var req;
 
+  // "incremental" updates will only hide the list of schools, and
+  // not any of the other elements (results total, sort, pages)
+  var incremental = false;
+
+  // the maximum # of page links to show
+  var MAX_PAGES = 6;
+
   var change = picc.debounce(onChange, 100);
 
   picc.ready(function() {
@@ -19,6 +26,12 @@
   });
 
   form.on('change', change);
+
+  // sort is an "incremental" update
+  form.on('change:sort', function() {
+    console.log('change sort!');
+    incremental = true;
+  });
 
   form.on('submit', function(data, e) {
     change();
@@ -99,14 +112,28 @@
 
     if (req) req.cancel();
 
-    resultsRoot.classList.add('js-loading');
-    resultsRoot.classList.remove('js-loaded');
-    resultsRoot.classList.remove('js-error');
+    var list = d3.select(resultsRoot)
+      .select('[data-bind="results"]');
+
+    if (incremental) {
+      list.classed('hidden', true);
+    } else {
+      resultsRoot.classList.add('js-loading');
+      resultsRoot.classList.remove('js-loaded');
+      resultsRoot.classList.remove('js-error');
+    }
+
+    var paginator = resultsRoot.querySelector('.pagination');
+    paginator.classList.toggle('show-loading', incremental);
 
     console.time && console.time('[load]');
 
     picc.API.search(query, function(error, data) {
       resultsRoot.classList.remove('js-loading');
+      list.classed('hidden', false);
+
+      paginator.classList.remove('show-loading');
+      incremental = false;
 
       console.timeEnd && console.timeEnd('[load]');
 
@@ -129,11 +156,125 @@
         results_total: format.number('total', '0')
       });
 
+      var page = +params.page || 0;
+      var total = data.total;
+      var perPage = data.per_page;
+
+      var pages = getPages(total, perPage, page);
+
+      tagalong(paginator, {
+        pages: pages
+      }, {
+        pages: {
+          '@data-index': function(d) {
+            return String(d.index);
+          },
+          '@class': function(d) {
+            return d.index === page
+              ? 'pagination-page_selected'
+              : d.arrow ? 'pagination-arrow' : null;
+          },
+          link: {
+            text: 'page',
+            '@data-page': function(d) {
+              return String(d.index);
+            },
+            '@href': function(d) {
+              return d.index === page
+                ? null
+                : d.index === false
+                  ? null
+                  : '?' + querystring.stringify(picc.data.extend({}, params, {page: d.index}));
+            }
+          }
+        }
+      });
+
+      var pageLinks = d3.selectAll('a.select-page')
+        .on('click', function() {
+          d3.event.preventDefault();
+
+          var _page = this.getAttribute('data-page');
+          if (_page === 'false') return;
+
+          pageLinks.each(function() {
+            var p = this.getAttribute('data-page');
+            var selected = p == _page;
+            this.parentNode.classList
+              .toggle('pagination-page_selected', selected);
+            // console.log('selected?', p, page, selected, '->', this.parentNode);
+          });
+
+          form.set('page', _page);
+          incremental = true;
+          change();
+        });
+
       var resultsList = resultsRoot.querySelector('.schools-list');
       tagalong(resultsList, data.results, picc.school.directives);
 
       console.timeEnd && console.timeEnd('[render]');
     });
+  }
+
+  function getPages(total, perPage, page) {
+
+    var numPages = Math.ceil(total / perPage);
+    var previous = false;
+    var next = false;
+
+    if (numPages > MAX_PAGES) {
+      var end = Math.min(page + MAX_PAGES, numPages);
+      var start = end - MAX_PAGES;
+      // console.log('pages: %d -> %d', start, end);
+      pages = d3.range(start, start + MAX_PAGES);
+      previous = start > 0;
+      next = end < numPages;
+    } else {
+      pages = d3.range(0, numPages);
+    }
+
+    // console.log('pages:', numPages, '->', pages);
+
+    pages = pages.map(function(page) {
+      return {
+        page: page + 1,
+        index: page
+      };
+    });
+
+    if (previous) {
+      var first = pages[0];
+      pages.unshift({
+        index: first.index - 1,
+        page: '<',
+        arrow: true
+      });
+      if (first.index > 1) {
+        pages.unshift({
+          index: 0,
+          page: '<<',
+          arrow: true
+        });
+      }
+    }
+    if (next) {
+      var last = pages[pages.length - 1];
+      pages.push({
+        index: last.index + 1,
+        page: '>',
+        arrow: true
+      });
+      if (last.index < numPages - 1) {
+        pages.push({
+          index: numPages - 1,
+          page: '>>',
+          arrow: true
+        });
+      }
+    }
+
+    return pages;
   }
 
   function showError(error) {
