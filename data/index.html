@@ -1,5 +1,11 @@
 ---
+title: Data
 layout: default-data
+permalink: /data/
+scripts:
+  - vendor/flickity.pkgd.js
+stylesheets:
+  - vendor/flickity.min.css
 ---
 
 <div class="data-home-intro">
@@ -34,7 +40,22 @@ layout: default-data
 
     <h2>Data Insights</h2>
 
-    <p>Welcome, mission statement, why this is important, join the conversation. Lorem ipsum dolor sed lacus id ligula hendrerit semper sed vitae risus.</p>
+    <div class="main-gallery js-flickity"
+      data-flickity-options='{ "cellAlign": "left", "contain": true }'>
+
+      <div class="gallery-cell">
+          <p>Welcome, mission statement, why this is important, join the conversation. Lorem ipsum dolor sed lacus id ligula hendrerit semper sed vitae risus.</p>
+      </div>
+
+      <div class="gallery-cell">
+          <p>This is the second cell, mission statement, why this is important, join the conversation. Lorem ipsum dolor sed lacus id ligula hendrerit semper sed vitae risus.</p>
+      </div>
+
+      <div class="gallery-cell">
+          <p>Even a third one! why this is important, join the conversation. Lorem ipsum dolor sed lacus id ligula hendrerit semper sed vitae risus.</p>
+      </div>
+      
+    </div>
 
   </section>
 
