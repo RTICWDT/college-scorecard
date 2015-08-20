@@ -154,7 +154,7 @@ body_scripts:
                     <figure class="meter below_is_good">
                       <h2 class="figure-heading" aria-describedby="tip-avg-cost-year">
                         Average Cost Per Year
-                        <a class="tooltip-target">
+                        <a class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
                         </a>
                       </h2>
@@ -231,7 +231,7 @@ body_scripts:
                     <figure class="meter above_is_good">
                       <h2 class="figure-heading" aria-describedby="tip-avg-cost-year">
                         Students Paying<br>Down Their Debt
-                        <a class="tooltip-target">
+                        <a class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
                         </a>
                       </h2>
@@ -263,20 +263,38 @@ body_scripts:
                   <div class="school-two_col-right school-fact_list">
 
                     <div>
-                      <h2>Typical Total Debt</h2>
+                      <h2
+                        aria-describedby="tip-graduation-rate">
+                        Typical Total Debt
+                        <a class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <strong class="fact_number" data-bind="average_total_debt">$XX,XXX</strong>
                       <p>For undergraduates who complete college</p>
                     </div>
 
                     <div>
-                      <h2>Typical Monthly Loan Payment</h2>
+                      <h2
+                        aria-describedby="tip-graduation-rate">
+                        Typical Monthly Loan Payment
+                        <a class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <strong class="fact_number">
                         <span data-bind="average_monthly_loan_payment">$XXX</span>/mo
                       </strong>
                     </div>
 
                     <div>
-                      <h2>Students Receiving Federal Aid</h2>
+                      <h2
+                        aria-describedby="tip-graduation-rate">
+                        Students Receiving Federal Aid
+                        <a class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <strong class="fact_number" data-bind="federal_aid_percentage">XX%</strong>
                       <p>You may be eligible to receive federal loans, repaid after you leave school, to help pay the costs of college. This is how many students at this school borrowed federal loans last year.</p>
                     </div>
@@ -431,13 +449,23 @@ body_scripts:
 
                     <div class="school-two_col-left">
 
-                      <h2>Gender</h2>
+                      <h2
+                        aria-describedby="tip-graduation-rate">Gender
+                        <a class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <ol class="bars" data-bind="gender_values">
                         {% include bar_chart_template_item.html %}
                       </ol>
 
                       <!-- <div class="school-student-stats"> -->
-                      <h2>Other Demographics</h2>
+                      <h2
+                        aria-describedby="tip-graduation-rate">Other Demographics
+                        <a class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
 
                       <div class="school-student-stats-col">
 
@@ -467,7 +495,13 @@ body_scripts:
                     <!-- </div> -->
 
                     <div class="school-two_col-right">
-                      <h2>Race/Ethnicity</h2>
+                      <h2
+                        aria-describedby="tip-graduation-rate">
+                        Race/Ethnicity
+                        <a class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <ol class="bars" data-bind="race_ethnicity_values">
                         {% include bar_chart_template_item.html %}
                       </ol>
@@ -523,14 +557,26 @@ body_scripts:
 
                 <div id="selectivity-content" aria-hidden="true">
                   <div class="school-two_col-left centered">
-                    <h2>Acceptance Rate</h2>
+                    <h2
+                      aria-describedby="tip-graduation-rate">
+                      Acceptance Rate
+                      <a class="tooltip-target">
+                        <i class="fa fa-info-circle"></i>
+                      </a>
+                    </h2>
                     <strong class="fact_number">Somewhat Selective</strong>
                     <p>[chart here]</p>
                   </div>
 
                   <div class="school-two_col-right">
 
-                    <h2>Test Scores</h2>
+                    <h2
+                      aria-describedby="tip-graduation-rate">
+                      Test Scores
+                      <a class="tooltip-target">
+                        <i class="fa fa-info-circle"></i>
+                      </a>
+                    </h2>
                     <p>Students who were admitted typically had standardized test score in these ranges.</p>
 
                     <h3 class="h2">SAT</h3>
@@ -583,7 +629,13 @@ body_scripts:
                       <div class="group_inline-right"><h2><span data-bind="programs_plural">Programs</span> Offered</h2></div>
                     </div>
 
-                    <h2>Most Popular Programs</h2>
+                    <h2
+                      aria-describedby="tip-graduation-rate">
+                      Most Popular Programs
+                      <a class="tooltip-target">
+                        <i class="fa fa-info-circle"></i>
+                      </a>
+                    </h2>
                     <ol class="decimal school-programs" data-bind="popular_programs">
                       <li><span class="program"></span> (<span class="percent"></span>)</li>
                     </ol>
@@ -591,7 +643,13 @@ body_scripts:
 
                   <div class="school-two_col-right">
 
-                    <h2>Available Areas of Study</h2>
+                    <h2
+                      aria-describedby="tip-graduation-rate">
+                      Available Areas of Study
+                      <a class="tooltip-target">
+                        <i class="fa fa-info-circle"></i>
+                      </a>
+                    </h2>
                     <ul class="school-long_list" data-bind="available_programs">
                       <li><span class="program">Management</span></li>
                     </ul>
