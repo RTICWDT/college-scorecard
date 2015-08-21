@@ -1,0 +1,43 @@
+.pagination {
+  margin-top: $base-padding;
+  text-align: right;
+
+  ol {
+    display: block;
+    overflow: hidden;
+    font-weight: $weight-bold;
+    text-transform: uppercase;
+
+    li {
+      display: inline-block;
+      margin-left: $base-padding-lite;
+
+      a {
+        border-radius: $base-border-radius;
+        color: $black;
+        display: inline-block;
+        padding: 2px 10px 1px 10px;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+          background: $white;
+        }
+      }
+
+      &.pagination-arrow {
+        a {
+          color: $mid-blue;
+        }
+      }
+
+      &.pagination-page_selected {
+        a {
+          @extend .light_on_dark;
+          color: $white;
+          background: $mid-blue;
+        }
+      }
+    }
+  }
+}

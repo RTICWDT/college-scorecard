@@ -148,10 +148,6 @@
       this.setAttribute('aria-valuemin', lower);
       this.setAttribute('aria-valuemax', upper);
 
-      this.dispatchEvent(new CustomEvent('change', {
-        min: lower,
-        max: upper
-      }));
     },
 
     // clamp to min and max, round if snap === true
@@ -233,6 +229,17 @@
     window.removeEventListener('touchmove', getListener(move, this));
     window.removeEventListener('mouseup', getListener(release, this));
     window.removeEventListener('touchend', getListener(release, this));
+
+    var lower = this.lower;
+    var upper = this.upper;
+    this.getElementsByTagName("input")[0].setAttribute("value", lower+".."+upper);
+
+    this.dispatchEvent(new CustomEvent('change', {
+      min: lower,
+      max: upper,
+      bubbles: true
+    }));
+
     e.preventDefault();
     return false;
   }

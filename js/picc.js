@@ -374,7 +374,7 @@
     NAME:                 'school.name',
     CITY:                 'school.city',
     STATE:                'school.state',
-    LOCATION:             'school.location',
+    LOCATION:             'location',
     OWNERSHIP:            'school.ownership',
     LOCALE:               'school.locale',
     REGION_ID:            'school.region_id',
@@ -409,7 +409,7 @@
     MEDIAN_EARNINGS:      '2011.earnings.6_yrs_after_entry.median',
 
     // FIXME: pending #373
-    EARNINGS_GT_25K:      '2011.earnings.gt_25k_p10',
+    EARNINGS_GT_25K:      '2011.earnings.threshold_earnings_percent',
 
     PROGRAM_PERCENTAGE:   '2013.academics.program_percentage',
 

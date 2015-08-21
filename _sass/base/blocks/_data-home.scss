@@ -1,13 +1,18 @@
 // Data Tool
 //=============================
 
+.data-home-rule {
+  border-right: ($regular-border-size * 2) solid $light-gray;
+  margin-right: $base-padding;
+}
+
 .data-home-intro {
-  background: $light-putty;
 
   h3 {
     @include font-size($h5);
     font-weight: 800;
     letter-spacing: em(2.5);
+    padding-top: $base-padding;
     text-transform: uppercase;
 
     @include respond-to(medium-up) {
@@ -16,7 +21,8 @@
   }
 
   p {
-    padding-right: $base-padding;
+    padding-top: $base-padding;
+    padding-bottom: $base-padding;
   }
 
   ul li {
@@ -51,5 +57,77 @@
 
   @include respond-to(medium-up) {
     @include span-columns(4);
+  }
+}
+
+button.data-home-button {
+  @extend .button-wizard;
+  @include font-size(0.75);
+  border-color: $green;
+  color: $green;
+  height: auto;
+  margin-bottom: $base-padding-extra;
+  padding-top: 0.8em;
+  width: 330px;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0 0 0 2px $green;
+  }
+
+  + button.data-home-button {
+    margin-left: 10px;
+  }
+}
+
+.data-home-download {
+  h2,
+  h3 {
+    padding-bottom: $base-padding-lite;
+  }
+
+  p + ul {
+    margin-top: $base-padding;
+  }
+
+  button.button-primary {
+    @include font-size($h3);
+    letter-spacing: 2px;
+    margin-top: $base-padding-large;
+    margin-bottom: $base-padding-extra;
+    width: 335px;
+
+    + button.button-primary {
+      background-color: $mid-blue;
+      margin-left: 10px;
+
+      &:hover,
+      &:focus {
+        background-color: lighten($dark-blue, 8%);
+      }
+    }
+  }
+
+  .data-home-intro-col-left {
+    padding-right: $base-padding;
+  }
+
+  .link-more {
+    display: block;
+    margin-top: $base-padding-extra;
+  }
+
+  .data-download-list {
+    margin-bottom: $base-padding-large;
+
+    li a {
+      color: $mid-blue;
+      text-decoration: none;
+
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
   }
 }

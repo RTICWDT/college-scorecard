@@ -1,0 +1,48 @@
+.main-gallery {
+  height: 280px;
+  margin-top: $base-padding-large;
+  margin-bottom: $base-padding-large;
+  position: relative;
+}
+
+.gallery-cell {
+  padding-left: 80px;
+  padding-right: 80px;
+  width: 100%;
+
+  p {
+    @include font-size($h2);
+
+    .insight-highlight {
+      background: $yellow;
+      font-weight: $weight-bold;
+    }
+  }
+}
+
+.flickity-page-dots {
+  bottom: -10px !important;
+  right: 80px;
+  text-align: right !important;
+
+  .dot {
+    background: $mid-blue !important;
+    height: 20px !important;
+    margin: 0 6px !important;
+    width: 20px !important;
+  }
+}
+
+.insight-cite {
+  @include font-size($h4);
+  color: $dark-gray;
+  display: block;
+  margin-top: $base-padding;
+}
+
+.gallery-static {
+  bottom: 20px;
+  position: absolute;
+  right: 80px;
+  z-index: 100000;
+}

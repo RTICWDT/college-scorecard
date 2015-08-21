@@ -31,31 +31,47 @@
       <div id="filters-content" aria-hidden="true" class="accordion-div">
 
         <div class="filter_section">
-          <h2>Cost Per Year</h2>
+          <h2 aria-describedby="tip-avg-cost-year">Cost Per Year
+            <a class="tooltip-target">
+              <i class="fa fa-info-circle"></i>
+            </a>
+          </h2>
           <picc-slider format="$" max="50000" average="22000">
-            <input type="hidden" name="average_cost_range">
+            <input type="hidden" name="2013.cost.avg_net_price.private__range">
           </picc-slider>
         </div>
 
 
         <div class="filter_section">
-          <h2>Graduation Rate</h2>
+          <h2 aria-describedby="tip-graduation-rate">Graduation Rate
+            <a class="tooltip-target">
+              <i class="fa fa-info-circle"></i>
+            </a>
+          </h2>
           <picc-slider format="%" max="1">
-            <input type="hidden" name="graduation_rate_range">
+            <input type="hidden" name="2013.completion.rate.four_year__range">
           </picc-slider>
         </div>
 
         <div class="filter_section">
-          <h2>Salary After Graduation</h2>
+          <h2 aria-describedby="tip-avg-salary">Salary After Graduation
+            <a class="tooltip-target">
+              <i class="fa fa-info-circle"></i>
+            </a>
+          </h2>
           <picc-slider format="$" max="50000" average="25000">
-            <input type="hidden" name="average_salary_range">
+            <input type="hidden" name="2011.earnings.6_yrs_after_entry.mean_earnings.lowest_tercile__range">
           </picc-slider>
         </div>
 
         <div class="filter_section">
-          <h2>Monthly Student Loan Payment</h2>
+          <h2 aria-describedby="tip-repayment-rate">Monthly Student Loan Payment
+            <a class="tooltip-target">
+              <i class="fa fa-info-circle"></i>
+            </a>
+          </h2>
           <picc-slider format="$" max="500" average="280">
-            <input type="hidden" name="monthly_loan_payment_range">
+            <input type="hidden" name="2013.debt.median_debt_suppressed.completers.monthly_payments__range">
           </picc-slider>
         </div>
 
@@ -159,11 +175,11 @@
         <div class="group_inline">
 
           <label for="zip-code" class="group_inline-left">Enter a ZIP Code
-            <input id="zip-code" name="zip_code" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>
+            <input id="zip-code" name="zip" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>
           </label>
 
           <label for="search-radius" class="group_inline-right">Mile radius
-            <input name="search_radius" type="number" step=".1" placeholder="no limit" id="search-radius" {{ common_input_attributes }}>
+            <input name="distance" type="number" step=".1" placeholder="no limit" id="search-radius" {{ common_input_attributes }}>
           </label>
 
         </div>

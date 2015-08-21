@@ -51,6 +51,7 @@ body_scripts:
               <span data-bind="results_word">Results</span>
               Based on Your Criteria
             </h1>
+
           </div>
           <!-- <a href="#search-form" class="link-more"><i class="fa fa-chevron-left"></i> Edit Criteria</a> -->
           <div>
@@ -62,9 +63,11 @@ body_scripts:
               <!-- <div class="u-group_inline-right"> -->
                 <label for="select-sort">Sort by:</label>
                 <select id="select-sort" name="sort">
-                  <option selected value="2011.earnings.gt_25k_p10:desc">Earnings</option>
-                  <option value="2013.student.size:asc">Size (small to large)</option>
+                  <option selected value="2011.earnings.6_yrs_after_entry.mean_earnings.lowest_tercile">Earnings</option>
+                  <option value="school.name:asc">Name (A to Z)</option>
+                  <option value="school.name:desc">Name (Z to A)</option>
                   <option value="2013.student.size:desc">Size (large to small)</option>
+                  <option value="2013.student.size:asc">Size (small to large)</option>
                 </select>
               <!-- </div> -->
 
@@ -73,6 +76,15 @@ body_scripts:
           </div>
         </div>
 
+      </div>
+
+      <div class="pagination container show-loaded">
+        <input type="hidden" name="page">
+
+        <ol data-bind="pages">
+          Page:
+          <li><a class="select-page" data-bind="link">1</a></li>
+        </ol>
       </div>
 
       <section class="section section-card_container-results show-loaded">
@@ -85,7 +97,7 @@ body_scripts:
             <div class="investigation-major-wrapper"
               data-bind="under_investigation" aria-hidden="true">
               <a>
-                <p class="investigation-major" aria-describedby="tip-investigation-major">
+                <p class="investigation-major" aria-describedby="tip-hcm2">
                   Under investigation <i class="tooltip-target fa fa-info-circle"></i>
                 </p>
               </a>
@@ -103,11 +115,11 @@ body_scripts:
               <li>
                 <span data-bind="size_number">x</span> undergraduate students
               </li>
-              <a data-bind="under_investigation2" aria-hidden="true">
+              <!-- <a data-bind="under_investigation2" aria-hidden="true">
                 <li class="investigation-minor" aria-describedby="tip-investigation-minor">
                   Under investigation <i class="tooltip-target fa fa-info-circle"></i>
                 </li>
-              </a>
+              </a> -->
             </ul>
 
             <div id="key-stats" class="school-meters">
@@ -174,6 +186,15 @@ body_scripts:
         </div><!-- /div.schools-list -->
 
       </section>
+
+      <!-- <div class="pagination container show-loaded">
+        <input type="hidden" name="page">
+
+        <ol data-bind="pages">
+          Page:
+          <li><a class="select-page" data-bind="link">1</a></li>
+        </ol>
+      </div> -->
 
     </div>
 
