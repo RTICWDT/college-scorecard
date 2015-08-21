@@ -6,6 +6,37 @@
   margin-right: $base-padding;
 }
 
+.data-home-intro-convo-right {
+  @include span-columns(12);
+
+  @include respond-to(medium-up) {
+    @include span-columns(4);
+    @include shift(8);
+  }
+}
+
+.data-home-convo {
+  background: $light-gray;
+
+  ul li {
+    @include font-size(0.8);
+    color: $mid-blue;
+    display: inline-block;
+    padding-top: $base-padding-lite;
+    padding-right: $base-padding-lite;
+
+    i {
+      @include font-size(1);
+      color: $sky-blue;
+    }
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+}
+
 .data-home-intro {
 
   h3 {
@@ -23,23 +54,9 @@
   p {
     padding-top: $base-padding;
     padding-bottom: $base-padding;
-  }
 
-  ul li {
-    @include font-size(0.8);
-    color: $mid-blue;
-    display: inline-block;
-    padding-top: $base-padding-lite;
-    padding-right: $base-padding-lite;
-
-    i {
-      @include font-size(1);
-      color: $sky-blue;
-    }
-
-    &:hover,
-    &:focus {
-      text-decoration: underline;
+    + p {
+      padding-top: 0;
     }
   }
 }
