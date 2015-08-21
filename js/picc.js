@@ -374,7 +374,7 @@
     NAME:                 'school.name',
     CITY:                 'school.city',
     STATE:                'school.state',
-    LOCATION:             'school.location',
+    LOCATION:             'location',
     OWNERSHIP:            'school.ownership',
     LOCALE:               'school.locale',
     REGION_ID:            'school.region_id',
