@@ -2,7 +2,7 @@
 //=============================
 
 .data-home-rule {
-  border-right: $regular-border-size solid $base-border-color;
+  border-right: ($regular-border-size * 2) solid $light-gray;
   margin-right: $base-padding;
 }
 
