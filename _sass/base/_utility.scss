@@ -112,6 +112,24 @@ ol.decimal,
   }
 }
 
+// Unordered List
+//
+// A list with bullets and list spacing.
+//
+// Styleguide base.util.unordered_list
+ol.disc,
+.u-unordered_list {
+  list-style-type: disc;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: $base-padding;
+
+  li {
+    padding-bottom: ($base-padding-lite * 0.4);
+  }
+}
+
 // Unmarked List
 //
 // A list with no list style and list spacing.
