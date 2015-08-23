@@ -59,15 +59,13 @@
     // if the region is specified, add it either as a value or a
     // range with picc.data.rangify()
     if (query.region) {
-      // FIXME: 'region_id' should be `picc.fields.REGION_ID`
-      picc.data.rangify(query, 'region_id', query.region);
+      picc.data.rangify(query, picc.fields.REGION_ID, query.region);
       delete query.region;
     }
 
     // if a size is specified, just pass it along as a range
     if (query.size) {
-      // FIXME: 'size' should be `picc.fields.SIZE`
-      query.size__range = query.size;
+      picc.data.rangify(query, picc.fields.SIZE, query.size);
       delete query.size;
     }
 
