@@ -389,8 +389,9 @@
     UNDER_INVESTIGATION:  'school.HCM2',
 
     // net price
-    // FIXME: this should be `net_price`
-    NET_PRICE:            '2013.cost.avg_net_price',
+    // FIXME: where is NET_PRICE_BY_INCOME used?
+    NET_PRICE_ROOT:       '2013.cost.avg_net_price',
+    NET_PRICE:            '2013.cost.avg_net_price.overall',
     NET_PRICE_BY_INCOME:  '2013.cost.net_price',
 
     // completion rate
@@ -545,10 +546,7 @@
     }
   };
 
-  picc.access.netPrice = picc.access.composed(
-    picc.fields.NET_PRICE,
-    picc.access.publicPrivate
-  );
+  picc.access.netPrice = picc.access(picc.fields.NET_PRICE);
 
   picc.access.netPriceByIncomeLevel = function(level) {
     return picc.access.composed(

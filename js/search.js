@@ -89,10 +89,12 @@
       picc.fields.OWNERSHIP,
       // to get the "four_year" or "lt_four_year" bit
       picc.fields.PREDOMINANT_DEGREE,
-      // get both of the net price values
-      picc.fields.NET_PRICE + '.public',
-      picc.fields.NET_PRICE + '.private',
-      // get both of the completion rate values
+      // get all of the net price values
+      picc.fields.NET_PRICE_ROOT + '.overall',
+      picc.fields.NET_PRICE_ROOT + '.public',
+      picc.fields.NET_PRICE_ROOT + '.private',
+      // get all of the completion rate values
+      picc.fields.COMPLETION_RATE + '.overall',
       picc.fields.COMPLETION_RATE + '.four_year',
       picc.fields.COMPLETION_RATE + '.lt_four_year',
       // this has no sub-fields
