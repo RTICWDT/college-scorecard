@@ -59,15 +59,13 @@
     // if the region is specified, add it either as a value or a
     // range with picc.data.rangify()
     if (query.region) {
-      // FIXME: 'region_id' should be `picc.fields.REGION_ID`
-      picc.data.rangify(query, 'region_id', query.region);
+      picc.data.rangify(query, picc.fields.REGION_ID, query.region);
       delete query.region;
     }
 
     // if a size is specified, just pass it along as a range
     if (query.size) {
-      // FIXME: 'size' should be `picc.fields.SIZE`
-      query.size__range = query.size;
+      picc.data.rangify(query, picc.fields.SIZE, query.size);
       delete query.size;
     }
 
@@ -91,10 +89,12 @@
       picc.fields.OWNERSHIP,
       // to get the "four_year" or "lt_four_year" bit
       picc.fields.PREDOMINANT_DEGREE,
-      // get both of the net price values
-      picc.fields.NET_PRICE + '.public',
-      picc.fields.NET_PRICE + '.private',
-      // get both of the completion rate values
+      // get all of the net price values
+      picc.fields.NET_PRICE_ROOT + '.overall',
+      picc.fields.NET_PRICE_ROOT + '.public',
+      picc.fields.NET_PRICE_ROOT + '.private',
+      // get all of the completion rate values
+      picc.fields.COMPLETION_RATE + '.overall',
       picc.fields.COMPLETION_RATE + '.four_year',
       picc.fields.COMPLETION_RATE + '.lt_four_year',
       // this has no sub-fields
