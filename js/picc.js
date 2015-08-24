@@ -993,6 +993,136 @@
   };
 
 
+  /**
+   *
+   */
+  picc.form.prepareParams = (function() {
+    var fields = picc.fields;
+
+    var alias = {
+      name:                 fields.NAME,
+
+      // slider ranges
+      avg_net_price:        fields.NET_PRICE + '__range',
+      completion_rate:      fields.COMPLETION_RATE + '__range',
+      median_earnings:      fields.MEDIAN_EARNINGS + '__range',
+      monthly_payments:     fields.MONTHLY_LOAN_PAYMENT + '__range',
+
+      state:                fields.STATE,
+      region:               fields.REGION_ID,
+      zip:                  fields.ZIP_CODE,
+      online:               fields.DISTANCE_ONLY,
+
+      sort: function(query, value, key) {
+        var bits = String(value).split(':');
+        value = bits[0];
+        bits[0] = picc.form.mappings.sort[value] || value;
+        if (!bits[0]) {
+          console.warn('unmapped sort value:', value);
+        }
+        query[key] = bits.join(':');
+      },
+
+      program: function(query, value, key) {
+        // FIXME: this only supports a single program
+        if (value) {
+          var k = [fields.PROGRAM_PERCENTAGE, value].join('.');
+          // FIXME: this should use {k}__gt=0
+          query[k + '__range'] = '.0001..';
+          delete query[key];
+        }
+      },
+
+      degree: function(query, value, key) {
+        query[key] = mapDegree(value);
+      },
+
+      size: function(query, value, key) {
+        query[key] = mapSize(value);
+      },
+
+      // XXX: this is only used for testing
+      under_investigation:  picc.fields.UNDER_INVESTIGATION,
+    };
+
+    function mapSize(value) {
+      if (Array.isArray(value)) {
+        return value.map(mapSize);
+      }
+      return picc.form.mappings.size[value];
+    }
+
+    function mapDegree(value) {
+      if (Array.isArray(value)) {
+        return value.map(mapDegree);
+      }
+      return picc.form.mappings.degree[value];
+    }
+
+    function empty(value) {
+      return value === ''
+          || value === null
+          || value === undefined
+          || (Array.isArray(value) && empty(value[0]));
+    }
+
+    return function prepareParams(params) {
+
+      var query = picc.data.extend({}, params);
+
+      for (var key in query) {
+        var v = query[key];
+
+        if (empty(v)) {
+          delete query[key];
+          continue;
+        }
+
+        var k = alias[key];
+        switch (typeof k) {
+          case 'function':
+            k(query, v, key);
+            break;
+
+          case 'string':
+            query[k] = v;
+            delete query[key];
+            break;
+        }
+      }
+
+      for (key in query) {
+        if (query[key] === null || query[key] === undefined) {
+          delete query[key];
+        }
+      }
+
+      // if the region is specified, add it either as a value or a
+      // range with picc.data.rangify()
+      if (query.region) {
+        picc.data.rangify(query, picc.fields.REGION_ID, query.region);
+        delete query.region;
+      }
+
+      // if a size is specified, just pass it along as a range
+      if (query.size) {
+        picc.data.rangify(query, picc.fields.SIZE, query.size);
+        delete query.size;
+      }
+
+      // set the predominant degree, which can be either a value or
+      // a range (default: '2..3')
+      if (query.degree) {
+        picc.data.rangify(query, picc.fields.PREDOMINANT_DEGREE, query.degree);
+        delete query.degree;
+      }
+
+      return query;
+    };
+
+  })();
+
+
   // UI tools
   picc.ui = {};
 
