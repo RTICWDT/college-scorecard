@@ -1019,9 +1019,10 @@
       sort: function(query, value, key) {
         var bits = String(value).split(':');
         value = bits[0];
-        bits[0] = picc.form.mappings.sort[value] || value;
+        bits[0] = picc.form.mappings.sort[value];
         if (!bits[0]) {
           console.warn('unmapped sort value:', value);
+          bits[0] = value;
         }
         query[key] = bits.join(':');
       },
