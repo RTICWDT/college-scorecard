@@ -409,13 +409,11 @@
 
     MEDIAN_EARNINGS:      '2011.earnings.10_yrs_after_entry.median',
 
-    // FIXME: pending #373
     EARNINGS_GT_25K:      '2011.earnings.6_yrs_after_entry.percent_greater_than_25000',
 
     PROGRAM_PERCENTAGE:   '2013.academics.program_percentage',
 
-    // FIXME: will become `2013.student.demographics.female_share`
-    FEMALE_SHARE:         '2013.student.female',
+    FEMALE_SHARE:         '2013.student.demographics.female_share',
     RACE_ETHNICITY:       '2013.student.demographics.race_ethnicity',
     AGE_ENTRY:            '2013.student.demographics.age_entry',
 
@@ -717,6 +715,7 @@
       state:          access(fields.STATE),
 
       under_investigation: underInvestigation,
+
       // FIXME this is a hack to deal with the issue of tagalong
       // not applying a directive to multiple elements
       under_investigation2: underInvestigation,
