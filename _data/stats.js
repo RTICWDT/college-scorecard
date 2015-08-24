@@ -28,9 +28,9 @@ var columns = {
   'net_price_private_income5': 'NPT45_PRIV',
   */
 
-  'completion_rate_4': 'C150_4',
-  'completion_rate_l4': 'C150_L4',
-  'median_earnings': 'earn_2002_p10',
+  'four_years': 'C150_4',
+  'lt_four_years': 'C150_L4',
+  'median_earnings': '2011.earnings.10_yrs_after_entry.median',
 
   'retention_rate': function(d) {
     with (d) {
@@ -43,7 +43,7 @@ var columns = {
   'median_completer_debt': 'GRAD_DEBT_MDN_SUPP',
   'median_monthly_loan': 'GRAD_DEBT_MDN10YR_SUPP',
 
-  'earnings_gt_25k': 'gt_25k_2006_p6',
+  'earnings_gt_25k': '2011.earnings.6_yrs_after_entry.percent_greater_than_25000',
 };
 
 for (var dest in columns) {
