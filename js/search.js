@@ -109,8 +109,9 @@
     ].join(',');
 
     var qs = querystring.stringify(params);
-    qs = qs.replace(/^&/, '');
-    qs = qs.replace(/&{2,}/g, '&');
+    qs = qs.replace(/^&/, '')
+      .replace(/&{2,}/g, '&')
+      .replace(/%3A/g, ':');
     // update the URL
     history.pushState(params, 'search', '?' + qs);
 
