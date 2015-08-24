@@ -86,6 +86,11 @@
   }
 }
 
+.results-share {
+  @extend .share;
+  float: right;
+}
+
 .results-filter {
   background-color: $white;
   display: none;

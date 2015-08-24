@@ -207,3 +207,13 @@ button,
   font-weight: $weight-bold;
   line-height: 1;
 }
+
+.share {
+  @extend .button;
+  @extend .button-primary;
+  @include font-size($h5);
+  letter-spacing: 1px;
+  padding: 6px 9px;
+  height: auto !important;
+  width: auto !important;
+}
