@@ -43,7 +43,13 @@
         // range value.
         var input = this.querySelector('input');
         if (input) {
-          input.value = [this.lower, this.upper].join('..');
+          if (this.lower > this.min || this.upper < this.max) {
+            // console.log('%d > %d || %d < %d', this.lower, this.min, this.upper, this.max);
+            input.value = [this.lower, this.upper].join('..');
+          } else {
+            // console.log('slider range @ limits:', this);
+            input.value = '';
+          }
           change();
         }
       }, 200));
