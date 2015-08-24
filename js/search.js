@@ -22,8 +22,11 @@
     form.setData(query);
     // console.log('states:', form.getInputsByName('state'), form.get('state'));
 
+    // for each of the <picc-slider> elements...
     d3.selectAll('picc-slider')
       .each(function() {
+        // 1. get the value of its hidden input (set by formdb),
+        // and parse it as a range
         var input = this.querySelector('input');
         if (input) {
           var value = input.value.split('..').map(Number);
@@ -36,6 +39,8 @@
         }
       })
       .on('change', picc.debounce(function() {
+        // 2. when the slider changes, update the input with a
+        // range value.
         var input = this.querySelector('input');
         if (input) {
           input.value = [this.lower, this.upper].join('..');
