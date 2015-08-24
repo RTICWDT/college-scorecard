@@ -90,13 +90,9 @@
       // to get the "four_year" or "lt_four_year" bit
       picc.fields.PREDOMINANT_DEGREE,
       // get all of the net price values
-      picc.fields.NET_PRICE_ROOT + '.overall',
-      picc.fields.NET_PRICE_ROOT + '.public',
-      picc.fields.NET_PRICE_ROOT + '.private',
-      // get all of the completion rate values
-      picc.fields.COMPLETION_RATE + '.overall',
-      picc.fields.COMPLETION_RATE + '.four_year',
-      picc.fields.COMPLETION_RATE + '.lt_four_year',
+      picc.fields.NET_PRICE,
+      // completion rate
+      picc.fields.COMPLETION_RATE,
       // this has no sub-fields
       picc.fields.MEDIAN_EARNINGS,
       // not sure if we need this, but let's get it anyway
