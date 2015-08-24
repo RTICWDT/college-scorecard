@@ -22,6 +22,27 @@
     form.setData(query);
     // console.log('states:', form.getInputsByName('state'), form.get('state'));
 
+    d3.selectAll('picc-slider')
+      .each(function() {
+        var input = this.querySelector('input');
+        if (input) {
+          var value = input.value.split('..').map(Number);
+          if (value.length === 2) {
+            this.lower = value[0];
+            this.upper = value[1];
+          } else {
+            console.warn('bad slider input value:', value);
+          }
+        }
+      })
+      .on('change', picc.debounce(function() {
+        var input = this.querySelector('input');
+        if (input) {
+          input.value = [this.lower, this.upper].join('..');
+          change();
+        }
+      }, 200));
+
     change();
   });
 
@@ -29,7 +50,7 @@
 
   // sort is an "incremental" update
   form.on('change:sort', function() {
-    console.log('change sort!');
+    // console.log('change sort!');
     incremental = true;
   });
 
