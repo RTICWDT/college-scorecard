@@ -395,22 +395,21 @@
     NET_PRICE_BY_INCOME:  '2013.cost.net_price',
 
     // completion rate
-    COMPLETION_RATE:      '2013.completion.rate',
+    COMPLETION_RATE:      '2013.completion.rate_suppressed',
 
     RETENTION_RATE:       '2013.student.retention_rate',
 
     REPAYMENT_RATE:       '2013.repayment.3_yr_repayment_suppressed.overall',
 
-    AVERAGE_TOTAL_DEBT:   '2013.debt.median_debt_suppressed.completers.overall',
-    MONTHLY_LOAN_PAYMENT: '2013.debt.median_debt_suppressed.completers.monthly_payments',
+    AVERAGE_TOTAL_DEBT:   '2013.aid.median_debt_suppressed.completers.overall',
+    MONTHLY_LOAN_PAYMENT: '2013.aid.median_debt_suppressed.completers.monthly_payments',
 
-    // FIXME: this will be renamed eventually
-    AID_PERCENTAGE:       '2013.debt.loan_rate',
+    AID_PERCENTAGE:       '2013.aid.federal_loan_rate',
 
-    MEDIAN_EARNINGS:      '2011.earnings.6_yrs_after_entry.median',
+    MEDIAN_EARNINGS:      '2011.earnings.10_yrs_after_entry.median',
 
     // FIXME: pending #373
-    EARNINGS_GT_25K:      '2011.earnings.threshold_earnings_percent',
+    EARNINGS_GT_25K:      '2011.earnings.6_yrs_after_entry.percent_greater_than_25000',
 
     PROGRAM_PERCENTAGE:   '2013.academics.program_percentage',
 
