@@ -955,7 +955,6 @@
     },
 
     degree: {
-      '': '2..3',
       a: '2',
       b: '3'
     }
@@ -1121,6 +1120,8 @@
       if (query.degree) {
         picc.data.rangify(query, picc.fields.PREDOMINANT_DEGREE, query.degree);
         delete query.degree;
+      } else {
+        query[picc.fields.PREDOMINANT_DEGREE + '__range'] = '2..3';
       }
 
       return query;
