@@ -1008,9 +1008,13 @@
       monthly_payments:     fields.MONTHLY_LOAN_PAYMENT + '__range',
 
       state:                fields.STATE,
-      region:               fields.REGION_ID,
       zip:                  fields.ZIP_CODE,
       online:               fields.DISTANCE_ONLY,
+
+      region: function(query, value, key) {
+        picc.data.rangify(query, picc.fields.REGION_ID, query.region);
+        delete query[key];
+      },
 
       sort: function(query, value, key) {
         var bits = String(value).split(':');
@@ -1032,12 +1036,16 @@
         }
       },
 
-      degree: function(query, value, key) {
-        query[key] = mapDegree(value);
+      size: function(query, value, key) {
+        value = mapSize(value);
+        query[picc.fields.SIZE + '__range'] = Array.isArray(value)
+          ? value.join(',')
+          : value;
+        delete query[key];
       },
 
-      size: function(query, value, key) {
-        query[key] = mapSize(value);
+      degree: function(query, value, key) {
+        query[key] = mapDegree(value);
       },
 
       // XXX: this is only used for testing
@@ -1100,19 +1108,6 @@
         if (query[key] === null || query[key] === undefined) {
           delete query[key];
         }
-      }
-
-      // if the region is specified, add it either as a value or a
-      // range with picc.data.rangify()
-      if (query.region) {
-        picc.data.rangify(query, picc.fields.REGION_ID, query.region);
-        delete query.region;
-      }
-
-      // if a size is specified, just pass it along as a range
-      if (query.size) {
-        picc.data.rangify(query, picc.fields.SIZE, query.size);
-        delete query.size;
       }
 
       // set the predominant degree, which can be either a value or
