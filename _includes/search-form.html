@@ -208,11 +208,11 @@
       <div id="major-content" aria-hidden="true" class="accordion-div">
 
         <label for="major">Choose a program
-          <select id="major" name="degree">
-            <option value="2..3">Any</option>
-            <option value="2">Fill</option>
-            <option value="3">degrees</option>
-            <option value="4">here</option>
+          <select id="major" name="major">
+            <option value="">Any</option>
+            {% for program in site.data.programs %}
+            <option value="{{ program.key }}">{{ program.label }}</option>
+            {% endfor %}
           </select>
         </label>
 
