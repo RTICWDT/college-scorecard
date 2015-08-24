@@ -392,13 +392,11 @@
     UNDER_INVESTIGATION:  'school.HCM2',
 
     // net price
-    // FIXME: where is NET_PRICE_BY_INCOME used?
-    NET_PRICE_ROOT:       '2013.cost.avg_net_price',
     NET_PRICE:            '2013.cost.avg_net_price.overall',
     NET_PRICE_BY_INCOME:  '2013.cost.net_price',
 
     // completion rate
-    COMPLETION_RATE:      '2013.completion.rate_suppressed',
+    COMPLETION_RATE:      '2013.completion.rate_suppressed.overall',
 
     RETENTION_RATE:       '2013.student.retention_rate',
 
@@ -548,7 +546,9 @@
     }
   };
 
-  picc.access.netPrice = picc.access(picc.fields.NET_PRICE);
+  picc.access.netPrice = picc.access.composed(
+    picc.fields.NET_PRICE
+  );
 
   picc.access.netPriceByIncomeLevel = function(level) {
     return picc.access.composed(
@@ -567,23 +567,9 @@
     picc.fields.EARNINGS_GT_25K
   );
 
-  picc.access.completionRate = function(d) {
-    var key = picc.access.yearDesignation(d);
-    var rate = picc.access(picc.fields.COMPLETION_RATE)(d);
-    if (!rate) {
-      // XXX: this is for when the data is accessed as a
-      // "pre-nested" field, which is how Elasticsearch
-      // expresses data when you ask it for specific fields
-      var four = picc.access.composed(picc.fields.COMPLETION_RATE, 'four_year')(d);
-      var less = picc.access.composed(picc.fields.COMPLETION_RATE, 'lt_four_year')(d);
-      return four || less;
-    }
-    if (rate[key] === 0) {
-      console.warn('completion rate key mismatch: expected "%s", but got zero:', key, rate);
-      return rate.four_year || rate.lt_four_year;
-    }
-    return rate[key];
-  };
+  picc.access.completionRate = picc.access.composed(
+    picc.fields.COMPLETION_RATE
+  );
 
   picc.access.partTimeShare = function(d) {
     // FIXME: this should be a single field?
