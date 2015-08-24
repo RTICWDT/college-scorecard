@@ -107,6 +107,7 @@
 
     var qs = querystring.stringify(params);
     qs = qs.replace(/^&/, '');
+    qs = qs.replace(/&{2,}/g, '&');
     // update the URL
     history.pushState(params, 'search', '?' + qs);
 
