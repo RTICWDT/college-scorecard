@@ -374,12 +374,15 @@
     NAME:                 'school.name',
     CITY:                 'school.city',
     STATE:                'school.state',
+    ZIP_CODE:             'school.zip',
+
     LOCATION:             'location',
     OWNERSHIP:            'school.ownership',
     LOCALE:               'school.locale',
     REGION_ID:            'school.region_id',
 
     SIZE:                 '2013.student.size',
+    DISTANCE_ONLY:        'school.DISTANCEONLY',
 
     WOMEN_ONLY:           'school.women_only',
     MEN_ONLY:             'school.men_only',
@@ -943,6 +946,34 @@
 
   // form utilities
   picc.form = {};
+
+  /**
+   * These are mappings of values for common form fields from
+   * URL- (and human-) friendly values to ones that the API
+   * recognizes.
+   */
+  picc.form.mappings = {
+    sort: {
+      advantage:          picc.fields.EARNINGS_GT_25K,
+      salary:             picc.fields.MEDIAN_EARNINGS,
+      name:               picc.fields.NAME,
+      size:               picc.fields.SIZE,
+      avg_net_price:      picc.fields.NET_PRICE,
+      completion_rate:    picc.fields.COMPLETION_RATE,
+    },
+
+    size: {
+      small:  '..1999',
+      medium: '2000..15000',
+      large:  '15001..'
+    },
+
+    degree: {
+      '': '2..3',
+      a: '2',
+      b: '3'
+    }
+  };
 
   /**
    * Adds a "submit" listener to the provided formdb.Form instance (or CSS
