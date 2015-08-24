@@ -32,7 +32,7 @@
     var school = data.school;
 
     var name = picc.access(picc.fields.NAME)(school);
-    document.title += ' / ' + name;
+    document.title = name;
 
     school.metadata = data.metadata;
     console.log('got school:', school);

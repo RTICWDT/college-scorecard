@@ -141,7 +141,7 @@
 
 .results-main {
   background-color: $mid-gray;
-  min-height: 500px;
+  min-height: 900px; //TODO make this auto
 
   @include respond-to(medium-up) {
     @include span-columns(13 of 16);

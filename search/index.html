@@ -63,11 +63,14 @@ body_scripts:
               <!-- <div class="u-group_inline-right"> -->
                 <label for="select-sort">Sort by:</label>
                 <select id="select-sort" name="sort">
-                  <option selected value="2011.earnings.6_yrs_after_entry.mean_earnings.lowest_tercile">Earnings</option>
+                  <option selected value="2011.earnings.6_yrs_after_entry.percent_greater_than_25000:desc">Advantage Factor</option>
+                  <option value="2011.earnings.10_yrs_after_entry.median:desc">Salary</option>
                   <option value="school.name:asc">Name (A to Z)</option>
-                  <option value="school.name:desc">Name (Z to A)</option>
-                  <option value="2013.student.size:desc">Size (large to small)</option>
+                  <!--option value="school.name:desc">Name (Z to A)</option -->
+                  <!--option value="2013.student.size:desc">Size (large to small)</option-->
                   <option value="2013.student.size:asc">Size (small to large)</option>
+                  <option value="2013.cost.avg_net_price.overall:asc">Actual Cost</option>
+                  <option value="2013.completion.rate_suppressed.overall:desc">Graduation Rate</option>
                 </select>
               <!-- </div> -->
 
@@ -126,7 +129,7 @@ body_scripts:
               <figure class="meter">
                 <h2 class="figure-heading constrain_width"
                   aria-describedby="tip-avg-cost-year">
-                  Average Cost Per Year
+                  Average Actual Cost
                   <a class="tooltip-target u-new_line">
                     <i class="fa fa-info-circle"></i>
                   </a>
@@ -156,7 +159,7 @@ body_scripts:
               <figure class="meter">
                 <h2 class="figure-heading constrain_width"
                   aria-describedby="tip-avg-salary">
-                  Average Salary
+                  Salary<br>10 Years After
                   <a class="tooltip-target u-new_line">
                     <i class="fa fa-info-circle"></i>
                   </a>
