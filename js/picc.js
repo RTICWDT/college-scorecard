@@ -393,6 +393,7 @@
 
     // net price
     NET_PRICE:            '2013.cost.avg_net_price.overall',
+    // FIXME: where is NET_PRICE_BY_INCOME used?
     NET_PRICE_BY_INCOME:  '2013.cost.net_price',
 
     // completion rate
