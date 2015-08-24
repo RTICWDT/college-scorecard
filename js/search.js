@@ -49,32 +49,7 @@
   function onChange() {
     var params = form.getData();
 
-    // console.log('search params:', params);
-    if (Array.isArray(params.state) && !params.state[0]) {
-      delete params.state;
-    }
-
-    var query = picc.data.extend({}, params);
-
-    // if the region is specified, add it either as a value or a
-    // range with picc.data.rangify()
-    if (query.region) {
-      picc.data.rangify(query, picc.fields.REGION_ID, query.region);
-      delete query.region;
-    }
-
-    // if a size is specified, just pass it along as a range
-    if (query.size) {
-      picc.data.rangify(query, picc.fields.SIZE, query.size);
-      delete query.size;
-    }
-
-    // set the predominant degree, which can be either a value or
-    // a range (default: '2..3')
-    if (query.degree) {
-      picc.data.rangify(query, picc.fields.PREDOMINANT_DEGREE, query.degree);
-      delete query.degree;
-    }
+    var query = picc.form.prepareParams(params);
 
     // only query the fields that we care about
     query.fields = [
