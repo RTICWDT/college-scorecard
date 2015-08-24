@@ -1044,6 +1044,7 @@
       under_investigation:  picc.fields.UNDER_INVESTIGATION,
     };
 
+    // map a size or array of sizes to API-friendly range values
     function mapSize(value) {
       if (Array.isArray(value)) {
         return value.map(mapSize);
@@ -1051,6 +1052,8 @@
       return picc.form.mappings.size[value];
     }
 
+    // map a degree string ('', 'a' or 'b') or array of strings to an
+    // API-friendly "predominant degree" range value
     function mapDegree(value) {
       if (Array.isArray(value)) {
         return value.map(mapDegree);
@@ -1058,6 +1061,8 @@
       return picc.form.mappings.degree[value];
     }
 
+    // returns true if a value is an empty string, null, undefined, or an array
+    // with an empty 0 index value
     function empty(value) {
       return value === ''
           || value === null
@@ -1072,6 +1077,7 @@
       for (var key in query) {
         var v = query[key];
 
+        // delete empty keys
         if (empty(v)) {
           delete query[key];
           continue;
