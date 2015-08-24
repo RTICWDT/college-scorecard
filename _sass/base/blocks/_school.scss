@@ -424,6 +424,11 @@
   padding-bottom: 0;
 }
 
+.school-section button.button-primary {
+    @include font-size($h5);
+    letter-spacing: 1px;
+}
+
 .school-student-body {
 
   h2 {
