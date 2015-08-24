@@ -1027,12 +1027,11 @@
         query[key] = bits.join(':');
       },
 
-      program: function(query, value, key) {
+      major: function(query, value, key) {
         // FIXME: this only supports a single program
         if (value) {
           var k = [fields.PROGRAM_PERCENTAGE, value].join('.');
-          // FIXME: this should use {k}__gt=0
-          query[k + '__range'] = '.0001..';
+          query[k + '__not'] = 0;
           delete query[key];
         }
       },
