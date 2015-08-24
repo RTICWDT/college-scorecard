@@ -214,6 +214,11 @@
 
     this.setAttribute('aria-valuenow', value);
 
+    var event = new CustomEvent('drag');
+    event.property = property;
+    event.value = value;
+    this.dispatchEvent(event);
+
     e.preventDefault();
     return false;
   }
@@ -230,15 +235,7 @@
     window.removeEventListener('mouseup', getListener(release, this));
     window.removeEventListener('touchend', getListener(release, this));
 
-    var lower = this.lower;
-    var upper = this.upper;
-    this.getElementsByTagName("input")[0].setAttribute("value", lower+".."+upper);
-
-    this.dispatchEvent(new CustomEvent('change', {
-      min: lower,
-      max: upper,
-      bubbles: true
-    }));
+    this.dispatchEvent(new CustomEvent('change'));
 
     e.preventDefault();
     return false;
