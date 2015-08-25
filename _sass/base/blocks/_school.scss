@@ -116,8 +116,11 @@
       vertical-align: top;
       width: 70px;
 
-      .icon-year {
-        //year implementation here
+      .school-key_figures-year {
+        @include font-size(2.86);
+        display: block;
+        font-weight: $weight-bold;
+        margin-top: -$height;
       }
     }
   }
