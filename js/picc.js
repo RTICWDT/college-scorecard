@@ -655,7 +655,7 @@
         var value = programs[key];
         var dictKey = [field, key].join('.');
         var name = dictionary[dictKey]
-          ? (dictionary[dictKey].description || key)
+          ? (dictionary[dictKey].label || key)
           : key;
         return {
           program: name,
@@ -1027,12 +1027,11 @@
         query[key] = bits.join(':');
       },
 
-      program: function(query, value, key) {
+      major: function(query, value, key) {
         // FIXME: this only supports a single program
         if (value) {
           var k = [fields.PROGRAM_PERCENTAGE, value].join('.');
-          // FIXME: this should use {k}__gt=0
-          query[k + '__range'] = '.0001..';
+          query[k + '__range'] = '0.00001..';
           delete query[key];
         }
       },

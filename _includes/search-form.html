@@ -199,25 +199,31 @@
 
     <aria-accordion id="school-degree" class="container">
 
-      <legend>Area of Study</legend>
+      <legend>Programs/Degree</legend>
       <h1 class="search_category">
         <a aria-expanded="false" aria-controls="major-content">
-          Area of Study
+          Programs/Degree
         </a>
       </h1>
       <div id="major-content" aria-hidden="true" class="accordion-div">
 
-        <!-- <label for="major">Choose a program
-          <input id="major" name="major" type="text" placeholder="e.g. Engineering" {{ common_input_attributes }}>
-        </label> -->
+        <label for="major">Choose a program
+          <select id="major" name="major">
+            <option value="">Any</option>
+            {% for program in site.data.programs %}
+            <option value="{{ program.key }}">{{ program.label }}</option>
+            {% endfor %}
+          </select>
+        </label>
 
-        <label for="major-type">Choose a program
+        <label for="major-type">Choose a degree
           <select id="major-type" name="degree">
             <option value="">Any</option>
             <option value="a">Associates</option>
             <option value="b">Bachelors</option>
           </select>
         </label>
+
       </div>
 
     </aria-accordion>
