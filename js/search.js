@@ -22,6 +22,38 @@
     form.setData(query);
     // console.log('states:', form.getInputsByName('state'), form.get('state'));
 
+    // for each of the <picc-slider> elements...
+    d3.selectAll('picc-slider')
+      .each(function() {
+        // 1. get the value of its hidden input (set by formdb),
+        // and parse it as a range
+        var input = this.querySelector('input');
+        if (input) {
+          var value = input.value.split('..').map(Number);
+          if (value.length === 2) {
+            this.lower = value[0];
+            this.upper = value[1];
+          } else {
+            console.warn('bad slider input value:', value);
+          }
+        }
+      })
+      .on('change', picc.debounce(function() {
+        // 2. when the slider changes, update the input with a
+        // range value.
+        var input = this.querySelector('input');
+        if (input) {
+          if (this.lower > this.min || this.upper < this.max) {
+            // console.log('%d > %d || %d < %d', this.lower, this.min, this.upper, this.max);
+            input.value = [this.lower, this.upper].join('..');
+          } else {
+            // console.log('slider range @ limits:', this);
+            input.value = '';
+          }
+          change();
+        }
+      }, 200));
+
     change();
   });
 
@@ -29,7 +61,7 @@
 
   // sort is an "incremental" update
   form.on('change:sort', function() {
-    console.log('change sort!');
+    // console.log('change sort!');
     incremental = true;
   });
 
@@ -49,32 +81,10 @@
   function onChange() {
     var params = form.getData();
 
-    // console.log('search params:', params);
-    if (Array.isArray(params.state) && !params.state[0]) {
-      delete params.state;
-    }
+    var query = picc.form.prepareParams(params);
 
-    var query = picc.data.extend({}, params);
-
-    // if the region is specified, add it either as a value or a
-    // range with picc.data.rangify()
-    if (query.region) {
-      picc.data.rangify(query, picc.fields.REGION_ID, query.region);
-      delete query.region;
-    }
-
-    // if a size is specified, just pass it along as a range
-    if (query.size) {
-      picc.data.rangify(query, picc.fields.SIZE, query.size);
-      delete query.size;
-    }
-
-    // set the predominant degree, which can be either a value or
-    // a range (default: '2..3')
-    if (query.degree) {
-      picc.data.rangify(query, picc.fields.PREDOMINANT_DEGREE, query.degree);
-      delete query.degree;
-    }
+    // only get open schools
+    query[picc.fields.OPERATING] = 1;
 
     // only query the fields that we care about
     query.fields = [
@@ -90,13 +100,9 @@
       // to get the "four_year" or "lt_four_year" bit
       picc.fields.PREDOMINANT_DEGREE,
       // get all of the net price values
-      picc.fields.NET_PRICE_ROOT + '.overall',
-      picc.fields.NET_PRICE_ROOT + '.public',
-      picc.fields.NET_PRICE_ROOT + '.private',
-      // get all of the completion rate values
-      picc.fields.COMPLETION_RATE + '.overall',
-      picc.fields.COMPLETION_RATE + '.four_year',
-      picc.fields.COMPLETION_RATE + '.lt_four_year',
+      picc.fields.NET_PRICE,
+      // completion rate
+      picc.fields.COMPLETION_RATE,
       // this has no sub-fields
       picc.fields.MEDIAN_EARNINGS,
       // not sure if we need this, but let's get it anyway
@@ -106,9 +112,19 @@
     ].join(',');
 
     var qs = querystring.stringify(params);
-    qs = qs.replace(/^&/, '');
+    qs = qs.replace(/^&/, '')
+      .replace(/&{2,}/g, '&')
+      .replace(/%3A/g, ':');
     // update the URL
     history.pushState(params, 'search', '?' + qs);
+
+    d3.select('a.results-share')
+      .attr('href', function() {
+        return picc.template.resolve(
+          this.getAttribute('data-href'),
+          {url: document.location.href}
+        );
+      });
 
     if (req) req.cancel();
 
