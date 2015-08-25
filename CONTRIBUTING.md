@@ -42,6 +42,7 @@ Click the "new pull request" button at the top right.
 
 ![screen shot 2015-08-25 at 10 26 33 am](https://cloud.githubusercontent.com/assets/1626026/9469247/06f6e8ec-4b14-11e5-9a53-a7b44d915579.png)
 
+Review your changes to make sure nothing else was modified.
 Click on the the branch you just created, and then click "create pull request."
 
 ![screen shot 2015-08-25 at 11 08 05 am](https://cloud.githubusercontent.com/assets/1626026/9470354/9d606fec-4b19-11e5-9b0c-69308953819a.png)
