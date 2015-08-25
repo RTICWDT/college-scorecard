@@ -364,7 +364,20 @@
         '41': 'Rural: Fringe',
         '42': 'Rural: Distant',
         '43': 'Rural: Remote'
-      }, 'locale unknown'))
+      }, 'locale unknown')),
+
+      href: function(key) {
+        key = picc.access(key);
+        return function(d) {
+          var url = key(d);
+          if (!url) return null;
+          else if (String(url).indexOf('http') !== 0) {
+            return 'http://' + url;
+          } else {
+            return url;
+          }
+        };
+      }
 
     };
   })();
@@ -435,6 +448,8 @@
     SAT_WRITING_25TH_PCTILE:  '2013.student.sat_scores.25th_percentile.writing',
     SAT_WRITING_75TH_PCTILE:  '2013.student.sat_scores.75th_percentile.writing',
     SAT_WRITING_MIDPOINT:     '2013.student.sat_scores.midpoint.writing',
+
+    NET_PRICE_CALC_URL:       'school.price_calculator_url'
   };
 
   picc.access = function(key) {
@@ -917,6 +932,10 @@
         '@lower': access(fields.SAT_WRITING_25TH_PCTILE),
         '@upper': access(fields.SAT_WRITING_75TH_PCTILE),
         '@middle': access(fields.SAT_WRITING_MIDPOINT),
+      },
+
+      net_price_calculator: {
+        '@href': format.href(fields.NET_PRICE_CALC_URL)
       }
     };
 
