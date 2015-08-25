@@ -328,13 +328,19 @@
         '3': 'Private, For-Profit'
       }, 'control unknown')),
 
+      controlClass: formatter(map({
+        '1': 'public',
+        '2': 'private-non',
+        '3': 'private-profit'
+      }, '')),
+
       // format.preddeg('deg')({deg: 2}) === '2-year'
       // format.preddeg('deg')({deg: 3}) === '4-year'
       preddeg: formatter(map({
-        '1': 'Certificate',
-        '2': '2-year',
-        '3': '4-year',
-        '4': 'Graduate'
+        //'1': 'Certificate',
+        '2': '2',
+        '3': '4',
+        //'4': 'Graduate'
       }, NA)),
 
       zero: function(key) {
@@ -349,6 +355,12 @@
         [2000, 15000, 'Medium'],
         [15000, Infinity, 'Large']
       ]), 'size unknown'),
+
+      sizeCategoryClass: formatter(range([
+        [0, 2000, 'icon-small'],
+        [2000, 15000, 'icon-medium'],
+        [15000, Infinity, 'icon-large']
+      ]), ''),
 
       // format.locale('locale')({locale: 11}) === 'City: Large'
       locale: formatter(map({
@@ -376,10 +388,26 @@
         '41': 'Rural',
         '42': 'Rural',
         '43': 'Rural'
-      }, 'locale unknown'))
+      }, 'locale unknown')),
+
+      localeClass: formatter(map({
+        '11': 'icon-urban',
+        '12': 'icon-urban',
+        '13': 'icon-urban',
+        '21': 'icon-suburban',
+        '22': 'icon-suburban',
+        '23': 'icon-suburban',
+        '31': 'icon-town',
+        '32': 'icon-town',
+        '33': 'icon-town',
+        '41': 'icon-rural',
+        '42': 'icon-rural',
+        '43': 'icon-rural'
+      }, ''))
 
     };
   })();
+
 
   picc.fields = {
     ID:                   'id',
@@ -736,10 +764,19 @@
       under_investigation2: underInvestigation,
 
       size_number:    format.number(fields.SIZE),
-      control:        format.control(fields.OWNERSHIP),
-      locale_name:    format.locale(fields.LOCALE),
+      control: {
+        '@class': format.controlClass(fields.OWNERSHIP),
+        value: format.control(fields.OWNERSHIP)
+      },
+      locale_name: {
+        '@class': format.localeClass(fields.LOCALE),
+        value: format.locale(fields.LOCALE)
+      },
       years:          format.preddeg(fields.PREDOMINANT_DEGREE),
-      size_category:  format.sizeCategory(fields.SIZE),
+      size_category: {
+        '@class': format.sizeCategoryClass(fields.SIZE),
+        value: format.sizeCategory(fields.SIZE)
+      },
 
       // this is a direct accessor because some designations
       // (e.g. `women_only`) are at the object root, rather than
