@@ -5,31 +5,63 @@ SAT_avg:
 net_price_public:
   min: -6359
   max: 32921
-  median: 8446
+  median: 9954
 net_price_private:
   min: -19360
   max: 87414
-  median: 17706
+  median: 20761
+net_price:
+  min: -19360
+  max: 87414
+  median: 16789
+net_price_l4:
+  median: 14052
+net_price_4:
+  median: 18824
 completion_rate_4:
   min: 0
   max: 1
-  median: 0.47
+  median: 0.48
 completion_rate_l4:
   min: 0
   max: 1
-  median: 0.61
+  median: 0.34
+completion_rate:
+  min: 0
+  max: 1
+  median: 0.44
 median_earnings:
-  min: null
-  max: null
-  median: null
+  min: 0
+  max: 166200
+  median: 34343
+median_earnings_l4:
+  min: 0
+  max: 166200
+  median: 31080
+median_earnings_4:
+  min: 0
+  max: 166200
+  median: 42051
 retention_rate:
   min: 0
   max: 1
-  median: 0.65
-repayment_rate:
+  median: 0.67
+retention_rate_l4:
+  min: 0
+  max: 1
+  median: 0.60
+repayment_rate_4:
   min: 0.05
   max: 1
-  median: 0.59
+  median: 0.70
+repayment_rate_4:
+  min: 0.05
+  max: 1
+  median: 0.76
+repayment_rate_l4:
+  min: 0.05
+  max: 1
+  median: 0.54
 median_completer_debt:
   min: 310
   max: 51375
@@ -37,8 +69,20 @@ median_completer_debt:
 median_monthly_loan:
   min: 3.44
   max: 570.37
-  median: 157.03
+  median: 238.27
+median_monthly_loan_l4:
+  median: 181.96
+median_monthly_loan_4:
+  median: 270.44
 earnings_gt_25k:
-  min: null
-  max: null
-  median: null
+  min: 0
+  max: 1
+  median: .57
+earnings_gt_25k_l4:
+  min: 0
+  max: 1
+  median: .49
+earnings_gt_25k_4:
+  min: 0
+  max: 1
+  median: .63
