@@ -692,6 +692,19 @@
     return value === 'NULL' ? null : value;
   };
 
+  picc.template = function(template) {
+    template = String(template);
+    return function(data) {
+      return template.replace(/{\s*(\w+)\s*}/g, function(_k, key) {
+        return picc.access(key)(data);
+      });
+    };
+  };
+
+  picc.template.resolve = function(template, data) {
+    return picc.template(template).call(this, data);
+  };
+
   // namespace for school-related stuff
   picc.school = {};
 
@@ -725,6 +738,15 @@
         link: {
           text: access(fields.NAME),
           '@href': href
+        }
+      },
+
+      share_link: {
+        '@href': function(d) {
+          return picc.template.resolve(
+            this.getAttribute('data-href'),
+            {url: document.location.href}
+          );
         }
       },
 
