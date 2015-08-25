@@ -1031,7 +1031,7 @@
         // FIXME: this only supports a single program
         if (value) {
           var k = [fields.PROGRAM_PERCENTAGE, value].join('.');
-          query[k + '__not'] = 0;
+          query[k + '__range'] = '0.00001..';
           delete query[key];
         }
       },
