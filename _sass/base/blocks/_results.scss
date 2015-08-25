@@ -34,7 +34,7 @@
 }
 
 .results-main-alert {
-  padding-top: $base-padding-large;
+  padding-top: $base-padding-lite;
   padding-right: $base-padding;
   padding-left: $base-padding;
 
@@ -86,9 +86,22 @@
   }
 }
 
+.results-share {
+  @extend .share;
+}
+
+.results-share-wrapper {
+  @include span-columns(12);
+  text-align: right;
+
+  @include respond-to(medium-up) {
+    padding-right: $base-padding;
+  }
+}
+
 .results-filter {
   background-color: $white;
-  display: none;
+  //display: none;
 
   .search-form-intro {
     display: none;
@@ -167,7 +180,7 @@
 
       h2.figure-heading {
         @include font-size(0.75);
-        min-height: 54px;
+        //min-height: 54px;
         &.constrain_width {
           margin-left: -5%;
           width: 110%;
@@ -189,7 +202,7 @@
   .link-more {
     @include span-columns(12 of 12);
     border-top: $thin-border-size solid $base-border-color;
-    margin-top: $base-padding;
+    margin-top: ($base-padding * 1.6);
     padding-top: $base-padding;
   }
 }
@@ -224,10 +237,8 @@
 
   ul {
     @include font-size(0.9);
-    border-bottom: $thin-border-size solid $base-border-color;
     font-weight: bold;
-    margin-bottom: $base-padding;
-    padding-bottom: $base-padding;
+    //padding-bottom: $base-padding;
   }
 
   h1 {
@@ -248,4 +259,10 @@
     @include span-columns(4);
     @include omega(3n);
   }
+}
+
+.results-card-headings {
+  min-height: 150px;
+  border-bottom: $thin-border-size solid $base-border-color;
+  margin-bottom: $base-padding;
 }

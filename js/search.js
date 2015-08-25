@@ -118,6 +118,14 @@
     // update the URL
     history.pushState(params, 'search', '?' + qs);
 
+    d3.select('a.results-share')
+      .attr('href', function() {
+        return picc.template.resolve(
+          this.getAttribute('data-href'),
+          {url: document.location.href}
+        );
+      });
+
     if (req) req.cancel();
 
     var list = d3.select(resultsRoot)

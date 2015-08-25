@@ -403,7 +403,20 @@
         '41': 'icon-rural',
         '42': 'icon-rural',
         '43': 'icon-rural'
-      }, ''))
+      }, '')),
+
+      href: function(key) {
+        key = picc.access(key);
+        return function(d) {
+          var url = key(d);
+          if (!url) return null;
+          else if (String(url).indexOf('http') !== 0) {
+            return 'http://' + url;
+          } else {
+            return url;
+          }
+        };
+      }
 
     };
   })();
@@ -477,6 +490,8 @@
     SAT_WRITING_25TH_PCTILE:  '2013.student.sat_scores.25th_percentile.writing',
     SAT_WRITING_75TH_PCTILE:  '2013.student.sat_scores.75th_percentile.writing',
     SAT_WRITING_MIDPOINT:     '2013.student.sat_scores.midpoint.writing',
+
+    NET_PRICE_CALC_URL:       'school.price_calculator_url'
   };
 
   picc.access = function(key) {
@@ -717,6 +732,19 @@
     return value === 'NULL' ? null : value;
   };
 
+  picc.template = function(template) {
+    template = String(template);
+    return function(data) {
+      return template.replace(/{\s*(\w+)\s*}/g, function(_k, key) {
+        return picc.access(key)(data);
+      });
+    };
+  };
+
+  picc.template.resolve = function(template, data) {
+    return picc.template(template).call(this, data);
+  };
+
   // namespace for school-related stuff
   picc.school = {};
 
@@ -750,6 +778,15 @@
         link: {
           text: access(fields.NAME),
           '@href': href
+        }
+      },
+
+      share_link: {
+        '@href': function(d) {
+          return picc.template.resolve(
+            this.getAttribute('data-href'),
+            {url: document.location.href}
+          );
         }
       },
 
@@ -968,6 +1005,10 @@
         '@lower': access(fields.SAT_WRITING_25TH_PCTILE),
         '@upper': access(fields.SAT_WRITING_75TH_PCTILE),
         '@middle': access(fields.SAT_WRITING_MIDPOINT),
+      },
+
+      net_price_calculator: {
+        '@href': format.href(fields.NET_PRICE_CALC_URL)
       }
     };
 

@@ -123,6 +123,8 @@
   }
 
   .school-map {
+    border: 1px solid $black;
+    border-radius: $base-border-radius;
     height: 280px;
     margin-top: $base-padding;
     @include respond-to(medium-up) {
@@ -424,6 +426,15 @@
   padding-bottom: 0;
 }
 
+.school-section button.button-primary,
+.school-section .button-primary {
+    @include font-size($h5);
+    height: auto;
+    letter-spacing: 1px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
 .school-student-body {
 
   h2 {
@@ -470,4 +481,13 @@ ol.bars {
       padding-right: 0.5em;
     }
   }
+}
+
+.school-share {
+  @extend .share;
+}
+
+.school-share-wrapper {
+  @include span-columns(12);
+  text-align: right;
 }
