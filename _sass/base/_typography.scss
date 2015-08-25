@@ -137,6 +137,11 @@ button,
   &:focus {
     color: $darker-green;
   }
+
+  i {
+    @include font-size(0.7);
+    padding-left: 2px;
+  }
 }
 
 // Other type
