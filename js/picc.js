@@ -655,7 +655,7 @@
         var value = programs[key];
         var dictKey = [field, key].join('.');
         var name = dictionary[dictKey]
-          ? (dictionary[dictKey].description || key)
+          ? (dictionary[dictKey].label || key)
           : key;
         return {
           program: name,
