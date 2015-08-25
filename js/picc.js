@@ -324,8 +324,8 @@
       // format.control('control')({control: 2}) === 'Private non-profit'
       control: formatter(map({
         '1': 'Public',
-        '2': 'Private non-profit',
-        '3': 'Private for-profit'
+        '2': 'Private, Not-for-Profit',
+        '3': 'Private, For-Profit'
       }, 'control unknown')),
 
       // format.preddeg('deg')({deg: 2}) === '2-year'
