@@ -201,6 +201,7 @@
 
     h1 {
       @include font-size(1.4);
+      min-height: 100px;
       padding-top: 0;
 
       a[href] {
