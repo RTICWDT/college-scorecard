@@ -381,6 +381,8 @@
     LOCALE:               'school.locale',
     REGION_ID:            'school.region_id',
 
+    OPERATING:            '2013.student.operating',
+
     SIZE:                 '2013.student.size',
     DISTANCE_ONLY:        'school.DISTANCEONLY',
 
