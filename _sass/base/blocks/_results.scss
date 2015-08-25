@@ -34,7 +34,7 @@
 }
 
 .results-main-alert {
-  padding-top: $base-padding-large;
+  padding-top: $base-padding-lite;
   padding-right: $base-padding;
   padding-left: $base-padding;
 
@@ -88,7 +88,15 @@
 
 .results-share {
   @extend .share;
-  float: right;
+}
+
+.results-share-wrapper {
+  @include span-columns(12);
+  text-align: right;
+
+  @include respond-to(medium-up) {
+    padding-right: $base-padding;
+  }
 }
 
 .results-filter {

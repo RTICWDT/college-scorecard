@@ -211,9 +211,9 @@ button,
 .share {
   @extend .button;
   @extend .button-primary;
-  @include font-size($h5);
+  @include font-size(0.75);
   letter-spacing: 1px;
-  padding: 6px 9px;
+  padding: 2px 7px;
   height: auto !important;
   width: auto !important;
 }
