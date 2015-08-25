@@ -258,7 +258,9 @@ body_scripts:
                         class="debt"
                         data-bind="repayment_rate_meter"
                         max="1"
-                        data-median="{{ site.data.national_stats.repayment_rate.median }}">
+                        average="{{ site.data.national_stats.repayment_rate.median }}"
+                        data-median-four_year="{{ site.data.national_stats.repayment_rate_4.median }}"
+                        data-median-lt_four_year="{{ site.data.national_stats.repayment_rate_l4.median }}">
                       </picc-meter>
                       <figcaption>
                         <i class="fa average average-arrow" data-meter="repayment-meter"></i>

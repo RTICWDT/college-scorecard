@@ -821,7 +821,7 @@
       repayment_rate_percent: format.percent(fields.REPAYMENT_RATE),
       repayment_rate_meter: {
         '@value': access(fields.REPAYMENT_RATE),
-        '@average': access.nationalStat('median'),
+        '@average': access.nationalStat('median', access.yearDesignation),
         label:    format.percent(function() {
           return this.getAttribute('average');
         })
