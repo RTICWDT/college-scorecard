@@ -93,7 +93,7 @@
     $height: 50px;
     margin-top: $base-padding;
 
-    $list: urban, rural, trees, house;
+    $list: rural, suburban, urban, small, medium, large;
 
     @each $icon in $list {
       .icon-#{$icon} {
