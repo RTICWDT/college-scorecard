@@ -812,6 +812,7 @@
       average_salary: format.dollars(access.earningsMedian),
       average_salary_meter: {
         '@value': access.earningsMedian,
+        '@average': access.nationalStat('median', access.yearDesignation),
         label:    format.dollars(function() {
           return this.getAttribute('average');
         }),
@@ -977,8 +978,10 @@
 
     function debugMeterTitle(d) {
       return [
-        'value: ', this.getAttribute('value'), '\n',
-        'median: ', this.getAttribute('average')
+        'min: ', this.min, '\n',
+        'max: ', this.max, '\n',
+        'median: ', this.average, '\n',
+        'value: ', this.value
       ].join('');
     }
 
