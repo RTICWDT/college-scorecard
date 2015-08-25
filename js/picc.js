@@ -369,7 +369,7 @@
       href: function(key) {
         key = picc.access(key);
         return function(d) {
-          var url = key(d);
+          var url = key.call(this, d);
           if (!url) return null;
           else if (String(url).indexOf('http') !== 0) {
             return 'http://' + url;
@@ -377,7 +377,7 @@
             return url;
           }
         };
-      }
+      },
 
     };
   })();
@@ -388,6 +388,8 @@
     CITY:                 'school.city',
     STATE:                'school.state',
     ZIP_CODE:             'school.zip',
+
+    SCHOOL_URL:           'school.school_url',
 
     LOCATION:             'location',
     OWNERSHIP:            'school.ownership',
@@ -692,6 +694,19 @@
     return value === 'NULL' ? null : value;
   };
 
+  picc.template = function(template) {
+    template = String(template);
+    return function(data) {
+      return template.replace(/{\s*(\w+)\s*}/g, function(_k, key) {
+        return picc.access(key)(data);
+      });
+    };
+  };
+
+  picc.template.resolve = function(template, data) {
+    return picc.template(template).call(this, data);
+  };
+
   // namespace for school-related stuff
   picc.school = {};
 
@@ -725,6 +740,25 @@
         link: {
           text: access(fields.NAME),
           '@href': href
+        }
+      },
+
+      school_link: {
+        '@href':  format.href(fields.SCHOOL_URL),
+        text: function(d) {
+          var url = picc.access(fields.SCHOOL_URL)(d);
+          if (!url) return url;
+          // grab the domain, strip the leading "www."
+          return url.split('/').shift().replace(/^www\./, '');
+        }
+      },
+
+      share_link: {
+        '@href': function(d) {
+          return picc.template.resolve(
+            this.getAttribute('data-href'),
+            {url: document.location.href}
+          );
         }
       },
 
