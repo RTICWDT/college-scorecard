@@ -374,12 +374,17 @@
     NAME:                 'school.name',
     CITY:                 'school.city',
     STATE:                'school.state',
+    ZIP_CODE:             'school.zip',
+
     LOCATION:             'location',
     OWNERSHIP:            'school.ownership',
     LOCALE:               'school.locale',
     REGION_ID:            'school.region_id',
 
+    OPERATING:            '2013.student.operating',
+
     SIZE:                 '2013.student.size',
+    DISTANCE_ONLY:        'school.DISTANCEONLY',
 
     WOMEN_ONLY:           'school.women_only',
     MEN_ONLY:             'school.men_only',
@@ -389,13 +394,12 @@
     UNDER_INVESTIGATION:  'school.HCM2',
 
     // net price
-    // FIXME: where is NET_PRICE_BY_INCOME used?
-    NET_PRICE_ROOT:       '2013.cost.avg_net_price',
     NET_PRICE:            '2013.cost.avg_net_price.overall',
+    // FIXME: where is NET_PRICE_BY_INCOME used?
     NET_PRICE_BY_INCOME:  '2013.cost.net_price',
 
     // completion rate
-    COMPLETION_RATE:      '2013.completion.rate_suppressed',
+    COMPLETION_RATE:      '2013.completion.rate_suppressed.overall',
 
     RETENTION_RATE:       '2013.student.retention_rate',
 
@@ -408,13 +412,11 @@
 
     MEDIAN_EARNINGS:      '2011.earnings.10_yrs_after_entry.median',
 
-    // FIXME: pending #373
     EARNINGS_GT_25K:      '2011.earnings.6_yrs_after_entry.percent_greater_than_25000',
 
     PROGRAM_PERCENTAGE:   '2013.academics.program_percentage',
 
-    // FIXME: will become `2013.student.demographics.female_share`
-    FEMALE_SHARE:         '2013.student.female',
+    FEMALE_SHARE:         '2013.student.demographics.female_share',
     RACE_ETHNICITY:       '2013.student.demographics.race_ethnicity',
     AGE_ENTRY:            '2013.student.demographics.age_entry',
 
@@ -545,7 +547,9 @@
     }
   };
 
-  picc.access.netPrice = picc.access(picc.fields.NET_PRICE);
+  picc.access.netPrice = picc.access.composed(
+    picc.fields.NET_PRICE
+  );
 
   picc.access.netPriceByIncomeLevel = function(level) {
     return picc.access.composed(
@@ -564,23 +568,9 @@
     picc.fields.EARNINGS_GT_25K
   );
 
-  picc.access.completionRate = function(d) {
-    var key = picc.access.yearDesignation(d);
-    var rate = picc.access(picc.fields.COMPLETION_RATE)(d);
-    if (!rate) {
-      // XXX: this is for when the data is accessed as a
-      // "pre-nested" field, which is how Elasticsearch
-      // expresses data when you ask it for specific fields
-      var four = picc.access.composed(picc.fields.COMPLETION_RATE, 'four_year')(d);
-      var less = picc.access.composed(picc.fields.COMPLETION_RATE, 'lt_four_year')(d);
-      return four || less;
-    }
-    if (rate[key] === 0) {
-      console.warn('completion rate key mismatch: expected "%s", but got zero:', key, rate);
-      return rate.four_year || rate.lt_four_year;
-    }
-    return rate[key];
-  };
+  picc.access.completionRate = picc.access.composed(
+    picc.fields.COMPLETION_RATE
+  );
 
   picc.access.partTimeShare = function(d) {
     // FIXME: this should be a single field?
@@ -667,7 +657,7 @@
         var value = programs[key];
         var dictKey = [field, key].join('.');
         var name = dictionary[dictKey]
-          ? (dictionary[dictKey].description || key)
+          ? (dictionary[dictKey].label || key)
           : key;
         return {
           program: name,
@@ -728,6 +718,7 @@
       state:          access(fields.STATE),
 
       under_investigation: underInvestigation,
+
       // FIXME this is a hack to deal with the issue of tagalong
       // not applying a directive to multiple elements
       under_investigation2: underInvestigation,
@@ -945,6 +936,33 @@
   picc.form = {};
 
   /**
+   * These are mappings of values for common form fields from
+   * URL- (and human-) friendly values to ones that the API
+   * recognizes.
+   */
+  picc.form.mappings = {
+    sort: {
+      advantage:          picc.fields.EARNINGS_GT_25K,
+      salary:             picc.fields.MEDIAN_EARNINGS,
+      name:               picc.fields.NAME,
+      size:               picc.fields.SIZE,
+      avg_net_price:      picc.fields.NET_PRICE,
+      completion_rate:    picc.fields.COMPLETION_RATE,
+    },
+
+    size: {
+      small:  '..1999',
+      medium: '2000..15000',
+      large:  '15001..'
+    },
+
+    degree: {
+      a: '2',
+      b: '3'
+    }
+  };
+
+  /**
    * Adds a "submit" listener to the provided formdb.Form instance (or CSS
    * selector) that intercepts its data, formats it as a querystring, then does
    * a client-side redirect with window.location, effectively removing the
@@ -974,6 +992,139 @@
 
     return form;
   };
+
+
+  /**
+   *
+   */
+  picc.form.prepareParams = (function() {
+    var fields = picc.fields;
+
+    var alias = {
+      name:                 fields.NAME,
+
+      // slider ranges
+      avg_net_price:        fields.NET_PRICE + '__range',
+      completion_rate:      fields.COMPLETION_RATE + '__range',
+      median_earnings:      fields.MEDIAN_EARNINGS + '__range',
+      monthly_payments:     fields.MONTHLY_LOAN_PAYMENT + '__range',
+
+      state:                fields.STATE,
+      zip:                  fields.ZIP_CODE,
+      online:               fields.DISTANCE_ONLY,
+
+      region: function(query, value, key) {
+        picc.data.rangify(query, picc.fields.REGION_ID, query.region);
+        delete query[key];
+      },
+
+      sort: function(query, value, key) {
+        var bits = String(value).split(':');
+        value = bits[0];
+        bits[0] = picc.form.mappings.sort[value];
+        if (!bits[0]) {
+          console.warn('unmapped sort value:', value);
+          bits[0] = value;
+        }
+        query[key] = bits.join(':');
+      },
+
+      major: function(query, value, key) {
+        // FIXME: this only supports a single program
+        if (value) {
+          var k = [fields.PROGRAM_PERCENTAGE, value].join('.');
+          query[k + '__range'] = '0.00001..';
+          delete query[key];
+        }
+      },
+
+      size: function(query, value, key) {
+        value = mapSize(value);
+        query[picc.fields.SIZE + '__range'] = Array.isArray(value)
+          ? value.join(',')
+          : value;
+        delete query[key];
+      },
+
+      degree: function(query, value, key) {
+        query[key] = mapDegree(value);
+      },
+
+      // XXX: this is only used for testing
+      under_investigation:  picc.fields.UNDER_INVESTIGATION,
+    };
+
+    // map a size or array of sizes to API-friendly range values
+    function mapSize(value) {
+      if (Array.isArray(value)) {
+        return value.map(mapSize);
+      }
+      return picc.form.mappings.size[value];
+    }
+
+    // map a degree string ('', 'a' or 'b') or array of strings to an
+    // API-friendly "predominant degree" range value
+    function mapDegree(value) {
+      if (Array.isArray(value)) {
+        return value.map(mapDegree);
+      }
+      return picc.form.mappings.degree[value];
+    }
+
+    // returns true if a value is an empty string, null, undefined, or an array
+    // with an empty 0 index value
+    function empty(value) {
+      return value === ''
+          || value === null
+          || value === undefined
+          || (Array.isArray(value) && empty(value[0]));
+    }
+
+    return function prepareParams(params) {
+
+      var query = picc.data.extend({}, params);
+
+      for (var key in query) {
+        var v = query[key];
+
+        // delete empty keys
+        if (empty(v)) {
+          delete query[key];
+          continue;
+        }
+
+        var k = alias[key];
+        switch (typeof k) {
+          case 'function':
+            k(query, v, key);
+            break;
+
+          case 'string':
+            query[k] = v;
+            delete query[key];
+            break;
+        }
+      }
+
+      for (key in query) {
+        if (query[key] === null || query[key] === undefined) {
+          delete query[key];
+        }
+      }
+
+      // set the predominant degree, which can be either a value or
+      // a range (default: '2..3')
+      if (query.degree) {
+        picc.data.rangify(query, picc.fields.PREDOMINANT_DEGREE, query.degree);
+        delete query.degree;
+      } else {
+        query[picc.fields.PREDOMINANT_DEGREE + '__range'] = '2..3';
+      }
+
+      return query;
+    };
+
+  })();
 
 
   // UI tools
