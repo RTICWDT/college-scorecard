@@ -352,18 +352,30 @@
 
       // format.locale('locale')({locale: 11}) === 'City: Large'
       locale: formatter(map({
-        '11': 'City: Large',
-        '12': 'City: Midsize',
-        '13': 'City: Small',
-        '21': 'Suburb: Large',
-        '22': 'Suburb: Midsize',
-        '23': 'Suburb: Small',
+        // '11': 'City: Large',
+        // '12': 'City: Midsize',
+        // '13': 'City: Small',
+        // '21': 'Suburb: Large',
+        // '22': 'Suburb: Midsize',
+        // '23': 'Suburb: Small',
+        // '31': 'Town: Fringe',
+        // '32': 'Town: Distant',
+        // '33': 'Town: Remote',
+        // '41': 'Rural: Fringe',
+        // '42': 'Rural: Distant',
+        // '43': 'Rural: Remote'
+        '11': 'Urban',
+        '12': 'Urban',
+        '13': 'Urban',
+        '21': 'Suburban',
+        '22': 'Suburban',
+        '23': 'Suburban',
         '31': 'Town: Fringe',
         '32': 'Town: Distant',
         '33': 'Town: Remote',
-        '41': 'Rural: Fringe',
-        '42': 'Rural: Distant',
-        '43': 'Rural: Remote'
+        '41': 'Rural',
+        '42': 'Rural',
+        '43': 'Rural'
       }, 'locale unknown'))
 
     };
