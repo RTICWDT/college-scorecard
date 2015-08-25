@@ -6,7 +6,7 @@
 
   {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
 
-  <input type="hidden" name="school.HCM2">
+  <input type="hidden" name="under_investigation">
 
   <div class="container search-form-intro">
 
@@ -36,8 +36,8 @@
               <i class="fa fa-info-circle"></i>
             </a>
           </h2>
-          <picc-slider format="$" max="50000" average="22000">
-            <input type="hidden" name="2013.cost.avg_net_price.overall__range">
+          <picc-slider format="$" max="90000" step="1000">
+            <input type="hidden" name="avg_net_price">
           </picc-slider>
         </div>
 
@@ -59,8 +59,8 @@
               <i class="fa fa-info-circle"></i>
             </a>
           </h2>
-          <picc-slider format="$" max="50000" average="25000">
-            <input type="hidden" name="2011.earnings.10_yrs_after_entry.median__range">
+          <picc-slider format="$" max="250000">
+            <input type="hidden" name="median_earnings">
           </picc-slider>
         </div>
 
@@ -70,8 +70,8 @@
               <i class="fa fa-info-circle"></i>
             </a>
           </h2>
-          <picc-slider format="$" max="500" average="280">
-            <input type="hidden" name="2013.aid.median_debt_suppressed.completers.monthly_payments__range">
+          <picc-slider format="$" max="1000" step="50">
+            <input type="hidden" name="monthly_payments">
           </picc-slider>
         </div>
 
@@ -185,7 +185,7 @@
         </div>
 
         <label for="online" class="checkbox">
-          <input id="online" type="checkbox" name="size" value="online" tabindex="0">
+          <input id="online" type="checkbox" name="online" value="1" tabindex="0">
           <span tabindex="-1" class="checkbox-focus"></span>Include Online Only Schools
         </label>
 
@@ -213,9 +213,9 @@
 
         <label for="major-type">Choose a program
           <select id="major-type" name="degree">
-            <option value="2..3">Any</option>
-            <option value="2">Associates</option>
-            <option value="3">Bachelors</option>
+            <option value="">Any</option>
+            <option value="a">Associates</option>
+            <option value="b">Bachelors</option>
           </select>
         </label>
       </div>
@@ -244,19 +244,19 @@
           <ul>
             <li>
               <label for="size-small" class="checkbox">
-                <input id="size-small" type="checkbox" name="size" value="..1999" tabindex="0">
+                <input id="size-small" type="checkbox" name="size" value="small" tabindex="0">
                 <span tabindex="-1" class="checkbox-focus"></span>Small (&lt; 2,000)
               </label>
             </li>
             <li>
               <label for="size-medium" class="checkbox">
-                <input id="size-medium" type="checkbox" name="size" value="2000..15000" tabindex="0">
+                <input id="size-medium" type="checkbox" name="size" value="medium" tabindex="0">
                 <span tabindex="-1" class="checkbox-focus"></span>Medium (2,000&ndash;15,000)
               </label>
             </li>
             <li>
               <label for="size-large" class="checkbox">
-                <input id="size-large" type="checkbox" name="size" value="15001.." tabindex="0">
+                <input id="size-large" type="checkbox" name="size" value="large" tabindex="0">
                 <span tabindex="-1" class="checkbox-focus"></span>Large (&gt; 15,000)
               </label>
             </li>
