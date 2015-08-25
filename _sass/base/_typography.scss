@@ -218,7 +218,7 @@ button,
   @extend .button-primary;
   @include font-size(0.75);
   letter-spacing: 1px;
-  padding: 2px 10px;
+  padding: 2px 10px !important;
   height: auto !important;
   width: auto !important;
 }
