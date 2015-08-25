@@ -123,6 +123,8 @@
   }
 
   .school-map {
+    border: 1px solid $black;
+    border-radius: $base-border-radius;
     height: 280px;
     margin-top: $base-padding;
     @include respond-to(medium-up) {
@@ -470,4 +472,13 @@ ol.bars {
       padding-right: 0.5em;
     }
   }
+}
+
+.school-share {
+  @extend .share;
+}
+
+.school-share-wrapper {
+  @include span-columns(12);
+  text-align: right;
 }
