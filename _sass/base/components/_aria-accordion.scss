@@ -38,19 +38,22 @@ aria-accordion {
   }
 
   [aria-controls]:after {
-    content: '\002B';
     top: -2px;
   }
 
-  &[aria-expanded='true'] [aria-controls]:after {
+  &[aria-expanded=true] [aria-controls]:after {
     content: '\2212';
+  }
+
+  &[aria-expanded=false] [aria-controls]:after {
+    content: '\002B';
   }
 
   [aria-controls]:hover:after {
     color: #333; // TODO
   }
 
-  [aria-hidden="true"] {
+  [aria-hidden=true] {
     display: none;
   }
 
