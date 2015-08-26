@@ -422,6 +422,7 @@
 
     PROGRAM_PERCENTAGE:   '2013.academics.program_percentage',
 
+    PART_TIME_SHARE:      '2013.student.PPTUG_EF',
     FEMALE_SHARE:         '2013.student.demographics.female_share',
     RACE_ETHNICITY:       '2013.student.demographics.race_ethnicity',
     AGE_ENTRY:            '2013.student.demographics.age_entry',
@@ -580,12 +581,9 @@
     picc.fields.COMPLETION_RATE
   );
 
-  picc.access.partTimeShare = function(d) {
-    // FIXME: this should be a single field?
-    var prefix = '2013.student.';
-    return +picc.access(prefix + 'PPTUG_EF')(d)
-        || +picc.access(prefix + 'PPTUG_EF2')(d);
-  };
+  picc.access.partTimeShare = picc.access.composed(
+    picc.fields.PART_TIME_SHARE
+  );
 
   picc.access.retentionRate = function(d) {
     var retention = picc.access.composed(
@@ -836,10 +834,13 @@
 
       full_time_percent: format.number(function(d) {
         var pt = access.partTimeShare(d);
-        return pt === null ? null : (100 - pt);
+        return pt === null ? null : 100 * (1 - pt);
       }),
 
-      part_time_percent: format.number(access.partTimeShare),
+      part_time_percent: format.number(function(d) {
+        var pt = access.partTimeShare(d);
+        return pt === null ? null : 100 * pt;
+      }),
 
       gender_values: function(d) {
         var female = access(fields.FEMALE_SHARE)(d);
