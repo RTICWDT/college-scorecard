@@ -17,8 +17,8 @@ $nat_average-height: 25px;
 }
 
 .legend-nat_average-box-line {
-  border-bottom: $thin-border-size solid $black;
-  height: ($nat_average-height * 0.42);
+  border-bottom: 2px solid $black;
+  height: ($nat_average-height * 0.48);
 }
 
 .legend-nat_average-words {
