@@ -50,6 +50,7 @@
     display: inline-block;
     margin: $base-padding $base-padding-extra;
     padding-bottom: $base-padding;
+    vertical-align: middle;
 
     @include respond-to(tiny-up) {
       border-bottom: none;
