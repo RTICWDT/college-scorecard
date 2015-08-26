@@ -267,7 +267,7 @@
   margin-bottom: $base-padding;
 
   aria-accordion {
-    min-height: 30px;
+    //min-height: 10px;
   }
 
   aria-accordion [aria-controls] {
@@ -280,8 +280,14 @@
       border: none;
     }
   }
+
+  .nested_fieldset h1 {
+    @include font-size($h5);
+    font-weight: $weight-bold;
+  }
 }
 
 .advanced-search-title {
+  margin-bottom: 20px;
   text-align: center;
 }
