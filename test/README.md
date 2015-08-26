@@ -32,10 +32,12 @@ For local testing you'll need [Selenium Server][Selenium Server]
 [webdriver-manager]:
 
 ```sh
+# install java
+brew cask install java
 # install the package
 npm install -g webdriver-manager
 # run the command line tool to install Selenium Server
-webdriver-manager install
+webdriver-manager update
 # start the server
 webdriver-manager start
 ```
@@ -130,12 +132,12 @@ which [Nightwatch] needs to authenticate with Sauce Labs.
 On [Travis] we run cross-browser tests with:
 
 ```sh
-npm run test:all
+npm run test:travis
 ```
 
 The requests are tunneled through [Sauce Connect]. The list of
-browsers to run against are listed in the
-[package.json](../package.json)'s `test:all` script directive.
+browsers to run against are listed in the [package.json](../package.json)'s
+`test:travis` script directive.
 
 [Nightwatch]: http://nightwatchjs.org/
 [Node.js]: https://nodejs.org/

@@ -36,7 +36,10 @@
               <i class="fa fa-info-circle"></i>
             </a>
           </h2>
-          <picc-slider format="$" max="90000" step="1000">
+          <picc-slider format="$"
+            average="{{ site.data.national_stats.net_price.median }}"
+            max="{{ site.data.national_stats.net_price.max }}"
+            step="1000">
             <input type="hidden" name="avg_net_price">
           </picc-slider>
         </div>
@@ -48,8 +51,9 @@
               <i class="fa fa-info-circle"></i>
             </a>
           </h2>
-          <picc-slider format="%" step=".01" max="1">
-            <input type="hidden" name="2013.completion.rate_suppressed.overall__range">
+          <picc-slider format="%" step=".01" max="1"
+            average="{{ site.data.national_stats.completion_rate.median }}">
+            <input type="hidden" name="completion_rate">
           </picc-slider>
         </div>
 
@@ -59,7 +63,10 @@
               <i class="fa fa-info-circle"></i>
             </a>
           </h2>
-          <picc-slider format="$" max="250000">
+          <picc-slider format="$"
+            average="{{ site.data.national_stats.median_earnings.median }}"
+            max="{{ site.data.national_stats.median_earnings.max }}"
+            step="1000">
             <input type="hidden" name="median_earnings">
           </picc-slider>
         </div>
@@ -70,7 +77,7 @@
               <i class="fa fa-info-circle"></i>
             </a>
           </h2>
-          <picc-slider format="$" max="1000" step="50">
+          <picc-slider format="$" max="550" step="50">
             <input type="hidden" name="monthly_payments">
           </picc-slider>
         </div>
@@ -174,7 +181,7 @@
 
         <div class="group_inline">
 
-          <label for="zip-code" class="group_inline-left">Enter a ZIP Code
+          <label for="zip-code" class="group_inline-left">Enter a ZIP code
             <input id="zip-code" name="zip" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>
           </label>
 

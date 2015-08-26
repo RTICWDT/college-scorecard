@@ -137,6 +137,11 @@ button,
   &:focus {
     color: $darker-green;
   }
+
+  i {
+    @include font-size(0.7);
+    padding-left: 2px;
+  }
 }
 
 // Other type
@@ -208,4 +213,14 @@ button,
   display: block;
   font-weight: $weight-bold;
   line-height: 1;
+}
+
+.share {
+  @extend .button;
+  @extend .button-primary;
+  @include font-size(0.75);
+  letter-spacing: 1px;
+  padding: 2px 10px !important;
+  height: auto !important;
+  width: auto !important;
 }

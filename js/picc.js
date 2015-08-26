@@ -364,7 +364,20 @@
         '41': 'Rural: Fringe',
         '42': 'Rural: Distant',
         '43': 'Rural: Remote'
-      }, 'locale unknown'))
+      }, 'locale unknown')),
+
+      href: function(key) {
+        key = picc.access(key);
+        return function(d) {
+          var url = key.call(this, d);
+          if (!url) return null;
+          else if (String(url).indexOf('http') !== 0) {
+            return 'http://' + url;
+          } else {
+            return url;
+          }
+        };
+      },
 
     };
   })();
@@ -376,6 +389,8 @@
     STATE:                'school.state',
     ZIP_CODE:             'school.zip',
 
+    SCHOOL_URL:           'school.school_url',
+
     LOCATION:             'location',
     OWNERSHIP:            'school.ownership',
     LOCALE:               'school.locale',
@@ -385,7 +400,7 @@
     OPERATING:            '2013.student.operating',
 
     SIZE:                 '2013.student.size',
-    DISTANCE_ONLY:        'school.DISTANCEONLY',
+    ONLINE_ONLY:          'school.online_only',
 
     WOMEN_ONLY:           'school.women_only',
     MEN_ONLY:             'school.men_only',
@@ -438,6 +453,8 @@
     SAT_WRITING_25TH_PCTILE:  '2013.student.sat_scores.25th_percentile.writing',
     SAT_WRITING_75TH_PCTILE:  '2013.student.sat_scores.75th_percentile.writing',
     SAT_WRITING_MIDPOINT:     '2013.student.sat_scores.midpoint.writing',
+
+    NET_PRICE_CALC_URL:       'school.price_calculator_url'
   };
 
   picc.access = function(key) {
@@ -678,6 +695,19 @@
     return value === 'NULL' ? null : value;
   };
 
+  picc.template = function(template) {
+    template = String(template);
+    return function(data) {
+      return template.replace(/{\s*(\w+)\s*}/g, function(_k, key) {
+        return picc.access(key)(data);
+      });
+    };
+  };
+
+  picc.template.resolve = function(template, data) {
+    return picc.template(template).call(this, data);
+  };
+
   // namespace for school-related stuff
   picc.school = {};
 
@@ -714,6 +744,25 @@
         }
       },
 
+      school_link: {
+        '@href':  format.href(fields.SCHOOL_URL),
+        text: function(d) {
+          var url = picc.access(fields.SCHOOL_URL)(d);
+          if (!url) return url;
+          // grab the domain, strip the leading "www."
+          return url.split('/').shift().replace(/^www\./, '');
+        }
+      },
+
+      share_link: {
+        '@href': function(d) {
+          return picc.template.resolve(
+            this.getAttribute('data-href'),
+            {url: encodeURIComponent(document.location.href)}
+          );
+        }
+      },
+
       name:           access(fields.NAME),
       city:           access(fields.CITY),
       state:          access(fields.STATE),
@@ -737,10 +786,10 @@
 
       average_cost: format.dollars(access.netPrice),
       average_cost_meter: {
-        '@max':     access.nationalStat('max', access.publicPrivate),
-        '@average': access.nationalStat('median', access.publicPrivate),
+        // '@max':     access.nationalStat('max', access.publicPrivate),
+        // '@average': access.nationalStat('median', access.publicPrivate),
         '@value':   access.netPrice,
-        label:      format.dollars(access.nationalStat('median', access.publicPrivate)),
+        label:      format.dollars(function() { return this.average; }),
         '@title':   debugMeterTitle
       },
 
@@ -753,56 +802,43 @@
 
       grad_rate: format.percent(access.completionRate),
       grad_rate_meter: {
-        '@average': access.nationalStat('median', access.yearDesignation),
+        // '@average': access.nationalStat('median', access.yearDesignation),
         '@value':   access.completionRate,
-        label:      format.percent(function() {
-          return this.getAttribute('average');
-        }),
+        label:      format.percent(function() { return this.average; }),
         '@title':   debugMeterTitle
       },
 
       average_salary: format.dollars(access.earningsMedian),
       average_salary_meter: {
         '@value': access.earningsMedian,
-        label:    format.dollars(function() {
-          return this.getAttribute('average');
-        }),
+        // '@average': access.nationalStat('median', access.yearDesignation),
+        label:    format.dollars(function() { return this.average; }),
         '@title': debugMeterTitle
       },
 
       repayment_rate_percent: format.percent(fields.REPAYMENT_RATE),
       repayment_rate_meter: {
         '@value': access(fields.REPAYMENT_RATE),
-        '@average': access.nationalStat('median'),
-        label:    format.percent(function() {
-          return this.getAttribute('average');
-        })
+        // '@average': access.nationalStat('median', access.yearDesignation),
+        label:    format.percent(function() { return this.average; })
       },
 
       average_total_debt: format.dollars(fields.AVERAGE_TOTAL_DEBT),
       average_monthly_loan_payment: format.dollars(fields.MONTHLY_LOAN_PAYMENT),
 
-      federal_aid_percentage: format.percent(function(d) {
-        var aid = access(fields.AID_PERCENTAGE)(d);
-        if (!aid) return null;
-        return Math.max(aid.federal, aid.pell) || null; // 0 is n/a
-      }),
+      federal_aid_percentage: format.percent(fields.AID_PERCENTAGE),
 
       earnings_gt_25k: format.percent(access.earnings25k),
       earnings_gt_25k_meter: {
         '@value': access.earnings25k,
-        label: format.percent(function() {
-          return this.getAttribute('average');
-        }),
+        label:    format.percent(function() { return this.average; }),
         '@title': debugMeterTitle
       },
 
       retention_rate_value: format.percent(access.retentionRate),
       retention_rate_meter: {
         '@value': access.retentionRate,
-        label:    format.percent(function() {
-          return this.getAttribute('average');
-        }),
+        label:    format.percent(function() { return this.average; }),
         '@title': debugMeterTitle
       },
 
@@ -920,13 +956,19 @@
         '@lower': access(fields.SAT_WRITING_25TH_PCTILE),
         '@upper': access(fields.SAT_WRITING_75TH_PCTILE),
         '@middle': access(fields.SAT_WRITING_MIDPOINT),
+      },
+
+      net_price_calculator: {
+        '@href': format.href(fields.NET_PRICE_CALC_URL)
       }
     };
 
     function debugMeterTitle(d) {
       return [
-        'value: ', this.getAttribute('value'), '\n',
-        'median: ', this.getAttribute('average')
+        'min: ', this.min, '\n',
+        'max: ', this.max, '\n',
+        'median: ', this.average, '\n',
+        'value: ', this.value
       ].join('');
     }
 
@@ -1020,7 +1062,7 @@
 
       state:                fields.STATE,
       zip:                  fields.ZIP_CODE,
-      online:               fields.DISTANCE_ONLY,
+      online:               fields.ONLINE_ONLY,
 
       control: function(query, value, key) {
         value = mapControl(value);

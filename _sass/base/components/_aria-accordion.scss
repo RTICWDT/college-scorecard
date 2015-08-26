@@ -5,10 +5,10 @@ aria-accordion {
   @include transition(height 1s linear);
 
   display: block;
-  overflow: hidden;
   min-height: $button-size + ($button-margin * 2);
+  // overflow: hidden;
   padding-bottom: $base-padding-lite;
-  
+
   @include respond-to(tiny-up) {
     min-height: $button-size + ($button-margin * 3);
   }
@@ -20,10 +20,10 @@ aria-accordion {
   }
 
   [aria-controls]:after {
-    color: #999;
     background: #fff;
     border: 1px solid #e3e3e3;
     border-radius: 500px;
+    color: #999;
     display: inline-block;
     font-size: $button-size;
     font-weight: normal;
