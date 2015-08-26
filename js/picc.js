@@ -314,17 +314,23 @@
       // format.control('control')({control: 2}) === 'Private non-profit'
       control: formatter(map({
         '1': 'Public',
-        '2': 'Private non-profit',
-        '3': 'Private for-profit'
+        '2': 'Private',
+        '3': 'For Profit'
       }, 'control unknown')),
+
+      controlClass: formatter(map({
+        '1': 'icon-public',
+        '2': 'icon-private',
+        '3': 'icon-profit'
+      }, '')),
 
       // format.preddeg('deg')({deg: 2}) === '2-year'
       // format.preddeg('deg')({deg: 3}) === '4-year'
       preddeg: formatter(map({
-        '1': 'Certificate',
-        '2': '2-year',
-        '3': '4-year',
-        '4': 'Graduate'
+        //'1': 'Certificate',
+        '2': '2',
+        '3': '4',
+        //'4': 'Graduate'
       }, NA)),
 
       zero: function(key) {
@@ -340,21 +346,54 @@
         [15000, Infinity, 'Large']
       ]), 'size unknown'),
 
+      sizeCategoryClass: formatter(range([
+        [0, 2000, 'icon-small'],
+        [2000, 15000, 'icon-medium'],
+        [15000, Infinity, 'icon-large']
+      ]), ''),
+
       // format.locale('locale')({locale: 11}) === 'City: Large'
       locale: formatter(map({
-        '11': 'City: Large',
-        '12': 'City: Midsize',
-        '13': 'City: Small',
-        '21': 'Suburb: Large',
-        '22': 'Suburb: Midsize',
-        '23': 'Suburb: Small',
+        // '11': 'City: Large',
+        // '12': 'City: Midsize',
+        // '13': 'City: Small',
+        // '21': 'Suburb: Large',
+        // '22': 'Suburb: Midsize',
+        // '23': 'Suburb: Small',
+        // '31': 'Town: Fringe',
+        // '32': 'Town: Distant',
+        // '33': 'Town: Remote',
+        // '41': 'Rural: Fringe',
+        // '42': 'Rural: Distant',
+        // '43': 'Rural: Remote'
+        '11': 'Urban',
+        '12': 'Urban',
+        '13': 'Urban',
+        '21': 'Suburban',
+        '22': 'Suburban',
+        '23': 'Suburban',
         '31': 'Town: Fringe',
         '32': 'Town: Distant',
         '33': 'Town: Remote',
-        '41': 'Rural: Fringe',
-        '42': 'Rural: Distant',
-        '43': 'Rural: Remote'
+        '41': 'Rural',
+        '42': 'Rural',
+        '43': 'Rural'
       }, 'locale unknown')),
+
+      localeClass: formatter(map({
+        '11': 'icon-urban',
+        '12': 'icon-urban',
+        '13': 'icon-urban',
+        '21': 'icon-suburban',
+        '22': 'icon-suburban',
+        '23': 'icon-suburban',
+        '31': 'icon-town',
+        '32': 'icon-town',
+        '33': 'icon-town',
+        '41': 'icon-rural',
+        '42': 'icon-rural',
+        '43': 'icon-rural'
+      }, '')),
 
       href: function(key) {
         key = picc.access(key);
@@ -371,6 +410,7 @@
 
     };
   })();
+
 
   picc.fields = {
     ID:                   'id',
@@ -762,10 +802,19 @@
       under_investigation2: underInvestigation,
 
       size_number:    format.number(fields.SIZE),
-      control:        format.control(fields.OWNERSHIP),
-      locale_name:    format.locale(fields.LOCALE),
+      control: {
+        '@class': format.controlClass(fields.OWNERSHIP),
+        value: format.control(fields.OWNERSHIP)
+      },
+      locale_name: {
+        '@class': format.localeClass(fields.LOCALE),
+        value: format.locale(fields.LOCALE)
+      },
       years:          format.preddeg(fields.PREDOMINANT_DEGREE),
-      size_category:  format.sizeCategory(fields.SIZE),
+      size_category: {
+        '@class': format.sizeCategoryClass(fields.SIZE),
+        value: format.sizeCategory(fields.SIZE)
+      },
 
       // this is a direct accessor because some designations
       // (e.g. `women_only`) are at the object root, rather than
