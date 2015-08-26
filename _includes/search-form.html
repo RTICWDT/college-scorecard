@@ -351,7 +351,7 @@
                 <label for="affiliation">Religious affiliation
                   <select id="affiliation" name="religious">
                     <option value="">None</option>
-                    {% for row in site.data.religious_affiliations:sort('label') %}
+                    {% for row in site.data.religious_affiliations %}
                     <option value="{{ row.value }}">{{ row.label }}</option>
                     {% endfor %}
                   </select>
