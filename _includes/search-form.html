@@ -282,12 +282,12 @@
       Find Schools
     </button>
 
-    <fieldset>
+    <fieldset class="advanced-search">
 
       <aria-accordion>
 
         <legend>Advanced Search</legend>
-        <div>
+        <div class="advanced-search-title">
           <a aria-expanded="false" aria-controls="advanced-content" class="button link-more">
             Advanced Search <i class="fa fa-plus"></i>
           </a>
@@ -295,37 +295,43 @@
 
         <div id="advanced-content" aria-hidden="false">
 
-          <label for="test-school">Test</label>
-          <input id="testing-school" name="test" type="text" placeholder="e.g. Test" {{ common_input_attributes }}>
+          <label for="affiliation">Religious affiliation
+            <select id="affiliation" name="affiliation">
+              <option value="">Any</option>
+              {% for program in site.data.programs %}
+              <option value="{{ program.key }}">{{ program.label }}</option>
+              {% endfor %}
+            </select>
+          </label>
 
-          <fieldset>
+          <fieldset class="nested_fieldset">
 
             <legend>Type</legend>
             <h1>Type</h1>
 
             <ul>
               <li>
-                <label for="size-small" class="checkbox">
-                  <input id="size-small" type="checkbox" name="size" value="small" tabindex="0">
+                <label for="type-public" class="checkbox">
+                  <input id="type-public" type="checkbox" name="type" value="public" tabindex="0">
                   <span tabindex="-1" class="checkbox-focus"></span>Public
                 </label>
               </li>
               <li>
-                <label for="size-medium" class="checkbox">
-                  <input id="size-medium" type="checkbox" name="size" value="medium" tabindex="0">
+                <label for="type-private" class="checkbox">
+                  <input id="type-private" type="checkbox" name="type" value="private" tabindex="0">
                   <span tabindex="-1" class="checkbox-focus"></span>Private, Not-for-Profit
                 </label>
               </li>
               <li>
-                <label for="size-large" class="checkbox">
-                  <input id="size-large" type="checkbox" name="size" value="large" tabindex="0">
+                <label for="type-profit" class="checkbox">
+                  <input id="type-profit" type="checkbox" name="type" value="profit" tabindex="0">
                   <span tabindex="-1" class="checkbox-focus"></span>Private, For-Profit
                 </label>
               </li>
             </ul>
 
           </fieldset>
-          
+
         </div>
 
       </aria-accordion>

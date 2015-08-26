@@ -257,7 +257,31 @@
     padding-top: $base-padding;
   }
 
-  div {
-    // @extend .new_line;
+  fieldset {
+    border-top: none;
+    text-align: left;
   }
+}
+
+.advanced-search {
+  margin-bottom: $base-padding;
+
+  aria-accordion {
+    min-height: 30px;
+  }
+
+  aria-accordion [aria-controls] {
+    display: inline;
+
+    &::after {
+      content: '';
+      color: transparent;
+      background: transparent;
+      border: none;
+    }
+  }
+}
+
+.advanced-search-title {
+  text-align: center;
 }
