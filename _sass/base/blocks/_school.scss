@@ -192,6 +192,11 @@
 
     span {
       font-weight: normal;
+
+      &.normal {
+        @include font-size(1.8);
+        color: $black;
+      }
     }
   }
 
@@ -502,4 +507,9 @@ ol.bars {
 .school-share-wrapper {
   @include span-columns(12);
   text-align: right;
+}
+
+.leaflet-control-attribution a {
+  color: $black !important;
+  text-decoration: underline;
 }

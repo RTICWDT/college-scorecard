@@ -790,6 +790,8 @@
       net_price_income4: format.dollars(access.netPriceByIncomeLevel('75001-110000')),
       net_price_income5: format.dollars(access.netPriceByIncomeLevel('110001-plus')),
 
+      advantage_rate: format.percent(fields.EARNINGS_GT_25K),
+
       grad_rate: format.percent(access.completionRate),
       grad_rate_meter: {
         // '@average': access.nationalStat('median', access.yearDesignation),

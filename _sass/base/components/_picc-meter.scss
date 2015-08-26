@@ -21,25 +21,11 @@ picc-meter {
     left: 0;
     right: 0;
     bottom: 0;
-    height: 3px;
+    height: 2px;
     background-color: #000;
     background-color: rgba(0,0,0,.8);
     bottom: 0%;
     transition: bottom .5s;
-
-    &:after {
-      content: "";
-      display: block;
-      width: 100%;
-      position: absolute;
-      top: 100%;
-      height: 50%;
-      left: 0;
-      right: 0;
-      background-color: #fff;
-      opacity: 0;
-      transition: opacity .5s;
-    }
 
     .label {
       height: 1em;
@@ -48,12 +34,6 @@ picc-meter {
       position: absolute;
       margin: -.4em 0 0 8px;
       // border: 1px dotted red;
-    }
-  }
-
-  &.above_average {
-    .picc-meter-line:after {
-      opacity: 1;
     }
   }
 
