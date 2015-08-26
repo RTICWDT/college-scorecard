@@ -381,6 +381,7 @@
     LOCALE:               'school.locale',
     REGION_ID:            'school.region_id',
 
+    RELIGIOUS:            'school.religious_affiliation',
     OPERATING:            '2013.student.operating',
 
     SIZE:                 '2013.student.size',
@@ -1014,6 +1015,8 @@
       completion_rate:      fields.COMPLETION_RATE + '__range',
       median_earnings:      fields.MEDIAN_EARNINGS + '__range',
       monthly_payments:     fields.MONTHLY_LOAN_PAYMENT + '__range',
+
+      religious:            fields.RELIGIOUS,
 
       state:                fields.STATE,
       zip:                  fields.ZIP_CODE,

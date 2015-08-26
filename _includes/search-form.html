@@ -296,10 +296,10 @@
         <div id="advanced-content" aria-hidden="false">
 
           <label for="affiliation">Religious affiliation
-            <select id="affiliation" name="affiliation">
-              <option value="">Any</option>
-              {% for program in site.data.programs %}
-              <option value="{{ program.key }}">{{ program.label }}</option>
+            <select id="affiliation" name="religious">
+              <option value="">None</option>
+              {% for row in site.data.religious_affiliations %}
+              <option value="{{ row.value }}">{{ row.label }}</option>
               {% endfor %}
             </select>
           </label>
