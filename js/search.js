@@ -122,7 +122,7 @@
       .attr('href', function() {
         return picc.template.resolve(
           this.getAttribute('data-href'),
-          {url: document.location.href}
+          {url: encodeURIComponent(document.location.href)}
         );
       });
 
