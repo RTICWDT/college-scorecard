@@ -1029,7 +1029,7 @@
       },
 
       region: function(query, value, key) {
-        picc.data.rangify(query, picc.fields.REGION_ID, query.region);
+        picc.data.rangify(query, fields.REGION_ID, value);
         delete query[key];
       },
 
