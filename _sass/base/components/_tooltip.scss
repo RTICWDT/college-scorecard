@@ -2,7 +2,6 @@
   position: relative;
 
   i {
-    @include font-size($h4);
     color: $mid-blue;
   }
 
@@ -28,7 +27,6 @@
   &:focus {
     i {
       color: $black;
-      opacity: 0.7;
     }
   }
 }
@@ -61,7 +59,7 @@
     font-weight: $weight-book;
     left: -50%;
     line-height: $base-line-height;
-    padding: $base-padding-tb $base-padding;
+    padding: $base-padding-tb $base-padding !important;
     width: 300px;
   }
 

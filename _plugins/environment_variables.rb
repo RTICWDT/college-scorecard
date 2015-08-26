@@ -6,13 +6,13 @@ module Jekyll
 
     def generate(site)
       if ENV['API_BASE_URL']
-        site.config['api']['baseurl'] = ENV['API_BASE_URL']
+        site.config['API']['baseurl'] = ENV['API_BASE_URL']
       end
       if ENV['API_KEY']
-        site.config['api']['key'] = ENV['API_KEY']
+        site.config['API']['key'] = ENV['API_KEY']
       end
       # puts "API: ------------------"
-      # puts site.config['api']
+      # puts site.config['API']
       # puts "------------------"
     end
 

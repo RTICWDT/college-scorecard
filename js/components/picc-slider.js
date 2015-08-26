@@ -148,10 +148,6 @@
       this.setAttribute('aria-valuemin', lower);
       this.setAttribute('aria-valuemax', upper);
 
-      this.dispatchEvent(new CustomEvent('change', {
-        min: lower,
-        max: upper
-      }));
     },
 
     // clamp to min and max, round if snap === true
@@ -218,6 +214,11 @@
 
     this.setAttribute('aria-valuenow', value);
 
+    var event = new CustomEvent('drag');
+    event.property = property;
+    event.value = value;
+    this.dispatchEvent(event);
+
     e.preventDefault();
     return false;
   }
@@ -233,6 +234,9 @@
     window.removeEventListener('touchmove', getListener(move, this));
     window.removeEventListener('mouseup', getListener(release, this));
     window.removeEventListener('touchend', getListener(release, this));
+
+    this.dispatchEvent(new CustomEvent('change'));
+
     e.preventDefault();
     return false;
   }

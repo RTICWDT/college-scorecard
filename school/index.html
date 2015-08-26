@@ -41,12 +41,17 @@ body_scripts:
         </div>
 
         <div class="show-loaded">
+
+          <div class="school-share-wrapper">
+            <a data-href="mailto:?subject=Check%20this%20out&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov,%20check%20it%20out%3%0A%0A{url}" class="school-share" data-bind="share_link">Share this school</a>
+          </div>
+
           <div class="school-heading">
 
             <div class="investigation-major-wrapper"
               data-bind="under_investigation" aria-hidden="true">
               <a>
-                <p class="investigation-major" aria-describedby="tip-investigation-major">
+                <p class="investigation-major" aria-describedby="tip-hcm2">
                   Under investigation <i class="tooltip-target fa fa-info-circle"></i>
                 </p>
               </a>
@@ -61,6 +66,12 @@ body_scripts:
 
             <h2 class="population">
               <span data-bind="size_number">X</span> undergraduate students
+            </h2>
+
+            <h2 class="school-url">
+              <span data-bind="">
+                <a data-bind="school_link" target="_blank">xxx.edu</a>
+              </span>
             </h2>
 
             <ul class="school-key_figures key-figures">
@@ -93,7 +104,12 @@ body_scripts:
 
           <div id="key-stats" class="school-meters">
             <figure class="meter below_is_good">
-              <h2 class="figure-heading constrain_width">Average Cost Per Year</h2>
+              <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year">
+                Average Actual Cost
+                <a class="tooltip-target u-new_line">
+                  <i class="fa fa-info-circle"></i>
+                </a>
+              </h2>
               <picc-meter {% include net_price_meter_attributes.html %}>
               </picc-meter>
               <figcaption>
@@ -102,7 +118,12 @@ body_scripts:
             </figure>
 
             <figure class="meter above_is_good">
-              <h2 class="figure-heading constrain_width">Graduation Rate</h2>
+              <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year">
+                Graduation Rate
+                <a class="tooltip-target u-new_line">
+                  <i class="fa fa-info-circle"></i>
+                </a>
+              </h2>
               <picc-meter {% include graduation_meter_attributes.html %}>
               </picc-meter>
               <figcaption>
@@ -111,7 +132,12 @@ body_scripts:
             </figure>
 
             <figure class="meter above_is_good">
-              <h2 class="figure-heading constrain_width">Average Salary</h2>
+              <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year">
+                Salary 10 Years After
+                <a class="tooltip-target u-new_line">
+                  <i class="fa fa-info-circle"></i>
+                </a>
+              </h2>
               <picc-meter {% include earnings_meter_attributes.html %}>
               </picc-meter>
               <figcaption>
@@ -137,7 +163,12 @@ body_scripts:
                   <div class="school-two_col-left centered">
 
                     <figure class="meter below_is_good">
-                      <h2 class="figure-heading">Average Cost Per Year</h2>
+                      <h2 class="figure-heading" aria-describedby="tip-avg-cost-year">
+                        Average Actual Cost
+                        <a class="tooltip-target u-new_line">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <picc-meter id="cost-meter" {% include net_price_meter_attributes.html %}>
                       </picc-meter>
                       <figcaption>
@@ -146,9 +177,17 @@ body_scripts:
                         <div class="average average-label"></div>
                       </figcaption>
                     </figure>
-                    <!--
-                    <p>Assumes <strong>$XX,XXX</strong> in tuition and fees, <strong>$X,XXX</strong> in other costs like room and board, books and supplies, and other personal expenses.</p>
-                    -->
+
+                    <!-- <p>Assumes <strong>$XX,XXX</strong> in tuition and
+                      fees, <strong>$X,XXX</strong> in other costs like room
+                      and board, books and supplies, and other personal
+                      expenses.</p> -->
+
+                    <a class="button button-primary" target="_blank" data-bind="net_price_calculator">
+                      <i class="fa fa-calculator"></i>
+                      Calculate your exact net price
+                    </a>
+
                   </div>
 
                   <div class="school-two_col-right">
@@ -209,7 +248,12 @@ body_scripts:
                   <div class="school-two_col-left centered">
 
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading">Students Paying<br>Down Their Debt</h2>
+                      <h2 class="figure-heading" aria-describedby="tip-avg-cost-year">
+                        Students Paying<br>Down Their Debt
+                        <a class="tooltip-target u-new_line">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <picc-meter id="repayment-meter"
                         class="debt"
                         data-bind="repayment_rate_meter"
@@ -227,9 +271,9 @@ body_scripts:
 
                       <h2>Get Help Paying for College</h2>
                       <p>Submit a free application for Federal Student Aid. It only takes 20 minutes!</p>
-                      <button class="button button-primary">
+                      <a href="https://fafsa.ed.gov/FAFSA/app/fafsa" target="_blank" class="button button-primary">
                         Start My Application
-                      </button>
+                      </a>
 
                     </div>
 
@@ -238,20 +282,38 @@ body_scripts:
                   <div class="school-two_col-right school-fact_list">
 
                     <div>
-                      <h2>Typical Total Debt</h2>
+                      <h2
+                        aria-describedby="tip-graduation-rate">
+                        Typical Total Debt
+                        <a class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <strong class="fact_number" data-bind="average_total_debt">$XX,XXX</strong>
                       <p>For undergraduates who complete college</p>
                     </div>
 
                     <div>
-                      <h2>Typical Monthly Loan Payment</h2>
+                      <h2
+                        aria-describedby="tip-graduation-rate">
+                        Typical Monthly Loan Payment
+                        <a class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <strong class="fact_number">
                         <span data-bind="average_monthly_loan_payment">$XXX</span>/mo
                       </strong>
                     </div>
 
                     <div>
-                      <h2>Students Receiving Federal Aid</h2>
+                      <h2
+                        aria-describedby="tip-graduation-rate">
+                        Students Receiving Federal Aid
+                        <a class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <strong class="fact_number" data-bind="federal_aid_percentage">XX%</strong>
                       <p>You may be eligible to receive federal loans, repaid after you leave school, to help pay the costs of college. This is how many students at this school borrowed federal loans last year.</p>
                     </div>
@@ -277,7 +339,12 @@ body_scripts:
 
                   <div class="school-two_col-left centered">
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading constrain_width">Graduation Rate</h2>
+                      <h2 class="figure-heading constrain_width" aria-describedby="tip-graduation-rate">
+                        Graduation Rate
+                        <a class="tooltip-target u-new_line">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <picc-meter id="grad-meter" {% include graduation_meter_attributes.html %}>
                       </picc-meter>
                       <figcaption>
@@ -290,7 +357,12 @@ body_scripts:
 
                   <div class="school-two_col-right centered">
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading">Students Who<br>Return After Their First Year</h2>
+                      <h2 class="figure-heading" aria-describedby="tip-retention-rate">
+                        Students Who<br>Return After Their First Year
+                        <a class="tooltip-target u-new_line">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <picc-meter id="retention-meter"
                         class="graduation"
                         data-bind="retention_rate_meter"
@@ -323,7 +395,12 @@ body_scripts:
                 <div id="earnings-content" aria-hidden="true">
                   <div class="school-two_col-left centered">
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading">Average Salary <br>After Leaving School</h2>
+                      <h2 class="figure-heading" aria-describedby="tip-avg-salary">
+                        Salary<br>10 Years After
+                        <a class="tooltip-target u-new_line">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <picc-meter id="salary-meter" {% include earnings_meter_attributes.html %}>
                       </picc-meter>
                       <figcaption>
@@ -336,7 +413,12 @@ body_scripts:
 
                   <div class="school-two_col-right centered">
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading">Former Students <br>Earning More Than $25K</h2>
+                      <h2 class="figure-heading" aria-describedby="tip-earnings-25k">
+                        Former Students <br>Earning More Than $25K
+                        <a class="tooltip-target u-new_line">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <picc-meter class="earnings"
                         id="earn25k-meter"
                         data-bind="earnings_gt_25k_meter"
@@ -385,15 +467,26 @@ body_scripts:
                   <div class="school-two_col school-student-body">
 
                     <div class="school-two_col-left">
-
-                      <h2>Gender</h2>
+                      <!-- FIXME Gender Data Missing
+                      <h2
+                        aria-describedby="tip-graduation-rate">Gender
+                        <a class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <ol class="bars" data-bind="gender_values">
                         {% include bar_chart_template_item.html %}
                       </ol>
-
+                    -->
                       <!-- <div class="school-student-stats"> -->
-                      <h2>Other Demographics</h2>
-
+                      <!--
+                      <h2
+                        aria-describedby="tip-graduation-rate">Other Demographics
+                        <a class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
+                    -->
                       <div class="school-student-stats-col">
 
                         <div>
@@ -409,12 +502,12 @@ body_scripts:
                             <span>%</span>
                           </span> Part-time
                         </div>
-
+<!--
                         <div class="group_inline">
                           <div class="group_inline-left"><span class="fact_number" data-bind="age_entry">XX</span></div>
                           <div class="group_inline-right"><p class="school-student-stats-col-p">Average age at enrollment</p></div>
                         </div>
-
+-->
                       </div>
 
                     </div>
@@ -422,7 +515,13 @@ body_scripts:
                     <!-- </div> -->
 
                     <div class="school-two_col-right">
-                      <h2>Race/Ethnicity</h2>
+                      <h2
+                        aria-describedby="tip-graduation-rate">
+                        Race/Ethnicity
+                        <a class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </a>
+                      </h2>
                       <ol class="bars" data-bind="race_ethnicity_values">
                         {% include bar_chart_template_item.html %}
                       </ol>
@@ -477,15 +576,27 @@ body_scripts:
                 </h1>
 
                 <div id="selectivity-content" aria-hidden="true">
-                  <div class="school-two_col-left centered">
-                    <h2>Acceptance Rate</h2>
+                  <!-- <div class="school-two_col-left centered">
+                    <h2
+                      aria-describedby="tip-graduation-rate">
+                      Acceptance Rate
+                      <a class="tooltip-target">
+                        <i class="fa fa-info-circle"></i>
+                      </a>
+                    </h2>
                     <strong class="fact_number">Somewhat Selective</strong>
                     <p>[chart here]</p>
-                  </div>
+                  </div> -->
 
-                  <div class="school-two_col-right">
-
-                    <h2>Test Scores</h2>
+                  <!-- <div class="school-two_col-right"> -->
+                  <div style="padding-top: 20px;"> <!--TODO-->
+                    <h2
+                      aria-describedby="tip-graduation-rate">
+                      Test Scores
+                      <a class="tooltip-target">
+                        <i class="fa fa-info-circle"></i>
+                      </a>
+                    </h2>
                     <p>Students who were admitted typically had standardized test score in these ranges.</p>
 
                     <h3 class="h2">SAT</h3>
@@ -514,8 +625,9 @@ body_scripts:
                       <picc-range data-bind="act_scores" min="0" max="36">
                       </picc-range>
                     </figure>
-
                   </div>
+
+                  <!-- </div> -->
                 </div>
               </div>
             </aria-accordion>
@@ -533,12 +645,18 @@ body_scripts:
                 <div id="academics-content" aria-hidden="true">
                   <div class="school-two_col-left">
 
-                    <div class="school-academics-fact group_inline">
+                    <!-- <div class="school-academics-fact group_inline">
                       <div class="group_inline-left"><strong class="fact_number" data-bind="num_available_programs">X</strong></div>
                       <div class="group_inline-right"><h2><span data-bind="programs_plural">Programs</span> Offered</h2></div>
-                    </div>
+                    </div> -->
 
-                    <h2>Most Popular Programs</h2>
+                    <h2
+                      aria-describedby="tip-graduation-rate">
+                      Most Popular Programs
+                      <a class="tooltip-target">
+                        <i class="fa fa-info-circle"></i>
+                      </a>
+                    </h2>
                     <ol class="decimal school-programs" data-bind="popular_programs">
                       <li><span class="program"></span> (<span class="percent"></span>)</li>
                     </ol>
@@ -546,7 +664,13 @@ body_scripts:
 
                   <div class="school-two_col-right">
 
-                    <h2>Available Areas of Study</h2>
+                    <h2
+                      aria-describedby="tip-graduation-rate">
+                      Available Areas of Study
+                      <a class="tooltip-target">
+                        <i class="fa fa-info-circle"></i>
+                      </a>
+                    </h2>
                     <ul class="school-long_list" data-bind="available_programs">
                       <li><span class="program">Management</span></li>
                     </ul>

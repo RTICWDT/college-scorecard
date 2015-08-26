@@ -7,6 +7,13 @@
   // the current outbound request
   var req;
 
+  // "incremental" updates will only hide the list of schools, and
+  // not any of the other elements (results total, sort, pages)
+  var incremental = false;
+
+  // the maximum # of page links to show
+  var MAX_PAGES = 6;
+
   var change = picc.debounce(onChange, 100);
 
   picc.ready(function() {
@@ -15,10 +22,48 @@
     form.setData(query);
     // console.log('states:', form.getInputsByName('state'), form.get('state'));
 
+    // for each of the <picc-slider> elements...
+    d3.selectAll('picc-slider')
+      .each(function() {
+        // 1. get the value of its hidden input (set by formdb),
+        // and parse it as a range
+        var input = this.querySelector('input');
+        if (input) {
+          var value = input.value.split('..').map(Number);
+          if (value.length === 2) {
+            this.lower = value[0];
+            this.upper = value[1];
+          } else {
+            console.warn('bad slider input value:', value);
+          }
+        }
+      })
+      .on('change', picc.debounce(function() {
+        // 2. when the slider changes, update the input with a
+        // range value.
+        var input = this.querySelector('input');
+        if (input) {
+          if (this.lower > this.min || this.upper < this.max) {
+            // console.log('%d > %d || %d < %d', this.lower, this.min, this.upper, this.max);
+            input.value = [this.lower, this.upper].join('..');
+          } else {
+            // console.log('slider range @ limits:', this);
+            input.value = '';
+          }
+          change();
+        }
+      }, 200));
+
     change();
   });
 
   form.on('change', change);
+
+  // sort is an "incremental" update
+  form.on('change:sort', function() {
+    // console.log('change sort!');
+    incremental = true;
+  });
 
   form.on('submit', function(data, e) {
     change();
@@ -36,37 +81,10 @@
   function onChange() {
     var params = form.getData();
 
-    // console.log('search params:', params);
-    if (Array.isArray(params.state) && !params.state[0]) {
-      delete params.state;
-    }
+    var query = picc.form.prepareParams(params);
 
-    var query = picc.data.extend({}, params);
-
-    // if the region is specified, add it either as a value or a
-    // range with picc.data.rangify()
-    if (query.region) {
-      // FIXME: 'region_id' should be `picc.fields.REGION_ID`
-      picc.data.rangify(query, 'region_id', query.region);
-      delete query.region;
-    }
-
-    // if a size is specified, just pass it along as a range
-    if (query.size) {
-      // FIXME: 'size' should be `picc.fields.SIZE`
-      query.size__range = query.size;
-      delete query.size;
-    }
-
-    // set the predominant degree, which can be either a value or
-    // a range (default: '2..3')
-    if (query.degree) {
-      // FIXME: when we have support for nested keys,
-      // 'predominant' should be changed to
-      // `picc.fields.PREDOMINANT_DEGREE`
-      picc.data.rangify(query, 'predominant', query.degree);
-      delete query.degree;
-    }
+    // only get open schools
+    query[picc.fields.OPERATING] = 1;
 
     // only query the fields that we care about
     query.fields = [
@@ -81,12 +99,10 @@
       picc.fields.OWNERSHIP,
       // to get the "four_year" or "lt_four_year" bit
       picc.fields.PREDOMINANT_DEGREE,
-      // get both of the net price values
-      picc.fields.NET_PRICE + '.public',
-      picc.fields.NET_PRICE + '.private',
-      // get both of the completion rate values
-      picc.fields.COMPLETION_RATE + '.four_year',
-      picc.fields.COMPLETION_RATE + '.lt_four_year',
+      // get all of the net price values
+      picc.fields.NET_PRICE,
+      // completion rate
+      picc.fields.COMPLETION_RATE,
       // this has no sub-fields
       picc.fields.MEDIAN_EARNINGS,
       // not sure if we need this, but let's get it anyway
@@ -96,20 +112,44 @@
     ].join(',');
 
     var qs = querystring.stringify(params);
-    qs = qs.replace(/^&/, '');
+    qs = qs.replace(/^&/, '')
+      .replace(/&{2,}/g, '&')
+      .replace(/%3A/g, ':');
     // update the URL
     history.pushState(params, 'search', '?' + qs);
 
+    d3.select('a.results-share')
+      .attr('href', function() {
+        return picc.template.resolve(
+          this.getAttribute('data-href'),
+          {url: document.location.href}
+        );
+      });
+
     if (req) req.cancel();
 
-    resultsRoot.classList.add('js-loading');
-    resultsRoot.classList.remove('js-loaded');
-    resultsRoot.classList.remove('js-error');
+    var list = d3.select(resultsRoot)
+      .select('[data-bind="results"]');
+
+    if (incremental) {
+      list.classed('hidden', true);
+    } else {
+      resultsRoot.classList.add('js-loading');
+      resultsRoot.classList.remove('js-loaded');
+      resultsRoot.classList.remove('js-error');
+    }
+
+    var paginator = resultsRoot.querySelector('.pagination');
+    paginator.classList.toggle('show-loading', incremental);
 
     console.time && console.time('[load]');
 
     picc.API.search(query, function(error, data) {
       resultsRoot.classList.remove('js-loading');
+      list.classed('hidden', false);
+
+      paginator.classList.remove('show-loading');
+      incremental = false;
 
       console.timeEnd && console.timeEnd('[load]');
 
@@ -132,11 +172,125 @@
         results_total: format.number('total', '0')
       });
 
+      var page = +params.page || 0;
+      var total = data.total;
+      var perPage = data.per_page;
+
+      var pages = getPages(total, perPage, page);
+
+      tagalong(paginator, {
+        pages: pages
+      }, {
+        pages: {
+          '@data-index': function(d) {
+            return String(d.index);
+          },
+          '@class': function(d) {
+            return d.index === page
+              ? 'pagination-page_selected'
+              : d.arrow ? 'pagination-arrow' : null;
+          },
+          link: {
+            text: 'page',
+            '@data-page': function(d) {
+              return String(d.index);
+            },
+            '@href': function(d) {
+              return d.index === page
+                ? null
+                : d.index === false
+                  ? null
+                  : '?' + querystring.stringify(picc.data.extend({}, params, {page: d.index}));
+            }
+          }
+        }
+      });
+
+      var pageLinks = d3.selectAll('a.select-page')
+        .on('click', function() {
+          d3.event.preventDefault();
+
+          var _page = this.getAttribute('data-page');
+          if (_page === 'false') return;
+
+          pageLinks.each(function() {
+            var p = this.getAttribute('data-page');
+            var selected = p == _page;
+            this.parentNode.classList
+              .toggle('pagination-page_selected', selected);
+            // console.log('selected?', p, page, selected, '->', this.parentNode);
+          });
+
+          form.set('page', _page);
+          incremental = true;
+          change();
+        });
+
       var resultsList = resultsRoot.querySelector('.schools-list');
       tagalong(resultsList, data.results, picc.school.directives);
 
       console.timeEnd && console.timeEnd('[render]');
     });
+  }
+
+  function getPages(total, perPage, page) {
+
+    var numPages = Math.ceil(total / perPage);
+    var previous = false;
+    var next = false;
+
+    if (numPages > MAX_PAGES) {
+      var end = Math.min(page + MAX_PAGES, numPages);
+      var start = end - MAX_PAGES;
+      // console.log('pages: %d -> %d', start, end);
+      pages = d3.range(start, start + MAX_PAGES);
+      previous = start > 0;
+      next = end < numPages;
+    } else {
+      pages = d3.range(0, numPages);
+    }
+
+    // console.log('pages:', numPages, '->', pages);
+
+    pages = pages.map(function(page) {
+      return {
+        page: page + 1,
+        index: page
+      };
+    });
+
+    if (previous) {
+      var first = pages[0];
+      pages.unshift({
+        index: first.index - 1,
+        page: '<',
+        arrow: true
+      });
+      if (first.index > 1) {
+        pages.unshift({
+          index: 0,
+          page: '<<',
+          arrow: true
+        });
+      }
+    }
+    if (next) {
+      var last = pages[pages.length - 1];
+      pages.push({
+        index: last.index + 1,
+        page: '>',
+        arrow: true
+      });
+      if (last.index < numPages - 1) {
+        pages.push({
+          index: numPages - 1,
+          page: '>>',
+          arrow: true
+        });
+      }
+    }
+
+    return pages;
   }
 
   function showError(error) {

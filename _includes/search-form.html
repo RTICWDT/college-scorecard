@@ -6,7 +6,7 @@
 
   {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
 
-  <input type="hidden" name="school.HCM2">
+  <input type="hidden" name="under_investigation">
 
   <div class="container search-form-intro">
 
@@ -31,31 +31,47 @@
       <div id="filters-content" aria-hidden="true" class="accordion-div">
 
         <div class="filter_section">
-          <h2>Cost Per Year</h2>
-          <picc-slider format="$" max="50000" average="22000">
-            <input type="hidden" name="average_cost_range">
+          <h2 aria-describedby="tip-avg-cost-year">Actual Cost
+            <a class="tooltip-target">
+              <i class="fa fa-info-circle"></i>
+            </a>
+          </h2>
+          <picc-slider format="$" max="90000" step="1000">
+            <input type="hidden" name="avg_net_price">
           </picc-slider>
         </div>
 
 
         <div class="filter_section">
-          <h2>Graduation Rate</h2>
-          <picc-slider format="%" max="1">
-            <input type="hidden" name="graduation_rate_range">
+          <h2 aria-describedby="tip-graduation-rate">Graduation Rate
+            <a class="tooltip-target">
+              <i class="fa fa-info-circle"></i>
+            </a>
+          </h2>
+          <picc-slider format="%" step=".01" max="1">
+            <input type="hidden" name="completion_rate">
           </picc-slider>
         </div>
 
         <div class="filter_section">
-          <h2>Salary After Graduation</h2>
-          <picc-slider format="$" max="50000" average="25000">
-            <input type="hidden" name="average_salary_range">
+          <h2 aria-describedby="tip-avg-salary">Salary After Graduation
+            <a class="tooltip-target">
+              <i class="fa fa-info-circle"></i>
+            </a>
+          </h2>
+          <picc-slider format="$" max="250000">
+            <input type="hidden" name="median_earnings">
           </picc-slider>
         </div>
 
         <div class="filter_section">
-          <h2>Monthly Student Loan Payment</h2>
-          <picc-slider format="$" max="500" average="280">
-            <input type="hidden" name="monthly_loan_payment_range">
+          <h2 aria-describedby="tip-repayment-rate">Monthly Student Loan Payment
+            <a class="tooltip-target">
+              <i class="fa fa-info-circle"></i>
+            </a>
+          </h2>
+          <picc-slider format="$" max="550" step="50">
+            <input type="hidden" name="monthly_payments">
           </picc-slider>
         </div>
 
@@ -158,18 +174,18 @@
 
         <div class="group_inline">
 
-          <label for="zip-code" class="group_inline-left">Enter a ZIP Code
-            <input id="zip-code" name="zip_code" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>
+          <label for="zip-code" class="group_inline-left">Enter a ZIP code
+            <input id="zip-code" name="zip" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>
           </label>
 
           <label for="search-radius" class="group_inline-right">Mile radius
-            <input name="search_radius" type="number" step=".1" placeholder="no limit" id="search-radius" {{ common_input_attributes }}>
+            <input name="distance" type="number" step=".1" placeholder="no limit" id="search-radius" {{ common_input_attributes }}>
           </label>
 
         </div>
 
         <label for="online" class="checkbox">
-          <input id="online" type="checkbox" name="size" value="online" tabindex="0">
+          <input id="online" type="checkbox" name="online" value="1" tabindex="0">
           <span tabindex="-1" class="checkbox-focus"></span>Include Online Only Schools
         </label>
 
@@ -183,25 +199,31 @@
 
     <aria-accordion id="school-degree" class="container">
 
-      <legend>Area of Study</legend>
+      <legend>Programs/Degree</legend>
       <h1 class="search_category">
         <a aria-expanded="false" aria-controls="major-content">
-          Area of Study
+          Programs/Degree
         </a>
       </h1>
       <div id="major-content" aria-hidden="true" class="accordion-div">
 
-        <!-- <label for="major">Choose a program
-          <input id="major" name="major" type="text" placeholder="e.g. Engineering" {{ common_input_attributes }}>
-        </label> -->
-
-        <label for="major-type">Choose a program
-          <select id="major-type" name="degree">
-            <option value="2..3">Any</option>
-            <option value="2">Associates</option>
-            <option value="3">Bachelors</option>
+        <label for="major">Choose a program
+          <select id="major" name="major">
+            <option value="">Any</option>
+            {% for program in site.data.programs %}
+            <option value="{{ program.key }}">{{ program.label }}</option>
+            {% endfor %}
           </select>
         </label>
+
+        <label for="major-type">Choose a degree
+          <select id="major-type" name="degree">
+            <option value="">Any</option>
+            <option value="a">Associates</option>
+            <option value="b">Bachelors</option>
+          </select>
+        </label>
+
       </div>
 
     </aria-accordion>
@@ -228,19 +250,19 @@
           <ul>
             <li>
               <label for="size-small" class="checkbox">
-                <input id="size-small" type="checkbox" name="size" value="..1999" tabindex="0">
+                <input id="size-small" type="checkbox" name="size" value="small" tabindex="0">
                 <span tabindex="-1" class="checkbox-focus"></span>Small (&lt; 2,000)
               </label>
             </li>
             <li>
               <label for="size-medium" class="checkbox">
-                <input id="size-medium" type="checkbox" name="size" value="2000..15000" tabindex="0">
+                <input id="size-medium" type="checkbox" name="size" value="medium" tabindex="0">
                 <span tabindex="-1" class="checkbox-focus"></span>Medium (2,000&ndash;15,000)
               </label>
             </li>
             <li>
               <label for="size-large" class="checkbox">
-                <input id="size-large" type="checkbox" name="size" value="15001.." tabindex="0">
+                <input id="size-large" type="checkbox" name="size" value="large" tabindex="0">
                 <span tabindex="-1" class="checkbox-focus"></span>Large (&gt; 15,000)
               </label>
             </li>

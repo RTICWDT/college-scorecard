@@ -1,8 +1,8 @@
-avg-cost-year: <strong>Average Cost Per Year</strong> The average annual cost of attendance, including living expenses; minus any federal, state, or institutional grant aid. This figure is reported for federal financial aid recipients only.
+avg-cost-year: <strong>Average Actual Cost</strong> The average annual cost of attendance, including living expenses; minus any federal, state, or institutional grant aid. This figure is reported for federal financial aid recipients only.
 
 graduation-rate: <strong>Graduation Rate</strong> The rate of completion for full-time students who are attending college for the first time, within 6 years for predominantly four-year colleges and within 4 years for predominantly two-year colleges.
 
-avg-salary: <strong>Average Salary</strong> The median earnings of former students who received federal financial aid, at 10 years after entering the school.
+avg-salary: <strong>Salary 10 Years After</strong> The median earnings of former students who received federal financial aid, at 10 years after entering the school.
 
 repayment-rate: <strong>Students Repaying Loans on Time</strong> Percentage of borrowers who have defaulted on their loan after entering repayment.
 
@@ -18,6 +18,6 @@ typical-earnings: <strong>Typical Earnings</strong> The median earnings of forme
 
 earnings-25k: <strong>Former Students Earning More Than $25K</strong> Percentage of students who earn more than $25K (the average salary for those with only a high school diploma) after leaving school.
 
-acceptance-rate: <strong>Acceptance Rate</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse odio velit, mattis at dictum aliquam, vestibulum quis enim. 
+acceptance-rate: <strong>Acceptance Rate</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse odio velit, mattis at dictum aliquam, vestibulum quis enim.
 
 hcm2: <strong>Under Investigation</strong> This school is on a Heightened Cash Monitoring, level 2 payment method because of federal compliance or financial issues.

@@ -35,6 +35,10 @@ body_scripts:
 
       <div class="results-main-alert">
 
+        <div class="results-share-wrapper">
+          <a data-href="mailto:?subject=Check%20this%20out&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov,%20check%20it%20out%3A%20%0A%0A{url}" class="results-share">Share</a>
+        </div>
+
         <div class="container show-loading">
           <h1>Loading...</h1>
         </div>
@@ -51,8 +55,9 @@ body_scripts:
               <span data-bind="results_word">Results</span>
               Based on Your Criteria
             </h1>
+
           </div>
-          <!-- <a href="#search-form" class="link-more"><i class="fa fa-chevron-left"></i> Edit Criteria</a> -->
+
           <div>
 
             <div class="u-group_inline">
@@ -62,9 +67,14 @@ body_scripts:
               <!-- <div class="u-group_inline-right"> -->
                 <label for="select-sort">Sort by:</label>
                 <select id="select-sort" name="sort">
-                  <option selected value="2011.earnings.gt_25k_p10:desc">Earnings</option>
-                  <option value="2013.student.size:asc">Size (small to large)</option>
-                  <option value="2013.student.size:desc">Size (large to small)</option>
+                  <option selected value="advantage:desc">Advantage Factor</option>
+                  <option value="salary:desc">Salary</option>
+                  <option value="name:asc">Name (A to Z)</option>
+                  <!--option value="name:desc">Name (Z to A)</option -->
+                  <!--option value="size:desc">Size (large to small)</option-->
+                  <option value="size:asc">Size (small to large)</option>
+                  <option value="avg_net_price:asc">Actual Cost</option>
+                  <option value="completion_rate:desc">Graduation Rate</option>
                 </select>
               <!-- </div> -->
 
@@ -75,46 +85,58 @@ body_scripts:
 
       </div>
 
+      <div class="pagination container show-loaded">
+        <input type="hidden" name="page">
+
+        <ol data-bind="pages">
+          Page:
+          <li><a class="select-page" data-bind="link">1</a></li>
+        </ol>
+      </div>
+
       <section class="section section-card_container-results show-loaded">
 
         <div class="results-main-schools schools-list container" data-bind="results">
 
           <!-- this element is the template for the results listing -->
+
           <div class="school results-card">
 
             <div class="investigation-major-wrapper"
               data-bind="under_investigation" aria-hidden="true">
               <a>
-                <p class="investigation-major" aria-describedby="tip-investigation-major">
+                <p class="investigation-major" aria-describedby="tip-hcm2">
                   Under investigation <i class="tooltip-target fa fa-info-circle"></i>
                 </p>
               </a>
             </div>
 
-            <h1 data-bind="title"><a class="link">School Name</a></h1>
-            <ul class="school-info">
-              <li class="location">
-                <span data-bind="city">City</span>,
-                <span data-bind="state">State</span>
-              </li>
-              <!-- <li class="institution-category">
-                <span data-bind="years">year category</span>
-              </li> -->
-              <li>
-                <span data-bind="size_number">x</span> undergraduate students
-              </li>
-              <a data-bind="under_investigation2" aria-hidden="true">
-                <li class="investigation-minor" aria-describedby="tip-investigation-minor">
-                  Under investigation <i class="tooltip-target fa fa-info-circle"></i>
+            <div class="results-card-headings">
+              <h1 data-bind="title"><a class="link">School Name</a></h1>
+              <ul class="school-info">
+                <li class="location">
+                  <span data-bind="city">City</span>,
+                  <span data-bind="state">State</span>
                 </li>
-              </a>
-            </ul>
+                <!-- <li class="institution-category">
+                  <span data-bind="years">year category</span>
+                </li> -->
+                <li>
+                  <span data-bind="size_number">x</span> undergraduate students
+                </li>
+                <!-- <a data-bind="under_investigation2" aria-hidden="true">
+                  <li class="investigation-minor" aria-describedby="tip-investigation-minor">
+                    Under investigation <i class="tooltip-target fa fa-info-circle"></i>
+                  </li>
+                </a> -->
+              </ul>
+            </div>
 
             <div id="key-stats" class="school-meters">
               <figure class="meter">
                 <h2 class="figure-heading constrain_width"
                   aria-describedby="tip-avg-cost-year">
-                  Average Cost Per Year
+                  Average <br>Actual Cost
                   <a class="tooltip-target u-new_line">
                     <i class="fa fa-info-circle"></i>
                   </a>
@@ -129,7 +151,7 @@ body_scripts:
               <figure class="meter">
                 <h2 class="figure-heading constrain_width"
                   aria-describedby="tip-graduation-rate">
-                  Graduation Rate
+                  Graduation <br>Rate
                   <a class="tooltip-target u-new_line">
                     <i class="fa fa-info-circle"></i>
                   </a>
@@ -144,7 +166,7 @@ body_scripts:
               <figure class="meter">
                 <h2 class="figure-heading constrain_width"
                   aria-describedby="tip-avg-salary">
-                  Average Salary
+                  Salary 10 <br>Years After
                   <a class="tooltip-target u-new_line">
                     <i class="fa fa-info-circle"></i>
                   </a>
@@ -174,6 +196,15 @@ body_scripts:
         </div><!-- /div.schools-list -->
 
       </section>
+
+      <!-- <div class="pagination container show-loaded">
+        <input type="hidden" name="page">
+
+        <ol data-bind="pages">
+          Page:
+          <li><a class="select-page" data-bind="link">1</a></li>
+        </ol>
+      </div> -->
 
     </div>
 

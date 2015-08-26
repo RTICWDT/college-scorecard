@@ -1,18 +1,18 @@
 ---
+title: Data
 layout: default-data
+permalink: /data/
+scripts:
+  - vendor/flickity.pkgd.js
+stylesheets:
+  - vendor/flickity.min.css
 ---
 
-<div class="data-home-intro">
+<div class="data-home-convo">
 
   <section class="container section">
 
-    <div class="data-home-intro-col-left">
-
-      <p>Welcome, mission statement, why this is important, join the conversation. Lorem ipsum dolor sed lacus id ligula hendrerit semper sed vitae risus.</p>
-
-    </div>
-
-    <aside class="data-home-intro-col-right">
+    <aside class="data-home-intro-convo-right">
 
       <h3>Join the Conversation</h3>
 
@@ -32,9 +32,59 @@ layout: default-data
 
   <section class="section">
 
-    <h2>Data Insights</h2>
+    <div class="data-home-intro-col-left data-home-rule section-margin_bottom">
 
-    <p>Welcome, mission statement, why this is important, join the conversation. Lorem ipsum dolor sed lacus id ligula hendrerit semper sed vitae risus.</p>
+      <h2>Data Insights</h2>
+
+      <div class="main-gallery u-h_center_block js-flickity"
+      data-flickity-options='{
+        "cellAlign": "left",
+        "contain": true,
+        "setGallerySize": false,
+        "cellSelector": ".gallery-cell"
+      }'>
+
+        <div class="gallery-static"><a href="#" class="link-more">View all data insights <i class="fa fa-chevron-right"></i></a></div>
+        <div class="gallery-cell">
+          <div>
+            <p>&ldquo;Lorem ipsum dolor sit amet, <span class="insight-highlight">consectetur adipiscing elit</span>. Nulla lobortis magna varius lorem fermentum cursus. Vestibulum rhoncus in lectus eget imperdiet. Fusce euismod nibh vehicula quam rhoncus, euismod nibh vehicula quam rhoncus, sit amet pellentesque arcu varius. <span class="insight-highlight">Etiam vitae eros ac tellus commodo finibus non eget arcu</span>.&rdquo;</p>
+            <cite class="insight-cite">Attribution excerpt from Policy Paper</cite>
+          </div>
+        </div>
+
+        <div class="gallery-cell">
+            <p>&ldquo;Duis urna neque, sodales sit amet porta nec, consequat non enim. Duis sed posuere ante. <span class="insight-highlight">Integer in velit tristique, finibus nunc ac, convallis nulla</span>. Morbi mattis lacus ac felis sodales, et tempus nisl tristique. Suspendisse varius leo tortor, ut mollis lectus feugiat vitae. Fusce sed leo in odio pretium bibendum vel vel erat.&rdquo;</p>
+            <cite class="insight-cite">Attribution excerpt from Policy Paper</cite>
+        </div>
+
+        <div class="gallery-cell">
+            <p>&ldquo;Morbi at tellus mi. Etiam porta magna a mauris consequat feugiat. <span class="insight-highlight">Vivamus euismod eget justo</span> vestibulum sagittis. Vivamus pellentesque felis nec est consequat, in dapibus leo interdum. Cras velit turpis, lobortis nec ultrices et, pulvinar at enim.&rdquo;</p>
+            <cite class="insight-cite">Attribution excerpt from Policy Paper</cite>
+        </div>
+
+        <div class="gallery-cell">
+            <p>&ldquo;<span class="insight-highlight">Duis urna neque, sodales sit amet porta nec</span>, consequat non enim. Duis sed posuere ante. Integer in velit tristique, finibus nunc ac, convallis nulla. Morbi mattis lacus ac felis sodales, et tempus nisl tristique. Suspendisse varius leo tortor, ut mollis lectus feugiat vitae. Fusce sed leo in odio pretium bibendum vel vel erat.&rdquo;</p>
+            <cite class="insight-cite">Attribution excerpt from Policy Paper</cite>
+        </div>
+
+      </div>
+
+      <div class="u-align_c">
+        <button class="data-home-button">Download the Policy Paper</button>
+        <button class="data-home-button">Download the Technical Paper</button>
+      </div>
+
+    </div>
+
+    <div class="data-home-intro-col-right data-home-intro">
+
+      <h2>Introduction to the Data</h2>
+
+      <p>Welcome to College Scorecard Data! Here, you can get the data behind the College Scorecard, as well as other data from the Department of Education, all provided through federal financial aid and tax information. These data provide insights into the performance of schools eligible to receive federal financial aid, and offer a look at the outcomes of students at those schools.</p>
+
+      <p>[Search for the school of your choice to see all available data, or] download the full files to explore the data for yourself. Be sure to check out the Data Details section to help you navigate the data.</p>
+
+    </div>
 
   </section>
 
@@ -46,9 +96,9 @@ layout: default-data
 
     <section class="section">
 
-      <h2>The Data at a Glance</h2>
+      <!-- <h2>The Data at a Glance</h2>
 
-      <p>Welcome, mission statement, why this is important, join the conversation. Lorem ipsum dolor sed lacus id ligula hendrerit semper sed vitae risus.</p>
+      <p>Welcome, mission statement, why this is important, join the conversation. Lorem ipsum dolor sed lacus id ligula hendrerit semper sed vitae risus.</p> -->
 
     </section>
 
@@ -58,17 +108,55 @@ layout: default-data
 
 <div class="container">
 
-  <section class="section">
+  <section class="section data-home-download">
 
-    <h2>Download the Data</h2>
+    <div class="data-home-intro-col-left data-home-rule section-margin_bottom">
 
-    <p>Welcome, mission statement, why this is important, join the conversation. Lorem ipsum dolor sed lacus id ligula hendrerit semper sed vitae risus.</p>
+      <h2>Download the Data</h2>
+
+      <p>Nulla lobortis magna varius lorem fermentum cursus. Vestibulum rhoncus in lectus eget imperdiet. Fusce euismod nibh vehicula quam rhoncus, euismod nibh vehicula quam rhoncus.</p>
+
+      <div>
+        <button class="button button-primary">Download All Data</button>
+        <button class="button button-primary">Create Custom Data Set</button>
+      </div>
+
+      <h3>Featured Downloads</h3>
+
+      <ul class="data-download-list">
+        <li><a href="#">Scorecard data</a> 4.7GB csv</li>
+        <li><a href="#">Most recent data</a> 4.7GB csv</li>
+        <li><a href="#">What's new from NSLDS</a> 4.7GB csv</li>
+        <li><a href="#">Post-school earnings</a> 4.7GB csv</li>
+      </ul>
+
+    </div>
+
+    <div class="data-home-intro-col-right">
+
+      <h2>API Documentation</h2>
+
+      <p>Lorem ipsum dolor sed lacus id ligula hendrerit semper sed vitae risus. <strong>Sed suscipit purus:</strong></p>
+
+      <ul class="u-unordered_list">
+        <li>Nulla lobortis</li>
+        <li>Magna varius lorem</li>
+        <li>Fermentum cursus</li>
+        <li>Vestibulum rhoncus in</li>
+        <li>Lectus eget imperdiet</li>
+      </ul>
+
+      <p>Lorem ipsum dolor sed lacus id ligula hendrerit semper sed vitae risus.</p>
+
+      <a href="#" class="link-more">View the API documentation <i class="fa fa-chevron-right"></i></a>
+
+    </div>
 
   </section>
 
 </div>
 
-<div style="background:#0e365b; color: white;">
+<!-- <div style="background:#0e365b; color: white;">
 
   <div class="container">
 
@@ -82,4 +170,4 @@ layout: default-data
 
   </div>
 
-</div>
+</div> -->
