@@ -757,7 +757,7 @@
         '@href': function(d) {
           return picc.template.resolve(
             this.getAttribute('data-href'),
-            {url: document.location.href}
+            {url: encodeURIComponent(document.location.href)}
           );
         }
       },
@@ -825,11 +825,7 @@
       average_total_debt: format.dollars(fields.AVERAGE_TOTAL_DEBT),
       average_monthly_loan_payment: format.dollars(fields.MONTHLY_LOAN_PAYMENT),
 
-      federal_aid_percentage: format.percent(function(d) {
-        var aid = access(fields.AID_PERCENTAGE)(d);
-        if (!aid) return null;
-        return Math.max(aid.federal, aid.pell) || null; // 0 is n/a
-      }),
+      federal_aid_percentage: format.percent(fields.AID_PERCENTAGE),
 
       earnings_gt_25k: format.percent(access.earnings25k),
       earnings_gt_25k_meter: {
