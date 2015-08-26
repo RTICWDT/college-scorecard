@@ -55,7 +55,8 @@ picc-meter {
       color: $dark-gray;
       content: 'Data not available';
       display: block;
-      padding: 3em .5em;
+      line-height: 1.2;
+      padding: 60% .5em 0;
       position: relative;
       text-align: center;
     }
