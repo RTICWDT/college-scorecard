@@ -30,6 +30,7 @@ label {
   @include font-size(0.875);
   font-weight: 600;
   margin-bottom: $base-line-height / 4;
+  padding-top: $base-padding-lite;
 
   &.required:after {
     content: "*";

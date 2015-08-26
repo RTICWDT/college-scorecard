@@ -260,12 +260,18 @@
   }
 }
 
+.search-button {
+  margin-bottom: $base-padding;
+}
+
 .advanced_search {
   border-top: none;
+  min-height: 50px;
   margin-bottom: $base-padding;
 
   aria-accordion .advanced_search-control {
       display: inline;
+      padding-bottom: none;
 
       &::after {
         content: '';
