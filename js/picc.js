@@ -228,17 +228,7 @@
    * `men_only` are top-level properties of each school API response
    * object.
    */
-  var SPECIAL_DESIGNATIONS = {
-    // TODO: rename 'aanapi' to 'aanapisi'?
-    // per <http://www2.ed.gov/programs/aanapi/index.html>
-    aanipi:               'AANAPI',
-    hispanic:             'Hispanic',
-    historically_black:   'Historically Black',
-    predominantly_black:  'Predominantly Black',
-    tribal:               'Tribal',
-    women_only:           'Women Only',
-    men_only:             'Men Only'
-  };
+  var SPECIAL_DESIGNATIONS = ({{ site.data.special_designations|jsonify }});
 
   // this is our "n/a" string that we display for null numeric values
   var NA = '--';
