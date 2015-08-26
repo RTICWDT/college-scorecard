@@ -293,68 +293,72 @@
             </a>
           </div>
 
-        <div id="advanced-content" aria-hidden="false">
+        <div id="advanced-content" class="advanced-content" aria-hidden="false">
 
-          <aria-accordion>
+          <fieldset>
 
-            <legend>Institution Type</legend>
-            <h1>
-              <a aria-expanded="false" aria-controls="type-content">
-                Institution Type
-              </a>
-            </h1>
+            <aria-accordion class="container">
 
-            <div id="type-content" aria-hidden="false">
+              <legend>Institution Type</legend>
+              <h1 class="search_category">
+                <a aria-expanded="false" aria-controls="type-content">
+                  Institution Type
+                </a>
+              </h1>
 
-              <fieldset class="nested_fieldset">
+              <div id="type-content" aria-hidden="false">
 
-                <legend>Type</legend>
-                <h1>Type</h1>
+                <fieldset class="nested_fieldset">
 
-                <ul>
-                  <li>
-                    <label for="type-public" class="checkbox">
-                      <input id="type-public" type="checkbox" name="control" value="public" tabindex="0">
-                      <span tabindex="-1" class="checkbox-focus"></span>Public
-                    </label>
-                  </li>
-                  <li>
-                    <label for="type-private" class="checkbox">
-                      <input id="type-private" type="checkbox" name="control" value="private" tabindex="0">
-                      <span tabindex="-1" class="checkbox-focus"></span>Private, Not-for-Profit
-                    </label>
-                  </li>
-                  <li>
-                    <label for="type-profit" class="checkbox">
-                      <input id="type-profit" type="checkbox" name="control" value="profit" tabindex="0">
-                      <span tabindex="-1" class="checkbox-focus"></span>Private, For-Profit
-                    </label>
-                  </li>
-                </ul>
+                  <legend>Type of school</legend>
+                  <h1>Type of school</h1>
 
-              </fieldset>
+                  <ul>
+                    <li>
+                      <label for="type-public" class="checkbox">
+                        <input id="type-public" type="checkbox" name="control" value="public" tabindex="0">
+                        <span tabindex="-1" class="checkbox-focus"></span>Public
+                      </label>
+                    </li>
+                    <li>
+                      <label for="type-private" class="checkbox">
+                        <input id="type-private" type="checkbox" name="control" value="private" tabindex="0">
+                        <span tabindex="-1" class="checkbox-focus"></span>Private, Not-for-Profit
+                      </label>
+                    </li>
+                    <li>
+                      <label for="type-profit" class="checkbox">
+                        <input id="type-profit" type="checkbox" name="control" value="profit" tabindex="0">
+                        <span tabindex="-1" class="checkbox-focus"></span>Private, For-Profit
+                      </label>
+                    </li>
+                  </ul>
 
-              <label for="affiliation">Special designation
-                <select id="affiliation" name="religious">
-                  <option value="">None</option>
-                  {% for row in site.data.religious_affiliations %}
-                  <option value="{{ row.value }}">{{ row.label }}</option>
-                  {% endfor %}
-                </select>
-              </label>
+                </fieldset>
 
-              <label for="affiliation">Religious affiliation
-                <select id="affiliation" name="religious">
-                  <option value="">None</option>
-                  {% for row in site.data.religious_affiliations %}
-                  <option value="{{ row.value }}">{{ row.label }}</option>
-                  {% endfor %}
-                </select>
-              </label>
+                <label for="affiliation">Special designation
+                  <select id="affiliation" name="religious">
+                    <option value="">None</option>
+                    {% for row in site.data.religious_affiliations %}
+                    <option value="{{ row.value }}">{{ row.label }}</option>
+                    {% endfor %}
+                  </select>
+                </label>
 
-            </div>
+                <label for="affiliation">Religious affiliation
+                  <select id="affiliation" name="religious">
+                    <option value="">None</option>
+                    {% for row in site.data.religious_affiliations %}
+                    <option value="{{ row.value }}">{{ row.label }}</option>
+                    {% endfor %}
+                  </select>
+                </label>
 
-          </aria-accordion>
+              </div>
+
+            </aria-accordion>
+
+          <fieldset>
 
         </div>
 

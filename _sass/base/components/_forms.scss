@@ -84,7 +84,6 @@ label.radio {
   display: inline-block;
   font-weight: 400;
   margin-bottom: 0.5em;
-  padding-left: 3px; //TODO remove. Compensates for odd border bug.
 
   input[type="checkbox"] + span {
     box-shadow: 0 0 1px $black;
