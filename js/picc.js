@@ -785,10 +785,10 @@
 
       average_cost: format.dollars(access.netPrice),
       average_cost_meter: {
-        '@max':     access.nationalStat('max', access.publicPrivate),
-        '@average': access.nationalStat('median', access.publicPrivate),
+        // '@max':     access.nationalStat('max', access.publicPrivate),
+        // '@average': access.nationalStat('median', access.publicPrivate),
         '@value':   access.netPrice,
-        label:      format.dollars(access.nationalStat('median', access.publicPrivate)),
+        label:      format.dollars(function() { return this.average; }),
         '@title':   debugMeterTitle
       },
 
@@ -801,31 +801,25 @@
 
       grad_rate: format.percent(access.completionRate),
       grad_rate_meter: {
-        '@average': access.nationalStat('median', access.yearDesignation),
+        // '@average': access.nationalStat('median', access.yearDesignation),
         '@value':   access.completionRate,
-        label:      format.percent(function() {
-          return this.getAttribute('average');
-        }),
+        label:      format.percent(function() { return this.average; }),
         '@title':   debugMeterTitle
       },
 
       average_salary: format.dollars(access.earningsMedian),
       average_salary_meter: {
         '@value': access.earningsMedian,
-        '@average': access.nationalStat('median', access.yearDesignation),
-        label:    format.dollars(function() {
-          return this.getAttribute('average');
-        }),
+        // '@average': access.nationalStat('median', access.yearDesignation),
+        label:    format.dollars(function() { return this.average; }),
         '@title': debugMeterTitle
       },
 
       repayment_rate_percent: format.percent(fields.REPAYMENT_RATE),
       repayment_rate_meter: {
         '@value': access(fields.REPAYMENT_RATE),
-        '@average': access.nationalStat('median', access.yearDesignation),
-        label:    format.percent(function() {
-          return this.getAttribute('average');
-        })
+        // '@average': access.nationalStat('median', access.yearDesignation),
+        label:    format.percent(function() { return this.average; })
       },
 
       average_total_debt: format.dollars(fields.AVERAGE_TOTAL_DEBT),
@@ -840,18 +834,14 @@
       earnings_gt_25k: format.percent(access.earnings25k),
       earnings_gt_25k_meter: {
         '@value': access.earnings25k,
-        label: format.percent(function() {
-          return this.getAttribute('average');
-        }),
+        label:    format.percent(function() { return this.average; }),
         '@title': debugMeterTitle
       },
 
       retention_rate_value: format.percent(access.retentionRate),
       retention_rate_meter: {
         '@value': access.retentionRate,
-        label:    format.percent(function() {
-          return this.getAttribute('average');
-        }),
+        label:    format.percent(function() { return this.average; }),
         '@title': debugMeterTitle
       },
 
