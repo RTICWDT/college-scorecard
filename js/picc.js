@@ -228,17 +228,7 @@
    * `men_only` are top-level properties of each school API response
    * object.
    */
-  var SPECIAL_DESIGNATIONS = {
-    // TODO: rename 'aanapi' to 'aanapisi'?
-    // per <http://www2.ed.gov/programs/aanapi/index.html>
-    aanipi:               'AANAPI',
-    hispanic:             'Hispanic',
-    historically_black:   'Historically Black',
-    predominantly_black:  'Predominantly Black',
-    tribal:               'Tribal',
-    women_only:           'Women Only',
-    men_only:             'Men Only'
-  };
+  var SPECIAL_DESIGNATIONS = ({{ site.data.special_designations|jsonify }});
 
   // this is our "n/a" string that we display for null numeric values
   var NA = '--';
@@ -396,6 +386,7 @@
     LOCALE:               'school.locale',
     REGION_ID:            'school.region_id',
 
+    RELIGIOUS:            'school.religious_affiliation',
     OPERATING:            '2013.student.operating',
 
     SIZE:                 '2013.student.size',
@@ -994,6 +985,12 @@
       completion_rate:    picc.fields.COMPLETION_RATE,
     },
 
+    control: {
+      'public': 1,
+      'private': 2,
+      'profit': 3
+    },
+
     size: {
       small:  '..1999',
       medium: '2000..15000',
@@ -1053,12 +1050,35 @@
       median_earnings:      fields.MEDIAN_EARNINGS + '__range',
       monthly_payments:     fields.MONTHLY_LOAN_PAYMENT + '__range',
 
+      religious:            fields.RELIGIOUS,
+
+      // special designations: women/men only, minority groups
+      serving: function(query, value, key) {
+        var field = [fields.MINORITY_SERVING, value].join('.');
+        switch (value) {
+          case 'men_only':
+            field = fields.MEN_ONLY;
+            break;
+          case 'women_only':
+            field = fields.WOMEN_ONLY;
+            break;
+        }
+        query[field] = 1;
+        delete query[key];
+      },
+
       state:                fields.STATE,
       zip:                  fields.ZIP_CODE,
       online:               fields.ONLINE_ONLY,
 
+      control: function(query, value, key) {
+        value = mapControl(value);
+        picc.data.rangify(query, fields.OWNERSHIP, value);
+        delete query[key];
+      },
+
       region: function(query, value, key) {
-        picc.data.rangify(query, picc.fields.REGION_ID, query.region);
+        picc.data.rangify(query, fields.REGION_ID, value);
         delete query[key];
       },
 
@@ -1113,6 +1133,13 @@
         return value.map(mapDegree);
       }
       return picc.form.mappings.degree[value];
+    }
+
+    function mapControl(value) {
+      if (Array.isArray(value)) {
+        return value.map(mapControl);
+      }
+      return picc.form.mappings.control[value];
     }
 
     // returns true if a value is an empty string, null, undefined, or an array

@@ -186,10 +186,12 @@ button,
 
 .nested_fieldset {
   border-top: none;
+  padding-bottom: $base-padding-lite;
 
   h1 {
-    @include font-size($h3);
-    font-weight: $weight-book;
+    @include font-size($h5);
+    font-weight: $weight-bold;
+    margin-top: 12px;
     margin-bottom: 0.5em;
   }
 }
