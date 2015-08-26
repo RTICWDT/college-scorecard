@@ -1050,6 +1050,20 @@
 
       religious:            fields.RELIGIOUS,
 
+      serving: function(query, value, key) {
+        var field = [fields.MINORITY_SERVING, value].join('.');
+        switch (value) {
+          case 'men_only':
+            field = fields.MEN_ONLY;
+            break;
+          case 'women_only':
+            field = fields.WOMEN_ONLY;
+            break;
+        }
+        query[field] = 1;
+        delete query[key];
+      },
+
       state:                fields.STATE,
       zip:                  fields.ZIP_CODE,
       online:               fields.ONLINE_ONLY,
