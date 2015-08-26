@@ -261,13 +261,17 @@
 }
 
 .search-button {
-  margin-bottom: $base-padding;
+  margin-bottom: $base-padding-extra;
 }
 
 .advanced_search {
   border-top: none;
-  min-height: 50px;
-  margin-bottom: $base-padding;
+  margin-bottom: 0;
+  padding-bottom: 0;
+
+  // aria-accordion {
+  //   min-height: 0;
+  // }
 
   aria-accordion .advanced_search-control {
       display: inline;
@@ -288,6 +292,7 @@
 }
 
 .advanced-content {
+  margin-bottom: $base-padding;
   > fieldset {
     border-bottom: 3px solid $base-border-color;
   }
