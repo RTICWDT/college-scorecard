@@ -133,7 +133,7 @@ body_scripts:
 
             <figure class="meter above_is_good">
               <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year">
-                Salary 10 Years After
+                Salary 10<br>Years After
                 <a class="tooltip-target u-new_line">
                   <i class="fa fa-info-circle"></i>
                 </a>
@@ -395,10 +395,21 @@ body_scripts:
                 </h1>
 
                 <div id="earnings-content" aria-hidden="true">
-                  <div class="school-two_col-left centered">
+
+                  <div class="school-two_col-left">
+                    <strong class="fact_number">
+                      <span data-bind="advantage_rate">XX%</span>
+                      <span class="normal">of students</span>
+                    </strong>
+                    <p>who attend this school will earn more than those with
+                      only a high school diploma.</p>
+                  </div>
+
+
+                  <div class="school-two_col-right centered">
                     <figure class="meter above_is_good">
                       <h2 class="figure-heading" aria-describedby="tip-avg-salary">
-                        Salary<br>10 Years After
+                        Average Salary 10<br>Years After Entry
                         <a class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
                         </a>
@@ -408,28 +419,6 @@ body_scripts:
                       <figcaption>
                         <i class="fa average average-arrow" data-meter="salary-meter"></i>
                         <span data-bind="average_salary">$XX,XXX</span>
-                        <div class="average average-label"></div>
-                      </figcaption>
-                    </figure>
-                  </div>
-
-                  <div class="school-two_col-right centered">
-                    <figure class="meter above_is_good">
-                      <h2 class="figure-heading" aria-describedby="tip-earnings-25k">
-                        Former Students <br>Earning More Than $25K
-                        <a class="tooltip-target u-new_line">
-                          <i class="fa fa-info-circle"></i>
-                        </a>
-                      </h2>
-                      <picc-meter class="earnings"
-                        id="earn25k-meter"
-                        data-bind="earnings_gt_25k_meter"
-                        max="1"
-                        average="{{ site.data.national_stats.earnings_gt_25k.median }}">
-                      </picc-meter>
-                      <figcaption>
-                        <i class="fa average average-arrow" data-meter="earn25k-meter"></i>
-                        <span data-bind="earnings_gt_25k">XX%</span>
                         <div class="average average-label"></div>
                       </figcaption>
                     </figure>
