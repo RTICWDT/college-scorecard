@@ -399,7 +399,7 @@
     OPERATING:            '2013.student.operating',
 
     SIZE:                 '2013.student.size',
-    DISTANCE_ONLY:        'school.DISTANCEONLY',
+    ONLINE_ONLY:          'school.online_only',
 
     WOMEN_ONLY:           'school.women_only',
     MEN_ONLY:             'school.men_only',
@@ -1060,7 +1060,7 @@
 
       state:                fields.STATE,
       zip:                  fields.ZIP_CODE,
-      online:               fields.DISTANCE_ONLY,
+      online:               fields.ONLINE_ONLY,
 
       region: function(query, value, key) {
         picc.data.rangify(query, picc.fields.REGION_ID, query.region);
