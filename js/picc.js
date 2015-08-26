@@ -1050,6 +1050,7 @@
 
       religious:            fields.RELIGIOUS,
 
+      // special designations: women/men only, minority groups
       serving: function(query, value, key) {
         var field = [fields.MINORITY_SERVING, value].join('.');
         switch (value) {
