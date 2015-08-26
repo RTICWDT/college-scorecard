@@ -503,3 +503,8 @@ ol.bars {
   @include span-columns(12);
   text-align: right;
 }
+
+.leaflet-control-attribution a {
+  text-decoration: underline;
+  color: $black !important;
+}
