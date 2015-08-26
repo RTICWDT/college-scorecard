@@ -192,6 +192,11 @@
 
     span {
       font-weight: normal;
+
+      &.normal {
+        @include font-size(1.8);
+        color: $black;
+      }
     }
   }
 
