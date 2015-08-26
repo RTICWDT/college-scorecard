@@ -950,6 +950,12 @@
       completion_rate:    picc.fields.COMPLETION_RATE,
     },
 
+    control: {
+      'public': 1,
+      'private': 2,
+      'profit': 3
+    },
+
     size: {
       small:  '..1999',
       medium: '2000..15000',
@@ -1013,6 +1019,12 @@
       zip:                  fields.ZIP_CODE,
       online:               fields.DISTANCE_ONLY,
 
+      control: function(query, value, key) {
+        value = mapControl(value);
+        picc.data.rangify(query, fields.OWNERSHIP, value);
+        delete query[key];
+      },
+
       region: function(query, value, key) {
         picc.data.rangify(query, picc.fields.REGION_ID, query.region);
         delete query[key];
@@ -1069,6 +1081,13 @@
         return value.map(mapDegree);
       }
       return picc.form.mappings.degree[value];
+    }
+
+    function mapControl(value) {
+      if (Array.isArray(value)) {
+        return value.map(mapControl);
+      }
+      return picc.form.mappings.control[value];
     }
 
     // returns true if a value is an empty string, null, undefined, or an array
