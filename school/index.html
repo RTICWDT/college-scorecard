@@ -258,7 +258,9 @@ body_scripts:
                         class="debt"
                         data-bind="repayment_rate_meter"
                         max="1"
-                        data-median="{{ site.data.national_stats.repayment_rate.median }}">
+                        average="{{ site.data.national_stats.repayment_rate.median }}"
+                        data-median-four_year="{{ site.data.national_stats.repayment_rate_4.median }}"
+                        data-median-lt_four_year="{{ site.data.national_stats.repayment_rate_l4.median }}">
                       </picc-meter>
                       <figcaption>
                         <i class="fa average average-arrow" data-meter="repayment-meter"></i>
@@ -423,7 +425,7 @@ body_scripts:
                         id="earn25k-meter"
                         data-bind="earnings_gt_25k_meter"
                         max="1"
-                        average=".6">
+                        average="{{ site.data.national_stats.earnings_gt_25k.median }}">
                       </picc-meter>
                       <figcaption>
                         <i class="fa average average-arrow" data-meter="earn25k-meter"></i>
