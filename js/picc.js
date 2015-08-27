@@ -1139,8 +1139,8 @@
       online:               fields.ONLINE_ONLY,
 
       zip: function(query, value, key) {
-        // if there is no distance query, use the explicit `school.zip` field
-        // to match schools in that zip code
+        // if there is no distance query, use the fully-qualified zip code
+        // field to match schools in that zip
         if (!query.distance) {
           query[fields.ZIP_CODE] = value;
           delete query[key];
