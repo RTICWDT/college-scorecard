@@ -1,6 +1,7 @@
 // Thanks to http://www.designcouch.com/home/why/2014/04/23/pure-css-drawer-menu/
 
-$drawer-width: 30%;
+$drawer-width: 100%;
+$drawer-width-medium_up: 30%;
 
 .drawer {
 
@@ -8,7 +9,7 @@ $drawer-width: 30%;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
-  /* adds animation for all transitions */
+  // adds animation for all transitions
 
   -webkit-transition: .25s ease-in-out;
   -moz-transition: .25s ease-in-out;
@@ -56,15 +57,17 @@ $drawer-width: 30%;
     padding-bottom: 0.9em;
   }
 }
-/* Makes sure that everything is 100% height */
+
+// Makes sure that everything is 100% height
 
 html,
 body {
     //height: 100%;
     //overflow: hidden;
 }
-/* gets the actual input out of the way;
-we're going to style the label instead */
+
+// gets the actual input out of the way;
+// we're going to style the label instead
 
 #drawer-toggle {
   position: absolute;
@@ -86,7 +89,8 @@ we're going to style the label instead */
   background: rgba(255, 255, 255, .0);
   z-index: 1;
 }
-/* adds our "hamburger" menu icon */
+
+// adds "hamburger" menu icon
 
 #drawer-toggle-label:before {
   content: '';
@@ -102,18 +106,22 @@ we're going to style the label instead */
 
 #drawer {
   position: absolute;
-  //top: 0;
   left: -$drawer-width;
   height: 100%;
   width: $drawer-width;
   background: $white;
   overflow-x: hidden;
-  //overflow-y: scroll;
   padding-top: $base-padding-extra;
   padding-left: $base-padding;
   -webkit-overflow-scrolling: touch;
+
+  @include respond-to(large-up) {
+    left: -$drawer-width-medium_up;
+    width: $drawer-width-medium_up;
+  }
 }
-/* actual page content pane */
+
+// actual page content pane
 
 #page-content {
   margin-left: 0;
@@ -123,22 +131,29 @@ we're going to style the label instead */
   overflow-x: hidden;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
-  //padding: 20px;
 }
 
-/* checked styles (menu open state) */
+// checked styles (menu open state)
 
 -toggle:checked ~ #drawer-toggle-label {
   height: 100%;
   width: calc(100% - $drawer-width);
+
+  @include respond-to(large-up) {
+    width: calc(100% - $drawer-width-medium_up);
+  }
 }
 
 #drawer-toggle:checked ~ #drawer-toggle-label,
 #drawer-toggle:checked ~ header {
   height: 50px;
-  left: $drawer-width - 6%;
+  left: $drawer-width - 15%;
   span {
     display: none;
+  }
+
+  @include respond-to(large-up) {
+    left: $drawer-width-medium_up - 6%;
   }
 }
 
@@ -148,4 +163,8 @@ we're going to style the label instead */
 
 #drawer-toggle:checked ~ #page-content {
   margin-left: $drawer-width;
+
+  @include respond-to(large-up) {
+    margin-left: $drawer-width-medium_up;
+  }
 }
