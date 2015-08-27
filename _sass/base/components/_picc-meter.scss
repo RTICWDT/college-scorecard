@@ -49,4 +49,17 @@ picc-meter {
     }
   }
 
+  &.no_data {
+    &:after {
+      @include font-size(.8);
+      color: $dark-gray;
+      content: 'Data not available';
+      display: block;
+      line-height: 1.2;
+      padding: 60% .5em 0;
+      position: relative;
+      text-align: center;
+    }
+  }
+
 }

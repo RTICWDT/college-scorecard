@@ -33,44 +33,69 @@
         update: {value: function() {
           var min = this.min;
           var max = this.max;
-
-          var scale = function(v) {
-            return (v - min) / (max - min);
-          };
-
-          var percent = function(v) {
-            return (scale(v) * 100).toFixed(1) + '%';
-          };
+          var value = this.value;
+          var average = this.average;
 
           var bar = getBar(this);
-          // prevent the bar from exceeding the height
-          var value = Math.min(this.value, this.max);
-          bar.style.setProperty('height', percent(value));
-
           var line = getLine(this);
 
-          var average = this.average;
-          var difference;
-          // console.log('average:', this.getAttribute('average'), '->', average);
-          if (isNaN(average)) {
+          if (typeof value !== 'number' || isNaN(value)) {
+            // console.log('bad value:', value);
+
+            // reset the bar
+            bar.style.setProperty('display', 'none');
+            bar.style.removeProperty('height');
+
+            // reset the line
             line.style.setProperty('display', 'none');
+            line.style.removeProperty('bottom');
+
+            // classify and bail
             classify(this, {
+              'no_data': true,
               'above_average': false,
               'below_average': false,
               'about_average': false
             });
-          } else {
-            difference = value - average;
-            line.style.removeProperty('display');
-            line.style.setProperty('bottom', percent(this.average));
-            var aboutThreshold = getAttr(this, 'about-threshold', .05) * (this.max - this.min);
-            classify(this, {
-              'above_average': difference > 0,
-              'below_average': difference < 0,
-              'about_average': Math.abs(difference) <= aboutThreshold
-            });
-          }
 
+          } else {
+
+            classify(this, {no_data: false});
+
+            var scale = function(v) {
+              return (v - min) / (max - min);
+            };
+
+            var percent = function(v) {
+              return (scale(v) * 100).toFixed(1) + '%';
+            };
+
+            bar.style.removeProperty('display');
+            // prevent the bar from exceeding the height
+            bar.style.setProperty('height', percent(Math.min(value, max)));
+
+            var difference;
+            // console.log('average:', this.getAttribute('average'), '->', average);
+            if (isNaN(average)) {
+              line.style.setProperty('display', 'none');
+              classify(this, {
+                'above_average': false,
+                'below_average': false,
+                'about_average': false
+              });
+            } else {
+              difference = value - average;
+              line.style.removeProperty('display');
+              line.style.setProperty('bottom', percent(this.average));
+              var aboutThreshold = getAttr(this, 'about-threshold', .05) * (max - min);
+              classify(this, {
+                'above_average': difference > 0,
+                'below_average': difference < 0,
+                'about_average': Math.abs(difference) <= aboutThreshold
+              });
+            }
+
+          }
 
           delete this.__timeout;
 

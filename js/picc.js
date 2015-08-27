@@ -609,6 +609,18 @@
     );
   };
 
+  /*
+  // XXX this version of the median earnings accessor stringifies a
+  // numeric earnings value so that the old version of tagalong
+  // we're using doesn't treat 0 as empty
+  picc.access.earningsMedian = function(d) {
+    var value = picc.access(picc.fields.MEDIAN_EARNINGS)(d);
+    return typeof value === 'number'
+      ? String(value)
+      : value;
+  };
+  */
+
   picc.access.earningsMedian = picc.access.composed(
     picc.fields.MEDIAN_EARNINGS
   );
