@@ -29,6 +29,7 @@ picc-range {
     transition: left .5s;
 
     span {
+      font-weight: 200;
       position: absolute;
       top: $label-height;
       width: $label-width;
@@ -51,13 +52,17 @@ picc-range {
     &.picc-range-label-middle,
     &.picc-range-label-lower,
     &.picc-range-label-upper {
-      border: 1px solid black;
+      border-left: 1px solid black;
+    }
+
+    &.picc-range-label-upper {
+      border-left: none;
+      border-right: 1px solid black;
     }
 
     &.picc-range-label-min,
     &.picc-range-label-max,
     &.picc-range-label-middle {
-      border-width: 2px;
       bottom: -.5em;
       top: auto;
 
