@@ -339,10 +339,17 @@
         //'4': 'Graduate'
       }, NA)),
 
-      zero: function(key) {
+      empty: function(key) {
         key = picc.access(key);
         return function(d) {
-          return key.call(this, d) == 0;
+          return !key.call(this, d);
+        };
+      },
+
+      notEmpty: function(key) {
+        key = picc.access(key);
+        return function(d) {
+          return !!key.call(this, d);
         };
       },
 
@@ -983,39 +990,51 @@
       },
 
       act_scores_visible: {
-        '@aria-hidden': format.zero(fields.ACT_MIDPOINT),
+        '@aria-hidden': format.empty(fields.ACT_MIDPOINT),
+      },
+      act_scores_invisible: {
+        '@aria-hidden': format.notEmpty(fields.ACT_MIDPOINT),
       },
       act_scores: {
         '@lower': access(fields.ACT_25TH_PCTILE),
         '@upper': access(fields.ACT_75TH_PCTILE),
-        '@middle': access(fields.ACT_MIDPOINT),
+        // '@middle': access(fields.ACT_MIDPOINT),
       },
 
       sat_reading_scores_visible: {
-        '@aria-hidden': format.zero(fields.SAT_READING_MIDPOINT),
+        '@aria-hidden': format.empty(fields.SAT_READING_MIDPOINT),
+      },
+      sat_reading_scores_invisible: {
+        '@aria-hidden': format.notEmpty(fields.SAT_READING_MIDPOINT),
       },
       sat_reading_scores: {
         '@lower': access(fields.SAT_READING_25TH_PCTILE),
         '@upper': access(fields.SAT_READING_75TH_PCTILE),
-        '@middle': access(fields.SAT_READING_MIDPOINT),
+        // '@middle': access(fields.SAT_READING_MIDPOINT),
       },
 
       sat_math_scores_visible: {
-        '@aria-hidden': format.zero(fields.SAT_MATH_MIDPOINT),
+        '@aria-hidden': format.empty(fields.SAT_MATH_MIDPOINT),
+      },
+      sat_math_scores_invisible: {
+        '@aria-hidden': format.notEmpty(fields.SAT_MATH_MIDPOINT),
       },
       sat_math_scores: {
         '@lower': access(fields.SAT_MATH_25TH_PCTILE),
         '@upper': access(fields.SAT_MATH_75TH_PCTILE),
-        '@middle': access(fields.SAT_MATH_MIDPOINT),
+        // '@middle': access(fields.SAT_MATH_MIDPOINT),
       },
 
       sat_writing_scores_visible: {
-        '@aria-hidden': format.zero(fields.SAT_WRITING_MIDPOINT),
+        '@aria-hidden': format.empty(fields.SAT_WRITING_MIDPOINT),
+      },
+      sat_writing_scores_invisible: {
+        '@aria-hidden': format.notEmpty(fields.SAT_WRITING_MIDPOINT),
       },
       sat_writing_scores: {
         '@lower': access(fields.SAT_WRITING_25TH_PCTILE),
         '@upper': access(fields.SAT_WRITING_75TH_PCTILE),
-        '@middle': access(fields.SAT_WRITING_MIDPOINT),
+        // '@middle': access(fields.SAT_WRITING_MIDPOINT),
       },
 
       net_price_calculator: {

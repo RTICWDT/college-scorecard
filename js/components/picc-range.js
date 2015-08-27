@@ -25,9 +25,9 @@
 
           this.min = getAttr(this, 'min', 0);
           this.max = getAttr(this, 'max', 1);
-          this.lower = getAttr(this, 'lower', 0);
-          this.middle = getAttr(this, 'middle', 0);
-          this.upper = getAttr(this, 'upper', 0);
+          this.lower = getAttr(this, 'lower');
+          this.middle = getAttr(this, 'middle');
+          this.upper = getAttr(this, 'upper');
 
           this.update();
         }},
@@ -67,10 +67,15 @@
             if (!label) return;
 
             var value = this[type];
-            label.style.setProperty('left', percent(value));
-            var span = label.querySelector('span');
-            if (span) {
-              span.textContent = String(Math.round(value));
+            if (typeof value !== 'number' || isNaN(value)) {
+              label.style.setProperty('display', 'none');
+            } else {
+              label.style.removeProperty('display');
+              label.style.setProperty('left', percent(value));
+              var span = label.querySelector('span');
+              if (span) {
+                span.textContent = String(Math.round(value));
+              }
             }
           }, this);
 
@@ -92,7 +97,7 @@
             return this.__max;
           },
           set: function(value) {
-            this.__max = number(value, 0);
+            this.__max = number(value);
             deferUpdate(this);
           }
         },
@@ -102,7 +107,7 @@
             return this.__lower;
           },
           set: function(value) {
-            this.__lower = number(value, 0);
+            this.__lower = number(value);
             deferUpdate(this);
           }
         },
@@ -112,7 +117,7 @@
             return this.__middle;
           },
           set: function(value) {
-            this.__middle = number(value, 0);
+            this.__middle = number(value);
             deferUpdate(this);
           }
         },
@@ -122,7 +127,7 @@
             return this.__upper;
           },
           set: function(value) {
-            this.__upper = number(value, 0);
+            this.__upper = number(value);
             deferUpdate(this);
           }
         }
@@ -148,7 +153,7 @@
 
   function number(value, fallback) {
     var num = +value;
-    return isNaN(value) ? (fallback || 0) : num;
+    return isNaN(value) ? fallback : num;
   }
 
   function classify(el, classes) {

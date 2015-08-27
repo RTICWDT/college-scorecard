@@ -597,18 +597,27 @@ body_scripts:
                       <picc-range data-bind="sat_reading_scores" max="800">
                       </picc-range>
                     </figure>
+                    <p class="no-data" data-bind="sat_reading_scores_invisible">
+                      No Critical Reading data available.
+                    </p>
 
                     <figure data-bind="sat_math_scores_visible">
                       <h4>Math</h4>
                       <picc-range data-bind="sat_math_scores" max="800">
                       </picc-range>
                     </figure>
+                    <p class="no-data" data-bind="sat_math_scores_invisible">
+                      No Math data available.
+                    </p>
 
                     <figure data-bind="sat_writing_scores_visible">
                       <h4>Writing</h4>
                       <picc-range data-bind="sat_writing_scores" max="800">
                       </picc-range>
                     </figure>
+                    <p class="no-data" data-bind="sat_writing_scores_invisible">
+                      No Writing data available.
+                    </p>
 
                     <h3 class="h2">ACT</h3>
 
@@ -616,6 +625,10 @@ body_scripts:
                       <picc-range data-bind="act_scores" min="0" max="36">
                       </picc-range>
                     </figure>
+                    <p class="no-data" data-bind="act_scores_invisible">
+                      No data available.
+                    </p>
+
                   </div>
 
                   <!-- </div> -->
