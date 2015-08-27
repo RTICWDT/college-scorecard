@@ -273,7 +273,7 @@ ol.disc,
   color: $dark-gray;
   border: 1px solid $light-gray;
   border-radius: $base-border-radius;
-  padding: $base-padding-lite $base-padding !important;
+  padding: $base-padding-lite ($base-padding-lite * 2) !important;
   margin-top: $base-padding;
   margin-bottom: $base-padding;
 }
