@@ -54,16 +54,23 @@ picc-range {
       border: 1px solid black;
     }
 
+    &.picc-range-label-min,
+    &.picc-range-label-max,
     &.picc-range-label-middle {
       border-width: 2px;
-      bottom: 0;
+      bottom: -.5em;
       top: auto;
 
       span {
         bottom: 100%;
+        top: auto;
+      }
+    }
+
+    &.picc-range-label-middle {
+      span {
         margin-left: -($label-width / 2);
         text-align: center;
-        top: auto;
       }
     }
   }
