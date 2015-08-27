@@ -269,6 +269,14 @@ ol.disc,
   float: right;
 }
 
+.no-data {
+  color: $dark-gray;
+  border: 1px solid $light-gray;
+  border-radius: $base-border-radius;
+  padding: $base-padding-lite $base-padding !important;
+  margin-top: $base-padding;
+  margin-bottom: $base-padding;
+}
 
 // Lower an element below its container
 //
