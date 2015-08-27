@@ -73,7 +73,12 @@
       if (params) uri = join([uri, params], '?');
       var url = join([API.url, uri], '/');
       console.debug('[API] get: "%s"', url);
-      return d3.json(url, done);
+      return d3.json(url, function(error, data) {
+        if (data && data.errors) {
+          error = data.errors[0];
+        }
+        return done(error, data);
+      });
     };
 
     /**
