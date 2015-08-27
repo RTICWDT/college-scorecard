@@ -1,6 +1,8 @@
   {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
 
+  {% if page.title == 'Search' %}
   <div id="results_search-content" aria-hidden="true">
+  {% endif %}
 
   <fieldset>
 
@@ -287,4 +289,6 @@
 
   </div>
 
+{% if page.title == 'Search' %}
 </div>
+{% endif %}
