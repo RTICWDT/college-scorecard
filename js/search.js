@@ -300,7 +300,8 @@
   function showError(error) {
     console.error('error:', error);
     var message = resultsRoot.querySelector('.error-message');
-    message.textContent = String(error.responseText || 'There was an unexpected API error.');
+    error = error.responseText || error;
+    message.textContent = String(error) || 'There was an unexpected API error.';
   }
 
 })(this);
