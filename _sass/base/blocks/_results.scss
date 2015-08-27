@@ -22,15 +22,19 @@
     }
   }
 
-  @include respond-to(medium-up) {
-    background: linear-gradient(
-      to right,
-      $white 0%,
-      $white 50%,
-      $mid-gray 50%,
-      $mid-gray 100%
-    );
-  }
+  // @include respond-to(medium-up) {
+  //   background: linear-gradient(
+  //     to right,
+  //     $white 0%,
+  //     $white 50%,
+  //     $mid-gray 50%,
+  //     $mid-gray 100%
+  //   );
+  // }
+}
+
+.results_search {
+  border-top: $thick-border-size solid $base-border-color;
 }
 
 .results-main-alert {
@@ -156,9 +160,9 @@
   background-color: $mid-gray;
   min-height: 900px; //TODO make this auto
 
-  @include respond-to(medium-up) {
-    @include span-columns(13 of 16);
-  }
+  // @include respond-to(medium-up) {
+  //   @include span-columns(13 of 16);
+  // }
 }
 
 .results-main-schools {
@@ -238,7 +242,6 @@
   ul {
     @include font-size(0.9);
     font-weight: bold;
-    //padding-bottom: $base-padding;
   }
 
   h1 {
@@ -256,8 +259,8 @@
 
   @include respond-to(large-up) {
     @include omega-reset(2n);
-    @include span-columns(4);
-    @include omega(3n);
+    @include span-columns(3);
+    @include omega(4n);
   }
 }
 
