@@ -1130,8 +1130,16 @@
       },
 
       state:                fields.STATE,
-      zip:                  fields.ZIP_CODE,
       online:               fields.ONLINE_ONLY,
+
+      zip: function(query, value, key) {
+        if (query.distance) {
+          return;
+        } else {
+          query[fields.ZIP_CODE] = value;
+          delete query[key];
+        }
+      },
 
       control: function(query, value, key) {
         value = mapControl(value);
