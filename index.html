@@ -14,7 +14,23 @@ body_scripts:
 <!-- where to start -->
 <section class="search_form">
 
+  <form id="search-form" is="search-form"
+    autocomplete="false"
+    action="{{ site.baseurl }}/search/" method="GET">
+
+    <input type="hidden" name="under_investigation">
+
+    <div class="container search-form-intro">
+
+      <legend>Find Schools By:</legend>
+      <h1 class="large_heading">Find Schools By:</h1>
+      <p>Enter criteria that is important to you</p>
+
+    </div>
+
   {% include search-form.html %}
+
+  </form>
 
   <section class="section section-home-start">
 
