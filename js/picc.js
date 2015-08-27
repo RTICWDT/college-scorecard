@@ -378,9 +378,9 @@
         '21': 'Suburban',
         '22': 'Suburban',
         '23': 'Suburban',
-        '31': 'Town: Fringe',
-        '32': 'Town: Distant',
-        '33': 'Town: Remote',
+        '31': 'Town',
+        '32': 'Town',
+        '33': 'Town',
         '41': 'Rural',
         '42': 'Rural',
         '43': 'Rural'
