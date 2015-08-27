@@ -62,7 +62,6 @@ $drawer-width-medium_up: 30%;
 
 html,
 body {
-    //height: 100%;
     overflow-x: hidden;
 }
 
@@ -109,7 +108,6 @@ body {
   left: -$drawer-width;
   width: $drawer-width;
   background: $white;
-  //overflow-x: hidden;
   padding-top: $base-padding-extra;
   padding-left: $base-padding;
   -webkit-overflow-scrolling: touch;
@@ -126,7 +124,6 @@ body {
   margin-left: 0;
   padding-top: 50px;
   width: 100%;
-  //height: calc(100% - 50px);
   overflow-x: hidden;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
