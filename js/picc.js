@@ -113,9 +113,10 @@
       var params = {};
       params[idField] = id;
       return API.get(schoolEndpoint, params, function(error, res) {
-        if (error || !res.total) {
+        var meta = res.metadata || res;
+        if (error || !meta.total) {
           return done(error
-            ? error.responseText || errors.NO_SUCH_SCHOOL
+            ? error.responseText || error || errors.NO_SUCH_SCHOOL
             : errors.NO_SUCH_SCHOOL);
         } else if (res.total > 1) {
           console.warn('More than one school found for ID: "' + id + '"');
