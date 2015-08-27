@@ -1133,12 +1133,14 @@
       online:               fields.ONLINE_ONLY,
 
       zip: function(query, value, key) {
-        if (query.distance) {
-          return;
-        } else {
+        // if there is no distance query, use the explicit `school.zip` field
+        // to match schools in that zip code
+        if (!query.distance) {
           query[fields.ZIP_CODE] = value;
           delete query[key];
         }
+        // (the default will submit `zip=x&distance=y`,
+        // which is what the API expects)
       },
 
       control: function(query, value, key) {
