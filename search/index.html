@@ -22,54 +22,48 @@ body_scripts:
 
     <input type="checkbox" id="drawer-toggle" name="drawer-toggle" checked>
     <label for="drawer-toggle" id="drawer-toggle-label"></label>
-    <header></header>
+    <header><span>Filter and edit your search</span></header>
     <nav id="drawer">
-      <!-- <ul>
-        <li><a href="#">Menu Item</a></li>
-        <li><a href="#">Menu Item</a></li>
-        <li><a href="#">Menu Item</a></li>
-        <li><a href="#">Menu Item</a></li>
-      </ul> -->
 
-      <div class="">
+      <div>
 
-        <legend>Edit Search Criteria</legend>
-        <h2 class="results-filter-title">Edit Search Criteria</h2>
+        <div class="filter-wrapper">
 
-        {% include filters.html %}
+          {% include filters.html %}
 
-        <legend>Modify or Start a New Search</legend>
-        <h2 class="results-filter-title">Modify or Start a New Search</h2>
+        </div>
 
-        {% include search-form.html %}
+        <fieldset class="results_search">
+
+          <aria-accordion class="container">
+
+            <legend>Modify or Start a New Search</legend>
+            <h1 class="search_category search_category-head">
+              <a aria-expanded="false" aria-controls="results_search-content">
+                Modify or Start a New Search
+              </a>
+            </h1>
+
+            <!-- <legend>Modify or Start a New Search</legend>
+            <h2 class="results-filter-title">Modify or Start a New Search</h2> -->
+
+            {% include search-form.html %}
+
+          </aria-accordion>
+
+      </fieldset>
+
+
 
       </div>
 
     </nav>
     <div id="page-content">
 
-
-
-
-
 <!-- Search results -->
 <section class="results search-results loadable">
 
   <div class="container">
-
-    <!-- <div class="results-filter">
-
-      <legend>Edit Search Criteria</legend>
-      <h2 class="results-filter-title">Edit Search Criteria</h2>
-
-      {% include filters.html %}
-
-      <legend>Modify or Start a New Search</legend>
-      <h2 class="results-filter-title">Modify or Start a New Search</h2>
-
-      {% include search-form.html %}
-
-    </div> -->
 
     <div class="results-main">
 

@@ -1,8 +1,9 @@
 // Thanks to http://www.designcouch.com/home/why/2014/04/23/pure-css-drawer-menu/
 
-$drawer-width: 400px;
+$drawer-width: 30%;
 
 .drawer {
+
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
@@ -16,14 +17,52 @@ $drawer-width: 400px;
   margin: 0;
   padding: 0;
   -webkit-text-size-adjust: none;
+
+  aria-accordion {
+    min-height: 0;
+  }
+
+  aria-accordion [aria-controls]:after {
+    $button-size: 20px;
+    $button-margin: 9px;
+
+    @include font-size(1.3);
+    height: $button-size;
+    width: $button-size;
+  }
+
+  header {
+    @include font-size(0.8);
+    color: $black;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    background: #c8c8c8;
+    padding: 10px 10px 10px 50px;
+    line-height: 30px;
+    z-index: 0;
+  }
+
+  .search-button {
+    height: 35px;
+  }
+
+  .search_category {
+    @include font-size($h3);
+  }
+
+  .search_category-head {
+    padding-top: 0.9em;
+    padding-bottom: 0.9em;
+  }
 }
 /* Makes sure that everything is 100% height */
 
-// html,
-// body {
-//   height: 100%;
-//   overflow: hidden;
-// }
+html,
+body {
+    //height: 100%;
+    //overflow: hidden;
+}
 /* gets the actual input out of the way;
 we're going to style the label instead */
 
@@ -39,11 +78,11 @@ we're going to style the label instead */
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  left: 0px;
+  left: 0;
   height: 50px;
   width: 50px;
   display: block;
-  position: fixed;
+  position: absolute;
   background: rgba(255, 255, 255, .0);
   z-index: 1;
 }
@@ -61,21 +100,8 @@ we're going to style the label instead */
   box-shadow: 0 6px 0 $black, 0 12px 0 $black;
 }
 
-.drawer {
-  header {
-    width: 100%;
-    position: fixed;
-    left: 0px;
-    //background: $mid-gray;
-    padding: 10px 10px 10px 50px;
-    font-size: 30px;
-    line-height: 30px;
-    z-index: 0;
-  }
-}
-
 #drawer {
-  position: fixed;
+  position: absolute;
   //top: 0;
   left: -$drawer-width;
   height: 100%;
@@ -90,12 +116,12 @@ we're going to style the label instead */
 /* actual page content pane */
 
 #page-content {
-  margin-left: 0px;
-  margin-top: 50px;
+  margin-left: 0;
+  padding-top: 50px;
   width: 100%;
-  height: calc(100% - 50px);
+  //height: calc(100% - 50px);
   overflow-x: hidden;
-  //overflow-y: scroll;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   //padding: 20px;
 }
@@ -105,31 +131,21 @@ we're going to style the label instead */
 -toggle:checked ~ #drawer-toggle-label {
   height: 100%;
   width: calc(100% - $drawer-width);
-  background: rgba(255, 255, 255, .8);
 }
 
 #drawer-toggle:checked ~ #drawer-toggle-label,
 #drawer-toggle:checked ~ header {
-  left: $drawer-width;
+  height: 50px;
+  left: $drawer-width - 6%;
+  span {
+    display: none;
+  }
 }
 
 #drawer-toggle:checked ~ #drawer {
-  left: 0px;
+  left: 0;
 }
 
 #drawer-toggle:checked ~ #page-content {
   margin-left: $drawer-width;
-}
-
-/* checked styles (menu open state) */
-
-#drawer-toggle:checked ~ #drawer-toggle-label {
-  height: 100%;
-  width: calc(100% - $drawer-width);
-  //background: rgba(255, 255, 255, .8);
-}
-
-#drawer-toggle:checked ~ #drawer-toggle-label,
-#drawer-toggle:checked ~ header {
-  left: $drawer-width;
 }

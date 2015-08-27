@@ -22,15 +22,19 @@
     }
   }
 
-  @include respond-to(medium-up) {
-    background: linear-gradient(
-      to right,
-      $white 0%,
-      $white 50%,
-      $mid-gray 50%,
-      $mid-gray 100%
-    );
-  }
+  // @include respond-to(medium-up) {
+  //   background: linear-gradient(
+  //     to right,
+  //     $white 0%,
+  //     $white 50%,
+  //     $mid-gray 50%,
+  //     $mid-gray 100%
+  //   );
+  // }
+}
+
+.results_search {
+  border-top: $thick-border-size solid $base-border-color;
 }
 
 .results-main-alert {
