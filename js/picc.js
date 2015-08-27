@@ -46,7 +46,7 @@
     var errors = picc.errors;
 
     // the API endpoint (URI) at which to find school data
-    var schoolEndpoint = 'school/';
+    var schoolEndpoint = 'schools/';
 
     // the school's primary key field
     var idField = 'id';
