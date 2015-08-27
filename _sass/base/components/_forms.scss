@@ -4,7 +4,6 @@ form {
 
 fieldset {
   border-top: $regular-border-size solid $base-border-color;
-  // padding-bottom: 1em;
 
   > fieldset {
     border-top: none;
@@ -31,6 +30,7 @@ label {
   @include font-size(0.875);
   font-weight: 600;
   margin-bottom: $base-line-height / 4;
+  padding-top: $base-padding-lite;
 
   &.required:after {
     content: "*";
@@ -144,7 +144,7 @@ label.radio input[type="radio"] {
   width: 20px;
   vertical-align: -4px;
 
-  // to hide checkbox/radio from visual but 
+  // to hide checkbox/radio from visual but
   // still read to screenreaders
   border: 0;
   clip: rect(0 0 0 0);
@@ -198,8 +198,8 @@ select {
   }
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }

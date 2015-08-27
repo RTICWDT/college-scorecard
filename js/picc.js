@@ -228,17 +228,7 @@
    * `men_only` are top-level properties of each school API response
    * object.
    */
-  var SPECIAL_DESIGNATIONS = {
-    // TODO: rename 'aanapi' to 'aanapisi'?
-    // per <http://www2.ed.gov/programs/aanapi/index.html>
-    aanipi:               'AANAPI',
-    hispanic:             'Hispanic',
-    historically_black:   'Historically Black',
-    predominantly_black:  'Predominantly Black',
-    tribal:               'Tribal',
-    women_only:           'Women Only',
-    men_only:             'Men Only'
-  };
+  var SPECIAL_DESIGNATIONS = ({{ site.data.special_designations|jsonify }});
 
   // this is our "n/a" string that we display for null numeric values
   var NA = '--';
@@ -324,17 +314,23 @@
       // format.control('control')({control: 2}) === 'Private non-profit'
       control: formatter(map({
         '1': 'Public',
-        '2': 'Private non-profit',
-        '3': 'Private for-profit'
+        '2': 'Private',
+        '3': 'For Profit'
       }, 'control unknown')),
+
+      controlClass: formatter(map({
+        '1': 'icon-public',
+        '2': 'icon-private',
+        '3': 'icon-profit'
+      }, '')),
 
       // format.preddeg('deg')({deg: 2}) === '2-year'
       // format.preddeg('deg')({deg: 3}) === '4-year'
       preddeg: formatter(map({
-        '1': 'Certificate',
-        '2': '2-year',
-        '3': '4-year',
-        '4': 'Graduate'
+        //'1': 'Certificate',
+        '2': '2',
+        '3': '4',
+        //'4': 'Graduate'
       }, NA)),
 
       zero: function(key) {
@@ -350,21 +346,54 @@
         [15000, Infinity, 'Large']
       ]), 'size unknown'),
 
+      sizeCategoryClass: formatter(range([
+        [0, 2000, 'icon-small'],
+        [2000, 15000, 'icon-medium'],
+        [15000, Infinity, 'icon-large']
+      ]), ''),
+
       // format.locale('locale')({locale: 11}) === 'City: Large'
       locale: formatter(map({
-        '11': 'City: Large',
-        '12': 'City: Midsize',
-        '13': 'City: Small',
-        '21': 'Suburb: Large',
-        '22': 'Suburb: Midsize',
-        '23': 'Suburb: Small',
+        // '11': 'City: Large',
+        // '12': 'City: Midsize',
+        // '13': 'City: Small',
+        // '21': 'Suburb: Large',
+        // '22': 'Suburb: Midsize',
+        // '23': 'Suburb: Small',
+        // '31': 'Town: Fringe',
+        // '32': 'Town: Distant',
+        // '33': 'Town: Remote',
+        // '41': 'Rural: Fringe',
+        // '42': 'Rural: Distant',
+        // '43': 'Rural: Remote'
+        '11': 'Urban',
+        '12': 'Urban',
+        '13': 'Urban',
+        '21': 'Suburban',
+        '22': 'Suburban',
+        '23': 'Suburban',
         '31': 'Town: Fringe',
         '32': 'Town: Distant',
         '33': 'Town: Remote',
-        '41': 'Rural: Fringe',
-        '42': 'Rural: Distant',
-        '43': 'Rural: Remote'
+        '41': 'Rural',
+        '42': 'Rural',
+        '43': 'Rural'
       }, 'locale unknown')),
+
+      localeClass: formatter(map({
+        '11': 'icon-urban',
+        '12': 'icon-urban',
+        '13': 'icon-urban',
+        '21': 'icon-suburban',
+        '22': 'icon-suburban',
+        '23': 'icon-suburban',
+        '31': 'icon-town',
+        '32': 'icon-town',
+        '33': 'icon-town',
+        '41': 'icon-rural',
+        '42': 'icon-rural',
+        '43': 'icon-rural'
+      }, '')),
 
       href: function(key) {
         key = picc.access(key);
@@ -382,6 +411,7 @@
     };
   })();
 
+
   picc.fields = {
     ID:                   'id',
     NAME:                 'school.name',
@@ -396,10 +426,11 @@
     LOCALE:               'school.locale',
     REGION_ID:            'school.region_id',
 
+    RELIGIOUS:            'school.religious_affiliation',
     OPERATING:            '2013.student.operating',
 
     SIZE:                 '2013.student.size',
-    DISTANCE_ONLY:        'school.DISTANCEONLY',
+    ONLINE_ONLY:          'school.online_only',
 
     WOMEN_ONLY:           'school.women_only',
     MEN_ONLY:             'school.men_only',
@@ -431,6 +462,7 @@
 
     PROGRAM_PERCENTAGE:   '2013.academics.program_percentage',
 
+    PART_TIME_SHARE:      '2013.student.PPTUG_EF',
     FEMALE_SHARE:         '2013.student.demographics.female_share',
     RACE_ETHNICITY:       '2013.student.demographics.race_ethnicity',
     AGE_ENTRY:            '2013.student.demographics.age_entry',
@@ -589,12 +621,9 @@
     picc.fields.COMPLETION_RATE
   );
 
-  picc.access.partTimeShare = function(d) {
-    // FIXME: this should be a single field?
-    var prefix = '2013.student.';
-    return +picc.access(prefix + 'PPTUG_EF')(d)
-        || +picc.access(prefix + 'PPTUG_EF2')(d);
-  };
+  picc.access.partTimeShare = picc.access.composed(
+    picc.fields.PART_TIME_SHARE
+  );
 
   picc.access.retentionRate = function(d) {
     var retention = picc.access.composed(
@@ -757,7 +786,7 @@
         '@href': function(d) {
           return picc.template.resolve(
             this.getAttribute('data-href'),
-            {url: document.location.href}
+            {url: encodeURIComponent(document.location.href)}
           );
         }
       },
@@ -773,10 +802,19 @@
       under_investigation2: underInvestigation,
 
       size_number:    format.number(fields.SIZE),
-      control:        format.control(fields.OWNERSHIP),
-      locale_name:    format.locale(fields.LOCALE),
+      control: {
+        '@class': format.controlClass(fields.OWNERSHIP),
+        value: format.control(fields.OWNERSHIP)
+      },
+      locale_name: {
+        '@class': format.localeClass(fields.LOCALE),
+        value: format.locale(fields.LOCALE)
+      },
       years:          format.preddeg(fields.PREDOMINANT_DEGREE),
-      size_category:  format.sizeCategory(fields.SIZE),
+      size_category: {
+        '@class': format.sizeCategoryClass(fields.SIZE),
+        value: format.sizeCategory(fields.SIZE)
+      },
 
       // this is a direct accessor because some designations
       // (e.g. `women_only`) are at the object root, rather than
@@ -785,10 +823,10 @@
 
       average_cost: format.dollars(access.netPrice),
       average_cost_meter: {
-        '@max':     access.nationalStat('max', access.publicPrivate),
-        '@average': access.nationalStat('median', access.publicPrivate),
+        // '@max':     access.nationalStat('max', access.publicPrivate),
+        // '@average': access.nationalStat('median', access.publicPrivate),
         '@value':   access.netPrice,
-        label:      format.dollars(access.nationalStat('median', access.publicPrivate)),
+        label:      format.dollars(function() { return this.average; }),
         '@title':   debugMeterTitle
       },
 
@@ -799,32 +837,29 @@
       net_price_income4: format.dollars(access.netPriceByIncomeLevel('75001-110000')),
       net_price_income5: format.dollars(access.netPriceByIncomeLevel('110001-plus')),
 
+      advantage_rate: format.percent(fields.EARNINGS_GT_25K),
+
       grad_rate: format.percent(access.completionRate),
       grad_rate_meter: {
-        '@average': access.nationalStat('median', access.yearDesignation),
+        // '@average': access.nationalStat('median', access.yearDesignation),
         '@value':   access.completionRate,
-        label:      format.percent(function() {
-          return this.getAttribute('average');
-        }),
+        label:      format.percent(function() { return this.average; }),
         '@title':   debugMeterTitle
       },
 
       average_salary: format.dollars(access.earningsMedian),
       average_salary_meter: {
         '@value': access.earningsMedian,
-        label:    format.dollars(function() {
-          return this.getAttribute('average');
-        }),
+        // '@average': access.nationalStat('median', access.yearDesignation),
+        label:    format.dollars(function() { return this.average; }),
         '@title': debugMeterTitle
       },
 
       repayment_rate_percent: format.percent(fields.REPAYMENT_RATE),
       repayment_rate_meter: {
         '@value': access(fields.REPAYMENT_RATE),
-        '@average': access.nationalStat('median'),
-        label:    format.percent(function() {
-          return this.getAttribute('average');
-        })
+        // '@average': access.nationalStat('median', access.yearDesignation),
+        label:    format.percent(function() { return this.average; })
       },
 
       average_total_debt: format.dollars(fields.AVERAGE_TOTAL_DEBT),
@@ -835,27 +870,26 @@
       earnings_gt_25k: format.percent(access.earnings25k),
       earnings_gt_25k_meter: {
         '@value': access.earnings25k,
-        label: format.percent(function() {
-          return this.getAttribute('average');
-        }),
+        label:    format.percent(function() { return this.average; }),
         '@title': debugMeterTitle
       },
 
       retention_rate_value: format.percent(access.retentionRate),
       retention_rate_meter: {
         '@value': access.retentionRate,
-        label:    format.percent(function() {
-          return this.getAttribute('average');
-        }),
+        label:    format.percent(function() { return this.average; }),
         '@title': debugMeterTitle
       },
 
       full_time_percent: format.number(function(d) {
         var pt = access.partTimeShare(d);
-        return pt === null ? null : (100 - pt);
+        return pt === null ? null : 100 * (1 - pt);
       }),
 
-      part_time_percent: format.number(access.partTimeShare),
+      part_time_percent: format.number(function(d) {
+        var pt = access.partTimeShare(d);
+        return pt === null ? null : 100 * pt;
+      }),
 
       gender_values: function(d) {
         var female = access(fields.FEMALE_SHARE)(d);
@@ -973,8 +1007,10 @@
 
     function debugMeterTitle(d) {
       return [
-        'value: ', this.getAttribute('value'), '\n',
-        'median: ', this.getAttribute('average')
+        'min: ', this.min, '\n',
+        'max: ', this.max, '\n',
+        'median: ', this.average, '\n',
+        'value: ', this.value
       ].join('');
     }
 
@@ -997,6 +1033,12 @@
       size:               picc.fields.SIZE,
       avg_net_price:      picc.fields.NET_PRICE,
       completion_rate:    picc.fields.COMPLETION_RATE,
+    },
+
+    control: {
+      'public': 1,
+      'private': 2,
+      'profit': 3
     },
 
     size: {
@@ -1058,12 +1100,35 @@
       median_earnings:      fields.MEDIAN_EARNINGS + '__range',
       monthly_payments:     fields.MONTHLY_LOAN_PAYMENT + '__range',
 
+      religious:            fields.RELIGIOUS,
+
+      // special designations: women/men only, minority groups
+      serving: function(query, value, key) {
+        var field = [fields.MINORITY_SERVING, value].join('.');
+        switch (value) {
+          case 'men_only':
+            field = fields.MEN_ONLY;
+            break;
+          case 'women_only':
+            field = fields.WOMEN_ONLY;
+            break;
+        }
+        query[field] = 1;
+        delete query[key];
+      },
+
       state:                fields.STATE,
       zip:                  fields.ZIP_CODE,
-      online:               fields.DISTANCE_ONLY,
+      online:               fields.ONLINE_ONLY,
+
+      control: function(query, value, key) {
+        value = mapControl(value);
+        picc.data.rangify(query, fields.OWNERSHIP, value);
+        delete query[key];
+      },
 
       region: function(query, value, key) {
-        picc.data.rangify(query, picc.fields.REGION_ID, query.region);
+        picc.data.rangify(query, fields.REGION_ID, value);
         delete query[key];
       },
 
@@ -1118,6 +1183,13 @@
         return value.map(mapDegree);
       }
       return picc.form.mappings.degree[value];
+    }
+
+    function mapControl(value) {
+      if (Array.isArray(value)) {
+        return value.map(mapControl);
+      }
+      return picc.form.mappings.control[value];
     }
 
     // returns true if a value is an empty string, null, undefined, or an array

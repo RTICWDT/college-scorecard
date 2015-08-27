@@ -36,7 +36,10 @@
               <i class="fa fa-info-circle"></i>
             </a>
           </h2>
-          <picc-slider format="$" max="90000" step="1000">
+          <picc-slider format="$"
+            average="{{ site.data.national_stats.net_price.median }}"
+            max="{{ site.data.national_stats.net_price.max }}"
+            step="1000">
             <input type="hidden" name="avg_net_price">
           </picc-slider>
         </div>
@@ -48,7 +51,8 @@
               <i class="fa fa-info-circle"></i>
             </a>
           </h2>
-          <picc-slider format="%" step=".01" max="1">
+          <picc-slider format="%" step=".01" max="1"
+            average="{{ site.data.national_stats.completion_rate.median }}">
             <input type="hidden" name="completion_rate">
           </picc-slider>
         </div>
@@ -59,7 +63,10 @@
               <i class="fa fa-info-circle"></i>
             </a>
           </h2>
-          <picc-slider format="$" max="250000">
+          <picc-slider format="$"
+            average="{{ site.data.national_stats.median_earnings.median }}"
+            max="{{ site.data.national_stats.median_earnings.max }}"
+            step="1000">
             <input type="hidden" name="median_earnings">
           </picc-slider>
         </div>
@@ -270,34 +277,6 @@
 
         </fieldset>
 
-        <!-- <fieldset class="nested_fieldset">
-
-          <legend>Student-to-Faculty Ratio</legend>
-          <h1>Student-to-Faculty Ratio</h1>
-
-          <ul>
-            <li>
-              <label for="ratio-low" class="checkbox">
-                <input id="ratio-low" type="checkbox" name="sf_ratio" value="low" tabindex="0">
-                <span tabindex="-1" class="checkbox-focus"></span>Low (&lt; 20:1)
-              </label>
-            </li>
-            <li>
-              <label for="ratio-medium" class="checkbox">
-                <input id="ratio-medium" type="checkbox" name="sf_ratio" value="medium" tabindex="0">
-                <span tabindex="-1" class="checkbox-focus"></span>Medium (20:1&ndash;50:1)
-              </label>
-            </li>
-            <li>
-              <label for="ratio-high" class="checkbox">
-                <input id="ratio-high" type="checkbox" name="sf_ratio" value="high" tabindex="0">
-                <span tabindex="-1" class="checkbox-focus"></span>High (&gt; 50:1)
-              </label>
-            </li>
-          </ul>
-
-        </fieldset> -->
-
       </div>
 
     </aria-accordion>
@@ -306,15 +285,93 @@
 
   <div class="container search_form-submit">
 
-    <button id="search-submit" class="button button-primary">
+    <fieldset class="advanced_search">
+
+      <aria-accordion>
+
+          <legend>Advanced Search</legend>
+          <div class="advanced_search-title">
+            <a aria-expanded="false" aria-controls="advanced-content" class="button link-more advanced_search-control">
+              Advanced Search <i class="fa fa-plus"></i>
+            </a>
+          </div>
+
+        <div id="advanced-content" class="advanced-content" aria-hidden="false">
+
+          <fieldset>
+
+            <aria-accordion class="container">
+
+              <legend>Institution Type</legend>
+              <h1 class="search_category">
+                <a aria-expanded="false" aria-controls="type-content">
+                  Institution Type
+                </a>
+              </h1>
+
+              <div id="type-content" aria-hidden="false">
+
+                <fieldset class="nested_fieldset">
+
+                  <legend>Type of school</legend>
+                  <h1>Type of school</h1>
+
+                  <ul>
+                    <li>
+                      <label for="type-public" class="checkbox">
+                        <input id="type-public" type="checkbox" name="control" value="public" tabindex="0">
+                        <span tabindex="-1" class="checkbox-focus"></span>Public
+                      </label>
+                    </li>
+                    <li>
+                      <label for="type-private" class="checkbox">
+                        <input id="type-private" type="checkbox" name="control" value="private" tabindex="0">
+                        <span tabindex="-1" class="checkbox-focus"></span>Private, Not-for-Profit
+                      </label>
+                    </li>
+                    <li>
+                      <label for="type-profit" class="checkbox">
+                        <input id="type-profit" type="checkbox" name="control" value="profit" tabindex="0">
+                        <span tabindex="-1" class="checkbox-focus"></span>Private, For-Profit
+                      </label>
+                    </li>
+                  </ul>
+
+                </fieldset>
+
+                <label for="affiliation">Special designation
+                  <select id="affiliation" name="serving">
+                    <option value="">None</option>
+                    {% for designation in site.data.special_designations %}
+                    <option value="{{ designation[0] }}">{{ designation[1] }}</option>
+                    {% endfor %}
+                  </select>
+                </label>
+
+                <label for="affiliation">Religious affiliation
+                  <select id="affiliation" name="religious">
+                    <option value="">None</option>
+                    {% for row in site.data.religious_affiliations %}
+                    <option value="{{ row.value }}">{{ row.label }}</option>
+                    {% endfor %}
+                  </select>
+                </label>
+
+              </div>
+
+            </aria-accordion>
+
+          </fieldset>
+
+        </div>
+
+      </aria-accordion>
+
+    </fieldset>
+
+    <button id="search-submit" class="button button-primary search-button">
       Find Schools
     </button>
-
-    <div>
-      <a class="button link-more">
-        Advanced Search <i class="fa fa-plus"></i>
-      </a>
-    </div>
 
   </div>
 

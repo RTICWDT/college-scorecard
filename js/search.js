@@ -112,7 +112,7 @@
     ].join(',');
 
     var qs = querystring.stringify(params);
-    qs = qs.replace(/^&/, '')
+    qs = qs.replace(/^&+/, '')
       .replace(/&{2,}/g, '&')
       .replace(/%3A/g, ':');
     // update the URL
@@ -122,7 +122,7 @@
       .attr('href', function() {
         return picc.template.resolve(
           this.getAttribute('data-href'),
-          {url: document.location.href}
+          {url: encodeURIComponent(document.location.href)}
         );
       });
 
