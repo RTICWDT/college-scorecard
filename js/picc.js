@@ -462,7 +462,7 @@
 
     PROGRAM_PERCENTAGE:   '2013.academics.program_percentage',
 
-    PART_TIME_SHARE:      '2013.student.PPTUG_EF',
+    PART_TIME_SHARE:      '2013.student.part_time_share',
     FEMALE_SHARE:         '2013.student.demographics.female_share',
     RACE_ETHNICITY:       '2013.student.demographics.race_ethnicity',
     AGE_ENTRY:            '2013.student.demographics.age_entry',
