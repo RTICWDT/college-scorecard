@@ -166,15 +166,19 @@
 
       console.time && console.time('[render]');
 
+      var meta = data.metadata || data;
+      // console.log('meta:', meta);
+      var total = meta.total;
+      var _total = function() { return total; };
+
       // render the basic DOM template for each school
       tagalong(resultsRoot, data, {
-        results_word: format.plural('total', 'Result'),
-        results_total: format.number('total', '0')
+        results_word: format.plural(_total, 'Result'),
+        results_total: format.number(_total, '0')
       });
 
       var page = +params.page || 0;
-      var total = data.total;
-      var perPage = data.per_page;
+      var perPage = meta.per_page;
 
       var pages = getPages(total, perPage, page);
 
@@ -296,7 +300,8 @@
   function showError(error) {
     console.error('error:', error);
     var message = resultsRoot.querySelector('.error-message');
-    message.textContent = String(error.responseText || 'There was an unexpected API error.');
+    error = error.responseText || error;
+    message.textContent = String(error) || 'There was an unexpected API error.';
   }
 
 })(this);

@@ -149,10 +149,11 @@
   }
 
   // show an error message
-  function showError(message) {
+  function showError(error) {
     var container = document.querySelector('#error');
     var target = container.querySelector('.error-message') || container;
-    target.textContent = message;
+    error = error.responseText || error;
+    target.textContent = error;
     return target;
   }
 

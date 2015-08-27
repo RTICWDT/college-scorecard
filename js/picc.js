@@ -46,7 +46,7 @@
     var errors = picc.errors;
 
     // the API endpoint (URI) at which to find school data
-    var schoolEndpoint = 'school/';
+    var schoolEndpoint = 'schools/';
 
     // the school's primary key field
     var idField = 'id';
@@ -73,7 +73,12 @@
       if (params) uri = join([uri, params], '?');
       var url = join([API.url, uri], '/');
       console.debug('[API] get: "%s"', url);
-      return d3.json(url, done);
+      return d3.json(url, function(error, data) {
+        if (data && data.errors && data.errors.length) {
+          error = data.errors[0];
+        }
+        return done(error, data);
+      });
     };
 
     /**
@@ -108,9 +113,10 @@
       var params = {};
       params[idField] = id;
       return API.get(schoolEndpoint, params, function(error, res) {
-        if (error || !res.total) {
+        var meta = res.metadata || res;
+        if (error || !meta.total) {
           return done(error
-            ? error.responseText || errors.NO_SUCH_SCHOOL
+            ? error.responseText || error || errors.NO_SUCH_SCHOOL
             : errors.NO_SUCH_SCHOOL);
         } else if (res.total > 1) {
           console.warn('More than one school found for ID: "' + id + '"');
@@ -462,7 +468,7 @@
 
     PROGRAM_PERCENTAGE:   '2013.academics.program_percentage',
 
-    PART_TIME_SHARE:      '2013.student.PPTUG_EF',
+    PART_TIME_SHARE:      '2013.student.part_time_share',
     FEMALE_SHARE:         '2013.student.demographics.female_share',
     RACE_ETHNICITY:       '2013.student.demographics.race_ethnicity',
     AGE_ENTRY:            '2013.student.demographics.age_entry',
@@ -1133,8 +1139,8 @@
       online:               fields.ONLINE_ONLY,
 
       zip: function(query, value, key) {
-        // if there is no distance query, use the explicit `school.zip` field
-        // to match schools in that zip code
+        // if there is no distance query, use the fully-qualified zip code
+        // field to match schools in that zip
         if (!query.distance) {
           query[fields.ZIP_CODE] = value;
           delete query[key];
