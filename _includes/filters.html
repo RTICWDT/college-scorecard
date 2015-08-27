@@ -1,15 +1,11 @@
   <fieldset>
 
-    <aria-accordion id="search-filters" class="container">
-
       <legend>Filter Your Results</legend>
       <h1 class="search_category search_category-head">
-        <a aria-expanded="false" aria-controls="filters-content">
           Filter Your Results
-        </a>
       </h1>
 
-      <div id="filters-content" aria-hidden="true" class="accordion-div">
+      <div id="filters-content" class="accordion-div">
 
         <div class="filter_section">
           <h2 aria-describedby="tip-avg-cost-year">Actual Cost
@@ -52,7 +48,7 @@
           </picc-slider>
         </div>
 
-        <div class="filter_section">
+        <!-- <div class="filter_section">
           <h2 aria-describedby="tip-repayment-rate">Monthly Student Loan Payment
             <a class="tooltip-target">
               <i class="fa fa-info-circle"></i>
@@ -61,10 +57,8 @@
           <picc-slider format="$" max="550" step="50">
             <input type="hidden" name="monthly_payments">
           </picc-slider>
-        </div>
+        </div> -->
 
       </div>
-
-    </aria-accordion>
 
   </fieldset>
