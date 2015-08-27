@@ -93,7 +93,7 @@
     $height: 50px;
     margin-top: $base-padding;
 
-    $list:  rural, suburban, urban,
+    $list:  rural, town, suburban, urban,
             small, medium, large,
             public, private, profit;
 
@@ -117,6 +117,7 @@
       text-align: center;
       vertical-align: top;
       width: 70px;
+      margin-right: 10px;
 
       .school-key_figures-year {
         @include font-size(2.86);
