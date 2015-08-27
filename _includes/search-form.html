@@ -1,9 +1,5 @@
   {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
 
-  {% if page.title == 'Search' %}
-  <div>
-  {% endif %}
-
   <fieldset>
 
     <aria-accordion id="school-name" class="container">
@@ -288,7 +284,3 @@
     </button>
 
   </div>
-
-{% if page.title == 'Search' %}
-</div>
-{% endif %}
