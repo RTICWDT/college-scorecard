@@ -339,10 +339,17 @@
         //'4': 'Graduate'
       }, NA)),
 
-      zero: function(key) {
+      empty: function(key) {
         key = picc.access(key);
         return function(d) {
-          return key.call(this, d) == 0;
+          return !key.call(this, d);
+        };
+      },
+
+      notEmpty: function(key) {
+        key = picc.access(key);
+        return function(d) {
+          return !!key.call(this, d);
         };
       },
 
@@ -378,9 +385,9 @@
         '21': 'Suburban',
         '22': 'Suburban',
         '23': 'Suburban',
-        '31': 'Town: Fringe',
-        '32': 'Town: Distant',
-        '33': 'Town: Remote',
+        '31': 'Town',
+        '32': 'Town',
+        '33': 'Town',
         '41': 'Rural',
         '42': 'Rural',
         '43': 'Rural'
@@ -461,6 +468,7 @@
     MONTHLY_LOAN_PAYMENT: '2013.aid.median_debt_suppressed.completers.monthly_payments',
 
     AID_PERCENTAGE:       '2013.aid.federal_loan_rate',
+    PELL_PERCENTAGE:      '2013.aid.pell_grant_rate',
 
     MEDIAN_EARNINGS:      '2011.earnings.10_yrs_after_entry.median',
 
@@ -884,6 +892,7 @@
       average_monthly_loan_payment: format.dollars(fields.MONTHLY_LOAN_PAYMENT),
 
       federal_aid_percentage: format.percent(fields.AID_PERCENTAGE),
+      pell_grant_percentage: format.percent(fields.PELL_PERCENTAGE),
 
       earnings_gt_25k: format.percent(access.earnings25k),
       earnings_gt_25k_meter: {
@@ -983,39 +992,51 @@
       },
 
       act_scores_visible: {
-        '@aria-hidden': format.zero(fields.ACT_MIDPOINT),
+        '@aria-hidden': format.empty(fields.ACT_MIDPOINT),
+      },
+      act_scores_invisible: {
+        '@aria-hidden': format.notEmpty(fields.ACT_MIDPOINT),
       },
       act_scores: {
         '@lower': access(fields.ACT_25TH_PCTILE),
         '@upper': access(fields.ACT_75TH_PCTILE),
-        '@middle': access(fields.ACT_MIDPOINT),
+        // '@middle': access(fields.ACT_MIDPOINT),
       },
 
       sat_reading_scores_visible: {
-        '@aria-hidden': format.zero(fields.SAT_READING_MIDPOINT),
+        '@aria-hidden': format.empty(fields.SAT_READING_MIDPOINT),
+      },
+      sat_reading_scores_invisible: {
+        '@aria-hidden': format.notEmpty(fields.SAT_READING_MIDPOINT),
       },
       sat_reading_scores: {
         '@lower': access(fields.SAT_READING_25TH_PCTILE),
         '@upper': access(fields.SAT_READING_75TH_PCTILE),
-        '@middle': access(fields.SAT_READING_MIDPOINT),
+        // '@middle': access(fields.SAT_READING_MIDPOINT),
       },
 
       sat_math_scores_visible: {
-        '@aria-hidden': format.zero(fields.SAT_MATH_MIDPOINT),
+        '@aria-hidden': format.empty(fields.SAT_MATH_MIDPOINT),
+      },
+      sat_math_scores_invisible: {
+        '@aria-hidden': format.notEmpty(fields.SAT_MATH_MIDPOINT),
       },
       sat_math_scores: {
         '@lower': access(fields.SAT_MATH_25TH_PCTILE),
         '@upper': access(fields.SAT_MATH_75TH_PCTILE),
-        '@middle': access(fields.SAT_MATH_MIDPOINT),
+        // '@middle': access(fields.SAT_MATH_MIDPOINT),
       },
 
       sat_writing_scores_visible: {
-        '@aria-hidden': format.zero(fields.SAT_WRITING_MIDPOINT),
+        '@aria-hidden': format.empty(fields.SAT_WRITING_MIDPOINT),
+      },
+      sat_writing_scores_invisible: {
+        '@aria-hidden': format.notEmpty(fields.SAT_WRITING_MIDPOINT),
       },
       sat_writing_scores: {
         '@lower': access(fields.SAT_WRITING_25TH_PCTILE),
         '@upper': access(fields.SAT_WRITING_75TH_PCTILE),
-        '@middle': access(fields.SAT_WRITING_MIDPOINT),
+        // '@middle': access(fields.SAT_WRITING_MIDPOINT),
       },
 
       net_price_calculator: {
