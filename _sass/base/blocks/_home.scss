@@ -138,9 +138,9 @@
   }
 
   .section-home-paying-content {
-    padding: $base-padding $base-padding-large $base-padding-large $base-padding-large;
+    padding: $base-padding-extra $base-padding-large $base-padding-large $base-padding-large;
     text-align: left;
-
+    min-height: 383px;
     p {
       padding-bottom: $base-padding-lite;
     }
@@ -148,6 +148,8 @@
 
   @include respond-to(medium-up) {
     @include span-columns(6);
+
+    //TODO this is to make this section even with the one next door
     padding-top: $base-padding;
 
     > div > div {
