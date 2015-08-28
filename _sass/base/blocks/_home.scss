@@ -50,6 +50,7 @@
     display: inline-block;
     margin: $base-padding $base-padding-extra;
     padding-bottom: $base-padding;
+    vertical-align: top;
 
     @include respond-to(tiny-up) {
       border-bottom: none;
@@ -58,14 +59,29 @@
     &:last-of-type {
       border-bottom: none;
     }
+
+    img {
+      @extend .u-new_line;
+      margin-right: auto;
+      margin-left: auto;
+      height: 100px;
+      width: 100px;
+      margin-bottom: $base-padding;
+    }
+  }
+
+  span {
+    font-weight: $weight-bold;
   }
 
   strong {
     @extend .fact_number;
+    @include font-size(4);
+    padding-top: 5px;
 
     &:nth-of-type(2) {
       @include font-size($h1);
-      font-weight: normal;
+      font-weight: $weight-light;
       line-height: 0.9;
       padding-bottom: $base-padding-lite;
     }
