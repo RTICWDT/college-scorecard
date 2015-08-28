@@ -4,19 +4,17 @@ $drawer-width: 100%;
 $drawer-width-medium_up: 30%;
 
 .drawer {
-
+  margin: 0;
+  padding: 0;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
   // adds animation for all transitions
-
   -webkit-transition: .25s ease-in-out;
   -moz-transition: .25s ease-in-out;
   -o-transition: .25s ease-in-out;
   transition: .25s ease-in-out;
-  margin: 0;
-  padding: 0;
   -webkit-text-size-adjust: none;
 
   aria-accordion {
@@ -34,13 +32,13 @@ $drawer-width-medium_up: 30%;
 
   header {
     @include font-size(0.8);
-    color: $black;
-    width: 100%;
-    position: absolute;
-    left: 0;
     background: #c8c8c8;
-    padding: 10px 10px 10px 50px;
+    color: $black;
+    left: 0;
     line-height: 30px;
+    padding: 10px 10px 10px 50px;
+    position: absolute;
+    width: 100%;
     z-index: 0;
   }
 
@@ -132,11 +130,11 @@ body {
 // actual page content pane
 
 #page-content {
+  overflow-x: hidden;
+  overflow-y: hidden;
   margin-left: 0;
   padding-top: 50px;
   width: 100%;
-  overflow-x: hidden;
-  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
 }
 
