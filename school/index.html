@@ -432,7 +432,7 @@ body_scripts:
             <aria-accordion id="demographics" class="school-two_col">
               <div>
                 <h1 class="search_category">
-                  <a aria-expanded="false" aria-controls="student-content">
+                  <a aria-expanded="true" aria-controls="student-content">
                     Student Body
                   </a>
                 </h1>
@@ -494,15 +494,29 @@ body_scripts:
                           </span> Part-time
                         </div>
 
-                        <div class="school-student-stat">
-                          <h3>Socio-Economic Diversity</h3>
+                        <div class="school-student-socio_econ">
+                          <h2>Socio-Economic Diversity</h2>
+                          <div class="group_inline school-student-socio_econ-stat">
+                            <div class="group_inline-left">
+                              <strong class="fact_number" data-bind="pell_grant_percentage">X</strong>
+                            </div>
+                            <div class="group_inline-right">
+                              <strong>of students</strong>
+                            </div>
+                          </div>
+                          <p>have a family income less than $40k and receive a
+                            grant to pay for college.</p>
+                        </div>
+
+                        <!-- <div class="school-student-stat group_inline">
+                          <h2>Socio-Economic Diversity</h2>
                           <strong class="fact_number big">
-                            <span data-bind="pell_grant_percentage">XX%</span>
+                            <strong data-bind="pell_grant_percentage">XX%</strong>
                             <span class="small normal">of students</span>
                           </strong>
                           <p>have a family income less than $40k and receive a
                             grant to pay for college.</p>
-                        </div>
+                        </div> -->
 
 <!--
                         <div class="group_inline">
