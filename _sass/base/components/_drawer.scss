@@ -4,19 +4,17 @@ $drawer-width: 100%;
 $drawer-width-medium_up: 30%;
 
 .drawer {
-
+  margin: 0;
+  padding: 0;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
   // adds animation for all transitions
-
   -webkit-transition: .25s ease-in-out;
   -moz-transition: .25s ease-in-out;
   -o-transition: .25s ease-in-out;
   transition: .25s ease-in-out;
-  margin: 0;
-  padding: 0;
   -webkit-text-size-adjust: none;
 
   aria-accordion {
@@ -34,13 +32,13 @@ $drawer-width-medium_up: 30%;
 
   header {
     @include font-size(0.8);
-    color: $black;
-    width: 100%;
-    position: absolute;
-    left: 0;
     background: #c8c8c8;
-    padding: 10px 10px 10px 50px;
+    color: $black;
+    left: 0;
     line-height: 30px;
+    padding: 10px 10px 10px 50px;
+    position: absolute;
+    width: 100%;
     z-index: 0;
   }
 
@@ -79,42 +77,48 @@ body {
 }
 
 #drawer-toggle-label {
+  background: rgba(255, 255, 255, .0);
+  cursor: pointer;
+  display: block;
+  height: 50px;
+  left: 0;
+  width: 250px;
+  z-index: 1;
+  position: absolute;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  left: 0;
-  height: 50px;
-  width: 50px;
-  display: block;
-  position: absolute;
-  background: rgba(255, 255, 255, .0);
-  z-index: 1;
+
+  // &:hover,
+  // &:focus {
+  //   background: $sky-blue;
+  // }
 }
 
 // adds "hamburger" menu icon
 
 #drawer-toggle-label:before {
+  background: $black;
+  box-shadow: 0 6px 0 $black, 0 12px 0 $black;
   content: '';
   display: block;
-  position: absolute;
   height: 2px;
-  width: 24px;
-  background: $black;
   left: 13px;
+  position: absolute;
   top: 18px;
-  box-shadow: 0 6px 0 $black, 0 12px 0 $black;
+  width: 24px;
 }
 
 #drawer {
-  position: absolute;
-  left: -$drawer-width;
-  width: $drawer-width;
   background: $white;
+  left: -$drawer-width;
   padding-top: $base-padding-extra;
   padding-left: $base-padding;
+  position: absolute;
+  width: $drawer-width;
   -webkit-overflow-scrolling: touch;
 
   @include respond-to(large-up) {
@@ -126,11 +130,11 @@ body {
 // actual page content pane
 
 #page-content {
+  overflow-x: hidden;
+  overflow-y: hidden;
   margin-left: 0;
   padding-top: 50px;
   width: 100%;
-  overflow-x: hidden;
-  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
 }
 
