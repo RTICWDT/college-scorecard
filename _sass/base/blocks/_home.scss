@@ -96,7 +96,7 @@
   background-color: $tertiary-background-color;
   @include span-columns(12);
 
-  @include respond-to(medium-up) {
+  @include respond-to(large-up) {
     @include span-columns(6);
   }
 
@@ -154,15 +154,20 @@
   }
 
   .section-home-paying-content {
-    padding: $base-padding $base-padding-large $base-padding-large $base-padding-large;
+    padding: $base-padding-extra $base-padding-large $base-padding-large $base-padding-large;
     text-align: left;
 
     p {
       padding-bottom: $base-padding-lite;
     }
+
+    @include respond-to(large-up) {
+      min-height: 430px;
+      //TODO this is to make this section even with the one next door
+    }
   }
 
-  @include respond-to(medium-up) {
+  @include respond-to(large-up) {
     @include span-columns(6);
     padding-top: $base-padding;
 
