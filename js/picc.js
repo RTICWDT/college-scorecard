@@ -468,6 +468,7 @@
     MONTHLY_LOAN_PAYMENT: '2013.aid.median_debt_suppressed.completers.monthly_payments',
 
     AID_PERCENTAGE:       '2013.aid.federal_loan_rate',
+    PELL_PERCENTAGE:      '2013.aid.pell_grant_rate',
 
     MEDIAN_EARNINGS:      '2011.earnings.10_yrs_after_entry.median',
 
@@ -891,6 +892,7 @@
       average_monthly_loan_payment: format.dollars(fields.MONTHLY_LOAN_PAYMENT),
 
       federal_aid_percentage: format.percent(fields.AID_PERCENTAGE),
+      pell_grant_percentage: format.percent(fields.PELL_PERCENTAGE),
 
       earnings_gt_25k: format.percent(access.earnings25k),
       earnings_gt_25k_meter: {

@@ -303,9 +303,9 @@ body_scripts:
                           <i class="fa fa-info-circle"></i>
                         </a>
                       </h2>
-                      <strong class="fact_number">
-                        <span data-bind="average_monthly_loan_payment">$XXX</span>/mo
-                      </strong>
+                      <span class="fact_number">
+                        <strong data-bind="average_monthly_loan_payment">$XXX</strong>/mo
+                      </span>
                     </div>
 
                     <div>
@@ -398,8 +398,8 @@ body_scripts:
 
                   <div class="school-two_col-left">
                     <strong class="fact_number">
-                      <span data-bind="advantage_rate">XX%</span>
-                      <span class="normal">of students</span>
+                      <strong data-bind="advantage_rate">XX%</strong>
+                      <span class="small normal">of students</span>
                     </strong>
                     <p>who attend this school will earn more than those with
                       only a high school diploma.</p>
@@ -480,19 +480,48 @@ body_scripts:
                     -->
                       <div class="school-student-stats-col">
 
-                        <div>
-                          <span class="fact_number">
-                            <strong data-bind="full_time_percent">XX</strong>
-                            <span>%</span>
-                          </span> Full-time
+                        <div class="test-align">
+
+                          <div>
+                            <span class="fact_number">
+                              <strong data-bind="full_time_percent">XX</strong>
+                              <span class="small">%</span>
+                            </span> Full-time
+                          </div>
+                          <div class="fact_number divide">/</div>
+                          <div>
+                            <span class="fact_number">
+                              <strong data-bind="part_time_percent">XX</strong>
+                              <span class="small">%</span>
+                            </span> Part-time
+                          </div>
+
                         </div>
-                        <div class="fact_number divide">/</div>
-                        <div>
-                          <span class="fact_number">
-                            <strong data-bind="part_time_percent">XX</strong>
-                            <span>%</span>
-                          </span> Part-time
+
+                        <div class="school-student-socio_econ">
+                          <h2>Socio-Economic Diversity</h2>
+                          <div class="group_inline school-student-socio_econ-stat">
+                            <div class="group_inline-left">
+                              <strong class="fact_number" data-bind="pell_grant_percentage">X</strong>
+                            </div>
+                            <div class="group_inline-right">
+                              <strong>of students</strong>
+                            </div>
+                          </div>
+                          <p>have a family income less than $40k and receive a
+                            grant to pay for college.</p>
                         </div>
+
+                        <!-- <div class="school-student-stat group_inline">
+                          <h2>Socio-Economic Diversity</h2>
+                          <strong class="fact_number big">
+                            <strong data-bind="pell_grant_percentage">XX%</strong>
+                            <span class="small normal">of students</span>
+                          </strong>
+                          <p>have a family income less than $40k and receive a
+                            grant to pay for college.</p>
+                        </div> -->
+
 <!--
                         <div class="group_inline">
                           <div class="group_inline-left"><span class="fact_number" data-bind="age_entry">XX</span></div>
@@ -527,7 +556,7 @@ body_scripts:
                       <div>
                         <span class="fact_number">
                           <strong data-bind="full_time_percent">XX</strong>
-                          <span>%</span>
+                          <span class="small">%</span>
                         </span> Full-time
                       </div>
                       <div class="fact_number divide">/</div>
