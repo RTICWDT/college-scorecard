@@ -419,9 +419,15 @@
 
 .school-student-stats-col {
 
-  > div {
-    display: inline-block;
-    vertical-align: middle;
+  .test-align {
+    width: 75%;
+    margin-right: auto;
+    margin-left: auto;
+
+    > div {
+      display: inline-block;
+      vertical-align: middle;
+    }
   }
 
   h3 {
@@ -443,6 +449,11 @@
       color: darken($mid-gray, 10%);
     }
   }
+
+.school-student-time {
+  @extend .u-h_center_block;
+  width: 80%;
+}
 
 .school-student-socio_econ {
   margin-top: $base-padding-extra;
@@ -520,7 +531,7 @@ ol.bars {
 
     .bar {
       background: $sky-blue;
-      height: 0.5em;
+      height: 1em;
     }
 
     &.bar-female .bar {
