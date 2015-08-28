@@ -191,6 +191,7 @@
 
   .fact_number {
     @include font-size(3.5);
+
     padding: {
       top: 8px;
       bottom: 8px;
@@ -199,8 +200,11 @@
     span {
       font-weight: normal;
 
-      &.normal {
+      &.small {
         @include font-size(1.8);
+      }
+
+      &.normal {
         color: $black;
       }
     }
@@ -420,11 +424,17 @@
     vertical-align: middle;
   }
 
+  h3 {
+    margin-top: $base-padding-large;
+    margin-bottom: 0;
+  }
+
   .fact_number {
     @include font-size(3);
+
     padding-bottom: 0;
 
-    span {
+    .small {
       @include font-size(1.8);
     }
 
