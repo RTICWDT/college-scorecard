@@ -117,14 +117,14 @@ button.block {
   margin-bottom: $base-padding-large;
   padding-top: 0.9em;
   padding-bottom: 0.9em;
-  width: 350px;
+  width: 100%;
 
   &:hover,
   &:focus {
     box-shadow: 0 0 0 2px $green;
   }
 
-  @include respond-to(large-up) {
+  @include respond-to(huge-up) {
     width: 450px;
   }
 }
