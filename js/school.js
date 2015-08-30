@@ -211,7 +211,7 @@
       })
       .addTo(map);
 
-    marker.bindPopup(school.name);
+    marker.bindPopup(school.school.name);
     return map;
   }
 
