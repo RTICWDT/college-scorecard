@@ -1364,6 +1364,7 @@
     return function() {
       var context = this;
       var args = arguments;
+      clearTimeout(timeout);
       return timeout = setTimeout(function() {
         fn.apply(context, args);
       }, delay);
@@ -1601,6 +1602,16 @@
         blur:       picc.tooltip.hide
       }
     );
+  });
+
+  window.addEventListener('mousedown', function(e) {
+    // console.info('+ drag');
+    document.body.classList.add('dragging');
+  });
+
+  window.addEventListener('mouseup', function(e) {
+    // console.info('- drag');
+    document.body.classList.remove('dragging');
   });
 
 })(this);

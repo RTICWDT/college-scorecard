@@ -11,6 +11,9 @@
   // not any of the other elements (results total, sort, pages)
   var incremental = false;
 
+  // if this flag is set to false, the search form will not resubmit
+  var submit = true;
+
   // the maximum # of page links to show
   var MAX_PAGES = 6;
 
@@ -65,6 +68,10 @@
     incremental = true;
   });
 
+  form.on('change:_drawer', function(value, e) {
+    submit = false;
+  });
+
   form.on('submit', function(data, e) {
     change();
     e.preventDefault();
@@ -79,7 +86,16 @@
   });
 
   function onChange() {
+    if (!submit) {
+      // console.warn('not submitting this time!');
+      submit = true;
+      return;
+    }
+
     var params = form.getData();
+
+    // don't submit the _drawer parameter
+    delete params._drawer;
 
     var query = picc.form.prepareParams(params);
 
@@ -126,7 +142,7 @@
         );
       });
 
-    if (req) req.cancel();
+    if (req) req.abort();
 
     var list = d3.select(resultsRoot)
       .select('[data-bind="results"]');
@@ -144,7 +160,7 @@
 
     console.time && console.time('[load]');
 
-    picc.API.search(query, function(error, data) {
+    req = picc.API.search(query, function(error, data) {
       resultsRoot.classList.remove('js-loading');
       list.classed('hidden', false);
 

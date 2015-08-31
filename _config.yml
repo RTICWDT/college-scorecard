@@ -16,6 +16,7 @@ sass:
 # common site scripts, relative to `{{ site.baseurl }}/js/`
 scripts:
   - vendor/aight.min.js
+  - compat/custom-event.js
   - vendor/d3.min.js
   - vendor/async.min.js
   - vendor/querystring.min.js
