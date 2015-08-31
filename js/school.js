@@ -149,10 +149,11 @@
   }
 
   // show an error message
-  function showError(message) {
+  function showError(error) {
     var container = document.querySelector('#error');
     var target = container.querySelector('.error-message') || container;
-    target.textContent = message;
+    error = error.responseText || error;
+    target.textContent = error;
     return target;
   }
 
@@ -192,6 +193,13 @@
       .setView(center, 10);
 
     L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png')
+      .addTo(map);
+
+    L.control.attribution({
+        position: 'bottomleft',
+        prefix: false
+      })
+      .addAttribution('Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>.<br>Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.')
       .addTo(map);
 
     var marker = L.circle(center, 1200, {

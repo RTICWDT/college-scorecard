@@ -32,10 +32,12 @@ For local testing you'll need [Selenium Server][Selenium Server]
 [webdriver-manager]:
 
 ```sh
+# install java
+brew cask install java
 # install the package
 npm install -g webdriver-manager
 # run the command line tool to install Selenium Server
-webdriver-manager install
+webdriver-manager update
 # start the server
 webdriver-manager start
 ```

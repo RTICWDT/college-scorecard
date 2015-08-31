@@ -1,87 +1,4 @@
-{% if search_form_nested != true %}
-<form id="search-form" is="search-form"
-  autocomplete="false"
-  action="{{ site.baseurl }}/search/" method="GET">
-{% endif %}
-
   {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
-
-  <input type="hidden" name="under_investigation">
-
-  <div class="container search-form-intro">
-
-    <legend>Find Schools By:</legend>
-    <h1 class="large_heading">Find Schools By:</h1>
-    <p>Enter criteria that is important to you</p>
-
-  </div>
-
-  {% if show_search_filters %}
-  <fieldset>
-
-    <aria-accordion id="search-filters" class="container">
-
-      <legend>Filters</legend>
-      <h1 class="search_category">
-        <a aria-expanded="false" aria-controls="filters-content">
-          Filters
-        </a>
-      </h1>
-
-      <div id="filters-content" aria-hidden="true" class="accordion-div">
-
-        <div class="filter_section">
-          <h2 aria-describedby="tip-avg-cost-year">Actual Cost
-            <a class="tooltip-target">
-              <i class="fa fa-info-circle"></i>
-            </a>
-          </h2>
-          <picc-slider format="$" max="90000" step="1000">
-            <input type="hidden" name="avg_net_price">
-          </picc-slider>
-        </div>
-
-
-        <div class="filter_section">
-          <h2 aria-describedby="tip-graduation-rate">Graduation Rate
-            <a class="tooltip-target">
-              <i class="fa fa-info-circle"></i>
-            </a>
-          </h2>
-          <picc-slider format="%" step=".01" max="1">
-            <input type="hidden" name="completion_rate">
-          </picc-slider>
-        </div>
-
-        <div class="filter_section">
-          <h2 aria-describedby="tip-avg-salary">Salary After Graduation
-            <a class="tooltip-target">
-              <i class="fa fa-info-circle"></i>
-            </a>
-          </h2>
-          <picc-slider format="$" max="250000">
-            <input type="hidden" name="median_earnings">
-          </picc-slider>
-        </div>
-
-        <div class="filter_section">
-          <h2 aria-describedby="tip-repayment-rate">Monthly Student Loan Payment
-            <a class="tooltip-target">
-              <i class="fa fa-info-circle"></i>
-            </a>
-          </h2>
-          <picc-slider format="$" max="550" step="50">
-            <input type="hidden" name="monthly_payments">
-          </picc-slider>
-        </div>
-
-      </div>
-
-    </aria-accordion>
-
-  </fieldset>
-  {% endif %}
-
 
   <fieldset>
 
@@ -270,34 +187,6 @@
 
         </fieldset>
 
-        <!-- <fieldset class="nested_fieldset">
-
-          <legend>Student-to-Faculty Ratio</legend>
-          <h1>Student-to-Faculty Ratio</h1>
-
-          <ul>
-            <li>
-              <label for="ratio-low" class="checkbox">
-                <input id="ratio-low" type="checkbox" name="sf_ratio" value="low" tabindex="0">
-                <span tabindex="-1" class="checkbox-focus"></span>Low (&lt; 20:1)
-              </label>
-            </li>
-            <li>
-              <label for="ratio-medium" class="checkbox">
-                <input id="ratio-medium" type="checkbox" name="sf_ratio" value="medium" tabindex="0">
-                <span tabindex="-1" class="checkbox-focus"></span>Medium (20:1&ndash;50:1)
-              </label>
-            </li>
-            <li>
-              <label for="ratio-high" class="checkbox">
-                <input id="ratio-high" type="checkbox" name="sf_ratio" value="high" tabindex="0">
-                <span tabindex="-1" class="checkbox-focus"></span>High (&gt; 50:1)
-              </label>
-            </li>
-          </ul>
-
-        </fieldset> -->
-
       </div>
 
     </aria-accordion>
@@ -306,18 +195,92 @@
 
   <div class="container search_form-submit">
 
-    <button id="search-submit" class="button button-primary">
+    <fieldset class="advanced_search">
+
+      <aria-accordion>
+
+          <legend>Advanced Search</legend>
+          <div class="advanced_search-title">
+            <a aria-expanded="false" aria-controls="advanced-content" class="button link-more advanced_search-control">
+              Advanced Search <i class="fa fa-plus"></i>
+            </a>
+          </div>
+
+        <div id="advanced-content" class="advanced-content" aria-hidden="false">
+
+          <fieldset>
+
+            <aria-accordion class="container">
+
+              <legend>Institution Type</legend>
+              <h1 class="search_category">
+                <a aria-expanded="false" aria-controls="type-content">
+                  Institution Type
+                </a>
+              </h1>
+
+              <div id="type-content" aria-hidden="false">
+
+                <fieldset class="nested_fieldset">
+
+                  <legend>Type of school</legend>
+                  <h1>Type of school</h1>
+
+                  <ul>
+                    <li>
+                      <label for="type-public" class="checkbox">
+                        <input id="type-public" type="checkbox" name="control" value="public" tabindex="0">
+                        <span tabindex="-1" class="checkbox-focus"></span>Public
+                      </label>
+                    </li>
+                    <li>
+                      <label for="type-private" class="checkbox">
+                        <input id="type-private" type="checkbox" name="control" value="private" tabindex="0">
+                        <span tabindex="-1" class="checkbox-focus"></span>Private, Not-for-Profit
+                      </label>
+                    </li>
+                    <li>
+                      <label for="type-profit" class="checkbox">
+                        <input id="type-profit" type="checkbox" name="control" value="profit" tabindex="0">
+                        <span tabindex="-1" class="checkbox-focus"></span>Private, For-Profit
+                      </label>
+                    </li>
+                  </ul>
+
+                </fieldset>
+
+                <label for="affiliation">Special designation
+                  <select id="affiliation" name="serving">
+                    <option value="">None</option>
+                    {% for designation in site.data.special_designations %}
+                    <option value="{{ designation[0] }}">{{ designation[1] }}</option>
+                    {% endfor %}
+                  </select>
+                </label>
+
+                <label for="affiliation">Religious affiliation
+                  <select id="affiliation" name="religious">
+                    <option value="">None</option>
+                    {% for row in site.data.religious_affiliations %}
+                    <option value="{{ row.value }}">{{ row.label }}</option>
+                    {% endfor %}
+                  </select>
+                </label>
+
+              </div>
+
+            </aria-accordion>
+
+          </fieldset>
+
+        </div>
+
+      </aria-accordion>
+
+    </fieldset>
+
+    <button id="search-submit" class="button button-primary search-button">
       Find Schools
     </button>
 
-    <div>
-      <a class="button link-more">
-        Advanced Search <i class="fa fa-plus"></i>
-      </a>
-    </div>
-
   </div>
-
-{% if search_form_nested != true %}
-</form>
-{% endif %}

@@ -93,7 +93,9 @@
     $height: 50px;
     margin-top: $base-padding;
 
-    $list: urban, rural, trees, house;
+    $list:  rural, town, suburban, urban,
+            small, medium, large,
+            public, private, profit;
 
     @each $icon in $list {
       .icon-#{$icon} {
@@ -115,9 +117,13 @@
       text-align: center;
       vertical-align: top;
       width: 70px;
+      margin-right: 10px;
 
-      .icon-year {
-        //year implementation here
+      .school-key_figures-year {
+        @include font-size(2.86);
+        display: block;
+        font-weight: $weight-bold;
+        margin-top: -$height;
       }
     }
   }
@@ -185,6 +191,7 @@
 
   .fact_number {
     @include font-size(3.5);
+
     padding: {
       top: 8px;
       bottom: 8px;
@@ -192,6 +199,14 @@
 
     span {
       font-weight: normal;
+
+      &.small {
+        @include font-size(1.8);
+      }
+
+      &.normal {
+        color: $black;
+      }
     }
   }
 
@@ -404,16 +419,28 @@
 
 .school-student-stats-col {
 
-  > div {
-    display: inline-block;
-    vertical-align: middle;
+  .test-align {
+    width: 75%;
+    margin-right: auto;
+    margin-left: auto;
+
+    > div {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  h3 {
+    margin-top: $base-padding-large;
+    margin-bottom: 0;
   }
 
   .fact_number {
     @include font-size(3);
+
     padding-bottom: 0;
 
-    span {
+    .small {
       @include font-size(1.8);
     }
 
@@ -422,6 +449,34 @@
       color: darken($mid-gray, 10%);
     }
   }
+
+.school-student-time {
+  @extend .u-h_center_block;
+  width: 80%;
+}
+
+.school-student-socio_econ {
+  margin-top: $base-padding-extra;
+
+  .fact_number {
+    border: $regular-border-size solid $base-border-color;
+    border-radius: 500px;
+    height: 120px;
+    padding-top: 31px;
+    text-align: center;
+    width: 120px;
+
+    span {
+      @include font-size($h3);
+    }
+  }
+}
+
+.school-student-socio_econ-stat {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
   // @include span-columns(12);
   // @include omega();
@@ -476,7 +531,7 @@ ol.bars {
 
     .bar {
       background: $sky-blue;
-      height: 0.5em;
+      height: 1em;
     }
 
     &.bar-female .bar {
@@ -502,4 +557,9 @@ ol.bars {
 .school-share-wrapper {
   @include span-columns(12);
   text-align: right;
+}
+
+.leaflet-control-attribution a {
+  color: $black !important;
+  text-decoration: underline;
 }

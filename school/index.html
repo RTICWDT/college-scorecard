@@ -43,7 +43,7 @@ body_scripts:
         <div class="show-loaded">
 
           <div class="school-share-wrapper">
-            <a data-href="mailto:?subject=Check%20this%20out&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov,%20check%20it%20out%3%0A%0A{url}" class="school-share" data-bind="share_link">Share this school</a>
+            <a data-href="mailto:?subject=Take%20a%20look%20at%20this%20school&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov,%20take%20a%20look%3A%0A%0A{url}" class="school-share" data-bind="share_link">Share this school</a>
           </div>
 
           <div class="school-heading">
@@ -75,18 +75,18 @@ body_scripts:
             </h2>
 
             <ul class="school-key_figures key-figures">
-              <li class="years icon-year">
-                <b data-bind="years">X</b>
-                <span>Years</span>
+              <li>
+                <span data-bind="years" class="school-key_figures-year">X</span>
+                <span>Year</span>
               </li>
-              <li class="public-private icon-urban">
-                <span data-bind="control">Public</span>
+              <li data-bind="control">
+                <span data-bind="value">X</span>
               </li>
-              <li class="setting icon-rural">
-                <span data-bind="locale_name">Urban</span>
+              <li data-bind="locale_name">
+                <span data-bind="value">X</span>
               </li>
-              <li class="population icon-house">
-                <span data-bind="size_category">Small</span>
+              <li data-bind="size_category">
+                <span data-bind="value">X</span>
               </li>
             </ul>
 
@@ -133,7 +133,7 @@ body_scripts:
 
             <figure class="meter above_is_good">
               <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year">
-                Salary 10 Years After
+                Salary 10<br>Years After
                 <a class="tooltip-target u-new_line">
                   <i class="fa fa-info-circle"></i>
                 </a>
@@ -258,7 +258,9 @@ body_scripts:
                         class="debt"
                         data-bind="repayment_rate_meter"
                         max="1"
-                        data-median="{{ site.data.national_stats.repayment_rate.median }}">
+                        average="{{ site.data.national_stats.repayment_rate.median }}"
+                        data-median-four_year="{{ site.data.national_stats.repayment_rate_4.median }}"
+                        data-median-lt_four_year="{{ site.data.national_stats.repayment_rate_l4.median }}">
                       </picc-meter>
                       <figcaption>
                         <i class="fa average average-arrow" data-meter="repayment-meter"></i>
@@ -301,9 +303,9 @@ body_scripts:
                           <i class="fa fa-info-circle"></i>
                         </a>
                       </h2>
-                      <strong class="fact_number">
-                        <span data-bind="average_monthly_loan_payment">$XXX</span>/mo
-                      </strong>
+                      <span class="fact_number">
+                        <strong data-bind="average_monthly_loan_payment">$XXX</strong>/mo
+                      </span>
                     </div>
 
                     <div>
@@ -393,10 +395,21 @@ body_scripts:
                 </h1>
 
                 <div id="earnings-content" aria-hidden="true">
-                  <div class="school-two_col-left centered">
+
+                  <div class="school-two_col-left">
+                    <strong class="fact_number">
+                      <strong data-bind="advantage_rate">XX%</strong>
+                      <span class="small normal">of students</span>
+                    </strong>
+                    <p>who attend this school will earn more than those with
+                      only a high school diploma.</p>
+                  </div>
+
+
+                  <div class="school-two_col-right centered">
                     <figure class="meter above_is_good">
                       <h2 class="figure-heading" aria-describedby="tip-avg-salary">
-                        Salary<br>10 Years After
+                        Average Salary 10<br>Years After Entry
                         <a class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
                         </a>
@@ -406,28 +419,6 @@ body_scripts:
                       <figcaption>
                         <i class="fa average average-arrow" data-meter="salary-meter"></i>
                         <span data-bind="average_salary">$XX,XXX</span>
-                        <div class="average average-label"></div>
-                      </figcaption>
-                    </figure>
-                  </div>
-
-                  <div class="school-two_col-right centered">
-                    <figure class="meter above_is_good">
-                      <h2 class="figure-heading" aria-describedby="tip-earnings-25k">
-                        Former Students <br>Earning More Than $25K
-                        <a class="tooltip-target u-new_line">
-                          <i class="fa fa-info-circle"></i>
-                        </a>
-                      </h2>
-                      <picc-meter class="earnings"
-                        id="earn25k-meter"
-                        data-bind="earnings_gt_25k_meter"
-                        max="1"
-                        average=".6">
-                      </picc-meter>
-                      <figcaption>
-                        <i class="fa average average-arrow" data-meter="earn25k-meter"></i>
-                        <span data-bind="earnings_gt_25k">XX%</span>
                         <div class="average average-label"></div>
                       </figcaption>
                     </figure>
@@ -451,8 +442,8 @@ body_scripts:
                   <div class="school-student-intro">
 
                     <ul class="school-key_figures key-figures">
-                      <li class="public-private icon-urban">
-                        <span data-bind="control">Small</span>
+                      <li data-bind="size_category">
+                        <span data-bind="value">X</span>
                       </li>
                       <li class="school-key_figures-stat">
                         <div class="group_inline">
@@ -489,19 +480,48 @@ body_scripts:
                     -->
                       <div class="school-student-stats-col">
 
-                        <div>
-                          <span class="fact_number">
-                            <strong data-bind="full_time_percent">XX</strong>
-                            <span>%</span>
-                          </span> Full-time
+                        <div class="test-align">
+
+                          <div>
+                            <span class="fact_number">
+                              <strong data-bind="full_time_percent">XX</strong>
+                              <span class="small">%</span>
+                            </span> Full-time
+                          </div>
+                          <div class="fact_number divide">/</div>
+                          <div>
+                            <span class="fact_number">
+                              <strong data-bind="part_time_percent">XX</strong>
+                              <span class="small">%</span>
+                            </span> Part-time
+                          </div>
+
                         </div>
-                        <div class="fact_number divide">/</div>
-                        <div>
-                          <span class="fact_number">
-                            <strong data-bind="part_time_percent">XX</strong>
-                            <span>%</span>
-                          </span> Part-time
+
+                        <div class="school-student-socio_econ">
+                          <h2>Socio-Economic Diversity</h2>
+                          <div class="group_inline school-student-socio_econ-stat">
+                            <div class="group_inline-left">
+                              <strong class="fact_number" data-bind="pell_grant_percentage">X</strong>
+                            </div>
+                            <div class="group_inline-right">
+                              <strong>of students</strong>
+                            </div>
+                          </div>
+                          <p>have a family income less than $40k and receive a
+                            grant to pay for college.</p>
                         </div>
+
+                        <!-- <div class="school-student-stat group_inline">
+                          <h2>Socio-Economic Diversity</h2>
+                          <strong class="fact_number big">
+                            <strong data-bind="pell_grant_percentage">XX%</strong>
+                            <span class="small normal">of students</span>
+                          </strong>
+                          <p>have a family income less than $40k and receive a
+                            grant to pay for college.</p>
+                        </div> -->
+
 <!--
                         <div class="group_inline">
                           <div class="group_inline-left"><span class="fact_number" data-bind="age_entry">XX</span></div>
@@ -536,7 +556,7 @@ body_scripts:
                       <div>
                         <span class="fact_number">
                           <strong data-bind="full_time_percent">XX</strong>
-                          <span>%</span>
+                          <span class="small">%</span>
                         </span> Full-time
                       </div>
                       <div class="fact_number divide">/</div>
@@ -606,18 +626,27 @@ body_scripts:
                       <picc-range data-bind="sat_reading_scores" max="800">
                       </picc-range>
                     </figure>
+                    <p class="no-data" data-bind="sat_reading_scores_invisible">
+                      No Critical Reading data available.
+                    </p>
 
                     <figure data-bind="sat_math_scores_visible">
                       <h4>Math</h4>
                       <picc-range data-bind="sat_math_scores" max="800">
                       </picc-range>
                     </figure>
+                    <p class="no-data" data-bind="sat_math_scores_invisible">
+                      No Math data available.
+                    </p>
 
                     <figure data-bind="sat_writing_scores_visible">
                       <h4>Writing</h4>
                       <picc-range data-bind="sat_writing_scores" max="800">
                       </picc-range>
                     </figure>
+                    <p class="no-data" data-bind="sat_writing_scores_invisible">
+                      No Writing data available.
+                    </p>
 
                     <h3 class="h2">ACT</h3>
 
@@ -625,6 +654,10 @@ body_scripts:
                       <picc-range data-bind="act_scores" min="0" max="36">
                       </picc-range>
                     </figure>
+                    <p class="no-data" data-bind="act_scores_invisible">
+                      No data available.
+                    </p>
+
                   </div>
 
                   <!-- </div> -->

@@ -107,3 +107,24 @@ button.block {
   margin-bottom: 0;
   width: auto;
 }
+
+.button-outline {
+  @extend .button;
+  @include font-size($h4);
+  border: $regular-border-size solid $green;
+  color: $green;
+  height: auto;
+  margin-bottom: $base-padding-large;
+  padding-top: 0.9em;
+  padding-bottom: 0.9em;
+  width: 100%;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0 0 0 2px $green;
+  }
+
+  @include respond-to(huge-up) {
+    width: 450px;
+  }
+}
