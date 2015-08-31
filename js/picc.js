@@ -1364,6 +1364,7 @@
     return function() {
       var context = this;
       var args = arguments;
+      clearTimeout(timeout);
       return timeout = setTimeout(function() {
         fn.apply(context, args);
       }, delay);
