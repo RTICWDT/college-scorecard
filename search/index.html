@@ -11,18 +11,14 @@ body_scripts:
   - search.js
 ---
 
-{% assign show_search_filters = true %}
-{% assign search_form_nested = true %}
-
 <form id="search-form" is="search-form"
   autocomplete="false"
   action="{{ page.permalink }}" method="GET" class="drawer">
 
-
-
-  <input type="checkbox" id="drawer-toggle">
+  <input type="checkbox" id="drawer-toggle" name="_drawer">
   <label for="drawer-toggle" id="drawer-toggle-label"></label>
   <header><span>Filter and edit your search</span></header>
+
   <nav id="drawer">
 
     <div>
