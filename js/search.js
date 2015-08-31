@@ -142,7 +142,7 @@
         );
       });
 
-    if (req) req.cancel();
+    if (req) req.abort();
 
     var list = d3.select(resultsRoot)
       .select('[data-bind="results"]');
@@ -160,7 +160,7 @@
 
     console.time && console.time('[load]');
 
-    picc.API.search(query, function(error, data) {
+    req = picc.API.search(query, function(error, data) {
       resultsRoot.classList.remove('js-loading');
       list.classed('hidden', false);
 
