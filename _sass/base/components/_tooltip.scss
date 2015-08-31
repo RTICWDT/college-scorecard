@@ -92,3 +92,7 @@
     }
   }
 }
+
+body.dragging [role="tooltip"] {
+  visibility: hidden;
+}
