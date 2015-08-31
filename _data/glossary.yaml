@@ -1,23 +1,29 @@
-avg-cost-year: <strong>Average Actual Cost</strong> The average annual cost of attendance, including living expenses; minus any federal, state, or institutional grant aid. This figure is reported for federal financial aid recipients only.
+avg-cost-year: <strong>Average Actual Cost</strong> The average annual cost of attendance for Title IV students less any state, federal, or institutional grant aid.
 
-graduation-rate: <strong>Graduation Rate</strong> The rate of completion for full-time students who are attending college for the first time, within 6 years for predominantly four-year colleges and within 4 years for predominantly two-year colleges.
+graduation-rate: <strong>Graduation Rate</strong> The completion rate for first—time, full—time students within 150 percent of  the expected time to completion for predominantly four-year schools, and within 200 percent for less-than-four-year schools.
 
-avg-salary: <strong>Salary 10 Years After</strong> The median earnings of former students who received federal financial aid, at 10 years after entering the school.
+avg-salary: <strong>Salary After Graduation (10 Years Out)</strong> The median earnings of students who are working and not enrolled in college, measured 10 years after they first enroll.
 
-repayment-rate: <strong>Students Repaying Loans on Time</strong> Percentage of borrowers who have defaulted on their loan after entering repayment.
+avg-loan-payment: <strong>Monthly Student Loan Payment</strong> The median monthly loan payment for students who completed, if it were repaid  over 10 years at a 6 percent interest rate.
 
-avg-debt: <strong>Average Total Debt</strong> The median debt of students who completed. This figure includes only federal Stafford loans; it excludes private student loans and Parent PLUS loans.
+repayment-rate: <strong>Students Paying Down Their Debt</strong> The share of students who have repaid at least $1 of the principal balance on their federal loans within 3 years of leaving school.
 
-avg-loan-payment: <strong>Average Monthly Loan Payment</strong> The median monthly loan payment for students who completed, if it were repaid over 10 years at a 6 percent interest rate.
+avg-debt: <strong>Typical Total Debt</strong> Typical Total Debt The median federal debt of borrowers who completed. This figure includes only federal Stafford loans; it excludes private student loans and Parent PLUS loans.
 
-student-aid: <strong>Students Receiving Financial Aid</strong> Percentage of students who receive some form of federal financial aid, be it loans or grants.
+student-aid: <strong>Students Receiving Federal Aid</strong> The share of undergraduate students who borrowed federal loans.
 
-retention-rate: <strong>Students Who Return After the First Year</strong> Percentage of students who return to the school after their first year.
+retention-rate: <strong>Students Who Return After the First Year</strong> The share of first-time, full-time undergraduates who returned to the institution after their freshman year.
 
-typical-earnings: <strong>Typical Earnings</strong> The median earnings of former students who received federal financial aid, at 10 years after entering the school.
+earnings-25k: <strong>Former Students Earning More Than $25K</strong> The share of students earning more than $25,000, or about the average earnings of a high school graduate aged 25-34, 6 years after they first enroll.
 
-earnings-25k: <strong>Former Students Earning More Than $25K</strong> Percentage of students who earn more than $25K (the average salary for those with only a high school diploma) after leaving school.
+race-eth: <strong>Race/Ethnicity</strong> The share of students enrolled for credit who identified themselves in each race/ethnicity.
 
-acceptance-rate: <strong>Acceptance Rate</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse odio velit, mattis at dictum aliquam, vestibulum quis enim.
+socio-eco: <strong>Socio-Economic Diversity</strong> Percent of undergraduate students receiving federal need-based (Pell grant) aid.
+
+test-scores: <strong>Test Scores</strong> At schools that report their test scores, 50 percent had scores within this range. Of the remaining 50 percent, half were above the range and half were below. Not all schools require test scores.
+
+pop-prog: <strong>Popular Programs</strong> The five largest programs of study at the school, as measured by the share of students enrolled.
+
+avail-study: <strong>Available Areas of Study</strong> All available programs of study offered at the school.
 
 hcm2: <strong>Under Investigation</strong> This school is on a Heightened Cash Monitoring, level 2 payment method because of federal compliance or financial issues.
