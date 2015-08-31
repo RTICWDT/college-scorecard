@@ -175,13 +175,19 @@
     this.__dragging = getClosestHandle.call(this, e);
     this.__dragging.setAttribute('aria-grabbed', true);
     move.call(this, e);
+    release.call(this, e);
   }
 
   function engage(e) {
+    if (this.__dragging) {
+      console.warn('already dragging on engage()');
+      return;
+    }
+
     // ignore right-clicks
     if (e.button === 2) {
       e.preventDefault();
-      return false;
+      return;
     }
     // console.log('+ engage');
 
@@ -189,13 +195,16 @@
     this.__dragging.setAttribute('aria-grabbed', true);
 
     window.addEventListener('mousemove', getListener(move, this));
-    window.addEventListener('touchmove', getListener(move, this));
     window.addEventListener('mouseup', getListener(release, this));
+    window.addEventListener('touchmove', getListener(move, this));
     window.addEventListener('touchend', getListener(release, this));
   }
 
   function move(e) {
-    if (!this.__dragging) return;
+    if (!this.__dragging) {
+      console.warn('move() while not dragging');
+      return;
+    }
 
     // console.log('* move');
 
@@ -220,25 +229,35 @@
     this.dispatchEvent(event);
 
     e.preventDefault();
-    return false;
+
+    try {
+      window.getSelection().removeAllRanges();
+    } catch (err) {
+      console.warn('unable to clear ranges:', err);
+    }
+    return;
   }
 
   function release(e) {
     // console.log('- release');
     if (this.__dragging) {
       this.__dragging.removeAttribute('aria-grabbed');
+    } else {
+      console.warn('release() while not dragging');
     }
+
     this.__dragging = false;
     this.removeAttribute('aria-valuenow');
+
     window.removeEventListener('mousemove', getListener(move, this));
-    window.removeEventListener('touchmove', getListener(move, this));
     window.removeEventListener('mouseup', getListener(release, this));
+    window.removeEventListener('touchmove', getListener(move, this));
     window.removeEventListener('touchend', getListener(release, this));
 
     this.dispatchEvent(new CustomEvent('change'));
 
     e.preventDefault();
-    return false;
+    return;
   }
 
   function keypress(e) {
