@@ -1605,12 +1605,12 @@
   });
 
   window.addEventListener('mousedown', function(e) {
-    console.info('+ drag');
+    // console.info('+ drag');
     document.body.classList.add('dragging');
   });
 
   window.addEventListener('mouseup', function(e) {
-    console.info('- drag');
+    // console.info('- drag');
     document.body.classList.remove('dragging');
   });
 
