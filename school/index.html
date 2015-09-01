@@ -3,12 +3,9 @@ title: School
 layout: default
 permalink: /school/
 scripts:
-  - vendor/tagalong.min.js
-  - vendor/leaflet.js
+  - vendor/leaflet.min.js
 stylesheets:
   - vendor/leaflet.css
-body_scripts:
-  - school.js
 ---
 
 <!-- Search results -->
@@ -737,8 +734,6 @@ body_scripts:
 </div>
 
 
-<!--
-<section>
-  {# include search-form.html #}
-</section>
--->
+<script>
+  picc.pages.school();
+</script>
