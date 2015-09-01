@@ -77,22 +77,16 @@
   }
 }
 
-button.data-home-button {
-  @extend .button-wizard;
+.data-home-button {
+  @extend .button-outline;
   @include font-size(0.75);
-  border-color: $green;
-  color: $green;
   height: auto;
+  letter-spacing: 2px;
   margin-bottom: $base-padding-extra;
   padding-top: 0.8em;
   width: 330px;
 
-  &:hover,
-  &:focus {
-    box-shadow: 0 0 0 2px $green;
-  }
-
-  + button.data-home-button {
+  + .data-home-button {
     margin-left: 10px;
   }
 }
