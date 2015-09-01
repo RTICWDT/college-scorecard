@@ -146,3 +146,24 @@
     }
   }
 }
+
+.data-docs {
+  padding-right: $base-padding-large;
+
+  a {
+    color: $mid-blue;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  h2 {
+    padding-bottom: $base-padding-lite;
+  }
+
+  p {
+    padding-bottom: $base-padding;
+  }
+}
