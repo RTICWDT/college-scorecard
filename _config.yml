@@ -25,7 +25,8 @@ analytics: true
 
 # API configuration
 API:
-  baseurl: https://api.data.gov/TEST/ed/
+  baseurl: https://api.data.gov/TEST/ed/production/v1/
+  key: ''
 
 # specify paths to exclude from copying to _site
 # Note: files and directories with the '_' prefix are excluded
