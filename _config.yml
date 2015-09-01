@@ -36,6 +36,7 @@ exclude:
   - package.json
   - node_modules
   - js/src
+  - js/**/*.md
   - '**/Makefile'
   - '*.sh'
   # Ruby stuff
