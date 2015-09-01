@@ -37,28 +37,6 @@
 
   <fieldset>
 
-    <aria-accordion id="school-name" class="container">
-
-      <legend>Name</legend>
-      <h1 class="search_category">
-        <a aria-expanded="false" aria-controls="name-content">
-          Name
-        </a>
-      </h1>
-
-      <div id="name-content" aria-hidden="false" class="accordion-div">
-        <label for="name-school">School name</label>
-        <input id="name-school" name="name" type="text" placeholder="e.g. USA University" {{ common_input_attributes }}>
-      </div>
-
-      <input type="submit" class="sr-only">
-
-    </aria-accordion>
-
-  </fieldset>
-
-  <fieldset>
-
     <aria-accordion id="school-location" class="container">
 
       <legend>Location</legend>
@@ -188,6 +166,28 @@
         </fieldset>
 
       </div>
+
+    </aria-accordion>
+
+  </fieldset>
+
+  <fieldset>
+
+    <aria-accordion id="school-name" class="container">
+
+      <legend>Name</legend>
+      <h1 class="search_category">
+        <a aria-expanded="false" aria-controls="name-content">
+          Name
+        </a>
+      </h1>
+
+      <div id="name-content" aria-hidden="false" class="accordion-div">
+        <label for="name-school">School name</label>
+        <input id="name-school" name="name" type="text" placeholder="e.g. USA University" {{ common_input_attributes }}>
+      </div>
+
+      <input type="submit" class="sr-only">
 
     </aria-accordion>
 
