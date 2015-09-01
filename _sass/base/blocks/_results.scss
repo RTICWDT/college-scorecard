@@ -259,6 +259,12 @@
 
   @include respond-to(large-up) {
     @include omega-reset(2n);
+    @include span-columns(4);
+    @include omega(3n);
+  }
+
+  @include respond-to(huge-up) {
+    @include omega-reset(3n);
     @include span-columns(3);
     @include omega(4n);
   }

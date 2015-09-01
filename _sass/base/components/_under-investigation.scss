@@ -5,9 +5,10 @@
   text-transform: uppercase;
 }
 
-$invest_height: 36px;
+$invest_height: 32px;
 
 .investigation-major {
+  @include font-size(0.9);
   @extend .light_on_dark;
   color: $white;
   font-weight: $weight-bold;
