@@ -35,7 +35,6 @@ exclude:
   # Node and JS asset build files
   - package.json
   - node_modules
-  - js/src
   - js/**/*.md
   - '**/Makefile'
   - '*.sh'
