@@ -2,13 +2,6 @@
 title: Search
 layout: default
 permalink: /search/
-scripts:
-  - components/combo-box.js
-  - components/picc-slider.js
-  - vendor/formdb.min.js
-  - vendor/tagalong.min.js
-body_scripts:
-  - search.js
 ---
 
 <form id="search-form" is="search-form"
@@ -234,3 +227,7 @@ body_scripts:
   </div>
 
 </form>
+
+<script>
+  picc.pages.search();
+</script>
