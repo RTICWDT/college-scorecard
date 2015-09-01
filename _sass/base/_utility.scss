@@ -284,3 +284,9 @@ ol.disc,
 .u-lower {
   margin-bottom: -5em !important;
 }
+
+.compat-message {
+  background: #ffe;
+  color: $red;
+  padding: $base-padding 0;
+}
