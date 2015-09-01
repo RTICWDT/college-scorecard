@@ -1,5 +1,5 @@
 .main-gallery {
-  height: 280px;
+  height: 320px;
   margin-top: $base-padding-large;
   margin-bottom: $base-padding-large;
   position: relative;
@@ -11,7 +11,7 @@
   width: 100%;
 
   p {
-    @include font-size($h2);
+    @include font-size($h3);
 
     .insight-highlight {
       background: $yellow;
