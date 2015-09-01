@@ -15,16 +15,6 @@ sass:
 
 # common site scripts, relative to `{{ site.baseurl }}/js/`
 scripts:
-  - vendor/aight.min.js
-  - compat/custom-event.js
-  - vendor/d3.min.js
-  - vendor/async.min.js
-  - vendor/querystring.min.js
-  - vendor/document-register-element.min.js
-  - components/aria-accordion.js
-  - components/picc-meter.js
-  - components/picc-range.js
-  - components/multi-select.js
   - picc.js
 
 stylesheets:
@@ -44,6 +34,7 @@ exclude:
   # Node and JS asset build files
   - package.json
   - node_modules
+  - js/src
   - '**/Makefile'
   - '*.sh'
   # Ruby stuff
