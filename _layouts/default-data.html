@@ -6,7 +6,7 @@
     <main>
       {{ content }}
     </main>
-    {% include footer.html %}
+    {% include footer-data.html %}
 
     {% for script in page.body_scripts %}
     <script src="{{ site.baseurl }}/js/{{ script }}" data-src="{{ script }}"></script>
