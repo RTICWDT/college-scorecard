@@ -2,18 +2,33 @@
 
   <fieldset>
 
-    <aria-accordion id="school-name" class="container">
+    <aria-accordion id="school-degree" class="container">
 
-      <legend>Name</legend>
+      <legend>Programs/Degree</legend>
       <h1 class="search_category">
-        <a aria-expanded="true" aria-controls="name-content">
-          Name
+        <a aria-expanded="true" aria-controls="major-content">
+          Programs/Degree
         </a>
       </h1>
+      <div id="major-content" aria-hidden="true" class="accordion-div">
 
-      <div id="name-content" aria-hidden="false" class="accordion-div">
-        <label for="name-school">School name</label>
-        <input id="name-school" name="name" type="text" placeholder="e.g. USA University" {{ common_input_attributes }}>
+        <label for="major-type">Choose a degree
+          <select id="major-type" name="degree">
+            <option value="">Any</option>
+            <option value="a">Associates</option>
+            <option value="b">Bachelors</option>
+          </select>
+        </label>
+
+        <label for="major">Choose a program
+          <select id="major" name="major">
+            <option value="">Any</option>
+            {% for program in site.data.programs %}
+            <option value="{{ program.key }}">{{ program.label }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
       </div>
 
       <input type="submit" class="sr-only">
@@ -108,40 +123,7 @@
 
       </div>
 
-    </aria-accordion>
-
-  </fieldset>
-
-  <fieldset>
-
-    <aria-accordion id="school-degree" class="container">
-
-      <legend>Programs/Degree</legend>
-      <h1 class="search_category">
-        <a aria-expanded="false" aria-controls="major-content">
-          Programs/Degree
-        </a>
-      </h1>
-      <div id="major-content" aria-hidden="true" class="accordion-div">
-
-        <label for="major">Choose a program
-          <select id="major" name="major">
-            <option value="">Any</option>
-            {% for program in site.data.programs %}
-            <option value="{{ program.key }}">{{ program.label }}</option>
-            {% endfor %}
-          </select>
-        </label>
-
-        <label for="major-type">Choose a degree
-          <select id="major-type" name="degree">
-            <option value="">Any</option>
-            <option value="a">Associates</option>
-            <option value="b">Bachelors</option>
-          </select>
-        </label>
-
-      </div>
+      <input type="submit" class="sr-only">
 
     </aria-accordion>
 
@@ -188,6 +170,30 @@
         </fieldset>
 
       </div>
+
+      <input type="submit" class="sr-only">
+
+    </aria-accordion>
+
+  </fieldset>
+
+  <fieldset>
+
+    <aria-accordion id="school-name" class="container">
+
+      <legend>Name</legend>
+      <h1 class="search_category">
+        <a aria-expanded="false" aria-controls="name-content">
+          Name
+        </a>
+      </h1>
+
+      <div id="name-content" aria-hidden="false" class="accordion-div">
+        <label for="name-school">School name</label>
+        <input id="name-school" name="name" type="text" placeholder="e.g. USA University" {{ common_input_attributes }}>
+      </div>
+
+      <input type="submit" class="sr-only">
 
     </aria-accordion>
 
@@ -274,6 +280,8 @@
           </fieldset>
 
         </div>
+
+        <input type="submit" class="sr-only">
 
       </aria-accordion>
 
