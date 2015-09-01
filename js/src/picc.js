@@ -439,7 +439,7 @@ picc.fields = {
   MINORITY_SERVING:     'school.minority_serving',
 
   PREDOMINANT_DEGREE:   'school.degrees_awarded.predominant',
-  UNDER_INVESTIGATION:  'school.HCM2',
+  UNDER_INVESTIGATION:  'school.under_investigation',
 
   // net price
   NET_PRICE:            '2013.cost.avg_net_price.overall',

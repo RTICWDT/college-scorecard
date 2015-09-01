@@ -73,14 +73,16 @@
 
   .school-heading {
     h1 {
+      @include font-size($h1-huge);
       padding-bottom: $base-padding-lite;
     }
 
     h2 {
+      color: $dark-gray;
       margin-top: 0;
       margin-bottom: 0;
       padding-top: 0;
-      font-size: font-size($h4);
+      font-size: font-size($h1);
       font-weight: normal;
     }
 
