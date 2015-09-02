@@ -159,6 +159,20 @@
     }
   }
 
+  aria-accordion {
+    a {
+      color: $black;
+    }
+
+    p:first-of-type {
+      padding-top: $base-padding;
+    }
+  }
+
+  aria-accordion [aria-controls]:after {
+    top: -6px;
+  }
+
   h2 {
     padding-bottom: $base-padding-lite;
   }
