@@ -383,9 +383,9 @@ picc.format = (function() {
     }, 'locale unknown')),
 
     localeClass: formatter(map({
-      '11': 'icon-urban',
-      '12': 'icon-urban',
-      '13': 'icon-urban',
+      '11': 'icon-city',
+      '12': 'icon-city',
+      '13': 'icon-city',
       '21': 'icon-suburban',
       '22': 'icon-suburban',
       '23': 'icon-suburban',
