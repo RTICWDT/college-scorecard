@@ -12,6 +12,9 @@ module.exports = function search() {
   // the current outbound request
   var req;
 
+  var previousParams = query || {};
+  var poppingState = false;
+
   // "incremental" updates will only hide the list of schools, and
   // not any of the other elements (results total, sort, pages)
   var incremental = false;
@@ -24,31 +27,21 @@ module.exports = function search() {
 
   var change = picc.debounce(onChange, 100);
 
+  // get a reference to all of the sliders
+  var sliders = d3.selectAll('picc-slider');
+
   picc.ready(function() {
     // console.warn('setting form data...', query);
     // console.log('states:', form.get('state'));
     form.setData(query);
     // console.log('states:', form.getInputsByName('state'), form.get('state'));
 
-    // for each of the <picc-slider> elements...
-    d3.selectAll('picc-slider')
-      .each(function() {
-        // 1. get the value of its hidden input (set by formdb),
-        // and parse it as a range
-        var input = this.querySelector('input');
-        if (input) {
-          var value = input.value.split('..').map(Number);
-          if (value.length === 2) {
-            this.lower = value[0];
-            this.upper = value[1];
-          } else {
-            // console.warn('bad slider input value:', value);
-          }
-        }
-      })
+    // for each of the sliders
+    sliders
+      // update them once first, so they don't fire a change event
+      .each(updateSlider)
       .on('change', picc.debounce(function() {
-        // 2. when the slider changes, update the input with a
-        // range value.
+        // when the slider changes, update the input with a range value.
         var input = this.querySelector('input');
         if (input) {
           if (this.lower > this.min || this.upper < this.max) {
@@ -83,6 +76,25 @@ module.exports = function search() {
     return false;
   });
 
+  // update the form on popstate
+  window.addEventListener('popstate', function(e) {
+
+    // copy the unset keys (as `null`) from the previous state to clear any
+    // elements that aren't represented in the new state.
+    var state = copyUnsetKeys(previousParams, e.state);
+    console.info('pop state:', e.state, '->', state);
+
+    // update all of the form elements
+    form.setData(state);
+
+    // update the slider values, too
+    sliders.each(updateSlider);
+
+    poppingState = true;
+    onChange();
+    poppingState = false;
+  });
+
   picc.ui.expandAccordions(function() {
     var inputs = this.querySelectorAll('[name]');
     return [].some.call(inputs, function(input) {
@@ -98,6 +110,12 @@ module.exports = function search() {
     }
 
     var params = form.getData();
+    for (var k in params) {
+      if (Array.isArray(params[k]) && !params[k][0]) {
+        // console.warn('ignoring empty array parameter:', k, params[k]);
+        delete params[k];
+      }
+    }
 
     // don't submit the _drawer parameter
     delete params._drawer;
@@ -133,11 +151,23 @@ module.exports = function search() {
     ].join(',');
 
     var qs = querystring.stringify(params);
-    qs = qs.replace(/^&+/, '')
+    qs = '?' + qs.replace(/^&+/, '')
       .replace(/&{2,}/g, '&')
       .replace(/%3A/g, ':');
-    // update the URL
-    history.pushState(params, 'search', '?' + qs);
+
+    if (poppingState) {
+      console.info('popping state');
+      history.replaceState(params, 'search', qs);
+    } else if (location.search && diff(previousParams, params)) {
+      console.info('push state:', qs, previousParams, '->', params);
+      // update the URL
+      history.pushState(params, 'search', qs);
+    } else {
+      console.info('replace state:', qs);
+      history.replaceState(params, 'search', qs);
+    }
+
+    previousParams = params;
 
     d3.select('a.results-share')
       .attr('href', function() {
@@ -323,6 +353,44 @@ module.exports = function search() {
     var message = resultsRoot.querySelector('.error-message');
     error = error.responseText || error;
     message.textContent = String(error) || 'There was an unexpected API error.';
+  }
+
+  function diff(a, b) {
+    if ((typeof a) !== (typeof b)) {
+      // console.log('diff types:', typeof a, typeof b);
+      return true;
+    } else if (typeof a === 'object') {
+      for (k in a) if (diff(a[k], b[k])) return true;
+      for (k in b) if (diff(a[k], b[k])) return true;
+      return false;
+    }
+    return a != b;
+  }
+
+  function copyUnsetKeys(from, into) {
+    var copy = picc.data.extend({}, into);
+    for (var key in from) {
+      if (!copy.hasOwnProperty(key)) {
+        copy[key] = null;
+      }
+    }
+    return copy;
+  }
+
+
+  function updateSlider() {
+    // get the value of its hidden input (set by formdb),
+    // and parse it as a range
+    var input = this.querySelector('input');
+    if (input) {
+      var value = input.value.split('..').map(Number);
+      if (value.length === 2) {
+        this.lower = value[0];
+        this.upper = value[1];
+      } else {
+        // console.warn('bad slider input value:', value);
+      }
+    }
   }
 
 };

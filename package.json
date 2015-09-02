@@ -6,7 +6,7 @@
   "description": "Scripts for the college-choice project.",
   "scripts": {
     "build": "browserify `js/src/browserify-args.sh`",
-    "watch": "watchify `js/src/browserify-args.sh`",
+    "watch": "watchify -v `js/src/browserify-args.sh`",
     "test": "./test/runner.sh",
     "test:live": "./test/browsers.sh",
     "test:sauce": "./test/runner.sh sauce",
