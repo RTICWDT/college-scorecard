@@ -1,18 +1,34 @@
 footer {
   @include font-size($h6);
   background-color: #eeeeee;
+  color: $dark-gray;
   height: 60px;
+  font-weight: $weight-light;
   text-align: center;
   padding-top: 22px;
+
   @include respond-to(tiny-up) {
     @include font-size($h5);
-    height: 100px;
-    padding-top: 41px;
+    height: 200px;
+    padding-top: 51px;
+  }
+
+  a {
+    color: $mid-blue;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
   }
 
   p {
-    color: $dark-gray;
-    font-weight: 600;
+    padding-bottom: $base-padding;
+  }
+
+  .footer-owner {
+    font-weight: $weight-bold;
     letter-spacing: 0.4px;
     text-transform: uppercase;
   }
