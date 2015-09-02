@@ -1,16 +1,53 @@
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+  <!-- Basic Page Needs
+  ================================================== -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google-site-verification" content="XexyC4L1w7iwDpplB904pWaTNTVewrjLSloIZheu2ks" />
+
+  <!-- Mobile Specific Metas
+  ================================================== -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Twitter and OpenGraph data
+  ================================================== -->
+  <!-- type -->
+  <meta property="og:type" content="website">
+
+  <!-- title -->
+  {% if page.title %}
+    <title>{{ page.title }}</title>
+    <meta property="og:title" content="{{ page.title | xml_escape }}" />
+  {% else %}
+    <title>{{ site.title }}</title>
+    <meta property="og:title" content="{{ site.title | xml_escape }}" />
+    <meta name="twitter:title" content="">
+  {% endif %}
+
+  <!-- url -->
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+  <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+
+  <!-- img -->
+  <meta property="og:img" content="{{ site.baseurl }}/img/hero.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ site.baseurl }}/img/hero.jpg">
+
+  <!-- description -->
+  <meta property="og:description" content="{{ site.description }}">
+  <meta name="twitter:description" content="{{ site.description }}">
+
+  <!-- Favicons
+  ================================================== -->
   <link rel="icon" type="image/x-icon" href="{{ site.baseurl }}/img/favicon.ico">
   <link rel="icon" type="image/png" href="{{ site.baseurl }}/img/favicon-16x16.png" sizes="16x16">
   <link rel="icon" type="image/png" href="{{ site.baseurl }}/img/favicon-32x32.png" sizes="32x32">
 
-  <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
-  <meta name="description" content="{{ site.description }}">
-
-  <!-- site styles -->
+  <!-- Styles
+  ================================================== -->
   {% for sheet in site.stylesheets %}
   <link rel="stylesheet" href="{{ site.baseurl }}/css/{{ sheet }}">
   {% endfor %}
@@ -20,9 +57,8 @@
   <link rel="stylesheet" href="{{ site.baseurl }}/css/{{ sheet }}">
   {% endfor %}{% endif %}
 
-  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-
-  <!-- site scripts -->
+  <!-- Scripts
+  ================================================== -->
   {% for script in site.scripts %}
   <script src="{{ site.baseurl }}/js/{{ script }}"></script>
   {% endfor %}
@@ -34,4 +70,5 @@
   {% for script in page.scripts %}
   <script src="{{ site.baseurl }}/js/{{ script }}"></script>
   {% endfor %}{% endif %}
+
 </head>
