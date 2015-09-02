@@ -12,6 +12,9 @@ module.exports = function search() {
   // the current outbound request
   var req;
 
+  var previousParams = query || {};
+  var poppingState = false;
+
   // "incremental" updates will only hide the list of schools, and
   // not any of the other elements (results total, sort, pages)
   var incremental = false;
@@ -73,6 +76,25 @@ module.exports = function search() {
     return false;
   });
 
+  // update the form on popstate
+  window.addEventListener('popstate', function(e) {
+
+    // copy the unset keys (as `null`) from the previous state to clear any
+    // elements that aren't represented in the new state.
+    var state = copyUnsetKeys(previousParams, e.state);
+    console.info('pop state:', e.state, '->', state);
+
+    // update all of the form elements
+    form.setData(state);
+
+    // update the slider values, too
+    sliders.each(updateSlider);
+
+    poppingState = true;
+    onChange();
+    poppingState = false;
+  });
+
   picc.ui.expandAccordions(function() {
     var inputs = this.querySelectorAll('[name]');
     return [].some.call(inputs, function(input) {
@@ -123,11 +145,23 @@ module.exports = function search() {
     ].join(',');
 
     var qs = querystring.stringify(params);
-    qs = qs.replace(/^&+/, '')
+    qs = '?' + qs.replace(/^&+/, '')
       .replace(/&{2,}/g, '&')
       .replace(/%3A/g, ':');
-    // update the URL
-    history.pushState(params, 'search', '?' + qs);
+
+    if (poppingState) {
+      console.info('popping state');
+      history.replaceState(params, 'search', qs);
+    } else if (location.search && diff(previousParams, params)) {
+      console.info('push state:', qs, previousParams, '->', params);
+      // update the URL
+      history.pushState(params, 'search', qs);
+    } else {
+      console.info('replace state:', qs);
+      history.replaceState(params, 'search', qs);
+    }
+
+    previousParams = params;
 
     d3.select('a.results-share')
       .attr('href', function() {
