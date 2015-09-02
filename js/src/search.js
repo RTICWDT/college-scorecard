@@ -24,31 +24,21 @@ module.exports = function search() {
 
   var change = picc.debounce(onChange, 100);
 
+  // get a reference to all of the sliders
+  var sliders = d3.selectAll('picc-slider');
+
   picc.ready(function() {
     // console.warn('setting form data...', query);
     // console.log('states:', form.get('state'));
     form.setData(query);
     // console.log('states:', form.getInputsByName('state'), form.get('state'));
 
-    // for each of the <picc-slider> elements...
-    d3.selectAll('picc-slider')
-      .each(function() {
-        // 1. get the value of its hidden input (set by formdb),
-        // and parse it as a range
-        var input = this.querySelector('input');
-        if (input) {
-          var value = input.value.split('..').map(Number);
-          if (value.length === 2) {
-            this.lower = value[0];
-            this.upper = value[1];
-          } else {
-            // console.warn('bad slider input value:', value);
-          }
-        }
-      })
+    // for each of the sliders
+    sliders
+      // update them once first, so they don't fire a change event
+      .each(updateSlider)
       .on('change', picc.debounce(function() {
-        // 2. when the slider changes, update the input with a
-        // range value.
+        // when the slider changes, update the input with a range value.
         var input = this.querySelector('input');
         if (input) {
           if (this.lower > this.min || this.upper < this.max) {
@@ -323,6 +313,22 @@ module.exports = function search() {
     var message = resultsRoot.querySelector('.error-message');
     error = error.responseText || error;
     message.textContent = String(error) || 'There was an unexpected API error.';
+  }
+
+
+  function updateSlider() {
+    // get the value of its hidden input (set by formdb),
+    // and parse it as a range
+    var input = this.querySelector('input');
+    if (input) {
+      var value = input.value.split('..').map(Number);
+      if (value.length === 2) {
+        this.lower = value[0];
+        this.upper = value[1];
+      } else {
+        // console.warn('bad slider input value:', value);
+      }
+    }
   }
 
 };
