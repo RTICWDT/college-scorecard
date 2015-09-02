@@ -8,7 +8,7 @@ permalink: /search/
   autocomplete="false"
   action="{{ page.permalink }}" method="GET" class="drawer">
 
-  <div class="search-toggles container">
+  <div class="toggles container">
 
     <aria-accordion id="filters">
 
@@ -18,15 +18,9 @@ permalink: /search/
           <i class="fa fa-filter"></i> Filter
         </a>
       </h1>
-      <div id="filter-content" aria-hidden="true" class="accordion-div">
+      <div id="filter-content" aria-hidden="true" class="toggle-content">
 
-        <label for="major-type">Choose a degree
-          <select id="major-type" name="degree">
-            <option value="">Any</option>
-            <option value="a">Associates</option>
-            <option value="b">Bachelors</option>
-          </select>
-        </label>
+        {% include filters.html %}
 
       </div>
 
@@ -42,15 +36,9 @@ permalink: /search/
           <i class="fa fa-search"></i> Edit Search
         </a>
       </h1>
-      <div id="search-content" aria-hidden="true" class="accordion-div">
+      <div id="search-content" aria-hidden="true" class="toggle-content">
 
-        <label for="major-type">Choose a degree
-          <select id="major-type" name="degree">
-            <option value="">Any</option>
-            <option value="a">Associates</option>
-            <option value="b">Bachelors</option>
-          </select>
-        </label>
+        {% include search-form.html %}
 
       </div>
 
@@ -66,15 +54,19 @@ permalink: /search/
           <i class="fa fa-sort"></i> Sort
         </a>
       </h1>
-      <div id="sort-content" aria-hidden="true" class="accordion-div">
-
-        <label for="major-type">Choose a degree
-          <select id="major-type" name="degree">
-            <option value="">Any</option>
-            <option value="a">Associates</option>
-            <option value="b">Bachelors</option>
-          </select>
-        </label>
+      <div id="sort-content" aria-hidden="true" class="toggle-content">
+        
+        <label for="select-sort">Sort by:</label>
+        <select id="select-sort" name="sort">
+          <option selected value="advantage:desc">Increase in Earnings</option>
+          <option value="avg_net_price:asc">Actual Cost</option>
+          <option value="completion_rate:desc">Graduation Rate</option>
+          <option value="salary:desc">Salary After School</option>
+          <option value="name:asc">Name (A to Z)</option>
+          <!--option value="name:desc">Name (Z to A)</option -->
+          <!--option value="size:desc">Size (large to small)</option-->
+          <option value="size:asc">Size (small to large)</option>
+        </select>
 
       </div>
 
@@ -85,40 +77,9 @@ permalink: /search/
 
   </div>
 
-  <input type="checkbox" id="drawer-toggle" name="_drawer">
-  <label for="drawer-toggle" id="drawer-toggle-label"></label>
-  <header><span>Filter and Edit Your Search</span></header>
-
-  <nav id="drawer">
-
-    <div>
-
-      <div class="filter-wrapper">
-
-        {% include filters.html %}
-
-      </div>
-
-      <fieldset class="results_search">
 
 
-
-          <legend>Modify Your Search</legend>
-          <h1 class="search_category search_category-head">
-              Modify Your Search
-          </h1>
-
-          {% include search-form.html %}
-
-
-
-      </fieldset>
-
-    </div>
-
-  </nav>
-
-  <div id="page-content">
+  <!-- <div id="page-content"> -->
 
     <!-- Search results -->
     <section class="results search-results loadable">
@@ -157,17 +118,8 @@ permalink: /search/
                 <div class="u-group_inline">
 
                   <!-- <div class="u-group_inline-right"> -->
-                    <label for="select-sort">Sort by:</label>
-                    <select id="select-sort" name="sort">
-                      <option selected value="advantage:desc">Increase in Earnings</option>
-                      <option value="avg_net_price:asc">Actual Cost</option>
-                      <option value="completion_rate:desc">Graduation Rate</option>
-                      <option value="salary:desc">Salary After School</option>
-                      <option value="name:asc">Name (A to Z)</option>
-                      <!--option value="name:desc">Name (Z to A)</option -->
-                      <!--option value="size:desc">Size (large to small)</option-->
-                      <option value="size:asc">Size (small to large)</option>
-                    </select>
+                    <!--  -->
+
                   <!-- </div> -->
 
                 </div>
@@ -301,7 +253,7 @@ permalink: /search/
 
     </section>
 
-  </div>
+  <!-- </div> -->
 
 </form>
 

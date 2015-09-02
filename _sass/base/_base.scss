@@ -24,6 +24,7 @@
 @import 'typography';
 
 // Components
+@import 'components/aria-accordion';
 @import 'components/browser-compat';
 @import 'components/buttons';
 @import 'components/drawer';
@@ -33,12 +34,11 @@
 @import 'components/legend';
 @import 'components/loadable';
 @import 'components/pagination';
-@import 'components/aria-accordion';
-// @import 'components/combo-box';
 @import 'components/picc-meter';
 @import 'components/picc-range';
 @import 'components/picc-slider';
 @import 'components/multi-select';
+@import 'components/search-toggles';
 @import 'components/sections';
 @import 'components/tooltip';
 @import 'components/under-investigation';

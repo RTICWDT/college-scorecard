@@ -1,0 +1,59 @@
+$toggle-padding: 10px;
+
+.toggles {
+  padding-top: $base-padding-lite;
+  padding-bottom: $base-padding-lite;
+
+  aria-accordion {
+    border-radius: $base-border-radius $base-border-radius 0 0;
+    border-top: 3px solid $white;
+    display: inline-block;
+    margin-right: 10px;
+    padding: 0 $toggle-padding 5px $toggle-padding;
+    position: relative;
+    width: auto;
+
+    &:hover,
+    &:focus {
+      border-top: 3px solid $black;
+    }
+
+    &[aria-expanded=true] {
+      border-top: 3px solid $black;
+    }
+
+    aria-accordion {
+      width: 100%;
+
+      &:hover,
+      &:focus {
+        border-top: 3px solid $white;
+      }
+
+      &[aria-expanded=true] {
+        border-top: 3px solid $white;
+      }
+    }
+  }
+
+  > aria-accordion [aria-controls]:after {
+    display: none;
+  }
+
+  fieldset {
+    border-top: none;
+  }
+
+
+}
+
+.toggle-content {
+  background-color: $white;
+  box-shadow: 0 8px 9px -3px rgba(50,50,50,0.6);
+  padding: $base-padding-lite;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 400px;
+  z-index: 10000;
+}
