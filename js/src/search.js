@@ -315,6 +315,28 @@ module.exports = function search() {
     message.textContent = String(error) || 'There was an unexpected API error.';
   }
 
+  function diff(a, b) {
+    if ((typeof a) !== (typeof b)) {
+      console.log('diff types:', typeof a, typeof b);
+      return true;
+    } else if (typeof a === 'object') {
+      for (k in a) if (diff(a[k], b[k])) return console.log('diff key:', k, a, b), true;
+      for (k in b) if (diff(a[k], b[k])) return console.log('diff key:', k, a, b), true;
+      return false;
+    }
+    return a != b;
+  }
+
+  function copyUnsetKeys(from, into) {
+    var copy = picc.data.extend({}, into);
+    for (var key in from) {
+      if (!copy.hasOwnProperty(key)) {
+        copy[key] = null;
+      }
+    }
+    return copy;
+  }
+
 
   function updateSlider() {
     // get the value of its hidden input (set by formdb),
