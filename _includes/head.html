@@ -12,18 +12,23 @@
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width initial-scale=1">
 
-  <link rel="icon" type="image/x-icon" href="{{ site.baseurl }}/img/favicon.ico">
-  <link rel="icon" type="image/png" href="{{ site.baseurl }}/img/favicon-16x16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="{{ site.baseurl }}/img/favicon-32x32.png" sizes="32x32">
-
+  <!-- Twitter and OpenGraph data
+  ================================================== -->
   <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
-
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ site.title }}">
   <meta property="og:description" content="{{ site.description }}">
   <meta name="description" content="{{ site.description }}">
 
-  <!-- site styles -->
+  <!-- Favicons
+  ================================================== -->
+  <link rel="icon" type="image/x-icon" href="{{ site.baseurl }}/img/favicon.ico">
+  <link rel="icon" type="image/png" href="{{ site.baseurl }}/img/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="{{ site.baseurl }}/img/favicon-32x32.png" sizes="32x32">
+
+  <!-- Styles
+  ================================================== -->
   {% for sheet in site.stylesheets %}
   <link rel="stylesheet" href="{{ site.baseurl }}/css/{{ sheet }}">
   {% endfor %}
@@ -33,9 +38,8 @@
   <link rel="stylesheet" href="{{ site.baseurl }}/css/{{ sheet }}">
   {% endfor %}{% endif %}
 
-  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-
-  <!-- site scripts -->
+  <!-- Scripts
+  ================================================== -->
   {% for script in site.scripts %}
   <script src="{{ site.baseurl }}/js/{{ script }}"></script>
   {% endfor %}
