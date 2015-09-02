@@ -479,6 +479,7 @@ picc.fields = {
   EARNINGS_GT_25K:      '2011.earnings.6_yrs_after_entry.percent_greater_than_25000',
 
   PROGRAM_PERCENTAGE:   '2013.academics.program_percentage',
+  PROGRAM_OFFERED:      '2013.academics.program.degree',
 
   PART_TIME_SHARE:      '2013.student.part_time_share',
   FEMALE_SHARE:         '2013.student.demographics.female_share',
@@ -1211,10 +1212,9 @@ picc.form.prepareParams = (function() {
     },
 
     major: function(query, value, key) {
-      // FIXME: this only supports a single program
       if (value) {
-        var k = [fields.PROGRAM_PERCENTAGE, value].join('.');
-        query[k + '__range'] = '0.00001..';
+        var k = [fields.PROGRAM_OFFERED, value].join('.');
+        query[k + '__range'] = '1..';
         delete query[key];
       }
     },
