@@ -59,7 +59,7 @@
           <multi-select>
             <div class="u-group_inline u-group_inline-left">
               <select name="state" class="select-state">
-                <option value=""></option>
+                <option value="">Any</option>
                 {% for state in site.data.states|sort('name') %}
                 <option value="{{ state.abbr }}">{{ state.name }}</option>
                 {% endfor %}
@@ -86,7 +86,7 @@
           <multi-select>
             <div class="u-group_inline u-group_inline-left">
               <select name="region" class="select-region">
-                <option value=""></option>
+                <option value="">Any</option>
                 {% for region in site.data.regions|sort('name') %}
                 <option value="{{ region.id }}" data-states="{{ region.states }}">{{ region.name }}</option>
                 {% endfor %}
