@@ -1,4 +1,9 @@
-(function(exports) {
+// tagalong!
+var tagalong = require('tagalong');
+var formdb = require('formdb');
+var querystring = require('querystring');
+
+module.exports = function search() {
 
   var resultsRoot = document.querySelector('.search-results');
   var form = new formdb.Form('#search-form');
@@ -37,7 +42,7 @@
             this.lower = value[0];
             this.upper = value[1];
           } else {
-            console.warn('bad slider input value:', value);
+            // console.warn('bad slider input value:', value);
           }
         }
       })
@@ -320,4 +325,4 @@
     message.textContent = String(error) || 'There was an unexpected API error.';
   }
 
-})(this);
+};

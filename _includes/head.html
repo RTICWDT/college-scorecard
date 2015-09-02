@@ -26,6 +26,10 @@
   {% for script in site.scripts %}
   <script src="{{ site.baseurl }}/js/{{ script }}"></script>
   {% endfor %}
+
+  <!-- JavaScript configuration with site variables -->
+  {% include js-config.html %}
+
   {% if page.scripts %}<!-- page scripts -->
   {% for script in page.scripts %}
   <script src="{{ site.baseurl }}/js/{{ script }}"></script>

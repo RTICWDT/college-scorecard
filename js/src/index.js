@@ -1,4 +1,6 @@
-(function(exports) {
+var formdb = require('formdb');
+
+module.exports = function index() {
 
   var form = new formdb.Form('#search-form');
   picc.form.minifyQueryString(form);
@@ -14,4 +16,4 @@
     }
   });
 
-})(this);
+};
