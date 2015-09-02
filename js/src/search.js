@@ -66,6 +66,9 @@ module.exports = function search() {
     incremental = true;
   });
 
+  // update the distance field's disabled flag when zip changes
+  form.on('change:zip', updateDistanceDisabled);
+
   form.on('change:_drawer', function(value, e) {
     submit = false;
   });
@@ -108,6 +111,8 @@ module.exports = function search() {
       submit = true;
       return;
     }
+
+    updateDistanceDisabled();
 
     var params = form.getData();
     for (var k in params) {
@@ -391,6 +396,13 @@ module.exports = function search() {
         // console.warn('bad slider input value:', value);
       }
     }
+  }
+
+  function updateDistanceDisabled() {
+    var zip = form.get('zip');
+    var dist = form.getInputsByName('distance')[0];
+    if (!dist) return;
+    dist.disabled = !zip;
   }
 
 };
