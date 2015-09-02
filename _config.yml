@@ -11,7 +11,7 @@ baseurl: /college-choice
 markdown: kramdown
 
 sass:
-  style: nested
+  style: compressed
 
 # common site scripts, relative to `{{ site.baseurl }}/js/`
 scripts:
