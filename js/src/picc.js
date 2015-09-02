@@ -1249,6 +1249,12 @@ picc.form.prepareParams = (function() {
 
     var query = picc.data.extend({}, params);
 
+    // ignore distance if no zip is provided
+    if (query.distance && !query.zip) {
+      console.warn('distance provided without zip; ignoring', query);
+      delete query.distance;
+    }
+
     for (var key in query) {
       var v = query[key];
 
