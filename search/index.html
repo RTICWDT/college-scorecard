@@ -8,9 +8,86 @@ permalink: /search/
   autocomplete="false"
   action="{{ page.permalink }}" method="GET" class="drawer">
 
+  <div class="search-toggles container">
+
+    <aria-accordion id="filters">
+
+      <legend>Filter</legend>
+      <h1 class="search_category">
+        <a aria-expanded="false" aria-controls="filter-content">
+          <i class="fa fa-filter"></i> Filter
+        </a>
+      </h1>
+      <div id="filter-content" aria-hidden="true" class="accordion-div">
+
+        <label for="major-type">Choose a degree
+          <select id="major-type" name="degree">
+            <option value="">Any</option>
+            <option value="a">Associates</option>
+            <option value="b">Bachelors</option>
+          </select>
+        </label>
+
+      </div>
+
+      <input type="submit" class="sr-only">
+
+    </aria-accordion>
+
+    <aria-accordion id="search-edit">
+
+      <legend>Edit Search</legend>
+      <h1 class="search_category">
+        <a aria-expanded="false" aria-controls="search-content">
+          <i class="fa fa-search"></i> Edit Search
+        </a>
+      </h1>
+      <div id="search-content" aria-hidden="true" class="accordion-div">
+
+        <label for="major-type">Choose a degree
+          <select id="major-type" name="degree">
+            <option value="">Any</option>
+            <option value="a">Associates</option>
+            <option value="b">Bachelors</option>
+          </select>
+        </label>
+
+      </div>
+
+      <input type="submit" class="sr-only">
+
+    </aria-accordion>
+
+    <aria-accordion id="sort">
+
+      <legend>Sort</legend>
+      <h1 class="search_category">
+        <a aria-expanded="false" aria-controls="sort-content">
+          <i class="fa fa-sort"></i> Sort
+        </a>
+      </h1>
+      <div id="sort-content" aria-hidden="true" class="accordion-div">
+
+        <label for="major-type">Choose a degree
+          <select id="major-type" name="degree">
+            <option value="">Any</option>
+            <option value="a">Associates</option>
+            <option value="b">Bachelors</option>
+          </select>
+        </label>
+
+      </div>
+
+      <input type="submit" class="sr-only">
+
+    </aria-accordion>
+
+
+  </div>
+
   <input type="checkbox" id="drawer-toggle" name="_drawer">
   <label for="drawer-toggle" id="drawer-toggle-label"></label>
-  <header><span>Filter and edit your search</span></header>
+  <header><span>Filter and Edit Your Search</span></header>
 
   <nav id="drawer">
 

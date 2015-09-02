@@ -31,8 +31,8 @@ $drawer-width-medium_up: 30%;
   }
 
   header {
-    @include font-size(0.8);
-    background: #c8c8c8;
+    @include font-size(1);
+    background: $white;
     color: $black;
     left: 0;
     line-height: 30px;
