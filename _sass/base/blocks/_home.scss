@@ -271,7 +271,7 @@
 .search_form-submit {
   @extend .centered;
   border-top: $thick-border-size solid $base-border-color;
-  padding-top: $base-padding-large;
+  padding-top: $base-padding-extra;
   padding-right: 0;
   padding-left: 0;
   text-align: center;
@@ -283,16 +283,17 @@
 
 .search-button {
   margin-bottom: $base-padding-extra;
+  width: 80% !important;
+
+  @include respond-to(medium-up) {
+    width: 300px !important;
+  }
 }
 
 .advanced_search {
   border-top: none;
   margin-bottom: 0;
   padding-bottom: 0;
-
-  // aria-accordion {
-  //   min-height: 0;
-  // }
 
   aria-accordion .advanced_search-control {
       display: inline;

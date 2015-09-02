@@ -199,8 +199,76 @@
 
   </fieldset>
 
+  <fieldset>
+
+    <aria-accordion class="container">
+
+      <legend>Type</legend>
+      <h1 class="search_category">
+        <a aria-expanded="false" aria-controls="type-content">
+          Type
+        </a>
+      </h1>
+
+      <div id="type-content" aria-hidden="false">
+
+        <fieldset class="nested_fieldset">
+
+          <legend>Type of school</legend>
+          <h1>Type of school</h1>
+
+          <ul>
+            <li>
+              <label for="type-public" class="checkbox">
+                <input id="type-public" type="checkbox" name="control" value="public" tabindex="0">
+                <span tabindex="-1" class="checkbox-focus"></span>Public
+              </label>
+            </li>
+            <li>
+              <label for="type-private" class="checkbox">
+                <input id="type-private" type="checkbox" name="control" value="private" tabindex="0">
+                <span tabindex="-1" class="checkbox-focus"></span>Private, Not-for-Profit
+              </label>
+            </li>
+            <li>
+              <label for="type-profit" class="checkbox">
+                <input id="type-profit" type="checkbox" name="control" value="profit" tabindex="0">
+                <span tabindex="-1" class="checkbox-focus"></span>Private, For-Profit
+              </label>
+            </li>
+          </ul>
+
+        </fieldset>
+
+        <label for="affiliation">Special designation
+          <select id="affiliation" name="serving">
+            <option value="">None</option>
+            {% for designation in site.data.special_designations %}
+            <option value="{{ designation[0] }}">{{ designation[1] }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <label for="affiliation">Religious affiliation
+          <select id="affiliation" name="religious">
+            <option value="">None</option>
+            {% for row in site.data.religious_affiliations %}
+            <option value="{{ row.value }}">{{ row.label }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+      </div>
+
+      <input type="submit" class="sr-only">
+
+    </aria-accordion>
+
+  </fieldset>
+
   <div class="container search_form-submit">
 
+    <!-- Section for future advanced search features
     <fieldset class="advanced_search">
 
       <aria-accordion>
@@ -214,78 +282,13 @@
 
         <div id="advanced-content" class="advanced-content" aria-hidden="false">
 
-          <fieldset>
-
-            <aria-accordion class="container">
-
-              <legend>Advanced Search</legend>
-              <h1 class="search_category">
-                <a aria-expanded="false" aria-controls="type-content">
-                  Advanced Search
-                </a>
-              </h1>
-
-              <div id="type-content" aria-hidden="false">
-
-                <fieldset class="nested_fieldset">
-
-                  <legend>Type of school</legend>
-                  <h1>Type of school</h1>
-
-                  <ul>
-                    <li>
-                      <label for="type-public" class="checkbox">
-                        <input id="type-public" type="checkbox" name="control" value="public" tabindex="0">
-                        <span tabindex="-1" class="checkbox-focus"></span>Public
-                      </label>
-                    </li>
-                    <li>
-                      <label for="type-private" class="checkbox">
-                        <input id="type-private" type="checkbox" name="control" value="private" tabindex="0">
-                        <span tabindex="-1" class="checkbox-focus"></span>Private, Not-for-Profit
-                      </label>
-                    </li>
-                    <li>
-                      <label for="type-profit" class="checkbox">
-                        <input id="type-profit" type="checkbox" name="control" value="profit" tabindex="0">
-                        <span tabindex="-1" class="checkbox-focus"></span>Private, For-Profit
-                      </label>
-                    </li>
-                  </ul>
-
-                </fieldset>
-
-                <label for="affiliation">Special designation
-                  <select id="affiliation" name="serving">
-                    <option value="">None</option>
-                    {% for designation in site.data.special_designations %}
-                    <option value="{{ designation[0] }}">{{ designation[1] }}</option>
-                    {% endfor %}
-                  </select>
-                </label>
-
-                <label for="affiliation">Religious affiliation
-                  <select id="affiliation" name="religious">
-                    <option value="">None</option>
-                    {% for row in site.data.religious_affiliations %}
-                    <option value="{{ row.value }}">{{ row.label }}</option>
-                    {% endfor %}
-                  </select>
-                </label>
-
-              </div>
-
-            </aria-accordion>
-
-          </fieldset>
-
         </div>
 
         <input type="submit" class="sr-only">
 
       </aria-accordion>
 
-    </fieldset>
+    </fieldset> END section for future advanced search features -->
 
     <button id="search-submit" class="button button-primary search-button">
       Find Schools
