@@ -110,6 +110,12 @@ module.exports = function search() {
     }
 
     var params = form.getData();
+    for (var k in params) {
+      if (Array.isArray(params[k]) && !params[k][0]) {
+        // console.warn('ignoring empty array parameter:', k, params[k]);
+        delete params[k];
+      }
+    }
 
     // don't submit the _drawer parameter
     delete params._drawer;
@@ -351,11 +357,11 @@ module.exports = function search() {
 
   function diff(a, b) {
     if ((typeof a) !== (typeof b)) {
-      console.log('diff types:', typeof a, typeof b);
+      // console.log('diff types:', typeof a, typeof b);
       return true;
     } else if (typeof a === 'object') {
-      for (k in a) if (diff(a[k], b[k])) return console.log('diff key:', k, a, b), true;
-      for (k in b) if (diff(a[k], b[k])) return console.log('diff key:', k, a, b), true;
+      for (k in a) if (diff(a[k], b[k])) return true;
+      for (k in b) if (diff(a[k], b[k])) return true;
       return false;
     }
     return a != b;
