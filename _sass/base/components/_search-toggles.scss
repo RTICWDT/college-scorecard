@@ -22,6 +22,10 @@ $toggle-padding: 10px;
       border-top: 3px solid $black;
     }
 
+    [aria-controls]:after {
+      display: none;
+    }
+
     aria-accordion {
       width: 100%;
 
@@ -33,11 +37,11 @@ $toggle-padding: 10px;
       &[aria-expanded=true] {
         border-top: 3px solid $white;
       }
-    }
-  }
 
-  > aria-accordion [aria-controls]:after {
-    display: none;
+      [aria-controls]:after {
+        display: inline-block;
+      }
+    }
   }
 
   fieldset {
