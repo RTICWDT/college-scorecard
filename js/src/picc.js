@@ -368,9 +368,9 @@ picc.format = (function() {
       // '41': 'Rural: Fringe',
       // '42': 'Rural: Distant',
       // '43': 'Rural: Remote'
-      '11': 'Urban',
-      '12': 'Urban',
-      '13': 'Urban',
+      '11': 'City',
+      '12': 'City',
+      '13': 'City',
       '21': 'Suburban',
       '22': 'Suburban',
       '23': 'Suburban',
