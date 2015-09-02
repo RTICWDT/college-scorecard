@@ -55,7 +55,7 @@ permalink: /search/
         </a>
       </h1>
       <div id="sort-content" aria-hidden="true" class="toggle-content">
-        
+
         <label for="select-sort">Sort by:</label>
         <select id="select-sort" name="sort">
           <option selected value="advantage:desc">Increase in Earnings</option>
@@ -115,13 +115,13 @@ permalink: /search/
 
               <div>
 
-                <div class="u-group_inline">
+                <div class="pagination show-loaded">
+                  <input type="hidden" name="page">
 
-                  <!-- <div class="u-group_inline-right"> -->
-                    <!--  -->
-
-                  <!-- </div> -->
-
+                  <ol data-bind="pages">
+                    Page:
+                    <li><a class="select-page" data-bind="link">1</a></li>
+                  </ol>
                 </div>
 
               </div>
@@ -129,14 +129,7 @@ permalink: /search/
 
           </div>
 
-          <div class="pagination container show-loaded">
-            <input type="hidden" name="page">
 
-            <ol data-bind="pages">
-              Page:
-              <li><a class="select-page" data-bind="link">1</a></li>
-            </ol>
-          </div>
 
           <section class="section section-card_container-results show-loaded">
 
