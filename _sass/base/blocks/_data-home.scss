@@ -185,6 +185,7 @@
 .data-docs-api {
   li a {
     color: $mid-blue;
+     word-wrap: break-word;  
 
     &:hover,
     &:focus {
@@ -198,6 +199,10 @@
     letter-spacing: 1px;
     padding-bottom: $base-padding-lite;
     text-transform: none;
+  }
+
+  h4 {
+    font-weight: $weight-bold;
   }
 
   span {
