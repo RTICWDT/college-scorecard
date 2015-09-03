@@ -71,7 +71,12 @@
     padding-top: 0;
   }
 
-  .legend-nat_average {
+  figure.meter {
+    margin-bottom: 0;
+  }
+
+  .legend-wrapper + .button {
+    margin-top: $base-padding;
   }
 
   .school-heading {
@@ -228,8 +233,6 @@
     ul {
       padding-bottom: $base-padding;
     }
-
-
   }
 
   .fact_number {
@@ -255,9 +258,6 @@
 
   .button-primary {
     width: 100%;
-    // @include respond-to(tiny-up) {
-    //   width: 300px;
-    // }
   }
 
   .school-two_col {
@@ -345,7 +345,6 @@
     padding: 13px;
     height: 102px;
     width: 102px;
-
   }
 
   .group_inline-right {
@@ -358,8 +357,10 @@
 }
 
 .school-callout {
+  @include span-columns(5 fo 5);
   background-color: $sky-blue-light;
   border-radius: $base-border-radius;
+  margin-top: $base-padding;
   padding-top: $base-padding;
   padding-bottom: $base-padding;
 }
