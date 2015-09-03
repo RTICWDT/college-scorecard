@@ -1,39 +1,39 @@
 key,label
 agriculture,"Agriculture, Agriculture Operations, and Related Sciences"
-resources,"Natural Resources and Conservation"
-architecture,"Architecture and Related Services"
+architecture,Architecture and Related Services
 ethnic_cultural_gender,"Area, Ethnic, Cultural, Gender, and Group Studies"
-communication,"Communication, Journalism, and Related Programs"
-communications_technology,"Communications Technologies/Technicians and Support Services"
-computer,"Computer and Information Sciences and Support Services"
-personal_culinary,"Personal and Culinary Services"
-education,"Education"
-engineering,"Engineering"
-engineering_technology,"Engineering Technologies and Engineering-Related Fields"
-language,"Foreign Languages, Literatures, and Linguistics"
-family_consumer_science,"Family and Consumer Sciences/Human Sciences"
-legal,"Legal Professions and Studies"
-english,"English Language and Literature/Letters"
-humanities,"Liberal Arts and Sciences, General Studies and Humanities"
-library,"Library Science"
-biological,"Biological and Biomedical Sciences"
-mathematics,"Mathematics and Statistics"
-military,"Military Technologies and Applied Sciences"
-multidiscipline,"Multi/Interdisciplinary Studies"
-parks_recreation_fitness,"Parks, Recreation, Leisure, and Fitness Studies"
-philosophy_religious,"Philosophy and Religious Studies"
-theology_religious_vocation,"Theology and Religious Vocations"
-physical_science,"Physical Sciences"
-science_technology,"Science Technologies/Technicians"
-psychology,"Psychology"
-security_law_enforcement,"Homeland Security, Law Enforcement, Firefighting and Related Protective Services"
-public_administration_social_service,"Public Administration and Social Service Professions"
-social_science,"Social Sciences"
-construction,"Construction Trades"
-mechanic_repair_technology,"Mechanic and Repair Technologies/Technicians"
-precision_production,"Precision Production"
-transportation,"Transportation and Materials Moving"
-visual_performing,"Visual and Performing Arts"
-health,"Health Professions and Related Programs"
+biological,Biological and Biomedical Sciences
 business_marketing,"Business, Management, Marketing, and Related Support Services"
-history,"History"
+communication,"Communication, Journalism, and Related Programs"
+communications_technology,Communications Technologies/Technicians and Support Services
+computer,Computer and Information Sciences and Support Services
+construction,Construction Trades
+education,Education
+engineering,Engineering
+engineering_technology,Engineering Technologies and Engineering-Related Fields
+english,English Language and Literature/Letters
+family_consumer_science,Family and Consumer Sciences/Human Sciences
+language,"Foreign Languages, Literatures, and Linguistics"
+health,Health Professions and Related Programs
+history,History
+security_law_enforcement,"Homeland Security, Law Enforcement, Firefighting and Related Protective Services"
+legal,Legal Professions and Studies
+humanities,"Liberal Arts and Sciences, General Studies and Humanities"
+library,Library Science
+mathematics,Mathematics and Statistics
+mechanic_repair_technology,Mechanic and Repair Technologies/Technicians
+military,Military Technologies and Applied Sciences
+multidiscipline,Multi/Interdisciplinary Studies
+resources,Natural Resources and Conservation
+parks_recreation_fitness,"Parks, Recreation, Leisure, and Fitness Studies"
+personal_culinary,Personal and Culinary Services
+philosophy_religious,Philosophy and Religious Studies
+physical_science,Physical Sciences
+precision_production,Precision Production
+psychology,Psychology
+public_administration_social_service,Public Administration and Social Service Professions
+science_technology,Science Technologies/Technicians
+social_science,Social Sciences
+theology_religious_vocation,Theology and Religious Vocations
+transportation,Transportation and Materials Moving
+visual_performing,Visual and Performing Arts
