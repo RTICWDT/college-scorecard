@@ -86,7 +86,7 @@
       font-weight: normal;
     }
 
-    @include respond-to(medium-up) {
+    @include respond-to(large-up) {
       @include span-columns(7 of 12);
     }
   }
@@ -135,7 +135,7 @@
     border-radius: $base-border-radius;
     height: 280px;
     margin-top: $base-padding;
-    @include respond-to(medium-up) {
+    @include respond-to(large-up) {
       @include span-columns(5 of 12);
       @include omega();
       margin-top: 0;
@@ -156,14 +156,52 @@
 
   .school-meters {
     @include span-columns(12 of 12);
-    border-top : $regular-border-size solid $base-border-color;
+    border-top: $regular-border-size solid $base-border-color;
     margin-top: $base-padding;
     padding-top: $base-padding;
     text-align: center;
 
+    figure.meter {
+      @include span-columns(5 of 15);
+      @include omega(3n);
+      margin: 2px;
+    }
+
+    figcaption {
+      @include font-size(0.75);
+    }
+
+    h2.figure-heading {
+      @include font-size(0.75);
+      &.constrain_width {
+        margin-left: -5%;
+        width: 110%;
+      }
+    }
+
     // don't show meter labels for top-level stats
     picc-meter .label {
       visibility: hidden;
+    }
+
+    @include respond-to(tiny-up) {
+      figcaption {
+        @include font-size(1);
+      }
+
+      h2.figure-heading {
+        @include font-size(1);
+      }
+    }
+
+    @include respond-to(medium-up) {
+      figcaption {
+        @include font-size($h1);
+      }
+
+      h2.figure-heading {
+        @include font-size($h1);
+      }
     }
   }
 
