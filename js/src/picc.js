@@ -807,6 +807,21 @@ picc.school.directives = (function() {
       }
     },
 
+    response_link: {
+      '@href': function(d) {
+        var href = format.href(fields.SCHOOL_URL)(d);
+        if (href) {
+          var suffix = '/CollegeScorecard';
+          if (href.substr(-1) === '/') {
+            href += suffix.substr(1);
+          } else {
+            href += suffix;
+          }
+        }
+        return '';
+      }
+    },
+
     name:           access(fields.NAME),
     city:           access(fields.CITY),
     state:          access(fields.STATE),
