@@ -127,9 +127,6 @@ module.exports = function search() {
 
     var query = picc.form.prepareParams(params);
 
-    // only get open schools
-    query[picc.fields.OPERATING] = 1;
-
     // only query the fields that we care about
     query.fields = [
       // we need the id to link it
