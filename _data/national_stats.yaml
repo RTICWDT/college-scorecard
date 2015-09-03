@@ -1,6 +1,6 @@
 net_price:
   min: -19360
-  max: 87414
+  max: 46000
   median: 16789
   average_range: [12259, 20185]
 net_price_public:
@@ -38,17 +38,17 @@ completion_rate_4:
 
 median_earnings:
   min: 0
-  max: 166200
+  max: 100000
   median: 34343
   average_range: [31600, 39700]
 median_earnings_l4:
   min: 0
-  max: 166200
+  max: 100000
   median: 31080
   average_range: [27700, 33000]
 median_earnings_4:
   min: 0
-  max: 166200
+  max: 100000
   median: 42051
   average_range: [37100, 40700]
 
