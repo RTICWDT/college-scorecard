@@ -281,25 +281,26 @@ module.exports = function search() {
         }
       });
 
-      var pageLinks = d3.selectAll('a.select-page')
-        .on('click', function() {
-          d3.event.preventDefault();
+      var pageLinks = d3.select(paginator)
+        .selectAll('a.select-page')
+          .on('click', function() {
+            d3.event.preventDefault();
 
-          var _page = this.getAttribute('data-page');
-          if (_page === 'false') return;
+            var _page = this.getAttribute('data-page');
+            if (_page === 'false') return;
 
-          pageLinks.each(function() {
-            var p = this.getAttribute('data-page');
-            var selected = p == _page;
-            this.parentNode.classList
-              .toggle('pagination-page_selected', selected);
-            // console.log('selected?', p, page, selected, '->', this.parentNode);
+            pageLinks.each(function() {
+              var p = this.getAttribute('data-page');
+              var selected = p == _page;
+              this.parentNode.classList
+                .toggle('pagination-page_selected', selected);
+              // console.log('selected?', p, page, selected, '->', this.parentNode);
+            });
+
+            form.set('page', _page);
+            incremental = true;
+            change();
           });
-
-          form.set('page', _page);
-          incremental = true;
-          change();
-        });
 
       var resultsList = resultsRoot.querySelector('.schools-list');
       tagalong(resultsList, data.results, picc.school.directives);
