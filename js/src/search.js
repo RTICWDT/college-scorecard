@@ -15,6 +15,7 @@ module.exports = function search() {
 
   var previousParams = query || {};
   var poppingState = false;
+  var ready = false;
 
   // "incremental" updates will only hide the list of schools, and
   // not any of the other elements (results total, sort, pages)
@@ -32,6 +33,7 @@ module.exports = function search() {
   var sliders = d3.selectAll('picc-slider');
 
   picc.ready(function() {
+    ready = true;
 
     // console.warn('setting form data:', query);
     form.setData(query);
@@ -107,12 +109,22 @@ module.exports = function search() {
   });
 
   function onChange() {
+    // XXX somehow, Firefox fires a change event before picc.ready() does its
+    // callback. This guards against any browser that does this from
+    // overwriting the query with default form data.
+    if (!ready) {
+      console.warn('onChange() before ready!');
+      return;
+    }
+
+    // XXX the submit flag is set to false when the drawer toggles.
     if (!submit) {
       // console.warn('not submitting this time!');
       submit = true;
       return;
     }
 
+    // always update the distance disabled state
     updateDistanceDisabled();
 
     var params = form.getData();
@@ -162,14 +174,14 @@ module.exports = function search() {
       .replace(/%3A/g, ':');
 
     if (poppingState) {
-      console.info('popping state');
+      // console.info('popping state');
       history.replaceState(params, 'search', qs);
-    } else if (location.search && diff(previousParams, params)) {
-      console.info('push state:', qs, previousParams, '->', params);
+    } else if (diff(previousParams, params)) {
+      // console.info('push state:', qs, previousParams, '->', params);
       // update the URL
       history.pushState(params, 'search', qs);
     } else {
-      console.info('replace state:', qs);
+      // console.info('replace state:', qs);
       history.replaceState(params, 'search', qs);
     }
 
