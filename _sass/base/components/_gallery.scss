@@ -1,8 +1,13 @@
 .main-gallery {
-  height: 340px;
+  height: 460px;
   margin-top: $base-padding-large;
-  margin-bottom: $base-padding-large;
+  margin-bottom: $base-padding-extra;
   position: relative;
+
+  @include respond-to(medium-up) {
+    height: 340px;
+    margin-bottom: $base-padding-large;
+  }
 }
 
 .gallery-cell {

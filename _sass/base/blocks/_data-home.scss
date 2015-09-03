@@ -2,8 +2,11 @@
 //=============================
 
 .data-home-rule {
-  border-right: ($regular-border-size * 2) solid $light-gray;
   margin-right: $base-padding;
+
+  @include respond-to(medium-up) {
+    border-right: ($regular-border-size * 2) solid $light-gray;
+  }
 }
 
 .data-home-intro-convo-right {
@@ -185,7 +188,7 @@
 .data-docs-api {
   li a {
     color: $mid-blue;
-     word-wrap: break-word;  
+     word-wrap: break-word;
 
     &:hover,
     &:focus {
