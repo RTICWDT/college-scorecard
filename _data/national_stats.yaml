@@ -1,6 +1,6 @@
 net_price:
   min: -19360
-  max: 46000
+  max: 40000
   median: 16789
   average_range: [12259, 20185]
 net_price_public:
