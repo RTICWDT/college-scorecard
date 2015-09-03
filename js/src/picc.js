@@ -1152,7 +1152,6 @@ picc.form.prepareParams = (function() {
     },
 
     state:                fields.STATE,
-    online:               fields.ONLINE_ONLY,
 
     zip: function(query, value, key) {
       // if there is no distance query, use the fully-qualified zip code
@@ -1257,6 +1256,15 @@ picc.form.prepareParams = (function() {
       console.warn('distance provided without zip; ignoring', query);
       delete query.distance;
     }
+
+    // if "online" is truthy, then we should *include* online schools,
+    // which means not filtering on that field
+    if (query.online) {
+    } else {
+      // otherwise (if query.online is falsy), filter by fields.ONLINE_ONLY=0
+      query[fields.ONLINE_ONLY] = 0;
+    }
+    delete query.online;
 
     for (var key in query) {
       var v = query[key];
