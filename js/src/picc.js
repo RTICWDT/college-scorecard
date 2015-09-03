@@ -1257,6 +1257,12 @@ picc.form.prepareParams = (function() {
       delete query.distance;
     }
 
+    // by default, filter out schools for which school.size is null
+    // with a numeric range query
+    if (!query.size) {
+      query[fields.SIZE + '__range'] = '0..';
+    }
+
     // if "online" is truthy, then we should *include* online schools,
     // which means not filtering on that field
     if (query.online) {
