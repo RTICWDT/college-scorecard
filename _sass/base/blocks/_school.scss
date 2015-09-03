@@ -71,6 +71,14 @@
     padding-top: 0;
   }
 
+  .legend-nat_average {
+    //@include span-columns(12);
+    width: 150px;
+    @include shift(4);
+    //margin-left: 38%;
+    //text-align: center;
+  }
+
   .school-heading {
     h1 {
       @include font-size($h1-huge);
