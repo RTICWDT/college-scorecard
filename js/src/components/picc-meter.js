@@ -72,25 +72,38 @@ window.PICCMeter = document.registerElement('picc-meter', {
           // prevent the bar from exceeding the height
           bar.style.setProperty('height', percent(Math.min(value, max)));
 
-          var difference;
-          // console.log('average:', this.getAttribute('average'), '->', average);
-          if (isNaN(average)) {
-            line.style.setProperty('display', 'none');
+          if (this.hasAttribute('average-range')) {
+            var range = this.getAttribute('average-range');
+            var numbers = range.split('..').map(Number);
+            if (numbers.some(isNaN)) {
+              console.warn('invalid average-range:', range, numbers);
+              classify(this, {
+                'above_average': false,
+                'below_average': false,
+                'about_average': false
+              });
+            } else {
+              var lo = numbers[0];
+              var hi = numbers[1];
+              classify(this, {
+                'above_average': value > hi,
+                'below_average': value < lo,
+                'about_average': value >= lo && value <= hi
+              });
+            }
+          } else {
             classify(this, {
               'above_average': false,
               'below_average': false,
               'about_average': false
             });
+          }
+
+          if (isNaN(average)) {
+            line.style.setProperty('display', 'none');
           } else {
-            difference = value - average;
             line.style.removeProperty('display');
-            line.style.setProperty('bottom', percent(this.average));
-            var aboutThreshold = getAttr(this, 'about-threshold', .05) * (max - min);
-            classify(this, {
-              'above_average': difference > 0,
-              'below_average': difference < 0,
-              'about_average': Math.abs(difference) <= aboutThreshold
-            });
+            line.style.setProperty('bottom', percent(average));
           }
 
         }
