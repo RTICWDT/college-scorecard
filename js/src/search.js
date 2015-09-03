@@ -8,12 +8,15 @@ module.exports = function search() {
   var resultsRoot = document.querySelector('.search-results');
   var form = new formdb.Form('#search-form');
   var query = querystring.parse(location.search.substr(1));
+  // console.info('initial query:', query);
 
   // the current outbound request
   var req;
 
   var previousParams = query || {};
   var poppingState = false;
+  var ready = false;
+  var alreadyLoaded = false;
 
   // "incremental" updates will only hide the list of schools, and
   // not any of the other elements (results total, sort, pages)
@@ -31,10 +34,10 @@ module.exports = function search() {
   var sliders = d3.selectAll('picc-slider');
 
   picc.ready(function() {
-    // console.warn('setting form data...', query);
-    // console.log('states:', form.get('state'));
+    ready = true;
+
+    // console.warn('setting form data:', query);
     form.setData(query);
-    // console.log('states:', form.getInputsByName('state'), form.get('state'));
 
     // for each of the sliders
     sliders
@@ -81,11 +84,12 @@ module.exports = function search() {
 
   // update the form on popstate
   window.addEventListener('popstate', function(e) {
+    if (!e.state) return;
 
     // copy the unset keys (as `null`) from the previous state to clear any
     // elements that aren't represented in the new state.
     var state = copyUnsetKeys(previousParams, e.state);
-    console.info('pop state:', e.state, '->', state);
+    // console.info('pop state:', e.state, '->', state);
 
     // update all of the form elements
     form.setData(state);
@@ -106,15 +110,28 @@ module.exports = function search() {
   });
 
   function onChange() {
+    // XXX somehow, Firefox fires a change event before picc.ready() does its
+    // callback. This guards against any browser that does this from
+    // overwriting the query with default form data.
+    if (!ready) {
+      console.warn('onChange() before ready!');
+      return;
+    }
+
+    // XXX the submit flag is set to false when the drawer toggles.
     if (!submit) {
       // console.warn('not submitting this time!');
       submit = true;
       return;
     }
 
+    // always update the distance disabled state
     updateDistanceDisabled();
 
     var params = form.getData();
+    // console.info('form data:', params);
+
+    // unset parameters that are "empty" arrays (with a single, falsy value)
     for (var k in params) {
       if (Array.isArray(params[k]) && !params[k][0]) {
         // console.warn('ignoring empty array parameter:', k, params[k]);
@@ -126,9 +143,6 @@ module.exports = function search() {
     delete params._drawer;
 
     var query = picc.form.prepareParams(params);
-
-    // only get open schools
-    query[picc.fields.OPERATING] = 1;
 
     // only query the fields that we care about
     query.fields = [
@@ -161,18 +175,19 @@ module.exports = function search() {
       .replace(/%3A/g, ':');
 
     if (poppingState) {
-      console.info('popping state');
-      history.replaceState(params, 'search', qs);
-    } else if (location.search && diff(previousParams, params)) {
-      console.info('push state:', qs, previousParams, '->', params);
+      // console.info('popping state');
+      // history.replaceState(params, 'search', qs);
+    } else if (alreadyLoaded && diff(previousParams, params)) {
+      // console.info('push state:', qs, previousParams, '->', params);
       // update the URL
       history.pushState(params, 'search', qs);
     } else {
-      console.info('replace state:', qs);
+      // console.info('replace state:', qs);
       history.replaceState(params, 'search', qs);
     }
 
     previousParams = params;
+    alreadyLoaded = true;
 
     d3.select('a.results-share')
       .attr('href', function() {

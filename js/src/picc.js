@@ -1249,6 +1249,9 @@ picc.form.prepareParams = (function() {
 
     var query = picc.data.extend({}, params);
 
+    // only get open schools
+    query[fields.OPERATING] = 1;
+
     // ignore distance if no zip is provided
     if (query.distance && !query.zip) {
       console.warn('distance provided without zip; ignoring', query);
