@@ -16,6 +16,7 @@ module.exports = function search() {
   var previousParams = query || {};
   var poppingState = false;
   var ready = false;
+  var alreadyLoaded = false;
 
   // "incremental" updates will only hide the list of schools, and
   // not any of the other elements (results total, sort, pages)
@@ -175,8 +176,8 @@ module.exports = function search() {
 
     if (poppingState) {
       // console.info('popping state');
-      history.replaceState(params, 'search', qs);
-    } else if (diff(previousParams, params)) {
+      // history.replaceState(params, 'search', qs);
+    } else if (alreadyLoaded && diff(previousParams, params)) {
       // console.info('push state:', qs, previousParams, '->', params);
       // update the URL
       history.pushState(params, 'search', qs);
@@ -186,6 +187,7 @@ module.exports = function search() {
     }
 
     previousParams = params;
+    alreadyLoaded = true;
 
     d3.select('a.results-share')
       .attr('href', function() {
