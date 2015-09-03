@@ -81,6 +81,7 @@ module.exports = function search() {
 
   // update the form on popstate
   window.addEventListener('popstate', function(e) {
+    if (!e.state) return;
 
     // copy the unset keys (as `null`) from the previous state to clear any
     // elements that aren't represented in the new state.
