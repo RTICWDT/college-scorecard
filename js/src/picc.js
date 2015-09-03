@@ -1258,6 +1258,10 @@ picc.form.prepareParams = (function() {
       delete query.distance;
     }
 
+    if (!query.size) {
+      query[fields.SIZE + '__range'] = '0..';
+    }
+
     for (var key in query) {
       var v = query[key];
 
