@@ -8,6 +8,7 @@ module.exports = function search() {
   var resultsRoot = document.querySelector('.search-results');
   var form = new formdb.Form('#search-form');
   var query = querystring.parse(location.search.substr(1));
+  // console.info('initial query:', query);
 
   // the current outbound request
   var req;
@@ -31,10 +32,9 @@ module.exports = function search() {
   var sliders = d3.selectAll('picc-slider');
 
   picc.ready(function() {
-    // console.warn('setting form data...', query);
-    // console.log('states:', form.get('state'));
+
+    // console.warn('setting form data:', query);
     form.setData(query);
-    // console.log('states:', form.getInputsByName('state'), form.get('state'));
 
     // for each of the sliders
     sliders
@@ -86,7 +86,7 @@ module.exports = function search() {
     // copy the unset keys (as `null`) from the previous state to clear any
     // elements that aren't represented in the new state.
     var state = copyUnsetKeys(previousParams, e.state);
-    console.info('pop state:', e.state, '->', state);
+    // console.info('pop state:', e.state, '->', state);
 
     // update all of the form elements
     form.setData(state);
@@ -116,6 +116,9 @@ module.exports = function search() {
     updateDistanceDisabled();
 
     var params = form.getData();
+    // console.info('form data:', params);
+
+    // unset parameters that are "empty" arrays (with a single, falsy value)
     for (var k in params) {
       if (Array.isArray(params[k]) && !params[k][0]) {
         // console.warn('ignoring empty array parameter:', k, params[k]);
