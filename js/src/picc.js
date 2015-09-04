@@ -809,6 +809,7 @@ picc.school.directives = (function() {
           } else {
             href += suffix;
           }
+          return href;
         }
         return '';
       }
