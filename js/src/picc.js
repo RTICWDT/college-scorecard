@@ -671,6 +671,11 @@ picc.access.specialDesignations = function(d) {
     designations.push(SPECIAL_DESIGNATIONS.men_only);
   }
 
+  var religious = picc.access(picc.fields.RELIGIOUS)(d);
+  if (religious in picc.RELIGIOUS_AFFILIATIONS_BY_NUMBER) {
+    designations.push(picc.RELIGIOUS_AFFILIATIONS_BY_NUMBER[religious]);
+  }
+
   var minorityServing = picc.access(picc.fields.MINORITY_SERVING)(d);
   if (minorityServing) {
     for (var key in SPECIAL_DESIGNATIONS) {
