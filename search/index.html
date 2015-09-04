@@ -100,7 +100,7 @@ permalink: /search/
 
           </div>
 
-          <div class="pagination container show-loaded">
+          <div class="pagination container show-loaded show-incremental">
             <input type="hidden" name="page">
 
             <ol data-bind="pages">
@@ -109,7 +109,7 @@ permalink: /search/
             </ol>
           </div>
 
-          <section class="section section-card_container-results show-loaded">
+          <section class="section section-card_container-results show-loaded fade-incremental">
 
             <div class="results-main-schools schools-list container" data-bind="results">
 
@@ -211,14 +211,9 @@ permalink: /search/
 
           </section>
 
-          <!-- <div class="pagination container show-loaded">
-            <input type="hidden" name="page">
-
-            <ol data-bind="pages">
-              Page:
-              <li><a class="select-page" data-bind="link">1</a></li>
-            </ol>
-          </div> -->
+          <div class="pagination pagination_bottom container show-loaded">
+            <!-- this gets filled in with JavaScript -->
+          </div>
 
         </div>
 
