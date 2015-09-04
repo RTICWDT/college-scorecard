@@ -641,26 +641,13 @@ picc.access.partTimeShare = picc.access.composed(
   picc.fields.PART_TIME_SHARE
 );
 
-picc.access.retentionRate = function(d) {
-  var retention = picc.access.composed(
-    picc.fields.RETENTION_RATE,
-    picc.access.yearDesignation
-  )(d);
-  if (!retention) return null;
-
-  var size = picc.access.size(d);
-  if (!size) return null;
-
-  var ptShare = picc.access.partTimeShare(d);
-  if (ptShare === null) return null;
-
-  var pt = size * ptShare * retention.part_time;
-  var ft = (size - size * ptShare) * retention.full_time;
-  if (isNaN(pt) || isNaN(ft)) return null;
-
-  // console.log('retention:', retention, [pt, ft], 'size:', size);
-  return (pt + ft) / size;
-};
+// only use full-time retention rate, branching on year designation
+// (`retetion
+picc.access.retentionRate = picc.access.composed(
+  picc.fields.RETENTION_RATE,
+  picc.access.yearDesignation,
+  'full_time'
+);
 
 picc.access.size = picc.access.composed(
   picc.fields.SIZE
