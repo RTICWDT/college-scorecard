@@ -118,18 +118,23 @@ $toggle-padding: 15px;
 
   .search_form-submit {
     border-top: $thin-border-size solid $mid-gray;
-    padding-top: $base-padding-large;
+    padding-top: $base-padding;
+
+    @include respond-to(small-up) {
+      padding-top: $base-padding-large;
+    }
   }
 
   .search-button {
     @include font-size(0.75);
     height: 45px;
     letter-spacing: 2px;
-    margin-bottom: ($base-padding-lite + 0.3);
+    margin-bottom: ($base-padding-lite - 0.4);
 
     @include respond-to(small-up) {
       @include font-size($h4);
       height: 55px;
+      margin-bottom: ($base-padding-lite + 0.3);
     }
   }
 
