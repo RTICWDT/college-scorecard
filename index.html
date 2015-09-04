@@ -1,15 +1,10 @@
 ---
 layout: default
-scripts:
-  - vendor/formdb.min.js
-  - components/combo-box.js
-body_scripts:
-  - index.js
 ---
-
 
 <!-- background image -->
 <div class="home-splash"></div>
+
 <!-- search and -->
 <!-- where to start -->
 <section class="search_form">
@@ -22,9 +17,9 @@ body_scripts:
 
     <div class="container search-form-intro">
 
-      <legend>Find Schools By:</legend>
-      <h1 class="large_heading">Find Schools By:</h1>
-      <p>Enter criteria that is important to you</p>
+      <legend>Find Schools</legend>
+      <h1 class="large_heading">Find Schools</h1>
+      <p>Compare schools now</p>
 
     </div>
 
@@ -62,7 +57,7 @@ body_scripts:
 
       <ul>
         <li>
-          <img src="{{ site.baseurl }}/img/application.svg" alt="Application">
+          <img src="{{ site.baseurl }}/img/money.svg" alt="Dollar bills">
           <div>
             On average, college graduates earn
             <strong>$1 million</strong>
@@ -82,9 +77,9 @@ body_scripts:
         <li>
           <img src="{{ site.baseurl }}/img/cap.svg" alt="Graduation cap">
           Did you know that
-          <strong>60%</strong>
+          <strong>30%</strong>
           <strong>of college graduates</strong>
-          started college at <span>age 24 or older</span>.
+          started college at <span>age 25 or older</span>.
         </li>
       </ul>
 
@@ -151,7 +146,7 @@ body_scripts:
               <a href="https://fafsa.ed.gov/FAFSA/app/f4cForm" class="button button-outline" target="_blank">
                 Estimate Your Aid</a>
               <a href="http://www.consumerfinance.gov/paying-for-college/compare-financial-aid-and-college-cost/" class="button button-outline" target="_blank">
-                Evaluate Aid Offers</a>
+                Compare Aid Packages</a>
               <a href=" https://department-of-veterans-affairs.github.io/gi-bill-comparison-tool/" class="button button-outline" target="_blank">
                 Calculate GI Bill Benefits</a>
 
@@ -187,3 +182,7 @@ body_scripts:
 
   </section>
 </div> -->
+
+<script>
+  picc.pages.index();
+</script>

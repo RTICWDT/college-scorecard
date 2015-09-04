@@ -1,9 +1,10 @@
-(function(exports) {
+var tagalong = require('tagalong');
 
-  var id = getSchoolId();
+module.exports = function school() {
 
   var loadable = d3.select('.loadable');
 
+  var id = getSchoolId();
   if (!id) {
     loadable.classed('js-error', true);
     return showError(picc.errors.NO_SCHOOL_ID);
@@ -211,8 +212,8 @@
       })
       .addTo(map);
 
-    marker.bindPopup(school.name);
+    marker.bindPopup(school.school.name);
     return map;
   }
 
-})(this);
+};

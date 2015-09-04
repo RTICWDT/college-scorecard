@@ -2,27 +2,16 @@
 title: Search
 layout: default
 permalink: /search/
-scripts:
-  - components/combo-box.js
-  - components/picc-slider.js
-  - vendor/formdb.min.js
-  - vendor/tagalong.min.js
-body_scripts:
-  - search.js
 ---
-
-{% assign show_search_filters = true %}
-{% assign search_form_nested = true %}
 
 <form id="search-form" is="search-form"
   autocomplete="false"
   action="{{ page.permalink }}" method="GET" class="drawer">
 
-
-
-  <input type="checkbox" id="drawer-toggle">
+  <input type="checkbox" id="drawer-toggle" name="_drawer">
   <label for="drawer-toggle" id="drawer-toggle-label"></label>
   <header><span>Filter and edit your search</span></header>
+
   <nav id="drawer">
 
     <div>
@@ -93,7 +82,7 @@ body_scripts:
                   <!-- <div class="u-group_inline-right"> -->
                     <label for="select-sort">Sort by:</label>
                     <select id="select-sort" name="sort">
-                      <option selected value="advantage:desc">Exceeds H.S. Only</option>
+                      <option selected value="advantage:desc">Increase in Earnings</option>
                       <option value="avg_net_price:asc">Actual Cost</option>
                       <option value="completion_rate:desc">Graduation Rate</option>
                       <option value="salary:desc">Salary After School</option>
@@ -111,7 +100,7 @@ body_scripts:
 
           </div>
 
-          <div class="pagination container show-loaded">
+          <div class="pagination container show-loaded show-incremental">
             <input type="hidden" name="page">
 
             <ol data-bind="pages">
@@ -120,7 +109,7 @@ body_scripts:
             </ol>
           </div>
 
-          <section class="section section-card_container-results show-loaded">
+          <section class="section section-card_container-results show-loaded fade-incremental">
 
             <div class="results-main-schools schools-list container" data-bind="results">
 
@@ -159,7 +148,7 @@ body_scripts:
                   <figure class="meter">
                     <h2 class="figure-heading constrain_width"
                       aria-describedby="tip-avg-cost-year">
-                      Average <br>Actual Cost
+                      Actual<br>Cost
                       <a class="tooltip-target u-new_line">
                         <i class="fa fa-info-circle"></i>
                       </a>
@@ -189,7 +178,7 @@ body_scripts:
                   <figure class="meter">
                     <h2 class="figure-heading constrain_width"
                       aria-describedby="tip-avg-salary">
-                      Salary 10 <br>Years After
+                      Salary After<br>Attending
                       <a class="tooltip-target u-new_line">
                         <i class="fa fa-info-circle"></i>
                       </a>
@@ -202,12 +191,14 @@ body_scripts:
                   </figure>
                 </div>
 
-                <div class="legend-nat_average">
-                  <div class="legend-nat_average-box">
-                    <div class="legend-nat_average-box-line">
+                <div class="legend-wrapper">
+                  <div class="legend-nat_average">
+                    <div class="legend-nat_average-box">
+                      <div class="legend-nat_average-box-line">
+                      </div>
                     </div>
+                    <div class="legend-nat_average-words">National Average</div>
                   </div>
-                  <div class="legend-nat_average-words">National Average</div>
                 </div>
 
                 <a class="link link-more" data-bind="more_link">
@@ -220,14 +211,9 @@ body_scripts:
 
           </section>
 
-          <!-- <div class="pagination container show-loaded">
-            <input type="hidden" name="page">
-
-            <ol data-bind="pages">
-              Page:
-              <li><a class="select-page" data-bind="link">1</a></li>
-            </ol>
-          </div> -->
+          <div class="pagination pagination_bottom container show-loaded">
+            <!-- this gets filled in with JavaScript -->
+          </div>
 
         </div>
 
@@ -238,3 +224,7 @@ body_scripts:
   </div>
 
 </form>
+
+<script>
+  picc.pages.search();
+</script>

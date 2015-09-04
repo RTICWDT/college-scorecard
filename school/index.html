@@ -3,12 +3,9 @@ title: School
 layout: default
 permalink: /school/
 scripts:
-  - vendor/tagalong.min.js
-  - vendor/leaflet.js
+  - vendor/leaflet.min.js
 stylesheets:
   - vendor/leaflet.css
-body_scripts:
-  - school.js
 ---
 
 <!-- Search results -->
@@ -52,7 +49,7 @@ body_scripts:
               data-bind="under_investigation" aria-hidden="true">
               <a>
                 <p class="investigation-major" aria-describedby="tip-hcm2">
-                  Under investigation <i class="tooltip-target fa fa-info-circle"></i>
+                  Under Ed Monitoring <i class="tooltip-target fa fa-info-circle"></i>
                 </p>
               </a>
             </div>
@@ -103,9 +100,10 @@ body_scripts:
           </div>
 
           <div id="key-stats" class="school-meters">
+
             <figure class="meter below_is_good">
               <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year">
-                Average Actual Cost
+                Actual<br>Cost
                 <a class="tooltip-target u-new_line">
                   <i class="fa fa-info-circle"></i>
                 </a>
@@ -118,8 +116,8 @@ body_scripts:
             </figure>
 
             <figure class="meter above_is_good">
-              <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year">
-                Graduation Rate
+              <h2 class="figure-heading constrain_width" aria-describedby="tip-graduation-rate">
+                Graduation<br>Rate
                 <a class="tooltip-target u-new_line">
                   <i class="fa fa-info-circle"></i>
                 </a>
@@ -132,8 +130,8 @@ body_scripts:
             </figure>
 
             <figure class="meter above_is_good">
-              <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year">
-                Salary 10<br>Years After
+              <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-salary">
+                Salary After<br>Attending
                 <a class="tooltip-target u-new_line">
                   <i class="fa fa-info-circle"></i>
                 </a>
@@ -144,6 +142,17 @@ body_scripts:
                 <span data-bind="average_salary">$XX,XXX</span>
               </figcaption>
             </figure>
+
+            <div class="legend-wrapper">
+              <div class="legend-nat_average">
+                <div class="legend-nat_average-box">
+                  <div class="legend-nat_average-box-line">
+                  </div>
+                </div>
+                <div class="legend-nat_average-words">National Average</div>
+              </div>
+            </div>
+
           </div>
 
           <div class="section-card_container-school">
@@ -164,7 +173,7 @@ body_scripts:
 
                     <figure class="meter below_is_good">
                       <h2 class="figure-heading" aria-describedby="tip-avg-cost-year">
-                        Average Actual Cost
+                        Actual Cost
                         <a class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
                         </a>
@@ -178,14 +187,19 @@ body_scripts:
                       </figcaption>
                     </figure>
 
-                    <!-- <p>Assumes <strong>$XX,XXX</strong> in tuition and
-                      fees, <strong>$X,XXX</strong> in other costs like room
-                      and board, books and supplies, and other personal
-                      expenses.</p> -->
+                    <div class="legend-wrapper">
+                      <div class="legend-nat_average">
+                        <div class="legend-nat_average-box">
+                          <div class="legend-nat_average-box-line">
+                          </div>
+                        </div>
+                        <div class="legend-nat_average-words">National Average</div>
+                      </div>
+                    </div>
 
                     <a class="button button-primary" target="_blank" data-bind="net_price_calculator">
                       <i class="fa fa-calculator"></i>
-                      Calculate your exact net price
+                      Calculate your personal net price
                     </a>
 
                   </div>
@@ -248,7 +262,7 @@ body_scripts:
                   <div class="school-two_col-left centered">
 
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading" aria-describedby="tip-avg-cost-year">
+                      <h2 class="figure-heading" aria-describedby="tip-repayment-rate">
                         Students Paying<br>Down Their Debt
                         <a class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
@@ -259,6 +273,7 @@ body_scripts:
                         data-bind="repayment_rate_meter"
                         max="1"
                         average="{{ site.data.national_stats.repayment_rate.median }}"
+                        average-range="{{ site.data.national_stats.repayment_rate.average_range|join:'..' }}"
                         data-median-four_year="{{ site.data.national_stats.repayment_rate_4.median }}"
                         data-median-lt_four_year="{{ site.data.national_stats.repayment_rate_l4.median }}">
                       </picc-meter>
@@ -268,6 +283,16 @@ body_scripts:
                         <div class="average average-label"></div>
                       </figcaption>
                     </figure>
+
+                    <div class="legend-wrapper">
+                      <div class="legend-nat_average">
+                        <div class="legend-nat_average-box">
+                          <div class="legend-nat_average-box-line">
+                          </div>
+                        </div>
+                        <div class="legend-nat_average-words">National Average</div>
+                      </div>
+                    </div>
 
                     <div class="container school-callout">
 
@@ -285,7 +310,7 @@ body_scripts:
 
                     <div>
                       <h2
-                        aria-describedby="tip-graduation-rate">
+                        aria-describedby="tip-avg-debt">
                         Typical Total Debt
                         <a class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
@@ -297,7 +322,7 @@ body_scripts:
 
                     <div>
                       <h2
-                        aria-describedby="tip-graduation-rate">
+                        aria-describedby="tip-avg-loan-payment">
                         Typical Monthly Loan Payment
                         <a class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
@@ -310,7 +335,7 @@ body_scripts:
 
                     <div>
                       <h2
-                        aria-describedby="tip-graduation-rate">
+                        aria-describedby="tip-student-aid">
                         Students Receiving Federal Aid
                         <a class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
@@ -355,12 +380,23 @@ body_scripts:
                         <div class="average average-label"></div>
                       </figcaption>
                     </figure>
+
+                    <div class="legend-wrapper">
+                      <div class="legend-nat_average">
+                        <div class="legend-nat_average-box">
+                          <div class="legend-nat_average-box-line">
+                          </div>
+                        </div>
+                        <div class="legend-nat_average-words">National Average</div>
+                      </div>
+                    </div>
+
                   </div>
 
                   <div class="school-two_col-right centered">
                     <figure class="meter above_is_good">
                       <h2 class="figure-heading" aria-describedby="tip-retention-rate">
-                        Students Who<br>Return After Their First Year
+                        Students Who Return<br>After Their First Year
                         <a class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
                         </a>
@@ -368,9 +404,9 @@ body_scripts:
                       <picc-meter id="retention-meter"
                         class="graduation"
                         data-bind="retention_rate_meter"
-                        about-threshold=".03"
                         max="1"
-                        average="{{ site.data.national_stats.retention_rate.median }}">
+                        average="{{ site.data.national_stats.retention_rate.median }}"
+                        average-range="{{ site.data.national_stats.retention_rate.average_range|join:'..' }}">
                       </picc-meter>
                       <figcaption>
                         <i class="fa average average-arrow" data-meter="retention-meter"></i>
@@ -378,6 +414,17 @@ body_scripts:
                         <div class="average average-label"></div>
                       </figcaption>
                     </figure>
+
+                    <div class="legend-wrapper">
+                      <div class="legend-nat_average">
+                        <div class="legend-nat_average-box">
+                          <div class="legend-nat_average-box-line">
+                          </div>
+                        </div>
+                        <div class="legend-nat_average-words">National Average</div>
+                      </div>
+                    </div>
+
                   </div>
 
                 </div>
@@ -401,15 +448,14 @@ body_scripts:
                       <strong data-bind="advantage_rate">XX%</strong>
                       <span class="small normal">of students</span>
                     </strong>
-                    <p>who attend this school will earn more than those with
-                      only a high school diploma.</p>
+                    <p>who attend this school will earn more than those with only a high school diploma.</p>
                   </div>
 
 
                   <div class="school-two_col-right centered">
                     <figure class="meter above_is_good">
                       <h2 class="figure-heading" aria-describedby="tip-avg-salary">
-                        Average Salary 10<br>Years After Entry
+                        Salary After<br>Attending
                         <a class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
                         </a>
@@ -422,6 +468,17 @@ body_scripts:
                         <div class="average average-label"></div>
                       </figcaption>
                     </figure>
+
+                    <div class="legend-wrapper">
+                      <div class="legend-nat_average">
+                        <div class="legend-nat_average-box">
+                          <div class="legend-nat_average-box-line">
+                          </div>
+                        </div>
+                        <div class="legend-nat_average-words">National Average</div>
+                      </div>
+                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -536,7 +593,7 @@ body_scripts:
 
                     <div class="school-two_col-right">
                       <h2
-                        aria-describedby="tip-graduation-rate">
+                        aria-describedby="tip-race-eth">
                         Race/Ethnicity
                         <a class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
@@ -591,7 +648,7 @@ body_scripts:
               <div>
                 <h1 class="search_category">
                   <a aria-expanded="false" aria-controls="selectivity-content">
-                    Selectivity
+                    Admissions
                   </a>
                 </h1>
 
@@ -611,13 +668,13 @@ body_scripts:
                   <!-- <div class="school-two_col-right"> -->
                   <div style="padding-top: 20px;"> <!--TODO-->
                     <h2
-                      aria-describedby="tip-graduation-rate">
+                      aria-describedby="tip-test-scores">
                       Test Scores
                       <a class="tooltip-target">
                         <i class="fa fa-info-circle"></i>
                       </a>
                     </h2>
-                    <p>Students who were admitted typically had standardized test score in these ranges.</p>
+                    <p>Students who were admitted typically had standardized test scores in these ranges.</p>
 
                     <h3 class="h2">SAT</h3>
 
@@ -684,7 +741,7 @@ body_scripts:
                     </div> -->
 
                     <h2
-                      aria-describedby="tip-graduation-rate">
+                      aria-describedby="tip-pop-prog">
                       Most Popular Programs
                       <a class="tooltip-target">
                         <i class="fa fa-info-circle"></i>
@@ -698,7 +755,7 @@ body_scripts:
                   <div class="school-two_col-right">
 
                     <h2
-                      aria-describedby="tip-graduation-rate">
+                      aria-describedby="tip-avail-study">
                       Available Areas of Study
                       <a class="tooltip-target">
                         <i class="fa fa-info-circle"></i>
@@ -737,8 +794,6 @@ body_scripts:
 </div>
 
 
-<!--
-<section>
-  {# include search-form.html #}
-</section>
--->
+<script>
+  picc.pages.school();
+</script>

@@ -1,8 +1,13 @@
 .main-gallery {
-  height: 280px;
+  height: 460px;
   margin-top: $base-padding-large;
-  margin-bottom: $base-padding-large;
+  margin-bottom: $base-padding-extra;
   position: relative;
+
+  @include respond-to(medium-up) {
+    height: 340px;
+    margin-bottom: $base-padding-large;
+  }
 }
 
 .gallery-cell {
@@ -11,7 +16,7 @@
   width: 100%;
 
   p {
-    @include font-size($h2);
+    @include font-size($h3);
 
     .insight-highlight {
       background: $yellow;

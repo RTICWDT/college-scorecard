@@ -71,20 +71,30 @@
     padding-top: 0;
   }
 
+  figure.meter {
+    margin-bottom: 0;
+  }
+
+  .legend-wrapper + .button {
+    margin-top: $base-padding;
+  }
+
   .school-heading {
     h1 {
+      @include font-size($h1-huge);
       padding-bottom: $base-padding-lite;
     }
 
     h2 {
+      color: $dark-gray;
       margin-top: 0;
       margin-bottom: 0;
       padding-top: 0;
-      font-size: font-size($h4);
+      font-size: font-size($h1);
       font-weight: normal;
     }
 
-    @include respond-to(medium-up) {
+    @include respond-to(large-up) {
       @include span-columns(7 of 12);
     }
   }
@@ -93,7 +103,7 @@
     $height: 50px;
     margin-top: $base-padding;
 
-    $list:  rural, town, suburban, urban,
+    $list:  rural, town, suburban, city,
             small, medium, large,
             public, private, profit;
 
@@ -133,7 +143,7 @@
     border-radius: $base-border-radius;
     height: 280px;
     margin-top: $base-padding;
-    @include respond-to(medium-up) {
+    @include respond-to(large-up) {
       @include span-columns(5 of 12);
       @include omega();
       margin-top: 0;
@@ -154,14 +164,52 @@
 
   .school-meters {
     @include span-columns(12 of 12);
-    border-top : $regular-border-size solid $base-border-color;
+    border-top: $regular-border-size solid $base-border-color;
     margin-top: $base-padding;
     padding-top: $base-padding;
     text-align: center;
 
+    figure.meter {
+      @include span-columns(5 of 15);
+      @include omega(3n);
+      margin: 2px;
+    }
+
+    figcaption {
+      @include font-size(0.75);
+    }
+
+    h2.figure-heading {
+      @include font-size(0.75);
+      &.constrain_width {
+        margin-left: -5%;
+        width: 110%;
+      }
+    }
+
     // don't show meter labels for top-level stats
     picc-meter .label {
       visibility: hidden;
+    }
+
+    @include respond-to(tiny-up) {
+      figcaption {
+        @include font-size(1);
+      }
+
+      h2.figure-heading {
+        @include font-size(1);
+      }
+    }
+
+    @include respond-to(medium-up) {
+      figcaption {
+        @include font-size($h1);
+      }
+
+      h2.figure-heading {
+        @include font-size($h1);
+      }
     }
   }
 
@@ -185,8 +233,6 @@
     ul {
       padding-bottom: $base-padding;
     }
-
-
   }
 
   .fact_number {
@@ -212,9 +258,6 @@
 
   .button-primary {
     width: 100%;
-    // @include respond-to(tiny-up) {
-    //   width: 300px;
-    // }
   }
 
   .school-two_col {
@@ -302,7 +345,6 @@
     padding: 13px;
     height: 102px;
     width: 102px;
-
   }
 
   .group_inline-right {
@@ -315,8 +357,10 @@
 }
 
 .school-callout {
+  @include span-columns(5 fo 5);
   background-color: $sky-blue-light;
   border-radius: $base-border-radius;
+  margin-top: $base-padding;
   padding-top: $base-padding;
   padding-bottom: $base-padding;
 }

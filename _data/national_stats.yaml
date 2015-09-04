@@ -1,88 +1,113 @@
-SAT_avg:
-  min: null
-  max: null
-  median: null
+net_price:
+  min: -19360
+  max: 40000
+  median: 16789
+  average_range: [12259, 20185]
 net_price_public:
   min: -6359
   max: 32921
   median: 9954
+  average_range: [7441, 11560]
 net_price_private:
   min: -19360
   max: 87414
   median: 20761
-net_price:
-  min: -19360
-  max: 87414
-  median: 16789
+  average_range: [18516, 23079]
 net_price_l4:
   median: 14052
+  average_range: [7910, 18527]
 net_price_4:
   median: 18824
-completion_rate_4:
-  min: 0
-  max: 1
-  median: 0.48
-completion_rate_l4:
-  min: 0
-  max: 1
-  median: 0.34
+  average_range: [15487, 21298]
+
 completion_rate:
   min: 0
   max: 1
-  median: 0.44
+  median: 0.4379
+  average_range: [.3180, .5236]
+completion_rate_l4:
+  min: 0
+  max: 1
+  median: 0.3393
+  average_range: [.2329, .3467]
+completion_rate_4:
+  min: 0
+  max: 1
+  median: 0.4778
+  average_range: [.3781, .5608]
+
 median_earnings:
   min: 0
-  max: 166200
+  max: 100000
   median: 34343
+  average_range: [31600, 39700]
 median_earnings_l4:
   min: 0
-  max: 166200
+  max: 100000
   median: 31080
+  average_range: [27700, 33000]
 median_earnings_4:
   min: 0
-  max: 166200
+  max: 100000
   median: 42051
+  average_range: [37100, 40700]
+
 retention_rate:
   min: 0
   max: 1
-  median: 0.67
+  median: 0.6671
+  average_range: [.6026, .7522]
 retention_rate_l4:
   min: 0
   max: 1
-  median: 0.60
-repayment_rate_4:
+  median: 0.5959
+  average_range: [.5473, .6311]
+retention_rate_4:
+  min: 0
+  max: 1
+  median: 0.6973
+  average_range: [.663, .7896]
+
+repayment_rate:
   min: 0.05
   max: 1
-  median: 0.70
-repayment_rate_4:
-  min: 0.05
-  max: 1
-  median: 0.76
+  median: 0.6690
+  average_range: [.5675, .8031]
 repayment_rate_l4:
   min: 0.05
   max: 1
-  median: 0.54
-median_completer_debt:
-  min: 310
-  max: 51375
-  median: 14144
+  median: 0.5402
+  average_range: [.4589, .6178]
+repayment_rate_4:
+  min: 0.05
+  max: 1
+  median: 0.7586
+  average_range: [.7463, .8652]
+
 median_monthly_loan:
   min: 3.44
   max: 570.37
   median: 238.27
+  average_range: [210.94, 286.80]
 median_monthly_loan_l4:
   median: 181.96
+  average_range: [127.67, 222.04]
 median_monthly_loan_4:
   median: 270.44
+  average_range: [249.80, 299.76]
+
 earnings_gt_25k:
   min: 0
   max: 1
   median: .57
+  average_range: [.5083, .6435]
 earnings_gt_25k_l4:
   min: 0
   max: 1
   median: .49
+  average_range: [.4449, .5383]
 earnings_gt_25k_4:
   min: 0
   max: 1
   median: .63
+  average_range: [.5983, .6529]

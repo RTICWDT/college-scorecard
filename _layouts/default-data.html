@@ -3,10 +3,20 @@
   {% include head.html %}
   <body>
     {% include header-data.html %}
+
+    <!--[if lt IE 10]>
+    <div class="compat-message">
+      <div class="container">
+        <h1>We&rsquo;re sorry. The browser version you are using is not
+          supported.<br>Please update your browser to the latest version.</h1>
+      </div>
+    </div>
+    <![endif]-->
+    
     <main>
       {{ content }}
     </main>
-    {% include footer.html %}
+    {% include footer-data.html %}
 
     {% for script in page.body_scripts %}
     <script src="{{ site.baseurl }}/js/{{ script }}" data-src="{{ script }}"></script>
