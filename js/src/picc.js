@@ -445,7 +445,7 @@ picc.fields = {
   REGION_ID:            'school.region_id',
 
   RELIGIOUS:            'school.religious_affiliation',
-  OPERATING:            '2013.student.operating',
+  OPERATING:            'school.operating',
 
   SIZE:                 '2013.student.size',
   ONLINE_ONLY:          'school.online_only',
@@ -486,23 +486,23 @@ picc.fields = {
   RACE_ETHNICITY:       '2013.student.demographics.race_ethnicity',
   AGE_ENTRY:            '2013.student.demographics.age_entry',
 
-  ACT_25TH_PCTILE:      '2013.student.act_scores.25th_percentile.cumulative',
-  ACT_75TH_PCTILE:      '2013.student.act_scores.75th_percentile.cumulative',
-  ACT_MIDPOINT:         '2013.student.act_scores.midpoint.cumulative',
+  ACT_25TH_PCTILE:      '2013.admissions.act_scores.25th_percentile.cumulative',
+  ACT_75TH_PCTILE:      '2013.admissions.act_scores.75th_percentile.cumulative',
+  ACT_MIDPOINT:         '2013.admissions.act_scores.midpoint.cumulative',
 
-  SAT_CUMULATIVE_AVERAGE:   '2013.student.sat_scores.average.overall',
+  SAT_CUMULATIVE_AVERAGE:   '2013.admissions.sat_scores.average.overall',
 
-  SAT_READING_25TH_PCTILE:  '2013.student.sat_scores.25th_percentile.critical_reading',
-  SAT_READING_75TH_PCTILE:  '2013.student.sat_scores.75th_percentile.critical_reading',
-  SAT_READING_MIDPOINT:     '2013.student.sat_scores.midpoint.critical_reading',
+  SAT_READING_25TH_PCTILE:  '2013.admissions.sat_scores.25th_percentile.critical_reading',
+  SAT_READING_75TH_PCTILE:  '2013.admissions.sat_scores.75th_percentile.critical_reading',
+  SAT_READING_MIDPOINT:     '2013.admissions.sat_scores.midpoint.critical_reading',
 
-  SAT_MATH_25TH_PCTILE:     '2013.student.sat_scores.25th_percentile.math',
-  SAT_MATH_75TH_PCTILE:     '2013.student.sat_scores.75th_percentile.math',
-  SAT_MATH_MIDPOINT:        '2013.student.sat_scores.midpoint.math',
+  SAT_MATH_25TH_PCTILE:     '2013.admissions.sat_scores.25th_percentile.math',
+  SAT_MATH_75TH_PCTILE:     '2013.admissions.sat_scores.75th_percentile.math',
+  SAT_MATH_MIDPOINT:        '2013.admissions.sat_scores.midpoint.math',
 
-  SAT_WRITING_25TH_PCTILE:  '2013.student.sat_scores.25th_percentile.writing',
-  SAT_WRITING_75TH_PCTILE:  '2013.student.sat_scores.75th_percentile.writing',
-  SAT_WRITING_MIDPOINT:     '2013.student.sat_scores.midpoint.writing',
+  SAT_WRITING_25TH_PCTILE:  '2013.admissions.sat_scores.25th_percentile.writing',
+  SAT_WRITING_75TH_PCTILE:  '2013.admissions.sat_scores.75th_percentile.writing',
+  SAT_WRITING_MIDPOINT:     '2013.admissions.sat_scores.midpoint.writing',
 
   NET_PRICE_CALC_URL:       'school.price_calculator_url'
 };
