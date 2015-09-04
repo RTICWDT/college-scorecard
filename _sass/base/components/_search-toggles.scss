@@ -5,10 +5,9 @@ $toggle-padding: 15px;
 
   aria-accordion {
     display: inline-block;
-    margin-right: 10px;
     min-height: 0;
+    padding-bottom: 0;
     position: relative;
-    width: auto;
 
     &[aria-expanded=true] {
       background-color: $white;
@@ -20,6 +19,7 @@ $toggle-padding: 15px;
 
     aria-accordion {
       border-top: $thin-border-size solid $mid-gray;
+      padding-bottom: $base-padding-lite;
       width: 100%;
 
       [aria-controls]:after {
@@ -31,6 +31,12 @@ $toggle-padding: 15px;
         height: $button-size;
         width: $button-size;
       }
+
+      @include respond-to(teensy-down) {
+        label {
+          @include font-size(0.7);
+        }
+      }
     }
   }
 
@@ -40,28 +46,59 @@ $toggle-padding: 15px;
 
   .fa-filter,
   .fa-search {
-    padding-right: $toggle-padding;
+    padding-right: ($toggle-padding / 2);
+
+    @include respond-to(small-up) {
+      padding-right: $toggle-padding;
+    }
   }
 
   .fa-chevron-down {
-    @include font-size(0.8);
-    padding-left: $toggle-padding;
+    @include font-size(0.6);
+    padding-left: ($toggle-padding / 2);
     vertical-align: 2px;
+
+    @include respond-to(small-up) {
+      @include font-size(0.8);
+      padding-left: $toggle-padding;
+    }
   }
 
   .search_category {
-    @include font-size($h3);
+    @include font-size(0.75);
     font-weight: $weight-bold;
+
+    @include respond-to(teensy-up) {
+      @include font-size(0.9);
+    }
+
+    @include respond-to(small-up) {
+      @include font-size($h3);
+    }
   }
 }
 
-.toggle-control {
+.toggle-accordion {
   border-bottom: $thick-border-size solid $lighter-gray;
-  padding: $base-padding-lite $toggle-padding $base-padding-lite $toggle-padding;
 
   &:hover,
   &:focus {
     border-bottom: $thick-border-size solid $dark-blue;
+  }
+}
+
+.toggle-control {
+  margin-right: 10px;
+  width: 100px;
+  padding: $base-padding-lite ($toggle-padding / 2) $base-padding-lite ($toggle-padding / 2);
+
+  @include respond-to(teensy-up) {
+    width: 150px;
+  }
+
+  @include respond-to(small-up) {
+    width: 210px;
+    padding: $base-padding-lite $toggle-padding $base-padding-lite $toggle-padding;
   }
 }
 
@@ -72,8 +109,7 @@ $toggle-padding: 15px;
   padding: $base-padding $base-padding-lite;;
   position: absolute;
   top: 100%;
-  left: 0;
-  width: 400px;
+  width: 200%;
   z-index: 10000;
 
   .search_category {
@@ -86,11 +122,22 @@ $toggle-padding: 15px;
   }
 
   .search-button {
+    @include font-size(0.75);
     height: 35px;
+    letter-spacing: 2px;
     margin-bottom: $base-padding;
+
+    @include respond-to(small-up) {
+      @include font-size($h4);
+    }
+  }
+
+  @include respond-to(small-up) {
+    left: 0;
+    width: 400px;
   }
 }
 
-// .toggle-content-search {
-//   padding-top: 1.64em;
-// }
+.toggle-content-search {
+  right: 0;
+}

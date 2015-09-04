@@ -6,7 +6,6 @@ aria-accordion {
 
   display: block;
   min-height: $button-size + ($button-margin * 2);
-  // overflow: hidden;
   padding-bottom: $base-padding-lite;
 
   @include respond-to(tiny-up) {
