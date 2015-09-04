@@ -123,12 +123,13 @@ $toggle-padding: 15px;
 
   .search-button {
     @include font-size(0.75);
-    //height: 35px;
+    height: 45px;
     letter-spacing: 2px;
     margin-bottom: ($base-padding-lite + 0.3);
 
     @include respond-to(small-up) {
       @include font-size($h4);
+      height: 55px;
     }
   }
 
