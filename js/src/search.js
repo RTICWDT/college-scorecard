@@ -6,6 +6,9 @@ var querystring = require('querystring');
 module.exports = function search() {
 
   var resultsRoot = document.querySelector('.search-results');
+  var paginator = resultsRoot.querySelector('.pagination');
+  var bottomPaginator = resultsRoot.querySelector('.pagination_bottom');
+
   var form = new formdb.Form('#search-form');
   var query = querystring.parse(location.search.substr(1));
   // console.info('initial query:', query);
@@ -199,27 +202,27 @@ module.exports = function search() {
 
     if (req) req.abort();
 
-    var list = d3.select(resultsRoot)
-      .select('[data-bind="results"]');
+    resultsRoot.classList.toggle('js-incremental', incremental);
 
     if (incremental) {
-      list.classed('hidden', true);
+      // incremental
     } else {
       resultsRoot.classList.add('js-loading');
       resultsRoot.classList.remove('js-loaded');
       resultsRoot.classList.remove('js-error');
     }
 
-    var paginator = resultsRoot.querySelector('.pagination');
     paginator.classList.toggle('show-loading', incremental);
 
     console.time && console.time('[load]');
 
     req = picc.API.search(query, function(error, data) {
       resultsRoot.classList.remove('js-loading');
-      list.classed('hidden', false);
+      resultsRoot.classList.remove('js-incremental');
 
       paginator.classList.remove('show-loading');
+      bottomPaginator.classList.remove('show-loading');
+
       incremental = false;
 
       console.timeEnd && console.timeEnd('[load]');
@@ -281,25 +284,29 @@ module.exports = function search() {
         }
       });
 
-      var pageLinks = d3.selectAll('a.select-page')
-        .on('click', function() {
-          d3.event.preventDefault();
+      // duplicate the pagination structure below the search results
+      bottomPaginator.innerHTML = paginator.innerHTML;
 
-          var _page = this.getAttribute('data-page');
-          if (_page === 'false') return;
+      var pageLinks = d3.select(resultsRoot)
+        .selectAll('a.select-page')
+          .on('click', function() {
+            d3.event.preventDefault();
 
-          pageLinks.each(function() {
-            var p = this.getAttribute('data-page');
-            var selected = p == _page;
-            this.parentNode.classList
-              .toggle('pagination-page_selected', selected);
-            // console.log('selected?', p, page, selected, '->', this.parentNode);
+            var _page = this.getAttribute('data-page');
+            if (_page === 'false') return;
+
+            pageLinks.each(function() {
+              var p = this.getAttribute('data-page');
+              var selected = p == _page;
+              this.parentNode.classList
+                .toggle('pagination-page_selected', selected);
+              // console.log('selected?', p, page, selected, '->', this.parentNode);
+            });
+
+            form.set('page', _page);
+            incremental = true;
+            change();
           });
-
-          form.set('page', _page);
-          incremental = true;
-          change();
-        });
 
       var resultsList = resultsRoot.querySelector('.schools-list');
       tagalong(resultsList, data.results, picc.school.directives);
