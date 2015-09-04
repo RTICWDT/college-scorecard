@@ -65,10 +65,6 @@ permalink: /search/
 
           <div class="results-main-alert">
 
-            <div class="results-share-wrapper">
-              <a data-href="mailto:?subject=Take%20a%20look%20at%20these%20schools&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov,%20take%20a%20look%3A%0A%0A{url}" class="results-share">Share</a>
-            </div>
-
             <div class="container show-loading">
               <h1>Loading...</h1>
             </div>
@@ -84,24 +80,35 @@ permalink: /search/
                   <span data-bind="results_total">0</span>
                   <span data-bind="results_word">Results</span>
                 </h1>
-
               </div>
 
               <div>
 
-                <label for="select-sort">Sort by:</label>
-                <select id="select-sort" name="sort">
-                  <option selected value="advantage:desc">Increase in Earnings</option>
-                  <option value="avg_net_price:asc">Actual Cost</option>
-                  <option value="completion_rate:desc">Graduation Rate</option>
-                  <option value="salary:desc">Salary After School</option>
-                  <option value="name:asc">Name (A to Z)</option>
-                  <!--option value="name:desc">Name (Z to A)</option -->
-                  <!--option value="size:desc">Size (large to small)</option-->
-                  <option value="size:asc">Size (small to large)</option>
-                </select>
+                <a data-href="mailto:?subject=Take%20a%20look%20at%20these%20schools&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov,%20take%20a%20look%3A%0A%0A{url}" class="results-share">Share</a>
 
               </div>
+
+              <div class="results-sort u-group_inline">
+
+                <div class="u-group_inline-left">
+                  <label for="select-sort">Sort:</label>
+                </div>
+
+                <div class="u-group_inline-right">
+                  <select id="select-sort" name="sort">
+                    <option selected value="advantage:desc">Increase in Earnings</option>
+                    <option value="avg_net_price:asc">Actual Cost</option>
+                    <option value="completion_rate:desc">Graduation Rate</option>
+                    <option value="salary:desc">Salary After School</option>
+                    <option value="name:asc">Name (A to Z)</option>
+                    <!--option value="name:desc">Name (Z to A)</option -->
+                    <!--option value="size:desc">Size (large to small)</option-->
+                    <option value="size:asc">Size (small to large)</option>
+                  </select>
+                </div>
+
+              </div>
+
             </div>
 
           </div>
