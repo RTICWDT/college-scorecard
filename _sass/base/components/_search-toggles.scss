@@ -67,7 +67,7 @@ $toggle-padding: 15px;
   background-color: $white;
   border-bottom: $thick-border-size solid $dark-blue;
   box-shadow: 0 8px 9px -3px rgba(50,50,50,0.6);
-  padding: $base-padding-lite;
+  padding: $base-padding $base-padding-lite;;
   position: absolute;
   top: 100%;
   left: 0;
@@ -88,6 +88,6 @@ $toggle-padding: 15px;
   }
 }
 
-.toggle-content-search {
-  padding-top: 1.64em;
-}
+// .toggle-content-search {
+//   padding-top: 1.64em;
+// }
