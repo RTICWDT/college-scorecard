@@ -19,5 +19,11 @@
    * object.
    */
   picc.SPECIAL_DESIGNATIONS = ({{ site.data.special_designations|jsonify }});
+
+  // XXX
+  picc.RELIGIOUS_AFFILIATIONS_BY_NUMBER = {
+  {% for affiliation in site.data.religious_affiliations %}
+    '{{ affiliation.value }}': '{{ affiliation.label }}', {% endfor %}
+  };
   </script>
 
