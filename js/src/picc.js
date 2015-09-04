@@ -18,6 +18,22 @@ picc.errors = {
   NO_SUCH_SCHOOL: 'No school found.'
 };
 
+// race-ethnicity labels
+picc.RACE_ETHNICITY_LABELS = {
+  aian:                   "American Indian/Alaska Native",
+  asian:                  "Asian",
+  asian_pacific_islander: "Asian/Pacific Islander",
+  black:                  "Black",
+  black_non_hispanic:     "Black non-Hispanic",
+  hispanic:               "Hispanic",
+  nhpi:                   "Native Hawaiian/Pacific Islander",
+  non_resident_alien:     "non-resident alien",
+  two_or_more:            "two or more races",
+  unknown:                "unknown",
+  white:                  "White",
+  white_non_hispanic:     "White non-Hispanic",
+};
+
 /**
  * picc.API is a singleton object with methods to query the open-data-maker
  * JSON API. Its base URL (`picc.API.url`) and API key (`picc.API.key`) are
@@ -705,6 +721,7 @@ picc.access.programAreas = function(d, metadata) {
   var dictionary = metadata.dictionary;
   var field = picc.fields.PROGRAM_PERCENTAGE;
   var programs = picc.access(field)(d);
+  if (!programs) return [];
   // remove the year prefix
   field = field.replace(/^\d+\./, '');
   return Object.keys(programs || {})
@@ -913,19 +930,19 @@ picc.school.directives = (function() {
 
     race_ethnicity_values: function(d) {
       if (!d.metadata) return [];
-      var dictionary = d.metadata.dictionary;
-      var field = fields.RACE_ETHNICITY;
-      var values = access(field)(d);
-      var prefix = field + '.';
+      var values = access(fields.RACE_ETHNICITY)(d);
+      if (!values) return [];
       return Object.keys(values)
         .map(function(key) {
           var value = picc.nullify(values[key]);
-          var dict = dictionary[prefix + key];
+          var label = picc.RACE_ETHNICITY_LABELS[key] || key;
           return {
-            key: key,
-            label: dict ? (dict.label || key) : key,
-            value: value,
-            percent: percent(value)
+            key:      key,
+            label:    label,
+            value:    value,
+            percent:  value >= .05
+              ? percent(value)
+              : '<1%'
           };
         })
         .filter(function(d) {
