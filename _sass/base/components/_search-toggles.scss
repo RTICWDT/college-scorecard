@@ -1,26 +1,21 @@
-$toggle-padding: 10px;
+$toggle-padding: 15px;
 
 .toggles {
   background-color: $lighter-gray;
-  padding-top: $base-padding-lite;
-  padding-bottom: $base-padding-lite;
 
   aria-accordion {
-    border-radius: $base-border-radius $base-border-radius 0 0;
-    border-top: 3px solid $white;
     display: inline-block;
     margin-right: 10px;
-    padding: 0 $toggle-padding 5px $toggle-padding;
     position: relative;
     width: auto;
 
     &:hover,
     &:focus {
-      border-top: 3px solid $black;
+      border-bottom: $thick-border-size solid $dark-blue;
     }
 
     &[aria-expanded=true] {
-      border-top: 3px solid $black;
+      background-color: $white;
     }
 
     [aria-controls]:after {
@@ -30,14 +25,6 @@ $toggle-padding: 10px;
     aria-accordion {
       width: 100%;
 
-      &:hover,
-      &:focus {
-        border-top: 3px solid $white;
-      }
-
-      &[aria-expanded=true] {
-        border-top: 3px solid $white;
-      }
 
       [aria-controls]:after {
         display: inline-block;
@@ -49,12 +36,25 @@ $toggle-padding: 10px;
     border-top: none;
   }
 
+  .fa-filter,
+  .fa-search {
+    padding-right: $base-padding-lite;
+  }
+
   .fa-chevron-down {
     @include font-size(0.8);
-    padding-left: $base-padding-lite;
+    padding-left: $toggle-padding;
     vertical-align: 2px;
   }
 
+  .search_category {
+    font-weight: $weight-bold;
+  }
+}
+
+.toggle-control {
+  border-bottom: $thick-border-size solid $lighter-gray;
+  padding: $base-padding-lite $toggle-padding $base-padding-lite $toggle-padding;
 }
 
 .toggle-content {
@@ -66,4 +66,8 @@ $toggle-padding: 10px;
   left: 0;
   width: 400px;
   z-index: 10000;
+
+  .search_category {
+    font-weight: $weight-book;
+  }
 }
