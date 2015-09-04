@@ -429,7 +429,7 @@ picc.fields = {
   REGION_ID:            'school.region_id',
 
   RELIGIOUS:            'school.religious_affiliation',
-  OPERATING:            '2013.student.operating',
+  OPERATING:            'school.operating',
 
   SIZE:                 '2013.student.size',
   ONLINE_ONLY:          'school.online_only',
