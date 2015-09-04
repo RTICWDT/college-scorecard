@@ -53,10 +53,18 @@
       @include span-columns(12);
 
       @include respond-to(medium-up) {
-        @include span-columns(6);
-
         &:first-of-type {
-          @include span-columns(2);
+          @include span-columns(6);
+        }
+
+        &:last-of-type {
+          @include span-columns(6);
+        }
+      }
+
+      @include respond-to(large-up) {
+        &:first-of-type {
+          @include span-columns(8);
         }
 
         &:last-of-type {
@@ -86,7 +94,7 @@
 
 .results-share {
   @extend .share;
-  margin-top: $base-padding-lite;
+  margin-left: $base-padding;
 }
 
 .results-sort {

@@ -6,10 +6,9 @@ $toggle-padding: 15px;
   aria-accordion {
     display: inline-block;
     margin-right: 10px;
+    min-height: 0;
     position: relative;
     width: auto;
-
-
 
     &[aria-expanded=true] {
       background-color: $white;
@@ -23,12 +22,14 @@ $toggle-padding: 15px;
       border-top: $thin-border-size solid $mid-gray;
       width: 100%;
 
-      // &:first-of-type {
-      //   margin-top: $base-padding;
-      // }
-
       [aria-controls]:after {
+        $button-size: 20px;
+        $button-margin: 9px;
+
+        @include font-size(1.3);
         display: inline-block;
+        height: $button-size;
+        width: $button-size;
       }
     }
   }
@@ -49,6 +50,7 @@ $toggle-padding: 15px;
   }
 
   .search_category {
+    @include font-size($h3);
     font-weight: $weight-bold;
   }
 }
@@ -84,6 +86,7 @@ $toggle-padding: 15px;
   }
 
   .search-button {
+    height: 35px;
     margin-bottom: $base-padding;
   }
 }
