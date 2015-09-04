@@ -1,6 +1,7 @@
 $toggle-padding: 10px;
 
 .toggles {
+  background-color: $lighter-gray;
   padding-top: $base-padding-lite;
   padding-bottom: $base-padding-lite;
 
@@ -48,6 +49,11 @@ $toggle-padding: 10px;
     border-top: none;
   }
 
+  .fa-chevron-down {
+    @include font-size(0.8);
+    padding-left: $base-padding-lite;
+    vertical-align: 2px;
+  }
 
 }
 
