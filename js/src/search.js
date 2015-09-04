@@ -145,6 +145,11 @@ module.exports = function search() {
     // don't submit the _drawer parameter
     delete params._drawer;
 
+    if (diffExcept(previousParams, params, ['page'])) {
+      // console.warn('non-page change:', previousParams, '->', params);
+      delete params.page;
+    }
+
     var query = picc.form.prepareParams(params);
 
     // only query the fields that we care about
@@ -380,6 +385,17 @@ module.exports = function search() {
     var message = resultsRoot.querySelector('.error-message');
     error = error.responseText || error;
     message.textContent = String(error) || 'There was an unexpected API error.';
+  }
+
+  function diffExcept(a, b, keys) {
+    a = picc.data.extend({}, a);
+    b = picc.data.extend({}, b);
+    keys.forEach(function(key) {
+      delete a[key];
+      delete b[key];
+    });
+    // console.log('diff except:', a, b, keys);
+    return diff(a, b);
   }
 
   function diff(a, b) {
