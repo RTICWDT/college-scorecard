@@ -240,8 +240,8 @@
 
         </fieldset>
 
-        <label for="affiliation">Special designation
-          <select id="affiliation" name="serving">
+        <label for="special">Special designation
+          <select id="special" name="serving">
             <option value="">Any</option>
             {% for designation in site.data.special_designations %}
             <option value="{{ designation[0] }}">{{ designation[1] }}</option>
