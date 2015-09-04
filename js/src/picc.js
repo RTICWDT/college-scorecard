@@ -368,9 +368,9 @@ picc.format = (function() {
       // '41': 'Rural: Fringe',
       // '42': 'Rural: Distant',
       // '43': 'Rural: Remote'
-      '11': 'Urban',
-      '12': 'Urban',
-      '13': 'Urban',
+      '11': 'City',
+      '12': 'City',
+      '13': 'City',
       '21': 'Suburban',
       '22': 'Suburban',
       '23': 'Suburban',
@@ -383,9 +383,9 @@ picc.format = (function() {
     }, 'locale unknown')),
 
     localeClass: formatter(map({
-      '11': 'icon-urban',
-      '12': 'icon-urban',
-      '13': 'icon-urban',
+      '11': 'icon-city',
+      '12': 'icon-city',
+      '13': 'icon-city',
       '21': 'icon-suburban',
       '22': 'icon-suburban',
       '23': 'icon-suburban',
@@ -641,26 +641,13 @@ picc.access.partTimeShare = picc.access.composed(
   picc.fields.PART_TIME_SHARE
 );
 
-picc.access.retentionRate = function(d) {
-  var retention = picc.access.composed(
-    picc.fields.RETENTION_RATE,
-    picc.access.yearDesignation
-  )(d);
-  if (!retention) return null;
-
-  var size = picc.access.size(d);
-  if (!size) return null;
-
-  var ptShare = picc.access.partTimeShare(d);
-  if (ptShare === null) return null;
-
-  var pt = size * ptShare * retention.part_time;
-  var ft = (size - size * ptShare) * retention.full_time;
-  if (isNaN(pt) || isNaN(ft)) return null;
-
-  // console.log('retention:', retention, [pt, ft], 'size:', size);
-  return (pt + ft) / size;
-};
+// only use full-time retention rate, branching on year designation
+// (`retetion
+picc.access.retentionRate = picc.access.composed(
+  picc.fields.RETENTION_RATE,
+  picc.access.yearDesignation,
+  'full_time'
+);
 
 picc.access.size = picc.access.composed(
   picc.fields.SIZE
@@ -1152,7 +1139,6 @@ picc.form.prepareParams = (function() {
     },
 
     state:                fields.STATE,
-    online:               fields.ONLINE_ONLY,
 
     zip: function(query, value, key) {
       // if there is no distance query, use the fully-qualified zip code
@@ -1248,6 +1234,30 @@ picc.form.prepareParams = (function() {
   return function prepareParams(params) {
 
     var query = picc.data.extend({}, params);
+
+    // only get open schools
+    query[fields.OPERATING] = 1;
+
+    // ignore distance if no zip is provided
+    if (query.distance && !query.zip) {
+      console.warn('distance provided without zip; ignoring', query);
+      delete query.distance;
+    }
+
+    // by default, filter out schools for which school.size is null
+    // with a numeric range query
+    if (!query.size) {
+      query[fields.SIZE + '__range'] = '0..';
+    }
+
+    // if "online" is truthy, then we should *include* online schools,
+    // which means not filtering on that field
+    if (query.online) {
+    } else {
+      // otherwise (if query.online is falsy), filter by fields.ONLINE_ONLY=0
+      query[fields.ONLINE_ONLY] = 0;
+    }
+    delete query.online;
 
     for (var key in query) {
       var v = query[key];

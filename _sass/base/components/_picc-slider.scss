@@ -32,7 +32,9 @@ picc-slider {
   }
 
   .picc-slider-average {
-    border-left: 1px solid black;
+    border-color: black;
+    border-style: solid;
+    border-width: 0 1px;
     height: $handle-size + $mark-outset;
     position: absolute;
     top: $vertical-offset - ($mark-outset / 2);

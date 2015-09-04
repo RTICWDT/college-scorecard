@@ -49,7 +49,7 @@ stylesheets:
               data-bind="under_investigation" aria-hidden="true">
               <a>
                 <p class="investigation-major" aria-describedby="tip-hcm2">
-                  Under investigation <i class="tooltip-target fa fa-info-circle"></i>
+                  Under Ed Monitoring <i class="tooltip-target fa fa-info-circle"></i>
                 </p>
               </a>
             </div>
@@ -100,6 +100,7 @@ stylesheets:
           </div>
 
           <div id="key-stats" class="school-meters">
+
             <figure class="meter below_is_good">
               <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year">
                 Actual<br>Cost
@@ -116,7 +117,7 @@ stylesheets:
 
             <figure class="meter above_is_good">
               <h2 class="figure-heading constrain_width" aria-describedby="tip-graduation-rate">
-                Graduation Rate
+                Graduation<br>Rate
                 <a class="tooltip-target u-new_line">
                   <i class="fa fa-info-circle"></i>
                 </a>
@@ -141,6 +142,17 @@ stylesheets:
                 <span data-bind="average_salary">$XX,XXX</span>
               </figcaption>
             </figure>
+
+            <div class="legend-wrapper">
+              <div class="legend-nat_average">
+                <div class="legend-nat_average-box">
+                  <div class="legend-nat_average-box-line">
+                  </div>
+                </div>
+                <div class="legend-nat_average-words">National Average</div>
+              </div>
+            </div>
+
           </div>
 
           <div class="section-card_container-school">
@@ -175,10 +187,15 @@ stylesheets:
                       </figcaption>
                     </figure>
 
-                    <!-- <p>Assumes <strong>$XX,XXX</strong> in tuition and
-                      fees, <strong>$X,XXX</strong> in other costs like room
-                      and board, books and supplies, and other personal
-                      expenses.</p> -->
+                    <div class="legend-wrapper">
+                      <div class="legend-nat_average">
+                        <div class="legend-nat_average-box">
+                          <div class="legend-nat_average-box-line">
+                          </div>
+                        </div>
+                        <div class="legend-nat_average-words">National Average</div>
+                      </div>
+                    </div>
 
                     <a class="button button-primary" target="_blank" data-bind="net_price_calculator">
                       <i class="fa fa-calculator"></i>
@@ -256,6 +273,7 @@ stylesheets:
                         data-bind="repayment_rate_meter"
                         max="1"
                         average="{{ site.data.national_stats.repayment_rate.median }}"
+                        average-range="{{ site.data.national_stats.repayment_rate.average_range|join:'..' }}"
                         data-median-four_year="{{ site.data.national_stats.repayment_rate_4.median }}"
                         data-median-lt_four_year="{{ site.data.national_stats.repayment_rate_l4.median }}">
                       </picc-meter>
@@ -265,6 +283,16 @@ stylesheets:
                         <div class="average average-label"></div>
                       </figcaption>
                     </figure>
+
+                    <div class="legend-wrapper">
+                      <div class="legend-nat_average">
+                        <div class="legend-nat_average-box">
+                          <div class="legend-nat_average-box-line">
+                          </div>
+                        </div>
+                        <div class="legend-nat_average-words">National Average</div>
+                      </div>
+                    </div>
 
                     <div class="container school-callout">
 
@@ -352,6 +380,17 @@ stylesheets:
                         <div class="average average-label"></div>
                       </figcaption>
                     </figure>
+
+                    <div class="legend-wrapper">
+                      <div class="legend-nat_average">
+                        <div class="legend-nat_average-box">
+                          <div class="legend-nat_average-box-line">
+                          </div>
+                        </div>
+                        <div class="legend-nat_average-words">National Average</div>
+                      </div>
+                    </div>
+
                   </div>
 
                   <div class="school-two_col-right centered">
@@ -365,9 +404,9 @@ stylesheets:
                       <picc-meter id="retention-meter"
                         class="graduation"
                         data-bind="retention_rate_meter"
-                        about-threshold=".03"
                         max="1"
-                        average="{{ site.data.national_stats.retention_rate.median }}">
+                        average="{{ site.data.national_stats.retention_rate.median }}"
+                        average-range="{{ site.data.national_stats.retention_rate.average_range|join:'..' }}">
                       </picc-meter>
                       <figcaption>
                         <i class="fa average average-arrow" data-meter="retention-meter"></i>
@@ -375,6 +414,17 @@ stylesheets:
                         <div class="average average-label"></div>
                       </figcaption>
                     </figure>
+
+                    <div class="legend-wrapper">
+                      <div class="legend-nat_average">
+                        <div class="legend-nat_average-box">
+                          <div class="legend-nat_average-box-line">
+                          </div>
+                        </div>
+                        <div class="legend-nat_average-words">National Average</div>
+                      </div>
+                    </div>
+
                   </div>
 
                 </div>
@@ -398,8 +448,7 @@ stylesheets:
                       <strong data-bind="advantage_rate">XX%</strong>
                       <span class="small normal">of students</span>
                     </strong>
-                    <p>who attend this school will earn more than those with
-                      only a high school diploma.</p>
+                    <p>who attend this school will earn more than those with only a high school diploma.</p>
                   </div>
 
 
@@ -419,6 +468,17 @@ stylesheets:
                         <div class="average average-label"></div>
                       </figcaption>
                     </figure>
+
+                    <div class="legend-wrapper">
+                      <div class="legend-nat_average">
+                        <div class="legend-nat_average-box">
+                          <div class="legend-nat_average-box-line">
+                          </div>
+                        </div>
+                        <div class="legend-nat_average-words">National Average</div>
+                      </div>
+                    </div>
+                    
                   </div>
                 </div>
               </div>

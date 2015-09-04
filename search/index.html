@@ -115,14 +115,10 @@ permalink: /search/
 
               <div>
 
-                <div class="pagination show-loaded">
-                  <input type="hidden" name="page">
+                <!-- <div class="pagination show-loaded">
+                  <input type="hidden" name="page"> -->
 
-                  <ol data-bind="pages">
-                    Page:
-                    <li><a class="select-page" data-bind="link">1</a></li>
-                  </ol>
-                </div>
+
 
               </div>
             </div>
@@ -130,8 +126,17 @@ permalink: /search/
           </div>
 
 
+          <div class="pagination container show-loaded show-incremental">
+            <input type="hidden" name="page">
 
-          <section class="section section-card_container-results show-loaded">
+            <ol data-bind="pages">
+              Page:
+              <li><a class="select-page" data-bind="link">1</a></li>
+            </ol>
+            
+          </div>
+
+          <section class="section section-card_container-results show-loaded fade-incremental">
 
             <div class="results-main-schools schools-list container" data-bind="results">
 
@@ -213,12 +218,14 @@ permalink: /search/
                   </figure>
                 </div>
 
-                <div class="legend-nat_average">
-                  <div class="legend-nat_average-box">
-                    <div class="legend-nat_average-box-line">
+                <div class="legend-wrapper">
+                  <div class="legend-nat_average">
+                    <div class="legend-nat_average-box">
+                      <div class="legend-nat_average-box-line">
+                      </div>
                     </div>
+                    <div class="legend-nat_average-words">National Average</div>
                   </div>
-                  <div class="legend-nat_average-words">National Average</div>
                 </div>
 
                 <a class="link link-more" data-bind="more_link">
@@ -231,14 +238,9 @@ permalink: /search/
 
           </section>
 
-          <!-- <div class="pagination container show-loaded">
-            <input type="hidden" name="page">
-
-            <ol data-bind="pages">
-              Page:
-              <li><a class="select-page" data-bind="link">1</a></li>
-            </ol>
-          </div> -->
+          <div class="pagination pagination_bottom container show-loaded">
+            <!-- this gets filled in with JavaScript -->
+          </div>
 
         </div>
 
