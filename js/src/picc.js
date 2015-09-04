@@ -27,9 +27,9 @@ picc.RACE_ETHNICITY_LABELS = {
   black_non_hispanic:     "Black non-Hispanic",
   hispanic:               "Hispanic",
   nhpi:                   "Native Hawaiian/Pacific Islander",
-  non_resident_alien:     "non-resident alien",
-  two_or_more:            "two or more races",
-  unknown:                "unknown",
+  non_resident_alien:     "Non-resident alien",
+  two_or_more:            "Two or more races",
+  unknown:                "Unknown",
   white:                  "White",
   white_non_hispanic:     "White non-Hispanic",
 };
