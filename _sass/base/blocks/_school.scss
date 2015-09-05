@@ -91,8 +91,12 @@
 
   .school-heading {
     h1 {
-      @include font-size($h1-huge);
+      @include font-size($h1);
       padding-bottom: $base-padding-lite;
+
+      @include respond-to(small-up) {
+        @include font-size($h1-huge);
+      }
     }
 
     h2 {
