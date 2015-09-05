@@ -459,7 +459,6 @@ picc.fields = {
 
   // net price
   NET_PRICE:            '2013.cost.avg_net_price.overall',
-  // FIXME: where is NET_PRICE_BY_INCOME used?
   NET_PRICE_BY_INCOME:  '2013.cost.net_price',
 
   // completion rate
@@ -814,6 +813,22 @@ picc.school.directives = (function() {
           this.getAttribute('data-href'),
           {url: encodeURIComponent(document.location.href)}
         );
+      }
+    },
+
+    response_link: {
+      '@href': function(d) {
+        var href = format.href(fields.SCHOOL_URL)(d);
+        if (href) {
+          var suffix = '/CollegeScorecard';
+          if (href.substr(-1) === '/') {
+            href += suffix.substr(1);
+          } else {
+            href += suffix;
+          }
+          return href;
+        }
+        return '';
       }
     },
 
