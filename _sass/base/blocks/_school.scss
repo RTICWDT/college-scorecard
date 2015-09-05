@@ -401,6 +401,11 @@
   margin-top: $base-padding-extra;
   padding-top: $base-padding;
   padding-bottom: $base-padding;
+
+  .button {
+    padding-left: $base-padding;
+    padding-right: $base-padding;
+  }
 }
 
 .average-value {
