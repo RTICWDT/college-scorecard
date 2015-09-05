@@ -2,14 +2,14 @@ footer {
   @include font-size($h6);
   background-color: $lighter-gray;
   color: $dark-gray;
-  height: 60px;
+  height: 180px;
   font-weight: $weight-light;
   text-align: center;
   padding-top: 22px;
 
   @include respond-to(tiny-up) {
     @include font-size($h5);
-    height: 200px;
+    height: 260px;
     padding-top: 51px;
   }
 
@@ -27,9 +27,35 @@ footer {
     padding-bottom: $base-padding;
   }
 
+  .footer-attribution {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include respond-to(tiny-up) {
+      width: 70%;
+    }
+
+    @include respond-to(small-up) {
+      width: 50%;
+    }
+
+    @include respond-to(medium-up) {
+      width: 40%;
+    }
+
+    @include respond-to(large-up) {
+      width: 30%;
+    }
+  }
+
   .footer-owner {
     font-weight: $weight-bold;
     letter-spacing: 0.4px;
     text-transform: uppercase;
+
+    a {
+      color: $dark-gray;
+    }
   }
 }

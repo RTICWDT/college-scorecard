@@ -18,6 +18,22 @@ picc.errors = {
   NO_SUCH_SCHOOL: 'No school found.'
 };
 
+// race-ethnicity labels
+picc.RACE_ETHNICITY_LABELS = {
+  aian:                   "American Indian/Alaska Native",
+  asian:                  "Asian",
+  asian_pacific_islander: "Asian/Pacific Islander",
+  black:                  "Black",
+  black_non_hispanic:     "Black non-Hispanic",
+  hispanic:               "Hispanic",
+  nhpi:                   "Native Hawaiian/Pacific Islander",
+  non_resident_alien:     "Non-resident alien",
+  two_or_more:            "Two or more races",
+  unknown:                "Unknown",
+  white:                  "White",
+  white_non_hispanic:     "White non-Hispanic",
+};
+
 /**
  * picc.API is a singleton object with methods to query the open-data-maker
  * JSON API. Its base URL (`picc.API.url`) and API key (`picc.API.key`) are
@@ -429,7 +445,7 @@ picc.fields = {
   REGION_ID:            'school.region_id',
 
   RELIGIOUS:            'school.religious_affiliation',
-  OPERATING:            '2013.student.operating',
+  OPERATING:            'school.operating',
 
   SIZE:                 '2013.student.size',
   ONLINE_ONLY:          'school.online_only',
@@ -443,7 +459,6 @@ picc.fields = {
 
   // net price
   NET_PRICE:            '2013.cost.avg_net_price.overall',
-  // FIXME: where is NET_PRICE_BY_INCOME used?
   NET_PRICE_BY_INCOME:  '2013.cost.net_price',
 
   // completion rate
@@ -470,23 +485,23 @@ picc.fields = {
   RACE_ETHNICITY:       '2013.student.demographics.race_ethnicity',
   AGE_ENTRY:            '2013.student.demographics.age_entry',
 
-  ACT_25TH_PCTILE:      '2013.student.act_scores.25th_percentile.cumulative',
-  ACT_75TH_PCTILE:      '2013.student.act_scores.75th_percentile.cumulative',
-  ACT_MIDPOINT:         '2013.student.act_scores.midpoint.cumulative',
+  ACT_25TH_PCTILE:      '2013.admissions.act_scores.25th_percentile.cumulative',
+  ACT_75TH_PCTILE:      '2013.admissions.act_scores.75th_percentile.cumulative',
+  ACT_MIDPOINT:         '2013.admissions.act_scores.midpoint.cumulative',
 
-  SAT_CUMULATIVE_AVERAGE:   '2013.student.sat_scores.average.overall',
+  SAT_CUMULATIVE_AVERAGE:   '2013.admissions.sat_scores.average.overall',
 
-  SAT_READING_25TH_PCTILE:  '2013.student.sat_scores.25th_percentile.critical_reading',
-  SAT_READING_75TH_PCTILE:  '2013.student.sat_scores.75th_percentile.critical_reading',
-  SAT_READING_MIDPOINT:     '2013.student.sat_scores.midpoint.critical_reading',
+  SAT_READING_25TH_PCTILE:  '2013.admissions.sat_scores.25th_percentile.critical_reading',
+  SAT_READING_75TH_PCTILE:  '2013.admissions.sat_scores.75th_percentile.critical_reading',
+  SAT_READING_MIDPOINT:     '2013.admissions.sat_scores.midpoint.critical_reading',
 
-  SAT_MATH_25TH_PCTILE:     '2013.student.sat_scores.25th_percentile.math',
-  SAT_MATH_75TH_PCTILE:     '2013.student.sat_scores.75th_percentile.math',
-  SAT_MATH_MIDPOINT:        '2013.student.sat_scores.midpoint.math',
+  SAT_MATH_25TH_PCTILE:     '2013.admissions.sat_scores.25th_percentile.math',
+  SAT_MATH_75TH_PCTILE:     '2013.admissions.sat_scores.75th_percentile.math',
+  SAT_MATH_MIDPOINT:        '2013.admissions.sat_scores.midpoint.math',
 
-  SAT_WRITING_25TH_PCTILE:  '2013.student.sat_scores.25th_percentile.writing',
-  SAT_WRITING_75TH_PCTILE:  '2013.student.sat_scores.75th_percentile.writing',
-  SAT_WRITING_MIDPOINT:     '2013.student.sat_scores.midpoint.writing',
+  SAT_WRITING_25TH_PCTILE:  '2013.admissions.sat_scores.25th_percentile.writing',
+  SAT_WRITING_75TH_PCTILE:  '2013.admissions.sat_scores.75th_percentile.writing',
+  SAT_WRITING_MIDPOINT:     '2013.admissions.sat_scores.midpoint.writing',
 
   NET_PRICE_CALC_URL:       'school.price_calculator_url'
 };
@@ -671,6 +686,11 @@ picc.access.specialDesignations = function(d) {
     designations.push(SPECIAL_DESIGNATIONS.men_only);
   }
 
+  var religious = picc.access(picc.fields.RELIGIOUS)(d);
+  if (religious in picc.RELIGIOUS_AFFILIATIONS_BY_NUMBER) {
+    designations.push(picc.RELIGIOUS_AFFILIATIONS_BY_NUMBER[religious]);
+  }
+
   var minorityServing = picc.access(picc.fields.MINORITY_SERVING)(d);
   if (minorityServing) {
     for (var key in SPECIAL_DESIGNATIONS) {
@@ -700,6 +720,7 @@ picc.access.programAreas = function(d, metadata) {
   var dictionary = metadata.dictionary;
   var field = picc.fields.PROGRAM_PERCENTAGE;
   var programs = picc.access(field)(d);
+  if (!programs) return [];
   // remove the year prefix
   field = field.replace(/^\d+\./, '');
   return Object.keys(programs || {})
@@ -792,6 +813,22 @@ picc.school.directives = (function() {
           this.getAttribute('data-href'),
           {url: encodeURIComponent(document.location.href)}
         );
+      }
+    },
+
+    response_link: {
+      '@href': function(d) {
+        var href = format.href(fields.SCHOOL_URL)(d);
+        if (href) {
+          var suffix = '/CollegeScorecard';
+          if (href.substr(-1) === '/') {
+            href += suffix.substr(1);
+          } else {
+            href += suffix;
+          }
+          return href;
+        }
+        return '';
       }
     },
 
@@ -908,19 +945,19 @@ picc.school.directives = (function() {
 
     race_ethnicity_values: function(d) {
       if (!d.metadata) return [];
-      var dictionary = d.metadata.dictionary;
-      var field = fields.RACE_ETHNICITY;
-      var values = access(field)(d);
-      var prefix = field + '.';
+      var values = access(fields.RACE_ETHNICITY)(d);
+      if (!values) return [];
       return Object.keys(values)
         .map(function(key) {
           var value = picc.nullify(values[key]);
-          var dict = dictionary[prefix + key];
+          var label = picc.RACE_ETHNICITY_LABELS[key] || key;
           return {
-            key: key,
-            label: dict ? (dict.label || key) : key,
-            value: value,
-            percent: percent(value)
+            key:      key,
+            label:    label,
+            value:    value,
+            percent:  value >= .05
+              ? percent(value)
+              : '<1%'
           };
         })
         .filter(function(d) {
