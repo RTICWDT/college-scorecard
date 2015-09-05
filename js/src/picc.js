@@ -1655,14 +1655,25 @@ picc.ready(function() {
   );
 });
 
-window.addEventListener('mousedown', function(e) {
-  // console.info('+ drag');
-  document.body.classList.add('dragging');
-});
-
-window.addEventListener('mouseup', function(e) {
-  // console.info('- drag');
-  document.body.classList.remove('dragging');
-});
+// set the "dragging" class when the mouse is down
+d3.select(document)
+  .on('mousedown', function(e) {
+    clearTimeout(this.__dragTimeout);
+    var body = this.body;
+    this.__dragTimeout = setTimeout(function() {
+      // console.info('+ drag');
+      body.classList.add('dragging');
+    }, 100);
+  })
+  .on('mouseup', function(e) {
+    clearTimeout(this.__dragTimeout);
+    // console.info('- drag');
+    this.body.classList.remove('dragging');
+  })
+  .on('click', function(e) {
+    clearTimeout(this.__dragTimeout);
+    // console.info('- drag');
+    this.body.classList.remove('dragging');
+  });
 
 module.exports = picc;
