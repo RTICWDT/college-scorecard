@@ -38,12 +38,20 @@ module.exports = function search() {
 
   // close other toggles when one opens
   var toggles = d3.selectAll('.toggle-accordion')
-    .property('closed', true)
     .on('open', function() {
       var opened = this;
       toggles.each(function() {
         if (this !== opened) this.close();
       });
+    });
+
+  // close all toggles on escape
+  d3.select(window)
+    .on('keyup', function() {
+      if (d3.event.keyCode === 27) {
+        console.warn('escape');
+        toggles.property('expanded', false);
+      }
     });
 
   // expand (child) accordions that contain elements with values set
