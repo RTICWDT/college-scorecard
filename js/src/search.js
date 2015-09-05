@@ -99,6 +99,7 @@ module.exports = function search() {
 
   form.on('submit', function(data, e) {
     toggles.property('expanded', false);
+    scrollIntoView();
 
     change();
     e.preventDefault();
@@ -454,6 +455,14 @@ module.exports = function search() {
     var dist = form.getInputsByName('distance')[0];
     if (!dist) return;
     dist.disabled = !zip;
+  }
+
+  function scrollIntoView() {
+    try {
+      form.element.scrollIntoView();
+    } catch (error) {
+      console.warn('unable to scroll results into view:', error);
+    }
   }
 
 };
