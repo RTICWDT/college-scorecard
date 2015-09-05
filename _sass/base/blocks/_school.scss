@@ -522,6 +522,7 @@
       display: inline-block;
       text-align: left;
       vertical-align: middle;
+      white-space: nowrap;
 
       &:last-of-type {
         padding-left: $base-padding-lite;
@@ -535,8 +536,7 @@
   }
 
   .fact_number {
-    @include font-size(3);
-
+    @include font-size(2.5);
     padding-bottom: 0;
 
     .small {
@@ -546,6 +546,10 @@
     &.divide {
       @include font-size(4.2);
       color: darken($mid-gray, 10%);
+    }
+
+    @include respond-to(medium-up) {
+      @include font-size(3);
     }
   }
 
@@ -630,9 +634,13 @@ ol.bars {
     margin-bottom: 0.7em;
     position: relative;
 
+    .bar-wrapper {
+      background: $light-gray;
+    }
+
     .bar {
-      background: $sky-blue;
-      height: 1em;
+      background: $lime-green;
+      height: 1.2em;
     }
 
     &.bar-female .bar {

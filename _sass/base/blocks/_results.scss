@@ -210,7 +210,8 @@
 .section-card_container-results {
 
   .results-card {
-    border-radius: 0;
+    border: $base-padding-lite solid $mid-gray;
+    border-radius: 1em;
 
     h1 {
       @include font-size($h1);
@@ -227,6 +228,7 @@
     }
 
     @include respond-to(small-up) {
+      border: none;
       border-radius: 0.4em;
     }
   }
