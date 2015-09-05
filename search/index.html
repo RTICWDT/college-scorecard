@@ -2,206 +2,210 @@
 title: Search
 layout: default
 permalink: /search/
-scripts:
-  - components/combo-box.js
-  - components/picc-slider.js
-  - vendor/formdb.min.js
-  - vendor/tagalong.min.js
-body_scripts:
-  - search.js
 ---
-
-{% assign show_search_filters = true %}
-{% assign search_form_nested = true %}
 
 <form id="search-form" is="search-form"
   autocomplete="false"
-  action="{{ page.permalink }}" method="GET" class="drawer">
+  action="{{ page.permalink }}" method="GET">
 
+  <div class="toggles">
 
+    <div class="container">
 
-  <input type="checkbox" id="drawer-toggle">
-  <label for="drawer-toggle" id="drawer-toggle-label"></label>
-  <header><span>Filter and edit your search</span></header>
-  <nav id="drawer">
+      <aria-accordion id="filters" class="toggle-accordion">
 
-    <div>
-
-      <div class="filter-wrapper">
-
-        {% include filters.html %}
-
-      </div>
-
-      <fieldset class="results_search">
-
-
-
-          <legend>Modify Your Search</legend>
-          <h1 class="search_category search_category-head">
-              Modify Your Search
+        <div class="toggle-control">
+          <legend>Filter Results</legend>
+          <h1 class="search_category">
+            <a aria-expanded="false" aria-controls="filter-content">
+              <i class="fa fa-filter"></i>Filter Results<i class="fa fa-chevron-down"></i>
+            </a>
           </h1>
+        </div>
+
+
+        <div id="filter-content" aria-hidden="true" class="toggle-content">
+
+          {% include filters.html %}
+
+        </div>
+
+        <input type="submit" class="sr-only">
+
+      </aria-accordion>
+
+      <aria-accordion id="search-edit" class="toggle-accordion">
+
+        <div class="toggle-control">
+          <legend>Edit Search</legend>
+          <h1 class="search_category">
+            <a aria-expanded="false" aria-controls="search-content">
+              <i class="fa fa-search"></i>Edit Search<i class="fa fa-chevron-down"></i>
+            </a>
+          </h1>
+        </div>
+
+        <div id="search-content" aria-hidden="true" class="toggle-content toggle-content-search">
 
           {% include search-form.html %}
 
+        </div>
 
+        <input type="submit" class="sr-only">
 
-      </fieldset>
+      </aria-accordion>
 
     </div>
 
-  </nav>
+  </div>
 
-  <div id="page-content">
+  <!-- Search results -->
+  <section class="results search-results loadable">
 
-    <!-- Search results -->
-    <section class="results search-results loadable">
+    <div class="container">
 
-      <div class="container">
+      <div class="results-main">
 
-        <div class="results-main">
+        <div class="results-main-alert">
 
-          <div class="results-main-alert">
+          <div class="container show-loading">
+            <h1>Loading...</h1>
+          </div>
 
-            <div class="results-share-wrapper">
-              <a data-href="mailto:?subject=Take%20a%20look%20at%20these%20schools&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov,%20take%20a%20look%3A%0A%0A{url}" class="results-share">Share</a>
-            </div>
+          <div class="container show-error">
+            <h1>Error</h1>
+            <p class="error-message"></p>
+          </div>
 
-            <div class="container show-loading">
-              <h1>Loading...</h1>
-            </div>
+          <div class="container show-loaded">
 
-            <div class="container show-error">
-              <h1>Error</h1>
-              <p class="error-message"></p>
-            </div>
+            <div class="u-group_inline">
 
-            <div class="container show-loaded">
-              <div>
+              <div class="u-group_inline-left">
                 <h1>
                   <span data-bind="results_total">0</span>
                   <span data-bind="results_word">Results</span>
-                  Based on Your Criteria
                 </h1>
-
               </div>
 
-              <div>
-
-                <div class="u-group_inline">
-
-                  <!-- <div class="u-group_inline-right"> -->
-                    <label for="select-sort">Sort by:</label>
-                    <select id="select-sort" name="sort">
-                      <option selected value="advantage:desc">Exceeds H.S. Only</option>
-                      <option value="avg_net_price:asc">Actual Cost</option>
-                      <option value="completion_rate:desc">Graduation Rate</option>
-                      <option value="salary:desc">Salary After School</option>
-                      <option value="name:asc">Name (A to Z)</option>
-                      <!--option value="name:desc">Name (Z to A)</option -->
-                      <!--option value="size:desc">Size (large to small)</option-->
-                      <option value="size:asc">Size (small to large)</option>
-                    </select>
-                  <!-- </div> -->
-
-                </div>
-
+              <div class="u-group_inline-right">
+                <a data-href="mailto:?subject=Take%20a%20look%20at%20these%20schools&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov,%20take%20a%20look%3A%0A%0A{url}" class="results-share">Share</a>
               </div>
+
+            </div>
+
+            <div class="results-sort u-group_inline">
+
+              <div class="u-group_inline-left">
+                <label for="select-sort">Sort:</label>
+              </div>
+
+              <div class="u-group_inline-right">
+                <select id="select-sort" name="sort">
+                  <option selected value="advantage:desc">Increase in Earnings</option>
+                  <option value="avg_net_price:asc">Actual Cost</option>
+                  <option value="completion_rate:desc">Graduation Rate</option>
+                  <option value="salary:desc">Salary After School</option>
+                  <option value="name:asc">Name (A to Z)</option>
+                  <!--option value="name:desc">Name (Z to A)</option -->
+                  <!--option value="size:desc">Size (large to small)</option-->
+                  <option value="size:asc">Size (small to large)</option>
+                </select>
+              </div>
+
             </div>
 
           </div>
 
-          <div class="pagination container show-loaded">
-            <input type="hidden" name="page">
+        </div>
 
-            <ol data-bind="pages">
-              Page:
-              <li><a class="select-page" data-bind="link">1</a></li>
-            </ol>
-          </div>
+        <div class="pagination container show-loaded show-incremental">
+          <input type="hidden" name="page">
+          <ol data-bind="pages">
+            Page:
+            <li><a class="select-page" data-bind="link">1</a></li>
+          </ol>
+        </div>
 
-          <section class="section section-card_container-results show-loaded">
+        <section class="section section-card_container-results show-loaded fade-incremental">
 
-            <div class="results-main-schools schools-list container" data-bind="results">
+          <div class="results-main-schools schools-list container" data-bind="results">
 
-              <!-- this element is the template for the results listing -->
+            <!-- this element is the template for the results listing -->
 
-              <div class="school results-card">
+            <div class="school results-card">
 
-                <div class="investigation-major-wrapper"
-                  data-bind="under_investigation" aria-hidden="true">
-                  <a>
-                    <p class="investigation-major" aria-describedby="tip-hcm2">
-                      Under investigation <i class="tooltip-target fa fa-info-circle"></i>
-                    </p>
-                  </a>
-                </div>
+              <div class="investigation-major-wrapper"
+                data-bind="under_investigation" aria-hidden="true">
+                <a>
+                  <p class="investigation-major" aria-describedby="tip-hcm2">
+                    Under investigation <i class="tooltip-target fa fa-info-circle"></i>
+                  </p>
+                </a>
+              </div>
 
-                <div class="results-card-headings">
-                  <h1 data-bind="title"><a class="link">School Name</a></h1>
-                  <ul class="school-info">
-                    <li class="location">
-                      <span data-bind="city">City</span>,
-                      <span data-bind="state">State</span>
-                    </li>
-                    <li>
-                      <span data-bind="size_number">x</span> undergraduate students
-                    </li>
-                    <!-- <a data-bind="under_investigation2" aria-hidden="true">
-                      <li class="investigation-minor" aria-describedby="tip-investigation-minor">
-                        Under investigation <i class="tooltip-target fa fa-info-circle"></i>
-                      </li>
-                    </a> -->
-                  </ul>
-                </div>
+              <div class="results-card-headings">
+                <h1 data-bind="title"><a class="link">School Name</a></h1>
+                <ul class="school-info">
+                  <li class="location">
+                    <span data-bind="city">City</span>,
+                    <span data-bind="state">State</span>
+                  </li>
+                  <li>
+                    <span data-bind="size_number">x</span> undergraduate students
+                  </li>
+                </ul>
+              </div>
 
-                <div id="key-stats" class="school-meters">
-                  <figure class="meter">
-                    <h2 class="figure-heading constrain_width"
-                      aria-describedby="tip-avg-cost-year">
-                      Average <br>Actual Cost
-                      <a class="tooltip-target u-new_line">
-                        <i class="fa fa-info-circle"></i>
-                      </a>
-                    </h2>
-                    <picc-meter {% include net_price_meter_attributes.html %}>
-                    </picc-meter>
-                    <figcaption>
-                      <span data-bind="average_cost"></span>
-                    </figcaption>
-                  </figure>
+              <div id="key-stats" class="school-meters">
 
-                  <figure class="meter">
-                    <h2 class="figure-heading constrain_width"
-                      aria-describedby="tip-graduation-rate">
-                      Graduation <br>Rate
-                      <a class="tooltip-target u-new_line">
-                        <i class="fa fa-info-circle"></i>
-                      </a>
-                    </h2>
-                    <picc-meter {% include graduation_meter_attributes.html %}>
-                    </picc-meter>
-                    <figcaption>
-                      <span data-bind="grad_rate"></span>
-                    </figcaption>
-                  </figure>
+                <figure class="meter">
+                  <h2 class="figure-heading constrain_width"
+                    aria-describedby="tip-avg-cost-year">
+                    Actual<br>Cost
+                    <a class="tooltip-target u-new_line">
+                      <i class="fa fa-info-circle"></i>
+                    </a>
+                  </h2>
+                  <picc-meter {% include net_price_meter_attributes.html %}>
+                  </picc-meter>
+                  <figcaption>
+                    <span data-bind="average_cost"></span>
+                  </figcaption>
+                </figure>
 
-                  <figure class="meter">
-                    <h2 class="figure-heading constrain_width"
-                      aria-describedby="tip-avg-salary">
-                      Salary 10 <br>Years After
-                      <a class="tooltip-target u-new_line">
-                        <i class="fa fa-info-circle"></i>
-                      </a>
-                    </h2>
-                    <picc-meter {% include earnings_meter_attributes.html %}>
-                    </picc-meter>
-                    <figcaption>
-                      <span data-bind="average_salary"></span>
-                    </figcaption>
-                  </figure>
-                </div>
+                <figure class="meter">
+                  <h2 class="figure-heading constrain_width"
+                    aria-describedby="tip-graduation-rate">
+                    Graduation <br>Rate
+                    <a class="tooltip-target u-new_line">
+                      <i class="fa fa-info-circle"></i>
+                    </a>
+                  </h2>
+                  <picc-meter {% include graduation_meter_attributes.html %}>
+                  </picc-meter>
+                  <figcaption>
+                    <span data-bind="grad_rate"></span>
+                  </figcaption>
+                </figure>
 
+                <figure class="meter">
+                  <h2 class="figure-heading constrain_width"
+                    aria-describedby="tip-avg-salary">
+                    Salary After<br>Attending
+                    <a class="tooltip-target u-new_line">
+                      <i class="fa fa-info-circle"></i>
+                    </a>
+                  </h2>
+                  <picc-meter {% include earnings_meter_attributes.html %}>
+                  </picc-meter>
+                  <figcaption>
+                    <span data-bind="average_salary"></span>
+                  </figcaption>
+                </figure>
+              </div>
+
+              <div class="legend-wrapper">
                 <div class="legend-nat_average">
                   <div class="legend-nat_average-box">
                     <div class="legend-nat_average-box-line">
@@ -209,32 +213,30 @@ body_scripts:
                   </div>
                   <div class="legend-nat_average-words">National Average</div>
                 </div>
-
-                <a class="link link-more" data-bind="more_link">
-                  View more details <i class="fa fa-chevron-right"></i>
-                </a>
-
               </div>
 
-            </div><!-- /div.schools-list -->
+              <a class="link link-more" data-bind="more_link">
+                View more details <i class="fa fa-chevron-right"></i>
+              </a>
 
-          </section>
+            </div>
 
-          <!-- <div class="pagination container show-loaded">
-            <input type="hidden" name="page">
+          </div><!-- /div.schools-list -->
 
-            <ol data-bind="pages">
-              Page:
-              <li><a class="select-page" data-bind="link">1</a></li>
-            </ol>
-          </div> -->
+        </section>
 
+        <div class="pagination pagination_bottom container show-loaded">
+          <!-- this gets filled in with JavaScript -->
         </div>
 
       </div>
 
-    </section>
+    </div>
 
-  </div>
+  </section>
 
 </form>
+
+<script>
+  picc.pages.search();
+</script>

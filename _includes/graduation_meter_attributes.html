@@ -2,5 +2,6 @@
   data-bind="grad_rate_meter"
   max="1"
   average="{{ site.data.national_stats.completion_rate.median }}"
+  average-range="{{ site.data.national_stats.completion_rate.average_range|join:'..' }}"
   data-median-four_year="{{ site.data.national_stats.completion_rate_4.median }}"
   data-median-lt_four_year="{{ site.data.national_stats.completion_rate_l4.median }}"

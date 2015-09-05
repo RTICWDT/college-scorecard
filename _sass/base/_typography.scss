@@ -48,7 +48,6 @@ h1, h2, h3, h4
   line-height: $base-heading-line-height;
   margin: 0;
   padding: 0;
-  //padding-top: 0.7em;
   text-rendering: optimizeLegibility;
   // ^^ Fix character spacing for headings
   // by enabling ligatures in text smaller than 20px
@@ -197,14 +196,13 @@ button,
 }
 
 .special {
-  background-color: #f6e768;
+  background-color: #d3eefb;
   display: inline-block;
   font-weight: 600;
   line-height: 1;
   margin-right: $base-padding-lite;
   margin-bottom: 0.2em;
   padding: 0.3em;
-  text-transform: uppercase;
 }
 
 .fact_number {
@@ -220,7 +218,7 @@ button,
   @extend .button-primary;
   @include font-size(0.75);
   letter-spacing: 1px;
-  padding: 2px 10px !important;
+  padding: 2px 15px !important;
   height: auto !important;
   width: auto !important;
 }

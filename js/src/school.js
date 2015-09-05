@@ -1,9 +1,10 @@
-(function(exports) {
+var tagalong = require('tagalong');
 
-  var id = getSchoolId();
+module.exports = function school() {
 
   var loadable = d3.select('.loadable');
 
+  var id = getSchoolId();
   if (!id) {
     loadable.classed('js-error', true);
     return showError(picc.errors.NO_SCHOOL_ID);
@@ -105,10 +106,16 @@
     bars.select('.value')
       .remove();
 
+    var scale = d3.scale.linear()
+      .domain([0, 1])
+      .range(['1%', '100%']);
+
     bars.select('.bar')
-      .style('width', d3.scale.linear()
-        .domain([0, .01, 1])
-        .range(['0%', '1%', '100%']));
+      .style('width', function(d) {
+        return d > .005
+          ? scale(d)
+          : d ? '1px' : 0;
+      });
 
     createMap(school, root.querySelector('.school-map'));
   });
@@ -211,8 +218,8 @@
       })
       .addTo(map);
 
-    marker.bindPopup(school.name);
+    marker.bindPopup(school.school.name);
     return map;
   }
 
-})(this);
+};
