@@ -70,6 +70,12 @@
       width: 100px;
       margin-bottom: $base-padding;
     }
+
+     .fact-words {
+      max-width: 280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 
   span {
@@ -135,7 +141,7 @@
 
     .section-home-numbers-group-left {
       display: table-cell;
-      padding-right: 8px;
+      padding-right: 20px;
     }
 
     .section-home-numbers-group-right {
