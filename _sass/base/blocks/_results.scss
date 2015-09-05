@@ -160,7 +160,7 @@
 
 .results-main {
   background-color: $mid-gray;
-  min-height: 900px; //TODO make this auto
+  //min-height: 900px;
 }
 
 .results-main-schools {
@@ -171,18 +171,16 @@
   }
 
   .school-meters {
-    overflow: hidden;
-
     figure.meter {
       @include span-columns(4 of 12);
       @include omega(3n);
 
       figcaption {
-        @include font-size(1);
+        @include font-size(0.9);
       }
 
       h2.figure-heading {
-        @include font-size(0.75);
+        @include font-size(0.7);
         &.constrain_width {
           margin-left: -5%;
           width: 110%;
@@ -215,7 +213,7 @@
     border-radius: 0;
 
     h1 {
-      @include font-size(1.4);
+      @include font-size($h1);
       padding-top: 0;
 
       a[href] {
@@ -238,7 +236,7 @@
   padding: $base-padding;
 
   ul {
-    @include font-size(0.9);
+    @include font-size($h4);
     font-weight: bold;
   }
 
@@ -270,7 +268,7 @@
 }
 
 .results-card-headings {
-  min-height: 150px;
+  min-height: 160px;
   border-bottom: $thin-border-size solid $base-border-color;
   margin-bottom: $base-padding;
 }
