@@ -342,6 +342,10 @@
 .school-table {
   width: 100%;
 
+  th {
+    text-transform: uppercase;
+  }
+
   td, th {
     padding: em(5);
     text-align: left;
