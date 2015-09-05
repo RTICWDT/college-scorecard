@@ -49,7 +49,6 @@ module.exports = function search() {
   d3.select(window)
     .on('keyup', function() {
       if (d3.event.keyCode === 27) {
-        console.warn('escape');
         toggles.property('expanded', false);
       }
     });
