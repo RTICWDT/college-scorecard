@@ -1,6 +1,6 @@
 footer {
   @include font-size($h6);
-  background-color: #eeeeee;
+  background-color: $lighter-gray;
   color: $dark-gray;
   height: 180px;
   font-weight: $weight-light;

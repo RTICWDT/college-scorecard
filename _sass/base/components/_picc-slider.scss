@@ -65,8 +65,7 @@ picc-slider {
   h2 {
     @include font-size($h4);
     border-top: $thin-border-size solid $base-border-color;
-    margin-top: $base-padding;
-    padding-top: $base-padding;
+    padding: $base-padding $base-padding 0 $base-padding;
   }
 }
 

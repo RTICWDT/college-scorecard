@@ -21,16 +21,6 @@
       padding-left: $base-padding;
     }
   }
-
-  // @include respond-to(medium-up) {
-  //   background: linear-gradient(
-  //     to right,
-  //     $white 0%,
-  //     $white 50%,
-  //     $mid-gray 50%,
-  //     $mid-gray 100%
-  //   );
-  // }
 }
 
 .results_search {
@@ -43,6 +33,8 @@
   padding-left: $base-padding;
 
   .show-loaded {
+    padding-top: $base-padding;
+
     label {
       display: block;
       padding-bottom: 4px;
@@ -61,6 +53,16 @@
       @include span-columns(12);
 
       @include respond-to(medium-up) {
+        &:first-of-type {
+          @include span-columns(6);
+        }
+
+        &:last-of-type {
+          @include span-columns(6);
+        }
+      }
+
+      @include respond-to(large-up) {
         &:first-of-type {
           @include span-columns(8);
         }
@@ -92,20 +94,20 @@
 
 .results-share {
   @extend .share;
+  margin-left: $base-padding;
 }
 
-.results-share-wrapper {
-  @include span-columns(12);
-  text-align: right;
-
-  @include respond-to(medium-up) {
-    padding-right: $base-padding;
+.results-sort {
+  label {
+    @include font-size(1);
+  }
+  .u-group_inline-right {
+    width: 100%;
   }
 }
 
 .results-filter {
   background-color: $white;
-  //display: none;
 
   .search-form-intro {
     display: none;
@@ -159,10 +161,6 @@
 .results-main {
   background-color: $mid-gray;
   min-height: 900px; //TODO make this auto
-
-  // @include respond-to(medium-up) {
-  //   @include span-columns(13 of 16);
-  // }
 }
 
 .results-main-schools {
@@ -173,10 +171,11 @@
   }
 
   .school-meters {
+    overflow: hidden;
+
     figure.meter {
-      @include span-columns(5 of 15);
+      @include span-columns(4 of 12);
       @include omega(3n);
-      margin: 1px;
 
       figcaption {
         @include font-size(1);
@@ -252,6 +251,7 @@
   @include omega();
 
   @include respond-to(small-up) {
+    @include omega-reset(n);
     @include span-columns(6);
     @include omega(2n);
   }
@@ -278,4 +278,3 @@
 .pagination_bottom {
   margin-bottom: $base-padding;
 }
-
