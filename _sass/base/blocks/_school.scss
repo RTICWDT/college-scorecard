@@ -486,14 +486,21 @@
 
 .school-student-stats-col {
 
-  .test-align {
-    width: 75%;
+  .school-student-stats-col-align {
+    display: inline-block;
     margin-right: auto;
     margin-left: auto;
+    text-align: center;
+    width: 85%;
 
     > div {
       display: inline-block;
+      text-align: left;
       vertical-align: middle;
+
+      &:last-of-type {
+        padding-left: $base-padding-lite;
+      }
     }
   }
 
