@@ -359,9 +359,9 @@
 
 .school-long_list {
   border-top: $thin-border-size solid $base-border-color;
-  height: 375px;
+  max-height: 375px;
   margin-top: $base-padding-lite;
-  overflow-y: auto;
+  overflow-y: scroll;
 
   li {
     border-bottom: $thin-border-size solid $base-border-color;
