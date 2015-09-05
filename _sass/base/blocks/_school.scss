@@ -526,9 +526,6 @@
   margin-top: $base-padding-extra;
 
   .fact_number {
-    border: $regular-border-size solid $base-border-color;
-    border-radius: 500px;
-    height: 120px;
     padding-top: 31px;
     text-align: center;
     width: 120px;
@@ -543,6 +540,11 @@
   width: 75%;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: $base-padding-lite;
+
+  .fact_number {
+    display: inline-block;
+  }
 }
 
   // @include span-columns(12);
