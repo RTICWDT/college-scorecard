@@ -20,18 +20,18 @@ picc.errors = {
 
 // race-ethnicity labels
 picc.RACE_ETHNICITY_LABELS = {
-  aian:                   "American Indian/Alaska Native",
-  asian:                  "Asian",
-  asian_pacific_islander: "Asian/Pacific Islander",
-  black:                  "Black",
-  black_non_hispanic:     "Black non-Hispanic",
-  hispanic:               "Hispanic",
-  nhpi:                   "Native Hawaiian/Pacific Islander",
-  non_resident_alien:     "Non-resident alien",
-  two_or_more:            "Two or more races",
-  unknown:                "Unknown",
-  white:                  "White",
-  white_non_hispanic:     "White non-Hispanic",
+  aian:                   'American Indian/Alaska Native',
+  asian:                  'Asian',
+  asian_pacific_islander: 'Asian/Pacific Islander',
+  black:                  'Black',
+  black_non_hispanic:     'Black non-Hispanic',
+  hispanic:               'Hispanic',
+  nhpi:                   'Native Hawaiian/Pacific Islander',
+  non_resident_alien:     'Non-resident alien',
+  two_or_more:            'Two or more races',
+  unknown:                'Unknown',
+  white:                  'White',
+  white_non_hispanic:     'White non-Hispanic',
 };
 
 /**
@@ -459,7 +459,6 @@ picc.fields = {
 
   // net price
   NET_PRICE:            '2013.cost.avg_net_price.overall',
-  // FIXME: where is NET_PRICE_BY_INCOME used?
   NET_PRICE_BY_INCOME:  '2013.cost.net_price',
 
   // completion rate
@@ -814,6 +813,22 @@ picc.school.directives = (function() {
           this.getAttribute('data-href'),
           {url: encodeURIComponent(document.location.href)}
         );
+      }
+    },
+
+    response_link: {
+      '@href': function(d) {
+        var href = format.href(fields.SCHOOL_URL)(d);
+        if (href) {
+          var suffix = '/CollegeScorecard';
+          if (href.substr(-1) === '/') {
+            href += suffix.substr(1);
+          } else {
+            href += suffix;
+          }
+          return href;
+        }
+        return '';
       }
     },
 
@@ -1532,7 +1547,9 @@ picc.tooltip = {
    * This is an hover/focus event listener that will attach the corresponding
    * tooltip to this element's tooltip-target.
    */
-  show: function showTooltip() {
+  show: function showTooltip(e) {
+    clearTimeout(this.__tooltipShowTimeout);
+
     var tooltip = this.tooltip;
     if (!tooltip) {
       tooltip = document.getElementById(this.getAttribute('aria-describedby'));
@@ -1542,10 +1559,30 @@ picc.tooltip = {
       this.tooltip = tooltip;
     }
 
-    // console.log('show tooltip:', this, tooltip);
-    tooltip.setAttribute('aria-hidden', false);
+    var parent = this;
     var ref = this.querySelector('.tooltip-target') || this;
-    picc.tooltip.constrain(tooltip, ref);
+    var show = function() {
+      // console.log('show tooltip:', this, tooltip);
+      tooltip.setAttribute('aria-hidden', false);
+      var click;
+      // d3 makes this a lot simpler with exclusive listeners
+      var win = d3.select(window)
+        .on('click.tooltip', click = function(e) {
+          win.on('click.tooltip', null);
+          if (parent.contains(tooltip)) {
+            picc.tooltip.hide.call(parent, e);
+          } else {
+            console.warn('ignoring click on unowned tooltip:', parent, tooltip);
+          }
+        }, true);
+      picc.tooltip.constrain(tooltip, ref);
+    };
+
+    if (e.type === 'click') {
+      show();
+    } else {
+      this.__tooltipShowTimeout = setTimeout(show, 200);
+    }
   },
 
   /**
@@ -1553,9 +1590,18 @@ picc.tooltip = {
    * tooltip, but leave it in place for debugging.
    */
   hide: function hideTooltip() {
+    clearTimeout(this.__tooltipShowTimeout);
     if (!this.tooltip) return;
-    var tooltip = this.tooltip;
-    tooltip.setAttribute('aria-hidden', true);
+    this.tooltip.setAttribute('aria-hidden', true);
+    this.tooltip = null;
+  },
+
+  toggle: function toggleTooltip(e) {
+    if (this.tooltip && this.tooltip.getAttribute('aria-hidden') !== 'false') {
+      picc.tooltip.hide.call(this, e);
+    } else {
+      picc.tooltip.show.call(this, e);
+    }
   },
 
   /**
@@ -1627,27 +1673,49 @@ picc.ready(function() {
   var described = 'aria-describedby';
   picc.delegate(
     document.body,
+    // if the element matches '[aria-describedby^="tip-"]'
     function() {
       return this.hasAttribute(described)
           && this.getAttribute(described).match(/^tip-/);
     },
-    {
-      mouseenter: picc.tooltip.show,
-      mouseleave: picc.tooltip.hide,
-      focus:      picc.tooltip.show,
-      blur:       picc.tooltip.hide
-    }
+    // XXX this is a *very* rudimentary way to detect whether the browser
+    // supports touch events.
+    document.body.ontouchstart
+      // with touch enabled, only show on focus/blur and click/tap
+      ? {
+        focus:      picc.tooltip.show,
+        blur:       picc.tooltip.hide,
+        click:      picc.tooltip.toggle
+      }
+      // otherwise, show on enter/leave and focus/blur
+      : {
+        mouseenter: picc.tooltip.show,
+        mouseleave: picc.tooltip.hide,
+        focus:      picc.tooltip.show,
+        blur:       picc.tooltip.hide,
+      }
   );
 });
 
-window.addEventListener('mousedown', function(e) {
-  // console.info('+ drag');
-  document.body.classList.add('dragging');
-});
-
-window.addEventListener('mouseup', function(e) {
-  // console.info('- drag');
-  document.body.classList.remove('dragging');
-});
+// set the "dragging" class when the mouse is down
+d3.select(document)
+  .on('mousedown', function(e) {
+    clearTimeout(this.__dragTimeout);
+    var body = this.body;
+    this.__dragTimeout = setTimeout(function() {
+      // console.info('+ drag');
+      body.classList.add('dragging');
+    }, 100);
+  })
+  .on('mouseup', function(e) {
+    clearTimeout(this.__dragTimeout);
+    // console.info('- drag');
+    this.body.classList.remove('dragging');
+  })
+  .on('click', function(e) {
+    clearTimeout(this.__dragTimeout);
+    // console.info('- drag');
+    this.body.classList.remove('dragging');
+  });
 
 module.exports = picc;

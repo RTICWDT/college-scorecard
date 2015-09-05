@@ -31,22 +31,31 @@
 
   h2 {
     padding-bottom: $base-padding;
+    text-align: center;
   }
 
-  img {
-    padding-bottom: $base-padding-lite;
+  .button-outline {
+    @include font-size($h5);
+    letter-spacing: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
     width: 100%;
   }
 
-  p {
-    @extend .supporting_copy;
-    padding-bottom: $base-padding-lite;
-  }
-
-  .link-more {
-    display: inline-block;
-    padding-top: $base-padding-lite;
-  }
+  // img {
+  //   padding-bottom: $base-padding-lite;
+  //   width: 100%;
+  // }
+  //
+  // p {
+  //   @extend .supporting_copy;
+  //   padding-bottom: $base-padding-lite;
+  // }
+  //
+  // .link-more {
+  //   display: inline-block;
+  //   padding-top: $base-padding-lite;
+  // }
 
   @include respond-to(medium-up) {
     @include span-columns(3);
@@ -57,6 +66,7 @@
 
     h2 {
       @include font-size($h3);
+      text-align: left;
     }
   }
 }
@@ -172,7 +182,6 @@
     figure.meter {
       @include span-columns(5 of 15);
       @include omega(3n);
-      margin: 2px;
     }
 
     figcaption {
@@ -606,4 +615,9 @@ ol.bars {
 .leaflet-control-attribution a {
   color: $black !important;
   text-decoration: underline;
+}
+
+.college-response {
+  @include span-columns(12);
+  margin-top: $base-padding;
 }

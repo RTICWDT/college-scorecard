@@ -36,6 +36,31 @@ module.exports = function search() {
   // get a reference to all of the sliders
   var sliders = d3.selectAll('picc-slider');
 
+  // close other toggles when one opens
+  var toggles = d3.selectAll('.toggle-accordion')
+    .on('open', function() {
+      var opened = this;
+      toggles.each(function() {
+        if (this !== opened) this.close();
+      });
+    });
+
+  // close all toggles on escape
+  d3.select(window)
+    .on('keyup', function() {
+      if (d3.event.keyCode === 27) {
+        toggles.property('expanded', false);
+      }
+    });
+
+  // expand (child) accordions that contain elements with values set
+  picc.ui.expandAccordions('.toggle-accordion aria-accordion', function() {
+    var inputs = this.querySelectorAll('[name]');
+    return [].some.call(inputs, function(input) {
+      return query[input.name];
+    });
+  });
+
   picc.ready(function() {
     ready = true;
 
@@ -80,6 +105,9 @@ module.exports = function search() {
   });
 
   form.on('submit', function(data, e) {
+    toggles.property('expanded', false);
+    scrollIntoView();
+
     change();
     e.preventDefault();
     return false;
@@ -103,13 +131,6 @@ module.exports = function search() {
     poppingState = true;
     onChange();
     poppingState = false;
-  });
-
-  picc.ui.expandAccordions(function() {
-    var inputs = this.querySelectorAll('[name]');
-    return [].some.call(inputs, function(input) {
-      return query[input.name];
-    });
   });
 
   function onChange() {
@@ -144,6 +165,11 @@ module.exports = function search() {
 
     // don't submit the _drawer parameter
     delete params._drawer;
+
+    if (diffExcept(previousParams, params, ['page'])) {
+      // console.warn('non-page change:', previousParams, '->', params);
+      delete params.page;
+    }
 
     var query = picc.form.prepareParams(params);
 
@@ -382,6 +408,17 @@ module.exports = function search() {
     message.textContent = String(error) || 'There was an unexpected API error.';
   }
 
+  function diffExcept(a, b, keys) {
+    a = picc.data.extend({}, a);
+    b = picc.data.extend({}, b);
+    keys.forEach(function(key) {
+      delete a[key];
+      delete b[key];
+    });
+    // console.log('diff except:', a, b, keys);
+    return diff(a, b);
+  }
+
   function diff(a, b) {
     if ((typeof a) !== (typeof b)) {
       // console.log('diff types:', typeof a, typeof b);
@@ -425,6 +462,14 @@ module.exports = function search() {
     var dist = form.getInputsByName('distance')[0];
     if (!dist) return;
     dist.disabled = !zip;
+  }
+
+  function scrollIntoView() {
+    try {
+      form.element.scrollIntoView();
+    } catch (error) {
+      console.warn('unable to scroll results into view:', error);
+    }
   }
 
 };

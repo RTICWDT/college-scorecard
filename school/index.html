@@ -91,9 +91,6 @@ stylesheets:
               <li class="special"></li>
             </ul>
 
-            <!-- <h3 class="special" data-bind="special_designation">
-              Special Designation
-            </h3> -->
           </div>
 
           <div class="school-map" data-bind="map">
@@ -448,7 +445,9 @@ stylesheets:
                       <strong data-bind="advantage_rate">XX%</strong>
                       <span class="small normal">of students</span>
                     </strong>
-                    <p>who attend this school will earn more than those with only a high school diploma.</p>
+                    <p aria-describedby="tip-earnings-25k">who attend this school will earn more than those with only a high school diploma. <a class="tooltip-target">
+                      <i class="fa fa-info-circle"></i>
+                    </a></p>
                   </div>
 
 
@@ -478,7 +477,6 @@ stylesheets:
                         <div class="legend-nat_average-words">National Average</div>
                       </div>
                     </div>
-                    
                   </div>
                 </div>
               </div>
@@ -771,6 +769,12 @@ stylesheets:
             </aria-accordion>
           </div>
 
+          <p class="college-response">
+            <a class="link-more" data-bind="response_link">
+              College Response <i class="fa fa-chevron-right"></i>
+            </a>
+          </p>
+
         </div>
 
       </div>
@@ -779,13 +783,18 @@ stylesheets:
 
     <aside class="school-right">
 
-      <h2>Paying for College</h2>
+      <h2>Get The Best Deal</h2>
 
-      <img src="{{ site.baseurl }}/img/cfpb-logo.png" alt="consumer financial protection bureau">
+      <div class="u-align_c">
 
-      <p>Get help to make informed financial decisions about how to pay for college. Start by comparing financial aid offers or understanding student loan repayment options.</p>
+        <a href="https://fafsa.ed.gov/FAFSA/app/f4cForm" class="button button-outline" target="_blank">
+          Estimate Your Aid</a>
+        <a href="http://www.consumerfinance.gov/paying-for-college/compare-financial-aid-and-college-cost/" class="button button-outline" target="_blank">
+          Compare Aid Packages</a>
+        <a href=" https://department-of-veterans-affairs.github.io/gi-bill-comparison-tool/" class="button button-outline" target="_blank">
+          Calculate GI Bill Benefits</a>
 
-      <a href="http://www.consumerfinance.gov/paying-for-college/" class="link-more">Go to the consumer financial protection bureau <i class="fa fa-chevron-right"></i></a>
+      </div>
 
     </aside>
 
