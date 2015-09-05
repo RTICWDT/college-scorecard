@@ -607,3 +607,8 @@ ol.bars {
   color: $black !important;
   text-decoration: underline;
 }
+
+.college-response {
+  @include span-columns(12);
+  margin-top: $base-padding;
+}
