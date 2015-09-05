@@ -172,7 +172,6 @@
     figure.meter {
       @include span-columns(5 of 15);
       @include omega(3n);
-      margin: 2px;
     }
 
     figcaption {
