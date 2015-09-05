@@ -1547,7 +1547,9 @@ picc.tooltip = {
    * This is an hover/focus event listener that will attach the corresponding
    * tooltip to this element's tooltip-target.
    */
-  show: function showTooltip() {
+  show: function showTooltip(e) {
+    clearTimeout(this.__tooltipShowTimeout);
+
     var tooltip = this.tooltip;
     if (!tooltip) {
       tooltip = document.getElementById(this.getAttribute('aria-describedby'));
@@ -1557,10 +1559,30 @@ picc.tooltip = {
       this.tooltip = tooltip;
     }
 
-    // console.log('show tooltip:', this, tooltip);
-    tooltip.setAttribute('aria-hidden', false);
+    var parent = this;
     var ref = this.querySelector('.tooltip-target') || this;
-    picc.tooltip.constrain(tooltip, ref);
+    var show = function() {
+      // console.log('show tooltip:', this, tooltip);
+      tooltip.setAttribute('aria-hidden', false);
+      var click;
+      // d3 makes this a lot simpler with exclusive listeners
+      var win = d3.select(window)
+        .on('click.tooltip', click = function(e) {
+          win.on('click.tooltip', null);
+          if (parent.contains(tooltip)) {
+            picc.tooltip.hide.call(parent, e);
+          } else {
+            console.warn('ignoring click on unowned tooltip:', parent, tooltip);
+          }
+        }, true);
+      picc.tooltip.constrain(tooltip, ref);
+    };
+
+    if (e.type === 'click') {
+      show();
+    } else {
+      this.__tooltipShowTimeout = setTimeout(show, 200);
+    }
   },
 
   /**
@@ -1568,9 +1590,18 @@ picc.tooltip = {
    * tooltip, but leave it in place for debugging.
    */
   hide: function hideTooltip() {
+    clearTimeout(this.__tooltipShowTimeout);
     if (!this.tooltip) return;
-    var tooltip = this.tooltip;
-    tooltip.setAttribute('aria-hidden', true);
+    this.tooltip.setAttribute('aria-hidden', true);
+    this.tooltip = null;
+  },
+
+  toggle: function toggleTooltip(e) {
+    if (this.tooltip && this.tooltip.getAttribute('aria-hidden') !== 'false') {
+      picc.tooltip.hide.call(this, e);
+    } else {
+      picc.tooltip.show.call(this, e);
+    }
   },
 
   /**
@@ -1642,16 +1673,27 @@ picc.ready(function() {
   var described = 'aria-describedby';
   picc.delegate(
     document.body,
+    // if the element matches '[aria-describedby^="tip-"]'
     function() {
       return this.hasAttribute(described)
           && this.getAttribute(described).match(/^tip-/);
     },
-    {
-      mouseenter: picc.tooltip.show,
-      mouseleave: picc.tooltip.hide,
-      focus:      picc.tooltip.show,
-      blur:       picc.tooltip.hide
-    }
+    // XXX this is a *very* rudimentary way to detect whether the browser
+    // supports touch events.
+    document.body.ontouchstart
+      // with touch enabled, only show on focus/blur and click/tap
+      ? {
+        focus:      picc.tooltip.show,
+        blur:       picc.tooltip.hide,
+        click:      picc.tooltip.toggle
+      }
+      // otherwise, show on enter/leave and focus/blur
+      : {
+        mouseenter: picc.tooltip.show,
+        mouseleave: picc.tooltip.hide,
+        focus:      picc.tooltip.show,
+        blur:       picc.tooltip.hide,
+      }
   );
 });
 
