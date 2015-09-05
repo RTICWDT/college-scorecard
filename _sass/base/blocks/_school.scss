@@ -634,9 +634,13 @@ ol.bars {
     margin-bottom: 0.7em;
     position: relative;
 
+    .bar-wrapper {
+      background: $light-gray;
+    }
+
     .bar {
-      background: $sky-blue;
-      height: 1em;
+      background: $lime-green;
+      height: 1.2em;
     }
 
     &.bar-female .bar {
