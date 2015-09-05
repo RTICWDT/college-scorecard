@@ -48,12 +48,14 @@
   li {
     border-bottom: $thin-border-size solid $base-border-color;
     display: inline-block;
-    margin: $base-padding $base-padding-extra;
-    padding-bottom: $base-padding;
+    margin: $base-padding $base-padding-lite;
+    padding-bottom: $base-padding-large;
     vertical-align: top;
 
-    @include respond-to(tiny-up) {
+    @include respond-to(small-up) {
       border-bottom: none;
+      margin: $base-padding $base-padding-extra;
+      padding-bottom: $base-padding;
     }
 
     &:last-of-type {
