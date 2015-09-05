@@ -1,13 +1,13 @@
 // Data Tool
 //=============================
 
-.data-home-rule {
-  margin-right: $base-padding;
-
-  @include respond-to(medium-up) {
-    border-right: ($regular-border-size * 2) solid $light-gray;
-  }
-}
+// .data-home-rule {
+//   margin-right: $base-padding;
+//
+//   @include respond-to(medium-up) {
+//     border-right: ($regular-border-size * 2) solid $light-gray;
+//   }
+// }
 
 .data-home-intro-convo-right {
   @include span-columns(12);
@@ -80,6 +80,12 @@
   }
 }
 
+.data-home-feature {
+  border: $thin-border-size solid $base-border-color;
+  border-radius: $base-border-radius;
+  padding: $base-padding-large;
+}
+
 .data-home-button {
   @extend .button-outline;
   @include font-size(0.75);
@@ -94,7 +100,15 @@
   }
 }
 
+.data-home-hr {
+  margin-top: $base-padding;
+  border-top: $regular-border-size solid $base-border-color;
+  padding-top: $base-padding-extra;
+}
+
 .data-home-download {
+  @extend .data-home-hr;
+
   h2,
   h3 {
     padding-bottom: $base-padding-lite;
