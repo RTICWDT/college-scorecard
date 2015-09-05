@@ -178,9 +178,10 @@ stylesheets:
                       <picc-meter id="cost-meter" {% include net_price_meter_attributes.html %}>
                       </picc-meter>
                       <figcaption>
-                        <i class="fa average average-arrow" data-meter="cost-meter"></i>
-                        <span data-bind="average_cost"></span>
-                        <div class="average average-label"></div>
+                        <span class="average-value" data-bind="average_cost"></span>
+                        <div class="average-wrapper">
+                          <i class="fa average average-arrow" data-meter="cost-meter"></i> <span class="average average-label"></span>
+                        </div>
                       </figcaption>
                     </figure>
 
@@ -274,11 +275,15 @@ stylesheets:
                         data-median-four_year="{{ site.data.national_stats.repayment_rate_4.median }}"
                         data-median-lt_four_year="{{ site.data.national_stats.repayment_rate_l4.median }}">
                       </picc-meter>
+
                       <figcaption>
-                        <i class="fa average average-arrow" data-meter="repayment-meter"></i>
-                        <span data-bind="repayment_rate_percent">XX%</span>
-                        <div class="average average-label"></div>
+                        <span class="average-value" data-bind="repayment_rate_percent">XX%</span>
+                        <div class="average-wrapper">
+                          <i class="fa average average-arrow" data-meter="repayment-meter"></i> <span class="average average-label"></span>
+                        </div>
                       </figcaption>
+
+
                     </figure>
 
                     <div class="legend-wrapper">
@@ -372,9 +377,10 @@ stylesheets:
                       <picc-meter id="grad-meter" {% include graduation_meter_attributes.html %}>
                       </picc-meter>
                       <figcaption>
-                        <i class="fa average average-arrow" data-meter="grad-meter"></i>
-                        <span data-bind="grad_rate">60%</span>
-                        <div class="average average-label"></div>
+                        <span class="average-value" data-bind="grad_rate">60%</span>
+                        <div class="average-wrapper">
+                          <i class="fa average average-arrow" data-meter="grad-meter"></i> <span class="average average-label"></span>
+                        </div>
                       </figcaption>
                     </figure>
 
@@ -406,9 +412,10 @@ stylesheets:
                         average-range="{{ site.data.national_stats.retention_rate.average_range|join:'..' }}">
                       </picc-meter>
                       <figcaption>
-                        <i class="fa average average-arrow" data-meter="retention-meter"></i>
-                        <span data-bind="retention_rate_value">XX%</span>
-                        <div class="average average-label"></div>
+                        <span class="average-value" data-bind="retention_rate_value">XX%</span>
+                        <div class="average-wrapper">
+                          <i class="fa average average-arrow" data-meter="retention-meter"></i> <span class="average average-label"></span>
+                        </div>
                       </figcaption>
                     </figure>
 
@@ -462,9 +469,10 @@ stylesheets:
                       <picc-meter id="salary-meter" {% include earnings_meter_attributes.html %}>
                       </picc-meter>
                       <figcaption>
-                        <i class="fa average average-arrow" data-meter="salary-meter"></i>
-                        <span data-bind="average_salary">$XX,XXX</span>
-                        <div class="average average-label"></div>
+                        <span class="average-value" data-bind="average_salary">$XX,XXX</span>
+                        <div class="average-wrapper">
+                          <i class="fa average average-arrow" data-meter="salary-meter"></i> <span class="average average-label"></span>
+                        </div>
                       </figcaption>
                     </figure>
 

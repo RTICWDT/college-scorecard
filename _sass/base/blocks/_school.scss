@@ -378,9 +378,18 @@
   padding-bottom: $base-padding;
 }
 
+.average-value {
+  display: block;
+}
+
+.average-wrapper {
+  display: inline-block;
+  padding-bottom: $base-padding-lite;
+}
+
 .above_is_good .average.above_average,
 .below_is_good .average.below_average {
-  color: $green;
+  color: $lime-green;
 }
 
 .above_is_good .average.below_average,
@@ -393,8 +402,9 @@
 }
 
 .average-label {
-  font-size: .5em;
-  font-weight: normal;
+  @include font-size($h5);
+  font-weight: $weight-bold;
+  text-transform: uppercase;
 }
 
 .school-student-intro {
