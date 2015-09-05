@@ -36,6 +36,24 @@ module.exports = function search() {
   // get a reference to all of the sliders
   var sliders = d3.selectAll('picc-slider');
 
+  // close other toggles when one opens
+  var toggles = d3.selectAll('.toggle-accordion')
+    .property('closed', true)
+    .on('open', function() {
+      var opened = this;
+      toggles.each(function() {
+        if (this !== opened) this.close();
+      });
+    });
+
+  // expand (child) accordions that contain elements with values set
+  picc.ui.expandAccordions('.toggle-accordion aria-accordion', function() {
+    var inputs = this.querySelectorAll('[name]');
+    return [].some.call(inputs, function(input) {
+      return query[input.name];
+    });
+  });
+
   picc.ready(function() {
     ready = true;
 
@@ -80,6 +98,8 @@ module.exports = function search() {
   });
 
   form.on('submit', function(data, e) {
+    toggles.property('expanded', false);
+
     change();
     e.preventDefault();
     return false;
@@ -103,13 +123,6 @@ module.exports = function search() {
     poppingState = true;
     onChange();
     poppingState = false;
-  });
-
-  picc.ui.expandAccordions(function() {
-    var inputs = this.querySelectorAll('[name]');
-    return [].some.call(inputs, function(input) {
-      return query[input.name];
-    });
   });
 
   function onChange() {
