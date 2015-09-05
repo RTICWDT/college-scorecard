@@ -21,16 +21,18 @@
 .data-home-convo {
   background: $light-gray;
 
-  ul li {
+  a {
     @include font-size(0.8);
     color: $mid-blue;
     display: inline-block;
     padding-top: $base-padding-lite;
     padding-right: $base-padding-lite;
+    text-decoration: none;
 
     i {
       @include font-size(1);
       color: $sky-blue;
+      padding-right: 3px;
     }
 
     &:hover,
