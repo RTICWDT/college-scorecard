@@ -221,7 +221,6 @@
 
   @include respond-to(small-up) {
     background: url(../img/hero.jpg) center center no-repeat;
-    background-attachment: fixed;
     background-size: cover;
   }
 }
