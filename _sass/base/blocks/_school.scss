@@ -230,11 +230,19 @@
 
     > div {
       border-top: $thin-border-size solid $base-border-color;
-      padding-top: $base-padding-lite;
+      padding-top: $base-padding-large;
+      padding-bottom: $base-padding-large;
 
       &:first-of-type {
         border-top: none;
-        padding-top: 0;
+
+        @include respond-to(small-up) {
+          padding-top: 0;
+        }
+
+        p {
+          padding-bottom: 0;
+        }
       }
     }
 
@@ -248,16 +256,24 @@
     }
   }
 
+  strong.fact_number {
+    font-weight: $weight-bold;
+
+  }
+
   .fact_number {
     @include font-size(3.5);
+    font-weight: normal;
 
     padding: {
       top: 8px;
       bottom: 8px;
     }
 
+    + strong {
+    }
+
     span {
-      font-weight: normal;
 
       &.small {
         @include font-size(1.8);
@@ -373,7 +389,7 @@
   @include span-columns(5 fo 5);
   background-color: $sky-blue-light;
   border-radius: $base-border-radius;
-  margin-top: $base-padding;
+  margin-top: $base-padding-extra;
   padding-top: $base-padding;
   padding-bottom: $base-padding;
 }
