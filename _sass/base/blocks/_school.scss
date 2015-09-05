@@ -85,22 +85,22 @@
     margin-bottom: 0;
   }
 
-  .legend-wrapper + .button {
-    margin-top: $base-padding;
-  }
-
   .school-heading {
     h1 {
-      @include font-size($h1-huge);
+      @include font-size($h1);
       padding-bottom: $base-padding-lite;
+
+      @include respond-to(small-up) {
+        @include font-size($h1-huge);
+      }
     }
 
     h2 {
-      color: $dark-gray;
+      color: $black;
       margin-top: 0;
       margin-bottom: 0;
       padding-top: 0;
-      font-size: font-size($h1);
+      font-size: font-size($h2);
       font-weight: normal;
     }
 
@@ -226,11 +226,19 @@
 
     > div {
       border-top: $thin-border-size solid $base-border-color;
-      padding-top: $base-padding-lite;
+      padding-top: $base-padding-large;
+      padding-bottom: $base-padding-large;
 
       &:first-of-type {
         border-top: none;
-        padding-top: 0;
+
+        @include respond-to(small-up) {
+          padding-top: 0;
+        }
+
+        p {
+          padding-bottom: 0;
+        }
       }
     }
 
@@ -244,16 +252,24 @@
     }
   }
 
+  strong.fact_number {
+    font-weight: $weight-bold;
+
+  }
+
   .fact_number {
     @include font-size(3.5);
+    font-weight: normal;
 
     padding: {
       top: 8px;
       bottom: 8px;
     }
 
+    + strong {
+    }
+
     span {
-      font-weight: normal;
 
       &.small {
         @include font-size(1.8);
@@ -267,6 +283,18 @@
 
   .button-primary {
     width: 100%;
+  }
+
+  .button-costs {
+    margin-top: $base-padding-large;
+    margin-bottom: $base-padding-large;
+    padding-left: $base-padding-large;
+    padding-right:  $base-padding-large;
+    width: 100%;
+
+    @include respond-to(large-up) {
+      width: 300px;
+    }
   }
 
   .school-two_col {
@@ -298,12 +326,13 @@
   }
 
   .school-two_col-right {
-    padding-top: $base-padding;
+    padding-top: $base-padding-large;
 
     @include span-columns(6 of 6);
     @include respond-to(large-up) {
       @include span-columns(3 of 6);
       @include omega();
+      padding-top: $base-padding;
     }
   }
 }
@@ -369,14 +398,23 @@
   @include span-columns(5 fo 5);
   background-color: $sky-blue-light;
   border-radius: $base-border-radius;
-  margin-top: $base-padding;
+  margin-top: $base-padding-extra;
   padding-top: $base-padding;
   padding-bottom: $base-padding;
 }
 
+.average-value {
+  display: block;
+}
+
+.average-wrapper {
+  display: inline-block;
+  padding-bottom: $base-padding-lite;
+}
+
 .above_is_good .average.above_average,
 .below_is_good .average.below_average {
-  color: $green;
+  color: $lime-green;
 }
 
 .above_is_good .average.below_average,
@@ -389,8 +427,9 @@
 }
 
 .average-label {
-  font-size: .5em;
-  font-weight: normal;
+  @include font-size($h5);
+  font-weight: $weight-bold;
+  text-transform: uppercase;
 }
 
 .school-student-intro {
@@ -472,14 +511,21 @@
 
 .school-student-stats-col {
 
-  .test-align {
-    width: 75%;
+  .school-student-stats-col-align {
+    display: inline-block;
     margin-right: auto;
     margin-left: auto;
+    text-align: center;
+    width: 85%;
 
     > div {
       display: inline-block;
+      text-align: left;
       vertical-align: middle;
+
+      &:last-of-type {
+        padding-left: $base-padding-lite;
+      }
     }
   }
 
@@ -512,10 +558,7 @@
   margin-top: $base-padding-extra;
 
   .fact_number {
-    border: $regular-border-size solid $base-border-color;
-    border-radius: 500px;
-    height: 120px;
-    padding-top: 31px;
+    padding-top: 0;
     text-align: center;
     width: 120px;
 
@@ -529,6 +572,11 @@
   width: 75%;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: $base-padding-lite;
+
+  .fact_number {
+    display: inline-block;
+  }
 }
 
   // @include span-columns(12);

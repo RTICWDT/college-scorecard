@@ -48,12 +48,14 @@
   li {
     border-bottom: $thin-border-size solid $base-border-color;
     display: inline-block;
-    margin: $base-padding $base-padding-extra;
-    padding-bottom: $base-padding;
+    margin: $base-padding $base-padding-lite;
+    padding-bottom: $base-padding-large;
     vertical-align: top;
 
-    @include respond-to(tiny-up) {
+    @include respond-to(small-up) {
       border-bottom: none;
+      margin: $base-padding $base-padding-extra;
+      padding-bottom: $base-padding;
     }
 
     &:last-of-type {
@@ -221,7 +223,6 @@
 
   @include respond-to(small-up) {
     background: url(../img/hero.jpg) center center no-repeat;
-    background-attachment: fixed;
     background-size: cover;
   }
 }
@@ -271,7 +272,7 @@
 .search_form-submit {
   @extend .centered;
   border-top: $thick-border-size solid $base-border-color;
-  padding-top: $base-padding-extra;
+  padding-top: $base-padding-large;
   padding-right: 0;
   padding-left: 0;
   text-align: center;
@@ -282,7 +283,7 @@
 }
 
 .search-button {
-  margin-bottom: $base-padding-extra;
+  margin-bottom: $base-padding-large;
   width: 80% !important;
 
   @include respond-to(medium-up) {
