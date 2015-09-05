@@ -1,13 +1,13 @@
 // Data Tool
 //=============================
 
-// .data-home-rule {
-//   margin-right: $base-padding;
-//
-//   @include respond-to(medium-up) {
-//     border-right: ($regular-border-size * 2) solid $light-gray;
-//   }
-// }
+.data-home-rule {
+  margin-right: $base-padding;
+
+  @include respond-to(medium-up) {
+    border-right: ($regular-border-size * 2) solid $light-gray;
+  }
+}
 
 .data-home-intro-convo-right {
   @include span-columns(12);
@@ -211,15 +211,22 @@
   }
 
   h3 {
-    @include font-size($h3);
+    @include font-size($h2);
+    border-top: $thin-border-size solid $base-border-color;
     font-weight: $weight-bold;
     letter-spacing: 1px;
+    margin-top: $base-padding;
+    padding-top: $base-padding-large;
     padding-bottom: $base-padding-lite;
     text-transform: none;
   }
 
   h4 {
     font-weight: $weight-bold;
+
+    &:first-of-type {
+      padding-top: $base-padding;
+    }
   }
 
   span {
