@@ -9,7 +9,7 @@ footer {
 
   @include respond-to(tiny-up) {
     @include font-size($h5);
-    height: 227px;
+    height: 215px;
     padding-top: 32px;
   }
 
