@@ -6,6 +6,7 @@ $max-width: em(1230) !default;
 $teensy: em(380);
 $tiny: em(480);
 $small: em(600);
+$small-plus: em(640);
 $medium: em(768);
 $large: em(990);
 $huge: em(1230);
@@ -14,6 +15,7 @@ $teensy-down: new-breakpoint(max-width $teensy);
 $teensy-up: new-breakpoint(min-width $teensy);
 $tiny-up: new-breakpoint(min-width $tiny);
 $small-up: new-breakpoint(min-width $small);
+$small-plus-up: new-breakpoint(min-width $small-plus);
 $medium-up: new-breakpoint(min-width $medium);
 $large-up: new-breakpoint(min-width $large);
 $huge-up: new-breakpoint(min-width $huge);
@@ -30,6 +32,9 @@ $huge-up: new-breakpoint(min-width $huge);
   }
   @else if $media == small-up {
     @media only screen and (min-width: $small) { @content; }
+  }
+  @else if $media == small-plus-up {
+    @media only screen and (min-width: $small-plus) { @content; }
   }
   @else if $media == medium-up {
     @media only screen and (min-width: $medium) { @content; }
