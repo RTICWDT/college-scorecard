@@ -1,0 +1,6 @@
+When sorting by "%Earning Above", schools with "Data Not Available" sort to the top
+
+Repo: search for all private schools, get 2219 results, sort by "%Earning Above" and the school at the top has "Data Not Available" 
+for the Earnings field.
+
+iPhone5 running iOS 8.4.1 using Safari
