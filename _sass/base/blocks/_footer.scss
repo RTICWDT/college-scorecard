@@ -9,8 +9,8 @@ footer {
 
   @include respond-to(tiny-up) {
     @include font-size($h5);
-    height: 260px;
-    padding-top: 51px;
+    height: 215px;
+    padding-top: 32px;
   }
 
   a {
@@ -28,23 +28,29 @@ footer {
   }
 
   .footer-attribution {
+    @include font-size(0.6);
     width: 90%;
     margin-left: auto;
     margin-right: auto;
 
     @include respond-to(tiny-up) {
+      @include font-size(0.7);
       width: 70%;
     }
 
     @include respond-to(small-up) {
-      width: 50%;
+      width: 60%;
     }
 
     @include respond-to(medium-up) {
-      width: 40%;
+      width: 50%;
     }
 
     @include respond-to(large-up) {
+      width: 40%;
+    }
+
+    @include respond-to(huge-up) {
       width: 30%;
     }
   }

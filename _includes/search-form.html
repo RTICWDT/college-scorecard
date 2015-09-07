@@ -7,7 +7,7 @@
       <legend>Programs/Degree</legend>
       <h1 class="search_category">
         <a aria-expanded="false" aria-controls="major-content">
-          Programs/Degree
+          Programs/Degrees
         </a>
       </h1>
       <div id="major-content" aria-hidden="true" class="accordion-div">
@@ -15,8 +15,8 @@
         <label for="major-type">Choose a degree
           <select id="major-type" name="degree">
             <option value="">Any</option>
-            <option value="a">Associates</option>
-            <option value="b">Bachelors</option>
+            <option value="a">Two-year (Associate)</option>
+            <option value="b">Four-year (Bachelor's)</option>
           </select>
         </label>
 
@@ -67,10 +67,10 @@
             </div>
             <div class="u-group_inline u-group_inline-right u-nowrap">
               <button class="button button-add">
-                Add State
+                Add<br>State
               </button>
               <button class="button button-remove">
-                &times;
+                <i class="fa fa-times-circle"></i>
               </button>
             </div>
           </multi-select>
@@ -94,7 +94,7 @@
             </div>
             <div class="u-group_inline u-group_inline-right u-nowrap">
               <button class="button button-add">
-                Add Region
+                Add<br>Region
               </button>
               <button class="button button-remove">
                 &times;
@@ -107,7 +107,7 @@
         <div class="group_inline">
 
           <label for="zip-code" class="group_inline-left">Enter a ZIP code
-            <input id="zip-code" name="zip" type="number" placeholder="e.g. 45400" {{ common_input_attributes }}>
+            <input id="zip-code" name="zip" type="number" placeholder="e.g., 45400" {{ common_input_attributes }}>
           </label>
 
           <label for="search-radius" class="group_inline-right">Mile radius
@@ -118,7 +118,7 @@
 
         <label for="online" class="checkbox">
           <input id="online" type="checkbox" name="online" checked value="1" tabindex="0">
-          <span tabindex="-1" class="checkbox-focus"></span>Include Online Only Schools
+          <span tabindex="-1" class="checkbox-focus"></span>Include Online-Only Schools
         </label>
 
       </div>
@@ -190,7 +190,7 @@
 
       <div id="name-content" aria-hidden="false" class="accordion-div">
         <label for="name-school">School name</label>
-        <input id="name-school" name="name" type="text" placeholder="e.g. USA University" {{ common_input_attributes }}>
+        <input id="name-school" name="name" type="text" placeholder="e.g., USA University" {{ common_input_attributes }}>
       </div>
 
       <input type="submit" class="sr-only">
@@ -203,10 +203,10 @@
 
     <aria-accordion class="container">
 
-      <legend>Type</legend>
+      <legend>Advanced Search</legend>
       <h1 class="search_category">
         <a aria-expanded="false" aria-controls="type-content">
-          Type
+          Advanced Search
         </a>
       </h1>
 
@@ -240,7 +240,7 @@
 
         </fieldset>
 
-        <label for="special">Special designation
+        <label for="special">Specialized mission
           <select id="special" name="serving">
             <option value="">Any</option>
             {% for designation in site.data.special_designations %}

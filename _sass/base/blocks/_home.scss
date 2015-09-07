@@ -70,6 +70,12 @@
       width: 100px;
       margin-bottom: $base-padding;
     }
+
+     .fact-words {
+      max-width: 280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 
   span {
@@ -135,7 +141,7 @@
 
     .section-home-numbers-group-left {
       display: table-cell;
-      padding-right: 8px;
+      padding-right: 20px;
     }
 
     .section-home-numbers-group-right {
@@ -156,16 +162,29 @@
   }
 
   .section-home-paying-content {
-    padding: $base-padding-extra $base-padding-large $base-padding-large $base-padding-large;
+    padding: $base-padding $base-padding-large $base-padding-large $base-padding-large;
     text-align: left;
 
     p {
       padding-bottom: $base-padding-lite;
     }
 
+    .button-outline {
+      @include font-size($h6);
+      padding-left: $base-padding;
+      padding-right: $base-padding;
+    }
+
+    @include respond-to(small-up) {
+      .button-outline {
+        @include font-size($h4);
+      }
+    }
+
     @include respond-to(large-up) {
       min-height: 430px;
-      //TODO this is to make this section even with the one next door
+      //TODO magic number: this is to make this section even with the one next door
+      padding-top: $base-padding-extra;
     }
   }
 

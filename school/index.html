@@ -100,7 +100,7 @@ stylesheets:
 
             <figure class="meter below_is_good">
               <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year">
-                Actual<br>Cost
+                Average<br>Annual Cost
                 <a class="tooltip-target u-new_line">
                   <i class="fa fa-info-circle"></i>
                 </a>
@@ -170,7 +170,7 @@ stylesheets:
 
                     <figure class="meter below_is_good">
                       <h2 class="figure-heading" aria-describedby="tip-avg-cost-year">
-                        Actual Cost
+                        Average<br>Annual Cost
                         <a class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
                         </a>
@@ -210,7 +210,7 @@ stylesheets:
                       <thead>
                         <tr>
                           <th>Family Income</th>
-                          <th>Average Price</th>
+                          <th>Average Cost</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -299,7 +299,7 @@ stylesheets:
                     <div class="container school-callout">
 
                       <h2>Get Help Paying for College</h2>
-                      <p>Submit a free application for Federal Student Aid. It only takes 20 minutes!</p>
+                      <p>Submit a free application for Federal Student Aid, which includes Pell Grants.</p>
                       <a href="https://fafsa.ed.gov/FAFSA/app/fafsa" target="_blank" class="button button-primary">
                         Start My Application
                       </a>
@@ -436,7 +436,7 @@ stylesheets:
             </aria-accordion>
           </div>
 
-          <div class="section-card_container-school">
+          <div class="section-card_container-school school-earnings">
             <aria-accordion id="earnings" class="school-two_col">
               <div>
                 <h1 class="search_category">
@@ -448,13 +448,19 @@ stylesheets:
                 <div id="earnings-content" aria-hidden="true">
 
                   <div class="school-two_col-left">
+
+                    <h2 aria-describedby="tip-earnings-25k">
+                      Earning Potential
+                      <a class="tooltip-target">
+                        <i class="fa fa-info-circle"></i>
+                      </a>
+                    </h2>
+
                     <strong class="fact_number">
                       <strong data-bind="advantage_rate">XX%</strong>
                       <span class="small normal">of students</span>
                     </strong>
-                    <p aria-describedby="tip-earnings-25k">who attend this school will earn more than those with only a high school diploma. <a class="tooltip-target">
-                      <i class="fa fa-info-circle"></i>
-                    </a></p>
+                    <p>who attend this school will earn more than those with only a high school diploma.</p>
                   </div>
 
 
@@ -543,7 +549,12 @@ stylesheets:
                         </div>
 
                         <div class="school-student-socio_econ">
-                          <h2>Socio-Economic Diversity</h2>
+                          <h2 aria-describedby="tip-socio-eco">
+                            Socio-Economic Diversity
+                            <a class="tooltip-target">
+                              <i class="fa fa-info-circle"></i>
+                            </a>
+                          </h2>
 
                           <div class="school-student-socio_econ-stat">
                             <strong class="fact_number" data-bind="pell_grant_percentage">X</strong>
@@ -687,12 +698,6 @@ stylesheets:
               </div>
             </aria-accordion>
           </div>
-
-          <p class="college-response">
-            <a class="link-more" data-bind="response_link">
-              College Response <i class="fa fa-chevron-right"></i>
-            </a>
-          </p>
 
         </div>
 
