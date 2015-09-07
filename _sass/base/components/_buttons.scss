@@ -87,10 +87,26 @@ input[type="submit"] {
   }
 
   &.button-add {
-    width: 50px;
     @extend .link-more;
     background-color: $white;
+    border-radius: 0;
     color: $green;
+    padding-right: 0;
+    padding-left: 0;
+    line-height: 1;
+
+    &:hover,
+    &:focus {
+      background-color: $white;
+      color: $darker-green;
+    }
+  }
+
+  &.button-remove {
+    @include font-size($h1-large);
+    background-color: $white;
+    color: $mid-dark-gray;
+    line-height: 1;
 
     &:hover,
     &:focus {

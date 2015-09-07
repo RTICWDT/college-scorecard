@@ -48,12 +48,14 @@
   li {
     border-bottom: $thin-border-size solid $base-border-color;
     display: inline-block;
-    margin: $base-padding $base-padding-extra;
-    padding-bottom: $base-padding;
+    margin: $base-padding $base-padding-lite;
+    padding-bottom: $base-padding-large;
     vertical-align: top;
 
-    @include respond-to(tiny-up) {
+    @include respond-to(small-up) {
       border-bottom: none;
+      margin: $base-padding $base-padding-extra;
+      padding-bottom: $base-padding;
     }
 
     &:last-of-type {
@@ -67,6 +69,12 @@
       height: 100px;
       width: 100px;
       margin-bottom: $base-padding;
+    }
+
+     .fact-words {
+      max-width: 280px;
+      margin-left: auto;
+      margin-right: auto;
     }
   }
 
@@ -133,7 +141,7 @@
 
     .section-home-numbers-group-left {
       display: table-cell;
-      padding-right: 8px;
+      padding-right: 20px;
     }
 
     .section-home-numbers-group-right {
@@ -154,16 +162,29 @@
   }
 
   .section-home-paying-content {
-    padding: $base-padding-extra $base-padding-large $base-padding-large $base-padding-large;
+    padding: $base-padding $base-padding-large $base-padding-large $base-padding-large;
     text-align: left;
 
     p {
       padding-bottom: $base-padding-lite;
     }
 
+    .button-outline {
+      @include font-size($h6);
+      padding-left: $base-padding;
+      padding-right: $base-padding;
+    }
+
+    @include respond-to(small-up) {
+      .button-outline {
+        @include font-size($h4);
+      }
+    }
+
     @include respond-to(large-up) {
-      min-height: 430px;
-      //TODO this is to make this section even with the one next door
+      min-height: 382px;
+      //magic number. this is to make this section even with the one next door
+      padding-top: $base-padding-extra;
     }
   }
 
@@ -221,7 +242,6 @@
 
   @include respond-to(small-up) {
     background: url(../img/hero.jpg) center center no-repeat;
-    background-attachment: fixed;
     background-size: cover;
   }
 }
@@ -271,7 +291,7 @@
 .search_form-submit {
   @extend .centered;
   border-top: $thick-border-size solid $base-border-color;
-  padding-top: $base-padding-extra;
+  padding-top: $base-padding-large;
   padding-right: 0;
   padding-left: 0;
   text-align: center;
@@ -282,7 +302,7 @@
 }
 
 .search-button {
-  margin-bottom: $base-padding-extra;
+  margin-bottom: $base-padding-large;
   width: 80% !important;
 
   @include respond-to(medium-up) {
