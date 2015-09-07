@@ -10,19 +10,19 @@ repayment-rate: <strong>Students Paying Down Their Debt</strong> The share of st
 
 avg-debt: <strong>Typical Total Debt</strong> The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.
 
-student-aid: <strong>Students Receiving Federal Aid</strong> The share of undergraduate students who borrowed federal loans.
+student-aid: <strong>Students Receiving Federal Aid</strong> The share of undergraduate students who received Pell grants or federal loans.
 
-retention-rate: <strong>Students Who Return After the First Year</strong> The share of first-time, full-time undergraduates who returned to the institution after their freshman year.
+retention-rate: <strong>Students Who Return After Their First Year</strong> The share of first-time, full-time undergraduates who returned to the institution after their freshman year.
 
-earnings-25k: <strong>Former Students Earning More Than $25K</strong> The share of students earning more than $25,000, or about the average earnings of a high school graduate aged 25-34, 6 years after they first enroll.
+earnings-25k: <strong>Threshold Earnings</strong> The share of former students earning more than $25,000, or about the average earnings of a high school graduate aged 25-34, 6 years after they first enroll.
 
-race-eth: <strong>Race/Ethnicity</strong> The share of students enrolled for credit who identified themselves in each race/ethnicity.
+race-eth: <strong>Race/Ethnicity</strong> The specific race/ethnicity categories (including those for foreign students pursuing postsecondary education at an institution within the U.S.) are mandated by Departmental regulation (2007) as required and/or approved by the Office of Management and Budget (1997).
 
 socio-eco: <strong>Socio-Economic Diversity</strong> Percent of undergraduate students receiving federal need-based (Pell grant) aid.
 
 test-scores: <strong>Test Scores</strong> At schools that report their test scores, 50 percent had scores within this range. Of the remaining 50 percent, half were above the range and half were below. Not all schools require test scores.
 
-pop-prog: <strong>Popular Programs</strong> The five largest programs of study at the school, as measured by the share of students enrolled.
+pop-prog: <strong>Most Popular Programs</strong> The five largest programs of study at the school, as measured by the share of students enrolled.
 
 avail-study: <strong>Available Areas of Study</strong> All available programs of study offered at the school.
 
