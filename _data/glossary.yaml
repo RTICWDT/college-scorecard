@@ -1,29 +1,29 @@
-avg-cost-year: <strong>Actual Cost</strong> The average annual cost of attendance for Title IV students less any state, federal, or institutional grant aid.
+avg-cost-year: <strong>Average Annual Cost</strong> The average annual net price for federal financial aid recipients, after aid from the school, state, or federal government. For public schools, this is only the average cost for in-state students.
 
-graduation-rate: <strong>Graduation Rate</strong> The completion rate for first—time, full—time students within 150 percent of  the expected time to completion for predominantly four-year schools, and within 200 percent for less-than-four-year schools.
+graduation-rate: <strong>Graduation Rate</strong> The graduation rate after six years for schools that award predominantly four-year degrees and after four years for all other schools. These rates are only for full-time students enrolled for the first time.
 
-avg-salary: <strong>Salary After Attending</strong> The median earnings of students who are working and not enrolled in college, measured 10 years after they first enroll.
+avg-salary: <strong>Salary After Attending</strong> The median earnings of former students who received federal financial aid, at 10 years after entering the school.
 
 avg-loan-payment: <strong>Monthly Student Loan Payment</strong> The median monthly loan payment for students who completed, if it were repaid  over 10 years at a 6 percent interest rate.
 
 repayment-rate: <strong>Students Paying Down Their Debt</strong> The share of students who have repaid at least $1 of the principal balance on their federal loans within 3 years of leaving school.
 
-avg-debt: <strong>Typical Total Debt</strong> Typical Total Debt The median federal debt of borrowers who completed. This figure includes only federal Stafford loans; it excludes private student loans and Parent PLUS loans.
+avg-debt: <strong>Typical Total Debt</strong> The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.
 
-student-aid: <strong>Students Receiving Federal Aid</strong> The share of undergraduate students who borrowed federal loans.
+student-aid: <strong>Students Receiving Federal Aid</strong> The share of undergraduate students who received Pell grants or federal loans.
 
-retention-rate: <strong>Students Who Return After the First Year</strong> The share of first-time, full-time undergraduates who returned to the institution after their freshman year.
+retention-rate: <strong>Students Who Return After Their First Year</strong> The share of first-time, full-time undergraduates who returned to the institution after their freshman year.
 
-earnings-25k: <strong>Former Students Earning More Than $25K</strong> The share of students earning more than $25,000, or about the average earnings of a high school graduate aged 25-34, 6 years after they first enroll.
+earnings-25k: <strong>Threshold Earnings</strong> The share of former students earning more than $25,000, or about the average earnings of a high school graduate aged 25-34, 6 years after they first enroll.
 
-race-eth: <strong>Race/Ethnicity</strong> The share of students enrolled for credit who identified themselves in each race/ethnicity.
+race-eth: <strong>Race/Ethnicity</strong> The specific race/ethnicity categories (including those for foreign students pursuing postsecondary education at an institution within the U.S.) are mandated by Departmental regulation (2007) as required and/or approved by the Office of Management and Budget (1997).
 
 socio-eco: <strong>Socio-Economic Diversity</strong> Percent of undergraduate students receiving federal need-based (Pell grant) aid.
 
 test-scores: <strong>Test Scores</strong> At schools that report their test scores, 50 percent had scores within this range. Of the remaining 50 percent, half were above the range and half were below. Not all schools require test scores.
 
-pop-prog: <strong>Popular Programs</strong> The five largest programs of study at the school, as measured by the share of students enrolled.
+pop-prog: <strong>Popular Programs</strong> The five largest programs of study, as measured as the share of degrees awarded.
 
 avail-study: <strong>Available Areas of Study</strong> All available programs of study offered at the school.
 
-hcm2: <strong>Under Ed Monitorting</strong> Heightened Cash Monitoring is a step that the Department can take with institutions to provide additional oversight for a number of financial or federal compliance issues, including but not limited to, concern around the school’s administrative capabilities, concern around a schools’ financial responsibility and possibly severe findings uncovered during a program review.  Some schools are on this list due to preliminary findings made during a program review that is still open. 
+hcm2: <strong>Under ED Monitoring</strong> Heightened Cash Monitoring is when the Department of Education provides additional oversight because of financial or federal compliance issues, including but not limited to, concern around the school’s administrative capabilities, concern around a schools’ financial responsibility and possibly severe findings uncovered during a program review. Some schools are on this list because of preliminary findings made during a program review that is still open.

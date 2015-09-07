@@ -326,7 +326,7 @@ picc.format = (function() {
     control: formatter(map({
       '1': 'Public',
       '2': 'Private',
-      '3': 'For Profit'
+      '3': 'For-Profit'
     }, 'control unknown')),
 
     controlClass: formatter(map({

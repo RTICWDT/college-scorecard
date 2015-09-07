@@ -1,10 +1,11 @@
 .pagination {
   @include span-columns(12);
-  margin-top: $base-padding;
+  margin-top: $base-padding-lite;
   margin-left: $base-padding;
 
   @include respond-to(small-up) {
     text-align: right;
+    margin-top: $base-padding;
     margin-left: 0;
   }
 
