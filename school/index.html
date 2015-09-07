@@ -3,12 +3,9 @@ title: School
 layout: default
 permalink: /school/
 scripts:
-  - vendor/tagalong.min.js
-  - vendor/leaflet.js
+  - vendor/leaflet.min.js
 stylesheets:
   - vendor/leaflet.css
-body_scripts:
-  - school.js
 ---
 
 <!-- Search results -->
@@ -52,7 +49,7 @@ body_scripts:
               data-bind="under_investigation" aria-hidden="true">
               <a>
                 <p class="investigation-major" aria-describedby="tip-hcm2">
-                  Under investigation <i class="tooltip-target fa fa-info-circle"></i>
+                  Under Ed Monitoring <i class="tooltip-target fa fa-info-circle"></i>
                 </p>
               </a>
             </div>
@@ -94,15 +91,13 @@ body_scripts:
               <li class="special"></li>
             </ul>
 
-            <!-- <h3 class="special" data-bind="special_designation">
-              Special Designation
-            </h3> -->
           </div>
 
           <div class="school-map" data-bind="map">
           </div>
 
           <div id="key-stats" class="school-meters">
+
             <figure class="meter below_is_good">
               <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year">
                 Actual<br>Cost
@@ -119,7 +114,7 @@ body_scripts:
 
             <figure class="meter above_is_good">
               <h2 class="figure-heading constrain_width" aria-describedby="tip-graduation-rate">
-                Graduation Rate
+                Graduation<br>Rate
                 <a class="tooltip-target u-new_line">
                   <i class="fa fa-info-circle"></i>
                 </a>
@@ -144,6 +139,17 @@ body_scripts:
                 <span data-bind="average_salary">$XX,XXX</span>
               </figcaption>
             </figure>
+
+            <div class="legend-wrapper">
+              <div class="legend-nat_average">
+                <div class="legend-nat_average-box">
+                  <div class="legend-nat_average-box-line">
+                  </div>
+                </div>
+                <div class="legend-nat_average-words">National Average</div>
+              </div>
+            </div>
+
           </div>
 
           <div class="section-card_container-school">
@@ -172,18 +178,24 @@ body_scripts:
                       <picc-meter id="cost-meter" {% include net_price_meter_attributes.html %}>
                       </picc-meter>
                       <figcaption>
-                        <i class="fa average average-arrow" data-meter="cost-meter"></i>
-                        <span data-bind="average_cost"></span>
-                        <div class="average average-label"></div>
+                        <span class="average-value" data-bind="average_cost"></span>
+                        <div class="average-wrapper">
+                          <i class="fa average average-arrow" data-meter="cost-meter"></i> <span class="average average-label"></span>
+                        </div>
                       </figcaption>
                     </figure>
 
-                    <!-- <p>Assumes <strong>$XX,XXX</strong> in tuition and
-                      fees, <strong>$X,XXX</strong> in other costs like room
-                      and board, books and supplies, and other personal
-                      expenses.</p> -->
+                    <div class="legend-wrapper">
+                      <div class="legend-nat_average">
+                        <div class="legend-nat_average-box">
+                          <div class="legend-nat_average-box-line">
+                          </div>
+                        </div>
+                        <div class="legend-nat_average-words">National Average</div>
+                      </div>
+                    </div>
 
-                    <a class="button button-primary" target="_blank" data-bind="net_price_calculator">
+                    <a class="button button-primary button-costs" target="_blank" data-bind="net_price_calculator">
                       <i class="fa fa-calculator"></i>
                       Calculate your personal net price
                     </a>
@@ -259,15 +271,30 @@ body_scripts:
                         data-bind="repayment_rate_meter"
                         max="1"
                         average="{{ site.data.national_stats.repayment_rate.median }}"
+                        average-range="{{ site.data.national_stats.repayment_rate.average_range|join:'..' }}"
                         data-median-four_year="{{ site.data.national_stats.repayment_rate_4.median }}"
                         data-median-lt_four_year="{{ site.data.national_stats.repayment_rate_l4.median }}">
                       </picc-meter>
+
                       <figcaption>
-                        <i class="fa average average-arrow" data-meter="repayment-meter"></i>
-                        <span data-bind="repayment_rate_percent">XX%</span>
-                        <div class="average average-label"></div>
+                        <span class="average-value" data-bind="repayment_rate_percent">XX%</span>
+                        <div class="average-wrapper">
+                          <i class="fa average average-arrow" data-meter="repayment-meter"></i> <span class="average average-label"></span>
+                        </div>
                       </figcaption>
+
+
                     </figure>
+
+                    <div class="legend-wrapper">
+                      <div class="legend-nat_average">
+                        <div class="legend-nat_average-box">
+                          <div class="legend-nat_average-box-line">
+                          </div>
+                        </div>
+                        <div class="legend-nat_average-words">National Average</div>
+                      </div>
+                    </div>
 
                     <div class="container school-callout">
 
@@ -350,11 +377,23 @@ body_scripts:
                       <picc-meter id="grad-meter" {% include graduation_meter_attributes.html %}>
                       </picc-meter>
                       <figcaption>
-                        <i class="fa average average-arrow" data-meter="grad-meter"></i>
-                        <span data-bind="grad_rate">60%</span>
-                        <div class="average average-label"></div>
+                        <span class="average-value" data-bind="grad_rate">60%</span>
+                        <div class="average-wrapper">
+                          <i class="fa average average-arrow" data-meter="grad-meter"></i> <span class="average average-label"></span>
+                        </div>
                       </figcaption>
                     </figure>
+
+                    <div class="legend-wrapper">
+                      <div class="legend-nat_average">
+                        <div class="legend-nat_average-box">
+                          <div class="legend-nat_average-box-line">
+                          </div>
+                        </div>
+                        <div class="legend-nat_average-words">National Average</div>
+                      </div>
+                    </div>
+
                   </div>
 
                   <div class="school-two_col-right centered">
@@ -368,16 +407,28 @@ body_scripts:
                       <picc-meter id="retention-meter"
                         class="graduation"
                         data-bind="retention_rate_meter"
-                        about-threshold=".03"
                         max="1"
-                        average="{{ site.data.national_stats.retention_rate.median }}">
+                        average="{{ site.data.national_stats.retention_rate.median }}"
+                        average-range="{{ site.data.national_stats.retention_rate.average_range|join:'..' }}">
                       </picc-meter>
                       <figcaption>
-                        <i class="fa average average-arrow" data-meter="retention-meter"></i>
-                        <span data-bind="retention_rate_value">XX%</span>
-                        <div class="average average-label"></div>
+                        <span class="average-value" data-bind="retention_rate_value">XX%</span>
+                        <div class="average-wrapper">
+                          <i class="fa average average-arrow" data-meter="retention-meter"></i> <span class="average average-label"></span>
+                        </div>
                       </figcaption>
                     </figure>
+
+                    <div class="legend-wrapper">
+                      <div class="legend-nat_average">
+                        <div class="legend-nat_average-box">
+                          <div class="legend-nat_average-box-line">
+                          </div>
+                        </div>
+                        <div class="legend-nat_average-words">National Average</div>
+                      </div>
+                    </div>
+
                   </div>
 
                 </div>
@@ -385,7 +436,7 @@ body_scripts:
             </aria-accordion>
           </div>
 
-          <div class="section-card_container-school">
+          <div class="section-card_container-school school-earnings">
             <aria-accordion id="earnings" class="school-two_col">
               <div>
                 <h1 class="search_category">
@@ -397,12 +448,19 @@ body_scripts:
                 <div id="earnings-content" aria-hidden="true">
 
                   <div class="school-two_col-left">
+
+                    <h2 aria-describedby="tip-earnings-25k">
+                      Earning Potential
+                      <a class="tooltip-target">
+                        <i class="fa fa-info-circle"></i>
+                      </a>
+                    </h2>
+
                     <strong class="fact_number">
                       <strong data-bind="advantage_rate">XX%</strong>
                       <span class="small normal">of students</span>
                     </strong>
-                    <p>who attend this school will earn more than those with
-                      only a high school diploma.</p>
+                    <p>who attend this school will earn more than those with only a high school diploma.</p>
                   </div>
 
 
@@ -417,11 +475,22 @@ body_scripts:
                       <picc-meter id="salary-meter" {% include earnings_meter_attributes.html %}>
                       </picc-meter>
                       <figcaption>
-                        <i class="fa average average-arrow" data-meter="salary-meter"></i>
-                        <span data-bind="average_salary">$XX,XXX</span>
-                        <div class="average average-label"></div>
+                        <span class="average-value" data-bind="average_salary">$XX,XXX</span>
+                        <div class="average-wrapper">
+                          <i class="fa average average-arrow" data-meter="salary-meter"></i> <span class="average average-label"></span>
+                        </div>
                       </figcaption>
                     </figure>
+
+                    <div class="legend-wrapper">
+                      <div class="legend-nat_average">
+                        <div class="legend-nat_average-box">
+                          <div class="legend-nat_average-box-line">
+                          </div>
+                        </div>
+                        <div class="legend-nat_average-words">National Average</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -447,7 +516,7 @@ body_scripts:
                       </li>
                       <li class="school-key_figures-stat">
                         <div class="group_inline">
-                          <div class="group_inline-left fact_number" data-bind="size_number">X,XXX</div>
+                          <strong class="group_inline-left fact_number" data-bind="size_number">X,XXX</strong>
                           <div class="group_inline-right"><p>undergraduate <br>students</p></div>
                         </div>
                       </li>
@@ -458,29 +527,10 @@ body_scripts:
                   <div class="school-two_col school-student-body">
 
                     <div class="school-two_col-left">
-                      <!-- FIXME Gender Data Missing
-                      <h2
-                        aria-describedby="tip-graduation-rate">Gender
-                        <a class="tooltip-target">
-                          <i class="fa fa-info-circle"></i>
-                        </a>
-                      </h2>
-                      <ol class="bars" data-bind="gender_values">
-                        {% include bar_chart_template_item.html %}
-                      </ol>
-                    -->
-                      <!-- <div class="school-student-stats"> -->
-                      <!--
-                      <h2
-                        aria-describedby="tip-graduation-rate">Other Demographics
-                        <a class="tooltip-target">
-                          <i class="fa fa-info-circle"></i>
-                        </a>
-                      </h2>
-                    -->
+
                       <div class="school-student-stats-col">
 
-                        <div class="test-align">
+                        <div class="school-student-stats-col-align">
 
                           <div>
                             <span class="fact_number">
@@ -499,40 +549,25 @@ body_scripts:
                         </div>
 
                         <div class="school-student-socio_econ">
-                          <h2>Socio-Economic Diversity</h2>
-                          <div class="group_inline school-student-socio_econ-stat">
-                            <div class="group_inline-left">
-                              <strong class="fact_number" data-bind="pell_grant_percentage">X</strong>
-                            </div>
-                            <div class="group_inline-right">
-                              <strong>of students</strong>
-                            </div>
+                          <h2 aria-describedby="tip-socio-eco">
+                            Socio-Economic Diversity
+                            <a class="tooltip-target">
+                              <i class="fa fa-info-circle"></i>
+                            </a>
+                          </h2>
+
+                          <div class="school-student-socio_econ-stat">
+                            <strong class="fact_number" data-bind="pell_grant_percentage">X</strong>
+                            <strong>of students</strong>
                           </div>
-                          <p>have a family income less than $40k and receive a
-                            grant to pay for college.</p>
+
+                          <p>have a family income less than $40k and receive a grant to pay for college.</p>
                         </div>
 
-                        <!-- <div class="school-student-stat group_inline">
-                          <h2>Socio-Economic Diversity</h2>
-                          <strong class="fact_number big">
-                            <strong data-bind="pell_grant_percentage">XX%</strong>
-                            <span class="small normal">of students</span>
-                          </strong>
-                          <p>have a family income less than $40k and receive a
-                            grant to pay for college.</p>
-                        </div> -->
-
-<!--
-                        <div class="group_inline">
-                          <div class="group_inline-left"><span class="fact_number" data-bind="age_entry">XX</span></div>
-                          <div class="group_inline-right"><p class="school-student-stats-col-p">Average age at enrollment</p></div>
-                        </div>
--->
                       </div>
 
                     </div>
 
-                    <!-- </div> -->
 
                     <div class="school-two_col-right">
                       <h2
@@ -549,38 +584,6 @@ body_scripts:
 
                   </div>
 
-                  <!-- <div class="school-student-stats">
-                    <h2>Other Demographics</h2>
-
-                    <div class="school-student-stats-col">
-                      <div>
-                        <span class="fact_number">
-                          <strong data-bind="full_time_percent">XX</strong>
-                          <span class="small">%</span>
-                        </span> Full-time
-                      </div>
-                      <div class="fact_number divide">/</div>
-                      <div>
-                        <span class="fact_number">
-                          <strong data-bind="part_time_percent">XX</strong>
-                          <span>%</span>
-                        </span> Part-time
-                      </div>
-                    </div>
-
-                    <div class="school-student-stats-col">
-                      <div class="group_inline">
-                        <div class="group_inline-left"><span class="fact_number" data-bind="age_entry">XX</span></div>
-                        <div class="group_inline-right"><p class="school-student-stats-col-p">Average age at enrollment</p></div>
-                      </div>
-                    </div> -->
-
-                    <!-- <div class="school-student-stats-col"> -->
-                      <!-- Placeholder for future stats -->
-                    <!-- </div> -->
-
-                  <!-- </div> -->
-
                 </div>
               </div>
             </aria-accordion>
@@ -596,19 +599,7 @@ body_scripts:
                 </h1>
 
                 <div id="selectivity-content" aria-hidden="true">
-                  <!-- <div class="school-two_col-left centered">
-                    <h2
-                      aria-describedby="tip-graduation-rate">
-                      Acceptance Rate
-                      <a class="tooltip-target">
-                        <i class="fa fa-info-circle"></i>
-                      </a>
-                    </h2>
-                    <strong class="fact_number">Somewhat Selective</strong>
-                    <p>[chart here]</p>
-                  </div> -->
 
-                  <!-- <div class="school-two_col-right"> -->
                   <div style="padding-top: 20px;"> <!--TODO-->
                     <h2
                       aria-describedby="tip-test-scores">
@@ -660,7 +651,6 @@ body_scripts:
 
                   </div>
 
-                  <!-- </div> -->
                 </div>
               </div>
             </aria-accordion>
@@ -677,11 +667,6 @@ body_scripts:
 
                 <div id="academics-content" aria-hidden="true">
                   <div class="school-two_col-left">
-
-                    <!-- <div class="school-academics-fact group_inline">
-                      <div class="group_inline-left"><strong class="fact_number" data-bind="num_available_programs">X</strong></div>
-                      <div class="group_inline-right"><h2><span data-bind="programs_plural">Programs</span> Offered</h2></div>
-                    </div> -->
 
                     <h2
                       aria-describedby="tip-pop-prog">
@@ -714,6 +699,12 @@ body_scripts:
             </aria-accordion>
           </div>
 
+          <p class="college-response">
+            <a class="link-more" data-bind="response_link">
+              College Response <i class="fa fa-chevron-right"></i>
+            </a>
+          </p>
+
         </div>
 
       </div>
@@ -722,13 +713,18 @@ body_scripts:
 
     <aside class="school-right">
 
-      <h2>Paying for College</h2>
+      <h2>Get The Best Deal</h2>
 
-      <img src="{{ site.baseurl }}/img/cfpb-logo.png" alt="consumer financial protection bureau">
+      <div class="u-align_c">
 
-      <p>Get help to make informed financial decisions about how to pay for college. Start by comparing financial aid offers or understanding student loan repayment options.</p>
+        <a href="https://fafsa.ed.gov/FAFSA/app/f4cForm" class="button button-outline" target="_blank">
+          Estimate Your Aid</a>
+        <a href="http://www.consumerfinance.gov/paying-for-college/compare-financial-aid-and-college-cost/" class="button button-outline" target="_blank">
+          Compare Aid Packages</a>
+        <a href=" https://department-of-veterans-affairs.github.io/gi-bill-comparison-tool/" class="button button-outline" target="_blank">
+          Calculate GI Bill Benefits</a>
 
-      <a href="http://www.consumerfinance.gov/paying-for-college/" class="link-more">Go to the consumer financial protection bureau <i class="fa fa-chevron-right"></i></a>
+      </div>
 
     </aside>
 
@@ -737,8 +733,6 @@ body_scripts:
 </div>
 
 
-<!--
-<section>
-  {# include search-form.html #}
-</section>
--->
+<script>
+  picc.pages.school();
+</script>

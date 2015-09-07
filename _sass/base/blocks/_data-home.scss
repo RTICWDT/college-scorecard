@@ -2,8 +2,11 @@
 //=============================
 
 .data-home-rule {
-  border-right: ($regular-border-size * 2) solid $light-gray;
   margin-right: $base-padding;
+
+  @include respond-to(medium-up) {
+    border-right: ($regular-border-size * 2) solid $light-gray;
+  }
 }
 
 .data-home-intro-convo-right {
@@ -18,16 +21,18 @@
 .data-home-convo {
   background: $light-gray;
 
-  ul li {
+  a {
     @include font-size(0.8);
     color: $mid-blue;
     display: inline-block;
     padding-top: $base-padding-lite;
     padding-right: $base-padding-lite;
+    text-decoration: none;
 
     i {
       @include font-size(1);
       color: $sky-blue;
+      padding-right: 3px;
     }
 
     &:hover,
@@ -77,27 +82,35 @@
   }
 }
 
-button.data-home-button {
-  @extend .button-wizard;
+.data-home-feature {
+  border: $thin-border-size solid $base-border-color;
+  border-radius: $base-border-radius;
+  padding: $base-padding-large;
+}
+
+.data-home-button {
+  @extend .button-outline;
   @include font-size(0.75);
-  border-color: $green;
-  color: $green;
   height: auto;
+  letter-spacing: 2px;
   margin-bottom: $base-padding-extra;
   padding-top: 0.8em;
   width: 330px;
 
-  &:hover,
-  &:focus {
-    box-shadow: 0 0 0 2px $green;
-  }
-
-  + button.data-home-button {
+  + .data-home-button {
     margin-left: 10px;
   }
 }
 
+.data-home-hr {
+  margin-top: $base-padding;
+  border-top: $regular-border-size solid $base-border-color;
+  padding-top: $base-padding-extra;
+}
+
 .data-home-download {
+  @extend .data-home-hr;
+
   h2,
   h3 {
     padding-bottom: $base-padding-lite;
@@ -150,5 +163,75 @@ button.data-home-button {
         text-decoration: underline;
       }
     }
+  }
+}
+
+.data-docs {
+  padding-right: $base-padding-large;
+
+  a {
+    color: $mid-blue;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  aria-accordion {
+    a {
+      color: $black;
+    }
+
+    p:first-of-type {
+      padding-top: $base-padding;
+    }
+  }
+
+  aria-accordion [aria-controls]:after {
+    top: -6px;
+  }
+
+  h2 {
+    padding-bottom: $base-padding-lite;
+  }
+
+  p {
+    padding-bottom: $base-padding;
+  }
+}
+
+.data-docs-api {
+  li a {
+    color: $mid-blue;
+     word-wrap: break-word;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  h3 {
+    @include font-size($h2);
+    border-top: $thin-border-size solid $base-border-color;
+    font-weight: $weight-bold;
+    letter-spacing: 1px;
+    margin-top: $base-padding;
+    padding-top: $base-padding-large;
+    padding-bottom: $base-padding-lite;
+    text-transform: none;
+  }
+
+  h4 {
+    font-weight: $weight-bold;
+
+    &:first-of-type {
+      padding-top: $base-padding;
+    }
+  }
+
+  span {
+    font-weight: $weight-bold;
   }
 }

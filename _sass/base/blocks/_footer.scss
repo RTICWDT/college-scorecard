@@ -1,19 +1,67 @@
 footer {
   @include font-size($h6);
-  background-color: #eeeeee;
-  height: 60px;
+  background-color: $lighter-gray;
+  color: $dark-gray;
+  height: 180px;
+  font-weight: $weight-light;
   text-align: center;
   padding-top: 22px;
+
   @include respond-to(tiny-up) {
     @include font-size($h5);
-    height: 100px;
-    padding-top: 41px;
+    height: 215px;
+    padding-top: 32px;
+  }
+
+  a {
+    color: $mid-blue;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
   }
 
   p {
-    color: $dark-gray;
-    font-weight: 600;
+    padding-bottom: $base-padding;
+  }
+
+  .footer-attribution {
+    @include font-size(0.6);
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include respond-to(tiny-up) {
+      @include font-size(0.7);
+      width: 70%;
+    }
+
+    @include respond-to(small-up) {
+      width: 60%;
+    }
+
+    @include respond-to(medium-up) {
+      width: 50%;
+    }
+
+    @include respond-to(large-up) {
+      width: 40%;
+    }
+
+    @include respond-to(huge-up) {
+      width: 30%;
+    }
+  }
+
+  .footer-owner {
+    font-weight: $weight-bold;
     letter-spacing: 0.4px;
     text-transform: uppercase;
+
+    a {
+      color: $dark-gray;
+    }
   }
 }

@@ -2,7 +2,7 @@
 
   var EXPANDED = 'aria-expanded';
   var HIDDEN = 'aria-hidden';
-  var TOGGLE_EVENTS = ['click', 'touchstart'];
+  var TOGGLE_EVENTS = ['click'];
 
   exports.ARIAAccordion = document.registerElement('aria-accordion', {
     prototype: Object.create(

@@ -11,20 +11,10 @@ baseurl: /college-choice
 markdown: kramdown
 
 sass:
-  style: nested
+  style: compressed
 
 # common site scripts, relative to `{{ site.baseurl }}/js/`
 scripts:
-  - vendor/aight.min.js
-  - compat/custom-event.js
-  - vendor/d3.min.js
-  - vendor/async.min.js
-  - vendor/querystring.min.js
-  - vendor/document-register-element.min.js
-  - components/aria-accordion.js
-  - components/picc-meter.js
-  - components/picc-range.js
-  - components/multi-select.js
   - picc.js
 
 stylesheets:
@@ -35,7 +25,8 @@ analytics: true
 
 # API configuration
 API:
-  baseurl: https://api.data.gov/TEST/ed/
+  baseurl: https://api.data.gov/TEST/ed/production/v1/
+  key: ''
 
 # specify paths to exclude from copying to _site
 # Note: files and directories with the '_' prefix are excluded
@@ -44,6 +35,7 @@ exclude:
   # Node and JS asset build files
   - package.json
   - node_modules
+  - js/**/*.md
   - '**/Makefile'
   - '*.sh'
   # Ruby stuff

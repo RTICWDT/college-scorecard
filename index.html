@@ -1,15 +1,10 @@
 ---
 layout: default
-scripts:
-  - vendor/formdb.min.js
-  - components/combo-box.js
-body_scripts:
-  - index.js
 ---
-
 
 <!-- background image -->
 <div class="home-splash"></div>
+
 <!-- search and -->
 <!-- where to start -->
 <section class="search_form">
@@ -56,10 +51,6 @@ body_scripts:
 
       <h1>By The Numbers</h1>
 
-      <!-- <a class="link-more">
-        More Key Facts <i class="fa fa-chevron-right"></i>
-      </a> -->
-
       <ul>
         <li>
           <img src="{{ site.baseurl }}/img/money.svg" alt="Dollar bills">
@@ -67,24 +58,24 @@ body_scripts:
             On average, college graduates earn
             <strong>$1 million</strong>
             <strong>more</strong>
-            over their lifetimes than<br>
-            high school graduates.
+            <div class="fact-words">over their lifetimes than
+            high school graduates.</div>
           </div>
         </li>
         <li>
           <img src="{{ site.baseurl }}/img/application.svg" alt="Application">
           You could be eligible for up to
           <strong>$5,775</strong>
-          <strong>of free money</strong>
-          in federal grants to help pay for<br>
-          college. <span>No repayment needed!</span>
+          <strong>for free</strong>
+          <div class="fact-words">in federal grants to help pay
+          for college. <span>No repayment needed!</span></div>
         </li>
         <li>
           <img src="{{ site.baseurl }}/img/cap.svg" alt="Graduation cap">
           Did you know that
-          <strong>60%</strong>
+          <strong>30%</strong>
           <strong>of college graduates</strong>
-          started college at <span>age 24 or older</span>.
+          <div class="fact-words">started college at <span>age 25 or older</span>.</div>
         </li>
       </ul>
 
@@ -187,3 +178,7 @@ body_scripts:
 
   </section>
 </div> -->
+
+<script>
+  picc.pages.index();
+</script>

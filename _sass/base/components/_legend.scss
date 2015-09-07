@@ -1,11 +1,16 @@
 $nat_average-height: 25px;
 
+.legend-wrapper {
+  @include span-columns(12 of 12);
+}
+
 .legend-nat_average {
   @include font-size(0.8);
-  @include span-columns(9);
-  @include shift(3);
+  margin-left: auto;
+  margin-right: auto;
   padding-top: $base-padding-lite;
   position: relative;
+  width: 150px;
 }
 
 .legend-nat_average-box {

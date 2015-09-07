@@ -1,10 +1,16 @@
 .pagination {
-  margin-top: $base-padding;
-  text-align: right;
+  @include span-columns(12);
+  margin-top: $base-padding-lite;
+  margin-left: $base-padding;
+
+  @include respond-to(small-up) {
+    text-align: right;
+    margin-top: $base-padding;
+    margin-left: 0;
+  }
 
   ol {
     display: block;
-    overflow: hidden;
     font-weight: $weight-bold;
     text-transform: uppercase;
 

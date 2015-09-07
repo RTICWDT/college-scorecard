@@ -70,6 +70,10 @@ select[multiple=multiple] {
     box-shadow: $form-box-shadow-focus;
     outline: none;
   }
+
+  &:disabled {
+    color: $light-gray;
+  }
 }
 
 textarea {
