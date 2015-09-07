@@ -182,8 +182,8 @@
     }
 
     @include respond-to(large-up) {
-      min-height: 430px;
-      //TODO magic number: this is to make this section even with the one next door
+      min-height: 382px;
+      //magic number. this is to make this section even with the one next door
       padding-top: $base-padding-extra;
     }
   }
