@@ -14,7 +14,6 @@ $header-font-family: $base-font-family;
 $base-font-weight: $weight-book;
 
 
-
 // Sizes
 $base-font-size: 1;
 $base-line-height: 1.5;
@@ -25,8 +24,10 @@ $white: #ffffff;
 $black: #040404;
 $light-putty: #f6f6f6;
 $dark-gray: #666666;
+$mid-dark-gray: #999999;
 $mid-gray: #e1e1e1;
 $light-gray: #eaeaea;
+$lighter-gray: #eeeeee;
 $light-blue: #d5dfe8;
 $dark-blue: #0e365b;
 $darker-blue: #092236;
@@ -106,7 +107,7 @@ $form-font-family: $base-font-family;
 $form-input-color: $dark-gray;
 
 // Loadable states
-$loadable-states: (loading, loaded, error);
+$loadable-states: (loading, loaded, error, incremental);
 
 // Splash
 $splash-height: 37em;

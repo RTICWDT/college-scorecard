@@ -18,6 +18,22 @@ picc.errors = {
   NO_SUCH_SCHOOL: 'No school found.'
 };
 
+// race-ethnicity labels
+picc.RACE_ETHNICITY_LABELS = {
+  aian:                   'American Indian/Alaska Native',
+  asian:                  'Asian',
+  asian_pacific_islander: 'Asian/Pacific Islander',
+  black:                  'Black',
+  black_non_hispanic:     'Black non-Hispanic',
+  hispanic:               'Hispanic',
+  nhpi:                   'Native Hawaiian/Pacific Islander',
+  non_resident_alien:     'Non-resident alien',
+  two_or_more:            'Two or more races',
+  unknown:                'Unknown',
+  white:                  'White',
+  white_non_hispanic:     'White non-Hispanic',
+};
+
 /**
  * picc.API is a singleton object with methods to query the open-data-maker
  * JSON API. Its base URL (`picc.API.url`) and API key (`picc.API.key`) are
@@ -429,7 +445,7 @@ picc.fields = {
   REGION_ID:            'school.region_id',
 
   RELIGIOUS:            'school.religious_affiliation',
-  OPERATING:            '2013.student.operating',
+  OPERATING:            'school.operating',
 
   SIZE:                 '2013.student.size',
   ONLINE_ONLY:          'school.online_only',
@@ -443,7 +459,6 @@ picc.fields = {
 
   // net price
   NET_PRICE:            '2013.cost.avg_net_price.overall',
-  // FIXME: where is NET_PRICE_BY_INCOME used?
   NET_PRICE_BY_INCOME:  '2013.cost.net_price',
 
   // completion rate
@@ -470,23 +485,23 @@ picc.fields = {
   RACE_ETHNICITY:       '2013.student.demographics.race_ethnicity',
   AGE_ENTRY:            '2013.student.demographics.age_entry',
 
-  ACT_25TH_PCTILE:      '2013.student.act_scores.25th_percentile.cumulative',
-  ACT_75TH_PCTILE:      '2013.student.act_scores.75th_percentile.cumulative',
-  ACT_MIDPOINT:         '2013.student.act_scores.midpoint.cumulative',
+  ACT_25TH_PCTILE:      '2013.admissions.act_scores.25th_percentile.cumulative',
+  ACT_75TH_PCTILE:      '2013.admissions.act_scores.75th_percentile.cumulative',
+  ACT_MIDPOINT:         '2013.admissions.act_scores.midpoint.cumulative',
 
-  SAT_CUMULATIVE_AVERAGE:   '2013.student.sat_scores.average.overall',
+  SAT_CUMULATIVE_AVERAGE:   '2013.admissions.sat_scores.average.overall',
 
-  SAT_READING_25TH_PCTILE:  '2013.student.sat_scores.25th_percentile.critical_reading',
-  SAT_READING_75TH_PCTILE:  '2013.student.sat_scores.75th_percentile.critical_reading',
-  SAT_READING_MIDPOINT:     '2013.student.sat_scores.midpoint.critical_reading',
+  SAT_READING_25TH_PCTILE:  '2013.admissions.sat_scores.25th_percentile.critical_reading',
+  SAT_READING_75TH_PCTILE:  '2013.admissions.sat_scores.75th_percentile.critical_reading',
+  SAT_READING_MIDPOINT:     '2013.admissions.sat_scores.midpoint.critical_reading',
 
-  SAT_MATH_25TH_PCTILE:     '2013.student.sat_scores.25th_percentile.math',
-  SAT_MATH_75TH_PCTILE:     '2013.student.sat_scores.75th_percentile.math',
-  SAT_MATH_MIDPOINT:        '2013.student.sat_scores.midpoint.math',
+  SAT_MATH_25TH_PCTILE:     '2013.admissions.sat_scores.25th_percentile.math',
+  SAT_MATH_75TH_PCTILE:     '2013.admissions.sat_scores.75th_percentile.math',
+  SAT_MATH_MIDPOINT:        '2013.admissions.sat_scores.midpoint.math',
 
-  SAT_WRITING_25TH_PCTILE:  '2013.student.sat_scores.25th_percentile.writing',
-  SAT_WRITING_75TH_PCTILE:  '2013.student.sat_scores.75th_percentile.writing',
-  SAT_WRITING_MIDPOINT:     '2013.student.sat_scores.midpoint.writing',
+  SAT_WRITING_25TH_PCTILE:  '2013.admissions.sat_scores.25th_percentile.writing',
+  SAT_WRITING_75TH_PCTILE:  '2013.admissions.sat_scores.75th_percentile.writing',
+  SAT_WRITING_MIDPOINT:     '2013.admissions.sat_scores.midpoint.writing',
 
   NET_PRICE_CALC_URL:       'school.price_calculator_url'
 };
@@ -641,26 +656,13 @@ picc.access.partTimeShare = picc.access.composed(
   picc.fields.PART_TIME_SHARE
 );
 
-picc.access.retentionRate = function(d) {
-  var retention = picc.access.composed(
-    picc.fields.RETENTION_RATE,
-    picc.access.yearDesignation
-  )(d);
-  if (!retention) return null;
-
-  var size = picc.access.size(d);
-  if (!size) return null;
-
-  var ptShare = picc.access.partTimeShare(d);
-  if (ptShare === null) return null;
-
-  var pt = size * ptShare * retention.part_time;
-  var ft = (size - size * ptShare) * retention.full_time;
-  if (isNaN(pt) || isNaN(ft)) return null;
-
-  // console.log('retention:', retention, [pt, ft], 'size:', size);
-  return (pt + ft) / size;
-};
+// only use full-time retention rate, branching on year designation
+// (`retetion
+picc.access.retentionRate = picc.access.composed(
+  picc.fields.RETENTION_RATE,
+  picc.access.yearDesignation,
+  'full_time'
+);
 
 picc.access.size = picc.access.composed(
   picc.fields.SIZE
@@ -682,6 +684,11 @@ picc.access.specialDesignations = function(d) {
     designations.push(SPECIAL_DESIGNATIONS.women_only);
   } else if (+picc.access(picc.fields.MEN_ONLY)(d)) {
     designations.push(SPECIAL_DESIGNATIONS.men_only);
+  }
+
+  var religious = picc.access(picc.fields.RELIGIOUS)(d);
+  if (religious in picc.RELIGIOUS_AFFILIATIONS_BY_NUMBER) {
+    designations.push(picc.RELIGIOUS_AFFILIATIONS_BY_NUMBER[religious]);
   }
 
   var minorityServing = picc.access(picc.fields.MINORITY_SERVING)(d);
@@ -713,6 +720,7 @@ picc.access.programAreas = function(d, metadata) {
   var dictionary = metadata.dictionary;
   var field = picc.fields.PROGRAM_PERCENTAGE;
   var programs = picc.access(field)(d);
+  if (!programs) return [];
   // remove the year prefix
   field = field.replace(/^\d+\./, '');
   return Object.keys(programs || {})
@@ -805,6 +813,22 @@ picc.school.directives = (function() {
           this.getAttribute('data-href'),
           {url: encodeURIComponent(document.location.href)}
         );
+      }
+    },
+
+    response_link: {
+      '@href': function(d) {
+        var href = format.href(fields.SCHOOL_URL)(d);
+        if (href) {
+          var suffix = '/CollegeScorecard';
+          if (href.substr(-1) === '/') {
+            href += suffix.substr(1);
+          } else {
+            href += suffix;
+          }
+          return href;
+        }
+        return '';
       }
     },
 
@@ -921,19 +945,19 @@ picc.school.directives = (function() {
 
     race_ethnicity_values: function(d) {
       if (!d.metadata) return [];
-      var dictionary = d.metadata.dictionary;
-      var field = fields.RACE_ETHNICITY;
-      var values = access(field)(d);
-      var prefix = field + '.';
+      var values = access(fields.RACE_ETHNICITY)(d);
+      if (!values) return [];
       return Object.keys(values)
         .map(function(key) {
           var value = picc.nullify(values[key]);
-          var dict = dictionary[prefix + key];
+          var label = picc.RACE_ETHNICITY_LABELS[key] || key;
           return {
-            key: key,
-            label: dict ? (dict.label || key) : key,
-            value: value,
-            percent: percent(value)
+            key:      key,
+            label:    label,
+            value:    value,
+            percent:  value >= .05
+              ? percent(value)
+              : '<1%'
           };
         })
         .filter(function(d) {
@@ -1152,7 +1176,6 @@ picc.form.prepareParams = (function() {
     },
 
     state:                fields.STATE,
-    online:               fields.ONLINE_ONLY,
 
     zip: function(query, value, key) {
       // if there is no distance query, use the fully-qualified zip code
@@ -1248,6 +1271,30 @@ picc.form.prepareParams = (function() {
   return function prepareParams(params) {
 
     var query = picc.data.extend({}, params);
+
+    // only get open schools
+    query[fields.OPERATING] = 1;
+
+    // ignore distance if no zip is provided
+    if (query.distance && !query.zip) {
+      console.warn('distance provided without zip; ignoring', query);
+      delete query.distance;
+    }
+
+    // by default, filter out schools for which school.size is null
+    // with a numeric range query
+    if (!query.size) {
+      query[fields.SIZE + '__range'] = '0..';
+    }
+
+    // if "online" is truthy, then we should *include* online schools,
+    // which means not filtering on that field
+    if (query.online) {
+    } else {
+      // otherwise (if query.online is falsy), filter by fields.ONLINE_ONLY=0
+      query[fields.ONLINE_ONLY] = 0;
+    }
+    delete query.online;
 
     for (var key in query) {
       var v = query[key];
@@ -1500,7 +1547,9 @@ picc.tooltip = {
    * This is an hover/focus event listener that will attach the corresponding
    * tooltip to this element's tooltip-target.
    */
-  show: function showTooltip() {
+  show: function showTooltip(e) {
+    clearTimeout(this.__tooltipShowTimeout);
+
     var tooltip = this.tooltip;
     if (!tooltip) {
       tooltip = document.getElementById(this.getAttribute('aria-describedby'));
@@ -1510,10 +1559,30 @@ picc.tooltip = {
       this.tooltip = tooltip;
     }
 
-    // console.log('show tooltip:', this, tooltip);
-    tooltip.setAttribute('aria-hidden', false);
+    var parent = this;
     var ref = this.querySelector('.tooltip-target') || this;
-    picc.tooltip.constrain(tooltip, ref);
+    var show = function() {
+      // console.log('show tooltip:', this, tooltip);
+      tooltip.setAttribute('aria-hidden', false);
+      var click;
+      // d3 makes this a lot simpler with exclusive listeners
+      var win = d3.select(window)
+        .on('click.tooltip', click = function(e) {
+          win.on('click.tooltip', null);
+          if (parent.contains(tooltip)) {
+            picc.tooltip.hide.call(parent, e);
+          } else {
+            console.warn('ignoring click on unowned tooltip:', parent, tooltip);
+          }
+        }, true);
+      picc.tooltip.constrain(tooltip, ref);
+    };
+
+    if (e.type === 'click') {
+      show();
+    } else {
+      this.__tooltipShowTimeout = setTimeout(show, 200);
+    }
   },
 
   /**
@@ -1521,9 +1590,18 @@ picc.tooltip = {
    * tooltip, but leave it in place for debugging.
    */
   hide: function hideTooltip() {
+    clearTimeout(this.__tooltipShowTimeout);
     if (!this.tooltip) return;
-    var tooltip = this.tooltip;
-    tooltip.setAttribute('aria-hidden', true);
+    this.tooltip.setAttribute('aria-hidden', true);
+    this.tooltip = null;
+  },
+
+  toggle: function toggleTooltip(e) {
+    if (this.tooltip && this.tooltip.getAttribute('aria-hidden') !== 'false') {
+      picc.tooltip.hide.call(this, e);
+    } else {
+      picc.tooltip.show.call(this, e);
+    }
   },
 
   /**
@@ -1595,27 +1673,49 @@ picc.ready(function() {
   var described = 'aria-describedby';
   picc.delegate(
     document.body,
+    // if the element matches '[aria-describedby^="tip-"]'
     function() {
       return this.hasAttribute(described)
           && this.getAttribute(described).match(/^tip-/);
     },
-    {
-      mouseenter: picc.tooltip.show,
-      mouseleave: picc.tooltip.hide,
-      focus:      picc.tooltip.show,
-      blur:       picc.tooltip.hide
-    }
+    // XXX this is a *very* rudimentary way to detect whether the browser
+    // supports touch events.
+    document.body.ontouchstart
+      // with touch enabled, only show on focus/blur and click/tap
+      ? {
+        focus:      picc.tooltip.show,
+        blur:       picc.tooltip.hide,
+        click:      picc.tooltip.toggle
+      }
+      // otherwise, show on enter/leave and focus/blur
+      : {
+        mouseenter: picc.tooltip.show,
+        mouseleave: picc.tooltip.hide,
+        focus:      picc.tooltip.show,
+        blur:       picc.tooltip.hide,
+      }
   );
 });
 
-window.addEventListener('mousedown', function(e) {
-  // console.info('+ drag');
-  document.body.classList.add('dragging');
-});
-
-window.addEventListener('mouseup', function(e) {
-  // console.info('- drag');
-  document.body.classList.remove('dragging');
-});
+// set the "dragging" class when the mouse is down
+d3.select(document)
+  .on('mousedown', function(e) {
+    clearTimeout(this.__dragTimeout);
+    var body = this.body;
+    this.__dragTimeout = setTimeout(function() {
+      // console.info('+ drag');
+      body.classList.add('dragging');
+    }, 100);
+  })
+  .on('mouseup', function(e) {
+    clearTimeout(this.__dragTimeout);
+    // console.info('- drag');
+    this.body.classList.remove('dragging');
+  })
+  .on('click', function(e) {
+    clearTimeout(this.__dragTimeout);
+    // console.info('- drag');
+    this.body.classList.remove('dragging');
+  });
 
 module.exports = picc;

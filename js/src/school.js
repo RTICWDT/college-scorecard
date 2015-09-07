@@ -106,10 +106,16 @@ module.exports = function school() {
     bars.select('.value')
       .remove();
 
+    var scale = d3.scale.linear()
+      .domain([0, 1])
+      .range(['1%', '100%']);
+
     bars.select('.bar')
-      .style('width', d3.scale.linear()
-        .domain([0, .01, 1])
-        .range(['0%', '1%', '100%']));
+      .style('width', function(d) {
+        return d > .005
+          ? scale(d)
+          : d ? '1px' : 0;
+      });
 
     createMap(school, root.querySelector('.school-map'));
   });

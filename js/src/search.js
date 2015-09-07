@@ -6,14 +6,20 @@ var querystring = require('querystring');
 module.exports = function search() {
 
   var resultsRoot = document.querySelector('.search-results');
+  var paginator = resultsRoot.querySelector('.pagination');
+  var bottomPaginator = resultsRoot.querySelector('.pagination_bottom');
+
   var form = new formdb.Form('#search-form');
   var query = querystring.parse(location.search.substr(1));
+  // console.info('initial query:', query);
 
   // the current outbound request
   var req;
 
   var previousParams = query || {};
   var poppingState = false;
+  var ready = false;
+  var alreadyLoaded = false;
 
   // "incremental" updates will only hide the list of schools, and
   // not any of the other elements (results total, sort, pages)
@@ -30,11 +36,36 @@ module.exports = function search() {
   // get a reference to all of the sliders
   var sliders = d3.selectAll('picc-slider');
 
+  // close other toggles when one opens
+  var toggles = d3.selectAll('.toggle-accordion')
+    .on('open', function() {
+      var opened = this;
+      toggles.each(function() {
+        if (this !== opened) this.close();
+      });
+    });
+
+  // close all toggles on escape
+  d3.select(window)
+    .on('keyup', function() {
+      if (d3.event.keyCode === 27) {
+        toggles.property('expanded', false);
+      }
+    });
+
+  // expand (child) accordions that contain elements with values set
+  picc.ui.expandAccordions('.toggle-accordion aria-accordion', function() {
+    var inputs = this.querySelectorAll('[name]');
+    return [].some.call(inputs, function(input) {
+      return query[input.name];
+    });
+  });
+
   picc.ready(function() {
-    // console.warn('setting form data...', query);
-    // console.log('states:', form.get('state'));
+    ready = true;
+
+    // console.warn('setting form data:', query);
     form.setData(query);
-    // console.log('states:', form.getInputsByName('state'), form.get('state'));
 
     // for each of the sliders
     sliders
@@ -66,11 +97,17 @@ module.exports = function search() {
     incremental = true;
   });
 
+  // update the distance field's disabled flag when zip changes
+  form.on('change:zip', updateDistanceDisabled);
+
   form.on('change:_drawer', function(value, e) {
     submit = false;
   });
 
   form.on('submit', function(data, e) {
+    toggles.property('expanded', false);
+    scrollIntoView();
+
     change();
     e.preventDefault();
     return false;
@@ -78,11 +115,12 @@ module.exports = function search() {
 
   // update the form on popstate
   window.addEventListener('popstate', function(e) {
+    if (!e.state) return;
 
     // copy the unset keys (as `null`) from the previous state to clear any
     // elements that aren't represented in the new state.
     var state = copyUnsetKeys(previousParams, e.state);
-    console.info('pop state:', e.state, '->', state);
+    // console.info('pop state:', e.state, '->', state);
 
     // update all of the form elements
     form.setData(state);
@@ -95,21 +133,29 @@ module.exports = function search() {
     poppingState = false;
   });
 
-  picc.ui.expandAccordions(function() {
-    var inputs = this.querySelectorAll('[name]');
-    return [].some.call(inputs, function(input) {
-      return query[input.name];
-    });
-  });
-
   function onChange() {
+    // XXX somehow, Firefox fires a change event before picc.ready() does its
+    // callback. This guards against any browser that does this from
+    // overwriting the query with default form data.
+    if (!ready) {
+      console.warn('onChange() before ready!');
+      return;
+    }
+
+    // XXX the submit flag is set to false when the drawer toggles.
     if (!submit) {
       // console.warn('not submitting this time!');
       submit = true;
       return;
     }
 
+    // always update the distance disabled state
+    updateDistanceDisabled();
+
     var params = form.getData();
+    // console.info('form data:', params);
+
+    // unset parameters that are "empty" arrays (with a single, falsy value)
     for (var k in params) {
       if (Array.isArray(params[k]) && !params[k][0]) {
         // console.warn('ignoring empty array parameter:', k, params[k]);
@@ -120,10 +166,12 @@ module.exports = function search() {
     // don't submit the _drawer parameter
     delete params._drawer;
 
-    var query = picc.form.prepareParams(params);
+    if (diffExcept(previousParams, params, ['page'])) {
+      // console.warn('non-page change:', previousParams, '->', params);
+      delete params.page;
+    }
 
-    // only get open schools
-    query[picc.fields.OPERATING] = 1;
+    var query = picc.form.prepareParams(params);
 
     // only query the fields that we care about
     query.fields = [
@@ -156,18 +204,19 @@ module.exports = function search() {
       .replace(/%3A/g, ':');
 
     if (poppingState) {
-      console.info('popping state');
-      history.replaceState(params, 'search', qs);
-    } else if (location.search && diff(previousParams, params)) {
-      console.info('push state:', qs, previousParams, '->', params);
+      // console.info('popping state');
+      // history.replaceState(params, 'search', qs);
+    } else if (alreadyLoaded && diff(previousParams, params)) {
+      // console.info('push state:', qs, previousParams, '->', params);
       // update the URL
       history.pushState(params, 'search', qs);
     } else {
-      console.info('replace state:', qs);
+      // console.info('replace state:', qs);
       history.replaceState(params, 'search', qs);
     }
 
     previousParams = params;
+    alreadyLoaded = true;
 
     d3.select('a.results-share')
       .attr('href', function() {
@@ -179,27 +228,27 @@ module.exports = function search() {
 
     if (req) req.abort();
 
-    var list = d3.select(resultsRoot)
-      .select('[data-bind="results"]');
+    resultsRoot.classList.toggle('js-incremental', incremental);
 
     if (incremental) {
-      list.classed('hidden', true);
+      // incremental
     } else {
       resultsRoot.classList.add('js-loading');
       resultsRoot.classList.remove('js-loaded');
       resultsRoot.classList.remove('js-error');
     }
 
-    var paginator = resultsRoot.querySelector('.pagination');
     paginator.classList.toggle('show-loading', incremental);
 
     console.time && console.time('[load]');
 
     req = picc.API.search(query, function(error, data) {
       resultsRoot.classList.remove('js-loading');
-      list.classed('hidden', false);
+      resultsRoot.classList.remove('js-incremental');
 
       paginator.classList.remove('show-loading');
+      bottomPaginator.classList.remove('show-loading');
+
       incremental = false;
 
       console.timeEnd && console.timeEnd('[load]');
@@ -261,25 +310,29 @@ module.exports = function search() {
         }
       });
 
-      var pageLinks = d3.selectAll('a.select-page')
-        .on('click', function() {
-          d3.event.preventDefault();
+      // duplicate the pagination structure below the search results
+      bottomPaginator.innerHTML = paginator.innerHTML;
 
-          var _page = this.getAttribute('data-page');
-          if (_page === 'false') return;
+      var pageLinks = d3.select(resultsRoot)
+        .selectAll('a.select-page')
+          .on('click', function() {
+            d3.event.preventDefault();
 
-          pageLinks.each(function() {
-            var p = this.getAttribute('data-page');
-            var selected = p == _page;
-            this.parentNode.classList
-              .toggle('pagination-page_selected', selected);
-            // console.log('selected?', p, page, selected, '->', this.parentNode);
+            var _page = this.getAttribute('data-page');
+            if (_page === 'false') return;
+
+            pageLinks.each(function() {
+              var p = this.getAttribute('data-page');
+              var selected = p == _page;
+              this.parentNode.classList
+                .toggle('pagination-page_selected', selected);
+              // console.log('selected?', p, page, selected, '->', this.parentNode);
+            });
+
+            form.set('page', _page);
+            incremental = true;
+            change();
           });
-
-          form.set('page', _page);
-          incremental = true;
-          change();
-        });
 
       var resultsList = resultsRoot.querySelector('.schools-list');
       tagalong(resultsList, data.results, picc.school.directives);
@@ -355,6 +408,17 @@ module.exports = function search() {
     message.textContent = String(error) || 'There was an unexpected API error.';
   }
 
+  function diffExcept(a, b, keys) {
+    a = picc.data.extend({}, a);
+    b = picc.data.extend({}, b);
+    keys.forEach(function(key) {
+      delete a[key];
+      delete b[key];
+    });
+    // console.log('diff except:', a, b, keys);
+    return diff(a, b);
+  }
+
   function diff(a, b) {
     if ((typeof a) !== (typeof b)) {
       // console.log('diff types:', typeof a, typeof b);
@@ -390,6 +454,21 @@ module.exports = function search() {
       } else {
         // console.warn('bad slider input value:', value);
       }
+    }
+  }
+
+  function updateDistanceDisabled() {
+    var zip = form.get('zip');
+    var dist = form.getInputsByName('distance')[0];
+    if (!dist) return;
+    dist.disabled = !zip;
+  }
+
+  function scrollIntoView() {
+    try {
+      form.element.scrollIntoView();
+    } catch (error) {
+      console.warn('unable to scroll results into view:', error);
     }
   }
 

@@ -7,6 +7,14 @@
       display: none;
     }
 
+    .fade-#{$state} {
+      transition: opacity .2;
+    }
+
+    &.js-#{$state} .fade-#{$state} {
+      opacity: .5;
+    }
+
     &.js-#{$state} .show-#{$state} {
       display: block;
     }
