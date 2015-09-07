@@ -250,7 +250,7 @@
   @include span-columns(12);
   @include omega();
 
-  @include respond-to(small-up) {
+  @include respond-to(small-plus-up) {
     @include omega-reset(n);
     @include span-columns(6);
     @include omega(2n);
