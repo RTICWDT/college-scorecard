@@ -55,11 +55,12 @@ permalink: /data/documentation/
 
             <div id="root-content" aria-hidden="true">
 
-              <p>These select items refer to the most basic information in the data set, different IDs for each school.</p>
+              <p>These select items refer to the most basic information in the data set,
+                 including different IDs for each school.</p>
 
               <ul class="u-unordered_list">
-                <li>ID</li>
-                <li>Currently Operating</li>
+                <li>IDs</li>
+                <li>Location (lat/lon)</li>
               </ul>
 
             </div>
@@ -84,7 +85,7 @@ permalink: /data/documentation/
 
               <ul class="u-unordered_list">
                 <li>Name</li>
-                <li>Location</li>
+                <li>Currently Operating</li>
                 <li>URLs</li>
                 <li>Main vs Branch Campus</li>
                 <li>Accrediting Agency</li>
@@ -328,14 +329,16 @@ permalink: /data/documentation/
 
       <h2>API Documentation</h2>
 
-      <p>The College Choice API is a GET API that lives at <span>http://api.data.gov/ed/college-scorecard/</span>.</p>
-      <p> The endpoint for querying all data begins with <span>/school/</span>.</p>
+      <p>The College Choice API is a GET API that lives at <span>http://api.data.gov/ed/college-scorecard</span></p>
+      <p>The endpoint for querying all data is <span>/v1/schools</span>.</p>
 
       <h3>Structure</h3>
 
-      <p>The basic structure of an API call is <span>year.dev-category.dev-friendly-variable-name</span>.</p>
-      <p>All variables are listed in the Data Dictionary. In the event a dev-friendly variable name is not present, the parameter structure takes the form of: <span>year.dev-category.VARIABLE</span>.</p>
-      <p>If no dev-category is present, the dev-friendly name is: <span>year.dev-friendly-variable-name or year.VARIABLE</span>.</p>
+      <p>The basic structure of an API call is <span>year.dev-category.dev-friendly-variable-name</span>,
+      except that the <span>school</span> category has no year and <span>id</span>, <span>ope6_id</span>,
+      <span>ope8_id</span> and <span>location</span>
+      have no category or year.</p>
+      <p>All variables are listed in the Data Dictionary.</p>
 
       <div class="u-align_c">
         <a href="{{ site.baseurl }}/assets/CollegeScorecardDataDictionary_09-04-2015.pdf" class="button data-home-button">Download the Data Dictionary</a>
@@ -346,9 +349,9 @@ permalink: /data/documentation/
       <h4>All Data for Boston College</h4>
 
       <ul class="u-unordered_list">
-        <li><a href="api.data.gov/collegescorecard/v1/schools?school.name=boston%20college">
+        <li><a href="https://api.data.gov/collegescorecard/v1/schools?school.name=boston%20college">
           api.data.gov/collegescorecard/v1/schools?school.name=boston%20college</a></li>
-        <li><a href="api.data.gov/collegescorecard/v1/schools?id=164924">
+        <li><a href="https://api.data.gov/collegescorecard/v1/schools?id=164924">
           api.data.gov/collegescorecard/v1/schools?id=164924</a></li>
       </ul>
 
@@ -361,7 +364,7 @@ permalink: /data/documentation/
       <h4>Debt, Earnings, and Repayment</h4>
 
       <ul class="u-unordered_list">
-        <li><a href="api.data.gov/collegescorecard/v1/schools?fields=school.name,id,2013.student.demographics.race_ethnicity.white,2013.student.demographics.race_ethnicity.black,2013.student.demographics.race_ethnicity.hispanic,2013.student.demographics.race_ethnicity.asian,2013.student.demographics.race_ethnicity.aian,2013.student.demographics.race_ethnicity.nhpi,2013.student.demographics.race_ethnicity.two_or_more,2013.student.demographics.race_ethnicity.non_resident_alien,2013.student.demographics.race_ethnicity.unknown,2013.student.demographics.race_ethnicity.white_non_hispanic,2013.student.demographics.race_ethnicity.black_non_hispanic,2013.student.demographics.race_ethnicity.asian_pacific_islander&sort=2013.completion.rate_suppressed.overall:desc">api.data.gov/collegescorecard/v1/schools?fields=school.name,id,2013.student.demographics.race_ethnicity.white,2013.student.demographics.race_ethnicity.black,2013.student.demographics.race_ethnicity.hispanic,2013.student.demographics.race_ethnicity.asian,2013.student.demographics.race_ethnicity.aian,2013.student.demographics.race_ethnicity.nhpi,2013.student.demographics.race_ethnicity.two_or_more,2013.student.demographics.race_ethnicity.non_resident_alien,2013.student.demographics.race_ethnicity.unknown,2013.student.demographics.race_ethnicity.white_non_hispanic,2013.student.demographics.race_ethnicity.black_non_hispanic,2013.student.demographics.race_ethnicity.asian_pacific_islander&sort=2013.completion.rate_suppressed.overall:desc</a></li>
+        <li><a href="https://api.data.gov/collegescorecard/v1/schools?fields=school.name,id,2013.student.demographics.race_ethnicity.white,2013.student.demographics.race_ethnicity.black,2013.student.demographics.race_ethnicity.hispanic,2013.student.demographics.race_ethnicity.asian,2013.student.demographics.race_ethnicity.aian,2013.student.demographics.race_ethnicity.nhpi,2013.student.demographics.race_ethnicity.two_or_more,2013.student.demographics.race_ethnicity.non_resident_alien,2013.student.demographics.race_ethnicity.unknown,2013.student.demographics.race_ethnicity.white_non_hispanic,2013.student.demographics.race_ethnicity.black_non_hispanic,2013.student.demographics.race_ethnicity.asian_pacific_islander&sort=2013.completion.rate_suppressed.overall:desc">api.data.gov/collegescorecard/v1/schools?fields=school.name,id,2013.student.demographics.race_ethnicity.white,2013.student.demographics.race_ethnicity.black,2013.student.demographics.race_ethnicity.hispanic,2013.student.demographics.race_ethnicity.asian,2013.student.demographics.race_ethnicity.aian,2013.student.demographics.race_ethnicity.nhpi,2013.student.demographics.race_ethnicity.two_or_more,2013.student.demographics.race_ethnicity.non_resident_alien,2013.student.demographics.race_ethnicity.unknown,2013.student.demographics.race_ethnicity.white_non_hispanic,2013.student.demographics.race_ethnicity.black_non_hispanic,2013.student.demographics.race_ethnicity.asian_pacific_islander&sort=2013.completion.rate_suppressed.overall:desc</a></li>
       </ul>
 
     </div>
