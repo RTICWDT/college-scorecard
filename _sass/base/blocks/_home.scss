@@ -100,9 +100,18 @@
 .section-home-numbers {
   @extend .centered;
   @extend .section-card_container;
-
-  background-color: $tertiary-background-color;
   @include span-columns(12);
+  background-color: $tertiary-background-color;
+
+  a {
+    color: $black;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
 
   @include respond-to(large-up) {
     @include span-columns(6);
@@ -240,7 +249,7 @@
 .home-splash {
   height: $splash-height;
 
-  @include respond-to(small-up) {
+  @include respond-to(medium-up) {
     background: url(../img/hero.jpg) center center no-repeat;
     background-size: cover;
   }

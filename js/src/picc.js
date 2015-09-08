@@ -326,7 +326,7 @@ picc.format = (function() {
     control: formatter(map({
       '1': 'Public',
       '2': 'Private',
-      '3': 'For Profit'
+      '3': 'For-Profit'
     }, 'control unknown')),
 
     controlClass: formatter(map({
@@ -479,6 +479,7 @@ picc.fields = {
   EARNINGS_GT_25K:      '2011.earnings.6_yrs_after_entry.percent_greater_than_25000',
 
   PROGRAM_PERCENTAGE:   '2013.academics.program_percentage',
+  PROGRAM_OFFERED:      '2013.academics.program',
 
   PART_TIME_SHARE:      '2013.student.part_time_share',
   FEMALE_SHARE:         '2013.student.demographics.female_share',
@@ -867,8 +868,7 @@ picc.school.directives = (function() {
       // '@max':     access.nationalStat('max', access.publicPrivate),
       // '@average': access.nationalStat('median', access.publicPrivate),
       '@value':   access.netPrice,
-      label:      format.dollars(function() { return this.average; }),
-      '@title':   debugMeterTitle
+      label:      format.dollars(function() { return this.average; })
     },
 
     // income level net price stats
@@ -884,16 +884,14 @@ picc.school.directives = (function() {
     grad_rate_meter: {
       // '@average': access.nationalStat('median', access.yearDesignation),
       '@value':   access.completionRate,
-      label:      format.percent(function() { return this.average; }),
-      '@title':   debugMeterTitle
+      label:      format.percent(function() { return this.average; })
     },
 
     average_salary: format.dollars(access.earningsMedian),
     average_salary_meter: {
       '@value': access.earningsMedian,
       // '@average': access.nationalStat('median', access.yearDesignation),
-      label:    format.dollars(function() { return this.average; }),
-      '@title': debugMeterTitle
+      label:    format.dollars(function() { return this.average; })
     },
 
     repayment_rate_percent: format.percent(fields.REPAYMENT_RATE),
@@ -912,15 +910,13 @@ picc.school.directives = (function() {
     earnings_gt_25k: format.percent(access.earnings25k),
     earnings_gt_25k_meter: {
       '@value': access.earnings25k,
-      label:    format.percent(function() { return this.average; }),
-      '@title': debugMeterTitle
+      label:    format.percent(function() { return this.average; })
     },
 
     retention_rate_value: format.percent(access.retentionRate),
     retention_rate_meter: {
       '@value': access.retentionRate,
-      label:    format.percent(function() { return this.average; }),
-      '@title': debugMeterTitle
+      label:    format.percent(function() { return this.average; })
     },
 
     full_time_percent: format.number(function(d) {
@@ -1058,15 +1054,6 @@ picc.school.directives = (function() {
       '@href': format.href(fields.NET_PRICE_CALC_URL)
     }
   };
-
-  function debugMeterTitle(d) {
-    return [
-      'min: ', this.min, '\n',
-      'max: ', this.max, '\n',
-      'median: ', this.average, '\n',
-      'value: ', this.value
-    ].join('');
-  }
 
 })();
 
@@ -1211,12 +1198,22 @@ picc.form.prepareParams = (function() {
     },
 
     major: function(query, value, key) {
-      // FIXME: this only supports a single program
-      if (value) {
-        var k = [fields.PROGRAM_PERCENTAGE, value].join('.');
-        query[k + '__range'] = '0.00001..';
-        delete query[key];
+      var subfield = 'degree';
+      // XXX query.degree *may* have been mapped with mapDegree(),
+      // so we switch on either the input values or the output values
+      switch (query.degree) {
+        case 'a':
+        case '2':
+          subfield = 'assoc';
+          break;
+        case 'b':
+        case '3':
+          subfield = 'bachelors';
+          break;
       }
+      var k = [fields.PROGRAM_OFFERED, subfield, value].join('.');
+      query[k + '__range'] = '1..';
+      delete query[key];
     },
 
     size: function(query, value, key) {
@@ -1287,6 +1284,7 @@ picc.form.prepareParams = (function() {
       query[fields.SIZE + '__range'] = '0..';
     }
 
+    /*
     // if "online" is truthy, then we should *include* online schools,
     // which means not filtering on that field
     if (query.online) {
@@ -1295,6 +1293,7 @@ picc.form.prepareParams = (function() {
       query[fields.ONLINE_ONLY] = 0;
     }
     delete query.online;
+    */
 
     for (var key in query) {
       var v = query[key];
