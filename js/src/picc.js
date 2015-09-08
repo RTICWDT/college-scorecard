@@ -479,7 +479,7 @@ picc.fields = {
   EARNINGS_GT_25K:      '2011.earnings.6_yrs_after_entry.percent_greater_than_25000',
 
   PROGRAM_PERCENTAGE:   '2013.academics.program_percentage',
-  PROGRAM_OFFERED:      '2013.academics.program.degree',
+  PROGRAM_OFFERED:      '2013.academics.program',
 
   PART_TIME_SHARE:      '2013.student.part_time_share',
   FEMALE_SHARE:         '2013.student.demographics.female_share',
@@ -1212,11 +1212,22 @@ picc.form.prepareParams = (function() {
     },
 
     major: function(query, value, key) {
-      if (value) {
-        var k = [fields.PROGRAM_OFFERED, value].join('.');
-        query[k + '__range'] = '1..';
-        delete query[key];
+      var subfield = 'degree';
+      // XXX query.degree *may* have been mapped with mapDegree(),
+      // so we switch on either the input values or the output values
+      switch (query.degree) {
+        case 'a':
+        case '2':
+          subfield = 'assoc';
+          break;
+        case 'b':
+        case '3':
+          subfield = 'bachelors';
+          break;
       }
+      var k = [fields.PROGRAM_OFFERED, subfield, value].join('.');
+      query[k + '__range'] = '1..';
+      delete query[key];
     },
 
     size: function(query, value, key) {
