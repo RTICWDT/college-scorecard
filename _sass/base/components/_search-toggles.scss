@@ -110,7 +110,7 @@ $toggle-padding: 15px;
   position: absolute;
   top: 100%;
   width: 200%;
-  z-index: 10000;
+  z-index: $z-third;
 
   .search_category {
     font-weight: $weight-book;
