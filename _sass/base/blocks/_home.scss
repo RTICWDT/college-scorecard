@@ -191,9 +191,8 @@
     }
 
     @include respond-to(large-up) {
-      min-height: 382px;
-      //magic number. this is to make this section even with the one next door
-      padding-top: $base-padding-extra;
+      padding-top: 17px;
+      // magic number to make this content block line up with the one next door
     }
   }
 
