@@ -135,8 +135,8 @@
     padding-right: $base-padding-lite;
     padding-bottom: $base-padding-lite;
     padding-left: $base-padding-lite;
-
     min-height: $button-size + ($button-margin);
+
     @include respond-to(tiny-up) {
       min-height: $button-size + ($button-margin);
     }
@@ -160,7 +160,6 @@
 
 .results-main {
   background-color: $mid-gray;
-  //min-height: 900px;
 }
 
 .results-main-schools {
@@ -171,6 +170,9 @@
   }
 
   .school-meters {
+    @include span-columns(12 of 12);
+    @include omega();
+
     figure.meter {
       @include span-columns(4 of 12);
       @include omega(3n);
@@ -193,7 +195,7 @@
 
         // don't show labels on small meters
         .label {
-          visibility: hidden;
+          display: none;
         }
       }
     }
@@ -247,18 +249,18 @@
     padding-bottom: $base-padding-lite;
   }
 
-  @include span-columns(12);
+  @include span-columns(12 of 12);
   @include omega();
 
   @include respond-to(small-plus-up) {
     @include omega-reset(n);
-    @include span-columns(6);
+    @include span-columns(6 of 12);
     @include omega(2n);
   }
 
   @include respond-to(large-up) {
     @include omega-reset(2n);
-    @include span-columns(4);
+    @include span-columns(4 of 12);
     @include omega(3n);
   }
 
@@ -270,6 +272,7 @@
 }
 
 .results-card-headings {
+  @include span-columns(12);
   min-height: 160px;
   border-bottom: $thin-border-size solid $base-border-color;
   margin-bottom: $base-padding;
