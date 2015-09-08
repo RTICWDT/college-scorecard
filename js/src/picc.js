@@ -952,7 +952,7 @@ picc.school.directives = (function() {
             key:      key,
             label:    label,
             value:    value,
-            percent:  value >= .05
+            percent:  value >= .005
               ? percent(value)
               : '<1%'
           };
