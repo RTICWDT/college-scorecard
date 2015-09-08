@@ -100,9 +100,18 @@
 .section-home-numbers {
   @extend .centered;
   @extend .section-card_container;
-
-  background-color: $tertiary-background-color;
   @include span-columns(12);
+  background-color: $tertiary-background-color;
+
+  a {
+    color: $black;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
 
   @include respond-to(large-up) {
     @include span-columns(6);
