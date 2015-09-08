@@ -270,10 +270,11 @@ picc.format = (function() {
         : function(v) { return v; };
       return function(d) {
         var value = key.call(this, d);
+        if (empty && value === '' || isNaN(String(value))) {
+          return empty.call(d);
+        }
         if (round) value = Math.round(value);
-        return ((value === '' || isNaN(value)) && empty)
-          ? empty.call(d)
-          : fmt.call(d, +value, key);
+        return fmt.call(d, value, key);
       };
     };
   };
@@ -951,7 +952,7 @@ picc.school.directives = (function() {
             key:      key,
             label:    label,
             value:    value,
-            percent:  value >= .05
+            percent:  value >= .005
               ? percent(value)
               : '<1%'
           };
