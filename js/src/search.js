@@ -83,8 +83,10 @@ module.exports = function search() {
         var input = this.querySelector('input');
         if (input) {
           if (this.lower > this.min || this.upper < this.max) {
+            var lower = this.lower > this.min ? this.lower : '';
+            var upper = this.upper < this.max ? this.upper : '';
             // console.log('%d > %d || %d < %d', this.lower, this.min, this.upper, this.max);
-            input.value = [this.lower, this.upper].join('..');
+            input.value = [lower, upper].join('..');
           } else {
             // console.log('slider range @ limits:', this);
             input.value = '';
@@ -456,8 +458,8 @@ module.exports = function search() {
     if (input) {
       var value = input.value.split('..').map(Number);
       if (value.length === 2) {
-        this.lower = value[0];
-        this.upper = value[1];
+        this.lower = value[0] || this.min;
+        this.upper = value[1] || this.max;
       } else {
         // console.warn('bad slider input value:', value);
       }
