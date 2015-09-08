@@ -13,6 +13,14 @@ $base-font-family: $sans-serif;
 $header-font-family: $base-font-family;
 $base-font-weight: $weight-book;
 
+// z-index
+$z-under: -100;
+$z-ground: 0;
+$z-first: 100;
+$z-second: 200;
+$z-third: 300;
+$z-rooftop: 10000;
+
 
 // Sizes
 $base-font-size: 1;
