@@ -868,8 +868,7 @@ picc.school.directives = (function() {
       // '@max':     access.nationalStat('max', access.publicPrivate),
       // '@average': access.nationalStat('median', access.publicPrivate),
       '@value':   access.netPrice,
-      label:      format.dollars(function() { return this.average; }),
-      '@title':   debugMeterTitle
+      label:      format.dollars(function() { return this.average; })
     },
 
     // income level net price stats
@@ -885,16 +884,14 @@ picc.school.directives = (function() {
     grad_rate_meter: {
       // '@average': access.nationalStat('median', access.yearDesignation),
       '@value':   access.completionRate,
-      label:      format.percent(function() { return this.average; }),
-      '@title':   debugMeterTitle
+      label:      format.percent(function() { return this.average; })
     },
 
     average_salary: format.dollars(access.earningsMedian),
     average_salary_meter: {
       '@value': access.earningsMedian,
       // '@average': access.nationalStat('median', access.yearDesignation),
-      label:    format.dollars(function() { return this.average; }),
-      '@title': debugMeterTitle
+      label:    format.dollars(function() { return this.average; })
     },
 
     repayment_rate_percent: format.percent(fields.REPAYMENT_RATE),
@@ -913,15 +910,13 @@ picc.school.directives = (function() {
     earnings_gt_25k: format.percent(access.earnings25k),
     earnings_gt_25k_meter: {
       '@value': access.earnings25k,
-      label:    format.percent(function() { return this.average; }),
-      '@title': debugMeterTitle
+      label:    format.percent(function() { return this.average; })
     },
 
     retention_rate_value: format.percent(access.retentionRate),
     retention_rate_meter: {
       '@value': access.retentionRate,
-      label:    format.percent(function() { return this.average; }),
-      '@title': debugMeterTitle
+      label:    format.percent(function() { return this.average; })
     },
 
     full_time_percent: format.number(function(d) {
@@ -1059,15 +1054,6 @@ picc.school.directives = (function() {
       '@href': format.href(fields.NET_PRICE_CALC_URL)
     }
   };
-
-  function debugMeterTitle(d) {
-    return [
-      'min: ', this.min, '\n',
-      'max: ', this.max, '\n',
-      'median: ', this.average, '\n',
-      'value: ', this.value
-    ].join('');
-  }
 
 })();
 
