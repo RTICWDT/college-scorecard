@@ -33,6 +33,8 @@ module.exports = function search() {
 
   var change = picc.debounce(onChange, 100);
 
+  var win = d3.select(window);
+
   // get a reference to all of the sliders
   var sliders = d3.selectAll('picc-slider');
 
@@ -43,15 +45,20 @@ module.exports = function search() {
       toggles.each(function() {
         if (this !== opened) this.close();
       });
+      win.on('click.toggle', function() {
+        if (!opened.contains(d3.event.target)) {
+          win.on('click.toggle', null);
+          opened.close();
+        }
+      });
     });
 
   // close all toggles on escape
-  d3.select(window)
-    .on('keyup', function() {
-      if (d3.event.keyCode === 27) {
-        toggles.property('expanded', false);
-      }
-    });
+  win.on('keyup.toggle', function() {
+    if (d3.event.keyCode === 27) {
+      toggles.property('expanded', false);
+    }
+  });
 
   // expand (child) accordions that contain elements with values set
   picc.ui.expandAccordions('.toggle-accordion aria-accordion', function() {
