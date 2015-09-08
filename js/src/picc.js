@@ -1287,6 +1287,7 @@ picc.form.prepareParams = (function() {
       query[fields.SIZE + '__range'] = '0..';
     }
 
+    /*
     // if "online" is truthy, then we should *include* online schools,
     // which means not filtering on that field
     if (query.online) {
@@ -1295,6 +1296,7 @@ picc.form.prepareParams = (function() {
       query[fields.ONLINE_ONLY] = 0;
     }
     delete query.online;
+    */
 
     for (var key in query) {
       var v = query[key];
