@@ -40,7 +40,7 @@
   position: absolute;
   text-align: left;
   top: 100%;
-  z-index: 1000;
+  z-index: $z-rooftop;
 
   .tooltip-content,
   .tooltip-arrow {

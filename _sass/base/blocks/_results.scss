@@ -192,6 +192,7 @@
       picc-meter {
         height: 120px;
         width: 90%;
+        z-index: $z-first;
 
         // don't show labels on small meters
         .label {
