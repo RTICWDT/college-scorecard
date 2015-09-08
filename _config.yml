@@ -8,7 +8,7 @@ description:
 baseurl: /college-choice
 
 # app version number
-version: v1.2.1
+version: v1.2.2
 
 # Build settings
 markdown: kramdown
