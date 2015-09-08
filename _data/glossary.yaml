@@ -10,7 +10,7 @@ repayment-rate: <strong>Students Paying Down Their Debt</strong> The share of st
 
 avg-debt: <strong>Typical Total Debt</strong> The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.
 
-student-aid: <strong>Students Receiving Federal Aid</strong> The share of undergraduate students who received Pell grants or federal loans.
+student-aid: <strong>Students Receiving Federal Loans</strong> The share of undergraduate students who borrowed federal loans to help pay for college. Excludes Parent PLUS loans.
 
 retention-rate: <strong>Students Who Return After Their First Year</strong> The share of first-time, full-time undergraduates who returned to the institution after their freshman year.
 
