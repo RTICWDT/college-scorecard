@@ -249,7 +249,7 @@
 .home-splash {
   height: $splash-height;
 
-  @include respond-to(small-up) {
+  @include respond-to(medium-up) {
     background: url(../img/hero.jpg) center center no-repeat;
     background-size: cover;
   }
