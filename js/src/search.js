@@ -45,9 +45,11 @@ module.exports = function search() {
       toggles.each(function() {
         if (this !== opened) this.close();
       });
-      win.on('click.toggle', function() {
+
+      var event = 'click.toggle';
+      win.on(event, function() {
         if (!opened.contains(d3.event.target)) {
-          win.on('click.toggle', null);
+          win.on(event, null);
           opened.close();
         }
       });
