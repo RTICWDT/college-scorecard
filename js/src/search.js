@@ -524,7 +524,7 @@ module.exports = function search() {
 
   function removeAllChildren(node) {
     while (node.lastChild) {
-      resultsList.removeChild(node.lastChild);
+      node.removeChild(node.lastChild);
     }
   }
 
