@@ -226,7 +226,6 @@ module.exports = function search() {
       history.replaceState(params, 'search', qs);
     }
 
-    previousParams = params;
     alreadyLoaded = true;
 
     d3.select('a.results-share')
@@ -261,6 +260,7 @@ module.exports = function search() {
       bottomPaginator.classList.remove('show-loading');
 
       incremental = false;
+      previousParams = params;
 
       console.timeEnd && console.timeEnd('[load]');
 
