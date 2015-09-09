@@ -1593,6 +1593,9 @@ picc.tooltip = {
     clearTimeout(this.__tooltipShowTimeout);
     if (!this.tooltip) return;
     this.tooltip.setAttribute('aria-hidden', true);
+    if (this.tooltip.originalParent) {
+      this.tooltip.originalParent.appendChild(this.tooltip);
+    }
     this.tooltip = null;
   },
 
@@ -1616,6 +1619,8 @@ picc.tooltip = {
     // the outer element's size
     if (parent === tooltip.parentNode) {
       parent.removeChild(tooltip);
+    } else {
+      tooltip.originalParent = tooltip.parentNode;
     }
 
     var content = tooltip.querySelector('.tooltip-content') || tooltip;
