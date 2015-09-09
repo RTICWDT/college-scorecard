@@ -21,6 +21,9 @@ module.exports = function search() {
   var ready = false;
   var alreadyLoaded = false;
 
+  // are we in IE? hopefully not.
+  var ie = typeof document.documentMode === 'number';
+
   // "incremental" updates will only hide the list of schools, and
   // not any of the other elements (results total, sort, pages)
   var incremental = false;
@@ -243,9 +246,6 @@ module.exports = function search() {
       history.replaceState(params, 'search', qs);
     }
 
-    previousParams = params;
-    alreadyLoaded = true;
-
     d3.select('a.results-share')
       .attr('href', function() {
         return picc.template.resolve(
@@ -277,6 +277,7 @@ module.exports = function search() {
       paginator.classList.remove('show-loading');
       bottomPaginator.classList.remove('show-loading');
 
+      previousParams = params;
       incremental = false;
 
       console.timeEnd && console.timeEnd('[load]');
@@ -363,7 +364,12 @@ module.exports = function search() {
           });
 
       var resultsList = resultsRoot.querySelector('.schools-list');
+      if (ie && alreadyLoaded) {
+        removeAllChildren(resultsList);
+      }
       tagalong(resultsList, data.results, directives);
+
+      alreadyLoaded = true;
 
       console.timeEnd && console.timeEnd('[render]');
     });
@@ -497,6 +503,12 @@ module.exports = function search() {
       form.element.scrollIntoView();
     } catch (error) {
       console.warn('unable to scroll results into view:', error);
+    }
+  }
+
+  function removeAllChildren(node) {
+    while (node.lastChild) {
+      resultsList.removeChild(resultsList.lastChild);
     }
   }
 
