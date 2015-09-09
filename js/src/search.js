@@ -364,9 +364,25 @@ module.exports = function search() {
           });
 
       var resultsList = resultsRoot.querySelector('.schools-list');
+
+      /*
+       * XXX this avoids a nasty hard crash in IE11, which seems to have some
+       * problems with tagalong's data joining algorithm (and/or, you know,
+       * it's just broken).
+       *
+       * Removing the children of the results list after it's already been
+       * rendered (iff `alreadyLoaded` is true) guarantees that tagalong has
+       * stashed a reference to the template node.
+       *
+       * Note: we _don't_ do this in other browsers because it has performance
+       * implications. Rendering will be much faster when the existing nodes
+       * are reused and modified in place, rather than being cloned anew each
+       * time.
+       */
       if (ie && alreadyLoaded) {
         removeAllChildren(resultsList);
       }
+
       tagalong(resultsList, data.results, directives);
 
       alreadyLoaded = true;
