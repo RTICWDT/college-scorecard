@@ -3,7 +3,13 @@ var d3 = require('d3');
 module.exports = function wh() {
 
   function resizeFrame() {
-    window.parent.postMessage( document.documentElement.scrollHeight, '*' );
+    var height = Math.min(
+      // Handles a decrease in height in Firefox
+      document.body.scrollHeight,
+      // Handles a decrease in height in Chrome/Safari
+      document.documentElement.scrollHeight
+    );
+    window.parent.postMessage( height, '*' );
   }
 
   picc.ready(function() {
