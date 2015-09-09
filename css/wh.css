@@ -1,0 +1,26 @@
+.banner {
+	color: #0e365b;
+	background: none;
+	text-align: center;
+}
+.banner a {
+	position: static;
+}
+.title {
+	color: #2b6091;
+	background: none;
+}
+.title h1 {
+	text-align: center;
+	float: none;
+}
+.home-splash {
+  background: none;
+}
+.search_form {
+	box-shadow: 0px 0px 4px 1px rgba( 102, 102, 102, 0.2 );
+}
+.home-bg-gray,
+.section-home-numbers {
+	background: none;
+}

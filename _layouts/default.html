@@ -17,7 +17,9 @@
       {{ content }}
     </main>
 
+    {% unless page.footer == false %}
     {% include footer.html %}
+    {% endunless %}
 
     {% include glossary.html %}
 
