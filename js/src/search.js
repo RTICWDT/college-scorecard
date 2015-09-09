@@ -299,8 +299,8 @@ module.exports = function search() {
       var total = meta.total;
       var _total = function() { return total; };
 
-      // render the basic DOM template for each school
-      tagalong(resultsRoot, data, {
+      var headings = resultsRoot.querySelector('.results-main-alert');
+      tagalong(headings, data, {
         results_word: format.plural(_total, 'Result'),
         results_total: format.number(_total, '0')
       });
