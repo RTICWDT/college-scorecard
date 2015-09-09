@@ -508,7 +508,7 @@ module.exports = function search() {
 
   function removeAllChildren(node) {
     while (node.lastChild) {
-      resultsList.removeChild(resultsList.lastChild);
+      resultsList.removeChild(node.lastChild);
     }
   }
 
