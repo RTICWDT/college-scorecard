@@ -1665,7 +1665,8 @@ picc.tooltip = {
 picc.pages = {
   index: require('./index'),
   search: require('./search'),
-  school: require('./school')
+  school: require('./school'),
+  wh: require('./wh')
 };
 
 /**
