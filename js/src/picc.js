@@ -1122,7 +1122,11 @@ picc.form.minifyQueryString = function(form) {
       .replace(/&{2,}/g, '&')
       .replace(/&$/, '');
 
-    window.location = url;
+    if ( top.location !== self.location ) {
+      parent.location = url;
+    } else {
+      window.location = url;
+    }
     e.preventDefault();
     return false;
   });
@@ -1661,7 +1665,8 @@ picc.tooltip = {
 picc.pages = {
   index: require('./index'),
   search: require('./search'),
-  school: require('./school')
+  school: require('./school'),
+  wh: require('./wh')
 };
 
 /**
