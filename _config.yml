@@ -7,6 +7,9 @@ description:
 # the subpath of your site, e.g. /blog
 baseurl: /college-choice
 
+# app version number
+version: v1.2.4
+
 # Build settings
 markdown: kramdown
 

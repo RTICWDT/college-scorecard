@@ -86,14 +86,19 @@
   }
 
   .school-heading {
+    @include span-columns(12 of 12);
+
     h1 {
       @include font-size($h1);
       padding-bottom: $base-padding-lite;
-      margin-top: -11px;
-      //magic number to make top of text align with map
 
       @include respond-to(small-up) {
         @include font-size($h1-huge);
+      }
+
+      @include respond-to(medium-up) {
+        margin-top: -11px;
+        //magic number to make top of text align with map
       }
     }
 
@@ -237,10 +242,10 @@
         @include respond-to(small-up) {
           padding-top: 0;
         }
+      }
 
-        p {
-          padding-bottom: 0;
-        }
+      p {
+        padding-bottom: 0;
       }
     }
 

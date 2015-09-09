@@ -93,7 +93,6 @@
   @include font-size(0.75);
   height: auto;
   letter-spacing: 2px;
-  margin-bottom: $base-padding-extra;
   padding-top: 0.8em;
   width: 330px;
 
@@ -120,14 +119,16 @@
     margin-top: $base-padding;
   }
 
-  button.button-primary {
+  .button-primary {
     @include font-size($h3);
     letter-spacing: 2px;
     margin-top: $base-padding-large;
     margin-bottom: $base-padding-extra;
+    padding-top: 0.85em;
+    text-align: center;
     width: 335px;
 
-    + button.button-primary {
+    + .button-primary {
       background-color: $mid-blue;
       margin-left: 10px;
 
