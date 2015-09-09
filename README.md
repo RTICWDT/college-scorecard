@@ -6,8 +6,7 @@ to not only search among colleges to find schools that would meet their desires,
 different dimensions of "fit," highlighting "value" factors. The goal is to enable people to find schools that are 
 best suited to them, and ensure a broad and flexible definition of elements that contribute to "fit."
 
-This application is accompanied by a [Data Tool](https://github.com/18F/college-choice-data/) and 
-a [API](https://github.com/18F/open-data-maker/).
+This repo contains the front end of a web app with its API created by an instance of [Open Data Maker](https://github.com/18F/open-data-maker) which is configured with a specific data set. For more details on setting up the back end of the web app, see below: [Running the API Locally](#running-the-api-locally).  However, you can run the web app with the hosted API following the installation instructions in the next section.
 
 ## Installation
 This site is made with [Jekyll]. Once you've got [Ruby] on your computer, you
@@ -45,4 +44,41 @@ the source files.
 [Sass]: http://sass-lang.com/
 [D3]: http://d3js.org/
 [Ruby]: https://www.ruby-lang.org/
+
+## Running the API Locally
+
+To set up the API (as a developer), follow the [Open Data Maker installation instructions](https://github.com/18F/open-data-maker/blob/dev/INSTALL.md) then:
+
+1. download the [full data set](NEED FINAL LINK) into open-data-maker directory and rename the folder as "real-data"
+2. set DATA_PATH environment variable.  On the command line:
+```
+export DATA_PATH=./real-data
+```
+
+3. This application uses only most recent data.  To speed up start up time, edit `data.yaml` file inside the `real-data` directory to limit the number of files indexed to 4 (year 2013 is included twice, once for the columns that are not specific to any year, and once for the 2013 data, then 2012 and 2011).  Optionally, limiting the number of rows will reduce the set of colleges in the data set and is helpful for testing since it speeds startup time significantly:
+```
+options:
+  limit_files: 4 
+  limit_rows: 100
+```
+
+To create the API for the complete set of schools, comment out the `limit_rows` option by adding a `#` to the start of the line:
+
+```
+options:
+  limit_files: 4 
+#  limit_rows: 100
+```
+
+3. Start Open Data Maker.  On the command line, from the open-data-maker directory:
+```
+padrino start
+```
+
+4. To view progress of indexing, it is helpful to look at the development log in another terminal window:
+```
+tail -f log/development.log
+```
+
+
  
