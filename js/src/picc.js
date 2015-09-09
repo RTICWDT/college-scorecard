@@ -1538,6 +1538,17 @@ picc.data.rangify = function(obj, key, values) {
   return obj;
 };
 
+picc.data.selectKeys = function(obj, keys, negate) {
+  negate = !!negate;
+  var copy = {};
+  for (var key in obj) {
+    var index = keys.indexOf(key);
+    var include = negate ? (index === -1) : (index > -1);
+    if (include) copy[key] = obj[key];
+  }
+  return copy;
+};
+
 /**
  * Tooltip helper functions.
  */
