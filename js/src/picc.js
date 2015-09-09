@@ -1538,14 +1538,15 @@ picc.data.rangify = function(obj, key, values) {
   return obj;
 };
 
-picc.data.selectKeys = function(obj, keys, negate) {
-  negate = !!negate;
+picc.data.selectKeys = function(obj, keys) {
   var copy = {};
-  for (var key in obj) {
-    var index = keys.indexOf(key);
-    var include = negate ? (index === -1) : (index > -1);
-    if (include) copy[key] = obj[key];
-  }
+  keys.forEach(function(key) {
+    if (key in obj) {
+      copy[key] = obj[key];
+    } else {
+      console.warn('no such key in source object:', key, obj);
+    }
+  });
   return copy;
 };
 
