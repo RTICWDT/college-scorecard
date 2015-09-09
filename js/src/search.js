@@ -21,6 +21,9 @@ module.exports = function search() {
   var ready = false;
   var alreadyLoaded = false;
 
+  // are we in IE? hopefully not.
+  var ie = typeof document.documentMode === 'number';
+
   // "incremental" updates will only hide the list of schools, and
   // not any of the other elements (results total, sort, pages)
   var incremental = false;
@@ -32,6 +35,23 @@ module.exports = function search() {
   var MAX_PAGES = 6;
 
   var change = picc.debounce(onChange, 100);
+
+  // only render these directives, for performance (and IE11, *cough*)
+  var directives = picc.data.selectKeys(picc.school.directives, [
+    'title',
+    'school_link',
+    'name',
+    'city',
+    'state',
+    'under_investigation',
+    'size_number',
+    'average_cost',
+    'average_cost_meter',
+    'grad_rate',
+    'grad_rate_meter',
+    'average_salary',
+    'average_salary_meter',
+  ]);
 
   var win = d3.select(window);
 
@@ -226,9 +246,6 @@ module.exports = function search() {
       history.replaceState(params, 'search', qs);
     }
 
-    previousParams = params;
-    alreadyLoaded = true;
-
     d3.select('a.results-share')
       .attr('href', function() {
         return picc.template.resolve(
@@ -260,6 +277,7 @@ module.exports = function search() {
       paginator.classList.remove('show-loading');
       bottomPaginator.classList.remove('show-loading');
 
+      previousParams = params;
       incremental = false;
 
       console.timeEnd && console.timeEnd('[load]');
@@ -280,12 +298,12 @@ module.exports = function search() {
       var meta = data.metadata || data;
       // console.log('meta:', meta);
       var total = meta.total;
-      var _total = function() { return total; };
 
-      // render the basic DOM template for each school
-      tagalong(resultsRoot, data, {
-        results_word: format.plural(_total, 'Result'),
-        results_total: format.number(_total, '0')
+      // only update the heading
+      var heading = resultsRoot.querySelector('.results-main-alert');
+      tagalong(heading, meta, {
+        results_word: format.plural('total', 'Result'),
+        results_total: format.number('total', '0')
       });
 
       var page = +params.page || 0;
@@ -346,7 +364,28 @@ module.exports = function search() {
           });
 
       var resultsList = resultsRoot.querySelector('.schools-list');
-      tagalong(resultsList, data.results, picc.school.directives);
+
+      /*
+       * XXX this avoids a nasty hard crash in IE11, which seems to have some
+       * problems with tagalong's data joining algorithm (and/or, you know,
+       * it's just broken).
+       *
+       * Removing the children of the results list after it's already been
+       * rendered (iff `alreadyLoaded` is true) guarantees that tagalong has
+       * stashed a reference to the template node.
+       *
+       * Note: we _don't_ do this in other browsers because it has performance
+       * implications. Rendering will be much faster when the existing nodes
+       * are reused and modified in place, rather than being cloned anew each
+       * time.
+       */
+      if (ie && alreadyLoaded) {
+        removeAllChildren(resultsList);
+      }
+
+      tagalong(resultsList, data.results, directives);
+
+      alreadyLoaded = true;
 
       console.timeEnd && console.timeEnd('[render]');
     });
@@ -480,6 +519,12 @@ module.exports = function search() {
       form.element.scrollIntoView();
     } catch (error) {
       console.warn('unable to scroll results into view:', error);
+    }
+  }
+
+  function removeAllChildren(node) {
+    while (node.lastChild) {
+      node.removeChild(node.lastChild);
     }
   }
 
