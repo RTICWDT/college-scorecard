@@ -51,6 +51,7 @@ module.exports = function search() {
     'grad_rate_meter',
     'average_salary',
     'average_salary_meter',
+    'more_link'
   ]);
 
   var win = d3.select(window);
