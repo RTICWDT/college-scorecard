@@ -33,6 +33,23 @@ module.exports = function search() {
 
   var change = picc.debounce(onChange, 100);
 
+  // only render these directives, for performance (and IE11, *cough*)
+  var directives = picc.data.selectKeys(picc.school.directives, [
+    'title',
+    'school_link',
+    'name',
+    'city',
+    'state',
+    'under_investigation',
+    'size_number',
+    'average_cost',
+    'average_cost_meter',
+    'grad_rate',
+    'grad_rate_meter',
+    'average_salary',
+    'average_salary_meter',
+  ]);
+
   var win = d3.select(window);
 
   // get a reference to all of the sliders
@@ -346,7 +363,7 @@ module.exports = function search() {
           });
 
       var resultsList = resultsRoot.querySelector('.schools-list');
-      tagalong(resultsList, data.results, picc.school.directives);
+      tagalong(resultsList, data.results, directives);
 
       console.timeEnd && console.timeEnd('[render]');
     });
