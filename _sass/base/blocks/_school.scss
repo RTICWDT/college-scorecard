@@ -242,10 +242,10 @@
         @include respond-to(small-up) {
           padding-top: 0;
         }
+      }
 
-        p {
-          padding-bottom: 0;
-        }
+      p {
+        padding-bottom: 0;
       }
     }
 
