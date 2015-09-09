@@ -298,12 +298,12 @@ module.exports = function search() {
       var meta = data.metadata || data;
       // console.log('meta:', meta);
       var total = meta.total;
-      var _total = function() { return total; };
 
-      var headings = resultsRoot.querySelector('.results-main-alert');
-      tagalong(headings, data, {
-        results_word: format.plural(_total, 'Result'),
-        results_total: format.number(_total, '0')
+      // only update the heading
+      var heading = resultsRoot.querySelector('.results-main-alert');
+      tagalong(heading, meta, {
+        results_word: format.plural('total', 'Result'),
+        results_total: format.number('total', '0')
       });
 
       var page = +params.page || 0;
