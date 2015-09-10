@@ -1,11 +1,14 @@
-language: node_js
+language: ruby
+rvm:
+- 2.2.2
 
-before_install:
-- gem install liquid -v 2.5.1 --no-rdoc --no-ri
-- gem install sass -v 3.4.16 --no-rdoc --no-ri
-- gem install jekyll -v 1.0.2 --no-rdoc --no-ri
+sudo: false
+cache: bundler
+git:
+  submodules: false
 
 script:
+- npm install --dev
 - npm run test:travis
 
 addons:
