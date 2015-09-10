@@ -2,10 +2,10 @@ language: ruby
 rvm:
 - 2.2.2
 
-sudo: false
-cache: bundler
-git:
-  submodules: false
+cache:
+  bundler: true
+  directories:
+  - node_modules
 
 script:
 - npm install --dev
@@ -13,6 +13,10 @@ script:
 
 addons:
   sauce_connect: true
+
+sudo: false
+git:
+  submodules: false
 
 env:
   global:
