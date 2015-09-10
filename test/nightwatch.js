@@ -26,7 +26,8 @@ var browsers = {
 
 var capabilities = extend({
   javascriptEnabled: true,
-  acceptSslCerts: true
+  acceptSslCerts: true,
+  'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
 }, browsers.phantomjs);
 
 var sauce = {
