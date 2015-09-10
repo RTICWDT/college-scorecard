@@ -9,6 +9,7 @@ module.exports = {
       .assert.visible('@searchForm');
   },
 
+  /*
   'searching by name changes the URL appropriately': function(client) {
     var input = '@nameInput';
     var page = client.page.index()
@@ -20,7 +21,9 @@ module.exports = {
       .submitForm(input)
       .assert.urlContains('?name=foo');
   },
+  */
 
+  /*
   'searching by state changes the URL': function(client) {
     var page = client.page.index()
       .navigate();
@@ -35,6 +38,7 @@ module.exports = {
       .submitForm(input)
       .assert.urlContains('?state=' + value);
   },
+  */
 
   after: function(client) {
     client.end();
