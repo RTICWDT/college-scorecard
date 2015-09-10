@@ -2,6 +2,10 @@ var sauce = require('../sauce');
 
 module.exports = {
 
+  before: function(client) {
+    client.windowSize('current', 1024, 768);
+  },
+
   'search form exists on the home page': function(client) {
     return client.page.index()
       .navigate()
