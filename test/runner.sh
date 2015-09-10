@@ -1,13 +1,13 @@
 #!/bin/sh
 
-# start the jekyll server and remember its pid
+# start the jekyll server and remember its process id
 jekyll serve &
 PID=$!
 
 # this should be enough time for jekyll to spin up
-sleep 3
+sleep 10
 
-./test/browsers.sh $@ || exit 1
+./test/browsers.sh $@ || (kill -9 ${PID}; echo "FAILED"; exit 1)
 
 # kill the background jekyll server
 kill -9 ${PID} || echo "(Jekyll died before we could kill it.)"
