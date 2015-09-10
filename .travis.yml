@@ -1,10 +1,11 @@
-language: node_js
+language: ruby
 
 rvm:
-  - 2.2.2
+- 2.2.2
 
 before_install:
-- bundle install
+- npm install
+- npm install --dev
 
 script:
 - npm run test:travis
