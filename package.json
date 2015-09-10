@@ -11,7 +11,7 @@
     "test:live": "./test/browsers.sh",
     "test:local": "./test/runner.sh chrome:local firefox:local",
     "test:sauce": "./test/runner.sh sauce",
-    "test:travis": "./test/runner.sh chrome ie11 firefox"
+    "test:travis": "./test/runner.sh chrome"
   },
   "dependencies": {
     "aight": "^2.1.1",
