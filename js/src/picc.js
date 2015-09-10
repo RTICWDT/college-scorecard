@@ -1538,6 +1538,18 @@ picc.data.rangify = function(obj, key, values) {
   return obj;
 };
 
+picc.data.selectKeys = function(obj, keys) {
+  var copy = {};
+  keys.forEach(function(key) {
+    if (key in obj) {
+      copy[key] = obj[key];
+    } else {
+      console.warn('no such key in source object:', key, obj);
+    }
+  });
+  return copy;
+};
+
 /**
  * Tooltip helper functions.
  */
@@ -1593,6 +1605,9 @@ picc.tooltip = {
     clearTimeout(this.__tooltipShowTimeout);
     if (!this.tooltip) return;
     this.tooltip.setAttribute('aria-hidden', true);
+    if (this.tooltip.originalParent) {
+      this.tooltip.originalParent.appendChild(this.tooltip);
+    }
     this.tooltip = null;
   },
 
@@ -1616,6 +1631,8 @@ picc.tooltip = {
     // the outer element's size
     if (parent === tooltip.parentNode) {
       parent.removeChild(tooltip);
+    } else {
+      tooltip.originalParent = tooltip.parentNode;
     }
 
     var content = tooltip.querySelector('.tooltip-content') || tooltip;
