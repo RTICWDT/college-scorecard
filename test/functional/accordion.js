@@ -13,7 +13,7 @@ module.exports = {
       .waitForDocumentReady()
       .execute(function() {
         var accordion = document.querySelector('aria-accordion[aria-expanded="true"]');
-        return accordion ? accordion.expanded : null;
+        return accordion ? accordion.expanded : 'no expanded accordion found';
       }, [], function(result) {
         client.assert.equal(result.value, true);
       });
