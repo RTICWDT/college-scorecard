@@ -8,15 +8,15 @@ var LAUNCH_URL = (
 var browsers = {
   chrome: {browserName: 'chrome'},
   firefox: {browserName: 'firefox'},
+  ie11: {
+    browserName: 'internet explorer',
+    version: '11.0',
+    platform: 'Windows 8.1'
+  },
   ie9: {
     browserName: 'internet explorer',
     version: '9.0',
     platform: 'Windows 7'
-  },
-  ie8: {
-    browserName: 'internet explorer',
-    version: '8.0',
-    platform: 'Windows XP'
   },
   phantomjs: {
     browserName: 'phantomjs'
