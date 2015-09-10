@@ -8,6 +8,7 @@ var LAUNCH_URL = (
 var browsers = {
   chrome: {browserName: 'chrome'},
   firefox: {browserName: 'firefox'},
+  safari: {browserName: 'safari'},
   ie11: {
     browserName: 'internet explorer',
     version: '11.0',
