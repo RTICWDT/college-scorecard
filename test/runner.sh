@@ -8,6 +8,9 @@ PID=$!
 sleep 10
 
 ./test/browsers.sh $@ || (kill -9 ${PID}; echo "FAILED"; exit 1)
+STATUS=$?
 
 # kill the background jekyll server
 kill -9 ${PID} || echo "(Jekyll died before we could kill it.)"
+
+exit $STATUS
