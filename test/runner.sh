@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # start the jekyll server and remember its process id
-jekyll serve &
+bundle exec jekyll serve &
 PID=$!
 
 # this should be enough time for jekyll to spin up
