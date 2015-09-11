@@ -24,7 +24,7 @@
   {% else %}
     <title>{{ site.title }}</title>
     <meta property="og:title" content="{{ site.title | xml_escape }}" />
-    <meta name="twitter:title" content="">
+    <meta name="twitter:title" content="{{ site.title | xml_escape }}">
   {% endif %}
 
   <!-- url -->
