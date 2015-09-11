@@ -21,6 +21,7 @@
   {% if page.title %}
     <title>{{ page.title }}</title>
     <meta property="og:title" content="{{ page.title | xml_escape }}" />
+    <meta name="twitter:title" content="{{ page.title | xml_escape }}">
   {% else %}
     <title>{{ site.title }}</title>
     <meta property="og:title" content="{{ site.title | xml_escape }}" />
@@ -28,8 +29,8 @@
   {% endif %}
 
   <!-- url -->
-  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-  <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.url }}">
+  <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.url }}">
 
   <!-- img -->
   <meta property="og:img" content="{{ site.baseurl }}/img/hero.jpg">
