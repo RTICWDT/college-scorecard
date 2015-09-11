@@ -1,22 +1,17 @@
-language: ruby
-rvm:
-- 2.2.2
+language: node_js
 
 cache:
   bundler: true
-  directories:
-  - node_modules
+
+before_install:
+- rvm use 2.2.2
+- gem install github-pages
 
 script:
-- npm install --dev
 - npm run test:travis
 
 addons:
   sauce_connect: true
-
-sudo: false
-git:
-  submodules: false
 
 env:
   global:
