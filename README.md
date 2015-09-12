@@ -1,4 +1,4 @@
-# Project Inform College Choice
+# College Scorecard
 
 A website that allows students (high school and adult) and those who support them (parents, guidance councelors)
 to not only search among colleges to find schools that would meet their desires, but also encourage them to consider
