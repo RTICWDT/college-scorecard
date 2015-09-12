@@ -27,6 +27,10 @@
   },
   "devDependencies": {
     "browserify": "^10.2.4",
+    "d3-bundler": "^0.2.7",
+    "d3-dispatch": "^0.2.1",
+    "d3-selection": "^0.4.8",
+    "d3-xhr": "^0.1.1",
     "extend": "^3.0.0",
     "minifyify": "^7.0.5",
     "nightwatch": "^0.7.9",
