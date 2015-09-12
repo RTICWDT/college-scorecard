@@ -1,4 +1,5 @@
 (function(exports) {
+  var d3 = require('../d3');
 
   var ITEM_CLASS = 'multi-select_item';
 
