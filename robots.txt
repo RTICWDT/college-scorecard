@@ -1,2 +1,3 @@
 User-agent: *
 Disallow: /
+Sitemap: https://collegescorecard.ed.gov/sitemap.xml
