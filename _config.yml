@@ -7,8 +7,11 @@ description:
 # the subpath of your site, e.g. /blog
 baseurl: /college-choice
 
+# permanent url, for use in meta references
+url: https://collegescorecard.ed.gov
+
 # app version number
-version: v1.3.0
+version: v1.4.0
 
 # Build settings
 markdown: kramdown
