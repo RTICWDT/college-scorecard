@@ -5,7 +5,7 @@ require('aight');
 require('./components');
 
 var querystring = require('querystring');
-var d3 = require('d3');
+var d3 = require('./d3');
 var async = require('async');
 var formdb = require('formdb');
 
