@@ -11,7 +11,7 @@ baseurl: /college-choice
 url: https://collegescorecard.ed.gov
 
 # app version number
-version: v1.3.0
+version: v1.4.0
 
 # Build settings
 markdown: kramdown
