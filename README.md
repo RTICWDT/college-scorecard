@@ -34,19 +34,7 @@ Then visit [http://localhost:4000](http://localhost:4000) to view it. The `-w`
 (or `--watch`) flag tells Jekyll to rebuild the relevant pages when you edit
 the source files.
 
-## Frontend Tools
-- Styles: we're using [Sass], which is bundled with [Jekyll].
-- Font: [Montserrat] hosted on [Google Fonts](https://www.google.com/fonts/).
-- Charts will be rendered with [D3].
-
-[Montserrat]: https://www.google.com/fonts/specimen/Montserrat
-[Jekyll]: http://jekyllrb.com/
-[Sass]: http://sass-lang.com/
-[D3]: http://d3js.org/
-[Ruby]: https://www.ruby-lang.org/
-
 ## Running the API Locally
-
 To set up the API (as a developer), follow the [Open Data Maker installation instructions](https://github.com/18F/open-data-maker/blob/dev/INSTALL.md) then:
 
 1. download the [full data set](NEED FINAL LINK) into open-data-maker directory and rename the folder as "real-data"
@@ -80,5 +68,8 @@ padrino start
 tail -f log/development.log
 ```
 
-
- 
+[Montserrat]: https://www.google.com/fonts/specimen/Montserrat
+[Jekyll]: http://jekyllrb.com/
+[Sass]: http://sass-lang.com/
+[D3]: http://d3js.org/
+[Ruby]: https://www.ruby-lang.org/
