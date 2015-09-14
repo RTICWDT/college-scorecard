@@ -12,6 +12,8 @@ var formdb = require('formdb');
 // create the global picc namespace
 var picc = {};
 
+picc.d3 = d3;
+
 // common error messages
 picc.errors = {
   NO_SCHOOL_ID: 'No school ID was provided.',
@@ -303,7 +305,7 @@ picc.format = (function() {
     // format.dollars('x')({x: 1000}) === '$1,000'
     dollars: formatter('$,d', NA),
     // format.percent('y')({x: 1000}) === '$1,000'
-    percent: formatter('%.0f', NA),
+    percent: formatter('.0%', NA),
     number: formatter(',d', NA),
 
     // format.plural('x', 'foo')({x: 1}) === 'foo'
