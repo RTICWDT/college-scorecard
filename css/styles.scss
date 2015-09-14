@@ -16,3 +16,12 @@
 @import "base/fonts";
 // include FontAwesome
 @import "font-awesome/font-awesome";
+
+body {
+  @include display(flex);
+  @include flex-direction(column);
+  min-height: 100vh;
+  header {}
+  main { @include flex(1); }
+  footer {}
+}
