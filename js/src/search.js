@@ -404,7 +404,7 @@ module.exports = function search() {
       // console.log('pages: %d -> %d', start, end);
       pages = d3.range(start, start + MAX_PAGES);
       previous = start > 0;
-      next = end < numPages;
+      next = page < numPages - 1;
     } else {
       pages = d3.range(0, numPages);
     }
@@ -425,28 +425,23 @@ module.exports = function search() {
         page: '<',
         arrow: true
       });
-      if (first.index > 1) {
-        pages.unshift({
-          index: 0,
-          page: '<<',
-          arrow: true
-        });
-      }
+      pages.unshift({
+        index: 0,
+        page: '<<',
+        arrow: true
+      });
     }
     if (next) {
-      var last = pages[pages.length - 1];
       pages.push({
-        index: last.index + 1,
+        index: page + 1,
         page: '>',
         arrow: true
       });
-      if (last.index < numPages - 1) {
-        pages.push({
-          index: numPages - 1,
-          page: '>>',
-          arrow: true
-        });
-      }
+      pages.push({
+        index: numPages - 1,
+        page: '>>',
+        arrow: true
+      });
     }
 
     return pages;
