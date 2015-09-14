@@ -16,7 +16,6 @@
   "dependencies": {
     "aight": "^2.1.1",
     "async": "^1.4.0",
-    "d3": "^3.5.5",
     "document-register-element": "^0.4.5",
     "formdb": "^0.2.0",
     "leaflet": "^0.7.3",
@@ -29,7 +28,7 @@
   "devDependencies": {
     "browserify": "^10.2.4",
     "d3-arrays": "0.0.4",
-    "d3-bundler": "^0.2.7",
+    "d3-bundler": "^0.2.9",
     "d3-color": "^0.2.4",
     "d3-dispatch": "^0.2.1",
     "d3-dsv": "^0.1.5",
