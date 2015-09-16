@@ -77,6 +77,8 @@ select[multiple=multiple] {
 
   &:invalid,
   &:out-of-range {
+    background: tint($red, 95);
+    border-color: transparent;
     box-shadow: $form-box-shadow-invalid;
   }
 }
