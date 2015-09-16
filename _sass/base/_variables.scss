@@ -111,6 +111,7 @@ $form-border-color-hover: darken($base-border-color, 10);
 $form-border-radius: $base-border-radius;
 $form-box-shadow: none;
 $form-box-shadow-focus: 0 0 0 2px $mid-blue;
+$form-box-shadow-invalid: 0 0 0 2px $red;
 $form-font-family: $base-font-family;
 $form-input-color: $dark-gray;
 
