@@ -72,7 +72,8 @@ select[multiple=multiple] {
     color: $light-gray;
   }
 
-  &:invalid {
+  &:invalid,
+  &:out-of-range {
     box-shadow: $form-box-shadow-invalid;
   }
 }
@@ -216,18 +217,19 @@ input[type=number] {
 label.validated {
   position: relative;
 
-  [aria-describedby] + span[id] {
+  [aria-describedby] + .invalid-message {
     display: none;
   }
 
-  [aria-describedby]:invalid + span[id] {
-    display: block;
-    position: absolute;
+  [aria-describedby]:invalid + .invalid-message,
+  [aria-describedby]:out-of-range + .invalid-message {
     background: $yellow;
-    padding: $base-padding-lite;
+    display: block;
     left: 0;
-    top: 100%;
     margin-top: -$base-padding-lite;
+    padding: $base-padding-lite;
+    position: absolute;
+    top: 100%;
     width: 10em;
     z-index: $z-rooftop;
   }
