@@ -74,6 +74,10 @@ select[multiple=multiple] {
   &:disabled {
     color: $light-gray;
   }
+
+  &:invalid {
+    box-shadow: $form-box-shadow-invalid;
+  }
 }
 
 textarea {
@@ -210,4 +214,24 @@ input[type=number]::-webkit-outer-spin-button {
 
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+label.has-validity {
+  position: relative;
+
+  [aria-describedby] + span[id] {
+    display: none;
+  }
+
+  [aria-describedby]:invalid + span[id] {
+    display: block;
+    position: absolute;
+    background: $yellow;
+    padding: $base-padding-lite;
+    left: 0;
+    top: 100%;
+    margin-top: -$base-padding-lite;
+    width: 10em;
+    z-index: $z-rooftop;
+  }
 }
