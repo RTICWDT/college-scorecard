@@ -1176,6 +1176,16 @@ picc.form.prepareParams = (function() {
       // which is what the API expects)
     },
 
+    distance: function(query, value, key) {
+      var num = value ? +value : NaN;
+      if (isNaN(num)) {
+        delete query[key];
+      } else {
+        // round and make it positive
+        query[key] = Math.abs(Math.round(num));
+      }
+    },
+
     control: function(query, value, key) {
       value = mapControl(value);
       picc.data.rangify(query, fields.OWNERSHIP, value);
