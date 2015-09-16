@@ -538,10 +538,6 @@ module.exports = function search() {
   function enforceValidity(event) {
     var input = event.target;
     var validity = input.validity;
-    var hasCustomValidity = (typeof input.setCustomValidity === 'function');
-    if (hasCustomValidity) {
-      input.setCustomValidity('');
-    }
     if (validity && validity.valid === false) {
       console.warn('input invalid:', input, validity);
       event.preventDefault();
