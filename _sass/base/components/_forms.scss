@@ -14,6 +14,10 @@ fieldset {
   }
 }
 
+legend {
+  @extend .sr-only;
+}
+
 input,
 label,
 select {
@@ -23,7 +27,6 @@ select {
 }
 
 label {
-  @extend .sr-only;
   @include font-size(0.875);
   font-weight: 600;
   margin-bottom: $base-line-height / 4;
@@ -214,7 +217,7 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-label.validated {
+.validated-label {
   position: relative;
 
   [aria-describedby] + .invalid-message {
