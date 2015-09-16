@@ -1343,6 +1343,16 @@ picc.form.prepareParams = (function() {
 picc.ui = {};
 
 /**
+ * Performs any necessary updates to the UI based on the given form.
+ */
+picc.ui.update = function(form) {
+  // Add 'has-selection' class to any select elements that have a selection.
+  d3.selectAll('#' + form.element.id + ' select').each(function () {
+    this.classList.toggle('has-selection', this.value);
+  });
+}
+
+/**
  * Expand all of the accordions on the page (or only those matching the
  * provided selector) according to an `expanded` value or function.
  *

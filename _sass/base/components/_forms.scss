@@ -200,6 +200,10 @@ select {
   &::-ms-expand {
     display: none;
   }
+
+  &.has-selection {
+    color: $black;
+  }
 }
 
 input[type=number]::-webkit-inner-spin-button,
