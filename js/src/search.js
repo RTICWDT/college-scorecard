@@ -546,11 +546,14 @@ module.exports = function search() {
       console.warn('input invalid:', input, validity);
       event.preventDefault();
       return false;
-    } else if (input.hasAttribute('minlength') && String(input.value).length < +input.getAttribute('minlength')) {
-      if (hasCustomValidity) {
-        input.setCustomValidity('no no NO');
+    } else if (input.hasAttribute('minlength')) {
+      var minlength = +input.getAttribute('minlength');
+      if (String(input.value).length < minlength) {
+        if (hasCustomValidity) {
+          input.setCustomValidity('no no NO');
+        }
+        return false;
       }
-      return false;
     }
     return true;
   }
