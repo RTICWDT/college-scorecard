@@ -31,9 +31,9 @@ team:
 - github: hollyallen
 - github: diego-
 milestones: 
-- June 2015: Kick-off meeting
-- August 2015: Private beta launched
-- September 2015: Public live launch
+- "June 2015: Kick-off meeting"
+- "August 2015: Private beta launched"
+- "September 2015: Public live launch"
 impact: 3 Million site views since September 2015
 licenses:
   collegescorecard:
