@@ -184,6 +184,7 @@ module.exports = function search() {
     // always update the distance disabled state
     updateDistanceDisabled();
 
+    // Update UI elements
     picc.ui.update(form);
 
     var params = form.getData();
