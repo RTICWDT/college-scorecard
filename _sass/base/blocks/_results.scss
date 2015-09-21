@@ -215,6 +215,8 @@
   .results-card {
     border: $base-padding-lite solid $mid-gray;
     border-radius: 1em;
+    margin-top: flex-gutter();
+    margin-bottom: 0;
 
     h1 {
       @include font-size($h1);

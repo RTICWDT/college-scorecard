@@ -31,7 +31,7 @@ analytics: true
 
 # API configuration
 API:
-  baseurl: https://api.data.gov/TEST/ed/production/v1/
+  baseurl: https://api.data.gov/ed/collegescorecard/v1/
   key: ''
 
 # specify paths to exclude from copying to _site
