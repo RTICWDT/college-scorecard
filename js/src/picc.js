@@ -1348,7 +1348,7 @@ picc.ui = {};
 picc.ui.update = function(form) {
   // Add 'has-selection' class to any select elements that have a selection.
   d3.selectAll('#' + form.element.id + ' select').each(function () {
-    this.classList.toggle('has-selection', this.value);
+    this.value ? this.classList.add('has-selection') : this.classList.remove('has-selection');
   });
 }
 
