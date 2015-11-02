@@ -26,13 +26,13 @@
     "browserify": "^10.2.4",
     "extend": "^3.0.0",
     "minifyify": "^7.0.5",
-    "nightwatch": "^0.7.9",
-    "phantomjs": "^1.9.17",
+    "mocha": "^2.3.3",
     "request": "^2.60.0",
     "simple-statistics": "^0.9.2",
     "stream-array": "^1.1.0",
     "tito": "^0.4.0",
     "uglify-js": "^2.4.24",
-    "watchify": "^3.3.1"
+    "watchify": "^3.3.1",
+    "webdriverio": "^3.2.6"
   }
 }
