@@ -7,11 +7,9 @@
   "scripts": {
     "build": "browserify `js/src/browserify-args.sh`",
     "watch": "watchify -v `js/src/browserify-args.sh`",
-    "test": "./test/runner.sh",
-    "test:live": "./test/browsers.sh",
-    "test:local": "./test/runner.sh chrome:local firefox:local",
-    "test:sauce": "./test/runner.sh sauce",
-    "test:travis": "./test/runner.sh chrome"
+    "test": "wdio test/wdio.conf.js",
+    "test-sauce": "wdio test/wdio.sauce.js",
+    "test-travis": "wdio test/wdio.travis.js"
   },
   "dependencies": {
     "aight": "^2.1.1",
