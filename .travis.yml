@@ -1,16 +1,22 @@
-language: node_js
+language: ruby
+rvm:
+- 2.2.2
+
 node_js:
-- 0.10
+- 0.12
 
 cache:
   bundler: true
+  directories:
+  - node_modules
 
 before_install:
-- rvm use 2.2.2
-- gem install github-pages
+- nvm install 4.0
+- nvm use 4.0
+- npm install --dev
 
 script:
-- npm run test:travis
+- npm run test-travis
 
 addons:
   sauce_connect: true
