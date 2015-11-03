@@ -9,7 +9,7 @@
     "watch": "watchify -v `js/src/browserify-args.sh`",
     "test": "wdio test/wdio.conf.js",
     "test-sauce": "wdio test/wdio.sauce.js",
-    "test-travis": "wdio test/wdio.travis.js"
+    "test-travis": "./test/travis.sh"
   },
   "dependencies": {
     "aight": "^2.1.1",
