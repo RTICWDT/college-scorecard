@@ -3,7 +3,7 @@ rvm:
 - 2.2.2
 
 node_js:
-- 0.12
+- 4.0
 
 cache:
   bundler: true
@@ -15,6 +15,9 @@ before_install:
 
 script:
 - npm run test-travis
+
+addons:
+  sauce_connect: true
 
 env:
   global:
