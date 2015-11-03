@@ -2,10 +2,13 @@ language: ruby
 rvm:
 - 2.2.2
 
+node_js:
+- 0.12
+
 cache:
   bundler: true
   directories:
-    - node_modules
+  - node_modules
 
 before_install:
 - npm install --dev
