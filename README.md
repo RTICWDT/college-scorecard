@@ -19,6 +19,12 @@ gem install github-pages
 (Note: depending on how Ruby was installed, you may need to prefix the above
 command with `sudo`.)
 
+Then install all the ruby gems you need:
+
+```
+bundle
+```
+
 This Jekyll site features dynamic Javascript that queries [api.data.gov](https://api.data.gov/). For the Javascript to work, it needs an
 API key and a base URL. Jekyll will pull them from the local machine's
 environment variables at build time, so ensure that both the `API_KEY` and
