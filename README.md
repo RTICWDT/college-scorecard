@@ -25,10 +25,16 @@ Then install all the ruby gems you need:
 bundle
 ```
 
-This Jekyll site features dynamic Javascript that queries [api.data.gov](https://api.data.gov/). For the Javascript to work, it needs an
+This Jekyll site features dynamic Javascript that queries [api.data.gov](https://api.data.gov/). 
+For the Javascript to work, it needs an
 API key and a base URL. Jekyll will pull them from the local machine's
 environment variables at build time, so ensure that both the `API_KEY` and
-`API_BASE_URL` variables are set before running build scripts.
+`API_BASE_URL` variables are set before running build scripts. On a Mac using the production api 
+endpoint this is how to set those variables:
+
+```
+export API_KEY=yourkeyhere; export API_BASE_URL=https://api.data.gov/ed/collegescorecard/v1/
+```
 
 To start up the local server, run:
 
