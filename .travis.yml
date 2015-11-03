@@ -1,19 +1,15 @@
-language: node_js
-node_js:
-- 0.10
+language: ruby
+rvm:
+- 2.2.2
 
 cache:
   bundler: true
 
 before_install:
-- rvm use 2.2.2
-- gem install github-pages
+- npm install --dev
 
 script:
-- npm run test:travis
-
-addons:
-  sauce_connect: true
+- npm run test-travis
 
 env:
   global:
