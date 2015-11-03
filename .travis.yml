@@ -3,7 +3,7 @@ rvm:
 - 2.2.2
 
 node_js:
-- 4.0
+- 0.12
 
 cache:
   bundler: true
@@ -11,6 +11,7 @@ cache:
   - node_modules
 
 before_install:
+- rvm use 0.12
 - npm install --dev
 
 script:
