@@ -26,8 +26,9 @@ bundle
 ```
 
 This Jekyll site features dynamic Javascript that queries [api.data.gov](https://api.data.gov/). 
-For the Javascript to work, it needs an
-API key and a base URL. Jekyll will pull them from the local machine's
+For the Javascript to work, it needs an API key (register for one at 
+[api.data.gov/signup/](https://api.data.gov/signup/))
+and a base URL. Jekyll will pull them from the local machine's
 environment variables at build time, so ensure that both the `API_KEY` and
 `API_BASE_URL` variables are set before running build scripts. On a Mac using the production api 
 endpoint this is how to set those variables:
