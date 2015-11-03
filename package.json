@@ -23,6 +23,7 @@
   "devDependencies": {
     "browserify": "^10.2.4",
     "extend": "^3.0.0",
+    "http-server": "^0.8.5",
     "minifyify": "^7.0.5",
     "mocha": "^2.3.3",
     "request": "^2.60.0",
