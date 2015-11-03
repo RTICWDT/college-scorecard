@@ -4,6 +4,8 @@ rvm:
 
 cache:
   bundler: true
+  directories:
+    - node_modules
 
 before_install:
 - npm install --dev
