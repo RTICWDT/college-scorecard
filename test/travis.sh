@@ -1,5 +1,5 @@
 bundle exec jekyll build
-http-server -p 4000 _site &
+./node_modules/.bin/http-server -p 4000 _site &
 PID=$!
-wdio test/wdio.travis.js
+./node_modules/.bin/wdio test/wdio.travis.js
 kill $PID

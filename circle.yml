@@ -6,7 +6,7 @@ dependencies:
     - wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz
     - tar -xzf sc-latest-linux.tar.gz
   override:
-    - npm install -g --dev
+    - npm install --dev
     - bundle install
 test:
   override:
