@@ -7,7 +7,7 @@ dependencies:
     - tar -xzf sc-latest-linux.tar.gz
   override:
     - npm install --dev
-    - bundle install
+    - bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
 test:
   override:
     - cd sc-*-linux && ./bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY:
