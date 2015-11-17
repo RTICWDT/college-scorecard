@@ -27,6 +27,7 @@
     "minifyify": "^7.1.0",
     "mocha": "*",
     "request": "^2.65.0",
+    "sauceconnect-runner": "^0.2.1",
     "simple-statistics": "^1.0.0",
     "stream-array": "^1.1.1",
     "tito": "^0.4.0",
