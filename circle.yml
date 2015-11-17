@@ -1,7 +1,12 @@
+machine:
+  node:
+    version: 4.0
 dependencies:
   post:
     - wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz
     - tar -xzf sc-latest-linux.tar.gz
+  override:
+    - npm install --dev
 test:
   override:
     - cd sc-*-linux && ./bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY:
