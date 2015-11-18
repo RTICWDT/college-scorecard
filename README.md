@@ -92,3 +92,6 @@ padrino start
 ```
 tail -f log/development.log
 ```
+## Content
+
+For the content on the College Scorecard, we are following the [18F Content Guide](https://pages.18f.gov/content-guide/).
