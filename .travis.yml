@@ -1,11 +1,25 @@
-language: node_js
+language: ruby
+rvm:
+- 2.2.2
+
+node_js:
+- 0.12
+
+cache:
+  bundler: true
+  directories:
+  - node_modules
 
 before_install:
-- gem install liquid -v 2.5.1 --no-rdoc --no-ri
-- gem install jekyll -v 1.0.2 --no-rdoc --no-ri
+- nvm install 4.0
+- nvm use 4.0
+- npm install --dev
 
 script:
-- npm run test:travis
+- npm run test-travis
+
+addons:
+  sauce_connect: true
 
 env:
   global:

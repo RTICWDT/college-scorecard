@@ -1,0 +1,16 @@
+machine:
+  node:
+    version: 4.0
+dependencies:
+  post:
+    - wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz
+    - tar -xzf sc-latest-linux.tar.gz
+  override:
+    - npm install --dev
+    - bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+test:
+  override:
+    - cd sc-*-linux && ./bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY:
+        background: true
+    - sleep 25
+    - ./test/travis.sh
