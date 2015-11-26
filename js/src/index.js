@@ -16,4 +16,8 @@ module.exports = function index() {
     }
   });
 
+  form.on('change', function () {
+    picc.ui.update(form);
+  });
+
 };
