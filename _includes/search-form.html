@@ -106,12 +106,24 @@
 
         <div class="group_inline">
 
-          <label for="zip-code" class="group_inline-left">Enter a ZIP code
-            <input id="zip-code" name="zip" type="number" placeholder="e.g., 45400" {{ common_input_attributes }}>
+          <label for="zip-code" class="group_inline-left validated-label">
+            Enter a ZIP code
+            <input id="zip-code" name="zip" type="number" step="1" min="1000" max="99999" minlength="4" maxlength="5" placeholder="e.g., 45400" aria-describedby="zip-format" {{ common_input_attributes }}>
+            <!--
+            <span id="zip-format" class="invalid-message">
+              ZIP code must be a 5-digit number.
+            </span>
+            -->
           </label>
 
-          <label for="search-radius" class="group_inline-right">Mile radius
-            <input name="distance" type="number" step=".1" placeholder="no limit" id="search-radius" {{ common_input_attributes }}>
+          <label for="search-radius" class="group_inline-right validated-label">
+            Mile radius
+            <input name="distance" type="number" step="1" min="1" max="9999" placeholder="no limit" aria-describedby="distance-format" id="search-radius" {{ common_input_attributes }}>
+            <!--
+            <span id="distance-format" class="invalid-message">
+              Distance must be a positive, whole number.
+            </span>
+            -->
           </label>
 
         </div>

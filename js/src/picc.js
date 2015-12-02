@@ -1166,14 +1166,37 @@ picc.form.prepareParams = (function() {
     state:                fields.STATE,
 
     zip: function(query, value, key) {
+      if (value.length !== 5) {
+        console.warn('invalid zip code:', value);
+        delete query[key];
+        return;
+      }
+
       // if there is no distance query, use the fully-qualified zip code
       // field to match schools in that zip
       if (!query.distance) {
         query[fields.ZIP_CODE] = value;
         delete query[key];
       }
+
       // (the default will submit `zip=x&distance=y`,
       // which is what the API expects)
+    },
+
+    distance: function(query, value, key) {
+      // ignore distance if there's no zip
+      if (!query.zip) {
+        delete query[key];
+        return;
+      }
+
+      var num = value ? +value : NaN;
+      if (isNaN(num)) {
+        delete query[key];
+      } else {
+        // round and make it positive
+        query[key] = Math.abs(Math.round(num));
+      }
     },
 
     control: function(query, value, key) {
@@ -1272,12 +1295,6 @@ picc.form.prepareParams = (function() {
 
     // only get open schools
     query[fields.OPERATING] = 1;
-
-    // ignore distance if no zip is provided
-    if (query.distance && !query.zip) {
-      console.warn('distance provided without zip; ignoring', query);
-      delete query.distance;
-    }
 
     // by default, filter out schools for which school.size is null
     // with a numeric range query

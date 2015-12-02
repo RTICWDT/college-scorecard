@@ -17,6 +17,8 @@ module.exports = function search() {
   var req;
 
   var previousParams = query || {};
+  // FIXME: this should probably be an option that gets passed to the change
+  // handler, rather than a state flag
   var poppingState = false;
   var ready = false;
   var alreadyLoaded = false;
@@ -121,7 +123,11 @@ module.exports = function search() {
     change();
   });
 
-  form.on('change', change);
+  form.on('change', function(data, e) {
+    if (enforceValidity(e)) {
+      change();
+    }
+  });
 
   // sort is an "incremental" update
   form.on('change:sort', function() {
@@ -527,6 +533,17 @@ module.exports = function search() {
     while (node.lastChild) {
       node.removeChild(node.lastChild);
     }
+  }
+
+  function enforceValidity(event) {
+    var input = event.target;
+    var validity = input.validity;
+    if (validity && validity.valid === false) {
+      console.warn('input invalid:', input, validity);
+      event.preventDefault();
+      return false;
+    }
+    return true;
   }
 
 };
