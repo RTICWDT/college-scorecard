@@ -49,3 +49,4 @@ exclude:
   - config.ru
   # functional testing files
   - test/**
+  - vendor
