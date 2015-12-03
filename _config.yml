@@ -7,8 +7,11 @@ description:
 # the subpath of your site, e.g. /blog
 baseurl:
 
+# permanent url, for use in meta references
+url: https://collegescorecard.ed.gov
+
 # app version number
-version: v1.3.0
+version: v1.4.0
 
 # Build settings
 markdown: kramdown
@@ -28,7 +31,7 @@ analytics: true
 
 # API configuration
 API:
-  baseurl: https://api.data.gov/TEST/ed/production/v1/
+  baseurl: https://api.data.gov/ed/collegescorecard/v1/
   key: ''
 
 # specify paths to exclude from copying to _site

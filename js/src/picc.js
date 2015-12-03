@@ -96,7 +96,7 @@ picc.API = (function() {
   };
 
   /**
-   * Generate a endpoint function that hits a fixed URI.
+   * Generate an endpoint function that hits a fixed URI.
    *
    * @example
    * API.search = API.endpoint('search/');

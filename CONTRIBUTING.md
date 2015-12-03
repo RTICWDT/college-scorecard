@@ -2,7 +2,7 @@
 
 We're so glad you're thinking about contributing to this open source project! If you're unsure or afraid of anything, just ask or submit the issue or pull request anyways. The worst that can happen is that you'll be politely asked to change something. We appreciate any sort of contribution, and don't want a wall of rules to get in the way of that.
 
-Before contributing, we encourage you to read LICENSE, and README, all of which are in this repository. If you have any questions, open an (issue!)[https://github.com/18F/college-choice/issues/new].
+Before contributing, we encourage you to read LICENSE, and README, all of which are in this repository. If you have any questions, open an [issue](https://github.com/18F/college-choice/issues/new).
 
 ## How to contribute copy changes
 
@@ -45,7 +45,7 @@ Click the "new pull request" button at the top right.
 ![screen shot 2015-08-25 at 10 26 33 am](https://cloud.githubusercontent.com/assets/1626026/9469247/06f6e8ec-4b14-11e5-9a53-a7b44d915579.png)
 
 Review your changes to make sure nothing else was modified.
-Click on the the branch you just created, and then click "create pull request."
+Click on the branch you just created, and then click "create pull request."
 
 ![screen shot 2015-08-25 at 11 08 05 am](https://cloud.githubusercontent.com/assets/1626026/9470354/9d606fec-4b19-11e5-9b0c-69308953819a.png)
 
@@ -54,6 +54,6 @@ A member of the team will now see you've suggested a change and be able to incor
 ## Public domain
 
 As a work of the United States Government, this project is in the public domain within the United
-States. Additionally, the United States Government waives copyright and related rights in this work worldwide through the CC0 1.0 Universal Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/).
+States. Additionally, the United States Government waives copyright and related rights in this work worldwide through the [CC0 1.0 Universal Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/).
 
 All contributions to this project will be released under the CC0 dedication. By submitting a pull request, you are agreeing to comply with this waiver of copyright interest.
