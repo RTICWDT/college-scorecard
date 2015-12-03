@@ -5,6 +5,7 @@ var results = require('./resultCounts');
 
 var getResultCount = function() {
   return browser
+    .pause(500)
     .waitForText('.results-main-alert .u-group_inline-left h1 span:first-child', 10000)
     .getText('.results-main-alert .u-group_inline-left h1 span:first-child');
 }; 
@@ -201,11 +202,12 @@ describe('search', function() {
   /*
     Size
   */
-  it('should contain all small schools if selected', function*() {
+  it.only('should contain all small schools if selected', function*() {
     yield browser
       .url('/')
       .click('#school-size h1 a')
-      .click('#size-small')
+      .execute(function() { 
+        document.getElementById('size-small').click() })
       .click('#search-submit');
 
     var result = yield getResultCount();
@@ -216,7 +218,8 @@ describe('search', function() {
     yield browser
       .url('/')
       .click('#school-size h1 a')
-      .click('#size-medium')
+      .execute(function() {
+        document.getElementById('size-medium').click() })
       .click('#search-submit');
 
     var result = yield getResultCount();
@@ -227,7 +230,8 @@ describe('search', function() {
     yield browser
       .url('/')
       .click('#school-size h1 a')
-      .click('#size-large')
+      .execute(function() {
+        document.getElementById('size-large').click() })
       .click('#search-submit');
 
     var result = yield getResultCount();
@@ -238,8 +242,10 @@ describe('search', function() {
     yield browser
       .url('/')
       .click('#school-size h1 a')
-      .click('#size-small')
-      .click('#size-large')
+      .execute(function() {
+        document.getElementById('size-small').click() })
+      .execute(function() {
+        document.getElementById('size-large').click() })
       .click('#search-submit');
 
     var result = yield getResultCount();
@@ -305,7 +311,8 @@ describe('search', function() {
     yield browser
       .url('/')
       .click('#search-form > fieldset:last-of-type h1 a')
-      .click('#type-public')
+      .execute(function() {
+        document.getElementById('type-public').click() })
       .click('#search-submit');
 
     var result = yield getResultCount();
@@ -316,7 +323,8 @@ describe('search', function() {
     yield browser
       .url('/')
       .click('#search-form > fieldset:last-of-type h1 a')
-      .click('#type-private')
+      .execute(function() {
+        document.getElementById('type-private').click() })
       .click('#search-submit');
 
     var result = yield getResultCount();
@@ -327,7 +335,8 @@ describe('search', function() {
     yield browser
       .url('/')
       .click('#search-form fieldset:last-of-type h1 a')
-      .click('#type-profit')
+      .execute(function() {
+        document.getElementById('type-profit').click() })
       .click('#search-submit');
 
     var result = yield getResultCount();
