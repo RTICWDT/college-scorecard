@@ -8,7 +8,7 @@ dependencies:
 test:
   override:
     - echo $CIRCLE_BUILD_NUM
-    - cd sc-*-linux && ./bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY -i "18f-cs-$CIRCLE_BUILD_NUM" --readyfile ~/sauce_is_ready:
+    - cd sc-*-linux && ./bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY -i "18f-cs-$CIRCLE_BUILD_NUM" --readyfile ~/sauce_is_ready —logfile $CIRCLE_ARTIFACTS/sauce-connect.log:
         background: true
     - while [ ! -e ~/sauce_is_ready ]; do sleep 1; done:
         timeout: 60 
