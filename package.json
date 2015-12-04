@@ -8,6 +8,7 @@
     "build": "browserify `js/src/browserify-args.sh`",
     "watch": "watchify -v `js/src/browserify-args.sh`",
     "test": "wdio test/wdio.conf.js",
+    "test-quick": "wdio test/wdio.quick.js",
     "test-sauce": "wdio test/wdio.sauce.js",
     "test-ci": "./test/ci.sh"
   },
