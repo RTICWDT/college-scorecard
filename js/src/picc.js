@@ -1,8 +1,11 @@
-// aight, for polyfilling common JS APIs
-require('aight');
+'use strict';
 
-// web components
-require('./components');
+if (typeof window !== 'undefined') {
+  // aight, for polyfilling common JS APIs
+  require('aight');
+  // web components
+  require('./components');
+}
 
 var querystring = require('querystring');
 var d3 = require('d3');
@@ -86,7 +89,7 @@ picc.API = (function() {
     }
     if (params) uri = join([uri, params], '?');
     var url = join([API.url, uri], '/');
-    console.debug('[API] get: "%s"', url);
+    console.info('[API] get: "%s"', url);
     return d3.json(url, function(error, data) {
       if (data && data.errors && data.errors.length) {
         error = data.errors[0];
@@ -1681,58 +1684,63 @@ picc.pages = {
   school: require('./school')
 };
 
-/**
- * add event listeners for the tooltips by listening for mouseenter,
- * mouseleave, focus and blur events on elements that have an
- * aria-describedby attribute that begins with "tip-".
- */
-picc.ready(function() {
-  var described = 'aria-describedby';
-  picc.delegate(
-    document.body,
-    // if the element matches '[aria-describedby^="tip-"]'
-    function() {
-      return this.hasAttribute(described)
-          && this.getAttribute(described).match(/^tip-/);
-    },
-    // XXX this is a *very* rudimentary way to detect whether the browser
-    // supports touch events.
-    document.body.ontouchstart
-      // with touch enabled, only show on focus/blur and click/tap
-      ? {
-        focus:      picc.tooltip.show,
-        blur:       picc.tooltip.hide,
-        click:      picc.tooltip.toggle
-      }
-      // otherwise, show on enter/leave and focus/blur
-      : {
-        mouseenter: picc.tooltip.show,
-        mouseleave: picc.tooltip.hide,
-        focus:      picc.tooltip.show,
-        blur:       picc.tooltip.hide,
-      }
-  );
-});
 
-// set the "dragging" class when the mouse is down
-d3.select(document)
-  .on('mousedown', function(e) {
-    clearTimeout(this.__dragTimeout);
-    var body = this.body;
-    this.__dragTimeout = setTimeout(function() {
-      // console.info('+ drag');
-      body.classList.add('dragging');
-    }, 100);
-  })
-  .on('mouseup', function(e) {
-    clearTimeout(this.__dragTimeout);
-    // console.info('- drag');
-    this.body.classList.remove('dragging');
-  })
-  .on('click', function(e) {
-    clearTimeout(this.__dragTimeout);
-    // console.info('- drag');
-    this.body.classList.remove('dragging');
+// only do this stuff in the browser
+if (typeof document !== 'undefined') {
+
+  /**
+   * add event listeners for the tooltips by listening for mouseenter,
+   * mouseleave, focus and blur events on elements that have an
+   * aria-describedby attribute that begins with "tip-".
+   */
+  picc.ready(function() {
+    var described = 'aria-describedby';
+    picc.delegate(
+      document.body,
+      // if the element matches '[aria-describedby^="tip-"]'
+      function() {
+        return this.hasAttribute(described)
+            && this.getAttribute(described).match(/^tip-/);
+      },
+      // XXX this is a *very* rudimentary way to detect whether the browser
+      // supports touch events.
+      document.body.ontouchstart
+        // with touch enabled, only show on focus/blur and click/tap
+        ? {
+          focus:      picc.tooltip.show,
+          blur:       picc.tooltip.hide,
+          click:      picc.tooltip.toggle
+        }
+        // otherwise, show on enter/leave and focus/blur
+        : {
+          mouseenter: picc.tooltip.show,
+          mouseleave: picc.tooltip.hide,
+          focus:      picc.tooltip.show,
+          blur:       picc.tooltip.hide,
+        }
+    );
   });
+
+  // set the "dragging" class when the mouse is down
+  d3.select(document)
+    .on('mousedown', function(e) {
+      clearTimeout(this.__dragTimeout);
+      var body = this.body;
+      this.__dragTimeout = setTimeout(function() {
+        // console.info('+ drag');
+        body.classList.add('dragging');
+      }, 100);
+    })
+    .on('mouseup', function(e) {
+      clearTimeout(this.__dragTimeout);
+      // console.info('- drag');
+      this.body.classList.remove('dragging');
+    })
+    .on('click', function(e) {
+      clearTimeout(this.__dragTimeout);
+      // console.info('- drag');
+      this.body.classList.remove('dragging');
+    });
+}
 
 module.exports = picc;
