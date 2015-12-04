@@ -6,17 +6,13 @@ var xhr = require('xmlhttprequest');
 // make XMLHttpRequest available to d3
 global.XMLHttpRequest = xhr.XMLHttpRequest;
 
-picc.API.url = 'https://api.data.gov/ed/collegescorecard/v1/';
-picc.API.key = process.env.API_KEY;
+// use the API_BASE_URL environment variable,
+// or production API by default
+picc.API.url = process.env.API_BASE_URL || 'https://api.data.gov/ed/collegescorecard/v1/';
 
-describe('picc.API', function() {
-  it('can request stuff', function() {
-    picc.API.get('schools/', {'school.name': 'appalachian'}, function(error, data) {
-      assert.ok(!error);
-      assert.ok(data.results.length > 1, 'results: ' + data.results.length);
-    });
-  });
-});
+// XXX you'll need to set the API_KEY environment varible
+// for this to work
+picc.API.key = process.env.API_KEY;
 
 // expected default parameters
 const EXPECTED_DEFAULTS = {
@@ -43,6 +39,15 @@ var fromDefaults = function(params, except) {
   }
   return params;
 };
+
+describe('picc.API', function() {
+  it('can request stuff', function() {
+    picc.API.get('schools/', {'school.name': 'appalachian'}, function(error, data) {
+      assert.ok(!error);
+      assert.ok(data.results.length > 1, 'results: ' + data.results.length);
+    });
+  });
+});
 
 /**
  * picc.form.prepareParams() is the function that we pass the search
