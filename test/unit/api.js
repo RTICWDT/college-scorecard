@@ -1,5 +1,7 @@
 /* jshint esnext: true */
-/* globals require, process, global */
+/* globals require */
+/* globals process */
+/* globals global */
 
 var picc = require('../../js/src/picc');
 var assert = require('assert');
