@@ -1,5 +1,5 @@
 /* jshint: strict: true */
-/* globals require, global, process */
+/* globals require, process, global */
 
 var picc = require('../../js/src/picc');
 var assert = require('assert');
@@ -45,9 +45,11 @@ var fromDefaults = function(params, except) {
 
 describe('picc.API', function() {
   it('can request stuff', function() {
-    picc.API.get('schools/', {'school.name': 'appalachian'}, function(error, data) {
+    var params = {'school.name': 'appalachian'};
+    picc.API.get('schools/', params, function(error, data) {
       assert.ok(!error);
-      assert.ok(data.results.length > 1, 'results: ' + data.results.length);
+      assert.ok(data.results.length > 1,
+                'results: ' + data.results.length);
     });
   });
 });
@@ -59,7 +61,7 @@ describe('picc.API', function() {
 describe('picc.form.prepareParams()', function() {
   var prep = picc.form.prepareParams;
 
-  it('specifies `size > 0`, `preddeg = 2..3` and `curroper = 1` by default', function() {
+  it('defaults: `size > 0`, `preddeg = 2..3`, `curroper = 1`', function() {
     assert.deepEqual(prep({}), EXPECTED_DEFAULTS);
   });
 
