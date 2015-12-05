@@ -1,5 +1,5 @@
 /* jshint: strict: true */
-/* globals require, global */
+/* globals require, global, process */
 
 var picc = require('../../js/src/picc');
 var assert = require('assert');
