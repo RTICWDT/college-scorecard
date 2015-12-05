@@ -46,12 +46,13 @@ var fromDefaults = function(params, except) {
 };
 
 describe('picc.API', function() {
-  it('can request stuff', function() {
+  it('can request stuff', function(done) {
     var params = {'school.name': 'appalachian'};
     picc.API.get('schools/', params, function(error, data) {
       assert.ok(!error);
       assert.ok(data.results.length > 1,
                 'results: ' + data.results.length);
+      done();
     });
   });
 });

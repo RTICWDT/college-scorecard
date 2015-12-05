@@ -34,6 +34,7 @@
     "tito": "^0.4.0",
     "uglify-js": "^2.6.1",
     "watchify": "^3.6.1",
-    "webdriverio": "^3.3.0"
+    "webdriverio": "^3.3.0",
+    "xmlhttprequest": "^1.8.0"
   }
 }
