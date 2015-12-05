@@ -1,3 +1,6 @@
+/* jshint: strict: true */
+/* globals require, global */
+
 var picc = require('../../js/src/picc');
 var assert = require('assert');
 var extend = require('extend');
@@ -15,7 +18,7 @@ picc.API.url = process.env.API_BASE_URL || 'https://api.data.gov/ed/collegescore
 picc.API.key = process.env.API_KEY;
 
 // expected default parameters
-const EXPECTED_DEFAULTS = {
+var EXPECTED_DEFAULTS = {
   '2013.student.size__range': '0..',
   'school.degrees_awarded.predominant__range': '2..3',
   'school.operating': '1'
