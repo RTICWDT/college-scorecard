@@ -1,9 +1,18 @@
-/* jshint: strict: true */
+/* jshint esnext: true */
 /* globals require, process, global */
 
 var picc = require('../../js/src/picc');
 var assert = require('assert');
 var extend = require('extend');
+
+const DEFAULT_API_URL = 'https://api.data.gov/ed/collegescorecard/v1/';
+
+// expected default parameters
+const EXPECTED_DEFAULTS = {
+  '2013.student.size__range': '0..',
+  'school.degrees_awarded.predominant__range': '2..3',
+  'school.operating': '1'
+};
 
 var xhr = require('xmlhttprequest');
 // make XMLHttpRequest available to d3
@@ -11,18 +20,11 @@ global.XMLHttpRequest = xhr.XMLHttpRequest;
 
 // use the API_BASE_URL environment variable,
 // or production API by default
-picc.API.url = process.env.API_BASE_URL || 'https://api.data.gov/ed/collegescorecard/v1/';
+picc.API.url = process.env.API_BASE_URL || DEFAULT_API_URL;
 
 // XXX you'll need to set the API_KEY environment varible
 // for this to work
 picc.API.key = process.env.API_KEY;
-
-// expected default parameters
-var EXPECTED_DEFAULTS = {
-  '2013.student.size__range': '0..',
-  'school.degrees_awarded.predominant__range': '2..3',
-  'school.operating': '1'
-};
 
 /**
  * Merge defaults into a set of parameters and optionally exclude one
