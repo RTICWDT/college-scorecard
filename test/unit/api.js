@@ -46,6 +46,9 @@ var fromDefaults = function(params, except) {
 };
 
 describe('picc.API', function() {
+  // 10-second timeout on API requests
+  this.timeout(10000);
+
   it('can request stuff', function(done) {
     var params = {'school.name': 'appalachian'};
     picc.API.get('schools/', params, function(error, data) {
