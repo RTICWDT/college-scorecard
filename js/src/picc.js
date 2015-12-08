@@ -88,7 +88,7 @@ picc.API = (function() {
       params = addAPIKey(params);
     }
     if (params) uri = join([uri, params], '?');
-    var url = join([API.url, uri], '/');
+    var url = API.url ? join([API.url, uri], '/') : uri;
     // console.info('[API] get: "%s"', url);
     return d3.json(url, function(error, data) {
       if (data && data.errors && data.errors.length) {
