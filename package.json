@@ -9,6 +9,7 @@
     "watch": "watchify -v `js/src/browserify-args.sh`",
     "lint": "jshint -c .jshintrc js/src",
     "test-unit": "mocha -- test/unit",
+    "test-unit-ci": "XUNIT_FILE=$CIRCLE_TEST_REPORTS/unit.xml mocha -R spec-xunit-file -- test/unit",
     "test": "wdio test/wdio.conf.js",
     "test-sauce": "wdio test/wdio.sauce.js",
     "test-ci": "./test/ci.sh"
@@ -32,6 +33,7 @@
     "request": "^2.67.0",
     "simple-statistics": "^1.0.1",
     "sinon": "^1.17.2",
+    "spec-xunit-file": "0.0.1-3",
     "stream-array": "^1.1.1",
     "tito": "^0.4.0",
     "uglify-js": "^2.6.1",
