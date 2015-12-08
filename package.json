@@ -31,6 +31,7 @@
     "mocha": "*",
     "request": "^2.67.0",
     "simple-statistics": "^1.0.1",
+    "sinon": "^1.17.2",
     "stream-array": "^1.1.1",
     "tito": "^0.4.0",
     "uglify-js": "^2.6.1",
