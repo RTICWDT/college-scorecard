@@ -1,3 +1,4 @@
+/* jshint esnext: true */
 /*global require, describe, it, browser */
 
 var assert = require('assert');
@@ -76,7 +77,7 @@ describe('search', function() {
   it('each program should include the correct count of schools', function*() {
     for (var index = 0; index < results.allSchoolsWithProgram.length; index++) {
       var program = results.allSchoolsWithProgram[index];
-      yield utils.runSearch(programSearch(program.name));
+      yield utils.runSearch(programSearch, program.name);
       var result = yield utils.getSearchCount();
       assert.equal(result, program.count, 
                    resultCountError(program.name, result, program.count));
@@ -96,9 +97,9 @@ describe('search', function() {
   it('each designation should include the correct # of schools', function*() {
     for (var index = 0; index < results.specialDesignation.length; index++) {
       var program = results.specialDesignation[index];
-      yield utils.runSearch(designationSearch(program.name));
+      yield utils.runSearch(designationSearch, program.name);
       var result = yield utils.getSearchCount();
-      assert.equal(result, program.count, program.name +
+      assert.equal(result, program.count,
                    resultCountError(program.name, result, program.count));
     }
   });
@@ -120,7 +121,7 @@ describe('search', function() {
         .click('#search-submit');
 
       var result = yield utils.getSearchCount();
-      assert.equal(result, program.count, program.name +
+      assert.equal(result, program.count,
                    resultCountError(program.name, result, program.count));
       assert(valueMatch, program.code + ' does not match ' + program.name);
     }

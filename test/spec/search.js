@@ -1,3 +1,4 @@
+/* jshint esnext: true */
 /*global require, describe, it, browser */
 
 var assert = require('assert');
