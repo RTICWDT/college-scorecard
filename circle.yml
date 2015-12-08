@@ -9,12 +9,20 @@ test:
   override:
     # run unit tests before browser tests with Sauce Labs
     - XUNIT_FILE=$CIRCLE_TEST_REPORTS/unit.xml npm run test-unit-ci
+
     # open a Sauce Connect tunnel
     - cd sc-*-linux && ./bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY -i "18f-cs-$CIRCLE_BUILD_NUM" --readyfile ~/sauce_is_ready:
         background: true
+
     # wait for Sauce Connect's readyfile
     - while [ ! -e ~/sauce_is_ready ]; do sleep 1; done
-    - pwd
+
+    # XXX this is a workaround for a bug in WebDriverIO
+    # that doesn't allow for absolute paths in the xunit
+    # output directory:
+    # <https://github.com/webdriverio/webdriverio/issues/926>
+    - ln -s /tmp
+
     # run the browser tests
     - ./test/ci.sh
   post:
