@@ -4,6 +4,12 @@ var assert = require('assert');
 var results = require('./resultData.json');
 var utils = require('./utils');
 
+
+var resultCountError = function(name, result, expected) {
+  return name + ' result count is incorrect. Expected: ' +
+         expected + ' Actual: ' + result;
+};
+
 describe('search', function() {
 
   /*
@@ -20,12 +26,14 @@ describe('search', function() {
         .selectByVisibleText('.multi-select_item .select-state', state.name);
         // check selection by value to ensure that value & text are aligned
       var valueMatch = yield browser
-        .isSelected('.multi-select_item .select-state [value="' + state.code + '"]');
+        .isSelected('.multi-select_item .select-state [value="' +
+                    state.code + '"]');
       yield browser
         .click('#search-submit');
 
       var result = yield utils.getSearchCount();
-      assert.equal(result, state.count, state.code + ' result count is incorrect. Expected: ' + state.count + ' Actual: ' + result);
+      assert.equal(result, state.count,
+                   resultCountError(state.code, result, state.count));
       assert(valueMatch, state.code + ' does not match ' + state.name);
     }
   });
@@ -43,12 +51,14 @@ describe('search', function() {
         .selectByVisibleText('.multi-select_item .select-region', region.name);
         // check selection by value to ensure that value & text are aligned
       var valueMatch = yield browser
-        .isSelected('.multi-select_item .select-region [value="' + region.code + '"]');
+        .isSelected('.multi-select_item .select-region [value="' +
+                    region.code + '"]');
       yield browser
         .click('#search-submit');
 
       var result = yield utils.getSearchCount();
-      assert.equal(result, region.count, region.name + ' result count is incorrect. Expected: ' + region.count + ' Actual: ' + result);
+      assert.equal(result, region.count, 
+                   resultCountError(region.code, result, region.count));
       assert(valueMatch, region.code + ' does not match ' + region.name);
     }
   });
@@ -56,37 +66,47 @@ describe('search', function() {
   /*
     Programs/Degrees
   */
+
+  var programSearch = function(programName) {
+    return browser
+      .click('#school-degree h1 a')
+      .selectByVisibleText('#major', programName);
+  };
+
   it('each program should include the correct count of schools', function*() {
     for (var index = 0; index < results.allSchoolsWithProgram.length; index++) {
       var program = results.allSchoolsWithProgram[index];
-      yield utils.runSearch(function() { return browser
-                                     .click('#school-degree h1 a')
-                                     .selectByVisibleText('#major', program.name)
-                                 });
+      yield utils.runSearch(programSearch(program.name));
       var result = yield utils.getSearchCount();
-      assert.equal(result, program.count, program.name + ' result count is incorrect. Expected: ' + program.count + ' Actual: ' + result);
+      assert.equal(result, program.count, 
+                   resultCountError(program.name, result, program.count));
     }
   });
 
   /*
     Special Designation
   */
-  it('each special designation should include the correct count of schools', function*() {
+
+  var designationSearch = function(designation) {
+    return browser
+      .click('#search-form fieldset:last-of-type h1 a')
+      .selectByVisibleText('#special', designation);
+  };
+
+  it('each designation should include the correct # of schools', function*() {
     for (var index = 0; index < results.specialDesignation.length; index++) {
       var program = results.specialDesignation[index];
-      yield utils.runSearch(function() { return browser
-                                   .click('#search-form fieldset:last-of-type h1 a')
-                                   .selectByVisibleText('#special', program.name)
-                                 });
+      yield utils.runSearch(designationSearch(program.name));
       var result = yield utils.getSearchCount();
-      assert.equal(result, program.count, program.name + ' result count is incorrect. Expected: ' + program.count + ' Actual: ' + result);
+      assert.equal(result, program.count, program.name +
+                   resultCountError(program.name, result, program.count));
     }
   });
 
   /*
     Religious Affiliation
   */
-  it('each religious affiliation should include the correct count of schools', function*() {
+  it('each affiliation should include the correct # of schools', function*() {
     for (var index = 0; index < results.religiousAffiliation.length; index++) {
       var program = results.religiousAffiliation[index];
       yield browser
@@ -100,7 +120,8 @@ describe('search', function() {
         .click('#search-submit');
 
       var result = yield utils.getSearchCount();
-      assert.equal(result, program.count, program.name + ' result count is incorrect. Expected: ' + program.count + ' Actual: ' + result);
+      assert.equal(result, program.count, program.name +
+                   resultCountError(program.name, result, program.count));
       assert(valueMatch, program.code + ' does not match ' + program.name);
     }
   });
