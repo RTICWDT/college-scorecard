@@ -8,12 +8,13 @@ dependencies:
 test:
   override:
     # run unit tests before browser tests with Sauce Labs
-    - npm run test-unit
+    - XUNIT_FILE=$CIRCLE_TEST_REPORTS/unit.xml npm run test-unit-ci
     # open a Sauce Connect tunnel
     - cd sc-*-linux && ./bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY -i "18f-cs-$CIRCLE_BUILD_NUM" --readyfile ~/sauce_is_ready:
         background: true
     # wait for Sauce Connect's readyfile
     - while [ ! -e ~/sauce_is_ready ]; do sleep 1; done
+    - pwd
     # run the browser tests
     - ./test/ci.sh
   post:
