@@ -7,10 +7,14 @@ dependencies:
     - tar -xzf sc-latest-linux.tar.gz
 test:
   override:
-    - echo $CIRCLE_BUILD_NUM
+    # run unit tests before browser tests with Sauce Labs
+    - npm run test-unit
+    # open a Sauce Connect tunnel
     - cd sc-*-linux && ./bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY -i "18f-cs-$CIRCLE_BUILD_NUM" --readyfile ~/sauce_is_ready:
         background: true
+    # wait for Sauce Connect's readyfile
     - while [ ! -e ~/sauce_is_ready ]; do sleep 1; done
+    # run the browser tests
     - ./test/ci.sh
   post:
     - killall --wait sc  # wait for Sauce Connect to close the tunnel
