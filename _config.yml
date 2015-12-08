@@ -49,4 +49,6 @@ exclude:
   - config.ru
   # functional testing files
   - test/**
+  # see test/circle.yml for why this is necessary
+  - tmp
   - vendor

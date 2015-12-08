@@ -7,10 +7,25 @@ dependencies:
     - tar -xzf sc-latest-linux.tar.gz
 test:
   override:
-    - echo $CIRCLE_BUILD_NUM
+    # run unit tests before browser tests with Sauce Labs
+    - mkdir $CIRCLE_TEST_REPORTS/mocha
+    - XUNIT_FILE=$CIRCLE_TEST_REPORTS/mocha/unit.xml npm run test-unit-ci
+
+    # open a Sauce Connect tunnel
     - cd sc-*-linux && ./bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY -i "18f-cs-$CIRCLE_BUILD_NUM" --readyfile ~/sauce_is_ready:
         background: true
+
+    # wait for Sauce Connect's readyfile
     - while [ ! -e ~/sauce_is_ready ]; do sleep 1; done
+
+    # XXX this is a workaround for a bug in WebDriverIO
+    # that doesn't allow for absolute paths in the xunit
+    # output directory:
+    # <https://github.com/webdriverio/webdriverio/issues/926>
+    - ln -s /tmp
+
+    # run the browser tests
+    - mkdir $CIRCLE_TEST_REPORTS/browser
     - ./test/ci.sh
   post:
     - killall --wait sc  # wait for Sauce Connect to close the tunnel
