@@ -32,7 +32,8 @@ exports.config = {
     // capabilities: https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [{
-        browserName: 'chrome'
+        browserName: 'chrome',
+        maxDuration: 4000
     }],
     //
     // ===================

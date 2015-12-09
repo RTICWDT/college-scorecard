@@ -23,6 +23,7 @@ describe('search', function() {
       yield browser
         .url('/')
         .click('#school-location h1 a')
+        .pause(200)
         // select by text to ensure the text is the same
         .selectByVisibleText('.multi-select_item .select-state', state.name);
         // check selection by value to ensure that value & text are aligned
@@ -48,6 +49,7 @@ describe('search', function() {
       yield browser
         .url('/')
         .click('#school-location h1 a')
+        .pause(200)
         // select by text to ensure the text is the same
         .selectByVisibleText('.multi-select_item .select-region', region.name);
         // check selection by value to ensure that value & text are aligned
@@ -71,6 +73,7 @@ describe('search', function() {
   var programSearch = function(programName) {
     return browser
       .click('#school-degree h1 a')
+      .pause(200)
       .selectByVisibleText('#major', programName);
   };
 
@@ -91,6 +94,7 @@ describe('search', function() {
   var designationSearch = function(designation) {
     return browser
       .click('#search-form fieldset:last-of-type h1 a')
+      .pause(200)
       .selectByVisibleText('#special', designation);
   };
 
@@ -113,6 +117,7 @@ describe('search', function() {
       yield browser
         .url('/')
         .click('#search-form fieldset:last-of-type h1 a')
+        .pause(200)
         // select by text to ensure the text is the same
         .selectByVisibleText('#affiliation', program.name);
       var valueMatch = yield browser
