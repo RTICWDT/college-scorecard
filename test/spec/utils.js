@@ -2,9 +2,14 @@
 /* global exports, browser */
 exports.getSearchCount = function*() {
   var value = yield browser
-    .pause(800)
-    .waitForText(
-      '.results-main-alert .u-group_inline-left h1 span:first-child', 10000)
+    .waitForExist(
+      '.results-main-alert .u-group_inline-left h1 span:first-child', 5000)
+    .waitUntil(function() {
+      return this.getText(
+        '.results-main-alert .u-group_inline-left h1 span:last-child').then(function(text) {
+          return text === 'Results' || text === 'Result';
+      });
+    })
     .getText('.results-main-alert .u-group_inline-left h1 span:first-child');
   return parseInt(value.replace(/,/g, ''), 10);
 };

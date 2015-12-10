@@ -30,7 +30,6 @@ describe('search', function() {
         .isSelected('.multi-select_item .select-state [value="' +
                     state.code + '"]');
       yield browser
-        .pause(200)
         .click('#search-submit');
 
       var result = yield utils.getSearchCount();
@@ -56,7 +55,6 @@ describe('search', function() {
         .isSelected('.multi-select_item .select-region [value="' +
                     region.code + '"]');
       yield browser
-        .pause(200)
         .click('#search-submit');
 
       var result = yield utils.getSearchCount();
@@ -74,7 +72,6 @@ describe('search', function() {
     return browser
       .click('#school-degree h1 a')
       .selectByVisibleText('#major', programName)
-      .pause(200);
   };
 
   it('each program should include the correct count of schools', function*() {
@@ -95,7 +92,6 @@ describe('search', function() {
     return browser
       .click('#search-form fieldset:last-of-type h1 a')
       .selectByVisibleText('#special', designation)
-      .pause(200);
   };
 
   it('each designation should include the correct # of schools', function*() {
@@ -122,7 +118,6 @@ describe('search', function() {
       var valueMatch = yield browser
         .isSelected('#affiliation [value="' + program.code + '"]');
       yield browser
-        .pause(200)
         .click('#search-submit');
 
       var result = yield utils.getSearchCount();
