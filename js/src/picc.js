@@ -1230,9 +1230,9 @@ picc.form.prepareParams = (function() {
 
     degree: function(query, value, key) {
       if (value === 'a') {
-        query['2013.academics.program.assoc'] = 1;
+        query[picc.fields.PROGRAM_OFFERED + '.assoc'] = 1;
       } else if (value === 'b') {
-        query['2013.academics.program.bachl'] = 1;
+        query[picc.fields.PROGRAM_OFFERED + '.bachl'] = 1;
       }
       delete query[key];
     },
