@@ -1229,7 +1229,12 @@ picc.form.prepareParams = (function() {
     },
 
     degree: function(query, value, key) {
-      query[key] = mapDegree(value);
+      if (value === 'a') {
+        query['2013.academics.program.assoc'] = 1;
+      } else if (value === 'b') {
+        query['2013.academics.program.bachl'] = 1;
+      }
+      delete query[key];
     },
 
     // XXX: this is only used for testing
@@ -1327,14 +1332,8 @@ picc.form.prepareParams = (function() {
       }
     }
 
-    // set the predominant degree, which can be either a value or
-    // a range (default: '2..3')
-    if (query.degree) {
-      picc.data.rangify(query, picc.fields.PREDOMINANT_DEGREE, query.degree);
-      delete query.degree;
-    } else {
-      query[picc.fields.PREDOMINANT_DEGREE + '__range'] = '2..3';
-    }
+    // set the predominant degree to range '2..3' because ED expert guidance
+    query[picc.fields.PREDOMINANT_DEGREE + '__range'] = '2..3';
 
     return query;
   };
