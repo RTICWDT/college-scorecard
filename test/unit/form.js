@@ -49,6 +49,22 @@ describe('picc.form', function() {
       }));
     });
 
+    it('searches for associates degrees', function() {
+      assert.deepEqual(prep({degree: 'a'}), fromDefaults({
+        'school.degrees_awarded.predominant': '2'
+      }, [
+        'school.degrees_awarded.predominant__range'
+      ]));
+    });
+
+    it('searches for bachelors degrees', function() {
+      assert.deepEqual(prep({degree: 'b'}), fromDefaults({
+        'school.degrees_awarded.predominant': '3'
+      }, [
+        'school.degrees_awarded.predominant__range'
+      ]));
+    });
+
     describe('majors', function() {
 
       it('can query associates degrees', function() {
