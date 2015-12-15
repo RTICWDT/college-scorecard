@@ -71,7 +71,7 @@ describe('search', function() {
   var programSearch = function(programName) {
     return browser
       .click('#school-degree h1 a')
-      .selectByVisibleText('#major', programName)
+      .selectByVisibleText('#major', programName);
   };
 
   it('each program should include the correct count of schools', function*() {
@@ -91,7 +91,7 @@ describe('search', function() {
   var designationSearch = function(designation) {
     return browser
       .click('#search-form fieldset:last-of-type h1 a')
-      .selectByVisibleText('#special', designation)
+      .selectByVisibleText('#special', designation);
   };
 
   it('each designation should include the correct # of schools', function*() {
