@@ -11,6 +11,7 @@
     "test-unit": "mocha -- test/unit",
     "test-unit-ci": "XUNIT_FILE=$CIRCLE_TEST_REPORTS/unit.xml mocha -R spec-xunit-file -- test/unit",
     "test": "wdio test/wdio.conf.js",
+    "test-quick": "wdio test/wdio.quick.js",
     "test-sauce": "wdio test/wdio.sauce.js",
     "test-ci": "./test/ci.sh"
   },

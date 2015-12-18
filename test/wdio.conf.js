@@ -15,7 +15,7 @@ exports.config = {
     ],
     // Patterns to exclude.
     exclude: [
-        // 'path/to/excluded/files'
+        //''
     ],
     //
     // ============
@@ -32,7 +32,8 @@ exports.config = {
     // capabilities: https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [{
-        browserName: 'chrome'
+        browserName: 'chrome',
+        maxDuration: 4000
     }],
     //
     // ===================
@@ -95,7 +96,8 @@ exports.config = {
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
     mochaOpts: {
-        ui: 'bdd'
+        ui: 'bdd',
+        timeout: 600000
     },
 
     //

@@ -1,3 +1,6 @@
+/* jshint esnext: true */
+/* global browser */
+
 var assert = require('assert');
 
 describe('page title', function() {

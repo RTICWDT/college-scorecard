@@ -58,6 +58,13 @@ Once the server is up, you can run the tests in Chrome with:
 npm test
 ```
 
+The complete test suite takes several minutes to run. You can exclude
+the data count tests by running:
+
+```sh
+npm run test-quick
+```
+
 ## Testing with Sauce Labs
 
 For testing with [Sauce Labs] you'll need [Sauce Connect], which you
@@ -100,6 +107,10 @@ which are not valid Sauce Labs credentials.
 If you see this, make sure that you've [exported][export variables]
 your `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` environment variables,
 which [WebDriverIO] needs to authenticate with Sauce Labs.
+
+NOTE: By default, the data count tests are not run on Sauce. You can
+enable them by replacing the reference to `./wdio.quick` with
+`./wdio.conf` in `wdio.sauce.js`.
 
 ## Testing on CircleCI
 
