@@ -8,7 +8,7 @@ var assert = require('assert');
 var loadSchoolUrl = function(school) {
   return browser
     .url('/school/?' + school)
-    .waitForVisible('.show-loading', 2000, true);
+    .waitForVisible('.show-loading', 5000, true);
 //    .pause(pageTimeout);
 };
 
