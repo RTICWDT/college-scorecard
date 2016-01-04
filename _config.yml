@@ -5,7 +5,7 @@ description:
   Helping prospective college students find the right school.
 
 # the subpath of your site, e.g. /blog
-baseurl: /college-choice
+baseurl:
 
 # permanent url, for use in meta references
 url: https://collegescorecard.ed.gov
@@ -49,3 +49,6 @@ exclude:
   - config.ru
   # functional testing files
   - test/**
+  # see test/circle.yml for why this is necessary
+  - tmp
+  - vendor

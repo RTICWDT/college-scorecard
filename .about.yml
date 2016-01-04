@@ -22,7 +22,8 @@ stack:
 - Rails
 - elasticsearch
 contact:
-- holly.allen@gsa.gov
+- url: mailto:holly.allen@gsa.gov
+  text: Holly Allen
 team:
 - github: ultrasaurus
 - github: shawnbot
