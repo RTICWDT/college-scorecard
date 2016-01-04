@@ -79,3 +79,12 @@ padrino start
 ```
 tail -f log/development.log
 ```
+
+## System Architecture
+
+This repository drives the "front end" of the College Scorecard application and
+is hosted on [Federalist](https://github.com/18F/federalist). The back end is
+an instance of the [Open Data Maker](https://github.com/18F/open-data-maker/).
+Here's how the different parts work together in our production environment:
+
+![system architecture](https://raw.githubusercontent.com/18F/college-choice/add-architecture-graphic/assets/architecture-diagram.png)
