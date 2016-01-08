@@ -484,6 +484,7 @@ picc.fields = {
 
   PROGRAM_PERCENTAGE:   '2013.academics.program_percentage',
   PROGRAM_OFFERED:      '2013.academics.program',
+  DEGREE_OFFERED:       '2013.academics.program_available',
 
   PART_TIME_SHARE:      '2013.student.part_time_share',
   FEMALE_SHARE:         '2013.student.demographics.female_share',
@@ -1230,9 +1231,9 @@ picc.form.prepareParams = (function() {
 
     degree: function(query, value, key) {
       if (value === 'a') {
-        query[picc.fields.PROGRAM_OFFERED + '.assoc'] = 1;
+        query[picc.fields.DEGREE_OFFERED + '.assoc'] = true;
       } else if (value === 'b') {
-        query[picc.fields.PROGRAM_OFFERED + '.bachl'] = 1;
+        query[picc.fields.DEGREE_OFFERED + '.bachelors'] = true;
       }
       delete query[key];
     },
@@ -1303,6 +1304,10 @@ picc.form.prepareParams = (function() {
     }
     delete query.online;
     */
+
+    if (!query.degree) {
+      query[fields.DEGREE_OFFERED + '.assoc_or_bachelors'] = true;
+    }
 
     for (var key in query) {
       var v = query[key];
