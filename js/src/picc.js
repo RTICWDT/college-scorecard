@@ -459,6 +459,7 @@ picc.fields = {
   MINORITY_SERVING:     'school.minority_serving',
 
   PREDOMINANT_DEGREE:   'school.degrees_awarded.predominant',
+  HIGHEST_DEGREE:   'school.degrees_awarded.highest',
   UNDER_INVESTIGATION:  'school.under_investigation',
 
   // net price
@@ -1339,6 +1340,9 @@ picc.form.prepareParams = (function() {
 
     // set the predominant degree to range '2..3' because ED expert guidance
     query[picc.fields.PREDOMINANT_DEGREE + '__range'] = '2..3';
+
+    // set the highest degree to range '2..4' to exclude certificate only schools
+    query[picc.fields.HIGHEST_DEGREE + '__range'] = '2..4';
 
     return query;
   };
