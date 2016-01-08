@@ -8,7 +8,7 @@ var extend = require('extend');
 const EXPECTED_DEFAULTS = {
   '2013.student.size__range': '0..',
   'school.degrees_awarded.predominant__range': '2..3',
-  'school.operating': '1'
+  'school.operating': 1
 };
 
 /**
@@ -49,7 +49,19 @@ describe('picc.form', function() {
       }));
     });
 
-    describe('majors', function() {
+    it('searches for associates degrees', function() {
+      assert.deepEqual(prep({degree: 'a'}), fromDefaults({
+        '2013.academics.program.assoc': '1'
+      }));
+    });
+
+    it('searches for bachelors degrees', function() {
+      assert.deepEqual(prep({degree: 'b'}), fromDefaults({
+        '2013.academics.program.bachl': '1'
+      }));
+    });
+
+    xdescribe('majors', function() {
 
       it('can query associates degrees', function() {
         assert.deepEqual(prep({
