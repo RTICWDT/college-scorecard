@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const async = require('async');
 const pa11y = require('pa11y');
 const reporter = require('pa11y/reporter/cli');
