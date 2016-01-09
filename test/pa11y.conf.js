@@ -1,8 +1,13 @@
 const config = {
+
   // test against WCAG 2.0 AA
-  'standard': 'WCAG2AA',
+  standard: 'WCAG2AA',
+
   // only fail on errors
-  'level': 'error'
+  level: 'error',
+
+  // wait 500ms before checking
+  wait: 500
 };
 
 /**
