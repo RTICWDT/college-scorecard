@@ -30,6 +30,7 @@ async.mapSeries(URLS, function(url, done) {
       reporter.error(error.stack);
     }
 
+    // filter out "invalid" (ignoreable) results
     results = results.filter(isValidResult);
 
     reporter.results(results, url);
@@ -43,7 +44,6 @@ async.mapSeries(URLS, function(url, done) {
   });
 }, function(error, runs) {
   if (failed) {
-
     var count = 0;
     var failing = runs.map(function(results) {
       var failing = results.filter(isFailingResult);
