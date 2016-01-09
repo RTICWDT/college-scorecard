@@ -22,6 +22,10 @@ const IGNORE_MESSAGES = [
   // text so that it can be programmatically determined.
   'WCAG2AA.Principle1.Guideline1_3.1_3_1.H49.I',
 
+  // Warning: If this table is a data table, consider using the summary
+  // attribute of the table element to give an overview of this table.
+  'WCAG2AA.Principle1.Guideline1_3.1_3_1.H73.3.NoSummary',
+
   // Warning: If this selection list contains groups of related options, they
   // should be grouped with optgroup.
   'WCAG2AA.Principle1.Guideline1_3.1_3_1.H85.2',
@@ -31,9 +35,19 @@ const IGNORE_MESSAGES = [
   // all covered parts of the background are at least 4.5:1.
   'WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Abs',
 
+  // Warning: This element's text is placed on a background image. Ensure the
+  // contrast ratio between the text and all covered parts of the image are at
+  // least 4.5:1.
+  'WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.BgImage',
+
   // Warning: Anchor element found with link content, but no href, ID or name
   // attribute has been supplied.
   'WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.A.Placeholder',
+
+  // Warning: Anchor elements should not be used for defining in-page link
+  // targets. If not using the ID for other purposes (such as CSS or
+  // scripting), consider moving it to a parent element.
+  'WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.A.NoHref',
 
   // Error: Duplicate id attribute value "xxx" found on the web page.
   // XXX: these appear to be false positives in HTML_Code_Sniffer
