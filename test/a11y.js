@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+/* jshint esnext: true */
+
 const async = require('async');
 const pa11y = require('pa11y');
 const reporter = require('pa11y/reporter/cli');
@@ -63,7 +65,9 @@ async.mapSeries(URLS, function(url, done) {
 });
 
 function pluralize(num, singular, plural) {
-  if (!plural) plural = singular + 's';
+  if (!plural) {
+    plural = singular + 's';
+  }
   return [num, num === 1 ? singular : plural].join(' ');
 }
 

@@ -1,3 +1,5 @@
+/* jshint esnext: true */
+
 const config = {
 
   // test against WCAG 2.0 AA
