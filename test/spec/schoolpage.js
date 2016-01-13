@@ -220,15 +220,16 @@ describe('school page', function() {
     var urls = ['204176-Mount-Carmel-College-of-Nursing',
                 '204635-Ohio-Northern-University'];
     var meters = ['earnings', 'cost', 'graduation'];
-    for (var index = 0; index < urls.length; index++) {
-      yield loadSchoolUrl(urls[index]);
-      for (var meterIndex = 0; meterIndex < meters.length; meterIndex++) {
-        var meterResult = yield getMeterClass(meters[meterIndex]);
+
+    urls.forEach(function*(url) {
+      yield loadSchoolUrl(url);
+      meters.forEach(function*(url) {
+        var meterResult = yield getMeterClass(meter);
         var name = yield getSchoolName();
-        assert(meterResult.indexOf('no_data') === -1, name +
-               ' has no data for ' + meters[meterIndex]);
-      }
-    }
+        assert(meterResult.indexOf('no_data') === -1,
+               name + ' has no data for ' + meter);
+      });
+    });
   });
 
   /*
