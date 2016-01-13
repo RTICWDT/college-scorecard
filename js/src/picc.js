@@ -80,7 +80,7 @@ picc.API = (function() {
    * @return {Object} the d3.xhr() wrapper object
    */
   API.get = function(uri, params, done) {
-    // console.debug('[API] get("%s", %s)', uri, JSON.stringify(params));
+    console.debug('[API] get("%s", %s)', uri, JSON.stringify(params));
     if (arguments.length === 2) {
       done = params;
       params = addAPIKey({});
@@ -89,7 +89,7 @@ picc.API = (function() {
     }
     if (params) uri = join([uri, params], '?');
     var url = API.url ? join([API.url, uri], '/') : uri;
-    // console.info('[API] get: "%s"', url);
+    console.info('[API] get: "%s"', url);
     return d3.json(url, function(error, data) {
       if (data && data.errors && data.errors.length) {
         error = data.errors[0];
@@ -1338,8 +1338,8 @@ picc.form.prepareParams = (function() {
       }
     }
 
-    // set the predominant degree to range '2..3' because ED expert guidance
-    query[picc.fields.PREDOMINANT_DEGREE + '__range'] = '2..3';
+    // set the predominant degree to range '1..3' because ED expert guidance
+    query[picc.fields.PREDOMINANT_DEGREE + '__range'] = '1..3';
 
     // set the highest degree to range '2..4' to exclude certificate only schools
     query[picc.fields.HIGHEST_DEGREE + '__range'] = '2..4';

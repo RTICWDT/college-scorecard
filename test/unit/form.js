@@ -8,7 +8,7 @@ var extend = require('extend');
 const EXPECTED_DEFAULTS = {
   '2013.academics.program_available.assoc_or_bachelors': true,
   '2013.student.size__range': '0..',
-  'school.degrees_awarded.predominant__range': '2..3',
+  'school.degrees_awarded.predominant__range': '1..3',
   'school.degrees_awarded.highest__range': '2..4',
   'school.operating': 1
 };
