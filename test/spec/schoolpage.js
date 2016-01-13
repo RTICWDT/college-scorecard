@@ -32,33 +32,32 @@ var getMeterClass = function(meter) {
 };
 
 var checkBanner = function*(urls, banner) {
-  for (var index = 0; index < urls.length; index++) {
-    yield loadSchoolUrl(urls[index]);
+  urls.forEach(function*(url) {
+    yield loadSchoolUrl(url);
     var banners = yield getBanners();
     var name = yield getSchoolName();
     var found = banners.indexOf(banner) >= 0;
     assert(found, name + ' did not contain the ' + banner + ' banner.');
-  }
+  });
 };
 
 var checkIcon = function*(urls, icon) {
-  for (var index = 0; index < urls.length; index++) {
-    yield loadSchoolUrl(urls[index]);
+  urls.forEach(function*(url) {
+    yield loadSchoolUrl(url);
     var icons = yield getIcon();
     var name = yield getSchoolName();
     var found = icons.indexOf(icon) >= 0;
     assert(found, name + ' did not contain the ' + icon + ' icon.');
-  }
+  });
 };
 
 var checkProgramLength = function*(urls, programLength) {
-  for (var index = 0; index < urls.length; index++) {
-    yield loadSchoolUrl(urls[index]);
-    var len = yield browser
-      .getText(
-        '.school-heading .school-key_figures li span.school-key_figures-year');
+  var selector = '.school-heading .school-key_figures li span.school-key_figures-year';
+  urls.forEach(function*(url) {
+    yield loadSchoolUrl(url);
+    var len = yield browser.getText(selector);
     assert.equal(programLength, len);
-  }
+  });
 };
 
 var isAccordionExpanded = function(selector) {
@@ -142,13 +141,12 @@ describe('school page', function() {
                 '443049-Faith-Evangelical-College-Seminary',
                 '139287-Carver-Bible-College',
                 '434016-Little-Priest-Tribal-College'];
-    for (var index = 0; index < urls.length; index++) {
-      yield loadSchoolUrl(urls[index]);
-      var value = yield browser
-        .getAttribute(
-          '.school-heading div.investigation-major-wrapper', 'aria-hidden');
+    var selector = '.school-heading div.investigation-major-wrapper';
+    urls.forEach(function*(url) {
+      yield loadSchoolUrl(url);
+      var value = yield browser.getAttribute(selector, 'aria-hidden');
       assert.equal(value, false);
-    }
+    });
   });
 
   it('should display the religious affiliation if specified', function*() {
@@ -205,15 +203,16 @@ describe('school page', function() {
     var urls = ['416801-The-University-of-Texas-MD-Anderson-Cancer-Center',
                 '104665-Frank-Lloyd-Wright-School-of-Architecture'];
     var meters = ['earnings', 'cost', 'graduation'];
-    for (var index = 0; index < urls.length; index++) {
-      yield loadSchoolUrl(urls[index]);
-      for (var meterIndex = 0; meterIndex < meters.length; meterIndex++) {
-        var meterResult = yield getMeterClass(meters[meterIndex]);
+
+    urls.forEach(function*(url) {
+      yield loadSchoolUrl(url);
+      meters.forEach(function*(meter) {
+        var meterResult = yield getMeterClass(meter);
         var name = yield getSchoolName();
-        assert(meterResult.indexOf('no_data') > -1, name + ' has data for ' +
-               meters[meterIndex]);
-      }
-    }
+        assert(meterResult.indexOf('no_data') > -1,
+               name + ' has data for ' + meter);
+      });
+    });
   });
 
   it('should display key metric figures if data is present', function*() {
@@ -347,29 +346,29 @@ describe('school page', function() {
   it('should have "Data missing" messages for SAT, if missing', function*() {
     var urls = ['416801-The-University-of-Texas-MD-Anderson-Cancer-Center',
                 '104665-Frank-Lloyd-Wright-School-of-Architecture'];
-    for (var index = 0; index < urls.length; index++) {
-      yield loadSchoolUrl(urls[index]);
+    urls.forEach(function*(url) {
+      yield loadSchoolUrl(url);
       yield toggleAccordion('#selectivity');
       var vals = yield browser
         .getAttribute('#selectivity-content figure+p.no-data', 'aria-hidden');
-        var name = yield getSchoolName();
+      var name = yield getSchoolName();
       var allFalse = vals.every(function(value) { return value === ''; });
       assert(allFalse, 'SAT/ACT Data figures are visible for ' + name);
-    }
+    });
   });
 
   it('should display SAT/ACT figures, if the data is present', function*() {
     var urls = ['204635-Ohio-Northern-University',
                 '206349-Ursuline-College'];
-    for (var index = 0; index < urls.length; index++) {
-      yield loadSchoolUrl(urls[index]);
+    urls.forEach(function*(url) {
+      yield loadSchoolUrl(url);
       yield toggleAccordion('#selectivity');
       var vals = yield browser
         .getAttribute('#selectivity-content figure', 'aria-hidden');
-        var name = yield getSchoolName();
+      var name = yield getSchoolName();
       var allFalse = vals.every(function(value) { return value === ''; });
       assert(allFalse, 'SAT/ACT figures are not visible for ' + name);
-    }
+    });
   });
 
   /*
