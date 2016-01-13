@@ -1,0 +1,14 @@
+.content-column {
+  @include span-columns(12);
+
+  padding-bottom: 10px;
+
+  @include respond-to(large-up) {
+    @include span-columns(6);
+  }
+
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+}
