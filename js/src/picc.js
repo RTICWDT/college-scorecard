@@ -80,7 +80,7 @@ picc.API = (function() {
    * @return {Object} the d3.xhr() wrapper object
    */
   API.get = function(uri, params, done) {
-    console.debug('[API] get("%s", %s)', uri, JSON.stringify(params));
+    // console.info('[API] get("%s", %s)', uri, JSON.stringify(params));
     if (arguments.length === 2) {
       done = params;
       params = addAPIKey({});
