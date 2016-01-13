@@ -223,7 +223,7 @@ describe('school page', function() {
 
     urls.forEach(function*(url) {
       yield loadSchoolUrl(url);
-      meters.forEach(function*(url) {
+      meters.forEach(function*(meter) {
         var meterResult = yield getMeterClass(meter);
         var name = yield getSchoolName();
         assert(meterResult.indexOf('no_data') === -1,
