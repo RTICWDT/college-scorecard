@@ -1,4 +1,5 @@
 var tagalong = require('tagalong');
+var d3 = require('d3');
 
 module.exports = function school() {
 
@@ -206,7 +207,12 @@ module.exports = function school() {
         position: 'bottomleft',
         prefix: false
       })
-      .addAttribution('Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>.<br>Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.')
+      .addAttribution([
+        'Map tiles by <a href="http://stamen.com">Stamen Design</a>, ',
+        'under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>.',
+        '<br>Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, ',
+        'under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
+      ].join(''))
       .addTo(map);
 
     var marker = L.circle(center, 1200, {
