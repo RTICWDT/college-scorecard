@@ -122,8 +122,6 @@ describe('search', function() {
     assert.equal(yield utils.getSearchCount(), results.spotChecks.allSchools);
   });
 
-  // Check include Online-Only isn't implemented 
-
   /*
     Size
   */
