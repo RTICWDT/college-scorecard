@@ -1,10 +1,10 @@
 # test against different APIs based on the branch being built
 if [ $CIRCLE_BRANCH ]; then
-    if [ $branch == 'master' ]; then
+    if [ $branch = 'master' ]; then
 
         echo "[using the default (production) API]"
 
-    elif [ $branch == 'staging' ]; then
+    elif [ $branch = 'staging' ]; then
 
         echo "[using the staging API]"
         API_BASE_URL=https://api.data.gov/TEST/ed/staging/v1/
