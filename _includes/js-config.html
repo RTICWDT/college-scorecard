@@ -2,7 +2,6 @@
   picc.BASE_URL = '{{ site.baseurl }}';
   picc.SITE_BRANCH = '{{ site.branch }}';
 
-  // site.API = {{ site.API|jsonify }};
   {% if site.API[site.branch] %}
   picc.API.url = '{{ site.API[site.branch].baseurl }}';
   picc.API.key = '{{ site.API[site.branch].key }}';
