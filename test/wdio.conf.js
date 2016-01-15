@@ -62,7 +62,7 @@ exports.config = {
 
     //
     // Default timeout for all waitForXXX commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 20000,
 
     //
     // Initialize the browser instance with a WebdriverIO plugin. The object
