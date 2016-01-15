@@ -25,6 +25,13 @@ fi
 
 # build the site
 bundle exec jekyll build
+
+# serve it up statically, in the background
 ./node_modules/.bin/http-server -p 4000 _site &
-wget --retry-connrefused --waitretry=1 -T 5 -t 30 http://localhost:4000 || exit 1
-./node_modules/.bin/wdio test/wdio.ci.js
+pid=$!
+
+# wait for the http server to start
+wget --retry-connrefused --waitretry=1 -T 5 -t 30 -qO- http://localhost:4000 > /dev/null || exit 1
+
+# and run the tests
+./node_modules/.bin/wdio test/wdio.ci.js || (kill -9 $pid; exit 1)
