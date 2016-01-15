@@ -6,9 +6,11 @@ var extend = require('extend');
 
 // expected default parameters
 const EXPECTED_DEFAULTS = {
+  '2013.academics.program_available.assoc_or_bachelors': true,
   '2013.student.size__range': '0..',
-  'school.degrees_awarded.predominant__range': '2..3',
-  'school.operating': '1'
+  'school.degrees_awarded.predominant__range': '1..3',
+  'school.degrees_awarded.highest__range': '2..4',
+  'school.operating': 1
 };
 
 /**
@@ -49,7 +51,23 @@ describe('picc.form', function() {
       }));
     });
 
-    describe('majors', function() {
+    it('searches for associates degrees', function() {
+      assert.deepEqual(prep({degree: 'a'}), fromDefaults({
+        '2013.academics.program_available.assoc': true
+      }, [ // omit
+        '2013.academics.program_available.assoc_or_bachelors'
+      ]));
+    });
+
+    it('searches for bachelors degrees', function() {
+      assert.deepEqual(prep({degree: 'b'}), fromDefaults({
+        '2013.academics.program_available.bachelors': true
+      }, [ // omit
+        '2013.academics.program_available.assoc_or_bachelors'
+      ]));
+    });
+
+    xdescribe('majors', function() {
 
       it('can query associates degrees', function() {
         assert.deepEqual(prep({

@@ -80,7 +80,7 @@ picc.API = (function() {
    * @return {Object} the d3.xhr() wrapper object
    */
   API.get = function(uri, params, done) {
-    // console.debug('[API] get("%s", %s)', uri, JSON.stringify(params));
+    // console.info('[API] get("%s", %s)', uri, JSON.stringify(params));
     if (arguments.length === 2) {
       done = params;
       params = addAPIKey({});
@@ -89,7 +89,7 @@ picc.API = (function() {
     }
     if (params) uri = join([uri, params], '?');
     var url = API.url ? join([API.url, uri], '/') : uri;
-    // console.info('[API] get: "%s"', url);
+    console.info('[API] get: "%s"', url);
     return d3.json(url, function(error, data) {
       if (data && data.errors && data.errors.length) {
         error = data.errors[0];
@@ -459,6 +459,7 @@ picc.fields = {
   MINORITY_SERVING:     'school.minority_serving',
 
   PREDOMINANT_DEGREE:   'school.degrees_awarded.predominant',
+  HIGHEST_DEGREE:   'school.degrees_awarded.highest',
   UNDER_INVESTIGATION:  'school.under_investigation',
 
   // net price
@@ -484,6 +485,7 @@ picc.fields = {
 
   PROGRAM_PERCENTAGE:   '2013.academics.program_percentage',
   PROGRAM_OFFERED:      '2013.academics.program',
+  DEGREE_OFFERED:       '2013.academics.program_available',
 
   PART_TIME_SHARE:      '2013.student.part_time_share',
   FEMALE_SHARE:         '2013.student.demographics.female_share',
@@ -1229,7 +1231,12 @@ picc.form.prepareParams = (function() {
     },
 
     degree: function(query, value, key) {
-      query[key] = mapDegree(value);
+      if (value === 'a') {
+        query[picc.fields.DEGREE_OFFERED + '.assoc'] = true;
+      } else if (value === 'b') {
+        query[picc.fields.DEGREE_OFFERED + '.bachelors'] = true;
+      }
+      delete query[key];
     },
 
     // XXX: this is only used for testing
@@ -1299,6 +1306,10 @@ picc.form.prepareParams = (function() {
     delete query.online;
     */
 
+    if (!query.degree) {
+      query[fields.DEGREE_OFFERED + '.assoc_or_bachelors'] = true;
+    }
+
     for (var key in query) {
       var v = query[key];
 
@@ -1327,14 +1338,11 @@ picc.form.prepareParams = (function() {
       }
     }
 
-    // set the predominant degree, which can be either a value or
-    // a range (default: '2..3')
-    if (query.degree) {
-      picc.data.rangify(query, picc.fields.PREDOMINANT_DEGREE, query.degree);
-      delete query.degree;
-    } else {
-      query[picc.fields.PREDOMINANT_DEGREE + '__range'] = '2..3';
-    }
+    // set the predominant degree to range '1..3' because ED expert guidance
+    query[picc.fields.PREDOMINANT_DEGREE + '__range'] = '1..3';
+
+    // set the highest degree to range '2..4' to exclude certificate only schools
+    query[picc.fields.HIGHEST_DEGREE + '__range'] = '2..4';
 
     return query;
   };
