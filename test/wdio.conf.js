@@ -13,10 +13,12 @@ exports.config = {
     specs: [
         './test/spec/**/*.js'
     ],
+
     // Patterns to exclude.
     exclude: [
         //''
     ],
+
     //
     // ============
     // Capabilities
@@ -35,6 +37,7 @@ exports.config = {
         browserName: 'chrome',
         maxDuration: 4000
     }],
+
     //
     // ===================
     // Test Configurations
@@ -43,19 +46,24 @@ exports.config = {
     //
     // Level of logging verbosity.
     logLevel: 'silent',
+
     //
     // Enables colors for log output.
     coloredLogs: true,
+
     //
     // Saves a screenshot to a given path if a command fails.
     screenshotPath: './screenshots',
+
     //
     // Set a base URL in order to shorten url command calls. If your url
     // parameter starts with "/", the base url gets prepended.
     baseUrl: 'http://localhost:4000',
+
     //
     // Default timeout for all waitForXXX commands.
     waitforTimeout: 10000,
+
     //
     // Initialize the browser instance with a WebdriverIO plugin. The object
     // should have the plugin name as key and the desired plugin options as
@@ -86,6 +94,7 @@ exports.config = {
     // Jasmine: `$ npm install jasmine`
     // Cucumber: `$ npm install cucumber`
     framework: 'mocha',
+
     //
     // Test reporter for stdout.
     // The following are supported: dot (default), spec and xunit
@@ -112,6 +121,7 @@ exports.config = {
     onPrepare: function() {
         // do something
     },
+
     //
     // Gets executed before test execution begins. At this point you will have
     // access to all global variables like `browser`. It is the perfect place to
@@ -119,12 +129,14 @@ exports.config = {
     before: function() {
         // do something
     },
+
     //
     // Gets executed after all tests are done. You still have access to all
     // global variables from the test.
     after: function(failures, pid) {
         // do something
     },
+
     //
     // Gets executed after all workers got shut down and the process is about to
     // exit. It is not possible to defer the end of the process using a promise.
