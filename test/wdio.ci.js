@@ -10,9 +10,13 @@ if (job) {
   config.build = jobID;
 }
 
-config.reporter = 'xunit';
-config.reporterOptions = {
-  outputDir: process.env.CIRCLE_TEST_REPORTS
-};
+if (process.env.TEST_REPORTER) {
+  config.reporter = process.env.TEST_REPORTER;
+} else {
+  config.reporter = 'xunit';
+  config.reporterOptions = {
+    outputDir: process.env.CIRCLE_TEST_REPORTS
+  };
+}
 
 exports.config = config;
