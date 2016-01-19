@@ -346,7 +346,7 @@ picc.format = (function() {
       '2': '2',
       '3': '4',
       //'4': 'Graduate'
-    }, NA)),
+    }, '')),
 
     empty: function(key) {
       key = picc.access(key);
@@ -796,6 +796,8 @@ picc.school.directives = (function() {
     }
   };
 
+  var years = format.preddeg(fields.PREDOMINANT_DEGREE);
+
   return {
     title: {
       link: {
@@ -858,7 +860,17 @@ picc.school.directives = (function() {
       '@class': format.localeClass(fields.LOCALE),
       value: format.locale(fields.LOCALE)
     },
-    years:          format.preddeg(fields.PREDOMINANT_DEGREE),
+
+    years: {
+      '@class': function(d) {
+        return years(d) ? 'n-year' : 'certificate';
+      },
+      number: years,
+      label: function(d) {
+        return years(d) ? 'Year' : 'Certificate';
+      }
+    },
+
     size_category: {
       '@class': format.sizeCategoryClass(fields.SIZE),
       value: format.sizeCategory(fields.SIZE)
