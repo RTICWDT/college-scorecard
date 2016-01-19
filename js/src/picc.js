@@ -1664,7 +1664,7 @@ picc.tooltip = {
     var outer = parent.getBoundingClientRect();
     parent.appendChild(tooltip);
 
-    rect = content.getBoundingClientRect();
+    var rect = content.getBoundingClientRect();
 
     var margin = 10;
     var offsetWidth = (rect.width - outer.width) / 2;
