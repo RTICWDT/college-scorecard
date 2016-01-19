@@ -151,6 +151,14 @@
         display: block;
         font-weight: $weight-bold;
         margin-top: -$height;
+
+        &:empty {
+          margin-top: -20px;
+        }
+      }
+
+      &.certificate {
+        margin-right: 25px;
       }
     }
   }
