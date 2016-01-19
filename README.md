@@ -12,36 +12,30 @@ This repo contains the front end of a web app with its API created by an instanc
 This site is made with [Jekyll]. Once you've got [Ruby] on your computer, you
 can run:
 
-```sh
-gem install github-pages
-```
+    gem install github-pages
 
 (Note: depending on how Ruby was installed, you may need to prefix the above
 command with `sudo`.)
 
 Then install all the ruby gems you need:
 
-```
-bundle
-```
+    bundle
 
 This Jekyll site features dynamic Javascript that queries [api.data.gov](https://api.data.gov/). 
 For the Javascript to work, it needs an API key (register for one at 
-[api.data.gov/signup/](https://api.data.gov/signup/))
-and a base URL. Jekyll will pull them from the local machine's
-environment variables at build time, so ensure that both the `API_KEY` and
-`API_BASE_URL` variables are set before running build scripts. On a Mac using the production api 
-endpoint this is how to set those variables:
+[api.data.gov/signup/](https://api.data.gov/signup/)) and a base URL. Jekyll will pull them from the local machine's
+environment variables at build time, so ensure that both the `API_KEY` and `API_BASE_URL` variables are set before running build scripts.
 
-```
-export API_KEY=yourkeyhere; export API_BASE_URL=https://api.data.gov/ed/collegescorecard/v1/
-```
+Install [`autoenv`](https://github.com/kennethreitz/autoenv). Create a `.env` file in this directory, where you can place your `API_KEY` that you've received in the email. Below is a sample `.env` file:
+
+    export API_KEY=<yourkeyhere>
+    export API_BASE_URL=https://api.data.gov/ed/collegescorecard/v1/
+
+Every time you `cd college-choice`, the envronmental variables specified in `.env` will be sourced.
 
 To start up the local server, run:
 
-```sh
-jekyll serve --baseurl='' -w
-```
+    jekyll serve --baseurl='' -w
 
 Then visit [http://localhost:4000](http://localhost:4000) to view it. The `-w`
 (or `--watch`) flag tells Jekyll to rebuild the relevant pages when you edit
@@ -60,38 +54,39 @@ the source files.
 
 ## Running the API Locally
 
-To set up the API (as a developer), follow the [Open Data Maker installation instructions](https://github.com/18F/open-data-maker/blob/dev/INSTALL.md) then:
+To set up the API (as a developer), follow the [Open Data Maker installation instructions](https://github.com/18F/open-data-maker/blob/dev/INSTALL.md) until you reach the point
+in which Elastic Search is successfully [installed](https://github.com/18F/open-data-maker/blob/dev/INSTALL.md#make-sure-elasticsearch-is-up-and-running) on your computer.
 
-1. download the [full data set](https://s3.amazonaws.com/ed-college-choice-public/CollegeScorecard_Raw_Data.zip) into open-data-maker directory and rename the folder as "real-data"
-2. set DATA_PATH environment variable.  On the command line:
-```
-export DATA_PATH=./real-data
-```
+Then make a new folder called `real-data`. This is the folder where you'll place new custom college-specific data.
 
-3. This application uses only most recent data.  To speed up start up time, edit `data.yaml` file inside the `real-data` directory to limit the number of files indexed to 4 (year 2013 is included twice, once for the columns that are not specific to any year, and once for the 2013 data, then 2012 and 2011).  Optionally, limiting the number of rows will reduce the set of colleges in the data set and is helpful for testing since it speeds startup time significantly:
-```
-options:
-  limit_files: 4
-  limit_rows: 100
-```
+1. Download the [full data set](https://s3.amazonaws.com/ed-college-choice-public/CollegeScorecard_Raw_Data.zip) into the `open-data-maker` directory and rename that folder to `real-data`. Remove any pdf files in the `real-data` directory; only `*.csv` and `.yaml` files should exist there. You should see the expected contents:
 
-To create the API for the complete set of schools, comment out the `limit_rows` option by adding a `#` to the start of the line:
 
-```
-options:
-  limit_files: 4
-#  limit_rows: 100
-```
+        /open-data-maker/real-data$ ls
+        CollegeScorecardDataDictionary-09-12-2015.csv   MERGED2002_PP.csv                               MERGED2009_PP.csv
+        MERGED1996_PP.csv                               MERGED2003_PP.csv                               MERGED2010_PP.csv
+        MERGED1997_PP.csv                               MERGED2004_PP.csv                               MERGED2011_PP.csv
+        MERGED1998_PP.csv                               MERGED2005_PP.csv                               MERGED2012_PP.csv
+        MERGED1999_PP.csv                               MERGED2006_PP.csv                               MERGED2013_PP.csv
+        MERGED2000_PP.csv                               MERGED2007_PP.csv                               data_dictionary.yaml
+        MERGED2001_PP.csv                               MERGED2008_PP.csv
 
-3. Start Open Data Maker.  On the command line, from the open-data-maker directory:
-```
-padrino start
-```
 
-4. To view progress of indexing, it is helpful to look at the development log in another terminal window:
-```
-tail -f log/development.log
-```
+2. Set the `DATA_PATH` environment variable and import the data.
+
+        export DATA_PATH=./real-data
+        rake import
+
+3. *OPTIONAL*: To speed up start up time, edit `data_dictionary.yaml` file inside the `real-data` directory to limit the number of files indexed and the number of rows.  These limits reduce the set of colleges in the data set and is helpful for testing since it speeds startup time significantly:
+
+        options:
+          limit_files: 4
+          limit_rows: 100
+
+4. Start Open Data Maker.  On the command line, from the open-data-maker directory:
+
+        padrino start
+
 ## Content
 
 For the content on the College Scorecard, we are following the [18F Content Guide](https://pages.18f.gov/content-guide/).
