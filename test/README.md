@@ -1,6 +1,6 @@
 # Frontend Tests
 
-This directory contains Node.js scripts that run under [Nightwatch],
+This directory contains Node.js scripts that run under [WebDriverIO],
 which in turn uses [Selenium WebDriver] to programmatically control
 both local and remote browsers (in our case, running on [Sauce
 Labs]) and run functional tests against them.
@@ -18,11 +18,10 @@ In order to run the tests, you'll need...
     brew install node
     ```
 
-1. The requisite JavaScript dependencies, including [Nightwatch] and
-   [PhantomJS]:
+1. The requisite JavaScript dependencies, including [WebDriverIO]:
 
     ```sh
-    npm install --dev
+    npm install
     ```
 
 ## Local Testing
@@ -46,12 +45,25 @@ webdriver-manager start
 you'll either have to background it explicitly or run it in a
 separate shell from the other commands.
 
-From here you can run the tests headlessly in [PhantomJS] with:
+The tests depend on fetching the site from `http://localhost:4000/` . The
+simplest way of building the site and running the server in one go is with `jekyll serve`, which you should leave running in another shell:
+
+```sh
+bundle exec jekyll serve
+```
+
+Once the server is up, you can run the tests in Chrome with:
 
 ```sh
 npm test
 ```
 
+The complete test suite takes several minutes to run. You can exclude
+the data count tests by running:
+
+```sh
+npm run test-quick
+```
 
 ## Testing with Sauce Labs
 
@@ -78,46 +90,15 @@ Then you can run your tests on Sauce Labs with either of the
 following commands:
 
 ```sh
-npm run test:sauce
+npm run test-sauce
 # which just calls:
-./test/runner.sh sauce
-```
-
-
-## The Test Runner
-
-The `runner.sh` script called by `npm test` starts the Jekyll server
-in the background, sleeps for a couple of seconds to let it start
-up, then runs the function tests against one or more [Nightwatch]
-environments, most of which correspond to different browsers in our
-configuration.
-
-By default (without any arguments), tests will be run against
-[PhantomJS] running locally. You can provide one or more arguments
-to run the tests on [Sauce Labs] against those browsers:
-
-```sh
-# PhantomJS locally
-./test/runner.sh
-# Chrome on Sauce Labs
-./test/runner.sh sauce
-# Chrome, IE9 and Firefox on Sauce Labs
-./test/runner.sh chrome ie9 firefox
-```
-
-**Note:** If you're already running the Jekyll server (e.g. with
-`jekyll serve -w` to develop the site) and want to run cross-browser
-tests against your local machine with [Sauce Connect], then you can
-instead run:
-
-```sh
-./test/browsers.sh chrome ie9 firefox
+wdio test/wdio.sauce.js
 ```
 
 If the tests fail to run, check the output for an error like:
 
 ```
-Error processing the server response: 
+Error processing the server response:
 Sauce Labs Authentication Error.
 You used username 'username' and access key '...' to authenticate,
 which are not valid Sauce Labs credentials.
@@ -125,21 +106,23 @@ which are not valid Sauce Labs credentials.
 
 If you see this, make sure that you've [exported][export variables]
 your `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` environment variables,
-which [Nightwatch] needs to authenticate with Sauce Labs.
+which [WebDriverIO] needs to authenticate with Sauce Labs.
 
-## Testing on Travis
+NOTE: By default, the data count tests are not run on Sauce. You can
+enable them by replacing the reference to `./wdio.quick` with
+`./wdio.conf` in `wdio.sauce.js`.
 
-On [Travis] we run cross-browser tests with:
+## Testing on CircleCI
+
+On [CircleCI] we run cross-browser tests with:
 
 ```sh
-npm run test:travis
+npm run test-ci
 ```
 
-The requests are tunneled through [Sauce Connect]. The list of
-browsers to run against are listed in the [package.json](../package.json)'s
-`test:travis` script directive.
+The requests are tunneled through [Sauce Connect]. 
 
-[Nightwatch]: http://nightwatchjs.org/
+[WebDriverIO]: http://webdriver.io/
 [Node.js]: https://nodejs.org/
 [PhantomJS]: http://phantomjs.org/
 [Sauce Connect]: https://docs.saucelabs.com/reference/sauce-connect/
@@ -149,5 +132,5 @@ browsers to run against are listed in the [package.json](../package.json)'s
 [npm]: https://www.npmjs.org/
 [sauceconnect-runner]: https://github.com/shawnbot/sauceconnect-runner
 [webdriver-manager]: https://www.npmjs.com/package/webdriver-manager
-[Travis]: https://travis-ci.org/
+[CircleCI]: https://circleci.com/
 [export variables]: https://docs.saucelabs.com/tutorials/js-unit-testing/#exporting-credentials-on-mac-linux

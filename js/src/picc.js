@@ -1,8 +1,11 @@
-// aight, for polyfilling common JS APIs
-require('aight');
+'use strict';
 
-// web components
-require('./components');
+if (typeof window !== 'undefined') {
+  // aight, for polyfilling common JS APIs
+  require('aight');
+  // web components
+  require('./components');
+}
 
 var querystring = require('querystring');
 var d3 = require('d3');
@@ -77,7 +80,7 @@ picc.API = (function() {
    * @return {Object} the d3.xhr() wrapper object
    */
   API.get = function(uri, params, done) {
-    // console.debug('[API] get("%s", %s)', uri, JSON.stringify(params));
+    // console.info('[API] get("%s", %s)', uri, JSON.stringify(params));
     if (arguments.length === 2) {
       done = params;
       params = addAPIKey({});
@@ -85,8 +88,8 @@ picc.API = (function() {
       params = addAPIKey(params);
     }
     if (params) uri = join([uri, params], '?');
-    var url = join([API.url, uri], '/');
-    console.debug('[API] get: "%s"', url);
+    var url = API.url ? join([API.url, uri], '/') : uri;
+    console.info('[API] get: "%s"', url);
     return d3.json(url, function(error, data) {
       if (data && data.errors && data.errors.length) {
         error = data.errors[0];
@@ -96,7 +99,7 @@ picc.API = (function() {
   };
 
   /**
-   * Generate a endpoint function that hits a fixed URI.
+   * Generate an endpoint function that hits a fixed URI.
    *
    * @example
    * API.search = API.endpoint('search/');
@@ -343,7 +346,7 @@ picc.format = (function() {
       '2': '2',
       '3': '4',
       //'4': 'Graduate'
-    }, NA)),
+    }, '')),
 
     empty: function(key) {
       key = picc.access(key);
@@ -456,6 +459,7 @@ picc.fields = {
   MINORITY_SERVING:     'school.minority_serving',
 
   PREDOMINANT_DEGREE:   'school.degrees_awarded.predominant',
+  HIGHEST_DEGREE:   'school.degrees_awarded.highest',
   UNDER_INVESTIGATION:  'school.under_investigation',
 
   // net price
@@ -481,6 +485,7 @@ picc.fields = {
 
   PROGRAM_PERCENTAGE:   '2013.academics.program_percentage',
   PROGRAM_OFFERED:      '2013.academics.program',
+  DEGREE_OFFERED:       '2013.academics.program_available',
 
   PART_TIME_SHARE:      '2013.student.part_time_share',
   FEMALE_SHARE:         '2013.student.demographics.female_share',
@@ -791,6 +796,8 @@ picc.school.directives = (function() {
     }
   };
 
+  var years = format.preddeg(fields.PREDOMINANT_DEGREE);
+
   return {
     title: {
       link: {
@@ -853,7 +860,17 @@ picc.school.directives = (function() {
       '@class': format.localeClass(fields.LOCALE),
       value: format.locale(fields.LOCALE)
     },
-    years:          format.preddeg(fields.PREDOMINANT_DEGREE),
+
+    years: {
+      '@class': function(d) {
+        return years(d) ? 'n-year' : 'certificate';
+      },
+      number: years,
+      label: function(d) {
+        return years(d) ? 'Year' : 'Certificate';
+      }
+    },
+
     size_category: {
       '@class': format.sizeCategoryClass(fields.SIZE),
       value: format.sizeCategory(fields.SIZE)
@@ -1226,7 +1243,12 @@ picc.form.prepareParams = (function() {
     },
 
     degree: function(query, value, key) {
-      query[key] = mapDegree(value);
+      if (value === 'a') {
+        query[picc.fields.DEGREE_OFFERED + '.assoc'] = true;
+      } else if (value === 'b') {
+        query[picc.fields.DEGREE_OFFERED + '.bachelors'] = true;
+      }
+      delete query[key];
     },
 
     // XXX: this is only used for testing
@@ -1296,6 +1318,10 @@ picc.form.prepareParams = (function() {
     delete query.online;
     */
 
+    if (!query.degree) {
+      query[fields.DEGREE_OFFERED + '.assoc_or_bachelors'] = true;
+    }
+
     for (var key in query) {
       var v = query[key];
 
@@ -1324,14 +1350,11 @@ picc.form.prepareParams = (function() {
       }
     }
 
-    // set the predominant degree, which can be either a value or
-    // a range (default: '2..3')
-    if (query.degree) {
-      picc.data.rangify(query, picc.fields.PREDOMINANT_DEGREE, query.degree);
-      delete query.degree;
-    } else {
-      query[picc.fields.PREDOMINANT_DEGREE + '__range'] = '2..3';
-    }
+    // set the predominant degree to range '1..3' because ED expert guidance
+    query[picc.fields.PREDOMINANT_DEGREE + '__range'] = '1..3';
+
+    // set the highest degree to range '2..4' to exclude certificate only schools
+    query[picc.fields.HIGHEST_DEGREE + '__range'] = '2..4';
 
     return query;
   };
@@ -1641,7 +1664,7 @@ picc.tooltip = {
     var outer = parent.getBoundingClientRect();
     parent.appendChild(tooltip);
 
-    rect = content.getBoundingClientRect();
+    var rect = content.getBoundingClientRect();
 
     var margin = 10;
     var offsetWidth = (rect.width - outer.width) / 2;
@@ -1681,58 +1704,63 @@ picc.pages = {
   school: require('./school')
 };
 
-/**
- * add event listeners for the tooltips by listening for mouseenter,
- * mouseleave, focus and blur events on elements that have an
- * aria-describedby attribute that begins with "tip-".
- */
-picc.ready(function() {
-  var described = 'aria-describedby';
-  picc.delegate(
-    document.body,
-    // if the element matches '[aria-describedby^="tip-"]'
-    function() {
-      return this.hasAttribute(described)
-          && this.getAttribute(described).match(/^tip-/);
-    },
-    // XXX this is a *very* rudimentary way to detect whether the browser
-    // supports touch events.
-    document.body.ontouchstart
-      // with touch enabled, only show on focus/blur and click/tap
-      ? {
-        focus:      picc.tooltip.show,
-        blur:       picc.tooltip.hide,
-        click:      picc.tooltip.toggle
-      }
-      // otherwise, show on enter/leave and focus/blur
-      : {
-        mouseenter: picc.tooltip.show,
-        mouseleave: picc.tooltip.hide,
-        focus:      picc.tooltip.show,
-        blur:       picc.tooltip.hide,
-      }
-  );
-});
 
-// set the "dragging" class when the mouse is down
-d3.select(document)
-  .on('mousedown', function(e) {
-    clearTimeout(this.__dragTimeout);
-    var body = this.body;
-    this.__dragTimeout = setTimeout(function() {
-      // console.info('+ drag');
-      body.classList.add('dragging');
-    }, 100);
-  })
-  .on('mouseup', function(e) {
-    clearTimeout(this.__dragTimeout);
-    // console.info('- drag');
-    this.body.classList.remove('dragging');
-  })
-  .on('click', function(e) {
-    clearTimeout(this.__dragTimeout);
-    // console.info('- drag');
-    this.body.classList.remove('dragging');
+// only do this stuff in the browser
+if (typeof document !== 'undefined') {
+
+  /**
+   * add event listeners for the tooltips by listening for mouseenter,
+   * mouseleave, focus and blur events on elements that have an
+   * aria-describedby attribute that begins with "tip-".
+   */
+  picc.ready(function() {
+    var described = 'aria-describedby';
+    picc.delegate(
+      document.body,
+      // if the element matches '[aria-describedby^="tip-"]'
+      function() {
+        return this.hasAttribute(described)
+            && this.getAttribute(described).match(/^tip-/);
+      },
+      // XXX this is a *very* rudimentary way to detect whether the browser
+      // supports touch events.
+      document.body.ontouchstart
+        // with touch enabled, only show on focus/blur and click/tap
+        ? {
+          focus:      picc.tooltip.show,
+          blur:       picc.tooltip.hide,
+          click:      picc.tooltip.toggle
+        }
+        // otherwise, show on enter/leave and focus/blur
+        : {
+          mouseenter: picc.tooltip.show,
+          mouseleave: picc.tooltip.hide,
+          focus:      picc.tooltip.show,
+          blur:       picc.tooltip.hide,
+        }
+    );
   });
+
+  // set the "dragging" class when the mouse is down
+  d3.select(document)
+    .on('mousedown', function(e) {
+      clearTimeout(this.__dragTimeout);
+      var body = this.body;
+      this.__dragTimeout = setTimeout(function() {
+        // console.info('+ drag');
+        body.classList.add('dragging');
+      }, 100);
+    })
+    .on('mouseup', function(e) {
+      clearTimeout(this.__dragTimeout);
+      // console.info('- drag');
+      this.body.classList.remove('dragging');
+    })
+    .on('click', function(e) {
+      clearTimeout(this.__dragTimeout);
+      // console.info('- drag');
+      this.body.classList.remove('dragging');
+    });
+}
 
 module.exports = picc;
