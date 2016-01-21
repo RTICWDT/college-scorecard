@@ -4,6 +4,10 @@
   "author": "18F",
   "license": "CC0",
   "description": "Scripts for the college-choice project.",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:18F/college-choice.git"
+  },
   "scripts": {
     "build": "browserify `js/src/browserify-args.sh`",
     "watch": "watchify -v `js/src/browserify-args.sh`",
@@ -41,5 +45,8 @@
     "watchify": "^3.6.1",
     "webdriverio": "^3.3.0",
     "xmlhttprequest": "^1.8.0"
+  },
+  "engines": {
+    "node": ">= 4.2.2"
   }
 }

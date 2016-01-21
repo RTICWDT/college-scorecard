@@ -15,7 +15,7 @@ describe('search', function() {
   /*
     Search By Name
   */
-  it('should contain all schools containing "Columbia"', function*() {
+  xit('should contain all schools containing "Columbia"', function*() {
     yield utils.runSearch(function() {
       return browser
         .click('#school-name h1 a')
@@ -30,7 +30,7 @@ describe('search', function() {
     assert.equal(startsWith, results.spotChecks.allStartsWithColumbia);
   });
 
-  it('should contain all schools containing "col"', function*() {
+  xit('should contain all schools containing "col"', function*() {
     yield utils.runSearch(function() {
       return browser
         .click('#school-name h1 a')
@@ -83,7 +83,7 @@ describe('search', function() {
     assert.equal(yield utils.getSearchCount(), results.spotChecks.allInFarWest);
   });
 
-  it('should contain all schools in Zip Code 10023', function*() {
+  xit('should contain all schools in Zip Code 10023', function*() {
     yield utils.runSearch(function() {
       return browser
         .click('#school-location h1 a')
@@ -93,7 +93,7 @@ describe('search', function() {
                  results.spotChecks.allIn10023NoRadius);
   });
 
-  it('should contain all schools in 5 miles of Zip Code 10023', function*() {
+  xit('should contain all schools in 5 miles of Zip Code 10023', function*() {
     yield utils.runSearch(function() {
       return browser
         .click('#school-location h1 a')
@@ -121,8 +121,6 @@ describe('search', function() {
       });
     assert.equal(yield utils.getSearchCount(), results.spotChecks.allSchools);
   });
-
-  // Check include Online-Only isn't implemented 
 
   /*
     Size
