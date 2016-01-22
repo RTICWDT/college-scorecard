@@ -19,8 +19,10 @@
     "jasmine",
     "beforeEach",
     "describe",
+    "xdescribe",
     "expect",
     "it",
+    "xit",
 
     "angular",
     "inject",

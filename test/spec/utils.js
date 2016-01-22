@@ -3,7 +3,8 @@
 exports.getSearchCount = function*() {
   var value = yield browser
     .waitForExist(
-      '.results-main-alert .u-group_inline-left h1 span:first-child', 5000)
+      '.results-main-alert .u-group_inline-left h1 span:first-child'
+    )
     .waitUntil(function() {
       return this.getText(
         '.results-main-alert .u-group_inline-left h1 span:last-child')
