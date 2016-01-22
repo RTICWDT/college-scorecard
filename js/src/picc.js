@@ -666,7 +666,9 @@ picc.access.partTimeShare = picc.access.composed(
 // only use full-time retention rate, branching on year designation
 picc.access.retentionRate = function(d) {
   var retention = picc.access(picc.fields.RETENTION_RATE)(d);
+  /* jshint ignore:start */
   return retention.four_year.full_time || retention.lt_four_year.full_time;
+  /* jshint ignore:end */
 };
 
 picc.access.size = picc.access.composed(
