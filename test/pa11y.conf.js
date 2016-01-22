@@ -49,11 +49,7 @@ const IGNORE_MESSAGES = [
   // Warning: Anchor elements should not be used for defining in-page link
   // targets. If not using the ID for other purposes (such as CSS or
   // scripting), consider moving it to a parent element.
-  'WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.A.NoHref',
-
-  // Error: Duplicate id attribute value "xxx" found on the web page.
-  // XXX: these appear to be false positives in HTML_Code_Sniffer
-  'WCAG2AA.Principle4.Guideline4_1.4_1_1.F77'
+  'WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.A.NoHref'
 ];
 
 // ignore all of the above, plus all notices
