@@ -7,8 +7,12 @@ dependencies:
     - tar -xzf sc-latest-linux.tar.gz
 test:
   override:
-    # run unit tests before browser tests with Sauce Labs
+    # create directories for xunit reports
     - mkdir $CIRCLE_TEST_REPORTS/mocha
+    - mkdir $CIRCLE_TEST_REPORTS/browser
+    - mkdir $CIRCLE_TEST_REPORTS/a11y
+
+    # run unit tests before browser tests with Sauce Labs
     - XUNIT_FILE=$CIRCLE_TEST_REPORTS/mocha/unit.xml npm run test-unit-ci
 
     # open a Sauce Connect tunnel
@@ -25,7 +29,6 @@ test:
     - ln -s /tmp
 
     # run the browser tests
-    - mkdir $CIRCLE_TEST_REPORTS/browser
     - ./test/ci.sh
   post:
     - killall --wait sc  # wait for Sauce Connect to close the tunnel
