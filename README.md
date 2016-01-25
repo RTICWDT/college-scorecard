@@ -102,6 +102,15 @@ instructions](https://github.com/18F/open-data-maker/blob/dev/INSTALL.md) then:
       limit_rows: 100
     ```
 
+    To create the API for the complete set of schools, comment out the `limit_rows`
+    option by adding a `#` to the start of the line:
+
+    ```yaml
+    options:
+      limit_files: 4
+    #  limit_rows: 100
+    ```
+
 1. Start Open Data Maker.  On the command line, from the open-data-maker
    directory:
 
