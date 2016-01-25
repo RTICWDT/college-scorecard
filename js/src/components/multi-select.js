@@ -35,6 +35,7 @@
           // listen for change events, and hide it
           this.__select.addEventListener('change', this.__onchange = onchange.bind(this));
           this.__select.style.display = 'none';
+          this.__select.setAttribute('aria-hidden', 'true');
 
           this.__pollID = setInterval(pollSourceSelect.bind(this), 200);
         }},
