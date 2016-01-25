@@ -3,10 +3,11 @@
 A website that allows students (high school and adult) and those who support them (parents, guidance counselors)
 to not only search among colleges to find schools that would meet their desires, but also encourage them to consider
 "value" factors, be exposed to schools with better outcomes, and allow users to compare and contrast schools across
-different dimensions of "fit," highlighting "value" factors. The goal is to enable people to find schools that are 
+different dimensions of "fit," highlighting "value" factors. The goal is to enable people to find schools that are
 best suited to them, and ensure a broad and flexible definition of elements that contribute to "fit."
 
 This repo contains the front end of a web app with its API created by an instance of [Open Data Maker](https://github.com/18F/open-data-maker) which is configured with a specific data set. For more details on setting up the back end of the web app, see below: [Running the API Locally](#running-the-api-locally).  However, you can run the web app with the hosted API following the installation instructions in the next section.
+
 
 ## Installation
 This site is made with [Jekyll]. Once you've got [Ruby] on your computer, you
@@ -30,7 +31,7 @@ For the JavaScript to work, it needs an API key (register for one at
 [api.data.gov/signup/](https://api.data.gov/signup/))
 and a base URL. Jekyll will pull them from the local machine's
 environment variables at build time, so ensure that both the `API_KEY` and
-`API_BASE_URL` variables are set before running build scripts. On a Mac using the production api 
+`API_BASE_URL` variables are set before running build scripts. On a Mac using the production api
 endpoint this is how to set those variables:
 
 ```
@@ -73,8 +74,8 @@ For the content on the College Scorecard, we are following the [18F Content
 Guide](https://pages.18f.gov/content-guide/).
 
 
-## Running the API Locally
 
+## Running the API Locally
 To set up the API (as a developer), follow the [Open Data Maker installation
 instructions](https://github.com/18F/open-data-maker/blob/dev/INSTALL.md) then:
 
@@ -101,15 +102,6 @@ instructions](https://github.com/18F/open-data-maker/blob/dev/INSTALL.md) then:
       limit_rows: 100
     ```
 
-    To create the API for the complete set of schools, comment out the `limit_rows`
-    option by adding a `#` to the start of the line:
-
-    ```yaml
-    options:
-      limit_files: 4
-    #  limit_rows: 100
-    ```
-
 1. Start Open Data Maker.  On the command line, from the open-data-maker
    directory:
 
@@ -123,6 +115,19 @@ instructions](https://github.com/18F/open-data-maker/blob/dev/INSTALL.md) then:
     ```sh
     tail -f log/development.log
     ```
+
+
+## System Architecture
+This repository drives the "front end" of the College Scorecard application and
+is hosted on [Federalist](https://github.com/18F/federalist). The back end is
+an instance of the [Open Data Maker](https://github.com/18F/open-data-maker/).
+Here's how the different parts work together in our production environment:
+
+![system architecture](docs/architecture-diagram.png)
+
+
+## Content
+For the content on the College Scorecard, we are following the [18F Content Guide](https://pages.18f.gov/content-guide/).
 
 
 [Montserrat]: https://www.google.com/fonts/specimen/Montserrat
