@@ -52,13 +52,13 @@
 
         <div class="input-add group_inline">
 
-          <label for="select-state">
+          <label id="label-select-state">
             Select one or more states
           </label>
 
           <multi-select>
             <div class="u-group_inline u-group_inline-left">
-              <select id="select-state" class="select-state" name="state">
+              <select aria-labelledby="label-select-state" class="select-state" name="state">
                 <option value="" selected>Any</option>
                 {% for state in site.data.states|sort('name') %}
                 <option value="{{ state.abbr }}">{{ state.name }}</option>
@@ -79,13 +79,13 @@
 
         <div class="input-add group_inline">
 
-          <label for="select-region">
+          <label id="label-select-region">
             Select one or more regions
           </label>
 
           <multi-select>
             <div class="u-group_inline u-group_inline-left">
-              <select id="select-region" class="select-region" name="region">
+              <select aria-labelledby="label-select-region" class="select-region" name="region">
                 <option value="" selected>Any</option>
                 {% for region in site.data.regions|sort('name') %}
                 <option value="{{ region.id }}" data-states="{{ region.states }}">{{ region.name }}</option>
