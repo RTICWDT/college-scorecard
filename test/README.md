@@ -1,16 +1,20 @@
-# Frontend Tests
+# Tests
+This directory contains scripts that test various aspects of the site:
 
-This directory contains Node.js scripts that run under [WebDriverIO],
-which in turn uses [Selenium WebDriver] to programmatically control
-both local and remote browsers (in our case, running on [Sauce
-Labs]) and run functional tests against them.
+1. [Unit tests](#unit-tests) ensure that our "core" JavaScript works
+   the way we expect it to in isolation.
+1. [Functional tests](#functional-tests) validate the behavior of the site in
+   real browsers.
+1. [Accessibility tests](#accessibility-tests) ensure that our markup meets
+   the industry standard Web Content Accessibility Guidelines.
 
 **Note:** All of the commands in this guide should be run from the
 root directory of this repo!
 
+
 ## Setting Up
 
-In order to run the tests, you'll need...
+In order to run the tests, you'll need:
 
 1. [Node.js] and [npm], which you can install on OS X with:
 
@@ -21,10 +25,26 @@ In order to run the tests, you'll need...
 1. The requisite JavaScript dependencies, including [WebDriverIO]:
 
     ```sh
-    npm install
+    npm install --dev
     ```
 
-## Local Testing
+
+## Unit Tests
+The `unit` directory contains unit tests for our core JavaScript functionality.
+These tests are run with [mocha] like so, from the project root directory:
+
+```sh
+npm run test-unit
+```
+
+## Functional Tests
+
+Our functional (browser) test suite uses [WebDriverIO], which in turn uses
+[Selenium WebDriver] to programmatically control both local and remote browsers
+(in our case, running on [Sauce Labs]) and run functional tests against them.
+These test suite files live in the `functional` directory.
+
+### Local Testing
 
 For local testing you'll need [Selenium Server][Selenium Server]
 (which, unfortunately, requires Java), which can be installed with
@@ -65,7 +85,7 @@ the data count tests by running:
 npm run test-quick
 ```
 
-## Testing with Sauce Labs
+### Testing with Sauce Labs
 
 For testing with [Sauce Labs] you'll need [Sauce Connect], which you
 can get with [sauceconnect-runner]:
@@ -112,7 +132,7 @@ NOTE: By default, the data count tests are not run on Sauce. You can
 enable them by replacing the reference to `./wdio.quick` with
 `./wdio.conf` in `wdio.sauce.js`.
 
-## Testing on CircleCI
+### Testing on CircleCI
 
 On [CircleCI] we run cross-browser tests with:
 
@@ -121,6 +141,29 @@ npm run test-ci
 ```
 
 The requests are tunneled through [Sauce Connect]. 
+
+
+## Accessibility Tests
+
+We use [pa11y] to ensure that the site meets [Web Content Accessibility
+Guidelines 2.0][WCAG 2.0], level AA. To run the test suite, first start the
+Jekyll server:
+
+```sh
+jekyll serve
+# or:
+bundle exec jekyll serve
+```
+
+Then run:
+
+```sh
+npm run test-a11y
+```
+
+The accessibility test runner is [a11y.js](a11y.js), and the pa11y
+configuration lives in [pa11y.conf.js](pa11y.conf.js).
+
 
 [WebDriverIO]: http://webdriver.io/
 [Node.js]: https://nodejs.org/
@@ -134,3 +177,5 @@ The requests are tunneled through [Sauce Connect].
 [webdriver-manager]: https://www.npmjs.com/package/webdriver-manager
 [CircleCI]: https://circleci.com/
 [export variables]: https://docs.saucelabs.com/tutorials/js-unit-testing/#exporting-credentials-on-mac-linux
+[pa11y]: http://pa11y.org/
+[WCAG 2.0]: https://www.w3.org/WAI/WCAG20/quickref/

@@ -15,7 +15,6 @@ permalink: /search/
       <aria-accordion id="filters" class="toggle-accordion">
 
         <div class="toggle-control">
-          <legend>Filter Results</legend>
           <h1 class="search_category">
             <a aria-expanded="false" aria-controls="filter-content">
               <i class="fa fa-filter"></i>Filter Results<i class="fa fa-chevron-down"></i>
@@ -30,7 +29,7 @@ permalink: /search/
 
         </div>
 
-        <input type="submit" class="sr-only">
+        <input type="submit" value="Submit" class="sr-only">
 
       </aria-accordion>
 
@@ -51,7 +50,7 @@ permalink: /search/
 
         </div>
 
-        <input type="submit" class="sr-only">
+        <input type="submit" value="Submit" class="sr-only">
 
       </aria-accordion>
 
@@ -155,15 +154,15 @@ permalink: /search/
                 </ul>
               </div>
 
-              <div id="key-stats" class="school-meters">
+              <div class="school-meters">
 
                 <figure class="meter">
                   <h2 class="figure-heading constrain_width"
                     aria-describedby="tip-avg-cost-year">
                     Average<br>Annual Cost
-                    <a class="tooltip-target u-new_line">
+                    <span class="tooltip-target u-new_line">
                       <i class="fa fa-info-circle"></i>
-                    </a>
+                    </span>
                   </h2>
                   <picc-meter {% include net_price_meter_attributes.html %}>
                   </picc-meter>
@@ -176,9 +175,9 @@ permalink: /search/
                   <h2 class="figure-heading constrain_width"
                     aria-describedby="tip-graduation-rate">
                     Graduation <br>Rate
-                    <a class="tooltip-target u-new_line">
+                    <span class="tooltip-target u-new_line">
                       <i class="fa fa-info-circle"></i>
-                    </a>
+                    </span>
                   </h2>
                   <picc-meter {% include graduation_meter_attributes.html %}>
                   </picc-meter>
@@ -191,9 +190,9 @@ permalink: /search/
                   <h2 class="figure-heading constrain_width"
                     aria-describedby="tip-avg-salary">
                     Salary After<br>Attending
-                    <a class="tooltip-target u-new_line">
+                    <span class="tooltip-target u-new_line">
                       <i class="fa fa-info-circle"></i>
-                    </a>
+                    </span>
                   </h2>
                   <picc-meter {% include earnings_meter_attributes.html %}>
                   </picc-meter>

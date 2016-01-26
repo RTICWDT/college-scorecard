@@ -1,10 +1,10 @@
   {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
 
   <fieldset>
+    <legend>Programs/Degree</legend>
 
     <aria-accordion id="school-degree" class="container">
 
-      <legend>Programs/Degree</legend>
       <h1 class="search_category">
         <a aria-expanded="false" aria-controls="major-content">
           Programs/Degrees
@@ -14,7 +14,7 @@
 
         <label for="major-type">Choose a degree
           <select id="major-type" name="degree">
-            <option value="">Any</option>
+            <option value="" selected>Any</option>
             <option value="a">Two-year (Associate's)</option>
             <option value="b">Four-year (Bachelor's)</option>
           </select>
@@ -22,7 +22,7 @@
 
         <label for="major">Choose a program
           <select id="major" name="major">
-            <option value="">Any</option>
+            <option value="" selected>Any</option>
             {% for program in site.data.programs %}
             <option value="{{ program.key }}">{{ program.label }}</option>
             {% endfor %}
@@ -31,17 +31,17 @@
 
       </div>
 
-      <input type="submit" class="sr-only">
+      <input type="submit" value="Submit" class="sr-only">
 
     </aria-accordion>
 
   </fieldset>
 
   <fieldset>
+    <legend>Location</legend>
 
     <aria-accordion id="school-location" class="container">
 
-      <legend>Location</legend>
       <h1 class="search_category">
         <a aria-expanded="false" aria-controls="location-content">
           Location
@@ -52,14 +52,14 @@
 
         <div class="input-add group_inline">
 
-          <label for="select-state">
+          <div class="label" id="label-select-state">
             Select one or more states
-          </label>
+          </div>
 
           <multi-select>
             <div class="u-group_inline u-group_inline-left">
-              <select name="state" class="select-state">
-                <option value="">Any</option>
+              <select aria-labelledby="label-select-state" class="select-state" name="state">
+                <option value="" selected>Any</option>
                 {% for state in site.data.states|sort('name') %}
                 <option value="{{ state.abbr }}">{{ state.name }}</option>
                 {% endfor %}
@@ -69,7 +69,7 @@
               <button class="button button-add">
                 Add<br>State
               </button>
-              <button class="button button-remove">
+              <button class="button button-remove" title="Remove State">
                 <i class="fa fa-times-circle"></i>
               </button>
             </div>
@@ -79,14 +79,14 @@
 
         <div class="input-add group_inline">
 
-          <label for="select-region">
+          <div class="label" id="label-select-region">
             Select one or more regions
-          </label>
+          </div>
 
           <multi-select>
             <div class="u-group_inline u-group_inline-left">
-              <select name="region" class="select-region">
-                <option value="">Any</option>
+              <select aria-labelledby="label-select-region" class="select-region" name="region">
+                <option value="" selected>Any</option>
                 {% for region in site.data.regions|sort('name') %}
                 <option value="{{ region.id }}" data-states="{{ region.states }}">{{ region.name }}</option>
                 {% endfor %}
@@ -96,7 +96,7 @@
               <button class="button button-add">
                 Add<br>Region
               </button>
-              <button class="button button-remove">
+              <button class="button button-remove" title="Remove Region">
                 &times;
               </button>
             </div>
@@ -125,17 +125,17 @@
 
       </div>
 
-      <input type="submit" class="sr-only">
+      <input type="submit" value="Submit" class="sr-only">
 
     </aria-accordion>
 
   </fieldset>
 
   <fieldset>
+    <legend>Size</legend>
 
     <aria-accordion id="school-size" class="container">
 
-      <legend>Size</legend>
       <h1 class="search_category">
         <a aria-expanded="false" aria-controls="size-content">
           Size
@@ -173,17 +173,17 @@
 
       </div>
 
-      <input type="submit" class="sr-only">
+      <input type="submit" value="Submit" class="sr-only">
 
     </aria-accordion>
 
   </fieldset>
 
   <fieldset>
+    <legend>Name</legend>
 
     <aria-accordion id="school-name" class="container">
 
-      <legend>Name</legend>
       <h1 class="search_category">
         <a aria-expanded="false" aria-controls="name-content">
           Name
@@ -195,17 +195,16 @@
         <input id="name-school" name="name" type="text" placeholder="e.g., USA University" {{ common_input_attributes }}>
       </div>
 
-      <input type="submit" class="sr-only">
+      <input type="submit" value="Submit" class="sr-only">
 
     </aria-accordion>
 
   </fieldset>
 
   <fieldset>
+    <legend>Advanced Search</legend>
 
     <aria-accordion class="container">
-
-      <legend>Advanced Search</legend>
       <h1 class="search_category">
         <a aria-expanded="false" aria-controls="type-content">
           Advanced Search
@@ -215,8 +214,8 @@
       <div id="type-content" aria-hidden="false">
 
         <fieldset class="nested_fieldset">
-
           <legend>Type of school</legend>
+
           <h1>Type of school</h1>
 
           <ul>
@@ -244,7 +243,7 @@
 
         <label for="special">Specialized mission
           <select id="special" name="serving">
-            <option value="">Any</option>
+            <option value="" selected>Any</option>
             {% for designation in site.data.special_designations %}
             <option value="{{ designation[0] }}">{{ designation[1] }}</option>
             {% endfor %}
@@ -253,7 +252,7 @@
 
         <label for="affiliation">Religious affiliation
           <select id="affiliation" name="religious">
-            <option value="">Any</option>
+            <option value="" selected>Any</option>
             {% for row in site.data.religious_affiliations %}
             <option value="{{ row.value }}">{{ row.label }}</option>
             {% endfor %}
@@ -262,7 +261,7 @@
 
       </div>
 
-      <input type="submit" class="sr-only">
+      <input type="submit" value="Submit" class="sr-only">
 
     </aria-accordion>
 
@@ -274,8 +273,8 @@
     <fieldset class="advanced_search">
 
       <aria-accordion>
-
           <legend>Advanced Search</legend>
+
           <div class="advanced_search-title">
             <a aria-expanded="false" aria-controls="advanced-content" class="button link-more advanced_search-control">
               Advanced Search <i class="fa fa-plus"></i>
@@ -286,7 +285,7 @@
 
         </div>
 
-        <input type="submit" class="sr-only">
+        <input type="submit" value="Submit" class="sr-only">
 
       </aria-accordion>
 
