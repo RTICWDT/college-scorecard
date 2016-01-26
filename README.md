@@ -26,8 +26,8 @@ Then install all the ruby gems you need:
 bundle
 ```
 
-This Jekyll site features dynamic Javascript that queries [api.data.gov](https://api.data.gov/).
-For the Javascript to work, it needs an API key (register for one at
+This Jekyll site features dynamic JavaScript that queries [api.data.gov](https://api.data.gov/). 
+For the JavaScript to work, it needs an API key (register for one at 
 [api.data.gov/signup/](https://api.data.gov/signup/))
 and a base URL. Jekyll will pull them from the local machine's
 environment variables at build time, so ensure that both the `API_KEY` and
@@ -49,52 +49,81 @@ Then visit [http://localhost:4000](http://localhost:4000) to view it. The `-w`
 the source files.
 
 
-## Frontend Tools
+## Front End Development
 
-- Styles: we're using [Sass], which is bundled with [Jekyll].
-- Font: [Montserrat] hosted on [Google Fonts](https://www.google.com/fonts/).
-- Charts will be rendered with [D3].
+### Stylesheets
+- We use [Sass] to generate our CSS.
+- [Montserrat] is our primary font, courtesy of [Google Fonts](https://www.google.com/fonts/).
 
-[Montserrat]: https://www.google.com/fonts/specimen/Montserrat
-[Jekyll]: http://jekyllrb.com/
-[Sass]: http://sass-lang.com/
-[D3]: http://d3js.org/
-[Ruby]: https://www.ruby-lang.org/
+### JavaScript
+- We use [npm](https://www.npmjs.com/) to manage our JavaScript dependencies.
+  See the [package.json](https://github.com/18F/college-choice/blob/master/package.json)
+  for the list of libraries and tools we use.
+- We bundle our JavaScript with [browserify](http://browserify.org/).
+- We use [D3] for client-side data management, DOM manipulation, and event handling.
+
+### Accessibility
+- We adhere to [Web Content Accessibility Guidelines 2.0](https://www.w3.org/WAI/WCAG20/quickref/),
+  level AA.
+- We test the site's accessibility with [pa11y](http://pa11y.org/).
+
+
+## Content
+
+For the content on the College Scorecard, we are following the [18F Content
+Guide](https://pages.18f.gov/content-guide/).
+
 
 
 ## Running the API Locally
-To set up the API (as a developer), follow the [Open Data Maker installation instructions](https://github.com/18F/open-data-maker/blob/dev/INSTALL.md) then:
+To set up the API (as a developer), follow the [Open Data Maker installation
+instructions](https://github.com/18F/open-data-maker/blob/dev/INSTALL.md) then:
 
-1. download the [full data set](https://s3.amazonaws.com/ed-college-choice-public/CollegeScorecard_Raw_Data.zip) into open-data-maker directory and rename the folder as "real-data"
-2. set DATA_PATH environment variable.  On the command line:
-```
-export DATA_PATH=./real-data
-```
+1. download the [full data set](https://s3.amazonaws.com/ed-college-choice-public/CollegeScorecard_Raw_Data.zip)
+   into open-data-maker directory and rename the folder as "real-data"
 
-3. This application uses only most recent data.  To speed up start up time, edit `data.yaml` file inside the `real-data` directory to limit the number of files indexed to 4 (year 2013 is included twice, once for the columns that are not specific to any year, and once for the 2013 data, then 2012 and 2011).  Optionally, limiting the number of rows will reduce the set of colleges in the data set and is helpful for testing since it speeds startup time significantly:
-```
-options:
-  limit_files: 4
-  limit_rows: 100
-```
+1. set `DATA_PATH` environment variable.  On the command line:
 
-To create the API for the complete set of schools, comment out the `limit_rows` option by adding a `#` to the start of the line:
+    ```sh
+    export DATA_PATH=./real-data
+    ```
 
-```
-options:
-  limit_files: 4
-#  limit_rows: 100
-```
+1. This application uses only most recent data.  To speed up start up time,
+   edit `data.yaml` file inside the `real-data` directory to limit the number
+   of files indexed to 4 (year 2013 is included twice, once for the columns
+   that are not specific to any year, and once for the 2013 data, then 2012 and
+   2011).  Optionally, limiting the number of rows will reduce the set of
+   colleges in the data set and is helpful for testing since it speeds startup
+   time significantly:
 
-3. Start Open Data Maker.  On the command line, from the open-data-maker directory:
-```
-padrino start
-```
+    ```yaml
+    options:
+      limit_files: 4
+      limit_rows: 100
+    ```
 
-4. To view progress of indexing, it is helpful to look at the development log in another terminal window:
-```
-tail -f log/development.log
-```
+    To create the API for the complete set of schools, comment out the `limit_rows`
+    option by adding a `#` to the start of the line:
+
+    ```yaml
+    options:
+      limit_files: 4
+    #  limit_rows: 100
+    ```
+
+1. Start Open Data Maker.  On the command line, from the open-data-maker
+   directory:
+
+    ```sh
+    padrino start
+    ```
+
+1. To view progress of indexing, it is helpful to look at the development log
+   in another terminal window:
+
+    ```sh
+    tail -f log/development.log
+    ```
 
 
 ## System Architecture
@@ -108,3 +137,10 @@ Here's how the different parts work together in our production environment:
 
 ## Content
 For the content on the College Scorecard, we are following the [18F Content Guide](https://pages.18f.gov/content-guide/).
+
+
+[Montserrat]: https://www.google.com/fonts/specimen/Montserrat
+[Jekyll]: http://jekyllrb.com/
+[Sass]: http://sass-lang.com/
+[D3]: http://d3js.org/
+[Ruby]: https://www.ruby-lang.org/
