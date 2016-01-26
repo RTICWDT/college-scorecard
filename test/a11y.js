@@ -33,7 +33,7 @@ async.mapSeries(URLS, function(url, done) {
     }
 
     // filter out "invalid" (ignoreable) results
-    results = results.filter(isValidResult);
+    results = results ? results.filter(isValidResult) : [];
 
     reporter.results(results, url);
 

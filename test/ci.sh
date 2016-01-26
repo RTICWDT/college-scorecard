@@ -1,10 +1,14 @@
+#!/bin/bash
+
 # test against different APIs based on the branch being built
 if [ $CIRCLE_BRANCH ]; then
-    if [ $branch = 'master' ]; then
+    branch=$CIRCLE_BRANCH
+
+    if [ $branch == 'master' ]; then
 
         echo "[using the default (production) API]"
 
-    elif [ $branch = 'staging' ]; then
+    elif [ $branch == 'staging' ]; then
 
         echo "[using the staging API]"
         API_BASE_URL=https://api.data.gov/TEST/ed/staging/v1/
@@ -37,4 +41,6 @@ wget --retry-connrefused --waitretry=1 -T 5 -t 30 -qO- http://localhost:4000 > /
 ./node_modules/.bin/wdio test/wdio.ci.js || (kill -9 $pid; exit 1)
 
 # run the accessibility tests
-npm run test-a11y
+npm run test-a11y || (kill -9 $pid; exit 1)
+
+kill -9 $pid || exit 0
