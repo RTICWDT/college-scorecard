@@ -33,8 +33,8 @@ pid=$!
 # wait for the http server to start
 wget --retry-connrefused --waitretry=1 -T 5 -t 30 -qO- http://localhost:4000 > /dev/null || exit 1
 
-# run the accessibility tests
-npm run test-a11y || (kill -9 $pid; exit 1)
-
 # run the browser tests
 ./node_modules/.bin/wdio test/wdio.ci.js || (kill -9 $pid; exit 1)
+
+# run the accessibility tests
+npm run test-a11y
