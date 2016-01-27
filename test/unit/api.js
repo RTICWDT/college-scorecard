@@ -1,9 +1,9 @@
 /* jshint esnext: true */
 /* globals require, process, global */
 var picc = require('../../js/src/picc');
+var d3 = require('../../js/src/d3');
 var assert = require('assert');
 var sinon = require('sinon');
-var d3 = require('d3');
 
 describe('picc.API', function() {
   picc.API.url = '';

@@ -1,7 +1,7 @@
 (function(exports) {
 
   var ITEM_CLASS = 'multi-select_item';
-  var d3 = require('d3');
+  var d3 = require('../d3');
 
   exports.MultiSelect = document.registerElement('multi-select', {
     prototype: Object.create(
