@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "browserify `js/src/browserify-args.sh`",
-    "build-d3": "rollup -f cjs --banner '/* jshint esnext: true, -W097 */' js/src/d3-bundle.js > js/src/d3.js",
+    "build-d3": "rollup -c js/src/rollup.config.js -- js/src/d3-bundle.js > js/src/d3.js",
     "watch": "watchify -v `js/src/browserify-args.sh`",
     "lint": "jshint -c .jshintrc js/src",
     "test-unit": "mocha -- test/unit",
@@ -51,6 +51,7 @@
     "pa11y": "^3.2.1",
     "request": "^2.67.0",
     "rollup": "^0.25.1",
+    "rollup-plugin-npm": "^1.3.0",
     "simple-statistics": "^1.0.1",
     "sinon": "^1.17.2",
     "spec-xunit-file": "0.0.1-3",

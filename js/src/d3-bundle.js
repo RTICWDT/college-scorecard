@@ -18,7 +18,9 @@ import {
   descending
 } from 'd3-array';
 
-import * as scale from 'd3-scale';
+import {
+  linear
+} from 'd3-scale';
 
 import { format } from 'd3-format';
 
@@ -33,7 +35,9 @@ export default {
   select: select,
   selectAll: selectAll,
   functor: functor,
-  scale: scale,
+  scale: {
+    linear: linear
+  },
   format: format,
   range: range,
   ascending: ascending,
