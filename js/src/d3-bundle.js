@@ -16,7 +16,7 @@ import {
   sum,
   ascending,
   descending
-} from 'd3-arrays';
+} from 'd3-array';
 
 import * as scale from 'd3-scale';
 

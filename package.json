@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "browserify `js/src/browserify-args.sh`",
-    "build-d3": "d3-bundler -- js/src/d3-bundle.js > js/src/d3.js",
+    "build-d3": "rollup -f cjs js/src/d3-bundle.js > js/src/d3.js",
     "watch": "watchify -v `js/src/browserify-args.sh`",
     "lint": "jshint -c .jshintrc js/src",
     "test-unit": "mocha -- test/unit",
@@ -32,8 +32,7 @@
   },
   "devDependencies": {
     "browserify": "^12.0.1",
-    "d3-arrays": "0.0.4",
-    "d3-bundler": "^0.2.9",
+    "d3-array": "^0.7.0",
     "d3-color": "^0.2.4",
     "d3-dispatch": "^0.2.1",
     "d3-dsv": "^0.1.5",
@@ -51,6 +50,7 @@
     "mocha": "*",
     "pa11y": "^3.2.1",
     "request": "^2.67.0",
+    "rollup": "^0.25.1",
     "simple-statistics": "^1.0.1",
     "sinon": "^1.17.2",
     "spec-xunit-file": "0.0.1-3",
