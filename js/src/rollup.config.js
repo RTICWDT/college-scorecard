@@ -1,3 +1,5 @@
+/* jshint esnext: true */
+
 import npm from 'rollup-plugin-npm';
 
 export default {
