@@ -1,3 +1,4 @@
+/* jshint esnext: true, -W097 */
 'use strict';
 
 var d3Selection = require('d3-selection');

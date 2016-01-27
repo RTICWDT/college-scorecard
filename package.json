@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "browserify `js/src/browserify-args.sh`",
-    "build-d3": "rollup -f cjs js/src/d3-bundle.js > js/src/d3.js",
+    "build-d3": "rollup -f cjs --banner '/* jshint esnext: true, -W097 */' js/src/d3-bundle.js > js/src/d3.js",
     "watch": "watchify -v `js/src/browserify-args.sh`",
     "lint": "jshint -c .jshintrc js/src",
     "test-unit": "mocha -- test/unit",
