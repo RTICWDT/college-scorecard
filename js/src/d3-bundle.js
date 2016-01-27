@@ -1,8 +1,10 @@
+/* jshint esnext: true */
+
 import {
   event,
   select,
   selectAll
-} from "d3-selection";
+} from 'd3-selection';
 
 import {
   xhr,
@@ -21,9 +23,9 @@ import * as scale from 'd3-scale';
 import { format } from 'd3-format';
 
 const functor = function(x) {
-  return (typeof x === 'function')
-    ? x
-    : function() { return x; };
+  return (typeof x === 'function') ?
+    x :
+    function() { return x; };
 };
 
 export default {
