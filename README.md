@@ -60,7 +60,9 @@ the source files.
   See the [package.json](https://github.com/18F/college-choice/blob/master/package.json)
   for the list of libraries and tools we use.
 - We bundle our JavaScript with [browserify](http://browserify.org/).
-- We use [D3] for client-side data management, DOM manipulation, and event handling.
+- We use [D3] for client-side data management, DOM manipulation, and event
+  handling. We use [rollup] to generate a custom build of D3 which includes
+  only the parts of the library that we need.
 
 ### Accessibility
 - We adhere to [Web Content Accessibility Guidelines 2.0](https://www.w3.org/WAI/WCAG20/quickref/),
@@ -144,3 +146,4 @@ For the content on the College Scorecard, we are following the [18F Content Guid
 [Sass]: http://sass-lang.com/
 [D3]: http://d3js.org/
 [Ruby]: https://www.ruby-lang.org/
+[rollup]: http://rollupjs.org/
