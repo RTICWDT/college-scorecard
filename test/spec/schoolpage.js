@@ -1,0 +1,432 @@
+/* jshint esnext: true */
+/* global it, require, describe, browser */
+
+var assert = require('assert');
+
+//var pageTimeout = 800;
+
+var loadSchoolUrl = function(school) {
+  return browser
+    .url('/school/?' + school)
+    .waitForVisible('.show-loading', 5000, true);
+//    .pause(pageTimeout);
+};
+
+var getBanners = function() {
+  return browser.getText(
+    '.school-heading .school-special_designation li.special');
+};
+
+var getSchoolName = function() {
+  return browser.getText('.school-heading h1');
+};
+
+var getIcon = function() {
+  return browser.getAttribute(
+    '.school-heading .school-key_figures li', 'class');
+};
+
+var getMeterClass = function(meter) {
+  return browser.getAttribute(
+    '.school-meters picc-meter.' + meter, 'class');
+};
+
+var checkBanner = function*(urls, banner) {
+  urls.forEach(function*(url) {
+    yield loadSchoolUrl(url);
+    var banners = yield getBanners();
+    var name = yield getSchoolName();
+    var found = banners.indexOf(banner) >= 0;
+    assert(found, name + ' did not contain the ' + banner + ' banner.');
+  });
+};
+
+var checkIcon = function*(urls, icon) {
+  urls.forEach(function*(url) {
+    yield loadSchoolUrl(url);
+    var icons = yield getIcon();
+    var name = yield getSchoolName();
+    var found = icons.indexOf(icon) >= 0;
+    assert(found, name + ' did not contain the ' + icon + ' icon.');
+  });
+};
+
+var checkProgramLength = function*(urls, programLength) {
+  var selector = '.school-heading .school-key_figures li span.school-key_figures-year';
+  urls.forEach(function*(url) {
+    yield loadSchoolUrl(url);
+    var len = yield browser.getText(selector);
+    assert.equal(programLength, len);
+  });
+};
+
+var isAccordionExpanded = function(selector) {
+  return browser.getAttribute(selector, 'aria-expanded');
+};
+
+var toggleAccordion = function(selector) {
+  return browser
+    .click(selector + ' h1 a')
+    .getAttribute(selector, 'aria-expanded');
+};
+
+describe('school page', function() {
+
+  /*
+    Banners & Iconography
+  */
+
+  it('should contain the private icon if it is private school', function*() {
+    yield checkIcon(['196431-Talmudical-Seminary-Oholei-Torah',
+                     '104665-Frank-Lloyd-Wright-School-of-Architecture'],
+                    'icon-private');
+  });
+
+  it('should have for profit icon if it is a for profit school', function*() {
+    yield checkIcon(['449339-American-Public-University-System'],
+                    'icon-profit');
+  });
+
+  it('should have public icon if it is a for public school', function*() {
+    yield checkIcon(
+      ['416801-The-University-of-Texas-MD-Anderson-Cancer-Center'],
+      'icon-public');
+  });
+
+  it('should have four-year icon if it has a four year program', function*() {
+    yield checkProgramLength(
+      ['416801-The-University-of-Texas-MD-Anderson-Cancer-Center',
+       '449339-American-Public-University-System',
+       '104665-Frank-Lloyd-Wright-School-of-Architecture'],
+      4);
+  });
+
+  it('should have two-year icon if it has a two year program', function*() {
+    yield checkProgramLength(['167525-Quincy-College',
+                              '192961-Memorial-School-of-Nursing'],
+                             2);
+  });
+
+  it('should contain the black school banner if school qualifies', function*() {
+    yield checkBanner(['101587-University-of-West-Alabama'],
+                      'Predominantly Black Institution');
+  });
+
+  it('should contain the tribal banner if the school qualifies', function*() {
+    yield checkBanner(['434016-Little-Priest-Tribal-College',
+                       '180160-Chief-Dull-Knife-College'],
+                      'Tribal College and University');
+  });
+
+  it('should contain the men only banner if the school qualifies', function*() {
+    yield checkBanner(['196431-Talmudical-Seminary-Oholei-Torah'],
+                      'Men-Only');
+  });
+
+  it('should contain the women only banner if school qualifies', function*() {
+    yield checkBanner(['206349-Ursuline-College'],
+                      'Women-Only');
+  });
+
+  it('should contain the asian american banner if it qualifies', function*() {
+    yield checkBanner(
+      ['240736-American-Samoa-Community-College',
+       '110617-California-State-University-Sacramento'],
+     'Asian American and Native American Pacific Islander-Serving Institution');
+  });
+
+  it('should contain the "investigation" banner if it needs it', function*() {
+    var urls = ['481252-Ultrasound-Medical-Institute',
+                '446163-Community-Christian-College',
+                '443049-Faith-Evangelical-College-Seminary',
+                '139287-Carver-Bible-College',
+                '434016-Little-Priest-Tribal-College'];
+    var selector = '.school-heading div.investigation-major-wrapper';
+    urls.forEach(function*(url) {
+      yield loadSchoolUrl(url);
+      var value = yield browser.getAttribute(selector, 'aria-hidden');
+      assert.equal(value, false);
+    });
+  });
+
+  it('should display the religious affiliation if specified', function*() {
+    yield checkBanner(['219639-Baptist-Memorial-College-of-Health-Sciences'],
+                      'Baptist');
+  });
+
+  it('should contain the city icon if it is an urban school', function*() {
+    yield checkIcon(
+      ['192961-Memorial-School-of-Nursing',
+       '416801-The-University-of-Texas-MD-Anderson-Cancer-Center'],
+      'icon-city');
+  });
+
+  it('should contain the town icon if it is an small city school', function*() {
+    yield checkIcon(['449339-American-Public-University-System'],
+                    'icon-town');
+  });
+
+  it('should contain the suburban icon if it is suburban school', function*() {
+    yield checkIcon(['206349-Ursuline-College',
+                     '167525-Quincy-College'],
+                    'icon-suburban');
+  });
+
+  it('should contain the rural icon if it is a rural school', function*() {
+    yield checkIcon(['101587-University-of-West-Alabama',
+                     '104665-Frank-Lloyd-Wright-School-of-Architecture'],
+                    'icon-rural');
+  });
+
+  it('should contain the small icon if it is a small school', function*() {
+    yield checkIcon(
+      ['192961-Memorial-School-of-Nursing',
+       '416801-The-University-of-Texas-MD-Anderson-Cancer-Center'],
+      'icon-small');
+  });
+
+  it('should contain the medium icon if it is a medium school', function*() {
+    yield checkIcon(['167525-Quincy-College'],
+                    'icon-medium');
+  });
+
+  it('should contain the large icon if it is a large school', function*() {
+    yield checkIcon(['449339-American-Public-University-System'],
+                    'icon-large');
+  });
+
+  /*
+    Key Metrics
+  */ 
+
+  it('should have "Data not available" warnings for key metrics', function*() {
+    var urls = ['416801-The-University-of-Texas-MD-Anderson-Cancer-Center',
+                '104665-Frank-Lloyd-Wright-School-of-Architecture'];
+    var meters = ['earnings', 'cost', 'graduation'];
+
+    urls.forEach(function*(url) {
+      yield loadSchoolUrl(url);
+      meters.forEach(function*(meter) {
+        var meterResult = yield getMeterClass(meter);
+        var name = yield getSchoolName();
+        assert(meterResult.indexOf('no_data') > -1,
+               name + ' has data for ' + meter);
+      });
+    });
+  });
+
+  it('should display key metric figures if data is present', function*() {
+    var urls = ['204176-Mount-Carmel-College-of-Nursing',
+                '204635-Ohio-Northern-University'];
+    var meters = ['earnings', 'cost', 'graduation'];
+
+    urls.forEach(function*(url) {
+      yield loadSchoolUrl(url);
+      meters.forEach(function*(meter) {
+        var meterResult = yield getMeterClass(meter);
+        var name = yield getSchoolName();
+        assert(meterResult.indexOf('no_data') === -1,
+               name + ' has no data for ' + meter);
+      });
+    });
+  });
+
+  /*
+    Cost Section
+  */
+
+  it('should expand Costs section when the heading is clicked', function*() {
+    yield loadSchoolUrl('204635-Ohio-Northern-University');
+    assert.equal(yield isAccordionExpanded('#cost'), 'false');
+    assert.equal(yield toggleAccordion('#cost'), 'true');
+  });
+
+  it('should hide Costs when heading is clicked and it is open', function*() {
+    yield loadSchoolUrl('204635-Ohio-Northern-University');
+    assert.equal(yield toggleAccordion('#cost'), 'true');
+    assert.equal(yield isAccordionExpanded('#cost'), 'true');
+    assert.equal(yield toggleAccordion('#cost'), 'false');
+  });
+
+  /* 
+    Financial Aid & Debt Section
+  */
+ 
+  it('should expand Financial Aid & Debt when heading is clicked', function*() {
+    yield loadSchoolUrl('204635-Ohio-Northern-University');
+    assert.equal(yield isAccordionExpanded('#finaid'), 'false');
+    assert.equal(yield toggleAccordion('#finaid'), 'true');
+  });
+
+  it('should hide Financial Aid when the it is clicked and open', function*() {
+    yield loadSchoolUrl('204635-Ohio-Northern-University');
+    assert.equal(yield toggleAccordion('#finaid'), 'true');
+    assert.equal(yield isAccordionExpanded('#finaid'), 'true');
+    assert.equal(yield toggleAccordion('#finaid'), 'false');
+  });
+
+  it('should redirect to FAFSA app if "Start My App" clicked', function*() {
+    yield loadSchoolUrl('204635-Ohio-Northern-University');
+    yield toggleAccordion('#finaid');
+    yield browser.click('#finaid div.school-callout a').pause(500);
+    var tabs = yield browser.getTabIds();
+    assert.equal(tabs.length, 2);
+    var url = yield browser.switchTab(tabs[1]).getUrl();
+    assert.equal(url, 'https://fafsa.ed.gov/FAFSA/app/fafsa');
+  });
+
+  /*
+    Graduation & Retention
+  */
+
+  it('should expand Graduation when the heading is clicked', function*() {
+    yield loadSchoolUrl('204635-Ohio-Northern-University');
+    assert.equal(yield isAccordionExpanded('#graduation'), 'false');
+    assert.equal(yield toggleAccordion('#graduation'), 'true');
+  });
+
+  it('should hide Graduation when it is clicked and open', function*() {
+    yield loadSchoolUrl('204635-Ohio-Northern-University');
+    assert.equal(yield toggleAccordion('#graduation'), 'true');
+    assert.equal(yield isAccordionExpanded('#graduation'), 'true');
+    assert.equal(yield toggleAccordion('#graduation'), 'false');
+  });
+
+  xit('should show Retention Rate data for certain schools', function*() {
+  });
+
+  xit('should show Retention Rate as "No Data Available" for schools without it', function*() {
+  });
+
+  it('should show <4-year retention rate if 4-year rate is unavailable', function*() {
+    yield loadSchoolUrl('219578-Aquinas-College');
+    assert.equal(yield toggleAccordion('#graduation'), 'true');
+
+    var meterClass = yield browser.getAttribute('#retention-meter', 'class');
+    // console.log('meter class:', meterClass);
+    assert.equal(meterClass.indexOf('no_data'), -1);
+  });
+
+  /*
+    Earnings After School Section
+  */
+
+  it('should expand Earnings After School when it is clicked', function*() {
+    yield loadSchoolUrl('204635-Ohio-Northern-University');
+    assert.equal(yield isAccordionExpanded('#earnings'), 'false');
+    assert.equal(yield toggleAccordion('#earnings'), 'true');
+  });
+
+  it('should hide Earnings when it is clicked and open', function*() {
+    yield loadSchoolUrl('204635-Ohio-Northern-University');
+    assert.equal(yield toggleAccordion('#earnings'), 'true');
+    assert.equal(yield isAccordionExpanded('#earnings'), 'true');
+    assert.equal(yield toggleAccordion('#earnings'), 'false');
+  });
+
+  /*
+   Student Body Section 
+  */
+
+  it('should expand Student Body section when it is clicked', function*() {
+    yield loadSchoolUrl('204635-Ohio-Northern-University');
+    assert.equal(yield isAccordionExpanded('#demographics'), 'false');
+    assert.equal(yield toggleAccordion('#demographics'), 'true');
+  });
+
+  it('should hide Student Body when it is clicked and open', function*() {
+    yield loadSchoolUrl('204635-Ohio-Northern-University');
+    assert.equal(yield toggleAccordion('#demographics'), 'true');
+    assert.equal(yield isAccordionExpanded('#demographics'), 'true');
+    assert.equal(yield toggleAccordion('#demographics'), 'false');
+  });
+
+  /* 
+    SAT/ACT Section
+  */
+
+  it('should expand SAT/ACT section when the heading is clicked', function*() {
+    yield loadSchoolUrl('204635-Ohio-Northern-University');
+    assert.equal(yield isAccordionExpanded('#selectivity'), 'false');
+    assert.equal(yield toggleAccordion('#selectivity'), 'true');
+  });
+
+  it('should hide SAT/ACT when it is clicked and open', function*() {
+    yield loadSchoolUrl('204635-Ohio-Northern-University');
+    assert.equal(yield toggleAccordion('#selectivity'), 'true');
+    assert.equal(yield isAccordionExpanded('#selectivity'), 'true');
+    assert.equal(yield toggleAccordion('#selectivity'), 'false');
+  });
+
+  it('should have "Data missing" messages for SAT, if missing', function*() {
+    var urls = ['416801-The-University-of-Texas-MD-Anderson-Cancer-Center',
+                '104665-Frank-Lloyd-Wright-School-of-Architecture'];
+    urls.forEach(function*(url) {
+      yield loadSchoolUrl(url);
+      yield toggleAccordion('#selectivity');
+      var vals = yield browser
+        .getAttribute('#selectivity-content figure+p.no-data', 'aria-hidden');
+      var name = yield getSchoolName();
+      var allFalse = vals.every(function(value) { return value === ''; });
+      assert(allFalse, 'SAT/ACT Data figures are visible for ' + name);
+    });
+  });
+
+  it('should display SAT/ACT figures, if the data is present', function*() {
+    var urls = ['204635-Ohio-Northern-University',
+                '206349-Ursuline-College'];
+    urls.forEach(function*(url) {
+      yield loadSchoolUrl(url);
+      yield toggleAccordion('#selectivity');
+      var vals = yield browser
+        .getAttribute('#selectivity-content figure', 'aria-hidden');
+      var name = yield getSchoolName();
+      var allFalse = vals.every(function(value) { return value === ''; });
+      assert(allFalse, 'SAT/ACT figures are not visible for ' + name);
+    });
+  });
+
+  /*
+   Academic Programs Section 
+  */
+
+  it('should expand Academic Programs when it is clicked', function*() {
+    yield loadSchoolUrl('204635-Ohio-Northern-University');
+    assert.equal(yield isAccordionExpanded('#academics'), 'false');
+    assert.equal(yield toggleAccordion('#academics'), 'true');
+  });
+
+  it('should hide Academic Programs when it is clicked and open', function*() {
+    yield loadSchoolUrl('204635-Ohio-Northern-University');
+    assert.equal(yield toggleAccordion('#academics'), 'true');
+    assert.equal(yield isAccordionExpanded('#academics'), 'true');
+    assert.equal(yield toggleAccordion('#academics'), 'false');
+  });
+
+  // This is MUCH uglier than I like, but I wasn't able to find a cleaner way
+  //  of determining if an element is actually visible, given that it is part
+  //  of a element with overview:scroll.
+  it('the last program in a scrolling section should be visable', function*() {
+    yield loadSchoolUrl('201645-Case-Western-Reserve-University');
+    assert.equal(yield toggleAccordion('#academics'), 'true');
+    var lastProgramPreScroll = yield browser
+      .getLocation('#academics ul.school-long_list li:last-of-type span');
+    yield browser
+      .execute(function() {
+        var element = document.getElementsByClassName('school-long_list')[0];
+        element.scrollTop += element.scrollHeight;
+      }).pause(5000);
+    var lastProgramPostScroll = yield browser
+      .getLocation('#academics ul.school-long_list li:last-of-type span');
+    var listSize = yield browser
+      .getElementSize('#academics ul.school-long_list');
+    var listLocation = yield browser
+      .getLocation('#academics ul.school-long_list');
+    var listBound = listLocation.y + listSize.height;
+    assert(lastProgramPreScroll.y > listBound,
+           'Last element was in view before scroll.');
+    assert(lastProgramPostScroll.y < listBound,
+           'Last element was not in view after scroll.');
+  });
+
+});

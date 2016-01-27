@@ -2,6 +2,7 @@
   var d3 = require('../d3');
 
   var ITEM_CLASS = 'multi-select_item';
+  var d3 = require('d3');
 
   exports.MultiSelect = document.registerElement('multi-select', {
     prototype: Object.create(
@@ -35,6 +36,7 @@
           // listen for change events, and hide it
           this.__select.addEventListener('change', this.__onchange = onchange.bind(this));
           this.__select.style.display = 'none';
+          this.__select.setAttribute('aria-hidden', 'true');
 
           this.__pollID = setInterval(pollSourceSelect.bind(this), 200);
         }},

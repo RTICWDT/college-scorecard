@@ -20,13 +20,15 @@ legend {
 
 input,
 label,
+form .label,
 select {
   @include font-size(1);
   display: block;
   font-family: $form-font-family;
 }
 
-label {
+label,
+form .label {
   @include font-size(0.875);
   font-weight: 600;
   margin-bottom: $base-line-height / 4;
