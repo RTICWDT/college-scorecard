@@ -292,6 +292,21 @@ describe('school page', function() {
     assert.equal(yield toggleAccordion('#graduation'), 'false');
   });
 
+  xit('should show Retention Rate data for certain schools', function*() {
+  });
+
+  xit('should show Retention Rate as "No Data Available" for schools without it', function*() {
+  });
+
+  it('should show <4-year retention rate if 4-year rate is unavailable', function*() {
+    yield loadSchoolUrl('219578-Aquinas-College');
+    assert.equal(yield toggleAccordion('#graduation'), 'true');
+
+    var meterClass = yield browser.getAttribute('#retention-meter', 'class');
+    // console.log('meter class:', meterClass);
+    assert.equal(meterClass.indexOf('no_data'), -1);
+  });
+
   /*
     Earnings After School Section
   */

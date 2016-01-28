@@ -96,14 +96,14 @@ stylesheets:
           <div class="school-map" data-bind="map">
           </div>
 
-          <div id="key-stats" class="school-meters">
+          <div class="school-meters">
 
             <figure class="meter below_is_good">
               <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year">
                 Average<br>Annual Cost
-                <a class="tooltip-target u-new_line">
+                <span class="tooltip-target u-new_line">
                   <i class="fa fa-info-circle"></i>
-                </a>
+                </span>
               </h2>
               <picc-meter {% include net_price_meter_attributes.html %}>
               </picc-meter>
@@ -115,9 +115,9 @@ stylesheets:
             <figure class="meter above_is_good">
               <h2 class="figure-heading constrain_width" aria-describedby="tip-graduation-rate">
                 Graduation<br>Rate
-                <a class="tooltip-target u-new_line">
+                <span class="tooltip-target u-new_line">
                   <i class="fa fa-info-circle"></i>
-                </a>
+                </span>
               </h2>
               <picc-meter {% include graduation_meter_attributes.html %}>
               </picc-meter>
@@ -129,9 +129,9 @@ stylesheets:
             <figure class="meter above_is_good">
               <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-salary">
                 Salary After<br>Attending
-                <a class="tooltip-target u-new_line">
+                <span class="tooltip-target u-new_line">
                   <i class="fa fa-info-circle"></i>
-                </a>
+                </span>
               </h2>
               <picc-meter {% include earnings_meter_attributes.html %}>
               </picc-meter>
@@ -171,9 +171,9 @@ stylesheets:
                     <figure class="meter below_is_good">
                       <h2 class="figure-heading" aria-describedby="tip-avg-cost-year">
                         Average<br>Annual Cost
-                        <a class="tooltip-target u-new_line">
+                        <span class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
-                        </a>
+                        </span>
                       </h2>
                       <picc-meter id="cost-meter" {% include net_price_meter_attributes.html %}>
                       </picc-meter>
@@ -207,6 +207,7 @@ stylesheets:
                     <p>Depending on the federal, state, or institutional grant aid available, students in your income bracket may pay more or less than the overall average costs.</p>
 
                     <table class="school-table">
+                      <caption class="sr-only">Average cost by family income</caption>
                       <thead>
                         <tr>
                           <th>Family Income</th>
@@ -262,9 +263,9 @@ stylesheets:
                     <figure class="meter above_is_good">
                       <h2 class="figure-heading" aria-describedby="tip-repayment-rate">
                         Students Paying<br>Down Their Debt
-                        <a class="tooltip-target u-new_line">
+                        <span class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
-                        </a>
+                        </span>
                       </h2>
                       <picc-meter id="repayment-meter"
                         class="debt"
@@ -314,9 +315,9 @@ stylesheets:
                       <h2
                         aria-describedby="tip-student-aid">
                         Students Receiving Federal Loans
-                        <a class="tooltip-target">
+                        <span class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
-                        </a>
+                        </span>
                       </h2>
                       <strong class="fact_number" data-bind="federal_aid_percentage">XX%</strong>
                       <p>At some schools where few students borrow federal loans, the typical undergraduate may leave school with $0 in debt.</p>
@@ -326,9 +327,9 @@ stylesheets:
                       <h2
                         aria-describedby="tip-avg-debt">
                         Typical Total Debt
-                        <a class="tooltip-target">
+                        <span class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
-                        </a>
+                        </span>
                       </h2>
                       <strong class="fact_number" data-bind="average_total_debt">$XX,XXX</strong>
                       <p>For undergraduate borrowers who complete college</p>
@@ -338,9 +339,9 @@ stylesheets:
                       <h2
                         aria-describedby="tip-avg-loan-payment">
                         Typical Monthly Loan Payment
-                        <a class="tooltip-target">
+                        <span class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
-                        </a>
+                        </span>
                       </h2>
                       <span class="fact_number">
                         <strong data-bind="average_monthly_loan_payment">$XXX</strong>/mo
@@ -369,9 +370,9 @@ stylesheets:
                     <figure class="meter above_is_good">
                       <h2 class="figure-heading constrain_width" aria-describedby="tip-graduation-rate">
                         Graduation Rate
-                        <a class="tooltip-target u-new_line">
+                        <span class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
-                        </a>
+                        </span>
                       </h2>
                       <picc-meter id="grad-meter" {% include graduation_meter_attributes.html %}>
                       </picc-meter>
@@ -399,9 +400,9 @@ stylesheets:
                     <figure class="meter above_is_good">
                       <h2 class="figure-heading" aria-describedby="tip-retention-rate">
                         Students Who Return<br>After Their First Year
-                        <a class="tooltip-target u-new_line">
+                        <span class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
-                        </a>
+                        </span>
                       </h2>
                       <picc-meter id="retention-meter"
                         class="graduation"
@@ -450,9 +451,9 @@ stylesheets:
 
                     <h2 aria-describedby="tip-earnings-25k">
                       Percentage Earning Above High School Grad
-                      <a class="tooltip-target">
+                      <span class="tooltip-target">
                         <i class="fa fa-info-circle"></i>
-                      </a>
+                      </span>
                     </h2>
 
                     <strong class="fact_number">
@@ -467,9 +468,9 @@ stylesheets:
                     <figure class="meter above_is_good">
                       <h2 class="figure-heading" aria-describedby="tip-avg-salary">
                         Salary After<br>Attending
-                        <a class="tooltip-target u-new_line">
+                        <span class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
-                        </a>
+                        </span>
                       </h2>
                       <picc-meter id="salary-meter" {% include earnings_meter_attributes.html %}>
                       </picc-meter>
@@ -550,9 +551,9 @@ stylesheets:
                         <div class="school-student-socio_econ">
                           <h2 aria-describedby="tip-socio-eco">
                             Socio-Economic Diversity
-                            <a class="tooltip-target">
+                            <span class="tooltip-target">
                               <i class="fa fa-info-circle"></i>
-                            </a>
+                            </span>
                           </h2>
 
                           <div class="school-student-socio_econ-stat">
@@ -572,9 +573,9 @@ stylesheets:
                       <h2
                         aria-describedby="tip-race-eth">
                         Race/Ethnicity
-                        <a class="tooltip-target">
+                        <span class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
-                        </a>
+                        </span>
                       </h2>
                       <ol class="bars" data-bind="race_ethnicity_values">
                         {% include bar_chart_template_item.html %}
@@ -603,9 +604,9 @@ stylesheets:
                     <h2
                       aria-describedby="tip-test-scores">
                       Test Scores
-                      <a class="tooltip-target">
+                      <span class="tooltip-target">
                         <i class="fa fa-info-circle"></i>
-                      </a>
+                      </span>
                     </h2>
                     <p>Students who were admitted and enrolled typically had standardized test scores in these ranges.</p>
 
@@ -670,9 +671,9 @@ stylesheets:
                     <h2
                       aria-describedby="tip-pop-prog">
                       Most Popular Programs
-                      <a class="tooltip-target">
+                      <span class="tooltip-target">
                         <i class="fa fa-info-circle"></i>
-                      </a>
+                      </span>
                     </h2>
                     <ol class="decimal school-programs" data-bind="popular_programs">
                       <li><span class="program"></span> (<span class="percent"></span>)</li>
@@ -684,9 +685,9 @@ stylesheets:
                     <h2
                       aria-describedby="tip-avail-study">
                       Available Areas of Study
-                      <a class="tooltip-target">
+                      <span class="tooltip-target">
                         <i class="fa fa-info-circle"></i>
-                      </a>
+                      </span>
                     </h2>
                     <ul class="school-long_list" data-bind="available_programs">
                       <li><span class="program">Management</span></li>
