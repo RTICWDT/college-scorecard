@@ -132,13 +132,10 @@ Here's how the different parts work together in our production environment:
 For the content on the College Scorecard, we are following the [18F Content Guide].
 
 [18F Content Guide]: https://pages.18f.gov/content-guide/
-[D3]: http://d3js.org/
 [Federalist]: https://github.com/18F/federalist
 [full data set]: https://s3.amazonaws.com/ed-college-choice-public/CollegeScorecard_Raw_Data.zip
 [Open Data Maker]: https://github.com/18F/open-data-maker/
 [Jekyll]: http://jekyllrb.com/
 [Montserrat]: https://www.google.com/fonts/specimen/Montserrat
-[npm]: https://www.npmjs.com/
 [Ruby]: https://www.ruby-lang.org/
 [Sass]: http://sass-lang.com/
-[UglifyJS]: https://github.com/mishoo/UglifyJS
