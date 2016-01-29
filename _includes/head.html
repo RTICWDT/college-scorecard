@@ -35,7 +35,7 @@
   <meta name="twitter:title" content="{{ site.title | xml_escape }}">
   {% endif %}
 
-  {% if site.branch %}
+  {% if site.branch and site.branch != 'master' %}
   {% capture canonical_base_url %}https://federalist.18f.gov/preview/18F/college-choice/{{ site.branch }}{% endcapture %}
   {% else %}
   {% assign canonical_base_url = site.url %}
@@ -43,7 +43,7 @@
 
   <!-- url -->
   <!-- <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.url }}"> -->
-  <!-- <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.url }}"> -->
+  <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: canonical_base_url }}">
 
   <!-- img -->
   <meta property="og:image" content="{{ canonical_base_url }}/img/hero.jpg">
