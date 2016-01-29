@@ -26,13 +26,13 @@
 
   <!-- title -->
   {% if page.title %}
-    <title>{{ page.title }}</title>
-    <meta property="og:title" content="{{ page.title | xml_escape }}">
-    <meta name="twitter:title" content="{{ page.title | xml_escape }}">
+  <title>{{ page.title }}</title>
+  <meta property="og:title" content="{{ page.title | xml_escape }}">
+  <meta name="twitter:title" content="{{ page.title | xml_escape }}">
   {% else %}
-    <title>{{ site.title }}</title>
-    <meta property="og:title" content="{{ site.title | xml_escape }}">
-    <meta name="twitter:title" content="{{ site.title | xml_escape }}">
+  <title>{{ site.title }}</title>
+  <meta property="og:title" content="{{ site.title | xml_escape }}">
+  <meta name="twitter:title" content="{{ site.title | xml_escape }}">
   {% endif %}
 
   <!-- url -->
