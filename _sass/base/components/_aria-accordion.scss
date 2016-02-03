@@ -14,8 +14,22 @@ aria-accordion {
 
   [aria-controls] {
     display: block;
-    cursor: pointer;
     position: relative;
+  }
+
+  button[aria-controls] {
+    // reset all of the button styles...
+    background: transparent;
+    border-radius: 0;
+    font: inherit;
+    height: auto;
+    letter-spacing: 0;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    text-transform: none;
+    vertical-align: baseline;
+    width: 100%;
   }
 
   [aria-controls]:after {
