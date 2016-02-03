@@ -1,4 +1,4 @@
-/* jshint esnext: true */
+/* jshint node: true, esnext: true */
 
 const config = {
 
