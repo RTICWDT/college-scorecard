@@ -66,7 +66,7 @@ var isAccordionExpanded = function(selector) {
 
 var toggleAccordion = function(selector) {
   return browser
-    .click(selector + ' h1 a')
+    .click(selector + ' h1 button')
     .getAttribute(selector, 'aria-expanded');
 };
 
