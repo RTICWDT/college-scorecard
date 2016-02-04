@@ -1,8 +1,10 @@
 # Site settings
 title: College Scorecard
 
-description:
-  Helping prospective college students find the right school.
+description: |
+    Find the college that’s the best fit for you! The U.S. Department of
+    Education’s College Scorecard has the most reliable data on college costs,
+    graduation, and post-college earnings.
 
 # the subpath of your site, e.g. /blog
 baseurl:
@@ -11,7 +13,7 @@ baseurl:
 url: https://collegescorecard.ed.gov
 
 # app version number
-version: v1.5.1
+version: v1.6.0
 
 # Build settings
 markdown: kramdown
