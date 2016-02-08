@@ -18,7 +18,7 @@
     "test": "wdio test/wdio.conf.js",
     "test-quick": "wdio test/wdio.quick.js",
     "test-sauce": "wdio test/wdio.sauce.js",
-    "test-ci": "./test/ci.sh"
+    "test-ci": "wdio test/wdio.ci.js"
   },
   "dependencies": {
     "aight": "^2.1.1",
