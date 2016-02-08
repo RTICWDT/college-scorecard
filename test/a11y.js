@@ -10,9 +10,10 @@ const test = pa11y(config);
 const BASEURL = 'http://localhost:4000';
 
 const URLS = [
-  BASEURL + '/school/?226152-Texas-A-M-International-University',
-  BASEURL + '/search/?state=CA',
   BASEURL + '/',
+  BASEURL + '/search/?state=CA',
+  BASEURL + '/school/?226152-Texas-A-M-International-University',
+  BASEURL + '/data/',
 ];
 
 const IGNORE_RESULTS = [
