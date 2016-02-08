@@ -30,6 +30,7 @@ async.mapSeries(URLS, function(url, done) {
 
     if (error) {
       reporter.error(error.stack);
+      return done(error.stack);
     }
 
     // filter out "invalid" (ignoreable) results
@@ -45,21 +46,23 @@ async.mapSeries(URLS, function(url, done) {
     done(null, results);
   });
 }, function(error, runs) {
-  if (failed) {
-    var count = 0;
-    var failing = runs.map(function(results) {
-      var failing = results.filter(isFailingResult);
-      count += failing.length;
-      return failing;
-    })
-    .filter(function(failing) {
-      return failing.length;
-    });
+  if (error || failed) {
+    if (failed) {
+      var count = 0;
+      var failing = runs.map(function(results) {
+        var failing = results.filter(isFailingResult);
+        count += failing.length;
+        return failing;
+      })
+      .filter(function(failing) {
+        return failing.length;
+      });
 
-    reporter.error([
-      pluralize(count, 'failure'),
-      'on', pluralize(failing.length, 'page')
-    ].join(' '));
+      reporter.error([
+        pluralize(count, 'failure'),
+        'on', pluralize(failing.length, 'page')
+      ].join(' '));
+    }
     process.exit(2);
   }
 });
