@@ -31,7 +31,7 @@ test:
     # build the site and start the server (this exits when the server is
     # available at localhost:4000)
     - ./test/server.sh:
-      background: true
+        background: true
 
     # run the browser tests
     - npm run test-ci
