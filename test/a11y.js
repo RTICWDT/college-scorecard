@@ -13,7 +13,7 @@ const URLS = [
   BASEURL + '/',
   BASEURL + '/search/?state=CA',
   BASEURL + '/school/?226152-Texas-A-M-International-University',
-  BASEURL + '/data/',
+  // BASEURL + '/data/',
 ];
 
 const IGNORE_RESULTS = [
