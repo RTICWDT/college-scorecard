@@ -10,10 +10,16 @@
       {
         attachedCallback: {value: function() {
           var trigger = this.__trigger = getTrigger(this);
-          if (!trigger) return;
+          if (!trigger) {
+            return;
+          }
 
           var content = this.__content = getContent(this, trigger);
-          if (!content) return;
+          if (!content) {
+            return;
+          }
+
+          trigger.setAttribute('tabindex', 0);
 
           // set role="button" on the trigger element if it's not a <button>
           if (trigger.nodeName !== 'BUTTON' && !trigger.hasAttribute('role')) {

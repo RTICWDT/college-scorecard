@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* jshint esnext: true */
+/* jshint node: true, esnext: true */
 
 const async = require('async');
 const pa11y = require('pa11y');
