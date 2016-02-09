@@ -28,11 +28,4 @@ if [ $API_BASE_URL ]; then
 fi
 
 # build the site
-bundle exec jekyll build
-
-# serve it up statically, in the background
-./node_modules/.bin/http-server -p 4000 _site &
-
-# wait for the http server to start
-wget --retry-connrefused --waitretry=1 -T 5 -t 30 \
-    -qO- http://localhost:4000 > /dev/null || exit 1
+bundle exec jekyll serve
