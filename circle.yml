@@ -33,6 +33,9 @@ test:
     - ./test/server.sh:
         background: true
 
+    # wait for the http server to start
+    - wget --retry-connrefused --waitretry=1 -T 5 -t 30 \ -qO- http://localhost:4000 > /dev/null
+
     # run the browser tests
     - npm run test-ci
 
