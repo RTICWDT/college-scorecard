@@ -28,7 +28,20 @@ test:
     # <https://github.com/webdriverio/webdriverio/issues/926>
     - ln -s /tmp
 
+    # build the site and start the server (this exits when the server is
+    # available at localhost:4000)
+    - ./test/server.sh:
+        background: true
+
+    # wait for the http server to start
+    - wget --retry-connrefused --waitretry=1 -T 5 -t 30 -qO- http://localhost:4000 > /dev/null
+
     # run the browser tests
-    - ./test/ci.sh
+    - npm run test-ci
+
+    # run the accessibility tests
+    - npm run test-a11y
+
   post:
-    - killall --wait sc  # wait for Sauce Connect to close the tunnel
+    # wait for Sauce Connect to close the tunnel
+    - killall --wait sc

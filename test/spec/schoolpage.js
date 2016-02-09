@@ -3,13 +3,10 @@
 
 var assert = require('assert');
 
-//var pageTimeout = 800;
-
 var loadSchoolUrl = function(school) {
   return browser
     .url('/school/?' + school)
-    .waitForVisible('.show-loading', 5000, true);
-//    .pause(pageTimeout);
+    .waitForVisible('.show-loaded');
 };
 
 var getBanners = function() {
