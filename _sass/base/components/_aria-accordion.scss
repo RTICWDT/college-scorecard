@@ -13,19 +13,16 @@ aria-accordion {
   }
 
   [aria-controls] {
-    display: block;
-    position: relative;
-  }
-
-  button[aria-controls] {
     // reset all of the button styles...
     background: transparent;
     border-radius: 0;
+    display: block;
     font: inherit;
     height: auto;
     letter-spacing: 0;
     margin: 0;
     padding: 0;
+    position: relative;
     text-align: left;
     text-transform: none;
     vertical-align: baseline;
