@@ -60,7 +60,7 @@
   //   padding-top: $base-padding-lite;
   // }
 
-  @include respond-to(medium-up) {
+  @include respond-to(large-up) {
     @include span-columns(3);
     @include omega();
     margin-top: $base-padding;
