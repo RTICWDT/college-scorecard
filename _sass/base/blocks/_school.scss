@@ -26,8 +26,11 @@
 
 .school-right {
   margin-top: $base-padding;
+  padding-top: $base-padding;
   padding-left: $base-padding;
   padding-right: $base-padding;
+  background-color: $white;
+  border-radius: 0.4em;
 
   h2 {
     padding-bottom: $base-padding;
@@ -60,8 +63,6 @@
   @include respond-to(medium-up) {
     @include span-columns(3);
     @include omega();
-    padding-left: 0;
-    padding-right: 0;
     margin-top: $base-padding;
 
     h2 {

@@ -6,9 +6,9 @@
     <aria-accordion id="school-degree" class="container">
 
       <h1 class="search_category">
-        <a aria-expanded="false" aria-controls="major-content">
+        <button aria-expanded="false" aria-controls="major-content">
           Programs/Degrees
-        </a>
+        </button>
       </h1>
       <div id="major-content" aria-hidden="true" class="accordion-div">
 
@@ -31,7 +31,7 @@
 
       </div>
 
-      <input type="submit" value="Submit" class="sr-only">
+      <input type="submit" value="Submit" class="sr-only" tabindex="-1">
 
     </aria-accordion>
 
@@ -43,9 +43,9 @@
     <aria-accordion id="school-location" class="container">
 
       <h1 class="search_category">
-        <a aria-expanded="false" aria-controls="location-content">
+        <button aria-expanded="false" aria-controls="location-content">
           Location
-        </a>
+        </button>
       </h1>
 
       <div id="location-content" aria-hidden="true" class="accordion-div">
@@ -125,7 +125,7 @@
 
       </div>
 
-      <input type="submit" value="Submit" class="sr-only">
+      <input type="submit" value="Submit" class="sr-only" tabindex="-1">
 
     </aria-accordion>
 
@@ -137,9 +137,9 @@
     <aria-accordion id="school-size" class="container">
 
       <h1 class="search_category">
-        <a aria-expanded="false" aria-controls="size-content">
+        <button aria-expanded="false" aria-controls="size-content">
           Size
-        </a>
+        </button>
       </h1>
 
       <div id="size-content" aria-hidden="true">
@@ -173,7 +173,7 @@
 
       </div>
 
-      <input type="submit" value="Submit" class="sr-only">
+      <input type="submit" value="Submit" class="sr-only" tabindex="-1">
 
     </aria-accordion>
 
@@ -185,9 +185,9 @@
     <aria-accordion id="school-name" class="container">
 
       <h1 class="search_category">
-        <a aria-expanded="false" aria-controls="name-content">
+        <button aria-expanded="false" aria-controls="name-content">
           Name
-        </a>
+        </button>
       </h1>
 
       <div id="name-content" aria-hidden="false" class="accordion-div">
@@ -195,7 +195,7 @@
         <input id="name-school" name="name" type="text" placeholder="e.g., USA University" {{ common_input_attributes }}>
       </div>
 
-      <input type="submit" value="Submit" class="sr-only">
+      <input type="submit" value="Submit" class="sr-only" tabindex="-1">
 
     </aria-accordion>
 
@@ -206,9 +206,9 @@
 
     <aria-accordion class="container">
       <h1 class="search_category">
-        <a aria-expanded="false" aria-controls="type-content">
+        <button aria-expanded="false" aria-controls="type-content">
           Advanced Search
-        </a>
+        </button>
       </h1>
 
       <div id="type-content" aria-hidden="false">
@@ -261,7 +261,7 @@
 
       </div>
 
-      <input type="submit" value="Submit" class="sr-only">
+      <input type="submit" value="Submit" class="sr-only" tabindex="-1">
 
     </aria-accordion>
 
@@ -276,16 +276,16 @@
           <legend>Advanced Search</legend>
 
           <div class="advanced_search-title">
-            <a aria-expanded="false" aria-controls="advanced-content" class="button link-more advanced_search-control">
+            <button aria-expanded="false" aria-controls="advanced-content" class="button link-more advanced_search-control">
               Advanced Search <i class="fa fa-plus"></i>
-            </a>
+            </button>
           </div>
 
         <div id="advanced-content" class="advanced-content" aria-hidden="false">
 
         </div>
 
-        <input type="submit" value="Submit" class="sr-only">
+        <input type="submit" value="Submit" class="sr-only" tabindex="-1">
 
       </aria-accordion>
 

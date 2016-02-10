@@ -1,21 +1,32 @@
 aria-accordion {
-  $button-size: 34px;
-  $button-margin: 9px;
+  $toggle-size: 34px;
+  $toggle-margin: 9px;
 
   @include transition(height 1s linear);
 
   display: block;
-  min-height: $button-size + ($button-margin * 2);
+  min-height: $toggle-size + ($toggle-margin * 2);
   padding-bottom: $base-padding-lite;
 
   @include respond-to(tiny-up) {
-    min-height: $button-size + ($button-margin * 3);
+    min-height: $toggle-size + ($toggle-margin * 3);
   }
 
   [aria-controls] {
+    // reset all of the button styles...
+    background: transparent;
+    border-radius: 0;
     display: block;
-    cursor: pointer;
+    font: inherit;
+    height: auto;
+    letter-spacing: 0;
+    margin: 0;
+    padding: 0;
     position: relative;
+    text-align: left;
+    text-transform: none;
+    vertical-align: baseline;
+    width: 100%;
   }
 
   [aria-controls]:after {
@@ -24,16 +35,16 @@ aria-accordion {
     border-radius: 500px;
     color: #999;
     display: inline-block;
-    font-size: $button-size;
+    font-size: $toggle-size;
     font-weight: normal;
-    height: $button-size;
+    height: $toggle-size;
     line-height: 1.075;
     padding-left: 0.02em;
     position: absolute;
     text-align: center;
-    top: $button-margin;
+    top: $toggle-margin;
     right: 0; // XXX
-    width: $button-size;
+    width: $toggle-size;
   }
 
   [aria-controls]:after {

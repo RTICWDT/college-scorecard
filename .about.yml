@@ -22,8 +22,8 @@ stack:
 - Rails
 - elasticsearch
 contact:
-- url: mailto:holly.allen@gsa.gov
-  text: Holly Allen
+- url: mailto:alexandra.bisker@gsa.gov
+  text: Alex Bisker
 team:
 - github: ultrasaurus
 - github: shawnbot

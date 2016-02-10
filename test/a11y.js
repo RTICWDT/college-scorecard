@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* jshint esnext: true */
+/* jshint node: true, esnext: true */
 
 const async = require('async');
 const pa11y = require('pa11y');
@@ -10,9 +10,10 @@ const test = pa11y(config);
 const BASEURL = 'http://localhost:4000';
 
 const URLS = [
-  BASEURL + '/school/?226152-Texas-A-M-International-University',
-  BASEURL + '/search/?state=CA',
   BASEURL + '/',
+  BASEURL + '/search/?state=CA',
+  BASEURL + '/school/?226152-Texas-A-M-International-University',
+  // BASEURL + '/data/',
 ];
 
 const IGNORE_RESULTS = [
@@ -30,6 +31,7 @@ async.mapSeries(URLS, function(url, done) {
 
     if (error) {
       reporter.error(error.stack);
+      return done(error.stack);
     }
 
     // filter out "invalid" (ignoreable) results
@@ -45,21 +47,23 @@ async.mapSeries(URLS, function(url, done) {
     done(null, results);
   });
 }, function(error, runs) {
-  if (failed) {
-    var count = 0;
-    var failing = runs.map(function(results) {
-      var failing = results.filter(isFailingResult);
-      count += failing.length;
-      return failing;
-    })
-    .filter(function(failing) {
-      return failing.length;
-    });
+  if (error || failed) {
+    if (failed) {
+      var count = 0;
+      var failing = runs.map(function(results) {
+        var failing = results.filter(isFailingResult);
+        count += failing.length;
+        return failing;
+      })
+      .filter(function(failing) {
+        return failing.length;
+      });
 
-    reporter.error([
-      pluralize(count, 'failure'),
-      'on', pluralize(failing.length, 'page')
-    ].join(' '));
+      reporter.error([
+        pluralize(count, 'failure'),
+        'on', pluralize(failing.length, 'page')
+      ].join(' '));
+    }
     process.exit(2);
   }
 });
