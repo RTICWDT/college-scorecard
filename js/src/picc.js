@@ -725,11 +725,14 @@ picc.access.programAreas = function(d, metadata) {
   if (!metadata || !metadata.dictionary) return [];
 
   var dictionary = metadata.dictionary;
-  var field = picc.fields.PROGRAM_PERCENTAGE;
+  var field = picc.fields.PROGRAM_OFFERED + '.degree';
   var programs = picc.access(field)(d);
   if (!programs) return [];
-  // remove the year prefix
-  field = field.replace(/^\d+\./, '');
+
+  // use the metadata dictionary for the corresponding program percentage
+  // fields, because the program offered fields don't have metadata
+  field = picc.fields.PROGRAM_PERCENTAGE.replace(/^\d+\./, '');
+
   return Object.keys(programs || {})
     .map(function(key) {
       var value = programs[key];
