@@ -18,7 +18,7 @@ describe('search', function() {
   xit('should contain all schools containing "Columbia"', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#school-name h1 a')
+        .click('#school-name h1 [aria-controls]')
         .setValue('#name-school', 'Columbia');
       });
     assert.equal(yield utils.getSearchCount(), results.spotChecks.allColumbia);
@@ -33,7 +33,7 @@ describe('search', function() {
   xit('should contain all schools containing "col"', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#school-name h1 a')
+        .click('#school-name h1 [aria-controls]')
         .setValue('#name-school', 'col');
       });
     assert.equal(yield utils.getSearchCount(), results.spotChecks.allCol);
@@ -42,7 +42,7 @@ describe('search', function() {
   it('should contain no results for a nonsense word', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#school-name h1 a')
+        .click('#school-name h1 [aria-controls]')
         .setValue('#name-school', 'nons%ense wo@d#');
       });
     assert.equal(yield utils.getSearchCount(), 0);
@@ -54,7 +54,7 @@ describe('search', function() {
   it('should contain all schools in Delaware if selected', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#school-location h1 a')
+        .click('#school-location h1 [aria-controls]')
         .selectByValue('.multi-select_item .select-state', 'DE');
       });
     assert.equal(yield utils.getSearchCount(),
@@ -64,7 +64,7 @@ describe('search', function() {
   it('should contain all schools in DE & KY if selected', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#school-location h1 a')
+        .click('#school-location h1 [aria-controls]')
         .selectByValue('.multi-select_item .select-state', 'DE')
         .click('button.button.button-add')
         .selectByValue('.multi-select_item + .multi-select_item .select-state',
@@ -77,7 +77,7 @@ describe('search', function() {
   it('should contain all schools in Far West region if selected', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#school-location h1 a')
+        .click('#school-location h1 [aria-controls]')
         .selectByValue('.multi-select_item .select-region', '8');
       });
     assert.equal(yield utils.getSearchCount(), results.spotChecks.allInFarWest);
@@ -86,7 +86,7 @@ describe('search', function() {
   xit('should contain all schools in Zip Code 10023', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#school-location h1 a')
+        .click('#school-location h1 [aria-controls]')
         .setValue('#zip-code', '10023');
       });
     assert.equal(yield utils.getSearchCount(),
@@ -96,7 +96,7 @@ describe('search', function() {
   xit('should contain all schools in 5 miles of Zip Code 10023', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#school-location h1 a')
+        .click('#school-location h1 [aria-controls]')
         .setValue('#zip-code', '10023')
         .setValue('#search-radius', '5');
       });
@@ -107,7 +107,7 @@ describe('search', function() {
   it('should contain no results for zip code = 1089987987', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#school-location h1 a')
+        .click('#school-location h1 [aria-controls]')
         .setValue('#zip-code', '1089987987');
       });
     assert.equal(yield utils.getSearchCount(), 0);
@@ -116,7 +116,7 @@ describe('search', function() {
   it('should contain no results for radius = 0890098', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#school-location h1 a')
+        .click('#school-location h1 [aria-controls]')
         .setValue('#search-radius', '0890098');
       });
     assert.equal(yield utils.getSearchCount(), results.spotChecks.allSchools);
@@ -128,7 +128,7 @@ describe('search', function() {
   it('should contain all small schools if selected', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#school-size h1 a')
+        .click('#school-size h1 [aria-controls]')
         .execute(function() { 
           document.getElementById('size-small').click(); });
       });
@@ -138,7 +138,7 @@ describe('search', function() {
   it('should contain all medium schools if selected', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#school-size h1 a')
+        .click('#school-size h1 [aria-controls]')
         .execute(function() {
           document.getElementById('size-medium').click(); });
       });
@@ -148,7 +148,7 @@ describe('search', function() {
   it('should contain all large schools if selected', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#school-size h1 a')
+        .click('#school-size h1 [aria-controls]')
         .execute(function() {
           document.getElementById('size-large').click(); });
       });
@@ -158,7 +158,7 @@ describe('search', function() {
   it('should contain all small and large schools if selected', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#school-size h1 a')
+        .click('#school-size h1 [aria-controls]')
         .execute(function() {
           document.getElementById('size-small').click(); })
         .execute(function() {
@@ -171,7 +171,7 @@ describe('search', function() {
   it('should only show any, bachelors, associates as options', function*() {
     var options = yield browser
       .url('/')
-      .click('#school-degree h1 a')
+      .click('#school-degree h1 [aria-controls]')
       .getText('#major-type option');
     assert.deepEqual(options, [ 'Any', 'Two-year (Associate\'s)',
                                 'Four-year (Bachelor\'s)' ]);
@@ -180,7 +180,7 @@ describe('search', function() {
   it('should contain only associate degrees if selected', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#school-degree h1 a')
+        .click('#school-degree h1 [aria-controls]')
         .selectByVisibleText('#major-type', 'Two-year (Associate\'s)');
       });
     assert.equal(yield utils.getSearchCount(),
@@ -190,7 +190,7 @@ describe('search', function() {
   it('should contain only bachelors degrees if selected', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#school-degree h1 a')
+        .click('#school-degree h1 [aria-controls]')
         .selectByVisibleText('#major-type', 'Four-year (Bachelor\'s)');
       });
     assert.equal(yield utils.getSearchCount(), results.spotChecks.allBachelors);
@@ -206,7 +206,7 @@ describe('search', function() {
   it('should contain only public schools if selected', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#search-form > fieldset:last-of-type h1 a')
+        .click('#search-form > fieldset:last-of-type h1 [aria-controls]')
         .execute(function() {
           document.getElementById('type-public').click(); });
       });
@@ -216,7 +216,7 @@ describe('search', function() {
   it('should contain only private schools if selected', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#search-form > fieldset:last-of-type h1 a')
+        .click('#search-form > fieldset:last-of-type h1 [aria-controls]')
         .execute(function() {
           document.getElementById('type-private').click(); });
       });
@@ -227,7 +227,7 @@ describe('search', function() {
   it('should contain only for profit schools if selected', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#search-form fieldset:last-of-type h1 a')
+        .click('#search-form fieldset:last-of-type h1 [aria-controls]')
         .execute(function() {
           document.getElementById('type-profit').click(); });
       });

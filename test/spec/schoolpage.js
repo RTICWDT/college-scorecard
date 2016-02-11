@@ -3,13 +3,10 @@
 
 var assert = require('assert');
 
-//var pageTimeout = 800;
-
 var loadSchoolUrl = function(school) {
   return browser
     .url('/school/?' + school)
-    .waitForVisible('.show-loading', 5000, true);
-//    .pause(pageTimeout);
+    .waitForVisible('.show-loaded');
 };
 
 var getBanners = function() {
@@ -66,7 +63,7 @@ var isAccordionExpanded = function(selector) {
 
 var toggleAccordion = function(selector) {
   return browser
-    .click(selector + ' h1 a')
+    .click(selector + ' h1 [aria-controls]')
     .getAttribute(selector, 'aria-expanded');
 };
 
