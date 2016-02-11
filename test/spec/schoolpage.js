@@ -6,7 +6,7 @@ var assert = require('assert');
 var loadSchoolUrl = function(school) {
   return browser
     .url('/school/?' + school)
-    .waitForVisible('.show-loaded');
+    .waitForVisible('.show-loading', null, true);
 };
 
 var getBanners = function() {
