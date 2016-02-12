@@ -7,14 +7,16 @@
   "forin": true,
   "immed": true,
   "latedef": "nofunc",
+  "laxbreak": true,
   "maxlen": 80,
   "newcap": true,
   "noarg": true,
   "noempty": true,
   "nonew": true,
   "predef": [
-    "picc",
     "console",
+    "picc",
+    "L",
 
     "beforeEach",
     "describe",
