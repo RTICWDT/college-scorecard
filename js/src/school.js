@@ -16,13 +16,9 @@ module.exports = function school() {
 
   loadable.classed('js-loading', true);
 
-  picc.API.getAll({
-    metadata: 'data.json',
-    school: [picc.API.getSchool, id]
-  }, function onSchoolLoad(error, data) {
+  picc.API.getSchool(id, function onSchoolLoad(error, school) {
     loadable.classed('js-loading', false);
 
-    // console.log('data:', data);
     if (error) {
       loadable.classed('js-error', true);
       return showError(error);
@@ -31,12 +27,10 @@ module.exports = function school() {
     loadable.classed('js-loaded', true);
 
     var root = document.querySelector('#school');
-    var school = data.school;
 
     var name = picc.access(picc.fields.NAME)(school);
     document.title = name;
 
-    school.metadata = data.metadata;
     console.log('got school:', school);
     root.classList.remove('hidden');
 
