@@ -13,21 +13,16 @@
   "noempty": true,
   "nonew": true,
   "predef": [
-    "$",
-    "jQuery",
+    "picc",
+    "console",
 
-    "jasmine",
     "beforeEach",
     "describe",
     "xdescribe",
-    "expect",
     "it",
     "xit",
 
-    "angular",
-    "inject",
     "module",
-
     "require",
     "process",
     "global"
