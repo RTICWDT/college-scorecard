@@ -45,7 +45,7 @@ module.exports = function school() {
     d3.selectAll('i.average-arrow[data-meter]')
       .each(function() {
         var icon = d3.select(this);
-        var meter = d3.select('#' + this.getAttribute('data-meter'))
+        d3.select('#' + this.getAttribute('data-meter'))
           .on('update', function updateMeterAverage() {
             var match = this.className.match(/\b(\w+)_average\b/);
             var state = match ? match[1] : 'na';
@@ -107,7 +107,7 @@ module.exports = function school() {
 
     bars.select('.bar')
       .style('width', function(d) {
-        return d > .005
+        return d > 0.005
           ? scale(d)
           : d ? '1px' : 0;
       });
@@ -145,7 +145,9 @@ module.exports = function school() {
 
   // get the school ID from the URL
   function getSchoolId() {
-    if (!location.search) return null;
+    if (!location.search) {
+      return null;
+    }
     var match = location.search.match(/^\?(\d+)(\b|-)/);
     return match ? match[1] : null;
   }
@@ -174,8 +176,7 @@ module.exports = function school() {
 
     var location = picc.access.location(school);
 
-    if (!location || !+location.lat || !+location.lon) {
-      console.warn('missing or invalid location:', location, '; hiding the map');
+    if (!location || !Number(location.lat) || !Number(location.lon)) {
       container.classList.add('hidden');
       return false;
     }
@@ -194,7 +195,7 @@ module.exports = function school() {
       })
       .setView(center, 10);
 
-    L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png')
+    L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png') // jshint ignore:line
       .addTo(map);
 
     L.control.attribution({
