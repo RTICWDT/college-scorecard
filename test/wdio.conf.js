@@ -1,3 +1,4 @@
+/* jshint node: true */
 var baseUrl = require('./url');
 
 exports.config = {
@@ -134,7 +135,7 @@ exports.config = {
     //
     // Gets executed after all tests are done. You still have access to all
     // global variables from the test.
-    after: function(failures, pid) {
+    after: function(/* failures, pid */) {
         // do something
     },
 

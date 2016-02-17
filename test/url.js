@@ -1,3 +1,4 @@
+/* jshint node: true */
 var url = 'http://localhost:4000';
 var env = process.env;
 
