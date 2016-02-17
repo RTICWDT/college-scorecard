@@ -21,8 +21,11 @@ test:
     # <https://github.com/webdriverio/webdriverio/issues/926>
     - ln -s /tmp
 
-    # run the browser tests
+    # check env, wait for Federalist to build
     - ./test/ci.sh
+
+    # run the browser tests
+    - npm run test-ci
 
     # run the accessibility tests
     - npm run test-a11y
