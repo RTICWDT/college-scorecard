@@ -1,3 +1,5 @@
+var baseUrl = require('./url');
+
 exports.config = {
 
     //
@@ -16,7 +18,6 @@ exports.config = {
 
     // Patterns to exclude.
     exclude: [
-        //''
     ],
 
     //
@@ -58,7 +59,7 @@ exports.config = {
     //
     // Set a base URL in order to shorten url command calls. If your url
     // parameter starts with "/", the base url gets prepended.
-    baseUrl: 'http://localhost:4000',
+    baseUrl: baseUrl,
 
     //
     // Default timeout for all waitForXXX commands.
