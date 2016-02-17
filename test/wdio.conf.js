@@ -1,4 +1,4 @@
-var baseUrl = require('./url');
+var baseUrl = process.env.BROWSER_TEST_URL || 'http://localhost:4000';
 
 exports.config = {
 
