@@ -2,7 +2,7 @@
 
 repo="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
 
-if [ "$CIRCLE_PROJECT_USERNAME" != "$CIRCLE_PR_USERNAME" ]; then
+if [ -e "$CIRCLE_PR_USERNAME" ] && [ "$CIRCLE_PROJECT_USERNAME" != "$CIRCLE_PR_USERNAME" ]; then
   echo "This branch is on a fork: ${CIRCLE_PR_USERNAME}/${CIRCLE_PR_REPONAME}"
   echo
   echo "Automated browser tests are disabled for pull requests from forks."
