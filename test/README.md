@@ -37,12 +37,34 @@ These tests are run with [mocha] like so, from the project root directory:
 npm run test-unit
 ```
 
-## Functional Tests
 
+## Accessibility Tests
+We use [pa11y] to ensure that the site meets [Web Content Accessibility
+Guidelines 2.0][WCAG 2.0], level AA. To run the test suite, first start the
+Jekyll server:
+
+```sh
+jekyll serve
+# or:
+bundle exec jekyll serve
+```
+
+Then run:
+
+```sh
+npm run test-a11y
+```
+
+The accessibility test runner is [a11y.js](a11y.js), and the pa11y
+configuration lives in [pa11y.conf.js](pa11y.conf.js).
+
+
+## Functional Tests
 Our functional (browser) test suite uses [WebDriverIO], which in turn uses
 [Selenium WebDriver] to programmatically control both local and remote browsers
 (in our case, running on [Sauce Labs]) and run functional tests against them.
 These test suite files live in the `functional` directory.
+
 
 ### Local Testing
 
@@ -133,6 +155,7 @@ NOTE: By default, the data count tests are not run on Sauce. You can
 enable them by replacing the reference to `./wdio.quick` with
 `./wdio.conf` in `wdio.sauce.js`.
 
+
 ### Testing on CircleCI
 
 On [CircleCI] we run cross-browser tests with:
@@ -142,32 +165,53 @@ npm run test-ci
 ```
 
 On the CI server, both the browser and accessibility tests are run against
-public Federalist preview URLs. See [this pull
-request](https://github.com/18F/college-choice/pull/1496) for more
-info and instructions for testing the CI behavior locally.
+public Federalist preview URLs.
 
 
-## Accessibility Tests
-
-We use [pa11y] to ensure that the site meets [Web Content Accessibility
-Guidelines 2.0][WCAG 2.0], level AA. To run the test suite, first start the
-Jekyll server:
+You can test the CI behavior locally by setting certain combinations of
+Circle-specific [environment
+variables](https://circleci.com/docs/environment-variables) then running the
+`test/ci.sh` script:
 
 ```sh
-jekyll serve
-# or:
-bundle exec jekyll serve
+# without any environment variables, this will just output http://localhost:4000
+./test/ci.sh
+
+# outputs the production URL, no fork warning
+export CIRCLE_BRANCH=master
+./test/ci.sh
+
+# outputs the Federalist preview URL, no fork warning
+export CIRCLE_PROJECT_USERNAME=18F
+export CIRCLE_PROJECT_REPONAME=college-choice
+export CIRCLE_BRANCH=ci-serverless
+./test/ci.sh
+
+# test the fork warning
+export CIRCLE_PR_USERNAME=shawnbot
+export CIRCLE_PR_REPONAME=college-choice
+./test/ci.sh
 ```
 
-Then run:
+If you were to run any of the browser tests at this point, they will exit early
+and output a warning to stderr:
+
+```
+exiting from forked branch
+```
+
+You'll need to `unset CIRCLE_PR_USERNAME` before you can run the tests again,
+since that env var short-circuits both the browser and a11y tests. You can then
+set `CIRCLE_SHA1` to test the Federalist wait behavior:
 
 ```sh
-npm run test-a11y
+unset CIRCLE_PR_USERNAME CIRCLE_PR_REPONAME
+export CIRCLE_SHA1=$(curl -s $(node test/url.js)/commit.txt)
+./test/ci.sh
 ```
 
-The accessibility test runner is [a11y.js](a11y.js), and the pa11y
-configuration lives in [pa11y.conf.js](pa11y.conf.js).
-
+See the [circle.yml](circle.yml) for more info on the order in which tests are
+run.
 
 [WebDriverIO]: http://webdriver.io/
 [Node.js]: https://nodejs.org/
