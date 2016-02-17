@@ -398,6 +398,7 @@ module.exports = function search() {
     var numPages = Math.ceil(total / perPage);
     var previous = false;
     var next = false;
+    var pages;
 
     if (numPages > MAX_PAGES) {
       var end = Math.min(page + MAX_PAGES, numPages);

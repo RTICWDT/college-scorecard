@@ -403,16 +403,20 @@ describe('school page', function() {
   // This is MUCH uglier than I like, but I wasn't able to find a cleaner way
   //  of determining if an element is actually visible, given that it is part
   //  of a element with overview:scroll.
-  it('the last program in a scrolling section should be visable', function*() {
+  it('the last program in a scrolling section should be visible', function*() {
     yield loadSchoolUrl('201645-Case-Western-Reserve-University');
     assert.equal(yield toggleAccordion('#academics'), 'true');
+
     var lastProgramPreScroll = yield browser
       .getLocation('#academics ul.school-long_list li:last-of-type span');
+
     yield browser
       .execute(function() {
         var element = document.getElementsByClassName('school-long_list')[0];
         element.scrollTop += element.scrollHeight;
-      }).pause(5000);
+      })
+      .pause(5000);
+
     var lastProgramPostScroll = yield browser
       .getLocation('#academics ul.school-long_list li:last-of-type span');
     var listSize = yield browser
@@ -420,10 +424,18 @@ describe('school page', function() {
     var listLocation = yield browser
       .getLocation('#academics ul.school-long_list');
     var listBound = listLocation.y + listSize.height;
+
     assert(lastProgramPreScroll.y > listBound,
            'Last element was in view before scroll.');
     assert(lastProgramPostScroll.y < listBound,
            'Last element was not in view after scroll.');
+  });
+
+  it('shows "Education" among the list of offered programs', function*() {
+    yield loadSchoolUrl('110583-California-State-University-Long-Beach');
+    assert.equal(yield toggleAccordion('#academics'), 'true');
+    var html = yield browser.getHTML('#academics [data-bind=available_programs]');
+    assert(html.match(/\bEducation\b/), 'no "Education" item found in program listing');
   });
 
 });
