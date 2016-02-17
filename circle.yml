@@ -1,10 +1,6 @@
 machine:
   node:
     version: 4.0
-dependencies:
-  post:
-    # - wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz
-    # - tar -xzf sc-latest-linux.tar.gz
 test:
   override:
     # create directories for xunit reports
@@ -29,7 +25,3 @@ test:
 
     # run the accessibility tests
     - npm run test-a11y
-
-  post:
-    # wait for Sauce Connect to close the tunnel
-    - killall --wait sc
