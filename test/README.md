@@ -66,7 +66,8 @@ you'll either have to background it explicitly or run it in a
 separate shell from the other commands.
 
 The tests depend on fetching the site from `http://localhost:4000/` . The
-simplest way of building the site and running the server in one go is with `jekyll serve`, which you should leave running in another shell:
+simplest way of building the site and running the server in one go is with
+`jekyll serve`, which you should leave running in another shell:
 
 ```sh
 bundle exec jekyll serve
@@ -140,7 +141,10 @@ On [CircleCI] we run cross-browser tests with:
 npm run test-ci
 ```
 
-The requests are tunneled through [Sauce Connect]. 
+On the CI server, both the browser and accessibility tests are run against
+public Federalist preview URLs. See [this pull
+request](https://github.com/18F/college-choice/pull/1496) for more
+info and instructions for testing the CI behavior locally.
 
 
 ## Accessibility Tests
