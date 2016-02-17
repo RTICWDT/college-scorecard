@@ -1,0 +1,5 @@
+---
+# this file outputs the most recent git commit SHA1, and is used by the CI test
+# script to ensure that we're running tests against the latest Federalist build
+---
+{{ site.commit.commit }}
