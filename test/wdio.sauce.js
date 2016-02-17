@@ -1,3 +1,4 @@
+/* jshint node: true */
 var config = require('./wdio.quick').config;
 
 config.user = process.env.SAUCE_USERNAME;

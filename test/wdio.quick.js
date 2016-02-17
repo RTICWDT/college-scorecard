@@ -1,3 +1,4 @@
+/* jshint node: true */
 var config = require('./wdio.conf').config;
 
 config.exclude = [
