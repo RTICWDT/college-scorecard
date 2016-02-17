@@ -9,20 +9,13 @@ if [ -n "$CIRCLE_PR_USERNAME" ] && [ "$CIRCLE_PROJECT_USERNAME" != "$CIRCLE_PR_U
   echo "Please merge this branch locally and test it before merging the "
   echo "associated pull request to ${repo}."
   echo
-  exit 1
+  exit 0
 fi
 
-if [ "$CIRCLE_BRANCH" == "master" ]; then
-  url="https://collegescorecard.ed.gov"
-elif [ "$CIRCLE_BRANCH" != "" ]; then
-  url="https://federalist.18f.gov/preview/${repo}/${CIRCLE_BRANCH}"
-else
-  echo "no CIRCLE_BRANCH detected; testing locally"
-  npm run test-ci
-  exit $?
-fi
+# get the URL from our node script
+url=$(node test/url.js)
 
-echo "testing site URL: ${url}"
+echo "testing URL: ${url}"
 
 if [ "$CIRCLE_SHA1" != "" ]; then
   commit_url="${url}/commit.txt"
@@ -45,6 +38,3 @@ if [ "$CIRCLE_SHA1" != "" ]; then
     sleep 5
   done
 fi
-
-# pass the Federalist URL to the test runner
-BROWSER_TEST_URL=$url npm run test-ci
