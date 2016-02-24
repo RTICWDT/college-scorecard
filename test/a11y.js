@@ -1,22 +1,22 @@
 #!/usr/bin/env node
 /* jshint node: true, esnext: true */
 
-const async = require('async');
-const pa11y = require('pa11y');
-const reporter = require('pa11y/reporter/cli');
-const config = require('./pa11y.conf');
-const test = pa11y(config);
+var async = require('async');
+var pa11y = require('pa11y');
+var reporter = require('pa11y/reporter/cli');
+var config = require('./pa11y.conf');
+var test = pa11y(config);
 
-const BASEURL = 'http://localhost:4000';
+var baseUrl = require('./url');
 
-const URLS = [
-  BASEURL + '/',
-  BASEURL + '/search/?state=CA',
-  BASEURL + '/school/?226152-Texas-A-M-International-University',
+var URLS = [
+  baseUrl + '/',
+  baseUrl + '/search/?state=CA',
+  baseUrl + '/school/?226152-Texas-A-M-International-University',
   // BASEURL + '/data/',
 ];
 
-const IGNORE_RESULTS = [
+var IGNORE_RESULTS = [
   function leafletImage(result) {
     return result.context.match(/leaflet-tile/);
   }

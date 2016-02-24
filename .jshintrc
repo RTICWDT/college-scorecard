@@ -7,27 +7,24 @@
   "forin": true,
   "immed": true,
   "latedef": "nofunc",
+  "laxbreak": true,
   "maxlen": 80,
   "newcap": true,
   "noarg": true,
   "noempty": true,
   "nonew": true,
   "predef": [
-    "$",
-    "jQuery",
+    "console",
+    "picc",
+    "L",
 
-    "jasmine",
     "beforeEach",
     "describe",
     "xdescribe",
-    "expect",
     "it",
     "xit",
 
-    "angular",
-    "inject",
     "module",
-
     "require",
     "process",
     "global"

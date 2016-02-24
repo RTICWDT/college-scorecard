@@ -713,37 +713,34 @@ picc.access.specialDesignations = function(d) {
 /**
  * Returns an array of program areas for a given school object from the API.
  *
- * @param {Object}  school    the school data object
- * @param {Object?} metadata  the optional API metadata object. If this is
- *                            falsy, we look for metadata in `school.metadata`.
+ * @param {Object}  school  the school data object
+ * @param {String?} field   the optional field in which to look for program
+ *                          areas.
  * @return {Array}  an Array of Objects, each with `program` (the name) and
- *                  `percent` (a decimal number or string representing its
+ *                  `value` (a decimal number or string representing its
  *                  share of student enrollment) properties.
  */
-picc.access.programAreas = function(d, metadata) {
-  if (!metadata) metadata = d.metadata;
-  if (!metadata || !metadata.dictionary) return [];
+picc.access.programAreas = function(d, field) {
+  if (!field) {
+    field = picc.fields.PROGRAM_OFFERED + '.degree';
+  }
 
-  var dictionary = metadata.dictionary;
-  var field = picc.fields.PROGRAM_PERCENTAGE;
   var programs = picc.access(field)(d);
-  if (!programs) return [];
-  // remove the year prefix
-  field = field.replace(/^\d+\./, '');
-  return Object.keys(programs || {})
+  if (!programs) {
+    return [];
+  }
+
+  return Object.keys(programs)
     .map(function(key) {
       var value = programs[key];
-      var dictKey = [field, key].join('.');
-      var name = dictionary[dictKey]
-        ? (dictionary[dictKey].label || key)
-        : key;
+      var name = picc.PROGRAM_NAMES[key];
       return {
         program: name,
-        percent: value
+        value: +value
       };
     })
     .filter(function(d) {
-      return +d.percent > 0;
+      return d.value > 0;
     });
 };
 
@@ -992,14 +989,11 @@ picc.school.directives = (function() {
     }),
 
     popular_programs: function(d) {
-      var areas = access.programAreas(d);
-      if (areas.length) {
-        var total = d3.sum(areas, picc.access('percent'));
-        areas.forEach(function(d) {
-          d.value = +d.percent / total;
-          d.percent = percent(d.value);
-        });
-      }
+      var areas = access.programAreas(d, fields.PROGRAM_PERCENTAGE);
+      // copy the "value" key to "percent"
+      areas.forEach(function(d) {
+        d.percent = d.value;
+      });
       return areas
         .sort(function(a, b) {
           return d3.descending(a.value, b.value);
