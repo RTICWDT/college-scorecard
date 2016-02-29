@@ -19,6 +19,15 @@
    */
   picc.SPECIAL_DESIGNATIONS = ({{ site.data.special_designations|jsonify }});
 
+  /*
+   * The names of programs by API sub-field key, e.g.
+   * 'language': 'Foreign Languages, Literatures, and Linguistics'
+   */
+  picc.PROGRAM_NAMES = {
+  {% for program in site.data.programs %}
+    '{{ program.key }}': '{{ program.label }}',{% endfor %}
+  };
+
   // map religious affiliation ids to their labels
   picc.RELIGIOUS_AFFILIATIONS_BY_NUMBER = {
   {% for affiliation in site.data.religious_affiliations %}

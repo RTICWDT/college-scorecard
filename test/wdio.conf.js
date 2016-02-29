@@ -1,3 +1,6 @@
+/* jshint node: true */
+var baseUrl = require('./url');
+
 exports.config = {
 
     //
@@ -16,7 +19,6 @@ exports.config = {
 
     // Patterns to exclude.
     exclude: [
-        //''
     ],
 
     //
@@ -58,7 +60,7 @@ exports.config = {
     //
     // Set a base URL in order to shorten url command calls. If your url
     // parameter starts with "/", the base url gets prepended.
-    baseUrl: 'http://localhost:4000',
+    baseUrl: baseUrl,
 
     //
     // Default timeout for all waitForXXX commands.
@@ -133,7 +135,7 @@ exports.config = {
     //
     // Gets executed after all tests are done. You still have access to all
     // global variables from the test.
-    after: function(failures, pid) {
+    after: function(/* failures, pid */) {
         // do something
     },
 
