@@ -1,5 +1,5 @@
-/* jshint esnext: true */
-/*global require, describe, it, browser */
+/* jshint esnext: true, maxlen: 120, noyield: true */
+/* global browser */
 
 var assert = require('assert');
 var results = require('./resultData.json');
