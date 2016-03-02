@@ -1,5 +1,5 @@
-/* jshint esnext: true */
-/* global it, require, describe, browser */
+/* jshint esnext: true, maxlen: 120, noyield: true */
+/* global browser */
 
 var assert = require('assert');
 
@@ -434,8 +434,18 @@ describe('school page', function() {
   it('shows "Education" among the list of offered programs', function*() {
     yield loadSchoolUrl('110583-California-State-University-Long-Beach');
     assert.equal(yield toggleAccordion('#academics'), 'true');
-    var html = yield browser.getHTML('#academics [data-bind=available_programs]');
-    assert(html.match(/\bEducation\b/), 'no "Education" item found in program listing');
+    var html = yield browser
+      .getHTML('#academics [data-bind=available_programs]');
+    assert(html.match(/\bEducation\b/),
+           'no "Education" item found in program listing');
+  });
+
+  it('lists "Hispanic" among race/ethnicity values at UC Long Beach', function*() {
+    yield loadSchoolUrl('110583-California-State-University-Long-Beach');
+    assert.equal(yield toggleAccordion('#demographics'), 'true');
+    var text = yield browser
+      .getText('#demographics .bar-hispanic .label');
+    assert.equal(text, 'Hispanic');
   });
 
 });
