@@ -1,5 +1,5 @@
-/* jshint esnext: true */
-/* global it, require, describe, browser */
+/* jshint esnext: true, maxlen: 120, noyield: true */
+/* global browser */
 
 var assert = require('assert');
 
