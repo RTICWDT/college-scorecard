@@ -955,7 +955,6 @@ picc.school.directives = (function() {
     },
 
     race_ethnicity_values: function(d) {
-      if (!d.metadata) return [];
       var values = access(fields.RACE_ETHNICITY)(d);
       if (!values) return [];
       return Object.keys(values)
