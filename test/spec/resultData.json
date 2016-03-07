@@ -12,12 +12,12 @@
     "allSmall" : 2478,
     "allMedium" : 1466,
     "allLarge" : 249,
-    "allSmallAndLarge" : 2768,
-    "allAssociates" : 3056,
-    "allBachelors" : 2671,
-    "allPublic" : 1629,
-    "allPrivateNonProfit" : 1447,
-    "allPrivateForProfit" : 1171
+    "allSmallAndLarge" : 2727,
+    "allAssociates" : 3005,
+    "allBachelors" : 2638,
+    "allPublic" : 1622,
+    "allPrivateNonProfit" : 1431,
+    "allPrivateForProfit" : 1140
   },
   "allSchoolsInState" : [
     {"code": "AL", "name": "Alabama", "count": 76},
