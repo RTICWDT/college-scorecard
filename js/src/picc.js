@@ -991,7 +991,9 @@ picc.school.directives = (function() {
       var areas = access.programAreas(d, fields.PROGRAM_PERCENTAGE);
       // copy the "value" key to "percent"
       areas.forEach(function(d) {
-        d.percent = d.value;
+        d.percent = d.value > 0.005
+          ? percent(d.value)
+          : '<1%';
       });
       return areas
         .sort(function(a, b) {
