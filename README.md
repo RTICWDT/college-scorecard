@@ -8,6 +8,11 @@ best suited to them, and ensure a broad and flexible definition of elements that
 
 This repo contains the front end of a web app with its API created by an instance of [Open Data Maker](https://github.com/18F/open-data-maker) which is configured with a specific data set. For more details on setting up the back end of the web app, see below: [Running the API Locally](#running-the-api-locally).  However, you can run the web app with the hosted API following the installation instructions in the next section.
 
+#### Build Status
+* [production](https://github.com/18F/college-choice/tree/master/) [![Circle CI](https://circleci.com/gh/18F/college-choice.svg?style=svg)](https://circleci.com/gh/18F/college-choice)
+* [staging](https://github.com/18F/college-choice/tree/staging/) [![Circle CI](https://circleci.com/gh/18F/college-choice/tree/staging.svg?style=svg)](https://circleci.com/gh/18F/college-choice/tree/staging)
+* [development](https://github.com/18F/college-choice/tree/dev/) [![Circle CI](https://circleci.com/gh/18F/college-choice/tree/dev.svg?style=svg)](https://circleci.com/gh/18F/college-choice/tree/dev)
+
 
 ## Installation
 This site is made with [Jekyll]. Once you've got [Ruby] on your computer, you
