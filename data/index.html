@@ -2,6 +2,7 @@
 title: College Scorecard Data
 layout: default-data
 permalink: /data/
+data_base_url: https://download.collegescorecard.ed.gov
 scripts:
   - vendor/flickity.pkgd.js
 stylesheets:
@@ -105,7 +106,7 @@ stylesheets:
 
       <div class="u-group_inline">
         <div class="u-group_inline-left">
-          <a href="https://s3.amazonaws.com/ed-college-choice-public/CollegeScorecard_Raw_Data.zip" class="button button-primary">Download All Data</a>
+          <a href="{{ page.data_base_url }}/CollegeScorecard_Raw_Data.zip" class="button button-primary">Download All Data</a>
         </div>
         <div class="u-group_inline-right">
           <p>212 MB zip</p>
@@ -119,10 +120,10 @@ stylesheets:
         current data for each element.</p>
 
       <ul class="data-download-list">
-        <li><a href="https://s3.amazonaws.com/ed-college-choice-public/Most+Recent+Cohorts+(Scorecard+Elements).csv">Scorecard data</a> 4.6 MB CSV</li>
-        <li><a href="https://s3.amazonaws.com/ed-college-choice-public/Most+Recent+Cohorts+(All+Data+Elements).csv">Most recent data</a> 124 MB CSV</li>
-        <li><a href="https://s3.amazonaws.com/ed-college-choice-public/Most+Recent+Cohorts+(NSLDS+Elements).csv">What's new from NSLDS</a> 104.4 MB CSV</li>
-        <li><a href="https://s3.amazonaws.com/ed-college-choice-public/Most+Recent+Cohorts+(Treasury+Elements).csv">Post-school earnings</a> 7.4 MB CSV</li>
+        <li><a href="{{ page.data_base_url }}/Most+Recent+Cohorts+Scorecard+Elements.csv">Scorecard data</a> 4.6 MB CSV</li>
+        <li><a href="{{ page.data_base_url }}/Most+Recent+Cohorts+All+Data+Elements.csv">Most recent data</a> 124 MB CSV</li>
+        <li><a href="{{ page.data_base_url }}/Most+Recent+Cohorts+NSLDS+Elements.csv">What's new from NSLDS</a> 104.4 MB CSV</li>
+        <li><a href="{{ page.data_base_url }}/Most+Recent+Cohorts+Treasury+Elements.csv">Post-school earnings</a> 7.4 MB CSV</li>
       </ul>
 
     </div>
