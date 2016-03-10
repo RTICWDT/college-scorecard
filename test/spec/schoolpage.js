@@ -431,6 +431,15 @@ describe('school page', function() {
            'Last element was not in view after scroll.');
   });
 
+  it('lists percentages among popular programs', function*() {
+    yield loadSchoolUrl('110583-California-State-University-Long-Beach');
+    assert.equal(yield toggleAccordion('#academics'), 'true');
+    var text = yield browser
+      .getText('#academics [data-bind=popular_programs]');
+    assert(text.match(/\bBusiness, Management, Marketing, and Related Support Services \(\d+%\)/), // jshint ignore:line
+           'no "Business Management" percentage found in: ' + text);
+  });
+
   it('shows "Education" among the list of offered programs', function*() {
     yield loadSchoolUrl('110583-California-State-University-Long-Beach');
     assert.equal(yield toggleAccordion('#academics'), 'true');

@@ -6,7 +6,7 @@
     <aria-accordion id="school-degree" class="container">
 
       <h1 class="search_category">
-        <button aria-expanded="false" aria-controls="major-content">
+        <button type="button" aria-expanded="false" aria-controls="major-content">
           Programs/Degrees
         </button>
       </h1>
@@ -43,7 +43,7 @@
     <aria-accordion id="school-location" class="container">
 
       <h1 class="search_category">
-        <button aria-expanded="false" aria-controls="location-content">
+        <button type="button" aria-expanded="false" aria-controls="location-content">
           Location
         </button>
       </h1>
@@ -66,10 +66,10 @@
               </select>
             </div>
             <div class="u-group_inline u-group_inline-right u-nowrap">
-              <button class="button button-add">
+              <button type="button" class="button button-add">
                 Add<br>State
               </button>
-              <button class="button button-remove" title="Remove State">
+              <button type="button" class="button button-remove" title="Remove State">
                 <i class="fa fa-times-circle"></i>
               </button>
             </div>
@@ -93,10 +93,10 @@
               </select>
             </div>
             <div class="u-group_inline u-group_inline-right u-nowrap">
-              <button class="button button-add">
+              <button type="button" class="button button-add">
                 Add<br>Region
               </button>
-              <button class="button button-remove" title="Remove Region">
+              <button type="button" class="button button-remove" title="Remove Region">
                 &times;
               </button>
             </div>
@@ -137,7 +137,7 @@
     <aria-accordion id="school-size" class="container">
 
       <h1 class="search_category">
-        <button aria-expanded="false" aria-controls="size-content">
+        <button type="button" aria-expanded="false" aria-controls="size-content">
           Size
         </button>
       </h1>
@@ -185,7 +185,7 @@
     <aria-accordion id="school-name" class="container">
 
       <h1 class="search_category">
-        <button aria-expanded="false" aria-controls="name-content">
+        <button type="button" aria-expanded="false" aria-controls="name-content">
           Name
         </button>
       </h1>
@@ -195,7 +195,7 @@
         <input id="name-school" name="name" type="text" placeholder="e.g., USA University" {{ common_input_attributes }}>
       </div>
 
-      <input type="submit" value="Submit" class="sr-only" tabindex="-1">
+      <input type="submit" value="Submit" class="sr-only">
 
     </aria-accordion>
 
@@ -206,7 +206,7 @@
 
     <aria-accordion class="container">
       <h1 class="search_category">
-        <button aria-expanded="false" aria-controls="type-content">
+        <button type="button" aria-expanded="false" aria-controls="type-content">
           Advanced Search
         </button>
       </h1>
@@ -276,7 +276,7 @@
           <legend>Advanced Search</legend>
 
           <div class="advanced_search-title">
-            <button aria-expanded="false" aria-controls="advanced-content" class="button link-more advanced_search-control">
+            <button type="button" aria-expanded="false" aria-controls="advanced-content" class="button link-more advanced_search-control">
               Advanced Search <i class="fa fa-plus"></i>
             </button>
           </div>
@@ -291,7 +291,7 @@
 
     </fieldset> END section for future advanced search features -->
 
-    <button id="search-submit" class="button button-primary search-button">
+    <button type="submit" id="search-submit" class="button button-primary search-button">
       Find Schools
     </button>
 
