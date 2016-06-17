@@ -40,13 +40,16 @@ stylesheets:
         <div class="show-loaded">
 
           <div class="school-share-wrapper">
-            <a data-href="mailto:?subject=Take%20a%20look%20at%20this%20school&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A{url}" class="school-share" data-bind="share_link">Share this school</a>
+            <a t-href="share_link_href('Take a look at this school', 'I found this on collegescorecard.ed.gov. Take a look:\n\n', document.location.href)" class="school-share">
+              Share this school
+            </a>
           </div>
 
           <div class="school-heading">
 
             <div class="investigation-major-wrapper"
-              data-bind="under_investigation" aria-hidden="true">
+              aria-hidden="true"
+              t-aria-hidden="!under_investigation">
               <a>
                 <p class="investigation-major" aria-describedby="tip-hcm2">
                   Under Ed Monitoring <i class="tooltip-target fa fa-info-circle"></i>
@@ -54,46 +57,47 @@ stylesheets:
               </a>
             </div>
 
-            <h1 data-bind="name">School Name</h1>
+            <h1 t-text="name">School Name</h1>
 
             <h2 class="location">
-              <span data-bind="city">City</span>,
-              <span data-bind="state">State</span>
+              <span t-text="city">City</span>,
+              <span t-text="state">State</span>
             </h2>
 
             <h2 class="population">
-              <span data-bind="size_number">X</span> undergraduate students
+              <span t-text="size_number">X</span> undergraduate students
             </h2>
 
             <h2 class="school-url">
-              <span data-bind="">
-                <a data-bind="school_link" target="_blank">ed.gov</a>
+              <span>
+                <a t-href="school_link" target="_blank">ed.gov</a>
               </span>
             </h2>
 
             <ul class="school-key_figures key-figures">
-              <li data-bind="years">
-                <span data-bind="number" class="school-key_figures-year">X</span>
-                <span class="label"></span>
+              <li t-class="years_class">
+                <span t-text="years_text" class="school-key_figures-year">X</span>
+                <span t-text="years_label" class="label"></span>
               </li>
-              <li data-bind="control">
-                <span data-bind="value">X</span>
+              <li t-class="control_class">
+                <span t-text="control_text">X</span>
               </li>
-              <li data-bind="locale_name">
-                <span data-bind="value">X</span>
+              <li t-class="locale_class">
+                <span t-text="locale_text">X</span>
               </li>
-              <li data-bind="size_category">
-                <span data-bind="value">X</span>
+              <li t-class="size_category">
+                <span t-text="size_category">X</span>
               </li>
             </ul>
 
-            <ul class="school-special_designation" data-bind="special_designations">
-              <li class="special"></li>
+            <ul class="school-special_designation">
+              <li t-each="special_designations" t-text="." class="special">
+              </li>
             </ul>
 
           </div>
 
-          <div class="school-map" data-bind="map">
+          <div class="school-map">
           </div>
 
           <div class="school-meters">
@@ -108,7 +112,7 @@ stylesheets:
               <picc-meter {% include net_price_meter_attributes.html %}>
               </picc-meter>
               <figcaption>
-                <span data-bind="average_cost">$XX,XXX</span>
+                <span t-text="average_cost_dollars">$XX,XXX</span>
               </figcaption>
             </figure>
 
@@ -122,7 +126,7 @@ stylesheets:
               <picc-meter {% include graduation_meter_attributes.html %}>
               </picc-meter>
               <figcaption>
-                <span data-bind="grad_rate">XX%</span>
+                <span t-text="grad_rate_percent">XX%</span>
               </figcaption>
             </figure>
 
@@ -136,7 +140,7 @@ stylesheets:
               <picc-meter {% include earnings_meter_attributes.html %}>
               </picc-meter>
               <figcaption>
-                <span data-bind="average_salary">$XX,XXX</span>
+                <span t-text="average_salary_dollars">$XX,XXX</span>
               </figcaption>
             </figure>
 
@@ -178,7 +182,7 @@ stylesheets:
                       <picc-meter id="cost-meter" {% include net_price_meter_attributes.html %}>
                       </picc-meter>
                       <figcaption>
-                        <span class="average-value" data-bind="average_cost"></span>
+                        <span class="average-value" t-text="average_cost_dollars"></span>
                         <div class="average-wrapper">
                           <i class="fa average average-arrow" data-meter="cost-meter"></i> <span class="average average-label"></span>
                         </div>
@@ -195,7 +199,8 @@ stylesheets:
                       </div>
                     </div>
 
-                    <a class="button button-primary button-costs" target="_blank" data-bind="net_price_calculator">
+                    <a class="button button-primary button-costs" target="_blank"
+                      t-href="net_price_calculator_href">
                       <i class="fa fa-calculator"></i>
                       Calculate your personal net price
                     </a>
@@ -217,23 +222,23 @@ stylesheets:
                       <tbody>
                         <tr>
                           <td>$0-$30,000</td>
-                          <td data-bind="net_price_income1">$X,XXX</td>
+                          <td t-text="net_price_income1">$X,XXX</td>
                         </tr>
                         <tr>
                           <td>$30,001-$48,000</td>
-                          <td data-bind="net_price_income2">$XX,XXX</td>
+                          <td t-text="net_price_income2">$XX,XXX</td>
                         </tr>
                         <tr>
                           <td>$48,001-$75,000</td>
-                          <td data-bind="net_price_income3">$XX,XXX</td>
+                          <td t-text="net_price_income3">$XX,XXX</td>
                         </tr>
                         <tr>
                           <td>$75,001-$110,000</td>
-                          <td data-bind="net_price_income4">$XX,XXX</td>
+                          <td t-text="net_price_income4">$XX,XXX</td>
                         </tr>
                         <tr>
                           <td>$110,001+</td>
-                          <td data-bind="net_price_income5">$XX,XXX</td>
+                          <td t-text="net_price_income5">$XX,XXX</td>
                         </tr>
                       </tbody>
                     </table>
@@ -269,16 +274,17 @@ stylesheets:
                       </h2>
                       <picc-meter id="repayment-meter"
                         class="debt"
-                        data-bind="repayment_rate_meter"
                         max="1"
+                        t-value="repayment_rate_value"
                         average="{{ site.data.national_stats.repayment_rate.median }}"
+                        average-format="percent"
                         average-range="{{ site.data.national_stats.repayment_rate.average_range|join:'..' }}"
                         data-median-four_year="{{ site.data.national_stats.repayment_rate_4.median }}"
                         data-median-lt_four_year="{{ site.data.national_stats.repayment_rate_l4.median }}">
                       </picc-meter>
 
                       <figcaption>
-                        <span class="average-value" data-bind="repayment_rate_percent">XX%</span>
+                        <span class="average-value" t-text="repayment_rate_percent">XX%</span>
                         <div class="average-wrapper">
                           <i class="fa average average-arrow" data-meter="repayment-meter"></i> <span class="average average-label"></span>
                         </div>
@@ -319,7 +325,7 @@ stylesheets:
                           <i class="fa fa-info-circle"></i>
                         </span>
                       </h2>
-                      <strong class="fact_number" data-bind="federal_aid_percentage">XX%</strong>
+                      <strong class="fact_number" t-text="federal_aid_percentage">XX%</strong>
                       <p>At some schools where few students borrow federal loans, the typical undergraduate may leave school with $0 in debt.</p>
                     </div>
 
@@ -331,7 +337,7 @@ stylesheets:
                           <i class="fa fa-info-circle"></i>
                         </span>
                       </h2>
-                      <strong class="fact_number" data-bind="average_total_debt">$XX,XXX</strong>
+                      <strong class="fact_number" t-text="average_total_debt">$XX,XXX</strong>
                       <p>For undergraduate borrowers who complete college</p>
                     </div>
 
@@ -344,7 +350,7 @@ stylesheets:
                         </span>
                       </h2>
                       <span class="fact_number">
-                        <strong data-bind="average_monthly_loan_payment">$XXX</strong>/mo
+                        <strong t-text="average_monthly_loan_payment">$XXX</strong>/mo
                       </span>
                     </div>
 
@@ -377,7 +383,7 @@ stylesheets:
                       <picc-meter id="grad-meter" {% include graduation_meter_attributes.html %}>
                       </picc-meter>
                       <figcaption>
-                        <span class="average-value" data-bind="grad_rate">60%</span>
+                        <span class="average-value" t-text="grad_rate_percent">60%</span>
                         <div class="average-wrapper">
                           <i class="fa average average-arrow" data-meter="grad-meter"></i> <span class="average average-label"></span>
                         </div>
@@ -406,13 +412,14 @@ stylesheets:
                       </h2>
                       <picc-meter id="retention-meter"
                         class="graduation"
-                        data-bind="retention_rate_meter"
                         max="1"
+                        t-value="retention_rate"
                         average="{{ site.data.national_stats.retention_rate.median }}"
+                        average-format="percent"
                         average-range="{{ site.data.national_stats.retention_rate.average_range|join:'..' }}">
                       </picc-meter>
                       <figcaption>
-                        <span class="average-value" data-bind="retention_rate_value">XX%</span>
+                        <span class="average-value" t-text="retention_rate">XX%</span>
                         <div class="average-wrapper">
                           <i class="fa average average-arrow" data-meter="retention-meter"></i> <span class="average average-label"></span>
                         </div>
@@ -457,7 +464,7 @@ stylesheets:
                     </h2>
 
                     <strong class="fact_number">
-                      <strong data-bind="advantage_rate">XX%</strong>
+                      <strong t-text="advantage_rate">XX%</strong>
                       <span class="small normal">of students</span>
                     </strong>
                     <p>who attend this school earned, on average, more than those with only a high school diploma.</p>
@@ -475,7 +482,7 @@ stylesheets:
                       <picc-meter id="salary-meter" {% include earnings_meter_attributes.html %}>
                       </picc-meter>
                       <figcaption>
-                        <span class="average-value" data-bind="average_salary">$XX,XXX</span>
+                        <span class="average-value" t-text="average_salary_dollars">$XX,XXX</span>
                         <div class="average-wrapper">
                           <i class="fa average average-arrow" data-meter="salary-meter"></i> <span class="average average-label"></span>
                         </div>
@@ -511,12 +518,12 @@ stylesheets:
                   <div class="school-student-intro">
 
                     <ul class="school-key_figures key-figures">
-                      <li data-bind="size_category">
-                        <span data-bind="value">X</span>
+                      <li t-class="size_category">
+                        <span t-text="size_category">X</span>
                       </li>
                       <li class="school-key_figures-stat">
                         <div class="group_inline">
-                          <strong class="group_inline-left fact_number" data-bind="size_number">X,XXX</strong>
+                          <strong class="group_inline-left fact_number" t-text="size_number">X,XXX</strong>
                           <div class="group_inline-right"><p>undergraduate <br>students</p></div>
                         </div>
                       </li>
@@ -534,14 +541,14 @@ stylesheets:
 
                           <div>
                             <span class="fact_number">
-                              <strong data-bind="full_time_percent">XX</strong>
+                              <strong t-text="full_time_percent">XX</strong>
                               <span class="small">%</span>
                             </span> Full-time
                           </div>
                           <div class="fact_number divide">/</div>
                           <div>
                             <span class="fact_number">
-                              <strong data-bind="part_time_percent">XX</strong>
+                              <strong t-text="part_time_percent">XX</strong>
                               <span class="small">%</span>
                             </span> Part-time
                           </div>
@@ -557,7 +564,7 @@ stylesheets:
                           </h2>
 
                           <div class="school-student-socio_econ-stat">
-                            <strong class="fact_number" data-bind="pell_grant_percentage">X</strong>
+                            <strong class="fact_number" t-text="pell_grant_percentage">X</strong>
                             <strong>of students</strong>
                           </div>
 
@@ -577,7 +584,7 @@ stylesheets:
                           <i class="fa fa-info-circle"></i>
                         </span>
                       </h2>
-                      <ol class="bars" data-bind="race_ethnicity_values">
+                      <ol class="bars" t-foreach="race_ethnicity_values">
                         {% include bar_chart_template_item.html %}
                       </ol>
                     </div>
@@ -612,40 +619,48 @@ stylesheets:
 
                     <h3 class="h2">SAT</h3>
 
-                    <figure data-bind="sat_reading_scores_visible">
+                    <figure t-if="sat_reading_scores_visible">
                       <h4>Critical Reading</h4>
-                      <picc-range data-bind="sat_reading_scores" max="800">
+                      <picc-range max="800"
+                        t-lower="act_scores_lower"
+                        t-upper="act_scores_upper">
                       </picc-range>
                     </figure>
-                    <p class="no-data" data-bind="sat_reading_scores_invisible">
+                    <p class="no-data" t-else>
                       No Critical Reading data available.
                     </p>
 
-                    <figure data-bind="sat_math_scores_visible">
+                    <figure t-if="sat_math_scores_visible">
                       <h4>Math</h4>
-                      <picc-range data-bind="sat_math_scores" max="800">
+                      <picc-range max="800"
+                        t-upper="sat_math_scores_lower"
+                        t-lower="sat_math_scores_upper">
                       </picc-range>
                     </figure>
-                    <p class="no-data" data-bind="sat_math_scores_invisible">
+                    <p class="no-data" t-else>
                       No Math data available.
                     </p>
 
-                    <figure data-bind="sat_writing_scores_visible">
+                    <figure t-if="sat_writing_scores_visible">
                       <h4>Writing</h4>
-                      <picc-range data-bind="sat_writing_scores" max="800">
+                      <picc-range max="800"
+                        t-lower="sat_writing_scores_lower"
+                        t-upper="sat_writing_scores_upper">
                       </picc-range>
                     </figure>
-                    <p class="no-data" data-bind="sat_writing_scores_invisible">
+                    <p class="no-data" t-else>
                       No Writing data available.
                     </p>
 
                     <h3 class="h2">ACT</h3>
 
-                    <figure data-bind="act_scores_visible">
-                      <picc-range data-bind="act_scores" min="0" max="36">
+                    <figure t-if="act_scores_visible">
+                      <picc-range min="0" max="36"
+                        t-lower="act_scores_lower"
+                        t-upper="act_scores_upper">
                       </picc-range>
                     </figure>
-                    <p class="no-data" data-bind="act_scores_invisible">
+                    <p class="no-data" t-else>
                       No data available.
                     </p>
 
@@ -675,8 +690,10 @@ stylesheets:
                         <i class="fa fa-info-circle"></i>
                       </span>
                     </h2>
-                    <ol class="decimal school-programs" data-bind="popular_programs">
-                      <li><span class="program"></span> (<span class="percent"></span>)</li>
+                    <ol class="decimal school-programs">
+                      <li t-each="popular_programs">
+                        <span t-text="program"></span> (<span t-text="percent"></span>)
+                      </li>
                     </ol>
                   </div>
 
@@ -689,8 +706,10 @@ stylesheets:
                         <i class="fa fa-info-circle"></i>
                       </span>
                     </h2>
-                    <ul class="school-long_list" data-bind="available_programs">
-                      <li><span class="program">Management</span></li>
+                    <ul class="school-long_list">
+                      <li t-each="available_programs">
+                        <span t-text="program">Management</span>
+                      </li>
                     </ul>
 
                   </div>
