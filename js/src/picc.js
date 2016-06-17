@@ -786,105 +786,76 @@ picc.school.directives = (function() {
     ].join('');
   };
 
-  var underInvestigation = {
-    '@aria-hidden': function(d) {
-      var flag = access(fields.UNDER_INVESTIGATION)(d);
-      return +flag !== 1;
-    }
-  };
-
   var years = format.preddeg(fields.PREDOMINANT_DEGREE);
 
   return {
-    title: {
-      link: {
-        text: access(fields.NAME),
-        '@href': href
-      }
+    school_name:    access(fields.NAME),
+    local_href:     href,
+    external_link_href: format.href(fields.SCHOOL_URL),
+    external_link_text: function(d) {
+      var url = picc.access(fields.SCHOOL_URL)(d);
+      if (!url) return url;
+      // grab the domain, strip the leading "www."
+      return url.split('/').shift().replace(/^www\./, '');
     },
 
-    school_link: {
-      '@href':  format.href(fields.SCHOOL_URL),
-      text: function(d) {
-        var url = picc.access(fields.SCHOOL_URL)(d);
-        if (!url) return url;
-        // grab the domain, strip the leading "www."
-        return url.split('/').shift().replace(/^www\./, '');
-      }
+    share_link_href: function(d) {
+      return [
+        'mailto:?subject=',
+        encodeURIComponent('Take a look at this school'),
+        '&amp;body=',
+        encodeURIComponent('I found this on collegescorecard.ed.gov. Take a look:\n\n'),
+        encodeURIComponent(href(d))
+      ].join('');
     },
 
-    share_link: {
-      '@href': function(d) {
-        return picc.template.resolve(
-          this.getAttribute('data-href'),
-          {url: encodeURIComponent(document.location.href)}
-        );
-      }
-    },
-
-    response_link: {
-      '@href': function(d) {
-        var href = format.href(fields.SCHOOL_URL)(d);
-        if (href) {
-          var suffix = '/CollegeScorecard';
-          if (href.substr(-1) === '/') {
-            href += suffix.substr(1);
-          } else {
-            href += suffix;
-          }
-          return href;
+    response_href: function(d) {
+      var href = format.href(fields.SCHOOL_URL)(d);
+      if (href) {
+        var suffix = '/CollegeScorecard';
+        if (href.substr(-1) === '/') {
+          href += suffix.substr(1);
+        } else {
+          href += suffix;
         }
-        return '';
+        return href;
       }
+      return '';
     },
 
     name:           access(fields.NAME),
     city:           access(fields.CITY),
     state:          access(fields.STATE),
 
-    under_investigation: underInvestigation,
-
-    // FIXME this is a hack to deal with the issue of tagalong
-    // not applying a directive to multiple elements
-    under_investigation2: underInvestigation,
+    under_investigation: function(d) {
+      var flag = access(fields.UNDER_INVESTIGATION)(d);
+      return flag === 1;
+    },
 
     size_number:    format.number(fields.SIZE),
-    control: {
-      '@class': format.controlClass(fields.OWNERSHIP),
-      value: format.control(fields.OWNERSHIP)
+    control_class:  format.controlClass(fields.OWNERSHIP),
+    control_text:   format.control(fields.OWNERSHIP),
+
+    locale_class:   format.localeClass(fields.LOCALE),
+    locale_text:    format.locale(fields.LOCALE),
+
+    years_class: function(d) {
+      return years(d) ? 'n-year' : 'certificate';
     },
-    locale_name: {
-      '@class': format.localeClass(fields.LOCALE),
-      value: format.locale(fields.LOCALE)
+    years_text: years,
+    years_label: function(d) {
+      return years(d) ? 'Year' : 'Certificate';
     },
 
-    years: {
-      '@class': function(d) {
-        return years(d) ? 'n-year' : 'certificate';
-      },
-      number: years,
-      label: function(d) {
-        return years(d) ? 'Year' : 'Certificate';
-      }
-    },
-
-    size_category: {
-      '@class': format.sizeCategoryClass(fields.SIZE),
-      value: format.sizeCategory(fields.SIZE)
-    },
+    size_category: format.sizeCategoryClass(fields.SIZE),
 
     // this is a direct accessor because some designations
     // (e.g. `women_only`) are at the object root, rather than
     // nested in `minority_serving`.
     special_designations: access.specialDesignations,
 
-    average_cost: format.dollars(access.netPrice),
-    average_cost_meter: {
-      // '@max':     access.nationalStat('max', access.publicPrivate),
-      // '@average': access.nationalStat('median', access.publicPrivate),
-      '@value':   access.netPrice,
-      label:      format.dollars(function() { return this.average; })
-    },
+    average_cost_value: access.netPrice,
+    average_cost_dollars: format.dollars(access.netPrice),
 
     // income level net price stats
     net_price_income1: format.dollars(access.netPriceByIncomeLevel('0-30000')),
@@ -895,26 +866,14 @@ picc.school.directives = (function() {
 
     advantage_rate: format.percent(fields.EARNINGS_GT_25K),
 
-    grad_rate: format.percent(access.completionRate),
-    grad_rate_meter: {
-      // '@average': access.nationalStat('median', access.yearDesignation),
-      '@value':   access.completionRate,
-      label:      format.percent(function() { return this.average; })
-    },
+    grad_rate_value: access.completionRate,
+    grad_rate_percent: format.percent(access.completionRate),
 
-    average_salary: format.dollars(access.earningsMedian),
-    average_salary_meter: {
-      '@value': access.earningsMedian,
-      // '@average': access.nationalStat('median', access.yearDesignation),
-      label:    format.dollars(function() { return this.average; })
-    },
+    average_salary_value: access.earningsMedian,
+    average_salary_dollars: format.dollars(access.earningsMedian),
 
+    repayment_rate_value: access(fields.REPAYMENT_RATE),
     repayment_rate_percent: format.percent(fields.REPAYMENT_RATE),
-    repayment_rate_meter: {
-      '@value': access(fields.REPAYMENT_RATE),
-      // '@average': access.nationalStat('median', access.yearDesignation),
-      label:    format.percent(function() { return this.average; })
-    },
 
     average_total_debt: format.dollars(fields.AVERAGE_TOTAL_DEBT),
     average_monthly_loan_payment: format.dollars(fields.MONTHLY_LOAN_PAYMENT),
@@ -922,17 +881,10 @@ picc.school.directives = (function() {
     federal_aid_percentage: format.percent(fields.AID_PERCENTAGE),
     pell_grant_percentage: format.percent(fields.PELL_PERCENTAGE),
 
-    earnings_gt_25k: format.percent(access.earnings25k),
-    earnings_gt_25k_meter: {
-      '@value': access.earnings25k,
-      label:    format.percent(function() { return this.average; })
-    },
+    earnings_gt_25k_value: access.earnings25k,
+    earnings_gt_25k_percent: format.percent(access.earnings25k),
 
-    retention_rate_value: format.percent(access.retentionRate),
-    retention_rate_meter: {
-      '@value': access.retentionRate,
-      label:    format.percent(function() { return this.average; })
-    },
+    retention_rate: access.retentionRate,
 
     full_time_percent: format.number(function(d) {
       var pt = access.partTimeShare(d);
@@ -955,7 +907,6 @@ picc.school.directives = (function() {
     },
 
     race_ethnicity_values: function(d) {
-      if (!d.metadata) return [];
       var values = access(fields.RACE_ETHNICITY)(d);
       if (!values) return [];
       return Object.keys(values)
@@ -990,9 +941,9 @@ picc.school.directives = (function() {
 
     popular_programs: function(d) {
       var areas = access.programAreas(d, fields.PROGRAM_PERCENTAGE);
-      // copy the "value" key to "percent"
+      // format the percentage for each value
       areas.forEach(function(d) {
-        d.percent = d.value;
+        d.percent = percent(d.value);
       });
       return areas
         .sort(function(a, b) {
@@ -1010,61 +961,23 @@ picc.school.directives = (function() {
       return age ? age : NA;
     },
 
-    more_link: {
-      '@href': href
-    },
+    act_scores_visible: format.empty(fields.ACT_MIDPOINT),
+    act_scores_lower: access(fields.ACT_25TH_PCTILE),
+    act_scores_upper: access(fields.ACT_75TH_PCTILE),
 
-    act_scores_visible: {
-      '@aria-hidden': format.empty(fields.ACT_MIDPOINT),
-    },
-    act_scores_invisible: {
-      '@aria-hidden': format.notEmpty(fields.ACT_MIDPOINT),
-    },
-    act_scores: {
-      '@lower': access(fields.ACT_25TH_PCTILE),
-      '@upper': access(fields.ACT_75TH_PCTILE),
-      // '@middle': access(fields.ACT_MIDPOINT),
-    },
+    sat_reading_scores_visible: format.empty(fields.SAT_READING_MIDPOINT),
+    sat_reading_scores_lower: access(fields.SAT_READING_25TH_PCTILE),
+    sat_reading_scores_upper: access(fields.SAT_READING_75TH_PCTILE),
 
-    sat_reading_scores_visible: {
-      '@aria-hidden': format.empty(fields.SAT_READING_MIDPOINT),
-    },
-    sat_reading_scores_invisible: {
-      '@aria-hidden': format.notEmpty(fields.SAT_READING_MIDPOINT),
-    },
-    sat_reading_scores: {
-      '@lower': access(fields.SAT_READING_25TH_PCTILE),
-      '@upper': access(fields.SAT_READING_75TH_PCTILE),
-      // '@middle': access(fields.SAT_READING_MIDPOINT),
-    },
+    sat_math_scores_visible: format.empty(fields.SAT_MATH_MIDPOINT),
+    sat_math_scores_lower: access(fields.SAT_MATH_25TH_PCTILE),
+    sat_math_scores_upper: access(fields.SAT_MATH_75TH_PCTILE),
 
-    sat_math_scores_visible: {
-      '@aria-hidden': format.empty(fields.SAT_MATH_MIDPOINT),
-    },
-    sat_math_scores_invisible: {
-      '@aria-hidden': format.notEmpty(fields.SAT_MATH_MIDPOINT),
-    },
-    sat_math_scores: {
-      '@lower': access(fields.SAT_MATH_25TH_PCTILE),
-      '@upper': access(fields.SAT_MATH_75TH_PCTILE),
-      // '@middle': access(fields.SAT_MATH_MIDPOINT),
-    },
+    sat_writing_scores_visible: format.empty(fields.SAT_WRITING_MIDPOINT),
+    sat_writing_scores_lower: access(fields.SAT_WRITING_25TH_PCTILE),
+    sat_writing_scores_upper: access(fields.SAT_WRITING_75TH_PCTILE),
 
-    sat_writing_scores_visible: {
-      '@aria-hidden': format.empty(fields.SAT_WRITING_MIDPOINT),
-    },
-    sat_writing_scores_invisible: {
-      '@aria-hidden': format.notEmpty(fields.SAT_WRITING_MIDPOINT),
-    },
-    sat_writing_scores: {
-      '@lower': access(fields.SAT_WRITING_25TH_PCTILE),
-      '@upper': access(fields.SAT_WRITING_75TH_PCTILE),
-      // '@middle': access(fields.SAT_WRITING_MIDPOINT),
-    },
-
-    net_price_calculator: {
-      '@href': format.href(fields.NET_PRICE_CALC_URL)
-    }
+    net_price_calculator_href: format.href(fields.NET_PRICE_CALC_URL)
   };
 
 })();
