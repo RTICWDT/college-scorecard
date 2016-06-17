@@ -1,5 +1,5 @@
-// tagalong!
 var tagalong = require('tagalong');
+var surrogate = require('object-surrogate');
 var formdb = require('formdb');
 var querystring = require('querystring');
 var d3 = require('d3');
@@ -38,22 +38,7 @@ module.exports = function search() {
   var change = picc.debounce(onChange, 100);
 
   // only render these directives, for performance (and IE11, *cough*)
-  var directives = picc.data.selectKeys(picc.school.directives, [
-    'title',
-    'school_link',
-    'name',
-    'city',
-    'state',
-    'under_investigation',
-    'size_number',
-    'average_cost',
-    'average_cost_meter',
-    'grad_rate',
-    'grad_rate_meter',
-    'average_salary',
-    'average_salary_meter',
-    'more_link'
-  ]);
+  var directives = picc.school.directives;
 
   var win = d3.select(window);
 
@@ -303,41 +288,26 @@ module.exports = function search() {
 
       // only update the heading
       var heading = resultsRoot.querySelector('.results-main-alert');
-      tagalong(heading, meta, {
+      tagalong.render(heading, surrogate(meta, {
         results_word: format.plural('total', 'Result'),
         results_total: format.number('total', '0')
-      });
+      }));
 
       var page = +params.page || 0;
       var perPage = meta.per_page;
 
       var pages = getPages(total, perPage, page);
 
-      tagalong(paginator, {
+      tagalong.render(paginator, {
         pages: pages
       }, {
-        pages: {
-          '@data-index': function(d) {
-            return String(d.index);
-          },
-          '@class': function(d) {
-            return d.index === page
-              ? 'pagination-page_selected'
-              : d.arrow ? 'pagination-arrow' : null;
-          },
-          link: {
-            text: 'page',
-            '@data-page': function(d) {
-              return String(d.index);
-            },
-            '@href': function(d) {
-              return d.index === page
-                ? null
-                : d.index === false
-                  ? null
-                  : '?' + querystring.stringify(picc.data.extend({}, params, {page: d.index}));
-            }
-          }
+        selected: page,
+        href: function(d) {
+          return d.index === page
+            ? null
+            : d.index === false
+              ? null
+              : '?' + querystring.stringify(picc.data.extend({}, params, {page: d.index}));
         }
       });
 
@@ -385,7 +355,9 @@ module.exports = function search() {
         removeAllChildren(resultsList);
       }
 
-      tagalong(resultsList, data.results, directives);
+      tagalong.render(resultsList, {
+        results: surrogate(data.results, directives)
+      });
 
       alreadyLoaded = true;
 
