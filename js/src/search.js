@@ -7,8 +7,17 @@ var d3 = require('d3');
 module.exports = function search() {
 
   var resultsRoot = document.querySelector('.search-results');
+
+  // renderers
+  var resultsList = resultsRoot.querySelector('.schools-list');
+  var renderResults = tagalong.createRenderer(resultsList);
+
+  var heading = resultsRoot.querySelector('.results-main-alert');
+  var renderHeading = tagalong.createRenderer(heading);
+
   var paginator = resultsRoot.querySelector('.pagination');
   var bottomPaginator = resultsRoot.querySelector('.pagination_bottom');
+  var renderPaginator = tagalong.createRenderer(paginator);
 
   var form = new formdb.Form('#search-form');
   var query = querystring.parse(location.search.substr(1));
@@ -287,8 +296,7 @@ module.exports = function search() {
       var total = meta.total;
 
       // only update the heading
-      var heading = resultsRoot.querySelector('.results-main-alert');
-      tagalong.render(heading, surrogate(meta, {
+      renderHeading(surrogate(meta, {
         results_word: format.plural('total', 'Result'),
         results_total: format.number('total', '0')
       }));
@@ -298,17 +306,21 @@ module.exports = function search() {
 
       var pages = getPages(total, perPage, page);
 
-      tagalong.render(paginator, {
-        pages: pages
-      }, {
-        selected: page,
-        href: function(d) {
-          return d.index === page
+      pages.forEach(function(d) {
+        var qs = querystring.stringify(picc.data.extend({}, params, {
+          page: d.index
+        }));
+        d.selected = d.index === page;
+        d.href = d.index === page
+          ? null
+          : d.index === false
             ? null
-            : d.index === false
-              ? null
-              : '?' + querystring.stringify(picc.data.extend({}, params, {page: d.index}));
-        }
+            : '?' + qs;
+      });
+
+      renderPaginator({
+        pages: pages,
+        selected: page
       });
 
       // duplicate the pagination structure below the search results
@@ -335,8 +347,6 @@ module.exports = function search() {
             change();
           });
 
-      var resultsList = resultsRoot.querySelector('.schools-list');
-
       /*
        * XXX this avoids a nasty hard crash in IE11, which seems to have some
        * problems with tagalong's data joining algorithm (and/or, you know,
@@ -355,7 +365,7 @@ module.exports = function search() {
         removeAllChildren(resultsList);
       }
 
-      tagalong.render(resultsList, {
+      renderResults({
         results: surrogate(data.results, directives)
       });
 
