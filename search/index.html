@@ -127,11 +127,11 @@ permalink: /search/
                 t-data-page="index"
                 t-class="{
                   'select-page': true,
-                  'pagination-page_selected': index === selected,
-                  'pagination-arrow': index !== selected
+                  'pagination-page_selected': selected,
+                  'pagination-arrow': !selected
                 }"
-                t-href="(d) => href(d)"
-                t-text="(d) => d.page">1</a>
+                t-href="href"
+                t-text="page">1</a>
             </li>
           </ol>
         </div>
