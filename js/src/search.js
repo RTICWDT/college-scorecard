@@ -319,8 +319,7 @@ module.exports = function search() {
       });
 
       renderPaginator({
-        pages: pages,
-        selected: page
+        pages: pages
       });
 
       // duplicate the pagination structure below the search results
