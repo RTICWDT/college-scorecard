@@ -365,6 +365,11 @@ module.exports = function search() {
         removeAllChildren(resultsList);
       }
 
+      // Scroll to the top of the result list when loading new pages
+      if (alreadyLoaded) {
+        scrollIntoView();
+      }
+
       renderResults({
         results: surrogate(data.results, directives)
       });

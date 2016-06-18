@@ -2,6 +2,7 @@
 title: College Scorecard Data
 layout: default-data
 permalink: /data/
+data_base_url: https://collegescorecard.ed.gov/downloads
 scripts:
   - vendor/flickity.pkgd.js
 stylesheets:
@@ -97,26 +98,32 @@ stylesheets:
 
       <h2>Download the Data</h2>
 
-      <p>Download the data that appear on the College Scorecard, as well as supporting data on student completion, debt and repayment, earnings, and more. The files include data from 1996 through 2015 for all undergraduate degree-granting institutions of higher education.</p>
+      <p>Download the data that appear on the College Scorecard, as well as
+        supporting data on student completion, debt and repayment, earnings,
+        and more. The files include data from 1996 through 2015 for all
+        undergraduate degree-granting institutions of higher education. This
+        data was last updated on <strong>March 2nd, 2016</strong>.</p>
 
       <div class="u-group_inline">
         <div class="u-group_inline-left">
-          <a href="https://s3.amazonaws.com/ed-college-choice-public/CollegeScorecard_Raw_Data.zip" class="button button-primary">Download All Data</a>
+          <a href="{{ page.data_base_url }}/CollegeScorecard_Raw_Data.zip" class="button button-primary">Download All Data</a>
         </div>
         <div class="u-group_inline-right">
-          <p> 212 MB zip</p>
+          <p>212 MB zip</p>
         </div>
       </div>
 
       <h3>Featured Downloads</h3>
 
-      <p>These data downloads provide quick access to some of the data in which users may be most interested, including a file that offers the most current data for each element.</p>
+      <p>These data downloads provide quick access to some of the data in which
+        users may be most interested, including a file that offers the most
+        current data for each element.</p>
 
       <ul class="data-download-list">
-        <li><a href="https://s3.amazonaws.com/ed-college-choice-public/Most+Recent+Cohorts+(Scorecard+Elements).csv">Scorecard data</a> 4.6 MB csv</li>
-        <li><a href="https://s3.amazonaws.com/ed-college-choice-public/Most+Recent+Cohorts+(All+Data+Elements).csv">Most recent data</a> 124 MB csv</li>
-        <li><a href="https://s3.amazonaws.com/ed-college-choice-public/Most+Recent+Cohorts+(NSLDS+Elements).csv">What's new from NSLDS</a> 104.4 MB csv</li>
-        <li><a href="https://s3.amazonaws.com/ed-college-choice-public/Most+Recent+Cohorts+(Treasury+Elements).csv">Post-school earnings</a> 7.4 MB csv</li>
+        <li><a href="{{ page.data_base_url }}/Most-Recent-Cohorts-Scorecard-Elements.csv">Scorecard data</a> 4.8 MB CSV</li>
+        <li><a href="{{ page.data_base_url }}/Most-Recent-Cohorts-All-Data-Elements.csv">Most recent data</a> 155 MB CSV</li>
+        <li><a href="{{ page.data_base_url }}/Most-Recent-Cohorts-NSLDS-Elements.csv">What's new from NSLDS</a> 139 MB CSV</li>
+        <li><a href="{{ page.data_base_url }}/Most-Recent-Cohorts-Treasury-Elements.csv">Post-school earnings</a> 7.8 MB CSV</li>
       </ul>
 
     </div>
@@ -125,12 +132,16 @@ stylesheets:
 
       <h2>Data Documentation</h2>
 
-      <p>The College Scorecard is designed to increase transparency, putting the power in the hands of the public &mdash; from those choosing colleges to those improving college quality &mdash; to see how well different schools are serving their students. This documentation provides more on how to use the data, including:</p>
+      <p>The College Scorecard is designed to increase transparency, putting
+        the power in the hands of the public &mdash; from those choosing
+        colleges to those improving college quality &mdash; to see how well
+        different schools are serving their students. This documentation
+        provides more on how to use the data, including:</p>
 
       <ul class="u-unordered_list">
         <li>Sources of the data</li>
         <li>The construction of metrics</li>
-        <li> Data considerations and limitations</li>
+        <li>Data considerations and limitations</li>
       </ul>
 
       <a href="{{ site.baseurl }}/data/documentation/" class="link-more">View the documentation <i class="fa fa-chevron-right"></i></a>
@@ -140,19 +151,3 @@ stylesheets:
   </section>
 
 </div>
-
-<!-- <div style="background:#0e365b; color: white;">
-
-  <div class="container">
-
-    <section class="section">
-
-      <h2>See the Data in Action</h2>
-
-      <p>Welcome, mission statement, why this is important, join the conversation. Lorem ipsum dolor sed lacus id ligula hendrerit semper sed vitae risus.</p>
-
-    </section>
-
-  </div>
-
-</div> -->
