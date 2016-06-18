@@ -122,14 +122,10 @@ permalink: /search/
           <input type="hidden" name="page">
           <ol>
             Page:
-            <li t-each="pages">
+            <li t-each="pages"
+              t-class="d => 'pagination-page' + (d.selected ? '_selected' : '') + (d.arrow ? ' pagination-arrow' : '')">
               <a class="select-page"
                 t-data-page="index"
-                t-class="{
-                  'select-page': true,
-                  'pagination-page_selected': selected,
-                  'pagination-arrow': !selected
-                }"
                 t-href="href"
                 t-text="page">1</a>
             </li>
