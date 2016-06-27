@@ -67,6 +67,19 @@ describe('picc.form', function() {
       ]));
     });
 
+    it('treats a distance of string "0" as empty', function() {
+      assert.deepEqual(prep({zip: '12345', distance: '0'}), fromDefaults({
+        'school.zip': '12345'
+      }));
+    });
+
+    it('treats a non-zero distance as not empty', function() {
+      assert.deepEqual(prep({zip: '12345', distance: '10'}), fromDefaults({
+        'zip': '12345',
+        'distance': '10'
+      }));
+    });
+
     xdescribe('majors', function() {
 
       it('can query associates degrees', function() {
