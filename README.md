@@ -137,7 +137,7 @@ Here's how the different parts work together in our production environment:
 For the content on the College Scorecard, we are following the [18F Content Guide].
 
 [18F Content Guide]: https://pages.18f.gov/content-guide/
-[Federalist]: https://github.com/18F/federalist
+[Federalist]: https://federalist.18f.gov
 [full data set]: https://s3.amazonaws.com/ed-college-choice-public/CollegeScorecard_Raw_Data.zip
 [Open Data Maker]: https://github.com/18F/open-data-maker/
 [Jekyll]: http://jekyllrb.com/
