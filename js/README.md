@@ -51,7 +51,7 @@ encounter a merge conflict, follow these steps:
 1. `git add js/picc.js*` to add the newly bundle script to the merge commit
 1. `git commit` to complete the merge
 
-We hope to address [this particular issue](https://github.com/18F/college-choice/issues/1455)
+We hope to address [this particular issue](https://github.com/RTICWDT/college-scorecard/issues/1455)
 soon.
 
 ## Testing
