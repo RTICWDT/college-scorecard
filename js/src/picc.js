@@ -12,6 +12,10 @@ var d3 = require('d3');
 var async = require('async');
 var formdb = require('formdb');
 
+var jQuery = require("jquery");
+var typeahead = require("typeahead.js-browserify");
+typeahead.loadjQueryPlugin(); //attach jQuery
+
 // create the global picc namespace
 var picc = {};
 
@@ -1142,6 +1146,38 @@ picc.form.minifyQueryString = function(form) {
   return form;
 };
 
+/**
+ * Adds listener and attaches autocomplete/dropdown functionality
+ * to the name field in the form with given selector. Called on
+ * both index and search pages.
+ *
+ * @param {String} form selector
+*/
+picc.form.autocompleteName = function(formSelector) {
+  var field = jQuery(formSelector).find('#name-school');
+
+  field.typeahead({
+    minLength: 3,
+    highlight: true,
+    hint: false
+  }, {
+    name: 'schools',
+    limit: 10, //limit high to counteract typeahead.js bug
+    display: picc.fields.NAME,
+    source: function(q, syncResults, asyncResults) {
+      //fashion basic query object to pass to API.search
+      var query = { fields: picc.fields.NAME, per_page: 5 }
+      query[picc.fields.NAME] = q;
+      query[picc.fields.OPERATING] = 1;
+
+      //uses debounced search call to avoid API spam
+      picc.API.debounced_search(query, function(error, data) {
+        if (error) { return {}; }
+        asyncResults(data.results);
+      });
+    }
+  });
+};
 
 /**
  *
@@ -1430,6 +1466,12 @@ picc.debounce = function(fn, delay) {
     }, delay);
   };
 };
+
+/**
+* Debounced version of the picc.API.search function, used to debounce
+* autocomplete API requests for the school name field on the search form
+*/
+picc.API.debounced_search = picc.debounce(picc.API.search, 200);
 
 /**
  * This is an event delegation helper that allows us to listen for events on
