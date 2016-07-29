@@ -1168,7 +1168,7 @@ picc.form.autocompleteName = function(formSelector) {
       //fashion basic query object to pass to API.search
       var query = { fields: picc.fields.NAME, per_page: 5 }
       query[picc.fields.NAME] = q;
-      query[picc.fields.OPERATING] = 1;
+      query = picc.form.prepareParams(query);
 
       //uses debounced search call to avoid API spam
       picc.API.debounced_search(query, function(error, data) {
