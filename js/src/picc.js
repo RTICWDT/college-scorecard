@@ -451,7 +451,7 @@ picc.fields = {
   RELIGIOUS:            'school.religious_affiliation',
   OPERATING:            'school.operating',
 
-  SIZE:                 '2013.student.size',
+  SIZE:                 '2014.student.size',
   ONLINE_ONLY:          'school.online_only',
 
   WOMEN_ONLY:           'school.women_only',
@@ -463,52 +463,52 @@ picc.fields = {
   UNDER_INVESTIGATION:  'school.under_investigation',
 
   // net price
-  NET_PRICE:            '2013.cost.avg_net_price.overall',
-  NET_PRICE_BY_INCOME:  '2013.cost.net_price',
+  NET_PRICE:            '2014.cost.avg_net_price.overall',
+  NET_PRICE_BY_INCOME:  '2014.cost.net_price',
 
   // completion rate
-  COMPLETION_RATE:      '2013.completion.rate_suppressed.overall',
+  COMPLETION_RATE:      '2014.completion.rate_suppressed.overall',
 
-  RETENTION_RATE:       '2013.student.retention_rate',
+  RETENTION_RATE:       '2014.student.retention_rate',
 
-  REPAYMENT_RATE:       '2013.repayment.3_yr_repayment_suppressed.overall',
+  REPAYMENT_RATE:       '2014.repayment.3_yr_repayment_suppressed.overall',
 
-  AVERAGE_TOTAL_DEBT:   '2013.aid.median_debt_suppressed.completers.overall',
-  MONTHLY_LOAN_PAYMENT: '2013.aid.median_debt_suppressed.completers.monthly_payments',
+  AVERAGE_TOTAL_DEBT:   '2014.aid.median_debt_suppressed.completers.overall',
+  MONTHLY_LOAN_PAYMENT: '2014.aid.median_debt_suppressed.completers.monthly_payments',
 
-  AID_PERCENTAGE:       '2013.aid.federal_loan_rate',
-  PELL_PERCENTAGE:      '2013.aid.pell_grant_rate',
+  AID_PERCENTAGE:       '2014.aid.federal_loan_rate',
+  PELL_PERCENTAGE:      '2014.aid.pell_grant_rate',
 
-  MEDIAN_EARNINGS:      '2011.earnings.10_yrs_after_entry.median',
+  MEDIAN_EARNINGS:      '2012.earnings.10_yrs_after_entry.median',
 
-  EARNINGS_GT_25K:      '2011.earnings.6_yrs_after_entry.percent_greater_than_25000',
+  EARNINGS_GT_25K:      '2012.earnings.6_yrs_after_entry.percent_greater_than_25000',
 
-  PROGRAM_PERCENTAGE:   '2013.academics.program_percentage',
-  PROGRAM_OFFERED:      '2013.academics.program',
-  DEGREE_OFFERED:       '2013.academics.program_available',
+  PROGRAM_PERCENTAGE:   '2014.academics.program_percentage',
+  PROGRAM_OFFERED:      '2014.academics.program',
+  DEGREE_OFFERED:       '2014.academics.program_available',
 
-  PART_TIME_SHARE:      '2013.student.part_time_share',
-  FEMALE_SHARE:         '2013.student.demographics.female_share',
-  RACE_ETHNICITY:       '2013.student.demographics.race_ethnicity',
-  AGE_ENTRY:            '2013.student.demographics.age_entry',
+  PART_TIME_SHARE:      '2014.student.part_time_share',
+  FEMALE_SHARE:         '2014.student.demographics.female_share',
+  RACE_ETHNICITY:       '2014.student.demographics.race_ethnicity',
+  AGE_ENTRY:            '2014.student.demographics.age_entry',
 
-  ACT_25TH_PCTILE:      '2013.admissions.act_scores.25th_percentile.cumulative',
-  ACT_75TH_PCTILE:      '2013.admissions.act_scores.75th_percentile.cumulative',
-  ACT_MIDPOINT:         '2013.admissions.act_scores.midpoint.cumulative',
+  ACT_25TH_PCTILE:      '2014.admissions.act_scores.25th_percentile.cumulative',
+  ACT_75TH_PCTILE:      '2014.admissions.act_scores.75th_percentile.cumulative',
+  ACT_MIDPOINT:         '2014.admissions.act_scores.midpoint.cumulative',
 
-  SAT_CUMULATIVE_AVERAGE:   '2013.admissions.sat_scores.average.overall',
+  SAT_CUMULATIVE_AVERAGE:   '2014.admissions.sat_scores.average.overall',
 
-  SAT_READING_25TH_PCTILE:  '2013.admissions.sat_scores.25th_percentile.critical_reading',
-  SAT_READING_75TH_PCTILE:  '2013.admissions.sat_scores.75th_percentile.critical_reading',
-  SAT_READING_MIDPOINT:     '2013.admissions.sat_scores.midpoint.critical_reading',
+  SAT_READING_25TH_PCTILE:  '2014.admissions.sat_scores.25th_percentile.critical_reading',
+  SAT_READING_75TH_PCTILE:  '2014.admissions.sat_scores.75th_percentile.critical_reading',
+  SAT_READING_MIDPOINT:     '2014.admissions.sat_scores.midpoint.critical_reading',
 
-  SAT_MATH_25TH_PCTILE:     '2013.admissions.sat_scores.25th_percentile.math',
-  SAT_MATH_75TH_PCTILE:     '2013.admissions.sat_scores.75th_percentile.math',
-  SAT_MATH_MIDPOINT:        '2013.admissions.sat_scores.midpoint.math',
+  SAT_MATH_25TH_PCTILE:     '2014.admissions.sat_scores.25th_percentile.math',
+  SAT_MATH_75TH_PCTILE:     '2014.admissions.sat_scores.75th_percentile.math',
+  SAT_MATH_MIDPOINT:        '2014.admissions.sat_scores.midpoint.math',
 
-  SAT_WRITING_25TH_PCTILE:  '2013.admissions.sat_scores.25th_percentile.writing',
-  SAT_WRITING_75TH_PCTILE:  '2013.admissions.sat_scores.75th_percentile.writing',
-  SAT_WRITING_MIDPOINT:     '2013.admissions.sat_scores.midpoint.writing',
+  SAT_WRITING_25TH_PCTILE:  '2014.admissions.sat_scores.25th_percentile.writing',
+  SAT_WRITING_75TH_PCTILE:  '2014.admissions.sat_scores.75th_percentile.writing',
+  SAT_WRITING_MIDPOINT:     '2014.admissions.sat_scores.midpoint.writing',
 
   NET_PRICE_CALC_URL:       'school.price_calculator_url'
 };
