@@ -1,6 +1,7 @@
   class="graduation"
-  data-bind="grad_rate_meter"
   max="1"
+  t-value="grad_rate_value"
+  t-label="percent({{ site.data.national_stats.completion_rate.median }})"
   average="{{ site.data.national_stats.completion_rate.median }}"
   average-range="{{ site.data.national_stats.completion_rate.average_range|join:'..' }}"
   data-median-four_year="{{ site.data.national_stats.completion_rate_4.median }}"

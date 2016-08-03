@@ -1,5 +1,5 @@
-// tagalong!
 var tagalong = require('tagalong');
+var surrogate = require('object-surrogate');
 var formdb = require('formdb');
 var querystring = require('querystring');
 var d3 = require('d3');
@@ -7,8 +7,17 @@ var d3 = require('d3');
 module.exports = function search() {
 
   var resultsRoot = document.querySelector('.search-results');
+
+  // renderers
+  var resultsList = resultsRoot.querySelector('.schools-list');
+  var renderResults = tagalong.createRenderer(resultsList);
+
+  var heading = resultsRoot.querySelector('.results-main-alert');
+  var renderHeading = tagalong.createRenderer(heading);
+
   var paginator = resultsRoot.querySelector('.pagination');
   var bottomPaginator = resultsRoot.querySelector('.pagination_bottom');
+  var renderPaginator = tagalong.createRenderer(paginator);
 
   var form = new formdb.Form('#search-form');
   var query = querystring.parse(location.search.substr(1));
@@ -38,22 +47,7 @@ module.exports = function search() {
   var change = picc.debounce(onChange, 100);
 
   // only render these directives, for performance (and IE11, *cough*)
-  var directives = picc.data.selectKeys(picc.school.directives, [
-    'title',
-    'school_link',
-    'name',
-    'city',
-    'state',
-    'under_investigation',
-    'size_number',
-    'average_cost',
-    'average_cost_meter',
-    'grad_rate',
-    'grad_rate_meter',
-    'average_salary',
-    'average_salary_meter',
-    'more_link'
-  ]);
+  var directives = picc.school.directives;
 
   var win = d3.select(window);
 
@@ -302,43 +296,30 @@ module.exports = function search() {
       var total = meta.total;
 
       // only update the heading
-      var heading = resultsRoot.querySelector('.results-main-alert');
-      tagalong(heading, meta, {
+      renderHeading(surrogate(meta, {
         results_word: format.plural('total', 'Result'),
         results_total: format.number('total', '0')
-      });
+      }));
 
       var page = +params.page || 0;
       var perPage = meta.per_page;
 
       var pages = getPages(total, perPage, page);
 
-      tagalong(paginator, {
+      pages.forEach(function(d) {
+        var qs = querystring.stringify(picc.data.extend({}, params, {
+          page: d.index
+        }));
+        d.selected = d.index === page;
+        d.href = d.index === page
+          ? null
+          : d.index === false
+            ? null
+            : '?' + qs;
+      });
+
+      renderPaginator({
         pages: pages
-      }, {
-        pages: {
-          '@data-index': function(d) {
-            return String(d.index);
-          },
-          '@class': function(d) {
-            return d.index === page
-              ? 'pagination-page_selected'
-              : d.arrow ? 'pagination-arrow' : null;
-          },
-          link: {
-            text: 'page',
-            '@data-page': function(d) {
-              return String(d.index);
-            },
-            '@href': function(d) {
-              return d.index === page
-                ? null
-                : d.index === false
-                  ? null
-                  : '?' + querystring.stringify(picc.data.extend({}, params, {page: d.index}));
-            }
-          }
-        }
       });
 
       // duplicate the pagination structure below the search results
@@ -365,8 +346,6 @@ module.exports = function search() {
             change();
           });
 
-      var resultsList = resultsRoot.querySelector('.schools-list');
-
       /*
        * XXX this avoids a nasty hard crash in IE11, which seems to have some
        * problems with tagalong's data joining algorithm (and/or, you know,
@@ -387,10 +366,12 @@ module.exports = function search() {
 
       // Scroll to the top of the result list when loading new pages
       if (alreadyLoaded) {
-          scrollIntoView();
+        scrollIntoView();
       }
 
-      tagalong(resultsList, data.results, directives);
+      renderResults({
+        results: surrogate(data.results, directives)
+      });
 
       alreadyLoaded = true;
 

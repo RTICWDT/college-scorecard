@@ -1,4 +1,5 @@
 var tagalong = require('tagalong');
+var surrogate = require('object-surrogate');
 var d3 = require('d3');
 
 module.exports = function school() {
@@ -71,14 +72,8 @@ module.exports = function school() {
     var sections = root.querySelectorAll('.section-card_container-school');
 
     // common school template directives
-    var directives = picc.school.directives;
-
-    [root]
-      .concat([].slice.call(sections))
-      .forEach(function(node) {
-        // console.log('binding to:', node);
-        tagalong(node, school, directives);
-      });
+    var proxy = surrogate(school, picc.school.directives);
+    tagalong.render(root, proxy);
 
     // render the bar charts
     // FIXME this should be possible in tagalong!
