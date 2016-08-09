@@ -5,12 +5,16 @@ if (typeof window !== 'undefined') {
   require('aight');
   // web components
   require('./components');
+
+  var typeahead = require("typeahead.js-browserify");
+  typeahead.loadjQueryPlugin(); //attach jQuery
 }
 
 var querystring = require('querystring');
 var d3 = require('d3');
 var async = require('async');
 var formdb = require('formdb');
+var jQuery = require("jquery");
 
 // create the global picc namespace
 var picc = {};
@@ -1142,7 +1146,6 @@ picc.form.minifyQueryString = function(form) {
   return form;
 };
 
-
 /**
  *
  */
@@ -1430,6 +1433,12 @@ picc.debounce = function(fn, delay) {
     }, delay);
   };
 };
+
+/**
+* Debounced version of the picc.API.search function, used to debounce
+* autocomplete API requests for the school name field on the search form
+*/
+picc.API.debounced_search = picc.debounce(picc.API.search, 250);
 
 /**
  * This is an event delegation helper that allows us to listen for events on
@@ -1756,6 +1765,59 @@ if (typeof document !== 'undefined') {
       // console.info('- drag');
       this.body.classList.remove('dragging');
     });
+
+  /**
+   * Adds listener and attaches autocomplete/dropdown functionality
+   * to the name field in the form with given selector. Called on
+   * both index and search pages.
+   *
+   * @param {String} form selector
+   */
+  picc.form.autocompleteName = function(formSelector) {
+    var field = jQuery(formSelector).find('#name-school');
+
+    field.typeahead({
+      minLength: 3,
+      highlight: true,
+      hint: false
+    }, {
+      name: 'schools',
+      limit: 10, //limit higher than displayed to counteract typeahead.js bug
+      display: picc.fields.NAME,
+      source: function(q, syncResults, asyncResults) {
+        //fashion basic query object to pass to API.search
+        //return more results to ensure enough left-first matches are captured
+        var query = { fields: picc.fields.NAME, per_page: 20 }
+        query[picc.fields.NAME] = q;
+        query = picc.form.prepareParams(query);
+
+        //uses debounced search call to avoid API spam
+        picc.API.debounced_search(query, function(error, data) {
+          if (error || !data.results.length) { return {}; }
+
+          //sort results to perform left-first matching
+          data.results.sort(function(a,b) {
+            var qU = q.toUpperCase(), //uppercase original query
+                s1 = a['school.name'].toUpperCase(),
+                s2 = b['school.name'].toUpperCase();
+
+            var s1match = (qU == s1.substr(0,qU.length)),
+                s2match = (qU == s2.substr(0,qU.length));
+
+            if (s1match) {
+              return (s2match) ? 0 : -1;
+            } else {
+              return (s2match) ? 1 : 0;
+            } 
+          });
+
+          //reduce results to 5 for display
+          data.results.length = (data.results.length > 5) ? 5 : data.results.length;
+          asyncResults(data.results);
+        });
+      }
+    });
+  };
 }
 
 module.exports = picc;
