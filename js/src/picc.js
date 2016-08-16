@@ -1782,7 +1782,7 @@ if (typeof document !== 'undefined') {
       hint: false
     }, {
       name: 'schools',
-      limit: 10, //limit higher than displayed to counteract typeahead.js bug
+      limit: 20, //limit higher than displayed to counteract typeahead.js bug
       display: picc.fields.NAME,
       source: function(q, syncResults, asyncResults) {
         //fashion basic query object to pass to API.search
@@ -1812,7 +1812,7 @@ if (typeof document !== 'undefined') {
           });
 
           //reduce results to 5 for display
-          data.results.length = (data.results.length > 5) ? 5 : data.results.length;
+          data.results.length = (data.results.length > 10) ? 10 : data.results.length;
           asyncResults(data.results);
         });
       }
