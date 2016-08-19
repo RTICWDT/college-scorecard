@@ -1129,6 +1129,10 @@ picc.form.minifyQueryString = function(form) {
   }
 
   form.on('submit', function(data, e) {
+    //close typeahead.js so it is hidden on back
+    var ac = jQuery('#'+form.element.id).find('#name-school');
+    ac.typeahead('close').typeahead('val', '');
+
     var url = [
         form.element.action,
         querystring.stringify(data)
