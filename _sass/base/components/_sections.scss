@@ -94,3 +94,14 @@
   background-color: $tertiary-background-color;
   padding-top: 0;
 }
+
+.data-changelog{
+  a {
+    color: $mid-blue;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+}
