@@ -235,3 +235,49 @@ describe('search', function() {
                  results.spotChecks.allPrivateForProfit);
   });
 });
+
+describe('autocomplete', function() {
+
+  it('should return results after typing 3 reasonable characters', function*() {
+
+    var nameInput = browser
+        .url('/')
+        .click('#school-name h1 [aria-controls]')
+        .setValue('#name-school', 'Uni');
+
+    var doesExist = yield browser.waitForExist('#name-content .tt-dataset > .tt-suggestion > .tt-highlight', 8000);
+
+    assert.equal(doesExist, true);
+
+
+  });
+
+  it('should return results when reasonable letters were typed', function*() {
+
+    var nameInput = browser
+        .url('/')
+        .click('#school-name h1 [aria-controls]')
+        .setValue('#name-school', 'Berkeley');
+
+    var doesExist = yield browser.waitForExist('#name-content .tt-dataset > .tt-suggestion > .tt-highlight', 8000);
+
+    var actualText = yield browser.getText('#name-content .tt-dataset > .tt-suggestion > .tt-highlight');
+
+    assert.equal(actualText[0], 'Berkeley');
+
+  });
+
+  it('should contain no results for a nonsense word', function*() {
+
+    var nameInput = browser
+        .url('/')
+        .click('#school-name h1 [aria-controls]')
+        .setValue('#name-school', 'nons%ense wo@d#');
+
+    var doesExist = yield browser.waitForExist('#name-content .tt-menu.tt-empty', 8000);
+
+    assert.equal(doesExist, true);
+
+  });
+
+});
