@@ -274,7 +274,8 @@ describe('autocomplete', function() {
         .click('#school-name h1 [aria-controls]')
         .setValue('#name-school', 'nons%ense wo@d#');
 
-    var doesExist = yield browser.waitForExist('#name-content .tt-menu.tt-empty', 8000);
+    // forcing a pause as to simulate a search due to .tt-empty class added before any response
+    var doesExist = yield browser.pause(3000).waitForExist('#name-content .tt-empty .tt-dataset', 8000);
 
     assert.equal(doesExist, true);
 
