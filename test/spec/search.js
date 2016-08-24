@@ -240,12 +240,12 @@ describe('autocomplete', function() {
 
   it('should return results after typing 3 reasonable characters', function*() {
 
-    var nameInput = browser
+    var nameInput = yield browser
         .url('/')
         .click('#school-name h1 [aria-controls]')
         .setValue('#name-school', 'Uni');
 
-    var doesExist = yield browser.waitForExist('#name-content .tt-dataset > .tt-suggestion > .tt-highlight', 8000);
+    var doesExist = yield browser.waitForExist('#name-content .tt-dataset > .tt-suggestion > .tt-highlight');
 
     assert.equal(doesExist, true);
 
@@ -254,12 +254,12 @@ describe('autocomplete', function() {
 
   it('should return results when reasonable letters were typed', function*() {
 
-    var nameInput = browser
+    var nameInput = yield browser
         .url('/')
         .click('#school-name h1 [aria-controls]')
         .setValue('#name-school', 'Berkeley');
 
-    var doesExist = yield browser.waitForExist('#name-content .tt-dataset > .tt-suggestion > .tt-highlight', 8000);
+    var doesExist = yield browser.waitForExist('#name-content .tt-dataset > .tt-suggestion > .tt-highlight');
 
     var actualText = yield browser.getText('#name-content .tt-dataset > .tt-suggestion > .tt-highlight');
 
@@ -269,13 +269,13 @@ describe('autocomplete', function() {
 
   it('should contain no results for a nonsense word', function*() {
 
-    var nameInput = browser
+    var nameInput = yield browser
         .url('/')
         .click('#school-name h1 [aria-controls]')
         .setValue('#name-school', 'nons%ense wo@d#');
 
     // forcing a pause as to simulate a search due to .tt-empty class added before any response
-    var doesExist = yield browser.pause(3000).waitForExist('#name-content .tt-empty .tt-dataset', 8000);
+    var doesExist = yield browser.pause(3000).waitForExist('#name-content .tt-empty .tt-dataset');
 
     assert.equal(doesExist, true);
 
