@@ -245,6 +245,61 @@
   }
 }
 
+
+.section-home-resources {
+  @extend .centered;
+  @extend .section-card_container;
+  @include span-columns(12);
+
+  > div > div {
+    margin-top: 0;
+  }
+  h1{
+    color: $lime-green; 
+    padding-bottom: $base-padding-lite;
+  }
+
+  .section-home-resources-content {
+    padding: $base-padding $base-padding-large $base-padding-large $base-padding-large;
+    text-align: left;
+    p {
+      padding-bottom: $base-padding;
+    }
+
+    .button-outline {
+      @include font-size($h6);
+      padding-left: $base-padding;
+      padding-right: $base-padding;
+      width:100%;
+    }
+
+    @include respond-to(small-up) {
+      .button-outline {
+        @include font-size($h4);
+      }
+    }
+
+    @include respond-to(large-up) {
+      padding-top: 17px;
+      // magic number to make this content block line up with the one next door
+      p{
+        padding-bottom: $base-padding-lite;
+        min-height:160px;
+      }
+    }
+  }
+
+  @include respond-to(large-up) {
+    @include span-columns(4);
+    padding-top: $base-padding;
+
+    > div > div {
+      margin-top: $base-padding;
+    }
+  }
+}
+
+
 .home-splash {
   height: $splash-height;
 
@@ -256,6 +311,10 @@
 
 .home-bg-gray {
   background-color: $tertiary-background-color;
+}
+
+.home-bg-dk-gray {
+  background-color: $mid-medium-gray;
 }
 
 // Search form
