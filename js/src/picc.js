@@ -258,9 +258,11 @@ var NA = '--';
  */
 picc.format = (function() {
   var formatter = function(fmt, _empty) {
-    var round = false;
+    var round = false,
+        percent = false;
     if (typeof fmt === 'string') {
       round = !!fmt.match(/d$/);
+      percent = !round;
       fmt = d3.format(fmt);
     }
     return function(key, empty) {
@@ -277,6 +279,10 @@ picc.format = (function() {
           return empty.call(d);
         }
         if (round) value = Math.round(value);
+        if (percent) {
+          // percentage rounding fix
+          value = Math.round(parseFloat(value*100).toPrecision(12)) / 100;
+        }
         return fmt.call(d, value, key);
       };
     };
