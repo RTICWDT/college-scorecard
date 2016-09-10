@@ -280,7 +280,8 @@ picc.format = (function() {
         }
         if (round) value = Math.round(value);
         if (percent) {
-          value = Math.round(parseFloat(value*100).toPrecision(12)) / 100; //percentage rounding fix
+          // percentage rounding fix
+          value = Math.round(parseFloat(value*100).toPrecision(12)) / 100;
         }
         return fmt.call(d, value, key);
       };
