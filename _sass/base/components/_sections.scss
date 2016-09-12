@@ -74,18 +74,16 @@
           li {
             list-style-type: circle;
 
-            ul {
-
-              li {
-                padding-top: 0.1em;
-                padding-bottom: 0.1em;
-                list-style-type: square;
-              }
+            li {
+              padding-top: 0.1em;
+              padding-bottom: 0.1em;
+              list-style-type: square;
             }
           }
         }
       }
     }
+
     .footnote {
       font-size: 0.5em;
 
