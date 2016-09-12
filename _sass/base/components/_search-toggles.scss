@@ -97,8 +97,8 @@ $toggle-padding: 15px;
   }
 
   @include respond-to(small-up) {
-    width: 214px;
     padding: $base-padding-lite $toggle-padding $base-padding-lite $toggle-padding;
+    width: 214px;
   }
 }
 
