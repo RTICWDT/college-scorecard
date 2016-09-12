@@ -54,28 +54,28 @@
     margin-bottom: 0;
     padding: $base-padding;
     width: 100%;
-    
+
     sup{
       vertical-align: super;
       font-size: 0.25em;
     }
-    
+
     ul.multi-level {
       margin: .25em 1.5em .25em;
       
       li {
-        list-style-type:disc;
+        list-style-type: disc;
         padding-bottom: 0.5em;
         padding-top: 0.5em;
-        
+
         ul {
-          margin: 0em 1.5em 0em;
-          
+          margin: 0em 1.5em;
+
           li {
             list-style-type: circle;
-            
+
             ul {
-              
+
               li {
                 padding-top: 0.1em;
                 padding-bottom: 0.1em;
@@ -88,7 +88,7 @@
     }
     .footnote {
       font-size: 0.5em;
-      
+
       sup {
         vertical-align: super;
       }
@@ -103,7 +103,7 @@
 }
 
 .data-changelog{
-  
+
   a {
     color: $mid-blue;
 
