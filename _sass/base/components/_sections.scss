@@ -55,14 +55,14 @@
     padding: $base-padding;
     width: 100%;
 
-    sup{
-      vertical-align: super;
+    sup {
       font-size: 0.25em;
+      vertical-align: super;
     }
 
-    ul.multi-level {
-      margin: .25em 1.5em .25em;
-      
+    .multi-level {
+      margin: .25em 1.5em;
+
       li {
         list-style-type: disc;
         padding-bottom: 0.5em;
@@ -102,7 +102,7 @@
   padding-top: 0;
 }
 
-.data-changelog{
+.data-changelog {
 
   a {
     color: $mid-blue;
