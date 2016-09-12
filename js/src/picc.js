@@ -283,7 +283,10 @@ picc.format = (function() {
           return empty.call(d);
         }
         if (round) value = Math.round(value);
-        if (percent) value = Math.round(parseFloat(value*100).toPrecision(12)) / 100; //percentage rounding fix
+        if (percent) {
+          // percentage rounding fix
+          value = Math.round(parseFloat(value*100).toPrecision(12)) / 100;
+        }
         return fmt.call(d, value, key);
       };
     };
