@@ -463,7 +463,11 @@ module.exports = function search() {
   function showError(error) {
     console.error('error:', error);
     var message = resultsRoot.querySelector('.error-message');
-    error = error.responseText || error;
+    if (typeof error.responseText != "undefined") {
+      var errorText = JSON.parse(error.responseText);
+      error = errorText.errors[0].message;
+    }
+
     message.textContent = String(error) || 'There was an unexpected API error.';
   }
 
