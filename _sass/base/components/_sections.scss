@@ -54,6 +54,43 @@
     margin-bottom: 0;
     padding: $base-padding;
     width: 100%;
+
+    sup {
+      font-size: 0.25em;
+      vertical-align: super;
+    }
+
+    .multi-level {
+      margin: .25em 1.5em;
+
+      li {
+        list-style-type: disc;
+        padding-bottom: 0.5em;
+        padding-top: 0.5em;
+
+        ul {
+          margin: 0em 1.5em;
+
+          li {
+            list-style-type: circle;
+
+            li {
+              padding-top: 0.1em;
+              padding-bottom: 0.1em;
+              list-style-type: square;
+            }
+          }
+        }
+      }
+    }
+
+    .footnote {
+      font-size: 0.5em;
+
+      sup {
+        vertical-align: super;
+      }
+    }
   }
 }
 
@@ -61,4 +98,16 @@
   @extend .section-card_container;
   background-color: $tertiary-background-color;
   padding-top: 0;
+}
+
+.data-changelog {
+
+  a {
+    color: $mid-blue;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
 }

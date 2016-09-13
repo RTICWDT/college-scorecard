@@ -93,12 +93,12 @@ $toggle-padding: 15px;
   padding: $base-padding-lite ($toggle-padding / 2) $base-padding-lite ($toggle-padding / 2);
 
   @include respond-to(teensy-up) {
-    width: 150px;
+    width: 154px;
   }
 
   @include respond-to(small-up) {
-    width: 210px;
     padding: $base-padding-lite $toggle-padding $base-padding-lite $toggle-padding;
+    width: 214px;
   }
 }
 
