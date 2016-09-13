@@ -1,0 +1,164 @@
+---
+title: Documentation | College Scorecard Data
+layout: default-data
+permalink: /data/changelog/
+---
+
+<div class="data-home-convo">
+
+  <section class="container section">
+
+    <aside class="data-home-intro-convo-right">
+
+      <p><strong>Join the Conversation:</strong> <a href="http://opendata.stackexchange.com/questions/tagged/collegescorecard" target="_blank"><i class="fa fa-stack-exchange"></i>StackExchange</a></p>
+
+    </aside>
+
+  </section>
+
+</div>
+
+
+<div class="container">
+
+  <section class="section section-margin_top">
+
+    <div class="data-home-intro-col-left data-home-rule data-docs section-margin_bottom data-changelog">
+
+      <h1>Change Log</h1>
+
+      <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
+
+
+      <div class="section-card_container-school">
+
+        <aria-accordion>
+          <div>
+            <h3>
+              <a aria-expanded="true" aria-controls="september-2016">
+                September 2016
+              </a>
+            </h3>
+
+            <div id="september-2016" aria-hidden="true">
+              <p><strong>Consumer Website:</strong> In September 2016, the U.S. Department of Education (the Department) updated the College Scorecard consumer website with an annual refresh that includes newer, updated data for virtually all elements. Please note that the Department made a minor change to the methodology for calculating the median debt presented on the website. See the description for median loan debt below for more details.  In addition, the Department made some changes to how data are presented on the consumer website. Key changes include:</p>
+              <ul class='multi-level'>
+                <li>Presenting completion rates as graduating within 150% of time for all institutions regardless of institutional characteristics. In contrast, the previous consumer website version presented completion rates of either 150% or 200% depending on whether the institution was a four-year institution or a two-year institution, respectively.</li>
+                <li>Identifying minority-serving institutions (MSIs) in the specialized mission category based on the institution’s eligibility to apply for Department MSI grants. In contrast, the previous consumer website version presented only recent grant recipients as MSIs.</li>
+              </ul>
+              <p><strong>Downloadable Data Files and API:</strong> In addition to providing newer, updated data in the College Scorecard downloadable data files and API, the Department made minor changes in the methodology of how data values were calculated. In some cases, the Department recalculated data values and replaced previously published data values. Key changes include:</p>
+              <ul class='multi-level'>
+                <li>NSLDS derived data elements:
+                  <ul>
+                    <li>To improve data quality and to better protect individual privacy, many NSLDS-derived data elements, including those describing earning cohorts, have been subject to statistical imputation and minor data improvement recalculations. Many NSLDS-generated data values previously published in the previous data files have been replaced with recalculated data values.</li>
+                    <li>In addition, the Department recalculated and replaced earnings cohort data previously calculated by the Treasury Department.  These recalculated data elements include: 
+                      <ul>
+                        <li>The share of female students (FEMALE), students over 23 at entry (AGEGE24), married students (MARRIED), dependent students (DEPENDENT), veteran students (VETERAN); and first-generation students (FIRST_GEN<sup>1</sup>).</li>
+                        <li>The average and median family income of students (FAMINC and MD_FAMINC) and separately of independent students (FAMINC_IND)<sup>2</sup>;</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>MSIs:
+                  <ul>
+                    <li>In the previous version of Scorecard, MSIs were designated as recent MSI grantees. In contrast, MSI indicators in the September 2016 data release (except HBCU) replace the earlier measures and instead are derived from the Eligibility Matrix<sup>3</sup> constructed by the Department. The Matrix classifies eligibility on 19 distinct grant programs. The below bullets indicate the correspondence between the Scorecard indicators and the columns of the Matrix:
+                      <ul>
+                        <li>AANAPII: AANAPISI Elig or AANAPISI-F Elig</li>
+                        <li>ANNHI: ANNH Elig or ANNH-F Elig</li>
+                        <li>HSI: HSI Elig or HSI Stem Elig</li>
+                        <li>NANTI: NASNTI Elig or NASNTI-F Elig</li>
+                        <li>PBI: PBI Comp or PBI Mand</li>
+                        <li>TRIBAL: TCCU Elig</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>Median Loan Debt:
+                  <ul>
+                    <li>In the previous version of Scorecard, the median  undergraduate loan debt  (DEBT_MDN) was calculated for those who separated (i.e., either graduated or withdrew) in a given fiscal year , measured at the time of calculation (October 2014).  These values were recalculated and replaced, by calculating median debt for those who separate in a given fiscal year, measured at the time of separation.<sup>4</sup></li>
+                  </ul>
+                </li>
+                <li>Carnegie Classification:
+                  <ul>
+                    <li>Carnegie Classification data are now based on the 2015 Carnegie Classification scheme. Previously published data from the previous version of Scorecard (using the previous Carnegie Classification scheme) are no longer available in the data files.</li>
+                  </ul>
+                </li>
+                <li>New Data Elements:
+                  <ul>
+                    <li>Scorecard data elements available in the September 2016 data release that were not previously made available in Scorecard data files and API:
+                      <ul>
+                        <li>Institution name aliases</li>
+                        <li>Level of institution</li>
+                        <li>Total share of enrollment of undergraduate degree-seeking students who are men</li>
+                        <li>Total share of enrollment of undergraduate degree-seeking students who are women</li>
+                        <li>Completion rate for first-time, full-time students at four-year institutions (100% of expected time to completion/6 years)</li>
+                        <li>Completion rate for first-time, full-time students at less-than-four-year institutions (100% of expected time to completion)</li>
+                        <li>Adjusted cohort count for completion rate at four-year institutions (denominator of 100% completion rate)</li>
+                        <li>Adjusted cohort count for completion rate at less-than-four-year institutions (denominator of100%  completion rate)</li>
+                        <li>Transfer rate for first-time, full-time students at four-year institutions (within 150% of expected time to completion/6 years)</li>
+                        <li>Transfer rate for first-time, full-time students at less-than-four-year institutions (150% of expected time to completion)</li>
+                        <li>Adjusted cohort count for transfer rate at less-than-four-year institutions (denominator of 150% transfer rate)</li>
+                        <li>Adjusted cohort count for transfer rate at four-year institutions (denominator of 150% transfer rate)</li>
+                        <li>Number of students in the cohort for the three-year cohort default rate</li>
+                        <li>Number of students in the cohort for the two-year cohort default rate</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>Data Elements No Longer Available:
+                  <ul>
+                    <li>Several Treasury Department-produced data elements describing earnings cohorts are no longer available (assigned NULL values). These include age of entry squared (AGE_ENTRY_SQ), log of family income (LNFAMINC) log of family income (LNFAMINC_IND), and the share of students who submitted FAFSAs to only one institution or multiple institutions<sup>5</sup> (FSEND_* for 1-5).</li>
+                  </ul>
+                </li>
+              </ul>
+              <hr />
+
+              <p class='footnote'><sup>1</sup> This data element is redundant with PAR_ED_1STGEN.</p>
+              <p class='footnote'><sup>2</sup> NSLDS calculations of the percentage of students in each income groups are based on nominal dollar values (not adjusted for inflation).  This methodology differs from the way the Treasury Department identified income groups (with inflation adjustments) for disaggregated earnings calculations.</p>
+              <p class='footnote'><sup>3</sup> The Eligibility Matrix is available at <a href='http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls' target='_blank'>http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls</a>. For the purpose of the indicators included in Scorecard, some of these programs were combined (and others were not relevant). Values of 5, 6, or ‘E’ in the Matrix yielded a corresponding flag value of 1 (Yes). All other values were mapped to a corresponding flag value of 0 (No). If multiple values were considered for a flag (either across grant programs or across branches of the institution), the Scorecard indicator was set to 1 when any one of the values indicated eligibility.</p>
+              <p class='footnote'><sup>4</sup> In the previous version of Scorecard, if a student separated and then went back and got further undergraduate loans at the same institution after separation and prior to October 2014 (time of measurement), then those additional loans would be included in the total.</p>
+              
+              <p class='footnote'><sup>5</sup> This information recalculated by the Department of Education is available under the data elements APPL_SCH_PCT_GE*.</p>
+            </div>
+          </div>
+        </aria-accordion>
+
+        <aria-accordion>
+          <div>
+            <h3>
+              <a aria-expanded="false" aria-controls="march-2016">
+                March 2016
+              </a>
+            </h3>
+            <div id="march-2016" aria-hidden="true">
+              <p>In March 2016, the Department updated two data elements with more recent data values that appear on both the consumer website and downloadable data files/API:</p>
+              <ul class="u-unordered_list">
+                <li>Currently Operating Status Flag</li>
+                <li>Heighten Cash Monitoring Flag</li>
+              </ul>
+            </div>
+          </div>
+        </aria-accordion>
+
+        <aria-accordion>
+          <div>
+            <h3>
+              <a aria-expanded="false" aria-controls="february-2016">
+                February 2016
+              </a>
+            </h3>
+            <div id="february-2016" aria-hidden="true">
+                <p>In February 2016, the Department expanded the number of institutions that are presented on the College Scorecard consumer website to include roughly 700 less-than-two-year institutions (institutions that predominately award undergraduate certificates) that offer and award Associate and/or Bachelor’s degrees. The previous version of the consumer website did not include these predominantly less-than-two-year institutions.</p>
+            </div>
+          </div>
+        </aria-accordion>
+      </div>
+    </div>
+    <div class="data-home-intro-col-right data-home-intro data-docs-api data-changelog">
+      <p>For more information about the College Scorecard data, click here to see our <a href="{{ site.baseurl }}/data/documentation/">data documentation</a>. You can also learn more about the data through our full <a href="{{ site.baseurl }}/assets/FullDataDocumentation.pdf" target="_blank">Documentation Report</a> and the <a href="{{ site.baseurl }}/assets/CollegeScorecardDataDictionary-08-18-2016.csv" target="_blank">Data Dictionary</a>.</p>
+      <p>For those who want to understand more about ways to use the data, important information is contained in the <a href="{{ site.baseurl }}/assets/BetterInformationForBetterCollegeChoiceAndInstitutionalPerformance.pdf" target="_blank">Policy Paper</a>, which describes the goals of the College Scorecard and the use of data on the site, and the <a href="{{ site.baseurl }}/assets/UsingFederalDataToMeasureAndImprovePerformance.pdf" target="_blank">Technical Paper</a>, which offers an in-depth exploration of the data and methodologies considered and used for this project.</p>
+    </div>
+
+  </section>
+
+</div>
