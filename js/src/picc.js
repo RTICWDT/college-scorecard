@@ -1192,10 +1192,15 @@ picc.form.prepareParams = (function() {
 
     zip: function(query, value, key) {
       // if there is no distance query, use the fully-qualified zip code
-      // field to match schools in that zip
-      if (!query.distance) {
-        query[fields.ZIP_CODE] = value;
-        delete query[key];
+      // field to match schools in that zip:
+      // ?zip=XXXXXX&distance=0 will always return zero results because it
+      // does a distance calculation; whereas
+      // ?school.zip=XXXXXX will return all schools with that zip code value
+      // instead of doing a distance calculation
+      if (! +query.distance) {
+        query[fields.ZIP_CODE] = value; // query['school.zip'] = ...
+        delete query[key]; // delete query.zip
+        delete query.distance;
       }
       // (the default will submit `zip=x&distance=y`,
       // which is what the API expects)
