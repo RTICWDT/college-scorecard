@@ -215,6 +215,7 @@
     // don't show meter labels for top-level stats
     picc-meter .label {
       visibility: hidden;
+      left: 0;
     }
 
     @include respond-to(tiny-up) {
