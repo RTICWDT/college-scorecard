@@ -104,7 +104,7 @@ describe('search', function() {
                  results.spotChecks.allIn10023Radius5);
   });
 
-  it('should contain no results for zip code = 1089987987', function*() {
+  xit('should contain no results for zip code = 1089987987', function*() {
     yield utils.runSearch(function() {
       return browser
         .click('#school-location h1 [aria-controls]')
