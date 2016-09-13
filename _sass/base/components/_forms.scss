@@ -78,6 +78,37 @@ select[multiple=multiple] {
   }
 }
 
+.twitter-typeahead {
+  width: 100%;
+  margin-bottom: 1em;
+
+  input[type=text] {
+    margin-bottom: 0;
+  }
+
+  .tt-menu {
+    width: 100%;
+    background-color: white;
+    box-sizing: border-box;
+    @include font-size(.8);
+    border-radius: $form-border-radius;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    box-shadow: $form-box-shadow-focus;    
+  }
+
+  .tt-suggestion {
+    padding: 0.6em 0.8em;
+    border-bottom: 1px solid $form-border-color;
+    cursor: pointer;
+
+    &.tt-cursor,
+    &:hover {
+      background-color: #f1f1f1;
+    }
+  }
+}
+
 textarea {
   resize: vertical;
 }
@@ -94,7 +125,7 @@ label.radio {
 
   input[type="checkbox"] + span {
     box-shadow: 0 0 1px $black;
-    border-radius: 1px;
+    /*border-radius: 1px;*/
     display: inline-block;
     height: 20px;
     margin-top: 0;
