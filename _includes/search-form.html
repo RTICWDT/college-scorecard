@@ -111,7 +111,7 @@
           </label>
 
           <label for="search-radius" class="group_inline-right">Mile radius
-            <input name="distance" type="number" step=".1" placeholder="10" value="10" id="search-radius" {{ common_input_attributes }}>
+            <input name="distance" type="number" step="1" min="1" pattern="^\d+$" placeholder="10" value="10" id="search-radius" {{ common_input_attributes }}>
           </label>
 
         </div>
