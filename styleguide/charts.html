@@ -50,8 +50,8 @@ range_types:
     <figure class="meter">
       <h2>{{ meter.title }}</h2>
       <picc-meter class="{{ type }}"
-        value="{{ meter.value|default:.25 }}"
-        average="{{ meter.average|default:.5 }}">
+        value="{{ meter.value|default:0.25 }}"
+        average="{{ meter.average|default:0.5 }}">
       </picc-meter>
       <figcaption>
         {{ meter.value_string|default:meter.value }}

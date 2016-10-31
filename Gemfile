@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
-ruby '2.2.3'
+ruby '2.3.1'
 
-gem 'github-pages'
+gem 'github-pages', '38'
 gem 'vienna'
 gem 'rack-ssl-enforcer'
