@@ -167,7 +167,7 @@ layout: default
         <label for="select-state">Select a State
           <select id="select-state" name="state">
             <option value=""></option>
-            {% for state in site.data.states|sort('name') %}
+            {% for state in site.data.states %}
             <option value="{{ state.abbr }}">{{ state.name }}</option>
             {% endfor %}
             <i class="fa fa-chevron-down"></i>
