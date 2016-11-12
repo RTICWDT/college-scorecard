@@ -3848,10 +3848,12 @@ PrevNextButton.prototype._create = function() {
   if(this.isPrevious)
   {
     element.setAttribute( 'aria-label', 'Previous');
+    element.setAttribute( 'title', 'Previous');
   }
   else
   {
-      element.setAttribute( 'aria-label', 'Next');
+    element.setAttribute( 'aria-label', 'Next');
+    element.setAttribute( 'title', 'Next');
   }
   Flickity.setUnselectable( element );
   // create arrow
