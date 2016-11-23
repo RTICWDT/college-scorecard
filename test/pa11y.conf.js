@@ -51,11 +51,6 @@ const IGNORE_MESSAGES = [
   // scripting), consider moving it to a parent element.
   'WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.A.NoHref',
 
-  // XXX remove this after fixing contrast issues in the school page sidebar
-  // This element has insufficient contrast at this conformance level. Expected
-  // a contrast ratio of at least 4.5:1, but text in this element has a
-  // contrast ratio of 3.59:1. [...]
-  'WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail'
 ];
 
 // ignore all of the above, plus all notices
