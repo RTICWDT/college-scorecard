@@ -127,14 +127,14 @@
   }
 
   ul {
-    padding-bottom: ($base-padding + 0.5em);
+    padding-bottom: ($base-padding + 1.65em);
 
     @include respond-to(tiny-up) {
       text-align: left;
     }
 
     li {
-      padding: ($base-padding-lite + 0.1em) $base-padding-extra ($base-padding / 1.5);
+      padding: $base-padding $base-padding-extra;
       border-bottom: $thin-border-size solid $base-border-color;
 
       &:first-of-type {
