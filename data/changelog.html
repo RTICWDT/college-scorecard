@@ -43,14 +43,17 @@ permalink: /data/changelog/
               <p>In January 2017, the Department updated three data elements that appear on the consumer website and/or the downloadable data files/API with more recent data values:</p>
               <ul class="u-unordered_list">
                 <li>Currently Operating Status Flag</li>
-                <li>Heighten Cash Monitoring Flag</li>
+                <li>Heightened Cash Monitoring 2 Flag</li>
                 <li>Accrediting Agency</li>
               </ul>
-              <p>In addition, the Department made minor corrections to two elements, improving data quality:</p>
+              <p>The Department also made corrections to three elements, improving data quality:</p>
               <ul class="u-unordered_list">
                 <li>The OPEID of two institutions now correctly identifies the institution as the main campus (as opposed to a branch campus)</li>
-                <li>The flag indicating that an institution is a main campus was removed for five  institutions across eight years of data</li>
+                <li>The flag indicating that an institution is a main campus was removed for five institutions across eight years of data, correctly identifying them as branch campuses</li>
+                <li>Repayment rates were recalculated for all institutions across all years of data.</li>
               </ul>
+              <p>After identifying an error in the code that generates repayment rates, the Department fixed the error and recalculated all repayment rates and replaced the previously published repayment rate data values with revised values. The error was a technical one in the coding that caused undercounting of some borrowers who had not reduced their balances, and therefore inflated repayment rates for almost all schools. This revision includes all repayment rate data values in all of the merged data files and all versions of repayment rates including repayment rates for each repayment rate cohort, the 1-, 3-, 5-, 7-year repayment rates, and all repayment rates disaggregated by demographic category (e.g. first-generation status, gender, etc.). The relative difference—that is, whether schools fall above, about, or below average— is modest; over 90 percent of institutions on the College Scorecard tool do not change categories from the previously published to the new rates. However, in some cases, the nominal differences are significant.</p>
+              <p>The Department also updated the data dictionary to resolve an issue that prevented the repayment rate data elements and one additional data element, describing the share of students with family incomes between $48,001-$75,000, from being accessible from the API. In prior releases, these elements were only available in the downloadable data files.</p>
             </div>
           </div>
         </aria-accordion>
