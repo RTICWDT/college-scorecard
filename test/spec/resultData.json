@@ -1,24 +1,24 @@
 {
   "spotChecks": {
-    "allSchools": 4053,
+    "allSchools": 4006,
     "allColumbia": 26,
     "allStartsWithColumbia": 16,
     "allCol": 2266,
     "allInDelaware": 11,
-    "allInDelawareKentucky": 74,
-    "allInFarWest": 527,
+    "allInDelawareKentucky": 73,
+    "allInFarWest": 521,
     "allIn10023NoRadius": 2,
     "allIn10023Radius5": 45,
     "checkIncludeOnlineOnly": 0,
-    "allSmall": 2377,
-    "allMedium": 1431,
-    "allLarge": 245,
-    "allSmallAndLarge": 2622,
-    "allAssociates": 2897,
-    "allBachelors": 2518,
-    "allPublic": 1623,
-    "allPrivateNonProfit": 1434,
-    "allPrivateForProfit": 996
+    "allSmall": 2327,
+    "allMedium": 1433,
+    "allLarge": 246,
+    "allSmallAndLarge": 2573,
+    "allAssociates": 2853,
+    "allBachelors": 2501,
+    "allPublic": 1622,
+    "allPrivateNonProfit": 1427,
+    "allPrivateForProfit": 957
   },
 
   "allSchoolsInState": [
