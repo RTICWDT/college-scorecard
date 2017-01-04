@@ -127,7 +127,9 @@
   }
 
   ul {
-    padding-bottom: ($base-padding + 1.65em);
+
+    padding-top: ($base-padding + 1.65em);
+    padding-bottom: ($base-padding + 4.3em);
 
     @include respond-to(tiny-up) {
       text-align: left;
