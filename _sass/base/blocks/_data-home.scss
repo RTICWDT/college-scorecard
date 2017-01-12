@@ -115,8 +115,17 @@
     padding-bottom: $base-padding-lite;
   }
 
+  p.padded-bottom {
+    padding-bottom: $base-padding;
+  }
+
   p + ul {
     margin-top: $base-padding;
+  }
+
+  a {
+    color: $mid-blue;
+    text-decoration: none;
   }
 
   .button-primary {
