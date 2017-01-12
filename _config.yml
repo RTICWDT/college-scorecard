@@ -13,7 +13,7 @@ baseurl:
 url: https://collegescorecard.ed.gov
 
 # app version number
-version: v1.8.6
+version: v1.9
 
 # Build settings
 markdown: kramdown
@@ -37,7 +37,7 @@ API:
   key: ''
 
 downloads:
-  data-dictionary: CollegeScorecardDataDictionary-10-26-2016.xlsx
+  data-dictionary: CollegeScorecardDataDictionary-12-20-2016.xlsx
 
 # specify paths to exclude from copying to _site
 # Note: files and directories with the '_' prefix are excluded
