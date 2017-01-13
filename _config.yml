@@ -37,7 +37,7 @@ API:
   key: ''
 
 downloads:
-  data-dictionary: CollegeScorecardDataDictionary-12-20-2016.xlsx
+  data-dictionary: CollegeScorecardDataDictionary.xlsx
 
 # specify paths to exclude from copying to _site
 # Note: files and directories with the '_' prefix are excluded
