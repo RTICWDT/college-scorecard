@@ -35,7 +35,33 @@ permalink: /data/changelog/
         <aria-accordion>
           <div>
             <h3>
-              <a aria-expanded="true" aria-controls="september-2016">
+              <a aria-expanded="true" aria-controls="january-2017">
+                January 2017
+              </a>
+            </h3>
+            <div id="january-2017" aria-hidden="true">
+              <p>In January 2017, the Department updated three data elements that appear on the consumer website and/or the downloadable data files/API with more recent data values:</p>
+              <ul class="u-unordered_list">
+                <li>Currently Operating Status Flag</li>
+                <li>Heightened Cash Monitoring 2 Flag</li>
+                <li>Accrediting Agency</li>
+              </ul>
+              <p>The Department also made corrections to three elements, improving data quality:</p>
+              <ul class="u-unordered_list">
+                <li>The OPEID of two institutions now correctly identifies the institution as the main campus (as opposed to a branch campus)</li>
+                <li>The flag indicating that an institution is a main campus was removed for five institutions across eight years of data, correctly identifying them as branch campuses</li>
+                <li>Repayment rates were recalculated for all institutions across all years of data.</li>
+              </ul>
+              <p>After identifying an error in the code that generates repayment rates, the Department fixed the error and recalculated all repayment rates and replaced the previously published repayment rate data values with revised values. The error was a technical one in the coding that caused undercounting of some borrowers who had not reduced their balances, and therefore inflated repayment rates for almost all schools. This revision includes all repayment rate data values in all of the merged data files and all versions of repayment rates including repayment rates for each repayment rate cohort, the 1-, 3-, 5-, 7-year repayment rates, and all repayment rates disaggregated by demographic category (e.g. first-generation status, gender, etc.). The relative difference—that is, whether schools fall above, about, or below average— is modest; over 90 percent of institutions on the College Scorecard tool do not change categories from the previously published to the new rates. However, in some cases, the nominal differences are significant.</p>
+              <p>The Department also updated the data dictionary to resolve an issue that prevented the repayment rate data elements and one additional data element, describing the share of students with family incomes between $48,001-$75,000, from being accessible from the API. In prior releases, these elements were only available in the downloadable data files. In addition, the Department resolved a data dictionary labeling issue on the description for low income students by independent/dependent status.</p>
+            </div>
+          </div>
+        </aria-accordion>
+
+        <aria-accordion>
+          <div>
+            <h3>
+              <a aria-expanded="false" aria-controls="september-2016">
                 September 2016
               </a>
             </h3>
@@ -51,7 +77,7 @@ permalink: /data/changelog/
                 <li>NSLDS derived data elements:
                   <ul>
                     <li>To improve data quality and to better protect individual privacy, many NSLDS-derived data elements, including those describing earning cohorts, have been subject to statistical imputation and minor data improvement recalculations. Many NSLDS-generated data values previously published in the previous data files have been replaced with recalculated data values.</li>
-                    <li>In addition, the Department recalculated and replaced earnings cohort data previously calculated by the Treasury Department.  These recalculated data elements include: 
+                    <li>In addition, the Department recalculated and replaced earnings cohort data previously calculated by the Treasury Department.  These recalculated data elements include:
                       <ul>
                         <li>The share of female students (FEMALE), students over 23 at entry (AGEGE24), married students (MARRIED), dependent students (DEPENDENT), veteran students (VETERAN); and first-generation students (FIRST_GEN<sup>1</sup>).</li>
                         <li>The average and median family income of students (FAMINC and MD_FAMINC) and separately of independent students (FAMINC_IND)<sup>2</sup>;</li>
@@ -117,7 +143,7 @@ permalink: /data/changelog/
               <p class='footnote'><sup>2</sup> NSLDS calculations of the percentage of students in each income groups are based on nominal dollar values (not adjusted for inflation).  This methodology differs from the way the Treasury Department identified income groups (with inflation adjustments) for disaggregated earnings calculations.</p>
               <p class='footnote'><sup>3</sup> The Eligibility Matrix is available at <a href='http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls' target='_blank'>http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls</a>. For the purpose of the indicators included in Scorecard, some of these programs were combined (and others were not relevant). Values of 5, 6, or ‘E’ in the Matrix yielded a corresponding flag value of 1 (Yes). All other values were mapped to a corresponding flag value of 0 (No). If multiple values were considered for a flag (either across grant programs or across branches of the institution), the Scorecard indicator was set to 1 when any one of the values indicated eligibility.</p>
               <p class='footnote'><sup>4</sup> In the previous version of Scorecard, if a student separated and then went back and got further undergraduate loans at the same institution after separation and prior to October 2014 (time of measurement), then those additional loans would be included in the total.</p>
-              
+
               <p class='footnote'><sup>5</sup> This information recalculated by the Department of Education is available under the data elements APPL_SCH_PCT_GE*.</p>
             </div>
           </div>
