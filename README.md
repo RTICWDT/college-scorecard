@@ -31,8 +31,8 @@ Then install all the ruby gems you need:
 bundle
 ```
 
-This Jekyll site features dynamic JavaScript that queries [api.data.gov](https://api.data.gov/). 
-For the JavaScript to work, it needs an API key (register for one at 
+This Jekyll site features dynamic JavaScript that queries [api.data.gov](https://api.data.gov/).
+For the JavaScript to work, it needs an API key (register for one at
 [api.data.gov/signup/](https://api.data.gov/signup/))
 and a base URL. Jekyll will pull them from the local machine's
 environment variables at build time, so ensure that both the `API_KEY` and
@@ -62,7 +62,7 @@ the source files.
 
 ### JavaScript
 See the [JavaScript docs](js/#readme) for more information on our scripting tools and
-workflow.
+workflows.
 
 ### Accessibility
 - We adhere to [Web Content Accessibility Guidelines 2.0](https://www.w3.org/WAI/WCAG20/quickref/),
