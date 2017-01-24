@@ -1,8 +1,8 @@
 net_price:
   min: -19360
   max: 40000
-  median: 16190
-  average_range: [11175, 19587]
+  median: 16126.5
+  average_range: [11110, 19538]
 net_price_public:
   min: -6359
   max: 32921
@@ -23,8 +23,8 @@ net_price_4:
 completion_rate:
   min: 0
   max: 1
-  median: .42316574
-  average_range: [.30461335, .54543942]
+  median: 0.4157
+  average_range: [0.2986, 0.5391]
 completion_rate_l4:
   min: 0
   max: 1
@@ -39,8 +39,8 @@ completion_rate_4:
 median_earnings:
   min: 0
   max: 100000
-  median: 33400
-  average_range: [29200, 38100]
+  median: 33500
+  average_range: [29300, 38200]
 median_earnings_l4:
   min: 0
   max: 100000
@@ -55,8 +55,8 @@ median_earnings_4:
 retention_rate:
   min: 0
   max: 1
-  median: .67769998
-  average_range: [.60070002, .75470001]
+  median: 0.6793
+  average_range: [0.6009, 0.7554]
 retention_rate_l4:
   min: 0
   max: 1
@@ -71,8 +71,8 @@ retention_rate_4:
 repayment_rate:
   min: 0.05
   max: 1
-  median: .67900875
-  average_range: [.55749129, .79727685]
+  median: 0.4594594595
+  average_range: [0.3480339244, 0.5708853884]
 repayment_rate_l4:
   min: 0.05
   max: 1
@@ -99,8 +99,8 @@ median_monthly_loan_4:
 earnings_gt_25k:
   min: 0
   max: 1
-  median: .549
-  average_range: [.474, .624]
+  median: 0.549
+  average_range: [0.475, 0.626]
 earnings_gt_25k_l4:
   min: 0
   max: 1
