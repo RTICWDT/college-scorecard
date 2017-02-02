@@ -205,6 +205,6 @@
     {"code": "71", "name": "United Methodist", "count": 85},
     {"code": "89", "name": "Wesleyan", "count": 6},
     {"code": "33", "name": "Wisconsin Evangelical Lutheran Synod", "count": 2},
-    {"code": "99", "name": "Other (none of the above)", "count": 9},
+    {"code": "99", "name": "Other (none of the above)", "count": 9}
   ]
 }
