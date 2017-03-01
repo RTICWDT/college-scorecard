@@ -188,7 +188,7 @@ function engage(e) {
 
   if (e.type === 'focus') {
     window.addEventListener('keyup', getListener(keypress, this));
-    //this.addEventListener('blur', release, true);
+    e.target.addEventListener('blur', getListener(releaseFocus, this));
   } else {
     window.addEventListener('mousemove', getListener(move, this));
     window.addEventListener('mouseup', getListener(release, this));
@@ -263,13 +263,28 @@ function release(e) {
   return;
 }
 
+function releaseFocus(e) {
+   //console.info('- release focus', e.type);
+   window.removeEventListener('keyup', getListener(keypress, this));
+   e.target.removeEventListener('blur', getListener(releaseFocus, this));
+
+  if (this.__dragging) {
+    this.__dragging.removeAttribute('aria-grabbed');
+  } else {
+    console.warn('release() while not dragging');
+  }
+
+  this.__dragging = false;
+  return false;
+}
+
 function keypress(e) {
   // console.info('* keypress:', e.keyCode);
   switch (e.keyCode) {
     case 37: // left
       nudge.call(this, -1);
       this.dispatchEvent(new CustomEvent('change'));
-break;
+    break;
     case 39: // right
       nudge.call(this, +1);
       this.dispatchEvent(new CustomEvent('change'));
