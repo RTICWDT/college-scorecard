@@ -177,7 +177,7 @@ function click(e) {
 
 function engage(e) {
   // ignore right-clicks
-  if (e.button === 2) {
+  if (e.button === 2 || this.__mousedrag) {
     e.preventDefault();
     return;
   }
@@ -190,6 +190,7 @@ function engage(e) {
     window.addEventListener('keyup', getListener(keypress, this));
     e.target.addEventListener('blur', getListener(releaseFocus, this));
   } else {
+    this.__mousedrag = true;
     window.addEventListener('mousemove', getListener(move, this));
     window.addEventListener('mouseup', getListener(release, this));
     window.addEventListener('touchmove', getListener(move, this));
@@ -248,9 +249,10 @@ function release(e) {
   this.removeAttribute('aria-valuenow');
 
   if (e.type === 'blur') {
-    window.removeEventListener('keyup', getListener(keypress, this));
+    //window.removeEventListener('keyup', getListener(keypress, this));
     //this.removeEventListener('blur', release, true);
   } else {
+    this.__mousedrag = false;
     window.removeEventListener('mousemove', getListener(move, this));
     window.removeEventListener('mouseup', getListener(release, this));
     window.removeEventListener('touchmove', getListener(move, this));
@@ -267,13 +269,6 @@ function releaseFocus(e) {
    //console.info('- release focus', e.type);
    window.removeEventListener('keyup', getListener(keypress, this));
    e.target.removeEventListener('blur', getListener(releaseFocus, this));
-
-  if (this.__dragging) {
-    this.__dragging.removeAttribute('aria-grabbed');
-  } else {
-    console.warn('release() while not dragging');
-  }
-
   this.__dragging = false;
   return false;
 }
