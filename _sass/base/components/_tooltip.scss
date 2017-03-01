@@ -90,6 +90,7 @@
     .tooltip-arrow {
       @include triangle($tooltip-arrow-size, $black-transparent, down);
       top: 100%;
+      border-bottom-style:none;
     }
   }
 }
