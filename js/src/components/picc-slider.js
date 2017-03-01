@@ -28,8 +28,8 @@ window.PICCSlider = registerElement(ELEMENT_NAME, {
 
   detachedCallback: function() {
     this.removeEventListener('click', click);
-    this.removeEventListener('mousedown', enagage);
-    this.removeEventListener('touchstart', enagage);
+    this.removeEventListener('mousedown', engage);
+    this.removeEventListener('touchstart', engage);
     this.removeEventListener('focus', engage, true);
   },
 
@@ -188,7 +188,7 @@ function engage(e) {
 
   if (e.type === 'focus') {
     window.addEventListener('keyup', getListener(keypress, this));
-    this.addEventListener('blur', release, true);
+    //this.addEventListener('blur', release, true);
   } else {
     window.addEventListener('mousemove', getListener(move, this));
     window.addEventListener('mouseup', getListener(release, this));
@@ -249,7 +249,7 @@ function release(e) {
 
   if (e.type === 'blur') {
     window.removeEventListener('keyup', getListener(keypress, this));
-    this.removeEventListener('blur', release, true);
+    //this.removeEventListener('blur', release, true);
   } else {
     window.removeEventListener('mousemove', getListener(move, this));
     window.removeEventListener('mouseup', getListener(release, this));
@@ -268,10 +268,12 @@ function keypress(e) {
   switch (e.keyCode) {
     case 37: // left
       nudge.call(this, -1);
-      break;
+      this.dispatchEvent(new CustomEvent('change'));
+break;
     case 39: // right
       nudge.call(this, +1);
-      break;
+      this.dispatchEvent(new CustomEvent('change'));
+    break;
 
     case 36: // end
     case 35: // home
@@ -283,6 +285,7 @@ function keypress(e) {
           this.upper = this.max;
           break;
       }
+      this.dispatchEvent(new CustomEvent('change'));
       break;
   }
 }
