@@ -22,7 +22,7 @@ window.PICCSlider = registerElement(ELEMENT_NAME, {
     this.addEventListener('click', click);
     this.addEventListener('mousedown', engage);
     this.addEventListener('touchstart', engage);
-    // this.addEventListener('focus', engage, true);
+    this.addEventListener('focus', engage, true);
     this.update();
   },
 
@@ -30,7 +30,7 @@ window.PICCSlider = registerElement(ELEMENT_NAME, {
     this.removeEventListener('click', click);
     this.removeEventListener('mousedown', enagage);
     this.removeEventListener('touchstart', enagage);
-    // this.removeEventListener('focus', engage, true);
+    this.removeEventListener('focus', engage, true);
   },
 
   attributeChangedCallback: function(attr, prev, value) {
