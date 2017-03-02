@@ -5,7 +5,8 @@ if (typeof window !== 'undefined') {
   require('aight');
   // web components
   require('./components');
-
+  var tagalong = require('tagalong');
+  var jQuery = require("jquery");
   var typeahead = require("typeahead.js-browserify");
   typeahead.loadjQueryPlugin(); //attach jQuery
 }
@@ -14,7 +15,6 @@ var querystring = require('querystring');
 var d3 = require('d3');
 var async = require('async');
 var formdb = require('formdb');
-var jQuery = require("jquery");
 
 // create the global picc namespace
 var picc = {};
@@ -22,7 +22,8 @@ var picc = {};
 // common error messages
 picc.errors = {
   NO_SCHOOL_ID: 'No school ID was provided.',
-  NO_SUCH_SCHOOL: 'No school found.'
+  NO_SUCH_SCHOOL: 'No school found.',
+  NO_SCHOOLS_TO_COMPARE: 'No schools selected to compare.'
 };
 
 // race-ethnicity labels
@@ -124,16 +125,23 @@ picc.API = (function() {
   /**
    * A helper function to get data for a single school.
    *
-   * @param {String|Number} id  the school primary key identifier
-   * @param {Function} callback the callback function, as in
+   * @param {String|Number} id - The school primary key identifier
+   * @param {object}  params - Optional query params to append to the school's query;
+   *                            most useful for a `fields` query
+   * @param {Function} done - The callback function, as in
    *                            `picc.API.get()`, that receives a single
    *                            school's data as its second parameter on
    *                            success.
    */
-  API.getSchool = function(id, done) {
-    var params = {};
-    params[idField] = id;
-    return API.get(schoolEndpoint, params, function(error, res) {
+  API.getSchool = function(id, params, done) {
+    var queryParams = {};
+    if (arguments.length === 2) {
+      done = params;
+    } else if (arguments.length === 3) {
+      queryParams = picc.data.extend(queryParams, params);
+    }
+    queryParams[idField] = id;
+    return API.get(schoolEndpoint, queryParams, function(error, res) {
       var meta = res.metadata || res;
       if (error || !meta.total) {
         return done(error
@@ -446,6 +454,7 @@ picc.format = (function() {
 
 picc.fields = {
   ID:                   'id',
+  // OPEID8:               'ope8_id',
   NAME:                 'school.name',
   CITY:                 'school.city',
   STATE:                'school.state',
@@ -463,13 +472,14 @@ picc.fields = {
 
   SIZE:                 '2014.student.size',
   ONLINE_ONLY:          'school.online_only',
+  // MAIN:                 'school.main_campus',
 
   WOMEN_ONLY:           'school.women_only',
   MEN_ONLY:             'school.men_only',
   MINORITY_SERVING:     'school.minority_serving',
 
   PREDOMINANT_DEGREE:   'school.degrees_awarded.predominant',
-  HIGHEST_DEGREE:   'school.degrees_awarded.highest',
+  HIGHEST_DEGREE:       'school.degrees_awarded.highest',
   UNDER_INVESTIGATION:  'school.under_investigation',
 
   // net price
@@ -852,6 +862,19 @@ picc.school.directives = (function() {
     city:           access(fields.CITY),
     state:          access(fields.STATE),
 
+    selected_school: {
+      '@aria-pressed': function(d) {
+         var collection = this.getAttribute('data-school');
+         return (picc.school.selection.isSelected(access(fields.ID)(d), collection) >= 0);
+      },
+      '@data-school-id': function(d) {
+        return access(fields.ID)(d);
+      },
+      '@data-school-name': function(d) {
+        return access(fields.NAME)(d);
+      }
+    },
+
     under_investigation: underInvestigation,
 
     // FIXME this is a hack to deal with the issue of tagalong
@@ -894,6 +917,47 @@ picc.school.directives = (function() {
       // '@average': access.nationalStat('median', access.publicPrivate),
       '@value':   access.netPrice,
       label:      format.dollars(function() { return this.average; })
+    },
+
+    // on the compare screen we draw the vertical average line
+    // for the current meter group across multiple school picc-side-meter's.
+    // depending on the meter, we format the average accordingly ($,%, etc)
+    average_line: {
+
+        '@style': function() {
+          var type = this.getAttribute('data-meter');
+          var meter = this.nextElementSibling.querySelector('[data-bind="'+type+'"]');
+          var min = meter.getAttribute('min') || 0;
+          var max = meter.getAttribute('max') || 1;
+          var average = meter.getAttribute('average');
+
+          var scale = function(v) {
+            return (v - min) / (max - min) * 100;
+          };
+          var value = Math.max(min, Math.min(+average, max));
+          var right = Math.max(0, value);
+
+          var style = '';
+          style +='right:'+ (100 - scale(right)) + '%;';
+          return style;
+        },
+        label: {
+           text: function() {
+             var parent = this.parentElement;
+             var type = parent.getAttribute('data-meter');
+             var meter = parent.nextElementSibling.querySelector('[data-bind="' + type + '"]')
+
+             switch (type) {
+               case 'average_cost_meter':
+               case 'average_salary_meter':
+                  return format.dollars( function() { return meter.average; })('average');
+               case 'grad_rate_meter':
+                    return format.percent(function () { return meter.average; })('average');
+               default:
+                 return meter.average;
+             }
+           }
+        }
     },
 
     // income level net price stats
@@ -1080,6 +1144,106 @@ picc.school.directives = (function() {
 
 })();
 
+/**
+ * School selection utils for checking state, saving schools, and rendering toggles & links
+ */
+picc.school.selection = {
+
+    all: function (key) {
+      return JSON.parse(window.localStorage.getItem(key)) || [];
+    },
+
+    isSelected: function (id, key) {
+      return (picc.school.selection.all(key).map(function(fav){
+        return +fav.schoolId;
+      }).indexOf(id));
+    },
+
+    toggle: function (e, el) {
+
+      if (!el) {
+        el = (e.target.parentElement.hasAttribute('data-school-id')) ? e.target.parentElement : e.target;
+      }
+      var dataset = el.dataset;
+      var collection = dataset.school;
+      var isSelected = picc.school.selection.isSelected(+dataset.schoolId, collection);
+      var selectedSchools = picc.school.selection.all(collection);
+
+      if (isSelected >= 0) {
+        selectedSchools.splice(isSelected, 1);
+          window.localStorage.setItem(collection, JSON.stringify(selectedSchools));
+          if (el.hasAttribute('aria-pressed')) {
+            el.setAttribute('aria-pressed', false);
+          }
+      } else {
+
+        selectedSchools.push(dataset);
+          window.localStorage.setItem(collection, JSON.stringify(selectedSchools));
+        if (el.hasAttribute('aria-pressed')) {
+          el.setAttribute('aria-pressed', true);
+        }
+      }
+
+    },
+
+    renderCompareToggles: function() {
+        var collection = 'compare';
+        tagalong(
+          '#edit-compare-list',
+          picc.school.selection.all(collection),
+          {
+            name: function(d) {
+              return picc.access('schoolName')(d)
+            },
+            checkbox_label: {
+              '@for': function(d) {
+                return 'edit-compare-' + picc.access('schoolId')(d);
+              },
+              '@data-school-id': function (d) {
+                return picc.access('schoolId')(d);
+              },
+              '@data-school-name': function(d) {
+                return picc.access('schoolName')(d);
+              }
+            },
+            compare_checkbox: {
+              '@id': function (d) {
+                return 'edit-compare-' + picc.access('schoolId')(d);
+              },
+              '@checked': function(d) {
+                return (picc.school.selection.isSelected(picc.access('schoolId')(d), collection) >= 0) ? 'checked': null;
+              }
+            }
+          }
+        );
+
+      // Fix for tagalong binding only to the first instance of a directive
+      var checkboxes = document.querySelectorAll('input[name="_compare"]');
+
+
+      for (var i = 0; i < checkboxes.length; i++) {
+          checkboxes[i].checked = true;
+      }
+
+      // update compare schools link
+      picc.school.selection.renderCompareLink();
+
+    },
+
+    renderCompareLink: function() {
+      var compareLink = d3.select('#compare-link');
+      if (compareLink) {
+        if (picc.school.selection.all('compare').length) {
+          compareLink
+            .attr('href', picc.BASE_URL + '/compare/');
+        } else {
+          compareLink
+            .attr('href', null);
+        }
+      }
+    }
+
+};
 
 // form utilities
 picc.form = {};
@@ -1718,9 +1882,10 @@ picc.tooltip = {
  * page-specific functions
  */
 picc.pages = {
-  index: require('./index'),
-  search: require('./search'),
-  school: require('./school')
+  index:      require('./index'),
+  search:     require('./search'),
+  school:     require('./school'),
+  compare:    require('./compare'),
 };
 
 
@@ -1758,6 +1923,25 @@ if (typeof document !== 'undefined') {
           blur:       picc.tooltip.hide,
         }
     );
+  });
+
+  /**
+   * add event listeners for school selection click events
+   */
+  picc.ready(function() {
+      var ariaPressed = 'aria-pressed';
+      picc.delegate(
+          document.body,
+          // if the element matches '[aria-pressed]'
+          function() {
+              return this.parentElement.hasAttribute(ariaPressed) ||
+              this.hasAttribute(ariaPressed);
+          },
+          {
+            click: picc.school.selection.toggle
+          }
+      );
+
   });
 
   // set the "dragging" class when the mouse is down
@@ -1802,7 +1986,7 @@ if (typeof document !== 'undefined') {
       source: function(q, syncResults, asyncResults) {
         //fashion basic query object to pass to API.search
         //return more results to ensure enough left-first matches are captured
-        var query = { fields: picc.fields.NAME, per_page: 20 }
+        var query = { fields: picc.fields.NAME, per_page: 20 };
         query[picc.fields.NAME] = q;
         query = picc.form.prepareParams(query);
 

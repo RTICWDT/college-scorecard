@@ -1,0 +1,66 @@
+.compare-bg {
+  background-color: $white;
+  padding-bottom: $base-padding;
+}
+
+.header-controls {
+
+  padding: $base-padding-lite ($toggle-padding / 2) $base-padding-lite ($toggle-padding / 2);
+  min-height: 55px;
+
+
+  .compare-back {
+    display: inline-block;
+    padding-top: $base-padding-lite;
+
+    .link-more {
+      display: none;
+    }
+
+    .link-more[href] {
+      display: inline-block;
+    }
+  }
+}
+
+.compare-schools {
+  @include outer-container();
+  overflow-x: auto;
+
+}
+
+.compare-container_group {
+  position: relative;
+  .average_line {
+    position:absolute;
+    bottom:0;
+    top: 0px;
+    background-image: linear-gradient($dark-gray 33%, rgba(255,255,255,0) 0%);
+    background-position: right;
+    background-size: 3px 13px;
+    background-repeat: repeat-y;
+    width: 100%;
+
+    .label {
+      text-align: right;
+      position: absolute;
+      top: -25px;
+      right: -20px;
+    }
+  }
+}
+
+.figure-heading {
+  margin: 20px auto;
+}
+
+.section-card_container-compare {
+
+  position: relative;
+  margin-bottom: 60px;
+
+  .meter-wrapper {
+    margin-bottom: 20px;
+  }
+
+}

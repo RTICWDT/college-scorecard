@@ -23,6 +23,16 @@ var getIcon = function() {
     '.school-heading .school-key_figures li', 'class');
 };
 
+var toggleSchoolCompare = function*(url, selector, clicks) {
+    yield loadSchoolUrl(url);
+
+    for (var i = 0; i < clicks; i++) {
+       yield browser.click(selector);
+
+    }
+    return browser.getAttribute(selector, 'aria-pressed');
+};
+
 var getMeterClass = function(meter) {
   return browser.getAttribute(
     '.school-meters picc-meter.' + meter, 'class');
@@ -68,6 +78,10 @@ var toggleAccordion = function(selector) {
 };
 
 describe('school page', function() {
+
+  after(function() {
+    browser.localStorage('DELETE');
+  });
 
   /*
     Banners & Iconography
@@ -194,39 +208,54 @@ describe('school page', function() {
 
   /*
     Key Metrics
-  */ 
+   */
 
   it('should have "Data not available" warnings for key metrics', function*() {
-    var urls = ['416801-The-University-of-Texas-MD-Anderson-Cancer-Center',
-                '104665-Frank-Lloyd-Wright-School-of-Architecture'];
-    var meters = ['earnings', 'cost', 'graduation'];
-
-    urls.forEach(function*(url) {
-      yield loadSchoolUrl(url);
-      meters.forEach(function*(meter) {
-        var meterResult = yield getMeterClass(meter);
-        var name = yield getSchoolName();
-        assert(meterResult.indexOf('no_data') > -1,
-               name + ' has data for ' + meter);
-      });
-    });
+     var urls = ['416801-The-University-of-Texas-MD-Anderson-Cancer-Center',
+         '104665-Frank-Lloyd-Wright-School-of-Architecture'];
+     var meters = ['earnings', 'cost', 'graduation'];
+     urls.forEach(function*(url) {
+         yield loadSchoolUrl(url);
+         meters.forEach(function*(meter) {
+             var meterResult = yield getMeterClass(meter);
+             var name = yield getSchoolName();
+             assert(meterResult.indexOf('no_data') > -1,
+                 name + ' has data for ' + meter);
+         });
+     });
   });
 
   it('should display key metric figures if data is present', function*() {
-    var urls = ['204176-Mount-Carmel-College-of-Nursing',
-                '204635-Ohio-Northern-University'];
-    var meters = ['earnings', 'cost', 'graduation'];
+     var urls = ['204176-Mount-Carmel-College-of-Nursing',
+                     '204635-Ohio-Northern-University'];
+     var meters = ['earnings', 'cost', 'graduation'];
 
-    urls.forEach(function*(url) {
-      yield loadSchoolUrl(url);
-      meters.forEach(function*(meter) {
-        var meterResult = yield getMeterClass(meter);
-        var name = yield getSchoolName();
-        assert(meterResult.indexOf('no_data') === -1,
-               name + ' has no data for ' + meter);
+     urls.forEach(function*(url) {
+       yield loadSchoolUrl(url);
+       meters.forEach(function*(meter) {
+          var meterResult = yield getMeterClass(meter);
+          var name = yield getSchoolName();
+            assert(meterResult.indexOf('no_data') === -1, name + ' has no data for ' + meter);
+         });
+  
       });
-    });
   });
+
+  /*
+    Compare School
+   */
+
+  it('should add aria-pressed attribute on school compare button when clicked', function*() {
+      var isFavorite = yield toggleSchoolCompare('167525-Quincy-College', '.button-compare_schools', 1);
+      var name = yield getSchoolName();
+      assert(isFavorite, name + ' was added as a compare school' );
+  });
+
+    it('should remove aria-pressed attribute on school compare button on subsequent click', function*() {
+        var isFavorite = yield toggleSchoolCompare('449339-American-Public-University-System', '.button-compare_schools', 2);
+        var name = yield getSchoolName();
+        assert( isFavorite, false, name + ' was removed as a compare school' );
+    });
 
   /*
     Cost Section

@@ -13,6 +13,7 @@ var URLS = [
   baseUrl + '/',
   baseUrl + '/search/?state=CA',
   baseUrl + '/school/?226152-Texas-A-M-International-University',
+  baseUrl + '/compare/?schools[]=226152&schools[]=117803'
   // BASEURL + '/data/',
 ];
 

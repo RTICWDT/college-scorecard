@@ -1,0 +1,24 @@
+picc-side-meter {
+  display: block;
+  background-color: $light-gray;
+  height: 1em;
+  position: relative;
+  margin-bottom: .5em;
+
+  .picc-side-meter-bar {
+    height: 100%;
+    left: 0;
+    right: 100%;
+    position: absolute;
+    transition: left .2s, right .2s;
+  }
+
+  @each $meter-class, $meter-color in $meter-colors {
+    &.#{$meter-class} {
+      .picc-side-meter-bar {
+        background-color: $meter-color;
+      }
+    }
+  }
+
+}

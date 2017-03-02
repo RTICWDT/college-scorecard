@@ -282,3 +282,77 @@ describe('autocomplete', function() {
   });
 
 });
+
+// compare schools toggles on search results page
+
+describe('compare', function() {
+
+  after(function() {
+    browser.localStorage('DELETE');
+  });
+
+  it('should add aria-pressed attribute on school compare button when clicked', function*() {
+    yield utils.runSearch();
+    yield utils.getVisibleResults();
+
+    var schoolSelector = '.school.results-card:first-child .button-compare_schools';
+
+    var ariaPressed = yield browser
+      .click(schoolSelector)
+      .getAttribute(schoolSelector, 'aria-pressed');
+
+    // yield.browser.alert('msg: '+ariaPressed);
+
+    assert(ariaPressed, true);
+  });
+
+  it('should remove aria-pressed attribute on the previously clicked school compare button when clicked again', function*() {
+
+    yield utils.getVisibleResults();
+
+    var schoolSelector = '.school.results-card:first-child .button-compare_schools';
+
+    var ariaPressed = yield browser
+      .click(schoolSelector)
+      .getAttribute(schoolSelector, 'aria-pressed');
+
+    assert(ariaPressed, false);
+  });
+
+  it('should add schools to compare school toggle accordion when school compare button is clicked', function*(){
+    yield utils.runSearch();
+    yield utils.getVisibleResults();
+
+    var schoolSelector = '.school.results-card:first-child .button-compare_schools';
+
+    var schoolId = yield browser
+      .click(schoolSelector)
+      .getAttribute(schoolSelector, 'data-school-id');
+
+    var matchSchoolId = yield browser
+      .click('#compare_schools-edit')
+      .getAttribute('#edit-compare-list li label:first-child', 'data-school-id');
+
+    assert.equal(schoolId, matchSchoolId);
+  });
+
+  it('should remove schools from compare school toggle accordion when school compare button is clicked again', function*(){
+    yield utils.getVisibleResults();
+
+    var schoolSelector = '.school.results-card:first-child .button-compare_schools';
+
+    yield browser
+      .click(schoolSelector);
+
+    yield browser
+      .click('#compare_schools-edit');
+
+    var checkboxes = yield browser
+      .execute(function(){
+        return document.querySelectorAll('#edit-compare-list li');
+      });
+
+    assert.equal(checkboxes.value.length, 0);
+  });
+
+});

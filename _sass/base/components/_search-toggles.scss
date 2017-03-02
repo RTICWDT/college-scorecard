@@ -45,7 +45,8 @@ $toggle-padding: 15px;
   }
 
   .fa-filter,
-  .fa-search {
+  .fa-search,
+  .fa-star{
     padding-right: ($toggle-padding / 2);
 
     @include respond-to(small-up) {
@@ -125,7 +126,23 @@ $toggle-padding: 15px;
     }
   }
 
-  .search-button {
+
+  .compare-button_link {
+    display: none;
+  }
+
+  .compare-button_link[href] {
+    display: block;
+    position: relative;
+    span {
+      position: absolute;
+      top:15px;
+      left: 50px;
+    }
+  }
+
+  .search-button,
+  .compare-button_link {
     @include font-size(0.75);
     height: 45px;
     letter-spacing: 2px;

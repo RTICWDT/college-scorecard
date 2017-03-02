@@ -114,6 +114,53 @@ input[type="submit"] {
       color: $darker-green;
     }
   }
+
+  &.button-compare_schools {
+    @include font-size($h1-large);
+    background-color: $white;
+    color: $mid-dark-gray;
+    letter-spacing: 0;
+    line-height: 1;
+    white-space: normal;
+    width: auto;
+    float: right;
+
+    &[aria-pressed="true"] {
+      color: $yellow;
+    }
+    &:hover {
+      background-color: $white;
+      color: $darker-yellow;
+    }
+  }
+
+  &.button-fotw_schools {
+    @include font-size($h1-large);
+    background-color: $white;
+    color: $mid-dark-gray;
+    letter-spacing: 0;
+    line-height: 1;
+    white-space: normal;
+    width: auto;
+    float: right;
+
+    .fa {
+      font-size: 40px;
+    }
+
+    &[aria-pressed="true"] {
+      .fa:before {
+        color: $green;
+        content: '\f058';
+      }
+    }
+    &:hover {
+      background-color: $white;
+      color: $darker-green;
+    }
+
+  }
+
 }
 
 button.block {

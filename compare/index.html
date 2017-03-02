@@ -1,0 +1,157 @@
+---
+title: Compare Schools | College Scorecard
+layout: default
+permalink: /compare/
+---
+
+<div class="compare-bg loadable">
+
+    <div class="toggles">
+
+        <div class="header-controls container">
+
+            <div class="container compare-back">
+                <a id="referrer-link" class="link-more" href="../search/">
+                    <i class="fa fa-chevron-left"></i> Back to search results
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <section class="section compare-schools">
+
+        <div class="container">
+
+            <div class="compare-main-alert">
+
+                <div class="show-error">
+                    <h2>Something went wrong:</h2>
+                    <p class="error-message"></p>
+                </div>
+
+            </div>
+
+            <div class="compare-sidebar">
+
+            </div>
+
+            <div class="schools-compare_selected-list show-loaded">
+
+                <h2 class="figure-heading constrain_width"
+                    aria-describedby="tip-avg-cost-year">
+                    Average Annual Cost
+                    <span class="tooltip-target">
+                              <i class="fa fa-info-circle"></i>
+                            </span>
+                </h2>
+                <div class="compare-container_group">
+
+                    <div class="average_line" data-meter="average_cost_meter">
+                        <span class="label"></span>
+                    </div>
+                    <div class="section-card_container-compare average-cost">
+
+                        <div class="selected-school_average-cost_group">
+
+                            <div class="selected-school_average-cost net_price">
+
+                                <div class="meter-wrapper">
+                                    <figure class="side-meter">
+                                        <picc-side-meter {% include net_price_meter_attributes.html %}>
+                                        </picc-side-meter>
+                                        <figcaption>
+                                            <strong data-bind="average_cost"></strong>
+                                            <span data-bind="name">School Name</span>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <h2 class="figure-heading constrain_width"
+                    aria-describedby="tip-graduation-rate">
+                    Graduation Rate
+                    <span class="tooltip-target">
+                      <i class="fa fa-info-circle"></i>
+                    </span>
+                </h2>
+                <div class="compare-container_group">
+
+                    <div class="average_line" data-meter="grad_rate_meter">
+                        <span class="label"></span>
+                    </div>
+                    <div class="section-card_container-compare grad-rate">
+
+                        <div class="selected-school_grad-rate_group">
+
+                            <div class="selected-school_grad-rate grad-rate">
+
+                                <div class="meter-wrapper">
+                                    <figure class="side-meter">
+                                        <picc-side-meter {% include graduation_meter_attributes.html %}>
+                                        </picc-side-meter>
+                                        <figcaption>
+                                            <strong data-bind="grad_rate"></strong>
+                                            <span data-bind="name">School Name</span>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <h2 class="figure-heading constrain_width"
+                    aria-describedby="tip-avg-salary">
+                    Salary After Attending
+                    <span class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </span>
+                </h2>
+                <div class="compare-container_group">
+
+                    <div class="average_line" data-meter="average_salary_meter">
+                        <span class="label"></span>
+                    </div>
+                    <div class="section-card_container-compare average-salary">
+
+                        <div class="selected-school_average-salary_group">
+
+                            <div class="selected-school_average-salary average-salary">
+
+                                <div class="meter-wrapper">
+                                    <figure class="side-meter">
+                                        <picc-side-meter {% include earnings_meter_attributes.html %}>
+                                        </picc-side-meter>
+                                        <figcaption>
+                                            <strong data-bind="average_salary"></strong>
+                                            <span data-bind="name">School Name</span>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+</div>
+
+<script>
+  picc.pages.compare();
+</script>

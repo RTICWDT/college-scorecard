@@ -9,8 +9,8 @@
     "url": "git@github.com:18F/college-choice.git"
   },
   "scripts": {
-    "build": "browserify `js/src/browserify-args.sh`",
-    "watch": "watchify -v `js/src/browserify-args.sh`",
+    "build": "`js/src/browserify-args.sh | xargs -L1 browserify`",
+    "watch": "`js/src/browserify-args.sh | xargs -L1 watchify -v`",
     "lint": "jshint -c .jshintrc js/src",
     "test-unit": "mocha -- test/unit",
     "test-unit-ci": "XUNIT_FILE=$CIRCLE_TEST_REPORTS/unit.xml mocha -R spec-xunit-file -- test/unit",

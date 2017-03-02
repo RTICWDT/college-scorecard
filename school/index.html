@@ -27,7 +27,7 @@ stylesheets:
           <h2>Something went wrong:</h2>
           <p class="error-message"></p>
           <form action="{{ site.baseurl }}/search/" method="GET">
-            <label for="name-school" >Try searching for a school by name:</h2>
+            <label for="name-school" >Try searching for a school by name:</label>
             <input id="name-school" name="name" type="text" placeholder="Name of School" autocomplete="off" autocorrect="off" autocapitalize="off">
             <input type="submit" value="Search" class="button-primary">
           </form>
@@ -52,6 +52,10 @@ stylesheets:
                   Under Ed Monitoring <i class="tooltip-target fa fa-info-circle"></i>
                 </p>
               </a>
+            </div>
+
+            <div class="compare-school">
+              {% include compare_school_control.html %}
             </div>
 
             <h1 data-bind="name">School Name</h1>
