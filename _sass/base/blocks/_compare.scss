@@ -35,11 +35,9 @@
     position:absolute;
     bottom:0;
     top: 0px;
-    background-image: linear-gradient($dark-gray 33%, rgba(255,255,255,0) 0%);
-    background-position: right;
-    background-size: 3px 13px;
-    background-repeat: repeat-y;
+    border-right: 2px solid $black-transparent;
     width: 100%;
+    z-index: 1;
 
     .label {
       text-align: right;
@@ -52,6 +50,22 @@
 
 .figure-heading {
   margin: 20px auto;
+}
+
+figure.side-meter {
+
+figcaption {
+  background: rgb(255, 255, 255);
+  background: rgba(255, 255, 255, .9);
+  position: relative;
+  z-index: $z-first;
+  display: inline-block;
+
+  span {
+    width: 100%;
+  }
+}
+
 }
 
 .section-card_container-compare {
