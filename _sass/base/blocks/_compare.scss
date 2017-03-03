@@ -8,7 +8,6 @@
   padding: $base-padding-lite ($toggle-padding / 2) $base-padding-lite ($toggle-padding / 2);
   min-height: 55px;
 
-
   .compare-back {
     display: inline-block;
     padding-top: $base-padding-lite;
@@ -73,8 +72,104 @@ figcaption {
   position: relative;
   margin-bottom: 60px;
 
+  .school-headings {
+    margin-top: $base-padding;
+    h1 {
+      @include font-size($h3);
+
+      @include respond-to(small-up) {
+        @include font-size($h2);
+      }
+      @include respond-to(medium-up) {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+
+    .school-key_figures.key-figures {
+      $height: 65px;
+      margin-top: -15px;
+      @include respond-to(medium-up) {
+        margin-top: 0;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      $list: rural, town, suburban, city,
+      small, medium, large,
+      public, private, profit;
+
+      @each $icon in $list {
+        li.icon-#{$icon} {
+          background: url(../img/school-icons/#{$icon}.png) no-repeat;
+          background: url(../img/school-icons/#{$icon}.svg) no-repeat,
+          linear-gradient(transparent, transparent);
+          background-position: top center;
+          background-size: 30px $height;
+        }
+      }
+
+      li {
+        width: 60px;
+        &.certificate {
+          margin-left: 10px;
+          padding-top: 25px;
+          @include respond-to(small-up) {
+            //margin-right: 25px;
+          }
+
+          .school-key_figures-year:before {
+            font-family: "fontawesome";
+            content: '\f0a3';
+            font-size: .75em;
+
+          }
+        }
+        &.n-year {
+          margin-right:0;
+          .school-key_figures-year {
+            margin-top: -35px;
+
+            font-size: 20px;
+            font-size: 2rem;
+          }
+        }
+
+        .label {
+          font-size: 14px;
+        }
+      }
+    }
+  }
   .meter-wrapper {
     margin-bottom: 20px;
   }
+
+}
+
+.section-card_container-compare_more {
+  @extend .section-card_container-school;
+
+  .compare-two_col-left {
+    padding-top: $base-padding;
+
+    @include span-columns(6 of 6);
+    @include respond-to(large-up) {
+      @include span-columns(3 of 6);
+    }
+  }
+
+
+  .compare-two_col-right {
+    padding-top: $base-padding-large;
+
+    @include span-columns(6 of 6);
+    @include respond-to(large-up) {
+      @include span-columns(3 of 6);
+      @include omega();
+      padding-top: $base-padding;
+    }
+  }
+
 
 }

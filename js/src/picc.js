@@ -687,7 +687,12 @@ picc.access.partTimeShare = picc.access.composed(
 picc.access.retentionRate = function(d) {
   var retention = picc.access(picc.fields.RETENTION_RATE)(d);
   /* jshint ignore:start */
-  return retention.four_year.full_time || retention.lt_four_year.full_time;
+  if (retention) {
+    return retention.four_year.full_time || retention.lt_four_year.full_time;
+  }
+  // data result key may be a full path dotted-string
+  retention = picc.access(picc.fields.RETENTION_RATE + ".four_year.full_time")(d);
+  return (retention) ? retention : picc.access(picc.fields.RETENTION_RATE + ".lt_four_year.full_time")(d) ;
   /* jshint ignore:end */
 };
 
@@ -919,9 +924,9 @@ picc.school.directives = (function() {
       label:      format.dollars(function() { return this.average; })
     },
 
-    // on the compare screen we draw the vertical average line
+    // on the compare screen we draw the vertical `average_line`
     // for the current meter group across multiple school picc-side-meter's.
-    // depending on the meter, we format the average accordingly ($,%, etc)
+    // depending on the meter, we format the average label accordingly ($,%, etc)
     average_line: {
 
         '@style': function() {
@@ -945,13 +950,15 @@ picc.school.directives = (function() {
            text: function() {
              var parent = this.parentElement;
              var type = parent.getAttribute('data-meter');
-             var meter = parent.nextElementSibling.querySelector('[data-bind="' + type + '"]')
+             var meter = parent.nextElementSibling.querySelector('[data-bind="' + type + '"]');
 
              switch (type) {
                case 'average_cost_meter':
                case 'average_salary_meter':
                   return format.dollars( function() { return meter.average; })('average');
                case 'grad_rate_meter':
+               case 'repayment_rate_meter':
+               case 'retention_rate_meter':
                     return format.percent(function () { return meter.average; })('average');
                default:
                  return meter.average;

@@ -108,7 +108,7 @@
       margin-top: 0;
       margin-bottom: 0;
       padding-top: 0;
-      font-size: font-size($h2);
+      @include font-size($h2);
       font-weight: normal;
     }
 

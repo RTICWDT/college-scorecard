@@ -33,11 +33,29 @@ permalink: /compare/
 
             </div>
 
-            <div class="compare-sidebar">
+            <div class="schools-compare_selected-list default-meters show-loaded">
 
-            </div>
+                <div class="section-card_container-compare">
+                    <div class="school-section school-headings">
+                        <h1 data-bind="name">School Name</h1>
+                        <ul class="school-key_figures key-figures">
+                            <li data-bind="years">
+                                <span data-bind="number" class="school-key_figures-year">X</span>
+                                <span class="label"></span>
+                            </li>
+                            <li data-bind="control">
+                                <span data-bind="value" class="label" >X</span>
+                            </li>
+                            <li data-bind="locale_name">
+                                <span data-bind="value" class="label" >X</span>
+                            </li>
+                            <li data-bind="size_category">
+                                <span data-bind="value" class="label" >X</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
-            <div class="schools-compare_selected-list show-loaded">
 
                 <h2 class="figure-heading constrain_width"
                     aria-describedby="tip-avg-cost-year">
@@ -144,8 +162,277 @@ permalink: /compare/
                     </div>
                 </div>
             </div>
-        </div>
 
+            <div class="compare-more show-loaded">
+                <div class="section-card_container-compare_more">
+
+                    <aria-accordion id="cost">
+
+                        <div>
+
+                            <h1 class="search_category">
+                                <button aria-expanded="false" aria-controls="costs-content">
+                                    Costs
+                                </button>
+                            </h1>
+
+                            <div id="costs-content" aria-hidden="true">
+
+                                <div>
+                                    <h2 class="figure-heading constrain_width"
+                                        aria-describedby="tip-avg-cost-year">
+                                        Average Annual Cost
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>
+                                    <div class="compare-container_group">
+
+                                        <div class="average_line" data-meter="average_cost_meter">
+                                            <span class="label"></span>
+                                        </div>
+                                        <div class="section-card_container-compare average-cost">
+
+                                            <div class="selected-school_average-cost_group">
+
+                                                <div class="selected-school_average-cost net_price">
+
+                                                    <div class="meter-wrapper">
+                                                        <figure class="side-meter">
+                                                            <picc-side-meter {% include net_price_meter_attributes.html %}>
+                                                            </picc-side-meter>
+                                                            <figcaption>
+                                                                <span data-bind="name">School Name</span>
+                                                                <strong data-bind="average_cost"></strong>
+                                                            </figcaption>
+                                                        </figure>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </aria-accordion>
+                </div>
+
+                <div class="section-card_container-compare_more">
+                    <aria-accordion id="finaid">
+                        <div>
+                            <h1 class="search_category">
+                                <button aria-expanded="false" aria-controls="finaid-content">
+                                    Financial Aid &amp; Debt
+                                </button>
+                            </h1>
+
+                            <div id="finaid-content" aria-hidden="true">
+
+                                <h2 class="figure-heading" aria-describedby="tip-repayment-rate">
+                                    Students Paying <span>Down Their Debt</span>
+                                    <span class="tooltip-target">
+                                        <i class="fa fa-info-circle"></i>
+                                    </span>
+                                </h2>
+                                <div class="compare-container_group">
+
+                                    <div class="average_line" data-meter="repayment_rate_meter">
+                                        <span class="label"></span>
+                                    </div>
+
+                                    <div class="section-card_container-compare repayment-rate">
+
+                                        <div class="selected-school_repayment-rate_group">
+
+                                            <div class="selected-school_repayment-rate repayment-rate">
+
+                                                <div class="meter-wrapper">
+                                                    <figure class="side-meter">
+                                                        <picc-side-meter
+                                                            class="debt"
+                                                            data-bind="repayment_rate_meter"
+                                                            max="1"
+                                                            average="{{ site.data.national_stats.repayment_rate.median }}"
+                                                            average-range="{{ site.data.national_stats.repayment_rate.average_range|join:'..' }}"
+                                                            data-median-four_year="{{ site.data.national_stats.repayment_rate_4.median }}"
+                                                            data-median-lt_four_year="{{ site.data.national_stats.repayment_rate_l4.median }}">
+                                                        </picc-side-meter>
+                                                        <figcaption>
+                                                            <span data-bind="name">School Name</span>
+                                                            <strong data-bind="repayment_rate_percent"></strong>
+                                                        </figcaption>
+                                                    </figure>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </aria-accordion>
+                </div>
+
+                <div class="section-card_container-compare_more">
+                    <aria-accordion id="graduation">
+                        <div>
+                            <h1 class="search_category">
+                                <button aria-expanded="false" aria-controls="graduation-content">
+                                    Graduation &amp; Retention
+                                </button>
+                            </h1>
+
+                            <div id="graduation-content" aria-hidden="true">
+                                <div>
+                                    <h2 class="figure-heading constrain_width"
+                                        aria-describedby="tip-graduation-rate">
+                                        Graduation Rate
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>
+                                    <div class="compare-container_group">
+
+                                        <div class="average_line" data-meter="grad_rate_meter">
+                                            <span class="label"></span>
+                                        </div>
+                                        <div class="section-card_container-compare grad-rate">
+
+                                            <div class="selected-school_grad-rate_group">
+
+                                                <div class="selected-school_grad-rate grad-rate">
+
+                                                    <div class="meter-wrapper">
+                                                        <figure class="side-meter">
+                                                            <picc-side-meter {% include graduation_meter_attributes.html %}>
+                                                            </picc-side-meter>
+                                                            <figcaption>
+                                                                <span data-bind="name">School Name</span>
+                                                                <strong data-bind="grad_rate"></strong>
+                                                            </figcaption>
+                                                        </figure>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <h2 class="figure-heading" aria-describedby="tip-retention-rate">
+                                        Students Who Return <span>After Their First Year</span>
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>
+
+                                    <div class="compare-container_group">
+
+                                        <div class="average_line" data-meter="retention_rate_meter">
+                                            <span class="label"></span>
+                                        </div>
+                                        <div class="section-card_container-compare rentention-rate">
+
+                                            <div class="selected-school_retention-rate_group">
+
+                                                <div class="selected-school_retention-rate rentention-rate">
+
+                                                    <div class="meter-wrapper">
+                                                        <figure class="side-meter">
+                                                            <picc-side-meter
+                                                                class="graduation"
+                                                                data-bind="retention_rate_meter"
+                                                                max="1"
+                                                                average="{{ site.data.national_stats.retention_rate.median }}"
+                                                                average-range="{{ site.data.national_stats.retention_rate.average_range|join:'..' }}">
+                                                            </picc-side-meter>
+
+                                                            <figcaption>
+                                                                <span data-bind="name">School Name</span>
+                                                                <strong data-bind="retention_rate_value"></strong>
+                                                            </figcaption>
+                                                        </figure>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </aria-accordion>
+                </div>
+
+                <div class="section-card_container-compare_more">
+                    <aria-accordion id="earnings">
+                        <div>
+                            <h1 class="search_category">
+                                <button aria-expanded="false" aria-controls="earnings-content">
+                                    Earnings After School
+                                </button>
+                            </h1>
+
+                            <div id="earnings-content" aria-hidden="true">
+
+                                <div>
+                                    <h2 class="figure-heading constrain_width"
+                                        aria-describedby="tip-avg-salary">
+                                        Salary After Attending
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>
+                                    <div class="compare-container_group">
+
+                                        <div class="average_line" data-meter="average_salary_meter">
+                                            <span class="label"></span>
+                                        </div>
+                                        <div class="section-card_container-compare average-salary">
+
+                                            <div class="selected-school_average-salary_group">
+
+                                                <div class="selected-school_average-salary average-salary">
+
+                                                    <div class="meter-wrapper">
+                                                        <figure class="side-meter">
+                                                            <picc-side-meter {% include earnings_meter_attributes.html %}>
+                                                            </picc-side-meter>
+                                                            <figcaption>
+                                                                <span data-bind="name">School Name</span>
+                                                                <strong data-bind="average_salary"></strong>
+                                                            </figcaption>
+                                                        </figure>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </aria-accordion>
+                </div>
+            </div>
+        </div>
     </section>
 
 

@@ -41,16 +41,19 @@ module.exports = function compare() {
     picc.fields.CITY,
     picc.fields.STATE,
     picc.fields.SIZE,
-    // to get "public" or "private"
+    picc.fields.LOCALE,
+    // to get "public" or "private" control
     picc.fields.OWNERSHIP,
     // to get the "four_year" or "lt_four_year" bit
     picc.fields.PREDOMINANT_DEGREE,
     // get all of the net price values
     picc.fields.NET_PRICE,
-    // completion rate
     picc.fields.COMPLETION_RATE,
+    picc.fields.REPAYMENT_RATE,
     // this has no sub-fields
     picc.fields.MEDIAN_EARNINGS,
+    picc.fields.RETENTION_RATE + '.four_year.full_time',
+    picc.fields.RETENTION_RATE + '.lt_four_year.full_time',
     // not sure if we need this, but let's get it anyway
     picc.fields.EARNINGS_GT_25K,
     // under investigation flag
@@ -70,14 +73,24 @@ module.exports = function compare() {
 
   var directives = picc.data.selectKeys(picc.school.directives, [
     'name',
+    'years',
+    'control',
+    'locale_name',
+    'size_category',
     'average_cost',
     'average_cost_meter',
     'grad_rate',
     'grad_rate_meter',
     'average_salary',
-    'average_salary_meter'
+    'average_salary_meter',
+    'repayment_rate_meter',
+    'repayment_rate_percent',
+    'retention_rate_value',
+    'retention_rate_meter'
 
   ]);
+
+  // var directives = picc.school.directives;
 
   var meterWrapper = picc.data.selectKeys(picc.school.directives, [
     'average_line'
@@ -89,6 +102,7 @@ module.exports = function compare() {
     var id = +school.schoolId || +school;
     query['s'+id] = [picc.API.getSchool, id, params];
   });
+
 console.log('query', query);
   picc.API.getAll(query, function (error, data) {
 
