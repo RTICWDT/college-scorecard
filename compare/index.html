@@ -6,7 +6,7 @@ permalink: /compare/
 
 <div class="compare-bg loadable">
 
-    <div class="toggles">
+    <div class="toggles compare-toggles">
 
         <div class="header-controls container">
 
@@ -15,6 +15,27 @@ permalink: /compare/
                     <i class="fa fa-chevron-left"></i> Back to search results
                 </a>
             </div>
+
+            <aria-accordion id="compare_schools-edit" class="toggle-accordion">
+
+                <div class="toggle-control">
+                    <legend>Compare</legend>
+                    <h1 class="search_category">
+                        <button type="button" aria-expanded="false" aria-controls="compare_schools-content">
+                            <i class="fa fa-star"></i>Compare<i class="fa fa-chevron-down"></i>
+                        </button>
+                    </h1>
+                </div>
+
+                <div id="compare_schools-content" aria-hidden="true" class="toggle-content toggle-content-compare_schools">
+
+                    {% include edit-compare.html %}
+
+                </div>
+
+                <!--<input type="submit" value="Submit" class="sr-only" tabindex="-1">-->
+
+            </aria-accordion>
 
         </div>
 
@@ -35,34 +56,12 @@ permalink: /compare/
 
             <div class="schools-compare_selected-list default-meters show-loaded">
 
-                <div class="section-card_container-compare">
-                    <div class="school-section school-headings">
-                        <h1 data-bind="name">School Name</h1>
-                        <ul class="school-key_figures key-figures">
-                            <li data-bind="years">
-                                <span data-bind="number" class="school-key_figures-year">X</span>
-                                <span class="label"></span>
-                            </li>
-                            <li data-bind="control">
-                                <span data-bind="value" class="label" >X</span>
-                            </li>
-                            <li data-bind="locale_name">
-                                <span data-bind="value" class="label" >X</span>
-                            </li>
-                            <li data-bind="size_category">
-                                <span data-bind="value" class="label" >X</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-
                 <h2 class="figure-heading constrain_width"
                     aria-describedby="tip-avg-cost-year">
                     Average Annual Cost
                     <span class="tooltip-target">
-                              <i class="fa fa-info-circle"></i>
-                            </span>
+                        <i class="fa fa-info-circle"></i>
+                    </span>
                 </h2>
                 <div class="compare-container_group">
 
@@ -81,7 +80,7 @@ permalink: /compare/
                                         </picc-side-meter>
                                         <figcaption>
                                             <span data-bind="name">School Name</span>
-                                            <strong data-bind="average_cost"></strong>
+                                            <span data-bind="average_cost" class="sr-only"></span>
                                         </figcaption>
                                     </figure>
                                 </div>
@@ -116,7 +115,7 @@ permalink: /compare/
                                         </picc-side-meter>
                                         <figcaption>
                                             <span data-bind="name">School Name</span>
-                                            <strong data-bind="grad_rate"></strong>
+                                            <span data-bind="grad_rate" class="sr-only"></span>
                                         </figcaption>
                                     </figure>
                                 </div>
@@ -131,8 +130,8 @@ permalink: /compare/
                     aria-describedby="tip-avg-salary">
                     Salary After Attending
                     <span class="tooltip-target">
-                          <i class="fa fa-info-circle"></i>
-                        </span>
+                        <i class="fa fa-info-circle"></i>
+                    </span>
                 </h2>
                 <div class="compare-container_group">
 
@@ -151,7 +150,7 @@ permalink: /compare/
                                         </picc-side-meter>
                                         <figcaption>
                                             <span data-bind="name">School Name</span>
-                                            <strong data-bind="average_salary"></strong>
+                                            <span data-bind="average_salary" class="sr-only"></span>
                                         </figcaption>
                                     </figure>
                                 </div>
@@ -164,6 +163,95 @@ permalink: /compare/
             </div>
 
             <div class="compare-more show-loaded">
+
+                <div class="section-card_container-compare_more">
+
+                    <aria-accordion id="school">
+
+                        <div>
+
+                            <h1 class="search_category">
+                                <button aria-expanded="false" aria-controls="school-content">
+                                    College Information
+                                </button>
+                            </h1>
+
+                            <div id="school-content">
+                                <h2 class="figure-heading constrain_width"
+                                    aria-describedby="tip-full-time">
+                                    Full-time Enrollment
+                                    <span class="tooltip-target">
+                                        <i class="fa fa-info-circle"></i>
+                                    </span>
+                                </h2>
+
+                                <div class="section-card_container-compare school-summary">
+
+                                    <div class="school-two_col">
+                                        <div class="compare-two_col-left">
+
+                                        <div class="meter-wrapper">
+                                            <figure class="side-meter">
+                                                <picc-side-meter
+                                                    class="demographics"
+                                                    data-bind="full_time_value"
+                                                    max="1">
+                                                </picc-side-meter>
+                                                <figcaption>
+                                                    <span data-bind="name">School Name</span>
+                                                    <span data-bind="full_time_percent" class="sr-only"></span>
+                                                </figcaption>
+                                            </figure>
+                                        </div>
+
+                                        </div>
+
+                                        <div class="compare-two_col-right">
+
+                                        <div class="school-student-stats-col">
+
+                                            <div class="school-student-stats-col-align school-summary">
+                                            <div class="school-size">
+                                                <span class="fact_number">
+                                                    <span data-bind="size_number"></span>
+                                                </span>
+                                                <strong class="label">Undergraduates</strong>
+                                            </div>
+
+                                            <div class="school-section school-headings">
+                                                <ul class="school-key_figures key-figures">
+                                                    <li data-bind="years">
+                                                        <span data-bind="number" class="school-key_figures-year">X</span>
+                                                        <span class="label"></span>
+                                                    </li>
+                                                    <li data-bind="control">
+                                                        <span data-bind="value" class="label" >X</span>
+                                                    </li>
+                                                    <li data-bind="locale_name">
+                                                        <span data-bind="value" class="label" >X</span>
+                                                    </li>
+                                                    <li data-bind="size_category">
+                                                        <span data-bind="value" class="label" >X</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </aria-accordion>
+                </div>
+
                 <div class="section-card_container-compare_more">
 
                     <aria-accordion id="cost">
@@ -171,12 +259,12 @@ permalink: /compare/
                         <div>
 
                             <h1 class="search_category">
-                                <button aria-expanded="false" aria-controls="costs-content">
+                                <button aria-expanded="false" aria-controls="cost-content">
                                     Costs
                                 </button>
                             </h1>
 
-                            <div id="costs-content" aria-hidden="true">
+                            <div id="cost-content" aria-hidden="true">
 
                                 <div>
                                     <h2 class="figure-heading constrain_width"
@@ -203,7 +291,7 @@ permalink: /compare/
                                                             </picc-side-meter>
                                                             <figcaption>
                                                                 <span data-bind="name">School Name</span>
-                                                                <strong data-bind="average_cost"></strong>
+                                                                <span data-bind="average_cost" class="sr-only"></span>
                                                             </figcaption>
                                                         </figure>
                                                     </div>
@@ -264,7 +352,7 @@ permalink: /compare/
                                                         </picc-side-meter>
                                                         <figcaption>
                                                             <span data-bind="name">School Name</span>
-                                                            <strong data-bind="repayment_rate_percent"></strong>
+                                                            <span data-bind="repayment_rate_percent" class="sr-only"></span>
                                                         </figcaption>
                                                     </figure>
                                                 </div>
@@ -316,7 +404,7 @@ permalink: /compare/
                                                             </picc-side-meter>
                                                             <figcaption>
                                                                 <span data-bind="name">School Name</span>
-                                                                <strong data-bind="grad_rate"></strong>
+                                                                <span data-bind="grad_rate" class="sr-only"></span>
                                                             </figcaption>
                                                         </figure>
                                                     </div>
@@ -359,7 +447,7 @@ permalink: /compare/
 
                                                             <figcaption>
                                                                 <span data-bind="name">School Name</span>
-                                                                <strong data-bind="retention_rate_value"></strong>
+                                                                <span data-bind="retention_rate_value" class="sr-only"></span>
                                                             </figcaption>
                                                         </figure>
                                                     </div>
@@ -414,7 +502,7 @@ permalink: /compare/
                                                             </picc-side-meter>
                                                             <figcaption>
                                                                 <span data-bind="name">School Name</span>
-                                                                <strong data-bind="average_salary"></strong>
+                                                                <span data-bind="average_salary" class="sr-only"></span>
                                                             </figcaption>
                                                         </figure>
                                                     </div>
@@ -434,8 +522,6 @@ permalink: /compare/
             </div>
         </div>
     </section>
-
-
 
 </div>
 

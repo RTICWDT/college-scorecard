@@ -158,6 +158,28 @@
   }
 }
 
+.search-toggles .toggle-content-compare_schools {
+  left:0;
+
+  @media only screen and (min-width:541px)
+  and (max-width: 599px) {
+    right: 0;
+    left: inherit;
+  }
+
+  @media only screen and (min-width: 721px)
+  and (max-width: 900px) {
+    right: 0;
+    left: inherit;
+  }
+
+  fieldset {
+    border-top: 1px solid $mid-gray;
+    padding: 1em 1.25em 0 1.25em;
+  }
+
+}
+
 .results-main {
   background-color: $mid-gray;
 }

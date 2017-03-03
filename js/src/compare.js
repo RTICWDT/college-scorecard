@@ -2,6 +2,7 @@ var tagalong = require('tagalong');
 var d3 = require('d3');
 var querystring = require('querystring');
 
+
 module.exports = function compare() {
 
   var loadable = d3.select('.loadable');
@@ -29,8 +30,7 @@ module.exports = function compare() {
 
   loadable.classed('js-loading', true);
 
-  var params = {},
-    query = {};
+  var params = {};
 
   params.fields = [
     // we need the id to link it
@@ -56,25 +56,16 @@ module.exports = function compare() {
     picc.fields.RETENTION_RATE + '.lt_four_year.full_time',
     // not sure if we need this, but let's get it anyway
     picc.fields.EARNINGS_GT_25K,
+    picc.fields.PART_TIME_SHARE,
     // under investigation flag
     picc.fields.UNDER_INVESTIGATION
   ].join(',');
-
-  // var headingDirectives = picc.data.selectKeys(picc.school.directives, [
-  //   'title',
-  //   'school_link',
-  //   'name',
-  //   'city',
-  //   'state',
-  //   'selected_school',
-  //   'under_investigation',
-  //   'size_number',
-  // ]);
 
   var directives = picc.data.selectKeys(picc.school.directives, [
     'name',
     'years',
     'control',
+    'size_number',
     'locale_name',
     'size_category',
     'average_cost',
@@ -86,7 +77,8 @@ module.exports = function compare() {
     'repayment_rate_meter',
     'repayment_rate_percent',
     'retention_rate_value',
-    'retention_rate_meter'
+    'retention_rate_meter',
+    'full_time_value'
 
   ]);
 
@@ -98,60 +90,127 @@ module.exports = function compare() {
 
 
   // build query for API call
-  compareSchools.map(function (school) {
-    var id = +school.schoolId || +school;
-    query['s'+id] = [picc.API.getSchool, id, params];
-  });
+  function buildQuery (schools) {
+    var query = {};
+    schools.map(function (school) {
+      var id = +school.schoolId || +school;
+      query['s'+id] = [picc.API.getSchool, id, params];
 
-console.log('query', query);
-  picc.API.getAll(query, function (error, data) {
+    });
+    return query;
+  }
 
-    loadable.classed('js-loading', false);
+  picc.school.selection.renderCompareToggles();
 
-    if (error) {
-      console.error('getAll error:', error);
-    }
+  // initial display
+  onChange();
 
-    console.info('got schools:', data);
 
-    var school = {};
-    school.results = [];
+  function onChange() {
 
-    Object.keys(data).forEach(function (key) {
-      if (data[key]) {
-        school.results.push(data[key]);
+    compareSchools = (qs['schools[]']) ? qs['schools[]'] : picc.school.selection.all('compare');
+
+    // build query for API call
+    query = buildQuery(compareSchools);
+
+    picc.API.getAll(query, function (error, data) {
+
+      loadable.classed('js-loading', false);
+
+      if (error) {
+        console.error('getAll error:', error);
       }
+
+      console.info('got schools:', data);
+
+      var school = {};
+      school.results = [];
+
+      Object.keys(data).forEach(function (key) {
+        if (data[key]) {
+          school.results.push(data[key]);
+        }
+      });
+
+      if (!school.results.length) {
+        loadable.classed('js-error', true);
+        loadable.classed('js-loaded', false);
+        return showError(picc.errors.NO_SUCH_SCHOOL);
+      }
+      loadable.classed('js-error', false);
+      loadable.classed('js-loaded', true);
+
+      var root = document.querySelectorAll('.compare-container_group');
+      var compareGroups = document.querySelectorAll('.section-card_container-compare');
+
+      [].slice.call(compareGroups)
+        .forEach(function(node) {
+          // console.log('binding to:', node);
+          tagalong(node, school.results, directives);
+        });
+
+
+      [].slice.call(root)
+        .forEach(function(node) {
+          // using tagalong for directive bindings but not data
+          tagalong(node, {}, meterWrapper);
+        });
+
+
     });
 
-    if (!school.results.length) {
-      loadable.classed('js-error', true);
-      return showError(picc.errors.NO_SUCH_SCHOOL);
-    }
+  }
 
-    loadable.classed('js-loaded', true);
+  /**
+   * add event listeners for school selection click events and fetch new results
+   */
+  picc.ready(function() {
 
-
-
-    // var headingList = document.querySelector('.selected-school_heading');
-    var root = document.querySelectorAll('.compare-container_group');
-    var compareGroups = document.querySelectorAll('.section-card_container-compare');
-
-
-
-    [].slice.call(compareGroups)
-      .forEach(function(node) {
-        // console.log('binding to:', node);
-        tagalong(node, school.results, directives);
-      });
-
-
-    [].slice.call(root)
-      .forEach(function(node) {
-        // using tagalong for directive bindings but not data
-        tagalong(node, {}, meterWrapper);
-      });
-
+    var compareBox = 'data-school';
+    picc.delegate(
+      document.body,
+      // if the element matches '[data-school]'
+      function() {
+        return this.parentElement.hasAttribute(compareBox) ||
+          this.hasAttribute(compareBox);
+      },
+      {
+        click: picc.debounce(function(e) {
+          picc.school.selection.toggle(e);
+          onChange();
+        },250)
+      }
+    );
 
   });
+  var win = d3.select(window);
+  // close other toggles when one opens
+  var toggles = d3.selectAll('.toggle-accordion')
+    .on('open', function() {
+      var opened = this;
+      toggles.each(function() {
+        if (this !== opened) this.close();
+      });
+
+      var event = 'click.toggle';
+      win.on(event, function() {
+        if (!opened.contains(d3.event.target)) {
+          win.on(event, null);
+          opened.close();
+        }
+      });
+
+      // if (this.id = 'compare_schools-edit') {
+      //   picc.school.selection.renderCompareToggles();
+      // }
+    });
+
+  // close all toggles on escape
+  win.on('keyup.toggle', function() {
+    if (d3.event.keyCode === 27) {
+      toggles.property('expanded', false);
+    }
+  });
+
 
 };

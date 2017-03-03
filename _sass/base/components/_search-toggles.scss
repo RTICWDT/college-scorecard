@@ -126,6 +126,16 @@ $toggle-padding: 15px;
     }
   }
 
+  .compare_link {
+    margin-top: $base-padding;
+    padding-left: 10px;
+    padding-right: 10px;
+    @include respond-to(teensy-up) {
+      padding-left: inherit;
+      padding-right: inherit;
+    }
+  }
+
 
   .compare-button_link {
     display: none;
@@ -134,10 +144,20 @@ $toggle-padding: 15px;
   .compare-button_link[href] {
     display: block;
     position: relative;
+    margin: 0 auto;
     span {
       position: absolute;
-      top:15px;
-      left: 50px;
+      top:13px;
+      left: 0;
+      right: 0;
+      margin-right: auto;
+      margin-left: auto;
+      text-align: center;
+      width: 175px;
+      @include respond-to(teensy-up) {
+        top:15px;
+        width: 200px;
+      }
     }
   }
 

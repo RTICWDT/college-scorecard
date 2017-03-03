@@ -921,7 +921,8 @@ picc.school.directives = (function() {
       // '@max':     access.nationalStat('max', access.publicPrivate),
       // '@average': access.nationalStat('median', access.publicPrivate),
       '@value':   access.netPrice,
-      label:      format.dollars(function() { return this.average; })
+      label:      format.dollars(function() { return this.average; }),
+      'picc-side-meter-val': format.dollars(access.netPrice),
     },
 
     // on the compare screen we draw the vertical `average_line`
@@ -980,21 +981,24 @@ picc.school.directives = (function() {
     grad_rate_meter: {
       // '@average': access.nationalStat('median', access.yearDesignation),
       '@value':   access.completionRate,
-      label:      format.percent(function() { return this.average; })
+      label:      format.percent(function() { return this.average; }),
+      'picc-side-meter-val': format.percent(access.completionRate)
     },
 
     average_salary: format.dollars(access.earningsMedian),
     average_salary_meter: {
       '@value': access.earningsMedian,
       // '@average': access.nationalStat('median', access.yearDesignation),
-      label:    format.dollars(function() { return this.average; })
+      label:    format.dollars(function() { return this.average; }),
+      'picc-side-meter-val': format.dollars(access.earningsMedian)
     },
 
     repayment_rate_percent: format.percent(fields.REPAYMENT_RATE),
     repayment_rate_meter: {
       '@value': access(fields.REPAYMENT_RATE),
       // '@average': access.nationalStat('median', access.yearDesignation),
-      label:    format.percent(function() { return this.average; })
+      label:    format.percent(function() { return this.average; }),
+      'picc-side-meter-val': format.percent(fields.REPAYMENT_RATE)
     },
 
     average_total_debt: format.dollars(fields.AVERAGE_TOTAL_DEBT),
@@ -1006,13 +1010,32 @@ picc.school.directives = (function() {
     earnings_gt_25k: format.percent(access.earnings25k),
     earnings_gt_25k_meter: {
       '@value': access.earnings25k,
-      label:    format.percent(function() { return this.average; })
+      label:    format.percent(function() { return this.average; }),
+      'picc-side-meter-val': format.percent(access.earnings25k)
     },
 
     retention_rate_value: format.percent(access.retentionRate),
     retention_rate_meter: {
       '@value': access.retentionRate,
-      label:    format.percent(function() { return this.average; })
+      label:    format.percent(function() { return this.average; }),
+      'picc-side-meter-val': format.percent(access.retentionRate),
+    },
+
+    full_time_value: {
+
+      '@value': function(d) {
+        var pt = access.partTimeShare(d);
+        return pt === null ? null : 1 - pt;
+      },
+      'average': function(d) {
+        var pt = access.partTimeShare(d);
+        return pt === null ? null : 1 - pt;
+      },
+      'picc-side-meter-val': format.percent(function(d) {
+        var pt = access.partTimeShare(d);
+        return pt === null ? null : (1 - pt);
+      }),
+
     },
 
     full_time_percent: format.number(function(d) {

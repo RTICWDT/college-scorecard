@@ -36,13 +36,16 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
           var average = this.average;
 
           var bar = getBar(this);
+          var barVal = getBarVal(this);
 
           if (typeof value !== 'number' || isNaN(value)) {
             // console.log('bad value:', value);
 
             // reset the bar
             bar.style.setProperty('display', 'none');
+            barVal.style.setProperty('display', 'none');
             bar.style.removeProperty('height');
+
 
             // classify and bail
             classify(this, {
@@ -63,11 +66,34 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
             value = Math.max(min, Math.min(this.value, max));
             var left = Math.min(value, Math.max(0, min));
             var right = Math.max(0, value);
+            var scaleRight = scale(right);
 
             bar.style.removeProperty('display');
+            barVal.style.removeProperty('display');
 
             bar.style.setProperty('left', scale(left) + '%');
-            bar.style.setProperty('right', 100 - scale(right) + '%');
+            bar.style.setProperty('right', 100 - scaleRight + '%');
+
+            // attach the average value next to the bar chart
+            // and responsively scale it from overflowing bar
+            // when the bar is a little less than full
+            var magicNum = (max > 1) ? 6 : 3;
+            var magicFlow = 85;
+            var sRightVal = (100 - (scaleRight + magicNum) <= magicNum ) ? 100 : scaleRight + magicNum;
+            var sLeftVal = (sRightVal === 100) ? scaleRight - magicNum : scaleRight;
+
+            if ( sRightVal < (100 - magicNum) ) {
+              barVal.style.setProperty('left', sLeftVal + '%');
+
+              // flag to remove left property at smaller viewports
+              if ( sRightVal > magicFlow ) {
+                barVal.setAttribute('flow', true);
+
+              }
+            } else {
+              barVal.style.setProperty('right', (100 -  sRightVal) + '%');
+              barVal.style.setProperty('background', 'none');
+            }
 
 
             if (this.hasAttribute('average-range')) {
@@ -171,6 +197,15 @@ function getBar(meter) {
     bar.className = CLASS_PREFIX + 'bar';
   }
   return bar;
+}
+
+function getBarVal(meter) {
+  var avg = meter.querySelector('.' + CLASS_PREFIX + 'val');
+  if (!avg) {
+    avg = meter.appendChild(document.createElement('span'));
+    avg.className = CLASS_PREFIX + 'val';
+  }
+  return avg;
 }
 
 function number(value, fallback) {
