@@ -79,7 +79,8 @@
     position:absolute;
     bottom:0;
     top: 0;
-    border-right: 2px solid $black-transparent;
+    border: 1px solid $black;
+    width: 0;
     z-index: 1;
 
     .label {
