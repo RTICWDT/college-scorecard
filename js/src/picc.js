@@ -1262,13 +1262,18 @@ picc.school.selection = {
 
     renderCompareLink: function() {
       var compareLink = d3.select('#compare-link');
+      var linkContainer = d3.select(compareLink.node().parentNode);
       if (compareLink) {
         if (picc.school.selection.all('compare').length) {
           compareLink
-            .attr('href', picc.BASE_URL + '/compare/');
+            .attr('href', picc.BASE_URL + '/compare/')
+            .attr('aria-disabled', null);
+          linkContainer.classed('disabled',false);
         } else {
           compareLink
-            .attr('href', null);
+            .attr('href', null)
+            .attr('aria-disabled', true);
+          linkContainer.classed('disabled', true);
         }
       }
     }

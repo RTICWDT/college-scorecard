@@ -130,18 +130,21 @@ $toggle-padding: 15px;
     margin-top: $base-padding;
     padding-left: 10px;
     padding-right: 10px;
+    text-align: center;
     @include respond-to(teensy-up) {
       padding-left: inherit;
       padding-right: inherit;
     }
-  }
 
+    &.disabled:before {
+      position: relative;
+      bottom: 17px;
+      content: 'No Schools Selected to Compare';
+      color: $dark-gray;
+    }
+  }
 
   .compare-button_link {
-    display: none;
-  }
-
-  .compare-button_link[href] {
     display: block;
     position: relative;
     margin: 0 auto;
@@ -159,6 +162,13 @@ $toggle-padding: 15px;
         width: 200px;
       }
     }
+
+    &[aria-disabled="true"] {
+      background-color: $mid-medium-gray;
+      cursor: not-allowed;
+    }
+
+
   }
 
   .search-button,
