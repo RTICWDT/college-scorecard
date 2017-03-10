@@ -1604,7 +1604,7 @@ picc.ui.expandAccordions = function(selector, expanded) {
 };
 
 // are we in IE? hopefully not.
-picc.ui.ie = typeof document.documentMode === 'number';
+picc.ui.ie = typeof document !== 'undefined' && document.documentMode === 'number';
 
 // flag used mainly by IE/tagalong issue
 picc.ui.alreadyLoaded = false;
