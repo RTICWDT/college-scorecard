@@ -42,9 +42,13 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
             // console.log('bad value:', value);
 
             // reset the bar
+            bar.removeAttribute('style');
             bar.style.setProperty('display', 'none');
+
+            // reset the barVal
+            barVal.removeAttribute('style');
+            barVal.removeAttribute('flow');
             barVal.style.setProperty('display', 'none');
-            bar.style.removeProperty('height');
 
 
             // classify and bail
@@ -68,8 +72,10 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
             var right = Math.max(0, value);
             var scaleRight = scale(right);
 
-            bar.style.removeProperty('display');
-            barVal.style.removeProperty('display');
+            // reset the bar and barVal
+            bar.removeAttribute('style');
+            barVal.removeAttribute('style');
+            barVal.removeAttribute('flow');
 
             bar.style.setProperty('left', scale(left) + '%');
             bar.style.setProperty('right', 100 - scaleRight + '%');
