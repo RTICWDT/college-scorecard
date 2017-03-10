@@ -956,11 +956,11 @@ picc.school.directives = (function() {
              switch (type) {
                case 'average_cost_meter':
                case 'average_salary_meter':
-                  return format.dollars( function() { return meter.average; })('average');
+                  return format.dollars( function() { return meter.getAttribute('average'); })('average');
                case 'grad_rate_meter':
                case 'repayment_rate_meter':
                case 'retention_rate_meter':
-                    return format.percent(function () { return meter.average; })('average');
+                    return format.percent(function () { return meter.getAttribute('average'); })('average');
                default:
                  return meter.average;
              }
@@ -1601,6 +1601,19 @@ picc.ui.expandAccordions = function(selector, expanded) {
       return !!expanded.apply(this, arguments);
     })
     .property('expanded', true);
+};
+
+// are we in IE? hopefully not.
+picc.ui.ie = typeof document.documentMode === 'number';
+
+// flag used mainly by IE/tagalong issue
+picc.ui.alreadyLoaded = false;
+
+// another IE/tagalong util
+picc.ui.removeAllChildren = function(node) {
+  while (node.lastChild) {
+    node.removeChild(node.lastChild);
+  }
 };
 
 /**

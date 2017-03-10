@@ -2,7 +2,6 @@ var tagalong = require('tagalong');
 var d3 = require('d3');
 var querystring = require('querystring');
 
-
 module.exports = function compare() {
 
   var loadable = d3.select('.loadable');
@@ -82,8 +81,6 @@ module.exports = function compare() {
 
   ]);
 
-  // var directives = picc.school.directives;
-
   var meterWrapper = picc.data.selectKeys(picc.school.directives, [
     'average_line'
   ]);
@@ -99,11 +96,6 @@ module.exports = function compare() {
     });
     return query;
   }
-
-  picc.school.selection.renderCompareToggles();
-
-  // initial display
-  onChange();
 
 
   function onChange() {
@@ -140,22 +132,49 @@ module.exports = function compare() {
       loadable.classed('js-error', false);
       loadable.classed('js-loaded', true);
 
+
+      /*
+       * XXX this avoids a nasty hard crash in IE11, which seems to have some
+       * problems with tagalong's data joining algorithm (and/or, you know,
+       * it's just broken).
+       *
+       * Removing the children of the results list after it's already been
+       * rendered (iff `alreadyLoaded` is true) guarantees that tagalong has
+       * stashed a reference to the template node. On the compare page, clone
+       * template references are needed as we have nested templates.
+       *
+       * Note: we _don't_ do this in other browsers because it has performance
+       * implications. Rendering will be much faster when the existing nodes
+       * are reused and modified in place, rather than being cloned anew each
+       * time.
+       */
+
       var root = document.querySelectorAll('.compare-container_group');
-      var compareGroups = document.querySelectorAll('.section-card_container-compare');
 
-      [].slice.call(compareGroups)
-        .forEach(function(node) {
-          // console.log('binding to:', node);
-          tagalong(node, school.results, directives);
+      if (picc.ui.ie && picc.ui.alreadyLoaded) {
+
+        [].slice.call(root).forEach(function(node) {
+          var section = node.querySelector('.section-card_container-compare').cloneNode(true);
+          var avg = node.querySelector('.average_line').cloneNode(true);
+          picc.ui.removeAllChildren(node);
+          node.appendChild(avg);
+          var addedAvg = node.querySelector('.average_line');
+          addedAvg.parentNode.insertBefore(section, addedAvg.nextSibling);
         });
 
+      }
 
-      [].slice.call(root)
-        .forEach(function(node) {
-          // using tagalong for directive bindings but not data
-          tagalong(node, {}, meterWrapper);
-        });
+      var sections = document.querySelectorAll('.section-card_container-compare');
 
+      [].slice.call(sections).forEach(function(node){
+        tagalong(node, school.results, directives);
+      });
+
+      [].slice.call(root).forEach(function (node) {
+        tagalong(node, {}, meterWrapper);
+      });
+
+      picc.ui.alreadyLoaded = true;
 
     });
 
@@ -165,6 +184,12 @@ module.exports = function compare() {
    * add event listeners for school selection click events and fetch new results
    */
   picc.ready(function() {
+
+    // wait for ready to avoid IE remembering checkbox state
+    picc.school.selection.renderCompareToggles();
+
+    // initial display
+    onChange();
 
     var compareBox = 'data-school';
     picc.delegate(
@@ -178,7 +203,7 @@ module.exports = function compare() {
         click: picc.debounce(function(e) {
           picc.school.selection.toggle(e);
           onChange();
-        },250)
+        },100)
       }
     );
 
@@ -200,9 +225,6 @@ module.exports = function compare() {
         }
       });
 
-      // if (this.id = 'compare_schools-edit') {
-      //   picc.school.selection.renderCompareToggles();
-      // }
     });
 
   // close all toggles on escape

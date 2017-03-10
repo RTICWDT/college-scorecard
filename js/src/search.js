@@ -23,8 +23,6 @@ module.exports = function search() {
   var ready = false;
   var alreadyLoaded = false;
 
-  // are we in IE? hopefully not.
-  var ie = typeof document.documentMode === 'number';
 
   // "incremental" updates will only hide the list of schools, and
   // not any of the other elements (results total, sort, pages)
@@ -78,7 +76,7 @@ module.exports = function search() {
         }
       });
 
-      if (this.id = 'compare_schools-edit') {
+      if (this.id === 'compare_schools-edit') {
         picc.school.selection.renderCompareToggles();
       }
     });
@@ -394,8 +392,9 @@ module.exports = function search() {
        * are reused and modified in place, rather than being cloned anew each
        * time.
        */
-      if (ie && alreadyLoaded) {
-        removeAllChildren(resultsList);
+
+      if (picc.ui.ie && picc.ui.alreadyLoaded) {
+        picc.ui.removeAllChildren(resultsList);
       }
 
       // Scroll to the top of the result list when loading new pages
@@ -404,7 +403,7 @@ module.exports = function search() {
       }
       tagalong(resultsList, data.results, directives);
 
-      alreadyLoaded = true;
+      picc.ui.alreadyLoaded = true;
 
       console.timeEnd && console.timeEnd('[render]');
     });
@@ -543,12 +542,6 @@ module.exports = function search() {
       form.element.scrollIntoView();
     } catch (error) {
       console.warn('unable to scroll results into view:', error);
-    }
-  }
-
-  function removeAllChildren(node) {
-    while (node.lastChild) {
-      node.removeChild(node.lastChild);
     }
   }
 
