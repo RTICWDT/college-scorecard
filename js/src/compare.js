@@ -6,10 +6,21 @@ module.exports = function compare() {
 
   var loadable = d3.select('.loadable');
   var compareRoot = document.querySelector('.compare-schools');
+  var compareSchools = picc.school.selection.all('compare');
+
 
   // if schools were shared by querystring, compare those instead of any local school picks
   var qs = querystring.parse(location.search.substr(1));
-  var compareSchools = (qs['schools[]']) ? qs['schools[]'] : picc.school.selection.all('compare');
+  var shareComparison = false;
+  var compareShareLink = document.querySelector('.school-share-wrapper');
+
+  if (qs['schools[]'])
+  {
+    console.log('share', qs['schools[]']);
+    compareSchools = qs['schools[]'];
+    shareComparison = true;
+
+  }
 
   var showError = function (error) {
     console.error('error:', error);
@@ -67,6 +78,7 @@ module.exports = function compare() {
     'size_number',
     'locale_name',
     'size_category',
+    'compare_link',
     'average_cost',
     'average_cost_meter',
     'grad_rate',
@@ -85,6 +97,10 @@ module.exports = function compare() {
     'average_line'
   ]);
 
+  var shareLink = picc.data.selectKeys(picc.school.directives, [
+    'compare_link'
+  ]);
+
 
   // build query for API call
   function buildQuery (schools) {
@@ -100,7 +116,7 @@ module.exports = function compare() {
 
   function onChange() {
 
-    compareSchools = (qs['schools[]']) ? qs['schools[]'] : picc.school.selection.all('compare');
+    compareSchools = (shareComparison) ? qs['schools[]'] : picc.school.selection.all('compare');
 
     // build query for API call
     query = buildQuery(compareSchools);
@@ -174,6 +190,8 @@ module.exports = function compare() {
         tagalong(node, {}, meterWrapper);
       });
 
+      tagalong(compareShareLink, {}, shareLink);
+
       picc.ui.alreadyLoaded = true;
 
     });
@@ -185,8 +203,13 @@ module.exports = function compare() {
    */
   picc.ready(function() {
 
-    // wait for ready to avoid IE remembering checkbox state
-    picc.school.selection.renderCompareToggles();
+    if (!shareComparison) {
+      // don't show edit toggle on shared comparison views
+      var compareToggle = d3.select('#compare_schools-edit');
+      compareToggle.attr('aria-hidden', false);
+      picc.school.selection.renderCompareToggles();
+
+    }
 
     // initial display
     onChange();

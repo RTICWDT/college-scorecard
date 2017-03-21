@@ -847,6 +847,37 @@ picc.school.directives = (function() {
       }
     },
 
+    compare_link: {
+      '@href': function(d) {
+        return picc.template.resolve(
+          this.getAttribute('data-href'),
+          {
+            url: (function() {
+              var qs =  querystring.parse(location.search.substr(1));
+              var share = [];
+              var schools = (qs['schools[]']) ? qs['schools[]'] : picc.school.selection.all('compare');
+
+              if (schools) {
+                share = schools.map(function(item) {
+                  if (item.schoolId) {
+                    item = item.schoolId;
+                  }
+                  return 'schools[]=' +item.replace('/^[0-9]/', '');
+                })
+              }
+
+              // older IE
+              if (!window.location.origin) {
+                window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+              }
+              return encodeURIComponent(window.location.origin + window.location.pathname + '?'+share.join('&'));
+            })()
+
+          }
+        );
+      }
+    },
+
     response_link: {
       '@href': function(d) {
         var href = format.href(fields.SCHOOL_URL)(d);

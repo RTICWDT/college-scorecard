@@ -16,8 +16,7 @@ permalink: /compare/
                 </a>
             </div>
 
-            <aria-accordion id="compare_schools-edit" class="toggle-accordion">
-
+            <aria-accordion id="compare_schools-edit" class="toggle-accordion" aria-hidden="true">
                 <div class="toggle-control">
                     <legend>Compare</legend>
                     <h1 class="search_category">
@@ -32,8 +31,6 @@ permalink: /compare/
                     {% include edit-compare.html %}
 
                 </div>
-
-                <!--<input type="submit" value="Submit" class="sr-only" tabindex="-1">-->
 
             </aria-accordion>
 
@@ -55,6 +52,10 @@ permalink: /compare/
             </div>
 
             <div class="schools-compare_selected-list default-meters show-loaded">
+
+                <div class="school-share-wrapper">
+                    <a data-href="mailto:?subject=Take%20a%20look%20at%20these%20schools&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A{url}" class="school-share" data-bind="compare_link">Share this comparison</a>
+                </div>
 
                 <h2 class="figure-heading constrain_width"
                     aria-describedby="tip-avg-cost-year">
