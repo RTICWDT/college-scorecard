@@ -95,6 +95,11 @@
       @include font-size($h5);
     }
   }
+
+  .legend-wrapper {
+    position: relative;
+    top:-50px;
+  }
 }
 
 .figure-heading {
