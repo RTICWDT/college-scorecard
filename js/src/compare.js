@@ -16,7 +16,7 @@ module.exports = function compare() {
 
   if (qs['schools[]'])
   {
-    console.log('share', qs['schools[]']);
+    // console.log('share', qs['schools[]']);
     compareSchools = qs['schools[]'];
     shareComparison = true;
 
@@ -78,7 +78,6 @@ module.exports = function compare() {
     'size_number',
     'locale_name',
     'size_category',
-    'compare_link',
     'average_cost',
     'average_cost_meter',
     'grad_rate',
