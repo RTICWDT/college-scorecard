@@ -974,8 +974,12 @@ picc.school.directives = (function() {
           var value = Math.max(min, Math.min(+average, max));
           var right = Math.max(0, value);
 
+          // average lines are better represented
+          // when dollars fixedTo `1`, percentages to `0`
+          var fixNum = (max  > 1) ? 1 : 0;
+
           var style = '';
-          style +='right:'+ (100 - scale(right)) + '%;';
+          style +='right:'+ (100 - scale(right)).toFixed(fixNum) + '%;';
           return style;
         },
         label: {

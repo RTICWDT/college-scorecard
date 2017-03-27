@@ -71,6 +71,7 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
             var left = Math.min(value, Math.max(0, min));
             var right = Math.max(0, value);
             var scaleRight = scale(right);
+            var fixNum = (max > 1) ? 1 : 0;
 
             // reset the bar and barVal
             bar.removeAttribute('style');
@@ -78,7 +79,7 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
             barVal.removeAttribute('flow');
 
             bar.style.setProperty('left', scale(left) + '%');
-            bar.style.setProperty('right', 100 - scaleRight + '%');
+            bar.style.setProperty('right', (100 - scaleRight).toFixed(fixNum) + '%');
 
             // attach the average value next to the bar chart
             // and responsively scale it from overflowing bar
@@ -89,7 +90,7 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
             var sLeftVal = (sRightVal === 100) ? scaleRight - magicNum : scaleRight;
 
             if ( sRightVal < (100 - magicNum) ) {
-              barVal.style.setProperty('left', sLeftVal + '%');
+              barVal.style.setProperty('left', sLeftVal.toFixed(fixNum) + '%');
 
               // flag to remove left property at smaller viewports
               if ( sRightVal > magicFlow ) {
@@ -97,7 +98,7 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
 
               }
             } else {
-              barVal.style.setProperty('right', (100 -  sRightVal) + '%');
+              barVal.style.setProperty('right', (100 -  sRightVal).toFixed(fixNum) + '%');
               barVal.style.setProperty('background', 'none');
             }
 
