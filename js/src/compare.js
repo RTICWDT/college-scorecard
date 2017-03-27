@@ -106,7 +106,7 @@ module.exports = function compare() {
     var query = {};
     schools.map(function (school) {
       var id = +school.schoolId || +school;
-      query['s'+id] = [picc.API.getSchool, id, params];
+      query[id] = [picc.API.getSchool, id, params];
 
     });
     return query;
@@ -147,6 +147,11 @@ module.exports = function compare() {
       loadable.classed('js-error', false);
       loadable.classed('js-loaded', true);
 
+      school.results.sort(function(a,b){
+       return (a['school.name'].toLowerCase() < b['school.name'].toLowerCase()) ? -1
+         : (a['school.name'].toLowerCase() > b['school.name'].toLowerCase()) ? 1
+         : 0;
+      });
 
       /*
        * XXX this avoids a nasty hard crash in IE11, which seems to have some
