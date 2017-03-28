@@ -27,6 +27,15 @@ describe('compare', function() {
     var schoolTwoName = yield browser
         .getAttribute(schoolTwo, 'data-school-name');
 
+    var sortedSchools = [schoolOneName, schoolTwoName];
+
+    sortedSchools.sort(function(a, b){
+      return (a.toLowerCase() < b.toLowerCase()) ? -1
+        : (a.toLowerCase() > b.toLowerCase()) ? 1
+        : 0;
+    });
+
+
     yield browser
       .click(schoolOne);
 
@@ -49,8 +58,8 @@ describe('compare', function() {
       .element(compareTwo)
       .getText();
 
-    assert.equal(schoolOneName, compareOneName);
-    assert.equal(schoolTwoName, compareTwoName);
+    assert.equal(sortedSchools[0], compareOneName);
+    assert.equal(sortedSchools[1], compareTwoName);
 
   });
 
