@@ -11,6 +11,7 @@
 
   .link-more {
     display: none;
+    color: $darker-green;
   }
 
   .link-more[href] {
@@ -441,7 +442,7 @@
 
 .above_is_good .average.above_average,
 .below_is_good .average.below_average {
-  color: $lime-green;
+  color: $green;
 }
 
 .above_is_good .average.below_average,

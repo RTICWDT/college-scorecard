@@ -3845,6 +3845,16 @@ PrevNextButton.prototype._create = function() {
   element.className += this.isPrevious ? ' previous' : ' next';
   // prevent button from submitting form http://stackoverflow.com/a/10836076/182183
   element.setAttribute( 'type', 'button' );
+  if(this.isPrevious)
+  {
+    element.setAttribute( 'aria-label', 'Previous');
+    element.setAttribute( 'title', 'Previous');
+  }
+  else
+  {
+    element.setAttribute( 'aria-label', 'Next');
+    element.setAttribute( 'title', 'Next');
+  }
   Flickity.setUnselectable( element );
   // create arrow
   if ( supportsInlineSVG() ) {
