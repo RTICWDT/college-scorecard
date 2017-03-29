@@ -196,6 +196,9 @@ module.exports = function school() {
       .setView(center, 10);
 
     L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png') // jshint ignore:line
+      .on('tileload', function(tileEvent){
+        tileEvent.tile.setAttribute('alt', 'Map tile image');
+      })
       .addTo(map);
 
     L.control.attribution({
