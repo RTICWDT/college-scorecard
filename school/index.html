@@ -17,7 +17,7 @@ stylesheets:
     </a>
   </div>
 
-  <div class="container container-collapse section-card_container-school">
+  <div class="container container-collapse main-card_container-school">
 
     <div id="school" class="school-left school-section">
 
@@ -27,7 +27,7 @@ stylesheets:
           <h2>Something went wrong:</h2>
           <p class="error-message"></p>
           <form action="{{ site.baseurl }}/search/" method="GET">
-            <label for="name-school" >Try searching for a school by name:</h2>
+            <label for="name-school" >Try searching for a school by name:</label>
             <input id="name-school" name="name" type="text" placeholder="Name of School" autocomplete="off" autocorrect="off" autocapitalize="off">
             <input type="submit" value="Search" class="button-primary">
           </form>
@@ -38,119 +38,121 @@ stylesheets:
         </div>
 
         <div class="show-loaded">
-
-          <div class="school-share-wrapper">
-            <a data-href="mailto:?subject=Take%20a%20look%20at%20this%20school&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A{url}" class="school-share" data-bind="share_link">Share this school</a>
-          </div>
-
-          <div class="school-heading">
-
-            <div class="investigation-major-wrapper"
-              data-bind="under_investigation" aria-hidden="true">
-              <a>
-                <p class="investigation-major" aria-describedby="tip-hcm2">
-                  Under Ed Monitoring <i class="tooltip-target fa fa-info-circle"></i>
-                </p>
-              </a>
+          <div class="school-card_container-school">
+            <div class="school-share-wrapper">
+              <a data-href="mailto:?subject=Take%20a%20look%20at%20this%20school&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A{url}" class="school-share" data-bind="share_link">Share this school</a>
             </div>
 
-            <h1 data-bind="name">School Name</h1>
+            <div class="school-heading">
 
-            <h2 class="location">
-              <span data-bind="city">City</span>,
-              <span data-bind="state">State</span>
-            </h2>
-
-            <h2 class="population">
-              <span data-bind="size_number">X</span> undergraduate students
-            </h2>
-
-            <h2 class="school-url">
-              <span data-bind="">
-                <a data-bind="school_link" target="_blank">ed.gov</a>
-              </span>
-            </h2>
-
-            <ul class="school-key_figures key-figures">
-              <li data-bind="years">
-                <span data-bind="number" class="school-key_figures-year">X</span>
-                <span class="label"></span>
-              </li>
-              <li data-bind="control">
-                <span data-bind="value">X</span>
-              </li>
-              <li data-bind="locale_name">
-                <span data-bind="value">X</span>
-              </li>
-              <li data-bind="size_category">
-                <span data-bind="value">X</span>
-              </li>
-            </ul>
-
-            <ul class="school-special_designation" data-bind="special_designations">
-              <li class="special"></li>
-            </ul>
-
-          </div>
-
-          <div class="school-map" data-bind="map">
-          </div>
-
-          <div class="school-meters">
-
-            <figure class="meter below_is_good">
-              <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year">
-                Average<br>Annual Cost
-                <span class="tooltip-target u-new_line">
-                  <i class="fa fa-info-circle"></i>
-                </span>
-              </h2>
-              <picc-meter {% include net_price_meter_attributes.html %}>
-              </picc-meter>
-              <figcaption>
-                <span data-bind="average_cost">$XX,XXX</span>
-              </figcaption>
-            </figure>
-
-            <figure class="meter above_is_good">
-              <h2 class="figure-heading constrain_width" aria-describedby="tip-graduation-rate">
-                Graduation<br>Rate
-                <span class="tooltip-target u-new_line">
-                  <i class="fa fa-info-circle"></i>
-                </span>
-              </h2>
-              <picc-meter {% include graduation_meter_attributes.html %}>
-              </picc-meter>
-              <figcaption>
-                <span data-bind="grad_rate">XX%</span>
-              </figcaption>
-            </figure>
-
-            <figure class="meter above_is_good">
-              <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-salary">
-                Salary After<br>Attending
-                <span class="tooltip-target u-new_line">
-                  <i class="fa fa-info-circle"></i>
-                </span>
-              </h2>
-              <picc-meter {% include earnings_meter_attributes.html %}>
-              </picc-meter>
-              <figcaption>
-                <span data-bind="average_salary">$XX,XXX</span>
-              </figcaption>
-            </figure>
-
-            <div class="legend-wrapper">
-              <div class="legend-nat_average">
-                <div class="legend-nat_average-box">
-                  <div class="legend-nat_average-box-line">
-                  </div>
-                </div>
-                <div class="legend-nat_average-words">National Average</div>
+              <div class="investigation-major-wrapper"
+                data-bind="under_investigation" aria-hidden="true">
+                <a>
+                  <p class="investigation-major" aria-describedby="tip-hcm2">
+                    Under Ed Monitoring <i class="tooltip-target fa fa-info-circle"></i>
+                  </p>
+                </a>
               </div>
+
+              <h1 data-bind="name">School Name</h1>
+
+              <h2 class="location">
+                <span data-bind="city">City</span>,
+                <span data-bind="state">State</span>
+              </h2>
+
+              <h2 class="population">
+                <span data-bind="size_number">X</span> undergraduate students
+              </h2>
+
+              <h2 class="school-url">
+                <span data-bind="">
+                  <a data-bind="school_link" target="_blank">ed.gov</a>
+                </span>
+              </h2>
+
+              <ul class="school-key_figures key-figures">
+                <li data-bind="years">
+                  <span data-bind="number" class="school-key_figures-year">X</span>
+                  <span class="label"></span>
+                </li>
+                <li data-bind="control">
+                  <span data-bind="value">X</span>
+                </li>
+                <li data-bind="locale_name">
+                  <span data-bind="value">X</span>
+                </li>
+                <li data-bind="size_category">
+                  <span data-bind="value">X</span>
+                </li>
+              </ul>
+
+              <ul class="school-special_designation" data-bind="special_designations">
+                <li class="special"></li>
+              </ul>
+
             </div>
 
-          </div>
+            <div class="school-map" data-bind="map">
+            </div>
+
+            <div class="school-meters">
+
+              <figure class="meter below_is_good">
+                <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year" tabindex="0">
+                  Average<br>Annual Cost
+                  <span class="tooltip-target u-new_line">
+                    <i class="fa fa-info-circle"></i>
+                  </span>
+                </h2>
+                <picc-meter {% include net_price_meter_attributes.html %}>
+                </picc-meter>
+                <figcaption>
+                  <span data-bind="average_cost">$XX,XXX</span>
+                </figcaption>
+              </figure>
+
+              <figure class="meter above_is_good">
+                <h2 class="figure-heading constrain_width" aria-describedby="tip-graduation-rate" tabindex="0">
+                  Graduation<br>Rate
+                  <span class="tooltip-target u-new_line">
+                    <i class="fa fa-info-circle"></i>
+                  </span>
+                </h2>
+                <picc-meter {% include graduation_meter_attributes.html %}>
+                </picc-meter>
+                <figcaption>
+                  <span data-bind="grad_rate">XX%</span>
+                </figcaption>
+              </figure>
+
+              <figure class="meter above_is_good">
+                <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-salary" tabindex="0">
+                  Salary After<br>Attending
+                  <span class="tooltip-target u-new_line">
+                    <i class="fa fa-info-circle"></i>
+                  </span>
+                </h2>
+                <picc-meter {% include earnings_meter_attributes.html %}>
+                </picc-meter>
+                <figcaption>
+                  <span data-bind="average_salary">$XX,XXX</span>
+                </figcaption>
+              </figure>
+
+              <div class="legend-wrapper">
+                <div class="legend-nat_average">
+                  <div class="legend-nat_average-box">
+                    <div class="legend-nat_average-box-line">
+                    </div>
+                  </div>
+                  <div class="legend-nat_average-words">National Average</div>
+                </div>
+              </div>
+
+            </div>
+
+          </div><!-- /.school-card_container-school -->
 
           <div class="section-card_container-school">
 
@@ -169,7 +171,7 @@ stylesheets:
                   <div class="school-two_col-left centered">
 
                     <figure class="meter below_is_good">
-                      <h2 class="figure-heading" aria-describedby="tip-avg-cost-year">
+                      <h2 class="figure-heading" aria-describedby="tip-avg-cost-year" tabindex="0">
                         Average<br>Annual Cost
                         <span class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
@@ -261,7 +263,7 @@ stylesheets:
                   <div class="school-two_col-left centered">
 
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading" aria-describedby="tip-repayment-rate">
+                      <h2 class="figure-heading" aria-describedby="tip-repayment-rate" tabindex="0">
                         Students Paying<br>Down Their Debt
                         <span class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
@@ -313,7 +315,7 @@ stylesheets:
 
                     <div>
                       <h2
-                        aria-describedby="tip-student-aid">
+                        aria-describedby="tip-student-aid" tabindex="0">
                         Students Receiving Federal Loans
                         <span class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
@@ -325,7 +327,7 @@ stylesheets:
 
                     <div>
                       <h2
-                        aria-describedby="tip-avg-debt">
+                        aria-describedby="tip-avg-debt" tabindex="0">
                         Typical Total Debt
                         <span class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
@@ -337,7 +339,7 @@ stylesheets:
 
                     <div>
                       <h2
-                        aria-describedby="tip-avg-loan-payment">
+                        aria-describedby="tip-avg-loan-payment" tabindex="0">
                         Typical Monthly Loan Payment
                         <span class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
@@ -368,7 +370,7 @@ stylesheets:
 
                   <div class="school-two_col-left centered">
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading constrain_width" aria-describedby="tip-graduation-rate">
+                      <h2 class="figure-heading constrain_width" aria-describedby="tip-graduation-rate" tabindex="0">
                         Graduation Rate
                         <span class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
@@ -398,7 +400,7 @@ stylesheets:
 
                   <div class="school-two_col-right centered">
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading" aria-describedby="tip-retention-rate">
+                      <h2 class="figure-heading" aria-describedby="tip-retention-rate" tabindex="0">
                         Students Who Return<br>After Their First Year
                         <span class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
@@ -449,7 +451,7 @@ stylesheets:
 
                   <div class="school-two_col-left">
 
-                    <h2 aria-describedby="tip-earnings-25k">
+                    <h2 aria-describedby="tip-earnings-25k" tabindex="0">
                       Percentage Earning Above High School Grad
                       <span class="tooltip-target">
                         <i class="fa fa-info-circle"></i>
@@ -466,7 +468,7 @@ stylesheets:
 
                   <div class="school-two_col-right centered">
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading" aria-describedby="tip-avg-salary">
+                      <h2 class="figure-heading" aria-describedby="tip-avg-salary" tabindex="0">
                         Salary After<br>Attending
                         <span class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
@@ -549,7 +551,7 @@ stylesheets:
                         </div>
 
                         <div class="school-student-socio_econ">
-                          <h2 aria-describedby="tip-socio-eco">
+                          <h2 aria-describedby="tip-socio-eco" tabindex="0">
                             Socio-Economic Diversity
                             <span class="tooltip-target">
                               <i class="fa fa-info-circle"></i>
@@ -571,7 +573,7 @@ stylesheets:
 
                     <div class="school-two_col-right">
                       <h2
-                        aria-describedby="tip-race-eth">
+                        aria-describedby="tip-race-eth" tabindex="0">
                         Race/Ethnicity
                         <span class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
@@ -602,7 +604,7 @@ stylesheets:
 
                   <div style="padding-top: 20px;"> <!--TODO-->
                     <h2
-                      aria-describedby="tip-test-scores">
+                      aria-describedby="tip-test-scores" tabindex="0">
                       Test Scores
                       <span class="tooltip-target">
                         <i class="fa fa-info-circle"></i>
@@ -669,7 +671,7 @@ stylesheets:
                   <div class="school-two_col-left">
 
                     <h2
-                      aria-describedby="tip-pop-prog">
+                      aria-describedby="tip-pop-prog" tabindex="0">
                       Most Popular Programs
                       <span class="tooltip-target">
                         <i class="fa fa-info-circle"></i>
@@ -683,7 +685,7 @@ stylesheets:
                   <div class="school-two_col-right">
 
                     <h2
-                      aria-describedby="tip-avail-study">
+                      aria-describedby="tip-avail-study" tabindex="0">
                       Available Areas of Study
                       <span class="tooltip-target">
                         <i class="fa fa-info-circle"></i>

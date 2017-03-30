@@ -22,15 +22,15 @@ window.PICCSlider = registerElement(ELEMENT_NAME, {
     this.addEventListener('click', click);
     this.addEventListener('mousedown', engage);
     this.addEventListener('touchstart', engage);
-    // this.addEventListener('focus', engage, true);
+    this.addEventListener('focus', engage, true);
     this.update();
   },
 
   detachedCallback: function() {
     this.removeEventListener('click', click);
-    this.removeEventListener('mousedown', enagage);
-    this.removeEventListener('touchstart', enagage);
-    // this.removeEventListener('focus', engage, true);
+    this.removeEventListener('mousedown', engage);
+    this.removeEventListener('touchstart', engage);
+    this.removeEventListener('focus', engage, true);
   },
 
   attributeChangedCallback: function(attr, prev, value) {
@@ -177,7 +177,7 @@ function click(e) {
 
 function engage(e) {
   // ignore right-clicks
-  if (e.button === 2) {
+  if (e.button === 2 || this.__mousedrag) {
     e.preventDefault();
     return;
   }
@@ -188,8 +188,9 @@ function engage(e) {
 
   if (e.type === 'focus') {
     window.addEventListener('keyup', getListener(keypress, this));
-    this.addEventListener('blur', release, true);
+    e.target.addEventListener('blur', getListener(releaseFocus, this));
   } else {
+    this.__mousedrag = true;
     window.addEventListener('mousemove', getListener(move, this));
     window.addEventListener('mouseup', getListener(release, this));
     window.addEventListener('touchmove', getListener(move, this));
@@ -248,9 +249,10 @@ function release(e) {
   this.removeAttribute('aria-valuenow');
 
   if (e.type === 'blur') {
-    window.removeEventListener('keyup', getListener(keypress, this));
-    this.removeEventListener('blur', release, true);
+    //window.removeEventListener('keyup', getListener(keypress, this));
+    //this.removeEventListener('blur', release, true);
   } else {
+    this.__mousedrag = false;
     window.removeEventListener('mousemove', getListener(move, this));
     window.removeEventListener('mouseup', getListener(release, this));
     window.removeEventListener('touchmove', getListener(move, this));
@@ -263,15 +265,25 @@ function release(e) {
   return;
 }
 
+function releaseFocus(e) {
+   //console.info('- release focus', e.type);
+   window.removeEventListener('keyup', getListener(keypress, this));
+   e.target.removeEventListener('blur', getListener(releaseFocus, this));
+  this.__dragging = false;
+  return false;
+}
+
 function keypress(e) {
   // console.info('* keypress:', e.keyCode);
   switch (e.keyCode) {
     case 37: // left
       nudge.call(this, -1);
-      break;
+      this.dispatchEvent(new CustomEvent('change'));
+    break;
     case 39: // right
       nudge.call(this, +1);
-      break;
+      this.dispatchEvent(new CustomEvent('change'));
+    break;
 
     case 36: // end
     case 35: // home
@@ -283,6 +295,7 @@ function keypress(e) {
           this.upper = this.max;
           break;
       }
+      this.dispatchEvent(new CustomEvent('change'));
       break;
   }
 }
