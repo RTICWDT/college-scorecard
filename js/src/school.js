@@ -26,7 +26,7 @@ module.exports = function school() {
 
     loadable.classed('js-loaded', true);
 
-    var root = document.querySelector('#school');
+    var root = document.querySelector('.school-card_container-school');
 
     var name = picc.access(picc.fields.NAME)(school);
     document.title = name;
@@ -68,7 +68,7 @@ module.exports = function school() {
 
     // this is necessary because tagalong only binds to
     // the first instance for each data or directive key
-    var sections = root.querySelectorAll('.section-card_container-school');
+    var sections = document.querySelectorAll('.section-card_container-school');
 
     // common school template directives
     var directives = picc.school.directives;
@@ -196,6 +196,9 @@ module.exports = function school() {
       .setView(center, 10);
 
     L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png') // jshint ignore:line
+      .on('tileload', function(tileEvent){
+        tileEvent.tile.setAttribute('alt', 'Map tile image');
+      })
       .addTo(map);
 
     L.control.attribution({

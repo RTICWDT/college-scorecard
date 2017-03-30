@@ -94,6 +94,10 @@
   }
 }
 
+.main-card_container-school {
+  @extend .section-card_container-school;
+}
+
 .section-card_container-results {
   @extend .section-card_container;
   background-color: $tertiary-background-color;
@@ -109,5 +113,8 @@
     &:focus {
       text-decoration: none;
     }
+  }
+  .section-card_container-school h2{
+    padding-bottom: 0;
   }
 }
