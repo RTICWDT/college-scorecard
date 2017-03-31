@@ -194,3 +194,24 @@ $toggle-padding: 15px;
 .toggle-content-search {
   right: 0;
 }
+
+.toggle-content-compare_schools {
+
+  label.checkbox {
+    text-indent: -2.2em;
+    margin-left: 1.4em;
+
+    :checked + span {
+
+      &:focus {
+        outline: none;
+      }
+
+      &:after {
+        display: inline;
+        left: 2.3em;
+      }
+    }
+  }
+
+}
