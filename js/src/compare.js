@@ -203,7 +203,7 @@ module.exports = function compare() {
   }
 
   /**
-   * add event listeners for school selection click events and fetch new results
+   * add event listeners for school selection change events and fetch new results
    */
   picc.ready(function() {
 
@@ -227,10 +227,10 @@ module.exports = function compare() {
           this.hasAttribute(compareBox);
       },
       {
-        click: picc.debounce(function(e) {
+        change: function(e) {
           picc.school.selection.toggle(e);
           onChange();
-        },100)
+        }
       }
     );
 
