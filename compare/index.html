@@ -28,7 +28,7 @@ permalink: /compare/
 
                 <div id="compare_schools-content" aria-hidden="true" class="toggle-content toggle-content-compare_schools">
 
-                    {% include edit-compare.html %}
+                    {% include edit-compare_highlight.html %}
 
                 </div>
 
@@ -73,7 +73,7 @@ permalink: /compare/
 
                         <div class="selected-school_average-cost_group">
 
-                            <div class="selected-school_average-cost net_price">
+                            <div class="selected-school_average-cost net_price" data-bind="school_section">
 
                                 <div class="meter-wrapper">
                                     <figure class="side-meter">
@@ -119,7 +119,7 @@ permalink: /compare/
 
                         <div class="selected-school_grad-rate_group">
 
-                            <div class="selected-school_grad-rate grad-rate">
+                            <div class="selected-school_grad-rate grad-rate" data-bind="school_section">
 
                                 <div class="meter-wrapper">
                                     <figure class="side-meter">
@@ -165,7 +165,7 @@ permalink: /compare/
 
                         <div class="selected-school_average-salary_group">
 
-                            <div class="selected-school_average-salary average-salary">
+                            <div class="selected-school_average-salary average-salary" data-bind="school_section">
 
                                 <div class="meter-wrapper">
                                     <figure class="side-meter">
@@ -221,62 +221,63 @@ permalink: /compare/
                                 </h2>
 
                                 <div class="section-card_container-compare school-summary">
+                                    <div>
+                                        <div class="school-two_col" data-bind="school_section">
+                                            <div class="compare-two_col-left">
 
-                                    <div class="school-two_col">
-                                        <div class="compare-two_col-left">
+                                                <div class="meter-wrapper">
+                                                    <figure class="side-meter">
+                                                        <picc-side-meter
+                                                            class="demographics"
+                                                            data-bind="full_time_value"
+                                                            max="1">
+                                                        </picc-side-meter>
+                                                        <figcaption>
+                                                            <span data-bind="name">School Name</span>
+                                                            <span data-bind="full_time_percent" class="sr-only"></span>
+                                                        </figcaption>
+                                                    </figure>
+                                                </div>
 
-                                        <div class="meter-wrapper">
-                                            <figure class="side-meter">
-                                                <picc-side-meter
-                                                    class="demographics"
-                                                    data-bind="full_time_value"
-                                                    max="1">
-                                                </picc-side-meter>
-                                                <figcaption>
-                                                    <span data-bind="name">School Name</span>
-                                                    <span data-bind="full_time_percent" class="sr-only"></span>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-
-                                        </div>
-
-                                        <div class="compare-two_col-right">
-
-                                        <div class="school-student-stats-col">
-
-                                            <div class="school-student-stats-col-align school-summary">
-                                            <div class="school-size">
-                                                <span class="fact_number">
-                                                    <span data-bind="size_number"></span>
-                                                </span>
-                                                <strong class="label">Undergraduates</strong>
                                             </div>
 
-                                            <div class="school-section school-headings">
-                                                <ul class="school-key_figures key-figures">
-                                                    <li data-bind="years">
-                                                        <span data-bind="number" class="school-key_figures-year">X</span>
-                                                        <span class="label"></span>
-                                                    </li>
-                                                    <li data-bind="control">
-                                                        <span data-bind="value" class="label" >X</span>
-                                                    </li>
-                                                    <li data-bind="locale_name">
-                                                        <span data-bind="value" class="label" >X</span>
-                                                    </li>
-                                                    <li data-bind="size_category">
-                                                        <span data-bind="value" class="label" >X</span>
-                                                    </li>
-                                                </ul>
+                                            <div class="compare-two_col-right">
+
+                                                <div class="school-student-stats-col">
+
+                                                    <div class="school-student-stats-col-align school-summary">
+                                                        <div class="school-size">
+                                                            <span class="fact_number">
+                                                                <span data-bind="size_number"></span>
+                                                            </span>
+                                                            <strong class="label">Undergraduates</strong>
+                                                        </div>
+
+                                                        <div class="school-section school-headings">
+                                                            <ul class="school-key_figures key-figures">
+                                                                <li data-bind="years">
+                                                                    <span data-bind="number" class="school-key_figures-year">X</span>
+                                                                    <span class="label"></span>
+                                                                </li>
+                                                                <li data-bind="control">
+                                                                    <span data-bind="value" class="label" >X</span>
+                                                                </li>
+                                                                <li data-bind="locale_name">
+                                                                    <span data-bind="value" class="label" >X</span>
+                                                                </li>
+                                                                <li data-bind="size_category">
+                                                                    <span data-bind="value" class="label" >X</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
                                             </div>
 
                                         </div>
-
-                                        </div>
-
-                                    </div>
-
                                     </div>
 
                                 </div>
@@ -318,7 +319,7 @@ permalink: /compare/
 
                                             <div class="selected-school_average-cost_group">
 
-                                                <div class="selected-school_average-cost net_price">
+                                                <div class="selected-school_average-cost net_price" data-bind="school_section">
 
                                                     <div class="meter-wrapper">
                                                         <figure class="side-meter">
@@ -383,7 +384,7 @@ permalink: /compare/
 
                                         <div class="selected-school_repayment-rate_group">
 
-                                            <div class="selected-school_repayment-rate repayment-rate">
+                                            <div class="selected-school_repayment-rate repayment-rate" data-bind="school_section">
 
                                                 <div class="meter-wrapper">
                                                     <figure class="side-meter">
@@ -452,7 +453,7 @@ permalink: /compare/
 
                                             <div class="selected-school_grad-rate_group">
 
-                                                <div class="selected-school_grad-rate grad-rate">
+                                                <div class="selected-school_grad-rate grad-rate" data-bind="school_section">
 
                                                     <div class="meter-wrapper">
                                                         <figure class="side-meter">
@@ -500,7 +501,7 @@ permalink: /compare/
 
                                             <div class="selected-school_retention-rate_group">
 
-                                                <div class="selected-school_retention-rate rentention-rate">
+                                                <div class="selected-school_retention-rate rentention-rate" data-bind="school_section">
 
                                                     <div class="meter-wrapper">
                                                         <figure class="side-meter">
@@ -572,7 +573,7 @@ permalink: /compare/
 
                                             <div class="selected-school_average-salary_group">
 
-                                                <div class="selected-school_average-salary average-salary">
+                                                <div class="selected-school_average-salary average-salary" data-bind="school_section">
 
                                                     <div class="meter-wrapper">
                                                         <figure class="side-meter">

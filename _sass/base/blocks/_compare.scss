@@ -31,10 +31,6 @@
         color: $darker-yellow;
       }
 
-      .compare_link {
-        display: none;
-      }
-
     }
 
     aria-accordion {
@@ -65,6 +61,17 @@
         padding: 1em 1.25em 0 1.25em;
       }
 
+    }
+  }
+
+}
+
+.edit-compare-list-item {
+
+  .button-highlight_schools {
+
+    &[aria-pressed="true"] + .checkbox  span + span {
+      background-color: $light-orange;
     }
   }
 
@@ -134,6 +141,13 @@ figcaption {
 
   .meter-wrapper {
     margin-bottom: 20px;
+  }
+
+  [data-highlight="true"] {
+
+    .picc-side-meter-bar {
+      background-color: $orange !important;
+    }
   }
 
 }

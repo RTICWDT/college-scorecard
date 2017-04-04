@@ -161,6 +161,28 @@ input[type="submit"] {
 
   }
 
+  &.button-highlight_schools {
+    @include font-size($h1-large);
+    height: 22px;
+    width: 18px;
+    position: absolute;
+    right: 15px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    background-color: $white;
+    color: $mid-dark-gray;
+    white-space: normal;
+    background: url(../img/highlighter.png) no-repeat;
+    background: url(../img/highlighter.svg) no-repeat,
+      linear-gradient(transparent, transparent);
+    background-size: contain;
+
+    &[aria-pressed="true"] {
+      background: url(../img/highlighter-active.png) no-repeat;
+      background: url(../img/highlighter-active.svg) no-repeat,
+    }
+  }
+
 }
 
 button.block {
@@ -191,3 +213,4 @@ button.block {
     width: 450px;
   }
 }
+

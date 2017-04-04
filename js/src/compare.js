@@ -2,6 +2,10 @@ var tagalong = require('tagalong');
 var d3 = require('d3');
 var querystring = require('querystring');
 
+if (typeof document !== 'undefined') {
+  require('./components/compat/custom-event');
+}
+
 module.exports = function compare() {
 
   var loadable = d3.select('.loadable');
@@ -91,6 +95,12 @@ module.exports = function compare() {
     'full_time_value'
 
   ]);
+
+  directives['school_section'] = {
+      '@data-school-id': function(d) {
+        return picc.access(picc.fields.ID)(d);
+      }
+  };
 
   var meterWrapper = picc.data.selectKeys(picc.school.directives, [
     'average_line'
@@ -202,6 +212,19 @@ module.exports = function compare() {
 
   }
 
+  function toggleDisplay(e) {
+
+    var el = (e.target.parentElement.hasAttribute('data-school-id')) ? e.target.parentElement : e.target;
+    var toggleState = !(el.firstElementChild.checked);
+    var schoolID = el.getAttribute('data-school-id');
+
+    var sections = [].slice.call(document.querySelectorAll('[data-bind="school_section"][data-school-id="'+schoolID+'"]'));
+    for(var i=0; i < sections.length; i++) {
+      sections[i].setAttribute('aria-hidden', toggleState);
+    }
+
+  }
+
   /**
    * add event listeners for school selection change events and fetch new results
    */
@@ -229,12 +252,33 @@ module.exports = function compare() {
       {
         change: function(e) {
           picc.school.selection.toggle(e);
-          onChange();
+          toggleDisplay(e);
         }
       }
     );
 
   });
+
+  /**
+   * * add event listeners for school highlighter click events
+   */
+  picc.ready(function() {
+    var ariaPressed = 'aria-pressed';
+    var highlightSchool = 'data-highlight-btn';
+    picc.delegate(
+      document.body,
+      // if the element matches '[aria-pressed] && [data-highlight]'
+      function() {
+        return (this.parentElement.hasAttribute(ariaPressed) || this.hasAttribute(ariaPressed))
+          && this.hasAttribute(highlightSchool);
+      },
+      {
+        click: picc.school.selection.highlightToggle
+      }
+    );
+
+  });
+
   var win = d3.select(window);
   // close other toggles when one opens
   var toggles = d3.selectAll('.toggle-accordion')

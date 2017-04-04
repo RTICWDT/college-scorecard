@@ -1235,17 +1235,72 @@ picc.school.selection = {
       var selectedSchools = picc.school.selection.all(collection);
 
       if (isSelected >= 0) {
+        // remove school from collection
         selectedSchools.splice(isSelected, 1);
           window.localStorage.setItem(collection, JSON.stringify(selectedSchools));
           if (el.hasAttribute('aria-pressed')) {
             el.setAttribute('aria-pressed', false);
           }
+          // compare schools page we need to remove highlighted sections on toggle remove school
+          if (el.previousElementSibling && el.previousElementSibling.hasAttribute('data-highlight-btn')) {
+            picc.school.selection.highlightRemove(dataset.schoolId);
+          }
       } else {
-
+        // add school to collection
         selectedSchools.push(dataset);
           window.localStorage.setItem(collection, JSON.stringify(selectedSchools));
         if (el.hasAttribute('aria-pressed')) {
           el.setAttribute('aria-pressed', true);
+        }
+      }
+
+    },
+
+    // remove any highlight from a deselecte school
+    highlightRemove: function(schoolId) {
+
+        var btn = document.querySelector('button[data-highlight-btn][data-school-id="'+schoolId+'"]');
+        btn.setAttribute('aria-pressed', false);
+
+        var sections = [].slice.call(document.querySelectorAll('[data-bind="school_section"][data-school-id="'+schoolId+'"]'));
+        for(var i=0; i<sections.length;i++) {
+          sections[i].removeAttribute('data-highlight')
+        }
+    },
+
+    highlightToggle: function(e) {
+      var el = (e.target);
+      var schoolID = el.getAttribute('data-school-id');
+      var highlightTarget = (el.getAttribute('aria-pressed') !== "true");
+
+      if (el.nextElementSibling && !el.nextElementSibling.querySelector('input').checked) {
+        // let the highlight button reselect a deselected (hidden) school
+        var checkbox = el.nextElementSibling.querySelector('input');
+        checkbox.checked = true;
+        checkbox.dispatchEvent(new CustomEvent('change'));
+      }
+
+      // reset all other highlight buttons and toggle target
+      var btns = [].slice.call(document.querySelectorAll('button[data-highlight-btn]'));
+      for(var i=0; i < btns.length; i++) {
+        var btnID = btns[i].getAttribute('data-school-id');
+
+        if (btnID === schoolID) {
+          // toggle
+          el.setAttribute('aria-pressed', highlightTarget);
+        } else {
+          btns[i].setAttribute('aria-pressed', false);
+
+        }
+      }
+      // reset all highlightable sections and toggle target sections
+      var highlightable = [].slice.call(document.querySelectorAll('[data-bind="school_section"]'));
+      for(var i=0;i<highlightable.length; i++) {
+        var sectionID =  highlightable[i].getAttribute('data-school-id');
+        if (sectionID === schoolID) {
+          highlightable[i].setAttribute('data-highlight', highlightTarget);
+        } else {
+          highlightable[i].removeAttribute('data-highlight');
         }
       }
 
@@ -1278,6 +1333,15 @@ picc.school.selection = {
               '@checked': function(d) {
                 return (picc.school.selection.isSelected(picc.access('schoolId')(d), collection) >= 0) ? 'checked': null;
               }
+            },
+            highlight_button: {
+              '@aria-pressed': function (d) {
+                return this.getAttribute('aria-pressed');
+
+              },
+              '@data-school-id': function (d) {
+                return picc.access('schoolId')(d);
+              }
             }
           }
         );
@@ -1297,8 +1361,8 @@ picc.school.selection = {
 
     renderCompareLink: function() {
       var compareLink = d3.select('#compare-link');
-      var linkContainer = d3.select(compareLink.node().parentNode);
-      if (compareLink) {
+      if (!compareLink.empty()) {
+        var linkContainer = d3.select(compareLink.node().parentNode);
         if (picc.school.selection.all('compare').length) {
           compareLink
             .attr('href', picc.BASE_URL + '/compare/')
@@ -2013,12 +2077,13 @@ if (typeof document !== 'undefined') {
    */
   picc.ready(function() {
       var ariaPressed = 'aria-pressed';
+      var compareSchool = 'data-school';
       picc.delegate(
           document.body,
-          // if the element matches '[aria-pressed]'
+          // if the element matches '[aria-pressed] && [data-school]'
           function() {
-              return this.parentElement.hasAttribute(ariaPressed) ||
-              this.hasAttribute(ariaPressed);
+              return (this.parentElement.hasAttribute(ariaPressed) || this.hasAttribute(ariaPressed))
+                && (this.parentElement.hasAttribute(compareSchool) || this.hasAttribute(compareSchool));
           },
           {
             click: picc.school.selection.toggle
