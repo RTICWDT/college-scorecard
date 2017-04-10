@@ -18,6 +18,7 @@ picc-side-meter {
     align-items: center;
     height: 100%;
     padding: 0 3px;
+    color: $black;
     font-weight: $weight-bold;
     transition: left .2s, right .2s;
     z-index: $z-first;

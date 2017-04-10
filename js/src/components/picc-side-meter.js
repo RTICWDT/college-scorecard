@@ -100,6 +100,7 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
             } else {
               barVal.style.setProperty('right', (100 -  sRightVal).toFixed(fixNum) + '%');
               barVal.style.setProperty('background', 'none');
+              barVal.style.setProperty('color', 'inherit'); // for a11y warning
             }
 
 
