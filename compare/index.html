@@ -295,25 +295,27 @@ permalink: /compare/
                                         </span>
                                     </h2>
 
-                                    <div class="school-two_col" data-bind="school_section">
+                                    <div class="school-two_col">
                                         <div class="compare-two_col-left">
                                             <p>Percent of student with a family income less than $40k and receive an income-based federal Pell Grant to help pay for college.</p>
                                         </div>
                                         <div class="compare-two_col-right">
                                             <div class="section-card_container-compare school-diversity">
                                                 <div>
-                                                    <div class="meter-wrapper">
-                                                        <figure class="side-meter">
-                                                            <picc-side-meter
-                                                                    class="socio-economic"
-                                                                    data-bind="pell_grant_meter"
-                                                                    max="1">
-                                                            </picc-side-meter>
-                                                            <figcaption>
-                                                                <span data-bind="name">School Name</span>
-                                                                <span data-bind="pell_grant_meter" class="sr-only"></span>
-                                                            </figcaption>
-                                                        </figure>
+                                                    <div data-bind="school_section">
+                                                        <div class="meter-wrapper">
+                                                            <figure class="side-meter">
+                                                                <picc-side-meter
+                                                                        class="socio-economic"
+                                                                        data-bind="pell_grant_meter"
+                                                                        max="1">
+                                                                </picc-side-meter>
+                                                                <figcaption>
+                                                                    <span data-bind="name">School Name</span>
+                                                                    <span data-bind="pell_grant_meter" class="sr-only"></span>
+                                                                </figcaption>
+                                                            </figure>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -474,17 +476,19 @@ permalink: /compare/
 
                                     <div class="section-card_container-compare avg-debt">
                                         <div>
-                                            <div class="meter-wrapper">
-                                                <figure class="side-meter">
-                                                    <picc-side-meter
-                                                        class="debt"
-                                                        data-bind="average_total_debt_meter">
-                                                    </picc-side-meter>
-                                                    <figcaption>
-                                                        <span data-bind="name">School Name</span>
-                                                        <span data-bind="average_total_debt_meter" class="sr-only"></span>
-                                                    </figcaption>
-                                                </figure>
+                                            <div data-bind="school_section">
+                                                <div class="meter-wrapper">
+                                                    <figure class="side-meter">
+                                                        <picc-side-meter
+                                                            class="debt"
+                                                            data-bind="average_total_debt_meter">
+                                                        </picc-side-meter>
+                                                        <figcaption>
+                                                            <span data-bind="name">School Name</span>
+                                                            <span data-bind="average_total_debt_meter" class="sr-only"></span>
+                                                        </figcaption>
+                                                    </figure>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -501,17 +505,19 @@ permalink: /compare/
 
                                     <div class="section-card_container-compare student-aid">
                                         <div>
-                                            <div class="meter-wrapper">
-                                                <figure class="side-meter">
-                                                    <picc-side-meter
-                                                        class="debt"
-                                                        data-bind="federal_aid_meter">
-                                                    </picc-side-meter>
-                                                    <figcaption>
-                                                        <span data-bind="name">School Name</span>
-                                                        <span data-bind="federal_aid_meter" class="sr-only"></span>
-                                                    </figcaption>
-                                                </figure>
+                                            <div data-bind="school_section">
+                                                <div class="meter-wrapper">
+                                                    <figure class="side-meter">
+                                                        <picc-side-meter
+                                                            class="debt"
+                                                            data-bind="federal_aid_meter">
+                                                        </picc-side-meter>
+                                                        <figcaption>
+                                                            <span data-bind="name">School Name</span>
+                                                            <span data-bind="federal_aid_meter" class="sr-only"></span>
+                                                        </figcaption>
+                                                    </figure>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -528,17 +534,19 @@ permalink: /compare/
 
                                     <div class="section-card_container-compare avg-loan-payment">
                                         <div>
-                                            <div class="meter-wrapper">
-                                                <figure class="side-meter">
-                                                    <picc-side-meter
-                                                            class="debt"
-                                                            data-bind="average_monthly_loan_payment_meter">
-                                                    </picc-side-meter>
-                                                    <figcaption>
-                                                        <span data-bind="name">School Name</span>
-                                                        <span data-bind="average_monthly_loan_payment_meter" class="sr-only"></span>
-                                                    </figcaption>
-                                                </figure>
+                                            <div data-bind="school_section">
+                                                <div class="meter-wrapper">
+                                                    <figure class="side-meter">
+                                                        <picc-side-meter
+                                                                class="debt"
+                                                                data-bind="average_monthly_loan_payment_meter">
+                                                        </picc-side-meter>
+                                                        <figcaption>
+                                                            <span data-bind="name">School Name</span>
+                                                            <span data-bind="average_monthly_loan_payment_meter" class="sr-only"></span>
+                                                        </figcaption>
+                                                    </figure>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -738,17 +746,19 @@ permalink: /compare/
 
                                     <div class="section-card_container-compare advantage-rate">
                                         <div>
-                                            <div class="meter-wrapper">
-                                                <figure class="side-meter">
-                                                    <picc-side-meter
-                                                            class="earnings"
-                                                            data-bind="advantage_rate_meter">
-                                                    </picc-side-meter>
-                                                    <figcaption>
-                                                        <span data-bind="name">School Name</span>
-                                                        <span data-bind="advantage_rate_meter" class="sr-only"></span>
-                                                    </figcaption>
-                                                </figure>
+                                            <div data-bind="school_section">
+                                                <div class="meter-wrapper">
+                                                    <figure class="side-meter">
+                                                        <picc-side-meter
+                                                                class="earnings"
+                                                                data-bind="advantage_rate_meter">
+                                                        </picc-side-meter>
+                                                        <figcaption>
+                                                            <span data-bind="name">School Name</span>
+                                                            <span data-bind="advantage_rate_meter" class="sr-only"></span>
+                                                        </figcaption>
+                                                    </figure>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
