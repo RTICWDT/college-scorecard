@@ -1050,6 +1050,12 @@ picc.school.directives = (function() {
     average_monthly_loan_payment: format.dollars(fields.MONTHLY_LOAN_PAYMENT),
 
     federal_aid_percentage: format.percent(fields.AID_PERCENTAGE),
+    federal_aid_meter: {
+      '@value': access(fields.AID_PERCENTAGE),
+      label:    format.percent(function() { return this.average; }),
+      'picc-side-meter-val': format.percent(fields.AID_PERCENTAGE)
+    },
+
     pell_grant_percentage: format.percent(fields.PELL_PERCENTAGE),
     pell_grant_meter: {
       '@value': access(fields.PELL_PERCENTAGE),

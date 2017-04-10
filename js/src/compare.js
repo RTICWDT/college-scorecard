@@ -72,6 +72,7 @@ module.exports = function compare() {
     picc.fields.EARNINGS_GT_25K,
     picc.fields.PELL_PERCENTAGE,
     picc.fields.AVERAGE_TOTAL_DEBT,
+    picc.fields.AID_PERCENTAGE,
     picc.fields.PART_TIME_SHARE,
     // under investigation flag
     picc.fields.UNDER_INVESTIGATION
@@ -96,7 +97,8 @@ module.exports = function compare() {
     'retention_rate_meter',
     'full_time_value',
     'pell_grant_meter',
-    'average_total_debt_meter'
+    'average_total_debt_meter',
+    'federal_aid_meter'
 
   ]);
 
