@@ -73,6 +73,7 @@ module.exports = function compare() {
     picc.fields.PELL_PERCENTAGE,
     picc.fields.AVERAGE_TOTAL_DEBT,
     picc.fields.AID_PERCENTAGE,
+    picc.fields.MONTHLY_LOAN_PAYMENT,
     picc.fields.PART_TIME_SHARE,
     // under investigation flag
     picc.fields.UNDER_INVESTIGATION
@@ -98,7 +99,8 @@ module.exports = function compare() {
     'full_time_value',
     'pell_grant_meter',
     'average_total_debt_meter',
-    'federal_aid_meter'
+    'federal_aid_meter',
+    'average_monthly_loan_payment_meter'
 
   ]);
 
