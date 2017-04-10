@@ -408,58 +408,88 @@ permalink: /compare/
 
                             <div id="finaid-content" aria-hidden="true">
 
-                                <h2 class="figure-heading" aria-describedby="tip-repayment-rate" tabindex="0">
-                                    Students Paying <span>Down Their Debt</span>
-                                    <span class="tooltip-target">
-                                        <i class="fa fa-info-circle"></i>
-                                    </span>
-                                </h2>
-                                <div class="compare-container_group">
+                                <div class="repayment">
 
-                                    <div class="average_line" data-meter="repayment_rate_meter">
-                                        <span class="label"></span>
-                                    </div>
+                                    <h2 class="figure-heading" aria-describedby="tip-repayment-rate" tabindex="0">
+                                        Students Paying <span>Down Their Debt</span>
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>
+                                    <div class="compare-container_group">
 
-                                    <div class="section-card_container-compare repayment-rate">
+                                        <div class="average_line" data-meter="repayment_rate_meter">
+                                            <span class="label"></span>
+                                        </div>
 
-                                        <div class="selected-school_repayment-rate_group">
+                                        <div class="section-card_container-compare repayment-rate">
 
-                                            <div class="selected-school_repayment-rate repayment-rate" data-bind="school_section">
+                                            <div class="selected-school_repayment-rate_group">
 
-                                                <div class="meter-wrapper">
-                                                    <figure class="side-meter">
-                                                        <picc-side-meter
-                                                            class="debt"
-                                                            data-bind="repayment_rate_meter"
-                                                            max="1"
-                                                            average="{{ site.data.national_stats.repayment_rate.median }}"
-                                                            average-range="{{ site.data.national_stats.repayment_rate.average_range|join:'..' }}"
-                                                            data-median-four_year="{{ site.data.national_stats.repayment_rate_4.median }}"
-                                                            data-median-lt_four_year="{{ site.data.national_stats.repayment_rate_l4.median }}">
-                                                        </picc-side-meter>
-                                                        <figcaption>
-                                                            <span data-bind="name">School Name</span>
-                                                            <span data-bind="repayment_rate_percent" class="sr-only"></span>
-                                                        </figcaption>
-                                                    </figure>
+                                                <div class="selected-school_repayment-rate repayment-rate" data-bind="school_section">
+
+                                                    <div class="meter-wrapper">
+                                                        <figure class="side-meter">
+                                                            <picc-side-meter
+                                                                class="debt"
+                                                                data-bind="repayment_rate_meter"
+                                                                max="1"
+                                                                average="{{ site.data.national_stats.repayment_rate.median }}"
+                                                                average-range="{{ site.data.national_stats.repayment_rate.average_range|join:'..' }}"
+                                                                data-median-four_year="{{ site.data.national_stats.repayment_rate_4.median }}"
+                                                                data-median-lt_four_year="{{ site.data.national_stats.repayment_rate_l4.median }}">
+                                                            </picc-side-meter>
+                                                            <figcaption>
+                                                                <span data-bind="name">School Name</span>
+                                                                <span data-bind="repayment_rate_percent" class="sr-only"></span>
+                                                            </figcaption>
+                                                        </figure>
+                                                    </div>
+
                                                 </div>
+                                            </div>
 
+                                        </div>
+
+                                        <div class="legend-wrapper">
+                                            <div class="legend-nat_average">
+                                                <div class="legend-nat_average-box">
+                                                    <div class="legend-nat_average-box-line-vert">
+                                                    </div>
+                                                </div>
+                                                <div class="legend-nat_average-words">National Average</div>
                                             </div>
                                         </div>
 
                                     </div>
+                                </div><!-- /.repayment -->
 
-                                    <div class="legend-wrapper">
-                                        <div class="legend-nat_average">
-                                            <div class="legend-nat_average-box">
-                                                <div class="legend-nat_average-box-line-vert">
-                                                </div>
+                                <div class="debt">
+                                    <h2 class="figure-heading" aria-describedby="tip-avg-debt" tabindex="0">
+                                        Total Typical Debt
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>
+
+                                    <div class="section-card_container-compare avg-debt">
+                                        <div>
+                                            <div class="meter-wrapper">
+                                                <figure class="side-meter">
+                                                    <picc-side-meter
+                                                        class="debt"
+                                                        data-bind="average_total_debt_meter">
+                                                    </picc-side-meter>
+                                                    <figcaption>
+                                                        <span data-bind="name">School Name</span>
+                                                        <span data-bind="average_total_debt_meter" class="sr-only"></span>
+                                                    </figcaption>
+                                                </figure>
                                             </div>
-                                            <div class="legend-nat_average-words">National Average</div>
                                         </div>
                                     </div>
 
-                                </div>
+                                </div><!-- /.debt -->
 
                             </div>
                         </div>

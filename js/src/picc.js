@@ -1037,6 +1037,16 @@ picc.school.directives = (function() {
     },
 
     average_total_debt: format.dollars(fields.AVERAGE_TOTAL_DEBT),
+
+    average_total_debt_meter: {
+      //FIXME: meter needs a national max
+      //temporarily taken from across all schools in 2014: 49750
+      '@max': function(d) { return 49750},
+      '@value': access(fields.AVERAGE_TOTAL_DEBT),
+      // '@average': access.nationalStat('median', access.yearDesignation),
+      label:    format.dollars(function() { return this.average; }),
+      'picc-side-meter-val': format.dollars(fields.AVERAGE_TOTAL_DEBT)
+    },
     average_monthly_loan_payment: format.dollars(fields.MONTHLY_LOAN_PAYMENT),
 
     federal_aid_percentage: format.percent(fields.AID_PERCENTAGE),
