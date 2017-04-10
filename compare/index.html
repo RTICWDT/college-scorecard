@@ -679,7 +679,7 @@ permalink: /compare/
 
                             <div id="earnings-content" aria-hidden="true">
 
-                                <div>
+                                <div class="avg-salary">
                                     <h2 class="figure-heading constrain_width"
                                         aria-describedby="tip-avg-salary" tabindex="0">
                                         Salary After Attending
@@ -726,7 +726,33 @@ permalink: /compare/
 
                                     </div>
 
-                                </div>
+                                </div><!-- /.avg-salary -->
+
+                                <div class="advantage-rate">
+                                    <h2 class="figure-heading" aria-describedby="tip-earnings-25k" tabindex="0">
+                                        Percentage Earning Above High School Grad
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>
+
+                                    <div class="section-card_container-compare advantage-rate">
+                                        <div>
+                                            <div class="meter-wrapper">
+                                                <figure class="side-meter">
+                                                    <picc-side-meter
+                                                            class="earnings"
+                                                            data-bind="advantage_rate_meter">
+                                                    </picc-side-meter>
+                                                    <figcaption>
+                                                        <span data-bind="name">School Name</span>
+                                                        <span data-bind="advantage_rate_meter" class="sr-only"></span>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- /.advantage-rate -->
 
                             </div>
 

@@ -66,10 +66,9 @@ module.exports = function compare() {
     picc.fields.REPAYMENT_RATE,
     // this has no sub-fields
     picc.fields.MEDIAN_EARNINGS,
+    picc.fields.EARNINGS_GT_25K,
     picc.fields.RETENTION_RATE + '.four_year.full_time',
     picc.fields.RETENTION_RATE + '.lt_four_year.full_time',
-    // not sure if we need this, but let's get it anyway
-    picc.fields.EARNINGS_GT_25K,
     picc.fields.PELL_PERCENTAGE,
     picc.fields.AVERAGE_TOTAL_DEBT,
     picc.fields.AID_PERCENTAGE,
@@ -92,6 +91,7 @@ module.exports = function compare() {
     'grad_rate_meter',
     'average_salary',
     'average_salary_meter',
+    'advantage_rate_meter',
     'repayment_rate_meter',
     'repayment_rate_percent',
     'retention_rate_value',

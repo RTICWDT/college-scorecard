@@ -1011,6 +1011,11 @@ picc.school.directives = (function() {
     net_price_income5: format.dollars(access.netPriceByIncomeLevel('110001-plus')),
 
     advantage_rate: format.percent(fields.EARNINGS_GT_25K),
+    advantage_rate_meter: {
+      '@value':   access.earnings25k,
+      label:      format.percent(function() { return this.average; }),
+      'picc-side-meter-val': format.percent(fields.EARNINGS_GT_25K)
+    },
 
     grad_rate: format.percent(access.completionRate),
     grad_rate_meter: {
