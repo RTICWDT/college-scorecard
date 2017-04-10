@@ -70,6 +70,7 @@ module.exports = function compare() {
     picc.fields.RETENTION_RATE + '.lt_four_year.full_time',
     // not sure if we need this, but let's get it anyway
     picc.fields.EARNINGS_GT_25K,
+    picc.fields.PELL_PERCENTAGE,
     picc.fields.PART_TIME_SHARE,
     // under investigation flag
     picc.fields.UNDER_INVESTIGATION
@@ -92,7 +93,8 @@ module.exports = function compare() {
     'repayment_rate_percent',
     'retention_rate_value',
     'retention_rate_meter',
-    'full_time_value'
+    'full_time_value',
+    'pell_grant_meter'
 
   ]);
 

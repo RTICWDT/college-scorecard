@@ -1041,6 +1041,11 @@ picc.school.directives = (function() {
 
     federal_aid_percentage: format.percent(fields.AID_PERCENTAGE),
     pell_grant_percentage: format.percent(fields.PELL_PERCENTAGE),
+    pell_grant_meter: {
+      '@value': access(fields.PELL_PERCENTAGE),
+      label:    format.percent(function() { return this.average; }),
+      'picc-side-meter-val': format.percent(fields.PELL_PERCENTAGE)
+    },
 
     earnings_gt_25k: format.percent(access.earnings25k),
     earnings_gt_25k_meter: {
