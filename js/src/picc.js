@@ -26,22 +26,6 @@ picc.errors = {
   NO_SCHOOLS_TO_COMPARE: 'No schools selected to compare.'
 };
 
-// race-ethnicity labels
-picc.RACE_ETHNICITY_LABELS = {
-  aian:                   'American Indian/Alaska Native',
-  asian:                  'Asian',
-  asian_pacific_islander: 'Asian/Pacific Islander',
-  black:                  'Black',
-  black_non_hispanic:     'Black non-Hispanic',
-  hispanic:               'Hispanic',
-  nhpi:                   'Native Hawaiian/Pacific Islander',
-  non_resident_alien:     'Non-resident alien',
-  two_or_more:            'Two or more races',
-  unknown:                'Unknown',
-  white:                  'White',
-  white_non_hispanic:     'White non-Hispanic',
-};
-
 /**
  * picc.API is a singleton object with methods to query the open-data-maker
  * JSON API. Its base URL (`picc.API.url`) and API key (`picc.API.key`) are
