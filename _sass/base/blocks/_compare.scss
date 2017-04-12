@@ -302,7 +302,6 @@ figcaption {
   }
 
   .net-price-income {
-
     .compare-two_col-left {
       padding-top: 0;
 
@@ -313,6 +312,21 @@ figcaption {
         @include span-columns(6 of 6);
         @include respond-to(small-up) {
           @include span-columns(3 of 6);
+        }
+      }
+    }
+  }
+
+  .race-ethnicity {
+    .compare-two_col-left {
+      padding-top: 0;
+
+      label {
+        margin-bottom: 15px;
+        @include font-size($h3);
+        @include span-columns(6 of 6);
+        @include respond-to(small-up) {
+          @include span-columns(4 of 6);
         }
       }
     }

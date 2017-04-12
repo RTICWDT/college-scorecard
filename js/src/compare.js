@@ -92,6 +92,10 @@ module.exports = function compare() {
     params.fields.push(picc.fields.NET_PRICE_BY_INCOME + '.private.by_income_level.' + level);
   });
 
+  Object.keys(picc.RACE_ETHNICITY_LABELS).forEach(function(key) {
+    params.fields.push(picc.access.raceEthnicityValueByKey(key));
+  });
+
   params.fields.join(',');
 
   var directives = picc.data.selectKeys(picc.school.directives, [
@@ -114,11 +118,11 @@ module.exports = function compare() {
     'retention_rate_value',
     'retention_rate_meter',
     'full_time_value',
+    'race_ethnicity_meter',
     'pell_grant_meter',
     'average_total_debt_meter',
     'federal_aid_meter',
     'average_monthly_loan_payment_meter'
-
   ]);
 
   directives['school_section'] = {
@@ -319,17 +323,21 @@ module.exports = function compare() {
         change: function(e) {
           var targetMeter = e.target.getAttribute(dataSelect);
           var meters = [].slice.call(document.querySelectorAll('picc-side-meter[data-bind="'+targetMeter+'"]'));
-          var selectLevel = e.target.value;
-          for (var i = 0; i < meters.length; i++) {
-            var formattedValue = picc.format.dollars('value')({'value': meters[i].getAttribute('data-'+selectLevel)});
-            meters[i].setAttribute('value', meters[i].getAttribute('data-'+selectLevel));
+          var selectedOption = e.target.value;
 
-            // bar value
+          var formatter = (+meters[0].getAttribute('max') === 1) ? 'percent' : 'dollars';
+          for (var i = 0; i < meters.length; i++) {
+            var value = meters[i].getAttribute('data-'+selectedOption);
+            var formattedValue = picc.format[formatter]('value')({'value': value});
+            if (formatter === 'percent') formattedValue = (value >= .005) ? formattedValue : '<1%';
+            // set bar
+            meters[i].setAttribute('value', value);
+            // set bar text value
             var barVal = meters[i].querySelector('.picc-side-meter-val');
             if (barVal) {
               barVal.textContent = formattedValue;
             }
-            // screen-reader only bar value
+            // set screen-reader only bar text value
             var valueEl = meters[i].nextElementSibling.querySelector('span[data-bind="'+targetMeter+'"]');
             if (valueEl) {
               valueEl.textContent = formattedValue;

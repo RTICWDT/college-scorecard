@@ -306,7 +306,7 @@ permalink: /compare/
                                                         <div class="meter-wrapper">
                                                             <figure class="side-meter">
                                                                 <picc-side-meter
-                                                                        class="socio-economic"
+                                                                        class="demographics"
                                                                         data-bind="pell_grant_meter"
                                                                         max="1">
                                                                 </picc-side-meter>
@@ -323,6 +323,56 @@ permalink: /compare/
                                     </div>
 
                                 </div><!-- /.socio-economic.u-wrap -->
+
+                                <div class="race-ethnicity u-wrap">
+
+                                    <div class="school-two_col u-wrap" data-bind="school_section">
+                                        <div class="compare-two_col-left">
+
+                                            <h2 class="figure-heading constrain_width"
+                                                aria-describedby="tip-race-eth" tabindex="0">
+                                                Race/Ethnicity
+                                                <span class="tooltip-target">
+                                                    <i class="fa fa-info-circle"></i>
+                                                </span>
+                                            </h2>
+
+                                            <label for="race_ethnicity">Which group are you interested in?
+                                                <select id="race_ethnicity" name="race_ethnicity" data-select="race_ethnicity_meter">
+                                                    {% for key in site.data.race_ethnicity %}
+                                                        {% if forloop.index == 1 %}
+                                                            <option value="{{ key[0] }}" selected>{{ key[1] }}</option>
+                                                        {% else %}
+                                                            <option value="{{ key[0] }}">{{ key[1] }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </label>
+                                        </div>
+                                        <div class="compare-two_col-right"><div>{% comment %} empty space column {% endcomment %}</div></div>
+                                    </div>
+
+                                    <div class="section-card_container-compare race-ethnicity">
+                                        <div>
+                                            <div data-bind="school_section">
+                                                <div class="meter-wrapper">
+                                                    <figure class="side-meter">
+                                                        <picc-side-meter
+                                                            class="demographics"
+                                                            data-bind="race_ethnicity_meter"
+                                                            max="1">
+                                                        </picc-side-meter>
+                                                        <figcaption>
+                                                            <span data-bind="name">School Name</span>
+                                                            <span data-bind="race_ethnicity_meter" class="sr-only"></span>
+                                                        </figcaption>
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div><!-- /.race-ethnicity.u-wrap -->
 
                             </div>
                         </div>
