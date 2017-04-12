@@ -77,6 +77,13 @@
     }
   }
 
+  .checkbox {
+    width: 75%;
+    @include respond-to(tiny-up) {
+      width: 90%;
+    }
+  }
+
 }
 
 .compare-schools {
