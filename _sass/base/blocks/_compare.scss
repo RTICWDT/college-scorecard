@@ -155,6 +155,7 @@ figcaption {
 }
 
 .section-card_container-compare_more {
+
   @extend .section-card_container-school;
 
   .compare-two_col-left {
@@ -296,11 +297,25 @@ figcaption {
       > span {
         @include font-size($h1);
       }
-
-
     }
 
   }
 
+  .net-price-income {
+
+    .compare-two_col-left {
+      padding-top: 0;
+
+      label {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        @include font-size($h3);
+        @include span-columns(6 of 6);
+        @include respond-to(small-up) {
+          @include span-columns(3 of 6);
+        }
+      }
+    }
+  }
 
 }

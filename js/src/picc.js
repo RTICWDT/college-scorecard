@@ -1009,6 +1009,22 @@ picc.school.directives = (function() {
     net_price_income3: format.dollars(access.netPriceByIncomeLevel('48001-75000')),
     net_price_income4: format.dollars(access.netPriceByIncomeLevel('75001-110000')),
     net_price_income5: format.dollars(access.netPriceByIncomeLevel('110001-plus')),
+    net_price_income_meter: {
+      '@data-net_price_income1': access.netPriceByIncomeLevel('0-30000'),
+      '@data-net_price_income2': access.netPriceByIncomeLevel('30001-48000'),
+      '@data-net_price_income3': access.netPriceByIncomeLevel('48001-75000'),
+      '@data-net_price_income4': access.netPriceByIncomeLevel('75001-110000'),
+      '@data-net_price_income5': access.netPriceByIncomeLevel('110001-plus'),
+      '@value':   function() {
+        var select = document.getElementById('net_price_income');
+        return this.getAttribute('data-'+select.value);
+      },
+      'picc-side-meter-val': function() {
+        var select = document.getElementById('net_price_income');
+        var selectValue = this.getAttribute('data-'+select.value);
+        return format.dollars('selectValue')({'selectValue':selectValue});
+      }
+    },
 
     advantage_rate: format.percent(fields.EARNINGS_GT_25K),
     advantage_rate_meter: {

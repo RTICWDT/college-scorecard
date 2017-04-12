@@ -76,7 +76,23 @@ module.exports = function compare() {
     picc.fields.PART_TIME_SHARE,
     // under investigation flag
     picc.fields.UNDER_INVESTIGATION
-  ].join(',');
+  ];
+
+  var INCOME_LEVELS = [
+    '0-30000',
+    '30001-48000',
+    '48001-75000',
+    '75001-110000',
+    '110001-plus'
+  ];
+
+  // full paths until wildcard search is supported by API
+  INCOME_LEVELS.forEach(function(level) {
+    params.fields.push(picc.fields.NET_PRICE_BY_INCOME + '.public.by_income_level.' + level);
+    params.fields.push(picc.fields.NET_PRICE_BY_INCOME + '.private.by_income_level.' + level);
+  });
+
+  params.fields.join(',');
 
   var directives = picc.data.selectKeys(picc.school.directives, [
     'name',
@@ -87,6 +103,7 @@ module.exports = function compare() {
     'size_category',
     'average_cost',
     'average_cost_meter',
+    'net_price_income_meter',
     'grad_rate',
     'grad_rate_meter',
     'average_salary',
@@ -282,6 +299,43 @@ module.exports = function compare() {
       },
       {
         click: picc.school.selection.highlightToggle
+      }
+    );
+
+  });
+
+  /**
+   * * add event listeners for select-controlled sections
+   */
+  picc.ready(function() {
+    var dataSelect = 'data-select';
+    picc.delegate(
+      document.body,
+      // if the element matches '[data-select]'
+      function() {
+        return this.hasAttribute(dataSelect)
+      },
+      {
+        change: function(e) {
+          var targetMeter = e.target.getAttribute(dataSelect);
+          var meters = [].slice.call(document.querySelectorAll('picc-side-meter[data-bind="'+targetMeter+'"]'));
+          var selectLevel = e.target.value;
+          for (var i = 0; i < meters.length; i++) {
+            var formattedValue = picc.format.dollars('value')({'value': meters[i].getAttribute('data-'+selectLevel)});
+            meters[i].setAttribute('value', meters[i].getAttribute('data-'+selectLevel));
+
+            // bar value
+            var barVal = meters[i].querySelector('.picc-side-meter-val');
+            if (barVal) {
+              barVal.textContent = formattedValue;
+            }
+            // screen-reader only bar value
+            var valueEl = meters[i].nextElementSibling.querySelector('span[data-bind="'+targetMeter+'"]');
+            if (valueEl) {
+              valueEl.textContent = formattedValue;
+            }
+          }
+        }
       }
     );
 

@@ -344,7 +344,7 @@ permalink: /compare/
 
                             <div id="cost-content" aria-hidden="true">
 
-                                <div>
+                                <div class="avg-cost">
                                     <h2 class="figure-heading constrain_width"
                                         aria-describedby="tip-avg-cost-year" tabindex="0">
                                         Average Annual Cost
@@ -391,7 +391,54 @@ permalink: /compare/
 
                                     </div>
 
-                                </div>
+                                </div><!-- /.avg-cost -->
+
+                                <div class="net-price-income">
+
+                                    <div class="school-two_col u-wrap" data-bind="school_section">
+                                        <div class="compare-two_col-left">
+                                            <h2 class="figure-heading constrain_width">By Family Income</h2>
+                                            <p>Depending on the federal, state, or institutional grant aid available,
+                                                students in your income bracket may pay more or less than the overall average costs.
+                                            </p>
+
+                                            <label for="net_price_income">What's your family income?
+                                                <select id="net_price_income" name="net_price_income" data-select="net_price_income_meter">
+                                                    {% for level in site.data.net_price_income %}
+                                                        {% if forloop.index == 2 %}
+                                                            <option value="{{ level[0] }}" selected>{{ level[1] }}</option>
+                                                        {% else %}
+                                                            <option value="{{ level[0] }}">{{ level[1] }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </label>
+                                        </div>
+                                        <div class="compare-two_col-right"><div>{% comment %} empty space column {% endcomment %}</div></div>
+                                    </div>
+
+                                    <div class="section-card_container-compare net-price-income">
+                                        <div>
+                                            <div data-bind="school_section">
+                                                <div class="meter-wrapper">
+                                                    <figure class="side-meter">
+                                                        <picc-side-meter
+                                                                class="cost"
+                                                                data-bind="net_price_income_meter"
+                                                                max="{{ site.data.national_stats.net_price.max }}"
+                                                                average="{{ site.data.national_stats.net_price.median }}">
+                                                        </picc-side-meter>
+                                                        <figcaption>
+                                                            <span data-bind="name">School Name</span>
+                                                            <span data-bind="net_price_income_meter" class="sr-only"></span>
+                                                        </figcaption>
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div><!-- /.net-price-income -->
 
                             </div>
 
