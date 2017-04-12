@@ -126,8 +126,7 @@ picc.API = (function() {
     }
     queryParams[idField] = id;
     return API.get(schoolEndpoint, queryParams, function(error, res) {
-      var meta = res.metadata || res;
-      if (error || !meta.total) {
+      if (error || !res.metadata.total) {
         return done(error
           ? error.responseText || error || errors.NO_SUCH_SCHOOL
           : errors.NO_SUCH_SCHOOL);

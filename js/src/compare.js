@@ -9,6 +9,7 @@ if (typeof document !== 'undefined') {
 module.exports = function compare() {
 
   var loadable = d3.select('.loadable');
+  var root = d3.select('.compare-bg');
   var compareRoot = document.querySelector('.compare-schools');
   var compareSchools = picc.school.selection.all('compare');
 
@@ -250,6 +251,16 @@ module.exports = function compare() {
     var sections = [].slice.call(document.querySelectorAll('[data-bind="school_section"][data-school-id="'+schoolID+'"]'));
     for(var i=0; i < sections.length; i++) {
       sections[i].setAttribute('aria-hidden', toggleState);
+    }
+
+    // show error if last checkbox was unchecked (nothing to compare)
+    if (!picc.school.selection.all('compare').length) {
+      root.classed('js-loaded', false);
+      loadable.classed('js-error', true);
+      return showError(picc.errors.NO_SCHOOLS_TO_COMPARE);
+    } else {
+      root.classed('js-loaded', true);
+      loadable.classed('js-error', false);
     }
 
   }
