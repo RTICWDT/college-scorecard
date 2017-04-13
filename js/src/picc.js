@@ -1173,7 +1173,7 @@ picc.school.directives = (function() {
       'picc-side-meter-val': function() {
         var select = document.getElementById('race_ethnicity');
         var selectValue = this.getAttribute('data-'+select.value);
-        return format.percent('selectValue')({'selectValue':selectValue});
+        return (selectValue >= .005) ? format.percent('selectValue')({'selectValue':selectValue}) : '<1%';
       }
     },
 
