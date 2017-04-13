@@ -348,11 +348,6 @@ module.exports = function compare() {
             if (barVal) {
               barVal.textContent = formattedValue;
             }
-            // set screen-reader only bar text value
-            var valueEl = meters[i].nextElementSibling.querySelector('span[data-bind="'+targetMeter+'"]');
-            if (valueEl) {
-              valueEl.textContent = formattedValue;
-            }
           }
         }
       }
