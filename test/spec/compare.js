@@ -13,10 +13,23 @@ var getMeterSchoolName = function*(schoolID) {
   return browser.getText('.default-meters [data-school-id="'+schoolID+'"] .side-meter figcaption [data-bind="name"]');
 };
 
+var getMeterHighlightForSchool = function*(meter, schoolID){
+  return browser.getAttribute('.' +meter + ' [data-school-id="'+schoolID+'"]', 'data-highlight' );
+};
+
 var visitComparePage = function*() {
   yield browser
     .url('/compare');
-}
+};
+
+var compareSchools = function*(schoolIDs) {
+
+    for(var i=0; i< schoolIDs.length; i++) {
+      yield selectCompareSchools(schoolIDs[i]);
+    }
+    yield visitComparePage();
+    yield utils.getVisibleCompare();
+};
 
 
 var loadSchoolUrl = function*(school) {
@@ -53,12 +66,7 @@ describe('compare page key metrics', function(){
       var schoolIDs = ['439446', '457402'];
       var meters = ['earnings', 'cost', 'graduation'];
 
-      for(var i=0; i< schoolIDs.length; i++) {
-        yield selectCompareSchools(schoolIDs[i]);
-      }
-
-      yield visitComparePage();
-      yield utils.getVisibleCompare();
+     yield compareSchools(schoolIDs);
 
       for(var i=0;i < schoolIDs.length;i++) {
         for (var j=0;j < meters.length;j++){
@@ -80,13 +88,7 @@ describe('compare page key metrics', function(){
     it('should display key metric figures', function*() {
       var schoolIDs = ['110635', '125170'];
       var meters = ['earnings', 'cost', 'graduation'];
-
-      for(var i=0; i< schoolIDs.length; i++) {
-        yield selectCompareSchools(schoolIDs[i]);
-      }
-
-      yield visitComparePage();
-      yield utils.getVisibleCompare();
+      yield compareSchools(schoolIDs);
 
       for(var i=0;i < schoolIDs.length;i++) {
         for (var j=0;j < meters.length;j++){
@@ -165,16 +167,6 @@ describe('navigation to compare page', function() {
 
 describe('Accordion section', function(){
 
-  before(function*(){
-    var schoolIDs = ['110635', '125170'];
-
-    for(var i=0; i< schoolIDs.length; i++) {
-      yield selectCompareSchools(schoolIDs[i]);
-    }
-    yield visitComparePage();
-    yield utils.getVisibleCompare();
-  });
-
   after(function() {
     browser.localStorage('DELETE');
   });
@@ -191,9 +183,12 @@ describe('Accordion section', function(){
       assert.equal(yield isAccordionExpanded('#school'), 'false');
     });
 
-    describe('race/ethnicity charts', function() {
+    describe('race/ethnicity charts', function*() {
 
       var schoolIDs = ['110635', '125170'];
+
+      yield compareSchools(schoolIDs);
+
       var options = [
         'aian',
         'asian',
@@ -228,7 +223,7 @@ describe('Accordion section', function(){
 
           assert.equal(meterAttr, meterVal);
 
-          // check that the meter value is represented as the formatted bar value (4.55 -> "5%")
+          // check that the bar value is represented as the percent formatted meter value ("0.0455" -> "5%")
           if (meterVal >= 0.005) {
             assert.equal((+meterVal * 100).toFixed(0)+'%', barVal);
           } else if (meterVal) {
@@ -247,7 +242,7 @@ describe('Accordion section', function(){
 
           assert.equal(meterAttr, meterVal);
 
-          // check that the meter value is represented as the formatted bar value (4.55 -> "5%")
+          // check that the bar value is represented as the percent formatted meter value ("0.0455" -> "5%")
           if (meterVal >= 0.005) {
             assert.equal((+meterVal * 100).toFixed(0)+'%', barVal);
           } else if (meterVal) {
@@ -271,9 +266,11 @@ describe('Accordion section', function(){
       assert.equal(yield isAccordionExpanded('#cost'), 'false');
     });
 
-    describe('by family income charts', function(){
+    describe('by family income charts', function*(){
 
       var schoolIDs = ['110635', '125170'];
+      yield compareSchools(schoolIDs);
+
       var options = [
         'net_price_income1',
         'net_price_income2',
@@ -353,4 +350,420 @@ describe('Accordion section', function(){
 
   });
 
+});
+
+describe('highlight', function(){
+
+  after(function() {
+    browser.localStorage('DELETE');
+  });
+
+  it('should add [aria-pressed="true"] to the selected school highlight button', function*(){
+
+    browser.localStorage('DELETE');
+    var schoolIDs = ['110635', '125170'];
+    yield compareSchools(schoolIDs);
+
+    var highlighted = yield browser
+      .click('#compare_schools-edit h1 [aria-controls]')
+      .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]')
+      .getAttribute('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]', 'aria-pressed');
+
+    assert.equal(highlighted, 'true');
+  });
+
+  it('should toggle back to [aria-pressed="false"] on the subsequent click on the selected school highlight button', function*(){
+
+    browser.localStorage('DELETE');
+    var schoolIDs = ['110635', '125170'];
+    yield compareSchools(schoolIDs);
+
+    var highlighted = yield browser
+      .click('#compare_schools-edit h1 [aria-controls]')
+      .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]') // first click - on
+      .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]') // second click - off
+      .getAttribute('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]', 'aria-pressed');
+
+    assert.equal(highlighted, 'false');
+  });
+
+  it('should toggle a previously highlighted school selection off when a different school is selected', function*(){
+    browser.localStorage('DELETE');
+    var schoolIDs = ['110635', '125170'];
+    yield compareSchools(schoolIDs);
+
+    var highlighted = yield browser
+      .click('#compare_schools-edit h1 [aria-controls]')
+      .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]') // first school click - on
+      .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]') // second school click - on
+      .getAttribute('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]', 'aria-pressed');
+
+    assert.equal(highlighted, 'false');
+  });
+
+
+  describe('selected school in each section', function(){
+
+    var schoolIDs = ['110635', '125170'];
+
+    before(function*() {
+      browser.localStorage('DELETE');
+      yield compareSchools(schoolIDs);
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]');
+    });
+
+
+    it('should highlight corresponding Average Cost main meter', function*(){
+
+      // test school #1
+      yield browser
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
+
+      var highlighted = yield getMeterHighlightForSchool('average-cost', schoolIDs[0]);
+      assert.equal(highlighted[0], 'true');
+
+      // test school #2
+      yield browser
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
+
+      highlighted = yield getMeterHighlightForSchool('average-cost', schoolIDs[1]);
+      assert.equal(highlighted[0], 'true');
+    });
+
+    it('should highlight corresponding Grad Rate main meter', function*(){
+
+      // test school #1
+      yield browser
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
+
+      var highlighted = yield getMeterHighlightForSchool('grad-rate', schoolIDs[0]);
+      assert.equal(highlighted[0], 'true');
+
+      // test school #2
+      yield browser
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
+
+      highlighted = yield getMeterHighlightForSchool('grad-rate', schoolIDs[1]);
+      assert.equal(highlighted[0], 'true');
+    });
+
+    it('should highlight corresponding Salary Earnings main meter', function*(){
+
+      // test school #1
+      yield browser
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
+
+      var highlighted = yield getMeterHighlightForSchool('average-salary', schoolIDs[0]);
+      assert.equal(highlighted[0], 'true');
+
+      // test school #2
+      yield browser
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
+
+      highlighted = yield getMeterHighlightForSchool('average-salary', schoolIDs[1]);
+      assert.equal(highlighted[0], 'true');
+    });
+
+    it('should highlight corresponding Full Time percent meter in College Information accordion', function*(){
+
+      // test school #1
+      yield browser
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
+
+      yield toggleAccordion('#school');
+
+      var highlighted = yield getMeterHighlightForSchool('school-summary', schoolIDs[0]);
+      assert.equal(highlighted, 'true');
+
+      // test school #2
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
+
+      yield toggleAccordion('#school');
+
+      highlighted = yield getMeterHighlightForSchool('school-summary', schoolIDs[1]);
+      assert.equal(highlighted, 'true');
+    });
+
+    it('should highlight corresponding Socio-Economic Diversity meter in College Information accordion', function*(){
+
+      // test school #1
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
+
+      yield toggleAccordion('#school');
+
+      var highlighted = yield getMeterHighlightForSchool('school-diversity', schoolIDs[0]);
+      assert.equal(highlighted, 'true');
+
+      // test school #2
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
+
+      yield toggleAccordion('#school');
+
+      highlighted = yield getMeterHighlightForSchool('school-diversity', schoolIDs[1]);
+      assert.equal(highlighted, 'true');
+    });
+
+    it('should highlight corresponding Race/Ethnicity meter in College Information accordion', function*(){
+
+      // test school #1
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
+
+      yield toggleAccordion('#school');
+
+      var highlighted = yield getMeterHighlightForSchool('race-ethnicity', schoolIDs[0]);
+      assert.equal(highlighted, 'true');
+
+      // test school #2
+
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
+
+      yield toggleAccordion('#school');
+
+      highlighted = yield getMeterHighlightForSchool('race-ethnicity', schoolIDs[1]);
+      assert.equal(highlighted, 'true');
+    });
+
+    it('should highlight corresponding Average Cost meter in Costs accordion', function*(){
+
+      // test school #1
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
+
+      yield toggleAccordion('#cost');
+
+      var highlighted = yield getMeterHighlightForSchool('avg-cost', schoolIDs[0]);
+      assert.equal(highlighted, 'true');
+
+      // test school #2
+
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
+
+      yield toggleAccordion('#cost');
+
+      highlighted = yield getMeterHighlightForSchool('avg-cost', schoolIDs[1]);
+      assert.equal(highlighted, 'true');
+    });
+
+    it('should highlight corresponding By Family Income cost meter in Costs accordion', function*(){
+
+      // test school #1
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
+
+      yield toggleAccordion('#cost');
+
+      var highlighted = yield getMeterHighlightForSchool('net-price-income', schoolIDs[0]);
+      assert.equal(highlighted, 'true');
+
+      // test school #2
+
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
+
+      yield toggleAccordion('#cost');
+
+      highlighted = yield getMeterHighlightForSchool('net-price-income', schoolIDs[1]);
+      assert.equal(highlighted, 'true');
+    });
+
+    it('should highlight corresponding Students Paying Down Their Debt meter in Financial Aid & Debt accordion', function*(){
+
+      // test school #1
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
+
+      yield toggleAccordion('#finaid');
+
+      var highlighted = yield getMeterHighlightForSchool('repayment-rate', schoolIDs[0]);
+      assert.equal(highlighted, 'true');
+
+      // test school #2
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
+
+      yield toggleAccordion('#finaid');
+
+      highlighted = yield getMeterHighlightForSchool('repayment-rate', schoolIDs[1]);
+      assert.equal(highlighted, 'true');
+    });
+
+    it('should highlight corresponding Total Typical Debt meter in Financial Aid & Debt accordion', function*(){
+
+      // test school #1
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
+
+      yield toggleAccordion('#finaid');
+
+      var highlighted = yield getMeterHighlightForSchool('avg-debt', schoolIDs[0]);
+      assert.equal(highlighted, 'true');
+
+      // test school #2
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
+
+      yield toggleAccordion('#finaid');
+
+      highlighted = yield getMeterHighlightForSchool('avg-debt', schoolIDs[1]);
+      assert.equal(highlighted, 'true');
+    });
+
+    it('should highlight corresponding Students Receiving Federal Loans meter in Financial Aid & Debt accordion', function*(){
+
+      // test school #1
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
+
+      yield toggleAccordion('#finaid');
+
+      var highlighted = yield getMeterHighlightForSchool('student-aid', schoolIDs[0]);
+      assert.equal(highlighted, 'true');
+
+      // test school #2
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
+
+      yield toggleAccordion('#finaid');
+
+      highlighted = yield getMeterHighlightForSchool('student-aid', schoolIDs[1]);
+      assert.equal(highlighted, 'true');
+    });
+
+    it('should highlight corresponding Typical Monthly Loan Payment meter in Financial Aid & Debt accordion', function*(){
+
+      // test school #1
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
+
+      yield toggleAccordion('#finaid');
+
+      var highlighted = yield getMeterHighlightForSchool('avg-loan-payment', schoolIDs[0]);
+      assert.equal(highlighted, 'true');
+
+      // test school #2
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
+
+      yield toggleAccordion('#finaid');
+
+      highlighted = yield getMeterHighlightForSchool('avg-loan-payment', schoolIDs[1]);
+      assert.equal(highlighted, 'true');
+    });
+
+    it('should highlight corresponding Graduation Rate meter in Graduation & Retention accordion', function*(){
+
+      // test school #1
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
+
+      yield toggleAccordion('#graduation');
+
+      var highlighted = yield getMeterHighlightForSchool('completion-rate', schoolIDs[0]);
+      assert.equal(highlighted, 'true');
+
+      // test school #2
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
+
+      yield toggleAccordion('#graduation');
+
+      highlighted = yield getMeterHighlightForSchool('completion-rate', schoolIDs[1]);
+      assert.equal(highlighted, 'true');
+    });
+
+    it('should highlight corresponding Students Who Return After Their First Year meter in Graduation & Retention accordion', function*(){
+
+      // test school #1
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
+
+      yield toggleAccordion('#graduation');
+
+      var highlighted = yield getMeterHighlightForSchool('grad-retention', schoolIDs[0]);
+      assert.equal(highlighted, 'true');
+
+      // test school #2
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
+
+      yield toggleAccordion('#graduation');
+
+      highlighted = yield getMeterHighlightForSchool('grad-retention', schoolIDs[1]);
+      assert.equal(highlighted, 'true');
+    });
+
+    it('should highlight corresponding Salary After Attending meter in Earnings After School accordion', function*(){
+
+      // test school #1
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
+
+      yield toggleAccordion('#earnings');
+
+      var highlighted = yield getMeterHighlightForSchool('avg-salary', schoolIDs[0]);
+      assert.equal(highlighted, 'true');
+
+      // test school #2
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
+
+      yield toggleAccordion('#earnings');
+
+      highlighted = yield getMeterHighlightForSchool('avg-salary', schoolIDs[1]);
+      assert.equal(highlighted, 'true');
+    });
+
+    it('should highlight corresponding Percentage Earning Above High School Grad meter in Earnings After School accordion', function*(){
+
+      // test school #1
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
+
+      yield toggleAccordion('#earnings');
+
+      var highlighted = yield getMeterHighlightForSchool('advantage-rate', schoolIDs[0]);
+      assert.equal(highlighted, 'true');
+
+      // test school #2
+      yield browser
+        .click('#compare_schools-edit h1 [aria-controls]')
+        .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
+
+      yield toggleAccordion('#earnings');
+
+      highlighted = yield getMeterHighlightForSchool('advantage-rate', schoolIDs[1]);
+      assert.equal(highlighted, 'true');
+    });
+  });
 });
