@@ -244,3 +244,37 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.form-subtabs {
+  font-weight: $weight-bold;
+  margin-bottom: $base-padding;
+  text-transform: uppercase;
+
+  a {
+    color: $black;
+  }
+
+  li {
+    @include font-size($h5);
+    display: inline-block;
+    margin-right: $base-padding-lite;
+    padding: 0.05em 0.4em 0 0.4em;
+
+    &:hover,
+    &:focus {
+      background: $mid-gray;
+      color: $black;
+    }
+
+    @include respond-to(medium-up) {
+      margin-right: $base-padding;
+    }
+  }
+}
+
+.form-subtabs-active {
+  @extend .light_on_dark;
+  background: $mid-blue;
+  border-radius: $base-border-radius;
+  color: $white;
+}
