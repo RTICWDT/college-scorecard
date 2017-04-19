@@ -7,6 +7,15 @@ header {
   }
 }
 
+.maintenance{
+  background-color: $darker-red;
+  > div{
+    @include font-size(0.6);
+    padding: 5px; 
+    text-align:center;
+  }
+}
+
 .banner {
   background: $dark-blue;
   height: 25px;
