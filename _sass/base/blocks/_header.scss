@@ -9,10 +9,11 @@ header {
 
 .maintenance{
   background-color: $darker-red;
+
   > div{
-    @include font-size(0.6);
-    padding: 5px; 
-    text-align:center;
+    @include font-size(0.65);
+    padding: 5px;
+    text-align: center;
   }
 }
 
