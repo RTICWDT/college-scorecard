@@ -452,7 +452,7 @@ permalink: /compare/
                                             <label for="net_price_income">What's your family income?
                                                 <select id="net_price_income" name="net_price_income" data-select="net_price_income_meter">
                                                     {% for level in site.data.net_price_income %}
-                                                        {% if forloop.index == 2 %}
+                                                        {% if forloop.index == 3 %}
                                                             <option value="{{ level[0] }}" selected>{{ level[1] }}</option>
                                                         {% else %}
                                                             <option value="{{ level[0] }}">{{ level[1] }}</option>
