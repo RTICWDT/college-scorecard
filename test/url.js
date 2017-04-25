@@ -10,7 +10,7 @@ if (branch === 'master') {
   url = 'https://collegescorecard.ed.gov';
 } else if (branch && user && repo) {
   var path = [user, repo, branch].join('/');
-  url = 'https://federalist.18f.gov/preview/' + path;
+  url = 'https://federalist.fr.cloud.gov/preview/' + path.toLowerCase();
 }
 
 if (module.parent) {
