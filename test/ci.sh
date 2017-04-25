@@ -39,5 +39,4 @@ if [ "$CIRCLE_SHA1" != "" ]; then
   #done
   echo "Short circuit build loop"
   sleep 360
-  return 1
 fi
