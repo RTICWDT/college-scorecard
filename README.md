@@ -138,7 +138,7 @@ For the content on the College Scorecard, we are following the [18F Content Guid
 
 [18F Content Guide]: https://pages.18f.gov/content-guide/
 [Federalist]: https://federalist.fr.cloud.gov
-[full data set]: https://ed-public-download.apps.cloud.gov/downloads/CollegeScorecard_Raw_Data.zip
+[full data set]: https://ed-public-download.app.cloud.gov/downloads/CollegeScorecard_Raw_Data.zip
 [Open Data Maker]: https://github.com/RTICWDT/open-data-maker/
 [Jekyll]: http://jekyllrb.com/
 [Montserrat]: https://www.google.com/fonts/specimen/Montserrat
