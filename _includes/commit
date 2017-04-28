@@ -1,1 +1,1 @@
-{{ site.git.last_commit.long_sha }}
+{{site.commit_metadata.sha}}
