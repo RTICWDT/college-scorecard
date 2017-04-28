@@ -1,0 +1,1 @@
+{{ site.git.last_commit.long_sha }}

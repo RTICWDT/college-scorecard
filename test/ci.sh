@@ -33,10 +33,8 @@ if [ "$CIRCLE_SHA1" != "" ]; then
     fi
   }
 
-  #while check_federalist_commit; do
-  #  echo "waiting for Federalist to build..."
-  #  sleep 5
-  #done
-  echo "Short circuit build loop"
-  sleep 360
+  while check_federalist_commit; do
+    echo "waiting for Federalist to build..."
+    sleep 5
+  done
 fi
