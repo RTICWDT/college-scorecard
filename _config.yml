@@ -39,10 +39,6 @@ API:
 downloads:
   data-dictionary: CollegeScorecardDataDictionary.xlsx
 
-# for wait-for-federalist / circleCI
-gems:
-  - jekyll-git_metadata
-
 # specify paths to exclude from copying to _site
 # Note: files and directories with the '_' prefix are excluded
 # automatically

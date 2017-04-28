@@ -95,8 +95,6 @@ GEM
       jekyll (~> 3.3)
     jekyll-gist (1.4.0)
       octokit (~> 4.2)
-    jekyll-git_metadata (0.1.2)
-      jekyll (~> 3.0)
     jekyll-github-metadata (2.3.1)
       jekyll (~> 3.1)
       octokit (~> 4.0, != 4.4.0)
@@ -201,7 +199,6 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
-  jekyll-git_metadata
   rack-ssl-enforcer
   vienna
 
