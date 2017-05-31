@@ -29,7 +29,7 @@
   {% endif %}
 
   {% if site.branch and site.branch != 'master' %}
-  {% capture canonical_base_url %}https://federalist.18f.gov/preview/rticwdt/college-scorecard/{{ site.branch }}{% endcapture %}
+  {% capture canonical_base_url %}https://federalist-proxy.app.cloud.gov/preview/rticwdt/college-scorecard/{{ site.branch }}{% endcapture %}
   {% else %}
   {% assign canonical_base_url = site.url %}
   {% endif %}
@@ -75,5 +75,14 @@
   {% for script in page.scripts %}
   <script src="{{ site.baseurl }}/js/{{ script }}"></script>
   {% endfor %}{% endif %}
+
+  <!-- Start crazyegg -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+      var b=document.getElementsByTagName("script")[0];
+      a.src=document.location.protocol+"//{{ site.crazyegg_script }}?"+Math.floor(new Date().getTime()/3600000);
+      a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END crazyegg -->
 
 </head>
