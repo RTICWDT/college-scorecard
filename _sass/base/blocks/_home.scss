@@ -190,6 +190,7 @@
     @include respond-to(small-up) {
       .button-outline {
         @include font-size($h4);
+        margin-bottom: 0.5em;
       }
     }
 
