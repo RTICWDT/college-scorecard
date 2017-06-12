@@ -1,0 +1,98 @@
+.accordion-tabs {
+  $tab-border-color: $base-border-color;
+  $tab-border: 1px solid $tab-border-color;
+  $tab-content-background: lighten($light-gray, 10);
+  $tab-active-background: $tab-content-background;
+  $tab-inactive-color: $base-background-color;
+  $tab-inactive-hover-color: darken($light-gray, 5);
+
+  @include clearfix;
+  border: $tab-border;
+  border-radius: $base-border-radius;
+  margin-bottom: $base-padding;
+
+  @include respond-to(medium-up) {
+    border: none;
+  }
+
+  li.tab-header-and-content {
+
+    @include respond-to(medium-up) {
+      display: inline;
+    }
+
+    &:first-child a.tab-link {
+      border-top-left-radius: $base-border-radius; 
+      border-top-right-radius: $base-border-radius; 
+      border-top: 0;
+    }
+
+    &:last-child a.tab-link {
+      border-bottom-left-radius: $base-border-radius; 
+      border-bottom-right-radius: $base-border-radius;
+
+      @include respond-to(medium-up) {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+  }
+
+  li.tab-header-and-content a.tab-link {
+    background-color: $tab-inactive-color;
+    border-top: $tab-border;
+    color: $dark-gray;
+    display: block;
+    font-weight: bold;
+    padding: $base-padding/2 $gutter/2;
+
+    @include respond-to(medium-up) {
+      @include inline-block;
+      border-top: 0;
+      border-top-right-radius: $base-border-radius;
+      border-top-left-radius: $base-border-radius;
+    }
+
+    &:hover {
+      color: $hover-link-color;
+    }
+
+    &:focus { 
+      outline: none; 
+    }
+
+    &.is-active {
+      background-color: $tab-active-background;
+      border-bottom: 0;
+      color: $base-link-color;
+
+      @include respond-to(medium-up) {
+        background-color: $tab-active-background;
+        border: $tab-border;
+        border-bottom: 1px solid $tab-active-background;
+        margin-bottom: -1px;
+      }
+    }
+  }
+
+  li.tab-header-and-content .tab-content {
+    padding: $base-padding $gutter;
+    background: $tab-content-background;
+    display: none;
+    overflow: hidden;
+    width: 100%;
+
+    @include respond-to(medium-up) {
+      border-bottom-left-radius: $base-border-radius;
+      border-bottom-right-radius: $base-border-radius;
+      border: $tab-border;
+      float: left;
+      left: 0;
+      padding: $base-padding/2 $gutter/2;
+
+      p {
+        @include columns(2);
+      }
+    }
+  }
+}

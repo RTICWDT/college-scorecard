@@ -1,6 +1,7 @@
 var tagalong = require('tagalong');
 var d3 = require('d3');
 var querystring = require('querystring');
+var jQuery = require('jquery');
 
 if (typeof document !== 'undefined') {
   require('./components/compat/custom-event');
@@ -108,6 +109,11 @@ module.exports = function compare() {
     'size_category',
     'average_cost',
     'average_cost_meter',
+    'net_price_income1',
+    'net_price_income2',
+    'net_price_income3',
+    'net_price_income4',
+    'net_price_income5',
     'net_price_income_meter',
     'grad_rate',
     'grad_rate_meter',
@@ -235,6 +241,7 @@ module.exports = function compare() {
       });
 
       tagalong(compareShareLink, {}, shareLink);
+      addTabAccordions();
 
       picc.ui.alreadyLoaded = true;
 
@@ -354,6 +361,24 @@ module.exports = function compare() {
     );
 
   });
+
+  function addTabAccordions() {
+    // FIX ME: do this in tagalong
+    jQuery('.accordion-tabs li span').first().find('a').addClass('is-active').next().addClass('is-open').show();
+    jQuery('.accordion-tabs').on('click', 'li span> a.tab-link', function (event) {
+      if (!jQuery(this).hasClass('is-active')) {
+        event.preventDefault();
+        var accordionTabs = jQuery(this).closest('.accordion-tabs');
+        accordionTabs.find('.is-open').removeClass('is-open').hide();
+
+        jQuery(this).next().toggleClass('is-open').toggle();
+        accordionTabs.find('.is-active').removeClass('is-active');
+        jQuery(this).addClass('is-active');
+      } else {
+        event.preventDefault();
+      }
+    });
+  }
 
   var win = d3.select(window);
   // close other toggles when one opens
