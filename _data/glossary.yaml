@@ -8,7 +8,7 @@ avg-loan-payment: <strong>Monthly Student Loan Payment</strong> The median month
 
 repayment-rate: <strong>Students Paying Down Their Debt</strong> The share of students who have repaid at least $1 of the principal balance on their federal loans within 3 years of leaving school.
 
-avg-debt: <strong>Typical Total Debt</strong> The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.
+avg-debt: <strong>Typical Total Debt After Gradutation</strong> The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.
 
 student-aid: <strong>Students Receiving Federal Loans</strong> The share of undergraduate students who borrowed federal loans to help pay for college. Excludes Parent PLUS loans.
 
