@@ -1011,6 +1011,9 @@ picc.school.directives = (function() {
         return format.dollars('selectValue')({'selectValue':selectValue});
       }
     },
+    net_price_income_header_row: function() {
+      return '<th>hello</th>';
+    },
 
     advantage_rate: format.percent(fields.EARNINGS_GT_25K),
     advantage_rate_meter: {

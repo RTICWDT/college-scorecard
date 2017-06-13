@@ -12,9 +12,6 @@
 // include site specific base styles
 @import "base/base";
 
-// include site specific Bourbon Refills
-@import "refills/refills";
-
 // include fonts (and @import font-face declarations from /css/fonts)
 @import "base/fonts";
 // include FontAwesome
