@@ -501,9 +501,59 @@ permalink: /compare/
                                     </div>
 
                                 </div><!-- /.net-price-income -->
+                                <div class="net-price-income-option2">
 
+                                    <div class="school-two_col u-wrap" data-bind="school_section">
+                                        <div class="compare-two_col-left">
+                                            <h2 class="figure-heading constrain_width">By Family Income Category</h2>
+                                            <p>Depending on the federal, state, or institutional grant aid available,
+                                                students in your income bracket may pay more or less than the overall average costs.
+                                            </p>
+                                        </div>
+                                        <div class="compare-two_col-right"><div>{% comment %} empty space column {% endcomment %}</div></div>
+                                    </div>
+
+                                    <div class="school-two_col u-wrap" data-bind="school_section">
+
+                                        <div class="net-price-income-table compare-two_col-left">
+                                            <table class="school-table tables">
+                                                <caption class="sr-only">Average cost by family income</caption>
+                                                <thead class="by-family-income-thead">
+                                                    <tr>
+                                                        <th>Family Income</th>
+                                                        <th class="by-family-income-th" align="center" data-bind="school_section">School Name</th>
+                                                    </tr>
+
+                                                </thead>
+                                                <tbody class="by-family-income-tbody">
+                                                     <tr>
+                                                       <td>$0-$30,000</td>
+                                                       <td data-row="net_price_income1" class="income-row" align="center" data-bind="school_section">$XX,XXX</td>
+                                                     </tr>
+                                                     <tr>
+                                                       <td>$30,001-$48,000</td>
+                                                       <td data-row="net_price_income2" class="income-row" align="center" data-bind="school_section">$XX,XXX</td>
+                                                     </tr>
+                                                     <tr>
+                                                       <td>$48,001-$75,000</td>
+                                                       <td data-row="net_price_income3" class="income-row" align="center" data-bind="school_section">$XX,XXX</td>
+                                                     </tr>
+                                                     <tr>
+                                                       <td>$75,001-$110,000</td>
+                                                       <td data-row="net_price_income4" class="income-row" align="center" data-bind="school_section">$XX,XXX</td>
+                                                     </tr>
+                                                     <tr>
+                                                       <td>$110,001+</td>
+                                                       <td data-row="net_price_income5" class="income-row" align="center" data-bind="school_section">$XX,XXX</td>
+                                                     </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="compare-two_col-right"><div>{% comment %} empty space column {% endcomment %}</div></div>
+                                    </div>
+
+                                </div><!-- /.net-price-income-option2 -->
                             </div>
-
                         </div>
                     </aria-accordion>
                 </div>

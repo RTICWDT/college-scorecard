@@ -242,10 +242,50 @@ module.exports = function compare() {
 
       tagalong(compareShareLink, {}, shareLink);
 
+      var thead = document.querySelector('.by-family-income-thead');
+      var tbody = document.querySelector('.by-family-income-tbody');
+      addOption2ByFamilyIncome(school.results, thead, tbody);
+
       picc.ui.alreadyLoaded = true;
 
     });
 
+  }
+
+  /** this will likely not test well on mobile, but is an option **/
+  function addOption2ByFamilyIncome(schools, thead, tbody) {
+    schools.forEach(function(school) {
+      var last = thead.querySelector('.by-family-income-th:last-of-type');
+      var th = last.cloneNode();
+      th.textContent = picc.access(picc.fields.NAME)(school);
+      th.setAttribute('data-school-id', picc.access(picc.fields.ID)(school));
+      if (last.textContent === 'School Name') {
+        insertAfter(th, last);
+        last.parentNode.removeChild(last);
+      } else {
+        insertAfter(th, last);
+      }
+
+      var rows = [].slice.call(tbody.querySelectorAll('tr'));
+      rows.forEach(function(row){
+        var last = row.querySelector('.income-row:last-of-type');
+        var td = last.cloneNode();
+        var incomeLevel = last.getAttribute('data-row');
+        td.textContent = picc.school.directives[incomeLevel](school);
+        td.setAttribute('data-school-id', picc.access(picc.fields.ID)(school));
+        if (last.textContent === '$XX,XXX'){
+          insertAfter(td,last);
+          last.parentNode.removeChild(last);
+        } else {
+          insertAfter(td, last);
+        }
+      });
+
+    })
+  }
+
+  function insertAfter(newNode, referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
   }
 
   function toggleDisplay(e) {

@@ -324,6 +324,30 @@ figcaption {
     }
   }
 
+  .net-price-income-option2 {
+
+    .by-family-income-thead th {
+      background-color: $darker-yellow;
+      margin-right: $base-padding-lite;
+      &:first-of-type {
+        background-color: $white;
+      }
+      padding: $base-padding-lite;
+    }
+
+    .by-family-income-tbody td {
+      padding: $base-padding-lite;
+      font-weight: 700;
+      &:first-of-type {
+        font-weight: inherit;
+      }
+
+      &[data-highlight="true"] {
+        background-color: $orange;
+      }
+    }
+  }
+
   .race-ethnicity {
     .compare-two_col-left {
       padding-top: 0;
