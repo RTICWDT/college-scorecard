@@ -29,8 +29,34 @@
         }
       }
 
-      .toggle-control .fa-star {
-        color: $darker-yellow;
+      .toggle-control {
+
+        @include respond-to(small-up) {
+          width: 290px;
+        }
+        .fa-star {
+          color: $darker-yellow;
+        }
+
+        button {
+          @include respond-to(teensy-up) {
+            width: 124px;
+            text-indent: -0.8em;
+            margin-left: 2em;
+            .fa-chevron-down {
+              padding-left: 18px;
+            }
+          }
+
+          @include respond-to(small-up) {
+            width: 290px;
+            text-indent: inherit;
+            margin-left: inherit;
+            .fa-chevron-down {
+              padding-left: 15px;
+            }
+          }
+        }
       }
 
     }
