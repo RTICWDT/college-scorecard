@@ -362,6 +362,7 @@ figcaption {
     }
 
     .by-family-income-tbody td {
+      text-align: center;
       padding: $base-padding-lite;
       font-weight: 700;
       &:first-of-type {
