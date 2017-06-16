@@ -77,7 +77,20 @@ module.exports = function compare() {
     picc.fields.MONTHLY_LOAN_PAYMENT,
     picc.fields.PART_TIME_SHARE,
     // under investigation flag
-    picc.fields.UNDER_INVESTIGATION
+    picc.fields.UNDER_INVESTIGATION,
+    //SAT/ACT
+    picc.fields.ACT_MIDPOINT,
+    picc.fields.ACT_25TH_PCTILE,
+    picc.fields.ACT_75TH_PCTILE,
+    picc.fields.SAT_MATH_MIDPOINT,
+    picc.fields.SAT_MATH_25TH_PCTILE,
+    picc.fields.SAT_MATH_75TH_PCTILE,
+    picc.fields.SAT_READING_MIDPOINT,
+    picc.fields.SAT_READING_25TH_PCTILE,
+    picc.fields.SAT_READING_75TH_PCTILE,
+    picc.fields.SAT_WRITING_MIDPOINT,
+    picc.fields.SAT_WRITING_25TH_PCTILE,
+    picc.fields.SAT_WRITING_75TH_PCTILE
   ];
 
   var INCOME_LEVELS = [
@@ -129,7 +142,19 @@ module.exports = function compare() {
     'pell_grant_meter',
     'average_total_debt_meter',
     'federal_aid_meter',
-    'average_monthly_loan_payment_meter'
+    'average_monthly_loan_payment_meter',
+    'act_scores_visible',
+    'act_scores_invisible',
+    'act_scores',
+    'sat_reading_scores_visible',
+    'sat_reading_scores_invisible',
+    'sat_reading_scores',
+    'sat_math_scores_visible',
+    'sat_math_scores_invisible',
+    'sat_math_scores',
+    'sat_writing_scores_visible',
+    'sat_writing_scores_invisible',
+    'sat_writing_scores',
   ]);
 
   directives['school_section'] = {

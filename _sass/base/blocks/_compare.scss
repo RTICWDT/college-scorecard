@@ -183,6 +183,10 @@ figcaption {
     .picc-side-meter-bar {
       background-color: $orange !important;
     }
+
+    .picc-range-bar {
+      background-color: $orange !important;
+    }
   }
 
 }
@@ -190,6 +194,20 @@ figcaption {
 .section-card_container-compare_more {
 
   @extend .section-card_container-school;
+
+  .base-p-top {
+    padding-top: $base-padding;
+  }
+  .base-p-right {
+    padding-right: $base-padding;
+  }
+  .base-p-bottom {
+    padding-bottom: $base-padding;
+  }
+  .base-p-left {
+    padding-left: $base-padding;
+  }
+
 
   .compare-two_col-left {
     padding-top: $base-padding;
@@ -388,6 +406,61 @@ figcaption {
         }
       }
     }
+  }
+
+  .selectivity-scores {
+
+    .section-card_container-compare {
+      padding-right: 15px;
+    }
+
+    .score-type {
+      &:first-of-type {
+        padding-top: $base-padding-extra;
+      }
+      padding-top: $base-padding;
+    }
+
+    picc-range {
+      height: 1em;
+      max-width: 100%;
+      margin-bottom: 0;
+      .picc-range-label.picc-range-label-min span,
+      .picc-range-label.picc-range-label-max span {
+        top: 8px;
+      }
+      .picc-range-label.picc-range-label-lower span,
+      .picc-range-label.picc-range-label-upper span {
+        top: -140%;
+      }
+      & + figcaption{
+        background: rgba(255,255,255,0.9);
+        position: relative;
+        z-index: 100;
+        display: inline-block;
+      }
+    }
+
+    .no-data {
+      padding: 0 !important;
+      margin-bottom: 0;
+      border: none;
+      span {
+        color: $black;
+      }
+      span:first-of-type {
+        color: $dark-gray;
+        height: 1.2em;
+        font-size: .8rem;
+        background-color: $light-gray;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+
+    }
+
   }
 
 }

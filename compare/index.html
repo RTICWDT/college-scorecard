@@ -937,6 +937,113 @@ permalink: /compare/
                         </div>
                     </aria-accordion>
                 </div>
+                <div class="section-card_container-compare_more">
+                    <aria-accordion id="selectivity">
+                        <div>
+                            <h1 class="search_category">
+                                <button aria-expanded="false" aria-controls="selectivity-content">
+                                    SAT/ACT Scores
+                                </button>
+                            </h1>
+
+                            <div id="selectivity-content" aria-hidden="true">
+
+                                <div style="padding-top: 20px;">
+                                    <h2 aria-describedby="tip-test-scores" tabindex="0">
+                                        Test Scores
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>
+                                    <p>Students who were admitted and enrolled typically had standardized test scores in these ranges.</p>
+
+                                    <div class="selectivity-scores base-p-top">
+                                        <h3 class="h2">SAT</h3>
+
+                                        <h3 class="score-type">Critical Reading</h3>
+                                        <div class="section-card_container-compare">
+                                            <span>
+                                                <figure data-bind="sat_reading_scores_visible">
+                                                    <span data-bind="school_section">
+                                                        <h4 class="sr-only">Critical Reading</h4>
+                                                        <picc-range data-bind="sat_reading_scores" max="800">
+                                                        </picc-range>
+                                                        <figcaption>
+                                                            <span class="name">School Name</span>
+                                                        </figcaption>
+                                                    </span>
+                                                </figure>
+                                                <p class="no-data" data-bind="sat_reading_scores_invisible">
+                                                    <span>Data not available</span>
+                                                    <span class="new-line" data-bind="name2">School Name</span>
+                                                </p>
+                                            </span>
+                                        </div>
+
+                                        <h3 class="score-type">Math</h3>
+                                        <div class="section-card_container-compare">
+                                            <span>
+                                                <figure data-bind="sat_math_scores_visible">
+                                                    <span data-bind="school_section">
+                                                        <h4 class="sr-only">Math</h4>
+                                                        <picc-range data-bind="sat_math_scores" max="800">
+                                                        </picc-range>
+                                                        <figcaption>
+                                                            <span class="name">School Name</span>
+                                                        </figcaption>
+                                                    </span>
+                                                </figure>
+                                                <p class="no-data" data-bind="sat_math_scores_invisible">
+                                                    <span>Data not available</span>
+                                                    <span data-bind="name2">School Name</span>
+                                                </p>
+                                            </span>
+                                        </div>
+
+                                        <h3 class="score-type">Writing</h3>
+                                        <div class="section-card_container-compare">
+                                            <span>
+                                                <figure data-bind="sat_writing_scores_visible">
+                                                    <span data-bind="school_section">
+                                                        <h4 class="sr-only">Writing</h4>
+                                                        <picc-range data-bind="sat_writing_scores" max="800">
+                                                        </picc-range>
+                                                        <figcaption>
+                                                            <span class="name">School Name</span>
+                                                        </figcaption>
+                                                    </span>
+                                                </figure>
+                                                <p class="no-data" data-bind="sat_writing_scores_invisible">
+                                                   <span>Data not available</span>
+                                                   <span data-bind="name2">School Name</span>
+                                                </p>
+                                            </span>
+                                        </div>
+
+                                        <h3 class="h2">ACT</h3>
+                                        <div class="section-card_container-compare">
+                                            <span>
+                                                <figure data-bind="act_scores_visible">
+                                                    <span data-bind="school_section">
+                                                        <picc-range data-bind="act_scores" min="0" max="36">
+                                                        </picc-range>
+                                                        <figcaption>
+                                                            <span class="name">School Name</span>
+                                                        </figcaption>
+                                                    </span>
+                                                </figure>
+                                                <p class="no-data" data-bind="act_scores_invisible">
+                                                   <span>Data not available</span>
+                                                   <span data-bind="name2">School Name</span>
+                                                </p>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </aria-accordion>
+                </div>
             </div>
         </div>
     </section>
