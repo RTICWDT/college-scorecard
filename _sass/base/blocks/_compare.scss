@@ -425,6 +425,9 @@ figcaption {
       height: 1em;
       max-width: 100%;
       margin-bottom: 0;
+      .picc-range-label span {
+        width: 3em;
+      }
       .picc-range-label.picc-range-label-min span,
       .picc-range-label.picc-range-label-max span {
         top: 8px;
