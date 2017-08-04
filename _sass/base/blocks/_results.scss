@@ -180,6 +180,23 @@
 
 }
 
+.container {
+  // sticky search toggles on results page
+  // these only apply when scrolled
+  top: 0;
+  left: 0;
+  right: 0;
+
+  .search-toggles.fixed-container > & {
+    position: fixed;
+    max-width: inherit;
+    background-color: $lighter-gray;
+    z-index: $z-second;
+    box-shadow: 0 4px 2px -2px $mid-dark-gray;
+
+  }
+}
+
 .results-main {
   background-color: $mid-gray;
 }

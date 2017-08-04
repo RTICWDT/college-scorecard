@@ -9,6 +9,7 @@ module.exports = function search() {
   var resultsRoot = document.querySelector('.search-results');
   var paginator = resultsRoot.querySelector('.pagination');
   var bottomPaginator = resultsRoot.querySelector('.pagination_bottom');
+  var toggleContainer = document.querySelector('.toggles.search-toggles');
 
   var form = new formdb.Form('#search-form');
   var query = querystring.parse(location.search.substr(1));
@@ -544,5 +545,25 @@ module.exports = function search() {
       console.warn('unable to scroll results into view:', error);
     }
   }
+
+  // create a sticky fixed search-toggle container when scrolled
+
+  function checkToggleContainerOffset() {
+    return toggleContainer.offsetTop <= window.scrollY;
+  }
+
+  var handleStickyness = function() {
+    toggleContainer.classList.toggle('fixed-container', checkToggleContainerOffset());
+  };
+
+  function tryCheck() {
+    requestAnimationFrame(handleStickyness)
+  }
+
+  window.addEventListener('scroll', tryCheck, false);
+  window.addEventListener('resize', tryCheck, false);
+
+
+
 
 };
