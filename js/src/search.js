@@ -44,6 +44,7 @@ module.exports = function search() {
     'name',
     'city',
     'state',
+    'school_container',
     'selected_school',
     'under_investigation',
     'size_number',

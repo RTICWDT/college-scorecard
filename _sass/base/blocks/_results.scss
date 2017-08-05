@@ -182,11 +182,10 @@
 
 .container {
   // sticky search toggles on results page
-  // these only apply when scrolled
   top: 0;
   left: 0;
   right: 0;
-
+  // these only apply when scrolled
   .search-toggles.fixed-container > & {
     position: fixed;
     max-width: inherit;
@@ -310,6 +309,47 @@
     @include omega-reset(3n);
     @include span-columns(3);
     @include omega(4n);
+  }
+}
+
+.school.results-card[data-compare="true"] {
+  display: flex;
+  padding: 4px;
+  //margin: -5px;
+  flex-direction: column;
+  background-color: $darker-yellow;
+  /* Single pixel data uri image http://jsfiddle.net/LPxrT/
+  /* background-image: darker-yellow, darker-yellow, white */
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAPAAAO66KP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='),
+  url('data:image/gif;base64,R0lGODlhAQABAPAAAO66KP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='),
+  url('data:image/gif;base64,R0lGODlhAQABAPAAAP///////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==');
+  background-repeat: no-repeat;
+  background-size: 0 2px, 0 100%, 0% 2px;
+  background-position: top center, top center, bottom center;
+  -webkit-animation: drawBorderFromCenter 1s;
+  .content-box {
+    flex: 1;
+    padding: 1em;
+    border-radius: 0.4em;
+    background-color: $white !important;
+  }
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes drawBorderFromCenter {
+  0% {
+    background-size: 0 2px, 0 0, 100% 100%;
+  }
+  20% {
+    background-size: 100% 2px, 100% 0, 100% 100%;
+  }
+  66%
+  {
+    background-size: 100% 2px, 100% 98%, 100% 100%;
+  }
+  99%
+  {
+    background-size: 100% 2px, 100% 98%, 0 2px;
   }
 }
 

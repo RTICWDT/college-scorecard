@@ -884,6 +884,13 @@ picc.school.directives = (function() {
     city:           access(fields.CITY),
     state:          access(fields.STATE),
 
+    school_container: function(d) {
+        // hack for tagalong not allowing binding to direct child template element
+        this.setAttribute('data-school-id', access(fields.ID)(d));
+        this.setAttribute('data-compare', (picc.school.selection.isSelected(access(fields.ID)(d), 'compare') >= 0));
+        return null;
+      },
+
     selected_school: {
       '@aria-pressed': function(d) {
          var collection = this.getAttribute('data-school');
@@ -1300,27 +1307,41 @@ picc.school.selection = {
       var collection = dataset.school;
       var isSelected = picc.school.selection.isSelected(+dataset.schoolId, collection);
       var selectedSchools = picc.school.selection.all(collection);
+      var selectedCard = document.querySelector('.school.results-card[data-school-id="'+dataset.schoolId+'"]');
 
       if (isSelected >= 0) {
         // remove school from collection
         selectedSchools.splice(isSelected, 1);
-          window.localStorage.setItem(collection, JSON.stringify(selectedSchools));
-          if (el.hasAttribute('aria-pressed')) {
-            el.setAttribute('aria-pressed', false);
-          }
-          // compare schools page we need to remove highlighted sections on toggle remove school
-          if (el.previousElementSibling && el.previousElementSibling.hasAttribute('data-highlight-btn')) {
-            picc.school.selection.highlightRemove(dataset.schoolId);
-          }
+        // save the new collection
+        window.localStorage.setItem(collection, JSON.stringify(selectedSchools));
+        // toggle the compare button
+        picc.school.selection.toggleBtn(el,false);
+        picc.school.selection.toggleCard(selectedCard, false);
+        // compare schools page we need to remove highlighted sections on toggle remove school
+        if (el.previousElementSibling && el.previousElementSibling.hasAttribute('data-highlight-btn')) {
+          picc.school.selection.highlightRemove(dataset.schoolId);
+        }
       } else {
         // add school to collection
         selectedSchools.push(dataset);
-          window.localStorage.setItem(collection, JSON.stringify(selectedSchools));
-        if (el.hasAttribute('aria-pressed')) {
-          el.setAttribute('aria-pressed', true);
-        }
+        // save the new collection
+        window.localStorage.setItem(collection, JSON.stringify(selectedSchools));
+        picc.school.selection.toggleBtn(el, true);
+        picc.school.selection.toggleCard(selectedCard, true);
       }
 
+    },
+
+    toggleBtn: function (el,state) {
+      if (el.hasAttribute('aria-pressed')) {
+        el.setAttribute('aria-pressed', state);
+      }
+    },
+
+    toggleCard: function(el, state) {
+      if (el.hasAttribute('data-compare')) {
+        el.setAttribute('data-compare', state)
+      }
     },
 
     // remove any highlight from a deselecte school
