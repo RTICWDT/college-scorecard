@@ -214,4 +214,52 @@ $toggle-padding: 15px;
     }
   }
 
+  fieldset {
+    max-height: 50vh;
+    overflow-y: auto;
+    /* a couple ios fixes for showing a scrollbar */
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      border: 3px solid #fff;
+      background-color: rgba(0, 0, 0, .3);
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #fff;
+      border-radius: 8px;
+    }
+
+  }
+}
+
+.toggle-content-search {
+
+  .controls-container {
+    max-height: 50vh;
+    overflow-y: auto;
+
+    /* a couple ios fixes for showing a scrollbar */
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      border: 3px solid #fff;
+      background-color: rgba(0, 0, 0, .3);
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #fff;
+      border-radius: 8px;
+    }
+  }
 }
