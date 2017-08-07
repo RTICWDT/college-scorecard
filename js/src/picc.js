@@ -841,7 +841,7 @@ picc.school.directives = (function() {
             url: (function() {
               var qs =  querystring.parse(location.search.substr(1));
               var share = [];
-              var schools = (qs['schools[]']) ? qs['schools[]'] : picc.school.selection.all('compare');
+              var schools = (qs['schools[]']) ? qs['schools[]'] : picc.school.selection.all(picc.school.selection.LSKey);
 
               if (schools) {
                 share = schools.map(function(item) {
@@ -887,20 +887,28 @@ picc.school.directives = (function() {
     school_container: function(d) {
         // hack for tagalong not allowing binding to direct child template element
         this.setAttribute('data-school-id', access(fields.ID)(d));
-        this.setAttribute('data-compare', (picc.school.selection.isSelected(access(fields.ID)(d), 'compare') >= 0));
+        this.setAttribute('data-compare', (picc.school.selection.isSelected(access(fields.ID)(d), picc.school.selection.LSKey) >= 0));
         return null;
       },
 
     selected_school: {
       '@aria-pressed': function(d) {
-         var collection = this.getAttribute('data-school');
-         return (picc.school.selection.isSelected(access(fields.ID)(d), collection) >= 0);
+         return (picc.school.selection.isSelected(access(fields.ID)(d), picc.school.selection.LSKey) >= 0);
+      },
+      '@data-school': function(d) {
+        return picc.school.selection.LSKey;
       },
       '@data-school-id': function(d) {
         return access(fields.ID)(d);
       },
       '@data-school-name': function(d) {
         return access(fields.NAME)(d);
+      },
+      '@aria-describedby': function(d) {
+        return (picc.school.selection.all(picc.school.selection.LSKey).length > 9 &&
+                picc.school.selection.isSelected(access(fields.ID)(d), picc.school.selection.LSKey) === -1)
+                  ? 'tip-compare-max'
+                  : null;
       }
     },
 
@@ -1288,6 +1296,8 @@ picc.school.directives = (function() {
  */
 picc.school.selection = {
 
+    LSKey: 'compare-schools',
+
     all: function (key) {
       return JSON.parse(window.localStorage.getItem(key)) || [];
     },
@@ -1296,6 +1306,22 @@ picc.school.selection = {
       return (picc.school.selection.all(key).map(function(fav){
         return +fav.schoolId;
       }).indexOf(id));
+    },
+
+    showMaxSelected: function() {
+
+      var compareBtns = [].slice.call(document.querySelectorAll('button.button-compare_schools:not([aria-pressed="true"])'));
+      for(var i=0; i<compareBtns.length;i++) {
+        compareBtns[i].setAttribute('aria-describedby', "tip-compare-max");
+      }
+
+    },
+
+    hideMaxSelected: function() {
+      var compareBtns = [].slice.call(document.querySelectorAll('button.button-compare_schools'));
+      for(var i=0; i<compareBtns.length;i++) {
+        compareBtns[i].removeAttribute('aria-describedby');
+      }
     },
 
     toggle: function (e, el) {
@@ -1310,6 +1336,11 @@ picc.school.selection = {
       var selectedCard = document.querySelector('.school.results-card[data-school-id="'+dataset.schoolId+'"]');
 
       if (isSelected >= 0) {
+
+        if (selectedSchools.length === 10) {
+          picc.school.selection.hideMaxSelected();
+        }
+
         // remove school from collection
         selectedSchools.splice(isSelected, 1);
         // save the new collection
@@ -1322,14 +1353,25 @@ picc.school.selection = {
           picc.school.selection.highlightRemove(dataset.schoolId);
         }
       } else {
-        // add school to collection
-        selectedSchools.push(dataset);
-        // save the new collection
-        window.localStorage.setItem(collection, JSON.stringify(selectedSchools));
-        picc.school.selection.toggleBtn(el, true);
-        picc.school.selection.toggleCard(selectedCard, true);
-      }
 
+        if (selectedSchools.length < 10) {
+          // add school to collection
+          selectedSchools.push(dataset);
+          picc.school.selection.toggleBtn(el, true);
+          picc.school.selection.toggleCard(selectedCard, true);
+
+          if (selectedSchools.length > 9) {
+            picc.school.selection.showMaxSelected();
+          }
+
+          // save the new collection
+          window.localStorage.setItem(collection, JSON.stringify(selectedSchools));
+
+        } else {
+          // only compare up to 10 schools
+          picc.school.selection.showMaxSelected();
+        }
+      }
     },
 
     toggleBtn: function (el,state) {
@@ -1395,7 +1437,7 @@ picc.school.selection = {
     },
 
     renderCompareToggles: function() {
-        var collection = 'compare';
+        var collection = picc.school.selection.LSKey;
         tagalong(
           '#edit-compare-list',
           picc.school.selection.all(collection),
@@ -1406,6 +1448,9 @@ picc.school.selection = {
             checkbox_label: {
               '@for': function(d) {
                 return 'edit-compare-' + picc.access('schoolId')(d);
+              },
+              '@data-school': function(d) {
+                return collection;
               },
               '@data-school-id': function (d) {
                 return picc.access('schoolId')(d);
@@ -1451,7 +1496,7 @@ picc.school.selection = {
       var compareLink = d3.select('#compare-link');
       if (!compareLink.empty()) {
         var linkContainer = d3.select(compareLink.node().parentNode);
-        if (picc.school.selection.all('compare').length) {
+        if (picc.school.selection.all(picc.school.selection.LSKey).length) {
           compareLink
             .attr('href', picc.BASE_URL + '/compare/')
             .attr('aria-disabled', null);

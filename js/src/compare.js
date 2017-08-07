@@ -12,7 +12,8 @@ module.exports = function compare() {
   var loadable = d3.select('.loadable');
   var root = d3.select('.compare-bg');
   var compareRoot = document.querySelector('.compare-schools');
-  var compareSchools = picc.school.selection.all('compare');
+  var LSKey = picc.school.selection.LSKey;
+  var compareSchools = picc.school.selection.all(LSKey);
 
 
   // if schools were shared by querystring, compare those instead of any local school picks
@@ -186,7 +187,7 @@ module.exports = function compare() {
 
   function onChange() {
 
-    compareSchools = (shareComparison) ? qs['schools[]'] : picc.school.selection.all('compare');
+    compareSchools = (shareComparison) ? qs['schools[]'] : picc.school.selection.all(LSKey);
 
     // build query for API call
     query = buildQuery(compareSchools);
@@ -325,7 +326,7 @@ module.exports = function compare() {
     }
 
     // show error if last checkbox was unchecked (nothing to compare)
-    if (!picc.school.selection.all('compare').length) {
+    if (!picc.school.selection.all(LSKey).length) {
       root.classed('js-loaded', false);
       loadable.classed('js-error', true);
       return showError(picc.errors.NO_SCHOOLS_TO_COMPARE);

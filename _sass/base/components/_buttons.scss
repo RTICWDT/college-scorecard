@@ -126,34 +126,26 @@ input[type="submit"] {
     float: right;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     &[aria-pressed="true"] {
-      color: $darker-yellow;;
+      color: $darker-yellow;
     }
-
-  }
-
-  &.button-fotw_schools {
-    @include font-size($h1-large);
-    background-color: $white;
-    color: $mid-dark-gray;
-    letter-spacing: 0;
-    line-height: 1;
-    white-space: normal;
-    width: auto;
-    float: right;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    .fa {
-      font-size: 40px;
-    }
-
-    &[aria-pressed="true"] {
-      .fa:before {
-        color: $green;
-        content: '\f058';
+    /* Conditional tooltips for selected school limits */
+    &[aria-describedby^="tip-"] {
+      cursor: not-allowed !important;
+      &:hover,
+      &:focus{
+        i {
+          color: inherit !important;
+        }
+      }
+      .fa {
+        cursor: not-allowed !important;
       }
     }
-    &:hover {
-      background-color: $white;
-      color: $darker-green;
+    .fa {
+      z-index: $z-first;
+      &.tooltip-target > [role="tooltip"] {
+        font-family: $sans-serif !important;
+      }
     }
 
   }
