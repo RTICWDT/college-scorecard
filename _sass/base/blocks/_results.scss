@@ -328,15 +328,15 @@
   background-position: top center, top center, bottom center;
   -webkit-animation: drawBorderFromCenter 1s;
   .content-box {
-    flex: 1;
+    flex: 1 0 auto;
     padding: 1em;
     border-radius: 0.4em;
     background-color: $white !important;
   }
 }
 
-/* Chrome, Safari, Opera */
-@-webkit-keyframes drawBorderFromCenter {
+
+@include keyframes(drawBorderFromCenter) {
   0% {
     background-size: 0 2px, 0 0, 100% 100%;
   }
