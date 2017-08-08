@@ -124,6 +124,7 @@ input[type="submit"] {
     white-space: normal;
     width: auto;
     float: right;
+    position:relative;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     &[aria-pressed="true"] {
       color: $darker-yellow;
@@ -150,11 +151,21 @@ input[type="submit"] {
       }
     }
     .fa {
+      z-index: $z-first;
       &.tooltip-target > [role="tooltip"] {
         font-family: $sans-serif !important;
       }
     }
 
+  }
+  /* ugh, _only_ IE11 */
+  _:-ms-fullscreen, :root &.button-compare_schools {
+    margin-right: 10px;
+    position: inherit;
+    .fa {
+      margin-top: -20px;
+      position: absolute;
+    }
   }
 
   &.button-highlight_schools {
