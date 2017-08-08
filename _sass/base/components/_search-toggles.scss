@@ -9,6 +9,10 @@ $toggle-padding: 15px;
     padding-bottom: 0;
     position: relative;
 
+    @include respond-to(teensy-down) {
+      float: left;
+    }
+
     &[aria-expanded=true] {
       background-color: $white;
     }

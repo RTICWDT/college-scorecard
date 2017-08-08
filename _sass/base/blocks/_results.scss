@@ -159,7 +159,12 @@
 }
 
 .search-toggles .toggle-content-compare_schools {
-  left:0;
+
+  left: 0;
+  @include respond-to(tiny-down) {
+    right:0;
+    left: inherit;
+  }
 
   @media only screen and (min-width:556px)
   and (max-width: 599px) {
