@@ -129,20 +129,27 @@ input[type="submit"] {
       color: $darker-yellow;
     }
     /* Conditional tooltips for selected school limits */
-    &[aria-describedby^="tip-"] {
+    &[aria-describedby="tip-compare-max"] {
       cursor: not-allowed !important;
+      .fa {
+        cursor: not-allowed !important;
+      }
+    }
+    &[aria-describedby="tip-compare-add"] {
+      cursor: pointer;
+      .fa {
+        cursor: pointer;
+      }
+    }
+    &[aria-describedby^="tip-"] {
       &:hover,
       &:focus{
         i {
           color: inherit !important;
         }
       }
-      .fa {
-        cursor: not-allowed !important;
-      }
     }
     .fa {
-      z-index: $z-first;
       &.tooltip-target > [role="tooltip"] {
         font-family: $sans-serif !important;
       }

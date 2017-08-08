@@ -908,7 +908,7 @@ picc.school.directives = (function() {
         return (picc.school.selection.all(picc.school.selection.LSKey).length > 9 &&
                 picc.school.selection.isSelected(access(fields.ID)(d), picc.school.selection.LSKey) === -1)
                   ? 'tip-compare-max'
-                  : null;
+                  : 'tip-compare-add';
       }
     },
 
