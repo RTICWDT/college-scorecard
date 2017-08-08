@@ -1347,6 +1347,7 @@ picc.school.selection = {
         window.localStorage.setItem(collection, JSON.stringify(selectedSchools));
         // toggle the compare button
         picc.school.selection.toggleBtn(el,false);
+          // highlight the card if visible on page
         picc.school.selection.toggleCard(selectedCard, false);
         // compare schools page we need to remove highlighted sections on toggle remove school
         if (el.previousElementSibling && el.previousElementSibling.hasAttribute('data-highlight-btn')) {
@@ -1376,13 +1377,13 @@ picc.school.selection = {
     },
 
     toggleBtn: function (el,state) {
-      if (el.hasAttribute('aria-pressed')) {
+      if (el && el.hasAttribute('aria-pressed')) {
         el.setAttribute('aria-pressed', state);
       }
     },
 
     toggleCard: function(el, state) {
-      if (el.hasAttribute('data-compare')) {
+      if (el && el.hasAttribute('data-compare')) {
         el.setAttribute('data-compare', state)
       }
     },
