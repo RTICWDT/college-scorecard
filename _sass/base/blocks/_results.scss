@@ -186,7 +186,8 @@
   left: 0;
   right: 0;
   // these only apply when scrolled
-  .search-toggles.fixed-container > & {
+  .search-toggles.fixed-container > &,
+  .search-toggles[data-fixed="true"] > & {
     position: fixed;
     max-width: inherit;
     background-color: $lighter-gray;

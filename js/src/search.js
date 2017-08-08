@@ -14,6 +14,9 @@ module.exports = function search() {
   var form = new formdb.Form('#search-form');
   var query = querystring.parse(location.search.substr(1));
   picc.form.autocompleteName('#search-form');
+  if (picc.ui.ie) {
+    picc.ui.stickyFixIE();
+  }
   // console.info('initial query:', query);
 
   // the current outbound request
@@ -405,6 +408,9 @@ module.exports = function search() {
       }
       tagalong(resultsList, data.results, directives);
 
+      //set compare counter
+      picc.school.selection.setCount();
+
       picc.ui.alreadyLoaded = true;
 
       console.timeEnd && console.timeEnd('[render]');
@@ -548,9 +554,8 @@ module.exports = function search() {
   }
 
   // create a sticky fixed search-toggle container when scrolled
-
   function checkToggleContainerOffset() {
-    return toggleContainer.offsetTop <= window.scrollY;
+    return toggleContainer.offsetTop <= window.pageYOffset;
   }
 
   var handleStickyness = function() {
@@ -558,13 +563,21 @@ module.exports = function search() {
   };
 
   function tryCheck() {
-    requestAnimationFrame(handleStickyness)
+    if(!picc.ui.ie) {
+      requestAnimationFrame(handleStickyness);
+    } else {
+      // fall back due to IE bug with classList.toggle second (force) parameter
+      toggleContainer.setAttribute('data-fixed', checkToggleContainerOffset());
+    }
   }
+
+  window.requestAnimationFrame = window.requestAnimationFrame
+    || window.mozRequestAnimationFrame
+    || window.webkitRequestAnimationFrame
+    || window.msRequestAnimationFrame
+    || function(f){return setTimeout(f, 1000/60)}; // simulate calling code 60
 
   window.addEventListener('scroll', tryCheck, false);
   window.addEventListener('resize', tryCheck, false);
-
-
-
 
 };

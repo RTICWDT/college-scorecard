@@ -1372,6 +1372,7 @@ picc.school.selection = {
           picc.school.selection.showMaxSelected();
         }
       }
+      picc.school.selection.setCount();
     },
 
     toggleBtn: function (el,state) {
@@ -1383,6 +1384,13 @@ picc.school.selection = {
     toggleCard: function(el, state) {
       if (el.hasAttribute('data-compare')) {
         el.setAttribute('data-compare', state)
+      }
+    },
+
+    setCount: function() {
+      var counter = document.querySelector('.selection-count');
+      if (counter) {
+       counter.textContent = picc.school.selection.all(picc.school.selection.LSKey).length;
       }
     },
 

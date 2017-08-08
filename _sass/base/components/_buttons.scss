@@ -174,7 +174,22 @@ input[type="submit"] {
       background: url(../img/highlighter-active.svg) no-repeat,
     }
   }
-
+  &[aria-controls="compare_schools-content"] {
+    .selection-count {
+      font-size: 9px;
+      font-weight: bold;
+      line-height: 15px;
+      position: absolute;
+      //top: -5px;
+      right: 47px;
+      width: 15px;
+      height: 15px;
+      text-align: center;
+      color: #fff;
+      border-radius: 50%;
+      background: $green;
+    }
+  }
 }
 
 button.block {
