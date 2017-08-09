@@ -477,7 +477,6 @@ figcaption {
 
 }
 
-.compare-schools [data-bind="school_section"],
-.compare-schools [data-bind^="sat_"]{
+.compare-schools [data-bind="school_section"][data-school-id] {
   cursor: pointer;
 }
