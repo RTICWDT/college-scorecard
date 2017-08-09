@@ -399,7 +399,7 @@ module.exports = function compare() {
     var dataSchoolId = 'data-school-id';
     picc.delegate(
       document.body,
-      // if the element matches '[aria-pressed] && [data-highlight]'
+      // if the element matches '[data-bind="school_section"] && [data-school-id]'
       function() {
         return this.closest('[data-bind="school_section"]').hasAttribute('data-school-id');
       },

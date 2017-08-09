@@ -1,8 +1,9 @@
 'use strict';
 
 if (typeof window !== 'undefined') {
-  // aight, for polyfilling common JS APIs
+  // for polyfilling common JS APIs
   require('aight');
+  require('element-closest');
   // web components
   require('./components');
   var tagalong = require('tagalong');
