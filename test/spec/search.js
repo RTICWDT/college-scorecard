@@ -364,7 +364,7 @@ describe('compare', function() {
     var counterBefore = yield browser
       .getText('[aria-controls="compare_schools-content"] [data-counter="compare"]');
 
-    var ariaPressed = yield browser
+    yield browser
       .click(schoolSelector)
       .getAttribute(schoolSelector, 'aria-pressed');
 
@@ -382,7 +382,7 @@ describe('compare', function() {
     var counterBefore = yield browser
       .getText('[aria-controls="compare_schools-content"] [data-counter="compare"]');
 
-    var ariaPressed = yield browser
+    yield browser
       .click(schoolSelector)
       .getAttribute(schoolSelector, 'aria-pressed');
 
@@ -390,6 +390,26 @@ describe('compare', function() {
       .getText('[aria-controls="compare_schools-content"] [data-counter="compare"]');
 
     assert.equal(counterBefore - 1, +counterAfter);
+  });
+
+  it('should allow selecting up to ten (10) schools maximum', function*(){
+    yield utils.runSearch();
+    yield utils.getVisibleResults();
+
+    yield browser
+      .execute(function(){
+        var cardButtons = [].slice.call(document.querySelectorAll('.results-card button.button-compare_schools'));
+        console.log('cards', cardButtons);
+
+        for (var i=0;i < 11; i++) {
+          cardButtons[i].click();
+        }
+      });
+
+    var counterAfter = yield browser
+      .getText('[aria-controls="compare_schools-content"] [data-counter="compare"]');
+
+    assert.equal(+counterAfter, 10);
   });
 
 });
