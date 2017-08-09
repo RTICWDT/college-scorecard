@@ -206,7 +206,7 @@ describe('search', function() {
   it('should contain only public schools if selected', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#search-form > fieldset:last-of-type h1 [aria-controls]')
+        .click('#search-form > .controls-container > fieldset:last-of-type h1 [aria-controls]')
         .execute(function() {
           document.getElementById('type-public').click(); });
       });
@@ -216,7 +216,7 @@ describe('search', function() {
   it('should contain only private schools if selected', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#search-form > fieldset:last-of-type h1 [aria-controls]')
+        .click('#search-form > .controls-container > fieldset:last-of-type h1 [aria-controls]')
         .execute(function() {
           document.getElementById('type-private').click(); });
       });
@@ -227,7 +227,7 @@ describe('search', function() {
   it('should contain only for profit schools if selected', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#search-form fieldset:last-of-type h1 [aria-controls]')
+        .click('#search-form > .controls-container > fieldset:last-of-type h1 [aria-controls]')
         .execute(function() {
           document.getElementById('type-profit').click(); });
       });
