@@ -355,4 +355,41 @@ describe('compare', function() {
     assert.equal(checkboxes.value.length, 0);
   });
 
+  it('should increment the selected compare school counter bubble when a school is added', function*(){
+    yield utils.runSearch();
+    yield utils.getVisibleResults();
+
+    var schoolSelector = '.school.results-card:first-child .button-compare_schools';
+
+    var counterBefore = yield browser
+      .getText('[aria-controls="compare_schools-content"] [data-counter="compare"]');
+
+    var ariaPressed = yield browser
+      .click(schoolSelector)
+      .getAttribute(schoolSelector, 'aria-pressed');
+
+    var counterAfter = yield browser
+      .getText('[aria-controls="compare_schools-content"] [data-counter="compare"]');
+
+    assert.equal(counterBefore + 1, +counterAfter);
+  });
+
+  it('should decrement the selected compare school counter bubble when a school is removed', function*(){
+    yield utils.getVisibleResults();
+
+    var schoolSelector = '.school.results-card:first-child .button-compare_schools';
+
+    var counterBefore = yield browser
+      .getText('[aria-controls="compare_schools-content"] [data-counter="compare"]');
+
+    var ariaPressed = yield browser
+      .click(schoolSelector)
+      .getAttribute(schoolSelector, 'aria-pressed');
+
+    var counterAfter = yield browser
+      .getText('[aria-controls="compare_schools-content"] [data-counter="compare"]');
+
+    assert.equal(counterBefore - 1, +counterAfter);
+  });
+
 });
