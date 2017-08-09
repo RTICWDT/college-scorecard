@@ -180,6 +180,10 @@ figcaption {
 
   [data-highlight="true"] {
 
+    & .no_data {
+      border: 1px solid $orange !important;
+    }
+
     .picc-side-meter-bar {
       background-color: $orange !important;
     }
@@ -464,6 +468,16 @@ figcaption {
 
     }
 
+    [data-highlight="true"] {
+      .no-data > span:first-of-type  {
+        border: 1px solid $orange;
+      }
+    }
   }
 
+}
+
+.compare-schools [data-bind="school_section"],
+.compare-schools [data-bind^="sat_"]{
+  cursor: pointer;
 }

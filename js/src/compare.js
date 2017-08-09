@@ -392,6 +392,25 @@ module.exports = function compare() {
   });
 
   /**
+   * * add event listeners for school picc bar highlighter click events
+   */
+  picc.ready(function() {
+    var dataBind = 'data-bind';
+    var dataSchoolId = 'data-school-id';
+    picc.delegate(
+      document.body,
+      // if the element matches '[aria-pressed] && [data-highlight]'
+      function() {
+        return this.closest('[data-bind="school_section"]').hasAttribute('data-school-id');
+      },
+      {
+        click: picc.school.selection.highlightBarToggle
+      }
+    );
+
+  });
+
+  /**
    * * add event listeners for select-controlled sections
    */
   picc.ready(function() {

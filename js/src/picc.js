@@ -1407,8 +1407,10 @@ picc.school.selection = {
         }
     },
 
-    highlightToggle: function(e) {
-      var el = (e.target);
+    highlightToggle: function(e, el) {
+      if (!el) {
+        el = (e.target);
+      }
       var schoolID = el.getAttribute('data-school-id');
       var highlightTarget = (el.getAttribute('aria-pressed') !== "true");
 
@@ -1443,6 +1445,13 @@ picc.school.selection = {
         }
       }
 
+    },
+
+    highlightBarToggle: function(e) {
+      var  el = e.target.closest('[data-bind="school_section"]');
+      var schoolId = el.getAttribute('data-school-id');
+      var schoolHighlightBtn = document.querySelector('button[data-highlight-btn][data-school-id="'+schoolId+'"]');
+      picc.school.selection.highlightToggle(e, schoolHighlightBtn)
     },
 
     renderCompareToggles: function() {
