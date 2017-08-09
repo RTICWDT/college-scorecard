@@ -161,7 +161,7 @@
 .search-toggles .toggle-content-compare_schools {
 
   left: 0;
-  @include respond-to(tiny-down) {
+  @include respond-to(teensy-down) {
     right:0;
     left: inherit;
   }
