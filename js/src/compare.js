@@ -270,7 +270,7 @@ module.exports = function compare() {
 
       var thead = document.querySelector('.by-family-income-thead');
       var tbody = document.querySelector('.by-family-income-tbody');
-      addOption2ByFamilyIncome(school.results, thead, tbody);
+      // addOption2ByFamilyIncome(school.results, thead, tbody);
 
       picc.ui.alreadyLoaded = true;
 
@@ -278,7 +278,7 @@ module.exports = function compare() {
 
   }
 
-  /** this will likely not test well on mobile, but is an option **/
+  /** this will likely not test well on mobile, but is an option
   function addOption2ByFamilyIncome(schools, thead, tbody) {
     schools.forEach(function(school) {
       var last = thead.querySelector('.by-family-income-th:last-of-type');
@@ -308,7 +308,7 @@ module.exports = function compare() {
       });
 
     })
-  }
+  }**/
 
   function insertAfter(newNode, referenceNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
