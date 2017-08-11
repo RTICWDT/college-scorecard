@@ -192,31 +192,6 @@ input[type="submit"] {
       background: url(../img/highlighter-active.svg) no-repeat,
     }
   }
-  &[aria-controls="compare_schools-content"] {
-    .selection-count {
-      font-size: 9px;
-      font-weight: bold;
-      line-height: 15px;
-      position: absolute;
-      right: -10px;
-      width: 15px;
-      height: 15px;
-      text-align: center;
-      color: #fff;
-      border-radius: 50%;
-      background: $green;
-
-      @media only screen and (min-width:380px)
-      and (max-width: 599px) {
-        right: 35px;
-        top: -5px;
-      }
-
-      @media only screen and (min-width:600px) {
-        right: 47px;
-      }
-    }
-  }
 }
 
 button.block {

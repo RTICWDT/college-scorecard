@@ -158,31 +158,87 @@
   }
 }
 
-.search-toggles .toggle-content-compare_schools {
+.search-toggles {
 
-  left: 0;
-  @include respond-to(teensy-down) {
-    right:0;
-    left: inherit;
+  aria-accordion#compare_schools-edit {
+    .toggle-control {
+      width: 120px;
+      margin-right: -5px;
+
+      @include respond-to(teensy-up) {
+        width: inherit;
+        margin-right: inherit;
+      }
+    }
+
+    &:hover .selection-count {
+      padding-bottom: 0;
+      @include respond-to(small-up) {
+        padding-bottom: 7px;
+      }
+    }
+
+    button[aria-controls="compare_schools-content"] {
+      width: auto;
+      height: 100%;
+      @include respond-to(small-up) {
+        width: 210px;
+      }
+
+      .selection-count {
+        font-weight: bold;
+        line-height: 15px;
+        text-align: center;
+        color: #fff;
+        background: $green;
+        padding-left: 5px;
+        padding-right: 5px;
+
+        @include respond-to(teensy-up) {
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+
+        @include respond-to(small-up) {
+          padding: 15px 15px;
+        }
+      }
+
+      &:hover .selection-count {
+        padding-bottom: 0;
+        @include respond-to(small-up) {
+          padding-bottom: 7px;
+        }
+      }
+    }
   }
 
-  @media only screen and (min-width:556px)
-  and (max-width: 599px) {
-    right: 0;
-    left: inherit;
-  }
+  .toggle-content-compare_schools {
 
-  @media only screen and (min-width: 736px)
-  and (max-width: 902px) {
-    right: 0;
-    left: inherit;
-  }
+    left: 0;
+    @include respond-to(teensy-down) {
+      right:0;
+      left: inherit;
+    }
 
-  fieldset {
-    border-top: 1px solid $mid-gray;
-    padding: 1em 1.25em 0 1.25em;
-  }
+    @media only screen and (min-width:556px)
+    and (max-width: 599px) {
+      right: 0;
+      left: inherit;
+    }
 
+    @media only screen and (min-width: 736px)
+    and (max-width: 902px) {
+      right: 0;
+      left: inherit;
+    }
+
+    fieldset {
+      border-top: 1px solid $mid-gray;
+      padding: 1em 1.25em 0 1.25em;
+    }
+
+  }
 }
 
 .container {
