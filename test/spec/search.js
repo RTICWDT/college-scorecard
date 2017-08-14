@@ -399,7 +399,6 @@ describe('compare', function() {
     yield browser
       .execute(function(){
         var cardButtons = [].slice.call(document.querySelectorAll('.results-card button.button-compare_schools'));
-        console.log('cards', cardButtons);
 
         for (var i=0;i < 11; i++) {
           cardButtons[i].click();

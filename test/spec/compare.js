@@ -58,7 +58,7 @@ describe('compare page key metrics', function(){
 
   describe('for schools with null key metrics', function() {
 
-    after(function() {
+    after(function*() {
       browser.localStorage('DELETE');
     });
 
@@ -81,7 +81,7 @@ describe('compare page key metrics', function(){
 
   describe('for schools with key metrics available', function() {
 
-    after(function() {
+    after(function*() {
       browser.localStorage('DELETE');
     });
 
@@ -106,7 +106,7 @@ describe('compare page key metrics', function(){
 /* compare school toggles / school selection functionality */
 describe('navigation to compare page', function() {
 
-  after(function() {
+  after(function*() {
     browser.localStorage('DELETE');
   });
 
@@ -167,7 +167,7 @@ describe('navigation to compare page', function() {
 
 describe('Accordion section', function(){
 
-  after(function() {
+  after(function*() {
     browser.localStorage('DELETE');
   });
 
@@ -354,7 +354,7 @@ describe('Accordion section', function(){
 
 describe('highlight', function(){
 
-  after(function() {
+  after(function*() {
     browser.localStorage('DELETE');
   });
 
@@ -367,6 +367,7 @@ describe('highlight', function(){
     var highlighted = yield browser
       .click('#compare_schools-edit h1 [aria-controls]')
       .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]')
+      .waitForExist('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"][aria-pressed="true"]') // space out subsequent clicks
       .getAttribute('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]', 'aria-pressed');
 
     assert.equal(highlighted, 'true');
@@ -381,6 +382,7 @@ describe('highlight', function(){
     var highlighted = yield browser
       .click('#compare_schools-edit h1 [aria-controls]')
       .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]') // first click - on
+      .waitForExist('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"][aria-pressed="true"]') // space out subsequent clicks
       .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]') // second click - off
       .getAttribute('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]', 'aria-pressed');
 
@@ -395,6 +397,7 @@ describe('highlight', function(){
     var highlighted = yield browser
       .click('#compare_schools-edit h1 [aria-controls]')
       .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]') // first school click - on
+      .waitForExist('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"][aria-pressed="true"]') // space out subsequent clicks
       .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]') // second school click - on
       .getAttribute('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]', 'aria-pressed');
 
