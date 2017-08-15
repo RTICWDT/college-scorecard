@@ -1,7 +1,7 @@
 var tagalong = require('tagalong');
 var d3 = require('d3');
 var querystring = require('querystring');
-var jQuery = require('jquery');
+// var jQuery = require('jquery');
 
 if (typeof document !== 'undefined') {
   require('./components/compat/custom-event');
@@ -128,34 +128,50 @@ module.exports = function compare() {
     'net_price_income3',
     'net_price_income4',
     'net_price_income5',
+    'net_price_income_val',
     'net_price_income_meter',
     'grad_rate',
     'grad_rate_meter',
     'average_salary',
     'average_salary_meter',
+    'advantage_rate',
     'advantage_rate_meter',
     'repayment_rate_meter',
     'repayment_rate_percent',
     'retention_rate_value',
     'retention_rate_meter',
+    'full_time_percent',
     'full_time_value',
+    'race_ethnicity_val',
     'race_ethnicity_meter',
+    'pell_grant_percentage',
     'pell_grant_meter',
+    'average_total_debt',
     'average_total_debt_meter',
+    'federal_aid_percentage',
     'federal_aid_meter',
+    'average_monthly_loan_payment',
     'average_monthly_loan_payment_meter',
     'act_scores_visible',
     'act_scores_invisible',
     'act_scores',
+    'act_25',
+    'act_75',
     'sat_reading_scores_visible',
     'sat_reading_scores_invisible',
     'sat_reading_scores',
+    'sat_reading_25',
+    'sat_reading_75',
     'sat_math_scores_visible',
     'sat_math_scores_invisible',
     'sat_math_scores',
+    'sat_math_25',
+    'sat_math_75',
     'sat_writing_scores_visible',
     'sat_writing_scores_invisible',
     'sat_writing_scores',
+    'sat_writing_25',
+    'sat_writing_75',
   ]);
 
   directives['school_section'] = {
@@ -268,8 +284,8 @@ module.exports = function compare() {
 
       tagalong(compareShareLink, {}, shareLink);
 
-      var thead = document.querySelector('.by-family-income-thead');
-      var tbody = document.querySelector('.by-family-income-tbody');
+      // var thead = document.querySelector('.by-family-income-thead');
+      // var tbody = document.querySelector('.by-family-income-tbody');
       // addOption2ByFamilyIncome(school.results, thead, tbody);
 
       picc.ui.alreadyLoaded = true;
@@ -310,9 +326,9 @@ module.exports = function compare() {
     })
   }**/
 
-  function insertAfter(newNode, referenceNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-  }
+  // function insertAfter(newNode, referenceNode) {
+  //   referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  // }
 
   function toggleDisplay(e) {
 
@@ -401,7 +417,7 @@ module.exports = function compare() {
       document.body,
       // if the element matches '[data-bind="school_section"] && [data-school-id]'
       function() {
-        return this.closest('[data-bind="school_section"]').hasAttribute('data-school-id');
+        return (this.closest('[data-bind="school_section"]') && this.closest('[data-bind="school_section"]').hasAttribute('data-school-id'));
       },
       {
         click: picc.school.selection.highlightBarToggle
@@ -431,13 +447,18 @@ module.exports = function compare() {
           for (var i = 0; i < meters.length; i++) {
             var value = meters[i].getAttribute('data-'+selectedOption);
             var formattedValue = picc.format[formatter]('value')({'value': value});
-            if (formatter === 'percent') formattedValue = (value >= .005) ? formattedValue : '<1%';
+            if (formatter === 'percent') formattedValue = (value >= .005) ? formattedValue : (value) ? "<1%" : "No Data Available";
             // set bar
             meters[i].setAttribute('value', value);
             // set bar text value
             var barVal = meters[i].querySelector('.picc-side-meter-val');
             if (barVal) {
               barVal.textContent = formattedValue;
+            }
+            // set figure value for screen-reader
+            var figVal = (meters[i].nextElementSibling) ? meters[i].nextElementSibling.querySelector('.fig-val') : null;
+            if(figVal) {
+              figVal.textContent = formattedValue;
             }
           }
         }

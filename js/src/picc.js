@@ -805,6 +805,19 @@ picc.school.directives = (function() {
     }
   };
 
+  // binds data to select-controlled value
+  var raceEthnicity = function(d) {
+    var select = document.getElementById('race_ethnicity');
+    var selectValue = (select) ? access(picc.access.raceEthnicityValueByKey(select.value))(d) : null;
+    return (selectValue >= .005) ? format.percent('selectValue')({'selectValue':selectValue}) : (selectValue) ? '<1%' : 'No Data Available';
+  };
+
+  // binds data to select-controlled value
+  var netPricebyIncomeLevelValue = function(d) {
+    var select = document.getElementById('net_price_income');
+    return (select) ? picc.school.directives[select.value].call(this, d) : null;
+  };
+
   var years = format.preddeg(fields.PREDOMINANT_DEGREE);
 
   return {
@@ -962,7 +975,6 @@ picc.school.directives = (function() {
     // for the current meter group across multiple school picc-side-meter's.
     // depending on the meter, we format the average label accordingly ($,%, etc)
     average_line: {
-
         '@style': function() {
           var type = this.getAttribute('data-meter');
           var meter = this.nextElementSibling.querySelector('[data-bind="'+type+'"]');
@@ -1021,13 +1033,14 @@ picc.school.directives = (function() {
         var select = document.getElementById('net_price_income');
         return this.getAttribute('data-'+select.value);
       },
-      'picc-side-meter-val': function() {
-        var select = document.getElementById('net_price_income');
-        var selectValue = this.getAttribute('data-'+select.value);
-        return format.dollars('selectValue')({'selectValue':selectValue});
+      'picc-side-meter-val': function(d) {
+        return netPricebyIncomeLevelValue(d);
       }
     },
 
+    net_price_income_val: function(d) {
+      return netPricebyIncomeLevelValue(d);
+    },
     advantage_rate: format.percent(fields.EARNINGS_GT_25K),
     advantage_rate_meter: {
       '@value':   access.earnings25k,
@@ -1186,12 +1199,15 @@ picc.school.directives = (function() {
         var select = document.getElementById('race_ethnicity');
         return this.getAttribute('data-'+select.value);
       },
-      'picc-side-meter-val': function() {
-        var select = document.getElementById('race_ethnicity');
-        var selectValue = this.getAttribute('data-'+select.value);
-        return (selectValue >= .005) ? format.percent('selectValue')({'selectValue':selectValue}) : '<1%';
+      'picc-side-meter-val': function(d) {
+        return raceEthnicity(d);
       }
     },
+
+    race_ethnicity_val: function(d) {
+      return raceEthnicity(d);
+    },
+
 
     available_programs: function(d) {
       var areas = access.programAreas(d);
@@ -1245,6 +1261,8 @@ picc.school.directives = (function() {
       '@upper': access(fields.ACT_75TH_PCTILE),
       // '@middle': access(fields.ACT_MIDPOINT),
     },
+    act_25: access(fields.ACT_25TH_PCTILE),
+    act_75: access(fields.ACT_75TH_PCTILE),
 
     sat_reading_scores_visible: {
       '@aria-hidden': format.empty(fields.SAT_READING_MIDPOINT),
@@ -1258,6 +1276,8 @@ picc.school.directives = (function() {
       '@upper': access(fields.SAT_READING_75TH_PCTILE),
       // '@middle': access(fields.SAT_READING_MIDPOINT),
     },
+    sat_reading_25: access(fields.SAT_READING_25TH_PCTILE),
+    sat_reading_75: access(fields.SAT_READING_75TH_PCTILE),
 
     sat_math_scores_visible: {
       '@aria-hidden': format.empty(fields.SAT_MATH_MIDPOINT),
@@ -1271,6 +1291,8 @@ picc.school.directives = (function() {
       '@upper': access(fields.SAT_MATH_75TH_PCTILE),
       // '@middle': access(fields.SAT_MATH_MIDPOINT),
     },
+    sat_math_25: access(fields.SAT_MATH_25TH_PCTILE),
+    sat_math_75: access(fields.SAT_MATH_75TH_PCTILE),
 
     sat_writing_scores_visible: {
       '@aria-hidden': format.empty(fields.SAT_WRITING_MIDPOINT),
@@ -1284,6 +1306,8 @@ picc.school.directives = (function() {
       '@upper': access(fields.SAT_WRITING_75TH_PCTILE),
       // '@middle': access(fields.SAT_WRITING_MIDPOINT),
     },
+    sat_writing_25: access(fields.SAT_WRITING_25TH_PCTILE),
+    sat_writing_75: access(fields.SAT_WRITING_75TH_PCTILE),
 
     net_price_calculator: {
       '@href': format.href(fields.NET_PRICE_CALC_URL)

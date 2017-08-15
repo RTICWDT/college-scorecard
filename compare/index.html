@@ -79,12 +79,13 @@ permalink: /compare/
 
                             <div class="selected-school_average-cost net_price" data-bind="school_section">
 
-                                <div class="meter-wrapper">
+                                <div class="meter-wrapper" tabindex="0">
                                     <figure class="side-meter">
                                         <picc-side-meter {% include net_price_meter_attributes.html %}>
                                         </picc-side-meter>
                                         <figcaption>
                                             <span data-bind="name">School Name</span>
+                                            <span data-bind="average_cost" class="sr-only"></span>
                                         </figcaption>
                                     </figure>
                                 </div>
@@ -128,12 +129,13 @@ permalink: /compare/
 
                             <div class="selected-school_grad-rate grad-rate" data-bind="school_section">
 
-                                <div class="meter-wrapper">
+                                <div class="meter-wrapper" tabindex="0">
                                     <figure class="side-meter">
                                         <picc-side-meter {% include graduation_meter_attributes.html %}>
                                         </picc-side-meter>
                                         <figcaption>
                                             <span data-bind="name">School Name</span>
+                                            <span data-bind="grad_rate" class="sr-only"></span>
                                         </figcaption>
                                     </figure>
                                 </div>
@@ -177,12 +179,13 @@ permalink: /compare/
 
                             <div class="selected-school_average-salary average-salary" data-bind="school_section">
 
-                                <div class="meter-wrapper">
+                                <div class="meter-wrapper" tabindex="0">
                                     <figure class="side-meter">
                                         <picc-side-meter {% include earnings_meter_attributes.html %}>
                                         </picc-side-meter>
                                         <figcaption>
                                             <span data-bind="name">School Name</span>
+                                            <span data-bind="average_salary" class="sr-only"></span>
                                         </figcaption>
                                     </figure>
                                 </div>
@@ -240,7 +243,7 @@ permalink: /compare/
                                             <div class="school-two_col" data-bind="school_section">
                                                 <div class="compare-two_col-left">
 
-                                                    <div class="meter-wrapper">
+                                                    <div class="meter-wrapper" tabindex="0">
                                                         <figure class="side-meter">
                                                             <picc-side-meter
                                                                 class="demographics"
@@ -249,6 +252,7 @@ permalink: /compare/
                                                             </picc-side-meter>
                                                             <figcaption>
                                                                 <span data-bind="name">School Name</span>
+                                                                <span data-bind="full_time_percent" class="sr-only"></span>
                                                             </figcaption>
                                                         </figure>
                                                     </div>
@@ -315,7 +319,7 @@ permalink: /compare/
                                             <div class="section-card_container-compare school-diversity">
                                                 <div>
                                                     <div data-bind="school_section">
-                                                        <div class="meter-wrapper">
+                                                        <div class="meter-wrapper" tabindex="0">
                                                             <figure class="side-meter">
                                                                 <picc-side-meter
                                                                         class="demographics"
@@ -324,6 +328,7 @@ permalink: /compare/
                                                                 </picc-side-meter>
                                                                 <figcaption>
                                                                     <span data-bind="name">School Name</span>
+                                                                    <span data-bind="pell_grant_percentage" class="sr-only"></span>
                                                                 </figcaption>
                                                             </figure>
                                                         </div>
@@ -366,7 +371,7 @@ permalink: /compare/
                                     <div class="section-card_container-compare race-ethnicity">
                                         <div>
                                             <div data-bind="school_section">
-                                                <div class="meter-wrapper">
+                                                <div class="meter-wrapper" tabindex="0">
                                                     <figure class="side-meter">
                                                         <picc-side-meter
                                                             class="demographics"
@@ -375,6 +380,7 @@ permalink: /compare/
                                                         </picc-side-meter>
                                                         <figcaption>
                                                             <span data-bind="name">School Name</span>
+                                                            <span data-bind="race_ethnicity_val" class="sr-only fig-val"></span>
                                                         </figcaption>
                                                     </figure>
                                                 </div>
@@ -423,12 +429,13 @@ permalink: /compare/
 
                                                 <div class="selected-school_average-cost net_price" data-bind="school_section">
 
-                                                    <div class="meter-wrapper">
+                                                    <div class="meter-wrapper" tabindex="0">
                                                         <figure class="side-meter">
                                                             <picc-side-meter {% include net_price_meter_attributes.html %}>
                                                             </picc-side-meter>
                                                             <figcaption>
                                                                 <span data-bind="name">School Name</span>
+                                                                <span data-bind="average_cost" class="sr-only"></span>
                                                             </figcaption>
                                                         </figure>
                                                     </div>
@@ -483,16 +490,17 @@ permalink: /compare/
                                     <div class="section-card_container-compare net-price-income">
                                         <div>
                                             <div data-bind="school_section">
-                                                <div class="meter-wrapper">
+                                                <div class="meter-wrapper" tabindex="0">
                                                     <figure class="side-meter">
                                                         <picc-side-meter
-                                                                class="cost"
-                                                                data-bind="net_price_income_meter"
-                                                                max="{{ site.data.national_stats.net_price.max }}"
-                                                                average="{{ site.data.national_stats.net_price.median }}">
+                                                            class="cost"
+                                                            data-bind="net_price_income_meter"
+                                                            max="{{ site.data.national_stats.net_price.max }}"
+                                                            average="{{ site.data.national_stats.net_price.median }}">
                                                         </picc-side-meter>
                                                         <figcaption>
                                                             <span data-bind="name">School Name</span>
+                                                            <span data-bind="net_price_income_val" class="sr-only fig-val"></span>
                                                         </figcaption>
                                                     </figure>
                                                 </div>
@@ -589,7 +597,7 @@ permalink: /compare/
 
                                                 <div class="selected-school_repayment-rate repayment-rate" data-bind="school_section">
 
-                                                    <div class="meter-wrapper">
+                                                    <div class="meter-wrapper" tabindex="0">
                                                         <figure class="side-meter">
                                                             <picc-side-meter
                                                                 class="debt"
@@ -602,6 +610,7 @@ permalink: /compare/
                                                             </picc-side-meter>
                                                             <figcaption>
                                                                 <span data-bind="name">School Name</span>
+                                                                <span data-bind="repayment_rate_percent" class="sr-only"></span>
                                                             </figcaption>
                                                         </figure>
                                                     </div>
@@ -639,7 +648,7 @@ permalink: /compare/
                                     <div class="section-card_container-compare avg-debt">
                                         <div>
                                             <div data-bind="school_section">
-                                                <div class="meter-wrapper">
+                                                <div class="meter-wrapper" tabindex="0">
                                                     <figure class="side-meter">
                                                         <picc-side-meter
                                                             class="debt"
@@ -647,6 +656,7 @@ permalink: /compare/
                                                         </picc-side-meter>
                                                         <figcaption>
                                                             <span data-bind="name">School Name</span>
+                                                            <span data-bind="average_total_debt" class="sr-only"></span>
                                                         </figcaption>
                                                     </figure>
                                                 </div>
@@ -667,7 +677,7 @@ permalink: /compare/
                                     <div class="section-card_container-compare student-aid">
                                         <div>
                                             <div data-bind="school_section">
-                                                <div class="meter-wrapper">
+                                                <div class="meter-wrapper" tabindex="0">
                                                     <figure class="side-meter">
                                                         <picc-side-meter
                                                             class="debt"
@@ -675,6 +685,7 @@ permalink: /compare/
                                                         </picc-side-meter>
                                                         <figcaption>
                                                             <span data-bind="name">School Name</span>
+                                                            <span data-bind="federal_aid_percentage" class="sr-only"></span>
                                                         </figcaption>
                                                     </figure>
                                                 </div>
@@ -695,7 +706,7 @@ permalink: /compare/
                                     <div class="section-card_container-compare avg-loan-payment">
                                         <div>
                                             <div data-bind="school_section">
-                                                <div class="meter-wrapper">
+                                                <div class="meter-wrapper" tabindex="0">
                                                     <figure class="side-meter">
                                                         <picc-side-meter
                                                                 class="debt"
@@ -703,6 +714,7 @@ permalink: /compare/
                                                         </picc-side-meter>
                                                         <figcaption>
                                                             <span data-bind="name">School Name</span>
+                                                            <span data-bind="average_monthly_loan_payment" class="sr-only"></span>
                                                         </figcaption>
                                                     </figure>
                                                 </div>
@@ -746,12 +758,13 @@ permalink: /compare/
 
                                                 <div class="selected-school_grad-rate grad-rate" data-bind="school_section">
 
-                                                    <div class="meter-wrapper">
+                                                    <div class="meter-wrapper" tabindex="0">
                                                         <figure class="side-meter">
                                                             <picc-side-meter {% include graduation_meter_attributes.html %}>
                                                             </picc-side-meter>
                                                             <figcaption>
                                                                 <span data-bind="name">School Name</span>
+                                                                <span data-bind="grad_rate" class="sr-only"></span>
                                                             </figcaption>
                                                         </figure>
                                                     </div>
@@ -798,7 +811,7 @@ permalink: /compare/
 
                                                 <div class="selected-school_retention-rate rentention-rate" data-bind="school_section">
 
-                                                    <div class="meter-wrapper">
+                                                    <div class="meter-wrapper" tabindex="0">
                                                         <figure class="side-meter">
                                                             <picc-side-meter
                                                                 class="graduation"
@@ -809,6 +822,7 @@ permalink: /compare/
                                                             </picc-side-meter>
                                                             <figcaption>
                                                                 <span data-bind="name">School Name</span>
+                                                                <span data-bind="retention_rate_value" class="sr-only"></span>
                                                             </figcaption>
                                                         </figure>
                                                     </div>
@@ -872,12 +886,13 @@ permalink: /compare/
 
                                                 <div class="selected-school_average-salary average-salary" data-bind="school_section">
 
-                                                    <div class="meter-wrapper">
+                                                    <div class="meter-wrapper" tabindex="0">
                                                         <figure class="side-meter">
                                                             <picc-side-meter {% include earnings_meter_attributes.html %}>
                                                             </picc-side-meter>
                                                             <figcaption>
                                                                 <span data-bind="name">School Name</span>
+                                                                <span data-bind="average_salary" class="sr-only"></span>
                                                             </figcaption>
                                                         </figure>
                                                     </div>
@@ -916,7 +931,7 @@ permalink: /compare/
                                     <div class="section-card_container-compare advantage-rate">
                                         <div>
                                             <div data-bind="school_section">
-                                                <div class="meter-wrapper">
+                                                <div class="meter-wrapper" tabindex="0">
                                                     <figure class="side-meter">
                                                         <picc-side-meter
                                                                 class="earnings"
@@ -924,6 +939,7 @@ permalink: /compare/
                                                         </picc-side-meter>
                                                         <figcaption>
                                                             <span data-bind="name">School Name</span>
+                                                            <span data-bind="advantage_rate" class="sr-only"></span>
                                                         </figcaption>
                                                     </figure>
                                                 </div>
@@ -949,7 +965,7 @@ permalink: /compare/
                             <div id="selectivity-content" aria-hidden="true">
 
                                 <div style="padding-top: 20px;">
-                                    <h2 aria-describedby="tip-test-scores" tabindex="0">
+                                    <h2 aria-describedby="tip-test-scores">
                                         Test Scores
                                         <span class="tooltip-target">
                                             <i class="fa fa-info-circle"></i>
@@ -964,17 +980,19 @@ permalink: /compare/
                                         <div class="section-card_container-compare">
                                             <span>
                                                 <span data-bind="school_section">
-                                                    <figure data-bind="sat_reading_scores_visible">
+                                                    <figure data-bind="sat_reading_scores_visible" tabindex="0">
                                                         <span>
                                                             <h4 class="sr-only">Critical Reading</h4>
                                                             <picc-range data-bind="sat_reading_scores" max="800">
                                                             </picc-range>
                                                             <figcaption>
                                                                 <span class="name">School Name</span>
+                                                                <span class="sr-only">SAT Critical Reading 25th Percentile: <span data-bind="sat_reading_25"></span></span>
+                                                                <span class="sr-only">SAT Critical Reading 75th Percentile: <span data-bind="sat_reading_75"></span></span>
                                                             </figcaption>
                                                         </span>
                                                     </figure>
-                                                    <p class="no-data" data-bind="sat_reading_scores_invisible">
+                                                    <p class="no-data" data-bind="sat_reading_scores_invisible" tabindex="0">
                                                         <span>Data not available</span>
                                                         <span class="new-line" data-bind="name2">School Name</span>
                                                     </p>
@@ -986,17 +1004,19 @@ permalink: /compare/
                                         <div class="section-card_container-compare">
                                             <span>
                                                 <span data-bind="school_section">
-                                                    <figure data-bind="sat_math_scores_visible">
+                                                    <figure data-bind="sat_math_scores_visible" tabindex="0">
                                                         <span>
                                                             <h4 class="sr-only">Math</h4>
                                                             <picc-range data-bind="sat_math_scores" max="800">
                                                             </picc-range>
                                                             <figcaption>
                                                                 <span class="name">School Name</span>
+                                                                <span class="sr-only">SAT Math 25th Percentile: <span data-bind="sat_math_25"></span></span>
+                                                                <span class="sr-only">SAT Math 75th Percentile: <span data-bind="sat_math_75"></span></span>
                                                             </figcaption>
                                                         </span>
                                                     </figure>
-                                                    <p class="no-data" data-bind="sat_math_scores_invisible">
+                                                    <p class="no-data" data-bind="sat_math_scores_invisible" tabindex="0">
                                                         <span>Data not available</span>
                                                         <span data-bind="name2">School Name</span>
                                                     </p>
@@ -1008,17 +1028,19 @@ permalink: /compare/
                                         <div class="section-card_container-compare">
                                             <span>
                                                 <span data-bind="school_section">
-                                                    <figure data-bind="sat_writing_scores_visible">
+                                                    <figure data-bind="sat_writing_scores_visible" tabindex="0">
                                                         <span>
                                                             <h4 class="sr-only">Writing</h4>
                                                             <picc-range data-bind="sat_writing_scores" max="800">
                                                             </picc-range>
                                                             <figcaption>
                                                                 <span class="name">School Name</span>
+                                                                <span class="sr-only">SAT Writing 25th Percentile: <span data-bind="sat_writing_25"></span></span>
+                                                                <span class="sr-only">SAT Writing 75th Percentile: <span data-bind="sat_writing_75"></span></span>
                                                             </figcaption>
                                                         </span>
                                                     </figure>
-                                                    <p class="no-data" data-bind="sat_writing_scores_invisible">
+                                                    <p class="no-data" data-bind="sat_writing_scores_invisible" tabindex="0">
                                                        <span>Data not available</span>
                                                        <span data-bind="name2">School Name</span>
                                                     </p>
@@ -1030,16 +1052,18 @@ permalink: /compare/
                                         <div class="section-card_container-compare">
                                             <span>
                                                 <span data-bind="school_section">
-                                                    <figure data-bind="act_scores_visible">
+                                                    <figure data-bind="act_scores_visible" tabindex="0">
                                                         <span>
                                                             <picc-range data-bind="act_scores" min="0" max="36">
                                                             </picc-range>
                                                             <figcaption>
                                                                 <span class="name">School Name</span>
+                                                                <span class="sr-only">ACT Score 25th Percentile: <span data-bind="act_25"></span></span>
+                                                                <span class="sr-only">ACT Score 75th Percentile: <span data-bind="act_75"></span></span>
                                                             </figcaption>
                                                         </span>
                                                     </figure>
-                                                    <p class="no-data" data-bind="act_scores_invisible">
+                                                    <p class="no-data" data-bind="act_scores_invisible" tabindex="0">
                                                        <span>Data not available</span>
                                                        <span data-bind="name2">School Name</span>
                                                     </p>
