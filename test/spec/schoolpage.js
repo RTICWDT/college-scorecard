@@ -78,11 +78,6 @@ var toggleAccordion = function(selector) {
 };
 
 describe('school page', function() {
-
-  after(function() {
-    browser.localStorage('DELETE');
-  });
-
   /*
     Banners & Iconography
   */
@@ -249,6 +244,9 @@ describe('school page', function() {
       var isFavorite = yield toggleSchoolCompare('167525-Quincy-College', '.button-compare_schools', 1);
       var name = yield getSchoolName();
       assert(isFavorite, name + ' was added as a compare school' );
+
+      // cleanup
+      yield toggleSchoolCompare('167525-Quincy-College', '.button-compare_schools', 1);
   });
 
     it('should remove aria-pressed attribute on school compare button on subsequent click', function*() {

@@ -31,6 +31,8 @@ exports.config = {
     // overwrite the spec and exclude option in order to group specific specs to
     // a specific capability.
     //
+
+    maxInstances: 1,
     // If you have trouble getting all important capabilities together, check
     // out the Sauce Labs platform configurator - a great tool to configure your
     // capabilities: https://docs.saucelabs.com/reference/platforms-configurator
@@ -46,6 +48,11 @@ exports.config = {
     // ===================
     // Define all options that are relevant for the WebdriverIO instance here
     //
+    // Per default WebdriverIO commands getting executed in a synchronous way using
+    // the wdio-sync package. If you still want to run your tests in an async way
+    // using promises you can set the sync command to false.
+    sync: true,
+
     // Level of logging verbosity.
     logLevel: 'silent',
 

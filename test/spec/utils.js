@@ -5,15 +5,9 @@ var _this = this;
 exports.getVisibleCompare = function*() {
   return yield browser
     .waitForExist(
-      '.section-card_container-compare figcaption span'
+      '.section-card_container-compare figcaption span:first-child'
     )
-    .waitUntil(function() {
-      return this.getText(
-        '.section-card_container-compare figcaption span')
-        .then(function(text) {
-          return text !== "School Name" && text !== "";
-        });
-    });
+    .waitForVisible('.show-loaded .school-share-wrapper .school-share');
 };
 
 exports.getVisibleResults = function*() {

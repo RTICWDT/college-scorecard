@@ -301,8 +301,6 @@ describe('compare', function() {
       .click(schoolSelector)
       .getAttribute(schoolSelector, 'aria-pressed');
 
-    // yield.browser.alert('msg: '+ariaPressed);
-
     assert(ariaPressed, true);
   });
 
