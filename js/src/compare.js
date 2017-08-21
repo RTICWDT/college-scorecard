@@ -1,7 +1,6 @@
 var tagalong = require('tagalong');
 var d3 = require('d3');
 var querystring = require('querystring');
-// var jQuery = require('jquery');
 
 if (typeof document !== 'undefined') {
   require('./components/compat/custom-event');
@@ -113,6 +112,9 @@ module.exports = function compare() {
   });
 
   params.fields.join(',');
+
+  // browser cache-busting for d3.json calls
+  params['_per_page'] = new Date().getTime();
 
   var directives = picc.data.selectKeys(picc.school.directives, [
     'name',
