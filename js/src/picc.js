@@ -820,6 +820,66 @@ picc.school.directives = (function() {
 
   var years = format.preddeg(fields.PREDOMINANT_DEGREE);
 
+  var meterMedian = function(el, degreeType) {
+    switch(degreeType) {
+      case 3:
+        return el.getAttribute('data-median-four_year');
+      case 2:
+        return el.getAttribute('data-median-two_year');
+      case 1:
+        return el.getAttribute('data-median-cert');
+    }
+  };
+
+  var medianLine = {
+    '@style': function() {
+      var type = this.getAttribute('data-meter');
+      var medianType = this.getAttribute('data-median');
+      var meter = this.closest('.compare-container_group').querySelector('[data-bind="'+type+'"]');
+
+      if (!meter) { return ''; }
+
+      var min = meter.getAttribute('min') || 0;
+      var max = meter.getAttribute('max') || 1;
+      var median = meter.getAttribute(medianType);
+
+      var scale = function(v) {
+        return (v - min) / (max - min) * 100;
+      };
+      var value = Math.max(min, Math.min(+median, max));
+      var right = Math.max(0, value);
+
+      // median lines are better represented
+      // when dollars fixedTo `1`, percentages to `0`
+      var fixNum = (max  > 1) ? 1 : 0;
+
+      var style = '';
+      style +='right:'+ (100 - scale(right)).toFixed(fixNum) + '%;';
+      return style;
+    },
+    label: {
+      text: function() {
+        var type = this.closest('[data-meter]').getAttribute('data-meter');
+        var medianType = this.closest('[data-median]').getAttribute('data-median');
+        var meter = this.closest('.compare-container_group').querySelector('[data-bind="' + type + '"]');
+        if (!meter) { return ''; }
+        switch (type) {
+          case 'average_cost_meter':
+          case 'average_salary_meter':
+          case 'average_total_debt_meter':
+          case 'average_monthly_loan_payment_meter':
+            return format.dollars( function() { return meter.getAttribute(medianType); })(medianType);
+          case 'grad_rate_meter':
+          case 'repayment_rate_meter':
+          case 'retention_rate_meter':
+            return format.percent(function () { return meter.getAttribute(medianType); })(medianType);
+          default:
+            return meter.median;
+        }
+      }
+    }
+  };
+
   return {
     title: {
       link: {
@@ -863,7 +923,7 @@ picc.school.directives = (function() {
                     item = item.schoolId;
                   }
                   return 'schools[]=' +item.replace('/^[0-9]/', '');
-                })
+                });
               }
 
               // older IE
@@ -898,12 +958,18 @@ picc.school.directives = (function() {
     city:           access(fields.CITY),
     state:          access(fields.STATE),
 
+    compare_group:  {
+      '@aria-hidden': function(d) {
+        return !(this.querySelector('[data-bind="school_section"]'));
+      }
+    },
+
     school_container: function(d) {
         // hack for tagalong not allowing binding to direct child template element
         this.setAttribute('data-school-id', access(fields.ID)(d));
         this.setAttribute('data-compare', (picc.school.selection.isSelected(access(fields.ID)(d), picc.school.selection.LSKey) >= 0));
         return null;
-      },
+    },
 
     selected_school: {
       '@aria-pressed': function(d) {
@@ -964,58 +1030,21 @@ picc.school.directives = (function() {
 
     average_cost: format.dollars(access.netPrice),
     average_cost_meter: {
-      // '@max':     access.nationalStat('max', access.publicPrivate),
-      // '@average': access.nationalStat('median', access.publicPrivate),
       '@value':   access.netPrice,
-      label:      format.dollars(function() { return this.average; }),
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:      format.dollars(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
       'picc-side-meter-val': format.dollars(access.netPrice),
     },
 
-    // on the compare screen we draw the vertical `average_line`
+    // on the compare screen we draw the vertical `median_line`
     // for the current meter group across multiple school picc-side-meter's.
-    // depending on the meter, we format the average label accordingly ($,%, etc)
-    average_line: {
-        '@style': function() {
-          var type = this.getAttribute('data-meter');
-          var meter = this.nextElementSibling.querySelector('[data-bind="'+type+'"]');
-          var min = meter.getAttribute('min') || 0;
-          var max = meter.getAttribute('max') || 1;
-          var average = meter.getAttribute('average');
-
-          var scale = function(v) {
-            return (v - min) / (max - min) * 100;
-          };
-          var value = Math.max(min, Math.min(+average, max));
-          var right = Math.max(0, value);
-
-          // average lines are better represented
-          // when dollars fixedTo `1`, percentages to `0`
-          var fixNum = (max  > 1) ? 1 : 0;
-
-          var style = '';
-          style +='right:'+ (100 - scale(right)).toFixed(fixNum) + '%;';
-          return style;
-        },
-        label: {
-           text: function() {
-             var parent = this.parentElement;
-             var type = parent.getAttribute('data-meter');
-             var meter = parent.nextElementSibling.querySelector('[data-bind="' + type + '"]');
-
-             switch (type) {
-               case 'average_cost_meter':
-               case 'average_salary_meter':
-                  return format.dollars( function() { return meter.getAttribute('average'); })('average');
-               case 'grad_rate_meter':
-               case 'repayment_rate_meter':
-               case 'retention_rate_meter':
-                    return format.percent(function () { return meter.getAttribute('average'); })('average');
-               default:
-                 return meter.average;
-             }
-           }
-        }
-    },
+    // depending on the meter, we format the median label accordingly ($,%, etc)
+    median_line: medianLine,
+    // pred_degree: function() {
+    //   return this.querySelector('[data-school-preddeg]').getAttribute('data-school-preddeg');
+    // },
 
     // income level net price stats
     net_price_income1: format.dollars(access.netPriceByIncomeLevel('0-30000')),
@@ -1044,53 +1073,60 @@ picc.school.directives = (function() {
     advantage_rate: format.percent(fields.EARNINGS_GT_25K),
     advantage_rate_meter: {
       '@value':   access.earnings25k,
-      label:      format.percent(function() { return this.average; }),
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:      format.percent(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
       'picc-side-meter-val': format.percent(fields.EARNINGS_GT_25K)
     },
 
     grad_rate: format.percent(access.completionRate),
     grad_rate_meter: {
-      // '@average': access.nationalStat('median', access.yearDesignation),
       '@value':   access.completionRate,
-      label:      format.percent(function() { return this.average; }),
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:      format.percent(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
       'picc-side-meter-val': format.percent(access.completionRate)
     },
 
     average_salary: format.dollars(access.earningsMedian),
     average_salary_meter: {
       '@value': access.earningsMedian,
-      // '@average': access.nationalStat('median', access.yearDesignation),
-      label:    format.dollars(function() { return this.average; }),
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:    format.dollars(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
       'picc-side-meter-val': format.dollars(access.earningsMedian)
     },
 
     repayment_rate_percent: format.percent(fields.REPAYMENT_RATE),
     repayment_rate_meter: {
       '@value': access(fields.REPAYMENT_RATE),
-      // '@average': access.nationalStat('median', access.yearDesignation),
-      label:    format.percent(function() { return this.average; }),
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:    format.percent(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
       'picc-side-meter-val': format.percent(fields.REPAYMENT_RATE)
     },
 
     average_total_debt: format.dollars(fields.AVERAGE_TOTAL_DEBT),
-
     average_total_debt_meter: {
-      //TODO: fix me - meter needs a national max
-      //temporarily taken from across all schools in 2014: 49750
-      '@max': function(d) { return 49750},
       '@value': access(fields.AVERAGE_TOTAL_DEBT),
-      // '@average': access.nationalStat('median', access.yearDesignation),
-      label:    format.dollars(function() { return this.average; }),
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:    format.dollars(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
       'picc-side-meter-val': format.dollars(fields.AVERAGE_TOTAL_DEBT)
     },
+
     average_monthly_loan_payment: format.dollars(fields.MONTHLY_LOAN_PAYMENT),
     average_monthly_loan_payment_meter: {
-      //TODO: fix me - meter needs a national max
-      //temporarily taken from across all schools in 2014: 510.579
-      '@max': function(d) { return 510.579},
       '@value': access(fields.MONTHLY_LOAN_PAYMENT),
-      // '@average': access.nationalStat('median', access.yearDesignation),
-      label:    format.dollars(function() { return this.average; }),
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:    format.dollars(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
       'picc-side-meter-val': function(d) {
         return (format.dollars(fields.MONTHLY_LOAN_PAYMENT)(d)) +'/mo'
       }
@@ -1099,28 +1135,40 @@ picc.school.directives = (function() {
     federal_aid_percentage: format.percent(fields.AID_PERCENTAGE),
     federal_aid_meter: {
       '@value': access(fields.AID_PERCENTAGE),
-      label:    format.percent(function() { return this.average; }),
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:    format.percent(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
       'picc-side-meter-val': format.percent(fields.AID_PERCENTAGE)
     },
 
     pell_grant_percentage: format.percent(fields.PELL_PERCENTAGE),
     pell_grant_meter: {
       '@value': access(fields.PELL_PERCENTAGE),
-      label:    format.percent(function() { return this.average; }),
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:    format.percent(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
       'picc-side-meter-val': format.percent(fields.PELL_PERCENTAGE)
     },
 
     earnings_gt_25k: format.percent(access.earnings25k),
     earnings_gt_25k_meter: {
       '@value': access.earnings25k,
-      label:    format.percent(function() { return this.average; }),
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:    format.percent(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
       'picc-side-meter-val': format.percent(access.earnings25k)
     },
 
     retention_rate_value: format.percent(access.retentionRate),
     retention_rate_meter: {
       '@value': access.retentionRate,
-      label:    format.percent(function() { return this.average; }),
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:    format.percent(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
       'picc-side-meter-val': format.percent(access.retentionRate),
     },
 

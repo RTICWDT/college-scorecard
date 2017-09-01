@@ -281,14 +281,7 @@ stylesheets:
                           <i class="fa fa-info-circle"></i>
                         </span>
                       </h2>
-                      <picc-meter id="repayment-meter"
-                        class="debt"
-                        data-bind="repayment_rate_meter"
-                        max="1"
-                        average="{{ site.data.national_stats.repayment_rate.median }}"
-                        average-range="{{ site.data.national_stats.repayment_rate.average_range|join:'..' }}"
-                        data-median-four_year="{{ site.data.national_stats.repayment_rate_4.median }}"
-                        data-median-lt_four_year="{{ site.data.national_stats.repayment_rate_l4.median }}">
+                      <picc-meter id="repayment-meter" {% include repayment_rate_meter_attributes.html %}>
                       </picc-meter>
 
                       <figcaption>
@@ -426,12 +419,7 @@ stylesheets:
                           <i class="fa fa-info-circle"></i>
                         </span>
                       </h2>
-                      <picc-meter id="retention-meter"
-                        class="graduation"
-                        data-bind="retention_rate_meter"
-                        max="1"
-                        average="{{ site.data.national_stats.retention_rate.median }}"
-                        average-range="{{ site.data.national_stats.retention_rate.average_range|join:'..' }}">
+                      <picc-meter id="retention-meter" {% include retention_rate_meter_attributes.html %}>
                       </picc-meter>
                       <figcaption>
                         <span class="average-value" data-bind="retention_rate_value">XX%</span>

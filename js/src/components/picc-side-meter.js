@@ -9,7 +9,7 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
         this.min = getAttr(this, 'min', 0);
         this.max = getAttr(this, 'max', 1);
         this.value = getAttr(this, 'value');
-        this.average = getAttr(this, 'average');
+        this.median = getAttr(this, 'median');
 
         this.update();
       }},
@@ -17,12 +17,12 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
       attributeChangedCallback: {value: function(attr, prev, value) {
         // pass through attribute settings to
         // properties for min, max, value an
-        // average
+        // median
         switch (attr) {
           case 'min':
           case 'max':
           case 'value':
-          case 'average':
+          case 'median':
             this[attr] = value;
             return;
         }
@@ -33,7 +33,7 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
           var min = this.min;
           var max = this.max;
           var value = this.value;
-          var average = this.average;
+          var median = this.median;
 
           var bar = getBar(this);
           var barVal = getBarVal(this);
@@ -81,7 +81,7 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
             bar.style.setProperty('left', scale(left) + '%');
             bar.style.setProperty('right', (100 - scaleRight).toFixed(fixNum) + '%');
 
-            // attach the average value next to the bar chart
+            // attach the median value next to the bar chart
             // and responsively scale it from overflowing bar
             // when the bar is a little less than full
             var magicNum = (max > 1) ? 6 : 3;
@@ -104,11 +104,11 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
             }
 
 
-            if (this.hasAttribute('average-range')) {
-              var range = this.getAttribute('average-range');
+            if (this.hasAttribute('percentile-range')) {
+              var range = this.getAttribute('percentile-range');
               var numbers = range.split('..').map(Number);
               if (numbers.some(isNaN)) {
-                console.warn('invalid average-range:', range, numbers);
+                console.warn('invalid percentile-range:', range, numbers);
                 classify(this, {
                   'above_average': false,
                   'below_average': false,
@@ -169,12 +169,12 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
         }
       },
 
-      average: {
+      median: {
         get: function() {
-          return this.__average;
+          return this.__median;
         },
         set: function(value) {
-          this.__average = number(value);
+          this.__median = number(value);
           deferUpdate(this);
         }
       }

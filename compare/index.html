@@ -67,49 +67,59 @@ permalink: /compare/
                     <span class="tooltip-target">
                         <i class="fa fa-info-circle"></i>
                     </span>
-                </h2>
-                <div class="compare-container_group">
+                </h2>{% for group in site.data.predominant_degrees %}
+                <div class="compare-container_group" data-pred-degree="{{group.key}}">
 
-                    <div class="average_line" data-meter="average_cost_meter">
-                        <span class="label"></span>
-                    </div>
-                    <div class="section-card_container-compare average-cost">
+                    <div class="compare-group_wrapper" data-bind="compare_group">
 
-                        <div class="selected-school_average-cost_group">
+                        <div class="compare-degree_group">Offers predominately {{group.label}}</div>
 
-                            <div class="selected-school_average-cost net_price" data-bind="school_section">
+                        <div class="meter-group_wrapper">
 
-                                <div class="meter-wrapper" tabindex="0">
-                                    <figure class="side-meter">
-                                        <picc-side-meter {% include net_price_meter_attributes.html %}>
-                                        </picc-side-meter>
-                                        <figcaption>
-                                            <span data-bind="name">School Name</span>
-                                            <span data-bind="average_cost" class="sr-only"></span>
-                                        </figcaption>
-                                    </figure>
+                            <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="average_cost_meter">
+                                <span class="label"></span>
+                            </div>
+
+                            <div class="section-card_container-compare average-cost" data-pred-degree="{{group.key}}">
+                                <div class="selected-school_average-cost_group">
+
+                                    <div class="selected-school_average-cost net_price" data-bind="school_section">
+
+                                        <div class="meter-wrapper" tabindex="0">
+                                            <figure class="side-meter">
+                                                <picc-side-meter {% include net_price_meter_attributes.html %}>
+                                                </picc-side-meter>
+                                                <figcaption>
+                                                    <span data-bind="name">School Name</span>
+                                                    <span data-bind="average_cost" class="sr-only"></span>
+                                                </figcaption>
+                                            </figure>
+                                        </div>
+
+                                    </div>
                                 </div>
 
                             </div>
-                        </div>
 
-                    </div>
+                        </div><!-- /.meter-group_wrapper -->
 
-                    <div class="legend-wrapper">
-                        <div class="legend-nat_average">
-                            <div class="legend-nat_average-box">
-                                <div class="legend-nat_average-box-line-vert">
+                        <div class="legend-wrapper">
+                            <div class="legend-nat_average">
+                                <div class="legend-nat_average-box">
+                                    <div class="legend-nat_average-box-line-vert">
+                                    </div>
+                                </div>
+                                <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                                    <span class="tooltip-target">
+                                        <i class="fa fa-info-circle"></i>
+                                    </span>
                                 </div>
                             </div>
-                            <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                                <span class="tooltip-target">
-                                    <i class="fa fa-info-circle"></i>
-                                </span>
-                            </div>
                         </div>
-                    </div>
 
-                </div>
+                    </div><!-- /.compare-group_wrapper -->
+
+                </div><!-- /.compare-container_group -->{% endfor %}
 
                 <h2 class="figure-heading constrain_width"
                     aria-describedby="tip-graduation-rate" tabindex="0">
@@ -117,49 +127,61 @@ permalink: /compare/
                     <span class="tooltip-target">
                       <i class="fa fa-info-circle"></i>
                     </span>
-                </h2>
-                <div class="compare-container_group">
+                </h2>{% for group in site.data.predominant_degrees %}
+                <div class="compare-container_group" data-pred-degree="{{group.key}}">
 
-                    <div class="average_line" data-meter="grad_rate_meter">
-                        <span class="label"></span>
-                    </div>
-                    <div class="section-card_container-compare grad-rate">
+                    <div class="compare-group_wrapper" data-bind="compare_group">
 
-                        <div class="selected-school_grad-rate_group">
+                        <div class="compare-degree_group">Offers predominately {{group.label}}</div>
 
-                            <div class="selected-school_grad-rate grad-rate" data-bind="school_section">
+                        <div class="meter-group_wrapper">
 
-                                <div class="meter-wrapper" tabindex="0">
-                                    <figure class="side-meter">
-                                        <picc-side-meter {% include graduation_meter_attributes.html %}>
-                                        </picc-side-meter>
-                                        <figcaption>
-                                            <span data-bind="name">School Name</span>
-                                            <span data-bind="grad_rate" class="sr-only"></span>
-                                        </figcaption>
-                                    </figure>
+                            <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="grad_rate_meter">
+                                <span class="label"></span>
+                            </div>
+
+                            <div class="section-card_container-compare grad-rate" data-pred-degree="{{group.key}}">
+
+                                <div class="selected-school_grad-rate_group">
+
+                                    <div class="selected-school_grad-rate grad-rate" data-bind="school_section">
+
+                                        <div class="meter-wrapper" tabindex="0">
+                                            <figure class="side-meter">
+                                                <picc-side-meter {% include graduation_meter_attributes.html %}>
+                                                </picc-side-meter>
+                                                <figcaption>
+                                                    <span data-bind="name">School Name</span>
+                                                    <span data-bind="grad_rate" class="sr-only"></span>
+                                                </figcaption>
+                                            </figure>
+                                        </div>
+
+                                    </div>
+
                                 </div>
 
                             </div>
-                        </div>
 
-                    </div>
+                        </div><!-- /.meter-group_wrapper -->
 
-                    <div class="legend-wrapper">
-                        <div class="legend-nat_average">
-                            <div class="legend-nat_average-box">
-                                <div class="legend-nat_average-box-line-vert">
+                        <div class="legend-wrapper">
+                            <div class="legend-nat_average">
+                                <div class="legend-nat_average-box">
+                                    <div class="legend-nat_average-box-line-vert">
+                                    </div>
+                                </div>
+                                <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                                    <span class="tooltip-target">
+                                        <i class="fa fa-info-circle"></i>
+                                    </span>
                                 </div>
                             </div>
-                            <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                                <span class="tooltip-target">
-                                    <i class="fa fa-info-circle"></i>
-                                </span>
-                            </div>
                         </div>
-                    </div>
 
-                </div>
+                    </div><!-- /.compare-group_wrapper -->
+
+                </div><!-- /.compare-container_group -->{% endfor %}
 
                 <h2 class="figure-heading constrain_width"
                     aria-describedby="tip-avg-salary" tabindex="0">
@@ -167,51 +189,62 @@ permalink: /compare/
                     <span class="tooltip-target">
                         <i class="fa fa-info-circle"></i>
                     </span>
-                </h2>
-                <div class="compare-container_group">
+                </h2>{% for group in site.data.predominant_degrees %}
+                <div class="compare-container_group" data-pred-degree="{{group.key}}">
 
-                    <div class="average_line" data-meter="average_salary_meter">
-                        <span class="label"></span>
-                    </div>
-                    <div class="section-card_container-compare average-salary">
+                    <div class="compare-group_wrapper" data-bind="compare_group">
 
-                        <div class="selected-school_average-salary_group">
+                        <div class="compare-degree_group">Offers predominately {{group.label}}</div>
 
-                            <div class="selected-school_average-salary average-salary" data-bind="school_section">
+                        <div class="meter-group_wrapper">
 
-                                <div class="meter-wrapper" tabindex="0">
-                                    <figure class="side-meter">
-                                        <picc-side-meter {% include earnings_meter_attributes.html %}>
-                                        </picc-side-meter>
-                                        <figcaption>
-                                            <span data-bind="name">School Name</span>
-                                            <span data-bind="average_salary" class="sr-only"></span>
-                                        </figcaption>
-                                    </figure>
+                            <div class="median-line four-year" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="average_salary_meter">
+                                <span class="label"></span>
+                            </div>
+
+                            <div class="section-card_container-compare average-salary" data-pred-degree="{{group.key}}">
+
+                                <div class="selected-school_average-salary_group">
+
+                                    <div class="selected-school_average-salary average-salary" data-bind="school_section">
+
+                                        <div class="meter-wrapper" tabindex="0">
+                                            <figure class="side-meter">
+                                                <picc-side-meter {% include earnings_meter_attributes.html %}>
+                                                </picc-side-meter>
+                                                <figcaption>
+                                                    <span data-bind="name">School Name</span>
+                                                    <span data-bind="average_salary" class="sr-only"></span>
+                                                </figcaption>
+                                            </figure>
+                                        </div>
+
+                                    </div>
                                 </div>
 
                             </div>
-                        </div>
 
-                    </div>
+                        </div><!-- /.meter-group_wrapper -->
 
-                    <div class="legend-wrapper">
-                        <div class="legend-nat_average">
-                            <div class="legend-nat_average-box">
-                                <div class="legend-nat_average-box-line-vert">
+                        <div class="legend-wrapper">
+                            <div class="legend-nat_average">
+                                <div class="legend-nat_average-box">
+                                    <div class="legend-nat_average-box-line-vert">
+                                    </div>
+                                </div>
+                                <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                                    <span class="tooltip-target">
+                                        <i class="fa fa-info-circle"></i>
+                                    </span>
                                 </div>
                             </div>
-                            <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                                <span class="tooltip-target">
-                                    <i class="fa fa-info-circle"></i>
-                                </span>
-                            </div>
                         </div>
-                    </div>
 
-                </div>
+                    </div><!-- /.compare-group_wrapper -->
 
-            </div>
+                </div><!-- /.compare-container_group -->{% endfor %}
+
+            </div><!-- /.default-meters -->
 
             <div class="compare-more show-loaded">
 
@@ -322,9 +355,9 @@ permalink: /compare/
                                                         <div class="meter-wrapper" tabindex="0">
                                                             <figure class="side-meter">
                                                                 <picc-side-meter
-                                                                        class="demographics"
-                                                                        data-bind="pell_grant_meter"
-                                                                        max="1">
+                                                                    class="demographics"
+                                                                    data-bind="pell_grant_meter"
+                                                                    max="1">
                                                                 </picc-side-meter>
                                                                 <figcaption>
                                                                     <span data-bind="name">School Name</span>
@@ -417,49 +450,59 @@ permalink: /compare/
                                         <span class="tooltip-target">
                                             <i class="fa fa-info-circle"></i>
                                         </span>
-                                    </h2>
-                                    <div class="compare-container_group">
+                                    </h2>{% for group in site.data.predominant_degrees %}
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
 
-                                        <div class="average_line" data-meter="average_cost_meter">
-                                            <span class="label"></span>
-                                        </div>
-                                        <div class="section-card_container-compare average-cost">
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
 
-                                            <div class="selected-school_average-cost_group">
+                                            <div class="compare-degree_group">Offers predominately {{group.label}}</div>
 
-                                                <div class="selected-school_average-cost net_price" data-bind="school_section">
+                                            <div class="meter-group_wrapper">
 
-                                                    <div class="meter-wrapper" tabindex="0">
-                                                        <figure class="side-meter">
-                                                            <picc-side-meter {% include net_price_meter_attributes.html %}>
-                                                            </picc-side-meter>
-                                                            <figcaption>
-                                                                <span data-bind="name">School Name</span>
-                                                                <span data-bind="average_cost" class="sr-only"></span>
-                                                            </figcaption>
-                                                        </figure>
+                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="average_cost_meter">
+                                                    <span class="label"></span>
+                                                </div>
+                                                <div class="section-card_container-compare average-cost" data-pred-degree="{{group.key}}">
+
+                                                    <div class="selected-school_average-cost_group">
+
+                                                        <div class="selected-school_average-cost net_price" data-bind="school_section">
+
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter {% include net_price_meter_attributes.html %}>
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="average_cost" class="sr-only"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+
+                                                        </div>
                                                     </div>
 
                                                 </div>
-                                            </div>
 
-                                        </div>
+                                            </div><!-- /.meter-group_wrapper -->
 
-                                        <div class="legend-wrapper">
-                                            <div class="legend-nat_average">
-                                                <div class="legend-nat_average-box">
-                                                    <div class="legend-nat_average-box-line-vert">
+                                            <div class="legend-wrapper">
+                                                <div class="legend-nat_average">
+                                                    <div class="legend-nat_average-box">
+                                                        <div class="legend-nat_average-box-line-vert">
+                                                        </div>
+                                                    </div>
+                                                    <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                                                        <span class="tooltip-target">
+                                                            <i class="fa fa-info-circle"></i>
+                                                        </span>
                                                     </div>
                                                 </div>
-                                                <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                                                    <span class="tooltip-target">
-                                                        <i class="fa fa-info-circle"></i>
-                                                    </span>
-                                                </div>
                                             </div>
-                                        </div>
 
-                                    </div>
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
 
                                 </div><!-- /.avg-cost -->
 
@@ -509,58 +552,7 @@ permalink: /compare/
                                     </div>
 
                                 </div><!-- /.net-price-income -->
-                                {% comment %}<div class="net-price-income-option2">
 
-                                    <div class="school-two_col u-wrap" data-bind="school_section">
-                                        <div class="compare-two_col-left">
-                                            <h2 class="figure-heading constrain_width">By Family Income Category</h2>
-                                            <p>Depending on the federal, state, or institutional grant aid available,
-                                                students in your income bracket may pay more or less than the overall average costs.
-                                            </p>
-                                        </div>
-                                        <div class="compare-two_col-right"><div>{% comment %} empty space column {% endcomment %}</div></div>
-                                    </div>
-
-                                    <div class="school-two_col u-wrap" data-bind="school_section">
-
-                                        <div class="net-price-income-table compare-two_col-left">
-                                            <table class="school-table tables">
-                                                <caption class="sr-only">Average cost by family income</caption>
-                                                <thead class="by-family-income-thead">
-                                                    <tr>
-                                                        <th>Family Income</th>
-                                                        <th class="by-family-income-th" data-bind="school_section">School Name</th>
-                                                    </tr>
-
-                                                </thead>
-                                                <tbody class="by-family-income-tbody">
-                                                     <tr>
-                                                       <td>$0-$30,000</td>
-                                                       <td data-row="net_price_income1" class="income-row" data-bind="school_section">$XX,XXX</td>
-                                                     </tr>
-                                                     <tr>
-                                                       <td>$30,001-$48,000</td>
-                                                       <td data-row="net_price_income2" class="income-row" data-bind="school_section">$XX,XXX</td>
-                                                     </tr>
-                                                     <tr>
-                                                       <td>$48,001-$75,000</td>
-                                                       <td data-row="net_price_income3" class="income-row" data-bind="school_section">$XX,XXX</td>
-                                                     </tr>
-                                                     <tr>
-                                                       <td>$75,001-$110,000</td>
-                                                       <td data-row="net_price_income4" class="income-row" data-bind="school_section">$XX,XXX</td>
-                                                     </tr>
-                                                     <tr>
-                                                       <td>$110,001+</td>
-                                                       <td data-row="net_price_income5" class="income-row" data-bind="school_section">$XX,XXX</td>
-                                                     </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="compare-two_col-right"><div>{% comment %} empty space column {% endcomment %}</div></div>
-                                    </div>
-
-                                </div><!-- /.net-price-income-option2 -->{% endcomment %}
                             </div>
                         </div>
                     </aria-accordion>
@@ -584,57 +576,61 @@ permalink: /compare/
                                         <span class="tooltip-target">
                                             <i class="fa fa-info-circle"></i>
                                         </span>
-                                    </h2>
-                                    <div class="compare-container_group">
+                                    </h2>{% for group in site.data.predominant_degrees %}
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
 
-                                        <div class="average_line" data-meter="repayment_rate_meter">
-                                            <span class="label"></span>
-                                        </div>
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
 
-                                        <div class="section-card_container-compare repayment-rate">
+                                            <div class="compare-degree_group">Offers predominately {{group.label}}</div>
 
-                                            <div class="selected-school_repayment-rate_group">
+                                            <div class="meter-group_wrapper">
 
-                                                <div class="selected-school_repayment-rate repayment-rate" data-bind="school_section">
+                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="repayment_rate_meter">
+                                                    <span class="label"></span>
+                                                </div>
 
-                                                    <div class="meter-wrapper" tabindex="0">
-                                                        <figure class="side-meter">
-                                                            <picc-side-meter
-                                                                class="debt"
-                                                                data-bind="repayment_rate_meter"
-                                                                max="1"
-                                                                average="{{ site.data.national_stats.repayment_rate.median }}"
-                                                                average-range="{{ site.data.national_stats.repayment_rate.average_range|join:'..' }}"
-                                                                data-median-four_year="{{ site.data.national_stats.repayment_rate_4.median }}"
-                                                                data-median-lt_four_year="{{ site.data.national_stats.repayment_rate_l4.median }}">
-                                                            </picc-side-meter>
-                                                            <figcaption>
-                                                                <span data-bind="name">School Name</span>
-                                                                <span data-bind="repayment_rate_percent" class="sr-only"></span>
-                                                            </figcaption>
-                                                        </figure>
+                                                <div class="section-card_container-compare repayment-rate" data-pred-degree="{{group.key}}">
+
+                                                    <div class="selected-school_repayment-rate_group">
+
+                                                        <div class="selected-school_repayment-rate repayment-rate" data-bind="school_section">
+
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter {% include repayment_rate_meter_attributes.html %}>
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="repayment_rate_percent" class="sr-only"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+
+                                                        </div>
                                                     </div>
 
                                                 </div>
-                                            </div>
 
-                                        </div>
+                                            </div><!-- /.meter-group_wrapper -->
 
-                                        <div class="legend-wrapper">
-                                            <div class="legend-nat_average">
-                                                <div class="legend-nat_average-box">
-                                                    <div class="legend-nat_average-box-line-vert">
+                                            <div class="legend-wrapper">
+                                                <div class="legend-nat_average">
+                                                    <div class="legend-nat_average-box">
+                                                        <div class="legend-nat_average-box-line-vert">
+                                                        </div>
+                                                    </div>
+                                                    <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                                                        <span class="tooltip-target">
+                                                            <i class="fa fa-info-circle"></i>
+                                                        </span>
                                                     </div>
                                                 </div>
-                                                <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                                                    <span class="tooltip-target">
-                                                        <i class="fa fa-info-circle"></i>
-                                                    </span>
-                                                </div>
                                             </div>
-                                        </div>
 
-                                    </div>
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
+
                                 </div><!-- /.repayment -->
 
                                 <div class="debt">
@@ -643,26 +639,55 @@ permalink: /compare/
                                         <span class="tooltip-target">
                                             <i class="fa fa-info-circle"></i>
                                         </span>
-                                    </h2>
+                                    </h2>{% for group in site.data.predominant_degrees %}
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
 
-                                    <div class="section-card_container-compare avg-debt">
-                                        <div>
-                                            <div data-bind="school_section">
-                                                <div class="meter-wrapper" tabindex="0">
-                                                    <figure class="side-meter">
-                                                        <picc-side-meter
-                                                            class="debt"
-                                                            data-bind="average_total_debt_meter">
-                                                        </picc-side-meter>
-                                                        <figcaption>
-                                                            <span data-bind="name">School Name</span>
-                                                            <span data-bind="average_total_debt" class="sr-only"></span>
-                                                        </figcaption>
-                                                    </figure>
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
+
+                                            <div class="compare-degree_group">Offers predominately {{group.label}}</div>
+
+                                            <div class="meter-group_wrapper">
+
+                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="average_total_debt_meter">
+                                                    <span class="label"></span>
+                                                </div>
+
+                                                <div class="section-card_container-compare avg-debt" data-pred-degree="{{group.key}}">
+                                                    <div>
+                                                        <div data-bind="school_section">
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter {% include average_total_debt_meter_attributes.html %}>
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="average_total_debt" class="sr-only"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div><!-- /.meter-group_wrapper -->
+
+                                            <div class="legend-wrapper">
+                                                <div class="legend-nat_average">
+                                                    <div class="legend-nat_average-box">
+                                                        <div class="legend-nat_average-box-line-vert">
+                                                        </div>
+                                                    </div>
+                                                    <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                                                        <span class="tooltip-target">
+                                                            <i class="fa fa-info-circle"></i>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
 
                                 </div><!-- /.debt -->
 
@@ -674,7 +699,7 @@ permalink: /compare/
                                         </span>
                                     </h2>
 
-                                    <div class="section-card_container-compare student-aid">
+                                    <div class="section-card_container-compare student-aid" data-pred-degree="{{group.key}}">
                                         <div>
                                             <div data-bind="school_section">
                                                 <div class="meter-wrapper" tabindex="0">
@@ -701,26 +726,56 @@ permalink: /compare/
                                         <span class="tooltip-target">
                                             <i class="fa fa-info-circle"></i>
                                         </span>
-                                    </h2>
+                                    </h2>{% for group in site.data.predominant_degrees %}
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
 
-                                    <div class="section-card_container-compare avg-loan-payment">
-                                        <div>
-                                            <div data-bind="school_section">
-                                                <div class="meter-wrapper" tabindex="0">
-                                                    <figure class="side-meter">
-                                                        <picc-side-meter
-                                                                class="debt"
-                                                                data-bind="average_monthly_loan_payment_meter">
-                                                        </picc-side-meter>
-                                                        <figcaption>
-                                                            <span data-bind="name">School Name</span>
-                                                            <span data-bind="average_monthly_loan_payment" class="sr-only"></span>
-                                                        </figcaption>
-                                                    </figure>
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
+
+                                            <div class="compare-degree_group">Offers predominately {{group.label}}</div>
+
+                                            <div class="meter-group_wrapper">
+
+                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="average_monthly_loan_payment_meter">
+                                                    <span class="label"></span>
+                                                </div>
+
+                                                <div class="section-card_container-compare avg-loan-payment" data-pred-degree="{{group.key}}">
+                                                    <div>
+                                                        <div data-bind="school_section">
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter {% include average_monthly_payment_meter_attributes.html %}>
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="average_monthly_loan_payment" class="sr-only"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div><!-- /.meter-group_wrapper -->
+
+                                            <div class="legend-wrapper">
+                                                <div class="legend-nat_average">
+                                                    <div class="legend-nat_average-box">
+                                                        <div class="legend-nat_average-box-line-vert">
+                                                        </div>
+                                                    </div>
+                                                    <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                                                        <span class="tooltip-target">
+                                                            <i class="fa fa-info-circle"></i>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
+
                                 </div><!-- /.avg-loan-payment -->
 
                             </div>
@@ -746,49 +801,59 @@ permalink: /compare/
                                         <span class="tooltip-target">
                                             <i class="fa fa-info-circle"></i>
                                         </span>
-                                    </h2>
-                                    <div class="compare-container_group">
+                                    </h2>{% for group in site.data.predominant_degrees %}
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
 
-                                        <div class="average_line" data-meter="grad_rate_meter">
-                                            <span class="label"></span>
-                                        </div>
-                                        <div class="section-card_container-compare grad-rate">
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
 
-                                            <div class="selected-school_grad-rate_group">
+                                            <div class="compare-degree_group">Offers predominately {{group.label}}</div>
 
-                                                <div class="selected-school_grad-rate grad-rate" data-bind="school_section">
+                                            <div class="meter-group_wrapper">
 
-                                                    <div class="meter-wrapper" tabindex="0">
-                                                        <figure class="side-meter">
-                                                            <picc-side-meter {% include graduation_meter_attributes.html %}>
-                                                            </picc-side-meter>
-                                                            <figcaption>
-                                                                <span data-bind="name">School Name</span>
-                                                                <span data-bind="grad_rate" class="sr-only"></span>
-                                                            </figcaption>
-                                                        </figure>
+                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="grad_rate_meter">
+                                                    <span class="label"></span>
+                                                </div>
+                                                <div class="section-card_container-compare grad-rate" data-pred-degree="{{group.key}}">
+
+                                                    <div class="selected-school_grad-rate_group">
+
+                                                        <div class="selected-school_grad-rate grad-rate" data-bind="school_section">
+
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter {% include graduation_meter_attributes.html %}>
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="grad_rate" class="sr-only"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+
+                                                        </div>
                                                     </div>
 
                                                 </div>
-                                            </div>
 
-                                        </div>
+                                            </div><!-- /.meter-group_wrapper -->
 
-                                        <div class="legend-wrapper">
-                                            <div class="legend-nat_average">
-                                                <div class="legend-nat_average-box">
-                                                    <div class="legend-nat_average-box-line-vert">
+                                            <div class="legend-wrapper">
+                                                <div class="legend-nat_average">
+                                                    <div class="legend-nat_average-box">
+                                                        <div class="legend-nat_average-box-line-vert">
+                                                        </div>
+                                                    </div>
+                                                    <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                                                        <span class="tooltip-target">
+                                                            <i class="fa fa-info-circle"></i>
+                                                        </span>
                                                     </div>
                                                 </div>
-                                                <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                                                    <span class="tooltip-target">
-                                                        <i class="fa fa-info-circle"></i>
-                                                    </span>
-                                                </div>
                                             </div>
-                                        </div>
 
-                                    </div>
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
 
                                 </div><!-- /.completion-rate -->
 
@@ -798,55 +863,60 @@ permalink: /compare/
                                         <span class="tooltip-target">
                                             <i class="fa fa-info-circle"></i>
                                         </span>
-                                    </h2>
+                                    </h2>{% for group in site.data.predominant_degrees %}
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
 
-                                    <div class="compare-container_group">
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
 
-                                        <div class="average_line" data-meter="retention_rate_meter">
-                                            <span class="label"></span>
-                                        </div>
-                                        <div class="section-card_container-compare rentention-rate">
+                                            <div class="compare-degree_group">Offers predominately {{group.label}}</div>
 
-                                            <div class="selected-school_retention-rate_group">
+                                            <div class="meter-group_wrapper">
 
-                                                <div class="selected-school_retention-rate rentention-rate" data-bind="school_section">
+                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="retention_rate_meter">
+                                                    <span class="label"></span>
+                                                </div>
 
-                                                    <div class="meter-wrapper" tabindex="0">
-                                                        <figure class="side-meter">
-                                                            <picc-side-meter
-                                                                class="graduation"
-                                                                data-bind="retention_rate_meter"
-                                                                max="1"
-                                                                average="{{ site.data.national_stats.retention_rate.median }}"
-                                                                average-range="{{ site.data.national_stats.retention_rate.average_range|join:'..' }}">
-                                                            </picc-side-meter>
-                                                            <figcaption>
-                                                                <span data-bind="name">School Name</span>
-                                                                <span data-bind="retention_rate_value" class="sr-only"></span>
-                                                            </figcaption>
-                                                        </figure>
+                                                <div class="section-card_container-compare rentention-rate" data-pred-degree="{{group.key}}">
+
+                                                    <div class="selected-school_retention-rate_group">
+
+                                                        <div class="selected-school_retention-rate rentention-rate" data-bind="school_section">
+
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter {% include retention_rate_meter_attributes.html %}>
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="retention_rate_value" class="sr-only"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+
+                                                        </div>
                                                     </div>
 
                                                 </div>
-                                            </div>
 
-                                        </div>
+                                            </div><!-- /.meter-group_wrapper -->
 
-                                        <div class="legend-wrapper">
-                                            <div class="legend-nat_average">
-                                                <div class="legend-nat_average-box">
-                                                    <div class="legend-nat_average-box-line-vert">
+                                            <div class="legend-wrapper">
+                                                <div class="legend-nat_average">
+                                                    <div class="legend-nat_average-box">
+                                                        <div class="legend-nat_average-box-line-vert">
+                                                        </div>
+                                                    </div>
+                                                    <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                                                        <span class="tooltip-target">
+                                                            <i class="fa fa-info-circle"></i>
+                                                        </span>
                                                     </div>
                                                 </div>
-                                                <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                                                    <span class="tooltip-target">
-                                                        <i class="fa fa-info-circle"></i>
-                                                    </span>
-                                                </div>
                                             </div>
-                                        </div>
 
-                                    </div>
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
 
                                 </div><!-- /.grad-retention -->
 
@@ -874,49 +944,59 @@ permalink: /compare/
                                         <span class="tooltip-target">
                                             <i class="fa fa-info-circle"></i>
                                         </span>
-                                    </h2>
-                                    <div class="compare-container_group">
+                                    </h2>{% for group in site.data.predominant_degrees %}
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
 
-                                        <div class="average_line" data-meter="average_salary_meter">
-                                            <span class="label"></span>
-                                        </div>
-                                        <div class="section-card_container-compare average-salary">
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
 
-                                            <div class="selected-school_average-salary_group">
+                                            <div class="compare-degree_group">Offers predominately {{group.label}}</div>
 
-                                                <div class="selected-school_average-salary average-salary" data-bind="school_section">
+                                            <div class="meter-group_wrapper">
 
-                                                    <div class="meter-wrapper" tabindex="0">
-                                                        <figure class="side-meter">
-                                                            <picc-side-meter {% include earnings_meter_attributes.html %}>
-                                                            </picc-side-meter>
-                                                            <figcaption>
-                                                                <span data-bind="name">School Name</span>
-                                                                <span data-bind="average_salary" class="sr-only"></span>
-                                                            </figcaption>
-                                                        </figure>
+                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="average_salary_meter">
+                                                    <span class="label"></span>
+                                                </div>
+                                                <div class="section-card_container-compare average-salary" data-pred-degree="{{group.key}}">
+
+                                                    <div class="selected-school_average-salary_group">
+
+                                                        <div class="selected-school_average-salary average-salary" data-bind="school_section">
+
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter {% include earnings_meter_attributes.html %}>
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="average_salary" class="sr-only"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+
+                                                        </div>
                                                     </div>
 
                                                 </div>
-                                            </div>
 
-                                        </div>
+                                            </div><!-- /.meter-group_wrapper -->
 
-                                        <div class="legend-wrapper">
-                                            <div class="legend-nat_average">
-                                                <div class="legend-nat_average-box">
-                                                    <div class="legend-nat_average-box-line-vert">
+                                            <div class="legend-wrapper">
+                                                <div class="legend-nat_average">
+                                                    <div class="legend-nat_average-box">
+                                                        <div class="legend-nat_average-box-line-vert">
+                                                        </div>
+                                                    </div>
+                                                    <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                                                        <span class="tooltip-target">
+                                                            <i class="fa fa-info-circle"></i>
+                                                        </span>
                                                     </div>
                                                 </div>
-                                                <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                                                    <span class="tooltip-target">
-                                                        <i class="fa fa-info-circle"></i>
-                                                    </span>
-                                                </div>
                                             </div>
-                                        </div>
 
-                                    </div>
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
 
                                 </div><!-- /.avg-salary -->
 
@@ -928,7 +1008,7 @@ permalink: /compare/
                                         </span>
                                     </h2>
 
-                                    <div class="section-card_container-compare advantage-rate">
+                                    <div class="section-card_container-compare advantage-rate" data-pred-degree="{{group.key}}">
                                         <div>
                                             <div data-bind="school_section">
                                                 <div class="meter-wrapper" tabindex="0">
@@ -953,6 +1033,7 @@ permalink: /compare/
                         </div>
                     </aria-accordion>
                 </div>
+
                 <div class="section-card_container-compare_more">
                     <aria-accordion id="selectivity">
                         <div>
@@ -1072,10 +1153,13 @@ permalink: /compare/
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
+
                         </div>
                     </aria-accordion>
                 </div>
+
             </div>
         </div>
     </section>

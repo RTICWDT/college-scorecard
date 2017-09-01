@@ -119,7 +119,7 @@ describe('compare page ', function(){
     var schoolOne = '.school.results-card:nth-child(1) .button-compare_schools';
     var compareOne = '.selected-school_average-cost_group:nth-child(1) figcaption [data-bind="name"]';
 
-    var schoolTwo = '.school.results-card:nth-child(2) .button-compare_schools';
+    var schoolTwo = '.school.results-card:nth-child(3) .button-compare_schools';
     var compareTwo = '.selected-school_average-cost_group:nth-child(2) figcaption [data-bind="name"]';
 
     var schoolOneName = yield browser
@@ -282,6 +282,12 @@ describe('compare page ', function(){
       var meterVal = yield browser.getAttribute('.section-card_container-compare.net-price-income [data-school-id="'+schoolIDs[0]+'"] picc-side-meter', 'value');
       var barVal = yield browser.getText('.section-card_container-compare.net-price-income [data-school-id="'+schoolIDs[0]+'"] .picc-side-meter-val');
 
+      // this is necessary because for whatever reason an undefined attribute value
+      // is '' for a data-<attribute> but `NaN` for the value attribute
+      if (isNaN(meterAttr)) meterAttr = '';
+      if (isNaN(meterVal)) meterVal = '';
+      if (meterVal === '' && !barVal) barVal = '$0';
+
       assert.equal(meterAttr, meterVal);
       assert.equal('$'+(+meterVal).toLocaleString('en'), barVal);
 
@@ -289,6 +295,12 @@ describe('compare page ', function(){
       meterAttr = yield browser.getAttribute('.section-card_container-compare.net-price-income [data-school-id="'+schoolIDs[1]+'"] picc-side-meter', 'data-'+options[i]);
       meterVal = yield browser.getAttribute('.section-card_container-compare.net-price-income [data-school-id="'+schoolIDs[1]+'"] picc-side-meter', 'value');
       barVal = yield browser.getText('.section-card_container-compare.net-price-income [data-school-id="'+schoolIDs[1]+'"] .picc-side-meter-val');
+
+      // this is necessary because for whatever reason an undefined attribute value
+      // is '' for a data-<attribute> but `NaN` for the value attribute
+      if (isNaN(meterAttr)) meterAttr = '';
+      if (isNaN(meterVal)) meterVal = '';
+      if (meterVal === '' && !barVal) barVal = '$0';
 
       assert.equal(meterAttr, meterVal);
       assert.equal('$'+(+meterVal).toLocaleString('en'), barVal);

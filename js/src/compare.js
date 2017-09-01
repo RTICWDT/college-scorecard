@@ -15,7 +15,8 @@ module.exports = function compare() {
   var compareSchools = picc.school.selection.all(LSKey);
 
 
-  // if schools were shared by querystring, compare those instead of any local school picks
+  // if schools were shared by querystring,
+  // compare those instead of any local school picks
   var qs = querystring.parse(location.search.substr(1));
   var shareComparison = false;
   var compareShareLink = document.querySelector('.school-share-wrapper');
@@ -31,7 +32,7 @@ module.exports = function compare() {
   var showError = function (error) {
     console.error('error:', error);
     var message = compareRoot.querySelector('.error-message');
-    if (typeof error.responseText != "undefined") {
+    if (typeof error.responseText != 'undefined') {
       var errorText = JSON.parse(error.responseText);
       error = errorText.errors[0].message;
     }
@@ -114,7 +115,7 @@ module.exports = function compare() {
   params.fields.join(',');
 
   // browser cache-busting for d3.json calls
-  params['_per_page'] = new Date().getTime();
+  params._per_page = new Date().getTime();
 
   var directives = picc.data.selectKeys(picc.school.directives, [
     'name',
@@ -176,14 +177,15 @@ module.exports = function compare() {
     'sat_writing_75',
   ]);
 
-  directives['school_section'] = {
+  directives.school_section = {
       '@data-school-id': function(d) {
         return picc.access(picc.fields.ID)(d);
       }
   };
 
   var meterWrapper = picc.data.selectKeys(picc.school.directives, [
-    'average_line'
+    'compare_group',
+    'median_line'
   ]);
 
   var shareLink = picc.data.selectKeys(picc.school.directives, [
@@ -197,7 +199,6 @@ module.exports = function compare() {
     schools.map(function (school) {
       var id = +school.schoolId || +school;
       query[id] = [picc.API.getSchool, id, params];
-
     });
     return query;
   }
@@ -208,11 +209,12 @@ module.exports = function compare() {
     compareSchools = (shareComparison) ? qs['schools[]'] : picc.school.selection.all(LSKey);
 
     // build query for API call
-    query = buildQuery(compareSchools);
+    var query = buildQuery(compareSchools);
 
     picc.API.getAll(query, function (error, data) {
 
       loadable.classed('js-loading', false);
+      loadable.classed('highlight', !shareComparison);
 
       if (error) {
         console.error('getAll error:', error);
@@ -220,16 +222,16 @@ module.exports = function compare() {
 
       console.info('got schools:', data);
 
-      var school = {};
-      school.results = [];
+      var schools = {};
+      schools.results = [];
 
       Object.keys(data).forEach(function (key) {
         if (data[key]) {
-          school.results.push(data[key]);
+          schools.results.push(data[key]);
         }
       });
 
-      if (!school.results.length) {
+      if (!schools.results.length) {
         loadable.classed('js-error', true);
         loadable.classed('js-loaded', false);
         return showError(picc.errors.NO_SUCH_SCHOOL);
@@ -237,10 +239,11 @@ module.exports = function compare() {
       loadable.classed('js-error', false);
       loadable.classed('js-loaded', true);
 
-      school.results.sort(function(a,b){
-       return (a['school.name'].toLowerCase() < b['school.name'].toLowerCase()) ? -1
-         : (a['school.name'].toLowerCase() > b['school.name'].toLowerCase()) ? 1
-         : 0;
+        // sort schools a-z
+      schools.results.sort(function (a, b) {
+        return (a['school.name'].toLowerCase() < b['school.name'].toLowerCase()) ? -1
+          : (a['school.name'].toLowerCase() > b['school.name'].toLowerCase()) ? 1
+          : 0;
       });
 
       /*
@@ -259,17 +262,20 @@ module.exports = function compare() {
        * time.
        */
 
-      var root = document.querySelectorAll('.compare-container_group');
+      var degreeSectionContainers;
 
       if (picc.ui.ie && picc.ui.alreadyLoaded) {
 
-        [].slice.call(root).forEach(function(node) {
+        degreeSectionContainers = document.querySelectorAll('.compare-container_group');
+
+        [].slice.call(degreeSectionContainers).forEach(function(node) {
           var section = node.querySelector('.section-card_container-compare').cloneNode(true);
-          var avg = node.querySelector('.average_line').cloneNode(true);
+          var median = node.querySelector('.median_line').cloneNode(true);
           picc.ui.removeAllChildren(node);
-          node.appendChild(avg);
-          var addedAvg = node.querySelector('.average_line');
-          addedAvg.parentNode.insertBefore(section, addedAvg.nextSibling);
+          node.appendChild(median);
+          var addedMedian = node.querySelector('.median_line');
+          // addedAvg.parentNode.insertBefore(section, addedAvg.nextSibling);
+          insertAfter(section, addedMedian);
         });
 
       }
@@ -277,18 +283,16 @@ module.exports = function compare() {
       var sections = document.querySelectorAll('.section-card_container-compare');
 
       [].slice.call(sections).forEach(function(node){
-        tagalong(node, school.results, directives);
+          tagalong(node, schoolsByPredDegree(schools.results, node.getAttribute('data-pred-degree')), directives);
       });
 
-      [].slice.call(root).forEach(function (node) {
+      degreeSectionContainers = document.querySelectorAll('.compare-container_group');
+
+      [].slice.call(degreeSectionContainers).forEach(function (node) {
         tagalong(node, {}, meterWrapper);
       });
 
       tagalong(compareShareLink, {}, shareLink);
-
-      // var thead = document.querySelector('.by-family-income-thead');
-      // var tbody = document.querySelector('.by-family-income-tbody');
-      // addOption2ByFamilyIncome(school.results, thead, tbody);
 
       picc.ui.alreadyLoaded = true;
 
@@ -296,41 +300,26 @@ module.exports = function compare() {
 
   }
 
-  /** this will likely not test well on mobile, but is an option
-  function addOption2ByFamilyIncome(schools, thead, tbody) {
-    schools.forEach(function(school) {
-      var last = thead.querySelector('.by-family-income-th:last-of-type');
-      var th = last.cloneNode();
-      th.textContent = picc.access(picc.fields.NAME)(school);
-      th.setAttribute('data-school-id', picc.access(picc.fields.ID)(school));
-      if (last.textContent === 'School Name') {
-        insertAfter(th, last);
-        last.parentNode.removeChild(last);
-      } else {
-        insertAfter(th, last);
-      }
+  function schoolsByPredDegree(results, degreeType) {
+    return results.filter(function(d) {
+      // if degreeType is empty for a section, this returns all schools
+      return picc.access(picc.fields.PREDOMINANT_DEGREE)(d) === +degreeType || !degreeType ;
+    });
+  }
 
-      var rows = [].slice.call(tbody.querySelectorAll('tr'));
-      rows.forEach(function(row){
-        var last = row.querySelector('.income-row:last-of-type');
-        var td = last.cloneNode();
-        var incomeLevel = last.getAttribute('data-row');
-        td.textContent = picc.school.directives[incomeLevel](school);
-        td.setAttribute('data-school-id', picc.access(picc.fields.ID)(school));
-        if (last.textContent === '$XX,XXX'){
-          insertAfter(td,last);
-          last.parentNode.removeChild(last);
-        } else {
-          insertAfter(td, last);
-        }
+  function insertAfter(newNode, referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  }
+
+  function toggleGroupOnHiddenChildren() {
+    var groupsToToggle = [].slice.call(document.querySelectorAll('.compare-container_group[data-pred-degree]'));
+    groupsToToggle.forEach(function(grp) {
+      var isHidden = [].slice.call(grp.querySelectorAll('[data-bind="school_section"]')).every(function(school){
+        return window.getComputedStyle(school, null).display === 'none';
       });
-
-    })
-  }**/
-
-  // function insertAfter(newNode, referenceNode) {
-  //   referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-  // }
+      grp.firstElementChild.setAttribute('aria-hidden', isHidden);
+    });
+  }
 
   function toggleDisplay(e) {
 
@@ -352,6 +341,10 @@ module.exports = function compare() {
       root.classed('js-loaded', true);
       loadable.classed('js-error', false);
     }
+
+    // if all schools of a degree type are hidden
+    // toggle the container for the degree type
+    toggleGroupOnHiddenChildren();
 
   }
 
@@ -397,9 +390,11 @@ module.exports = function compare() {
     var highlightSchool = 'data-highlight-btn';
     picc.delegate(
       document.body,
+      // no events for shared pages
       // if the element matches '[aria-pressed] && [data-highlight]'
       function() {
-        return (this.parentElement.hasAttribute(ariaPressed) || this.hasAttribute(ariaPressed))
+        return !shareComparison
+          && ( this.parentElement.hasAttribute(ariaPressed) || this.hasAttribute(ariaPressed) )
           && this.hasAttribute(highlightSchool);
       },
       {
@@ -413,13 +408,13 @@ module.exports = function compare() {
    * * add event listeners for school picc bar highlighter click events
    */
   picc.ready(function() {
-    var dataBind = 'data-bind';
-    var dataSchoolId = 'data-school-id';
     picc.delegate(
       document.body,
       // if the element matches '[data-bind="school_section"] && [data-school-id]'
       function() {
-        return (this.closest('[data-bind="school_section"]') && this.closest('[data-bind="school_section"]').hasAttribute('data-school-id'));
+        return !shareComparison
+          && this.closest('[data-bind="school_section"]')
+          && this.closest('[data-bind="school_section"]').hasAttribute('data-school-id');
       },
       {
         click: picc.school.selection.highlightBarToggle
@@ -437,7 +432,7 @@ module.exports = function compare() {
       document.body,
       // if the element matches '[data-select]'
       function() {
-        return this.hasAttribute(dataSelect)
+        return this.hasAttribute(dataSelect);
       },
       {
         change: function(e) {
@@ -449,7 +444,9 @@ module.exports = function compare() {
           for (var i = 0; i < meters.length; i++) {
             var value = meters[i].getAttribute('data-'+selectedOption);
             var formattedValue = picc.format[formatter]('value')({'value': value});
-            if (formatter === 'percent') formattedValue = (value >= .005) ? formattedValue : (value) ? "<1%" : "No Data Available";
+            if (formatter === 'percent') {
+              formattedValue = (value >= 0.005) ? formattedValue : (value) ? '<1%' : 'No Data Available';
+            }
             // set bar
             meters[i].setAttribute('value', value);
             // set bar text value
@@ -476,7 +473,7 @@ module.exports = function compare() {
     .on('open', function() {
       var opened = this;
       toggles.each(function() {
-        if (this !== opened) this.close();
+        if (this !== opened) { this.close(); }
       });
 
       var event = 'click.toggle';

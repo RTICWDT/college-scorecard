@@ -9,7 +9,8 @@ window.PICCMeter = document.registerElement('picc-meter', {
         this.min = getAttr(this, 'min', 0);
         this.max = getAttr(this, 'max', 1);
         this.value = getAttr(this, 'value');
-        this.average = getAttr(this, 'average');
+        this.median = getAttr(this, 'median');
+        this.degree = getAttr(this,'degree');
 
         this.update();
       }},
@@ -17,22 +18,23 @@ window.PICCMeter = document.registerElement('picc-meter', {
       attributeChangedCallback: {value: function(attr, prev, value) {
         // pass through attribute settings to
         // properties for min, max, value an
-        // average
+        // median
         switch (attr) {
           case 'min':
           case 'max':
           case 'value':
-          case 'average':
+          case 'median':
+          case 'degree':
             this[attr] = value;
             return;
         }
       }},
 
       update: {value: function() {
-        var min = this.min;
-        var max = this.max;
+        var min = getMin(this);
+        var max = getMax(this);
+        var median = getMedian(this);
         var value = this.value;
-        var average = this.average;
 
         var bar = getBar(this);
         var line = getLine(this);
@@ -72,11 +74,11 @@ window.PICCMeter = document.registerElement('picc-meter', {
           // prevent the bar from exceeding the height
           bar.style.setProperty('height', percent(Math.min(value, max)));
 
-          if (this.hasAttribute('average-range')) {
-            var range = this.getAttribute('average-range');
+          if (this.hasAttribute('percentile-range')) {
+            var range = getRange(this);
             var numbers = range.split('..').map(Number);
             if (numbers.some(isNaN)) {
-              console.warn('invalid average-range:', range, numbers);
+              console.warn('invalid median-range:', range, numbers);
               classify(this, {
                 'above_average': false,
                 'below_average': false,
@@ -99,11 +101,11 @@ window.PICCMeter = document.registerElement('picc-meter', {
             });
           }
 
-          if (isNaN(average)) {
+          if (isNaN(median)) {
             line.style.setProperty('display', 'none');
           } else {
             line.style.removeProperty('display');
-            line.style.setProperty('bottom', percent(average));
+            line.style.setProperty('bottom', percent(median));
           }
 
         }
@@ -143,12 +145,22 @@ window.PICCMeter = document.registerElement('picc-meter', {
         }
       },
 
-      average: {
+      median: {
         get: function() {
-          return this.__average;
+          return this.__median;
         },
         set: function(value) {
-          this.__average = number(value);
+          this.__median = number(value);
+          deferUpdate(this);
+        }
+      },
+
+      degree: {
+        get: function() {
+          return this.__degree;
+        },
+        set: function(value) {
+          this.__degree = number(value);
           deferUpdate(this);
         }
       }
@@ -190,6 +202,33 @@ function getLine(meter) {
       .setAttribute('class', 'label');
   }
   return line;
+}
+
+function getMin(meter) {
+  return meter.getAttribute('data-min-' + getSuffixForDegree(meter.degree));
+}
+
+function getMax(meter) {
+  return meter.getAttribute('data-max-' + getSuffixForDegree(meter.degree));
+}
+
+function getMedian(meter) {
+ return meter.getAttribute('data-median-' + getSuffixForDegree(meter.degree));
+}
+
+function getRange(meter) {
+  return meter.getAttribute('data-range-' + getSuffixForDegree(meter.degree));
+}
+
+function getSuffixForDegree(degree){
+  switch(degree) {
+    case 3:
+      return 'four_year';
+    case 2:
+      return 'two_year';
+    case 1:
+      return 'cert';
+  }
 }
 
 function number(value, fallback) {

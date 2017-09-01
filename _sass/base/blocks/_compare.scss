@@ -114,37 +114,45 @@
 
 .compare-schools {
   @include outer-container();
-  overflow-x: auto;
 
 }
 
 .compare-container_group {
   position: relative;
-  top: 5px;
-  .average_line {
-    position:absolute;
-    bottom:0;
-    top: 0;
-    border: 1px solid $black;
-    width: 0;
-    z-index: 1;
 
-    .label {
-      text-align: center;
-      position: absolute;
-      top: -20px;
-      right: -50px;
-      width: 100px;
-      margin-left: auto;
-      margin-right: auto;
-      color: rgba(0,0,0,.6);
-      @include font-size($h5);
+  .compare-degree_group {
+    font-style: italic;
+  }
+
+  .meter-group_wrapper {
+    position: relative;
+    top: $base-padding-large;
+
+    .median-line {
+      position:absolute;
+      bottom:0;
+      top: 0;
+      border: 1px solid $black;
+      width: 0;
+      z-index: 1;
+
+      .label {
+        text-align: center;
+        position: absolute;
+        top: -20px;
+        right: -50px;
+        width: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        color: rgba(0,0,0,.6);
+        @include font-size($h5);
+      }
     }
   }
 
   .legend-wrapper {
     position: relative;
-    top:-50px;
+    top:-25px;
   }
 }
 
@@ -477,6 +485,6 @@ figcaption {
 
 }
 
-.compare-schools [data-bind="school_section"][data-school-id] {
+.highlight .compare-schools [data-bind="school_section"][data-school-id] {
   cursor: pointer;
 }

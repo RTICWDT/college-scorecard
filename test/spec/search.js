@@ -234,59 +234,46 @@ describe('search', function() {
     assert.equal(yield utils.getSearchCount(),
                  results.spotChecks.allPrivateForProfit);
   });
-});
 
-describe('autocomplete', function() {
-
-  it('should return results after typing 3 reasonable characters', function*() {
+  it('should return autocomplete results after typing 3 reasonable characters', function*() {
 
     var nameInput = yield browser
-        .url('/')
-        .click('#school-name h1 [aria-controls]')
-        .setValue('#name-school', 'Uni');
+      .url('/')
+      .click('#school-name h1 [aria-controls]')
+      .setValue('#name-school', 'Uni');
 
     var doesExist = yield browser.waitForExist('#name-content .tt-dataset > .tt-suggestion > .tt-highlight');
 
     assert.equal(doesExist, true);
-
-
   });
 
-  it('should return results when reasonable letters were typed', function*() {
+  it('should return autocomplete results when reasonable letters were typed', function*() {
 
     var nameInput = yield browser
-        .url('/')
-        .click('#school-name h1 [aria-controls]')
-        .setValue('#name-school', 'Berkeley');
+      .url('/')
+      .click('#school-name h1 [aria-controls]')
+      .setValue('#name-school', 'Berkeley');
 
-    var doesExist = yield browser.waitForExist('#name-content .tt-dataset > .tt-suggestion > .tt-highlight');
-
-    var actualText = yield browser.getText('#name-content .tt-dataset > .tt-suggestion > .tt-highlight');
+    var actualText = yield browser.waitForExist('#name-content .tt-dataset > .tt-suggestion > .tt-highlight')
+        .getText('#name-content .tt-dataset > .tt-suggestion > .tt-highlight');
 
     assert.equal(actualText[0], 'Berkeley');
-
   });
 
-  it('should contain no results for a nonsense word', function*() {
+  it('should contain no autocomplete results for a nonsense word', function*() {
 
     var nameInput = yield browser
-        .url('/')
-        .click('#school-name h1 [aria-controls]')
-        .setValue('#name-school', 'nons%ense wo@d#');
+      .url('/')
+      .click('#school-name h1 [aria-controls]')
+      .setValue('#name-school', 'San Francisco')
+      .setValue('#name-school', 'nons%ense wo@d#');
 
-    // forcing a pause as to simulate a search due to .tt-empty class added before any response
-    var doesExist = yield browser.pause(3000).waitForExist('#name-content .tt-empty .tt-dataset');
+    var doesExist = yield browser.waitForExist('#name-content .tt-empty .tt-dataset');
 
     assert.equal(doesExist, true);
-
   });
 
-});
-
-// compare schools toggles on search results page
-
-describe('compare', function() {
-
+  // compare schools toggles on search results page
   after(function() {
     browser.localStorage('DELETE');
   });
@@ -408,5 +395,4 @@ describe('compare', function() {
 
     assert.equal(+counterAfter, 10);
   });
-
 });

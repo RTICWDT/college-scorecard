@@ -16,8 +16,7 @@ retention-rate: <strong>Students Who Return After Their First Year</strong> The 
 
 earnings-25k: <strong>Threshold Earnings</strong> The share of former students earning more than $25,000, or about the average earnings of a high school graduate aged 25-34, 6 years after they first enroll.
 
-# Update me
-full-time: <strong>PLACEHOLDER</strong> The share of students who were enrolled full-time.
+full-time: <strong>Full-time Enrollment</strong> Percent of first-time, full-time students.
 
 race-eth: <strong>Race/Ethnicity</strong> The specific race/ethnicity categories (including those for foreign students pursuing postsecondary education at an institution within the U.S.) are either required (1997) and/or approved (2007) by the Office of Management and Budget (2007). Only the race/ethnicity groups of students enrolled in this institution are displayed.
 
