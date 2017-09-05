@@ -128,6 +128,10 @@ ol.disc,
   li {
     padding-bottom: ($base-padding-lite * 0.4);
   }
+
+  &.second_level {
+    list-style-type: square;
+  }
 }
 
 // Unmarked List
