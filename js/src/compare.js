@@ -21,13 +21,16 @@ module.exports = function compare() {
   var shareComparison = false;
   var compareShareLink = document.querySelector('.school-share-wrapper');
 
-  if (qs['schools[]'])
-  {
+  if (qs['schools[]']) {
     // console.log('share', qs['schools[]']);
     compareSchools = qs['schools[]'];
     shareComparison = true;
 
   }
+
+  var searchReferrer = (!shareComparison && document.referrer.match('/search')) ? document.referrer : '../search/';
+  d3.select('#referrer-link')
+    .attr('href', searchReferrer);
 
   var showError = function (error) {
     console.error('error:', error);
