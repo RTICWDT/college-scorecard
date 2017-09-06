@@ -54,11 +54,15 @@ stylesheets:
                 </a>
               </div>
 
-	          <div class="compare-school">
-              	{% include compare_school_control.html %}
-              </div>
+              <div class="compare-wrapper">
 
-              <h1 data-bind="name">School Name</h1>
+                <h1 data-bind="name">School Name</h1>
+
+                <div class="compare-school">
+                  {% include compare_school_control.html %}
+                </div>
+
+              </div>
 
               <h2 class="location">
                 <span data-bind="city">City</span>,

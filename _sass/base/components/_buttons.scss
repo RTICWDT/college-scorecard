@@ -122,8 +122,8 @@ input[type="submit"] {
     letter-spacing: 0;
     line-height: 1;
     white-space: normal;
-    width: auto;
-    float: right;
+    width: 40px;
+    //float: right;
     position:relative;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     &[aria-pressed="true"] {
