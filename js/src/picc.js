@@ -1385,7 +1385,7 @@ picc.school.selection = {
 
       var compareBtns = [].slice.call(document.querySelectorAll('button.button-compare_schools:not([aria-pressed="true"])'));
       for(var i=0; i<compareBtns.length;i++) {
-        compareBtns[i].setAttribute('aria-describedby', "tip-compare-max");
+        compareBtns[i].setAttribute('aria-describedby', 'tip-compare-max');
       }
 
     },
@@ -1393,7 +1393,7 @@ picc.school.selection = {
     hideMaxSelected: function() {
       var compareBtns = [].slice.call(document.querySelectorAll('button.button-compare_schools'));
       for(var i=0; i<compareBtns.length;i++) {
-        compareBtns[i].removeAttribute('aria-describedby');
+        compareBtns[i].setAttribute('aria-describedby', 'tip-compare-add' );
       }
     },
 
