@@ -17,7 +17,7 @@ module.exports = function compare() {
 
   // if schools were shared by querystring,
   // compare those instead of any local school picks
-  var qs = querystring.parse(location.search.substr(1));
+  var qs = querystring.parse(decodeURIComponent(location.search.substr(1)));
   var shareComparison = false;
   var compareShareLink = document.querySelector('.school-share-wrapper');
 

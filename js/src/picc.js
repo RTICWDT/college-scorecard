@@ -913,7 +913,7 @@ picc.school.directives = (function() {
           this.getAttribute('data-href'),
           {
             url: (function() {
-              var qs =  querystring.parse(location.search.substr(1));
+              var qs =  querystring.parse(decodeURIComponent(location.search.substr(1)));
               var share = [];
               var schools = (qs['schools[]']) ? qs['schools[]'] : picc.school.selection.all(picc.school.selection.LSKey);
 
@@ -922,7 +922,7 @@ picc.school.directives = (function() {
                   if (item.schoolId) {
                     item = item.schoolId;
                   }
-                  return 'schools[]=' +item.replace('/^[0-9]/', '');
+                  return encodeURIComponent('schools[]=' +item.replace('/^[0-9]/', ''));
                 });
               }
 
