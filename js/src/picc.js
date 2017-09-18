@@ -821,20 +821,25 @@ picc.school.directives = (function() {
   var years = format.preddeg(fields.PREDOMINANT_DEGREE);
 
   var meterMedian = function(el, degreeType) {
-    switch(degreeType) {
-      case 3:
-        return el.getAttribute('data-median-four_year');
-      case 2:
-        return el.getAttribute('data-median-two_year');
-      case 1:
-        return el.getAttribute('data-median-cert');
-    }
+
+    // simply using the overall national median per ED
+    return el.getAttribute('median');
+
+    // switch(degreeType) {
+    //   case 3:
+    //     return el.getAttribute('data-median-four_year');
+    //   case 2:
+    //     return el.getAttribute('data-median-two_year');
+    //   case 1:
+    //     return el.getAttribute('data-median-cert');
+    // }
   };
 
   var medianLine = {
     '@style': function() {
       var type = this.getAttribute('data-meter');
-      var medianType = this.getAttribute('data-median');
+      // var medianType = this.getAttribute('data-median');
+      var medianType = 'median';
       var meter = this.closest('.compare-container_group').querySelector('[data-bind="'+type+'"]');
 
       if (!meter) { return ''; }
@@ -860,7 +865,8 @@ picc.school.directives = (function() {
     label: {
       text: function() {
         var type = this.closest('[data-meter]').getAttribute('data-meter');
-        var medianType = this.closest('[data-median]').getAttribute('data-median');
+        // var medianType = this.closest('[data-median]').getAttribute('data-median');
+        var medianType = 'median';
         var meter = this.closest('.compare-container_group').querySelector('[data-bind="' + type + '"]');
         if (!meter) { return ''; }
         switch (type) {

@@ -31,9 +31,12 @@ window.PICCMeter = document.registerElement('picc-meter', {
       }},
 
       update: {value: function() {
-        var min = getMin(this);
-        var max = getMax(this);
-        var median = getMedian(this);
+        // var min = getMin(this);
+        // var max = getMax(this);
+        // var median = getMedian(this);
+        var min = this.min;
+        var max = this.max;
+        var median = this.median;
         var value = this.value;
 
         var bar = getBar(this);
@@ -75,7 +78,8 @@ window.PICCMeter = document.registerElement('picc-meter', {
           bar.style.setProperty('height', percent(Math.min(value, max)));
 
           if (this.hasAttribute('percentile-range')) {
-            var range = getRange(this);
+            // var range = getRange(this);
+            var range = this.getAttribute('percentile-range');
             var numbers = range.split('..').map(Number);
             if (numbers.some(isNaN)) {
               console.warn('invalid median-range:', range, numbers);
