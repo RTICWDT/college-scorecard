@@ -1,4 +1,4 @@
-var tagalong = require('tagalong');
+var tagalong = require('./tagalong');
 var d3 = require('d3');
 var querystring = require('querystring');
 
@@ -469,7 +469,6 @@ module.exports = function compare() {
 
   });
 
-
   var win = d3.select(window);
   // close other toggles when one opens
   var toggles = d3.selectAll('.toggle-accordion')
@@ -495,6 +494,4 @@ module.exports = function compare() {
       toggles.property('expanded', false);
     }
   });
-
-
 };

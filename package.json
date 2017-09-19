@@ -26,10 +26,10 @@
     "d3": "^3.5.9",
     "document-register-element": "^0.5.0",
     "element-closest": "^2.0.2",
+    "element-dataset": "^2.2.6",
     "formdb": "^0.2.0",
     "jquery": "^2.2.4",
     "leaflet": "^0.7.7",
-    "tagalong": "^0.1.2",
     "typeahead.js-browserify": "^1.0.7"
   },
   "devDependencies": {

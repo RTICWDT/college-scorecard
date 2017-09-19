@@ -1,4 +1,4 @@
-var tagalong = require('tagalong');
+var tagalong = require('./tagalong');
 var d3 = require('d3');
 
 module.exports = function school() {

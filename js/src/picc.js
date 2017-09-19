@@ -4,9 +4,11 @@ if (typeof window !== 'undefined') {
   // for polyfilling common JS APIs
   require('aight');
   require('element-closest');
+  require('element-dataset').default();
+
   // web components
   require('./components');
-  var tagalong = require('tagalong');
+  var tagalong = require('./tagalong');
   var jQuery = require("jquery");
   var typeahead = require("typeahead.js-browserify");
   typeahead.loadjQueryPlugin(); //attach jQuery

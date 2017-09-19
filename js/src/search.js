@@ -1,5 +1,5 @@
 // tagalong!
-var tagalong = require('tagalong');
+var tagalong = require('./tagalong');
 var formdb = require('formdb');
 var querystring = require('querystring');
 var d3 = require('d3');
