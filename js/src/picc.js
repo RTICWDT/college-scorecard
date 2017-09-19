@@ -1241,16 +1241,17 @@ picc.school.directives = (function() {
     race_ethnicity_meter: {
       '@data-aian': access.raceEthnicityValueByKey('aian'),
       '@data-asian': access.raceEthnicityValueByKey('asian'),
-      '@data-asian_pacific_islander': access.raceEthnicityValueByKey('asian_pacific_islander'),
       '@data-black': access.raceEthnicityValueByKey('black'),
-      '@data-black_non_hispanic': access.raceEthnicityValueByKey('black_non_hispanic'),
       '@data-hispanic': access.raceEthnicityValueByKey('hispanic'),
       '@data-nhpi': access.raceEthnicityValueByKey('nhpi'),
       '@data-non_resident_alien': access.raceEthnicityValueByKey('non_resident_alien'),
       '@data-two_or_more': access.raceEthnicityValueByKey('two_or_more'),
       '@data-unknown': access.raceEthnicityValueByKey('unknown'),
       '@data-white': access.raceEthnicityValueByKey('white'),
-      '@data-white_non_hispanic': access.raceEthnicityValueByKey('white_non_hispanic'),
+      // no longer used data vars
+      // '@data-white_non_hispanic': access.raceEthnicityValueByKey('white_non_hispanic'),
+      // '@data-asian_pacific_islander': access.raceEthnicityValueByKey('asian_pacific_islander'),
+      // '@data-black_non_hispanic': access.raceEthnicityValueByKey('black_non_hispanic'),
       '@value': function() {
         var select = document.getElementById('race_ethnicity');
         return this.getAttribute('data-'+select.value);
