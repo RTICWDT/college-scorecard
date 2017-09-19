@@ -677,11 +677,12 @@ picc.access.retentionRate = function(d) {
   var retention = picc.access(picc.fields.RETENTION_RATE)(d);
   /* jshint ignore:start */
   if (retention) {
-    return retention.four_year.full_time || retention.lt_four_year.full_time;
+    var fourYear = retention.four_year.full_time;
+    return (fourYear || fourYear === 0) ? fourYear : retention.lt_four_year.full_time;
   }
   // data result key may be a full path dotted-string
   retention = picc.access(picc.fields.RETENTION_RATE + ".four_year.full_time")(d);
-  return (retention) ? retention : picc.access(picc.fields.RETENTION_RATE + ".lt_four_year.full_time")(d) ;
+  return ( retention || retention === 0) ? retention : picc.access(picc.fields.RETENTION_RATE + ".lt_four_year.full_time")(d) ;
   /* jshint ignore:end */
 };
 
