@@ -3,10 +3,10 @@ title: College Scorecard Data
 layout: default-data
 permalink: /data/
 data_base_url: https://ed-public-download.app.cloud.gov/downloads
-scripts:
-  - vendor/flickity.pkgd.js
-stylesheets:
-  - vendor/flickity.min.css
+#scripts:
+#  - vendor/flickity.pkgd.js
+#stylesheets:
+#  - vendor/flickity.min.css
 ---
 
 <div class="data-home-convo">
@@ -28,11 +28,13 @@ stylesheets:
 
   <section class="section section-margin_top">
 
-    <div class="data-home-intro-col-left section-margin_bottom">
+    <div class="data-home-intro-col-left section-margin_bottom data-home-insights">
 
       <h2>Data Insights</h2>
 
-      <div class="main-gallery u-h_center_block js-flickity"
+      <p class="padded-bottom">The College Scorecard 2017 Data Insights report describes summary statistics for the data update published in the fall of 2017. The College Scorecard Technical Paper provides in-depth data analysis on College Scorecard data as well as a discussion of the College Scorecard data generating process.</p>
+
+      {% comment %}<div class="main-gallery u-h_center_block js-flickity"
       data-flickity-options='{
         "cellAlign": "left",
         "contain": true,
@@ -65,7 +67,7 @@ stylesheets:
             <cite class="insight-cite">Learn more in the Technical Paper</cite>
         </div>
 
-      </div>
+      </div>{% endcomment %}
 
       <div class="u-align_c">
         <a href="{{ site.baseurl }}/assets/UsingFederalDataToMeasureAndImprovePerformance.pdf" class="button data-home-button">Download the Technical Paper</a>
@@ -97,7 +99,7 @@ stylesheets:
 
       <h2>Download the Data</h2>
 
-      <p class='padded-bottom'>Download the data that appear on the College Scorecard, as well as
+      <p class="padded-bottom">Download the data that appear on the College Scorecard, as well as
         supporting data on student completion, debt and repayment, earnings,
         and more. The files include data from 1996 through 2016 for all
         undergraduate degree-granting institutions of higher education. </p>
