@@ -359,6 +359,11 @@ figcaption {
         text-align: left;
       }
 
+      > div {
+        display: block;
+        text-align: center;
+      }
+
     }
 
     .school-size {
