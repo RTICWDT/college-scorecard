@@ -1,10 +1,10 @@
 .compare-bg {
-  background-color: $white;
+  background-color: $light-gray;
   padding-bottom: $base-padding;
 
 
   .toggles {
-
+    @include display(flex);
     @include respond-to(small-up) {
       max-height: 55px;
     }
@@ -115,13 +115,36 @@
 .compare-schools {
   @include outer-container();
 
+  @include respond-to(medium-down) {
+    > .container {
+      padding-left:0;
+      padding-right:0;
+    }
+  }
 
+  .compare-main-alert {
+    .show-error {
+      background-color: $white;
+      padding: $base-padding-extra;
+      border-radius: 0.4em;
+      @include respond-to(large-up) {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+  
   .schools-compare_selected-list {
+    background-color: $white;
+    padding: $base-padding;
+    border-radius: 0.4em;
 
     @include respond-to(large-up) {
-      max-width: 650px;
+      max-width: 800px;
       margin-left: auto;
       margin-right: auto;
+      padding: $base-padding-extra;
     }
   }
 
