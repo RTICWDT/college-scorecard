@@ -103,62 +103,41 @@
   @include span-columns(12);
   background-color: $tertiary-background-color;
 
-  a {
-    color: $black;
-    text-decoration: none;
-
-    &:hover,
-    &:focus {
-      text-decoration: underline;
-    }
-  }
-
   @include respond-to(large-up) {
     @include span-columns(6);
   }
 
-  img {
-    @extend .new_line;
-    opacity: $icon-opacity;
-    margin-right: auto;
-    margin-left: auto;
-    width: 40px;
-    height: 40px;
-  }
+  .section-home-numbers-content {
+    padding: $base-padding $base-padding-large $base-padding-large $base-padding-large;
 
-  ul {
-
-    padding-top: ($base-padding + 1.65em);
-    padding-bottom: ($base-padding + 4.3em);
-
-    @include respond-to(tiny-up) {
-      text-align: left;
+    p {
+      padding-bottom: $base-padding;
     }
 
-    li {
-      padding: $base-padding $base-padding-extra;
-      border-bottom: $thin-border-size solid $base-border-color;
+    .button-outline {
+      @include font-size($h6);
+      padding-left: $base-padding;
+      padding-right: $base-padding;
+    }
 
-      &:first-of-type {
-        border-top: $thin-border-size solid $base-border-color;
+    @include respond-to(small-up) {
+      .button-outline {
+        @include font-size($h4);
       }
     }
-  }
 
-  @include respond-to(tiny-up) {
-    .section-home-numbers-group {
-      display: table;
-      width: 100%;
-    }
+    @include respond-to(large-up) {
+      // magic numbers to make this content block line up with the one next door
+      padding-top: 17px;
+      min-height: 315px;
+      p{
+        min-height: 85px;
+        padding-bottom: $base-padding-lite;
+        & + div {
+          padding-top: 50px;
+        }
+      }
 
-    .section-home-numbers-group-left {
-      display: table-cell;
-      padding-right: 20px;
-    }
-
-    .section-home-numbers-group-right {
-      display: table-cell;
-      vertical-align: middle;
     }
   }
 }
@@ -293,7 +272,7 @@
   }
 
   @include respond-to(large-up) {
-    @include span-columns(4);
+    @include span-columns(6);
     padding-top: $base-padding;
 
     > div > div {
