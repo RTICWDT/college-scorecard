@@ -396,33 +396,11 @@ figcaption {
         @include font-size($h3);
         @include span-columns(6 of 6);
         @include respond-to(small-up) {
-          @include span-columns(3 of 6);
+          min-width: 325px;
+          > select {
+            max-width: 310px;
+          }
         }
-      }
-    }
-  }
-
-  .net-price-income-option2 {
-
-    .by-family-income-thead th {
-      background-color: $darker-yellow;
-      margin-right: $base-padding-lite;
-      &:first-of-type {
-        background-color: $white;
-      }
-      padding: $base-padding-lite;
-    }
-
-    .by-family-income-tbody td {
-      text-align: center;
-      padding: $base-padding-lite;
-      font-weight: 700;
-      &:first-of-type {
-        font-weight: inherit;
-      }
-
-      &[data-highlight="true"] {
-        background-color: $orange;
       }
     }
   }
@@ -436,7 +414,10 @@ figcaption {
         @include font-size($h3);
         @include span-columns(6 of 6);
         @include respond-to(small-up) {
-          @include span-columns(4 of 6);
+          min-width: 325px;
+          > select {
+            max-width: 310px;
+          }
         }
       }
     }
