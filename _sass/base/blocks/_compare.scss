@@ -115,6 +115,16 @@
 .compare-schools {
   @include outer-container();
 
+
+  .schools-compare_selected-list {
+
+    @include respond-to(large-up) {
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
 }
 
 .compare-container_group {
@@ -204,6 +214,13 @@ figcaption {
 }
 
 .section-card_container-compare_more {
+
+  @include respond-to(large-up) {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
 
   @extend .section-card_container-school;
 
