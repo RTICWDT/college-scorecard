@@ -126,12 +126,14 @@ function applyDirectives(node, data, directives) {
   for (var key in directives) {
     if (key.charAt(0) === '@') {
       var attr = key.substr(1);
-      var value = access(key, attr) || '';
+      var accessedValue = access(key, attr);
+      var value = (accessedValue || accessedValue === 0) ? accessedValue : '';
       node.setAttribute(attr, value);
     } else {
       switch (key) {
         case 'text':
-          node.textContent = access(key) || '';
+          var txt = access(key);
+          node.textContent = (txt || txt === 0) ? txt : '';
           break;
       }
       if (typeof directives[key] === 'object') {
