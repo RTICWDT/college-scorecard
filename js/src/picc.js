@@ -812,7 +812,7 @@ picc.school.directives = (function() {
   var raceEthnicity = function(d) {
     var select = document.getElementById('race_ethnicity');
     var selectValue = (select) ? access(picc.access.raceEthnicityValueByKey(select.value))(d) : null;
-    return (selectValue >= .005) ? format.percent('selectValue')({'selectValue':selectValue}) : (selectValue) ? '<1%' : 'No Data Available';
+    return (selectValue >= .005 || selectValue === 0) ? format.percent('selectValue')({'selectValue':selectValue}) : (selectValue) ? '<1%' : 'No Data Available';
   };
 
   // binds data to select-controlled value

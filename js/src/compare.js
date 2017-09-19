@@ -448,7 +448,7 @@ module.exports = function compare() {
             var value = meters[i].getAttribute('data-'+selectedOption);
             var formattedValue = picc.format[formatter]('value')({'value': value});
             if (formatter === 'percent') {
-              formattedValue = (value >= 0.005) ? formattedValue : (value) ? '<1%' : 'No Data Available';
+              formattedValue = (value >= 0.005 || value === 0) ? formattedValue : (value) ? '<1%' : 'No Data Available';
             }
             // set bar
             meters[i].setAttribute('value', value);
