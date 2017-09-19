@@ -468,9 +468,9 @@ figcaption {
         height: 1.2em;
         font-size: .8rem;
         background-color: $light-gray;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include display(flex);
+        @include align-items(center);
+        @include justify-content(center);
       }
 
 

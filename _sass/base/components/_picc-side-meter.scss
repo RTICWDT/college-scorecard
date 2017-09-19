@@ -14,8 +14,8 @@ picc-side-meter {
 
   .picc-side-meter-val {
     position: absolute;
-    display: flex;
-    align-items: center;
+    @include display(flex);
+    @include align-items(center);
     height: 100%;
     padding: 0 3px;
     color: $black;
@@ -47,8 +47,8 @@ picc-side-meter {
       color: $dark-gray;
       content: 'Data not available';
       white-space: nowrap;
-      display: flex;
-      align-items: center;
+      @include display(flex);
+      @include align-items(center);
       position: relative;
       text-align: center;
       background-color: rgba(234, 234, 234, 0.9);

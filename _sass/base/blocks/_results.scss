@@ -353,10 +353,10 @@
 }
 
 .school.results-card[data-compare="true"] {
-  display: flex;
+  @include display(flex);
   padding: 4px;
   //margin: -5px;
-  flex-direction: column;
+  @include flex-direction(column);
   background-color: $darker-yellow;
   /* Single pixel data uri image http://jsfiddle.net/LPxrT/
   /* background-image: darker-yellow, darker-yellow, white */
@@ -400,8 +400,13 @@
   margin-bottom: $base-padding;
 
   .compare-wrapper {
-    display: flex;
-    flex-flow: row nowrap;
+    @include display(flex);
+    @include flex-direction(row);
+    @include flex-wrap(nowrap);
+    flex: 1 0 auto;
+    h1 {
+      width: 85%;
+    }
   }
 }
 
