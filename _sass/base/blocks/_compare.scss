@@ -123,7 +123,8 @@
   }
 
   .compare-main-alert {
-    .show-error {
+    .show-error,
+    .show-loading {
       background-color: $white;
       padding: $base-padding-extra;
       border-radius: 0.4em;
