@@ -16,7 +16,16 @@ module.exports = function school() {
 
   loadable.classed('js-loading', true);
 
-  picc.API.getSchool(id, function onSchoolLoad(error, school) {
+  var params = {};
+
+  // only display scorecard school (from default search)
+  params[picc.fields.OPERATING] = 1;
+  params[picc.fields.DEGREE_OFFERED + '.assoc_or_bachelors'] = true;
+  params[picc.fields.SIZE + '__range'] = '0..';
+  params[picc.fields.PREDOMINANT_DEGREE + '__range'] = '1..3';
+  params[picc.fields.HIGHEST_DEGREE + '__range'] = '2..4';
+
+  picc.API.getSchool(id, params, function onSchoolLoad(error, school) {
     loadable.classed('js-loading', false);
 
     if (error) {
