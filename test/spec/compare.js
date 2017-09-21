@@ -205,16 +205,16 @@ describe('compare page ', function(){
     var options = [
       'aian',
       'asian',
-      'asian_pacific_islander',
+      // 'asian_pacific_islander',
       'black',
-      'black_non_hispanic',
+      // 'black_non_hispanic',
       'hispanic',
       'nhpi',
       'non_resident_alien',
       'two_or_more',
       'unknown',
       'white',
-      'white_non_hispanic'
+      // 'white_non_hispanic'
     ];
 
     yield browser
