@@ -323,7 +323,7 @@ describe('school page', function() {
   });
 
   it('should show <4-year retention rate if 4-year rate is unavailable', function*() {
-    yield loadSchoolUrl('219578-Aquinas-College');
+    yield loadSchoolUrl('452948-Galen-College-of-Nursing-Cincinnati');
     assert.equal(yield toggleAccordion('#graduation'), 'true');
 
     var meterClass = yield browser.getAttribute('#retention-meter', 'class');
