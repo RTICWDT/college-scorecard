@@ -101,41 +101,23 @@
   @extend .centered;
   @extend .section-card_container;
   @include span-columns(12);
-  background-color: $tertiary-background-color;
+  //background-color: $tertiary-background-color;
 
   @include respond-to(large-up) {
     @include span-columns(6);
   }
 
   .section-home-numbers-content {
-    padding: $base-padding $base-padding-large $base-padding-large $base-padding-large;
 
-    p {
-      padding-bottom: $base-padding;
-    }
+    background-color: $tertiary-background-color;
 
-    .button-outline {
-      @include font-size($h6);
-      padding-left: $base-padding;
-      padding-right: $base-padding;
-    }
 
-    @include respond-to(small-up) {
-      .button-outline {
-        @include font-size($h4);
-      }
-    }
 
     @include respond-to(large-up) {
-      // magic numbers to make this content block line up with the one next door
-      padding-top: 17px;
-      min-height: 315px;
-      p{
-        min-height: 85px;
-        padding-bottom: $base-padding-lite;
-        & + div {
-          padding-top: 50px;
-        }
+
+      .u-video-wrap {
+        // magic number to help line-up embedded iframe next to neighboring column
+        min-height: 420px;
       }
 
     }
