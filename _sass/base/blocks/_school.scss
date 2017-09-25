@@ -95,6 +95,9 @@
       @include flex-direction(row);
       @include flex-wrap(nowrap);
       flex: 1 0 auto;
+      h1 {
+        width: 85%;
+      }
     }
 
     h1 {
