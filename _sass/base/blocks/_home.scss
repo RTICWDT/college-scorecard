@@ -111,13 +111,17 @@
 
     background-color: $tertiary-background-color;
 
-
-
-    @include respond-to(large-up) {
+      .u-align_c {
+        background-color: $tertiary-background-color;
 
       .u-video-wrap {
-        // magic number to help line-up embedded iframe next to neighboring column
-        min-height: 420px;
+        @include respond-to(large-up) {
+          // magic number to help line-up embedded iframe next to neighboring column
+          min-height: 420px;
+        }
+        iframe {
+          border-radius: 6px !important;
+        }
       }
 
     }
@@ -128,7 +132,6 @@
   @extend .centered;
   @extend .section-card_container;
   @include span-columns(12);
-  padding-top: 0;
 
   > div > div {
     margin-top: 0;
