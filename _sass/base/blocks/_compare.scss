@@ -243,6 +243,11 @@ figcaption {
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+
+    > aria-accordion
+    > div > div {
+      padding: $base-padding-large;
+    }
   }
 
 
