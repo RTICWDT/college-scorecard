@@ -3,10 +3,10 @@ title: College Scorecard Data
 layout: default-data
 permalink: /data/
 data_base_url: https://ed-public-download.app.cloud.gov/downloads
-#scripts:
-#  - vendor/flickity.pkgd.js
-#stylesheets:
-#  - vendor/flickity.min.css
+scripts:
+  - vendor/flickity.pkgd.js
+stylesheets:
+  - vendor/flickity.min.css
 ---
 
 <div class="data-home-convo">
@@ -32,9 +32,7 @@ data_base_url: https://ed-public-download.app.cloud.gov/downloads
 
       <h2>Data Insights</h2>
 
-      <p class="padded-bottom">The College Scorecard 2017 Data Insights report describes summary statistics for the data update published in the fall of 2017. The College Scorecard Technical Paper provides in-depth data analysis on College Scorecard data as well as a discussion of the College Scorecard data generating process.</p>
-
-      {% comment %}<div class="main-gallery u-h_center_block js-flickity"
+      <div class="main-gallery u-h_center_block js-flickity"
       data-flickity-options='{
         "cellAlign": "left",
         "contain": true,
@@ -43,6 +41,11 @@ data_base_url: https://ed-public-download.app.cloud.gov/downloads
       }'>
 
         <div class="gallery-cell">
+          <p class="padded-bottom">The College Scorecard 2017 Data Insights report describes summary statistics for the data update published in the fall of 2017. The College Scorecard Technical Paper provides in-depth data analysis on College Scorecard data as well as a discussion of the College Scorecard data generating process.</p>
+          <cite class="insight-cite">Learn more in the Technical Paper</cite>
+        </div>
+
+        {% comment %}<div class="gallery-cell">
             <p>While there is variation in the amount of debt and fraction of students borrowing by sector, on average, <span class="insight-highlight">students at private for-profit two-year and four-year institutions have high rates of borrowing and their graduates often have large amounts of debt.</span> While debt per se may not be problematic where students are able to repay their loans, it should be paired with other data, such as completion rates and post-school earnings, to provide a more comprehensive picture of student outcomes.</p>
             <cite class="insight-cite">Learn more in the Technical Paper</cite>
         </div>
@@ -65,9 +68,9 @@ data_base_url: https://ed-public-download.app.cloud.gov/downloads
         <div class="gallery-cell">
             <p>To help complement federal data and address the limitations of the federal graduation rate measure collected through IPEDS, <span class="insight-highlight">several external organizations have launched efforts to measure accurate completion rates and other data sources.</span> One effort, the Student Achievement Measure, provides data on progress and completion of transfer, part-time, and full-time students. The Voluntary Framework of Accountability explores remedial education, academic measures, and workforce outcomes. Additionally, IPEDS will begin collecting and publishing more comprehensive graduation rates next year.</p>
             <cite class="insight-cite">Learn more in the Technical Paper</cite>
-        </div>
+        </div>{% endcomment %}
 
-      </div>{% endcomment %}
+      </div>
 
       <div class="u-align_c">
         <a href="{{ site.baseurl }}/assets/UsingFederalDataToMeasureAndImprovePerformance.pdf" class="button data-home-button">Download the Technical Paper</a>

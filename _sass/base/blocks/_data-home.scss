@@ -9,19 +9,6 @@
   }
 }
 
-.data-home-insights {
-
-  h2 {
-    padding-top: $base-padding-lite;
-    padding-bottom: $base-padding-lite;
-  }
-
-  p + div {
-    padding-top: $base-padding-extra;
-  }
-
-}
-
 .data-home-intro-convo-right {
   @include span-columns(12);
 
