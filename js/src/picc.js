@@ -367,13 +367,13 @@ picc.format = (function() {
     },
 
     sizeCategory: formatter(range([
-      [0, 2000, 'Small'],
+      [1, 2000, 'Small'],
       [2000, 15000, 'Medium'],
       [15000, Infinity, 'Large']
     ]), 'size unknown'),
 
     sizeCategoryClass: formatter(range([
-      [0, 2000, 'icon-small'],
+      [1, 2000, 'icon-small'],
       [2000, 15000, 'icon-medium'],
       [15000, Infinity, 'icon-large']
     ]), ''),
@@ -1638,7 +1638,7 @@ picc.form.mappings = {
   },
 
   size: {
-    small:  '..1999',
+    small:  '1..2000',
     medium: '2000..15000',
     large:  '15001..'
   },
@@ -1846,10 +1846,10 @@ picc.form.prepareParams = (function() {
       delete query.distance;
     }
 
-    // by default, filter out schools for which school.size is null
+    // by default, filter out schools for which school.size is null or 0
     // with a numeric range query
     if (!query.size) {
-      query[fields.SIZE + '__range'] = '0..';
+      query[fields.SIZE + '__range'] = '1..';
     }
 
     /*

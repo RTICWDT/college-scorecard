@@ -21,7 +21,7 @@ module.exports = function school() {
   // only display scorecard school (from default search)
   params[picc.fields.OPERATING] = 1;
   params[picc.fields.DEGREE_OFFERED + '.assoc_or_bachelors'] = true;
-  params[picc.fields.SIZE + '__range'] = '0..';
+  params[picc.fields.SIZE + '__range'] = '1..';
   params[picc.fields.PREDOMINANT_DEGREE + '__range'] = '1..3';
   params[picc.fields.HIGHEST_DEGREE + '__range'] = '2..4';
 
