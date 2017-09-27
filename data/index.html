@@ -2,11 +2,11 @@
 title: College Scorecard Data
 layout: default-data
 permalink: /data/
-data_base_url: https://ed-public-download.app.cloud.gov/downloads
-scripts:
-  - vendor/flickity.pkgd.js
-stylesheets:
-  - vendor/flickity.min.css
+data_base_url: https://ed-public-download-09012017.app.cloud.gov/downloads
+#scripts:
+#  - vendor/flickity.pkgd.js
+#stylesheets:
+#  - vendor/flickity.min.css
 ---
 
 <div class="data-home-convo">
@@ -26,7 +26,7 @@ stylesheets:
 
 <div class="container">
 
-  <section class="section section-margin_top">
+  {% comment %}<!--<section class="section section-margin_top">
 
     <div class="data-home-intro-col-left section-margin_bottom data-home-insights">
 
@@ -64,7 +64,7 @@ stylesheets:
           <p class="padded-bottom">The national median <span class="insight-highlight">repayment rate is 46%</span></p>
           <cite class="insight-cite">The repayment rate is the percentage of an institution’s borrowers who entered repayment in fiscal years 2012 and 2013 who were not in default on their federal loans and who were making progress in paying them down (i.e. have paid down at least $1 in the initial balance on their loans) in fiscal years 2015 and 2016 respectively.</cite>
         </div>
-        
+
       </div>
 
       <div class="u-align_c">
@@ -85,13 +85,13 @@ stylesheets:
 
     </div>
 
-  </section>
+  </section>-->{% endcomment %}
 
 </div>
 
 <div class="container">
 
-  <section class="section data-home-download">
+  <section class="section section-margin_top data-home-download">
 
     <div class="data-home-intro-col-left section-margin_bottom">
 
@@ -138,15 +138,16 @@ stylesheets:
         the power in the hands of the public &mdash; from those choosing
         colleges to those improving college quality &mdash; to see how well
         different schools are serving their students. This documentation
-        provides more on how to use the data, including:</p>
+        provides more on how to use the data and includes:</p>
 
       <ul class="u-unordered_list">
-        <li>Sources of the data</li>
-        <li>The construction of metrics</li>
-        <li>Data considerations and limitations</li>
+        <li><a href="{{ site.baseurl }}/assets/FullDataDocumentation.pdf" target="_blank">Documentation Report</a></li>
+        <li><a href="{{ site.baseurl }}/assets/{{ site.downloads.data-dictionary }}" target="_blank">Data Dictionary</a></li>
+        <li><a href="{{ site.baseurl }}/data/changelog/">Change Log</a></li>
+        <li>API Documentation</li>
       </ul>
 
-      <a href="{{ site.baseurl }}/data/documentation/" class="link-more">View the documentation <i class="fa fa-chevron-right"></i></a>
+      <a href="{{ site.baseurl }}/data/documentation/" class="link-more">View Full Documentation <i class="fa fa-chevron-right"></i></a>
 
     </div>
 
