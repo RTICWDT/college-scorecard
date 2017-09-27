@@ -7,7 +7,7 @@ var extend = require('extend');
 // expected default parameters
 const EXPECTED_DEFAULTS = {
   '2015.academics.program_available.assoc_or_bachelors': true,
-  '2015.student.size__range': '0..',
+  '2015.student.size__range': '1..',
   'school.degrees_awarded.predominant__range': '1..3',
   'school.degrees_awarded.highest__range': '2..4',
   'school.operating': 1
