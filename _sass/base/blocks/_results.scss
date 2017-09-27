@@ -162,7 +162,7 @@
 
   aria-accordion#compare_schools-edit {
     .toggle-control {
-      width: 120px;
+      width: 130px;
       margin-right: -5px;
 
       @include respond-to(teensy-up) {
@@ -195,7 +195,7 @@
 
     left: 0;
     @include respond-to(teensy-down) {
-      right:0;
+      //right:0;
       left: inherit;
     }
 
