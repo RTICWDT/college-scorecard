@@ -9,18 +9,19 @@ window.PICCRange = document.registerElement(ELEMENT_NAME, {
     {
 
       attachedCallback: {value: function() {
-        var bar = this.appendChild(document.createElement('div'));
-        bar.className = CLASS_PREFIX + 'bar';
+        if(!this.querySelector('.' + CLASS_PREFIX + 'bar')) {
+          var bar = this.appendChild(document.createElement('div'));
+          bar.className = CLASS_PREFIX + 'bar';
 
-        LABEL_TYPES.forEach(function(type) {
-          var label = this.appendChild(document.createElement('span'));
-          label.className = [
-            CLASS_PREFIX + 'label',
-            [CLASS_PREFIX, 'label-', type].join('')
-          ].join(' ');
-          label.appendChild(document.createElement('span'));
-        }, this);
-
+          LABEL_TYPES.forEach(function(type) {
+            var label = this.appendChild(document.createElement('span'));
+            label.className = [
+              CLASS_PREFIX + 'label',
+              [CLASS_PREFIX, 'label-', type].join('')
+            ].join(' ');
+            label.appendChild(document.createElement('span'));
+          }, this);
+        }
         this.min = getAttr(this, 'min', 0);
         this.max = getAttr(this, 'max', 1);
         this.lower = getAttr(this, 'lower');

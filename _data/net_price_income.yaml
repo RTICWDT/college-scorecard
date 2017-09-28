@@ -1,0 +1,5 @@
+net_price_income1: "$0-$30,000"
+net_price_income2: "$30,001-$48,000"
+net_price_income3: "$48,001-$75,000"
+net_price_income4: "$75,001-$110,000"
+net_price_income5: "$110,001+"

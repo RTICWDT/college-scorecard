@@ -35,7 +35,89 @@ permalink: /data/changelog/
         <aria-accordion>
           <div>
             <h2>
-              <button aria-expanded="true" aria-controls="january-2017">
+              <button aria-expanded="true" aria-controls="sept-2017">
+                September 2017
+              </button>
+            </h2>
+            <div id="sept-2017" aria-hidden="true">
+              <p><strong>Consumer Website:</strong> In September 2017, the U.S. Department of Education (the Department)
+                updated the College Scorecard consumer website with an annual refresh that includes newer, updated data for
+                virtually all elements. In addition, the Department made some changes to how data are presented on
+                the consumer website. Key changes include:
+              </p>
+              <ul class="u-unordered_list">
+                <li>School Comparison feature. The consumer website has been updated with a new page for
+                  comparing user-selected schools. Users of the website can select schools by clicking on the
+                  “Add to Compare” star-icon and then visiting the new page.
+                </li>
+                <li>Replaced “National Average” text with “National Median”. The College Scorecard consumer website
+                  has been displaying the National Median values for various metrics to show how schools measure up
+                  to other schools. This “average” label, however, was misleading as it was actually the median value.
+                  The consumer website now adequately labels these values appropriately.
+                </li>
+              </ul>
+              <p><strong>Downloadable Data Files and API: </strong> In addition to providing newer, updated data in the
+                College Scorecard downloadable data files and API, the Department updated and replaced all previously
+                published NSLDS metrics with values calculated with a newer NSLDS data extract. These metrics include
+                repayment rates, student loan cumulative debt percentiles, and NSLDS completion rates.
+              </p>
+
+              <p>In addition, the Department made minor changes in the methodology of how data values
+                were calculated for a small subset of variables. In some cases, the Department recalculated
+                data values and replaced previously published data values. Key changes include:
+              </p>
+              <ul class="u-unordered_list">
+                <li>The method of calculating the Predominant Award and Highest Award classifications has been changed
+                  to count institutions that award only graduate certificates as graduate institutions rather than
+                  certificate institutions. In addition, some institutions that previously did not have values of
+                  Predominant Award assigned could be classified as certificate institutions using a value
+                  of the IPEDS Institutional Category variable (not included in the Scorecard data) that was
+                  not used in prior Scorecard releases.
+                </li>
+                <li>The source data for the average faculty salary metrics for the 2001-02 and prior
+                  Scorecard data files was updated and as a result, some average faculty salary values have
+                  changed in these data files.
+                </li>
+                <li>Whenever institution identifying information from IPEDS (e.g., name) is
+                  available in a later data file, the most recent value is used in all Scorecard data files.
+                  For example, if an institution changed their name in 2015-16, the new name will be carried
+                  through to all Scorecard data files.
+                </li>
+                <li>Updates to IPEDS data due to revisions by institutions have been applied to the 2013-14 and
+                  2014-15 Scorecard data files (2012-13 and prior Scorecard files released in September 2016
+                  already used final IPEDS data).
+                </li>
+                <li>The method for calculating the share of entering undergraduate students who are first-time,
+                  full-time degree/certificate-seeking undergraduate students (PFTFTUG1_EF) changed to exclude
+                  non-degree/certificate-seeking undergraduate students from the denominator. All institutions had
+                  their data replaced for this metric.
+                </li>
+                <li>Some Scorecard data elements are available in the September 2017 data release that were
+                  not previously made available in Scorecard data files and API:
+                  <ul class="u-unordered_list second_level">
+                    <li>Open admissions policy indicator</li>
+                    <li>Denominator of the percentage of undergraduates that were awarded a Pell grant or
+                      federal student loan
+                    </li>
+                    <li>Number of undergraduate non-degree-seeking students enrolled in the fall of the academic year</li>
+                    <li>Number of graduate students enrolled in the fall of the academic year</li>
+                    <li>Number of students in the adjusted cohort for the 150% completion rate calculations by race</li>
+                    <li>PEPS code corresponding to the accrediting agency provided in the Scorecard data file</li>
+                    <li>Earliest date of initial Title IV approval for any location associated with each IPEDS UNITID</li>
+                  </ul>
+                </li>
+                <li>One Treasury Department-produced data element (COUNT_ED) describing earnings cohorts is no longer
+                  available and has been assigned all NULL values.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </aria-accordion>
+
+        <aria-accordion>
+          <div>
+            <h2>
+              <button aria-expanded="false" aria-controls="january-2017">
                 January 2017
               </button>
           </h2>
@@ -182,7 +264,7 @@ permalink: /data/changelog/
     </div>
     <div class="data-home-intro-col-right data-home-intro data-docs-api data-changelog">
       <p>For more information about the College Scorecard data, click here to see our <a href="{{ site.baseurl }}/data/documentation/">data documentation</a>. You can also learn more about the data through our full <a href="{{ site.baseurl }}/assets/FullDataDocumentation.pdf" target="_blank">Documentation Report</a> and the <a href="{{ site.baseurl }}/assets/{{ site.downloads.data-dictionary }}" target="_blank">Data Dictionary</a>.</p>
-      <p>For those who want to understand more about ways to use the data, important information is contained in the <a href="{{ site.baseurl }}/assets/BetterInformationForBetterCollegeChoiceAndInstitutionalPerformance.pdf" target="_blank">Policy Paper</a>, which describes the goals of the College Scorecard and the use of data on the site, and the <a href="{{ site.baseurl }}/assets/UsingFederalDataToMeasureAndImprovePerformance.pdf" target="_blank">Technical Paper</a>, which offers an in-depth exploration of the data and methodologies considered and used for this project.</p>
+      <p>For those who want to understand more about ways to use the data, the <a href="{{ site.baseurl }}/assets/UsingFederalDataToMeasureAndImprovePerformance.pdf" target="_blank">Technical Paper</a> offers an in-depth exploration of the data and methodologies considered and used for this project.</p>
     </div>
 
   </section>

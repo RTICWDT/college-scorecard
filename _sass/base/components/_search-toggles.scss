@@ -9,6 +9,10 @@ $toggle-padding: 15px;
     padding-bottom: 0;
     position: relative;
 
+    @include respond-to(teensy-down) {
+      float: left;
+    }
+
     &[aria-expanded=true] {
       background-color: $white;
     }
@@ -45,7 +49,8 @@ $toggle-padding: 15px;
   }
 
   .fa-filter,
-  .fa-search {
+  .fa-search,
+  .fa-star{
     padding-right: ($toggle-padding / 2);
 
     @include respond-to(small-up) {
@@ -125,7 +130,53 @@ $toggle-padding: 15px;
     }
   }
 
-  .search-button {
+  .compare_link {
+    margin-top: $base-padding;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    @include respond-to(teensy-up) {
+      padding-left: inherit;
+      padding-right: inherit;
+    }
+
+    &.disabled:before {
+      position: relative;
+      bottom: 17px;
+      content: 'No Schools Selected to Compare';
+      color: $dark-gray;
+    }
+  }
+
+  .compare-button_link {
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    span {
+      position: absolute;
+      top:13px;
+      left: 0;
+      right: 0;
+      margin-right: auto;
+      margin-left: auto;
+      text-align: center;
+      width: 175px;
+      @include respond-to(teensy-up) {
+        top:15px;
+        width: 200px;
+      }
+    }
+
+    &[aria-disabled="true"] {
+      background-color: $mid-medium-gray;
+      cursor: not-allowed;
+    }
+
+
+  }
+
+  .search-button,
+  .compare-button_link {
     @include font-size(0.75);
     height: 45px;
     letter-spacing: 2px;
@@ -146,4 +197,76 @@ $toggle-padding: 15px;
 
 .toggle-content-search {
   right: 0;
+}
+
+.toggle-content-compare_schools {
+
+  label.checkbox {
+    text-indent: -2.2em;
+    margin-left: 1.4em;
+
+    :checked + span {
+
+      &:focus {
+        outline: none;
+      }
+
+      &:after {
+        display: inline;
+        left: 2.3em;
+      }
+    }
+  }
+
+  &.search {
+
+    fieldset {
+      max-height: 50vh;
+      overflow-y: auto;
+      /* a couple ios fixes for showing a scrollbar */
+      &::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 14px;
+        height: 14px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 8px;
+        border: 3px solid #fff;
+        background-color: rgba(0, 0, 0, .3);
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: #fff;
+        border-radius: 8px;
+      }
+
+    }
+  }
+}
+
+.toggle-content-search {
+
+  .controls-container {
+    max-height: 50vh;
+    overflow-y: auto;
+
+    /* a couple ios fixes for showing a scrollbar */
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      border: 3px solid #fff;
+      background-color: rgba(0, 0, 0, .3);
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #fff;
+      border-radius: 8px;
+    }
+  }
 }

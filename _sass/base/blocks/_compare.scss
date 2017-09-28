@@ -1,0 +1,522 @@
+.compare-bg {
+  background-color: $light-gray;
+  padding-bottom: $base-padding;
+
+
+  .toggles {
+    @include display(flex);
+    @include respond-to(small-up) {
+      max-height: 55px;
+    }
+    .header-controls {
+
+      padding: 0 $toggle-padding  0 $toggle-padding ;
+
+      .compare-back {
+        display: inline-block;
+        padding-top: .8em;
+        padding-bottom: .8em;
+        vertical-align: top;
+
+        .link-more {
+          display: none;
+          color: $darker-green;
+
+        }
+
+        .link-more[href] {
+          display: inline-block;
+        }
+      }
+
+      .toggle-control {
+
+        @include respond-to(small-up) {
+          width: 290px;
+        }
+        .fa-star {
+          color: $darker-yellow;
+        }
+
+        button {
+          @include respond-to(teensy-up) {
+            width: 124px;
+            text-indent: -0.8em;
+            margin-left: 2em;
+            .fa-chevron-down {
+              padding-left: 18px;
+            }
+          }
+
+          @include respond-to(small-up) {
+            width: 290px;
+            text-indent: inherit;
+            margin-left: inherit;
+            .fa-chevron-down {
+              padding-left: 15px;
+            }
+          }
+        }
+      }
+
+    }
+
+    aria-accordion {
+      margin-left: $base-padding;
+
+      @include respond-to(small-up) {
+        margin-left: 0;
+      }
+
+      &[aria-hidden="true"] {
+        display:none;
+      }
+    }
+
+
+    .toggle-content.toggle-content-compare_schools {
+
+      left:0;
+
+      @media only screen and (min-width: 440px)
+      and (max-width: 656px) {
+        right: 0;
+        left: inherit;
+      }
+
+      fieldset {
+        border-top: 1px solid $mid-gray;
+        padding: 1em 1.25em 0 1.25em;
+      }
+
+    }
+  }
+
+}
+
+.edit-compare-list-item {
+
+  .button-highlight_schools {
+
+    &[aria-pressed="true"] + .checkbox  span + span {
+      background-color: $light-orange;
+    }
+  }
+
+  .checkbox {
+    width: 75%;
+    @include respond-to(tiny-up) {
+      width: 90%;
+    }
+  }
+
+}
+
+.compare-schools {
+  @include outer-container();
+
+  @include respond-to(medium-down) {
+    > .container {
+      padding-left:0;
+      padding-right:0;
+    }
+  }
+
+  .compare-main-alert {
+    .show-error,
+    .show-loading {
+      background-color: $white;
+      padding: $base-padding-extra;
+      border-radius: 0.4em;
+      @include respond-to(large-up) {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+
+  .schools-compare_selected-list {
+    background-color: $white;
+    padding: $base-padding;
+    border-radius: 0.4em;
+
+    @include respond-to(large-up) {
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: $base-padding-extra;
+    }
+  }
+
+}
+
+.compare-container_group {
+  position: relative;
+
+  .compare-degree_group {
+    font-style: italic;
+  }
+
+  .meter-group_wrapper {
+    position: relative;
+    top: $base-padding-large;
+
+    .median-line {
+      position:absolute;
+      bottom:-3px;
+      top: -3px;
+      border: 1px solid $black;
+      width: 0;
+      z-index: 1;
+
+      .label {
+        text-align: center;
+        position: absolute;
+        top: -20px;
+        right: -50px;
+        width: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        color: rgba(0,0,0,.6);
+        @include font-size($h5);
+      }
+    }
+  }
+
+  .legend-wrapper {
+    position: relative;
+    top:-25px;
+  }
+}
+
+.figure-heading {
+  margin: 20px auto;
+}
+
+figure.side-meter {
+
+figcaption {
+  background: rgb(255, 255, 255);
+  background: rgba(255, 255, 255, .9);
+  position: relative;
+  z-index: $z-first;
+  display: inline-block;
+
+  span {
+    width: 100%;
+  }
+}
+
+}
+
+.section-card_container-compare {
+
+  position: relative;
+  margin-bottom: 60px;
+
+
+  .meter-wrapper {
+    margin-bottom: 20px;
+  }
+
+  [data-highlight="true"] {
+
+    & .no_data {
+      border: 1px solid $orange !important;
+    }
+
+    .picc-side-meter-bar {
+      background-color: $orange !important;
+    }
+
+    .picc-range-bar {
+      background-color: $orange !important;
+    }
+  }
+
+}
+
+.section-card_container-compare_more {
+
+  @include respond-to(large-up) {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+
+    > aria-accordion
+    > div > div {
+      padding: $base-padding-large;
+    }
+  }
+
+
+  @extend .section-card_container-school;
+
+  .base-p-top {
+    padding-top: $base-padding;
+  }
+  .base-p-right {
+    padding-right: $base-padding;
+  }
+  .base-p-bottom {
+    padding-bottom: $base-padding;
+  }
+  .base-p-left {
+    padding-left: $base-padding;
+  }
+
+
+  .compare-two_col-left {
+    padding-top: $base-padding;
+
+    @include span-columns(6 of 6);
+    @include respond-to(large-up) {
+      @include span-columns(3 of 6);
+    }
+  }
+
+
+  .compare-two_col-right {
+    padding-top: $base-padding-large;
+
+    @include span-columns(6 of 6);
+    @include respond-to(large-up) {
+      @include span-columns(3 of 6);
+      @include omega();
+      padding-top: $base-padding;
+    }
+  }
+
+  .school-headings {
+    h1 {
+      @include font-size($h3);
+
+      @include respond-to(small-up) {
+        @include font-size($h2);
+      }
+      @include respond-to(medium-up) {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+
+    .school-key_figures.key-figures {
+      $height: 65px;
+      margin-top: -15px;
+      @include respond-to(medium-up) {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      $list: rural, town, suburban, city,
+      small, medium, large,
+      public, private, profit;
+
+      @each $icon in $list {
+        li.icon-#{$icon} {
+          background: url(../img/school-icons/#{$icon}.png) no-repeat;
+          background: url(../img/school-icons/#{$icon}.svg) no-repeat,
+          linear-gradient(transparent, transparent);
+          background-position: top center;
+          background-size: 30px $height;
+        }
+      }
+
+      li {
+        width: 60px;
+        @include hyphens(auto);
+        @include respond-to(large-up) {
+          width: 70px;
+        }
+
+        &.certificate {
+          @include hyphens(none);
+          margin-left: 10px;
+          padding-top: 25px;
+          margin-right: 20px;
+          width: 60px;
+
+          .school-key_figures-year:before {
+            font-family: "fontawesome";
+            content: '\f0a3';
+            font-size: .75em;
+
+
+          }
+        }
+        &.n-year {
+          margin-right:0;
+          .school-key_figures-year {
+            margin-top: -35px;
+            font-size: 20px;
+            font-size: 2rem;
+          }
+        }
+
+        .label {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .school-summary {
+    .school-two_col > div {
+      margin-bottom: $base-padding;
+    }
+  }
+
+  .school-student-stats-col {
+    margin-top: -60px;
+    @include respond-to(small-up) {
+      text-align: center;
+    }
+
+    @include respond-to(large-up) {
+      margin-top: -40px;
+      white-space: nowrap;
+    }
+
+    .school-student-stats-col-align {
+      position: relative;
+      top: -20px;
+      width: inherit;
+      text-align: center;
+      @include respond-to(large-up) {
+        position: static;
+        text-align: left;
+      }
+
+      > div {
+        display: block;
+        text-align: center;
+      }
+
+    }
+
+    .school-size {
+      padding: $base-padding-lite;
+
+      .label {
+        position: relative;
+        @include font-size($h5);
+        top: -5px;
+      }
+    }
+
+    .fact_number {
+      text-align: center;
+
+      > span {
+        @include font-size($h1);
+      }
+    }
+
+  }
+
+  .net-price-income {
+    .compare-two_col-left {
+      padding-top: 0;
+
+      label {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        @include font-size($h3);
+        @include span-columns(6 of 6);
+        @include respond-to(small-up) {
+          min-width: 325px;
+          > select {
+            max-width: 310px;
+          }
+        }
+      }
+    }
+  }
+
+  .race-ethnicity {
+    .compare-two_col-left {
+      padding-top: 0;
+
+      label {
+        margin-bottom: 15px;
+        @include font-size($h3);
+        @include span-columns(6 of 6);
+        @include respond-to(small-up) {
+          min-width: 325px;
+          > select {
+            max-width: 310px;
+          }
+        }
+      }
+    }
+  }
+
+  .selectivity-scores {
+
+    .section-card_container-compare {
+      padding-right: 15px;
+    }
+
+    .score-type {
+      &:first-of-type {
+        padding-top: $base-padding-extra;
+      }
+      padding-top: $base-padding;
+    }
+
+    picc-range {
+      height: 1em;
+      max-width: 100%;
+      margin-bottom: 0;
+      .picc-range-label span {
+        width: 3em;
+      }
+      .picc-range-label.picc-range-label-min span,
+      .picc-range-label.picc-range-label-max span {
+        top: 8px;
+      }
+      .picc-range-label.picc-range-label-lower span,
+      .picc-range-label.picc-range-label-upper span {
+        top: -140%;
+      }
+      & + figcaption{
+        background: rgba(255,255,255,0.9);
+        position: relative;
+        z-index: 100;
+        display: inline-block;
+      }
+    }
+
+    .no-data {
+      padding: 0 !important;
+      margin-bottom: 0;
+      border: none;
+      span {
+        color: $black;
+      }
+      span:first-of-type {
+        color: $dark-gray;
+        height: 1.2em;
+        font-size: .8rem;
+        background-color: $light-gray;
+        @include display(flex);
+        @include align-items(center);
+        @include justify-content(center);
+      }
+
+
+    }
+
+    [data-highlight="true"] {
+      .no-data > span:first-of-type  {
+        border: 1px solid $orange;
+      }
+    }
+  }
+
+}
+
+.highlight .compare-schools [data-bind="school_section"][data-school-id] {
+  cursor: pointer;
+}

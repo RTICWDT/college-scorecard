@@ -104,6 +104,10 @@
   padding-top: 0;
 }
 
+.section-card_container-fotw {
+  @extend .section-card_container;
+}
+
 .data-changelog {
 
   a {

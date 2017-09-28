@@ -54,7 +54,15 @@ stylesheets:
                 </a>
               </div>
 
-              <h1 data-bind="name">School Name</h1>
+              <div class="compare-wrapper">
+
+                <h1 data-bind="name">School Name</h1>
+
+                <div class="compare-school">
+                  {% include compare_school_control.html %}
+                </div>
+
+              </div>
 
               <h2 class="location">
                 <span data-bind="city">City</span>,
@@ -146,7 +154,11 @@ stylesheets:
                     <div class="legend-nat_average-box-line">
                     </div>
                   </div>
-                  <div class="legend-nat_average-words">National Average</div>
+                  <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                    <span class="tooltip-target">
+                        <i class="fa fa-info-circle"></i>
+                     </span>
+                  </div>
                 </div>
               </div>
 
@@ -193,7 +205,11 @@ stylesheets:
                           <div class="legend-nat_average-box-line">
                           </div>
                         </div>
-                        <div class="legend-nat_average-words">National Average</div>
+                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                          <span class="tooltip-target">
+                            <i class="fa fa-info-circle"></i>
+                           </span>
+                        </div>
                       </div>
                     </div>
 
@@ -269,14 +285,7 @@ stylesheets:
                           <i class="fa fa-info-circle"></i>
                         </span>
                       </h2>
-                      <picc-meter id="repayment-meter"
-                        class="debt"
-                        data-bind="repayment_rate_meter"
-                        max="1"
-                        average="{{ site.data.national_stats.repayment_rate.median }}"
-                        average-range="{{ site.data.national_stats.repayment_rate.average_range|join:'..' }}"
-                        data-median-four_year="{{ site.data.national_stats.repayment_rate_4.median }}"
-                        data-median-lt_four_year="{{ site.data.national_stats.repayment_rate_l4.median }}">
+                      <picc-meter id="repayment-meter" {% include repayment_rate_meter_attributes.html %}>
                       </picc-meter>
 
                       <figcaption>
@@ -295,7 +304,11 @@ stylesheets:
                           <div class="legend-nat_average-box-line">
                           </div>
                         </div>
-                        <div class="legend-nat_average-words">National Average</div>
+                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                          <span class="tooltip-target">
+                            <i class="fa fa-info-circle"></i>
+                           </span>
+                        </div>
                       </div>
                     </div>
 
@@ -328,7 +341,7 @@ stylesheets:
                     <div>
                       <h2
                         aria-describedby="tip-avg-debt" tabindex="0">
-                        Typical Total Debt
+                        Typical Total Debt After Graduation
                         <span class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
                         </span>
@@ -392,7 +405,11 @@ stylesheets:
                           <div class="legend-nat_average-box-line">
                           </div>
                         </div>
-                        <div class="legend-nat_average-words">National Average</div>
+                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                          <span class="tooltip-target">
+                            <i class="fa fa-info-circle"></i>
+                           </span>
+                        </div>
                       </div>
                     </div>
 
@@ -406,12 +423,7 @@ stylesheets:
                           <i class="fa fa-info-circle"></i>
                         </span>
                       </h2>
-                      <picc-meter id="retention-meter"
-                        class="graduation"
-                        data-bind="retention_rate_meter"
-                        max="1"
-                        average="{{ site.data.national_stats.retention_rate.median }}"
-                        average-range="{{ site.data.national_stats.retention_rate.average_range|join:'..' }}">
+                      <picc-meter id="retention-meter" {% include retention_rate_meter_attributes.html %}>
                       </picc-meter>
                       <figcaption>
                         <span class="average-value" data-bind="retention_rate_value">XX%</span>
@@ -427,7 +439,11 @@ stylesheets:
                           <div class="legend-nat_average-box-line">
                           </div>
                         </div>
-                        <div class="legend-nat_average-words">National Average</div>
+                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                          <span class="tooltip-target">
+                            <i class="fa fa-info-circle"></i>
+                           </span>
+                        </div>
                       </div>
                     </div>
 
@@ -490,7 +506,11 @@ stylesheets:
                           <div class="legend-nat_average-box-line">
                           </div>
                         </div>
-                        <div class="legend-nat_average-words">National Average</div>
+                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                          <span class="tooltip-target">
+                            <i class="fa fa-info-circle"></i>
+                           </span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -551,11 +571,8 @@ stylesheets:
                         </div>
 
                         <div class="school-student-socio_econ">
-                          <h2 aria-describedby="tip-socio-eco" tabindex="0">
+                          <h2>
                             Socio-Economic Diversity
-                            <span class="tooltip-target">
-                              <i class="fa fa-info-circle"></i>
-                            </span>
                           </h2>
 
                           <div class="school-student-socio_econ-stat">
@@ -563,7 +580,7 @@ stylesheets:
                             <strong>of students</strong>
                           </div>
 
-                          <p>have a family income less than $40k and receive an income-based federal Pell Grant to help pay for college.</p>
+                          <p>received an income-based federal Pell grant intended for low-income students.</p>
                         </div>
 
                       </div>
@@ -717,9 +734,10 @@ stylesheets:
           Types of Financial Aid</a>
         <a href="https://fafsa.ed.gov/FAFSA/app/f4cForm" class="button button-outline" target="_blank">
           Calculate Your Aid</a>
+        <a href="https://fafsa.ed.gov/" class="button button-outline" target="_blank">
+          Start My FAFSA</a>
         <a href="https://www.vets.gov/gi-bill-comparison-tool" class="button button-outline" target="_blank">
           GI Bill&reg; Benefits</a>
-
       </div>
 
     </aside>

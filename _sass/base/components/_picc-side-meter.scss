@@ -1,0 +1,62 @@
+picc-side-meter {
+  display: block;
+  background-color: $light-gray;
+  height: 1em;
+  position: relative;
+
+  .picc-side-meter-bar {
+    height: 100%;
+    left: 0;
+    right: 100%;
+    position: absolute;
+    transition: left .2s, right .2s;
+  }
+
+  .picc-side-meter-val {
+    position: absolute;
+    @include display(flex);
+    @include align-items(center);
+    height: 100%;
+    padding: 0 3px;
+    color: $black;
+    font-weight: $weight-bold;
+    transition: left .2s, right .2s;
+    z-index: $z-first;
+
+    &[flow="true"] {
+      @include respond-to(medium-down) {
+        left: inherit !important;
+        right: 0;
+        background: none;
+      }
+    }
+    background-color: rgba(234, 234, 234, 0.9);
+  }
+
+  @each $meter-class, $meter-color in $meter-colors {
+    &.#{$meter-class} {
+      .picc-side-meter-bar {
+        background-color: $meter-color;
+      }
+    }
+  }
+
+  &.no_data {
+    &:after {
+      @include font-size(.8);
+      color: $dark-gray;
+      content: 'Data not available';
+      white-space: nowrap;
+      @include display(flex);
+      @include align-items(center);
+      position: relative;
+      text-align: center;
+      background-color: rgba(234, 234, 234, 0.9);
+      width: 117px;
+      height: 100%;
+      margin: 0 auto;
+      z-index: $z-first;
+    }
+  }
+
+}
