@@ -438,7 +438,8 @@ module.exports = function compare() {
         return this.hasAttribute(dataSelect);
       },
       {
-        change: function(e) {
+        change: picc.debounce(function(e) {
+          e.preventDefault();
           var targetMeter = e.target.getAttribute(dataSelect);
           var meters = [].slice.call(document.querySelectorAll('picc-side-meter[data-bind="'+targetMeter+'"]'));
           var selectedOption = e.target.value;
@@ -463,7 +464,7 @@ module.exports = function compare() {
               figVal.textContent = formattedValue;
             }
           }
-        }
+        }, 250)
       }
     );
 
