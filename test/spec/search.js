@@ -206,7 +206,7 @@ describe('search', function() {
   it('should contain only public schools if selected', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#search-form > fieldset:last-of-type h1 [aria-controls]')
+        .click('#search-form > .controls-container > fieldset:last-of-type h1 [aria-controls]')
         .execute(function() {
           document.getElementById('type-public').click(); });
       });
@@ -216,7 +216,7 @@ describe('search', function() {
   it('should contain only private schools if selected', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#search-form > fieldset:last-of-type h1 [aria-controls]')
+        .click('#search-form > .controls-container > fieldset:last-of-type h1 [aria-controls]')
         .execute(function() {
           document.getElementById('type-private').click(); });
       });
@@ -227,58 +227,172 @@ describe('search', function() {
   it('should contain only for profit schools if selected', function*() {
     yield utils.runSearch(function() {
       return browser
-        .click('#search-form fieldset:last-of-type h1 [aria-controls]')
+        .click('#search-form > .controls-container > fieldset:last-of-type h1 [aria-controls]')
         .execute(function() {
           document.getElementById('type-profit').click(); });
       });
     assert.equal(yield utils.getSearchCount(),
                  results.spotChecks.allPrivateForProfit);
   });
-});
 
-describe('autocomplete', function() {
-
-  it('should return results after typing 3 reasonable characters', function*() {
+  it('should return autocomplete results after typing 3 reasonable characters', function*() {
 
     var nameInput = yield browser
-        .url('/')
-        .click('#school-name h1 [aria-controls]')
-        .setValue('#name-school', 'Uni');
+      .url('/')
+      .click('#school-name h1 [aria-controls]')
+      .setValue('#name-school', 'Uni');
 
     var doesExist = yield browser.waitForExist('#name-content .tt-dataset > .tt-suggestion > .tt-highlight');
 
     assert.equal(doesExist, true);
-
-
   });
 
-  it('should return results when reasonable letters were typed', function*() {
+  it('should return autocomplete results when reasonable letters were typed', function*() {
 
     var nameInput = yield browser
-        .url('/')
-        .click('#school-name h1 [aria-controls]')
-        .setValue('#name-school', 'Berkeley');
+      .url('/')
+      .click('#school-name h1 [aria-controls]')
+      .setValue('#name-school', 'Berkeley');
 
-    var doesExist = yield browser.waitForExist('#name-content .tt-dataset > .tt-suggestion > .tt-highlight');
-
-    var actualText = yield browser.getText('#name-content .tt-dataset > .tt-suggestion > .tt-highlight');
+    var actualText = yield browser.waitForExist('#name-content .tt-dataset > .tt-suggestion > .tt-highlight')
+        .getText('#name-content .tt-dataset > .tt-suggestion > .tt-highlight');
 
     assert.equal(actualText[0], 'Berkeley');
-
   });
 
-  it('should contain no results for a nonsense word', function*() {
+  it('should contain no autocomplete results for a nonsense word', function*() {
 
     var nameInput = yield browser
-        .url('/')
-        .click('#school-name h1 [aria-controls]')
-        .setValue('#name-school', 'nons%ense wo@d#');
+      .url('/')
+      .click('#school-name h1 [aria-controls]')
+      .setValue('#name-school', 'San Francisco')
+      .setValue('#name-school', 'nons%ense wo@d#');
 
-    // forcing a pause as to simulate a search due to .tt-empty class added before any response
-    var doesExist = yield browser.pause(3000).waitForExist('#name-content .tt-empty .tt-dataset');
+    var doesExist = yield browser.waitForExist('#name-content .tt-empty .tt-dataset');
 
     assert.equal(doesExist, true);
-
   });
 
+  // compare schools toggles on search results page
+  after(function() {
+    browser.localStorage('DELETE');
+  });
+
+  it('should add aria-pressed attribute on school compare button when clicked', function*() {
+    yield utils.runSearch();
+    yield utils.getVisibleResults();
+
+    var schoolSelector = '.school.results-card:first-child .button-compare_schools';
+
+    var ariaPressed = yield browser
+      .click(schoolSelector)
+      .getAttribute(schoolSelector, 'aria-pressed');
+
+    assert(ariaPressed, true);
+  });
+
+  it('should remove aria-pressed attribute on the previously clicked school compare button when clicked again', function*() {
+
+    yield utils.getVisibleResults();
+
+    var schoolSelector = '.school.results-card:first-child .button-compare_schools';
+
+    var ariaPressed = yield browser
+      .click(schoolSelector)
+      .getAttribute(schoolSelector, 'aria-pressed');
+
+    assert(ariaPressed, false);
+  });
+
+  it('should add schools to compare school toggle accordion when school compare button is clicked', function*(){
+    yield utils.runSearch();
+    yield utils.getVisibleResults();
+
+    var schoolSelector = '.school.results-card:first-child .button-compare_schools';
+
+    var schoolId = yield browser
+      .click(schoolSelector)
+      .getAttribute(schoolSelector, 'data-school-id');
+
+    var matchSchoolId = yield browser
+      .click('#compare_schools-edit')
+      .getAttribute('#edit-compare-list li label:first-child', 'data-school-id');
+
+    assert.equal(schoolId, matchSchoolId);
+  });
+
+  it('should remove schools from compare school toggle accordion when school compare button is clicked again', function*(){
+    yield utils.getVisibleResults();
+
+    var schoolSelector = '.school.results-card:first-child .button-compare_schools';
+
+    yield browser
+      .click(schoolSelector);
+
+    yield browser
+      .click('#compare_schools-edit');
+
+    var checkboxes = yield browser
+      .execute(function(){
+        return document.querySelectorAll('#edit-compare-list li');
+      });
+
+    assert.equal(checkboxes.value.length, 0);
+  });
+
+  it('should increment the selected compare school counter bubble when a school is added', function*(){
+    yield utils.runSearch();
+    yield utils.getVisibleResults();
+
+    var schoolSelector = '.school.results-card:first-child .button-compare_schools';
+
+    var counterBefore = yield browser
+      .getText('[aria-controls="compare_schools-content"] [data-counter="compare"]');
+
+    yield browser
+      .click(schoolSelector)
+      .getAttribute(schoolSelector, 'aria-pressed');
+
+    var counterAfter = yield browser
+      .getText('[aria-controls="compare_schools-content"] [data-counter="compare"]');
+
+    assert.equal(counterBefore + 1, +counterAfter);
+  });
+
+  it('should decrement the selected compare school counter bubble when a school is removed', function*(){
+    yield utils.getVisibleResults();
+
+    var schoolSelector = '.school.results-card:first-child .button-compare_schools';
+
+    var counterBefore = yield browser
+      .getText('[aria-controls="compare_schools-content"] [data-counter="compare"]');
+
+    yield browser
+      .click(schoolSelector)
+      .getAttribute(schoolSelector, 'aria-pressed');
+
+    var counterAfter = yield browser
+      .getText('[aria-controls="compare_schools-content"] [data-counter="compare"]');
+
+    assert.equal(counterBefore - 1, +counterAfter);
+  });
+
+  it('should allow selecting up to ten (10) schools maximum', function*(){
+    yield utils.runSearch();
+    yield utils.getVisibleResults();
+
+    yield browser
+      .execute(function(){
+        var cardButtons = [].slice.call(document.querySelectorAll('.results-card button.button-compare_schools'));
+
+        for (var i=0;i < 11; i++) {
+          cardButtons[i].click();
+        }
+      });
+
+    var counterAfter = yield browser
+      .getText('[aria-controls="compare_schools-content"] [data-counter="compare"]');
+
+    assert.equal(+counterAfter, 10);
+  });
 });
