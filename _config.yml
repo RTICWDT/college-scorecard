@@ -13,7 +13,7 @@ baseurl:
 url: https://collegescorecard.ed.gov
 
 # app version number
-version: v1.10.1
+version: v1.10.2
 
 # Build settings
 markdown: kramdown
