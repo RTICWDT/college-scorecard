@@ -3,10 +3,10 @@ title: College Scorecard Data
 layout: default-data
 permalink: /data/
 data_base_url: https://ed-public-download.app.cloud.gov/downloads
-scripts:
-  - vendor/flickity.pkgd.js
-stylesheets:
-  - vendor/flickity.min.css
+#scripts:
+#  - vendor/flickity.pkgd.js
+#stylesheets:
+#  - vendor/flickity.min.css
 ---
 
 <div class="data-home-convo">
@@ -26,9 +26,9 @@ stylesheets:
 
 <div class="container">
 
-  <section class="section section-margin_top">
+  {% comment %}<!--<section class="section section-margin_top">
 
-    <div class="data-home-intro-col-left section-margin_bottom">
+    <div class="data-home-intro-col-left section-margin_bottom data-home-insights">
 
       <h2>Data Insights</h2>
 
@@ -41,34 +41,33 @@ stylesheets:
       }'>
 
         <div class="gallery-cell">
-            <p>While there is variation in the amount of debt and fraction of students borrowing by sector, on average, <span class="insight-highlight">students at private for-profit two-year and four-year institutions have high rates of borrowing and their graduates often have large amounts of debt.</span> While debt per se may not be problematic where students are able to repay their loans, it should be paired with other data, such as completion rates and post-school earnings, to provide a more comprehensive picture of student outcomes.</p>
-            <cite class="insight-cite">Learn more in the Technical Paper</cite>
+          <p class="padded-bottom">The national median <span class="insight-highlight">average net price is $16,300</span></p>
+          <cite class="insight-cite">The average net price is an institution’s average annual cost of attendance (including tuition and fees, books and supplies, and living expenses) minus grant/scholarship aid, for full-time, ﬁrst-time undergraduate Title IV-receiving students in the 2014-15 academic year.</cite>
         </div>
 
         <div class="gallery-cell">
-          <p>Loan repayment rates offer a new way to consider borrower behavior, and may convey more information about student debt management than cohort default rates (CDR). The overall three-year repayment rate for all undergraduate institutions, weighted by the number of students borrowing at each school, was 45 percent in the combined 2010 and 2011 repayment cohorts. <span class="insight-highlight">55 percent of borrowers were thus not meeting the repayment rate metric - either they were in default or were making monthly payments that were not reducing their loan balance.</span> As a point of comparison, the three-year CDR was 13 percent for all students in the 2011 repayment cohort.</p>
-          <cite class="insight-cite">Learn more in the Technical Paper</cite>
-        </div>
-
-          <div class="gallery-cell">
-            <p>There is a great deal of earnings variation within a college, so that students with good outcomes at low-earning schools often perform better than students with poor outcomes at high-earning schools. Earnings variation can be explained at least in part by the program in which students choose to study; <span class="insight-highlight">program-level earnings data will be available moving forward, beginning with the 2012 cohort.</span></p>
-            <cite class="insight-cite">Learn more in the Technical Paper</cite>
-        </div>
-
-          <div class="gallery-cell">
-            <p><span class="insight-highlight">The data in the National Student Loan Data System (NSLDS) on enrollment intensity and transfer status are both of poor quality for Pell-only students prior to 2012.</span> Because of this, the data do not support reporting completion rates disaggregated by full-time and part-time status, or first-time and not-first-time status. Moreover, since transfers can only be identified if the student receives Title IV aid at the transfer-in institution, NSLDS cannot reliably identify all transfer students.</p>
-            <cite class="insight-cite">Learn more in the Technical Paper</cite>
+          <p class="padded-bottom">The national median <span class="insight-highlight">retention rate is 68%</span></p>
+          <cite class="insight-cite">The retention rate is the percentage of an institution’s first-time full-time students in fall 2014 who returned to the institution after the ﬁrst year.</cite>
         </div>
 
         <div class="gallery-cell">
-            <p>To help complement federal data and address the limitations of the federal graduation rate measure collected through IPEDS, <span class="insight-highlight">several external organizations have launched efforts to measure accurate completion rates and other data sources.</span> One effort, the Student Achievement Measure, provides data on progress and completion of transfer, part-time, and full-time students. The Voluntary Framework of Accountability explores remedial education, academic measures, and workforce outcomes. Additionally, IPEDS will begin collecting and publishing more comprehensive graduation rates next year.</p>
-            <cite class="insight-cite">Learn more in the Technical Paper</cite>
+          <p class="padded-bottom">The national median <span class="insight-highlight">earnings is $34,100</span></p>
+          <cite class="insight-cite">The earnings is an institution’s median earnings of title IV students who were working 10 years after entry (students who began at the institution in award years 2003 and 2004 measured in calendar years 2013 and 2014 respectively).</cite>
+        </div>
+
+        <div class="gallery-cell">
+          <p class="padded-bottom">The national median <span class="insight-highlight">graduation rate is 42%</span></p>
+          <cite class="insight-cite">The graduation rate is the percentage of an institution’s full-time, first-time students who complete within 150 percent of the expected time (e.g., six years for a student pursuing a four-year bachelor’s degree) as measured in the IPEDS 2015-16 data collection year and prior (this represents the weighted average of consecutive years in order to use a larger sample of students in the calculation).</cite>
+        </div>
+
+        <div class="gallery-cell">
+          <p class="padded-bottom">The national median <span class="insight-highlight">repayment rate is 46%</span></p>
+          <cite class="insight-cite">The repayment rate is the percentage of an institution’s borrowers who entered repayment in fiscal years 2012 and 2013 who were not in default on their federal loans and who were making progress in paying them down (i.e. have paid down at least $1 in the initial balance on their loans) in fiscal years 2015 and 2016 respectively.</cite>
         </div>
 
       </div>
 
       <div class="u-align_c">
-        <a href="{{ site.baseurl }}/assets/BetterInformationForBetterCollegeChoiceAndInstitutionalPerformance.pdf" class="button data-home-button">Download the Policy Paper</a>
         <a href="{{ site.baseurl }}/assets/UsingFederalDataToMeasureAndImprovePerformance.pdf" class="button data-home-button">Download the Technical Paper</a>
       </div>
 
@@ -86,24 +85,24 @@ stylesheets:
 
     </div>
 
-  </section>
+  </section>-->{% endcomment %}
 
 </div>
 
 <div class="container">
 
-  <section class="section data-home-download">
+  <section class="section section-margin_top data-home-download">
 
     <div class="data-home-intro-col-left section-margin_bottom">
 
       <h2>Download the Data</h2>
 
-      <p class='padded-bottom'>Download the data that appear on the College Scorecard, as well as
+      <p class="padded-bottom">Download the data that appear on the College Scorecard, as well as
         supporting data on student completion, debt and repayment, earnings,
         and more. The files include data from 1996 through 2016 for all
         undergraduate degree-granting institutions of higher education. </p>
 
-      <p>This data was <strong>last updated on January 13th, 2017</strong>. Our
+      <p>This data was <strong>last updated on September 28th, 2017</strong>. Our
           <a href="{{ site.baseurl }}/data/changelog/">Change Log</a> describes the changes to the
           dataset over time.</p>
 
@@ -112,7 +111,7 @@ stylesheets:
           <a href="{{ page.data_base_url }}/CollegeScorecard_Raw_Data.zip" class="button button-primary">Download All Data</a>
         </div>
         <div class="u-group_inline-right">
-          <p>229 MB zip</p>
+          <p>241 MB zip</p>
         </div>
       </div>
 
@@ -124,9 +123,9 @@ stylesheets:
 
       <ul class="data-download-list">
         <li><a href="{{ page.data_base_url }}/Most-Recent-Cohorts-Scorecard-Elements.csv">Scorecard data</a> 5 MB CSV</li>
-        <li><a href="{{ page.data_base_url }}/Most-Recent-Cohorts-All-Data-Elements.csv">Most recent data</a> 141 MB CSV</li>
-        <li><a href="{{ page.data_base_url }}/Most-Recent-Cohorts-NSLDS-Elements.csv">What's new from NSLDS</a> 123 MB CSV</li>
-        <li><a href="{{ page.data_base_url }}/Most-Recent-Cohorts-Treasury-Elements.csv">Post-school earnings</a> 7 MB CSV</li>
+        <li><a href="{{ page.data_base_url }}/Most-Recent-Cohorts-All-Data-Elements.csv">Most recent data</a> 145 MB CSV</li>
+        <li><a href="{{ page.data_base_url }}/Most-Recent-Cohorts-NSLDS-Elements.csv">What's new from NSLDS</a> 125 MB CSV</li>
+        <li><a href="{{ page.data_base_url }}/Most-Recent-Cohorts-Treasury-Elements.csv">Post-school earnings</a> 6 MB CSV</li>
       </ul>
 
     </div>
@@ -139,15 +138,16 @@ stylesheets:
         the power in the hands of the public &mdash; from those choosing
         colleges to those improving college quality &mdash; to see how well
         different schools are serving their students. This documentation
-        provides more on how to use the data, including:</p>
+        provides more on how to use the data and includes:</p>
 
       <ul class="u-unordered_list">
-        <li>Sources of the data</li>
-        <li>The construction of metrics</li>
-        <li>Data considerations and limitations</li>
+        <li><a href="{{ site.baseurl }}/assets/FullDataDocumentation.pdf" target="_blank">Documentation Report</a></li>
+        <li><a href="{{ site.baseurl }}/assets/{{ site.downloads.data-dictionary }}" target="_blank">Data Dictionary</a></li>
+        <li><a href="{{ site.baseurl }}/data/changelog/">Change Log</a></li>
+        <li>API Documentation</li>
       </ul>
 
-      <a href="{{ site.baseurl }}/data/documentation/" class="link-more">View the documentation <i class="fa fa-chevron-right"></i></a>
+      <a href="{{ site.baseurl }}/data/documentation/" class="link-more">View Full Documentation <i class="fa fa-chevron-right"></i></a>
 
     </div>
 

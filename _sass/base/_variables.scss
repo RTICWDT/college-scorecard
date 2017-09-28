@@ -52,6 +52,8 @@ $lime-green: #77b713;
 $emerald-green: #13b79e;
 $yellow: #f0d704;
 $darker-yellow: #eeba28;
+$light-orange: #f3ddca;
+$orange: #d37c39;
 $red: #d44116;
 $darker-red: #b93610;
 $purple: #8c57f6;
@@ -65,10 +67,12 @@ $meter-colors: (
   earnings: $sky-blue,
   acceptance: $emerald-green,
   retention: $amethyst-purple,
-  debt: $amethyst-purple
+  debt: $amethyst-purple,
+  demographics: $lime-green
 );
 
 // Background Color
+$base-background-color: $white;
 $secondary-background-color: $dark-blue;
 $tertiary-background-color: $mid-gray;
 $quaternary-background-color: $mid-blue;

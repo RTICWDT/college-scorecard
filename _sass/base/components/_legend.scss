@@ -26,7 +26,16 @@ $nat_average-height: 25px;
   height: ($nat_average-height * 0.48);
 }
 
+.legend-nat_average-box-line-vert {
+  border: 1px solid $black;
+  width: 0;
+  height: 100%;
+  margin: 0 auto;
+}
+
 .legend-nat_average-words {
   padding-top: 3px;
-  padding-left: ($nat_average-height * 1.2);
+  width: 200px;
+  text-align: left;
+  padding-left: ($nat_average-height * 1.1);
 }
