@@ -149,6 +149,13 @@
     }
   }
 
+  .legend-wrapper {
+    position: relative;
+    margin-bottom: $base-padding-extra;
+    margin-right: 0;
+    float: none;
+  }
+
 }
 
 .compare-container_group {
@@ -182,11 +189,6 @@
         @include font-size($h5);
       }
     }
-  }
-
-  .legend-wrapper {
-    position: relative;
-    top:-25px;
   }
 }
 
