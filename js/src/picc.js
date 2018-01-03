@@ -458,7 +458,7 @@ picc.fields = {
 
   SIZE:                 '2015.student.size',
   ONLINE_ONLY:          'school.online_only',
-  // MAIN:                 'school.main_campus',
+  MAIN:                 'school.main_campus',
 
   WOMEN_ONLY:           'school.women_only',
   MEN_ONLY:             'school.men_only',
@@ -720,6 +720,11 @@ picc.access.specialDesignations = function(d) {
         designations.push(SPECIAL_DESIGNATIONS[key]);
       }
     }
+  }
+
+  var mainCampus = picc.access(picc.fields.MAIN)(d);
+  if(! +mainCampus) {
+    designations.push('Branch Campus')
   }
 
   return designations;
