@@ -397,25 +397,40 @@ permalink: /compare/
                                         <div class="compare-two_col-right"><div>{% comment %} empty space column {% endcomment %}</div></div>
                                     </div>
 
-                                    <div class="section-card_container-compare race-ethnicity">
-                                        <div>
-                                            <div data-bind="school_section">
-                                                <div class="meter-wrapper" tabindex="0">
-                                                    <figure class="side-meter">
-                                                        <picc-side-meter
-                                                            class="demographics"
-                                                            data-bind="race_ethnicity_meter"
-                                                            max="1">
-                                                        </picc-side-meter>
-                                                        <figcaption>
-                                                            <span data-bind="name">School Name</span>
-                                                            <span data-bind="race_ethnicity_val" class="sr-only fig-val"></span>
-                                                        </figcaption>
-                                                    </figure>
+                                    {% for group in site.data.predominant_degrees %}
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
+
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
+
+                                            <div class="compare-degree_group">{{group.label}}</div>
+
+                                            <div class="meter-group_wrapper">
+
+                                                <div class="section-card_container-compare race-ethnicity" data-pred-degree="{{group.key}}">
+                                                    <div>
+                                                        <div data-bind="school_section">
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter
+                                                                        class="demographics"
+                                                                        data-bind="race_ethnicity_meter"
+                                                                        max="1">
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="race_ethnicity_val" class="sr-only fig-val"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
+                                            </div><!-- /.meter-group_wrapper -->
+
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
 
                                 </div><!-- /.race-ethnicity.u-wrap -->
 
@@ -525,26 +540,41 @@ permalink: /compare/
                                         <div class="compare-two_col-right"><div>{% comment %} empty space column {% endcomment %}</div></div>
                                     </div>
 
-                                    <div class="section-card_container-compare net-price-income">
-                                        <div>
-                                            <div data-bind="school_section">
-                                                <div class="meter-wrapper" tabindex="0">
-                                                    <figure class="side-meter">
-                                                        <picc-side-meter
-                                                            class="cost"
-                                                            data-bind="net_price_income_meter"
-                                                            max="{{ site.data.national_stats.net_price.max }}"
-                                                            median="{{ site.data.national_stats.net_price.median }}">
-                                                        </picc-side-meter>
-                                                        <figcaption>
-                                                            <span data-bind="name">School Name</span>
-                                                            <span data-bind="net_price_income_val" class="sr-only fig-val"></span>
-                                                        </figcaption>
-                                                    </figure>
+                                    {% for group in site.data.predominant_degrees %}
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
+
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
+
+                                            <div class="compare-degree_group">{{group.label}}</div>
+
+                                            <div class="meter-group_wrapper">
+
+                                                <div class="section-card_container-compare net-price-income"  data-pred-degree="{{group.key}}">
+                                                    <div>
+                                                        <div data-bind="school_section">
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter
+                                                                        class="cost"
+                                                                        data-bind="net_price_income_meter"
+                                                                        max="{{ site.data.national_stats.net_price.max }}"
+                                                                        median="{{ site.data.national_stats.net_price.median }}">
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="net_price_income_val" class="sr-only fig-val"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
+                                            </div><!-- /.meter-group_wrapper -->
+
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
 
                                 </div><!-- /.net-price-income -->
 
