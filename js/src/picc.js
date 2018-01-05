@@ -889,6 +889,15 @@ picc.school.directives = (function() {
     }
   };
 
+  var searchShareLink = {
+    '@href': function(d) {
+      return picc.template.resolve(
+        this.getAttribute('data-href'),
+        {url: encodeURIComponent(document.location.href)}
+      );
+    }
+  };
+
   var schoolShareLink = {
     '@href': function(d) {
       return picc.template.resolve(
@@ -946,6 +955,12 @@ picc.school.directives = (function() {
         return url.split('/').shift().replace(/^www\./, '');
       }
     },
+
+    search_share_link_fb: searchShareLink,
+    search_share_link_twt: searchShareLink,
+    search_share_link_gplus: searchShareLink,
+    search_share_link_li: searchShareLink,
+    search_share_link_mail: searchShareLink,
 
     school_share_link_fb: schoolShareLink,
     school_share_link_twt: schoolShareLink,

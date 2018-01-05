@@ -150,17 +150,8 @@
   }
 
   .button-share {
-    @extend .button;
-    @extend .button-primary;
     @include font-size(0.85);
-    letter-spacing: 1px;
-    text-align: center;
-    cursor: default;
-    padding: 2px 15px !important;
     height: 25px !important;
-    width: auto !important;
-    position: relative;
-    overflow: hidden;
   }
 
 }

@@ -54,7 +54,21 @@ module.exports = function search() {
     'grad_rate_meter',
     'average_salary',
     'average_salary_meter',
-    'more_link'
+    'more_link',
+    'search_share_link_fb',
+    'search_share_link_twt',
+    'search_share_link_gplus',
+    'search_share_link_li',
+    'search_share_link_mail',
+  ]);
+
+  var socialRoot = document.querySelector('.school-share-wrapper');
+  var socialLinks = picc.data.selectKeys(picc.school.directives, [
+    'search_share_link_fb',
+    'search_share_link_twt',
+    'search_share_link_gplus',
+    'search_share_link_li',
+    'search_share_link_mail',
   ]);
 
   var win = d3.select(window);
@@ -261,13 +275,16 @@ module.exports = function search() {
       history.replaceState(params, 'search', qs);
     }
 
-    d3.select('a.results-share')
-      .attr('href', function() {
-        return picc.template.resolve(
-          this.getAttribute('data-href'),
-          {url: encodeURIComponent(document.location.href)}
-        );
-      });
+
+    // d3.select('a.results-share')
+    //   .attr('href', function() {
+    //     return picc.template.resolve(
+    //       this.getAttribute('data-href'),
+    //       {url: encodeURIComponent(document.location.href)}
+    //     );
+    //   });
+
+    tagalong(socialRoot, {}, socialLinks);
 
     if (req) req.abort();
 
