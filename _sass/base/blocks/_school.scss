@@ -712,6 +712,69 @@ ol.bars {
 .school-share-wrapper {
   @include span-columns(12);
   text-align: right;
+  position: relative;
+}
+
+.button-share {
+  @extend .button;
+  @extend .button-primary;
+  @include font-size(0.75);
+  letter-spacing: 1px;
+  text-align: center;
+  cursor: default;
+  padding: 2px 15px !important;
+  height: 25px !important;
+  width: auto !important;
+  position: relative;
+  overflow: hidden;
+
+  .content {
+    transition: top 0.3s;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .top {
+    top: 0;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .bottom {
+    top: 10px;
+    opacity: 0;
+    visibility: hidden;
+    width: auto;
+
+    > li {
+      display: inline-block;
+      padding: 5px 10px;
+
+      > a {
+        color: $white;
+
+        > .fa {
+          color: $white;
+        }
+      }
+    }
+  }
+
+  &:hover,
+  &:focus {
+
+    .top {
+      top: -10px;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .bottom {
+      top: -25px;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 }
 
 .leaflet-control-attribution a {
