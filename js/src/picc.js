@@ -889,11 +889,42 @@ picc.school.directives = (function() {
     }
   };
 
-  var socialShareLink = {
+  var schoolShareLink = {
     '@href': function(d) {
       return picc.template.resolve(
         this.getAttribute('data-href'),
         {url: encodeURIComponent(document.location.href)}
+      );
+    }
+  };
+
+  var compareShareLink = {
+    '@href': function(d) {
+      return picc.template.resolve(
+        this.getAttribute('data-href'),
+        {
+          url: (function() {
+            var qs =  querystring.parse(decodeURIComponent(location.search.substr(1)));
+            var share = [];
+            var schools = (qs['s[]']) ? qs['s[]'] : picc.school.selection.all(picc.school.selection.LSKey);
+
+            if (schools) {
+              share = schools.map(function(item) {
+                if (item.schoolId) {
+                  item = item.schoolId;
+                }
+                return encodeURIComponent('s[]=' +item.replace('/^[0-9]/', ''));
+              });
+            }
+
+            // older IE
+            if (!window.location.origin) {
+              window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+            }
+            return encodeURIComponent(window.location.origin + window.location.pathname + '?'+share.join('&'));
+          })()
+
+        }
       );
     }
   };
@@ -916,42 +947,18 @@ picc.school.directives = (function() {
       }
     },
 
-    school_share_link_fb: socialShareLink,
-    school_share_link_twt: socialShareLink,
-    school_share_link_gplus: socialShareLink,
-    school_share_link_li: socialShareLink,
-    school_share_link_mail: socialShareLink,
+    school_share_link_fb: schoolShareLink,
+    school_share_link_twt: schoolShareLink,
+    school_share_link_gplus: schoolShareLink,
+    school_share_link_li: schoolShareLink,
+    school_share_link_mail: schoolShareLink,
 
-    compare_link: {
-      '@href': function(d) {
-        return picc.template.resolve(
-          this.getAttribute('data-href'),
-          {
-            url: (function() {
-              var qs =  querystring.parse(decodeURIComponent(location.search.substr(1)));
-              var share = [];
-              var schools = (qs['schools[]']) ? qs['schools[]'] : picc.school.selection.all(picc.school.selection.LSKey);
+    compare_share_link_fb: compareShareLink,
+    compare_share_link_twt: compareShareLink,
+    compare_share_link_gplus: compareShareLink,
+    compare_share_link_li: compareShareLink,
+    compare_share_link_mail: compareShareLink,
 
-              if (schools) {
-                share = schools.map(function(item) {
-                  if (item.schoolId) {
-                    item = item.schoolId;
-                  }
-                  return encodeURIComponent('schools[]=' +item.replace('/^[0-9]/', ''));
-                });
-              }
-
-              // older IE
-              if (!window.location.origin) {
-                window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
-              }
-              return encodeURIComponent(window.location.origin + window.location.pathname + '?'+share.join('&'));
-            })()
-
-          }
-        );
-      }
-    },
 
     response_link: {
       '@href': function(d) {

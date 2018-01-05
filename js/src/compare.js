@@ -21,9 +21,9 @@ module.exports = function compare() {
   var shareComparison = false;
   var compareShareLink = document.querySelector('.school-share-wrapper');
 
-  if (qs['schools[]']) {
+  if (qs['s[]'] || qs['schools[]']) {
     // console.log('share', qs['schools[]']);
-    compareSchools = qs['schools[]'];
+    compareSchools = (qs['s[]']) ? qs['s[]'] : qs['schools[]'];
     shareComparison = true;
 
   }
@@ -191,8 +191,12 @@ module.exports = function compare() {
     'median_line'
   ]);
 
-  var shareLink = picc.data.selectKeys(picc.school.directives, [
-    'compare_link'
+  var shareLinks = picc.data.selectKeys(picc.school.directives, [
+    'compare_share_link_fb',
+    'compare_share_link_twt',
+    'compare_share_link_gplus',
+    'compare_share_link_li',
+    'compare_share_link_mail',
   ]);
 
 
@@ -209,7 +213,11 @@ module.exports = function compare() {
 
   function onChange() {
 
-    compareSchools = (shareComparison) ? qs['schools[]'] : picc.school.selection.all(LSKey);
+    if(shareComparison) {
+      compareSchools = (qs['s[]']) ? qs['s[]'] : qs['schools[]'];
+    } else {
+      compareSchools =  picc.school.selection.all(LSKey);
+    }
 
     // build query for API call
     var query = buildQuery(compareSchools);
@@ -295,7 +303,7 @@ module.exports = function compare() {
         tagalong(node, {}, meterWrapper);
       });
 
-      tagalong(compareShareLink, {}, shareLink);
+      tagalong(compareShareLink, {}, shareLinks);
 
       picc.ui.alreadyLoaded = true;
 

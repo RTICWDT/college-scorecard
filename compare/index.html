@@ -57,10 +57,44 @@ permalink: /compare/
 
             <div class="schools-compare_selected-list default-meters show-loaded">
 
-
-
                 <div class="school-share-wrapper">
-                    <a data-href="mailto:?subject=Take%20a%20look%20at%20these%20schools&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A{url}" class="school-share" data-bind="compare_link">Share this comparison</a>
+
+                    <div class="button button-primary button-share" tabindex="0">
+                        <span class="top content">Share this Comparison</span>
+                        <ul class="social-share-list bottom content">
+                            <li class="social-item">
+                                <a data-href="https://www.facebook.com/sharer/sharer.php?u={url}" data-bind="compare_share_link_fb" title="Share on Facebook" target="_blank">
+                                    <i class="fa fa-facebook"></i>
+                                    <span class="sr-only">Share on Facebook</span>
+                                </a>
+                            </li>
+                            <li class="social-item">
+                                <a data-href="https://twitter.com/intent/tweet?text=Take%20a%20look%20at%20these%20schools&amp;url={url}" title="Share on Twitter" data-bind="compare_share_link_twt" target="_blank">
+                                    <i class="fa fa-twitter"></i>
+                                    <span class="sr-only">Share on Twitter</span>
+                                </a>
+                            </li>
+                            <li class="social-item">
+                                <a data-href="https://plus.google.com/share?url={url}" data-bind="compare_share_link_gplus" title="Share on Google Plus" target="_blank">
+                                    <i class="fa fa-google-plus"></i>
+                                    <span class="sr-only">Share on Google Plus</span>
+                                </a>
+                            </li>
+                            <li class="social-item">
+                                <a data-href="https://www.linkedin.com/shareArticle?mini=true&url={url}" data-bind="compare_share_link_li" title="Share on LinkedIn" target="_blank">
+                                    <i class="fa fa-linkedin"></i>
+                                    <span class="sr-only">Share on LinkedIn</span>
+                                </a>
+                            </li>
+                            <li class="social-item">
+                                <a data-href="mailto:?subject=Take%20a%20look%20at%20these%20schools&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A{url}" title="Share via Email" data-bind="compare_share_link_mail">
+                                    <i class="fa fa-envelope"></i>
+                                    <span class="sr-only">Share via Email</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
 
                 <h2 class="figure-heading constrain_width"
