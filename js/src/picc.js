@@ -2427,6 +2427,29 @@ if (typeof document !== 'undefined') {
       }
     });
   };
+
+  var socialTabNavToggle = function socialTabNavToggle(evt) {
+    evt.target.classList.add('social-tab');
+  };
+
+
+  /**
+   * * add focus listeners for social links and tab navigation
+   */
+  picc.ready(function() {
+    var shareBtn = 'data-share-button';
+    picc.delegate(
+      document.body,
+      function() {
+        return this.hasAttribute(shareBtn);
+      },
+      {
+        focus: socialTabNavToggle,
+      }
+    );
+
+
+  });
 }
 
 module.exports = picc;

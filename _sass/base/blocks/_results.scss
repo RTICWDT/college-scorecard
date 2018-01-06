@@ -119,7 +119,8 @@
   }
 
   &:hover,
-  &:focus {
+  &:focus,
+  &.social-tab {
     width: 155px !important;
   }
 

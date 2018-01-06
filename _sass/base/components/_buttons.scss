@@ -294,7 +294,8 @@ button.block {
   }
 
   &:hover,
-  &:focus {
+  &:focus,
+  &.social-tab {
     .top {
       opacity: 0;
       visibility: hidden;
