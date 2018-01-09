@@ -2417,7 +2417,7 @@ if (typeof document !== 'undefined') {
               return (s2match) ? 0 : -1;
             } else {
               return (s2match) ? 1 : 0;
-            } 
+            }
           });
 
           //reduce results to 5 for display
@@ -2432,9 +2432,21 @@ if (typeof document !== 'undefined') {
     evt.target.classList.add('social-tab');
   };
 
+  var socialDidClickShare = function socialDidClickShare(evt) {
+    var type = evt.target.closest('[data-social]').getAttribute('data-social');
+    var shareTypes = ['Facebook', 'Twitter', 'Google Plus', 'LinkedIn', 'Email'];
+    var shareType = (shareTypes.indexOf(type) >= 0) ? type : 'unknown';
+    if (window.ga) {
+      try {
+        ga('send', 'event', 'Social Share', shareType, window.location.pathname)
+      } catch (e) {
+        console.error('[ga] social error');
+      }
+    }
+  };
 
   /**
-   * * add focus listeners for social links and tab navigation
+   * * add focus and click listeners for social links and tab navigation
    */
   picc.ready(function() {
     var shareBtn = 'data-share-button';
@@ -2448,7 +2460,16 @@ if (typeof document !== 'undefined') {
       }
     );
 
-
+    var socialType = 'data-social';
+    picc.delegate(
+      document.body,
+      function() {
+        return this.parentElement.hasAttribute(socialType) || this.hasAttribute(socialType);
+      },
+      {
+        click: socialDidClickShare,
+      }
+    );
   });
 }
 
