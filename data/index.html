@@ -68,7 +68,7 @@ data_base_url: https://ed-public-download.app.cloud.gov/downloads
       </div>
 
       <div class="u-align_c">
-        <a href="{{ site.baseurl }}/assets/UsingFederalDataToMeasureAndImprovePerformance.pdf" class="button data-home-button">Download the Technical Paper</a>
+        <a data-download href="{{ site.baseurl }}/assets/UsingFederalDataToMeasureAndImprovePerformance.pdf" class="button data-home-button">Download the Technical Paper</a>
       </div>
 
     </div>
@@ -108,7 +108,7 @@ data_base_url: https://ed-public-download.app.cloud.gov/downloads
 
       <div class="u-group_inline">
         <div class="u-group_inline-left">
-          <a href="{{ page.data_base_url }}/CollegeScorecard_Raw_Data.zip" class="button button-primary">Download All Data</a>
+          <a data-download href="{{ page.data_base_url }}/CollegeScorecard_Raw_Data.zip" class="button button-primary">Download All Data</a>
         </div>
         <div class="u-group_inline-right">
           <p>234 MB zip</p>
@@ -122,10 +122,10 @@ data_base_url: https://ed-public-download.app.cloud.gov/downloads
         current data for each element.</p>
 
       <ul class="data-download-list">
-        <li><a href="{{ page.data_base_url }}/Most-Recent-Cohorts-Scorecard-Elements.csv">Scorecard data</a> 5 MB CSV</li>
-        <li><a href="{{ page.data_base_url }}/Most-Recent-Cohorts-All-Data-Elements.csv">Most recent data</a> 140 MB CSV</li>
-        <li><a href="{{ page.data_base_url }}/Most-Recent-Cohorts-NSLDS-Elements.csv">What's new from NSLDS</a> 120 MB CSV</li>
-        <li><a href="{{ page.data_base_url }}/Most-Recent-Cohorts-Treasury-Elements.csv">Post-school earnings</a> 6 MB CSV</li>
+        <li><a data-download href="{{ page.data_base_url }}/Most-Recent-Cohorts-Scorecard-Elements.csv">Scorecard data</a> 5 MB CSV</li>
+        <li><a data-download href="{{ page.data_base_url }}/Most-Recent-Cohorts-All-Data-Elements.csv">Most recent data</a> 140 MB CSV</li>
+        <li><a data-download href="{{ page.data_base_url }}/Most-Recent-Cohorts-NSLDS-Elements.csv">What's new from NSLDS</a> 120 MB CSV</li>
+        <li><a data-download href="{{ page.data_base_url }}/Most-Recent-Cohorts-Treasury-Elements.csv" >Post-school earnings</a> 6 MB CSV</li>
       </ul>
 
     </div>
@@ -141,8 +141,8 @@ data_base_url: https://ed-public-download.app.cloud.gov/downloads
         provides more on how to use the data and includes:</p>
 
       <ul class="u-unordered_list">
-        <li><a href="{{ site.baseurl }}/assets/FullDataDocumentation.pdf" target="_blank">Documentation Report</a></li>
-        <li><a href="{{ site.baseurl }}/assets/{{ site.downloads.data-dictionary }}" target="_blank">Data Dictionary</a></li>
+        <li><a data-download href="{{ site.baseurl }}/assets/FullDataDocumentation.pdf" target="_blank">Documentation Report</a></li>
+        <li><a data-download href="{{ site.baseurl }}/assets/{{ site.downloads.data-dictionary }}" target="_blank">Data Dictionary</a></li>
         <li><a href="{{ site.baseurl }}/data/changelog/">Change Log</a></li>
         <li>API Documentation</li>
       </ul>
@@ -178,3 +178,7 @@ data_base_url: https://ed-public-download.app.cloud.gov/downloads
   </section>
 
 </div>
+
+<script>
+  picc.pages.data();
+</script>

@@ -250,7 +250,7 @@ permalink: /data/changelog/
 
               <p class='footnote'><sup>1</sup> This data element is redundant with PAR_ED_1STGEN.</p>
               <p class='footnote'><sup>2</sup> NSLDS calculations of the percentage of students in each income groups are based on nominal dollar values (not adjusted for inflation).  This methodology differs from the way the Treasury Department identified income groups (with inflation adjustments) for disaggregated earnings calculations.</p>
-              <p class='footnote'><sup>3</sup> The Eligibility Matrix is available at <a href='http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls' target='_blank'>http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls</a>. For the purpose of the indicators included in Scorecard, some of these programs were combined (and others were not relevant). Values of 5, 6, or ‘E’ in the Matrix yielded a corresponding flag value of 1 (Yes). All other values were mapped to a corresponding flag value of 0 (No). If multiple values were considered for a flag (either across grant programs or across branches of the institution), the Scorecard indicator was set to 1 when any one of the values indicated eligibility.</p>
+              <p class='footnote'><sup>3</sup> The Eligibility Matrix is available at <a data-download href='http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls' target='_blank'>http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls</a>. For the purpose of the indicators included in Scorecard, some of these programs were combined (and others were not relevant). Values of 5, 6, or ‘E’ in the Matrix yielded a corresponding flag value of 1 (Yes). All other values were mapped to a corresponding flag value of 0 (No). If multiple values were considered for a flag (either across grant programs or across branches of the institution), the Scorecard indicator was set to 1 when any one of the values indicated eligibility.</p>
               <p class='footnote'><sup>4</sup> In the previous version of Scorecard, if a student separated and then went back and got further undergraduate loans at the same institution after separation and prior to October 2014 (time of measurement), then those additional loans would be included in the total.</p>
 
               <p class='footnote'><sup>5</sup> This information recalculated by the Department of Education is available under the data elements APPL_SCH_PCT_GE*.</p>
@@ -290,10 +290,14 @@ permalink: /data/changelog/
       </div>
     </div>
     <div class="data-home-intro-col-right data-home-intro data-docs-api data-changelog">
-      <p>For more information about the College Scorecard data, click here to see our <a href="{{ site.baseurl }}/data/documentation/">data documentation</a>. You can also learn more about the data through our full <a href="{{ site.baseurl }}/assets/FullDataDocumentation.pdf" target="_blank">Documentation Report</a> and the <a href="{{ site.baseurl }}/assets/{{ site.downloads.data-dictionary }}" target="_blank">Data Dictionary</a>.</p>
-      <p>For those who want to understand more about ways to use the data, the <a href="{{ site.baseurl }}/assets/UsingFederalDataToMeasureAndImprovePerformance.pdf" target="_blank">Technical Paper</a> offers an in-depth exploration of the data and methodologies considered and used for this project.</p>
+      <p>For more information about the College Scorecard data, click here to see our <a href="{{ site.baseurl }}/data/documentation/">data documentation</a>. You can also learn more about the data through our full <a data-download href="{{ site.baseurl }}/assets/FullDataDocumentation.pdf" target="_blank">Documentation Report</a> and the <a data-download href="{{ site.baseurl }}/assets/{{ site.downloads.data-dictionary }}" target="_blank">Data Dictionary</a>.</p>
+      <p>For those who want to understand more about ways to use the data, the <a data-download href="{{ site.baseurl }}/assets/UsingFederalDataToMeasureAndImprovePerformance.pdf" target="_blank">Technical Paper</a> offers an in-depth exploration of the data and methodologies considered and used for this project.</p>
     </div>
 
   </section>
 
 </div>
+
+<script>
+  picc.pages.data();
+</script>

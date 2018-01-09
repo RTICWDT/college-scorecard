@@ -2295,6 +2295,7 @@ picc.pages = {
   search:     require('./search'),
   school:     require('./school'),
   compare:    require('./compare'),
+  data:       require('./data')
 };
 
 
