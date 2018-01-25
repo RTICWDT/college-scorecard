@@ -2446,7 +2446,36 @@ if (typeof document !== 'undefined') {
       try {
         ga('send', 'event', 'Social Share', shareType, window.location.pathname)
       } catch (e) {
-        console.error('[ga] social error');
+        console.error('[ga] social event error');
+      }
+    }
+  };
+
+  var accordionDidExpand = function accordionToggle(evt) {
+    var type = evt.target.getAttribute('aria-controls');
+    var accordionTypes = {
+     'cost'        : 'Costs',
+     'finaid'      : 'Financial Aid & Debt',
+     'graduation'  : 'Graduation & Retention',
+     'earnings'    : 'Earnings After School',
+     'student'     : 'Student Body',
+     'school'      : 'College Information',
+     'selectivity' : 'SAT/ACT Scores',
+     'academics'   : 'Academic Programs'
+    };
+
+    var accordionType;
+    Object.keys(accordionTypes).forEach(function(k) {
+      if (!accordionType && type.indexOf(k) === 0) {
+        accordionType = accordionTypes[k];
+      }
+    });
+
+    if (window.ga && accordionType) {
+      try {
+        ga('send', 'event', 'Expand Accordion', accordionType, window.location.pathname)
+      } catch (e) {
+        console.error('[ga] accordion event error');
       }
     }
   };
@@ -2476,6 +2505,24 @@ if (typeof document !== 'undefined') {
         click: socialDidClickShare,
       }
     );
+  });
+
+  /**
+   * * add click listeners for accordion expanded events
+   */
+  picc.ready(function() {
+    var ariaControls = 'aria-controls';
+    var ariaExpanded = 'aria-expanded';
+    picc.delegate(
+      document.body,
+      function() {
+        return this.hasAttribute(ariaControls) && this.getAttribute(ariaExpanded) === 'false';
+      },
+      {
+        click: accordionDidExpand,
+      }
+    );
+
   });
 }
 
