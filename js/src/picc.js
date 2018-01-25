@@ -2083,7 +2083,7 @@ picc.delegate = function(root, qualify, event, listener) { if
     }
   };
   root.addEventListener(event, _listener, true);
-  return listener;
+  return _listener;
 };
 
 // data tools
