@@ -722,11 +722,6 @@ picc.access.specialDesignations = function(d) {
     }
   }
 
-  var mainCampus = picc.access(picc.fields.MAIN)(d);
-  if(! +mainCampus) {
-    designations.push('Branch Campus')
-  }
-
   return designations;
 };
 
@@ -1041,6 +1036,13 @@ picc.school.directives = (function() {
     // (e.g. `women_only`) are at the object root, rather than
     // nested in `minority_serving`.
     special_designations: access.specialDesignations,
+
+    branch_campus: {
+      '@aria-hidden': function(d) {
+        var flag = access(fields.MAIN)(d);
+        return +flag === 1;
+      }
+    },
 
     average_cost: format.dollars(access.netPrice),
     average_cost_meter: {
