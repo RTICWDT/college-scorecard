@@ -2429,8 +2429,13 @@ if (typeof document !== 'undefined') {
     });
   };
 
+  picc.socialTabListener = {};
+
   var socialTabNavToggle = function socialTabNavToggle(evt) {
-    evt.target.classList.add('social-tab');
+    setTimeout(function() {
+      evt.target.classList.add('social-tab');
+    },300);
+    document.body.removeEventListener('focus', picc.socialTabListener['focus'], true);
   };
 
   var socialDidClickShare = function socialDidClickShare(evt) {
@@ -2451,7 +2456,7 @@ if (typeof document !== 'undefined') {
    */
   picc.ready(function() {
     var shareBtn = 'data-share-button';
-    picc.delegate(
+    picc.socialTabListener = picc.delegate(
       document.body,
       function() {
         return this.hasAttribute(shareBtn);
