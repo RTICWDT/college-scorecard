@@ -36,4 +36,4 @@ compare-add: <strong>Add to Compare.</strong> Select up to ten (10) schools to c
 
 compare-max: <strong>Max Schools Selected (10).</strong> To add this school you will first need to remove a school from your compare list.
 
-branch-campus: <strong>Branch Campus</strong> A branch campus is geographically separated from the main campus. Some of the information below is provided by the main campus.
+branch-campus: "<strong>Branch Campus</strong> This school is geographically separated from the main campus. Data for the following elements are for <em>all</em> related branches of this institution (including the main campus): Accreditation, Earnings, Debt, Repayment Rate, and Heightened Cash Monitoring."

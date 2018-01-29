@@ -72,6 +72,10 @@
     font-weight: $weight-bold;
   }
 
+  em {
+    font-style: italic;
+  }
+
   &.tooltip_below .tooltip-arrow {
     @include triangle($tooltip-arrow-size, $black-transparent, up);
     bottom: 100%;
