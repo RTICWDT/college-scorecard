@@ -2440,7 +2440,7 @@ if (typeof document !== 'undefined') {
 
   var socialDidClickShare = function socialDidClickShare(evt) {
     var type = evt.target.closest('[data-social]').getAttribute('data-social');
-    var shareTypes = ['Facebook', 'Twitter', 'Google Plus', 'LinkedIn', 'Email'];
+    var shareTypes = ['Facebook', 'Twitter', 'Email', 'LinkedIn'];
     var shareType = (shareTypes.indexOf(type) >= 0) ? type : 'unknown';
     if (window.ga) {
       try {
