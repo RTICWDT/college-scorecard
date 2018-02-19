@@ -2503,6 +2503,17 @@ if (typeof document !== 'undefined') {
     }
   };
 
+  var outboundFSA = function outboundFSA(evt) {
+    var target = evt.target.href.replace(/^https:\/\//, '');
+    if (window.ga && target) {
+      try {
+        ga('send', 'event', 'Outbound FSA', target, window.location.pathname);
+      } catch (e) {
+        console.error('[ga] accordion event error');
+      }
+    }
+  };
+
   /**
    * * add focus and click listeners for social links and tab navigation
    */
@@ -2543,6 +2554,24 @@ if (typeof document !== 'undefined') {
       },
       {
         click: accordionDidExpand,
+      }
+    );
+
+  });
+
+  /**
+   * * add event listeners for outbound FSA links
+   */
+  picc.ready(function() {
+    var anchorHref = 'href';
+    picc.delegate(
+      document.body,
+      function() {
+        return this.hasAttribute(anchorHref)
+          && this.getAttribute(anchorHref).match(/^https:\/\/fafsa/);
+      },
+      {
+        click: outboundFSA,
       }
     );
 
