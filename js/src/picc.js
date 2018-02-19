@@ -2503,13 +2503,13 @@ if (typeof document !== 'undefined') {
     }
   };
 
-  var outboundFSA = function outboundFSA(evt) {
+  var outboundLinks = function outboundLinks(evt) {
     var target = evt.target.href.replace(/^https:\/\//, '');
     if (window.ga && target) {
       try {
-        ga('send', 'event', 'Outbound FSA', target, window.location.pathname);
+        ga('send', 'event', 'Outbound Links', target, window.location.pathname);
       } catch (e) {
-        console.error('[ga] accordion event error');
+        console.error('[ga] outbound link event error');
       }
     }
   };
@@ -2560,7 +2560,7 @@ if (typeof document !== 'undefined') {
   });
 
   /**
-   * * add event listeners for outbound FSA links
+   * * add event listeners for outbound links
    */
   picc.ready(function() {
     var anchorHref = 'href';
@@ -2568,10 +2568,15 @@ if (typeof document !== 'undefined') {
       document.body,
       function() {
         return this.hasAttribute(anchorHref)
-          && this.getAttribute(anchorHref).match(/^https:\/\/fafsa/);
+          && this.href.indexOf(location.host) === -1
+          && (
+            this.href.match(/^https:\/\/fafsa\.ed\.gov\//)
+            || this.href.match(/^https:\/\/studentaid\.ed\.gov\//)
+            || this.href.match(/^https:\/\/www\.vets\.gov\//)
+          );
       },
       {
-        click: outboundFSA,
+        click: outboundLinks,
       }
     );
 
