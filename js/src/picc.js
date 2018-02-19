@@ -2452,28 +2452,51 @@ if (typeof document !== 'undefined') {
   };
 
   var accordionDidExpand = function accordionToggle(evt) {
-    var type = evt.target.getAttribute('aria-controls');
+    var controlType = evt.target.getAttribute('aria-controls');
     var accordionTypes = {
-     'cost'        : 'Costs',
-     'finaid'      : 'Financial Aid & Debt',
-     'graduation'  : 'Graduation & Retention',
-     'earnings'    : 'Earnings After School',
-     'student'     : 'Student Body',
-     'school'      : 'College Information',
-     'selectivity' : 'SAT/ACT Scores',
-     'academics'   : 'Academic Programs'
+      'Data': {
+        'cost'        : 'Costs',
+        'finaid'      : 'Financial Aid & Debt',
+        'graduation'  : 'Graduation & Retention',
+        'earnings'    : 'Earnings After School',
+        'student'     : 'Student Body',
+        'school'      : 'College Information',
+        'selectivity' : 'SAT/ACT Scores',
+        'academics'   : 'Academic Programs',
+      },
+      'Search': {
+        'major-content'     : 'Programs/Degrees',
+        'location-content'  : 'Location',
+        'size-content'      : 'Size',
+        'name-content'      : 'Name',
+        'type-content'      : 'Advanced Search',
+      }
     };
 
-    var accordionType;
-    Object.keys(accordionTypes).forEach(function(k) {
-      if (!accordionType && type.indexOf(k) === 0) {
-        accordionType = accordionTypes[k];
-      }
-    });
+    function matchAccordionType(typeArr, group) {
+      var accordion = [];
+      Object.keys(typeArr[group]).forEach(function(k) {
+        if (!accordion.length && controlType.indexOf(k) === 0) {
+          accordion.push({
+            'group': group,
+            'name': typeArr[group][k]
+          });
+        }
+      });
+      return accordion;
+    }
 
-    if (window.ga && accordionType) {
+    var accordionType = matchAccordionType(accordionTypes, 'Data');
+
+    if(!accordionType.length) {
+      // also check the search accordions
+      accordionType = matchAccordionType(accordionTypes, 'Search');
+    }
+
+    if (window.ga && accordionType.length) {
       try {
-        ga('send', 'event', 'Expand Accordion', accordionType, window.location.pathname)
+        var category = '[' + accordionType[0]['group'] + '] Expand Accordion';
+        ga('send', 'event', category, accordionType[0]['name'], window.location.pathname);
       } catch (e) {
         console.error('[ga] accordion event error');
       }
