@@ -5,6 +5,25 @@ shared: &shared
   steps:
     - checkout
 
+
+    # Restore PhantomJs
+    - restore_cache:
+        key: v1-phantomjs-2.1.1
+
+    - run:
+        name: Install phantomjs
+        command: |
+          if ! [ $(which phantomjs) ]; then
+            sudo curl --output /usr/local/bin/phantomjs https://s3.amazonaws.com/circle-downloads/phantomjs-2.1.1
+          fi
+
+          sudo chmod ugo+x /usr/local/bin/phantomjs
+
+    - save_cache:
+        key: v1-phantomjs-2.1.1
+        paths:
+          - /usr/local/bin/phantomjs
+
     # Restore npm modules
     - restore_cache:
         keys:
@@ -22,9 +41,13 @@ shared: &shared
     - run:
         name: Create directories for xunit reports
         command: |
-          mkdir -p ~/reports/mocha
-          mkdir -p ~/reports/browser
-          mkdir -p ~/reports/a11y
+          mkdir -p ~/reports
+          mkdir ~/reports/mocha
+          ln -s $CIRCLE_TEST_REPORTS/mocha ~/reports/mocha
+          mkdir ~/reports/browser
+          ln -s $CIRCLE_TEST_REPORTS/browser ~/reports/browser
+          mkdir ~/reports/a11y
+          ln -s $CIRCLE_TEST_REPORTS/a11y ~/reports/a11y
 
     - run:
         name: Run Mocha unit tests
