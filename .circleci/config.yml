@@ -1,0 +1,66 @@
+version: 2
+
+shared: &shared
+  working_directory: ~/repo
+  steps:
+    - checkout
+
+    # Restore npm modules
+    - restore_cache:
+        keys:
+          - dependency-cache-{{ checksum "package.json" }}
+
+    - run:
+        name: NPM Install
+        command: npm install
+
+    - save_cache:
+        key: dependency-cache-{{ checksum "package.json" }}
+        paths:
+          - node_modules
+
+    - run:
+        name: Create directories for xunit reports
+        command: |
+          mkdir $CIRCLE_TEST_REPORTS/mocha
+          mkdir $CIRCLE_TEST_REPORTS/browser
+          mkdir $CIRCLE_TEST_REPORTS/a11y
+
+    - run:
+        name: Run Mocha unit tests
+        command: |
+          XUNIT_FILE=$CIRCLE_TEST_REPORTS/mocha/unit.xml npm run test-unit-ci
+
+    # XXX this is a workaround for a bug in WebDriverIO
+    # that doesn't allow for absolute paths in the xunit
+    # output directory:
+    # <https://github.com/webdriverio/webdriverio/issues/926>
+    - run:
+        name: WebDriverIO workaround directory
+        command: |
+          ln -s /tmp
+
+    - run:
+        name: Wait for Federalist Build
+        command: ./test/ci.sh
+
+    - run:
+        name: Run Browser tests
+        command: npm run test-ci
+
+    - run:
+        name: Run A11y tests
+        command: npm run test-a11y
+
+jobs:
+  test-college-scorecard:
+    <<: *shared
+    docker:
+      - image: circleci/node:4.8
+
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - test-college-scorecard
