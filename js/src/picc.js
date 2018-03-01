@@ -765,6 +765,20 @@ picc.access.programAreas = function(d, field) {
     });
 };
 
+picc.access.awardLevels = function(d, preddegree) {
+  // return values are whether the instituion offers other kind of degrees/certs than the predominant degree
+  // if they do we return the glossary term key to display or false to disable the tooltip
+  switch(preddegree) {
+    case 1:
+      return (picc.access(picc.fields.DEGREE_OFFERED + '.assoc_or_bachelors')(d)) ? 'certificate' : false;
+    case 2:
+      return (picc.access(picc.fields.DEGREE_OFFERED + '.certificate')(d) || picc.access(picc.fields.DEGREE_OFFERED + '.bachelors')(d)) ? '2-year' : false;
+    case 3:
+      return (picc.access(picc.fields.DEGREE_OFFERED + '.certificate')(d) || picc.access(picc.fields.DEGREE_OFFERED + '.assoc')(d)) ? '4-year' : false;
+  }
+  return false;
+};
+
 /**
  * @param {*} value
  * @return {*} `null` if `value === "NULL"`, otherwise the value as-is.
@@ -1047,6 +1061,19 @@ picc.school.directives = (function() {
       '@data-definition': function(d) {
         return (picc.access.branchCampus(d)) ? 'branch' : 'default';
       }
+    },
+
+    award_level: {
+        '@data-definition': function (d) {
+          var offersMultipleAwards = picc.access.awardLevels(d, picc.access(picc.fields.PREDOMINANT_DEGREE)(d));
+          if (offersMultipleAwards) {
+            return offersMultipleAwards;
+          } else {
+            this.removeAttribute('aria-describedby');
+            this.removeAttribute('tabindex');
+            return null;
+          }
+        }
     },
 
     average_cost: format.dollars(access.netPrice),

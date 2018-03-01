@@ -68,3 +68,9 @@ compare-add:
 
 compare-max:
   default: <strong>Max Schools Selected (10).</strong> To add this school you will first need to remove a school from your compare list.
+
+award-level:
+  default: Most awards earned at this institution are at this level, but other degrees or certificates are offered.
+  certificate: Most awards earned are certificates, but degrees are offered.
+  2-year: Most awards earned are 2-year associate's degrees, but other degrees or certificates are offered.
+  4-year: Most awards earned are 4-year bachelor's degrees, but other degrees or certificates are offered.
