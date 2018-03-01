@@ -7,22 +7,27 @@ graduation-rate:
 avg-salary:
   default: <strong>Salary After Attending</strong> The median earnings of former students who received federal financial aid, at 10 years after entering the school.
   branch: <strong>Salary After Attending</strong> The median earnings of former students who received federal financial aid, at 10 years after entering the school.<br><br>This information is based on all locations of this school.
+  branch_compare: <strong>Salary After Attending</strong> The median earnings of former students who received federal financial aid, at 10 years after entering the school.<br><br>For schools with multiple locations, some of this information may be based on all of their locations.
 
 avg-loan-payment:
  default: <strong>Monthly Student Loan Payment</strong> The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 4.45% interest rate.
  branch: <strong>Monthly Student Loan Payment</strong> The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 4.45% interest rate.<br><br>This information is based on all locations of this school.
+ branch_compare: <strong>Monthly Student Loan Payment</strong> The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 4.45% interest rate.<br><br>For schools with multiple locations, some of this information may be based on all of their locations.
 
 repayment-rate:
   default: <strong>Students Paying Down Their Debt</strong> The share of student borrowers who have paid at least one dollar of the principal balance on their federal loans within three years of leaving school.
   branch: <strong>Students Paying Down Their Debt</strong> The share of student borrowers who have paid at least one dollar of the principal balance on their federal loans within three years of leaving school.<br><br>This information is based on all locations of this school.
+  branch_compare: <strong>Students Paying Down Their Debt</strong> The share of student borrowers who have paid at least one dollar of the principal balance on their federal loans within three years of leaving school.<br><br>For schools with multiple locations, some of this information may be based on all of their locations.
 
 avg-debt:
   default: <strong>Typical Total Debt After Graduation</strong> The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.
   branch: <strong>Typical Total Debt After Graduation</strong> The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.<br><br>This information is based on all locations of this school.
+  branch_compare: <strong>Typical Total Debt After Graduation</strong> The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.<br><br>For schools with multiple locations, some of this information may be based on all of their locations.
 
 student-aid:
   default: <strong>Students Receiving Federal Loans</strong> The share of undergraduate students who borrowed federal loans to help pay for college. Excludes Parent PLUS loans.
   branch: <strong>Students Receiving Federal Loans</strong> The share of undergraduate students who borrowed federal loans to help pay for college. Excludes Parent PLUS loans.<br><br>This information is based on all locations of this school.
+  branch_compare: <strong>Students Receiving Federal Loans</strong> The share of undergraduate students who borrowed federal loans to help pay for college. Excludes Parent PLUS loans.<br><br>For schools with multiple locations, some of this information may be based on all of their locations.
 
 retention-rate:
   default: <strong>Students Who Return After Their First Year</strong> The share of first-time, full-time undergraduates who returned to the institution after their freshman year.
@@ -30,6 +35,7 @@ retention-rate:
 earnings-25k:
   default: <strong>Threshold Earnings</strong> The share of former students earning more than $25,000, or about the average earnings of a high school graduate aged 25-34, 6 years after they first enroll.
   branch: <strong>Threshold Earnings</strong> The share of former students earning more than $25,000, or about the average earnings of a high school graduate aged 25-34, 6 years after they first enroll.<br><br>This information is based on all locations of this school.
+  branch_compare: <strong>Threshold Earnings</strong> The share of former students earning more than $25,000, or about the average earnings of a high school graduate aged 25-34, 6 years after they first enroll.<br><br>For schools with multiple locations, some of this information may be based on all of their locations.
 
 full-time:
   default: <strong>Full-time Enrollment</strong> Percent of undergraduates who are enrolled on a full-time schedule.
@@ -52,6 +58,7 @@ avail-study:
 hcm2:
   default: <strong>Under ED Monitoring</strong> Heightened Cash Monitoring 2 is when the Department of Education provides additional oversight because of financial or federal compliance issues, including but not limited to, concern around the school’s administrative capabilities, concern around a schools’ financial responsibility and possibly severe findings uncovered during a program review. Some schools are on this list because of preliminary findings made during a program review that is still open.
   branch: <strong>Under ED Monitoring</strong> Heightened Cash Monitoring 2 is when the Department of Education provides additional oversight because of financial or federal compliance issues, including but not limited to, concern around the school’s administrative capabilities, concern around a schools’ financial responsibility and possibly severe findings uncovered during a program review. Some schools are on this list because of preliminary findings made during a program review that is still open.<br><br>This information is based on all locations of this school.
+  branch_compare: <strong>Under ED Monitoring</strong> Heightened Cash Monitoring 2 is when the Department of Education provides additional oversight because of financial or federal compliance issues, including but not limited to, concern around the school’s administrative capabilities, concern around a schools’ financial responsibility and possibly severe findings uncovered during a program review. Some schools are on this list because of preliminary findings made during a program review that is still open.<br><br>For schools with multiple locations, some of this information may be based on all of their locations.
 
 national-median:
   default: <strong>National Median</strong> The national median is the middle value, with half of schools having a higher value and half having a lower value.
