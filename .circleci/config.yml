@@ -27,9 +27,10 @@ buildtest: &buildtest
 
     # Restore npm modules
     - restore_cache:
-        keys:
-          - dependency-cache-{{ checksum "package.json" }}
-          - v1.1-phantomjs-2.1.1
+        key: dependency-cache-{{ checksum "package.json" }}
+
+    - restore_cache:
+        key: v1.1-phantomjs-2.1.1
 
     - run:
         name: NPM Install
@@ -43,16 +44,16 @@ buildtest: &buildtest
     - run:
         name: Create directories for xunit reports
         command: |
-          mkdir -p ~/reports/mocha
-          mkdir -p ~/reports/browser
-          mkdir -p ~/reports/a11y
+          mkdir -p test/reports/mocha
+          mkdir -p test/reports/browser
+          mkdir -p test/reports/a11y
 
     - run:
         name: Run Mocha unit tests
         command: |
           npm run test-unit-ci
         environment:
-          XUNIT_FILE: ~/reports/mocha/unit.xml
+          XUNIT_FILE: ~/repo/test/reports/mocha/unit.xml
         when: always
 
     # XXX this is a workaround for a bug in WebDriverIO
@@ -78,9 +79,9 @@ buildtest: &buildtest
 
     - store_test_results:
         paths:
-          - ~/reports/mocha
-          - ~/reports/browser
-          - ~/reports/a11y
+          - ~/repo/test/reports/mocha
+          - ~/repo/test/reports/browser
+          - ~/repo/test/reports/a11y
 
 jobs:
   install_phantomjs:
@@ -93,7 +94,7 @@ jobs:
     docker:
       - image: circleci/node:4.8
         environment:
-          TEST_REPORTS_CI: ~/reports
+          TEST_REPORTS_CI: test/reports
 
 workflows:
   version: 2
