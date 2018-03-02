@@ -1,11 +1,7 @@
 version: 2
 
-shared: &shared
-  working_directory: ~/repo
+phantomjs: &phantomjs
   steps:
-    - checkout
-
-
     # Restore PhantomJs
     - restore_cache:
         key: v1-phantomjs-2.1.1
@@ -24,10 +20,15 @@ shared: &shared
         paths:
           - /usr/local/bin/phantomjs
 
+
+build: &build
+  working_directory: ~/repo
+  steps:
+    - checkout
+
     # Restore npm modules
     - restore_cache:
-        keys:
-          - dependency-cache-{{ checksum "package.json" }}
+        key: dependency-cache-{{ checksum "package.json" }}
 
     - run:
         name: NPM Install
@@ -79,11 +80,16 @@ shared: &shared
         command: npm run test-a11y
 
     - store_test_results:
-        path: ~/reports
+        root: ~/reports
+        paths:
+          - mocha
+          - browser
+          - a11y
 
 jobs:
   test-college-scorecard:
-    <<: *shared
+    <<: *phantomjs
+    <<: *build
     docker:
       - image: circleci/node:4.8
 
