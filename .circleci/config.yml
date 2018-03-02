@@ -63,10 +63,7 @@ buildtest: &buildtest
         command: npm run test-a11y
 
     - store_test_results:
-        paths:
-          - ~/repo/test/reports/mocha
-          - ~/repo/test/reports/browser
-          - ~/repo/test/reports/a11y
+        path: ~/repo/test/reports
 
 jobs:
   build_and_test:
