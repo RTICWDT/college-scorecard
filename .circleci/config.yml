@@ -4,7 +4,7 @@ phantomjs: &phantomjs
   steps:
     # Restore PhantomJs
     - restore_cache:
-        key: v1-phantomjs-2.1.1
+        key: v1.1-phantomjs-2.1.1
 
     - run:
         name: Install phantomjs
@@ -15,7 +15,7 @@ phantomjs: &phantomjs
           sudo chmod ugo+x /usr/local/bin/phantomjs
 
     - save_cache:
-        key: v1-phantomjs-2.1.1
+        key: v1.1-phantomjs-2.1.1
         paths:
           - /usr/local/bin/phantomjs
 
@@ -29,7 +29,7 @@ buildtest: &buildtest
     - restore_cache:
         keys:
           - dependency-cache-{{ checksum "package.json" }}
-          - v1-phantomjs-2.1.1
+          - v1.1-phantomjs-2.1.1
 
     - run:
         name: NPM Install
