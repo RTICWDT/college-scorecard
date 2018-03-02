@@ -12,7 +12,6 @@ phantomjs: &phantomjs
           if ! [ $(which phantomjs) ]; then
             sudo curl --output /usr/local/bin/phantomjs https://s3.amazonaws.com/circle-downloads/phantomjs-2.1.1
           fi
-
           sudo chmod ugo+x /usr/local/bin/phantomjs
 
     - save_cache:
@@ -28,7 +27,9 @@ build: &build
 
     # Restore npm modules
     - restore_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
+        keys:
+          - dependency-cache-{{ checksum "package.json" }}
+          - v1-phantomjs-2.1.1
 
     - run:
         name: NPM Install
@@ -87,8 +88,12 @@ build: &build
           - a11y
 
 jobs:
-  test-college-scorecard:
+  install_phantomjs:
     <<: *phantomjs
+    docker:
+      - image: circleci/node:4.8
+
+  build_and_test:
     <<: *build
     docker:
       - image: circleci/node:4.8
@@ -98,4 +103,7 @@ workflows:
   version: 2
   build:
     jobs:
-      - test-college-scorecard
+      - install_phantomjs
+      - build_and_test
+          requires:
+            - install_phantomjs
