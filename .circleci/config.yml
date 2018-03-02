@@ -20,7 +20,7 @@ phantomjs: &phantomjs
           - /usr/local/bin/phantomjs
 
 
-build: &build
+buildtest: &buildtest
   working_directory: ~/repo
   steps:
     - checkout
@@ -43,13 +43,9 @@ build: &build
     - run:
         name: Create directories for xunit reports
         command: |
-          mkdir -p ~/reports
-          mkdir ~/reports/mocha
-          ln -s $CIRCLE_TEST_REPORTS/mocha ~/reports/mocha
-          mkdir ~/reports/browser
-          ln -s $CIRCLE_TEST_REPORTS/browser ~/reports/browser
-          mkdir ~/reports/a11y
-          ln -s $CIRCLE_TEST_REPORTS/a11y ~/reports/a11y
+          mkdir -p ~/reports/mocha
+          mkdir -p ~/reports/browser
+          mkdir -p ~/reports/a11y
 
     - run:
         name: Run Mocha unit tests
@@ -81,11 +77,10 @@ build: &build
         command: npm run test-a11y
 
     - store_test_results:
-        root: ~/reports
         paths:
-          - mocha
-          - browser
-          - a11y
+          - ~/reports/mocha
+          - ~/reports/browser
+          - ~/reports/a11y
 
 jobs:
   install_phantomjs:
@@ -94,16 +89,17 @@ jobs:
       - image: circleci/node:4.8
 
   build_and_test:
-    <<: *build
+    <<: *buildtest
     docker:
       - image: circleci/node:4.8
-
+        environment:
+          TEST_REPORTS_CI: ~/reports
 
 workflows:
   version: 2
   build:
     jobs:
       - install_phantomjs
-      - build_and_test
+      - build_and_test:
           requires:
             - install_phantomjs
