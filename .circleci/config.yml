@@ -83,4 +83,4 @@ workflows:
   version: 2
   build:
     jobs:
-      - build_and_test:
+      - build_and_test
