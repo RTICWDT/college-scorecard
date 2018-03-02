@@ -35,11 +35,7 @@ buildtest: &buildtest
 
     - run:
         name: Run Mocha unit tests
-        command: |
-          npm run test-unit-ci
-        environment:
-          XUNIT_FILE: ~/repo/test/reports/mocha/unit.xml
-        when: always
+        command: npm run test-unit-ci
 
     # XXX this is a workaround for a bug in WebDriverIO
     # that doesn't allow for absolute paths in the xunit
@@ -47,8 +43,7 @@ buildtest: &buildtest
     # <https://github.com/webdriverio/webdriverio/issues/926>
     - run:
         name: WebDriverIO workaround directory
-        command: |
-          ln -s /tmp
+        command: ln -s /tmp
 
     - run:
         name: Wait for Federalist Build
