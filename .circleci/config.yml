@@ -9,9 +9,6 @@ buildtest: &buildtest
     - restore_cache:
         key: dependency-cache-{{ checksum "package.json" }}
 
-    - restore_cache:
-        key: v1.1-phantomjs-2.1.1
-
     - run:
         name: Install phantomjs
         command: |
