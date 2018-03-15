@@ -26,8 +26,6 @@ avg-debt:
 
 student-aid:
   default: <strong>Students Receiving Federal Loans</strong> The share of undergraduate students who borrowed federal loans to help pay for college. Excludes Parent PLUS loans.
-  branch: <strong>Students Receiving Federal Loans</strong> The share of undergraduate students who borrowed federal loans to help pay for college. Excludes Parent PLUS loans.<br><br>This information is based on all locations of this school.
-  branch_compare: <strong>Students Receiving Federal Loans</strong> The share of undergraduate students who borrowed federal loans to help pay for college. Excludes Parent PLUS loans.<br><br>For schools with multiple locations, some of this information may be based on all of their locations.
 
 retention-rate:
   default: <strong>Students Who Return After Their First Year</strong> The share of first-time, full-time undergraduates who returned to the institution after their freshman year.
