@@ -308,8 +308,11 @@ permalink: /compare/
                                                             <div class="school-section school-headings">
                                                                 <ul class="school-key_figures key-figures">
                                                                     <li data-bind="years">
-                                                                        <span data-bind="number" class="school-key_figures-year">X</span>
-                                                                        <span class="label"></span>
+                                                                         <span aria-describedby="tip-award-level" tabindex="0" data-bind="award_level">
+                                                                            <span data-bind="number" class="school-key_figures-year">X</span>
+                                                                            <span class="label"></span>
+                                                                            <span class="tooltip-target u-new_line"></span>
+                                                                         </span>
                                                                     </li>
                                                                     <li data-bind="control">
                                                                         <span data-bind="value" class="label" >X</span>

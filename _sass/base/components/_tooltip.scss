@@ -62,6 +62,7 @@
     line-height: $base-line-height;
     padding: $base-padding-tb $base-padding !important;
     width: 300px;
+    white-space: normal;
   }
 
   .tooltip-arrow {
