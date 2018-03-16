@@ -220,6 +220,7 @@ figcaption {
 
   .meter-wrapper {
     margin-bottom: 20px;
+    overflow: hidden;
   }
 
   [data-highlight="true"] {
@@ -487,6 +488,7 @@ figcaption {
         position: relative;
         z-index: 100;
         display: inline-block;
+        overflow: hidden;
       }
     }
 
