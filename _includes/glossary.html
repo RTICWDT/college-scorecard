@@ -1,7 +1,9 @@
 <section class="glossary" aria-hidden="true">
   {% for term in site.data.glossary %}
   <div id="tip-{{ term[0] }}" role="tooltip">
-    <p class="tooltip-content">{{ term[1] }}</p>
+    {% for definition in term[1] %}
+    <p class="tooltip-content" data-definition="{{ definition[0] }}" aria-hidden="true">{{ definition[1] }}</p>
+    {% endfor %}
     <div class="tooltip-arrow"></div>
   </div>
   {% endfor %}

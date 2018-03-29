@@ -28,7 +28,7 @@
     "element-closest": "^2.0.2",
     "element-dataset": "^2.2.6",
     "formdb": "^0.2.0",
-    "jquery": "^2.2.4",
+    "jquery": "^3.3.1",
     "leaflet": "^0.7.7",
     "typeahead.js-browserify": "^1.0.7"
   },

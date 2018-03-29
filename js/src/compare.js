@@ -21,9 +21,9 @@ module.exports = function compare() {
   var shareComparison = false;
   var compareShareLink = document.querySelector('.school-share-wrapper');
 
-  if (qs['schools[]']) {
+  if (qs['s[]'] || qs['schools[]']) {
     // console.log('share', qs['schools[]']);
-    compareSchools = qs['schools[]'];
+    compareSchools = (qs['s[]']) ? qs['s[]'] : qs['schools[]'];
     shareComparison = true;
 
   }
@@ -66,6 +66,11 @@ module.exports = function compare() {
     picc.fields.OWNERSHIP,
     // to get the "four_year" or "lt_four_year" bit
     picc.fields.PREDOMINANT_DEGREE,
+    // to get alternative predominant degree offered flag
+    picc.fields.DEGREE_OFFERED + '.assoc_or_bachelors',
+    picc.fields.DEGREE_OFFERED + '.bachelors',
+    picc.fields.DEGREE_OFFERED + '.assoc',
+    picc.fields.DEGREE_OFFERED + '.certificate',
     // get all of the net price values
     picc.fields.NET_PRICE,
     picc.fields.COMPLETION_RATE,
@@ -73,8 +78,8 @@ module.exports = function compare() {
     // this has no sub-fields
     picc.fields.MEDIAN_EARNINGS,
     picc.fields.EARNINGS_GT_25K,
-    picc.fields.RETENTION_RATE + '.four_year.full_time',
-    picc.fields.RETENTION_RATE + '.lt_four_year.full_time',
+    picc.fields.RETENTION_RATE + '.four_year.full_time_pooled',
+    picc.fields.RETENTION_RATE + '.lt_four_year.full_time_pooled',
     picc.fields.PELL_PERCENTAGE,
     picc.fields.AVERAGE_TOTAL_DEBT,
     picc.fields.AID_PERCENTAGE,
@@ -125,6 +130,7 @@ module.exports = function compare() {
     'years',
     'control',
     'size_number',
+    'award_level',
     'locale_name',
     'size_category',
     'average_cost',
@@ -191,8 +197,11 @@ module.exports = function compare() {
     'median_line'
   ]);
 
-  var shareLink = picc.data.selectKeys(picc.school.directives, [
-    'compare_link'
+  var shareLinks = picc.data.selectKeys(picc.school.directives, [
+    'compare_share_link_fb',
+    'compare_share_link_twt',
+    'compare_share_link_li',
+    'compare_share_link_mail',
   ]);
 
 
@@ -209,7 +218,11 @@ module.exports = function compare() {
 
   function onChange() {
 
-    compareSchools = (shareComparison) ? qs['schools[]'] : picc.school.selection.all(LSKey);
+    if(shareComparison) {
+      compareSchools = (qs['s[]']) ? qs['s[]'] : qs['schools[]'];
+    } else {
+      compareSchools =  picc.school.selection.all(LSKey);
+    }
 
     // build query for API call
     var query = buildQuery(compareSchools);
@@ -295,7 +308,7 @@ module.exports = function compare() {
         tagalong(node, {}, meterWrapper);
       });
 
-      tagalong(compareShareLink, {}, shareLink);
+      tagalong(compareShareLink, {}, shareLinks);
 
       picc.ui.alreadyLoaded = true;
 
