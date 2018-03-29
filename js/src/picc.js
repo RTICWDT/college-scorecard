@@ -1268,7 +1268,7 @@ picc.school.directives = (function() {
 
 
     available_programs: function(d) {
-      var areas = access.programAreas(d);
+      var areas = access.programAreas(d, fields.PROGRAM_OFFERED + '.degree_or_certificate');
       return areas
         .sort(function(a, b) {
           return d3.ascending(a.program, b.program);
