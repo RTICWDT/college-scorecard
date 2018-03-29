@@ -7,7 +7,7 @@ exports.getVisibleCompare = function*() {
     .waitForExist(
       '.section-card_container-compare figcaption span:first-child'
     )
-    .waitForVisible('.show-loaded .school-share-wrapper .school-share');
+    .waitForVisible('.show-loaded .school-share-wrapper');
 };
 
 exports.getVisibleResults = function*() {

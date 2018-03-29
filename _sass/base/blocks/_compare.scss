@@ -149,13 +149,17 @@
     }
   }
 
+  .button-share {
+    @include font-size(0.85);
+    height: 25px !important;
+  }
+
   .legend-wrapper {
     position: relative;
     margin-bottom: $base-padding-extra;
     margin-right: 0;
     float: none;
   }
-
 }
 
 .compare-container_group {

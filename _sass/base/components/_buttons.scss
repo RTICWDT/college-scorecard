@@ -222,3 +222,106 @@ button.block {
     width: 450px;
   }
 }
+
+.button-share {
+  @extend .button;
+  @extend .button-primary;
+  @include font-size(0.75);
+  letter-spacing: 1px;
+  text-align: center;
+  cursor: default;
+  padding: 2px 15px !important;
+  height: 25px !important;
+  width: auto !important;
+  position: relative;
+  overflow: hidden;
+
+  &.yaxis {
+    padding: 2px 0px !important;
+  }
+
+  .content {
+    overflow: hidden;
+    position: relative;
+
+    &.xaxis {
+      @include transition(top 0.3s);
+    }
+    &.yaxis {
+      @include transition(left 0.3s);
+    }
+  }
+
+
+  .top {
+    opacity: 1;
+    visibility: visible;
+
+    &.xaxis {
+      top: 0;
+    }
+    &.yaxis {
+      left:0;
+    }
+  }
+
+  .bottom {
+    opacity: 0;
+    visibility: hidden;
+
+    > li {
+      display: inline-block;
+      padding: 5px 10px;
+
+      > a {
+        color: $white;
+
+        > .fa {
+          color: $white;
+        }
+      }
+    }
+
+    &.xaxis {
+      top: 10px;
+      width: auto;
+    }
+    &.yaxis {
+      left: -100px;
+      top: -25px;
+      width: 200px;
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &.social-tab {
+    .top {
+      opacity: 0;
+      visibility: hidden;
+
+      &.xaxis {
+        top: -10px;
+      }
+      &.yaxis {
+        left: 20px;
+      }
+    }
+
+    .bottom {
+      opacity: 1;
+      visibility: visible;
+
+      &.xaxis {
+        top: -25px;
+      }
+      &.yaxis {
+        left: -35px;
+      }
+    }
+  }
+
+  &.social-tab {
+    overflow: inherit;
+  }
+}
