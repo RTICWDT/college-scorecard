@@ -73,8 +73,8 @@ module.exports = function compare() {
     // this has no sub-fields
     picc.fields.MEDIAN_EARNINGS,
     picc.fields.EARNINGS_GT_25K,
-    picc.fields.RETENTION_RATE + '.four_year.full_time',
-    picc.fields.RETENTION_RATE + '.lt_four_year.full_time',
+    picc.fields.RETENTION_RATE + '.four_year.full_time_pooled',
+    picc.fields.RETENTION_RATE + '.lt_four_year.full_time_pooled',
     picc.fields.PELL_PERCENTAGE,
     picc.fields.AVERAGE_TOTAL_DEBT,
     picc.fields.AID_PERCENTAGE,
