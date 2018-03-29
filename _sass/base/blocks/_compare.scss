@@ -149,6 +149,11 @@
     }
   }
 
+  .button-share {
+    @include font-size(0.85);
+    height: 25px !important;
+  }
+
 }
 
 .compare-container_group {

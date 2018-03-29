@@ -712,6 +712,7 @@ ol.bars {
 .school-share-wrapper {
   @include span-columns(12);
   text-align: right;
+  position: relative;
 }
 
 .leaflet-control-attribution a {
