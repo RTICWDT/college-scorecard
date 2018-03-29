@@ -77,6 +77,12 @@
   margin-top: $base-padding;
 }
 
+.branch-campus-wrapper {
+  .fa {
+    color: $black;
+  }
+}
+
 .school-section {
 
   h1 {
@@ -712,6 +718,7 @@ ol.bars {
 .school-share-wrapper {
   @include span-columns(12);
   text-align: right;
+  position: relative;
 }
 
 .leaflet-control-attribution a {

@@ -49,6 +49,19 @@
       }
     }
 
+    .u-group_inline {
+      white-space: nowrap;
+      > .u-group_inline-right {
+        @include respond-to(weensy-down) {
+          display: block !important;
+          float: left;
+        }
+      }
+      @include respond-to(small-up) {
+        white-space: normal;
+      }
+    }
+
     > div {
       @include span-columns(12);
 
@@ -92,9 +105,30 @@
   }
 }
 
-.results-share {
+.button-share.results-share {
   @extend .share;
-  margin-left: $base-padding;
+  cursor: default;
+  margin-left: 0;
+  padding: 2px 15px !important;
+  height: 22px !important;
+  width: 93px !important;
+  @include transition(width 0.3s);
+
+  @include respond-to(tiny-up) {
+    margin-left: $base-padding;
+  }
+
+  &:hover,
+  &:focus,
+  &.social-tab {
+    width: 155px !important;
+  }
+
+  .social-share-list {
+    li {
+      padding: 6px;
+    }
+  }
 }
 
 .results-sort {

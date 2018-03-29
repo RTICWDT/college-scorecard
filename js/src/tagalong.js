@@ -66,11 +66,13 @@ function bindArray(node, data, directives) {
 }
 
 function bindKey(node, key, value, directives) {
-  var target = findKeyNode(node, key);
-  if (!target) {
+  var targets = findKeyNode(node, key);
+  if (!targets.length) {
     return false;
   }
-  return tagalong(target, value, directives);
+  for(var i = 0,len = targets.length; i < len; i++ ) {
+    tagalong(targets[i], value, directives);
+  }
 }
 
 function bindScalar(node, data, directives) {
@@ -81,7 +83,7 @@ function bindScalar(node, data, directives) {
 
 function findKeyNode(node, key) {
   var classed = node.getElementsByClassName(key)[0];
-  if (classed) return classed;
+  if (classed) return [classed];
 
   // Doing it this way, rather than:
   //
@@ -90,12 +92,13 @@ function findKeyNode(node, key) {
   // ...ensures that we won't get an exception for keys that would produce
   // invalid selectors.
   var children = node.querySelectorAll('[data-bind]');
+  var targets = [];
   for (var i = 0, len = children.length; i < len; i++) {
     if (children[i].getAttribute('data-bind') == key) {
-      return children[i];
+      targets.push(children[i]);
     }
   }
-  return null;
+  return targets;
 }
 
 function getChildren(node) {

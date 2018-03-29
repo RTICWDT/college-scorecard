@@ -18,7 +18,7 @@ if (process.env.TEST_REPORTER) {
 } else {
   config.reporter = 'xunit';
   config.reporterOptions = {
-    outputDir: process.env.CIRCLE_TEST_REPORTS
+    outputDir: process.env.TEST_REPORTS_CI + '/browser'
   };
 }
 
