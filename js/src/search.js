@@ -57,6 +57,14 @@ module.exports = function search() {
     'more_link'
   ]);
 
+  var socialRoot = document.querySelector('.school-share-wrapper');
+  var socialLinks = picc.data.selectKeys(picc.school.directives, [
+    'search_share_link_fb',
+    'search_share_link_twt',
+    'search_share_link_li',
+    'search_share_link_mail',
+  ]);
+
   var win = d3.select(window);
 
   // get a reference to all of the sliders
@@ -261,13 +269,7 @@ module.exports = function search() {
       history.replaceState(params, 'search', qs);
     }
 
-    d3.select('a.results-share')
-      .attr('href', function() {
-        return picc.template.resolve(
-          this.getAttribute('data-href'),
-          {url: encodeURIComponent(document.location.href)}
-        );
-      });
+    tagalong(socialRoot, {}, socialLinks);
 
     if (req) req.abort();
 

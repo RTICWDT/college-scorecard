@@ -3,6 +3,7 @@
 $max-width: em(1230) !default;
 
 // Breakpoints
+$weensy: em(360);
 $teensy: em(380);
 $tiny: em(480);
 $small: em(600);
@@ -11,6 +12,7 @@ $medium: em(768);
 $large: em(990);
 $huge: em(1230);
 
+$weensy-down: new-breakpoint(max-width $weensy);
 $teensy-down: new-breakpoint(max-width $teensy);
 $teensy-up: new-breakpoint(min-width $teensy);
 $tiny-up: new-breakpoint(min-width $tiny);
@@ -22,7 +24,10 @@ $large-up: new-breakpoint(min-width $large);
 $huge-up: new-breakpoint(min-width $huge);
 
 @mixin respond-to($media) {
-  @if $media == teensy-down {
+  @if $media == weensy-down {
+    @media only screen and (max-width: $weensy) { @content; }
+  }
+  @else if $media == teensy-down {
     @media only screen and (max-width: $teensy) { @content; }
   }
   @else if $media == teensy-up {
