@@ -958,19 +958,16 @@ picc.school.directives = (function() {
 
     search_share_link_fb: searchShareLink,
     search_share_link_twt: searchShareLink,
-    search_share_link_gplus: searchShareLink,
     search_share_link_li: searchShareLink,
     search_share_link_mail: searchShareLink,
 
     school_share_link_fb: schoolShareLink,
     school_share_link_twt: schoolShareLink,
-    school_share_link_gplus: schoolShareLink,
     school_share_link_li: schoolShareLink,
     school_share_link_mail: schoolShareLink,
 
     compare_share_link_fb: compareShareLink,
     compare_share_link_twt: compareShareLink,
-    compare_share_link_gplus: compareShareLink,
     compare_share_link_li: compareShareLink,
     compare_share_link_mail: compareShareLink,
 

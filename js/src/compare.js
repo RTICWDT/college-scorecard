@@ -194,7 +194,6 @@ module.exports = function compare() {
   var shareLinks = picc.data.selectKeys(picc.school.directives, [
     'compare_share_link_fb',
     'compare_share_link_twt',
-    'compare_share_link_gplus',
     'compare_share_link_li',
     'compare_share_link_mail',
   ]);
