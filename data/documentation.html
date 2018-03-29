@@ -29,9 +29,9 @@ permalink: /data/documentation/
 
       <p>This page provides more details about the robust data set behind the College Scorecard efforts. You can get information on accessing and understanding the API; download the entire dataset spanning nearly 20 years of data and covering multiple sources including IPEDS, NSLDS, and Department of Treasury; or download smaller data sets, including the data provided on the College Scorecard.</p>
 
-      <p>You can also learn more about the data through our full <a href="{{ site.baseurl }}/assets/FullDataDocumentation.pdf" target="_blank">Documentation Report</a> and the <a href="{{ site.baseurl }}/assets/{{ site.downloads.data-dictionary }}" target="_blank">Data Dictionary</a>. Our <a href="{{ site.baseurl }}/data/changelog/">Change Log</a> describes the changes to the dataset over time.</p>
+      <p>You can also learn more about the data through our full <a data-download href="{{ site.baseurl }}/assets/FullDataDocumentation.pdf" target="_blank">Documentation Report</a> and the <a data-download href="{{ site.baseurl }}/assets/{{ site.downloads.data-dictionary }}" target="_blank">Data Dictionary</a>. Our <a href="{{ site.baseurl }}/data/changelog/">Change Log</a> describes the changes to the dataset over time.</p>
 
-      <p>For those who want to understand more about ways to use the data, the <a href="{{ site.baseurl }}/assets/UsingFederalDataToMeasureAndImprovePerformance.pdf" target="_blank">2015 Technical Paper</a> offers an in-depth exploration of the data and methodologies considered and used for this project.</p>
+      <p>For those who want to understand more about ways to use the data, the <a data-download href="{{ site.baseurl }}/assets/UsingFederalDataToMeasureAndImprovePerformance.pdf" target="_blank">2015 Technical Paper</a> offers an in-depth exploration of the data and methodologies considered and used for this project.</p>
 
       <h2>Accuracy and Privacy</h2>
 
@@ -41,7 +41,7 @@ permalink: /data/documentation/
 
       <h2>Categories of Data</h2>
 
-      <p>The data available from this website covers a wide range of topics. An overview of the available categories of data is below. For detailed information on each category and its individual fields, see the full <a href="{{ site.baseurl }}/assets/FullDataDocumentation.pdf" target="_blank">Documentation Report</a> and the <a href="{{ site.baseurl }}/assets/{{ site.downloads.data-dictionary }}" target="_blank">Data Dictionary</a>.</p>
+      <p>The data available from this website covers a wide range of topics. An overview of the available categories of data is below. For detailed information on each category and its individual fields, see the full <a data-download href="{{ site.baseurl }}/assets/FullDataDocumentation.pdf" target="_blank">Documentation Report</a> and the <a data-download href="{{ site.baseurl }}/assets/{{ site.downloads.data-dictionary }}" target="_blank">Data Dictionary</a>.</p>
 
       <div class="section-card_container-school">
 
@@ -339,7 +339,7 @@ permalink: /data/documentation/
       <p>All variables are listed in the Data Dictionary.</p>
 
       <div class="u-align_c">
-        <a href="{{ site.baseurl }}/assets/{{ site.downloads.data-dictionary }}" class="button data-home-button">Download the Data Dictionary</a>
+        <a data-download href="{{ site.baseurl }}/assets/{{ site.downloads.data-dictionary }}" class="button data-home-button">Download the Data Dictionary</a>
       </div>
 
       <p class="data-docs">For guidance on querying the API and extracting results, see the <a href="https://github.com/RTICWDT/open-data-maker/blob/master/API.md" target="_blank">HTTP API documentation</a>.</p>
@@ -372,3 +372,7 @@ permalink: /data/documentation/
   </section>
 
 </div>
+
+<script>
+  picc.pages.data();
+</script>

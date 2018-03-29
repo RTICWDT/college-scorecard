@@ -113,7 +113,41 @@ permalink: /search/
               </div>
 
               <div class="u-group_inline-right">
-                <a data-href="mailto:?subject=Take%20a%20look%20at%20these%20schools&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A{url}" class="results-share">Share</a>
+
+                <div class="school-share-wrapper">
+
+                  <div class="button button-primary button-share results-share" data-share-button tabindex="0" role="button" onclick="void(0)">
+                    <span class="top yaxis content">Share</span>
+                    <ul class="social-share-list bottom yaxis content">
+                      <li class="social-item">
+                        <a data-href="https://twitter.com/intent/tweet?text=Take%20a%20look%20at%20these%20schools&amp;url={url}" data-bind="search_share_link_twt" data-social="Twitter" title="Share on Twitter" target="_blank">
+                          <i class="fa fa-twitter"></i>
+                          <span class="sr-only">Share on Twitter</span>
+                        </a>
+                      </li>
+                      <li class="social-item">
+                        <a data-href="https://www.facebook.com/sharer/sharer.php?u={url}" data-bind="search_share_link_fb" data-social="Facebook" title="Share on Facebook" target="_blank">
+                          <i class="fa fa-facebook"></i>
+                          <span class="sr-only">Share on Facebook</span>
+                        </a>
+                      </li>
+                      <li class="social-item">
+                        <a data-href="mailto:?subject=Take%20a%20look%20at%20these%20schools&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A{url}" data-bind="search_share_link_mail" data-social="Email" title="Share via Email" >
+                          <i class="fa fa-envelope"></i>
+                          <span class="sr-only">Share via Email</span>
+                        </a>
+                      </li>
+                      <li class="social-item">
+                        <a data-href="https://www.linkedin.com/shareArticle?mini=true&url={url}" data-bind="search_share_link_li" data-social="LinkedIn" title="Share on LinkedIn" target="_blank">
+                          <i class="fa fa-linkedin"></i>
+                          <span class="sr-only">Share on LinkedIn</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                </div>
+
               </div>
 
             </div>
@@ -161,7 +195,7 @@ permalink: /search/
                 <div class="investigation-major-wrapper"
                   data-bind="under_investigation" aria-hidden="true">
                   <a>
-                    <p class="investigation-major" aria-describedby="tip-hcm2" tabindex="0">
+                    <p class="investigation-major" aria-describedby="tip-hcm2" tabindex="0" data-bind="branch_campus">
                       Under ED Monitoring <i class="fa fa-info-circle"></i>
                     </p>
                   </a>
@@ -219,7 +253,7 @@ permalink: /search/
 
                   <figure class="meter">
                     <h2 class="figure-heading constrain_width"
-                      aria-describedby="tip-avg-salary" tabindex="0">
+                      aria-describedby="tip-avg-salary" tabindex="0" data-bind="branch_campus">
                       Salary After<br>Attending
                       <span class="tooltip-target u-new_line">
                         <i class="fa fa-info-circle"></i>

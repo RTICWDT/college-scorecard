@@ -34,18 +34,55 @@ permalink: /data/changelog/
         <aria-accordion>
           <div>
             <h2>
-              <button aria-expanded="true" aria-controls="december-2017">
+              <button aria-expanded="true" aria-controls="march-2018">
+                March 2018
+              </button>
+            </h2>
+            <div id="march-2018" aria-hidden="true">
+              <p>In March 2018, the Department updated five data elements that appear on the consumer website and/or
+                the downloadable data files/API with more recent data values:
+              </p>
+              <ul class="u-unordered_list">
+                <li>Currently Operating Status Flag</li>
+                <li>Heightened Cash Monitoring Flag</li>
+                <li>Accrediting Agency Name</li>
+                <li>Accrediting Agency Code</li>
+                <li>Title IV Approval Date</li>
+              </ul>
+              <p>The Department also added data elements that pool the retention rate and transfer rate data across
+                years to help stabilize those rates for institutions with smaller cohort sizes. Furthermore, these
+                new rates were suppressed for cohort sizes less than 30 students.
+              </p>
+              <p>In addition, the Department updated the consumer website with the following changes:
+              <ul class="u-unordered_list">
+                <li>The share feature has been enhanced to include social media options in addition to e-mail.</li>
+                <li>On the institution comparison page, the "By Family Income Category" and "Race/Ethnicity" charts are now grouped by school type: 4-year, 2-year, or certificate.</li>
+                <li>Some data elements on the institution profile are derived from information from all main and branch campus locations. These metrics are now identified in the tooltip descriptions on the institution profile and comparison pages.</li>
+                <li>The institution profile page currently displays the predominant degree awarded by the institution. If the institution offers additional degrees and/or certificates, this is now noted in the tooltip.</li>
+                <li>The retention rate variable used on the institution profile and comparison pages has been updated to reference the new pooled data variable.</li>
+                <li>Certificate programs are now included in list of Available Programs on the institution page.</li>
+              </ul>
+              </p>
+            </div>
+          </div>
+        </aria-accordion>
+
+        <aria-accordion>
+          <div>
+            <h2>
+              <button aria-expanded="false" aria-controls="december-2017">
                 December 2017
               </button>
             </h2>
             <div id="december-2017" aria-hidden="true">
-              <p>In December 2017, the Department updated three data elements that appear on the consumer website
+              <p>In December 2017, the Department updated five data elements that appear on the consumer website
                 and/or the downloadable data files/API with more recent data values:
               </p>
               <ul class="u-unordered_list">
                 <li>Currently Operating Status Flag</li>
                 <li>Heightened Cash Monitoring Flag</li>
-                <li>Accrediting Agency and Code</li>
+                <li>Accrediting Agency Name</li>
+                <li>Accrediting Agency Code</li>
                 <li>Title IV Approval Date</li>
               </ul>
               <p>In addition, the Department added twenty-eight new data elements corresponding to information from the
@@ -250,7 +287,7 @@ permalink: /data/changelog/
 
               <p class='footnote'><sup>1</sup> This data element is redundant with PAR_ED_1STGEN.</p>
               <p class='footnote'><sup>2</sup> NSLDS calculations of the percentage of students in each income groups are based on nominal dollar values (not adjusted for inflation).  This methodology differs from the way the Treasury Department identified income groups (with inflation adjustments) for disaggregated earnings calculations.</p>
-              <p class='footnote'><sup>3</sup> The Eligibility Matrix is available at <a href='http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls' target='_blank'>http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls</a>. For the purpose of the indicators included in Scorecard, some of these programs were combined (and others were not relevant). Values of 5, 6, or ‘E’ in the Matrix yielded a corresponding flag value of 1 (Yes). All other values were mapped to a corresponding flag value of 0 (No). If multiple values were considered for a flag (either across grant programs or across branches of the institution), the Scorecard indicator was set to 1 when any one of the values indicated eligibility.</p>
+              <p class='footnote'><sup>3</sup> The Eligibility Matrix is available at <a data-download href='http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls' target='_blank'>http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls</a>. For the purpose of the indicators included in Scorecard, some of these programs were combined (and others were not relevant). Values of 5, 6, or ‘E’ in the Matrix yielded a corresponding flag value of 1 (Yes). All other values were mapped to a corresponding flag value of 0 (No). If multiple values were considered for a flag (either across grant programs or across branches of the institution), the Scorecard indicator was set to 1 when any one of the values indicated eligibility.</p>
               <p class='footnote'><sup>4</sup> In the previous version of Scorecard, if a student separated and then went back and got further undergraduate loans at the same institution after separation and prior to October 2014 (time of measurement), then those additional loans would be included in the total.</p>
 
               <p class='footnote'><sup>5</sup> This information recalculated by the Department of Education is available under the data elements APPL_SCH_PCT_GE*.</p>
@@ -290,10 +327,14 @@ permalink: /data/changelog/
       </div>
     </div>
     <div class="data-home-intro-col-right data-home-intro data-docs-api data-changelog">
-      <p>For more information about the College Scorecard data, click here to see our <a href="{{ site.baseurl }}/data/documentation/">data documentation</a>. You can also learn more about the data through our full <a href="{{ site.baseurl }}/assets/FullDataDocumentation.pdf" target="_blank">Documentation Report</a> and the <a href="{{ site.baseurl }}/assets/{{ site.downloads.data-dictionary }}" target="_blank">Data Dictionary</a>.</p>
-      <p>For those who want to understand more about ways to use the data, the <a href="{{ site.baseurl }}/assets/UsingFederalDataToMeasureAndImprovePerformance.pdf" target="_blank">Technical Paper</a> offers an in-depth exploration of the data and methodologies considered and used for this project.</p>
+      <p>For more information about the College Scorecard data, click here to see our <a href="{{ site.baseurl }}/data/documentation/">data documentation</a>. You can also learn more about the data through our full <a data-download href="{{ site.baseurl }}/assets/FullDataDocumentation.pdf" target="_blank">Documentation Report</a> and the <a data-download href="{{ site.baseurl }}/assets/{{ site.downloads.data-dictionary }}" target="_blank">Data Dictionary</a>.</p>
+      <p>For those who want to understand more about ways to use the data, the <a data-download href="{{ site.baseurl }}/assets/UsingFederalDataToMeasureAndImprovePerformance.pdf" target="_blank">Technical Paper</a> offers an in-depth exploration of the data and methodologies considered and used for this project.</p>
     </div>
 
   </section>
 
 </div>
+
+<script>
+  picc.pages.data();
+</script>
