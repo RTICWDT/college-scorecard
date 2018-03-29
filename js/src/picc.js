@@ -458,7 +458,8 @@ picc.fields = {
 
   SIZE:                 '2015.student.size',
   ONLINE_ONLY:          'school.online_only',
-  // MAIN:                 'school.main_campus',
+  MAIN:                 'school.main_campus',
+  BRANCHES:             'school.branches',
 
   WOMEN_ONLY:           'school.women_only',
   MEN_ONLY:             'school.men_only',
@@ -475,7 +476,7 @@ picc.fields = {
   // completion rate
   COMPLETION_RATE:      '2015.completion.rate_suppressed.overall',
 
-  RETENTION_RATE:       '2015.student.retention_rate',
+  RETENTION_RATE:       '2015.student.retention_rate_suppressed',
 
   REPAYMENT_RATE:       '2015.repayment.3_yr_repayment_suppressed.overall',
 
@@ -611,6 +612,11 @@ picc.access.yearDesignation = function(d) {
   return null;
 };
 
+picc.access.branchCampus = function(d) {
+  var branch_count = picc.access(picc.fields.BRANCHES)(d);
+  return +branch_count > 1;
+};
+
 picc.access.nationalStat = function(stat, suffix) {
   if (suffix) {
     suffix = picc.access(suffix);
@@ -677,12 +683,12 @@ picc.access.retentionRate = function(d) {
   var retention = picc.access(picc.fields.RETENTION_RATE)(d);
   /* jshint ignore:start */
   if (retention) {
-    var fourYear = retention.four_year.full_time;
-    return (fourYear || fourYear === 0) ? fourYear : retention.lt_four_year.full_time;
+    var fourYear = retention.four_year.full_time_pooled;
+    return (fourYear || fourYear === 0) ? fourYear : retention.lt_four_year.full_time_pooled;
   }
   // data result key may be a full path dotted-string
-  retention = picc.access(picc.fields.RETENTION_RATE + ".four_year.full_time")(d);
-  return ( retention || retention === 0) ? retention : picc.access(picc.fields.RETENTION_RATE + ".lt_four_year.full_time")(d) ;
+  retention = picc.access(picc.fields.RETENTION_RATE + ".four_year.full_time_pooled")(d);
+  return ( retention || retention === 0) ? retention : picc.access(picc.fields.RETENTION_RATE + ".lt_four_year.full_time_pooled")(d) ;
   /* jshint ignore:end */
 };
 
@@ -757,6 +763,20 @@ picc.access.programAreas = function(d, field) {
     .filter(function(d) {
       return d.value > 0;
     });
+};
+
+picc.access.awardLevels = function(d, preddegree) {
+  // return values are whether the instituion offers other kind of degrees/certs than the predominant degree
+  // if they do we return the glossary term key to display or false to disable the tooltip
+  switch(preddegree) {
+    case 1:
+      return (picc.access(picc.fields.DEGREE_OFFERED + '.assoc_or_bachelors')(d)) ? 'certificate' : false;
+    case 2:
+      return (picc.access(picc.fields.DEGREE_OFFERED + '.certificate')(d) || picc.access(picc.fields.DEGREE_OFFERED + '.bachelors')(d)) ? '2-year' : false;
+    case 3:
+      return (picc.access(picc.fields.DEGREE_OFFERED + '.certificate')(d) || picc.access(picc.fields.DEGREE_OFFERED + '.assoc')(d)) ? '4-year' : false;
+  }
+  return false;
 };
 
 /**
@@ -1062,6 +1082,25 @@ picc.school.directives = (function() {
     // nested in `minority_serving`.
     special_designations: access.specialDesignations,
 
+    branch_campus: {
+      '@data-definition': function(d) {
+        return (picc.access.branchCampus(d)) ? 'branch' : 'default';
+      }
+    },
+
+    award_level: {
+        '@data-definition': function (d) {
+          var offersMultipleAwards = picc.access.awardLevels(d, picc.access(picc.fields.PREDOMINANT_DEGREE)(d));
+          if (offersMultipleAwards) {
+            return offersMultipleAwards;
+          } else {
+            this.removeAttribute('aria-describedby');
+            this.removeAttribute('tabindex');
+            return null;
+          }
+        }
+    },
+
     average_cost: format.dollars(access.netPrice),
     average_cost_meter: {
       '@value':   access.netPrice,
@@ -1293,7 +1332,7 @@ picc.school.directives = (function() {
 
 
     available_programs: function(d) {
-      var areas = access.programAreas(d);
+      var areas = access.programAreas(d, fields.PROGRAM_OFFERED + '.degree_or_certificate');
       return areas
         .sort(function(a, b) {
           return d3.ascending(a.program, b.program);
@@ -2175,6 +2214,7 @@ picc.tooltip = {
     clearTimeout(this.__tooltipShowTimeout);
 
     var tooltip = this.tooltip;
+    var definition = this.definition;
     if (!tooltip) {
       tooltip = document.getElementById(this.getAttribute('aria-describedby'));
       if (!tooltip) {
@@ -2183,11 +2223,17 @@ picc.tooltip = {
       this.tooltip = tooltip;
     }
 
+    if (!definition) {
+     var definitionTarget = ( this.hasAttribute('data-definition') ) ? this.getAttribute('data-definition') : 'default';
+     this.definition = definition = tooltip.querySelector('[data-definition="'+definitionTarget+'"]');
+    }
+
     var parent = this;
     var ref = this.querySelector('.tooltip-target') || this;
     var show = function() {
       // console.log('show tooltip:', this, tooltip);
       tooltip.setAttribute('aria-hidden', false);
+      definition.setAttribute('aria-hidden', false);
       var click;
       // d3 makes this a lot simpler with exclusive listeners
       var win = d3.select(window)
@@ -2217,6 +2263,7 @@ picc.tooltip = {
     clearTimeout(this.__tooltipShowTimeout);
     if (!this.tooltip) return;
     this.tooltip.setAttribute('aria-hidden', true);
+    this.definition.setAttribute('aria-hidden', true);
     if (this.tooltip.originalParent) {
       this.tooltip.originalParent.appendChild(this.tooltip);
     }
@@ -2247,7 +2294,7 @@ picc.tooltip = {
       tooltip.originalParent = tooltip.parentNode;
     }
 
-    var content = tooltip.querySelector('.tooltip-content') || tooltip;
+    var content = tooltip.querySelector('.tooltip-content[aria-hidden="false"]') || tooltip;
     content.style.removeProperty('left');
 
     var outer = parent.getBoundingClientRect();

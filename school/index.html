@@ -79,7 +79,7 @@ stylesheets:
               <div class="investigation-major-wrapper"
                 data-bind="under_investigation" aria-hidden="true">
                 <a>
-                  <p class="investigation-major" aria-describedby="tip-hcm2">
+                  <p class="investigation-major" aria-describedby="tip-hcm2" data-bind="branch_campus">
                     Under Ed Monitoring <i class="tooltip-target fa fa-info-circle"></i>
                   </p>
                 </a>
@@ -112,8 +112,11 @@ stylesheets:
 
               <ul class="school-key_figures key-figures">
                 <li data-bind="years">
-                  <span data-bind="number" class="school-key_figures-year">X</span>
-                  <span class="label"></span>
+                  <span aria-describedby="tip-award-level" tabindex="0" data-bind="award_level">
+                    <span data-bind="number" class="school-key_figures-year">X</span>
+                    <span class="label"></span>
+                    <span class="tooltip-target u-new_line"></span>
+                  </span>
                 </li>
                 <li data-bind="control">
                   <span data-bind="value">X</span>
@@ -166,7 +169,7 @@ stylesheets:
               </figure>
 
               <figure class="meter above_is_good">
-                <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-salary" tabindex="0">
+                <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-salary" tabindex="0" data-bind="branch_campus">
                   Salary After<br>Attending
                   <span class="tooltip-target u-new_line">
                     <i class="fa fa-info-circle"></i>
@@ -310,7 +313,7 @@ stylesheets:
                   <div class="school-two_col-left centered">
 
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading" aria-describedby="tip-repayment-rate" tabindex="0">
+                      <h2 class="figure-heading" aria-describedby="tip-repayment-rate" tabindex="0" data-bind="branch_campus">
                         Students Paying<br>Down Their Debt
                         <span class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
@@ -358,8 +361,7 @@ stylesheets:
                   <div class="school-two_col-right school-fact_list">
 
                     <div>
-                      <h2
-                        aria-describedby="tip-student-aid" tabindex="0">
+                      <h2 aria-describedby="tip-student-aid" tabindex="0">
                         Students Receiving Federal Loans
                         <span class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
@@ -370,8 +372,7 @@ stylesheets:
                     </div>
 
                     <div>
-                      <h2
-                        aria-describedby="tip-avg-debt" tabindex="0">
+                      <h2 aria-describedby="tip-avg-debt" tabindex="0" data-bind="branch_campus">
                         Typical Total Debt After Graduation
                         <span class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
@@ -382,8 +383,7 @@ stylesheets:
                     </div>
 
                     <div>
-                      <h2
-                        aria-describedby="tip-avg-loan-payment" tabindex="0">
+                      <h2 aria-describedby="tip-avg-loan-payment" tabindex="0" data-bind="branch_campus">
                         Typical Monthly Loan Payment
                         <span class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
@@ -498,7 +498,7 @@ stylesheets:
 
                   <div class="school-two_col-left">
 
-                    <h2 aria-describedby="tip-earnings-25k" tabindex="0">
+                    <h2 aria-describedby="tip-earnings-25k" tabindex="0" data-bind="branch_campus">
                       Percentage Earning Above High School Grad
                       <span class="tooltip-target">
                         <i class="fa fa-info-circle"></i>
@@ -515,7 +515,7 @@ stylesheets:
 
                   <div class="school-two_col-right centered">
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading" aria-describedby="tip-avg-salary" tabindex="0">
+                      <h2 class="figure-heading" aria-describedby="tip-avg-salary" tabindex="0" data-bind="branch_campus">
                         Salary After<br>Attending
                         <span class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>

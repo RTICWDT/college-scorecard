@@ -1,60 +1,60 @@
 net_price:
   min: -924
   max: 89881
-  median: 16164
-  percentile_range: [10737, 19966]
+  median: 16099
+  percentile_range: [10672, 19962]
 net_price_lt2:
   min: 443
   max: 89881
-  median: 15524
-  percentile_range: [8780, 19759]
+  median: 15471
+  percentile_range: [8760, 19711]
 net_price_2:
   min: -924
   max: 41964
-  median: 8881
-  percentile_range: [7164, 12999]
+  median: 8784.5
+  percentile_range: [7126, 12572]
 net_price_4:
   min: 872
   max: 52073
-  median: 18854
-  percentile_range: [15851, 22308]
+  median: 18848.5
+  percentile_range: [15836, 22323]
 
 completion_rate:
   min: 0.0227
   max: 1
-  median: 0.41895
-  percentile_range: [0.3026, 0.5435]
+  median: 0.42005
+  percentile_range: [0.3026, 0.5443]
 completion_rate_lt2:
   min: 0.0432
   max: 1
   median: 0.4505
-  percentile_range: [0.3044, 0.5781]
+  percentile_range: [0.3043, 0.5737]
 completion_rate_2:
   min: 0.0286
   max: 0.9884
-  median: 0.2567
-  percentile_range: [0.2047, 0.3376]
+  median: 0.2558
+  percentile_range: [0.2039, 0.3346]
 completion_rate_4:
   min: 0.0227
   max: 1
-  median: 0.50645
-  percentile_range: [0.4186, 0.6006]
+  median: 0.5083
+  percentile_range: [0.4199, 0.6023]
 
 median_earnings:
   min: 12400
   max: 125900
   median: 34300
-  percentile_range: [29900, 39300]
+  percentile_range: [30000, 39300]
 median_earnings_lt2:
   min: 14200
   max: 58000
   median: 26700
   percentile_range: [24500, 29100]
 median_earnings_2:
-  min: 13400
+  min: 14300
   max: 85600
-  median: 29800
-  percentile_range: [27300, 32200]
+  median: 29900
+  percentile_range: [27300, 32300]
 median_earnings_4:
   min: 12400
   max: 125900
@@ -62,106 +62,107 @@ median_earnings_4:
   percentile_range: [37100, 45300]
 
 retention_rate:
-  min: 0
+  min: 0.1635392523
   max: 1
-  median: 0.6853
-  percentile_range: [0.6089, 0.7536]
+  median: 0.6835529437
+  percentile_range: [0.6098504335, 0.7507601824]
 retention_rate_lt2:
-  min: 0
+  min: 0.2375303167
   max: 1
-  median: 0.62395
-  percentile_range: [0.5683, 0.6903]
+  median: 0.6219262553
+  percentile_range: [0.5660377358, 0.6836571429]
 retention_rate_2:
-  min: 0
+  min: 0.2089537313
   max: 1
-  median: 0.60255
-  percentile_range: [0.5593, 0.6537]
+  median: 0.5978851958
+  percentile_range: [0.5579323286, 0.6370971279]
 retention_rate_4:
-  min: 0
+  min: 0.1635392523
   max: 1
-  median: 0.7511
-  percentile_range: [0.6944, 0.8087]
+  median: 0.7542859054
+  percentile_range: [0.6987181818, 0.8058418944]
 
 repayment_rate:
   min: 0.0898617512
   max: 0.9253246753
-  median: 0.4674115456
-  percentile_range: [0.3674526373, 0.5779036827]
+  median: 0.4693877551
+  percentile_range: [0.3701312675, 0.5796645702]
 repayment_rate_lt2:
   min: 0.0903361345
   max: 0.8585858586
-  median: 0.3226102941
+  median: 0.3251649387
   percentile_range: [0.2567094516, 0.3897216274]
 repayment_rate_2:
   min: 0.0898617512
   max: 0.8026315789
-  median: 0.3741307371
-  percentile_range: [0.3105022831, 0.4402676011]
+  median: 0.3774010498
+  percentile_range: [0.3140096618, 0.441410694]
 repayment_rate_4:
   min: 0.1045130641
   max: 0.9253246753
-  median: 0.6012493493
-  percentile_range: [0.5227475468, 0.6814404432]
+  median: 0.6021052632
+  percentile_range: [0.5232690125, 0.6819798037]
 
 median_total_debt:
   min: 1500
   max: 50750
-  median: 20104
-  percentile_range: [13750, 24399]
+  median: 20000
+  percentile_range: [13500, 24437.5]
 median_total_debt_lt2:
   min: 3000
   max: 30485
-  median: 9511.5
-  percentile_range: [9500, 12000]
+  median: 9500
+  percentile_range: [9496, 12000]
 median_total_debt_2:
   min: 1500
   max: 42281
   median: 12000
-  percentile_range: [10000, 16283.5]
+  percentile_range: [9935, 16000]
 median_total_debt_4:
   min: 1700
   max: 50750
   median: 25000
-  percentile_range: [22500, 26750]
+  percentile_range: [22500, 26774]
 
 median_monthly_loan:
   min: 15.509633438
   max: 524.74259798
-  median: 207.87044709
-  percentile_range: [142.17163985, 252.2796975]
+  median: 206.79511251
+  percentile_range: [139.58670094, 252.67777809]
 median_monthly_loan_lt2:
   min: 31.019266876
   max: 315.20745024
-  median: 98.34658563
-  percentile_range: [98.22767844, 124.0770675]
+  median: 98.22767844
+  percentile_range: [98.186319418, 124.0770675]
 median_monthly_loan_2:
   min: 15.509633438
   max: 437.17520759
   median: 124.0770675
-  percentile_range: [103.39755625, 168.36741072]
+  percentile_range: [102.72547214, 165.43609]
 median_monthly_loan_4:
   min: 17.577584563
   max: 524.74259798
   median: 258.49389063
-  percentile_range: [232.64450157, 276.58846298]
+  percentile_range: [232.64450157, 276.83661711]
 
 earnings_gt_25k:
-  min: 0.078
+  min: 0.081
   max: 0.96
-  median: 0.558
+  median: 0.56
   percentile_range: [0.489, 0.638]
 earnings_gt_25k_lt2:
   min: 0.081
   max: 0.846
-  median: 0.429
+  median: 0.428
   percentile_range: [0.376, 0.491]
 earnings_gt_25k_2:
-  min: 0.078
+  min: 0.134
   max: 0.933
   median: 0.487
-  percentile_range: [0.446, 0.528]
+  percentile_range: [0.446, 0.527]
 earnings_gt_25k_4:
   min: 0.081
   max: 0.96
-  median: 0.659
-  percentile_range: [0.61, 0.709]
+  median: 0.66
+  percentile_range: [0.611, 0.709]
+
