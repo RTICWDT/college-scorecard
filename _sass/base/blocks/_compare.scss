@@ -154,6 +154,12 @@
     height: 25px !important;
   }
 
+  .legend-wrapper {
+    position: relative;
+    margin-bottom: $base-padding-extra;
+    margin-right: 0;
+    float: none;
+  }
 }
 
 .compare-container_group {
@@ -188,11 +194,6 @@
       }
     }
   }
-
-  .legend-wrapper {
-    position: relative;
-    top:-25px;
-  }
 }
 
 .figure-heading {
@@ -223,6 +224,7 @@ figcaption {
 
   .meter-wrapper {
     margin-bottom: 20px;
+    overflow: hidden;
   }
 
   [data-highlight="true"] {
@@ -490,6 +492,7 @@ figcaption {
         position: relative;
         z-index: 100;
         display: inline-block;
+        overflow: hidden;
       }
     }
 
