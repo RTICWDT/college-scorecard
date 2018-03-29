@@ -66,6 +66,11 @@ module.exports = function compare() {
     picc.fields.OWNERSHIP,
     // to get the "four_year" or "lt_four_year" bit
     picc.fields.PREDOMINANT_DEGREE,
+    // to get alternative predominant degree offered flag
+    picc.fields.DEGREE_OFFERED + '.assoc_or_bachelors',
+    picc.fields.DEGREE_OFFERED + '.bachelors',
+    picc.fields.DEGREE_OFFERED + '.assoc',
+    picc.fields.DEGREE_OFFERED + '.certificate',
     // get all of the net price values
     picc.fields.NET_PRICE,
     picc.fields.COMPLETION_RATE,
@@ -125,6 +130,7 @@ module.exports = function compare() {
     'years',
     'control',
     'size_number',
+    'award_level',
     'locale_name',
     'size_category',
     'average_cost',

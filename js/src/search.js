@@ -46,6 +46,7 @@ module.exports = function search() {
     'state',
     'school_container',
     'selected_school',
+    'branch_campus',
     'under_investigation',
     'size_number',
     'average_cost',
@@ -236,6 +237,7 @@ module.exports = function search() {
       picc.fields.CITY,
       picc.fields.STATE,
       picc.fields.SIZE,
+      picc.fields.BRANCHES,
       // to get "public" or "private"
       picc.fields.OWNERSHIP,
       // to get the "four_year" or "lt_four_year" bit
