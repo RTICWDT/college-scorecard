@@ -38,9 +38,40 @@ stylesheets:
         </div>
 
         <div class="show-loaded">
+
           <div class="school-card_container-school">
+
             <div class="school-share-wrapper">
-              <a data-href="mailto:?subject=Take%20a%20look%20at%20this%20school&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A{url}" class="school-share" data-bind="share_link">Share this school</a>
+              <div class="button button-share" data-share-button tabindex="0" role="button" onclick="void(0)">
+                <span class="top xaxis content">Share this School</span>
+                <ul class="social-share-list bottom xaxis content">
+                  <li class="social-item">
+                    <a data-href="https://twitter.com/intent/tweet?text=Take%20a%20look%20at%20this%20school&amp;url={url}" data-bind="school_share_link_twt" data-social="Twitter" title="Share on Twitter" target="_blank">
+                      <i class="fa fa-twitter"></i>
+                      <span class="sr-only">Share on Twitter</span>
+                    </a>
+                  </li>
+                  <li class="social-item">
+                    <a data-href="https://www.facebook.com/sharer/sharer.php?u={url}" data-bind="school_share_link_fb" title="Share on Facebook" data-social="Facebook" target="_blank">
+                      <i class="fa fa-facebook"></i>
+                      <span class="sr-only">Share on Facebook</span>
+                    </a>
+                  </li>
+                  <li class="social-item">
+                    <a data-href="mailto:?subject=Take%20a%20look%20at%20this%20school&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A{url}" data-bind="school_share_link_mail" data-social="Email" title="Share via Email" >
+                      <i class="fa fa-envelope"></i>
+                      <span class="sr-only">Share via Email</span>
+                    </a>
+                  </li>
+                  <li class="social-item">
+                    <a data-href="https://www.linkedin.com/shareArticle?mini=true&url={url}" data-bind="school_share_link_li" data-social="LinkedIn" title="Share on LinkedIn" target="_blank">
+                      <i class="fa fa-linkedin"></i>
+                      <span class="sr-only">Share on LinkedIn</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
             </div>
 
             <div class="school-heading">
@@ -48,13 +79,21 @@ stylesheets:
               <div class="investigation-major-wrapper"
                 data-bind="under_investigation" aria-hidden="true">
                 <a>
-                  <p class="investigation-major" aria-describedby="tip-hcm2">
+                  <p class="investigation-major" aria-describedby="tip-hcm2" data-bind="branch_campus">
                     Under Ed Monitoring <i class="tooltip-target fa fa-info-circle"></i>
                   </p>
                 </a>
               </div>
 
-              <h1 data-bind="name">School Name</h1>
+              <div class="compare-wrapper">
+
+                <h1 data-bind="name">School Name</h1>
+
+                <div class="compare-school">
+                  {% include compare_school_control.html %}
+                </div>
+
+              </div>
 
               <h2 class="location">
                 <span data-bind="city">City</span>,
@@ -73,8 +112,11 @@ stylesheets:
 
               <ul class="school-key_figures key-figures">
                 <li data-bind="years">
-                  <span data-bind="number" class="school-key_figures-year">X</span>
-                  <span class="label"></span>
+                  <span aria-describedby="tip-award-level" tabindex="0" data-bind="award_level">
+                    <span data-bind="number" class="school-key_figures-year">X</span>
+                    <span class="label"></span>
+                    <span class="tooltip-target u-new_line"></span>
+                  </span>
                 </li>
                 <li data-bind="control">
                   <span data-bind="value">X</span>
@@ -127,7 +169,7 @@ stylesheets:
               </figure>
 
               <figure class="meter above_is_good">
-                <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-salary" tabindex="0">
+                <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-salary" tabindex="0" data-bind="branch_campus">
                   Salary After<br>Attending
                   <span class="tooltip-target u-new_line">
                     <i class="fa fa-info-circle"></i>
@@ -146,7 +188,11 @@ stylesheets:
                     <div class="legend-nat_average-box-line">
                     </div>
                   </div>
-                  <div class="legend-nat_average-words">National Average</div>
+                  <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                    <span class="tooltip-target">
+                        <i class="fa fa-info-circle"></i>
+                     </span>
+                  </div>
                 </div>
               </div>
 
@@ -193,7 +239,11 @@ stylesheets:
                           <div class="legend-nat_average-box-line">
                           </div>
                         </div>
-                        <div class="legend-nat_average-words">National Average</div>
+                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                          <span class="tooltip-target">
+                            <i class="fa fa-info-circle"></i>
+                           </span>
+                        </div>
                       </div>
                     </div>
 
@@ -263,20 +313,13 @@ stylesheets:
                   <div class="school-two_col-left centered">
 
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading" aria-describedby="tip-repayment-rate" tabindex="0">
+                      <h2 class="figure-heading" aria-describedby="tip-repayment-rate" tabindex="0" data-bind="branch_campus">
                         Students Paying<br>Down Their Debt
                         <span class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
                         </span>
                       </h2>
-                      <picc-meter id="repayment-meter"
-                        class="debt"
-                        data-bind="repayment_rate_meter"
-                        max="1"
-                        average="{{ site.data.national_stats.repayment_rate.median }}"
-                        average-range="{{ site.data.national_stats.repayment_rate.average_range|join:'..' }}"
-                        data-median-four_year="{{ site.data.national_stats.repayment_rate_4.median }}"
-                        data-median-lt_four_year="{{ site.data.national_stats.repayment_rate_l4.median }}">
+                      <picc-meter id="repayment-meter" {% include repayment_rate_meter_attributes.html %}>
                       </picc-meter>
 
                       <figcaption>
@@ -295,7 +338,11 @@ stylesheets:
                           <div class="legend-nat_average-box-line">
                           </div>
                         </div>
-                        <div class="legend-nat_average-words">National Average</div>
+                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                          <span class="tooltip-target">
+                            <i class="fa fa-info-circle"></i>
+                           </span>
+                        </div>
                       </div>
                     </div>
 
@@ -314,8 +361,7 @@ stylesheets:
                   <div class="school-two_col-right school-fact_list">
 
                     <div>
-                      <h2
-                        aria-describedby="tip-student-aid" tabindex="0">
+                      <h2 aria-describedby="tip-student-aid" tabindex="0">
                         Students Receiving Federal Loans
                         <span class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
@@ -326,9 +372,8 @@ stylesheets:
                     </div>
 
                     <div>
-                      <h2
-                        aria-describedby="tip-avg-debt" tabindex="0">
-                        Typical Total Debt
+                      <h2 aria-describedby="tip-avg-debt" tabindex="0" data-bind="branch_campus">
+                        Typical Total Debt After Graduation
                         <span class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
                         </span>
@@ -338,8 +383,7 @@ stylesheets:
                     </div>
 
                     <div>
-                      <h2
-                        aria-describedby="tip-avg-loan-payment" tabindex="0">
+                      <h2 aria-describedby="tip-avg-loan-payment" tabindex="0" data-bind="branch_campus">
                         Typical Monthly Loan Payment
                         <span class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
@@ -392,7 +436,11 @@ stylesheets:
                           <div class="legend-nat_average-box-line">
                           </div>
                         </div>
-                        <div class="legend-nat_average-words">National Average</div>
+                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                          <span class="tooltip-target">
+                            <i class="fa fa-info-circle"></i>
+                           </span>
+                        </div>
                       </div>
                     </div>
 
@@ -406,12 +454,7 @@ stylesheets:
                           <i class="fa fa-info-circle"></i>
                         </span>
                       </h2>
-                      <picc-meter id="retention-meter"
-                        class="graduation"
-                        data-bind="retention_rate_meter"
-                        max="1"
-                        average="{{ site.data.national_stats.retention_rate.median }}"
-                        average-range="{{ site.data.national_stats.retention_rate.average_range|join:'..' }}">
+                      <picc-meter id="retention-meter" {% include retention_rate_meter_attributes.html %}>
                       </picc-meter>
                       <figcaption>
                         <span class="average-value" data-bind="retention_rate_value">XX%</span>
@@ -427,7 +470,11 @@ stylesheets:
                           <div class="legend-nat_average-box-line">
                           </div>
                         </div>
-                        <div class="legend-nat_average-words">National Average</div>
+                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                          <span class="tooltip-target">
+                            <i class="fa fa-info-circle"></i>
+                           </span>
+                        </div>
                       </div>
                     </div>
 
@@ -451,7 +498,7 @@ stylesheets:
 
                   <div class="school-two_col-left">
 
-                    <h2 aria-describedby="tip-earnings-25k" tabindex="0">
+                    <h2 aria-describedby="tip-earnings-25k" tabindex="0" data-bind="branch_campus">
                       Percentage Earning Above High School Grad
                       <span class="tooltip-target">
                         <i class="fa fa-info-circle"></i>
@@ -468,7 +515,7 @@ stylesheets:
 
                   <div class="school-two_col-right centered">
                     <figure class="meter above_is_good">
-                      <h2 class="figure-heading" aria-describedby="tip-avg-salary" tabindex="0">
+                      <h2 class="figure-heading" aria-describedby="tip-avg-salary" tabindex="0" data-bind="branch_campus">
                         Salary After<br>Attending
                         <span class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
@@ -490,7 +537,11 @@ stylesheets:
                           <div class="legend-nat_average-box-line">
                           </div>
                         </div>
-                        <div class="legend-nat_average-words">National Average</div>
+                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                          <span class="tooltip-target">
+                            <i class="fa fa-info-circle"></i>
+                           </span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -551,11 +602,8 @@ stylesheets:
                         </div>
 
                         <div class="school-student-socio_econ">
-                          <h2 aria-describedby="tip-socio-eco" tabindex="0">
+                          <h2>
                             Socio-Economic Diversity
-                            <span class="tooltip-target">
-                              <i class="fa fa-info-circle"></i>
-                            </span>
                           </h2>
 
                           <div class="school-student-socio_econ-stat">
@@ -563,7 +611,7 @@ stylesheets:
                             <strong>of students</strong>
                           </div>
 
-                          <p>have a family income less than $40k and receive an income-based federal Pell Grant to help pay for college.</p>
+                          <p>received an income-based federal Pell grant intended for low-income students.</p>
                         </div>
 
                       </div>
@@ -717,9 +765,10 @@ stylesheets:
           Types of Financial Aid</a>
         <a href="https://fafsa.ed.gov/FAFSA/app/f4cForm" class="button button-outline" target="_blank">
           Calculate Your Aid</a>
+        <a href="https://fafsa.ed.gov/" class="button button-outline" target="_blank">
+          Start My FAFSA</a>
         <a href="https://www.vets.gov/gi-bill-comparison-tool" class="button button-outline" target="_blank">
           GI Bill&reg; Benefits</a>
-
       </div>
 
     </aside>

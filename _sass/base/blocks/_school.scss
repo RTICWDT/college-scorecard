@@ -77,6 +77,12 @@
   margin-top: $base-padding;
 }
 
+.branch-campus-wrapper {
+  .fa {
+    color: $black;
+  }
+}
+
 .school-section {
 
   h1 {
@@ -89,6 +95,16 @@
 
   .school-heading {
     @include span-columns(12 of 12);
+
+    .compare-wrapper {
+      @include display(flex);
+      @include flex-direction(row);
+      @include flex-wrap(nowrap);
+      flex: 1 0 auto;
+      h1 {
+        width: 85%;
+      }
+    }
 
     h1 {
       @include font-size($h1);
@@ -109,7 +125,7 @@
       margin-top: 0;
       margin-bottom: 0;
       padding-top: 0;
-      font-size: font-size($h2);
+      @include font-size($h2);
       font-weight: normal;
     }
 
@@ -702,6 +718,7 @@ ol.bars {
 .school-share-wrapper {
   @include span-columns(12);
   text-align: right;
+  position: relative;
 }
 
 .leaflet-control-attribution a {

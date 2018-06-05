@@ -4,7 +4,7 @@ var CLASS_PREFIX = ELEMENT_NAME + '-';
 window.PICCSlider = registerElement(ELEMENT_NAME, {
   createdCallback: function() {
     this.__range = createRange.call(this);
-    this.__mark = createMark.call(this, 'average');
+    this.__mark = createMark.call(this, 'median');
     this.__left = createHandle.call(this, 'min');
     this.__right = createHandle.call(this, 'max');
 
@@ -14,7 +14,7 @@ window.PICCSlider = registerElement(ELEMENT_NAME, {
     this.lower = getAttr.call(this, 'lower', this.min);
     this.upper = getAttr.call(this, 'upper', this.max);
     this.step = getAttr.call(this, 'step', 1);
-    this.average = getAttr.call(this, 'average');
+    this.median = getAttr.call(this, 'median');
     this.format = getAttr.call(this, 'format');
   },
 
@@ -39,7 +39,7 @@ window.PICCSlider = registerElement(ELEMENT_NAME, {
       case 'max':
       case 'value':
       case 'step':
-      case 'average':
+      case 'median':
       case 'format':
         // console.log('picc-slider attr: ', attr, ' = ', value);
         this[attr] = value;
@@ -65,7 +65,7 @@ window.PICCSlider = registerElement(ELEMENT_NAME, {
 
     var lower = this.lower;
     var upper = this.upper;
-    var average = this.average;
+    var median = this.median;
 
     var x = function(value) {
       return 100 * (value - min) / (max - min);
@@ -85,7 +85,7 @@ window.PICCSlider = registerElement(ELEMENT_NAME, {
     var labels = [
       {el: getLabel(this.__left), value: lower},
       {el: getLabel(this.__right), value: upper},
-      {el: getLabel(mark), value: average},
+      {el: getLabel(mark), value: median},
     ];
 
     var format = function() { return ''; };
@@ -133,11 +133,11 @@ window.PICCSlider = registerElement(ELEMENT_NAME, {
       */
     });
 
-    if (isNaN(average)) {
+    if (isNaN(median)) {
       mark.style.setProperty('display', 'none');
     } else {
-      var p = percent(x(average));
-      // console.log('mark:', average, p);
+      var p = percent(x(median));
+      // console.log('mark:', median, p);
       mark.style.setProperty('left', p);
       mark.style.removeProperty('display');
     }
@@ -160,7 +160,7 @@ window.PICCSlider = registerElement(ELEMENT_NAME, {
   lower:  property('lower', Number),
   upper:  property('upper', Number),
   step:   property('step', Number),
-  average: property('average', Number),
+  median: property('median', Number),
 
   format: property('format', String)
 });
@@ -215,7 +215,8 @@ function move(e) {
   x = Math.max(0, Math.min(x, width));
 
   var value = this.min + (x / width) * (this.max - this.min);
-  if (this.step) value = roundTo(value, this.step);
+
+  if (this.step && value !== this.max) value = roundTo(value, this.step);
   this[property] = value;
   this.update();
 

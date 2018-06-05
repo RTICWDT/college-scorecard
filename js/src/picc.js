@@ -1,11 +1,15 @@
 'use strict';
 
 if (typeof window !== 'undefined') {
-  // aight, for polyfilling common JS APIs
+  // for polyfilling common JS APIs
   require('aight');
+  require('element-closest');
+  require('element-dataset').default();
+
   // web components
   require('./components');
-
+  var tagalong = require('./tagalong');
+  var jQuery = require("jquery");
   var typeahead = require("typeahead.js-browserify");
   typeahead.loadjQueryPlugin(); //attach jQuery
 }
@@ -14,7 +18,6 @@ var querystring = require('querystring');
 var d3 = require('d3');
 var async = require('async');
 var formdb = require('formdb');
-var jQuery = require("jquery");
 
 // create the global picc namespace
 var picc = {};
@@ -22,23 +25,8 @@ var picc = {};
 // common error messages
 picc.errors = {
   NO_SCHOOL_ID: 'No school ID was provided.',
-  NO_SUCH_SCHOOL: 'No school found.'
-};
-
-// race-ethnicity labels
-picc.RACE_ETHNICITY_LABELS = {
-  aian:                   'American Indian/Alaska Native',
-  asian:                  'Asian',
-  asian_pacific_islander: 'Asian/Pacific Islander',
-  black:                  'Black',
-  black_non_hispanic:     'Black non-Hispanic',
-  hispanic:               'Hispanic',
-  nhpi:                   'Native Hawaiian/Pacific Islander',
-  non_resident_alien:     'Non-resident alien',
-  two_or_more:            'Two or more races',
-  unknown:                'Unknown',
-  white:                  'White',
-  white_non_hispanic:     'White non-Hispanic',
+  NO_SUCH_SCHOOL: 'No school found.',
+  NO_SCHOOLS_TO_COMPARE: 'No schools selected to compare.'
 };
 
 /**
@@ -124,18 +112,24 @@ picc.API = (function() {
   /**
    * A helper function to get data for a single school.
    *
-   * @param {String|Number} id  the school primary key identifier
-   * @param {Function} callback the callback function, as in
+   * @param {String|Number} id - The school primary key identifier
+   * @param {object}  params - Optional query params to append to the school's query;
+   *                            most useful for a `fields` query
+   * @param {Function} done - The callback function, as in
    *                            `picc.API.get()`, that receives a single
    *                            school's data as its second parameter on
    *                            success.
    */
-  API.getSchool = function(id, done) {
-    var params = {};
-    params[idField] = id;
-    return API.get(schoolEndpoint, params, function(error, res) {
-      var meta = res.metadata || res;
-      if (error || !meta.total) {
+  API.getSchool = function(id, params, done) {
+    var queryParams = {};
+    if (arguments.length === 2) {
+      done = params;
+    } else if (arguments.length === 3) {
+      queryParams = picc.data.extend(queryParams, params);
+    }
+    queryParams[idField] = id;
+    return API.get(schoolEndpoint, queryParams, function(error, res) {
+      if (error || !res.metadata.total) {
         return done(error
           ? error.responseText || error || errors.NO_SUCH_SCHOOL
           : errors.NO_SUCH_SCHOOL);
@@ -373,13 +367,13 @@ picc.format = (function() {
     },
 
     sizeCategory: formatter(range([
-      [0, 2000, 'Small'],
+      [1, 2000, 'Small'],
       [2000, 15000, 'Medium'],
       [15000, Infinity, 'Large']
     ]), 'size unknown'),
 
     sizeCategoryClass: formatter(range([
-      [0, 2000, 'icon-small'],
+      [1, 2000, 'icon-small'],
       [2000, 15000, 'icon-medium'],
       [15000, Infinity, 'icon-large']
     ]), ''),
@@ -446,6 +440,7 @@ picc.format = (function() {
 
 picc.fields = {
   ID:                   'id',
+  // OPEID8:               'ope8_id',
   NAME:                 'school.name',
   CITY:                 'school.city',
   STATE:                'school.state',
@@ -461,64 +456,66 @@ picc.fields = {
   RELIGIOUS:            'school.religious_affiliation',
   OPERATING:            'school.operating',
 
-  SIZE:                 '2014.student.size',
+  SIZE:                 '2015.student.size',
   ONLINE_ONLY:          'school.online_only',
+  MAIN:                 'school.main_campus',
+  BRANCHES:             'school.branches',
 
   WOMEN_ONLY:           'school.women_only',
   MEN_ONLY:             'school.men_only',
   MINORITY_SERVING:     'school.minority_serving',
 
   PREDOMINANT_DEGREE:   'school.degrees_awarded.predominant',
-  HIGHEST_DEGREE:   'school.degrees_awarded.highest',
+  HIGHEST_DEGREE:       'school.degrees_awarded.highest',
   UNDER_INVESTIGATION:  'school.under_investigation',
 
   // net price
-  NET_PRICE:            '2014.cost.avg_net_price.overall',
-  NET_PRICE_BY_INCOME:  '2014.cost.net_price',
+  NET_PRICE:            '2015.cost.avg_net_price.overall',
+  NET_PRICE_BY_INCOME:  '2015.cost.net_price',
 
   // completion rate
-  COMPLETION_RATE:      '2014.completion.rate_suppressed.overall',
+  COMPLETION_RATE:      '2015.completion.rate_suppressed.overall',
 
-  RETENTION_RATE:       '2014.student.retention_rate',
+  RETENTION_RATE:       '2015.student.retention_rate_suppressed',
 
-  REPAYMENT_RATE:       '2014.repayment.3_yr_repayment_suppressed.overall',
+  REPAYMENT_RATE:       '2015.repayment.3_yr_repayment_suppressed.overall',
 
-  AVERAGE_TOTAL_DEBT:   '2014.aid.median_debt_suppressed.completers.overall',
-  MONTHLY_LOAN_PAYMENT: '2014.aid.median_debt_suppressed.completers.monthly_payments',
+  AVERAGE_TOTAL_DEBT:   '2015.aid.median_debt_suppressed.completers.overall',
+  MONTHLY_LOAN_PAYMENT: '2015.aid.median_debt_suppressed.completers.monthly_payments',
 
-  AID_PERCENTAGE:       '2014.aid.federal_loan_rate',
-  PELL_PERCENTAGE:      '2014.aid.pell_grant_rate',
+  AID_PERCENTAGE:       '2015.aid.federal_loan_rate',
+  PELL_PERCENTAGE:      '2015.aid.pell_grant_rate',
 
-  MEDIAN_EARNINGS:      '2012.earnings.10_yrs_after_entry.median',
+  MEDIAN_EARNINGS:      '2013.earnings.10_yrs_after_entry.median',
 
-  EARNINGS_GT_25K:      '2012.earnings.6_yrs_after_entry.percent_greater_than_25000',
+  EARNINGS_GT_25K:      '2013.earnings.6_yrs_after_entry.percent_greater_than_25000',
 
-  PROGRAM_PERCENTAGE:   '2014.academics.program_percentage',
-  PROGRAM_OFFERED:      '2014.academics.program',
-  DEGREE_OFFERED:       '2014.academics.program_available',
+  PROGRAM_PERCENTAGE:   '2015.academics.program_percentage',
+  PROGRAM_OFFERED:      '2015.academics.program',
+  DEGREE_OFFERED:       '2015.academics.program_available',
 
-  PART_TIME_SHARE:      '2014.student.part_time_share',
-  FEMALE_SHARE:         '2014.student.demographics.female_share',
-  RACE_ETHNICITY:       '2014.student.demographics.race_ethnicity',
-  AGE_ENTRY:            '2014.student.demographics.age_entry',
+  PART_TIME_SHARE:      '2015.student.part_time_share',
+  FEMALE_SHARE:         '2015.student.demographics.female_share',
+  RACE_ETHNICITY:       '2015.student.demographics.race_ethnicity',
+  AGE_ENTRY:            '2015.student.demographics.age_entry',
 
-  ACT_25TH_PCTILE:      '2014.admissions.act_scores.25th_percentile.cumulative',
-  ACT_75TH_PCTILE:      '2014.admissions.act_scores.75th_percentile.cumulative',
-  ACT_MIDPOINT:         '2014.admissions.act_scores.midpoint.cumulative',
+  ACT_25TH_PCTILE:      '2015.admissions.act_scores.25th_percentile.cumulative',
+  ACT_75TH_PCTILE:      '2015.admissions.act_scores.75th_percentile.cumulative',
+  ACT_MIDPOINT:         '2015.admissions.act_scores.midpoint.cumulative',
 
-  SAT_CUMULATIVE_AVERAGE:   '2014.admissions.sat_scores.average.overall',
+  SAT_CUMULATIVE_AVERAGE:   '2015.admissions.sat_scores.average.overall',
 
-  SAT_READING_25TH_PCTILE:  '2014.admissions.sat_scores.25th_percentile.critical_reading',
-  SAT_READING_75TH_PCTILE:  '2014.admissions.sat_scores.75th_percentile.critical_reading',
-  SAT_READING_MIDPOINT:     '2014.admissions.sat_scores.midpoint.critical_reading',
+  SAT_READING_25TH_PCTILE:  '2015.admissions.sat_scores.25th_percentile.critical_reading',
+  SAT_READING_75TH_PCTILE:  '2015.admissions.sat_scores.75th_percentile.critical_reading',
+  SAT_READING_MIDPOINT:     '2015.admissions.sat_scores.midpoint.critical_reading',
 
-  SAT_MATH_25TH_PCTILE:     '2014.admissions.sat_scores.25th_percentile.math',
-  SAT_MATH_75TH_PCTILE:     '2014.admissions.sat_scores.75th_percentile.math',
-  SAT_MATH_MIDPOINT:        '2014.admissions.sat_scores.midpoint.math',
+  SAT_MATH_25TH_PCTILE:     '2015.admissions.sat_scores.25th_percentile.math',
+  SAT_MATH_75TH_PCTILE:     '2015.admissions.sat_scores.75th_percentile.math',
+  SAT_MATH_MIDPOINT:        '2015.admissions.sat_scores.midpoint.math',
 
-  SAT_WRITING_25TH_PCTILE:  '2014.admissions.sat_scores.25th_percentile.writing',
-  SAT_WRITING_75TH_PCTILE:  '2014.admissions.sat_scores.75th_percentile.writing',
-  SAT_WRITING_MIDPOINT:     '2014.admissions.sat_scores.midpoint.writing',
+  SAT_WRITING_25TH_PCTILE:  '2015.admissions.sat_scores.25th_percentile.writing',
+  SAT_WRITING_75TH_PCTILE:  '2015.admissions.sat_scores.75th_percentile.writing',
+  SAT_WRITING_MIDPOINT:     '2015.admissions.sat_scores.midpoint.writing',
 
   NET_PRICE_CALC_URL:       'school.price_calculator_url'
 };
@@ -615,6 +612,11 @@ picc.access.yearDesignation = function(d) {
   return null;
 };
 
+picc.access.branchCampus = function(d) {
+  var branch_count = picc.access(picc.fields.BRANCHES)(d);
+  return +branch_count > 1;
+};
+
 picc.access.nationalStat = function(stat, suffix) {
   if (suffix) {
     suffix = picc.access(suffix);
@@ -644,6 +646,9 @@ picc.access.netPriceByIncomeLevel = function(level) {
   );
 };
 
+picc.access.raceEthnicityValueByKey = function(key) {
+  return picc.fields.RACE_ETHNICITY + '.' + key;
+};
 
 /*
 // XXX this version of the median earnings accessor stringifies a
@@ -677,7 +682,13 @@ picc.access.partTimeShare = picc.access.composed(
 picc.access.retentionRate = function(d) {
   var retention = picc.access(picc.fields.RETENTION_RATE)(d);
   /* jshint ignore:start */
-  return retention.four_year.full_time || retention.lt_four_year.full_time;
+  if (retention) {
+    var fourYear = retention.four_year.full_time_pooled;
+    return (fourYear || fourYear === 0) ? fourYear : retention.lt_four_year.full_time_pooled;
+  }
+  // data result key may be a full path dotted-string
+  retention = picc.access(picc.fields.RETENTION_RATE + ".four_year.full_time_pooled")(d);
+  return ( retention || retention === 0) ? retention : picc.access(picc.fields.RETENTION_RATE + ".lt_four_year.full_time_pooled")(d) ;
   /* jshint ignore:end */
 };
 
@@ -754,6 +765,20 @@ picc.access.programAreas = function(d, field) {
     });
 };
 
+picc.access.awardLevels = function(d, preddegree) {
+  // return values are whether the instituion offers other kind of degrees/certs than the predominant degree
+  // if they do we return the glossary term key to display or false to disable the tooltip
+  switch(preddegree) {
+    case 1:
+      return (picc.access(picc.fields.DEGREE_OFFERED + '.assoc_or_bachelors')(d)) ? 'certificate' : false;
+    case 2:
+      return (picc.access(picc.fields.DEGREE_OFFERED + '.certificate')(d) || picc.access(picc.fields.DEGREE_OFFERED + '.bachelors')(d)) ? '2-year' : false;
+    case 3:
+      return (picc.access(picc.fields.DEGREE_OFFERED + '.certificate')(d) || picc.access(picc.fields.DEGREE_OFFERED + '.assoc')(d)) ? '4-year' : false;
+  }
+  return false;
+};
+
 /**
  * @param {*} value
  * @return {*} `null` if `value === "NULL"`, otherwise the value as-is.
@@ -803,7 +828,135 @@ picc.school.directives = (function() {
     }
   };
 
+  // binds data to select-controlled value
+  var raceEthnicity = function(d) {
+    var select = document.getElementById('race_ethnicity');
+    var selectValue = (select) ? access(picc.access.raceEthnicityValueByKey(select.value))(d) : null;
+    return (selectValue >= .005 || selectValue === 0) ? format.percent('selectValue')({'selectValue':selectValue}) : (selectValue) ? '<1%' : 'No Data Available';
+  };
+
+  // binds data to select-controlled value
+  var netPricebyIncomeLevelValue = function(d) {
+    var select = document.getElementById('net_price_income');
+    return (select) ? picc.school.directives[select.value].call(this, d) : null;
+  };
+
   var years = format.preddeg(fields.PREDOMINANT_DEGREE);
+
+  var meterMedian = function(el, degreeType) {
+
+    // simply using the overall national median per ED
+    return el.getAttribute('median');
+
+    // switch(degreeType) {
+    //   case 3:
+    //     return el.getAttribute('data-median-four_year');
+    //   case 2:
+    //     return el.getAttribute('data-median-two_year');
+    //   case 1:
+    //     return el.getAttribute('data-median-cert');
+    // }
+  };
+
+  var medianLine = {
+    '@style': function() {
+      var type = this.getAttribute('data-meter');
+      // var medianType = this.getAttribute('data-median');
+      var medianType = 'median';
+      var meter = this.closest('.compare-container_group').querySelector('[data-bind="'+type+'"]');
+
+      if (!meter) { return ''; }
+
+      var min = meter.getAttribute('min') || 0;
+      var max = meter.getAttribute('max') || 1;
+      var median = meter.getAttribute(medianType);
+
+      var scale = function(v) {
+        return (v - min) / (max - min) * 100;
+      };
+      var value = Math.max(min, Math.min(+median, max));
+      var right = Math.max(0, value);
+
+      // median lines are better represented
+      // when dollars fixedTo `1`, percentages to `0`
+      var fixNum = (max  > 1) ? 1 : 0;
+
+      var style = '';
+      style +='right:'+ (100 - scale(right)).toFixed(fixNum) + '%;';
+      return style;
+    },
+    label: {
+      text: function() {
+        var type = this.closest('[data-meter]').getAttribute('data-meter');
+        // var medianType = this.closest('[data-median]').getAttribute('data-median');
+        var medianType = 'median';
+        var meter = this.closest('.compare-container_group').querySelector('[data-bind="' + type + '"]');
+        if (!meter) { return ''; }
+        switch (type) {
+          case 'average_cost_meter':
+          case 'average_salary_meter':
+          case 'average_total_debt_meter':
+          case 'average_monthly_loan_payment_meter':
+            return format.dollars( function() { return meter.getAttribute(medianType); })(medianType);
+          case 'grad_rate_meter':
+          case 'repayment_rate_meter':
+          case 'retention_rate_meter':
+            return format.percent(function () { return meter.getAttribute(medianType); })(medianType);
+          default:
+            return meter.median;
+        }
+      }
+    }
+  };
+
+  var searchShareLink = {
+    '@href': function(d) {
+      return picc.template.resolve(
+        this.getAttribute('data-href'),
+        {url: encodeURIComponent(document.location.href)}
+      );
+    }
+  };
+
+  var schoolShareLink = {
+    '@href': function(d) {
+      return picc.template.resolve(
+        this.getAttribute('data-href'),
+        {url: encodeURIComponent(document.location.href)}
+      );
+    }
+  };
+
+  var compareShareLink = {
+    '@href': function(d) {
+      return picc.template.resolve(
+        this.getAttribute('data-href'),
+        {
+          url: (function() {
+            var qs =  querystring.parse(decodeURIComponent(location.search.substr(1)));
+            var share = [];
+            var schools = (qs['s[]']) ? qs['s[]'] : picc.school.selection.all(picc.school.selection.LSKey);
+
+            if (schools) {
+              share = schools.map(function(item) {
+                if (item.schoolId) {
+                  item = item.schoolId;
+                }
+                return encodeURIComponent('s[]=' +item.replace('/^[0-9]/', ''));
+              });
+            }
+
+            // older IE
+            if (!window.location.origin) {
+              window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+            }
+            return encodeURIComponent(window.location.origin + window.location.pathname + '?'+share.join('&'));
+          })()
+
+        }
+      );
+    }
+  };
 
   return {
     title: {
@@ -823,14 +976,21 @@ picc.school.directives = (function() {
       }
     },
 
-    share_link: {
-      '@href': function(d) {
-        return picc.template.resolve(
-          this.getAttribute('data-href'),
-          {url: encodeURIComponent(document.location.href)}
-        );
-      }
-    },
+    search_share_link_fb: searchShareLink,
+    search_share_link_twt: searchShareLink,
+    search_share_link_li: searchShareLink,
+    search_share_link_mail: searchShareLink,
+
+    school_share_link_fb: schoolShareLink,
+    school_share_link_twt: schoolShareLink,
+    school_share_link_li: schoolShareLink,
+    school_share_link_mail: schoolShareLink,
+
+    compare_share_link_fb: compareShareLink,
+    compare_share_link_twt: compareShareLink,
+    compare_share_link_li: compareShareLink,
+    compare_share_link_mail: compareShareLink,
+
 
     response_link: {
       '@href': function(d) {
@@ -851,6 +1011,40 @@ picc.school.directives = (function() {
     name:           access(fields.NAME),
     city:           access(fields.CITY),
     state:          access(fields.STATE),
+
+    compare_group:  {
+      '@aria-hidden': function(d) {
+        return !(this.querySelector('[data-bind="school_section"]'));
+      }
+    },
+
+    school_container: function(d) {
+        // hack for tagalong not allowing binding to direct child template element
+        this.setAttribute('data-school-id', access(fields.ID)(d));
+        this.setAttribute('data-compare', (picc.school.selection.isSelected(access(fields.ID)(d), picc.school.selection.LSKey) >= 0));
+        return null;
+    },
+
+    selected_school: {
+      '@aria-pressed': function(d) {
+         return (picc.school.selection.isSelected(access(fields.ID)(d), picc.school.selection.LSKey) >= 0);
+      },
+      '@data-school': function(d) {
+        return picc.school.selection.LSKey;
+      },
+      '@data-school-id': function(d) {
+        return access(fields.ID)(d);
+      },
+      '@data-school-name': function(d) {
+        return access(fields.NAME)(d);
+      },
+      '@aria-describedby': function(d) {
+        return (picc.school.selection.all(picc.school.selection.LSKey).length > 9 &&
+                picc.school.selection.isSelected(access(fields.ID)(d), picc.school.selection.LSKey) === -1)
+                  ? 'tip-compare-max'
+                  : 'tip-compare-add';
+      }
+    },
 
     under_investigation: underInvestigation,
 
@@ -888,13 +1082,42 @@ picc.school.directives = (function() {
     // nested in `minority_serving`.
     special_designations: access.specialDesignations,
 
+    branch_campus: {
+      '@data-definition': function(d) {
+        return (picc.access.branchCampus(d)) ? 'branch' : 'default';
+      }
+    },
+
+    award_level: {
+        '@data-definition': function (d) {
+          var offersMultipleAwards = picc.access.awardLevels(d, picc.access(picc.fields.PREDOMINANT_DEGREE)(d));
+          if (offersMultipleAwards) {
+            return offersMultipleAwards;
+          } else {
+            this.removeAttribute('aria-describedby');
+            this.removeAttribute('tabindex');
+            return null;
+          }
+        }
+    },
+
     average_cost: format.dollars(access.netPrice),
     average_cost_meter: {
-      // '@max':     access.nationalStat('max', access.publicPrivate),
-      // '@average': access.nationalStat('median', access.publicPrivate),
       '@value':   access.netPrice,
-      label:      format.dollars(function() { return this.average; })
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:      format.dollars(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
+      'picc-side-meter-val': format.dollars(access.netPrice),
     },
+
+    // on the compare screen we draw the vertical `median_line`
+    // for the current meter group across multiple school picc-side-meter's.
+    // depending on the meter, we format the median label accordingly ($,%, etc)
+    median_line: medianLine,
+    // pred_degree: function() {
+    //   return this.querySelector('[data-school-preddeg]').getAttribute('data-school-preddeg');
+    // },
 
     // income level net price stats
     net_price_income1: format.dollars(access.netPriceByIncomeLevel('0-30000')),
@@ -902,46 +1125,141 @@ picc.school.directives = (function() {
     net_price_income3: format.dollars(access.netPriceByIncomeLevel('48001-75000')),
     net_price_income4: format.dollars(access.netPriceByIncomeLevel('75001-110000')),
     net_price_income5: format.dollars(access.netPriceByIncomeLevel('110001-plus')),
+    net_price_income_meter: {
+      '@data-net_price_income1': access.netPriceByIncomeLevel('0-30000'),
+      '@data-net_price_income2': access.netPriceByIncomeLevel('30001-48000'),
+      '@data-net_price_income3': access.netPriceByIncomeLevel('48001-75000'),
+      '@data-net_price_income4': access.netPriceByIncomeLevel('75001-110000'),
+      '@data-net_price_income5': access.netPriceByIncomeLevel('110001-plus'),
+      '@value':   function() {
+        var select = document.getElementById('net_price_income');
+        return this.getAttribute('data-'+select.value);
+      },
+      'picc-side-meter-val': function(d) {
+        return netPricebyIncomeLevelValue(d);
+      }
+    },
 
+    net_price_income_val: function(d) {
+      return netPricebyIncomeLevelValue(d);
+    },
     advantage_rate: format.percent(fields.EARNINGS_GT_25K),
+    advantage_rate_meter: {
+      '@value':   access.earnings25k,
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:      format.percent(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
+      'picc-side-meter-val': format.percent(fields.EARNINGS_GT_25K)
+    },
 
     grad_rate: format.percent(access.completionRate),
     grad_rate_meter: {
-      // '@average': access.nationalStat('median', access.yearDesignation),
       '@value':   access.completionRate,
-      label:      format.percent(function() { return this.average; })
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:      format.percent(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
+      'picc-side-meter-val': format.percent(access.completionRate)
     },
 
     average_salary: format.dollars(access.earningsMedian),
     average_salary_meter: {
       '@value': access.earningsMedian,
-      // '@average': access.nationalStat('median', access.yearDesignation),
-      label:    format.dollars(function() { return this.average; })
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:    format.dollars(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
+      'picc-side-meter-val': format.dollars(access.earningsMedian)
     },
 
     repayment_rate_percent: format.percent(fields.REPAYMENT_RATE),
     repayment_rate_meter: {
       '@value': access(fields.REPAYMENT_RATE),
-      // '@average': access.nationalStat('median', access.yearDesignation),
-      label:    format.percent(function() { return this.average; })
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:    format.percent(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
+      'picc-side-meter-val': format.percent(fields.REPAYMENT_RATE)
     },
 
     average_total_debt: format.dollars(fields.AVERAGE_TOTAL_DEBT),
+    average_total_debt_meter: {
+      '@value': access(fields.AVERAGE_TOTAL_DEBT),
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:    format.dollars(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
+      'picc-side-meter-val': format.dollars(fields.AVERAGE_TOTAL_DEBT)
+    },
+
     average_monthly_loan_payment: format.dollars(fields.MONTHLY_LOAN_PAYMENT),
+    average_monthly_loan_payment_meter: {
+      '@value': access(fields.MONTHLY_LOAN_PAYMENT),
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:    format.dollars(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
+      'picc-side-meter-val': function(d) {
+        return (format.dollars(fields.MONTHLY_LOAN_PAYMENT)(d)) +'/mo'
+      }
+    },
 
     federal_aid_percentage: format.percent(fields.AID_PERCENTAGE),
+    federal_aid_meter: {
+      '@value': access(fields.AID_PERCENTAGE),
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:    format.percent(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
+      'picc-side-meter-val': format.percent(fields.AID_PERCENTAGE)
+    },
+
     pell_grant_percentage: format.percent(fields.PELL_PERCENTAGE),
+    pell_grant_meter: {
+      '@value': access(fields.PELL_PERCENTAGE),
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:    format.percent(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
+      'picc-side-meter-val': format.percent(fields.PELL_PERCENTAGE)
+    },
 
     earnings_gt_25k: format.percent(access.earnings25k),
     earnings_gt_25k_meter: {
       '@value': access.earnings25k,
-      label:    format.percent(function() { return this.average; })
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:    format.percent(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
+      'picc-side-meter-val': format.percent(access.earnings25k)
     },
 
     retention_rate_value: format.percent(access.retentionRate),
     retention_rate_meter: {
       '@value': access.retentionRate,
-      label:    format.percent(function() { return this.average; })
+      '@degree': access(fields.PREDOMINANT_DEGREE),
+      label:    format.percent(function(d) {
+        return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
+      }),
+      'picc-side-meter-val': format.percent(access.retentionRate),
+    },
+
+    full_time_value: {
+
+      '@value': function(d) {
+        var pt = access.partTimeShare(d);
+        return pt === null ? null : 1 - pt;
+      },
+      'average': function(d) {
+        var pt = access.partTimeShare(d);
+        return pt === null ? null : 1 - pt;
+      },
+      'picc-side-meter-val': format.percent(function(d) {
+        var pt = access.partTimeShare(d);
+        return pt === null ? null : (1 - pt);
+      }),
+
     },
 
     full_time_percent: format.number(function(d) {
@@ -985,8 +1303,36 @@ picc.school.directives = (function() {
         });
     },
 
+    race_ethnicity_meter: {
+      '@data-aian': access.raceEthnicityValueByKey('aian'),
+      '@data-asian': access.raceEthnicityValueByKey('asian'),
+      '@data-black': access.raceEthnicityValueByKey('black'),
+      '@data-hispanic': access.raceEthnicityValueByKey('hispanic'),
+      '@data-nhpi': access.raceEthnicityValueByKey('nhpi'),
+      '@data-non_resident_alien': access.raceEthnicityValueByKey('non_resident_alien'),
+      '@data-two_or_more': access.raceEthnicityValueByKey('two_or_more'),
+      '@data-unknown': access.raceEthnicityValueByKey('unknown'),
+      '@data-white': access.raceEthnicityValueByKey('white'),
+      // no longer used data vars
+      // '@data-white_non_hispanic': access.raceEthnicityValueByKey('white_non_hispanic'),
+      // '@data-asian_pacific_islander': access.raceEthnicityValueByKey('asian_pacific_islander'),
+      // '@data-black_non_hispanic': access.raceEthnicityValueByKey('black_non_hispanic'),
+      '@value': function() {
+        var select = document.getElementById('race_ethnicity');
+        return this.getAttribute('data-'+select.value);
+      },
+      'picc-side-meter-val': function(d) {
+        return raceEthnicity(d);
+      }
+    },
+
+    race_ethnicity_val: function(d) {
+      return raceEthnicity(d);
+    },
+
+
     available_programs: function(d) {
-      var areas = access.programAreas(d);
+      var areas = access.programAreas(d, fields.PROGRAM_OFFERED + '.degree_or_certificate');
       return areas
         .sort(function(a, b) {
           return d3.ascending(a.program, b.program);
@@ -1030,48 +1376,60 @@ picc.school.directives = (function() {
     },
     act_scores_invisible: {
       '@aria-hidden': format.notEmpty(fields.ACT_MIDPOINT),
+      'name2': access(fields.NAME)
     },
     act_scores: {
       '@lower': access(fields.ACT_25TH_PCTILE),
       '@upper': access(fields.ACT_75TH_PCTILE),
       // '@middle': access(fields.ACT_MIDPOINT),
     },
+    act_25: access(fields.ACT_25TH_PCTILE),
+    act_75: access(fields.ACT_75TH_PCTILE),
 
     sat_reading_scores_visible: {
       '@aria-hidden': format.empty(fields.SAT_READING_MIDPOINT),
     },
     sat_reading_scores_invisible: {
       '@aria-hidden': format.notEmpty(fields.SAT_READING_MIDPOINT),
+      'name2': access(fields.NAME)
     },
     sat_reading_scores: {
       '@lower': access(fields.SAT_READING_25TH_PCTILE),
       '@upper': access(fields.SAT_READING_75TH_PCTILE),
       // '@middle': access(fields.SAT_READING_MIDPOINT),
     },
+    sat_reading_25: access(fields.SAT_READING_25TH_PCTILE),
+    sat_reading_75: access(fields.SAT_READING_75TH_PCTILE),
 
     sat_math_scores_visible: {
       '@aria-hidden': format.empty(fields.SAT_MATH_MIDPOINT),
     },
     sat_math_scores_invisible: {
       '@aria-hidden': format.notEmpty(fields.SAT_MATH_MIDPOINT),
+      'name2': access(fields.NAME)
     },
     sat_math_scores: {
       '@lower': access(fields.SAT_MATH_25TH_PCTILE),
       '@upper': access(fields.SAT_MATH_75TH_PCTILE),
       // '@middle': access(fields.SAT_MATH_MIDPOINT),
     },
+    sat_math_25: access(fields.SAT_MATH_25TH_PCTILE),
+    sat_math_75: access(fields.SAT_MATH_75TH_PCTILE),
 
     sat_writing_scores_visible: {
       '@aria-hidden': format.empty(fields.SAT_WRITING_MIDPOINT),
     },
     sat_writing_scores_invisible: {
       '@aria-hidden': format.notEmpty(fields.SAT_WRITING_MIDPOINT),
+      'name2': access(fields.NAME)
     },
     sat_writing_scores: {
       '@lower': access(fields.SAT_WRITING_25TH_PCTILE),
       '@upper': access(fields.SAT_WRITING_75TH_PCTILE),
       // '@middle': access(fields.SAT_WRITING_MIDPOINT),
     },
+    sat_writing_25: access(fields.SAT_WRITING_25TH_PCTILE),
+    sat_writing_75: access(fields.SAT_WRITING_75TH_PCTILE),
 
     net_price_calculator: {
       '@href': format.href(fields.NET_PRICE_CALC_URL)
@@ -1080,6 +1438,244 @@ picc.school.directives = (function() {
 
 })();
 
+/**
+ * School selection utils for checking state, saving schools, and rendering toggles & links
+ */
+picc.school.selection = {
+
+    LSKey: 'compare-schools',
+
+    all: function (key) {
+      return JSON.parse(window.localStorage.getItem(key)) || [];
+    },
+
+    isSelected: function (id, key) {
+      return (picc.school.selection.all(key).map(function(fav){
+        return +fav.schoolId;
+      }).indexOf(id));
+    },
+
+    showMaxSelected: function() {
+
+      var compareBtns = [].slice.call(document.querySelectorAll('button.button-compare_schools:not([aria-pressed="true"])'));
+      for(var i=0; i<compareBtns.length;i++) {
+        compareBtns[i].setAttribute('aria-describedby', 'tip-compare-max');
+      }
+
+    },
+
+    hideMaxSelected: function() {
+      var compareBtns = [].slice.call(document.querySelectorAll('button.button-compare_schools'));
+      for(var i=0; i<compareBtns.length;i++) {
+        compareBtns[i].setAttribute('aria-describedby', 'tip-compare-add' );
+      }
+    },
+
+    toggle: function (e, el) {
+
+      if (!el) {
+        el = (e.target.parentElement.hasAttribute('data-school-id')) ? e.target.parentElement : e.target;
+      }
+      var dataset = el.dataset;
+      var collection = dataset.school;
+      var isSelected = picc.school.selection.isSelected(+dataset.schoolId, collection);
+      var selectedSchools = picc.school.selection.all(collection);
+      var selectedCard = document.querySelector('.school.results-card[data-school-id="'+dataset.schoolId+'"]');
+
+      if (isSelected >= 0) {
+
+        if (selectedSchools.length === 10) {
+          picc.school.selection.hideMaxSelected();
+        }
+
+        // remove school from collection
+        selectedSchools.splice(isSelected, 1);
+        // save the new collection
+        window.localStorage.setItem(collection, JSON.stringify(selectedSchools));
+        // toggle the compare button
+        picc.school.selection.toggleBtn(el,false);
+          // highlight the card if visible on page
+        picc.school.selection.toggleCard(selectedCard, false);
+        // compare schools page we need to remove highlighted sections on toggle remove school
+        if (el.previousElementSibling && el.previousElementSibling.hasAttribute('data-highlight-btn')) {
+          picc.school.selection.highlightRemove(dataset.schoolId);
+        }
+      } else {
+
+        if (selectedSchools.length < 10) {
+          // add school to collection
+          selectedSchools.push(dataset);
+          picc.school.selection.toggleBtn(el, true);
+          picc.school.selection.toggleCard(selectedCard, true);
+
+          if (selectedSchools.length > 9) {
+            picc.school.selection.showMaxSelected();
+          }
+
+          // save the new collection
+          window.localStorage.setItem(collection, JSON.stringify(selectedSchools));
+
+        } else {
+          // only compare up to 10 schools
+          picc.school.selection.showMaxSelected();
+        }
+      }
+      picc.school.selection.setCount();
+    },
+
+    toggleBtn: function (el,state) {
+      if (el && el.hasAttribute('aria-pressed')) {
+        el.setAttribute('aria-pressed', state);
+      }
+    },
+
+    toggleCard: function(el, state) {
+      if (el && el.hasAttribute('data-compare')) {
+        el.setAttribute('data-compare', state)
+      }
+    },
+
+    setCount: function() {
+      var counter = document.querySelector('.selection-count');
+      if (counter) {
+       counter.textContent = picc.school.selection.all(picc.school.selection.LSKey).length;
+      }
+    },
+
+    // remove any highlight from a deselecte school
+    highlightRemove: function(schoolId) {
+
+        var btn = document.querySelector('button[data-highlight-btn][data-school-id="'+schoolId+'"]');
+        btn.setAttribute('aria-pressed', false);
+
+        var sections = [].slice.call(document.querySelectorAll('[data-bind="school_section"][data-school-id="'+schoolId+'"]'));
+        for(var i=0; i<sections.length;i++) {
+          sections[i].removeAttribute('data-highlight')
+        }
+    },
+
+    highlightToggle: function(e, el) {
+      if (!el) {
+        el = (e.target);
+      }
+      var schoolID = el.getAttribute('data-school-id');
+      var highlightTarget = (el.getAttribute('aria-pressed') !== "true");
+
+      if (el.nextElementSibling && !el.nextElementSibling.querySelector('input').checked) {
+        // let the highlight button reselect a deselected (hidden) school
+        var checkbox = el.nextElementSibling.querySelector('input');
+        checkbox.checked = true;
+        checkbox.dispatchEvent(new CustomEvent('change'));
+      }
+
+      // reset all other highlight buttons and toggle target
+      var btns = [].slice.call(document.querySelectorAll('button[data-highlight-btn]'));
+      for(var i=0; i < btns.length; i++) {
+        var btnID = btns[i].getAttribute('data-school-id');
+
+        if (btnID === schoolID) {
+          // toggle
+          el.setAttribute('aria-pressed', highlightTarget);
+        } else {
+          btns[i].setAttribute('aria-pressed', false);
+
+        }
+      }
+      // reset all highlightable sections and toggle target sections
+      var highlightable = [].slice.call(document.querySelectorAll('[data-bind="school_section"]'));
+      for(var i=0;i<highlightable.length; i++) {
+        var sectionID =  highlightable[i].getAttribute('data-school-id');
+        if (sectionID === schoolID) {
+          highlightable[i].setAttribute('data-highlight', highlightTarget);
+        } else {
+          highlightable[i].removeAttribute('data-highlight');
+        }
+      }
+
+    },
+
+    highlightBarToggle: function(e) {
+      var  el = e.target.closest('[data-bind="school_section"]');
+      var schoolId = el.getAttribute('data-school-id');
+      var schoolHighlightBtn = document.querySelector('button[data-highlight-btn][data-school-id="'+schoolId+'"]');
+      picc.school.selection.highlightToggle(e, schoolHighlightBtn)
+    },
+
+    renderCompareToggles: function() {
+        var collection = picc.school.selection.LSKey;
+        tagalong(
+          '#edit-compare-list',
+          picc.school.selection.all(collection),
+          {
+            name: function(d) {
+              return picc.access('schoolName')(d)
+            },
+            checkbox_label: {
+              '@for': function(d) {
+                return 'edit-compare-' + picc.access('schoolId')(d);
+              },
+              '@data-school': function(d) {
+                return collection;
+              },
+              '@data-school-id': function (d) {
+                return picc.access('schoolId')(d);
+              },
+              '@data-school-name': function(d) {
+                return picc.access('schoolName')(d);
+              }
+            },
+            compare_checkbox: {
+              '@id': function (d) {
+                return 'edit-compare-' + picc.access('schoolId')(d);
+              },
+              '@checked': function(d) {
+                return (picc.school.selection.isSelected(picc.access('schoolId')(d), collection) >= 0) ? 'checked': null;
+              }
+            },
+            highlight_button: {
+              '@aria-pressed': function (d) {
+                return this.getAttribute('aria-pressed');
+
+              },
+              '@data-school-id': function (d) {
+                return picc.access('schoolId')(d);
+              }
+            }
+          }
+        );
+
+      // Fix for tagalong binding only to the first instance of a directive
+      var checkboxes = document.querySelectorAll('input[name="_compare"]');
+
+
+      for (var i = 0; i < checkboxes.length; i++) {
+          checkboxes[i].checked = true;
+      }
+
+      // update compare schools link
+      picc.school.selection.renderCompareLink();
+
+    },
+
+    renderCompareLink: function() {
+      var compareLink = d3.select('#compare-link');
+      if (!compareLink.empty()) {
+        var linkContainer = d3.select(compareLink.node().parentNode);
+        if (picc.school.selection.all(picc.school.selection.LSKey).length) {
+          compareLink
+            .attr('href', picc.BASE_URL + '/compare/')
+            .attr('aria-disabled', null);
+          linkContainer.classed('disabled',false);
+        } else {
+          compareLink
+            .attr('href', null)
+            .attr('aria-disabled', true);
+          linkContainer.classed('disabled', true);
+        }
+      }
+    }
+
+};
 
 // form utilities
 picc.form = {};
@@ -1106,7 +1702,7 @@ picc.form.mappings = {
   },
 
   size: {
-    small:  '..1999',
+    small:  '1..2000',
     medium: '2000..15000',
     large:  '15001..'
   },
@@ -1314,10 +1910,10 @@ picc.form.prepareParams = (function() {
       delete query.distance;
     }
 
-    // by default, filter out schools for which school.size is null
+    // by default, filter out schools for which school.size is null or 0
     // with a numeric range query
     if (!query.size) {
-      query[fields.SIZE + '__range'] = '0..';
+      query[fields.SIZE + '__range'] = '1..';
     }
 
     /*
@@ -1402,6 +1998,19 @@ picc.ui.expandAccordions = function(selector, expanded) {
       return !!expanded.apply(this, arguments);
     })
     .property('expanded', true);
+};
+
+// are we in IE? hopefully not.
+picc.ui.ie = typeof document !== 'undefined' && typeof document.documentMode === 'number';
+
+// flag used mainly by IE/tagalong issue
+picc.ui.alreadyLoaded = false;
+
+// another IE/tagalong util
+picc.ui.removeAllChildren = function(node) {
+  while (node.lastChild) {
+    node.removeChild(node.lastChild);
+  }
 };
 
 /**
@@ -1510,7 +2119,7 @@ picc.delegate = function(root, qualify, event, listener) { if
     }
   };
   root.addEventListener(event, _listener, true);
-  return listener;
+  return _listener;
 };
 
 // data tools
@@ -1605,6 +2214,7 @@ picc.tooltip = {
     clearTimeout(this.__tooltipShowTimeout);
 
     var tooltip = this.tooltip;
+    var definition = this.definition;
     if (!tooltip) {
       tooltip = document.getElementById(this.getAttribute('aria-describedby'));
       if (!tooltip) {
@@ -1613,11 +2223,17 @@ picc.tooltip = {
       this.tooltip = tooltip;
     }
 
+    if (!definition) {
+     var definitionTarget = ( this.hasAttribute('data-definition') ) ? this.getAttribute('data-definition') : 'default';
+     this.definition = definition = tooltip.querySelector('[data-definition="'+definitionTarget+'"]');
+    }
+
     var parent = this;
     var ref = this.querySelector('.tooltip-target') || this;
     var show = function() {
       // console.log('show tooltip:', this, tooltip);
       tooltip.setAttribute('aria-hidden', false);
+      definition.setAttribute('aria-hidden', false);
       var click;
       // d3 makes this a lot simpler with exclusive listeners
       var win = d3.select(window)
@@ -1647,6 +2263,7 @@ picc.tooltip = {
     clearTimeout(this.__tooltipShowTimeout);
     if (!this.tooltip) return;
     this.tooltip.setAttribute('aria-hidden', true);
+    this.definition.setAttribute('aria-hidden', true);
     if (this.tooltip.originalParent) {
       this.tooltip.originalParent.appendChild(this.tooltip);
     }
@@ -1677,7 +2294,7 @@ picc.tooltip = {
       tooltip.originalParent = tooltip.parentNode;
     }
 
-    var content = tooltip.querySelector('.tooltip-content') || tooltip;
+    var content = tooltip.querySelector('.tooltip-content[aria-hidden="false"]') || tooltip;
     content.style.removeProperty('left');
 
     var outer = parent.getBoundingClientRect();
@@ -1718,9 +2335,11 @@ picc.tooltip = {
  * page-specific functions
  */
 picc.pages = {
-  index: require('./index'),
-  search: require('./search'),
-  school: require('./school')
+  index:      require('./index'),
+  search:     require('./search'),
+  school:     require('./school'),
+  compare:    require('./compare'),
+  data:       require('./data')
 };
 
 
@@ -1758,6 +2377,26 @@ if (typeof document !== 'undefined') {
           blur:       picc.tooltip.hide,
         }
     );
+  });
+
+  /**
+   * add event listeners for school selection click events
+   */
+  picc.ready(function() {
+      var ariaPressed = 'aria-pressed';
+      var compareSchool = 'data-school';
+      picc.delegate(
+          document.body,
+          // if the element matches '[aria-pressed] && [data-school]'
+          function() {
+              return (this.parentElement.hasAttribute(ariaPressed) || this.hasAttribute(ariaPressed))
+                && (this.parentElement.hasAttribute(compareSchool) || this.hasAttribute(compareSchool));
+          },
+          {
+            click: picc.school.selection.toggle
+          }
+      );
+
   });
 
   // set the "dragging" class when the mouse is down
@@ -1802,7 +2441,7 @@ if (typeof document !== 'undefined') {
       source: function(q, syncResults, asyncResults) {
         //fashion basic query object to pass to API.search
         //return more results to ensure enough left-first matches are captured
-        var query = { fields: picc.fields.NAME, per_page: 20 }
+        var query = { fields: picc.fields.NAME, per_page: 20 };
         query[picc.fields.NAME] = q;
         query = picc.form.prepareParams(query);
 
@@ -1823,7 +2462,7 @@ if (typeof document !== 'undefined') {
               return (s2match) ? 0 : -1;
             } else {
               return (s2match) ? 1 : 0;
-            } 
+            }
           });
 
           //reduce results to 5 for display
@@ -1833,6 +2472,159 @@ if (typeof document !== 'undefined') {
       }
     });
   };
+
+  picc.socialTabListener = {};
+
+  var socialTabNavToggle = function socialTabNavToggle(evt) {
+    setTimeout(function() {
+      evt.target.classList.add('social-tab');
+    },300);
+    document.body.removeEventListener('focus', picc.socialTabListener['focus'], true);
+  };
+
+  var socialDidClickShare = function socialDidClickShare(evt) {
+    var type = evt.target.closest('[data-social]').getAttribute('data-social');
+    var shareTypes = ['Facebook', 'Twitter', 'Email', 'LinkedIn'];
+    var shareType = (shareTypes.indexOf(type) >= 0) ? type : 'unknown';
+    if (window.ga) {
+      try {
+        ga('send', 'event', 'Social Share', shareType, window.location.pathname)
+      } catch (e) {
+        console.error('[ga] social event error');
+      }
+    }
+  };
+
+  var accordionDidExpand = function accordionToggle(evt) {
+    var controlType = evt.target.getAttribute('aria-controls');
+    var accordionTypes = {
+      'Data': {
+        'cost'        : 'Costs',
+        'finaid'      : 'Financial Aid & Debt',
+        'graduation'  : 'Graduation & Retention',
+        'earnings'    : 'Earnings After School',
+        'student'     : 'Student Body',
+        'school'      : 'College Information',
+        'selectivity' : 'SAT/ACT Scores',
+        'academics'   : 'Academic Programs',
+      },
+      'Search': {
+        'major-content'     : 'Programs/Degrees',
+        'location-content'  : 'Location',
+        'size-content'      : 'Size',
+        'name-content'      : 'Name',
+        'type-content'      : 'Advanced Search',
+      }
+    };
+
+    function matchAccordionType(typeArr, group) {
+      var accordion = [];
+      Object.keys(typeArr[group]).forEach(function(k) {
+        if (!accordion.length && controlType.indexOf(k) === 0) {
+          accordion.push({
+            'group': group,
+            'name': typeArr[group][k]
+          });
+        }
+      });
+      return accordion;
+    }
+
+    var accordionType = matchAccordionType(accordionTypes, 'Data');
+
+    if(!accordionType.length) {
+      // also check the search accordions
+      accordionType = matchAccordionType(accordionTypes, 'Search');
+    }
+
+    if (window.ga && accordionType.length) {
+      try {
+        var category = '[' + accordionType[0]['group'] + '] Expand Accordion';
+        ga('send', 'event', category, accordionType[0]['name'], window.location.pathname);
+      } catch (e) {
+        console.error('[ga] accordion event error');
+      }
+    }
+  };
+
+  var outboundLinks = function outboundLinks(evt) {
+    var target = evt.target.href.replace(/^https:\/\//, '');
+    if (window.ga && target) {
+      try {
+        ga('send', 'event', 'Outbound Links', target, window.location.pathname);
+      } catch (e) {
+        console.error('[ga] outbound link event error');
+      }
+    }
+  };
+
+  /**
+   * * add focus and click listeners for social links and tab navigation
+   */
+  picc.ready(function() {
+    var shareBtn = 'data-share-button';
+    picc.socialTabListener = picc.delegate(
+      document.body,
+      function() {
+        return this.hasAttribute(shareBtn);
+      },
+      {
+        focus: socialTabNavToggle,
+      }
+    );
+
+    var socialType = 'data-social';
+    picc.delegate(
+      document.body,
+      function() {
+        return this.parentElement.hasAttribute(socialType) || this.hasAttribute(socialType);
+      },
+      {
+        click: socialDidClickShare,
+      }
+    );
+  });
+
+  /**
+   * * add click listeners for accordion expanded events
+   */
+  picc.ready(function() {
+    var ariaControls = 'aria-controls';
+    var ariaExpanded = 'aria-expanded';
+    picc.delegate(
+      document.body,
+      function() {
+        return this.hasAttribute(ariaControls) && this.getAttribute(ariaExpanded) === 'false';
+      },
+      {
+        click: accordionDidExpand,
+      }
+    );
+
+  });
+
+  /**
+   * * add event listeners for outbound links
+   */
+  picc.ready(function() {
+    var anchorHref = 'href';
+    picc.delegate(
+      document.body,
+      function() {
+        return this.hasAttribute(anchorHref)
+          && this.href.indexOf(location.host) === -1
+          && (
+            this.href.match(/^https:\/\/fafsa\.ed\.gov\//)
+            || this.href.match(/^https:\/\/studentaid\.ed\.gov\//)
+            || this.href.match(/^https:\/\/www\.vets\.gov\//)
+          );
+      },
+      {
+        click: outboundLinks,
+      }
+    );
+
+  });
 }
 
 module.exports = picc;

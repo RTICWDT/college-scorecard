@@ -1,5 +1,5 @@
 // tagalong!
-var tagalong = require('tagalong');
+var tagalong = require('./tagalong');
 var formdb = require('formdb');
 var querystring = require('querystring');
 var d3 = require('d3');
@@ -9,6 +9,7 @@ module.exports = function search() {
   var resultsRoot = document.querySelector('.search-results');
   var paginator = resultsRoot.querySelector('.pagination');
   var bottomPaginator = resultsRoot.querySelector('.pagination_bottom');
+  var toggleContainer = document.querySelector('.toggles.search-toggles');
 
   var form = new formdb.Form('#search-form');
   var query = querystring.parse(location.search.substr(1));
@@ -23,8 +24,6 @@ module.exports = function search() {
   var ready = false;
   var alreadyLoaded = false;
 
-  // are we in IE? hopefully not.
-  var ie = typeof document.documentMode === 'number';
 
   // "incremental" updates will only hide the list of schools, and
   // not any of the other elements (results total, sort, pages)
@@ -45,6 +44,9 @@ module.exports = function search() {
     'name',
     'city',
     'state',
+    'school_container',
+    'selected_school',
+    'branch_campus',
     'under_investigation',
     'size_number',
     'average_cost',
@@ -54,6 +56,14 @@ module.exports = function search() {
     'average_salary',
     'average_salary_meter',
     'more_link'
+  ]);
+
+  var socialRoot = document.querySelector('.school-share-wrapper');
+  var socialLinks = picc.data.selectKeys(picc.school.directives, [
+    'search_share_link_fb',
+    'search_share_link_twt',
+    'search_share_link_li',
+    'search_share_link_mail',
   ]);
 
   var win = d3.select(window);
@@ -76,6 +86,10 @@ module.exports = function search() {
           opened.close();
         }
       });
+
+      if (this.id === 'compare_schools-edit') {
+        picc.school.selection.renderCompareToggles();
+      }
     });
 
   // close all toggles on escape
@@ -120,6 +134,8 @@ module.exports = function search() {
         }
       }, 200));
 
+    picc.school.selection.renderCompareToggles();
+
     change();
   });
 
@@ -134,7 +150,12 @@ module.exports = function search() {
   // update the distance field's disabled flag when zip changes
   form.on('change:zip', updateDistanceDisabled);
 
-  form.on('change:_drawer', function(value, e) {
+  // stop compare checkboxes triggering search and update storage
+  form.on('change:_compare', function(value, e) {
+    var id = e.target.parentElement.getAttribute('data-school-id');
+    var school = document.querySelector('button[data-school-id="'+id+'"]');
+    picc.school.selection.toggle(e, school);
+    picc.school.selection.renderCompareLink();
     submit = false;
   });
 
@@ -176,7 +197,7 @@ module.exports = function search() {
       return;
     }
 
-    // XXX the submit flag is set to false when the drawer toggles.
+    // XXX the submit flag is set to false when the edit-compare form is used
     if (!submit) {
       // console.warn('not submitting this time!');
       submit = true;
@@ -197,8 +218,8 @@ module.exports = function search() {
       }
     }
 
-    // don't submit the _drawer parameter
-    delete params._drawer;
+    // don't submit the edit-compare parameters
+    delete params._compare;
 
     if (diffExcept(previousParams, params, ['page'])) {
       // console.warn('non-page change:', previousParams, '->', params);
@@ -216,6 +237,7 @@ module.exports = function search() {
       picc.fields.CITY,
       picc.fields.STATE,
       picc.fields.SIZE,
+      picc.fields.BRANCHES,
       // to get "public" or "private"
       picc.fields.OWNERSHIP,
       // to get the "four_year" or "lt_four_year" bit
@@ -249,13 +271,7 @@ module.exports = function search() {
       history.replaceState(params, 'search', qs);
     }
 
-    d3.select('a.results-share')
-      .attr('href', function() {
-        return picc.template.resolve(
-          this.getAttribute('data-href'),
-          {url: encodeURIComponent(document.location.href)}
-        );
-      });
+    tagalong(socialRoot, {}, socialLinks);
 
     if (req) req.abort();
 
@@ -382,18 +398,21 @@ module.exports = function search() {
        * are reused and modified in place, rather than being cloned anew each
        * time.
        */
-      if (ie && alreadyLoaded) {
-        removeAllChildren(resultsList);
+
+      if (picc.ui.ie && picc.ui.alreadyLoaded) {
+        picc.ui.removeAllChildren(resultsList);
       }
 
       // Scroll to the top of the result list when loading new pages
       if (alreadyLoaded) {
           scrollIntoView();
       }
-
       tagalong(resultsList, data.results, directives);
 
-      alreadyLoaded = true;
+      //set compare counter
+      picc.school.selection.setCount();
+
+      picc.ui.alreadyLoaded = true;
 
       console.timeEnd && console.timeEnd('[render]');
     });
@@ -535,10 +554,31 @@ module.exports = function search() {
     }
   }
 
-  function removeAllChildren(node) {
-    while (node.lastChild) {
-      node.removeChild(node.lastChild);
+  // create a sticky fixed search-toggle container when scrolled
+  function checkToggleContainerOffset() {
+    return toggleContainer.offsetTop <= window.pageYOffset;
+  }
+
+  var handleStickyness = function() {
+    toggleContainer.classList.toggle('fixed-container', checkToggleContainerOffset());
+  };
+
+  function tryCheck() {
+    if(!picc.ui.ie) {
+      requestAnimationFrame(handleStickyness);
+    } else {
+      // fall back due to IE bug with classList.toggle second (force) parameter
+      toggleContainer.setAttribute('data-fixed', checkToggleContainerOffset());
     }
   }
+
+  window.requestAnimationFrame = window.requestAnimationFrame
+    || window.mozRequestAnimationFrame
+    || window.webkitRequestAnimationFrame
+    || window.msRequestAnimationFrame
+    || function(f){return setTimeout(f, 1000/60)}; // simulate calling code 60
+
+  window.addEventListener('scroll', tryCheck, false);
+  window.addEventListener('resize', tryCheck, false);
 
 };

@@ -1,0 +1,20 @@
+<fieldset>
+    <legend>Compare Schools</legend>
+    <ul id="edit-compare-list">
+        <li class="edit-compare-list-item">
+            <button type="button"
+                    class="button button-highlight_schools"
+                    data-bind="highlight_button"
+                    data-highlight-btn
+                    aria-label="Highlight this School">
+                <span class="sr-only">Highlight this School</span>
+            </button>
+
+            <label class="checkbox" data-bind="checkbox_label" data-school for="compare_checkbox">
+                <input id="compare_checkbox" type="checkbox" name="_compare" tabindex="0" data-bind="compare_checkbox">
+                <span tabindex="-1" class="checkbox-focus"></span>
+                <span data-bind="name"></span>
+            </label>
+        </li>
+    </ul>
+</fieldset>

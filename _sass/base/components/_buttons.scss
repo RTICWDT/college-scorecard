@@ -114,6 +114,84 @@ input[type="submit"] {
       color: $darker-green;
     }
   }
+
+  &.button-compare_schools {
+    @include font-size($h1-large);
+    background-color: $white;
+    color: $mid-dark-gray;
+    letter-spacing: 0;
+    line-height: 1;
+    white-space: normal;
+    width: 40px;
+    //float: right;
+    position:relative;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    &[aria-pressed="true"] {
+      color: $darker-yellow;
+    }
+    /* Conditional tooltips for selected school limits */
+    &[aria-describedby="tip-compare-max"] {
+      cursor: not-allowed !important;
+      .fa {
+        cursor: not-allowed !important;
+      }
+    }
+    &[aria-describedby="tip-compare-add"] {
+      cursor: pointer;
+      .fa {
+        cursor: pointer;
+      }
+    }
+    &[aria-describedby^="tip-"] {
+      &:hover,
+      &:focus{
+        i {
+          color: inherit !important;
+        }
+      }
+    }
+    .fa {
+      z-index: $z-first;
+      &.tooltip-target > [role="tooltip"] {
+        font-family: $sans-serif !important;
+      }
+    }
+
+  }
+  /* ugh, _only_ IE11 */
+  _:-ms-fullscreen, :root &.button-compare_schools {
+    margin-right: 10px;
+    position: inherit;
+    .fa {
+      margin-top: -20px;
+      position: absolute;
+    }
+  }
+
+  &.button-highlight_schools {
+    @include font-size($h1-large);
+    height: 22px;
+    width: 18px;
+    position: absolute;
+    right: 5px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    background-color: $white;
+    color: $mid-dark-gray;
+    white-space: normal;
+    background: url(../img/highlighter.png) no-repeat;
+    background: url(../img/highlighter.svg) no-repeat,
+      linear-gradient(transparent, transparent);
+    background-size: contain;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    @include respond-to(tiny-up) {
+      right: 15px;
+    }
+    &[aria-pressed="true"] {
+      background: url(../img/highlighter-active.png) no-repeat;
+      background: url(../img/highlighter-active.svg) no-repeat,
+    }
+  }
 }
 
 button.block {
@@ -142,5 +220,108 @@ button.block {
 
   @include respond-to(huge-up) {
     width: 450px;
+  }
+}
+
+.button-share {
+  @extend .button;
+  @extend .button-primary;
+  @include font-size(0.75);
+  letter-spacing: 1px;
+  text-align: center;
+  cursor: default;
+  padding: 2px 15px !important;
+  height: 25px !important;
+  width: auto !important;
+  position: relative;
+  overflow: hidden;
+
+  &.yaxis {
+    padding: 2px 0px !important;
+  }
+
+  .content {
+    overflow: hidden;
+    position: relative;
+
+    &.xaxis {
+      @include transition(top 0.3s);
+    }
+    &.yaxis {
+      @include transition(left 0.3s);
+    }
+  }
+
+
+  .top {
+    opacity: 1;
+    visibility: visible;
+
+    &.xaxis {
+      top: 0;
+    }
+    &.yaxis {
+      left:0;
+    }
+  }
+
+  .bottom {
+    opacity: 0;
+    visibility: hidden;
+
+    > li {
+      display: inline-block;
+      padding: 5px 10px;
+
+      > a {
+        color: $white;
+
+        > .fa {
+          color: $white;
+        }
+      }
+    }
+
+    &.xaxis {
+      top: 10px;
+      width: auto;
+    }
+    &.yaxis {
+      left: -100px;
+      top: -25px;
+      width: 200px;
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &.social-tab {
+    .top {
+      opacity: 0;
+      visibility: hidden;
+
+      &.xaxis {
+        top: -10px;
+      }
+      &.yaxis {
+        left: 20px;
+      }
+    }
+
+    .bottom {
+      opacity: 1;
+      visibility: visible;
+
+      &.xaxis {
+        top: -25px;
+      }
+      &.yaxis {
+        left: -35px;
+      }
+    }
+  }
+
+  &.social-tab {
+    overflow: inherit;
   }
 }

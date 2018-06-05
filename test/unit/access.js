@@ -5,13 +5,13 @@ describe('picc.access', function() {
 
   describe('picc.access.retentionRate()', function() {
 
-    it('uses the four_year.full_time retention rate if it exists', function() {
+    it('uses the four_year.full_time_pooled retention rate if it exists', function() {
       var value = picc.access.retentionRate({
-        2014: {
+        2015: {
           student: {
-            retention_rate: {
+            retention_rate_suppressed: {
               four_year: {
-                full_time: 1.0
+                full_time_pooled: 1.0
               }
             }
           }
@@ -20,16 +20,16 @@ describe('picc.access', function() {
       assert.equal(value, 1.0);
     });
 
-    it('uses the lt_four_year.full_time retention rate if 4-year doesn\'t exist', function() {
+    it('uses the lt_four_year.full_time_pooled retention rate if 4-year doesn\'t exist', function() {
       var value = picc.access.retentionRate({
-        2014: {
+        2015: {
           student: {
-            retention_rate: {
+            retention_rate_suppressed: {
               four_year: {
-                full_time: null
+                full_time_pooled: null
               },
               lt_four_year: {
-                full_time: 0.5
+                full_time_pooled: 0.5
               }
             }
           }

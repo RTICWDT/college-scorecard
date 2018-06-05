@@ -9,11 +9,11 @@
     "url": "git@github.com:18F/college-choice.git"
   },
   "scripts": {
-    "build": "browserify `js/src/browserify-args.sh`",
-    "watch": "watchify -v `js/src/browserify-args.sh`",
+    "build": "`js/src/browserify-args.sh | xargs -L1 browserify`",
+    "watch": "`js/src/browserify-args.sh | xargs -L1 watchify -v`",
     "lint": "jshint -c .jshintrc js/src",
     "test-unit": "mocha -- test/unit",
-    "test-unit-ci": "XUNIT_FILE=$CIRCLE_TEST_REPORTS/unit.xml mocha -R spec-xunit-file -- test/unit",
+    "test-unit-ci": "XUNIT_FILE=test/reports/mocha/unit.xml mocha -R spec-xunit-file -- test/unit",
     "test-a11y": "./test/a11y.js",
     "test": "wdio test/wdio.conf.js",
     "test-quick": "wdio test/wdio.quick.js",
@@ -25,10 +25,11 @@
     "async": "*",
     "d3": "^3.5.9",
     "document-register-element": "^0.5.0",
+    "element-closest": "^2.0.2",
+    "element-dataset": "^2.2.6",
     "formdb": "^0.2.0",
-    "jquery": "^2.2.4",
+    "jquery": "^3.3.1",
     "leaflet": "^0.7.7",
-    "tagalong": "^0.1.2",
     "typeahead.js-browserify": "^1.0.7"
   },
   "devDependencies": {
@@ -37,7 +38,7 @@
     "jshint": "^2.8.0",
     "minifyify": "^7.1.0",
     "mocha": "*",
-    "pa11y": "^3.2.1",
+    "pa11y": "^4.13.0",
     "request": "^2.67.0",
     "simple-statistics": "^1.0.1",
     "sinon": "^1.17.2",
@@ -50,6 +51,6 @@
     "xmlhttprequest": "^1.8.0"
   },
   "engines": {
-    "node": ">= 4.2.2"
+    "node": ">= 6.14.2"
   }
 }

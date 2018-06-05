@@ -1,0 +1,1192 @@
+---
+title: Compare Schools | College Scorecard
+layout: default
+permalink: /compare/
+---
+
+<div class="compare-bg loadable">
+
+    <div class="toggles compare-toggles">
+
+        <div class="header-controls container">
+
+            <div class="container compare-back">
+                <a id="referrer-link" class="link-more" href="../search/">
+                    <i class="fa fa-chevron-left"></i> Back to search results
+                </a>
+            </div>
+
+            <aria-accordion id="compare_schools-edit" class="toggle-accordion" aria-hidden="true">
+                <div class="toggle-control">
+                    <legend>Compare</legend>
+                    <h1 class="search_category">
+                        <button type="button" aria-expanded="false" aria-controls="compare_schools-content">
+                            <i class="fa fa-star"></i>Compare and Highlight<i class="fa fa-chevron-down"></i>
+                        </button>
+                    </h1>
+                </div>
+
+                <div id="compare_schools-content" aria-hidden="true" class="toggle-content toggle-content-compare_schools compare">
+
+                    {% include edit-compare_highlight.html %}
+
+                </div>
+
+            </aria-accordion>
+
+        </div>
+
+    </div>
+
+    <section class="section compare-schools">
+
+        <div class="container">
+
+            <div class="compare-main-alert">
+
+                <div class="show-loading">
+                    <h1>Loading...</h1>
+                </div>
+
+                <div class="show-error">
+                    <h2>Something went wrong:</h2>
+                    <p class="error-message"></p>
+                </div>
+
+            </div>
+
+            <div class="schools-compare_selected-list default-meters show-loaded">
+
+                <div class="school-share-wrapper">
+
+                    <div class="button button-primary button-share" data-share-button tabindex="0" role="button" onclick="void(0)">
+                        <span class="top xaxis content">Share this Comparison</span>
+                        <ul class="social-share-list bottom xaxis content">
+                            <li class="social-item">
+                                <a data-href="https://twitter.com/intent/tweet?text=Take%20a%20look%20at%20these%20schools&amp;url={url}" data-bind="compare_share_link_twt" data-social="Twitter" title="Share on Twitter" target="_blank">
+                                    <i class="fa fa-twitter"></i>
+                                    <span class="sr-only">Share on Twitter</span>
+                                </a>
+                            </li>
+                            <li class="social-item">
+                                <a data-href="https://www.facebook.com/sharer/sharer.php?u={url}" data-bind="compare_share_link_fb" data-social="Facebook" title="Share on Facebook" target="_blank">
+                                    <i class="fa fa-facebook"></i>
+                                    <span class="sr-only">Share on Facebook</span>
+                                </a>
+                            </li>
+                            <li class="social-item">
+                                <a data-href="mailto:?subject=Take%20a%20look%20at%20these%20schools&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A{url}" data-bind="compare_share_link_mail" data-social="Email" title="Share via Email">
+                                    <i class="fa fa-envelope"></i>
+                                    <span class="sr-only">Share via Email</span>
+                                </a>
+                            </li>
+                            <li class="social-item">
+                                <a data-href="https://www.linkedin.com/shareArticle?mini=true&url={url}" data-bind="compare_share_link_li" data-social="LinkedIn" title="Share on LinkedIn" target="_blank">
+                                    <i class="fa fa-linkedin"></i>
+                                    <span class="sr-only">Share on LinkedIn</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <h2 class="figure-heading constrain_width"
+                    aria-describedby="tip-avg-cost-year" tabindex="0">
+                    Average Annual Cost
+                    <span class="tooltip-target">
+                        <i class="fa fa-info-circle"></i>
+                    </span>
+                </h2>{% for group in site.data.predominant_degrees %}
+                <div class="compare-container_group" data-pred-degree="{{group.key}}">
+
+                    <div class="compare-group_wrapper" data-bind="compare_group">
+
+                        <div class="compare-degree_group">{{group.label}}</div>
+
+                        <div class="meter-group_wrapper">
+
+                            <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="average_cost_meter">
+                                <span class="label"></span>
+                            </div>
+
+                            <div class="section-card_container-compare average-cost" data-pred-degree="{{group.key}}">
+                                <div class="selected-school_average-cost_group">
+
+                                    <div class="selected-school_average-cost net_price" data-bind="school_section">
+
+                                        <div class="meter-wrapper" tabindex="0">
+                                            <figure class="side-meter">
+                                                <picc-side-meter {% include net_price_meter_attributes.html %}>
+                                                </picc-side-meter>
+                                                <figcaption>
+                                                    <span data-bind="name">School Name</span>
+                                                    <span data-bind="average_cost" class="sr-only"></span>
+                                                </figcaption>
+                                            </figure>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div><!-- /.meter-group_wrapper -->
+
+                    </div><!-- /.compare-group_wrapper -->
+
+                </div><!-- /.compare-container_group -->{% endfor %}
+
+                <div class="legend-wrapper">
+                    <div class="legend-nat_average">
+                        <div class="legend-nat_average-box">
+                            <div class="legend-nat_average-box-line-vert"></div>
+                        </div>
+                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                            <span class="tooltip-target">
+                                <i class="fa fa-info-circle"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="figure-heading constrain_width"
+                    aria-describedby="tip-graduation-rate" tabindex="0">
+                    Graduation Rate
+                    <span class="tooltip-target">
+                      <i class="fa fa-info-circle"></i>
+                    </span>
+                </h2>{% for group in site.data.predominant_degrees %}
+                <div class="compare-container_group" data-pred-degree="{{group.key}}">
+
+                    <div class="compare-group_wrapper" data-bind="compare_group">
+
+                        <div class="compare-degree_group">{{group.label}}</div>
+
+                        <div class="meter-group_wrapper">
+
+                            <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="grad_rate_meter">
+                                <span class="label"></span>
+                            </div>
+
+                            <div class="section-card_container-compare grad-rate" data-pred-degree="{{group.key}}">
+
+                                <div class="selected-school_grad-rate_group">
+
+                                    <div class="selected-school_grad-rate grad-rate" data-bind="school_section">
+
+                                        <div class="meter-wrapper" tabindex="0">
+                                            <figure class="side-meter">
+                                                <picc-side-meter {% include graduation_meter_attributes.html %}>
+                                                </picc-side-meter>
+                                                <figcaption>
+                                                    <span data-bind="name">School Name</span>
+                                                    <span data-bind="grad_rate" class="sr-only"></span>
+                                                </figcaption>
+                                            </figure>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div><!-- /.meter-group_wrapper -->
+
+                    </div><!-- /.compare-group_wrapper -->
+
+                </div><!-- /.compare-container_group -->{% endfor %}
+
+                <div class="legend-wrapper">
+                    <div class="legend-nat_average">
+                        <div class="legend-nat_average-box">
+                            <div class="legend-nat_average-box-line-vert"></div>
+                        </div>
+                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                            <span class="tooltip-target">
+                                <i class="fa fa-info-circle"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="figure-heading constrain_width"
+                    aria-describedby="tip-avg-salary" tabindex="0" data-definition="branch_compare">
+                    Salary After Attending
+                    <span class="tooltip-target">
+                        <i class="fa fa-info-circle"></i>
+                    </span>
+                </h2>{% for group in site.data.predominant_degrees %}
+                <div class="compare-container_group" data-pred-degree="{{group.key}}">
+
+                    <div class="compare-group_wrapper" data-bind="compare_group">
+
+                        <div class="compare-degree_group">{{group.label}}</div>
+
+                        <div class="meter-group_wrapper">
+
+                            <div class="median-line four-year" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="average_salary_meter">
+                                <span class="label"></span>
+                            </div>
+
+                            <div class="section-card_container-compare average-salary" data-pred-degree="{{group.key}}">
+
+                                <div class="selected-school_average-salary_group">
+
+                                    <div class="selected-school_average-salary average-salary" data-bind="school_section">
+
+                                        <div class="meter-wrapper" tabindex="0">
+                                            <figure class="side-meter">
+                                                <picc-side-meter {% include earnings_meter_attributes.html %}>
+                                                </picc-side-meter>
+                                                <figcaption>
+                                                    <span data-bind="name">School Name</span>
+                                                    <span data-bind="average_salary" class="sr-only"></span>
+                                                </figcaption>
+                                            </figure>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div><!-- /.meter-group_wrapper -->
+
+                    </div><!-- /.compare-group_wrapper -->
+
+                </div><!-- /.compare-container_group -->{% endfor %}
+
+                <div class="legend-wrapper">
+                    <div class="legend-nat_average">
+                        <div class="legend-nat_average-box">
+                            <div class="legend-nat_average-box-line-vert"></div>
+                        </div>
+                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                            <span class="tooltip-target">
+                                <i class="fa fa-info-circle"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /.default-meters -->
+
+            <div class="compare-more show-loaded">
+
+                <div class="section-card_container-compare_more">
+
+                    <aria-accordion id="school">
+
+                        <div>
+
+                            <h1 class="search_category">
+                                <button aria-expanded="false" aria-controls="school-content">
+                                    College Information
+                                </button>
+                            </h1>
+
+                            <div id="school-content">
+
+                                <div class="summary u-wrap">
+                                    <h2 class="figure-heading constrain_width"
+                                        aria-describedby="tip-full-time" tabindex="0">
+                                        Full-time Enrollment
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>
+
+                                    <div class="section-card_container-compare school-summary">
+                                        <div>
+                                            <div class="school-two_col" data-bind="school_section">
+                                                <div class="compare-two_col-left">
+
+                                                    <div class="meter-wrapper" tabindex="0">
+                                                        <figure class="side-meter">
+                                                            <picc-side-meter
+                                                                class="demographics"
+                                                                data-bind="full_time_value"
+                                                                max="1">
+                                                            </picc-side-meter>
+                                                            <figcaption>
+                                                                <span data-bind="name">School Name</span>
+                                                                <span data-bind="full_time_percent" class="sr-only"></span>
+                                                            </figcaption>
+                                                        </figure>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="compare-two_col-right">
+
+                                                    <div class="school-student-stats-col">
+
+                                                        <div class="school-student-stats-col-align school-summary">
+                                                            <div class="school-size">
+                                                                <span class="fact_number">
+                                                                    <span data-bind="size_number"></span>
+                                                                </span>
+                                                                <strong class="label">Undergraduates</strong>
+                                                            </div>
+
+                                                            <div class="school-section school-headings">
+                                                                <ul class="school-key_figures key-figures">
+                                                                    <li data-bind="years">
+                                                                         <span aria-describedby="tip-award-level" tabindex="0" data-bind="award_level">
+                                                                            <span data-bind="number" class="school-key_figures-year">X</span>
+                                                                            <span class="label"></span>
+                                                                            <span class="tooltip-target u-new_line"></span>
+                                                                         </span>
+                                                                    </li>
+                                                                    <li data-bind="control">
+                                                                        <span data-bind="value" class="label" >X</span>
+                                                                    </li>
+                                                                    <li data-bind="locale_name">
+                                                                        <span data-bind="value" class="label" >X</span>
+                                                                    </li>
+                                                                    <li data-bind="size_category">
+                                                                        <span data-bind="value" class="label" >X</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div><!-- /.summary.u-wrap -->
+
+                                <div class="socio-economic u-wrap">
+
+                                    <h2 class="figure-heading constrain_width"
+                                        aria-describedby="tip-socio-eco" tabindex="0">
+                                        Socio-Economic Diversity
+                                    </h2>
+
+                                    <div class="school-two_col">
+                                        <div class="compare-two_col-left">
+                                            <p>Percent of students that received an income-based federal Pell grant intended for low-income students.</p>
+                                        </div>
+                                        <div class="compare-two_col-right">
+                                            <div class="section-card_container-compare school-diversity">
+                                                <div>
+                                                    <div data-bind="school_section">
+                                                        <div class="meter-wrapper" tabindex="0">
+                                                            <figure class="side-meter">
+                                                                <picc-side-meter
+                                                                    class="demographics"
+                                                                    data-bind="pell_grant_meter"
+                                                                    max="1">
+                                                                </picc-side-meter>
+                                                                <figcaption>
+                                                                    <span data-bind="name">School Name</span>
+                                                                    <span data-bind="pell_grant_percentage" class="sr-only"></span>
+                                                                </figcaption>
+                                                            </figure>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div><!-- /.socio-economic.u-wrap -->
+
+                                <div class="race-ethnicity u-wrap">
+
+                                    <div class="school-two_col u-wrap" data-bind="school_section">
+                                        <div class="compare-two_col-left">
+
+                                            <h2 class="figure-heading constrain_width"
+                                                aria-describedby="tip-race-eth" tabindex="0">
+                                                Race/Ethnicity
+                                                <span class="tooltip-target">
+                                                    <i class="fa fa-info-circle"></i>
+                                                </span>
+                                            </h2>
+
+                                            <label for="race_ethnicity">Which group are you interested in?
+                                                <select id="race_ethnicity" name="race_ethnicity" data-select="race_ethnicity_meter">
+                                                    {% for key in site.data.race_ethnicity %}
+                                                        {% if forloop.index == 1 %}
+                                                            <option value="{{ key[0] }}" selected>{{ key[1] }}</option>
+                                                        {% else %}
+                                                            <option value="{{ key[0] }}">{{ key[1] }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </label>
+                                        </div>
+                                        <div class="compare-two_col-right"><div>{% comment %} empty space column {% endcomment %}</div></div>
+                                    </div>
+
+                                    {% for group in site.data.predominant_degrees %}
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
+
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
+
+                                            <div class="compare-degree_group">{{group.label}}</div>
+
+                                            <div class="meter-group_wrapper">
+
+                                                <div class="section-card_container-compare race-ethnicity" data-pred-degree="{{group.key}}">
+                                                    <div>
+                                                        <div data-bind="school_section">
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter
+                                                                        class="demographics"
+                                                                        data-bind="race_ethnicity_meter"
+                                                                        max="1">
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="race_ethnicity_val" class="sr-only fig-val"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div><!-- /.meter-group_wrapper -->
+
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
+
+                                </div><!-- /.race-ethnicity.u-wrap -->
+
+                            </div>
+                        </div>
+
+                    </aria-accordion>
+                </div>
+
+                <div class="section-card_container-compare_more">
+
+                    <aria-accordion id="cost">
+
+                        <div>
+
+                            <h1 class="search_category">
+                                <button aria-expanded="false" aria-controls="cost-content">
+                                    Costs
+                                </button>
+                            </h1>
+
+                            <div id="cost-content" aria-hidden="true">
+
+                                <div class="avg-cost">
+                                    <h2 class="figure-heading constrain_width"
+                                        aria-describedby="tip-avg-cost-year" tabindex="0">
+                                        Average Annual Cost
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>{% for group in site.data.predominant_degrees %}
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
+
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
+
+                                            <div class="compare-degree_group">{{group.label}}</div>
+
+                                            <div class="meter-group_wrapper">
+
+                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="average_cost_meter">
+                                                    <span class="label"></span>
+                                                </div>
+                                                <div class="section-card_container-compare average-cost" data-pred-degree="{{group.key}}">
+
+                                                    <div class="selected-school_average-cost_group">
+
+                                                        <div class="selected-school_average-cost net_price" data-bind="school_section">
+
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter {% include net_price_meter_attributes.html %}>
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="average_cost" class="sr-only"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div><!-- /.meter-group_wrapper -->
+
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
+
+                                    <div class="legend-wrapper">
+                                        <div class="legend-nat_average">
+                                            <div class="legend-nat_average-box">
+                                                <div class="legend-nat_average-box-line-vert"></div>
+                                            </div>
+                                            <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                                                <span class="tooltip-target">
+                                                    <i class="fa fa-info-circle"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div><!-- /.avg-cost -->
+
+                                <div class="net-price-income">
+
+                                    <div class="school-two_col u-wrap" data-bind="school_section">
+                                        <div class="compare-two_col-left">
+                                            <h2 class="figure-heading constrain_width">By Family Income Category</h2>
+                                            <p>Depending on the federal, state, or institutional grant aid available,
+                                                students in your income bracket may pay more or less than the overall average costs.
+                                            </p>
+
+                                            <label for="net_price_income">What's your family income?
+                                                <select id="net_price_income" name="net_price_income" data-select="net_price_income_meter">
+                                                    {% for level in site.data.net_price_income %}
+                                                        {% if forloop.index == 3 %}
+                                                            <option value="{{ level[0] }}" selected>{{ level[1] }}</option>
+                                                        {% else %}
+                                                            <option value="{{ level[0] }}">{{ level[1] }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </label>
+                                        </div>
+                                        <div class="compare-two_col-right"><div>{% comment %} empty space column {% endcomment %}</div></div>
+                                    </div>
+
+                                    {% for group in site.data.predominant_degrees %}
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
+
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
+
+                                            <div class="compare-degree_group">{{group.label}}</div>
+
+                                            <div class="meter-group_wrapper">
+
+                                                <div class="section-card_container-compare net-price-income"  data-pred-degree="{{group.key}}">
+                                                    <div>
+                                                        <div data-bind="school_section">
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter
+                                                                        class="cost"
+                                                                        data-bind="net_price_income_meter"
+                                                                        max="{{ site.data.national_stats.net_price.max }}"
+                                                                        median="{{ site.data.national_stats.net_price.median }}">
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="net_price_income_val" class="sr-only fig-val"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div><!-- /.meter-group_wrapper -->
+
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
+
+                                </div><!-- /.net-price-income -->
+
+                            </div>
+                        </div>
+                    </aria-accordion>
+                </div>
+
+                <div class="section-card_container-compare_more">
+                    <aria-accordion id="finaid">
+                        <div>
+                            <h1 class="search_category">
+                                <button aria-expanded="false" aria-controls="finaid-content">
+                                    Financial Aid &amp; Debt
+                                </button>
+                            </h1>
+
+                            <div id="finaid-content" aria-hidden="true">
+
+                                <div class="repayment">
+
+                                    <h2 class="figure-heading" aria-describedby="tip-repayment-rate" tabindex="0" data-definition="branch_compare">
+                                        Students Paying <span>Down Their Debt</span>
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>{% for group in site.data.predominant_degrees %}
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
+
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
+
+                                            <div class="compare-degree_group">{{group.label}}</div>
+
+                                            <div class="meter-group_wrapper">
+
+                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="repayment_rate_meter">
+                                                    <span class="label"></span>
+                                                </div>
+
+                                                <div class="section-card_container-compare repayment-rate" data-pred-degree="{{group.key}}">
+
+                                                    <div class="selected-school_repayment-rate_group">
+
+                                                        <div class="selected-school_repayment-rate repayment-rate" data-bind="school_section">
+
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter {% include repayment_rate_meter_attributes.html %}>
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="repayment_rate_percent" class="sr-only"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div><!-- /.meter-group_wrapper -->
+
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
+
+                                    <div class="legend-wrapper">
+                                        <div class="legend-nat_average">
+                                            <div class="legend-nat_average-box">
+                                                <div class="legend-nat_average-box-line-vert"></div>
+                                            </div>
+                                            <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                                                <span class="tooltip-target">
+                                                    <i class="fa fa-info-circle"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div><!-- /.repayment -->
+
+                                <div class="debt">
+                                    <h2 class="figure-heading" aria-describedby="tip-avg-debt" tabindex="0" data-definition="branch_compare">
+                                        Typical Total Debt After Graduation
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>{% for group in site.data.predominant_degrees %}
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
+
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
+
+                                            <div class="compare-degree_group">{{group.label}}</div>
+
+                                            <div class="meter-group_wrapper">
+
+                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="average_total_debt_meter">
+                                                    <span class="label"></span>
+                                                </div>
+
+                                                <div class="section-card_container-compare avg-debt" data-pred-degree="{{group.key}}">
+                                                    <div>
+                                                        <div data-bind="school_section">
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter {% include average_total_debt_meter_attributes.html %}>
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="average_total_debt" class="sr-only"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div><!-- /.meter-group_wrapper -->
+
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
+
+                                    <div class="legend-wrapper">
+                                        <div class="legend-nat_average">
+                                            <div class="legend-nat_average-box">
+                                                <div class="legend-nat_average-box-line-vert">
+                                                </div>
+                                            </div>
+                                            <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                                                <span class="tooltip-target">
+                                                    <i class="fa fa-info-circle"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div><!-- /.debt -->
+
+                                <div class="student-aid">
+                                    <h2 class="figure-heading" aria-describedby="tip-student-aid" tabindex="0">
+                                        Students Receiving Federal Loans
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>
+
+                                    <div class="section-card_container-compare student-aid" data-pred-degree>
+                                        <div>
+                                            <div data-bind="school_section">
+                                                <div class="meter-wrapper" tabindex="0">
+                                                    <figure class="side-meter">
+                                                        <picc-side-meter
+                                                            class="debt"
+                                                            data-bind="federal_aid_meter">
+                                                        </picc-side-meter>
+                                                        <figcaption>
+                                                            <span data-bind="name">School Name</span>
+                                                            <span data-bind="federal_aid_percentage" class="sr-only"></span>
+                                                        </figcaption>
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div><!-- /.student-aid -->
+
+                                <div class="avg-loan-payment">
+                                    <h2 class="figure-heading" aria-describedby="tip-avg-loan-payment" tabindex="0" data-definition="branch_compare">
+                                        Typical Monthly Loan Payment
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>
+
+                                    <div class="section-card_container-compare avg-loan-payment" data-pred-degree="{{group.key}}">
+                                        <div>
+                                            <div data-bind="school_section">
+                                                <div class="meter-wrapper" tabindex="0">
+                                                    <figure class="side-meter">
+                                                        <picc-side-meter {% include average_monthly_payment_meter_attributes.html %}>
+                                                        </picc-side-meter>
+                                                        <figcaption>
+                                                            <span data-bind="name">School Name</span>
+                                                            <span data-bind="average_monthly_loan_payment" class="sr-only"></span>
+                                                        </figcaption>
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div><!-- /.avg-loan-payment -->
+
+                            </div>
+                        </div>
+                    </aria-accordion>
+                </div>
+
+                <div class="section-card_container-compare_more">
+                    <aria-accordion id="graduation">
+                        <div>
+                            <h1 class="search_category">
+                                <button aria-expanded="false" aria-controls="graduation-content">
+                                    Graduation &amp; Retention
+                                </button>
+                            </h1>
+
+                            <div id="graduation-content" aria-hidden="true">
+
+                                <div class="completion-rate">
+                                    <h2 class="figure-heading constrain_width"
+                                        aria-describedby="tip-graduation-rate" tabindex="0">
+                                        Graduation Rate
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>{% for group in site.data.predominant_degrees %}
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
+
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
+
+                                            <div class="compare-degree_group">{{group.label}}</div>
+
+                                            <div class="meter-group_wrapper">
+
+                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="grad_rate_meter">
+                                                    <span class="label"></span>
+                                                </div>
+                                                <div class="section-card_container-compare grad-rate" data-pred-degree="{{group.key}}">
+
+                                                    <div class="selected-school_grad-rate_group">
+
+                                                        <div class="selected-school_grad-rate grad-rate" data-bind="school_section">
+
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter {% include graduation_meter_attributes.html %}>
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="grad_rate" class="sr-only"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div><!-- /.meter-group_wrapper -->
+
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
+
+                                    <div class="legend-wrapper">
+                                        <div class="legend-nat_average">
+                                            <div class="legend-nat_average-box">
+                                                <div class="legend-nat_average-box-line-vert"></div>
+                                            </div>
+                                            <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                                                <span class="tooltip-target">
+                                                    <i class="fa fa-info-circle"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div><!-- /.completion-rate -->
+
+                                <div class="grad-retention">
+                                    <h2 class="figure-heading" aria-describedby="tip-retention-rate" tabindex="0">
+                                        Students Who Return <span>After Their First Year</span>
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>{% for group in site.data.predominant_degrees %}
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
+
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
+
+                                            <div class="compare-degree_group">{{group.label}}</div>
+
+                                            <div class="meter-group_wrapper">
+
+                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="retention_rate_meter">
+                                                    <span class="label"></span>
+                                                </div>
+
+                                                <div class="section-card_container-compare rentention-rate" data-pred-degree="{{group.key}}">
+
+                                                    <div class="selected-school_retention-rate_group">
+
+                                                        <div class="selected-school_retention-rate rentention-rate" data-bind="school_section">
+
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter {% include retention_rate_meter_attributes.html %}>
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="retention_rate_value" class="sr-only"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div><!-- /.meter-group_wrapper -->
+
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
+
+                                    <div class="legend-wrapper">
+                                        <div class="legend-nat_average">
+                                            <div class="legend-nat_average-box">
+                                                <div class="legend-nat_average-box-line-vert"></div>
+                                            </div>
+                                            <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                                                <span class="tooltip-target">
+                                                    <i class="fa fa-info-circle"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div><!-- /.grad-retention -->
+
+                            </div>
+
+                        </div>
+                    </aria-accordion>
+                </div>
+
+                <div class="section-card_container-compare_more">
+                    <aria-accordion id="earnings">
+                        <div>
+                            <h1 class="search_category">
+                                <button aria-expanded="false" aria-controls="earnings-content">
+                                    Earnings After School
+                                </button>
+                            </h1>
+
+                            <div id="earnings-content" aria-hidden="true">
+
+                                <div class="avg-salary">
+                                    <h2 class="figure-heading constrain_width"
+                                        aria-describedby="tip-avg-salary" tabindex="0" data-definition="branch_compare">
+                                        Salary After Attending
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>{% for group in site.data.predominant_degrees %}
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
+
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
+
+                                            <div class="compare-degree_group">{{group.label}}</div>
+
+                                            <div class="meter-group_wrapper">
+
+                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="average_salary_meter">
+                                                    <span class="label"></span>
+                                                </div>
+                                                <div class="section-card_container-compare average-salary" data-pred-degree="{{group.key}}">
+
+                                                    <div class="selected-school_average-salary_group">
+
+                                                        <div class="selected-school_average-salary average-salary" data-bind="school_section">
+
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter {% include earnings_meter_attributes.html %}>
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="average_salary" class="sr-only"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div><!-- /.meter-group_wrapper -->
+
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
+
+                                    <div class="legend-wrapper">
+                                        <div class="legend-nat_average">
+                                            <div class="legend-nat_average-box">
+                                                <div class="legend-nat_average-box-line-vert"></div>
+                                            </div>
+                                            <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
+                                                <span class="tooltip-target">
+                                                    <i class="fa fa-info-circle"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div><!-- /.avg-salary -->
+
+                                <div class="advantage-rate">
+                                    <h2 class="figure-heading" aria-describedby="tip-earnings-25k" tabindex="0" data-definition="branch_compare">
+                                        Percentage Earning Above High School Grad
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>
+
+                                    <div class="section-card_container-compare advantage-rate" data-pred-degree="{{group.key}}">
+                                        <div>
+                                            <div data-bind="school_section">
+                                                <div class="meter-wrapper" tabindex="0">
+                                                    <figure class="side-meter">
+                                                        <picc-side-meter
+                                                                class="earnings"
+                                                                data-bind="advantage_rate_meter">
+                                                        </picc-side-meter>
+                                                        <figcaption>
+                                                            <span data-bind="name">School Name</span>
+                                                            <span data-bind="advantage_rate" class="sr-only"></span>
+                                                        </figcaption>
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- /.advantage-rate -->
+
+                            </div>
+
+                        </div>
+                    </aria-accordion>
+                </div>
+
+                <div class="section-card_container-compare_more">
+                    <aria-accordion id="selectivity">
+                        <div>
+                            <h1 class="search_category">
+                                <button aria-expanded="false" aria-controls="selectivity-content">
+                                    SAT/ACT Scores
+                                </button>
+                            </h1>
+
+                            <div id="selectivity-content" aria-hidden="true">
+
+                                <div style="padding-top: 20px;">
+                                    <h2 aria-describedby="tip-test-scores">
+                                        Test Scores
+                                        <span class="tooltip-target">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>
+                                    </h2>
+                                    <p>Students who were admitted and enrolled typically had standardized test scores in these ranges.</p>
+
+                                    <div class="selectivity-scores base-p-top">
+                                        <h3 class="h2">SAT</h3>
+
+                                        <h3 class="score-type">Critical Reading</h3>
+                                        <div class="section-card_container-compare">
+                                            <span>
+                                                <span data-bind="school_section">
+                                                    <figure data-bind="sat_reading_scores_visible" tabindex="0">
+                                                        <span>
+                                                            <h4 class="sr-only">Critical Reading</h4>
+                                                            <picc-range data-bind="sat_reading_scores" max="800">
+                                                            </picc-range>
+                                                            <figcaption>
+                                                                <span class="name">School Name</span>
+                                                                <span class="sr-only">SAT Critical Reading 25th Percentile: <span data-bind="sat_reading_25"></span></span>
+                                                                <span class="sr-only">SAT Critical Reading 75th Percentile: <span data-bind="sat_reading_75"></span></span>
+                                                            </figcaption>
+                                                        </span>
+                                                    </figure>
+                                                    <p class="no-data" data-bind="sat_reading_scores_invisible" tabindex="0">
+                                                        <span>Data not available</span>
+                                                        <span class="new-line" data-bind="name2">School Name</span>
+                                                    </p>
+                                                </span>
+                                            </span>
+                                        </div>
+
+                                        <h3 class="score-type">Math</h3>
+                                        <div class="section-card_container-compare">
+                                            <span>
+                                                <span data-bind="school_section">
+                                                    <figure data-bind="sat_math_scores_visible" tabindex="0">
+                                                        <span>
+                                                            <h4 class="sr-only">Math</h4>
+                                                            <picc-range data-bind="sat_math_scores" max="800">
+                                                            </picc-range>
+                                                            <figcaption>
+                                                                <span class="name">School Name</span>
+                                                                <span class="sr-only">SAT Math 25th Percentile: <span data-bind="sat_math_25"></span></span>
+                                                                <span class="sr-only">SAT Math 75th Percentile: <span data-bind="sat_math_75"></span></span>
+                                                            </figcaption>
+                                                        </span>
+                                                    </figure>
+                                                    <p class="no-data" data-bind="sat_math_scores_invisible" tabindex="0">
+                                                        <span>Data not available</span>
+                                                        <span data-bind="name2">School Name</span>
+                                                    </p>
+                                                </span>
+                                            </span>
+                                        </div>
+
+                                        <h3 class="score-type">Writing</h3>
+                                        <div class="section-card_container-compare">
+                                            <span>
+                                                <span data-bind="school_section">
+                                                    <figure data-bind="sat_writing_scores_visible" tabindex="0">
+                                                        <span>
+                                                            <h4 class="sr-only">Writing</h4>
+                                                            <picc-range data-bind="sat_writing_scores" max="800">
+                                                            </picc-range>
+                                                            <figcaption>
+                                                                <span class="name">School Name</span>
+                                                                <span class="sr-only">SAT Writing 25th Percentile: <span data-bind="sat_writing_25"></span></span>
+                                                                <span class="sr-only">SAT Writing 75th Percentile: <span data-bind="sat_writing_75"></span></span>
+                                                            </figcaption>
+                                                        </span>
+                                                    </figure>
+                                                    <p class="no-data" data-bind="sat_writing_scores_invisible" tabindex="0">
+                                                       <span>Data not available</span>
+                                                       <span data-bind="name2">School Name</span>
+                                                    </p>
+                                                </span>
+                                            </span>
+                                        </div>
+
+                                        <h3 class="h2">ACT</h3>
+                                        <div class="section-card_container-compare">
+                                            <span>
+                                                <span data-bind="school_section">
+                                                    <figure data-bind="act_scores_visible" tabindex="0">
+                                                        <span>
+                                                            <picc-range data-bind="act_scores" min="0" max="36">
+                                                            </picc-range>
+                                                            <figcaption>
+                                                                <span class="name">School Name</span>
+                                                                <span class="sr-only">ACT Score 25th Percentile: <span data-bind="act_25"></span></span>
+                                                                <span class="sr-only">ACT Score 75th Percentile: <span data-bind="act_75"></span></span>
+                                                            </figcaption>
+                                                        </span>
+                                                    </figure>
+                                                    <p class="no-data" data-bind="act_scores_invisible" tabindex="0">
+                                                       <span>Data not available</span>
+                                                       <span data-bind="name2">School Name</span>
+                                                    </p>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </aria-accordion>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+  picc.pages.compare();
+</script>

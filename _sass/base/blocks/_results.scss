@@ -49,6 +49,19 @@
       }
     }
 
+    .u-group_inline {
+      white-space: nowrap;
+      > .u-group_inline-right {
+        @include respond-to(weensy-down) {
+          display: block !important;
+          float: left;
+        }
+      }
+      @include respond-to(small-up) {
+        white-space: normal;
+      }
+    }
+
     > div {
       @include span-columns(12);
 
@@ -92,9 +105,30 @@
   }
 }
 
-.results-share {
+.button-share.results-share {
   @extend .share;
-  margin-left: $base-padding;
+  cursor: default;
+  margin-left: 0;
+  padding: 2px 15px !important;
+  height: 22px !important;
+  width: 93px !important;
+  @include transition(width 0.3s);
+
+  @include respond-to(tiny-up) {
+    margin-left: $base-padding;
+  }
+
+  &:hover,
+  &:focus,
+  &.social-tab {
+    width: 155px !important;
+  }
+
+  .social-share-list {
+    li {
+      padding: 6px;
+    }
+  }
 }
 
 .results-sort {
@@ -155,6 +189,84 @@
 
   @include respond-to(medium-up) {
     display: block;
+  }
+}
+
+.search-toggles {
+
+  aria-accordion#compare_schools-edit {
+    .toggle-control {
+      width: 130px;
+      margin-right: -5px;
+
+      @include respond-to(teensy-up) {
+        width: inherit;
+        margin-right: inherit;
+      }
+    }
+
+    button[aria-controls="compare_schools-content"] {
+      width: auto;
+      height: 100%;
+      @include respond-to(small-up) {
+        width: 210px;
+      }
+
+      .selection-count {
+        display: inline-block;
+        font-weight: bold;
+        text-align: center;
+        color: #fff;
+        background: $green;
+        padding-left: 10px;
+        padding-right: 10px;
+
+      }
+    }
+  }
+
+  .toggle-content-compare_schools {
+
+    left: 0;
+    @include respond-to(teensy-down) {
+      //right:0;
+      left: inherit;
+    }
+
+    @media only screen and (min-width:544px)
+    and (max-width: 599px) {
+      right: 0;
+      left: inherit;
+    }
+
+    @media only screen and (min-width: 736px)
+    and (max-width: 902px) {
+      right: 0;
+      left: inherit;
+    }
+
+    fieldset {
+      border-top: 1px solid $mid-gray;
+      padding: 1em 1.25em 0 1.25em;
+    }
+
+  }
+}
+
+.container {
+  // sticky search toggles on results page
+  top: 0;
+  left: 0;
+  right: 0;
+  // these only apply when scrolled
+  .search-toggles.fixed-container > &,
+  .search-toggles[data-fixed="true"] > & {
+    position: fixed;
+    max-width: inherit;
+    background-color: $lighter-gray;
+    z-index: $z-second;
+    box-shadow: 0 4px 2px -2px $mid-dark-gray;
+
   }
 }
 
@@ -274,11 +386,62 @@
   }
 }
 
+.school.results-card[data-compare="true"] {
+  @include display(flex);
+  padding: 4px;
+  //margin: -5px;
+  @include flex-direction(column);
+  background-color: $darker-yellow;
+  /* Single pixel data uri image http://jsfiddle.net/LPxrT/
+  /* background-image: darker-yellow, darker-yellow, white */
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAPAAAO66KP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='),
+  url('data:image/gif;base64,R0lGODlhAQABAPAAAO66KP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='),
+  url('data:image/gif;base64,R0lGODlhAQABAPAAAP///////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==');
+  background-repeat: no-repeat;
+  background-size: 0 2px, 0 100%, 0% 2px;
+  background-position: top center, top center, bottom center;
+  -webkit-animation: drawBorderFromCenter 1s;
+  .content-box {
+    flex: 1 0 auto;
+    padding: 1em;
+    border-radius: 0.4em;
+    background-color: $white !important;
+  }
+}
+
+
+@include keyframes(drawBorderFromCenter) {
+  0% {
+    background-size: 0 2px, 0 0, 100% 100%;
+  }
+  20% {
+    background-size: 100% 2px, 100% 0, 100% 100%;
+  }
+  66%
+  {
+    background-size: 100% 2px, 100% 98%, 100% 100%;
+  }
+  99%
+  {
+    background-size: 100% 2px, 100% 98%, 0 2px;
+  }
+}
+
 .results-card-headings {
   @include span-columns(12);
   min-height: 160px;
   border-bottom: $thin-border-size solid $base-border-color;
   margin-bottom: $base-padding;
+
+  .compare-wrapper {
+    @include display(flex);
+    @include flex-direction(row);
+    @include flex-wrap(nowrap);
+    flex: 1 0 auto;
+    h1 {
+      width: 85%;
+    }
+  }
 }
 
 .pagination_bottom {
