@@ -6,8 +6,8 @@ var extend = require('extend');
 
 // expected default parameters
 const EXPECTED_DEFAULTS = {
-  '2015.academics.program_available.assoc_or_bachelors': true,
-  '2015.student.size__range': '1..',
+  'latest.academics.program_available.assoc_or_bachelors': true,
+  'latest.student.size__range': '1..',
   'school.degrees_awarded.predominant__range': '1..3',
   'school.degrees_awarded.highest__range': '2..4',
   'school.operating': 1
@@ -53,17 +53,17 @@ describe('picc.form', function() {
 
     it('searches for associates degrees', function() {
       assert.deepEqual(prep({degree: 'a'}), fromDefaults({
-        '2015.academics.program_available.assoc': true
+        'latest.academics.program_available.assoc': true
       }, [ // omit
-        '2015.academics.program_available.assoc_or_bachelors'
+        'latest.academics.program_available.assoc_or_bachelors'
       ]));
     });
 
     it('searches for bachelors degrees', function() {
       assert.deepEqual(prep({degree: 'b'}), fromDefaults({
-        '2015.academics.program_available.bachelors': true
+        'latest.academics.program_available.bachelors': true
       }, [ // omit
-        '2015.academics.program_available.assoc_or_bachelors'
+        'latest.academics.program_available.assoc_or_bachelors'
       ]));
     });
 
@@ -88,7 +88,7 @@ describe('picc.form', function() {
           major: 'science_technology'
         }), fromDefaults({
           'school.degrees_awarded.predominant': '2',
-          '2015.academics.program.assoc.science_technology__range': '1..'
+          'latest.academics.program.assoc.science_technology__range': '1..'
         }, [
           'school.degrees_awarded.predominant__range'
         ]));
