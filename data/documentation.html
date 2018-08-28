@@ -332,10 +332,20 @@ permalink: /data/documentation/
 
       <h3>Structure</h3>
 
-      <p>The basic structure of an API call is <span>year.dev-category.dev-friendly-variable-name</span>,
-      except that the <span>school</span> category has no year and <span>id</span>, <span>ope6_id</span>,
-      <span>ope8_id</span> and <span>location</span>
-      have no category or year.</p>
+      <!--<p>The basic structure of an API call is <span>year.dev-category.dev-friendly-variable-name</span>,-->
+      <!--except that the <span>school</span> category has no year and <span>id</span>, <span>ope6_id</span>,-->
+      <!--<span>ope8_id</span> and <span>location</span>-->
+      <!--have no category or year.</p>-->
+      <p>The basic structure of an API call is <span>year.dev-category.dev-friendly-variable-name</span>.
+      <ul class="u-unordered_list">
+        <li>
+          The <span>year</span> may be any year of data available (example: 2012), or use the word <span>latest</span> to get the most recent data available from the API.
+          Using the "latest" key will allow your application to access the new data as soon as it is released.
+        </li>
+        <li>The <strong>school</strong> category has no year.</li>
+        <li><span>id</span>, <span>ope6_id</span>, <span>ope8_id</span> and <span>location</span> have no category or year.</li>
+      </ul>
+
       <p>All variables are listed in the Data Dictionary.</p>
 
       <div class="u-align_c">
