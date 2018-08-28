@@ -7,9 +7,9 @@ var utils = require('./utils');
 var schoolIDs = ['110635', '125170'];
 var missingDataSchoolIds = ['439446', '457402'];
 var schoolIDsByType = {
-  'four_year': ['190150','199120'], //4-year
-  'two_year':['113634', '433174'], //2-year
-  'cert':['172918','199856'] //certificate
+  'four_year': ['190150','199120'], // 4-year
+  'two_year':['113634', '433174'], // 2-year
+  'cert':['173416','204608'] // certificate
 };
 
 var getMeterClassForSchool = function*(meter, schoolID) {
@@ -31,7 +31,9 @@ var getMeterSchoolName = function*(schoolID) {
 };
 
 var getMeterHighlightForSchool = function*(meter, schoolID){
-  return browser.getAttribute('.' +meter + ' [data-school-id="'+schoolID+'"]', 'data-highlight' );
+  return browser
+    .waitForExist('.' +meter + ' [data-school-id="'+schoolID+'"]')
+    .getAttribute('.' +meter + ' [data-school-id="'+schoolID+'"]', 'data-highlight' );
 };
 
 var visitComparePage = function*() {
