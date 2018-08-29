@@ -1299,7 +1299,7 @@ picc.school.directives = (function() {
           };
         })
         .filter(function(d) {
-          return d.value > 0;
+          return picc.RACE_ETHNICITY_LABELS[d.key] && d.value > 0;
         });
     },
 
