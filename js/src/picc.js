@@ -971,8 +971,12 @@ picc.school.directives = (function() {
       text: function(d) {
         var url = picc.access(fields.SCHOOL_URL)(d);
         if (!url) return url;
-        // grab the domain, strip the leading "www."
-        return url.split('/').shift().replace(/^www\./, '');
+        // grab the domain, strip the leading http(s) protocol and "www."
+        return url
+          .replace(/^https?:\/\//i, "") // remove protocol
+          .split('/') // explode the url
+          .shift() // grab first segment (the domain)
+          .replace(/^www\./, ''); // remove www.
       }
     },
 
