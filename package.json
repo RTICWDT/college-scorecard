@@ -38,7 +38,7 @@
     "jshint": "^2.8.0",
     "minifyify": "^7.1.0",
     "mocha": "*",
-    "pa11y": "^3.2.1",
+    "pa11y": "^4.13.0",
     "request": "^2.67.0",
     "simple-statistics": "^1.0.1",
     "sinon": "^1.17.2",
@@ -51,6 +51,6 @@
     "xmlhttprequest": "^1.8.0"
   },
   "engines": {
-    "node": ">= 4.2.2"
+    "node": ">= 6.14.2"
   }
 }
