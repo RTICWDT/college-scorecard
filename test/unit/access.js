@@ -7,7 +7,7 @@ describe('picc.access', function() {
 
     it('uses the four_year.full_time_pooled retention rate if it exists', function() {
       var value = picc.access.retentionRate({
-        2015: {
+        latest: {
           student: {
             retention_rate_suppressed: {
               four_year: {
@@ -22,7 +22,7 @@ describe('picc.access', function() {
 
     it('uses the lt_four_year.full_time_pooled retention rate if 4-year doesn\'t exist', function() {
       var value = picc.access.retentionRate({
-        2015: {
+        latest: {
           student: {
             retention_rate_suppressed: {
               four_year: {
