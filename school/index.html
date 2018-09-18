@@ -436,7 +436,7 @@ stylesheets:
 
                 <div id="earnings-content" aria-hidden="true">
 
-                  <div class="school-two_col-left">
+                  {% comment %}<div class="school-two_col-left">
 
                     <h2 aria-describedby="tip-earnings-25k" tabindex="0" data-bind="branch_campus">
                       Percentage Earning Above High School Grad
@@ -450,10 +450,11 @@ stylesheets:
                       <span class="small normal">of students</span>
                     </strong>
                     <p>who attend this school earned, on average, more than those with only a high school diploma.</p>
-                  </div>
+                  </div>{% endcomment %}
 
 
-                  <div class="school-two_col-right centered">
+                  <div class="comment-school-two_col-right centered">
+                    <br>
                     <figure class="meter above_is_good">
                       <h2 class="figure-heading" aria-describedby="tip-avg-salary" tabindex="0" data-bind="branch_campus">
                         Salary After<br>Attending
