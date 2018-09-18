@@ -182,19 +182,7 @@ stylesheets:
                 </figcaption>
               </figure>
 
-              <div class="legend-wrapper">
-                <div class="legend-nat_average">
-                  <div class="legend-nat_average-box">
-                    <div class="legend-nat_average-box-line">
-                    </div>
-                  </div>
-                  <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                    <span class="tooltip-target">
-                        <i class="fa fa-info-circle"></i>
-                     </span>
-                  </div>
-                </div>
-              </div>
+              {% comment %}{% include median_legend.html %}{% endcomment %}
 
             </div>
 
@@ -227,25 +215,13 @@ stylesheets:
                       </picc-meter>
                       <figcaption>
                         <span class="average-value" data-bind="average_cost"></span>
-                        <div class="average-wrapper">
+                        {% comment %}<div class="average-wrapper">
                           <i class="fa average average-arrow" data-meter="cost-meter"></i> <span class="average average-label"></span>
-                        </div>
+                        </div>{% endcomment %}
                       </figcaption>
                     </figure>
 
-                    <div class="legend-wrapper">
-                      <div class="legend-nat_average">
-                        <div class="legend-nat_average-box">
-                          <div class="legend-nat_average-box-line">
-                          </div>
-                        </div>
-                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                          <span class="tooltip-target">
-                            <i class="fa fa-info-circle"></i>
-                           </span>
-                        </div>
-                      </div>
-                    </div>
+                    {% comment %}{% include median_legend.html %}{% endcomment %}
 
                     <a class="button button-primary button-costs" target="_blank" data-bind="net_price_calculator">
                       <i class="fa fa-calculator"></i>
@@ -324,27 +300,15 @@ stylesheets:
 
                       <figcaption>
                         <span class="average-value" data-bind="repayment_rate_percent">XX%</span>
-                        <div class="average-wrapper">
+                        {% comment %}<div class="average-wrapper">
                           <i class="fa average average-arrow" data-meter="repayment-meter"></i> <span class="average average-label"></span>
-                        </div>
+                        </div>{% endcomment %}
                       </figcaption>
 
 
                     </figure>
 
-                    <div class="legend-wrapper">
-                      <div class="legend-nat_average">
-                        <div class="legend-nat_average-box">
-                          <div class="legend-nat_average-box-line">
-                          </div>
-                        </div>
-                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                          <span class="tooltip-target">
-                            <i class="fa fa-info-circle"></i>
-                           </span>
-                        </div>
-                      </div>
-                    </div>
+                    {% comment %}{% include median_legend.html %}{% endcomment %}
 
                     <div class="container school-callout">
 
@@ -424,25 +388,13 @@ stylesheets:
                       </picc-meter>
                       <figcaption>
                         <span class="average-value" data-bind="grad_rate">60%</span>
-                        <div class="average-wrapper">
+                        {% comment %}<div class="average-wrapper">
                           <i class="fa average average-arrow" data-meter="grad-meter"></i> <span class="average average-label"></span>
-                        </div>
+                        </div>{% endcomment %}
                       </figcaption>
                     </figure>
 
-                    <div class="legend-wrapper">
-                      <div class="legend-nat_average">
-                        <div class="legend-nat_average-box">
-                          <div class="legend-nat_average-box-line">
-                          </div>
-                        </div>
-                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                          <span class="tooltip-target">
-                            <i class="fa fa-info-circle"></i>
-                           </span>
-                        </div>
-                      </div>
-                    </div>
+                    {% comment %}{% include median_legend.html %}{% endcomment %}
 
                   </div>
 
@@ -458,25 +410,13 @@ stylesheets:
                       </picc-meter>
                       <figcaption>
                         <span class="average-value" data-bind="retention_rate_value">XX%</span>
-                        <div class="average-wrapper">
+                        {% comment %}<div class="average-wrapper">
                           <i class="fa average average-arrow" data-meter="retention-meter"></i> <span class="average average-label"></span>
-                        </div>
+                        </div>{% endcomment %}
                       </figcaption>
                     </figure>
 
-                    <div class="legend-wrapper">
-                      <div class="legend-nat_average">
-                        <div class="legend-nat_average-box">
-                          <div class="legend-nat_average-box-line">
-                          </div>
-                        </div>
-                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                          <span class="tooltip-target">
-                            <i class="fa fa-info-circle"></i>
-                           </span>
-                        </div>
-                      </div>
-                    </div>
+                    {% comment %}{% include median_legend.html %}{% endcomment %}
 
                   </div>
 
@@ -525,25 +465,14 @@ stylesheets:
                       </picc-meter>
                       <figcaption>
                         <span class="average-value" data-bind="average_salary">$XX,XXX</span>
-                        <div class="average-wrapper">
+                        {% comment %}<div class="average-wrapper">
                           <i class="fa average average-arrow" data-meter="salary-meter"></i> <span class="average average-label"></span>
-                        </div>
+                        </div>{% endcomment %}
                       </figcaption>
                     </figure>
 
-                    <div class="legend-wrapper">
-                      <div class="legend-nat_average">
-                        <div class="legend-nat_average-box">
-                          <div class="legend-nat_average-box-line">
-                          </div>
-                        </div>
-                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                          <span class="tooltip-target">
-                            <i class="fa fa-info-circle"></i>
-                           </span>
-                        </div>
-                      </div>
-                    </div>
+                    {% comment %}{% include median_legend.html %}{% endcomment %}
+
                   </div>
                 </div>
               </div>

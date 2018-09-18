@@ -1,7 +1,7 @@
   class="cost"
   data-bind="average_cost_meter"
   max="{{ site.data.national_stats.net_price.max }}"
-  median="{{ site.data.national_stats.net_price.median }}"
+  {% comment %}median="{{ site.data.national_stats.net_price.median }}"
   percentile-range="{{ site.data.national_stats.net_price.percentile_range|join:'..' }}"
   data-max-cert="{{ site.data.national_stats.net_price_lt2.max }}"
   data-max-two_year="{{ site.data.national_stats.net_price_2.max }}"
@@ -11,4 +11,4 @@
   data-median-four_year="{{ site.data.national_stats.net_price_4.median }}"
   data-range-cert="{{ site.data.national_stats.net_price_lt2.percentile_range|join:'..' }}"
   data-range-two_year="{{ site.data.national_stats.net_price_2.percentile_range|join:'..' }}"
-  data-range-four_year="{{ site.data.national_stats.net_price_4.percentile_range|join:'..' }}"
+  data-range-four_year="{{ site.data.national_stats.net_price_4.percentile_range|join:'..' }}"{% endcomment %}

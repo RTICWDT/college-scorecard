@@ -1,7 +1,7 @@
   class="graduation"
   data-bind="grad_rate_meter"
   max="1"
-  median="{{ site.data.national_stats.completion_rate.median }}"
+  {% comment %}median="{{ site.data.national_stats.completion_rate.median }}"
   percentile-range="{{ site.data.national_stats.completion_rate.percentile_range|join:'..' }}"
   data-max-cert="{{ site.data.national_stats.completion_rate_lt2.max }}"
   data-max-two_year="{{ site.data.national_stats.completion_rate_2.max }}"
@@ -11,4 +11,4 @@
   data-median-four_year="{{ site.data.national_stats.completion_rate_4.median }}"
   data-range-cert="{{ site.data.national_stats.completion_rate_lt2.percentile_range|join:'..' }}"
   data-range-two_year="{{ site.data.national_stats.completion_rate_2.percentile_range|join:'..' }}"
-  data-range-four_year="{{ site.data.national_stats.completion_rate_4.percentile_range|join:'..' }}"
+  data-range-four_year="{{ site.data.national_stats.completion_rate_4.percentile_range|join:'..' }}"{% endcomment %}

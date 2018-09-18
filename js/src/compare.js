@@ -194,7 +194,7 @@ module.exports = function compare() {
 
   var meterWrapper = picc.data.selectKeys(picc.school.directives, [
     'compare_group',
-    'median_line'
+    /**'median_line' */
   ]);
 
   var shareLinks = picc.data.selectKeys(picc.school.directives, [
@@ -286,12 +286,12 @@ module.exports = function compare() {
 
         [].slice.call(degreeSectionContainers).forEach(function(node) {
           var section = node.querySelector('.section-card_container-compare').cloneNode(true);
-          var median = node.querySelector('.median_line').cloneNode(true);
+          /** var median = node.querySelector('.median_line').cloneNode(true); */
           picc.ui.removeAllChildren(node);
-          node.appendChild(median);
+          /** node.appendChild(median);
           var addedMedian = node.querySelector('.median_line');
           // addedAvg.parentNode.insertBefore(section, addedAvg.nextSibling);
-          insertAfter(section, addedMedian);
+          insertAfter(section, addedMedian); */
         });
 
       }
