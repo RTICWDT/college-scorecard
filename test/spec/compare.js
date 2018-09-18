@@ -810,7 +810,7 @@ describe('compare page ', function(){
     yield browser.click('#compare_schools-edit h1 [aria-controls]');
   });
 
-  it('should highlight corresponding selected school in the Percentage Earning Above High School Grad meter in Earnings After School accordion', function*(){
+  xit('should highlight corresponding selected school in the Percentage Earning Above High School Grad meter in Earnings After School accordion', function*(){
     yield browser
       .click('#compare_schools-edit h1 [aria-controls]');
 
