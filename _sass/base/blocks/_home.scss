@@ -128,7 +128,7 @@
   }
 }
 
-.section-home-paying {
+.section-home-paying, .section-home-toolkit {
   @extend .centered;
   @extend .section-card_container;
   @include span-columns(12);
@@ -137,12 +137,19 @@
     margin-top: 0;
   }
 
-  .section-home-paying-content {
+  .section-home-paying-content, .section-home-toolkit-content {
     padding: $base-padding $base-padding-large $base-padding-large $base-padding-large;
     text-align: left;
+    
+    @include respond-to(large-up){
+      min-height: 320px;
+    }
 
     p {
-      padding-bottom: $base-padding-lite;
+      padding-bottom: $base-padding;
+      @include respond-to(large-up){
+        padding-bottom: $base-padding-large;
+      }
     }
 
     .button-outline {
