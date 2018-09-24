@@ -253,20 +253,27 @@
   }
 }
 
-.container {
-  // sticky search toggles on results page
-  top: 0;
-  left: 0;
-  right: 0;
-  // these only apply when scrolled
-  .search-toggles.fixed-container > &,
-  .search-toggles[data-fixed="true"] > & {
-    position: fixed;
-    max-width: inherit;
-    background-color: $lighter-gray;
-    z-index: $z-second;
-    box-shadow: 0 4px 2px -2px $mid-dark-gray;
+// sticky search header for desktop only
+@include respond-to(medium-up) {
+  .search-toggles > .container {
+    top: -55px;
+    left: 0;
+    right: 0;
+    @include transition((top 0.3s));
+  }
 
+  .search-toggles[data-fixed="true"] {
+    height: 0;
+    padding-bottom: 55px;
+
+    > .container {
+      position: fixed;
+      top: 0;
+      max-width: inherit;
+      background-color: $lighter-gray;
+      z-index: $z-second;
+      box-shadow: 0 4px 2px -2px $mid-dark-gray;
+    }
   }
 }
 
