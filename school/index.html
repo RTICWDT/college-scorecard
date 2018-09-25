@@ -182,8 +182,6 @@ stylesheets:
                 </figcaption>
               </figure>
 
-              {% comment %}{% include median_legend.html %}{% endcomment %}
-
             </div>
 
           </div><!-- /.school-card_container-school -->
@@ -215,13 +213,8 @@ stylesheets:
                       </picc-meter>
                       <figcaption>
                         <span class="average-value" data-bind="average_cost"></span>
-                        {% comment %}<div class="average-wrapper">
-                          <i class="fa average average-arrow" data-meter="cost-meter"></i> <span class="average average-label"></span>
-                        </div>{% endcomment %}
                       </figcaption>
                     </figure>
-
-                    {% comment %}{% include median_legend.html %}{% endcomment %}
 
                     <a class="button button-primary button-costs" target="_blank" data-bind="net_price_calculator">
                       <i class="fa fa-calculator"></i>
@@ -300,15 +293,8 @@ stylesheets:
 
                       <figcaption>
                         <span class="average-value" data-bind="repayment_rate_percent">XX%</span>
-                        {% comment %}<div class="average-wrapper">
-                          <i class="fa average average-arrow" data-meter="repayment-meter"></i> <span class="average average-label"></span>
-                        </div>{% endcomment %}
                       </figcaption>
-
-
                     </figure>
-
-                    {% comment %}{% include median_legend.html %}{% endcomment %}
 
                     <div class="container school-callout">
 
@@ -388,14 +374,8 @@ stylesheets:
                       </picc-meter>
                       <figcaption>
                         <span class="average-value" data-bind="grad_rate">60%</span>
-                        {% comment %}<div class="average-wrapper">
-                          <i class="fa average average-arrow" data-meter="grad-meter"></i> <span class="average average-label"></span>
-                        </div>{% endcomment %}
                       </figcaption>
                     </figure>
-
-                    {% comment %}{% include median_legend.html %}{% endcomment %}
-
                   </div>
 
                   <div class="school-two_col-right centered">
@@ -410,14 +390,8 @@ stylesheets:
                       </picc-meter>
                       <figcaption>
                         <span class="average-value" data-bind="retention_rate_value">XX%</span>
-                        {% comment %}<div class="average-wrapper">
-                          <i class="fa average average-arrow" data-meter="retention-meter"></i> <span class="average average-label"></span>
-                        </div>{% endcomment %}
                       </figcaption>
                     </figure>
-
-                    {% comment %}{% include median_legend.html %}{% endcomment %}
-
                   </div>
 
                 </div>
@@ -436,24 +410,7 @@ stylesheets:
 
                 <div id="earnings-content" aria-hidden="true">
 
-                  {% comment %}<div class="school-two_col-left">
-
-                    <h2 aria-describedby="tip-earnings-25k" tabindex="0" data-bind="branch_campus">
-                      Percentage Earning Above High School Grad
-                      <span class="tooltip-target">
-                        <i class="fa fa-info-circle"></i>
-                      </span>
-                    </h2>
-
-                    <strong class="fact_number">
-                      <strong data-bind="advantage_rate">XX%</strong>
-                      <span class="small normal">of students</span>
-                    </strong>
-                    <p>who attend this school earned, on average, more than those with only a high school diploma.</p>
-                  </div>{% endcomment %}
-
-
-                  <div class="comment-school-two_col-right centered">
+                  <div class="centered">
                     <br>
                     <figure class="meter above_is_good">
                       <h2 class="figure-heading" aria-describedby="tip-avg-salary" tabindex="0" data-bind="branch_campus">
@@ -466,14 +423,8 @@ stylesheets:
                       </picc-meter>
                       <figcaption>
                         <span class="average-value" data-bind="average_salary">$XX,XXX</span>
-                        {% comment %}<div class="average-wrapper">
-                          <i class="fa average average-arrow" data-meter="salary-meter"></i> <span class="average average-label"></span>
-                        </div>{% endcomment %}
                       </figcaption>
                     </figure>
-
-                    {% comment %}{% include median_legend.html %}{% endcomment %}
-
                   </div>
                 </div>
               </div>
