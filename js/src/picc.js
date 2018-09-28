@@ -1118,7 +1118,7 @@ picc.school.directives = (function() {
     // on the compare screen we draw the vertical `median_line`
     // for the current meter group across multiple school picc-side-meter's.
     // depending on the meter, we format the median label accordingly ($,%, etc)
-    median_line: medianLine,
+    /**  median_line: medianLine, */
     // pred_degree: function() {
     //   return this.querySelector('[data-school-preddeg]').getAttribute('data-school-preddeg');
     // },

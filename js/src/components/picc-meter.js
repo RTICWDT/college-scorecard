@@ -9,7 +9,7 @@ window.PICCMeter = document.registerElement('picc-meter', {
         this.min = getAttr(this, 'min', 0);
         this.max = getAttr(this, 'max', 1);
         this.value = getAttr(this, 'value');
-        this.median = getAttr(this, 'median');
+        /** this.median = getAttr(this, 'median'); */
         this.degree = getAttr(this,'degree');
 
         this.update();
@@ -23,7 +23,7 @@ window.PICCMeter = document.registerElement('picc-meter', {
           case 'min':
           case 'max':
           case 'value':
-          case 'median':
+          /** case 'median': */
           case 'degree':
             this[attr] = value;
             return;
@@ -36,11 +36,11 @@ window.PICCMeter = document.registerElement('picc-meter', {
         // var median = getMedian(this);
         var min = this.min;
         var max = this.max;
-        var median = this.median;
+        /** var median = this.median; */
         var value = this.value;
 
         var bar = getBar(this);
-        var line = getLine(this);
+        /** var line = getLine(this); */
 
         if (typeof value !== 'number' || isNaN(value)) {
           // console.log('bad value:', value);
@@ -50,8 +50,8 @@ window.PICCMeter = document.registerElement('picc-meter', {
           bar.style.removeProperty('height');
 
           // reset the line
-          line.style.setProperty('display', 'none');
-          line.style.removeProperty('bottom');
+          /** line.style.setProperty('display', 'none');
+          line.style.removeProperty('bottom'); */
 
           // classify and bail
           classify(this, {
@@ -77,7 +77,7 @@ window.PICCMeter = document.registerElement('picc-meter', {
           // prevent the bar from exceeding the height
           bar.style.setProperty('height', percent(Math.min(value, max)));
 
-          if (this.hasAttribute('percentile-range')) {
+          /** if (this.hasAttribute('percentile-range')) {
             // var range = getRange(this);
             var range = this.getAttribute('percentile-range');
             var numbers = range.split('..').map(Number);
@@ -108,9 +108,9 @@ window.PICCMeter = document.registerElement('picc-meter', {
           if (isNaN(median)) {
             line.style.setProperty('display', 'none');
           } else {
-            line.style.removeProperty('display');
-            line.style.setProperty('bottom', percent(median));
-          }
+            // line.style.removeProperty('display');
+            // line.style.setProperty('bottom', percent(median));
+          } */
 
         }
 
@@ -149,7 +149,7 @@ window.PICCMeter = document.registerElement('picc-meter', {
         }
       },
 
-      median: {
+      /**median: {
         get: function() {
           return this.__median;
         },
@@ -157,7 +157,7 @@ window.PICCMeter = document.registerElement('picc-meter', {
           this.__median = number(value);
           deferUpdate(this);
         }
-      },
+      }, */
 
       degree: {
         get: function() {
@@ -197,7 +197,7 @@ function getBar(meter) {
   return bar;
 }
 
-function getLine(meter) {
+/** function getLine(meter) {
   var line = meter.querySelector('.' + CLASS_PREFIX + 'line');
   if (!line) {
     line = meter.appendChild(document.createElement('div'));
@@ -206,7 +206,7 @@ function getLine(meter) {
       .setAttribute('class', 'label');
   }
   return line;
-}
+} */
 
 function getMin(meter) {
   return meter.getAttribute('data-min-' + getSuffixForDegree(meter.degree));

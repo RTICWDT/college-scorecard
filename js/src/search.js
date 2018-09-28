@@ -554,22 +554,16 @@ module.exports = function search() {
     }
   }
 
-  // create a sticky fixed search-toggle container when scrolled
+  // check that scroll is past our search-toggle header
   function checkToggleContainerOffset() {
     return toggleContainer.offsetTop <= window.pageYOffset;
   }
 
-  var handleStickyness = function() {
-    toggleContainer.classList.toggle('fixed-container', checkToggleContainerOffset());
-  };
-
-  function tryCheck() {
-    if(!picc.ui.ie) {
-      requestAnimationFrame(handleStickyness);
-    } else {
-      // fall back due to IE bug with classList.toggle second (force) parameter
+  function handleStickyness() {
+     // create a sticky fixed search-toggle header when scrolled
+    window.requestAnimationFrame(function() {
       toggleContainer.setAttribute('data-fixed', checkToggleContainerOffset());
-    }
+    });
   }
 
   window.requestAnimationFrame = window.requestAnimationFrame
@@ -578,7 +572,7 @@ module.exports = function search() {
     || window.msRequestAnimationFrame
     || function(f){return setTimeout(f, 1000/60)}; // simulate calling code 60
 
-  window.addEventListener('scroll', tryCheck, false);
-  window.addEventListener('resize', tryCheck, false);
+  window.addEventListener('scroll', handleStickyness, false);
+  window.addEventListener('resize', handleStickyness, false);
 
 };
