@@ -204,7 +204,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?112260-Claremont_McKenna_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?112385-Coastline_Community_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?112394-Cogswell_College</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?112446-Coleman_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?112561-Columbia_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?112570-Columbia_College_Hollywood</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?112686-El_Camino_College-Compton_Center</loc></url>
@@ -486,6 +485,7 @@
   <url><loc>https://collegescorecard.ed.gov/school/?131496-Georgetown_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?131520-Howard_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?131803-Strayer_University-District_of_Columbia</loc></url>
+  <url><loc>https://collegescorecard.ed.gov/school/?131876-Trinity_Washington_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?132338-The_Art_Institute_of_Fort_Lauderdale</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?132408-The_Baptist_College_of_Florida</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?132471-Barry_University</loc></url>
@@ -699,7 +699,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?145239-Fox_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?145336-Governors_State_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?145372-Greenville_University</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?145460-Harrington_College_of_Design</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?145497-Hebrew_Theological_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?145521-Highland_Community_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?145600-University_of_Illinois_at_Chicago</loc></url>
@@ -1005,7 +1004,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?158088-Central_Louisiana_Technical_Community_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?158343-Baton_Rouge_School_of_Computers</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?158431-Bossier_Parish_Community_College</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?158440-Cameron_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?158477-Centenary_College_of_Louisiana</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?158662-Delgado_Community_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?158802-Dillard_University</loc></url>
@@ -1404,7 +1402,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?177472-Ozarks_Technical_Community_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?177542-Hannibal-LaGrange_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?177551-Harris-Stowe_State_University</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?177579-Hickey_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?177676-Jefferson_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?177719-Barnes-Jewish_College_Goldfarb_School_of_Nursing</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?177746-Kansas_City_Art_Institute</loc></url>
@@ -2178,7 +2175,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?209056-Lewis_&amp;_Clark_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?209065-Linfield_College-McMinnville_Campus</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?209074-Linn-Benton_Community_College</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?209108-Marylhurst_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?209241-Mount_Angel_Seminary</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?209250-Mt_Hood_Community_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?209287-Multnomah_University</loc></url>
@@ -3261,8 +3257,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?433013-Career_Networks_Institute</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?433174-Carolinas_College_of_Health_Sciences</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?433387-Western_Governors_University</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?433420-Santa_Barbara_Business_College-Ventura</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?433466-Sullivan_and_Cogliano_Training_Center</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?433536-Herzing_University-Kenner</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?433563-Spencerian_College-Lexington</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?433660-Florida_Gulf_Coast_University</loc></url>
@@ -3278,7 +3272,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?434751-White_Earth_Tribal_and_Community_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?434900-Dewey_University-Carolina</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?434937-Yeshiva_College_of_the_Nations_Capital</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?434973-University_of_Phoenix-Maryland</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?435000-Louisiana_State_University_Health_Sciences_Center-Shreveport</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?436094-Argosy_University-Phoenix</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?436191-Vatterott_College-Sunset_Hills</loc></url>
@@ -3416,7 +3409,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?444778-Charlotte_Christian_College_and_Theological_Seminary</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?444787-Nightingale_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?444954-Mountwest_Community_and_Technical_College</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?444972-Centura_College-Columbia</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?444990-Flagler_College-Tallahassee</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?445027-American_InterContinental_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?445090-Virginia_College-Mobile</loc></url>
@@ -3429,7 +3421,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?445267-Central_Methodist_University-College_of_Graduate_and_Extended_Studies</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?445300-University_of_Phoenix-New_Jersey</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?445328-Brightwood_College-Fort_Worth</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?445391-University_of_Phoenix-Kentucky</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?445434-Altierus_Career_College-Orange_Park</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?445692-Neumont_College_of_Computer_Science</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?445708-Johnson_&amp;_Wales_University-Charlotte</loc></url>
@@ -3453,7 +3444,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?446640-Harrisburg_University_of_Science_and_Technology</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?446677-Stevens-Henager_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?446774-Blue_Ridge_Community_and_Technical_College</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?446880-McCann_School_of_Business_&amp;_Technology</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?447014-Daytona_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?447050-United_States_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?447102-Brightwood_College-Bakersfield</loc></url>
@@ -3518,7 +3508,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?450298-Strayer_University-Delaware</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?450377-Strayer_University-Alabama</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?450401-Clary_Sage_College</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?450483-University_of_Phoenix-Washington_DC</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?450526-Argosy_University-Inland_Empire</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?450535-Argosy_University-Nashville</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?450544-Argosy_University-San_Diego</loc></url>
@@ -3650,7 +3639,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?459958-Fortis_Institute-Houston</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?459994-Strayer_University-Global_Region</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?460020-Fortis_College-Columbia</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?460075-California_University_of_Management_and_Sciences</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?460109-Ross_Medical_Education_Center-Granger</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?460136-Pima_Medical_Institute-Houston</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?460181-Concorde_Career_College-Dallas</loc></url>

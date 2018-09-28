@@ -34,31 +34,64 @@ permalink: /data/changelog/
         <aria-accordion>
           <div>
             <h2>
-              <button aria-expanded="true" aria-controls="sept-2018">
-                September 2018
+              <button aria-expanded="true" aria-controls="sept-2018-phase2">
+                September 28, 2018
               </button>
             </h2>
-            <div id="sept-2018" aria-hidden="true">
+            <div id="sept-2018-phase2" aria-hidden="true">
               <p>
-                In early September 2018, the Department updated the College Scorecard website with the first installment of its annual refresh that includes newer, updated data for many elements. Data elements coming from the NSLDS and the Treasury Department have not yet been updated<sup>1</sup>, but all other data have been refreshed (e.g, IPEDS-based metrics). Key changes include:
+                On September 28, 2018, the Department updated the College Scorecard website with the second installment of its annual refresh that includes newer, updated data for metrics from Treasury Department data sources. NSLDS data have not yet been updated<sup>1</sup>, but all other data have been refreshed in 2018. In addition to the updated Treasury-derived metrics, key changes include:
               </p>
               <ul class="u-unordered_list">
-                <li>In addition to accessing data by year in the API, developers can now reference a top-level “latest” object that will contain the most recent data available for a particular institution.</li>
-                <li>Updates to IPEDS data due to revisions by institutions have been applied to the 2015-16 Scorecard data files (2014-15 and prior Scorecard files released in September 2017 already used final IPEDS data)</li>
-                <li>Metrics in the 2015-16 Scorecard data file based on the Outcome Measures (OM) component of IPEDS have been updated to use the 2015-16 OM component files instead of the 2016-17 OM data. 2016-17 data was previously included in the 2015-16 Scorecard data as a proxy due initial availability issues for the 2015-16 OM data file.</li>
-                <li>Some Scorecard data elements are available in the September 2018 data release that were not previously made available in Scorecard data files and API:
+                <li>Some Scorecard data elements previously available in the Scorecard data files, but not loaded into the API have now been loaded into the API. These metrics are:
                   <ul class="u-unordered_list second_level">
-                    <li>Pooled, suppressed versions of the 100% IPEDS completions rates for 4-year and less-than-4-year institutions</li>
-                    <li>IPEDS 150% completions rates for 4-year and less-than-4-year institutions by Pell Grant and Subsidized Direct Loan recipient status (received a Pell Grant, received a Subsidized Direct Loan but not a Pell Grant, and received neither a Pell Grant nor a Subsidized Direct Loan)</li>
+                    <li>IPEDS 200% completion rates for 4 and less-than-4-year institutions</li>
+                    <li>Pooled, suppressed versions of the 200% IPEDS completions rates for 4-year and less-than-4-year institutions</li>
+                  </ul>
+                </li>
+                <li>A new variable for threshold earnings describing the proportion of former students earning above $28,000 (prior calculations of threshold earnings used a $25,000 threshold).</li>
+                <li>The following user interface changes to the College Scorecard consumer website were included with this update:
+                  <ul class="u-unordered_list second_level">
+                    <li>Removal of Percentage Earning above High School Graduate given caveats described in the <a data-download href="{{ site.baseurl }}/assets/FullDataDocumentation.pdf" target="_blank">Documentation Report</a>.  As this was the default sort of the search results, the default sort was updated to be Salary After Attending.</li>
+                    <li>Removal of the national median indicators. On bar charts, the lines that once indicated the national median were removed. Additionally, the arrows and text that stated whether an institution was above or below the national median have also been removed.</li>
                   </ul>
                 </li>
               </ul>
-              <hr />
-              
-              <p class='footnote'>
-                <sup>1</sup> NSLDS and Treasury Department derived data elements will also be updated in the fall of 2018
+              <hr/>
+              <p class="footnote">
+                <sup>1</sup> NSLDS -derived data elements will also be updated in the fall of 2018<br>
               </p>
-            </div>
+              </div>
+          </div>
+        </aria-accordion>
+
+        <aria-accordion>
+          <div>
+            <h2>
+              <button aria-expanded="false" aria-controls="sept-2018-phase1">
+                September 6, 2018
+              </button>
+            </h2>
+            <div id="sept-2018-phase1" aria-hidden="true">
+                <p>
+                  In early September 2018, the Department updated the College Scorecard website with the first installment of its annual refresh that includes newer, updated data for many elements. Data elements coming from the NSLDS and the Treasury Department have not yet been updated<sup>1</sup>, but all other data have been refreshed (e.g, IPEDS-based metrics). Key changes include:
+                </p>
+                <ul class="u-unordered_list">
+                  <li>In addition to accessing data by year in the API, developers can now reference a top-level “latest” object that will contain the most recent data available for a particular institution.</li>
+                  <li>Updates to IPEDS data due to revisions by institutions have been applied to the 2015-16 Scorecard data files (2014-15 and prior Scorecard files released in September 2017 already used final IPEDS data)</li>
+                  <li>Metrics in the 2015-16 Scorecard data file based on the Outcome Measures (OM) component of IPEDS have been updated to use the 2015-16 OM component files instead of the 2016-17 OM data. 2016-17 data was previously included in the 2015-16 Scorecard data as a proxy due initial availability issues for the 2015-16 OM data file.</li>
+                  <li>Some Scorecard data elements are available in the September 2018 data release that were not previously made available in Scorecard data files and API:
+                    <ul class="u-unordered_list second_level">
+                      <li>Pooled, suppressed versions of the 100% IPEDS completions rates for 4-year and less-than-4-year institutions</li>
+                      <li>IPEDS 150% completions rates for 4-year and less-than-4-year institutions by Pell Grant and Subsidized Direct Loan recipient status (received a Pell Grant, received a Subsidized Direct Loan but not a Pell Grant, and received neither a Pell Grant nor a Subsidized Direct Loan)</li>
+                    </ul>
+                  </li>
+                </ul>
+                <hr />
+                <p class="footnote">
+                  <sup>1</sup> NSLDS and Treasury Department derived data elements will also be updated in the fall of 2018
+                </p>
+              </div>
           </div>
         </aria-accordion>
 

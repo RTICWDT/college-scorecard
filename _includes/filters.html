@@ -10,7 +10,6 @@
         </span>
       </h2>
       <picc-slider format="$"
-        median="{{ site.data.national_stats.net_price.median }}"
         max="{{ site.data.national_stats.net_price.max }}"
         step="1000">
         <input type="hidden" name="avg_net_price">
@@ -24,8 +23,7 @@
           <i class="fa fa-info-circle"></i>
         </span>
       </h2>
-      <picc-slider format="%" step=".01" max="1"
-        median="{{ site.data.national_stats.completion_rate.median }}">
+      <picc-slider format="%" step=".01" max="1">
         <input type="hidden" name="completion_rate">
       </picc-slider>
     </div>
@@ -37,7 +35,6 @@
         </span>
       </h2>
       <picc-slider format="$"
-        median="{{ site.data.national_stats.median_earnings.median }}"
         max="{{ site.data.national_stats.median_earnings.max }}"
         step="1000">
         <input type="hidden" name="median_earnings">

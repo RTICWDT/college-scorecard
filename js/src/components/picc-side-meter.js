@@ -9,7 +9,7 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
         this.min = getAttr(this, 'min', 0);
         this.max = getAttr(this, 'max', 1);
         this.value = getAttr(this, 'value');
-        this.median = getAttr(this, 'median');
+        /** this.median = getAttr(this, 'median'); */
 
         this.update();
       }},
@@ -22,7 +22,7 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
           case 'min':
           case 'max':
           case 'value':
-          case 'median':
+          /** case 'median': */
             this[attr] = value;
             return;
         }
@@ -33,7 +33,7 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
           var min = this.min;
           var max = this.max;
           var value = this.value;
-          var median = this.median;
+          /** var median = this.median; */
 
           var bar = getBar(this);
           var barVal = getBarVal(this);
@@ -104,7 +104,7 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
             }
 
 
-            if (this.hasAttribute('percentile-range')) {
+            /**if (this.hasAttribute('percentile-range')) {
               var range = this.getAttribute('percentile-range');
               var numbers = range.split('..').map(Number);
               if (numbers.some(isNaN)) {
@@ -129,7 +129,7 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
                 'below_average': false,
                 'about_average': false
               });
-            }
+            } */
 
           }
 
@@ -169,7 +169,7 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
         }
       },
 
-      median: {
+      /** median: {
         get: function() {
           return this.__median;
         },
@@ -177,7 +177,7 @@ window.PICCMeterStack = document.registerElement('picc-side-meter', {
           this.__median = number(value);
           deferUpdate(this);
         }
-      }
+      } */
     }
   )
 });

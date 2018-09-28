@@ -106,10 +106,6 @@ permalink: /compare/
 
                         <div class="meter-group_wrapper">
 
-                            <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="average_cost_meter">
-                                <span class="label"></span>
-                            </div>
-
                             <div class="section-card_container-compare average-cost" data-pred-degree="{{group.key}}">
                                 <div class="selected-school_average-cost_group">
 
@@ -137,19 +133,6 @@ permalink: /compare/
 
                 </div><!-- /.compare-container_group -->{% endfor %}
 
-                <div class="legend-wrapper">
-                    <div class="legend-nat_average">
-                        <div class="legend-nat_average-box">
-                            <div class="legend-nat_average-box-line-vert"></div>
-                        </div>
-                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                            <span class="tooltip-target">
-                                <i class="fa fa-info-circle"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
                 <h2 class="figure-heading constrain_width"
                     aria-describedby="tip-graduation-rate" tabindex="0">
                     Graduation Rate
@@ -164,10 +147,6 @@ permalink: /compare/
                         <div class="compare-degree_group">{{group.label}}</div>
 
                         <div class="meter-group_wrapper">
-
-                            <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="grad_rate_meter">
-                                <span class="label"></span>
-                            </div>
 
                             <div class="section-card_container-compare grad-rate" data-pred-degree="{{group.key}}">
 
@@ -198,19 +177,6 @@ permalink: /compare/
 
                 </div><!-- /.compare-container_group -->{% endfor %}
 
-                <div class="legend-wrapper">
-                    <div class="legend-nat_average">
-                        <div class="legend-nat_average-box">
-                            <div class="legend-nat_average-box-line-vert"></div>
-                        </div>
-                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                            <span class="tooltip-target">
-                                <i class="fa fa-info-circle"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
                 <h2 class="figure-heading constrain_width"
                     aria-describedby="tip-avg-salary" tabindex="0" data-definition="branch_compare">
                     Salary After Attending
@@ -225,10 +191,6 @@ permalink: /compare/
                         <div class="compare-degree_group">{{group.label}}</div>
 
                         <div class="meter-group_wrapper">
-
-                            <div class="median-line four-year" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="average_salary_meter">
-                                <span class="label"></span>
-                            </div>
 
                             <div class="section-card_container-compare average-salary" data-pred-degree="{{group.key}}">
 
@@ -257,19 +219,6 @@ permalink: /compare/
                     </div><!-- /.compare-group_wrapper -->
 
                 </div><!-- /.compare-container_group -->{% endfor %}
-
-                <div class="legend-wrapper">
-                    <div class="legend-nat_average">
-                        <div class="legend-nat_average-box">
-                            <div class="legend-nat_average-box-line-vert"></div>
-                        </div>
-                        <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                            <span class="tooltip-target">
-                                <i class="fa fa-info-circle"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
 
             </div><!-- /.default-meters -->
 
@@ -501,9 +450,6 @@ permalink: /compare/
 
                                             <div class="meter-group_wrapper">
 
-                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="average_cost_meter">
-                                                    <span class="label"></span>
-                                                </div>
                                                 <div class="section-card_container-compare average-cost" data-pred-degree="{{group.key}}">
 
                                                     <div class="selected-school_average-cost_group">
@@ -531,19 +477,6 @@ permalink: /compare/
                                         </div><!-- /.compare-group_wrapper -->
 
                                     </div><!-- /.compare-container_group -->{% endfor %}
-
-                                    <div class="legend-wrapper">
-                                        <div class="legend-nat_average">
-                                            <div class="legend-nat_average-box">
-                                                <div class="legend-nat_average-box-line-vert"></div>
-                                            </div>
-                                            <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                                                <span class="tooltip-target">
-                                                    <i class="fa fa-info-circle"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                 </div><!-- /.avg-cost -->
 
@@ -588,8 +521,7 @@ permalink: /compare/
                                                                     <picc-side-meter
                                                                         class="cost"
                                                                         data-bind="net_price_income_meter"
-                                                                        max="{{ site.data.national_stats.net_price.max }}"
-                                                                        median="{{ site.data.national_stats.net_price.median }}">
+                                                                        max="{{ site.data.national_stats.net_price.max }}">
                                                                     </picc-side-meter>
                                                                     <figcaption>
                                                                         <span data-bind="name">School Name</span>
@@ -641,10 +573,6 @@ permalink: /compare/
 
                                             <div class="meter-group_wrapper">
 
-                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="repayment_rate_meter">
-                                                    <span class="label"></span>
-                                                </div>
-
                                                 <div class="section-card_container-compare repayment-rate" data-pred-degree="{{group.key}}">
 
                                                     <div class="selected-school_repayment-rate_group">
@@ -673,19 +601,6 @@ permalink: /compare/
 
                                     </div><!-- /.compare-container_group -->{% endfor %}
 
-                                    <div class="legend-wrapper">
-                                        <div class="legend-nat_average">
-                                            <div class="legend-nat_average-box">
-                                                <div class="legend-nat_average-box-line-vert"></div>
-                                            </div>
-                                            <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                                                <span class="tooltip-target">
-                                                    <i class="fa fa-info-circle"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div><!-- /.repayment -->
 
                                 <div class="debt">
@@ -702,10 +617,6 @@ permalink: /compare/
                                             <div class="compare-degree_group">{{group.label}}</div>
 
                                             <div class="meter-group_wrapper">
-
-                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="average_total_debt_meter">
-                                                    <span class="label"></span>
-                                                </div>
 
                                                 <div class="section-card_container-compare avg-debt" data-pred-degree="{{group.key}}">
                                                     <div>
@@ -729,20 +640,6 @@ permalink: /compare/
                                         </div><!-- /.compare-group_wrapper -->
 
                                     </div><!-- /.compare-container_group -->{% endfor %}
-
-                                    <div class="legend-wrapper">
-                                        <div class="legend-nat_average">
-                                            <div class="legend-nat_average-box">
-                                                <div class="legend-nat_average-box-line-vert">
-                                                </div>
-                                            </div>
-                                            <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                                                <span class="tooltip-target">
-                                                    <i class="fa fa-info-circle"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                 </div><!-- /.debt -->
 
@@ -834,9 +731,6 @@ permalink: /compare/
 
                                             <div class="meter-group_wrapper">
 
-                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="grad_rate_meter">
-                                                    <span class="label"></span>
-                                                </div>
                                                 <div class="section-card_container-compare grad-rate" data-pred-degree="{{group.key}}">
 
                                                     <div class="selected-school_grad-rate_group">
@@ -865,19 +759,6 @@ permalink: /compare/
 
                                     </div><!-- /.compare-container_group -->{% endfor %}
 
-                                    <div class="legend-wrapper">
-                                        <div class="legend-nat_average">
-                                            <div class="legend-nat_average-box">
-                                                <div class="legend-nat_average-box-line-vert"></div>
-                                            </div>
-                                            <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                                                <span class="tooltip-target">
-                                                    <i class="fa fa-info-circle"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div><!-- /.completion-rate -->
 
                                 <div class="grad-retention">
@@ -894,10 +775,6 @@ permalink: /compare/
                                             <div class="compare-degree_group">{{group.label}}</div>
 
                                             <div class="meter-group_wrapper">
-
-                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="retention_rate_meter">
-                                                    <span class="label"></span>
-                                                </div>
 
                                                 <div class="section-card_container-compare rentention-rate" data-pred-degree="{{group.key}}">
 
@@ -926,19 +803,6 @@ permalink: /compare/
                                         </div><!-- /.compare-group_wrapper -->
 
                                     </div><!-- /.compare-container_group -->{% endfor %}
-
-                                    <div class="legend-wrapper">
-                                        <div class="legend-nat_average">
-                                            <div class="legend-nat_average-box">
-                                                <div class="legend-nat_average-box-line-vert"></div>
-                                            </div>
-                                            <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                                                <span class="tooltip-target">
-                                                    <i class="fa fa-info-circle"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                 </div><!-- /.grad-retention -->
 
@@ -975,9 +839,6 @@ permalink: /compare/
 
                                             <div class="meter-group_wrapper">
 
-                                                <div class="median-line" data-bind="median_line" data-median="data-median-{{group.suffix}}" data-meter="average_salary_meter">
-                                                    <span class="label"></span>
-                                                </div>
                                                 <div class="section-card_container-compare average-salary" data-pred-degree="{{group.key}}">
 
                                                     <div class="selected-school_average-salary_group">
@@ -1006,48 +867,7 @@ permalink: /compare/
 
                                     </div><!-- /.compare-container_group -->{% endfor %}
 
-                                    <div class="legend-wrapper">
-                                        <div class="legend-nat_average">
-                                            <div class="legend-nat_average-box">
-                                                <div class="legend-nat_average-box-line-vert"></div>
-                                            </div>
-                                            <div class="legend-nat_average-words" aria-describedby="tip-national-median">National Median
-                                                <span class="tooltip-target">
-                                                    <i class="fa fa-info-circle"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div><!-- /.avg-salary -->
-
-                                <div class="advantage-rate">
-                                    <h2 class="figure-heading" aria-describedby="tip-earnings-25k" tabindex="0" data-definition="branch_compare">
-                                        Percentage Earning Above High School Grad
-                                        <span class="tooltip-target">
-                                            <i class="fa fa-info-circle"></i>
-                                        </span>
-                                    </h2>
-
-                                    <div class="section-card_container-compare advantage-rate" data-pred-degree="{{group.key}}">
-                                        <div>
-                                            <div data-bind="school_section">
-                                                <div class="meter-wrapper" tabindex="0">
-                                                    <figure class="side-meter">
-                                                        <picc-side-meter
-                                                                class="earnings"
-                                                                data-bind="advantage_rate_meter">
-                                                        </picc-side-meter>
-                                                        <figcaption>
-                                                            <span data-bind="name">School Name</span>
-                                                            <span data-bind="advantage_rate" class="sr-only"></span>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- /.advantage-rate -->
 
                             </div>
 
