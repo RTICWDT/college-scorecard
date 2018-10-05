@@ -6,10 +6,10 @@ var extend = require('extend');
 
 // expected default parameters
 const EXPECTED_DEFAULTS = {
-  'latest.academics.program_available.assoc_or_bachelors': true,
+  'latest.academics.program_available.assoc_or_bachelors_or_certificate': true,
   'latest.student.size__range': '1..',
   'school.degrees_awarded.predominant__range': '1..3',
-  'school.degrees_awarded.highest__range': '2..4',
+  // 'school.degrees_awarded.highest__range': '2..4',
   'school.operating': 1
 };
 
@@ -55,7 +55,7 @@ describe('picc.form', function() {
       assert.deepEqual(prep({degree: 'a'}), fromDefaults({
         'latest.academics.program_available.assoc': true
       }, [ // omit
-        'latest.academics.program_available.assoc_or_bachelors'
+        'latest.academics.program_available.assoc_or_bachelors_or_certificate'
       ]));
     });
 
@@ -63,7 +63,15 @@ describe('picc.form', function() {
       assert.deepEqual(prep({degree: 'b'}), fromDefaults({
         'latest.academics.program_available.bachelors': true
       }, [ // omit
-        'latest.academics.program_available.assoc_or_bachelors'
+        'latest.academics.program_available.assoc_or_bachelors_or_certificate'
+      ]));
+    });
+
+    it('searches for certificates awards', function() {
+      assert.deepEqual(prep({degree: 'c'}), fromDefaults({
+        'latest.academics.program_available.certificate': true
+      }, [ // omit
+        'latest.academics.program_available.assoc_or_bachelors_or_certificate'
       ]));
     });
 
