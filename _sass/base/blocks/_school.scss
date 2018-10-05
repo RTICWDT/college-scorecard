@@ -162,7 +162,10 @@
       text-align: center;
       vertical-align: top;
       width: 70px;
-      margin-right: 10px;
+      margin-right: 5px;
+      @include respond-to(small-up) {
+        margin-right: 10px;
+      }
 
       .school-key_figures-year {
         @include font-size(2.86);
@@ -176,7 +179,21 @@
       }
 
       &.certificate {
-        margin-right: 25px;
+        margin-right: 20px;
+        @include hyphens(none);
+        @include respond-to(small-up) {
+          margin-right: 25px;
+        }
+
+        .school-key_figures-year {
+          margin-top: -50px;
+
+          &:before {
+            font-family: "fontawesome";
+            content: '\f0a3';
+            margin-left: 15px;
+          }
+        }
       }
     }
   }
@@ -226,6 +243,9 @@
       &.constrain_width {
         margin-left: -5%;
         width: 110%;
+      }
+      span[data-bind="average_cost_label"] {
+        white-space: pre;
       }
     }
 
@@ -356,6 +376,12 @@
     @include span-columns(6 of 6);
     @include respond-to(large-up) {
       @include span-columns(3 of 6);
+    }
+
+    h2.figure-heading {
+      span[data-bind="average_cost_label"] {
+        white-space: pre;
+      }
     }
   }
 

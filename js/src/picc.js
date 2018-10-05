@@ -1092,6 +1092,30 @@ picc.school.directives = (function() {
       }
     },
 
+    // TEMPORARY: Until API has flag for Program-based vs.
+    // Academic Calendar-based reporting
+    average_cost_tip: {
+      '@aria-describedby': function(d) {
+        var degree = picc.access(picc.fields.HIGHEST_DEGREE)(d);
+        switch (+degree) {
+          case 1: // Certificate granting
+            return 'tip-avg-program-cost';
+        }
+        return 'tip-avg-cost-year';
+      }
+    },
+    // TEMPORARY: Until API has flag for Program-based vs.
+    // Academic Calendar-based reporting
+    average_cost_label: function(d) {
+      var degree = picc.access(picc.fields.HIGHEST_DEGREE)(d);
+      switch (+degree) {
+        case 1: // Certificate Granting
+          return 'Cost of Largest\r\nProgram';
+
+      }
+      return 'Average\r\n Annual Cost';
+    },
+
     award_level: {
         '@data-definition': function (d) {
           var offersMultipleAwards = picc.access.awardLevels(d, picc.access(picc.fields.PREDOMINANT_DEGREE)(d));
@@ -1713,7 +1737,8 @@ picc.form.mappings = {
 
   degree: {
     a: '2',
-    b: '3'
+    b: '3',
+    c: '1'
   }
 };
 
@@ -1841,6 +1866,10 @@ picc.form.prepareParams = (function() {
         case '3':
           subfield = 'bachelors';
           break;
+        case 'c':
+        case '1':
+          subfield = 'certificate'
+
       }
       var k = [fields.PROGRAM_OFFERED, subfield, value].join('.');
       query[k + '__range'] = '1..';
@@ -1860,6 +1889,8 @@ picc.form.prepareParams = (function() {
         query[picc.fields.DEGREE_OFFERED + '.assoc'] = true;
       } else if (value === 'b') {
         query[picc.fields.DEGREE_OFFERED + '.bachelors'] = true;
+      } else if (value === 'c') {
+        query[picc.fields.DEGREE_OFFERED + '.certificate'] = true;
       }
       delete query[key];
     },
@@ -1876,7 +1907,7 @@ picc.form.prepareParams = (function() {
     return picc.form.mappings.size[value];
   }
 
-  // map a degree string ('', 'a' or 'b') or array of strings to an
+  // map a degree string ('', 'a' or 'b' or 'c') or array of strings to an
   // API-friendly "predominant degree" range value
   function mapDegree(value) {
     if (Array.isArray(value)) {
@@ -1932,7 +1963,7 @@ picc.form.prepareParams = (function() {
     */
 
     if (!query.degree) {
-      query[fields.DEGREE_OFFERED + '.assoc_or_bachelors'] = true;
+      query[fields.DEGREE_OFFERED + '.assoc_or_bachelors_or_certificate'] = true;
     }
 
     for (var key in query) {
@@ -1967,7 +1998,7 @@ picc.form.prepareParams = (function() {
     query[picc.fields.PREDOMINANT_DEGREE + '__range'] = '1..3';
 
     // set the highest degree to range '2..4' to exclude certificate only schools
-    query[picc.fields.HIGHEST_DEGREE + '__range'] = '2..4';
+    //query[picc.fields.HIGHEST_DEGREE + '__range'] = '2..4';
 
     return query;
   };

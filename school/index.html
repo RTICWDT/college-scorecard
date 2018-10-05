@@ -141,8 +141,9 @@ stylesheets:
             <div class="school-meters">
 
               <figure class="meter below_is_good">
-                <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year" tabindex="0">
-                  Average<br>Annual Cost
+                <h2 class="figure-heading constrain_width"
+                    aria-describedby="tip-avg-cost-year" tabindex="0" data-bind="average_cost_tip">
+                  <span data-bind="average_cost_label">Average<br>Annual Cost</span>
                   <span class="tooltip-target u-new_line">
                     <i class="fa fa-info-circle"></i>
                   </span>
@@ -203,8 +204,9 @@ stylesheets:
                   <div class="school-two_col-left centered">
 
                     <figure class="meter below_is_good">
-                      <h2 class="figure-heading" aria-describedby="tip-avg-cost-year" tabindex="0">
-                        Average<br>Annual Cost
+                      <h2 class="figure-heading constrain_width"
+                          aria-describedby="tip-avg-cost-year" tabindex="0" data-bind="average_cost_tip">
+                        <span data-bind="average_cost_label" class="label-nowrap">Average<br>Annual Cost</span>
                         <span class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
                         </span>

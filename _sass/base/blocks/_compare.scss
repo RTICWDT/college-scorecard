@@ -310,7 +310,7 @@ figcaption {
     }
   }
 
-  .school-headings {
+  .school-headings.school-section {
     h1 {
       @include font-size($h3);
 
@@ -359,11 +359,14 @@ figcaption {
           margin-right: 20px;
           width: 60px;
 
-          .school-key_figures-year:before {
-            font-family: "fontawesome";
-            content: '\f0a3';
-            font-size: .75em;
+          .school-key_figures-year {
+            margin-top: -20px;
 
+            &:before {
+              font-family: "fontawesome";
+              content: '\f0a3';
+              font-size: .75em;
+            }
 
           }
         }

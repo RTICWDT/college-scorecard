@@ -1,6 +1,9 @@
 avg-cost-year:
  default: <strong>Average Annual Cost</strong> The average annual net price for federal financial aid recipients, after aid from the school, state, or federal government. For public schools, this is only the average cost for in-state students.
 
+avg-program-cost:
+  default: "<strong>Cost of Largest Program</strong> If program is less than 1 year, this is the total cost. If the program is longer than 1 year, this is the annual cost. Note: Programs are not necessarily comparable."
+
 graduation-rate:
  default: <strong>Graduation Rate</strong> The graduation rate within 150 percent of the expected time to completion (typically six years for schools that award predominantly four-year degrees and three years for schools that award predominantly two-year degrees). These rates are only for full-time students enrolled for the first time.
 
