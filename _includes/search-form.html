@@ -1,4 +1,5 @@
   {% capture common_input_attributes %}autocomplete="off" autocorrect="off" autocapitalize="off"{% endcapture %}
+
   <div class="controls-container">
   <fieldset>
     <legend>Programs/Degree</legend>
@@ -46,9 +47,17 @@
         </button>
       </h1>
 
-      <div id="location-content" aria-hidden="true" class="accordion-div">
 
-        <div class="input-add group_inline">
+
+<div id="location-content" aria-hidden="true" class="accordion-div">
+      
+
+
+
+
+
+
+        <div class="input-add group_inline" id="statelocal">
 
           <div class="label" id="label-select-state">
             Select one or more states
@@ -75,32 +84,7 @@
 
         </div>
 
-        <div class="input-add group_inline">
 
-          <div class="label" id="label-select-region">
-            Select one or more regions
-          </div>
-
-          <multi-select>
-            <div class="u-group_inline u-group_inline-left">
-              <select aria-labelledby="label-select-region" class="select-region" name="region">
-                <option value="" selected>Any</option>
-                {% for region in site.data.regions|sort('name') %}
-                <option value="{{ region.id }}" data-states="{{ region.states }}">{{ region.name }}</option>
-                {% endfor %}
-              </select>
-            </div>
-            <div class="u-group_inline u-group_inline-right u-nowrap">
-              <button type="button" class="button button-add">
-                Add<br>Region
-              </button>
-              <button type="button" class="button button-remove" title="Remove Region" aria-label="Remove Region">
-                &times;
-              </button>
-            </div>
-          </multi-select>
-
-        </div>
 
         <div class="group_inline">
 
@@ -287,3 +271,9 @@
     </button>
 
   </div>
+
+  <script type="text/javascript">
+    function hide(){
+      document.getElementById("statelocal").hidden = true;
+    }
+  </script>
