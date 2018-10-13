@@ -10,9 +10,9 @@ avg-salary:
   branch_compare: <strong>Salary After Attending</strong> The median earnings of former students who received federal financial aid, at 10 years after entering the school.<br><br>For schools with multiple locations, this information is based on all of their locations.
 
 avg-loan-payment:
- default: <strong>Monthly Student Loan Payment</strong> The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 4.45% interest rate.
- branch: <strong>Monthly Student Loan Payment</strong> The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 4.45% interest rate.<br><br>This information is based on all locations of this school.
- branch_compare: <strong>Monthly Student Loan Payment</strong> The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 4.45% interest rate.<br><br>For schools with multiple locations, this information is based on all of their locations.
+ default: <strong>Monthly Student Loan Payment</strong> The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 5.05% interest rate.
+ branch: <strong>Monthly Student Loan Payment</strong> The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 5.05% interest rate.<br><br>This information is based on all locations of this school.
+ branch_compare: <strong>Monthly Student Loan Payment</strong> The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 5.05% interest rate.<br><br>For schools with multiple locations, this information is based on all of their locations.
 
 repayment-rate:
   default: <strong>Students Paying Down Their Debt</strong> The share of student borrowers who have paid at least one dollar of the principal balance on their federal loans within three years of leaving school.
