@@ -11,20 +11,20 @@ median_earnings:
   max: 100000
 
 retention_rate:
-  min: 0.1624
+  min: 0.1574
   max: 1
 
 repayment_rate:
-  min: 0.089861751
-  max: 0.925324675
+  min: 0.105932203
+  max: 0.933202358
 
 median_total_debt:
   min: 1500
-  max: 50750
+  max: 52000
 
 median_monthly_loan:
-  min: 15.50963344
-  max: 524.742598
+  min: 15.94651201
+  max: 552.8124164
 
 earnings_gt_25k:
   min: 0.081
