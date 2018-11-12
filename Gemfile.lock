@@ -30,7 +30,7 @@ GEM
     pathutil (0.14.0)
       forwardable-extended (~> 2.6)
     public_suffix (3.0.0)
-    rack (1.6.4)
+    rack (1.6.11)
     rack-ssl-enforcer (0.2.9)
     rb-fsevent (0.10.2)
     rb-inotify (0.9.10)
