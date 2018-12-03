@@ -297,6 +297,8 @@ describe('school page', function() {
     assert.equal(tabs.length, 2);
     var url = yield browser.switchTab(tabs[1]).getUrl();
     assert.equal(url, 'https://fafsa.ed.gov/FAFSA/app/fafsa');
+    // cleanup
+    yield browser.switchTab(tabs[0]);
   });
 
   /*

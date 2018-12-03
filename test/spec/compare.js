@@ -845,6 +845,78 @@ describe('compare page ', function(){
     yield selectCompareSchools(schoolIDs[1], false);
   });
 
+  it('should hide the 4-year predominant degree group when there are no representative schools', function*(){
+
+    yield selectCompareSchools(schoolIDsByType['two_year'][0], true);
+    yield selectCompareSchools(schoolIDsByType['cert'][0], true);
+
+    yield visitComparePage();
+    yield utils.getVisibleCompare();
+
+    var sections = ['.compare-container_group[data-pred-degree="3"] > [data-bind="compare_group"]'];
+
+    yield browser.selectorExecute(sections, function(groups){
+      return groups.every(function*(g) {
+          return g.getAttribute('aria-hidden');
+      });
+    }).then(function(allHidden) {
+      assert.equal(allHidden, true, '4-year predominant degree group was not hidden.');
+    });
+
+    //cleanup
+    yield selectCompareSchools(schoolIDsByType['two_year'][0], false);
+    yield selectCompareSchools(schoolIDsByType['cert'][0], false);
+
+  });
+
+  it('should hide the 2-year predominant degree group when there are no representative schools', function*(){
+
+    yield selectCompareSchools(schoolIDsByType['four_year'][0], true);
+    yield selectCompareSchools(schoolIDsByType['cert'][0], true);
+
+    yield visitComparePage();
+    yield utils.getVisibleCompare();
+
+    var sections = ['.compare-container_group[data-pred-degree="2"] > [data-bind="compare_group"]'];
+
+    yield browser.selectorExecute(sections, function(groups){
+      return groups.every(function*(g) {
+        return g.getAttribute('aria-hidden');
+      });
+    }).then(function(allHidden) {
+      assert.equal(allHidden, true, '2-year predominant degree group was not hidden.');
+    });
+
+    //cleanup
+    yield selectCompareSchools(schoolIDsByType['four_year'][0], false);
+    yield selectCompareSchools(schoolIDsByType['cert'][0], false);
+
+  });
+
+  it('should hide the certificate predominant degree group when there are no representative schools', function*(){
+
+    yield selectCompareSchools(schoolIDsByType['four_year'][0], true);
+    yield selectCompareSchools(schoolIDsByType['two_year'][0], true);
+
+    yield visitComparePage();
+    yield utils.getVisibleCompare();
+
+    var sections = ['.compare-container_group[data-pred-degree="1"] > [data-bind="compare_group"]'];
+
+    yield browser.selectorExecute(sections, function(groups){
+      return groups.every(function*(g) {
+        return g.getAttribute('aria-hidden');
+      });
+    }).then(function(allHidden) {
+      assert.equal(allHidden, true, 'certificate predominant degree group was not hidden.');
+    });
+
+    //cleanup
+    yield selectCompareSchools(schoolIDsByType['four_year'][0], false);
+    yield selectCompareSchools(schoolIDsByType['two_year'][0], false);
+
+  });
+
   it('should group schools based on predominant degree', function*(){
 
     yield selectCompareSchools(schoolIDsByType['four_year'][0], true);
@@ -878,78 +950,6 @@ describe('compare page ', function(){
     yield selectCompareSchools(schoolIDsByType['four_year'][0], false);
     yield selectCompareSchools(schoolIDsByType['two_year'][0], false);
     yield selectCompareSchools(schoolIDsByType['cert'][0], false);
-  });
-
-  it('should hide the 4-year predominant degree group when there are no representative schools', function*(){
-
-    yield selectCompareSchools(schoolIDsByType['two_year'][0], true);
-    yield selectCompareSchools(schoolIDsByType['cert'][0], true);
-
-    yield visitComparePage();
-    yield utils.getVisibleCompare();
-
-    var sections = ['.compare-container_group[data-pred-degree="3"] > [data-bind="compare_group"]'];
-
-    yield browser.selectorExecute(sections, function(groups){
-      return groups.every(function(g) {
-          return g.getAttribute('aria-hidden');
-      });
-    }).then(function(allHidden) {
-      assert.equal(allHidden, true, '4-year predominant degree group was not hidden.');
-    });
-
-    //cleanup
-    yield selectCompareSchools(schoolIDsByType['two_year'][0], false);
-    yield selectCompareSchools(schoolIDsByType['cert'][0], false);
-
-  });
-
-  it('should hide the 2-year predominant degree group when there are no representative schools', function*(){
-
-    yield selectCompareSchools(schoolIDsByType['four_year'][0], true);
-    yield selectCompareSchools(schoolIDsByType['cert'][0], true);
-
-    yield visitComparePage();
-    yield utils.getVisibleCompare();
-
-    var sections = ['.compare-container_group[data-pred-degree="2"] > [data-bind="compare_group"]'];
-
-    yield browser.selectorExecute(sections, function(groups){
-      return groups.every(function(g) {
-        return g.getAttribute('aria-hidden');
-      });
-    }).then(function(allHidden) {
-      assert.equal(allHidden, true, '2-year predominant degree group was not hidden.');
-    });
-
-    //cleanup
-    yield selectCompareSchools(schoolIDsByType['four_year'][0], false);
-    yield selectCompareSchools(schoolIDsByType['cert'][0], false);
-
-  });
-
-  it('should hide the certificate predominant degree group when there are no representative schools', function*(){
-
-    yield selectCompareSchools(schoolIDsByType['four_year'][0], true);
-    yield selectCompareSchools(schoolIDsByType['two_year'][0], true);
-
-    yield visitComparePage();
-    yield utils.getVisibleCompare();
-
-    var sections = ['.compare-container_group[data-pred-degree="1"] > [data-bind="compare_group"]'];
-
-    yield browser.selectorExecute(sections, function(groups){
-      return groups.every(function(g) {
-        return g.getAttribute('aria-hidden');
-      });
-    }).then(function(allHidden) {
-      assert.equal(allHidden, true, 'certificate predominant degree group was not hidden.');
-    });
-
-    //cleanup
-    yield selectCompareSchools(schoolIDsByType['four_year'][0], false);
-    yield selectCompareSchools(schoolIDsByType['two_year'][0], false);
-
   });
 
   it('should only remove the degree type group when multiple representative schools are all removed', function*() {
@@ -1050,15 +1050,6 @@ describe('compare page ', function(){
     }).then(function(allHidden) {
       assert.equal(allHidden, true, 'Certificate predominant degree group was not hidden.');
     });
-
-    yield selectCompareSchools(schoolIDsByType['four_year'][0], false);
-    yield selectCompareSchools(schoolIDsByType['four_year'][1], false);
-
-    yield selectCompareSchools(schoolIDsByType['two_year'][0], false);
-    yield selectCompareSchools(schoolIDsByType['two_year'][1], false);
-
-    yield selectCompareSchools(schoolIDsByType['cert'][0], false);
-    yield selectCompareSchools(schoolIDsByType['cert'][1], false);
 
   });
   
