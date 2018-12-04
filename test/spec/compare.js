@@ -936,7 +936,7 @@ describe('compare page ', function(){
     var sections = ['.compare-container_group[data-pred-degree="1"] > [data-bind="compare_group"]'];
 
     yield browser.selectorExecute(sections, function(groups){
-      return groups.every(function(g) {
+      return groups.every(function*(g) {
         return g.getAttribute('aria-hidden');
       });
     }).then(function(allHidden) {

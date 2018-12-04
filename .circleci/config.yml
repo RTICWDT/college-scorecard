@@ -52,7 +52,7 @@ buildtest: &buildtest
     - run:
         name: Run Browser tests
         command: npm run test-ci
-        no_output_timeout: 15m
+        no_output_timeout: 20m
 
     - run:
         name: Run A11y tests
