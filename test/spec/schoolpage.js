@@ -289,7 +289,7 @@ describe('school page', function() {
     assert.equal(yield toggleAccordion('#finaid'), 'false');
   });
 
-  it('should redirect to FAFSA app if "Start My App" clicked', function*() {
+  xit('should redirect to FAFSA app if "Start My App" clicked', function*() {
     yield loadSchoolUrl('204635-Ohio-Northern-University');
     yield toggleAccordion('#finaid');
     yield browser.click('#finaid div.school-callout a').pause(500);
