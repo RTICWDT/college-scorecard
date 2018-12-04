@@ -39,7 +39,8 @@ exports.config = {
     //
     capabilities: [{
         browserName: 'chrome',
-        maxDuration: 4000
+        maxDuration: 4000,
+        extendedDebugging: true
     }],
 
     //
@@ -108,7 +109,7 @@ exports.config = {
     // Test reporter for stdout.
     // The following are supported: dot (default), spec and xunit
     // see also: http://webdriver.io/guide/testrunner/reporters.html
-    reporter: 'dot',
+    reporter: 'spec',
 
     //
     // Options to be passed to Mocha.
