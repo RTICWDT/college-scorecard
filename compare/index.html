@@ -649,26 +649,37 @@ permalink: /compare/
                                         <span class="tooltip-target">
                                             <i class="fa fa-info-circle"></i>
                                         </span>
-                                    </h2>
+                                    </h2>{% for group in site.data.predominant_degrees %}
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
 
-                                    <div class="section-card_container-compare student-aid" data-pred-degree>
-                                        <div>
-                                            <div data-bind="school_section">
-                                                <div class="meter-wrapper" tabindex="0">
-                                                    <figure class="side-meter">
-                                                        <picc-side-meter
-                                                            class="debt"
-                                                            data-bind="federal_aid_meter">
-                                                        </picc-side-meter>
-                                                        <figcaption>
-                                                            <span data-bind="name">School Name</span>
-                                                            <span data-bind="federal_aid_percentage" class="sr-only"></span>
-                                                        </figcaption>
-                                                    </figure>
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
+
+                                            <div class="compare-degree_group">{{group.label}}</div>
+
+                                            <div class="meter-group_wrapper">
+                                                <div class="section-card_container-compare student-aid" data-pred-degree="{{group.key}}">
+                                                    <div>
+                                                        <div data-bind="school_section">
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter
+                                                                        class="debt"
+                                                                        data-bind="federal_aid_meter">
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="federal_aid_percentage" class="sr-only"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                            </div><!-- /.meter-group_wrapper -->
+
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
 
                                 </div><!-- /.student-aid -->
 
@@ -678,24 +689,36 @@ permalink: /compare/
                                         <span class="tooltip-target">
                                             <i class="fa fa-info-circle"></i>
                                         </span>
-                                    </h2>
+                                    </h2>{% for group in site.data.predominant_degrees %}
 
-                                    <div class="section-card_container-compare avg-loan-payment" data-pred-degree="{{group.key}}">
-                                        <div>
-                                            <div data-bind="school_section">
-                                                <div class="meter-wrapper" tabindex="0">
-                                                    <figure class="side-meter">
-                                                        <picc-side-meter {% include average_monthly_payment_meter_attributes.html %}>
-                                                        </picc-side-meter>
-                                                        <figcaption>
-                                                            <span data-bind="name">School Name</span>
-                                                            <span data-bind="average_monthly_loan_payment" class="sr-only"></span>
-                                                        </figcaption>
-                                                    </figure>
+                                    <div class="compare-container_group" data-pred-degree="{{group.key}}">
+
+                                        <div class="compare-group_wrapper" data-bind="compare_group">
+
+                                            <div class="compare-degree_group">{{group.label}}</div>
+
+                                            <div class="meter-group_wrapper">
+                                                <div class="section-card_container-compare avg-loan-payment" data-pred-degree="{{group.key}}">
+                                                    <div>
+                                                        <div data-bind="school_section">
+                                                            <div class="meter-wrapper" tabindex="0">
+                                                                <figure class="side-meter">
+                                                                    <picc-side-meter {% include average_monthly_payment_meter_attributes.html %}>
+                                                                    </picc-side-meter>
+                                                                    <figcaption>
+                                                                        <span data-bind="name">School Name</span>
+                                                                        <span data-bind="average_monthly_loan_payment" class="sr-only"></span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                            </div><!-- /.meter-group_wrapper -->
+
+                                        </div><!-- /.compare-group_wrapper -->
+
+                                    </div><!-- /.compare-container_group -->{% endfor %}
 
                                 </div><!-- /.avg-loan-payment -->
 
