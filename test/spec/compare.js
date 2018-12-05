@@ -609,7 +609,7 @@ describe('compare page ', function(){
     var sections = ['.compare-container_group[data-pred-degree="3"] > [data-bind="compare_group"]'];
 
     yield browser.selectorExecute(sections, function(groups){
-      return groups.every(function(g) {
+      return groups.every(function*(g) {
           return g.getAttribute('aria-hidden');
       });
     }).then(function(allHidden) {
@@ -633,7 +633,7 @@ describe('compare page ', function(){
     var sections = ['.compare-container_group[data-pred-degree="2"] > [data-bind="compare_group"]'];
 
     yield browser.selectorExecute(sections, function(groups){
-      return groups.every(function(g) {
+      return groups.every(function*(g) {
         return g.getAttribute('aria-hidden');
       });
     }).then(function(allHidden) {
@@ -687,7 +687,7 @@ describe('compare page ', function(){
     // test 4-year still visible
     yield browser
       .click('#compare_schools-edit h1 [aria-controls]')
-      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['four_year'][0]+'"]'); // removes only one 4yr
+      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['four_year'][0]+'"]').pause(250); // removes only one 4yr
 
     var sections = ['.compare-container_group[data-pred-degree="3"] > [data-bind="compare_group"]'];
 
@@ -701,7 +701,7 @@ describe('compare page ', function(){
 
     // test 4-year now hidden
     yield browser
-      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['four_year'][1]+'"]'); // removes the other 4yr
+      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['four_year'][1]+'"]').pause(250); // removes the other 4yr
 
     sections = ['.compare-container_group[data-pred-degree="3"] > [data-bind="compare_group"]'];
 
@@ -715,7 +715,7 @@ describe('compare page ', function(){
 
     // test 2-year still visible
     yield browser
-      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['two_year'][0]+'"]'); // removes only one 2yr
+      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['two_year'][0]+'"]').pause(250); // removes only one 2yr
 
     sections = ['.compare-container_group[data-pred-degree="2"] > [data-bind="compare_group"]'];
 
@@ -729,7 +729,7 @@ describe('compare page ', function(){
 
     // test 2-year now hidden
     yield browser
-      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['two_year'][1]+'"]'); // removes the other 2yr
+      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['two_year'][1]+'"]').pause(250); // removes the other 2yr
 
     sections = ['.compare-container_group[data-pred-degree="2"] > [data-bind="compare_group"]'];
 
@@ -743,7 +743,7 @@ describe('compare page ', function(){
 
     // test cert group still visible
     yield browser
-      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['cert'][0]+'"]'); // removes only one cert
+      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['cert'][0]+'"]').pause(250); // removes only one cert
 
     sections = ['.compare-container_group[data-pred-degree="1"] > [data-bind="compare_group"]'];
 
@@ -757,7 +757,7 @@ describe('compare page ', function(){
 
     // test cert group now hidden
     yield browser
-      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['cert'][1]+'"]'); // hides the other cert
+      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['cert'][1]+'"]').pause(250); // hides the other cert
 
     sections = ['.compare-container_group[data-pred-degree="1"] > [data-bind="compare_group"]'];
 
