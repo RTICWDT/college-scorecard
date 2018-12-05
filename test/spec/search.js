@@ -274,7 +274,7 @@ describe('search', function() {
   });
 
   // compare schools toggles on search results page
-  after(function() {
+  after(function*() {
     browser.localStorage('DELETE');
   });
 

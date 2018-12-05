@@ -289,14 +289,16 @@ describe('school page', function() {
     assert.equal(yield toggleAccordion('#finaid'), 'false');
   });
 
-  it('should redirect to FAFSA app if "Start My App" clicked', function*() {
+  xit('should redirect to FAFSA app if "Start My App" clicked', function*() {
     yield loadSchoolUrl('204635-Ohio-Northern-University');
     yield toggleAccordion('#finaid');
     yield browser.click('#finaid div.school-callout a').pause(500);
     var tabs = yield browser.getTabIds();
     assert.equal(tabs.length, 2);
     var url = yield browser.switchTab(tabs[1]).getUrl();
-    assert.equal(url, 'https://fafsa.ed.gov/FAFSA/app/fafsa');
+    assert.equal(url, 'https://fafsa.ed.gov/spa/fafsa');
+    // cleanup
+    yield browser.switchTab(tabs[0]);
   });
 
   /*
