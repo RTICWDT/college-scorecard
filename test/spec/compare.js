@@ -219,8 +219,10 @@ describe('compare page ', function(){
       // 'white_non_hispanic'
     ];
 
+    // open College Information accordion
     yield browser
       .click('#school h1 [aria-controls]');
+
     for(var i=0;i<options.length;i++) {
       yield browser
         .selectByValue('#race_ethnicity', options[i]).pause(500);
@@ -229,25 +231,6 @@ describe('compare page ', function(){
       var meterAttr = yield browser.getAttribute('.section-card_container-compare.race-ethnicity [data-school-id="'+schoolIDs[0]+'"] picc-side-meter', 'data-'+options[i]);
       var meterVal = yield browser.getAttribute('.section-card_container-compare.race-ethnicity [data-school-id="'+schoolIDs[0]+'"] picc-side-meter', 'value');
       var barVal = yield browser.getText('.section-card_container-compare.race-ethnicity [data-school-id="'+schoolIDs[0]+'"] .picc-side-meter-val');
-      // this is necessary because for whatever reason an undefined attribute value
-      // is '' for a data-<attribute> but `NaN` for the value attribute
-      if (meterAttr === 'NaN') meterAttr = '';
-      if (meterVal === 'NaN') meterVal = '';
-
-      assert.equal(meterAttr, meterVal);
-
-      // check that the bar value is represented as the percent formatted meter value ("0.0455" -> "5%")
-      if (meterVal >= 0.005) {
-        assert.equal((+meterVal * 100).toFixed(0)+'%', barVal);
-      } else if (meterVal) {
-        assert.equal('<1%', barVal);
-      }
-
-      // Test meter 2
-      meterAttr = yield browser.getAttribute('.section-card_container-compare.race-ethnicity [data-school-id="'+schoolIDs[1]+'"] picc-side-meter', 'data-'+options[i]);
-      meterVal = yield browser.getAttribute('.section-card_container-compare.race-ethnicity [data-school-id="'+schoolIDs[1]+'"] picc-side-meter', 'value');
-      barVal = yield browser.getText('.section-card_container-compare.race-ethnicity [data-school-id="'+schoolIDs[1]+'"] .picc-side-meter-val');
-
       // this is necessary because for whatever reason an undefined attribute value
       // is '' for a data-<attribute> but `NaN` for the value attribute
       if (meterAttr === 'NaN') meterAttr = '';
@@ -289,23 +272,10 @@ describe('compare page ', function(){
 
     yield browser
       .click('#cost h1 [aria-controls]');
+
     for(var i=0;i<options.length;i++) {
       yield browser
         .selectByValue('#net_price_income', options[i]).pause(500);
-
-      // Test meter 1
-      var meterAttr = yield browser.getAttribute('.section-card_container-compare.net-price-income [data-school-id="'+schoolIDs[0]+'"] picc-side-meter', 'data-'+options[i]);
-      var meterVal = yield browser.getAttribute('.section-card_container-compare.net-price-income [data-school-id="'+schoolIDs[0]+'"] picc-side-meter', 'value');
-      var barVal = yield browser.getText('.section-card_container-compare.net-price-income [data-school-id="'+schoolIDs[0]+'"] .picc-side-meter-val');
-
-      // this is necessary because for whatever reason an undefined attribute value
-      // is '' for a data-<attribute> but `NaN` for the value attribute
-      if (isNaN(meterAttr)) meterAttr = '';
-      if (isNaN(meterVal)) meterVal = '';
-      if (meterVal === '' && !barVal) barVal = '$0';
-
-      assert.equal(meterAttr, meterVal);
-      assert.equal('$'+(+meterVal).toLocaleString('en'), barVal);
 
       // Test meter 2
       meterAttr = yield browser.getAttribute('.section-card_container-compare.net-price-income [data-school-id="'+schoolIDs[1]+'"] picc-side-meter', 'data-'+options[i]);
@@ -356,153 +326,77 @@ describe('compare page ', function(){
 
 
   it('should add [aria-pressed="true"] to the selected school highlight button', function*(){
-
     var highlighted = yield browser
       .click('#compare_schools-edit h1 [aria-controls]')
       .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]') // first click - on
       .waitForExist('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"][aria-pressed="true"]') // space out subsequent clicks
       .getAttribute('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]', 'aria-pressed');
-
-      assert.equal(highlighted, 'true');
-
-      //cleanup
-      yield browser.click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]'); // second click -off
-      yield browser.click('#compare_schools-edit h1 [aria-controls]'); // close dropdown
+    assert.equal(highlighted, 'true');
   });
 
   it('should toggle back to [aria-pressed="false"] on the subsequent click on the selected school highlight button', function*(){
-
+    // compare and highlight dropdown still open
     var highlighted = yield browser
-      .click('#compare_schools-edit h1 [aria-controls]')
-      .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]') // first click - on
-      .waitForExist('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"][aria-pressed="true"]') // space out subsequent clicks
       .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]') // second click - off
       .getAttribute('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]', 'aria-pressed');
-
     assert.equal(highlighted, 'false');
-
-    // cleanup
-    yield browser.click('#compare_schools-edit h1 [aria-controls]'); // close dropdown
   });
 
   it('should toggle a previously highlighted school selection off when a different school is selected', function*(){
-
+    // compare and highlight dropdown still open
     var highlighted = yield browser
-      .click('#compare_schools-edit h1 [aria-controls]')
       .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]') // first school click - on
       .waitForExist('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"][aria-pressed="true"]') // space out subsequent clicks
       .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]') // second school click - on
       .getAttribute('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]', 'aria-pressed');
-
     assert.equal(highlighted, 'false');
-
-    // clean up
-    yield browser.click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]'); // second school click - off
-    yield browser.click('#compare_schools-edit h1 [aria-controls]'); // close dropdown
   });
 
   it('should highlight corresponding selected school in the Average Cost main meter', function*(){
-    // open compare and highlight dropdown
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]');
-
     // test school #1
+    // compare and highlight dropdown still open
     yield browser
       .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
 
     var highlighted = yield getMeterHighlightForSchool('average-cost', schoolIDs[0]);
     assert.equal(highlighted[0], 'true');
 
-    // test school #2
-    yield browser
-      .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
-
-    highlighted = yield getMeterHighlightForSchool('average-cost', schoolIDs[1]);
-    assert.equal(highlighted[0], 'true');
-
-    //cleanup
-    yield browser.click('#compare_schools-edit h1 [aria-controls]'); // close dropdown
   });
 
   it('should highlight corresponding selected school in the Grad Rate main meter', function*(){
-    // open compare and highlight dropdown
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]');
-
-    // test school #1
-    yield browser
-      .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
-
-    var highlighted = yield getMeterHighlightForSchool('grad-rate', schoolIDs[0]);
-    assert.equal(highlighted[0], 'true');
 
     // test school #2
+    // compare and highlight dropdown still open
     yield browser
       .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
 
-    highlighted = yield getMeterHighlightForSchool('grad-rate', schoolIDs[1]);
+    var highlighted = yield getMeterHighlightForSchool('grad-rate', schoolIDs[1]);
     assert.equal(highlighted[0], 'true');
-
-    //cleanup
-    yield browser.click('#compare_schools-edit h1 [aria-controls]');
   });
 
   it('should highlight corresponding selected school in the Salary Earnings main meter', function*(){
-    // open compare and highlight dropdown
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]');
-
     // test school #1
+    // compare and highlight dropdown still open
     yield browser
       .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
 
     var highlighted = yield getMeterHighlightForSchool('average-salary', schoolIDs[0]);
     assert.equal(highlighted[0], 'true');
-
-    // test school #2
-    yield browser
-      .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
-
-    highlighted = yield getMeterHighlightForSchool('average-salary', schoolIDs[1]);
-    assert.equal(highlighted[0], 'true');
-
-    //cleanup
-    yield browser.click('#compare_schools-edit h1 [aria-controls]');
   });
 
   it('should highlight corresponding selected school in the Full Time percent meter in College Information accordion', function*(){
-    // open compare and highlight dropdown
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]');
-
-    // test school #1
-    yield browser
-      .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
-
-    yield toggleAccordion('#school');
-
-    var highlighted = yield getMeterHighlightForSchool('school-summary', schoolIDs[0]);
-    assert.equal(highlighted, 'true');
-
     // test school #2
+    // compare and highlight dropdown still open
     yield browser
-      .click('#compare_schools-edit h1 [aria-controls]')
       .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
 
     yield toggleAccordion('#school');
 
-    highlighted = yield getMeterHighlightForSchool('school-summary', schoolIDs[1]);
+    var highlighted = yield getMeterHighlightForSchool('school-summary', schoolIDs[1]);
     assert.equal(highlighted, 'true');
-
-    //cleanup
-    yield browser.click('#compare_schools-edit h1 [aria-controls]');
   });
 
   it('should highlight corresponding selected school in the Socio-Economic Diversity meter in College Information accordion', function*(){
-    // open compare and highlight dropdown
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]');
-
     // test school #1
     yield browser
       .click('#compare_schools-edit h1 [aria-controls]')
@@ -512,54 +406,21 @@ describe('compare page ', function(){
 
     var highlighted = yield getMeterHighlightForSchool('school-diversity', schoolIDs[0]);
     assert.equal(highlighted, 'true');
-
-    // test school #2
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]')
-      .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
-
-    yield toggleAccordion('#school');
-
-    highlighted = yield getMeterHighlightForSchool('school-diversity', schoolIDs[1]);
-    assert.equal(highlighted, 'true');
-
-    //cleanup
-    yield browser.click('#compare_schools-edit h1 [aria-controls]');
   });
 
   it('should highlight corresponding selected school in the Race/Ethnicity meter in College Information accordion', function*(){
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]');
-
-    // test school #1
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]')
-      .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
-
-    yield toggleAccordion('#school');
-
-    var highlighted = yield getMeterHighlightForSchool('race-ethnicity', schoolIDs[0]);
-    assert.equal(highlighted, 'true');
-
     // test school #2
-
     yield browser
       .click('#compare_schools-edit h1 [aria-controls]')
       .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
 
     yield toggleAccordion('#school');
 
-    highlighted = yield getMeterHighlightForSchool('race-ethnicity', schoolIDs[1]);
+    var highlighted = yield getMeterHighlightForSchool('race-ethnicity', schoolIDs[1]);
     assert.equal(highlighted, 'true');
-
-    //cleanup
-    yield browser.click('#compare_schools-edit h1 [aria-controls]');
   });
 
   it('should highlight corresponding selected school in the Average Cost meter in Costs accordion', function*(){
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]');
-
     // test school #1
     yield browser
       .click('#compare_schools-edit h1 [aria-controls]')
@@ -569,54 +430,21 @@ describe('compare page ', function(){
 
     var highlighted = yield getMeterHighlightForSchool('avg-cost', schoolIDs[0]);
     assert.equal(highlighted, 'true');
-
-    // test school #2
-
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]')
-      .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
-
-    yield toggleAccordion('#cost');
-
-    highlighted = yield getMeterHighlightForSchool('avg-cost', schoolIDs[1]);
-    assert.equal(highlighted, 'true');
-
-    //cleanup
-    yield browser.click('#compare_schools-edit h1 [aria-controls]');
   });
 
   it('should highlight corresponding selected school in the By Family Income cost meter in Costs accordion', function*(){
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]');
-
-    // test school #1
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]')
-      .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
-
-    yield toggleAccordion('#cost');
-
-    var highlighted = yield getMeterHighlightForSchool('net-price-income', schoolIDs[0]);
-    assert.equal(highlighted, 'true');
-
     // test school #2
-
     yield browser
       .click('#compare_schools-edit h1 [aria-controls]')
       .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
 
     yield toggleAccordion('#cost');
 
-    highlighted = yield getMeterHighlightForSchool('net-price-income', schoolIDs[1]);
+    var highlighted = yield getMeterHighlightForSchool('net-price-income', schoolIDs[1]);
     assert.equal(highlighted, 'true');
-
-    //cleanup
-    yield browser.click('#compare_schools-edit h1 [aria-controls]');
   });
 
   it('should highlight corresponding selected school in the Students Paying Down Their Debt meter in Financial Aid & Debt accordion', function*(){
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]');
 
     // test school #1
     yield browser
@@ -627,35 +455,9 @@ describe('compare page ', function(){
 
     var highlighted = yield getMeterHighlightForSchool('repayment-rate', schoolIDs[0]);
     assert.equal(highlighted, 'true');
-
-    // test school #2
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]')
-      .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
-
-    yield toggleAccordion('#finaid');
-
-    highlighted = yield getMeterHighlightForSchool('repayment-rate', schoolIDs[1]);
-    assert.equal(highlighted, 'true');
-
-    //cleanup
-    yield browser.click('#compare_schools-edit h1 [aria-controls]');
   });
 
   it('should highlight corresponding selected school in the Total Typical Debt meter in Financial Aid & Debt accordion', function*(){
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]');
-
-    // test school #1
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]')
-      .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
-
-    yield toggleAccordion('#finaid');
-
-    var highlighted = yield getMeterHighlightForSchool('avg-debt', schoolIDs[0]);
-    assert.equal(highlighted, 'true');
-
     // test school #2
     yield browser
       .click('#compare_schools-edit h1 [aria-controls]')
@@ -663,17 +465,11 @@ describe('compare page ', function(){
 
     yield toggleAccordion('#finaid');
 
-    highlighted = yield getMeterHighlightForSchool('avg-debt', schoolIDs[1]);
+    var highlighted = yield getMeterHighlightForSchool('avg-debt', schoolIDs[1]);
     assert.equal(highlighted, 'true');
-
-    //cleanup
-    yield browser.click('#compare_schools-edit h1 [aria-controls]');
   });
 
   it('should highlight corresponding selected school in the Students Receiving Federal Loans meter in Financial Aid & Debt accordion', function*(){
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]');
-
     // test school #1
     yield browser
       .click('#compare_schools-edit h1 [aria-controls]')
@@ -683,35 +479,9 @@ describe('compare page ', function(){
 
     var highlighted = yield getMeterHighlightForSchool('student-aid', schoolIDs[0]);
     assert.equal(highlighted, 'true');
-
-    // test school #2
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]')
-      .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
-
-    yield toggleAccordion('#finaid');
-
-    highlighted = yield getMeterHighlightForSchool('student-aid', schoolIDs[1]);
-    assert.equal(highlighted, 'true');
-
-    //cleanup
-    yield browser.click('#compare_schools-edit h1 [aria-controls]');
   });
 
   it('should highlight corresponding selected school in the Typical Monthly Loan Payment meter in Financial Aid & Debt accordion', function*(){
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]');
-
-    // test school #1
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]')
-      .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
-
-    yield toggleAccordion('#finaid');
-
-    var highlighted = yield getMeterHighlightForSchool('avg-loan-payment', schoolIDs[0]);
-    assert.equal(highlighted, 'true');
-
     // test school #2
     yield browser
       .click('#compare_schools-edit h1 [aria-controls]')
@@ -719,17 +489,11 @@ describe('compare page ', function(){
 
     yield toggleAccordion('#finaid');
 
-    highlighted = yield getMeterHighlightForSchool('avg-loan-payment', schoolIDs[1]);
+    var highlighted = yield getMeterHighlightForSchool('avg-loan-payment', schoolIDs[1]);
     assert.equal(highlighted, 'true');
-
-    //cleanup
-    yield browser.click('#compare_schools-edit h1 [aria-controls]');
   });
 
   it('should highlight corresponding selected school in the Graduation Rate meter in Graduation & Retention accordion', function*(){
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]');
-
     // test school #1
     yield browser
       .click('#compare_schools-edit h1 [aria-controls]')
@@ -739,35 +503,9 @@ describe('compare page ', function(){
 
     var highlighted = yield getMeterHighlightForSchool('completion-rate', schoolIDs[0]);
     assert.equal(highlighted, 'true');
-
-    // test school #2
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]')
-      .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
-
-    yield toggleAccordion('#graduation');
-
-    highlighted = yield getMeterHighlightForSchool('completion-rate', schoolIDs[1]);
-    assert.equal(highlighted, 'true');
-
-    //cleanup
-    yield browser.click('#compare_schools-edit h1 [aria-controls]');
   });
 
   it('should highlight corresponding selected school in the Students Who Return After Their First Year meter in Graduation & Retention accordion', function*(){
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]');
-
-    // test school #1
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]')
-      .click('.button-highlight_schools[data-school-id="'+schoolIDs[0]+'"]');
-
-    yield toggleAccordion('#graduation');
-
-    var highlighted = yield getMeterHighlightForSchool('grad-retention', schoolIDs[0]);
-    assert.equal(highlighted, 'true');
-
     // test school #2
     yield browser
       .click('#compare_schools-edit h1 [aria-controls]')
@@ -775,17 +513,11 @@ describe('compare page ', function(){
 
     yield toggleAccordion('#graduation');
 
-    highlighted = yield getMeterHighlightForSchool('grad-retention', schoolIDs[1]);
+    var highlighted = yield getMeterHighlightForSchool('grad-retention', schoolIDs[1]);
     assert.equal(highlighted, 'true');
-
-    //cleanup
-    yield browser.click('#compare_schools-edit h1 [aria-controls]');
   });
 
   it('should highlight corresponding selected school in the Salary After Attending meter in Earnings After School accordion', function*(){
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]');
-
     // test school #1
     yield browser
       .click('#compare_schools-edit h1 [aria-controls]')
@@ -796,18 +528,7 @@ describe('compare page ', function(){
     var highlighted = yield getMeterHighlightForSchool('avg-salary', schoolIDs[0]);
     assert.equal(highlighted, 'true');
 
-    // test school #2
-    yield browser
-      .click('#compare_schools-edit h1 [aria-controls]')
-      .click('.button-highlight_schools[data-school-id="'+schoolIDs[1]+'"]');
-
-    yield toggleAccordion('#earnings');
-
-    highlighted = yield getMeterHighlightForSchool('avg-salary', schoolIDs[1]);
-    assert.equal(highlighted, 'true');
-
     //cleanup
-    yield browser.click('#compare_schools-edit h1 [aria-controls]');
     yield selectCompareSchools(schoolIDs[0]);
     yield selectCompareSchools(schoolIDs[1]);
   });
@@ -888,7 +609,7 @@ describe('compare page ', function(){
     var sections = ['.compare-container_group[data-pred-degree="3"] > [data-bind="compare_group"]'];
 
     yield browser.selectorExecute(sections, function(groups){
-      return groups.every(function(g) {
+      return groups.every(function*(g) {
           return g.getAttribute('aria-hidden');
       });
     }).then(function(allHidden) {
@@ -912,7 +633,7 @@ describe('compare page ', function(){
     var sections = ['.compare-container_group[data-pred-degree="2"] > [data-bind="compare_group"]'];
 
     yield browser.selectorExecute(sections, function(groups){
-      return groups.every(function(g) {
+      return groups.every(function*(g) {
         return g.getAttribute('aria-hidden');
       });
     }).then(function(allHidden) {
@@ -966,7 +687,7 @@ describe('compare page ', function(){
     // test 4-year still visible
     yield browser
       .click('#compare_schools-edit h1 [aria-controls]')
-      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['four_year'][0]+'"]');
+      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['four_year'][0]+'"]').pause(250); // removes only one 4yr
 
     var sections = ['.compare-container_group[data-pred-degree="3"] > [data-bind="compare_group"]'];
 
@@ -980,7 +701,7 @@ describe('compare page ', function(){
 
     // test 4-year now hidden
     yield browser
-      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['four_year'][1]+'"]');
+      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['four_year'][1]+'"]').pause(250); // removes the other 4yr
 
     sections = ['.compare-container_group[data-pred-degree="3"] > [data-bind="compare_group"]'];
 
@@ -994,7 +715,7 @@ describe('compare page ', function(){
 
     // test 2-year still visible
     yield browser
-      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['two_year'][0]+'"]');
+      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['two_year'][0]+'"]').pause(250); // removes only one 2yr
 
     sections = ['.compare-container_group[data-pred-degree="2"] > [data-bind="compare_group"]'];
 
@@ -1008,7 +729,7 @@ describe('compare page ', function(){
 
     // test 2-year now hidden
     yield browser
-      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['two_year'][1]+'"]');
+      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['two_year'][1]+'"]').pause(250); // removes the other 2yr
 
     sections = ['.compare-container_group[data-pred-degree="2"] > [data-bind="compare_group"]'];
 
@@ -1022,7 +743,7 @@ describe('compare page ', function(){
 
     // test cert group still visible
     yield browser
-      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['cert'][0]+'"]');
+      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['cert'][0]+'"]').pause(250); // removes only one cert
 
     sections = ['.compare-container_group[data-pred-degree="1"] > [data-bind="compare_group"]'];
 
@@ -1036,7 +757,7 @@ describe('compare page ', function(){
 
     // test cert group now hidden
     yield browser
-      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['cert'][1]+'"]');
+      .click('.edit-compare-list-item .checkbox[data-school-id="'+schoolIDsByType['cert'][1]+'"]').pause(250); // hides the other cert
 
     sections = ['.compare-container_group[data-pred-degree="1"] > [data-bind="compare_group"]'];
 
