@@ -1,5 +1,10 @@
-// document.registerElement() polyfill
+
+require('es6-shim');
+
+// window.customElements() polyfills
 require('document-register-element');
+require('@webcomponents/custom-elements');
+require('./html-base-custom-element');
 
 // CustomEvent polyfill
 require('./compat/custom-event');

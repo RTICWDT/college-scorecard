@@ -4,104 +4,122 @@
   var HIDDEN = 'aria-hidden';
   var TOGGLE_EVENTS = ['click'];
 
-  exports.ARIAAccordion = document.registerElement('aria-accordion', {
-    prototype: Object.create(
-      HTMLElement.prototype,
-      {
-        attachedCallback: {value: function() {
-          var trigger = this.__trigger = getTrigger(this);
-          if (!trigger) {
-            return;
-          }
+  function ARIAAccordion() {
+    var self = Reflect.construct(HTMLBaseCustomElement, [], this.constructor);
+    return self;
+  }
 
-          var content = this.__content = getContent(this, trigger);
-          if (!content) {
-            return;
-          }
+  ARIAAccordion.prototype = Object.create(HTMLBaseCustomElement.prototype);
+  ARIAAccordion.prototype.constructor = ARIAAccordion;
+  Object.setPrototypeOf(ARIAAccordion, HTMLBaseCustomElement);
 
-          trigger.setAttribute('tabindex', 0);
+  ARIAAccordion.observedAttributes = ['trigger', 'aria-controls', 'aria-expanded', 'aria-hidden'];
 
-          // set role="button" on the trigger element if it's not a <button>
-          if (trigger.nodeName !== 'BUTTON' && !trigger.hasAttribute('role')) {
-            trigger.setAttribute('role', 'button');
-          }
+  ARIAAccordion.prototype.connectedCallback = function() {
+    this.setup();
+  };
 
-          // reflect the aria-expanded attribute of the accordion to the
-          // trigger (button) if the attribute is unset
-          if (!trigger.hasAttribute(EXPANDED)) {
-            trigger.setAttribute(EXPANDED, getAriaBoolean(this, EXPANDED));
-          }
+  ARIAAccordion.prototype.childrenAvailableCallback = function() {
 
-          var toggle = this.toggle.bind(this);
-          var toggleAndCancel = this.__toggleAndCancel = function(e) {
-            toggle();
-            e.preventDefault();
-            return false;
-          };
+    this.parsed = true;
+    var trigger = this.__trigger = getTrigger(this);
+    if (!trigger) {
+      return;
+    };
 
-          TOGGLE_EVENTS.forEach(function(event) {
-            trigger.addEventListener(event, toggleAndCancel);
-          });
+    var content = this.__content = getContent(this, trigger);
+    if (!content) {
+      return;
+    };
 
+    trigger.setAttribute('tabindex', 0);
+
+    // set role="button" on the trigger element if it's not a <button>
+    if (trigger.nodeName !== 'BUTTON' && !trigger.hasAttribute('role')) {
+      trigger.setAttribute('role', 'button');
+    }
+
+    // reflect the aria-expanded attribute of the accordion to the
+    // trigger (button) if the attribute is unset
+    if (!trigger.hasAttribute(EXPANDED)) {
+      trigger.setAttribute(EXPANDED, getAriaBoolean(this, EXPANDED));
+    }
+
+    var toggle = this.toggle.bind(this);
+    var toggleAndCancel = this.__toggleAndCancel = function(e) {
+      toggle();
+      e.preventDefault();
+      return false;
+    };
+
+    TOGGLE_EVENTS.forEach(function(event) {
+      trigger.addEventListener(event, toggleAndCancel);
+    });
+
+    this.update();
+
+  };
+
+  ARIAAccordion.prototype.attributeChangedCallback = function (attr, old, value) {
+
+  };
+
+  ARIAAccordion.prototype.disconnectedCallback = function() {
+    var trigger = this.__trigger;
+    if (!trigger) return;
+    var toggleAndCancel = this.__toggleAndCancel;
+    TOGGLE_EVENTS.forEach(function(event) {
+      trigger.removeEventListener(event, toggleAndCancel);
+    });
+  };
+
+  Object.defineProperties(ARIAAccordion.prototype, {
+    "expanded": {
+      get: function () {
+        return getAriaBoolean(this.__trigger, EXPANDED);
+      },
+      set: function (value) {
+        value = !!value;
+        if (value !== this.expanded && this.__trigger) {
+          this.__trigger.setAttribute(EXPANDED, value);
           this.update();
-        }},
-
-        detachedCallback: {value: function() {
-          var trigger = this.__trigger;
-          if (!trigger) return;
-          var toggleAndCancel = this.__toggleAndCancel;
-          TOGGLE_EVENTS.forEach(function(event) {
-            trigger.removeEventListener(event, toggleAndCancel);
-          });
-        }},
-
-        update: {value: function() {
-          var expanded = this.expanded;
-          this.setAttribute(EXPANDED, expanded);
-          this.__trigger.setAttribute(EXPANDED, expanded);
-          this.__content.setAttribute(HIDDEN, !expanded);
-        }},
-
-        expanded: {
-          get: function() {
-            return getAriaBoolean(this.__trigger, EXPANDED);
-          },
-          set: function(value) {
-            value = !!value;
-            if (value !== this.expanded && this.__trigger) {
-              this.__trigger.setAttribute(EXPANDED, value);
-              this.update();
-              this.dispatchEvent(new CustomEvent(value ? 'open' : 'close'));
-            }
-          }
-        },
-
-        open: {value: function() {
-          this.expanded = true;
-        }},
-
-        close: {value: function() {
-          this.expanded = false;
-        }},
-
-        toggle: {value: function() {
-          this.expanded = !this.expanded;
-        }},
-
-        trigger: {
-          get: function() {
-            return this.__trigger;
-          }
-        },
-
-        content: {
-          get: function() {
-            return this.__content;
-          }
+          this.dispatchEvent(new CustomEvent(value ? 'open' : 'close'));
         }
       }
-    )
+    }
   });
+
+  ARIAAccordion.prototype.update = function() {
+    var expanded = this.expanded;
+    this.setAttribute(EXPANDED, expanded);
+    this.__trigger.setAttribute(EXPANDED, expanded);
+    this.__content.setAttribute(HIDDEN, !expanded);
+  };
+
+  ARIAAccordion.prototype.open = function() {
+    this.expanded = true;
+  };
+
+  ARIAAccordion.prototype.close = function() {
+    this.expanded = false;
+  };
+
+  ARIAAccordion.prototype.toggle = function() {
+    this.expanded = !this.expanded;
+  };
+
+  ARIAAccordion.prototype.trigger = {
+    get: function() {
+      return this.__trigger;
+    }
+  };
+
+  ARIAAccordion.prototype.content = {
+    get: function() {
+      return this.__content;
+    }
+  };
+
 
   function getTrigger(root) {
     var selector = root.getAttribute('trigger') || '[aria-controls]';
@@ -126,5 +144,7 @@
   function getAriaBoolean(el, attr) {
     return el && el.hasAttribute(attr) && el.getAttribute(attr) !== 'false';
   }
+
+  exports.customElements.define('aria-accordion', ARIAAccordion);
 
 })(window);
