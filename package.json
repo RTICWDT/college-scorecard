@@ -21,6 +21,7 @@
     "test-ci": "wdio test/wdio.ci.js"
   },
   "dependencies": {
+    "@webcomponents/custom-elements": "^1.2.1",
     "aight": "^2.1.1",
     "async": "*",
     "d3": "^3.5.9",
@@ -34,7 +35,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
-    "@webcomponents/custom-elements": "^1.2.1",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/preset-env": "^7.3.1",
     "babelify": "^10.0.0",
     "browserify": "^12.0.1",
     "es6-shim": "^0.35.4",
