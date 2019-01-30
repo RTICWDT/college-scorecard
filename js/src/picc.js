@@ -1957,7 +1957,7 @@ picc.form.prepareParams = (function() {
       }
     }
 
-    for (key in query) {
+    for (var key in query) {
       if (query[key] === null || query[key] === undefined) {
         delete query[key];
       }

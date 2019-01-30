@@ -225,4 +225,4 @@
     return String(a) === String(b);
   }
 
-})(this);
+})(window);

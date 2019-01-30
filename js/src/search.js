@@ -506,8 +506,8 @@ module.exports = function search() {
       // console.log('diff types:', typeof a, typeof b);
       return true;
     } else if (typeof a === 'object') {
-      for (k in a) if (diff(a[k], b[k])) return true;
-      for (k in b) if (diff(a[k], b[k])) return true;
+      for (var k in a) if (diff(a[k], b[k])) return true;
+      for (var k in b) if (diff(a[k], b[k])) return true;
       return false;
     }
     return a != b;
