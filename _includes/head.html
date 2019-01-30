@@ -64,6 +64,10 @@
 
   <!-- Scripts
   ================================================== -->
+
+  <!-- CustomElements v1 polyfill -->
+  <script>this.customElements||document.write('<script src="//unpkg.com/document-register-element"><\x2fscript>');</script>
+
   {% for script in site.scripts %}
   <script src="{{ site.baseurl }}/js/{{ script }}"></script>
   {% endfor %}
@@ -84,5 +88,7 @@
       a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
   </script>
   {% comment %} End crazyegg {% endcomment %}{% endif site.branch %}
+
+
 
 </head>
