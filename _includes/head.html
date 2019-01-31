@@ -65,9 +65,6 @@
   <!-- Scripts
   ================================================== -->
 
-  <!-- CustomElements v1 polyfill -->
-  <script>this.customElements||document.write('<script src="//unpkg.com/document-register-element"><\x2fscript>');</script>
-
   {% for script in site.scripts %}
   <script src="{{ site.baseurl }}/js/{{ script }}"></script>
   {% endfor %}
