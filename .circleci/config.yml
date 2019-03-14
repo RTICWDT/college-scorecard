@@ -7,7 +7,7 @@ buildtest: &buildtest
 
     # Restore npm modules
     - restore_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
+        key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
 
     - run:
         name: Install phantomjs
