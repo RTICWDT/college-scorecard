@@ -7,7 +7,7 @@ buildtest: &buildtest
 
     # Restore npm modules
     - restore_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
+        key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
 
     - run:
         name: Install phantomjs
@@ -22,7 +22,7 @@ buildtest: &buildtest
         command: npm install
 
     - save_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
+        key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
         paths:
           - node_modules
 
@@ -65,7 +65,7 @@ jobs:
   build_and_test:
     <<: *buildtest
     docker:
-      - image: circleci/node:4.8
+      - image: circleci/node:7.10
         environment:
           TEST_REPORTS_CI: test/reports
 
