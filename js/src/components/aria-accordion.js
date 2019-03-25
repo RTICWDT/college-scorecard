@@ -3,105 +3,99 @@
   var EXPANDED = 'aria-expanded';
   var HIDDEN = 'aria-hidden';
   var TOGGLE_EVENTS = ['click'];
+  var HTMLParsedElement = require('./html-parsed-element');
 
-  exports.ARIAAccordion = document.registerElement('aria-accordion', {
-    prototype: Object.create(
-      HTMLElement.prototype,
-      {
-        attachedCallback: {value: function() {
-          var trigger = this.__trigger = getTrigger(this);
-          if (!trigger) {
-            return;
-          }
+  exports.customElements.define(
+    'aria-accordion',
+    class extends HTMLParsedElement {
+      parsedCallback() {
 
-          var content = this.__content = getContent(this, trigger);
-          if (!content) {
-            return;
-          }
+        var trigger = this.__trigger = getTrigger(this);
+        if (!trigger) {
+          return;
+        }
 
-          trigger.setAttribute('tabindex', 0);
+        var content = this.__content = getContent(this, trigger);
+        if (!content) {
+          return;
+        }
 
-          // set role="button" on the trigger element if it's not a <button>
-          if (trigger.nodeName !== 'BUTTON' && !trigger.hasAttribute('role')) {
-            trigger.setAttribute('role', 'button');
-          }
+        trigger.setAttribute('tabindex', 0);
 
-          // reflect the aria-expanded attribute of the accordion to the
-          // trigger (button) if the attribute is unset
-          if (!trigger.hasAttribute(EXPANDED)) {
-            trigger.setAttribute(EXPANDED, getAriaBoolean(this, EXPANDED));
-          }
+        // set role="button" on the trigger element if it's not a <button>
+        if (trigger.nodeName !== 'BUTTON' && !trigger.hasAttribute('role')) {
+          trigger.setAttribute('role', 'button');
+        }
 
-          var toggle = this.toggle.bind(this);
-          var toggleAndCancel = this.__toggleAndCancel = function(e) {
-            toggle();
-            e.preventDefault();
-            return false;
-          };
+        // reflect the aria-expanded attribute of the accordion to the
+        // trigger (button) if the attribute is unset
+        if (!trigger.hasAttribute(EXPANDED)) {
+          trigger.setAttribute(EXPANDED, getAriaBoolean(this, EXPANDED));
+        }
 
-          TOGGLE_EVENTS.forEach(function(event) {
-            trigger.addEventListener(event, toggleAndCancel);
-          });
+        var toggle = this.toggle.bind(this);
+        var toggleAndCancel = this.__toggleAndCancel = function(e) {
+          toggle();
+          e.preventDefault();
+          return false;
+        };
 
+        TOGGLE_EVENTS.forEach(function(event) {
+          trigger.addEventListener(event, toggleAndCancel);
+        });
+
+        this.update();
+      }
+
+      disconnectedCallback() {
+        var trigger = this.__trigger;
+        if (!trigger) return;
+        var toggleAndCancel = this.__toggleAndCancel;
+        TOGGLE_EVENTS.forEach(function(event) {
+          trigger.removeEventListener(event, toggleAndCancel);
+        });
+      }
+
+      update() {
+        var expanded = this.expanded;
+        this.setAttribute(EXPANDED, expanded);
+        this.__trigger.setAttribute(EXPANDED, expanded);
+        this.__content.setAttribute(HIDDEN, !expanded);
+      }
+
+      get expanded() {
+          return getAriaBoolean(this.__trigger, EXPANDED);
+      }
+      set expanded(value) {
+        value = !!value;
+        if (value !== this.expanded && this.__trigger) {
+          this.__trigger.setAttribute(EXPANDED, value);
           this.update();
-        }},
-
-        detachedCallback: {value: function() {
-          var trigger = this.__trigger;
-          if (!trigger) return;
-          var toggleAndCancel = this.__toggleAndCancel;
-          TOGGLE_EVENTS.forEach(function(event) {
-            trigger.removeEventListener(event, toggleAndCancel);
-          });
-        }},
-
-        update: {value: function() {
-          var expanded = this.expanded;
-          this.setAttribute(EXPANDED, expanded);
-          this.__trigger.setAttribute(EXPANDED, expanded);
-          this.__content.setAttribute(HIDDEN, !expanded);
-        }},
-
-        expanded: {
-          get: function() {
-            return getAriaBoolean(this.__trigger, EXPANDED);
-          },
-          set: function(value) {
-            value = !!value;
-            if (value !== this.expanded && this.__trigger) {
-              this.__trigger.setAttribute(EXPANDED, value);
-              this.update();
-              this.dispatchEvent(new CustomEvent(value ? 'open' : 'close'));
-            }
-          }
-        },
-
-        open: {value: function() {
-          this.expanded = true;
-        }},
-
-        close: {value: function() {
-          this.expanded = false;
-        }},
-
-        toggle: {value: function() {
-          this.expanded = !this.expanded;
-        }},
-
-        trigger: {
-          get: function() {
-            return this.__trigger;
-          }
-        },
-
-        content: {
-          get: function() {
-            return this.__content;
-          }
+          this.dispatchEvent(new CustomEvent(value ? 'open' : 'close'));
         }
       }
-    )
-  });
+
+      open() {
+        this.expanded = true;
+      }
+
+      close() {
+        this.expanded = false;
+      }
+
+      toggle() {
+        this.expanded = !this.expanded;
+      }
+
+      get trigger() {
+        return this.__trigger;
+      }
+
+      get content() {
+        return this.__content;
+      }
+    }
+  );
 
   function getTrigger(root) {
     var selector = root.getAttribute('trigger') || '[aria-controls]';

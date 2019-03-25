@@ -1,6 +1,3 @@
-// document.registerElement() polyfill
-require('document-register-element');
-
 // CustomEvent polyfill
 require('./compat/custom-event');
 

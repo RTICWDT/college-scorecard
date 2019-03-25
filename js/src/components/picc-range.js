@@ -1,14 +1,17 @@
-var ELEMENT_NAME = 'picc-range';
-var CLASS_PREFIX = ELEMENT_NAME + '-';
+(function(exports) {
+  var ELEMENT_NAME = 'picc-range';
+  var CLASS_PREFIX = ELEMENT_NAME + '-';
+  var LABEL_TYPES = ['min', 'max', 'lower', 'middle', 'upper'];
 
-var LABEL_TYPES = ['min', 'max', 'lower', 'middle', 'upper'];
+  var HTMLParsedElement = require('./html-parsed-element');
+  exports.customElements.define(
+    ELEMENT_NAME,
+    class extends HTMLParsedElement {
+      static get observedAttributes() {
+        return ['min', 'max', 'lower', 'middle', 'upper'];
+      }
 
-window.PICCRange = document.registerElement(ELEMENT_NAME, {
-  prototype: Object.create(
-    HTMLElement.prototype,
-    {
-
-      attachedCallback: {value: function() {
+      parsedCallback() {
         if(!this.querySelector('.' + CLASS_PREFIX + 'bar')) {
           var bar = this.appendChild(document.createElement('div'));
           bar.className = CLASS_PREFIX + 'bar';
@@ -29,9 +32,9 @@ window.PICCRange = document.registerElement(ELEMENT_NAME, {
         this.upper = getAttr(this, 'upper');
 
         this.update();
-      }},
+      }
 
-      attributeChangedCallback: {value: function(attr, prev, value) {
+      attributeChangedCallback(attr, prev, value) {
         // pass through attribute settings to properties for min,
         // max, lower and upper values
         switch (attr) {
@@ -43,9 +46,9 @@ window.PICCRange = document.registerElement(ELEMENT_NAME, {
             this[attr] = value;
             return;
         }
-      }},
+      }
 
-      update: {value: function() {
+      update() {
         var min = this.min;
         var max = this.max;
 
@@ -79,84 +82,75 @@ window.PICCRange = document.registerElement(ELEMENT_NAME, {
         }, this);
 
         delete this.__timeout;
-      }},
+      }
 
-      min: {
-        get: function() {
-          return this.__min;
-        },
-        set: function(value) {
-          this.__min = number(value, 0);
-          deferUpdate(this);
-        }
-      },
+      get min() {
+        return this.__min;
+      }
+      set min(value) {
+        this.__min = number(value, 0);
+        deferUpdate(this);
+      }
 
-      max: {
-        get: function() {
-          return this.__max;
-        },
-        set: function(value) {
-          this.__max = number(value);
-          deferUpdate(this);
-        }
-      },
+      get max() {
+        return this.__max;
+      }
+      set max(value) {
+        this.__max = number(value);
+        deferUpdate(this);
+      }
 
-      lower: {
-        get: function() {
-          return this.__lower;
-        },
-        set: function(value) {
-          this.__lower = number(value);
-          deferUpdate(this);
-        }
-      },
+      get lower() {
+        return this.__lower;
+      }
+      set lower(value) {
+        this.__lower = number(value);
+        deferUpdate(this);
+      }
 
-      middle: {
-        get: function() {
+      get middle() {
           return this.__middle;
-        },
-        set: function(value) {
-          this.__middle = number(value);
-          deferUpdate(this);
-        }
-      },
+      }
+      set middle(value) {
+        this.__middle = number(value);
+        deferUpdate(this);
+      }
 
-      upper: {
-        get: function() {
-          return this.__upper;
-        },
-        set: function(value) {
-          this.__upper = number(value);
-          deferUpdate(this);
-        }
+      get upper() {
+        return this.__upper;
+      }
+      set upper(value) {
+        this.__upper = number(value);
+        deferUpdate(this);
       }
     }
-  )
-});
+  );
 
-function deferUpdate(meter, delay) {
-  if (!delay) delay = 50;
-  if (!meter.__timeout) {
-    meter.__timeout = setTimeout(function() {
-      delete meter.__timeout;
-      meter.update();
-    }, delay);
+  function deferUpdate(meter, delay) {
+    if (!delay) delay = 50;
+    if (!meter.__timeout) {
+      meter.__timeout = setTimeout(function() {
+        delete meter.__timeout;
+        meter.update();
+      }, delay);
+    }
   }
-}
 
-function getAttr(node, attr, fallback) {
-  return node.hasAttribute(attr)
-    ? node.getAttribute(attr) || fallback
-    : fallback;
-}
-
-function number(value, fallback) {
-  var num = +value;
-  return isNaN(value) ? fallback : num;
-}
-
-function classify(el, classes) {
-  for (var klass in classes) {
-    el.classList[classes[klass] ? 'add' : 'remove'](klass);
+  function getAttr(node, attr, fallback) {
+    return node.hasAttribute(attr)
+      ? node.getAttribute(attr) || fallback
+      : fallback;
   }
-}
+
+  function number(value, fallback) {
+    var num = +value;
+    return isNaN(value) ? fallback : num;
+  }
+
+  function classify(el, classes) {
+    for (var klass in classes) {
+      el.classList[classes[klass] ? 'add' : 'remove'](klass);
+    }
+  }
+
+})(window);
