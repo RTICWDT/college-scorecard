@@ -65,7 +65,7 @@ jobs:
   build_and_test:
     <<: *buildtest
     docker:
-      - image: circleci/node:7.10
+      - image: circleci/node:8.11.4
         environment:
           TEST_REPORTS_CI: test/reports
 

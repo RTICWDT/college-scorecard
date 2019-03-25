@@ -51,6 +51,6 @@
     "xmlhttprequest": "^1.8.0"
   },
   "engines": {
-    "node": ">= 6.14.2"
+    "node": ">= 8.11.1"
   }
 }
