@@ -45,6 +45,13 @@
     padding-top: 2em;
   }
 
+  ul {
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
   li {
     border-bottom: $thin-border-size solid $base-border-color;
     display: inline-block;
@@ -76,6 +83,36 @@
       margin-left: auto;
       margin-right: auto;
     }
+
+    &.aid {
+      strong:first-of-type {
+        @include font-size(3);
+      }
+    }
+
+    &.apprenticeships {
+      > strong {
+        margin-top: 25px;
+        font-size: 2.4rem;
+      }
+
+      .fact-words {
+        padding-top: 0.8em;
+        padding-bottom: 0.8em;
+      }
+
+      a {
+        text-decoration: none;
+        font-size: 1.6rem;
+        &:hover {
+          text-decoration: underline $darker-green;
+          strong {
+            color: $darker-green;
+          }
+        }
+      }
+
+    }
   }
 
   span {
@@ -87,7 +124,7 @@
     @include font-size(4);
     padding-top: 5px;
 
-    &:nth-of-type(2) {
+    &.less-strong {
       @include font-size($h1);
       font-weight: $weight-light;
       line-height: 0.9;

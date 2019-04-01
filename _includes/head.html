@@ -64,6 +64,7 @@
 
   <!-- Scripts
   ================================================== -->
+
   {% for script in site.scripts %}
   <script src="{{ site.baseurl }}/js/{{ script }}"></script>
   {% endfor %}
@@ -84,5 +85,7 @@
       a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
   </script>
   {% comment %} End crazyegg {% endcomment %}{% endif site.branch %}
+
+
 
 </head>

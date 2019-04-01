@@ -1,48 +1,41 @@
 (function(exports) {
 
   var focusClass = 'combo-box_option_focus';
+  var HTMLParsedElement = require('./html-parsed-element');
 
-  exports.ComboBox = document.registerElement('combo-box', {
-    prototype: Object.create(
-      HTMLElement.prototype,
-      {
-        createdCallback: {value: function() {
-        }},
+  exports.customElements.define(
+    'combo-box',
+    class extends HTMLParsedElement {
+      parsedCallback() {
+        this.__input = this.querySelector('[role="combobox"]');
+        if (!this.__input) {
+          return console.warn('no input found in <combo-box>');
+        }
 
-        attachedCallback: {value: function() {
-          this.__input = this.querySelector('[role="combobox"]');
-          if (!this.__input) {
-            return console.warn('no input found in <combo-box>');
-          }
+        this.__list = this.querySelector('[role="listbox"]');
+        if (!this.__list) {
+          return console.warn('no list found in <combo-box>');
+        }
+        hide(this.__list);
 
-          this.__list = this.querySelector('[role="listbox"]');
-          if (!this.__list) {
-            return console.warn('no list found in <combo-box>');
-          }
-          hide(this.__list);
+        this.__list.addEventListener('click', this.__onclick = onclick.bind(this), true);
+        this.__list.addEventListener('focus', this.__onoptionfocus = onOptionFocus.bind(this), true);
 
-          this.__list.addEventListener('click', this.__onclick = onclick.bind(this), true);
-          this.__list.addEventListener('focus', this.__onoptionfocus = onOptionFocus.bind(this), true);
-
-          this.__input.addEventListener('focus', this.__onfocus = onfocus.bind(this));
-          this.__input.addEventListener('keydown', this.__onkeydown = onkeydown.bind(this));
-          this.__input.addEventListener('blur', this.__onfocus = onblur.bind(this));
-        }},
-
-        attributeChangedCallback: {value: function(attr, oldValue, newValue) {
-        }},
-
-        detachedCallback: {value: function() {
-          this.__list.removeEventListener('click', this.__onclick);
-          this.__list.removeEventListener('focus', this.__onoptionfocus);
-
-          this.__input.removeEventListener('focus', this.__onfocus);
-          this.__input.removeEventListener('keydown', this.__onkeydown);
-          this.__input.removeEventListener('blur', this.__onfocus);
-        }}
+        this.__input.addEventListener('focus', this.__onfocus = onfocus.bind(this));
+        this.__input.addEventListener('keydown', this.__onkeydown = onkeydown.bind(this));
+        this.__input.addEventListener('blur', this.__onfocus = onblur.bind(this));
       }
-    )
-  });
+
+      disconnectedCallback() {
+        this.__list.removeEventListener('click', this.__onclick);
+        this.__list.removeEventListener('focus', this.__onoptionfocus);
+
+        this.__input.removeEventListener('focus', this.__onfocus);
+        this.__input.removeEventListener('keydown', this.__onkeydown);
+        this.__input.removeEventListener('blur', this.__onfocus);
+      }
+    }
+  );
 
   function onfocus(e) {
     show(this.__list);
@@ -270,4 +263,4 @@
     ].join('');
   }
 
-})(this);
+})(window);

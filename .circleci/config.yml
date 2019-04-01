@@ -7,7 +7,7 @@ buildtest: &buildtest
 
     # Restore npm modules
     - restore_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
+        key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
 
     - run:
         name: Install phantomjs
@@ -22,7 +22,7 @@ buildtest: &buildtest
         command: npm install
 
     - save_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
+        key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
         paths:
           - node_modules
 
@@ -52,7 +52,7 @@ buildtest: &buildtest
     - run:
         name: Run Browser tests
         command: npm run test-ci
-        no_output_timeout: 15m
+        no_output_timeout: 20m
 
     - run:
         name: Run A11y tests
@@ -65,7 +65,7 @@ jobs:
   build_and_test:
     <<: *buildtest
     docker:
-      - image: circleci/node:4.8
+      - image: circleci/node:8.11.4
         environment:
           TEST_REPORTS_CI: test/reports
 
