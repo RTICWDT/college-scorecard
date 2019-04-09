@@ -1,0 +1,33 @@
+aria-tabs {
+
+
+  .tablist {
+    display: flex;
+    align-items: center;
+    button[aria-controls] {
+      display: inline-block;
+      padding: .25em .5em;
+      margin: 0;
+      margin-bottom: .25em;
+      width: inherit;
+      background: none;
+      border: none;
+      border-bottom: 1px solid transparent;
+      cursor: pointer;
+      border-radius: $base-border-radius;
+      @include font-size($h4);
+      @include appearance(none);
+    }
+
+    button[aria-controls]:after {
+      content: none;
+    }
+
+    button[aria-controls][aria-selected="true"] {
+      background-color: $darker-green;
+      color: $white;
+    }
+  }
+
+  div[role="tabpanel"] {  }
+}
