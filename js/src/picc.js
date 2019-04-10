@@ -769,6 +769,84 @@ picc.access.programAreas = function(d, field) {
     });
 };
 
+// TEMPORARY until API has cost of largest program data
+picc.access.isProgramReporter = function(d) {
+  return picc.access(picc.fields.HIGHEST_DEGREE)(d) === 1;
+}
+
+// TEMPORARY until API has cost of largest program data
+picc.access.largestPrograms = function(d, range) {
+  switch(range) {
+    case 'total':
+      // TEMPORARY until API has cost of largest program data
+      return [
+        {
+          program: 'Program A',
+          cost: '$25,247',
+          duration: '30'
+        },
+        {
+          program: 'Program B',
+          cost: '$15,255',
+          duration: '10'
+        },
+        {
+          program: 'Program C',
+          cost: '$13,456',
+          duration: '6'
+        },
+        {
+          program: 'Program D',
+          cost: '$12,405',
+          duration: '30'
+        },
+        {
+          program: 'Program E',
+          cost: '$12,654',
+          duration: '10'
+        },
+        {
+          program: 'Program F',
+          cost: '$12,346',
+          duration: '10'
+        },
+      ];
+    case 'year':
+      return [
+        {
+          program: 'Program A',
+          cost: '$10,098',
+          duration: '30'
+        },
+        {
+          program: 'Program B',
+          cost: '$15,225',
+          duration: '10'
+        },
+        {
+          program: 'Program C',
+          cost: '$13,456',
+          duration: '6'
+        },
+        {
+          program: 'Program D',
+          cost: '$4,962',
+          duration: '30'
+        },
+        {
+          program: 'Program E',
+          cost: '$12,654',
+          duration: '10'
+        },
+        {
+          program: 'Program F',
+          cost: '$12,346',
+          duration: '10'
+        },
+      ];
+  }
+};
+
 picc.access.awardLevels = function(d, preddegree) {
   // return values are whether the instituion offers other kind of degrees/certs than the predominant degree
   // if they do we return the glossary term key to display or false to disable the tooltip
@@ -1119,6 +1197,40 @@ picc.school.directives = (function() {
       }
       return 'Average\r\n Annual Cost';
     },
+
+    // TEMPORARY: Until API has flag for Program-based vs.
+    // Academic Calendar-based reporting
+    program_reporter_hidden: {
+      '@aria-hidden': access.isProgramReporter
+        // return
+      // }
+    },
+    // TEMPORARY: Until API has flag for Program-based vs.
+    // Academic Calendar-based reporting
+    program_reporter_shown: {
+      '@aria-hidden': function(d) {
+        return access.isProgramReporter(d) ? 'false' : 'true'
+      }
+    },
+
+    program_reporter_class: {
+      '@class': function(d) {
+        return access.isProgramReporter(d) ? 'centered': 'school-two_col-left centered';
+      }
+    },
+
+    // TEMPORARY: Until API has flag for Program-based vs.
+    // Academic Calendar-based reporting
+    program_report_total: function(d) {
+      return access.largestPrograms(/*picc.fields.LARGEST_PROGRAMS*/ d, 'total');
+    },
+
+    // TEMPORARY: Until API has flag for Program-based vs.
+    // Academic Calendar-based reporting
+    program_report_per_year: function(d) {
+      return access.largestPrograms(/*picc.fields.LARGEST_PROGRAMS*/ d, 'year');
+    },
+
 
     award_level: {
         '@data-definition': function (d) {

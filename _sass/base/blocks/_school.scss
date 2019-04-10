@@ -395,6 +395,11 @@
       padding-top: $base-padding;
     }
   }
+
+  .school-single_col {
+    padding-top: $base-padding;
+    padding-bottom: $base-padding;
+  }
 }
 
 .school-table {
@@ -418,6 +423,16 @@
     font-weight: 700;
   }
 
+}
+
+.programs-table {
+  thead > tr {
+    border-bottom: $regular-border-size solid darken($base-border-color, 10);
+
+    th {
+      vertical-align: bottom;
+    }
+  }
 }
 
 .school-long_list {

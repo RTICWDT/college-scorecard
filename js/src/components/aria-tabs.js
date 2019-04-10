@@ -4,7 +4,7 @@
   const SELECTED = 'aria-selected';
   const CONTROLS = 'aria-controls';
   const TAB_NAME = 'data-name';
-  const TOGGLE_EVENTS = ['click', 'focus'];
+  const TOGGLE_EVENTS = ['click', 'focus', 'keydown'];
   const HTMLParsedElement = require('./html-parsed-element');
 
   exports.customElements.define(
@@ -16,7 +16,7 @@
         if (!tabs.length) {
           return;
         }
-        // this.setAttribute('role', 'tablist');
+
         this.renderTabs(this, tabs);
         this.__tabs = [...this.querySelectorAll('[role="tab"]')];
         this.__panels = [...this.querySelectorAll('[role="tabpanel"]')];
@@ -62,6 +62,7 @@
           let tabBtn = document.createElement('button');
           let tabName = tabPanel.getAttribute(TAB_NAME);
           let tabId = `${ELEMENT_NAME}-${index}`;
+
           tabBtn.setAttribute('id', tabId);
           tabBtn.setAttribute('role', 'tab');
           tabBtn.setAttribute(SELECTED, this.getAriaBoolean(tabPanel, SELECTED));
@@ -96,7 +97,7 @@
       }
 
       initEventHandlers() {
-        this.__tabs.forEach((tab, i) => {
+        this.__tabs.forEach((tab) => {
           tab.removeEventListener('click', this.__boundOnClick, true);
           tab.addEventListener('click', this.__boundOnClick, true);
           tab.removeEventListener('focus', this.__boundOnFocus, true);
@@ -115,7 +116,6 @@
         if(this.getAriaBoolean(event.target, SELECTED) !== 'true') this._activateTab(event.target);
       }
 
-      // Handle keyDown on tabs
       _onKeyDown(event) {
         switch (event.key) {
           case "ArrowRight":
@@ -164,12 +164,12 @@
         this.__tabs.forEach((tab, i) => {
           tab.setAttribute('tabindex', '-1');
           tab.setAttribute(SELECTED, false);
-        })
+        });
 
-        this.__panels.forEach((panel, i) =>{
+        this.__panels.forEach((panel, i) => {
           panel.setAttribute('aria-hidden', true);
           panel.setAttribute('tabindex', '-1');
-        })
+        });
       }
 
       getAriaBoolean(el, attr) {

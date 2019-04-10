@@ -306,3 +306,8 @@ ol.disc,
   }
 }
 
+.clearfix,
+.u-clearfix {
+  @include clearfix();
+}
+

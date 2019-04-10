@@ -201,7 +201,7 @@ stylesheets:
 
                 <div id="costs-content" aria-hidden="true">
 
-                  <div class="school-two_col-left centered">
+                  <div class="school-two_col-left centered" data-bind="program_reporter_hidden">
 
                     <figure class="meter below_is_good">
                       <h2 class="figure-heading constrain_width"
@@ -225,7 +225,7 @@ stylesheets:
 
                   </div>
 
-                  <div class="school-two_col-right">
+                  <div class="school-two_col-right" data-bind="program_reporter_hidden">
                     <h2>By Family Income</h2>
                     <p>Depending on the federal, state, or institutional grant aid available, students in your income bracket may pay more or less than the overall average costs.</p>
 
@@ -261,6 +261,83 @@ stylesheets:
                       </tbody>
                     </table>
 
+                  </div>
+
+                  <div class="u-clearfix"></div>
+
+                  <div class="school-single_col centered" data-bind="program_reporter_shown" aria-hidden="true">
+                    <h2 class="figure-heading constrain_width"
+                    aria-describedby="tip-cost-largest-programs" tabindex="0">
+                    Cost of 6 Largest Programs
+                      <span class="tooltip-target">
+                      <i class="fa fa-info-circle"></i>
+                      </span>
+                    </h2>
+
+                    <aria-tabs>
+                      <div data-name="Total" aria-selected="true">
+                        <table class="school-table programs-table">
+                          <caption class="sr-only">Total costs of 6 largest programs</caption>
+                          <thead>
+                          <tr>
+                            <th width="60%">Program Name</th>
+                            <th width="15%">Tuition + Fees</th>
+                            <th width="15%">Program Months</th>
+                          </tr>
+                          </thead>
+                          <tbody class="program-table-body" data-bind="program_report_total">
+                          <tr>
+                            <td><span class="program">Program Name</span></td>
+                            <td><span class="cost">$XXXXXX</span></td>
+                            <td><span class="duration">XX</span></td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div data-name="Per Year">
+                        <table class="school-table programs-table">
+                          <caption class="sr-only">Costs of 6 largest programs per year</caption>
+                          <thead>
+                          <tr>
+                            <th width="60%">Program Name</th>
+                            <th width="15%">Tuition + Fees</th>
+                            <th width="15%">Program Months</th>
+                          </tr>
+                          </thead>
+                          <tbody class="program-table-body" data-bind="program_report_per_year">
+                          <tr>
+                            <td><span class="program">Program Name</span></td>
+                            <td><span class="cost">$XXXXXX</span></td>
+                            <td><span class="duration">XX</span></td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </aria-tabs>
+                  </div>
+
+                  <div class="u-clearfix"></div>
+
+                  <div class="school-single_col centered" data-bind="program_reporter_shown" aria-hidden="true">
+                    <figure class="below_is_good">
+                      <h2 class="figure-heading"
+                          aria-describedby="tip-avg-program-cost" tabindex="0">
+                        Cost After Aid<br>for Largest Program
+                        <span class="tooltip-target u-new_line">
+                          <i class="fa fa-info-circle"></i>
+                        </span>
+                      </h2>
+                      <picc-meter id="cost-meter" {% include net_price_meter_attributes.html %}>
+                      </picc-meter>
+                      <figcaption>
+                        <span class="average-value" data-bind="average_cost"></span>
+                      </figcaption>
+                    </figure>
+
+                    <a class="button button-primary button-costs" target="_blank" data-bind="net_price_calculator">
+                      <i class="fa fa-calculator"></i>
+                      Calculate your personal net price
+                    </a>
                   </div>
 
                 </div>
