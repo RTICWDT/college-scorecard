@@ -778,7 +778,6 @@ picc.access.isProgramReporter = function(d) {
 picc.access.largestPrograms = function(d, range) {
   switch(range) {
     case 'total':
-      // TEMPORARY until API has cost of largest program data
       return [
         {
           program: 'Program A',
@@ -1174,8 +1173,7 @@ picc.school.directives = (function() {
       }
     },
 
-    // TEMPORARY: Until API has flag for Program-based vs.
-    // Academic Calendar-based reporting
+    // TEMPORARY until API has cost of largest program data
     average_cost_tip: {
       '@aria-describedby': function(d) {
         var degree = picc.access(picc.fields.HIGHEST_DEGREE)(d);
@@ -1186,8 +1184,7 @@ picc.school.directives = (function() {
         return 'tip-avg-cost-year';
       }
     },
-    // TEMPORARY: Until API has flag for Program-based vs.
-    // Academic Calendar-based reporting
+    // TEMPORARY until API has cost of largest program data
     average_cost_label: function(d) {
       var degree = picc.access(picc.fields.HIGHEST_DEGREE)(d);
       switch (+degree) {
@@ -1198,15 +1195,13 @@ picc.school.directives = (function() {
       return 'Average\r\n Annual Cost';
     },
 
-    // TEMPORARY: Until API has flag for Program-based vs.
-    // Academic Calendar-based reporting
+    // TEMPORARY until API has cost of largest program data
     program_reporter_hidden: {
       '@aria-hidden': access.isProgramReporter
         // return
       // }
     },
-    // TEMPORARY: Until API has flag for Program-based vs.
-    // Academic Calendar-based reporting
+    // TEMPORARY until API has cost of largest program data
     program_reporter_shown: {
       '@aria-hidden': function(d) {
         return access.isProgramReporter(d) ? 'false' : 'true'
@@ -1219,14 +1214,12 @@ picc.school.directives = (function() {
       }
     },
 
-    // TEMPORARY: Until API has flag for Program-based vs.
-    // Academic Calendar-based reporting
+    // TEMPORARY until API has cost of largest program data
     program_report_total: function(d) {
       return access.largestPrograms(/*picc.fields.LARGEST_PROGRAMS*/ d, 'total');
     },
 
-    // TEMPORARY: Until API has flag for Program-based vs.
-    // Academic Calendar-based reporting
+    // TEMPORARY until API has cost of largest program data
     program_report_per_year: function(d) {
       return access.largestPrograms(/*picc.fields.LARGEST_PROGRAMS*/ d, 'year');
     },
