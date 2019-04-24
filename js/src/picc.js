@@ -1208,6 +1208,13 @@ picc.school.directives = (function() {
       }
     },
 
+    // TEMPORARY until no finaid flag is available
+    no_finaid_shown: {
+      '@aria-hidden': function(d) {
+        return access.isProgramReporter(d) ? 'false' : 'true'
+      }
+    },
+
     program_reporter_class: {
       '@class': function(d) {
         return access.isProgramReporter(d) ? 'centered': 'school-two_col-left centered';

@@ -361,7 +361,7 @@ stylesheets:
           </div>
 
           <div class="section-card_container-school">
-            <aria-accordion id="finaid" class="school-two_col">
+            <aria-accordion id="finaid">
               <div>
                 <h1 class="search_category">
                   <button aria-expanded="false" aria-controls="finaid-content">
@@ -371,71 +371,82 @@ stylesheets:
 
                 <div id="finaid-content" aria-hidden="true">
 
-                  <div class="school-two_col-left centered">
-
-                    <figure class="meter above_is_good">
-                      <h2 class="figure-heading" aria-describedby="tip-repayment-rate" tabindex="0" data-bind="branch_campus">
-                        Students Paying<br>Down Their Debt
-                        <span class="tooltip-target u-new_line">
-                          <i class="fa fa-info-circle"></i>
-                        </span>
-                      </h2>
-                      <picc-meter id="repayment-meter" {% include repayment_rate_meter_attributes.html %}>
-                      </picc-meter>
-
-                      <figcaption>
-                        <span class="average-value" data-bind="repayment_rate_percent">XX%</span>
-                      </figcaption>
-                    </figure>
-
-                    <div class="container school-callout">
-
-                      <h2>Get Help Paying for College</h2>
-                      <p>Submit a free application for Federal Student Aid. You may be eligible to receive federal grants or loans.</p>
-                      <a href="https://fafsa.ed.gov/spa/fafsa" target="_blank" class="button button-primary">
-                        Start My Application
-                      </a>
-
+                  <div class="school-single_col" data-bind="no_finaid_shown" aria-hidden="true">
+                    <div class="callout-banner-wrapper">
+                      <p class="callout-banner">
+                        This school does not offer federal student aid.
+                      </p>
                     </div>
-
                   </div>
 
-                  <div class="school-two_col-right school-fact_list">
+                  <div class="school-two_col">
 
-                    <div>
-                      <h2 aria-describedby="tip-student-aid" tabindex="0">
-                        Students Receiving Federal Loans
-                        <span class="tooltip-target">
-                          <i class="fa fa-info-circle"></i>
-                        </span>
-                      </h2>
-                      <strong class="fact_number" data-bind="federal_aid_percentage">XX%</strong>
-                      <p>At some schools where few students borrow federal loans, the typical undergraduate may leave school with $0 in debt.</p>
+                    <div class="school-two_col-left centered">
+
+                      <figure class="meter above_is_good">
+                        <h2 class="figure-heading" aria-describedby="tip-repayment-rate" tabindex="0" data-bind="branch_campus">
+                          Students Paying<br>Down Their Debt
+                          <span class="tooltip-target u-new_line">
+                            <i class="fa fa-info-circle"></i>
+                          </span>
+                        </h2>
+                        <picc-meter id="repayment-meter" {% include repayment_rate_meter_attributes.html %}>
+                        </picc-meter>
+
+                        <figcaption>
+                          <span class="average-value" data-bind="repayment_rate_percent">XX%</span>
+                        </figcaption>
+                      </figure>
+
+                      <div class="container school-callout">
+
+                        <h2>Get Help Paying for College</h2>
+                        <p>Submit a free application for Federal Student Aid. You may be eligible to receive federal grants or loans.</p>
+                        <a href="https://fafsa.ed.gov/spa/fafsa" target="_blank" class="button button-primary">
+                          Start My Application
+                        </a>
+
+                      </div>
+
                     </div>
 
-                    <div>
-                      <h2 aria-describedby="tip-avg-debt" tabindex="0" data-bind="branch_campus">
-                        Typical Total Debt After Graduation
-                        <span class="tooltip-target">
-                          <i class="fa fa-info-circle"></i>
-                        </span>
-                      </h2>
-                      <strong class="fact_number" data-bind="average_total_debt">$XX,XXX</strong>
-                      <p>For undergraduate borrowers who complete college</p>
-                    </div>
+                    <div class="school-two_col-right school-fact_list">
 
-                    <div>
-                      <h2 aria-describedby="tip-avg-loan-payment" tabindex="0" data-bind="branch_campus">
-                        Typical Monthly Loan Payment
-                        <span class="tooltip-target">
-                          <i class="fa fa-info-circle"></i>
-                        </span>
-                      </h2>
-                      <span class="fact_number">
-                        <strong data-bind="average_monthly_loan_payment">$XXX</strong>/mo
-                      </span>
-                    </div>
+                      <div>
+                        <h2 aria-describedby="tip-student-aid" tabindex="0">
+                          Students Receiving Federal Loans
+                          <span class="tooltip-target">
+                            <i class="fa fa-info-circle"></i>
+                          </span>
+                        </h2>
+                        <strong class="fact_number" data-bind="federal_aid_percentage">XX%</strong>
+                        <p>At some schools where few students borrow federal loans, the typical undergraduate may leave school with $0 in debt.</p>
+                      </div>
 
+                      <div>
+                        <h2 aria-describedby="tip-avg-debt" tabindex="0" data-bind="branch_campus">
+                          Typical Total Debt After Graduation
+                          <span class="tooltip-target">
+                            <i class="fa fa-info-circle"></i>
+                          </span>
+                        </h2>
+                        <strong class="fact_number" data-bind="average_total_debt">$XX,XXX</strong>
+                        <p>For undergraduate borrowers who complete college</p>
+                      </div>
+
+                      <div>
+                        <h2 aria-describedby="tip-avg-loan-payment" tabindex="0" data-bind="branch_campus">
+                          Typical Monthly Loan Payment
+                          <span class="tooltip-target">
+                            <i class="fa fa-info-circle"></i>
+                          </span>
+                        </h2>
+                        <span class="fact_number">
+                          <strong data-bind="average_monthly_loan_payment">$XXX</strong>/mo
+                        </span>
+                      </div>
+
+                    </div>
                   </div>
                 </div>
               </div>
