@@ -176,9 +176,10 @@
   }
 
   .data-prelim {
+    margin-top: $base-padding-large;
+    margin-bottom: $base-padding;
 
     h3 {
-      margin-top: $base-padding-large;
       margin-left: 0;
       .fa {
         color: $orange;
