@@ -1174,28 +1174,6 @@ picc.school.directives = (function() {
     },
 
     // TEMPORARY until API has cost of largest program data
-    average_cost_tip: {
-      '@aria-describedby': function(d) {
-        var degree = picc.access(picc.fields.HIGHEST_DEGREE)(d);
-        switch (+degree) {
-          case 1: // Certificate granting
-            return 'tip-avg-program-cost';
-        }
-        return 'tip-avg-cost-year';
-      }
-    },
-    // TEMPORARY until API has cost of largest program data
-    average_cost_label: function(d) {
-      var degree = picc.access(picc.fields.HIGHEST_DEGREE)(d);
-      switch (+degree) {
-        case 1: // Certificate Granting
-          return 'Cost of Largest\r\nProgram';
-
-      }
-      return 'Average\r\n Annual Cost';
-    },
-
-    // TEMPORARY until API has cost of largest program data
     program_reporter_hidden: {
       '@aria-hidden': access.isProgramReporter
         // return
@@ -1231,7 +1209,6 @@ picc.school.directives = (function() {
       return access.largestPrograms(/*picc.fields.LARGEST_PROGRAMS*/ d, 'year');
     },
 
-
     award_level: {
         '@data-definition': function (d) {
           var offersMultipleAwards = picc.access.awardLevels(d, picc.access(picc.fields.PREDOMINANT_DEGREE)(d));
@@ -1245,14 +1222,21 @@ picc.school.directives = (function() {
         }
     },
 
-    average_cost: format.dollars(access.netPrice),
+    average_cost: function(d) {
+      return !(access.isProgramReporter(d)) ? format.dollars(access.netPrice)(d) : '--';
+    },
+
     average_cost_meter: {
-      '@value':   access.netPrice,
+      '@value': function(d) {
+        return !(access.isProgramReporter(d)) ? access(picc.fields.NET_PRICE)(d) : null;
+      },
       '@degree': access(fields.PREDOMINANT_DEGREE),
-      label:      format.dollars(function(d) {
+      label: format.dollars(function(d) {
         return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
       }),
-      'picc-side-meter-val': format.dollars(access.netPrice),
+      'picc-side-meter-val': function(d) {
+        return !(access.isProgramReporter(d)) ? format.dollars(access.netPrice)(d): '--';
+      }
     },
 
     // on the compare screen we draw the vertical `median_line`

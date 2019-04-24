@@ -20,6 +20,8 @@ module.exports = function compare() {
   var qs = querystring.parse(decodeURIComponent(location.search.substr(1)));
   var shareComparison = false;
   var compareShareLink = document.querySelector('.school-share-wrapper');
+  var programReporterNote = document.querySelector('.program-reporter-note');
+  console.log('here', programReporterNote);
 
   if (qs['s[]'] || qs['schools[]']) {
     // console.log('share', qs['schools[]']);
@@ -64,6 +66,7 @@ module.exports = function compare() {
     picc.fields.LOCALE,
     // to get "public" or "private" control
     picc.fields.OWNERSHIP,
+    picc.fields.HIGHEST_DEGREE,
     // to get the "four_year" or "lt_four_year" bit
     picc.fields.PREDOMINANT_DEGREE,
     // to get alternative predominant degree offered flag
@@ -135,6 +138,7 @@ module.exports = function compare() {
     'size_category',
     'average_cost',
     'average_cost_meter',
+    'program_reporter_shown',
     'net_price_income1',
     'net_price_income2',
     'net_price_income3',
@@ -202,6 +206,10 @@ module.exports = function compare() {
     'compare_share_link_twt',
     'compare_share_link_li',
     'compare_share_link_mail',
+  ]);
+
+  var programReporter = picc.data.selectKeys(picc.school.directives, [
+    'program_reporter_shown'
   ]);
 
 
@@ -310,17 +318,32 @@ module.exports = function compare() {
 
       tagalong(compareShareLink, {}, shareLinks);
 
+      if (hasProgramReporter(schools.results)) {
+        programReporterNote.removeAttribute('aria-hidden');
+      }
+
       picc.ui.alreadyLoaded = true;
 
     });
 
   }
 
+  // TEMPORARY until program reporter flag
   function schoolsByPredDegree(results, degreeType) {
     return results.filter(function(d) {
       // if degreeType is empty for a section, this returns all schools
-      return picc.access(picc.fields.PREDOMINANT_DEGREE)(d) === +degreeType || !degreeType ;
+      if (degreeType === 'P') {
+        return picc.access.isProgramReporter(d);
+      } else {
+        return (picc.access(picc.fields.PREDOMINANT_DEGREE)(d) === +degreeType && picc.access(picc.fields.HIGHEST_DEGREE)(d) !== 1) || !degreeType ;
+      }
     });
+  }
+
+  function hasProgramReporter(results) {
+    return results.some(function(d) {
+      return picc.access.isProgramReporter(d);
+    })
   }
 
   function insertAfter(newNode, referenceNode) {

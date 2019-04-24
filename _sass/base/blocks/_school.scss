@@ -274,6 +274,11 @@
         @include font-size($h1);
       }
     }
+
+    .program-reporter-note {
+      text-align: left;
+      font-style: italic;
+    }
   }
 
   .school-fact_list {
