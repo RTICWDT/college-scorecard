@@ -20,8 +20,7 @@ module.exports = function compare() {
   var qs = querystring.parse(decodeURIComponent(location.search.substr(1)));
   var shareComparison = false;
   var compareShareLink = document.querySelector('.school-share-wrapper');
-  var programReporterNote = document.querySelector('.program-reporter-note');
-  console.log('here', programReporterNote);
+  var programReporterNote = document.querySelectorAll('.program-reporter-note');
 
   if (qs['s[]'] || qs['schools[]']) {
     // console.log('share', qs['schools[]']);
@@ -74,6 +73,13 @@ module.exports = function compare() {
     picc.fields.DEGREE_OFFERED + '.bachelors',
     picc.fields.DEGREE_OFFERED + '.assoc',
     picc.fields.DEGREE_OFFERED + '.certificate',
+    // program reporter number / flag
+    picc.fields.PROGRAM_REPORTER_OFFERED,
+    // program reporter largest program variables
+    picc.fields.PROGRAM_REPORTER_PROGRAM + '.cip_1.cip_description',
+    picc.fields.PROGRAM_REPORTER_PROGRAM + '.cip_1.avg_duration_by_month',
+    picc.fields.PROGRAM_REPORTER_COST + '.cip_1.full_program',
+    picc.fields.PROGRAM_REPORTER_COST + '.cip_1.annualized_by_academic_yr',
     // get all of the net price values
     picc.fields.NET_PRICE,
     picc.fields.COMPLETION_RATE,
@@ -138,7 +144,6 @@ module.exports = function compare() {
     'size_category',
     'average_cost',
     'average_cost_meter',
-    'program_reporter_shown',
     'net_price_income1',
     'net_price_income2',
     'net_price_income3',
@@ -208,11 +213,6 @@ module.exports = function compare() {
     'compare_share_link_mail',
   ]);
 
-  var programReporter = picc.data.selectKeys(picc.school.directives, [
-    'program_reporter_shown'
-  ]);
-
-
   // build query for API call
   function buildQuery (schools) {
     var query = {};
@@ -222,7 +222,6 @@ module.exports = function compare() {
     });
     return query;
   }
-
 
   function onChange() {
 
@@ -319,7 +318,9 @@ module.exports = function compare() {
       tagalong(compareShareLink, {}, shareLinks);
 
       if (hasProgramReporter(schools.results)) {
-        programReporterNote.removeAttribute('aria-hidden');
+        [].slice.call(programReporterNote).forEach(function(node) {
+          node.removeAttribute('aria-hidden');
+        })
       }
 
       picc.ui.alreadyLoaded = true;
@@ -328,21 +329,16 @@ module.exports = function compare() {
 
   }
 
-  // TEMPORARY until program reporter flag
   function schoolsByPredDegree(results, degreeType) {
     return results.filter(function(d) {
-      // if degreeType is empty for a section, this returns all schools
-      if (degreeType === 'P') {
-        return picc.access.isProgramReporter(d);
-      } else {
-        return (picc.access(picc.fields.PREDOMINANT_DEGREE)(d) === +degreeType && picc.access(picc.fields.HIGHEST_DEGREE)(d) !== 1) || !degreeType ;
-      }
+      var isProgramReporter = !!picc.access.isProgramReporter(d);
+      return (degreeType === 'P' && isProgramReporter) || (!isProgramReporter && picc.access(picc.fields.PREDOMINANT_DEGREE)(d) === +degreeType);
     });
   }
 
   function hasProgramReporter(results) {
     return results.some(function(d) {
-      return picc.access.isProgramReporter(d);
+      return !!picc.access.isProgramReporter(d);
     })
   }
 

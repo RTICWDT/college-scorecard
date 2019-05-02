@@ -478,6 +478,10 @@ permalink: /compare/
 
                                             </div><!-- /.meter-group_wrapper -->
 
+                                            {% if group.key == "P" %}
+                                            <p class="program-reporter-note" aria-hidden="true">Average annual cost is not available for program reporter schools</p>
+                                            {% endif%}
+
                                         </div><!-- /.compare-group_wrapper -->
 
                                     </div><!-- /.compare-container_group -->{% endfor %}
