@@ -521,7 +521,21 @@ picc.fields = {
   SAT_WRITING_75TH_PCTILE:  'latest.admissions.sat_scores.75th_percentile.writing',
   SAT_WRITING_MIDPOINT:     'latest.admissions.sat_scores.midpoint.writing',
 
-  NET_PRICE_CALC_URL:       'school.price_calculator_url'
+  NET_PRICE_CALC_URL:       'school.price_calculator_url',
+
+  // program reporters
+  PROGRAM_REPORTER_OFFERED: 'latest.academics.program_reporter.programs_offered',
+  PROGRAM_REPORTER_COST:     'latest.cost.program_reporter',
+  PROGRAM_REPORTER_PROGRAM:  'latest.academics.program_reporter',
+};
+
+picc.programReporterCip = {
+  1: 'cip_1',
+  2: 'cip_2',
+  3: 'cip_3',
+  4: 'cip_4',
+  5: 'cip_5',
+  6: 'cip_6'
 };
 
 picc.access = function(key) {
@@ -769,85 +783,71 @@ picc.access.programAreas = function(d, field) {
     });
 };
 
-// TEMPORARY until API has cost of largest program data
 picc.access.isProgramReporter = function(d) {
-  return picc.access(picc.fields.HIGHEST_DEGREE)(d) === 1;
+  return picc.access(picc.fields.PROGRAM_REPORTER_OFFERED)(d);
 }
 
-// TEMPORARY until API has cost of largest program data
-picc.access.largestPrograms = function(d, range) {
-  switch(range) {
-    case 'total':
-      return [
-        {
-          program: 'Program A',
-          cost: '$25,247',
-          duration: '30'
-        },
-        {
-          program: 'Program B',
-          cost: '$15,255',
-          duration: '10'
-        },
-        {
-          program: 'Program C',
-          cost: '$13,456',
-          duration: '6'
-        },
-        {
-          program: 'Program D',
-          cost: '$12,405',
-          duration: '30'
-        },
-        {
-          program: 'Program E',
-          cost: '$12,654',
-          duration: '10'
-        },
-        {
-          program: 'Program F',
-          cost: '$12,346',
-          duration: '10'
-        },
-      ];
-    case 'year':
-      return [
-        {
-          program: 'Program A',
-          cost: '$10,098',
-          duration: '30'
-        },
-        {
-          program: 'Program B',
-          cost: '$15,225',
-          duration: '10'
-        },
-        {
-          program: 'Program C',
-          cost: '$13,456',
-          duration: '6'
-        },
-        {
-          program: 'Program D',
-          cost: '$4,962',
-          duration: '30'
-        },
-        {
-          program: 'Program E',
-          cost: '$12,654',
-          duration: '10'
-        },
-        {
-          program: 'Program F',
-          cost: '$12,346',
-          duration: '10'
-        },
-      ];
+picc.access.largestProgramsReported = function(d, basis) {
+
+  if(!basis) {
+    basis = 'full_program';
+  }
+
+  const prog = Object.entries(picc.programReporterCip).map(item => {
+    let program = picc.access.composed(
+      picc.fields.PROGRAM_REPORTER_PROGRAM,
+      item[1],
+      'cip_description'
+    )(d);
+
+    if (program) {
+      program = program.replace(/\//g," / "); // space out slash so we can break word on mobile
+    }
+
+    const cost = picc.format.dollars(picc.access.composed(
+      picc.fields.PROGRAM_REPORTER_COST,
+      item[1],
+      basis
+    ))(d);
+
+    const duration = picc.access.composed(
+      picc.fields.PROGRAM_REPORTER_PROGRAM,
+      item[1],
+      'avg_duration_by_month'
+    )(d);
+
+    return {
+      program,
+      cost,
+      duration,
+      basis
+    }
+  }).filter(item => item.program);
+  console.log(prog);
+  return prog;
+};
+
+picc.access.largestProgramReported = function(d) {
+
+  let largestProgram = picc.access.largestProgramsReported(d, 'annualized_by_academic_yr').shift();
+
+  if (largestProgram.duration <=12) {
+    // for programs <= 12 months long (regardless of the institution's academic-year length), use the full program cost
+    largestProgram = picc.access.largestProgramsReported(d).shift();
+  }
+
+  const costDescription = largestProgram.duration <=12
+    ? `for a ${largestProgram.duration}-month program`
+    : `per year on average`
+
+  return {
+    ...largestProgram,
+    costDescription
   }
 };
 
 picc.access.awardLevels = function(d, preddegree) {
-  // return values are whether the instituion offers other kind of degrees/certs than the predominant degree
+  // return values are whether the institution offers other kind of degrees/certs than the predominant degree
   // if they do we return the glossary term key to display or false to disable the tooltip
   switch(preddegree) {
     case 1:
@@ -1173,23 +1173,21 @@ picc.school.directives = (function() {
       }
     },
 
-    // TEMPORARY until API has cost of largest program data
     program_reporter_hidden: {
-      '@aria-hidden': access.isProgramReporter
-        // return
-      // }
-    },
-    // TEMPORARY until API has cost of largest program data
-    program_reporter_shown: {
-      '@aria-hidden': function(d) {
-        return access.isProgramReporter(d) ? 'false' : 'true'
+      '@aria-hidden':  function(d) {
+        return access.isProgramReporter(d) ? 'true' : 'false';
       }
     },
 
-    // TEMPORARY until no finaid flag is available
+    program_reporter_shown: {
+      '@aria-hidden': function(d) {
+        return access.isProgramReporter(d) ? 'false' : 'true';
+      }
+    },
+
     no_finaid_shown: {
       '@aria-hidden': function(d) {
-        return access.isProgramReporter(d) ? 'false' : 'true'
+        return access.isProgramReporter(d) ? 'false' : 'true';
       }
     },
 
@@ -1199,15 +1197,17 @@ picc.school.directives = (function() {
       }
     },
 
-    // TEMPORARY until API has cost of largest program data
-    program_report_total: function(d) {
-      return access.largestPrograms(/*picc.fields.LARGEST_PROGRAMS*/ d, 'total');
+    program_reporter_number_of_programs: access.isProgramReporter,
+
+    program_reporter_total: function(d) {
+      return access.largestProgramsReported(d, 'full_program');
     },
 
-    // TEMPORARY until API has cost of largest program data
-    program_report_per_year: function(d) {
-      return access.largestPrograms(/*picc.fields.LARGEST_PROGRAMS*/ d, 'year');
+    program_reporter_per_year: function(d) {
+      return access.largestProgramsReported(d, 'annualized_by_academic_yr');
     },
+
+    program_reporter_largest: access.largestProgramReported,
 
     award_level: {
         '@data-definition': function (d) {
@@ -1222,6 +1222,7 @@ picc.school.directives = (function() {
         }
     },
 
+    // program reporters dont have an accurate net price to display
     average_cost: function(d) {
       return !(access.isProgramReporter(d)) ? format.dollars(access.netPrice)(d) : '--';
     },
