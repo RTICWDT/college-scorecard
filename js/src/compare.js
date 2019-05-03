@@ -327,7 +327,8 @@ module.exports = function compare() {
   function schoolsByPredDegree(results, degreeType) {
     return results.filter(function(d) {
       var isProgramReporter = !!picc.access.isProgramReporter(d);
-      return (degreeType === 'P' && isProgramReporter) || (!isProgramReporter && picc.access(picc.fields.PREDOMINANT_DEGREE)(d) === +degreeType);
+      // need to return all schools if this is not a section that renders schools by pred degree breakouts (College Information), i.e., `!degreeType`
+      return (degreeType === 'P' && isProgramReporter) || (!isProgramReporter && picc.access(picc.fields.PREDOMINANT_DEGREE)(d) === +degreeType) || !degreeType;
     });
   }
 
