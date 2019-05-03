@@ -269,7 +269,7 @@ stylesheets:
                   <div class="school-single_col centered" data-bind="program_reporter_shown" aria-hidden="true">
                     <h2 class="figure-heading constrain_width"
                     aria-describedby="tip-cost-six-largest-programs" tabindex="0">
-                      Cost of 6 Largest Programs
+                      Cost of Largest Programs
                       <span class="tooltip-target">
                       <i class="fa fa-info-circle"></i>
                       </span>
@@ -278,38 +278,38 @@ stylesheets:
                     <aria-tabs>
                       <div data-name="Total" aria-selected="true">
                         <table class="school-table programs-table">
-                          <caption class="sr-only">Total costs of 6 largest programs</caption>
+                          <caption class="sr-only">Total costs of largest programs</caption>
                           <thead>
                           <tr>
                             <th width="60%">Program Name</th>
-                            <th width="15%">Tuition + Fees</th>
                             <th width="15%">Program Months</th>
+                            <th width="15%">Tuition + Fees</th>
                           </tr>
                           </thead>
                           <tbody class="program-table-body" data-bind="program_reporter_total">
                           <tr>
                             <td><span class="program">Program Name</span></td>
-                            <td><span class="cost">$XX,XXX</span></td>
                             <td><span class="duration">XX</span></td>
+                            <td><span class="cost">$XX,XXX</span></td>
                           </tr>
                           </tbody>
                         </table>
                       </div>
-                      <div data-name="Per Year">
+                      <div data-name="Per Academic Year">
                         <table class="school-table programs-table">
-                          <caption class="sr-only">Costs of 6 largest programs per year</caption>
+                          <caption class="sr-only">Costs of largest programs per academic year</caption>
                           <thead>
                           <tr>
                             <th width="60%">Program Name</th>
-                            <th width="15%">Tuition + Fees</th>
                             <th width="15%">Program Months</th>
+                            <th width="15%">Tuition + Fees</th>
                           </tr>
                           </thead>
                           <tbody class="program-table-body" data-bind="program_reporter_per_year">
                           <tr>
                             <td><span class="program">Program Name</span></td>
-                            <td><span class="cost">$XX,XXX</span></td>
                             <td><span class="duration">XX</span></td>
+                            <td><span class="cost">$XX,XXX</span></td>
                           </tr>
                           </tbody>
                         </table>
@@ -318,7 +318,7 @@ stylesheets:
                   </div>
 
                   <div class="u-new_line u-clearfix" style="margin-top: 15px;"></div>
-                    <div class="centered">
+                  <div class="centered" data-bind="program_reporter_shown">
                     <h2 class="figure-heading"
                         aria-describedby="tip-avg-program-cost" tabindex="0">
                       Cost After Aid<br>for Largest Program

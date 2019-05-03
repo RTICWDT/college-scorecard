@@ -472,6 +472,7 @@ picc.fields = {
   PREDOMINANT_DEGREE:   'school.degrees_awarded.predominant',
   HIGHEST_DEGREE:       'school.degrees_awarded.highest',
   UNDER_INVESTIGATION:  'school.under_investigation',
+  AID_ELIGIBILITY:      'school.title_iv.eligibility_type',
 
   // net price
   NET_PRICE:            'latest.cost.avg_net_price.overall',
@@ -525,17 +526,18 @@ picc.fields = {
 
   // program reporters
   PROGRAM_REPORTER_OFFERED: 'latest.academics.program_reporter.programs_offered',
-  PROGRAM_REPORTER_COST:     'latest.cost.program_reporter',
-  PROGRAM_REPORTER_PROGRAM:  'latest.academics.program_reporter',
+  PROGRAG_REPORTER_CIP:     'cip_6_digit',
+  PROGRAM_REPORTER_COST:    'latest.cost.program_reporter',
+  PROGRAM_REPORTER_PROGRAM: 'latest.academics.program_reporter',
 };
 
 picc.programReporterCip = {
-  1: 'cip_1',
-  2: 'cip_2',
-  3: 'cip_3',
-  4: 'cip_4',
-  5: 'cip_5',
-  6: 'cip_6'
+  1: 'program_1',
+  2: 'program_2',
+  3: 'program_3',
+  4: 'program_4',
+  5: 'program_5',
+  6: 'program_6'
 };
 
 picc.access = function(key) {
@@ -789,15 +791,18 @@ picc.access.isProgramReporter = function(d) {
 
 picc.access.largestProgramsReported = function(d, basis) {
 
+  if (!picc.access.isProgramReporter) return [];
+
   if(!basis) {
     basis = 'full_program';
   }
 
-  const prog = Object.entries(picc.programReporterCip).map(item => {
+  return Object.entries(picc.programReporterCip).map(item => {
     let program = picc.access.composed(
       picc.fields.PROGRAM_REPORTER_PROGRAM,
       item[1],
-      'cip_description'
+      picc.fields.PROGRAG_REPORTER_CIP,
+      'title'
     )(d);
 
     if (program) {
@@ -807,13 +812,15 @@ picc.access.largestProgramsReported = function(d, basis) {
     const cost = picc.format.dollars(picc.access.composed(
       picc.fields.PROGRAM_REPORTER_COST,
       item[1],
+      picc.fields.PROGRAG_REPORTER_CIP,
       basis
     ))(d);
 
     const duration = picc.access.composed(
       picc.fields.PROGRAM_REPORTER_PROGRAM,
       item[1],
-      'avg_duration_by_month'
+      picc.fields.PROGRAG_REPORTER_CIP,
+      'avg_month_completion'
     )(d);
 
     return {
@@ -823,13 +830,13 @@ picc.access.largestProgramsReported = function(d, basis) {
       basis
     }
   }).filter(item => item.program);
-  console.log(prog);
-  return prog;
 };
 
 picc.access.largestProgramReported = function(d) {
 
-  let largestProgram = picc.access.largestProgramsReported(d, 'annualized_by_academic_yr').shift();
+  let largestProgram = picc.access.largestProgramsReported(d, 'annualized').shift();
+
+  if (!largestProgram) return;
 
   if (largestProgram.duration <=12) {
     // for programs <= 12 months long (regardless of the institution's academic-year length), use the full program cost
@@ -1187,7 +1194,7 @@ picc.school.directives = (function() {
 
     no_finaid_shown: {
       '@aria-hidden': function(d) {
-        return access.isProgramReporter(d) ? 'false' : 'true';
+        return access(picc.fields.AID_ELIGIBILITY)(d) !== 3;
       }
     },
 
@@ -1204,7 +1211,7 @@ picc.school.directives = (function() {
     },
 
     program_reporter_per_year: function(d) {
-      return access.largestProgramsReported(d, 'annualized_by_academic_yr');
+      return access.largestProgramsReported(d, 'annualized');
     },
 
     program_reporter_largest: access.largestProgramReported,
