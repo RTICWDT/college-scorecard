@@ -1180,6 +1180,12 @@ picc.school.directives = (function() {
       }
     },
 
+    program_reporter_tip: {
+      '@data-definition': function(d) {
+        return !!picc.access.isProgramReporter(d) ? 'program_reporter' : 'default';
+      }
+    },
+
     program_reporter_hidden: {
       '@aria-hidden':  function(d) {
         return access.isProgramReporter(d) ? 'true' : 'false';
