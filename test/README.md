@@ -87,6 +87,10 @@ webdriver-manager start
 you'll either have to background it explicitly or run it in a
 separate shell from the other commands.
 
+**Note**: As of May 2019, you may need to pin webdriver to a specific standalone version if getting corrupt jarfile errors,
+see https://stackoverflow.com/questions/55835805/invalid-or-corrupt-jar-file-when-trying-to-start-selenium-server-from-intellij/55836347#55836347
+
+
 The tests depend on fetching the site from `http://localhost:4000/` . The
 simplest way of building the site and running the server in one go is with
 `jekyll serve`, which you should leave running in another shell:

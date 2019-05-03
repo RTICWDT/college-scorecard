@@ -272,8 +272,8 @@ describe('school page', function() {
     assert.equal(yield toggleAccordion('#cost'), 'false');
   });
 
-  it('should show Cost of 6 Largest Programs for Program Reporter (certificate) schools', function*() {
-    yield loadSchoolUrl('428000-Miami-Ad-School-Wynwood');
+  it('should show Cost of Largest Programs for Program Reporter schools', function*() {
+    yield loadSchoolUrl('452948-Galen-College-of-Nursing-Cincinnati');
     yield toggleAccordion('#cost');
     var isHidden = yield browser
       .getAttribute('#costs-content [data-bind="program_reporter_hidden"]', 'aria-hidden');
@@ -283,7 +283,7 @@ describe('school page', function() {
     assert(isShown, 'Cost of Largest Programs was not shown on a program reporter school page');
   });
 
-  it('should hide Cost of 6 Largest Programs for non-program reporter schools', function*() {
+  it('should hide Cost of Largest Programs for non-program reporter schools', function*() {
     yield loadSchoolUrl('204635-Ohio-Northern-University');
     yield toggleAccordion('#cost')
     var isHidden = yield browser
@@ -295,7 +295,7 @@ describe('school page', function() {
   });
 
   it('should show the aria-tabs selected tab content', function*() {
-    yield loadSchoolUrl('428000-Miami-Ad-School-Wynwood');
+    yield loadSchoolUrl('452948-Galen-College-of-Nursing-Cincinnati');
     yield toggleAccordion('#cost');
     var activeTabPanel = yield browser.getAttribute('#costs-content .tablist [aria-selected="true"]', "aria-controls");
     var isHidden = yield browser.getAttribute('#costs-content [id="'+ activeTabPanel +'"]', 'aria-hidden');
@@ -303,7 +303,7 @@ describe('school page', function() {
   });
 
   it('should hide the aria-tabs for a non-selected tab content', function*() {
-    yield loadSchoolUrl('428000-Miami-Ad-School-Wynwood');
+    yield loadSchoolUrl('452948-Galen-College-of-Nursing-Cincinnati');
     yield toggleAccordion('#cost');
     var nonActiveTabPanel = yield browser.getAttribute('#costs-content .tablist [aria-selected="false"]', "aria-controls");
     var isHidden = yield browser.getAttribute('#costs-content [id="'+ nonActiveTabPanel +'"]', 'aria-hidden');
@@ -311,7 +311,7 @@ describe('school page', function() {
   });
 
   it('should toggle the aria-tabs on click of non-selected tab', function*() {
-    yield loadSchoolUrl('428000-Miami-Ad-School-Wynwood');
+    yield loadSchoolUrl('452948-Galen-College-of-Nursing-Cincinnati');
     yield toggleAccordion('#cost');
     var selector = '#costs-content .tablist [aria-selected="false"]';
     var selector2 = '#costs-content .tablist [aria-selected="true"]';
