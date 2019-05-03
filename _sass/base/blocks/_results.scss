@@ -209,7 +209,7 @@
       width: auto;
       height: 100%;
       @include respond-to(small-up) {
-        width: 210px;
+        width: 160px;
       }
 
       .selection-count {
@@ -229,7 +229,6 @@
 
     left: 0;
     @include respond-to(teensy-down) {
-      //right:0;
       left: inherit;
     }
 

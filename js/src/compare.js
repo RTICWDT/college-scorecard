@@ -75,11 +75,6 @@ module.exports = function compare() {
     picc.fields.DEGREE_OFFERED + '.certificate',
     // program reporter number / flag
     picc.fields.PROGRAM_REPORTER_OFFERED,
-    // program reporter largest program variables
-    picc.fields.PROGRAM_REPORTER_PROGRAM + '.cip_1.cip_description',
-    picc.fields.PROGRAM_REPORTER_PROGRAM + '.cip_1.avg_duration_by_month',
-    picc.fields.PROGRAM_REPORTER_COST + '.cip_1.full_program',
-    picc.fields.PROGRAM_REPORTER_COST + '.cip_1.annualized_by_academic_yr',
     // get all of the net price values
     picc.fields.NET_PRICE,
     picc.fields.COMPLETION_RATE,

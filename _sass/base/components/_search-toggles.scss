@@ -160,10 +160,10 @@ $toggle-padding: 15px;
       margin-right: auto;
       margin-left: auto;
       text-align: center;
-      width: 175px;
+      width: 200px;
       @include respond-to(teensy-up) {
         top:15px;
-        width: 200px;
+        width: 225px;
       }
     }
 
@@ -171,8 +171,6 @@ $toggle-padding: 15px;
       background-color: $mid-medium-gray;
       cursor: not-allowed;
     }
-
-
   }
 
   .search-button,
@@ -189,6 +187,12 @@ $toggle-padding: 15px;
     }
   }
 
+  @include respond-to(small-down) {
+    &.toggle-content-compare_schools {
+      width: 240%;
+    }
+  }
+
   @include respond-to(small-up) {
     left: 0;
     width: 400px;
@@ -200,7 +204,6 @@ $toggle-padding: 15px;
 }
 
 .toggle-content-compare_schools {
-
   label.checkbox {
     text-indent: -2.2em;
     margin-left: 1.4em;

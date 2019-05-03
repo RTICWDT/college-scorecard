@@ -32,7 +32,7 @@
       .toggle-control {
 
         @include respond-to(small-up) {
-          width: 290px;
+          width: 260px;
         }
         .fa-star {
           color: $darker-yellow;
@@ -79,7 +79,7 @@
       left:0;
 
       @media only screen and (min-width: 440px)
-      and (max-width: 656px) {
+      and (max-width: 768px) {
         right: 0;
         left: inherit;
       }
