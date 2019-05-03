@@ -1182,7 +1182,6 @@ picc.school.directives = (function() {
 
     program_reporter_tip: {
       '@data-definition': function(d) {
-        console.log(picc.access.isProgramReporter(d));
         return picc.access.isProgramReporter(d) ? 'program_reporter' : 'default';
       }
     },
