@@ -46,17 +46,22 @@ describe('picc.access', function() {
         latest: {
           cost: {
             program_reporter: {
-              cip_1: {
-                full_program: 10000,
-                annualized_by_academic_yr: 5000
+              program_1: {
+                cip_6_digit: {
+                  full_program: 10000,
+                  annualized: 5000
+                }
               }
             }
           },
           academics: {
             program_reporter: {
-              cip_1: {
-                cip_description: 'Registered Nursing/Registered Nurse',
-                avg_duration_by_month: 18
+              programs_offered: 1,
+              program_1: {
+                cip_6_digit: {
+                  title: 'Registered Nursing/Registered Nurse',
+                  avg_month_completion: 18
+                }
               }
             }
           }
@@ -72,22 +77,27 @@ describe('picc.access', function() {
         latest: {
           cost: {
             program_reporter: {
-              cip_1: {
-                full_program: 10000,
-                annualized_by_academic_yr: 5000
+              program_1: {
+                cip_6_digit: {
+                  full_program: 10000,
+                  annualized: 5000
+                }
               }
             }
           },
           academics: {
             program_reporter: {
-              cip_1: {
-                cip_description: 'Registered Nursing/Registered Nurse',
-                avg_duration_by_month: 18
+              programs_offered: 1,
+              program_1: {
+                cip_6_digit: {
+                  title: 'Registered Nursing/Registered Nurse',
+                  avg_month_completion: 18
+                }
               }
             }
           }
         }
-      }, 'annualized_by_academic_yr');
+      }, 'annualized');
       assert.equal(programs[0].cost, '$5,000');
     })
 
@@ -96,25 +106,34 @@ describe('picc.access', function() {
         latest: {
           cost: {
             program_reporter: {
-              cip_1: {
-                full_program: 10000,
-                annualized_by_academic_yr: 5000
+              program_1: {
+                cip_6_digit: {
+                  full_program: 10000,
+                  annualized: 5000
+                }
               },
-              cip_2: {
-                full_program: 20000,
-                annualized_by_academic_yr: 1000
+              program_2: {
+                cip_6_digit: {
+                  full_program: 20000,
+                  annualized: 1000
+                }
               }
             }
           },
           academics: {
             program_reporter: {
-              cip_1: {
-                cip_description: 'Registered Nursing/Registered Nurse',
-                avg_duration_by_month: 18
+              programs_offered: 2,
+              program_1: {
+                cip_6_digit: {
+                  title: 'Registered Nursing/Registered Nurse',
+                  avg_month_completion: 18
+                }
               },
-              cip_2: {
-                cip_description: 'Medical/Clinical Assistant',
-                avg_duration_by_month: 30
+              program_2: {
+                cip_6_digit: {
+                  title: 'Medical/Clinical Assistant',
+                  avg_month_completion: 30
+                }
               }
             }
           }
