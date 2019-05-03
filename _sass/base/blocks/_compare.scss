@@ -34,9 +34,6 @@
         @include respond-to(small-up) {
           width: 260px;
         }
-        .fa-star {
-          color: $darker-yellow;
-        }
 
         button {
           @include respond-to(teensy-up) {
@@ -49,7 +46,7 @@
           }
 
           @include respond-to(small-up) {
-            width: 290px;
+            width: 250px;
             text-indent: inherit;
             margin-left: inherit;
             .fa-chevron-down {
@@ -77,6 +74,7 @@
     .toggle-content.toggle-content-compare_schools {
 
       left:0;
+      max-width: 200%;
 
       @media only screen and (min-width: 440px)
       and (max-width: 768px) {
