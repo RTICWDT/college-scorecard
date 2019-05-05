@@ -730,3 +730,55 @@ ol.bars {
   @include span-columns(12);
   margin-top: $base-padding;
 }
+
+.school-outcome-measures{
+  margin-top: $base-padding;
+  padding-top: $base-padding;
+  clear: both;
+}
+
+.toggle_group a{
+  display: inline-block;
+  border: 1px solid #eaeaea;
+  padding: 3px 8px;
+  background-color: $light-gray;
+  color: $black;
+  text-decoration: none;
+  border: 1px solid $white;
+  &:hover{
+    background-color: $hover-button-color;
+    color: $white;
+  }
+  &.active{
+    background-color: $green;
+    font-weight: $weight-bold;
+    color: $white;
+  }
+}
+#om_visualization{
+  display: flex;
+}
+
+#om_group{
+  width: 32%;
+  text-align: center;
+  padding-top: 100px;
+  padding-right: $base-padding;
+}
+#om_sankey{
+  width: 68%;
+  height: 300px;
+  margin-top: $base-padding;
+  text[text-anchor="start"]{
+    display:none;
+  }
+  &.na{
+    border: 1px dashed $mid-gray;
+    text-align: center;
+    padding-top: 100px;
+
+  }
+}
+.google-visualization-tooltip{
+  display:none;
+}

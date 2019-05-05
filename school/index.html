@@ -394,21 +394,26 @@ stylesheets:
                     </figure>
                   </div>
 
+                  <div class="school-outcome-measures">
+                    <h2 class="figure-heading u-align_c" aria-describedby="tip-outcome-measures" tabindex="0">
+                      Students Outcomes <br>By Enrollment Level
+                      <span class="tooltip-target u-new_line">
+                          <i class="fa fa-info-circle"></i>
+                        </span>
+                    </h2>
+                    <div class='toggle_group enroll' id='enroll_toggle'>
+                      <a class='outcome_toggle' href="#enroll_first_time">Started college here</a><a class='outcome_toggle' href="#enroll_not_first_time">Transferred in</a><a class='outcome_toggle active' href="#enroll_both">Both</a>
+                    </div>
+                    <div class='toggle_group study' id="study_toggle">
+                      <a class='outcome_toggle' href="#study_full_time">Study full-time</a><a class='outcome_toggle' href="#study_part_time">Study part-time</a><a class='outcome_toggle active' href="#study_both">Both</a>
+                    </div>
+                    <div id="om_visualization">
+                      <div id="om_group"></div>
+                      <div id="om_sankey"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              <div>
-                <a>Started college here</a>
-                <a>Transferred in</a>
-                <a>Both</a>
-              </div>
-              <div>
-                <a>Study full-time</a>
-                <a>Study part-time</a>
-                <a>Both</a>
-              </div>
-              graduated | transferred | still enrolled | withdrew
-              <div id="sankey_basic" style="width: 900px; height: 300px;"></div>
             </aria-accordion>
 
           </div>
