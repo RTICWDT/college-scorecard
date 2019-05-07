@@ -278,11 +278,6 @@
         @include font-size($h1);
       }
     }
-
-    .program-reporter-note {
-      text-align: left;
-      font-style: italic;
-    }
   }
 
   .school-fact_list {
@@ -442,6 +437,11 @@
       vertical-align: bottom;
     }
   }
+}
+
+.largest-program-cost {
+  max-width: 80%;
+  margin: 0 auto;
 }
 
 .school-long_list {

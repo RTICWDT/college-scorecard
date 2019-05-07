@@ -797,6 +797,8 @@ picc.access.largestProgramsReported = function(d, basis) {
     basis = 'full_program';
   }
 
+  const otherBasis = (basis === 'full_program') ? 'annualized' : 'full_program';
+
   return Object.entries(picc.programReporterCip).map(item => {
     let program = picc.access.composed(
       picc.fields.PROGRAM_REPORTER_PROGRAM,
@@ -809,12 +811,30 @@ picc.access.largestProgramsReported = function(d, basis) {
       program = program.replace(/\//g," / "); // space out slash so we can break word on mobile
     }
 
-    const cost = picc.format.dollars(picc.access.composed(
+    const cost = picc.access.composed(
       picc.fields.PROGRAM_REPORTER_COST,
       item[1],
       picc.fields.PROGRAG_REPORTER_CIP,
       basis
-    ))(d);
+    )(d);
+
+    const costDollar = picc.format.dollars()(cost);
+
+    const otherCost = picc.access.composed(
+      picc.fields.PROGRAM_REPORTER_COST,
+      item[1],
+      picc.fields.PROGRAG_REPORTER_CIP,
+      otherBasis
+    )(d);
+
+    const otherCostDollar = picc.format.dollars()(otherCost);
+
+    const costs = {
+      [basis]: costDollar,
+      [otherBasis]: otherCostDollar
+    };
+
+    const isYearLong = (cost === otherCost);
 
     const duration = picc.access.composed(
       picc.fields.PROGRAM_REPORTER_PROGRAM,
@@ -825,8 +845,10 @@ picc.access.largestProgramsReported = function(d, basis) {
 
     return {
       program,
-      cost,
+      cost: costDollar,
+      costs,
       duration,
+      isYearLong,
       basis
     }
   }).filter(item => item.program);
@@ -834,23 +856,22 @@ picc.access.largestProgramsReported = function(d, basis) {
 
 picc.access.largestProgramReported = function(d) {
 
-  let largestProgram = picc.access.largestProgramsReported(d, 'annualized').shift();
-
+  let largestProgram = picc.access.largestProgramsReported(d).shift();
   if (!largestProgram) return;
 
-  if (largestProgram.duration <=12) {
-    // for programs <= 12 months long (regardless of the institution's academic-year length), use the full program cost
-    largestProgram = picc.access.largestProgramsReported(d).shift();
-  }
+  // the net price is always the cost of the largest program for program-reporter schools,
+  // which includes living expenses
+  const cost = picc.format.dollars(picc.access.netPrice)(d);
 
-  const costDescription = largestProgram.duration <=12
+  const costDescription = largestProgram.isYearLong
     ? `for a ${largestProgram.duration}-month program`
-    : `per year on average`
+    : `per year on average`;
 
   return {
     ...largestProgram,
+    cost,
     costDescription
-  }
+  };
 };
 
 picc.access.awardLevels = function(d, preddegree) {
