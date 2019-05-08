@@ -9,7 +9,7 @@ const EXPECTED_DEFAULTS = {
   'latest.academics.program_available.assoc_or_bachelors_or_certificate': true,
   'latest.student.size__range': '1..',
   'school.degrees_awarded.predominant__range': '1..3',
-  // 'school.degrees_awarded.highest__range': '2..4',
+  'school.id': '..999999',
   'school.operating': 1
 };
 
@@ -41,7 +41,7 @@ describe('picc.form', function() {
   describe('prepareParams()', function() {
     var prep = picc.form.prepareParams;
 
-    it('defaults: `size > 0`, `preddeg = 2..3`, `curroper = 1`', function() {
+    it('defaults: `size > 0`, `preddeg = 1..3`, id = ..999999 `curroper = 1`', function() {
       assert.deepEqual(prep({}), EXPECTED_DEFAULTS);
     });
 
