@@ -3,7 +3,7 @@ avg-cost-year:
  program_reporter: <strong>Average Annual Cost</strong> The average annual net price is not available for this program-reporting school.
 
 avg-program-cost:
-  default: "<strong>Cost of Largest Program</strong> If program is less than 1 year, this is the total cost. If the program is longer than 1 year, this is the annual cost. Note: Programs are not necessarily comparable."
+  default: <strong>Cost After Aid for Largest Program</strong><ul><li>This includes expenses beyond tuition, fees, books, and supplies (e.g., living expenses).</li><li>If the program is less than 1 year, this is the total cost after aid. If the program is longer than 1 year, this is the annual cost after aid.</li></ul>
 
 graduation-rate:
  default: <strong>Graduation Rate</strong> The graduation rate within 150 percent of the expected time to completion (typically six years for schools that award predominantly four-year degrees and three years for schools that award predominantly two-year degrees). These rates are only for full-time students enrolled for the first time.
@@ -78,4 +78,4 @@ award-level:
   4-year: Most awards earned are 4-year bachelor's degrees, but other degrees or certificates are offered.
 
 cost-six-largest-programs:
-  default: <strong>PLACEHOLDER</strong> Programs reported at this institution.
+  default: <strong>Largest Programs</strong> Includes up to six of this school’s largest programs by number of students enrolled.
