@@ -257,3 +257,28 @@
     font-weight: $weight-bold;
   }
 }
+
+
+.data-preview{
+  .back-link{
+    margin-bottom: $base-padding-large;
+  }
+  p{
+    margin-bottom: $base-padding;
+  }
+  ol{
+    margin: $base-padding $base-padding-large;
+
+    li{
+      list-style-type: decimal;
+      margin-top: $base-padding-lite;
+      margin-bottom: $base-padding-lite;
+    }
+  }
+  .button{
+    width: 425px;
+  }
+  .u-group_inline{
+    width: 70%;
+  }
+}
