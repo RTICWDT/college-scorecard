@@ -2132,8 +2132,8 @@ picc.form.prepareParams = (function() {
     // set the predominant degree to range '1..3' because ED expert guidance
     query[picc.fields.PREDOMINANT_DEGREE + '__range'] = '1..3';
 
-    // set the highest degree to range '2..4' to exclude certificate only schools
-    //query[picc.fields.HIGHEST_DEGREE + '__range'] = '2..4';
+    // exclude perfect-only children per ED
+    query[picc.fields.ID + '__range'] = '..999999';
 
     return query;
   };
