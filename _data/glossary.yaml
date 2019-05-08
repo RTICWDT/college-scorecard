@@ -79,3 +79,6 @@ award-level:
 
 cost-six-largest-programs:
   default: <strong>Largest Programs</strong> Includes up to six of this school’s largest programs by number of students enrolled.
+
+ogc:
+  default: This institution does not participate in the Federal student financial aid programs administered by the U.S. Department of Education, but is approved by the Department for purposes of allowing students to receive deferments on repayment of Federal student loans received at other institutions.
