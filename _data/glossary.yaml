@@ -2,7 +2,7 @@ avg-cost-year:
  default: <strong>Average Annual Cost</strong> The average annual net price for federal financial aid recipients, after aid from the school, state, or federal government. For public schools, this is only the average cost for in-state students.
 
 graduation-rate:
- default: <strong>Graduation Rate</strong> The graduation rate within 150 percent of the expected time to completion (typically six years for schools that award predominantly four-year degrees and three years for schools that award predominantly two-year degrees). These rates are only for full-time students enrolled for the first time.
+  default: <strong>Graduation Rate</strong> <ul><li>The graduation rate is the share of students who graduated within 150 percent of the expected time to graduation (typically 6 years for schools that award predominantly 4-year degrees and 3 years for schools that award predominantly 2-year degrees).</li><li>This graduation rate only applies to students studying full-time who started college at this school.</li></ul>
 
 avg-salary:
   default: <strong>Salary After Attending</strong> The median earnings of former students who received federal financial aid, at 10 years after entering the school.
@@ -74,4 +74,4 @@ award-level:
   4-year: Most awards earned are 4-year bachelor's degrees, but other degrees or certificates are offered.
 
 outcome-measures: 
-  default: <strong>Outcomes 8 Years After Attending</strong> Percentages of students by enrollment level who graduated, transferred, are still enrolled, and withdrew from this institution within 8 years of entry. Percentages may not add to 100% due to suppression and rounding.
+  default: <strong>Outcomes 8 Years After Attending</strong> <ul><li>Percentages of students who graduated, transferred, are still enrolled, and withdrew from this institution within 8 years of entry.</li><li>This 8-year graduation rate is different from the graduation rate shown above, which measures a shorter time period and a more narrow group of students. </li><li>Percentages may not add to 100% due to suppression and rounding.</li></ul>
