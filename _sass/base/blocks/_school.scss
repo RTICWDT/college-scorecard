@@ -739,6 +739,11 @@ ol.bars {
     padding-bottom: 0.7em !important;
     padding-left: 2px;
   }
+
+  .figure-heading{
+    padding-top: $base-padding;
+    border-top: 1px solid $mid-gray;
+  }
   
 }
 
