@@ -6,10 +6,10 @@ var extend = require('extend');
 
 // expected default parameters
 const EXPECTED_DEFAULTS = {
+  'id__range': '..999999',
   'latest.academics.program_available.assoc_or_bachelors_or_certificate': true,
   'latest.student.size__range': '1..',
   'school.degrees_awarded.predominant__range': '1..3',
-  'school.id': '..999999',
   'school.operating': 1
 };
 
