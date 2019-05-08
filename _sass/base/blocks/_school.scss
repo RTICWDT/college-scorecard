@@ -735,24 +735,42 @@ ol.bars {
   margin-top: $base-padding;
   padding-top: $base-padding;
   clear: both;
+  .outcomes_intro{
+    padding-bottom: 0.7em !important;
+    padding-left: 2px;
+  }
+  
+}
+
+.toggle_group{
+  border-radius: 2px;
+  margin-bottom: 0.7em;
 }
 
 .toggle_group a{
   display: inline-block;
-  border: 1px solid #eaeaea;
-  padding: 3px 8px;
-  background-color: $light-gray;
+  border: 1px solid $mid-gray;
+  padding: .25em .5em;
+  background-color: $white;
   color: $black;
   text-decoration: none;
-  border: 1px solid $white;
+  font-size: 1rem;
   &:hover{
     background-color: $hover-button-color;
     color: $white;
   }
   &.active{
-    background-color: $green;
-    font-weight: $weight-bold;
+    background-color: $darker-green;
     color: $white;
+  }
+  &:first-child{
+    border-radius: 2px 0 0 2px;
+    border-right-style:none;
+
+  }
+  &:last-child{
+    border-radius: 0 2px 2px 0;
+    border-left-style:none;
   }
 }
 #om_visualization{
@@ -773,10 +791,11 @@ ol.bars {
     display:none;
   }
   &.na{
-    border: 1px dashed $mid-gray;
+    border: 1px solid $light-gray;
     text-align: center;
     padding-top: 100px;
-
+    color: $dark-gray;
+    border-radius: 2px;
   }
 }
 .google-visualization-tooltip{

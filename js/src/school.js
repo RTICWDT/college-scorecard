@@ -246,7 +246,7 @@ module.exports = function school() {
 
     jQuery('.outcome_toggle').click(function(e){
       e.preventDefault();
-      $ref = jQuery(this);
+      var $ref = jQuery(this);
       $ref.closest('.toggle_group').find('.active').removeClass('active');
       $ref.addClass('active');
       drawChart();
@@ -261,52 +261,52 @@ module.exports = function school() {
       study_full_time: {
         enroll_first_time: {
           variable: 'full_time.first_time.8yr',
-          text: "Started college here and studying full-time"
+          text: "Out of students who started college here and studied full-time..."
         },
         enroll_not_first_time: {
           variable: 'full_time.not_first_time.8yr',
-          text: "Transferred in and studying full-time"
+          text: "Out of students who transferred in and studied full-time..."
         },
         enroll_both: {
           variable: 'full_time.8yr',
-          text: "Studying full-time"
+          text: "Out of students who studied full-time..."
         }
       },
       study_part_time: {
         enroll_first_time: {
           variable: 'part_time.first_time.8yr',
-          text: 'Started college here and studying part-time'
+          text: 'Out of students who started college here and studied part-time...'
         },
         enroll_not_first_time: {
           variable: 'part_time.not_first_time.8yr',
-          text: 'Transferred in and studying part-time'
+          text: 'Out of students who transferred in and studied part-time...'
         },
         enroll_both: {
           variable: 'part_time.8yr',
-          text: 'Studying part-time'
+          text: 'Out of students who studied part-time...'
         },
       },
       study_both: {
         enroll_first_time: {
           variable: 'first_time.8yr',
-          text: 'Started college here'
+          text: 'Out of students who started college here...'
         },
         enroll_not_first_time: {
           variable: 'not_first_time.8yr',
-          text: 'Transferred in'
+          text: 'Out of students who transferred in...'
         },
         enroll_both: {
           variable: 'all_students.8yr',
-          text: 'All students'
+          text: 'Out of all students...'
         }
       }
     }
 
     var friendlyMetrics = {
-      'award_pooled': 'Graduated',
-      'still_enrolled_pooled': 'Still Enrolled',
-      'transfer_pooled': 'Transferred',
-      'unknown_pooled': 'Withdrew'
+      'award_pooled': 'graduated',
+      'still_enrolled_pooled': 'still enrolled',
+      'transfer_pooled': 'transferred',
+      'unknown_pooled': 'withdrew'
     }
 
     var currentData = jQuery.extend(true, {}, picc.access(links[study][enroll].variable)(outcomes));
@@ -316,7 +316,7 @@ module.exports = function school() {
     for(var q in currentData){ 
       percent = Math.round(currentData[q] * 100);
       if(percent > 0) {
-        rows.push([ 'Group', percent+"% " + friendlyMetrics[q], percent, '{node: {color: red }}']);
+        rows.push([ 'Group', percent+"% " + friendlyMetrics[q], percent]);
       }
     }
 
@@ -327,7 +327,6 @@ module.exports = function school() {
       data.addColumn('string', 'From');
       data.addColumn('string', 'To');
       data.addColumn('number', 'Percent');
-      data.addColumn({type:'string', role:'Style'})
       data.addRows(rows);
 
       // Sets chart options.

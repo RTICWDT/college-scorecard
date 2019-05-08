@@ -74,4 +74,4 @@ award-level:
   4-year: Most awards earned are 4-year bachelor's degrees, but other degrees or certificates are offered.
 
 outcome-measures: 
-  default: <strong>Student Outcomes By Enrollment Level</strong> Percentages of students by enrollment level who graduated, transferred, are still enrolled, and withdrew from this institution within 8 years of entry. Percentages may not add to 100% due to suppression and rounding.
+  default: <strong>Outcomes 8 Years After Attending</strong> Percentages of students by enrollment level who graduated, transferred, are still enrolled, and withdrew from this institution within 8 years of entry. Percentages may not add to 100% due to suppression and rounding.
