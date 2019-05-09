@@ -250,6 +250,15 @@ module.exports = function school() {
       $ref.closest('.toggle_group').find('.active').removeClass('active');
       $ref.addClass('active');
       drawChart();
+      if (window.ga) {
+        var ga_enroll = jQuery('#enroll_toggle').find('.active').attr('href').substring(8).replace(/_/g,' ');
+        var ga_study = jQuery('#study_toggle').find('.active').attr('href').substring(7).replace(/_/g,' ');
+        try {
+          ga('send', 'event', 'Outcome', 'Toggle', ga_enroll+" "+ga_study);
+        } catch (e) {
+          console.error('[ga] outcome measure toggle event error');
+        }
+      }
     });
   }
 
