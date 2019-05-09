@@ -2080,10 +2080,10 @@ picc.form.prepareParams = (function() {
       delete query.distance;
     }
 
-    // by default, filter out schools for which school.size is null or 0
+    // by default, filter out schools for which school.size is null
     // with a numeric range query
     if (!query.size) {
-      query[fields.SIZE + '__range'] = '1..';
+      query[fields.SIZE + '__range'] = '0..';
     }
 
     /*
