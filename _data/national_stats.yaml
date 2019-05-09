@@ -3,20 +3,20 @@ net_price:
   max: 100000
 
 completion_rate:
-  min: 0.0227
-  max: 1
+  min: 0
+  max: 0.9811
 
 median_earnings:
   min: 0
   max: 100000
 
 retention_rate:
-  min: 0.1574
+  min: 0.075
   max: 1
 
 repayment_rate:
   min: 0.105932203
-  max: 0.933202358
+  max: 0.933673469
 
 median_total_debt:
   min: 1500

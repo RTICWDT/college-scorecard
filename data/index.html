@@ -2,7 +2,6 @@
 title: College Scorecard Data
 layout: default-data
 permalink: /data/
-data_base_url: https://ed-public-download.app.cloud.gov/downloads
 #scripts:
 #  - vendor/flickity.pkgd.js
 #stylesheets:
@@ -36,16 +35,16 @@ data_base_url: https://ed-public-download.app.cloud.gov/downloads
         and more. The files include data from 1996 through 2017 for all
         undergraduate degree-granting institutions of higher education. </p>
 
-      <p>This data was <strong>last updated October 30, 2018</strong>. Our
+      <p>This data was <strong>last updated May 21, 2019</strong>. Our
           <a href="{{ site.baseurl }}/data/changelog/">Change Log</a> describes the changes to the
           dataset over time.</p>
 
       <div class="u-group_inline">
         <div class="u-group_inline-left">
-          <a data-download href="{{ page.data_base_url }}/CollegeScorecard_Raw_Data.zip" class="button button-primary">Download All Data</a>
+          <a data-download href="{{ site.downloads.data-base_url }}/CollegeScorecard_Raw_Data.zip" class="button button-primary">Download All Data</a>
         </div>
         <div class="u-group_inline-right">
-          <p>240 MB zip</p>
+          <p>265 MB zip</p>
         </div>
       </div>
 
@@ -56,11 +55,25 @@ data_base_url: https://ed-public-download.app.cloud.gov/downloads
         current data for each element.</p>
 
       <ul class="data-download-list">
-        <li><a data-download href="{{ page.data_base_url }}/Most-Recent-Cohorts-Scorecard-Elements.csv">Scorecard data</a> 4 MB CSV</li>
-        <li><a data-download href="{{ page.data_base_url }}/Most-Recent-Cohorts-All-Data-Elements.csv">Most recent data</a> 132 MB CSV</li>
-        <li><a data-download href="{{ page.data_base_url }}/Most-Recent-Cohorts-NSLDS-Elements.csv">What's new from NSLDS</a> 111 MB CSV</li>
-        <li><a data-download href="{{ page.data_base_url }}/Most-Recent-Cohorts-Treasury-Elements.csv" >Post-school earnings</a> 5 MB CSV</li>
+        <li><a data-download href="{{ site.downloads.data-base_url }}/Most-Recent-Cohorts-Scorecard-Elements.csv">Scorecard data</a> 4 MB CSV</li>
+        <li><a data-download href="{{ site.downloads.data-base_url }}/Most-Recent-Cohorts-All-Data-Elements.csv">Most recent data</a> 135 MB CSV</li>
+        <li><a data-download href="{{ site.downloads.data-base_url }}/Most-Recent-Cohorts-NSLDS-Elements.csv">What's new from NSLDS</a> 110 MB CSV</li>
+        <li><a data-download href="{{ site.downloads.data-base_url }}/Most-Recent-Cohorts-Treasury-Elements.csv" >Post-school earnings</a> 5 MB CSV</li>
       </ul>
+
+      <hr/>
+
+      <div class="data-prelim">
+        <h3><i class="fa fa-warning"></i> Preliminary Data Downloads <i class="fa fa-warning"></i></h3>
+
+        <p class="">The following data downloads are <strong>not finalized for production use</strong> and are only provided for the purpose of preliminary review. Please use with caution.</p>
+
+        <ul class="data-download-list">
+          <li><a data-download href="/data/preview/">Preliminary Loan Debt Data by Field of Study</a></li>
+        </ul>
+      </div>
+
+      <hr/>
 
     </div>
 
