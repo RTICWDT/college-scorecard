@@ -141,7 +141,8 @@ stylesheets:
             <div class="school-meters">
 
               <figure class="meter below_is_good">
-                <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year" tabindex="0">
+                <h2 class="figure-heading constrain_width" data-bind="program_reporter_tip"
+                    aria-describedby="tip-avg-cost-year" tabindex="0">
                   Average<br>Annual Cost
                   <span class="tooltip-target u-new_line">
                     <i class="fa fa-info-circle"></i>
@@ -183,7 +184,6 @@ stylesheets:
               </figure>
 
             </div>
-
           </div><!-- /.school-card_container-school -->
 
           <div class="section-card_container-school">
@@ -200,11 +200,12 @@ stylesheets:
 
                 <div id="costs-content" aria-hidden="true">
 
-                  <div class="school-two_col-left centered">
+                  <div class="school-two_col-left centered" data-bind="program_reporter_hidden">
 
                     <figure class="meter below_is_good">
-                      <h2 class="figure-heading" aria-describedby="tip-avg-cost-year" tabindex="0">
-                        Average<br>Annual Cost
+                      <h2 class="figure-heading constrain_width"
+                          aria-describedby="tip-avg-cost-year" tabindex="0" data-bind="average_cost_tip">
+                        <span data-bind="average_cost_label" class="label-nowrap">Average<br>Annual Cost</span>
                         <span class="tooltip-target u-new_line">
                           <i class="fa fa-info-circle"></i>
                         </span>
@@ -223,7 +224,7 @@ stylesheets:
 
                   </div>
 
-                  <div class="school-two_col-right">
+                  <div class="school-two_col-right" data-bind="program_reporter_hidden">
                     <h2>By Family Income</h2>
                     <p>Depending on the federal, state, or institutional grant aid available, students in your income bracket may pay more or less than the overall average costs.</p>
 
@@ -261,6 +262,86 @@ stylesheets:
 
                   </div>
 
+                  <div class="u-clearfix"></div>
+
+                  <div class="school-single_col centered" data-bind="program_reporter_shown" aria-hidden="true">
+                    <h2 class="figure-heading constrain_width"
+                    aria-describedby="tip-cost-six-largest-programs" tabindex="0">
+                      Largest Programs
+                      <span class="tooltip-target">
+                      <i class="fa fa-info-circle"></i>
+                      </span>
+                    </h2>
+
+                    <aria-tabs>
+                      <div data-name="Total" aria-selected="true">
+                        <table class="school-table programs-table">
+                          <caption class="sr-only">Total costs of largest programs</caption>
+                          <thead>
+                          <tr>
+                            <th width="60%">Program Name</th>
+                            <th width="15%">Program Months</th>
+                            <th width="15%">Tuition, Fees, Books, Supplies</th>
+                          </tr>
+                          </thead>
+                          <tbody class="program-table-body" data-bind="program_reporter_total">
+                          <tr>
+                            <td><span class="program">Program Name</span></td>
+                            <td><span class="duration">XX</span></td>
+                            <td><span class="cost">$XX,XXX</span></td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div data-name="Per Academic Year">
+                        <table class="school-table programs-table">
+                          <caption class="sr-only">Costs of largest programs per academic year</caption>
+                          <thead>
+                          <tr>
+                            <th width="60%">Program Name</th>
+                            <th width="15%">Program Months</th>
+                            <th width="15%">Tuition, Fees, Books, Supplies</th>
+                          </tr>
+                          </thead>
+                          <tbody class="program-table-body" data-bind="program_reporter_per_year">
+                          <tr>
+                            <td><span class="program">Program Name</span></td>
+                            <td><span class="duration">XX</span></td>
+                            <td><span class="cost">$XX,XXX</span></td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </aria-tabs>
+                  </div>
+
+                  <div class="u-new_line u-clearfix" style="margin-top: 15px;"></div>
+                  <div class="centered" data-bind="program_reporter_shown">
+                    <h2 class="figure-heading"
+                        aria-describedby="tip-avg-program-cost" tabindex="0">
+                      Cost After Aid<br>for Largest Program
+                      <span class="tooltip-target u-new_line">
+                            <i class="fa fa-info-circle"></i>
+                          </span>
+                    </h2>
+                    <div class="largest-program-cost" data-bind="program_reporter_largest">
+                            <span><strong>Program: </strong>
+                              <span class="program">Program Name</span>
+                            </span>
+                      <strong class="fact_number">
+                        <span class="cost">$XX,XXX</span>
+                      </strong>
+                      <span class="costDescription">XXX</span>
+                    </div>
+                  </div>
+
+                  <div class="school-single_col centered" data-bind="program_reporter_shown" aria-hidden="true">
+                    <a class="button button-primary button-costs" target="_blank" data-bind="net_price_calculator">
+                      <i class="fa fa-calculator"></i>
+                      Calculate your personal net price
+                    </a>
+                  </div>
+
                 </div>
 
               </div>
@@ -269,7 +350,7 @@ stylesheets:
           </div>
 
           <div class="section-card_container-school">
-            <aria-accordion id="finaid" class="school-two_col">
+            <aria-accordion id="finaid">
               <div>
                 <h1 class="search_category">
                   <button aria-expanded="false" aria-controls="finaid-content">
@@ -279,71 +360,85 @@ stylesheets:
 
                 <div id="finaid-content" aria-hidden="true">
 
-                  <div class="school-two_col-left centered">
-
-                    <figure class="meter above_is_good">
-                      <h2 class="figure-heading" aria-describedby="tip-repayment-rate" tabindex="0" data-bind="branch_campus">
-                        Students Paying<br>Down Their Debt
-                        <span class="tooltip-target u-new_line">
+                  <div class="school-single_col no_finaid_banner" data-bind="no_finaid_shown" aria-hidden="true" aria-describedby="tip-ogc">
+                    <div class="callout-banner-wrapper">
+                      <p class="callout-banner">
+                        This school does not offer federal student aid.
+                        <span class="tooltip-target">
                           <i class="fa fa-info-circle"></i>
                         </span>
-                      </h2>
-                      <picc-meter id="repayment-meter" {% include repayment_rate_meter_attributes.html %}>
-                      </picc-meter>
-
-                      <figcaption>
-                        <span class="average-value" data-bind="repayment_rate_percent">XX%</span>
-                      </figcaption>
-                    </figure>
-
-                    <div class="container school-callout">
-
-                      <h2>Get Help Paying for College</h2>
-                      <p>Submit a free application for Federal Student Aid. You may be eligible to receive federal grants or loans.</p>
-                      <a href="https://fafsa.ed.gov/spa/fafsa" target="_blank" class="button button-primary">
-                        Start My Application
-                      </a>
-
+                      </p>
                     </div>
-
                   </div>
 
-                  <div class="school-two_col-right school-fact_list">
+                  <div class="school-two_col">
 
-                    <div>
-                      <h2 aria-describedby="tip-student-aid" tabindex="0">
-                        Students Receiving Federal Loans
-                        <span class="tooltip-target">
-                          <i class="fa fa-info-circle"></i>
-                        </span>
-                      </h2>
-                      <strong class="fact_number" data-bind="federal_aid_percentage">XX%</strong>
-                      <p>At some schools where few students borrow federal loans, the typical undergraduate may leave school with $0 in debt.</p>
+                    <div class="school-two_col-left centered">
+
+                      <figure class="meter above_is_good">
+                        <h2 class="figure-heading" aria-describedby="tip-repayment-rate" tabindex="0" data-bind="branch_campus">
+                          Students Paying<br>Down Their Debt
+                          <span class="tooltip-target u-new_line">
+                            <i class="fa fa-info-circle"></i>
+                          </span>
+                        </h2>
+                        <picc-meter id="repayment-meter" {% include repayment_rate_meter_attributes.html %}>
+                        </picc-meter>
+
+                        <figcaption>
+                          <span class="average-value" data-bind="repayment_rate_percent">XX%</span>
+                        </figcaption>
+                      </figure>
+
+                      <div class="container school-callout">
+
+                        <h2>Get Help Paying for College</h2>
+                        <p>Submit a free application for Federal Student Aid. You may be eligible to receive federal grants or loans.</p>
+                        <a href="https://fafsa.ed.gov/spa/fafsa" target="_blank" class="button button-primary">
+                          Start My Application
+                        </a>
+
+                      </div>
+
                     </div>
 
-                    <div>
-                      <h2 aria-describedby="tip-avg-debt" tabindex="0" data-bind="branch_campus">
-                        Typical Total Debt After Graduation
-                        <span class="tooltip-target">
-                          <i class="fa fa-info-circle"></i>
-                        </span>
-                      </h2>
-                      <strong class="fact_number" data-bind="average_total_debt">$XX,XXX</strong>
-                      <p>For undergraduate borrowers who complete college</p>
-                    </div>
+                    <div class="school-two_col-right school-fact_list">
 
-                    <div>
-                      <h2 aria-describedby="tip-avg-loan-payment" tabindex="0" data-bind="branch_campus">
-                        Typical Monthly Loan Payment
-                        <span class="tooltip-target">
-                          <i class="fa fa-info-circle"></i>
-                        </span>
-                      </h2>
-                      <span class="fact_number">
-                        <strong data-bind="average_monthly_loan_payment">$XXX</strong>/mo
-                      </span>
-                    </div>
+                      <div>
+                        <h2 aria-describedby="tip-student-aid" tabindex="0">
+                          Students Receiving Federal Loans
+                          <span class="tooltip-target">
+                            <i class="fa fa-info-circle"></i>
+                          </span>
+                        </h2>
+                        <strong class="fact_number" data-bind="federal_aid_percentage">XX%</strong>
+                        <p>At some schools where few students borrow federal loans, the typical undergraduate may leave school with $0 in debt.</p>
+                      </div>
 
+                      <div>
+                        <h2 aria-describedby="tip-avg-debt" tabindex="0" data-bind="branch_campus">
+                          Typical Total Debt After Graduation
+                          <span class="tooltip-target">
+                            <i class="fa fa-info-circle"></i>
+                          </span>
+                        </h2>
+                        <strong class="fact_number" data-bind="average_total_debt">$XX,XXX</strong>
+                        <p>For undergraduate borrowers who complete college</p>
+                      </div>
+
+                      <div>
+                        <h2 aria-describedby="tip-avg-loan-payment" tabindex="0" data-bind="branch_campus">
+                          Typical Monthly Loan Payment
+                          <span class="tooltip-target">
+                            <i class="fa fa-info-circle"></i>
+                          </span>
+                        </h2>
+                        <span class="fact_number">
+                          <strong data-bind="average_monthly_loan_payment">$XXX</strong>/mo
+                        </span>
+                      </div>
+
+                    </div>
                   </div>
                 </div>
               </div>

@@ -1,5 +1,9 @@
 avg-cost-year:
  default: <strong>Average Annual Cost</strong> The average annual net price for federal financial aid recipients, after aid from the school, state, or federal government. For public schools, this is only the average cost for in-state students.
+ program_reporter: <strong>Average Annual Cost</strong> The average annual net price is not available for this program-reporting school.
+
+avg-program-cost:
+  default: <strong>Cost After Aid for Largest Program</strong><ul><li>This includes expenses beyond tuition, fees, books, and supplies (e.g., living expenses).</li><li>If the program is less than 1 year, this is the total cost after aid. If the program is longer than 1 year, this is the annual cost after aid.</li></ul>
 
 graduation-rate:
   default: <strong>Graduation Rate</strong> <ul><li>The graduation rate is the share of students who graduated within 150 percent of the expected time to graduation (typically 6 years for schools that award predominantly 4-year degrees and 3 years for schools that award predominantly 2-year degrees).</li><li>This graduation rate only applies to students studying full-time who started college at this school.</li></ul>
@@ -73,5 +77,11 @@ award-level:
   2-year: Most awards earned are 2-year associate's degrees, but other degrees or certificates are offered.
   4-year: Most awards earned are 4-year bachelor's degrees, but other degrees or certificates are offered.
 
-outcome-measures: 
+cost-six-largest-programs:
+  default: <strong>Largest Programs</strong> Includes up to six of this school’s largest programs by number of students enrolled.
+
+ogc:
+  default: This institution does not participate in the Federal student financial aid programs administered by the U.S. Department of Education, but is approved by the Department for purposes of allowing students to receive deferments on repayment of Federal student loans received at other institutions.
+
+outcome-measures:
   default: <strong>Outcomes 8 Years After Attending</strong> <ul><li>Percentages of students who graduated, transferred, are still enrolled, and withdrew from this institution within 8 years of entry.</li><li>This 8-year graduation rate is different from the graduation rate shown above, which measures a shorter time period and a more narrow group of students. </li><li>Percentages may not add to 100% due to suppression and rounding.</li></ul>

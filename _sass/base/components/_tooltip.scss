@@ -21,6 +21,19 @@
   }
 }
 
+.no_finaid_banner{
+  i{
+    color: $white;
+  }
+  &:hover,
+  &:focus {
+    i {
+      color: $mid-medium-gray !important;
+    }
+  }
+}
+
+
 [aria-describedby^=tip-] {
   cursor: pointer;
 

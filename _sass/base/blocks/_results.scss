@@ -209,7 +209,7 @@
       width: auto;
       height: 100%;
       @include respond-to(small-up) {
-        width: 210px;
+        width: 165px;
       }
 
       .selection-count {
@@ -229,17 +229,16 @@
 
     left: 0;
     @include respond-to(teensy-down) {
-      //right:0;
       left: inherit;
     }
 
-    @media only screen and (min-width:544px)
+    @media only screen and (min-width:534px)
     and (max-width: 599px) {
       right: 0;
       left: inherit;
     }
 
-    @media only screen and (min-width: 736px)
+    @media only screen and (min-width: 707px)
     and (max-width: 902px) {
       right: 0;
       left: inherit;

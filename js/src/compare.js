@@ -20,6 +20,7 @@ module.exports = function compare() {
   var qs = querystring.parse(decodeURIComponent(location.search.substr(1)));
   var shareComparison = false;
   var compareShareLink = document.querySelector('.school-share-wrapper');
+  var programReporterNote = document.querySelectorAll('.program-reporter-note');
 
   if (qs['s[]'] || qs['schools[]']) {
     // console.log('share', qs['schools[]']);
@@ -64,6 +65,7 @@ module.exports = function compare() {
     picc.fields.LOCALE,
     // to get "public" or "private" control
     picc.fields.OWNERSHIP,
+    picc.fields.HIGHEST_DEGREE,
     // to get the "four_year" or "lt_four_year" bit
     picc.fields.PREDOMINANT_DEGREE,
     // to get alternative predominant degree offered flag
@@ -71,6 +73,8 @@ module.exports = function compare() {
     picc.fields.DEGREE_OFFERED + '.bachelors',
     picc.fields.DEGREE_OFFERED + '.assoc',
     picc.fields.DEGREE_OFFERED + '.certificate',
+    // program reporter number / flag
+    picc.fields.PROGRAM_REPORTER_OFFERED,
     // get all of the net price values
     picc.fields.NET_PRICE,
     picc.fields.COMPLETION_RATE,
@@ -204,7 +208,6 @@ module.exports = function compare() {
     'compare_share_link_mail',
   ]);
 
-
   // build query for API call
   function buildQuery (schools) {
     var query = {};
@@ -214,7 +217,6 @@ module.exports = function compare() {
     });
     return query;
   }
-
 
   function onChange() {
 
@@ -310,6 +312,12 @@ module.exports = function compare() {
 
       tagalong(compareShareLink, {}, shareLinks);
 
+      if (hasProgramReporter(schools.results)) {
+        [].slice.call(programReporterNote).forEach(function(node) {
+          node.removeAttribute('aria-hidden');
+        })
+      }
+
       picc.ui.alreadyLoaded = true;
 
     });
@@ -318,9 +326,16 @@ module.exports = function compare() {
 
   function schoolsByPredDegree(results, degreeType) {
     return results.filter(function(d) {
-      // if degreeType is empty for a section, this returns all schools
-      return picc.access(picc.fields.PREDOMINANT_DEGREE)(d) === +degreeType || !degreeType ;
+      var isProgramReporter = !!picc.access.isProgramReporter(d);
+      // need to return all schools if this is not a section that renders schools by pred degree breakouts (College Information), i.e., `!degreeType`
+      return (degreeType === 'P' && isProgramReporter) || (!isProgramReporter && picc.access(picc.fields.PREDOMINANT_DEGREE)(d) === +degreeType) || !degreeType;
     });
+  }
+
+  function hasProgramReporter(results) {
+    return results.some(function(d) {
+      return !!picc.access.isProgramReporter(d);
+    })
   }
 
   function insertAfter(newNode, referenceNode) {

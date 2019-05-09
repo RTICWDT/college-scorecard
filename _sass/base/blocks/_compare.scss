@@ -32,10 +32,7 @@
       .toggle-control {
 
         @include respond-to(small-up) {
-          width: 290px;
-        }
-        .fa-star {
-          color: $darker-yellow;
+          width: 260px;
         }
 
         button {
@@ -49,7 +46,7 @@
           }
 
           @include respond-to(small-up) {
-            width: 290px;
+            width: 250px;
             text-indent: inherit;
             margin-left: inherit;
             .fa-chevron-down {
@@ -77,9 +74,10 @@
     .toggle-content.toggle-content-compare_schools {
 
       left:0;
+      max-width: 200%;
 
       @media only screen and (min-width: 440px)
-      and (max-width: 656px) {
+      and (max-width: 768px) {
         right: 0;
         left: inherit;
       }
@@ -196,6 +194,10 @@
   }
 }
 
+.program-reporter-note {
+  font-style: italic;
+}
+
 .figure-heading {
   margin: 20px auto;
 
@@ -310,7 +312,7 @@ figcaption {
     }
   }
 
-  .school-headings {
+  .school-headings.school-section {
     h1 {
       @include font-size($h3);
 
@@ -359,11 +361,14 @@ figcaption {
           margin-right: 20px;
           width: 60px;
 
-          .school-key_figures-year:before {
-            font-family: "fontawesome";
-            content: '\f0a3';
-            font-size: .75em;
+          .school-key_figures-year {
+            margin-top: -20px;
 
+            &:before {
+              font-family: "fontawesome";
+              content: '\f0a3';
+              font-size: .75em;
+            }
 
           }
         }

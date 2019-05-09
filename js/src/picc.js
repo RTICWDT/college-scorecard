@@ -472,6 +472,7 @@ picc.fields = {
   PREDOMINANT_DEGREE:   'school.degrees_awarded.predominant',
   HIGHEST_DEGREE:       'school.degrees_awarded.highest',
   UNDER_INVESTIGATION:  'school.under_investigation',
+  AID_ELIGIBILITY:      'school.title_iv.eligibility_type',
 
   // net price
   NET_PRICE:            'latest.cost.avg_net_price.overall',
@@ -521,7 +522,22 @@ picc.fields = {
   SAT_WRITING_75TH_PCTILE:  'latest.admissions.sat_scores.75th_percentile.writing',
   SAT_WRITING_MIDPOINT:     'latest.admissions.sat_scores.midpoint.writing',
 
-  NET_PRICE_CALC_URL:       'school.price_calculator_url'
+  NET_PRICE_CALC_URL:       'school.price_calculator_url',
+
+  // program reporters
+  PROGRAM_REPORTER_OFFERED: 'latest.academics.program_reporter.programs_offered',
+  PROGRAG_REPORTER_CIP:     'cip_6_digit',
+  PROGRAM_REPORTER_COST:    'latest.cost.program_reporter',
+  PROGRAM_REPORTER_PROGRAM: 'latest.academics.program_reporter',
+};
+
+picc.programReporterCip = {
+  1: 'program_1',
+  2: 'program_2',
+  3: 'program_3',
+  4: 'program_4',
+  5: 'program_5',
+  6: 'program_6'
 };
 
 picc.access = function(key) {
@@ -769,8 +785,97 @@ picc.access.programAreas = function(d, field) {
     });
 };
 
+picc.access.isProgramReporter = function(d) {
+  return picc.access(picc.fields.PROGRAM_REPORTER_OFFERED)(d);
+}
+
+picc.access.largestProgramsReported = function(d, basis) {
+
+  if (!picc.access.isProgramReporter) return [];
+
+  if(!basis) {
+    basis = 'full_program';
+  }
+
+  const otherBasis = (basis === 'full_program') ? 'annualized' : 'full_program';
+
+  return Object.entries(picc.programReporterCip).map(item => {
+    let program = picc.access.composed(
+      picc.fields.PROGRAM_REPORTER_PROGRAM,
+      item[1],
+      picc.fields.PROGRAG_REPORTER_CIP,
+      'title'
+    )(d);
+
+    if (program) {
+      program = program.replace(/\//g," / "); // space out slash so we can break word on mobile
+    }
+
+    const cost = picc.access.composed(
+      picc.fields.PROGRAM_REPORTER_COST,
+      item[1],
+      picc.fields.PROGRAG_REPORTER_CIP,
+      basis
+    )(d);
+
+    const costDollar = picc.format.dollars()(cost);
+
+    const otherCost = picc.access.composed(
+      picc.fields.PROGRAM_REPORTER_COST,
+      item[1],
+      picc.fields.PROGRAG_REPORTER_CIP,
+      otherBasis
+    )(d);
+
+    const otherCostDollar = picc.format.dollars()(otherCost);
+
+    const costs = {
+      [basis]: costDollar,
+      [otherBasis]: otherCostDollar
+    };
+
+    const isYearLong = (cost === otherCost);
+
+    const duration = picc.access.composed(
+      picc.fields.PROGRAM_REPORTER_PROGRAM,
+      item[1],
+      picc.fields.PROGRAG_REPORTER_CIP,
+      'avg_month_completion'
+    )(d);
+
+    return {
+      program,
+      cost: costDollar,
+      costs,
+      duration,
+      isYearLong,
+      basis
+    }
+  }).filter(item => item.program);
+};
+
+picc.access.largestProgramReported = function(d) {
+
+  let largestProgram = picc.access.largestProgramsReported(d).shift();
+  if (!largestProgram) return;
+
+  // the net price is always the cost of the largest program for program-reporter schools,
+  // which includes living expenses
+  const cost = picc.format.dollars(picc.access.netPrice)(d);
+
+  const costDescription = largestProgram.isYearLong
+    ? `for a ${largestProgram.duration}-month program`
+    : `per year on average`;
+
+  return {
+    ...largestProgram,
+    cost,
+    costDescription
+  };
+};
+
 picc.access.awardLevels = function(d, preddegree) {
-  // return values are whether the instituion offers other kind of degrees/certs than the predominant degree
+  // return values are whether the institution offers other kind of degrees/certs than the predominant degree
   // if they do we return the glossary term key to display or false to disable the tooltip
   switch(preddegree) {
     case 1:
@@ -1096,6 +1201,48 @@ picc.school.directives = (function() {
       }
     },
 
+    program_reporter_tip: {
+      '@data-definition': function(d) {
+        return picc.access.isProgramReporter(d) ? 'program_reporter' : 'default';
+      }
+    },
+
+    program_reporter_hidden: {
+      '@aria-hidden':  function(d) {
+        return access.isProgramReporter(d) ? 'true' : 'false';
+      }
+    },
+
+    program_reporter_shown: {
+      '@aria-hidden': function(d) {
+        return access.isProgramReporter(d) ? 'false' : 'true';
+      }
+    },
+
+    no_finaid_shown: {
+      '@aria-hidden': function(d) {
+        return access(picc.fields.AID_ELIGIBILITY)(d) !== 3;
+      }
+    },
+
+    program_reporter_class: {
+      '@class': function(d) {
+        return access.isProgramReporter(d) ? 'centered': 'school-two_col-left centered';
+      }
+    },
+
+    program_reporter_number_of_programs: access.isProgramReporter,
+
+    program_reporter_total: function(d) {
+      return access.largestProgramsReported(d, 'full_program');
+    },
+
+    program_reporter_per_year: function(d) {
+      return access.largestProgramsReported(d, 'annualized');
+    },
+
+    program_reporter_largest: access.largestProgramReported,
+
     award_level: {
         '@data-definition': function (d) {
           var offersMultipleAwards = picc.access.awardLevels(d, picc.access(picc.fields.PREDOMINANT_DEGREE)(d));
@@ -1109,14 +1256,22 @@ picc.school.directives = (function() {
         }
     },
 
-    average_cost: format.dollars(access.netPrice),
+    // program reporters dont have an accurate net price to display
+    average_cost: function(d) {
+      return !(access.isProgramReporter(d)) ? format.dollars(access.netPrice)(d) : '--';
+    },
+
     average_cost_meter: {
-      '@value':   access.netPrice,
+      '@value': function(d) {
+        return !(access.isProgramReporter(d)) ? access(picc.fields.NET_PRICE)(d) : null;
+      },
       '@degree': access(fields.PREDOMINANT_DEGREE),
-      label:      format.dollars(function(d) {
+      label: format.dollars(function(d) {
         return meterMedian(this, access(fields.PREDOMINANT_DEGREE)(d));
       }),
-      'picc-side-meter-val': format.dollars(access.netPrice),
+      'picc-side-meter-val': function(d) {
+        return !(access.isProgramReporter(d)) ? format.dollars(access.netPrice)(d): '--';
+      }
     },
 
     // on the compare screen we draw the vertical `median_line`
@@ -1717,7 +1872,8 @@ picc.form.mappings = {
 
   degree: {
     a: '2',
-    b: '3'
+    b: '3',
+    c: '1'
   }
 };
 
@@ -1845,6 +2001,10 @@ picc.form.prepareParams = (function() {
         case '3':
           subfield = 'bachelors';
           break;
+        case 'c':
+        case '1':
+          subfield = 'certificate'
+
       }
       var k = [fields.PROGRAM_OFFERED, subfield, value].join('.');
       query[k + '__range'] = '1..';
@@ -1864,6 +2024,8 @@ picc.form.prepareParams = (function() {
         query[picc.fields.DEGREE_OFFERED + '.assoc'] = true;
       } else if (value === 'b') {
         query[picc.fields.DEGREE_OFFERED + '.bachelors'] = true;
+      } else if (value === 'c') {
+        query[picc.fields.DEGREE_OFFERED + '.certificate'] = true;
       }
       delete query[key];
     },
@@ -1880,7 +2042,7 @@ picc.form.prepareParams = (function() {
     return picc.form.mappings.size[value];
   }
 
-  // map a degree string ('', 'a' or 'b') or array of strings to an
+  // map a degree string ('', 'a' or 'b' or 'c') or array of strings to an
   // API-friendly "predominant degree" range value
   function mapDegree(value) {
     if (Array.isArray(value)) {
@@ -1936,7 +2098,7 @@ picc.form.prepareParams = (function() {
     */
 
     if (!query.degree) {
-      query[fields.DEGREE_OFFERED + '.assoc_or_bachelors'] = true;
+      query[fields.DEGREE_OFFERED + '.assoc_or_bachelors_or_certificate'] = true;
     }
 
     for (var key in query) {
@@ -1970,8 +2132,8 @@ picc.form.prepareParams = (function() {
     // set the predominant degree to range '1..3' because ED expert guidance
     query[picc.fields.PREDOMINANT_DEGREE + '__range'] = '1..3';
 
-    // set the highest degree to range '2..4' to exclude certificate only schools
-    query[picc.fields.HIGHEST_DEGREE + '__range'] = '2..4';
+    // exclude perfect-only children per ED
+    query[picc.fields.ID + '__range'] = '..999999';
 
     return query;
   };

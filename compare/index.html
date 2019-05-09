@@ -21,7 +21,7 @@ permalink: /compare/
                     <legend>Compare</legend>
                     <h1 class="search_category">
                         <button type="button" aria-expanded="false" aria-controls="compare_schools-content">
-                            <i class="fa fa-star"></i>Compare and Highlight<i class="fa fa-chevron-down"></i>
+                            Compare and Highlight<i class="fa fa-chevron-down"></i>
                         </button>
                     </h1>
                 </div>
@@ -128,6 +128,10 @@ permalink: /compare/
                             </div>
 
                         </div><!-- /.meter-group_wrapper -->
+
+                        {% if group.key == "P" %}
+                        <p class="program-reporter-note" aria-hidden="true">Average annual cost is not available for program-reporter schools</p>
+                        {% endif%}
 
                     </div><!-- /.compare-group_wrapper -->
 
@@ -473,6 +477,10 @@ permalink: /compare/
                                                 </div>
 
                                             </div><!-- /.meter-group_wrapper -->
+
+                                            {% if group.key == "P" %}
+                                            <p class="program-reporter-note" aria-hidden="true">Average annual cost is not available for program-reporter schools</p>
+                                            {% endif%}
 
                                         </div><!-- /.compare-group_wrapper -->
 
