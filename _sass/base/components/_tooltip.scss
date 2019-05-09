@@ -63,6 +63,16 @@
     padding: $base-padding-tb $base-padding !important;
     width: 300px;
     white-space: normal;
+    ul{
+      margin-left: 25px;
+      margin-top: $base-padding-tb;
+      margin-bottom: $base-padding-tb;
+      li{
+        list-style-type: disc;
+        margin-top: $base-padding-lite;
+        margin-bottom: $base-padding-lite;
+      }
+    }
   }
 
   .tooltip-arrow {

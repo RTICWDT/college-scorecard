@@ -1,5 +1,6 @@
 var tagalong = require('./tagalong');
 var d3 = require('d3');
+var jQuery = require('jquery');
 
 module.exports = function school() {
 
@@ -122,6 +123,7 @@ module.exports = function school() {
       });
 
     createMap(school, root.querySelector('.school-map'));
+    outcomeVisualization(school);
   });
 
   /**
@@ -235,4 +237,135 @@ module.exports = function school() {
     return map;
   }
 
+  var outcomes = {};
+  function outcomeVisualization(school)
+  {
+    outcomes = picc.access('latest.completion.outcome_percentage_suppressed')(school);
+    google.charts.load('current', {'packages':['sankey']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    jQuery('.outcome_toggle').click(function(e){
+      e.preventDefault();
+      var $ref = jQuery(this);
+      $ref.closest('.toggle_group').find('.active').removeClass('active');
+      $ref.addClass('active');
+      drawChart();
+    });
+  }
+
+  function drawChart() {
+    var enroll = jQuery('#enroll_toggle').find('.active').attr('href').substring(1);
+    var study = jQuery('#study_toggle').find('.active').attr('href').substring(1);
+
+    var links = {
+      study_full_time: {
+        enroll_first_time: {
+          variable: 'full_time.first_time.8yr',
+          text: "Out of students who started college here and studied full-time..."
+        },
+        enroll_not_first_time: {
+          variable: 'full_time.not_first_time.8yr',
+          text: "Out of students who transferred in and studied full-time..."
+        },
+        enroll_both: {
+          variable: 'full_time.8yr',
+          text: "Out of students who studied full-time..."
+        }
+      },
+      study_part_time: {
+        enroll_first_time: {
+          variable: 'part_time.first_time.8yr',
+          text: 'Out of students who started college here and studied part-time...'
+        },
+        enroll_not_first_time: {
+          variable: 'part_time.not_first_time.8yr',
+          text: 'Out of students who transferred in and studied part-time...'
+        },
+        enroll_both: {
+          variable: 'part_time.8yr',
+          text: 'Out of students who studied part-time...'
+        },
+      },
+      study_both: {
+        enroll_first_time: {
+          variable: 'first_time.8yr',
+          text: 'Out of students who started college here...'
+        },
+        enroll_not_first_time: {
+          variable: 'not_first_time.8yr',
+          text: 'Out of students who transferred in...'
+        },
+        enroll_both: {
+          variable: 'all_students.8yr',
+          text: 'Out of all students...'
+        }
+      }
+    }
+
+    var friendlyMetrics = {
+      'award_pooled': 'graduated',
+      'still_enrolled_pooled': 'still enrolled',
+      'transfer_pooled': 'transferred',
+      'unknown_pooled': 'withdrew'
+    }
+
+    var currentData = jQuery.extend(true, {}, picc.access(links[study][enroll].variable)(outcomes));
+    jQuery('#om_group').text(links[study][enroll].text)
+    var rows = [];
+    var percent;
+    for(var q in currentData){ 
+      percent = Math.round(currentData[q] * 100);
+      if(percent > 0) {
+        rows.push([ 'Group', percent+"% " + friendlyMetrics[q], percent]);
+      }
+    }
+
+    if(rows.length>0)
+    {
+      jQuery('#om_sankey').removeClass('na');
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'From');
+      data.addColumn('string', 'To');
+      data.addColumn('number', 'Percent');
+      data.addRows(rows);
+
+      // Sets chart options.
+      var options = {
+        width: '100%',
+        tooltip: {
+          trigger: 'selection',
+          isHtml: true
+        },
+        sankey:{
+          node: {
+            colors: ['#d37c39', '#86B33B', '#8360ED', '#49ACEC', '#37608D'],
+            label: { 
+              fontName: 'Montserrat,"Helvetica Neue",Helvetica,arial,sans-serif',
+              fontSize: 14,
+              color: '#040404'
+            },
+            interactivity: false,
+            colorMode: 'unique'
+          },
+          link: {
+            color: '#EAEAEA'
+          },
+          tooltip: false
+        }
+      };
+
+      var chart = new google.visualization.Sankey(document.getElementById('om_sankey'));
+      chart.draw(data, options);
+    }
+    else
+    {
+      jQuery('#om_sankey').empty().text('Data not available').addClass('na');
+    }
+  }
+  jQuery('#graduation').click(function(){
+    drawChart();
+  });
+  jQuery(window).resize(function(){
+    drawChart(); 
+  });
 };
