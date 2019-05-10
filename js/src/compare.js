@@ -227,6 +227,15 @@ module.exports = function compare() {
     // build query for API call
     var query = buildQuery(compareSchools);
 
+    // pass the list of chosen schools to analytics. 
+    if (window.ga) {      
+      try {
+        ga('send', 'event', 'Comparison', 'School IDs', Object.keys(query).join(";"));
+      } catch (e) {
+        console.error('[ga] compare school event error');
+      }
+    }
+
     picc.API.getAll(query, function (error, data) {
 
       loadable.classed('js-loading', false);
