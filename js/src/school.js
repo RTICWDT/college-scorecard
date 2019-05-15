@@ -270,29 +270,29 @@ module.exports = function school() {
       study_full_time: {
         enroll_first_time: {
           variable: 'full_time.first_time.8yr',
-          text: "Out of students who started college here and studied full-time..."
+          text: "Out of students who started college here and started their studies full-time..."
         },
         enroll_not_first_time: {
           variable: 'full_time.not_first_time.8yr',
-          text: "Out of students who transferred in and studied full-time..."
+          text: "Out of students who transferred in and started their studies full-time..."
         },
         enroll_both: {
           variable: 'full_time.8yr',
-          text: "Out of students who studied full-time..."
+          text: "Out of students who started their studies full-time..."
         }
       },
       study_part_time: {
         enroll_first_time: {
           variable: 'part_time.first_time.8yr',
-          text: 'Out of students who started college here and studied part-time...'
+          text: 'Out of students who started college here and started their studies part-time...'
         },
         enroll_not_first_time: {
           variable: 'part_time.not_first_time.8yr',
-          text: 'Out of students who transferred in and studied part-time...'
+          text: 'Out of students who transferred in and started their studies part-time...'
         },
         enroll_both: {
           variable: 'part_time.8yr',
-          text: 'Out of students who studied part-time...'
+          text: 'Out of students who started their studies part-time...'
         },
       },
       study_both: {
