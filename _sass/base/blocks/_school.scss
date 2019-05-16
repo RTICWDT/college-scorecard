@@ -738,18 +738,19 @@ ol.bars {
   .outcomes_intro{
     padding-bottom: 0.7em !important;
     padding-left: 2px;
+    display:inline-block;
   }
 
   .figure-heading{
     padding-top: $base-padding;
     border-top: 1px solid $mid-gray;
-  }
-  
+  }  
 }
 
 .toggle_group{
   border-radius: 2px;
   margin-bottom: 0.7em;
+  display:inline-block;
 }
 
 .toggle_group a{
@@ -780,6 +781,7 @@ ol.bars {
 }
 #om_visualization{
   display: flex;
+  clear:both;
 }
 
 #om_group{
@@ -801,6 +803,7 @@ ol.bars {
     padding-top: 100px;
     color: $dark-gray;
     border-radius: 2px;
+    width: 100%;
   }
 }
 .google-visualization-tooltip{

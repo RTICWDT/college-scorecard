@@ -238,9 +238,29 @@ module.exports = function school() {
   }
 
   var outcomes = {};
+  var outcome_cohorts = {};
   function outcomeVisualization(school)
   {
     outcomes = picc.access('latest.completion.outcome_percentage_suppressed')(school);
+    var outcome_cohort_data = picc.access('latest.completion.outcome_cohort')(school);
+    outcome_cohorts = {
+      study_full_time:{
+        enroll_first_time: outcome_cohort_data.full_time.first_time['8yr_pooled'],
+        enroll_not_first_time: outcome_cohort_data.full_time.not_first_time['8yr_pooled'],
+        enroll_both: outcome_cohort_data.full_time.first_time['8yr_pooled']+outcome_cohort_data.full_time.not_first_time['8yr_pooled']
+      },
+      study_part_time:{
+        enroll_first_time: outcome_cohort_data.part_time.first_time['8yr_pooled'],
+        enroll_not_first_time: outcome_cohort_data.part_time.not_first_time['8yr_pooled'],
+        enroll_both: outcome_cohort_data.part_time.first_time['8yr_pooled']+outcome_cohort_data.part_time.not_first_time['8yr_pooled']
+      },
+      study_both:{
+        enroll_first_time: outcome_cohort_data.full_time.first_time['8yr_pooled']+outcome_cohort_data.part_time.first_time['8yr_pooled'],
+        enroll_not_first_time: outcome_cohort_data.full_time.not_first_time['8yr_pooled']+outcome_cohort_data.part_time.not_first_time['8yr_pooled'],
+        enroll_both: outcome_cohort_data.full_time.first_time['8yr_pooled']+outcome_cohort_data.full_time.not_first_time['8yr_pooled']+outcome_cohort_data.part_time.first_time['8yr_pooled']+outcome_cohort_data.part_time.not_first_time['8yr_pooled']
+      },
+      
+    }
     google.charts.load('current', {'packages':['sankey']});
     google.charts.setOnLoadCallback(drawChart);
 
@@ -319,9 +339,9 @@ module.exports = function school() {
     }
 
     var currentData = jQuery.extend(true, {}, picc.access(links[study][enroll].variable)(outcomes));
-    jQuery('#om_group').text(links[study][enroll].text)
     var rows = [];
     var percent;
+
     for(var q in currentData){ 
       percent = Math.round(currentData[q] * 100);
       if(percent > 0) {
@@ -332,6 +352,8 @@ module.exports = function school() {
     if(rows.length>0)
     {
       jQuery('#om_sankey').removeClass('na');
+      jQuery('#om_group').show();
+
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'From');
       data.addColumn('string', 'To');
@@ -364,11 +386,13 @@ module.exports = function school() {
       };
 
       var chart = new google.visualization.Sankey(document.getElementById('om_sankey'));
+      jQuery('#om_group').text("Out of "+picc.format.number(study+'.'+enroll)(outcome_cohorts)+" students...")
       chart.draw(data, options);
     }
     else
     {
       jQuery('#om_sankey').empty().text('Data not available').addClass('na');
+      jQuery('#om_group').hide();
     }
   }
   jQuery('#graduation').click(function(){
