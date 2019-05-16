@@ -543,3 +543,24 @@ figcaption {
 .highlight .compare-schools [data-bind="school_section"][data-school-id] {
   cursor: pointer;
 }
+
+.compare-container_group{
+  .om_visualization{
+    border: 1px solid $mid-gray;
+    padding: $base-padding;
+    margin-top: $base-padding;
+    border-radius: 2px;
+    .om_sankey{
+      margin-top: 0px;
+    }
+    .na{
+      border-style:none;
+    }
+  }
+  [data-highlight="true"]{
+    .om_visualization{
+      border: 1px solid $orange;
+    }
+
+  }
+}
