@@ -160,7 +160,7 @@ $toggle-padding: 15px;
       margin-right: auto;
       margin-left: auto;
       text-align: center;
-      width: 200px;
+      width: 175px;
       @include respond-to(teensy-up) {
         top:15px;
         width: 225px;

@@ -1,6 +1,7 @@
 var tagalong = require('./tagalong');
 var d3 = require('d3');
 var querystring = require('querystring');
+var jQuery = require('jquery');
 
 if (typeof document !== 'undefined') {
   require('./components/compat/custom-event');
@@ -103,7 +104,57 @@ module.exports = function compare() {
     picc.fields.SAT_READING_75TH_PCTILE,
     picc.fields.SAT_WRITING_MIDPOINT,
     picc.fields.SAT_WRITING_25TH_PCTILE,
-    picc.fields.SAT_WRITING_75TH_PCTILE
+    picc.fields.SAT_WRITING_75TH_PCTILE,
+
+    'latest.completion.outcome_cohort.full_time.first_time.8yr_pooled',
+    'latest.completion.outcome_cohort.full_time.not_first_time.8yr_pooled',
+    'latest.completion.outcome_cohort.part_time.first_time.8yr_pooled',
+    'latest.completion.outcome_cohort.part_time.not_first_time.8yr_pooled',
+
+    'latest.completion.outcome_percentage_suppressed.full_time.first_time.8yr.award_pooled',
+    'latest.completion.outcome_percentage_suppressed.full_time.first_time.8yr.still_enrolled_pooled',
+    'latest.completion.outcome_percentage_suppressed.full_time.first_time.8yr.transfer_pooled',
+    'latest.completion.outcome_percentage_suppressed.full_time.first_time.8yr.unknown_pooled',
+
+    'latest.completion.outcome_percentage_suppressed.full_time.not_first_time.8yr.award_pooled',
+    'latest.completion.outcome_percentage_suppressed.full_time.not_first_time.8yr.still_enrolled_pooled',
+    'latest.completion.outcome_percentage_suppressed.full_time.not_first_time.8yr.transfer_pooled',
+    'latest.completion.outcome_percentage_suppressed.full_time.not_first_time.8yr.unknown_pooled',
+
+    'latest.completion.outcome_percentage_suppressed.full_time.8yr.award_pooled',
+    'latest.completion.outcome_percentage_suppressed.full_time.8yr.still_enrolled_pooled',
+    'latest.completion.outcome_percentage_suppressed.full_time.8yr.transfer_pooled',
+    'latest.completion.outcome_percentage_suppressed.full_time.8yr.unknown_pooled',
+
+    'latest.completion.outcome_percentage_suppressed.part_time.first_time.8yr.award_pooled',
+    'latest.completion.outcome_percentage_suppressed.part_time.first_time.8yr.still_enrolled_pooled',
+    'latest.completion.outcome_percentage_suppressed.part_time.first_time.8yr.transfer_pooled',
+    'latest.completion.outcome_percentage_suppressed.part_time.first_time.8yr.unknown_pooled',
+
+    'latest.completion.outcome_percentage_suppressed.part_time.not_first_time.8yr.award_pooled',
+    'latest.completion.outcome_percentage_suppressed.part_time.not_first_time.8yr.still_enrolled_pooled',
+    'latest.completion.outcome_percentage_suppressed.part_time.not_first_time.8yr.transfer_pooled',
+    'latest.completion.outcome_percentage_suppressed.part_time.not_first_time.8yr.unknown_pooled',
+
+    'latest.completion.outcome_percentage_suppressed.part_time.8yr.award_pooled',
+    'latest.completion.outcome_percentage_suppressed.part_time.8yr.still_enrolled_pooled',
+    'latest.completion.outcome_percentage_suppressed.part_time.8yr.transfer_pooled',
+    'latest.completion.outcome_percentage_suppressed.part_time.8yr.unknown_pooled',
+
+    'latest.completion.outcome_percentage_suppressed.first_time.8yr.award_pooled',
+    'latest.completion.outcome_percentage_suppressed.first_time.8yr.still_enrolled_pooled',
+    'latest.completion.outcome_percentage_suppressed.first_time.8yr.transfer_pooled',
+    'latest.completion.outcome_percentage_suppressed.first_time.8yr.unknown_pooled',
+
+    'latest.completion.outcome_percentage_suppressed.not_first_time.8yr.award_pooled',
+    'latest.completion.outcome_percentage_suppressed.not_first_time.8yr.still_enrolled_pooled',
+    'latest.completion.outcome_percentage_suppressed.not_first_time.8yr.transfer_pooled',
+    'latest.completion.outcome_percentage_suppressed.not_first_time.8yr.unknown_pooled',
+
+    'latest.completion.outcome_percentage_suppressed.all_students.8yr.award_pooled',
+    'latest.completion.outcome_percentage_suppressed.all_students.8yr.still_enrolled_pooled',
+    'latest.completion.outcome_percentage_suppressed.all_students.8yr.transfer_pooled',
+    'latest.completion.outcome_percentage_suppressed.all_students.8yr.unknown_pooled',
   ];
 
   var INCOME_LEVELS = [
@@ -329,10 +380,39 @@ module.exports = function compare() {
 
       picc.ui.alreadyLoaded = true;
 
+      picc.sankey.init();
+
+      jQuery('.selected-school_outcomes_group').each(function(idx, el){
+        var $ref = jQuery(this);
+        var schoolId = $ref.find('.selected-school_outcomes').attr('data-school-id');
+        var el = $ref.find('.om_visualization');
+        var newObj = {};
+        for(var q in data[schoolId])
+        { 
+          parseDotNotation(q, data[schoolId][q], newObj);
+        }
+        picc.sankey.outcomeVisualization(newObj, el);
+      })
+
     });
 
   }
+  function parseDotNotation(str, val, obj) {
+    var currentObj = obj,
+        keys = str.split("."),
+        i, l = Math.max(1, keys.length - 1),
+        key;
 
+    for (i = 0; i < l; ++i) {
+        key = keys[i];
+        currentObj[key] = currentObj[key] || {};
+        currentObj = currentObj[key];
+    }
+    
+    currentObj[keys[i]] = val;
+    delete obj[str];
+  }
+  
   function schoolsByPredDegree(results, degreeType) {
     return results.filter(function(d) {
       var isProgramReporter = !!picc.access.isProgramReporter(d);
