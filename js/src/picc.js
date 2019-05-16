@@ -2775,10 +2775,19 @@ if (typeof document !== 'undefined') {
         $element.find('.om_group').show();
 
         var data = new google.visualization.DataTable();
+        var colors = [];
         data.addColumn('string', 'From');
         data.addColumn('string', 'To');
         data.addColumn('number', 'Percent');
         data.addRows(rows);
+        if($element.data('colors')=='solid')
+        {
+          colors = ['#8360ED']
+        }
+        else
+        {
+          colors = ['#d37c39', '#86B33B', '#8360ED', '#49ACEC', '#37608D']
+        }
 
         // Sets chart options.
         var options = {
@@ -2789,7 +2798,7 @@ if (typeof document !== 'undefined') {
         },
         sankey:{
             node: {
-            colors: ['#d37c39', '#86B33B', '#8360ED', '#49ACEC', '#37608D'],
+            colors: colors,
             label: { 
                 fontName: 'Montserrat,"Helvetica Neue",Helvetica,arial,sans-serif',
                 fontSize: 14,
