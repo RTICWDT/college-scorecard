@@ -371,13 +371,13 @@ picc.format = (function() {
     },
 
     sizeCategory: formatter(range([
-      [1, 2000, 'Small'],
+      [0, 2000, 'Small'],
       [2000, 15000, 'Medium'],
       [15000, Infinity, 'Large']
     ]), 'size unknown'),
 
     sizeCategoryClass: formatter(range([
-      [1, 2000, 'icon-small'],
+      [0, 2000, 'icon-small'],
       [2000, 15000, 'icon-medium'],
       [15000, Infinity, 'icon-large']
     ]), ''),

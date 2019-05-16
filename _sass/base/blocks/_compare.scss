@@ -195,7 +195,9 @@
 }
 
 .program-reporter-note {
-  font-style: italic;
+  @include font-size($h6);
+  margin-top: -$base-padding;
+  margin-bottom: $base-padding;
 }
 
 .figure-heading {

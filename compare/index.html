@@ -104,6 +104,10 @@ permalink: /compare/
 
                         <div class="compare-degree_group">{{group.label}}</div>
 
+                        {% if group.key == "P" %}
+                        <p class="program-reporter-note" aria-hidden="true"><strong>Note:</strong> Average annual cost is not available for program reporter schools.</p>
+                        {% endif%}
+
                         <div class="meter-group_wrapper">
 
                             <div class="section-card_container-compare average-cost" data-pred-degree="{{group.key}}">
@@ -128,10 +132,6 @@ permalink: /compare/
                             </div>
 
                         </div><!-- /.meter-group_wrapper -->
-
-                        {% if group.key == "P" %}
-                        <p class="program-reporter-note" aria-hidden="true">Average annual cost is not available for program-reporter schools</p>
-                        {% endif%}
 
                     </div><!-- /.compare-group_wrapper -->
 
@@ -452,6 +452,10 @@ permalink: /compare/
 
                                             <div class="compare-degree_group">{{group.label}}</div>
 
+                                            {% if group.key == "P" %}
+                                            <p class="program-reporter-note" aria-hidden="true"><strong>Note:</strong> Average annual cost is not available for program reporter schools.</p>
+                                            {% endif%}
+
                                             <div class="meter-group_wrapper">
 
                                                 <div class="section-card_container-compare average-cost" data-pred-degree="{{group.key}}">
@@ -477,10 +481,6 @@ permalink: /compare/
                                                 </div>
 
                                             </div><!-- /.meter-group_wrapper -->
-
-                                            {% if group.key == "P" %}
-                                            <p class="program-reporter-note" aria-hidden="true">Average annual cost is not available for program-reporter schools</p>
-                                            {% endif%}
 
                                         </div><!-- /.compare-group_wrapper -->
 
