@@ -2633,6 +2633,187 @@ if (typeof document !== 'undefined') {
     );
 
   });
+
+  // namespace sankey
+  picc.sankey = {};
+
+  picc.sankey.init  = function(){
+    google.charts.load('current', {'packages':['sankey']});
+
+    jQuery('.outcome_toggle').click(function(e){
+      e.preventDefault();
+      var $ref = jQuery(this);
+      $ref.closest('.toggle_group').find('.active').removeClass('active');
+      $ref.addClass('active');
+      jQuery('.om_visualization').each(function(idx, el){
+        picc.sankey.drawSankeyChart(jQuery(el));
+      })
+      if (window.ga) {
+          var ga_enroll = jQuery('#enroll_toggle').find('.active').attr('href').substring(8).replace(/_/g,' ');
+          var ga_study = jQuery('#study_toggle').find('.active').attr('href').substring(7).replace(/_/g,' ');
+          try {
+              ga('send', 'event', 'Outcome', 'Toggle', ga_enroll+" "+ga_study);
+          } catch (e) {
+              console.error('[ga] outcome measure toggle event error');
+          }
+      }
+    });
+    jQuery('#graduation').click(function(){
+      jQuery('.om_visualization').each(function(idx, el){
+        picc.sankey.drawSankeyChart(jQuery(el));
+      })
+    });
+    jQuery(window).resize(function(){
+      jQuery('.om_visualization').each(function(idx, el){
+        picc.sankey.drawSankeyChart(jQuery(el));
+      })
+    });    
+  }
+
+
+  picc.sankey.outcomeVisualization = function(school, $element) {
+
+    var outcomes = picc.access('latest.completion.outcome_percentage_suppressed')(school);
+    var outcome_cohort_data = picc.access('latest.completion.outcome_cohort')(school);
+    var outcome_cohorts = {
+        study_full_time:{
+            enroll_first_time: outcome_cohort_data.full_time.first_time['8yr_pooled'],
+            enroll_not_first_time: outcome_cohort_data.full_time.not_first_time['8yr_pooled'],
+            enroll_both: outcome_cohort_data.full_time.first_time['8yr_pooled']+outcome_cohort_data.full_time.not_first_time['8yr_pooled']
+        },
+        study_part_time:{
+           enroll_first_time: outcome_cohort_data.part_time.first_time['8yr_pooled'],
+            enroll_not_first_time: outcome_cohort_data.part_time.not_first_time['8yr_pooled'],
+            enroll_both: outcome_cohort_data.part_time.first_time['8yr_pooled']+outcome_cohort_data.part_time.not_first_time['8yr_pooled']
+        },
+        study_both:{
+            enroll_first_time: outcome_cohort_data.full_time.first_time['8yr_pooled']+outcome_cohort_data.part_time.first_time['8yr_pooled'],
+            enroll_not_first_time: outcome_cohort_data.full_time.not_first_time['8yr_pooled']+outcome_cohort_data.part_time.not_first_time['8yr_pooled'],
+            enroll_both: outcome_cohort_data.full_time.first_time['8yr_pooled']+outcome_cohort_data.full_time.not_first_time['8yr_pooled']+outcome_cohort_data.part_time.first_time['8yr_pooled']+outcome_cohort_data.part_time.not_first_time['8yr_pooled']
+        },
+    }
+    $element.data('outcomes', outcomes);
+    $element.data('outcome_cohorts', outcome_cohorts);
+
+    google.charts.setOnLoadCallback(function(){ picc.sankey.drawSankeyChart($element)});   
+  };
+
+  picc.sankey.drawSankeyChart = function($element) {
+
+    var enroll = jQuery('#enroll_toggle').find('.active').attr('href').substring(1);
+    var study = jQuery('#study_toggle').find('.active').attr('href').substring(1);
+
+    var outcomes = $element.data('outcomes');
+    var outcome_cohorts = $element.data('outcome_cohorts');
+
+    var links = {
+        study_full_time: {
+            enroll_first_time: {
+                variable: 'full_time.first_time.8yr',
+                text: "Out of students who started college here and started their studies full-time..."
+            },
+            enroll_not_first_time: {
+                variable: 'full_time.not_first_time.8yr',
+                text: "Out of students who transferred in and started their studies full-time..."
+            },
+            enroll_both: {
+                variable: 'full_time.8yr',
+                text: "Out of students who started their studies full-time..."
+            }
+        },
+        study_part_time: {
+            enroll_first_time: {
+                variable: 'part_time.first_time.8yr',
+                text: 'Out of students who started college here and started their studies part-time...'
+            },
+            enroll_not_first_time: {
+                variable: 'part_time.not_first_time.8yr',
+                text: 'Out of students who transferred in and started their studies part-time...'
+            },
+            enroll_both: {
+                variable: 'part_time.8yr',
+                text: 'Out of students who started their studies part-time...'
+            },
+        },
+        study_both: {
+            enroll_first_time: {
+                variable: 'first_time.8yr',
+                text: 'Out of students who started college here...'
+            },
+            enroll_not_first_time: {
+                variable: 'not_first_time.8yr',
+                text: 'Out of students who transferred in...'
+            },
+            enroll_both: {
+                variable: 'all_students.8yr',
+                text: 'Out of all students...'
+            }
+        }
+    }
+
+    var friendlyMetrics = {
+        'award_pooled': 'graduated',
+        'still_enrolled_pooled': 'still enrolled',
+        'transfer_pooled': 'transferred',
+        'unknown_pooled': 'withdrew'
+    }
+
+    var currentData = jQuery.extend(true, {}, picc.access(links[study][enroll].variable)(outcomes));
+    var rows = [];
+    var percent;
+
+    for(var q in currentData){ 
+        percent = Math.round(currentData[q] * 100);
+        if(percent > 0) {
+            rows.push([ 'Group', percent+"% " + friendlyMetrics[q], percent]);
+        }
+    }
+
+    if(rows.length>0)
+    {
+        $element.find('.om_sankey').removeClass('na');
+        $element.find('.om_group').show();
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'From');
+        data.addColumn('string', 'To');
+        data.addColumn('number', 'Percent');
+        data.addRows(rows);
+
+        // Sets chart options.
+        var options = {
+        width: '100%',
+        tooltip: {
+            trigger: 'selection',
+            isHtml: true
+        },
+        sankey:{
+            node: {
+            colors: ['#d37c39', '#86B33B', '#8360ED', '#49ACEC', '#37608D'],
+            label: { 
+                fontName: 'Montserrat,"Helvetica Neue",Helvetica,arial,sans-serif',
+                fontSize: 14,
+                color: '#040404'
+            },
+            interactivity: false,
+            colorMode: 'unique'
+            },
+            link: {
+            color: '#EAEAEA'
+            },
+            tooltip: false
+        }
+        };
+        var chart = new google.visualization.Sankey($element.find('.om_sankey')[0]);
+        $element.find('.om_group').text("Out of "+picc.format.number(study+'.'+enroll)(outcome_cohorts)+" students...")
+        chart.draw(data, options);
+    }
+    else
+    {
+        $element.find('.om_sankey').empty().text('Data not available').addClass('na');
+        $element.find('.om_group').hide();
+    }
+  }
 }
 
 module.exports = picc;
