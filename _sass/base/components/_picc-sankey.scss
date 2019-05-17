@@ -66,6 +66,9 @@
     path[fill="#FFFFFF"]{
       display:none;
     }
+    rect[fill="#FFFFFF"]{
+      display:none;
+    }
     &.na{
       border: 1px solid $light-gray;
       text-align: center;
