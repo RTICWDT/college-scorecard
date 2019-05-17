@@ -2927,7 +2927,7 @@ if (typeof document !== 'undefined') {
     for(var q in currentData){ 
         percent = Math.round(currentData[q] * 100);
         if(percent > 0) {
-            rows.push([ 'Group', percent+"% " + friendlyMetrics[q], percent]);
+            rows.push([ percent+"% " + friendlyMetrics[q], 'Group', percent]);
         }
     }
 
@@ -2944,11 +2944,12 @@ if (typeof document !== 'undefined') {
         data.addRows(rows);
         if($element.data('colors')=='solid')
         {
-          colors = ['#8360ED']
+//          colors = ['#8360ED']
+          colors = ['#d37c39', '#FFFFFF', '#86B33B', '#8360ED', '#49ACEC', '#37608D']
         }
         else
         {
-          colors = ['#d37c39', '#86B33B', '#8360ED', '#49ACEC', '#37608D']
+          colors = ['#d37c39', '#FFFFFF', '#86B33B', '#8360ED', '#49ACEC', '#37608D']
         }
 
         // Sets chart options.
@@ -2961,6 +2962,8 @@ if (typeof document !== 'undefined') {
         sankey:{
             node: {
             colors: colors,
+            width: 80, 
+            nodePadding: 0,
             label: { 
                 fontName: 'Montserrat,"Helvetica Neue",Helvetica,arial,sans-serif',
                 fontSize: 14,
@@ -2970,7 +2973,7 @@ if (typeof document !== 'undefined') {
             colorMode: 'unique'
             },
             link: {
-            color: '#EAEAEA'
+            color: '#FFFFFF'
             },
             tooltip: false
         }

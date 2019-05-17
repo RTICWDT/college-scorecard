@@ -60,7 +60,10 @@
     width: 68%;
     height: 300px;
     margin-top: $base-padding;
-    text[text-anchor="start"]{
+    text[text-anchor="end"]{
+      display:none;
+    }
+    path[fill="#FFFFFF"]{
       display:none;
     }
     &.na{
