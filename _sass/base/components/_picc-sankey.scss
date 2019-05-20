@@ -1,7 +1,13 @@
+#graduation-content{
+  .school-two_col-left, 
+  .school-two_col-right{
+    padding-bottom: $base-padding-large;
+  }
+}
 .school-outcome-measures{
-  margin-top: $base-padding;
   padding-top: $base-padding;
   clear: both;
+  border-top: 1px solid $mid-gray;
 
   .outcomes_intro{
     padding-bottom: 0.7em !important;
@@ -10,10 +16,11 @@
   }
 
   .figure-heading{
-    padding-top: $base-padding;
-    border-top: 1px solid $mid-gray;
+    max-width: 250px;
+    margin: $base-padding auto;
   }  
 }
+
   
 .toggle_group{
   border-radius: 2px;
