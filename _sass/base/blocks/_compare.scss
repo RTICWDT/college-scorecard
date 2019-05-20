@@ -544,6 +544,14 @@ figcaption {
   cursor: pointer;
 }
 
+.compare-schools{
+  .school-outcome-measures{
+    .figure-heading{
+      max-width: none;
+      text-align: left;
+    }
+  }
+}
 .compare-container_group{
   .om_visualization{
     border: 1px solid $mid-gray;

@@ -2801,7 +2801,7 @@ if (typeof document !== 'undefined') {
             node: {
             colors: colors,
             width: 80, 
-            nodePadding: 0,
+            //nodePadding: 0,
             label: { 
                 fontName: 'Montserrat,"Helvetica Neue",Helvetica,arial,sans-serif',
                 fontSize: 14,
