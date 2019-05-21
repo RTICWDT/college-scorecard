@@ -47,6 +47,7 @@ module.exports = function search() {
     'school_container',
     'selected_school',
     'branch_campus',
+    'program_reporter_tip',
     'under_investigation',
     'size_number',
     'average_cost',
@@ -242,6 +243,8 @@ module.exports = function search() {
       picc.fields.OWNERSHIP,
       // to get the "four_year" or "lt_four_year" bit
       picc.fields.PREDOMINANT_DEGREE,
+      // program-reporter offered programs / flag
+      picc.fields.PROGRAM_REPORTER_OFFERED,
       // get all of the net price values
       picc.fields.NET_PRICE,
       // completion rate

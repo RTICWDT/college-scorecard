@@ -1,5 +1,6 @@
 var tagalong = require('./tagalong');
 var d3 = require('d3');
+var jQuery = require('jquery');
 
 module.exports = function school() {
 
@@ -20,10 +21,10 @@ module.exports = function school() {
 
   // only display scorecard school (from default search)
   params[picc.fields.OPERATING] = 1;
-  params[picc.fields.DEGREE_OFFERED + '.assoc_or_bachelors'] = true;
-  params[picc.fields.SIZE + '__range'] = '1..';
+  params[picc.fields.DEGREE_OFFERED + '.assoc_or_bachelors_or_certificate'] = true;
+  params[picc.fields.SIZE + '__range'] = '0..';
   params[picc.fields.PREDOMINANT_DEGREE + '__range'] = '1..3';
-  params[picc.fields.HIGHEST_DEGREE + '__range'] = '2..4';
+  params[picc.fields.ID + '__range'] = '..999999';
 
   picc.API.getSchool(id, params, function onSchoolLoad(error, school) {
     loadable.classed('js-loading', false);
@@ -122,6 +123,8 @@ module.exports = function school() {
       });
 
     createMap(school, root.querySelector('.school-map'));
+    picc.sankey.init();
+    picc.sankey.outcomeVisualization(school, jQuery('#school_om_visualization'));
   });
 
   /**
@@ -234,5 +237,4 @@ module.exports = function school() {
     marker.bindPopup(school.school.name);
     return map;
   }
-
 };

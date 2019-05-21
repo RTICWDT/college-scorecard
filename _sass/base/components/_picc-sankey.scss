@@ -1,0 +1,93 @@
+#graduation-content{
+  .school-two_col-left, 
+  .school-two_col-right{
+    padding-bottom: $base-padding-large;
+  }
+}
+.school-outcome-measures{
+  padding-top: $base-padding;
+  clear: both;
+  border-top: 1px solid $mid-gray;
+
+  .outcomes_intro{
+    padding-bottom: 0.7em !important;
+    padding-left: 2px;
+    display:inline-block;
+  }
+
+  .figure-heading{
+    max-width: 250px;
+    margin: $base-padding auto;
+  }  
+}
+
+  
+.toggle_group{
+  border-radius: 2px;
+  margin-bottom: 0.7em;
+  display:inline-block;
+  a{
+    display: inline-block;
+    border: 1px solid $mid-gray;
+    padding: .25em .5em;
+    background-color: $white;
+    color: $black;
+    text-decoration: none;
+    font-size: 1rem;
+    &:hover{
+      background-color: $hover-button-color;
+      color: $white;
+    }
+    &.active{
+      background-color: $darker-green;
+      color: $white;
+    }
+    &:first-child{
+      border-radius: 2px 0 0 2px;
+      border-right-style:none;
+  
+    }
+    &:last-child{
+      border-radius: 0 2px 2px 0;
+      border-left-style:none;
+    }
+  }
+}
+
+.om_visualization{
+  display: flex;
+  clear:both;
+  .om_group{
+    width: 32%;
+    text-align: center;
+    padding-top: 100px;
+    padding-right: $base-padding;
+  }
+  .om_sankey{
+    width: 68%;
+    height: 300px;
+    margin-top: $base-padding;
+    text[text-anchor="end"]{
+      display:none;
+    }
+    path[fill="#ffffff"]{
+      display:none;
+    }
+    rect[fill="#ffffff"]{
+      display:none;
+    }
+    &.na{
+      border: 1px solid $light-gray;
+      text-align: center;
+      padding-top: 100px;
+      color: $dark-gray;
+      border-radius: 2px;
+      width: 100%;
+    }
+  }
+  .google-visualization-tooltip{
+    display:none;
+  }
+}
+
+

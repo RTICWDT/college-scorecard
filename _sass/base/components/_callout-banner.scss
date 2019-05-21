@@ -1,0 +1,21 @@
+$callout_height: 32px;
+
+.callout-banner {
+  @include font-size(0.9);
+  @extend .light_on_dark;
+  color: $white;
+  font-weight: $weight-bold;
+
+  padding-left: $base-padding;
+  text-align: center;
+  @include respond-to(large-up) {
+    height: $callout_height;
+    padding-top: $base-padding-lite;
+  }
+}
+
+.callout-banner-wrapper {
+  background-color: $mid-blue;
+  margin-bottom: $base-padding;
+  position: relative;
+}

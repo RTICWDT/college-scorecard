@@ -272,6 +272,62 @@ describe('school page', function() {
     assert.equal(yield toggleAccordion('#cost'), 'false');
   });
 
+  it('should show Cost of Largest Programs for Program Reporter schools', function*() {
+    yield loadSchoolUrl('452948-Galen-College-of-Nursing-Cincinnati');
+    yield toggleAccordion('#cost');
+    var isHidden = yield browser
+      .getAttribute('#costs-content [data-bind="program_reporter_hidden"]', 'aria-hidden');
+    assert(isHidden, 'Average Annual Cost was not hidden on program reporter school page');
+    var isShown = yield browser
+      .getAttribute('#costs-content [data-bind="program_reporter_shown"]', 'aria-hidden');
+    assert(isShown, 'Cost of Largest Programs was not shown on a program reporter school page');
+  });
+
+  it('should hide Cost of Largest Programs for non-program reporter schools', function*() {
+    yield loadSchoolUrl('204635-Ohio-Northern-University');
+    yield toggleAccordion('#cost')
+    var isHidden = yield browser
+      .getAttribute('#costs-content [data-bind="program_reporter_shown"]', 'aria-hidden');
+    assert(isHidden, 'Cost of Largest Programs was not hidden on non-program reporter school page');
+    var isShown = yield browser
+      .getAttribute('#costs-content [data-bind="program_reporter_hidden"]', 'aria-hidden');
+    assert(isShown, 'Average Annual Cost was hidden on a non-program reporter school page');
+  });
+
+  it('should show the aria-tabs selected tab content', function*() {
+    yield loadSchoolUrl('452948-Galen-College-of-Nursing-Cincinnati');
+    yield toggleAccordion('#cost');
+    var activeTabPanel = yield browser.getAttribute('#costs-content .tablist [aria-selected="true"]', "aria-controls");
+    var isHidden = yield browser.getAttribute('#costs-content [id="'+ activeTabPanel +'"]', 'aria-hidden');
+    assert(!isHidden, 'The active aria-tab should display it\'s corresponding tabpanel');
+  });
+
+  it('should hide the aria-tabs for a non-selected tab content', function*() {
+    yield loadSchoolUrl('452948-Galen-College-of-Nursing-Cincinnati');
+    yield toggleAccordion('#cost');
+    var nonActiveTabPanel = yield browser.getAttribute('#costs-content .tablist [aria-selected="false"]', "aria-controls");
+    var isHidden = yield browser.getAttribute('#costs-content [id="'+ nonActiveTabPanel +'"]', 'aria-hidden');
+    assert(isHidden, 'The non-active aria-tab should not display it\'s corresponding tabpanel');
+  });
+
+  it('should toggle the aria-tabs on click of non-selected tab', function*() {
+    yield loadSchoolUrl('452948-Galen-College-of-Nursing-Cincinnati');
+    yield toggleAccordion('#cost');
+    var selector = '#costs-content .tablist [aria-selected="false"]';
+    var selector2 = '#costs-content .tablist [aria-selected="true"]';
+    var nonActiveTab = yield browser.element(selector);
+    var nonActiveTabPanel = yield browser.getAttribute(selector, 'aria-controls');
+    yield browser.click(selector);
+    var isHidden = yield browser.getAttribute('#costs-content [id="'+ nonActiveTabPanel +'"]', 'aria-hidden');
+    assert(!isHidden, 'The active aria-tab did not display it\'s corresponding tabpanel');
+    yield browser.click(selector);
+    isHidden = yield browser.getAttribute('#costs-content [id="'+ nonActiveTabPanel +'"]', 'aria-hidden');
+    assert(isHidden, 'The de-selected aria-tab did not hide it\'s corresponding tabpanel');
+    var activeTabPanel = yield browser.getAttribute(selector2, 'aria-controls');
+    isHidden = yield browser.getAttribute('#costs-content [id="'+ activeTabPanel +'"]', 'aria-hidden');
+    assert(!isHidden, 'The active aria-tab did not display it\'s corresponding tabpanel');
+  });
+
   /* 
     Financial Aid & Debt Section
   */

@@ -174,6 +174,18 @@
       }
     }
   }
+
+  .data-prelim {
+    margin-top: $base-padding-large;
+    margin-bottom: $base-padding;
+
+    h3 {
+      margin-left: 0;
+      .fa {
+        color: $orange;
+      }
+    }
+  }
 }
 
 .data-docs {
@@ -243,5 +255,30 @@
 
   span {
     font-weight: $weight-bold;
+  }
+}
+
+
+.data-preview{
+  .back-link{
+    margin-bottom: $base-padding-large;
+  }
+  p{
+    margin-bottom: $base-padding;
+  }
+  ol{
+    margin: $base-padding $base-padding-large;
+
+    li{
+      list-style-type: decimal;
+      margin-top: $base-padding-lite;
+      margin-bottom: $base-padding-lite;
+    }
+  }
+  .button{
+    width: 425px;
+  }
+  .u-group_inline{
+    width: 70%;
   }
 }
