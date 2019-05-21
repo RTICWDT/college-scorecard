@@ -104,6 +104,10 @@
       h1 {
         width: 85%;
       }
+
+      button .fa {
+        font-size: 36px;
+      }
     }
 
     h1 {
@@ -162,7 +166,10 @@
       text-align: center;
       vertical-align: top;
       width: 70px;
-      margin-right: 10px;
+      margin-right: 5px;
+      @include respond-to(small-up) {
+        margin-right: 10px;
+      }
 
       .school-key_figures-year {
         @include font-size(2.86);
@@ -176,7 +183,21 @@
       }
 
       &.certificate {
-        margin-right: 25px;
+        margin-right: 20px;
+        @include hyphens(none);
+        @include respond-to(small-up) {
+          margin-right: 25px;
+        }
+
+        .school-key_figures-year {
+          margin-top: -50px;
+
+          &:before {
+            font-family: "fontawesome";
+            content: '\f0a3';
+            margin-left: 15px;
+          }
+        }
       }
     }
   }
@@ -226,6 +247,9 @@
       &.constrain_width {
         margin-left: -5%;
         width: 110%;
+      }
+      span[data-bind="average_cost_label"] {
+        white-space: pre;
       }
     }
 
@@ -357,6 +381,12 @@
     @include respond-to(large-up) {
       @include span-columns(3 of 6);
     }
+
+    h2.figure-heading {
+      span[data-bind="average_cost_label"] {
+        white-space: pre;
+      }
+    }
   }
 
   .school-two_col-right {
@@ -368,6 +398,11 @@
       @include omega();
       padding-top: $base-padding;
     }
+  }
+
+  .school-single_col {
+    padding-top: $base-padding;
+    padding-bottom: $base-padding;
   }
 }
 
@@ -392,6 +427,21 @@
     font-weight: 700;
   }
 
+}
+
+.programs-table {
+  thead > tr {
+    border-bottom: $regular-border-size solid darken($base-border-color, 10);
+
+    th {
+      vertical-align: bottom;
+    }
+  }
+}
+
+.largest-program-cost {
+  max-width: 80%;
+  margin: 0 auto;
 }
 
 .school-long_list {
@@ -730,3 +780,4 @@ ol.bars {
   @include span-columns(12);
   margin-top: $base-padding;
 }
+

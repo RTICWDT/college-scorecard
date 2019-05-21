@@ -7,3 +7,4 @@ require('./picc-range');
 require('./picc-side-meter');
 require('./picc-slider');
 require('./multi-select');
+require('./aria-tabs');

@@ -1,0 +1,63 @@
+aria-tabs {
+
+
+  .tablist {
+    display: flex;
+    align-items: center;
+    button[aria-controls] {
+      display: inline-block;
+      padding: .25em .5em;
+      margin: 0;
+      margin-bottom: .25em;
+      width: inherit;
+      background: none;
+      border: $thin-border-size solid $base-border-color;
+      cursor: pointer;
+      border-radius: $base-border-radius;
+      z-index: 10;
+      @include font-size($h4);
+      @include appearance(none);
+    }
+
+    button[aria-controls]:after {
+      content: none;
+    }
+
+    button[aria-controls]:not(:first-of-type):not(:last-of-type) {
+      border-left: none;
+      border-right: none;
+      border-radius: inherit;
+    }
+
+    button[aria-controls]:first-of-type {
+      border-right: none;
+      border-top-right-radius: inherit;
+      border-bottom-right-radius: inherit;
+      & ~ button[aria-controls][aria-selected="false"] {
+        border-left: $thin-border-size solid $base-border-color;
+      }
+      &[aria-selected="true"] + button[aria-controls][aria-selected="false"] {
+        border-left: none;
+      }
+    }
+
+    button[aria-controls]:last-of-type {
+      border-left: none;
+      border-top-left-radius: inherit;
+      border-bottom-left-radius: inherit;
+    }
+
+    button[aria-controls][aria-selected="true"] {
+      background-color: $darker-green;
+      color: $white;
+      border: $thin-border-size solid $darker-green;
+      z-index: 20;
+
+      & + button[aria-controls][aria-selected="false"] {
+        border-left: none;
+      }
+    }
+  }
+
+  div[role="tabpanel"] {  }
+}

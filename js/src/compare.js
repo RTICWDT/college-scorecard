@@ -1,6 +1,7 @@
 var tagalong = require('./tagalong');
 var d3 = require('d3');
 var querystring = require('querystring');
+var jQuery = require('jquery');
 
 if (typeof document !== 'undefined') {
   require('./components/compat/custom-event');
@@ -64,6 +65,7 @@ module.exports = function compare() {
     picc.fields.LOCALE,
     // to get "public" or "private" control
     picc.fields.OWNERSHIP,
+    picc.fields.HIGHEST_DEGREE,
     // to get the "four_year" or "lt_four_year" bit
     picc.fields.PREDOMINANT_DEGREE,
     // to get alternative predominant degree offered flag
@@ -71,6 +73,8 @@ module.exports = function compare() {
     picc.fields.DEGREE_OFFERED + '.bachelors',
     picc.fields.DEGREE_OFFERED + '.assoc',
     picc.fields.DEGREE_OFFERED + '.certificate',
+    // program reporter number / flag
+    picc.fields.PROGRAM_REPORTER_OFFERED,
     // get all of the net price values
     picc.fields.NET_PRICE,
     picc.fields.COMPLETION_RATE,
@@ -99,7 +103,57 @@ module.exports = function compare() {
     picc.fields.SAT_READING_75TH_PCTILE,
     picc.fields.SAT_WRITING_MIDPOINT,
     picc.fields.SAT_WRITING_25TH_PCTILE,
-    picc.fields.SAT_WRITING_75TH_PCTILE
+    picc.fields.SAT_WRITING_75TH_PCTILE,
+
+    'latest.completion.outcome_cohort.full_time.first_time.8yr_pooled',
+    'latest.completion.outcome_cohort.full_time.not_first_time.8yr_pooled',
+    'latest.completion.outcome_cohort.part_time.first_time.8yr_pooled',
+    'latest.completion.outcome_cohort.part_time.not_first_time.8yr_pooled',
+
+    'latest.completion.outcome_percentage_suppressed.full_time.first_time.8yr.award_pooled',
+    'latest.completion.outcome_percentage_suppressed.full_time.first_time.8yr.still_enrolled_pooled',
+    'latest.completion.outcome_percentage_suppressed.full_time.first_time.8yr.transfer_pooled',
+    'latest.completion.outcome_percentage_suppressed.full_time.first_time.8yr.unknown_pooled',
+
+    'latest.completion.outcome_percentage_suppressed.full_time.not_first_time.8yr.award_pooled',
+    'latest.completion.outcome_percentage_suppressed.full_time.not_first_time.8yr.still_enrolled_pooled',
+    'latest.completion.outcome_percentage_suppressed.full_time.not_first_time.8yr.transfer_pooled',
+    'latest.completion.outcome_percentage_suppressed.full_time.not_first_time.8yr.unknown_pooled',
+
+    'latest.completion.outcome_percentage_suppressed.full_time.8yr.award_pooled',
+    'latest.completion.outcome_percentage_suppressed.full_time.8yr.still_enrolled_pooled',
+    'latest.completion.outcome_percentage_suppressed.full_time.8yr.transfer_pooled',
+    'latest.completion.outcome_percentage_suppressed.full_time.8yr.unknown_pooled',
+
+    'latest.completion.outcome_percentage_suppressed.part_time.first_time.8yr.award_pooled',
+    'latest.completion.outcome_percentage_suppressed.part_time.first_time.8yr.still_enrolled_pooled',
+    'latest.completion.outcome_percentage_suppressed.part_time.first_time.8yr.transfer_pooled',
+    'latest.completion.outcome_percentage_suppressed.part_time.first_time.8yr.unknown_pooled',
+
+    'latest.completion.outcome_percentage_suppressed.part_time.not_first_time.8yr.award_pooled',
+    'latest.completion.outcome_percentage_suppressed.part_time.not_first_time.8yr.still_enrolled_pooled',
+    'latest.completion.outcome_percentage_suppressed.part_time.not_first_time.8yr.transfer_pooled',
+    'latest.completion.outcome_percentage_suppressed.part_time.not_first_time.8yr.unknown_pooled',
+
+    'latest.completion.outcome_percentage_suppressed.part_time.8yr.award_pooled',
+    'latest.completion.outcome_percentage_suppressed.part_time.8yr.still_enrolled_pooled',
+    'latest.completion.outcome_percentage_suppressed.part_time.8yr.transfer_pooled',
+    'latest.completion.outcome_percentage_suppressed.part_time.8yr.unknown_pooled',
+
+    'latest.completion.outcome_percentage_suppressed.first_time.8yr.award_pooled',
+    'latest.completion.outcome_percentage_suppressed.first_time.8yr.still_enrolled_pooled',
+    'latest.completion.outcome_percentage_suppressed.first_time.8yr.transfer_pooled',
+    'latest.completion.outcome_percentage_suppressed.first_time.8yr.unknown_pooled',
+
+    'latest.completion.outcome_percentage_suppressed.not_first_time.8yr.award_pooled',
+    'latest.completion.outcome_percentage_suppressed.not_first_time.8yr.still_enrolled_pooled',
+    'latest.completion.outcome_percentage_suppressed.not_first_time.8yr.transfer_pooled',
+    'latest.completion.outcome_percentage_suppressed.not_first_time.8yr.unknown_pooled',
+
+    'latest.completion.outcome_percentage_suppressed.all_students.8yr.award_pooled',
+    'latest.completion.outcome_percentage_suppressed.all_students.8yr.still_enrolled_pooled',
+    'latest.completion.outcome_percentage_suppressed.all_students.8yr.transfer_pooled',
+    'latest.completion.outcome_percentage_suppressed.all_students.8yr.unknown_pooled',
   ];
 
   var INCOME_LEVELS = [
@@ -204,7 +258,6 @@ module.exports = function compare() {
     'compare_share_link_mail',
   ]);
 
-
   // build query for API call
   function buildQuery (schools) {
     var query = {};
@@ -214,7 +267,6 @@ module.exports = function compare() {
     });
     return query;
   }
-
 
   function onChange() {
 
@@ -226,6 +278,15 @@ module.exports = function compare() {
 
     // build query for API call
     var query = buildQuery(compareSchools);
+
+    // pass the list of chosen schools to analytics. 
+    if (window.ga) {      
+      try {
+        ga('send', 'event', 'Comparison', 'School IDs', Object.keys(query).join(";"));
+      } catch (e) {
+        console.error('[ga] compare school event error');
+      }
+    }
 
     picc.API.getAll(query, function (error, data) {
 
@@ -312,10 +373,39 @@ module.exports = function compare() {
 
       picc.ui.alreadyLoaded = true;
 
+      picc.sankey.init();
+
+      jQuery('.selected-school_outcomes_group').each(function(idx, el){
+        var $ref = jQuery(this);
+        var schoolId = $ref.find('.selected-school_outcomes').attr('data-school-id');
+        var el = $ref.find('.om_visualization');
+        var newObj = {};
+        for(var q in data[schoolId])
+        { 
+          parseDotNotation(q, data[schoolId][q], newObj);
+        }
+        picc.sankey.outcomeVisualization(newObj, el);
+      })
+
     });
 
   }
+  function parseDotNotation(str, val, obj) {
+    var currentObj = obj,
+        keys = str.split("."),
+        i, l = Math.max(1, keys.length - 1),
+        key;
 
+    for (i = 0; i < l; ++i) {
+        key = keys[i];
+        currentObj[key] = currentObj[key] || {};
+        currentObj = currentObj[key];
+    }
+    
+    currentObj[keys[i]] = val;
+    delete obj[str];
+  }
+  
   function schoolsByPredDegree(results, degreeType) {
     return results.filter(function(d) {
       // if degreeType is empty for a section, this returns all schools
