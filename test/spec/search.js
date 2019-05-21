@@ -168,13 +168,23 @@ describe('search', function() {
                  results.spotChecks.allSmallAndLarge);
   });
 
-  it('should only show any, bachelors, associates as options', function*() {
+  it('should only show any, certificates, bachelors, associates as options', function*() {
     var options = yield browser
       .url('/')
       .click('#school-degree h1 [aria-controls]')
       .getText('#major-type option');
-    assert.deepEqual(options, [ 'Any', 'Two-year (Associate\'s)',
+    assert.deepEqual(options, [ 'Any', 'Certificate', 'Two-year (Associate\'s)',
                                 'Four-year (Bachelor\'s)' ]);
+  });
+
+  it('should contain only certificate degrees if selected', function*() {
+    yield utils.runSearch(function() {
+      return browser
+        .click('#school-degree h1 [aria-controls]')
+        .selectByVisibleText('#major-type', 'Certificate');
+    });
+    assert.equal(yield utils.getSearchCount(),
+      results.spotChecks.allCertificates);
   });
 
   it('should contain only associate degrees if selected', function*() {

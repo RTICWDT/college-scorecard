@@ -16,6 +16,7 @@ $weensy-down: new-breakpoint(max-width $weensy);
 $teensy-down: new-breakpoint(max-width $teensy);
 $teensy-up: new-breakpoint(min-width $teensy);
 $tiny-up: new-breakpoint(min-width $tiny);
+$small-down: new-breakpoint(min-width $small);
 $small-up: new-breakpoint(min-width $small);
 $small-plus-up: new-breakpoint(min-width $small-plus);
 $medium-down: new-breakpoint(max-width $medium);
@@ -35,6 +36,9 @@ $huge-up: new-breakpoint(min-width $huge);
   }
   @else if $media == tiny-up {
     @media only screen and (min-width: $tiny) { @content; }
+  }
+  @else if $media == small-down {
+    @media only screen and (max-width: $small) { @content; }
   }
   @else if $media == small-up {
     @media only screen and (min-width: $small) { @content; }

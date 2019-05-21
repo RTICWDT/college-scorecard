@@ -29,7 +29,7 @@
     "element-dataset": "^2.2.6",
     "formdb": "^0.2.0",
     "html-parsed-element": "^0.4.0",
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.0",
     "leaflet": "^0.7.7",
     "typeahead.js-browserify": "^1.0.7"
   },

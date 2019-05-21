@@ -38,6 +38,9 @@ a img {
 
 [aria-hidden="true"] {
   display: none;
+  &[data-bind] {
+    display: none !important;
+  }
 }
 
 @media print {
