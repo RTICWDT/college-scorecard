@@ -2944,8 +2944,7 @@ if (typeof document !== 'undefined') {
         data.addRows(rows);
         if($element.data('colors')=='solid')
         {
-//          colors = ['#8360ED']
-          colors = ['#d37c39', '#FFFFFF', '#86B33B', '#8360ED', '#49ACEC', '#37608D']
+          colors = ['#8360ED','#FFFFFF','#8360ED','#8360ED','#8360ED','#8360ED']
         }
         else
         {
