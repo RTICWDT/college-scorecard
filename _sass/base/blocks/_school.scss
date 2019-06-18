@@ -103,6 +103,7 @@
       flex: 1 0 auto;
       h1 {
         width: 85%;
+        @include word-wrap(break-word);
       }
 
       button .fa {
