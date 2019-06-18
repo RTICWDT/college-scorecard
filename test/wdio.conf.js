@@ -42,7 +42,7 @@ exports.config = {
         maxDuration: 4000,
         extendedDebugging: true,
         chromeOptions: {
-            w3c: false
+            w3c: true
         }
     }],
 
