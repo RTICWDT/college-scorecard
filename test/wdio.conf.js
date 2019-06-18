@@ -42,12 +42,7 @@ exports.config = {
         maxDuration: 4000,
         extendedDebugging: true,
         chromeOptions: {
-            "w3c": true
-            // prefs: {
-            //   profile:{
-            //     default_content_setting_values: {images: 2} // disable images for faster page loads
-            //   }
-            // }
+            w3c: false
         }
     }],
 
