@@ -41,9 +41,10 @@ exports.config = {
         browserName: 'chrome',
         maxDuration: 4000,
         extendedDebugging: true,
-        chromeOptions: {
-            w3c: true
-        }
+        version: "74.0"
+        // chromeOptions: {
+        //     w3c: false
+        // }
     }],
 
     //
