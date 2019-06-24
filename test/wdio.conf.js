@@ -41,12 +41,9 @@ exports.config = {
         browserName: 'chrome',
         maxDuration: 4000,
         extendedDebugging: true,
+        version: "74.0"
         // chromeOptions: {
-        //     prefs: {
-        //       profile:{
-        //         default_content_setting_values: {images: 2} // disable images for faster page loads
-        //       }
-        //     }
+        //     w3c: false
         // }
     }],
 
