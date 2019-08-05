@@ -1221,7 +1221,13 @@ picc.school.directives = (function() {
 
     no_finaid_shown: {
       '@aria-hidden': function(d) {
-        return access(picc.fields.AID_ELIGIBILITY)(d) !== 3;
+        return access(picc.fields.AID_ELIGIBILITY)(d) === 3 ? 'false' : 'true';
+      }
+    },
+
+    no_finaid_alt_shown: {
+      '@aria-hidden': function(d) {
+        return access(picc.fields.AID_ELIGIBILITY)(d) > 3 ? 'false' : 'true';
       }
     },
 

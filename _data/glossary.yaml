@@ -83,5 +83,8 @@ cost-six-largest-programs:
 ogc:
   default: This institution does not participate in the Federal student financial aid programs administered by the U.S. Department of Education, but is approved by the Department for purposes of allowing students to receive deferments on repayment of Federal student loans received at other institutions.
 
+no-aid:
+  default: This institution  does not participate in the Federal student financial aid program administered by the U.S. Department of Education.
+
 outcome-measures:
   default: <strong>Outcomes 8 Years After Attending</strong> <ul><li>Percentages of students who graduated, transferred, are still enrolled, and withdrew from this institution within 8 years of entry.</li><li>This 8-year graduation rate is different from the graduation rate shown above, which measures a shorter time period and a more narrow group of students. </li><li>Percentages may not add to 100% due to suppression and rounding.</li></ul>
