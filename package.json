@@ -52,7 +52,8 @@
     "tito": "^0.4.0",
     "uglify-js": "^3.4.9",
     "watchify": "^3.11.1",
-    "webdriverio": "^5.11.13",
+    "wdio-mocha-framework": "^0.6.4",
+    "webdriverio": "^4.14.4",
     "xmlhttprequest": "^1.8.0"
   },
   "engines": {
