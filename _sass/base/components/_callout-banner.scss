@@ -5,17 +5,12 @@ $callout_height: 32px;
   @extend .light_on_dark;
   color: $white;
   font-weight: $weight-bold;
-
-  padding-left: $base-padding;
+  padding: $base-padding-lite;
   text-align: center;
-  @include respond-to(large-up) {
-    height: $callout_height;
-    padding-top: $base-padding-lite;
-  }
 }
 
 .callout-banner-wrapper {
+  margin-top: $base-padding;
   background-color: $mid-blue;
-  margin-bottom: $base-padding;
   position: relative;
 }
