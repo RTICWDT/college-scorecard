@@ -81,7 +81,9 @@ cost-six-largest-programs:
   default: <strong>Largest Programs</strong> Includes up to six of this school’s largest programs by number of students enrolled.
 
 ogc:
-  default: This institution does not participate in the Federal student financial aid programs administered by the U.S. Department of Education, but is approved by the Department for purposes of allowing students to receive deferments on repayment of Federal student loans received at other institutions.
+  default:  This institution does not participate in the Federal student financial aid program administered by the U.S. Department of Education.
+  flag3: This institution does not participate in the Federal student financial aid programs administered by the U.S. Department of Education, but is approved by the Department for purposes of allowing students to receive deferments on repayment of Federal student loans received at other institutions.
+  flag8: Data is not yet available. This institution only recently began administering Federal aid.  
 
 outcome-measures:
   default: <strong>Outcomes 8 Years After Attending</strong> <ul><li>Percentages of students who graduated, transferred, are still enrolled, and withdrew from this institution within 8 years of entry.</li><li>This 8-year graduation rate is different from the graduation rate shown above, which measures a shorter time period and a more narrow group of students. </li><li>Percentages may not add to 100% due to suppression and rounding.</li></ul>

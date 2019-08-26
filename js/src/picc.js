@@ -1207,6 +1207,15 @@ picc.school.directives = (function() {
       }
     },
 
+    ogc_tip: {
+      '@data-definition': function(d) {
+        let opeflag = access(picc.fields.AID_ELIGIBILITY)(d);
+        if(opeflag === 8) return 'flag8';
+        else if(opeflag === 3) return 'flag3';
+        else if(opeflag > 3 && opeflag < 8) return 'default';
+      }
+    },
+
     program_reporter_hidden: {
       '@aria-hidden':  function(d) {
         return access.isProgramReporter(d) ? 'true' : 'false';
@@ -1221,9 +1230,16 @@ picc.school.directives = (function() {
 
     no_finaid_shown: {
       '@aria-hidden': function(d) {
-        return access(picc.fields.AID_ELIGIBILITY)(d) !== 3;
+        return access(picc.fields.AID_ELIGIBILITY)(d) >= 3 ? 'false' : 'true';
       }
     },
+    
+    no_finaid_hidden: {
+      '@aria-hidden': function(d) {
+        return access(picc.fields.AID_ELIGIBILITY)(d) >= 3 ? 'true' : 'false';
+      }
+    },
+
 
     program_reporter_class: {
       '@class': function(d) {
