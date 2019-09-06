@@ -9,7 +9,9 @@
     "url": "git@github.com:18F/college-choice.git"
   },
   "scripts": {
+    "serve": "jekyll serve --baseurl='' -w",
     "build": "`js/src/browserify-args.sh | xargs -L1 browserify`",
+    "new-build": "webpack --devtool source-map --config webpack.config.js",
     "watch": "`js/src/browserify-args.sh | xargs -L1 watchify -v`",
     "lint": "jshint -c .jshintrc js/src",
     "test-unit": "mocha -- test/unit",
@@ -51,9 +53,14 @@
     "stream-array": "^1.1.1",
     "tito": "^0.4.0",
     "uglify-js": "^3.4.9",
+    "vue": "^2.6.10",
+    "vue-loader": "^15.7.1",
+    "vue-template-compiler": "^2.6.10",
     "watchify": "^3.11.1",
     "wdio-mocha-framework": "^0.6.4",
     "webdriverio": "^4.14.4",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8",
     "xmlhttprequest": "^1.8.0"
   },
   "engines": {
