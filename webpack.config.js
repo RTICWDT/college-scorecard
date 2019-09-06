@@ -3,12 +3,21 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   mode: "development",
-  entry: './js/src/picc.js',
+  entry: {
+    picc: './js/src/picc.js',
+    app: './js/src/app.js'
+  },
   output: {
-    path: path.join(__dirname, "js"),
-    filename: 'picc.js',
+    filename: '[name].js',
+    path: __dirname + '/js',
     library: "picc",
     libraryTarget: "umd"
+  },
+  // For template compiler.
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    }
   },
   module: {
     rules: [
