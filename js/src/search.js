@@ -137,7 +137,7 @@ module.exports = function search() {
 
     picc.school.selection.renderCompareToggles();
 
-    change();
+    // change();
   });
 
   form.on('change', change);
