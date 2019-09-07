@@ -11,7 +11,7 @@
   "scripts": {
     "serve": "jekyll serve --baseurl='' -w",
     "build": "`js/src/browserify-args.sh | xargs -L1 browserify`",
-    "new-build": "webpack --devtool source-map --config webpack.config.js",
+    "new-build": "webpack --devtool source-map --config webpack.picc.config.js && webpack --devtool source-map --config webpack.vue.config.js",
     "watch": "`js/src/browserify-args.sh | xargs -L1 watchify -v`",
     "lint": "jshint -c .jshintrc js/src",
     "test-unit": "mocha -- test/unit",
