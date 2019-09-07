@@ -4,10 +4,300 @@ layout: default
 body_scripts:
   - app.js
 ---
-<div id='app'>
+<!-- <div id='app'>
     <test />
 </div>
 
 <script>
 //   picc.pages.search();
+</script> -->
+
+<form id="search-form" is="search-form"
+  autocomplete="false"
+  action="{{ page.permalink }}" method="GET">
+
+  <div class="toggles search-toggles">
+
+    <div class="container">
+
+      <aria-accordion id="filters" class="toggle-accordion">
+
+        <div class="toggle-control">
+          <h1 class="search_category">
+            <button type="button" aria-expanded="false" aria-controls="filter-content">
+              <i class="fa fa-filter"></i>Filter Results<i class="fa fa-chevron-down"></i>
+            </button>
+          </h1>
+        </div>
+
+
+        <div id="filter-content" aria-hidden="true" class="toggle-content">
+
+          {% include filters.html %}
+
+        </div>
+
+        <input type="submit" value="Submit" class="sr-only" tabindex="-1">
+
+      </aria-accordion>
+
+      <aria-accordion id="search-edit" class="toggle-accordion">
+
+        <div class="toggle-control">
+          <legend>Edit Search</legend>
+          <h1 class="search_category">
+            <button type="button" aria-expanded="false" aria-controls="search-content">
+              <i class="fa fa-search"></i>Edit Search<i class="fa fa-chevron-down"></i>
+            </button>
+          </h1>
+        </div>
+
+        <div id="search-content" aria-hidden="true" class="toggle-content toggle-content-search">
+
+          {% include search-form.html %}
+
+        </div>
+
+        <input type="submit" value="Submit" class="sr-only" tabindex="-1">
+
+      </aria-accordion>
+
+      <aria-accordion id="compare_schools-edit" class="toggle-accordion">
+
+        <div class="toggle-control">
+          <legend>Compare</legend>
+          <h1 class="search_category">
+            <button type="button" aria-expanded="false" aria-controls="compare_schools-content">
+              Compare
+              <span class="selection-count" data-counter="compare"></span>
+              <i class="fa fa-chevron-down"></i>
+            </button>
+          </h1>
+        </div>
+
+        <div id="compare_schools-content" aria-hidden="true" class="toggle-content toggle-content-compare_schools search">
+
+          {% include edit-compare.html %}
+
+        </div>
+
+        <!--<input type="submit" value="Submit" class="sr-only" tabindex="-1">-->
+
+      </aria-accordion>
+
+
+    </div>
+
+  </div>
+
+  <!-- Search results -->
+  <section class="results search-results loadable">
+
+    <div class="container">
+
+      <div class="results-main">
+
+        <div class="results-main-alert">
+
+          <div class="container show-loading">
+            <h1>Loading...</h1>
+          </div>
+
+          <div class="container show-error">
+            <h1>Error</h1>
+            <p class="error-message"></p>
+          </div>
+
+          <div class="container show-loaded">
+
+            <div class="u-group_inline">
+
+              <div class="u-group_inline-left">
+                <h1>
+                  <span data-bind="results_total">0</span>
+                  <span data-bind="results_word">Results</span>
+                </h1>
+              </div>
+
+              <div class="u-group_inline-right">
+
+                <div class="school-share-wrapper">
+
+                  <div class="button button-primary button-share results-share" data-share-button tabindex="0" role="button" onclick="void(0)">
+                    <span class="top yaxis content">Share</span>
+                    <ul class="social-share-list bottom yaxis content">
+                      <li class="social-item">
+                        <a data-href="https://twitter.com/intent/tweet?text=Take%20a%20look%20at%20these%20schools&amp;url={url}" data-bind="search_share_link_twt" data-social="Twitter" title="Share on Twitter" target="_blank">
+                          <i class="fa fa-twitter"></i>
+                          <span class="sr-only">Share on Twitter</span>
+                        </a>
+                      </li>
+                      <li class="social-item">
+                        <a data-href="https://www.facebook.com/sharer/sharer.php?u={url}" data-bind="search_share_link_fb" data-social="Facebook" title="Share on Facebook" target="_blank">
+                          <i class="fa fa-facebook"></i>
+                          <span class="sr-only">Share on Facebook</span>
+                        </a>
+                      </li>
+                      <li class="social-item">
+                        <a data-href="mailto:?subject=Take%20a%20look%20at%20these%20schools&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A{url}" data-bind="search_share_link_mail" data-social="Email" title="Share via Email" >
+                          <i class="fa fa-envelope"></i>
+                          <span class="sr-only">Share via Email</span>
+                        </a>
+                      </li>
+                      <li class="social-item">
+                        <a data-href="https://www.linkedin.com/shareArticle?mini=true&url={url}" data-bind="search_share_link_li" data-social="LinkedIn" title="Share on LinkedIn" target="_blank">
+                          <i class="fa fa-linkedin"></i>
+                          <span class="sr-only">Share on LinkedIn</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="results-sort u-group_inline">
+
+              <div class="u-group_inline-left">
+                <label for="select-sort">Sort:</label>
+              </div>
+
+              <div class="u-group_inline-right">
+                <select id="select-sort" name="sort">
+                  <option selected="selected" value="salary:desc">Salary After Attending</option>
+                  <option value="avg_net_price:asc">Average Annual Cost</option>
+                  <option value="completion_rate:desc">Graduation Rate</option>
+                  <option value="name:asc">Name (A to Z)</option>
+                </select>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="pagination container show-loaded show-incremental">
+          <input type="hidden" name="page">
+          <ol data-bind="pages">
+            Page:
+            <li><a class="select-page" data-bind="link">1</a></li>
+          </ol>
+        </div>
+
+        <section class="section section-card_container-results show-loaded fade-incremental">
+
+          <div class="results-main-schools schools-list container" data-bind="results">
+
+            <!-- this element is the template for the results listing -->
+
+            <div class="school results-card">
+              <span data-bind="school_container">{% comment %}fix for tagalong binding - please leave here{% endcomment %}</span>
+              <div class="content-box">
+                <div class="investigation-major-wrapper"
+                  data-bind="under_investigation" aria-hidden="true">
+                  <a>
+                    <p class="investigation-major" aria-describedby="tip-hcm2" tabindex="0" data-bind="branch_campus">
+                      Under ED Monitoring <i class="fa fa-info-circle"></i>
+                    </p>
+                  </a>
+                </div>
+
+                <div class="results-card-headings">
+                  <div class="compare-wrapper">
+                    <h1 data-bind="title"><a class="link">School Name</a></h1>
+                    <div class="compare-school">
+                      {% include compare_school_control.html %}
+                    </div>
+                  </div>
+                  <ul class="school-info">
+                    <li class="location">
+                      <span data-bind="city">City</span>,
+                      <span data-bind="state">State</span>
+                    </li>
+                    <li>
+                      <span data-bind="size_number">x</span> undergraduates
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="school-meters">
+
+                  <figure class="meter">
+                    <h2 class="figure-heading constrain_width" data-bind="program_reporter_tip"
+                      aria-describedby="tip-avg-cost-year" tabindex="0">
+                      Average<br>Annual Cost
+                      <span class="tooltip-target u-new_line">
+                        <i class="fa fa-info-circle"></i>
+                      </span>
+                    </h2>
+                    <picc-meter {% include net_price_meter_attributes.html %}>
+                    </picc-meter>
+                    <figcaption>
+                      <span data-bind="average_cost"></span>
+                    </figcaption>
+                  </figure>
+
+                  <figure class="meter">
+                    <h2 class="figure-heading constrain_width"
+                      aria-describedby="tip-graduation-rate" tabindex="0">
+                      Graduation <br>Rate
+                      <span class="tooltip-target u-new_line">
+                        <i class="fa fa-info-circle"></i>
+                      </span>
+                    </h2>
+                    <picc-meter {% include graduation_meter_attributes.html %}>
+                    </picc-meter>
+                    <figcaption>
+                      <span data-bind="grad_rate"></span>
+                    </figcaption>
+                  </figure>
+
+                  <figure class="meter">
+                    <h2 class="figure-heading constrain_width"
+                      aria-describedby="tip-avg-salary" tabindex="0" data-bind="branch_campus">
+                      Salary After<br>Attending
+                      <span class="tooltip-target u-new_line">
+                        <i class="fa fa-info-circle"></i>
+                      </span>
+                    </h2>
+                    <picc-meter {% include earnings_meter_attributes.html %}>
+                    </picc-meter>
+                    <figcaption>
+                      <span data-bind="average_salary"></span>
+                    </figcaption>
+                  </figure>
+                </div>
+
+                <a class="link link-more" data-bind="more_link">
+                  View more details <i class="fa fa-chevron-right"></i>
+                </a>
+              </div>
+            </div>
+
+          </div><!-- /div.schools-list -->
+
+        </section>
+
+        <div class="pagination pagination_bottom container show-loaded">
+          <!-- this gets filled in with JavaScript -->
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</form>
+
+<div id='app'>
+    <test />
+</div>
+
+<script>
+  picc.pages.search();
 </script>
