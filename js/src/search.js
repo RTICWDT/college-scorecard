@@ -25,7 +25,10 @@ module.exports = function search() {
   var alreadyLoaded = false;
 
   // TODO: Test events
-  var eventSearchUpdated = new Event('search-updated');
+  var eventSearchUpdated = document.createEvent('CustomEvent');
+ 
+  // var eventSearchUpdated = document.createEvent('Event');
+  // eventSearchUpdated.initEvent('search-updated',true,true);
 
   // "incremental" updates will only hide the list of schools, and
   // not any of the other elements (results total, sort, pages)
@@ -318,7 +321,11 @@ module.exports = function search() {
       console.log('loaded schools:', data);
 
       // TODO: Pass data to vue instance here.
+      eventSearchUpdated.initCustomEvent('search-updated',true,true,{data:data});
       document.dispatchEvent(eventSearchUpdated);
+
+      // var eventSearchUpdated = new Event('search-updated');
+      // document.dispatchEvent(eventSearchUpdated);
 
       console.time && console.time('[render]');
 

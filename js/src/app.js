@@ -10,8 +10,16 @@ new Vue({
     'test': Test
   },
   mounted(){
-    document.addEventListener('search-updated', function () {
+    let vm = this;
+    // Process the search updated event.
+    document.addEventListener('search-updated', function (e) {
       console.log("Event Heard From Vue.");
-    })
+      vm.refreshResults(e.detail.data);
+    });
+  },
+  methods:{
+    refreshResults(resultsObject){
+      this.results = resultsObject;
+    }
   }
 });
