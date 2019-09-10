@@ -24,9 +24,11 @@ sass:
 # common site scripts, relative to `{{ site.baseurl }}/js/`
 scripts:
   - picc.js
+  - vendor/materialize.min.js
 
 stylesheets:
   - styles.css
+
 
 # whether to include the Google Analytics & DAP snippets
 analytics: true

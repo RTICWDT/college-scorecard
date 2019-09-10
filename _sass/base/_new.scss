@@ -1,0 +1,38 @@
+
+.collapsible-header{
+    position: relative;
+    i{
+        position: absolute;
+        right: 10px;
+    }
+}
+
+.collapsible .active .collapsible-header i {
+    -ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
+}
+
+.sidenav .collapsible-body {
+    padding: 2rem;
+    
+}
+
+.school-section{
+    padding: 2rem !important;
+}
+
+.search_form{
+    background-color: transparent;
+    box-shadow: none;
+    .search-form-intro{
+        color: #FFF;
+    }
+}
+.search_form .collapsible-body{
+    background-color: #FFFFFF;
+}
+
+.sidenav .search_form-submit{
+    display:none;
+}

@@ -274,10 +274,12 @@
 
 .home-splash {
   height: $splash-height;
+  background: #37608D;
 
   @include respond-to(medium-up) {
-    background: url('../img/hero-large.jpg') center center no-repeat;
-    background-size: cover;
+    background: #37608D;
+    // background: url('../img/hero-large.jpg') center center no-repeat;
+    // background-size: cover;
   }
 }
 
@@ -327,18 +329,6 @@
   }
 }
 
-.search_form-submit {
-  @extend .centered;
-  border-top: $thick-border-size solid $base-border-color;
-  padding-top: $base-padding-large;
-  padding-right: 0;
-  padding-left: 0;
-  text-align: center;
-
-  fieldset {
-    text-align: left;
-  }
-}
 
 .search-button {
   margin-bottom: $base-padding-large;

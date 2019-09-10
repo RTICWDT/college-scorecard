@@ -2812,6 +2812,13 @@ if (typeof document !== 'undefined') {
 
   });
 
+  /**
+   * initialize materialize
+   */
+  picc.ready(function() {
+    M.AutoInit();
+  })
+
   // namespace sankey
   picc.sankey = {};
 
