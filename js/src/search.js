@@ -24,6 +24,8 @@ module.exports = function search() {
   var ready = false;
   var alreadyLoaded = false;
 
+  // TODO: Test events
+  var eventSearchUpdated = new Event('search-updated');
 
   // "incremental" updates will only hide the list of schools, and
   // not any of the other elements (results total, sort, pages)
@@ -315,6 +317,9 @@ module.exports = function search() {
 
       console.log('loaded schools:', data);
 
+      // TODO: Pass data to vue instance here.
+      document.dispatchEvent(eventSearchUpdated);
+
       console.time && console.time('[render]');
 
       var meta = data.metadata || data;
@@ -412,7 +417,7 @@ module.exports = function search() {
       }
       tagalong(resultsList, data.results, directives);
 
-      console.log(Event);
+      // console.log(Event);
 
       //set compare counter
       picc.school.selection.setCount();
