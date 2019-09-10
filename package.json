@@ -13,6 +13,7 @@
     "build": "`js/src/browserify-args.sh | xargs -L1 browserify`",
     "new-build": "webpack --devtool source-map --config webpack.picc.config.js && webpack --devtool source-map --config webpack.vue.config.js",
     "watch": "`js/src/browserify-args.sh | xargs -L1 watchify -v`",
+    "new-watch": "webpack --devtool source-map --config webpack.picc.config.js --watch & webpack --devtool source-map --config webpack.vue.config.js --watch",
     "lint": "jshint -c .jshintrc js/src",
     "test-unit": "mocha -- test/unit",
     "test-unit-ci": "XUNIT_FILE=test/reports/mocha/unit.xml mocha -R spec-xunit-file -- test/unit",
