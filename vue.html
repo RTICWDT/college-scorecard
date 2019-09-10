@@ -295,7 +295,7 @@ body_scripts:
 </form>
 
 <div id='app'>
-    <test />
+    <test v-for="school in results.results" :school="school" />
 </div>
 
 <script>
