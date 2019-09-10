@@ -137,7 +137,7 @@ module.exports = function search() {
 
     picc.school.selection.renderCompareToggles();
 
-    // change();
+    change();
   });
 
   form.on('change', change);
@@ -411,6 +411,8 @@ module.exports = function search() {
           scrollIntoView();
       }
       tagalong(resultsList, data.results, directives);
+
+      console.log(Event);
 
       //set compare counter
       picc.school.selection.setCount();
