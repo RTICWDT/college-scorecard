@@ -24,6 +24,11 @@ module.exports = function search() {
   var ready = false;
   var alreadyLoaded = false;
 
+  // TODO: Test events
+  var eventSearchUpdated = document.createEvent('CustomEvent');
+ 
+  // var eventSearchUpdated = document.createEvent('Event');
+  // eventSearchUpdated.initEvent('search-updated',true,true);
 
   // "incremental" updates will only hide the list of schools, and
   // not any of the other elements (results total, sort, pages)
@@ -315,6 +320,13 @@ module.exports = function search() {
 
       console.log('loaded schools:', data);
 
+      // TODO: Pass data to vue instance here.
+      eventSearchUpdated.initCustomEvent('search-updated',true,true,{data:data});
+      document.dispatchEvent(eventSearchUpdated);
+
+      // var eventSearchUpdated = new Event('search-updated');
+      // document.dispatchEvent(eventSearchUpdated);
+
       console.time && console.time('[render]');
 
       var meta = data.metadata || data;
@@ -411,6 +423,8 @@ module.exports = function search() {
           scrollIntoView();
       }
       tagalong(resultsList, data.results, directives);
+
+      // console.log(Event);
 
       //set compare counter
       picc.school.selection.setCount();
