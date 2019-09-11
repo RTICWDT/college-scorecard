@@ -8,3 +8,4 @@ node_modules
 index.html.*
 build.log
 js/picc.js*
+js/app.js*
