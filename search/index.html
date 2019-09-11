@@ -4,185 +4,126 @@ layout: default
 permalink: /search/
 ---
 
-<form id="search-form" is="search-form"
-  autocomplete="false"
-  action="{{ page.permalink }}" method="GET">
+<ul id="slide-out" class="sidenav">
+  <div class='row'>
 
-  <div class="toggles search-toggles">
+    <form id="search-form" is="search-form"
+      autocomplete="false"
+      action="{{ page.permalink }}" method="GET">
 
-    <div class="container">
-
-      <aria-accordion id="filters" class="toggle-accordion">
-
-        <div class="toggle-control">
-          <h1 class="search_category">
-            <button type="button" aria-expanded="false" aria-controls="filter-content">
-              <i class="fa fa-filter"></i>Filter Results<i class="fa fa-chevron-down"></i>
-            </button>
-          </h1>
-        </div>
-
-
-        <div id="filter-content" aria-hidden="true" class="toggle-content">
-
-          {% include filters.html %}
-
-        </div>
-
-        <input type="submit" value="Submit" class="sr-only" tabindex="-1">
-
-      </aria-accordion>
-
-      <aria-accordion id="search-edit" class="toggle-accordion">
-
-        <div class="toggle-control">
-          <legend>Edit Search</legend>
-          <h1 class="search_category">
-            <button type="button" aria-expanded="false" aria-controls="search-content">
-              <i class="fa fa-search"></i>Edit Search<i class="fa fa-chevron-down"></i>
-            </button>
-          </h1>
-        </div>
-
-        <div id="search-content" aria-hidden="true" class="toggle-content toggle-content-search">
-
-          {% include search-form.html %}
-
-        </div>
-
-        <input type="submit" value="Submit" class="sr-only" tabindex="-1">
-
-      </aria-accordion>
-
-      <aria-accordion id="compare_schools-edit" class="toggle-accordion">
-
-        <div class="toggle-control">
-          <legend>Compare</legend>
-          <h1 class="search_category">
-            <button type="button" aria-expanded="false" aria-controls="compare_schools-content">
-              Compare
-              <span class="selection-count" data-counter="compare"></span>
-              <i class="fa fa-chevron-down"></i>
-            </button>
-          </h1>
-        </div>
-
-        <div id="compare_schools-content" aria-hidden="true" class="toggle-content toggle-content-compare_schools search">
-
-          {% include edit-compare.html %}
-
-        </div>
-
-        <!--<input type="submit" value="Submit" class="sr-only" tabindex="-1">-->
-
-      </aria-accordion>
-
-
-    </div>
+      {% include search-form.html %}
+      {% include filters.html %}
+      <input type="submit" value="Submit" class="sr-only" tabindex="-1">
+    </form>
 
   </div>
 
+</ul>
+    
+<a href="#" data-target="slide-out" style="position: fixed; left:30px; bottom: 30px" class="sidenav-trigger btn-floating btn-large waves-effect waves-light"><i class="material-icons">search</i></a>
+
+<a class="waves-effect waves-light btn modal-trigger" style="position: fixed; left:120px; bottom: 30px" href="#compareModal">Compare</a>
+
+
   <!-- Search results -->
-  <section class="results search-results loadable">
+  <section class=" results search-results loadable">
 
-    <div class="container">
-
-      <div class="results-main">
+      <div class="container results-main">
 
         <div class="results-main-alert">
 
-          <div class="container show-loading">
+          <div class=" show-loading">
             <h1>Loading...</h1>
           </div>
 
-          <div class="container show-error">
+          <div class=" show-error">
             <h1>Error</h1>
             <p class="error-message"></p>
           </div>
 
-          <div class="container show-loaded">
+          <div class=" show-loaded">
 
-            <div class="u-group_inline">
+            <div class="row">
 
-              <div class="u-group_inline-left">
-                <h1>
+              <div class="col m6">
+                <h5>
                   <span data-bind="results_total">0</span>
                   <span data-bind="results_word">Results</span>
-                </h1>
-              </div>
-
-              <div class="u-group_inline-right">
-
+                </h5>
                 <div class="school-share-wrapper">
 
-                  <div class="button button-primary button-share results-share" data-share-button tabindex="0" role="button" onclick="void(0)">
-                    <span class="top yaxis content">Share</span>
-                    <ul class="social-share-list bottom yaxis content">
-                      <li class="social-item">
-                        <a data-href="https://twitter.com/intent/tweet?text=Take%20a%20look%20at%20these%20schools&amp;url={url}" data-bind="search_share_link_twt" data-social="Twitter" title="Share on Twitter" target="_blank">
-                          <i class="fa fa-twitter"></i>
-                          <span class="sr-only">Share on Twitter</span>
-                        </a>
-                      </li>
-                      <li class="social-item">
-                        <a data-href="https://www.facebook.com/sharer/sharer.php?u={url}" data-bind="search_share_link_fb" data-social="Facebook" title="Share on Facebook" target="_blank">
-                          <i class="fa fa-facebook"></i>
-                          <span class="sr-only">Share on Facebook</span>
-                        </a>
-                      </li>
-                      <li class="social-item">
-                        <a data-href="mailto:?subject=Take%20a%20look%20at%20these%20schools&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A{url}" data-bind="search_share_link_mail" data-social="Email" title="Share via Email" >
-                          <i class="fa fa-envelope"></i>
-                          <span class="sr-only">Share via Email</span>
-                        </a>
-                      </li>
-                      <li class="social-item">
-                        <a data-href="https://www.linkedin.com/shareArticle?mini=true&url={url}" data-bind="search_share_link_li" data-social="LinkedIn" title="Share on LinkedIn" target="_blank">
-                          <i class="fa fa-linkedin"></i>
-                          <span class="sr-only">Share on LinkedIn</span>
-                        </a>
-                      </li>
-                    </ul>
+                    <div class="button button-primary button-share results-share" data-share-button tabindex="0" role="button" onclick="void(0)">
+                      <span class="top yaxis content">Share</span>
+                      <ul class="social-share-list bottom yaxis content">
+                        <li class="social-item">
+                          <a data-href="https://twitter.com/intent/tweet?text=Take%20a%20look%20at%20these%20schools&amp;url={url}" data-bind="search_share_link_twt" data-social="Twitter" title="Share on Twitter" target="_blank">
+                            <i class="fa fa-twitter"></i>
+                            <span class="sr-only">Share on Twitter</span>
+                          </a>
+                        </li>
+                        <li class="social-item">
+                          <a data-href="https://www.facebook.com/sharer/sharer.php?u={url}" data-bind="search_share_link_fb" data-social="Facebook" title="Share on Facebook" target="_blank">
+                            <i class="fa fa-facebook"></i>
+                            <span class="sr-only">Share on Facebook</span>
+                          </a>
+                        </li>
+                        <li class="social-item">
+                          <a data-href="mailto:?subject=Take%20a%20look%20at%20these%20schools&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A{url}" data-bind="search_share_link_mail" data-social="Email" title="Share via Email" >
+                            <i class="fa fa-envelope"></i>
+                            <span class="sr-only">Share via Email</span>
+                          </a>
+                        </li>
+                        <li class="social-item">
+                          <a data-href="https://www.linkedin.com/shareArticle?mini=true&url={url}" data-bind="search_share_link_li" data-social="LinkedIn" title="Share on LinkedIn" target="_blank">
+                            <i class="fa fa-linkedin"></i>
+                            <span class="sr-only">Share on LinkedIn</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                
                   </div>
-
-                </div>
-
               </div>
 
-            </div>
+              <div class="col m6">
 
-            <div class="results-sort u-group_inline">
 
-              <div class="u-group_inline-left">
                 <label for="select-sort">Sort:</label>
-              </div>
-
-              <div class="u-group_inline-right">
                 <select id="select-sort" name="sort">
                   <option selected="selected" value="salary:desc">Salary After Attending</option>
                   <option value="avg_net_price:asc">Average Annual Cost</option>
                   <option value="completion_rate:desc">Graduation Rate</option>
                   <option value="name:asc">Name (A to Z)</option>
                 </select>
+                
+              </div>
+            </div>
+            <div class="row">
+              <div class="col m6 offset-m6">
+                  <div class="pagination  show-loaded show-incremental">
+                    <ol data-bind="pages">
+                      Page:
+                      <li><a class="select-page" data-bind="link">1</a></li>
+                    </ol>
+                  </div>
               </div>
 
             </div>
 
+                
+ 
           </div>
 
         </div>
 
-        <div class="pagination container show-loaded show-incremental">
-          <input type="hidden" name="page">
-          <ol data-bind="pages">
-            Page:
-            <li><a class="select-page" data-bind="link">1</a></li>
-          </ol>
-        </div>
+      </div>
 
-        <section class="section section-card_container-results show-loaded fade-incremental">
 
-          <div class="results-main-schools schools-list container" data-bind="results">
+
+
+        <section class="container section section-card_container-results show-loaded fade-incremental">
+
+          <div class="results-main-schools schools-list " data-bind="results">
 
             <!-- this element is the template for the results listing -->
 
@@ -216,52 +157,25 @@ permalink: /search/
                   </ul>
                 </div>
 
-                <div class="school-meters">
-
-                  <figure class="meter">
-                    <h2 class="figure-heading constrain_width" data-bind="program_reporter_tip"
-                      aria-describedby="tip-avg-cost-year" tabindex="0">
-                      Average<br>Annual Cost
-                      <span class="tooltip-target u-new_line">
+                <div class="school-meters">                  
+                  <p data-bind="program_reporter_tip"
+                  aria-describedby="tip-avg-cost-year">
+                    <span data-bind="average_cost"></span> Average Annual Cost
+                    <span class="tooltip-target"><i class="fa fa-info-circle"></i></span>
+                  </p>
+                  <p aria-describedby="tip-graduation-rate">
+                    <span data-bind="grad_rate"></span> Graduation Rate
+                    <span class="tooltip-target">
                         <i class="fa fa-info-circle"></i>
-                      </span>
-                    </h2>
-                    <picc-meter {% include net_price_meter_attributes.html %}>
-                    </picc-meter>
-                    <figcaption>
-                      <span data-bind="average_cost"></span>
-                    </figcaption>
-                  </figure>
+                    </span>
+                  </p>
 
-                  <figure class="meter">
-                    <h2 class="figure-heading constrain_width"
-                      aria-describedby="tip-graduation-rate" tabindex="0">
-                      Graduation <br>Rate
-                      <span class="tooltip-target u-new_line">
-                        <i class="fa fa-info-circle"></i>
-                      </span>
-                    </h2>
-                    <picc-meter {% include graduation_meter_attributes.html %}>
-                    </picc-meter>
-                    <figcaption>
-                      <span data-bind="grad_rate"></span>
-                    </figcaption>
-                  </figure>
-
-                  <figure class="meter">
-                    <h2 class="figure-heading constrain_width"
-                      aria-describedby="tip-avg-salary" tabindex="0" data-bind="branch_campus">
-                      Salary After<br>Attending
-                      <span class="tooltip-target u-new_line">
-                        <i class="fa fa-info-circle"></i>
-                      </span>
-                    </h2>
-                    <picc-meter {% include earnings_meter_attributes.html %}>
-                    </picc-meter>
-                    <figcaption>
-                      <span data-bind="average_salary"></span>
-                    </figcaption>
-                  </figure>
+                  <p aria-describedby="tip-avg-salary">
+                  <span data-bind="average_salary"></span> Average Salary
+                  <span class="tooltip-target">
+                      <i class="fa fa-info-circle"></i>
+                  </span>
+                </p>
                 </div>
 
                 <a class="link link-more" data-bind="more_link">
@@ -273,18 +187,23 @@ permalink: /search/
           </div><!-- /div.schools-list -->
 
         </section>
-
-        <div class="pagination pagination_bottom container show-loaded">
-          <!-- this gets filled in with JavaScript -->
+        <div class="container">
+          <div class="pagination pagination_bottom show-loaded">
+            <!-- this gets filled in with JavaScript -->
+          </div>
         </div>
-
       </div>
-
-    </div>
-
   </section>
 
-</form>
+
+<div id="compareModal" class="modal bottom-sheet" style='width: 40%; right: 20%; left: auto;'>
+  <div class="modal-content">
+      <div id="compare_schools-content">
+        {% include edit-compare.html %}
+      </div>
+  </div>
+</div>
+
 
 <script>
   picc.pages.search();

@@ -8,49 +8,20 @@ layout: default
 <!-- search and -->
 <!-- where to start -->
 <section class="search_form">
-
-  <form id="search-form" is="search-form"
-    autocomplete="false"
-    action="{{ site.baseurl }}/search/" method="GET">
-
+  <form id="search-form" is="search-form" autocomplete="false" action="{{ site.baseurl }}/search/" method="GET">
     <input type="hidden" name="under_investigation">
-
-    <div class="container search-form-intro">
-
-      <legend>Find Schools</legend>
-      <h1 class="large_heading">Find Schools</h1>
-      <p>Compare schools now</p>
-
+    <div class="search-form-intro">
+      <h1 class='center-align'>Find Schools</h1>
+      <p class='center-align'>Compare schools now</p>
     </div>
-
-  {% include search-form.html %}
-
+    {% include search-form.html extraClass="popout" %}
   </form>
-
-  <section class="section section-home-start">
-
-    <!-- <div class="container section-home-start-group">
-
-      <h1 class="light_on_dark section-home-start-group-left">Not Sure Where to Start?</h1>
-
-      <button class="button button-wizard section-home-start-group-right">
-        Help me find schools <br>best suited to me
-      </button>
-
-    </div> -->
-
-  </section>
-
 </section>
 
 <!-- by the numbers -->
 <div>
   <section class="section section-home-facts">
-
     <div class="container">
-
-      <h1>Did You Know?</h1>
-
       <ul>
         <li class="aid">
           <img src="{{ site.baseurl }}/img/application.svg" alt="Application">
@@ -64,7 +35,7 @@ layout: default
           <img src="{{ site.baseurl }}/img/cap.svg" alt="Graduation cap">
           <strong>40%</strong>
           <strong class="less-strong">of undergraduates</strong>
-          <div class="fact-words">are <span>24 years or older</span>?</div>
+          <div class="fact-words">are <span>24 years or older</span>.</div>
         </li>
         <li class="apprenticeships">
           <img src="{{ site.baseurl }}/img/apprenticeships.svg" alt="Wrench">
@@ -73,80 +44,27 @@ layout: default
             <a href="https://www.apprenticeship.gov/apprenticeship-finder" target="_blank" rel="noopener"><strong class="less-strong">Find one that’s right for you.</strong></a>
         </li>
       </ul>
-
     </div>
-
   </section>
 </div>
 
 <!-- check out these schools -->
 <!-- and paying for college -->
-<div class="home-bg-gray">
-
+<!--<div class="home-bg-gray">
   <div class="container">
-
-    <section class="section section-home-paying">
-
-      <div>
-
-        <div>
-
-          <h1>Paying For College</h1>
-
-          <div class="section-home-paying-content">
-
-            <div class="u-align_c">
-
-              <a href="https://studentaid.ed.gov/sa/types#aid-from-the-federal-government" class="button button-outline" target="_blank">
-                Types of Financial Aid</a>
-              <a href="https://fafsa.ed.gov/FAFSA/app/f4cForm" class="button button-outline" target="_blank">
-                Calculate Your Aid</a>
-              <a href="https://fafsa.ed.gov/" class="button button-outline" target="_blank">
-                Start My FAFSA</a>
-              <a href="https://www.vets.gov/gi-bill-comparison-tool" class="button button-outline" target="_blank">
-                GI Bill&reg; Benefits</a>
-
-            </div>
-
-          </div>
-
-        </div>
-
+    <div class='row'>
+      <div class='col s6'>
+        {% include paying_for_college.html %}
       </div>
-
-    </section>
-
-    <section class="section section-home-toolkit">
-
-      <div>
-
-        <div>
-
-          <h1>Toolkit</h1>
-            
-            <div class="section-home-toolkit-content">
-
-              <p class="u-align_c">Want to share the College Scorecard with others?</p>
-              <p class="u-align_c">Here’s a toolkit to help you disseminate information through emails, social media, and events.</p>
-
-              <div class="u-align_c">
-
-                <a href="{{ site.baseurl }}/assets/College-Scorecard-Toolkit.pdf" class="button button-outline" target="_blank">
-                  Download PDF</a>
-
-            </div>
-
-          </div>
-
-        </div>
-
+      <div class='col s6'>
+        <h1>Toolkit</h1>
+        <p class="u-align_c">Want to share the College Scorecard with others?</p>
+        <p class="u-align_c">Here’s a toolkit to help you disseminate information through emails, social media, and events.</p>
+        <a href="{{ site.baseurl }}/assets/College-Scorecard-Toolkit.pdf" class="btn" target="_blank">Download PDF</a>
       </div>
-
-    </section>
-
+    </div>
   </div>
-
-</div>
+</div>-->
 
 <script>
   picc.pages.index();

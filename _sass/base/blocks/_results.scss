@@ -35,70 +35,9 @@
   .show-loaded {
     padding-top: $base-padding;
 
-    label {
-      display: block;
-      padding-bottom: 4px;
-      padding-left: 3px;
-      text-align: left;
-      text-transform: uppercase;
-
-      @include respond-to(medium-up) {
-        display: table-cell;
-        padding-right: 8px;
-        width: 28%;
-      }
-    }
-
-    .u-group_inline {
-      white-space: nowrap;
-      > .u-group_inline-right {
-        @include respond-to(weensy-down) {
-          display: block !important;
-          float: left;
-        }
-      }
-      @include respond-to(small-up) {
-        white-space: normal;
-      }
-    }
-
-    > div {
-      @include span-columns(12);
-
-      @include respond-to(medium-up) {
-        &:first-of-type {
-          @include span-columns(6);
-        }
-
-        &:last-of-type {
-          @include span-columns(6);
-        }
-      }
-
-      @include respond-to(large-up) {
-        &:first-of-type {
-          @include span-columns(8);
-        }
-
-        &:last-of-type {
-          @include span-columns(4);
-        }
-      }
-    }
-
-    select {
-      border-color: darken($mid-gray, 10%);
-      display: block;
-      padding-right: 50px;
-
-      @include respond-to(medium-up) {
-        display: table-cell;
-        vertical-align: middle;
-      }
-    }
   }
 
-  @include respond-to(small-up) {
+  @include respond-to(small-u p) {
     border-bottom: $regular-border-size solid darken($mid-gray, 10%);
     padding-right: 0;
     padding-left: 0;
@@ -339,6 +278,7 @@
     h1 {
       @include font-size($h1);
       padding-top: 0;
+      margin-top: 0;
 
       a[href] {
         color: $darkest-blue;

@@ -121,14 +121,6 @@ $toggle-padding: 15px;
     font-weight: $weight-book;
   }
 
-  .search_form-submit {
-    border-top: $thin-border-size solid $mid-gray;
-    padding-top: $base-padding;
-
-    @include respond-to(small-up) {
-      padding-top: $base-padding-large;
-    }
-  }
 
   .compare_link {
     margin-top: $base-padding;
