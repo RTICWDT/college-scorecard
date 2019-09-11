@@ -61,7 +61,7 @@ $button-font-size: 14px !default;
 $button-icon-font-size: 1.3rem !default;
 $button-height: 36px !default;
 $button-padding: 0 16px !default;
-$button-radius: 2px !default;
+$button-radius: 500px !default;
 
 // Disabled styles
 $button-disabled-background: #DFDFDF !default;
@@ -174,7 +174,7 @@ $input-font-size: 16px !default;
 $input-margin-bottom: 8px;
 $input-margin: 0 0 $input-margin-bottom 0 !default;
 $input-padding: 0 !default;
-$label-font-size: .8rem !default;
+$label-font-size: .9rem !default;
 $input-disabled-color: rgba(0,0,0, .42) !default;
 $input-disabled-solid-color: #949494 !default;
 $input-disabled-border: 1px dotted $input-disabled-color !default;

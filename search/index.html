@@ -15,15 +15,14 @@ permalink: /search/
       {% include filters.html %}
       <input type="submit" value="Submit" class="sr-only" tabindex="-1">
     </form>
-    <div id="compare_schools-content"  class="toggle-content toggle-content-compare_schools search">
-      {% include edit-compare.html %}
-    </div>
+
   </div>
 
 </ul>
     
 <a href="#" data-target="slide-out" style="position: fixed; left:30px; bottom: 30px" class="sidenav-trigger btn-floating btn-large waves-effect waves-light"><i class="material-icons">search</i></a>
 
+<a class="waves-effect waves-light btn modal-trigger" style="position: fixed; left:120px; bottom: 30px" href="#compareModal">Compare</a>
 
 
   <!-- Search results -->
@@ -195,6 +194,15 @@ permalink: /search/
         </div>
       </div>
   </section>
+
+
+<div id="compareModal" class="modal bottom-sheet" style='width: 40%; right: 20%; left: auto;'>
+  <div class="modal-content">
+      <div id="compare_schools-content">
+        {% include edit-compare.html %}
+      </div>
+  </div>
+</div>
 
 
 <script>

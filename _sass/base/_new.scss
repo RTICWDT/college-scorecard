@@ -1,4 +1,4 @@
-
+/* need to figure out which partials are left and redistribute these appropriately */ 
 .collapsible-header{
     position: relative;
     i{
@@ -35,4 +35,12 @@
 
 .sidenav .search_form-submit{
     display:none;
+}
+
+
+label{
+    color: darken(gray, 10%);
+}
+label.checkbox{
+    vertical-align: middle;
 }
