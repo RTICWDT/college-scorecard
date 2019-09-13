@@ -214,7 +214,7 @@ module.exports = function search() {
     updateDistanceDisabled();
 
     var params = form.getData();
-    // console.info('form data:', params);
+    console.info('form data:', params);
 
     // unset parameters that are "empty" arrays (with a single, falsy value)
     for (var k in params) {

@@ -53,7 +53,7 @@ export default {
   methods:{
     // This would go up one level to root vue instance.
     testAPI(){
-      let params = {};
+      let params = {state:['MA']};
       let query = picc.form.prepareParams(params);
 
       query.fields = [
