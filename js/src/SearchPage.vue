@@ -18,16 +18,21 @@
     <a href="#" data-target="slide-out" style="position: fixed; left:30px; bottom: 30px" class="sidenav-trigger btn-floating btn-large waves-effect waves-light"><i class="material-icons">search</i></a>
     <a class="waves-effect waves-light btn modal-trigger" style="position: fixed; left:120px; bottom: 30px" href="#compareModal">Compare</a>
 
-    
-  
+    <!-- Basic Example for now -->
+    <search-result-card v-for="school in results.schools" :key="school.id" :school="school"/>
   
   </div><!--End of root -->
 </template>
 
 <script>
+import SearchResultCard from './components/vue/SearchResultCard.vue';
+
 const querystring = require('querystring');
 
 export default {
+  components:{
+    'search-result-card': SearchResultCard
+  },
   props:{
     'page-permalink': String
   },
@@ -42,6 +47,7 @@ export default {
     this.testAPI();
   },
   methods:{
+    // This would go up one level to root vue instance.
     testAPI(){
       let params = {};
       let query = picc.form.prepareParams(params);
@@ -81,7 +87,7 @@ export default {
       let vm = this;
       let req = picc.API.search(query, function(error, data) {
         console.log('loaded schools:', data);
-        vm.results.scools = data.results;
+        vm.results.schools = data.results;
       });
     }
   }
