@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Test from './components/vue/Test.vue';
+import SearchPage from './SearchPage.vue';
 
 new Vue({
   el: '#app',
@@ -7,7 +8,8 @@ new Vue({
     results:{}
   },
   components:{
-    'test': Test
+    'test': Test,
+    'search-page': SearchPage
   },
   mounted(){
     let vm = this;
