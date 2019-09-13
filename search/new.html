@@ -5,7 +5,16 @@ permalink: /search/new
 body_scripts:
   - app.js
 ---
+<script>
+  // REMOVE
+  let siteAll = {{site.data | jsonify}}
+
+  let siteDataStates = {{site.data.states | jsonify}}
+  let siteDataPrograms = {{site.data.programs | jsonify}}
+
+</script>
+
 <div id="app">
   <!-- Pass other variables as props-->
-  <search-page page-permalink="{{ page.permalink }}"/>
+  <search-page page-permalink="{{ page.permalink }}" :states="site.data.states" :programs="site.data.programs"/>
 </div>

@@ -34,6 +34,7 @@
     "html-parsed-element": "^0.4.0",
     "jquery": "^3.4.0",
     "leaflet": "^0.7.7",
+    "lodash": "^4.17.15",
     "typeahead.js-browserify": "^1.0.7"
   },
   "devDependencies": {

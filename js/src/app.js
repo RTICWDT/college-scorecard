@@ -2,10 +2,19 @@ import Vue from 'vue';
 import Test from './components/vue/Test.vue';
 import SearchPage from './SearchPage.vue';
 
+let _ = require('lodash');
+
 new Vue({
   el: '#app',
   data:{
-    results:{}
+    results:{},
+    site:{
+      all:null,
+      data:{
+        states: null,
+        programs: null,
+      }
+    }
   },
   components:{
     'test': Test,
@@ -18,6 +27,11 @@ new Vue({
       console.log("Event Heard From Vue.");
       vm.refreshResults(e.detail.data);
     });
+
+    // Items passed via page variable.
+    this.site.all = siteAll;
+    this.site.data.states = siteDataStates;
+    this.site.data.programs = siteDataPrograms;
   },
   methods:{
     refreshResults(resultsObject){

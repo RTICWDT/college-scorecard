@@ -3,18 +3,24 @@
     <!-- Make Whole Search Field Component -->
     <ul id="slide-out" class="sidenav">
       <div class='row'>
+        
+        <!-- Search Form Component -->
+        <search-form :states="states" :programs="programs" 
+          :urlParsedParams="urlParsedParams"
+          @form-input-change="testAPI($event)"
+        />
 
         <form id="search-form" autocomplete="false"
           :action="pagePermalink" method="GET">
           
           <!-- search-Form component-->
+
           <!-- Filter Component -->
 
           <input type="submit" value="Submit" class="sr-only" tabindex="-1">
         </form>
       </div>
     </ul>
-
     <a href="#" data-target="slide-out" style="position: fixed; left:30px; bottom: 30px" class="sidenav-trigger btn-floating btn-large waves-effect waves-light"><i class="material-icons">search</i></a>
     <a class="waves-effect waves-light btn modal-trigger" style="position: fixed; left:120px; bottom: 30px" href="#compareModal">Compare</a>
 
@@ -29,31 +35,61 @@
 </template>
 
 <script>
+// TODO - This needs major cleanup.  How can it be cleaned?, Seperate files?
 import SearchResultCard from './components/vue/SearchResultCard.vue';
+import SearchForm from './components/vue/SearchForm.vue';
 
 const querystring = require('querystring');
 
+function diff(a, b) {
+  if ((typeof a) !== (typeof b)) {
+    // console.log('diff types:', typeof a, typeof b);
+    return true;
+  } else if (typeof a === 'object') {
+    for (var k in a) if (diff(a[k], b[k])) return true;
+    for (var k in b) if (diff(a[k], b[k])) return true;
+    return false;
+  }
+  return a != b;
+}
+
 export default {
   components:{
-    'search-result-card': SearchResultCard
+    'search-result-card': SearchResultCard,
+    'search-form': SearchForm
   },
   props:{
-    'page-permalink': String
+    'page-permalink': String,
+    'states': Array,
+    'programs': Array
   },
   data(){
     return {
       results:{
-        schools:[]
+        schools:[],
+        meta:{},
+      },
+      urlParsedParams:{
+        state:[]
       }
     };
   },
-  mounted(){
-    this.testAPI();
+  mounted(){   
+    // URL Parsing and filling. TODO: Move Up.
+    let query = querystring.parse(location.search.substr(1));
+    console.log("query: " + JSON.stringify(query));
+    
+    this.urlParsedParams = query || {};
+    
+    // TODO - Remove this call.  We are testing on load for now.
+    this.testAPI(this.urlParsedParams);
   },
   methods:{
     // This would go up one level to root vue instance.
-    testAPI(){
-      let params = {state:['MA']};
+    testAPI(params = {}){
+      let poppingState = false;
+      let alreadyLoaded = false;
+
       let query = picc.form.prepareParams(params);
 
       query.fields = [
@@ -88,11 +124,22 @@ export default {
         .replace(/&{2,}/g, '&')
         .replace(/%3A/g, ':');
 
+      if (poppingState) {
+        // console.info('popping state');
+        // history.replaceState(params, 'search', qs);
+      } else if (diff(this.urlParsedParams, params)) {
+        // console.info('push state:', qs, previousParams, '->', params);
+        // update the URL
+        history.pushState(params, 'search', qs);
+      } else {
+        // console.info('replace state:', qs);
+        history.replaceState(params, 'search', qs);
+      }
+
       let vm = this;
       let req = picc.API.search(query, function(error, data) {
         console.log('loaded schools:', data);
-        vm.results.schools = data.results;
-        
+        vm.results.schools = data.results;  
       });
     }
   }
