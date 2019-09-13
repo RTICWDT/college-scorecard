@@ -19,8 +19,12 @@
     <a class="waves-effect waves-light btn modal-trigger" style="position: fixed; left:120px; bottom: 30px" href="#compareModal">Compare</a>
 
     <!-- Basic Example for now -->
-    <search-result-card v-for="school in results.schools" :key="school.id" :school="school"/>
-  
+    <section class="container section section-card_container-results">
+      <div class="results-main-schools schools-list">
+        <search-result-card v-for="school in results.schools" :key="school.id" :school="school"/>
+      </div>
+    </section>
+
   </div><!--End of root -->
 </template>
 
@@ -88,6 +92,7 @@ export default {
       let req = picc.API.search(query, function(error, data) {
         console.log('loaded schools:', data);
         vm.results.schools = data.results;
+        
       });
     }
   }
