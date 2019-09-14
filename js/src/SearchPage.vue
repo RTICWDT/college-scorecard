@@ -7,7 +7,7 @@
         <!-- Search Form Component -->
         <search-form :states="states" :programs="programs" 
           :urlParsedParams="urlParsedParams"
-          @form-input-change="testAPI($event)"
+           @search-query="testAPI"
         />
 
         <form id="search-form" autocomplete="false"
@@ -69,9 +69,7 @@ export default {
         schools:[],
         meta:{},
       },
-      urlParsedParams:{
-        state:[]
-      }
+      urlParsedParams:{}
     };
   },
   mounted(){   
@@ -85,6 +83,9 @@ export default {
     this.testAPI(this.urlParsedParams);
   },
   methods:{
+    testFormChange(event){
+      console.log(event);
+    },
     // This would go up one level to root vue instance.
     testAPI(params = {}){
       let poppingState = false;

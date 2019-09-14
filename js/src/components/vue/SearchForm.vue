@@ -39,7 +39,7 @@
                   Select one or more states
                 </div>
                 
-                <select aria-labelledby="label-select-state" class="select-state" name="state" multiple v-model="input.state" @change="$emit('form-input-change',input)">
+                <select aria-labelledby="label-select-state" class="select-state" name="state" multiple v-model="input.state">
                   <option value="" selected>Any</option>
                   <option v-for="state in states" :value="state.abbr" :key="state.abbr">{{ state.name }}</option>
                 </select>
@@ -54,13 +54,15 @@
 </template>
 
 <script>
+// TODO - Try removing state from this form.
  _ = require('lodash');
 
 export default {
   props:{
     states: Array,
     programs: Array,
-    urlParsedParams: Object
+    parsedParams: Object,
+    urlParsedParams: Object // This doesn't need to be here.
   },
   data(){
     return{
@@ -70,12 +72,25 @@ export default {
     }
   },
   watch:{
-    // Watch prop and clone for local state.
+    // Check for parsed URL arguments.
     urlParsedParams(newVal, oldVal){
-      this.input = _.cloneDeep(newVal);
-    }
+      // if url parsed params exist, merge ensuring that inputs that are meant to be arrays, stay arrays.
+      this.input = _.mergeWith(this.input,newVal,function(objVal,newObjValue){
+        if(_.isArray(objVal) && _.isString(newObjValue)){
+          return [newObjValue];
+        }
+      });
+    },
+    // Watch input changes and debounce for querying.
+    input: {
+      handler: _.debounce(function() {
+        this.$emit('search-query', this.input)
+      }, 1000),
+      deep: true
+    },
   },
   mounted(){
+    // Get the params.
     // this.input = _.deepCopy(this.formState);
   },
   methods:{
