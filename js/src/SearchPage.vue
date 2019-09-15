@@ -38,6 +38,7 @@
 // TODO - This needs major cleanup.  How can it be cleaned?, Seperate files?
 import SearchResultCard from './components/vue/SearchResultCard.vue';
 import SearchForm from './components/vue/SearchForm.vue';
+import _ from 'lodash';
 
 const querystring = require('querystring');
 
@@ -61,7 +62,11 @@ export default {
   props:{
     'page-permalink': String,
     'states': Array,
-    'programs': Array
+    'programs': Array,
+    'defaultSort':{
+      type: String,
+      default: "avg_net_price:asc"
+    }
   },
   data(){
     return {
@@ -69,16 +74,33 @@ export default {
         schools:[],
         meta:{},
       },
-      urlParsedParams:{}
+      input:{
+        sort: null,
+        page:0
+      },
+      urlParsedParams:{},
+      utility:{
+        formDefult:{}
+      }
     };
   },
+  created(){
+    // Copy default form input state.
+    this.utility.formDefult = _.cloneDeep(this.input);
+  },
   mounted(){   
-    // URL Parsing and filling. TODO: Move Up.
+    // URL Parsing and filling.
     let query = querystring.parse(location.search.substr(1));
     console.log("query: " + JSON.stringify(query));
     
     this.urlParsedParams = query || {};
-    
+
+    // Add sort to state if it exists
+    this.input.sort = (this.urlParsedParams.sort) ? this.urlParsedParams.sort : this.defaultSort;
+
+    // if Page is in the url, add it here.
+    this.input.page = (this.urlParsedParams.page) ? this.urlParsedParams.page : 0;
+
     // TODO - Remove this call.  We are testing on load for now.
     this.testAPI(this.urlParsedParams);
   },
@@ -86,10 +108,16 @@ export default {
     testFormChange(event){
       console.log(event);
     },
-    // This would go up one level to root vue instance.
+    // This can stay here, Just needs some clean up.
     testAPI(params = {}){
       let poppingState = false;
       let alreadyLoaded = false;
+      
+      // Add page and sort items into params.
+      if(this.input.page > 0){
+        params.page = this.input.page;
+      }
+      params.sort = this.input.sort;
 
       let query = picc.form.prepareParams(params);
 

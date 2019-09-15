@@ -56,8 +56,10 @@
 <script>
 import _ from 'lodash';
 
-// TODO - Sorting + Default Sort: On UI + In URL
+// TODO - Remove Sorting and Pagination.
+  // TODO - Remove params that are not expected.
 
+// TODO - Add props and methods to generate forward URL + disable debounce.
 
 export default {
   props:{
@@ -79,8 +81,8 @@ export default {
         control:"", //Type
         serving:"",
         religious:"",
-        page:0,
-        sort:""
+        // page:0,
+        // sort:""
       },
       utility:{
         // Hold Default state of form data.
@@ -93,10 +95,20 @@ export default {
     urlParsedParams(newVal, oldVal){
       // if url parsed params exist, merge ensuring that inputs that are meant to be arrays, stay arrays.
       this.input = _.mergeWith(this.input,newVal,function(objVal,newObjValue){
+        // if(_.isNull(objVal)){
+        //   return undefined;
+        // }else if(_.isArray(objVal) && _.isString(newObjValue)){
+        //   return [newObjValue];
+        // }
         if(_.isArray(objVal) && _.isString(newObjValue)){
           return [newObjValue];
         }
       });
+
+      // TODO - Clean this, maybe integrate with input merge.  Should not add properties that are not expected.
+      // Remove properties t
+      // this.$delete(this.input, 'page');
+      // this.$delete(this.input, 'sort');
     },
     // Watch input changes and debounce for querying.
     input: {
@@ -112,6 +124,11 @@ export default {
       let defaultValues = this.utility.formDefult;
       // Pick only values that are different from default state.
       return _.pickBy(this.input,(value,key) => {
+        // If it does not exist in the default state object, remove.
+        if(!_.has(defaultValues,key)){
+          return false;
+        }
+        
         //If the input value is not eqaul to default, return value.
         if(!_.isEqual(value,defaultValues[key])){
           return value;
