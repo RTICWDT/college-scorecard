@@ -12,6 +12,7 @@ module.exports = function search() {
   var toggleContainer = document.querySelector('.toggles.search-toggles');
 
   var form = new formdb.Form('#search-form');
+  console.log(form);
   var query = querystring.parse(location.search.substr(1));
   picc.form.autocompleteName('#search-form');
   // console.info('initial query:', query);

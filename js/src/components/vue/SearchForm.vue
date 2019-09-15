@@ -54,20 +54,37 @@
 </template>
 
 <script>
-// TODO - Try removing state from this form.
- _ = require('lodash');
+import _ from 'lodash';
+
+// TODO - Sorting + Default Sort: On UI + In URL
+
 
 export default {
   props:{
     states: Array,
     programs: Array,
-    parsedParams: Object,
-    urlParsedParams: Object // This doesn't need to be here.
+    urlParsedParams: Object
   },
   data(){
     return{
       input:{
-        state:[]
+        state:[],
+        degree:"",
+        major:"",
+        region:[],
+        zip:"",
+        distance:"",
+        size:"",
+        name:"",
+        control:"", //Type
+        serving:"",
+        religious:"",
+        page:0,
+        sort:""
+      },
+      utility:{
+        // Hold Default state of form data.
+        formDefult:{}
       }
     }
   },
@@ -84,20 +101,32 @@ export default {
     // Watch input changes and debounce for querying.
     input: {
       handler: _.debounce(function() {
-        this.$emit('search-query', this.input)
+        this.$emit('search-query', this.cleanInput)
       }, 1000),
       deep: true
     },
   },
+  computed:{
+    // Remove items that are not set
+    cleanInput(){
+      let defaultValues = this.utility.formDefult;
+      // Pick only values that are different from default state.
+      return _.pickBy(this.input,(value,key) => {
+        //If the input value is not eqaul to default, return value.
+        if(!_.isEqual(value,defaultValues[key])){
+          return value;
+        }
+      });
+    }
+  },
+  created(){
+    // Replicate default form state.
+    this.utility.formDefult = _.cloneDeep(this.input);
+  },
   mounted(){
-    // Get the params.
-    // this.input = _.deepCopy(this.formState);
   },
   methods:{
     processChangeEvent(){
-      // Emit change to par
-      // Send all data to paraent.
-
     }
   }
 }
