@@ -7,7 +7,7 @@
         <!-- Search Form Component -->
         <search-form :states="states" :programs="programs" 
           :urlParsedParams="urlParsedParams"
-           @search-query="testAPI"
+           @search-query="searchAPI"
         />
 
         <form id="search-form" autocomplete="false"
@@ -115,7 +115,9 @@
 </template>
 
 <script>
-// TODO - This needs major cleanup.  How can it be cleaned?, Seperate files?
+// TODO - This needs major cleanup.  How can it be cleaned?, Seperate files for legacy Javascript items?
+// TODO - Error Handling
+
 import SearchResultCard from './components/vue/SearchResultCard.vue';
 import SearchForm from './components/vue/SearchForm.vue';
 import _ from 'lodash';
@@ -191,8 +193,7 @@ export default {
   mounted(){
   },
   methods:{
-    // TODO - Rename Method.
-    testAPI(params = {}){
+    searchAPI(params = {}){
       // Emit Loading Event.
       this.$emit('loading',true);
 
