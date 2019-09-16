@@ -7,18 +7,11 @@
         <!-- Search Form Component -->
         <search-form :states="states" :programs="programs" 
           :urlParsedParams="urlParsedParams"
-           @search-query="searchAPI"
-        />
+           @search-query="searchAPI" />
 
-        <form id="search-form" autocomplete="false"
-          :action="pagePermalink" method="GET">
-          
-          <!-- search-Form component-->
+        <!-- Filter Component -->
+        <!-- TODO - Add filter Component -->
 
-          <!-- Filter Component -->
-
-          <input type="submit" value="Submit" class="sr-only" tabindex="-1">
-        </form>
       </div>
     </ul>
     <a href="#" data-target="slide-out" style="position: fixed; left:30px; bottom: 30px" class="sidenav-trigger btn-floating btn-large waves-effect waves-light"><i class="material-icons">search</i></a>
@@ -45,6 +38,7 @@
                 <span>Results</span>
               </h5>
 
+              <!-- TODO: Clean up and verify these are working. -->
               <div class="school-share-wrapper">
                 <div class="button button-primary button-share results-share" data-share-button tabindex="0" role="button" onclick="void(0)">
                   <span class="top yaxis content">Share</span>
@@ -150,19 +144,6 @@ import SearchForm from './components/vue/SearchForm.vue';
 import _ from 'lodash';
 
 const querystring = require('querystring');
-
-// TODO - Remove if not needed.
-// function diff(a, b) {
-//   if ((typeof a) !== (typeof b)) {
-//     console.log('diff types:', typeof a, typeof b);
-//     return true;
-//   } else if (typeof a === 'object') {
-//     for (var k in a) if (diff(a[k], b[k])) return true;
-//     for (var k in b) if (diff(a[k], b[k])) return true;
-//     return false;
-//   }
-//   return a != b;
-// }
 
 export default {
   components:{
@@ -273,18 +254,6 @@ export default {
 
       history.replaceState(params, 'search', qs);
 
-      // if (poppingState) {
-      //   // console.info('popping state');
-      //   // history.replaceState(params, 'search', qs);
-      // } else if (_.isEqual(this.urlParsedParams, params)) {
-      //   console.info('push state:', qs, this.urlParsedParams, '->', params);
-      //   // update the URL
-      //   history.pushState(params, 'search', qs);
-      // } else {
-      //   // console.info('replace state:', qs);
-      //   history.replaceState(params, 'search', qs);
-      // }
-
       let vm = this;
       let req = picc.API.search(query, function(error, data) {
         
@@ -304,6 +273,7 @@ export default {
     },
     showError(error){
       // TODO: Loop through multiple error messages if needed.
+
       console.error('error:', error);
 
       if (typeof error.responseText != "undefined") {
@@ -343,6 +313,5 @@ export default {
     }
   }
 }
-
 
 </script>

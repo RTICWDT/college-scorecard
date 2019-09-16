@@ -56,10 +56,7 @@
 <script>
 import _ from 'lodash';
 
-// TODO - Remove Sorting and Pagination.
-  // TODO - Remove params that are not expected.
-
-// TODO - Add props and methods to generate forward URL + disable debounce.
+// TODO - Add props and methods to generate forward URL + disable debounce & watch
 
 export default {
   props:{
