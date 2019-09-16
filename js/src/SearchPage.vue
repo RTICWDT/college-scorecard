@@ -205,7 +205,7 @@ export default {
       // }
 
       // Emit Loading Event.
-      this.$emit('loading');
+      this.$emit('loading',true);
 
       let poppingState = false;
       let alreadyLoaded = false;
@@ -270,7 +270,7 @@ export default {
         vm.results.schools = data.results;
         vm.results.meta = data.metadata;
 
-        vm.$emit('loading');
+        vm.$emit('loading',false);
       });
     }
   }
