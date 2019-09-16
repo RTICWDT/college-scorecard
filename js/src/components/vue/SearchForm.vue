@@ -87,43 +87,15 @@ export default {
       utility:{
         // Hold Default state of form data.
         formDefult:{},
-        initialize: true
       }
     }
   },
   watch:{
-    // Check for parsed URL arguments.
-    // urlParsedParams(newVal, oldVal){
-      // if url parsed params exist, merge ensuring that inputs that are meant to be arrays, stay arrays.
-      // this.input = _.mergeWith(this.input,newVal,function(objVal,newObjValue){
-      //   // if(_.isNull(objVal)){
-      //   //   return undefined;
-      //   // }else if(_.isArray(objVal) && _.isString(newObjValue)){
-      //   //   return [newObjValue];
-      //   // }
-      //   if(_.isArray(objVal) && _.isString(newObjValue)){
-      //     return [newObjValue];
-      //   }
-      // });
-
-      // TODO - Clean this, maybe integrate with input merge.  Should not add properties that are not expected.
-      // Remove properties t
-      // this.$delete(this.input, 'page');
-      // this.$delete(this.input, 'sort');
-    // },
     // Watch input changes and debounce for querying.
     cleanInput: {
       handler: _.debounce(function() {
-        // if(this.utility.initialize){
-        //   this.utility.initialize = false;
-        // }else{
-        //   console.log("Search Updated Emit");
-        //   this.$emit('search-query', this.cleanInput)
-        // }
-        
         console.log("Search Updated Emit");
         this.$emit('search-query', this.cleanInput);
-
       }, 1000),
       deep: true
     },
@@ -157,8 +129,7 @@ export default {
     });
   },
   mounted(){
-    // First run initial query
-    // this.$emit('search-query', this.cleanInput)
+
   },
   methods:{
     processChangeEvent(){

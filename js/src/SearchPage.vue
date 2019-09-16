@@ -122,17 +122,18 @@ import _ from 'lodash';
 
 const querystring = require('querystring');
 
-function diff(a, b) {
-  if ((typeof a) !== (typeof b)) {
-    console.log('diff types:', typeof a, typeof b);
-    return true;
-  } else if (typeof a === 'object') {
-    for (var k in a) if (diff(a[k], b[k])) return true;
-    for (var k in b) if (diff(a[k], b[k])) return true;
-    return false;
-  }
-  return a != b;
-}
+// TODO - Remove if not needed.
+// function diff(a, b) {
+//   if ((typeof a) !== (typeof b)) {
+//     console.log('diff types:', typeof a, typeof b);
+//     return true;
+//   } else if (typeof a === 'object') {
+//     for (var k in a) if (diff(a[k], b[k])) return true;
+//     for (var k in b) if (diff(a[k], b[k])) return true;
+//     return false;
+//   }
+//   return a != b;
+// }
 
 export default {
   components:{
@@ -163,8 +164,7 @@ export default {
       },
       urlParsedParams:{},
       utility:{
-        formDefault:{},
-        initialLoad: true
+        formDefault:{}
       },
       hasError:null,
       error:{
@@ -187,23 +187,12 @@ export default {
 
     // if Page is in the url, add it here.
     this.input.page = (this.urlParsedParams.page) ? this.urlParsedParams.page : 0;
-    
-    // this.testAPI(this.urlParsedParams);
   },
-  mounted(){   
-    // this.testAPI(this.urlParsedParams);
+  mounted(){
   },
   methods:{
-    testFormChange(event){
-      console.log(event);
-    },
-    // This can stay here, Just needs some clean up.
+    // TODO - Rename Method.
     testAPI(params = {}){
-      // if(this.utility.initialLoad)
-      // {
-
-      // }
-
       // Emit Loading Event.
       this.$emit('loading',true);
 
