@@ -1,16 +1,15 @@
 import Vue from 'vue';
-import Test from './components/vue/Test.vue';
 import SearchPage from './SearchPage.vue';
 
-let _ = require('lodash');
+import _ from 'lodash';
 
 new Vue({
   el: '#app',
   data:{
     results:{},
     site:{
-      all:null,
       data:{
+        all: null,
         states: null,
         programs: null,
       }
@@ -19,7 +18,6 @@ new Vue({
     compareSchools:null
   },
   components:{
-    'test': Test,
     'search-page': SearchPage
   },
   created(){
@@ -34,9 +32,10 @@ new Vue({
     });
 
     // Items passed via page variable.
-    this.site.all = siteAll;
-    this.site.data.states = siteDataStates;
-    this.site.data.programs = siteDataPrograms;
+    // TODO - Do we need any more data?
+    this.site.data.all = siteDataAll;
+    this.site.data.states = this.site.data.all.states;
+    this.site.data.programs = this.site.data.all.programs;
   },
   methods:{
     refreshResults(resultsObject){
