@@ -14,7 +14,8 @@ new Vue({
         states: null,
         programs: null,
       }
-    }
+    },
+    isLoading: false
   },
   components:{
     'test': Test,

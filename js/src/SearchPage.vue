@@ -24,6 +24,86 @@
     <a href="#" data-target="slide-out" style="position: fixed; left:30px; bottom: 30px" class="sidenav-trigger btn-floating btn-large waves-effect waves-light"><i class="material-icons">search</i></a>
     <a class="waves-effect waves-light btn modal-trigger" style="position: fixed; left:120px; bottom: 30px" href="#compareModal">Compare</a>
 
+    <!-- Sort and Pagination controlls -->
+    <div class="container results-main">
+      <div class="results-main-alert">
+        
+        <div class="show-loading" v-show="isLoading">
+          <h1>Loading...</h1>
+        </div>
+
+        <div class="show-error" v-show="hasError">
+          <h1>Error</h1>
+          <p class="error-message">{{error.message}}</p> <!-- TODO - Loop through multiple errors. -->
+        </div>
+        
+        <div class="show-loaded" v-show="!isLoading">
+          <div class="row">
+            <div class="col m6">
+              <h5>
+                <span>{{results.meta.total}}</span>
+                <span>Results</span>
+              </h5>
+
+              <div class="school-share-wrapper">
+                <div class="button button-primary button-share results-share" data-share-button tabindex="0" role="button" onclick="void(0)">
+                  <span class="top yaxis content">Share</span>
+                  <ul class="social-share-list bottom yaxis content">
+                    <li class="social-item">
+                      <a data-href="https://twitter.com/intent/tweet?text=Take%20a%20look%20at%20these%20schools&amp;url={url}" data-bind="search_share_link_twt" data-social="Twitter" title="Share on Twitter" target="_blank">
+                        <i class="fa fa-twitter"></i>
+                        <span class="sr-only">Share on Twitter</span>
+                      </a>
+                    </li>
+                    <li class="social-item">
+                      <a data-href="https://www.facebook.com/sharer/sharer.php?u={url}" data-bind="search_share_link_fb" data-social="Facebook" title="Share on Facebook" target="_blank">
+                        <i class="fa fa-facebook"></i>
+                        <span class="sr-only">Share on Facebook</span>
+                      </a>
+                    </li>
+                    <li class="social-item">
+                      <a data-href="mailto:?subject=Take%20a%20look%20at%20these%20schools&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A{url}" data-bind="search_share_link_mail" data-social="Email" title="Share via Email" >
+                        <i class="fa fa-envelope"></i>
+                        <span class="sr-only">Share via Email</span>
+                      </a>
+                    </li>
+                    <li class="social-item">
+                      <a data-href="https://www.linkedin.com/shareArticle?mini=true&url={url}" data-bind="search_share_link_li" data-social="LinkedIn" title="Share on LinkedIn" target="_blank">
+                        <i class="fa fa-linkedin"></i>
+                        <span class="sr-only">Share on LinkedIn</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col m6">
+              <label for="select-sort">Sort:</label>
+              <select id="select-sort" name="sort" v-model="input.sort">
+                <option selected="selected" value="salary:desc">Salary After Attending</option>
+                <option value="avg_net_price:asc">Average Annual Cost</option>
+                <option value="completion_rate:desc">Graduation Rate</option>
+                <option value="name:asc">Name (A to Z)</option>
+              </select>
+            </div>
+          </div> <!-- row -->
+
+          <div class="row">
+            <div class="col m6 offset-m6">
+                <div class="pagination  show-loaded show-incremental">
+                  <ol data-bind="pages">
+                    Page:
+                    <li><a class="select-page" data-bind="link">1</a></li>
+                  </ol>
+                </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div> <!-- Results main -->
+
     <!-- Basic Example for now -->
     <section class="container section section-card_container-results">
       <div class="results-main-schools schools-list">
@@ -44,7 +124,7 @@ const querystring = require('querystring');
 
 function diff(a, b) {
   if ((typeof a) !== (typeof b)) {
-    // console.log('diff types:', typeof a, typeof b);
+    console.log('diff types:', typeof a, typeof b);
     return true;
   } else if (typeof a === 'object') {
     for (var k in a) if (diff(a[k], b[k])) return true;
@@ -66,13 +146,16 @@ export default {
     'defaultSort':{
       type: String,
       default: "avg_net_price:asc"
-    }
+    },
+    'isLoading': Boolean
   },
   data(){
     return {
       results:{
         schools:[],
-        meta:{},
+        meta:{
+          total:0
+        },
       },
       input:{
         sort: null,
@@ -80,15 +163,19 @@ export default {
       },
       urlParsedParams:{},
       utility:{
-        formDefult:{}
+        formDefault:{},
+        initialLoad: true
+      },
+      hasError:null,
+      error:{
+        message:null
       }
     };
   },
   created(){
     // Copy default form input state.
     this.utility.formDefult = _.cloneDeep(this.input);
-  },
-  mounted(){   
+  
     // URL Parsing and filling.
     let query = querystring.parse(location.search.substr(1));
     console.log("query: " + JSON.stringify(query));
@@ -100,9 +187,11 @@ export default {
 
     // if Page is in the url, add it here.
     this.input.page = (this.urlParsedParams.page) ? this.urlParsedParams.page : 0;
-
-    // TODO - Remove this call.  We are testing on load for now.
-    this.testAPI(this.urlParsedParams);
+    
+    // this.testAPI(this.urlParsedParams);
+  },
+  mounted(){   
+    // this.testAPI(this.urlParsedParams);
   },
   methods:{
     testFormChange(event){
@@ -110,6 +199,14 @@ export default {
     },
     // This can stay here, Just needs some clean up.
     testAPI(params = {}){
+      // if(this.utility.initialLoad)
+      // {
+
+      // }
+
+      // Emit Loading Event.
+      this.$emit('loading');
+
       let poppingState = false;
       let alreadyLoaded = false;
       
@@ -153,22 +250,27 @@ export default {
         .replace(/&{2,}/g, '&')
         .replace(/%3A/g, ':');
 
-      if (poppingState) {
-        // console.info('popping state');
-        // history.replaceState(params, 'search', qs);
-      } else if (diff(this.urlParsedParams, params)) {
-        // console.info('push state:', qs, previousParams, '->', params);
-        // update the URL
-        history.pushState(params, 'search', qs);
-      } else {
-        // console.info('replace state:', qs);
-        history.replaceState(params, 'search', qs);
-      }
+      history.replaceState(params, 'search', qs);
+
+      // if (poppingState) {
+      //   // console.info('popping state');
+      //   // history.replaceState(params, 'search', qs);
+      // } else if (_.isEqual(this.urlParsedParams, params)) {
+      //   console.info('push state:', qs, this.urlParsedParams, '->', params);
+      //   // update the URL
+      //   history.pushState(params, 'search', qs);
+      // } else {
+      //   // console.info('replace state:', qs);
+      //   history.replaceState(params, 'search', qs);
+      // }
 
       let vm = this;
       let req = picc.API.search(query, function(error, data) {
         console.log('loaded schools:', data);
-        vm.results.schools = data.results;  
+        vm.results.schools = data.results;
+        vm.results.meta = data.metadata;
+
+        vm.$emit('loading');
       });
     }
   }

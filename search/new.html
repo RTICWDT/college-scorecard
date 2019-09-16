@@ -16,5 +16,9 @@ body_scripts:
 
 <div id="app">
   <!-- Pass other variables as props-->
-  <search-page page-permalink="{{ page.permalink }}" :states="site.data.states" :programs="site.data.programs"/>
+  <search-page page-permalink="{{ page.permalink }}" 
+    :states="site.data.states" :programs="site.data.programs"
+    :is-loading="isLoading" @loading="isLoading = !isLoading"
+    
+  />
 </div>
