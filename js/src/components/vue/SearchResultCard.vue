@@ -4,6 +4,15 @@
             <div class="content-box">
                 <h1>School ID: {{school.id}}</h1>
                 <h3>School Name: {{school['school.name']}}</h3>
+
+                <div class="compare-school">
+                    <button type="button" class="btn-floating btn waves-effect waves-light" :class="{amber: isSelected}"
+                        aria-label="Add to Compare" @click="$emit('toggle-compare-school',school)">
+                        <i class="fa fa-star tooltip-target"></i>
+                        <span class="sr-only">Add to Compare</span>
+                    </button>
+                </div>
+                
                 <a class="link link-more" data-bind="more_link">
                     View more details <i class="fa fa-chevron-right"></i>
                 </a>
@@ -14,7 +23,8 @@
 <script>
 export default {
     props:{
-        "school": Object
+        "school": Object,
+        "isSelected": Boolean
     }
 }
 </script>

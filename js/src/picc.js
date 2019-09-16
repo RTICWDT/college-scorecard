@@ -1701,7 +1701,49 @@ picc.school.selection = {
       }
       picc.school.selection.setCount();
     },
+    
+    // TODO - replace default toggle function with this function.
+    // Toggle compare functionality from the vue component.
+    vueToggle: function (el){
+      if (!el) {
+        el = (e.target.parentElement.hasAttribute('data-school-id')) ? e.target.parentElement : e.target;
+      }
+      var dataset = el.dataset;
+      var collection = dataset.school;
+      var isSelected = picc.school.selection.isSelected(+dataset.schoolId, collection);
+      var selectedSchools = picc.school.selection.all(collection);
+      var selectedCard = document.querySelector('.school.results-card[data-school-id="'+dataset.schoolId+'"]');
 
+      if (isSelected >= 0) {
+
+        if (selectedSchools.length === 10) {
+          picc.school.selection.hideMaxSelected();
+        }
+
+        // remove school from collection
+        selectedSchools.splice(isSelected, 1);
+        // save the new collection
+        window.localStorage.setItem(collection, JSON.stringify(selectedSchools));
+      } else {
+
+        if (selectedSchools.length < 10) {
+          // add school to collection
+          selectedSchools.push(dataset);
+
+          if (selectedSchools.length > 9) {
+            picc.school.selection.showMaxSelected();
+          }
+
+          // save the new collection
+          window.localStorage.setItem(collection, JSON.stringify(selectedSchools));
+
+        } else {
+          // only compare up to 10 schools
+          picc.school.selection.showMaxSelected();
+        }
+      }
+      picc.school.selection.setCount();
+    },
     toggleBtn: function (el,state) {
       if (el && el.hasAttribute('aria-pressed')) {
         el.setAttribute('aria-pressed', state);

@@ -22,7 +22,7 @@
       </div>
     </ul>
     <a href="#" data-target="slide-out" style="position: fixed; left:30px; bottom: 30px" class="sidenav-trigger btn-floating btn-large waves-effect waves-light"><i class="material-icons">search</i></a>
-    <a class="waves-effect waves-light btn modal-trigger" style="position: fixed; left:120px; bottom: 30px" href="#compareModal">Compare</a>
+    <a class="waves-effect waves-light btn modal-trigger" style="position: fixed; left:120px; bottom: 30px" href="#compare-modal">Compare</a>
 
     <!-- Sort and Pagination controlls -->
     <div class="container results-main">
@@ -32,9 +32,9 @@
           <h1>Loading...</h1>
         </div>
 
-        <div class="show-error" v-show="hasError">
-          <h1>Error</h1>
-          <p class="error-message">{{error.message}}</p> <!-- TODO - Loop through multiple errors. -->
+        <div class="show-error" v-show="error.message">
+          <h1>Something went wrong:</h1>
+          <p class="error-message">{{error.message}}</p>
         </div>
         
         <div class="show-loaded" v-show="!isLoading">
@@ -107,16 +107,43 @@
     <!-- Basic Example for now -->
     <section class="container section section-card_container-results">
       <div class="results-main-schools schools-list">
-        <search-result-card v-for="school in results.schools" :key="school.id" :school="school"/>
+        <search-result-card v-for="school in results.schools" :key="school.id" :school="school" @toggle-compare-school="handleToggleCompareSchool" :is-selected="isResultCardSelected(school.id,compareSchools)"/>
       </div>
     </section>
+
+  <!-- TODO - Make This A Component. -->
+  <div id="compare-modal" class="modal bottom-sheet" style='width: 40%; right: 20%; left: auto;'>
+    <div class="modal-content">
+        <div id="compare_schools-content">
+          <fieldset>
+            <legend>Compare Schools</legend>
+            
+            <ul id="edit-compare-list">
+              <li class="edit-compare-list-item" v-for="school in compareSchools" :key="school.schoolId">
+                <label class="checkbox" data-bind="checkbox_label" data-school :for="`edit-compare-${school.schoolId}`">
+                  <input :id="`edit-compare-${school.schoolId}`" type="checkbox" name="_compare" tabindex="0" checked @change="handleToggleCompareSchool(school)">
+                  <span tabindex="-1" class="checkbox-focus"></span>
+                  <span>{{school.schoolName}}</span>
+                </label>
+              </li>
+            </ul>
+
+          </fieldset>
+
+          <div class=" compare_link">
+              <a id="compare-link" class="btn button-primary compare-button_link">Compare Schools</a>
+          </div>
+
+        </div>
+    </div> <!-- End .compare-modal -->
+
+</div>
 
   </div><!--End of root -->
 </template>
 
 <script>
 // TODO - This needs major cleanup.  How can it be cleaned?, Seperate files for legacy Javascript items?
-// TODO - Error Handling
 
 import SearchResultCard from './components/vue/SearchResultCard.vue';
 import SearchForm from './components/vue/SearchForm.vue';
@@ -150,7 +177,8 @@ export default {
       type: String,
       default: "avg_net_price:asc"
     },
-    'isLoading': Boolean
+    'isLoading': Boolean,
+    'compareSchools': Array
   },
   data(){
     return {
@@ -168,7 +196,6 @@ export default {
       utility:{
         formDefault:{}
       },
-      hasError:null,
       error:{
         message:null
       }
@@ -180,7 +207,7 @@ export default {
   
     // URL Parsing and filling.
     let query = querystring.parse(location.search.substr(1));
-    console.log("query: " + JSON.stringify(query));
+    // console.log("query: " + JSON.stringify(query));
     
     this.urlParsedParams = query || {};
 
@@ -194,8 +221,12 @@ export default {
   },
   methods:{
     searchAPI(params = {}){
-      // Emit Loading Event.
+      // TODO - Clean this method up, It does way more than just SearchAPI.
+        // Better Encapsilation.
+
       this.$emit('loading',true);
+      
+      this.error.message = null;
 
       let poppingState = false;
       let alreadyLoaded = false;
@@ -256,12 +287,59 @@ export default {
 
       let vm = this;
       let req = picc.API.search(query, function(error, data) {
+        
+        if (error){
+          vm.$emit('loading',false);
+          vm.showError(error);
+          return;
+        }
+
         console.log('loaded schools:', data);
+
         vm.results.schools = data.results;
         vm.results.meta = data.metadata;
-
+        
         vm.$emit('loading',false);
       });
+    },
+    showError(error){
+      // TODO: Loop through multiple error messages if needed.
+      console.error('error:', error);
+
+      if (typeof error.responseText != "undefined") {
+        // 500 doesn't have JSON text return.
+        if(error.status === 500){
+          this.error.message = 'There was an unexpected API error.';
+        }else{
+          var errorText = JSON.parse(error.responseText);
+          error = errorText.errors[0].message;
+
+          this.error.message = String(error) || 'There was an unexpected API error.';        
+        }
+      }
+    },
+    handleToggleCompareSchool(school){
+      // Prepare Data, Make a call to the picc function.    
+      let schoolData = {
+        dataset:{
+          bind:"selected_school",
+          school:"compare-schools",
+          schoolId: (school.schoolId) ? String(school.schoolId) : String(school.id),
+          schoolName: (school.schoolName) ? school.schoolName : school['school.name'],
+        }
+      };
+
+      picc.school.selection.vueToggle(schoolData);
+
+      // Update vue instance with new current compare school selection.
+      this.$emit('compare-update-selection');
+    },
+    isResultCardSelected(schoolId,compareSchools){
+      if(_.findIndex(compareSchools,['schoolId',String(schoolId)]) >= 0)
+      {
+        return true;
+      }
+      return false;
     }
   }
 }

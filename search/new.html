@@ -19,6 +19,6 @@ body_scripts:
   <search-page page-permalink="{{ page.permalink }}" 
     :states="site.data.states" :programs="site.data.programs"
     :is-loading="isLoading" @loading="isLoading = $event"
-    
+    :compare-schools="compareSchools" @compare-update-selection="refreshCompareSchools"
   />
 </div>

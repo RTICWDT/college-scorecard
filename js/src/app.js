@@ -15,11 +15,15 @@ new Vue({
         programs: null,
       }
     },
-    isLoading: true
+    isLoading: true,
+    compareSchools:null
   },
   components:{
     'test': Test,
     'search-page': SearchPage
+  },
+  created(){
+    this.refreshCompareSchools();
   },
   mounted(){
     let vm = this;
@@ -37,6 +41,10 @@ new Vue({
   methods:{
     refreshResults(resultsObject){
       this.results = resultsObject;
+    },
+    // Refresh Compare Schools from Local Storage.
+    refreshCompareSchools(){
+      this.compareSchools = picc.school.selection.all(picc.school.selection.LSKey);
     }
   }
 });

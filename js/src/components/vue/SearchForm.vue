@@ -94,7 +94,6 @@ export default {
     // Watch input changes and debounce for querying.
     cleanInput: {
       handler: _.debounce(function() {
-        console.log("Search Updated Emit");
         this.$emit('search-query', this.cleanInput);
       }, 1000),
       deep: true
