@@ -12,7 +12,6 @@ module.exports = function search() {
   var toggleContainer = document.querySelector('.toggles.search-toggles');
 
   var form = new formdb.Form('#search-form');
-  console.log(form);
   var query = querystring.parse(location.search.substr(1));
   picc.form.autocompleteName('#search-form');
   // console.info('initial query:', query);
@@ -25,11 +24,8 @@ module.exports = function search() {
   var ready = false;
   var alreadyLoaded = false;
 
-  // TODO: Test events
-  var eventSearchUpdated = document.createEvent('CustomEvent');
- 
-  // var eventSearchUpdated = document.createEvent('Event');
-  // eventSearchUpdated.initEvent('search-updated',true,true);
+  // TODO: Remove if not using this event.
+  // var eventSearchUpdated = document.createEvent('CustomEvent');
 
   // "incremental" updates will only hide the list of schools, and
   // not any of the other elements (results total, sort, pages)
@@ -215,7 +211,7 @@ module.exports = function search() {
     updateDistanceDisabled();
 
     var params = form.getData();
-    console.info('form data:', params);
+    // console.info('form data:', params);
 
     // unset parameters that are "empty" arrays (with a single, falsy value)
     for (var k in params) {
@@ -321,12 +317,9 @@ module.exports = function search() {
 
       console.log('loaded schools:', data);
 
-      // TODO: Pass data to vue instance here.
+      // TODO - Remove if not using custom events.
       eventSearchUpdated.initCustomEvent('search-updated',true,true,{data:data});
       document.dispatchEvent(eventSearchUpdated);
-
-      // var eventSearchUpdated = new Event('search-updated');
-      // document.dispatchEvent(eventSearchUpdated);
 
       console.time && console.time('[render]');
 
@@ -424,8 +417,6 @@ module.exports = function search() {
           scrollIntoView();
       }
       tagalong(resultsList, data.results, directives);
-
-      // console.log(Event);
 
       //set compare counter
       picc.school.selection.setCount();

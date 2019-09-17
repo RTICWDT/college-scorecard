@@ -5,7 +5,7 @@
       <div class='row'>
         
         <!-- Search Form Component -->
-        <search-form :states="states" :programs="programs" 
+        <search-form :states="states" :programs="programs"
           :urlParsedParams="urlParsedParams"
            @search-query="searchAPI" />
 
@@ -142,6 +142,7 @@
 import SearchResultCard from './components/vue/SearchResultCard.vue';
 import SearchForm from './components/vue/SearchForm.vue';
 import _ from 'lodash';
+// import querystring from 'querystring';
 
 const querystring = require('querystring');
 
