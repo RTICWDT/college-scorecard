@@ -55,6 +55,7 @@
 
 <script>
 import _ from 'lodash';
+import querystring from 'querystring';
 
 // TODO - Add props and methods to generate forward URL + disable debounce & watch
 
@@ -62,7 +63,11 @@ export default {
   props:{
     states: Array,
     programs: Array,
-    urlParsedParams: Object
+    urlParsedParams: Object,
+    generateURL: {
+      type: Boolean,
+      default: false
+    }
   },
   data(){
     return{
@@ -119,6 +124,15 @@ export default {
           return value;
         }
       });
+    },
+    // Generate a URI string of params for forwarding to search page.
+    searchURL(){
+      let qs = querystring.stringify(this.cleanInput);
+      qs = '?' + qs.replace(/^&+/, '')
+        .replace(/&{2,}/g, '&')
+        .replace(/%3A/g, ':');
+      
+      return qs;
     }
   },
   created(){
