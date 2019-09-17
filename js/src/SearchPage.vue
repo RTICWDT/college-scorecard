@@ -74,7 +74,7 @@
 
             <div class="col m6">
               <label for="select-sort">Sort:</label>
-              <select id="select-sort" name="sort" v-model="input.sort" @change="searchAPI(cleanInput)">
+              <select id="select-sort" name="sort" v-model="input.sort" @change="searchAPI(parseURLParams())">
                 <option selected="selected" value="salary:desc">Salary After Attending</option>
                 <option value="avg_net_price:asc">Average Annual Cost</option>
                 <option value="completion_rate:desc">Graduation Rate</option>
@@ -185,12 +185,8 @@ export default {
   created(){
     // Copy default form input state.
     this.utility.formDefult = _.cloneDeep(this.input);
-  
-    // URL Parsing and filling.
-    let query = querystring.parse(location.search.substr(1));
-    // console.log("query: " + JSON.stringify(query));
-    
-    this.urlParsedParams = query || {};
+
+    this.urlParsedParams = this.parseURLParams();
 
     // Add sort to state if it exists
     this.input.sort = (this.urlParsedParams.sort) ? this.urlParsedParams.sort : this.defaultSort;
@@ -310,6 +306,10 @@ export default {
         return true;
       }
       return false;
+    },
+    parseURLParams(){
+      let query = querystring.parse(location.search.substr(1));
+      return query || {};
     }
   }
 }
