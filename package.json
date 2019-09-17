@@ -10,9 +10,9 @@
   },
   "scripts": {
     "serve": "jekyll serve --baseurl='' -w",
-    "build": "`js/src/browserify-args.sh | xargs -L1 browserify`",
+    "build": "webpack --devtool source-map --config webpack.picc.config.js && webpack --devtool source-map --config webpack.vue.config.js",
     "new-build": "webpack --devtool source-map --config webpack.picc.config.js && webpack --devtool source-map --config webpack.vue.config.js",
-    "watch": "`js/src/browserify-args.sh | xargs -L1 watchify -v`",
+    "watch": "webpack --devtool source-map --config webpack.picc.config.js && webpack --devtool source-map --config webpack.vue.config.js",
     "new-watch": "webpack --devtool source-map --config webpack.picc.config.js --watch & webpack --devtool source-map --config webpack.vue.config.js --watch",
     "lint": "jshint -c .jshintrc js/src",
     "test-unit": "mocha -- test/unit",
@@ -34,6 +34,7 @@
     "html-parsed-element": "^0.4.0",
     "jquery": "^3.4.0",
     "leaflet": "^0.7.7",
+    "lodash": "^4.17.15",
     "typeahead.js-browserify": "^1.0.7"
   },
   "devDependencies": {

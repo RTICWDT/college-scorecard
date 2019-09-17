@@ -1,13 +1,27 @@
 import Vue from 'vue';
-import Test from './components/vue/Test.vue';
+import SearchPage from './SearchPage.vue';
+
+import _ from 'lodash';
 
 new Vue({
   el: '#app',
   data:{
-    results:{}
+    results:{},
+    site:{
+      data:{
+        all: null,
+        states: null,
+        programs: null,
+      }
+    },
+    isLoading: true,
+    compareSchools:null
   },
   components:{
-    'test': Test
+    'search-page': SearchPage
+  },
+  created(){
+    this.refreshCompareSchools();
   },
   mounted(){
     let vm = this;
@@ -16,10 +30,20 @@ new Vue({
       console.log("Event Heard From Vue.");
       vm.refreshResults(e.detail.data);
     });
+
+    // Items passed via page variable.
+    // TODO - Do we need any more data?
+    this.site.data.all = siteDataAll;
+    this.site.data.states = this.site.data.all.states;
+    this.site.data.programs = this.site.data.all.programs;
   },
   methods:{
     refreshResults(resultsObject){
       this.results = resultsObject;
+    },
+    // Refresh Compare Schools from Local Storage.
+    refreshCompareSchools(){
+      this.compareSchools = picc.school.selection.all(picc.school.selection.LSKey);
     }
   }
 });
