@@ -74,7 +74,7 @@
 
             <div class="col m6">
               <label for="select-sort">Sort:</label>
-              <select id="select-sort" name="sort" v-model="input.sort">
+              <select id="select-sort" name="sort" v-model="input.sort" @change="searchAPI(cleanInput)">
                 <option selected="selected" value="salary:desc">Salary After Attending</option>
                 <option value="avg_net_price:asc">Average Annual Cost</option>
                 <option value="completion_rate:desc">Graduation Rate</option>

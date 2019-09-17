@@ -84,17 +84,23 @@ export default {
       utility:{
         // Hold Default state of form data.
         formDefult:{},
+        initialized: false
       }
     }
   },
   watch:{
-    // Watch input changes and debounce for querying.
     cleanInput: {
-      handler: _.debounce(function() {
-        this.$emit('search-query', this.cleanInput);
-      }, 1000),
+      handler(newValue,oldValue){
+        // On first load trigger query immediately, then debounce additional queries.
+        if(this.utility.initialized){
+          this.debounceEmitSearchQuery();
+        }else{
+          this.$emit('search-query', newValue);
+          this.utility.initialized = true;
+        }
+      },
       deep: true
-    },
+    }
   },
   computed:{
     // Remove items that are not set
@@ -123,6 +129,11 @@ export default {
         return [newObjValue];
       }
     });
+
+    this.debounceEmitSearchQuery = _.debounce(function() {
+      this.$emit('search-query', this.cleanInput);
+    }, 1000);
+
   },
   mounted(){
 
