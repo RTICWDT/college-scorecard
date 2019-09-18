@@ -3,6 +3,8 @@ import SearchPage from './SearchPage.vue';
 
 import _ from 'lodash';
 
+import style from '../../sass/style.scss';
+
 new Vue({
   el: '#app',
   data:{
