@@ -12,7 +12,7 @@
     "serve": "jekyll serve --baseurl='' -w",
     "build": "webpack --devtool source-map --config webpack.picc.config.js && webpack --devtool source-map --config webpack.vue.config.js",
     "new-build": "webpack --devtool source-map --config webpack.picc.config.js && webpack --devtool source-map --config webpack.vue.config.js",
-    "watch": "webpack --devtool source-map --config webpack.picc.config.js && webpack --devtool source-map --config webpack.vue.config.js",
+    "watch": "webpack --devtool source-map --config webpack.picc.config.js --watch & webpack --devtool source-map --config webpack.vue.config.js --watch",
     "new-watch": "webpack --devtool source-map --config webpack.picc.config.js --watch & webpack --devtool source-map --config webpack.vue.config.js --watch",
     "lint": "jshint -c .jshintrc js/src",
     "test-unit": "mocha -- test/unit",
