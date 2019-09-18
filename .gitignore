@@ -10,3 +10,4 @@ build.log
 js/picc.js*
 js/app.js*
 .DS_Store
+css/fonts/material*

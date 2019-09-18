@@ -21,12 +21,16 @@ module.exports = {
         loader: 'vue-loader'
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
             loader: 'file-loader',
-          },
-        ],
+            options: {
+              name: '[name].[ext]',
+              outputPath: '../css/fonts/'
+            }
+          }
+        ]
       },
       {
         test: /\.(png|jpg|gif)$/i,

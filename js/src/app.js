@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import SearchPage from './SearchPage.vue';
 
+import Vuetify from 'vuetify'
+Vue.use(Vuetify)
+
 import _ from 'lodash';
 
 import style from '../../sass/style.scss';
