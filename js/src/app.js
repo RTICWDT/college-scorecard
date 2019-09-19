@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import SearchPage from './SearchPage.vue';
 
-import Vuetify from 'vuetify'
-Vue.use(Vuetify)
+import vuetify from './plugins/vuetify';
 
 import _ from 'lodash';
 
 import style from '../../sass/style.scss';
 
 new Vue({
+  vuetify,
   el: '#app',
   data:{
     results:{},

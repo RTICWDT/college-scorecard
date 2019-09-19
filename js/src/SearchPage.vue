@@ -1,5 +1,43 @@
 <template>
   <div>
+    <!-- <v-container fluid class="grey lighten-5">
+      <v-row no-gutters style="height:100px;" >
+        <v-col col="12" sm="2" v-show="showSidebar">
+          <search-form :states="states" :programs="programs"
+            :urlParsedParams="urlParsedParams"
+            @search-query="searchAPI" />
+        </v-col>
+        <v-col col="12" :sm="showSidebar ? '10' : '12'" >
+          <p>Result</p>
+          <p>Result</p>
+          <p>Result</p>
+          <p>Result</p>
+          <p>Result</p>
+          <p>Result</p>
+        </v-col>
+      </v-row>
+
+      <v-row>
+        <v-col col="12" sm="12">
+          <button @click="showSidebar = !showSidebar"> Show Sidebar</button>
+        </v-col>
+      </v-row>
+    </v-container> -->
+    <v-app>
+    <v-container fluid class="grey lighten-5">
+      <div v-show="$vuetify.breakpoint.mdAndUp || showSidebar">
+        <span> Test </span>
+      </div>
+      
+      <div class="d-inline">
+        <span> Test </span>
+        <button @click="showSidebar = !showSidebar" class="btn"> Show Sidebar</button>
+      </div>
+    </v-container>
+    </v-app>
+
+
+
     <!-- Make Whole Search Field Component -->
     <ul id="slide-out" class="sidenav">
       <div class='row'>
@@ -164,6 +202,7 @@ export default {
   },
   data(){
     return {
+      showSidebar: true,
       results:{
         schools:[],
         meta:{
