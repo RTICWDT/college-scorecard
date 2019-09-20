@@ -1,147 +1,138 @@
 <template>
   <div>
-    <!-- <v-container fluid class="grey lighten-5">
-      <v-row no-gutters style="height:100px;" >
-        <v-col col="12" sm="2" v-show="showSidebar">
-          <search-form :states="states" :programs="programs"
+    <v-app>
+      <v-container fluid class="grey lighten-5" fill-height>
+        <v-layout>
+          <div id="search-param-container" v-show="$vuetify.breakpoint.mdAndUp || showSidebar">
+            
+            <!-- TODO - All form fields and layout. -->
+            <!-- Search Form Component -->
+            <search-form :states="states" :programs="programs"
             :urlParsedParams="urlParsedParams"
             @search-query="searchAPI" />
-        </v-col>
-        <v-col col="12" :sm="showSidebar ? '10' : '12'" >
-          <p>Result</p>
-          <p>Result</p>
-          <p>Result</p>
-          <p>Result</p>
-          <p>Result</p>
-          <p>Result</p>
-        </v-col>
-      </v-row>
-
-      <v-row>
-        <v-col col="12" sm="12">
-          <button @click="showSidebar = !showSidebar"> Show Sidebar</button>
-        </v-col>
-      </v-row>
-    </v-container> -->
-    <v-app>
-    <v-container fluid class="grey lighten-5">
-      <div v-show="$vuetify.breakpoint.mdAndUp || showSidebar">
-        <span> Test </span>
-      </div>
-      
-      <div class="d-inline">
-        <span> Test </span>
-        <button @click="showSidebar = !showSidebar" class="btn"> Show Sidebar</button>
-      </div>
-    </v-container>
-    </v-app>
-
-
-
-    <!-- Make Whole Search Field Component -->
-    <ul id="slide-out" class="sidenav">
-      <div class='row'>
+          
+          </div>
         
-        <!-- Search Form Component -->
-        <search-form :states="states" :programs="programs"
-          :urlParsedParams="urlParsedParams"
-           @search-query="searchAPI" />
+          <div id="search-result-container" class="d-inline">
 
-        <!-- Filter Component -->
-        <!-- TODO - Add filter Component -->
+            <div id="search-can-query-container">
+              <v-row>
+                
+                <v-col cols="12" md='4' sm='12' xs='12'>
+                  <div id="search-can-query-text">
+                    <h3>Show Me Options</h3>
+                    <p>Selection options on right right to create a list of schools that fit you</p>
+                  </div>
+                </v-col>
+                <v-col md='8' sm='12' xs='12' cols=''>
+                  <div id="search-can-query-items-wrapper">
+                    <v-row>
+                      <v-col md='4' sm='12' col='12'>
+                        <button class="btn">Test</button>
+                      </v-col>
 
-      </div>
-    </ul>
-    <a href="#" data-target="slide-out" style="position: fixed; left:30px; bottom: 30px" class="sidenav-trigger btn-floating btn-large waves-effect waves-light"><i class="material-icons">search</i></a>
-    <a class="waves-effect waves-light btn modal-trigger" style="position: fixed; left:120px; bottom: 30px" href="#compare-modal">Compare</a>
+                      <v-col md='4' sm='12' col='12'>
+                        <button class="btn">Test</button>
+                      </v-col>
+                      
+                      <v-col md='4' sm='12' col='12'>
+                        <button class="btn">Test</button>
+                      </v-col>
 
-    <!-- Sort and Pagination controlls -->
-    <div class="container results-main">
-      <div class="results-main-alert">
-        
-        <div class="show-loading" v-show="isLoading">
-          <h1>Loading...</h1>
-        </div>
+                      <v-col md='4' sm='12' col='12'>
+                        <button class="btn">Test</button>
+                      </v-col>
 
-        <div class="show-error" v-show="error.message">
-          <h1>Something went wrong:</h1>
-          <p class="error-message">{{error.message}}</p>
-        </div>
-        
-        <div class="show-loaded" v-show="!isLoading">
-          <div class="row">
-            <div class="col m6">
-              <h5>
-                <span>{{results.meta.total}}</span>
-                <span>Results</span>
-              </h5>
+                      <v-col md='4' sm='12' col='12'>
+                        <button class="btn">Test</button>
+                      </v-col>
 
-              <!-- TODO: Clean up and verify these are working. -->
-              <div class="school-share-wrapper">
-                <div class="button button-primary button-share results-share" data-share-button tabindex="0" role="button" onclick="void(0)">
-                  <span class="top yaxis content">Share</span>
-                  <ul class="social-share-list bottom yaxis content">
-                    <li class="social-item">
-                      <a data-href="https://twitter.com/intent/tweet?text=Take%20a%20look%20at%20these%20schools&amp;url={url}" data-bind="search_share_link_twt" data-social="Twitter" title="Share on Twitter" target="_blank">
-                        <i class="fa fa-twitter"></i>
-                        <span class="sr-only">Share on Twitter</span>
-                      </a>
-                    </li>
-                    <li class="social-item">
-                      <a data-href="https://www.facebook.com/sharer/sharer.php?u={url}" data-bind="search_share_link_fb" data-social="Facebook" title="Share on Facebook" target="_blank">
-                        <i class="fa fa-facebook"></i>
-                        <span class="sr-only">Share on Facebook</span>
-                      </a>
-                    </li>
-                    <li class="social-item">
-                      <a data-href="mailto:?subject=Take%20a%20look%20at%20these%20schools&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A{url}" data-bind="search_share_link_mail" data-social="Email" title="Share via Email" >
-                        <i class="fa fa-envelope"></i>
-                        <span class="sr-only">Share via Email</span>
-                      </a>
-                    </li>
-                    <li class="social-item">
-                      <a data-href="https://www.linkedin.com/shareArticle?mini=true&url={url}" data-bind="search_share_link_li" data-social="LinkedIn" title="Share on LinkedIn" target="_blank">
-                        <i class="fa fa-linkedin"></i>
-                        <span class="sr-only">Share on LinkedIn</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+                      <v-col md='4' sm='12' col='12'>
+                        <button class="btn">Test</button>
+                      </v-col>
+                    </v-row>
+                  </div>  
+                </v-col>
+
+              </v-row>
+            </div>
+
+            <div class="results-main">
+              <div id="search-result-info-container">
+                <v-row>
+                  <v-col col='12' md='4' sm='12'>
+                    <div id="search-result-info-count">
+                      <h5>{{results.meta.total}} Results</h5> <!-- TODO - Count to display result/results -->
+                    </div>
+                  </v-col>
+                
+                  <v-col col='12' md='8' sm='12'>
+                    <v-row>
+
+                      <v-col col='12' md='8' sm='12'>
+                        <div id="search-pagination-controls">
+                          <v-pagination v-model="input.page" :length='totalPages' :total-visible='7' @input="searchAPI(parseURLParams())"></v-pagination>
+                        </div>
+                      </v-col>
+
+                      <v-col col='12' md="4">
+                        <label for="select-sort">Sort:</label>
+                        <select id="select-sort" name="sort" v-model="input.sort" @change="searchAPI(parseURLParams())">
+                          <option selected="selected" value="salary:desc">Salary After Attending</option>
+                          <option value="avg_net_price:asc">Average Annual Cost</option>
+                          <option value="completion_rate:desc">Graduation Rate</option>
+                          <option value="name:asc">Name (A to Z)</option>
+                        </select>
+                      </v-col>
+
+                    </v-row>
+                  </v-col>
+                </v-row>
               </div>
-            </div>
 
-            <div class="col m6">
-              <label for="select-sort">Sort:</label>
-              <select id="select-sort" name="sort" v-model="input.sort" @change="searchAPI(parseURLParams())">
-                <option selected="selected" value="salary:desc">Salary After Attending</option>
-                <option value="avg_net_price:asc">Average Annual Cost</option>
-                <option value="completion_rate:desc">Graduation Rate</option>
-                <option value="name:asc">Name (A to Z)</option>
-              </select>
-            </div>
-          </div> <!-- row -->
-
-          <div class="row">
-            <div class="col m6 offset-m6">
-                <div class="pagination  show-loaded show-incremental">
-                  <ol data-bind="pages">
-                    Page:
-                    <li><a class="select-page" data-bind="link">1</a></li>
-                  </ol>
+              <div class="results-main-alert">
+                <div class="show-loading" v-show="isLoading">
+                  <h1>Loading...</h1>
                 </div>
+
+                <div class="show-error" v-show="error.message">
+                  <h1>Something went wrong:</h1>
+                  <p class="error-message">{{error.message}}</p>
+                </div>
+
+                <div class="search-result-cards-container" v-if="!isLoading">
+                  <search-result-card v-for="school in results.schools" 
+                    :key="school.id" :school="school" 
+                    @toggle-compare-school="handleToggleCompareSchool" 
+                    :is-selected="isResultCardSelected(school.id,compareSchools)"/>
+
+                </div>
+
+                <div class="search-result-cards-container" v-else>
+                  <!-- Fake Cards -->
+                  
+                </div>
+
+                
+
+              </div> <!--results-main -->
+
             </div>
           </div>
+        </v-layout>
+      </v-container>
 
-        </div>
-      </div>
-    </div> <!-- Results main -->
-
+    </v-app>
+    
+    <a class="waves-effect waves-light btn modal-trigger" style="position: fixed; left:120px; bottom: 30px" href="#compare-modal">Compare</a>
+  
+  
     <!-- Basic Example for now -->
-    <section class="container section section-card_container-results">
+    <!-- <section class="container section section-card_container-results">
       <div class="results-main-schools schools-list">
         <search-result-card v-for="school in results.schools" :key="school.id" :school="school" @toggle-compare-school="handleToggleCompareSchool" :is-selected="isResultCardSelected(school.id,compareSchools)"/>
       </div>
-    </section>
+    </section> -->
 
   <!-- TODO - Make This A Component. -->
   <div id="compare-modal" class="modal bottom-sheet" style='width: 40%; right: 20%; left: auto;'>
@@ -202,7 +193,7 @@ export default {
   },
   data(){
     return {
-      showSidebar: true,
+      showSidebar: false,
       results:{
         schools:[],
         meta:{
@@ -211,11 +202,12 @@ export default {
       },
       input:{
         sort: null,
-        page:0
+        page: 1
       },
       urlParsedParams:{},
       utility:{
-        formDefault:{}
+        formDefault:{},
+        initailized: false,
       },
       error:{
         message:null
@@ -232,9 +224,19 @@ export default {
     this.input.sort = (this.urlParsedParams.sort) ? this.urlParsedParams.sort : this.defaultSort;
 
     // if Page is in the url, add it here.
-    this.input.page = (this.urlParsedParams.page) ? this.urlParsedParams.page : 0;
+    this.input.page = (this.urlParsedParams.page) ? Number(this.urlParsedParams.page) + 1 : 1;
   },
   mounted(){
+  },
+  computed:{
+    totalPages(){
+      if(this.results.meta.per_page && this.results.meta.total){
+        let totalPages = this.results.meta.total / this.results.meta.per_page;
+        
+        // return the maximum amount of pages if operation produces a float.
+        return Math.ceil(totalPages);
+      }
+    }
   },
   methods:{
     searchAPI(params = {}){
@@ -249,9 +251,11 @@ export default {
       let alreadyLoaded = false;
       
       // Add page and sort items into params.
-      if(this.input.page > 0){
-        params.page = this.input.page;
+      if(this.input.page >= 1){
+        // The API function off of a 0 index
+        params.page = this.input.page - 1;
       }
+
       params.sort = this.input.sort;
 
       let query = picc.form.prepareParams(params);

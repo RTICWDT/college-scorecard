@@ -1,6 +1,11 @@
 // All New Styles
+@import '_variables.scss';
+// Vuetify
 // @import '~@mdi/font/css/materialdesignicons.css';
 @import '~vuetify/dist/vuetify.min';
+
+// Pages
+@import 'pages/_search.scss';
 
 body{
   background-color: black;
