@@ -1,8 +1,12 @@
 // Import all base styles here so they can be imported as a
 // nice, clean chunk in css/styles.scss
+$body-font-family: 'Times New Roman', sans-serif !important;
+@import '../../node_modules/vuetify/src/styles/styles.sass';
+
 
 // Variables
 @import 'variables';
+
 
 // Elements
 @import 'elements';
@@ -60,5 +64,4 @@
 // @import 'components/components';
 
 // @import '../materialize/materialize.scss';
-
 @import 'new';

@@ -24,6 +24,20 @@ Vue.filter('formatUrlText', function(value){
 })
 
 
+Vue.filter('formatYearsText', function(value){
+    switch(+value){
+      case 2: return '2';
+      case 3: return '4';
+    }
+    return 'Certificate';
+});
+
+Vue.filter('formatYearsLabel', function(value){
+    if(value>1) return 'Year';
+    else if(value==1)return "Certificate";
+    else return false;
+});
+
 Vue.filter('control', function(id){
     let lookup = {
         '-1': 'Unknown',
@@ -45,9 +59,10 @@ Vue.filter('controlClass', function(id){
 
 Vue.filter('sizeCategory', function(size){
     let text = 'size unknown';
+    console.log(size);
     if(_.inRange(size, 0, 2000)) text = 'Small';
     else if(_.inRange(size, 2000, 15000)) text = 'Medium';
-    else if(_.inRange(15000)) text = 'Large';
+    else if(_.inRange(15000, Infinity)) text = 'Large';
     return text;
 })
 
@@ -55,7 +70,7 @@ Vue.filter('sizeCategoryClass', function(size){
     let text = 'size unknown';
     if(_.inRange(size, 0, 2000)) text = 'icon-small';
     else if(_.inRange(size, 2000, 15000)) text = 'icon-medium';
-    else if(_.inRange(15000)) text = 'icon-large';
+    else if(_.inRange(15000, Infinity)) text = 'icon-large';
     return text;
 })
 

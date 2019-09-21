@@ -60,3 +60,4 @@ exclude:
   # see test/circle.yml for why this is necessary
   - tmp
   - vendor
+  - '*.vue' 

@@ -38,5 +38,13 @@
   {% for affiliation in site.data.religious_affiliations %}
     '{{ affiliation.value }}': '{{ affiliation.label }}', {% endfor %}
   };
+
+  picc.CIP2 = {
+    {% for program in site.data.cip_2_digit %}
+    '{{ program.label }}': '{{ program.value }}',
+    {% endfor %}
+  };
+
+
   </script>
 

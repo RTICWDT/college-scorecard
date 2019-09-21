@@ -1,0 +1,656 @@
+---
+title: School | College Scorecard
+layout: default
+permalink: /school/old
+scripts:
+- vendor/leaflet.min.js
+stylesheets:
+- vendor/leaflet.css
+---
+
+<!-- Search results -->
+<div class="school-bg loadable">
+
+  <div class="container school-back">
+    <a id="referrer-link" class="link-more" href="../search/">
+      <i class="fa fa-chevron-left"></i> Back to search results
+    </a>
+
+  </div>
+
+  <div class="container container-collapse main-card_container-school">
+    <div class="row">
+      <div id="school" class="col s12 l9 school-section">
+
+        <div class=" section contained-no-radius">
+
+          <div id="error" class="show-error">
+            <h2>Something went wrong:</h2>
+            <p class="error-message"></p>
+            <form action="{{ site.baseurl }}/search/" method="GET">
+              <label for="name-school">Try searching for a school by name:</label>
+              <input id="name-school" name="name" type="text" placeholder="Name of School" autocomplete="off"
+                autocorrect="off" autocapitalize="off">
+              <input type="submit" value="Search" class="button-primary">
+            </form>
+          </div>
+
+          <div class="show-loading">
+            <h1>Loading...</h1>
+          </div>
+
+          <div class="show-loaded">
+
+            <div class="school-card_container-school">
+
+              <div class="school-heading">
+
+                <div class="investigation-major-wrapper" data-bind="under_investigation" aria-hidden="true">
+                  <a>
+                    <p class="investigation-major" aria-describedby="tip-hcm2" data-bind="branch_campus">
+                      Under Ed Monitoring <i class="tooltip-target fa fa-info-circle"></i>
+                    </p>
+                  </a>
+                </div>
+
+                <div class="compare-wrapper">
+
+                  <h1 data-bind="name">School Name</h1>
+
+                  <div class="compare-school">
+                    {% include compare_school_control.html %}
+                  </div>
+
+                </div>
+
+                <h2 class="location">
+                  <span data-bind="city">City</span>,
+                  <span data-bind="state">State</span>
+                </h2>
+
+                <h2 class="population">
+                  <span data-bind="size_number">X</span> undergraduate students
+                </h2>
+
+                <h2 class="school-url">
+                  <span data-bind="">
+                    <a data-bind="school_link" target="_blank">ed.gov</a>
+                  </span>
+                </h2>
+
+                <ul class="school-key_figures key-figures">
+                  <li data-bind="years">
+                    <span aria-describedby="tip-award-level" tabindex="0" data-bind="award_level">
+                      <span data-bind="number" class="school-key_figures-year">X</span>
+                      <span class="label"></span>
+                      <span class="tooltip-target u-new_line"></span>
+                    </span>
+                  </li>
+                  <li data-bind="control">
+                    <span data-bind="value">X</span>
+                  </li>
+                  <li data-bind="locale_name">
+                    <span data-bind="value">X</span>
+                  </li>
+                  <li data-bind="size_category">
+                    <span data-bind="value">X</span>
+                  </li>
+                </ul>
+
+                <ul class="school-special_designation" data-bind="special_designations">
+                  <li class="special"></li>
+                </ul>
+
+              </div>
+
+              <div class="school-map" data-bind="map">
+              </div>
+              <div class='u-clearfix'></div>
+              <div class='row'>
+                <div class='col m6'>
+                  Graduation Rate<br />
+                  <span data-bind="grad_rate">XX%</span>
+                </div>
+                <div class='col m6'>
+                  Salary After Attending<br />
+                  <span data-bind="average_salary">$XX,XXX</span>
+                  - <span data-bind="average_salary">$XX,XXX</span>
+                  <hr />
+                  Average Annual Cost
+                  <span data-bind="average_cost">$XX,XXX</span>
+                </div>
+              </div>
+            </div><!-- /.school-card_container-school -->
+            <div class='u-clearfix'></div>
+            <ul class='collapsible popout section-card_container-school'>
+              <li>
+                <div id="cost" class='collapsible-header' aria-controls="costs-content">
+                  Costs 
+                </div>
+                <div id="costs-content" class='collapsible-body'>
+                  <div class="school-two_col-left centered" data-bind="program_reporter_hidden">
+
+                    <figure class="meter below_is_good">
+                      <h2 class="figure-heading constrain_width" aria-describedby="tip-avg-cost-year" tabindex="0"
+                        data-bind="average_cost_tip">
+                        <span data-bind="average_cost_label" class="label-nowrap">Average<br>Annual Cost</span>
+                        <span class="tooltip-target u-new_line">
+                          <i class="fa fa-info-circle"></i>
+                        </span>
+                      </h2>
+                      <picc-meter id="cost-meter" {% include net_price_meter_attributes.html %}>
+                      </picc-meter>
+                      <figcaption>
+                        <span class="average-value" data-bind="average_cost"></span>
+                      </figcaption>
+                    </figure>
+
+                    <a class="btn" target="_blank" data-bind="net_price_calculator">
+                      <i class="fa fa-calculator"></i>
+                      Calculate your personal net price
+                    </a>
+
+                  </div>
+
+                  <div class="school-two_col-right" data-bind="program_reporter_hidden">
+                    <h2>By Family Income</h2>
+                    <p>Depending on the federal, state, or institutional grant aid available, students in your income
+                      bracket may pay more or less than the overall average costs.</p>
+
+                    <table class="school-table">
+                      <caption class="sr-only">Average cost by family income</caption>
+                      <thead>
+                        <tr>
+                          <th>Family Income</th>
+                          <th>Average Cost</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>$0-$30,000</td>
+                          <td data-bind="net_price_income1">$X,XXX</td>
+                        </tr>
+                        <tr>
+                          <td>$30,001-$48,000</td>
+                          <td data-bind="net_price_income2">$XX,XXX</td>
+                        </tr>
+                        <tr>
+                          <td>$48,001-$75,000</td>
+                          <td data-bind="net_price_income3">$XX,XXX</td>
+                        </tr>
+                        <tr>
+                          <td>$75,001-$110,000</td>
+                          <td data-bind="net_price_income4">$XX,XXX</td>
+                        </tr>
+                        <tr>
+                          <td>$110,001+</td>
+                          <td data-bind="net_price_income5">$XX,XXX</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+
+                  <div class="u-clearfix"></div>
+
+                  <div class="school-single_col centered" data-bind="program_reporter_shown" aria-hidden="true">
+                    <h2 class="figure-heading constrain_width" aria-describedby="tip-cost-six-largest-programs"
+                      tabindex="0">
+                      Largest Programs
+                      <span class="tooltip-target">
+                        <i class="fa fa-info-circle"></i>
+                      </span>
+                    </h2>
+
+                    <aria-tabs>
+                      <div data-name="Total" aria-selected="true">
+                        <table class="school-table programs-table">
+                          <caption class="sr-only">Total costs of largest programs</caption>
+                          <thead>
+                            <tr>
+                              <th width="60%">Program Name</th>
+                              <th width="15%">Program Months</th>
+                              <th width="15%">Tuition, Fees, Books, Supplies</th>
+                            </tr>
+                          </thead>
+                          <tbody class="program-table-body" data-bind="program_reporter_total">
+                            <tr>
+                              <td><span class="program">Program Name</span></td>
+                              <td><span class="duration">XX</span></td>
+                              <td><span class="cost">$XX,XXX</span></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div data-name="Per Academic Year">
+                        <table class="school-table programs-table">
+                          <caption class="sr-only">Costs of largest programs per academic year</caption>
+                          <thead>
+                            <tr>
+                              <th width="60%">Program Name</th>
+                              <th width="15%">Program Months</th>
+                              <th width="15%">Tuition, Fees, Books, Supplies</th>
+                            </tr>
+                          </thead>
+                          <tbody class="program-table-body" data-bind="program_reporter_per_year">
+                            <tr>
+                              <td><span class="program">Program Name</span></td>
+                              <td><span class="duration">XX</span></td>
+                              <td><span class="cost">$XX,XXX</span></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </aria-tabs>
+                  </div>
+
+                  <div class="u-new_line u-clearfix" style="margin-top: 15px;"></div>
+                  <div class="centered" data-bind="program_reporter_shown">
+                    <h2 class="figure-heading" aria-describedby="tip-avg-program-cost" tabindex="0">
+                      Cost After Aid<br>for Largest Program
+                      <span class="tooltip-target u-new_line">
+                        <i class="fa fa-info-circle"></i>
+                      </span>
+                    </h2>
+                    <div class="largest-program-cost" data-bind="program_reporter_largest">
+                      <span><strong>Program: </strong>
+                        <span class="program">Program Name</span>
+                      </span>
+                      <strong class="fact_number">
+                        <span class="cost">$XX,XXX</span>
+                      </strong>
+                      <span class="costDescription">XXX</span>
+                    </div>
+                  </div>
+
+                  <div class="school-single_col centered" data-bind="program_reporter_shown" aria-hidden="true">
+                    <a class="button button-primary button-costs" target="_blank" data-bind="net_price_calculator">
+                      <i class="fa fa-calculator"></i>
+                      Calculate your personal net price
+                    </a>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div id="graduation" class='collapsible-header' aria-controls="graduation-content">
+                  Graduation &amp; Retention <i class="material-icons">expand_more</i>
+                </div>
+                <div id="graduation-content" class='collapsible-body'>
+                  <div class="school-two_col-left centered">
+                    <figure class="meter above_is_good">
+                      <h2 class="figure-heading constrain_width" aria-describedby="tip-graduation-rate" tabindex="0">
+                        Graduation Rate
+                        <span class="tooltip-target u-new_line">
+                          <i class="fa fa-info-circle"></i>
+                        </span>
+                      </h2>
+                      <picc-meter id="grad-meter" {% include graduation_meter_attributes.html %}>
+                      </picc-meter>
+                      <figcaption>
+                        <span class="average-value" data-bind="grad_rate">60%</span>
+                      </figcaption>
+                    </figure>
+                  </div>
+
+                  <div class="school-two_col-right centered">
+                    <figure class="meter above_is_good">
+                      <h2 class="figure-heading" aria-describedby="tip-retention-rate" tabindex="0">
+                        Students Who Return<br>After Their First Year
+                        <span class="tooltip-target u-new_line">
+                          <i class="fa fa-info-circle"></i>
+                        </span>
+                      </h2>
+                      <picc-meter id="retention-meter" {% include retention_rate_meter_attributes.html %}>
+                      </picc-meter>
+                      <figcaption>
+                        <span class="average-value" data-bind="retention_rate_value">XX%</span>
+                      </figcaption>
+                    </figure>
+                  </div>
+
+                  <div class="school-outcome-measures">
+                    <h2 class="figure-heading u-align_c" aria-describedby="tip-outcome-measures" tabindex="0">
+                      Outcomes 8 Years<br />After Attending
+                      <span class="tooltip-target u-new_line">
+                        <i class="fa fa-info-circle"></i>
+                      </span>
+                    </h2>
+                    <div class=''>
+                      <p class='outcomes_intro'>Show data for students who </p>
+                      <div class='toggle_group enroll' id='enroll_toggle'>
+                        <a class='outcome_toggle' href="#enroll_first_time">started college here</a><a
+                          class='outcome_toggle' href="#enroll_not_first_time">transferred in</a><a
+                          class='outcome_toggle active' href="#enroll_both">both</a>
+                      </div>
+                    </div>
+                    <div class="">
+                      <p class='outcomes_intro'>and started their studies </p>
+                      <div class='toggle_group study' id="study_toggle">
+                        <a class='outcome_toggle' href="#study_full_time">full-time</a><a class='outcome_toggle'
+                          href="#study_part_time">part-time</a><a class='outcome_toggle active'
+                          href="#study_both">both</a>
+                      </div>
+                      .
+                    </div>
+                    <div id="school_om_visualization" class="om_visualization" data-colors="multi">
+                      <div class="om_group"></div>
+                      <div class="om_sankey"></div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div id="aid" class='collapsible-header' aria-controls="aid-content">
+                  Financial Aid &amp; Debt <i class="material-icons">expand_more</i>
+                </div>
+                <div id="aid-content" class='collapsible-body'>
+                  <div class="school-single_col no_finaid_banner" data-bind="no_finaid_shown" aria-hidden="true">
+                    <div class="callout-banner-wrapper">
+                      <p class="callout-banner" aria-describedby="tip-ogc" data-bind="ogc_tip">
+                        This school does not distribute federal student aid.
+                        <span class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div data-bind="no_finaid_hidden">
+                    <div class="row">
+                      <div class="col m6">
+                        <div>
+                          <h2 aria-describedby="tip-student-aid" tabindex="0">
+                            Students Receiving Federal Loans
+                            <span class="tooltip-target">
+                              <i class="fa fa-info-circle"></i>
+                            </span>
+                          </h2>
+                          <strong class="fact_number" data-bind="federal_aid_percentage">XX%</strong>
+                          <p>At some schools where few students borrow federal loans, the typical undergraduate may
+                            leave
+                            school with $0 in debt.</p>
+                        </div>
+
+                      </div>
+                      <div class="col m6">
+                        <div>
+                          <h2 aria-describedby="tip-avg-debt" tabindex="0" data-bind="branch_campus">
+                            Typical Total Debt After Graduation
+                            <span class="tooltip-target">
+                              <i class="fa fa-info-circle"></i>
+                            </span>
+                          </h2>
+                          <strong class="fact_number" data-bind="average_total_debt">$XX,XXX</strong>
+                          <p>For undergraduate borrowers who complete college</p>
+                        </div>
+
+                        <div>
+                          <h2 aria-describedby="tip-avg-loan-payment" tabindex="0" data-bind="branch_campus">
+                            Typical Monthly Loan Payment
+                            <span class="tooltip-target">
+                              <i class="fa fa-info-circle"></i>
+                            </span>
+                          </h2>
+                          <span class="fact_number">
+                            <strong data-bind="average_monthly_loan_payment">$XXX</strong>/mo
+                          </span>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div class='row'>
+                      <div class='col s12'>
+                        <div class="container school-callout">
+
+                          <h2>Get Help Paying for College</h2>
+                          <p>Submit a free application for Federal Student Aid. You may be eligible to receive federal
+                            grants or loans.</p>
+                          <a href="https://fafsa.ed.gov/spa/fafsa" target="_blank" class="btn button-primary">
+                            Start My Application
+                          </a>
+
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div id="earnings" class='collapsible-header' aria-controls="earnings-content">
+                  Earnings Completion by Field of Study <i class="material-icons">expand_more</i>
+                </div>
+                <div id="earnings-content" class='collapsible-body' aria-controls="earnings-content" v>
+                  <div class="centered">
+
+                    <picc-range data-bind="sat_reading_scores" max="800">
+                    </picc-range>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div id="academics" class='collapsible-header' aria-controls="academics-content">
+                  Academic Programs <i class="material-icons">expand_more</i>
+                </div>
+                <div id="academics-content" class='collapsible-body'>
+                  <div class="row">
+                    <div class="col m6">
+
+                      <h2 aria-describedby="tip-pop-prog" tabindex="0">
+                        Most Popular Programs
+                        <span class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </span>
+                      </h2>
+                      <ol class="decimal school-programs" data-bind="popular_programs">
+                        <li><span class="program"></span> (<span class="percent"></span>)</li>
+                      </ol>
+                    </div>
+
+                    <div class="col m6">
+
+                      <h2 aria-describedby="tip-avail-study" tabindex="0">
+                        Available Areas of Study
+                        <span class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </span>
+                      </h2>
+                      <ul class="school-long_list" data-bind="available_programs">
+                        <li><span class="program">Management</span></li>
+                      </ul>
+
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div id="demographics" class='collapsible-header' aria-controls="demographics-content" v>
+                  Student Body <i class="material-icons">expand_more</i>
+                </div>
+                <div id="demographics-content" class='collapsible-body'>
+                  <div class="school-student-intro">
+
+                    <ul class="school-key_figures key-figures">
+                      <li data-bind="size_category">
+                        <span data-bind="value">X</span>
+                      </li>
+                      <li class="school-key_figures-stat">
+                        <div class="group_inline">
+                          <strong class="group_inline-left fact_number" data-bind="size_number">X,XXX</strong>
+                          <div class="group_inline-right">
+                            <p>undergraduate <br>students</p>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+
+                  </div>
+
+                  <div class="row school-student-body">
+
+                    <div class="col m6">
+
+                      <div class="school-student-stats-col">
+
+                        <div class="school-student-stats-col-align">
+
+                          <div>
+                            <span class="fact_number">
+                              <strong data-bind="full_time_percent">XX</strong>
+                              <span class="small">%</span>
+                            </span> Full-time
+                          </div>
+                          <div class="fact_number divide">/</div>
+                          <div>
+                            <span class="fact_number">
+                              <strong data-bind="part_time_percent">XX</strong>
+                              <span class="small">%</span>
+                            </span> Part-time
+                          </div>
+
+                        </div>
+
+                        <div class="school-student-socio_econ" data-bind="no_finaid_hidden">
+                          <h2>
+                            Socio-Economic Diversity
+                          </h2>
+
+                          <div class="school-student-socio_econ-stat">
+                            <strong class="fact_number" data-bind="pell_grant_percentage">X</strong>
+                            <strong>of students</strong>
+                          </div>
+
+                          <p>received an income-based federal Pell grant intended for low-income students.</p>
+                        </div>
+
+                      </div>
+
+                    </div>
+
+
+                    <div class="col m6">
+                      <h2 aria-describedby="tip-race-eth" tabindex="0">
+                        Race/Ethnicity
+                        <span class="tooltip-target">
+                          <i class="fa fa-info-circle"></i>
+                        </span>
+                      </h2>
+                      <ol class="bars" data-bind="race_ethnicity_values">
+                        {% include bar_chart_template_item.html %}
+                      </ol>
+                    </div>
+
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div id="selectivity" class='collapsible-header' aria-controls="selectivity-content">
+                  Test Scores &amp; Admittance <i class="material-icons">expand_more</i>
+                </div>
+                <div id="selectivity-content" class='collapsible-body'>
+                  <div>
+                    <!--TODO-->
+                    <h2 aria-describedby="tip-test-scores" tabindex="0">
+                      Test Scores
+                      <span class="tooltip-target">
+                        <i class="fa fa-info-circle"></i>
+                      </span>
+                    </h2>
+                    <p>Students who were admitted and enrolled typically had standardized test scores in these ranges.
+                    </p>
+
+                    <h3 class="h2">SAT</h3>
+
+                    <figure data-bind="sat_reading_scores_visible">
+                      <h4>Critical Reading</h4>
+                      <picc-range data-bind="sat_reading_scores" max="800">
+                      </picc-range>
+                    </figure>
+                    <p class="no-data" data-bind="sat_reading_scores_invisible">
+                      No Critical Reading data available.
+                    </p>
+
+                    <figure data-bind="sat_math_scores_visible">
+                      <h4>Math</h4>
+                      <picc-range data-bind="sat_math_scores" max="800">
+                      </picc-range>
+                    </figure>
+                    <p class="no-data" data-bind="sat_math_scores_invisible">
+                      No Math data available.
+                    </p>
+
+                    <h3 class="h2">ACT</h3>
+
+                    <figure data-bind="act_scores_visible">
+                      <picc-range data-bind="act_scores" min="0" max="36">
+                      </picc-range>
+                    </figure>
+                    <p class="no-data" data-bind="act_scores_invisible">
+                      No data available.
+                    </p>
+
+                    <h3>Admittance Rate</h3>
+                    <p>Coming soon!</p>
+
+                  </div>
+                </div>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </div> <!-- END school card-->
+
+      <aside class="col l3">
+
+        <div class="school-share-wrapper">
+          <div class="button button-share" data-share-button tabindex="0" role="button" onclick="void(0)">
+            <span class="top xaxis content">Share this School</span>
+            <ul class="social-share-list bottom xaxis content">
+              <li class="social-item">
+                <a data-href="https://twitter.com/intent/tweet?text=Take%20a%20look%20at%20this%20school&amp;url={url}"
+                  data-bind="school_share_link_twt" data-social="Twitter" title="Share on Twitter" target="_blank">
+                  <i class="fa fa-twitter"></i>
+                  <span class="sr-only">Share on Twitter</span>
+                </a>
+              </li>
+              <li class="social-item">
+                <a data-href="https://www.facebook.com/sharer/sharer.php?u={url}" data-bind="school_share_link_fb"
+                  title="Share on Facebook" data-social="Facebook" target="_blank">
+                  <i class="fa fa-facebook"></i>
+                  <span class="sr-only">Share on Facebook</span>
+                </a>
+              </li>
+              <li class="social-item">
+                <a data-href="mailto:?subject=Take%20a%20look%20at%20this%20school&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A{url}"
+                  data-bind="school_share_link_mail" data-social="Email" title="Share via Email">
+                  <i class="fa fa-envelope"></i>
+                  <span class="sr-only">Share via Email</span>
+                </a>
+              </li>
+              <li class="social-item">
+                <a data-href="https://www.linkedin.com/shareArticle?mini=true&url={url}"
+                  data-bind="school_share_link_li" data-social="LinkedIn" title="Share on LinkedIn" target="_blank">
+                  <i class="fa fa-linkedin"></i>
+                  <span class="sr-only">Share on LinkedIn</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+        {% include paying_for_college.html %}
+      </aside>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  picc.pages.school();
+</script>

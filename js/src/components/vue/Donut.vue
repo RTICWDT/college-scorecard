@@ -1,56 +1,86 @@
-<template>
-    <div class='pieContainer' style='position:relative;'>
-        <div id='piechart' :style='style'></div>
-        
-        <div class='pieLabel' style='position: absolute; left: 2px; top: 2px; width: 150px; line-height: 150px; text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: maroon;'>            
-        {{ value }}%
-        </div>
-    </div>
-</template>
-
-
 <script>
+import { Doughnut } from "vue-chartjs";
 export default {
-    props: ['value','height','width','title'],
-    data(){
-        return{
-           
+  extends: Doughnut,
+  props: ["value","color"],
+  data() {
+    return {
+      options: {
+        responsive:false, 
+        maintainAspectRatio: false,
+        elements: {
+            center: {
+                text: Math.round(+this.value)+"%",
+                color: this.color, 
+                fontStyle: 'Montserrat', 
+                sidePadding: 20 
+            }
+        },
+        plugins:{
+          datalabels:{
+              display: false
+          }
         }
-    },
-    computed:{
-        style(){
-            return "height: "+this.height+"; width: "+this.width+";";
+      }
+    };
+  },
+  mounted() {
+    this.addPlugin({
+      id: "center",
+      beforeDraw: function(chart) {
+        if (chart.config.options.elements.center) {
+          //Get ctx from string
+          var ctx = chart.chart.ctx;
+
+          //Get options from the center object in options
+          var centerConfig = chart.config.options.elements.center;
+          var fontStyle = centerConfig.fontStyle || "Arial";
+          var txt = centerConfig.text;
+          var color = centerConfig.color || "#000";
+          var sidePadding = centerConfig.sidePadding || 20;
+          var sidePaddingCalculated =
+            (sidePadding / 100) * (chart.innerRadius * 2);
+          //Start with a base font of 30px
+          ctx.font = "30px " + fontStyle;
+
+          //Get the width of the string and also the width of the element minus 10 to give it 5px side padding
+          var stringWidth = ctx.measureText(txt).width;
+          var elementWidth = chart.innerRadius * 2 - sidePaddingCalculated;
+
+          // Find out how much the font can grow in width.
+          var widthRatio = elementWidth / stringWidth;
+          var newFontSize = Math.floor(30 * widthRatio);
+          var elementHeight = chart.innerRadius * 2;
+
+          // Pick a new font size so it will not be larger than the height of label.
+          var fontSizeToUse = Math.min(newFontSize, elementHeight);
+
+          //Set font settings to draw it correctly.
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          var centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
+          var centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
+          ctx.font = fontSizeToUse + "px " + fontStyle;
+          ctx.fillStyle = color;
+
+          //Draw text in center
+          ctx.fillText(txt, centerX, centerY);
         }
-    },
-    mounted(){
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(this.drawChart);
-    },
-    methods: {
-        drawChart(){
-        var data = google.visualization.arrayToDataTable([
-          ['label', 'value'],
-          ['', Number(this.value)],
-          ['', 100-Number(this.value)]
-        ]);
-
-        var options = {
-          title: this.title,
-          pieHole: 0.4,
-          legend: 'none',
-          pieSliceText: 'none',
-          slices: {
-            0: { color: '#2c8511' },
-            1: { color: 'gray' }
-          },
-          enableInteractivity: false,
-          fontName:'"Montserrat", "Helvetica Neue", "Helvetica", sans-serif'
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
-    }
-    }
-}
+      }
+    });
+    // Overwriting base render method with actual data.
+    this.renderChart(
+      {
+        labels: ["value", ""],
+        datasets: [
+          {
+            backgroundColor: [this.color],
+            data: [this.value, 100 - this.value]
+          }
+        ]
+      },
+      this.options
+    );
+  }
+};
 </script>

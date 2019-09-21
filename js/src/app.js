@@ -5,11 +5,11 @@ import vueNumeralFilterInstaller from 'vue-numeral-filter';
 
 
 import Test from './components/vue/Test.vue';
-import Donut from './components/vue/Donut.vue';
-import NameAutocomplete from './components/vue/NameAutocomplete.vue'
-import SchoolPage from './SchoolPage.vue'
-import Bar from './components/vue/Bar.vue'
+import SchoolPage from './SchoolPage.vue';
+import SchoolProgramsPage from './SchoolProgramsPage.vue';
+
 import './vue/filters.js'
+import './plugins/chartjs.js';
 
 Vue.prototype._ = _
 Vue.use(vueNumeralFilterInstaller, { locale: 'en' });
@@ -22,10 +22,8 @@ new Vue({
   },
   components:{
     'test': Test,
-    'donut': Donut,
-    'name-autocomplete': NameAutocomplete,
     'school-page': SchoolPage,
-    'bar-chart': Bar
+    'school-programs-page': SchoolProgramsPage,
   },
   mounted(){
     let vm = this;

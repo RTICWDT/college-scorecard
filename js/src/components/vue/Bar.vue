@@ -1,16 +1,41 @@
 <script>
 import { Bar } from 'vue-chartjs' 
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+
 export default {
   extends: Bar,
-  props: ['labels', 'data'],
+  props: {
+    labels:{
+      type: Array,
+      default: "Label"
+    },
+    data:{
+      type: Array,
+      default: 50
+    },
+    min:{
+      type: Number,
+      default: 0
+    },
+    max: {
+      type: Number,
+      default: 100
+    },
+    color: {
+      type: String,
+      default: '#333333'
+    },
+  },
   data(){
       return {
           options: {
+             plugins: [ChartDataLabels],
+             legend: false,
              scales: {
                 yAxes: [{
                     ticks: {
-                        min: 0,
-                        suggestedMax: 100
+                        min: this.min,
+                        suggestedMax: this.max
                     }
                 }]
             }
@@ -23,9 +48,8 @@ export default {
       labels: this.labels,
       datasets: [
         {
-          label: 'GitHub Commits',
-          backgroundColor: '#f87979',
-          data: this.data
+          label: '',
+          data: [this.data]
         }
       ]
     }, this.options)

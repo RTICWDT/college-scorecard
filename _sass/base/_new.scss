@@ -44,3 +44,168 @@ label{
 label.checkbox{
     vertical-align: middle;
 }
+
+
+
+.range-chart {
+    $label-height: 1em;
+    $label-offset: 1em;
+    $label-margin: $label-offset + $label-height;
+    $label-width: 5em;
+  
+    background-color: $light-gray;
+    display: block;
+    height: 8px;
+    margin-bottom: $label-margin + 1em;
+    margin-top: $label-margin;
+    max-width: 500px;
+    position: relative;
+  
+    .picc-range-bar {
+      background-color: $emerald-green;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: left .5s, right .5s;
+    }
+  
+    .picc-range-label {
+      height: 16px;
+      position: absolute;
+      top: 0;
+      transition: left .5s;
+  
+      span {
+        font-weight: 200;
+        position: absolute;
+        top: $label-height;
+        width: $label-width;
+      }
+  
+      &.picc-range-label-min,
+      &.picc-range-label-max,
+      &.picc-range-label-middle {
+        color: $dark-gray;
+      }
+  
+      &.picc-range-label-max,
+      &.picc-range-label-lower {
+        span {
+          right: 0;
+          text-align: right;
+        }
+      }
+  
+      &.picc-range-label-middle,
+      &.picc-range-label-lower,
+      &.picc-range-label-upper {
+        border-left: 1px solid black;
+      }
+  
+      &.picc-range-label-upper {
+        border-left: none;
+        border-right: 1px solid black;
+      }
+  
+      &.picc-range-label-min,
+      &.picc-range-label-max,
+      &.picc-range-label-middle {
+        bottom: -.5em;
+        top: auto;
+  
+        span {
+          bottom: 100%;
+          top: auto;
+        }
+      }
+  
+      &.picc-range-label-middle {
+        span {
+          margin-left: -($label-width / 2);
+          text-align: center;
+        }
+      }
+    }
+  
+  }
+  
+
+.school-left{
+  .school-heading{
+    background-color: #FFFFFF;
+    border-radius: 4px;
+  
+  }
+
+  .school-map {
+    border: 1px solid $black;
+    border-radius: 4px;
+    height: 280px;
+  }
+  
+  .school-key_figures {
+    $height: 50px;
+    padding-left: 0;
+
+    $list:  rural, town, suburban, city,
+            small, medium, large,
+            public, private, profit;
+
+    @each $icon in $list {
+      .icon-#{$icon} {
+        background: url(../img/school-icons/#{$icon}.png) no-repeat;
+        background: url(../img/school-icons/#{$icon}.svg) no-repeat,
+          linear-gradient(transparent, transparent);
+        background-position: top center;
+        background-size: 50px $height;
+      }
+    }
+
+    li {
+      @include hyphens(auto);
+      display: inline-block;
+      font-weight: 600;
+      line-height: 1.1;
+      min-height: $height;
+      padding-top: ($height + 5px);
+      text-align: center;
+      vertical-align: top;
+      width: 70px;
+      margin-right: 5px;
+      @include respond-to(small-up) {
+        margin-right: 10px;
+      }
+
+      .school-key_figures-year {
+        @include font-size(2.86);
+        display: block;
+        font-weight: $weight-bold;
+        margin-top: -$height;
+
+        &:empty {
+          margin-top: -20px;
+        }
+      }
+
+      &.certificate {
+        margin-right: 20px;
+        @include hyphens(none);
+        @include respond-to(small-up) {
+          margin-right: 25px;
+        }
+
+        .school-key_figures-year {
+          margin-top: -50px;
+
+          &:before {
+            font-family: "fontawesome";
+            content: '\f0a3';
+            margin-left: 15px;
+          }
+        }
+      }
+    }
+  }
+}
