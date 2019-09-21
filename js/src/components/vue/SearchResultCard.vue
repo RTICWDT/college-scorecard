@@ -1,6 +1,11 @@
 <style lang="scss">
   .search-result-card{
-    height: 510px;
+    height: auto;
+
+    @media (min-width: 960px) {
+      height: 510px;
+    }
+
     margin-bottom: 20px;
   }
 

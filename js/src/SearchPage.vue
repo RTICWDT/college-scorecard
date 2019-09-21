@@ -5,6 +5,15 @@
   .canned-search-wrapper{
     margin-bottom: 8px;
   }
+  #search-pagination-controls{
+    // padding-left: 30px;
+    // text-align: left;
+
+    // @media (min-width: 960px) {
+    //   text-align: left;
+    // }
+
+  }
 </style>
 
 <template>
@@ -88,16 +97,47 @@
                   </v-col>
                 
                   <v-col col='12' md='8' sm='12'>
+                    <!-- <div id="search-pagination-controls float-right">
+                      <span>Page:</span>
+                      <v-pagination v-model="input.page" :length='totalPages' :total-visible='7' @input="searchAPI(parseURLParams())"></v-pagination>
+                    </div>
+
+                    <div id="search-sort-controls">
+                      <v-speed-dial v-model="utility.sortFAB" direction="bottom" right transition="slide-y-transition">
+                        <template v-slot:activator>
+                          <v-btn v-model="utility.sortFAB" color="blue darken-2" dark fab>
+                            <v-icon v-if="utility.sortFAB">mdi-close</v-icon>
+                            <v-icon v-else>mdi-account-circle</v-icon>
+                          </v-btn>
+                        </template>
+                        
+                        <v-btn fab dark small color="green" >
+                          <v-icon>mdi-pencil</v-icon>
+                        </v-btn>
+
+                        <v-btn fab dark small color="indigo">
+                          <v-icon>mdi-plus</v-icon>
+                        </v-btn>
+
+                        <v-btn fab dark small color="red">
+                          <v-icon>mdi-delete</v-icon>
+                        </v-btn>
+                      </v-speed-dial> 
+
+                    </div> -->
+                      
+                   
+
                     <v-row>
 
-                      <v-col col='12' md='8' sm='12'>
-                        <div id="search-pagination-controls">
+                      <v-col cols='12' md='10' sm='12'>
+                        <div id="search-pagination-controls" class="text-md-right text-sm-left">
                           <span>Page:</span>
                           <v-pagination v-model="input.page" :length='totalPages' :total-visible='7' @input="searchAPI(parseURLParams())"></v-pagination>
                         </div>
                       </v-col>
 
-                      <v-col col='12' md="4">
+                      <v-col cols='12' md="2" class="text-md-center text-sm-center">
                         <v-speed-dial v-model="utility.sortFAB" direction="bottom" right transition="slide-y-transition">
                             <template v-slot:activator>
                               <v-btn v-model="utility.sortFAB" color="blue darken-2" dark fab>
