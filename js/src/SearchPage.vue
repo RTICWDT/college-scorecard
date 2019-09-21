@@ -1,3 +1,11 @@
+<style lang="sass">
+  .canned-search-wrapper{
+    margin-bottom: 8px;
+
+
+  }
+</style>
+
 <template>
   <div>
     <v-app>
@@ -27,28 +35,40 @@
                 <v-col md='8' sm='12' xs='12' cols=''>
                   <div id="search-can-query-items-wrapper">
                     <v-row>
-                      <v-col md='4' sm='12' col='12'>
-                        <button class="btn">Test</button>
+                      <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
+                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['MA']}]">
+                          Schools In MA
+                        </canned-search-button>
                       </v-col>
 
-                      <v-col md='4' sm='12' col='12'>
-                        <button class="btn">Test</button>
+                      <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
+                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['MA']}]">
+                          Schools In MA
+                        </canned-search-button>
                       </v-col>
                       
-                      <v-col md='4' sm='12' col='12'>
-                        <button class="btn">Test</button>
+                      <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
+                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['MA']}]">
+                          Schools In MA
+                        </canned-search-button>
                       </v-col>
 
-                      <v-col md='4' sm='12' col='12'>
-                        <button class="btn">Test</button>
+                      <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
+                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['MA']}]">
+                          Schools In MA
+                        </canned-search-button>
                       </v-col>
 
-                      <v-col md='4' sm='12' col='12'>
-                        <button class="btn">Test</button>
+                      <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
+                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['MA']}]">
+                          Schools In MA
+                        </canned-search-button>
                       </v-col>
 
-                      <v-col md='4' sm='12' col='12'>
-                        <button class="btn">Test</button>
+                      <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
+                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['MA']}]">
+                          Schools In MA
+                        </canned-search-button>
                       </v-col>
                     </v-row>
                   </div>  
@@ -57,7 +77,7 @@
               </v-row>
             </div>
 
-            <div class="results-main">
+            <div class="search-result-container">
               <div id="search-result-info-container">
                 <v-row>
                   <v-col col='12' md='4' sm='12'>
@@ -101,11 +121,15 @@
                 </div>
 
                 <div class="search-result-cards-container" v-if="!isLoading">
-                  <search-result-card v-for="school in results.schools" 
-                    :key="school.id" :school="school" 
-                    @toggle-compare-school="handleToggleCompareSchool" 
-                    :is-selected="isResultCardSelected(school.id,compareSchools)"/>
+                  <v-row>
+                    <v-col v-for="school in results.schools" :key="school.id" cols='12' lg='3' md='4' sm='12'>
+                      
+                      <search-result-card :school="school" 
+                        @toggle-compare-school="handleToggleCompareSchool" 
+                        :is-selected="isResultCardSelected(school.id,compareSchools)"/>
 
+                    </v-col>
+                  </v-row>
                 </div>
 
                 <div class="search-result-cards-container" v-else>
@@ -170,6 +194,8 @@
 
 import SearchResultCard from './components/vue/SearchResultCard.vue';
 import SearchForm from './components/vue/SearchForm.vue';
+import CannedSearchButton from './components/vue/CannedSearchButton.vue';
+
 import _ from 'lodash';
 // import querystring from 'querystring';
 
@@ -178,7 +204,8 @@ const querystring = require('querystring');
 export default {
   components:{
     'search-result-card': SearchResultCard,
-    'search-form': SearchForm
+    'search-form': SearchForm,
+    'canned-search-button': CannedSearchButton
   },
   props:{
     'page-permalink': String,
@@ -225,6 +252,11 @@ export default {
 
     // if Page is in the url, add it here.
     this.input.page = (this.urlParsedParams.page) ? Number(this.urlParsedParams.page) + 1 : 1;
+
+    //
+    this.debounceSearchUpdate = _.debounce(function(params) {
+      this.searchAPI(params);
+    }, 1000);
   },
   mounted(){
   },
@@ -287,11 +319,7 @@ export default {
         picc.fields.UNDER_INVESTIGATION
       ].join(',');
 
-      let qs = querystring.stringify(params);
-      qs = '?' + qs.replace(/^&+/, '')
-        .replace(/&{2,}/g, '&')
-        .replace(/%3A/g, ':');
-
+      let qs = this.generateQueryString(params);
       history.replaceState(params, 'search', qs);
 
       let vm = this;
@@ -344,6 +372,14 @@ export default {
       // Update vue instance with new current compare school selection.
       this.$emit('compare-update-selection');
     },
+    handleCannedSearchClick(cannedSearchData){
+      if(cannedSearchData.add[0]){
+        this.debounceSearchUpdate(cannedSearchData.add[0]);
+      }
+
+      // TODO - Better handling of adding/removing items.
+        // Maybe parse current url, add what is not there, remove whatever is passed.
+    },
     isResultCardSelected(schoolId,compareSchools){
       if(_.findIndex(compareSchools,['schoolId',String(schoolId)]) >= 0)
       {
@@ -354,6 +390,12 @@ export default {
     parseURLParams(){
       let query = querystring.parse(location.search.substr(1));
       return query || {};
+    },
+    generateQueryString(params){
+      let qs = querystring.stringify(params);
+      return '?' + qs.replace(/^&+/, '')
+        .replace(/&{2,}/g, '&')
+        .replace(/%3A/g, ':');
     }
   }
 }
