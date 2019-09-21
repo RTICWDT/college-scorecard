@@ -1,8 +1,9 @@
-<style lang="sass">
+<style lang="scss">
+  .v-speed-dial__list{
+    z-index: 99;
+  }
   .canned-search-wrapper{
     margin-bottom: 8px;
-
-
   }
 </style>
 
@@ -91,18 +92,41 @@
 
                       <v-col col='12' md='8' sm='12'>
                         <div id="search-pagination-controls">
+                          <span>Page:</span>
                           <v-pagination v-model="input.page" :length='totalPages' :total-visible='7' @input="searchAPI(parseURLParams())"></v-pagination>
                         </div>
                       </v-col>
 
                       <v-col col='12' md="4">
-                        <label for="select-sort">Sort:</label>
+                        <v-speed-dial v-model="utility.sortFAB" direction="bottom" right transition="slide-y-transition">
+                            <template v-slot:activator>
+                              <v-btn v-model="utility.sortFAB" color="blue darken-2" dark fab>
+                                <v-icon v-if="utility.sortFAB">mdi-close</v-icon>
+                                <v-icon v-else>mdi-account-circle</v-icon>
+                              </v-btn>
+                            </template>
+                            
+                            <v-btn fab dark small color="green" >
+                              <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+
+                            <v-btn fab dark small color="indigo">
+                              <v-icon>mdi-plus</v-icon>
+                            </v-btn>
+
+                            <v-btn fab dark small color="red">
+                              <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                          </v-speed-dial>
+
+                        <!-- <label for="select-sort">Sort:</label>
                         <select id="select-sort" name="sort" v-model="input.sort" @change="searchAPI(parseURLParams())">
                           <option selected="selected" value="salary:desc">Salary After Attending</option>
                           <option value="avg_net_price:asc">Average Annual Cost</option>
                           <option value="completion_rate:desc">Graduation Rate</option>
                           <option value="name:asc">Name (A to Z)</option>
-                        </select>
+                        </select> -->
+
                       </v-col>
 
                     </v-row>
@@ -235,6 +259,7 @@ export default {
       utility:{
         formDefault:{},
         initailized: false,
+        sortFAB: null
       },
       error:{
         message:null
@@ -243,7 +268,7 @@ export default {
   },
   created(){
     // Copy default form input state.
-    this.utility.formDefult = _.cloneDeep(this.input);
+    this.utility.formDefault = _.cloneDeep(this.input);
 
     this.urlParsedParams = this.parseURLParams();
 
@@ -253,7 +278,7 @@ export default {
     // if Page is in the url, add it here.
     this.input.page = (this.urlParsedParams.page) ? Number(this.urlParsedParams.page) + 1 : 1;
 
-    //
+    // Create Debounce function for this page.
     this.debounceSearchUpdate = _.debounce(function(params) {
       this.searchAPI(params);
     }, 1000);
