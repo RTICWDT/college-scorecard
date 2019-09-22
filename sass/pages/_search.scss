@@ -1,0 +1,55 @@
+// Layout
+#search-param-container{
+  display: inline-block;
+  width: $search-param-container-width;
+}
+
+#search-result-container{
+  padding: 2rem;
+  display:inline-block;
+  background-color: $search-result-container-bg-color;
+  width: 100%;
+}
+
+#search-can-query-container{
+  height: auto;
+
+  @media (min-width: 960px) {
+    height: 200px;
+  }
+
+  padding: 2rem;
+  background-color: white;
+}
+
+#search-can-query-text{
+  height:100%;
+}
+
+#search-can-query-items-wrapper{
+  height:100%;
+}
+
+#search-result-info-container{
+  padding: 1rem 2rem;
+}
+
+.v-pagination{
+  width: auto;
+  li:last-child{
+    display:none;
+  }
+  li:first-child{
+    display:none;
+  }
+
+  button{
+    background-color: Transparent !important;
+    background-repeat:no-repeat !important;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    box-shadow: none;
+  }
+}

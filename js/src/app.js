@@ -3,10 +3,9 @@ import vuetify from './plugins/vuetify'
 import _ from 'lodash'
 import vueNumeralFilterInstaller from 'vue-numeral-filter';
 
-
-import Test from './components/vue/Test.vue';
 import SchoolPage from './SchoolPage.vue';
 import SchoolProgramsPage from './SchoolProgramsPage.vue';
+import SearchPage from './SearchPage.vue';
 
 import './vue/filters.js'
 import './plugins/chartjs.js';
@@ -14,16 +13,30 @@ import './plugins/chartjs.js';
 Vue.prototype._ = _
 Vue.use(vueNumeralFilterInstaller, { locale: 'en' });
 
+import style from '../../sass/style.scss';
+
 new Vue({
   vuetify,
   el: '#app',
   data:{
-    results:{}
+    results:{},
+    site:{
+      data:{
+        all: null,
+        states: null,
+        programs: null,
+      }
+    },
+    isLoading: true,
+    compareSchools:null
   },
   components:{
-    'test': Test,
     'school-page': SchoolPage,
     'school-programs-page': SchoolProgramsPage,
+    'search-page': SearchPage
+  },
+  created(){
+    this.refreshCompareSchools();
   },
   mounted(){
     let vm = this;
@@ -32,10 +45,20 @@ new Vue({
       console.log("Event Heard From Vue.");
       vm.refreshResults(e.detail.data);
     });
+
+    // Items passed via page variable.
+    // TODO - Do we need any more data?
+    this.site.data.all = siteDataAll;
+    this.site.data.states = this.site.data.all.states;
+    this.site.data.programs = this.site.data.all.programs;
   },
   methods:{
     refreshResults(resultsObject){
       this.results = resultsObject;
+    },
+    // Refresh Compare Schools from Local Storage.
+    refreshCompareSchools(){
+      this.compareSchools = picc.school.selection.all(picc.school.selection.LSKey);
     }
   }
 });

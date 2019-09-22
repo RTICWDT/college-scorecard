@@ -22,29 +22,46 @@ module.exports = {
         loader: 'vue-loader'
       },
       {
-        test: /\.s(c|a)ss$/,
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
-          'vue-style-loader',
-          'css-loader',
           {
-            loader: 'sass-loader',
-            // Requires sass-loader@^7.0.0
+            loader: 'file-loader',
             options: {
-              implementation: require('sass'),
-              fiber: require('fibers'),
-              indentedSyntax: true // optional
+              name: '[name].[ext]',
+              outputPath: '../css/fonts/'
             }
           }
         ]
       },
       {
-        test: /\.css$/,
+        test: /\.(png|jpg|gif)$/i,
         use: [
-          'vue-style-loader',
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
           'css-loader',
-        ]
-      }
-      
+          'sass-loader'
+          // {
+          //   loader: 'sass-loader',
+          //   // Requires sass-loader@^8.0.0
+          //   options: {
+          //     implementation: require('sass'),
+          //     sassOptions: {
+          //       fiber: require('fibers'),
+          //     },
+          //   },
+          // },
+        ],
+      },
     ]
   },
   watchOptions: {
