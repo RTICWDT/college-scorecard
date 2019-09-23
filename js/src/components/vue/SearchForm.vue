@@ -1,7 +1,14 @@
 <template>
   <form @submit.prevent="OnSubmit">
-      <div class="controls-container">
-        <ul class="collapsible"> <!-- TODO: Extra class in main layout? -->
+
+    <!-- SLOT FOR SEARCH with default markup -->
+
+    <!-- NEED COLLAPSE MENU STUFF -->
+      
+    
+      
+      <!-- <div class="controls-container">
+        <ul class="collapsible">
           <li>
               <div id="school-degree" class="collapsible-header" aria-controls="major-content">
                 Programs/Degree <i class="material-icons">expand_more</i>
@@ -49,7 +56,7 @@
           </li>
 
         </ul>
-      </div>
+      </div> -->
   </form>
 </template>
 
