@@ -1,12 +1,124 @@
+<style lang="scss">
+  .search-form-degree-wrapper{
+    
+    .search-form-degree-cb{
+      padding:0px;
+      margin:0px;
+    }
+    .v-messages{
+      display: none;
+    }
+
+  }
+</style>
+
 <template>
-  <form @submit.prevent="OnSubmit">
+
+  <v-form>
+    <slot name="name-auto-complete">
+      <v-autocomplete label="Search By Name" append-icon="mdi-database-search"> </v-autocomplete>
+    </slot>
+    
+    <v-select v-model="input.state"
+      :items="states"
+      item-text="name"
+      item-value="abbr"
+      label="Location"
+      multiple
+      chips
+      ></v-select>
+    
+    <v-select v-model='input.major'
+      :items='programs'
+      item-text='label'
+      item-value='key'
+        label='Field Of Study'
+    >
+    </v-select>
+
+  <fieldset>
+    <legend>Length</legend>
+    <div class="search-form-degree-wrapper">
+        <v-checkbox
+          class="search-form-degree-cb"
+          v-model="input.degree"
+          label="Two Year"
+          value="a"
+        ></v-checkbox>
+
+        <v-checkbox
+          class="search-form-degree-cb"
+          v-model="input.degree"
+          label="Four Year"
+          value="b"
+        ></v-checkbox>
+
+        <v-checkbox
+          class="search-form-degree-cb"
+          v-model="input.degree"
+          label="Less than Two Year"
+          value="c"
+        ></v-checkbox>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Graduation Rate(%)</legend>
+
+    <v-row justify="space-around">
+      <v-checkbox v-model="utility.enable.graduation_rate"></v-checkbox>
+
+      <v-slider v-model="input.completion_rate"
+        class="align-center"
+        :class="{'v-slider--disabled': !utility.enable.graduation_rate}"
+        hide-details
+      >
+        <template v-slot:append>
+          <v-text-field v-model="input.completion_rate"
+            class="mt-0 pt-0"
+            hide-details
+            single-line
+            type="number"
+            style="width: 60px"
+          ></v-text-field>
+        </template>
+      </v-slider>
+
+    </v-row>
+    
+    <!-- Checkbox to activate  -->
+
+
+
+
+  </fieldset>
+
+
+
+
+
+
+    <!-- <v-radio-group v-model="input.degree" :mandatory="false"
+      label="Length"
+    >
+      <v-radio label="Two Year" value="a"></v-radio>
+      <v-radio label="Four Year" value="b"></v-radio>
+      <v-radio label="Less than Two Year" value="c"></v-radio>
+    </v-radio-group> -->
+
+
+  </v-form>
+
+<!-- <form @submit.prevent="OnSubmit"> -->
 
     <!-- SLOT FOR SEARCH with default markup -->
 
+
     <!-- NEED COLLAPSE MENU STUFF -->
-      
-    
-      
+
+
+
+
       <!-- <div class="controls-container">
         <ul class="collapsible">
           <li>
@@ -57,7 +169,7 @@
 
         </ul>
       </div> -->
-  </form>
+  <!-- </form> -->
 </template>
 
 <script>
@@ -90,14 +202,24 @@ export default {
         control:"", //Type
         serving:"",
         religious:"",
+        completion_rate: null,
         // page:0,
         // sort:""
       },
       utility:{
         // Hold Default state of form data.
         formDefult:{},
+        // // Some elements need translation before interacting with the API.
+        // mapDataValues:[
+        //   {
+        //     field: "graduation_rate"
+        //   }
+        // ]
         // Helper to activate debounced query after initial load.
-        initialized: false
+        initialized: false,
+        enable:{
+          graduation_rate: false
+        },
       }
     }
   },
@@ -120,7 +242,7 @@ export default {
     cleanInput(){
       let defaultValues = this.utility.formDefult;
       // Pick only values that are different from default state.
-      return _.pickBy(this.input,(value,key) => {
+      let groomedInput =  _.pickBy(this.input,(value,key) => {
         // If it does not exist in the default state object, remove.
         if(!_.has(defaultValues,key)){
           return false;
@@ -131,6 +253,20 @@ export default {
           return value;
         }
       });
+
+
+      // Pefrom Input to API data alterations.
+      // TODO - Refactor this process. Ingest and egress.  Maybe arrary of objects with string numeral parsing.  Is there a more elegant way?
+
+      // Completion rate
+      if(groomedInput.completion_rate && groomedInput.completion_rate > 0 && this.utility.enable.graduation_rate){
+        groomedInput.completion_rate = groomedInput.completion_rate / 100 + '..';
+      }else{
+        _.unset(groomedInput,'completion_rate');
+      }
+
+
+      return groomedInput;
     },
     // Generate a URI string of params for forwarding to search page.
     searchURL(){
@@ -140,17 +276,36 @@ export default {
         .replace(/%3A/g, ':');
       
       return qs;
-    }
+    },
+
+
+
   },
   created(){
     // Replicate default form state.
     this.utility.formDefult = _.cloneDeep(this.input);
 
-    this.input = _.mergeWith(this.input,this.urlParsedParams,function(objVal,newObjValue){
+    // TODO - Refactor this aswell
+      // For example, percentages for grad rate.
+
+    this.input = _.mergeWith(this.input,this.urlParsedParams,function(objVal,newObjValue,key){
       if(_.isArray(objVal) && _.isString(newObjValue)){
         return [newObjValue];
       }
+      
+      // TODO - Are there consts?
+      // Perform any URL -> Form data translations
+      if(key === 'completion_rate'){
+        return parseFloat(newObjValue) * 100;
+      }
+
     });
+
+    // TODO - Refactor to a more elegant. Loop through all utility enables, and trigger on.
+    // Set Sliders as active:
+    if(this.input.completion_rate > 0){
+      this.utility.enable.graduation_rate = true;
+    }
 
     this.debounceEmitSearchQuery = _.debounce(function() {
       this.$emit('search-query', this.cleanInput);

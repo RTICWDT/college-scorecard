@@ -433,6 +433,7 @@ export default {
     },
     parseURLParams(){
       let query = querystring.parse(location.search.substr(1));
+      
       return query || {};
     },
     generateQueryString(params){
