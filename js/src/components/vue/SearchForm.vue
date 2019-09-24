@@ -62,30 +62,10 @@
     </div>
   </fieldset>
 
-  <fieldset>
-    <legend>Graduation Rate(%)</legend>
-
-    <v-row justify="space-around">
-      <v-checkbox v-model="utility.enable.graduation_rate"></v-checkbox>
-
-      <v-slider v-model="input.completion_rate"
-        class="align-center"
-        :class="{'v-slider--disabled': !utility.enable.graduation_rate}"
-        hide-details
-      >
-        <template v-slot:append>
-          <v-text-field v-model="input.completion_rate"
-            class="mt-0 pt-0"
-            hide-details
-            single-line
-            type="number"
-            style="width: 60px"
-          ></v-text-field>
-        </template>
-      </v-slider>
-
-    </v-row>
-  </fieldset>
+  <check-range legend-title="Graduation Rate" v-model="input.completion_rate"
+    :enable="utility.enable.completion_rate" @slider-toggle="utility.enable.completion_rate = $event"
+    :min="0" :max="100"
+  ></check-range> 
 
   <fieldset>
     <legend>Average Annual Cost</legend>
@@ -195,6 +175,7 @@
 <script>
 import _ from 'lodash';
 import querystring from 'querystring';
+import CheckRange from './CheckRange.vue';
 
 // TODO - Add props and methods to generate forward URL + disable debounce & watch
 
@@ -207,6 +188,9 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  components:{
+    'check-range': CheckRange
   },
   data(){
     return{
@@ -232,7 +216,7 @@ export default {
         // Helper to activate debounced query after initial load.
         initialized: false,
         enable:{
-          graduation_rate: false
+          completion_rate: false
         },
       }
     }
@@ -274,12 +258,11 @@ export default {
         }
       });
 
-
       // Pefrom Input to API data alterations.
       // TODO - Refactor this process. Ingest and egress.  Maybe arrary of objects with string numeral parsing.  Is there a more elegant way?
 
       // Completion rate
-      if(groomedInput.completion_rate && groomedInput.completion_rate > 0 && this.utility.enable.graduation_rate){
+      if(groomedInput.completion_rate && groomedInput.completion_rate > 0 && this.utility.enable.completion_rate){
         groomedInput.completion_rate = groomedInput.completion_rate / 100 + '..';
       }else{
         _.unset(groomedInput,'completion_rate'); // TODO: CONST;
@@ -331,7 +314,7 @@ export default {
       // TODO - Refactor to a more elegant. Loop through all utility enables, and trigger on.
       // Set Sliders as active:
       if(this.input.completion_rate > 0){
-        this.utility.enable.graduation_rate = true;
+        this.utility.enable.completion_rate = true;
       }
 
     },
