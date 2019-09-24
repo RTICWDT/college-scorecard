@@ -299,7 +299,7 @@ export default {
 
     // Create Debounce function for this page.
     this.debounceSearchUpdate = _.debounce(function(params) {
-      this.searchAPI(params);
+      this.searchAPI(params,true);
     }, 1000);
   },
   mounted(){
@@ -418,7 +418,9 @@ export default {
     },
     handleCannedSearchClick(cannedSearchData){
       if(cannedSearchData.add[0]){
-        this.debounceSearchUpdate(cannedSearchData.add[0]);
+        console.log(this.parseURLParams(this.generateQueryString(cannedSearchData.add[0]).substr(1)));
+        this.urlParsedParams = this.parseURLParams(this.generateQueryString(cannedSearchData.add[0]).substr(1));
+        // this.debounceSearchUpdate(cannedSearchData.add[0]);
       }
 
       // TODO - Better handling of adding/removing items.
@@ -431,9 +433,9 @@ export default {
       }
       return false;
     },
-    parseURLParams(){
-      let query = querystring.parse(location.search.substr(1));
-      
+    parseURLParams(url = location.search.substr(1)){
+      let query = querystring.parse(url);
+
       return query || {};
     },
     generateQueryString(params){

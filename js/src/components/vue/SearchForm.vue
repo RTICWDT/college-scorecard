@@ -85,12 +85,32 @@
       </v-slider>
 
     </v-row>
-    
-    <!-- Checkbox to activate  -->
+  </fieldset>
 
+  <fieldset>
+    <legend>Average Annual Cost</legend>
 
+    <v-row justify="space-around">
+      <v-checkbox v-model="utility.enable.avg_net_price"></v-checkbox>
 
+      <v-slider v-model="input.avg_net_price"
+        class="align-center"
+        :class="{'v-slider--disabled': !utility.enable.avg_net_price}"
+        max='100'
+        hide-details
+      >
+        <template v-slot:append>
+          <v-text-field v-model="input.avg_net_price"
+            class="mt-0 pt-0"
+            hide-details
+            single-line
+            type="number"
+            style="width: 60px"
+          ></v-text-field>
+        </template>
+      </v-slider>
 
+    </v-row>
   </fieldset>
 
 
@@ -209,12 +229,6 @@ export default {
       utility:{
         // Hold Default state of form data.
         formDefult:{},
-        // // Some elements need translation before interacting with the API.
-        // mapDataValues:[
-        //   {
-        //     field: "graduation_rate"
-        //   }
-        // ]
         // Helper to activate debounced query after initial load.
         initialized: false,
         enable:{
@@ -233,6 +247,12 @@ export default {
           this.$emit('search-query', newValue);
           this.utility.initialized = true;
         }
+      },
+      deep: true
+    },
+    urlParsedParams: {
+      handler(newValue,oldValue){
+        this.mapInputFromProp();
       },
       deep: true
     }
@@ -262,9 +282,8 @@ export default {
       if(groomedInput.completion_rate && groomedInput.completion_rate > 0 && this.utility.enable.graduation_rate){
         groomedInput.completion_rate = groomedInput.completion_rate / 100 + '..';
       }else{
-        _.unset(groomedInput,'completion_rate');
+        _.unset(groomedInput,'completion_rate'); // TODO: CONST;
       }
-
 
       return groomedInput;
     },
@@ -277,9 +296,6 @@ export default {
       
       return qs;
     },
-
-
-
   },
   created(){
     // Replicate default form state.
@@ -287,25 +303,7 @@ export default {
 
     // TODO - Refactor this aswell
       // For example, percentages for grad rate.
-
-    this.input = _.mergeWith(this.input,this.urlParsedParams,function(objVal,newObjValue,key){
-      if(_.isArray(objVal) && _.isString(newObjValue)){
-        return [newObjValue];
-      }
-      
-      // TODO - Are there consts?
-      // Perform any URL -> Form data translations
-      if(key === 'completion_rate'){
-        return parseFloat(newObjValue) * 100;
-      }
-
-    });
-
-    // TODO - Refactor to a more elegant. Loop through all utility enables, and trigger on.
-    // Set Sliders as active:
-    if(this.input.completion_rate > 0){
-      this.utility.enable.graduation_rate = true;
-    }
+    this.mapInputFromProp();
 
     this.debounceEmitSearchQuery = _.debounce(function() {
       this.$emit('search-query', this.cleanInput);
@@ -316,6 +314,27 @@ export default {
 
   },
   methods:{
+    mapInputFromProp(){
+      this.input = _.mergeWith(this.input,this.urlParsedParams,function(objVal,newObjValue,key){
+        if(_.isArray(objVal) && _.isString(newObjValue)){
+          return [newObjValue];
+        }
+        
+        // TODO - Are there consts?
+        // Perform any URL -> Form data translations
+        if(key === 'completion_rate'){
+          return parseFloat(newObjValue) * 100;
+        }
+
+      });
+
+      // TODO - Refactor to a more elegant. Loop through all utility enables, and trigger on.
+      // Set Sliders as active:
+      if(this.input.completion_rate > 0){
+        this.utility.enable.graduation_rate = true;
+      }
+
+    },
     processChangeEvent(){
     }
   }
