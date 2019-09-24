@@ -24,7 +24,11 @@
             style="width: 60px"
             @input="handleInput"
             :append-icon='appendIcon'
+            :step="step"
           ></v-text-field>
+
+          <slot name="append-text">
+          </slot>
         </template>
       </v-slider>
 
@@ -43,6 +47,7 @@ export default {
     enable: Boolean,
     min: Number,
     max: Number,
+    step: Number,
     appendIcon: {
       type: String,
       default: null

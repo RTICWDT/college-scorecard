@@ -418,7 +418,7 @@ export default {
     },
     handleCannedSearchClick(cannedSearchData){
       if(cannedSearchData.add[0]){
-        console.log(this.parseURLParams(this.generateQueryString(cannedSearchData.add[0]).substr(1)));
+        // console.log(this.parseURLParams(this.generateQueryString(cannedSearchData.add[0]).substr(1)));
         this.urlParsedParams = this.parseURLParams(this.generateQueryString(cannedSearchData.add[0]).substr(1));
         // this.debounceSearchUpdate(cannedSearchData.add[0]);
       }

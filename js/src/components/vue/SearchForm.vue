@@ -10,6 +10,11 @@
     }
 
   }
+  .search-show-more-header{
+    // TODO: negative Margin.
+    padding: 10px;
+    background-color: purple;
+  }
 </style>
 
 <template>
@@ -67,32 +72,75 @@
     :min="0" :max="100" append-icon="mdi-percent"
   ></check-range>
 
-  <fieldset>
-    <legend>Average Annual Cost</legend>
+  <check-range legend-title="Average Annual Cost" v-model="input.avg_net_price"
+    :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
+    :min="0" :max="100"
+  >
+    <template v-slot:append-text>
+      K
+    </template>
+  </check-range>
 
-    <v-row justify="space-around">
-      <v-checkbox v-model="utility.enable.avg_net_price"></v-checkbox>
+  <div class="search-form-show-more-container">
+    <div class="search-show-more-header" @click='utility.showMore = !utility.showMore'>
+      <span>More</span>
+      <v-icon v-if='utility.showMore'>mdi-chevron-down</v-icon>
+      <v-icon v-else>mdi-chevron-up</v-icon>
+    </div>
 
-      <v-slider v-model="input.avg_net_price"
-        class="align-center"
-        :class="{'v-slider--disabled': !utility.enable.avg_net_price}"
-        max='100'
-        hide-details
-      >
-        <template v-slot:append>
-          <v-text-field v-model="input.avg_net_price"
-            class="mt-0 pt-0"
-            hide-details
-            single-line
-            type="number"
-            style="width: 60px"
-          ></v-text-field>
-        </template>
-      </v-slider>
+    <div class="search-show-more-body" v-if="utility.showMore">
+      <!-- TODO: Transition -->
 
-    </v-row>
-  </fieldset>
+      <fieldset>
+        <legend>Admittance</legend>
+        <!-- TODO - These are not working yet -->
+        <check-range v-model="input.avg_net_price"
+          :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
+          :min="0" :max="100"
+        >
+          <template v-slot:label>
+            Composite SAT
+          </template>
+        </check-range>
 
+        <check-range v-model="input.avg_net_price"
+          :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
+          :min="0" :max="100"
+        >
+          <template v-slot:label>
+            ACT Score
+          </template>
+        </check-range>
+
+        <check-range v-model="input.avg_net_price"
+          :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
+          :min="0" :max="100"
+        >
+          <template v-slot:label>
+            Acceptance Rate (%)
+          </template>
+        </check-range>
+      </fieldset>
+
+      <fieldset>
+        <legend>Size</legend>
+
+        <v-btn small :class="{primary: input.size === 'small' }" @click="handleSizeClick('small')">Small</v-btn>
+        <v-btn small :class="{primary: input.size === 'medium' }" @click="handleSizeClick('medium')">Medium</v-btn>
+        <v-btn small :class="{primary: input.size === 'large' }" @click="handleSizeClick('large')">Large</v-btn>
+      </fieldset>
+
+    </div>
+  </div>
+
+  <!-- <v-expansion-panels>
+    <v-expansion-panel>
+          <v-expansion-panel-header>Item</v-expansion-panel-header>
+          <v-expansion-panel-content>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </v-expansion-panel-content>
+    </v-expansion-panel>
+  </v-expansion-panels> -->
 
 
 
@@ -207,6 +255,7 @@ export default {
         serving:"",
         religious:"",
         completion_rate: null,
+        avg_net_price: null,
         // page:0,
         // sort:""
       },
@@ -215,8 +264,10 @@ export default {
         formDefult:{},
         // Helper to activate debounced query after initial load.
         initialized: false,
+        showMore: false,
         enable:{
-          completion_rate: false
+          completion_rate: false,
+          avg_net_price: false
         },
       }
     }
@@ -268,6 +319,14 @@ export default {
         _.unset(groomedInput,'completion_rate'); // TODO: CONST;
       }
 
+      if(groomedInput.avg_net_price && groomedInput.avg_net_price > 0 && this.utility.enable.avg_net_price){
+        groomedInput.avg_net_price = '..' + groomedInput.avg_net_price * 1000;
+      }else{
+        _.unset(groomedInput,'avg_net_price'); // TODO: CONST;
+      }
+
+
+
       return groomedInput;
     },
     // Generate a URI string of params for forwarding to search page.
@@ -309,6 +368,12 @@ export default {
           return parseFloat(newObjValue) * 100;
         }
 
+        if(key === 'avg_net_price'){
+          if(parseFloat(newObjValue.substr(2)) > 1000)
+          {
+            return parseFloat(newObjValue.substr(2)) / 1000;
+          }
+        }
       });
 
       // TODO - Refactor to a more elegant. Loop through all utility enables, and trigger on.
@@ -317,8 +382,19 @@ export default {
         this.utility.enable.completion_rate = true;
       }
 
+      if(this.input.avg_net_price > 0){
+        this.utility.enable.avg_net_price = true;
+      }
+
     },
     processChangeEvent(){
+    },
+    handleSizeClick(value){
+      if(value === this.input.size){
+        this.input.size = ""
+      }else{
+        this.input.size = value;
+      }
     }
   }
 }
