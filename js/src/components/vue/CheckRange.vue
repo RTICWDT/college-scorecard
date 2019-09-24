@@ -23,8 +23,8 @@
             type="number"
             style="width: 60px"
             @input="handleInput"
+            :append-icon='appendIcon'
           ></v-text-field>
-          <span>%</span>
         </template>
       </v-slider>
 
@@ -41,9 +41,12 @@ export default {
     },
     value: Number,
     enable: Boolean,
-    input: Number,
     min: Number,
     max: Number,
+    appendIcon: {
+      type: String,
+      default: null
+    }
   },
   data(){
     return{
@@ -58,8 +61,6 @@ export default {
     handleEnable(e){
       this.$emit('slider-toggle', this.enableSlider)
     },
-    handleSlide(e){
-    }
   }
 }
 </script>

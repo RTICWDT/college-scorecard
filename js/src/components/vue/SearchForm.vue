@@ -64,8 +64,8 @@
 
   <check-range legend-title="Graduation Rate" v-model="input.completion_rate"
     :enable="utility.enable.completion_rate" @slider-toggle="utility.enable.completion_rate = $event"
-    :min="0" :max="100"
-  ></check-range> 
+    :min="0" :max="100" append-icon="mdi-percent"
+  ></check-range>
 
   <fieldset>
     <legend>Average Annual Cost</legend>
