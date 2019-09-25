@@ -3,12 +3,14 @@ import vuetify from './plugins/vuetify'
 import _ from 'lodash'
 import vueNumeralFilterInstaller from 'vue-numeral-filter';
 
+import IndexPage from '../../index.vue';
 import SchoolPage from '../../school/index.vue';
 import SchoolProgramsPage from '../../school/fields.vue';
-import SearchPage from './SearchPage.vue';
+import SearchPage from '../../search/index.vue';
 import DataIndexPage from '../../data/index.vue';
 import DataChangelogPage from '../../data/changelog.vue';
 import DataDocumentationPage from '../../data/documentation.vue';
+//import ComparePage from '../../compare/index.vue';
 
 import './vue/filters.js'
 import './plugins/chartjs.js';
@@ -36,12 +38,14 @@ new Vue({
     compareSchools:null
   },
   components:{
+    'index-page': IndexPage,
     'school-page': SchoolPage,
     'school-programs-page': SchoolProgramsPage,
     'search-page': SearchPage,
     'data-index-page': DataIndexPage,
     'data-changelog': DataChangelogPage,
-    'data-documentation': DataDocumentationPage
+    'data-documentation': DataDocumentationPage,
+    //'compare-page': ComparePage
   },
   created(){
     this.refreshCompareSchools();

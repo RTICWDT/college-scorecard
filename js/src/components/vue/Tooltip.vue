@@ -1,5 +1,5 @@
 <template>
-    <v-tooltip abosolute top>
+    <v-tooltip top>
       <template v-slot:activator="{ on }">
         <v-icon color="primary" dark v-on="on">fa info</v-icon>
       </template>

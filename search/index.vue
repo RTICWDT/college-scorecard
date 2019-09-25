@@ -19,7 +19,7 @@
 <template>
   <div>
     <v-app>
-      <v-container fluid class="grey lighten-5" fill-height>
+      <v-container fluid class="grey lighten-5 pa-0" fill-height>
         <v-layout>
           <div id="search-param-container" v-show="$vuetify.breakpoint.mdAndUp || showSidebar">
             
@@ -88,7 +88,7 @@
               </v-row>
             </div>
 
-            <div class="search-result-container">
+            <div class="search-result-container pa-0">
               <div id="search-result-info-container">
                 <v-row>
                   <v-col col='12' md='4' sm='12'>
@@ -189,22 +189,8 @@
           </div>
         </v-layout>
       </v-container>
-
-    </v-app>
-    
-    <a class="waves-effect waves-light btn modal-trigger" style="position: fixed; left:120px; bottom: 30px" href="#compare-modal">Compare</a>
-  
-  
-    <!-- Basic Example for now -->
-    <!-- <section class="container section section-card_container-results">
-      <div class="results-main-schools schools-list">
-        <search-result-card v-for="school in results.schools" :key="school.id" :school="school" @toggle-compare-school="handleToggleCompareSchool" :is-selected="isResultCardSelected(school.id,compareSchools)"/>
-      </div>
-    </section> -->
-
-  <!-- TODO - Make This A Component. -->
-  <div id="compare-modal" class="modal bottom-sheet" style='width: 40%; right: 20%; left: auto;'>
-    <div class="modal-content">
+    <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
+ 
         <div id="compare_schools-content">
           <fieldset>
             <legend>Compare Schools</legend>
@@ -222,13 +208,26 @@
           </fieldset>
 
           <div class=" compare_link">
-              <a id="compare-link" class="btn button-primary compare-button_link">Compare Schools</a>
+              <v-btn color="secondary" href="/compare/">Compare Schools</v-btn>
           </div>
+      </div>
 
-        </div>
-    </div> <!-- End .compare-modal -->
+    </v-bottom-sheet> <!-- End .compare-modal -->
+    <v-btn color="secondary" rounded @click="showCompare = !showCompare">Compare</v-btn>
 
-</div>
+    </v-app>
+    
+  
+  
+    <!-- Basic Example for now -->
+    <!-- <section class="container section section-card_container-results">
+      <div class="results-main-schools schools-list">
+        <search-result-card v-for="school in results.schools" :key="school.id" :school="school" @toggle-compare-school="handleToggleCompareSchool" :is-selected="isResultCardSelected(school.id,compareSchools)"/>
+      </div>
+    </section> -->
+
+  <!-- TODO - Make This A Component. -->
+
 
   </div><!--End of root -->
 </template>
@@ -236,9 +235,9 @@
 <script>
 // TODO - This needs major cleanup.  How can it be cleaned?, Seperate files for legacy Javascript items?
 
-import SearchResultCard from './components/vue/SearchResultCard.vue';
-import SearchForm from './components/vue/SearchForm.vue';
-import CannedSearchButton from './components/vue/CannedSearchButton.vue';
+import SearchResultCard from 'components/vue/SearchResultCard.vue';
+import SearchForm from 'components/vue/SearchForm.vue';
+import CannedSearchButton from 'components/vue/CannedSearchButton.vue';
 
 import _ from 'lodash';
 // import querystring from 'querystring';
@@ -285,7 +284,8 @@ export default {
       },
       error:{
         message:null
-      }
+      },
+      showCompare: false
     };
   },
   created(){

@@ -57,7 +57,7 @@
 
     <v-card-text>
       <div class="result-card-school-name">
-        <h2>{{school['school.name'] ? school['school.name'] : 'School Name'}}</h2>
+        <h2><a :href='"/school/?"+_.get(school,"id")'>{{school['school.name'] ? school['school.name'] : 'School Name'}}</a></h2>
       </div>
       <span>{{school['latest.student.size']}} undergrads</span>
     </v-card-text>
