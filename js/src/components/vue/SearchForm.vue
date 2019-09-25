@@ -20,9 +20,8 @@
 <template>
 
   <v-form>
-    <slot name="name-auto-complete">
-      <v-autocomplete label="Search By Name" append-icon="mdi-database-search"> </v-autocomplete>
-    </slot>
+    <name-autocomplate></name-autocomplate>
+
     
     <v-select v-model="input.state"
       :items="states"
@@ -210,6 +209,7 @@
 import _ from 'lodash';
 import querystring from 'querystring';
 import CheckRange from './CheckRange.vue';
+import NameAutocomplete from './NameAutocomplete.vue';
 
 export default {
   props:{
@@ -224,7 +224,8 @@ export default {
     specializedMission: Object
   },
   components:{
-    'check-range': CheckRange
+    'check-range': CheckRange,
+    'name-autocomplate': NameAutocomplete
   },
   data(){
     return{

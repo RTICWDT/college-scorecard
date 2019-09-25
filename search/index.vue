@@ -21,7 +21,7 @@
     <v-app>
       <v-container fluid class="grey lighten-5 pa-0" fill-height>
         <v-layout>
-          <div id="search-param-container" v-show="$vuetify.breakpoint.mdAndUp || showSidebar">
+          <v-navigation-drawer id="search-param-container" width="400" class='pa-3' permanent>
             
             <!-- TODO - All form fields and layout. -->
             <!-- Search Form Component -->
@@ -30,7 +30,7 @@
             :urlParsedParams="urlParsedParams"
             @search-query="searchAPI" />
           
-          </div>
+          </v-navigation-drawer>
         
           <div id="search-result-container" class="d-inline">
 
@@ -208,7 +208,7 @@
           </fieldset>
 
           <div class=" compare_link">
-              <v-btn color="secondary" href="/compare/">Compare Schools</v-btn>
+            <v-btn color="secondary" href="/compare/">Compare Schools</v-btn>
           </div>
       </div>
 

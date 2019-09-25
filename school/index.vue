@@ -1,12 +1,15 @@
 <template>
   <v-app id="app" class="school-page">
-    <!-- Search results -->
-    <div class="school-bg">
+    <div class='backNav'>
       <div class="container school-back">
         <a id="referrer-link" class="link-more" href="../search/">
           <i class="fa fa-chevron-left"></i> Back to search results
         </a>
       </div>
+    </div>
+    <!-- Search results -->
+    <div class="school-bg">
+
 
       <v-container>
         <v-row>
@@ -26,30 +29,42 @@
             </div>-->
 
             <div v-if="!school.id" class="show-loading">
-              <h1>Loading...</h1>
+              <v-card tile class='pa-5'>
+              <h1 class='heading'>Loading...</h1>
+              </v-card>
             </div>
 
             <div v-else id="school">
-              <div class="school-heading pa-5 mb-5">
-                <v-chip
-                  v-if="_.get(school, fields['UNDER_INVESTIGATION'])==1"
-                  color="error"
-                  label
-                >Under ED Monitoring</v-chip>
+              <v-card tile class="school-heading pa-5 mb-5">
                 <v-row>
+                  <v-col cols="12" md="6" class='py-0'>
+                    <v-chip
+                      v-if="_.get(school, fields['UNDER_INVESTIGATION'])==1"
+                      color="error"
+                      label
+                    ><strong>Under ED Monitoring</strong></v-chip>
+                  </v-col>
+                  <v-col cols="12" md="6" class='text-right py-0'>
+                    [[ Add Compare ]]
+                    <share label="Share this School" url="https://collegescorecard.ed.gov" />
+                  </v-col>
+                </v-row>
+                <v-row class='mt-4'>
                   <v-col cols="12" md="8" class="py-0">
-                    <h1 class="display-1 pa-0 ma-0">{{ _.get(school, fields['NAME'], 'School Name') }}</h1>
-                    <h2 class="location mb-0">
+                    <h1 class="display-2 pa-0 mb-4">{{ _.get(school, fields['NAME'], 'School Name') }}</h1>
+                    <v-divider />
+                    
+                    <h2 class="title location mb-0 mt-2">
                       <span>{{ _.get(school, fields['CITY'], 'City') }}</span>,
                       <span>{{ _.get(school, fields['STATE'], 'State') }}</span>
                     </h2>
-                    <h2 class="population my-0">
+                    <h2 class="title population my-0">
                       <span>{{ _.get(school, fields['SIZE'], 'NNNN') | separator }}</span> undergraduate students
                     </h2>
-                    <h2 class="school-url mt-0">
+                    <h2 class="title school-url mt-0">
                       <a
                         target="_blank"
-                        class="secondary--text"
+                       
                         :href="_.get(school, fields['SCHOOL_URL'], 'ed.gov') | formatUrl"
                       >{{ _.get(school, fields['SCHOOL_URL'], 'ed.gov') | formatUrlText }}</a>
                     </h2>
@@ -85,7 +100,7 @@
                 </v-row>
                 <v-row>
                   <v-col col="12" md="6">
-                    <h4>Graduation Rate</h4>
+                    <h4 class='subtitle-2 font-weight-bold'>Graduation Rate</h4>
                     <donut
                       color="#00adf2"
                       :value="_.get(school, this.fields['COMPLETION_RATE']) * 100"
@@ -93,16 +108,19 @@
                     ></donut>
                   </v-col>
                   <v-col col="12" md="6">
-                    <h4>Salary After Completing</h4>
+                    <h4 class='subtitle-2 font-weight-bold'>Salary After Completing</h4>
+                    <div class='my-5' style='height: 70px'>
                     <range
                       :lower="{ value: 25000, label: 'Basketweaving<br />$25,0000' }"
                       :upper="{ value: 84000, label: 'Brain Surgeon<br />$84,000' }"
                       :min="{ value: 0, label: '0' }"
                       :max="{ value: 125000, label: '$125,000' }"
                       hideMiddle
+                      
                     ></range>
+                    </div>
 
-                    <h4>Average Annual Cost</h4>
+                    <h4 class='subtitle-2 font-weight-bold'>Average Annual Cost</h4>
                     <div v-if="!isProgramReporter">
                       <h2 class='display-2 secondary--text'>{{_.get(school, this.fields['NET_PRICE']) | numeral('$0,0') }}</h2>
                     </div>
@@ -111,7 +129,7 @@
                     </div>
                   </v-col>
                 </v-row>
-              </div>
+              </v-card>
 
               <v-row>
                 <v-col class="text-right">
@@ -630,7 +648,10 @@
           </v-col>
 
           <v-col lg="3">
-            <share label="Share this School" url="https://collegescorecard.ed.gov" />
+            
+            <v-card outline tile class='pa-5'>
+              <paying-for-college />
+            </v-card>
             <!-- { include paying_for_college.html } -->
           </v-col>
         </v-row>
@@ -641,15 +662,14 @@
 
 <style lang="scss" scoped>
 @import 'sass/_variables';
-.school-heading{
-  background-color: #FFFFFF;
-  border-radius: $base-border-radius;
-}
+
+
 .school-map {
   border: 1px solid $black;
   border-radius: $base-border-radius;
   height: 280px;
   margin-top: $base-padding;
+  width: 100%;
 }
 </style>
 
@@ -662,6 +682,7 @@ import Sankey from "components/vue/Sankey.vue";
 import Range from "components/vue/Range.vue";
 import HorizontalBar from "components/vue/HorizontalBar.vue";
 import Share from "components/vue/Share.vue";
+import PayingForCollege from "components/vue/PayingForCollege.vue";
 export default {
   props: ["baseUrl"],
   components: {
@@ -672,7 +693,8 @@ export default {
     sankey: Sankey,
     range: Range,
     "horizontal-bar": HorizontalBar,
-    share: Share
+    share: Share,
+    'paying-for-college': PayingForCollege
   },
   data() {
     return {

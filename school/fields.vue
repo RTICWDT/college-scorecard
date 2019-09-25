@@ -1,12 +1,14 @@
 <template>
   <v-app id="app" class="school-page">
-    <!-- Search results -->
-    <div class="school-bg">
+    <div class='backNav'>
       <div class="container school-back">
-        <a id="referrer-link" class="link-more" href="../search/">
-          <i class="fa fa-chevron-left"></i> Back to {{school.name }}
+        <a id="referrer-link" class="link-more" href="./index/">
+          <i class="fa fa-chevron-left"></i> Back to {{_.get(school, fields['NAME']) }}
         </a>
       </div>
+    </div>
+    <!-- Search results -->
+    <div class="school-bg">
 
       <v-container>
         <v-row>
@@ -16,31 +18,28 @@
             </div>
 
             <div v-else class="show-loaded" id="school">
-              <div class>
-                <div class="school-heading pa-5 mb-5">
-                  <div
-                    class="investigation-major-wrapper"
-                    data-bind="under_investigation"
-                    aria-hidden="true"
-                  >
-                    <a>
-                      <p
-                        class="investigation-major"
-                        aria-describedby="tip-hcm2"
-                        data-bind="branch_campus"
-                      >
-                        Under Ed Monitoring
-                        <i class="tooltip-target fa fa-info-circle"></i>
-                      </p>
-                    </a>
-                  </div>
+       
+                <v-card tille class="school-heading pa-5 mb-5">
+                         <v-row>
+                  <v-col cols="12" md="6" class='py-0'>
+                    <v-chip
+                      v-if="_.get(school, fields['UNDER_INVESTIGATION'])==1"
+                      color="error"
+                      label
+                    ><strong>Under ED Monitoring</strong></v-chip>
+                  </v-col>
+                  <v-col cols="12" md="6" class='text-right py-0'>
+                    [[ Add Compare ]]
+                    <share label="Share this School" url="https://collegescorecard.ed.gov" />
+                  </v-col>
+                </v-row>
+
                   <v-row>
                     <v-col cols="12" md="8" class="py-0">
-                      <h1 class="pa-0 ma-0">{{ _.get(school, fields['NAME'], 'School Name') }}</h1>
+                      <h1 class="pa-0 ma-0">All Fields of Study Available at {{ _.get(school, fields['NAME'], 'School Name') }}</h1>
                     </v-col>
                   </v-row>
-                </div>
-              </div>
+                </v-card>
               <!-- /.school-card_container-school -->
               <v-card class='px-4 pt-2 mb-4'>
               <v-select
@@ -80,67 +79,9 @@
           </v-col>
 
           <v-col lg="3">
-            <div class="school-share-wrapper">
-              <div
-                class="button button-share"
-                data-share-button
-                tabindex="0"
-                role="button"
-                onclick="void(0)"
-              >
-                <span class="top xaxis content">Share this School</span>
-                <ul class="social-share-list bottom xaxis content">
-                  <li class="social-item">
-                    <a
-                      data-href="https://twitter.com/intent/tweet?text=Take%20a%20look%20at%20this%20school&amp;url={url}"
-                      data-bind="school_share_link_twt"
-                      data-social="Twitter"
-                      title="Share on Twitter"
-                      target="_blank"
-                    >
-                      <i class="fa fa-twitter"></i>
-                      <span class="sr-only">Share on Twitter</span>
-                    </a>
-                  </li>
-                  <li class="social-item">
-                    <a
-                      data-href="https://www.facebook.com/sharer/sharer.php?u={url}"
-                      data-bind="school_share_link_fb"
-                      title="Share on Facebook"
-                      data-social="Facebook"
-                      target="_blank"
-                    >
-                      <i class="fa fa-facebook"></i>
-                      <span class="sr-only">Share on Facebook</span>
-                    </a>
-                  </li>
-                  <li class="social-item">
-                    <a
-                      data-href="mailto:?subject=Take%20a%20look%20at%20this%20school&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A{url}"
-                      data-bind="school_share_link_mail"
-                      data-social="Email"
-                      title="Share via Email"
-                    >
-                      <i class="fa fa-envelope"></i>
-                      <span class="sr-only">Share via Email</span>
-                    </a>
-                  </li>
-                  <li class="social-item">
-                    <a
-                      data-href="https://www.linkedin.com/shareArticle?mini=true&url={url}"
-                      data-bind="school_share_link_li"
-                      data-social="LinkedIn"
-                      title="Share on LinkedIn"
-                      target="_blank"
-                    >
-                      <i class="fa fa-linkedin"></i>
-                      <span class="sr-only">Share on LinkedIn</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- { include paying_for_college.html } -->
+            <v-card tile class='pa-5'>
+              <paying-for-college />
+            </v-card>
           </v-col>
         </v-row>
       </v-container>
@@ -150,10 +91,14 @@
 
 <script>
 import Tooltip from "components/vue/Tooltip.vue";
+import Share from "components/vue/Share.vue";
+import PayingForCollege from 'components/vue/PayingForCollege.vue';
 export default {
   props: ["baseUrl"],
   components: {
-    tooltip: Tooltip
+    tooltip: Tooltip,
+    share: Share,
+    'paying-for-college': PayingForCollege
   },
   data() {
     return {

@@ -7,7 +7,7 @@
 
 @import '~@mdi/font/css/materialdesignicons.css';
 @import '~vuetify/dist/vuetify.min';
-
+@import '_vuetify-overrides.scss';
 @import 'components/_header.scss';
 @import 'components/_footer.scss';
 
@@ -16,31 +16,7 @@
 @import 'pages/_school.scss';
 
 
+
 .sr-only{
   display:none;
-}
-
-.v-application{
-  h1, h2, h3, h4, h5, h6{
-    font-family: $header-font-family !important;
-  }
-  
-  
-  body, p{
-    font-family: $base-font-family !important;
-  }
-
-  .title, .display-1, .display-2, .display-3, .display-4
-  .subtitle-1, .subtitle-2
-  {
-    font-family: $header-font-family !important;
-
-  }
-
-  .v-expansion-panel-header{
-    font-weight: bold; 
-    font-family: $header-font-family !important;
-    font-size: 1.1rem;
-  }
-
 }

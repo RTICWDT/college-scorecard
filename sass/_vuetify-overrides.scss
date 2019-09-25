@@ -1,0 +1,30 @@
+
+.v-application{
+    h1, h2, h3, h4, h5, h6{
+      font-family: $header-font-family !important;
+    }
+    
+    
+    body, p{
+      font-family: $base-font-family !important;
+    }
+  
+    .title, .display-1, .display-2, .display-3, .display-4
+    .subtitle-1, .subtitle-2
+    {
+      font-family: $header-font-family !important;
+  
+    }
+  
+    .v-expansion-panel-header{
+      font-weight: bold; 
+      font-family: $header-font-family !important;
+      font-size: 1.1rem;
+    }
+    .v-expansion-panel-content{
+        .v-expansion-panel-header{
+            font-size: 0.9rem;
+            font-weight:normal;
+        }  
+    }
+  }

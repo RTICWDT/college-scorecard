@@ -15,7 +15,7 @@
     $label-height: 1em;
     $label-offset: 1em;
     $label-margin: $label-offset + $label-height;
-    $label-width: 5em;
+    $label-width: 8em;
   
     background-color: $light-gray;
     display: block;
@@ -24,6 +24,7 @@
     margin-top: $label-margin;
     max-width: 500px;
     position: relative;
+    
   
     .picc-range-bar {
       background-color: $emerald-green;
