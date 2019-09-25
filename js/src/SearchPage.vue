@@ -25,7 +25,8 @@
             
             <!-- TODO - All form fields and layout. -->
             <!-- Search Form Component -->
-            <search-form :states="states" :programs="programs"
+            <search-form :states="states" :programs="programs" 
+            :religious-affiliations="religiousAffiliations" :specialized-mission="specializedMission"
             :urlParsedParams="urlParsedParams"
             @search-query="searchAPI" />
           
@@ -97,37 +98,6 @@
                   </v-col>
                 
                   <v-col col='12' md='8' sm='12'>
-                    <!-- <div id="search-pagination-controls float-right">
-                      <span>Page:</span>
-                      <v-pagination v-model="input.page" :length='totalPages' :total-visible='7' @input="searchAPI(parseURLParams())"></v-pagination>
-                    </div>
-
-                    <div id="search-sort-controls">
-                      <v-speed-dial v-model="utility.sortFAB" direction="bottom" right transition="slide-y-transition">
-                        <template v-slot:activator>
-                          <v-btn v-model="utility.sortFAB" color="blue darken-2" dark fab>
-                            <v-icon v-if="utility.sortFAB">mdi-close</v-icon>
-                            <v-icon v-else>mdi-account-circle</v-icon>
-                          </v-btn>
-                        </template>
-                        
-                        <v-btn fab dark small color="green" >
-                          <v-icon>mdi-pencil</v-icon>
-                        </v-btn>
-
-                        <v-btn fab dark small color="indigo">
-                          <v-icon>mdi-plus</v-icon>
-                        </v-btn>
-
-                        <v-btn fab dark small color="red">
-                          <v-icon>mdi-delete</v-icon>
-                        </v-btn>
-                      </v-speed-dial> 
-
-                    </div> -->
-                      
-                   
-
                     <v-row>
 
                       <v-col cols='12' md='10' sm='12'>
@@ -140,22 +110,32 @@
                       <v-col cols='12' md="2" class="text-md-center text-sm-center">
                         <v-speed-dial v-model="utility.sortFAB" direction="bottom" right transition="slide-y-transition">
                             <template v-slot:activator>
+                              <!-- <label for="select-sort">Sort:</label> -->
                               <v-btn v-model="utility.sortFAB" color="blue darken-2" dark fab>
                                 <v-icon v-if="utility.sortFAB">mdi-close</v-icon>
-                                <v-icon v-else>mdi-account-circle</v-icon>
+                                <v-icon v-else>mdi-sort</v-icon>
                               </v-btn>
+                              
                             </template>
                             
-                            <v-btn fab dark small color="green" >
-                              <v-icon>mdi-pencil</v-icon>
+                            <v-btn dark color="blue" @click="input.sort = 'salary:desc'; debounceSearchUpdate(parseURLParams());">
+                              <v-icon left>mdi-sort-numeric</v-icon>
+                              Salary
                             </v-btn>
 
-                            <v-btn fab dark small color="indigo">
-                              <v-icon>mdi-plus</v-icon>
+                            <v-btn dark color="blue" @click="input.sort = 'avg_net_price:asc'; debounceSearchUpdate(parseURLParams());">
+                              <v-icon>mdi-sort-numeric</v-icon>
+                              Annual Cost
                             </v-btn>
 
-                            <v-btn fab dark small color="red">
-                              <v-icon>mdi-delete</v-icon>
+                            <v-btn dark color="blue" @click="input.sort = 'completion_rate:desc'; debounceSearchUpdate(parseURLParams());">
+                              <v-icon>mdi-sort-numeric</v-icon>
+                              Graduation Rate
+                            </v-btn>
+
+                            <v-btn dark color="blue" @click="input.sort = 'name:asc'; debounceSearchUpdate(parseURLParams());">
+                              <v-icon>mdi-sort-alphabetical</v-icon>
+                              Name
                             </v-btn>
                           </v-speed-dial>
 
@@ -275,6 +255,8 @@ export default {
     'page-permalink': String,
     'states': Array,
     'programs': Array,
+    'religiousAffiliations': Array,
+    'specializedMission': Object,
     'defaultSort':{
       type: String,
       default: "avg_net_price:asc"
@@ -320,7 +302,7 @@ export default {
 
     // Create Debounce function for this page.
     this.debounceSearchUpdate = _.debounce(function(params) {
-      this.searchAPI(params);
+      this.searchAPI(params,true);
     }, 1000);
   },
   mounted(){
@@ -439,7 +421,9 @@ export default {
     },
     handleCannedSearchClick(cannedSearchData){
       if(cannedSearchData.add[0]){
-        this.debounceSearchUpdate(cannedSearchData.add[0]);
+        // console.log(this.parseURLParams(this.generateQueryString(cannedSearchData.add[0]).substr(1)));
+        this.urlParsedParams = this.parseURLParams(this.generateQueryString(cannedSearchData.add[0]).substr(1));
+        // this.debounceSearchUpdate(cannedSearchData.add[0]);
       }
 
       // TODO - Better handling of adding/removing items.
@@ -452,8 +436,9 @@ export default {
       }
       return false;
     },
-    parseURLParams(){
-      let query = querystring.parse(location.search.substr(1));
+    parseURLParams(url = location.search.substr(1)){
+      let query = querystring.parse(url);
+
       return query || {};
     },
     generateQueryString(params){
