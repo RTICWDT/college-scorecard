@@ -17,6 +17,8 @@ new Vue({
         all: null,
         states: null,
         programs: null,
+        religiousAffiliations:null,
+        specializedMission:null,
       }
     },
     isLoading: true,
@@ -41,6 +43,8 @@ new Vue({
     this.site.data.all = siteDataAll;
     this.site.data.states = this.site.data.all.states;
     this.site.data.programs = this.site.data.all.programs;
+    this.site.data.religiousAffiliations = this.site.data.all.religious_affiliations;
+    this.site.data.specializedMission = this.site.data.all.special_designations;
   },
   methods:{
     refreshResults(resultsObject){

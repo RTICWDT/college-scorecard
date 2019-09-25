@@ -25,7 +25,8 @@
             
             <!-- TODO - All form fields and layout. -->
             <!-- Search Form Component -->
-            <search-form :states="states" :programs="programs"
+            <search-form :states="states" :programs="programs" 
+            :religious-affiliations="religiousAffiliations" :specialized-mission="specializedMission"
             :urlParsedParams="urlParsedParams"
             @search-query="searchAPI" />
           
@@ -254,6 +255,8 @@ export default {
     'page-permalink': String,
     'states': Array,
     'programs': Array,
+    'religiousAffiliations': Array,
+    'specializedMission': Object,
     'defaultSort':{
       type: String,
       default: "avg_net_price:asc"

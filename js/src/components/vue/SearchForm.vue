@@ -37,195 +37,179 @@
       :items='programs'
       item-text='label'
       item-value='key'
-        label='Field Of Study'
+      label='Field Of Study'
     >
     </v-select>
 
-  <fieldset>
-    <legend>Length</legend>
-    <div class="search-form-degree-wrapper">
-        <v-checkbox
-          class="search-form-degree-cb"
-          v-model="input.degree"
-          label="Two Year"
-          value="a"
-        ></v-checkbox>
+    <fieldset>
+      <legend>Length</legend>
+      <div class="search-form-degree-wrapper">
+          <v-checkbox
+            class="search-form-degree-cb"
+            v-model="input.degree"
+            label="Two Year"
+            value="a"
+          ></v-checkbox>
 
-        <v-checkbox
-          class="search-form-degree-cb"
-          v-model="input.degree"
-          label="Four Year"
-          value="b"
-        ></v-checkbox>
+          <v-checkbox
+            class="search-form-degree-cb"
+            v-model="input.degree"
+            label="Four Year"
+            value="b"
+          ></v-checkbox>
 
-        <v-checkbox
-          class="search-form-degree-cb"
-          v-model="input.degree"
-          label="Less than Two Year"
-          value="c"
-        ></v-checkbox>
-    </div>
-  </fieldset>
+          <v-checkbox
+            class="search-form-degree-cb"
+            v-model="input.degree"
+            label="Less than Two Year"
+            value="c"
+          ></v-checkbox>
+      </div>
+    </fieldset>
 
-  <check-range legend-title="Graduation Rate" v-model="input.completion_rate"
-    :enable="utility.enable.completion_rate" @slider-toggle="utility.enable.completion_rate = $event"
-    :min="0" :max="100" append-icon="mdi-percent"
-  ></check-range>
+    <check-range legend-title="Graduation Rate" v-model="input.completion_rate"
+      :enable="utility.enable.completion_rate" @slider-toggle="utility.enable.completion_rate = $event"
+      :min="0" :max="100" append-icon="mdi-percent"
+    ></check-range>
 
-  <check-range legend-title="Average Annual Cost" v-model="input.avg_net_price"
-    :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
-    :min="0" :max="100"
-  >
-    <template v-slot:append-text>
-      K
-    </template>
-  </check-range>
-
-  <div class="search-form-show-more-container">
-    <div class="search-show-more-header" @click='utility.showMore = !utility.showMore'>
-      <span>More</span>
-      <v-icon v-if='utility.showMore'>mdi-chevron-down</v-icon>
-      <v-icon v-else>mdi-chevron-up</v-icon>
-    </div>
-
-    <div class="search-show-more-body" v-if="utility.showMore">
-      <!-- TODO: Transition -->
-
-      <fieldset>
-        <legend>Admittance</legend>
-        <!-- TODO - These are not working yet -->
-        <check-range v-model="input.avg_net_price"
-          :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
-          :min="0" :max="100"
-        >
-          <template v-slot:label>
-            Composite SAT
-          </template>
-        </check-range>
-
-        <check-range v-model="input.avg_net_price"
-          :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
-          :min="0" :max="100"
-        >
-          <template v-slot:label>
-            ACT Score
-          </template>
-        </check-range>
-
-        <check-range v-model="input.avg_net_price"
-          :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
-          :min="0" :max="100"
-        >
-          <template v-slot:label>
-            Acceptance Rate (%)
-          </template>
-        </check-range>
-      </fieldset>
-
-      <fieldset>
-        <legend>Size</legend>
-
-        <v-btn small :class="{primary: input.size === 'small' }" @click="handleSizeClick('small')">Small</v-btn>
-        <v-btn small :class="{primary: input.size === 'medium' }" @click="handleSizeClick('medium')">Medium</v-btn>
-        <v-btn small :class="{primary: input.size === 'large' }" @click="handleSizeClick('large')">Large</v-btn>
-      </fieldset>
-
-    </div>
-  </div>
-
-  <!-- <v-expansion-panels>
-    <v-expansion-panel>
-          <v-expansion-panel-header>Item</v-expansion-panel-header>
-          <v-expansion-panel-content>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </v-expansion-panel-content>
-    </v-expansion-panel>
-  </v-expansion-panels> -->
-
-
-
-
-
-    <!-- <v-radio-group v-model="input.degree" :mandatory="false"
-      label="Length"
+    <check-range legend-title="Average Annual Cost" v-model="input.avg_net_price"
+      :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
+      :min="0" :max="100"
     >
-      <v-radio label="Two Year" value="a"></v-radio>
-      <v-radio label="Four Year" value="b"></v-radio>
-      <v-radio label="Less than Two Year" value="c"></v-radio>
-    </v-radio-group> -->
+      <template v-slot:append-text>
+        K
+      </template>
+    </check-range>
+
+    <div class="search-form-show-more-container">
+      <div class="search-show-more-header" @click='utility.showMore = !utility.showMore'>
+        <span>More</span>
+        <v-icon v-if='utility.showMore'>mdi-chevron-down</v-icon>
+        <v-icon v-else>mdi-chevron-up</v-icon>
+      </div>
+
+      <div class="search-show-more-body" v-if="utility.showMore">
+        <!-- TODO: Transition -->
+
+        <fieldset>
+          <legend>Admittance</legend>
+          <!-- TODO - These are not working yet -->
+          <check-range v-model="input.avg_net_price"
+            :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
+            :min="0" :max="100"
+          >
+            <template v-slot:label>
+              Composite SAT
+            </template>
+          </check-range>
+
+          <check-range v-model="input.avg_net_price"
+            :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
+            :min="0" :max="100"
+          >
+            <template v-slot:label>
+              ACT Score
+            </template>
+          </check-range>
+
+          <check-range v-model="input.avg_net_price"
+            :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
+            :min="0" :max="100"
+          >
+            <template v-slot:label>
+              Acceptance Rate (%)
+            </template>
+          </check-range>
+        </fieldset>
+
+        <fieldset>
+          <legend>Size</legend>
+
+          <v-btn small :class="{primary: input.size === 'small' }" @click="handleSizeClick('small')">Small</v-btn>
+          <v-btn small :class="{primary: input.size === 'medium' }" @click="handleSizeClick('medium')">Medium</v-btn>
+          <v-btn small :class="{primary: input.size === 'large' }" @click="handleSizeClick('large')">Large</v-btn>
+        </fieldset>
+
+        <legend>School Characteristics</legend>
+        
+        <fieldset>
+          <legend>Type Of School</legend>
+          <div class="search-form-type-container">
+            <v-checkbox
+              v-model="input.control"
+              label="Public"
+              value="public"
+            ></v-checkbox>
+
+            <v-checkbox
+              v-model="input.control"
+              label="Private Nonprofit"
+              value="private"
+            ></v-checkbox>
+
+            <v-checkbox
+              v-model="input.control"
+              label="Private For-Profit"
+              value="profit"
+            ></v-checkbox>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Urbancity</legend>
+          <!-- TODO - Not working yet -->
+          <div class="search-form-urban-container">
+            <v-row justify="space-around">
+              <v-checkbox
+                v-model="input.urban"
+                label="City"
+                value="city"
+              ></v-checkbox>
+
+              <v-checkbox
+                v-model="input.urban"
+                label="Suburban"
+                value="suburban"
+              ></v-checkbox>
+              <v-checkbox
+                v-model="input.urban"
+                label="Town"
+                value="town"
+              ></v-checkbox>
+
+              <v-checkbox
+                v-model="input.urban"
+                label="Rural"
+                value="rural"
+              ></v-checkbox>
+            </v-row>
+          </div>
+        </fieldset>
+
+        <v-select v-model='input.serving'
+          :items='cleanSpecializedMission'
+          item-text="value"
+          item-value="key"
+          label='Specialized Mission'
+        ></v-select>
+
+        <v-select v-model='input.religious'
+          :items='religiousAffiliations'
+          item-text='label'
+          item-value='value'
+          label='Religious Affiliation'
+        ></v-select>
 
 
+      </div>
+    </div>
   </v-form>
-
-<!-- <form @submit.prevent="OnSubmit"> -->
-
-    <!-- SLOT FOR SEARCH with default markup -->
-
-
-    <!-- NEED COLLAPSE MENU STUFF -->
-
-
-
-
-      <!-- <div class="controls-container">
-        <ul class="collapsible">
-          <li>
-              <div id="school-degree" class="collapsible-header" aria-controls="major-content">
-                Programs/Degree <i class="material-icons">expand_more</i>
-              </div>
-              <div class="collapsible-body" id="major-content">
-                  <label for="major-type">Choose a degree
-                    <select id="major-type" name="degree">
-                      <option value="" selected>Any</option>
-                      <option value="c">Certificate</option>
-                      <option value="a">Two-year (Associate's)</option>
-                      <option value="b">Four-year (Bachelor's)</option>
-                    </select>
-                  </label>
-          
-                  <label for="major">Choose a program
-                    <select id="major" name="major">
-                      <option value="" selected>Any</option>
-                      <option v-for="program in programs" :value="program.key" :key="program.key">{{program.label }}</option>
-                    </select>
-                  </label>
-              </div>
-          </li>
-
-
-          <li>
-            <div id="school-location" class="collapsible-header" aria-controls="location-content">
-              Location <i class="material-icons">expand_more</i>
-            </div>
-
-            <div class="collapsible-body" id="location-content">
-
-              <div class="input-add group_inline">
-                
-                <div class="label" id="label-select-state">
-                  Select one or more states
-                </div>
-                
-                <select aria-labelledby="label-select-state" class="select-state" name="state" multiple v-model="input.state">
-                  <option value="" selected>Any</option>
-                  <option v-for="state in states" :value="state.abbr" :key="state.abbr">{{ state.name }}</option>
-                </select>
-
-              </div>
-            </div>
-          </li>
-
-        </ul>
-      </div> -->
-  <!-- </form> -->
 </template>
 
 <script>
 import _ from 'lodash';
 import querystring from 'querystring';
 import CheckRange from './CheckRange.vue';
-
-// TODO - Add props and methods to generate forward URL + disable debounce & watch
 
 export default {
   props:{
@@ -235,7 +219,9 @@ export default {
     generateURL: {
       type: Boolean,
       default: false
-    }
+    },
+    religiousAffiliations: Array,
+    specializedMission: Object
   },
   components:{
     'check-range': CheckRange
@@ -251,11 +237,12 @@ export default {
         distance:"",
         size:"",
         name:"",
-        control:"", //Type
+        control:[], //Type
         serving:"",
         religious:"",
         completion_rate: null,
         avg_net_price: null,
+        urban:[]
         // page:0,
         // sort:""
       },
@@ -338,6 +325,14 @@ export default {
       
       return qs;
     },
+    cleanSpecializedMission(){
+      return _.map(this.specializedMission,(value,key) => {
+        return {
+          'key': key,
+          'value': value
+        }
+      })
+    }
   },
   created(){
     // Replicate default form state.

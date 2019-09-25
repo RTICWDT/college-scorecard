@@ -14,7 +14,9 @@ body_scripts:
 <div id="app">
   <!-- Pass other variables as props-->
   <search-page page-permalink="{{ page.permalink }}"
-    :states="site.data.states" :programs="site.data.programs"
+    :states="site.data.states" :programs="site.data.programs" 
+    :religious-affiliations="site.data.religiousAffiliations"
+    :specialized-mission="site.data.specializedMission"
     :is-loading="isLoading" @loading="isLoading = $event"
     :compare-schools="compareSchools" @compare-update-selection="refreshCompareSchools"
   />
