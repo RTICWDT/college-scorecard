@@ -1,9 +1,9 @@
 <template>
-  <button class="btn" @click="$emit('canned-search-click',{add:addToQuery,remove:removeFromQuery})">
+  <v-btn rounded color='secondary' @click="$emit('canned-search-click',{add:addToQuery,remove:removeFromQuery})">
     <slot>
       Test
     </slot>
-  </button>
+  </v-btn>
 </template>
 
 <script>

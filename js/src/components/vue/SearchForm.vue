@@ -40,8 +40,7 @@
     >
     </v-select>
 
-    <fieldset>
-      <legend>Length</legend>
+      <p class='subhead-2'>Length</p>
       <div class="search-form-degree-wrapper">
           <v-checkbox
             class="search-form-degree-cb"
@@ -64,7 +63,6 @@
             value="c"
           ></v-checkbox>
       </div>
-    </fieldset>
 
     <check-range legend-title="Graduation Rate" v-model="input.completion_rate"
       :enable="utility.enable.completion_rate" @slider-toggle="utility.enable.completion_rate = $event"
@@ -80,18 +78,17 @@
       </template>
     </check-range>
 
-    <div class="search-form-show-more-container">
-      <div class="search-show-more-header" @click='utility.showMore = !utility.showMore'>
-        <span>More</span>
-        <v-icon v-if='utility.showMore'>mdi-chevron-down</v-icon>
-        <v-icon v-else>mdi-chevron-up</v-icon>
-      </div>
+    <v-expansion-panels>
+      <v-expansion-panel>
+        <v-expansion-panel-header>
+          More
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
 
-      <div class="search-show-more-body" v-if="utility.showMore">
-        <!-- TODO: Transition -->
 
-        <fieldset>
-          <legend>Admittance</legend>
+ 
+     
+          <p class='subtitle-2'>Admittance</p>
           <!-- TODO - These are not working yet -->
           <check-range v-model="input.avg_net_price"
             :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
@@ -119,20 +116,20 @@
               Acceptance Rate (%)
             </template>
           </check-range>
-        </fieldset>
+    
 
-        <fieldset>
-          <legend>Size</legend>
-
+          <p class='subtitle-2 mb-0'>Size</p>
+          <v-btn-group>
           <v-btn small :class="{primary: input.size === 'small' }" @click="handleSizeClick('small')">Small</v-btn>
           <v-btn small :class="{primary: input.size === 'medium' }" @click="handleSizeClick('medium')">Medium</v-btn>
           <v-btn small :class="{primary: input.size === 'large' }" @click="handleSizeClick('large')">Large</v-btn>
-        </fieldset>
+          </v-btn-group>
+      
 
-        <legend>School Characteristics</legend>
+        <p class='title'>School Characteristics</p>
         
-        <fieldset>
-          <legend>Type Of School</legend>
+    
+          <p class='subtitle-2'>Type Of School</p>
           <div class="search-form-type-container">
             <v-checkbox
               v-model="input.control"
@@ -152,10 +149,8 @@
               value="profit"
             ></v-checkbox>
           </div>
-        </fieldset>
 
-        <fieldset>
-          <legend>Urbancity</legend>
+          <p class='subtitle-2'>Urbancity</p>
           <!-- TODO - Not working yet -->
           <div class="search-form-urban-container">
             <v-row justify="space-around">
@@ -183,7 +178,7 @@
               ></v-checkbox>
             </v-row>
           </div>
-        </fieldset>
+ 
 
         <v-select v-model='input.serving'
           :items='cleanSpecializedMission'
@@ -200,8 +195,10 @@
         ></v-select>
 
 
-      </div>
-    </div>
+     
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
   </v-form>
 </template>
 

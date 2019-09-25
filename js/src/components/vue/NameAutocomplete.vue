@@ -2,7 +2,7 @@
     <div>
         <v-autocomplete
             label="School Name"
-            v-model="model"
+            v-model="school"
             :items="items"
             :loading="isLoading"
             :search-input.sync="search"
@@ -13,6 +13,7 @@
             item-value="id"
             placeholder="Start typing to Search"
             return-object
+            @change="goToSchool"
          />
     </div>
 </template>
@@ -22,9 +23,14 @@ export default {
     data: () => ({
       items: [],
       isLoading: false,
-      model: null,
+      school: null,
       search: null,
     }),
+    methods:{
+      goToSchool(){
+        window.location='/school/?'+this.school.id;
+      }
+    },
     watch: {
       search (val) {
         // Items have already been loaded

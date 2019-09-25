@@ -1,12 +1,13 @@
 <template>
-  <fieldset>
-    <legend>
+  <div>
+    <p class='subhead-2 mb-0 pb-0'>
       <slot name='label'>
         {{legendTitle}}
       </slot>
-    </legend>
+    </p>
 
     <v-row justify="space-around">
+      
       <v-checkbox v-model="enableSlider" @change="handleEnable"></v-checkbox>
 
       <v-slider v-model="sliderValue"
@@ -33,7 +34,7 @@
       </v-slider>
 
     </v-row>
-  </fieldset>
+  </div>
 </template>
 
 <script>

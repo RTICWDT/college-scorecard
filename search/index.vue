@@ -5,34 +5,28 @@
   .canned-search-wrapper{
     margin-bottom: 8px;
   }
-  #search-pagination-controls{
-    // padding-left: 30px;
-    // text-align: left;
 
-    // @media (min-width: 960px) {
-    //   text-align: left;
-    // }
-
-  }
 </style>
 
 <template>
   <div>
     <v-app>
-      <v-container fluid class="grey lighten-5 pa-0" fill-height>
-        <v-layout>
-          <v-navigation-drawer id="search-param-container" width="400" class='pa-3' permanent>
-            
-            <!-- TODO - All form fields and layout. -->
-            <!-- Search Form Component -->
-            <search-form :states="states" :programs="programs" 
-            :religious-affiliations="religiousAffiliations" :specialized-mission="specializedMission"
-            :urlParsedParams="urlParsedParams"
-            @search-query="searchAPI" />
-          
-          </v-navigation-drawer>
+      <v-navigation-drawer v-model='showSidebar' app style="top: 158px;" class='pa-5' width="300">
         
-          <div id="search-result-container" class="d-inline">
+        <!-- TODO - All form fields and layout. -->
+        <!-- Search Form Component -->
+        <search-form :states="states" :programs="programs" 
+        :religious-affiliations="religiousAffiliations" :specialized-mission="specializedMission"
+        :urlParsedParams="urlParsedParams"
+        @search-query="searchAPI" />
+      
+      </v-navigation-drawer>
+      <v-content>
+      <v-container fluid class="grey lighten-5 pa-0" fill-height>
+     
+
+        
+          <div id="search-result-container">
 
             <div id="search-can-query-container">
               <v-row>
@@ -51,25 +45,18 @@
                           Schools In MA
                         </canned-search-button>
                       </v-col>
-
+ 
+                      <!-- <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
+                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['WA']}]">
+                          Schools In WA
+                        </canned-search-button>
+                      </v-col> -->
                       <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
-                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['MA']}]">
-                          Schools In MA
+                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{size:['medium']}]">
+                        Medium Sized Schools
                         </canned-search-button>
                       </v-col>
-                      
-                      <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
-                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['MA']}]">
-                          Schools In MA
-                        </canned-search-button>
-                      </v-col>
-
-                      <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
-                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['MA']}]">
-                          Schools In MA
-                        </canned-search-button>
-                      </v-col>
-
+<!--                      
                       <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
                         <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['MA']}]">
                           Schools In MA
@@ -81,6 +68,18 @@
                           Schools In MA
                         </canned-search-button>
                       </v-col>
+
+                      <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
+                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['MA']}]">
+                          Schools In MA
+                        </canned-search-button>
+                      </v-col>
+
+                      <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
+                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['MA']}]">
+                          Schools In MA
+                        </canned-search-button>
+                      </v-col> -->
                     </v-row>
                   </div>  
                 </v-col>
@@ -89,29 +88,29 @@
             </div>
 
             <div class="search-result-container pa-0">
-              <div id="search-result-info-container">
+                <v-card tile class='my-4 pa-1' color="grey lighten-2">
                 <v-row>
-                  <v-col col='12' md='4' sm='12'>
-                    <div id="search-result-info-count">
-                      <h5>{{results.meta.total}} Results</h5> <!-- TODO - Count to display result/results -->
+                  <v-col cols='12' md='4' sm='12' class='py-2'>
+                    <div id="search-result-info-count" class='pl-5'>
+                      <p class='title mb-0'>{{results.meta.total}} Results</p> <!-- TODO - Count to display result/results -->
                     </div>
                   </v-col>
                 
-                  <v-col col='12' md='8' sm='12'>
+                  <v-col cols='12' md='8' sm='12' class='pa-0'>
                     <v-row>
 
-                      <v-col cols='12' md='10' sm='12'>
+                      <v-col cols='12' md='10' sm='12' class='pa-0'>
                         <div id="search-pagination-controls" class="text-md-right text-sm-left">
                           <span>Page:</span>
                           <v-pagination v-model="input.page" :length='totalPages' :total-visible='7' @input="searchAPI(parseURLParams())"></v-pagination>
                         </div>
                       </v-col>
 
-                      <v-col cols='12' md="2" class="text-md-center text-sm-center">
-                        <v-speed-dial v-model="utility.sortFAB" direction="bottom" right transition="slide-y-transition">
+                      <v-col cols='12' md="2" class="text-md-center text-sm-center pa-0">
+                        <v-speed-dial  v-model="utility.sortFAB" direction="bottom" right transition="slide-y-transition">
                             <template v-slot:activator>
                               <!-- <label for="select-sort">Sort:</label> -->
-                              <v-btn v-model="utility.sortFAB" color="blue darken-2" dark fab>
+                              <v-btn small v-model="utility.sortFAB" color="blue darken-2" dark fab>
                                 <v-icon v-if="utility.sortFAB">mdi-close</v-icon>
                                 <v-icon v-else>mdi-sort</v-icon>
                               </v-btn>
@@ -139,20 +138,12 @@
                             </v-btn>
                           </v-speed-dial>
 
-                        <!-- <label for="select-sort">Sort:</label>
-                        <select id="select-sort" name="sort" v-model="input.sort" @change="searchAPI(parseURLParams())">
-                          <option selected="selected" value="salary:desc">Salary After Attending</option>
-                          <option value="avg_net_price:asc">Average Annual Cost</option>
-                          <option value="completion_rate:desc">Graduation Rate</option>
-                          <option value="name:asc">Name (A to Z)</option>
-                        </select> -->
-
                       </v-col>
 
                     </v-row>
                   </v-col>
                 </v-row>
-              </div>
+                </v-card>
 
               <div class="results-main-alert">
                 <div class="show-loading" v-show="isLoading">
@@ -187,13 +178,15 @@
 
             </div>
           </div>
-        </v-layout>
+        
+            
+      <v-btn fixed top right color="secondary" rounded @click="showCompare = !showCompare">Compare</v-btn>
+        
       </v-container>
-    <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
- 
-        <div id="compare_schools-content">
-          <fieldset>
-            <legend>Compare Schools</legend>
+      </v-content>
+      <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
+        <v-card tile id="compare_schools-content" class='pa-5'>
+            <p>Compare Schools</p>
             
             <ul id="edit-compare-list">
               <li class="edit-compare-list-item" v-for="school in compareSchools" :key="school.schoolId">
@@ -204,16 +197,11 @@
                 </label>
               </li>
             </ul>
-
-          </fieldset>
-
-          <div class=" compare_link">
-            <v-btn color="secondary" href="/compare/">Compare Schools</v-btn>
-          </div>
-      </div>
-
-    </v-bottom-sheet> <!-- End .compare-modal -->
-    <v-btn color="secondary" rounded @click="showCompare = !showCompare">Compare</v-btn>
+          <p>
+            <v-btn rounded color="secondary" href="/compare/">Compare Schools</v-btn>
+          </p>
+      </v-card>
+    </v-bottom-sheet> 
 
     </v-app>
     
@@ -265,7 +253,7 @@ export default {
   },
   data(){
     return {
-      showSidebar: false,
+      showSidebar: true,
       results:{
         schools:[],
         meta:{
