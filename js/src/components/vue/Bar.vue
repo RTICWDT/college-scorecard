@@ -35,10 +35,21 @@ export default {
                 yAxes: [{
                     ticks: {
                         min: this.min,
-                        suggestedMax: this.max
+                        suggestedMax: this.max,
+                        callback: function(value, index, values) {
+                          return value.toLocaleString("en-US",{style:"currency", currency:"USD" }).slice(0,-3);
+                        }
                     }
                 }]
+            },
+            plugins: {
+              datalabels: {
+                formatter: function(value, context) {
+                  return value.toLocaleString("en-US",{style:"currency", currency:"USD" }).slice(0,-3);
+                }
+              }
             }
+            
           }
       }
   },
@@ -49,6 +60,8 @@ export default {
       datasets: [
         {
           label: '',
+          hoverBackgroundColor: this.color,
+          backgroundColor: this.color, 
           data: [this.data]
         }
       ]

@@ -8,12 +8,13 @@ export default {
       options: {
         responsive:false, 
         maintainAspectRatio: false,
+        title: false,
         elements: {
             center: {
                 text: Math.round(+this.value)+"%",
                 color: this.color, 
                 fontStyle: 'Montserrat', 
-                sidePadding: 20 
+                sidePadding: 40 
             }
         },
         plugins:{
@@ -75,6 +76,7 @@ export default {
         datasets: [
           {
             backgroundColor: [this.color],
+            hoverBackgroundColor: [this.color],
             data: [this.value, 100 - this.value]
           }
         ]

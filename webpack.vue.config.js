@@ -13,8 +13,12 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
-    }
-  },
+    },
+    modules: [
+      path.resolve('./js/src'),
+      path.resolve('./node_modules')
+    ]
+},
   module: {
     rules: [
       {
@@ -47,21 +51,25 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
+          'vue-style-loader',
           'style-loader',
           'css-loader',
-          'sass-loader'
-          // {
-          //   loader: 'sass-loader',
-          //   // Requires sass-loader@^8.0.0
-          //   options: {
-          //     implementation: require('sass'),
-          //     sassOptions: {
-          //       fiber: require('fibers'),
-          //     },
-          //   },
-          // },
-        ],
+          
+          {
+            loader: 'sass-loader',
+            // // Requires sass-loader@^8.0.0
+            options: {
+              //prependData: './sass/_variables.scss',
+              implementation: require('sass'),
+              sassOptions: {
+                fiber: require('fibers'),
+              },
+            },
+          },
+          
+        ]
       },
+     
     ]
   },
   watchOptions: {

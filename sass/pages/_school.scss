@@ -1,0 +1,64 @@
+.school-bg {
+    background-image: url('/img/background.svg');
+    background-repeat: repeat;
+  }
+
+
+.school-key_figures {
+    $height: 50px;
+    margin-top: $base-padding;
+
+    $list:  rural, town, suburban, city,
+            small, medium, large,
+            public, private, profit;
+
+    @each $icon in $list {
+      .icon-#{$icon} {
+        background: url(/img/school-icons/#{$icon}.png) no-repeat;
+        background: url(/img/school-icons/#{$icon}.svg) no-repeat,
+          linear-gradient(transparent, transparent);
+        background-position: top center;
+        background-size: 50px $height;
+      }
+    }
+
+    li {
+     
+      display: inline-block;
+      font-weight: 600;
+      line-height: 1.1;
+      min-height: $height;
+      padding-top: ($height + 5px);
+      text-align: center;
+      vertical-align: top;
+      width: 70px;
+      margin-right: 5px;
+
+
+      .school-key_figures-year {
+       
+        display: block;
+        font-weight: $weight-bold;
+        margin-top: -$height;
+
+        &:empty {
+          margin-top: -20px;
+        }
+      }
+
+      &.certificate {
+        margin-right: 20px;
+
+
+        .school-key_figures-year {
+          margin-top: -50px;
+
+          &:before {
+            font-family: "fontawesome";
+            content: '\f0a3';
+            margin-left: 15px;
+          }
+        }
+      }
+    }
+  }

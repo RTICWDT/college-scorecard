@@ -2,11 +2,25 @@
 @import '_variables.scss';
 // Vuetify
 // @import '~@mdi/font/css/materialdesignicons.css';
-@import '~vuetify/dist/vuetify.min';
+// @import '~vuetify/dist/vuetify.min';
+//@import '~vuetify/src/styles/styles.sass';
+
+@import 'components/_header.scss';
+@import 'components/_footer.scss';
 
 // Pages
 @import 'pages/_search.scss';
+@import 'pages/_school.scss';
 
-body{
-  background-color: black;
+h1, h2, h3, h4, h5, h6{
+  font-family: $header-font-family;
+}
+
+
+body, p{
+  font-family: $base-font-family;
+}
+
+.sr-only{
+  display:none;
 }

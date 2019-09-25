@@ -149,7 +149,7 @@
 </template>
 
 <script>
-import Tooltip from "./components/vue/Tooltip.vue";
+import Tooltip from "components/vue/Tooltip.vue";
 export default {
   props: ["baseUrl"],
   components: {

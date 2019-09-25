@@ -2860,7 +2860,7 @@ if (typeof document !== 'undefined') {
    * initialize materialize
    */
   picc.ready(function() {
-    M.AutoInit();
+    if(window.M) M.AutoInit();
   })
 
   // namespace sankey

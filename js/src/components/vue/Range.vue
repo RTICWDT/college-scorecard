@@ -9,7 +9,94 @@
     </div>
 </template>
 
+<style lang="scss">
+@import "sass/_variables.scss";
+.range-chart {
+    $label-height: 1em;
+    $label-offset: 1em;
+    $label-margin: $label-offset + $label-height;
+    $label-width: 5em;
+  
+    background-color: $light-gray;
+    display: block;
+    height: 8px;
+    margin-bottom: $label-margin + 1em;
+    margin-top: $label-margin;
+    max-width: 500px;
+    position: relative;
+  
+    .picc-range-bar {
+      background-color: $emerald-green;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: left .5s, right .5s;
+    }
+  
+    .picc-range-label {
+      height: 16px;
+      position: absolute;
+      top: 0;
+      transition: left .5s;
+  
+      span {
+        font-weight: 200;
+        position: absolute;
+        top: $label-height;
+        width: $label-width;
+      }
+  
+      &.picc-range-label-min,
+      &.picc-range-label-max,
+      &.picc-range-label-middle {
+        color: $dark-gray;
+      }
+  
+      &.picc-range-label-max,
+      &.picc-range-label-lower {
+        span {
+          right: 0;
+          text-align: right;
+        }
+      }
+  
+      &.picc-range-label-middle,
+      &.picc-range-label-lower,
+      &.picc-range-label-upper {
+        border-left: 1px solid black;
+      }
+  
+      &.picc-range-label-upper {
+        border-left: none;
+        border-right: 1px solid black;
+      }
+  
+      &.picc-range-label-min,
+      &.picc-range-label-max,
+      &.picc-range-label-middle {
+        bottom: -.5em;
+        top: auto;
+  
+        span {
+          bottom: 100%;
+          top: auto;
+        }
+      }
+  
+      &.picc-range-label-middle {
+        span {
+          margin-left: -($label-width / 2);
+          text-align: center;
+        }
+      }
+    }
+  
+  }
+  
 
+</style>
 
 <script>
 export default {

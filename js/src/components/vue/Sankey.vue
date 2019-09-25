@@ -2,18 +2,18 @@
   <div>
     <div>
       <p class="outcomes_intro">Show data for students who</p>
-      <v-btn-toggle v-model="enroll" @change="drawSankeyChart" mandatory>
-        <v-btn text value="enroll_first_time">started college here</v-btn>
-        <v-btn text value="enroll_not_first_time">transferred in</v-btn>
-        <v-btn text value="enroll_both">both</v-btn>
+      <v-btn-toggle v-model="enroll" @change="drawSankeyChart" mandatory color="secondary">
+        <v-btn small text value="enroll_first_time">started college here</v-btn>
+        <v-btn small text value="enroll_not_first_time">transferred in</v-btn>
+        <v-btn small text value="enroll_both">both</v-btn>
       </v-btn-toggle>
     </div>
     <div>
       <p class="outcomes_intro">and started their studies</p>
-      <v-btn-toggle v-model="study" @change="drawSankeyChart" mandatory>
-        <v-btn text value="study_full_time">full-time</v-btn>
-        <v-btn text value="study_part_time">part-time</v-btn>
-        <v-btn text value="study_both">both</v-btn>
+      <v-btn-toggle v-model="study" @change="drawSankeyChart" mandatory color="secondary">
+        <v-btn small text value="study_full_time">full-time</v-btn>
+        <v-btn small text value="study_part_time">part-time</v-btn>
+        <v-btn small text value="study_both">both</v-btn>
       </v-btn-toggle>.
     </div>
 
@@ -27,6 +27,74 @@
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+@import "sass/_variables.scss";
+#graduation-content{
+  .school-two_col-left, 
+  .school-two_col-right{
+    padding-bottom: $base-padding-large;
+  }
+}
+.school-outcome-measures{
+  padding-top: $base-padding;
+  clear: both;
+  border-top: 1px solid $mid-gray;
+
+  .outcomes_intro{
+    padding-bottom: 0.7em !important;
+    padding-left: 2px;
+    display:inline-block;
+  }
+
+  .figure-heading{
+    max-width: 250px;
+    margin: $base-padding auto;
+  }  
+}
+
+  
+
+.om_visualization{
+  display: flex;
+  clear:both;
+  .om_group{
+    width: 32%;
+    text-align: center;
+    padding-top: 100px;
+    padding-right: $base-padding;
+  }
+  .om_sankey{
+    width: 68%;
+    height: 300px;
+    margin-top: $base-padding;
+    text[text-anchor="end"]{
+      display:none;
+    }
+    path[fill="#ffffff"]{
+      display:none;
+    }
+    rect[fill="#ffffff"]{
+      display:none;
+    }
+    &.na{
+      border: 1px solid $light-gray;
+      text-align: center;
+      padding-top: 100px;
+      color: $dark-gray;
+      border-radius: 2px;
+      width: 100%;
+    }
+  }
+  .google-visualization-tooltip{
+    display:none;
+  }
+}
+
+
+
+</style>
+
 
 <script>
 export default {

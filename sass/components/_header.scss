@@ -1,0 +1,42 @@
+header {
+    z-index: 10;
+    background-color: $dark-blue;
+    color: $white;
+  
+  
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  
+    .logo{
+      display:inline-block;
+      padding: 20px;
+      vertical-align: middle;
+      margin-top: -30px;
+      img{
+        width: 90px;
+      }
+    }
+    .headerText{
+      display:inline-block;
+      line-height: 200%;
+      margin-top: 10px;
+    }
+  
+    .edLine{
+      display:block;
+      font-size: 1.12rem;
+      padding-top: 15px;
+      font-family: $header-font-family;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #8B93A3;
+    }
+    .siteTitle{
+      display:block;
+      font-size: 2.24rem;
+      font-family: $header-font-family;
+    }
+  
+  }

@@ -1,0 +1,104 @@
+<head>
+
+  <!-- Basic Page Needs
+  ================================================== -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google-site-verification" content="joZQgj-M8GQ05V29ojfVsbsNk44SRgGqJfws9tBcnPU">
+
+  <!-- Mobile Specific Metas
+  ================================================== -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Twitter and OpenGraph data
+  ================================================== -->
+  <!-- type -->
+  <meta property="og:type" content="website">
+
+  <!-- title -->
+  {% if page.title %}
+  <title>{{ page.title }}</title>
+  <meta property="og:title" content="{{ page.title | xml_escape }}">
+  <meta name="twitter:title" content="{{ page.title | xml_escape }}">
+  {% else %}
+  <title>{{ site.title }}</title>
+  <meta property="og:title" content="{{ site.title | xml_escape }}">
+  <meta name="twitter:title" content="{{ site.title | xml_escape }}">
+  {% endif %}
+
+  {% if site.branch and site.branch != 'master' %}
+  {% capture canonical_base_url %}https://federalist-proxy.app.cloud.gov/preview/rticwdt/college-scorecard/{{ site.branch }}{% endcapture %}
+  {% else %}
+  {% assign canonical_base_url = site.url %}
+  {% endif %}
+  <!-- canonical_base_url: {{ canonical_base_url }} -->
+
+  <!-- img -->
+  <meta property="og:image" content="{{ canonical_base_url }}/img/hero-small.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ canonical_base_url }}/img/hero-small.jpg">
+
+  <!-- description -->
+  <meta name="description" content="{{ site.description }}">
+  <meta property="og:description" content="{{ site.description }}">
+  <meta name="twitter:description" content="{{ site.description }}">
+
+  <!-- Favicons
+  ================================================== -->
+  <link rel="icon" type="image/x-icon" href="{{ site.baseurl }}/img/favicon.ico">
+  <link rel="icon" type="image/png" href="{{ site.baseurl }}/img/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="{{ site.baseurl }}/img/favicon-32x32.png" sizes="32x32">
+
+  <!-- Styles
+  ================================================== -->
+  {% for sheet in site.vue.stylesheets %}
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/{{ sheet }}">
+  {% endfor %}
+
+  {% if page.stylesheets %}<!-- page-specific styles -->
+  {% for sheet in page.stylesheets %}
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/{{ sheet }}">
+  {% endfor %}{% endif %}
+
+  <!-- Scripts
+  ================================================== -->
+  
+  <!-- add google charts -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  {% for script in site.vue.scripts %}
+  <script src="{{ site.baseurl }}/js/{{ script }}"></script>
+  {% endfor %}
+
+  <!-- JavaScript configuration with site variables -->
+  {% include vue_js-config.html %}
+
+  {% if page.scripts %}<!-- page scripts -->
+  {% for script in page.scripts %}
+  <script src="{{ site.baseurl }}/js/{{ script }}"></script>
+  {% endfor %}{% endif %}
+
+  {% for script in page.body_scripts %}
+  <script src="{{ site.baseurl }}/js/{{ script }}" data-src="{{ script }}"></script>
+  {% endfor %}
+
+  {% if site.analytics %}
+  <script src="{{ site.baseurl }}/js/picc-analytics.js"></script>
+  <script src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js" id="_fed_an_ua_tag"></script>
+  {% endif %}
+
+
+  {% if site.branch %}{% comment %} Begin crazyegg {% endcomment %}
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+      var b=document.getElementsByTagName("script")[0];
+      a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0009/9201.js?"+Math.floor(new Date().getTime()/3600000);
+      a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  {% comment %} End crazyegg {% endcomment %}{% endif site.branch %}
+
+
+
+</head>

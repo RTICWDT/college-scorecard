@@ -29,6 +29,11 @@ scripts:
 stylesheets:
   - styles.css
 
+vue:
+  scripts:
+    - picc.js
+    - app.js
+    
 
 # whether to include the Google Analytics & DAP snippets
 analytics: true

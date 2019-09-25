@@ -53,7 +53,6 @@ export default {
           datalabels: {
             display: false,
             formatter: function(value, context) {
-              console.log(context);
               if (context.datasetIndex == 0 && value > 5) {
                 return value + "%";
               } else return null;

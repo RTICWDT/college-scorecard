@@ -3,9 +3,12 @@ import vuetify from './plugins/vuetify'
 import _ from 'lodash'
 import vueNumeralFilterInstaller from 'vue-numeral-filter';
 
-import SchoolPage from './SchoolPage.vue';
-import SchoolProgramsPage from './SchoolProgramsPage.vue';
+import SchoolPage from '../../school/index.vue';
+import SchoolProgramsPage from '../../school/fields.vue';
 import SearchPage from './SearchPage.vue';
+import DataIndexPage from '../../data/index.vue';
+import DataChangelogPage from '../../data/changelog.vue';
+import DataDocumentationPage from '../../data/documentation.vue';
 
 import './vue/filters.js'
 import './plugins/chartjs.js';
@@ -33,7 +36,10 @@ new Vue({
   components:{
     'school-page': SchoolPage,
     'school-programs-page': SchoolProgramsPage,
-    'search-page': SearchPage
+    'search-page': SearchPage,
+    'data-index-page': DataIndexPage,
+    'data-changelog': DataChangelogPage,
+    'data-documentation': DataDocumentationPage
   },
   created(){
     this.refreshCompareSchools();
