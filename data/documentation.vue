@@ -1,24 +1,10 @@
 <template>
   <v-app>
-    <div class="data-home-convo">
-      <section class="container section">
-        <aside class="data-home-intro-convo-right">
-          <p>
-            <strong>Join the Conversation:</strong>
-            <a
-              href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
-              target="_blank"
-            >
-              <i class="fa fa-stack-exchange"></i>StackExchange
-            </a>
-          </p>
-        </aside>
-      </section>
-    </div>
+    <data-navigation current="/data/documentation/" />
     <v-container>
       <v-row>
-        <v-col cols="12" md="8">
-          <h1>Data Documentation</h1>
+        <v-col cols="12" md="7">
+          <h1 class='display-1 pb-2'>Data Documentation</h1>
 
           <p>This page provides more details about the robust data set behind the College Scorecard efforts. You can get information on accessing and understanding the API; download the entire dataset spanning nearly 20 years of data and covering multiple sources including IPEDS, NSLDS, and Department of Treasury; or download smaller data sets, including the data provided on the College Scorecard.</p>
 
@@ -46,13 +32,13 @@
             >2015 Technical Paper</a> offers an in-depth exploration of the data and methodologies considered and used for this project.
           </p>
 
-          <h2>Accuracy and Privacy</h2>
+          <h2 class='title'>Accuracy and Privacy</h2>
 
           <p>Note that for many elements, we have taken additional steps to ensure data are stable from year to year and representative of a certain number of students. For most elements, data are pooled across years to reduce year-over-year variability in figures (i.e. repayment rate, completion rate, earnings). Moreover, for elements that we expect to publish for consumer use, a separate version of the element is available that suppresses the data for schools with fewer than 30 students in the denominator. All National Student Loan Data System (NSLDS) and Treasury elements are protected for privacy purposes; any data not reported in order to protect an individual’s privacy are shown as PrivacySuppressed.</p>
 
           <p>Additionally, many elements are available only for Title IV recipients, or students who receive federal grants and loans. While these data are reported at the individual level to NSLDS and used to distribute federal aid, they are published only at the aggregate institutional level. While some schools report these data at the campus level (8-digit OPE ID), we have rolled those up to the institution level (6-digit OPE ID).</p>
 
-          <h2>Categories of Data</h2>
+          <h2 class="title">Categories of Data</h2>
 
           <p>
             The data available from this website covers a wide range of topics. An overview of the available categories of data is below. For detailed information on each category and its individual fields, see the full
@@ -214,10 +200,16 @@
                 </ul>
               </v-expansion-panel-content>
             </v-expansion-panel>
+            <v-expansion-panel>
+              <v-expansion-panel-header>Program</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <p><em>Content Needed</em></p>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
           </v-expansion-panels>
         </v-col>
-        <v-col cols="12" md="4">
-          <h2>API Documentation</h2>
+        <v-col cols="12" md="4" offset-md="1">
+          <h2 class='display-1 mb-2'>API Documentation</h2>
 
           <p>
             The College Scorecard API is a GET API that lives at
@@ -232,7 +224,7 @@
             <a href="https://api.data.gov/signup" target="_blank">https://api.data.gov/signup</a>.
           </p>
 
-          <h3>Structure</h3>
+          <h3 class='title'>Structure</h3>
 
           <!--<p>The basic structure of an API call is <span>year.dev-category.dev-friendly-variable-name</span>,-->
           <!--except that the <span>school</span> category has no year and <span>id</span>, <span>ope6_id</span>,-->
@@ -263,13 +255,13 @@
 
           <p>All variables are listed in the Data Dictionary.</p>
 
-          <div class="u-align_c">
-            <a
+          <p ><v-btn
               data-download
+              rounded
+              color="secondary"
               :href="baseUrl+'/assets/'+dataDictionary"
               class="button data-home-button"
-            >Download the Data Dictionary</a>
-          </div>
+            >Download the Data Dictionary</v-btn></p>
 
           <p class="data-docs">
             For guidance on querying the API and extracting results, see the
@@ -279,40 +271,43 @@
             >HTTP API documentation</a>.
           </p>
 
-          <h3>Sample API Calls</h3>
+          <h3 class='title'>Sample API Calls</h3>
 
-          <h4>All Data for Boston College</h4>
+          <h4 class='overline mt-4'>All Data for Boston College</h4>
 
           <ul>
             <li>
               <a
+                target="_blank"
                 href="https://api.data.gov/ed/collegescorecard/v1/schools?school.name=boston%20college"
               >api.data.gov/ed/collegescorecard/v1/schools?school.name=boston%20college</a>
             </li>
             <li>
               <a
+                target="_blank"
                 href="https://api.data.gov/ed/collegescorecard/v1/schools?id=164924"
               >api.data.gov/ed/collegescorecard/v1/schools?id=164924</a>
             </li>
           </ul>
 
-          <h4>Completion By Race/Ethnicity</h4>
+          <h4 class='overline mt-4'>Completion By Race/Ethnicity</h4>
 
           <ul>
             <li>
               <a
+                target="_blank"
                 href="https://api.data.gov/ed/collegescorecard/v1/schools?fields=school.name,id,latest.student.demographics.race_ethnicity.white,latest.student.demographics.race_ethnicity.black,latest.student.demographics.race_ethnicity.hispanic,latest.student.demographics.race_ethnicity.asian,latest.student.demographics.race_ethnicity.aian,latest.student.demographics.race_ethnicity.nhpi,latest.student.demographics.race_ethnicity.two_or_more,latest.student.demographics.race_ethnicity.non_resident_alien,latest.student.demographics.race_ethnicity.unknown,latest.student.demographics.race_ethnicity.white_non_hispanic,latest.student.demographics.race_ethnicity.black_non_hispanic,latest.student.demographics.race_ethnicity.asian_pacific_islander&sort=latest.completion.rate_suppressed.overall:desc"
-              >api.data.gov/ed/collegescorecard/v1/schools?fields=school.name,id,latest.student.demographics.race_ethnicity.white,latest.student.demographics.race_ethnicity.black,latest.student.demographics.race_ethnicity.hispanic,latest.student.demographics.race_ethnicity.asian,latest.student.demographics.race_ethnicity.aian,latest.student.demographics.race_ethnicity.nhpi,latest.student.demographics.race_ethnicity.two_or_more,latest.student.demographics.race_ethnicity.non_resident_alien,latest.student.demographics.race_ethnicity.unknown,latest.student.demographics.race_ethnicity.white_non_hispanic,latest.student.demographics.race_ethnicity.black_non_hispanic,latest.student.demographics.race_ethnicity.asian_pacific_islander&sort=latest.completion.rate_suppressed.overall:desc</a>
+              >api.data.gov/ed/collegescorecard/v1/schools?fields=school.name,id,&#8203;latest.student.demographics.race_ethnicity.white,&#8203;latest.student.demographics.race_ethnicity.black,&#8203;latest.student.demographics.race_ethnicity.hispanic,&#8203;latest.student.demographics.race_ethnicity.asian,&#8203;latest.student.demographics.race_ethnicity.aian,&#8203;latest.student.demographics.race_ethnicity.nhpi,&#8203;latest.student.demographics.race_ethnicity.two_or_more,&#8203;latest.student.demographics.race_ethnicity.non_resident_alien,&#8203;latest.student.demographics.race_ethnicity.unknown,&#8203;latest.student.demographics.race_ethnicity.white_non_hispanic,&#8203;latest.student.demographics.race_ethnicity.black_non_hispanic,&#8203;latest.student.demographics.race_ethnicity.asian_pacific_islander&#8203;&sort=latest.completion.rate_suppressed.overall:desc</a>
             </li>
           </ul>
 
-          <h4>Debt, Earnings, and Repayment</h4>
+          <h4 class='overline mt-4'>Debt, Earnings, and Repayment</h4>
 
           <ul>
             <li>
               <a
                 href="https://api.data.gov/ed/collegescorecard/v1/schools?fields=school.name,id,latest.aid.median_debt.completers.overall,latest.repayment.1_yr_repayment.completers,latest.earnings.10_yrs_after_entry.working_not_enrolled.mean_earnings&page=100"
-              >api.data.gov/ed/collegescorecard/v1/schools?fields=school.name,id,latest.aid.median_debt.completers.overall,latest.repayment.1_yr_repayment.completers,latest.earnings.10_yrs_after_entry.working_not_enrolled.mean_earnings&page=100</a>
+              >api.data.gov/ed/collegescorecard/v1/schools?fields=school.name,id,&#8203;latest.aid.median_debt.completers.overall,&#8203;latest.repayment.1_yr_repayment.completers,&#8203;latest.earnings.10_yrs_after_entry.working_not_enrolled.mean_earnings&#8203;&page=100</a>
             </li>
           </ul>
         </v-col>
@@ -322,7 +317,11 @@
 </template>
 
 <script>
+import DataNavigation from 'components/vue/DataNavigation.vue';
 export default {
+  components:{
+    'data-navigation': DataNavigation
+  },
   props: ["baseUrl", "dataBase_url", "dataDictionary"]
 };
 </script>

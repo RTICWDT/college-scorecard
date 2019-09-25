@@ -1,25 +1,10 @@
 <template>
   <v-app>
-    <div class="data-home-convo">
-      <section class="container section">
-        <aside class="data-home-intro-convo-right">
-          <p>
-            <strong>Join the Conversation:</strong>
-            <a
-              href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
-              target="_blank"
-            >
-              <i class="fa fa-stack-exchange"></i>StackExchange
-            </a>
-          </p>
-        </aside>
-      </section>
-    </div>
-
+    <data-navigation current="/data/changelog/" />
     <v-container>
       <v-row>
-        <v-col cols="12" md="8">
-          <h1>Change Log</h1>
+        <v-col cols="12" md="7">
+          <h1 class="display-1 mb-2">Change Log</h1>
 
           <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
           <v-expansion-panels>
@@ -27,7 +12,7 @@
               <v-expansion-panel-header>August 26, 2019</v-expansion-panel-header>
               <v-expansion-panel-content>
                 <p>On August 26, 2019, the Department updated five data elements that appear on the consumer website and/or the downloadable data files/API with more recent data values:</p>
-                <ul>
+                <ul class="my-3">
                   <li>Currently Operating Status Flag</li>
                   <li>Heightened Cash Monitoring Flag</li>
                   <li>Accrediting Agency Name</li>
@@ -35,13 +20,13 @@
                   <li>Title IV Approval Date</li>
                 </ul>
                 <p>In addition to updating existing metrics, key changes include:</p>
-                <ul>
+                <ul class="my-3">
                   <li>Some institutions that do not participate in Title IV student aid programs were added to the API and downloadable data file for 2017-18. These institutions are identifiable using the Title IV eligibility status flag included in the API and data file.</li>
                   <li>For the small subset of institutions with non-title IV branches, the overall admissions rate and the number of branches metrics in the 2017-18 data changed due to the addition of non-Title IV institutions to the API/data file.</li>
                   <li>Although historical data for Title IV deferment-only institutions and non-Title IV institutions are not yet available via the Scorecard API/data files, those data were taken into consideration in calculating pooled metrics included on the 2017-18 data file. As a result, a small number of institution’s pooled metric values changed compared to the May 21, 2019 data release.</li>
                   <li>
                     Minor corrections to prior released values were needed in the 2016-17 and 2017-18 data files
-                    <ul>
+                    <ul class="my-3">
                       <li>Tuition, fees, books, and supplies metrics for the largest program at perfect child institutions were corrected in the 2016-17 and 2017-18 data files.</li>
                       <li>Outcome measure aggregation metrics (*_ALL, *_FIRSTTIME, *_NOTFIRSTTIME, *_FULLTIME, *_PARTTIME) were corrected in the 2016-17 data file.</li>
                       <li>None of these corrections had an impact on the Scorecard website profiles.</li>
@@ -57,13 +42,13 @@
               <v-expansion-panel-content>
                 <p>On May 21, 2019, the Department updated the College Scorecard website with the first installment of its annual refresh that includes newer, updated data for metrics derived from IPEDS and FSA data sources, such as cohort default rates. Changes to both the data files/API and the Scorecard website were made. Future installments of the 2019 refresh will include metrics derived from the National Student Loan Data System (NSLDS) and data from the Department of the Treasury on earnings after attending college.</p>
                 <p>In addition to updating existing metrics, key data changes include:</p>
-                <ul>
+                <ul class="my-3">
                   <li>Institutions with limited Title IV participation (deferment-only institutions) were added to the API and downloadable data file for 2017_18. In addition, a variable indicating the Title IV eligibility status was added to identify these institutions.</li>
                   <li>Additional pooled, suppressed metrics derived from the IPEDS Outcome Measures component (percentages of students who completed an award at the institution, who were still enrolled at the institution, who transferred to another institution, and whose status was unknown) were added to the API and downloadable data files. These new metrics are aggregations of data already available in Scorecard, correspond to cohorts of all entering students, all full-time entering students, all part-time entering students, all first-time entering students, and all non-first-time entering students.</li>
                   <li>Information about the six largest programs of study at institutions following a program-based or continuous enrollment calendar system were added to the API and downloadable data files. These data identify the programs via CIP code and corresponding test description, indicate how long it typically takes (in months) to complete the full program, and provide program costs (tuition, fees, books, and other supplies).</li>
                 </ul>
                 <p>In addition to incorporating the refreshed data, key consumer tool website changes include:</p>
-                <ul>
+                <ul class="my-3">
                   <li>Expanding the universe of institutions to include 1) non-degree granting institutions and 2) institutions with limited Title IV participation (deferment-only institutions).</li>
                   <li>A table that details the cost and length of the largest programs offered for institutions following a program-based or continuous enrollment calendar display.</li>
                   <li>The Graduation & Retention section of the school profile now includes 8-year outcome measure data.</li>
@@ -76,7 +61,7 @@
               <v-expansion-panel-header>October 30, 2018</v-expansion-panel-header>
               <v-expansion-panel-content>
                 <p>On October 30, 2018, the Department updated the College Scorecard website with the third installment of its annual refresh that includes newer, updated data for metrics derived from the NSLDS. In addition to the updated NSLDS metrics, key changes include:</p>
-                <ul>
+                <ul class="my-3">
                   <li>Pooled, suppressed versions of metrics derived from the IPEDS Outcome Measures component (percentages of students who completed an award at the institution, who were still enrolled at the institution, who transferred to another institution, and whose status was unknown) were added to the API and downloadable data files.</li>
                   <li>Pooled, suppressed versions of the retention and transfer rates were updated to reflect 2016-17, 2015-16, 2014-15, and 2013-14 data.</li>
                 </ul>
@@ -90,10 +75,10 @@
                   On September 28, 2018, the Department updated the College Scorecard website with the second installment of its annual refresh that includes newer, updated data for metrics from Treasury Department data sources. NSLDS data have not yet been updated
                   <sup>1</sup>, but all other data have been refreshed in 2018. In addition to the updated Treasury-derived metrics, key changes include:
                 </p>
-                <ul>
+                <ul class="my-3">
                   <li>
                     Some Scorecard data elements previously available in the Scorecard data files, but not loaded into the API have now been loaded into the API. These metrics are:
-                    <ul>
+                    <ul class="my-3">
                       <li>IPEDS 200% completion rates for 4 and less-than-4-year institutions</li>
                       <li>Pooled, suppressed versions of the 200% IPEDS completions rates for 4-year and less-than-4-year institutions</li>
                     </ul>
@@ -101,7 +86,7 @@
                   <li>A new variable for threshold earnings describing the proportion of former students earning above $28,000 (prior calculations of threshold earnings used a $25,000 threshold).</li>
                   <li>
                     The following user interface changes to the College Scorecard consumer website were included with this update:
-                    <ul>
+                    <ul class="my-3">
                       <li>
                         Removal of Percentage Earning above High School Graduate given caveats described in the
                         <a
@@ -129,13 +114,13 @@
                   In early September 2018, the Department updated the College Scorecard website with the first installment of its annual refresh that includes newer, updated data for many elements. Data elements coming from the NSLDS and the Treasury Department have not yet been updated
                   <sup>1</sup>, but all other data have been refreshed (e.g, IPEDS-based metrics). Key changes include:
                 </p>
-                <ul>
+                <ul class="my-3">
                   <li>In addition to accessing data by year in the API, developers can now reference a top-level “latest” object that will contain the most recent data available for a particular institution.</li>
                   <li>Updates to IPEDS data due to revisions by institutions have been applied to the 2015-16 Scorecard data files (2014-15 and prior Scorecard files released in September 2017 already used final IPEDS data)</li>
                   <li>Metrics in the 2015-16 Scorecard data file based on the Outcome Measures (OM) component of IPEDS have been updated to use the 2015-16 OM component files instead of the 2016-17 OM data. 2016-17 data was previously included in the 2015-16 Scorecard data as a proxy due initial availability issues for the 2015-16 OM data file.</li>
                   <li>
                     Some Scorecard data elements are available in the September 2018 data release that were not previously made available in Scorecard data files and API:
-                    <ul>
+                    <ul class="my-3">
                       <li>Pooled, suppressed versions of the 100% IPEDS completions rates for 4-year and less-than-4-year institutions</li>
                       <li>IPEDS 150% completions rates for 4-year and less-than-4-year institutions by Pell Grant and Subsidized Direct Loan recipient status (received a Pell Grant, received a Subsidized Direct Loan but not a Pell Grant, and received neither a Pell Grant nor a Subsidized Direct Loan)</li>
                     </ul>
@@ -155,7 +140,7 @@
                   In March 2018, the Department updated five data elements that appear on the consumer website and/or
                   the downloadable data files/API with more recent data values:
                 </p>
-                <ul>
+                <ul class="my-3">
                   <li>Currently Operating Status Flag</li>
                   <li>Heightened Cash Monitoring Flag</li>
                   <li>Accrediting Agency Name</li>
@@ -168,7 +153,7 @@
                   new rates were suppressed for cohort sizes less than 30 students.
                 </p>
                 <p>In addition, the Department updated the consumer website with the following changes:</p>
-                <ul>
+                <ul class="my-3">
                   <li>The share feature has been enhanced to include social media options in addition to e-mail.</li>
                   <li>On the institution comparison page, the "By Family Income Category" and "Race/Ethnicity" charts are now grouped by school type: 4-year, 2-year, or certificate.</li>
                   <li>Some data elements on the institution profile are derived from information from all main and branch campus locations. These metrics are now identified in the tooltip descriptions on the institution profile and comparison pages.</li>
@@ -186,7 +171,7 @@
                   In December 2017, the Department updated five data elements that appear on the consumer website
                   and/or the downloadable data files/API with more recent data values:
                 </p>
-                <ul>
+                <ul class="my-3">
                   <li>Currently Operating Status Flag</li>
                   <li>Heightened Cash Monitoring Flag</li>
                   <li>Accrediting Agency Name</li>
@@ -212,7 +197,7 @@
                   virtually all elements. In addition, the Department made some changes to how data are presented on
                   the consumer website. Key changes include:
                 </p>
-                <ul>
+                <ul class="my-3">
                   <li>
                     School Comparison feature. The consumer website has been updated with a new page for
                     comparing user-selected schools. Users of the website can select schools by clicking on the
@@ -237,7 +222,7 @@
                   were calculated for a small subset of variables. In some cases, the Department recalculated
                   data values and replaced previously published data values. Key changes include:
                 </p>
-                <ul>
+                <ul class="my-3">
                   <li>
                     The method of calculating the Predominant Award and Highest Award classifications has been changed
                     to count institutions that award only graduate certificates as graduate institutions rather than
@@ -271,7 +256,7 @@
                   <li>
                     Some Scorecard data elements are available in the September 2017 data release that were
                     not previously made available in Scorecard data files and API:
-                    <ul>
+                    <ul class="my-3">
                       <li>Open admissions policy indicator</li>
                       <li>
                         Denominator of the percentage of undergraduates that were awarded a Pell grant or
@@ -297,13 +282,13 @@
               <v-expansion-panel-header>January 2017</v-expansion-panel-header>
               <v-expansion-panel-content>
                 <p>In January 2017, the Department updated three data elements that appear on the consumer website and/or the downloadable data files/API with more recent data values:</p>
-                <ul>
+                <ul class="my-3">
                   <li>Currently Operating Status Flag</li>
                   <li>Heightened Cash Monitoring 2 Flag</li>
                   <li>Accrediting Agency</li>
                 </ul>
                 <p>The Department also made corrections to three elements, improving data quality:</p>
-                <ul>
+                <ul class="my-3">
                   <li>The OPEID of two institutions now correctly identifies the institution as the main campus (as opposed to a branch campus)</li>
                   <li>The flag indicating that an institution is a main campus was removed for five institutions across eight years of data, correctly identifying them as branch campuses</li>
                   <li>Repayment rates were recalculated for all institutions across all years of data.</li>
@@ -319,21 +304,21 @@
                 <p>
                   <strong>Consumer Website:</strong> In September 2016, the U.S. Department of Education (the Department) updated the College Scorecard consumer website with an annual refresh that includes newer, updated data for virtually all elements. Please note that the Department made a minor change to the methodology for calculating the median debt presented on the website. See the description for median loan debt below for more details. In addition, the Department made some changes to how data are presented on the consumer website. Key changes include:
                 </p>
-                <ul>
+                <ul class="my-3">
                   <li>Presenting completion rates as graduating within 150% of time for all institutions regardless of institutional characteristics. In contrast, the previous consumer website version presented completion rates of either 150% or 200% depending on whether the institution was a four-year institution or a two-year institution, respectively.</li>
                   <li>Identifying minority-serving institutions (MSIs) in the specialized mission category based on the institution’s eligibility to apply for Department MSI grants. In contrast, the previous consumer website version presented only recent grant recipients as MSIs.</li>
                 </ul>
                 <p>
                   <strong>Downloadable Data Files and API:</strong> In addition to providing newer, updated data in the College Scorecard downloadable data files and API, the Department made minor changes in the methodology of how data values were calculated. In some cases, the Department recalculated data values and replaced previously published data values. Key changes include:
                 </p>
-                <ul>
+                <ul class="my-3">
                   <li>
                     NSLDS derived data elements:
-                    <ul>
+                    <ul class="my-3">
                       <li>To improve data quality and to better protect individual privacy, many NSLDS-derived data elements, including those describing earning cohorts, have been subject to statistical imputation and minor data improvement recalculations. Many NSLDS-generated data values previously published in the previous data files have been replaced with recalculated data values.</li>
                       <li>
                         In addition, the Department recalculated and replaced earnings cohort data previously calculated by the Treasury Department. These recalculated data elements include:
-                        <ul>
+                        <ul class="my-3">
                           <li>
                             The share of female students (FEMALE), students over 23 at entry (AGEGE24), married students (MARRIED), dependent students (DEPENDENT), veteran students (VETERAN); and first-generation students (FIRST_GEN
                             <sup>1</sup>).
@@ -348,11 +333,11 @@
                   </li>
                   <li>
                     MSIs:
-                    <ul>
+                    <ul class="my-3">
                       <li>
                         In the previous version of Scorecard, MSIs were designated as recent MSI grantees. In contrast, MSI indicators in the September 2016 data release (except HBCU) replace the earlier measures and instead are derived from the Eligibility Matrix
                         <sup>3</sup> constructed by the Department. The Matrix classifies eligibility on 19 distinct grant programs. The below bullets indicate the correspondence between the Scorecard indicators and the columns of the Matrix:
-                        <ul>
+                        <ul class="my-3">
                           <li>AANAPII: AANAPISI Elig or AANAPISI-F Elig</li>
                           <li>ANNHI: ANNH Elig or ANNH-F Elig</li>
                           <li>HSI: HSI Elig or HSI Stem Elig</li>
@@ -365,7 +350,7 @@
                   </li>
                   <li>
                     Median Loan Debt:
-                    <ul>
+                    <ul class="my-3">
                       <li>
                         In the previous version of Scorecard, the median undergraduate loan debt (DEBT_MDN) was calculated for those who separated (i.e., either graduated or withdrew) in a given fiscal year , measured at the time of calculation (October 2014). These values were recalculated and replaced, by calculating median debt for those who separate in a given fiscal year, measured at the time of separation.
                         <sup>4</sup>
@@ -374,16 +359,16 @@
                   </li>
                   <li>
                     Carnegie Classification:
-                    <ul>
+                    <ul class="my-3">
                       <li>Carnegie Classification data are now based on the 2015 Carnegie Classification scheme. Previously published data from the previous version of Scorecard (using the previous Carnegie Classification scheme) are no longer available in the data files.</li>
                     </ul>
                   </li>
                   <li>
                     New Data Elements:
-                    <ul>
+                    <ul class="my-3">
                       <li>
                         Scorecard data elements available in the September 2016 data release that were not previously made available in Scorecard data files and API:
-                        <ul>
+                        <ul class="my-3">
                           <li>Institution name aliases</li>
                           <li>Level of institution</li>
                           <li>Total share of enrollment of undergraduate degree-seeking students who are men</li>
@@ -404,7 +389,7 @@
                   </li>
                   <li>
                     Data Elements No Longer Available:
-                    <ul>
+                    <ul class="my-3">
                       <li>
                         Several Treasury Department-produced data elements describing earnings cohorts are no longer available (assigned NULL values). These include age of entry squared (AGE_ENTRY_SQ), log of family income (LNFAMINC) log of family income (LNFAMINC_IND), and the share of students who submitted FAFSAs to only one institution or multiple institutions
                         <sup>5</sup> (FSEND_* for 1-5).
@@ -442,7 +427,7 @@
               <v-expansion-panel-header>March 2016</v-expansion-panel-header>
               <v-expansion-panel-content>
                 <p>In March 2016, the Department updated two data elements with more recent data values that appear on both the consumer website and downloadable data files/API:</p>
-                <ul>
+                <ul class="my-3">
                   <li>Currently Operating Status Flag</li>
                   <li>Heighten Cash Monitoring Flag</li>
                 </ul>
@@ -457,10 +442,13 @@
             </v-expansion-panel>
           </v-expansion-panels>
         </v-col>
-        <v-col cols="12" md="4">
+        <v-col cols="12" md="4" offset-md="1">
+          <h1 class="display-1 pb-2">Scorecard Data</h1>
           <p>
             For more information about the College Scorecard data, click here to see our
-            <a :href="baseUrl+'/data/documentation/'">data documentation</a>. You can also learn more about the data through our full
+            <a
+              :href="baseUrl+'/data/documentation/'"
+            >data documentation</a>. You can also learn more about the data through our full
             <a
               data-download
               :href="baseUrl+'/assets/FullDataDocumentation.pdf'"
@@ -486,11 +474,12 @@
   </v-app>
 </template>
 
-
-
-
 <script>
+import DataNavigation from 'components/vue/DataNavigation.vue';
 export default {
-  props: ["baseUrl", "dataBase_url", "dataDictionary"]
+  components: {
+    'data-navigation': DataNavigation
+  },
+  props: ["baseUrl", "dataBase_url", "dataDictionary"],
 };
 </script>
