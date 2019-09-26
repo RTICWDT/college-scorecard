@@ -50,6 +50,8 @@
                 label= "Filter by Degree"
               ></v-select>
               </v-card>
+              <v-alert v-if="currentFilter === 4" color="warning">Note about Post-baccalaureate Certificate coming soon!</v-alert>
+              <v-alert v-if="currentFilter === 8" color="warning">Note about Graduate/Professional Certificate coming soon!</v-alert>
               <v-expansion-panels>
                 <v-expansion-panel v-for="(program, key) in processedPrograms" :key="key">
                   <v-expansion-panel-header>{{ key.slice(0,-1) }}</v-expansion-panel-header>
@@ -64,7 +66,7 @@
                               <th>Median Debt</th>
                             </tr>
                             <tr>
-                              <td>{{fos.ipeds_award_count}}</td>
+                              <td>{{fos.count | separator}}</td>
                               <td v-if="fos.median_debt">{{fos.median_debt | numeral('$0,0') }}</td>
                               <td v-else>--</td>
                             </tr>
