@@ -18,7 +18,7 @@
     }
   
     .v-expansion-panel-header{
-      font-weight: bold; 
+      font-weight: 500; 
       font-family: $header-font-family !important;
       font-size: 1.1rem;
     }
@@ -26,6 +26,7 @@
         .v-expansion-panel-header{
             font-size: 0.9rem;
             font-weight:normal;
+            line-height: 140%;
         }  
     }
   }

@@ -26,7 +26,7 @@
           <h3>{{displayGradRate}}</h3>
         </v-col>
         <v-col cols='8'>
-          <span>who go Graduate</span>
+          <span>who go graduate</span>
           <span class="tooltip-target u-new_line">
             <i class="fa fa-info-circle"></i>
           </span>
@@ -37,7 +37,7 @@
           <h3>{{displayEarn}}</h3>
         </v-col>
         <v-col cols='8'>
-          <span>recent graduates typically earn</span>
+          <span>typical earnings for recent graduates</span>
           <span class="tooltip-target u-new_line">
             <i class="fa fa-info-circle"></i>
           </span>
@@ -48,7 +48,7 @@
           <h3>{{displayAvgCost}}</h3>
         </v-col>
         <v-col cols='8'>
-          <span>student's average annual cost</span>
+          <span>average annual cost after aid</span>
           <span class="tooltip-target u-new_line">
             <i class="fa fa-info-circle"></i>
           </span>

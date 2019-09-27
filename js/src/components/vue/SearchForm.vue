@@ -1,68 +1,75 @@
-<style lang="scss">
+<style lang="scss" scoped>
   .search-form-degree-wrapper{
     
-    .search-form-degree-cb{
-      padding:0px;
-      margin:0px;
-    }
     .v-messages{
       display: none;
     }
 
   }
-  .search-show-more-header{
-    // TODO: negative Margin.
-    padding: 10px;
-    background-color: purple;
+  .subhead-2{
+    margin-top: 1rem !important;
+    margin-bottom: 0.3rem !important;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif !important;
   }
 </style>
 
 <template>
 
   <v-form>
+    <div class='pa-5'>
     <name-autocomplate></name-autocomplate>
 
-    
+    <p class='subhead-2'>Location</p>    
     <v-select v-model="input.state"
       :items="states"
       item-text="name"
       item-value="abbr"
-      label="Location"
       multiple
       chips
+      hide-details
+      placeholder="Select one..."
       ></v-select>
     
+    <p class='subhead-2'>Field of Study/Major</p>
     <v-select v-model='input.major'
       :items='programs'
       item-text='label'
       item-value='key'
-      label='Field Of Study'
+      placeholder='e.g., civil engineering'
+      hide-details
     >
     </v-select>
 
-      <p class='subhead-2'>Length</p>
-      <div class="search-form-degree-wrapper">
-          <v-checkbox
-            class="search-form-degree-cb"
-            v-model="input.degree"
-            label="Two Year"
-            value="a"
-          ></v-checkbox>
+    <p class='subhead-2'>Length</p>
+    <div class="search-form-degree-wrapper">
+        <v-checkbox
+          class="search-form-degree-cb"
+          v-model="input.degree"
+          label="Two Year"
+          value="a"
+          color="primary"          
+          hide-details
+        ></v-checkbox>
 
-          <v-checkbox
-            class="search-form-degree-cb"
-            v-model="input.degree"
-            label="Four Year"
-            value="b"
-          ></v-checkbox>
+        <v-checkbox
+          class="search-form-degree-cb"
+          v-model="input.degree"
+          label="Four Year"
+          value="b"
+          color="primary"
+          hide-details
+        ></v-checkbox>
 
-          <v-checkbox
-            class="search-form-degree-cb"
-            v-model="input.degree"
-            label="Less than Two Year"
-            value="c"
-          ></v-checkbox>
-      </div>
+        <v-checkbox
+          class="search-form-degree-cb"
+          v-model="input.degree"
+          label="Less than Two Year"
+          value="c"
+          color="primary"
+          hide-details
+        ></v-checkbox>
+    </div>
 
     <check-range legend-title="Graduation Rate" v-model="input.completion_rate"
       :enable="utility.enable.completion_rate" @slider-toggle="utility.enable.completion_rate = $event"
@@ -77,6 +84,7 @@
         K
       </template>
     </check-range>
+    </div>
 
     <v-expansion-panels>
       <v-expansion-panel>
@@ -84,11 +92,8 @@
           More
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-
-
- 
      
-          <p class='subtitle-2'>Admittance</p>
+          <p class='title'>Admittance</p>
           <!-- TODO - These are not working yet -->
           <check-range v-model="input.avg_net_price"
             :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
@@ -118,80 +123,87 @@
           </check-range>
     
 
-          <p class='subtitle-2 mb-0'>Size</p>
-          <v-btn-group>
+
+
+        <p class='title'>School Characteristics</p>
+      
+          <p class='subtitle-2'>Size</p>
+          <div>
           <v-btn small :class="{primary: input.size === 'small' }" @click="handleSizeClick('small')">Small</v-btn>
           <v-btn small :class="{primary: input.size === 'medium' }" @click="handleSizeClick('medium')">Medium</v-btn>
           <v-btn small :class="{primary: input.size === 'large' }" @click="handleSizeClick('large')">Large</v-btn>
-          </v-btn-group>
-      
-
-        <p class='title'>School Characteristics</p>
-        
+          </div>
+              
     
-          <p class='subtitle-2'>Type Of School</p>
+          <p class='subtitle-2 mt-5'>Type of School</p>
           <div class="search-form-type-container">
             <v-checkbox
+              hide-details
               v-model="input.control"
               label="Public"
               value="public"
             ></v-checkbox>
 
             <v-checkbox
+              hide-details
               v-model="input.control"
               label="Private Nonprofit"
               value="private"
             ></v-checkbox>
 
             <v-checkbox
+              hide-details
               v-model="input.control"
               label="Private For-Profit"
               value="profit"
             ></v-checkbox>
           </div>
 
-          <p class='subtitle-2'>Urbancity</p>
+          <p class='subtitle-2 mt-5'>Urbancity</p>
           <!-- TODO - Not working yet -->
-          <div class="search-form-urban-container">
-            <v-row justify="space-around">
+          
               <v-checkbox
+                hide-details            
                 v-model="input.urban"
                 label="City"
                 value="city"
               ></v-checkbox>
 
               <v-checkbox
+                hide-details
                 v-model="input.urban"
                 label="Suburban"
                 value="suburban"
               ></v-checkbox>
               <v-checkbox
+                hide-details
                 v-model="input.urban"
                 label="Town"
                 value="town"
               ></v-checkbox>
 
               <v-checkbox
+                hide-details
                 v-model="input.urban"
                 label="Rural"
                 value="rural"
               ></v-checkbox>
-            </v-row>
-          </div>
  
-
+        <p class='subtitle-2 pt-5'>Specialized Mission</p>
         <v-select v-model='input.serving'
           :items='cleanSpecializedMission'
           item-text="value"
           item-value="key"
-          label='Specialized Mission'
+          placeholder='Select one...'
         ></v-select>
 
+
+        <p class='subtitle-2 pt-5'>Religious Affiliation</p>
         <v-select v-model='input.religious'
           :items='religiousAffiliations'
           item-text='label'
           item-value='value'
-          label='Religious Affiliation'
+          placeholder='Select one...'
         ></v-select>
 
 
