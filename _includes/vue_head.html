@@ -68,7 +68,7 @@
   <!-- add google charts -->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-  {% for script in site.vue.scripts %}
+  {% for script in site.scripts %}
   <script src="{{ site.baseurl }}/js/{{ script }}"></script>
   {% endfor %}
 
@@ -80,9 +80,6 @@
   <script src="{{ site.baseurl }}/js/{{ script }}"></script>
   {% endfor %}{% endif %}
 
-  {% for script in page.body_scripts %}
-  <script src="{{ site.baseurl }}/js/{{ script }}" data-src="{{ script }}"></script>
-  {% endfor %}
 
   {% if site.analytics %}
   <script src="{{ site.baseurl }}/js/picc-analytics.js"></script>
