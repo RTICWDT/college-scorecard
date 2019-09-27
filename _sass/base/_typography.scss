@@ -93,7 +93,7 @@ button,
   @include font-size($h3);
   font-family: $base-font-family;
   font-weight: $weight-bold;
-  letter-spacing: 3.6px;
+  // letter-spacing: 3.6px;
 
   &.button-secondary,
   &.button-compare {

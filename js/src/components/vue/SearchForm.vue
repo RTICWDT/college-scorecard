@@ -1,63 +1,212 @@
+<style lang="scss">
+  .search-form-degree-wrapper{
+    
+    .search-form-degree-cb{
+      padding:0px;
+      margin:0px;
+    }
+    .v-messages{
+      display: none;
+    }
+
+  }
+  .search-show-more-header{
+    // TODO: negative Margin.
+    padding: 10px;
+    background-color: purple;
+  }
+</style>
+
 <template>
-  <form @submit.prevent="OnSubmit">
-      <div class="controls-container">
-        <ul class="collapsible"> <!-- TODO: Extra class in main layout? -->
-          <li>
-              <div id="school-degree" class="collapsible-header" aria-controls="major-content">
-                Programs/Degree <i class="material-icons">expand_more</i>
-              </div>
-              <div class="collapsible-body" id="major-content">
-                  <label for="major-type">Choose a degree
-                    <select id="major-type" name="degree">
-                      <option value="" selected>Any</option>
-                      <option value="c">Certificate</option>
-                      <option value="a">Two-year (Associate's)</option>
-                      <option value="b">Four-year (Bachelor's)</option>
-                    </select>
-                  </label>
-          
-                  <label for="major">Choose a program
-                    <select id="major" name="major">
-                      <option value="" selected>Any</option>
-                      <option v-for="program in programs" :value="program.key" :key="program.key">{{program.label }}</option>
-                    </select>
-                  </label>
-              </div>
-          </li>
 
+  <v-form>
+    <name-autocomplate></name-autocomplate>
 
-          <li>
-            <div id="school-location" class="collapsible-header" aria-controls="location-content">
-              Location <i class="material-icons">expand_more</i>
-            </div>
+    
+    <v-select v-model="input.state"
+      :items="states"
+      item-text="name"
+      item-value="abbr"
+      label="Location"
+      multiple
+      chips
+      ></v-select>
+    
+    <v-select v-model='input.major'
+      :items='programs'
+      item-text='label'
+      item-value='key'
+      label='Field Of Study'
+    >
+    </v-select>
 
-            <div class="collapsible-body" id="location-content">
+      <p class='subhead-2'>Length</p>
+      <div class="search-form-degree-wrapper">
+          <v-checkbox
+            class="search-form-degree-cb"
+            v-model="input.degree"
+            label="Two Year"
+            value="a"
+          ></v-checkbox>
 
-              <div class="input-add group_inline">
-                
-                <div class="label" id="label-select-state">
-                  Select one or more states
-                </div>
-                
-                <select aria-labelledby="label-select-state" class="select-state" name="state" multiple v-model="input.state">
-                  <option value="" selected>Any</option>
-                  <option v-for="state in states" :value="state.abbr" :key="state.abbr">{{ state.name }}</option>
-                </select>
+          <v-checkbox
+            class="search-form-degree-cb"
+            v-model="input.degree"
+            label="Four Year"
+            value="b"
+          ></v-checkbox>
 
-              </div>
-            </div>
-          </li>
-
-        </ul>
+          <v-checkbox
+            class="search-form-degree-cb"
+            v-model="input.degree"
+            label="Less than Two Year"
+            value="c"
+          ></v-checkbox>
       </div>
-  </form>
+
+    <check-range legend-title="Graduation Rate" v-model="input.completion_rate"
+      :enable="utility.enable.completion_rate" @slider-toggle="utility.enable.completion_rate = $event"
+      :min="0" :max="100" append-icon="mdi-percent"
+    ></check-range>
+
+    <check-range legend-title="Average Annual Cost" v-model="input.avg_net_price"
+      :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
+      :min="0" :max="100"
+    >
+      <template v-slot:append-text>
+        K
+      </template>
+    </check-range>
+
+    <v-expansion-panels>
+      <v-expansion-panel>
+        <v-expansion-panel-header>
+          More
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+
+
+ 
+     
+          <p class='subtitle-2'>Admittance</p>
+          <!-- TODO - These are not working yet -->
+          <check-range v-model="input.avg_net_price"
+            :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
+            :min="0" :max="100"
+          >
+            <template v-slot:label>
+              Composite SAT
+            </template>
+          </check-range>
+
+          <check-range v-model="input.avg_net_price"
+            :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
+            :min="0" :max="100"
+          >
+            <template v-slot:label>
+              ACT Score
+            </template>
+          </check-range>
+
+          <check-range v-model="input.avg_net_price"
+            :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
+            :min="0" :max="100"
+          >
+            <template v-slot:label>
+              Acceptance Rate (%)
+            </template>
+          </check-range>
+    
+
+          <p class='subtitle-2 mb-0'>Size</p>
+          <v-btn-group>
+          <v-btn small :class="{primary: input.size === 'small' }" @click="handleSizeClick('small')">Small</v-btn>
+          <v-btn small :class="{primary: input.size === 'medium' }" @click="handleSizeClick('medium')">Medium</v-btn>
+          <v-btn small :class="{primary: input.size === 'large' }" @click="handleSizeClick('large')">Large</v-btn>
+          </v-btn-group>
+      
+
+        <p class='title'>School Characteristics</p>
+        
+    
+          <p class='subtitle-2'>Type Of School</p>
+          <div class="search-form-type-container">
+            <v-checkbox
+              v-model="input.control"
+              label="Public"
+              value="public"
+            ></v-checkbox>
+
+            <v-checkbox
+              v-model="input.control"
+              label="Private Nonprofit"
+              value="private"
+            ></v-checkbox>
+
+            <v-checkbox
+              v-model="input.control"
+              label="Private For-Profit"
+              value="profit"
+            ></v-checkbox>
+          </div>
+
+          <p class='subtitle-2'>Urbancity</p>
+          <!-- TODO - Not working yet -->
+          <div class="search-form-urban-container">
+            <v-row justify="space-around">
+              <v-checkbox
+                v-model="input.urban"
+                label="City"
+                value="city"
+              ></v-checkbox>
+
+              <v-checkbox
+                v-model="input.urban"
+                label="Suburban"
+                value="suburban"
+              ></v-checkbox>
+              <v-checkbox
+                v-model="input.urban"
+                label="Town"
+                value="town"
+              ></v-checkbox>
+
+              <v-checkbox
+                v-model="input.urban"
+                label="Rural"
+                value="rural"
+              ></v-checkbox>
+            </v-row>
+          </div>
+ 
+
+        <v-select v-model='input.serving'
+          :items='cleanSpecializedMission'
+          item-text="value"
+          item-value="key"
+          label='Specialized Mission'
+        ></v-select>
+
+        <v-select v-model='input.religious'
+          :items='religiousAffiliations'
+          item-text='label'
+          item-value='value'
+          label='Religious Affiliation'
+        ></v-select>
+
+
+     
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
+  </v-form>
 </template>
 
 <script>
 import _ from 'lodash';
 import querystring from 'querystring';
-
-// TODO - Add props and methods to generate forward URL + disable debounce & watch
+import CheckRange from './CheckRange.vue';
+import NameAutocomplete from './NameAutocomplete.vue';
 
 export default {
   props:{
@@ -67,7 +216,13 @@ export default {
     generateURL: {
       type: Boolean,
       default: false
-    }
+    },
+    religiousAffiliations: Array,
+    specializedMission: Object
+  },
+  components:{
+    'check-range': CheckRange,
+    'name-autocomplate': NameAutocomplete
   },
   data(){
     return{
@@ -80,9 +235,12 @@ export default {
         distance:"",
         size:"",
         name:"",
-        control:"", //Type
+        control:[], //Type
         serving:"",
         religious:"",
+        completion_rate: null,
+        avg_net_price: null,
+        urban:[]
         // page:0,
         // sort:""
       },
@@ -90,7 +248,12 @@ export default {
         // Hold Default state of form data.
         formDefult:{},
         // Helper to activate debounced query after initial load.
-        initialized: false
+        initialized: false,
+        showMore: false,
+        enable:{
+          completion_rate: false,
+          avg_net_price: false
+        },
       }
     }
   },
@@ -106,6 +269,12 @@ export default {
         }
       },
       deep: true
+    },
+    urlParsedParams: {
+      handler(newValue,oldValue){
+        this.mapInputFromProp();
+      },
+      deep: true
     }
   },
   computed:{
@@ -113,7 +282,7 @@ export default {
     cleanInput(){
       let defaultValues = this.utility.formDefult;
       // Pick only values that are different from default state.
-      return _.pickBy(this.input,(value,key) => {
+      let groomedInput =  _.pickBy(this.input,(value,key) => {
         // If it does not exist in the default state object, remove.
         if(!_.has(defaultValues,key)){
           return false;
@@ -124,6 +293,26 @@ export default {
           return value;
         }
       });
+
+      // Pefrom Input to API data alterations.
+      // TODO - Refactor this process. Ingest and egress.  Maybe arrary of objects with string numeral parsing.  Is there a more elegant way?
+
+      // Completion rate
+      if(groomedInput.completion_rate && groomedInput.completion_rate > 0 && this.utility.enable.completion_rate){
+        groomedInput.completion_rate = groomedInput.completion_rate / 100 + '..';
+      }else{
+        _.unset(groomedInput,'completion_rate'); // TODO: CONST;
+      }
+
+      if(groomedInput.avg_net_price && groomedInput.avg_net_price > 0 && this.utility.enable.avg_net_price){
+        groomedInput.avg_net_price = '..' + groomedInput.avg_net_price * 1000;
+      }else{
+        _.unset(groomedInput,'avg_net_price'); // TODO: CONST;
+      }
+
+
+
+      return groomedInput;
     },
     // Generate a URI string of params for forwarding to search page.
     searchURL(){
@@ -133,17 +322,23 @@ export default {
         .replace(/%3A/g, ':');
       
       return qs;
+    },
+    cleanSpecializedMission(){
+      return _.map(this.specializedMission,(value,key) => {
+        return {
+          'key': key,
+          'value': value
+        }
+      })
     }
   },
   created(){
     // Replicate default form state.
     this.utility.formDefult = _.cloneDeep(this.input);
 
-    this.input = _.mergeWith(this.input,this.urlParsedParams,function(objVal,newObjValue){
-      if(_.isArray(objVal) && _.isString(newObjValue)){
-        return [newObjValue];
-      }
-    });
+    // TODO - Refactor this aswell
+      // For example, percentages for grad rate.
+    this.mapInputFromProp();
 
     this.debounceEmitSearchQuery = _.debounce(function() {
       this.$emit('search-query', this.cleanInput);
@@ -154,7 +349,45 @@ export default {
 
   },
   methods:{
+    mapInputFromProp(){
+      this.input = _.mergeWith(this.input,this.urlParsedParams,function(objVal,newObjValue,key){
+        if(_.isArray(objVal) && _.isString(newObjValue)){
+          return [newObjValue];
+        }
+        
+        // TODO - Are there consts?
+        // Perform any URL -> Form data translations
+        if(key === 'completion_rate'){
+          return parseFloat(newObjValue) * 100;
+        }
+
+        if(key === 'avg_net_price'){
+          if(parseFloat(newObjValue.substr(2)) > 1000)
+          {
+            return parseFloat(newObjValue.substr(2)) / 1000;
+          }
+        }
+      });
+
+      // TODO - Refactor to a more elegant. Loop through all utility enables, and trigger on.
+      // Set Sliders as active:
+      if(this.input.completion_rate > 0){
+        this.utility.enable.completion_rate = true;
+      }
+
+      if(this.input.avg_net_price > 0){
+        this.utility.enable.avg_net_price = true;
+      }
+
+    },
     processChangeEvent(){
+    },
+    handleSizeClick(value){
+      if(value === this.input.size){
+        this.input.size = ""
+      }else{
+        this.input.size = value;
+      }
     }
   }
 }

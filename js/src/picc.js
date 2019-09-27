@@ -522,6 +522,8 @@ picc.fields = {
   SAT_WRITING_75TH_PCTILE:  'latest.admissions.sat_scores.75th_percentile.writing',
   SAT_WRITING_MIDPOINT:     'latest.admissions.sat_scores.midpoint.writing',
 
+  ADMITTANCE_RATE:          'latest.admissions.admission_rate.overall',
+
   NET_PRICE_CALC_URL:       'school.price_calculator_url',
 
   // program reporters
@@ -2858,7 +2860,7 @@ if (typeof document !== 'undefined') {
    * initialize materialize
    */
   picc.ready(function() {
-    M.AutoInit();
+    if(window.M) M.AutoInit();
   })
 
   // namespace sankey

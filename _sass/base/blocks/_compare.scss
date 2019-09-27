@@ -2,7 +2,10 @@
   background-color: $light-gray;
   padding-bottom: $base-padding;
 
+  .collapsible-body{
+    background-color: #FFFFFF;
 
+  }
   .toggles {
     @include display(flex);
     @include respond-to(small-up) {
@@ -127,7 +130,6 @@
       padding: $base-padding-extra;
       border-radius: 0.4em;
       @include respond-to(large-up) {
-        max-width: 800px;
         margin-left: auto;
         margin-right: auto;
       }
@@ -140,7 +142,6 @@
     border-radius: 0.4em;
 
     @include respond-to(large-up) {
-      max-width: 800px;
       margin-left: auto;
       margin-right: auto;
       padding: $base-padding-extra;
@@ -213,6 +214,7 @@
 }
 
 figure.side-meter {
+  margin: 0.3em 0;
 
 figcaption {
   background: rgb(255, 255, 255);
@@ -256,7 +258,6 @@ figcaption {
 .section-card_container-compare_more {
 
   @include respond-to(large-up) {
-    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
 

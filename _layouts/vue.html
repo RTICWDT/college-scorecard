@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include vue_head.html %}
+  <body data-env="{{ site.branch }}">
+    {% include header.html %}
+
+    <!--[if lte IE 10]>
+    <div class="compat-message">
+      <div class="container">
+        <h1>We&rsquo;re sorry. The browser version you are using is not
+          supported.<br>Please update your browser to the latest version.</h1>
+      </div>
+    </div>
+    <![endif]-->
+
+    <main>
+      {{ content }}
+    </main>
+
+    {% include vue_footer.html %}
+
+    {% for script in page.body_scripts %}
+    <script src="{{ site.baseurl }}/js/{{ script }}" data-src="{{ script }}"></script>
+    {% endfor %}
+    
+  </body>
+</html>

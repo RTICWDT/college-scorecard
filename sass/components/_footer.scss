@@ -1,0 +1,44 @@
+@import '../variables';
+footer {
+    z-index:10;
+    background-color: $lighter-gray;
+    color: $dark-gray;
+    height: 180px;
+    font-weight: $weight-light;
+    text-align: center;
+    font-family: $base-font-family;
+    padding-top: 22px;
+  
+   
+    a {
+      color: $mid-blue;
+      text-decoration: none;
+  
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
+  
+    p {
+      padding-bottom: $base-padding;
+    }
+  
+    .footer-attribution {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+  
+    }
+  
+    .footer-owner {
+      font-weight: $weight-bold;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+  
+      a {
+        color: $dark-gray;
+      }
+    }
+  }
+  
