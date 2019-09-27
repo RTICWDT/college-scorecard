@@ -11,7 +11,7 @@
 <template>
   <div>
     <v-app>
-      <v-navigation-drawer v-model='showSidebar' app style="top: 158px;" class='pa-5' width="300">
+      <v-navigation-drawer absolute v-model='showSidebar' app width="300">
         
         <!-- TODO - All form fields and layout. -->
         <!-- Search Form Component -->
@@ -22,7 +22,7 @@
       
       </v-navigation-drawer>
       <v-content>
-      <v-container fluid class="grey lighten-5 pa-0" fill-height>
+      <v-container fluid class="grey lighten-5 pa-0">
      
 
         

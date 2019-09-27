@@ -11,9 +11,10 @@
             hide-selected
             item-text="school.name"
             item-value="id"
-            placeholder="Start typing to Search"
+            placeholder="Start typing to search"
             return-object
             @change="goToSchool"
+            hide-details
          />
     </div>
 </template>

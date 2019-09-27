@@ -1,14 +1,23 @@
+<style lang="sass" scoped>
+.subhead-2{
+  margin-top: 1rem !important;
+  margin-bottom: 0.3rem !important;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif !important;
+}
+</style>
+
 <template>
   <div>
-    <p class='subhead-2 mb-0 pb-0'>
+    <p class='subhead-2'>
       <slot name='label'>
         {{legendTitle}}
       </slot>
     </p>
 
-    <v-row justify="space-around">
+    <v-row justify="space-around" class='mx-1'>
       
-      <v-checkbox v-model="enableSlider" @change="handleEnable"></v-checkbox>
+      <v-checkbox v-model="enableSlider" @change="handleEnable" color="primary"></v-checkbox>
 
       <v-slider v-model="sliderValue"
         class="align-center"
