@@ -15,7 +15,9 @@
 @import 'pages/_search.scss';
 @import 'pages/_school.scss';
 
-
+// Font Awesome
+// TODO - Remove styles we do not need from FA.
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
 
 .sr-only{
   display:none;
