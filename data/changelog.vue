@@ -9,6 +9,12 @@
           <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
           <v-expansion-panels>
             <v-expansion-panel>
+              <v-expansion-panel-header>September 30, 2019</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                  <p>On September 30, 2019, the Department updated metrics related to IPEDS by switching from IPEDS Preliminary release data for the 2017-18 year to Provisional release data. This change impacted many IPEDS-based metrics and removed 3 closed institutions from the data files.</p>
+              </v-expansion-panel-content>
+            </v-expansion-panel>  
+            <v-expansion-panel>
               <v-expansion-panel-header>August 26, 2019</v-expansion-panel-header>
               <v-expansion-panel-content>
                 <p>On August 26, 2019, the Department updated five data elements that appear on the consumer website and/or the downloadable data files/API with more recent data values:</p>
