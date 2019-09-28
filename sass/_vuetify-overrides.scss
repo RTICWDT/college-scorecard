@@ -29,4 +29,8 @@
             line-height: 140%;
         }  
     }
+    .v-data-table th{
+      font-size: 1rem;
+      font-family: $header-font-family !important;
+    }
   }

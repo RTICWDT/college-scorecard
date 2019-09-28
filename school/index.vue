@@ -1,6 +1,6 @@
 <template>
   <v-app id="app" class="school-page">
-    <div class='backNav'>
+    <div class="backNav">
       <div class="container school-back">
         <a id="referrer-link" class="link-more" href="../search/">
           <i class="fa fa-chevron-left"></i> Back to search results
@@ -9,8 +9,6 @@
     </div>
     <!-- Search results -->
     <div class="school-bg">
-
-
       <v-container>
         <v-row>
           <v-col cols="12" md="9" class="school-left">
@@ -24,37 +22,37 @@
                 <input type="submit" value="Search" class="button-primary">
               </form>
             </div>-->
-            <!-- <div class="compare-school">
-              { include compare_school_control.html }
-            </div>-->
 
             <div v-if="!school.id" class="show-loading">
-              <v-card tile class='pa-5'>
-              <h1 class='heading'>Loading...</h1>
+              <v-card tile class="pa-5">
+                <h1 class="heading">
+                  Loading
+                  <v-icon color="pink darken-4">fas fa-circle-notch fa-spin</v-icon>
+                </h1>
               </v-card>
             </div>
 
             <div v-else id="school">
-              <v-card tile class="school-heading pa-5 mb-5">
+              <v-card tile class="school-heading pa-5 pt-2 mb-5">
                 <v-row>
-                  <v-col cols="12" md="6" class='py-0'>
+                  <v-col cols="12" md="6" class="py-0 my-0">
                     <v-chip
                       v-if="_.get(school, fields['UNDER_INVESTIGATION'])==1"
                       color="error"
                       label
-                    ><strong>Under ED Monitoring</strong></v-chip>
-                  </v-col>
-                  <v-col cols="12" md="6" class='text-right py-0'>
-                    [[ Add Compare ]]
-                    <share label="Share this School" url="https://collegescorecard.ed.gov" />
+                    >
+                      <strong>Under ED Monitoring</strong>
+                    </v-chip>
                   </v-col>
                 </v-row>
-                <v-row class='mt-4'>
+                <v-row class="mt-4">
                   <v-col cols="12" md="8" class="py-0">
-                    <h1 class="display-2 pa-0 mb-4">{{ _.get(school, fields['NAME'], 'School Name') }}</h1>
+                    <h1
+                      class="display-2 pa-0 mb-4"
+                    >{{ _.get(school, fields['NAME'], 'School Name') }}</h1>
                     <v-divider />
-                    
-                    <h2 class="title location mb-0 mt-2">
+
+                    <h2 class="title location mb-0 mt-4">
                       <span>{{ _.get(school, fields['CITY'], 'City') }}</span>,
                       <span>{{ _.get(school, fields['STATE'], 'State') }}</span>
                     </h2>
@@ -64,65 +62,64 @@
                     <h2 class="title school-url mt-0">
                       <a
                         target="_blank"
-                       
                         :href="_.get(school, fields['SCHOOL_URL'], 'ed.gov') | formatUrl"
                       >{{ _.get(school, fields['SCHOOL_URL'], 'ed.gov') | formatUrlText }}</a>
                     </h2>
-                    <ul class="school-key_figures key-figures ma-5">
-                      <li>
-                        <span v-if="years==1" class="school-key_figures-year">
-                          <v-icon x-large color="black">fa fa-certificate</v-icon>
-                        </span>
-                        <span v-else class="school-key_figures-year">{{ years | formatYearsText }}</span>
-                        <span class="label">{{ years | formatYearsLabel }}</span>
-                      </li>
-                      <li :class="_.get(school, fields['OWNERSHIP'], '-1') | controlClass">
-                        <span>{{ _.get(school, fields['OWNERSHIP'], '-1') | control }}</span>
-                      </li>
-                      <li :class="_.get(school, fields['LOCALE'], '-1') | localeClass">
-                        <span>{{ _.get(school, fields['LOCALE'], '-1') | locale }}</span>
-                      </li>
-                      <li :class="_.get(school, fields['SIZE'], '-1') | sizeCategoryClass">
-                        <span>{{ _.get(school, fields['SIZE'], '-1') | sizeCategory }}</span>
-                      </li>
-                    </ul>
-                    <ul class="school-special_designation" v-if="specialDesignations.length>0">
-                      <li
-                        class="special"
+                    <school-icons :school="school" :fields="fields" />
+                    <div class="school-special_designation" v-if="specialDesignations.length>0">
+                      <v-chip
+                        class="special mr-1 mb-1"
+                        color="pink lighten-3"
+                        label
                         v-for="designation in specialDesignations"
                         :key="designation"
-                      >{{designation}}</li>
-                    </ul>
+                      >{{designation}}</v-chip>
+                    </div>
                   </v-col>
                   <v-col cols="12" md="4" class="py-0">
+                    <v-btn
+                      small
+                      color="primary"
+                      fab
+                      ripple
+                      :class="{amber: isSelected}"
+                      @click="$emit('toggle-compare-school',school)"
+                    >
+                      <v-icon small>fa fa-star</v-icon>
+                    </v-btn>
+                    <share label="Share this School" url="https://collegescorecard.ed.gov" />
                     <div class="school-map" ref="map"></div>
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col col="12" md="6">
-                    <h4 class='subtitle-2 font-weight-bold'>Graduation Rate</h4>
+                    <h2 class="mb-4">Graduation Rate</h2>
                     <donut
-                      color="#00adf2"
+                      color="#880E4F"
                       :value="_.get(school, this.fields['COMPLETION_RATE']) * 100"
-                      height="200px"
+                      :height="200"
                     ></donut>
                   </v-col>
                   <v-col col="12" md="6">
-                    <h4 class='subtitle-2 font-weight-bold'>Salary After Completing</h4>
-                    <div class='my-5' style='height: 70px'>
-                    <range
-                      :lower="{ value: 25000, label: 'Basketweaving<br />$25,0000' }"
-                      :upper="{ value: 84000, label: 'Brain Surgeon<br />$84,000' }"
-                      :min="{ value: 0, label: '0' }"
-                      :max="{ value: 125000, label: '$125,000' }"
-                      hideMiddle
-                      
-                    ></range>
+                    <h2 class="mb-3">Salary After Completing</h2>
+                    <div class="my-5" style="height: 70px">
+                      <range
+                        :lower="{ value: 25000, label: 'Basketweaving<br />$25,0000' }"
+                        :upper="{ value: 84000, label: 'Brain Surgeon<br />$84,000' }"
+                        :min="{ value: 0, label: '0' }"
+                        :max="{ value: 125000, label: '$125,000' }"
+                        hideMiddle
+                      ></range>
                     </div>
 
-                    <h4 class='subtitle-2 font-weight-bold'>Average Annual Cost</h4>
+                    <h2 class="mb-3">
+                      Average Annual Cost
+                      <tooltip definition="avg-cost-year" />
+                    </h2>
                     <div v-if="!isProgramReporter">
-                      <h2 class='display-2 secondary--text'>{{_.get(school, this.fields['NET_PRICE']) | numeral('$0,0') }}</h2>
+                      <h2
+                        class="display-2 pink--text text--darken-4 font-weight-bold"
+                      >{{_.get(school, this.fields['NET_PRICE']) | numeral('$0,0') }}</h2>
                     </div>
                     <div v-else>
                       <p>The average annual net price is not available for this program-reporting school.</p>
@@ -140,24 +137,26 @@
               <v-expansion-panels multiple focusable v-model="panels">
                 <v-expansion-panel>
                   <v-expansion-panel-header id="cost" aria-controls="costs-content">Costs</v-expansion-panel-header>
-                  <v-expansion-panel-content id="costs-content" class='pa-5'>
+                  <v-expansion-panel-content id="costs-content" class="pa-5">
                     <v-row v-if="!isProgramReporter">
-                      <v-col cols="12" md="6" class='text-center'>
+                      <v-col cols="12" md="6">
+                        <h2 class='mb-3'>Average Annual Cost</h2>
                         <bar-chart
-                          :labels="['Average Annual Cost']"
+                          :labels="['']"
                           :data="[_.get(school, fields['NET_PRICE'], '0')]"
-                          color="#d37c39"
+                          color="#880E4F"
                         />
-
+                        <p class="text-center">
                         <v-btn
                           rounded
                           color="secondary"
                           target="_blank"
                           :href="_.get(school, fields['NET_PRICE_CALC_URL'], '#')"
+                          v-if="_.get(school, fields['NET_PRICE_CALC_URL'], '#') != null"
                         >
-                          <i class="fa fa-calculator"></i>
-                          Calculate your personal net price
+                          <v-icon small>fas fa-calculator</v-icon> Calculate your personal net price
                         </v-btn>
+                        </p>
                       </v-col>
 
                       <v-col cols="12" md="6">
@@ -228,7 +227,9 @@
                         </v-btn-toggle>
 
                         <v-simple-table class="school-table programs-table">
-                          <caption v-if="program_reporter_table=='program_reporter_total'">Total costs of largest programs</caption>
+                          <caption
+                            v-if="program_reporter_table=='program_reporter_total'"
+                          >Total costs of largest programs</caption>
                           <caption v-else>Costs of largest programs per academic year</caption>
 
                           <thead>
@@ -305,153 +306,125 @@
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel>
-                  <v-expansion-panel-header id="graduation" aria-controls="graduation-content">
-                    Graduation &amp; Retention
-                    
-                  </v-expansion-panel-header>
-                  <v-expansion-panel-content id="graduation-content" class='pa-5'>
+                  <v-expansion-panel-header
+                    id="graduation"
+                    aria-controls="graduation-content"
+                  >Graduation &amp; Retention</v-expansion-panel-header>
+                  <v-expansion-panel-content id="graduation-content" class="pa-5">
                     <v-row>
                       <v-col cols="12" md="6">
-                        <h2>Graduation Rate</h2>
+                        <h2 class='mb-3 text-center'>Graduation<br />Rate</h2>
                         <donut
-                          color="#00adf2"
+                          color="#880E4F"
                           :value="_.get(school, this.fields['COMPLETION_RATE']) * 100"
-                          height="200px"
-                         
+                          :height="200"
                         ></donut>
                       </v-col>
-                      <v-col cols="12" md="6" class='text-center'>
-                        <h2>Students Who Return After Their First Year</h2>
+                      <v-col cols="12" md="6">
+                        <h2 class='mb-3 text-center'>Students Who Return After Their First Year</h2>
                         <donut 
-                          color="#00adf2" 
-                          :value="retentionRate * 100"
-                          height="200px"
+                          color="#880E4F" 
+                          :value="retentionRate * 100" 
+                          :height="200"
                         ></donut>
                       </v-col>
                     </v-row>
-                    <div class="school-outcome-measures">
-                      <h2
-                        class="figure-heading u-align_c"
-                        aria-describedby="tip-outcome-measures"
-                        tabindex="0"
-                      >
-                        Outcomes 8 Years After Attending
-                        <span class="tooltip-target u-new_line">
-                          <i class="fa fa-info-circle"></i>
-                        </span>
-                      </h2>
-                      <sankey :school="school" />
-                    </div>
+                    <v-row>
+                      <v-col cols="12">
+                        <h2 class='mb-3 mt-5'>
+                          Outcomes 8 Years After Attending <tooltip definition="outcome-measures" />
+                        </h2>
+                        <sankey :school="school" />
+                      </v-col>
+                    </v-row>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel>
-                  <v-expansion-panel-header id="aid" aria-controls="aid-content">
-                    Financial Aid &amp; Debt
-                    
-                  </v-expansion-panel-header>
-                  <v-expansion-panel-content id="aid-content" class='pa-5'>
-                    <v-alert v-if="_.get(school, fields['AID_ELIGIBILITY'])> 3 && _.get(school, fields['OPEFLAG']) < 8" type="info">This institution does not participate in the Federal student financial aid program administered by the U.S. Department of Education.</v-alert>
-                    <v-alert v-if="_.get(school, fields['AID_ELIGIBILITY'])===3" type="info">This institution does not participate in the Federal student financial aid programs administered by the U.S. Department of Education, but is approved by the Department for purposes of allowing students to receive deferments on repayment of Federal student loans received at other institutions.</v-alert>
-                    <v-alert v-if="_.get(school, fields['AID_ELIGIBILITY'])===8" type="info">Data is not yet available. This institution only recently began administering Federal aid.</v-alert>
+                  <v-expansion-panel-header
+                    id="aid"
+                    aria-controls="aid-content"
+                  >Financial Aid &amp; Debt</v-expansion-panel-header>
+                  <v-expansion-panel-content id="aid-content" class="pa-5">
+                    <v-alert
+                      v-if="_.get(school, fields['AID_ELIGIBILITY'])> 3 && _.get(school, fields['OPEFLAG']) < 8"
+                      type="info"
+                    >This institution does not participate in the Federal student financial aid program administered by the U.S. Department of Education.</v-alert>
+                    <v-alert
+                      v-if="_.get(school, fields['AID_ELIGIBILITY'])===3"
+                      type="info"
+                    >This institution does not participate in the Federal student financial aid programs administered by the U.S. Department of Education, but is approved by the Department for purposes of allowing students to receive deferments on repayment of Federal student loans received at other institutions.</v-alert>
+                    <v-alert
+                      v-if="_.get(school, fields['AID_ELIGIBILITY'])===8"
+                      type="info"
+                    >Data is not yet available. This institution only recently began administering Federal aid.</v-alert>
                     <div v-else>
-                      <div class="row">
-                        <div class="col m6">
-                          <div>
-                            <h2 aria-describedby="tip-student-aid" tabindex="0">
-                              Students Receiving Federal Loans
-                              <span class="tooltip-target">
-                                <i class="fa fa-info-circle"></i>
-                              </span>
-                            </h2>
-                           
-                             <donut
-                              color="#00adf2"
-                              :value="_.get(school, this.fields['AID_PERCENTAGE']) * 100"
-                              height="200px"                         
-                            ></donut>
+                      <v-row>
+                        <v-col cols="12" md="6">
+                          <h2 class='mb-3'>
+                            Students Receiving Federal Loans <tooltip definition="student-aid" />
+                          </h2>
+                          <donut
+                            color="#880E4F"
+                            :value="_.get(school, this.fields['AID_PERCENTAGE']) * 100"
+                            :height="200"
+                          ></donut>
+                          <p>
+                            At some schools where few students borrow federal loans, the typical undergraduate may leave school with $0 in debt.
+                          </p>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                          <h2 class='mb-3'>
+                            Typical Total Debt After Graduation <tooltip definition="avg-debt" />
+                          </h2>
+                          <range
+                            :lower="{ value: 25000, label: 'Basketweaving<br />$25,0000' }"
+                            :upper="{ value: 84000, label: 'Brain Surgeon<br />$84,000' }"
+                            :min="{ value: 0, label: '0' }"
+                            :max="{ value: 125000, label: '$125,000' }"
+                            hideMiddle
+                          ></range>
+                          <p>for undergraduate borrowers who complete college</p>
+                          
 
-                            <p>
-                              At some schools where few students borrow federal loans, the typical undergraduate may
-                              leave
-                              school with $0 in debt.
-                            </p>
+                          <h2 class='mb-3'>
+                            Typical Monthly Loan Payment&nbsp;<tooltip definition="avg-loan-payment" />
+                          </h2>
+                          <div class="display-2 pink--text text--darken-4 font-weight-bold">
+                            {{ _.get(school, fields['MONTHLY_LOAN_PAYMENT']) | numeral('$0,0') }}/mo
                           </div>
-                        </div>
-                        <div class="col m6">
-                          <div>
-                            <h2
-                              aria-describedby="tip-avg-debt"
-                              tabindex="0"
-                              data-bind="branch_campus"
-                            >
-                              Typical Total Debt After Graduation
-                              <span class="tooltip-target">
-                                <i class="fa fa-info-circle"></i>
-                              </span>
-                            </h2>
-                            <strong
-                              class="fact_number"
-                              data-bind="average_total_debt"
-                            >{{ _.get(school, fields['AVERAGE_TOTAL_DEBT']) | numeral('$0,0') }}</strong>
-                            <p>For undergraduate borrowers who complete college</p>
-                            <range
-                              :lower="{ value: 25000, label: 'Basketweaving<br />$25,0000' }"
-                              :upper="{ value: 84000, label: 'Brain Surgeon<br />$84,000' }"
-                              :min="{ value: 0, label: '0' }"
-                              :max="{ value: 125000, label: '$125,000' }"
-                              hideMiddle
-                            ></range>
-                          </div>
-
-                          <div>
-                            <h2
-                              aria-describedby="tip-avg-loan-payment"
-                              tabindex="0"
-                              data-bind="branch_campus"
-                            >
-                              Typical Monthly Loan Payment
-                              <span class="tooltip-target">
-                                <i class="fa fa-info-circle"></i>
-                              </span>
-                            </h2>
-                            <span class="fact_number">
-                              <strong
-                                data-bind="average_monthly_loan_payment"
-                              >{{ _.get(school, fields['MONTHLY_LOAN_PAYMENT']) | numeral('$0,0') }}</strong>/mo
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col s12">
-                          <div class="container school-callout">
-                            <h2>Get Help Paying for College</h2>
+                        </v-col>
+                      </v-row>
+                      <v-row>
+                        <v-col cols="12">
+                          <v-card color="grey lighten-2 pa-4">
+                            <h2 class='mb-3'>Get Help Paying for College</h2>
                             <p>
                               Submit a free application for Federal Student Aid. You may be eligible to receive federal
                               grants or loans.
                             </p>
-                            <a
+                            <v-btn
+                              rounded
+                              color="secondary"
                               href="https://fafsa.ed.gov/spa/fafsa"
                               target="_blank"
-                              class="btn button-primary"
-                            >Start My Application</a>
-                          </div>
-                        </div>
-                      </div>
+                            >Start My Application</v-btn>
+                          </v-card>
+                        </v-col>
+                      </v-row>
                     </div>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel>
-                  <v-expansion-panel-header id="earnings" aria-controls="earnings-content">
-                    Earnings Completion by Field of Study
-                    
-                  </v-expansion-panel-header>
+                  <v-expansion-panel-header
+                    id="earnings"
+                    aria-controls="earnings-content"
+                  >Salary After Completion by Field of Study</v-expansion-panel-header>
                   <v-expansion-panel-content
                     id="earnings-content"
                     aria-controls="earnings-content"
-                    class='pa-5'
+                    class="pa-5"
                   >
-                    <p>One-year post-completion earnings with range of highest and lowest median earnings for undergraduate and credential programs for which there is data. For more information, see Fields of Study for this school.</p>
+                    <p>One-year post-completion earnings with range of highest and lowest median earnings for undergraduate and credential programs for which there is data. For more information, see Fields of Study/Majors for this school.</p>
                     <range
                       :lower="{ value: 25000, label: 'Basketweaving<br />$25,0000' }"
                       :upper="{ value: 84000, label: 'Brain Surgeon<br />$84,000' }"
@@ -459,33 +432,37 @@
                       :max="{ value: 125000, label: '$125,000' }"
                       hideMiddle
                     ></range>
-                    
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel>
-                  <v-expansion-panel-header id="academics" aria-controls="academics-content">
-                    Fields of Study
-                    
-                  </v-expansion-panel-header>
-                  <v-expansion-panel-content id="academics-content" class='pa-5'>
-                   
-                    <v-btn-toggle v-model="field_sort" mandatory class='my-3' color="secondary" >
-                      <v-btn small text value="ipeds_award_count">Popular</v-btn>
+                  <v-expansion-panel-header
+                    id="academics"
+                    aria-controls="academics-content"
+                  >Fields of Study / Majors</v-expansion-panel-header>
+                  <v-expansion-panel-content id="academics-content" class="pa-5">
+                    Sort by:
+                    <v-btn-toggle v-model="field_sort" mandatory class="my-3" color="secondary">
+                      <v-btn small text value="ipeds_award_count">Most Popular</v-btn>
                       <v-btn small text value="earnings">Highest Earnings</v-btn>
                       <v-btn small text value="median_debt">Lowest Debt</v-btn>
                     </v-btn-toggle>
-                    <v-expansion-panels class='my-3'>
+                    <v-expansion-panels class="my-3">
                       <v-expansion-panel v-for="fos in fieldsOfStudy" :key="fos.code">
                         <v-expansion-panel-header>{{ fos.title.slice(0,-1) }} / {{ fos.credential.title }} / {{ fos.hoist }}</v-expansion-panel-header>
-                        <v-expansion-panel-content >
+                        <v-expansion-panel-content>
                           <v-simple-table>
                             <tr>
                               <th>Count</th>
                               <th>Median Debt</th>
+                              <th>Median Earnings</th>
                             </tr>
                             <tr>
-                              <td>{{fos.ipeds_award_count}}</td>
+                              <td>{{fos.ipeds_award_count | separator }}</td>
                               <td v-if="fos.median_debt">{{fos.median_debt | numeral('$0,0') }}</td>
+                              <td v-else>--</td>
+                              <td
+                                v-if="fos.median_earnings"
+                              >{{fos.median_earnings | numeral('$0,0') }}</td>
                               <td v-else>--</td>
                             </tr>
                           </v-simple-table>
@@ -496,7 +473,7 @@
                       rounded
                       color="secondary"
                       :href="'/school/fields/?'+school.id"
-                    >See All Available Programs at {{_.get(school,this.fields.NAME) }}</v-btn>
+                    >See All Available Fields of Study/Majors at {{_.get(school,this.fields.NAME) }}</v-btn>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel>
@@ -504,69 +481,69 @@
                     id="demographics"
                     aria-controls="demographics-content"
                     v
-                  >
-                    Student Body
-                    
-                  </v-expansion-panel-header>
-                  <v-expansion-panel-content id="demographics-content" class='pa-5'>
+                  >Student Body</v-expansion-panel-header>
+                  <v-expansion-panel-content id="demographics-content" class="pa-5">
                     <v-row>
-                      <v-col cols="12" md="12">
-                        <!-- <ul class="school-key_figures key-figures">
-                        <li :class="_.get(school, fields['SIZE'], '-1') | sizeCategoryClass">
-                          <span>{{ _.get(school, fields['SIZE'], '-1') | sizeCategory }}</span>
-                        </li>
-                        </ul>-->
-                        <strong
-                          class="group_inline-left fact_number"
-                        >{{ _.get(school, fields['SIZE']) | separator }}</strong>
-                        undergraduate students
+                      <v-col cols="12" md="6" class="d-flex justify-space-around">
+                        <ul class="school-key_figures key-figures mt-0 pt-0">
+                          <li :class="_.get(school, fields['SIZE'], '-1') | sizeCategoryClass">
+                            <span>{{ _.get(school, fields['SIZE'], '-1') | sizeCategory }}</span>
+                          </li>
+                        </ul>
+                        <div class="text-center">
+                          <strong
+                            class="display-2 pink--text text--darken-4 font-weight-bold"
+                          >{{ _.get(school, fields['SIZE']) | separator }}</strong>
+                          <br />
+                          <strong>undergraduate students</strong>
+                        </div>
+                      </v-col>
+                      <v-col cols="12" md="6" class="d-flex justify-space-around">
+                        <div class="text-right">
+                          <span
+                            class="display-2 pink--text text--darken-4 font-weight-bold"
+                          >{{ 1 - (_.get(school, fields['PART_TIME_SHARE'])) | numeral('0.%') }}</span>
+                          <br />
+                          <strong>Full-time</strong>
+                        </div>
+                        <div>
+                          <span
+                            class="display-2 pink--text text--darken-4 font-weight-bold divide"
+                          >/</span>
+                        </div>
+                        <div class="text-left">
+                          <span
+                            class="display-2 pink--text text--darken-4 font-weight-bold"
+                          >{{ _.get(school, fields['PART_TIME_SHARE'])| numeral('0.%') }}</span>
+                          <br />
+                          <strong>Part-time</strong>
+                        </div>
                       </v-col>
                     </v-row>
                     <v-row>
                       <v-col cols="12" md="6">
-                        <div>
-                          <span class="fact_number">
-                            <strong
-                              data-bind="full_time_percent"
-                            >{{ 1 - (_.get(school, fields['PART_TIME_SHARE'])) | numeral('0.%') }}</strong>
-                            <span class="small">%</span>
-                          </span> Full-time
-                        </div>
-                        <div class="fact_number divide">/</div>
-                        <div>
-                          <span class="fact_number">
-                            <strong
-                              
-                            >{{ _.get(school, fields['PART_TIME_SHARE'])| numeral('0.%') }}</strong>
-                            <span class="small">%</span>
-                          </span> Part-time
-                        </div>
-
                         <div v-if="_.get(school, fields['AID_ELIGIBILITY'])<3">
-                          <h2>Socio-Economic Diversity</h2>
+                          <h2 class="mb-3">Socio-Economic Diversity</h2>
 
-                          <div class="school-student-socio_econ-stat">
-                     
-                            <donut
-                              color="#00adf2"
-                              :value="_.get(school, this.fields['PELL_PERCENTAGE']) * 100"
-                              height="200px"                         
-                            ></donut>
+                          <donut
+                            color="#880E4F"
+                            :value="_.get(school, this.fields['PELL_PERCENTAGE']) * 100"
+                            :height="200"
+                          ></donut>
 
-                            <strong>of students</strong>
-                          </div>
-
-                          <p>received an income-based federal Pell grant intended for low-income students.</p>
+                          <p
+                            class="text-center pa-5"
+                          >of students received an income-based federal Pell grant intended for low-income students.</p>
                         </div>
                       </v-col>
                       <v-col cols="12" md="6">
-                        <h2>Race/Ethnicity</h2>
+                        <h2 class="mb-3">Race/Ethnicity</h2>
                         <div v-for="item in raceEthnicity" :key="item.label">
                           <horizontal-bar
                             :value="Math.round(item.value*100)"
                             :min="0"
                             :max="100"
-                            color="#77b713"
+                            color="#880E4F"
                             :height="25"
                           ></horizontal-bar>
                           <strong>{{item.value | numeral('0.%')}}</strong>
@@ -577,68 +554,66 @@
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel>
-                  <v-expansion-panel-header id="selectivity" aria-controls="selectivity-content">
-                    Test Scores &amp; Admittance
-                    
-                  </v-expansion-panel-header>
-                  <v-expansion-panel-content id="selectivity-content" class='pa-5'>
+                  <v-expansion-panel-header
+                    id="selectivity"
+                    aria-controls="selectivity-content"
+                  >Test Scores &amp; Admittance</v-expansion-panel-header>
+                  <v-expansion-panel-content id="selectivity-content" class="pa-5">
                     <v-row>
                       <v-col cols="12" md="7">
-                      <h2 aria-describedby="tip-test-scores" tabindex="0">
-                        Test Scores
-                        <span class="tooltip-target">
-                          <i class="fa fa-info-circle"></i>
-                        </span>
-                      </h2>
-                      <p>Students who were admitted and enrolled typically had standardized test scores in these ranges.</p>
+                        <h2>
+                          Test Scores
+                          <tooltip definition="test-scores" />
+                        </h2>
+                        <p>Students who were admitted and enrolled typically had standardized test scores in these ranges.</p>
 
-                      <h3 class="h2">SAT</h3>
+                        <h3 class="h2 mb-2">SAT</h3>
 
-                      <h4>Critical Reading</h4>
-                      <range
-                        v-if="_.get(school, fields['SAT_READING_MIDPOINT']) != null"
-                        :lower="{ value: _.get(school, fields['SAT_READING_25TH_PCTILE']), label: _.get(school, fields['SAT_READING_25TH_PCTILE']) }"
-                        :upper="{ value: _.get(school, fields['SAT_READING_75TH_PCTILE']), label: _.get(school, fields['SAT_READING_75TH_PCTILE']) }"
-                        :min="{ value: 0, label: '0' }"
-                        :max="{ value: 800, label: '800' }"
-                        hideMiddle
-                      ></range>
-                      <p v-else class="no-data">No Critical Reading data available.</p>
+                        <h4 class="overline">Critical Reading</h4>
+                        <range
+                          v-if="_.get(school, fields['SAT_READING_MIDPOINT']) != null"
+                          :lower="{ value: _.get(school, fields['SAT_READING_25TH_PCTILE']), label: _.get(school, fields['SAT_READING_25TH_PCTILE']) }"
+                          :upper="{ value: _.get(school, fields['SAT_READING_75TH_PCTILE']), label: _.get(school, fields['SAT_READING_75TH_PCTILE']) }"
+                          :min="{ value: 0, label: '0' }"
+                          :max="{ value: 800, label: '800' }"
+                          hideMiddle
+                        ></range>
+                        <p v-else class="no-data">No critical reading data available.</p>
 
-                      <h4>Math</h4>
-                      <range
-                        v-if="_.get(school, fields['SAT_MATH_MIDPOINT']) != null"
-                        :lower="{ value: _.get(school, fields['SAT_MATH_25TH_PCTILE']), label: _.get(school, fields['SAT_MATH_25TH_PCTILE']) }"
-                        :upper="{ value: _.get(school, fields['SAT_MATH_75TH_PCTILE']), label: _.get(school, fields['SAT_MATH_75TH_PCTILE']) }"
-                        :min="{ value: 0, label: '0' }"
-                        :max="{ value: 800, label: '800' }"
-                        hideMiddle
-                      ></range>
-                      <p v-else class="no-data">No Math data available.</p>
+                        <h4 class="overline">Math</h4>
+                        <range
+                          v-if="_.get(school, fields['SAT_MATH_MIDPOINT']) != null"
+                          :lower="{ value: _.get(school, fields['SAT_MATH_25TH_PCTILE']), label: _.get(school, fields['SAT_MATH_25TH_PCTILE']) }"
+                          :upper="{ value: _.get(school, fields['SAT_MATH_75TH_PCTILE']), label: _.get(school, fields['SAT_MATH_75TH_PCTILE']) }"
+                          :min="{ value: 0, label: '0' }"
+                          :max="{ value: 800, label: '800' }"
+                          hideMiddle
+                        ></range>
+                        <p v-else class="no-data">No math data available.</p>
 
-                      <h3 class="h2">ACT</h3>
+                        <h3 class="h2 mt-4">ACT</h3>
 
-                      <range
-                        v-if="_.get(school, fields['ACT_MIDPOINT']) != null"
-                        :lower="{ value: _.get(school, fields['ACT_25TH_PCTILE']), label: _.get(school, fields['ACT_25TH_PCTILE']) }"
-                        :upper="{ value: _.get(school, fields['ACT_75TH_PCTILE']), label: _.get(school, fields['ACT_75TH_PCTILE']) }"
-                        :min="{ value: 0, label: '0' }"
-                        :max="{ value: 36, label: '36' }"
-                        hideMiddle
-                      ></range>
-                      <p v-else class="no-data">No data available.</p>
+                        <range
+                          v-if="_.get(school, fields['ACT_MIDPOINT']) != null"
+                          :lower="{ value: _.get(school, fields['ACT_25TH_PCTILE']), label: _.get(school, fields['ACT_25TH_PCTILE']) }"
+                          :upper="{ value: _.get(school, fields['ACT_75TH_PCTILE']), label: _.get(school, fields['ACT_75TH_PCTILE']) }"
+                          :min="{ value: 0, label: '0' }"
+                          :max="{ value: 36, label: '36' }"
+                          hideMiddle
+                        ></range>
+                        <p v-else class="no-data">No data available.</p>
                       </v-col>
                       <v-col cols="12" md="4">
-                      <h3>Admittance Rate</h3>
-                      <div style="width:150px">
-                      <donut
-                        color="#00adf2"
-                        :value="_.get(school, this.fields['ADMITTANCE_RATE'])*100"
-                        chart-id="admittance-chart"
-                        height="200px"
-                        width="300px"
-                      ></donut>
-                      </div>
+                        <h2 class="mb-3">Admittance Rate</h2>
+                        <donut
+                          color="#880E4F"
+                          :value="_.get(school, this.fields['ADMITTANCE_RATE'])*100"
+                          v-if="_.get(school, this.fields['ADMITTANCE_RATE'])"
+                          chart-id="admittance-chart"
+                          :height="200"
+                          :width="300"
+                        ></donut>
+                        <p v-else>This school has an open admissiion policy.</p>
                       </v-col>
                     </v-row>
                   </v-expansion-panel-content>
@@ -648,8 +623,7 @@
           </v-col>
 
           <v-col lg="3">
-            
-            <v-card outline tile class='pa-5'>
+            <v-card outline tile class="pa-5">
               <paying-for-college />
             </v-card>
             <!-- { include paying_for_college.html } -->
@@ -661,8 +635,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import 'sass/_variables';
-
+@import "sass/_variables";
 
 .school-map {
   border: 1px solid $black;
@@ -683,6 +656,7 @@ import Range from "components/vue/Range.vue";
 import HorizontalBar from "components/vue/HorizontalBar.vue";
 import Share from "components/vue/Share.vue";
 import PayingForCollege from "components/vue/PayingForCollege.vue";
+import SchoolIcons from "components/vue/SchoolIcons.vue";
 export default {
   props: ["baseUrl"],
   components: {
@@ -694,7 +668,8 @@ export default {
     range: Range,
     "horizontal-bar": HorizontalBar,
     share: Share,
-    'paying-for-college': PayingForCollege
+    "paying-for-college": PayingForCollege,
+    "school-icons": SchoolIcons
   },
   data() {
     return {
@@ -703,7 +678,8 @@ export default {
       panels: [],
       num_panels: 7,
       program_reporter_table: "program_reporter_total",
-      field_sort: 'ipeds_award_count'
+      field_sort: "ipeds_award_count",
+      isSelected: false
     };
   },
   computed: {
@@ -844,26 +820,34 @@ export default {
       }
       return reporterData;
     },
-    isProgramReporter(){
-      return _.get(this.school, this.fields.PROGRAM_REPORTER_OFFERED)>0;
+    isProgramReporter() {
+      return _.get(this.school, this.fields.PROGRAM_REPORTER_OFFERED) > 0;
     },
-    fieldsOfStudy(){
+    fieldsOfStudy() {
       let self = this;
       let fos = _.get(this.school, "latest.programs.aid.debt.cip_4_digit");
-      if(fos.length)
-      {
-        fos = fos.filter(field=> field.credential.level<=3 && field[self.field_sort])
-        
-        fos = _.sortBy(fos, [function(o) { return o[self.field_sort]; }]);
-        if(['ipeds_award_count','highest_earnings'].indexOf(self.field_sort)>=0)
-        {
+      if (fos.length) {
+        fos = fos.filter(
+          field => field.credential.level <= 3 && field[self.field_sort]
+        );
+
+        fos = _.sortBy(fos, [
+          function(o) {
+            return o[self.field_sort];
+          }
+        ]);
+        if (
+          ["ipeds_award_count", "highest_earnings"].indexOf(self.field_sort) >=
+          0
+        ) {
           fos.reverse();
         }
-        fos = fos.slice(0,10);
-        fos.map(field=>{ field.hoist = field[self.field_sort]; return field; })
-      }
-      else
-      {
+        fos = fos.slice(0, 10);
+        fos.map(field => {
+          field.hoist = field[self.field_sort];
+          return field;
+        });
+      } else {
         fos = [fos];
       }
       return fos;
