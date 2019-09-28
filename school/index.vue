@@ -93,7 +93,7 @@
                 </v-row>
                 <v-row>
                   <v-col col="12" md="6">
-                    <h4 class="subtitle-2 font-weight-bold mb-4">Graduation Rate</h4>
+                    <h2 class="mb-4">Graduation Rate</h2>
                     <donut
                       color="#880E4F"
                       :value="_.get(school, this.fields['COMPLETION_RATE']) * 100"
@@ -101,7 +101,7 @@
                     ></donut>
                   </v-col>
                   <v-col col="12" md="6">
-                    <h4 class="subtitle-2 font-weight-bold">Salary After Completing</h4>
+                    <h2 class="mb-3">Salary After Completing</h2>
                     <div class="my-5" style="height: 70px">
                       <range
                         :lower="{ value: 25000, label: 'Basketweaving<br />$25,0000' }"
@@ -112,10 +112,10 @@
                       ></range>
                     </div>
 
-                    <h4 class="subtitle-2 font-weight-bold">
+                    <h2 class="mb-3">
                       Average Annual Cost
                       <tooltip definition="avg-cost-year" />
-                    </h4>
+                    </h2>
                     <div v-if="!isProgramReporter">
                       <h2
                         class="display-2 pink--text text--darken-4 font-weight-bold"
@@ -139,13 +139,14 @@
                   <v-expansion-panel-header id="cost" aria-controls="costs-content">Costs</v-expansion-panel-header>
                   <v-expansion-panel-content id="costs-content" class="pa-5">
                     <v-row v-if="!isProgramReporter">
-                      <v-col cols="12" md="6" class="text-center">
+                      <v-col cols="12" md="6">
+                        <h2 class='mb-3'>Average Annual Cost</h2>
                         <bar-chart
-                          :labels="['Average Annual Cost']"
+                          :labels="['']"
                           :data="[_.get(school, fields['NET_PRICE'], '0')]"
                           color="#880E4F"
                         />
-
+                        <p class="text-center">
                         <v-btn
                           rounded
                           color="secondary"
@@ -153,12 +154,9 @@
                           :href="_.get(school, fields['NET_PRICE_CALC_URL'], '#')"
                           v-if="_.get(school, fields['NET_PRICE_CALC_URL'], '#') != null"
                         >
-                          <i class="fa fa-calculator"></i>
-                          Calculate your personal net price
-                          <i
-                            clas="fa fa-external"
-                          ></i>
+                          <v-icon small>fas fa-calculator</v-icon> Calculate your personal net price
                         </v-btn>
+                        </p>
                       </v-col>
 
                       <v-col cols="12" md="6">

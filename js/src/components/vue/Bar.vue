@@ -44,6 +44,7 @@ export default {
             },
             plugins: {
               datalabels: {
+                color: '#FFFFFF',
                 formatter: function(value, context) {
                   return value.toLocaleString("en-US",{style:"currency", currency:"USD" }).slice(0,-3);
                 }

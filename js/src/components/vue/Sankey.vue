@@ -28,7 +28,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "sass/_variables.scss";
   
 
@@ -264,7 +264,7 @@ export default {
                 fontSize: 14,
                 color: "#040404"
               },
-              enableInteractivity: false,
+              interactivity: false,
               colorMode: "unique"
             },
             link: {
