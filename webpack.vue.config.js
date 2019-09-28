@@ -32,7 +32,8 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: '../css/fonts/'
+              outputPath: '../css/fonts/',
+              publicPath: '/css/fonts/'
             }
           }
         ]
@@ -54,7 +55,7 @@ module.exports = {
           'vue-style-loader',
           'style-loader',
           'css-loader',
-          
+          'resolve-url-loader',
           {
             loader: 'sass-loader',
             // // Requires sass-loader@^8.0.0
