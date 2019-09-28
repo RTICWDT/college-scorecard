@@ -1,23 +1,23 @@
 {
   "spotChecks": {
-    "allSchools": 5872,
+    "allSchools": 5873,
     "allColumbia": 35,
-    "allCol": 2509,
+    "allCol": 2510,
     "allInDelaware": 17,
     "allInDelawareKentucky": 104,
     "allInFarWest": 798,
     "allIn10023NoRadius": 2,
     "allIn10023Radius5": 74,
-    "allSmall": 4274,
+    "allSmall": 4275,
     "allMedium": 1363,
     "allLarge": 232,
-    "allSmallAndLarge": 4506,
-    "allCertificates": 4410,
+    "allSmallAndLarge": 4507,
+    "allCertificates": 4411,
     "allAssociates": 2645,
     "allBachelors": 2418,
     "allPublic": 1959,
     "allPrivateNonProfit": 1587,
-    "allPrivateForProfit": 2326
+    "allPrivateForProfit": 2327
   },
 
   "allSchoolsInState": [
@@ -74,7 +74,7 @@
     {"code": "WY", "name": "Wyoming", "count": 10},
     {"code": "AS", "name": "American Samoa", "count": 1},
     {"code": "GU", "name": "Guam", "count": 3},
-    {"code": "PR", "name": "Puerto Rico", "count": 123},
+    {"code": "PR", "name": "Puerto Rico", "count": 124},
     {"code": "VI", "name": "Virgin Islands", "count": 1}
   ],
 
@@ -87,7 +87,7 @@
     {"code": "6", "name": "Southwest", "count": 612},
     {"code": "7", "name": "Rocky Mountains", "count": 231},
     {"code": "8", "name": "Far West", "count": 798},
-    {"code": "9", "name": "Outlying areas", "count": 132}
+    {"code": "9", "name": "Outlying areas", "count": 133}
   ],
 
   "allSchoolsWithProgram": [
