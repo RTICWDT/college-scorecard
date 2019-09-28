@@ -1,20 +1,16 @@
 <template>
     <div>
         <v-autocomplete
-            label="School Name"
             v-model="school"
             :items="items"
             :loading="isLoading"
             :search-input.sync="search"
-            color="white"
-            hide-no-data
-            hide-selected
             item-text="school.name"
             item-value="id"
             placeholder="Start typing to search"
             return-object
             @change="goToSchool"
-            hide-details
+            autocomplete="off"
          />
     </div>
 </template>

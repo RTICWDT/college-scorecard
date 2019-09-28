@@ -20,7 +20,7 @@
             <div v-else class="show-loaded" id="school">
        
                 <v-card tille class="school-heading pa-5 mb-5">
-                         <v-row>
+                <v-row>
                   <v-col cols="12" md="6" class='py-0'>
                     <v-chip
                       v-if="_.get(school, fields['UNDER_INVESTIGATION'])==1"
@@ -28,16 +28,19 @@
                       label
                     ><strong>Under ED Monitoring</strong></v-chip>
                   </v-col>
-                  <v-col cols="12" md="6" class='text-right py-0'>
-                    [[ Add Compare ]]
-                    <share label="Share this School" url="https://collegescorecard.ed.gov" />
-                  </v-col>
+                
                 </v-row>
 
                   <v-row>
                     <v-col cols="12" md="8" class="py-0">
                       <h1 class="pa-0 ma-0">All Fields of Study Available at {{ _.get(school, fields['NAME'], 'School Name') }}</h1>
                     </v-col>
+                    <v-col cols="12" md="4" class='text-right py-0'>
+                    <v-btn small color="primary" fab  ripple :class="{amber: isSelected}" @click="$emit('toggle-compare-school',school)">
+                      <v-icon small>fa fa-star</v-icon>
+                    </v-btn>
+                    <share label="Share this School" url="https://collegescorecard.ed.gov" />
+                  </v-col>
                   </v-row>
                 </v-card>
               <!-- /.school-card_container-school -->
@@ -120,7 +123,8 @@ export default {
           { id: 7, credential: "First Professional Degree" },
           { id: 8, credential: "Graduate/Professional Certificate" },
         ],
-      currentFilter: 0
+      currentFilter: 0,
+      isSelected: false
     };
   },
   computed: {
@@ -129,6 +133,7 @@ export default {
       this.programs = programs;
       let processedPrograms = {};
       let self = this;
+
       programs.forEach(function(program, idx) {
         if (
           !self.currentFilter ||
