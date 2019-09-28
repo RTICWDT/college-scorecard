@@ -27,7 +27,7 @@
     
   
     .picc-range-bar {
-      background-color: $emerald-green;
+      background-color: #880E4F;
       height: 100%;
       left: 0;
       position: absolute;
@@ -41,6 +41,7 @@
       position: absolute;
       top: 0;
       transition: left .5s;
+      font-size: 0.8rem;
   
       span {
         font-weight: 200;

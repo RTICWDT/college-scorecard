@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <p class="outcomes_intro">Show data for students who</p>
+      <p class="outcomes_intro d-inline-block mb-2">Show data for students who</p>
       <v-btn-toggle v-model="enroll" @change="drawSankeyChart" mandatory color="secondary">
         <v-btn small text value="enroll_first_time">started college here</v-btn>
         <v-btn small text value="enroll_not_first_time">transferred in</v-btn>
@@ -9,7 +9,7 @@
       </v-btn-toggle>
     </div>
     <div>
-      <p class="outcomes_intro">and started their studies</p>
+      <p class="outcomes_intro d-inline-block ">and started their studies</p>
       <v-btn-toggle v-model="study" @change="drawSankeyChart" mandatory color="secondary">
         <v-btn small text value="study_full_time">full-time</v-btn>
         <v-btn small text value="study_part_time">part-time</v-btn>
@@ -28,31 +28,8 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "sass/_variables.scss";
-#graduation-content{
-  .school-two_col-left, 
-  .school-two_col-right{
-    padding-bottom: $base-padding-large;
-  }
-}
-.school-outcome-measures{
-  padding-top: $base-padding;
-  clear: both;
-  border-top: 1px solid $mid-gray;
-
-  .outcomes_intro{
-    padding-bottom: 0.7em !important;
-    padding-left: 2px;
-    display:inline-block;
-  }
-
-  .figure-heading{
-    max-width: 250px;
-    margin: $base-padding auto;
-  }  
-}
-
   
 
 .om_visualization{

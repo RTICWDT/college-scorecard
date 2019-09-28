@@ -14,7 +14,7 @@
   <v-card tile class="search-result-card mx-auto pa-2" 
     outlined :class="{'result-card-selected': isSelected}"> <!-- Better Selected style -->
     <v-card-text>
-       <v-btn color="primary" fab icon ripple class='float-right' :class="{amber: isSelected}" @click="$emit('toggle-compare-school',school)">
+       <v-btn color="primary" small fab icon ripple class='float-right' :class="{amber: isSelected}" @click="$emit('toggle-compare-school',school)">
           <v-icon>fa fa-star</v-icon>
         </v-btn>
         <p class='overline font-weight-bold mb-1'>{{school['school.city']}}, {{school['school.state']}}</p>

@@ -18,6 +18,7 @@
 
   <v-form>
     <div class='pa-5'>
+    <p class='subhead-2'>School Name</p> 
     <name-autocomplate></name-autocomplate>
 
     <p class='subhead-2'>Location</p>    
@@ -32,14 +33,15 @@
       ></v-select>
     
     <p class='subhead-2'>Field of Study/Major</p>
-    <v-select v-model='input.major'
+    <field-autocomplete></field-autocomplete>
+    <!-- <v-select v-model='input.major'
       :items='programs'
       item-text='label'
       item-value='key'
       placeholder='e.g., civil engineering'
       hide-details
     >
-    </v-select>
+    </v-select> -->
 
     <p class='subhead-2'>Length</p>
     <div class="search-form-degree-wrapper">
@@ -219,6 +221,7 @@ import _ from 'lodash';
 import querystring from 'querystring';
 import CheckRange from './CheckRange.vue';
 import NameAutocomplete from './NameAutocomplete.vue';
+import FieldAutocomplete from './FieldAutocomplete.vue';
 
 export default {
   props:{
@@ -234,7 +237,8 @@ export default {
   },
   components:{
     'check-range': CheckRange,
-    'name-autocomplate': NameAutocomplete
+    'name-autocomplate': NameAutocomplete,
+    'field-autocomplete': FieldAutocomplete
   },
   data(){
     return{

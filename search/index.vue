@@ -5,13 +5,15 @@
   .canned-search-wrapper{
     margin-bottom: 8px;
   }
-
+  .searchSidebar{
+    height: auto !important;
+  }
 </style>
 
 <template>
   <div>
     <v-app>
-      <v-navigation-drawer absolute v-model='showSidebar' app width="300">
+      <v-navigation-drawer absolute v-model='showSidebar' app width="300" class='searchSidebar'>
         
         <!-- TODO - All form fields and layout. -->
         <!-- Search Form Component -->
@@ -34,7 +36,7 @@
                 <v-col cols="12" md='4' sm='12' xs='12'>
                   <div id="search-can-query-text">
                     <h3>Show Me Options</h3>
-                    <p>Selection options on right right to create a list of schools that fit you</p>
+                    <p>Select one or more options on right to create a list of schools that fit you.</p>
                   </div>
                 </v-col>
                 <v-col md='8' sm='12' xs='12' cols=''>
@@ -181,6 +183,7 @@
         
             
       <v-btn fixed top right color="secondary" rounded @click="showCompare = !showCompare">Compare</v-btn>
+      <v-btn fixed bottom right color="secondary" rounded @click="showSidebar = !showSidebar">Search</v-btn>
         
       </v-container>
       </v-content>
