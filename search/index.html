@@ -16,6 +16,8 @@ permalink: /search/
     :religious-affiliations="site.data.religiousAffiliations"
     :specialized-mission="site.data.specializedMission"
     :is-loading="isLoading" @loading="isLoading = $event"
-    :compare-schools="compareSchools" @compare-update-selection="refreshCompareSchools"
+    :compare-schools="compareSchools"
+    @compare-update-selection="refreshCompareSchools"
+    @toggle-compare-school="toggleCompareSchool"
   />
 </div>

@@ -73,6 +73,22 @@ new Vue({
     // Refresh Compare Schools from Local Storage.
     refreshCompareSchools(){
       this.compareSchools = picc.school.selection.all(picc.school.selection.LSKey);
+    },
+    // Toggle Compare School in local storage.
+    toggleCompareSchool(school){
+      // Prepare Data, Make a call to the picc function.    
+      let schoolData = {
+        dataset:{
+          bind:"selected_school",
+          school:"compare-schools",
+          schoolId: (school.schoolId) ? String(school.schoolId) : String(school.id),
+          schoolName: (school.schoolName) ? school.schoolName : school['school.name'],
+        }
+      };
+
+      picc.school.selection.vueToggle(schoolData);
+
+      this.refreshCompareSchools();
     }
   }
 });

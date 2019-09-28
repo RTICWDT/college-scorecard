@@ -187,25 +187,12 @@
         
       </v-container>
       </v-content>
-      <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
-        <v-card tile id="compare_schools-content" class='pa-5'>
-            <p>Compare Schools</p>
-            
-            <ul id="edit-compare-list">
-              <li class="edit-compare-list-item" v-for="school in compareSchools" :key="school.schoolId">
-                <label class="checkbox" data-bind="checkbox_label" data-school :for="`edit-compare-${school.schoolId}`">
-                  <input :id="`edit-compare-${school.schoolId}`" type="checkbox" name="_compare" tabindex="0" checked @change="handleToggleCompareSchool(school)">
-                  <span tabindex="-1" class="checkbox-focus"></span>
-                  <span>{{school.schoolName}}</span>
-                </label>
-              </li>
-            </ul>
-          <p>
-            <v-btn rounded color="secondary" href="/compare/">Compare Schools</v-btn>
-          </p>
-      </v-card>
-    </v-bottom-sheet> 
 
+      <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
+        <compare-drawer :schools="compareSchools" @toggle-compare-school="handleToggleCompareSchool">
+        </compare-drawer>
+      </v-bottom-sheet> 
+      
     </v-app>
     
   
@@ -229,6 +216,7 @@
 import SearchResultCard from 'components/vue/SearchResultCard.vue';
 import SearchForm from 'components/vue/SearchForm.vue';
 import CannedSearchButton from 'components/vue/CannedSearchButton.vue';
+import CompareDrawer from 'components/vue/CompareDrawer.vue';
 
 import _ from 'lodash';
 // import querystring from 'querystring';
@@ -239,7 +227,8 @@ export default {
   components:{
     'search-result-card': SearchResultCard,
     'search-form': SearchForm,
-    'canned-search-button': CannedSearchButton
+    'canned-search-button': CannedSearchButton,
+    'compare-drawer': CompareDrawer
   },
   props:{
     'page-permalink': String,
@@ -395,21 +384,24 @@ export default {
       }
     },
     handleToggleCompareSchool(school){
-      // Prepare Data, Make a call to the picc function.    
-      let schoolData = {
-        dataset:{
-          bind:"selected_school",
-          school:"compare-schools",
-          schoolId: (school.schoolId) ? String(school.schoolId) : String(school.id),
-          schoolName: (school.schoolName) ? school.schoolName : school['school.name'],
-        }
-      };
-
-      picc.school.selection.vueToggle(schoolData);
-
-      // Update vue instance with new current compare school selection.
-      this.$emit('compare-update-selection');
+      this.$emit('toggle-compare-school',school);
     },
+    // handleToggleCompareSchool(school){
+    //   // Prepare Data, Make a call to the picc function.    
+    //   let schoolData = {
+    //     dataset:{
+    //       bind:"selected_school",
+    //       school:"compare-schools",
+    //       schoolId: (school.schoolId) ? String(school.schoolId) : String(school.id),
+    //       schoolName: (school.schoolName) ? school.schoolName : school['school.name'],
+    //     }
+    //   };
+
+    //   picc.school.selection.vueToggle(schoolData);
+
+    //   // Update vue instance with new current compare school selection.
+    //   this.$emit('compare-update-selection');
+    // },
     handleCannedSearchClick(cannedSearchData){
       if(cannedSearchData.add[0]){
         // console.log(this.parseURLParams(this.generateQueryString(cannedSearchData.add[0]).substr(1)));
