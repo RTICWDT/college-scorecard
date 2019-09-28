@@ -42,6 +42,7 @@
                       label
                     >
                       <strong>Under ED Monitoring</strong>
+                      <tooltip definition="hcm2" color="#FFFFFF" />
                     </v-chip>
                   </v-col>
                 </v-row>
@@ -145,6 +146,7 @@
                           :labels="['']"
                           :data="[_.get(school, fields['NET_PRICE'], '0')]"
                           color="#880E4F"
+                          :max="100000"
                         />
                         <p class="text-center">
                         <v-btn
@@ -613,7 +615,7 @@
                           :height="200"
                           :width="300"
                         ></donut>
-                        <p v-else>This school has an open admissiion policy.</p>
+                        <p v-else>This school has an open admission policy.</p>
                       </v-col>
                     </v-row>
                   </v-expansion-panel-content>
@@ -825,7 +827,7 @@ export default {
     },
     fieldsOfStudy() {
       let self = this;
-      let fos = _.get(this.school, "latest.programs.aid.debt.cip_4_digit");
+      let fos = _.get(this.school, "latest.programs.cip_4_digit");
       if (fos.length) {
         fos = fos.filter(
           field => field.credential.level <= 3 && field[self.field_sort]
@@ -945,7 +947,7 @@ export default {
     params[picc.fields.SIZE + "__range"] = "0..";
     params[picc.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";
     params[picc.fields.ID + "__range"] = "..999999";
-    params["fields"] = "latest,school,id,location";
+    //params["fields"] = "latest,school,id,location";
     params["keys_nested"] = true;
     picc.API.getSchool(id, params, function onSchoolLoad(error, school) {
       self.school = school;

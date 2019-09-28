@@ -129,7 +129,7 @@ export default {
   },
   computed: {
     processedPrograms() {
-      let programs = _.get(this.school, "latest.programs.aid.debt.cip_4_digit");
+      let programs = _.get(this.school, "latest.programs.cip_4_digit");
       this.programs = programs;
       let processedPrograms = {};
       let self = this;
@@ -177,7 +177,7 @@ export default {
     params[picc.fields.SIZE + "__range"] = "0..";
     params[picc.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";
     params[picc.fields.ID + "__range"] = "..999999";
-    params["fields"] = "latest,school,id,location";
+    //params["fields"] = "latest,school,id,location";
     params["keys_nested"] = true;
     picc.API.getSchool(id, params, function onSchoolLoad(error, school) {
       self.school = school;
