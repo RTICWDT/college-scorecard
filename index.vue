@@ -9,8 +9,9 @@
             <h1  class="white--text text-uppercase">Find the Right Fit.</h1>
             <p class="white--text">Find out about colleges: their programs, costs, admissions, results, and more.</p>
             <v-card style='min-height: 300px' class='pa-5'>
-              <p>[Insert Good Options]</p>
-              <p><v-btn color="secondary" rounded href="/search/">Go!</v-btn></p>
+              <canned-search-container @canned-search-submit="handleCannedSearchClick">
+
+              </canned-search-container>
             </v-card>
           </div>
         </v-col>
@@ -45,10 +46,26 @@
 </style>
 <script>
 import PayingForCollege from 'components/vue/PayingForCollege.vue';
+import CannedSearchContainer from 'components/vue/CannedSearchContainer.vue';
+import querystring from "querystring";
+
 export default {
   components:{
-    'paying-for-college': PayingForCollege
+    'paying-for-college': PayingForCollege,
+    'canned-search-container': CannedSearchContainer
   },
-  props: ["baseUrl"]
+  props: ["baseUrl"],
+  methods:{
+    handleCannedSearchClick(cannedSearchData){
+      // Generate URL based on params,
+      let qs = querystring.stringify(cannedSearchData);
+      let url =  '/search?' + qs.replace(/^&+/, '')
+        .replace(/&{2,}/g, '&')
+        .replace(/%3A/g, ':');
+
+      // Direct to location.
+      window.location.href = url;
+    },
+  }
 };
 </script>
