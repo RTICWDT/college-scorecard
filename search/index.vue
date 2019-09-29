@@ -29,8 +29,23 @@
 
         
           <div id="search-result-container">
-
             <div id="search-can-query-container">
+              <v-row>
+                <v-col cols="12" md='4' sm='12' xs='12'>
+                  <div id="search-can-query-text">
+                    <h3>Show Me Options</h3>
+                    <p>Select one or more options on right to create a list of schools that fit you.</p>
+                  </div>
+                </v-col>
+
+                <v-col md='8' sm='12' xs='12' cols='12'>
+                  <canned-search-container @canned-search-submit="handleCannedSearchClick">
+                  </canned-search-container>                  
+                </v-col>
+              </v-row>
+            </div>
+
+            <!-- <div id="search-can-query-container">
               <v-row>
                 
                 <v-col cols="12" md='4' sm='12' xs='12'>
@@ -47,47 +62,18 @@
                           Schools In MA
                         </canned-search-button>
                       </v-col>
- 
-                      <!-- <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
-                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['WA']}]">
-                          Schools In WA
-                        </canned-search-button>
-                      </v-col> -->
+
                       <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
                         <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{size:['medium']}]">
                         Medium Sized Schools
                         </canned-search-button>
                       </v-col>
-<!--                      
-                      <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
-                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['MA']}]">
-                          Schools In MA
-                        </canned-search-button>
-                      </v-col>
-
-                      <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
-                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['MA']}]">
-                          Schools In MA
-                        </canned-search-button>
-                      </v-col>
-
-                      <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
-                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['MA']}]">
-                          Schools In MA
-                        </canned-search-button>
-                      </v-col>
-
-                      <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
-                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['MA']}]">
-                          Schools In MA
-                        </canned-search-button>
-                      </v-col> -->
                     </v-row>
                   </div>  
                 </v-col>
 
               </v-row>
-            </div>
+            </div> -->
 
             <div class="search-result-container pa-0">
                 <v-card tile class='my-4 pa-1' color="grey lighten-2">
@@ -187,25 +173,12 @@
         
       </v-container>
       </v-content>
-      <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
-        <v-card tile id="compare_schools-content" class='pa-5'>
-            <p>Compare Schools</p>
-            
-            <ul id="edit-compare-list">
-              <li class="edit-compare-list-item" v-for="school in compareSchools" :key="school.schoolId">
-                <label class="checkbox" data-bind="checkbox_label" data-school :for="`edit-compare-${school.schoolId}`">
-                  <input :id="`edit-compare-${school.schoolId}`" type="checkbox" name="_compare" tabindex="0" checked @change="handleToggleCompareSchool(school)">
-                  <span tabindex="-1" class="checkbox-focus"></span>
-                  <span>{{school.schoolName}}</span>
-                </label>
-              </li>
-            </ul>
-          <p>
-            <v-btn rounded color="secondary" href="/compare/">Compare Schools</v-btn>
-          </p>
-      </v-card>
-    </v-bottom-sheet> 
 
+      <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
+        <compare-drawer :schools="compareSchools" @toggle-compare-school="handleToggleCompareSchool">
+        </compare-drawer>
+      </v-bottom-sheet> 
+      
     </v-app>
     
   
@@ -229,6 +202,8 @@
 import SearchResultCard from 'components/vue/SearchResultCard.vue';
 import SearchForm from 'components/vue/SearchForm.vue';
 import CannedSearchButton from 'components/vue/CannedSearchButton.vue';
+import CompareDrawer from 'components/vue/CompareDrawer.vue';
+import CannedSearchContainer from 'components/vue/CannedSearchContainer.vue';
 
 import _ from 'lodash';
 // import querystring from 'querystring';
@@ -239,7 +214,9 @@ export default {
   components:{
     'search-result-card': SearchResultCard,
     'search-form': SearchForm,
-    'canned-search-button': CannedSearchButton
+    'canned-search-button': CannedSearchButton,
+    'compare-drawer': CompareDrawer,
+    'canned-search-container': CannedSearchContainer,
   },
   props:{
     'page-permalink': String,
@@ -395,30 +372,13 @@ export default {
       }
     },
     handleToggleCompareSchool(school){
-      // Prepare Data, Make a call to the picc function.    
-      let schoolData = {
-        dataset:{
-          bind:"selected_school",
-          school:"compare-schools",
-          schoolId: (school.schoolId) ? String(school.schoolId) : String(school.id),
-          schoolName: (school.schoolName) ? school.schoolName : school['school.name'],
-        }
-      };
-
-      picc.school.selection.vueToggle(schoolData);
-
-      // Update vue instance with new current compare school selection.
-      this.$emit('compare-update-selection');
+      this.$emit('toggle-compare-school',school);
     },
     handleCannedSearchClick(cannedSearchData){
-      if(cannedSearchData.add[0]){
-        // console.log(this.parseURLParams(this.generateQueryString(cannedSearchData.add[0]).substr(1)));
-        this.urlParsedParams = this.parseURLParams(this.generateQueryString(cannedSearchData.add[0]).substr(1));
-        // this.debounceSearchUpdate(cannedSearchData.add[0]);
+      if(cannedSearchData){
+        this.urlParsedParams = this.parseURLParams(this.generateQueryString(cannedSearchData).substr(1));
+        this.debounceSearchUpdate(this.parseURLParams(this.generateQueryString(cannedSearchData).substr(1)));
       }
-
-      // TODO - Better handling of adding/removing items.
-        // Maybe parse current url, add what is not there, remove whatever is passed.
     },
     isResultCardSelected(schoolId,compareSchools){
       if(_.findIndex(compareSchools,['schoolId',String(schoolId)]) >= 0)
