@@ -531,6 +531,12 @@ picc.fields = {
   PROGRAG_REPORTER_CIP:     'cip_6_digit',
   PROGRAM_REPORTER_COST:    'latest.cost.program_reporter',
   PROGRAM_REPORTER_PROGRAM: 'latest.academics.program_reporter',
+
+  // field of study
+  FIELD_OF_STUDY:           'latest.programs.cip_4_digit',
+  FIELD_OF_STUDY_CODE:      'latest.programs.cip_4_digit.code',
+  FIELD_OF_STUDY_LENGTH:    'latest.programs.cip_4_digit.credential.level'
+
 };
 
 picc.programReporterCip = {

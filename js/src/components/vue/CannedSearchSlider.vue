@@ -1,5 +1,5 @@
 <template>
-  <v-switch :label="label" @change="$emit('canned-search-toggle', {value: $event, data: addToQuery})">
+  <v-switch :label="label" color="secondary" @change="$emit('canned-search-toggle', {value: $event, data: addToQuery})">
 
   </v-switch>
 </template>

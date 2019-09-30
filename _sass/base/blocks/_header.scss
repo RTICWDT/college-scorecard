@@ -1,4 +1,5 @@
 header {
+  z-index: 10;
   background-color: $dark-blue;
   color: $white;
 
@@ -8,36 +9,59 @@ header {
     text-decoration: none;
   }
 
-  .logo{
-    display:inline-block;
+  .logo {
+    display: inline-block;
     padding: 20px;
     vertical-align: middle;
     margin-top: -30px;
-    img{
+
+    img {
       width: 90px;
+
+      @media screen and (max-width: 500px) {
+        width: 50px;
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+      margin-top: -15px;
     }
   }
-  .headerText{
-    display:inline-block;
+
+  .headerText {
+    display: inline-block;
     line-height: 200%;
     margin-top: 10px;
+
+    @media screen and (max-width: 500px) {
+      line-height: 130%;
+    }
   }
 
-  .edLine{
-    display:block;
+  .edLine {
+    display: block;
     font-size: 1.12rem;
     padding-top: 15px;
     font-family: $header-font-family;
     font-weight: 700;
     text-transform: uppercase;
     color: #8B93A3;
-  }
-  .siteTitle{
-    display:block;
-    font-size: 2.24rem;
-    font-family: $header-font-family;
+
+    @media screen and (max-width: 500px) {
+      font-size: 0.6rem;
+
+    }
   }
 
+  .siteTitle {
+    display: block;
+    font-size: 2.24rem;
+    font-family: $header-font-family;
+
+    @media screen and (max-width: 500px) {
+      font-size: 1.19rem;
+    }
+  }
 }
 
 // Data tool

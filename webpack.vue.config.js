@@ -55,7 +55,6 @@ module.exports = {
           'vue-style-loader',
           'style-loader',
           'css-loader',
-          'resolve-url-loader',
           {
             loader: 'sass-loader',
             // // Requires sass-loader@^8.0.0

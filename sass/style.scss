@@ -5,11 +5,13 @@
 // @import '~vuetify/dist/vuetify.min';
 //@import '~vuetify/src/styles/styles.sass';
 
+@import '../css/fonts/fonts.css';
 @import '~@mdi/font/css/materialdesignicons.css';
 @import '~vuetify/dist/vuetify.min';
 @import '_vuetify-overrides.scss';
 @import 'components/_header.scss';
 @import 'components/_footer.scss';
+
 
 // Pages
 @import 'pages/_search.scss';

@@ -4,17 +4,19 @@
     text-decoration: none;
     line-height: 125%;
   }
-
+  .search-result-card{
+    border: 4px solid #FFFFFF !important;
+  }
   .result-card-selected{
-    border: 2px solid rgba(255, 193, 7, 0.4) !important;    
+    border: 4px solid #eeba28 !important;    
   }
 </style>
 
 <template>
-  <v-card tile class="search-result-card mx-auto pa-2" 
+  <v-card tile class="search-result-card mx-auto pa-0" 
     outlined :class="{'result-card-selected': isSelected}"> <!-- Better Selected style -->
     <v-card-text>
-       <v-btn color="primary" small fab icon ripple class='float-right' :class="{amber: isSelected}" @click="$emit('toggle-compare-school',school)">
+        <v-btn color="primary" small fab icon ripple class='float-right' :class="{amber: isSelected}" @click="$emit('toggle-compare-school',school)">
           <v-icon>fa fa-star</v-icon>
         </v-btn>
         <p class='overline font-weight-bold mb-1'>{{school['school.city']}}, {{school['school.state']}}</p>
@@ -22,36 +24,27 @@
         <p class='subtitle-1 font-italic'>{{school['latest.student.size'] | separator }} undergrads</p>
         <v-divider />
         <v-row>
-        <v-col cols='4'  class="pr-0 text-center">
+        <v-col cols='5'  class="pr-0 text-center">
           <h3>{{displayGradRate}}</h3>
         </v-col>
-        <v-col cols='8'>
-          <span>who go graduate</span>
-          <span class="tooltip-target u-new_line">
-            <i class="fa fa-info-circle"></i>
-          </span>
+        <v-col cols='7'>
+          <span>who go graduate <tooltip definition="graduation-rate" /></span>
         </v-col>
       </v-row>
       <v-row class='result-card-info-container'>
-        <v-col cols='4' class="pr-0 text-center">
+        <v-col cols='5' class="pr-0 text-center">
           <h3>{{displayEarn}}</h3>
         </v-col>
-        <v-col cols='8'>
-          <span>typical earnings for recent graduates</span>
-          <span class="tooltip-target u-new_line">
-            <i class="fa fa-info-circle"></i>
-          </span>
+        <v-col cols='7'>
+          <span>typical earnings for recent graduates <tooltip definition="avg-salary" /></span>          
         </v-col>
       </v-row>
       <v-row class='result-card-info-container'>
-        <v-col cols='4' class="pr-0 text-center">
+        <v-col cols='5' class="pr-0 text-center">
           <h3>{{displayAvgCost}}</h3>
         </v-col>
-        <v-col cols='8'>
-          <span>average annual cost after aid</span>
-          <span class="tooltip-target u-new_line">
-            <i class="fa fa-info-circle"></i>
-          </span>
+        <v-col cols='7'>
+          <span>average annual cost after aid <tooltip definition="avg-cost-year" /></span>
         </v-col>
       </v-row>
     </v-card-text>
@@ -60,8 +53,12 @@
 
 <script>
 import numeral from 'numeral';
+import Tooltip from 'components/vue/Tooltip.vue';
 
 export default {
+  components: {
+    tooltip: Tooltip
+  },
   props:{
       "school": Object,
       "isSelected": Boolean
@@ -75,11 +72,12 @@ export default {
       }
     },
     displayEarn(){
-      if (!this.school['latest.earnings.10_yrs_after_entry.median'] || this.school['latest.earnings.10_yrs_after_entry.median'] < 0){
-        return "N/A"
-      }else{
-        return numeral(this.school['latest.earnings.10_yrs_after_entry.median']).format('$0a');
-      }
+      // if (!this.school['latest.earnings.10_yrs_after_entry.median'] || this.school['latest.earnings.10_yrs_after_entry.median'] < 0){
+      //   return "N/A"
+      // }else{
+      //   return numeral(this.school['latest.earnings.10_yrs_after_entry.median']).format('$0a');
+      // }
+      return "$12K - $42K";
     },
     displayAvgCost(){
       if (!this.school['latest.cost.avg_net_price.overall'] || this.school['latest.cost.avg_net_price.overall'] < 0){

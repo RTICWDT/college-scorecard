@@ -75,7 +75,7 @@
   font-weight: 400;
   src: url('montserrat/Montserrat-Regular.eot');
   src: url('montserrat/Montserrat-Regular.woff2') format('woff2'),
-       url('montserrat/Montserrat-Regularv.woff') format('woff'),
+       url('montserrat/Montserrat-Regular.woff') format('woff'),
        url('montserrat/Montserrat-Regular.ttf') format('truetype');
 
 }

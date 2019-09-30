@@ -59,7 +59,7 @@ export default {
     handleCannedSearchClick(cannedSearchData){
       // Generate URL based on params,
       let qs = querystring.stringify(cannedSearchData);
-      let url =  '/search?' + qs.replace(/^&+/, '')
+      let url =  '/search/?' + qs.replace(/^&+/, '')
         .replace(/&{2,}/g, '&')
         .replace(/%3A/g, ':');
 

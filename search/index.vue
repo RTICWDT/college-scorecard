@@ -13,7 +13,14 @@
 <template>
   <div>
     <v-app>
-      <v-navigation-drawer absolute v-model='showSidebar' app width="300" class='searchSidebar'>
+      <v-navigation-drawer 
+        v-model='showSidebar' 
+        app 
+        width="300" 
+        class='searchSidebar' 
+        v-scroll="toggleFixed" 
+        :absolute="sidebar.absolute" 
+        :fixed="sidebar.fixed">
         
         <!-- TODO - All form fields and layout. -->
         <!-- Search Form Component -->
@@ -25,11 +32,8 @@
       </v-navigation-drawer>
       <v-content>
       <v-container fluid class="grey lighten-5 pa-0">
-     
-
-        
           <div id="search-result-container">
-            <div id="search-can-query-container">
+            <div id="search-can-query-container" v-if="results.schools.length === 0">
               <v-row>
                 <v-col cols="12" md='4' sm='12' xs='12'>
                   <div id="search-can-query-text">
@@ -45,97 +49,52 @@
               </v-row>
             </div>
 
-            <!-- <div id="search-can-query-container">
-              <v-row>
-                
-                <v-col cols="12" md='4' sm='12' xs='12'>
-                  <div id="search-can-query-text">
-                    <h3>Show Me Options</h3>
-                    <p>Select one or more options on right to create a list of schools that fit you.</p>
-                  </div>
-                </v-col>
-                <v-col md='8' sm='12' xs='12' cols=''>
-                  <div id="search-can-query-items-wrapper">
-                    <v-row>
-                      <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
-                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['MA']}]">
-                          Schools In MA
-                        </canned-search-button>
-                      </v-col>
 
-                      <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
-                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{size:['medium']}]">
-                        Medium Sized Schools
-                        </canned-search-button>
-                      </v-col>
-                    </v-row>
-                  </div>  
-                </v-col>
-
-              </v-row>
-            </div> -->
-
-            <div class="search-result-container pa-0">
-                <v-card tile class='my-4 pa-1' color="grey lighten-2">
+            <div class="search-result-container">
+              <v-card tile class='mt-2 mb-4 py-1 px-4' color="grey lighten-2">
                 <v-row>
-                  <v-col cols='12' md='4' sm='12' class='py-2'>
-                    <div id="search-result-info-count" class='pl-5'>
-                      <p class='title mb-0'>{{results.meta.total}} Results</p> <!-- TODO - Count to display result/results -->
+                  <v-col cols='12' sm='4' class=''>
+                    <div id="search-result-info-count" class=''>
+                      <p class='display-1 mb-0'>{{results.meta.total | separator }} Results</p>
                     </div>
                   </v-col>
                 
-                  <v-col cols='12' md='8' sm='12' class='pa-0'>
-                    <v-row>
-
-                      <v-col cols='12' md='10' sm='12' class='pa-0'>
-                        <div id="search-pagination-controls" class="text-md-right text-sm-left">
-                          <span>Page:</span>
-                          <v-pagination v-model="input.page" :length='totalPages' :total-visible='7' @input="searchAPI(parseURLParams())"></v-pagination>
-                        </div>
-                      </v-col>
-
-                      <v-col cols='12' md="2" class="text-md-center text-sm-center pa-0">
-                        <v-speed-dial  v-model="utility.sortFAB" direction="bottom" right transition="slide-y-transition">
-                            <template v-slot:activator>
-                              <!-- <label for="select-sort">Sort:</label> -->
-                              <v-btn small v-model="utility.sortFAB" color="blue darken-2" dark fab>
-                                <v-icon v-if="utility.sortFAB">mdi-close</v-icon>
-                                <v-icon v-else>mdi-sort</v-icon>
-                              </v-btn>
-                              
-                            </template>
-                            
-                            <v-btn dark color="blue" @click="input.sort = 'salary:desc'; debounceSearchUpdate(parseURLParams());">
-                              <v-icon left>mdi-sort-numeric</v-icon>
-                              Salary
-                            </v-btn>
-
-                            <v-btn dark color="blue" @click="input.sort = 'avg_net_price:asc'; debounceSearchUpdate(parseURLParams());">
-                              <v-icon>mdi-sort-numeric</v-icon>
-                              Annual Cost
-                            </v-btn>
-
-                            <v-btn dark color="blue" @click="input.sort = 'completion_rate:desc'; debounceSearchUpdate(parseURLParams());">
-                              <v-icon>mdi-sort-numeric</v-icon>
-                              Graduation Rate
-                            </v-btn>
-
-                            <v-btn dark color="blue" @click="input.sort = 'name:asc'; debounceSearchUpdate(parseURLParams());">
-                              <v-icon>mdi-sort-alphabetical</v-icon>
-                              Name
-                            </v-btn>
-                          </v-speed-dial>
-
-                      </v-col>
-
-                    </v-row>
+                  <v-col cols='12' sm='8' class='' v-if="!isLoading">
+                    <div class='text-md-right'>Page: <v-pagination v-model="input.page" :length='totalPages' :total-visible='7' @input="searchAPI(parseURLParams())"></v-pagination>
+                          <v-menu offset-y>
+                        <template v-slot:activator="{ on }">
+                          <v-btn
+                            color="primary"
+                            small
+                            v-on="on"
+                            fab
+                          >
+                            <v-icon>fas fa-sort</v-icon>
+                          </v-btn>
+                        </template>
+                        <v-list>
+                          <v-list-item
+                            v-for="(item, index) in sorts"
+                            :key="index"
+                            @click="resort(item.field);"
+                          >
+                            <v-list-item-title>{{ item.type }}</v-list-item-title>
+                          </v-list-item>
+                        </v-list>
+                      </v-menu>
+                      </div>
                   </v-col>
                 </v-row>
-                </v-card>
+              </v-card>
 
               <div class="results-main-alert">
                 <div class="show-loading" v-show="isLoading">
-                  <h1>Loading...</h1>
+                   <v-card tile class="pa-5">
+                    <h1 class="heading">
+                      Loading
+                      <v-icon color="pink darken-4">fas fa-circle-notch fa-spin</v-icon>
+                    </h1>
+                  </v-card>
                 </div>
 
                 <div class="show-error" v-show="error.message">
@@ -164,12 +123,41 @@
 
               </div> <!--results-main -->
 
+           <v-card tile class='mt-4 mb-2 py-1 px-4' color="grey lighten-2" v-if="!isLoading">
+                <v-row>
+                  <v-col cols='12' class=''>
+                    <div class='text-md-right'>Page: <v-pagination v-model="input.page" :length='totalPages' :total-visible='7' @input="searchAPI(parseURLParams())"></v-pagination>
+                          <v-menu offset-y>
+                        <template v-slot:activator="{ on }">
+                          <v-btn
+                            color="primary"
+                            small
+                            v-on="on"
+                            fab
+                          >
+                            <v-icon>fas fa-sort</v-icon>
+                          </v-btn>
+                        </template>
+                        <v-list>
+                          <v-list-item
+                            v-for="(item, index) in sorts"
+                            :key="index"
+                            @click="resort(item.field);"
+                          >
+                            <v-list-item-title>{{ item.type }}</v-list-item-title>
+                          </v-list-item>
+                        </v-list>
+                      </v-menu>
+                      </div>
+                  </v-col>
+                </v-row>
+              </v-card>
             </div>
           </div>
         
             
       <v-btn fixed top right color="secondary" rounded @click="showCompare = !showCompare">Compare</v-btn>
-      <v-btn fixed bottom right color="secondary" rounded @click="showSidebar = !showSidebar">Search</v-btn>
+      <v-btn fab fixed bottom right color="secondary" rounded @click="showSidebar = !showSidebar" v-if="$vuetify.breakpoint.mdAndDown"><v-icon>fas fa-search</v-icon></v-btn>
         
       </v-container>
       </v-content>
@@ -234,6 +222,10 @@ export default {
   data(){
     return {
       showSidebar: true,
+      sidebar:{
+        fixed: false, 
+        absolute: true
+      },
       results:{
         schools:[],
         meta:{
@@ -253,7 +245,12 @@ export default {
       error:{
         message:null
       },
-      showCompare: false
+      showCompare: false,
+      sorts:[
+        { type: "Name", field: 'name:asc' },
+        { type: "Annual Cost", field: 'avg_net_price:asc' },
+        { type: "Graduation Rate", field: 'completion_rate:asc' }
+      ]
     };
   },
   created(){
@@ -331,7 +328,9 @@ export default {
         // not sure if we need this, but let's get it anyway
         picc.fields.EARNINGS_GT_25K,
         // under investigation flag
-        picc.fields.UNDER_INVESTIGATION
+        picc.fields.UNDER_INVESTIGATION,
+        // TODO: add field of study data
+        //picc.fields.FIELD_OF_STUDY
       ].join(',');
 
       let qs = this.generateQueryString(params);
@@ -397,6 +396,23 @@ export default {
       return '?' + qs.replace(/^&+/, '')
         .replace(/&{2,}/g, '&')
         .replace(/%3A/g, ':');
+    },
+    toggleFixed(e){
+      if(window.scrollY < 160)
+      {
+        this.sidebar.absolute = true;
+        this.sidebar.fixed = false;
+      }
+      else
+      {
+        this.sidebar.absolute = false;
+        this.sidebar.fixed = true;
+      }
+     // 
+    },
+    resort(sort){
+      this.input.sort = sort;
+      this.debounceSearchUpdate(this.parseURLParams())
     }
   }
 }

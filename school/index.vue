@@ -103,14 +103,25 @@
                   </v-col>
                   <v-col col="12" md="6">
                     <h2 class="mb-3">Salary After Completing</h2>
-                    <div class="my-5" style="height: 70px">
-                      <range
-                        :lower="{ value: 25000, label: 'Basketweaving<br />$25,0000' }"
-                        :upper="{ value: 84000, label: 'Brain Surgeon<br />$84,000' }"
-                        :min="{ value: 0, label: '0' }"
-                        :max="{ value: 125000, label: '$125,000' }"
-                        hideMiddle
-                      ></range>
+                    <div class="my-5 d-flex">
+                      <div style="width: 40%">
+                        <h2 class="display-2 pink--text text--darken-4 font-weight-bold" >
+                          $25K
+                        </h2>
+                        <p class='caption'>Agricultural/Animal/ Plant/Veterinary Science and Related Fields, Other.</p>
+                      </div>
+                      <div style="width: 20%">
+                          <h2 class="display-2 pink--text text--darken-4 font-weight-bold" >
+                          to 
+                        </h2>
+                      </div>
+                      <div style="width: 40%">
+                        <h2 class="display-2 pink--text text--darken-4 font-weight-bold">
+                          $56K
+                        </h2>
+                        <p class='caption'>Teacher Education and Professional Development, Specific Levels and Methods.</p>
+                      </div>
+                    
                     </div>
 
                     <h2 class="mb-3">
