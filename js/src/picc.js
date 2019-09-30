@@ -481,6 +481,11 @@ picc.fields = {
   // completion rate
   COMPLETION_RATE:      'latest.completion.rate_suppressed.overall',
 
+  // new rates
+  COMPLETION_OM:        'latest.completion.outcome_percentage_suppressed.all_students.8yr.award_pooled',
+  COMPLETION_200_4:     'latest.completion.rate_suppressed.four_year_200percent',
+  COMPLETION_200_LT4:   'latest.completion.rate_suppressed.lt_four_year',  
+  
   RETENTION_RATE:       'latest.student.retention_rate_suppressed',
 
   REPAYMENT_RATE:       'latest.repayment.3_yr_repayment_suppressed.overall',
