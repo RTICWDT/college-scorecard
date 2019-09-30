@@ -1,6 +1,6 @@
 avg-cost-year:
- default: <strong>Average Annual Cost</strong> The average annual net price for federal financial aid recipients, after aid from the school, state, or federal government. For public schools, this is only the average cost for in-state students.
- program_reporter: <strong>Average Annual Cost</strong> The average annual net price is not available for this program-reporting school.
+ default: <strong>Average Annual Cost</strong> The average annual net price for federal financial aid recipients, after aid from the school, state, or federal government. For public schools, this is only the average cost for in-state students. Negative cost values indicate that the average grant/scholarship aid received exceeded the cost of attendance.
+ program_reporter: <strong>Average Annual Cost</strong> The average annual net price is not available for this program-reporting school.     Negative cost values indicate that the average grant/scholarship aid received exceeded the cost of attendance. Negative cost values indicate that the average grant/scholarship aid received exceeded the cost of attendance.
 
 avg-program-cost:
   default: <strong>Cost After Aid for Largest Program</strong><ul><li>This includes expenses beyond tuition, fees, books, and supplies (e.g., living expenses).</li><li>If the program is less than 1 year, this is the total cost after aid. If the program is longer than 1 year, this is the annual cost after aid.</li></ul>
