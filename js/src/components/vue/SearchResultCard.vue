@@ -31,7 +31,7 @@
           <v-icon>fa fa-star</v-icon>
         </v-btn>
         <p class='overline font-weight-bold mb-1'>{{school['school.city']}}, {{school['school.state']}}</p>
-        <h2 class="title mt-0"><a class='nameLink' :href="link">{{school['school.name'] ? school['school.name'] : 'School Name'}}</a></h2>
+        <h2 class="title mt-0 font-strong"><a class='nameLink' :href="link">{{school['school.name'] ? school['school.name'] : 'School Name'}}</a></h2>
         <p class='subtitle-1 font-italic'>{{school['latest.student.size'] | separator }} undergrads</p>
         <v-divider />
         <v-row> 
@@ -63,6 +63,11 @@
           <em>Average annual cost is not available for program reporters.</em>
         </v-col>
       </v-row>
+      <v-row>
+        <v-col cols="12">
+          <small-school-icons :school="school" :fields="fields" size="small" />
+        </v-col>
+      </v-row>
     </v-card-text>
   </v-card>
 </template>
@@ -70,10 +75,11 @@
 <script>
 import numeral from 'numeral';
 import Tooltip from 'components/vue/Tooltip.vue';
-
+import SmallSchoolIcons from 'components/vue/SmallSchoolIcons.vue';
 export default {
   components: {
-    tooltip: Tooltip
+    tooltip: Tooltip,
+    'small-school-icons': SmallSchoolIcons
   },
   props:{
       "school": Object,

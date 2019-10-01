@@ -1,5 +1,7 @@
 
 .v-application{
+    font-family: $base-font-family !important;
+  
     h1, h2, h3, h4, h5, h6{
       font-family: $header-font-family !important;
       line-height: 125% !important;
@@ -9,7 +11,15 @@
     body, p{
       font-family: $base-font-family !important;
     }
-  
+    
+    a{
+      color: $darker-green !important;
+    }
+
+    .v-btn.secondary{
+      color: #FFFFFF !important;
+    }
+
     .title, .display-1, .display-2, .display-3, .display-4
     .subtitle-1, .subtitle-2
     {
@@ -32,5 +42,8 @@
     .v-data-table th{
       font-size: 1rem;
       font-family: $header-font-family !important;
+    }
+    .v-card{
+      overflow-wrap: normal;
     }
   }

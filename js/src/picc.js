@@ -2103,6 +2103,8 @@ picc.form.prepareParams = (function() {
 
     // XXX: this is only used for testing
     under_investigation:  picc.fields.UNDER_INVESTIGATION,
+
+    cip4: picc.fields.FIELD_OF_STUDY_CODE
   };
 
   // map a size or array of sizes to API-friendly range values

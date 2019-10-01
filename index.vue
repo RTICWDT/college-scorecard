@@ -1,6 +1,25 @@
 <template>
   <v-app>
+    <!-- <v-navigation-drawer
+        v-model="showSidebar"
+        app
+        width="300"
+        class="searchSidebar"
+        v-scroll="toggleFixed"
+        :absolute="sidebar.absolute"
+        :fixed="sidebar.fixed"
+      >
+        <search-form
+          :states="states"
+          :programs="programs"
+          :religious-affiliations="religiousAffiliations"
+          :specialized-mission="specializedMission"
+          :urlParsedParams="urlParsedParams"
+          @search-query="searchAPI"
+        />
+      </v-navigation-drawer> -->
     <!-- background image -->
+    <v-content>
     <div class="home-splash">
     <v-container class="pt-0">
       <v-row>
@@ -9,9 +28,7 @@
             <h1  class="white--text text-uppercase">Find the Right Fit.</h1>
             <p class="white--text">Find out about colleges: their programs, costs, admissions, results, and more.</p>
             <v-card style='min-height: 300px' class='pa-5'>
-              <canned-search-container @canned-search-submit="handleCannedSearchClick">
-
-              </canned-search-container>
+              <canned-search-container @canned-search-submit="handleCannedSearchClick"></canned-search-container>
             </v-card>
           </div>
         </v-col>
@@ -33,6 +50,7 @@
         </v-col>  
       </v-row>
     </v-container>
+    </v-content>
   </v-app>
 </template>
 <style lang="scss" scoped>
@@ -48,13 +66,24 @@
 import PayingForCollege from 'components/vue/PayingForCollege.vue';
 import CannedSearchContainer from 'components/vue/CannedSearchContainer.vue';
 import querystring from "querystring";
+import SearchForm from 'components/vue/SearchForm.vue';
 
 export default {
   components:{
     'paying-for-college': PayingForCollege,
-    'canned-search-container': CannedSearchContainer
+    'canned-search-container': CannedSearchContainer,
+    'search-form': SearchForm
   },
   props: ["baseUrl"],
+  data(){
+    return{
+            showSidebar: true,
+      sidebar: {
+        fixed: false,
+        absolute: true
+      },
+    }
+  },
   methods:{
     handleCannedSearchClick(cannedSearchData){
       // Generate URL based on params,

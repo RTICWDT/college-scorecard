@@ -48,7 +48,7 @@
 
   picc.CIP4 = [
     {% for program in site.data.cip_4_digit %}
-    { cip4: '{{ program.label }}', field:'{{ program.value }}'},
+    { cip4: '{{ program.label }}', field:'{{ program.value | replace: ".","" }}'},
     {% endfor %}
   ];
 

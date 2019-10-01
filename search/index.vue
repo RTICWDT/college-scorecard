@@ -340,6 +340,7 @@ export default {
         picc.fields.STATE,
         picc.fields.SIZE,
         picc.fields.BRANCHES,
+        picc.fields.LOCALE,
         // to get "public" or "private"
         picc.fields.OWNERSHIP,
         // to get the "four_year" or "lt_four_year" bit
@@ -360,10 +361,9 @@ export default {
         // new completion rates
         picc.fields.COMPLETION_OM,
         picc.fields.COMPLETION_200_4,
-        picc.fields.COMPLETION_200_LT4
+        picc.fields.COMPLETION_200_LT4,
 
-        // TODO: add field of study data
-        //picc.fields.FIELD_OF_STUDY
+        picc.fields.FIELD_OF_STUDY
       ].join(",");
 
       let qs = this.generateQueryString(params);

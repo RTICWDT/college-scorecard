@@ -62,7 +62,7 @@
                         :href="_.get(school, fields['SCHOOL_URL'], 'ed.gov') | formatUrl"
                       >{{ _.get(school, fields['SCHOOL_URL'], 'ed.gov') | formatUrlText }}</a>
                     </h2>
-                    <school-icons :school="school" :fields="fields" />
+                    <school-icons :school="school" :fields="fields" class='my-5' />
                     <div class="school-special_designation" v-if="specialDesignations.length>0">
                       <v-chip
                         class="special mr-1 mb-1"
@@ -481,11 +481,7 @@
                   <v-expansion-panel-content id="demographics-content" class="pa-5">
                     <v-row>
                       <v-col cols="12" md="6" class="d-flex justify-space-around">
-                        <ul class="school-key_figures key-figures mt-0 pt-0">
-                          <li :class="_.get(school, fields['SIZE'], '-1') | sizeCategoryClass">
-                            <span>{{ _.get(school, fields['SIZE'], '-1') | sizeCategory }}</span>
-                          </li>
-                        </ul>
+                        <school-icons :school="school" :fields="fields" :sizeOnly="true" />
                         <div class="text-center">
                           <strong
                             class="display-2 pink--text text--darken-4 font-weight-bold"
