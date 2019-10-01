@@ -41,7 +41,7 @@ export default {
             return this.schools.length
         },
         school(){
-            return(this.schools.length>1)?'Schools':'School';
+            return(this.schools.length>1)?'schools':'school';
         }
     }
 }

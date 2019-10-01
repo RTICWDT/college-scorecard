@@ -15,10 +15,9 @@
 <template>
   <v-card tile class="search-result-card mx-auto pa-0" 
     outlined :class="{'result-card-selected': isSelected}"> <!-- Better Selected style -->
-    <v-card-text>
-        <p class='mt-1 my-2'>
+    <v-card-text class='pa-3'>
+        <p class='mt-1 mb-2' v-if="_.get(school, fields['UNDER_INVESTIGATION'])==1">
           <v-chip
-          v-if="_.get(school, fields['UNDER_INVESTIGATION'])==1"
           color="error"
           label
           >
@@ -27,12 +26,12 @@
         </v-chip>
         </p>
 
-        <v-btn color="primary" small fab icon ripple class='float-right' :class="{amber: isSelected}" @click="$emit('toggle-compare-school',school)">
-          <v-icon>fa fa-star</v-icon>
+        <v-btn color="primary" text icon class='float-right' :color="isSelected?'amber':'grey'"  @click="$emit('toggle-compare-school',school)">
+          <v-icon >fa fa-star</v-icon>
         </v-btn>
         <p class='overline font-weight-bold mb-1'>{{school['school.city']}}, {{school['school.state']}}</p>
         <h2 class="title mt-0 font-strong"><a class='nameLink' :href="link">{{school['school.name'] ? school['school.name'] : 'School Name'}}</a></h2>
-        <p class='subtitle-1 font-italic'>{{school['latest.student.size'] | separator }} undergrads</p>
+        <p class='body-2 mt-1'>{{school['latest.student.size'] | separator }} undergrads</p>
         <v-divider />
         <v-row> 
         <v-col cols='5'  class="pr-0 text-center">
