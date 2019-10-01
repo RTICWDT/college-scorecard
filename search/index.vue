@@ -185,6 +185,7 @@
         <compare-drawer
           :schools="compareSchools"
           @toggle-compare-school="handleToggleCompareSchool"
+          v-on:close-modal="closeModal()"
         ></compare-drawer>
       </v-bottom-sheet>
     </v-app>
@@ -447,6 +448,9 @@ export default {
     resort(sort) {
       this.input.sort = sort;
       this.debounceSearchUpdate(this.parseURLParams());
+    },
+    closeModal(){
+      this.showCompare = false;
     }
   }
 };

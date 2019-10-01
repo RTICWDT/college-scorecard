@@ -54,6 +54,9 @@ export default {
         // Move to a local state that can be clicked again and eventually refreshed.
 
       this.$emit('toggle-compare-school',school);
+    },
+    toggleDrawer(){
+      this.$emit('close-modal');
     }
   }
 }

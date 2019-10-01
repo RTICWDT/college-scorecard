@@ -2,7 +2,7 @@
   <v-app id="app" class="school-page">
     <div class="backNav">
       <div class="container school-back">
-        <a id="referrer-link" class="link-more" href="../search/">
+        <a id="referrer-link" class="link-more" :href="referer">
           <i class="fa fa-chevron-left"></i> Back to search results
         </a>
       </div>
@@ -84,7 +84,7 @@
                     >
                       <v-icon small>fa fa-star</v-icon>
                     </v-btn>
-                    <share label="Share this School" url="https://collegescorecard.ed.gov" />
+                    <share label="Share this School" :url="shareLink" />
                     <div class="school-map" ref="map"></div>
                   </v-col>
                 </v-row>
@@ -853,6 +853,12 @@ export default {
         fos = [fos];
       }
       return fos;
+    },
+    referer(){
+      return document.referrer || '/search/';
+    },
+    shareLink(){
+      return window.location.href || null;
     }
   },
 
@@ -936,8 +942,6 @@ export default {
       //  loadable.classed('js-error', true);
       //  return showError(picc.errors.NO_SCHOOL_ID);
     }
-
-    d3.select("#referrer-link").attr("href", document.referrer || null);
 
     var params = {};
     params[picc.fields.OPERATING] = 1;

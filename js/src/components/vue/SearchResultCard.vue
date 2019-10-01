@@ -118,7 +118,7 @@ export default {
       // }else{
       //   return numeral(this.school['latest.earnings.10_yrs_after_entry.median']).format('$0a');
       // }
-      if(this.school['latest.programs.cip_4_digit'][0]['title'])
+      if(this.school['latest.programs.cip_4_digit'].length==1 && this.school['latest.programs.cip_4_digit'][0]['title'])
       {
         this.field_of_study = this.school['latest.programs.cip_4_digit'][0]['title'];
         return '$24K'
