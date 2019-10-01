@@ -32,6 +32,8 @@ stylesheets:
 vue:
   scripts:
     - app.js
+  stylesheets:
+    - app.css
 
 # whether to include the Google Analytics & DAP snippets
 analytics: true
