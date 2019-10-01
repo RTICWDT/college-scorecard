@@ -33,15 +33,7 @@
       ></v-select>
     
     <p class='subhead-2'>Field of Study/Major</p>
-    <field-autocomplete></field-autocomplete>
-    <!-- <v-select v-model='input.major'
-      :items='programs'
-      item-text='label'
-      item-value='key'
-      placeholder='e.g., civil engineering'
-      hide-details
-    >
-    </v-select> -->
+    <field-autocomplete v-model="input.cip4"></field-autocomplete>
 
     <p class='subhead-2'>Length</p>
     <div class="search-form-degree-wrapper">
@@ -90,12 +82,12 @@
 
     <v-expansion-panels>
       <v-expansion-panel>
-        <v-expansion-panel-header>
+        <v-expansion-panel-header style='background-color: #ccc; border-radius: 0px !important;'>
           More
         </v-expansion-panel-header>
         <v-expansion-panel-content>
      
-          <p class='title'>Admittance</p>
+          <p class='title mt-3'>Admittance</p>
           <!-- TODO - These are not working yet -->
           <check-range v-model="input.avg_net_price"
             :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
@@ -256,7 +248,8 @@ export default {
         religious:"",
         completion_rate: null,
         avg_net_price: null,
-        urban:[]
+        urban:[],
+        cip4: ""
         // page:0,
         // sort:""
       },

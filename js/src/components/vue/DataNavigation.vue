@@ -7,8 +7,7 @@
           <a
             href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
             target="_blank"
-          >
-            <i class="fa fa-stack-exchange"></i>StackExchange
+          >StackExchange
           </a>
         </p>
       </v-container>

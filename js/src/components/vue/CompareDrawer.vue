@@ -1,23 +1,23 @@
 <template>
   <v-card tile id="compare_schools-content" class='pa-5'>
-      <p>Compare Schools</p>
-      
-      <ul id="edit-compare-list">
-        <li class="edit-compare-list-item" v-for="school in schools" :key="school.schoolId">
-          <label class="checkbox" data-bind="checkbox_label" data-school :for="`edit-compare-${school.schoolId}`">
-            <input :id="`edit-compare-${school.schoolId}`" type="checkbox" name="_compare" tabindex="0" checked @change="handleToggleCompareSchool(school)">
-            <span tabindex="-1" class="checkbox-focus"></span>
-            <span>{{school.schoolName}}</span>
-          </label>
-        </li>
-      </ul>
+      <p class='title'>Compare Schools</p>
+      <div class='my-3'>
+      <v-checkbox 
+        @change="handleToggleCompareSchool(school)"
+        :label="school.schoolName"
+        v-for="school in schools"
+        :key="school.schoolId"
+        :value="school.schoolId"
+        hide-details
+        v-model="selected"
+        color="secondary"
+        class="ma-0 pa-0"
+      ></v-checkbox>
+      </div>
     <p>
       <v-btn rounded color="secondary" href="/compare/">Compare Schools</v-btn>
     </p>
   </v-card>
-
-
-
 </template>
 
 <script>
@@ -27,9 +27,20 @@
 
 export default {
   props:{
-    schools: Array,
+    schools: Array
   },
-  created(){
+  data(){
+    return{
+      selected: Array
+    }
+  },
+  watch: {
+    schools(){
+      this.selected = _.map(this.schools, 'schoolId');
+    }
+  },
+  mounted(){
+      this.selected = _.map(this.schools, 'schoolId');
   },
   methods:{
     handleToggleCompareSchool(school){

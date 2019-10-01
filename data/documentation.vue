@@ -121,7 +121,7 @@
               <v-expansion-panel-content>
                 <p>Several elements, including some that haven’t been published before, identify demographic and other details about the student body of the school. Some of the elements are available through the Integrated Postsecondary Education Data System, and others were produced using the National Student Loan Data System.</p>
 
-                <ul>
+                <ul class='my-3'>
                   <li>Number of Undergraduate Students</li>
                   <li>Undergraduate Student Body by Race/Ethnicity</li>
                   <li>Undergraduate Students by Part-Time status</li>
@@ -234,7 +234,7 @@
             The basic structure of an API call is
             <span>year.dev-category.dev-friendly-variable-name</span>.
           </p>
-          <ul>
+          <ul class='my-3'>
             <li>
               The
               <span>year</span> may be any year of data available (example: 2012), or use the word

@@ -29,7 +29,7 @@
               class="btn"
             >
               <v-icon>mdi-search</v-icon>Download All Data
-            </v-btn>265 MB zip
+            </v-btn><span class='mx-3'>265 MB zip</span>
           </p>
 
           <h3 class="display-1 mb-2 mt-5">Featured Downloads</h3>

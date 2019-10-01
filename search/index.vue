@@ -1,141 +1,103 @@
 <style lang="scss">
-  .v-speed-dial__list{
-    z-index: 99;
-  }
-  .canned-search-wrapper{
-    margin-bottom: 8px;
-  }
-  .searchSidebar{
-    height: auto !important;
-  }
+.v-speed-dial__list {
+  z-index: 99;
+}
+.canned-search-wrapper {
+  margin-bottom: 8px;
+}
+.searchSidebar {
+  height: auto !important;
+}
 </style>
 
 <template>
   <div>
     <v-app>
-      <v-navigation-drawer absolute v-model='showSidebar' app width="300" class='searchSidebar'>
-        
+      <v-navigation-drawer
+        v-model="showSidebar"
+        app
+        width="300"
+        class="searchSidebar"
+        v-scroll="toggleFixed"
+        :absolute="sidebar.absolute"
+        :fixed="sidebar.fixed"
+      >
         <!-- TODO - All form fields and layout. -->
         <!-- Search Form Component -->
-        <search-form :states="states" :programs="programs" 
-        :religious-affiliations="religiousAffiliations" :specialized-mission="specializedMission"
-        :urlParsedParams="urlParsedParams"
-        @search-query="searchAPI" />
-      
+        <search-form
+          :states="states"
+          :programs="programs"
+          :religious-affiliations="religiousAffiliations"
+          :specialized-mission="specializedMission"
+          :urlParsedParams="urlParsedParams"
+          @search-query="searchAPI"
+        />
       </v-navigation-drawer>
       <v-content>
-      <v-container fluid class="grey lighten-5 pa-0">
-     
-
-        
+        <v-container fluid class="grey lighten-5 pa-0">
           <div id="search-result-container">
-            <div id="search-can-query-container">
+            <div id="search-can-query-container" v-if="results.schools.length === 0">
               <v-row>
-                <v-col cols="12" md='4' sm='12' xs='12'>
+                <v-col cols="12" md="4" sm="12" xs="12">
                   <div id="search-can-query-text">
                     <h3>Show Me Options</h3>
                     <p>Select one or more options on right to create a list of schools that fit you.</p>
                   </div>
                 </v-col>
 
-                <v-col md='8' sm='12' xs='12' cols='12'>
-                  <canned-search-container @canned-search-submit="handleCannedSearchClick">
-                  </canned-search-container>                  
+                <v-col md="8" sm="12" xs="12" cols="12">
+                  <canned-search-container @canned-search-submit="handleCannedSearchClick"></canned-search-container>
                 </v-col>
               </v-row>
             </div>
 
-            <!-- <div id="search-can-query-container">
-              <v-row>
-                
-                <v-col cols="12" md='4' sm='12' xs='12'>
-                  <div id="search-can-query-text">
-                    <h3>Show Me Options</h3>
-                    <p>Select one or more options on right to create a list of schools that fit you.</p>
-                  </div>
-                </v-col>
-                <v-col md='8' sm='12' xs='12' cols=''>
-                  <div id="search-can-query-items-wrapper">
-                    <v-row>
-                      <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
-                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{state:['MA']}]">
-                          Schools In MA
-                        </canned-search-button>
-                      </v-col>
-
-                      <v-col md='4' sm='12' cols='12' class="text-center canned-search-wrapper">
-                        <canned-search-button @canned-search-click="handleCannedSearchClick" :add-to-query="[{size:['medium']}]">
-                        Medium Sized Schools
-                        </canned-search-button>
-                      </v-col>
-                    </v-row>
-                  </div>  
-                </v-col>
-
-              </v-row>
-            </div> -->
-
-            <div class="search-result-container pa-0">
-                <v-card tile class='my-4 pa-1' color="grey lighten-2">
+            <div class="search-result-container">
+              <v-card tile class="mt-2 mb-4 py-1 px-4" color="grey lighten-2">
                 <v-row>
-                  <v-col cols='12' md='4' sm='12' class='py-2'>
-                    <div id="search-result-info-count" class='pl-5'>
-                      <p class='title mb-0'>{{results.meta.total}} Results</p> <!-- TODO - Count to display result/results -->
+                  <v-col cols="12" sm="4" class>
+                    <div id="search-result-info-count" class>
+                      <p class="display-1 mb-0">{{results.meta.total | separator }} Results</p>
                     </div>
                   </v-col>
-                
-                  <v-col cols='12' md='8' sm='12' class='pa-0'>
-                    <v-row>
 
-                      <v-col cols='12' md='10' sm='12' class='pa-0'>
-                        <div id="search-pagination-controls" class="text-md-right text-sm-left">
-                          <span>Page:</span>
-                          <v-pagination v-model="input.page" :length='totalPages' :total-visible='7' @input="searchAPI(parseURLParams())"></v-pagination>
-                        </div>
-                      </v-col>
-
-                      <v-col cols='12' md="2" class="text-md-center text-sm-center pa-0">
-                        <v-speed-dial  v-model="utility.sortFAB" direction="bottom" right transition="slide-y-transition">
-                            <template v-slot:activator>
-                              <!-- <label for="select-sort">Sort:</label> -->
-                              <v-btn small v-model="utility.sortFAB" color="blue darken-2" dark fab>
-                                <v-icon v-if="utility.sortFAB">mdi-close</v-icon>
-                                <v-icon v-else>mdi-sort</v-icon>
-                              </v-btn>
-                              
-                            </template>
-                            
-                            <v-btn dark color="blue" @click="input.sort = 'salary:desc'; debounceSearchUpdate(parseURLParams());">
-                              <v-icon left>mdi-sort-numeric</v-icon>
-                              Salary
-                            </v-btn>
-
-                            <v-btn dark color="blue" @click="input.sort = 'avg_net_price:asc'; debounceSearchUpdate(parseURLParams());">
-                              <v-icon>mdi-sort-numeric</v-icon>
-                              Annual Cost
-                            </v-btn>
-
-                            <v-btn dark color="blue" @click="input.sort = 'completion_rate:desc'; debounceSearchUpdate(parseURLParams());">
-                              <v-icon>mdi-sort-numeric</v-icon>
-                              Graduation Rate
-                            </v-btn>
-
-                            <v-btn dark color="blue" @click="input.sort = 'name:asc'; debounceSearchUpdate(parseURLParams());">
-                              <v-icon>mdi-sort-alphabetical</v-icon>
-                              Name
-                            </v-btn>
-                          </v-speed-dial>
-
-                      </v-col>
-
-                    </v-row>
+                  <v-col cols="12" sm="8" class v-if="!isLoading">
+                    <div class="text-md-right">
+                      Page:
+                      <v-pagination
+                        v-model="input.page"
+                        :length="totalPages"
+                        :total-visible="7"
+                        @input="searchAPI(parseURLParams())"
+                      ></v-pagination>
+                      <v-menu offset-y>
+                        <template v-slot:activator="{ on }">
+                          <v-btn color="primary" small v-on="on" fab>
+                            <v-icon>fas fa-sort</v-icon>
+                          </v-btn>
+                        </template>
+                        <v-list>
+                          <v-list-item
+                            v-for="(item, index) in sorts"
+                            :key="index"
+                            @click="resort(item.field);"
+                          >
+                            <v-list-item-title>{{ item.type }}</v-list-item-title>
+                          </v-list-item>
+                        </v-list>
+                      </v-menu>
+                    </div>
                   </v-col>
                 </v-row>
-                </v-card>
+              </v-card>
 
               <div class="results-main-alert">
                 <div class="show-loading" v-show="isLoading">
-                  <h1>Loading...</h1>
+                  <v-card tile class="pa-5">
+                    <h1 class="heading">
+                      Loading
+                      <v-icon color="pink darken-4">fas fa-circle-notch fa-spin</v-icon>
+                    </h1>
+                  </v-card>
                 </div>
 
                 <div class="show-error" v-show="error.message">
@@ -145,160 +107,222 @@
 
                 <div class="search-result-cards-container" v-if="!isLoading">
                   <v-row>
-                    <v-col v-for="school in results.schools" :key="school.id" cols='12' lg='3' md='4' sm='12'>
-                      
-                      <search-result-card :school="school" 
-                        @toggle-compare-school="handleToggleCompareSchool" 
-                        :is-selected="isResultCardSelected(school.id,compareSchools)"/>
-
+                    <v-col
+                      v-for="school in results.schools"
+                      :key="school.id"
+                      cols="12"
+                      lg="3"
+                      md="4"
+                      sm="12"
+                      class="d-flex align-stretch"
+                    >
+                      <search-result-card
+                        :school="school"
+                        @toggle-compare-school="handleToggleCompareSchool"
+                        :is-selected="isResultCardSelected(school.id,compareSchools)"
+                      />
                     </v-col>
                   </v-row>
                 </div>
 
                 <div class="search-result-cards-container" v-else>
                   <!-- Fake Cards -->
-                  
                 </div>
+              </div>
+              <!--results-main -->
 
-                
-
-              </div> <!--results-main -->
-
+              <v-card tile class="mt-4 mb-2 py-1 px-4" color="grey lighten-2" v-if="!isLoading">
+                <v-row>
+                  <v-col cols="12" class>
+                    <div class="text-md-right">
+                      Page:
+                      <v-pagination
+                        v-model="input.page"
+                        :length="totalPages"
+                        :total-visible="7"
+                        @input="searchAPI(parseURLParams())"
+                      ></v-pagination>
+                      <v-menu offset-y>
+                        <template v-slot:activator="{ on }">
+                          <v-btn color="primary" small v-on="on" fab>
+                            <v-icon>fas fa-sort</v-icon>
+                          </v-btn>
+                        </template>
+                        <v-list>
+                          <v-list-item
+                            v-for="(item, index) in sorts"
+                            :key="index"
+                            @click="resort(item.field);"
+                          >
+                            <v-list-item-title>{{ item.type }}</v-list-item-title>
+                          </v-list-item>
+                        </v-list>
+                      </v-menu>
+                    </div>
+                  </v-col>
+                </v-row>
+              </v-card>
             </div>
           </div>
-        
-            
-      <v-btn fixed top right color="secondary" rounded @click="showCompare = !showCompare">Compare</v-btn>
-      <v-btn fixed bottom right color="secondary" rounded @click="showSidebar = !showSidebar">Search</v-btn>
-        
-      </v-container>
+
+          <v-btn
+            fixed
+            top
+            right
+            color="secondary"
+            rounded
+            @click="showCompare = !showCompare"
+          >Compare</v-btn>
+          <v-btn
+            fab
+            fixed
+            bottom
+            right
+            color="secondary"
+            rounded
+            @click="showSidebar = !showSidebar"
+            v-if="$vuetify.breakpoint.mdAndDown"
+          >
+            <v-icon>fas fa-search</v-icon>
+          </v-btn>
+        </v-container>
       </v-content>
 
       <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
-        <compare-drawer :schools="compareSchools" @toggle-compare-school="handleToggleCompareSchool">
-        </compare-drawer>
-      </v-bottom-sheet> 
-      
+        <compare-drawer
+          :schools="compareSchools"
+          @toggle-compare-school="handleToggleCompareSchool"
+        ></compare-drawer>
+      </v-bottom-sheet>
     </v-app>
-    
-  
-  
+
     <!-- Basic Example for now -->
     <!-- <section class="container section section-card_container-results">
       <div class="results-main-schools schools-list">
         <search-result-card v-for="school in results.schools" :key="school.id" :school="school" @toggle-compare-school="handleToggleCompareSchool" :is-selected="isResultCardSelected(school.id,compareSchools)"/>
       </div>
-    </section> -->
+    </section>-->
 
-  <!-- TODO - Make This A Component. -->
-
-
-  </div><!--End of root -->
+    <!-- TODO - Make This A Component. -->
+  </div>
+  <!--End of root -->
 </template>
 
 <script>
 // TODO - This needs major cleanup.  How can it be cleaned?, Seperate files for legacy Javascript items?
 
-import SearchResultCard from 'components/vue/SearchResultCard.vue';
-import SearchForm from 'components/vue/SearchForm.vue';
-import CannedSearchButton from 'components/vue/CannedSearchButton.vue';
-import CompareDrawer from 'components/vue/CompareDrawer.vue';
-import CannedSearchContainer from 'components/vue/CannedSearchContainer.vue';
+import SearchResultCard from "components/vue/SearchResultCard.vue";
+import SearchForm from "components/vue/SearchForm.vue";
+import CannedSearchButton from "components/vue/CannedSearchButton.vue";
+import CompareDrawer from "components/vue/CompareDrawer.vue";
+import CannedSearchContainer from "components/vue/CannedSearchContainer.vue";
 
-import _ from 'lodash';
+import _ from "lodash";
 // import querystring from 'querystring';
 
-const querystring = require('querystring');
+const querystring = require("querystring");
 
 export default {
-  components:{
-    'search-result-card': SearchResultCard,
-    'search-form': SearchForm,
-    'canned-search-button': CannedSearchButton,
-    'compare-drawer': CompareDrawer,
-    'canned-search-container': CannedSearchContainer,
+  components: {
+    "search-result-card": SearchResultCard,
+    "search-form": SearchForm,
+    "canned-search-button": CannedSearchButton,
+    "compare-drawer": CompareDrawer,
+    "canned-search-container": CannedSearchContainer
   },
-  props:{
-    'page-permalink': String,
-    'states': Array,
-    'programs': Array,
-    'religiousAffiliations': Array,
-    'specializedMission': Object,
-    'defaultSort':{
+  props: {
+    "page-permalink": String,
+    states: Array,
+    programs: Array,
+    religiousAffiliations: Array,
+    specializedMission: Object,
+    defaultSort: {
       type: String,
       default: "avg_net_price:asc"
     },
-    'isLoading': Boolean,
-    'compareSchools': Array
+    isLoading: Boolean,
+    compareSchools: Array
   },
-  data(){
+  data() {
     return {
       showSidebar: true,
-      results:{
-        schools:[],
-        meta:{
-          total:0
-        },
+      sidebar: {
+        fixed: false,
+        absolute: true
       },
-      input:{
+      results: {
+        schools: [],
+        meta: {
+          total: 0
+        }
+      },
+      input: {
         sort: null,
         page: 1
       },
-      urlParsedParams:{},
-      utility:{
-        formDefault:{},
+      urlParsedParams: {},
+      utility: {
+        formDefault: {},
         initailized: false,
         sortFAB: null
       },
-      error:{
-        message:null
+      error: {
+        message: null
       },
-      showCompare: false
+      showCompare: false,
+      sorts: [
+        { type: "Name", field: "name:asc" },
+        { type: "Annual Cost", field: "avg_net_price:asc" },
+        { type: "Graduation Rate", field: "completion_rate:asc" }
+      ]
     };
   },
-  created(){
+  created() {
     // Copy default form input state.
     this.utility.formDefault = _.cloneDeep(this.input);
 
     this.urlParsedParams = this.parseURLParams();
 
     // Add sort to state if it exists
-    this.input.sort = (this.urlParsedParams.sort) ? this.urlParsedParams.sort : this.defaultSort;
+    this.input.sort = this.urlParsedParams.sort
+      ? this.urlParsedParams.sort
+      : this.defaultSort;
 
     // if Page is in the url, add it here.
-    this.input.page = (this.urlParsedParams.page) ? Number(this.urlParsedParams.page) + 1 : 1;
+    this.input.page = this.urlParsedParams.page
+      ? Number(this.urlParsedParams.page) + 1
+      : 1;
 
     // Create Debounce function for this page.
     this.debounceSearchUpdate = _.debounce(function(params) {
-      this.searchAPI(params,true);
+      this.searchAPI(params, true);
     }, 1000);
   },
-  mounted(){
-  },
-  computed:{
-    totalPages(){
-      if(this.results.meta.per_page && this.results.meta.total){
+  mounted() {},
+  computed: {
+    totalPages() {
+      if (this.results.meta.per_page && this.results.meta.total) {
         let totalPages = this.results.meta.total / this.results.meta.per_page;
-        
+
         // return the maximum amount of pages if operation produces a float.
         return Math.ceil(totalPages);
       }
     }
   },
-  methods:{
-    searchAPI(params = {}){
+  methods: {
+    searchAPI(params = {}) {
       // TODO - Clean this method up, It does way more than just SearchAPI.
-        // Better Encapsilation.
+      // Better Encapsilation.
 
-      this.$emit('loading',true);
-      
+      this.$emit("loading", true);
+
       this.error.message = null;
 
       let poppingState = false;
       let alreadyLoaded = false;
-      
+
       // Add page and sort items into params.
-      if(this.input.page >= 1){
+      if (this.input.page >= 1) {
         // The API function off of a 0 index
         params.page = this.input.page - 1;
       }
@@ -316,6 +340,7 @@ export default {
         picc.fields.STATE,
         picc.fields.SIZE,
         picc.fields.BRANCHES,
+        picc.fields.LOCALE,
         // to get "public" or "private"
         picc.fields.OWNERSHIP,
         // to get the "four_year" or "lt_four_year" bit
@@ -331,74 +356,103 @@ export default {
         // not sure if we need this, but let's get it anyway
         picc.fields.EARNINGS_GT_25K,
         // under investigation flag
-        picc.fields.UNDER_INVESTIGATION
-      ].join(',');
+        picc.fields.UNDER_INVESTIGATION,
+
+        // new completion rates
+        picc.fields.COMPLETION_OM,
+        picc.fields.COMPLETION_200_4,
+        picc.fields.COMPLETION_200_LT4,
+
+        picc.fields.FIELD_OF_STUDY
+      ].join(",");
 
       let qs = this.generateQueryString(params);
-      history.replaceState(params, 'search', qs);
+      history.replaceState(params, "search", qs);
 
       let vm = this;
       let req = picc.API.search(query, function(error, data) {
-        
-        if (error){
-          vm.$emit('loading',false);
+        if (error) {
+          vm.$emit("loading", false);
           vm.showError(error);
           return;
         }
 
-        console.log('loaded schools:', data);
+        console.log("loaded schools:", data);
 
         vm.results.schools = data.results;
         vm.results.meta = data.metadata;
-        
-        vm.$emit('loading',false);
+
+        vm.$emit("loading", false);
       });
     },
-    showError(error){
+    showError(error) {
       // TODO: Loop through multiple error messages if needed.
 
-      console.error('error:', error);
+      console.error("error:", error);
 
       if (typeof error.responseText != "undefined") {
         // 500 doesn't have JSON text return.
-        if(error.status === 500){
-          this.error.message = 'There was an unexpected API error.';
-        }else{
+        if (error.status === 500) {
+          this.error.message = "There was an unexpected API error.";
+        } else {
           var errorText = JSON.parse(error.responseText);
           error = errorText.errors[0].message;
 
-          this.error.message = String(error) || 'There was an unexpected API error.';        
+          this.error.message =
+            String(error) || "There was an unexpected API error.";
         }
       }
     },
-    handleToggleCompareSchool(school){
-      this.$emit('toggle-compare-school',school);
+    handleToggleCompareSchool(school) {
+      this.$emit("toggle-compare-school", school);
     },
-    handleCannedSearchClick(cannedSearchData){
-      if(cannedSearchData){
-        this.urlParsedParams = this.parseURLParams(this.generateQueryString(cannedSearchData).substr(1));
-        this.debounceSearchUpdate(this.parseURLParams(this.generateQueryString(cannedSearchData).substr(1)));
+    handleCannedSearchClick(cannedSearchData) {
+      if (cannedSearchData) {
+        this.urlParsedParams = this.parseURLParams(
+          this.generateQueryString(cannedSearchData).substr(1)
+        );
+        this.debounceSearchUpdate(
+          this.parseURLParams(
+            this.generateQueryString(cannedSearchData).substr(1)
+          )
+        );
       }
     },
-    isResultCardSelected(schoolId,compareSchools){
-      if(_.findIndex(compareSchools,['schoolId',String(schoolId)]) >= 0)
-      {
+    isResultCardSelected(schoolId, compareSchools) {
+      if (_.findIndex(compareSchools, ["schoolId", String(schoolId)]) >= 0) {
         return true;
       }
       return false;
     },
-    parseURLParams(url = location.search.substr(1)){
+    parseURLParams(url = location.search.substr(1)) {
       let query = querystring.parse(url);
 
       return query || {};
     },
-    generateQueryString(params){
+    generateQueryString(params) {
       let qs = querystring.stringify(params);
-      return '?' + qs.replace(/^&+/, '')
-        .replace(/&{2,}/g, '&')
-        .replace(/%3A/g, ':');
+      return (
+        "?" +
+        qs
+          .replace(/^&+/, "")
+          .replace(/&{2,}/g, "&")
+          .replace(/%3A/g, ":")
+      );
+    },
+    toggleFixed(e) {
+      if (window.scrollY < 160) {
+        this.sidebar.absolute = true;
+        this.sidebar.fixed = false;
+      } else {
+        this.sidebar.absolute = false;
+        this.sidebar.fixed = true;
+      }
+      //
+    },
+    resort(sort) {
+      this.input.sort = sort;
+      this.debounceSearchUpdate(this.parseURLParams());
     }
   }
-}
-
+};
 </script>
