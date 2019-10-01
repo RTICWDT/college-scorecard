@@ -47,7 +47,8 @@
           <h3>{{displayEarn}}</h3>
         </v-col>
         <v-col cols='7'>
-          <span>typical earnings for recent graduates <tooltip definition="avg-salary" /></span>          
+          <span v-if='!field_of_study'>typical earnings for recent graduates <tooltip definition="avg-salary" /></span>          
+          <span v-else>typical earnings for recent graduates in {{field_of_study}} <tooltip definition="avg-salary" /></span>          
         </v-col>
       </v-row>
       <v-row class='result-card-info-container' v-if="!isProgramReporter">
@@ -87,7 +88,8 @@ export default {
   },
   data(){
     return {
-      fields: picc.fields
+      fields: picc.fields,
+      field_of_study: ''
     }
   },
   computed:{
@@ -117,7 +119,15 @@ export default {
       // }else{
       //   return numeral(this.school['latest.earnings.10_yrs_after_entry.median']).format('$0a');
       // }
-      return "$12K - $42K";
+      if(this.school['latest.programs.cip_4_digit'][0]['title'])
+      {
+        this.field_of_study = this.school['latest.programs.cip_4_digit'][0]['title'];
+        return '$24K'
+      }
+      else
+      {
+        return "$12K - $42K";
+      }
     },
     displayAvgCost(){
       if (!this.school['latest.cost.avg_net_price.overall'] || this.school['latest.cost.avg_net_price.overall'] < 0){

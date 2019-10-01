@@ -2,7 +2,9 @@ header {
   z-index: 10;
   background-color: $dark-blue;
   color: $white;
-
+  .container{
+    padding: 0;
+  }
 
   a {
     color: inherit;

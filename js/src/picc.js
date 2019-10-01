@@ -540,8 +540,8 @@ picc.fields = {
   // field of study
   FIELD_OF_STUDY:           'latest.programs.cip_4_digit',
   FIELD_OF_STUDY_CODE:      'latest.programs.cip_4_digit.code',
-  FIELD_OF_STUDY_LENGTH:    'latest.programs.cip_4_digit.credential.level'
-
+  FIELD_OF_STUDY_LENGTH:    'latest.programs.cip_4_digit.credential.level',
+  FIELD_OF_STUDY_NAME:      'latest.programs.cip_4_digit.title'
 };
 
 picc.programReporterCip = {
