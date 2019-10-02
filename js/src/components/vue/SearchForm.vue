@@ -89,27 +89,35 @@
      
           <p class='title mt-3'>Admittance</p>
           <!-- TODO - These are not working yet -->
-          <check-range v-model="input.avg_net_price"
-            :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
-            :min="0" :max="100"
+          <check-range v-model="input.sat"
+            :enable="utility.enable.sat" 
+            @slider-toggle="utility.enable.sat = $event"
+            :min="0" 
+            :max="1600"
+            :step="100"
           >
             <template v-slot:label>
               Composite SAT
             </template>
           </check-range>
 
-          <check-range v-model="input.avg_net_price"
-            :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
-            :min="0" :max="100"
+          <check-range v-model="input.act"
+            :enable="utility.enable.act" @slider-toggle="utility.enable.act = $event"
+            :min="0" 
+            :max="36"
+            :step="1"
           >
             <template v-slot:label>
               ACT Score
             </template>
           </check-range>
 
-          <check-range v-model="input.avg_net_price"
-            :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
-            :min="0" :max="100"
+          <check-range v-model="input.acceptance"
+            :enable="utility.enable.acceptance" 
+            @slider-toggle="utility.enable.acceptance = $event"
+            :min="0"
+            :max="100"
+            :step="5"
           >
             <template v-slot:label>
               Acceptance Rate (%)
@@ -258,7 +266,10 @@ export default {
         completion_rate: null,
         avg_net_price: null,
         urban:[],
-        cip4: ""
+        cip4: "",
+        act: null,
+        sat: null,
+        acceptance:null
         // page:0,
         // sort:""
       },
@@ -270,7 +281,10 @@ export default {
         showMore: false,
         enable:{
           completion_rate: false,
-          avg_net_price: false
+          avg_net_price: false,
+          sat: false,
+          act: false,
+          acceptance: false
         },
       }
     }
@@ -317,7 +331,7 @@ export default {
       });
 
       // Pefrom Input to API data alterations.
-      // TODO - Refactor this process. Ingest and egress.  Maybe arrary of objects with string numeral parsing.  Is there a more elegant way?
+      // TODO - Refactor this process. Ingest and egress.  Maybe arrary of objects with string numeral parsing.  Refactor when we have some additional time.
 
       // Completion rate
       if(groomedInput.completion_rate && groomedInput.completion_rate > 0 && this.utility.enable.completion_rate){
@@ -332,6 +346,23 @@ export default {
         _.unset(groomedInput,'avg_net_price'); // TODO: CONST;
       }
 
+      if(groomedInput.sat && groomedInput.sat > 0 && this.utility.enable.sat){
+        groomedInput.sat = '..' + groomedInput.sat
+      }else{
+        _.unset(groomedInput,'sat'); // TODO: CONST;
+      }
+
+      if(groomedInput.act && groomedInput.act > 0 && this.utility.enable.act){
+        groomedInput.act = '..' + groomedInput.act
+      }else{
+        _.unset(groomedInput,'act'); // TODO: CONST;
+      }
+
+      if(groomedInput.acceptance && groomedInput.acceptance > 0 && this.utility.enable.acceptance){
+        groomedInput.acceptance = groomedInput.acceptance / 100 + '..'
+      }else{
+        _.unset(groomedInput,'acceptance'); // TODO: CONST;
+      }
 
 
       return groomedInput;
@@ -377,9 +408,9 @@ export default {
           return [newObjValue];
         }
         
-        // TODO - Are there consts?
+        // TODO - Are there consts?, add inarray check.
         // Perform any URL -> Form data translations
-        if(key === 'completion_rate'){
+        if(key === 'completion_rate' || key === 'acceptance'){
           return parseFloat(newObjValue) * 100;
         }
 
@@ -389,6 +420,11 @@ export default {
             return parseFloat(newObjValue.substr(2)) / 1000;
           }
         }
+
+        if(key === 'sat' || key === 'act'){
+          return parseFloat(newObjValue.substr(2))
+        }
+
       });
 
       // TODO - Refactor to a more elegant. Loop through all utility enables, and trigger on.
@@ -399,6 +435,18 @@ export default {
 
       if(this.input.avg_net_price > 0){
         this.utility.enable.avg_net_price = true;
+      }
+
+      if(this.input.sat > 0){
+        this.utility.enable.sat = true;
+      }
+
+      if(this.input.act > 0){
+        this.utility.enable.act = true;
+      }
+
+      if(this.input.acceptance > 0){
+        this.utility.enable.acceptance = true;
       }
 
     },

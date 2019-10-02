@@ -114,20 +114,22 @@ export default {
       return _.get(this.school, this.fields.PROGRAM_REPORTER_OFFERED) > 0;
     },
     displayEarn(){
-      // if (!this.school['latest.earnings.10_yrs_after_entry.median'] || this.school['latest.earnings.10_yrs_after_entry.median'] < 0){
-      //   return "N/A"
-      // }else{
-      //   return numeral(this.school['latest.earnings.10_yrs_after_entry.median']).format('$0a');
+      if (!this.school['latest.earnings.10_yrs_after_entry.median'] || this.school['latest.earnings.10_yrs_after_entry.median'] < 0){
+        return "N/A"
+      }else{
+        return numeral(this.school['latest.earnings.10_yrs_after_entry.median']).format('$0a');
+      }
+
+      // This data field doesn't seem to work at the moment.
+      // if(this.school['latest.programs.cip_4_digit'].length==1 && this.school['latest.programs.cip_4_digit'][0]['title'])
+      // {
+      //   this.field_of_study = this.school['latest.programs.cip_4_digit'][0]['title'];
+      //   return '$24K'
       // }
-      if(this.school['latest.programs.cip_4_digit'].length==1 && this.school['latest.programs.cip_4_digit'][0]['title'])
-      {
-        this.field_of_study = this.school['latest.programs.cip_4_digit'][0]['title'];
-        return '$24K'
-      }
-      else
-      {
-        return "$12K - $42K";
-      }
+      // else
+      // {
+      //   return "$12K - $42K";
+      // }
     },
     displayAvgCost(){
       if (!this.school['latest.cost.avg_net_price.overall'] || this.school['latest.cost.avg_net_price.overall'] < 0){

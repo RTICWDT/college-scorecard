@@ -24,6 +24,9 @@
         :class="{'v-slider--disabled': !enableSlider}"
         hide-details
         @input="handleInput"
+        :min="min"
+        :max="max"
+        :step="step"
       >
         <template v-slot:append>
           <v-text-field v-model="sliderValue"
