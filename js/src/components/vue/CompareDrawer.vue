@@ -21,7 +21,7 @@
       ></v-checkbox>
       </div>
     <p>
-      <v-btn rounded color="secondary" href="/compare/">Compare Schools</v-btn>
+      <v-btn rounded color="secondary" @click="$emit('update:showCompare', false);$emit('update:compareSheet', true)">Compare Schools</v-btn>
     </p>
   </v-card>
 </template>

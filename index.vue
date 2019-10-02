@@ -48,6 +48,18 @@
         </v-col>  
       </v-row>
     </v-container>
+        <v-btn
+            fab
+            fixed
+            bottom
+            right
+            color="secondary"
+            rounded
+            @click="showSidebar = !showSidebar"
+            v-if="$vuetify.breakpoint.mdAndDown"
+          >
+            <v-icon>fas fa-search</v-icon>
+          </v-btn>
     </v-content>
   </v-app>
 </template>
@@ -97,7 +109,7 @@ export default {
       window.location.href = url;
     },
     toggleFixed(e) {
-      if (window.scrollY < 160) {
+      if (window.scrollY < 105 ) {
         this.sidebar.absolute = true;
         this.sidebar.fixed = false;
       } else {
