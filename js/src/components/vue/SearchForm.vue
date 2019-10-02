@@ -23,7 +23,7 @@
 
     <p class='subhead-2'>Location</p>    
     <v-select v-model="input.state"
-      :items="states"
+      :items="site.data.states"
       item-text="name"
       item-value="abbr"
       multiple
@@ -80,7 +80,7 @@
     </check-range>
     </div>
 
-    <v-expansion-panels>
+    <v-expansion-panels v-if="displayAllFilters">
       <v-expansion-panel>
         <v-expansion-panel-header style='background-color: #ccc; border-radius: 0px !important;'>
           More
@@ -194,7 +194,7 @@
 
         <p class='subtitle-2 pt-5'>Religious Affiliation</p>
         <v-select v-model='input.religious'
-          :items='religiousAffiliations'
+          :items='site.data.religious_affiliations'
           item-text='label'
           item-value='value'
           placeholder='Select one...'
@@ -205,6 +205,9 @@
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
+
+    <v-btn v-if="!autoSubmit" color="secondary" rounded @click="$emit('search-query',cleanInput)">Submit</v-btn>
+
   </v-form>
 </template>
 
@@ -214,18 +217,20 @@ import querystring from 'querystring';
 import CheckRange from './CheckRange.vue';
 import NameAutocomplete from './NameAutocomplete.vue';
 import FieldAutocomplete from './FieldAutocomplete.vue';
+import { SiteData } from '../../vue/mixins/SiteData.js';
 
 export default {
+  mixins:[SiteData],
   props:{
-    states: Array,
-    programs: Array,
     urlParsedParams: Object,
-    generateURL: {
+    autoSubmit:{
       type: Boolean,
       default: false
     },
-    religiousAffiliations: Array,
-    specializedMission: Object
+    displayAllFilters: {
+      type: Boolean,
+      default: false
+    }
   },
   components:{
     'check-range': CheckRange,
@@ -270,6 +275,10 @@ export default {
     cleanInput: {
       handler(newValue,oldValue){
         // On first load trigger query immediately, then debounce additional queries.
+        if(!this.autoSubmit){
+          return;
+        }
+
         if(this.utility.initialized){
           this.debounceEmitSearchQuery();
         }else{
@@ -333,7 +342,7 @@ export default {
       return qs;
     },
     cleanSpecializedMission(){
-      return _.map(this.specializedMission,(value,key) => {
+      return _.map(this.site.data.religious_affiliations,(value,key) => {
         return {
           'key': key,
           'value': value

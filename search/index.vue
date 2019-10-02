@@ -22,16 +22,15 @@
         :absolute="sidebar.absolute"
         :fixed="sidebar.fixed"
       >
-        <!-- TODO - All form fields and layout. -->
+        
         <!-- Search Form Component -->
         <search-form
-          :states="states"
-          :programs="programs"
-          :religious-affiliations="religiousAffiliations"
-          :specialized-mission="specializedMission"
           :urlParsedParams="urlParsedParams"
+          auto-submit
+          display-all-filters
           @search-query="searchAPI"
         />
+
       </v-navigation-drawer>
       <v-content>
         <v-container fluid class="grey lighten-5 pa-0">
