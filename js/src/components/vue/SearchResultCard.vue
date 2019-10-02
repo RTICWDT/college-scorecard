@@ -31,7 +31,7 @@
           <v-icon >fa fa-star</v-icon>
         </v-btn>
         <p class='overline font-weight-bold mb-1'>{{school['school.city']}}, {{school['school.state']}}</p>
-        <h2 class="title mt-0 font-weight-bold"><a class='nameLink' :href="link">{{school['school.name'] ? school['school.name'] : 'School Name'}}</a></h2>
+        <h2 class="title mt-0 font-strong"><a class='nameLink' :href="link">{{school['school.name'] ? school['school.name'] : 'School Name'}}</a></h2>
         <p class='body-2 mt-1'>{{school['latest.student.size'] | separator }} undergrads</p>
         <v-divider />
         <v-row class="v-flex align-center"> 

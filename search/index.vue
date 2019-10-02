@@ -185,16 +185,8 @@
           :schools="compareSchools"
           @toggle-compare-school="handleToggleCompareSchool"
           v-on:close-modal="closeModal()"
-          :compareSheet.sync="compareSheet"
-          :showCompare.sync="showCompare"
         ></compare-drawer>
       </v-bottom-sheet>
-
-      <v-dialog :value="compareSheet" width="80%" @click:outside="compareSheet = false">
-        <v-card width="100%">
-          <iframe :src='compareLink' style="height: 90vh; width:100%"></iframe>
-        </v-card>
-      </v-dialog>
     </v-app>
   </div>
   <!--End of root -->
@@ -264,7 +256,6 @@ export default {
         message: null
       },
       showCompare: false,
-      compareSheet: false,
       sorts: [
         { type: "Name", field: "name:asc" },
         { type: "Annual Cost", field: "avg_net_price:asc" },
@@ -301,16 +292,6 @@ export default {
 
         // return the maximum amount of pages if operation produces a float.
         return Math.ceil(totalPages);
-      }
-    },
-    compareLink(){
-      if(this.compareSheet)
-      {
-        return '/compare/';
-      }
-      else
-      {
-        return '#';
       }
     }
   },
