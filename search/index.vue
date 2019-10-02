@@ -194,15 +194,6 @@
         ></compare-drawer>
       </v-bottom-sheet>
     </v-app>
-
-    <!-- Basic Example for now -->
-    <!-- <section class="container section section-card_container-results">
-      <div class="results-main-schools schools-list">
-        <search-result-card v-for="school in results.schools" :key="school.id" :school="school" @toggle-compare-school="handleToggleCompareSchool" :is-selected="isResultCardSelected(school.id,compareSchools)"/>
-      </div>
-    </section>-->
-
-    <!-- TODO - Make This A Component. -->
   </div>
   <!--End of root -->
 </template>

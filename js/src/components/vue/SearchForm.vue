@@ -206,7 +206,9 @@
       </v-expansion-panel>
     </v-expansion-panels>
 
-    <v-btn v-if="!autoSubmit" color="secondary" rounded @click="$emit('search-query',cleanInput)">Submit</v-btn>
+    <div id="search-submit-container" class="pa-2 text-center" v-if="!autoSubmit">
+      <v-btn color="secondary" rounded @click="$emit('search-query',cleanInput)">Submit</v-btn>
+    </div>
 
   </v-form>
 </template>
@@ -222,7 +224,9 @@ import { SiteData } from '../../vue/mixins/SiteData.js';
 export default {
   mixins:[SiteData],
   props:{
-    urlParsedParams: Object,
+    urlParsedParams: {
+      type: Object
+    },
     autoSubmit:{
       type: Boolean,
       default: false

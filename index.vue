@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <!-- <v-navigation-drawer
+    <v-navigation-drawer
         v-model="showSidebar"
         app
         width="300"
@@ -9,15 +9,13 @@
         :absolute="sidebar.absolute"
         :fixed="sidebar.fixed"
       >
+        <!-- Search Form Component -->
         <search-form
-          :states="states"
-          :programs="programs"
-          :religious-affiliations="religiousAffiliations"
-          :specialized-mission="specializedMission"
-          :urlParsedParams="urlParsedParams"
-          @search-query="searchAPI"
+          @search-query="directToSearch"
         />
-      </v-navigation-drawer> -->
+
+      </v-navigation-drawer>
+
     <!-- background image -->
     <v-content>
     <div class="home-splash">
@@ -28,7 +26,7 @@
             <h1  class="white--text text-uppercase">Find the Right Fit.</h1>
             <p class="white--text">Find out about colleges: their programs, costs, admissions, results, and more.</p>
             <v-card style='min-height: 300px' class='pa-5'>
-              <canned-search-container @canned-search-submit="handleCannedSearchClick"></canned-search-container>
+              <canned-search-container @canned-search-submit="directToSearch"></canned-search-container>
             </v-card>
           </div>
         </v-col>
@@ -77,7 +75,7 @@ export default {
   props: ["baseUrl"],
   data(){
     return{
-            showSidebar: true,
+      showSidebar: true,
       sidebar: {
         fixed: false,
         absolute: true
@@ -85,15 +83,27 @@ export default {
     }
   },
   methods:{
-    handleCannedSearchClick(cannedSearchData){
+    // handleCannedSearchClick(cannedSearchData){
+    //   this.directToSearch(cannedSearchData);
+    // },
+    directToSearch(params){
       // Generate URL based on params,
-      let qs = querystring.stringify(cannedSearchData);
+      let qs = querystring.stringify(params);
       let url =  '/search/?' + qs.replace(/^&+/, '')
         .replace(/&{2,}/g, '&')
         .replace(/%3A/g, ':');
 
       // Direct to location.
       window.location.href = url;
+    },
+    toggleFixed(e) {
+      if (window.scrollY < 160) {
+        this.sidebar.absolute = true;
+        this.sidebar.fixed = false;
+      } else {
+        this.sidebar.absolute = false;
+        this.sidebar.fixed = true;
+      }
     },
   }
 };
