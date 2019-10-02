@@ -33,7 +33,7 @@
         <h2 class="title mt-0 font-strong"><a class='nameLink' :href="link">{{school['school.name'] ? school['school.name'] : 'School Name'}}</a></h2>
         <p class='body-2 mt-1'>{{school['latest.student.size'] | separator }} undergrads</p>
         <v-divider />
-        <v-row> 
+        <v-row class="v-flex align-center"> 
         <v-col cols='5'  class="pr-0 text-center">
           <h3>{{displayGradRate  | numeral('0.%') }}</h3>
         </v-col>
@@ -41,7 +41,7 @@
           <span>who go graduate <tooltip definition="graduation-rate" /></span>
         </v-col>
       </v-row>
-      <v-row class='result-card-info-container'>
+      <v-row class='result-card-info-container v-flex align-center'>
         <v-col cols='5' class="pr-0 text-center">
           <h3>{{displayEarn}}</h3>
         </v-col>
@@ -50,7 +50,7 @@
           <span v-else>typical earnings for recent graduates in {{field_of_study}} <tooltip definition="avg-salary" /></span>          
         </v-col>
       </v-row>
-      <v-row class='result-card-info-container' v-if="!isProgramReporter">
+      <v-row class='result-card-info-container v-flex align-center' v-if="!isProgramReporter">
         <v-col cols='5' class="pr-0 text-center">
           <h3>{{displayAvgCost}}</h3>
         </v-col>
