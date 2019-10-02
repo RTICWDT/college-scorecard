@@ -65,14 +65,22 @@
         ></v-checkbox>
     </div>
 
-    <check-range legend-title="Graduation Rate" v-model="input.completion_rate"
-      :enable="utility.enable.completion_rate" @slider-toggle="utility.enable.completion_rate = $event"
-      :min="0" :max="100" append-icon="mdi-percent"
+    <check-range legend-title="Graduation Rate" 
+      v-model="input.completion_rate"
+      :enable="utility.enable.completion_rate" 
+      @slider-toggle="utility.enable.completion_rate = $event"
+      :min="0"
+      :max="100"
+      append-icon="mdi-percent"
     ></check-range>
 
-    <check-range legend-title="Average Annual Cost" v-model="input.avg_net_price"
-      :enable="utility.enable.avg_net_price" @slider-toggle="utility.enable.avg_net_price = $event"
-      :min="0" :max="100"
+    <check-range legend-title="Average Annual Cost" 
+      v-model="input.avg_net_price"
+      :enable="utility.enable.avg_net_price"
+      @slider-toggle="utility.enable.avg_net_price = $event"
+      :min="0"
+      :max="100"
+      :step="5"
     >
       <template v-slot:append-text>
         K
