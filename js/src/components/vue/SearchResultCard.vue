@@ -6,6 +6,7 @@
   }
   .search-result-card{
     border: 4px solid #FFFFFF !important;
+    width: 100%;
   }
   .result-card-selected{
     border: 4px solid #eeba28 !important;    
