@@ -15,6 +15,7 @@
     left: 25%;
     bottom: 0px;
     background-color: $light-gray;
+    z-index: 10;
     cursor: pointer; 
     @media only screen and (max-width: 600px) {
         width: 100%;
