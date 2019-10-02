@@ -44,16 +44,14 @@
                   </v-col>
                   <v-col cols="12" md="4" class="text-right py-0">
                     <v-btn
-                      small
-                      color="primary"
-                      fab
-                      ripple
-                      :class="{amber: isSelected}"
-                      @click="$emit('toggle-compare-school',school)"
+                      text
+                      icon
+                      :color="isSelected?'amber':'grey'"
+                      @click="$emit('toggle-compare-school', { schoolId: _.get(school, fields['ID']), schoolName: _.get(school, fields['NAME'])} )"
                     >
-                      <v-icon small>fa fa-star</v-icon>
+                      <v-icon>fa fa-star</v-icon>
                     </v-btn>
-                    <share label="Share this School" url="https://collegescorecard.ed.gov" />
+                    <share label="Share this School" :url="shareLink" />
                   </v-col>
                 </v-row>
               </v-card>
@@ -121,6 +119,14 @@
         </v-row>
       </v-container>
     </div>
+        <compare-header :showCompare.sync="showCompare" :schools="compareSchools" />
+      <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
+        <compare-drawer
+          :schools="compareSchools"
+          @toggle-compare-school="handleToggleCompareSchool"
+          v-on:close-modal="closeModal()"
+        ></compare-drawer>
+      </v-bottom-sheet>
   </v-app>
 </template>
 
@@ -128,12 +134,19 @@
 import Tooltip from "components/vue/Tooltip.vue";
 import Share from "components/vue/Share.vue";
 import PayingForCollege from "components/vue/PayingForCollege.vue";
+import CompareDrawer from "components/vue/CompareDrawer.vue";
+import CompareHeader from "components/vue/CompareHeader.vue";
+import { compare } from 'vue/mixins.js';
+
 export default {
-  props: ["baseUrl"],
+  mixins: [compare],
+  props: ["baseUrl", "compareSchools"],
   components: {
     tooltip: Tooltip,
     share: Share,
-    "paying-for-college": PayingForCollege
+    "paying-for-college": PayingForCollege,
+    "compare-drawer": CompareDrawer,
+    "compare-header": CompareHeader
   },
   data() {
     return {
@@ -153,8 +166,7 @@ export default {
         { id: 7, credential: "First Professional Degree" },
         { id: 8, credential: "Graduate/Professional Certificate" }
       ],
-      currentFilter: 0,
-      isSelected: false
+      currentFilter: 0
     };
   },
   computed: {
@@ -181,6 +193,9 @@ export default {
         }
       });
       return processedPrograms;
+    },
+    shareLink(){
+      return window.location.href || null;
     }
   },
   mounted() {

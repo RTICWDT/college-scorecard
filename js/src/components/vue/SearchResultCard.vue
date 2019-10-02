@@ -6,6 +6,7 @@
   }
   .search-result-card{
     border: 4px solid #FFFFFF !important;
+    width: 100%;
   }
   .result-card-selected{
     border: 4px solid #eeba28 !important;    
@@ -15,10 +16,9 @@
 <template>
   <v-card tile class="search-result-card mx-auto pa-0" 
     outlined :class="{'result-card-selected': isSelected}"> <!-- Better Selected style -->
-    <v-card-text>
-        <p class='mt-1 my-2'>
+    <v-card-text class='pa-3'>
+        <p class='mt-1 mb-2' v-if="_.get(school, fields['UNDER_INVESTIGATION'])==1">
           <v-chip
-          v-if="_.get(school, fields['UNDER_INVESTIGATION'])==1"
           color="error"
           label
           >
@@ -27,14 +27,14 @@
         </v-chip>
         </p>
 
-        <v-btn color="primary" small fab icon ripple class='float-right' :class="{amber: isSelected}" @click="$emit('toggle-compare-school',school)">
-          <v-icon>fa fa-star</v-icon>
+        <v-btn color="primary" text icon class='float-right' :color="isSelected?'amber':'grey'"  @click="$emit('toggle-compare-school',school)">
+          <v-icon >fa fa-star</v-icon>
         </v-btn>
         <p class='overline font-weight-bold mb-1'>{{school['school.city']}}, {{school['school.state']}}</p>
         <h2 class="title mt-0 font-strong"><a class='nameLink' :href="link">{{school['school.name'] ? school['school.name'] : 'School Name'}}</a></h2>
-        <p class='subtitle-1 font-italic'>{{school['latest.student.size'] | separator }} undergrads</p>
+        <p class='body-2 mt-1'>{{school['latest.student.size'] | separator }} undergrads</p>
         <v-divider />
-        <v-row> 
+        <v-row class="v-flex align-center"> 
         <v-col cols='5'  class="pr-0 text-center">
           <h3>{{displayGradRate  | numeral('0.%') }}</h3>
         </v-col>
@@ -42,15 +42,16 @@
           <span>who go graduate <tooltip definition="graduation-rate" /></span>
         </v-col>
       </v-row>
-      <v-row class='result-card-info-container'>
+      <v-row class='result-card-info-container v-flex align-center'>
         <v-col cols='5' class="pr-0 text-center">
           <h3>{{displayEarn}}</h3>
         </v-col>
         <v-col cols='7'>
-          <span>typical earnings for recent graduates <tooltip definition="avg-salary" /></span>          
+          <span v-if='!field_of_study'>typical earnings for recent graduates <tooltip definition="avg-salary" /></span>          
+          <span v-else>typical earnings for recent graduates in {{field_of_study}} <tooltip definition="avg-salary" /></span>          
         </v-col>
       </v-row>
-      <v-row class='result-card-info-container' v-if="!isProgramReporter">
+      <v-row class='result-card-info-container v-flex align-center' v-if="!isProgramReporter">
         <v-col cols='5' class="pr-0 text-center">
           <h3>{{displayAvgCost}}</h3>
         </v-col>
@@ -87,7 +88,8 @@ export default {
   },
   data(){
     return {
-      fields: picc.fields
+      fields: picc.fields,
+      field_of_study: ''
     }
   },
   computed:{
@@ -117,7 +119,15 @@ export default {
       // }else{
       //   return numeral(this.school['latest.earnings.10_yrs_after_entry.median']).format('$0a');
       // }
-      return "$12K - $42K";
+      if(this.school['latest.programs.cip_4_digit'].length==1 && this.school['latest.programs.cip_4_digit'][0]['title'])
+      {
+        this.field_of_study = this.school['latest.programs.cip_4_digit'][0]['title'];
+        return '$24K'
+      }
+      else
+      {
+        return "$12K - $42K";
+      }
     },
     displayAvgCost(){
       if (!this.school['latest.cost.avg_net_price.overall'] || this.school['latest.cost.avg_net_price.overall'] < 0){

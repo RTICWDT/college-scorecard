@@ -46,4 +46,10 @@
     .v-card{
       overflow-wrap: normal;
     }
+    .v-bottom-sheet--inset{
+      @media screen and (min-width: 1000px) {
+        max-width: 50% !important;
+      }
+
+    }
   }

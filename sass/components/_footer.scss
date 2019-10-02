@@ -3,15 +3,16 @@ footer {
     z-index:10;
     background-color: $lighter-gray;
     color: $dark-gray;
-    height: 180px;
     font-weight: $weight-light;
     text-align: center;
     font-family: $base-font-family;
     padding-top: 22px;
+    padding-bottom: 50px;
+    font-size: 1rem;
   
    
     a {
-      color: $mid-blue;
+      color: $darker-green;
       text-decoration: none;
   
       &:hover,
@@ -22,12 +23,14 @@ footer {
   
     p {
       padding-bottom: $base-padding;
+      font-family: $base-font-family;
     }
   
     .footer-attribution {
       width: 90%;
       margin-left: auto;
       margin-right: auto;
+      font-size: 0.8rem;
   
     }
   

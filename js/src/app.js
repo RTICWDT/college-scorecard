@@ -13,6 +13,7 @@ import DataDocumentationPage from '../../data/documentation.vue';
 //import ComparePage from '../../compare/index.vue';
 
 import './vue/filters.js'
+import './vue/mixins.js'
 import './plugins/chartjs.js';
 
 Vue.prototype._ = _
@@ -80,7 +81,6 @@ new Vue({
       };
 
       picc.school.selection.vueToggle(schoolData);
-
       this.refreshCompareSchools();
     }
   }

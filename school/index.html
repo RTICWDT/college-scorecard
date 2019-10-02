@@ -10,5 +10,11 @@ stylesheets:
 
 <div id="app">
     <!-- Pass other variables as props-->
-    <school-page page-permalink="{{ page.permalink }}" base-url="{{site.baseurl}}"   />
+    <school-page 
+        page-permalink="{{ page.permalink }}" 
+        base-url="{{site.baseurl}}"   
+        :compare-schools="compareSchools"
+        @compare-update-selection="refreshCompareSchools"
+        @toggle-compare-school="toggleCompareSchool"    
+    />
 </div>

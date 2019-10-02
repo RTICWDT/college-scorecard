@@ -165,14 +165,6 @@
           </div>
 
           <v-btn
-            fixed
-            top
-            right
-            color="secondary"
-            rounded
-            @click="showCompare = !showCompare"
-          >Compare</v-btn>
-          <v-btn
             fab
             fixed
             bottom
@@ -187,10 +179,12 @@
         </v-container>
       </v-content>
 
+      <compare-header :showCompare.sync="showCompare" :schools="compareSchools" />
       <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
         <compare-drawer
           :schools="compareSchools"
           @toggle-compare-school="handleToggleCompareSchool"
+          v-on:close-modal="closeModal()"
         ></compare-drawer>
       </v-bottom-sheet>
     </v-app>
@@ -206,6 +200,7 @@ import SearchForm from "components/vue/SearchForm.vue";
 import CannedSearchButton from "components/vue/CannedSearchButton.vue";
 import CompareDrawer from "components/vue/CompareDrawer.vue";
 import CannedSearchContainer from "components/vue/CannedSearchContainer.vue";
+import CompareHeader from "components/vue/CompareHeader.vue";
 
 import _ from "lodash";
 // import querystring from 'querystring';
@@ -218,7 +213,8 @@ export default {
     "search-form": SearchForm,
     "canned-search-button": CannedSearchButton,
     "compare-drawer": CompareDrawer,
-    "canned-search-container": CannedSearchContainer
+    "canned-search-container": CannedSearchContainer,
+    "compare-header": CompareHeader
   },
   props: {
     "page-permalink": String,
@@ -430,7 +426,7 @@ export default {
       );
     },
     toggleFixed(e) {
-      if (window.scrollY < 160) {
+      if (window.scrollY < 105) {
         this.sidebar.absolute = true;
         this.sidebar.fixed = false;
       } else {
@@ -442,6 +438,9 @@ export default {
     resort(sort) {
       this.input.sort = sort;
       this.debounceSearchUpdate(this.parseURLParams());
+    },
+    closeModal(){
+      this.showCompare = false;
     }
   }
 };

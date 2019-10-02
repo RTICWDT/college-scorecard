@@ -2,7 +2,7 @@
   <v-app id="app" class="school-page">
     <div class="backNav">
       <div class="container school-back">
-        <a id="referrer-link" class="link-more" href="../search/">
+        <a id="referrer-link" class="link-more" :href="referer">
           <i class="fa fa-chevron-left"></i> Back to search results
         </a>
       </div>
@@ -75,16 +75,14 @@
                   </v-col>
                   <v-col cols="12" md="4" class="py-0 text-right">
                     <v-btn
-                      small
-                      color="primary"
-                      fab
-                      ripple
-                      :class="{amber: isSelected}"
-                      @click="$emit('toggle-compare-school',school)"
+                      text
+                      icon
+                      :color="isSelected?'amber':'grey'"
+                      @click="$emit('toggle-compare-school', { schoolId: _.get(school, fields['ID']), schoolName: _.get(school, fields['NAME'])} )"
                     >
-                      <v-icon small>fa fa-star</v-icon>
+                      <v-icon>fa fa-star</v-icon>
                     </v-btn>
-                    <share label="Share this School" url="https://collegescorecard.ed.gov" />
+                    <share label="Share this School" :url="shareLink" />
                     <div class="school-map" ref="map"></div>
                   </v-col>
                 </v-row>
@@ -464,8 +462,8 @@
                     <v-btn
                       rounded
                       color="secondary"
-                      :href="'/school/fields/?'+school.id"
-                    >See All Available Fields of Study/Majors at {{_.get(school,this.fields.NAME) }}</v-btn>
+                      :href="fieldsLink"
+                    >See All Available Fields of Study/Majors <v-icon small>fas fa-chevron-right</v-icon></v-btn>
                     <!--</div>
                      <div v-else>
                       <v-alert type="info">Fields of Study/Majors are not available for this institution. </v-alert>
@@ -621,8 +619,21 @@
         </v-row>
       </v-container>
     </div>
+    <compare-header :showCompare.sync="showCompare" :schools="compareSchools" />
+      <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
+        <compare-drawer
+          :schools="compareSchools"
+          @toggle-compare-school="handleToggleCompareSchool"
+          v-on:close-modal="closeModal()"
+        ></compare-drawer>
+      </v-bottom-sheet>
   </v-app>
 </template>
+<style lang="scss">
+ .leaflet-bottom{
+    z-index: 100 !important;
+  }
+</style>
 
 <style lang="scss" scoped>
 @import "sass/_variables";
@@ -633,7 +644,9 @@
   height: 280px;
   margin-top: $base-padding;
   width: 100%;
+ 
 }
+
 </style>
 
 <script>
@@ -647,8 +660,13 @@ import HorizontalBar from "components/vue/HorizontalBar.vue";
 import Share from "components/vue/Share.vue";
 import PayingForCollege from "components/vue/PayingForCollege.vue";
 import SchoolIcons from "components/vue/SchoolIcons.vue";
+import CompareDrawer from "components/vue/CompareDrawer.vue";
+import CompareHeader from "components/vue/CompareHeader.vue";
+import { compare } from 'vue/mixins.js';
+
 export default {
-  props: ["baseUrl"],
+  mixins: [compare],
+  props: ["baseUrl",'compareSchools'],
   components: {
     donut: Donut,
     "name-autocomplete": NameAutocomplete,
@@ -659,7 +677,9 @@ export default {
     "horizontal-bar": HorizontalBar,
     share: Share,
     "paying-for-college": PayingForCollege,
-    "school-icons": SchoolIcons
+    "school-icons": SchoolIcons,
+    "compare-drawer": CompareDrawer,
+    "compare-header": CompareHeader
   },
   data() {
     return {
@@ -669,7 +689,8 @@ export default {
       num_panels: 7,
       program_reporter_table: "program_reporter_total",
       field_sort: "ipeds_award_count",
-      isSelected: false
+
+      
     };
   },
   computed: {
@@ -853,7 +874,18 @@ export default {
         fos = [fos];
       }
       return fos;
-    }
+    },
+    referer(){
+      return document.referrer || '/search/';
+    },
+    shareLink(){
+      return window.location.href || null;
+    },
+    fieldsLink(){
+      let id = _.get(this.school, this.fields['ID']);
+      let name = _.get(this.school, this.fields['NAME'],'(unknown)');
+      return '/school/fields/?'+id+'-'+name.replace(/\W+/g, '-'); 
+    },
   },
 
   methods: {
@@ -936,8 +968,6 @@ export default {
       //  loadable.classed('js-error', true);
       //  return showError(picc.errors.NO_SCHOOL_ID);
     }
-
-    d3.select("#referrer-link").attr("href", document.referrer || null);
 
     var params = {};
     params[picc.fields.OPERATING] = 1;

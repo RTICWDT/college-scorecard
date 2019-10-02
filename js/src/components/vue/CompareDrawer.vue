@@ -1,5 +1,11 @@
 <template>
   <v-card tile id="compare_schools-content" class='pa-5'>
+      <v-btn 
+        icon 
+        class='float-right'
+        @click="toggleDrawer()"
+        ><v-icon>fas fa-times-circle</v-icon>
+      </v-btn>
       <p class='title'>Compare Schools</p>
       <div class='my-3'>
       <v-checkbox 
@@ -48,6 +54,9 @@ export default {
         // Move to a local state that can be clicked again and eventually refreshed.
 
       this.$emit('toggle-compare-school',school);
+    },
+    toggleDrawer(){
+      this.$emit('close-modal');
     }
   }
 }
