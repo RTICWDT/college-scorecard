@@ -377,7 +377,7 @@ export default {
       return qs;
     },
     cleanSpecializedMission(){
-      return _.map(this.site.data.religious_affiliations,(value,key) => {
+      return _.map(this.site.data.special_designations,(value,key) => {
         return {
           'key': key,
           'value': value
