@@ -484,7 +484,7 @@ picc.fields = {
   // new rates
   COMPLETION_OM:        'latest.completion.outcome_percentage_suppressed.all_students.8yr.award_pooled',
   COMPLETION_200_4:     'latest.completion.rate_suppressed.four_year_200percent',
-  COMPLETION_200_LT4:   'latest.completion.rate_suppressed.lt_four_year',  
+  COMPLETION_200_LT4:   'latest.completion.rate_suppressed.lt_four_year',
   
   RETENTION_RATE:       'latest.student.retention_rate_suppressed',
 
@@ -2001,6 +2001,10 @@ picc.form.prepareParams = (function() {
     completion_rate:      fields.COMPLETION_RATE + '__range',
     median_earnings:      fields.MEDIAN_EARNINGS + '__range',
     monthly_payments:     fields.MONTHLY_LOAN_PAYMENT + '__range',
+    act:                  fields.ACT_MIDPOINT + '__range',
+    sat_math:             fields.SAT_MATH_MIDPOINT + '__range',
+    sat_read:             fields.SAT_READING_MIDPOINT + '__range',
+    acceptance:           fields.ADMITTANCE_RATE + '__range',
 
     religious:            fields.RELIGIOUS,
 
@@ -2104,11 +2108,7 @@ picc.form.prepareParams = (function() {
     // XXX: this is only used for testing
     under_investigation:  picc.fields.UNDER_INVESTIGATION,
 
-    cip4: picc.fields.FIELD_OF_STUDY_CODE,
-    
-    act: picc.fields.ACT_MIDPOINT,
-    sat: picc.fields.SAT_CUMULATIVE_AVERAGE,
-    acceptance: picc.fields.ADMITTANCE_RATE
+    cip4: picc.fields.FIELD_OF_STUDY_CODE
   };
 
   // map a size or array of sizes to API-friendly range values

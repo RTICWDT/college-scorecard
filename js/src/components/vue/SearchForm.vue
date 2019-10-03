@@ -71,6 +71,7 @@
       @slider-toggle="utility.enable.completion_rate = $event"
       :min="0"
       :max="100"
+      :step="5"
       append-icon="mdi-percent"
     ></check-range>
 
@@ -96,16 +97,28 @@
         <v-expansion-panel-content>
      
           <p class='title mt-3'>Admittance</p>
-          <!-- TODO - These are not working yet -->
-          <check-range v-model="input.sat"
-            :enable="utility.enable.sat" 
-            @slider-toggle="utility.enable.sat = $event"
+
+          <check-range v-model="input.sat_math"
+            :enable="utility.enable.sat_math" 
+            @slider-toggle="utility.enable.sat_math = $event"
             :min="0" 
-            :max="1600"
-            :step="100"
+            :max="800"
+            :step="20"
           >
             <template v-slot:label>
-              Composite SAT
+              SAT Math
+            </template>
+          </check-range>
+
+          <check-range v-model="input.sat_read"
+            :enable="utility.enable.sat_read" 
+            @slider-toggle="utility.enable.sat_read = $event"
+            :min="0" 
+            :max="800"
+            :step="20"
+          >
+            <template v-slot:label>
+              SAT Critical Reading
             </template>
           </check-range>
 
@@ -276,7 +289,8 @@ export default {
         urban:[],
         cip4: "",
         act: null,
-        sat: null,
+        sat_math: null,
+        sat_read: null,
         acceptance:null
         // page:0,
         // sort:""
@@ -290,7 +304,8 @@ export default {
         enable:{
           completion_rate: false,
           avg_net_price: false,
-          sat: false,
+          sat_math: false,
+          sat_read: false,
           act: false,
           acceptance: false
         },
@@ -354,10 +369,16 @@ export default {
         _.unset(groomedInput,'avg_net_price'); // TODO: CONST;
       }
 
-      if(groomedInput.sat && groomedInput.sat > 0 && this.utility.enable.sat){
-        groomedInput.sat = '..' + groomedInput.sat
+      if(groomedInput.sat_math && groomedInput.sat_math > 0 && this.utility.enable.sat_math){
+        groomedInput.sat_math = '..' + groomedInput.sat_math
       }else{
-        _.unset(groomedInput,'sat'); // TODO: CONST;
+        _.unset(groomedInput,'sat_math'); // TODO: CONST;
+      }
+
+      if(groomedInput.sat_read && groomedInput.sat_read > 0 && this.utility.enable.sat_read){
+        groomedInput.sat_read = '..' + groomedInput.sat_read
+      }else{
+        _.unset(groomedInput,'sat_read'); // TODO: CONST;
       }
 
       if(groomedInput.act && groomedInput.act > 0 && this.utility.enable.act){
@@ -429,7 +450,7 @@ export default {
           }
         }
 
-        if(key === 'sat' || key === 'act'){
+        if(key === 'sat_math' || key === 'sat_read' || key === 'act'){
           return parseFloat(newObjValue.substr(2))
         }
 
@@ -445,8 +466,12 @@ export default {
         this.utility.enable.avg_net_price = true;
       }
 
-      if(this.input.sat > 0){
-        this.utility.enable.sat = true;
+      if(this.input.sat_read > 0){
+        this.utility.enable.sat_read = true;
+      }
+
+      if(this.input.sat_math > 0){
+        this.utility.enable.sat_math = true;
       }
 
       if(this.input.act > 0){
