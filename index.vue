@@ -97,7 +97,7 @@ export default {
       window.location.href = url;
     },
     toggleFixed(e) {
-      if (window.scrollY < 160) {
+      if (window.scrollY < 105) {
         this.sidebar.absolute = true;
         this.sidebar.fixed = false;
       } else {
