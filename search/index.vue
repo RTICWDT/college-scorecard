@@ -349,7 +349,8 @@ export default {
         picc.fields.COMPLETION_200_4,
         picc.fields.COMPLETION_200_LT4,
 
-        picc.fields.FIELD_OF_STUDY
+        // TODO: Commenting out for now.  It is not working.
+        // picc.fields.FIELD_OF_STUDY
       ].join(",");
 
       let qs = this.generateQueryString(params);

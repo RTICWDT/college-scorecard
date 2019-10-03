@@ -17,13 +17,18 @@
 
     <v-row justify="space-around" class='mx-1'>
       
-      <v-checkbox v-model="enableSlider" @change="handleEnable" color="primary"></v-checkbox>
+      <v-checkbox v-model="enableSlider" 
+        @change="handleEnable" 
+        color="primary"
+      ></v-checkbox>
 
       <v-slider v-model="sliderValue"
         class="align-center"
-        :class="{'v-slider--disabled': !enableSlider}"
         hide-details
         @input="handleInput"
+        :min="min"
+        :max="max"
+        :step="step"
       >
         <template v-slot:append>
           <v-text-field v-model="sliderValue"
@@ -34,7 +39,6 @@
             style="width: 60px"
             @input="handleInput"
             :append-icon='appendIcon'
-            :step="step"
           ></v-text-field>
 
           <slot name="append-text">
@@ -71,6 +75,12 @@ export default {
   },
   methods: {
     handleInput (e) {
+      //Activate slider when the slider is moved.
+      if(!this.enableSlider){
+        this.enableSlider = true;
+        this.handleEnable(e);
+      }
+
       this.$emit('input', Number(this.sliderValue));
     },
     handleEnable(e){
