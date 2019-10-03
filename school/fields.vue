@@ -56,13 +56,15 @@
                 </v-row>
               </v-card>
               <!-- /.school-card_container-school -->
-              <v-card class="px-4 pt-2 mb-4">
+              <v-card class="mb-4" color="light-green lighten-4">
                 <v-select
+                  filled
                   :items="filters"
                   item-text="credential"
                   item-value="id"
                   v-model="currentFilter"
                   label="Filter by Degree"
+                  hide-details
                 ></v-select>
               </v-card>
               <v-alert
@@ -73,41 +75,26 @@
                 v-if="currentFilter === 8"
                 color="warning"
               >Note about Graduate/Professional Certificate coming soon!</v-alert>
-              <v-expansion-panels>
-                <v-expansion-panel v-for="(program, key) in processedPrograms" :key="key">
-                  <v-expansion-panel-header>{{ _.startCase(_.toLower(key.slice(0,-1))) }}</v-expansion-panel-header>
+              <v-expansion-panels v-if="!_.isEmpty(processedPrograms)">
+                <v-expansion-panel v-for="(program, index) in processedPrograms" :key="index">
+                  <v-expansion-panel-header>{{ _.startCase(_.toLower(program.name.slice(0,-1))) }}</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <v-expansion-panels dark>
                       <v-expansion-panel v-for="fos in program" :key="fos.code">
                         <v-expansion-panel-header>
-                          <v-row no-gutters>
-                            <v-col cols="6">{{ fos.title.slice(0,-1) }}</v-col>
-                            <v-col cols="6">{{ fos.credential.title }}</v-col>
-                          </v-row>
+                          {{ fos.title.slice(0,-1) }} - {{ fos.credential.title }}
                         </v-expansion-panel-header>
                         <v-expansion-panel-content>
-                          <v-simple-table>
-                            <tr>
-                              <th>Count</th>
-                              <th>Median Debt</th>
-                              <th>Median Earnings</th>
-                            </tr>
-                            <tr>
-                              <td>{{fos.count | separator}}</td>
-                              <td v-if="fos.median_debt">{{fos.median_debt | numeral('$0,0') }}</td>
-                              <td v-else>--</td>
-                              <td
-                                v-if="fos.median_earnings"
-                              >{{fos.median_earnings | numeral('$0,0') }}</td>
-                              <td v-else>--</td>
-                            </tr>
-                          </v-simple-table>
+                          <field-data :fos="fos" />
                         </v-expansion-panel-content>
                       </v-expansion-panel>
                     </v-expansion-panels>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
+              <v-card v-else color="pa-5">
+                <p class='ma-0 text-center'><em>This institution does not offer any fields of study with this degree.</em></p>
+              </v-card>
             </div>
           </v-col>
 
@@ -136,6 +123,7 @@ import Share from "components/vue/Share.vue";
 import PayingForCollege from "components/vue/PayingForCollege.vue";
 import CompareDrawer from "components/vue/CompareDrawer.vue";
 import CompareHeader from "components/vue/CompareHeader.vue";
+import FieldData from "components/vue/FieldData.vue";
 import { compare } from 'vue/mixins.js';
 
 export default {
@@ -146,7 +134,8 @@ export default {
     share: Share,
     "paying-for-college": PayingForCollege,
     "compare-drawer": CompareDrawer,
-    "compare-header": CompareHeader
+    "compare-header": CompareHeader,
+    'field-data': FieldData
   },
   data() {
     return {
@@ -182,8 +171,9 @@ export default {
           self.currentFilter == program.credential.level
         ) {
           let twodigit = program.code.substr(0, 2);
-          if (!processedPrograms[self.cip2[twodigit]])
+          if (!processedPrograms[self.cip2[twodigit]]){
             processedPrograms[self.cip2[twodigit]] = [];
+          }
           processedPrograms[self.cip2[twodigit]].push({
             title: program.title,
             count: program.ipeds_award_count,
@@ -192,7 +182,15 @@ export default {
           });
         }
       });
-      return processedPrograms;
+
+      let sorted = [];
+      for(var cip2 in processedPrograms){
+        sorted.push({
+          name: cip2,
+          fields: _.sortBy(processedPrograms[cip2], ['title'])
+        });
+      };
+      return _.sortBy(sorted, ['name']);
     },
     shareLink(){
       return window.location.href || null;

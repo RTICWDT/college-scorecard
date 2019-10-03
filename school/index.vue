@@ -93,23 +93,16 @@
                   </v-col>
                   <v-col col="12" md="6">
                     <h2 class="mb-3">Salary After Completing</h2>
-                    <div class="my-5 d-flex">
-                      <div style="width: 40%">
-                        <h2 class="display-2 pink--text text--darken-4 font-weight-bold">$25K</h2>
-                        <p
-                          class="caption"
-                        >Agricultural/Animal/ Plant/Veterinary Science and Related Fields, Other.</p>
-                      </div>
-                      <div style="width: 20%">
-                        <h2 class="display-2 pink--text text--darken-4 font-weight-bold">to</h2>
-                      </div>
-                      <div style="width: 40%">
-                        <h2 class="display-2 pink--text text--darken-4 font-weight-bold">$56K</h2>
-                        <p
-                          class="caption"
-                        >Teacher Education and Professional Development, Specific Levels and Methods.</p>
-                      </div>
-                    </div>
+                    <range
+                      :lower="{ value: 25000, label: '$25,000' }"
+                      :upper="{ value: 84000, label: '$84,000' }"
+                      :min="{ value: 0, label: '0' }"
+                      :max="{ value: 125000, label: '$125,000' }"
+                      lowertip="English"
+                      uppertip="Atmospheric Science"
+                      hideMiddle
+                    ></range>
+                    <p>depending on field of study.</p>
 
                     <h2 class="mb-3">
                       Average Annual Cost
@@ -140,13 +133,9 @@
                     <v-row v-if="!isProgramReporter">
                       <v-col cols="12" md="6">
                         <h2 class="mb-3">Average Annual Cost</h2>
-                        <bar-chart
-                          :labels="['']"
-                          :data="[_.get(school, fields['NET_PRICE'], '0')]"
-                          color="#880E4F"
-                          :max="100000"
-                        />
-                        <p class="text-center">
+                        <h2 class="display-2 pink--text text--darken-4 font-weight-bold"> {{_.get(school, fields['NET_PRICE'], 'N/A') | numeral('$0,0')}}</h2>
+                        <h2 class="mb-3 mt-5">Personal Net Price</h2>
+                          <p>Many institutions provide a custom net price calculator.</p>
                           <v-btn
                             rounded
                             color="secondary"
@@ -317,7 +306,7 @@
                           Outcomes 8 Years After Attending
                           <tooltip definition="outcome-measures" />
                         </h2>
-                        <sankey :school="school" />
+                        <sankey :school="school" colors="solid" />
                       </v-col>
                     </v-row>
                   </v-expansion-panel-content>
@@ -360,21 +349,22 @@
                             <tooltip definition="avg-debt" />
                           </h2>
                           <range
-                            :lower="{ value: 25000, label: 'Basketweaving<br />$25,0000' }"
-                            :upper="{ value: 84000, label: 'Brain Surgeon<br />$84,000' }"
+                            :lower="{ value: 25000, label: '$25,000' }"
+                            :upper="{ value: 84000, label: '$84,000' }"
                             :min="{ value: 0, label: '0' }"
                             :max="{ value: 125000, label: '$125,000' }"
+                            lowertip="English"
+                            uppertip="Atmospheric Science"
                             hideMiddle
                           ></range>
-                          <p>for undergraduate borrowers who complete college</p>
+                          <p>depending on field of study for undergraduate borrowers who complete college</p>
 
                           <h2 class="mb-3">
-                            Typical Monthly Loan Payment&nbsp;
-                            <tooltip definition="avg-loan-payment" />
+                            Typical Monthly Loan Payment&nbsp;<tooltip definition="avg-loan-payment" />
                           </h2>
                           <div
                             class="display-2 pink--text text--darken-4 font-weight-bold"
-                          >{{ _.get(school, fields['MONTHLY_LOAN_PAYMENT']) | numeral('$0,0') }}/mo</div>
+                          >{{ _.get(school, fields['MONTHLY_LOAN_PAYMENT']) | numeral('$0,0') }}-{{ _.get(school, fields['MONTHLY_LOAN_PAYMENT']) | numeral('0,0') }}/mo</div>
                         </v-col>
                       </v-row>
                       <v-row>
@@ -408,11 +398,13 @@
                     class="pa-5"
                   >
                     <p>One-year post-completion earnings with range of highest and lowest median earnings for undergraduate and credential programs for which there is data. For more information, see Fields of Study/Majors for this school.</p>
-                    <range
-                      :lower="{ value: 25000, label: 'Basketweaving<br />$25,0000' }"
-                      :upper="{ value: 84000, label: 'Brain Surgeon<br />$84,000' }"
+                     <range
+                      :lower="{ value: 25000, label: '$25,000' }"
+                      :upper="{ value: 84000, label: '$84,000' }"
                       :min="{ value: 0, label: '0' }"
                       :max="{ value: 125000, label: '$125,000' }"
+                      lowertip="English"
+                      uppertip="Atmospheric Science"
                       hideMiddle
                     ></range>
                   </v-expansion-panel-content>
@@ -424,38 +416,30 @@
                   >Fields of Study / Majors</v-expansion-panel-header>
                   <v-expansion-panel-content id="academics-content" class="pa-5">
                     <!-- <div if=''> -->
-                    Sort by:
+                    <h2 class='mb-3'>Top Fields of Study</h2>
+                    <p class='my-0'>Sort by:
                     <v-btn-toggle v-model="field_sort" mandatory class="my-3" color="secondary">
-                      <v-btn small text value="ipeds_award_count">Most Popular</v-btn>
+                      <v-btn small text value="ipeds_award_count">Largest Size</v-btn>
                       <v-btn small text value="earnings">Highest Earnings</v-btn>
                       <v-btn small text value="median_debt">Lowest Debt</v-btn>
-                    </v-btn-toggle>
+                    </v-btn-toggle></p>
+                    <v-row class='px-5 mt-5'>
+                      <v-col cols="12" sm="4" class='pa-0 ma-0 text-center font-weight-bold'>Field of Study</v-col>
+                      <v-col cols="12" sm="4" class='pa-0 ma-0 text-center font-weight-bold'>Degree</v-col>
+                      <v-col cols="12" sm="4" class='pa-0 ma-0 text-center font-weight-bold'>{{currentHoist}}</v-col>
+                    </v-row>
                     <v-expansion-panels class="my-3">
                       <v-expansion-panel v-for="fos in fieldsOfStudy" :key="fos.code">
-                        <v-expansion-panel-header>
+                        <v-expansion-panel-header class='py-0'>
                           <v-row no-gutters>
-                            <v-col cols="6">{{ fos.title.slice(0,-1) }}</v-col>
-                            <v-col cols="3">{{ fos.credential.title }}</v-col>
-                            <v-col cols="3">{{ fos.hoist }}</v-col>
+                            <v-col cols="12" sm="4" class='pa-2'>{{ fos.title.slice(0,-1) }}</v-col>
+                            <v-col cols="12" sm="4" class='pa-2 text-center'>{{ fos.credential.title }}</v-col>
+                            <v-col v-if="hoistCurrency" cols="12" class="text-center pink--text text--darken-4 pa-2" sm="4">{{ fos.hoist | numeral('$0,0') }}</v-col>
+                            <v-col v-else cols="12" class="text-center pink--text text--darken-4 pa-2" sm="4">{{ fos.hoist | separator }}</v-col>
                           </v-row>
                         </v-expansion-panel-header>
                         <v-expansion-panel-content>
-                          <v-simple-table>
-                            <tr>
-                              <th>Count</th>
-                              <th>Median Debt</th>
-                              <th>Median Earnings</th>
-                            </tr>
-                            <tr>
-                              <td>{{fos.ipeds_award_count | separator }}</td>
-                              <td v-if="fos.median_debt">{{fos.median_debt | numeral('$0,0') }}</td>
-                              <td v-else>--</td>
-                              <td
-                                v-if="fos.median_earnings"
-                              >{{fos.median_earnings | numeral('$0,0') }}</td>
-                              <td v-else>--</td>
-                            </tr>
-                          </v-simple-table>
+                         <field-data :fos="fos" />
                         </v-expansion-panel-content>
                       </v-expansion-panel>
                     </v-expansion-panels>
@@ -662,6 +646,7 @@ import PayingForCollege from "components/vue/PayingForCollege.vue";
 import SchoolIcons from "components/vue/SchoolIcons.vue";
 import CompareDrawer from "components/vue/CompareDrawer.vue";
 import CompareHeader from "components/vue/CompareHeader.vue";
+import FieldData from "components/vue/FieldData.vue";
 import { compare } from 'vue/mixins.js';
 
 export default {
@@ -679,7 +664,8 @@ export default {
     "paying-for-college": PayingForCollege,
     "school-icons": SchoolIcons,
     "compare-drawer": CompareDrawer,
-    "compare-header": CompareHeader
+    "compare-header": CompareHeader,
+    "field-data": FieldData
   },
   data() {
     return {
@@ -689,8 +675,7 @@ export default {
       num_panels: 7,
       program_reporter_table: "program_reporter_total",
       field_sort: "ipeds_award_count",
-
-      
+      hoistCurrency: false
     };
   },
   computed: {
@@ -886,6 +871,24 @@ export default {
       let name = _.get(this.school, this.fields['NAME'],'(unknown)');
       return '/school/fields/?'+id+'-'+name.replace(/\W+/g, '-'); 
     },
+    currentHoist(){
+      let sort = this.field_sort;
+      switch(sort)
+      {
+        case 'ipeds_award_count':
+          this.hoistCurrency = false;
+          return 'Graduates';
+        break;
+        case 'earnings':
+          this.hoistCurrency = true;
+          return 'Median Earnings';
+        break;
+        case 'median_debt':
+          this.hoistCurrency = true;
+          return 'Median Debt';
+        break;
+      }
+    }
   },
 
   methods: {

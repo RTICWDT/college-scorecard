@@ -51,6 +51,7 @@
     { cip4: '{{ program.label }}', field:'{{ program.value | replace: ".","" }}'},
     {% endfor %}
   ];
+  
 
   picc.GLOSSARY = ({{ site.data.glossary|jsonify }});
 

@@ -228,12 +228,12 @@ export default {
         data.addRows(rows);
         if (this.colors == "solid") {
           colors = [
-            "#8360ED",
+            "#880E4F",
             "#FFFFFF",
-            "#8360ED",
-            "#8360ED",
-            "#8360ED",
-            "#8360ED"
+            "#880E4F",
+            "#880E4F",
+            "#880E4F",
+            "#880E4F"
           ];
         } else {
           colors = [
@@ -260,7 +260,7 @@ export default {
               //nodePadding: 0,
               label: {
                 fontName:
-                  'Montserrat,"Helvetica Neue",Helvetica,arial,sans-serif',
+                  'Public Sans,"Helvetica Neue",Helvetica,arial,sans-serif',
                 fontSize: 14,
                 color: "#040404"
               },

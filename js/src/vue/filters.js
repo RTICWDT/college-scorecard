@@ -59,7 +59,6 @@ Vue.filter('controlClass', function(id){
 
 Vue.filter('sizeCategory', function(size){
     let text = 'size unknown';
-    console.log(size);
     if(_.inRange(size, 0, 2000)) text = 'Small';
     else if(_.inRange(size, 2000, 15000)) text = 'Medium';
     else if(_.inRange(15000, Infinity)) text = 'Large';

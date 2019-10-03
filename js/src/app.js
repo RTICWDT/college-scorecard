@@ -10,6 +10,7 @@ import SearchPage from '../../search/index.vue';
 import DataIndexPage from '../../data/index.vue';
 import DataChangelogPage from '../../data/changelog.vue';
 import DataDocumentationPage from '../../data/documentation.vue';
+import DataGlossaryPage from '../../data/glossary.vue';
 //import ComparePage from '../../compare/index.vue';
 
 import './vue/filters.js'
@@ -46,6 +47,7 @@ new Vue({
     'data-index-page': DataIndexPage,
     'data-changelog': DataChangelogPage,
     'data-documentation': DataDocumentationPage,
+    'data-glossary': DataGlossaryPage
     //'compare-page': ComparePage
   },
   created(){

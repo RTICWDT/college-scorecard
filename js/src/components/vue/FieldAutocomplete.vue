@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     items() {
-      return picc.CIP4;
+      return _.sortBy(picc.CIP4,['field']);
     }
   },
   created(){
