@@ -37,6 +37,27 @@
       class='mt-0 pt-0'
       ></v-select>
     
+    <!-- TODO: Enable for location aware search. -->
+    <!-- <p class='subhead-2'>Nearby</p>    
+    <v-row>
+      <v-col cols="12" md="4" sm="12" xs="12">
+        <v-btn text 
+          icon 
+          color="indigo"
+          @click="handleLocationCheck"
+        >
+          <v-icon>mdi-star</v-icon>
+        </v-btn>
+      </v-col>
+      <v-col cols="12" md="8" sm="12" xs="12">
+        <v-text-field v-model="location.miles"
+          :rules="[utility.rules.required,utility.rules.numerical]"
+          :disabled="!location.latLon"
+          label="Miles"
+        ></v-text-field>
+      </v-col>
+    </v-row> -->
+
     <p class='subhead-2'>Field of Study/Major</p>
     <field-autocomplete v-model="input.cip4"></field-autocomplete>
 
@@ -314,11 +335,25 @@ export default {
         act: null,
         sat_math: null,
         sat_read: null,
-        acceptance:null
+        acceptance:null,
+        lat: null,
+        long: null,
         // page:0,
         // sort:""
       },
+      location:{
+        latLon: null,
+        miles: 10, //In Miles.
+      },
       utility:{
+        rules:{
+          required: value => !!value || "Required.",
+          numerical: value => {
+            const pattern = /^\d+$/
+            return pattern.test(value) || 'Numerical'
+          }
+        },
+        test: null,
         // Hold Default state of form data.
         formDefult:{},
         // Helper to activate debounced query after initial load.
@@ -357,6 +392,18 @@ export default {
         this.mapInputFromProp();
       },
       deep: true
+    },
+    'location.latLon':{
+      // Proccess Lat/Long object for url values.
+      handler(newValue,oldValue){
+        if(newValue.min_lat && newValue.max_lat && newValue.min_lat && newValue.max_lat){
+          this.input.lat = newValue.min_lat.toFixed(4) + ".." + newValue.max_lat.toFixed(4);
+          this.input.long = newValue.min_lon.toFixed(4) + ".." + newValue.max_lon.toFixed(4);
+        }
+      }
+    },
+    'location.miles'(){
+      this.handleLocationCheck();
     }
   },
   computed:{
@@ -514,7 +561,93 @@ export default {
       }else{
         this.input.size = value;
       }
+    },
+    handleLocationCheck(){
+      if (navigator.geolocation) {
+        let vm = this;
+        navigator.geolocation.getCurrentPosition(function(position){
+          vm.location.latLon = vm.calculateBoundingBox(position.coords.latitude,position.coords.longitude, vm.location.miles * 1.609); // Convert miles to KM (Aprroximate)
+        });
+
+      } else {
+        // TODO: Error Handling.
+        console.log("Uh oh, Location no likie.")
+      }
+    },
+    //Distance: Referenced from: https://stackoverflow.com/a/25025590
+    calculateBoundingBox(lat,long,distance){
+      let MIN_LAT, MAX_LAT, MIN_LON, MAX_LON, R, radDist, degLat, degLon, radLat, radLon, minLat, maxLat, minLon, maxLon, deltaLon;
+      
+      if (distance < 0) {
+        return 'Illegal arguments';
+      }
+
+      // helper functions (degrees<–>radians)
+      Number.prototype.degToRad = function () {
+        return this * (Math.PI / 180);
+      };
+
+      Number.prototype.radToDeg = function () {
+        return (180 * this) / Math.PI;
+      };
+
+      // coordinate limits
+      MIN_LAT = (-90).degToRad();
+      MAX_LAT = (90).degToRad();
+      MIN_LON = (-180).degToRad();
+      MAX_LON = (180).degToRad();
+
+      // Earth's radius (km)
+      R = 6378.1;
+
+      // angular distance in radians on a great circle
+      radDist = distance / R;
+
+      // center point coordinates (deg)
+      degLat = lat;
+      degLon = long;
+
+      // center point coordinates (rad)
+      radLat = degLat.degToRad();
+      radLon = degLon.degToRad();
+
+      // minimum and maximum latitudes for given distance
+      minLat = radLat - radDist;
+      maxLat = radLat + radDist;
+
+      // minimum and maximum longitudes for given distance
+      minLon = void 0;
+      maxLon = void 0;
+
+      // define deltaLon to help determine min and max longitudes
+      deltaLon = Math.asin(Math.sin(radDist) / Math.cos(radLat));
+      if (minLat > MIN_LAT && maxLat < MAX_LAT) {
+        minLon = radLon - deltaLon;
+        maxLon = radLon + deltaLon;
+        if (minLon < MIN_LON) {
+          minLon = minLon + 2 * Math.PI;
+        }
+        if (maxLon > MAX_LON) {
+          maxLon = maxLon - 2 * Math.PI;
+        }
+      }
+
+      // a pole is within the given distance
+      else {
+        minLat = Math.max(minLat, MIN_LAT);
+        maxLat = Math.min(maxLat, MAX_LAT);
+        minLon = MIN_LON;
+        maxLon = MAX_LON;
+      }
+
+      return{
+        min_lat:minLat.radToDeg(),
+        max_lat:maxLat.radToDeg(),
+        min_lon:minLon.radToDeg(),
+        max_lon:maxLon.radToDeg()
+      };
     }
+
   }
 }
 </script>
