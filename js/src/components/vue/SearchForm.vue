@@ -32,6 +32,15 @@
       placeholder="Select one..."
       ></v-select>
     
+    <p class='subhead-2'>Nearby</p>
+    <v-btn text 
+      icon 
+      color="indigo"
+      @click="handleLocationCheck"
+    >
+      <v-icon>mdi-star</v-icon>
+    </v-btn>
+
     <p class='subhead-2'>Field of Study/Major</p>
     <field-autocomplete v-model="input.cip4"></field-autocomplete>
 
@@ -291,11 +300,12 @@ export default {
         act: null,
         sat_math: null,
         sat_read: null,
-        acceptance:null
+        acceptance:null,
         // page:0,
         // sort:""
       },
       utility:{
+        test: null,
         // Hold Default state of form data.
         formDefult:{},
         // Helper to activate debounced query after initial load.
@@ -491,7 +501,96 @@ export default {
       }else{
         this.input.size = value;
       }
+    },
+    handleLocationCheck(){
+      // TODO - Make distance a parameter.
+      
+      // Get the users location
+      if (navigator.geolocation) {
+        let vm = this;
+        navigator.geolocation.getCurrentPosition(function(position){
+          console.log("Go!");
+          vm.utility.test = vm.calculateBoundingBox(position.coords.latitude,position.coords.longitude,4);
+        });
+
+      } else { 
+        console.log("Uh oh, Location no likie.")
+      }
+    },
+    //Distance - KM for now.
+    calculateBoundingBox(lat,long,distance){
+      let MIN_LAT, MAX_LAT, MIN_LON, MAX_LON, R, radDist, degLat, degLon, radLat, radLon, minLat, maxLat, minLon, maxLon, deltaLon;
+      
+      if (distance < 0) {
+        return 'Illegal arguments';
+      }
+
+      // helper functions (degrees<–>radians)
+      Number.prototype.degToRad = function () {
+        return this * (Math.PI / 180);
+      };
+
+      Number.prototype.radToDeg = function () {
+        return (180 * this) / Math.PI;
+      };
+
+      // coordinate limits
+      MIN_LAT = (-90).degToRad();
+      MAX_LAT = (90).degToRad();
+      MIN_LON = (-180).degToRad();
+      MAX_LON = (180).degToRad();
+
+      // Earth's radius (km)
+      R = 6378.1;
+
+      // angular distance in radians on a great circle
+      radDist = distance / R;
+
+      // center point coordinates (deg)
+      degLat = lat;
+      degLon = long;
+
+      // center point coordinates (rad)
+      radLat = degLat.degToRad();
+      radLon = degLon.degToRad();
+
+      // minimum and maximum latitudes for given distance
+      minLat = radLat - radDist;
+      maxLat = radLat + radDist;
+
+      // minimum and maximum longitudes for given distance
+      minLon = void 0;
+      maxLon = void 0;
+
+      // define deltaLon to help determine min and max longitudes
+      deltaLon = Math.asin(Math.sin(radDist) / Math.cos(radLat));
+      if (minLat > MIN_LAT && maxLat < MAX_LAT) {
+        minLon = radLon - deltaLon;
+        maxLon = radLon + deltaLon;
+        if (minLon < MIN_LON) {
+          minLon = minLon + 2 * Math.PI;
+        }
+        if (maxLon > MAX_LON) {
+          maxLon = maxLon - 2 * Math.PI;
+        }
+      }
+
+      // a pole is within the given distance
+      else {
+        minLat = Math.max(minLat, MIN_LAT);
+        maxLat = Math.min(maxLat, MAX_LAT);
+        minLon = MIN_LON;
+        maxLon = MAX_LON;
+      }
+
+      return{
+        min_lat:minLat.radToDeg(),
+        max_lat:maxLat.radToDeg(),
+        min_lon:minLon.radToDeg(),
+        max_lon:maxLon.radToDeg()
+      };
     }
+
   }
 }
 </script>
