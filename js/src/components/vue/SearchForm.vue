@@ -12,12 +12,16 @@
     font-weight: 600;
     font-family: 'Montserrat', sans-serif !important;
   }
+  .search-panel-header{
+    background-color: #ccc; 
+    border-radius: 0px !important;
+  }
 </style>
 
 <template>
 
   <v-form>
-    <div class='pa-5'>
+    <div class='py-2 px-5'>
     <p class='subhead-2'>School Name</p> 
     <name-autocomplate></name-autocomplate>
 
@@ -30,6 +34,7 @@
       chips
       hide-details
       placeholder="Select one..."
+      class='mt-0 pt-0'
       ></v-select>
     
     <p class='subhead-2'>Field of Study/Major</p>
@@ -38,7 +43,7 @@
     <p class='subhead-2'>Length</p>
     <div class="search-form-degree-wrapper">
         <v-checkbox
-          class="search-form-degree-cb"
+          class="search-form-degree-cb my-0 py-0"
           v-model="input.degree"
           label="Two Year"
           value="a"
@@ -47,7 +52,7 @@
         ></v-checkbox>
 
         <v-checkbox
-          class="search-form-degree-cb"
+          class="search-form-degree-cb my-0 py-0"
           v-model="input.degree"
           label="Four Year"
           value="b"
@@ -56,7 +61,7 @@
         ></v-checkbox>
 
         <v-checkbox
-          class="search-form-degree-cb"
+          class="search-form-degree-cb my-0 py-0"
           v-model="input.degree"
           label="Less than Two Year"
           value="c"
@@ -73,6 +78,7 @@
       :max="100"
       :step="5"
       append-icon="mdi-percent"
+      class='mt-5'
     ></check-range>
 
     <check-range legend-title="Average Annual Cost" 
@@ -89,14 +95,14 @@
     </check-range>
     </div>
 
-    <v-expansion-panels v-if="displayAllFilters">
+    <v-expansion-panels v-if="displayAllFilters" class='mt-5'>
       <v-expansion-panel>
-        <v-expansion-panel-header style='background-color: #ccc; border-radius: 0px !important;'>
+        <v-expansion-panel-header class='search-panel-header'>
           More
         </v-expansion-panel-header>
         <v-expansion-panel-content>
      
-          <p class='title mt-3'>Admittance</p>
+          <!-- <p class='title mt-3'>Admittance</p> -->
 
           <check-range v-model="input.sat_math"
             :enable="utility.enable.sat_math" 
@@ -104,6 +110,7 @@
             :min="0" 
             :max="800"
             :step="20"
+            class='mt-5'
           >
             <template v-slot:label>
               SAT Math
@@ -148,9 +155,9 @@
 
 
 
-        <p class='title'>School Characteristics</p>
+        <!-- <p class='overline'>School Characteristics</p> -->
       
-          <p class='subtitle-2'>Size</p>
+          <p class='subhead-2 mb-3'>Size</p>
           <div>
           <v-btn small :class="{secondary: input.size === 'small' }" @click="handleSizeClick('small')">Small</v-btn>
           <v-btn small :class="{secondary: input.size === 'medium' }" @click="handleSizeClick('medium')">Medium</v-btn>
@@ -158,7 +165,7 @@
           </div>
               
     
-          <p class='subtitle-2 mt-5'>Type of School</p>
+          <p class='subhead-2'>Type of School</p>
           <div class="search-form-type-container">
             <v-checkbox
               hide-details
@@ -166,6 +173,7 @@
               label="Public"
               value="public"
                 color="secondary"
+                class="py-0 my-0"
             ></v-checkbox>
 
             <v-checkbox
@@ -174,6 +182,7 @@
               label="Private Nonprofit"
               value="private"
                 color="secondary"
+                class="py-0 my-0"
             ></v-checkbox>
 
             <v-checkbox
@@ -182,10 +191,11 @@
               label="Private For-Profit"
               value="profit"
                 color="secondary"
+                class="py-0 my-0"
             ></v-checkbox>
           </div>
 
-          <p class='subtitle-2 mt-5'>Urbancity</p>
+          <p class='subhead-2'>Urbancity</p>
           <!-- TODO - Not working yet -->
           
               <v-checkbox
@@ -194,6 +204,7 @@
                 label="City"
                 value="city"
                 color="secondary"
+                class="py-0 my-0"
               ></v-checkbox>
 
               <v-checkbox
@@ -202,6 +213,7 @@
                 label="Suburban"
                 value="suburban"
                 color="secondary"
+                class="py-0 my-0"
               ></v-checkbox>
               <v-checkbox
                 hide-details
@@ -209,6 +221,7 @@
                 label="Town"
                 value="town"
                 color="secondary"
+                class="py-0 my-0"
               ></v-checkbox>
 
               <v-checkbox
@@ -217,23 +230,26 @@
                 label="Rural"
                 value="rural"
                 color="secondary"
+                class="py-0 my-0"
               ></v-checkbox>
  
-        <p class='subtitle-2 pt-5'>Specialized Mission</p>
+        <p class='subhead-2'>Specialized Mission</p>
         <v-select v-model='input.serving'
           :items='cleanSpecializedMission'
           item-text="value"
           item-value="key"
           placeholder='Select one...'
+                class="py-0 my-0"
         ></v-select>
 
 
-        <p class='subtitle-2 pt-5'>Religious Affiliation</p>
+        <p class='subhead-2'>Religious Affiliation</p>
         <v-select v-model='input.religious'
           :items='site.data.religious_affiliations'
           item-text='label'
           item-value='value'
           placeholder='Select one...'
+                class="py-0 my-0"
         ></v-select>
 
 

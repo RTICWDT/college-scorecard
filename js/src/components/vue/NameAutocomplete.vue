@@ -11,6 +11,8 @@
             return-object
             @change="goToSchool"
             autocomplete="off"
+            hide-details
+            class='pt-0 mt-0'
          />
     </div>
 </template>

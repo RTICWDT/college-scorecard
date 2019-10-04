@@ -1,8 +1,8 @@
-<style lang="sass" scoped>
+<style lang="scss" scoped>
 .subhead-2{
-  margin-top: 1rem !important;
+  margin-top: 0.3rem !important;
   margin-bottom: 0.3rem !important;
-  font-weight: 500;
+  font-weight: 600;
   font-family: 'Montserrat', sans-serif !important;
 }
 </style>
@@ -15,15 +15,11 @@
       </slot>
     </p>
 
-    <v-row justify="space-around" class='mx-1'>
+    <v-row justify="space-around" >
+      <v-col class='py-0'>
       
-      <v-checkbox v-model="enableSlider" 
-        @change="handleEnable" 
-        color="secondary"
-      ></v-checkbox>
-
       <v-slider v-model="sliderValue"
-        class="align-center"
+        class="align-center pa-0 ma-0"
         hide-details
         @input="handleInput"
         :min="min"
@@ -46,8 +42,17 @@
           <slot name="append-text">
           </slot>
         </template>
-      </v-slider>
+        <template v-slot:prepend>
+<v-checkbox v-model="enableSlider" 
+        @change="handleEnable" 
+        color="secondary"
+        class="pa-0 ma-0"
+        hide-details
+      ></v-checkbox>
 
+        </template>
+      </v-slider>
+      </v-col>
     </v-row>
   </div>
 </template>

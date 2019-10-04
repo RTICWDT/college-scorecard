@@ -10,6 +10,9 @@
       return-object
       autocomplete="off"
       v-on:change="$emit('input', cip4.cip4.replace('\.',''))"
+      hide-details
+      class='pt-0 mt-0'
+
     />
   </div>
 </template>
