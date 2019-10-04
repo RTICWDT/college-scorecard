@@ -19,7 +19,7 @@
       
       <v-checkbox v-model="enableSlider" 
         @change="handleEnable" 
-        color="primary"
+        color="secondary"
       ></v-checkbox>
 
       <v-slider v-model="sliderValue"
@@ -29,6 +29,8 @@
         :min="min"
         :max="max"
         :step="step"
+        color="secondary"
+        track-color="grey"
       >
         <template v-slot:append>
           <v-text-field v-model="sliderValue"

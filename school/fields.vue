@@ -76,11 +76,11 @@
                 color="warning"
               >Note about Graduate/Professional Certificate coming soon!</v-alert>
               <v-expansion-panels v-if="!_.isEmpty(processedPrograms)">
-                <v-expansion-panel v-for="(program, index) in processedPrograms" :key="index">
-                  <v-expansion-panel-header>{{ _.startCase(_.toLower(program.name.slice(0,-1))) }}</v-expansion-panel-header>
+                <v-expansion-panel v-for="(prog, index) in processedPrograms" :key="index">
+                  <v-expansion-panel-header>{{ _.startCase(_.toLower(prog.name).slice(0,-1)) }}</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <v-expansion-panels dark>
-                      <v-expansion-panel v-for="fos in program" :key="fos.code">
+                      <v-expansion-panel v-for="fos in prog.fields" :key="fos.code">
                         <v-expansion-panel-header>
                           {{ fos.title.slice(0,-1) }} - {{ fos.credential.title }}
                         </v-expansion-panel-header>
@@ -88,7 +88,7 @@
                           <field-data :fos="fos" />
                         </v-expansion-panel-content>
                       </v-expansion-panel>
-                    </v-expansion-panels>
+                    </v-expansion-panels> 
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>

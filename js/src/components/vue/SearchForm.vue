@@ -42,7 +42,7 @@
           v-model="input.degree"
           label="Two Year"
           value="a"
-          color="primary"          
+          color="secondary"          
           hide-details
         ></v-checkbox>
 
@@ -51,7 +51,7 @@
           v-model="input.degree"
           label="Four Year"
           value="b"
-          color="primary"
+          color="secondary"
           hide-details
         ></v-checkbox>
 
@@ -60,7 +60,7 @@
           v-model="input.degree"
           label="Less than Two Year"
           value="c"
-          color="primary"
+          color="secondary"
           hide-details
         ></v-checkbox>
     </div>
@@ -152,9 +152,9 @@
       
           <p class='subtitle-2'>Size</p>
           <div>
-          <v-btn small :class="{primary: input.size === 'small' }" @click="handleSizeClick('small')">Small</v-btn>
-          <v-btn small :class="{primary: input.size === 'medium' }" @click="handleSizeClick('medium')">Medium</v-btn>
-          <v-btn small :class="{primary: input.size === 'large' }" @click="handleSizeClick('large')">Large</v-btn>
+          <v-btn small :class="{secondary: input.size === 'small' }" @click="handleSizeClick('small')">Small</v-btn>
+          <v-btn small :class="{secondary: input.size === 'medium' }" @click="handleSizeClick('medium')">Medium</v-btn>
+          <v-btn small :class="{secondary: input.size === 'large' }" @click="handleSizeClick('large')">Large</v-btn>
           </div>
               
     
@@ -165,6 +165,7 @@
               v-model="input.control"
               label="Public"
               value="public"
+                color="secondary"
             ></v-checkbox>
 
             <v-checkbox
@@ -172,6 +173,7 @@
               v-model="input.control"
               label="Private Nonprofit"
               value="private"
+                color="secondary"
             ></v-checkbox>
 
             <v-checkbox
@@ -179,6 +181,7 @@
               v-model="input.control"
               label="Private For-Profit"
               value="profit"
+                color="secondary"
             ></v-checkbox>
           </div>
 
@@ -190,6 +193,7 @@
                 v-model="input.urban"
                 label="City"
                 value="city"
+                color="secondary"
               ></v-checkbox>
 
               <v-checkbox
@@ -197,12 +201,14 @@
                 v-model="input.urban"
                 label="Suburban"
                 value="suburban"
+                color="secondary"
               ></v-checkbox>
               <v-checkbox
                 hide-details
                 v-model="input.urban"
                 label="Town"
                 value="town"
+                color="secondary"
               ></v-checkbox>
 
               <v-checkbox
@@ -210,6 +216,7 @@
                 v-model="input.urban"
                 label="Rural"
                 value="rural"
+                color="secondary"
               ></v-checkbox>
  
         <p class='subtitle-2 pt-5'>Specialized Mission</p>

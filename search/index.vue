@@ -59,7 +59,7 @@
                     </div>
                   </v-col>
 
-                  <v-col cols="12" sm="8" class v-if="!isLoading">
+                  <v-col cols="12" sm="8" class v-if="!isLoading && results.schools.length > 0">
                     <div class="text-md-right">
                       Page:
                       <v-pagination
@@ -130,7 +130,7 @@
               </div>
               <!--results-main -->
 
-              <v-card tile class="mt-4 mb-2 py-1 px-4" color="grey lighten-2" v-if="!isLoading">
+              <v-card tile class="mt-4 mb-2 py-1 px-4" color="grey lighten-2" v-if="!isLoading && results.schools.length > 0">
                 <v-row>
                   <v-col cols="12" class>
                     <div class="text-md-right">
