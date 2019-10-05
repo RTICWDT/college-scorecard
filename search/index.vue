@@ -28,7 +28,9 @@
           :urlParsedParams="urlParsedParams"
           auto-submit
           display-all-filters
+          :resetSearchForm="utility.resetForm"
           @search-query="searchAPI"
+          @search-form-reset="utility.resetForm = false"
         />
 
       </v-navigation-drawer>
@@ -55,7 +57,18 @@
                 <v-row>
                   <v-col cols="12" sm="4" class>
                     <div id="search-result-info-count" class>
-                      <p class="display-1 mb-0">{{results.meta.total | separator }} Results</p>
+                      <span class="display-1 mb-0">{{results.meta.total | separator }} Results </span>
+                        <v-chip
+                          class="mb-3"
+                          color="primary"
+                          text-color="white"
+                          @click="EventBus.$emit('search-reset-form');"
+                        >
+                          <v-avatar left>
+                            <v-icon>mdi-close-circle</v-icon>
+                          </v-avatar>
+                          Clear Search
+                        </v-chip>
                     </div>
                   </v-col>
 
@@ -204,6 +217,7 @@ import CompareHeader from "components/vue/CompareHeader.vue";
 
 import _ from "lodash";
 // import querystring from 'querystring';
+import {EventBus} from "../js/src/vue/EventBus.js";
 
 const querystring = require("querystring");
 
@@ -250,7 +264,8 @@ export default {
       utility: {
         formDefault: {},
         initailized: false,
-        sortFAB: null
+        sortFAB: null,
+        resetForm: false
       },
       error: {
         message: null

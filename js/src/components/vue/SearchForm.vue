@@ -293,6 +293,11 @@ import CheckRange from './CheckRange.vue';
 import NameAutocomplete from './NameAutocomplete.vue';
 import FieldAutocomplete from './FieldAutocomplete.vue';
 import { SiteData } from '../../vue/mixins/SiteData.js';
+import { EventBus } from '../../vue/EventBus.js';
+
+EventBus.$on('search-form-reset', () => {
+  console.log()
+});
 
 export default {
   mixins:[SiteData],
@@ -305,6 +310,10 @@ export default {
       default: false
     },
     displayAllFilters: {
+      type: Boolean,
+      default: false
+    },
+    resetSearchForm:{
       type: Boolean,
       default: false
     }
@@ -353,9 +362,10 @@ export default {
             return pattern.test(value) || 'Numerical'
           }
         },
+        // resetSearchForm: false,
         test: null,
         // Hold Default state of form data.
-        formDefult:{},
+        formDefault:{},
         // Helper to activate debounced query after initial load.
         initialized: false,
         showMore: false,
@@ -404,12 +414,19 @@ export default {
     },
     'location.miles'(){
       this.handleLocationCheck();
-    }
+    },
+    // 'resetSearchForm'(value){
+    //   if(value){
+    //     this.input = _.cloneDeep(this.utility.formDefault);
+    //   }
+
+    //   this.$emit('search-form-reset');      
+    // }
   },
   computed:{
     // Remove items that are not set
     cleanInput(){
-      let defaultValues = this.utility.formDefult;
+      let defaultValues = this.utility.formDefault;
       // Pick only values that are different from default state.
       let groomedInput =  _.pickBy(this.input,(value,key) => {
         // If it does not exist in the default state object, remove.
@@ -486,7 +503,7 @@ export default {
   },
   created(){
     // Replicate default form state.
-    this.utility.formDefult = _.cloneDeep(this.input);
+    this.utility.formDefault = _.cloneDeep(this.input);
 
     // TODO - Refactor this aswell
       // For example, percentages for grad rate.
