@@ -1,5 +1,5 @@
 <template>
-  <v-card tile id="compare_schools-content" class='pa-5'>
+  <v-card  id="compare_schools-content" class='pa-5'>
       <v-btn 
         icon 
         class='float-right'
@@ -7,6 +7,7 @@
         ><v-icon>fas fa-times-circle</v-icon>
       </v-btn>
       <p class='title'>Compare Schools</p>
+      <p>You can star up to 10 schools to compare.</p>
       <div class='my-3'>
       <v-checkbox 
         @change="handleToggleCompareSchool(school)"
@@ -25,7 +26,11 @@
     </p>
   </v-card>
 </template>
-
+<style lang="scss" scoped>
+.v-input--selection-controls.v-input .v-label{
+  color: #FFFFFF !important;
+}
+</style>
 <script>
 
 // This can work on any page, it just needs data passed in and events to react when school

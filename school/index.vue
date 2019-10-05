@@ -2,8 +2,8 @@
   <v-app id="app" class="school-page">
     <div class="backNav">
       <div class="container school-back">
-        <a id="referrer-link" class="link-more" :href="referer">
-          <i class="fa fa-chevron-left"></i> Back to search results
+        <a id="referrer-link" class="link-more" href="/search/">
+          &laquo; Back to search
         </a>
       </div>
     </div>
@@ -24,16 +24,16 @@
             </div>-->
 
             <div v-if="!school.id" class="show-loading">
-              <v-card tile class="pa-5">
+              <v-card class="pa-5">
                 <h1 class="heading">
                   Loading
-                  <v-icon color="pink darken-4">fas fa-circle-notch fa-spin</v-icon>
+                  <v-icon color="#0e365b">fas fa-circle-notch fa-spin</v-icon>
                 </h1>
               </v-card>
             </div>
 
             <div v-else id="school">
-              <v-card tile class="school-heading pa-5 pt-2 mb-5">
+              <v-card class="school-heading pa-5 pt-2 mb-5">
                 <v-row class="mt-4">
                   <v-col cols="12" md="8" class="py-0">
                     <h1 class="display-2 pa-0 mb-4">
@@ -66,7 +66,7 @@
                     <div class="school-special_designation" v-if="specialDesignations.length>0">
                       <v-chip
                         class="special mr-1 mb-1"
-                        color="pink lighten-3"
+                        color="blue lighten-3"
                         label
                         v-for="designation in specialDesignations"
                         :key="designation"
@@ -89,7 +89,7 @@
                 <v-row>
                   <v-col col="12" md="6">
                     <h2 class="mb-4">Graduation Rate</h2>
-                    <donut color="#880E4F" :value="completionRate * 100" :height="200"></donut>
+                    <donut color="#0e365b" :value="completionRate * 100" :height="200"></donut>
                   </v-col>
                   <v-col col="12" md="6">
                     <h2 class="mb-3">Salary After Completing</h2>
@@ -110,7 +110,7 @@
                     </h2>
                     <div v-if="!isProgramReporter">
                       <h2
-                        class="display-2 pink--text text--darken-4 font-weight-bold"
+                        class="display-2 navy-text font-weight-bold"
                       >{{_.get(school, this.fields['NET_PRICE']) | numeral('$0,0') }}</h2>
                     </div>
                     <div v-else>
@@ -133,7 +133,7 @@
                     <v-row v-if="!isProgramReporter">
                       <v-col cols="12" md="6">
                         <h2 class="mb-3">Average Annual Cost</h2>
-                        <h2 class="display-2 pink--text text--darken-4 font-weight-bold"> {{_.get(school, fields['NET_PRICE'], 'N/A') | numeral('$0,0')}}</h2>
+                        <h2 class="display-2 navy-text font-weight-bold"> {{_.get(school, fields['NET_PRICE'], 'N/A') | numeral('$0,0')}}</h2>
                         <h2 class="mb-3 mt-5">Personal Net Price</h2>
                           <p>Many institutions provide a custom net price calculator.</p>
                           <v-btn
@@ -257,11 +257,11 @@
                       </h2>
                       <h2 class="title my-3">
                         Program:
-                        <span class="pink--text text--darken-4">{{ programReporter[0].title}}</span>
+                        <span class="navy-text">{{ programReporter[0].title}}</span>
                       </h2>
                       <h2 class="title my-3">
                         <span
-                          class="pink--text text--darken-4"
+                          class="navy-text"
                         >{{ _.get(school, fields['NET_PRICE']) | numeral('$0,0')}}</span>
                         <span
                           v-if="programReporter[0].annualized== programReporter[0].full_program"
@@ -293,11 +293,11 @@
                           Graduation
                           <br />Rate
                         </h2>
-                        <donut color="#880E4F" :value="completionRate * 100" :height="200"></donut>
+                        <donut color="#0e365b" :value="completionRate * 100" :height="200"></donut>
                       </v-col>
                       <v-col cols="12" md="6">
                         <h2 class="mb-3 text-center">Students Who Return After Their First Year</h2>
-                        <donut color="#880E4F" :value="retentionRate * 100" :height="200"></donut>
+                        <donut color="#0e365b" :value="retentionRate * 100" :height="200"></donut>
                       </v-col>
                     </v-row>
                     <v-row>
@@ -337,7 +337,7 @@
                             <tooltip definition="student-aid" />
                           </h2>
                           <donut
-                            color="#880E4F"
+                            color="#0e365b"
                             :value="_.get(school, this.fields['AID_PERCENTAGE']) * 100"
                             :height="200"
                           ></donut>
@@ -363,13 +363,13 @@
                             Typical Monthly Loan Payment&nbsp;<tooltip definition="avg-loan-payment" />
                           </h2>
                           <div
-                            class="display-2 pink--text text--darken-4 font-weight-bold"
+                            class="display-2 navy-text font-weight-bold"
                           >{{ _.get(school, fields['MONTHLY_LOAN_PAYMENT']) | numeral('$0,0') }}-{{ _.get(school, fields['MONTHLY_LOAN_PAYMENT']) | numeral('0,0') }}/mo</div>
                         </v-col>
                       </v-row>
                       <v-row>
                         <v-col cols="12">
-                          <v-card color="grey lighten-2 pa-4">
+                          <v-card color="grey lighten-4 pa-4">
                             <h2 class="mb-3">Get Help Paying for College</h2>
                             <p>
                               Submit a free application for Federal Student Aid. You may be eligible to receive federal
@@ -434,8 +434,8 @@
                           <v-row no-gutters>
                             <v-col cols="12" sm="4" class='pa-2'>{{ fos.title.slice(0,-1) }}</v-col>
                             <v-col cols="12" sm="4" class='pa-2 text-center'>{{ fos.credential.title }}</v-col>
-                            <v-col v-if="hoistCurrency" cols="12" class="text-center pink--text text--darken-4 pa-2" sm="4">{{ fos.hoist | numeral('$0,0') }}</v-col>
-                            <v-col v-else cols="12" class="text-center pink--text text--darken-4 pa-2" sm="4">{{ fos.hoist | separator }}</v-col>
+                            <v-col v-if="hoistCurrency" cols="12" class="text-center navy-text pa-2" sm="4">{{ fos.hoist | numeral('$0,0') }}</v-col>
+                            <v-col v-else cols="12" class="text-center navy-text pa-2 font-weight-bold" sm="4">{{ fos.hoist | separator }}</v-col>
                           </v-row>
                         </v-expansion-panel-header>
                         <v-expansion-panel-content>
@@ -447,7 +447,7 @@
                       rounded
                       color="secondary"
                       :href="fieldsLink"
-                    >See All Available Fields of Study/Majors <v-icon small>fas fa-chevron-right</v-icon></v-btn>
+                    >See All Available Fields of Study/Majors</v-btn>
                     <!--</div>
                      <div v-else>
                       <v-alert type="info">Fields of Study/Majors are not available for this institution. </v-alert>
@@ -466,7 +466,7 @@
                         <school-icons :school="school" :fields="fields" :sizeOnly="true" />
                         <div class="text-center">
                           <strong
-                            class="display-2 pink--text text--darken-4 font-weight-bold"
+                            class="display-2 navy-text font-weight-bold"
                           >{{ _.get(school, fields['SIZE']) | separator }}</strong>
                           <br />
                           <strong>undergraduate students</strong>
@@ -475,19 +475,19 @@
                       <v-col cols="12" md="6" class="d-flex justify-space-around">
                         <div class="text-right">
                           <span
-                            class="display-2 pink--text text--darken-4 font-weight-bold"
+                            class="display-2 navy-text font-weight-bold"
                           >{{ 1 - (_.get(school, fields['PART_TIME_SHARE'])) | numeral('0.%') }}</span>
                           <br />
                           <strong>Full-time</strong>
                         </div>
                         <div>
                           <span
-                            class="display-2 pink--text text--darken-4 font-weight-bold divide"
+                            class="display-2 navy-text font-weight-bold divide"
                           >/</span>
                         </div>
                         <div class="text-left">
                           <span
-                            class="display-2 pink--text text--darken-4 font-weight-bold"
+                            class="display-2 navy-text font-weight-bold"
                           >{{ _.get(school, fields['PART_TIME_SHARE'])| numeral('0.%') }}</span>
                           <br />
                           <strong>Part-time</strong>
@@ -499,7 +499,7 @@
                         <h2 class="mb-3">Socio-Economic Diversity</h2>
 
                         <donut
-                          color="#880E4F"
+                          color="#0e365b"
                           :value="_.get(school, this.fields['PELL_PERCENTAGE']) * 100"
                           :height="200"
                         ></donut>
@@ -515,7 +515,7 @@
                             :value="Math.round(item.value*100)"
                             :min="0"
                             :max="100"
-                            color="#880E4F"
+                            color="#0e365b"
                             :height="25"
                           ></horizontal-bar>
                           <strong>{{item.value | numeral('0.%')}}</strong>
@@ -578,7 +578,7 @@
                       <v-col cols="12" md="4">
                         <h2 class="mb-3">Admittance Rate</h2>
                         <donut
-                          color="#880E4F"
+                          color="#0e365b"
                           :value="_.get(school, this.fields['ADMITTANCE_RATE'])*100"
                           v-if="_.get(school, this.fields['ADMITTANCE_RATE'])"
                           chart-id="admittance-chart"
@@ -595,7 +595,7 @@
           </v-col>
 
           <v-col lg="3">
-            <v-card outline tile class="pa-5">
+            <v-card outline class="pa-5">
               <paying-for-college />
             </v-card>
             <!-- { include paying_for_college.html } -->

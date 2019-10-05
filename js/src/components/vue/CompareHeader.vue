@@ -14,8 +14,10 @@
     width: 50%;
     left: 25%;
     bottom: 0px;
-    background-color: $light-gray;
+    background-color: rgba(0,0,0,0.9);
+    color: #FFFFFF;
     z-index: 10;
+    border-radius: 3px 3px 0 0;
     cursor: pointer; 
     @media only screen and (max-width: 600px) {
         width: 100%;

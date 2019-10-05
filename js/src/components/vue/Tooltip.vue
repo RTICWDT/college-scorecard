@@ -2,7 +2,7 @@
   <span>
     <v-tooltip top max-width="300" min-width="150" color="rgba(0,0,0,1)" content-class="csTooltip">
       <template v-slot:activator="{ on }">
-        <v-icon small allow-overflow :color="color" dark v-on="on">fas fa-info-circle</v-icon>
+        <v-icon x-small allow-overflow :color="color" dark v-on="on">fas fa-info-circle</v-icon>
       </template>
       <span v-html="content"></span>
     </v-tooltip>
@@ -25,7 +25,7 @@ export default {
     },
     color: {
       type: String,
-      default: "primary"
+      default: "grey"
     }
   },
   data() {

@@ -13,7 +13,7 @@
     font-family: 'Montserrat', sans-serif !important;
   }
   .search-panel-header{
-    background-color: #ccc; 
+    background-color: #C5D3E1; 
     border-radius: 0px !important;
   }
 </style>
@@ -35,6 +35,7 @@
       hide-details
       placeholder="Select one..."
       class='mt-0 pt-0'
+      color="secondary"
       ></v-select>
     
     <p class='subhead-2'>Field of Study/Major</p>
@@ -239,7 +240,9 @@
           item-text="value"
           item-value="key"
           placeholder='Select one...'
-                class="py-0 my-0"
+          class="py-0 my-0"
+          color="secondary"
+
         ></v-select>
 
 
@@ -249,7 +252,9 @@
           item-text='label'
           item-value='value'
           placeholder='Select one...'
-                class="py-0 my-0"
+          class="py-0 my-0"
+           color="secondary"
+
         ></v-select>
 
 

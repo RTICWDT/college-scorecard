@@ -1,12 +1,8 @@
 <template>
   <div>
     <ul class="school-key_figures key-figures my-0 ">
-      <li v-if="!sizeOnly">
-        <span v-if="years==1" class="school-key_figures-year">
-          <v-icon x-large color="black">fa fa-certificate</v-icon>
-        </span>
-        <span v-else class="school-key_figures-year">{{ years | formatYearsText }}</span>
-        <span class="label">{{ years | formatYearsLabel }}</span>
+      <li :class="years | yearsClass" v-if="!sizeOnly">
+        <span>{{ years | formatYearsLabel }}</span>
       </li>
       <li :class="_.get(school, fields['OWNERSHIP'], '-1') | controlClass" v-if="!sizeOnly">
         <span>{{ _.get(school, fields['OWNERSHIP'], '-1') | control }}</span>
@@ -32,11 +28,11 @@
 
     $list:  rural, town, suburban, city,
             small, medium, large,
-            public, private, profit;
+            public, private, profit,
+            two, four, certificate;
 
     @each $icon in $list {
       .icon-#{$icon} {
-        background: url(/img/school-icons/#{$icon}.png) no-repeat;
         background: url(/img/school-icons/#{$icon}.svg) no-repeat,
           linear-gradient(transparent, transparent);
         background-position: top center;

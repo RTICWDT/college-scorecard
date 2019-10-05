@@ -8,6 +8,9 @@
 .searchSidebar {
   height: auto !important;
 }
+.pageBar{
+  background-color: rgba(255,255,255,0.7) !important;
+}
 </style>
 
 <template>
@@ -35,7 +38,7 @@
       <v-content>
         <v-container fluid class="grey lighten-5 pa-0">
           <div id="search-result-container">
-            <div id="search-can-query-container" v-if="results.schools.length === 0">
+            <div id="search-can-query-container" v-if="!isLoading && results.schools.length === 0">
               <v-row>
                 <v-col cols="12" md="4" sm="12" xs="12">
                   <div id="search-can-query-text">
@@ -51,15 +54,15 @@
             </div>
 
             <div class="search-result-container">
-              <v-card tile class="mt-2 mb-4 py-1 px-4" color="grey lighten-2">
-                <v-row>
-                  <v-col cols="12" sm="4" class>
+              <v-card  class="mt-2 mb-4 py-1 px-4 elevaton-0 pageBar" v-if="!isLoading">
+                <v-row class="pa-0">
+                  <v-col cols="12" sm="4" class="py-2 px-4">
                     <div id="search-result-info-count" class>
-                      <p class="display-1 mb-0">{{results.meta.total | separator }} Results</p>
+                      <p class="title mb-0">{{results.meta.total | separator }} Results</p>
                     </div>
                   </v-col>
 
-                  <v-col cols="12" sm="8" class v-if="!isLoading && results.schools.length > 0">
+                  <v-col cols="12" sm="8" class="py-1 px-4" v-if="!isLoading && results.schools.length > 0">
                     <div class="text-md-right">
                       Page:
                       <v-pagination
@@ -67,11 +70,12 @@
                         :length="totalPages"
                         :total-visible="7"
                         @input="searchAPI(parseURLParams())"
+                        circle
                       ></v-pagination>
                       <v-menu offset-y>
                         <template v-slot:activator="{ on }">
-                          <v-btn color="primary" small v-on="on" fab>
-                            <v-icon>fas fa-sort</v-icon>
+                          <v-btn color="primary" small v-on="on">
+                            <v-icon small class='mr-1'>fas fa-sort</v-icon> Sort
                           </v-btn>
                         </template>
                         <v-list>
@@ -91,10 +95,10 @@
 
               <div class="results-main-alert">
                 <div class="show-loading" v-show="isLoading">
-                  <v-card tile class="pa-5">
+                  <v-card class="pa-5">
                     <h1 class="heading">
                       Loading
-                      <v-icon color="pink darken-4">fas fa-circle-notch fa-spin</v-icon>
+                      <v-icon color="#880E4F">fas fa-circle-notch fa-spin</v-icon>
                     </h1>
                   </v-card>
                 </div>
@@ -112,7 +116,7 @@
                       cols="12"
                       lg="3"
                       md="4"
-                      sm="12"
+                      sm="6"
                       class="d-flex align-stretch"
                     >
                       <search-result-card
@@ -130,7 +134,7 @@
               </div>
               <!--results-main -->
 
-              <v-card tile class="mt-4 mb-2 py-1 px-4" color="grey lighten-2" v-if="!isLoading && results.schools.length > 0">
+              <v-card class="mt-4 mb-2 py-1 px-4 pageBar elevation-0"  v-if="!isLoading && results.schools.length > 0">
                 <v-row>
                   <v-col cols="12" class>
                     <div class="text-md-right">

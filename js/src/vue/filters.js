@@ -24,18 +24,19 @@ Vue.filter('formatUrlText', function(value){
 })
 
 
-Vue.filter('formatYearsText', function(value){
-    switch(+value){
-      case 2: return '2';
-      case 3: return '4';
-    }
-    return 'Certificate';
-});
 
 Vue.filter('formatYearsLabel', function(value){
     if(value>1) return 'Year';
     else if(value==1)return "Certificate";
     else return false;
+});
+
+Vue.filter('yearsClass', function(value){
+    switch(+value){
+        case 2: return 'icon-two';
+        case 3: return 'icon-four';
+      }
+      return 'icon-certificate';
 });
 
 Vue.filter('control', function(id){

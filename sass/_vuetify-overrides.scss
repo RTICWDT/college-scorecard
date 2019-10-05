@@ -46,6 +46,9 @@
     .v-card{
       overflow-wrap: normal;
     }
+    .theme--light.v-card>.v-card__text{
+      color: rgba(0, 0, 0, 0.87) !important;
+    }
     .v-bottom-sheet--inset{
       @media screen and (min-width: 1000px) {
         max-width: 50% !important;
