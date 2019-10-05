@@ -43,7 +43,7 @@
           </slot>
         </template>
         <template v-slot:prepend>
-<v-checkbox v-model="enableSlider" 
+<v-checkbox v-model="enableSlider"
         @change="handleEnable" 
         color="secondary"
         class="pa-0 ma-0"
@@ -58,6 +58,8 @@
 </template>
 
 <script>
+import { EventBus } from '../../vue/EventBus.js';
+
 export default {
   props:{
     legendTitle:{
@@ -80,18 +82,28 @@ export default {
       enableSlider: this.enable
     }
   },
+  mounted(){
+    EventBus.$on('search-form-reset', () => {
+      this.enableSlider = false;
+      this.sliderValue = null;
+    });
+  },
   methods: {
     handleInput (e) {
-      //Activate slider when the slider is moved.
-      if(!this.enableSlider){
+      //Activate slider when the slider is moved. Prevent from triggering when clearing form.
+      if(!this.enableSlider && e != 0){
         this.enableSlider = true;
-        this.handleEnable(e);
+        this.handleEnable(this.enableSlider);
       }
 
-      this.$emit('input', Number(this.sliderValue));
+      // Prevent from triggering when clearing form.
+      if(e != 0){
+        this.$emit('input', Number(this.sliderValue));
+      }
+      
     },
-    handleEnable(e){
-      this.$emit('slider-toggle', this.enableSlider)
+    handleEnable(e){1
+      this.$emit('slider-toggle', e)
     },
   }
 }

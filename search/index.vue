@@ -62,7 +62,7 @@
                           class="mb-3"
                           color="primary"
                           text-color="white"
-                          @click="EventBus.$emit('search-reset-form');"
+                          @click="clearSearchForm"
                         >
                           <v-avatar left>
                             <v-icon>mdi-close-circle</v-icon>
@@ -217,7 +217,7 @@ import CompareHeader from "components/vue/CompareHeader.vue";
 
 import _ from "lodash";
 // import querystring from 'querystring';
-import {EventBus} from "../js/src/vue/EventBus.js";
+import { EventBus } from "../js/src/vue/EventBus.js";
 
 const querystring = require("querystring");
 
@@ -457,6 +457,9 @@ export default {
     },
     closeModal(){
       this.showCompare = false;
+    },
+    clearSearchForm: () => {
+      EventBus.$emit('search-form-reset');
     }
   }
 };

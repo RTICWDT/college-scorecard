@@ -19,6 +19,7 @@
 
 <script>
 import {find} from 'lodash';
+import { EventBus } from '../../vue/EventBus.js';
 
 export default {
   props: ["value"],
@@ -36,6 +37,12 @@ export default {
   created(){
     // Transform value prop to expected component state.
     this.cip4 = this.mapValuePropToState(this.value);
+  },
+  mounted(){
+    // Clear form event.
+    EventBus.$on('search-form-reset', () => {
+      this.cip4 = {};
+    });
   },
   methods:{
     // Digest URL value and look up in program index.

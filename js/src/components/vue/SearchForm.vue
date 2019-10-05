@@ -295,10 +295,6 @@ import FieldAutocomplete from './FieldAutocomplete.vue';
 import { SiteData } from '../../vue/mixins/SiteData.js';
 import { EventBus } from '../../vue/EventBus.js';
 
-EventBus.$on('search-form-reset', () => {
-  console.log()
-});
-
 export default {
   mixins:[SiteData],
   props:{
@@ -366,6 +362,7 @@ export default {
         test: null,
         // Hold Default state of form data.
         formDefault:{},
+        enableDefault:{},
         // Helper to activate debounced query after initial load.
         initialized: false,
         showMore: false,
@@ -504,6 +501,7 @@ export default {
   created(){
     // Replicate default form state.
     this.utility.formDefault = _.cloneDeep(this.input);
+    this.utility.enableDefault = _.cloneDeep(this.utility.enable);
 
     // TODO - Refactor this aswell
       // For example, percentages for grad rate.
@@ -515,7 +513,13 @@ export default {
 
   },
   mounted(){
+    EventBus.$on('search-form-reset', () => {
+      console.log("Yes!!!" + this.resetSearchForm);
+        this.input = _.cloneDeep(this.utility.formDefault);
+        // this.utility.enable = _.cloneDeep(this.utility.enableDefault);
+        // this.utility.enable.completion_rate = false;
 
+    });
   },
   methods:{
     mapInputFromProp(){
@@ -663,7 +667,7 @@ export default {
         min_lon:minLon.radToDeg(),
         max_lon:maxLon.radToDeg()
       };
-    }
+    },
 
   }
 }
