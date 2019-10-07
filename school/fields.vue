@@ -3,8 +3,7 @@
     <div class="backNav">
       <div class="container school-back">
         <a id="referrer-link" class="link-more" href="./index/">
-          <i class="fa fa-chevron-left"></i>
-          Back to {{_.get(school, fields['NAME']) }}
+          &laquo; Back to {{_.get(school, fields['NAME']) }}
         </a>
       </div>
     </div>
@@ -14,7 +13,7 @@
         <v-row>
           <v-col cols="12" md="9" class="school-left">
             <div v-if="!school.id" class="show-loading">
-              <v-card tile class="pa-5">
+              <v-card class="pa-5">
                 <h1 class="heading">
                   Loading
                   <v-icon color="pink darken-4">fas fa-circle-notch fa-spin</v-icon>
@@ -23,7 +22,7 @@
             </div>
 
             <div v-else class="show-loaded" id="school">
-              <v-card tille class="school-heading pa-5 mb-5">
+              <v-card class="school-heading pa-5 mb-5">
                 <v-row>
                   <v-col cols="12" md="6" class="py-0">
                     <v-chip
@@ -39,7 +38,7 @@
                 <v-row>
                   <v-col cols="12" md="8" class="py-0">
                     <h1
-                      class="pa-0 ma-0"
+                      class="display-1 pa-0 ma-0"
                     >All Fields of Study Available at {{ _.get(school, fields['NAME'], 'School Name') }}</h1>
                   </v-col>
                   <v-col cols="12" md="4" class="text-right py-0">
@@ -80,7 +79,7 @@
                   <v-expansion-panel-header>{{ _.startCase(_.toLower(prog.name).slice(0,-1)) }}</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <v-expansion-panels dark>
-                      <v-expansion-panel v-for="fos in prog.fields" :key="fos.code">
+                      <v-expansion-panel v-for="fos in prog.fields" :key="fos.code+'-'+fos.credential.level">
                         <v-expansion-panel-header>
                           {{ fos.title.slice(0,-1) }} - {{ fos.credential.title }}
                         </v-expansion-panel-header>
@@ -99,7 +98,7 @@
           </v-col>
 
           <v-col lg="3">
-            <v-card tile class="pa-5">
+            <v-card class="pa-5">
               <paying-for-college />
             </v-card>
           </v-col>
@@ -174,12 +173,7 @@ export default {
           if (!processedPrograms[self.cip2[twodigit]]){
             processedPrograms[self.cip2[twodigit]] = [];
           }
-          processedPrograms[self.cip2[twodigit]].push({
-            title: program.title,
-            count: program.ipeds_award_count,
-            credential: program.credential,
-            median_debt: program.median_debt
-          });
+          processedPrograms[self.cip2[twodigit]].push(program);
         }
       });
 
@@ -225,6 +219,7 @@ export default {
     params["keys_nested"] = true;
     picc.API.getSchool(id, params, function onSchoolLoad(error, school) {
       self.school = school;
+      document.title = _.get(school, "school.name") + " Fields of Study | College Scorecard";
     });
   }
 };

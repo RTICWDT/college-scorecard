@@ -3,7 +3,9 @@ header {
   background-color: $dark-blue;
   color: $white;
   height: 105px;
-
+  @media screen and (max-width: 500px) {
+    height: 77px;
+  }
   .container{
     padding: 0;
   }

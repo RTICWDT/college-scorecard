@@ -13,6 +13,7 @@
             autocomplete="off"
             hide-details
             class='pt-0 mt-0'
+            color="secondary"
          />
     </div>
 </template>

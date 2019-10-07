@@ -14,7 +14,7 @@
 </style>
 
 <template>
-  <v-card tile class="search-result-card mx-auto pa-0" 
+  <v-card  class="search-result-card mx-auto pa-0 elevation-4" 
     outlined :class="{'result-card-selected': isSelected}"> <!-- Better Selected style -->
     <v-card-text class='pa-3'>
         <p class='mt-1 mb-2' v-if="_.get(school, fields['UNDER_INVESTIGATION'])==1">
@@ -34,41 +34,43 @@
         <h2 class="title mt-0 font-weight-bold"><a class='nameLink' :href="link">{{school['school.name'] ? school['school.name'] : 'School Name'}}</a></h2>
         <p class='body-2 mt-1'>{{school['latest.student.size'] | separator }} undergrads</p>
         <v-divider />
-        <v-row class="v-flex align-center"> 
-        <v-col cols='5'  class="pr-0 text-center">
-          <h3>{{displayGradRate  | numeral('0.%') }}</h3>
-        </v-col>
-        <v-col cols='7'>
-          <span>who go graduate <tooltip definition="graduation-rate" /></span>
-        </v-col>
-      </v-row>
-      <v-row class='result-card-info-container v-flex align-center'>
-        <v-col cols='5' class="pr-0 text-center">
-          <h3>{{displayEarn}}</h3>
-        </v-col>
-        <v-col cols='7'>
-          <span v-if='!field_of_study'>typical earnings for recent graduates <tooltip definition="avg-salary" /></span>          
-          <span v-else>typical earnings for recent graduates in {{field_of_study}} <tooltip definition="avg-salary" /></span>          
-        </v-col>
-      </v-row>
-      <v-row class='result-card-info-container v-flex align-center' v-if="!isProgramReporter">
-        <v-col cols='5' class="pr-0 text-center">
-          <h3>{{displayAvgCost}}</h3>
-        </v-col>
-        <v-col cols='7'>
-          <span>average annual cost after aid <tooltip definition="avg-cost-year" /></span>
-        </v-col>
-      </v-row>
-      <v-row class='result-card-info-container' v-else>
-        <v-col cols="12" class='text-center'>
-          <em>Average annual cost is not available for program reporters.</em>
-        </v-col>
-      </v-row>
-      <v-row>
+        <v-row>
         <v-col cols="12">
           <small-school-icons :school="school" :fields="fields" size="small" />
         </v-col>
       </v-row>
+      <v-divider />
+        <v-row class="v-flex align-center"> 
+        <v-col cols='7' class='py-2'>
+          <span>Graduation Rate&nbsp;<tooltip definition="graduation-rate" /></span>
+        </v-col>
+        <v-col cols='5' class="pr-0 text--black py-2">
+          <h3 >{{displayGradRate  | numeral('0.%') }}</h3>
+        </v-col>
+      </v-row>
+      <v-row class='result-card-info-container v-flex align-center'>
+        <v-col cols='7' class='py-2'>
+          <span v-if='!field_of_study'>Salary After Completing&nbsp;<tooltip definition="avg-salary" /></span>          
+          <span v-else>Salary After Completing for {{field_of_study}}&nbsp;<tooltip definition="avg-salary" /></span>          
+        </v-col>
+        <v-col cols='5' class="pr-0 text--black py-2">
+          <h3>{{displayEarn}}</h3>
+        </v-col>
+      </v-row>
+      <v-row class='result-card-info-container v-flex align-center' v-if="!isProgramReporter">
+        <v-col cols='7' class='py-2'>
+          <span>Average Annual Cost&nbsp;<tooltip definition="avg-cost-year" /></span>
+        </v-col>
+        <v-col cols='5' class="pr-2 text--black py-0">
+          <h3>{{displayAvgCost}}</h3>
+        </v-col>
+      </v-row>
+      <v-row class='result-card-info-container' v-else>
+        <v-col cols="12" class=''>
+          <em>Average annual cost is not available for program reporters.</em>
+        </v-col>
+      </v-row>
+      
     </v-card-text>
   </v-card>
 </template>
@@ -114,22 +116,16 @@ export default {
       return _.get(this.school, this.fields.PROGRAM_REPORTER_OFFERED) > 0;
     },
     displayEarn(){
-      if (!this.school['latest.earnings.10_yrs_after_entry.median'] || this.school['latest.earnings.10_yrs_after_entry.median'] < 0){
-        return "N/A"
-      }else{
-        return numeral(this.school['latest.earnings.10_yrs_after_entry.median']).format('$0a');
+      let programs = _.get(this.school, 'latest.programs.cip_4_digit', false);
+      if(programs && programs.length && this.school['latest.programs.cip_4_digit'][0]['title'])
+      {
+        this.field_of_study = this.school['latest.programs.cip_4_digit'][0]['title'];
+        return '$NNK'
       }
-
-      // This data field doesn't seem to work at the moment.
-      // if(this.school['latest.programs.cip_4_digit'].length==1 && this.school['latest.programs.cip_4_digit'][0]['title'])
-      // {
-      //   this.field_of_study = this.school['latest.programs.cip_4_digit'][0]['title'];
-      //   return '$24K'
-      // }
-      // else
-      // {
-      //   return "$12K - $42K";
-      // }
+      else
+      {
+        return "$NN-NNK";
+      }
     },
     displayAvgCost(){
       if (!this.school['latest.cost.avg_net_price.overall'] || this.school['latest.cost.avg_net_price.overall'] < 0){

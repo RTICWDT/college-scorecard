@@ -228,12 +228,12 @@ export default {
         data.addRows(rows);
         if (this.colors == "solid") {
           colors = [
-            "#880E4F",
+            "#0e365b",
             "#FFFFFF",
-            "#880E4F",
-            "#880E4F",
-            "#880E4F",
-            "#880E4F"
+            "#0e365b",
+            "#0e365b",
+            "#0e365b",
+            "#0e365b"
           ];
         } else {
           colors = [

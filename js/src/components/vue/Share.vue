@@ -5,6 +5,7 @@
           color="secondary"
           v-on="on"
           rounded
+          :small="small"
         >
           {{label}}
         </v-btn>
@@ -25,16 +26,35 @@
 export default {
     props: {
         'url': { type: String, default: ''},
-        'label': { type: String, default: 'Share' }
+        'label': { type: String, default: 'Share' },
+        'small': { type: Boolean, default: false }
     },
-    data: () => ({
-      items: [
-        { title: 'Twitter' , 'url': 'https://twitter.com/intent/tweet?text=Take%20a%20look%20at%20this%20school&amp;url='},
-        { title: 'Facebook', 'url': 'https://www.facebook.com/sharer/sharer.php?u=' },
-        { title: 'Email', 'url': 'mailto:?subject=Take%20a%20look%20at%20this%20school&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A' }, 
-        { title: 'LinkedIn', 'url': 'https://www.linkedin.com/shareArticle?mini=true&url='},
-      ],
-    }),
+    computed: {
+      items(){
+        return [
+            { title: 'Twitter' , 'url': 'https://twitter.com/intent/tweet?text='+this.sentence+'&amp;url='},
+            { title: 'Facebook', 'url': 'https://www.facebook.com/sharer/sharer.php?u=' },
+            { title: 'Email', 'url': 'mailto:?subject='+this.sentence+'&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A' }, 
+            { title: 'LinkedIn', 'url': 'https://www.linkedin.com/shareArticle?mini=true&url='},
+        ];
+      },
+      sentence(){
+        let sentence = '';
+        switch(this.label.toLowerCase())
+        {
+          case 'share this search':
+            sentence = 'Take a look at this school search from the College Scorecard:';
+          break;
+          case 'share this comparison':
+            sentence = 'Take a look at this school comparison on the College Scorecard:';
+          break;
+          case 'share this school':
+            sentence = 'Take a look at this school on the College Scorecard:';
+          break;
+        }
+        return sentence;
+      }
+    },
     methods:{
         picked(item){
             window.open(item.url+this.url, "_blank"); 
@@ -43,65 +63,3 @@ export default {
 
 }
 </script>
-
-<!--
-            <div class="school-share-wrapper">
-              <div
-                class="button button-share"
-                data-share-button
-                tabindex="0"
-                role="button"
-                onclick="void(0)"
-              >
-                <span class="top xaxis content">Share this School</span>
-                <ul class="social-share-list bottom xaxis content">
-                  <li class="social-item">
-                    <a
-                      data-href="{url}"
-                      data-bind="school_share_link_twt"
-                      data-social="Twitter"
-                      title="Share on Twitter"
-                      target="_blank"
-                    >
-                      <i class="fa fa-twitter"></i>
-                      <span class="sr-only">Share on Twitter</span>
-                    </a>
-                  </li>
-                  <li class="social-item">
-                    <a
-                      data-href=""
-                      data-bind="school_share_link_fb"
-                      title="Share on Facebook"
-                      data-social="Facebook"
-                      target="_blank"
-                    >
-                      <i class="fa fa-facebook"></i>
-                      <span class="sr-only">Share on Facebook</span>
-                    </a>
-                  </li>
-                  <li class="social-item">
-                    <a
-                      data-href="}"
-                      data-bind="school_share_link_mail"
-                      data-social="Email"
-                      title="Share via Email"
-                    >
-                      <i class="fa fa-envelope"></i>
-                      <span class="sr-only">Share via Email</span>
-                    </a>
-                  </li>
-                  <li class="social-item">
-                    <a
-                      data-href=""
-                      data-bind="school_share_link_li"
-                      data-social="LinkedIn"
-                      title="Share on LinkedIn"
-                      target="_blank"
-                    >
-                      <i class="fa fa-linkedin"></i>
-                      <span class="sr-only">Share on LinkedIn</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>-->
