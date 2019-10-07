@@ -98,8 +98,8 @@
                       :upper="{ value: minMaxEarnings.max.earnings.median_earnings, label: $options.filters.numeral(minMaxEarnings.max.earnings.median_earnings, '$0,0') }"
                       :min="{ value: 0, label: '0' }"
                       :max="{ value: 125000, label: '$125,000' }"
-                      :lowertip="minMaxEarnings.min.title"
-                      :uppertip="minMaxEarnings.max.title"
+                      :lowertip="minMaxEarnings.min.title.slice(0,-1)"
+                      :uppertip="minMaxEarnings.max.title.slice(0,-1)"
                       hideMiddle
                     ></range>
                     <p>depending on field of study.</p>
@@ -353,8 +353,8 @@
                             :upper="{ value: minMaxDebt.max.debt.median_debt, label: $options.filters.numeral(minMaxDebt.max.debt.median_debt, '$0,0') }"
                             :min="{ value: 0, label: '0' }"
                             :max="{ value: 60000, label: '$60,000' }"
-                            :lowertip="minMaxDebt.min.title"
-                            :uppertip="minMaxDebt.max.title"
+                            :lowertip="minMaxDebt.min.title.slice(0,-1)"
+                            :uppertip="minMaxDebt.max.title.slice(0,-1)"
                             hideMiddle
                           ></range>
                           <p>depending on field of study for undergraduate borrowers who complete college</p>
@@ -403,8 +403,8 @@
                       :upper="{ value: minMaxEarnings.max.highest_earnings, label: $options.filters.numeral(minMaxEarnings.max.highest_earnings, '$0,0') }"
                       :min="{ value: 0, label: '0' }"
                       :max="{ value: 125000, label: '$125,000' }"
-                      :lowertip="minMaxEarnings.min.title"
-                      :uppertip="minMaxEarnings.max.title"
+                      :lowertip="minMaxEarnings.min.title.slice(0,-1)"
+                      :uppertip="minMaxEarnings.max.title.slice(0,-1)"
                       hideMiddle
                     ></range>
                   </v-expansion-panel-content>
@@ -428,7 +428,7 @@
                       <v-col cols="12" sm="4" class='ma-0 pa-0 font-weight-bold'>{{currentHoist}}</v-col>
                     </v-row>
                     <v-expansion-panels class="my-3">
-                      <v-expansion-panel v-for="fos in fieldsOfStudy" :key="fos.code">
+                      <v-expansion-panel v-for="fos in fieldsOfStudy" :key="fos.code+'-'+fos.credential.level">
                         <v-expansion-panel-header class='py-0'>
                           <v-row no-gutters class='my-0'>
                             <v-col cols="12" sm="8" class='pa-2'>{{ fos.title.slice(0,-1) }} - {{ fos.credential.title }}</v-col>

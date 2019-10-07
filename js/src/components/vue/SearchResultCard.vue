@@ -117,9 +117,10 @@ export default {
     },
     displayEarn(){
       let programs = _.get(this.school, 'latest.programs.cip_4_digit', false);
-      if(programs && programs.length && this.school['latest.programs.cip_4_digit'][0]['title'])
+      if(programs && programs.length==1 && this.school['latest.programs.cip_4_digit'][0]['title'])
       {
-        this.field_of_study = this.school['latest.programs.cip_4_digit'][0]['title'];
+        let label  = this.school['latest.programs.cip_4_digit'][0]['title'];
+        this.field_of_study = label.slice(0,-1);
         return '$NNK'
       }
       else
