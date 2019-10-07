@@ -2,9 +2,9 @@
   <v-app id="app" class="school-page">
     <div class="backNav">
       <div class="container school-back">
-        <a id="referrer-link" class="link-more" href="/search/">
+        <v-btn small color="secondary" rounded id="referrer-link" class="link-more" href="/search/">
           &laquo; Back to search
-        </a>
+        </v-btn>
       </div>
     </div>
     <!-- Search results -->
@@ -88,25 +88,28 @@
                 </v-row>
                 <v-row>
                   <v-col col="12" md="6">
-                    <h2 class="mb-4">Graduation Rate</h2>
+                    <h2 class="mb-4">Graduation Rate&nbsp;<tooltip definition="graduation-rate" /></h2>
                     <donut color="#0e365b" :value="completionRate * 100" :height="200"></donut>
                   </v-col>
                   <v-col col="12" md="6">
-                    <h2 class="mb-3">Salary After Completing</h2>
-                    <range
-                      :lower="{ value: minMaxEarnings.min.earnings.median_earnings, label: $options.filters.numeral(minMaxEarnings.min.earnings.median_earnings, '$0,0') }"
-                      :upper="{ value: minMaxEarnings.max.earnings.median_earnings, label: $options.filters.numeral(minMaxEarnings.max.earnings.median_earnings, '$0,0') }"
-                      :min="{ value: 0, label: '0' }"
-                      :max="{ value: 125000, label: '$125,000' }"
-                      :lowertip="minMaxEarnings.min.title.slice(0,-1)"
-                      :uppertip="minMaxEarnings.max.title.slice(0,-1)"
-                      hideMiddle
-                    ></range>
-                    <p>depending on field of study.</p>
-
+                    <h2 class="mb-3">Salary After Completing&nbsp;<tooltip definition="avg-salary" /></h2>
+                    <div v-if="minMaxEarnings.min">
+                      <range
+                        :lower="{ value: minMaxEarnings.min.earnings.median_earnings, label: $options.filters.numeral(minMaxEarnings.min.earnings.median_earnings, '$0,0') }"
+                        :upper="{ value: minMaxEarnings.max.earnings.median_earnings, label: $options.filters.numeral(minMaxEarnings.max.earnings.median_earnings, '$0,0') }"
+                        :min="{ value: 0, label: '0' }"
+                        :max="{ value: 150000, label: '$150,000' }"
+                        :lowertip="minMaxEarnings.min.title.slice(0,-1)"
+                        :uppertip="minMaxEarnings.max.title.slice(0,-1)"
+                        hideMiddle
+                      ></range>
+                      <p>depending on field of study.</p>
+                    </div>
+                    <div v-else class='data-na'>
+                      <p>Data not available.</p>
+                    </div>
                     <h2 class="mb-3">
-                      Average Annual Cost
-                      <tooltip definition="avg-cost-year" />
+                      Average Annual Cost&nbsp;<tooltip definition="avg-cost-year" />
                     </h2>
                     <div v-if="!isProgramReporter">
                       <h2
@@ -132,7 +135,7 @@
                   <v-expansion-panel-content id="costs-content" class="pa-5">
                     <v-row v-if="!isProgramReporter">
                       <v-col cols="12" md="6">
-                        <h2 class="mb-3">Average Annual Cost</h2>
+                        <h2 class="mb-3">Average Annual Cost&nbsp;<tooltip definition="avg-cost-year" /></h2>
                         <h2 class="display-2 navy-text font-weight-bold"> {{_.get(school, fields['NET_PRICE'], 'N/A') | numeral('$0,0')}}</h2>
                         <h2 class="mb-3 mt-5">Personal Net Price</h2>
                           <p>Many institutions provide a custom net price calculator.</p>
@@ -291,20 +294,19 @@
                       <v-col cols="12" md="6">
                         <h2 class="mb-3 text-center">
                           Graduation
-                          <br />Rate
+                          <br />Rate&nbsp;<tooltip definition="graduation-rate" />
                         </h2>
                         <donut color="#0e365b" :value="completionRate * 100" :height="200"></donut>
                       </v-col>
                       <v-col cols="12" md="6">
-                        <h2 class="mb-3 text-center">Students Who Return After Their First Year</h2>
+                        <h2 class="mb-3 text-center">Students Who Return After Their First Year&nbsp;<tooltip definition="retention-rate" /></h2>
                         <donut color="#0e365b" :value="retentionRate * 100" :height="200"></donut>
                       </v-col>
                     </v-row>
                     <v-row>
                       <v-col cols="12">
                         <h2 class="mb-3 mt-5">
-                          Outcomes 8 Years After Attending
-                          <tooltip definition="outcome-measures" />
+                          Outcomes 8 Years After Attending&nbsp;<tooltip definition="outcome-measures" />
                         </h2>
                         <sankey :school="school" colors="solid" />
                       </v-col>
@@ -348,23 +350,33 @@
                             Typical Total Debt After Graduation
                             <tooltip definition="avg-debt" />
                           </h2>
-                          <range
-                            :lower="{ value: minMaxDebt.min.debt.median_debt, label: $options.filters.numeral(minMaxDebt.min.debt.median_debt, '$0,0') }"
-                            :upper="{ value: minMaxDebt.max.debt.median_debt, label: $options.filters.numeral(minMaxDebt.max.debt.median_debt, '$0,0') }"
-                            :min="{ value: 0, label: '0' }"
-                            :max="{ value: 60000, label: '$60,000' }"
-                            :lowertip="minMaxDebt.min.title.slice(0,-1)"
-                            :uppertip="minMaxDebt.max.title.slice(0,-1)"
-                            hideMiddle
-                          ></range>
-                          <p>depending on field of study for undergraduate borrowers who complete college</p>
-
+                          <div v-if="minMaxDebt.min">
+                            <range
+                              :lower="{ value: minMaxDebt.min.debt.median_debt, label: $options.filters.numeral(minMaxDebt.min.debt.median_debt, '$0,0') }"
+                              :upper="{ value: minMaxDebt.max.debt.median_debt, label: $options.filters.numeral(minMaxDebt.max.debt.median_debt, '$0,0') }"
+                              :min="{ value: 0, label: '0' }"
+                              :max="{ value: 60000, label: '$60,000' }"
+                              :lowertip="minMaxDebt.min.title.slice(0,-1)"
+                              :uppertip="minMaxDebt.max.title.slice(0,-1)"
+                              hideMiddle
+                            ></range>
+                            <p>depending on field of study for undergraduate borrowers who complete college</p>
+                          </div>
+                          <div v-else class='data-na'>
+                            Data not available.
+                          </div>
                           <h2 class="mb-3">
                             Typical Monthly Loan Payment&nbsp;<tooltip definition="avg-loan-payment" />
                           </h2>
+                          <div v-if="minMaxDebt.min">
                           <div
                             class="display-2 navy-text font-weight-bold"
+                            v-if="minMaxDebt.min"
                           >{{ minMaxDebt.min.debt.monthly_debt_payment | numeral('$0,0') }}-{{ minMaxDebt.max.debt.monthly_debt_payment | numeral('$0,0') }}/mo</div>
+                          </div>
+                          <div v-else class='data-na'>
+                            Data not available.
+                          </div>
                         </v-col>
                       </v-row>
                       <v-row>
@@ -398,15 +410,20 @@
                     class="pa-5"
                   >
                     <p>One-year post-completion earnings with range of highest and lowest median earnings for undergraduate and credential programs for which there is data. For more information, see Fields of Study/Majors for this school.</p>
+                    <div v-if="minMaxEarnings.min">
                       <range
                       :lower="{ value: minMaxEarnings.min.highest_earnings, label: $options.filters.numeral(minMaxEarnings.min.highest_earnings, '$0,0') }"
                       :upper="{ value: minMaxEarnings.max.highest_earnings, label: $options.filters.numeral(minMaxEarnings.max.highest_earnings, '$0,0') }"
                       :min="{ value: 0, label: '0' }"
-                      :max="{ value: 125000, label: '$125,000' }"
+                      :max="{ value: 150000, label: '$150,000' }"
                       :lowertip="minMaxEarnings.min.title.slice(0,-1)"
                       :uppertip="minMaxEarnings.max.title.slice(0,-1)"
                       hideMiddle
                     ></range>
+                    </div>
+                    <div v-else class='data-na'>
+                      <p>Data not available.</p>
+                    </div>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel>
@@ -507,7 +524,7 @@
                         >of students received an income-based federal Pell grant intended for low-income students.</p>
                       </v-col>
                       <v-col cols="12" md="6">
-                        <h2 class="mb-3">Race/Ethnicity</h2>
+                        <h2 class="mb-3">Race/Ethnicity&nbsp;<tooltip definition="race-eth" /></h2>
                         <div v-for="item in raceEthnicity" :key="item.label">
                           <horizontal-bar
                             :value="Math.round(item.value*100)"
@@ -628,6 +645,7 @@
   width: 100%;
  
 }
+
 
 </style>
 

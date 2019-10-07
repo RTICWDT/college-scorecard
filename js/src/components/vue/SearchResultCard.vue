@@ -67,7 +67,7 @@
       </v-row>
       <v-row class='result-card-info-container' v-else>
         <v-col cols="12" class=''>
-          <em>Average annual cost is not available for program reporters.</em>
+          <p class='grey--text lighten-2'>The average annual net price is not available for this program-reporting school.</p>
         </v-col>
       </v-row>
       

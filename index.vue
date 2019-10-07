@@ -26,6 +26,8 @@
             <h1  class="white--text text-uppercase">Find the Right Fit.</h1>
             <p class="white--text">Find out about colleges: their programs, costs, admissions, results, and more.</p>
             <v-card style='min-height: 300px' class='pa-5'>
+              <h2>Show Me Options</h2>
+              <p class='my-2'>Select one or more options to create a list of schools that fit your needs.</p>
               <canned-search-container @canned-search-submit="directToSearch"></canned-search-container>
             </v-card>
           </div>
