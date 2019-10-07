@@ -117,7 +117,7 @@
     </check-range>
     </div>
 
-    <v-expansion-panels v-if="displayAllFilters" class='mt-5'>
+    <v-expansion-panels v-show="displayAllFilters" class='mt-5'>
       <v-expansion-panel>
         <v-expansion-panel-header class='search-panel-header'>
           More
@@ -413,18 +413,11 @@ export default {
     'location.miles'(){
       this.handleLocationCheck();
     },
-    // 'resetSearchForm'(value){
-    //   if(value){
-    //     this.input = _.cloneDeep(this.utility.formDefault);
-    //   }
-
-    //   this.$emit('search-form-reset');      
-    // }
   },
   computed:{
     // Remove items that are not set
     cleanInput(){
-      let defaultValues = this.utility.formDefault;
+      let defaultValues = _.cloneDeep(this.utility.formDefault);
       // Pick only values that are different from default state.
       let groomedInput =  _.pickBy(this.input,(value,key) => {
         // If it does not exist in the default state object, remove.
@@ -514,14 +507,17 @@ export default {
 
   },
   mounted(){
-    EventBus.$on('search-form-reset', () => {
-        this.input = _.cloneDeep(this.utility.formDefault);
-        this.utility.enable = _.cloneDeep(this.utility.enableDefault);
+    EventBus.$on('search-form-reset', (e) => {
+      this.resetFormDefault();
     });
   },
   methods:{
     mapInputFromProp(){
-      this.input = _.mergeWith(this.input,this.urlParsedParams,function(objVal,newObjValue,key){
+      // Reset form to default, Helps with processing canned search items.
+      this.resetFormDefault();
+
+      _.mergeWith(this.input,this.urlParsedParams,function(objVal,newObjValue,key){
+      // this.input = _.mergeWith(this.utility.formDefault, this.urlParsedParams,function(objVal,newObjValue,key){
         if(_.isArray(objVal) && _.isString(newObjValue)){
           return [newObjValue];
         }
@@ -666,6 +662,11 @@ export default {
         max_lon:maxLon.radToDeg()
       };
     },
+    //Reset form to default.
+    resetFormDefault(){
+      this.input = _.cloneDeep(this.utility.formDefault);
+      this.utility.enable = _.cloneDeep(this.utility.formDefault);
+    }
 
   }
 }

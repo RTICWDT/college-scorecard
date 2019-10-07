@@ -420,11 +420,6 @@ export default {
         this.urlParsedParams = this.parseURLParams(
           this.generateQueryString(cannedSearchData).substr(1)
         );
-        this.debounceSearchUpdate(
-          this.parseURLParams(
-            this.generateQueryString(cannedSearchData).substr(1)
-          )
-        );
       }
     },
     isResultCardSelected(schoolId, compareSchools) {
