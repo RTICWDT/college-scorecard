@@ -94,8 +94,8 @@
                   <v-col col="12" md="6">
                     <h2 class="mb-3">Salary After Completing</h2>
                     <range
-                      :lower="{ value: minMaxEarnings.min.highest_earnings, label: $options.filters.numeral(minMaxEarnings.min.highest_earnings, '$0,0') }"
-                      :upper="{ value: minMaxEarnings.max.highest_earnings, label: $options.filters.numeral(minMaxEarnings.max.highest_earnings, '$0,0') }"
+                      :lower="{ value: minMaxEarnings.min.earnings.median_earnings, label: $options.filters.numeral(minMaxEarnings.min.earnings.median_earnings, '$0,0') }"
+                      :upper="{ value: minMaxEarnings.max.earnings.median_earnings, label: $options.filters.numeral(minMaxEarnings.max.earnings.median_earnings, '$0,0') }"
                       :min="{ value: 0, label: '0' }"
                       :max="{ value: 125000, label: '$125,000' }"
                       :lowertip="minMaxEarnings.min.title"
@@ -352,7 +352,7 @@
                             :lower="{ value: minMaxDebt.min.debt.median_debt, label: $options.filters.numeral(minMaxDebt.min.debt.median_debt, '$0,0') }"
                             :upper="{ value: minMaxDebt.max.debt.median_debt, label: $options.filters.numeral(minMaxDebt.max.debt.median_debt, '$0,0') }"
                             :min="{ value: 0, label: '0' }"
-                            :max="{ value: 40000, label: '$40,000' }"
+                            :max="{ value: 60000, label: '$60,000' }"
                             :lowertip="minMaxDebt.min.title"
                             :uppertip="minMaxDebt.max.title"
                             hideMiddle
@@ -673,7 +673,10 @@ export default {
       num_panels: 7,
       program_reporter_table: "program_reporter_total",
       field_sort: "ipeds_award_count",
-      hoistCurrency: false
+      hoistCurrency: false,
+      allFieldsOfStudy: [],
+      minMaxDebt: {},
+      minMaxEarnings: {}
     };
   },
   computed: {
@@ -829,7 +832,7 @@ export default {
     },
     fieldsOfStudy() {
       let self = this;
-      let fos = _.get(this.school, "latest.programs.cip_4_digit");
+      let fos = this.allFieldsOfStudy;
       if (!fos) {
         return [];
       } else if (fos.length) {
@@ -888,14 +891,6 @@ export default {
         break;
       }
     },
-    minMaxDebt(){
-      let orderedDebt =  this.fieldsOfStudy.sort((a, b) =>  a.debt.median_debt - b.debt.median_debt);
-      return { min: orderedDebt[0], max: orderedDebt[orderedDebt.length-1]};
-    },
-    minMaxEarnings(){
-      let orderedEarnings =  this.fieldsOfStudy.sort((a, b) =>   a.earnings.median_earnings-b.earnings.median_earnings);
-      return { min: orderedEarnings[0], max: orderedEarnings[orderedEarnings.length-1]};
-    }
   },
 
   methods: {
@@ -962,7 +957,20 @@ export default {
     // Reset the panel
     none() {
       this.panels = [];
+    },
+    findDebtRange(){
+      let fos = this.allFieldsOfStudy;
+      let cleanDebt = fos.filter(obj => obj.debt.median_debt && obj.credential.level <= 3)
+      let orderedDebt = cleanDebt.sort((a, b) =>  a.debt.median_debt - b.debt.median_debt);
+      this.minMaxDebt = { min: orderedDebt[0], max: orderedDebt[orderedDebt.length-1]};
+    },
+    findEarningsRange(){
+      let fos = this.allFieldsOfStudy;
+      let cleanEarnings = fos.filter(obj => obj.earnings.median_earnings && obj.credential.level <= 3);
+      let orderedEarnings = cleanEarnings.sort((a, b) =>   a.earnings.median_earnings-b.earnings.median_earnings);
+      this.minMaxEarnings = { min: orderedEarnings[0], max: orderedEarnings[orderedEarnings.length-1]};
     }
+
   },
   mounted() {
     let self = this;
@@ -991,6 +999,9 @@ export default {
     params["keys_nested"] = true;
     picc.API.getSchool(id, params, function onSchoolLoad(error, school) {
       self.school = school;
+      self.allFieldsOfStudy = _.get(school, self.fields.FIELD_OF_STUDY)
+      self.findDebtRange();
+      self.findEarningsRange();
       document.title = _.get(school, "school.name") + " | College Scorecard";
       self.createMap(school);
     });
