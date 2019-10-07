@@ -58,7 +58,9 @@
                 <v-row class="pa-0">
                   <v-col cols="12" sm="4" class="py-2 px-4">
                     <div id="search-result-info-count" class>
-                      <p class="title mb-0">{{results.meta.total | separator }} Results</p>
+                      <p class="title mb-0">{{results.meta.total | separator }} Results
+                      <share :url="shareUrl" label="Share This Search" small class='ml-2' />
+                      </p>
                     </div>
                   </v-col>
 
@@ -98,7 +100,7 @@
                   <v-card class="pa-5">
                     <h1 class="heading">
                       Loading
-                      <v-icon color="#880E4F">fas fa-circle-notch fa-spin</v-icon>
+                      <v-icon color="#0e365b">fas fa-circle-notch fa-spin</v-icon>
                     </h1>
                   </v-card>
                 </div>
@@ -205,6 +207,7 @@ import CannedSearchButton from "components/vue/CannedSearchButton.vue";
 import CompareDrawer from "components/vue/CompareDrawer.vue";
 import CannedSearchContainer from "components/vue/CannedSearchContainer.vue";
 import CompareHeader from "components/vue/CompareHeader.vue";
+import Share from "components/vue/Share.vue";
 
 import _ from "lodash";
 // import querystring from 'querystring';
@@ -218,7 +221,8 @@ export default {
     "canned-search-button": CannedSearchButton,
     "compare-drawer": CompareDrawer,
     "canned-search-container": CannedSearchContainer,
-    "compare-header": CompareHeader
+    "compare-header": CompareHeader,
+    "share": Share
   },
   props: {
     "page-permalink": String,
@@ -264,7 +268,8 @@ export default {
         { type: "Name", field: "name:asc" },
         { type: "Annual Cost", field: "avg_net_price:asc" },
         { type: "Graduation Rate", field: "completion_rate:asc" }
-      ]
+      ],
+      shareUrl: null
     };
   },
   created() {
@@ -354,7 +359,7 @@ export default {
         picc.fields.COMPLETION_200_LT4,
 
         // TODO: Commenting out for now.  It is not working.
-        // picc.fields.FIELD_OF_STUDY
+        picc.fields.FIELD_OF_STUDY      
       ].join(",");
 
       let qs = this.generateQueryString(params);
@@ -374,6 +379,7 @@ export default {
         vm.results.meta = data.metadata;
 
         vm.$emit("loading", false);
+        vm.shareUrl = window.location.href;
       });
     },
     showError(error) {

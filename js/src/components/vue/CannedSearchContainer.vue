@@ -12,19 +12,19 @@
           :add-to-query="[{acceptance: '0.9..'}]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
-        <canned-search-slider
+        <!-- <canned-search-slider
           label="Private Schools"
           :add-to-query="[{control: 'public'}]"
           @canned-search-toggle="handleCannedToggle"
-        ></canned-search-slider>
+        ></canned-search-slider> -->
       </v-col>
 
       <v-col md="4" sm="12" cols="12" class="text-center canned-search-wrapper">
-        <canned-search-slider
+        <!-- <canned-search-slider
           label="Medium Sized Schools"
           :add-to-query="[{size:'medium'}]"
           @canned-search-toggle="handleCannedToggle"
-        ></canned-search-slider>
+        ></canned-search-slider> -->
         <canned-search-slider
           label="I want an Associate's Degree"
           :add-to-query="[{degree:'a'}]"
@@ -42,7 +42,7 @@
           :add-to-query="[{completion_rate:'0.8..'}]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
-        <canned-search-slider
+        <!-- <canned-search-slider
           label="I want to live in a city"
           :add-to-query="[{urban:'city'}]"
           @canned-search-toggle="handleCannedToggle"
@@ -51,7 +51,7 @@
           label="I want attend an all woman school"
           :add-to-query="[{serving:'women_only'}]"
           @canned-search-toggle="handleCannedToggle"
-        ></canned-search-slider>
+        ></canned-search-slider> -->
       </v-col>
 
       <v-col cols="12" md="12">

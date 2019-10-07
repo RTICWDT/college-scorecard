@@ -94,12 +94,12 @@
                   <v-col col="12" md="6">
                     <h2 class="mb-3">Salary After Completing</h2>
                     <range
-                      :lower="{ value: 25000, label: '$25,000' }"
-                      :upper="{ value: 84000, label: '$84,000' }"
+                      :lower="{ value: minMaxEarnings.min.highest_earnings, label: $options.filters.numeral(minMaxEarnings.min.highest_earnings, '$0,0') }"
+                      :upper="{ value: minMaxEarnings.max.highest_earnings, label: $options.filters.numeral(minMaxEarnings.max.highest_earnings, '$0,0') }"
                       :min="{ value: 0, label: '0' }"
                       :max="{ value: 125000, label: '$125,000' }"
-                      lowertip="English"
-                      uppertip="Atmospheric Science"
+                      :lowertip="minMaxEarnings.min.title"
+                      :uppertip="minMaxEarnings.max.title"
                       hideMiddle
                     ></range>
                     <p>depending on field of study.</p>
@@ -349,12 +349,12 @@
                             <tooltip definition="avg-debt" />
                           </h2>
                           <range
-                            :lower="{ value: 25000, label: '$25,000' }"
-                            :upper="{ value: 84000, label: '$84,000' }"
+                            :lower="{ value: minMaxDebt.min.debt.median_debt, label: $options.filters.numeral(minMaxDebt.min.debt.median_debt, '$0,0') }"
+                            :upper="{ value: minMaxDebt.max.debt.median_debt, label: $options.filters.numeral(minMaxDebt.max.debt.median_debt, '$0,0') }"
                             :min="{ value: 0, label: '0' }"
-                            :max="{ value: 125000, label: '$125,000' }"
-                            lowertip="English"
-                            uppertip="Atmospheric Science"
+                            :max="{ value: 40000, label: '$40,000' }"
+                            :lowertip="minMaxDebt.min.title"
+                            :uppertip="minMaxDebt.max.title"
                             hideMiddle
                           ></range>
                           <p>depending on field of study for undergraduate borrowers who complete college</p>
@@ -364,7 +364,7 @@
                           </h2>
                           <div
                             class="display-2 navy-text font-weight-bold"
-                          >{{ _.get(school, fields['MONTHLY_LOAN_PAYMENT']) | numeral('$0,0') }}-{{ _.get(school, fields['MONTHLY_LOAN_PAYMENT']) | numeral('0,0') }}/mo</div>
+                          >{{ minMaxDebt.min.debt.monthly_debt_payment | numeral('$0,0') }}-{{ minMaxDebt.max.debt.monthly_debt_payment | numeral('$0,0') }}/mo</div>
                         </v-col>
                       </v-row>
                       <v-row>
@@ -398,13 +398,13 @@
                     class="pa-5"
                   >
                     <p>One-year post-completion earnings with range of highest and lowest median earnings for undergraduate and credential programs for which there is data. For more information, see Fields of Study/Majors for this school.</p>
-                     <range
-                      :lower="{ value: 25000, label: '$25,000' }"
-                      :upper="{ value: 84000, label: '$84,000' }"
+                      <range
+                      :lower="{ value: minMaxEarnings.min.highest_earnings, label: $options.filters.numeral(minMaxEarnings.min.highest_earnings, '$0,0') }"
+                      :upper="{ value: minMaxEarnings.max.highest_earnings, label: $options.filters.numeral(minMaxEarnings.max.highest_earnings, '$0,0') }"
                       :min="{ value: 0, label: '0' }"
                       :max="{ value: 125000, label: '$125,000' }"
-                      lowertip="English"
-                      uppertip="Atmospheric Science"
+                      :lowertip="minMaxEarnings.min.title"
+                      :uppertip="minMaxEarnings.max.title"
                       hideMiddle
                     ></range>
                   </v-expansion-panel-content>
@@ -420,22 +420,20 @@
                     <p class='my-0'>Sort by:
                     <v-btn-toggle v-model="field_sort" mandatory class="my-3" color="secondary">
                       <v-btn small text value="ipeds_award_count">Largest Size</v-btn>
-                      <v-btn small text value="earnings">Highest Earnings</v-btn>
-                      <v-btn small text value="median_debt">Lowest Debt</v-btn>
+                      <v-btn small text value="highest_earnings">Highest Earnings</v-btn>
+                      <v-btn small text value="lowest_debt">Lowest Debt</v-btn>
                     </v-btn-toggle></p>
-                    <v-row class='px-5 mt-5'>
-                      <v-col cols="12" sm="4" class='pa-0 ma-0 text-center font-weight-bold'>Field of Study</v-col>
-                      <v-col cols="12" sm="4" class='pa-0 ma-0 text-center font-weight-bold'>Degree</v-col>
-                      <v-col cols="12" sm="4" class='pa-0 ma-0 text-center font-weight-bold'>{{currentHoist}}</v-col>
+                    <v-row class='mx-5 mt-5'>
+                      <v-col cols="12" sm="8" class='ma-0 px-2 py-0 font-weight-bold'>Field of Study - Degree</v-col>
+                      <v-col cols="12" sm="4" class='ma-0 pa-0 font-weight-bold'>{{currentHoist}}</v-col>
                     </v-row>
                     <v-expansion-panels class="my-3">
                       <v-expansion-panel v-for="fos in fieldsOfStudy" :key="fos.code">
                         <v-expansion-panel-header class='py-0'>
-                          <v-row no-gutters>
-                            <v-col cols="12" sm="4" class='pa-2'>{{ fos.title.slice(0,-1) }}</v-col>
-                            <v-col cols="12" sm="4" class='pa-2 text-center'>{{ fos.credential.title }}</v-col>
-                            <v-col v-if="hoistCurrency" cols="12" class="text-center navy-text pa-2" sm="4">{{ fos.hoist | numeral('$0,0') }}</v-col>
-                            <v-col v-else cols="12" class="text-center navy-text pa-2 font-weight-bold" sm="4">{{ fos.hoist | separator }}</v-col>
+                          <v-row no-gutters class='my-0'>
+                            <v-col cols="12" sm="8" class='pa-2'>{{ fos.title.slice(0,-1) }} - {{ fos.credential.title }}</v-col>
+                            <v-col v-if="hoistCurrency" cols="12" class="navy-text px-5 font-weight-bold" sm="4">{{ fos.hoist | numeral('$0,0') }}</v-col>
+                            <v-col v-else cols="12" class="navy-text px-5 font-weight-bold" sm="4">{{ fos.hoist | separator }}</v-col>
                           </v-row>
                         </v-expansion-panel-header>
                         <v-expansion-panel-content>
@@ -835,8 +833,16 @@ export default {
       if (!fos) {
         return [];
       } else if (fos.length) {
+        
+        for(let q=0; q<fos.length; q++)
+        {
+          fos[q].ipeds_award_count = fos[q].counts.ipeds_awards1 + fos[q].counts.ipeds_awards2;
+          fos[q].highest_earnings = fos[q].earnings.median_earnings;
+          fos[q].lowest_debt = fos[q].debt.median_debt
+          fos[q].hoist = fos[q][self.field_sort];
+        }
         fos = fos.filter(
-          field => field.credential.level <= 3 && field[self.field_sort]
+          field => field.credential.level <= 3 && field.hoist
         );
 
         fos = _.sortBy(fos, [
@@ -844,17 +850,10 @@ export default {
             return o[self.field_sort];
           }
         ]);
-        if (
-          ["ipeds_award_count", "highest_earnings"].indexOf(self.field_sort) >=
-          0
-        ) {
+        if (["ipeds_award_count", "highest_earnings"].indexOf(self.field_sort) >= 0) {
           fos.reverse();
         }
         fos = fos.slice(0, 10);
-        fos.map(field => {
-          field.hoist = field[self.field_sort];
-          return field;
-        });
       } else {
         fos = [fos];
       }
@@ -879,15 +878,23 @@ export default {
           this.hoistCurrency = false;
           return 'Graduates';
         break;
-        case 'earnings':
+        case 'highest_earnings':
           this.hoistCurrency = true;
           return 'Median Earnings';
         break;
-        case 'median_debt':
+        case 'lowest_debt':
           this.hoistCurrency = true;
           return 'Median Debt';
         break;
       }
+    },
+    minMaxDebt(){
+      let orderedDebt =  this.fieldsOfStudy.sort((a, b) =>  a.debt.median_debt - b.debt.median_debt);
+      return { min: orderedDebt[0], max: orderedDebt[orderedDebt.length-1]};
+    },
+    minMaxEarnings(){
+      let orderedEarnings =  this.fieldsOfStudy.sort((a, b) =>   a.earnings.median_earnings-b.earnings.median_earnings);
+      return { min: orderedEarnings[0], max: orderedEarnings[orderedEarnings.length-1]};
     }
   },
 

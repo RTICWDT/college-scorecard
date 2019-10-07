@@ -120,11 +120,11 @@ export default {
       if(programs && programs.length && this.school['latest.programs.cip_4_digit'][0]['title'])
       {
         this.field_of_study = this.school['latest.programs.cip_4_digit'][0]['title'];
-        return '$24K'
+        return '$NNK'
       }
       else
       {
-        return "$12-42K";
+        return "$NN-NNK";
       }
     },
     displayAvgCost(){

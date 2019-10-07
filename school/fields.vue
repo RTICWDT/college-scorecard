@@ -79,7 +79,7 @@
                   <v-expansion-panel-header>{{ _.startCase(_.toLower(prog.name).slice(0,-1)) }}</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <v-expansion-panels dark>
-                      <v-expansion-panel v-for="fos in prog.fields" :key="fos.code">
+                      <v-expansion-panel v-for="fos in prog.fields" :key="fos.code+'-'+fos.credential.level">
                         <v-expansion-panel-header>
                           {{ fos.title.slice(0,-1) }} - {{ fos.credential.title }}
                         </v-expansion-panel-header>
@@ -173,12 +173,7 @@ export default {
           if (!processedPrograms[self.cip2[twodigit]]){
             processedPrograms[self.cip2[twodigit]] = [];
           }
-          processedPrograms[self.cip2[twodigit]].push({
-            title: program.title,
-            count: program.ipeds_award_count,
-            credential: program.credential,
-            median_debt: program.median_debt
-          });
+          processedPrograms[self.cip2[twodigit]].push(program);
         }
       });
 
@@ -224,6 +219,7 @@ export default {
     params["keys_nested"] = true;
     picc.API.getSchool(id, params, function onSchoolLoad(error, school) {
       self.school = school;
+      document.title = _.get(school, "school.name") + " Fields of Study | College Scorecard";
     });
   }
 };
