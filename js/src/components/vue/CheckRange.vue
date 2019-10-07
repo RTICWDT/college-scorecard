@@ -42,15 +42,16 @@
           <slot name="append-text">
           </slot>
         </template>
-        <template v-slot:prepend>
-<v-checkbox v-model="enableSlider"
-        @change="handleEnable" 
-        color="secondary"
-        class="pa-0 ma-0"
-        hide-details
-      ></v-checkbox>
 
+        <template v-slot:prepend>
+          <v-checkbox v-model="enableSlider"
+            @change="handleEnable" 
+            color="secondary"
+            class="pa-0 ma-0"
+            hide-details
+          ></v-checkbox>
         </template>
+
       </v-slider>
       </v-col>
     </v-row>
@@ -82,10 +83,19 @@ export default {
       enableSlider: this.enable
     }
   },
+  watch:{
+    value(){
+      this.sliderValue = this.value;
+    },
+    enable(){
+      this.enableSlider = this.enable;
+    }
+  },
   mounted(){
     EventBus.$on('search-form-reset', () => {
-      this.enableSlider = false;
-      this.sliderValue = null;
+      // TODO - State is changed in parent component.
+      // this.enableSlider = false;
+      // this.sliderValue = null;
     });
   },
   methods: {
@@ -102,7 +112,7 @@ export default {
       }
       
     },
-    handleEnable(e){1
+    handleEnable(e){
       this.$emit('slider-toggle', e)
     },
   }

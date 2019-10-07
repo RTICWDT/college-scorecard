@@ -313,10 +313,6 @@ export default {
     displayAllFilters: {
       type: Boolean,
       default: false
-    },
-    resetSearchForm:{
-      type: Boolean,
-      default: false
     }
   },
   components:{
@@ -363,14 +359,14 @@ export default {
             return pattern.test(value) || 'Numerical'
           }
         },
-        // resetSearchForm: false,
-        test: null,
         // Hold Default state of form data.
         formDefault:{},
-        enableDefault:{},
         // Helper to activate debounced query after initial load.
         initialized: false,
         showMore: false,
+        // Hold Default for checkrange enables.
+        enableDefault:{},
+        // State object
         enable:{
           completion_rate: false,
           avg_net_price: false,
@@ -519,11 +515,8 @@ export default {
   },
   mounted(){
     EventBus.$on('search-form-reset', () => {
-      console.log("Yes!!!" + this.resetSearchForm);
         this.input = _.cloneDeep(this.utility.formDefault);
-        // this.utility.enable = _.cloneDeep(this.utility.enableDefault);
-        // this.utility.enable.completion_rate = false;
-
+        this.utility.enable = _.cloneDeep(this.utility.enableDefault);
     });
   },
   methods:{

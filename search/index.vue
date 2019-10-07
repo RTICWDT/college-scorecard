@@ -31,9 +31,7 @@
           :urlParsedParams="urlParsedParams"
           auto-submit
           display-all-filters
-          :resetSearchForm="utility.resetForm"
           @search-query="searchAPI"
-          @search-form-reset="utility.resetForm = false"
         />
 
       </v-navigation-drawer>
@@ -273,7 +271,6 @@ export default {
         formDefault: {},
         initailized: false,
         sortFAB: null,
-        resetForm: false
       },
       error: {
         message: null
