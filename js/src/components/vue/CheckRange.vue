@@ -5,6 +5,10 @@
   font-weight: 600;
   font-family: 'Montserrat', sans-serif !important;
 }
+.appendedText{
+  margin-top: 20px;
+  padding: 0 5px;
+}
 </style>
 
 <template>
@@ -15,8 +19,8 @@
       </slot>
     </p>
 
-    <v-row justify="space-around" >
-      <v-col class='py-0'>
+    <v-row >
+      <v-col class='py-0 d-flex justify-space-around align-content-center'>
       
       <v-slider v-model="sliderValue"
         class="align-center pa-0 ma-0"
@@ -36,14 +40,18 @@
             type="number"
             style="width: 60px"
             @input="handleInput"
-            :append-icon='appendIcon'
+            outlined
+            dense
           ></v-text-field>
 
-          <slot name="append-text">
+          <slot name="append">
+            <div class='appendedText'>
+              {{appendText}}
+            </div>
           </slot>
         </template>
         <template v-slot:prepend>
-<v-checkbox v-model="enableSlider"
+      <v-checkbox v-model="enableSlider"
         @change="handleEnable" 
         color="secondary"
         class="pa-0 ma-0"
@@ -71,7 +79,7 @@ export default {
     min: Number,
     max: Number,
     step: Number,
-    appendIcon: {
+    appendText: {
       type: String,
       default: null
     }

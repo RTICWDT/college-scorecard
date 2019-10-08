@@ -14,6 +14,8 @@
             hide-details
             class='pt-0 mt-0'
             color="secondary"
+            outlined
+             prepend-inner-icon="search"
          />
     </div>
 </template>
@@ -28,7 +30,9 @@ export default {
     }),
     methods:{
       goToSchool(){
-        window.location='/school/?'+this.school.id;
+        let id = _.get(this.school, picc.fields.ID);
+        let name = _.get(this.school, picc.fields.NAME,'(unknown)');
+        window.location= '/school/?'+id+'-'+name.replace(/\W+/g, '-'); 
       }
     },
     watch: {

@@ -12,23 +12,21 @@
       <v-container>
         <v-row>
           <v-col cols="12" md="9" class="school-left">
-            <!-- <div id="error" class="show-error">
-              <h2>Something went wrong:</h2>
-              <p class="error-message"></p>
-              <form :action=" baseUrl +'/search/'" method="GET">
-                <label for="name-school">Try searching for a school by name:</label>
-                <input id="name-school" name="name" type="text" placeholder="Name of School" autocomplete="off"
-                  autocorrect="off" autocapitalize="off">
-                <input type="submit" value="Search" class="button-primary">
-              </form>
-            </div>-->
+          
 
-            <div v-if="!school.id" class="show-loading">
+            <div v-if="!school.id && !error" class="show-loading">
               <v-card class="pa-5">
                 <h1 class="heading">
                   Loading
                   <v-icon color="#0e365b">fas fa-circle-notch fa-spin</v-icon>
                 </h1>
+              </v-card>
+            </div>
+            <div v-else-if="error">
+              <v-card class='pa-5'>
+              <h2>Something went wrong</h2>
+              <p>Try searching for a school by name:</p>
+              <name-autocomplete />
               </v-card>
             </div>
 
@@ -93,7 +91,19 @@
                   </v-col>
                   <v-col col="12" md="6">
                     <h2 class="mb-3">Salary After Completing&nbsp;<tooltip definition="avg-salary" /></h2>
-                    <div v-if="minMaxEarnings.min">
+                    <div v-if="singleEarnings">
+                      <range
+                        :lower="{ value: 0, label: '$0' }"
+                        :upper="{ value: minMaxEarnings.max.earnings.median_earnings, label: $options.filters.numeral(minMaxEarnings.max.earnings.median_earnings, '$0,0') }"
+                        :min="{ value: 0, label: '$0' }"
+                        :max="{ value: 150000, label: '$150,000' }"
+                        lowertip=""
+                        :uppertip="minMaxEarnings.max.title.slice(0,-1)"
+                        hideMiddle
+                        hideLower
+                      ></range>
+                    </div>
+                    <div v-else-if="minMaxEarnings.min">
                       <range
                         :lower="{ value: minMaxEarnings.min.earnings.median_earnings, label: $options.filters.numeral(minMaxEarnings.min.earnings.median_earnings, '$0,0') }"
                         :upper="{ value: minMaxEarnings.max.earnings.median_earnings, label: $options.filters.numeral(minMaxEarnings.max.earnings.median_earnings, '$0,0') }"
@@ -105,6 +115,7 @@
                       ></range>
                       <p>depending on field of study.</p>
                     </div>
+
                     <div v-else class='data-na'>
                       <p>Data not available.</p>
                     </div>
@@ -139,16 +150,7 @@
                         <h2 class="display-2 navy-text font-weight-bold"> {{_.get(school, fields['NET_PRICE'], 'N/A') | numeral('$0,0')}}</h2>
                         <h2 class="mb-3 mt-5">Personal Net Price</h2>
                           <p>Many institutions provide a custom net price calculator.</p>
-                          <v-btn
-                            rounded
-                            color="secondary"
-                            target="_blank"
-                            :href="_.get(school, fields['NET_PRICE_CALC_URL'], '#')"
-                            v-if="_.get(school, fields['NET_PRICE_CALC_URL'], '#') != null"
-                          >
-                            <v-icon small class="mx-1">fas fa-calculator</v-icon>Calculate your personal net price
-                          </v-btn>
-                        </p>
+                          <net-price-link :url="_.get(school, fields['NET_PRICE_CALC_URL'], '#')" />
                       </v-col>
 
                       <v-col cols="12" md="6">
@@ -259,12 +261,11 @@
                         <tooltip definition="avg-program-cost" />
                       </h2>
                       <h2 class="title my-3">
-                        Program:
-                        <span class="navy-text">{{ programReporter[0].title}}</span>
+                        <span class="font-weight-bold navy-text">{{ programReporter[0].title}}</span>
                       </h2>
                       <h2 class="title my-3">
                         <span
-                          class="navy-text"
+                          class="navy-text font-weight-bold"
                         >{{ _.get(school, fields['NET_PRICE']) | numeral('$0,0')}}</span>
                         <span
                           v-if="programReporter[0].annualized== programReporter[0].full_program"
@@ -272,14 +273,7 @@
                         <span class="costDescription" v-else>per year on average</span>
                       </h2>
                       <p>
-                        <v-btn
-                          color="secondary"
-                          target="_blank"
-                          rounded
-                          :href="_.get(school, fields['NET_PRICE_CALC_URL'], '#')"
-                        >
-                          <v-icon small class="mx-1">fas fa-calculator</v-icon>Calculate your personal net price
-                        </v-btn>
+                        <net-price-link :url="_.get(school, fields['NET_PRICE_CALC_URL'], '#')" />
                       </p>
                     </div>
                   </v-expansion-panel-content>
@@ -350,11 +344,24 @@
                             Typical Total Debt After Graduation
                             <tooltip definition="avg-debt" />
                           </h2>
-                          <div v-if="minMaxDebt.min">
+                          <div v-if="singleDebt">
+                            <range
+                              :lower="{ value: 0, label: '$0' }"
+                              :upper="{ value: minMaxDebt.max.debt.median_debt, label: $options.filters.numeral(minMaxDebt.max.debt.median_debt, '$0,0') }"
+                              :min="{ value: 0, label: '$0' }"
+                              :max="{ value: 60000, label: '$60,000' }"
+                              :lowertip="minMaxDebt.min.title.slice(0,-1)"
+                              :uppertip="minMaxDebt.max.title.slice(0,-1)"
+                              hideMiddle
+                              hideLower
+                            ></range>
+                            <p>depending on field of study for undergraduate borrowers who complete college</p>
+                          </div>
+                          <div v-else-if="minMaxDebt.min">
                             <range
                               :lower="{ value: minMaxDebt.min.debt.median_debt, label: $options.filters.numeral(minMaxDebt.min.debt.median_debt, '$0,0') }"
                               :upper="{ value: minMaxDebt.max.debt.median_debt, label: $options.filters.numeral(minMaxDebt.max.debt.median_debt, '$0,0') }"
-                              :min="{ value: 0, label: '0' }"
+                              :min="{ value: 0, label: '$0' }"
                               :max="{ value: 60000, label: '$60,000' }"
                               :lowertip="minMaxDebt.min.title.slice(0,-1)"
                               :uppertip="minMaxDebt.max.title.slice(0,-1)"
@@ -368,11 +375,17 @@
                           <h2 class="mb-3">
                             Typical Monthly Loan Payment&nbsp;<tooltip definition="avg-loan-payment" />
                           </h2>
-                          <div v-if="minMaxDebt.min">
+                          <div v-if="singleDebt">
                           <div
                             class="display-2 navy-text font-weight-bold"
                             v-if="minMaxDebt.min"
-                          >{{ minMaxDebt.min.debt.monthly_debt_payment | numeral('$0,0') }}-{{ minMaxDebt.max.debt.monthly_debt_payment | numeral('$0,0') }}/mo</div>
+                          >{{ minMaxDebt.min.debt.monthly_debt_payment | numeral('$0,0') }}/mo</div>
+                          </div>
+                          <div v-else-if="minMaxDebt.min">
+                          <div
+                            class="display-2 navy-text font-weight-bold"
+                            v-if="minMaxDebt.min"
+                          >{{ minMaxDebt.min.debt.monthly_debt_payment | numeral('$0,0') }}-{{ minMaxDebt.max.debt.monthly_debt_payment | numeral('0,0') }}/mo</div>
                           </div>
                           <div v-else class='data-na'>
                             Data not available.
@@ -403,18 +416,30 @@
                   <v-expansion-panel-header
                     id="earnings"
                     aria-controls="earnings-content"
-                  >Salary After Completion by Field of Study</v-expansion-panel-header>
+                  >Salary After Completing by Field of Study</v-expansion-panel-header>
                   <v-expansion-panel-content
                     id="earnings-content"
                     aria-controls="earnings-content"
                     class="pa-5"
                   >
                     <p>One-year post-completion earnings with range of highest and lowest median earnings for undergraduate and credential programs for which there is data. For more information, see Fields of Study/Majors for this school.</p>
-                    <div v-if="minMaxEarnings.min">
+                    <div v-if="singleEarnings">
+                      <range
+                        :lower="{ value: 0, label: '$0' }"
+                        :upper="{ value: minMaxEarnings.max.earnings.median_earnings, label: $options.filters.numeral(minMaxEarnings.max.earnings.median_earnings, '$0,0') }"
+                        :min="{ value: 0, label: '$0' }"
+                        :max="{ value: 150000, label: '$150,000' }"
+                        lowertip=""
+                        :uppertip="minMaxEarnings.max.title.slice(0,-1)"
+                        hideMiddle
+                        hideLower
+                      ></range>
+                    </div>
+                    <div v-else-if="minMaxEarnings.min">
                       <range
                       :lower="{ value: minMaxEarnings.min.highest_earnings, label: $options.filters.numeral(minMaxEarnings.min.highest_earnings, '$0,0') }"
                       :upper="{ value: minMaxEarnings.max.highest_earnings, label: $options.filters.numeral(minMaxEarnings.max.highest_earnings, '$0,0') }"
-                      :min="{ value: 0, label: '0' }"
+                      :min="{ value: 0, label: '$0' }"
                       :max="{ value: 150000, label: '$150,000' }"
                       :lowertip="minMaxEarnings.min.title.slice(0,-1)"
                       :uppertip="minMaxEarnings.max.title.slice(0,-1)"
@@ -444,10 +469,10 @@
                       <v-col cols="12" sm="8" class='ma-0 px-2 py-0 font-weight-bold'>Field of Study - Degree</v-col>
                       <v-col cols="12" sm="4" class='ma-0 pa-0 font-weight-bold'>{{currentHoist}}</v-col>
                     </v-row>
-                    <v-expansion-panels class="my-3">
+                    <v-expansion-panels class="my-3" v-if='fieldsOfStudy'>
                       <v-expansion-panel v-for="fos in fieldsOfStudy" :key="fos.code+'-'+fos.credential.level">
                         <v-expansion-panel-header class='py-0'>
-                          <v-row no-gutters class='my-0'>
+                          <v-row no-gutters class='my-0' align="center">
                             <v-col cols="12" sm="8" class='pa-2'>{{ fos.title.slice(0,-1) }} - {{ fos.credential.title }}</v-col>
                             <v-col v-if="hoistCurrency" cols="12" class="navy-text px-5 font-weight-bold" sm="4">{{ fos.hoist | numeral('$0,0') }}</v-col>
                             <v-col v-else cols="12" class="navy-text px-5 font-weight-bold" sm="4">{{ fos.hoist | separator }}</v-col>
@@ -458,6 +483,9 @@
                         </v-expansion-panel-content>
                       </v-expansion-panel>
                     </v-expansion-panels>
+                    <div v-else>
+                      <em>There are no fields of study with data for {{currentHoist}}.</em>
+                    </div>
                     <v-btn
                       rounded
                       color="secondary"
@@ -609,11 +637,14 @@
             </div>
           </v-col>
 
-          <v-col lg="3">
+          <v-col lg="3" v-if="!error">
+            <v-card outline class='pa-5 mb-3'>
+              <p class='title mb-2'>Find Another School</p>
+              <name-autocomplete />
+            </v-card>
             <v-card outline class="pa-5">
               <paying-for-college />
             </v-card>
-            <!-- { include paying_for_college.html } -->
           </v-col>
         </v-row>
       </v-container>
@@ -663,6 +694,8 @@ import SchoolIcons from "components/vue/SchoolIcons.vue";
 import CompareDrawer from "components/vue/CompareDrawer.vue";
 import CompareHeader from "components/vue/CompareHeader.vue";
 import FieldData from "components/vue/FieldData.vue";
+import NetPriceLink from "components/vue/NetPriceLink.vue";
+import SearchForm from "components/vue/SearchForm.vue";
 import { compare } from 'vue/mixins.js';
 
 export default {
@@ -681,7 +714,9 @@ export default {
     "school-icons": SchoolIcons,
     "compare-drawer": CompareDrawer,
     "compare-header": CompareHeader,
-    "field-data": FieldData
+    "field-data": FieldData,
+    'net-price-link': NetPriceLink,
+    'search-form': SearchForm
   },
   data() {
     return {
@@ -694,7 +729,10 @@ export default {
       hoistCurrency: false,
       allFieldsOfStudy: [],
       minMaxDebt: {},
-      minMaxEarnings: {}
+      minMaxEarnings: {},
+      singleDebt: false,
+      singleEarnings: false,
+      error: false
     };
   },
   computed: {
@@ -980,12 +1018,14 @@ export default {
       let fos = this.allFieldsOfStudy;
       let cleanDebt = fos.filter(obj => obj.debt.median_debt && obj.credential.level <= 3)
       let orderedDebt = cleanDebt.sort((a, b) =>  a.debt.median_debt - b.debt.median_debt);
+      this.singleDebt = (orderedDebt.length==1);
       this.minMaxDebt = { min: orderedDebt[0], max: orderedDebt[orderedDebt.length-1]};
     },
     findEarningsRange(){
       let fos = this.allFieldsOfStudy;
       let cleanEarnings = fos.filter(obj => obj.earnings.median_earnings && obj.credential.level <= 3);
       let orderedEarnings = cleanEarnings.sort((a, b) =>   a.earnings.median_earnings-b.earnings.median_earnings);
+      this.singleEarnings = (orderedEarnings.length==1);
       this.minMaxEarnings = { min: orderedEarnings[0], max: orderedEarnings[orderedEarnings.length-1]};
     }
 
@@ -1016,12 +1056,19 @@ export default {
     //params["fields"] = "latest,school,id,location";
     params["keys_nested"] = true;
     picc.API.getSchool(id, params, function onSchoolLoad(error, school) {
-      self.school = school;
-      self.allFieldsOfStudy = _.get(school, self.fields.FIELD_OF_STUDY)
-      self.findDebtRange();
-      self.findEarningsRange();
-      document.title = _.get(school, "school.name") + " | College Scorecard";
-      self.createMap(school);
+      if(error)
+      {
+        self.error = true;
+      }
+      else
+      {
+        self.school = school;
+        self.allFieldsOfStudy = _.get(school, self.fields.FIELD_OF_STUDY)
+        self.findDebtRange();
+        self.findEarningsRange();
+        document.title = _.get(school, "school.name") + " | College Scorecard";
+        self.createMap(school);
+      }
     });
   }
 };

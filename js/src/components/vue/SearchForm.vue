@@ -24,7 +24,7 @@
     <div class='py-2 px-5'>
     <p class='subhead-2'>School Name</p> 
     <name-autocomplate></name-autocomplate>
-
+    <v-divider class='my-4' />
     <p class='subhead-2'>Location</p>    
     <v-select v-model="input.state"
       :items="site.data.states"
@@ -99,7 +99,7 @@
       :min="0"
       :max="100"
       :step="5"
-      append-icon="mdi-percent"
+      appendText = "%"
       class='mt-5'
     ></check-range>
 
@@ -110,10 +110,8 @@
       :min="0"
       :max="100"
       :step="5"
+      appendText="K"
     >
-      <template v-slot:append-text>
-        K
-      </template>
     </check-range>
     </div>
 
@@ -168,9 +166,10 @@
             :min="0"
             :max="100"
             :step="5"
+            appendText="%"
           >
             <template v-slot:label>
-              Acceptance Rate (%)
+              Acceptance Rate
             </template>
           </check-range>
     

@@ -22,8 +22,8 @@
       <div class="om_sankey" ref="sankey"></div>
     </div>
 
-    <div v-else class="om_visualization">
-      <div class="om_sankey na">Data not Available</div>
+    <div v-else class="data-na">
+      <div class="om_sankey na">Data not available.</div>
     </div>
   </div>
 </template>
@@ -53,14 +53,6 @@
     }
     rect[fill="#ffffff"]{
       display:none;
-    }
-    &.na{
-      border: 1px solid $light-gray;
-      text-align: center;
-      padding-top: 100px;
-      color: $dark-gray;
-      border-radius: 2px;
-      width: 100%;
     }
   }
   .google-visualization-tooltip{
