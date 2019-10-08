@@ -175,18 +175,40 @@
           </check-range>
     
 
-
-
         <!-- <p class='overline'>School Characteristics</p> -->
       
           <p class='subhead-2 mb-3'>Size</p>
           <div>
-          <v-btn small :class="{secondary: input.size === 'small' }" @click="handleSizeClick('small')">Small</v-btn>
-          <v-btn small :class="{secondary: input.size === 'medium' }" @click="handleSizeClick('medium')">Medium</v-btn>
-          <v-btn small :class="{secondary: input.size === 'large' }" @click="handleSizeClick('large')">Large</v-btn>
+            <!-- TODO - Do we want these to appear as buttons? -->
+            <v-checkbox
+              hide-details
+              v-model="input.size"
+              label="Small"
+              value="small"
+              color="secondary"
+              class="py-0 my-0"
+            ></v-checkbox>
+
+            <v-checkbox
+              hide-details
+              v-model="input.size"
+              label="Medium"
+              value="medium"
+                color="secondary"
+                class="py-0 my-0"
+            ></v-checkbox>
+
+            <v-checkbox
+              hide-details
+              v-model="input.size"
+              label="Large"
+              value="large"
+                color="secondary"
+                class="py-0 my-0"
+            ></v-checkbox>
           </div>
-              
-    
+
+
           <p class='subhead-2'>Type of School</p>
           <div class="search-form-type-container">
             <v-checkbox
@@ -329,7 +351,7 @@ export default {
         region:[],
         zip:"",
         distance:"",
-        size:"",
+        size:[],
         name:"",
         control:[], //Type
         serving:"",
@@ -570,13 +592,13 @@ export default {
     },
     processChangeEvent(){
     },
-    handleSizeClick(value){
-      if(value === this.input.size){
-        this.input.size = ""
-      }else{
-        this.input.size = value;
-      }
-    },
+    // handleSizeClick(value){
+    //   if(value === this.input.size){
+    //     this.input.size = ""
+    //   }else{
+    //     this.input.size = value;
+    //   }
+    // },
     handleLocationCheck(){
       if (navigator.geolocation) {
         let vm = this;
