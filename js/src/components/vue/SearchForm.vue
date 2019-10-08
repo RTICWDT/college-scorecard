@@ -216,8 +216,8 @@
               v-model="input.control"
               label="Public"
               value="public"
-                color="secondary"
-                class="py-0 my-0"
+              color="secondary"
+              class="py-0 my-0"
             ></v-checkbox>
 
             <v-checkbox
@@ -225,8 +225,8 @@
               v-model="input.control"
               label="Private Nonprofit"
               value="private"
-                color="secondary"
-                class="py-0 my-0"
+              color="secondary"
+              class="py-0 my-0"
             ></v-checkbox>
 
             <v-checkbox
@@ -234,8 +234,8 @@
               v-model="input.control"
               label="Private For-Profit"
               value="profit"
-                color="secondary"
-                class="py-0 my-0"
+              color="secondary"
+              class="py-0 my-0"
             ></v-checkbox>
           </div>
 
