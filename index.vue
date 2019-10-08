@@ -16,20 +16,22 @@
             <v-col cols="12" sm="6">
               <!-- Search Form Component -->
               <v-card class="pa-5">
-                <h2 class='text-center'>Custom Search</h2>
+                <h2 class="text-center">Custom Search</h2>
                 <search-form @search-query="directToSearch" />
               </v-card>
             </v-col>
             <v-col cols="12" sm="6">
-              <div class="text-center">
-                <v-card style="min-height: 300px" class="pa-5">
-                  <h2>Show Me Options</h2>
-                  <p
-                    class="my-2"
-                  >Select one or more options to create a list of schools that fit your needs.</p>
-                  <canned-search-container @canned-search-submit="directToSearch"></canned-search-container>
-                </v-card>
-              </div>
+              <v-card class="pa-5 mb-3">
+                <h2 class="text-center mb-3">School Name</h2>
+                <name-autocomplete />
+              </v-card>
+              <v-card style="min-height: 300px" class="pa-5">
+                <h2 class='text-center'>Show Me Options</h2>
+                <p
+                  class="my-2 text-center"
+                >Select one or more options to create a list of schools that fit your needs.</p>
+                <canned-search-container @canned-search-submit="directToSearch"></canned-search-container>
+              </v-card>
             </v-col>
           </v-row>
         </v-container>
@@ -81,12 +83,13 @@ import PayingForCollege from "components/vue/PayingForCollege.vue";
 import CannedSearchContainer from "components/vue/CannedSearchContainer.vue";
 import querystring from "querystring";
 import SearchForm from "components/vue/SearchForm.vue";
-
+import NameAutocomplete from "components/vue/NameAutocomplete.vue";
 export default {
   components: {
     "paying-for-college": PayingForCollege,
     "canned-search-container": CannedSearchContainer,
-    "search-form": SearchForm
+    "search-form": SearchForm,
+    "name-autocomplete": NameAutocomplete
   },
   props: ["baseUrl"],
   data() {

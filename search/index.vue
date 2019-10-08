@@ -25,7 +25,10 @@
         :absolute="sidebar.absolute"
         :fixed="sidebar.fixed"
       >
-        
+        <div class="pa-4 grey lighten-3">
+          <h4 class='subhead-2 font-weight-bold mb-2'>Search by Name</h4>
+          <name-autocomplete />
+        </div>
         <!-- Search Form Component -->
         <search-form
           :urlParsedParams="urlParsedParams"
@@ -204,6 +207,7 @@ import CompareDrawer from "components/vue/CompareDrawer.vue";
 import CannedSearchContainer from "components/vue/CannedSearchContainer.vue";
 import CompareHeader from "components/vue/CompareHeader.vue";
 import Share from "components/vue/Share.vue";
+import NameAutocomplete from "components/vue/NameAutocomplete.vue";
 
 import _ from "lodash";
 // import querystring from 'querystring';
@@ -219,7 +223,8 @@ export default {
     "compare-drawer": CompareDrawer,
     "canned-search-container": CannedSearchContainer,
     "compare-header": CompareHeader,
-    "share": Share
+    "share": Share,
+    "name-autocomplete": NameAutocomplete
   },
   props: {
     "page-permalink": String,
