@@ -25,7 +25,17 @@
     <p class='subhead-2'>School Name</p> 
     <name-autocomplate></name-autocomplate>
 
-    <p class='subhead-2'>Location</p>    
+    <p class='subhead-2'>
+      Location
+
+      <v-btn text 
+        icon
+        :color="locationButtonColor"
+        @click="handleLocationCheck"
+      >
+        <v-icon>mdi-near-me</v-icon>
+      </v-btn>
+    </p>    
     <v-select v-model="input.state"
       :items="site.data.states"
       item-text="name"
@@ -38,7 +48,7 @@
       color="secondary"
       ></v-select>
     
-    <!-- TODO: Enable for location aware search. -->
+    <!-- TODO: Leaving this for now.  Can alter the miles away if needed. -->
     <!-- <p class='subhead-2'>Nearby</p>    
     <v-row>
       <v-col cols="12" md="4" sm="12" xs="12">
@@ -371,7 +381,7 @@ export default {
       },
       location:{
         latLon: null,
-        miles: 10, //In Miles.
+        miles: 50, //In Miles.
       },
       utility:{
         rules:{
@@ -512,6 +522,9 @@ export default {
           'value': value
         }
       })
+    },
+    locationButtonColor(){
+      return (this.location.latLon ? 'primary' : '');
     }
   },
   created(){

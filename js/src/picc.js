@@ -542,7 +542,11 @@ picc.fields = {
   FIELD_OF_STUDY_CODE:      'latest.programs.cip_4_digit.code',
   FIELD_OF_STUDY_LENGTH:    'latest.programs.cip_4_digit.credential.level',
   FIELD_OF_STUDY_NAME:      'latest.programs.cip_4_digit.title',
-  FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.median_earnings'
+  FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.median_earnings',
+
+  //Location
+  LATITUDE:                 'location.lat',
+  LONGITUDE:                'location.lon'
 };
 
 picc.programReporterCip = {
@@ -2006,7 +2010,8 @@ picc.form.prepareParams = (function() {
     sat_math:             fields.SAT_MATH_MIDPOINT + '__range',
     sat_read:             fields.SAT_READING_MIDPOINT + '__range',
     acceptance:           fields.ADMITTANCE_RATE + '__range',
-
+    lat:                  fields.LATITUDE + '__range',
+    long:                 fields.LONGITUDE + '__range',
     religious:            fields.RELIGIOUS,
 
     // special designations: women/men only, minority groups
@@ -2228,7 +2233,7 @@ picc.form.prepareParams = (function() {
 
     // exclude perfect-only children per ED
     query[picc.fields.ID + '__range'] = '..999999';
-
+    
     return query;
   };
 
