@@ -62,7 +62,7 @@
     <p class='subhead-2'>Field of Study/Major</p>
     <field-autocomplete v-model="input.cip4"></field-autocomplete>
 
-    <p class='subhead-2'>Length</p>
+    <!-- <p class='subhead-2'>Length</p>
     <div class="search-form-degree-wrapper">
         <v-checkbox
           class="search-form-degree-cb my-0 py-0"
@@ -90,7 +90,7 @@
           color="secondary"
           hide-details
         ></v-checkbox>
-    </div>
+    </div> -->
 
     <check-range legend-title="Graduation Rate" 
       v-model="input.completion_rate"
@@ -324,7 +324,7 @@ export default {
     return{
       input:{
         state:[],
-        degree:[],
+        // degree:[],
         major:"",
         region:[],
         zip:"",

@@ -2095,6 +2095,7 @@ picc.form.prepareParams = (function() {
       delete query[key];
     },
 
+    // TODO - Remove old function.
     // degree: function(query, value, key) {
     //   if (value === 'a') {
     //     query[picc.fields.DEGREE_OFFERED + '.assoc'] = true;
@@ -2106,24 +2107,20 @@ picc.form.prepareParams = (function() {
     //   delete query[key];
     // },
 
-    degree: function(query, value, key){
-      // Go through array.
-      console.log("Go: " + JSON.stringify(value));
-      // console.log("Go: " + key + " " + typeof(key));
-
-      for(var i in value){
-        // console.log("Degree: " + value[i]);
-
-        if (value[i] === 'a') {
-          query[picc.fields.DEGREE_OFFERED + '.assoc'] = true;
-        } else if (value[i] === 'b') {
-          query[picc.fields.DEGREE_OFFERED + '.bachelors'] = true;
-        } else if (value[i] === 'c') {
-          query[picc.fields.DEGREE_OFFERED + '.certificate'] = true;
-        }
-      }
-      delete query[key];
-    },
+    // TODO - Remove/Alter to leverage new datafields. (USE: PREDOMINANT_DEGREE).  Hiding for now.
+    // Note - This method will only return items that have ALL of the selected.  Not some of the selected degrees.
+    // degree: function(query, value, key){
+    //   for(var i in value){
+    //     if (value[i] === 'a') {
+    //       query[picc.fields.DEGREE_OFFERED + '.assoc'] = true;
+    //     } else if (value[i] === 'b') {
+    //       query[picc.fields.DEGREE_OFFERED + '.bachelors'] = true;
+    //     } else if (value[i] === 'c') {
+    //       query[picc.fields.DEGREE_OFFERED + '.certificate'] = true;
+    //     }
+    //   }
+    //   delete query[key];
+    // },
 
     // XXX: this is only used for testing
     under_investigation:  picc.fields.UNDER_INVESTIGATION,
