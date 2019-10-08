@@ -324,7 +324,7 @@ export default {
     return{
       input:{
         state:[],
-        degree:"",
+        degree:[],
         major:"",
         region:[],
         zip:"",

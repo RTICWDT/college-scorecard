@@ -2095,13 +2095,32 @@ picc.form.prepareParams = (function() {
       delete query[key];
     },
 
-    degree: function(query, value, key) {
-      if (value === 'a') {
-        query[picc.fields.DEGREE_OFFERED + '.assoc'] = true;
-      } else if (value === 'b') {
-        query[picc.fields.DEGREE_OFFERED + '.bachelors'] = true;
-      } else if (value === 'c') {
-        query[picc.fields.DEGREE_OFFERED + '.certificate'] = true;
+    // degree: function(query, value, key) {
+    //   if (value === 'a') {
+    //     query[picc.fields.DEGREE_OFFERED + '.assoc'] = true;
+    //   } else if (value === 'b') {
+    //     query[picc.fields.DEGREE_OFFERED + '.bachelors'] = true;
+    //   } else if (value === 'c') {
+    //     query[picc.fields.DEGREE_OFFERED + '.certificate'] = true;
+    //   }
+    //   delete query[key];
+    // },
+
+    degree: function(query, value, key){
+      // Go through array.
+      console.log("Go: " + JSON.stringify(value));
+      // console.log("Go: " + key + " " + typeof(key));
+
+      for(var i in value){
+        // console.log("Degree: " + value[i]);
+
+        if (value[i] === 'a') {
+          query[picc.fields.DEGREE_OFFERED + '.assoc'] = true;
+        } else if (value[i] === 'b') {
+          query[picc.fields.DEGREE_OFFERED + '.bachelors'] = true;
+        } else if (value[i] === 'c') {
+          query[picc.fields.DEGREE_OFFERED + '.certificate'] = true;
+        }
       }
       delete query[key];
     },
