@@ -436,7 +436,7 @@ export default {
     'location.latLon':{
       // Proccess Lat/Long object for url values.
       handler(newValue,oldValue){
-        if(newValue.min_lat && newValue.max_lat && newValue.min_lat && newValue.max_lat){
+        if(newValue != null && newValue.min_lat && newValue.max_lat && newValue.min_lat && newValue.max_lat){
           this.input.lat = newValue.min_lat.toFixed(4) + ".." + newValue.max_lat.toFixed(4);
           this.input.long = newValue.min_lon.toFixed(4) + ".." + newValue.max_lon.toFixed(4);
         }
@@ -701,6 +701,7 @@ export default {
     resetFormDefault(){
       this.input = _.cloneDeep(this.utility.formDefault);
       this.utility.enable = _.cloneDeep(this.utility.formDefault);
+      this.location.latLon = null;
     }
 
   }
