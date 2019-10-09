@@ -22,9 +22,6 @@
 
   <v-form>
     <div class='py-2 px-5'>
-    <p class='subhead-2'>School Name</p> 
-    <name-autocomplate></name-autocomplate>
-
     <p class='subhead-2'>
       Location
 
@@ -109,7 +106,7 @@
       :min="0"
       :max="100"
       :step="5"
-      append-icon="mdi-percent"
+      appendText = "%"
       class='mt-5'
     ></check-range>
 
@@ -120,19 +117,19 @@
       :min="0"
       :max="100"
       :step="5"
+      appendText="K"
     >
-      <template v-slot:append-text>
-        K
-      </template>
     </check-range>
     </div>
 
+    <div v-if="displayAllFilters" class='px-5'>
+      <!-- <v-expansion-panel>
     <v-expansion-panels v-show="displayAllFilters" class='mt-5'>
       <v-expansion-panel>
         <v-expansion-panel-header class='search-panel-header'>
           More
         </v-expansion-panel-header>
-        <v-expansion-panel-content>
+        <v-expansion-panel-content> -->
      
           <!-- <p class='title mt-3'>Admittance</p> -->
 
@@ -142,7 +139,6 @@
             :min="0" 
             :max="800"
             :step="20"
-            class='mt-5'
           >
             <template v-slot:label>
               SAT Math
@@ -178,9 +174,10 @@
             :min="0"
             :max="100"
             :step="5"
+            appendText="%"
           >
             <template v-slot:label>
-              Acceptance Rate (%)
+              Acceptance Rate
             </template>
           </check-range>
     
@@ -310,9 +307,9 @@
 
 
      
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-expansion-panels>
+        <!-- </v-expansion-panel-content>
+      </v-expansion-panel> -->
+    </div>
 
     <div id="search-submit-container" class="pa-2 text-center" v-if="!autoSubmit">
       <v-btn color="secondary" rounded @click="$emit('search-query',cleanInput)">Submit</v-btn>

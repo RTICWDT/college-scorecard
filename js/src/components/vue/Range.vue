@@ -5,13 +5,13 @@
       class="picc-range-bar"
       ref="bar"
     ></div>
-    <span class="picc-range-label picc-range-label-min" :style="_min.styles" ref="min">
+    <span  class="picc-range-label picc-range-label-min" :style="_min.styles" ref="min">
       <span v-html="_min.label"></span>
     </span>
     <span class="picc-range-label picc-range-label-max" :style="_max.styles" ref="max">
       <span v-html="_max.label"></span>
     </span>
-    <v-tooltip top>
+    <v-tooltip top v-if="!hideLower">
       <template v-slot:activator="{ on }">
         <span
           class="picc-range-label picc-range-label-lower"
@@ -173,7 +173,12 @@ export default {
       default: ""
     },
     hideMiddle: {
-      type: Boolean
+      type: Boolean,
+      default: true
+    },
+    hideLower:{
+      type: Boolean,
+      default: false
     }
   },
   data() {
