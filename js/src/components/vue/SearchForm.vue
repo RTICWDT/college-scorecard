@@ -34,6 +34,7 @@
       </v-btn>
 
       <v-icon color="#0e365b" v-show="location.isLoading">fas fa-circle-notch fa-spin</v-icon>
+      <span v-show="location.error" class="overline">{{location.error}}</span>
     </p>    
     <v-select v-model="input.state"
       :items="site.data.states"
@@ -410,6 +411,7 @@ export default {
         latLon: null,
         miles: 50, //In Miles.
         isLoading: false,
+        error: null
       },
       utility:{
         rules:{
@@ -642,6 +644,7 @@ export default {
     // },
     handleLocationCheck(){
       this.location.isLoading = true;
+      this.location.error = null;
 
       if (navigator.geolocation) {
         let vm = this;
@@ -651,9 +654,8 @@ export default {
         });
         
       } else {
-        // TODO: Error Handling.
-        console.log("Uh oh, Location no likie.");
         this.location.isLoading = false;
+        this.location.error = "Not Available"
       }
     },
     //Distance: Referenced from: https://stackoverflow.com/a/25025590
@@ -734,6 +736,7 @@ export default {
       this.input = _.cloneDeep(this.utility.formDefault);
       this.utility.enable = _.cloneDeep(this.utility.formDefault);
       this.location.latLon = null;
+      this.location.error = null;
     }
 
   }
