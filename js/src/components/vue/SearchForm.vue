@@ -71,6 +71,36 @@
 
     <p class='subhead-2'>Field of Study/Major</p>
     <field-autocomplete v-model="input.cip4"></field-autocomplete>
+    
+    <!-- cip4 - Degree subfield -->
+    <!-- <div class="search-form-sub-degree-wrapper" v-show="input.cip4">
+      <v-checkbox
+        class="search-form-degree-cb my-0 py-0"
+        v-model="input.cip4_degree"
+        label="Certificate"
+        value="c"
+        color="secondary"
+        hide-details
+      ></v-checkbox>
+
+      <v-checkbox
+        class="search-form-degree-cb my-0 py-0"
+        v-model="input.cip4_degree"
+        label="Assocaite's Degree"
+        value="a"
+        color="secondary"
+        hide-details
+      ></v-checkbox>
+
+      <v-checkbox
+        class="search-form-degree-cb my-0 py-0"
+        v-model="input.cip4_degree"
+        label="Bachelor's Degree"
+        value="b"
+        color="secondary"
+        hide-details
+      ></v-checkbox>
+    </div> -->
 
     <!-- <p class='subhead-2'>Length</p>
     <div class="search-form-degree-wrapper">
@@ -368,6 +398,7 @@ export default {
         avg_net_price: null,
         urban:[],
         cip4: "",
+        cip4_degree: [],
         act: null,
         sat_math: null,
         sat_read: null,

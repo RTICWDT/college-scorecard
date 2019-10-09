@@ -2133,6 +2133,11 @@ picc.form.prepareParams = (function() {
 
     cip4: picc.fields.FIELD_OF_STUDY_CODE,
 
+    // TODO: Finish implementing this feature.
+    cip4_degree: function(query, value, key){
+      // FIELD_OF_STUDY_LENGTH
+    },
+
     locale: function(query, value, key){
       var localeArray = [];
 
