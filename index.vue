@@ -24,7 +24,10 @@
               class='ma-0'
               show-arrows
               >
-                <v-tab>Search</v-tab>
+                <v-tab>
+                  <span class='hidden-sm-and-down'>Custom Search</span>
+                  <span class='hidden-md-and-up'>Search</span>
+                </v-tab>
                 <v-tab>Name Search</v-tab>
                 <v-tab>Show Me Options</v-tab>
                 <v-tab-item>
@@ -57,7 +60,7 @@
               <v-expansion-panels class='mb-2'>
                 <v-expansion-panel>
                   <v-expansion-panel-header>Custom Search</v-expansion-panel-header>
-                  <v-expansion-panel-content><search-form @search-query="directToSearch" /></v-expansion-panel-content>
+                  <v-expansion-panel-content class='pa-0 ma-0'><search-form @search-query="directToSearch" /></v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels >
               <v-expansion-panels class='mb-2'>
