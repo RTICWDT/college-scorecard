@@ -12,8 +12,8 @@
           <v-row>
               <v-col cols="12" sm="8" offset-sm="2">
                   <v-card class='pa-5'>
-                      <p>Links are provided by the institutions during data collection and are only updated about once a year. As such, over the course of the year, some links may break or websites may be taken  offline.</p>
-                      <p>The College Scorecard does not necessarily endorse the views expressed or the data and facts presented on this external site.</p>
+                      <p>Links are provided by the institutions during data collection and are only updated about once a year. As such, over the course of the year, some links may break or websites may be taken offline.</p>
+                      <p>The U.S. Department of Education does not necessarily endorse the views expressed or the data and facts presented on this external site.</p>
                       <v-btn color="secondary" rounded :href="url">Continue to Website</v-btn>        
                       <v-btn rounded :href="referrer">Return to Previous Page</v-btn>                    
                   </v-card>
