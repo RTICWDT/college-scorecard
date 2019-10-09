@@ -48,7 +48,7 @@
                       :color="isSelected?'amber':'grey'"
                       @click="$emit('toggle-compare-school', { schoolId: _.get(school, fields['ID']), schoolName: _.get(school, fields['NAME'])} )"
                     >
-                      <v-icon>fa fa-star</v-icon>
+                      <v-icon>fa fa-plus-circle</v-icon>
                     </v-btn>
                     <share label="Share this School" :url="shareLink" />
                   </v-col>

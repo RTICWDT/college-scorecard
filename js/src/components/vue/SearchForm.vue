@@ -112,12 +112,12 @@
     </check-range>
     </div>
 
-    <v-expansion-panels v-if="displayAllFilters" class='mt-5'>
-      <v-expansion-panel>
+    <div v-if="displayAllFilters" class='px-5'>
+      <!-- <v-expansion-panel>
         <v-expansion-panel-header class='search-panel-header'>
           More
         </v-expansion-panel-header>
-        <v-expansion-panel-content>
+        <v-expansion-panel-content> -->
      
           <!-- <p class='title mt-3'>Admittance</p> -->
 
@@ -127,7 +127,6 @@
             :min="0" 
             :max="800"
             :step="20"
-            class='mt-5'
           >
             <template v-slot:label>
               SAT Math
@@ -276,9 +275,9 @@
 
 
      
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-expansion-panels>
+        <!-- </v-expansion-panel-content>
+      </v-expansion-panel> -->
+    </div>
 
     <div id="search-submit-container" class="pa-2 text-center" v-if="!autoSubmit">
       <v-btn color="secondary" rounded @click="$emit('search-query',cleanInput)">Submit</v-btn>

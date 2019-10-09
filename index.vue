@@ -13,26 +13,39 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="12" sm="6">
+            <v-col cols="12" sm="8" offset-sm="2">
               <!-- Search Form Component -->
-              <v-card class="pa-5">
-                <h2 class="text-center">Custom Search</h2>
-                <search-form @search-query="directToSearch" />
-              </v-card>
+              <v-tabs
+              grow
+              background-color="rgba(0,0,0,0)"
+              color="white"
+              slider-size="8"
+              slider-color="#74B3E8"
+              >
+                <v-tab>Custom Search</v-tab>
+                <v-tab>Name Search</v-tab>
+                <v-tab>Show Me Options</v-tab>
+                <v-tab-item>
+                  <v-card class="pa-5">
+                    <search-form @search-query="directToSearch" />
+                  </v-card>
+                </v-tab-item>
+                <v-tab-item>
+                  <v-card class="pa-5 mb-3">
+                    <name-autocomplete />
+                  </v-card>
+                </v-tab-item>
+                <v-tab-item>
+                  <v-card style="min-height: 300px" class="pa-5">
+                    <p
+                      class="my-2 text-center"
+                    >Select one or more options to create a list of schools that fit your needs.</p>
+                    <canned-search-container @canned-search-submit="directToSearch"></canned-search-container>
+                  </v-card>
+                </v-tab-item>
+              </v-tabs>
             </v-col>
-            <v-col cols="12" sm="6">
-              <v-card class="pa-5 mb-3">
-                <h2 class="text-center mb-3">School Name</h2>
-                <name-autocomplete />
-              </v-card>
-              <v-card style="min-height: 300px" class="pa-5">
-                <h2 class='text-center'>Show Me Options</h2>
-                <p
-                  class="my-2 text-center"
-                >Select one or more options to create a list of schools that fit your needs.</p>
-                <canned-search-container @canned-search-submit="directToSearch"></canned-search-container>
-              </v-card>
-            </v-col>
+            <v-col cols="12" sm="6"></v-col>
           </v-row>
         </v-container>
       </div>
@@ -69,6 +82,7 @@
   </v-app>
 </template>
 <style lang="scss" scoped>
+@import 'sass/_variables.scss';
 .home-splash {
   background-repeat: repeat;
   background-color: #246498;
@@ -76,6 +90,11 @@
   min-height: 500px;
   padding-top: 1.5rem;
   background-size: auto;
+}
+.v-tab{
+  font-family: $header-font-family;
+  font-size: 1rem;
+  font-weight: bold;
 }
 </style>
 <script>

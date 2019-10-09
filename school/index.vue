@@ -57,7 +57,7 @@
                     <h2 class="title school-url mt-0">
                       <a
                         target="_blank"
-                        :href="_.get(school, fields['SCHOOL_URL'], 'ed.gov') | formatUrl"
+                        :href="'/school/transition/?url='+schoolUrl"
                       >{{ _.get(school, fields['SCHOOL_URL'], 'ed.gov') | formatUrlText }}</a>
                     </h2>
                     <school-icons :school="school" :fields="fields" class='my-5' />
@@ -78,7 +78,7 @@
                       :color="isSelected?'amber':'grey'"
                       @click="$emit('toggle-compare-school', { schoolId: _.get(school, fields['ID']), schoolName: _.get(school, fields['NAME'])} )"
                     >
-                      <v-icon>fa fa-star</v-icon>
+                      <v-icon>fa fa-plus-circle</v-icon>
                     </v-btn>
                     <share label="Share this School" :url="shareLink" />
                     <div class="school-map" ref="map"></div>
@@ -465,11 +465,11 @@
                       <v-btn small text value="highest_earnings">Highest Earnings</v-btn>
                       <v-btn small text value="lowest_debt">Lowest Debt</v-btn>
                     </v-btn-toggle></p>
-                    <v-row class='mx-5 mt-5'>
+                    <v-row class='mx-5 mt-5' v-if='fieldsOfStudy.length'>
                       <v-col cols="12" sm="8" class='ma-0 px-2 py-0 font-weight-bold'>Field of Study - Degree</v-col>
                       <v-col cols="12" sm="4" class='ma-0 pa-0 font-weight-bold'>{{currentHoist}}</v-col>
                     </v-row>
-                    <v-expansion-panels class="my-3" v-if='fieldsOfStudy'>
+                    <v-expansion-panels class="my-3" v-if='fieldsOfStudy.length'>
                       <v-expansion-panel v-for="fos in fieldsOfStudy" :key="fos.code+'-'+fos.credential.level">
                         <v-expansion-panel-header class='py-0'>
                           <v-row no-gutters class='my-0' align="center">
@@ -484,7 +484,9 @@
                       </v-expansion-panel>
                     </v-expansion-panels>
                     <div v-else>
-                      <em>There are no fields of study with data for {{currentHoist}}.</em>
+                      <v-alert type='info'>
+                      There are no fields of study with data available for {{currentHoist}}.
+                      </v-alert>
                     </div>
                     <v-btn
                       rounded
@@ -623,12 +625,12 @@
                         <donut
                           color="#0e365b"
                           :value="_.get(school, this.fields['ADMITTANCE_RATE'])*100"
-                          v-if="_.get(school, this.fields['ADMITTANCE_RATE'])"
+                          v-if="!_.get(school, this.fields['OPEN_ADMISSIONS'])"
                           chart-id="admittance-chart"
                           :height="200"
                           :width="300"
                         ></donut>
-                        <p v-else>This school has an open admission policy.</p>
+                        <p v-else>This school has an open admissions policy.</p>
                       </v-col>
                     </v-row>
                   </v-expansion-panel-content>
@@ -947,6 +949,17 @@ export default {
         break;
       }
     },
+    isBranch(){
+      // 0 not main
+      // 1 main
+      return _.get(this.school, this.fields['MAIN'])===0;
+    },
+    schoolUrl(){
+      let url = _.get(this.school, this.fields['SCHOOL_URL'], '#');
+      if(url =='#') return false;
+      else if(url.match(/^http/)) return url;
+      else return 'http://'+url;
+    }
   },
 
   methods: {
@@ -1018,14 +1031,14 @@ export default {
       let fos = this.allFieldsOfStudy;
       let cleanDebt = fos.filter(obj => obj.debt.median_debt && obj.credential.level <= 3)
       let orderedDebt = cleanDebt.sort((a, b) =>  a.debt.median_debt - b.debt.median_debt);
-      this.singleDebt = (orderedDebt.length==1);
+      this.singleDebt = (orderedDebt.length==1 || (orderedDebt.length==2 && orderedDebt[0].debt.median_debt == orderedDebt[1].debt.median_debt));
       this.minMaxDebt = { min: orderedDebt[0], max: orderedDebt[orderedDebt.length-1]};
     },
     findEarningsRange(){
       let fos = this.allFieldsOfStudy;
       let cleanEarnings = fos.filter(obj => obj.earnings.median_earnings && obj.credential.level <= 3);
       let orderedEarnings = cleanEarnings.sort((a, b) =>   a.earnings.median_earnings-b.earnings.median_earnings);
-      this.singleEarnings = (orderedEarnings.length==1);
+      this.singleEarnings = (orderedEarnings.length==1 || (orderedEarnings.length==2 && orderedEarnings[0].earnings.median_earnings == orderedEarnings[1].earnings.median_earnings));
       this.minMaxEarnings = { min: orderedEarnings[0], max: orderedEarnings[orderedEarnings.length-1]};
     }
 

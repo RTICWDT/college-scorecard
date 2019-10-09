@@ -34,21 +34,15 @@
       >
         <template v-slot:append>
           <v-text-field v-model="sliderValue"
-            class="mt-0 pt-0"
             hide-details
-            single-line
             type="number"
-            style="width: 60px"
             @input="handleInput"
-            outlined
+            solo
             dense
+            :prefix="prefix"
+            :suffix="appendText"
+            style="width: 100px;"
           ></v-text-field>
-
-          <slot name="append">
-            <div class='appendedText'>
-              {{appendText}}
-            </div>
-          </slot>
         </template>
         <template v-slot:prepend>
       <v-checkbox v-model="enableSlider"
@@ -88,6 +82,11 @@ export default {
     return{
       sliderValue: this.value,
       enableSlider: this.enable
+    }
+  },
+  computed:{
+    prefix(){
+      return (this.appendText == 'K')? '$':''; 
     }
   },
   mounted(){
