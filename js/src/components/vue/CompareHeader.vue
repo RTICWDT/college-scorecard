@@ -3,7 +3,7 @@
         @click="toggleDrawer()"
         v-if="currentCount>0"
     >
-        <v-icon color="amber" small class='pr-2'>fas fa-star</v-icon> {{currentCount}} {{school}} to compare and share
+        <v-icon color="amber" small class='pr-2'>fas fa-plus-circle</v-icon> {{currentCount}} {{school}} to compare and share
     </div>
 </template>
 

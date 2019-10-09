@@ -529,12 +529,13 @@ picc.fields = {
   SAT_WRITING_MIDPOINT:     'latest.admissions.sat_scores.midpoint.writing',
 
   ADMITTANCE_RATE:          'latest.admissions.admission_rate.overall',
+  OPEN_ADMISSIONS:          'school.open_admissions_policy',
 
   NET_PRICE_CALC_URL:       'school.price_calculator_url',
 
   // program reporters
   PROGRAM_REPORTER_OFFERED: 'latest.academics.program_reporter.programs_offered',
-  PROGRAG_REPORTER_CIP:     'cip_6_digit',
+  PROGRAM_REPORTER_CIP:     'cip_6_digit',
   PROGRAM_REPORTER_COST:    'latest.cost.program_reporter',
   PROGRAM_REPORTER_PROGRAM: 'latest.academics.program_reporter',
 

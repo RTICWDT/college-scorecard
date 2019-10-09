@@ -87,3 +87,6 @@ ogc:
 
 outcome-measures:
   default: <strong>Outcomes 8 Years After Attending</strong> <ul><li>Percentages of students who graduated, transferred, are still enrolled, and withdrew from this institution within 8 years of entry.</li><li>This 8-year graduation rate is different from the graduation rate shown above, which measures a shorter time period and a more narrow group of students. </li><li>Percentages may not add to 100% due to suppression and rounding.</li></ul>
+
+coming-soon:
+  default: This tooltip will be populated with updated text.

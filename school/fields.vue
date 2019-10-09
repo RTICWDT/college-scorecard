@@ -2,9 +2,9 @@
   <v-app id="app" class="school-page">
     <div class="backNav">
       <div class="container school-back">
-        <a id="referrer-link" class="link-more" href="./index/">
+        <v-btn color="secondary" rounded small id="referrer-link" class="link-more" href="./index/">
           &laquo; Back to {{_.get(school, fields['NAME']) }}
-        </a>
+        </v-btn>
       </div>
     </div>
     <!-- Search results -->
@@ -14,9 +14,9 @@
           <v-col cols="12" md="9" class="school-left">
             <div v-if="!school.id" class="show-loading">
               <v-card class="pa-5">
-                <h1 class="heading">
+                <h1 class="title">
                   Loading
-                  <v-icon color="pink darken-4">fas fa-circle-notch fa-spin</v-icon>
+                  <v-icon color="#0e365b">fas fa-circle-notch fa-spin</v-icon>
                 </h1>
               </v-card>
             </div>
@@ -48,7 +48,7 @@
                       :color="isSelected?'amber':'grey'"
                       @click="$emit('toggle-compare-school', { schoolId: _.get(school, fields['ID']), schoolName: _.get(school, fields['NAME'])} )"
                     >
-                      <v-icon>fa fa-star</v-icon>
+                      <v-icon>fa fa-plus-circle</v-icon>
                     </v-btn>
                     <share label="Share this School" :url="shareLink" />
                   </v-col>

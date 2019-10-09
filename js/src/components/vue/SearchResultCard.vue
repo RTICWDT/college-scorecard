@@ -28,7 +28,7 @@
         </p>
 
         <v-btn color="primary" text icon class='float-right' :color="isSelected?'amber':'grey'"  @click="$emit('toggle-compare-school',school)">
-          <v-icon >fa fa-star</v-icon>
+          <v-icon >fa fa-plus-circle</v-icon>
         </v-btn>
         <p class='overline font-weight-bold mb-1'>{{school['school.city']}}, {{school['school.state']}}</p>
         <h2 class="title mt-0 font-weight-bold"><a class='nameLink' :href="link">{{school['school.name'] ? school['school.name'] : 'School Name'}}</a></h2>
@@ -67,7 +67,7 @@
       </v-row>
       <v-row class='result-card-info-container' v-else>
         <v-col cols="12" class=''>
-          <em>Average annual cost is not available for program reporters.</em>
+          <p class='grey--text lighten-2'>The average annual net price is not available for this program-reporting school.</p>
         </v-col>
       </v-row>
       

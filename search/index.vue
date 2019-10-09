@@ -25,7 +25,10 @@
         :absolute="sidebar.absolute"
         :fixed="sidebar.fixed"
       >
-        
+        <div class="pa-4 grey lighten-3">
+          <h4 class='subhead-2 font-weight-bold mb-2'>Search by Name</h4>
+          <name-autocomplete />
+        </div>
         <!-- Search Form Component -->
         <search-form
           :urlParsedParams="urlParsedParams"
@@ -38,21 +41,6 @@
       <v-content>
         <v-container fluid class="grey lighten-5 pa-0">
           <div id="search-result-container">
-            <div id="search-can-query-container" v-if="!isLoading && results.schools.length === 0">
-              <v-row>
-                <v-col cols="12" md="4" sm="12" xs="12">
-                  <div id="search-can-query-text">
-                    <h3>Show Me Options</h3>
-                    <p>Select one or more options on right to create a list of schools that fit you.</p>
-                  </div>
-                </v-col>
-
-                <v-col md="8" sm="12" xs="12" cols="12">
-                  <canned-search-container @canned-search-submit="handleCannedSearchClick"></canned-search-container>
-                </v-col>
-              </v-row>
-            </div>
-
             <div class="search-result-container">
               <v-card  class="mt-2 mb-4 py-1 px-4 elevaton-0 pageBar" v-if="!isLoading">
                 <v-row class="pa-0">
@@ -105,11 +93,24 @@
                   </v-col>
                 </v-row>
               </v-card>
+            <div id="search-can-query-container" v-if="!isLoading && results.schools.length === 0">
+              <v-row>
+                <v-col cols="12" md="4" sm="12" xs="12">
+                  <div id="search-can-query-text">
+                    <h3>Show Me Options</h3>
+                    <p>Select one or more options on right to create a list of schools that fit you.</p>
+                  </div>
+                </v-col>
 
+                <v-col md="8" sm="12" xs="12" cols="12">
+                  <canned-search-container @canned-search-submit="handleCannedSearchClick"></canned-search-container>
+                </v-col>
+              </v-row>
+            </div>
               <div class="results-main-alert">
                 <div class="show-loading" v-show="isLoading">
-                  <v-card class="pa-5">
-                    <h1 class="heading">
+                  <v-card class="py-4 px-4 pageBar">
+                    <h1 class="title">
                       Loading
                       <v-icon color="#0e365b">fas fa-circle-notch fa-spin</v-icon>
                     </h1>
@@ -158,22 +159,7 @@
                         :total-visible="7"
                         @input="searchAPI(parseURLParams())"
                       ></v-pagination>
-                      <v-menu offset-y>
-                        <template v-slot:activator="{ on }">
-                          <v-btn color="primary" small v-on="on" fab>
-                            <v-icon>fas fa-sort</v-icon>
-                          </v-btn>
-                        </template>
-                        <v-list>
-                          <v-list-item
-                            v-for="(item, index) in sorts"
-                            :key="index"
-                            @click="resort(item.field);"
-                          >
-                            <v-list-item-title>{{ item.type }}</v-list-item-title>
-                          </v-list-item>
-                        </v-list>
-                      </v-menu>
+                     
                     </div>
                   </v-col>
                 </v-row>
@@ -219,6 +205,7 @@ import CompareDrawer from "components/vue/CompareDrawer.vue";
 import CannedSearchContainer from "components/vue/CannedSearchContainer.vue";
 import CompareHeader from "components/vue/CompareHeader.vue";
 import Share from "components/vue/Share.vue";
+import NameAutocomplete from "components/vue/NameAutocomplete.vue";
 
 import _ from "lodash";
 // import querystring from 'querystring';
@@ -234,7 +221,8 @@ export default {
     "compare-drawer": CompareDrawer,
     "canned-search-container": CannedSearchContainer,
     "compare-header": CompareHeader,
-    "share": Share
+    "share": Share,
+    "name-autocomplete": NameAutocomplete
   },
   props: {
     "page-permalink": String,
@@ -244,7 +232,7 @@ export default {
     specializedMission: Object,
     defaultSort: {
       type: String,
-      default: "avg_net_price:asc"
+      default: "name:asc"
     },
     isLoading: Boolean,
     compareSchools: Array
