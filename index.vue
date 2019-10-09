@@ -13,7 +13,7 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="12" sm="8" offset-sm="2">
+            <v-col cols="12" sm="10" offset-sm="1" md="8" offset-md="2" class='d-none d-sm-flex'>
               <!-- Search Form Component -->
               <v-tabs
               grow
@@ -21,8 +21,10 @@
               color="white"
               slider-size="8"
               slider-color="#74B3E8"
+              class='ma-0'
+              show-arrows
               >
-                <v-tab>Custom Search</v-tab>
+                <v-tab>Search</v-tab>
                 <v-tab>Name Search</v-tab>
                 <v-tab>Show Me Options</v-tab>
                 <v-tab-item>
@@ -45,7 +47,29 @@
                 </v-tab-item>
               </v-tabs>
             </v-col>
-            <v-col cols="12" sm="6"></v-col>
+            <v-col cols="12" class="pa-5 d-block d-sm-none">
+              <v-expansion-panels class='mb-2' v-model="mobilePanels">
+                <v-expansion-panel>
+                  <v-expansion-panel-header>Name Search</v-expansion-panel-header>
+                  <v-expansion-panel-content><name-autocomplete /></v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+              <v-expansion-panels class='mb-2'>
+                <v-expansion-panel>
+                  <v-expansion-panel-header>Custom Search</v-expansion-panel-header>
+                  <v-expansion-panel-content><search-form @search-query="directToSearch" /></v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels >
+              <v-expansion-panels class='mb-2'>
+                <v-expansion-panel>
+                  <v-expansion-panel-header>Show Me Options</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <p class="my-2 text-center">Select one or more options to create a list of schools that fit your needs.</p>
+                    <canned-search-container @canned-search-submit="directToSearch"></canned-search-container>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+            </v-col>
           </v-row>
         </v-container>
       </div>
@@ -95,6 +119,10 @@
   font-family: $header-font-family;
   font-size: 1rem;
   font-weight: bold;
+  color: #bbbbbb !important;
+}
+.v-tab.v-tab--active{
+  color: #FFFFFF !important;
 }
 </style>
 <script>
@@ -117,7 +145,8 @@ export default {
       sidebar: {
         fixed: false,
         absolute: true
-      }
+      },
+      mobilePanels: 0
     };
   },
   methods: {
