@@ -34,9 +34,7 @@
           :urlParsedParams="urlParsedParams"
           auto-submit
           display-all-filters
-          :resetSearchForm="utility.resetForm"
           @search-query="searchAPI"
-          @search-form-reset="utility.resetForm = false"
         />
 
       </v-navigation-drawer>
@@ -261,7 +259,6 @@ export default {
         formDefault: {},
         initailized: false,
         sortFAB: null,
-        resetForm: false
       },
       error: {
         message: null
@@ -361,8 +358,7 @@ export default {
         picc.fields.COMPLETION_200_4,
         picc.fields.COMPLETION_200_LT4,
 
-        // TODO: Commenting out for now.  It is not working.
-        picc.fields.FIELD_OF_STUDY      
+        picc.fields.FIELD_OF_STUDY
       ].join(",");
 
       let qs = this.generateQueryString(params);
@@ -410,11 +406,6 @@ export default {
       if (cannedSearchData) {
         this.urlParsedParams = this.parseURLParams(
           this.generateQueryString(cannedSearchData).substr(1)
-        );
-        this.debounceSearchUpdate(
-          this.parseURLParams(
-            this.generateQueryString(cannedSearchData).substr(1)
-          )
         );
       }
     },

@@ -22,7 +22,17 @@
 
   <v-form>
     <div class='py-2 px-5'>
-    <p class='subhead-2'>Location</p>    
+    <p class='subhead-2'>
+      Location
+
+      <v-btn text 
+        icon
+        :color="locationButtonColor"
+        @click="handleLocationCheck"
+      >
+        <v-icon>mdi-near-me</v-icon>
+      </v-btn>
+    </p>    
     <v-select v-model="input.state"
       :items="site.data.states"
       item-text="name"
@@ -35,7 +45,7 @@
       color="secondary"
       ></v-select>
     
-    <!-- TODO: Enable for location aware search. -->
+    <!-- TODO: Leaving this for now.  Can alter the miles away if needed. -->
     <!-- <p class='subhead-2'>Nearby</p>    
     <v-row>
       <v-col cols="12" md="4" sm="12" xs="12">
@@ -59,7 +69,7 @@
     <p class='subhead-2'>Field of Study/Major</p>
     <field-autocomplete v-model="input.cip4"></field-autocomplete>
 
-    <p class='subhead-2'>Length</p>
+    <!-- <p class='subhead-2'>Length</p>
     <div class="search-form-degree-wrapper">
         <v-checkbox
           class="search-form-degree-cb my-0 py-0"
@@ -87,7 +97,7 @@
           color="secondary"
           hide-details
         ></v-checkbox>
-    </div>
+    </div> -->
 
     <check-range legend-title="Graduation Rate" 
       v-model="input.completion_rate"
@@ -114,6 +124,8 @@
 
     <div v-if="displayAllFilters" class='px-5'>
       <!-- <v-expansion-panel>
+    <v-expansion-panels v-show="displayAllFilters" class='mt-5'>
+      <v-expansion-panel>
         <v-expansion-panel-header class='search-panel-header'>
           More
         </v-expansion-panel-header>
@@ -170,18 +182,40 @@
           </check-range>
     
 
-
-
         <!-- <p class='overline'>School Characteristics</p> -->
       
           <p class='subhead-2 mb-3'>Size</p>
           <div>
-          <v-btn small :class="{secondary: input.size === 'small' }" @click="handleSizeClick('small')">Small</v-btn>
-          <v-btn small :class="{secondary: input.size === 'medium' }" @click="handleSizeClick('medium')">Medium</v-btn>
-          <v-btn small :class="{secondary: input.size === 'large' }" @click="handleSizeClick('large')">Large</v-btn>
+            <!-- TODO - Do we want these to appear as buttons? -->
+            <v-checkbox
+              hide-details
+              v-model="input.size"
+              label="Small"
+              value="small"
+              color="secondary"
+              class="py-0 my-0"
+            ></v-checkbox>
+
+            <v-checkbox
+              hide-details
+              v-model="input.size"
+              label="Medium"
+              value="medium"
+                color="secondary"
+                class="py-0 my-0"
+            ></v-checkbox>
+
+            <v-checkbox
+              hide-details
+              v-model="input.size"
+              label="Large"
+              value="large"
+                color="secondary"
+                class="py-0 my-0"
+            ></v-checkbox>
           </div>
-              
-    
+
+
           <p class='subhead-2'>Type of School</p>
           <div class="search-form-type-container">
             <v-checkbox
@@ -189,8 +223,8 @@
               v-model="input.control"
               label="Public"
               value="public"
-                color="secondary"
-                class="py-0 my-0"
+              color="secondary"
+              class="py-0 my-0"
             ></v-checkbox>
 
             <v-checkbox
@@ -198,8 +232,8 @@
               v-model="input.control"
               label="Private Nonprofit"
               value="private"
-                color="secondary"
-                class="py-0 my-0"
+              color="secondary"
+              class="py-0 my-0"
             ></v-checkbox>
 
             <v-checkbox
@@ -207,48 +241,46 @@
               v-model="input.control"
               label="Private For-Profit"
               value="profit"
-                color="secondary"
-                class="py-0 my-0"
+              color="secondary"
+              class="py-0 my-0"
             ></v-checkbox>
           </div>
 
           <p class='subhead-2'>Urbancity</p>
-          <!-- TODO - Not working yet -->
-          
-              <v-checkbox
-                hide-details            
-                v-model="input.urban"
-                label="City"
-                value="city"
-                color="secondary"
-                class="py-0 my-0"
-              ></v-checkbox>
+            <v-checkbox
+              hide-details            
+              v-model="input.locale"
+              label="City"
+              value="city"
+              color="secondary"
+              class="py-0 my-0"
+            ></v-checkbox>
 
-              <v-checkbox
-                hide-details
-                v-model="input.urban"
-                label="Suburban"
-                value="suburban"
-                color="secondary"
-                class="py-0 my-0"
-              ></v-checkbox>
-              <v-checkbox
-                hide-details
-                v-model="input.urban"
-                label="Town"
-                value="town"
-                color="secondary"
-                class="py-0 my-0"
-              ></v-checkbox>
+            <v-checkbox
+              hide-details
+              v-model="input.locale"
+              label="Suburban"
+              value="suburban"
+              color="secondary"
+              class="py-0 my-0"
+            ></v-checkbox>
+            <v-checkbox
+              hide-details
+              v-model="input.locale"
+              label="Town"
+              value="town"
+              color="secondary"
+              class="py-0 my-0"
+            ></v-checkbox>
 
-              <v-checkbox
-                hide-details
-                v-model="input.urban"
-                label="Rural"
-                value="rural"
-                color="secondary"
-                class="py-0 my-0"
-              ></v-checkbox>
+            <v-checkbox
+              hide-details
+              v-model="input.locale"
+              label="Rural"
+              value="rural"
+              color="secondary"
+              class="py-0 my-0"
+            ></v-checkbox>
  
         <p class='subhead-2'>Specialized Mission</p>
         <v-select v-model='input.serving'
@@ -308,10 +340,6 @@ export default {
     displayAllFilters: {
       type: Boolean,
       default: false
-    },
-    resetSearchForm:{
-      type: Boolean,
-      default: false
     }
   },
   components:{
@@ -323,12 +351,12 @@ export default {
     return{
       input:{
         state:[],
-        degree:"",
+        // degree:[],
         major:"",
         region:[],
         zip:"",
         distance:"",
-        size:"",
+        size:[],
         name:"",
         control:[], //Type
         serving:"",
@@ -343,12 +371,11 @@ export default {
         acceptance:null,
         lat: null,
         long: null,
-        // page:0,
-        // sort:""
+        locale:[]
       },
       location:{
         latLon: null,
-        miles: 10, //In Miles.
+        miles: 50, //In Miles.
       },
       utility:{
         rules:{
@@ -358,14 +385,14 @@ export default {
             return pattern.test(value) || 'Numerical'
           }
         },
-        // resetSearchForm: false,
-        test: null,
         // Hold Default state of form data.
         formDefault:{},
-        enableDefault:{},
         // Helper to activate debounced query after initial load.
         initialized: false,
         showMore: false,
+        // Hold Default for checkrange enables.
+        enableDefault:{},
+        // State object
         enable:{
           completion_rate: false,
           avg_net_price: false,
@@ -403,7 +430,7 @@ export default {
     'location.latLon':{
       // Proccess Lat/Long object for url values.
       handler(newValue,oldValue){
-        if(newValue.min_lat && newValue.max_lat && newValue.min_lat && newValue.max_lat){
+        if(newValue != null && newValue.min_lat && newValue.max_lat && newValue.min_lat && newValue.max_lat){
           this.input.lat = newValue.min_lat.toFixed(4) + ".." + newValue.max_lat.toFixed(4);
           this.input.long = newValue.min_lon.toFixed(4) + ".." + newValue.max_lon.toFixed(4);
         }
@@ -412,18 +439,11 @@ export default {
     'location.miles'(){
       this.handleLocationCheck();
     },
-    // 'resetSearchForm'(value){
-    //   if(value){
-    //     this.input = _.cloneDeep(this.utility.formDefault);
-    //   }
-
-    //   this.$emit('search-form-reset');      
-    // }
   },
   computed:{
     // Remove items that are not set
     cleanInput(){
-      let defaultValues = this.utility.formDefault;
+      let defaultValues = _.cloneDeep(this.utility.formDefault);
       // Pick only values that are different from default state.
       let groomedInput =  _.pickBy(this.input,(value,key) => {
         // If it does not exist in the default state object, remove.
@@ -496,6 +516,9 @@ export default {
           'value': value
         }
       })
+    },
+    locationButtonColor(){
+      return (this.location.latLon ? 'primary' : '');
     }
   },
   created(){
@@ -513,17 +536,17 @@ export default {
 
   },
   mounted(){
-    EventBus.$on('search-form-reset', () => {
-      console.log("Yes!!!" + this.resetSearchForm);
-        this.input = _.cloneDeep(this.utility.formDefault);
-        // this.utility.enable = _.cloneDeep(this.utility.enableDefault);
-        // this.utility.enable.completion_rate = false;
-
+    EventBus.$on('search-form-reset', (e) => {
+      this.resetFormDefault();
     });
   },
   methods:{
     mapInputFromProp(){
-      this.input = _.mergeWith(this.input,this.urlParsedParams,function(objVal,newObjValue,key){
+      // Reset form to default, Helps with processing canned search items.
+      this.resetFormDefault();
+
+      _.mergeWith(this.input,this.urlParsedParams,function(objVal,newObjValue,key){
+      // this.input = _.mergeWith(this.utility.formDefault, this.urlParsedParams,function(objVal,newObjValue,key){
         if(_.isArray(objVal) && _.isString(newObjValue)){
           return [newObjValue];
         }
@@ -576,13 +599,13 @@ export default {
     },
     processChangeEvent(){
     },
-    handleSizeClick(value){
-      if(value === this.input.size){
-        this.input.size = ""
-      }else{
-        this.input.size = value;
-      }
-    },
+    // handleSizeClick(value){
+    //   if(value === this.input.size){
+    //     this.input.size = ""
+    //   }else{
+    //     this.input.size = value;
+    //   }
+    // },
     handleLocationCheck(){
       if (navigator.geolocation) {
         let vm = this;
@@ -668,6 +691,12 @@ export default {
         max_lon:maxLon.radToDeg()
       };
     },
+    //Reset form to default.
+    resetFormDefault(){
+      this.input = _.cloneDeep(this.utility.formDefault);
+      this.utility.enable = _.cloneDeep(this.utility.formDefault);
+      this.location.latLon = null;
+    }
 
   }
 }

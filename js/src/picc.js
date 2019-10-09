@@ -478,8 +478,9 @@ picc.fields = {
   NET_PRICE:            'latest.cost.avg_net_price.overall',
   NET_PRICE_BY_INCOME:  'latest.cost.net_price',
 
-  // completion rate
+  // completion rate - TODO: Change to new endpoint below
   COMPLETION_RATE:      'latest.completion.rate_suppressed.overall',
+  // COMPLETION_RATE:      'latest.completion.consumer_rate',
 
   // new rates
   COMPLETION_OM:        'latest.completion.outcome_percentage_suppressed.all_students.8yr.award_pooled',
@@ -543,7 +544,11 @@ picc.fields = {
   FIELD_OF_STUDY_CODE:      'latest.programs.cip_4_digit.code',
   FIELD_OF_STUDY_LENGTH:    'latest.programs.cip_4_digit.credential.level',
   FIELD_OF_STUDY_NAME:      'latest.programs.cip_4_digit.title',
-  FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.median_earnings'
+  FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.median_earnings',
+
+  //Location
+  LATITUDE:                 'location.lat',
+  LONGITUDE:                'location.lon'
 };
 
 picc.programReporterCip = {
@@ -2007,7 +2012,8 @@ picc.form.prepareParams = (function() {
     sat_math:             fields.SAT_MATH_MIDPOINT + '__range',
     sat_read:             fields.SAT_READING_MIDPOINT + '__range',
     acceptance:           fields.ADMITTANCE_RATE + '__range',
-
+    lat:                  fields.LATITUDE + '__range',
+    long:                 fields.LONGITUDE + '__range',
     religious:            fields.RELIGIOUS,
 
     // special designations: women/men only, minority groups
@@ -2096,21 +2102,64 @@ picc.form.prepareParams = (function() {
       delete query[key];
     },
 
-    degree: function(query, value, key) {
-      if (value === 'a') {
-        query[picc.fields.DEGREE_OFFERED + '.assoc'] = true;
-      } else if (value === 'b') {
-        query[picc.fields.DEGREE_OFFERED + '.bachelors'] = true;
-      } else if (value === 'c') {
-        query[picc.fields.DEGREE_OFFERED + '.certificate'] = true;
-      }
-      delete query[key];
-    },
+    // TODO - Remove old function.
+    // degree: function(query, value, key) {
+    //   if (value === 'a') {
+    //     query[picc.fields.DEGREE_OFFERED + '.assoc'] = true;
+    //   } else if (value === 'b') {
+    //     query[picc.fields.DEGREE_OFFERED + '.bachelors'] = true;
+    //   } else if (value === 'c') {
+    //     query[picc.fields.DEGREE_OFFERED + '.certificate'] = true;
+    //   }
+    //   delete query[key];
+    // },
+
+    // TODO - Remove/Alter to leverage new datafields. (USE: PREDOMINANT_DEGREE).  Hiding for now.
+    // Note - This method will only return items that have ALL of the selected.  Not some of the selected degrees.
+    // degree: function(query, value, key){
+    //   for(var i in value){
+    //     if (value[i] === 'a') {
+    //       query[picc.fields.DEGREE_OFFERED + '.assoc'] = true;
+    //     } else if (value[i] === 'b') {
+    //       query[picc.fields.DEGREE_OFFERED + '.bachelors'] = true;
+    //     } else if (value[i] === 'c') {
+    //       query[picc.fields.DEGREE_OFFERED + '.certificate'] = true;
+    //     }
+    //   }
+    //   delete query[key];
+    // },
 
     // XXX: this is only used for testing
     under_investigation:  picc.fields.UNDER_INVESTIGATION,
 
-    cip4: picc.fields.FIELD_OF_STUDY_CODE
+    cip4: picc.fields.FIELD_OF_STUDY_CODE,
+
+    locale: function(query, value, key){
+      var localeArray = [];
+
+      for(var i in value){
+        switch (value[i].toLowerCase()){
+          case 'city':
+            localeArray.push('11','12','13');
+            break;
+          case 'suburban':
+            localeArray.push('21','22','23');
+            break;
+          case 'town':
+            localeArray.push('31','32','33');
+            break;
+          case 'rural':
+            localeArray.push('41','42','43');
+            break;
+          default:
+            return;
+        }
+      }
+
+      query[picc.fields.LOCALE] = localeArray.join(",");
+      delete query[key];
+    }
+
   };
 
   // map a size or array of sizes to API-friendly range values
@@ -2213,7 +2262,7 @@ picc.form.prepareParams = (function() {
 
     // exclude perfect-only children per ED
     query[picc.fields.ID + '__range'] = '..999999';
-
+    
     return query;
   };
 
