@@ -25,13 +25,16 @@
     <p class='subhead-2'>
       Location
 
-      <v-btn text 
+      <v-btn text
         icon
         :color="locationButtonColor"
         @click="handleLocationCheck"
       >
         <v-icon>mdi-near-me</v-icon>
       </v-btn>
+
+      <v-icon color="#0e365b" v-show="location.isLoading">fas fa-circle-notch fa-spin</v-icon>
+      <span v-show="location.error" class="overline">{{location.error}}</span>
     </p>    
     <v-select v-model="input.state"
       :items="site.data.states"
@@ -68,6 +71,36 @@
 
     <p class='subhead-2'>Field of Study/Major</p>
     <field-autocomplete v-model="input.cip4"></field-autocomplete>
+    
+    <!-- cip4 - Degree subfield -->
+    <!-- <div class="search-form-sub-degree-wrapper" v-show="input.cip4">
+      <v-checkbox
+        class="search-form-degree-cb my-0 py-0"
+        v-model="input.cip4_degree"
+        label="Certificate"
+        value="c"
+        color="secondary"
+        hide-details
+      ></v-checkbox>
+
+      <v-checkbox
+        class="search-form-degree-cb my-0 py-0"
+        v-model="input.cip4_degree"
+        label="Assocaite's Degree"
+        value="a"
+        color="secondary"
+        hide-details
+      ></v-checkbox>
+
+      <v-checkbox
+        class="search-form-degree-cb my-0 py-0"
+        v-model="input.cip4_degree"
+        label="Bachelor's Degree"
+        value="b"
+        color="secondary"
+        hide-details
+      ></v-checkbox>
+    </div> -->
 
     <!-- <p class='subhead-2'>Length</p>
     <div class="search-form-degree-wrapper">
@@ -365,6 +398,7 @@ export default {
         avg_net_price: null,
         urban:[],
         cip4: "",
+        cip4_degree: [],
         act: null,
         sat_math: null,
         sat_read: null,
@@ -376,6 +410,8 @@ export default {
       location:{
         latLon: null,
         miles: 50, //In Miles.
+        isLoading: false,
+        error: null
       },
       utility:{
         rules:{
@@ -607,15 +643,19 @@ export default {
     //   }
     // },
     handleLocationCheck(){
+      this.location.isLoading = true;
+      this.location.error = null;
+
       if (navigator.geolocation) {
         let vm = this;
         navigator.geolocation.getCurrentPosition(function(position){
           vm.location.latLon = vm.calculateBoundingBox(position.coords.latitude,position.coords.longitude, vm.location.miles * 1.609); // Convert miles to KM (Aprroximate)
+          vm.location.isLoading = false;
         });
-
+        
       } else {
-        // TODO: Error Handling.
-        console.log("Uh oh, Location no likie.")
+        this.location.isLoading = false;
+        this.location.error = "Not Available"
       }
     },
     //Distance: Referenced from: https://stackoverflow.com/a/25025590
@@ -696,6 +736,7 @@ export default {
       this.input = _.cloneDeep(this.utility.formDefault);
       this.utility.enable = _.cloneDeep(this.utility.formDefault);
       this.location.latLon = null;
+      this.location.error = null;
     }
 
   }
