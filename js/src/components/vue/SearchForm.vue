@@ -250,42 +250,40 @@
           </div>
 
           <p class='subhead-2'>Urbancity</p>
-          <!-- TODO - Not working yet -->
-          
-              <v-checkbox
-                hide-details            
-                v-model="input.urban"
-                label="City"
-                value="city"
-                color="secondary"
-                class="py-0 my-0"
-              ></v-checkbox>
+            <v-checkbox
+              hide-details            
+              v-model="input.locale"
+              label="City"
+              value="city"
+              color="secondary"
+              class="py-0 my-0"
+            ></v-checkbox>
 
-              <v-checkbox
-                hide-details
-                v-model="input.urban"
-                label="Suburban"
-                value="suburban"
-                color="secondary"
-                class="py-0 my-0"
-              ></v-checkbox>
-              <v-checkbox
-                hide-details
-                v-model="input.urban"
-                label="Town"
-                value="town"
-                color="secondary"
-                class="py-0 my-0"
-              ></v-checkbox>
+            <v-checkbox
+              hide-details
+              v-model="input.locale"
+              label="Suburban"
+              value="suburban"
+              color="secondary"
+              class="py-0 my-0"
+            ></v-checkbox>
+            <v-checkbox
+              hide-details
+              v-model="input.locale"
+              label="Town"
+              value="town"
+              color="secondary"
+              class="py-0 my-0"
+            ></v-checkbox>
 
-              <v-checkbox
-                hide-details
-                v-model="input.urban"
-                label="Rural"
-                value="rural"
-                color="secondary"
-                class="py-0 my-0"
-              ></v-checkbox>
+            <v-checkbox
+              hide-details
+              v-model="input.locale"
+              label="Rural"
+              value="rural"
+              color="secondary"
+              class="py-0 my-0"
+            ></v-checkbox>
  
         <p class='subhead-2'>Specialized Mission</p>
         <v-select v-model='input.serving'
@@ -376,8 +374,7 @@ export default {
         acceptance:null,
         lat: null,
         long: null,
-        // page:0,
-        // sort:""
+        locale:[]
       },
       location:{
         latLon: null,

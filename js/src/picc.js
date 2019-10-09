@@ -478,8 +478,9 @@ picc.fields = {
   NET_PRICE:            'latest.cost.avg_net_price.overall',
   NET_PRICE_BY_INCOME:  'latest.cost.net_price',
 
-  // completion rate
+  // completion rate - TODO: Change to new endpoint below
   COMPLETION_RATE:      'latest.completion.rate_suppressed.overall',
+  // COMPLETION_RATE:      'latest.completion.consumer_rate',
 
   // new rates
   COMPLETION_OM:        'latest.completion.outcome_percentage_suppressed.all_students.8yr.award_pooled',
@@ -2130,7 +2131,34 @@ picc.form.prepareParams = (function() {
     // XXX: this is only used for testing
     under_investigation:  picc.fields.UNDER_INVESTIGATION,
 
-    cip4: picc.fields.FIELD_OF_STUDY_CODE
+    cip4: picc.fields.FIELD_OF_STUDY_CODE,
+
+    locale: function(query, value, key){
+      var localeArray = [];
+
+      for(var i in value){
+        switch (value[i].toLowerCase()){
+          case 'city':
+            localeArray.push('11','12','13');
+            break;
+          case 'suburban':
+            localeArray.push('21','22','23');
+            break;
+          case 'town':
+            localeArray.push('31','32','33');
+            break;
+          case 'rural':
+            localeArray.push('41','42','43');
+            break;
+          default:
+            return;
+        }
+      }
+
+      query[picc.fields.LOCALE] = localeArray.join(",");
+      delete query[key];
+    }
+
   };
 
   // map a size or array of sizes to API-friendly range values
