@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="school-key_figures key-figures my-0 ">
+    <ul class="school-key_figures key-figures my-0 px-0 py-0">
       <li :class="years | yearsClass" v-if="!sizeOnly">
         <span>{{ years | formatYearsLabel }}</span>
       </li>
