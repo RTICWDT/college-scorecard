@@ -98,7 +98,7 @@
                         :min="{ value: 0, label: '$0' }"
                         :max="{ value: 150000, label: '$150,000' }"
                         lowertip=""
-                        :uppertip="minMaxEarnings.max.title.slice(0,-1)"
+                        :uppertip="minMaxEarnings.max.title.slice(0,-1) + ' - '+ minMaxEarnings.max.credential.title"
                         hideMiddle
                         hideLower
                       ></range>
@@ -109,8 +109,8 @@
                         :upper="{ value: minMaxEarnings.max.earnings.median_earnings, label: $options.filters.numeral(minMaxEarnings.max.earnings.median_earnings, '$0,0') }"
                         :min="{ value: 0, label: '0' }"
                         :max="{ value: 150000, label: '$150,000' }"
-                        :lowertip="minMaxEarnings.min.title.slice(0,-1)"
-                        :uppertip="minMaxEarnings.max.title.slice(0,-1)"
+                        :lowertip="minMaxEarnings.min.title.slice(0,-1)+ ' - '+ minMaxEarnings.min.credential.title"
+                        :uppertip="minMaxEarnings.max.title.slice(0,-1)+ ' - '+ minMaxEarnings.max.credential.title"
                         hideMiddle
                       ></range>
                       <p>depending on field of study.</p>
@@ -143,7 +143,7 @@
               <v-expansion-panels multiple focusable v-model="panels">
                 <v-expansion-panel>
                   <v-expansion-panel-header id="cost" aria-controls="costs-content">Costs</v-expansion-panel-header>
-                  <v-expansion-panel-content id="costs-content" class="pa-5">
+                  <v-expansion-panel-content id="costs-content" class="px-0 py-3 pa-sm-5">
                     <v-row v-if="!isProgramReporter">
                       <v-col cols="12" md="6">
                         <h2 class="mb-3">Average Annual Cost&nbsp;<tooltip definition="avg-cost-year" /></h2>
@@ -204,58 +204,6 @@
                       </v-col>
                     </v-row>
                     <div v-else>
-                      <!--<div class="school-single_col centered">
-                        <h2
-                          class="figure-heading constrain_width"
-                          aria-describedby="tip-cost-six-largest-programs"
-                          tabindex="0"
-                        >
-                          Largest Programs
-                          <span class="tooltip-target">
-                            <i class="fa fa-info-circle"></i>
-                          </span>
-                        </h2>
-                        <v-btn-toggle v-model="program_reporter_table" mandatory color="secondary">
-                          <v-btn small text value="program_reporter_total">Total</v-btn>
-                          <v-btn small text value="program_reporter_per_year">Per Academic Year</v-btn>
-                        </v-btn-toggle>
-
-                        <v-simple-table class="school-table programs-table">
-                          <caption
-                            v-if="program_reporter_table=='program_reporter_total'"
-                          >Total costs of largest programs</caption>
-                          <caption v-else>Costs of largest programs per academic year</caption>
-
-                          <thead>
-                            <tr>
-                              <th width="60%">Program Name</th>
-                              <th width="15%">Program Months</th>
-                              <th width="15%">Tuition, Fees, Books, Supplies</th>
-                            </tr>
-                          </thead>
-                          <tbody
-                            class="program-table-body"
-                            v-for="(item, index) in programReporter"
-                            :key="index"
-                          >
-                            <tr>
-                              <td>
-                                <span class="program">{{item.title}}</span>
-                              </td>
-                              <td>
-                                <span class="duration">{{item.avg_month_completion}}</span>
-                              </td>
-                              <td v-if="program_reporter_table=='program_reporter_total'">
-                                <span class="cost">{{item.full_program | numeral('$0,0')}}</span>
-                              </td>
-                              <td v-else>
-                                <span class="cost">{{item.annualized | numeral('$0,0')}}</span>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </v-simple-table>
-                      </div>
-                      <div class="u-new_line u-clearfix" style="margin-top: 15px;"></div>-->
                       <h2>
                         Cost After Aid for Largest Program
                         <tooltip definition="avg-program-cost" />
@@ -283,7 +231,7 @@
                     id="graduation"
                     aria-controls="graduation-content"
                   >Graduation &amp; Retention</v-expansion-panel-header>
-                  <v-expansion-panel-content id="graduation-content" class="pa-5">
+                  <v-expansion-panel-content id="graduation-content" class="px-0 py-3 pa-sm-5">
                     <v-row>
                       <v-col cols="12" md="6">
                         <h2 class="mb-3 text-center">
@@ -312,7 +260,7 @@
                     id="aid"
                     aria-controls="aid-content"
                   >Financial Aid &amp; Debt</v-expansion-panel-header>
-                  <v-expansion-panel-content id="aid-content" class="pa-5">
+                  <v-expansion-panel-content id="aid-content" class="px-0 py-3 pa-sm-5">
                     <v-alert
                       v-if="(_.get(school, fields['AID_ELIGIBILITY']) > 3) && (_.get(school, fields['AID_ELIGIBILITY']) < 8)"
                       type="info"
@@ -350,8 +298,8 @@
                               :upper="{ value: minMaxDebt.max.debt.median_debt, label: $options.filters.numeral(minMaxDebt.max.debt.median_debt, '$0,0') }"
                               :min="{ value: 0, label: '$0' }"
                               :max="{ value: 60000, label: '$60,000' }"
-                              :lowertip="minMaxDebt.min.title.slice(0,-1)"
-                              :uppertip="minMaxDebt.max.title.slice(0,-1)"
+                              lowertip=""
+                              :uppertip="minMaxDebt.max.title.slice(0,-1)+ ' - '+ minMaxDebt.max.credential.title"
                               hideMiddle
                               hideLower
                             ></range>
@@ -363,8 +311,8 @@
                               :upper="{ value: minMaxDebt.max.debt.median_debt, label: $options.filters.numeral(minMaxDebt.max.debt.median_debt, '$0,0') }"
                               :min="{ value: 0, label: '$0' }"
                               :max="{ value: 60000, label: '$60,000' }"
-                              :lowertip="minMaxDebt.min.title.slice(0,-1)"
-                              :uppertip="minMaxDebt.max.title.slice(0,-1)"
+                              :lowertip="minMaxDebt.min.title.slice(0,-1)+ ' - '+ minMaxDebt.min.credential.title"
+                              :uppertip="minMaxDebt.max.title.slice(0,-1)+ ' - '+ minMaxDebt.max.credential.title"
                               hideMiddle
                             ></range>
                             <p>depending on field of study for undergraduate borrowers who complete college</p>
@@ -420,7 +368,7 @@
                   <v-expansion-panel-content
                     id="earnings-content"
                     aria-controls="earnings-content"
-                    class="pa-5"
+                    class="px-0 py-3 pa-sm-5"
                   >
                     <p>One-year post-completion earnings with range of highest and lowest median earnings for undergraduate and credential programs for which there is data. For more information, see Fields of Study/Majors for this school.</p>
                     <div v-if="singleEarnings">
@@ -430,7 +378,7 @@
                         :min="{ value: 0, label: '$0' }"
                         :max="{ value: 150000, label: '$150,000' }"
                         lowertip=""
-                        :uppertip="minMaxEarnings.max.title.slice(0,-1)"
+                        :uppertip="minMaxEarnings.max.title.slice(0,-1)+ ' - '+ minMaxEarnings.max.credential.title"
                         hideMiddle
                         hideLower
                       ></range>
@@ -441,8 +389,8 @@
                       :upper="{ value: minMaxEarnings.max.highest_earnings, label: $options.filters.numeral(minMaxEarnings.max.highest_earnings, '$0,0') }"
                       :min="{ value: 0, label: '$0' }"
                       :max="{ value: 150000, label: '$150,000' }"
-                      :lowertip="minMaxEarnings.min.title.slice(0,-1)"
-                      :uppertip="minMaxEarnings.max.title.slice(0,-1)"
+                      :lowertip="minMaxEarnings.min.title.slice(0,-1)+ ' - '+ minMaxEarnings.min.credential.title"
+                      :uppertip="minMaxEarnings.max.title.slice(0,-1)+ ' - '+ minMaxEarnings.max.credential.title"
                       hideMiddle
                     ></range>
                     </div>
@@ -456,27 +404,35 @@
                     id="academics"
                     aria-controls="academics-content"
                   >Fields of Study / Majors</v-expansion-panel-header>
-                  <v-expansion-panel-content id="academics-content" class="pa-5">
+                  <v-expansion-panel-content id="academics-content" class="px-0 py-3 pa-sm-5">
                     <!-- <div if=''> -->
                     <h2 class='mb-3'>Top Fields of Study</h2>
-                    <p class='my-0'>Sort by:
-                    <v-btn-toggle v-model="field_sort" mandatory class="my-3" color="secondary">
-                      <v-btn small text value="ipeds_award_count">Largest Size</v-btn>
-                      <v-btn small text value="highest_earnings">Highest Earnings</v-btn>
-                      <v-btn small text value="lowest_debt">Lowest Debt</v-btn>
-                    </v-btn-toggle></p>
-                    <v-row class='mx-5 mt-5' v-if='fieldsOfStudy.length'>
+                    <p class='my-0'>
+                      <span class='d-block d-sm-inline'>Sort by:</span> 
+                      <v-btn class="ma-1" :color="field_sort == 'ipeds_award_count'? 'secondary':null"  small @click="field_sort = 'ipeds_award_count'">Largest Size</v-btn>
+                      <v-btn class="ma-1" :color="field_sort == 'highest_earnings'? 'secondary':null" small @click="field_sort = 'highest_earnings'">Highest Earnings</v-btn>
+                      <v-btn class="ma-1" :color="field_sort == 'lowest_debt'? 'secondary':null" small @click="field_sort = 'lowest_debt'">Lowest Debt</v-btn>
+                    </p>
+                    <v-row class='mx-5 mt-5 d-none d-sm-flex' v-if='fieldsOfStudy.length'>
                       <v-col cols="12" sm="8" class='ma-0 px-2 py-0 font-weight-bold'>Field of Study - Degree</v-col>
                       <v-col cols="12" sm="4" class='ma-0 pa-0 font-weight-bold'>{{currentHoist}}</v-col>
                     </v-row>
+                    <v-row class='mx-0 mt-5 d-block d-sm-none' v-if='fieldsOfStudy.length'>
+                      <v-col cols="12" class='ma-0 px-2 py-2 font-weight-bold'>Field of Study - Degree ({{currentHoist}}) </v-col>
+                    </v-row>
                     <v-expansion-panels class="my-3" v-if='fieldsOfStudy.length'>
                       <v-expansion-panel v-for="fos in fieldsOfStudy" :key="fos.code+'-'+fos.credential.level">
-                        <v-expansion-panel-header class='py-0'>
-                          <v-row no-gutters class='my-0' align="center">
+                        <v-expansion-panel-header class='py-0 pl-2 pl-sm-4'>
+                          <v-row no-gutters class='my-0 d-none d-sm-flex' align="center">
                             <v-col cols="12" sm="8" class='pa-2'>{{ fos.title.slice(0,-1) }} - {{ fos.credential.title }}</v-col>
                             <v-col v-if="hoistCurrency" cols="12" class="navy-text px-5 font-weight-bold" sm="4">{{ fos.hoist | numeral('$0,0') }}</v-col>
                             <v-col v-else cols="12" class="navy-text px-5 font-weight-bold" sm="4">{{ fos.hoist | separator }}</v-col>
                           </v-row>
+                          <div class='d-block d-sm-none my-2 mx-1 pl-0'>
+                            {{ fos.title.slice(0,-1) }} - {{ fos.credential.title }}
+                            <span v-if="hoistCurrency" class="navy-text font-weight-bold"> ({{ fos.hoist | numeral('$0,0') }})</span>
+                            <span v-else class="navy-text font-weight-bold" > ({{ fos.hoist | separator }})</span>
+                          </div>
                         </v-expansion-panel-header>
                         <v-expansion-panel-content>
                          <field-data :fos="fos" />
@@ -492,7 +448,10 @@
                       rounded
                       color="secondary"
                       :href="fieldsLink"
-                    >See All Available Fields of Study/Majors</v-btn>
+                    >
+                      <span class='d-none d-sm-flex'>See All Available Fields of Study/Majors</span>
+                      <span class='d-block d-sm-none'>See All</span>
+                    </v-btn>
                     <!--</div>
                      <div v-else>
                       <v-alert type="info">Fields of Study/Majors are not available for this institution. </v-alert>
@@ -505,7 +464,7 @@
                     aria-controls="demographics-content"
                     v
                   >Student Body</v-expansion-panel-header>
-                  <v-expansion-panel-content id="demographics-content" class="pa-5">
+                  <v-expansion-panel-content id="demographics-content" class="px-0 py-3 pa-sm-5">
                     <v-row>
                       <v-col cols="12" md="6" class="d-flex justify-space-around">
                         <school-icons :school="school" :fields="fields" :sizeOnly="true" />
@@ -575,7 +534,7 @@
                     id="selectivity"
                     aria-controls="selectivity-content"
                   >Test Scores &amp; Admittance</v-expansion-panel-header>
-                  <v-expansion-panel-content id="selectivity-content" class="pa-5">
+                  <v-expansion-panel-content id="selectivity-content" class="px-0 py-3 pa-sm-5">
                     <v-row>
                       <v-col cols="12" md="7">
                         <h2>
@@ -897,7 +856,7 @@ export default {
         
         for(let q=0; q<fos.length; q++)
         {
-          fos[q].ipeds_award_count = fos[q].counts.ipeds_awards1 + fos[q].counts.ipeds_awards2;
+          fos[q].ipeds_award_count = fos[q].counts.ipeds_awards2;
           fos[q].highest_earnings = fos[q].earnings.median_earnings;
           fos[q].lowest_debt = fos[q].debt.median_debt
           fos[q].hoist = fos[q][self.field_sort];

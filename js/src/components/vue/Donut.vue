@@ -6,8 +6,8 @@ export default {
   data() {
     return {
       options: {
-        responsive:false, 
-        maintainAspectRatio: false,
+        responsive: true, 
+        maintainAspectRatio: true,
         title: false,
         elements: {
             center: {

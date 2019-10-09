@@ -62,7 +62,7 @@
                   item-text="credential"
                   item-value="id"
                   v-model="currentFilter"
-                  label="Filter by Degree"
+                  label="Filter by Degree Level"
                   hide-details
                 ></v-select>
               </v-card>

@@ -11,6 +11,9 @@
 .pageBar{
   background-color: rgba(255,255,255,0.7) !important;
 }
+.searchFab{
+  z-index: 20 !important;
+}
 </style>
 
 <template>
@@ -150,7 +153,7 @@
 
               <v-card class="mt-4 mb-2 py-1 px-4 pageBar elevation-0"  v-if="!isLoading && results.schools.length > 0">
                 <v-row>
-                  <v-col cols="12" class>
+                  <v-col cols="12" class='pa-1'>
                     <div class="text-md-right">
                       Page:
                       <v-pagination
@@ -158,6 +161,7 @@
                         :length="totalPages"
                         :total-visible="7"
                         @input="searchAPI(parseURLParams())"
+                        circle
                       ></v-pagination>
                      
                     </div>
@@ -176,6 +180,7 @@
             rounded
             @click="showSidebar = !showSidebar"
             v-if="$vuetify.breakpoint.mdAndDown"
+            class="searchFab"
           >
             <v-icon>fas fa-search</v-icon>
           </v-btn>

@@ -50,8 +50,7 @@
       </v-row>
       <v-row class='result-card-info-container v-flex align-center'>
         <v-col cols='7' class='py-2'>
-          <span v-if='!field_of_study'>Salary After Completing&nbsp;<tooltip definition="avg-salary" /></span>          
-          <span v-else>Salary After Completing for {{field_of_study}}&nbsp;<tooltip definition="avg-salary" /></span>          
+          <span>Salary After Completing&nbsp;<tooltip definition="avg-salary" /></span>          
         </v-col>
         <v-col cols='5' class="pr-0 text--black py-2">
           <h3>{{displayEarn}}</h3>
