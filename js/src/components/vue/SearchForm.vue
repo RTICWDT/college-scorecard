@@ -647,8 +647,9 @@ export default {
         let vm = this;
         navigator.geolocation.getCurrentPosition(function(position){
           vm.location.latLon = vm.calculateBoundingBox(position.coords.latitude,position.coords.longitude, vm.location.miles * 1.609); // Convert miles to KM (Aprroximate)
+          vm.location.isLoading = false;
         });
-        this.location.isLoading = false;
+        
       } else {
         // TODO: Error Handling.
         console.log("Uh oh, Location no likie.");
