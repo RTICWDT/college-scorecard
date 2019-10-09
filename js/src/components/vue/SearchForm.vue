@@ -25,13 +25,15 @@
     <p class='subhead-2'>
       Location
 
-      <v-btn text 
+      <v-btn text
         icon
         :color="locationButtonColor"
         @click="handleLocationCheck"
       >
         <v-icon>mdi-near-me</v-icon>
       </v-btn>
+
+      <v-icon color="#0e365b" v-show="location.isLoading">fas fa-circle-notch fa-spin</v-icon>
     </p>    
     <v-select v-model="input.state"
       :items="site.data.states"
@@ -407,6 +409,7 @@ export default {
       location:{
         latLon: null,
         miles: 50, //In Miles.
+        isLoading: false,
       },
       utility:{
         rules:{
@@ -638,15 +641,18 @@ export default {
     //   }
     // },
     handleLocationCheck(){
+      this.location.isLoading = true;
+
       if (navigator.geolocation) {
         let vm = this;
         navigator.geolocation.getCurrentPosition(function(position){
           vm.location.latLon = vm.calculateBoundingBox(position.coords.latitude,position.coords.longitude, vm.location.miles * 1.609); // Convert miles to KM (Aprroximate)
         });
-
+        this.location.isLoading = false;
       } else {
         // TODO: Error Handling.
-        console.log("Uh oh, Location no likie.")
+        console.log("Uh oh, Location no likie.");
+        this.location.isLoading = false;
       }
     },
     //Distance: Referenced from: https://stackoverflow.com/a/25025590
