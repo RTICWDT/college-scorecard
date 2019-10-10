@@ -1,6 +1,5 @@
 <style lang="scss" scoped>
   .search-form-degree-wrapper{
-    
     .v-messages{
       display: none;
     }
@@ -15,6 +14,10 @@
   .search-panel-header{
     background-color: #C5D3E1; 
     border-radius: 0px !important;
+  }
+
+  #search-form-sub-degree-container{
+    border-left: 1px solid black;
   }
 </style>
 
@@ -73,7 +76,7 @@
     <field-autocomplete v-model="input.cip4"></field-autocomplete>
     
     <!-- cip4 - Degree subfield -->
-    <!-- <div class="search-form-sub-degree-wrapper" v-show="input.cip4">
+    <div id="search-form-sub-degree-container" class="mt-4 pl-2 ml-4" v-show="input.cip4">
       <v-checkbox
         class="search-form-degree-cb my-0 py-0"
         v-model="input.cip4_degree"
@@ -100,7 +103,7 @@
         color="secondary"
         hide-details
       ></v-checkbox>
-    </div> -->
+    </div>
 
     <!-- <p class='subhead-2'>Length</p>
     <div class="search-form-degree-wrapper">

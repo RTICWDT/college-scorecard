@@ -457,7 +457,12 @@ export default {
     closeModal(){
       this.showCompare = false;
     },
-    clearSearchForm: () => {
+    clearSearchForm(){
+      this.input = {
+        page: 0,
+        sort: this.defaultSort
+      };
+      
       EventBus.$emit('search-form-reset');
     }
   }

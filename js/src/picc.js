@@ -2136,7 +2136,26 @@ picc.form.prepareParams = (function() {
 
     // TODO: Finish implementing this feature.
     cip4_degree: function(query, value, key){
-      // FIELD_OF_STUDY_LENGTH
+      var fosArray = [];
+
+      for(var i in value){
+        switch (value[i].toLowerCase()){
+          case 'c':
+            fosArray.push('1');
+            break;
+          case 'a':
+            fosArray.push('2');
+            break;
+          case 'b':
+            fosArray.push('3');
+            break;
+          default:
+            return;
+        }
+      }
+
+      query[fields.FIELD_OF_STUDY_LENGTH] = fosArray.join(",");
+      delete query[key];
     },
 
     locale: function(query, value, key){
