@@ -366,6 +366,10 @@ export default {
         picc.fields.FIELD_OF_STUDY
       ].join(",");
 
+      // TODO: Need to remove this when API
+      // is processing requests better
+      query['all_programs'] = true;
+      
       let qs = this.generateQueryString(params);
       history.replaceState(params, "search", qs);
 

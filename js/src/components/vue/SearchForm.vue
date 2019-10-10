@@ -345,7 +345,7 @@
     </div>
 
     <div id="search-submit-container" class="pa-2 text-center" v-if="!autoSubmit">
-      <v-btn color="secondary" rounded @click="$emit('search-query',cleanInput)">Submit</v-btn>
+      <v-btn color="secondary" rounded @click="$emit('search-query',cleanInput)">Go</v-btn>
     </div>
 
   </v-form>

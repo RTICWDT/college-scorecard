@@ -584,7 +584,7 @@
                         <donut
                           color="#0e365b"
                           :value="_.get(school, this.fields['ADMITTANCE_RATE'])*100"
-                          v-if="!_.get(school, this.fields['OPEN_ADMISSIONS'])"
+                          v-if="_.get(school, this.fields['OPEN_ADMISSIONS'])!=1"
                           chart-id="admittance-chart"
                           :height="200"
                           :width="300"

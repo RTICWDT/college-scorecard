@@ -45,7 +45,7 @@
           <span>Graduation Rate&nbsp;<tooltip definition="graduation-rate" /></span>
         </v-col>
         <v-col cols='5' class="pr-0 text--black py-2">
-          <h3 >{{displayGradRate  | numeral('0.%') }}</h3>
+          <h3 class='navy-text'>{{displayGradRate  | numeral('0.%') }}</h3>
         </v-col>
       </v-row>
       <v-row class='result-card-info-container v-flex align-center'>
@@ -53,7 +53,7 @@
           <span>Salary After Completing&nbsp;<tooltip definition="avg-salary" /></span>          
         </v-col>
         <v-col cols='5' class="pr-0 text--black py-2">
-          <h3>{{displayEarn}}</h3>
+          <h3 class='navy-text'>{{displayEarn}}</h3>
         </v-col>
       </v-row>
       <v-row class='result-card-info-container v-flex align-center' v-if="!isProgramReporter">
@@ -61,7 +61,7 @@
           <span>Average Annual Cost&nbsp;<tooltip definition="avg-cost-year" /></span>
         </v-col>
         <v-col cols='5' class="pr-2 text--black py-0">
-          <h3>{{displayAvgCost}}</h3>
+          <h3 class='navy-text'>{{displayAvgCost}}</h3>
         </v-col>
       </v-row>
       <v-row class='result-card-info-container' v-else>
@@ -115,16 +115,31 @@ export default {
       return _.get(this.school, this.fields.PROGRAM_REPORTER_OFFERED) > 0;
     },
     displayEarn(){
-      let programs = _.get(this.school, 'latest.programs.cip_4_digit', false);
-      if(programs && programs.length==1 && this.school['latest.programs.cip_4_digit'][0]['title'])
+      let fos = _.get(this.school, 'latest.programs.cip_4_digit', false);
+      if(!fos.length)
       {
-        let label  = this.school['latest.programs.cip_4_digit'][0]['title'];
-        this.field_of_study = label.slice(0,-1);
-        return '$NNK'
+        fos = [fos];
+      }
+      if(!fos)
+      {
+        return 'N/A';
+      }
+      let cleanEarnings = fos.filter(obj => obj.earnings.median_earnings && obj.credential.level <= 3);
+      if(cleanEarnings.length===0)
+      {
+        return 'N/A';
+      }
+      let orderedEarnings = cleanEarnings.sort((a, b) =>   a.earnings.median_earnings-b.earnings.median_earnings);
+      let single = (orderedEarnings.length==1 || (orderedEarnings.length==2 && orderedEarnings[0].earnings.median_earnings == orderedEarnings[1].earnings.median_earnings));
+      let minMax = { min: orderedEarnings[0], max: orderedEarnings[orderedEarnings.length-1]};
+
+      if(single)
+      {
+        return "$"+this.$options.filters.numeral(minMax.min.earnings.median_earnings, 'a');
       }
       else
       {
-        return "$NN-NNK";
+        return "$"+this.$options.filters.numeral(minMax.min.earnings.median_earnings, 'a')+"-"+this.$options.filters.numeral(minMax.max.earnings.median_earnings, 'a');
       }
     },
     displayAvgCost(){
