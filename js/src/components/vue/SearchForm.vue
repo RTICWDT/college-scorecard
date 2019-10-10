@@ -69,7 +69,7 @@
       </v-col>
     </v-row> -->
 
-    <p class='subhead-2'>Field of Study/Major</p>
+    <p class='subhead-2'>Academic Fields Offered</p>
     <field-autocomplete v-model="input.cip4"></field-autocomplete>
     
     <!-- cip4 - Degree subfield -->
@@ -345,7 +345,7 @@
     </div>
 
     <div id="search-submit-container" class="pa-2 text-center" v-if="!autoSubmit">
-      <v-btn color="secondary" rounded @click="$emit('search-query',cleanInput)">Go</v-btn>
+      <v-btn color="secondary" rounded @click="$emit('search-query',cleanInput)">Find Schools</v-btn>
     </div>
 
   </v-form>
