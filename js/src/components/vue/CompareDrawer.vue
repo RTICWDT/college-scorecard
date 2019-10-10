@@ -20,14 +20,14 @@
             class="ma-0 pa-0"
           ></v-checkbox>
         </div>
-        <!-- TODO: place this better -->
-        <!-- <p>
+        <p>
           <v-btn rounded color="secondary" href="/compare/">Compare Schools</v-btn>
-        </p> -->
+        </p>
       </v-col>
       <v-col cols="12" sm="6">
         <p>
-          <share :url="shareUrl" label="Share this Comparison" />
+          <!-- TODO: place this better -->
+          <!-- <share :url="shareUrl" label="Share this Comparison" /> -->
         </p>
       </v-col>
     </v-row>
