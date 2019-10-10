@@ -14,7 +14,7 @@
     </div>
     <div class="data-navigation">
       <v-container class="py-0">
-        <v-tabs background-color="grey lighten-3" v-model="dataTabs">
+        <v-tabs hide-slider background-color="grey lighten-3" v-model="dataTabs">
           <v-tab href="/data/" value="home">Data Home</v-tab>
           <v-tab href="/data/documentation/" value="documentation">Documentation</v-tab>
           <v-tab href="/data/changelog/" value="changelog">Change Log</v-tab>
@@ -31,6 +31,10 @@
 }
 .conversation {
   background-color: $mid-gray;
+}
+.v-tab--active{
+  background-color: $darker-green !important;
+  color: $white !important;
 }
 </style>
 <script>
