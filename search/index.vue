@@ -7,6 +7,10 @@
 }
 .searchSidebar {
   height: auto !important;
+  
+}
+.v-navigation-drawer__content{
+  height: 100vh !important;
 }
 .pageBar{
   background-color: rgba(255,255,255,0.7) !important;
