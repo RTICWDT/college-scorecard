@@ -79,9 +79,9 @@
       <v-container>
         <v-row>
           <v-col cols="12" md="5" offset-md="1">
-            <h2 class="title">College Alternatives</h2>
+            <h2 class="title">Alternative Pathways to a Career</h2>
 
-            <p>Apprenticeships are another great way to jumpstart your career.</p>
+            <p><strong>Apprenticeships</strong> are another great way to jumpstart your career.</p>
             <p>
               <v-btn
                 rounded
@@ -90,7 +90,7 @@
                 target="_blank"
               >Find one that's right for you!</v-btn>
             </p>
-            <p>Curious what careers are out there? O*NET’s career explorer is there to help!</p>
+            <p>Curious what careers are out there? <strong>O*NET’s career explorer</strong> is there to help!</p>
             <p>
               <v-btn
                 rounded
