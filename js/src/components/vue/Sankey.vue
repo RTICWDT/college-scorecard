@@ -52,6 +52,9 @@
     rect[fill="#ffffff"]{
       display:none;
     }
+    rect{
+      fill-opacity: 1 !important;
+    }
   }
   .google-visualization-tooltip{
     display:none;

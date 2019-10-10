@@ -1,6 +1,7 @@
 <template>
   <div class="range-chart">
     <div
+      v-if="!hideLower"
       :style="{ left: bar_styles.left, right: bar_styles.right }"
       class="picc-range-bar"
       ref="bar"
@@ -101,12 +102,12 @@
     &.picc-range-label-middle,
     &.picc-range-label-lower,
     &.picc-range-label-upper {
-      border-left: 1px solid black;
+      border-left: 3px solid $dark-blue;
     }
 
     &.picc-range-label-upper {
       border-left: none;
-      border-right: 1px solid black;
+      border-right: 3px solid $dark-blue;
     }
 
     &.picc-range-label-min,
