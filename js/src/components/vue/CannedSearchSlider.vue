@@ -1,5 +1,11 @@
 <template>
-  <v-switch :label="label" inset color="secondary" @change="$emit('canned-search-toggle', {value: $event, data: addToQuery})" hide-details>
+  <v-switch :label="label" 
+    inset 
+    color="secondary" 
+    @change="$emit('canned-search-toggle', {value: $event, data: addToQuery})" 
+    hide-details
+    :loading="isLoading"
+  >
 
   </v-switch>
 </template>
@@ -17,10 +23,7 @@ export default {
       type: Array,
       default: null
     },
-    // removeFromQuery: {
-    //   type: Object,
-    //   default: null
-    // }
+    isLoading:Boolean
   }
 }
 </script>

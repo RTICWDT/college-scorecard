@@ -358,10 +358,11 @@ import CheckRange from './CheckRange.vue';
 import NameAutocomplete from './NameAutocomplete.vue';
 import FieldAutocomplete from './FieldAutocomplete.vue';
 import { SiteData } from '../../vue/mixins/SiteData.js';
+import LocationCheck from '../../vue/mixins/LocationCheck.js';
 import { EventBus } from '../../vue/EventBus.js';
 
 export default {
-  mixins:[SiteData],
+  mixins:[SiteData,LocationCheck],
   props:{
     urlParsedParams: {
       type: Object
@@ -406,12 +407,6 @@ export default {
         lat: null,
         long: null,
         locale:[]
-      },
-      location:{
-        latLon: null,
-        miles: 50, //In Miles.
-        isLoading: false,
-        error: null
       },
       utility:{
         rules:{
@@ -604,6 +599,11 @@ export default {
           return parseFloat(newObjValue.substr(2))
         }
 
+        // if (key === 'location' && value){
+        //   // Unset
+        //   // Call location
+        // }
+
       });
 
       // TODO - Refactor to a more elegant. Loop through all utility enables, and trigger on.
@@ -634,102 +634,6 @@ export default {
 
     },
     processChangeEvent(){
-    },
-    // handleSizeClick(value){
-    //   if(value === this.input.size){
-    //     this.input.size = ""
-    //   }else{
-    //     this.input.size = value;
-    //   }
-    // },
-    handleLocationCheck(){
-      this.location.isLoading = true;
-      this.location.error = null;
-
-      if (navigator.geolocation) {
-        let vm = this;
-        navigator.geolocation.getCurrentPosition(function(position){
-          vm.location.latLon = vm.calculateBoundingBox(position.coords.latitude,position.coords.longitude, vm.location.miles * 1.609); // Convert miles to KM (Aprroximate)
-          vm.location.isLoading = false;
-        });
-        
-      } else {
-        this.location.isLoading = false;
-        this.location.error = "Not Available"
-      }
-    },
-    //Distance: Referenced from: https://stackoverflow.com/a/25025590
-    calculateBoundingBox(lat,long,distance){
-      let MIN_LAT, MAX_LAT, MIN_LON, MAX_LON, R, radDist, degLat, degLon, radLat, radLon, minLat, maxLat, minLon, maxLon, deltaLon;
-      
-      if (distance < 0) {
-        return 'Illegal arguments';
-      }
-
-      // helper functions (degrees<–>radians)
-      Number.prototype.degToRad = function () {
-        return this * (Math.PI / 180);
-      };
-
-      Number.prototype.radToDeg = function () {
-        return (180 * this) / Math.PI;
-      };
-
-      // coordinate limits
-      MIN_LAT = (-90).degToRad();
-      MAX_LAT = (90).degToRad();
-      MIN_LON = (-180).degToRad();
-      MAX_LON = (180).degToRad();
-
-      // Earth's radius (km)
-      R = 6378.1;
-
-      // angular distance in radians on a great circle
-      radDist = distance / R;
-
-      // center point coordinates (deg)
-      degLat = lat;
-      degLon = long;
-
-      // center point coordinates (rad)
-      radLat = degLat.degToRad();
-      radLon = degLon.degToRad();
-
-      // minimum and maximum latitudes for given distance
-      minLat = radLat - radDist;
-      maxLat = radLat + radDist;
-
-      // minimum and maximum longitudes for given distance
-      minLon = void 0;
-      maxLon = void 0;
-
-      // define deltaLon to help determine min and max longitudes
-      deltaLon = Math.asin(Math.sin(radDist) / Math.cos(radLat));
-      if (minLat > MIN_LAT && maxLat < MAX_LAT) {
-        minLon = radLon - deltaLon;
-        maxLon = radLon + deltaLon;
-        if (minLon < MIN_LON) {
-          minLon = minLon + 2 * Math.PI;
-        }
-        if (maxLon > MAX_LON) {
-          maxLon = maxLon - 2 * Math.PI;
-        }
-      }
-
-      // a pole is within the given distance
-      else {
-        minLat = Math.max(minLat, MIN_LAT);
-        maxLat = Math.min(maxLat, MAX_LAT);
-        minLon = MIN_LON;
-        maxLon = MAX_LON;
-      }
-
-      return{
-        min_lat:minLat.radToDeg(),
-        max_lat:maxLat.radToDeg(),
-        min_lon:minLon.radToDeg(),
-        max_lon:maxLon.radToDeg()
-      };
     },
     //Reset form to default.
     resetFormDefault(){

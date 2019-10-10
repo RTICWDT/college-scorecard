@@ -97,6 +97,7 @@
                 </v-row>
               </v-card>
             <div id="search-can-query-container" v-if="!isLoading && results.schools.length === 0">
+            <!-- <div id="search-can-query-container" v-if="!isLoading"> -->
               <v-row>
                 <v-col cols="12" md="4" sm="12" xs="12">
                   <div id="search-can-query-text">

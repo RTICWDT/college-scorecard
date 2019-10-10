@@ -3,9 +3,10 @@
     <v-row>
       <v-col md="4" sm="12" cols="12" class="text-center canned-search-wrapper py-0 my-0">
         <canned-search-slider
-          label="Schools Near Me (Placeholder)"
-          :add-to-query="[{state:['MA']}]"
+          label="Schools Near Me"
+          :add-to-query="[{location:true}]"
           @canned-search-toggle="handleCannedToggle"
+          :is-loading="location.isLoading"
         ></canned-search-slider>
         <canned-search-slider
           label="Most People Get In"
@@ -42,24 +43,46 @@
 import querystring from "querystring";
 import CannedSearchSlider from "components/vue/CannedSearchSlider.vue";
 import _ from "lodash";
+import LocationCheck from '../../vue/mixins/LocationCheck.js';
 
 export default {
+  mixins:[LocationCheck],
   data() {
     return {
-      query: {}
+      query: {},
     };
   },
   components: {
     "canned-search-slider": CannedSearchSlider
   },
+  watch:{
+    'location.latLon':{
+      // Proccess Lat/Long object for url values.
+      handler(newValue,oldValue){
+        if(newValue != null && newValue.min_lat && newValue.max_lat && newValue.min_lat && newValue.max_lat){
+          this.query.lat = newValue.min_lat.toFixed(4) + ".." + newValue.max_lat.toFixed(4);
+          this.query.long = newValue.min_lon.toFixed(4) + ".." + newValue.max_lon.toFixed(4);
+        }
+      }
+    },
+  },
   methods: {
     handleCannedToggle(data) {
       if (data.value) {
-        // Add
-        this.query = Object.assign({}, this.query, data.data[0]);
+        // Check for location
+        if(data.data[0].location){
+          this.handleLocationCheck();
+        }else{
+          this.query = Object.assign({}, this.query, data.data[0]);
+        }
       } else {
-        // Remove
-        let vm = this;
+        // Remove location
+        if(data.data[0].location){
+          delete this.query['lat'];
+          delete this.query['long'];
+        }
+
+        // Handle Everything else
         this.query = _.omitBy(this.query, function(value, key) {
           if (data.data[0][key]) {
             return true;
