@@ -15,7 +15,7 @@
             class='pt-0 mt-0'
             color="secondary"
             outlined
-             prepend-inner-icon="search"
+            prepend-inner-icon="search"
          />
     </div>
 </template>
@@ -36,12 +36,8 @@ export default {
       }
     },
     watch: {
-      search (val) {
-        // Items have already been loaded
-        //if (this.items.length > 0) return
-
-        // Items have already been requested
-        if (this.isLoading) return
+      search: _.debounce(function(newVal){
+        //if (this.isLoading) return
 
         this.isLoading = true
         var self = this;
@@ -49,13 +45,12 @@ export default {
         query[picc.fields.NAME] = this.search;
         query = picc.form.prepareParams(query);
 
-        //uses debounced search call to avoid API spam
-        picc.API.debounced_search(query, function(error, data){
+        picc.API.search(query, function(error, data){
             if (error || !data.results.length) { return {}; }
             self.items = data.results;
             self.isLoading = false;
         });
-      }
-    },
+      },200)
+    }
   }
 </script>
