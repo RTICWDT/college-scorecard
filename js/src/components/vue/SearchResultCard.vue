@@ -45,7 +45,7 @@
           <span>Graduation Rate&nbsp;<tooltip definition="graduation-rate" /></span>
         </v-col>
         <v-col cols='5' class="pr-0 text--black py-2">
-          <h3 class='navy-text'>{{displayGradRate  | numeral('0.%') }}</h3>
+          <h3 class='navy-text'>{{displayGradRate}}</h3>
         </v-col>
       </v-row>
       <v-row class='result-card-info-container v-flex align-center'>
@@ -56,20 +56,15 @@
           <h3 class='navy-text'>{{displayEarn}}</h3>
         </v-col>
       </v-row>
-      <v-row class='result-card-info-container v-flex align-center' v-if="!isProgramReporter">
+      <v-row class='result-card-info-container v-flex align-center' >
         <v-col cols='7' class='py-2'>
-          <span>Average Annual Cost&nbsp;<tooltip definition="avg-cost-year" /></span>
+          <span v-if="!isProgramReporter">Average Annual Cost&nbsp;<tooltip definition="avg-cost-year" /></span>
+          <span v-else>Average Annual Cost for Largest Program&nbsp;<tooltip definition="coming-soon" /></span>
         </v-col>
         <v-col cols='5' class="pr-2 text--black py-0">
           <h3 class='navy-text'>{{displayAvgCost}}</h3>
         </v-col>
       </v-row>
-      <v-row class='result-card-info-container' v-else>
-        <v-col cols="12" class=''>
-          <p class='grey--text lighten-2'>The average annual net price is not available for this program-reporting school.</p>
-        </v-col>
-      </v-row>
-      
     </v-card-text>
   </v-card>
 </template>
@@ -103,11 +98,15 @@ export default {
       let OM = _.get(this.school, this.fields.COMPLETION_OM);
       let G200_4 = _.get(this.school, this.fields.COMPLETION_200_4);
       let G200_LT4 = _.get(this.school, this.fields.COMPLETION_200_LT4);
-      if(OM){
-        return OM;
+      if(!OM & !G200_4 & !G200_LT4)
+      {
+        return 'N/A';
+      }
+      else if(OM){
+        return this.$options.filters.numeral(OM,'0.%');
       }
       else{
-        if(G200_LT4 || G200_4) return (this.years==3) ? G200_4 : G200_LT4;
+        if(G200_LT4 || G200_4) return (this.years==3) ? this.$options.filters.numeral(G200_4,'0.%') : this.$options.filters.numeral(G200_LT4,'0.%');
         else return "N/A";
       }
     },
