@@ -478,9 +478,9 @@ picc.fields = {
   NET_PRICE:            'latest.cost.avg_net_price.overall',
   NET_PRICE_BY_INCOME:  'latest.cost.net_price',
 
-  // completion rate - TODO: Change to new endpoint below
-  //COMPLETION_RATE:      'latest.completion.rate_suppressed.overall',
-  COMPLETION_RATE:      'latest.completion.consumer_rate',
+  // completion rate
+  COMPLETION_RATE:      'latest.completion.rate_suppressed.overall',
+  // COMPLETION_RATE:      'latest.completion.consumer_rate', Old Value
 
   // new rates
   COMPLETION_OM:        'latest.completion.outcome_percentage_suppressed.all_students.8yr.award_pooled',
