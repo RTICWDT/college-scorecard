@@ -1,6 +1,8 @@
 var formdb = require('formdb');
 
-module.exports = function index() {
+// module.exports = function index() {
+
+export default function index(){
 
   var form = new formdb.Form('#search-form');
   picc.form.minifyQueryString(form);

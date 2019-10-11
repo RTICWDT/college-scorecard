@@ -8,6 +8,7 @@ module.exports = {
     filename: 'picc.js',
     path: __dirname + '/js',
     library: "picc",
+    libraryExport: "default",
     libraryTarget: "umd"
   },
   module: {
@@ -17,9 +18,9 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env']
-          }
+          // options: {
+          //   presets: ['@babel/preset-env']
+          // }
         }
       }
     ]

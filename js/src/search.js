@@ -4,7 +4,8 @@ var formdb = require('formdb');
 var querystring = require('querystring');
 var d3 = require('d3');
 
-module.exports = function search() {
+// module.exports = function search() {
+export default function search(){
 
   var resultsRoot = document.querySelector('.search-results');
   var paginator = resultsRoot.querySelector('.pagination');

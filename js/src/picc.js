@@ -11,7 +11,7 @@ if (typeof window !== 'undefined') {
     // polyfill custom elements v1
     require('document-register-element');
   }
-  require('./components');
+  // require('./components');
   var tagalong = require('./tagalong');
   var jQuery = require("jquery");
   var typeahead = require("typeahead.js-browserify");
@@ -3148,4 +3148,4 @@ if (typeof document !== 'undefined') {
   }
 }
 
-module.exports = picc;
+export default picc;
