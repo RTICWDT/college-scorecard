@@ -89,7 +89,7 @@
       <v-checkbox
         class="search-form-degree-cb my-0 py-0"
         v-model="input.cip4_degree"
-        label="Assocaite's Degree"
+        label="Associate's Degree"
         value="a"
         color="secondary"
         hide-details
