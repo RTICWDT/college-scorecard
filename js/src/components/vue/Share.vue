@@ -7,7 +7,7 @@
           rounded
           :small="small"
         >
-          {{label}}
+          <v-icon x-small class='mr-2'>fas fa-share</v-icon> {{label}}
         </v-btn>
       </template>
       <v-list dense>
@@ -42,7 +42,7 @@ export default {
         let sentence = '';
         switch(this.label.toLowerCase())
         {
-          case 'share this search':
+          case 'share':
             sentence = 'Take a look at this school search from the College Scorecard:';
           break;
           case 'share this comparison':

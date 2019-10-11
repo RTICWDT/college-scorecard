@@ -37,8 +37,6 @@ export default {
     },
     watch: {
       search: _.debounce(function(newVal){
-        //if (this.isLoading) return
-
         this.isLoading = true
         var self = this;
         var query = { fields: ([picc.fields.NAME,picc.fields.ID]).join(','), per_page: 20 };
