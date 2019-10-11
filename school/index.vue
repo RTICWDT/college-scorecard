@@ -2,7 +2,7 @@
   <v-app id="app" class="school-page">
     <div class="backNav">
       <div class="container school-back">
-        <v-btn small color="secondary" rounded id="referrer-link" class="link-more" href="/search/">
+        <v-btn small color="secondary" rounded id="referrer-link" class="link-more" :href="searchURL">
           &laquo; Back to search
         </v-btn>
       </div>
@@ -658,9 +658,10 @@ import FieldData from "components/vue/FieldData.vue";
 import NetPriceLink from "components/vue/NetPriceLink.vue";
 import SearchForm from "components/vue/SearchForm.vue";
 import { compare } from 'vue/mixins.js';
+import URLHistory from '../js/src/vue/mixins/URLHistory.js';
 
 export default {
-  mixins: [compare],
+  mixins: [compare,URLHistory],
   props: ["baseUrl",'compareSchools'],
   components: {
     donut: Donut,
@@ -918,6 +919,14 @@ export default {
       if(url =='#') return false;
       else if(url.match(/^http/)) return url;
       else return 'http://'+url;
+    },
+    searchURL(){
+      let qs = this.returnURLFromStorage();
+      if(qs){
+        return '/search' + qs;
+      }else{
+        return '/search';
+      }
     }
   },
 

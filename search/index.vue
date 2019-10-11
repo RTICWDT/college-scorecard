@@ -212,6 +212,7 @@ import CannedSearchContainer from "components/vue/CannedSearchContainer.vue";
 import CompareHeader from "components/vue/CompareHeader.vue";
 import Share from "components/vue/Share.vue";
 import NameAutocomplete from "components/vue/NameAutocomplete.vue";
+import URLHistory from '../js/src/vue/mixins/URLHistory.js';
 
 import _ from "lodash";
 // import querystring from 'querystring';
@@ -230,6 +231,7 @@ export default {
     "share": Share,
     "name-autocomplete": NameAutocomplete
   },
+  mixins:[URLHistory],
   props: {
     "page-permalink": String,
     states: Array,
@@ -373,6 +375,8 @@ export default {
       
       let qs = this.generateQueryString(params);
       history.replaceState(params, "search", qs);
+
+      this.addURLToStorage(qs);
 
       let vm = this;
       let req = picc.API.search(query, function(error, data) {
