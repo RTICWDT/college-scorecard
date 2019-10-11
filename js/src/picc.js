@@ -1,4 +1,5 @@
 'use strict';
+import "@babel/polyfill";
 
 if (typeof window !== 'undefined') {
   // for polyfilling common JS APIs
@@ -809,70 +810,70 @@ picc.access.isProgramReporter = function(d) {
   return picc.access(picc.fields.PROGRAM_REPORTER_OFFERED)(d);
 }
 
-picc.access.largestProgramsReported = function(d, basis) {
+// picc.access.largestProgramsReported = function(d, basis) {
 
-  if (!picc.access.isProgramReporter) return [];
+//   if (!picc.access.isProgramReporter) return [];
 
-  if(!basis) {
-    basis = 'full_program';
-  }
+//   if(!basis) {
+//     basis = 'full_program';
+//   }
 
-  const otherBasis = (basis === 'full_program') ? 'annualized' : 'full_program';
+//   const otherBasis = (basis === 'full_program') ? 'annualized' : 'full_program';
 
-  return Object.entries(picc.programReporterCip).map(item => {
-    let program = picc.access.composed(
-      picc.fields.PROGRAM_REPORTER_PROGRAM,
-      item[1],
-      picc.fields.PROGRAG_REPORTER_CIP,
-      'title'
-    )(d);
+//   return Object.entries(picc.programReporterCip).map(item => {
+//     let program = picc.access.composed(
+//       picc.fields.PROGRAM_REPORTER_PROGRAM,
+//       item[1],
+//       picc.fields.PROGRAG_REPORTER_CIP,
+//       'title'
+//     )(d);
 
-    if (program) {
-      program = program.replace(/\//g," / "); // space out slash so we can break word on mobile
-    }
+//     if (program) {
+//       program = program.replace(/\//g," / "); // space out slash so we can break word on mobile
+//     }
 
-    const cost = picc.access.composed(
-      picc.fields.PROGRAM_REPORTER_COST,
-      item[1],
-      picc.fields.PROGRAG_REPORTER_CIP,
-      basis
-    )(d);
+//     const cost = picc.access.composed(
+//       picc.fields.PROGRAM_REPORTER_COST,
+//       item[1],
+//       picc.fields.PROGRAG_REPORTER_CIP,
+//       basis
+//     )(d);
 
-    const costDollar = picc.format.dollars()(cost);
+//     const costDollar = picc.format.dollars()(cost);
 
-    const otherCost = picc.access.composed(
-      picc.fields.PROGRAM_REPORTER_COST,
-      item[1],
-      picc.fields.PROGRAG_REPORTER_CIP,
-      otherBasis
-    )(d);
+//     const otherCost = picc.access.composed(
+//       picc.fields.PROGRAM_REPORTER_COST,
+//       item[1],
+//       picc.fields.PROGRAG_REPORTER_CIP,
+//       otherBasis
+//     )(d);
 
-    const otherCostDollar = picc.format.dollars()(otherCost);
+//     const otherCostDollar = picc.format.dollars()(otherCost);
 
-    const costs = {
-      [basis]: costDollar,
-      [otherBasis]: otherCostDollar
-    };
+//     const costs = {
+//       [basis]: costDollar,
+//       [otherBasis]: otherCostDollar
+//     };
 
-    const isYearLong = (cost === otherCost);
+//     const isYearLong = (cost === otherCost);
 
-    const duration = picc.access.composed(
-      picc.fields.PROGRAM_REPORTER_PROGRAM,
-      item[1],
-      picc.fields.PROGRAG_REPORTER_CIP,
-      'avg_month_completion'
-    )(d);
+//     const duration = picc.access.composed(
+//       picc.fields.PROGRAM_REPORTER_PROGRAM,
+//       item[1],
+//       picc.fields.PROGRAG_REPORTER_CIP,
+//       'avg_month_completion'
+//     )(d);
 
-    return {
-      program,
-      cost: costDollar,
-      costs,
-      duration,
-      isYearLong,
-      basis
-    }
-  }).filter(item => item.program);
-};
+//     return {
+//       program,
+//       cost: costDollar,
+//       costs,
+//       duration,
+//       isYearLong,
+//       basis
+//     }
+//   }).filter(item => item.program);
+// };
 
 picc.access.largestProgramReported = function(d) {
 
