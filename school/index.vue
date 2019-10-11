@@ -8,7 +8,7 @@
           rounded
           id="referrer-link"
           class="link-more"
-          href="/search/"
+          :href="searchURL"
         >&laquo; Back to search</v-btn>
       </div>
     </div>
