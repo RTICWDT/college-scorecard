@@ -29,6 +29,11 @@ export default {
         cip4:{}
     }
   },
+  watch:{
+    value(){
+      this.cip4 = this.mapValuePropToState(this.value);
+    },
+  },
   computed: {
     items() {
       return _.sortBy(picc.CIP4,['field']);
@@ -41,7 +46,8 @@ export default {
   mounted(){
     // Clear form event.
     EventBus.$on('search-form-reset', () => {
-      this.cip4 = {};
+      // TODO - Remove if not needed.
+      // this.cip4 = {};
     });
   },
   methods:{
