@@ -32,23 +32,3 @@
 #search-result-info-container{
   padding: 1rem 2rem;
 }
-
-.v-pagination{
-  width: auto;
-  li:last-child{
-    display:none;
-  }
-  li:first-child{
-    display:none;
-  }
-
-  button{
-    background-color: Transparent !important;
-    background-repeat:no-repeat !important;
-    border: none;
-    cursor:pointer;
-    overflow: hidden;
-    outline:none;
-    box-shadow: none;
-  }
-}

@@ -7,12 +7,19 @@
 }
 .searchSidebar {
   height: auto !important;
+  
+}
+.v-navigation-drawer__content{
+  height: 100vh !important;
 }
 .pageBar{
   background-color: rgba(255,255,255,0.7) !important;
 }
 .searchFab{
-  z-index: 20 !important;
+  z-index: 500 !important;
+}
+.v-pagination{
+  justify-content: flex-end !important;
 }
 </style>
 
@@ -47,9 +54,8 @@
             <div class="search-result-container">
               <v-card  class="mt-2 mb-4 py-1 px-4 elevaton-0 pageBar" v-if="!isLoading">
                 <v-row class="pa-0">
-                  <v-col cols="12" sm="6" class="py-2 px-4">
+                  <v-col cols="12" sm="7" class="py-2 px-4">
                     <div id="search-result-info-count" class>
-
                       <p class="title mb-0">{{results.meta.total | separator }} Results
                         <v-btn
                           color="primary"
@@ -59,26 +65,11 @@
                           rounded
                         >
                             <v-icon small class='mr-2'>mdi-close-circle</v-icon>
-                          Clear Search
+                          Clear
                         </v-btn>
-                      <share :url="shareUrl" label="Share This Search" small class='ml-2' />
-                      </p>
-                    </div>
-                  </v-col>
-
-                  <v-col cols="12" sm="6" class="py-1 px-4" v-if="!isLoading && results.schools.length > 0">
-                    <div class="text-md-right">
-                      Page:
-                      <v-pagination
-                        v-model="input.page"
-                        :length="totalPages"
-                        :total-visible="7"
-                        @input="searchAPI(parseURLParams())"
-                        circle
-                      ></v-pagination>
-                      <v-menu offset-y>
+                        <v-menu offset-y>
                         <template v-slot:activator="{ on }">
-                          <v-btn color="primary" small v-on="on">
+                          <v-btn rounded color="primary" small v-on="on">
                             <v-icon small class='mr-1'>fas fa-sort</v-icon> Sort
                           </v-btn>
                         </template>
@@ -92,6 +83,20 @@
                           </v-list-item>
                         </v-list>
                       </v-menu>
+                       <share :url="shareUrl" label="Share" small />
+                      </p>
+                    </div>
+                  </v-col>
+                  <v-col cols="12" sm="5" class="py-1 px-1" v-if="!isLoading && results.schools.length > 0">
+                    <div class="text-md-right">
+                      <v-pagination
+                        v-model="input.page"
+                        :length="totalPages"
+                        :total-visible="7"
+                        @input="searchAPI(parseURLParams())"
+                        class='pr-0 mr-0'
+                        
+                      ></v-pagination>
                     </div>
                   </v-col>
                 </v-row>
@@ -155,14 +160,13 @@
               <v-card class="mt-4 mb-2 py-1 px-4 pageBar elevation-0"  v-if="!isLoading && results.schools.length > 0">
                 <v-row>
                   <v-col cols="12" class='pa-1'>
-                    <div class="text-md-right">
-                      Page:
+                    <div class="text-right">
                       <v-pagination
                         v-model="input.page"
                         :length="totalPages"
                         :total-visible="7"
                         @input="searchAPI(parseURLParams())"
-                        circle
+                        
                       ></v-pagination>
                      
                     </div>

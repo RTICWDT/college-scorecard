@@ -33,8 +33,8 @@
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
       </v-col>
-      <v-col cols="12" md="12" class='text-center'>
-        <v-btn color="secondary" rounded @click="$emit('canned-search-submit',query)">Go</v-btn>
+      <v-col cols="12" md="12" class='text-center mt-5'>
+        <v-btn color="secondary" rounded @click="$emit('canned-search-submit',query)">Find Schools</v-btn>
       </v-col>
     </v-row>
   </div>

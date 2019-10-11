@@ -13,7 +13,7 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="12" sm="10" offset-sm="1" md="8" offset-md="2" class='d-none d-sm-flex'>
+            <v-col cols="12" sm="10" offset-sm="1" md="8" offset-md="2" class='d-none d-sm-flex pb-10'>
               <!-- Search Form Component -->
               <v-tabs
               grow
@@ -31,7 +31,7 @@
                 <v-tab>Name Search</v-tab>
                 <v-tab>Show Me Options</v-tab>
                 <v-tab-item>
-                  <v-card class="pa-5">
+                  <v-card class="px-5 pt-0 pb-5">
                     <search-form @search-query="directToSearch" />
                   </v-card>
                 </v-tab-item>
@@ -60,15 +60,15 @@
               <v-expansion-panels class='mb-2'>
                 <v-expansion-panel>
                   <v-expansion-panel-header>Custom Search</v-expansion-panel-header>
-                  <v-expansion-panel-content class='pa-0 ma-0'><search-form @search-query="directToSearch" /></v-expansion-panel-content>
+                  <v-expansion-panel-content class='pa-0 ma-0 mt-n5 mx-n5'><search-form @search-query="directToSearch" /></v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels >
               <v-expansion-panels class='mb-2'>
                 <v-expansion-panel>
                   <v-expansion-panel-header>Show Me Options</v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <p class="my-2 text-center">Select one or more options to create a list of schools that fit your needs.</p>
-                    <canned-search-container @canned-search-submit="directToSearch"></canned-search-container>
+                    <p class="my-2">Select one or more options to create a list of schools that fit your needs.</p>
+                    <canned-search-container @canned-search-submit="directToSearch" class='mx-5'></canned-search-container>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
@@ -76,35 +76,37 @@
           </v-row>
         </v-container>
       </div>
-      <v-container>
-        <v-row>
-          <v-col cols="12" md="5" offset-md="1">
-            <h2 class="title">College Alternatives</h2>
+      <div class='homeContent mt-5'>
+        <v-container class='pa-0 my-0'>
+          <v-row class='pa-0'>
+            <v-col cols="12" sm="5" offset-sm="1" class='homeCallout apprenticeships pa-0 my-0 mr-sm-3'>
+              <h2 class="title">Alternative Pathways<br />to a Career</h2>
 
-            <p>Apprenticeships are another great way to jumpstart your career.</p>
-            <p>
-              <v-btn
-                rounded
-                color="secondary"
-                href="https://www.apprenticeship.gov/apprenticeship-finder"
-                target="_blank"
-              >Find one that's right for you!</v-btn>
-            </p>
-            <p>Curious what careers are out there? O*NET’s career explorer is there to help!</p>
-            <p>
-              <v-btn
-                rounded
-                color="secondary"
-                href="https://www.onetonline.org/find/"
-                target="_blank"
-              >Explore Careers</v-btn>
-            </p>
-          </v-col>
-          <v-col cols="12" md="5">
-            <paying-for-college />
-          </v-col>
-        </v-row>
-      </v-container>
+              <p><strong>Apprenticeships</strong> are another great way to jumpstart your career.</p>
+              <p>
+                <v-btn
+                  rounded
+                  color="secondary"
+                  href="https://www.apprenticeship.gov/apprenticeship-finder"
+                  target="_blank"
+                >Find one that's right for you!</v-btn>
+              </p>
+              <p>Curious what careers are out there? <strong>O*NET’s career explorer</strong> is there to help!</p>
+              <p>
+                <v-btn
+                  rounded
+                  color="secondary"
+                  href="https://www.onetonline.org/find/"
+                  target="_blank"
+                >Explore Careers</v-btn>
+              </p>
+            </v-col>
+            <v-col cols="12" sm="5" class='homeCallout paying pa-0 my-0 ml-sm-3'>
+              <paying-for-college />
+            </v-col>
+          </v-row>
+        </v-container>
+      </div>
     </v-content>
   </v-app>
 </template>
@@ -126,6 +128,33 @@
 }
 .v-tab.v-tab--active{
   color: #FFFFFF !important;
+}
+.homeContent{
+  background-color: #B5D7F4;
+}
+
+</style>
+<style lang="scss">
+.homeCallout{
+  background-color: #FFFFFF;
+  h2{
+    font-weight: bold !important;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 2rem !important;
+  }
+  p{
+    text-align:center;
+    padding: 0rem 2rem 0.4rem;
+  }
+  &.apprenticeships h2{
+    background-color: #436692;
+
+  }
+  &.paying h2{
+    background-color: #80A771;
+  }
 }
 </style>
 <script>
