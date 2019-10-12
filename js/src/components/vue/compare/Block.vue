@@ -1,10 +1,16 @@
 <template>
-  <div>
+  <div >
     <h4 class='overline my-3'>{{ block_title }}</h4>
-    <div v-for="school in schools" :key="school.id" class='compareBlocks py-2'>
+    <div 
+      v-for="school in schools" 
+      :key="school.id" 
+      class="compareBlocks"
+    >
       <compare-row
         :school="school"
         :config="config"
+        :currentHighlight="currentHighlight"
+        @update-highlight="$emit('update-highlight', $event);"
       />
     </div>
   </div>
@@ -14,7 +20,6 @@
 @import 'sass/_variables';
 .compareBlocks{
     margin-left: 1rem;
-    padding-left: 1rem;
     border-left: 1px solid $dark-gray;
 }
 </style>
@@ -33,9 +38,13 @@ export default {
     schools: {
       type: Array
     },
+    currentHighlight: {
+      type: String
+    },
     config: {
-    type: Object
+      type: Object
     }
-  }
+  },
+  
 };
 </script>

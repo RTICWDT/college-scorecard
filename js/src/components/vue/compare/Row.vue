@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="classes" @click="$emit('update-highlight', 'school-'+school.id);">
     <p class="subtitle-1 pb-0 mb-0">{{_.get(school, fields['NAME'])}}</p>
 
     <horizontal-bar
@@ -62,6 +62,10 @@
 <style lang="scss" scoped>
 .data-na {
   padding: 5px 0;
+  background-color: #FAFAFA;
+}
+.active{
+    background-color: #faefd2 !important;
 }
 </style>
 
@@ -87,9 +91,19 @@ export default {
     },
     config: {
         type: Object
+    },
+    currentHighlight:{
+        type: String
     }
   },
   computed: {
+    classes(){
+        return{
+            active: "school-"+this.school.id == this.currentHighlight,
+            'py-2': true,
+            'px-5': true
+        }
+    },
     value() {
       if(this.config.currentRaceEthnicityFilter){
         let entry =  this.raceEthnicity.filter(obj => obj.label === this.config.currentRaceEthnicityFilter)
@@ -102,6 +116,7 @@ export default {
         return this[this.config.computedField];
       }
     }
+
   }
 };
 </script>

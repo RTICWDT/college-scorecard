@@ -31,18 +31,22 @@
                 <compare-section
                   :schools="schools"
                   title="Average Annual Cost"
+                  :currentHighlight="currentHighlight"
+                  @update-highlight="currentHighlight = $event"
                   :config="{ 
                     computedField: 'netPrice', 
                     color: '#86B33B', 
                     max: 150000, 
                     type: 'currency',
-                    chart: 'HorizontalBar' 
+                    chart: 'HorizontalBar'
                   }"
                 />
 
                 <compare-section
                   :schools="schools"
                   title="Graduation Rate"
+                  :currentHighlight="currentHighlight"
+                  @update-highlight="currentHighlight = $event"
                   :config="{ 
                     computedField: 'completionRate', 
                     color: '#86B33B', 
@@ -54,6 +58,8 @@
 
                 <compare-section
                   :schools="schools"
+                  :currentHighlight="currentHighlight"
+                  @update-highlight="currentHighlight = $event"
                   title="Salary After Completing"
                   :config="{ 
                     computedField: 'earningsRange', 
@@ -76,6 +82,8 @@
                     <compare-section
                       :schools="schools"
                       title="Full Time Enrollment"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
                       :config="{ 
                     computedField: 'fullTimeEnrollment', 
                     color: '#86B33B', 
@@ -85,10 +93,11 @@
                   }"
                     />
 
-              
-                      <compare-section
+                    <compare-section
                       :schools="schools"
                       title="School Information"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
                       :config="{ 
                         chart: 'SchoolInfo' 
                        }"
@@ -97,6 +106,8 @@
                     <compare-section
                       :schools="schools"
                       title="Socio-Economic Diversity"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
                       :config="{ 
                     computedField: 'socioEconomicDiversity', 
                     color: '#86B33B', 
@@ -109,6 +120,8 @@
                     <compare-section
                       :schools="schools"
                       title="Race/Ethnicity"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
                       :config="{ 
                     computedField: 'raceEthnicity', 
                     color: '#86B33B', 
@@ -144,6 +157,8 @@
                     <compare-section
                       :schools="schools"
                       title="Average Annual Cost"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'netPrice', 
                         color: '#86B33B', 
@@ -156,6 +171,8 @@
                     <compare-section
                       :schools="schools"
                       title="By Family Income Category"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
                       :config="{ 
                     computedField: 'income', 
                     color: '#86B33B', 
@@ -165,7 +182,7 @@
                     currentIncomeFilter: currentIncomeFilter 
                   }"
                     >
-                    <p>Depending on the federal, state, or institutional grant aid available, students in your income bracket may pay more or less than the overall average costs.</p>
+                      <p>Depending on the federal, state, or institutional grant aid available, students in your income bracket may pay more or less than the overall average costs.</p>
                       <v-select
                         :items="[
                             {label: '$0-$30,000', value:'0-30000'},
@@ -188,6 +205,8 @@
                     <compare-section
                       :schools="schools"
                       title="Graduation Rate"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'completionRate', 
                         color: '#86B33B', 
@@ -199,6 +218,8 @@
                     <compare-section
                       :schools="schools"
                       title="Students Who Return After Their First Year"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'retentionRate', 
                         color: '#86B33B', 
@@ -210,6 +231,8 @@
                     <compare-section
                       :schools="schools"
                       title="Outcomes 8 Years After Attending"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
                       :config="{ 
                         color: '#86B33B', 
                         chart: 'Sankey',
@@ -226,6 +249,8 @@
                     <compare-section
                       :schools="schools"
                       title="Students Recieving Federal Loans"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'studentsReceivingLoans', 
                         color: '#86B33B', 
@@ -237,6 +262,8 @@
                     <compare-section
                       :schools="schools"
                       title="Typical Debt After Graduation"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'debtRange', 
                         color: '#86B33B', 
@@ -248,6 +275,8 @@
                     <compare-section
                       :schools="schools"
                       title="Typical Monthly Loan Payment"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'debtRange', 
                         color: '#86B33B', 
@@ -264,6 +293,8 @@
                     <compare-section
                       :schools="schools"
                       title="Salary Ranges by Field of Study"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
                       :config="{ 
                     computedField: 'earningsRange', 
                     color: '#86B33B', 
@@ -280,6 +311,8 @@
                     <compare-section
                       :schools="schools"
                       title="SAT Reading"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'satReading', 
                         color: '#86B33B', 
@@ -289,6 +322,8 @@
                     <compare-section
                       :schools="schools"
                       title="SAT Math"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'satMath', 
                         color: '#86B33B', 
@@ -299,6 +334,8 @@
                     <compare-section
                       :schools="schools"
                       title="ACT"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'act', 
                         color: '#86B33B', 
@@ -309,6 +346,8 @@
                     <compare-section
                       :schools="schools"
                       title="Admittance Rate"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'admittanceRate', 
                         color: '#86B33B', 
@@ -381,7 +420,8 @@ export default {
       currentSankey: {
         enroll: "enroll_both",
         study: "study_both"
-      }
+      },
+      currentHighlight: ""
     };
   },
   computed: {

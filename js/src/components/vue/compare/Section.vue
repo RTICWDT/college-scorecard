@@ -1,13 +1,15 @@
 <template>
-  <div>
+  <div @update-highlight="$emit('update-highlight', $event);">
     <h2 class="heading mb-3 mt-8">{{title}}&nbsp;<tooltip definition="coming-soon" /></h2>
     <slot></slot>
     <div v-for="(school_list, school_type) in schools" :key="school_type">
       <compare-block
         :block_title="school_type"
         :schools="school_list"
+        :currentHighlight="currentHighlight"
         :config="config"
         v-if="school_list.length>0"
+        @update-highlight="$emit('update-highlight', $event);"
       />
     </div>
   </div>
@@ -30,6 +32,9 @@ export default {
       type: Object
     },
     title: {
+      type: String
+    },
+    currentHighlight: {
       type: String
     },
     config: {
