@@ -12,7 +12,7 @@ import DataChangelogPage from '../../data/changelog.vue';
 import DataDocumentationPage from '../../data/documentation.vue';
 import DataGlossaryPage from '../../data/glossary.vue';
 import TransitionPage from '../../school/transition.vue';
-//import ComparePage from '../../compare/index.vue';
+import ComparePage from '../../compare/index.vue';
 
 import './vue/filters.js'
 import './vue/mixins.js'
@@ -49,8 +49,8 @@ new Vue({
     'data-changelog': DataChangelogPage,
     'data-documentation': DataDocumentationPage,
     'data-glossary': DataGlossaryPage,
-    'transition-page': TransitionPage
-    //'compare-page': ComparePage
+    'transition-page': TransitionPage,
+    'compare-page': ComparePage
   },
   created(){
     this.refreshCompareSchools();

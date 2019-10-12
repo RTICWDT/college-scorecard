@@ -1,4 +1,5 @@
 <template>
+<div class="range-container">
   <div class="range-chart">
     <div
       v-if="!hideLower"
@@ -42,10 +43,16 @@
       <span>{{uppertip}}</span>
     </v-tooltip>
   </div>
+  </div>
 </template>
 
 <style lang="scss">
 @import "sass/_variables.scss";
+.range-container{
+  overflow: hidden;
+  height: 70px;
+  padding-top: 20px;
+}
 .range-chart {
   $label-height: 1.5em;
   $label-offset: 1.5em;
@@ -55,8 +62,8 @@
   background-color: $light-gray;
   display: block;
   height: 15px;
-  margin-bottom: $label-margin + 1em;
-  margin-top: $label-margin;
+  margin-bottom: 0;
+  margin-top: 0;
   max-width: none;
   position: relative;
 

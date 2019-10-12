@@ -1,0 +1,40 @@
+<template>
+  <div>
+    <h2 class="heading mb-3 mt-8">{{title}}&nbsp;<tooltip definition="coming-soon" /></h2>
+    <slot></slot>
+    <div v-for="(school_list, school_type) in schools" :key="school_type">
+      <compare-block
+        :block_title="school_type"
+        :schools="school_list"
+        :config="config"
+        v-if="school_list.length>0"
+      />
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+
+</style>
+
+<script>
+import CompareBlock from "components/vue/compare/Block.vue";
+import Tooltip from "components/vue/Tooltip.vue";
+export default {
+  components: {
+    "compare-block": CompareBlock,
+    "tooltip": Tooltip
+  },
+  props: {
+    schools: {
+      type: Object
+    },
+    title: {
+      type: String
+    },
+    config: {
+        type: Object
+    }
+  }
+};
+</script>
