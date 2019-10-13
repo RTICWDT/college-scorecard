@@ -1,6 +1,6 @@
 <template>
   <div :class="classes" @click="$emit('update-highlight', 'school-'+school.id);">
-    <p class="subtitle-1 pb-0 mb-0">{{_.get(school, fields['NAME'])}}</p>
+    <p class="subtitle-2 pb-0 mb-0">{{_.get(school, fields['NAME'])}}</p>
 
     <horizontal-bar
       v-if="school && config.chart=='HorizontalBar' && value"
@@ -8,7 +8,7 @@
       :min="0"
       :max="config.max"
       :color="config.color"
-      :height="15"
+      :height="10"
       :type="config.type"
       :labels="true"
     ></horizontal-bar>
@@ -61,8 +61,10 @@
 
 <style lang="scss" scoped>
 .data-na {
-  padding: 5px 0;
+  padding: 0;
   background-color: #FAFAFA;
+  margin: 0 !important;
+  font-size: 0.9rem;
 }
 .active{
     background-color: #faefd2 !important;
@@ -100,7 +102,7 @@ export default {
     classes(){
         return{
             active: "school-"+this.school.id == this.currentHighlight,
-            'py-2': true,
+            'pb-1': true,
             'px-5': true
         }
     },

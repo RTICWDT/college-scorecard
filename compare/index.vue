@@ -27,7 +27,7 @@
             </div>
 
             <div v-else class="show-loaded" id="school">
-              <v-card class="pa-5">
+              <v-card class="pb-5 px-5 pt-1">
                 <compare-section
                   :schools="schools"
                   title="Average Annual Cost"
@@ -35,7 +35,7 @@
                   @update-highlight="currentHighlight = $event"
                   :config="{ 
                     computedField: 'netPrice', 
-                    color: '#86B33B', 
+                    color: '#0e365b', 
                     max: 150000, 
                     type: 'currency',
                     chart: 'HorizontalBar'
@@ -49,7 +49,7 @@
                   @update-highlight="currentHighlight = $event"
                   :config="{ 
                     computedField: 'completionRate', 
-                    color: '#86B33B', 
+                    color: '#0e365b', 
                     max: 100, 
                     type: 'percent',
                     chart: 'HorizontalBar' 
@@ -63,7 +63,7 @@
                   title="Salary After Completing"
                   :config="{ 
                     computedField: 'earningsRange', 
-                    color: '#86B33B', 
+                    color: '#0e365b', 
                     chart: 'MultiRange',
                     multiRangeVariable: 'earnings.median_earnings'
                   }"
@@ -86,7 +86,7 @@
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
                     computedField: 'fullTimeEnrollment', 
-                    color: '#86B33B', 
+                    color: '#0e365b', 
                     max: 100, 
                     type: 'percent',
                     chart: 'HorizontalBar' 
@@ -110,7 +110,7 @@
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
                     computedField: 'socioEconomicDiversity', 
-                    color: '#86B33B', 
+                    color: '#0e365b', 
                     max: 100, 
                     type: 'percent',
                     chart: 'HorizontalBar' 
@@ -124,7 +124,7 @@
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
                     computedField: 'raceEthnicity', 
-                    color: '#86B33B', 
+                    color: '#0e365b', 
                     max: 100, 
                     type: 'percent',
                     chart: 'HorizontalBar',
@@ -147,6 +147,7 @@
                         item-value="value"
                         label="Race/Ethnicity"
                         v-model="currentRaceEthnicity"
+                        color="secondary"
                       ></v-select>
                     </compare-section>
                   </v-expansion-panel-content>
@@ -161,7 +162,7 @@
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'netPrice', 
-                        color: '#86B33B', 
+                        color: '#0e365b', 
                         max: 150000, 
                         type: 'currency',
                         chart: 'HorizontalBar' 
@@ -175,7 +176,7 @@
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
                     computedField: 'income', 
-                    color: '#86B33B', 
+                    color: '#0e365b', 
                     max: 60000, 
                     type: 'currency',
                     chart: 'HorizontalBar',
@@ -195,6 +196,7 @@
                         item-value="value"
                         label="What's your family income?"
                         v-model="currentIncomeFilter"
+                        color="secondary"
                       ></v-select>
                     </compare-section>
                   </v-expansion-panel-content>
@@ -209,7 +211,7 @@
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'completionRate', 
-                        color: '#86B33B', 
+                        color: '#0e365b', 
                         max: 100, 
                         type: 'percent',
                         chart: 'HorizontalBar' 
@@ -222,7 +224,7 @@
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'retentionRate', 
-                        color: '#86B33B', 
+                        color: '#0e365b', 
                         max: 100, 
                         type: 'percent',
                         chart: 'HorizontalBar' 
@@ -234,7 +236,7 @@
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
-                        color: '#86B33B', 
+                        color: '#0e365b', 
                         chart: 'Sankey',
                         currentSankey: currentSankey
                       }"
@@ -253,7 +255,7 @@
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'studentsReceivingLoans', 
-                        color: '#86B33B', 
+                        color: '#0e365b', 
                         max: 100, 
                         type: 'percent',
                         chart: 'HorizontalBar' 
@@ -266,7 +268,7 @@
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'debtRange', 
-                        color: '#86B33B', 
+                        color: '#0e365b', 
                         chart: 'MultiRange',
                         multiRangeVariable: 'debt.median_debt'
                       }"
@@ -279,7 +281,7 @@
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'debtRange', 
-                        color: '#86B33B', 
+                        color: '#0e365b', 
                         chart: 'MultiRange',
                         multiRangeVariable: 'debt.monthly_debt_payment',
                         max: { value: 2000, label: '$2,000' }
@@ -297,7 +299,7 @@
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
                     computedField: 'earningsRange', 
-                    color: '#86B33B', 
+                    color: '#0e365b', 
                     chart: 'MultiRange',
                     multiRangeVariable: 'earnings.median_earnings'
                   }"
@@ -315,7 +317,7 @@
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'satReading', 
-                        color: '#86B33B', 
+                        color: '#0e365b', 
                         chart: 'Range',
                       }"
                     />
@@ -326,7 +328,7 @@
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'satMath', 
-                        color: '#86B33B', 
+                        color: '#0e365b', 
                         chart: 'Range',
                       }"
                     />
@@ -338,7 +340,7 @@
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'act', 
-                        color: '#86B33B', 
+                        color: '#0e365b', 
                         chart: 'Range',
                       }"
                     />
@@ -350,7 +352,7 @@
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
                         computedField: 'admittanceRate', 
-                        color: '#86B33B', 
+                        color: '#0e365b', 
                         max: 100, 
                         type: 'percent',
                         chart: 'HorizontalBar' 

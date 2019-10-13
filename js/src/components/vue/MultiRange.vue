@@ -24,7 +24,7 @@
       ></range>
     </div>
     <div v-else class="data-na">
-      <p>Data not available.</p>
+      <p>Data Not Available</p>
     </div>
   </div>
 </template>
