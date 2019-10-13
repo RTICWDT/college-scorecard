@@ -9,7 +9,7 @@
           id="referrer-link"
           class="link-more"
           href="./index/"
-        >&laquo; Back to</v-btn>
+        >&laquo; Back</v-btn>
       </div>
     </div>
     <!-- Search results -->
