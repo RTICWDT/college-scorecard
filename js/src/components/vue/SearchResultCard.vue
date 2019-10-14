@@ -71,8 +71,8 @@
 
 <script>
 import numeral from 'numeral';
-import Tooltip from 'components/vue/Tooltip.vue';
-import SmallSchoolIcons from 'components/vue/SmallSchoolIcons.vue';
+import Tooltip from './Tooltip.vue';
+import SmallSchoolIcons from './SmallSchoolIcons.vue';
 export default {
   components: {
     tooltip: Tooltip,

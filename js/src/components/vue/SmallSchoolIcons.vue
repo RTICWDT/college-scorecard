@@ -17,6 +17,7 @@
     </ul>
   </div>
 </template>
+
 <style lang="scss" scoped>
 @import "sass/_variables.scss";
 .school-key_figures-year{
@@ -84,6 +85,7 @@
 
 
 </style>
+
 <script>
 export default {
   props: {

@@ -208,14 +208,14 @@
 <script>
 // TODO - This needs major cleanup.  How can it be cleaned?, Seperate files for legacy Javascript items?
 
-import SearchResultCard from "components/vue/SearchResultCard.vue";
-import SearchForm from "components/vue/SearchForm.vue";
-import CannedSearchButton from "components/vue/CannedSearchButton.vue";
-import CompareDrawer from "components/vue/CompareDrawer.vue";
-import CannedSearchContainer from "components/vue/CannedSearchContainer.vue";
-import CompareHeader from "components/vue/CompareHeader.vue";
-import Share from "components/vue/Share.vue";
-import NameAutocomplete from "components/vue/NameAutocomplete.vue";
+import SearchResultCard from "../../components/vue/SearchResultCard.vue";
+import SearchForm from "../../components/vue/SearchForm.vue";
+import CannedSearchButton from "../../components/vue/CannedSearchButton.vue";
+import CompareDrawer from "../../components/vue/CompareDrawer.vue";
+import CannedSearchContainer from "../../components/vue/CannedSearchContainer.vue";
+import CompareHeader from "../../components/vue/CompareHeader.vue";
+import Share from "../../components/vue/Share.vue";
+import NameAutocomplete from "../../components/vue/NameAutocomplete.vue";
 // import URLHistory from '../js/src/vue/mixins/URLHistory.js';
 import URLHistory from "../mixins/URLHistory.js";
 

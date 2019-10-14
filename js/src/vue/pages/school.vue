@@ -691,10 +691,12 @@ import CompareHeader from "components/vue/CompareHeader.vue";
 import FieldData from "components/vue/FieldData.vue";
 import NetPriceLink from "components/vue/NetPriceLink.vue";
 import SearchForm from "components/vue/SearchForm.vue";
+import MultiRange from "components/vue/MultiRange.vue";
+
 import { compare } from "vue/mixins.js";
 import ComplexFields from "vue/mixins/ComplexFields.js";
-import URLHistory from "../js/src/vue/mixins/URLHistory.js";
-import MultiRange from "components/vue/MultiRange.vue";
+import URLHistory from "vue/mixins/URLHistory.js";
+
 
 
 export default {

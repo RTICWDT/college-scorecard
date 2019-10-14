@@ -5,19 +5,23 @@ import _ from 'lodash'
 import vueNumeralFilterInstaller from 'vue-numeral-filter';
 
 import IndexPage from './vue/pages/index.vue';
-// import SchoolPage from '../../school/index.vue';
-// import SchoolProgramsPage from '../../school/fields.vue';
-import SearchPage from './vue/pages/search.vue';
-// import DataIndexPage from '../../data/index.vue';
-// import DataChangelogPage from '../../data/changelog.vue';
-// import DataDocumentationPage from '../../data/documentation.vue';
-// import DataGlossaryPage from '../../data/glossary.vue';
-// import TransitionPage from '../../school/transition.vue';
-// import ComparePage from '../../compare/index.vue';
 
-// import './vue/filters.js'
-// import './vue/mixins.js'
-// import './plugins/chartjs.js';
+import SchoolPage from './vue/pages/school.vue';
+import SchoolProgramsPage from './vue/pages/school_fields.vue';
+import TransitionPage from './vue/pages/school_transition.vue';
+
+import SearchPage from './vue/pages/search.vue';
+
+import DataIndexPage from './vue/pages/data.vue';
+import DataChangelogPage from './vue/pages/data_changelog.vue';
+import DataDocumentationPage from './vue/pages/data_documentation.vue';
+import DataGlossaryPage from './vue/pages/data_glossary.vue';
+
+import ComparePage from './vue/pages/compare.vue';
+
+import './vue/filters.js'
+import './vue/mixins.js'
+import './plugins/chartjs.js';
 
 Vue.prototype._ = _
 Vue.use(vueNumeralFilterInstaller, { locale: 'en' });
@@ -43,17 +47,15 @@ new Vue({
   },
   components:{
     'index-page': IndexPage,
-    // 'school-page': SchoolPage,
-    // 'school-programs-page': SchoolProgramsPage,
+    'school-page': SchoolPage,
+    'school-programs-page': SchoolProgramsPage,
+    'transition-page': TransitionPage,
     'search-page': SearchPage,
-    // 'data-index-page': DataIndexPage,
-    // 'data-changelog': DataChangelogPage,
-    // 'data-documentation': DataDocumentationPage,
-    // 'data-glossary': DataGlossaryPage,
-    // 'transition-page': TransitionPage,
-    // 'compare-page': ComparePage
-
-
+    'data-index-page': DataIndexPage,
+    'data-changelog': DataChangelogPage,
+    'data-documentation': DataDocumentationPage,
+    'data-glossary': DataGlossaryPage,
+    'compare-page': ComparePage
   },
   created(){
     this.refreshCompareSchools();
