@@ -5,6 +5,7 @@ export default {
         },
         id() {
             if (!this.school) return null;
+            return _.get(this.school, this.fields['ID']);
         },
         schoolName() {
             if (!this.school) return null;

@@ -79,7 +79,7 @@
                       text
                       icon
                       :color="isSelected?'amber':'grey'"
-                      @click="$emit('toggle-compare-school', { schoolId: id, schoolName: name } )"
+                      @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
                       <v-icon>fa fa-plus-circle</v-icon>
                     </v-btn>
