@@ -51,8 +51,8 @@
                     <v-divider />
 
                     <h2 class="title location mb-0 mt-4">
-                      <span>{{ _.get(school, fields['CITY'], 'City') }}</span>,
-                      <span>{{ _.get(school, fields['STATE'], 'State') }}</span>
+                      <span>{{ city }}</span>,
+                      <span>{{ state }}</span>
                     </h2>
                     <h2 class="title population my-0">
                       <span>{{ undergraduates | separator }}</span> undergraduate students
@@ -61,7 +61,7 @@
                       <a
                         target="_blank"
                         :href="'/school/transition/?url='+schoolUrl"
-                      >{{ _.get(school, fields['SCHOOL_URL'], 'ed.gov') | formatUrlText }}</a>
+                      >{{ schoolUrlDisplay | formatUrlText }}</a>
                     </h2>
                     <school-icons :school="school" :fields="fields" class="my-5" />
                     <div class="school-special_designation" v-if="specialDesignations.length>0">
@@ -79,7 +79,7 @@
                       text
                       icon
                       :color="isSelected?'amber':'grey'"
-                      @click="$emit('toggle-compare-school', { schoolId: _.get(school, fields['ID']), schoolName: _.get(school, fields['NAME'])} )"
+                      @click="$emit('toggle-compare-school', { schoolId: id, schoolName: name } )"
                     >
                       <v-icon>fa fa-plus-circle</v-icon>
                     </v-btn>
@@ -290,15 +290,15 @@
                   >Financial Aid &amp; Debt</v-expansion-panel-header>
                   <v-expansion-panel-content id="aid-content" class="px-0 py-3 pa-sm-5">
                     <v-alert
-                      v-if="(_.get(school, fields['AID_ELIGIBILITY']) > 3) && (_.get(school, fields['AID_ELIGIBILITY']) < 8)"
+                      v-if="(aidFlag > 3) && (aidFlag < 8)"
                       type="info"
                     >This institution does not participate in the Federal student financial aid program administered by the U.S. Department of Education.</v-alert>
                     <v-alert
-                      v-else-if="_.get(school, fields['AID_ELIGIBILITY'])==3"
+                      v-else-if="aidFlag==3"
                       type="info"
                     >This institution does not participate in the Federal student financial aid programs administered by the U.S. Department of Education, but is approved by the Department for purposes of allowing students to receive deferments on repayment of Federal student loans received at other institutions.</v-alert>
                     <v-alert
-                      v-else-if="_.get(school, fields['AID_ELIGIBILITY'])==8"
+                      v-else-if="aidFlag==8"
                       type="info"
                     >Data is not yet available. This institution only recently began administering Federal aid.</v-alert>
                     <div v-else>
@@ -532,7 +532,7 @@
                       </v-col>
                     </v-row>
                     <v-row>
-                      <v-col cols="12" md="6" v-if="_.get(school, fields['AID_ELIGIBILITY'])<3">
+                      <v-col cols="12" md="6" v-if="aidFlag<3">
                         <h2 class="mb-3">Socio-Economic Diversity</h2>
                         <p
                           class
@@ -739,11 +739,6 @@ export default {
     },
     shareLink() {
       return window.location.href || null;
-    },
-    fieldsLink() {
-      let id = _.get(this.school, this.fields["ID"]);
-      let name = _.get(this.school, this.fields["NAME"], "(unknown)");
-      return "/school/fields/?" + id + "-" + name.replace(/\W+/g, "-");
     },
     fieldsOfStudy() {
       let self = this;
