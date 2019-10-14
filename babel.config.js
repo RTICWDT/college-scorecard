@@ -10,6 +10,7 @@ const presets = [
         ie: "11"
       },
       useBuiltIns: "usage",
+      corejs: "2"
     },
   ],
 ];

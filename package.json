@@ -22,6 +22,7 @@
     "async": "^3.1.0",
     "chart.js": "^2.8.0",
     "chartjs-plugin-datalabels": "^0.7.0",
+    "core-js": "^2.6.10",
     "d3": "^3.5.9",
     "document-register-element": "^1.14.3",
     "element-closest": "^2.0.2",
