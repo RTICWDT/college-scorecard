@@ -1,5 +1,5 @@
 <template>
-  <v-app id="app" class="school-page">
+  <v-app id="app" class="compare-page">
     <div class="backNav">
       <div class="container school-back">
         <v-btn
@@ -28,6 +28,9 @@
 
             <div v-else class="show-loaded" id="school">
               <v-card class="pb-5 px-5 pt-1">
+                <p class='float-right mt-3 mr-5'>
+                  <share :url="shareUrl" label="Share this Comparison"  /> 
+                </p>
                 <compare-section
                   :schools="schools"
                   title="Average Annual Cost"
@@ -427,8 +430,12 @@ export default {
     };
   },
   computed: {
-    shareLink() {
-      return window.location.href || null;
+    shareUrl() {
+      let url = "";
+      this.compareSchools.map(function(itm, idx) {
+        url += "&s[]=" + itm.schoolId;
+      });
+      return window.location.origin+'/compare/?'+encodeURIComponent(url.substr(1));
     }
   },
   methods: {

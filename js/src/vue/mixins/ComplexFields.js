@@ -3,16 +3,35 @@ export default {
         fields() {
             return picc.fields;
         },
+        id() {
+            if (!this.school) return null;
+        },
         schoolName() {
-            return _.get(this.school, this.fields['NAME'], 'School Name');
+            if (!this.school) return null;
+            return _.get(this.school, this.fields['NAME'], 'N/A');
+        },
+        city() {
+            if (!this.school) return null;
+            return _.get(this.school, this.fields['CITY'], 'N/A')
+        },
+        state() {
+            if (!this.school) return null;
+            return _.get(this.school, this.fields['STATE'], 'N/A')
+        },
+        schoolUrlDisplay() {
+            if (!this.school) return null;
+            return _.get(this.school, this.fields['SCHOOL_URL'], 'ed.gov')
         },
         underInvestigation() {
+            if (!this.school) return null;
             return _.get(this.school, this.fields['UNDER_INVESTIGATION']);
         },
         years() {
+            if (!this.school) return null;
             return _.get(this.school, this.fields["PREDOMINANT_DEGREE"]);
         },
         awardLevels() {
+            if (!this.school) return null;
             // return values are whether the institution offers other kind of degrees/certs than the predominant degree
             // if they do we return the glossary term key to display or false to disable the tooltip
             switch (this.years) {
@@ -41,12 +60,15 @@ export default {
             return false;
         },
         netPrice() {
+            if (!this.school) return null;
             return _.get(this.school, this.fields['NET_PRICE'])
         },
-        undergraduates(){
+        undergraduates() {
+            if (!this.school) return null;
             return _.get(this.school, this.fields['SIZE'])
         },
         publicPrivate() {
+            if (!this.school) return null;
             var ownership = _.get(this.school, this.fields["OWNERSHIP"]);
             switch (+ownership) {
                 case 1: // public
@@ -59,10 +81,12 @@ export default {
             return null;
         },
         income() {
+            if (!this.school) return null;
             let income = _.get(this.school, this.fields["NET_PRICE_BY_INCOME"]);
             return income[this.publicPrivate]["by_income_level"];
         },
         specialDesignations() {
+            if (!this.school) return null;
             var designations = [];
             var SPECIAL_DESIGNATIONS = picc.SPECIAL_DESIGNATIONS || {};
 
@@ -88,6 +112,7 @@ export default {
             return designations;
         },
         raceEthnicity() {
+            if (!this.school) return null;
             let output = [];
             let re = _.get(this.school, this.fields["RACE_ETHNICITY"]);
             let include = [
@@ -111,6 +136,7 @@ export default {
             return _.sortBy(output, ["value"]).reverse();
         },
         retentionRate() {
+            if (!this.school) return null;
             let retention = _.get(this.school, this.fields.RETENTION_RATE);
             if (retention) {
                 let fourYear = retention.four_year.full_time_pooled;
@@ -130,6 +156,7 @@ export default {
                 );
         },
         completionRate() {
+            if (!this.school) return null;
             let OM = _.get(this.school, this.fields.COMPLETION_OM);
             let G200_4 = _.get(this.school, this.fields.COMPLETION_200_4);
             let G200_LT4 = _.get(this.school, this.fields.COMPLETION_200_LT4);
@@ -142,6 +169,7 @@ export default {
             }
         },
         programReporter() {
+            if (!this.school) return null;
             let reporterData = [];
             let programs = _.get(this.school, this.fields.PROGRAM_REPORTER_PROGRAM);
             let cost = _.get(this.school, this.fields.PROGRAM_REPORTER_COST);
@@ -156,14 +184,17 @@ export default {
             return reporterData;
         },
         isProgramReporter() {
+            if (!this.school) return null;
             return _.get(this.school, this.fields.PROGRAM_REPORTER_OFFERED) > 0;
         },
         isBranch() {
+            if (!this.school) return null;
             // 0 not main
             // 1 main
             return _.get(this.school, this.fields["MAIN"]) === 0;
         },
         schoolUrl() {
+            if (!this.school) return null;
             let url = _.get(this.school, this.fields['SCHOOL_URL'], '#');
             if (url == '#') return false;
             else if (url.match(/^http/)) return url;
@@ -171,21 +202,27 @@ export default {
         },
 
         fullTimeEnrollment() {
+            if (!this.school) return null;
             return 1 - (_.get(this.school, this.fields['PART_TIME_SHARE']));
         },
         partTimeEnrollment() {
+            if (!this.school) return null;
             return _.get(this.school, this.fields['PART_TIME_SHARE']);
         },
         socioEconomicDiversity() {
+            if (!this.school) return null;
             return _.get(this.school, this.fields['PELL_PERCENTAGE']);
         },
         netPriceCalculatorUrl() {
+            if (!this.school) return null;
             return _.get(this.school, this.fields['NET_PRICE_CALC_URL'], '#');
         },
         allFieldsOfStudy() {
+            if (!this.school) return null;
             return _.get(this.school, this.fields['FIELD_OF_STUDY']);
         },
         debtRange() {
+            if (!this.allFieldsOfStudy) return null;
             let fos = this.allFieldsOfStudy;
             let cleanDebt = fos.filter(
                 obj => obj.debt.median_debt && obj.credential.level <= 3
@@ -200,6 +237,7 @@ export default {
             }
         },
         earningsRange() {
+            if (!this.allFieldsOfStudy) return null;
             let fos = this.allFieldsOfStudy;
             let cleanEarnings = fos.filter(
                 obj => obj.earnings.median_earnings && obj.credential.level <= 3
@@ -213,42 +251,63 @@ export default {
                 max: orderedEarnings[orderedEarnings.length - 1]
             }
         },
-        act(){
-            return{
-                available: _.get(this.school, this.fields['ACT_MIDPOINT'])!=null,
+        act() {
+            if (!this.school) return null;
+            return {
+                available: _.get(this.school, this.fields['ACT_MIDPOINT']) != null,
                 lower: _.get(this.school, this.fields['ACT_25TH_PCTILE']),
                 upper: _.get(this.school, this.fields['ACT_75TH_PCTILE']),
-                min: 0, 
+                min: 0,
                 max: 36
             }
         },
-        satReading(){
-            return{
-                available: _.get(this.school, this.fields['SAT_READING_MIDPOINT'])!=null,
+        satReading() {
+            if (!this.school) return null;
+            return {
+                available: _.get(this.school, this.fields['SAT_READING_MIDPOINT']) != null,
                 lower: _.get(this.school, this.fields['SAT_READING_25TH_PCTILE']),
                 upper: _.get(this.school, this.fields['SAT_READING_75TH_PCTILE']),
-                min: 0, 
+                min: 0,
                 max: 800
             }
         },
-        satMath(){
-            return{
-                available: _.get(this.school, this.fields['SAT_MATH_MIDPOINT'])!=null,
+        satMath() {
+            if (!this.school) return null;
+            return {
+                available: _.get(this.school, this.fields['SAT_MATH_MIDPOINT']) != null,
                 lower: _.get(this.school, this.fields['SAT_MATH_25TH_PCTILE']),
                 upper: _.get(this.school, this.fields['SAT_MATH_75TH_PCTILE']),
                 min: 0,
                 max: 800
             }
         },
-        admittanceRate(){
+        admittanceRate() {
+            if (!this.school) return null;
             return _.get(this.school, this.fields['ADMITTANCE_RATE'])
         },
-        openAdmissions(){
+        openAdmissions() {
+            if (!this.school) return null;
             return _.get(this.school, this.fields['OPEN_ADMISSIONS'])
         },
-        studentsReceivingLoans(){
+        studentsReceivingLoans() {
+            if (!this.school) return null;
             return _.get(this.school, this.fields['AID_PERCENTAGE']);
+        },
+        aidFlag() {
+            if (!this.school) return null;
+            return _.get(this.school, this.fields['AID_ELIGIBILITY'])
+        },
+        fieldsLink() {
+            if (!this.school) return null;
+            let id = _.get(this.school, this.fields["ID"]);
+            let name = _.get(this.school, this.fields["NAME"], "(unknown)");
+            return "/school/fields/?" + id + "-" + name.replace(/\W+/g, "-");
+        },
+        schoolLink() {
+            if (!this.school) return null;
+            let id = _.get(this.school, this.fields['ID']);
+            let name = _.get(this.school, this.fields['NAME'], '(unknown)');
+            return '/school/?' + id + '-' + name.replace(/\W+/g, '-');
         }
-
     }
 }

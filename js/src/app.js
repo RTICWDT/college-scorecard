@@ -53,6 +53,7 @@ new Vue({
     // 'transition-page': TransitionPage,
     // 'compare-page': ComparePage
 
+
   },
   created(){
     this.refreshCompareSchools();

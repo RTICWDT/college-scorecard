@@ -25,10 +25,6 @@
         </p>
       </v-col>
       <v-col cols="12" sm="6">
-        <p>
-          <!-- TODO: place this better -->
-          <!-- <share :url="shareUrl" label="Share this Comparison" /> -->
-        </p>
       </v-col>
     </v-row>
   </v-card>
@@ -54,15 +50,6 @@ export default {
     return {
       selected: Array
     };
-  },
-  computed: {
-    shareUrl() {
-      let url = "";
-      this.schools.map(function(itm, idx) {
-        url += "&s[]=" + itm.schoolId;
-      });
-      return window.location.origin+'/compare/?'+encodeURIComponent(url.substr(1));
-    }
   },
   watch: {
     schools() {
