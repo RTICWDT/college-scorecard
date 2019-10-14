@@ -2948,13 +2948,6 @@ if (typeof document !== 'undefined') {
 
   });
 
-  /**
-   * initialize materialize
-   */
-  picc.ready(function() {
-    if(window.M) M.AutoInit();
-  })
-
   // namespace sankey
   picc.sankey = {};
 
