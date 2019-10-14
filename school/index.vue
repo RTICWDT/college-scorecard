@@ -158,7 +158,7 @@
                           <h2 class="title my-3">
                             <span class="font-weight-bold navy-text">{{ programReporter[0].title}}</span>
                           </h2>
-                          <h2 class="title my-3" v-if="netPRice">
+                          <h2 class="title my-3" v-if="netPrice">
                             <span
                               class="navy-text font-weight-bold"
                             >{{ netPrice | numeral('$0,0')}}</span>

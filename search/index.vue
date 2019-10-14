@@ -85,11 +85,11 @@
                         </v-btn>
                         <v-menu offset-y>
                         <template v-slot:activator="{ on }">
-                          <v-btn rounded color="primary" x-small v-on="on" fab class="d-inline d-sm-none">
-                            <v-icon small class=''>fas fa-sort</v-icon>
-                          </v-btn>
                           <v-btn rounded color="primary" small v-on="on" class="d-none d-sm-inline">
                             <v-icon small class='mr-1'>fas fa-sort</v-icon> Sort
+                          </v-btn>                          
+                          <v-btn rounded color="primary" x-small v-on="on" fab class="d-inline d-sm-none">
+                            <v-icon small class=''>fas fa-sort</v-icon>
                           </v-btn>
                         </template>
                         <v-list>

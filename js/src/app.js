@@ -13,6 +13,7 @@ import DataDocumentationPage from '../../data/documentation.vue';
 import DataGlossaryPage from '../../data/glossary.vue';
 import TransitionPage from '../../school/transition.vue';
 import ComparePage from '../../compare/index.vue';
+import FourOhFour from '../../404.vue';
 
 import './vue/filters.js'
 import './vue/mixins.js'
@@ -50,7 +51,8 @@ new Vue({
     'data-documentation': DataDocumentationPage,
     'data-glossary': DataGlossaryPage,
     'transition-page': TransitionPage,
-    'compare-page': ComparePage
+    'compare-page': ComparePage,
+    'four-oh-four': FourOhFour
   },
   created(){
     this.refreshCompareSchools();
