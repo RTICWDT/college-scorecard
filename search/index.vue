@@ -54,22 +54,41 @@
             <div class="search-result-container">
               <v-card  class="mt-2 mb-4 py-1 px-4 elevaton-0 pageBar" v-if="!isLoading">
                 <v-row class="pa-0">
-                  <v-col cols="12" sm="7" class="py-2 px-4">
+                  <v-col cols="12" md="7" class="py-2 px-4">
                     <div id="search-result-info-count" class>
                       <p class="title mb-0">{{results.meta.total | separator }} Results
                         <v-btn
                           color="primary"
                           text-color="white"
                           @click="clearSearchForm"
+                          x-small
+                          
+                          rounded
+                          fab
+                          class="d-inline d-sm-none"
+                        >
+                          <span >
+                            <v-icon class=''>mdi-close-circle</v-icon>
+                          </span>
+                        </v-btn>
+                        <v-btn
+                          color="primary"
+                          text-color="white"
+                          @click="clearSearchForm"
                           small
                           rounded
+                          class="d-none d-sm-inline"
                         >
-                            <v-icon small class='mr-2'>mdi-close-circle</v-icon>
-                          Clear
+                          <span >
+                            <v-icon small class='mr-2'>mdi-close-circle</v-icon> Clear
+                          </span>
                         </v-btn>
                         <v-menu offset-y>
                         <template v-slot:activator="{ on }">
-                          <v-btn rounded color="primary" small v-on="on">
+                          <v-btn rounded color="primary" x-small v-on="on" fab class="d-inline d-sm-none">
+                            <v-icon small class=''>fas fa-sort</v-icon>
+                          </v-btn>
+                          <v-btn rounded color="primary" small v-on="on" class="d-none d-sm-inline">
                             <v-icon small class='mr-1'>fas fa-sort</v-icon> Sort
                           </v-btn>
                         </template>
@@ -87,8 +106,8 @@
                       </p>
                     </div>
                   </v-col>
-                  <v-col cols="12" sm="5" class="py-1 px-1" v-if="!isLoading && results.schools.length > 0">
-                    <div class="text-md-right">
+                  <v-col cols="12" md="5" class="py-1 px-1" v-if="!isLoading && results.schools.length > 0">
+                    <div class="text-md-right text-center">
                       <v-pagination
                         v-model="input.page"
                         :length="totalPages"

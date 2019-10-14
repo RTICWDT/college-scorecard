@@ -52,6 +52,7 @@ new Vue({
     // 'data-glossary': DataGlossaryPage,
     // 'transition-page': TransitionPage,
     // 'compare-page': ComparePage
+
   },
   created(){
     this.refreshCompareSchools();

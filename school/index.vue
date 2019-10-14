@@ -38,9 +38,9 @@
                 <v-row class="mt-4">
                   <v-col cols="12" md="8" class="py-0">
                     <h1 class="display-2 pa-0 mb-4">
-                      {{ _.get(school, fields['NAME'], 'School Name') }}
+                      {{ schoolName }}
                       <v-chip
-                        v-if="_.get(school, fields['UNDER_INVESTIGATION'])==1"
+                        v-if="underInvestigation==1"
                         color="error"
                         label
                       >
@@ -55,7 +55,7 @@
                       <span>{{ _.get(school, fields['STATE'], 'State') }}</span>
                     </h2>
                     <h2 class="title population my-0">
-                      <span>{{ _.get(school, fields['SIZE'], 'NNNN') | separator }}</span> undergraduate students
+                      <span>{{ undergraduates | separator }}</span> undergraduate students
                     </h2>
                     <h2 class="title school-url mt-0">
                       <a
@@ -93,8 +93,13 @@
                       Graduation Rate&nbsp;
                       <tooltip definition="graduation-rate" />
                     </h2>
-                    <donut v-if="completionRate" color="#0e365b" :value="completionRate * 100" :height="200"></donut>
-                    <div v-else class='data-na'>Data Not Available</div>
+                    <donut
+                      v-if="completionRate"
+                      color="#0e365b"
+                      :value="completionRate * 100"
+                      :height="200"
+                    ></donut>
+                    <div v-else class="data-na">Data Not Available</div>
                   </v-col>
                   <v-col col="12" md="6">
                     <h2 class="mb-3">
@@ -102,49 +107,24 @@
                       <tooltip definition="avg-salary" />
                     </h2>
                     <p>Salary after completing depends on field of study.</p>
-                    <div v-if="singleEarnings" class='pr-5'>
-                      <range
-                        :lower="{ value: 0, label: '$0' }"
-                        :upper="{ value: minMaxEarnings.max.earnings.median_earnings, label: $options.filters.numeral(minMaxEarnings.max.earnings.median_earnings, '$0,0') }"
-                        :min="{ value: 0, label: '$0' }"
-                        :max="minMaxEarnings.max.earnings.median_earnings>150000 ? { value: 250000, label: '$250,000' }:{ value: 150000, label: '$150,000' }"
-                        lowertip
-                        :uppertip="minMaxEarnings.max.title.slice(0,-1) + ' - '+ minMaxEarnings.max.credential.title"
-                        hideMiddle
-                        hideLower
-                      ></range>
-                    </div>
-                    <div v-else-if="minMaxEarnings.min" class='pr-5'>
-                      <range
-                        :lower="{ value: minMaxEarnings.min.earnings.median_earnings, label: $options.filters.numeral(minMaxEarnings.min.earnings.median_earnings, '$0,0') }"
-                        :upper="{ value: minMaxEarnings.max.earnings.median_earnings, label: $options.filters.numeral(minMaxEarnings.max.earnings.median_earnings, '$0,0') }"
-                        :min="{ value: 0, label: '0' }"
-                        :max="minMaxEarnings.max.earnings.median_earnings>150000 ? { value: 250000, label: '$250,000' }:{ value: 150000, label: '$150,000' }"
-                        :lowertip="minMaxEarnings.min.title.slice(0,-1)+ ' - '+ minMaxEarnings.min.credential.title"
-                        :uppertip="minMaxEarnings.max.title.slice(0,-1)+ ' - '+ minMaxEarnings.max.credential.title"
-                        hideMiddle
-                      ></range>
-
-                    </div>
-
-                    <div v-else class="data-na pr-5">
-                      <p>Data Not Available</p>
-                    </div>
+                    <multi-range
+                      :minmax="earningsRange"
+                      variable="earnings.median_earnings"
+                      :max=" { label: '$150,000', value: 150000 }"
+                      />
                     <h2 class="mb-3" v-if="!isProgramReporter">
                       Average Annual Cost&nbsp;
                       <tooltip definition="avg-cost-year" />
                     </h2>
                     <h2 v-else>
-                      Average Annual Cost for Largest Program&nbsp;<tooltip definition="coming-soon" />
+                      Average Annual Cost for Largest Program&nbsp;
+                      <tooltip definition="coming-soon" />
                     </h2>
                     <h2
                       class="display-2 navy-text font-weight-bold"
-                      v-if="_.get(school, this.fields['NET_PRICE'])"
-                    >{{_.get(school, this.fields['NET_PRICE']) | numeral('$0,0') }}</h2>
-                    <div class='data-na' v-else>
-                      Data Not Available
-                    </div>
-                      
+                      v-if="netPrice"
+                    >{{ netPrice | numeral('$0,0') }}</h2>
+                    <div class="data-na" v-else>Data Not Available</div>
                   </v-col>
                 </v-row>
               </v-card>
@@ -168,7 +148,7 @@
                           </h2>
                           <h2
                             class="display-2 navy-text font-weight-bold"
-                          >{{_.get(school, fields['NET_PRICE'], 'N/A') | numeral('$0,0')}}</h2>
+                          >{{ netPrice | numeral('$0,0')}}</h2>
                         </div>
                         <div v-else>
                           <h2>
@@ -178,22 +158,20 @@
                           <h2 class="title my-3">
                             <span class="font-weight-bold navy-text">{{ programReporter[0].title}}</span>
                           </h2>
-                          <h2 class="title my-3" v-if="_.get(school, fields['NET_PRICE'])">
+                          <h2 class="title my-3" v-if="netPRice">
                             <span
                               class="navy-text font-weight-bold"
-                            >{{ _.get(school, fields['NET_PRICE']) | numeral('$0,0')}}</span>
+                            >{{ netPrice | numeral('$0,0')}}</span>
                             <span
                               v-if="programReporter[0].annualized== programReporter[0].full_program"
                             >for a {{programReporter[0].avg_month_completion}}-month program</span>
                             <span class="costDescription" v-else>per year on average</span>
                           </h2>
-                          <div v-else class='data-na'>
-                            Data Not Available
-                          </div>
+                          <div v-else class="data-na">Data Not Available</div>
                         </div>
                         <h2 class="mb-3 mt-5">Personal Net Price</h2>
                         <p>Institutions provide a custom net price calculator.</p>
-                        <net-price-link :url="_.get(school, fields['NET_PRICE_CALC_URL'], '#')" />
+                        <net-price-link :url="netPriceCalculatorUrl" />
                       </v-col>
 
                       <v-col cols="12" md="6">
@@ -271,16 +249,26 @@
                           <br />Rate&nbsp;
                           <tooltip definition="graduation-rate" />
                         </h2>
-                        <donut v-if="completionRate" color="#0e365b" :value="completionRate * 100" :height="200"></donut>
-                        <div v-else class='data-na'>Data Not Available</div>
+                        <donut
+                          v-if="completionRate"
+                          color="#0e365b"
+                          :value="completionRate * 100"
+                          :height="200"
+                        ></donut>
+                        <div v-else class="data-na">Data Not Available</div>
                       </v-col>
                       <v-col cols="12" md="6">
                         <h2 class="mb-3 text-center">
                           Students Who Return After Their First Year&nbsp;
                           <tooltip definition="retention-rate" />
                         </h2>
-                        <donut v-if="retentionRate" color="#0e365b" :value="retentionRate * 100" :height="200"></donut>
-                        <div v-else class='data-na'>Data Not Available</div>
+                        <donut
+                          v-if="retentionRate"
+                          color="#0e365b"
+                          :value="retentionRate * 100"
+                          :height="200"
+                        ></donut>
+                        <div v-else class="data-na">Data Not Available</div>
                       </v-col>
                     </v-row>
                     <v-row>
@@ -289,7 +277,8 @@
                           Outcomes 8 Years After Attending&nbsp;
                           <tooltip definition="outcome-measures" />
                         </h2>
-                        <sankey :school="school" colors="solid" />
+                        <sankey-buttons v-on:update-sankey="currentSankey = $event" />
+                        <sankey :school="school" colors="solid" :currentSankey="currentSankey" />
                       </v-col>
                     </v-row>
                   </v-expansion-panel-content>
@@ -321,13 +310,11 @@
                           </h2>
                           <donut
                             color="#0e365b"
-                            :value="_.get(school, this.fields['AID_PERCENTAGE']) * 100"
+                            :value="studentsReceivingLoans * 100"
                             :height="200"
-                            v-if="_.get(school, this.fields['AID_PERCENTAGE'])"
+                            v-if="studentsReceivingLoans"
                           ></donut>
-                          <div v-else class='data-na'>
-                            Data Not Available
-                          </div>
+                          <div v-else class="data-na">Data Not Available</div>
                           <p>At some schools where few students borrow federal loans, the typical undergraduate may leave school with $0 in debt.</p>
                         </v-col>
                         <v-col cols="12" md="6">
@@ -336,49 +323,36 @@
                             <tooltip definition="avg-debt" />
                           </h2>
                           <p>Total debt after graudation depends on field of study for undergraduate borrowers who complete college.</p>
-                          <div v-if="singleDebt">
-                            <range
-                              :lower="{ value: 0, label: '$0' }"
-                              :upper="{ value: minMaxDebt.max.debt.median_debt, label: $options.filters.numeral(minMaxDebt.max.debt.median_debt, '$0,0') }"
-                              :min="{ value: 0, label: '$0' }"
-                              :max="{ value: 60000, label: '$60,000' }"
-                              lowertip
-                              :uppertip="minMaxDebt.max.title.slice(0,-1)+ ' - '+ minMaxDebt.max.credential.title"
-                              hideMiddle
-                              hideLower
-                            ></range>
-                            <p>depending on field of study for undergraduate borrowers who complete college</p>
-                          </div>
-                          <div v-else-if="minMaxDebt.min">
-                            <range
-                              :lower="{ value: minMaxDebt.min.debt.median_debt, label: $options.filters.numeral(minMaxDebt.min.debt.median_debt, '$0,0') }"
-                              :upper="{ value: minMaxDebt.max.debt.median_debt, label: $options.filters.numeral(minMaxDebt.max.debt.median_debt, '$0,0') }"
-                              :min="{ value: 0, label: '$0' }"
-                              :max="{ value: 60000, label: '$60,000' }"
-                              :lowertip="minMaxDebt.min.title.slice(0,-1)+ ' - '+ minMaxDebt.min.credential.title"
-                              :uppertip="minMaxDebt.max.title.slice(0,-1)+ ' - '+ minMaxDebt.max.credential.title"
-                              hideMiddle
-                            ></range>
-                            
-                          </div>
-                          <div v-else class="data-na">Data not available.</div>
+                          <multi-range
+                            :minmax="debtRange"
+                            variable="debt.median_debt"
+                            :max=" { label: '$100,000', value: 100000 }"
+                            />
+
                           <h2 class="mb-3">
-                            Typical Monthly Loan Payment&nbsp;<tooltip definition="avg-loan-payment" />
+                            Typical Monthly Loan Payment&nbsp;
+                            <tooltip definition="avg-loan-payment" />
                           </h2>
-                          <div v-if="singleDebt">
+                          <div v-if="debtRange.singleDebt">
                             <div
                               class="display-2 navy-text font-weight-bold"
-                              v-if="minMaxDebt.min"
-                            >{{ minMaxDebt.min.debt.monthly_debt_payment | numeral('$0,0') }}/mo</div>
+                              v-if="debtRange.min"
+                            >{{ debtRange.min.debt.monthly_debt_payment | numeral('$0,0') }}/mo</div>
                           </div>
-                          <div v-else-if="minMaxDebt.min">
+                          <div v-else-if="debtRange.min">
                             <div
                               class="display-2 navy-text font-weight-bold"
-                              v-if="minMaxDebt.min"
-                            >{{ minMaxDebt.min.debt.monthly_debt_payment | numeral('$0,0') }}-{{ minMaxDebt.max.debt.monthly_debt_payment | numeral('0,0') }}/mo</div>
+                              v-if="debtRange.min"
+                            >{{ debtRange.min.debt.monthly_debt_payment | numeral('$0,0') }}-{{ debtRange.max.debt.monthly_debt_payment | numeral('0,0') }}/mo</div>
                           </div>
                           <div v-else class="data-na">Data not available.</div>
-                          <p class='mt-2'>This is based on a standard 10-year payment plan, other <a href="https://studentloans.gov/myDirectLoan/repaymentEstimator.action" target="_blank">payment options</a> are available.</p>
+                          <p class="mt-2">
+                            This is based on a standard 10-year payment plan, other
+                            <a
+                              href="https://studentloans.gov/myDirectLoan/repaymentEstimator.action"
+                              target="_blank"
+                            >payment options</a> are available.
+                          </p>
                         </v-col>
                       </v-row>
                       <v-row>
@@ -412,32 +386,11 @@
                     class="px-0 py-3 pa-sm-5"
                   >
                     <p>One-year post-completion earnings with range of highest and lowest median earnings for undergraduate and credential programs for which there is data. For more information, see Fields of Study/Majors for this school.</p>
-                    <div v-if="singleEarnings">
-                      <range
-                        :lower="{ value: 0, label: '$0' }"
-                        :upper="{ value: minMaxEarnings.max.earnings.median_earnings, label: $options.filters.numeral(minMaxEarnings.max.earnings.median_earnings, '$0,0') }"
-                        :min="{ value: 0, label: '$0' }"
-                        :max="minMaxEarnings.max.earnings.median_earnings>150000 ? { value: 250000, label: '$250,000' }:{ value: 150000, label: '$150,000' }"
-                        lowertip
-                        :uppertip="minMaxEarnings.max.title.slice(0,-1)+ ' - '+ minMaxEarnings.max.credential.title"
-                        hideMiddle
-                        hideLower
-                      ></range>
-                    </div>
-                    <div v-else-if="minMaxEarnings.min">
-                      <range
-                        :lower="{ value: minMaxEarnings.min.highest_earnings, label: $options.filters.numeral(minMaxEarnings.min.highest_earnings, '$0,0') }"
-                        :upper="{ value: minMaxEarnings.max.highest_earnings, label: $options.filters.numeral(minMaxEarnings.max.highest_earnings, '$0,0') }"
-                        :min="{ value: 0, label: '$0' }"
-                        :max="minMaxEarnings.max.earnings.median_earnings>150000 ? { value: 250000, label: '$250,000' }:{ value: 150000, label: '$150,000' }"
-                        :lowertip="minMaxEarnings.min.title.slice(0,-1)+ ' - '+ minMaxEarnings.min.credential.title"
-                        :uppertip="minMaxEarnings.max.title.slice(0,-1)+ ' - '+ minMaxEarnings.max.credential.title"
-                        hideMiddle
-                      ></range>
-                    </div>
-                    <div v-else class="data-na">
-                      <p>Data not available.</p>
-                    </div>
+                    <multi-range
+                      :minmax="earningsRange"
+                      variable="earnings.median_earnings"
+                      :max="{ label: '$150,000', value: 150000 }"
+                      />
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel>
@@ -553,7 +506,7 @@
                         <div class="text-center">
                           <strong
                             class="display-2 navy-text font-weight-bold"
-                          >{{ _.get(school, fields['SIZE']) | separator }}</strong>
+                          >{{ undergraduates | separator }}</strong>
                           <br />
                           <strong>undergraduate students</strong>
                         </div>
@@ -562,7 +515,7 @@
                         <div class="text-right">
                           <span
                             class="display-2 navy-text font-weight-bold"
-                          >{{ 1 - (_.get(school, fields['PART_TIME_SHARE'])) | numeral('0.%') }}</span>
+                          >{{ fullTimeEnrollment | numeral('0.%') }}</span>
                           <br />
                           <strong>Full-time</strong>
                         </div>
@@ -572,7 +525,7 @@
                         <div class="text-left">
                           <span
                             class="display-2 navy-text font-weight-bold"
-                          >{{ _.get(school, fields['PART_TIME_SHARE'])| numeral('0.%') }}</span>
+                          >{{ partTimeEnrollment | numeral('0.%') }}</span>
                           <br />
                           <strong>Part-time</strong>
                         </div>
@@ -582,16 +535,15 @@
                       <v-col cols="12" md="6" v-if="_.get(school, fields['AID_ELIGIBILITY'])<3">
                         <h2 class="mb-3">Socio-Economic Diversity</h2>
                         <p
-                          class=""
+                          class
                         >The percentage of students who received an income-based federal Pell grant intended for low-income students.</p>
                         <donut
                           color="#0e365b"
-                          :value="_.get(school, this.fields['PELL_PERCENTAGE']) * 100"
+                          :value="socioEconomicDiversity * 100"
                           :height="200"
-                          v-if="_.get(school, this.fields['PELL_PERCENTAGE'])">
-                        ></donut>
+                          v-if="socioEconomicDiversity"
+                        >></donut>
                         <div v-else class="data-na">Data Not Available</div>
-                       
                       </v-col>
                       <v-col cols="12" md="6">
                         <h2 class="mb-3">
@@ -631,22 +583,22 @@
 
                         <h4 class="overline">Critical Reading</h4>
                         <range
-                          v-if="_.get(school, fields['SAT_READING_MIDPOINT']) != null"
-                          :lower="{ value: _.get(school, fields['SAT_READING_25TH_PCTILE']), label: _.get(school, fields['SAT_READING_25TH_PCTILE']) }"
-                          :upper="{ value: _.get(school, fields['SAT_READING_75TH_PCTILE']), label: _.get(school, fields['SAT_READING_75TH_PCTILE']) }"
-                          :min="{ value: 0, label: '0' }"
-                          :max="{ value: 800, label: '800' }"
+                          v-if="satReading.available != null"
+                          :lower="{ value: satReading.lower, label: satReading.lower }"
+                          :upper="{ value: satReading.upper, label: satReading.upper}"
+                          :min="{ value: satReading.min, label: satReading.min }"
+                          :max="{ value: satReading.max, label: satReading.max }"
                           hideMiddle
                         ></range>
                         <p v-else class="data-na">Data Not Available</p>
 
                         <h4 class="overline">Math</h4>
                         <range
-                          v-if="_.get(school, fields['SAT_MATH_MIDPOINT']) != null"
-                          :lower="{ value: _.get(school, fields['SAT_MATH_25TH_PCTILE']), label: _.get(school, fields['SAT_MATH_25TH_PCTILE']) }"
-                          :upper="{ value: _.get(school, fields['SAT_MATH_75TH_PCTILE']), label: _.get(school, fields['SAT_MATH_75TH_PCTILE']) }"
-                          :min="{ value: 0, label: '0' }"
-                          :max="{ value: 800, label: '800' }"
+                          v-if="satMath.available != null"
+                          :lower="{ value: satMath.lower, label: satMath.lower }"
+                          :upper="{ value: satMath.upper, label: satMath.upper}"                       
+                          :min="{ value: satMath.min, label: satMath.min }"
+                          :max="{ value: satMath.max, label: satMath.max }"
                           hideMiddle
                         ></range>
                         <p v-else class="data-na">Data Not Available</p>
@@ -654,11 +606,11 @@
                         <h3 class="h2 mt-4">ACT</h3>
 
                         <range
-                          v-if="_.get(school, fields['ACT_MIDPOINT']) != null"
-                          :lower="{ value: _.get(school, fields['ACT_25TH_PCTILE']), label: _.get(school, fields['ACT_25TH_PCTILE']) }"
-                          :upper="{ value: _.get(school, fields['ACT_75TH_PCTILE']), label: _.get(school, fields['ACT_75TH_PCTILE']) }"
-                          :min="{ value: 0, label: '0' }"
-                          :max="{ value: 36, label: '36' }"
+                          v-if="act.available != null"
+                          :lower="{ value: act.lower, label: act.lower }"
+                          :upper="{ value: act.upper, label: act.upper}"                        
+                          :min="{ value: act.min, label: act.min }"
+                          :max="{ value: act.max, label: act.max }"
                           hideMiddle
                         ></range>
                         <p v-else class="data-na">Data Not Available</p>
@@ -667,8 +619,8 @@
                         <h2 class="mb-3">Admittance Rate</h2>
                         <donut
                           color="#0e365b"
-                          :value="_.get(school, this.fields['ADMITTANCE_RATE'])*100"
-                          v-if="_.get(school, this.fields['OPEN_ADMISSIONS'])!=1"
+                          :value="admittanceRate*100"
+                          v-if="openAdmissions!=1"
                           chart-id="admittance-chart"
                           :height="200"
                           :width="300"
@@ -727,6 +679,7 @@ import Donut from "components/vue/Donut.vue";
 import NameAutocomplete from "components/vue/NameAutocomplete.vue";
 import BarChart from "components/vue/Bar.vue";
 import Tooltip from "components/vue/Tooltip.vue";
+import SankeyButtons from "components/vue/SankeyButtons.vue";
 import Sankey from "components/vue/Sankey.vue";
 import Range from "components/vue/Range.vue";
 import HorizontalBar from "components/vue/HorizontalBar.vue";
@@ -738,17 +691,21 @@ import CompareHeader from "components/vue/CompareHeader.vue";
 import FieldData from "components/vue/FieldData.vue";
 import NetPriceLink from "components/vue/NetPriceLink.vue";
 import SearchForm from "components/vue/SearchForm.vue";
-import { compare } from 'vue/mixins.js';
-import URLHistory from '../js/src/vue/mixins/URLHistory.js';
+import { compare } from "vue/mixins.js";
+import ComplexFields from "vue/mixins/ComplexFields.js";
+import URLHistory from "../js/src/vue/mixins/URLHistory.js";
+import MultiRange from "components/vue/MultiRange.vue";
+
 
 export default {
-  mixins: [compare,URLHistory],
-  props: ["baseUrl",'compareSchools'],
+  mixins: [compare, URLHistory, ComplexFields],
+  props: ["baseUrl", "compareSchools"],
   components: {
     donut: Donut,
     "name-autocomplete": NameAutocomplete,
     "bar-chart": BarChart,
     tooltip: Tooltip,
+    "sankey-buttons": SankeyButtons,
     sankey: Sankey,
     range: Range,
     "horizontal-bar": HorizontalBar,
@@ -759,179 +716,34 @@ export default {
     "compare-header": CompareHeader,
     "field-data": FieldData,
     "net-price-link": NetPriceLink,
-    "search-form": SearchForm
+    "search-form": SearchForm,
+    "multi-range": MultiRange
   },
   data() {
     return {
       school: {},
-      fields: [],
       panels: [],
       num_panels: 7,
-      program_reporter_table: "program_reporter_total",
       field_sort: "ipeds_award_count",
       hoistCurrency: false,
-      allFieldsOfStudy: [],
-      minMaxDebt: {},
-      minMaxEarnings: {},
-      singleDebt: false,
-      singleEarnings: false,
-      error: false
+      error: false,
+      currentSankey: {
+          enroll: "enroll_both",
+          study: "study_both"
+      }
     };
   },
   computed: {
-    years() {
-      return _.get(this.school, this.fields["PREDOMINANT_DEGREE"]);
+    referer() {
+      return document.referrer || "/search/";
     },
-    awardLevels() {
-      // return values are whether the institution offers other kind of degrees/certs than the predominant degree
-      // if they do we return the glossary term key to display or false to disable the tooltip
-      switch (this.years) {
-        case 1:
-          return _.get(
-            this.school,
-            this.fields.DEGREE_OFFERED + ".assoc_or_bachelors"
-          )
-            ? "certificate"
-            : false;
-        case 2:
-          return _.get(
-            this.school,
-            this.fields.DEGREE_OFFERED + ".certificate"
-          ) || _.get(this.school, this.fields.DEGREE_OFFERED + ".bachelors")
-            ? "2-year"
-            : false;
-        case 3:
-          return _.get(
-            this.school,
-            this.fields.DEGREE_OFFERED + ".certificate"
-          ) || _.get(this.school, this.fields.DEGREE_OFFERED + ".assoc")
-            ? "4-year"
-            : false;
-      }
-      return false;
+    shareLink() {
+      return window.location.href || null;
     },
-    yearsStyle() {
-      switch (+this.years) {
-        case 2: // 2-year (AKA less than 4-year)
-          return "lt_four_year";
-        case 3: // 4-year
-          return "four_year";
-      }
-    },
-    publicPrivate() {
-      var ownership = _.get(this.school, this.fields["OWNERSHIP"]);
-      switch (+ownership) {
-        case 1: // public
-          return "public";
-
-        case 2: // private
-        case 3:
-          return "private";
-      }
-      return null;
-    },
-    income() {
-      let income = _.get(this.school, this.fields["NET_PRICE_BY_INCOME"]);
-      return income[this.publicPrivate]["by_income_level"];
-    },
-    specialDesignations() {
-      var designations = [];
-      var SPECIAL_DESIGNATIONS = picc.SPECIAL_DESIGNATIONS || {};
-
-      if (+_.get(this.school, this.fields.WOMEN_ONLY)) {
-        designations.push(SPECIAL_DESIGNATIONS.women_only);
-      } else if (+_.get(this.school, this.fields.MEN_ONLY)) {
-        designations.push(SPECIAL_DESIGNATIONS.men_only);
-      }
-
-      var religious = _.get(this.school, this.fields.RELIGIOUS);
-      if (religious in picc.RELIGIOUS_AFFILIATIONS_BY_NUMBER) {
-        designations.push(picc.RELIGIOUS_AFFILIATIONS_BY_NUMBER[religious]);
-      }
-
-      var minorityServing = _.get(this.school, this.fields.MINORITY_SERVING);
-      if (minorityServing) {
-        for (var key in SPECIAL_DESIGNATIONS) {
-          if (+minorityServing[key]) {
-            designations.push(SPECIAL_DESIGNATIONS[key]);
-          }
-        }
-      }
-      return designations;
-    },
-
-    raceEthnicity() {
-      let output = [];
-      let re = _.get(this.school, this.fields["RACE_ETHNICITY"]);
-      let include = [
-        "aian",
-        "asian",
-        "black",
-        "hispanic",
-        "nhpi",
-        "non_resident_alien",
-        "two_or_more",
-        "unknown",
-        "white"
-      ];
-      for (let p = 0; p < include.length; p++) {
-        output.push({
-          label: picc.RACE_ETHNICITY_LABELS[include[p]],
-          value: re[include[p]]
-        });
-      }
-
-      return _.sortBy(output, ["value"]).reverse();
-    },
-    retentionRate() {
-      let retention = _.get(this.school, this.fields.RETENTION_RATE);
-      if (retention) {
-        let fourYear = retention.four_year.full_time_pooled;
-        return fourYear || fourYear === 0
-          ? fourYear
-          : retention.lt_four_year.full_time_pooled;
-      }
-      retention = _.get(
-        this.school,
-        this.fields.RETENTION_RATE + ".four_year.full_time_pooled"
-      );
-      return retention || retention === 0
-        ? retention
-        : _.get(
-            this.school,
-            this.fields.RETENTION_RATE + ".lt_four_year.full_time_pooled"
-          );
-    },
-    completionRate() {
-      let OM = _.get(this.school, this.fields.COMPLETION_OM);
-      let G200_4 = _.get(this.school, this.fields.COMPLETION_200_4);
-      let G200_LT4 = _.get(this.school, this.fields.COMPLETION_200_LT4);
-      if(!OM && !G200_4 && !G200_LT4)
-      {
-        return false;
-      }
-      else if (OM) {
-        return OM;
-      } else {
-        return this.years == 3 ? G200_4 : G200_LT4;
-      }
-    },
-    programReporter() {
-      let reporterData = [];
-      let programs = _.get(this.school, this.fields.PROGRAM_REPORTER_PROGRAM);
-      let cost = _.get(this.school, this.fields.PROGRAM_REPORTER_COST);
-      for (let q = 1; q <= 6; q++) {
-        if (programs["program_" + q].cip_6_digit.code) {
-          reporterData.push({
-            ...programs["program_" + q].cip_6_digit,
-            ...cost["program_" + q].cip_6_digit
-          });
-        }
-      }
-      return reporterData;
-    },
-    isProgramReporter() {
-      return _.get(this.school, this.fields.PROGRAM_REPORTER_OFFERED) > 0;
+    fieldsLink() {
+      let id = _.get(this.school, this.fields["ID"]);
+      let name = _.get(this.school, this.fields["NAME"], "(unknown)");
+      return "/school/fields/?" + id + "-" + name.replace(/\W+/g, "-");
     },
     fieldsOfStudy() {
       let self = this;
@@ -964,17 +776,6 @@ export default {
       }
       return fos;
     },
-    referer() {
-      return document.referrer || "/search/";
-    },
-    shareLink() {
-      return window.location.href || null;
-    },
-    fieldsLink() {
-      let id = _.get(this.school, this.fields["ID"]);
-      let name = _.get(this.school, this.fields["NAME"], "(unknown)");
-      return "/school/fields/?" + id + "-" + name.replace(/\W+/g, "-");
-    },
     currentHoist() {
       let sort = this.field_sort;
       switch (sort) {
@@ -992,27 +793,15 @@ export default {
           break;
       }
     },
-    isBranch() {
-      // 0 not main
-      // 1 main
-      return _.get(this.school, this.fields["MAIN"]) === 0;
-    },
-    schoolUrl(){
-      let url = _.get(this.school, this.fields['SCHOOL_URL'], '#');
-      if(url =='#') return false;
-      else if(url.match(/^http/)) return url;
-      else return 'http://'+url;
-    },
-    searchURL(){
+    searchURL() {
       let qs = this.returnURLFromStorage();
-      if(qs){
-        return '/search' + qs;
-      }else{
-        return '/search';
+      if (qs) {
+        return "/search" + qs;
+      } else {
+        return "/search";
       }
     }
   },
-
   methods: {
     createMap(school) {
       var location = school.location;
@@ -1078,45 +867,11 @@ export default {
     none() {
       this.panels = [];
     },
-    findDebtRange() {
-      let fos = this.allFieldsOfStudy;
-      let cleanDebt = fos.filter(
-        obj => obj.debt.median_debt && obj.credential.level <= 3
-      );
-      let orderedDebt = cleanDebt.sort(
-        (a, b) => a.debt.median_debt - b.debt.median_debt
-      );
-      this.singleDebt =
-        orderedDebt.length == 1 ||
-        (orderedDebt.length == 2 &&
-          orderedDebt[0].debt.median_debt == orderedDebt[1].debt.median_debt);
-      this.minMaxDebt = {
-        min: orderedDebt[0],
-        max: orderedDebt[orderedDebt.length - 1]
-      };
-    },
-    findEarningsRange() {
-      let fos = this.allFieldsOfStudy;
-      let cleanEarnings = fos.filter(
-        obj => obj.earnings.median_earnings && obj.credential.level <= 3
-      );
-      let orderedEarnings = cleanEarnings.sort(
-        (a, b) => a.earnings.median_earnings - b.earnings.median_earnings
-      );
-      this.singleEarnings =
-        orderedEarnings.length == 1 ||
-        (orderedEarnings.length == 2 &&
-          orderedEarnings[0].earnings.median_earnings ==
-            orderedEarnings[1].earnings.median_earnings);
-      this.minMaxEarnings = {
-        min: orderedEarnings[0],
-        max: orderedEarnings[orderedEarnings.length - 1]
-      };
-    }
+    
+    
   },
   mounted() {
     let self = this;
-    this.fields = picc.fields;
 
     if (!location.search) {
       return null;
@@ -1130,13 +885,13 @@ export default {
     }
 
     var params = {};
-    params[picc.fields.OPERATING] = 1;
+    params[this.fields.OPERATING] = 1;
     params[
-      picc.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
+      this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
     ] = true;
-    params[picc.fields.SIZE + "__range"] = "0..";
-    params[picc.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";
-    params[picc.fields.ID + "__range"] = "..999999";
+    params[this.fields.SIZE + "__range"] = "0..";
+    params[this.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";
+    params[this.fields.ID + "__range"] = "..999999";
     //params["fields"] = "latest,school,id,location";
     params["keys_nested"] = true;
     picc.API.getSchool(id, params, function onSchoolLoad(error, school) {
@@ -1144,9 +899,6 @@ export default {
         self.error = true;
       } else {
         self.school = school;
-        self.allFieldsOfStudy = _.get(school, self.fields.FIELD_OF_STUDY);
-        self.findDebtRange();
-        self.findEarningsRange();
         document.title = _.get(school, "school.name") + " | College Scorecard";
         self.createMap(school);
       }

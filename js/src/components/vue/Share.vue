@@ -5,7 +5,18 @@
           color="secondary"
           v-on="on"
           rounded
+          :x-small="small"
+          class="d-inline d-sm-none"
+          fab
+        >
+          <v-icon small class=''>fas fa-share</v-icon>
+        </v-btn>
+        <v-btn
+          color="secondary"
+          v-on="on"
+          rounded
           :small="small"
+          class="d-none d-sm-inline"
         >
           <v-icon x-small class='mr-2'>fas fa-share</v-icon> {{label}}
         </v-btn>

@@ -1,7 +1,6 @@
 <script>
 import { HorizontalBar } from "vue-chartjs";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-
 export default {
   extends: HorizontalBar,
   props: {
@@ -20,6 +19,18 @@ export default {
     color: {
       type: String,
       default: "#333333"
+    },
+    labels:{
+      type: Boolean, 
+      default: false
+    },
+    labelColor:{
+      type: String,
+      default: "#333333"
+    },
+    type:{
+      type: String, 
+      default: 'percent'
     }
   },
   data() {
@@ -28,6 +39,7 @@ export default {
         layout: {
           padding: 0
         },
+        csType: this.type,
         plugins: [ChartDataLabels],
         legend: false,
         title: false,
@@ -51,23 +63,52 @@ export default {
         },
         plugins: {
           datalabels: {
-            display: false,
+            display: this.labels,
+            color: this.labelColor,
+            align: function(context){
+              let value = context.dataset.data[context.dataIndex];
+              let max =context.chart.options.scales.xAxes[0].ticks.max;
+              if(value > (max/2))
+              {
+                return "start"
+              }
+              else
+              {
+                return 'end';
+              }
+            },
+            anchor: 'end',
             formatter: function(value, context) {
-              if (context.datasetIndex == 0 && value > 5) {
-                return value + "%";
-              } else return null;
+              if(context.datasetIndex==0 && value > 5)
+              {
+                let type = context.chart.config.options.csType;
+                if(type=='percent')
+                {
+                  return value+"%";
+                }
+                else if(type=='currency')
+                {
+                  return Number(value).toLocaleString('en-US',{style: 'currency', currency: 'USD',}).slice(0,-3);
+                }
+                else
+                {
+                  return value;
+                }
+              }
+              else 
+              {
+                return null;
+              }
             }
           }
         }
       }
     };
   },
-  mounted() {
-    // Overwriting base render method with actual data.
-    this.renderChart(
-      {
+  computed:{
+    chartData(){
+      return {
         labels: ["Bar"],
-
         datasets: [
           {
             data: [this.value],
@@ -75,12 +116,20 @@ export default {
           },
           {
             data: [this.max],
-            backgroundColor: "rgba(0,0,0,0.3)"
+            backgroundColor: "#EAEAEA"
           }
         ]
-      },
-      this.options
-    );
+      }
+    }
+  },
+  watch: {
+    chartData() {
+      this.renderChart(this.chartData, this.options);
+    }
+  },
+  mounted() {
+    // Overwriting base render method with actual data.
+    this.renderChart(this.chartData, this.options);
   }
 };
 </script>
