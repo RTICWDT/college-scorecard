@@ -69,11 +69,11 @@
               <v-alert
                 v-if="currentFilter === 4"
                 color="warning"
-              >Note about Post-baccalaureate Certificate coming soon!</v-alert>
+              >No data are displayed because of definitional differences with other data sources. Fields of study on this page include undergraduate-level programs that may be classified as undergraduate certificates in other data sources.</v-alert>
               <v-alert
                 v-if="currentFilter === 8"
                 color="warning"
-              >Note about Graduate/Professional Certificate coming soon!</v-alert>
+              >Fields of study on this page include graduate-level programs that may be labeled “postbaccalaureate certificates” in other data sources.</v-alert>
               <v-expansion-panels v-if="!_.isEmpty(processedPrograms)">
                 <v-expansion-panel v-for="(prog, index) in processedPrograms" :key="index">
                   <v-expansion-panel-header>{{ _.startCase(_.toLower(prog.name).slice(0,-1)) }}</v-expansion-panel-header>
