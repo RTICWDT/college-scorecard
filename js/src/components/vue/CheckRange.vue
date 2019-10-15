@@ -86,7 +86,7 @@ export default {
   },
   computed:{
     prefix(){
-      return (this.appendText == 'K')? '$':''; 
+      return (this.appendText == 'k')? '$':''; 
     }
   },
   watch:{

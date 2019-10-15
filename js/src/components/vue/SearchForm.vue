@@ -153,7 +153,7 @@
       :min="0"
       :max="100"
       :step="5"
-      appendText="K"
+      appendText="k"
     >
     </check-range>
     </div>
