@@ -225,31 +225,53 @@ export default {
         debtRange() {
             if (!this.allFieldsOfStudy) return null;
             let fos = this.allFieldsOfStudy;
+            if(!fos.length)
+            {
+                fos = [fos];
+            }
             let cleanDebt = fos.filter(
                 obj => obj.debt.median_debt && obj.credential.level <= 3
             );
             let orderedDebt = cleanDebt.sort(
                 (a, b) => a.debt.median_debt - b.debt.median_debt
             );
-            return {
-                singlle: orderedDebt.length == 1 || (orderedDebt.length == 2 && orderedDebt[0].debt.median_debt == orderedDebt[1].debt.median_debt),
-                min: orderedDebt[0],
-                max: orderedDebt[orderedDebt.length - 1]
+            if(orderedDebt[0]==null)
+            {
+                return null;
+            }
+            else
+            {
+                return {
+                    single: orderedDebt.length == 1 || (orderedDebt.length == 2 && orderedDebt[0].debt.median_debt == orderedDebt[1].debt.median_debt),
+                    min: orderedDebt[0],
+                    max: orderedDebt[orderedDebt.length - 1]
+                }
             }
         },
         earningsRange() {
             if (!this.allFieldsOfStudy) return null;
             let fos = this.allFieldsOfStudy;
+            if(!fos.length)
+            {
+                fos = [fos];
+            }
             let cleanEarnings = fos.filter(
                 obj => obj.earnings.median_earnings && obj.credential.level <= 3
             );
             let orderedEarnings = cleanEarnings.sort(
                 (a, b) => a.earnings.median_earnings - b.earnings.median_earnings
             );
-            return {
-                single: orderedEarnings.length == 1 || (orderedEarnings.length == 2 && orderedEarnings[0].earnings.median_earnings == orderedEarnings[1].earnings.median_earnings),
-                min: orderedEarnings[0],
-                max: orderedEarnings[orderedEarnings.length - 1]
+            if(orderedEarnings[0]==null)
+            {
+                return null;
+            }
+            else
+            {
+                return {
+                    single: orderedEarnings.length == 1 || (orderedEarnings.length == 2 && orderedEarnings[0].earnings.median_earnings == orderedEarnings[1].earnings.median_earnings),
+                    min: orderedEarnings[0],
+                    max: orderedEarnings[orderedEarnings.length - 1]
+                }
             }
         },
         act() {
