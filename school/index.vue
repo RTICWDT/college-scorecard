@@ -319,7 +319,7 @@
                         </v-col>
                         <v-col cols="12" md="6">
                           <h2 class="mb-3">
-                            Typical Total Debt After Graduation
+                            Median Total Debt After Graduation
                             <tooltip definition="avg-debt" />
                           </h2>
                           <p>Total debt after graudation depends on field of study for undergraduate borrowers who complete college.</p>
@@ -385,7 +385,7 @@
                     aria-controls="earnings-content"
                     class="px-0 py-3 pa-sm-5"
                   >
-                    <p>One-year post-completion earnings with range of highest and lowest median earnings for undergraduate and credential programs for which there is data. For more information, see Fields of Study/Majors for this school.</p>
+                    <p>Typical earnings in the first year after graduation with the range of highest and lowest median earnings for undergraduate and credential programs for which there is data. For more information, see Fields of Study/Majors for this school.</p>
                     <multi-range
                       :minmax="earningsRange"
                       variable="earnings.median_earnings"
