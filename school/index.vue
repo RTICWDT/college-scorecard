@@ -147,8 +147,12 @@
                             <tooltip definition="avg-cost-year" />
                           </h2>
                           <h2
+                            v-if="netPrice"
                             class="display-2 navy-text font-weight-bold"
                           >{{ netPrice | numeral('$0,0')}}</h2>
+                          <div class="data-na" v-else>
+                            Data Not Available
+                          </div>
                         </div>
                         <div v-else>
                           <h2>
@@ -193,7 +197,6 @@
                             <tr>
                               <td>$0-$30,000</td>
                               <td
-                                data-bind="net_price_income1"
                                 v-if="income['0-30000']"
                               >{{ income['0-30000'] | numeral('$0,0') }}</td>
                               <td v-else>--</td>
@@ -201,7 +204,6 @@
                             <tr>
                               <td>$30,001-$48,000</td>
                               <td
-                                data-bind="net_price_income2"
                                 v-if="income['30001-48000']"
                               >{{ income['30001-48000'] | numeral('$0,0') }}</td>
                               <td v-else>--</td>
@@ -209,7 +211,6 @@
                             <tr>
                               <td>$48,001-$75,000</td>
                               <td
-                                data-bind="net_price_income3"
                                 v-if="income['48001-75000']"
                               >{{ income['48001-75000'] | numeral('$0,0') }}</td>
                               <td v-else>--</td>
@@ -217,7 +218,6 @@
                             <tr>
                               <td>$75,001-$110,000</td>
                               <td
-                                data-bind="net_price_income4"
                                 v-if="income['75001-110000']"
                               >{{ income['75001-110000'] | numeral('$0,0') }}</td>
                               <td v-else>--</td>
@@ -225,7 +225,6 @@
                             <tr>
                               <td>$110,001+</td>
                               <td
-                                data-bind="net_price_income5"
                                 v-if="income['110001-plus']"
                               >{{ income['110001-plus'] | numeral('$0,0') }}</td>
                               <td v-else>--</td>
@@ -583,7 +582,7 @@
 
                         <h4 class="overline">Critical Reading</h4>
                         <range
-                          v-if="satReading.available != null"
+                          v-if="satReading.available"
                           :lower="{ value: satReading.lower, label: satReading.lower }"
                           :upper="{ value: satReading.upper, label: satReading.upper}"
                           :min="{ value: satReading.min, label: satReading.min }"
@@ -594,7 +593,7 @@
 
                         <h4 class="overline">Math</h4>
                         <range
-                          v-if="satMath.available != null"
+                          v-if="satMath.available"
                           :lower="{ value: satMath.lower, label: satMath.lower }"
                           :upper="{ value: satMath.upper, label: satMath.upper}"                       
                           :min="{ value: satMath.min, label: satMath.min }"
@@ -606,7 +605,7 @@
                         <h3 class="h2 mt-4">ACT</h3>
 
                         <range
-                          v-if="act.available != null"
+                          v-if="act.available"
                           :lower="{ value: act.lower, label: act.lower }"
                           :upper="{ value: act.upper, label: act.upper}"                        
                           :min="{ value: act.min, label: act.min }"

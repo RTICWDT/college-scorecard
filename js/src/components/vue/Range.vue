@@ -49,7 +49,7 @@
 <style lang="scss">
 @import "sass/_variables.scss";
 .range-container{
-  overflow: hidden;
+  overflow: visible;
   height: 70px;
   padding-top: 20px;
 }

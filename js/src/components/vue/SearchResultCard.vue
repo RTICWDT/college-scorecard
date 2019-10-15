@@ -98,7 +98,7 @@ export default {
       let OM = _.get(this.school, this.fields.COMPLETION_OM);
       let G200_4 = _.get(this.school, this.fields.COMPLETION_200_4);
       let G200_LT4 = _.get(this.school, this.fields.COMPLETION_200_LT4);
-      if(!OM & !G200_4 & !G200_LT4)
+      if(!OM && !G200_4 && !G200_LT4)
       {
         return 'N/A';
       }
