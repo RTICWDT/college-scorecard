@@ -153,7 +153,7 @@
       :min="0"
       :max="100"
       :step="5"
-      appendText="K"
+      appendText="k"
     >
     </check-range>
     </div>
@@ -526,7 +526,7 @@ export default {
       }
 
       if(groomedInput.acceptance && groomedInput.acceptance > 0 && this.utility.enable.acceptance){
-        groomedInput.acceptance = groomedInput.acceptance / 100 + '..'
+        groomedInput.acceptance = groomedInput.acceptance / 100 + '..1'
       }else{
         _.unset(groomedInput,'acceptance'); // TODO: CONST;
       }
