@@ -63,9 +63,9 @@ new Vue({
   created(){
     this.refreshCompareSchools();
 
-    apiGet('https://api.data.gov/TEST/ed/staging/beta/v1/','XpW9kcymK6LQBjSlwclRWNsb47IBiw5AO7uvfzkD',"/schools",{}).then((response)=>{
-      console.log("Dater:" + response.data);
-    })
+    // apiGet('https://api.data.gov/TEST/ed/staging/beta/v1/','XpW9kcymK6LQBjSlwclRWNsb47IBiw5AO7uvfzkD',"/schools",{}).then((response)=>{
+    //   console.log("Dater:" + response.data);
+    // })
 
     // apiSearch({}, function(error,data){
     //   console.log(data);

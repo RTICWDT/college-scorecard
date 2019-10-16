@@ -223,6 +223,7 @@ import _ from "lodash";
 // import querystring from 'querystring';
 // import { EventBus } from "../js/src/vue/EventBus.js";
 import { EventBus } from "../EventBus.js";
+import {apiGet} from '../api.js';
 
 const querystring = require("querystring");
 
@@ -384,22 +385,34 @@ export default {
 
       this.addURLToStorage(qs);
 
+      // TODO Remove if needed.
       let vm = this;
-      let req = picc.API.search(query, function(error, data) {
-        if (error) {
-          vm.$emit("loading", false);
-          vm.showError(error);
-          return;
-        }
 
-        console.log("loaded schools:", data);
+      let request = apiGet('https://api.data.gov/TEST/ed/staging/beta/v1/','XpW9kcymK6LQBjSlwclRWNsb47IBiw5AO7uvfzkD',"/schools", query).then((response) => {
+        console.log("loaded schools:", response.data);
+        
+        this.results.schools = response.data.results;
+        this.results.meta = response.data.metadata;
 
-        vm.results.schools = data.results;
-        vm.results.meta = data.metadata;
-
-        vm.$emit("loading", false);
-        vm.shareUrl = window.location.href;
+        this.$emit("loading", false);
+        this.shareUrl = window.location.href;
       });
+      
+      // let req = picc.API.search(query, function(error, data) {
+      //   if (error) {
+      //     vm.$emit("loading", false);
+      //     vm.showError(error);
+      //     return;
+      //   }
+
+      //   console.log("loaded schools:", data);
+
+      //   vm.results.schools = data.results;
+      //   vm.results.meta = data.metadata;
+
+      //   vm.$emit("loading", false);
+      //   vm.shareUrl = window.location.href;
+      // });
     },
     showError(error) {
       // TODO: Loop through multiple error messages if needed.
