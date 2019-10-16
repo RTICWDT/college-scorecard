@@ -12,7 +12,7 @@
           <v-icon x-small class='mr-2'>fas fa-share</v-icon> {{label}}
         </v-btn>
       </template>
-      <v-list dense>
+      <v-list>
         <v-list-item
           v-for="(item, index) in items"
           :key="index"
@@ -35,7 +35,7 @@
           <v-icon x-small>fas fa-share</v-icon>
         </v-btn>
       </template>
-      <v-list dense>
+      <v-list>
         <v-list-item
           v-for="(item, index) in items"
           :key="index"
