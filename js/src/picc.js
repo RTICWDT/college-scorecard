@@ -2135,7 +2135,6 @@ picc.form.prepareParams = (function() {
 
     cip4: picc.fields.FIELD_OF_STUDY_CODE,
 
-    // TODO: Finish implementing this feature.
     cip4_degree: function(query, value, key){
       var fosArray = [];
 
@@ -2658,11 +2657,11 @@ picc.tooltip = {
  * page-specific functions
  */
 picc.pages = {
-  index:      require('./index'),
-  search:     require('./search'),
-  school:     require('./school'),
-  compare:    require('./compare'),
-  data:       require('./data')
+  // index:      require('./index'),
+  // search:     require('./search'),
+  // school:     require('./school'),
+  // compare:    require('./compare'),
+  // data:       require('./data')
 };
 
 
