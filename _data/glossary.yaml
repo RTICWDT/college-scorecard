@@ -1,22 +1,28 @@
 avg-cost-year:
- default: <strong>Average Annual Cost</strong> The average annual net price for federal financial aid recipients, after aid from the school, state, or federal government. For public schools, this is only the average cost for in-state students.
- program_reporter: <strong>Average Annual Cost</strong> The average annual net price is not available for this program-reporting school.
+  title: Average Annual Cost
+  default: The average annual net price for federal financial aid recipients, after aid from the school, state, or federal government. For public schools, this is only the average cost for in-state students.
+  program_reporter: The average annual net price is not available for this program-reporting school.
 
 avg-program-cost:
-  default: <strong>Cost After Aid for Largest Program</strong><ul><li>This includes expenses beyond tuition, fees, books, and supplies (e.g., living expenses).</li><li>If the program is less than 1 year, this is the total cost after aid. If the program is longer than 1 year, this is the annual cost after aid.</li></ul>
+  title: Cost After Aid for Largest Program
+  default: <ul><li>This includes expenses beyond tuition, fees, books, and supplies (e.g., living expenses).</li><li>If the program is less than 1 year, this is the total cost after aid. If the program is longer than 1 year, this is the annual cost after aid.</li></ul>
 
 graduation-rate:
+  title: Graduation Rate
   default: <strong>Graduation Rate</strong> <ul><li>The graduation rate is the share of students who graduated within 150 percent of the expected time to graduation (typically 6 years for schools that award predominantly 4-year degrees and 3 years for schools that award predominantly 2-year degrees).</li><li>This graduation rate only applies to students studying full-time who started college at this school.</li></ul>
 
 avg-salary:
-  default: <strong>Salary After Attending</strong> The median earnings of former students who received federal financial aid, at 10 years after entering the school.
-  branch: <strong>Salary After Attending</strong> The median earnings of former students who received federal financial aid, at 10 years after entering the school.<br><br>This information is based on all locations of this school.
-  branch_compare: <strong>Salary After Attending</strong> The median earnings of former students who received federal financial aid, at 10 years after entering the school.<br><br>For schools with multiple locations, this information is based on all of their locations.
+  title: Salary After Completing
+  default: The median earnings of former students who received federal financial aid, at 10 years after entering the school.
+  branch: The median earnings of former students who received federal financial aid, at 10 years after entering the school.<br><br>This information is based on all locations of this school.
+  branch_compare: The median earnings of former students who received federal financial aid, at 10 years after entering the school.<br><br>For schools with multiple locations, this information is based on all of their locations.
 
 avg-loan-payment:
- default: <strong>Monthly Student Loan Payment</strong> The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 5.05% interest rate.
- branch: <strong>Monthly Student Loan Payment</strong> The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 5.05% interest rate.<br><br>This information is based on all locations of this school.
- branch_compare: <strong>Monthly Student Loan Payment</strong> The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 5.05% interest rate.<br><br>For schools with multiple locations, this information is based on all of their locations.
+  title: Monthly Student Loan Payment
+  default: The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 5.05% interest rate.
+  branch: The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 5.05% interest rate.<br><br>This information is based on all locations of this school.
+  branch_compare: The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 5.05% interest rate.<br><br>For schools with multiple locations, this information is based on all of their locations.
+  glossary: The median monthly loan payment is based on the typical total debt after graduation, and assumes standard repayment terms of a 10 year amortization using the current interest rate for subsidized federal loans, 4.53%. This 10-year fixed payment plan is just one of several plans available to federal borrowers, please see the <a href="https://studentloans.gov/myDirectLoan/repaymentEstimator.action" target="_blank">repayment calculator</a> to estimate monthly payments for alternative payment plans. Please see the entry for typical total debt after graduation for information on what types of loans are included in this monthly payment. 
 
 repayment-rate:
   default: <strong>Students Paying Down Their Debt</strong> The share of student borrowers who have paid at least one dollar of the principal balance on their federal loans within three years of leaving school.
@@ -24,9 +30,11 @@ repayment-rate:
   branch_compare: <strong>Students Paying Down Their Debt</strong> The share of student borrowers who have paid at least one dollar of the principal balance on their federal loans within three years of leaving school.<br><br>For schools with multiple locations, this information is based on all of their locations.
 
 avg-debt:
-  default: <strong>Typical Total Debt After Graduation</strong> The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.
-  branch: <strong>Typical Total Debt After Graduation</strong> The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.<br><br>This information is based on all locations of this school.
-  branch_compare: <strong>Typical Total Debt After Graduation</strong> The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.<br><br>For schools with multiple locations, this information is based on all of their locations.
+  title: Median Total Debt After Graduation
+  default: The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.
+  branch: The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.<br><br>This information is based on all locations of this school.
+  branch_compare: The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.<br><br>For schools with multiple locations, this information is based on all of their locations.
+  glossary: The median per-borrower federal loan debt accumulated at the school by undergraduate student borrowers of federal loans who completed college. Non-federal loans and federal loans not made to students (e.g., Parent PLUS loans) are not included in this value. Note that this debt metric only includes loans originated at this school, so this metric should be interpreted as the typical debt level for attending this school alone, not necessarily the total debt to obtain a credential since students often attend more than 1 school.   
 
 student-aid:
   default: <strong>Students Receiving Federal Loans</strong> The share of undergraduate students who borrowed federal loans to help pay for college. Excludes Parent PLUS loans.
