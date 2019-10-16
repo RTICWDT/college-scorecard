@@ -79,16 +79,17 @@
                       text
                       icon
                       :color="isSelected?'amber':'grey'"
+                      
                       @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
                       <v-icon>fa fa-plus-circle</v-icon>
                     </v-btn>
-                    <share label="Share this School" :url="shareLink" />
+                    <share small label="Share this School" :url="shareLink" />
                     <div class="school-map" ref="map"></div>
                   </v-col>
                 </v-row>
-                <v-row>
-                  <v-col col="12" md="6">
+                <v-row class='mt-3'>
+                  <v-col cols="12" md="6" >
                     <h2 class="mb-4">
                       Graduation Rate&nbsp;
                       <tooltip definition="graduation-rate" />
@@ -101,7 +102,7 @@
                     ></donut>
                     <div v-else class="data-na">Data Not Available</div>
                   </v-col>
-                  <v-col col="12" md="6">
+                  <v-col cols="12" md="6">
                     <h2 class="mb-3">
                       Salary After Completing&nbsp;
                       <tooltip definition="avg-salary" />
@@ -480,6 +481,7 @@
                     <div v-else>
                       <v-alert
                         type="info"
+                        class='mt-3'
                       >There are no fields of study with data available for {{currentHoist}}.</v-alert>
                     </div>
                     <v-btn rounded color="secondary" :href="fieldsLink">

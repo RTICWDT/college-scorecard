@@ -3,7 +3,7 @@
     <div class="backNav">
       <div class="container school-back">
         <v-btn color="secondary" rounded small id="referrer-link" class="link-more" href="./index/">
-          &laquo; Back to {{_.get(school, fields['NAME']) }}
+          &laquo; Back to School Profile
         </v-btn>
       </div>
     </div>
@@ -50,7 +50,7 @@
                     >
                       <v-icon>fa fa-plus-circle</v-icon>
                     </v-btn>
-                    <share label="Share this School" :url="shareLink" />
+                    <share small label="Share this School" :url="shareLink" />
                   </v-col>
                 </v-row>
               </v-card>
