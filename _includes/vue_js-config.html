@@ -10,6 +10,12 @@
   picc.API.key = '{{ site.API.key }}';
   {% endif %}
 
+  // TODO - Replace above config with this!
+  window.api = {
+    url: '{{ site.API.baseurl }}',
+    key: '{{ site.API.key }}'
+  }
+
   /*
    * This is a dictionary for the various "special designation"
    * columns. The race/ethnicity ones are all nested under the

@@ -1997,7 +1997,7 @@ picc.form.minifyQueryString = function(form) {
 
 /**
  *
- */
+\ */
 picc.form.prepareParams = (function() {
   var fields = picc.fields;
 

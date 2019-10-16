@@ -388,7 +388,7 @@ export default {
       // TODO Remove if needed.
       let vm = this;
 
-      let request = apiGet('https://api.data.gov/TEST/ed/staging/beta/v1/','XpW9kcymK6LQBjSlwclRWNsb47IBiw5AO7uvfzkD',"/schools", query).then((response) => {
+      let request = apiGet(window.api.url, window.api.key, "/schools", query).then((response) => {
         console.log("loaded schools:", response.data);
         
         this.results.schools = response.data.results;
@@ -396,6 +396,13 @@ export default {
 
         this.$emit("loading", false);
         this.shareUrl = window.location.href;
+      }).catch((error) => {
+        console.warn("Error fetching search.");
+        this.$emit("loading", false);
+        
+        if(error.response.data.errors){
+          this.showError(error.response.data.errors[0]);
+        }
       });
       
       // let req = picc.API.search(query, function(error, data) {
@@ -416,21 +423,26 @@ export default {
     },
     showError(error) {
       // TODO: Loop through multiple error messages if needed.
-
       console.error("error:", error);
 
-      if (typeof error.responseText != "undefined") {
-        // 500 doesn't have JSON text return.
-        if (error.status === 500) {
-          this.error.message = "There was an unexpected API error.";
-        } else {
-          var errorText = JSON.parse(error.responseText);
-          error = errorText.errors[0].message;
-
-          this.error.message =
-            String(error) || "There was an unexpected API error.";
-        }
+      if(error.message){
+        this.error.message = error.message
+      }else{
+        this.error.message = "There was an unexpected API error.";
       }
+
+      // if (typeof error.responseText != "undefined") {
+      //   // 500 doesn't have JSON text return.
+      //   if (error.status === 500) {
+      //     this.error.message = "There was an unexpected API error.";
+      //   } else {
+      //     var errorText = JSON.parse(error.responseText);
+      //     error = errorText.errors[0].message;
+
+      //     this.error.message =
+      //       String(error) || "There was an unexpected API error.";
+      //   }
+      // }
     },
     handleToggleCompareSchool(school) {
       this.$emit("toggle-compare-school", school);

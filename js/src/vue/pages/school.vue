@@ -696,8 +696,7 @@ import MultiRange from "components/vue/MultiRange.vue";
 import { compare } from "vue/mixins.js";
 import ComplexFields from "vue/mixins/ComplexFields.js";
 import URLHistory from "vue/mixins/URLHistory.js";
-
-
+import { apiGet } from '../api.js';
 
 export default {
   mixins: [compare, URLHistory, ComplexFields],
@@ -891,15 +890,38 @@ export default {
     params[this.fields.ID + "__range"] = "..999999";
     //params["fields"] = "latest,school,id,location";
     params["keys_nested"] = true;
-    picc.API.getSchool(id, params, function onSchoolLoad(error, school) {
-      if (error) {
-        self.error = true;
-      } else {
-        self.school = school;
-        document.title = _.get(school, "school.name") + " | College Scorecard";
-        self.createMap(school);
-      }
-    });
+
+    // TODO - Check for API Key and URL.
+    // TODO - School CONST endpoint.
+
+    // Note, Must add key as a param.
+    let request = apiGet(window.api.url, window.api.key, '/schools/', {id:id})
+      .then((response) => {
+        if(response.data.metadata.total > 1){
+          this.error = true;
+          console.warn('More than one school found for ID: "' + id + '"');
+          return null;
+        }
+
+        this.school = response.data.results[0];
+        document.title = _.get(this.school, "school.name") + " | College Scorecard";
+        this.createMap(this.school);
+
+      }).catch((response) => {
+        this.error = true;
+        console.warn('No School found for ID: ' + id);
+      });
+
+    // TODO - Remove if not needed.
+    // picc.API.getSchool(id, params, function onSchoolLoad(error, school) {
+    //   if (error) {
+    //     self.error = true;
+    //   } else {
+    //     self.school = school;
+    //     document.title = _.get(school, "school.name") + " | College Scorecard";
+    //     self.createMap(school);
+    //   }
+    // });
   }
 };
 </script>
