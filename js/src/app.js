@@ -23,7 +23,8 @@ import './vue/filters.js'
 import './vue/mixins.js'
 import './plugins/chartjs.js';
 
-import {apiSearch as apiSearch} from './vue/legacy.js';
+// import {apiSearch as apiSearch} from './vue/legacy.js';
+import {apiGet} from './vue/api.js';
 
 Vue.prototype._ = _
 Vue.use(vueNumeralFilterInstaller, { locale: 'en' });
@@ -62,9 +63,13 @@ new Vue({
   created(){
     this.refreshCompareSchools();
 
-    apiSearch({}, function(error,data){
-      console.log(data);
-    }, 'https://api.data.gov/TEST/ed/staging/beta/v1/', 'XpW9kcymK6LQBjSlwclRWNsb47IBiw5AO7uvfzkD');
+    apiGet('https://api.data.gov/TEST/ed/staging/beta/v1/','XpW9kcymK6LQBjSlwclRWNsb47IBiw5AO7uvfzkD',"/schools",{}).then((response)=>{
+      console.log("Dater:" + response.data);
+    })
+
+    // apiSearch({}, function(error,data){
+    //   console.log(data);
+    // }, 'https://api.data.gov/TEST/ed/staging/beta/v1/', 'XpW9kcymK6LQBjSlwclRWNsb47IBiw5AO7uvfzkD');
 
     // console.log(Search);
   },
