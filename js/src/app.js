@@ -19,6 +19,8 @@ import DataGlossaryPage from './vue/pages/data_glossary.vue';
 
 import ComparePage from './vue/pages/compare.vue';
 
+import FourOhFour from './vue/pages/404.vue';
+
 import './vue/filters.js'
 import './vue/mixins.js'
 import './plugins/chartjs.js';
@@ -55,7 +57,8 @@ new Vue({
     'data-changelog': DataChangelogPage,
     'data-documentation': DataDocumentationPage,
     'data-glossary': DataGlossaryPage,
-    'compare-page': ComparePage
+    'compare-page': ComparePage,
+    'four-oh-four': FourOhFour
   },
   created(){
     this.refreshCompareSchools();
