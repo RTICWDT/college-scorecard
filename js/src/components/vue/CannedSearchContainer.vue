@@ -10,7 +10,7 @@
         ></canned-search-slider>
         <canned-search-slider
           label="Most People Get In"
-          :add-to-query="[{acceptance: '0.9..'}]"
+          :add-to-query="[{acceptance: '0.9..1'}]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
       </v-col>

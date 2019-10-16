@@ -526,7 +526,7 @@ export default {
       }
 
       if(groomedInput.acceptance && groomedInput.acceptance > 0 && this.utility.enable.acceptance){
-        groomedInput.acceptance = groomedInput.acceptance / 100 + '..'
+        groomedInput.acceptance = groomedInput.acceptance / 100 + '..1'
       }else{
         _.unset(groomedInput,'acceptance'); // TODO: CONST;
       }
