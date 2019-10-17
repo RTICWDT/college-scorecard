@@ -216,8 +216,8 @@ import CannedSearchContainer from "../../components/vue/CannedSearchContainer.vu
 import CompareHeader from "../../components/vue/CompareHeader.vue";
 import Share from "../../components/vue/Share.vue";
 import NameAutocomplete from "../../components/vue/NameAutocomplete.vue";
-// import URLHistory from '../js/src/vue/mixins/URLHistory.js';
 import URLHistory from "../mixins/URLHistory.js";
+import PrepareParams from '../mixins/PrepareParams.js';
 
 import _ from "lodash";
 // import querystring from 'querystring';
@@ -239,7 +239,7 @@ export default {
     "share": Share,
     "name-autocomplete": NameAutocomplete
   },
-  mixins:[URLHistory],
+  mixins:[URLHistory,PrepareParams],
   props: {
     "page-permalink": String,
     states: Array,
@@ -340,7 +340,9 @@ export default {
 
       params.sort = this.input.sort;
 
-      let query = picc.form.prepareParams(params);
+      // TODO - Remove old call if not needed.
+      // let query = picc.form.prepareParams(params);
+      let query = this.prepareParams(params);
 
       query.fields = [
         // we need the id to link it

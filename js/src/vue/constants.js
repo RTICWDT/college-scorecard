@@ -108,5 +108,34 @@ export const fields = {
   LONGITUDE:                'location.lon'
 };
 
+export const formMappings = {
+  sort: {
+    advantage:          fields.EARNINGS_GT_25K,
+    salary:             fields.MEDIAN_EARNINGS,
+    name:               fields.NAME,
+    size:               fields.SIZE,
+    avg_net_price:      fields.NET_PRICE,
+    completion_rate:    fields.COMPLETION_RATE,
+  },
+
+  control: {
+    'public': 1,
+    'private': 2,
+    'profit': 3
+  },
+
+  size: {
+    small:  '1..2000',
+    medium: '2000..15000',
+    large:  '15001..'
+  },
+
+  degree: {
+    a: '2',
+    b: '3',
+    c: '1'
+  }
+};
+
 // TODO -  Add the following items
   // API Endpoints
