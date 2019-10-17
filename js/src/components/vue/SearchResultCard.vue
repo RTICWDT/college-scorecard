@@ -73,6 +73,8 @@
 import numeral from 'numeral';
 import Tooltip from './Tooltip.vue';
 import SmallSchoolIcons from './SmallSchoolIcons.vue';
+import { fields } from '../../vue/constants.js';
+
 export default {
   components: {
     tooltip: Tooltip,
@@ -84,7 +86,7 @@ export default {
   },
   data(){
     return {
-      fields: picc.fields,
+      fields: fields,
       field_of_study: ''
     }
   },

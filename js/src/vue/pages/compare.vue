@@ -456,7 +456,7 @@ export default {
     var params = {};
     params[this.fields.OPERATING] = 1;
     params[
-      picc.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
+      this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
     ] = true;
     params[this.fields.SIZE + "__range"] = "0..";
     params[this.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";

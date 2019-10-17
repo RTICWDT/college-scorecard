@@ -125,9 +125,11 @@ import CompareHeader from "components/vue/CompareHeader.vue";
 import FieldData from "components/vue/FieldData.vue";
 import { compare } from 'vue/mixins.js';
 import { apiGet } from '../api.js';
+import { fields } from '../constants.js';
+import { SiteData } from '../mixins/SiteData.js';
 
 export default {
-  mixins: [compare],
+  mixins: [compare,SiteData],
   props: ["baseUrl", "compareSchools"],
   components: {
     tooltip: Tooltip,
@@ -143,7 +145,7 @@ export default {
       fields: [],
       panels: [],
       num_panels: 7,
-      cip2: picc.CIP2,
+      cip2: {},
       programs: [],
       filters: [
         { id: 1, credential: "Undergraduate Certificate or Diploma" },
@@ -193,7 +195,8 @@ export default {
   },
   mounted() {
     let self = this;
-    this.fields = picc.fields;
+    this.fields = fields;
+    this.cip2 = this.CIP2; // From SiteData mixin.
 
     if (!location.search) {
       return null;
@@ -206,16 +209,17 @@ export default {
       //  return showError(picc.errors.NO_SCHOOL_ID);
     }
 
+    // TODO - Replace this, maybe with regular dom selector.
     d3.select("#referrer-link").attr("href", document.referrer || null);
 
     var params = {};
-    params[picc.fields.OPERATING] = 1;
+    params[this.fields.OPERATING] = 1;
     params[
-      picc.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
+      this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
     ] = true;
-    params[picc.fields.SIZE + "__range"] = "0..";
-    params[picc.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";
-    params[picc.fields.ID + "__range"] = "..999999";
+    params[this.fields.SIZE + "__range"] = "0..";
+    params[this.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";
+    params[this.fields.ID + "__range"] = "..999999";
     //params["fields"] = "latest,school,id,location";
     params["keys_nested"] = true;
 

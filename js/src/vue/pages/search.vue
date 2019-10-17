@@ -224,6 +224,7 @@ import _ from "lodash";
 // import { EventBus } from "../js/src/vue/EventBus.js";
 import { EventBus } from "../EventBus.js";
 import {apiGet} from '../api.js';
+import {fields} from '../constants.js';
 
 const querystring = require("querystring");
 
@@ -343,37 +344,37 @@ export default {
 
       query.fields = [
         // we need the id to link it
-        picc.fields.ID,
+        fields.ID,
         // basic display fields
-        picc.fields.NAME,
-        picc.fields.CITY,
-        picc.fields.STATE,
-        picc.fields.SIZE,
-        picc.fields.BRANCHES,
-        picc.fields.LOCALE,
+        fields.NAME,
+        fields.CITY,
+        fields.STATE,
+        fields.SIZE,
+        fields.BRANCHES,
+        fields.LOCALE,
         // to get "public" or "private"
-        picc.fields.OWNERSHIP,
+        fields.OWNERSHIP,
         // to get the "four_year" or "lt_four_year" bit
-        picc.fields.PREDOMINANT_DEGREE,
+        fields.PREDOMINANT_DEGREE,
         // program-reporter offered programs / flag
-        picc.fields.PROGRAM_REPORTER_OFFERED,
+        fields.PROGRAM_REPORTER_OFFERED,
         // get all of the net price values
-        picc.fields.NET_PRICE,
+        fields.NET_PRICE,
         // completion rate
-        picc.fields.COMPLETION_RATE,
+        fields.COMPLETION_RATE,
         // this has no sub-fields
-        picc.fields.MEDIAN_EARNINGS,
+        fields.MEDIAN_EARNINGS,
         // not sure if we need this, but let's get it anyway
-        picc.fields.EARNINGS_GT_25K,
+        fields.EARNINGS_GT_25K,
         // under investigation flag
-        picc.fields.UNDER_INVESTIGATION,
+        fields.UNDER_INVESTIGATION,
 
         // new completion rates
-        picc.fields.COMPLETION_OM,
-        picc.fields.COMPLETION_200_4,
-        picc.fields.COMPLETION_200_LT4,
+        fields.COMPLETION_OM,
+        fields.COMPLETION_200_4,
+        fields.COMPLETION_200_LT4,
 
-        picc.fields.FIELD_OF_STUDY
+        fields.FIELD_OF_STUDY
       ].join(",");
 
       // TODO: Need to remove this when API

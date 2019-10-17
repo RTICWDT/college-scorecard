@@ -1,7 +1,11 @@
+import { fields } from '../constants.js';
+import { SiteData } from './SiteData.js';
+
 export default {
+    mixins:[SiteData],
     computed: {
         fields() {
-            return picc.fields;
+            return fields;
         },
         id() {
             if (!this.school) return null;
@@ -89,7 +93,7 @@ export default {
         specialDesignations() {
             if (!this.school) return null;
             var designations = [];
-            var SPECIAL_DESIGNATIONS = picc.SPECIAL_DESIGNATIONS || {};
+            let SPECIAL_DESIGNATIONS = this.site.data.special_designations || {};
 
             if (+_.get(this.school, this.fields.WOMEN_ONLY)) {
                 designations.push(SPECIAL_DESIGNATIONS.women_only);
@@ -98,8 +102,8 @@ export default {
             }
 
             var religious = _.get(this.school, this.fields.RELIGIOUS);
-            if (religious in picc.RELIGIOUS_AFFILIATIONS_BY_NUMBER) {
-                designations.push(picc.RELIGIOUS_AFFILIATIONS_BY_NUMBER[religious]);
+            if (religious in this.RELIGIOUS_AFFILIATIONS_BY_NUMBER) {
+                designations.push(this.RELIGIOUS_AFFILIATIONS_BY_NUMBER[religious]);
             }
 
             var minorityServing = _.get(this.school, this.fields.MINORITY_SERVING);
@@ -129,7 +133,7 @@ export default {
             ];
             for (let p = 0; p < include.length; p++) {
                 output.push({
-                    label: picc.RACE_ETHNICITY_LABELS[include[p]],
+                    label: this.site.data.race_ethnicity[include[p]],
                     value: re[include[p]]
                 });
             }

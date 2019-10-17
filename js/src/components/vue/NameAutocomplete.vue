@@ -21,6 +21,9 @@
 </template>
 
 <script>
+import { apiGet } from '../../vue/api.js';
+import { fields } from '../../vue/constants.js';
+
 export default {
     data: () => ({
       items: [],
@@ -30,24 +33,35 @@ export default {
     }),
     methods:{
       goToSchool(){
-        let id = _.get(this.school, picc.fields.ID);
-        let name = _.get(this.school, picc.fields.NAME,'(unknown)');
+        let id = _.get(this.school, fields.ID);
+        let name = _.get(this.school, fields.NAME,'(unknown)');
         window.location= '/school/?'+id+'-'+name.replace(/\W+/g, '-'); 
       }
     },
     watch: {
       search: _.debounce(function(newVal){
         this.isLoading = true
-        var self = this;
-        var query = { fields: ([picc.fields.NAME,picc.fields.ID]).join(','), per_page: 20 };
-        query[picc.fields.NAME] = this.search;
+        // var self = this;
+        var query = { fields: ([fields.NAME,fields.ID]).join(','), per_page: 20 };
+        query[fields.NAME] = this.search;
+
         query = picc.form.prepareParams(query);
 
-        picc.API.search(query, function(error, data){
-            if (error || !data.results.length) { return {}; }
-            self.items = data.results;
-            self.isLoading = false;
+        let request = apiGet(window.api.url, window.api.key, "/schools", query).then((response) => {
+          if (!response.data.results.length) { return {}; }
+
+          this.items = response.data.results;
+          this.isLoading = false;
+        }).catch((error) => {
+          this.items = {};
+          this.isLoading = false;
         });
+
+        // picc.API.search(query, function(error, data){
+        //     if (error || !data.results.length) { return {}; }
+        //     self.items = data.results;
+        //     self.isLoading = false;
+        // });
       },200)
     }
   }
