@@ -6,8 +6,8 @@
       </template>
       <v-card>
         <v-card-title>{{title}}</v-card-title>
-        <v-card-text v-html="content" class='pb-1'></v-card-text>
-        <v-card-actions class="px-5 pb-4">
+        <v-card-text v-html="content" class='pb-5'></v-card-text>
+        <v-card-actions class="px-5 pb-4" v-if='hasGlossary'>
           <v-btn :href="'/data/glossary/#'+definition" small rounded color="secondary">More Information</v-btn>
         </v-card-actions>
       </v-card>
@@ -48,6 +48,9 @@ export default {
     },
     title(){
       return this.glossary[this.definition]['title'];
+    },
+    hasGlossary(){
+      return this.glossary[this.definition]['glossary']?true:false;
     }
   }
 };
