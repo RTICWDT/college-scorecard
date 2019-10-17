@@ -20,8 +20,10 @@
 <script>
 import {find} from 'lodash';
 import { EventBus } from '../../vue/EventBus.js';
+import {SiteData} from '../../vue/mixins/SiteData.js';
 
 export default {
+  mixins:[SiteData],
   props: ["value"],
   data(){
     return{
@@ -36,7 +38,7 @@ export default {
   },
   computed: {
     items() {
-      return _.sortBy(picc.CIP4,['field']);
+      return _.sortBy(this.CIP4,['field']);
     }
   },
   created(){

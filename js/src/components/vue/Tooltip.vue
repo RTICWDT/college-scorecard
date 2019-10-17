@@ -16,7 +16,10 @@
 </style>
 
 <script>
+import {SiteData} from '../../vue/mixins/SiteData.js';
+
 export default {
+  mixins:[SiteData],
   props: {
     definition: String,
     custom: {
@@ -35,7 +38,7 @@ export default {
   },
   computed: {
     glossary() {
-      return picc.GLOSSARY;
+      return this.site.data.glossary;
     },
     content() {
       return this.glossary[this.definition][this.custom];
