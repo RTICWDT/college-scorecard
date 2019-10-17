@@ -191,7 +191,7 @@
                           <thead>
                             <tr>
                               <th>Family Income</th>
-                              <th>Average Cost</th>
+                              <th>Average Annual Cost</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -322,7 +322,7 @@
                             Median Total Debt After Graduation
                             <tooltip definition="avg-debt" />
                           </h2>
-                          <p>Total debt after graudation depends on field of study for undergraduate borrowers who complete college.</p>
+                          <p>Total debt after graduation depends on field of study for undergraduate borrowers who complete college.</p>
                           <multi-range
                             :minmax="debtRange"
                             variable="debt.median_debt"
