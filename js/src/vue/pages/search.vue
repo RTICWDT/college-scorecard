@@ -277,7 +277,7 @@ export default {
     specializedMission: Object,
     defaultSort: {
       type: String,
-      default: "name:asc"
+      default: "completion_rate:desc"
     },
     isLoading: Boolean,
     compareSchools: Array
@@ -312,7 +312,7 @@ export default {
       sorts: [
         { type: "Name", field: "name:asc" },
         { type: "Annual Cost", field: "avg_net_price:asc" },
-        { type: "Graduation Rate", field: "completion_rate:asc" }
+        { type: "Graduation Rate", field: "completion_rate:desc" }
       ],
       shareUrl: null
     };
