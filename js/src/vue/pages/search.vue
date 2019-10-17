@@ -49,7 +49,7 @@
 
       </v-navigation-drawer>
       <v-content>
-        <v-container fluid class="grey lighten-5 pa-0">
+        <v-container fluid class="pa-0">
           <div id="search-result-container">
             <div class="search-result-container">
               <v-card  class="mt-2 mb-4 py-1 px-4 elevaton-0 pageBar" v-if="!isLoading">
