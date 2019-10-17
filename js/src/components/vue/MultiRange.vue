@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="minmax.single">
+    <div v-if="minmax && minmax.single">
       <range
         :lower="{ value: 0, label: '$0' }"
         :upper="{ value: _.get(minmax.max, variable), label: $options.filters.numeral(_.get(minmax.max, variable), '$0,0') }"
@@ -12,7 +12,7 @@
         hideLower
       ></range>
     </div>
-    <div v-else-if="minmax.min">
+    <div v-else-if="minmax && minmax.min">
       <range
         :lower="{ value: _.get(minmax.min, variable), label: $options.filters.numeral(_.get(minmax.min, variable), '$0,0') }"
         :upper="{ value: _.get(minmax.max, variable), label: $options.filters.numeral(_.get(minmax.max, variable), '$0,0') }"

@@ -333,19 +333,20 @@
                             Typical Monthly Loan Payment&nbsp;
                             <tooltip definition="avg-loan-payment" />
                           </h2>
-                          <div v-if="debtRange.singleDebt">
+                          <div v-if="debtRange && debtRange.single">
                             <div
                               class="display-2 navy-text font-weight-bold"
                               v-if="debtRange.min"
                             >{{ debtRange.min.debt.monthly_debt_payment | numeral('$0,0') }}/mo</div>
                           </div>
-                          <div v-else-if="debtRange.min">
+                          <div v-else-if="debtRange && debtRange.min">
                             <div
                               class="display-2 navy-text font-weight-bold"
                               v-if="debtRange.min"
                             >{{ debtRange.min.debt.monthly_debt_payment | numeral('$0,0') }}-{{ debtRange.max.debt.monthly_debt_payment | numeral('0,0') }}/mo</div>
                           </div>
                           <div v-else class="data-na">Data not available.</div>
+                          
                           <p class="mt-2">
                             This is based on a standard 10-year payment plan, other
                             <a
