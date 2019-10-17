@@ -110,11 +110,11 @@ const alias = {
   // TODO - Remove old function.
   // degree: function(query, value, key) {
   //   if (value === 'a') {
-  //     query[picc.fields.DEGREE_OFFERED + '.assoc'] = true;
+  //     query[fields.DEGREE_OFFERED + '.assoc'] = true;
   //   } else if (value === 'b') {
-  //     query[picc.fields.DEGREE_OFFERED + '.bachelors'] = true;
+  //     query[fields.DEGREE_OFFERED + '.bachelors'] = true;
   //   } else if (value === 'c') {
-  //     query[picc.fields.DEGREE_OFFERED + '.certificate'] = true;
+  //     query[fields.DEGREE_OFFERED + '.certificate'] = true;
   //   }
   //   delete query[key];
   // },
@@ -124,11 +124,11 @@ const alias = {
   // degree: function(query, value, key){
   //   for(var i in value){
   //     if (value[i] === 'a') {
-  //       query[picc.fields.DEGREE_OFFERED + '.assoc'] = true;
+  //       query[fields.DEGREE_OFFERED + '.assoc'] = true;
   //     } else if (value[i] === 'b') {
-  //       query[picc.fields.DEGREE_OFFERED + '.bachelors'] = true;
+  //       query[fields.DEGREE_OFFERED + '.bachelors'] = true;
   //     } else if (value[i] === 'c') {
-  //       query[picc.fields.DEGREE_OFFERED + '.certificate'] = true;
+  //       query[fields.DEGREE_OFFERED + '.certificate'] = true;
   //     }
   //   }
   //   delete query[key];
@@ -294,10 +294,10 @@ export default {
       }
       
       // set the predominant degree to range '1..3' because ED expert guidance
-      query[picc.fields.PREDOMINANT_DEGREE + '__range'] = '1..3';
+      query[fields.PREDOMINANT_DEGREE + '__range'] = '1..3';
   
       // exclude perfect-only children per ED
-      query[picc.fields.ID + '__range'] = '..999999';
+      query[fields.ID + '__range'] = '..999999';
           
       return query;
     }

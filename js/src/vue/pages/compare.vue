@@ -470,7 +470,7 @@ export default {
     let paramArray = [];
     this.compareSchools.map(function(school) {
       var id = +school.schoolId || +school;
-      query[id] = [picc.API.getSchool, id, params];
+      // query[id] = [picc.API.getSchool, id, params];
       paramArray.push({
         id: id
       });
