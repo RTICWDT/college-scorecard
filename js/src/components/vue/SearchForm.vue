@@ -46,7 +46,7 @@
       multiple
       chips
       hide-details
-      placeholder="Select one..."
+      placeholder="Select a state..."
       class='mt-0 pt-0'
       color="secondary"
       ></v-select>
@@ -144,6 +144,7 @@
       :step="5"
       appendText = "%"
       class='mt-5'
+      andUp
     ></check-range>
 
     <check-range legend-title="Average Annual Cost" 
@@ -211,6 +212,7 @@
             :max="100"
             :step="5"
             appendText="%"
+            andUp
           >
             <template v-slot:label>
               Acceptance Rate
