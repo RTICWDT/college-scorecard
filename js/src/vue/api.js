@@ -20,28 +20,16 @@ const apiGet = function(baseURL,apiKey,uri,params = {}) {
   });
 }
 
-const apiGetAll = function(baseURL, apiKey, uriArray, params){
+const apiGetAll = function(baseURL, apiKey, uri, paramArray){
+  let promises = [];
 
+  for(let i = 0; i < paramArray.length; i++){
+    promises.push(
+      apiGet(baseURL,apiKey, uri, paramArray[i])
+    );
+  }
+
+  return axios.all(promises);
 }
 
-// const apiSchool = function(baseURL, apiKey, uri, id, params = {}){
-//   let apiInstance = initializeConfig(baseURL);
-
-//   if(!id){
-//     return{
-//       error: "ID is required",
-//       data: null
-//     }
-//   }
-
-//   return apiInstance.get(uri, {
-//     params:{
-//       api_key: apiKey,
-//       id: id,
-//       ...params
-//     }
-//   });
-// }
-
-export { apiGet };
-// A function to start config options for each type of call
+export { apiGet, apiGetAll };

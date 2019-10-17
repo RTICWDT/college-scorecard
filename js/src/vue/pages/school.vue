@@ -891,9 +891,6 @@ export default {
     //params["fields"] = "latest,school,id,location";
     params["keys_nested"] = true;
 
-    // TODO - Check for API Key and URL.
-    // TODO - School CONST endpoint.
-
     // Note, Must add key as a param.
     let request = apiGet(window.api.url, window.api.key, '/schools/', {id:id})
       .then((response) => {

@@ -124,6 +124,7 @@ import CompareDrawer from "components/vue/CompareDrawer.vue";
 import CompareHeader from "components/vue/CompareHeader.vue";
 import FieldData from "components/vue/FieldData.vue";
 import { compare } from 'vue/mixins.js';
+import { apiGet } from '../api.js';
 
 export default {
   mixins: [compare],
@@ -217,10 +218,27 @@ export default {
     params[picc.fields.ID + "__range"] = "..999999";
     //params["fields"] = "latest,school,id,location";
     params["keys_nested"] = true;
-    picc.API.getSchool(id, params, function onSchoolLoad(error, school) {
-      self.school = school;
-      document.title = _.get(school, "school.name") + " Fields of Study | College Scorecard";
-    });
+
+    // TODO - Handle Error.
+    let request = apiGet(window.api.url, window.api.key, '/schools/', {id:id})
+      .then((response) => {
+        if(response.data.metadata.total > 1){
+          console.warn('More than one school found for ID: "' + id + '"');
+          return null;
+        }
+
+        this.school = response.data.results[0];
+        document.title = _.get(this.school, "school.name") + " | College Scorecard";
+
+      }).catch((response) => {
+        console.warn('No School found for ID: ' + id);
+      });
+
+    // TODO - Remove If not needed.
+    // picc.API.getSchool(id, params, function onSchoolLoad(error, school) {
+    //   self.school = school;
+    //   document.title = _.get(school, "school.name") + " Fields of Study | College Scorecard";
+    // });
   }
 };
 </script>

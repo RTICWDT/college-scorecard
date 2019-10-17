@@ -397,6 +397,7 @@ import CompareSection from "components/vue/compare/Section.vue";
 import { compare } from "vue/mixins.js";
 import ComplexFields from "vue/mixins/ComplexFields.js";
 import SankeyButtons from "components/vue/SankeyButtons.vue";
+import { apiGetAll } from '../api.js';
 
 export default {
   mixins: [compare, ComplexFields],
@@ -465,9 +466,15 @@ export default {
     params["all_programs"] = true;
 
     let query = {};
+    let schoolArray = [];
+    let paramArray = [];
     this.compareSchools.map(function(school) {
       var id = +school.schoolId || +school;
       query[id] = [picc.API.getSchool, id, params];
+      paramArray.push({
+        id: id
+      });
+
     });
 
     // pass the list of chosen schools to analytics.
@@ -478,24 +485,53 @@ export default {
     //     console.error('[ga] compare school event error');
     //   }
     // }
-    picc.API.getAll(query, function(error, data) {
-      Object.keys(data).forEach(function(key) {
-        if (data[key]) {
-          switch (_.get(data[key], self.fields["PREDOMINANT_DEGREE"])) {
-            case 1:
-              self.schools["Certificate schools"].push(data[key]);
-              break;
-            case 2:
-              self.schools["2-year schools"].push(data[key]);
-              break;
 
-            case 3:
-              self.schools["4-year schools"].push(data[key]);
-              break;
-          }
+    let request = apiGetAll(window.api.url, window.api.key, '/schools/', paramArray).then((responses) => {
+      
+      let schoolData = responses.map(function(response){
+        if(response.data.results[0]){
+          return response.data.results[0];
         }
       });
+
+      schoolData.forEach((school) => {
+        switch (_.get(school, this.fields["PREDOMINANT_DEGREE"])) {
+          case 1:
+            this.schools["Certificate schools"].push(school);
+            break;
+          case 2:
+            this.schools["2-year schools"].push(school);
+            break;
+          case 3:
+            this.schools["4-year schools"].push(school);
+            break;
+        }
+      });
+
+    }).catch((responses) => {
+      // TODO - How do we want to handle errors?
+      console.error("Issue locating schools for compare...");
     });
+
+    // picc.API.getAll(query, function(error, data) {
+    //   Object.keys(data).forEach(function(key) {
+    //     if (data[key]) {
+    //       switch (_.get(data[key], self.fields["PREDOMINANT_DEGREE"])) {
+    //         case 1:
+    //           self.schools["Certificate schools"].push(data[key]);
+    //           break;
+    //         case 2:
+    //           self.schools["2-year schools"].push(data[key]);
+    //           break;
+
+    //         case 3:
+    //           self.schools["4-year schools"].push(data[key]);
+    //           break;
+    //       }
+    //     }
+    //   });
+    // });
+  
   }
 };
 </script>
