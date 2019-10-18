@@ -22,9 +22,11 @@ import ComparePage from './vue/pages/compare.vue';
 import './vue/filters.js'
 import './vue/mixins.js'
 import './plugins/chartjs.js';
+import {localStorageKeys} from './vue/constants.js';
+import {LocalStorage} from './vue/localStoage.js';
 
 // import {apiSearch as apiSearch} from './vue/legacy.js';
-import {apiGet} from './vue/api.js';
+// import {apiGet} from './vue/api.js';
 
 Vue.prototype._ = _
 Vue.use(vueNumeralFilterInstaller, { locale: 'en' });
@@ -62,33 +64,24 @@ new Vue({
   },
   created(){
     this.refreshCompareSchools();
-
-    // apiGet('https://api.data.gov/TEST/ed/staging/beta/v1/','XpW9kcymK6LQBjSlwclRWNsb47IBiw5AO7uvfzkD',"/schools",{}).then((response)=>{
-    //   console.log("Dater:" + response.data);
-    // })
-
-    // apiSearch({}, function(error,data){
-    //   console.log(data);
-    // }, 'https://api.data.gov/TEST/ed/staging/beta/v1/', 'XpW9kcymK6LQBjSlwclRWNsb47IBiw5AO7uvfzkD');
-
-    // console.log(Search);
   },
   mounted(){
     let vm = this;
     // Process the search updated event.
-    document.addEventListener('search-updated', function (e) {
-      console.log("Event Heard From Vue.");
-      vm.refreshResults(e.detail.data);
-    });
+    // document.addEventListener('search-updated', function (e) {
+    //   console.log("Event Heard From Vue.");
+    //   vm.refreshResults(e.detail.data);
+    // });
 
   },
   methods:{
-    refreshResults(resultsObject){
-      this.results = resultsObject;
-    },
+    // refreshResults(resultsObject){
+    //   this.results = resultsObject;
+    // },
     // Refresh Compare Schools from Local Storage.
     refreshCompareSchools(){
-      this.compareSchools = picc.school.selection.all(picc.school.selection.LSKey);
+      // this.compareSchools = JSON.parse(window.localStorage.getItem(localStorageKeys.COMPARE_KEY)) || [];
+      this.compareSchools = LocalStorage.selectAll(localStorageKeys.COMPARE_KEY);
     },
     // Toggle Compare School in local storage.
     toggleCompareSchool(school){
@@ -102,7 +95,8 @@ new Vue({
         }
       };
 
-      picc.school.selection.vueToggle(schoolData);
+      // picc.school.selection.vueToggle(schoolData);
+      LocalStorage.toggleCompare(schoolData, localStorageKeys.COMPARE_KEY);
       this.refreshCompareSchools();
     }
   }

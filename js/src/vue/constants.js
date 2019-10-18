@@ -137,5 +137,10 @@ export const formMappings = {
   }
 };
 
+export const localStorageKeys = {
+  COMPARE_KEY: 'compare-schools',
+  SEARCH_URL_KEY: 'search-url'
+};
+
 // TODO -  Add the following items
   // API Endpoints
