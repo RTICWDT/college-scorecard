@@ -36,7 +36,7 @@ export default {
   props: ["baseUrl", "dataBase_url"],
   computed: {
     glossary() {
-      return picc.GLOSSARY;
+      return siteDataAll.glossary;
     }
   }
 };

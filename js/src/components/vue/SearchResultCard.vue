@@ -73,7 +73,6 @@
 import numeral from 'numeral';
 import Tooltip from './Tooltip.vue';
 import SmallSchoolIcons from './SmallSchoolIcons.vue';
-import { fields } from '../../vue/constants.js';
 import ComplexFields from '../../vue/mixins/ComplexFields.js';
 
 export default {
@@ -85,12 +84,6 @@ export default {
   props:{
       "school": Object,
       "isSelected": Boolean
-  },
-  data(){
-    return {
-      fields: fields,
-      field_of_study: ''
-    }
   },
   computed:{
 
