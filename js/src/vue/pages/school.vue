@@ -795,9 +795,9 @@ export default {
     searchURL() {
       let qs = this.returnURLFromStorage();
       if (qs) {
-        return "/search" + qs;
+        return "/search/" + qs;
       } else {
-        return "/search";
+        return "/search/";
       }
     }
   },
