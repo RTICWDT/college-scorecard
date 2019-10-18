@@ -93,7 +93,10 @@ export default {
   },
   computed:{
     prefix(){
-      return (this.appendText == 'k')? '$':''; 
+      let text = '';
+      text += this.andUp? "≥ ":"≤ ";
+      text += (this.appendText == 'k')? '$':''
+      return text; 
     }
   },
   watch:{
