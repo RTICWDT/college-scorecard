@@ -1,22 +1,31 @@
+import "@babel/polyfill";
 import Vue from 'vue';
 import vuetify from './plugins/vuetify'
 import _ from 'lodash'
 import vueNumeralFilterInstaller from 'vue-numeral-filter';
 
-import IndexPage from '../../index.vue';
-import SchoolPage from '../../school/index.vue';
-import SchoolProgramsPage from '../../school/fields.vue';
-import SearchPage from '../../search/index.vue';
-import DataIndexPage from '../../data/index.vue';
-import DataChangelogPage from '../../data/changelog.vue';
-import DataDocumentationPage from '../../data/documentation.vue';
-import DataGlossaryPage from '../../data/glossary.vue';
-import TransitionPage from '../../school/transition.vue';
-//import ComparePage from '../../compare/index.vue';
+import IndexPage from './vue/pages/index.vue';
+
+import SchoolPage from './vue/pages/school.vue';
+import SchoolProgramsPage from './vue/pages/school_fields.vue';
+import TransitionPage from './vue/pages/school_transition.vue';
+
+import SearchPage from './vue/pages/search.vue';
+
+import DataIndexPage from './vue/pages/data.vue';
+import DataChangelogPage from './vue/pages/data_changelog.vue';
+import DataDocumentationPage from './vue/pages/data_documentation.vue';
+import DataGlossaryPage from './vue/pages/data_glossary.vue';
+
+import ComparePage from './vue/pages/compare.vue';
+
+import FourOhFourPage from './vue/pages/404.vue';
 
 import './vue/filters.js'
 import './vue/mixins.js'
 import './plugins/chartjs.js';
+import {localStorageKeys} from './vue/constants.js';
+import {LocalStorage} from './vue/localStoage.js';
 
 Vue.prototype._ = _
 Vue.use(vueNumeralFilterInstaller, { locale: 'en' });
@@ -44,33 +53,24 @@ new Vue({
     'index-page': IndexPage,
     'school-page': SchoolPage,
     'school-programs-page': SchoolProgramsPage,
+    'transition-page': TransitionPage,
     'search-page': SearchPage,
     'data-index-page': DataIndexPage,
     'data-changelog': DataChangelogPage,
     'data-documentation': DataDocumentationPage,
     'data-glossary': DataGlossaryPage,
-    'transition-page': TransitionPage
-    //'compare-page': ComparePage
+    'compare-page': ComparePage,
+    'four-oh-four': FourOhFourPage
   },
   created(){
     this.refreshCompareSchools();
   },
   mounted(){
-    let vm = this;
-    // Process the search updated event.
-    document.addEventListener('search-updated', function (e) {
-      console.log("Event Heard From Vue.");
-      vm.refreshResults(e.detail.data);
-    });
-
   },
   methods:{
-    refreshResults(resultsObject){
-      this.results = resultsObject;
-    },
     // Refresh Compare Schools from Local Storage.
     refreshCompareSchools(){
-      this.compareSchools = picc.school.selection.all(picc.school.selection.LSKey);
+      this.compareSchools = LocalStorage.selectAll(localStorageKeys.COMPARE_KEY);
     },
     // Toggle Compare School in local storage.
     toggleCompareSchool(school){
@@ -84,7 +84,8 @@ new Vue({
         }
       };
 
-      picc.school.selection.vueToggle(schoolData);
+      // picc.school.selection.vueToggle(schoolData);
+      LocalStorage.toggleCompare(schoolData, localStorageKeys.COMPARE_KEY);
       this.refreshCompareSchools();
     }
   }

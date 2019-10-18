@@ -1,20 +1,5 @@
 <template>
   <div>
-    <div>
-
-      <p class="outcomes_intro d-inline-block mb-2">Show data for students who</p>
-        <v-btn class='ma-1 d-block d-sm-inline' small :color="enroll == 'enroll_first_time'? 'secondary':null" @click="enroll='enroll_first_time'">started college here</v-btn>
-        <v-btn class='ma-1 d-block d-sm-inline' small :color="enroll == 'enroll_not_first_time'? 'secondary':null" @click="enroll='enroll_not_first_time'">transferred in</v-btn>
-        <v-btn class='ma-1 d-block d-sm-inline' small :color="enroll == 'enroll_both'? 'secondary':null" @click="enroll='enroll_both'">both</v-btn>
-    </div>
-    <div>
-      <p class="outcomes_intro d-inline-block ">and started their studies</p>
-        <v-btn class='ma-1 d-block d-sm-inline' small :color="study == 'study_full_time'? 'secondary':null" @click="study='study_full_time'">full-time</v-btn>
-        <v-btn class='ma-1 d-block d-sm-inline' small :color="study == 'study_part_time'? 'secondary':null" @click="study='study_part_time'">part-time</v-btn>
-        <v-btn class='ma-1 d-block d-sm-inline' small :color="study == 'study_both'? 'secondary':null" @click="study='study_both'">both</v-btn>
-        .
-    </div>
-
     <div v-if="has_data" class="om_visualization">
       <div class="om_group">Out of {{ group_count | separator }} students...</div>
       <div class="om_sankey" ref="sankey"></div>
@@ -61,8 +46,6 @@
   }
 }
 
-
-
 </style>
 
 
@@ -73,17 +56,26 @@ export default {
     colors: {
       type: String,
       default: "multi"
+    },
+    currentSankey:{
+      type: Object,
     }
   },
   data() {
     return {
       outcomes: Object,
       outcome_cohorts: Object,
-      enroll: "enroll_both",
-      study: "study_both",
       group_count: 0,
       has_data: true
     };
+  },
+  computed:{
+    enroll(){
+      return this.currentSankey.enroll;
+    },
+    study(){
+      return this.currentSankey.study;
+    }
   },
 
   mounted() {

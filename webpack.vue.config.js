@@ -26,6 +26,13 @@ module.exports = {
         loader: 'vue-loader'
       },
       {
+        test: /\.m?js$/,
+        include: [path.resolve('node_modules/vuetify'),path.resolve('js/src')],
+        use: {
+          loader: 'babel-loader'
+        }
+      },
+      {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {

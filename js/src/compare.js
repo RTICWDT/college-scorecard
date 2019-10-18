@@ -7,7 +7,8 @@ if (typeof document !== 'undefined') {
   require('./components/compat/custom-event');
 }
 
-module.exports = function compare() {
+// module.exports = function compare() {
+export default function compare() {
 
   var loadable = d3.select('.loadable');
   var root = d3.select('.compare-bg');

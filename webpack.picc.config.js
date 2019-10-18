@@ -8,13 +8,15 @@ module.exports = {
     filename: 'picc.js',
     path: __dirname + '/js',
     library: "picc",
+    libraryExport: "default",
     libraryTarget: "umd"
   },
   module: {
     rules: [
       {
         test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
+        // exclude: /(node_modules|bower_components)/,
+        // include: [path.resolve('node_modules/async')],
         use: {
           loader: 'babel-loader',
           options: {

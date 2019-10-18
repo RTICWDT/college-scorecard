@@ -1,4 +1,5 @@
-module.exports = function data() {
+// module.exports = function data() {
+export default function data() {
 
   /**
    * * add click listeners for download links

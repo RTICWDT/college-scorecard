@@ -2,8 +2,9 @@ var tagalong = require('./tagalong');
 var d3 = require('d3');
 var jQuery = require('jquery');
 
-module.exports = function school() {
-
+// module.exports = function school() {
+export default function school(){
+  
   var loadable = d3.select('.loadable');
 
   var id = getSchoolId();

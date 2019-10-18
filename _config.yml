@@ -23,8 +23,7 @@ sass:
 
 # common site scripts, relative to `{{ site.baseurl }}/js/`
 scripts:
-  - picc.js
-  - vendor/materialize.min.js
+  # - picc.js
 
 stylesheets:
   - styles.css

@@ -172,4 +172,5 @@ function expandKeys(obj) {
   return expanded;
 }
 
-module.exports = tagalong;
+// module.exports = tagalong;
+export default tagalong;

@@ -27,7 +27,7 @@
         </v-chip>
         </p>
 
-        <v-btn color="primary" text icon class='float-right' :color="isSelected?'amber':'grey'"  @click="$emit('toggle-compare-school',school)">
+        <v-btn text icon class='float-right' :color="isSelected?'amber':'grey'"  @click="$emit('toggle-compare-school',school)">
           <v-icon >fa fa-plus-circle</v-icon>
         </v-btn>
         <p class='overline font-weight-bold mb-1'>{{school['school.city']}}, {{school['school.state']}}</p>
@@ -71,8 +71,10 @@
 
 <script>
 import numeral from 'numeral';
-import Tooltip from 'components/vue/Tooltip.vue';
-import SmallSchoolIcons from 'components/vue/SmallSchoolIcons.vue';
+import Tooltip from './Tooltip.vue';
+import SmallSchoolIcons from './SmallSchoolIcons.vue';
+import { fields } from '../../vue/constants.js';
+
 export default {
   components: {
     tooltip: Tooltip,
@@ -84,7 +86,7 @@ export default {
   },
   data(){
     return {
-      fields: picc.fields,
+      fields: fields,
       field_of_study: ''
     }
   },
