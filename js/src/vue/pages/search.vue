@@ -126,7 +126,7 @@
                         :total-visible="7"
                         @input="searchAPI(parseURLParams())"
                         class='pr-0 mr-0'
-                        
+                        circle
                       ></v-pagination>
                     </div>
                   </v-col>
@@ -197,7 +197,7 @@
                         :length="totalPages"
                         :total-visible="7"
                         @input="searchAPI(parseURLParams())"
-                        
+                        circle
                       ></v-pagination>
                      
                     </div>
