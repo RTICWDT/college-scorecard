@@ -19,14 +19,13 @@ import DataGlossaryPage from './vue/pages/data_glossary.vue';
 
 import ComparePage from './vue/pages/compare.vue';
 
+import FourOhFourPage from './vue/pages/404.vue';
+
 import './vue/filters.js'
 import './vue/mixins.js'
 import './plugins/chartjs.js';
 import {localStorageKeys} from './vue/constants.js';
 import {LocalStorage} from './vue/localStoage.js';
-
-// import {apiSearch as apiSearch} from './vue/legacy.js';
-// import {apiGet} from './vue/api.js';
 
 Vue.prototype._ = _
 Vue.use(vueNumeralFilterInstaller, { locale: 'en' });
@@ -60,24 +59,15 @@ new Vue({
     'data-changelog': DataChangelogPage,
     'data-documentation': DataDocumentationPage,
     'data-glossary': DataGlossaryPage,
-    'compare-page': ComparePage
+    'compare-page': ComparePage,
+    'four-oh-four': FourOhFourPage
   },
   created(){
     this.refreshCompareSchools();
   },
   mounted(){
-    let vm = this;
-    // Process the search updated event.
-    // document.addEventListener('search-updated', function (e) {
-    //   console.log("Event Heard From Vue.");
-    //   vm.refreshResults(e.detail.data);
-    // });
-
   },
   methods:{
-    // refreshResults(resultsObject){
-    //   this.results = resultsObject;
-    // },
     // Refresh Compare Schools from Local Storage.
     refreshCompareSchools(){
       // this.compareSchools = JSON.parse(window.localStorage.getItem(localStorageKeys.COMPARE_KEY)) || [];

@@ -209,8 +209,7 @@ export default {
       //  return showError(picc.errors.NO_SCHOOL_ID);
     }
 
-    // TODO - Replace this, maybe with regular dom selector.
-    d3.select("#referrer-link").attr("href", document.referrer || null);
+    document.querySelector('#referrer-link').setAttribute("href", document.referrer || null);
 
     var params = {};
     params[this.fields.OPERATING] = 1;

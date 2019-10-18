@@ -451,7 +451,7 @@ export default {
   mounted() {
     let self = this;
 
-    d3.select("#referrer-link").attr("href", document.referrer || null);
+    document.querySelector('#referrer-link').setAttribute("href", document.referrer || null);
 
     var params = {};
     params[this.fields.OPERATING] = 1;
