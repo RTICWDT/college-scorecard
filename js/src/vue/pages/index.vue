@@ -24,12 +24,12 @@
               class='ma-0'
               show-arrows
               >
-                <v-tab>
+                <v-tab @click="GATrackEvent('Home Tab','Tab','Custom Search')">
                   <span class='hidden-sm-and-down'>Custom Search</span>
                   <span class='hidden-md-and-up'>Search</span>
                 </v-tab>
-                <v-tab>Name Search</v-tab>
-                <v-tab>Show Me Options</v-tab>
+                <v-tab @click="GATrackEvent('Home Tab','Tab','Name Search')">Name Search</v-tab>
+                <v-tab @click="GATrackEvent('Home Tab','Tab','Show Me Options')">Show Me Options</v-tab>
                 <v-tab-item>
                   <v-card class="px-5 pt-0 pb-5">
                     <search-form @search-query="directToSearch" />
