@@ -70,7 +70,6 @@ new Vue({
   methods:{
     // Refresh Compare Schools from Local Storage.
     refreshCompareSchools(){
-      // this.compareSchools = JSON.parse(window.localStorage.getItem(localStorageKeys.COMPARE_KEY)) || [];
       this.compareSchools = LocalStorage.selectAll(localStorageKeys.COMPARE_KEY);
     },
     // Toggle Compare School in local storage.
