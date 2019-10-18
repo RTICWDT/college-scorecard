@@ -286,7 +286,7 @@
             ></v-checkbox>
           </div>
 
-          <p class='subhead-2'>Urbancity</p>
+          <p class='subhead-2'>Urbanicity</p>
             <v-checkbox
               hide-details            
               v-model="input.locale"
