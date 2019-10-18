@@ -7,12 +7,12 @@
         <p v-else>--</p>        
       </v-col>
       <v-col cols="12" sm="4" class="pa-0">
-        <p class="overline mb-0">Median Debt&nbsp;<tooltip definition="coming-soon" /></p>
+        <p class="overline mb-0">Median Total Debt&nbsp;<tooltip definition="coming-soon" /></p>
         <p v-if="fos.debt.median_debt" >{{fos.debt.median_debt | numeral('$0,0') }}</p>
         <p v-else>--</p>
       </v-col>
       <v-col cols="12" sm="4" class="pa-0">
-        <p class="overline mb-0">Monthly Debt Payment&nbsp;<tooltip definition="coming-soon" /></p>
+        <p class="overline mb-0">Monthly Loan Payment&nbsp;<tooltip definition="coming-soon" /></p>
         <p v-if="fos.debt.median_debt">{{fos.debt.monthly_debt_payment | numeral('$0,0') }}/mo.</p>
         <p v-else>--</p>
       </v-col>

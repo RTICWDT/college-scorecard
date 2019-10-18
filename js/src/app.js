@@ -18,7 +18,6 @@ import DataDocumentationPage from './vue/pages/data_documentation.vue';
 import DataGlossaryPage from './vue/pages/data_glossary.vue';
 
 import ComparePage from './vue/pages/compare.vue';
-
 import FourOhFourPage from './vue/pages/404.vue';
 
 import './vue/filters.js'
@@ -31,6 +30,28 @@ Vue.prototype._ = _
 Vue.use(vueNumeralFilterInstaller, { locale: 'en' });
 
 import style from '../../sass/style.scss';
+
+// Global Method for Tracking Events
+// If analytics is not enabled, console receives the input. 
+Vue.mixin({
+  methods: {
+    GATrackEvent(category, action, label) {
+      if(window.ga)
+      {
+        try{
+          ga('send','event',category,action,label);
+        }
+        catch(e){
+          console.error('[ga] event error');
+        }
+      }
+      else{
+        console.log('GA Event: ['+category+','+action+', '+label+']');
+      }
+    }
+  }
+});
+
 
 new Vue({
   vuetify,

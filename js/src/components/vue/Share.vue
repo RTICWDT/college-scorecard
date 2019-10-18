@@ -1,4 +1,5 @@
 <template>
+  <span>
     <v-menu offset-y>
       <template v-slot:activator="{ on }">
           <v-btn
@@ -6,23 +7,12 @@
           v-on="on"
           rounded
           :small="small"
-          class="d-none d-sm-inline"
+          class='d-none d-sm-inline'
         >
           <v-icon x-small class='mr-2'>fas fa-share</v-icon> {{label}}
         </v-btn>
-        <v-btn
-          color="secondary"
-          v-on="on"
-          rounded
-          :x-small="small"
-          class="d-inline d-sm-none"
-          fab
-        >
-          <v-icon small class=''>fas fa-share</v-icon>
-        </v-btn>
-      
       </template>
-      <v-list dense>
+      <v-list>
         <v-list-item
           v-for="(item, index) in items"
           :key="index"
@@ -32,6 +22,30 @@
         </v-list-item>
       </v-list>
     </v-menu>
+    <v-menu offset-y>
+      <template v-slot:activator="{ on }">
+          <v-btn
+          color="secondary"
+          v-on="on"
+          rounded
+          fab 
+          :x-small="small"
+          class='d-inline d-sm-none'
+        >
+          <v-icon x-small>fas fa-share</v-icon>
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in items"
+          :key="index"
+          @click="picked(item)"
+        >
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+  </span>
 </template>
 
 <script>

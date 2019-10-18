@@ -24,12 +24,12 @@
               class='ma-0'
               show-arrows
               >
-                <v-tab>
+                <v-tab @click="GATrackEvent('Home Tab','Tab','Custom Search')">
                   <span class='hidden-sm-and-down'>Custom Search</span>
                   <span class='hidden-md-and-up'>Search</span>
                 </v-tab>
-                <v-tab>Name Search</v-tab>
-                <v-tab>Show Me Options</v-tab>
+                <v-tab @click="GATrackEvent('Home Tab','Tab','Name Search')">Name Search</v-tab>
+                <v-tab @click="GATrackEvent('Home Tab','Tab','Show Me Options')">Show Me Options</v-tab>
                 <v-tab-item>
                   <v-card class="px-5 pt-0 pb-5">
                     <search-form @search-query="directToSearch" />
@@ -113,12 +113,8 @@
 <style lang="scss" scoped>
 @import 'sass/_variables.scss';
 .home-splash {
-  background-repeat: repeat;
-  background-color: #246498;
-  background-image: url("data:image/svg+xml,%3Csvg width='84' height='48' viewBox='0 0 84 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h12v6H0V0zm28 8h12v6H28V8zm14-8h12v6H42V0zm14 0h12v6H56V0zm0 8h12v6H56V8zM42 8h12v6H42V8zm0 16h12v6H42v-6zm14-8h12v6H56v-6zm14 0h12v6H70v-6zm0-16h12v6H70V0zM28 32h12v6H28v-6zM14 16h12v6H14v-6zM0 24h12v6H0v-6zm0 8h12v6H0v-6zm14 0h12v6H14v-6zm14 8h12v6H28v-6zm-14 0h12v6H14v-6zm28 0h12v6H42v-6zm14-8h12v6H56v-6zm0-8h12v6H56v-6zm14 8h12v6H70v-6zm0 8h12v6H70v-6zM14 24h12v6H14v-6zm14-8h12v6H28v-6zM14 8h12v6H14V8zM0 8h12v6H0V8z' fill='%233d82b1' fill-opacity='0.24' fill-rule='evenodd'/%3E%3C/svg%3E");
   min-height: 500px;
   padding-top: 1.5rem;
-  background-size: auto;
 }
 .v-tab{
   font-family: $header-font-family;
@@ -130,6 +126,7 @@
   color: #FFFFFF !important;
 }
 .homeContent{
+  border-top: 20px solid #FFFFFF;
   background-color: #B5D7F4;
 }
 

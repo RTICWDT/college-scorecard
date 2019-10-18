@@ -29,8 +29,9 @@
         :min="min"
         :max="max"
         :step="step"
-        color="secondary"
-        track-color="grey"
+        :color="trackColor"
+        :track-color="trackBackground"
+        thumb-color="secondary"
       >
         <template v-slot:append>
           <v-text-field v-model="sliderValue"
@@ -76,17 +77,23 @@ export default {
     appendText: {
       type: String,
       default: null
+    },
+    andUp:{
+      type: Boolean,
+      default: false
     }
   },
   data(){
     return{
       sliderValue: this.value,
-      enableSlider: this.enable
+      enableSlider: this.enable,
+      trackColor: 'secondary',
+      trackBackground: 'grey' 
     }
   },
   computed:{
     prefix(){
-      return (this.appendText == 'K')? '$':''; 
+      return (this.appendText == 'k')? '$':''; 
     }
   },
   watch:{
@@ -98,6 +105,17 @@ export default {
     }
   },
   mounted(){
+    if(this.andUp)    
+    {
+      this.trackColor = "grey";
+      this.trackBackground = "secondary";
+    }
+    else
+    {
+      this.trackColor = "secondary";
+      this.trackBackground = "grey";
+    }
+  
     EventBus.$on('search-form-reset', () => {
       // TODO - State is changed in parent component.
       // this.enableSlider = false;

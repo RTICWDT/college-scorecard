@@ -1,5 +1,6 @@
 <template>
   <v-app>
+      <v-content class="white">
     <data-navigation current="/data/changelog/" />
     <v-container>
       <v-row>
@@ -477,6 +478,7 @@
         </v-col>
       </v-row>
     </v-container>
+    </v-content>
   </v-app>
 </template>
 

@@ -27,18 +27,41 @@
     <div class='py-2 px-5'>
     <p class='subhead-2'>
       Location
-
-      <v-btn text
-        icon
-        :color="locationButtonColor"
-        @click="handleLocationCheck"
-      >
-        <v-icon>mdi-near-me</v-icon>
-      </v-btn>
-
-      <v-icon color="#0e365b" v-show="location.isLoading">fas fa-circle-notch fa-spin</v-icon>
-      <span v-show="location.error" class="overline">{{location.error}}</span>
     </p>    
+
+    <div class='d-flex align-center'>
+      <v-tooltip
+        bottom
+        max-width="250"
+        color="rgba(0,0,0,0.95)"
+      >
+        <template v-slot:activator="{ on }">
+          <v-btn
+            icon
+            @click="handleLocationCheck"
+          >
+          <v-icon v-on="on"
+            :color="locationButtonColor"
+            v-html="location.isLoading ? 'fas fa-circle-notch fa-spin' : 'mdi-near-me'"
+            ></v-icon>
+          </v-btn>
+        </template>
+        Click the arrow to find your location based on your browser settings and then enter a distance to find schools near you. 
+      </v-tooltip>
+      <v-text-field 
+        v-model="location.miles"
+        :rules="[utility.rules.required,utility.rules.numerical]"
+        label="Distance in Miles"
+        :disabled="!location.latLon"
+        hideDetails
+        class="mb-3"
+        type="number"
+      >
+      </v-text-field>
+      <span v-show="location.error" class="overline">{{location.error}}</span>
+    </div>
+
+
     <v-select v-model="input.state"
       :items="site.data.states"
       item-text="name"
@@ -46,31 +69,10 @@
       multiple
       chips
       hide-details
-      placeholder="Select one..."
+      placeholder="Or select a state..."
       class='mt-0 pt-0'
       color="secondary"
       ></v-select>
-    
-    <!-- TODO: Leaving this for now.  Can alter the miles away if needed. -->
-    <!-- <p class='subhead-2'>Nearby</p>    
-    <v-row>
-      <v-col cols="12" md="4" sm="12" xs="12">
-        <v-btn text 
-          icon 
-          color="indigo"
-          @click="handleLocationCheck"
-        >
-          <v-icon>mdi-star</v-icon>
-        </v-btn>
-      </v-col>
-      <v-col cols="12" md="8" sm="12" xs="12">
-        <v-text-field v-model="location.miles"
-          :rules="[utility.rules.required,utility.rules.numerical]"
-          :disabled="!location.latLon"
-          label="Miles"
-        ></v-text-field>
-      </v-col>
-    </v-row> -->
 
     <p class='subhead-2'>Academic Fields Offered</p>
     <field-autocomplete v-model="input.cip4"></field-autocomplete>
@@ -144,6 +146,7 @@
       :step="5"
       appendText = "%"
       class='mt-5'
+      andUp
     ></check-range>
 
     <check-range legend-title="Average Annual Cost" 
@@ -153,7 +156,7 @@
       :min="0"
       :max="100"
       :step="5"
-      appendText="K"
+      appendText="k"
     >
     </check-range>
     </div>
@@ -211,6 +214,7 @@
             :max="100"
             :step="5"
             appendText="%"
+            andUp
           >
             <template v-slot:label>
               Acceptance Rate
@@ -282,7 +286,7 @@
             ></v-checkbox>
           </div>
 
-          <p class='subhead-2'>Urbancity</p>
+          <p class='subhead-2'>Urbanicity</p>
             <v-checkbox
               hide-details            
               v-model="input.locale"
@@ -526,7 +530,7 @@ export default {
       }
 
       if(groomedInput.acceptance && groomedInput.acceptance > 0 && this.utility.enable.acceptance){
-        groomedInput.acceptance = groomedInput.acceptance / 100 + '..'
+        groomedInput.acceptance = groomedInput.acceptance / 100 + '..1'
       }else{
         _.unset(groomedInput,'acceptance'); // TODO: CONST;
       }

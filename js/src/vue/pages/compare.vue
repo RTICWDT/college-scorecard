@@ -28,8 +28,8 @@
 
             <div v-else class="show-loaded" id="school">
               <v-card class="pb-5 px-5 pt-1">
-                <p class='float-right mt-3 mr-5'>
-                  <share :url="shareUrl" label="Share this Comparison"  /> 
+                <p class='float-right mt-3 mr-0'>
+                  <share small :url="shareUrl" label="Share this Comparison"  /> 
                 </p>
                 <compare-section
                   :schools="schools"

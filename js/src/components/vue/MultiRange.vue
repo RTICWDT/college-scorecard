@@ -1,23 +1,23 @@
 <template>
   <div>
-    <div v-if="minmax.single">
+    <div v-if="minmax && minmax.single">
       <range
         :lower="{ value: 0, label: '$0' }"
         :upper="{ value: _.get(minmax.max, variable), label: $options.filters.numeral(_.get(minmax.max, variable), '$0,0') }"
         :min="{ value: 0, label: '$0' }"
-        :max="max"
+        :max="adjustedMax"
         lowertip
         :uppertip="minmax.max.title.slice(0,-1)+ ' - '+ minmax.max.credential.title"
         hideMiddle
         hideLower
       ></range>
     </div>
-    <div v-else-if="minmax.min">
+    <div v-else-if="minmax && minmax.min">
       <range
         :lower="{ value: _.get(minmax.min, variable), label: $options.filters.numeral(_.get(minmax.min, variable), '$0,0') }"
         :upper="{ value: _.get(minmax.max, variable), label: $options.filters.numeral(_.get(minmax.max, variable), '$0,0') }"
         :min="{ value: 0, label: '$0' }"
-        :max="max"
+        :max="adjustedMax"
         :lowertip="minmax.min.title.slice(0,-1)+ ' - '+ minmax.min.credential.title"
         :uppertip="minmax.max.title.slice(0,-1)+ ' - '+ minmax.max.credential.title"
         hideMiddle
@@ -47,11 +47,18 @@ export default {
         default: { value: 150000, label: '$150,000' }
     }
   },
-  mounted(){
-      // if(this.minmax.max.earnings.median_earnings>150000)
-      // {
-      //     this.max = { value: 250000, label: '$250,000' }
-      // }
-  }
+  computed:{
+    adjustedMax(){
+      let adjMax = this.max;
+      if(this.variable=='earnings.median_earnings' && !this.single)
+      {
+        if(this.minmax.max.earnings.median_earnings>150000)
+        {
+          adjMax = { value: 300000, label: '$300,000' }
+        }
+      }
+      return adjMax;
+    }
+  },
 };
 </script>

@@ -1,5 +1,6 @@
 <template>
   <v-app>
+  <v-content class="white">
     <data-navigation current="/data/" />
 
     <v-container>
@@ -59,12 +60,6 @@
                 :href="dataBase_url+'/Most-Recent-Cohorts-NSLDS-Elements.csv'"
               >What's new from NSLDS</a> 116 MB CSV
             </li>
-            <li>
-              <a
-                data-download
-                :href="dataBase_url+'/Most-Recent-Cohorts-Treasury-Elements.csv'"
-              >Post-school earnings</a> 6 MB CSV
-            </li>
           </ul>
         </v-col>
         <v-col md="4" offset-md="1">
@@ -107,7 +102,6 @@
 
             <v-btn color="secondary" rounded :href="baseUrl+'/data/documentation/'" class="link-more">
               View Full Documentation
-              <i class="fa fa-chevron-right"></i>
             </v-btn>
 
         </v-col>
@@ -133,6 +127,7 @@
         </v-col>
       </v-row>
     </v-container>
+    </v-content>
   </v-app>
 </template>
 

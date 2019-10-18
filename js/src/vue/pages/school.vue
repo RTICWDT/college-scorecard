@@ -79,16 +79,17 @@
                       text
                       icon
                       :color="isSelected?'amber':'grey'"
+                      
                       @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
                       <v-icon>fa fa-plus-circle</v-icon>
                     </v-btn>
-                    <share label="Share this School" :url="shareLink" />
+                    <share small label="Share this School" :url="shareLink" />
                     <div class="school-map" ref="map"></div>
                   </v-col>
                 </v-row>
-                <v-row>
-                  <v-col col="12" md="6">
+                <v-row class='mt-3'>
+                  <v-col cols="12" md="6" >
                     <h2 class="mb-4">
                       Graduation Rate&nbsp;
                       <tooltip definition="graduation-rate" />
@@ -101,7 +102,7 @@
                     ></donut>
                     <div v-else class="data-na">Data Not Available</div>
                   </v-col>
-                  <v-col col="12" md="6">
+                  <v-col cols="12" md="6">
                     <h2 class="mb-3">
                       Salary After Completing&nbsp;
                       <tooltip definition="avg-salary" />
@@ -147,8 +148,12 @@
                             <tooltip definition="avg-cost-year" />
                           </h2>
                           <h2
+                            v-if="netPrice"
                             class="display-2 navy-text font-weight-bold"
                           >{{ netPrice | numeral('$0,0')}}</h2>
+                          <div class="data-na" v-else>
+                            Data Not Available
+                          </div>
                         </div>
                         <div v-else>
                           <h2>
@@ -186,14 +191,13 @@
                           <thead>
                             <tr>
                               <th>Family Income</th>
-                              <th>Average Cost</th>
+                              <th>Average Annual Cost</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
                               <td>$0-$30,000</td>
                               <td
-                                data-bind="net_price_income1"
                                 v-if="income['0-30000']"
                               >{{ income['0-30000'] | numeral('$0,0') }}</td>
                               <td v-else>--</td>
@@ -201,7 +205,6 @@
                             <tr>
                               <td>$30,001-$48,000</td>
                               <td
-                                data-bind="net_price_income2"
                                 v-if="income['30001-48000']"
                               >{{ income['30001-48000'] | numeral('$0,0') }}</td>
                               <td v-else>--</td>
@@ -209,7 +212,6 @@
                             <tr>
                               <td>$48,001-$75,000</td>
                               <td
-                                data-bind="net_price_income3"
                                 v-if="income['48001-75000']"
                               >{{ income['48001-75000'] | numeral('$0,0') }}</td>
                               <td v-else>--</td>
@@ -217,7 +219,6 @@
                             <tr>
                               <td>$75,001-$110,000</td>
                               <td
-                                data-bind="net_price_income4"
                                 v-if="income['75001-110000']"
                               >{{ income['75001-110000'] | numeral('$0,0') }}</td>
                               <td v-else>--</td>
@@ -225,7 +226,6 @@
                             <tr>
                               <td>$110,001+</td>
                               <td
-                                data-bind="net_price_income5"
                                 v-if="income['110001-plus']"
                               >{{ income['110001-plus'] | numeral('$0,0') }}</td>
                               <td v-else>--</td>
@@ -319,10 +319,10 @@
                         </v-col>
                         <v-col cols="12" md="6">
                           <h2 class="mb-3">
-                            Typical Total Debt After Graduation
+                            Median Total Debt After Graduation
                             <tooltip definition="avg-debt" />
                           </h2>
-                          <p>Total debt after graudation depends on field of study for undergraduate borrowers who complete college.</p>
+                          <p>Total debt after graduation depends on field of study for undergraduate borrowers who complete college.</p>
                           <multi-range
                             :minmax="debtRange"
                             variable="debt.median_debt"
@@ -333,19 +333,20 @@
                             Typical Monthly Loan Payment&nbsp;
                             <tooltip definition="avg-loan-payment" />
                           </h2>
-                          <div v-if="debtRange.singleDebt">
+                          <div v-if="debtRange && debtRange.single">
                             <div
                               class="display-2 navy-text font-weight-bold"
                               v-if="debtRange.min"
                             >{{ debtRange.min.debt.monthly_debt_payment | numeral('$0,0') }}/mo</div>
                           </div>
-                          <div v-else-if="debtRange.min">
+                          <div v-else-if="debtRange && debtRange.min">
                             <div
                               class="display-2 navy-text font-weight-bold"
                               v-if="debtRange.min"
                             >{{ debtRange.min.debt.monthly_debt_payment | numeral('$0,0') }}-{{ debtRange.max.debt.monthly_debt_payment | numeral('0,0') }}/mo</div>
                           </div>
                           <div v-else class="data-na">Data not available.</div>
+                          
                           <p class="mt-2">
                             This is based on a standard 10-year payment plan, other
                             <a
@@ -385,7 +386,7 @@
                     aria-controls="earnings-content"
                     class="px-0 py-3 pa-sm-5"
                   >
-                    <p>One-year post-completion earnings with range of highest and lowest median earnings for undergraduate and credential programs for which there is data. For more information, see Fields of Study/Majors for this school.</p>
+                    <p>Typical earnings in the first year after graduation with the range of highest and lowest median earnings for undergraduate and credential programs for which there is data. For more information, see Fields of Study/Majors for this school.</p>
                     <multi-range
                       :minmax="earningsRange"
                       variable="earnings.median_earnings"
@@ -481,6 +482,7 @@
                     <div v-else>
                       <v-alert
                         type="info"
+                        class='mt-3'
                       >There are no fields of study with data available for {{currentHoist}}.</v-alert>
                     </div>
                     <v-btn rounded color="secondary" :href="fieldsLink">
@@ -583,7 +585,7 @@
 
                         <h4 class="overline">Critical Reading</h4>
                         <range
-                          v-if="satReading.available != null"
+                          v-if="satReading.available"
                           :lower="{ value: satReading.lower, label: satReading.lower }"
                           :upper="{ value: satReading.upper, label: satReading.upper}"
                           :min="{ value: satReading.min, label: satReading.min }"
@@ -594,7 +596,7 @@
 
                         <h4 class="overline">Math</h4>
                         <range
-                          v-if="satMath.available != null"
+                          v-if="satMath.available"
                           :lower="{ value: satMath.lower, label: satMath.lower }"
                           :upper="{ value: satMath.upper, label: satMath.upper}"                       
                           :min="{ value: satMath.min, label: satMath.min }"
@@ -606,7 +608,7 @@
                         <h3 class="h2 mt-4">ACT</h3>
 
                         <range
-                          v-if="act.available != null"
+                          v-if="act.available"
                           :lower="{ value: act.lower, label: act.lower }"
                           :upper="{ value: act.upper, label: act.upper}"                        
                           :min="{ value: act.min, label: act.min }"
@@ -792,9 +794,9 @@ export default {
     searchURL() {
       let qs = this.returnURLFromStorage();
       if (qs) {
-        return "/search" + qs;
+        return "/search/" + qs;
       } else {
-        return "/search";
+        return "/search/";
       }
     }
   },

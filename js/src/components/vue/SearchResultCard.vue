@@ -17,7 +17,7 @@
   <v-card  class="search-result-card mx-auto pa-0 elevation-4" 
     outlined :class="{'result-card-selected': isSelected}"> <!-- Better Selected style -->
     <v-card-text class='pa-3'>
-        <p class='mt-1 mb-2' v-if="_.get(school, fields['UNDER_INVESTIGATION'])==1">
+        <p class='mt-1 mb-2' v-if="underInvestigation==1">
           <v-chip
           color="error"
           label
@@ -30,9 +30,9 @@
         <v-btn text icon class='float-right' :color="isSelected?'amber':'grey'"  @click="$emit('toggle-compare-school',school)">
           <v-icon >fa fa-plus-circle</v-icon>
         </v-btn>
-        <p class='overline font-weight-bold mb-1'>{{school['school.city']}}, {{school['school.state']}}</p>
-        <h2 class="title mt-0 font-weight-bold"><a class='nameLink' :href="link">{{school['school.name'] ? school['school.name'] : 'School Name'}}</a></h2>
-        <p class='body-2 mt-1'>{{school['latest.student.size'] | separator }} undergrads</p>
+        <p class='overline font-weight-bold mb-1'>{{ city }}, {{ state }}</p>
+        <h2 class="title mt-0 font-weight-bold"><a class='nameLink' :href="schoolLink">{{ schoolName }}</a></h2>
+        <p class='body-2 mt-1'>{{ undergraduates | separator }} undergrads</p>
         <v-divider />
         <v-row>
         <v-col cols="12">
@@ -74,8 +74,10 @@ import numeral from 'numeral';
 import Tooltip from './Tooltip.vue';
 import SmallSchoolIcons from './SmallSchoolIcons.vue';
 import { fields } from '../../vue/constants.js';
+import ComplexFields from '../../vue/mixins/ComplexFields.js';
 
 export default {
+  mixins: [ ComplexFields ],
   components: {
     tooltip: Tooltip,
     'small-school-icons': SmallSchoolIcons
@@ -91,63 +93,40 @@ export default {
     }
   },
   computed:{
-    link(){
-      let id = _.get(this.school, this.fields['ID']);
-      let name = _.get(this.school, this.fields['NAME'],'(unknown)');
-      return '/school/?'+id+'-'+name.replace(/\W+/g, '-'); 
-    },
-    displayGradRate(){
-      let OM = _.get(this.school, this.fields.COMPLETION_OM);
-      let G200_4 = _.get(this.school, this.fields.COMPLETION_200_4);
-      let G200_LT4 = _.get(this.school, this.fields.COMPLETION_200_LT4);
-      if(!OM & !G200_4 & !G200_LT4)
-      {
-        return 'N/A';
-      }
-      else if(OM){
-        return this.$options.filters.numeral(OM,'0.%');
-      }
-      else{
-        if(G200_LT4 || G200_4) return (this.years==3) ? this.$options.filters.numeral(G200_4,'0.%') : this.$options.filters.numeral(G200_LT4,'0.%');
-        else return "N/A";
-      }
-    },
-    isProgramReporter() {
-      return _.get(this.school, this.fields.PROGRAM_REPORTER_OFFERED) > 0;
-    },
-    displayEarn(){
-      let fos = _.get(this.school, 'latest.programs.cip_4_digit', false);
-      if(!fos.length)
-      {
-        fos = [fos];
-      }
-      if(!fos)
-      {
-        return 'N/A';
-      }
-      let cleanEarnings = fos.filter(obj => obj.earnings.median_earnings && obj.credential.level <= 3);
-      if(cleanEarnings.length===0)
-      {
-        return 'N/A';
-      }
-      let orderedEarnings = cleanEarnings.sort((a, b) =>   a.earnings.median_earnings-b.earnings.median_earnings);
-      let single = (orderedEarnings.length==1 || (orderedEarnings.length==2 && orderedEarnings[0].earnings.median_earnings == orderedEarnings[1].earnings.median_earnings));
-      let minMax = { min: orderedEarnings[0], max: orderedEarnings[orderedEarnings.length-1]};
 
-      if(single)
+    displayGradRate(){
+      if(!this.completionRate)
       {
-        return "$"+this.$options.filters.numeral(minMax.min.earnings.median_earnings, 'a');
+        return 'N/A';
       }
       else
       {
-        return "$"+this.$options.filters.numeral(minMax.min.earnings.median_earnings, 'a')+"-"+this.$options.filters.numeral(minMax.max.earnings.median_earnings, 'a');
+        return this.$options.filters.numeral(this.completionRate,'0.%');
       }
     },
+    displayEarn(){
+      if(!this.earningsRange)
+      { 
+        return 'N/A';
+      }
+      else if (this.earningsRange.single)
+      {
+        return this.$options.filters.numeral(this.earningsRange.min.earnings.median_earnings, '$0a');
+      }
+      else
+      {
+        return this.$options.filters.numeral(this.earningsRange.min.earnings.median_earnings, '$0a')+'-'+ this.$options.filters.numeral(this.earningsRange.max.earnings.median_earnings, '0a');
+      }
+
+    },
     displayAvgCost(){
-      if (!this.school['latest.cost.avg_net_price.overall'] || this.school['latest.cost.avg_net_price.overall'] < 0){
-        return "N/A"
-      }else{
-        return numeral(this.school['latest.cost.avg_net_price.overall']).format('$0a');
+      if(!this.netPrice)
+      {
+        return 'N/A';
+      }
+      else
+      {
+        return this.$options.filters.numeral(this.netPrice, '$0a');
       }
     }
   }

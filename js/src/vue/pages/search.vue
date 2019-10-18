@@ -49,7 +49,7 @@
 
       </v-navigation-drawer>
       <v-content>
-        <v-container fluid class="grey lighten-5 pa-0">
+        <v-container fluid class="pa-0">
           <div id="search-result-container">
             <div class="search-result-container">
               <v-card  class="mt-2 mb-4 py-1 px-4 elevaton-0 pageBar" v-if="!isLoading">
@@ -61,16 +61,47 @@
                           color="primary"
                           text-color="white"
                           @click="clearSearchForm"
+                          x-small
+                          rounded
+                          fab
+                          class="d-inline d-sm-none"
+                        >
+                          <span >
+                            <v-icon class=''>mdi-close-circle</v-icon>
+                          </span>
+                        </v-btn>
+                        <v-btn
+                          color="primary"
+                          text-color="white"
+                          @click="clearSearchForm"
                           small
                           rounded
+                          class="d-none d-sm-inline"
                         >
-                            <v-icon small class='mr-2'>mdi-close-circle</v-icon>
-                          Clear
+                          <span >
+                            <v-icon small class='mr-1'>mdi-close-circle</v-icon> Clear
+                          </span>
                         </v-btn>
                         <v-menu offset-y>
                         <template v-slot:activator="{ on }">
-                          <v-btn rounded color="primary" small v-on="on">
+                          <v-btn rounded color="primary" small v-on="on" class="d-none d-sm-inline">
                             <v-icon small class='mr-1'>fas fa-sort</v-icon> Sort
+                          </v-btn>                          
+                        </template>
+                        <v-list>
+                          <v-list-item
+                            v-for="(item, index) in sorts"
+                            :key="index"
+                            @click="resort(item.field);"
+                          >
+                            <v-list-item-title>{{ item.type }}</v-list-item-title>
+                          </v-list-item>
+                        </v-list>
+                      </v-menu>
+                      <v-menu offset-y>
+                        <template v-slot:activator="{ on }">
+                          <v-btn rounded color="primary" x-small v-on="on" fab class="d-inline d-sm-none">
+                            <v-icon small class=''>fas fa-sort</v-icon>
                           </v-btn>
                         </template>
                         <v-list>
@@ -248,7 +279,7 @@ export default {
     specializedMission: Object,
     defaultSort: {
       type: String,
-      default: "name:asc"
+      default: "completion_rate:desc"
     },
     isLoading: Boolean,
     compareSchools: Array
@@ -283,7 +314,7 @@ export default {
       sorts: [
         { type: "Name", field: "name:asc" },
         { type: "Annual Cost", field: "avg_net_price:asc" },
-        { type: "Graduation Rate", field: "completion_rate:asc" }
+        { type: "Graduation Rate", field: "completion_rate:desc" }
       ],
       shareUrl: null
     };

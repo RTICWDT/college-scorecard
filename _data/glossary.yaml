@@ -1,84 +1,85 @@
 avg-cost-year:
- default: <strong>Average Annual Cost</strong> The average annual net price for federal financial aid recipients, after aid from the school, state, or federal government. For public schools, this is only the average cost for in-state students.
- program_reporter: <strong>Average Annual Cost</strong> The average annual net price is not available for this program-reporting school.
+  title: Average Annual Cost
+  default: The average annual net price for federal financial aid recipients, after aid from the school, state, or federal government. For public schools, this is only the average cost for in-state students.
+  program_reporter: The average annual net price is not available for this program-reporting school.
+  glossary: 
 
 avg-program-cost:
-  default: <strong>Cost After Aid for Largest Program</strong><ul><li>This includes expenses beyond tuition, fees, books, and supplies (e.g., living expenses).</li><li>If the program is less than 1 year, this is the total cost after aid. If the program is longer than 1 year, this is the annual cost after aid.</li></ul>
+  title: Cost After Aid for Largest Program
+  default: <ul><li>This includes expenses beyond tuition, fees, books, and supplies (e.g., living expenses).</li><li>If the program is less than 1 year, this is the total cost after aid. If the program is longer than 1 year, this is the annual cost after aid.</li></ul>
+  glossary: 
 
 graduation-rate:
-  default: <strong>Graduation Rate</strong> <ul><li>The graduation rate is the share of students who graduated within 150 percent of the expected time to graduation (typically 6 years for schools that award predominantly 4-year degrees and 3 years for schools that award predominantly 2-year degrees).</li><li>This graduation rate only applies to students studying full-time who started college at this school.</li></ul>
+  title: Graduation Rate
+  default: <ul><li>The graduation rate is the share of students who graduated within 150 percent of the expected time to graduation (typically 6 years for schools that award predominantly 4-year degrees and 3 years for schools that award predominantly 2-year degrees).</li><li>This graduation rate only applies to students studying full-time who started college at this school.</li></ul>
+  glossary: 
 
 avg-salary:
-  default: <strong>Salary After Attending</strong> The median earnings of former students who received federal financial aid, at 10 years after entering the school.
-  branch: <strong>Salary After Attending</strong> The median earnings of former students who received federal financial aid, at 10 years after entering the school.<br><br>This information is based on all locations of this school.
-  branch_compare: <strong>Salary After Attending</strong> The median earnings of former students who received federal financial aid, at 10 years after entering the school.<br><br>For schools with multiple locations, this information is based on all of their locations.
+  title: Salary After Completing
+  default: The median earnings of former students who received federal financial aid, at 10 years after entering the school.
+  branch: The median earnings of former students who received federal financial aid, at 10 years after entering the school.<br><br>This information is based on all locations of this school.
+  branch_compare: The median earnings of former students who received federal financial aid, at 10 years after entering the school.<br><br>For schools with multiple locations, this information is based on all of their locations.
 
 avg-loan-payment:
- default: <strong>Monthly Student Loan Payment</strong> The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 5.05% interest rate.
- branch: <strong>Monthly Student Loan Payment</strong> The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 5.05% interest rate.<br><br>This information is based on all locations of this school.
- branch_compare: <strong>Monthly Student Loan Payment</strong> The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 5.05% interest rate.<br><br>For schools with multiple locations, this information is based on all of their locations.
-
-repayment-rate:
-  default: <strong>Students Paying Down Their Debt</strong> The share of student borrowers who have paid at least one dollar of the principal balance on their federal loans within three years of leaving school.
-  branch: <strong>Students Paying Down Their Debt</strong> The share of student borrowers who have paid at least one dollar of the principal balance on their federal loans within three years of leaving school.<br><br>This information is based on all locations of this school.
-  branch_compare: <strong>Students Paying Down Their Debt</strong> The share of student borrowers who have paid at least one dollar of the principal balance on their federal loans within three years of leaving school.<br><br>For schools with multiple locations, this information is based on all of their locations.
+  title: Monthly Student Loan Payment
+  default: The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 5.05% interest rate.
+  branch: The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 5.05% interest rate.<br><br>This information is based on all locations of this school.
+  branch_compare: The median monthly loan payment for student borrowers who completed, if it were repaid over 10 years at a 5.05% interest rate.<br><br>For schools with multiple locations, this information is based on all of their locations.
+  glossary: The median monthly loan payment is based on the typical total debt after graduation, and assumes standard repayment terms of a 10 year amortization using the current interest rate for subsidized federal loans, 4.53%. This 10-year fixed payment plan is just one of several plans available to federal borrowers, please see the <a href="https://studentloans.gov/myDirectLoan/repaymentEstimator.action" target="_blank">repayment calculator</a> to estimate monthly payments for alternative payment plans. Please see the entry for typical total debt after graduation for information on what types of loans are included in this monthly payment. 
 
 avg-debt:
-  default: <strong>Typical Total Debt After Graduation</strong> The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.
-  branch: <strong>Typical Total Debt After Graduation</strong> The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.<br><br>This information is based on all locations of this school.
-  branch_compare: <strong>Typical Total Debt After Graduation</strong> The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.<br><br>For schools with multiple locations, this information is based on all of their locations.
+  title: Median Total Debt After Graduation
+  default: The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.
+  branch: The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.<br><br>This information is based on all locations of this school.
+  branch_compare: The median federal debt of undergraduate borrowers who completed. This figure includes only federal loans; it excludes private student loans and Parent PLUS loans.<br><br>For schools with multiple locations, this information is based on all of their locations.
+  glossary: The median per-borrower federal loan debt accumulated at the school by undergraduate student borrowers of federal loans who completed college. Non-federal loans and federal loans not made to students (e.g., Parent PLUS loans) are not included in this value. Note that this debt metric only includes loans originated at this school, so this metric should be interpreted as the typical debt level for attending this school alone, not necessarily the total debt to obtain a credential since students often attend more than 1 school.   
 
 student-aid:
-  default: <strong>Students Receiving Federal Loans</strong> The share of undergraduate students who borrowed federal loans to help pay for college. Excludes Parent PLUS loans.
+  title: Students Receiving Federal Loans
+  default: The share of undergraduate students who borrowed federal loans to help pay for college. Excludes Parent PLUS loans.
+  glossary: 
 
 retention-rate:
-  default: <strong>Students Who Return After Their First Year</strong> The share of first-time, full-time undergraduates who returned to the institution after their freshman year.
+  title: Students Who Return After Their First Year
+  default: The share of first-time, full-time undergraduates who returned to the institution after their freshman year.
+  glossary: 
 
-earnings-25k:
-  default: <strong>Threshold Earnings</strong> The share of former students earning more than $25,000, or about the average earnings of a high school graduate aged 25-34, 6 years after they first enroll.
-  branch: <strong>Threshold Earnings</strong> The share of former students earning more than $25,000, or about the average earnings of a high school graduate aged 25-34, 6 years after they first enroll.<br><br>This information is based on all locations of this school.
-  branch_compare: <strong>Threshold Earnings</strong> The share of former students earning more than $25,000, or about the average earnings of a high school graduate aged 25-34, 6 years after they first enroll.<br><br>For schools with multiple locations, this information is based on all of their locations.
 
 full-time:
-  default: <strong>Full-time Enrollment</strong> Percent of undergraduates who are enrolled on a full-time schedule.
+  title: Full-time Enrollment
+  default: Percent of undergraduates who are enrolled on a full-time schedule.
+  glossary: 
 
 race-eth:
-  default: <strong>Race/Ethnicity</strong> The specific race/ethnicity categories (including those for foreign students pursuing postsecondary education at an institution within the U.S.) are either required (1997) and/or approved (2007) by the Office of Management and Budget (2007). Only the race/ethnicity groups of students enrolled in this institution are displayed.
+  title: Race/Ethnicity
+  default: The specific race/ethnicity categories (including those for foreign students pursuing postsecondary education at an institution within the U.S.) are either required (1997) and/or approved (2007) by the Office of Management and Budget (2007). Only the race/ethnicity groups of students enrolled in this institution are displayed.
+  glossary: 
 
 socio-eco:
-  default: <strong>Socio-Economic Diversity</strong> Percent of students receiving an income-based federal Pell Grant intended for low-income students.
+  title: Socio-Economic Diversity
+  default: Percent of students receiving an income-based federal Pell Grant intended for low-income students.
+  glossary: 
 
 test-scores:
-  default: <strong>Test Scores</strong> At schools that report their test scores, 50 percent had scores within this range. Of the remaining 50 percent, half were above the range and half were below. Not all schools require test scores.
-
-pop-prog:
-  default: <strong>Popular Programs</strong> The five largest programs of study, as measured as the share of degrees and certificates awarded.
-
-avail-study:
-  default: <strong>Available Areas of Study</strong> All available programs of study offered at the school.
+  title: Test Scores
+  default: At schools that report their test scores, 50 percent had scores within this range. Of the remaining 50 percent, half were above the range and half were below. Not all schools require test scores.
+  glossary: 
 
 hcm2:
-  default: <strong>Under ED Monitoring</strong> Heightened Cash Monitoring 2 is when the Department of Education provides additional oversight because of financial or federal compliance issues, including but not limited to, concern around the school’s administrative capabilities, concern around a schools’ financial responsibility and possibly severe findings uncovered during a program review. Some schools are on this list because of preliminary findings made during a program review that is still open.
-  branch: <strong>Under ED Monitoring</strong> Heightened Cash Monitoring 2 is when the Department of Education provides additional oversight because of financial or federal compliance issues, including but not limited to, concern around the school’s administrative capabilities, concern around a schools’ financial responsibility and possibly severe findings uncovered during a program review. Some schools are on this list because of preliminary findings made during a program review that is still open.<br><br>This information is based on all locations of this school.
-  branch_compare: <strong>Under ED Monitoring</strong> Heightened Cash Monitoring 2 is when the Department of Education provides additional oversight because of financial or federal compliance issues, including but not limited to, concern around the school’s administrative capabilities, concern around a schools’ financial responsibility and possibly severe findings uncovered during a program review. Some schools are on this list because of preliminary findings made during a program review that is still open.<br><br>For schools with multiple locations, this information is based on all of their locations.
-
-national-median:
-  default: <strong>National Median</strong> The national median is the middle value, with half of schools having a higher value and half having a lower value.
-
-compare-add:
-  default: <strong>Add to Compare.</strong> Select up to ten (10) schools to compare.
-
-compare-max:
-  default: <strong>Max Schools Selected (10).</strong> To add this school you will first need to remove a school from your compare list.
+  title: Under ED Monitoring
+  default: Heightened Cash Monitoring 2 is when the Department of Education provides additional oversight because of financial or federal compliance issues, including but not limited to, concern around the school’s administrative capabilities, concern around a schools’ financial responsibility and possibly severe findings uncovered during a program review. Some schools are on this list because of preliminary findings made during a program review that is still open.
+  branch: Heightened Cash Monitoring 2 is when the Department of Education provides additional oversight because of financial or federal compliance issues, including but not limited to, concern around the school’s administrative capabilities, concern around a schools’ financial responsibility and possibly severe findings uncovered during a program review. Some schools are on this list because of preliminary findings made during a program review that is still open.<br><br>This information is based on all locations of this school.
+  branch_compare: Heightened Cash Monitoring 2 is when the Department of Education provides additional oversight because of financial or federal compliance issues, including but not limited to, concern around the school’s administrative capabilities, concern around a schools’ financial responsibility and possibly severe findings uncovered during a program review. Some schools are on this list because of preliminary findings made during a program review that is still open.<br><br>For schools with multiple locations, this information is based on all of their locations.
+  glossary: 
 
 award-level:
+  title: Award Level
   default: Most awards earned at this institution are at this level, but other degrees or certificates are offered.
   certificate: Most awards earned are certificates, but degrees are offered.
   2-year: Most awards earned are 2-year associate's degrees, but other degrees or certificates are offered.
   4-year: Most awards earned are 4-year bachelor's degrees, but other degrees or certificates are offered.
+  glossary: 
 
-cost-six-largest-programs:
-  default: <strong>Largest Programs</strong> Includes up to six of this school’s largest programs by number of students enrolled.
 
 ogc:
   default:  This institution does not participate in the Federal student financial aid program administered by the U.S. Department of Education.
@@ -86,7 +87,8 @@ ogc:
   flag8: Data is not yet available. This institution only recently began administering Federal aid.  
 
 outcome-measures:
-  default: <strong>Outcomes 8 Years After Attending</strong> <ul><li>Percentages of students who graduated, transferred, are still enrolled, and withdrew from this institution within 8 years of entry.</li><li>This 8-year graduation rate is different from the graduation rate shown above, which measures a shorter time period and a more narrow group of students. </li><li>Percentages may not add to 100% due to suppression and rounding.</li></ul>
+  title: Outcomes 8 Years After Attending
+  default: <ul><li>Percentages of students who graduated, transferred, are still enrolled, and withdrew from this institution within 8 years of entry.</li><li>This 8-year graduation rate is different from the graduation rate shown above, which measures a shorter time period and a more narrow group of students. </li><li>Percentages may not add to 100% due to suppression and rounding.</li></ul>
 
 coming-soon:
   default: This tooltip will be populated with updated text.

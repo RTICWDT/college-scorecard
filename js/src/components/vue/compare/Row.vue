@@ -8,7 +8,7 @@
       :min="0"
       :max="config.max"
       :color="config.color"
-      :height="10"
+      :height="25"
       :type="config.type"
       :labels="true"
     ></horizontal-bar>

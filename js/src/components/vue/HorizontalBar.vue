@@ -43,6 +43,8 @@ export default {
         plugins: [ChartDataLabels],
         legend: false,
         title: false,
+        responsive: true,
+        maintainAspectRatio: true,
         scales: {
           xAxes: [
             {
@@ -90,7 +92,7 @@ export default {
             },
             anchor: 'end',
             formatter: function(value, context) {
-              if(context.datasetIndex==0 && value > 5)
+              if(context.datasetIndex==0)
               {
                 let type = context.chart.config.options.csType;
                 if(type=='percent')
