@@ -36,8 +36,8 @@ export const fields = {
   NET_PRICE_BY_INCOME:  'latest.cost.net_price',
 
   // completion rate
-  COMPLETION_RATE:      'latest.completion.rate_suppressed.overall',
-  // COMPLETION_RATE:      'latest.completion.consumer_rate', Old Value
+  //COMPLETION_RATE:      'latest.completion.rate_suppressed.overall',
+  COMPLETION_RATE:      'latest.completion.consumer_rate',
 
   // new rates
   COMPLETION_OM:        'latest.completion.outcome_percentage_suppressed.all_students.8yr.award_pooled',
