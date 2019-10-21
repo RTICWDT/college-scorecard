@@ -121,6 +121,8 @@
                       Average Annual Cost for Largest Program&nbsp;
                       <tooltip definition="coming-soon" />
                     </h2>
+                    <p v-if="!isProgramReporter">The average cost after grants and scholarships from the school, state, or federal government.</p>
+                    <p v-else>The average cost of the largest program after grants and scholarships from the school, state, or federal government.</p>
                     <h2
                       class="display-2 navy-text font-weight-bold"
                       v-if="netPrice"
@@ -147,6 +149,8 @@
                             Average Annual Cost&nbsp;
                             <tooltip definition="avg-cost-year" />
                           </h2>
+                          <p>The average cost after grants and scholarships from the school, state, or federal government.</p>
+
                           <h2
                             v-if="netPrice"
                             class="display-2 navy-text font-weight-bold"
@@ -160,6 +164,7 @@
                             Cost After Aid for Largest Program
                             <tooltip definition="avg-program-cost" />
                           </h2>
+                          <p>The average cost of the largest program after grants and scholarships from the school, state, or federal government.</p>
                           <h2 class="title my-3">
                             <span class="font-weight-bold navy-text">{{ programReporter[0].title}}</span>
                           </h2>
@@ -180,7 +185,7 @@
                       </v-col>
 
                       <v-col cols="12" md="6">
-                        <h2>By Family Income</h2>
+                        <h2 class="mb-3">By Family Income</h2>
                         <p>
                           Depending on the federal, state, or institutional grant aid available, students in your income
                           bracket may pay more or less than the overall average costs.
@@ -428,14 +433,14 @@
                         cols="12"
                         sm="8"
                         class="ma-0 px-2 py-0 font-weight-bold"
-                      >Field of Study - Degree</v-col>
+                      >Field of Study</v-col>
                       <v-col cols="12" sm="4" class="ma-0 pa-0 font-weight-bold">{{currentHoist}}</v-col>
                     </v-row>
                     <v-row class="mx-0 mt-5 d-block d-sm-none" v-if="fieldsOfStudy.length">
                       <v-col
                         cols="12"
                         class="ma-0 px-2 py-2 font-weight-bold"
-                      >Field of Study - Degree ({{currentHoist}})</v-col>
+                      >Field of Study ({{currentHoist}})</v-col>
                     </v-row>
                     <v-expansion-panels class="my-3" v-if="fieldsOfStudy.length">
                       <v-expansion-panel
