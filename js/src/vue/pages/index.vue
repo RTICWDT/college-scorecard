@@ -41,7 +41,7 @@
                   </v-card>
                 </v-tab-item>
                 <v-tab-item>
-                  <v-card style="min-height: 300px" class="pa-5">
+                  <v-card style="min-height: 300px" class="px-10 py-5">
                     <p
                       class="my-2 text-center"
                     >Select one or more options to create a list of schools that fit your needs.</p>

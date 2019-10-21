@@ -78,7 +78,7 @@
                 <v-expansion-panel v-for="(prog, index) in processedPrograms" :key="index">
                   <v-expansion-panel-header>{{ _.startCase(_.toLower(prog.name).slice(0,-1)) }}</v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <v-expansion-panels dark>
+                    <v-expansion-panels>
                       <v-expansion-panel v-for="fos in prog.fields" :key="fos.code+'-'+fos.credential.level">
                         <v-expansion-panel-header>
                           {{ fos.title.slice(0,-1) }} - {{ fos.credential.title }}
