@@ -412,7 +412,7 @@ export default {
 
       // TODO: Need to remove this when API
       // is processing requests better
-      query['all_programs'] = true;
+      query['all_programs_nested'] = true;
       
       let qs = this.generateQueryString(params);
       history.replaceState(params, "search", qs);
