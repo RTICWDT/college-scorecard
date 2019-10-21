@@ -10,7 +10,7 @@
         ></canned-search-slider>
         <canned-search-slider
           label="Most People Get In"
-          :add-to-query="[{acceptance: '0.9..1'}]"
+          :add-to-query="[{acceptance: '0.5..1'}]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
       </v-col>
@@ -29,7 +29,7 @@
       <v-col md="4" cols="12" class='py-0 my-0'>
         <canned-search-slider
           label="Most People Graduate"
-          :add-to-query="[{completion_rate:'0.8..'}]"
+          :add-to-query="[{completion_rate:'0.5..'}]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
       </v-col>
