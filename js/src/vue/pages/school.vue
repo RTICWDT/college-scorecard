@@ -428,6 +428,7 @@
                         @click="field_sort = 'lowest_debt'"
                       >Lowest Debt</v-btn>
                     </p>
+                    <p class='my-3'>Out of {{allFieldsOfStudy.length | numeral }} fields of study at {{ schoolName }}, the top {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} offering undergraduate degrees or certificates with data available on {{ hoistGroup }} are shown below. <a :href='fieldsLink'>See All Fields of Study &raquo;</a></p>
                     <v-row class="mx-5 mt-5 d-none d-sm-flex" v-if="fieldsOfStudy.length">
                       <v-col
                         cols="12"
@@ -734,6 +735,7 @@ export default {
       num_panels: 7,
       field_sort: "ipeds_award_count",
       hoistCurrency: false,
+      hoistGroup: 'numer of graduates',
       error: false,
       currentSankey: {
           enroll: "enroll_both",
@@ -784,14 +786,17 @@ export default {
       switch (sort) {
         case "ipeds_award_count":
           this.hoistCurrency = false;
+          this.hoistGroup = 'numer of graduates';
           return "Graduates";
           break;
         case "highest_earnings":
           this.hoistCurrency = true;
+          this.hoistGroup = 'earnings';
           return "Median Earnings";
           break;
         case "lowest_debt":
           this.hoistCurrency = true;
+          this.hoistGroup = 'debt';
           return "Median Debt";
           break;
       }
