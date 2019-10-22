@@ -110,11 +110,11 @@
                     />
                     <h2 class="mb-3" v-if="!isProgramReporter">
                       Average Annual Cost&nbsp;
-                      <tooltip definition="avg-cost-year" />
+                      <tooltip definition="avg-cost" />
                     </h2>
                     <h2 v-else>
                       Average Annual Cost for Largest Program&nbsp;
-                      <tooltip definition="coming-soon" />
+                      <tooltip definition="avg-program-cost" />
                     </h2>
                     <p
                       v-if="!isProgramReporter"
@@ -290,15 +290,15 @@
                     <v-alert
                       v-if="(aidFlag > 3) && (aidFlag < 8)"
                       type="info"
-                    >This institution does not participate in the Federal student financial aid program administered by the U.S. Department of Education.</v-alert>
+                    >{{site.data.glossary.ogc.default}}</v-alert>
                     <v-alert
                       v-else-if="aidFlag==3"
                       type="info"
-                    >This institution does not participate in the Federal student financial aid programs administered by the U.S. Department of Education, but is approved by the Department for purposes of allowing students to receive deferments on repayment of Federal student loans received at other institutions.</v-alert>
+                    >{{site.data.glossary.ogc.flag3}}</v-alert>
                     <v-alert
                       v-else-if="aidFlag==8"
                       type="info"
-                    >Data is not yet available. This institution only recently began administering Federal aid.</v-alert>
+                    >{{site.data.glossary.ogc.flag8}}</v-alert>
                     <div v-else>
                       <v-row>
                         <v-col cols="12" md="6">
@@ -510,7 +510,7 @@
                             class="display-2 navy-text font-weight-bold"
                           >{{ undergraduates | separator }}</strong>
                           <br />
-                          <strong>undergraduate students</strong>
+                          <strong>Undergraduate Students</strong>
                         </div>
                       </v-col>
                       <v-col cols="12" md="6" class="d-flex justify-space-around">
@@ -519,7 +519,7 @@
                             class="display-2 navy-text font-weight-bold"
                           >{{ fullTimeEnrollment | numeral('0.%') }}</span>
                           <br />
-                          <strong>Full-time</strong>
+                          <strong>Full-time <tooltip definition="full-time" /></strong>
                         </div>
                         <div>
                           <span class="display-2 navy-text font-weight-bold divide">/</span>
@@ -534,7 +534,7 @@
                       </v-col>
                     </v-row>
                     <v-row>
-                      <v-col cols="12" md="6" v-if="aidFlag<3">
+                      <v-col cols="12" md="6">
                         <h2 class="mb-3">
                           Socio-Economic Diversity
                           <tooltip definition="socio-eco" />
@@ -546,7 +546,7 @@
                           color="#0e365b"
                           :value="socioEconomicDiversity * 100"
                           :height="200"
-                          v-if="socioEconomicDiversity"
+                          v-if="aidFlag < 3 && socioEconomicDiversity"
                         >></donut>
                         <div v-else class="data-na">Data Not Available</div>
                       </v-col>
@@ -620,15 +620,14 @@
                         ></range>
                         <p v-else class="data-na">Data Not Available</p>
                       </v-col>
-                      <v-col cols="12" md="4">
-                        <h2 class="mb-3">Admittance Rate</h2>
+                      <v-col cols="12" md="5">
+                        <h2 class="mb-3">Admittance Rate <tooltip definition='admittance-rate' /></h2>
                         <donut
                           color="#0e365b"
                           :value="admittanceRate*100"
                           v-if="openAdmissions!=1"
                           chart-id="admittance-chart"
                           :height="200"
-                          :width="300"
                         ></donut>
                         <p v-else>This school has an open admissions policy.</p>
                       </v-col>
@@ -669,9 +668,6 @@
 
 <style lang="scss" scoped>
 @import 'sass/_variables';
-h2{
-  white-space: nowrap;
-}
 .school-map {
   border: 1px
     solid
