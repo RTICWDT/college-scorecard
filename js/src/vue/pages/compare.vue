@@ -17,7 +17,7 @@
       <v-container>
         <v-row>
           <v-col cols="12" md="9" class="school-left">
-            <div v-if="false" class="show-loading">
+            <div v-if="loading" class="show-loading">
               <v-card class="pa-5">
                 <h1 class="title">
                   Loading
@@ -427,7 +427,8 @@ export default {
         enroll: "enroll_both",
         study: "study_both"
       },
-      currentHighlight: ""
+      currentHighlight: "",
+      loading: true
     };
   },
   computed: {
@@ -485,7 +486,7 @@ export default {
     //     console.error('[ga] compare school event error');
     //   }
     // }
-
+    this.loading = true;
     let request = apiGetAll(window.api.url, window.api.key, '/schools/', paramArray).then((responses) => {
       
       let schoolData = responses.map(function(response){
@@ -506,6 +507,7 @@ export default {
             this.schools["4-year schools"].push(school);
             break;
         }
+        this.loading = false;
       });
 
     }).catch((responses) => {
