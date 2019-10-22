@@ -84,7 +84,7 @@
                           {{ fos.title.slice(0,-1) }} - {{ fos.credential.title }}
                         </v-expansion-panel-header>
                         <v-expansion-panel-content>
-                          <field-data :fos="fos" />
+                          <field-data :fos="fos" :school="school" />
                         </v-expansion-panel-content>
                       </v-expansion-panel>
                     </v-expansion-panels> 

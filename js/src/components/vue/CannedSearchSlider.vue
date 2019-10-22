@@ -11,7 +11,7 @@
 </template>
 <style lang="scss" >
   @import 'sass/_variables';
-  .v-input--selection-controls.v-input .v-label{
+  .v-input--switch.v-input .v-label{
     color: $darker-green !important;
     font-weight: bold;
     font-family: $header-font-family;

@@ -135,17 +135,14 @@
             <div id="search-can-query-container" v-if="!isLoading && results.schools.length === 0">
             <!-- <div id="search-can-query-container" v-if="!isLoading"> -->
               <v-row>
-                <v-col cols="12" md="4" sm="12" xs="12">
-                  <div id="search-can-query-text">
+                <v-col cols="12">
+                  <v-card class='pa-5'>
                     <h3>Show Me Options</h3>
-                    <p>Select one or more options on right to create a list of schools that fit you.</p>
-                  </div>
+                    <p>Select one or more options below to create a list of schools that fit your needs.</p>
+                    <canned-search-container @canned-search-submit="handleCannedSearchClick"></canned-search-container>
+                  </v-card>
                 </v-col>
-
-                <v-col md="8" sm="12" xs="12" cols="12">
-                  <canned-search-container @canned-search-submit="handleCannedSearchClick"></canned-search-container>
-                </v-col>
-              </v-row>
+             </v-row>
             </div>
               <div class="results-main-alert">
                 <div class="show-loading" v-show="isLoading">

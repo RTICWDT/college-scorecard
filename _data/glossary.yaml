@@ -62,11 +62,11 @@ ogc:
   flag8: Data is not yet available. This school only recently began administering Federal aid.   
 outcome-measures:
   title: Outcomes 8 Years After Attending
-  default: Percentages of students who graduated, transferred, are still enrolled, and withdrew from this school 8 years of entry.
+  default: <p>Percentages of students who graduated, transferred, are still enrolled, and withdrew from this school 8 years of entry.</p>
   glossary: "<p>Percentages of students falling into 4 outcome categories 8 years after entering the school: graduated, transferred, still enrolled, and withdrew. Percentages may not add to 100% due to suppression and rounding.</p>"
 fos-number-of-graduates: 
   title: Field of Study Number of Graduates
-  default: The total number of students, including those who did and those who did not receive federal financial aid, who graduated in this field of study.
+  default: <p>The total number of students, including those who did and those who did not receive federal financial aid, who graduated in this field of study.</p>
   glossary: <p>The number of awards earned in this field of study represent completions amongst all students, not just students who received federal financial aid. These counts are specific to the branch location displayed in this school profile, exclusive of any other related locations. The number of individuals receiving these awards may be smaller than the number of awards conferred due to individuals receiving multiple awards in this field of study category. </p>
 fos-median-debt:
   title: Field of Study Median Total Debt
@@ -79,7 +79,7 @@ fos-monthly-debt-payment:
   glossary: <p>The median monthly loan payment is based on the cumulative median debt of individuals who completed an award in the indicated field of study. It assumes standard repayment terms of a 10 year amortization using the current interest rate for undergraduate federal loans (4.53%) for undergraduate programs and the current interest rate for graduate PLUS loans (7.08%) or graduate-level programs. A 10-year fixed payment plan is just one of several plans available to federal borrowers, please see the <a href="https://studentloans.gov/myDirectLoan/repaymentEstimator.action" target="_blank">repayment calculator</a> to estimate monthly payments for alternative payment plans. Please see the entry for median debt by field of study for information on the median debt calculation. </p><p>For schools with multiple locations, this information is based on all of their locations.</p><p>These data are based on school-reported information about students' program of completion. The U.S. Department of Education Department cannot fully confirm the completeness of these reported data for this school.</p>
 fos-median-earnings:
   title: Field of Study Median Earnings
-  default: <p>The median annual earnings divided by 12 for students who received federal aid.</p><p>These data are based on school-reported information about students' program of completion. The U.S. Department of Education Department cannot fully confirm the completeness of these reported data for this school.</p>
+  default: <p>The median annual earnings of students one year after graduation. Only data from students who received federal financial aid is included in the calculation.</p><p>These data are based on school-reported information about students' program of completion. The U.S. Department of Education Department cannot fully confirm the completeness of these reported data for this school.</p>
   glossary: <p>The median annual earnings of individuals who received federal financial aid during their studies and completed an award at the indicated field of study. To be included in the median earnings calculation, the individuals needed to be working and not enrolled in school during in the year when earnings are measured. Median earnings are measured in the first full year after the student completed their award. </p><p>These data are based on school-reported information about students' program of completion. The U.S. Department of Education Department cannot fully confirm the completeness of these reported data for this school.</p><p>For schools with multiple locations, this information is based on all of their locations.</p>
 fos-monthly-earnings:
   title: Field of Study Monthly Earnings

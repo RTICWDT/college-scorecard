@@ -64,6 +64,7 @@
                   :currentHighlight="currentHighlight"
                   @update-highlight="currentHighlight = $event"
                   title="Salary After Completing"
+                  definition="fos-median-earnings"
                   :config="{ 
                     computedField: 'earningsRange', 
                     color: '#0e365b', 
@@ -109,6 +110,7 @@
                     <compare-section
                       :schools="schools"
                       title="Socio-Economic Diversity"
+                      definition="socio-eco"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
@@ -123,6 +125,7 @@
                     <compare-section
                       :schools="schools"
                       title="Race/Ethnicity"
+                      definition="race-eth"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
@@ -210,6 +213,7 @@
                     <compare-section
                       :schools="schools"
                       title="Graduation Rate"
+                      definition="graduation-rate"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
@@ -223,6 +227,7 @@
                     <compare-section
                       :schools="schools"
                       title="Students Who Return After Their First Year"
+                      definition="retention-rate"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
@@ -236,6 +241,7 @@
                     <compare-section
                       :schools="schools"
                       title="Outcomes 8 Years After Attending"
+                      definition="outcome-measures"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
@@ -253,7 +259,8 @@
                   <v-expansion-panel-content>
                     <compare-section
                       :schools="schools"
-                      title="Students Recieving Federal Loans"
+                      title="Students Receiving Federal Loans"
+                      definition="student-aid"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
@@ -266,7 +273,8 @@
                     />
                     <compare-section
                       :schools="schools"
-                      title="Typical Debt After Graduation"
+                      title="Median Total Debt After Graduation"
+                      definition="avg-debt"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
@@ -280,6 +288,7 @@
                     <compare-section
                       :schools="schools"
                       title="Typical Monthly Loan Payment"
+                      definition="avg-loan-payment"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
@@ -313,6 +322,8 @@
                 <v-expansion-panel>
                   <v-expansion-panel-header>Test Scores & Admittance</v-expansion-panel-header>
                   <v-expansion-panel-content>
+                    <h2 class='pt-5 pb-3'>Test Scores <tooltip definition="test-scores" /></h2>
+                    <p>Students who were admitted and enrolled typically had standardized test scores in these ranges.</p>
                     <compare-section
                       :schools="schools"
                       title="SAT Reading"

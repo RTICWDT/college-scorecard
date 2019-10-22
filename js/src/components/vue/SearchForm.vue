@@ -16,9 +16,7 @@
     border-radius: 0px !important;
   }
 
-  #search-form-sub-degree-container{
-    border-left: 1px solid black;
-  }
+
 </style>
 
 <template>
@@ -78,7 +76,8 @@
     <field-autocomplete v-model="input.cip4"></field-autocomplete>
     
     <!-- cip4 - Degree subfield -->
-    <div id="search-form-sub-degree-container" class="mt-4 pl-2 ml-4" v-show="input.cip4">
+    <p class='subhead-2'>Degrees/Certificates Offered</p>
+    <div id="search-form-sub-degree-container" class="">
       <v-checkbox
         class="search-form-degree-cb my-0 py-0"
         v-model="input.cip4_degree"

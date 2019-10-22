@@ -50,7 +50,7 @@
       </v-row>
       <v-row class='result-card-info-container v-flex align-center'>
         <v-col cols='7' class='py-2'>
-          <span>Salary After Completing&nbsp;<tooltip definition="avg-salary" /></span>          
+          <span>Salary After Completing&nbsp;<tooltip definition="fos-median-earnings" /></span>          
         </v-col>
         <v-col cols='5' class="pr-0 text--black py-2">
           <h3 class='navy-text'>{{displayEarn}}</h3>
@@ -59,7 +59,7 @@
       <v-row class='result-card-info-container v-flex align-center' >
         <v-col cols='7' class='py-2'>
           <span v-if="!isProgramReporter">Average Annual Cost&nbsp;<tooltip definition="avg-cost-year" /></span>
-          <span v-else>Average Annual Cost for Largest Program&nbsp;<tooltip definition="coming-soon" /></span>
+          <span v-else>Average Annual Cost for Largest Program&nbsp;<tooltip definition="avg-program-cost" /></span>
         </v-col>
         <v-col cols='5' class="pr-2 text--black py-0">
           <h3 class='navy-text'>{{displayAvgCost}}</h3>
