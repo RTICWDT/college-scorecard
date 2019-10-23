@@ -50,7 +50,7 @@
       </v-row>
       <v-row class='result-card-info-container v-flex align-center'>
         <v-col cols='7' class='py-2'>
-          <span>Salary After Completing&nbsp;<tooltip definition="fos-median-earnings" /></span>          
+          <span>Salary After Completing&nbsp;<tooltip definition="fos-median-earnings" :isBranch="isBranch" /></span>          
         </v-col>
         <v-col cols='5' class="pr-0 text--black py-2">
           <h3 class='navy-text'>{{displayEarn}}</h3>

@@ -41,7 +41,7 @@
                       {{ schoolName }}
                       <v-chip v-if="underInvestigation==1" color="error" label>
                         <strong>Under ED Monitoring</strong>
-                        <tooltip definition="hcm2" color="#FFFFFF" class="ml-2" />
+                        <tooltip definition="hcm2" color="#FFFFFF" class="ml-2" :isBranch="isBranch" />
                       </v-chip>
                     </h1>
                     <v-divider />
@@ -100,7 +100,7 @@
                   <v-col cols="12" md="6">
                     <h2 class="mb-3">
                       Salary After Completing&nbsp;
-                      <tooltip definition="fos-median-earnings" />
+                      <tooltip definition="fos-median-earnings" :isBranch="isBranch" />
                     </h2>
                     <p>Salary after completing depends on field of study.</p>
                     <multi-range
@@ -146,7 +146,7 @@
                         <div v-if="!isProgramReporter">
                           <h2 class="mb-3">
                             Average Annual Cost&nbsp;
-                            <tooltip definition="avg-cost-year" />
+                            <tooltip definition="avg-cost" />
                           </h2>
                           <p>The average cost after grants and scholarships from the school, state, or federal government.</p>
 
@@ -259,7 +259,7 @@
                       <v-col cols="12" md="6">
                         <h2 class="mb-3 text-center">
                           Students Who Return After Their First Year&nbsp;
-                          <tooltip definition="retention-rate" :branch="isBranch" />
+                          <tooltip definition="retention-rate" />
                         </h2>
                         <donut
                           v-if="retentionRate"
@@ -481,7 +481,7 @@
                           </div>
                         </v-expansion-panel-header>
                         <v-expansion-panel-content>
-                          <field-data :fos="fos" :school="school" />
+                          <field-data :fos="fos" />
                         </v-expansion-panel-content>
                       </v-expansion-panel>
                     </v-expansion-panels>

@@ -322,7 +322,7 @@
                 <v-expansion-panel>
                   <v-expansion-panel-header @click="trackAccordion('Test Scores & Admittance')">Test Scores & Admittance</v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <h2 class='pt-5 pb-3'>Test Scores <tooltip definition="test-scores" /></h2>
+                    <h2 class='pt-5 pb-3'>Test Scores <tooltip definition="test-scores" :isCompare="true" /></h2>
                     <p>Students who were admitted and enrolled typically had standardized test scores in these ranges.</p>
                     <compare-section
                       :schools="schools"
