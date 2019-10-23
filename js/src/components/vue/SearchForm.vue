@@ -63,6 +63,7 @@
 
 
     <v-select v-model="input.state"
+      id="search-form-state"
       :items="site.data.states"
       item-text="name"
       item-value="abbr"

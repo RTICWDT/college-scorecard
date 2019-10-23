@@ -65,3 +65,6 @@ exclude:
   - tmp
   - vendor
   - '*.vue' 
+  - js/src/*
+  - __tests
+  - output
