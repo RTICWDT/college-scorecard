@@ -31,26 +31,7 @@ Vue.use(vueNumeralFilterInstaller, { locale: 'en' });
 
 import style from '../../sass/style.scss';
 
-// Global Method for Tracking Events
-// If analytics is not enabled, console receives the input. 
-Vue.mixin({
-  methods: {
-    GATrackEvent(category, action, label) {
-      if(window.ga)
-      {
-        try{
-          ga('send','event',category,action,label);
-        }
-        catch(e){
-          console.error('[ga] event error');
-        }
-      }
-      else{
-        console.log('GA Event: ['+category+','+action+', '+label+']');
-      }
-    }
-  }
-});
+
 
 
 new Vue({

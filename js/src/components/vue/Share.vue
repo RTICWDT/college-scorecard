@@ -49,7 +49,10 @@
 </template>
 
 <script>
+import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
+
 export default {
+    mixins: [AnalyticsEvents],
     props: {
         'url': { type: String, default: ''},
         'label': { type: String, default: 'Share' },
@@ -83,6 +86,7 @@ export default {
     },
     methods:{
         picked(item){
+            this.trackShare(item.title);
             window.open(item.url+this.url, "_blank"); 
         }
     }

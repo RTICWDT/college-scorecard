@@ -7,6 +7,7 @@
           <a
             href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
             target="_blank"
+            @click="trackOutboundLink($event)"
           >StackExchange
           </a>
         </p>

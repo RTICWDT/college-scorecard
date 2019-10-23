@@ -81,7 +81,7 @@
               </v-row>
               <v-expansion-panels class="mt-5" multiple focusable v-model="panels">
                 <v-expansion-panel>
-                  <v-expansion-panel-header>College Information</v-expansion-panel-header>
+                  <v-expansion-panel-header @click="trackAccordion('College Information')">College Information</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <compare-section
                       :schools="schools"
@@ -159,7 +159,7 @@
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel>
-                  <v-expansion-panel-header>Costs</v-expansion-panel-header>
+                  <v-expansion-panel-header @click="trackAccordion('Costs')">Costs</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <compare-section
                       :schools="schools"
@@ -208,7 +208,7 @@
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel>
-                  <v-expansion-panel-header>Graduation & Retention</v-expansion-panel-header>
+                  <v-expansion-panel-header @click="trackAccordion('Graduation &amp; Retention')">Graduation & Retention</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <compare-section
                       :schools="schools"
@@ -255,7 +255,7 @@
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel>
-                  <v-expansion-panel-header>Financial Aid & Debt</v-expansion-panel-header>
+                  <v-expansion-panel-header @click="trackAccordion('Financial Aid &amp; Debt')">Financial Aid & Debt</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <compare-section
                       :schools="schools"
@@ -302,7 +302,7 @@
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel>
-                  <v-expansion-panel-header>Salary after Completing by Field of Study</v-expansion-panel-header>
+                  <v-expansion-panel-header @click="trackAccordion('Salary after Completing by Field of Study')">Salary after Completing by Field of Study</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <compare-section
                       :schools="schools"
@@ -320,7 +320,7 @@
                 </v-expansion-panel>
 
                 <v-expansion-panel>
-                  <v-expansion-panel-header>Test Scores & Admittance</v-expansion-panel-header>
+                  <v-expansion-panel-header @click="trackAccordion('Test Scores & Admittance')">Test Scores & Admittance</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <h2 class='pt-5 pb-3'>Test Scores <tooltip definition="test-scores" /></h2>
                     <p>Students who were admitted and enrolled typically had standardized test scores in these ranges.</p>
@@ -409,9 +409,10 @@ import { compare } from "vue/mixins.js";
 import ComplexFields from "vue/mixins/ComplexFields.js";
 import SankeyButtons from "components/vue/SankeyButtons.vue";
 import { apiGetAll } from '../api.js';
+import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
 
 export default {
-  mixins: [compare, ComplexFields],
+  mixins: [compare, ComplexFields, AnalyticsEvents],
   props: ["baseUrl", "compareSchools"],
   components: {
     tooltip: Tooltip,
@@ -483,20 +484,14 @@ export default {
     this.compareSchools.map(function(school) {
       var id = +school.schoolId || +school;
       // query[id] = [picc.API.getSchool, id, params];
+      schoolArray.push(id);
       paramArray.push({
         id: id
       });
 
     });
 
-    // pass the list of chosen schools to analytics.
-    // if (window.ga) {
-    //   try {
-    //     ga('send', 'event', 'Comparison', 'School IDs', Object.keys(query).join(";"));
-    //   } catch (e) {
-    //     console.error('[ga] compare school event error');
-    //   }
-    // }
+    this.trackCompareList(schoolArray.join(';'));
     this.loading = true;
     let request = apiGetAll(window.api.url, window.api.key, '/schools/', paramArray).then((responses) => {
       

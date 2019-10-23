@@ -19,7 +19,7 @@
           <v-col cols="12" md="9" class="school-left">
             <div v-if="!school.id && !error" class="show-loading">
               <v-card class="pa-5">
-                <h1 class="heading">
+                <h1 class="title">
                   Loading
                   <v-icon color="#0e365b">fas fa-circle-notch fa-spin</v-icon>
                 </h1>
@@ -139,7 +139,7 @@
               </v-row>
               <v-expansion-panels multiple focusable v-model="panels">
                 <v-expansion-panel>
-                  <v-expansion-panel-header id="cost" aria-controls="costs-content">Costs</v-expansion-panel-header>
+                  <v-expansion-panel-header id="cost" aria-controls="costs-content" @click="trackAccordion('Costs')">Costs</v-expansion-panel-header>
                   <v-expansion-panel-content id="costs-content" class="px-0 py-3 pa-sm-5">
                     <v-row>
                       <v-col cols="12" md="6">
@@ -238,6 +238,7 @@
                   <v-expansion-panel-header
                     id="graduation"
                     aria-controls="graduation-content"
+                    @click="trackAccordion('Graduation &amp; Retention')"
                   >Graduation &amp; Retention</v-expansion-panel-header>
                   <v-expansion-panel-content id="graduation-content" class="px-0 py-3 pa-sm-5">
                     <v-row>
@@ -285,6 +286,7 @@
                   <v-expansion-panel-header
                     id="aid"
                     aria-controls="aid-content"
+                    @click="trackAccordion('Financial Aid &amp; Debt')"
                   >Financial Aid &amp; Debt</v-expansion-panel-header>
                   <v-expansion-panel-content id="aid-content" class="px-0 py-3 pa-sm-5">
                     <v-alert
@@ -350,6 +352,7 @@
                             <a
                               href="https://studentloans.gov/myDirectLoan/repaymentEstimator.action"
                               target="_blank"
+                              @click="trackOutboundLink($event)"
                             >payment options</a> are available.
                           </p>
                         </v-col>
@@ -367,6 +370,7 @@
                               color="secondary"
                               href="https://fafsa.ed.gov/spa/fafsa"
                               target="_blank"
+                              @click="trackOutboundLink($event)"
                             >Start My FAFSA</v-btn>
                           </v-card>
                         </v-col>
@@ -378,6 +382,7 @@
                   <v-expansion-panel-header
                     id="earnings"
                     aria-controls="earnings-content"
+                    @click="trackAccordion('Salary After Completing by Field of Study')"
                   >Salary After Completing by Field of Study</v-expansion-panel-header>
                   <v-expansion-panel-content
                     id="earnings-content"
@@ -396,6 +401,7 @@
                   <v-expansion-panel-header
                     id="academics"
                     aria-controls="academics-content"
+                    @click="trackAccordion('Fields of Study')"
                   >Fields of Study / Majors</v-expansion-panel-header>
                   <v-expansion-panel-content id="academics-content" class="px-0 py-3 pa-sm-5">
                     <!-- <div if=''> -->
@@ -499,7 +505,7 @@
                   <v-expansion-panel-header
                     id="demographics"
                     aria-controls="demographics-content"
-                    v
+                    @click="trackAccordion('Student Body')"
                   >Student Body</v-expansion-panel-header>
                   <v-expansion-panel-content id="demographics-content" class="px-0 py-3 pa-sm-5">
                     <v-row>
@@ -574,6 +580,7 @@
                   <v-expansion-panel-header
                     id="selectivity"
                     aria-controls="selectivity-content"
+                    @click="trackAccordion('Test Scores and Admittance')"
                   >Test Scores &amp; Admittance</v-expansion-panel-header>
                   <v-expansion-panel-content id="selectivity-content" class="px-0 py-3 pa-sm-5">
                     <v-row>
@@ -702,9 +709,10 @@ import { compare } from "vue/mixins.js";
 import ComplexFields from "vue/mixins/ComplexFields.js";
 import URLHistory from "vue/mixins/URLHistory.js";
 import { apiGet } from '../api.js';
+import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
 
 export default {
-  mixins: [compare, URLHistory, ComplexFields],
+  mixins: [compare, URLHistory, ComplexFields, AnalyticsEvents],
   props: ["baseUrl", "compareSchools"],
   components: {
     donut: Donut,
@@ -872,8 +880,6 @@ export default {
     none() {
       this.panels = [];
     },
-
-
   },
   mounted() {
     let self = this;

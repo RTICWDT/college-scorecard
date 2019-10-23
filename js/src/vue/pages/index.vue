@@ -89,6 +89,7 @@
                   color="secondary"
                   href="https://www.apprenticeship.gov/apprenticeship-finder"
                   target="_blank"
+                  @click="trackOutboundLink($event)"
                 >Find one that's right for you!</v-btn>
               </p>
               <p>Curious what careers are out there? <strong>O*NET’s career explorer</strong> is there to help!</p>
@@ -98,6 +99,7 @@
                   color="secondary"
                   href="https://www.onetonline.org/find/"
                   target="_blank"
+                  @click="trackOutboundLink($event)"
                 >Explore Careers</v-btn>
               </p>
             </v-col>
@@ -160,7 +162,9 @@ import CannedSearchContainer from "components/vue/CannedSearchContainer.vue";
 import querystring from "querystring";
 import SearchForm from "components/vue/SearchForm.vue";
 import NameAutocomplete from "components/vue/NameAutocomplete.vue";
+import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
 export default {
+  mixins: [AnalyticsEvents],
   components: {
     "paying-for-college": PayingForCollege,
     "canned-search-container": CannedSearchContainer,
