@@ -36,7 +36,7 @@ export default {
   props: ["baseUrl", "dataBase_url"],
   computed: {
     glossary() {
-      return siteDataAll.glossary;
+      return _.orderBy(siteDataAll.glossary, 'title');
     }
   }
 };
