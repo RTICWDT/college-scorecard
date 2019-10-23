@@ -71,10 +71,10 @@ export default {
       return this.entry['glossary']?true:false;
     },
     showBranch(){
-      return (this.entry.branch && isBranch)
+      return (this.entry.branch && this.isBranch)
     },
     showCompare(){
-      return (this.entry.branch && isCompare)
+      return (this.entry.branch && this.isCompare)
     }
   },
   mounted(){
