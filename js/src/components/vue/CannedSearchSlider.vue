@@ -6,7 +6,7 @@
     hide-details
     :loading="isLoading"
   >
-
+   <simple-tooltip v-if="tip" slot='append' :text="tip" color="#38691F" />
   </v-switch>
 </template>
 <style lang="scss" >
@@ -18,14 +18,22 @@
   }
 </style>
 <script>
+import SimpleTooltip from "components/vue/SimpleTooltip.vue";
 export default {
+  components:{
+    'simple-tooltip': SimpleTooltip
+  },
   props:{
     label: String,
     addToQuery: {
       type: Array,
       default: null
     },
-    isLoading:Boolean
+    isLoading:Boolean,
+    tip:{
+      type: String,
+      default: ''
+    }
   }
 }
 </script>

@@ -8,15 +8,18 @@
           @canned-search-toggle="handleCannedToggle"
           :is-loading="location.isLoading"
         ></canned-search-slider>
+        
         <canned-search-slider
           label="Most People Get In"
           :add-to-query="[{acceptance: '0.5..1'}]"
           @canned-search-toggle="handleCannedToggle"
+          tip="Acceptance rate of 50% or higher"
         ></canned-search-slider>
         <canned-search-slider
           label="Most People Graduate"
           :add-to-query="[{completion_rate:'0.5..'}]"
           @canned-search-toggle="handleCannedToggle"
+          tip="Graduation rate of 50% or higher"
         ></canned-search-slider>
       </v-col>
       <v-col md="6" cols="12" class="text-center canned-search-wrapper py-0 my-0">
