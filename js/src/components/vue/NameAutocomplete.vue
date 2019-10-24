@@ -9,13 +9,14 @@
             item-value="id"
             placeholder="Start typing to search"
             return-object
-            @change="goToSchool"
+            @input="goToSchool"
             autocomplete="off"
             hide-details
             class='pt-0 mt-0'
             color="secondary"
             outlined
             prepend-inner-icon="search"
+            hide-no-data
          />
     </div>
 </template>
@@ -37,23 +38,19 @@ export default {
     goToSchool(){
       let id = _.get(this.school, fields.ID);
       let name = _.get(this.school, fields.NAME,'(unknown)');
-      window.location= '/school/?'+id+'-'+name.replace(/\W+/g, '-'); 
+      window.location= '/search/?school.name='+this.school; 
     }
   },
   watch: {
-    // TODO - Clean Unwanted Methods.
     search: _.debounce(function(newVal){
       this.isLoading = true
-      // var self = this;
+
       var query = { fields: ([fields.NAME,fields.ID]).join(','), per_page: 20 };
       query[fields.NAME] = this.search;
-
-      // query = picc.form.prepareParams(query);
       query = this.prepareParams(query);
 
       let request = apiGet(window.api.url, window.api.key, "/schools", query).then((response) => {
         if (!response.data.results.length) { return {}; }
-
         this.items = response.data.results;
         this.isLoading = false;
       }).catch((error) => {
@@ -61,11 +58,6 @@ export default {
         this.isLoading = false;
       });
 
-      // picc.API.search(query, function(error, data){
-      //     if (error || !data.results.length) { return {}; }
-      //     self.items = data.results;
-      //     self.isLoading = false;
-      // });
     },200)
   }
   }
