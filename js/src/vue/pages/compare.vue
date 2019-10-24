@@ -29,14 +29,6 @@
 
                   </v-col>
                   <v-col cols="6" class='text-right'>
-                    <v-btn
-                      text
-                      small
-                      :color="isSelected?'amber':'white'"
-                      @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
-                    >
-                      <v-icon x-small class='mr-2'>fa fa-plus-circle</v-icon> Compare
-                    </v-btn>
                     <share small text color="white" label="Share this Comparison" :url="shareUrl" />
                   </v-col>
                 </v-row>
