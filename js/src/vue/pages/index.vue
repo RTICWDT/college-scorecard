@@ -23,6 +23,7 @@
               slider-color="#74B3E8"
               class='ma-0'
               show-arrows
+              v-model="desktopTabs"
               >
                 <v-tab @click="GATrackEvent('Home Tab','Tab','Custom Search')">
                   <span class='hidden-sm-and-down'>Custom Search</span>
@@ -174,12 +175,8 @@ export default {
   props: ["baseUrl"],
   data() {
     return {
-      showSidebar: true,
-      sidebar: {
-        fixed: false,
-        absolute: true
-      },
-      mobilePanels: 0
+      mobilePanels: 0,
+      desktopTabs: 1
     };
   },
   methods: {
@@ -198,15 +195,6 @@ export default {
 
       // Direct to location.
       window.location.href = url;
-    },
-    toggleFixed(e) {
-      if (window.scrollY < 105) {
-        this.sidebar.absolute = true;
-        this.sidebar.fixed = false;
-      } else {
-        this.sidebar.absolute = false;
-        this.sidebar.fixed = true;
-      }
     }
   }
 };

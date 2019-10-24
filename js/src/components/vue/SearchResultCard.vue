@@ -18,13 +18,14 @@
     outlined :class="{'result-card-selected': isSelected}"> <!-- Better Selected style -->
     <v-card-text class='pa-3'>
         <p class='mt-1 mb-2' v-if="underInvestigation==1">
-          <v-chip
+          <v-card
           color="error"
-          label
+          class='px-2 py-1'
+          flat
           >
-          <strong>Under ED Monitoring</strong>
+          <strong class='white--text'>Under ED Monitoring</strong>
           <tooltip definition="hcm2" color="#FFFFFF" class='ml-2' />
-        </v-chip>
+        </v-card>
         </p>
 
         <v-btn text icon class='float-right' :color="isSelected?'amber':'grey'"  @click="$emit('toggle-compare-school',school)">

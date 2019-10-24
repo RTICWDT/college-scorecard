@@ -3,10 +3,11 @@
     <v-menu offset-y>
       <template v-slot:activator="{ on }">
           <v-btn
-          color="secondary"
+          :color="color"
           v-on="on"
           rounded
           :small="small"
+          :text="text"
           class='d-none d-sm-inline'
         >
           <v-icon x-small class='mr-2'>fas fa-share</v-icon> {{label}}
@@ -25,7 +26,7 @@
     <v-menu offset-y>
       <template v-slot:activator="{ on }">
           <v-btn
-          color="secondary"
+          :color="color"
           v-on="on"
           rounded
           fab 
@@ -56,7 +57,9 @@ export default {
     props: {
         'url': { type: String, default: ''},
         'label': { type: String, default: 'Share' },
-        'small': { type: Boolean, default: false }
+        'small': { type: Boolean, default: false },
+        'text': {type: Boolean, default: false },
+        'color': {type: String, default: 'secondary'}
     },
     computed: {
       items(){

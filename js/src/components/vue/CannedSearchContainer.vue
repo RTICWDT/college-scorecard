@@ -1,7 +1,7 @@
 <template>
   <div id="search-can-query-items-wrapper">
     <v-row>
-      <v-col md="4" sm="12" cols="12" class="text-center canned-search-wrapper py-0 my-0">
+      <v-col md="6" cols="12" class="text-center canned-search-wrapper py-0 my-0">
         <canned-search-slider
           label="Schools Near Me"
           :add-to-query="[{location:true}]"
@@ -13,8 +13,13 @@
           :add-to-query="[{acceptance: '0.5..1'}]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
+        <canned-search-slider
+          label="Most People Graduate"
+          :add-to-query="[{completion_rate:'0.5..'}]"
+          @canned-search-toggle="handleCannedToggle"
+        ></canned-search-slider>
       </v-col>
-      <v-col md="4" sm="12" cols="12" class="text-center canned-search-wrapper py-0 my-0">
+      <v-col md="6" cols="12" class="text-center canned-search-wrapper py-0 my-0">
         <canned-search-slider
           label="I want an Associate's Degree"
           :add-to-query="[{degree:'a'}]"
@@ -25,16 +30,9 @@
           :add-to-query="[{degree:'b'}]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
-      </v-col>
-      <v-col md="4" cols="12" class='py-0 my-0'>
         <canned-search-slider
           label="I want a Certificate"
           :add-to-query="[{degree:'c'}]"
-          @canned-search-toggle="handleCannedToggle"
-        ></canned-search-slider>
-        <canned-search-slider
-          label="Most People Graduate"
-          :add-to-query="[{completion_rate:'0.5..'}]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
       </v-col>

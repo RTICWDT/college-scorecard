@@ -1,22 +1,9 @@
 <template>
   <v-app id="app" class="compare-page">
-    <div class="backNav">
-      <div class="container school-back">
-        <v-btn
-          color="secondary"
-          rounded
-          small
-          id="referrer-link"
-          class="link-more"
-          href="./index/"
-        >&laquo; Back</v-btn>
-      </div>
-    </div>
-    <!-- Search results -->
     <div class="school-bg">
       <v-container>
         <v-row>
-          <v-col cols="12" md="9" class="school-left">
+          <v-col cols="12" lg="9" class="school-left">
             <div v-if="loading" class="show-loading">
               <v-card class="pa-5">
                 <h1 class="title">
@@ -27,13 +14,37 @@
             </div>
 
             <div v-else class="show-loaded" id="school">
-              <v-card class="pb-5 px-5 pt-1">
-                <p class='float-right mt-3 mr-0'>
-                  <share small :url="shareUrl" label="Share this Comparison"  /> 
-                </p>
+              <v-card class="pb-5 px-3">
+                <v-row class='csGreenBg'>
+                  <v-col cols="6">
+                     <v-btn
+                      small
+                      color="white"
+                      text
+                      id="referrer-link"
+                      class="link-more"
+                      :href="referrerLink"
+                    >&laquo; Back</v-btn>
+
+                  </v-col>
+                  <v-col cols="6" class='text-right'>
+                    <v-btn
+                      text
+                      small
+                      :color="isSelected?'amber':'white'"
+                      @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
+                    >
+                      <v-icon x-small class='mr-2'>fa fa-plus-circle</v-icon> Compare
+                    </v-btn>
+                    <share small text color="white" label="Share this Comparison" :url="shareUrl" />
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12">
                 <compare-section
                   :schools="schools"
                   title="Average Annual Cost"
+                  definition="avg-cost"
                   :currentHighlight="currentHighlight"
                   @update-highlight="currentHighlight = $event"
                   :config="{ 
@@ -71,15 +82,17 @@
                     chart: 'MultiRange',
                     multiRangeVariable: 'earnings.median_earnings'
                   }"
-                />
+                />  
+                  </v-col>
+                </v-row>
               </v-card>
               <v-row>
-                <v-col class="text-right">
+                <v-col class="text-right mt-5">
                   <v-btn primary @click="all">Expand All</v-btn>
                   <v-btn primary @click="none">Close All</v-btn>
                 </v-col>
               </v-row>
-              <v-expansion-panels class="mt-5" multiple focusable v-model="panels">
+              <v-expansion-panels class="" multiple focusable v-model="panels">
                 <v-expansion-panel>
                   <v-expansion-panel-header @click="trackAccordion('College Information')">College Information</v-expansion-panel-header>
                   <v-expansion-panel-content>
@@ -320,7 +333,7 @@
                 </v-expansion-panel>
 
                 <v-expansion-panel>
-                  <v-expansion-panel-header @click="trackAccordion('Test Scores & Admittance')">Test Scores & Admittance</v-expansion-panel-header>
+                  <v-expansion-panel-header @click="trackAccordion('Test Scores & Acceptance')">Test Scores & Acceptance</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <h2 class='pt-5 pb-3'>Test Scores <tooltip definition="test-scores" :isCompare="true" /></h2>
                     <p>Students who were admitted and enrolled typically had standardized test scores in these ranges.</p>
@@ -361,11 +374,11 @@
 
                     <compare-section
                       :schools="schools"
-                      title="Admittance Rate"
+                      title="Acceptance Rate"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
-                        computedField: 'admittanceRate', 
+                        computedField: 'acceptanceRate', 
                         color: '#0e365b', 
                         max: 100, 
                         type: 'percent',
@@ -450,6 +463,9 @@ export default {
         url += "&s[]=" + itm.schoolId;
       });
       return window.location.origin+'/compare/?'+encodeURIComponent(url.substr(1));
+    },
+    referrerLink(){
+      return document.referrer || null;
     }
   },
   methods: {
@@ -463,8 +479,6 @@ export default {
   },
   mounted() {
     let self = this;
-
-    document.querySelector('#referrer-link').setAttribute("href", document.referrer || null);
 
     var params = {};
     params[this.fields.OPERATING] = 1;

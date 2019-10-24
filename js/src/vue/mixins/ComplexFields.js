@@ -308,9 +308,9 @@ export default {
                 max: 800
             }
         },
-        admittanceRate() {
+        acceptanceRate() {
             if (!this.school) return null;
-            return _.get(this.school, this.fields['ADMITTANCE_RATE'])
+            return _.get(this.school, this.fields['ACCEPTANCE_RATE'])
         },
         openAdmissions() {
             if (!this.school) return null;

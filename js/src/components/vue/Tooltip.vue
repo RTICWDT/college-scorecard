@@ -10,10 +10,11 @@
           <div v-html="content"></div>
           <p v-if="showBranch">This information is based on all locations of this school.</p>
           <p v-if="showCompare">For schools with multiple locations, this information is based on all of their locations.</p>
+          <p class='text-center mt-3' v-if='hasGlossary'>
+            <v-btn :href="'/data/glossary/#'+definition" small rounded color="secondary" class='px-4'>More Information</v-btn>
+          </p>
         </v-card-text>
-        <v-card-actions class="px-5 pb-4" v-if='hasGlossary'>
-          <v-btn :href="'/data/glossary/#'+definition" small rounded color="secondary">More Information</v-btn>
-        </v-card-actions>
+
       </v-card>
     </v-dialog>
   </span>
@@ -34,7 +35,7 @@ export default {
     definition: String,
     color: {
       type: String,
-      default: "grey"
+      default: "blue darken-3"
     },
     version:{
       type: String, 

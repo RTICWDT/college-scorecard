@@ -1,17 +1,11 @@
 <template>
   <v-app id="app" class="school-page">
-    <div class="backNav">
-      <div class="container school-back">
-        <v-btn color="secondary" rounded small id="referrer-link" class="link-more" href="./index/">
-          &laquo; Back to School Profile
-        </v-btn>
-      </div>
-    </div>
+    
     <!-- Search results -->
     <div class="school-bg">
       <v-container>
         <v-row>
-          <v-col cols="12" md="9" class="school-left">
+          <v-col cols="12" lg="9" class="school-left">
             <div v-if="!school.id" class="show-loading">
               <v-card class="pa-5">
                 <h1 class="title">
@@ -22,7 +16,32 @@
             </div>
 
             <div v-else class="show-loaded" id="school">
-              <v-card class="school-heading pa-5 mb-5">
+              
+              <v-card class="school-heading px-3 mb-5">
+                <v-row class='csGreenBg'>
+                  <v-col cols="6">
+                     <v-btn
+                      small
+                      color="white"
+                      text
+                      id="referrer-link"
+                      class="link-more"
+                      :href="referrerLink"
+                    >&laquo; Back to School Profile</v-btn>
+
+                  </v-col>
+                  <v-col cols="6" class='text-right'>
+                    <v-btn
+                      text
+                      small
+                      :color="isSelected?'amber':'white'"
+                      @click="$emit('toggle-compare-school', { schoolId: school.id, schoolName: school.school.schoolName } )"
+                    >
+                      <v-icon x-small class='mr-2'>fa fa-plus-circle</v-icon> Compare
+                    </v-btn>
+                    <share small text color="white" label="Share this School" :url="shareLink" />
+                  </v-col>
+                </v-row>
                 <v-row>
                   <v-col cols="12" md="6" class="py-0">
                     <v-chip
@@ -36,34 +55,25 @@
                 </v-row>
 
                 <v-row>
-                  <v-col cols="12" md="8" class="py-0">
+                  <v-col cols="12" class="pa-sm-5">
                     <h1
-                      class="display-1 pa-0 ma-0"
-                    >All Fields of Study Available at {{ _.get(school, fields['NAME'], 'School Name') }}</h1>
-                  </v-col>
-                  <v-col cols="12" md="4" class="text-right py-0">
-                    <v-btn
-                      text
-                      icon
-                      :color="isSelected?'amber':'grey'"
-                      @click="$emit('toggle-compare-school', { schoolId: _.get(school, fields['ID']), schoolName: _.get(school, fields['NAME'])} )"
-                    >
-                      <v-icon>fa fa-plus-circle</v-icon>
-                    </v-btn>
-                    <share small label="Share this School" :url="shareLink" />
+                      class="display-1 pa-0 ma-0 font-weight-bold"
+                    >All Fields of Study Offered at {{ _.get(school, fields['NAME'], 'School Name') }}</h1>
                   </v-col>
                 </v-row>
               </v-card>
               <!-- /.school-card_container-school -->
-              <v-card class="mb-4" color="light-green lighten-4">
+              <v-card class="mb-4 pa-3">
                 <v-select
-                  filled
+                  outlined
+                  dense
                   :items="filters"
                   item-text="credential"
                   item-value="id"
                   v-model="currentFilter"
                   label="Filter by Degree Level"
                   hide-details
+                  color="secondary"
                 ></v-select>
               </v-card>
               <v-alert
@@ -189,6 +199,9 @@ export default {
       };
       return _.sortBy(sorted, ['name']);
     },
+    referrerLink(){
+      return document.referrer || null;
+    },
     shareLink(){
       return window.location.href || null;
     }
@@ -208,8 +221,6 @@ export default {
       //  loadable.classed('js-error', true);
       //  return showError(picc.errors.NO_SCHOOL_ID);
     }
-
-    document.querySelector('#referrer-link').setAttribute("href", document.referrer || null);
 
     var params = {};
     params[this.fields.OPERATING] = 1;

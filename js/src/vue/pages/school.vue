@@ -1,22 +1,10 @@
 <template>
   <v-app id="app" class="school-page">
-    <div class="backNav">
-      <div class="container school-back">
-        <v-btn
-          small
-          color="secondary"
-          rounded
-          id="referrer-link"
-          class="link-more"
-          :href="searchURL"
-        >&laquo; Back to search</v-btn>
-      </div>
-    </div>
     <!-- Search results -->
     <div class="school-bg">
       <v-container>
         <v-row>
-          <v-col cols="12" md="9" class="school-left">
+          <v-col cols="12" lg="9" class="school-left">
             <div v-if="!school.id && !error" class="show-loading">
               <v-card class="pa-5">
                 <h1 class="title">
@@ -34,19 +22,41 @@
             </div>
 
             <div v-else id="school">
-              <v-card class="school-heading pa-5 pt-2 mb-5">
-                <v-row class="mt-4">
-                  <v-col cols="12" md="8" class="py-0">
-                    <h1 class="display-2 pa-0 mb-4">
-                      {{ schoolName }}
+              <v-card class="school-heading px-3 mb-5">
+                <v-row class='csGreenBg'>
+                  <v-col cols="6">
+                     <v-btn
+                      small
+                      color="white"
+                      text
+                      id="referrer-link"
+                      class="link-more"
+                      :href="searchURL"
+                    >&laquo; Back to search</v-btn>
+                  </v-col>
+                  <v-col cols="6" class='text-right'>
+                    <v-btn
+                      text
+                      small
+                      :color="isSelected?'amber':'white'"
+                      @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
+                    >
+                      <v-icon x-small class='mr-2'>fa fa-plus-circle</v-icon> Compare
+                    </v-btn>
+                    <share small text color="white" label="Share this School" :url="shareLink" />
+                  </v-col>
+                </v-row>
+                
+                <v-row>
+                  <v-col cols="12" md="7" class="px-sm-5">
                       <v-chip v-if="underInvestigation==1" color="error" label>
                         <strong>Under ED Monitoring</strong>
                         <tooltip definition="hcm2" color="#FFFFFF" class="ml-2" :isBranch="isBranch" />
                       </v-chip>
+                      <h1 class="display-2 font-weight-bold pa-0 mb-2">
+                      {{ schoolName }}                  
                     </h1>
-                    <v-divider />
-
-                    <h2 class="title location mb-0 mt-4">
+                    <h2 class="title location">
                       <span>{{ city }}</span>,
                       <span>{{ state }}</span>
                     </h2>
@@ -60,7 +70,15 @@
                       >{{ schoolUrlDisplay | formatUrlText }}</a>
                     </h2>
                     <school-icons :school="school" :fields="fields" class="my-5" />
-                    <div class="school-special_designation" v-if="specialDesignations.length>0">
+                    
+                  </v-col>
+                  <v-col cols="12" md="5" class='px-sm-5 py-0'>
+                    <div class="school-map" ref="map"></div>
+                  </v-col>
+                </v-row>
+                <v-row class='mt-3' v-if="specialDesignations.length>0">
+                  <v-col cols='12' class='px-sm-5'>
+                  <div class="school-special_designation" >
                       <v-chip
                         class="special mr-1 mb-1"
                         color="blue lighten-3"
@@ -69,22 +87,10 @@
                         :key="designation"
                       >{{designation}}</v-chip>
                     </div>
-                  </v-col>
-                  <v-col cols="12" md="4" class="py-0 text-right">
-                    <v-btn
-                      text
-                      icon
-                      :color="isSelected?'amber':'grey'"
-                      @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
-                    >
-                      <v-icon>fa fa-plus-circle</v-icon>
-                    </v-btn>
-                    <share small label="Share this School" :url="shareLink" />
-                    <div class="school-map" ref="map"></div>
-                  </v-col>
+                    </v-col>
                 </v-row>
                 <v-row class="mt-3">
-                  <v-col cols="12" md="6">
+                  <v-col cols="12" md="6" class='px-sm-5'>
                     <h2 class="mb-4">
                       Graduation Rate&nbsp;
                       <tooltip definition="graduation-rate" />
@@ -97,7 +103,7 @@
                     ></donut>
                     <div v-else class="data-na">Data Not Available</div>
                   </v-col>
-                  <v-col cols="12" md="6">
+                  <v-col cols="12" md="6" class='px-sm-5'>
                     <h2 class="mb-3">
                       Salary After Completing&nbsp;
                       <tooltip definition="fos-median-earnings" :isBranch="isBranch" />
@@ -108,22 +114,18 @@
                       variable="earnings.median_earnings"
                       :max=" { label: '$150,000', value: 150000 }"
                     />
-                    <h2 class="mb-3" v-if="!isProgramReporter">
+                    <h2 class="mt-5 mb-3" v-if="!isProgramReporter">
                       Average Annual Cost&nbsp;
                       <tooltip definition="avg-cost" />
                     </h2>
-                    <h2 v-else>
+                    <h2 v-else class='mt-5 mb-3'>
                       Average Annual Cost for Largest Program&nbsp;
                       <tooltip definition="avg-program-cost" />
                     </h2>
-                    <p
-                      v-if="!isProgramReporter"
-                    >The average cost after grants and scholarships from the school, state, or federal government.</p>
-                    <p
-                      v-else
-                    >The average cost of the largest program after grants and scholarships from the school, state, or federal government.</p>
+                    <p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
+                   
                     <h2
-                      class="display-2 navy-text font-weight-bold"
+                      class="display-2 navy-text font-weight-bold mb-4"
                       v-if="netPrice"
                     >{{ netPrice | numeral('$0,0') }}</h2>
                     <div class="data-na" v-else>Data Not Available</div>
@@ -148,7 +150,8 @@
                             Average Annual Cost&nbsp;
                             <tooltip definition="avg-cost" />
                           </h2>
-                          <p>The average cost after grants and scholarships from the school, state, or federal government.</p>
+                          <p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
+                          
 
                           <h2
                             v-if="netPrice"
@@ -161,7 +164,7 @@
                             Cost After Aid for Largest Program
                             <tooltip definition="avg-program-cost" />
                           </h2>
-                          <p>The average cost of the largest program after grants and scholarships from the school, state, or federal government.</p>
+                          <p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
                           <h2 class="title my-3">
                             <span class="font-weight-bold navy-text">{{ programReporter[0].title}}</span>
                           </h2>
@@ -243,9 +246,8 @@
                   <v-expansion-panel-content id="graduation-content" class="px-0 py-3 pa-sm-5">
                     <v-row>
                       <v-col cols="12" md="6">
-                        <h2 class="mb-3 text-center">
-                          Graduation
-                          <br />Rate&nbsp;
+                        <h2 class="mb-3 ">
+                          Graduation Rate&nbsp;
                           <tooltip definition="graduation-rate" />
                         </h2>
                         <donut
@@ -257,7 +259,7 @@
                         <div v-else class="data-na">Data Not Available</div>
                       </v-col>
                       <v-col cols="12" md="6">
-                        <h2 class="mb-3 text-center">
+                        <h2 class="mb-3">
                           Students Who Return After Their First Year&nbsp;
                           <tooltip definition="retention-rate" />
                         </h2>
@@ -320,7 +322,7 @@
                         <v-col cols="12" md="6">
                           <h2 class="mb-3">
                             Median Total Debt After Graduation
-                            <tooltip definition="avg-debt" />
+                            <tooltip definition="avg-debt" :isBranch="isBranch" />
                           </h2>
                           <p>Total debt after graduation depends on field of study for undergraduate borrowers who complete college.</p>
                           <multi-range
@@ -331,7 +333,7 @@
 
                           <h2 class="mb-3">
                             Typical Monthly Loan Payment&nbsp;
-                            <tooltip definition="avg-loan-payment" />
+                            <tooltip definition="avg-loan-payment" :isBranch="isBranch" />
                           </h2>
                           <div v-if="debtRange && debtRange.single">
                             <div
@@ -365,6 +367,7 @@
                               Submit a Free Application for Federal Student Aid (FAFSA). You may be eligible to receive federal
                               grants or loans.
                             </p>
+                            <p class="text-center">
                             <v-btn
                               rounded
                               color="secondary"
@@ -372,6 +375,7 @@
                               target="_blank"
                               @click="trackOutboundLink($event)"
                             >Start My FAFSA</v-btn>
+                            </p>
                           </v-card>
                         </v-col>
                       </v-row>
@@ -491,14 +495,12 @@
                         class="mt-3"
                       >There are no fields of study with data available for {{currentHoist}}.</v-alert>
                     </div>
+                    <p class='text-center'>
                     <v-btn rounded color="secondary" :href="fieldsLink">
                       <span class="d-none d-sm-flex">See All Available Fields of Study/Majors</span>
                       <span class="d-block d-sm-none">See All</span>
                     </v-btn>
-                    <!--</div>
-                     <div v-else>
-                      <v-alert type="info">Fields of Study/Majors are not available for this institution. </v-alert>
-                    </div>-->
+                    </p>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel>
@@ -580,8 +582,8 @@
                   <v-expansion-panel-header
                     id="selectivity"
                     aria-controls="selectivity-content"
-                    @click="trackAccordion('Test Scores and Admittance')"
-                  >Test Scores &amp; Admittance</v-expansion-panel-header>
+                    @click="trackAccordion('Test Scores and Acceptance')"
+                  >Test Scores &amp; Acceptance</v-expansion-panel-header>
                   <v-expansion-panel-content id="selectivity-content" class="px-0 py-3 pa-sm-5">
                     <v-row>
                       <v-col cols="12" md="7">
@@ -628,12 +630,12 @@
                         <p v-else class="data-na">Data Not Available</p>
                       </v-col>
                       <v-col cols="12" md="5">
-                        <h2 class="mb-3">Admittance Rate <tooltip definition='admittance-rate' /></h2>
+                        <h2 class="mb-3">Acceptance Rate <tooltip definition='acceptance-rate' /></h2>
                         <donut
                           color="#0e365b"
-                          :value="admittanceRate*100"
+                          :value="acceptanceRate*100"
                           v-if="openAdmissions!=1"
-                          chart-id="admittance-chart"
+                          chart-id="acceptance-chart"
                           :height="200"
                         ></donut>
                         <p v-else>This school has an open admissions policy.</p>
@@ -801,7 +803,7 @@ export default {
           break;
         case "lowest_debt":
           this.hoistCurrency = true;
-          this.hoistGroup = 'debt'; z
+          this.hoistGroup = 'debt';
           return "Median Debt";
           break;
       }
@@ -838,7 +840,7 @@ export default {
         }).setView(center, 10);
 
         L.tileLayer(
-          "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png"
+          "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png"
         ) // jshint ignore:line
           .on("tileload", function (tileEvent) {
             tileEvent.tile.setAttribute("alt", "Map tile image");
@@ -850,18 +852,11 @@ export default {
             position: "bottomleft",
             prefix: false
           })
-          .addAttribution(
-            [
-              'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under ',
-              '<a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>.',
-              '<br>Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, ',
-              'under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
-            ].join("")
-          )
+          .addAttribution('<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use" target="_blank">Wikimedia</a>')
           .addTo(map);
 
-        var marker = L.circle(center, 1200, {
-          color: "black",
+        var marker = L.circle(center, 1000, {
+          color: "#183658",
           opacity: 1,
           strokeWidth: 1,
           fillColor: "white",
