@@ -173,6 +173,11 @@ export default {
                 return this.years == 3 ? G200_4 : G200_LT4;
             }
         },
+        completionRateFieldDefinition(){
+            if (!this.school) return null;
+            let OM = _.get(this.school, this.fields.COMPLETION_OM);
+            return (OM)?'default':'gr200';
+        },
         programReporter() {
             if (!this.school) return null;
             let reporterData = [];
@@ -308,9 +313,9 @@ export default {
                 max: 800
             }
         },
-        admittanceRate() {
+        acceptanceRate() {
             if (!this.school) return null;
-            return _.get(this.school, this.fields['ADMITTANCE_RATE'])
+            return _.get(this.school, this.fields['ACCEPTANCE_RATE'])
         },
         openAdmissions() {
             if (!this.school) return null;

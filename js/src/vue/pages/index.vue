@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <!-- background image -->
+    <scorecard-header />
     <v-content>
       <div class="home-splash">
         <v-container class="pt-0">
@@ -23,6 +23,7 @@
               slider-color="#74B3E8"
               class='ma-0'
               show-arrows
+              v-model="desktopTabs"
               >
                 <v-tab @click="GATrackEvent('Home Tab','Tab','Custom Search')">
                   <span class='hidden-sm-and-down'>Custom Search</span>
@@ -41,7 +42,7 @@
                   </v-card>
                 </v-tab-item>
                 <v-tab-item>
-                  <v-card style="min-height: 300px" class="pa-5">
+                  <v-card style="min-height: 300px" class="px-10 py-5">
                     <p
                       class="my-2 text-center"
                     >Select one or more options to create a list of schools that fit your needs.</p>
@@ -80,7 +81,7 @@
         <v-container class='pa-0 my-0'>
           <v-row class='pa-0'>
             <v-col cols="12" sm="5" offset-sm="1" class='homeCallout apprenticeships pa-0 my-0 mr-sm-3'>
-              <h2 class="title">Alternative Pathways<br />to a Career</h2>
+              <h2 class="title">Alternative Pathways to a Career</h2>
 
               <p><strong>Apprenticeships</strong> are another great way to jumpstart your career.</p>
               <p>
@@ -89,6 +90,7 @@
                   color="secondary"
                   href="https://www.apprenticeship.gov/apprenticeship-finder"
                   target="_blank"
+                  @click="trackOutboundLink($event)"
                 >Find one that's right for you!</v-btn>
               </p>
               <p>Curious what careers are out there? <strong>O*NET’s career explorer</strong> is there to help!</p>
@@ -98,6 +100,7 @@
                   color="secondary"
                   href="https://www.onetonline.org/find/"
                   target="_blank"
+                  @click="trackOutboundLink($event)"
                 >Explore Careers</v-btn>
               </p>
             </v-col>
@@ -108,6 +111,7 @@
         </v-container>
       </div>
     </v-content>
+    <scorecard-footer />
   </v-app>
 </template>
 <style lang="scss" scoped>
@@ -160,7 +164,9 @@ import CannedSearchContainer from "components/vue/CannedSearchContainer.vue";
 import querystring from "querystring";
 import SearchForm from "components/vue/SearchForm.vue";
 import NameAutocomplete from "components/vue/NameAutocomplete.vue";
+import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
 export default {
+  mixins: [AnalyticsEvents],
   components: {
     "paying-for-college": PayingForCollege,
     "canned-search-container": CannedSearchContainer,
@@ -170,12 +176,8 @@ export default {
   props: ["baseUrl"],
   data() {
     return {
-      showSidebar: true,
-      sidebar: {
-        fixed: false,
-        absolute: true
-      },
-      mobilePanels: 0
+      mobilePanels: 0,
+      desktopTabs: 1
     };
   },
   methods: {
@@ -194,15 +196,6 @@ export default {
 
       // Direct to location.
       window.location.href = url;
-    },
-    toggleFixed(e) {
-      if (window.scrollY < 105) {
-        this.sidebar.absolute = true;
-        this.sidebar.fixed = false;
-      } else {
-        this.sidebar.absolute = false;
-        this.sidebar.fixed = true;
-      }
     }
   }
 };

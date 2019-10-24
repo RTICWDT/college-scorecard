@@ -9,8 +9,8 @@
 @import '~@mdi/font/css/materialdesignicons.css';
 @import '~vuetify/dist/vuetify.min';
 @import '_vuetify-overrides.scss';
-@import 'components/_header.scss';
-@import 'components/_footer.scss';
+//@import 'components/_header.scss';
+//@import 'components/_footer.scss';
 
 
 // Pages
@@ -35,4 +35,9 @@
   color: $dark-gray;
   text-align: center;
   margin: 0.8rem 0;
+}
+.browsermessage{
+  font-family: $header-font-family;
+  background-color: $sky-blue;
+  text-align: center;
 }

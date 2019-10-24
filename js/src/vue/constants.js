@@ -85,7 +85,7 @@ export const fields = {
   SAT_WRITING_75TH_PCTILE:  'latest.admissions.sat_scores.75th_percentile.writing',
   SAT_WRITING_MIDPOINT:     'latest.admissions.sat_scores.midpoint.writing',
 
-  ADMITTANCE_RATE:          'latest.admissions.admission_rate.overall',
+  ACCEPTANCE_RATE:          'latest.admissions.admission_rate.overall',
   OPEN_ADMISSIONS:          'school.open_admissions_policy',
 
   NET_PRICE_CALC_URL:       'school.price_calculator_url',

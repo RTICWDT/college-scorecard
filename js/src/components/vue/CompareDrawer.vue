@@ -5,7 +5,7 @@
     </v-btn>
     <p class="title">Compare Schools</p>
     <v-row>
-      <v-col cols="12" sm="6">
+      <v-col cols="12">
         <p>You can star up to 10 schools to compare.</p>
         <div class="my-3">
           <v-checkbox
@@ -23,8 +23,6 @@
         <p>
           <v-btn rounded color="secondary" href="/compare/">Compare Schools</v-btn>
         </p>
-      </v-col>
-      <v-col cols="12" sm="6">
       </v-col>
     </v-row>
   </v-card>

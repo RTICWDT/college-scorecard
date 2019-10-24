@@ -1,8 +1,8 @@
 <template>
   <div @update-highlight="$emit('update-highlight', $event);">
-    <h2 class="heading mb-3 mt-8">{{title}}&nbsp;<tooltip definition="coming-soon" /></h2>
+    <h2 class="heading mb-3 mt-8">{{title}}&nbsp;<tooltip v-if="definition" :definition="definition" :isCompare="true" /></h2>
     <v-row v-if="this.$slots.default">
-      <v-col cols="9" class='pa-3'>
+      <v-col cols="10" class='pa-3'>
         <slot></slot>
       </v-col>
     </v-row>
@@ -43,6 +43,9 @@ export default {
     },
     config: {
         type: Object
+    },
+    definition:{
+      type: String
     }
   }
 };

@@ -8,7 +8,7 @@
   >
     <v-icon small class="mx-1">fas fa-calculator</v-icon>
     <span class='d-none d-sm-flex'>Calculate your personal net price</span>
-    <span class='d-block d-sm-none'>Calculte net price</span>
+    <span class='d-block d-sm-none'>Calculate net price</span>
                       
   </v-btn>
 </template>

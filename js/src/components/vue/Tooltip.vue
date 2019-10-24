@@ -6,10 +6,15 @@
       </template>
       <v-card>
         <v-card-title>{{title}}</v-card-title>
-        <v-card-text v-html="content" class='pb-5'></v-card-text>
-        <v-card-actions class="px-5 pb-4" v-if='hasGlossary'>
-          <v-btn :href="'/data/glossary/#'+definition" small rounded color="secondary">More Information</v-btn>
-        </v-card-actions>
+        <v-card-text class='pb-5'>
+          <div v-html="content"></div>
+          <p v-if="showBranch">This information is based on all locations of this school.</p>
+          <p v-if="showCompare">For schools with multiple locations, this information is based on all of their locations.</p>
+          <p class='text-center mt-3' v-if='hasGlossary'>
+            <v-btn :href="'/data/glossary/#'+definition" small rounded color="secondary" class='px-4'>More Information</v-btn>
+          </p>
+        </v-card-text>
+
       </v-card>
     </v-dialog>
   </span>
@@ -28,33 +33,54 @@ export default {
   mixins:[SiteData],
   props: {
     definition: String,
-    custom: {
-      type: String,
-      default: "default"
-    },
     color: {
       type: String,
-      default: "grey"
-    }
+      default: "blue darken-3"
+    },
+    version:{
+      type: String, 
+      default: 'default'
+    },
+    isBranch:{
+      type: Boolean, 
+      default: false
+    },
+    isCompare:{
+      type: Boolean, 
+      default: false
+    },
   },
   data() {
     return {
-      showDialog: false
+      showDialog: false,
     };
   },
   computed: {
     glossary() {
       return this.site.data.glossary;
     },
-    content() {
-      return this.glossary[this.definition][this.custom];
+    entry(){
+      return this.glossary[this.definition];
     },
     title(){
-      return this.glossary[this.definition]['title'];
+      return this.entry['title'];
+    },
+    content() {
+      if(this.isCompare && this.entry['compare']) return this.entry['compare'];
+      else return this.entry[this.version];
     },
     hasGlossary(){
-      return this.glossary[this.definition]['glossary']?true:false;
+      return this.entry['glossary']?true:false;
+    },
+    showBranch(){
+      return (this.entry.branch && this.isBranch)
+    },
+    showCompare(){
+      return (this.entry.branch && this.isCompare)
     }
+  },
+  mounted(){
+
   }
 };
 </script>

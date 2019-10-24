@@ -1,5 +1,7 @@
 <template>
   <v-app>
+  <scorecard-header />
+
   <v-content class="white">
     <data-navigation current="/data/" />
 
@@ -25,7 +27,7 @@
             <v-btn
               rounded
               color="secondary"
-              data-download
+              @click="trackDownload('CollegeScorecard_Raw_Data.zip')"
               :href="dataBase_url+'/CollegeScorecard_Raw_Data.zip'"
               class="btn"
             >
@@ -44,19 +46,19 @@
           <ul class='my-3'>
             <li>
               <a
-                data-download
+                @click="trackDownload('Most-Recent-Cohorts-Scorecard-Elements.csv')"
                 :href="dataBase_url+'/Most-Recent-Cohorts-Scorecard-Elements.csv'"
               >Scorecard data</a> 8 MB CSV
             </li>
             <li>
               <a
-                data-download
+                @click="trackDownload('Most-Recent-Cohorts-All-Data-Elements.csv')"
                 :href="dataBase_url+'/Most-Recent-Cohorts-All-Data-Elements.csv'"
               >Most recent data</a> 143 MB CSV
             </li>
             <li>
               <a
-                data-download
+                @click="trackDownload('Most-Recent-Cohorts-NSLDS-Elements.csv')"
                 :href="dataBase_url+'/Most-Recent-Cohorts-NSLDS-Elements.csv'"
               >What's new from NSLDS</a> 116 MB CSV
             </li>
@@ -77,14 +79,14 @@
             <ul class="my-3">
               <li>
                 <a
-                  data-download
+                  @click="trackDownload('FullDataDocumentation.pdf')"
                   :href="dataBase_url+'/assets/FullDataDocumentation.pdf'"
                   target="_blank"
                 >Documentation Report</a>
               </li>
               <li>
                 <a
-                  data-download
+                  @click="trackDownload(dataDictonary)"
                   :href="dataBase_url+'/assets/'+dataDictionary"
                   target="_blank"
                 >Data Dictionary</a>
@@ -112,13 +114,13 @@
           <p>Some other organizations have recently launched efforts to collect more accurate data on college completion, remedial education and workforce outcomes.</p>
           <ul class="my-3">
             <li>
-              <a href="http://www.studentachievementmeasure.org" target="_blank">
+              <a href="http://www.studentachievementmeasure.org" target="_blank" @click="trackOutboundLink($event)">
                 Student Achievement Measure initiative
                 <i class="fa fa-external-link"></i>
               </a>
             </li>
             <li>
-              <a href="http://vfa.aacc.nche.edu/Pages/default.aspx" target="_blank">
+              <a href="http://vfa.aacc.nche.edu/Pages/default.aspx" target="_blank" @click="trackOutboundLink($event)">
                 Voluntary Framework of Accountability initiative
                 <i class="fa fa-external-link"></i>
               </a>
@@ -128,6 +130,8 @@
       </v-row>
     </v-container>
     </v-content>
+    <scorecard-footer />
+
   </v-app>
 </template>
 
@@ -140,7 +144,9 @@
 
 <script>
 import DataNavigation from "components/vue/DataNavigation.vue";
+import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
 export default {
+  mixins: [AnalyticsEvents],
   components: {
     "data-navigation": DataNavigation
   },

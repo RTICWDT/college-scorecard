@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="school-key_figures key-figures my-0 px-0 py-0">
+    <ul class="school-key_figures key-figures my-0 px-0 py-0 d-flex justify-space-around">
       <li :class="years | yearsClass" v-if="!sizeOnly">
         <span>{{ years | formatYearsLabel }}</span>
       </li>
@@ -23,7 +23,7 @@
     font-size: 2.86rem;
 }
 .school-key_figures {
-    $height: 50px;
+    $height: 40px;
     margin-top: $base-padding;
 
     $list:  rural, town, suburban, city,

@@ -13,7 +13,7 @@
     <span class="picc-range-label picc-range-label-max" :style="_max.styles" ref="max">
       <span v-html="_max.label"></span>
     </span>
-    <v-tooltip top v-if="!hideLower">
+    <v-tooltip top v-if="!hideLower" :disabled="!lowertip">
       <template v-slot:activator="{ on }">
         <span
           class="picc-range-label picc-range-label-lower"
@@ -34,7 +34,7 @@
     >
       <span v-html="_middle.label"></span>
     </span>
-    <v-tooltip top>
+    <v-tooltip top :disabled="!uppertip">
       <template v-slot:activator="{ on }">
         <span class="picc-range-label picc-range-label-upper" :style="_upper.styles" ref="upper" v-on="on">
           <span v-html="_upper.label"></span>
