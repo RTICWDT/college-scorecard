@@ -6,7 +6,7 @@
     <p class="title">Compare Schools</p>
     <v-row>
       <v-col cols="12">
-        <p>You can star up to 10 schools to compare.</p>
+        <p>You can add up to 10 schools to compare.</p>
         <div class="my-3">
           <v-checkbox
             @change="handleToggleCompareSchool(school)"
