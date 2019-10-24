@@ -70,6 +70,7 @@
       placeholder="Or select a state..."
       class='mt-0 pt-0'
       color="secondary"
+      deletable-chips
       ></v-select>
 
     <p class='subhead-2'>Academic Fields Offered</p>
@@ -169,8 +170,6 @@
         </v-expansion-panel-header>
         <v-expansion-panel-content> -->
      
-          <!-- <p class='title mt-3'>Admittance</p> -->
-
           <check-range v-model="input.sat_math"
             :enable="utility.enable.sat_math" 
             @slider-toggle="utility.enable.sat_math = $event"
