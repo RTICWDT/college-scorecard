@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <!-- background image -->
+    <scorecard-header />
     <v-content>
       <div class="home-splash">
         <v-container class="pt-0">
@@ -111,6 +111,7 @@
         </v-container>
       </div>
     </v-content>
+    <scorecard-footer />
   </v-app>
 </template>
 <style lang="scss" scoped>

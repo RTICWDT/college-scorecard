@@ -1,16 +1,6 @@
 <style lang="scss">
-.v-speed-dial__list {
-  z-index: 99;
-}
 .canned-search-wrapper {
   margin-bottom: 8px;
-}
-.searchSidebar {
-  height: auto !important;
-  
-}
-.v-navigation-drawer__content{
-  height: 100vh !important;
 }
 .pageBar{
   background-color: rgba(255,255,255,0.7) !important;
@@ -26,14 +16,13 @@
 <template>
   <div>
     <v-app>
+      <scorecard-header />
       <v-navigation-drawer
         v-model="showSidebar"
         app
         width="300"
         class="searchSidebar"
-        v-scroll="toggleFixed"
-        :absolute="sidebar.absolute"
-        :fixed="sidebar.fixed"
+        clipped
       >
         <div class="pa-4 grey lighten-3">
           <h4 class='subhead-2 font-weight-bold mb-2'>Search by Name</h4>
@@ -46,7 +35,6 @@
           display-all-filters
           @search-query="searchAPI"
         />
-
       </v-navigation-drawer>
       <v-content>
         <v-container fluid class="pa-0">
@@ -219,6 +207,7 @@
           </v-btn>
         </v-container>
       </v-content>
+      <scorecard-footer />
 
       <compare-header :showCompare.sync="showCompare" :schools="compareSchools" />
       <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
@@ -505,16 +494,6 @@ export default {
           .replace(/&{2,}/g, "&")
           .replace(/%3A/g, ":")
       );
-    },
-    toggleFixed(e) {
-      if (window.scrollY < 105) {
-        this.sidebar.absolute = true;
-        this.sidebar.fixed = false;
-      } else {
-        this.sidebar.absolute = false;
-        this.sidebar.fixed = true;
-      }
-      //
     },
     resort(sort) {
       this.input.sort = sort;

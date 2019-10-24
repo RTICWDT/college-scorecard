@@ -1,6 +1,7 @@
 <template>
   <v-app id="app" class="compare-page">
-    <div class="school-bg">
+    <scorecard-header />
+    <v-content>
       <v-container>
         <v-row>
           <v-col cols="12" lg="9" class="school-left">
@@ -398,7 +399,9 @@
           </v-col>
         </v-row>
       </v-container>
-    </div>
+    </v-content>
+    <scorecard-footer />
+    
     <compare-header :showCompare.sync="showCompare" :schools="compareSchools" />
     <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
       <compare-drawer

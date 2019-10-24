@@ -26,12 +26,16 @@ import './plugins/chartjs.js';
 import {localStorageKeys} from './vue/constants.js';
 import {LocalStorage} from './vue/localStoage.js';
 
+import ScorecardHeader from './components/vue/ScorecardHeader.vue';
+import ScorecardFooter from './components/vue/ScorecardFooter.vue';
+
 Vue.prototype._ = _
 Vue.use(vueNumeralFilterInstaller, { locale: 'en' });
 
 import style from '../../sass/style.scss';
 
-
+Vue.component('scorecard-header', ScorecardHeader);
+Vue.component('scorecard-footer', ScorecardFooter);
 
 
 new Vue({

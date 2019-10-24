@@ -1,5 +1,7 @@
 <template>
   <v-app>
+        <scorecard-header />
+
       <v-content class="white">
     <data-navigation current="/data/documentation/" />
     <v-container>
@@ -315,6 +317,7 @@
       </v-row>
     </v-container>
     </v-content>
+    <scorecard-footer />
   </v-app>
 </template>
 

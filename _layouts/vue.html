@@ -2,10 +2,8 @@
 <html lang="en">
   {% include vue_head.html %}
   <body data-env="{{ site.branch }}">
-    {% include header.html %}
-
     <!--[if lte IE 10]>
-    <div class="compat-message">
+    <div class="browsermessage">
       <div class="container">
         <h1>We&rsquo;re sorry. The browser version you are using is not
           supported.<br>Please update your browser to the latest version.</h1>
@@ -16,8 +14,6 @@
     <main>
       {{ content }}
     </main>
-
-    {% include vue_footer.html %}
 
     <!-- Vue Scripts -->
     {% for script in site.vue.scripts %}
