@@ -229,7 +229,21 @@ export default {
         },
         allFieldsOfStudy() {
             if (!this.school) return null;
-            return _.get(this.school, this.fields['FIELD_OF_STUDY']);
+            let fos = _.get(this.school, this.fields['FIELD_OF_STUDY']);
+
+            // Fix data issue where the apostrophe is dropped in bachelor's degree
+            if(!fos.length)
+            {
+                fos = [fos];
+            }
+            for(let i=0; i<fos.length; i++)
+            {
+                if(fos[i].credential.level==3)
+                {
+                    fos[i].credential.title="Bachelor's Degree";
+                }
+            }
+            return fos;
         },
         debtRange() {
             if (!this.allFieldsOfStudy) return null;
