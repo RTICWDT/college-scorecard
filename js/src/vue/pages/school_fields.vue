@@ -43,13 +43,14 @@
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col cols="12" md="6" class="py-0">
+                  <v-col cols="12" md="6" class="pt-3 mb-n5">
                     <v-chip
                       v-if="_.get(school, fields['UNDER_INVESTIGATION'])==1"
                       color="error"
                       label
                     >
                       <strong>Under ED Monitoring</strong>
+                      <tooltip definition="hcm2" color="#FFFFFF" class="ml-2" :isBranch="isBranch" />
                     </v-chip>
                   </v-col>
                 </v-row>
