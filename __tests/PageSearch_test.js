@@ -36,3 +36,7 @@ Scenario('Visit root page and see all major page components', (I) => {
   // ensure URL is updated
 
 // Test: Paginate through results.
+
+// Test: Click to add to compare
+  // Compare exists,
+  // Has correct elements
