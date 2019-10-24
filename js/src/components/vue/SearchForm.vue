@@ -28,8 +28,39 @@
     <p class='subhead-2'>
       Location
     </p>    
+    <v-select
+      v-model="utility.location"
+      placeholder="Select an option"
+      :items="['Near Me','ZIP Code','State']"
+      hide-details
+      class="mb-3 mt-0 pt-0"
+    />
 
-    <div class='d-flex align-center'>
+    <div class='d-flex align-center' v-if="utility.location=='ZIP Code'">
+      <v-text-field 
+        v-model="input.zip"
+        label="ZIP Code"
+        hideDetails
+        class="mb-3 mr-3"
+        type="number"
+        
+      >
+      </v-text-field>
+      <v-text-field 
+        v-model="location.miles"
+        :rules="[utility.rules.required,utility.rules.numerical]"
+        label="Distance in Miles"
+        :disabled="!input.zip"
+        hideDetails
+        class="mb-3"
+        type="number"
+      >
+      </v-text-field>
+      
+    </div>
+
+
+    <div class='d-flex align-center' v-if="utility.location=='Near Me'">
       <v-tooltip
         bottom
         max-width="250"
@@ -62,24 +93,26 @@
     </div>
 
 
-    <v-select v-model="input.state"
+    <v-select 
+      v-model="input.state"
       :items="site.data.states"
       item-text="name"
       item-value="abbr"
       multiple
       chips
       hide-details
-      placeholder="Or select a state..."
+      placeholder="Select a state..."
       class='mt-0 pt-0'
       color="secondary"
       deletable-chips
+      v-if="utility.location=='State'"
       ></v-select>
 
     <p class='subhead-2'>Academic Fields Offered</p>
     <field-autocomplete v-model="input.cip4"></field-autocomplete>
     
     <!-- cip4 - Degree subfield -->
-    <div id="search-form-sub-degree-container" class="mt-4 pl-2 ml-2" v-show="input.cip4 || input.cip4_degree">
+    <div id="search-form-sub-degree-container" class="mt-4 pl-2 ml-2" v-show="input.cip4 || input.cip4_degree.length>0">
     <p class='subhead-2'>Degrees/Certificates Offered</p> 
       <v-checkbox
         class="search-form-degree-cb my-0 py-0"
@@ -413,7 +446,7 @@ export default {
         acceptance:null,
         lat: null,
         long: null,
-        locale:[]
+        locale:[],
       },
       utility:{
         rules:{
@@ -439,6 +472,7 @@ export default {
           act: false,
           acceptance: false
         },
+        location: null
       }
     }
   },
@@ -648,6 +682,7 @@ export default {
       this.utility.enable = _.cloneDeep(this.utility.formDefault);
       this.location.latLon = null;
       this.location.error = null;
+      this.utility.location = null;
     }
 
   }
