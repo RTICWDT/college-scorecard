@@ -7,6 +7,7 @@
     "serve": "jekyll serve --baseurl='' -w",
     "build": "webpack --config webpack.prod.vue.config.js",
     "watch": "webpack --devtool source-map --config webpack.vue.config.js --watch",
+    "test": "codeceptjs run --steps",
     "test-a11y": "./test/a11y.js",
     "test-ci": "wdio test/wdio.ci.js",
     "test-quick": "wdio test/wdio.quick.js",

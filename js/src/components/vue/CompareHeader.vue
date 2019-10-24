@@ -1,5 +1,6 @@
 <template>
-    <div class='header pa-3 elevation-4' 
+    <div id="compare-header"
+        class='header pa-3 elevation-4'
         @click="toggleDrawer()"
         v-if="currentCount>0"
     >

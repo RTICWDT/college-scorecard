@@ -76,5 +76,3 @@ Scenario('Visit /compare', (I) => {
   // Check for page element.
   I.see('Average Annual Cost','h2');
 });
-
-
