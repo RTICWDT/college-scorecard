@@ -12,7 +12,7 @@
         <p v-else>--</p>
       </v-col>
       <v-col cols="12" sm="4" class="pa-0">
-        <p class="overline mb-0">Monthly Loan Payment&nbsp;<tooltip definition="fos-monthly-debt-payment" :isBranch="isBranch" /></p>
+        <p class="overline mb-0">Monthly Loan Payment&nbsp;<tooltip definition="fos-monthly-debt-payment" :isBranch="isBranch" :version="[5,6,7,8].indexOf(fos.credential.level)<0?'default':'graduate'" /></p>
         <p v-if="fos.debt.median_debt">{{fos.debt.monthly_debt_payment | numeral('$0,0') }}/mo.</p>
         <p v-else>--</p>
       </v-col>
