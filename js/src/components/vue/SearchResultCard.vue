@@ -43,7 +43,7 @@
       <v-divider />
         <v-row class="v-flex align-center"> 
         <v-col cols='7' class='py-2'>
-          <span>Graduation Rate&nbsp;<tooltip definition="graduation-rate" /></span>
+          <span>Graduation Rate&nbsp;<tooltip definition="graduation-rate" :version="completionRateFieldDefinition" /></span>
         </v-col>
         <v-col cols='5' class="pr-0 text--black py-2">
           <h3 class='navy-text'>{{displayGradRate}}</h3>

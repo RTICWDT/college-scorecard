@@ -52,6 +52,7 @@
                 <compare-section
                   :schools="schools"
                   title="Graduation Rate"
+                  definition="graduation-rate"
                   :currentHighlight="currentHighlight"
                   @update-highlight="currentHighlight = $event"
                   :config="{ 
@@ -92,6 +93,7 @@
                     <compare-section
                       :schools="schools"
                       title="Full Time Enrollment"
+                      definition="full-time"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
@@ -160,6 +162,7 @@
                         label="Race/Ethnicity"
                         v-model="currentRaceEthnicity"
                         color="secondary"
+                        outlined
                       ></v-select>
                     </compare-section>
                   </v-expansion-panel-content>
@@ -170,6 +173,7 @@
                     <compare-section
                       :schools="schools"
                       title="Average Annual Cost"
+                      definition="avg-cost"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
@@ -209,6 +213,7 @@
                         label="What's your family income?"
                         v-model="currentIncomeFilter"
                         color="secondary"
+                        outlined
                       ></v-select>
                     </compare-section>
                   </v-expansion-panel-content>

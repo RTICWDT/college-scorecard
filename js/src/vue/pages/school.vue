@@ -95,7 +95,7 @@
                   <v-col cols="12" md="6" class='px-sm-5'>
                     <h2 class="mb-4">
                       Graduation Rate&nbsp;
-                      <tooltip definition="graduation-rate" />
+                      <tooltip definition="graduation-rate" :version="completionRateFieldDefinition" />
                     </h2>
                     <donut
                       v-if="completionRate"

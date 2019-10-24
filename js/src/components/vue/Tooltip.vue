@@ -66,7 +66,8 @@ export default {
       return this.entry['title'];
     },
     content() {
-      return this.entry[this.version];
+      if(this.isCompare && this.entry['compare']) return this.entry['compare'];
+      else return this.entry[this.version];
     },
     hasGlossary(){
       return this.entry['glossary']?true:false;
@@ -79,10 +80,7 @@ export default {
     }
   },
   mounted(){
-    // some special cases 
-    switch(this.definition){
 
-    }
   }
 };
 </script>
