@@ -81,7 +81,7 @@
         <v-container class='pa-0 my-0'>
           <v-row class='pa-0'>
             <v-col cols="12" sm="5" offset-sm="1" class='homeCallout apprenticeships pa-0 my-0 mr-sm-3'>
-              <h2 class="title">Alternative Pathways<br />to a Career</h2>
+              <h2 class="title">Alternative Pathways to a Career</h2>
 
               <p><strong>Apprenticeships</strong> are another great way to jumpstart your career.</p>
               <p>
