@@ -13,6 +13,7 @@ Scenario('Visit /search', (I) => {
   I.amOnPage('/search');
   // Check for Mounted
   I.seeElement('.v-application');
+  // I.wait(2);
   // Check for page element.
   I.see('Results','p');
 });
@@ -22,7 +23,7 @@ Scenario('Visit /school', (I) => {
   I.amOnPage('/school/?130794-Yale-University');
   // Check for Mounted
   I.seeElement('.v-application');
-  I.wait(2);
+  // I.wait(2);
   // Check for page element.
   I.see('Yale University','h1');
 });
@@ -31,6 +32,7 @@ Scenario('Visit school/fields', (I) => {
   I.amOnPage('/school/fields/?130794-Yale-University');
   // Check for Mounted
   I.seeElement('.v-application');
+  // I.wait(2);
   // Check for page element.
   I.see('All Fields of Study Available at Yale University','h1');
 });
