@@ -13,3 +13,5 @@ js/app.js*
 css/fonts/material*
 css/fonts/fa*
 css/app.css
+output/*.png
+.jekyll-cache
