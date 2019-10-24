@@ -22,17 +22,17 @@
       <v-col md="6" cols="12" class="text-center canned-search-wrapper py-0 my-0">
         <canned-search-slider
           label="I want an Associate's Degree"
-          :add-to-query="[{degree:'a'}]"
+          :add-to-query="[{cip4_degree:'a'}]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
         <canned-search-slider
           label="I want a Bachelor's Degree"
-          :add-to-query="[{degree:'b'}]"
+          :add-to-query="[{cip4_degree:'b'}]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
         <canned-search-slider
           label="I want a Certificate"
-          :add-to-query="[{degree:'c'}]"
+          :add-to-query="[{cip4_degree:'c'}]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
       </v-col>
