@@ -38,7 +38,7 @@
                 </v-tab-item>
                 <v-tab-item>
                   <v-card class="pa-5 mb-3">
-                    <name-autocomplete />
+                    <name-autocomplete @school-name-selected="handleSchoolNameSelected"/>
                   </v-card>
                 </v-tab-item>
                 <v-tab-item>
@@ -55,7 +55,7 @@
               <v-expansion-panels class='mb-2' v-model="mobilePanels">
                 <v-expansion-panel>
                   <v-expansion-panel-header>Name Search</v-expansion-panel-header>
-                  <v-expansion-panel-content><name-autocomplete /></v-expansion-panel-content>
+                  <v-expansion-panel-content><name-autocomplete @school-name-selected="handleSchoolNameSelected"/></v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
               <v-expansion-panels class='mb-2'>
@@ -196,6 +196,9 @@ export default {
 
       // Direct to location.
       window.location.href = url;
+    },
+    handleSchoolNameSelected(e){
+      window.location= '/search/?name='+ e['school.name'];
     }
   }
 };

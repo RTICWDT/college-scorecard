@@ -19,7 +19,7 @@
               <v-card class="pa-5">
                 <h2>Something went wrong</h2>
                 <p>Try searching for a school by name:</p>
-                <name-autocomplete />
+                <name-autocomplete @school-name-selected="handleSchoolNameSelected"/>
               </v-card>
             </div>
 
@@ -652,7 +652,7 @@
           <v-col lg="3" v-if="!error">
             <v-card outline class="pa-5 mb-3">
               <p class="title mb-2">Find Another School</p>
-              <name-autocomplete />
+              <name-autocomplete @school-name-selected="handleSchoolNameSelected"/>
             </v-card>
             <v-card outline class="pa-5">
               <paying-for-college />
@@ -878,6 +878,9 @@ export default {
     none() {
       this.panels = [];
     },
+    handleSchoolNameSelected(e){
+      window.location= '/search/?name='+ e['school.name'];
+    }
   },
   mounted() {
     let self = this;

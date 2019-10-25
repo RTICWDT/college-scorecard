@@ -25,6 +25,7 @@
 import { apiGet } from '../../vue/api.js';
 import { fields } from '../../vue/constants.js';
 import PrepareParams from '../../vue/mixins/PrepareParams.js'
+import { EventBus } from '../../vue/EventBus.js';
 
 export default {
   mixins:[PrepareParams],
@@ -36,9 +37,11 @@ export default {
   }),
   methods:{
     goToSchool(){
+      // Navigate to school page.
       let id = _.get(this.school, fields.ID);
       let name = _.get(this.school, fields.NAME,'(unknown)');
-      window.location= '/search/?school.name='+this.school; 
+      // window.location= '/search/?school.name='+this.school;
+      this.$emit('school-name-selected',this.school);
     }
   },
   watch: {
@@ -59,6 +62,11 @@ export default {
       });
 
     },200)
-  }
-  }
+  },
+  mounted(){
+    EventBus.$on('search-form-reset', (e) => {
+      this.school = null;
+    });
+  },  
+}
 </script>
