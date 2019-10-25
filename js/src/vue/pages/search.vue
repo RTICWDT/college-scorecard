@@ -416,8 +416,15 @@ export default {
         console.warn("Error fetching search.");
         this.$emit("loading", false);
         
+        this.results = {
+          meta: {},
+          schools:[]
+        };
+
         if(error.response.data.errors){
           this.showError(error.response.data.errors[0]);
+        }else if(error.response.status === 500){
+          this.showError("API 500 Error");
         }
       });
       

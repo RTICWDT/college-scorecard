@@ -73,22 +73,22 @@ export default {
     },
   },
   methods: {
+    // TODO - Refactor using this.query as an array.
     handleCannedToggle(data) {
       // Add to array.
       let newQuery = data.data[0];
 
       if (data.value) {
         // Check for location
+
         if(newQuery.location){
           this.handleLocationCheck();
         }else{
-          // this.query = Object.assign({}, this.query, data.data[0]);
           _.mergeWith(this.query, newQuery, (objValue,srcValue) => {
             if (_.isArray(objValue)) {
               return objValue.concat(srcValue);
             }
           });
-
         }
       } else {
         // Remove location
@@ -98,30 +98,15 @@ export default {
         }
 
         // Handle Everything else
-        
-        // Get the keys
-        // let queryKeys
-
-
-        
-        this.query = _.reduce(this.query, function(newObject, value, key){
+        _.forEach(newQuery,(value,key) => {
+          // Delete specific element from array.
           if(_.isArray(value)){
-            newObject[key] = _.without(value,newQuery[key][0]);
-            return newObject;
-          }else if (value[key] != newQuery[key]) {
-            newObject[key] = value;
-            return newObject;
+            this.query[key] = _.without(this.query[key],newQuery[key][0]);
+          }else{
+            // Or just delete.
+            delete this.query[key];
           }
-        },{});
-
-
-        // this.query = _.omitBy(this.query, function(value, key) {
-        //   if (newQuery[key]) {
-        //     return true;
-        //   } else {
-        //     return false;
-        //   }
-        // });
+        });
       }
     }
   }
