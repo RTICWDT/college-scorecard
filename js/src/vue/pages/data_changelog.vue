@@ -1,5 +1,7 @@
 <template>
   <v-app>
+        <scorecard-header />
+
       <v-content class="white">
     <data-navigation current="/data/changelog/" />
     <v-container>
@@ -97,7 +99,7 @@
                       <li>
                         Removal of Percentage Earning above High School Graduate given caveats described in the
                         <a
-                          data-download
+                          @click="trackDownload('FullDataDocumentation.pdf')"
                           :href="baseUrl+'/assets/FullDataDocumentation.pdf'"
                           target="_blank"
                         >Documentation Report</a>. As this was the default sort of the search results, the default sort was updated to be Salary After Attending.
@@ -415,7 +417,7 @@
                 <p class="footnote">
                   <sup>3</sup> The Eligibility Matrix is available at
                   <a
-                    data-download
+                    @click="trackDownload('http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls')"
                     href="http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls"
                     target="_blank"
                   >http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls</a>. For the purpose of the indicators included in Scorecard, some of these programs were combined (and others were not relevant). Values of 5, 6, or ‘E’ in the Matrix yielded a corresponding flag value of 1 (Yes). All other values were mapped to a corresponding flag value of 0 (No). If multiple values were considered for a flag (either across grant programs or across branches of the institution), the Scorecard indicator was set to 1 when any one of the values indicated eligibility.
@@ -457,12 +459,12 @@
               :href="baseUrl+'/data/documentation/'"
             >data documentation</a>. You can also learn more about the data through our full
             <a
-              data-download
+              @click="trackDownload('FullDataDocumentation.pdf')"
               :href="baseUrl+'/assets/FullDataDocumentation.pdf'"
               target="_blank"
             >Documentation Report</a> and the
             <a
-              data-download
+              @click="trackDownload(dataDictonary)"
               :href="baseUrl+'/assets/'+dataDictionary"
               target="_blank"
             >Data Dictionary</a>.
@@ -470,7 +472,7 @@
           <p>
             For those who want to understand more about ways to use the data, the
             <a
-              data-download
+              @click="trackDownload('UsingFederalDataToMeasureAndImprovePerformance.pdf')"
               :href="baseUrl+'/assets/UsingFederalDataToMeasureAndImprovePerformance.pdf'"
               target="_blank"
             >2015 Technical Paper</a> offers an in-depth exploration of the data and methodologies considered and used for this project.
@@ -479,12 +481,16 @@
       </v-row>
     </v-container>
     </v-content>
+    <scorecard-footer />
   </v-app>
 </template>
 
 <script>
 import DataNavigation from 'components/vue/DataNavigation.vue';
+import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
+
 export default {
+  mixins: [AnalyticsEvents],
   components: {
     'data-navigation': DataNavigation
   },

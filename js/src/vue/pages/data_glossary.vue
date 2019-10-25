@@ -1,5 +1,7 @@
 <template>
   <v-app>
+        <scorecard-header />
+
     <v-content class="white">
       <data-navigation current="/data/glossary/" />
       <v-container>
@@ -24,6 +26,7 @@
         </v-row>
       </v-container>
     </v-content>
+    <scorecard-footer />
   </v-app>
 </template>
 
@@ -36,7 +39,7 @@ export default {
   props: ["baseUrl", "dataBase_url"],
   computed: {
     glossary() {
-      return siteDataAll.glossary;
+      return _.orderBy(siteDataAll.glossary, 'title');
     }
   }
 };

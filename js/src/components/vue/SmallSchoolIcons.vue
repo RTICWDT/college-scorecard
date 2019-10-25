@@ -1,9 +1,14 @@
 <template>
   <div>
     <ul class="school-key_figures key-figures ma-0 pa-0 d-flex justify-space-around">
-      <li :class="years | yearsClass" v-if="!sizeOnly">
-        <span>{{ years | formatYearsLabel }}</span>
-      </li>
+     <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <li :class="years | yearsClass" v-if="!sizeOnly" v-on="on">
+            <span>{{ years | formatYearsLabel }}</span>
+          </li>
+        </template>
+        <span>{{tip}}</span>
+      </v-tooltip>
       <li :class="_.get(school, fields['OWNERSHIP'], '-1') | controlClass" v-if="!sizeOnly">
         <span>{{ _.get(school, fields['OWNERSHIP'], '-1') | control }}</span>
       </li>
@@ -107,6 +112,22 @@ export default {
   computed: {
     years() {
       return _.get(this.school, this.fields["PREDOMINANT_DEGREE"]);
+    },
+    tip(){
+      switch(this.years){
+        case 1:
+          return 'Most awards earned are certificates, but degrees may be offered.';
+        break;
+        case 2: 
+          return 'Most awards earned are 2-year associate\'s degrees, but other degrees or certificates may be offered.';
+        break;
+        case 3: 
+          return 'Most awards earned are 4-year bachelor\'s degrees, but other degrees or certificates may be offered.';
+        break;
+        default: 
+          return 'Most awards earned at this school are at this level, but other degrees or certificates may be offered.';
+        break;
+      }
     }
   }
 };

@@ -13,7 +13,7 @@
     <span class="picc-range-label picc-range-label-max" :style="_max.styles" ref="max">
       <span v-html="_max.label"></span>
     </span>
-    <v-tooltip top v-if="!hideLower">
+    <v-tooltip top v-if="!hideLower" :disabled="!lowertip">
       <template v-slot:activator="{ on }">
         <span
           class="picc-range-label picc-range-label-lower"
@@ -34,7 +34,7 @@
     >
       <span v-html="_middle.label"></span>
     </span>
-    <v-tooltip top>
+    <v-tooltip top :disabled="!uppertip">
       <template v-slot:activator="{ on }">
         <span class="picc-range-label picc-range-label-upper" :style="_upper.styles" ref="upper" v-on="on">
           <span v-html="_upper.label"></span>
@@ -52,6 +52,7 @@
   overflow: visible;
   height: 70px;
   padding-top: 20px;
+  padding-right: 60px;
 }
 .range-chart {
   $label-height: 1.5em;
@@ -82,7 +83,7 @@
     position: absolute;
     top: 0;
     transition: left 0.5s;
-    font-size: 1rem;
+    font-size: 0.85rem;
 
     span {
       font-weight: 200;
@@ -95,7 +96,7 @@
     &.picc-range-label-max,
     &.picc-range-label-middle {
       color: $dark-gray;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
     }
 
     &.picc-range-label-max,
@@ -215,22 +216,30 @@ export default {
     update() {
       var min = this._min.value;
       var max = this._max.value;
-      this.bar_styles.left = this.percent(this._lower.value);
+      this.bar_styles.left = this.percent(this._lower.value)+"%";
       this.bar_styles.right = this.percent(
         this._min.value + this._max.value - this._upper.value
-      );
+      )+"%";
     },
     scale(v) {
       return (v - this.min.value) / (this.max.value - this.min.value);
     },
     percent(v) {
-      return (this.scale(v) * 100).toFixed(1) + "%";
+      return (this.scale(v) * 100).toFixed(1) ;
     },
     styleLabel(obj) {
       let newObj = { ...obj };
       newObj.styles = {};
       newObj.styles.display = newObj.label ? "block" : "none";
-      newObj.styles.left = this.percent(newObj.value);
+      let left = this.percent(newObj.value);
+      if(left>100)
+      {
+        left = 100;
+        newObj.label = ">"+this._max.label;
+        newObj.value = this._max.value;
+      }
+      newObj.styles.left = left+"%";
+      
       return newObj;
     }
   },

@@ -1,16 +1,6 @@
 <style lang="scss">
-.v-speed-dial__list {
-  z-index: 99;
-}
 .canned-search-wrapper {
   margin-bottom: 8px;
-}
-.searchSidebar {
-  height: auto !important;
-  
-}
-.v-navigation-drawer__content{
-  height: 100vh !important;
 }
 .pageBar{
   background-color: rgba(255,255,255,0.7) !important;
@@ -26,19 +16,14 @@
 <template>
   <div>
     <v-app>
+      <scorecard-header />
       <v-navigation-drawer
         v-model="showSidebar"
         app
         width="300"
         class="searchSidebar"
-        v-scroll="toggleFixed"
-        :absolute="sidebar.absolute"
-        :fixed="sidebar.fixed"
+        clipped
       >
-        <div class="pa-4 grey lighten-3">
-          <h4 class='subhead-2 font-weight-bold mb-2'>Search by Name</h4>
-          <name-autocomplete />
-        </div>
         <!-- Search Form Component -->
         <search-form
           :urlParsedParams="urlParsedParams"
@@ -46,7 +31,6 @@
           display-all-filters
           @search-query="searchAPI"
         />
-
       </v-navigation-drawer>
       <v-content>
         <v-container fluid class="pa-0">
@@ -135,17 +119,14 @@
             <div id="search-can-query-container" v-if="!isLoading && results.schools.length === 0">
             <!-- <div id="search-can-query-container" v-if="!isLoading"> -->
               <v-row>
-                <v-col cols="12" md="4" sm="12" xs="12">
-                  <div id="search-can-query-text">
+                <v-col cols="12">
+                  <v-card class='pa-5'>
                     <h3>Show Me Options</h3>
-                    <p>Select one or more options on right to create a list of schools that fit you.</p>
-                  </div>
+                    <p>Select one or more options below to create a list of schools that fit your needs.</p>
+                    <canned-search-container @canned-search-submit="handleCannedSearchClick"></canned-search-container>
+                  </v-card>
                 </v-col>
-
-                <v-col md="8" sm="12" xs="12" cols="12">
-                  <canned-search-container @canned-search-submit="handleCannedSearchClick"></canned-search-container>
-                </v-col>
-              </v-row>
+             </v-row>
             </div>
               <div class="results-main-alert">
                 <div class="show-loading" v-show="isLoading">
@@ -222,6 +203,7 @@
           </v-btn>
         </v-container>
       </v-content>
+      <scorecard-footer />
 
       <compare-header :showCompare.sync="showCompare" :schools="compareSchools" />
       <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
@@ -412,7 +394,7 @@ export default {
 
       // TODO: Need to remove this when API
       // is processing requests better
-      query['all_programs'] = true;
+      query['all_programs_nested'] = true;
       
       let qs = this.generateQueryString(params);
       history.replaceState(params, "search", qs);
@@ -434,8 +416,15 @@ export default {
         console.warn("Error fetching search.");
         this.$emit("loading", false);
         
+        this.results = {
+          meta: {},
+          schools:[]
+        };
+
         if(error.response.data.errors){
           this.showError(error.response.data.errors[0]);
+        }else if(error.response.status === 500){
+          this.showError("API 500 Error");
         }
       });
       
@@ -508,16 +497,6 @@ export default {
           .replace(/&{2,}/g, "&")
           .replace(/%3A/g, ":")
       );
-    },
-    toggleFixed(e) {
-      if (window.scrollY < 105) {
-        this.sidebar.absolute = true;
-        this.sidebar.fixed = false;
-      } else {
-        this.sidebar.absolute = false;
-        this.sidebar.fixed = true;
-      }
-      //
     },
     resort(sort) {
       this.input.sort = sort;

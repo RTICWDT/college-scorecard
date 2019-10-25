@@ -1,35 +1,41 @@
 <template>
   <div id="search-can-query-items-wrapper">
     <v-row>
-      <v-col md="4" sm="12" cols="12" class="text-center canned-search-wrapper py-0 my-0">
+      <v-col md="6" cols="12" class="text-center canned-search-wrapper py-0 my-0">
         <canned-search-slider
           label="Schools Near Me"
           :add-to-query="[{location:true}]"
           @canned-search-toggle="handleCannedToggle"
           :is-loading="location.isLoading"
         ></canned-search-slider>
+        
         <canned-search-slider
           label="Most People Get In"
-          :add-to-query="[{acceptance: '0.9..1'}]"
+          :add-to-query="[{acceptance: '0.5..1'}]"
           @canned-search-toggle="handleCannedToggle"
+          tip="Acceptance rate of 50% or higher"
         ></canned-search-slider>
-      </v-col>
-      <!-- <v-col md="4" sm="12" cols="12" class="text-center canned-search-wrapper py-0 my-0">
-        <canned-search-slider
-          label="I want an Associate's Degree"
-          :add-to-query="[{degree:'a'}]"
-          @canned-search-toggle="handleCannedToggle"
-        ></canned-search-slider>
-        <canned-search-slider
-          label="I want an Bachelor's Degree"
-          :add-to-query="[{degree:'b'}]"
-          @canned-search-toggle="handleCannedToggle"
-        ></canned-search-slider>
-      </v-col> -->
-      <v-col md="4" cols="12" class='py-0 my-0'>
         <canned-search-slider
           label="Most People Graduate"
-          :add-to-query="[{completion_rate:'0.8..'}]"
+          :add-to-query="[{completion_rate:'0.5..'}]"
+          @canned-search-toggle="handleCannedToggle"
+          tip="Graduation rate of 50% or higher"
+        ></canned-search-slider>
+      </v-col>
+      <v-col md="6" cols="12" class="text-center canned-search-wrapper py-0 my-0">
+        <canned-search-slider
+          label="I want an Associate's Degree"
+          :add-to-query="[{cip4_degree:['a']}]"
+          @canned-search-toggle="handleCannedToggle"
+        ></canned-search-slider>
+        <canned-search-slider
+          label="I want a Bachelor's Degree"
+          :add-to-query="[{cip4_degree:['b']}]"
+          @canned-search-toggle="handleCannedToggle"
+        ></canned-search-slider>
+        <canned-search-slider
+          label="I want a Certificate"
+          :add-to-query="[{cip4_degree:['c']}]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
       </v-col>
@@ -67,27 +73,38 @@ export default {
     },
   },
   methods: {
+    // TODO - Refactor using this.query as an array.
     handleCannedToggle(data) {
+      // Add to array.
+      let newQuery = data.data[0];
+
       if (data.value) {
         // Check for location
-        if(data.data[0].location){
+
+        if(newQuery.location){
           this.handleLocationCheck();
         }else{
-          this.query = Object.assign({}, this.query, data.data[0]);
+          _.mergeWith(this.query, newQuery, (objValue,srcValue) => {
+            if (_.isArray(objValue)) {
+              return objValue.concat(srcValue);
+            }
+          });
         }
       } else {
         // Remove location
-        if(data.data[0].location){
+        if(newQuery.location){
           delete this.query['lat'];
           delete this.query['long'];
         }
 
         // Handle Everything else
-        this.query = _.omitBy(this.query, function(value, key) {
-          if (data.data[0][key]) {
-            return true;
-          } else {
-            return false;
+        _.forEach(newQuery,(value,key) => {
+          // Delete specific element from array.
+          if(_.isArray(value)){
+            this.query[key] = _.without(this.query[key],newQuery[key][0]);
+          }else{
+            // Or just delete.
+            delete this.query[key];
           }
         });
       }

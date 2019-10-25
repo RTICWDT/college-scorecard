@@ -26,31 +26,16 @@ import './plugins/chartjs.js';
 import {localStorageKeys} from './vue/constants.js';
 import {LocalStorage} from './vue/localStoage.js';
 
+import ScorecardHeader from './components/vue/ScorecardHeader.vue';
+import ScorecardFooter from './components/vue/ScorecardFooter.vue';
+
 Vue.prototype._ = _
 Vue.use(vueNumeralFilterInstaller, { locale: 'en' });
 
 import style from '../../sass/style.scss';
 
-// Global Method for Tracking Events
-// If analytics is not enabled, console receives the input. 
-Vue.mixin({
-  methods: {
-    GATrackEvent(category, action, label) {
-      if(window.ga)
-      {
-        try{
-          ga('send','event',category,action,label);
-        }
-        catch(e){
-          console.error('[ga] event error');
-        }
-      }
-      else{
-        console.log('GA Event: ['+category+','+action+', '+label+']');
-      }
-    }
-  }
-});
+Vue.component('scorecard-header', ScorecardHeader);
+Vue.component('scorecard-footer', ScorecardFooter);
 
 
 new Vue({

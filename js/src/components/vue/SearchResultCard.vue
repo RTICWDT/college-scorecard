@@ -18,13 +18,14 @@
     outlined :class="{'result-card-selected': isSelected}"> <!-- Better Selected style -->
     <v-card-text class='pa-3'>
         <p class='mt-1 mb-2' v-if="underInvestigation==1">
-          <v-chip
+          <v-card
           color="error"
-          label
+          class='px-2 py-1'
+          flat
           >
-          <strong>Under ED Monitoring</strong>
+          <strong class='white--text'>Under ED Monitoring</strong>
           <tooltip definition="hcm2" color="#FFFFFF" class='ml-2' />
-        </v-chip>
+        </v-card>
         </p>
 
         <v-btn text icon class='float-right' :color="isSelected?'amber':'grey'"  @click="$emit('toggle-compare-school',school)">
@@ -42,7 +43,7 @@
       <v-divider />
         <v-row class="v-flex align-center"> 
         <v-col cols='7' class='py-2'>
-          <span>Graduation Rate&nbsp;<tooltip definition="graduation-rate" /></span>
+          <span>Graduation Rate&nbsp;<tooltip definition="graduation-rate" :version="completionRateFieldDefinition" /></span>
         </v-col>
         <v-col cols='5' class="pr-0 text--black py-2">
           <h3 class='navy-text'>{{displayGradRate}}</h3>
@@ -50,7 +51,7 @@
       </v-row>
       <v-row class='result-card-info-container v-flex align-center'>
         <v-col cols='7' class='py-2'>
-          <span>Salary After Completing&nbsp;<tooltip definition="avg-salary" /></span>          
+          <span>Salary After Completing&nbsp;<tooltip definition="fos-median-earnings" :isBranch="isBranch" /></span>          
         </v-col>
         <v-col cols='5' class="pr-0 text--black py-2">
           <h3 class='navy-text'>{{displayEarn}}</h3>
@@ -58,8 +59,8 @@
       </v-row>
       <v-row class='result-card-info-container v-flex align-center' >
         <v-col cols='7' class='py-2'>
-          <span v-if="!isProgramReporter">Average Annual Cost&nbsp;<tooltip definition="avg-cost-year" /></span>
-          <span v-else>Average Annual Cost for Largest Program&nbsp;<tooltip definition="coming-soon" /></span>
+          <span v-if="!isProgramReporter">Average Annual Cost&nbsp;<tooltip definition="avg-cost" /></span>
+          <span v-else>Average Annual Cost for Largest Program&nbsp;<tooltip definition="avg-program-cost" /></span>
         </v-col>
         <v-col cols='5' class="pr-2 text--black py-0">
           <h3 class='navy-text'>{{displayAvgCost}}</h3>

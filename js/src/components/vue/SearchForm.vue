@@ -24,12 +24,50 @@
 <template>
 
   <v-form>
+    <div class="pa-4 grey lighten-3" v-if="displayAllFilters">
+      <h4 class='subhead-2 font-weight-bold mb-2'>Search by Name</h4>
+      <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
+    </div>
+
     <div class='py-2 px-5'>
     <p class='subhead-2'>
       Location
     </p>    
+    <v-select
+      v-model="utility.location"
+      @change="handleLocationChange"
+      placeholder="Select an option"
+      :items="['Near Me','ZIP Code','State']"
+      hide-details
+      class="mb-3 mt-0 pt-0"
+    />
 
-    <div class='d-flex align-center'>
+    <div class='d-flex align-center' v-if="utility.location=='ZIP Code'">
+      <v-text-field 
+        v-model="input.zip"
+        label="ZIP Code"
+        hideDetails
+        class="mb-3 mr-3"
+        type="number"
+        
+      >
+      </v-text-field>
+      <v-text-field 
+        v-model="input.distance"
+        :rules="[utility.rules.required,utility.rules.numerical]"
+        label="Distance in Miles"
+        :disabled="!input.zip"
+        hideDetails
+        class="mb-3"
+        type="number"
+        min='1'
+      >
+      </v-text-field>
+      
+    </div>
+
+
+    <div class='d-flex align-center' v-if="utility.location=='Near Me'">
       <v-tooltip
         bottom
         max-width="250"
@@ -61,8 +99,8 @@
       <span v-show="location.error" class="overline">{{location.error}}</span>
     </div>
 
-
-    <v-select v-model="input.state"
+    <v-select 
+      v-model="input.state"
       id="search-form-state"
       :items="site.data.states"
       item-text="name"
@@ -70,16 +108,22 @@
       multiple
       chips
       hide-details
-      placeholder="Or select a state..."
+      placeholder="Select a state..."
       class='mt-0 pt-0'
       color="secondary"
+      deletable-chips
+      v-if="utility.location=='State'"
       ></v-select>
 
-    <p class='subhead-2'>Academic Fields Offered</p>
+    <p class='subhead-2'>Field of Study Offered</p>
+    <div id="search-form-sub-degree-container" class="mt-4 pl-4 ml-2">
+
+    <p class='subhead-2'>Academic Fields</p>
     <field-autocomplete v-model="input.cip4"></field-autocomplete>
     
     <!-- cip4 - Degree subfield -->
-    <div id="search-form-sub-degree-container" class="mt-4 pl-2 ml-4" v-show="input.cip4">
+    <div>
+    <p class='subhead-2'>Degrees/Certificate</p> 
       <v-checkbox
         class="search-form-degree-cb my-0 py-0"
         v-model="input.cip4_degree"
@@ -106,6 +150,7 @@
         color="secondary"
         hide-details
       ></v-checkbox>
+    </div>
     </div>
 
     <!-- <p class='subhead-2'>Length</p>
@@ -171,8 +216,6 @@
         </v-expansion-panel-header>
         <v-expansion-panel-content> -->
      
-          <!-- <p class='title mt-3'>Admittance</p> -->
-
           <check-range v-model="input.sat_math"
             :enable="utility.enable.sat_math" 
             @slider-toggle="utility.enable.sat_math = $event"
@@ -386,7 +429,7 @@ export default {
   },
   components:{
     'check-range': CheckRange,
-    'name-autocomplate': NameAutocomplete,
+    'name-autocomplete': NameAutocomplete,
     'field-autocomplete': FieldAutocomplete
   },
   data(){
@@ -397,7 +440,7 @@ export default {
         major:"",
         region:[],
         zip:"",
-        distance:"",
+        distance:10,
         size:[],
         name:"",
         control:[], //Type
@@ -414,7 +457,7 @@ export default {
         acceptance:null,
         lat: null,
         long: null,
-        locale:[]
+        locale:[],
       },
       utility:{
         rules:{
@@ -440,6 +483,7 @@ export default {
           act: false,
           acceptance: false
         },
+        location: null
       }
     }
   },
@@ -536,6 +580,12 @@ export default {
         _.unset(groomedInput,'acceptance'); // TODO: CONST;
       }
 
+      // Handle edgecase for distance :(
+      if(groomedInput.zip){
+        groomedInput.distance = this.input.distance;
+      }else{
+        _.unset(groomedInput,'distance');
+      }
 
       return groomedInput;
     },
@@ -584,34 +634,30 @@ export default {
       // Reset form to default, Helps with processing canned search items.
       this.resetFormDefault();
 
+      // TODO - Refactor this method. Maybe add switch.
       _.mergeWith(this.input,this.urlParsedParams,function(objVal,newObjValue,key){
       // this.input = _.mergeWith(this.utility.formDefault, this.urlParsedParams,function(objVal,newObjValue,key){
         if(_.isArray(objVal) && _.isString(newObjValue)){
           return [newObjValue];
         }
         
-        // TODO - Are there consts?, add inarray check.
-        // Perform any URL -> Form data translations
-        if(key === 'completion_rate' || key === 'acceptance'){
-          return parseFloat(newObjValue) * 100;
+        // Alter values to accomidate form inputs.
+        switch(key){
+          case 'completion_rate':
+          case 'acceptance':
+            return parseFloat(newObjValue) * 100;
+            break;
+          case 'avg_net_price':
+            if(parseFloat(newObjValue.substr(2)) > 1000){
+              return parseFloat(newObjValue.substr(2)) / 1000;
+            }
+            break;
+          case 'sat_math':
+          case 'sat_read':
+          case 'act':
+            return parseFloat(newObjValue.substr(2))
+            break;
         }
-
-        if(key === 'avg_net_price'){
-          if(parseFloat(newObjValue.substr(2)) > 1000)
-          {
-            return parseFloat(newObjValue.substr(2)) / 1000;
-          }
-        }
-
-        if(key === 'sat_math' || key === 'sat_read' || key === 'act'){
-          return parseFloat(newObjValue.substr(2))
-        }
-
-        // if (key === 'location' && value){
-        //   // Unset
-        //   // Call location
-        // }
-
       });
 
       // TODO - Refactor to a more elegant. Loop through all utility enables, and trigger on.
@@ -640,15 +686,49 @@ export default {
         this.utility.enable.acceptance = true;
       }
 
+      // Check if these values are set, perform side effects.
+      // TODO - Remove values that cannot exist at the same time.
+      if (this.input.lat && this.input.long){
+        this.utility.location = "Near Me";
+        this.location.latLon = true;
+      }
+
+      if(this.input.zip){
+        this.utility.location = "ZIP Code";
+      }
+
+      if(!_.isEmpty(this.input.state)){
+        this.utility.location = "State";
+      }
+
     },
     processChangeEvent(){
     },
     //Reset form to default.
     resetFormDefault(){
+      // TODO - Create reset value method, pass desired fields to method, return default values from object.
       this.input = _.cloneDeep(this.utility.formDefault);
       this.utility.enable = _.cloneDeep(this.utility.formDefault);
       this.location.latLon = null;
       this.location.error = null;
+      this.utility.location = null;
+    },
+    // Reset values for sub objects to default
+    handleLocationChange(e){
+      // TODO - Check to see if values need to be reset.
+      this.input.zip = "";
+      this.input.state = [];
+    
+      this.input.lat = null;
+      this.input.long = null;
+
+      this.location.latLon = null;
+      this.location.error = null;
+    },
+    handleSchoolNameSelected(e){
+      if(e['school.name']){
+        this.input.name = e['school.name'];
+      }
     }
 
   }

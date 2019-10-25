@@ -34,7 +34,7 @@ Scenario('Visit school/fields', (I) => {
   I.seeElement('.v-application');
   // I.wait(2);
   // Check for page element.
-  I.see('All Fields of Study Available at Yale University','h1');
+  I.see('All Fields of Study Offered at Yale University','h1');
 });
 
 // Data Pages

@@ -47,6 +47,10 @@
                 undergraduates
             </v-col>
             <v-col>
+               <v-chip v-if="underInvestigation==1" color="error" label>
+                  <strong>Under ED Monitoring</strong>
+                  <tooltip definition="hcm2" color="#FFFFFF" class="ml-2" :isBranch="isBranch" />
+                </v-chip>
                 <a
                 target="_blank"
                 :href="'/school/transition/?url='+schoolUrl"
@@ -78,6 +82,8 @@ import MultiRange from "components/vue/MultiRange.vue";
 import Sankey from "components/vue/Sankey.vue";
 import SchoolIcons from "components/vue/SmallSchoolIcons.vue";
 import ComplexFields from "vue/mixins/ComplexFields.js";
+import Tooltip from "components/vue/Tooltip.vue";
+
 export default {
   mixins: [ComplexFields],
   components: {
@@ -85,7 +91,8 @@ export default {
     range: Range,
     sankey: Sankey,
     "multi-range": MultiRange,
-    "school-icons": SchoolIcons
+    "school-icons": SchoolIcons,
+    "tooltip": Tooltip
   },
   props: {
     school: {

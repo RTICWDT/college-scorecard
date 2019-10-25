@@ -271,22 +271,6 @@ export default {
       } else {
         this.has_data = false;
       }
-
-      if (window.ga) {
-        try {
-          ga(
-            "send",
-            "event",
-            "Outcome",
-            "Toggle",
-            this.enroll.substring(8).replace(/_/g, " ") +
-              " " +
-              this.study.substring(7).replace(/_/g, " ")
-          );
-        } catch (e) {
-          console.error("[ga] outcome measure toggle event error");
-        }
-      }
     }
   }
 };

@@ -18,7 +18,9 @@
 </template>
 
 <script>
+import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
 export default {
+    mixins: [AnalyticsEvents],
     data(){
         return {
             enroll: "enroll_both",
@@ -28,6 +30,7 @@ export default {
     methods:{
         updateSankey(){
             this.$emit('update-sankey', { enroll: this.enroll, study: this.study });
+            this.trackOutcome(this.enroll.substring(7).replace(/_/g, " ")+" " +this.study.substring(6).replace(/_/g, " "))
         }
     }
 }

@@ -1,5 +1,7 @@
 <template>
   <v-app>
+        <scorecard-header />
+
       <v-content class="white">
     <data-navigation current="/data/documentation/" />
     <v-container>
@@ -12,12 +14,12 @@
           <p>
             You can also learn more about the data through our full
             <a
-              data-download
+              @click="trackDownload('FullDataDocumentation.pdf')"
               :href="baseUrl+'/assets/FullDataDocumentation.pdf'"
               target="_blank"
             >Documentation Report</a> and the
             <a
-              data-download
+              @click="trackDownload(dataDictionary)"
               :href="baseUrl+'/assets/'+dataDictionary"
               target="_blank"
             >Data Dictionary</a>. Our
@@ -27,7 +29,7 @@
           <p>
             For those who want to understand more about ways to use the data, the
             <a
-              data-download
+              @click="trackDownload('UsingFederalDataToMeasureAndImprovePerformance.pdf')"
               :href="baseUrl+'/assets/UsingFederalDataToMeasureAndImprovePerformance.pdf'"
               target="_blank"
             >2015 Technical Paper</a> offers an in-depth exploration of the data and methodologies considered and used for this project.
@@ -44,12 +46,12 @@
           <p>
             The data available from this website covers a wide range of topics. An overview of the available categories of data is below. For detailed information on each category and its individual fields, see the full
             <a
-              data-download
+              @click="trackDownload('FullDataDocumentation.pdf')"
               :href="baseUrl+'/assets/FullDataDocumentation.pdf'"
               target="_blank"
             >Documentation Report</a> and the
             <a
-              data-download
+              @click="trackDownload(dataDictionary)"
               :href="baseUrl+'/assets/'+dataDictionary"
               target="_blank"
             >Data Dictionary</a>.
@@ -257,7 +259,7 @@
           <p>All variables are listed in the Data Dictionary.</p>
 
           <p ><v-btn
-              data-download
+              @click="trackDownload(dataDictionary)"
               rounded
               color="secondary"
               :href="baseUrl+'/assets/'+dataDictionary"
@@ -315,12 +317,16 @@
       </v-row>
     </v-container>
     </v-content>
+    <scorecard-footer />
   </v-app>
 </template>
 
 <script>
 import DataNavigation from 'components/vue/DataNavigation.vue';
+import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
+
 export default {
+  mixins: [AnalyticsEvents],
   components:{
     'data-navigation': DataNavigation
   },

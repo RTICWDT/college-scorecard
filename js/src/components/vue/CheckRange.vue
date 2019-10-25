@@ -28,7 +28,6 @@
         @input="handleInput"
         :min="min"
         :max="max"
-        :step="step"
         :color="trackColor"
         :track-color="trackBackground"
         thumb-color="secondary"
@@ -37,6 +36,7 @@
           <v-text-field v-model="sliderValue"
             hide-details
             type="number"
+            min="0"
             @input="handleInput"
             solo
             dense
