@@ -1,6 +1,7 @@
 <style lang="scss" scoped>
 @import 'sass/_variables';
 header {
+  z-index: 101 !important;
   .logo {
     display: inline-block;
     padding: 10px 20px 10px 30px;

@@ -229,7 +229,21 @@ export default {
         },
         allFieldsOfStudy() {
             if (!this.school) return null;
-            return _.get(this.school, this.fields['FIELD_OF_STUDY']);
+            let fos = _.get(this.school, this.fields['FIELD_OF_STUDY']);
+
+            // Fix data issue where the apostrophe is dropped in bachelor's degree
+            if(!fos.length)
+            {
+                fos = [fos];
+            }
+            for(let i=0; i<fos.length; i++)
+            {
+                if(fos[i].credential.level==3)
+                {
+                    fos[i].credential.title="Bachelor's Degree";
+                }
+            }
+            return fos;
         },
         debtRange() {
             if (!this.allFieldsOfStudy) return null;
@@ -238,6 +252,7 @@ export default {
             {
                 fos = [fos];
             }
+            let range = false; 
             let cleanDebt = fos.filter(
                 obj => obj.debt.median_debt && obj.credential.level <= 3
             );
@@ -251,7 +266,7 @@ export default {
             else
             {
                 return {
-                    single: orderedDebt.length == 1 || (orderedDebt.length == 2 && orderedDebt[0].debt.median_debt == orderedDebt[1].debt.median_debt),
+                    single: orderedDebt.length == 1 || (orderedDebt[0].debt.median_debt == orderedDebt[orderedDebt.length-1].debt.median_debt),
                     min: orderedDebt[0],
                     max: orderedDebt[orderedDebt.length - 1]
                 }
@@ -277,7 +292,7 @@ export default {
             else
             {
                 return {
-                    single: orderedEarnings.length == 1 || (orderedEarnings.length == 2 && orderedEarnings[0].earnings.median_earnings == orderedEarnings[1].earnings.median_earnings),
+                    single: orderedEarnings.length == 1 || (orderedEarnings[0].earnings.median_earnings == orderedEarnings[orderedEarnings.length-1].earnings.median_earnings),
                     min: orderedEarnings[0],
                     max: orderedEarnings[orderedEarnings.length - 1]
                 }

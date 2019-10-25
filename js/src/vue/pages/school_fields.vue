@@ -180,6 +180,9 @@ export default {
       let self = this;
 
       programs.forEach(function(program, idx) {
+        if(program.credential.level==3) {
+          program.credential.title = "Bachelor's Degree";
+        }
         if (
           !self.currentFilter ||
           self.currentFilter == program.credential.level

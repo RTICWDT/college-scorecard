@@ -33,7 +33,7 @@
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col cols="12">
+                  <v-col cols="12" class='pa-sm-5'>
                 <compare-section
                   :schools="schools"
                   title="Average Annual Cost"
