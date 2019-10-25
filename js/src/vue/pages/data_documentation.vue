@@ -131,7 +131,7 @@
                   <li>Undergraduate Students by Age (25 or Over)</li>
                   <li>Income Brackets of Federal Financial Aid Recipients</li>
                   <li>Share of First-Generation Students</li>
-                  <li>Number of FAFSA Submissions to Colleges</li>
+                  <li>Number of FAFSA&reg; Form Submissions to Colleges</li>
                 </ul>
 
                 <p>Some data were produced as contextual information for the earnings cohorts in particular; the most recent data for these elements are for the 2005 and 2006 cohorts. These data include undergraduate students by: gender, age at entry, veteran status, and marital status.</p>
