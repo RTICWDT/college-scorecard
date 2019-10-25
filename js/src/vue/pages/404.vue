@@ -8,7 +8,7 @@
             <v-card class='pa-5 text-center'>
             <h1>We flunked!</h1>
             <p>We couldn't find the page you were looking for. Try searching again?</p>
-            <name-autocomplete />
+            <name-autocomplete @school-name-selected="handleSchoolNameSelected"/>
             <div class="content-column">
               <v-img class='ma-4' src="/img/f-grade-paper.jpg" alt="Grade of F" />
             </div>
@@ -33,6 +33,11 @@ export default {
   components: {
     'name-autocomplete': NameAutocomplete
   },
-  props:['baseUrl','pagePermalink']
+  props:['baseUrl','pagePermalink'],
+  methods:{
+    handleSchoolNameSelected(e){
+      window.location= '/search/?name='+ e['school.name'];
+    }
+  }
 }
 </script>

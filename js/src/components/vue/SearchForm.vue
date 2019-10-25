@@ -24,6 +24,11 @@
 <template>
 
   <v-form>
+    <div class="pa-4 grey lighten-3">
+      <h4 class='subhead-2 font-weight-bold mb-2'>Search by Name</h4>
+      <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
+    </div>
+
     <div class='py-2 px-5'>
     <p class='subhead-2'>
       Location
@@ -420,7 +425,7 @@ export default {
   },
   components:{
     'check-range': CheckRange,
-    'name-autocomplate': NameAutocomplete,
+    'name-autocomplete': NameAutocomplete,
     'field-autocomplete': FieldAutocomplete
   },
   data(){
@@ -715,6 +720,11 @@ export default {
 
       this.location.latLon = null;
       this.location.error = null;
+    },
+    handleSchoolNameSelected(e){
+      if(e['school.name']){
+        this.input.name = e['school.name'];
+      }
     }
 
   }

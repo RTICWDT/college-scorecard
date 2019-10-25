@@ -24,10 +24,6 @@
         class="searchSidebar"
         clipped
       >
-        <div class="pa-4 grey lighten-3">
-          <h4 class='subhead-2 font-weight-bold mb-2'>Search by Name</h4>
-          <name-autocomplete />
-        </div>
         <!-- Search Form Component -->
         <search-form
           :urlParsedParams="urlParsedParams"
