@@ -38,7 +38,7 @@ Scenario('Visit root page and see all major page components', (I) => {
     I.amOnPage(BASE_SEARCH);
 
     I.fillField('#search-form-completion-rate-field','50');
-    I.fillField('#search-from-completion-rate-field','')
+    I.fillField('#search-form-acceptance-field','50');
     I.wait(1);
 
     let url = await I.grabCurrentUrl();
