@@ -16,9 +16,9 @@
 
             <div v-else class="show-loaded" id="school">
               <v-card class="pb-5 px-3">
-                <v-row class='csGreenBg'>
+                <v-row class="csGreenBg">
                   <v-col cols="6">
-                     <v-btn
+                    <v-btn
                       small
                       color="white"
                       text
@@ -26,57 +26,56 @@
                       class="link-more"
                       :href="referrerLink"
                     >&laquo; Back</v-btn>
-
                   </v-col>
-                  <v-col cols="6" class='text-right'>
+                  <v-col cols="6" class="text-right">
                     <share small text color="white" label="Share this Comparison" :url="shareUrl" />
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col cols="12" class='pa-sm-5'>
-                <compare-section
-                  :schools="schools"
-                  title="Average Annual Cost"
-                  definition="avg-cost"
-                  :currentHighlight="currentHighlight"
-                  @update-highlight="currentHighlight = $event"
-                  :config="{ 
-                    computedField: 'netPrice', 
-                    color: '#0e365b', 
-                    max: 150000, 
-                    type: 'currency',
-                    chart: 'HorizontalBar'
-                  }"
-                />
+                  <v-col cols="12" class="pa-sm-5">
+                    <compare-section
+                      :schools="schools"
+                      title="Average Annual Cost"
+                      definition="avg-cost"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
+                      :config="{ 
+                        computedField: 'netPrice', 
+                        color: '#0e365b', 
+                        max: 150000, 
+                        type: 'currency',
+                        chart: 'HorizontalBar'
+                      }"
+                    />
 
-                <compare-section
-                  :schools="schools"
-                  title="Graduation Rate"
-                  definition="graduation-rate"
-                  :currentHighlight="currentHighlight"
-                  @update-highlight="currentHighlight = $event"
-                  :config="{ 
-                    computedField: 'completionRate', 
-                    color: '#0e365b', 
-                    max: 100, 
-                    type: 'percent',
-                    chart: 'HorizontalBar' 
-                  }"
-                />
+                    <compare-section
+                      :schools="schools"
+                      title="Graduation Rate"
+                      definition="graduation-rate"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
+                      :config="{ 
+                        computedField: 'completionRate', 
+                        color: '#0e365b', 
+                        max: 100, 
+                        type: 'percent',
+                        chart: 'HorizontalBar' 
+                      }"
+                    />
 
-                <compare-section
-                  :schools="schools"
-                  :currentHighlight="currentHighlight"
-                  @update-highlight="currentHighlight = $event"
-                  title="Salary After Completing"
-                  definition="fos-median-earnings"
-                  :config="{ 
-                    computedField: 'earningsRange', 
-                    color: '#0e365b', 
-                    chart: 'MultiRange',
-                    multiRangeVariable: 'earnings.median_earnings'
-                  }"
-                />  
+                    <compare-section
+                      :schools="schools"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
+                      title="Salary After Completing"
+                      definition="fos-median-earnings"
+                      :config="{ 
+                        computedField: 'earningsRange', 
+                        color: '#0e365b', 
+                        chart: 'MultiRange',
+                        multiRangeVariable: 'earnings.median_earnings'
+                      }"
+                    />
                   </v-col>
                 </v-row>
               </v-card>
@@ -86,10 +85,12 @@
                   <v-btn primary @click="none">Close All</v-btn>
                 </v-col>
               </v-row>
-              <v-expansion-panels class="" multiple focusable v-model="panels">
+              <v-expansion-panels class multiple focusable v-model="panels">
                 <v-expansion-panel>
-                  <v-expansion-panel-header @click="trackAccordion('College Information')">College Information</v-expansion-panel-header>
-                  <v-expansion-panel-content>
+                  <v-expansion-panel-header
+                    @click="trackAccordion('College Information')"
+                  >College Information</v-expansion-panel-header>
+                  <v-expansion-panel-content class="mt-5">
                     <compare-section
                       :schools="schools"
                       title="Full Time Enrollment"
@@ -97,12 +98,12 @@
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
-                    computedField: 'fullTimeEnrollment', 
-                    color: '#0e365b', 
-                    max: 100, 
-                    type: 'percent',
-                    chart: 'HorizontalBar' 
-                  }"
+                        computedField: 'fullTimeEnrollment', 
+                        color: '#0e365b', 
+                        max: 100, 
+                        type: 'percent',
+                        chart: 'HorizontalBar' 
+                      }"
                     />
 
                     <compare-section
@@ -122,12 +123,12 @@
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
-                    computedField: 'socioEconomicDiversity', 
-                    color: '#0e365b', 
-                    max: 100, 
-                    type: 'percent',
-                    chart: 'HorizontalBar' 
-                  }"
+                        computedField: 'socioEconomicDiversity', 
+                        color: '#0e365b', 
+                        max: 100, 
+                        type: 'percent',
+                        chart: 'HorizontalBar' 
+                      }"
                     />
 
                     <compare-section
@@ -137,14 +138,16 @@
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
-                    computedField: 'raceEthnicity', 
-                    color: '#0e365b', 
-                    max: 100, 
-                    type: 'percent',
-                    chart: 'HorizontalBar',
-                    currentRaceEthnicityFilter: currentRaceEthnicity 
-                  }"
+                        computedField: 'raceEthnicity', 
+                        color: '#0e365b', 
+                        max: 100, 
+                        type: 'percent',
+                        chart: 'HorizontalBar',
+                        currentRaceEthnicityFilter: currentRaceEthnicity 
+                      }"
                     >
+                      <p class="overline mb-1">Race/Ethnicity</p>
+
                       <v-select
                         :items="[
                             {label: 'American Indian/Alaska Native', value:'American Indian/Alaska Native'},
@@ -162,14 +165,14 @@
                         label="Race/Ethnicity"
                         v-model="currentRaceEthnicity"
                         color="secondary"
-                        outlined
+                        solo
                       ></v-select>
                     </compare-section>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel>
                   <v-expansion-panel-header @click="trackAccordion('Costs')">Costs</v-expansion-panel-header>
-                  <v-expansion-panel-content>
+                  <v-expansion-panel-content class="mt-5">
                     <compare-section
                       :schools="schools"
                       title="Average Annual Cost"
@@ -191,15 +194,16 @@
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
-                    computedField: 'income', 
-                    color: '#0e365b', 
-                    max: 60000, 
-                    type: 'currency',
-                    chart: 'HorizontalBar',
-                    currentIncomeFilter: currentIncomeFilter 
-                  }"
+                        computedField: 'income', 
+                        color: '#0e365b', 
+                        max: 60000, 
+                        type: 'currency',
+                        chart: 'HorizontalBar',
+                        currentIncomeFilter: currentIncomeFilter 
+                      }"
                     >
                       <p>Depending on the federal, state, or institutional grant aid available, students in your income bracket may pay more or less than the overall average costs.</p>
+                      <p class="overline mb-1">What's your family income?</p>
                       <v-select
                         :items="[
                             {label: '$0-$30,000', value:'0-30000'},
@@ -213,14 +217,16 @@
                         label="What's your family income?"
                         v-model="currentIncomeFilter"
                         color="secondary"
-                        outlined
+                        solo
                       ></v-select>
                     </compare-section>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel>
-                  <v-expansion-panel-header @click="trackAccordion('Graduation &amp; Retention')">Graduation & Retention</v-expansion-panel-header>
-                  <v-expansion-panel-content>
+                  <v-expansion-panel-header
+                    @click="trackAccordion('Graduation &amp; Retention')"
+                  >Graduation & Retention</v-expansion-panel-header>
+                  <v-expansion-panel-content class="mt-5">
                     <compare-section
                       :schools="schools"
                       title="Graduation Rate"
@@ -266,8 +272,10 @@
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel>
-                  <v-expansion-panel-header @click="trackAccordion('Financial Aid &amp; Debt')">Financial Aid & Debt</v-expansion-panel-header>
-                  <v-expansion-panel-content>
+                  <v-expansion-panel-header
+                    @click="trackAccordion('Financial Aid &amp; Debt')"
+                  >Financial Aid & Debt</v-expansion-panel-header>
+                  <v-expansion-panel-content class="mt-5">
                     <compare-section
                       :schools="schools"
                       title="Students Receiving Federal Loans"
@@ -313,27 +321,34 @@
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel>
-                  <v-expansion-panel-header @click="trackAccordion('Salary after Completing by Field of Study')">Salary after Completing by Field of Study</v-expansion-panel-header>
-                  <v-expansion-panel-content>
+                  <v-expansion-panel-header
+                    @click="trackAccordion('Salary after Completing by Field of Study')"
+                  >Salary after Completing by Field of Study</v-expansion-panel-header>
+                  <v-expansion-panel-content class="mt-5">
                     <compare-section
                       :schools="schools"
                       title="Salary Ranges by Field of Study"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{ 
-                    computedField: 'earningsRange', 
-                    color: '#0e365b', 
-                    chart: 'MultiRange',
-                    multiRangeVariable: 'earnings.median_earnings'
-                  }"
+                        computedField: 'earningsRange', 
+                        color: '#0e365b', 
+                        chart: 'MultiRange',
+                        multiRangeVariable: 'earnings.median_earnings'
+                      }"
                     />
                   </v-expansion-panel-content>
                 </v-expansion-panel>
 
                 <v-expansion-panel>
-                  <v-expansion-panel-header @click="trackAccordion('Test Scores & Acceptance')">Test Scores & Acceptance</v-expansion-panel-header>
-                  <v-expansion-panel-content>
-                    <h2 class='pt-5 pb-3'>Test Scores <tooltip definition="test-scores" :isCompare="true" /></h2>
+                  <v-expansion-panel-header
+                    @click="trackAccordion('Test Scores & Acceptance')"
+                  >Test Scores & Acceptance</v-expansion-panel-header>
+                  <v-expansion-panel-content class="mt-5">
+                    <h2 class="pt-5 pb-3">
+                      Test Scores
+                      <tooltip definition="test-scores" :isCompare="true" />
+                    </h2>
                     <p>Students who were admitted and enrolled typically had standardized test scores in these ranges.</p>
                     <compare-section
                       :schools="schools"
@@ -398,7 +413,7 @@
       </v-container>
     </v-content>
     <scorecard-footer />
-    
+
     <compare-header :showCompare.sync="showCompare" :schools="compareSchools" />
     <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
       <compare-drawer
@@ -459,12 +474,12 @@ export default {
   computed: {
     shareUrl() {
       let url = "";
-      this.compareSchools.map(function(itm, idx) {
+      this.compareSchools.map(function (itm, idx) {
         url += "&s[]=" + itm.schoolId;
       });
-      return window.location.origin+'/compare/?'+encodeURIComponent(url.substr(1));
+      return window.location.origin + '/compare/?' + encodeURIComponent(url.substr(1));
     },
-    referrerLink(){
+    referrerLink() {
       return document.referrer || null;
     }
   },
@@ -495,9 +510,8 @@ export default {
     let query = {};
     let schoolArray = [];
     let paramArray = [];
-    this.compareSchools.map(function(school) {
+    this.compareSchools.map(function (school) {
       var id = +school.schoolId || +school;
-      // query[id] = [picc.API.getSchool, id, params];
       schoolArray.push(id);
       paramArray.push({
         id: id
@@ -508,9 +522,9 @@ export default {
     this.trackCompareList(schoolArray.join(';'));
     this.loading = true;
     let request = apiGetAll(window.api.url, window.api.key, '/schools/', paramArray).then((responses) => {
-      
-      let schoolData = responses.map(function(response){
-        if(response.data.results[0]){
+
+      let schoolData = responses.map(function (response) {
+        if (response.data.results[0]) {
           return response.data.results[0];
         }
       });
@@ -534,26 +548,6 @@ export default {
       // TODO - How do we want to handle errors?
       console.error("Issue locating schools for compare...");
     });
-
-    // picc.API.getAll(query, function(error, data) {
-    //   Object.keys(data).forEach(function(key) {
-    //     if (data[key]) {
-    //       switch (_.get(data[key], self.fields["PREDOMINANT_DEGREE"])) {
-    //         case 1:
-    //           self.schools["Certificate schools"].push(data[key]);
-    //           break;
-    //         case 2:
-    //           self.schools["2-year schools"].push(data[key]);
-    //           break;
-
-    //         case 3:
-    //           self.schools["4-year schools"].push(data[key]);
-    //           break;
-    //       }
-    //     }
-    //   });
-    // });
-  
   }
 };
 </script>
