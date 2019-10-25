@@ -115,12 +115,15 @@
       v-if="utility.location=='State'"
       ></v-select>
 
-    <p class='subhead-2'>Academic Fields Offered</p>
+    <p class='subhead-2'>Field of Study Offered</p>
+    <div id="search-form-sub-degree-container" class="mt-4 pl-4 ml-2">
+
+    <p class='subhead-2'>Academic Fields</p>
     <field-autocomplete v-model="input.cip4"></field-autocomplete>
     
     <!-- cip4 - Degree subfield -->
-    <div id="search-form-sub-degree-container" class="mt-4 pl-2 ml-2" v-show="input.cip4 || input.cip4_degree.length>0">
-    <p class='subhead-2'>Degrees/Certificates Offered</p> 
+    <div>
+    <p class='subhead-2'>Degrees/Certificate</p> 
       <v-checkbox
         class="search-form-degree-cb my-0 py-0"
         v-model="input.cip4_degree"
@@ -147,6 +150,7 @@
         color="secondary"
         hide-details
       ></v-checkbox>
+    </div>
     </div>
 
     <!-- <p class='subhead-2'>Length</p>
