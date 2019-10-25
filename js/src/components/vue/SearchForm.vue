@@ -183,7 +183,8 @@
         ></v-checkbox>
     </div> -->
 
-    <check-range legend-title="Graduation Rate" 
+    <check-range legend-title="Graduation Rate"
+      id='search-form-completion-rate'
       v-model="input.completion_rate"
       :enable="utility.enable.completion_rate" 
       @slider-toggle="utility.enable.completion_rate = $event"
@@ -195,7 +196,8 @@
       andUp
     ></check-range>
 
-    <check-range legend-title="Average Annual Cost" 
+    <check-range legend-title="Average Annual Cost"
+      id='search-form-avg-net-price'
       v-model="input.avg_net_price"
       :enable="utility.enable.avg_net_price"
       @slider-toggle="utility.enable.avg_net_price = $event"
@@ -217,6 +219,7 @@
         <v-expansion-panel-content> -->
      
           <check-range v-model="input.sat_math"
+            id='search-form-sat-math'
             :enable="utility.enable.sat_math" 
             @slider-toggle="utility.enable.sat_math = $event"
             :min="0" 
@@ -229,6 +232,7 @@
           </check-range>
 
           <check-range v-model="input.sat_read"
+            id='search-form-sat-read'
             :enable="utility.enable.sat_read" 
             @slider-toggle="utility.enable.sat_read = $event"
             :min="0" 
@@ -241,6 +245,7 @@
           </check-range>
 
           <check-range v-model="input.act"
+            id='search-form-act'
             :enable="utility.enable.act" @slider-toggle="utility.enable.act = $event"
             :min="0" 
             :max="36"
@@ -252,6 +257,7 @@
           </check-range>
 
           <check-range v-model="input.acceptance"
+            id="search-form-acceptance"
             :enable="utility.enable.acceptance" 
             @slider-toggle="utility.enable.acceptance = $event"
             :min="0"

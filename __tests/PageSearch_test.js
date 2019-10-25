@@ -34,6 +34,20 @@ Scenario('Visit root page and see all major page components', (I) => {
 
 // Test: Click items in search form, get results that match.
   // ensure URL is updated
+  Scenario('Click items in search and get updated results.', async(I) => {
+    I.amOnPage(BASE_SEARCH);
+
+    I.fillField('#search-form-completion-rate-field','50');
+    I.fillField('#search-from-completion-rate-field','')
+    I.wait(1);
+
+    let url = await I.grabCurrentUrl();
+    console.log(`Current URL is [${url}]`);
+
+  });
+
+
+// Test: Grab items from the URL and fill form.
 
 // Test: Paginate through results.
 
