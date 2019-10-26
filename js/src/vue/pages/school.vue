@@ -366,7 +366,7 @@
                           <v-card color="grey lighten-4 pa-4">
                             <h2 class="mb-3">Get Help Paying for College</h2>
                             <p>
-                              Submit a Free Application for Federal Student Aid (FAFSA). You may be eligible to receive federal
+                              Submit a <em>Free Application for Federal Student Aid</em> (FAFSA&reg) form. You may be eligible to receive federal
                               grants or loans.
                             </p>
                             <p class="text-center">
@@ -376,7 +376,7 @@
                               href="https://fafsa.ed.gov/spa/fafsa"
                               target="_blank"
                               @click="trackOutboundLink($event)"
-                            >Start My FAFSA</v-btn>
+                            >Start My FAFSA&reg; Form</v-btn>
                             </p>
                           </v-card>
                         </v-col>
