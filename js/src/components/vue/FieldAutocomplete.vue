@@ -14,6 +14,7 @@
       class="pt-0 mt-0"
       color="secondary"
       clearable
+      v-on:click:clear="$emit('input', null)"
     />
   </div>
 </template>

@@ -213,11 +213,11 @@ export default {
 
         fullTimeEnrollment() {
             if (!this.school) return null;
-            return 1 - (_.get(this.school, this.fields['PART_TIME_SHARE']));
+            return 1 - (_.get(this.school, this.fields['PART_TIME_SHARE'])).toFixed(2);
         },
         partTimeEnrollment() {
             if (!this.school) return null;
-            return _.get(this.school, this.fields['PART_TIME_SHARE']);
+            return (_.get(this.school, this.fields['PART_TIME_SHARE'])).toFixed(2);
         },
         socioEconomicDiversity() {
             if (!this.school) return null;
