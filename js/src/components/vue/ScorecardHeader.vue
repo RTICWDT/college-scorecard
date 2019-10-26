@@ -25,10 +25,6 @@ header {
     display: inline-block;
     line-height: 200%;
     margin-top: 0px;
-
-    @media screen and (max-width: 600px) {
-      line-height: 130%;
-    }
   }
 
   .edLine {
@@ -40,10 +36,7 @@ header {
     text-transform: uppercase;
     color: #8B93A3;
 
-    @media screen and (max-width: 600px) {
-      font-size: 0.6rem;
-
-    }
+    
   }
 
   .siteTitle {
@@ -51,9 +44,7 @@ header {
     font-size: 2.24rem;
     font-family: $header-font-family;
     color: $white;
-    @media screen and (max-width: 600px) {
-      font-size: 1.19rem;
-    }
+   
   }
 }
 </style>
