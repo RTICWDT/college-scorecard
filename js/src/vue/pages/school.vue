@@ -433,8 +433,8 @@
                         @click="field_sort = 'lowest_debt'"
                       >Lowest Debt</v-btn>
                     </p>
-                    <p class="my-3">
-                      Out of {{allFieldsOfStudy.length | numeral }} fields of study at {{ schoolName }}, the top {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} offering undergraduate degrees or certificates with data available on {{ hoistGroup }} are shown below.
+                    <p class="my-3"  v-if="fieldsOfStudy.length">
+                      Out of {{allFieldsOfStudy.length | numeral }} {{allFieldsOfStudy.length==1? 'field':'fields' }} of study at {{ schoolName }}, the top {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} offering undergraduate degrees or certificates with data available on {{ hoistGroup }} are shown below.
                       <a
                         :href="fieldsLink"
                       >See All Fields of Study &raquo;</a>
