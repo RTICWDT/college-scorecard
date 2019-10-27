@@ -8,7 +8,7 @@
         <v-row>
           <v-col
             cols="12"
-            md="7"
+            md="8"
           >
             <h1 class="display-1 mb-2">Glossary</h1>
             <div

@@ -5,7 +5,7 @@
       <data-navigation current="/data/changelog/" />
       <v-container>
         <v-row>
-          <v-col cols="12" md="7">
+          <v-col cols="12" md="8">
             <h1 class="display-1 mb-2">Change Log</h1>
             <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
             <v-expansion-panels>
@@ -435,33 +435,6 @@
                 </v-expansion-panel-content>
               </v-expansion-panel>
             </v-expansion-panels>
-          </v-col>
-          <v-col cols="12" md="4" offset-md="1">
-            <h1 class="display-1 pb-2">Scorecard Data</h1>
-            <p>
-              For more information about the College Scorecard data, click here to see our
-              <a
-                :href="baseUrl+'/data/documentation/'"
-              >data documentation</a>. You can also learn more about the data through our full
-              <a
-                @click="trackDownload('FullDataDocumentation.pdf')"
-                :href="baseUrl+'/assets/FullDataDocumentation.pdf'"
-                target="_blank"
-              >Documentation Report</a> and the
-              <a
-                @click="trackDownload(dataDictonary)"
-                :href="baseUrl+'/assets/'+dataDictionary"
-                target="_blank"
-              >Data Dictionary</a>.
-            </p>
-            <p>
-              For those who want to understand more about ways to use the data, the
-              <a
-                @click="trackDownload('UsingFederalDataToMeasureAndImprovePerformance.pdf')"
-                :href="baseUrl+'/assets/UsingFederalDataToMeasureAndImprovePerformance.pdf'"
-                target="_blank"
-              >2015 Technical Paper</a> offers an in-depth exploration of the data and methodologies considered and used for this project.
-            </p>
           </v-col>
         </v-row>
       </v-container>
