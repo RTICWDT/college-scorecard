@@ -88,22 +88,6 @@
               </v-expansion-panels>
             </v-col>
           </v-row>
-          <v-row>
-            <v-col>
-              <p class="text-center">
-                <v-btn
-                  outlined
-                  color="white"
-                  href="/search/"
-                  @click="GATrackEvent('Home Tab','Tab','See All Link')"
-                  rounded
-                >
-                  See All Schools
-                  <v-icon small color="white" class="ml-2">fas fa-chevron-circle-right</v-icon>
-                </v-btn>
-              </p>
-            </v-col>
-          </v-row>
         </v-container>
       </div>
       <div class="homeContent mt-5">

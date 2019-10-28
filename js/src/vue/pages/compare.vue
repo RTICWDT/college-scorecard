@@ -46,7 +46,7 @@
                         type: 'currency',
                         chart: 'HorizontalBar'
                       }"
-                    />
+                    ><p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p></compare-section>
 
                     <compare-section
                       :schools="schools"
@@ -186,7 +186,7 @@
                         type: 'currency',
                         chart: 'HorizontalBar' 
                       }"
-                    />
+                    ><p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p></compare-section>
 
                     <compare-section
                       :schools="schools"
