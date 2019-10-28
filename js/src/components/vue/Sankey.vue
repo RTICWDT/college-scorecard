@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div v-if="has_data" class="om_visualization">
+    <div v-show="has_data" class="om_visualization">
       <div class="om_group">Out of {{ group_count | separator }} students...</div>
       <div class="om_sankey" ref="sankey"></div>
     </div>
 
-    <div v-else class="data-na">
+    <div v-show="!has_data" class="data-na">
       <div class="om_sankey na">Data not available.</div>
     </div>
   </div>
@@ -44,6 +44,9 @@
   .google-visualization-tooltip{
     display:none;
   }
+}
+.na{
+  height: 300px;
 }
 
 </style>
@@ -267,7 +270,12 @@ export default {
           this.outcome_cohorts,
           this.study + "." + this.enroll
         );
-        chart.draw(data, options);
+        // delay this so the height can get setup before the 
+        // chart is drawn when transitioning from no data
+        setTimeout(function(){
+          chart.draw(data, options);
+        }, 100);
+
       } else {
         this.has_data = false;
       }

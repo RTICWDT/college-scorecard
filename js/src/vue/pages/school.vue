@@ -19,15 +19,15 @@
               <v-card class="pa-5">
                 <h2>Something went wrong</h2>
                 <p>Try searching for a school by name:</p>
-                <name-autocomplete @school-name-selected="handleSchoolNameSelected"/>
+                <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
               </v-card>
             </div>
 
             <div v-else id="school">
               <v-card class="school-heading px-3 mb-5">
-                <v-row class='csGreenBg'>
+                <v-row class="csGreenBg">
                   <v-col cols="6">
-                     <v-btn
+                    <v-btn
                       small
                       color="white"
                       text
@@ -36,28 +36,26 @@
                       :href="searchURL"
                     >&laquo; Back to search</v-btn>
                   </v-col>
-                  <v-col cols="6" class='text-right'>
+                  <v-col cols="6" class="text-right">
                     <v-btn
                       text
                       small
                       :color="isSelected?'amber':'white'"
                       @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
-                      <v-icon x-small class='mr-2'>fa fa-plus-circle</v-icon> Compare
+                      <v-icon x-small class="mr-2">fa fa-plus-circle</v-icon>Compare
                     </v-btn>
                     <share small text color="white" label="Share this School" :url="shareLink" />
                   </v-col>
                 </v-row>
-                
+
                 <v-row>
                   <v-col cols="12" md="7" class="px-sm-5">
-                      <v-chip v-if="underInvestigation==1" color="error" label>
-                        <strong>Under ED Monitoring</strong>
-                        <tooltip definition="hcm2" color="#FFFFFF" class="ml-2" :isBranch="isBranch" />
-                      </v-chip>
-                      <h1 class="display-2 font-weight-bold pa-0 mb-2">
-                      {{ schoolName }}                  
-                    </h1>
+                    <v-chip v-if="underInvestigation==1" color="error" label>
+                      <!--prettyhtml-ignore-->
+                      <strong>Under ED Monitoring</strong>&nbsp;<tooltip definition="hcm2" color="#FFFFFF" class="ml-2" :isBranch="isBranch" />
+                    </v-chip>
+                    <h1 class="display-2 font-weight-bold pa-0 mb-2">{{ schoolName }}</h1>
                     <h2 class="title location">
                       <span>{{ city }}</span>,
                       <span>{{ state }}</span>
@@ -72,15 +70,14 @@
                       >{{ schoolUrlDisplay | formatUrlText }}</a>
                     </h2>
                     <school-icons :school="school" :fields="fields" class="my-5" />
-                    
                   </v-col>
-                  <v-col cols="12" md="5" class='px-sm-5 py-0'>
+                  <v-col cols="12" md="5" class="px-sm-5 py-0">
                     <div class="school-map" ref="map"></div>
                   </v-col>
                 </v-row>
-                <v-row class='mt-3' v-if="specialDesignations.length>0">
-                  <v-col cols='12' class='px-sm-5'>
-                  <div class="school-special_designation" >
+                <v-row class="mt-3" v-if="specialDesignations.length>0">
+                  <v-col cols="12" class="px-sm-5">
+                    <div class="school-special_designation">
                       <v-chip
                         class="special mr-1 mb-1"
                         color="blue lighten-3"
@@ -89,13 +86,13 @@
                         :key="designation"
                       >{{designation}}</v-chip>
                     </div>
-                    </v-col>
+                  </v-col>
                 </v-row>
                 <v-row class="mt-3">
-                  <v-col cols="12" md="6" class='px-sm-5'>
+                  <v-col cols="12" md="6" class="px-sm-5">
                     <h2 class="mb-4">
-                      Graduation Rate&nbsp;
-                      <tooltip definition="graduation-rate" :version="completionRateFieldDefinition" />
+                      <!--prettyhtml-ignore-->
+                      Graduation Rate&nbsp;<tooltip definition="graduation-rate" :version="completionRateFieldDefinition" />
                     </h2>
                     <donut
                       v-if="completionRate"
@@ -105,8 +102,9 @@
                     ></donut>
                     <div v-else class="data-na">Data Not Available</div>
                   </v-col>
-                  <v-col cols="12" md="6" class='px-sm-5'>
+                  <v-col cols="12" md="6" class="px-sm-5">
                     <h2 class="mb-3">
+                      <!--prettyhtml-ignore-->
                       Salary After Completing&nbsp;
                       <tooltip definition="fos-median-earnings" :isBranch="isBranch" />
                     </h2>
@@ -117,15 +115,17 @@
                       :max=" { label: '$150,000', value: 150000 }"
                     />
                     <h2 class="mt-5 mb-3" v-if="!isProgramReporter">
+                      <!--prettyhtml-ignore-->
                       Average Annual Cost&nbsp;
                       <tooltip definition="avg-cost" />
                     </h2>
-                    <h2 v-else class='mt-5 mb-3'>
+                    <h2 v-else class="mt-5 mb-3">
+                      <!--prettyhtml-ignore-->
                       Average Annual Cost for Largest Program&nbsp;
                       <tooltip definition="avg-program-cost" />
                     </h2>
                     <p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
-                   
+
                     <h2
                       class="display-2 navy-text font-weight-bold mb-4"
                       v-if="netPrice"
@@ -143,7 +143,11 @@
               </v-row>
               <v-expansion-panels multiple focusable v-model="panels">
                 <v-expansion-panel>
-                  <v-expansion-panel-header id="cost" aria-controls="costs-content" @click="trackAccordion('Costs')">Costs</v-expansion-panel-header>
+                  <v-expansion-panel-header
+                    id="cost"
+                    aria-controls="costs-content"
+                    @click="trackAccordion('Costs')"
+                  >Costs</v-expansion-panel-header>
                   <v-expansion-panel-content id="costs-content" class="px-0 py-3 pa-sm-5">
                     <v-row>
                       <v-col cols="12" md="6">
@@ -153,7 +157,6 @@
                             <tooltip definition="avg-cost" />
                           </h2>
                           <p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
-                          
 
                           <h2
                             v-if="netPrice"
@@ -248,7 +251,7 @@
                   <v-expansion-panel-content id="graduation-content" class="px-0 py-3 pa-sm-5">
                     <v-row>
                       <v-col cols="12" md="6">
-                        <h2 class="mb-3 ">
+                        <h2 class="mb-3">
                           Graduation Rate&nbsp;
                           <tooltip definition="graduation-rate" />
                         </h2>
@@ -297,14 +300,8 @@
                       v-if="(aidFlag > 3) && (aidFlag < 8)"
                       type="info"
                     >{{site.data.glossary.ogc.default}}</v-alert>
-                    <v-alert
-                      v-else-if="aidFlag==3"
-                      type="info"
-                    >{{site.data.glossary.ogc.flag3}}</v-alert>
-                    <v-alert
-                      v-else-if="aidFlag==8"
-                      type="info"
-                    >{{site.data.glossary.ogc.flag8}}</v-alert>
+                    <v-alert v-else-if="aidFlag==3" type="info">{{site.data.glossary.ogc.flag3}}</v-alert>
+                    <v-alert v-else-if="aidFlag==8" type="info">{{site.data.glossary.ogc.flag8}}</v-alert>
                     <div v-else>
                       <v-row>
                         <v-col cols="12" md="6">
@@ -366,17 +363,18 @@
                           <v-card color="grey lighten-4 pa-4">
                             <h2 class="mb-3">Get Help Paying for College</h2>
                             <p>
-                              Submit a Free Application for Federal Student Aid (FAFSA). You may be eligible to receive federal
+                              Submit a
+                              <em>Free Application for Federal Student Aid</em> (FAFSA&reg) form. You may be eligible to receive federal
                               grants or loans.
                             </p>
                             <p class="text-center">
-                            <v-btn
-                              rounded
-                              color="secondary"
-                              href="https://fafsa.ed.gov/spa/fafsa"
-                              target="_blank"
-                              @click="trackOutboundLink($event)"
-                            >Start My FAFSA</v-btn>
+                              <v-btn
+                                rounded
+                                color="secondary"
+                                href="https://fafsa.ed.gov/spa/fafsa"
+                                target="_blank"
+                                @click="trackOutboundLink($event)"
+                              >Start My FAFSA&reg; Form</v-btn>
                             </p>
                           </v-card>
                         </v-col>
@@ -433,8 +431,8 @@
                         @click="field_sort = 'lowest_debt'"
                       >Lowest Debt</v-btn>
                     </p>
-                    <p class="my-3">
-                      Out of {{allFieldsOfStudy.length | numeral }} fields of study at {{ schoolName }}, the top {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} offering undergraduate degrees or certificates with data available on {{ hoistGroup }} are shown below.
+                    <p class="my-3" v-if="fieldsOfStudy.length">
+                      Out of {{allFieldsOfStudy.length | numeral }} {{allFieldsOfStudy.length==1? 'field':'fields' }} of study at {{ schoolName }}, the top {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} offering undergraduate degrees or certificates with data available on {{ hoistGroup }} are shown below.
                       <a
                         :href="fieldsLink"
                       >See All Fields of Study &raquo;</a>
@@ -497,11 +495,11 @@
                         class="mt-3"
                       >There are no fields of study with data available for {{currentHoist}}.</v-alert>
                     </div>
-                    <p class='text-center'>
-                    <v-btn rounded color="secondary" :href="fieldsLink">
-                      <span class="d-none d-sm-flex">See All Available Fields of Study/Majors</span>
-                      <span class="d-block d-sm-none">See All</span>
-                    </v-btn>
+                    <p class="text-center">
+                      <v-btn rounded color="secondary" :href="fieldsLink">
+                        <span class="d-none d-sm-flex">See All Available Fields of Study/Majors</span>
+                        <span class="d-block d-sm-none">See All</span>
+                      </v-btn>
                     </p>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -529,7 +527,10 @@
                             class="display-2 navy-text font-weight-bold"
                           >{{ fullTimeEnrollment | numeral('0.%') }}</span>
                           <br />
-                          <strong>Full-time <tooltip definition="full-time" /></strong>
+                          <strong>
+                            Full-time
+                            <tooltip definition="full-time" />
+                          </strong>
                         </div>
                         <div>
                           <span class="display-2 navy-text font-weight-bold divide">/</span>
@@ -632,7 +633,10 @@
                         <p v-else class="data-na">Data Not Available</p>
                       </v-col>
                       <v-col cols="12" md="5">
-                        <h2 class="mb-3">Acceptance Rate <tooltip definition='acceptance-rate' /></h2>
+                        <h2 class="mb-3">
+                          Acceptance Rate
+                          <tooltip definition="acceptance-rate" />
+                        </h2>
                         <donut
                           color="#0e365b"
                           :value="acceptanceRate*100"
@@ -652,7 +656,7 @@
           <v-col lg="3" v-if="!error">
             <v-card outline class="pa-5 mb-3">
               <p class="title mb-2">Find Another School</p>
-              <name-autocomplete @school-name-selected="handleSchoolNameSelected"/>
+              <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
             </v-card>
             <v-card outline class="pa-5">
               <paying-for-college />
@@ -779,10 +783,7 @@ export default {
             return o[self.field_sort];
           }
         ]);
-        if (
-          ["ipeds_award_count", "highest_earnings"].indexOf(self.field_sort) >=
-          0
-        ) {
+        if (["ipeds_award_count", "highest_earnings"].indexOf(self.field_sort) >=0) {
           fos.reverse();
         }
         fos = fos.slice(0, 10);
@@ -878,8 +879,8 @@ export default {
     none() {
       this.panels = [];
     },
-    handleSchoolNameSelected(e){
-      window.location= '/search/?name='+ e['school.name'];
+    handleSchoolNameSelected(e) {
+      window.location = '/search/?name=' + e['school.name'];
     }
   },
   mounted() {
@@ -890,11 +891,6 @@ export default {
     }
     var match = location.search.match(/^\?(\d+)(\b|-)/);
     var id = match ? match[1] : null;
-
-    if (!id) {
-      //  loadable.classed('js-error', true);
-      //  return showError(picc.errors.NO_SCHOOL_ID);
-    }
 
     var params = {};
     params[this.fields.OPERATING] = 1;
@@ -924,17 +920,6 @@ export default {
         this.error = true;
         console.warn('No School found for ID: ' + id);
       });
-
-    // TODO - Remove if not needed.
-    // picc.API.getSchool(id, params, function onSchoolLoad(error, school) {
-    //   if (error) {
-    //     self.error = true;
-    //   } else {
-    //     self.school = school;
-    //     document.title = _.get(school, "school.name") + " | College Scorecard";
-    //     self.createMap(school);
-    //   }
-    // });
   }
 };
 </script>

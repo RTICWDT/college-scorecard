@@ -380,7 +380,7 @@
           placeholder='Select one...'
           class="py-0 my-0"
           color="secondary"
-
+          clearable
         ></v-select>
 
 
@@ -391,8 +391,8 @@
           item-value='value'
           placeholder='Select one...'
           class="py-0 my-0"
-           color="secondary"
-
+          color="secondary"
+          clearable
         ></v-select>
 
 

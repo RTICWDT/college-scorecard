@@ -11,56 +11,58 @@
       autocomplete="off"
       v-on:change="$emit('input', cip4.cip4.replace('\.',''))"
       hide-details
-      class='pt-0 mt-0'
-      color="secondary" 
+      class="pt-0 mt-0"
+      color="secondary"
+      clearable
+      v-on:click:clear="$emit('input', null)"
     />
   </div>
 </template>
 
 <script>
-import {find} from 'lodash';
+import { find } from 'lodash';
 import { EventBus } from '../../vue/EventBus.js';
-import {SiteData} from '../../vue/mixins/SiteData.js';
+import { SiteData } from '../../vue/mixins/SiteData.js';
 
 export default {
-  mixins:[SiteData],
+  mixins: [SiteData],
   props: ["value"],
-  data(){
-    return{
-        isLoading: false,
-        cip4:{}
+  data() {
+    return {
+      isLoading: false,
+      cip4: {}
     }
   },
-  watch:{
-    value(){
+  watch: {
+    value() {
       this.cip4 = this.mapValuePropToState(this.value);
     },
   },
   computed: {
     items() {
-      return _.sortBy(this.CIP4,['field']);
+      return _.sortBy(this.CIP4, ['field']);
     }
   },
-  created(){
+  created() {
     // Transform value prop to expected component state.
     this.cip4 = this.mapValuePropToState(this.value);
   },
-  mounted(){
+  mounted() {
     // Clear form event.
     EventBus.$on('search-form-reset', () => {
       // TODO - Remove if not needed.
       // this.cip4 = {};
     });
   },
-  methods:{
+  methods: {
     // Digest URL value and look up in program index.
-    mapValuePropToState(value){
-      if(value.length != 4){
+    mapValuePropToState(value) {
+      if (value.length != 4) {
         return null;
       }
 
-      let groomedKey = value.slice(0,2) + '.' + value.slice(2);
-      return find(this.items,{cip4: groomedKey});
+      let groomedKey = value.slice(0, 2) + '.' + value.slice(2);
+      return find(this.items, { cip4: groomedKey });
     }
   }
 };

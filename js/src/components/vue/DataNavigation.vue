@@ -1,18 +1,6 @@
 <template>
   <div>
-    <div class="conversation">
-      <v-container class="py-3">
-        <p class="text-md-right my-0">
-          <strong>Join the Conversation:</strong>
-          <a
-            href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
-            target="_blank"
-            @click="trackOutboundLink($event)"
-          >StackExchange
-          </a>
-        </p>
-      </v-container>
-    </div>
+
     <div class="data-navigation">
       <v-container class="py-0">
         <v-tabs hide-slider background-color="grey lighten-3" v-model="dataTabs">
@@ -29,9 +17,6 @@
 @import "sass/_variables";
 .data-navigation {
   background-color: $lighter-gray;
-}
-.conversation {
-  background-color: $mid-gray;
 }
 .v-tab--active{
   background-color: $darker-green !important;

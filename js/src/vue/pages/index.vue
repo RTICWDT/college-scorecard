@@ -13,21 +13,28 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="12" sm="10" offset-sm="1" md="8" offset-md="2" class='d-none d-sm-flex pb-10'>
+            <v-col
+              cols="12"
+              sm="10"
+              offset-sm="1"
+              md="8"
+              offset-md="2"
+              class="d-none d-sm-flex pb-10"
+            >
               <!-- Search Form Component -->
               <v-tabs
-              grow
-              background-color="rgba(0,0,0,0)"
-              color="white"
-              slider-size="8"
-              slider-color="#74B3E8"
-              class='ma-0'
-              show-arrows
-              v-model="desktopTabs"
+                grow
+                background-color="rgba(0,0,0,0)"
+                color="white"
+                slider-size="8"
+                slider-color="#74B3E8"
+                class="ma-0"
+                show-arrows
+                v-model="desktopTabs"
               >
                 <v-tab @click="GATrackEvent('Home Tab','Tab','Custom Search')">
-                  <span class='hidden-sm-and-down'>Custom Search</span>
-                  <span class='hidden-md-and-up'>Search</span>
+                  <span class="hidden-sm-and-down">Custom Search</span>
+                  <span class="hidden-md-and-up">Search</span>
                 </v-tab>
                 <v-tab @click="GATrackEvent('Home Tab','Tab','Name Search')">Name Search</v-tab>
                 <v-tab @click="GATrackEvent('Home Tab','Tab','Show Me Options')">Show Me Options</v-tab>
@@ -38,7 +45,7 @@
                 </v-tab-item>
                 <v-tab-item>
                   <v-card class="pa-5 mb-3">
-                    <name-autocomplete @school-name-selected="handleSchoolNameSelected"/>
+                    <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
                   </v-card>
                 </v-tab-item>
                 <v-tab-item>
@@ -52,38 +59,67 @@
               </v-tabs>
             </v-col>
             <v-col cols="12" class="pa-5 d-block d-sm-none">
-              <v-expansion-panels class='mb-2' v-model="mobilePanels">
+              <v-expansion-panels class="mb-2" v-model="mobilePanels">
                 <v-expansion-panel>
                   <v-expansion-panel-header>Name Search</v-expansion-panel-header>
-                  <v-expansion-panel-content><name-autocomplete @school-name-selected="handleSchoolNameSelected"/></v-expansion-panel-content>
+                  <v-expansion-panel-content>
+                    <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
+                  </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
-              <v-expansion-panels class='mb-2'>
+              <v-expansion-panels class="mb-2">
                 <v-expansion-panel>
                   <v-expansion-panel-header>Custom Search</v-expansion-panel-header>
-                  <v-expansion-panel-content class='pa-0 ma-0 mt-n5 mx-n5'><search-form @search-query="directToSearch" /></v-expansion-panel-content>
+                  <v-expansion-panel-content class="pa-0 ma-0 mt-n5 mx-n5">
+                    <search-form @search-query="directToSearch" />
+                  </v-expansion-panel-content>
                 </v-expansion-panel>
-              </v-expansion-panels >
-              <v-expansion-panels class='mb-2'>
+              </v-expansion-panels>
+              <v-expansion-panels class="mb-2">
                 <v-expansion-panel>
                   <v-expansion-panel-header>Show Me Options</v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <p class="my-2">Select one or more options to create a list of schools that fit your needs.</p>
-                    <canned-search-container @canned-search-submit="directToSearch" class='mx-5'></canned-search-container>
+                    <p
+                      class="my-2"
+                    >Select one or more options to create a list of schools that fit your needs.</p>
+                    <canned-search-container @canned-search-submit="directToSearch" class="mx-5"></canned-search-container>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
             </v-col>
           </v-row>
+          <v-row>
+            <v-col>
+              <p class="text-center">
+                <v-btn
+                  outlined
+                  color="white"
+                  href="/search/"
+                  @click="GATrackEvent('Home Tab','Tab','See All Link')"
+                  rounded
+                >
+                  See All Schools
+                  <v-icon small color="white" class="ml-2">fas fa-chevron-circle-right</v-icon>
+                </v-btn>
+              </p>
+            </v-col>
+          </v-row>
         </v-container>
       </div>
-      <div class='homeContent mt-5'>
-        <v-container class='pa-0 my-0'>
-          <v-row class='pa-0'>
-            <v-col cols="12" sm="5" offset-sm="1" class='homeCallout apprenticeships pa-0 my-0 mr-sm-3'>
+      <div class="homeContent mt-5">
+        <v-container class="pa-0 my-0">
+          <v-row class="pa-0">
+            <v-col
+              cols="12"
+              sm="5"
+              offset-sm="1"
+              class="homeCallout apprenticeships pa-0 my-0 mr-sm-3"
+            >
               <h2 class="title">Alternative Pathways to a Career</h2>
 
-              <p><strong>Apprenticeships</strong> are another great way to jumpstart your career.</p>
+              <p>
+                <strong>Apprenticeships</strong> are another great way to jumpstart your career.
+              </p>
               <p>
                 <v-btn
                   rounded
@@ -93,7 +129,10 @@
                   @click="trackOutboundLink($event)"
                 >Find one that's right for you!</v-btn>
               </p>
-              <p>Curious what careers are out there? <strong>O*NET’s career explorer</strong> is there to help!</p>
+              <p>
+                Curious what careers are out there?
+                <strong>O*NET’s career explorer</strong> is there to help!
+              </p>
               <p>
                 <v-btn
                   rounded
@@ -104,7 +143,7 @@
                 >Explore Careers</v-btn>
               </p>
             </v-col>
-            <v-col cols="12" sm="5" class='homeCallout paying pa-0 my-0 ml-sm-3'>
+            <v-col cols="12" sm="5" class="homeCallout paying pa-0 my-0 ml-sm-3">
               <paying-for-college />
             </v-col>
           </v-row>
@@ -120,42 +159,49 @@
   min-height: 500px;
   padding-top: 1.5rem;
 }
-.v-tab{
+.v-tab {
   font-family: $header-font-family;
   font-size: 1rem;
   font-weight: bold;
   color: #bbbbbb !important;
 }
-.v-tab.v-tab--active{
-  color: #FFFFFF !important;
+.v-tab.v-tab--active {
+  color: #ffffff !important;
 }
-.homeContent{
-  border-top: 20px solid #FFFFFF;
-  background-color: #B5D7F4;
+.homeContent {
+  border-top: 20px
+    solid
+    #ffffff;
+  background-color: #b5d7f4;
 }
-
 </style>
 <style lang="scss">
-.homeCallout{
-  background-color: #FFFFFF;
-  h2{
+.homeCallout {
+  background-color: #ffffff;
+  h2 {
     font-weight: bold !important;
-    color: #FFFFFF;
+    color: #ffffff;
     text-align: center;
     padding: 1rem;
     margin-bottom: 2rem !important;
   }
-  p{
-    text-align:center;
-    padding: 0rem 2rem 0.4rem;
+  p {
+    text-align: center;
+    padding: 0rem
+      2rem
+      0.4rem;
   }
-  &.apprenticeships h2{
+  &.apprenticeships
+    h2 {
     background-color: #436692;
-
   }
-  &.paying h2{
-    background-color: #80A771;
+  &.paying
+    h2 {
+    background-color: #80a771;
   }
+}
+.sublink {
+  text-decoration: none;
 }
 </style>
 <script>
@@ -197,8 +243,8 @@ export default {
       // Direct to location.
       window.location.href = url;
     },
-    handleSchoolNameSelected(e){
-      window.location= '/search/?name='+ e['school.name'];
+    handleSchoolNameSelected(e) {
+      window.location = '/search/?name=' + e['school.name'];
     }
   }
 };
