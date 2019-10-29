@@ -7,7 +7,7 @@
 
       <v-container>
         <v-row>
-          <v-col cols="12" md="8">
+          <v-col cols="12" lg="8">
             <h2 class="display-1 mb-2">Download the Data</h2>
             <p>
               Download the data that appear on the College Scorecard, as well as
@@ -20,8 +20,8 @@
               <strong>last updated November NN, 2019</strong>.
             </p>
             <v-row>
-              <v-col cols="12" class="d-flex align-stretch justify-space-between">
-                <v-card class='pa-2 ma-2 text-center'>
+              <v-col cols="12" sm="4">
+                <v-card class='pa-2 text-center fill-height'>
                   <p class='title'>Download All Data Files&nbsp;<tooltip definition="all-data" /></p>
                   <v-btn
                     rounded
@@ -33,8 +33,10 @@
                     <v-icon>mdi-search</v-icon>Download
                   </v-btn>
                   <p>NNN MB ZIP</p>
-                </v-card>                
-                <v-card class='pa-2 ma-2 text-center'>
+                </v-card>    
+              </v-col>
+              <v-col cols="12" sm="4">
+                <v-card class='pa-2 text-center fill-height'>
                   <p class='title'>Most Recent Institution-Level Data</p>
                   <v-btn
                     rounded
@@ -47,7 +49,9 @@
                   </v-btn>
                   <p>NNN MB CSV</p>
                 </v-card>
-                <v-card class='pa-2 ma-2 text-center'>
+              </v-col>
+              <v-col cols="12" sm="4">
+                <v-card class='pa-2 text-center fill-height'>
                   <p class='title'>Most Recent Data by Field of Study</p>
                   <v-btn
                     rounded
