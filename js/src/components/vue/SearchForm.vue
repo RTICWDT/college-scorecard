@@ -26,7 +26,7 @@
   <v-form>
     <div class="pa-4 grey lighten-3" v-if="displayAllFilters">
       <h4 class='subhead-2 font-weight-bold mb-2'>Search by Name</h4>
-      <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
+      <name-autocomplete @school-name-selected="handleSchoolNameSelected" :initial_school="input.name" />
     </div>
 
     <div class='py-2 px-5'>
@@ -725,10 +725,10 @@ export default {
       this.location.latLon = null;
       this.location.error = null;
     },
-    handleSchoolNameSelected(e){
-      if(e['school.name']){
-        this.input.name = e['school.name'];
-      }
+    handleSchoolNameSelected(school){
+      //if(school){
+        this.input.name = school;
+      //}
     }
 
   }

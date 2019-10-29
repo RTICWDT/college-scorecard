@@ -9,12 +9,12 @@
       placeholder="Start typing to search"
       return-object
       autocomplete="off"
-      v-on:change="$emit('input', cip4.cip4.replace('\.',''))"
+      v-on:change="change"
       hide-details
       class="pt-0 mt-0"
       color="secondary"
       clearable
-      v-on:click:clear="$emit('input', null)"
+      v-on:click:clear="clear"
     />
   </div>
 </template>
@@ -63,6 +63,16 @@ export default {
 
       let groomedKey = value.slice(0, 2) + '.' + value.slice(2);
       return find(this.items, { cip4: groomedKey });
+    },
+    change(){
+      if(!_.isEmpty(this.cip4))
+      {
+        this.$emit('input', this.cip4.cip4.replace('\.',''))
+      }
+    },
+    clear(){
+      this.cip4 = {};
+      this.$emit('input', '');
     }
   }
 };

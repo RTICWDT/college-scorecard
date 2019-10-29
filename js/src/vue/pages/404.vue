@@ -32,8 +32,8 @@ export default {
   },
   props:['baseUrl','pagePermalink'],
   methods:{
-    handleSchoolNameSelected(e){
-      window.location= '/search/?name='+ e['school.name'];
+    handleSchoolNameSelected(school){
+      window.location= '/search/?name='+ school;
     }
   }
 }
