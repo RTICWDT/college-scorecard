@@ -24,7 +24,7 @@
 <template>
 
   <v-form>
-    <div class="pa-4 grey lighten-3" v-if="displayAllFilters">
+    <div class="px-4 pt-2 pb-4 grey lighten-3" v-if="displayAllFilters">
       <h4 class='subhead-2 font-weight-bold mb-2'>Search by Name</h4>
       <name-autocomplete @school-name-selected="handleSchoolNameSelected" :initial_school="input.name" />
     </div>

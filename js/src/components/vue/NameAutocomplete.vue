@@ -3,7 +3,8 @@
         <v-combobox
             :items="items"
             :loading="isLoading"
-            :search-input.sync="search"
+            v-model="search"
+            search.sync="search"
             item-text="school.name"
             placeholder="Type to search"
             autocomplete="off"
@@ -16,6 +17,7 @@
             :return-object="false"            
             @input="goToSchool"
             :value="initial_school"
+            @update:search-input="runSearch"
          />
     </div>
 </template>
@@ -40,21 +42,14 @@ export default {
     search: null
   }),
   methods:{
-    goToSchool(){
+    goToSchool: function(){
       this.items = [];
       this.$emit('school-name-selected',this.search);
-    }
-  },
-  watch: {
-    search: _.debounce(function(newVal){
-      if(!this.search){
-        this.items = [];
-        this.isLoading = false;
-        return {};
-      }
+    },
+    runSearch: _.debounce(function(newVal){
       this.isLoading = true
       var query = { fields: ([fields.NAME]).join(','), per_page: 20 };
-      query[fields.NAME] = this.search;
+      query[fields.NAME] = newVal;
       query = this.prepareParams(query);
 
       let request = apiGet(window.api.url, window.api.key, "/schools", query).then((response) => {
