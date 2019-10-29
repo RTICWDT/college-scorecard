@@ -202,8 +202,7 @@
         </v-container>
       </v-content>
       
-      <!-- this looks odd on this page -->
-      <!--<scorecard-footer />-->
+      <scorecard-footer />
 
       <compare-header :showCompare.sync="showCompare" :schools="compareSchools" />
       <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
