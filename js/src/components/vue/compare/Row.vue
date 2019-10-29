@@ -39,15 +39,15 @@
         v-if="school && config.chart=='SchoolInfo'"
     >
         <v-row>
-            <v-col cols="6">
+            <v-col cols="12" sm="6">
                 <school-icons :school="school" :fields="fields" />
             </v-col>
-            <v-col class='text-center'>
+            <v-col cols="12" sm="3" class='text-center'>
                 <h2 class='navy-text'>{{ this.undergraduates | separator}}</h2> 
                 undergraduates
             </v-col>
-            <v-col>
-               <v-chip v-if="underInvestigation==1" color="error" label>
+            <v-col cols="12" sm="3" class='text-center'>
+               <v-chip small v-if="underInvestigation==1" color="error" label>
                   <strong>Under ED Monitoring</strong>
                   <tooltip definition="hcm2" color="#FFFFFF" class="ml-2" :isBranch="isBranch" />
                 </v-chip>
@@ -69,6 +69,7 @@
   background-color: #FAFAFA;
   margin: 0 !important;
   font-size: 0.9rem;
+  min-height: 30px;
 }
 .active{
     background-color: #faefd2 !important;
@@ -110,7 +111,8 @@ export default {
         return{
             active: "school-"+this.school.id == this.currentHighlight,
             'pb-1': true,
-            'px-5': true
+            'px-sm-5': true,
+            "px-1": true
         }
     },
     value() {

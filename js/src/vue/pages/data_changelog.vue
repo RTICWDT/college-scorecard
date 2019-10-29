@@ -5,7 +5,7 @@
       <data-navigation current="/data/changelog/" />
       <v-container>
         <v-row>
-          <v-col cols="12" md="8">
+          <v-col cols="12" lg="8">
             <h1 class="display-1 mb-2">Change Log</h1>
             <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
             <v-expansion-panels>

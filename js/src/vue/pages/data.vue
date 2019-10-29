@@ -7,13 +7,12 @@
 
       <v-container>
         <v-row>
-          <v-col cols="12" md="8">
+          <v-col cols="12" lg="8">
             <h2 class="display-1 mb-2">Download the Data</h2>
             <p>
               Download the data that appear on the College Scorecard, as well as
               supporting data on student completion, debt and repayment, earnings,
-              and more. The files include data from 1996 through 2018 for all
-              undergraduate degree-granting institutions of higher education.
+              and more. 
             </p>
 
             <p>
@@ -21,10 +20,9 @@
               <strong>last updated November NN, 2019</strong>.
             </p>
             <v-row>
-              <v-col cols="12" class="d-flex align-stretch justify-space-between">
-                <v-card class='pa-2 ma-2 text-center'>
-                  <p class='title'>Most Recent Institution-Level Data</p>
-              
+              <v-col cols="12" sm="4">
+                <v-card class='pa-2 text-center fill-height'>
+                  <p class='title'>Download All Data Files&nbsp;<tooltip definition="all-data" /></p>
                   <v-btn
                     rounded
                     color="secondary"
@@ -35,33 +33,38 @@
                     <v-icon>mdi-search</v-icon>Download
                   </v-btn>
                   <p>NNN MB ZIP</p>
+                </v-card>    
+              </v-col>
+              <v-col cols="12" sm="4">
+                <v-card class='pa-2 text-center fill-height'>
+                  <p class='title'>Most Recent Institution-Level Data</p>
+                  <v-btn
+                    rounded
+                    color="secondary"
+                    @click="trackDownload('Most-Recent-Cohorts-All-Data-Elements.csv')"
+                    :href="dataBase_url+'/Most-Recent-Cohorts-All-Data-Elements.csv'"
+                    class="btn my-2"
+                  >
+                    <v-icon>mdi-search</v-icon>Download
+                  </v-btn>
+                  <p>NNN MB CSV</p>
                 </v-card>
-                <v-card class='pa-2 ma-2 text-center'>
+              </v-col>
+              <v-col cols="12" sm="4">
+                <v-card class='pa-2 text-center fill-height'>
                   <p class='title'>Most Recent Data by Field of Study</p>
                   <v-btn
                     rounded
                     color="secondary"
-                    @click="trackDownload('CollegeScorecard_Raw_Data.zip')"
-                    :href="dataBase_url+'/CollegeScorecard_Raw_Data.zip'"
+                    @click="trackDownload('Most-Recent-Field-Of-Study.csv')"
+                    :href="dataBase_url+'/Most-Recent-Field-Of-Study.csv'"
                     class="btn my-2"
                   >
                     <v-icon>mdi-search</v-icon>Download
                   </v-btn>
-                  <p>NNN MB ZIP</p>
+                  <p>NNN MB CSV</p>
                 </v-card>
-                <v-card class='pa-2 ma-2 text-center'>
-                  <p class='title'>Download All Data Files</p>
-                  <v-btn
-                    rounded
-                    color="secondary"
-                    @click="trackDownload('CollegeScorecard_Raw_Data.zip')"
-                    :href="dataBase_url+'/CollegeScorecard_Raw_Data.zip'"
-                    class="btn my-2"
-                  >
-                    <v-icon>mdi-search</v-icon>Download
-                  </v-btn>
-                  <p>NNN MB ZIP</p>
-                </v-card>
+
               </v-col>
             </v-row>
             <p>Looking for help? Visit <a href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"  @click="trackOutboundLink($event)" target="_blank">
@@ -108,10 +111,12 @@
 <script>
 import DataNavigation from "components/vue/DataNavigation.vue";
 import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
+import Tooltip from "components/vue/Tooltip.vue";
 export default {
   mixins: [AnalyticsEvents],
   components: {
-    "data-navigation": DataNavigation
+    "data-navigation": DataNavigation,
+    "tooltip": Tooltip
   },
   props: ["baseUrl", "dataBase_url", "dataDictionary"]
 };

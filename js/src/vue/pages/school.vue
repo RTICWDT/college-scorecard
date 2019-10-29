@@ -40,11 +40,21 @@
                     <v-btn
                       text
                       small
+                      class="d-none d-sm-inline"
                       :color="isSelected?'amber':'white'"
                       @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
                       <v-icon x-small class="mr-2">fa fa-plus-circle</v-icon>Compare
                     </v-btn>
+                    <v-btn
+                      fab
+                      x-small
+                      :color="isSelected?'amber':'white'"
+                      class="d-inline d-sm-none mr-2"
+                      @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
+                    >
+                      <v-icon small class="">fa fa-plus-circle</v-icon>
+                    </v-btn>                    
                     <share small text color="white" label="Share this School" :url="shareLink" />
                   </v-col>
                 </v-row>
@@ -432,7 +442,7 @@
                       >Lowest Debt</v-btn>
                     </p>
                     <p class="my-3" v-if="fieldsOfStudy.length">
-                      Out of {{allFieldsOfStudy.length | numeral }} {{allFieldsOfStudy.length==1? 'field':'fields' }} of study at {{ schoolName }}, the top {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} offering undergraduate degrees or certificates with data available on {{ hoistGroup }} are shown below.
+                      Out of {{allFieldsOfStudy.length | numeral }} {{allFieldsOfStudy.length==1? 'field':'fields' }} of study at {{ schoolName }}, the {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} {{ hoistGroupText }} are shown below. ({{ hoistCount}} had relevant data on {{ hoistGroupData }}.)
                       <a
                         :href="fieldsLink"
                       >See All Fields of Study &raquo;</a>
@@ -749,7 +759,9 @@ export default {
       num_panels: 7,
       field_sort: "ipeds_award_count",
       hoistCurrency: false,
-      hoistGroup: 'numer of graduates',
+      hoistGroupData: 'numer of graduates',
+      hoistGroupText: 'largest',
+      hoistCount: 0,
       error: false,
       currentSankey: {
         enroll: "enroll_both",
@@ -786,6 +798,7 @@ export default {
         if (["ipeds_award_count", "highest_earnings"].indexOf(self.field_sort) >=0) {
           fos.reverse();
         }
+        this.hoistCount = fos.length;
         fos = fos.slice(0, 10);
       } else {
         fos = [fos];
@@ -797,17 +810,20 @@ export default {
       switch (sort) {
         case "ipeds_award_count":
           this.hoistCurrency = false;
-          this.hoistGroup = 'numer of graduates';
+          this.hoistGroupText = 'largest'
+          this.hoistGroupData = 'numer of graduates';
           return "Graduates";
           break;
         case "highest_earnings":
           this.hoistCurrency = true;
-          this.hoistGroup = 'earnings';
+          this.hoistGroupText = 'highest earning'
+          this.hoistGroupData = 'earnings';
           return "Median Earnings";
           break;
         case "lowest_debt":
           this.hoistCurrency = true;
-          this.hoistGroup = 'debt';
+          this.hoistGroupText = 'with the least amount of debt'
+          this.hoistGroupData = 'debt';
           return "Median Debt";
           break;
       }
@@ -879,8 +895,8 @@ export default {
     none() {
       this.panels = [];
     },
-    handleSchoolNameSelected(e) {
-      window.location = '/search/?name=' + e['school.name'];
+    handleSchoolNameSelected(school) {
+      window.location = '/search/?name=' + school;
     }
   },
   mounted() {

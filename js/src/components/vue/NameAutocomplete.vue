@@ -1,15 +1,12 @@
 <template>
     <div>
-        <v-autocomplete
-            v-model="school"
+        <v-combobox
             :items="items"
             :loading="isLoading"
-            :search-input.sync="search"
+            v-model="search"
+            search.sync="search"
             item-text="school.name"
-            item-value="id"
-            placeholder="Start typing to search"
-            return-object
-            @input="goToSchool"
+            placeholder="Type to search"
             autocomplete="off"
             hide-details
             class='pt-0 mt-0'
@@ -17,6 +14,10 @@
             outlined
             prepend-inner-icon="search"
             hide-no-data
+            :return-object="false"            
+            @input="goToSchool"
+            :value="initial_school"
+            @update:search-input="runSearch"
          />
     </div>
 </template>
@@ -29,43 +30,46 @@ import { EventBus } from '../../vue/EventBus.js';
 
 export default {
   mixins:[PrepareParams],
+  props:{
+    initial_school:{
+      type: String,
+      default: null
+    }
+  },
   data: () => ({
     items: [],
     isLoading: false,
-    school: null,
-    search: null,
+    search: null
   }),
   methods:{
-    goToSchool(){
-      // Navigate to school page.
-      let id = _.get(this.school, fields.ID);
-      let name = _.get(this.school, fields.NAME,'(unknown)');
-      // window.location= '/search/?school.name='+this.school;
-      this.$emit('school-name-selected',this.school);
-    }
-  },
-  watch: {
-    search: _.debounce(function(newVal){
-      this.isLoading = true
+    goToSchool: function(){
+      this.items = [];
+      this.$emit('school-name-selected',this.search);
+    },
+    runSearch: _.debounce(function(newVal){
+      if(newVal)
+      {
+        this.isLoading = true
+        var query = { fields: ([fields.NAME]).join(','), per_page: 20 };
+        query[fields.NAME] = newVal;
+        query = this.prepareParams(query);
 
-      var query = { fields: ([fields.NAME,fields.ID]).join(','), per_page: 20 };
-      query[fields.NAME] = this.search;
-      query = this.prepareParams(query);
-
-      let request = apiGet(window.api.url, window.api.key, "/schools", query).then((response) => {
-        if (!response.data.results.length) { return {}; }
-        this.items = response.data.results;
-        this.isLoading = false;
-      }).catch((error) => {
-        this.items = {};
-        this.isLoading = false;
-      });
+        let request = apiGet(window.api.url, window.api.key, "/schools", query).then((response) => {
+          if (!response.data.results.length) { return {}; }
+          this.items = response.data.results;
+          this.isLoading = false;
+        }).catch((error) => {
+          this.items = [];
+          this.isLoading = false;
+        });
+      }
 
     },200)
   },
   mounted(){
+    this.search = this.initial_school;
     EventBus.$on('search-form-reset', (e) => {
-      this.school = null;
+      this.search = null;
     });
   },  
 }
