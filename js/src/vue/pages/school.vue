@@ -40,11 +40,21 @@
                     <v-btn
                       text
                       small
+                      class="d-none d-sm-inline"
                       :color="isSelected?'amber':'white'"
                       @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
                       <v-icon x-small class="mr-2">fa fa-plus-circle</v-icon>Compare
                     </v-btn>
+                    <v-btn
+                      fab
+                      x-small
+                      :color="isSelected?'amber':'white'"
+                      class="d-inline d-sm-none mr-2"
+                      @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
+                    >
+                      <v-icon small class="">fa fa-plus-circle</v-icon>
+                    </v-btn>                    
                     <share small text color="white" label="Share this School" :url="shareLink" />
                   </v-col>
                 </v-row>
