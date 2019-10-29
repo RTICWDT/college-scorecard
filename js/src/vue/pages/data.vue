@@ -12,8 +12,7 @@
             <p>
               Download the data that appear on the College Scorecard, as well as
               supporting data on student completion, debt and repayment, earnings,
-              and more. The files include data from 1996 through 2018 for all
-              undergraduate degree-granting institutions of higher education.
+              and more. 
             </p>
 
             <p>
