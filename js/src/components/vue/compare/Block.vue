@@ -4,7 +4,7 @@
     <div 
       v-for="school in schools" 
       :key="school.id" 
-      class="compareBlocks"
+      class="ml-sm-5 ml-1 compareBlocks"
     >
       <compare-row
         :school="school"
@@ -19,7 +19,6 @@
 <style lang="scss" scoped>
 @import 'sass/_variables';
 .compareBlocks{
-    margin-left: 1rem;
     border-left: 1px solid $dark-gray;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-<div class="range-container">
+<div class="range-container" :style="extraPad">
   <div class="range-chart">
     <div
       v-if="!hideLower"
@@ -52,7 +52,7 @@
   overflow: visible;
   height: 70px;
   padding-top: 20px;
-  padding-right: 60px;
+  padding-right: 0px;
 }
 .range-chart {
   $label-height: 1.5em;
@@ -90,6 +90,7 @@
       position: absolute;
       top: $label-height;
       width: $label-width;
+      cursor: pointer;
     }
 
     &.picc-range-label-min,
@@ -192,7 +193,10 @@ export default {
   },
   data() {
     return {
-      bar_styles: { left: 0, right: 0 }
+      bar_styles: { left: 0, right: 0 },
+      extraPad: {
+        'padding-right': 0
+      }
     };
   },
   computed: {
@@ -217,9 +221,15 @@ export default {
       var min = this._min.value;
       var max = this._max.value;
       this.bar_styles.left = this.percent(this._lower.value)+"%";
-      this.bar_styles.right = this.percent(
+      let right = this.percent(
         this._min.value + this._max.value - this._upper.value
-      )+"%";
+      );
+      this.bar_styles.right = right+"%";
+      if(right < 20)
+      {
+        this.extraPad['padding-right'] = '60px';
+      }
+
     },
     scale(v) {
       return (v - this.min.value) / (this.max.value - this.min.value);
@@ -239,7 +249,6 @@ export default {
         newObj.value = this._max.value;
       }
       newObj.styles.left = left+"%";
-      
       return newObj;
     }
   },

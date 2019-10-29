@@ -66,6 +66,16 @@ export default {
         plugins: {
           datalabels: {
             display: this.labels,
+            font: function(context){
+              if(context.chart.height<20)
+              {
+                return { size: 10 }
+              }
+              else
+              {
+                return { size: 15 }
+              }
+            },
             color: function(context){
               let value = context.dataset.data[context.dataIndex];
               let max =context.chart.options.scales.xAxes[0].ticks.max;

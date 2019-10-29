@@ -8,9 +8,7 @@
 .searchFab{
   z-index: 500 !important;
 }
-.v-pagination{
-  justify-content: flex-end !important;
-}
+
 </style>
 
 <template>
@@ -34,7 +32,7 @@
       </v-navigation-drawer>
       <v-content>
         <v-container fluid class="pa-0">
-          <div id="search-result-container">
+          <div id="search-result-container" class='pa-sm-8 pa-2'>
             <div class="search-result-container">
               <v-card  class="mt-2 mb-4 py-1 px-4 elevaton-0 pageBar" v-if="!isLoading">
                 <v-row class="pa-0">
@@ -204,8 +202,7 @@
         </v-container>
       </v-content>
       
-      <!-- this looks odd on this page -->
-      <!--<scorecard-footer />-->
+      <scorecard-footer />
 
       <compare-header :showCompare.sync="showCompare" :schools="compareSchools" />
       <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>

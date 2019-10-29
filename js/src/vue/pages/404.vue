@@ -5,13 +5,10 @@
       <v-container>
         <v-row>
           <v-col cols="12" md="6" offset-md="3">
-            <v-card class='pa-5 text-center'>
-            <h1>We flunked!</h1>
+            <v-card class='pa-5 text-center mt-10'>
+            <h1 class='pb-3'>Page Not Found</h1>
             <p>We couldn't find the page you were looking for. Try searching again?</p>
             <name-autocomplete @school-name-selected="handleSchoolNameSelected"/>
-            <div class="content-column">
-              <v-img class='ma-4' src="/img/f-grade-paper.jpg" alt="Grade of F" />
-            </div>
             </v-card>
           </v-col>
         </v-row>
@@ -35,8 +32,8 @@ export default {
   },
   props:['baseUrl','pagePermalink'],
   methods:{
-    handleSchoolNameSelected(e){
-      window.location= '/search/?name='+ e['school.name'];
+    handleSchoolNameSelected(school){
+      window.location= '/search/?name='+ school;
     }
   }
 }
