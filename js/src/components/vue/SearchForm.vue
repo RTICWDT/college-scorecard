@@ -276,8 +276,8 @@
       
           <p class='subhead-2 mb-3'>Size</p>
           <div>
-            <!-- TODO - Do we want these to appear as buttons? -->
             <v-checkbox
+              id="search-form-size-small"
               hide-details
               v-model="input.size"
               label="Small"
@@ -287,6 +287,7 @@
             ></v-checkbox>
 
             <v-checkbox
+              id="search-form-size-medium"
               hide-details
               v-model="input.size"
               label="Medium"
@@ -296,6 +297,7 @@
             ></v-checkbox>
 
             <v-checkbox
+              id="search-form-size-large"
               hide-details
               v-model="input.size"
               label="Large"
@@ -309,6 +311,7 @@
           <p class='subhead-2'>Type of School</p>
           <div class="search-form-type-container">
             <v-checkbox
+              id="search-form-type-public"
               hide-details
               v-model="input.control"
               label="Public"
@@ -318,6 +321,7 @@
             ></v-checkbox>
 
             <v-checkbox
+              id="search-form-type-private"
               hide-details
               v-model="input.control"
               label="Private Nonprofit"
@@ -327,6 +331,7 @@
             ></v-checkbox>
 
             <v-checkbox
+              id="search-form-type-profit"
               hide-details
               v-model="input.control"
               label="Private For-Profit"
@@ -338,6 +343,7 @@
 
           <p class='subhead-2'>Urbanicity</p>
             <v-checkbox
+              id="search-form-locale-city"
               hide-details            
               v-model="input.locale"
               label="City"
@@ -347,6 +353,7 @@
             ></v-checkbox>
 
             <v-checkbox
+              id="search-form-locale-suburban"
               hide-details
               v-model="input.locale"
               label="Suburban"
@@ -354,7 +361,9 @@
               color="secondary"
               class="py-0 my-0"
             ></v-checkbox>
+
             <v-checkbox
+              id="search-form-locale-town"
               hide-details
               v-model="input.locale"
               label="Town"
@@ -364,6 +373,7 @@
             ></v-checkbox>
 
             <v-checkbox
+              id="search-form-locale-rural"
               hide-details
               v-model="input.locale"
               label="Rural"
@@ -374,6 +384,7 @@
  
         <p class='subhead-2'>Specialized Mission</p>
         <v-select v-model='input.serving'
+          id="search-form-serving"
           :items='cleanSpecializedMission'
           item-text="value"
           item-value="key"
@@ -386,6 +397,7 @@
 
         <p class='subhead-2'>Religious Affiliation</p>
         <v-select v-model='input.religious'
+          id="search-form-religous"
           :items='site.data.religious_affiliations'
           item-text='label'
           item-value='value'
