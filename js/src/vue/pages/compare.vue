@@ -46,7 +46,7 @@
                         type: 'currency',
                         chart: 'HorizontalBar'
                       }"
-                    ><p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p></compare-section>
+                    ><p class='my-n3'>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p></compare-section>
 
                     <compare-section
                       :schools="schools"
@@ -90,7 +90,7 @@
                   <v-expansion-panel-header
                     @click="trackAccordion('College Information')"
                   >College Information</v-expansion-panel-header>
-                  <v-expansion-panel-content class="mt-5">
+                  <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
                     <compare-section
                       :schools="schools"
                       title="Full Time Enrollment"
@@ -172,7 +172,7 @@
                 </v-expansion-panel>
                 <v-expansion-panel>
                   <v-expansion-panel-header @click="trackAccordion('Costs')">Costs</v-expansion-panel-header>
-                  <v-expansion-panel-content class="mt-5">
+                  <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
                     <compare-section
                       :schools="schools"
                       title="Average Annual Cost"
@@ -226,7 +226,7 @@
                   <v-expansion-panel-header
                     @click="trackAccordion('Graduation &amp; Retention')"
                   >Graduation & Retention</v-expansion-panel-header>
-                  <v-expansion-panel-content class="mt-5">
+                  <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
                     <compare-section
                       :schools="schools"
                       title="Graduation Rate"
@@ -275,7 +275,7 @@
                   <v-expansion-panel-header
                     @click="trackAccordion('Financial Aid &amp; Debt')"
                   >Financial Aid & Debt</v-expansion-panel-header>
-                  <v-expansion-panel-content class="mt-5">
+                  <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
                     <compare-section
                       :schools="schools"
                       title="Students Receiving Federal Loans"
@@ -324,7 +324,7 @@
                   <v-expansion-panel-header
                     @click="trackAccordion('Salary after Completing by Field of Study')"
                   >Salary after Completing by Field of Study</v-expansion-panel-header>
-                  <v-expansion-panel-content class="mt-5">
+                  <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
                     <compare-section
                       :schools="schools"
                       title="Salary Ranges by Field of Study"
@@ -344,7 +344,7 @@
                   <v-expansion-panel-header
                     @click="trackAccordion('Test Scores & Acceptance')"
                   >Test Scores & Acceptance</v-expansion-panel-header>
-                  <v-expansion-panel-content class="mt-5">
+                  <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
                     <h2 class="pt-5 pb-3">
                       Test Scores
                       <tooltip definition="test-scores" :isCompare="true" />
