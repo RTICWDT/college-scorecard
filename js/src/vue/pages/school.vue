@@ -337,7 +337,7 @@
                           <multi-range
                             :minmax="debtRange"
                             variable="debt.median_debt"
-                            :max=" { label: '$8,000', value: 8000 }"
+                            :max=" { label: '$100,000', value: 100000 }"
                           />
 
                           <h2 class="mb-3">
