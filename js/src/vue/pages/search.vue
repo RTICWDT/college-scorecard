@@ -105,7 +105,7 @@
                       <v-pagination
                         v-model="input.page"
                         :length="totalPages"
-                        :total-visible="5"
+                        :total-visible="7"
                         @input="searchAPI(parseURLParams())"
                         class='pr-0 mr-0'
                         circle
@@ -174,7 +174,7 @@
                       <v-pagination
                         v-model="input.page"
                         :length="totalPages"
-                        :total-visible="5"
+                        :total-visible="7"
                         @input="searchAPI(parseURLParams())"
                         circle
                       ></v-pagination>

@@ -315,7 +315,7 @@
                         color: '#0e365b', 
                         chart: 'MultiRange',
                         multiRangeVariable: 'debt.monthly_debt_payment',
-                        max: { value: 2000, label: '$2,000' }
+                        max: { value: 1000, label: '$1,000' }
                       }"
                     />
                   </v-expansion-panel-content>
