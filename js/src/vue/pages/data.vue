@@ -22,33 +22,6 @@
             <v-row>
               <v-col cols="12" class="d-flex align-stretch justify-space-between">
                 <v-card class='pa-2 ma-2 text-center'>
-                  <p class='title'>Most Recent Institution-Level Data</p>
-              
-                  <v-btn
-                    rounded
-                    color="secondary"
-                    @click="trackDownload('CollegeScorecard_Raw_Data.zip')"
-                    :href="dataBase_url+'/CollegeScorecard_Raw_Data.zip'"
-                    class="btn my-2"
-                  >
-                    <v-icon>mdi-search</v-icon>Download
-                  </v-btn>
-                  <p>NNN MB ZIP</p>
-                </v-card>
-                <v-card class='pa-2 ma-2 text-center'>
-                  <p class='title'>Most Recent Data by Field of Study</p>
-                  <v-btn
-                    rounded
-                    color="secondary"
-                    @click="trackDownload('CollegeScorecard_Raw_Data.zip')"
-                    :href="dataBase_url+'/CollegeScorecard_Raw_Data.zip'"
-                    class="btn my-2"
-                  >
-                    <v-icon>mdi-search</v-icon>Download
-                  </v-btn>
-                  <p>NNN MB ZIP</p>
-                </v-card>
-                <v-card class='pa-2 ma-2 text-center'>
                   <p class='title'>Download All Data Files</p>
                   <v-btn
                     rounded
@@ -60,7 +33,34 @@
                     <v-icon>mdi-search</v-icon>Download
                   </v-btn>
                   <p>NNN MB ZIP</p>
+                </v-card>                
+                <v-card class='pa-2 ma-2 text-center'>
+                  <p class='title'>Most Recent Institution-Level Data</p>
+                  <v-btn
+                    rounded
+                    color="secondary"
+                    @click="trackDownload('Most-Recent-Cohorts-All-Data-Elements.csv')"
+                    :href="dataBase_url+'/Most-Recent-Cohorts-All-Data-Elements.csv'"
+                    class="btn my-2"
+                  >
+                    <v-icon>mdi-search</v-icon>Download
+                  </v-btn>
+                  <p>NNN MB CSV</p>
                 </v-card>
+                <v-card class='pa-2 ma-2 text-center'>
+                  <p class='title'>Most Recent Data by Field of Study</p>
+                  <v-btn
+                    rounded
+                    color="secondary"
+                    @click="trackDownload('Most-Recent-Field-Of-Study.csv')"
+                    :href="dataBase_url+'/Most-Recent-Field-Of-Study.csv'"
+                    class="btn my-2"
+                  >
+                    <v-icon>mdi-search</v-icon>Download
+                  </v-btn>
+                  <p>NNN MB CSV</p>
+                </v-card>
+
               </v-col>
             </v-row>
             <p>Looking for help? Visit <a href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"  @click="trackOutboundLink($event)" target="_blank">

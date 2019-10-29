@@ -12,6 +12,13 @@
             <p>College Scorecard provides data at the institution-level and data by field of study. The technical data documents provide in-depth information about these data. The data dictionary includes separate worksheets with institution-level and field of study dictionaries as well as cohort maps describing the timing aspects of each data element.</p>
 
             <div class='d-flex'>
+              <v-card class='pa-5 ml-2 text-center'>
+                <a
+                  @click="trackDownload(dataDictionary)"
+                  :href="baseUrl+'/assets/'+dataDictionary"
+                  target="_blank"
+                >Data Dictionary</a>
+              </v-card>              
               <v-card class='pa-5 mr-2 text-center'>
                 <a
                   @click="trackDownload('FullDataDocumentation.pdf')"
@@ -21,17 +28,10 @@
               </v-card>
               <v-card class='pa-5 text-center'>
                 <a
-                  @click="trackDownload('FullDataDocumentation.pdf')"
-                  :href="baseUrl+'/assets/FullDataDocumentation.pdf'"
+                  @click="trackDownload('FieldOfStudyDataDocumentation.pdf')"
+                  :href="baseUrl+'/assets/FieldOfStudyDataDocumentation.pdf'"
                   target="_blank"
                 >Technical Documentation for Data Files by Field of Study</a>
-              </v-card>
-              <v-card class='pa-5 ml-2 text-center'>
-                <a
-                  @click="trackDownload(dataDictionary)"
-                  :href="baseUrl+'/assets/'+dataDictionary"
-                  target="_blank"
-                >Data Dictionary</a>
               </v-card>
             </div>
              <p class='mt-5'>Looking for help? Visit <a href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"  @click="trackOutboundLink($event)" target="_blank">
