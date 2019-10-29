@@ -8,9 +8,7 @@
 .searchFab{
   z-index: 500 !important;
 }
-.v-pagination{
-  justify-content: flex-end !important;
-}
+
 </style>
 
 <template>
@@ -34,7 +32,7 @@
       </v-navigation-drawer>
       <v-content>
         <v-container fluid class="pa-0">
-          <div id="search-result-container">
+          <div id="search-result-container" class='pa-sm-8 pa-2'>
             <div class="search-result-container">
               <v-card  class="mt-2 mb-4 py-1 px-4 elevaton-0 pageBar" v-if="!isLoading">
                 <v-row class="pa-0">
@@ -107,7 +105,7 @@
                       <v-pagination
                         v-model="input.page"
                         :length="totalPages"
-                        :total-visible="7"
+                        :total-visible="5"
                         @input="searchAPI(parseURLParams())"
                         class='pr-0 mr-0'
                         circle
@@ -176,7 +174,7 @@
                       <v-pagination
                         v-model="input.page"
                         :length="totalPages"
-                        :total-visible="7"
+                        :total-visible="5"
                         @input="searchAPI(parseURLParams())"
                         circle
                       ></v-pagination>

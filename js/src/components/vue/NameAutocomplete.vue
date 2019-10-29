@@ -47,19 +47,22 @@ export default {
       this.$emit('school-name-selected',this.search);
     },
     runSearch: _.debounce(function(newVal){
-      this.isLoading = true
-      var query = { fields: ([fields.NAME]).join(','), per_page: 20 };
-      query[fields.NAME] = newVal;
-      query = this.prepareParams(query);
+      if(newVal)
+      {
+        this.isLoading = true
+        var query = { fields: ([fields.NAME]).join(','), per_page: 20 };
+        query[fields.NAME] = newVal;
+        query = this.prepareParams(query);
 
-      let request = apiGet(window.api.url, window.api.key, "/schools", query).then((response) => {
-        if (!response.data.results.length) { return {}; }
-        this.items = response.data.results;
-        this.isLoading = false;
-      }).catch((error) => {
-        this.items = [];
-        this.isLoading = false;
-      });
+        let request = apiGet(window.api.url, window.api.key, "/schools", query).then((response) => {
+          if (!response.data.results.length) { return {}; }
+          this.items = response.data.results;
+          this.isLoading = false;
+        }).catch((error) => {
+          this.items = [];
+          this.isLoading = false;
+        });
+      }
 
     },200)
   },

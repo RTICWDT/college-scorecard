@@ -22,7 +22,7 @@
             <v-row>
               <v-col cols="12" class="d-flex align-stretch justify-space-between">
                 <v-card class='pa-2 ma-2 text-center'>
-                  <p class='title'>Download All Data Files</p>
+                  <p class='title'>Download All Data Files&nbsp;<tooltip definition="all-data" /></p>
                   <v-btn
                     rounded
                     color="secondary"
@@ -107,10 +107,12 @@
 <script>
 import DataNavigation from "components/vue/DataNavigation.vue";
 import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
+import Tooltip from "components/vue/Tooltip.vue";
 export default {
   mixins: [AnalyticsEvents],
   components: {
-    "data-navigation": DataNavigation
+    "data-navigation": DataNavigation,
+    "tooltip": Tooltip
   },
   props: ["baseUrl", "dataBase_url", "dataDictionary"]
 };
