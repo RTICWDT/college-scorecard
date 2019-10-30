@@ -403,7 +403,7 @@
                     aria-controls="earnings-content"
                     class="px-0 py-3 pa-sm-5"
                   >
-                    <p>Typical earnings in the first year after graduation with the range of highest and lowest median earnings for undergraduate and credential programs for which there is data. For more information, see Fields of Study/Majors for this school.</p>
+                    <p>Typical earnings in the first year after graduation with the range of highest and lowest median earnings for undergraduate and credential programs for which there is data. For more information, see Fields of Study for this school.</p>
                     <multi-range
                       :minmax="earningsRange"
                       variable="earnings.median_earnings"
@@ -416,10 +416,10 @@
                     id="academics"
                     aria-controls="academics-content"
                     @click="trackAccordion('Fields of Study')"
-                  >Fields of Study / Majors</v-expansion-panel-header>
+                  >Fields of Study</v-expansion-panel-header>
                   <v-expansion-panel-content id="academics-content" class="px-0 py-3 pa-sm-5">
                     <!-- <div if=''> -->
-                    <h2 class="mb-3">Top Fields of Study</h2>
+                    <h2 class="mb-3">Top Fields of Study <tooltip definition="field-of-study" /></h2>
                     <p class="my-0">
                       <span class="d-block d-sm-inline">Sort by:</span>
                       <v-btn
@@ -507,7 +507,7 @@
                     </div>
                     <p class="text-center">
                       <v-btn rounded color="secondary" :href="fieldsLink">
-                        <span class="d-none d-sm-flex">See All Available Fields of Study/Majors</span>
+                        <span class="d-none d-sm-flex">See All Available Fields of Study</span>
                         <span class="d-block d-sm-none">See All</span>
                       </v-btn>
                     </p>
@@ -811,7 +811,7 @@ export default {
         case "ipeds_award_count":
           this.hoistCurrency = false;
           this.hoistGroupText = 'largest'
-          this.hoistGroupData = 'numer of graduates';
+          this.hoistGroupData = 'number of graduates';
           return "Graduates";
           break;
         case "highest_earnings":

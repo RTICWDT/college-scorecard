@@ -115,7 +115,7 @@
       v-if="utility.location=='State'"
       ></v-select>
 
-    <p class='subhead-2'>Field of Study Offered</p>
+    <p class='subhead-2'>Field of Study Offered <tooltip definition="field-of-study" /></p>
     <div id="search-form-sub-degree-container" class="mt-4 pl-4 ml-2">
 
     <p class='subhead-2'>Academic Fields</p>
@@ -411,6 +411,7 @@ import FieldAutocomplete from './FieldAutocomplete.vue';
 import { SiteData } from '../../vue/mixins/SiteData.js';
 import LocationCheck from '../../vue/mixins/LocationCheck.js';
 import { EventBus } from '../../vue/EventBus.js';
+import Tooltip from "./Tooltip.vue";
 
 export default {
   mixins:[SiteData,LocationCheck],
@@ -430,7 +431,8 @@ export default {
   components:{
     'check-range': CheckRange,
     'name-autocomplete': NameAutocomplete,
-    'field-autocomplete': FieldAutocomplete
+    'field-autocomplete': FieldAutocomplete,
+    'tooltip': Tooltip
   },
   data(){
     return{

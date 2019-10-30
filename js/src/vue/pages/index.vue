@@ -102,7 +102,7 @@
               <h2 class="title">Alternative Pathways to a Career</h2>
 
               <p>
-                <strong>Apprenticeships</strong> are another great way to jumpstart your career.
+                <strong>Apprenticeships</strong> are another great way to jump-start your career.
               </p>
               <p>
                 <v-btn

@@ -10,6 +10,25 @@
             <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
             <v-expansion-panels>
               <v-expansion-panel>
+                <v-expansion-panel-header>November NN, 2019</v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <p>On November NN, 2019, the Department released a new version of the College Scorecard. This update includes:</p>
+                  <ul>
+                    <li>The incorporation of Field of Study graduate count, debt, and earnings data into the consumer website, downloadable data files, and API.</li>
+                    <li>The graduation rate is now presented differently on the consumer website for degree granting and non-degree granting schools. The graduation rate for degree granting schools is the proportion of entering students that graduated at this school within 8 years of entry, regardless of their full-time/part-time status or prior postsecondary experience. The graduation rate for non-degree granting schools is the proportion of full-time, first-time students that have graduated at the same school where they started college within 200% of normal program completion time (e.g., within 18 months for a 9-month certificate)</li>
+                    <li>
+                      The user interface has been refreshed with an updated look and feel. This includes additional search options and methods, new visualizations for data, simplified navigation and updated comparison tool. Data updates include more recent data values for institution-level completion rate and debt metrics derived from the National Student Loan Data System and more recent data values for the:
+                      <ul>
+                        <li>Currently Operating Status Flag</li>
+                        <li>Accrediting Agency Name</li>
+                        <li>Accrediting Agency Code</li>
+                        <li>Title IV Approval Date</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+              <v-expansion-panel>
                 <v-expansion-panel-header>September 30, 2019</v-expansion-panel-header>
                 <v-expansion-panel-content>
                   <p>On September 30, 2019, the Department updated metrics related to IPEDS by switching from IPEDS Preliminary release data for the 2017-18 year to Provisional release data. This change impacted many IPEDS-based metrics and removed 3 closed institutions from the data files.</p>

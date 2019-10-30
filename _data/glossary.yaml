@@ -112,3 +112,8 @@ acceptance-rate:
   default: The share of first-time students who applied to this school that were accepted.
   glossary: The proportion of first-time students submitting an application to this school that were accepted for admission. An application is considered submitted only after all required portions of the application are complete. Applicants that do not submit a complete application are not included in the calculation of this rate. Institutions that have an open admissions policy do not report on their acceptance rate, but are considered to have a 100% acceptance rate for the purposes of searching on the Scorecard website.
   branch: false
+field-of-study:
+  title: Field of Study
+  default: Content TBD
+  glossary: Content TBD
+  branch: false
