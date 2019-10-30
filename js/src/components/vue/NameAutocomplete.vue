@@ -1,25 +1,26 @@
 <template>
-    <div>
-        <v-combobox
-            :items="items"
-            :loading="isLoading"
-            v-model="search"
-            search.sync="search"
-            item-text="school.name"
-            placeholder="Type to search"
-            autocomplete="off"
-            hide-details
-            class='pt-0 mt-0'
-            color="secondary"
-            outlined
-            prepend-inner-icon="search"
-            hide-no-data
-            :return-object="false"            
-            @input="goToSchool"
-            :value="initial_school"
-            @update:search-input="runSearch"
-         />
-    </div>
+  <div>
+    <v-combobox
+      id="search-name-auto-complete"
+      :items="items"
+      :loading="isLoading"
+      v-model="search"
+      search.sync="search"
+      item-text="school.name"
+      placeholder="Type to search"
+      autocomplete="off"
+      hide-details
+      class='pt-0 mt-0'
+      color="secondary"
+      outlined
+      prepend-inner-icon="search"
+      hide-no-data
+      :return-object="false"            
+      @input="goToSchool"
+      :value="initial_school"
+      @update:search-input="runSearch"
+      />
+  </div>
 </template>
 
 <script>

@@ -12,7 +12,7 @@ Feature('Page test: Search.  In depth test of search functionality.');
 
 Scenario('Visit root page and see all major page components', (I) => {
   I.amOnPage(BASE_SEARCH);
-  
+
   // Check for major page components.
   I.see("Results",'p');
   I.seeElement("#search-result-info-count");
@@ -49,7 +49,7 @@ Scenario('Vist root search and clear, sort, share and pagination', async (I) =>{
   });
 
   // Test Assertion of first resu
-  assert.equal(firstLetterOfFirstResult,'A');
+assert.equal(firstLetterOfFirstResult,'A');
 });
 
 Scenario('Click items in search and get updated results.', async(I) => {

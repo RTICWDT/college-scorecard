@@ -34,6 +34,7 @@
       Location
     </p>    
     <v-select
+      id="search-from-location-select"
       v-model="utility.location"
       @change="handleLocationChange"
       placeholder="Select an option"
@@ -43,7 +44,8 @@
     />
 
     <div class='d-flex align-center' v-if="utility.location=='ZIP Code'">
-      <v-text-field 
+      <v-text-field
+        id="search-form-zip-text" 
         v-model="input.zip"
         label="ZIP Code"
         hideDetails
@@ -125,6 +127,7 @@
     <div>
     <p class='subhead-2'>Degrees/Certificate</p> 
       <v-checkbox
+        id="search-form-fos-degree-c"
         class="search-form-degree-cb my-0 py-0"
         v-model="input.cip4_degree"
         label="Certificate"
@@ -134,6 +137,7 @@
       ></v-checkbox>
 
       <v-checkbox
+        id="search-form-fos-degree-a"
         class="search-form-degree-cb my-0 py-0"
         v-model="input.cip4_degree"
         label="Associate's Degree"
@@ -143,6 +147,7 @@
       ></v-checkbox>
 
       <v-checkbox
+        id="search-form-fos-degree-b"
         class="search-form-degree-cb my-0 py-0"
         v-model="input.cip4_degree"
         label="Bachelor's Degree"

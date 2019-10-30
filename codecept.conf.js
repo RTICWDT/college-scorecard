@@ -8,6 +8,9 @@ exports.config = {
       waitForNavigation: [ "domcontentloaded", "networkidle0" ],
       waitForAction: 500,
       chrome:{
+        args:[
+          // '--disable-permissions-api'
+        ]
         // defaultViewport:{
         //   width: 1024,
         //   height: 768
