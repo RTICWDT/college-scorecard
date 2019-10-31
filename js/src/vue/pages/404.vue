@@ -33,7 +33,14 @@ export default {
   props:['baseUrl','pagePermalink'],
   methods:{
     handleSchoolNameSelected(school){
-      window.location= '/search/?name='+ school;
+      if(typeof school == "string")
+      {
+        window.location = '/search/?name=' + encodeURIComponent(school);
+      }
+      else
+      {
+        window.location = '/search/?name=' + encodeURIComponent(school['school.name']) + "&id="+school.id;
+      }
     }
   }
 }

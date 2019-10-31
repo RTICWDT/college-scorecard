@@ -440,6 +440,7 @@ export default {
   data(){
     return{
       input:{
+        id: null,
         state:[],
         // degree:[],
         major:"",
@@ -731,9 +732,16 @@ export default {
       this.location.error = null;
     },
     handleSchoolNameSelected(school){
-      //if(school){
+      if(typeof school == "string")
+      {
         this.input.name = school;
-      //}
+        this.input.id = null;
+      }
+      else
+      {
+        this.input.name = school['school.name'];
+        this.input.id = school.id;
+      }
     }
 
   }
