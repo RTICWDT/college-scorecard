@@ -13,7 +13,7 @@
 
 <template>
   <div>
-    <p class='subhead-2'>
+    <p class='subhead-2' :id="generatedId">
       <slot name='label'>
         {{legendTitle}}
       </slot>
@@ -31,6 +31,7 @@
         :color="trackColor"
         :track-color="trackBackground"
         thumb-color="secondary"
+        :aria-labelledby="generatedId"
       >
         <template v-slot:append>
           <v-text-field v-model="sliderValue"
@@ -43,6 +44,7 @@
             :prefix="prefix"
             :suffix="appendText"
             style="width: 100px;"
+            :aria-labelledby="generatedId"
           ></v-text-field>
         </template>
         <template v-slot:prepend>
@@ -51,6 +53,7 @@
             color="secondary"
             class="pa-0 ma-0"
             hide-details
+            :aria-labelledby="generatedId"
           ></v-checkbox>
         </template>
 
@@ -97,6 +100,9 @@ export default {
       text += this.andUp? "≥ ":"≤ ";
       text += (this.appendText == 'k')? '$':''
       return text; 
+    },
+    generatedId(){
+      return "component-"+this._uid+"-label"
     }
   },
   watch:{

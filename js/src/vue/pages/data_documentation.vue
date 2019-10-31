@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="data-documentation">
     <scorecard-header />
 
     <v-content class="white">
@@ -57,7 +57,7 @@
                 href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
                 @click="trackOutboundLink($event)"
                 target="_blank"
-              >StackExchange</a> or email the helpdesk at
+              >StackExchange</a> or email the help desk at
               <a href="mailto:scorecarddata@rti.org">scorecarddata@rti.org</a>.
             </p>
             <h2 class="display-1 mb-2 mt-5">API Documentation</h2>

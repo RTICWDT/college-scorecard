@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id='data'>
     <scorecard-header />
 
     <v-content class="white">
@@ -51,7 +51,7 @@
             </v-row>
             <p class='mt-8'>Looking for help? Visit <a href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"  @click="trackOutboundLink($event)" target="_blank">
               StackExchange
-            </a> or email the helpdesk at <a href='mailto:scorecarddata@rti.org'>scorecarddata@rti.org</a>.</p>
+            </a> or email the help desk at <a href='mailto:scorecarddata@rti.org'>scorecarddata@rti.org</a>.</p>
           </v-col>
 
         </v-row>

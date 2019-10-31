@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="data-glossary">
         <scorecard-header />
 
     <v-content class="white">
@@ -12,12 +12,12 @@
           >
             <h1 class="display-1 mb-2">Glossary</h1>
             <div
-              v-for="(entry,key) in glossary"
-              :key="key"
+              v-for="entry in glossary"
+              :key="entry.id"
               v-if="entry.glossary"
             >
               <h3
-                :id="key"
+                :id="entry.id"
                 class='mt-4'
               >{{entry.title}}</h3>
               <div v-html="entry.glossary"></div>
@@ -39,7 +39,18 @@ export default {
   props: ["baseUrl", "dataBase_url"],
   computed: {
     glossary() {
+      let glossary = siteDataAll.glossary;
+      for(var key in glossary)
+      {
+        glossary[key].id = key;
+      }
       return _.orderBy(siteDataAll.glossary, 'title');
+    }
+  },
+  mounted(){
+    if(window.location.hash)
+    {
+      this.$vuetify.goTo(window.location.hash, {offset: 30})
     }
   }
 };

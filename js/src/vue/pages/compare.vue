@@ -1,5 +1,5 @@
 <template>
-  <v-app id="app" class="compare-page">
+  <v-app id="compare" class="compare-page">
     <scorecard-header />
     <v-content>
       <v-container>

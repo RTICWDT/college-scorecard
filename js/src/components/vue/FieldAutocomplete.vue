@@ -15,6 +15,7 @@
       color="secondary"
       clearable
       v-on:click:clear="clear"
+      aria-labelledby="fields-label"
     />
   </div>
 </template>

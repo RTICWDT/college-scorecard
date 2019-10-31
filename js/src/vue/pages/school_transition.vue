@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="school-transition">
     <scorecard-header />
 
     <v-content>

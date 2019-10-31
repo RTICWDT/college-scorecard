@@ -25,7 +25,7 @@
       <p v-else>--</p>
     </v-col>
     <v-col cols="12" sm="4" class="pa-0">
-      <p class="overline mb-0">Monthtly Earnings&nbsp;<tooltip definition="fos-monthly-earnings" :isBranch="isBranch" /></p>
+      <p class="overline mb-0">Monthly Earnings&nbsp;<tooltip definition="fos-monthly-earnings" :isBranch="isBranch" /></p>
       <p v-if="fos.earnings.median_earnings">{{(fos.earnings.median_earnings)/12 | numeral('$0,0') }}/mo</p>
       <p v-else>--</p>
     </v-col>

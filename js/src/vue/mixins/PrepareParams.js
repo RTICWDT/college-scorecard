@@ -21,6 +21,19 @@ const alias = {
   long:                 fields.LONGITUDE + '__range',
   religious:            fields.RELIGIOUS,
 
+  // below allows you to just pluck one school 
+  // if coming from a selected name search
+  id: function(query, value, key){
+    if(value)
+    {
+        query[fields.ID] = value;
+    }
+    else
+    {
+        // exclude perfect-only children per ED
+        query[fields.ID + '__range'] = '..999999';
+    }
+  },
   // special designations: women/men only, minority groups
   serving: function(query, value, key) {
     var field = [fields.MINORITY_SERVING, value].join('.');
@@ -264,7 +277,7 @@ export default {
       if (!query.degree) {
         query[fields.DEGREE_OFFERED + '.assoc_or_bachelors_or_certificate'] = true;
       }
-      
+
       for (var key in query) {
         var v = query[key];
   
@@ -292,13 +305,10 @@ export default {
           delete query[key];
         }
       }
-      
+
       // set the predominant degree to range '1..3' because ED expert guidance
       query[fields.PREDOMINANT_DEGREE + '__range'] = '1..3';
-  
-      // exclude perfect-only children per ED
-      query[fields.ID + '__range'] = '..999999';
-          
+
       return query;
     }
   }

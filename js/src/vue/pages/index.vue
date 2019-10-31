@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id='index'>
     <scorecard-header />
     <v-content>
       <div class="home-splash">
@@ -32,12 +32,12 @@
                 show-arrows
                 v-model="desktopTabs"
               >
-                <v-tab @click="GATrackEvent('Home Tab','Tab','Custom Search')">
+                <v-tab @click="GATrackEvent('Home Tab','Tab','Custom Search')" v>
                   <span class="hidden-sm-and-down">Custom Search</span>
                   <span class="hidden-md-and-up">Search</span>
                 </v-tab>
-                <v-tab @click="GATrackEvent('Home Tab','Tab','Name Search')">Name Search</v-tab>
-                <v-tab @click="GATrackEvent('Home Tab','Tab','Show Me Options')">Show Me Options</v-tab>
+                <v-tab @click="GATrackEvent('Home Tab','Tab','Name Search')" color="white">Name Search</v-tab>
+                <v-tab @click="GATrackEvent('Home Tab','Tab','Show Me Options')" color="white">Show Me Options</v-tab>
                 <v-tab-item>
                   <v-card class="px-5 pt-0 pb-5">
                     <search-form @search-query="directToSearch" />
@@ -102,7 +102,7 @@
               <h2 class="title">Alternative Pathways to a Career</h2>
 
               <p>
-                <strong>Apprenticeships</strong> are another great way to jumpstart your career.
+                <strong>Apprenticeships</strong> are another great way to jump-start your career.
               </p>
               <p>
                 <v-btn
@@ -152,6 +152,9 @@
 .v-tab.v-tab--active {
   color: #ffffff !important;
 }
+.theme--light.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active){
+    color: #FFFFFF !important;
+  }
 .homeContent {
   border-top: 20px
     solid
@@ -181,7 +184,7 @@
   }
   &.paying
     h2 {
-    background-color: #80a771;
+    background-color: #436692;
   }
 }
 .sublink {
@@ -228,7 +231,14 @@ export default {
       window.location.href = url;
     },
     handleSchoolNameSelected(school) {
-      window.location = '/search/?name=' + school;
+      if(typeof school == "string")
+      {
+        window.location = '/search/?name=' + encodeURIComponent(school);
+      }
+      else
+      {
+        window.location = '/search/?name=' + encodeURIComponent(school['school.name']) + "&id="+school.id;
+      }
     }
   }
 };
