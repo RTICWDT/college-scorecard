@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="four-oh-four">
     <scorecard-header />
     <v-content class="home-splash">
       <v-container>

@@ -1,5 +1,5 @@
 <template>
-  <v-app id="app" class="school-page">
+  <v-app id="school" class="school-page">
     <!-- Search results -->
     <scorecard-header />
 

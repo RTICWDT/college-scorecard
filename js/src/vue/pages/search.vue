@@ -13,7 +13,7 @@
 
 <template>
   <div>
-    <v-app>
+    <v-app id="search">
       <scorecard-header />
       <v-navigation-drawer
         v-model="showSidebar"

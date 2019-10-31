@@ -1,5 +1,5 @@
 <template>
-  <v-app id="app" class="school-page">
+  <v-app id="school-fields" class="school-page">
     
     <scorecard-header />
     <v-content>

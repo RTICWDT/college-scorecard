@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="data-changelog">
     <scorecard-header />
     <v-content class="white">
       <data-navigation current="/data/changelog/" />

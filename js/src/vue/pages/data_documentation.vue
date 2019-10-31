@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="data-documentation">
     <scorecard-header />
 
     <v-content class="white">
