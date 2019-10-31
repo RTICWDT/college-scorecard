@@ -120,7 +120,7 @@
     <div id="search-form-sub-degree-container" class="mt-4 pl-4 ml-2">
 
     <p class='subhead-2' id='fields-label'>Academic Fields</p>
-    <field-autocomplete v-model="input.cip4" aria-labelledby="fields-label"></field-autocomplete>
+    <field-autocomplete v-model="input.cip4"></field-autocomplete>
     
     <!-- cip4 - Degree subfield -->
     <div>
@@ -376,7 +376,7 @@
           class="py-0 my-0"
           color="secondary"
           clearable
-          aria-labeldby="specialized-mission-label"
+          aria-labelledby="specialized-mission-label"
         ></v-select>
 
 
@@ -389,7 +389,7 @@
           class="py-0 my-0"
           color="secondary"
           clearable
-          aria-labeldby="religions-affiliation-label"
+          aria-labelledby="religions-affiliation-label"
         ></v-select>
 
 
