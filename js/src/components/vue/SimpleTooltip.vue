@@ -1,10 +1,10 @@
 <template>
   <span>
-    <v-tooltip top>
+    <v-tooltip top color="#000000" max-width="600">
       <template v-slot:activator="{ on }">
         <v-icon x-small allow-overflow :color="color" dark v-on="on">fas fa-info-circle</v-icon>
       </template>
-      <span>{{text}}</span>
+      <span><slot /></span>
     </v-tooltip>
   </span>
 </template>

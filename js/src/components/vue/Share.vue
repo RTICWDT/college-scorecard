@@ -18,6 +18,7 @@
           v-for="(item, index) in items"
           :key="index"
           @click="picked(item)"
+          role="menuitem"
         >
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
@@ -34,6 +35,7 @@
           class='d-inline d-sm-none'
         >
           <v-icon x-small>fas fa-share</v-icon>
+          <span class='sr-only'>Share</span>
         </v-btn>
       </template>
       <v-list>
@@ -41,6 +43,7 @@
           v-for="(item, index) in items"
           :key="index"
           @click="picked(item)"
+          role="menuitem"
         >
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>

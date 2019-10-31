@@ -30,7 +30,7 @@
     </div>
 
     <div class='py-2 px-5'>
-    <p class='subhead-2'>
+    <p class='subhead-2' id='location-label'>
       Location
     </p>    
     <v-select
@@ -41,6 +41,7 @@
       :items="['Near Me','ZIP Code','State']"
       hide-details
       class="mb-3 mt-0 pt-0"
+      aria-labelledby="location-label"
     />
 
     <div class='d-flex align-center' v-if="utility.location=='ZIP Code'">
@@ -117,10 +118,10 @@
       v-if="utility.location=='State'"
       ></v-select>
 
-    <p class='subhead-2'>Field of Study Offered</p>
+    <p class='subhead-2'>Field of Study Offered <tooltip definition="field-of-study" /></p>
     <div id="search-form-sub-degree-container" class="mt-4 pl-4 ml-2">
 
-    <p class='subhead-2'>Academic Fields</p>
+    <p class='subhead-2' id='fields-label'>Academic Fields</p>
     <field-autocomplete v-model="input.cip4"></field-autocomplete>
     
     <!-- cip4 - Degree subfield -->
@@ -387,7 +388,7 @@
               class="py-0 my-0"
             ></v-checkbox>
  
-        <p class='subhead-2'>Specialized Mission</p>
+        <p class='subhead-2' id='specialized-mission-label'>Specialized Mission</p>
         <v-select v-model='input.serving'
           id="search-form-serving"
           :items='cleanSpecializedMission'
@@ -397,10 +398,11 @@
           class="py-0 my-0"
           color="secondary"
           clearable
+          aria-labelledby="specialized-mission-label"
         ></v-select>
 
 
-        <p class='subhead-2'>Religious Affiliation</p>
+        <p class='subhead-2' id='religions-affiliation-label'>Religious Affiliation</p>
         <v-select v-model='input.religious'
           id="search-form-religous"
           :items='site.data.religious_affiliations'
@@ -410,6 +412,7 @@
           class="py-0 my-0"
           color="secondary"
           clearable
+          aria-labelledby="religions-affiliation-label"
         ></v-select>
 
 
@@ -434,6 +437,7 @@ import FieldAutocomplete from './FieldAutocomplete.vue';
 import { SiteData } from '../../vue/mixins/SiteData.js';
 import LocationCheck from '../../vue/mixins/LocationCheck.js';
 import { EventBus } from '../../vue/EventBus.js';
+import Tooltip from "./Tooltip.vue";
 
 export default {
   mixins:[SiteData,LocationCheck],
@@ -453,11 +457,13 @@ export default {
   components:{
     'check-range': CheckRange,
     'name-autocomplete': NameAutocomplete,
-    'field-autocomplete': FieldAutocomplete
+    'field-autocomplete': FieldAutocomplete,
+    'tooltip': Tooltip
   },
   data(){
     return{
       input:{
+        id: null,
         state:[],
         // degree:[],
         major:"",
@@ -749,9 +755,16 @@ export default {
       this.location.error = null;
     },
     handleSchoolNameSelected(school){
-      //if(school){
+      if(typeof school == "string")
+      {
         this.input.name = school;
-      //}
+        this.input.id = null;
+      }
+      else
+      {
+        this.input.name = school['school.name'];
+        this.input.id = school.id;
+      }
     }
 
   }

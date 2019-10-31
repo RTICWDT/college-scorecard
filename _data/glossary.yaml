@@ -112,7 +112,8 @@ acceptance-rate:
   default: The share of first-time students who applied to this school that were accepted.
   glossary: The proportion of first-time students submitting an application to this school that were accepted for admission. An application is considered submitted only after all required portions of the application are complete. Applicants that do not submit a complete application are not included in the calculation of this rate. Institutions that have an open admissions policy do not report on their acceptance rate, but are considered to have a 100% acceptance rate for the purposes of searching on the Scorecard website.
   branch: false
-all-data:
-  title: All Data Download
-  default: "<p>Contains the following data:</p><ul><li>Institution-level data files for 1996-97 through 2017-18 containing aggregate data for each institution. Includes information on institutional characteristics, enrollment, student aid, costs, and student outcomes.<li>Field of study-level data files for the pooled 2014-15, 2015-16 award years through the pooled 2015-16, 2016-17 award years containing data at the credential level and 4-digit CIP code combination for each institution. Includes information on cumulative debt at graduation and earnings one year after graduation.</li><li>Crosswalk files for 2000-01 through 2017-18 that link the Department’s OPEID with an IPEDS UNITID for each institution.</li></ul>"
+field-of-study:
+  title: Field of Study
+  default: Content TBD
+  glossary: Content TBD
   branch: false

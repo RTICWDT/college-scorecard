@@ -15,10 +15,11 @@
       outlined
       prepend-inner-icon="search"
       hide-no-data
-      :return-object="false"            
+      return-object          
       @input="goToSchool"
       :value="initial_school"
       @update:search-input="runSearch"
+      aria-label="Name Search"
       />
   </div>
 </template>
@@ -51,7 +52,7 @@ export default {
       if(newVal)
       {
         this.isLoading = true
-        var query = { fields: ([fields.NAME]).join(','), per_page: 20 };
+        var query = { fields: ([fields.ID, fields.NAME]).join(','), per_page: 20 };
         query[fields.NAME] = newVal;
         query = this.prepareParams(query);
 

@@ -7,7 +7,7 @@
     :loading="isLoading"
     :id="id"
   >
-   <simple-tooltip v-if="tip" slot='append' :text="tip" color="#38691F" />
+   <simple-tooltip v-if="tip" slot='append' color="#38691F">{{tip}}</simple-tooltip>
   </v-switch>
 </template>
 <style lang="scss" >

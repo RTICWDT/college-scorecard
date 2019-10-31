@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id='data'>
     <scorecard-header />
 
     <v-content class="white">
@@ -19,57 +19,39 @@
               This data was
               <strong>last updated November NN, 2019</strong>.
             </p>
+            <p class='title font-weight-bold text-center mb-0'>Data Downloads</p>
             <v-row>
               <v-col cols="12" sm="4">
-                <v-card class='pa-2 text-center fill-height'>
-                  <p class='title'>Download All Data Files&nbsp;<tooltip definition="all-data" /></p>
-                  <v-btn
-                    rounded
-                    color="secondary"
-                    @click="trackDownload('CollegeScorecard_Raw_Data.zip')"
-                    :href="dataBase_url+'/CollegeScorecard_Raw_Data.zip'"
-                    class="btn my-2"
-                  >
-                    <v-icon>mdi-search</v-icon>Download
-                  </v-btn>
+                <v-card class='pa-2 text-center fill-height' 
+                  :href="dataBase_url+'/CollegeScorecard_Raw_Data.zip'"
+                  @click="trackDownload('CollegeScorecard_Raw_Data.zip')"
+                  hover
+                >
+                  <p class='title font-weight-bold'>All Data Files&nbsp;<simple-tooltip><p>Contains the following data:</p><ul><li>Institution-level data files for 1996-97 through 2017-18 containing aggregate data for each institution. Includes information on institutional characteristics, enrollment, student aid, costs, and student outcomes.<li>Field of study-level data files for the pooled 2014-15, 2015-16 award years through the pooled 2015-16, 2016-17 award years containing data at the credential level and 4-digit CIP code combination for each institution. Includes information on cumulative debt at graduation and earnings one year after graduation.</li><li>Crosswalk files for 2000-01 through 2017-18 that link the Department’s OPEID with an IPEDS UNITID for each institution.</li></ul></simple-tooltip></p>
                   <p>NNN MB ZIP</p>
                 </v-card>    
               </v-col>
               <v-col cols="12" sm="4">
-                <v-card class='pa-2 text-center fill-height'>
-                  <p class='title'>Most Recent Institution-Level Data</p>
-                  <v-btn
-                    rounded
-                    color="secondary"
-                    @click="trackDownload('Most-Recent-Cohorts-All-Data-Elements.csv')"
-                    :href="dataBase_url+'/Most-Recent-Cohorts-All-Data-Elements.csv'"
-                    class="btn my-2"
-                  >
-                    <v-icon>mdi-search</v-icon>Download
-                  </v-btn>
+                <v-card class='pa-2 text-center fill-height' @click="trackDownload('Most-Recent-Cohorts-All-Data-Elements.csv')"
+                    :href="dataBase_url+'/Most-Recent-Cohorts-All-Data-Elements.csv'" hover>
+                  <p class='title font-weight-bold'>Most Recent Institution-Level Data</p>
+
                   <p>NNN MB CSV</p>
                 </v-card>
               </v-col>
               <v-col cols="12" sm="4">
-                <v-card class='pa-2 text-center fill-height'>
-                  <p class='title'>Most Recent Data by Field of Study</p>
-                  <v-btn
-                    rounded
-                    color="secondary"
-                    @click="trackDownload('Most-Recent-Field-Of-Study.csv')"
-                    :href="dataBase_url+'/Most-Recent-Field-Of-Study.csv'"
-                    class="btn my-2"
-                  >
-                    <v-icon>mdi-search</v-icon>Download
-                  </v-btn>
+                <v-card class='pa-2 text-center fill-height'                     @click="trackDownload('Most-Recent-Field-Of-Study.csv')"
+                    :href="dataBase_url+'/Most-Recent-Field-Of-Study.csv'" hover>
+                  <p class='title font-weight-bold'>Most Recent Data by Field of Study</p>
+
                   <p>NNN MB CSV</p>
                 </v-card>
 
               </v-col>
             </v-row>
-            <p>Looking for help? Visit <a href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"  @click="trackOutboundLink($event)" target="_blank">
+            <p class='mt-8'>Looking for help? Visit <a href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"  @click="trackOutboundLink($event)" target="_blank">
               StackExchange
-            </a> or email the helpdesk at <a href='mailto:scorecarddata@rti.org'>scorecarddata@rti.org</a>.</p>
+            </a> or email the help desk at <a href='mailto:scorecarddata@rti.org'>scorecarddata@rti.org</a>.</p>
           </v-col>
 
         </v-row>
@@ -111,12 +93,12 @@
 <script>
 import DataNavigation from "components/vue/DataNavigation.vue";
 import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
-import Tooltip from "components/vue/Tooltip.vue";
+import SimpleTooltip from "components/vue/SimpleTooltip.vue";
 export default {
   mixins: [AnalyticsEvents],
   components: {
     "data-navigation": DataNavigation,
-    "tooltip": Tooltip
+    "simple-tooltip": SimpleTooltip
   },
   props: ["baseUrl", "dataBase_url", "dataDictionary"]
 };

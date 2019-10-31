@@ -2,7 +2,7 @@
   <span>
     <v-dialog max-width='500px'>
       <template v-slot:activator="{ on }">
-        <v-icon x-small allow-overflow :color="color" dark v-on="on">fas fa-info-circle</v-icon>
+        <v-icon x-small allow-overflow :color="color" dark v-on.stop="on">fas fa-info-circle</v-icon>
       </template>
       <v-card>
         <v-card-title>{{title}}</v-card-title>
