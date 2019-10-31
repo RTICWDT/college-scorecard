@@ -18,6 +18,7 @@
             @input="goToSchool"
             :value="initial_school"
             @update:search-input="runSearch"
+            aria-label="Name Search"
          />
     </div>
 </template>

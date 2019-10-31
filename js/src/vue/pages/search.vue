@@ -50,6 +50,7 @@
                         >
                           <span >
                             <v-icon class=''>mdi-close-circle</v-icon>
+                            <span class='sr-only'>Clear Search</span>
                           </span>
                         </v-btn>
                         <v-btn
@@ -84,6 +85,7 @@
                         <template v-slot:activator="{ on }">
                           <v-btn rounded color="primary" x-small v-on="on" fab class="d-inline d-sm-none">
                             <v-icon small class=''>fas fa-sort</v-icon>
+                            <span class='sr-only'>Sort</span>
                           </v-btn>
                         </template>
                         <v-list>

@@ -30,7 +30,7 @@
     </div>
 
     <div class='py-2 px-5'>
-    <p class='subhead-2'>
+    <p class='subhead-2' id='location-label'>
       Location
     </p>    
     <v-select
@@ -40,6 +40,7 @@
       :items="['Near Me','ZIP Code','State']"
       hide-details
       class="mb-3 mt-0 pt-0"
+      aria-labelledby="location-label"
     />
 
     <div class='d-flex align-center' v-if="utility.location=='ZIP Code'">
@@ -118,8 +119,8 @@
     <p class='subhead-2'>Field of Study Offered <tooltip definition="field-of-study" /></p>
     <div id="search-form-sub-degree-container" class="mt-4 pl-4 ml-2">
 
-    <p class='subhead-2'>Academic Fields</p>
-    <field-autocomplete v-model="input.cip4"></field-autocomplete>
+    <p class='subhead-2' id='fields-label'>Academic Fields</p>
+    <field-autocomplete v-model="input.cip4" aria-labelledby="fields-label"></field-autocomplete>
     
     <!-- cip4 - Degree subfield -->
     <div>
@@ -366,7 +367,7 @@
               class="py-0 my-0"
             ></v-checkbox>
  
-        <p class='subhead-2'>Specialized Mission</p>
+        <p class='subhead-2' id='specialized-mission-label'>Specialized Mission</p>
         <v-select v-model='input.serving'
           :items='cleanSpecializedMission'
           item-text="value"
@@ -375,10 +376,11 @@
           class="py-0 my-0"
           color="secondary"
           clearable
+          aria-labeldby="specialized-mission-label"
         ></v-select>
 
 
-        <p class='subhead-2'>Religious Affiliation</p>
+        <p class='subhead-2' id='religions-affiliation-label'>Religious Affiliation</p>
         <v-select v-model='input.religious'
           :items='site.data.religious_affiliations'
           item-text='label'
@@ -387,6 +389,7 @@
           class="py-0 my-0"
           color="secondary"
           clearable
+          aria-labeldby="religions-affiliation-label"
         ></v-select>
 
 
