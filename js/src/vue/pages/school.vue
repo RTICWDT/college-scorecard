@@ -25,7 +25,7 @@
 
             <div v-else id="school">
               <v-card class="school-heading px-3 mb-5">
-                <v-row class="csGreenBg">
+                <v-row id="school-sub-nav-header" class="csGreenBg">
                   <v-col cols="6">
                     <v-btn
                       small
@@ -100,7 +100,7 @@
                   </v-col>
                 </v-row>
                 <v-row class="mt-3">
-                  <v-col cols="12" md="6" class="px-sm-5">
+                  <v-col id="school-completion-rate-donut" cols="12" md="6" class="px-sm-5">
                     <h2 class="mb-4">
                       <!--prettyhtml-ignore-->
                       Graduation Rate&nbsp;<tooltip definition="graduation-rate" :version="completionRateFieldDefinition" />
@@ -114,7 +114,8 @@
                     <div v-else class="data-na">Data Not Available</div>
                   </v-col>
                   <v-col cols="12" md="6" class="px-sm-5">
-                    <h2 class="mb-3">
+                    <div id="school-salary-after-complete">
+                      <h2 class="mb-3">
                       <!--prettyhtml-ignore-->
                       Salary After Completing&nbsp;
                       <tooltip definition="fos-median-earnings" :isBranch="isBranch" />
@@ -125,23 +126,28 @@
                       variable="earnings.median_earnings"
                       :max=" { label: '$150,000', value: 150000 }"
                     />
-                    <h2 class="mt-5 mb-3" v-if="!isProgramReporter">
-                      <!--prettyhtml-ignore-->
-                      Average Annual Cost&nbsp;
-                      <tooltip definition="avg-cost" />
-                    </h2>
-                    <h2 v-else class="mt-5 mb-3">
-                      <!--prettyhtml-ignore-->
-                      Average Annual Cost for Largest Program&nbsp;
-                      <tooltip definition="avg-program-cost" />
-                    </h2>
-                    <p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
+                    </div>
 
-                    <h2
-                      class="display-2 navy-text font-weight-bold mb-4"
-                      v-if="netPrice"
-                    >{{ netPrice | numeral('$0,0') }}</h2>
-                    <div class="data-na" v-else>Data Not Available</div>
+                    <div id="school-avg-cost">
+                      <h2 class="mt-5 mb-3" v-if="!isProgramReporter">
+                        <!--prettyhtml-ignore-->
+                        Average Annual Cost&nbsp;
+                        <tooltip definition="avg-cost" />
+                      </h2>
+                      <h2 v-else class="mt-5 mb-3">
+                        <!--prettyhtml-ignore-->
+                        Average Annual Cost for Largest Program&nbsp;
+                        <tooltip definition="avg-program-cost" />
+                      </h2>
+                      <p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
+
+                      <h2
+                        class="display-2 navy-text font-weight-bold mb-4"
+                        v-if="netPrice"
+                      >{{ netPrice | numeral('$0,0') }}</h2>
+                      <div class="data-na" v-else>Data Not Available</div>
+                    </div>
+
                   </v-col>
                 </v-row>
               </v-card>
@@ -667,7 +673,7 @@
           <v-col lg="3" v-if="!error">
             <v-card outline class="pa-5 mb-3">
               <p class="title mb-2">Find Another School</p>
-              <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
+              <name-autocomplete id="school-name-auto-complete" @school-name-selected="handleSchoolNameSelected" />
             </v-card>
             <v-card outline class="pa-5">
               <paying-for-college />
