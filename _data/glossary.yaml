@@ -114,6 +114,7 @@ acceptance-rate:
   branch: false
 field-of-study:
   title: Field of Study
-  default: Content TBD
-  glossary: Content TBD
+  default: A field of study is a category of academic programs offered by institutions of education. Since these are categories of offerings, they may not map directly to programs advertised on course catalogs.
+  glossary: "<p>Fields of Study are categories of programs defined by a both a Classification of Instruction Program (CIP) codes and a credential level. Since these are categories of offerings, they may not map directly to programs advertised on course catalogs.</p><ul><li>CIP codes are a taxonomy of academic disciplines classified by a 6-digit code with the first two digits representing the most broad category for a discipline, the first four digits representing a more granular category, and all six digits represent the most granular description of an academic discipline. Scorecard uses the first four digits of the CIP code. More information on these codes is available <a href='https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=55' target='_blank'>here</a>.</li><li>The credential levels correspond to the following categories of programs: <ul><li>Undergraduate Certificates or Diplomas</li><li>Associate's Degrees</li><li>Bachelor's Degrees</li><li>Post-baccalaureate Certificates</li><li>Master's Degrees</li><li>Doctoral Degrees</li><li>First Professional Degrees</li><li>Graduate / Professional Certificates</li></ul></li></ul>"
   branch: false
+  
