@@ -66,6 +66,7 @@
               <!-- /.school-card_container-school -->
               <v-card class="mb-4 pa-3">
                 <v-select
+                  id="school-field-fos-degree"
                   outlined
                   dense
                   :items="filters"

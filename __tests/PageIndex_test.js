@@ -1,6 +1,19 @@
+const assert = require('assert');
 const BASE_URL = '/';
 
 Feature('Index Page Renders and Components behave as expected');
+
+Scenario('Page renders without console errors', async (I) => {
+  I.amOnPage(BASE_URL);
+
+  let logs = await I.grabBrowserLogs();
+
+  let errors = logs.filter((obj) => {
+    return obj._type === 'error';
+  });
+
+  assert.equal(errors.length, 0);
+});
 
 Scenario('Test Name Autocomplete', (I) => {
   I.amOnPage(BASE_URL);

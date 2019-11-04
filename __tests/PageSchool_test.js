@@ -1,17 +1,22 @@
-
+const assert = require('assert');
 const BASE_URL = "/school/?130794-Yale-University";
 
 Feature('Page Test: School. Indepth testing of the school page.');
 
 // Check console for errors.
+Scenario('Page renders without console errors', async (I) => {
+  I.amOnPage(BASE_URL);
 
-// Add to compare
-  // See compare drawer
+  let logs = await I.grabBrowserLogs();
+
+  let errors = logs.filter((obj) => {
+    return obj._type === 'error';
+  });
+
+  assert.equal(errors.length, 0);
+});
 
 // Share School
-
-// See all major top items: School title, Address, Icons, Maps, Grad rate, Salary, AVG cost.
-
 Scenario('Visit page and see all major page components.', (I) => {
   I.amOnPage(BASE_URL);
 
@@ -48,4 +53,13 @@ Scenario('Visit page and see all major page components.', (I) => {
   // Sidebar conent
   I.seeElement(locate('#school-name-auto-complete'));
   I.see('Learn More About Paying for College','h2');
+});
+
+//  Test Compare
+Scenario('Visit page and see all major page components.', (I) => {
+  I.amOnPage(BASE_URL);
+
+  I.click(locate('#school-sub-nav-header button').withText('Compare'));
+  I.wait(1);
+  I.seeElement('#compare-header');
 });
