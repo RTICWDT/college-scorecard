@@ -56,10 +56,13 @@ Scenario('Visit page and see all major page components.', (I) => {
 });
 
 //  Test Compare
-Scenario('Visit page and see all major page components.', (I) => {
+Scenario('Visit page and test compare functionality', (I) => {
   I.amOnPage(BASE_URL);
 
   I.click(locate('#school-sub-nav-header button').withText('Compare'));
   I.wait(1);
   I.seeElement('#compare-header');
+  I.click('#compare-header');
+  I.seeElement('#compare_schools-content');
+  I.seeElement(locate('#compare_schools-content label').withText('Yale University'));
 });

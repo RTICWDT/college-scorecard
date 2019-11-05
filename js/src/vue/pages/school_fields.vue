@@ -35,7 +35,7 @@
                       text
                       small
                       :color="isSelected?'amber':'white'"
-                      @click="$emit('toggle-compare-school', { schoolId: school.id, schoolName: school.school.schoolName } )"
+                      @click="$emit('toggle-compare-school', { schoolId: school.id, schoolName: school.school.name } )"
                     >
                       <v-icon x-small class='mr-2'>fa fa-plus-circle</v-icon> Compare
                     </v-btn>
@@ -89,11 +89,11 @@
               <v-expansion-panels v-if="!_.isEmpty(processedPrograms)">
                 <v-expansion-panel v-for="(prog, index) in processedPrograms" :key="index">
                   <v-expansion-panel-header>{{ _.startCase(_.toLower(prog.name).slice(0,-1)) }}</v-expansion-panel-header>
-                  <v-expansion-panel-content>
+                  <v-expansion-panel-content eager>
                     <v-expansion-panels>
                       <v-expansion-panel v-for="fos in prog.fields" :key="fos.code+'-'+fos.credential.level">
                         <v-expansion-panel-header>
-                          {{ fos.title.slice(0,-1) }} - {{ fos.credential.title }}
+                          <span class="school-fields-fos-degree-title">{{ fos.title.slice(0,-1) }} - {{ fos.credential.title }}</span>
                         </v-expansion-panel-header>
                         <v-expansion-panel-content>
                           <field-data :fos="fos" />
