@@ -45,7 +45,10 @@ export default {
   methods:{
     goToSchool: function(){
       this.items = [];
-      this.$emit('school-name-selected',this.search);
+      if(this.search)
+      {
+        this.$emit('school-name-selected',this.search);
+      }
     },
     runSearch: _.debounce(function(newVal){
       if(newVal)
