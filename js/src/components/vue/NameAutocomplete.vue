@@ -12,7 +12,7 @@
             class='pt-0 mt-0'
             color="secondary"
             outlined
-            prepend-inner-icon="search"
+            prepend-inner-icon="fas fa-search"
             hide-no-data
             return-object          
             @input="goToSchool"

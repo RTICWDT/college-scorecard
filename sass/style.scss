@@ -6,10 +6,10 @@
 @import '~vuetify/dist/vuetify.min';
 @import '_vuetify-overrides.scss';
 
-
 // Font Awesome
-// TODO - Remove styles we do not need from FA.
-@import '~@fortawesome/fontawesome-free/css/all.min.css';
+@import '~@fortawesome/fontawesome-free/css/fontawesome.min.css';
+@import '~@fortawesome/fontawesome-free/css/solid.min.css';
+@import '~@fortawesome/fontawesome-free/css/regular.min.css';
 
 .sr-only{
   display:none;
