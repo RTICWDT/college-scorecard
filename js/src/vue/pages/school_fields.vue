@@ -43,7 +43,7 @@
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col cols="12" md="6" class="pt-3 mb-n5">
+                  <v-col cols="12" md="6" class="pt-3 mb-n5" v-if="_.get(school, fields['UNDER_INVESTIGATION'])==1">
                     <v-chip
                       v-if="_.get(school, fields['UNDER_INVESTIGATION'])==1"
                       color="error"
