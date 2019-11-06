@@ -54,31 +54,28 @@ Scenario('Test Show Me Options: Simple Elements', (I) => {
   I.seeInCurrentUrl('cip4_degree=a&cip4_degree=b&cip4_degree=c');
 });
 
-// TODO - Cannot get around Geolocation Page Permissions.
-// Scenario('Test Show Me Options: Near Me', async (I) => {
-// const { browser } = this.helpers.Puppeteer;
-// // const context = browser.defaultBrowserContext();
-// // await context.overridePermissions('http://localhost:4000', ['geolocation']);
-
-//   // navigator.geolocation.getCurrentPosition = function(success, failure) { 
-//   //   success({ coords: { 
-//   //       latitude: 30, 
-//   //       longitude: -105,
-
-//   //   }, timestamp: Date.now() }); 
-//   // }
-
-//   I.amOnPage(BASE_URL);
-
-//   I.click(locate('.v-tab').withText("Show Me Options"));
+Scenario('Test Show Me Options: Near Me', async (I) => {
+  I.amOnPage('/');
   
-//   I.seeElement(locate(".v-window-item").withText("Select one or more options to create a list of schools that fit your needs."));
+  // Overwrite the location function
+  I.executeScript( ()=>{
+    navigator.geolocation.getCurrentPosition = function(success, failure) { 
+      success({ coords: { 
+          latitude: 35.906167, 
+          longitude: -78.863741,
 
-//   I.click("#canned-search-near-me");
-//   I.wait(5)
+      }, timestamp: Date.now() }); 
+    }
+  });
 
+  I.click(locate('.v-tab').withText("Show Me Options"));
+  I.seeElement(locate(".v-window-item").withText("Select one or more options to create a list of schools that fit your needs."));
+  I.click("#canned-search-near-me");
+  I.click('#canned-search-submit');
 
-// });
+  I.seeInCurrentUrl("lat=");
+  I.seeInCurrentUrl('long=');
+});
 
 // Test click then remove Show Me Options.
 Scenario('Test Show Me Options: Simple Elements', (I) => {

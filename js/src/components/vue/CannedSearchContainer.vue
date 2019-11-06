@@ -48,7 +48,7 @@
         ></canned-search-slider>
       </v-col>
       <v-col cols="12" md="12" class='text-center mt-5'>
-        <v-btn color="secondary" rounded @click="$emit('canned-search-submit',query)">Find Schools</v-btn>
+        <v-btn id='canned-search-submit' color="secondary" rounded @click="$emit('canned-search-submit',query)">Find Schools</v-btn>
       </v-col>
     </v-row>
   </div>
