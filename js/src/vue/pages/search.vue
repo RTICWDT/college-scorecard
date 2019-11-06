@@ -54,6 +54,7 @@
                           </span>
                         </v-btn>
                         <v-btn
+                          id="search-button-clear"
                           color="primary"
                           text-color="white"
                           @click="clearSearchForm"
@@ -67,7 +68,7 @@
                         </v-btn>
                         <v-menu offset-y>
                         <template v-slot:activator="{ on }">
-                          <v-btn rounded color="primary" small v-on="on" class="d-none d-sm-inline">
+                          <v-btn id="search-button-sort" rounded color="primary" small v-on="on" class="d-none d-sm-inline">
                             <v-icon small class='mr-1'>fas fa-sort</v-icon> Sort
                           </v-btn>                          
                         </template>

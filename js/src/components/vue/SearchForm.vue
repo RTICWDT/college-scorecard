@@ -34,6 +34,7 @@
       Location
     </p>    
     <v-select
+      id="search-from-location-select"
       v-model="utility.location"
       @change="handleLocationChange"
       placeholder="Select an option"
@@ -44,7 +45,8 @@
     />
 
     <div class='d-flex align-center' v-if="utility.location=='ZIP Code'">
-      <v-text-field 
+      <v-text-field
+        id="search-form-zip-text" 
         v-model="input.zip"
         label="ZIP Code"
         hideDetails
@@ -100,9 +102,9 @@
       <span v-show="location.error" class="overline">{{location.error}}</span>
     </div>
 
-
     <v-select 
       v-model="input.state"
+      id="search-form-state"
       :items="site.data.states"
       item-text="name"
       item-value="abbr"
@@ -126,6 +128,7 @@
     <div>
     <p class='subhead-2'>Degrees/Certificate</p> 
       <v-checkbox
+        id="search-form-fos-degree-c"
         class="search-form-degree-cb my-0 py-0"
         v-model="input.cip4_degree"
         label="Certificate"
@@ -135,6 +138,7 @@
       ></v-checkbox>
 
       <v-checkbox
+        id="search-form-fos-degree-a"
         class="search-form-degree-cb my-0 py-0"
         v-model="input.cip4_degree"
         label="Associate's Degree"
@@ -144,6 +148,7 @@
       ></v-checkbox>
 
       <v-checkbox
+        id="search-form-fos-degree-b"
         class="search-form-degree-cb my-0 py-0"
         v-model="input.cip4_degree"
         label="Bachelor's Degree"
@@ -184,7 +189,8 @@
         ></v-checkbox>
     </div> -->
 
-    <check-range legend-title="Graduation Rate" 
+    <check-range legend-title="Graduation Rate"
+      id='search-form-completion-rate'
       v-model="input.completion_rate"
       :enable="utility.enable.completion_rate" 
       @slider-toggle="utility.enable.completion_rate = $event"
@@ -196,7 +202,8 @@
       andUp
     ></check-range>
 
-    <check-range legend-title="Average Annual Cost" 
+    <check-range legend-title="Average Annual Cost"
+      id='search-form-avg-net-price'
       v-model="input.avg_net_price"
       :enable="utility.enable.avg_net_price"
       @slider-toggle="utility.enable.avg_net_price = $event"
@@ -218,6 +225,7 @@
         <v-expansion-panel-content> -->
      
           <check-range v-model="input.sat_math"
+            id='search-form-sat-math'
             :enable="utility.enable.sat_math" 
             @slider-toggle="utility.enable.sat_math = $event"
             :min="0" 
@@ -230,6 +238,7 @@
           </check-range>
 
           <check-range v-model="input.sat_read"
+            id='search-form-sat-read'
             :enable="utility.enable.sat_read" 
             @slider-toggle="utility.enable.sat_read = $event"
             :min="0" 
@@ -242,6 +251,7 @@
           </check-range>
 
           <check-range v-model="input.act"
+            id='search-form-act'
             :enable="utility.enable.act" @slider-toggle="utility.enable.act = $event"
             :min="0" 
             :max="36"
@@ -253,6 +263,7 @@
           </check-range>
 
           <check-range v-model="input.acceptance"
+            id="search-form-acceptance"
             :enable="utility.enable.acceptance" 
             @slider-toggle="utility.enable.acceptance = $event"
             :min="0"
@@ -271,8 +282,8 @@
       
           <p class='subhead-2 mb-3'>Size</p>
           <div>
-            <!-- TODO - Do we want these to appear as buttons? -->
             <v-checkbox
+              id="search-form-size-small"
               hide-details
               v-model="input.size"
               label="Small"
@@ -282,6 +293,7 @@
             ></v-checkbox>
 
             <v-checkbox
+              id="search-form-size-medium"
               hide-details
               v-model="input.size"
               label="Medium"
@@ -291,6 +303,7 @@
             ></v-checkbox>
 
             <v-checkbox
+              id="search-form-size-large"
               hide-details
               v-model="input.size"
               label="Large"
@@ -304,6 +317,7 @@
           <p class='subhead-2'>Type of School</p>
           <div class="search-form-type-container">
             <v-checkbox
+              id="search-form-type-public"
               hide-details
               v-model="input.control"
               label="Public"
@@ -313,6 +327,7 @@
             ></v-checkbox>
 
             <v-checkbox
+              id="search-form-type-private"
               hide-details
               v-model="input.control"
               label="Private Nonprofit"
@@ -322,6 +337,7 @@
             ></v-checkbox>
 
             <v-checkbox
+              id="search-form-type-profit"
               hide-details
               v-model="input.control"
               label="Private For-Profit"
@@ -333,6 +349,7 @@
 
           <p class='subhead-2'>Urbanicity</p>
             <v-checkbox
+              id="search-form-locale-city"
               hide-details            
               v-model="input.locale"
               label="City"
@@ -342,6 +359,7 @@
             ></v-checkbox>
 
             <v-checkbox
+              id="search-form-locale-suburban"
               hide-details
               v-model="input.locale"
               label="Suburban"
@@ -349,7 +367,9 @@
               color="secondary"
               class="py-0 my-0"
             ></v-checkbox>
+
             <v-checkbox
+              id="search-form-locale-town"
               hide-details
               v-model="input.locale"
               label="Town"
@@ -359,6 +379,7 @@
             ></v-checkbox>
 
             <v-checkbox
+              id="search-form-locale-rural"
               hide-details
               v-model="input.locale"
               label="Rural"
@@ -369,6 +390,7 @@
  
         <p class='subhead-2' id='specialized-mission-label'>Specialized Mission</p>
         <v-select v-model='input.serving'
+          id="search-form-serving"
           :items='cleanSpecializedMission'
           item-text="value"
           item-value="key"
@@ -382,6 +404,7 @@
 
         <p class='subhead-2' id='religions-affiliation-label'>Religious Affiliation</p>
         <v-select v-model='input.religious'
+          id="search-form-religous"
           :items='site.data.religious_affiliations'
           item-text='label'
           item-value='value'

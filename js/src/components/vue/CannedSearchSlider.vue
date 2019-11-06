@@ -5,6 +5,7 @@
     @change="$emit('canned-search-toggle', {value: $event, data: addToQuery})" 
     hide-details
     :loading="isLoading"
+    :id="id"
   >
    <simple-tooltip v-if="tip" slot='append' color="#38691F">{{tip}}</simple-tooltip>
   </v-switch>
@@ -33,7 +34,8 @@ export default {
     tip:{
       type: String,
       default: ''
-    }
+    },
+    id: String
   }
 }
 </script>

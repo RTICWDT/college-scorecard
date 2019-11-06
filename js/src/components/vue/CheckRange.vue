@@ -23,6 +23,7 @@
       <v-col class='py-0 d-flex justify-space-around align-content-center'>
       
       <v-slider v-model="sliderValue"
+        :id="id"
         class="align-center pa-0 ma-0"
         hide-details
         @input="handleInput"
@@ -35,6 +36,7 @@
       >
         <template v-slot:append>
           <v-text-field v-model="sliderValue"
+            :id="`${id}-field`"
             hide-details
             type="number"
             min="0"
@@ -49,6 +51,7 @@
         </template>
         <template v-slot:prepend>
           <v-checkbox v-model="enableSlider"
+            :id="`${id}-check`"
             @change="handleEnable" 
             color="secondary"
             class="pa-0 ma-0"
@@ -84,6 +87,9 @@ export default {
     andUp:{
       type: Boolean,
       default: false
+    },
+    id:{
+      type: String
     }
   },
   data(){

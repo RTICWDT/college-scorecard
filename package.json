@@ -7,6 +7,7 @@
     "serve": "jekyll serve --baseurl='' -w",
     "build": "webpack --config webpack.prod.vue.config.js",
     "watch": "webpack --devtool source-map --config webpack.vue.config.js --watch",
+    "test-e2e": "codeceptjs run --steps",
     "test-a11y": "./test/a11y.js",
     "test-ci": "wdio test/wdio.ci.js",
     "test-quick": "wdio test/wdio.quick.js",
@@ -45,6 +46,7 @@
     "babel-loader": "^8.0.6",
     "babelify": "^10.0.0",
     "browserify": "^12.0.1",
+    "codeceptjs": "^2.3.5",
     "css-loader": "^3.2.0",
     "deepmerge": "^4.1.1",
     "extend": "^3.0.2",
@@ -56,6 +58,7 @@
     "mocha": "^6.2.1",
     "numeral": "^2.0.6",
     "pa11y": "^4.13.2",
+    "puppeteer": "^1.20.0",
     "request": "^2.88.0",
     "sass": "^1.23.0",
     "sass-loader": "^8.0.0",
@@ -81,7 +84,7 @@
     "xmlhttprequest": "^1.8.0"
   },
   "engines": {
-    "node": ">= 8.11.1"
+    "node": ">= 10.17.0"
   },
   "license": "CC0",
   "repository": {

@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-autocomplete
+      id="search-form-fos-auto-complete"
       v-model="cip4"
       :items="items"
       :loading="isLoading"

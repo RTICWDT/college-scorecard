@@ -14,7 +14,7 @@
               </v-card>
             </div>
 
-            <div v-else class="show-loaded" id="school">
+            <div v-else-if="!loading && !showSearchForm" class="show-loaded" id="school">
               <v-card class="pb-5 px-3">
                 <v-row class="csGreenBg">
                   <v-col cols="6">
@@ -402,6 +402,16 @@
                 </v-expansion-panel>
               </v-expansion-panels>
             </div>
+
+            <!-- Search Form Component -->
+            <div v-show="!loading && showSearchForm">
+              <v-card class="px-5 pt-0 pb-5">
+                <h1 class="text-center pt-3">No schools selected to compare</h1>
+                <p class="text-center mt-2">Try searching for schools and clicking the <v-icon>fa fa-plus-circle</v-icon> to add a school for comparison</p>
+                <search-form @search-query="directToSearch" />
+              </v-card>
+            </div>
+
           </v-col>
 
           <v-col lg="3">
@@ -438,6 +448,10 @@ import ComplexFields from "vue/mixins/ComplexFields.js";
 import SankeyButtons from "components/vue/SankeyButtons.vue";
 import { apiGetAll } from '../api.js';
 import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
+import CannedSearchContainer from "components/vue/CannedSearchContainer.vue";
+import querystring from "querystring";
+import SearchForm from "components/vue/SearchForm.vue";
+import NameAutocomplete from "components/vue/NameAutocomplete.vue";
 
 export default {
   mixins: [compare, ComplexFields, AnalyticsEvents],
@@ -450,7 +464,10 @@ export default {
     "compare-header": CompareHeader,
     "horizontal-bar": HorizontalBar,
     "compare-section": CompareSection,
-    "sankey-buttons": SankeyButtons
+    "sankey-buttons": SankeyButtons,
+    "canned-search-container": CannedSearchContainer,
+    "search-form": SearchForm,
+    "name-autocomplete": NameAutocomplete
   },
   data() {
     return {
@@ -468,7 +485,9 @@ export default {
         study: "study_both"
       },
       currentHighlight: "",
-      loading: true
+      loading: true,
+      mobilePanels: 0,
+      desktopTabs: 1
     };
   },
   computed: {
@@ -481,6 +500,13 @@ export default {
     },
     referrerLink() {
       return document.referrer || null;
+    },
+    showSearchForm(){
+      if(this.schools['2-year schools'].length > 0 || this.schools['4-year schools'].length > 0 || this.schools['Certificate schools'].length > 0){
+        return false;
+      }else{
+        return true;
+      }
     }
   },
   methods: {
@@ -490,6 +516,19 @@ export default {
     // Reset the panel
     none() {
       this.panels = [];
+    },
+    directToSearch(params) {
+      // Generate URL based on params,
+      let qs = querystring.stringify(params);
+      let url =
+        "/search/?" +
+        qs
+          .replace(/^&+/, "")
+          .replace(/&{2,}/g, "&")
+          .replace(/%3A/g, ":");
+
+      // Direct to location.
+      window.location.href = url;
     }
   },
   mounted() {
@@ -541,12 +580,15 @@ export default {
             this.schools["4-year schools"].push(school);
             break;
         }
-        this.loading = false;
+        
       });
+
+      this.loading = false;
 
     }).catch((responses) => {
       // TODO - How do we want to handle errors?
       console.error("Issue locating schools for compare...");
+      this.loading = false;
     });
   }
 };

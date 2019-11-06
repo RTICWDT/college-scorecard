@@ -3,6 +3,7 @@
     <v-row>
       <v-col md="6" cols="12" class="text-center canned-search-wrapper py-0 my-0">
         <canned-search-slider
+          id="canned-search-near-me"
           label="Schools Near Me"
           :add-to-query="[{location:true}]"
           @canned-search-toggle="handleCannedToggle"
@@ -10,12 +11,15 @@
         ></canned-search-slider>
         
         <canned-search-slider
+          id="canned-search-most-get-in"
           label="Most People Get In"
           :add-to-query="[{acceptance: '0.5..1'}]"
           @canned-search-toggle="handleCannedToggle"
           tip="Acceptance rate of 50% or higher"
         ></canned-search-slider>
+
         <canned-search-slider
+          id="canned-search-most-grad"
           label="Most People Graduate"
           :add-to-query="[{completion_rate:'0.5..'}]"
           @canned-search-toggle="handleCannedToggle"
@@ -24,23 +28,27 @@
       </v-col>
       <v-col md="6" cols="12" class="text-center canned-search-wrapper py-0 my-0">
         <canned-search-slider
+          id="canned-search-degree-a"
           label="I want an Associate's Degree"
           :add-to-query="[{cip4_degree:['a']}]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
+        
         <canned-search-slider
+          id="canned-search-degree-b"
           label="I want a Bachelor's Degree"
           :add-to-query="[{cip4_degree:['b']}]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
         <canned-search-slider
+          id="canned-search-degree-c"
           label="I want a Certificate"
           :add-to-query="[{cip4_degree:['c']}]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
       </v-col>
       <v-col cols="12" md="12" class='text-center mt-5'>
-        <v-btn color="secondary" rounded @click="$emit('canned-search-submit',query)">Find Schools</v-btn>
+        <v-btn id='canned-search-submit' color="secondary" rounded @click="$emit('canned-search-submit',query)">Find Schools</v-btn>
       </v-col>
     </v-row>
   </div>
