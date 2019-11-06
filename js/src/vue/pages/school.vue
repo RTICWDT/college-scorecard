@@ -177,7 +177,7 @@
                         </div>
                         <div v-else>
                           <h2>
-                            Cost After Aid for Largest Program
+                            Average Annual Cost for Largest Program
                             <tooltip definition="avg-program-cost" />
                           </h2>
                           <p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
