@@ -16,7 +16,10 @@ exports.config = {
         //   height: 768
         // }
       }
-    }
+    },
+    LocalStorage: {
+      require: './localstorage_helper.js',
+    },
   },
   include: {
     I: './steps_file.js'

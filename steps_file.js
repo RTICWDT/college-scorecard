@@ -3,9 +3,12 @@
 
 module.exports = function() {
   return actor({
-
-    // Define custom steps here, use 'this' to access default methods of I.
-    // It is recommended to place a general 'login' function here.
-
+    grabAndFilterConsole:  async function(filter = 'error') {
+      let logs = await this.grabBrowserLogs();
+      let errors = logs.filter((obj) => {
+        return obj._type === filter;
+      });
+      return errors;
+    }
   });
 }
