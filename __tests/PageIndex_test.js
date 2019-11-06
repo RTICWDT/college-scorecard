@@ -1,7 +1,7 @@
 const assert = require('assert');
 const BASE_URL = '/';
 
-Feature('Index Page Renders and Components behave as expected');
+Feature('Page: Index');
 
 Scenario('Page renders without console errors', async (I) => {
   I.amOnPage(BASE_URL);

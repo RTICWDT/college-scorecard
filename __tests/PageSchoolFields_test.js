@@ -1,7 +1,7 @@
 const assert = require('assert');
 const BASE_URL = "/school/fields/?130794-Yale-University";
 
-Feature('Page Test: School Fields. Indepth testing of school fields page');
+Feature('Page: School/Fields');
 
 // Page loads without console errors
 Scenario('Page renders without console errors', async (I) => {

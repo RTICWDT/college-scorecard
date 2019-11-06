@@ -1,14 +1,7 @@
 let assert = require('assert');
-const BASE_SEARCH = '/search/?';
+const BASE_URL = '/search/?';
 
-Feature('Page test: Search.  In depth test of search functionality.');
-
-// Test school result card - This might be better handled with a unit test.
-  // Unit Test.
-  // Flag
-  // Icons
-  // Add to compare.
-  // Check tooltip
+Feature('Page: Search');
 
 Scenario('Page renders without console errors', async (I) => {
   I.amOnPage(BASE_URL);
@@ -23,7 +16,7 @@ Scenario('Page renders without console errors', async (I) => {
 });
 
 Scenario('Visit root page and see all major page components', (I) => {
-  I.amOnPage(BASE_SEARCH);
+  I.amOnPage(BASE_URL);
 
   // Check for major page components.
   I.see("Results",'p');
@@ -35,7 +28,7 @@ Scenario('Visit root page and see all major page components', (I) => {
 Scenario('Vist root search and clear, sort, share and pagination', async (I) =>{
   let testURLString = 'size=small&control=public&locale=city';
 
-  I.amOnPage(BASE_SEARCH + "size=small&control=public&locale=city");
+  I.amOnPage(BASE_URL + "size=small&control=public&locale=city");
 
   // Click to hide search form.
   I.click(locate(".search-result-container"));
@@ -65,7 +58,7 @@ assert.equal(firstLetterOfFirstResult,'A');
 });
 
 Scenario('Click items in search and get updated results.', async(I) => {
-  I.amOnPage(BASE_SEARCH);
+  I.amOnPage(BASE_URL);
 
   // Add all sliders.
   I.fillField('#search-form-completion-rate-field','50');
@@ -98,7 +91,7 @@ Scenario('Click items in search and get updated results.', async(I) => {
 });
 
 Scenario('Populate form based on URL data.', async (I) =>{
-  I.amOnPage(BASE_SEARCH + "size=small&control=public&locale=city");
+  I.amOnPage(BASE_URL + "size=small&control=public&locale=city");
 
   I.seeAttributesOnElements('#search-form-size-small',{'aria-checked':'true'});
   I.seeAttributesOnElements('#search-form-type-public',{'aria-checked':'true'});
@@ -108,7 +101,7 @@ Scenario('Populate form based on URL data.', async (I) =>{
 
 // Test Compare Functionality.
 Scenario('Add schools to compare, Items appear in compare drawer, Remove from compare.', async (I) =>{
-  I.amOnPage(BASE_SEARCH);
+  I.amOnPage(BASE_URL);
 
   // Click to close search window.
   I.click(locate(".search-result-container"));

@@ -1,7 +1,7 @@
 const assert = require('assert');
 const BASE_URL = "/compare/";
 
-Feature('Page: Comapre');
+Feature('Page: Compare');
 
 Scenario('Page renders search form with no compare items, no console errors', async (I) => {
   I.amOnPage(BASE_URL);

@@ -76,5 +76,5 @@ Scenario('Visit /compare', (I) => {
   // Check for Mounted
   I.seeElement('.v-application');
   // Check for page element.
-  I.see('Average Annual Cost','h2');
+  I.see('No schools selected to compare','h1');
 });
