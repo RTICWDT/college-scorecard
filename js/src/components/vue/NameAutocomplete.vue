@@ -13,7 +13,7 @@
       class='pt-0 mt-0'
       color="secondary"
       outlined
-      prepend-inner-icon="search"
+      prepend-inner-icon="fas fa-search"
       hide-no-data
       return-object          
       @input="goToSchool"
@@ -46,7 +46,10 @@ export default {
   methods:{
     goToSchool: function(){
       this.items = [];
-      this.$emit('school-name-selected',this.search);
+      if(this.search)
+      {
+        this.$emit('school-name-selected',this.search);
+      }
     },
     runSearch: _.debounce(function(newVal){
       if(newVal)

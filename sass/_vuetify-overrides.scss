@@ -25,6 +25,12 @@ html{
       color: $darker-green !important;
     }
 
+    @media (min-width: 1904px){
+      .container{
+        max-width: 1300px;
+      }
+    }
+
     .v-btn.secondary{
       color: #FFFFFF !important;
     }
