@@ -12,7 +12,7 @@
     "test-ci": "wdio test/wdio.ci.js",
     "test-quick": "wdio test/wdio.quick.js",
     "test-sauce": "wdio test/wdio.sauce.js",
-    "test-unit": "mocha -- test/unit",
+    "test-unit": "jest",
     "test-unit-ci": "XUNIT_FILE=test/reports/mocha/unit.xml mocha -R spec-xunit-file -- test/unit"
   },
   "dependencies": {
@@ -43,6 +43,8 @@
     "@babel/preset-env": "^7.6.3",
     "@fortawesome/fontawesome-free": "^5.11.2",
     "@mdi/font": "^4.5.95",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "babelify": "^10.0.0",
     "browserify": "^12.0.1",
@@ -52,6 +54,7 @@
     "extend": "^3.0.2",
     "fibers": "^3.1.1",
     "file-loader": "^4.2.0",
+    "jest": "^24.9.0",
     "jshint": "^2.10.2",
     "mini-css-extract-plugin": "^0.8.0",
     "minifyify": "^7.3.5",
@@ -71,6 +74,7 @@
     "uglify-js": "^3.6.1",
     "vue": "^2.6.10",
     "vue-cli-plugin-vuetify": "^0.6.3",
+    "vue-jest": "^3.0.5",
     "vue-loader": "^15.7.1",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.10",
@@ -90,5 +94,15 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:18F/college-choice.git"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      ".*\\.(vue)$": "vue-jest"
+    }
   }
 }
