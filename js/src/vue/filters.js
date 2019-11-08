@@ -1,4 +1,5 @@
 import Vue from "vue";
+import _ from "lodash";
 
 Vue.filter('capitalize', function (value) {
     if (!value) return ''

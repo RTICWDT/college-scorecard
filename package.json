@@ -41,6 +41,7 @@
     "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.6.3",
+    "babel-core": "^7.0.0-bridge.0",
     "@fortawesome/fontawesome-free": "^5.11.2",
     "@mdi/font": "^4.5.95",
     "@vue/test-utils": "^1.0.0-beta.29",
@@ -102,7 +103,8 @@
       "vue"
     ],
     "transform": {
-      ".*\\.(vue)$": "vue-jest"
+      ".*\\.(vue)$": "vue-jest",
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
     }
   }
 }
