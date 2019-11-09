@@ -9,6 +9,7 @@ import '../../js/src/vue/mixins.js'
 
 Vue.prototype._ = _;
 // Vue.use(vueNumeralFilterInstaller, { locale: 'en' });
+Vue.use(Vuetify);
 
 import {
   shallowMount,
@@ -16,7 +17,7 @@ import {
 } from '@vue/test-utils';
 
 export function shallowMountWithConfig(componentToMount, options = {}){
-  const localVue = createLocalVue();
+  // const localVue = createLocalVue();
   const vuetify = new Vuetify();
 
   // mount the component with all the options we added
@@ -24,7 +25,7 @@ export function shallowMountWithConfig(componentToMount, options = {}){
     mocks: {
       $vuetify: { breakpoint: {} },
     },
-    localVue,
+    Vue,
     vuetify,
     ...options
   });
