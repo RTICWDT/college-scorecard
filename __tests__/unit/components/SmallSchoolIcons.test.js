@@ -1,47 +1,24 @@
-import Vue from 'vue';
-import Vuetify from 'vuetify';
-Vue.use(Vuetify);
-
-import _ from 'lodash';
-Vue.prototype._ = _;
-
-// import "../../js/src/vue/filters.js";
-import "../../../js/src/vue/filters.js";
-
+import {shallowMountWithConfig} from '../../utility/ShallowMount';
 
 import SmallSchoolIcons from '../../../js/src/components/vue/SmallSchoolIcons.vue';
 import schoolData from '../../mock/school.json';
 import {fields as fieldData} from '../../../js/src/vue/constants.js';
 
-import {
-  shallowMount,
-  createLocalVue
-} from '@vue/test-utils';
-
-const localVue = createLocalVue();
+const mountOptions = {
+  propsData:{
+    school: schoolData,
+    fields: fieldData
+  }
+}
 
 describe('SmallSchoolIcons.vue', () => {
-  let vuetify
 
   beforeEach(() => {
-    vuetify = new Vuetify();
   })
 
   test('is a Vue instance', () => {
-    const wrapper = shallowMount(SmallSchoolIcons,{
-      propsData:{
-        school: schoolData,
-        fields: fieldData
-      },
-      mocks: {
-        $vuetify: { breakpoint: {} },
-      },
-      Vue,
-      vuetify,
-    });
-    
-    console.log(wrapper.html());
-    // const wrapper = shallowMount(SearchResultCard)
+    const wrapper = shallowMountWithConfig(SmallSchoolIcons,mountOptions);
+
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
 })

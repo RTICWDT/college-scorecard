@@ -29,6 +29,7 @@ import { apiGet } from '../../vue/api.js';
 import { fields } from '../../vue/constants.js';
 import PrepareParams from '../../vue/mixins/PrepareParams.js'
 import { EventBus } from '../../vue/EventBus.js';
+import _ from 'lodash';
 
 export default {
   mixins:[PrepareParams],
