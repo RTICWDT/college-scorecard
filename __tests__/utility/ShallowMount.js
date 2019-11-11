@@ -1,18 +1,18 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import _ from 'lodash';
-import numeral from 'numeral';
-// import vueNumeralFilterInstaller from 'vue-numeral-filter';
+import vueNumeralFilterInstaller from 'vue-numeral-filter';
 import '../../js/src/vue/filters.js';
 import '../../js/src/vue/mixins.js'
 // import '../../js/src/plugins/chartjs.js';
 
 Vue.prototype._ = _;
-// Vue.use(vueNumeralFilterInstaller, { locale: 'en' });
+Vue.use(vueNumeralFilterInstaller, { locale: 'en' });
 Vue.use(Vuetify);
 
 import {
   shallowMount,
+  mount,
   createLocalVue
 } from '@vue/test-utils';
 

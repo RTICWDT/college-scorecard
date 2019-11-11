@@ -106,6 +106,9 @@
       ".*\\.(vue)$": "vue-jest",
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
     },
-    "testRegex": "(/__tests__/unit/.*|(\\.|/)(test|spec))\\.[jt]sx?$"
+    "testRegex": "(/__tests__/unit/.*|(\\.|/)(test|spec))\\.[jt]sx?$",
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!vue-numeral-filter/.*)"
+    ]
   }
 }
