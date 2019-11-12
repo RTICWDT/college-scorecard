@@ -1,5 +1,6 @@
-  <script>
+<script>
   window.api = {};
+
   {% if site.API[site.branch] %}
     window.api.url = '{{ site.API[site.branch].baseurl }}';
     window.api.key = '{{ site.API[site.branch].key }}';
@@ -7,6 +8,7 @@
     window.api.url = '{{ site.API.baseurl }}';
     window.api.key = '{{ site.API.key }}';
   {% endif %}
-  siteDataAll = {{site.data | jsonify}}
+  
   scorecard_version = "{{ site.version }}";
-  </script>
+</script>
+
