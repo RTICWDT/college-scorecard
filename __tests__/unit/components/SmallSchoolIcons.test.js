@@ -4,21 +4,26 @@ import SmallSchoolIcons from '../../../js/src/components/vue/SmallSchoolIcons.vu
 import schoolData from '../../mock/school.json';
 import {fields as fieldData} from '../../../js/src/vue/constants.js';
 
-const mountOptions = {
-  propsData:{
-    school: schoolData,
-    fields: fieldData
-  }
-}
-
 describe('SmallSchoolIcons.vue', () => {
 
   beforeEach(() => {
   })
 
   test('is a Vue instance', () => {
-    const wrapper = shallowMountWithConfig(SmallSchoolIcons,mountOptions);
+    const mountOptions = {
+      propsData:{
+        school: schoolData,
+        fields: fieldData
+      }
+    }
 
-    expect(wrapper.isVueInstance()).toBeTruthy()
-  })
+    const wrapper = shallowMountWithConfig(SmallSchoolIcons,mountOptions);
+    expect(wrapper.isVueInstance()).toBeTruthy();
+  });
+
+  // Test displays properly.
+
+  // Test what happens
+
+
 })
