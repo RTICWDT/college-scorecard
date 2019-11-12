@@ -44,8 +44,8 @@ full-time:
   branch: false
 race-eth:
   title: Race/Ethnicity
-  default: The proportion of students in specific race/ethnicity categories. Only the race/ethnicity groups of students enrolled in this school are displayed.
-  glossary: <p>The proportion of students in specific race/ethnicity categories (including foreign students) following the categories described in this <a href="https://www.govinfo.gov/content/pkg/FR-2007-10-19/pdf/E7-20613.pdf" target="_blank">link</a>. Only the race/ethnicity groups of students enrolled in this school are displayed.</p>
+  default: The proportion of students in specific race/ethnicity categories.
+  glossary: <p>The proportion of students in specific race/ethnicity categories (including foreign students) following the categories described in this <a href="https://www.govinfo.gov/content/pkg/FR-2007-10-19/pdf/E7-20613.pdf" target="_blank">link</a>.</p>
   branch: false
 socio-eco:
   title: Socio-Economic Diversity
