@@ -182,7 +182,7 @@
                           <div class="data-na" v-else>Data Not Available</div>
                         </div>
                         <div v-else>
-                          <h2>
+                          <h2 class="mb-3">
                             Average Annual Cost for Largest Program
                             <tooltip definition="avg-program-cost" />
                           </h2>

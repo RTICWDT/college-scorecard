@@ -11,9 +11,9 @@
               <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
               <v-expansion-panels>
                 <v-expansion-panel>
-                  <v-expansion-panel-header>November 19, 2019</v-expansion-panel-header>
+                  <v-expansion-panel-header>November 20, 2019</v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <p>On November 19, 2019, the Department released a new version of the College Scorecard. This update includes:</p>
+                    <p>On November 20, 2019, the Department released a new version of the College Scorecard. This update includes:</p>
                     <ul>
                       <li>The incorporation of Field of Study graduate count, debt, and earnings data into the consumer website, downloadable data files, and API.</li>
                       <li>The graduation rate is now presented differently on the consumer website for degree granting and non-degree granting schools. The graduation rate for degree granting schools is the proportion of entering students that graduated at this school within 8 years of entry, regardless of their full-time/part-time status or prior postsecondary experience. The graduation rate for non-degree granting schools is the proportion of full-time, first-time students that have graduated at the same school where they started college within 200% of normal program completion time (e.g., within 18 months for a 9-month certificate)</li>

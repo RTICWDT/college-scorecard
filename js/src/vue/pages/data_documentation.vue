@@ -54,15 +54,13 @@
               </v-row>
 
               <p class="mt-8">
-                Looking for help? Visit
+                <strong>Looking for help?</strong> Visit
                 <a
                   href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
                   @click="trackOutboundLink($event)"
                   target="_blank"
                 >StackExchange</a> or email the help desk at
-                <a
-                  href="mailto:scorecarddata@rti.org"
-                >scorecarddata@rti.org</a>.
+                <a href="mailto:scorecarddata@rti.org">scorecarddata@rti.org</a> For inquiries by members of the press, please contact <a href="mailto:press@ed.gov">press@ed.gov</a>.
               </p>
               <h2 class="display-1 font-weight-bold mb-2 mt-5">API Documentation</h2>
 
