@@ -1,10 +1,11 @@
 <template>
   <span>
-    <v-dialog max-width='500px'>
+    <v-dialog max-width='500px' v-model="showDialog">
       <template v-slot:activator="{ on }">
         <v-icon x-small allow-overflow :color="color" dark v-on.stop="on">fas fa-info-circle</v-icon>
       </template>
       <v-card>
+        <v-btn @click="showDialog = false" icon class='float-right mt-3 mr-3'><v-icon>fas fa-times-circle</v-icon></v-btn>
         <v-card-title>{{title}}</v-card-title>
         <v-card-text class='pb-5'>
           <div v-html="content"></div>
@@ -14,7 +15,6 @@
             <v-btn :href="'/data/glossary/#'+definition" small rounded color="secondary" class='px-4'>More Information</v-btn>
           </p>
         </v-card-text>
-
       </v-card>
     </v-dialog>
   </span>
