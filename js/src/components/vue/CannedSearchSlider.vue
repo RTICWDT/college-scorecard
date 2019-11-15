@@ -19,7 +19,8 @@
   }
 </style>
 <script>
-import SimpleTooltip from "components/vue/SimpleTooltip.vue";
+import SimpleTooltip from "./SimpleTooltip.vue";
+
 export default {
   components:{
     'simple-tooltip': SimpleTooltip

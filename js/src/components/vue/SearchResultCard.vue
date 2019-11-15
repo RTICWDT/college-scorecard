@@ -34,7 +34,7 @@
       <v-btn
         text
         icon
-        class="float-right"
+        class="float-right search-result-card-compare"
         :color="isSelected?'amber':'grey'"
         @click="$emit('toggle-compare-school',school)"
       >

@@ -1,15 +1,8 @@
-import {shallowMountWithConfig} from '../../utility/ShallowMount';
+import {shallowMountWithConfig, mountWithConfig} from '../../utility/MountWithConfig.js';
 
 import SearchResultCard from '../../../js/src/components/vue/SearchResultCard.vue';
 import schoolData from '../../mock/school.json';
 import {fields as fieldData} from '../../../js/src/vue/constants.js';
-
-const mountOptions = {
-  propsData:{
-    school: schoolData,
-    fields: fieldData
-  }
-}
 
 describe('Component: SearchResultCard', () => {
 
@@ -17,9 +10,57 @@ describe('Component: SearchResultCard', () => {
   })
 
   test('is a Vue instance', () => {
-    const wrapper = shallowMountWithConfig(SearchResultCard,mountOptions);
+    const mountOptions = {
+      propsData:{
+        school: schoolData,
+        fields: fieldData
+      }
+    }
 
-    console.log(wrapper.html());
+    const wrapper = shallowMountWithConfig(SearchResultCard,mountOptions);
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
+
+  test('Comapre click event is fired',() => {
+    const mountOptions = {
+      propsData:{
+        school: schoolData,
+        fields: fieldData
+      }
+    }
+    const wrapper = mountWithConfig(SearchResultCard, mountOptions);
+
+    wrapper.find('.search-result-card-compare').trigger('click');
+    expect(wrapper.emitted('toggle-compare-school')).toHaveLength(1);
+  });
+
+  test('Monitoring flag is displayed.', () => {
+    // Add ed monitoring flag
+    const schoolUnderMonitoring = Object.assign({}, schoolData, {school:{under_investigation:1}});
+
+    const mountOptions = {
+      propsData:{
+        school: schoolUnderMonitoring,
+        fields: fieldData
+      }
+    }
+
+    const wrapper = shallowMountWithConfig(SearchResultCard, mountOptions);
+    expect(wrapper.find('strong.white--text').text()).toBe('Under ED Monitoring');
+  });
+
+  // Snapshot test
+  test('Renders correctly',()=> {
+    const mountOptions = {
+      propsData:{
+        school: schoolData,
+        fields: fieldData
+      }
+    }
+
+    const wrapper = mountWithConfig(SearchResultCard, mountOptions);
+
+    expect(wrapper.element).toMatchSnapshot();
+  });
+
 })

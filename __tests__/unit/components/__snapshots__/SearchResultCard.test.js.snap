@@ -1,0 +1,258 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: SearchResultCard Renders correctly 1`] = `
+<div
+  class="search-result-card mx-auto pa-0 elevation-4 v-card v-card--outlined v-sheet theme--light"
+  fields="[object Object]"
+>
+  <div
+    class="v-card__text pa-3"
+  >
+    <!---->
+     
+    <button
+      class="float-right search-result-card-compare v-btn v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default grey--text"
+      type="button"
+    >
+      <span
+        class="v-btn__content"
+      >
+        <i
+          aria-hidden="true"
+          class="v-icon notranslate fa fa fa fa-plus-circle theme--light"
+        />
+         
+        <span
+          class="sr-only"
+        >
+          Compare
+        </span>
+      </span>
+    </button>
+     
+    <p
+      class="overline font-weight-bold mb-1"
+    >
+      New Haven, CT
+    </p>
+     
+    <h2
+      class="title mt-0 font-weight-bold"
+    >
+      <a
+        class="nameLink"
+        href="/school/?130794-Yale-University"
+      >
+        Yale University
+      </a>
+    </h2>
+     
+    <p
+      class="body-2 mt-1"
+    >
+      5,742 undergrads
+    </p>
+     
+    <hr
+      aria-orientation="horizontal"
+      class="v-divider theme--light"
+      role="separator"
+    />
+     
+    <div
+      class="row"
+    >
+      <div
+        class="col col-12"
+      >
+        <div>
+          <ul
+            class="school-key_figures key-figures ma-0 pa-0 d-flex justify-space-around"
+          >
+            <span
+              class="v-tooltip v-tooltip--bottom"
+            >
+              <div
+                class="v-tooltip__content"
+                style="left: 0px; max-width: auto; opacity: 0; top: 12px; z-index: 0; display: none;"
+              />
+              <li
+                class="icon-four"
+              >
+                <span>
+                  Year
+                </span>
+              </li>
+            </span>
+             
+            <li
+              class="icon-private"
+            >
+              <span>
+                Private
+              </span>
+            </li>
+             
+            <li
+              class="icon-city"
+            >
+              <span>
+                City
+              </span>
+            </li>
+             
+            <li
+              class="icon-medium"
+            >
+              <span>
+                Medium
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+     
+    <hr
+      aria-orientation="horizontal"
+      class="v-divider theme--light"
+      role="separator"
+    />
+     
+    <div
+      class="row v-flex align-center"
+    >
+      <div
+        class="py-2 col col-7"
+      >
+        <span>
+          Graduation Rate 
+          <span>
+            <div
+              class="v-dialog__container"
+              role="dialog"
+            >
+              <i
+                allow-overflow=""
+                class="v-icon notranslate v-icon--link  fas fa-info-circle theme--dark blue--text text--darken-3"
+                role="button"
+                style="font-size: 12px;"
+              />
+              <div
+                class="v-dialog__content"
+                role="document"
+                style="z-index: 0;"
+              >
+                <div
+                  class="v-dialog"
+                  style="max-width: 500px; display: none;"
+                />
+              </div>
+            </div>
+          </span>
+        </span>
+      </div>
+       
+      <div
+        class="pr-0 text--black py-2 col col-5"
+      >
+        <h3
+          class="navy-text"
+        >
+          97%
+        </h3>
+      </div>
+    </div>
+     
+    <div
+      class="row result-card-info-container v-flex align-center"
+    >
+      <div
+        class="py-2 col col-7"
+      >
+        <span>
+          Salary After Completing 
+          <span>
+            <div
+              class="v-dialog__container"
+              role="dialog"
+            >
+              <i
+                allow-overflow=""
+                class="v-icon notranslate v-icon--link  fas fa-info-circle theme--dark blue--text text--darken-3"
+                role="button"
+                style="font-size: 12px;"
+              />
+              <div
+                class="v-dialog__content"
+                role="document"
+                style="z-index: 0;"
+              >
+                <div
+                  class="v-dialog"
+                  style="max-width: 500px; display: none;"
+                />
+              </div>
+            </div>
+          </span>
+        </span>
+      </div>
+       
+      <div
+        class="pr-0 text--black py-2 col col-5"
+      >
+        <h3
+          class="navy-text"
+        >
+          $39k-120k
+        </h3>
+      </div>
+    </div>
+     
+    <div
+      class="row result-card-info-container v-flex align-center"
+    >
+      <div
+        class="py-2 col col-7"
+      >
+        <span>
+          Average Annual Cost 
+          <span>
+            <div
+              class="v-dialog__container"
+              role="dialog"
+            >
+              <i
+                allow-overflow=""
+                class="v-icon notranslate v-icon--link  fas fa-info-circle theme--dark blue--text text--darken-3"
+                role="button"
+                style="font-size: 12px;"
+              />
+              <div
+                class="v-dialog__content"
+                role="document"
+                style="z-index: 0;"
+              >
+                <div
+                  class="v-dialog"
+                  style="max-width: 500px; display: none;"
+                />
+              </div>
+            </div>
+          </span>
+        </span>
+      </div>
+       
+      <div
+        class="pr-2 text--black py-0 col col-5"
+      >
+        <h3
+          class="navy-text"
+        >
+          $19k
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
+`;
