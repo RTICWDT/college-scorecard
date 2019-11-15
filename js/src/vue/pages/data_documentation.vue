@@ -20,7 +20,7 @@
                     target="_blank"
                     hover
                   >
-                    <p class="title font-weight-bold">Data Dictionary</p>
+                    <p class="title font-weight-bold btnText">Data Dictionary</p>
                   </v-card>
                 </v-col>
                 <v-col cols="12" sm="4">
@@ -33,7 +33,7 @@
                     hover
                   >
                     <p
-                      class="title font-weight-bold"
+                      class="title font-weight-bold btnText"
                     >Technical Documentation for Institution-Level Data Files</p>
                   </v-card>
                 </v-col>
@@ -47,7 +47,7 @@
                     hover
                   >
                     <p
-                      class="title font-weight-bold"
+                      class="title font-weight-bold btnText"
                     >Technical Documentation for Data Files by Field of Study</p>
                   </v-card>
                 </v-col>

@@ -72,14 +72,18 @@
                             <v-icon small class='mr-1'>fas fa-sort</v-icon> Sort
                           </v-btn>                          
                         </template>
-                        <v-list>
-                          <v-list-item
-                            v-for="(item, index) in sorts"
-                            :key="index"
-                            @click="resort(item.field);"
-                          >
-                            <v-list-item-title>{{ item.type }}</v-list-item-title>
-                          </v-list-item>
+                        <v-list min-width="200">
+                          <v-list-item-group v-model="input.sort" color="primary">
+                            <v-list-item
+                              v-for="(item, index) in sorts"
+                              :key="item.field"
+                              @click="resort(item.field);"
+                              :value="item.field"                              
+                              
+                            >
+                              <v-list-item-title>{{ item.type }}</v-list-item-title>
+                            </v-list-item>
+                          </v-list-item-group>
                         </v-list>
                       </v-menu>
                       <v-menu offset-y>
@@ -89,14 +93,17 @@
                             <span class='sr-only'>Sort</span>
                           </v-btn>
                         </template>
-                        <v-list>
-                          <v-list-item
-                            v-for="(item, index) in sorts"
-                            :key="index"
-                            @click="resort(item.field);"
-                          >
-                            <v-list-item-title>{{ item.type }}</v-list-item-title>
-                          </v-list-item>
+                        <v-list min-width="200">
+                          <v-list-item-group v-model="input.sort" color="primary">
+                            <v-list-item
+                              v-for="(item, index) in sorts"
+                              :key="item.field"
+                              @click="resort(item.field);"
+                              :value="item.field"
+                            >
+                              <v-list-item-title>{{ item.type }}</v-list-item-title>
+                            </v-list-item>
+                          </v-list-item-group>
                         </v-list>
                       </v-menu>
                        <share :url="shareUrl" label="Share" small />
