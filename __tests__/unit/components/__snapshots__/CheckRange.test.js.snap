@@ -90,7 +90,7 @@ exports[`CheckRange.vue Renders correctly 1`] = `
                 aria-valuemax="100"
                 aria-valuemin="0"
                 aria-valuenow="0"
-                class="v-slider__thumb-container secondary--text"
+                class="v-slider__thumb-container v-slider__thumb-container--show-label secondary--text"
                 role="slider"
                 style="left: 0%;"
                 tabindex="0"
@@ -98,6 +98,21 @@ exports[`CheckRange.vue Renders correctly 1`] = `
                 <div
                   class="v-slider__thumb secondary"
                 />
+                <div
+                  class="v-slider__thumb-label-container"
+                  style="display: none;"
+                >
+                  <div
+                    class="v-slider__thumb-label secondary"
+                    style="height: 32px; width: 32px; transform: translateY(-20%) translateY(-12px) translateX(-50%) rotate(45deg);"
+                  >
+                    <div>
+                      <span>
+                        0
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

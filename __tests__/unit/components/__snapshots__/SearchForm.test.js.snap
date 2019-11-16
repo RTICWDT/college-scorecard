@@ -23,9 +23,7 @@ exports[`SearchForm.vue Renders correctly 1`] = `
       class="subhead-2"
       id="location-label"
     >
-      
-    Location
-  
+      Location
     </p>
      
     <v-select-stub
@@ -86,7 +84,9 @@ exports[`SearchForm.vue Renders correctly 1`] = `
     <p
       class="subhead-2"
     >
-      Field of Study Offered 
+      
+      Field of Study Offered
+      
       <tooltip-stub
         color="blue darken-3"
         definition="field-of-study"
@@ -269,7 +269,7 @@ exports[`SearchForm.vue Renders correctly 1`] = `
   </div>
    
   <div
-    class="px-5"
+    class="px-5 extraFilters"
   >
     <check-range-stub
       id="search-form-sat-math"
