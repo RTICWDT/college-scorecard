@@ -19,6 +19,7 @@ import {
 const localVue = createLocalVue();
 localVue.prototype._ = _;
 localVue.use(vueNumeralFilterInstaller, { locale: 'en' });
+document.body.setAttribute('data-app', true); // To stop the vue warn error for some components
 // localVue.use(Vuetify);
 
 export function shallowMountWithConfig(componentToMount, options = {}){
