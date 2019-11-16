@@ -25,10 +25,15 @@
 import { find } from 'lodash';
 import { EventBus } from '../../vue/EventBus.js';
 import { SiteData } from '../../vue/mixins/SiteData.js';
+import _ from 'lodash';
 
 export default {
   mixins: [SiteData],
-  props: ["value"],
+  props: {
+    value:{
+      default: null
+    }
+  },
   data() {
     return {
       isLoading: false,
@@ -59,12 +64,14 @@ export default {
   methods: {
     // Digest URL value and look up in program index.
     mapValuePropToState(value) {
-      if (value.length != 4) {
+      if (!value || value.length != 4) {
         return null;
       }
 
       let groomedKey = value.slice(0, 2) + '.' + value.slice(2);
-      return find(this.items, { cip4: groomedKey });
+      let locatedCip4 = find(this.items, { cip4: groomedKey });
+
+      return (locatedCip4) ? locatedCip4 : null;
     },
     change(){
       if(!_.isEmpty(this.cip4))

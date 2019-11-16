@@ -1,0 +1,881 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchForm.vue Renders correctly 1`] = `
+<v-form-stub>
+  <div
+    class="px-4 pt-2 pb-4 grey lighten-3"
+  >
+    <h4
+      class="subhead-2 font-weight-bold mb-2"
+    >
+      Search by Name
+    </h4>
+     
+    <name-autocomplete-stub
+      initial_school=""
+    />
+  </div>
+   
+  <div
+    class="py-2 px-5"
+  >
+    <p
+      class="subhead-2"
+      id="location-label"
+    >
+      
+    Location
+  
+    </p>
+     
+    <v-select-stub
+      appendicon="$dropdown"
+      aria-labelledby="location-label"
+      backgroundcolor=""
+      class="mb-3 mt-0 pt-0"
+      clearicon="$clear"
+      errorcount="1"
+      errormessages=""
+      hidedetails="true"
+      id="search-from-location-select"
+      itemcolor="primary"
+      itemdisabled="disabled"
+      items="Near Me,ZIP Code,State"
+      itemtext="text"
+      itemvalue="value"
+      loaderheight="2"
+      menuprops="[object Object]"
+      messages=""
+      nodatatext="$vuetify.noDataText"
+      placeholder="Select an option"
+      rules=""
+      successmessages=""
+      type="text"
+      valuecomparator="function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false;
+  }
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false;
+  }
+
+  var props = Object.keys(a);
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false;
+  }
+
+  return props.every(function (p) {
+    return deepEqual(a[p], b[p]);
+  });
+}"
+    />
+     
+    <!---->
+     
+    <!---->
+     
+    <!---->
+     
+    <p
+      class="subhead-2"
+    >
+      Field of Study Offered 
+      <tooltip-stub
+        color="blue darken-3"
+        definition="field-of-study"
+        version="default"
+      />
+    </p>
+     
+    <div
+      class="mt-4 pl-4 ml-2"
+      id="search-form-sub-degree-container"
+    >
+      <p
+        class="subhead-2"
+        id="fields-label"
+      >
+        Academic Fields
+      </p>
+       
+      <field-autocomplete-stub
+        value=""
+      />
+       
+      <div>
+        <p
+          class="subhead-2"
+        >
+          Degrees/Certificate
+        </p>
+         
+        <v-checkbox-stub
+          backgroundcolor=""
+          class="search-form-degree-cb my-0 py-0"
+          color="secondary"
+          errorcount="1"
+          errormessages=""
+          hidedetails="true"
+          id="search-form-fos-degree-c"
+          indeterminateicon="$checkboxIndeterminate"
+          label="Certificate"
+          messages=""
+          officon="$checkboxOff"
+          onicon="$checkboxOn"
+          ripple="true"
+          rules=""
+          successmessages=""
+          value=""
+          valuecomparator="function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false;
+  }
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false;
+  }
+
+  var props = Object.keys(a);
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false;
+  }
+
+  return props.every(function (p) {
+    return deepEqual(a[p], b[p]);
+  });
+}"
+        />
+         
+        <v-checkbox-stub
+          backgroundcolor=""
+          class="search-form-degree-cb my-0 py-0"
+          color="secondary"
+          errorcount="1"
+          errormessages=""
+          hidedetails="true"
+          id="search-form-fos-degree-a"
+          indeterminateicon="$checkboxIndeterminate"
+          label="Associate's Degree"
+          messages=""
+          officon="$checkboxOff"
+          onicon="$checkboxOn"
+          ripple="true"
+          rules=""
+          successmessages=""
+          value=""
+          valuecomparator="function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false;
+  }
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false;
+  }
+
+  var props = Object.keys(a);
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false;
+  }
+
+  return props.every(function (p) {
+    return deepEqual(a[p], b[p]);
+  });
+}"
+        />
+         
+        <v-checkbox-stub
+          backgroundcolor=""
+          class="search-form-degree-cb my-0 py-0"
+          color="secondary"
+          errorcount="1"
+          errormessages=""
+          hidedetails="true"
+          id="search-form-fos-degree-b"
+          indeterminateicon="$checkboxIndeterminate"
+          label="Bachelor's Degree"
+          messages=""
+          officon="$checkboxOff"
+          onicon="$checkboxOn"
+          ripple="true"
+          rules=""
+          successmessages=""
+          value=""
+          valuecomparator="function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false;
+  }
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false;
+  }
+
+  var props = Object.keys(a);
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false;
+  }
+
+  return props.every(function (p) {
+    return deepEqual(a[p], b[p]);
+  });
+}"
+        />
+      </div>
+    </div>
+     
+    <check-range-stub
+      andup="true"
+      appendtext="%"
+      class="mt-5"
+      id="search-form-completion-rate"
+      legendtitle="Graduation Rate"
+      max="100"
+      min="0"
+      step="5"
+    />
+     
+    <check-range-stub
+      appendtext="k"
+      id="search-form-avg-net-price"
+      legendtitle="Average Annual Cost"
+      max="100"
+      min="0"
+      step="5"
+    />
+  </div>
+   
+  <div
+    class="px-5"
+  >
+    <check-range-stub
+      id="search-form-sat-math"
+      legendtitle="Title"
+      max="800"
+      min="0"
+      step="20"
+    />
+     
+    <check-range-stub
+      id="search-form-sat-read"
+      legendtitle="Title"
+      max="800"
+      min="0"
+      step="20"
+    />
+     
+    <check-range-stub
+      id="search-form-act"
+      legendtitle="Title"
+      max="36"
+      min="0"
+      step="1"
+    />
+     
+    <check-range-stub
+      andup="true"
+      appendtext="%"
+      id="search-form-acceptance"
+      legendtitle="Title"
+      max="100"
+      min="0"
+      step="5"
+    />
+     
+    <p
+      class="subhead-2 mb-3"
+    >
+      Size
+    </p>
+     
+    <div>
+      <v-checkbox-stub
+        backgroundcolor=""
+        class="py-0 my-0"
+        color="secondary"
+        errorcount="1"
+        errormessages=""
+        hidedetails="true"
+        id="search-form-size-small"
+        indeterminateicon="$checkboxIndeterminate"
+        label="Small"
+        messages=""
+        officon="$checkboxOff"
+        onicon="$checkboxOn"
+        ripple="true"
+        rules=""
+        successmessages=""
+        value=""
+        valuecomparator="function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false;
+  }
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false;
+  }
+
+  var props = Object.keys(a);
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false;
+  }
+
+  return props.every(function (p) {
+    return deepEqual(a[p], b[p]);
+  });
+}"
+      />
+       
+      <v-checkbox-stub
+        backgroundcolor=""
+        class="py-0 my-0"
+        color="secondary"
+        errorcount="1"
+        errormessages=""
+        hidedetails="true"
+        id="search-form-size-medium"
+        indeterminateicon="$checkboxIndeterminate"
+        label="Medium"
+        messages=""
+        officon="$checkboxOff"
+        onicon="$checkboxOn"
+        ripple="true"
+        rules=""
+        successmessages=""
+        value=""
+        valuecomparator="function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false;
+  }
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false;
+  }
+
+  var props = Object.keys(a);
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false;
+  }
+
+  return props.every(function (p) {
+    return deepEqual(a[p], b[p]);
+  });
+}"
+      />
+       
+      <v-checkbox-stub
+        backgroundcolor=""
+        class="py-0 my-0"
+        color="secondary"
+        errorcount="1"
+        errormessages=""
+        hidedetails="true"
+        id="search-form-size-large"
+        indeterminateicon="$checkboxIndeterminate"
+        label="Large"
+        messages=""
+        officon="$checkboxOff"
+        onicon="$checkboxOn"
+        ripple="true"
+        rules=""
+        successmessages=""
+        value=""
+        valuecomparator="function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false;
+  }
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false;
+  }
+
+  var props = Object.keys(a);
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false;
+  }
+
+  return props.every(function (p) {
+    return deepEqual(a[p], b[p]);
+  });
+}"
+      />
+    </div>
+     
+    <p
+      class="subhead-2"
+    >
+      Type of School
+    </p>
+     
+    <div
+      class="search-form-type-container"
+    >
+      <v-checkbox-stub
+        backgroundcolor=""
+        class="py-0 my-0"
+        color="secondary"
+        errorcount="1"
+        errormessages=""
+        hidedetails="true"
+        id="search-form-type-public"
+        indeterminateicon="$checkboxIndeterminate"
+        label="Public"
+        messages=""
+        officon="$checkboxOff"
+        onicon="$checkboxOn"
+        ripple="true"
+        rules=""
+        successmessages=""
+        value=""
+        valuecomparator="function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false;
+  }
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false;
+  }
+
+  var props = Object.keys(a);
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false;
+  }
+
+  return props.every(function (p) {
+    return deepEqual(a[p], b[p]);
+  });
+}"
+      />
+       
+      <v-checkbox-stub
+        backgroundcolor=""
+        class="py-0 my-0"
+        color="secondary"
+        errorcount="1"
+        errormessages=""
+        hidedetails="true"
+        id="search-form-type-private"
+        indeterminateicon="$checkboxIndeterminate"
+        label="Private Nonprofit"
+        messages=""
+        officon="$checkboxOff"
+        onicon="$checkboxOn"
+        ripple="true"
+        rules=""
+        successmessages=""
+        value=""
+        valuecomparator="function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false;
+  }
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false;
+  }
+
+  var props = Object.keys(a);
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false;
+  }
+
+  return props.every(function (p) {
+    return deepEqual(a[p], b[p]);
+  });
+}"
+      />
+       
+      <v-checkbox-stub
+        backgroundcolor=""
+        class="py-0 my-0"
+        color="secondary"
+        errorcount="1"
+        errormessages=""
+        hidedetails="true"
+        id="search-form-type-profit"
+        indeterminateicon="$checkboxIndeterminate"
+        label="Private For-Profit"
+        messages=""
+        officon="$checkboxOff"
+        onicon="$checkboxOn"
+        ripple="true"
+        rules=""
+        successmessages=""
+        value=""
+        valuecomparator="function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false;
+  }
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false;
+  }
+
+  var props = Object.keys(a);
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false;
+  }
+
+  return props.every(function (p) {
+    return deepEqual(a[p], b[p]);
+  });
+}"
+      />
+    </div>
+     
+    <p
+      class="subhead-2"
+    >
+      Urbanicity
+    </p>
+     
+    <v-checkbox-stub
+      backgroundcolor=""
+      class="py-0 my-0"
+      color="secondary"
+      errorcount="1"
+      errormessages=""
+      hidedetails="true"
+      id="search-form-locale-city"
+      indeterminateicon="$checkboxIndeterminate"
+      label="City"
+      messages=""
+      officon="$checkboxOff"
+      onicon="$checkboxOn"
+      ripple="true"
+      rules=""
+      successmessages=""
+      value=""
+      valuecomparator="function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false;
+  }
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false;
+  }
+
+  var props = Object.keys(a);
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false;
+  }
+
+  return props.every(function (p) {
+    return deepEqual(a[p], b[p]);
+  });
+}"
+    />
+     
+    <v-checkbox-stub
+      backgroundcolor=""
+      class="py-0 my-0"
+      color="secondary"
+      errorcount="1"
+      errormessages=""
+      hidedetails="true"
+      id="search-form-locale-suburban"
+      indeterminateicon="$checkboxIndeterminate"
+      label="Suburban"
+      messages=""
+      officon="$checkboxOff"
+      onicon="$checkboxOn"
+      ripple="true"
+      rules=""
+      successmessages=""
+      value=""
+      valuecomparator="function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false;
+  }
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false;
+  }
+
+  var props = Object.keys(a);
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false;
+  }
+
+  return props.every(function (p) {
+    return deepEqual(a[p], b[p]);
+  });
+}"
+    />
+     
+    <v-checkbox-stub
+      backgroundcolor=""
+      class="py-0 my-0"
+      color="secondary"
+      errorcount="1"
+      errormessages=""
+      hidedetails="true"
+      id="search-form-locale-town"
+      indeterminateicon="$checkboxIndeterminate"
+      label="Town"
+      messages=""
+      officon="$checkboxOff"
+      onicon="$checkboxOn"
+      ripple="true"
+      rules=""
+      successmessages=""
+      value=""
+      valuecomparator="function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false;
+  }
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false;
+  }
+
+  var props = Object.keys(a);
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false;
+  }
+
+  return props.every(function (p) {
+    return deepEqual(a[p], b[p]);
+  });
+}"
+    />
+     
+    <v-checkbox-stub
+      backgroundcolor=""
+      class="py-0 my-0"
+      color="secondary"
+      errorcount="1"
+      errormessages=""
+      hidedetails="true"
+      id="search-form-locale-rural"
+      indeterminateicon="$checkboxIndeterminate"
+      label="Rural"
+      messages=""
+      officon="$checkboxOff"
+      onicon="$checkboxOn"
+      ripple="true"
+      rules=""
+      successmessages=""
+      value=""
+      valuecomparator="function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false;
+  }
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false;
+  }
+
+  var props = Object.keys(a);
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false;
+  }
+
+  return props.every(function (p) {
+    return deepEqual(a[p], b[p]);
+  });
+}"
+    />
+     
+    <p
+      class="subhead-2"
+      id="specialized-mission-label"
+    >
+      Specialized Mission
+    </p>
+     
+    <v-select-stub
+      appendicon="$dropdown"
+      aria-labelledby="specialized-mission-label"
+      backgroundcolor=""
+      class="py-0 my-0"
+      clearable="true"
+      clearicon="$clear"
+      color="secondary"
+      errorcount="1"
+      errormessages=""
+      id="search-form-serving"
+      itemcolor="primary"
+      itemdisabled="disabled"
+      items="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]"
+      itemtext="value"
+      itemvalue="key"
+      loaderheight="2"
+      menuprops="[object Object]"
+      messages=""
+      nodatatext="$vuetify.noDataText"
+      placeholder="Select one..."
+      rules=""
+      successmessages=""
+      type="text"
+      value=""
+      valuecomparator="function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false;
+  }
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false;
+  }
+
+  var props = Object.keys(a);
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false;
+  }
+
+  return props.every(function (p) {
+    return deepEqual(a[p], b[p]);
+  });
+}"
+    />
+     
+    <p
+      class="subhead-2"
+      id="religions-affiliation-label"
+    >
+      Religious Affiliation
+    </p>
+     
+    <v-select-stub
+      appendicon="$dropdown"
+      aria-labelledby="religions-affiliation-label"
+      backgroundcolor=""
+      class="py-0 my-0"
+      clearable="true"
+      clearicon="$clear"
+      color="secondary"
+      errorcount="1"
+      errormessages=""
+      id="search-form-religous"
+      itemcolor="primary"
+      itemdisabled="disabled"
+      items="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]"
+      itemtext="label"
+      itemvalue="value"
+      loaderheight="2"
+      menuprops="[object Object]"
+      messages=""
+      nodatatext="$vuetify.noDataText"
+      placeholder="Select one..."
+      rules=""
+      successmessages=""
+      type="text"
+      value=""
+      valuecomparator="function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false;
+  }
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false;
+  }
+
+  var props = Object.keys(a);
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false;
+  }
+
+  return props.every(function (p) {
+    return deepEqual(a[p], b[p]);
+  });
+}"
+    />
+  </div>
+   
+  <!---->
+</v-form-stub>
+`;
