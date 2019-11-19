@@ -33,9 +33,9 @@ buildtest: &buildtest
           mkdir -p test/reports/browser
           mkdir -p test/reports/a11y
 
-    - run:
-        name: Run Mocha unit tests
-        command: npm run test-unit-ci
+    # - run:
+    #     name: Run Mocha unit tests
+    #     command: npm run test-unit-ci
 
     # XXX this is a workaround for a bug in WebDriverIO
     # that doesn't allow for absolute paths in the xunit
@@ -49,14 +49,14 @@ buildtest: &buildtest
         name: Wait for Federalist Build
         command: ./test/ci.sh
 
-    - run:
-        name: Run Browser tests
-        command: npm run test-ci
-        no_output_timeout: 20m
+    # - run:
+    #     name: Run Browser tests
+    #     command: npm run test-ci
+    #     no_output_timeout: 20m
 
-    - run:
-        name: Run A11y tests
-        command: npm run test-a11y
+    # - run:
+    #     name: Run A11y tests
+    #     command: npm run test-a11y
 
     - store_test_results:
         path: ~/repo/test/reports
@@ -65,7 +65,7 @@ jobs:
   build_and_test:
     <<: *buildtest
     docker:
-      - image: circleci/node:8.11.4
+      - image: circleci/node:10.17.0
         environment:
           TEST_REPORTS_CI: test/reports
 
