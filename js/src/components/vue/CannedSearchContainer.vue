@@ -40,6 +40,7 @@
           :add-to-query="[{cip4_degree:['b']}]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
+
         <canned-search-slider
           id="canned-search-degree-c"
           label="I want a Certificate"
@@ -55,7 +56,8 @@
 </template>
 <script>
 import querystring from "querystring";
-import CannedSearchSlider from "components/vue/CannedSearchSlider.vue";
+// import CannedSearchSlider from "components/vue/CannedSearchSlider.vue";
+import CannedSearchSlider from "./CannedSearchSlider.vue";
 import _ from "lodash";
 import LocationCheck from '../../vue/mixins/LocationCheck.js';
 
@@ -85,10 +87,9 @@ export default {
     handleCannedToggle(data) {
       // Add to array.
       let newQuery = data.data[0];
-
+      
       if (data.value) {
         // Check for location
-
         if(newQuery.location){
           this.handleLocationCheck();
         }else{

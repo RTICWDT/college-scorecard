@@ -92,13 +92,16 @@
 </style>
 
 <script>
+import _ from 'lodash';
+
 export default {
   props: {
     "school":{
       type: Object
     },
     "fields":{
-      type: Object
+      type: Object,
+      required: true
     },
     "size":{
       default: 'regular',
@@ -108,6 +111,8 @@ export default {
       default: false,
       type: Boolean
     }
+  },
+  created(){
   },
   computed: {
     years() {

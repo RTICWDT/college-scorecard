@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FieldAutocomplete.vue Renders correctly 1`] = `
+<div>
+  <div
+    class="v-input pt-0 mt-0 v-input--hide-details theme--light v-text-field v-text-field--placeholder v-select v-autocomplete"
+  >
+    <div
+      class="v-input__control"
+    >
+      <div
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        aria-owns="list-4"
+        class="v-input__slot"
+        role="combobox"
+      >
+        <div
+          class="v-select__slot"
+        >
+          <input
+            aria-labelledby="fields-label"
+            autocomplete="off"
+            id="search-form-fos-auto-complete"
+            placeholder="Start typing to search"
+            type="text"
+          />
+          <div
+            class="v-input__append-inner"
+          >
+            <div
+              class="v-input__icon v-input__icon--"
+            >
+              <i
+                class="v-icon notranslate v-icon--link material-icons theme--light"
+                role="button"
+              />
+            </div>
+          </div>
+          <div
+            class="v-input__append-inner"
+          >
+            <div
+              class="v-input__icon v-input__icon--append"
+            >
+              <i
+                aria-hidden="true"
+                class="v-icon notranslate mdi mdi-menu-down theme--light"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="v-menu"
+        >
+          <div
+            class="v-menu__content theme--light v-autocomplete__content"
+            style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

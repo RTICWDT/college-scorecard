@@ -7,12 +7,12 @@
     "serve": "jekyll serve --baseurl='' -w",
     "build": "webpack --config webpack.prod.vue.config.js",
     "watch": "webpack --devtool source-map --config webpack.vue.config.js --watch",
-    "test-e2e": "codeceptjs run --steps",
+    "test:e2e": "codeceptjs run --steps",
+    "test:unit": "jest",
     "test-a11y": "./test/a11y.js",
     "test-ci": "wdio test/wdio.ci.js",
     "test-quick": "wdio test/wdio.quick.js",
     "test-sauce": "wdio test/wdio.sauce.js",
-    "test-unit": "mocha -- test/unit",
     "test-unit-ci": "XUNIT_FILE=test/reports/mocha/unit.xml mocha -R spec-xunit-file -- test/unit"
   },
   "dependencies": {
@@ -43,6 +43,9 @@
     "@babel/preset-env": "^7.6.3",
     "@fortawesome/fontawesome-free": "^5.11.2",
     "@mdi/font": "^4.5.95",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "babelify": "^10.0.0",
     "browserify": "^12.0.1",
@@ -52,6 +55,8 @@
     "extend": "^3.0.2",
     "fibers": "^3.1.1",
     "file-loader": "^4.2.0",
+    "jest": "^24.9.0",
+    "jest-serializer-vue": "^2.0.2",
     "jshint": "^2.10.2",
     "mini-css-extract-plugin": "^0.8.0",
     "minifyify": "^7.3.5",
@@ -71,6 +76,7 @@
     "uglify-js": "^3.6.1",
     "vue": "^2.6.10",
     "vue-cli-plugin-vuetify": "^0.6.3",
+    "vue-jest": "^3.0.5",
     "vue-loader": "^15.7.1",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.10",
@@ -90,5 +96,23 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:18F/college-choice.git"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      ".*\\.(vue)$": "vue-jest",
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+    },
+    "testRegex": "(/__tests__/unit/.*|(\\.|/)(test|spec))\\.[jt]sx?$",
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!vue-numeral-filter/.*)"
+    ],
+    "snapshotSerializers": [
+      "jest-serializer-vue"
+    ]
   }
 }
