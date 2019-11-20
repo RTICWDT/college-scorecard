@@ -3,28 +3,20 @@
     <ul class="school-key_figures key-figures ma-0 pa-0 d-flex justify-space-around">
      <v-tooltip bottom>
         <template v-slot:activator="{ on }">
-          <li :class="years | yearsClass" v-if="!sizeOnly" v-on="on"
-            :style="{ 'background-image': 'url('+$baseUrl+'/img/school-icons/'+$options.filters.yearsClass(years).substr(5)+'.svg)' }"
-          >
+          <li :class="years | yearsClass" v-if="!sizeOnly" v-on="on" :style="{ 'background-image': yearIcon }">
             <span>{{ years | formatYearsLabel }}</span>
           </li>
         </template>
         <span>{{tip}}</span>
       </v-tooltip>
-      <li :class="_.get(school, fields['OWNERSHIP'], '-1') | controlClass" v-if="!sizeOnly"
-          :style="{ 'background-image': 'url('+$baseUrl+'/img/school-icons/'+$options.filters.controlClass(_.get(school, fields['OWNERSHIP'], '-1')).substr(5)+'.svg)' }"
-      >
+      <li :class="_.get(school, fields['OWNERSHIP'], '-1') | controlClass" v-if="!sizeOnly" :style="{ 'background-image': ownershipIcon }">
         <span>{{ _.get(school, fields['OWNERSHIP'], '-1') | control }}</span>
       </li>
-      <li :class="_.get(school, fields['LOCALE'], '-1') | localeClass" v-if="!sizeOnly"
-          :style="{ 'background-image': 'url('+$baseUrl+'/img/school-icons/'+$options.filters.localeClass(_.get(school, fields['LOCALE'], '-1')).substr(5)+'.svg)' }"
-      >
+      <li :class="_.get(school, fields['LOCALE'], '-1') | localeClass" v-if="!sizeOnly" :style="{ 'background-image': localeIcon }">
         <span>{{ _.get(school, fields['LOCALE'], '-1') | locale }}</span>
       </li>
 
-      <li :class="_.get(school, fields['SIZE'], '-1') | sizeCategoryClass"
-          :style="{ 'background-image': 'url('+$baseUrl+'/img/school-icons/'+$options.filters.sizeCategoryClass(_.get(school, fields['SIZE'])).substr(5)+'.svg)' }"
-      >
+      <li :class="_.get(school, fields['SIZE'], '-1') | sizeCategoryClass" :style="{ 'background-image': sizeIcon }">
         <span>{{ _.get(school, fields['SIZE'], '-1') | sizeCategory }}</span>
       </li>
     </ul>
@@ -139,6 +131,51 @@ export default {
         default: 
           return 'Most awards earned at this school are at this level, but other degrees or certificates may be offered.';
         break;
+      }
+    },
+     yearIcon(){
+      let icon = this.$options.filters.yearsClass(this.years);
+      if(icon)
+      {
+        return 'url('+this.$baseUrl+'/img/school-icons/'+icon.substr(5)+'.svg)';
+      }
+      else
+      {
+        return 'none';
+      }
+    },
+    ownershipIcon(){
+      let icon = this.$options.filters.controlClass(_.get(this.school, this.fields['OWNERSHIP'], '-1'));
+      if(icon)
+      {
+        return 'url('+this.$baseUrl+'/img/school-icons/'+icon.substr(5)+'.svg)';
+      }
+      else
+      {
+        return 'none';
+      }
+
+    },
+    localeIcon(){
+      let icon = this.$options.filters.localeClass(_.get(this.school, this.fields['LOCALE'], '-1'));
+      if(icon)
+      {
+        return 'url('+this.$baseUrl+'/img/school-icons/'+icon.substr(5)+'.svg)';
+      }
+      else
+      {
+        return 'none';
+      }
+    },
+    sizeIcon(){
+      let icon = this.$options.filters.sizeCategoryClass(_.get(this.school, this.fields['SIZE'])); 
+      if(icon)
+      {
+        return 'url('+this.$baseUrl+'/img/school-icons/'+icon.substr(5)+'.svg)';
+      }
+      else
+      {
+        return 'none';
       }
     }
   }

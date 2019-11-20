@@ -13,7 +13,7 @@ baseurl:
 url: https://collegescorecard.ed.gov
 
 # app version number
-version: v1.18.0
+version: v2.0.0
 
 # Build settings
 markdown: kramdown
@@ -44,7 +44,7 @@ API:
 
 downloads:
   data-dictionary: CollegeScorecardDataDictionary.xlsx
-  data-base_url: https://ed-public-download-11192019.app.cloud.gov/downloads
+  data-base_url: https://ed-public-download.app.cloud.gov/downloads
 
 # specify paths to exclude from copying to _site
 # Note: files and directories with the '_' prefix are excluded
