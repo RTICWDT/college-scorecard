@@ -1,62 +1,120 @@
 {
   "name": "college-choice-js",
   "version": "0.0.0",
-  "author": "18F",
-  "license": "CC0",
   "description": "Scripts for the college-choice project.",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:18F/college-choice.git"
-  },
+  "author": "RTI International",
   "scripts": {
-    "build": "`js/src/browserify-args.sh | xargs -L1 browserify`",
-    "watch": "`js/src/browserify-args.sh | xargs -L1 watchify -v`",
-    "lint": "jshint -c .jshintrc js/src",
-    "test-unit": "mocha -- test/unit",
-    "test-unit-ci": "XUNIT_FILE=test/reports/mocha/unit.xml mocha -R spec-xunit-file -- test/unit",
+    "serve": "jekyll serve --baseurl='' -w",
+    "build": "webpack --config webpack.prod.vue.config.js",
+    "build:dev": "webpack --devtool source-map --config webpack.vue.config.js",
+    "watch": "webpack --devtool source-map --config webpack.vue.config.js --watch",
+    "test:e2e": "codeceptjs run --steps",
+    "test:unit": "jest",
     "test-a11y": "./test/a11y.js",
-    "test": "wdio test/wdio.conf.js",
+    "test-ci": "wdio test/wdio.ci.js",
     "test-quick": "wdio test/wdio.quick.js",
     "test-sauce": "wdio test/wdio.sauce.js",
-    "test-ci": "wdio test/wdio.ci.js"
+    "test-unit-ci": "XUNIT_FILE=test/reports/mocha/unit.xml mocha -R spec-xunit-file -- test/unit"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.6.0",
     "aight": "^2.1.1",
-    "async": "*",
+    "async": "^3.1.0",
+    "axios": "^0.19.0",
+    "chart.js": "^2.8.0",
+    "chartjs-plugin-datalabels": "^0.7.0",
+    "core-js": "^2.6.10",
     "d3": "^3.5.9",
-    "document-register-element": "^1.13.1",
+    "document-register-element": "^1.14.3",
     "element-closest": "^2.0.2",
     "element-dataset": "^2.2.6",
     "formdb": "^0.2.0",
     "html-parsed-element": "^0.4.0",
     "jquery": "^3.4.0",
     "leaflet": "^0.7.7",
-    "typeahead.js-browserify": "^1.0.7"
+    "lodash": "^4.17.15",
+    "typeahead.js-browserify": "^1.0.7",
+    "vue-chartjs": "^3.4.2",
+    "vue-numeral-filter": "^1.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.3.0",
-    "@babel/preset-env": "^7.3.1",
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.3",
+    "@fortawesome/fontawesome-free": "^5.11.2",
+    "@mdi/font": "^4.5.95",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^8.0.6",
     "babelify": "^10.0.0",
     "browserify": "^12.0.1",
+    "codeceptjs": "^2.3.5",
+    "css-loader": "^3.2.0",
+    "deepmerge": "^4.1.1",
     "extend": "^3.0.2",
-    "jshint": "^2.9.7",
+    "fibers": "^3.1.1",
+    "file-loader": "^4.2.0",
+    "jest": "^24.9.0",
+    "jest-junit": "^9.0.0",
+    "jest-serializer-vue": "^2.0.2",
+    "jshint": "^2.10.2",
+    "mini-css-extract-plugin": "^0.8.0",
     "minifyify": "^7.3.5",
-    "mocha": "^6.2.0",
+    "mocha": "^6.2.1",
+    "numeral": "^2.0.6",
     "pa11y": "^4.13.2",
+    "puppeteer": "^1.20.0",
     "request": "^2.88.0",
+    "sass": "^1.23.0",
+    "sass-loader": "^8.0.0",
     "simple-statistics": "^1.0.1",
-    "sinon": "^1.17.2",
+    "sinon": "^1.17.7",
     "spec-xunit-file": "0.0.1-3",
     "stream-array": "^1.1.1",
+    "style-loader": "^1.0.0",
     "tito": "^0.4.0",
-    "uglify-js": "^3.4.9",
+    "uglify-js": "^3.6.1",
+    "vue": "^2.6.10",
+    "vue-cli-plugin-vuetify": "^0.6.3",
+    "vue-jest": "^3.0.5",
+    "vue-loader": "^15.7.1",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.10",
+    "vuetify": "^2.1.3",
+    "vuetify-loader": "^1.2.2",
     "watchify": "^3.11.1",
     "wdio-mocha-framework": "^0.6.4",
     "webdriverio": "^4.14.4",
+    "webpack": "^4.41.1",
+    "webpack-cli": "^3.3.9",
     "xmlhttprequest": "^1.8.0"
   },
   "engines": {
-    "node": ">= 8.11.1"
+    "node": ">= 10.17.0"
+  },
+  "license": "CC0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:18F/college-choice.git"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      ".*\\.(vue)$": "vue-jest",
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+    },
+    "testRegex": "(/__tests__/unit/.*|(\\.|/)(test|spec))\\.[jt]sx?$",
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!vue-numeral-filter/.*)"
+    ],
+    "snapshotSerializers": [
+      "jest-serializer-vue"
+    ]
   }
 }
