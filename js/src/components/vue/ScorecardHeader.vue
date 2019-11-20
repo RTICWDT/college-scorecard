@@ -66,7 +66,7 @@ header {
       color="#0e365b"
       class="pa-0 ma=0"
     >
-      <a :href="$baseUrl+'/index'">
+      <a :href="$baseUrl+'/'">
         <div class='logo'><img :src="$baseUrl+'/img/US-DeptOfEducation-Seal.svg'" alt="Department of Education Seal" /></div>
         <div class='headerText'>
           <span class='edLine'>U.S. Department of Education</span>
