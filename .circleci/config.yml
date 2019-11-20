@@ -9,13 +9,13 @@ buildtest: &buildtest
     - restore_cache:
         key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
 
-    - run:
-        name: Install phantomjs
-        command: |
-          if ! [ $(which phantomjs) ]; then
-            sudo curl --output /usr/local/bin/phantomjs https://s3.amazonaws.com/circle-downloads/phantomjs-2.1.1
-          fi
-          sudo chmod ugo+x /usr/local/bin/phantomjs
+    # - run:
+    #     name: Install phantomjs
+    #     command: |
+    #       if ! [ $(which phantomjs) ]; then
+    #         sudo curl --output /usr/local/bin/phantomjs https://s3.amazonaws.com/circle-downloads/phantomjs-2.1.1
+    #       fi
+    #       sudo chmod ugo+x /usr/local/bin/phantomjs
 
     - run:
         name: NPM Install
@@ -29,21 +29,20 @@ buildtest: &buildtest
     - run:
         name: Create directories for xunit reports
         command: |
-          mkdir -p test/reports/mocha
-          mkdir -p test/reports/browser
-          mkdir -p test/reports/a11y
+          mkdir -p test/reports/unit
+          mkdir -p test/reports/e2e
 
     - run:
-        name: Run Mocha unit tests
-        command: npm run test-unit-ci
+        name: Run Jest unit tests
+        command: JEST_JUNIT_OUTPUT_DIR="test/reports" JEST_JUNIT_OUTPUT_NAME="unit.xml" npx jest --ci --reporters=default --reporters=jest-junit
 
-    # XXX this is a workaround for a bug in WebDriverIO
-    # that doesn't allow for absolute paths in the xunit
-    # output directory:
-    # <https://github.com/webdriverio/webdriverio/issues/926>
-    - run:
-        name: WebDriverIO workaround directory
-        command: ln -s /tmp
+    # # XXX this is a workaround for a bug in WebDriverIO
+    # # that doesn't allow for absolute paths in the xunit
+    # # output directory:
+    # # <https://github.com/webdriverio/webdriverio/issues/926>
+    # - run:
+    #     name: WebDriverIO workaround directory
+    #     command: ln -s /tmp
 
     - run:
         name: Wait for Federalist Build
@@ -51,12 +50,12 @@ buildtest: &buildtest
 
     - run:
         name: Run Browser tests
-        command: npm run test-ci
+        command: npx codeceptjs run --steps --reporter xunit > test/reports/browser
         no_output_timeout: 20m
 
-    - run:
-        name: Run A11y tests
-        command: npm run test-a11y
+    # - run:
+    #     name: Run A11y tests
+    #     command: npm run test-a11y
 
     - store_test_results:
         path: ~/repo/test/reports
@@ -65,7 +64,7 @@ jobs:
   build_and_test:
     <<: *buildtest
     docker:
-      - image: circleci/node:8.11.4
+      - image: circleci/node:10.17.0
         environment:
           TEST_REPORTS_CI: test/reports
 
