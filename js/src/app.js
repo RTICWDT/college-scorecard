@@ -37,6 +37,8 @@ import style from '../../sass/style.scss';
 Vue.component('scorecard-header', ScorecardHeader);
 Vue.component('scorecard-footer', ScorecardFooter);
 
+Vue.prototype.$baseUrl = window.baseurl;
+
 
 new Vue({
   vuetify,

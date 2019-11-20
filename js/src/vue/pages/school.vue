@@ -77,7 +77,7 @@
                     <h2 class="title school-url mt-0">
                       <a
                         target="_blank"
-                        :href="'/school/transition/?url='+schoolUrl"
+                        :href="$baseUrl+'/school/transition/?url='+schoolUrl"
                       >{{ schoolUrlDisplay | formatUrlText }}</a>
                     </h2>
                     <school-icons :school="school" :fields="fields" class="my-5" />
@@ -778,7 +778,7 @@ export default {
   },
   computed: {
     referer() {
-      return document.referrer || "/search/";
+      return document.referrer || this.$baseUrl+"/search/";
     },
     shareLink() {
       return window.location.href || null;
@@ -838,9 +838,9 @@ export default {
     searchURL() {
       let qs = this.returnURLFromStorage();
       if (qs) {
-        return "/search/" + qs;
+        return this.$baseUrl+"/search/" + qs;
       } else {
-        return "/search/";
+        return this.$baseUrl+"/search/";
       }
     }
   },
@@ -905,11 +905,11 @@ export default {
     handleSchoolNameSelected(school) {
       if(typeof school == "string")
       {
-        window.location = '/search/?name=' + encodeURIComponent(school);
+        window.location = this.$baseUrl+'/search/?name=' + encodeURIComponent(school);
       }
       else
       {
-        window.location = '/search/?name=' + encodeURIComponent(school['school.name']) + "&id="+school.id;
+        window.location = this.$baseUrl+'/search/?name=' + encodeURIComponent(school['school.name']) + "&id="+school.id;
       }
     }
   },

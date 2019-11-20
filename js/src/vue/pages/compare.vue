@@ -521,7 +521,7 @@ export default {
       // Generate URL based on params,
       let qs = querystring.stringify(params);
       let url =
-        "/search/?" +
+        this.$baseUrl+"/search/?" +
         qs
           .replace(/^&+/, "")
           .replace(/&{2,}/g, "&")

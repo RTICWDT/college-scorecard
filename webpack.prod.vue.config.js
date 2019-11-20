@@ -43,7 +43,7 @@ module.exports = {
             options: {
               name: '[name].[ext]',
               outputPath: '../css/fonts/',
-              publicPath: '/css/fonts/'
+              publicPath: process.env.BASEURL+'/css/fonts/'
             }
           }
         ]

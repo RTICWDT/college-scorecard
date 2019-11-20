@@ -53,7 +53,7 @@
                 </v-chip>
                 <a
                 target="_blank"
-                :href="'/school/transition/?url='+schoolUrl"
+                :href="$baseUrl+'/school/transition/?url='+schoolUrl"
                 >{{ _.get(school, fields['SCHOOL_URL'], 'ed.gov') | formatUrlText }}</a>
             </v-col>
 

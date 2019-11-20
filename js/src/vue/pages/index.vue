@@ -221,7 +221,7 @@ export default {
       // Generate URL based on params,
       let qs = querystring.stringify(params);
       let url =
-        "/search/?" +
+        this.$baseUrl+"/search/?" +
         qs
           .replace(/^&+/, "")
           .replace(/&{2,}/g, "&")
@@ -233,11 +233,11 @@ export default {
     handleSchoolNameSelected(school) {
       if(typeof school == "string")
       {
-        window.location = '/search/?name=' + encodeURIComponent(school);
+        window.location = this.$baseUrl+'/search/?name=' + encodeURIComponent(school);
       }
       else
       {
-        window.location = '/search/?name=' + encodeURIComponent(school['school.name']) + "&id="+school.id;
+        window.location = this.$baseUrl+'/search/?name=' + encodeURIComponent(school['school.name']) + "&id="+school.id;
       }
     }
   }
