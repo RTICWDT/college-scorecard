@@ -3,15 +3,15 @@ const BASE_URL = "/compare/";
 
 Feature('Page: Compare');
 
-Scenario('Page renders search form with no compare items, no console errors', async (I) => {
-  I.amOnPage(BASE_URL);
+// Scenario('Page renders search form with no compare items, no console errors', async (I) => {
+//   I.amOnPage(BASE_URL);
 
-  let errors = await I.grabAndFilterConsole('error');
-  assert.equal(errors.length, 0);
+//   let errors = await I.grabAndFilterConsole('error');
+//   assert.equal(errors.length, 0);
 
-  // See search form
-  I.see('No schools selected to compare','h1');
-});
+//   // See search form
+//   I.see('No schools selected to compare','h1');
+// });
 
 Scenario('Add items to local storage, see chart elements, expand all, no console errors', async (I) => {
   // Add items to compare;
