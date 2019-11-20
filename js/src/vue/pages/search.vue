@@ -362,8 +362,6 @@ export default {
 
       params.sort = this.input.sort;
 
-      // TODO - Remove old call if not needed.
-      // let query = picc.form.prepareParams(params);
       let query = this.prepareParams(params);
 
       query.fields = [
