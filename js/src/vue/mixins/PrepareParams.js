@@ -66,6 +66,11 @@ const alias = {
   },
 
   control: function(query, value, key) {
+    //Array Translation
+    if(typeof value === 'string'){
+      value = value.split();
+    }
+    
     value = mapControl(value);
     query[fields.OWNERSHIP] = value.join(',');
     // picc.data.rangify(query, fields.OWNERSHIP, value);
@@ -173,6 +178,10 @@ const alias = {
   },
 
   locale: function(query, value, key){
+    //Array Translation
+    if(typeof value === 'string'){
+      value = value.split();
+    }
     var localeArray = [];
 
     for(var i in value){
