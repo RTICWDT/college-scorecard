@@ -8,23 +8,7 @@ import SearchForm from '../../../js/src/components/vue/SearchForm.vue';
 
 
 describe('SearchForm.vue', () => {
-
-  beforeEach(() => {
-  })
   
-  test('Renders correctly', async () => {
-    const mountOptions = {
-      propsData:{
-        displayAllFilters: true,
-        autoSubmit: true,
-        urlParsedParams:{}
-      },
-    }
-
-    const wrapper = shallowMountWithConfig(SearchForm,mountOptions);
-    expect(wrapper.element).toMatchSnapshot();
-  });
-
   test('is a Vue instance', () => {
     const mountOptions = {
       propsData:{

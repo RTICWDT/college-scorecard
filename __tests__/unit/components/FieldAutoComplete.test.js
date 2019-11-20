@@ -5,15 +5,15 @@ import { getConsoleOutput } from '@jest/console';
 
 describe('FieldAutocomplete.vue', () => {
 
-  test('Renders correctly', () => {
-    const mountOptions = {
-      attachToDocument: true,
-    }
+  // test('Renders correctly', () => {
+  //   const mountOptions = {
+  //     attachToDocument: true,
+  //   }
 
-    const wrapper = mountWithConfig(FieldAutocomplete, mountOptions);
-    expect(wrapper.element).toMatchSnapshot();
-    wrapper.destroy();
-  });
+  //   const wrapper = mountWithConfig(FieldAutocomplete, mountOptions);
+  //   expect(wrapper.element).toMatchSnapshot();
+  //   wrapper.destroy();
+  // });
 
   test('MapValueToProp', () => {
     const mountOptions = {

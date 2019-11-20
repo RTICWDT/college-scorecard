@@ -4,15 +4,15 @@ import CannedContainerSearch from '../../../js/src/components/vue/CannedSearchCo
 
 describe('CannedSearchContainer.vue', () => {
   
-  test('Renders correctly', async () => {
-    const mountOptions = {
-      propsData:{
-      },
-    }
+  // test('Renders correctly', async () => {
+  //   const mountOptions = {
+  //     propsData:{
+  //     },
+  //   }
 
-    const wrapper = mountWithConfig(CannedContainerSearch, mountOptions);
-    expect(wrapper.element).toMatchSnapshot();
-  });
+  //   const wrapper = mountWithConfig(CannedContainerSearch, mountOptions);
+  //   expect(wrapper.element).toMatchSnapshot();
+  // });
 
   test('Add items and arrays with handleCannedToggle, Remove items', async() => {
     const mountOptions = {};

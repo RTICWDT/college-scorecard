@@ -9,17 +9,17 @@ describe('Component: SearchResultCard', () => {
   beforeEach(() => {
   })
 
-  test('is a Vue instance', () => {
-    const mountOptions = {
-      propsData:{
-        school: schoolData,
-        fields: fieldData
-      }
-    }
+  // test('is a Vue instance', () => {
+  //   const mountOptions = {
+  //     propsData:{
+  //       school: schoolData,
+  //       fields: fieldData
+  //     }
+  //   }
 
-    const wrapper = shallowMountWithConfig(SearchResultCard,mountOptions);
-    expect(wrapper.isVueInstance()).toBeTruthy()
-  })
+  //   const wrapper = shallowMountWithConfig(SearchResultCard,mountOptions);
+  //   expect(wrapper.isVueInstance()).toBeTruthy()
+  // })
 
   test('Comapre click event is fired',() => {
     const mountOptions = {
@@ -47,20 +47,6 @@ describe('Component: SearchResultCard', () => {
 
     const wrapper = shallowMountWithConfig(SearchResultCard, mountOptions);
     expect(wrapper.find('strong.white--text').text()).toBe('Under ED Monitoring');
-  });
-
-  // Snapshot test
-  test('Renders correctly',()=> {
-    const mountOptions = {
-      propsData:{
-        school: schoolData,
-        fields: fieldData
-      }
-    }
-
-    const wrapper = mountWithConfig(SearchResultCard, mountOptions);
-
-    expect(wrapper.element).toMatchSnapshot();
   });
 
 })
