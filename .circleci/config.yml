@@ -30,11 +30,11 @@ buildtest: &buildtest
         name: Create directories for xunit reports
         command: |
           mkdir -p test/reports/unit
-          mkdir -p test/reports/e2e
+          mkdir -p test/reports/browser
 
     - run:
         name: Run Jest unit tests
-        command: JEST_JUNIT_OUTPUT_DIR="test/reports" JEST_JUNIT_OUTPUT_NAME="unit.xml" npx jest --ci --reporters=default --reporters=jest-junit
+        command: JEST_JUNIT_OUTPUT_DIR="test/reports/unit" JEST_JUNIT_OUTPUT_NAME="unit.xml" npx jest --ci --reporters=default --reporters=jest-junit
 
     # # XXX this is a workaround for a bug in WebDriverIO
     # # that doesn't allow for absolute paths in the xunit
@@ -50,7 +50,7 @@ buildtest: &buildtest
 
     - run:
         name: Run Browser tests
-        command: npx codeceptjs run --steps --reporter xunit > test/reports/browser
+        command: npx codeceptjs run --steps --reporter xunit > test/reports/browser/browser.xml
         no_output_timeout: 20m
 
     # - run:
