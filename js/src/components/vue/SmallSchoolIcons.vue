@@ -3,20 +3,28 @@
     <ul class="school-key_figures key-figures ma-0 pa-0 d-flex justify-space-around">
      <v-tooltip bottom>
         <template v-slot:activator="{ on }">
-          <li :class="years | yearsClass" v-if="!sizeOnly" v-on="on">
+          <li :class="years | yearsClass" v-if="!sizeOnly" v-on="on"
+            :style="{ 'background-image': 'url('+$baseUrl+'/img/school-icons/'+$options.filters.yearsClass(years).substr(5)+'.svg)' }"
+          >
             <span>{{ years | formatYearsLabel }}</span>
           </li>
         </template>
         <span>{{tip}}</span>
       </v-tooltip>
-      <li :class="_.get(school, fields['OWNERSHIP'], '-1') | controlClass" v-if="!sizeOnly">
+      <li :class="_.get(school, fields['OWNERSHIP'], '-1') | controlClass" v-if="!sizeOnly"
+          :style="{ 'background-image': 'url('+$baseUrl+'/img/school-icons/'+$options.filters.controlClass(_.get(school, fields['OWNERSHIP'], '-1')).substr(5)+'.svg)' }"
+      >
         <span>{{ _.get(school, fields['OWNERSHIP'], '-1') | control }}</span>
       </li>
-      <li :class="_.get(school, fields['LOCALE'], '-1') | localeClass" v-if="!sizeOnly">
+      <li :class="_.get(school, fields['LOCALE'], '-1') | localeClass" v-if="!sizeOnly"
+          :style="{ 'background-image': 'url('+$baseUrl+'/img/school-icons/'+$options.filters.localeClass(_.get(school, fields['LOCALE'], '-1')).substr(5)+'.svg)' }"
+      >
         <span>{{ _.get(school, fields['LOCALE'], '-1') | locale }}</span>
       </li>
 
-      <li :class="_.get(school, fields['SIZE'], '-1') | sizeCategoryClass">
+      <li :class="_.get(school, fields['SIZE'], '-1') | sizeCategoryClass"
+          :style="{ 'background-image': 'url('+$baseUrl+'/img/school-icons/'+$options.filters.sizeCategoryClass(_.get(school, fields['SIZE'])).substr(5)+'.svg)' }"
+      >
         <span>{{ _.get(school, fields['SIZE'], '-1') | sizeCategory }}</span>
       </li>
     </ul>
@@ -31,7 +39,6 @@
 .school-key_figures {
     $height: 20px;
     margin-top: $base-padding;
-
     $list:  rural, town, suburban, city,
             small, medium, large,
             public, private, profit,
@@ -39,7 +46,7 @@
 
     @each $icon in $list {
       .icon-#{$icon} {
-        background: url(/img/school-icons/#{$icon}.svg) no-repeat,
+        background: transparent no-repeat,
           linear-gradient(transparent, transparent);
         background-position: top center;
         background-size: 50px $height;
