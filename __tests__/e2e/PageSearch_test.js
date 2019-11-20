@@ -76,7 +76,6 @@ Scenario('Click items in search and get updated results.', async(I) => {
   
   // Test URL
   let url = await I.grabCurrentUrl();
-  console.log(`Current URL is [${url}]`);
   
   I.seeInCurrentUrl('completion_rate=0.5..');
   I.seeInCurrentUrl('avg_net_price=..10000');
