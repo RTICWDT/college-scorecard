@@ -1,0 +1,8 @@
+{
+  "compilerOption": {
+    "allowJs": true
+  },
+  "typeAcquisition": { 
+    "include": [ "jest" ] 
+  }
+}

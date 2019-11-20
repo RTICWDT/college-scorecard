@@ -57,8 +57,7 @@ the source files.
 ## Front End Development
 
 ### Stylesheets
-- We use [Sass] to generate our CSS. Jekyll handles this automatically.
-- [Montserrat] is our primary font, courtesy of [Google Fonts](https://www.google.com/fonts/).
+- We use [Sass] to generate our CSS.  Webpack is configured to translate standalone Sass files or styles within [VueJS Single File Components](https://vuejs.org/v2/guide/single-file-components.html)
 
 ### JavaScript
 See the [JavaScript docs](js/#readme) for more information on our scripting tools and

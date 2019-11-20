@@ -1,0 +1,15 @@
+---
+title: Glossary | College Scorecard
+layout: default
+permalink: /data/glossary/
+---
+
+<script>
+  // TODO - Do we need any more data?
+  let siteDataAll = {{site.data | jsonify}}
+</script>
+
+<div id="app">
+  <!-- Pass other variables as props-->
+  <data-glossary page-permalink="{{ page.permalink }}" />
+</div>

@@ -1,21 +1,7 @@
 ---
 layout: default
 ---
-<!-- error message -->
-<div>
-  <section class="section">
-    <div class="container">
-      <div class="content-column">
-        <h1>We flunked!</h1>
-        <p>We couldn't find the page you were looking for. <a href="{{ site.baseurl }}">Try searching again?</a></p>
-      </div>
-      <div class="content-column">
-        <img src="{{ site.baseurl}}/img/f-grade-paper.jpg" alt="Grade of F">
-      </div>
-    </div>
-  </section>
+<div id="app">
+  <!-- Pass other variables as props-->
+  <four-oh-four page-permalink="{{ page.permalink }}" base-url="{{site.baseurl}}"   />
 </div>
-
-<script>
-  picc.pages.index();
-</script>

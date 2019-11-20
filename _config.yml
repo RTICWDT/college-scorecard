@@ -13,7 +13,7 @@ baseurl:
 url: https://collegescorecard.ed.gov
 
 # app version number
-version: v1.19.1
+version: v2.0.0
 
 # Build settings
 markdown: kramdown
@@ -23,10 +23,16 @@ sass:
 
 # common site scripts, relative to `{{ site.baseurl }}/js/`
 scripts:
-  - picc.js
+  # - picc.js
 
 stylesheets:
   - styles.css
+
+vue:
+  scripts:
+    - app.js
+  stylesheets:
+    - app.css
 
 # whether to include the Google Analytics & DAP snippets
 analytics: true
@@ -38,7 +44,6 @@ API:
 
 downloads:
   data-dictionary: CollegeScorecardDataDictionary.xlsx
-  # data-base_url: https://ed-public-download-09272019.app.cloud.gov/downloads
   data-base_url: https://ed-public-download.app.cloud.gov/downloads
 
 # specify paths to exclude from copying to _site
@@ -59,3 +64,7 @@ exclude:
   # see test/circle.yml for why this is necessary
   - tmp
   - vendor
+  - '*.vue' 
+  - js/src/*
+  - __tests
+  - output

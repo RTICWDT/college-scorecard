@@ -1,0 +1,44 @@
+// All New Styles
+@import '_variables.scss';
+
+@import '../css/fonts/fonts.css';
+@import '~@mdi/font/css/materialdesignicons.css';
+@import '~vuetify/dist/vuetify.min';
+@import '_vuetify-overrides.scss';
+
+// Font Awesome
+@import '~@fortawesome/fontawesome-free/css/fontawesome.min.css';
+@import '~@fortawesome/fontawesome-free/css/solid.min.css';
+@import '~@fortawesome/fontawesome-free/css/regular.min.css';
+
+.sr-only{
+  display:none;
+}
+
+.navy-text{
+  color: $dark-blue;
+}
+
+.data-na{
+  padding: 1rem;
+  border: 1px dashed $light-gray;
+  color: $dark-gray;
+  text-align: center;
+  margin: 0.8rem 0;
+}
+.browsermessage{
+  font-family: $header-font-family;
+  background-color: $sky-blue;
+  text-align: center;
+}
+.csGreenBg{
+  background-color: $darker-green;
+}
+#search-can-query-items-wrapper{
+  height:100%;
+}
+
+.btnText{
+  line-height: 125% !important;
+}
+
