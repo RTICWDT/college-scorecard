@@ -496,7 +496,7 @@ export default {
       this.compareSchools.map(function (itm, idx) {
         url += "&s[]=" + itm.schoolId;
       });
-      return window.location.origin + this.$baseurl + '/compare/?' + encodeURIComponent(url.substr(1));
+      return window.location.origin + this.$baseUrl + '/compare/?' + encodeURIComponent(url.substr(1));
     },
     referrerLink() {
       return document.referrer || null;
