@@ -313,12 +313,12 @@
                     @click="trackAccordion('Financial Aid &amp; Debt')"
                   >Financial Aid &amp; Debt</v-expansion-panel-header>
                   <v-expansion-panel-content id="aid-content" class="px-0 py-3 pa-sm-5">
-                    <v-alert
+                    <v-card
                       v-if="(aidFlag > 3) && (aidFlag < 8)"
-                      type="info"
-                    >{{site.data.glossary.ogc.default}}</v-alert>
-                    <v-alert v-else-if="aidFlag==3" type="info">{{site.data.glossary.ogc.flag3}}</v-alert>
-                    <v-alert v-else-if="aidFlag==8" type="info">{{site.data.glossary.ogc.flag8}}</v-alert>
+                      color="blue" class='pa-5 white--text'
+                    >{{site.data.glossary.ogc.default}}</v-card>
+                    <v-card v-else-if="aidFlag==3" color="blue" class='pa-5 white--text'>{{site.data.glossary.ogc.flag3}}</v-card>
+                    <v-card v-else-if="aidFlag==8" color="blue" class='pa-5 white--text'>{{site.data.glossary.ogc.flag8}}</v-card>
                     <div v-else>
                       <v-row>
                         <v-col cols="12" md="6">

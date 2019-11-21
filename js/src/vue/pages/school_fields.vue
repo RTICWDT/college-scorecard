@@ -81,7 +81,7 @@
               <v-alert
                 v-if="currentFilter === 4"
                 color="warning"
-              >No data are displayed because of definitional differences with other data sources. Fields of study on this page include undergraduate-level programs that may be classified as undergraduate certificates in other data sources.</v-alert>
+              >No data on the number of graduates are displayed because of definitional differences with other data sources. Fields of study on this page include undergraduate-level programs that may be classified as undergraduate certificates in other data sources.</v-alert>
               <v-alert
                 v-if="currentFilter === 8"
                 color="warning"
