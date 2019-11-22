@@ -15,10 +15,14 @@ export default {
       this.location.error = null;
 
       if (navigator.geolocation) {
-        let vm = this;
-        navigator.geolocation.getCurrentPosition(function(position){
-          vm.location.latLon = vm.calculateBoundingBox(position.coords.latitude,position.coords.longitude, vm.location.miles * 1.609); // Convert miles to KM (Aprroximate)
-          vm.location.isLoading = false;
+        navigator.geolocation.getCurrentPosition((position)=>{
+          this.location.latLon = this.calculateBoundingBox(position.coords.latitude, position.coords.longitude, this.location.miles * 1.609); // Convert miles to KM (Aprroximate)
+          this.location.isLoading = false;
+        },(error) => {
+          this.location.error = "Not Available";
+          this.location.isLoading = false;
+        },{
+          timeout:5000
         });
         
       } else {
