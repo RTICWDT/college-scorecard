@@ -514,7 +514,7 @@ export default {
     },
     clearSearchForm(){
       this.input = {
-        page: 0,
+        page: 1,
         sort: this.defaultSort
       };
       
