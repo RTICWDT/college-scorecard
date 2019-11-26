@@ -476,7 +476,7 @@ export default {
         if (this.utility.initialized) {
           this.debounceEmitSearchQuery();
         } else {
-          this.$emit('search-query', newValue);
+          this.$emit('search-query', {...newValue});
           this.utility.initialized = true;
         }
       },
@@ -598,7 +598,8 @@ export default {
     this.mapInputFromProp();
 
     this.debounceEmitSearchQuery = _.debounce(function () {
-      this.$emit('search-query', this.cleanInput);
+      // Send new param object, reset page
+      this.$emit('search-query', {...this.cleanInput, page:0});
     }, 1000);
 
   },

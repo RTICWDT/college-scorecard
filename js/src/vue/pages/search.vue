@@ -354,9 +354,13 @@ export default {
       let poppingState = false;
       let alreadyLoaded = false;
 
-      // Add page and sort items into params.
-      if (this.input.page >= 1) {
-        // The API function off of a 0 index
+      //Add page and sort items into params.
+      if(params.page === 0){
+        // Reset page when passed 0
+        this.input.page = 1;
+      }else if (this.input.page >= 1) {
+        // Use local page counter;
+        // The API function off of a 0 index;
         params.page = this.input.page - 1;
       }
 
