@@ -93,9 +93,9 @@
         </v-col>
       </v-row>
     </v-card-text>
-    <v-card-action>
+    <v-card-actions>
       <p class='px-3'><a :href='schoolLink' class='moreDetails'>View More Details &raquo;</a></p>
-    </v-card-action>
+    </v-card-actions>
   </v-card>
 </template>
 
