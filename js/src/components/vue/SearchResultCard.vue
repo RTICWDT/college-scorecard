@@ -93,8 +93,8 @@
         </v-col>
       </v-row>
     </v-card-text>
-    <v-card-actions>
-      <p class='px-3'><a :href='schoolLink' class='moreDetails'>View More Details &raquo;</a></p>
+    <v-card-actions class='py-0'>
+      <p class='px-1'><a :href='schoolLink' class='moreDetails'>View More Details &raquo;</a></p>
     </v-card-actions>
   </v-card>
 </template>
