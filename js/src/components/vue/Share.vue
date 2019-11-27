@@ -10,6 +10,7 @@
           :text="text"
           class='d-none d-sm-inline'
         >
+      
           <v-icon x-small class='mr-2'>fas fa-share</v-icon> {{label}}
         </v-btn>
       </template>
@@ -69,7 +70,7 @@ export default {
         return [
             { title: 'Twitter' , 'url': 'https://twitter.com/intent/tweet?text='+this.sentence+'&amp;url='},
             { title: 'Facebook', 'url': 'https://www.facebook.com/sharer/sharer.php?u=' },
-            { title: 'Email', 'url': 'mailto:?subject='+this.sentence+'&amp;body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A' }, 
+            { title: 'Email', 'url': 'mailto:?subject='+this.sentence.slice(0,-1)+'&body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A' }, 
             { title: 'LinkedIn', 'url': 'https://www.linkedin.com/shareArticle?mini=true&url='},
         ];
       },

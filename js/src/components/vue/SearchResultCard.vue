@@ -2,6 +2,9 @@
 .nameLink {
   text-decoration: none;
   line-height: 125%;
+  &:hover{
+    text-decoration: underline;
+  }
 }
 .search-result-card {
   border: 4px
@@ -13,6 +16,13 @@
   border: 4px
     solid
     #eeba28 !important;
+}
+.moreDetails{
+  font-size: 0.9rem;
+  text-decoration: none;
+  &:hover{
+    text-decoration: underline;
+  }
 }
 </style>
 
@@ -83,6 +93,9 @@
         </v-col>
       </v-row>
     </v-card-text>
+    <v-card-actions class='py-0'>
+      <p class='px-1'><a :href='schoolLink' class='moreDetails'>View More Details &raquo;</a></p>
+    </v-card-actions>
   </v-card>
 </template>
 
