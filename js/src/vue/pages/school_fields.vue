@@ -206,7 +206,9 @@ export default {
       return _.sortBy(sorted, ['name']);
     },
     referrerLink(){
-      return document.referrer || null;
+      let id = _.get(this.school, this.fields['ID']);
+      let name = _.get(this.school, this.fields['NAME'], '(unknown)');
+      return this.$baseUrl+'/school/?' + id + '-' + name.replace(/\W+/g, '-');
     },
     shareLink(){
       return window.location.href || null;
