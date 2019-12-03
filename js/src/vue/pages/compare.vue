@@ -405,9 +405,12 @@
 
             <!-- Search Form Component -->
             <div v-show="!loading && showSearchForm">
+              <v-card class="pa-5 mb-2">
+                <h1 class="text-center pt-3">No schools selected to compare.</h1>
+                <p class="text-center mt-2">Try searching for schools and clicking the <v-icon>fa fa-plus-circle</v-icon> to add a school for comparison.</p>
+
+              </v-card>
               <v-card class="px-5 pt-0 pb-5">
-                <h1 class="text-center pt-3">No schools selected to compare</h1>
-                <p class="text-center mt-2">Try searching for schools and clicking the <v-icon>fa fa-plus-circle</v-icon> to add a school for comparison</p>
                 <search-form @search-query="directToSearch" />
               </v-card>
             </div>
@@ -415,6 +418,10 @@
           </v-col>
 
           <v-col lg="3">
+            <v-card v-if="passedSchools.length>0" class="pa-5 mb-3">
+              <p>You are viewing a shared comparison.</p>
+              <v-btn small color="secondary" rounded @click="saveCompareList()">Update Your List</v-btn>
+            </v-card>
             <v-card class="pa-5">
               <paying-for-college />
             </v-card>
@@ -487,7 +494,9 @@ export default {
       currentHighlight: "",
       loading: true,
       mobilePanels: 0,
-      desktopTabs: 1
+      desktopTabs: 1,
+      passedSchools: [],
+      cacheList: []
     };
   },
   computed: {
@@ -529,6 +538,19 @@ export default {
 
       // Direct to location.
       window.location.href = url;
+    }, 
+    saveCompareList(){
+      let i=0;
+      // remove existing schools
+      for(i=0; i<this.compareSchools.length; i++)
+      {
+        this.$emit('toggle-compare-school',{ schoolId: this.compareSchools[i].schoolId, schoolName: this.compareSchools[i].schoolName });
+      }
+      // add compare schools
+      for(i=0; i<this.cacheList.length; i++)
+      {
+        this.$emit('toggle-compare-school',{ schoolId: this.cacheList[i].schoolId, schoolName: this.cacheList[i].schoolName });
+      };
     }
   },
   mounted() {
@@ -549,15 +571,40 @@ export default {
     let query = {};
     let schoolArray = [];
     let paramArray = [];
-    this.compareSchools.map(function (school) {
-      var id = +school.schoolId || +school;
-      schoolArray.push(id);
-      paramArray.push({
-        id: id
+    let passed = querystring.parse(window.location.search.substr(1));
+    if(passed['s[]'])
+    {
+      this.passedSchools = passed['s[]'];
+    }
+    // handle case when we have just 
+    // one school
+    if(typeof(this.passedSchools) == 'string')
+    {
+      this.passedSchools = [this.passedSchools];
+    }
+    if(this.passedSchools.length>0)
+    {  
+      for(let i=0; i<this.passedSchools.length; i++)
+      {
+        let id = parseInt(this.passedSchools[i]);
+        if(id){
+          schoolArray.push(id);
+          paramArray.push({
+            id: id
+          });
+        }
+      }
+    }
+    else
+    {
+      this.compareSchools.map(function (school) {
+        var id = +school.schoolId || +school;
+        schoolArray.push(id);
+        paramArray.push({
+          id: id
+        });
       });
-
-    });
-
+    }
     this.trackCompareList(schoolArray.join(';'));
     this.loading = true;
     let request = apiGetAll(window.api.url, window.api.key, '/schools/', paramArray).then((responses) => {
@@ -569,6 +616,12 @@ export default {
       });
 
       schoolData.forEach((school) => {
+        // if you are passing in some, generate an object 
+        // of passed in schools so they can be saved
+        if(this.passedSchools)
+        {
+          this.cacheList.push({ schoolId: _.get(school, this.fields["ID"]), schoolName: _.get(school, this.fields["NAME"])})  
+        }
         switch (_.get(school, this.fields["PREDOMINANT_DEGREE"])) {
           case 1:
             this.schools["Certificate schools"].push(school);

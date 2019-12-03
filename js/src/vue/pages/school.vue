@@ -118,7 +118,7 @@
                       <h2 class="mb-3">
                       <!--prettyhtml-ignore-->
                       Salary After Completing&nbsp;
-                      <tooltip definition="fos-median-earnings" :isBranch="isBranch" />
+                      <tooltip definition="fos-median-earnings" :isBranch="isBranch" :limitedFoS="fieldsLink" />
                     </h2>
                     <p>Salary after completing depends on field of study.</p>
                     <multi-range
@@ -338,7 +338,7 @@
                         <v-col cols="12" md="6">
                           <h2 class="mb-3">
                             Median Total Debt After Graduation
-                            <tooltip definition="avg-debt" :isBranch="isBranch" />
+                            <tooltip definition="avg-debt" :isBranch="isBranch" :limitedFoS="fieldsLink" />
                           </h2>
                           <p>Total debt after graduation depends on field of study for undergraduate borrowers who complete college.</p>
                           <multi-range
@@ -349,7 +349,7 @@
 
                           <h2 class="mb-3">
                             Typical Monthly Loan Payment&nbsp;
-                            <tooltip definition="avg-loan-payment" :isBranch="isBranch" />
+                            <tooltip definition="avg-loan-payment" :isBranch="isBranch" :limitedFoS="fieldsLink" />
                           </h2>
                           <div v-if="debtRange && debtRange.single">
                             <div
@@ -426,7 +426,7 @@
                   >Fields of Study</v-expansion-panel-header>
                   <v-expansion-panel-content id="academics-content" class="px-0 py-3 pa-sm-5">
                     <!-- <div if=''> -->
-                    <h2 class="mb-3">Top Fields of Study <tooltip definition="field-of-study" /></h2>
+                    <h2 class="mb-3">Top Fields of Study <tooltip definition="field-of-study" :limitedFoS="fieldsLink" /></h2>
                     <p class="my-0">
                       <span class="d-block d-sm-inline">Sort by:</span>
                       <v-btn
@@ -449,7 +449,7 @@
                       >Lowest Debt</v-btn>
                     </p>
                     <p class="my-3" v-if="fieldsOfStudy.length">
-                      Out of {{allFieldsOfStudy.length | numeral }} {{allFieldsOfStudy.length==1? 'field':'fields' }} of study at {{ schoolName }}, the {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} {{ hoistGroupText }} are shown below. ({{ hoistCount}} had relevant data on {{ hoistGroupData }}.)
+                      Out of {{allFieldsOfStudy.length | numeral }} undergraduate {{allFieldsOfStudy.length==1? 'field':'fields' }} of study at {{ schoolName }}, the {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} {{ hoistGroupText }} are shown below. ({{ hoistCount}} had relevant data on {{ hoistGroupData }}.)
                       <a
                         :href="fieldsLink"
                       >See All Fields of Study &raquo;</a>
