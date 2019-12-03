@@ -576,6 +576,12 @@ export default {
     {
       this.passedSchools = passed['s[]'];
     }
+    // handle case when we have just 
+    // one school
+    if(typeof(this.passedSchools) == 'string')
+    {
+      this.passedSchools = [this.passedSchools];
+    }
     if(this.passedSchools.length>0)
     {  
       for(let i=0; i<this.passedSchools.length; i++)
