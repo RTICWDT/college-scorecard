@@ -9,6 +9,7 @@
         <v-card-title>{{title}}</v-card-title>
         <v-card-text class='pb-5'>
           <div v-html="content"></div>
+          <p v-if="limitedFoS">The data shown is for undergraduate fields of study (undergraduate certificates, associate's degrees, and bachelor's degrees) for which there is data. For more information on other credentials, including Graduate-level degrees and certificates, see <a :href='limitedFoS'>All Fields of Study</a> for this school.</p>
           <p v-if="showBranch">This information is based on all locations of this school.</p>
           <p v-if="showCompare">For schools with multiple locations, this information is based on all of their locations.</p>
           <p class='text-center mt-3' v-if='hasGlossary'>
@@ -49,6 +50,10 @@ export default {
       type: Boolean, 
       default: false
     },
+    limitedFoS:{
+      type: String, 
+      default: null
+    }
   },
   data() {
     return {
