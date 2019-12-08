@@ -16,7 +16,7 @@
 
               <p>
                 This data was
-                <strong>last updated November 20, 2019</strong>.
+                <strong>last updated December 9, 2019</strong>.
               </p>
               <v-row>
                 <v-col cols="12" sm="4">

@@ -10,7 +10,19 @@
               <h1 class="display-1 mb-2 font-weight-bold">Change Log</h1>
               <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
               <v-expansion-panels>
-                <v-expansion-panel>
+                <v-expansion-panel>                  
+                  <v-expansion-panel-header>December 9, 2019</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <p>On December 9, 2019, the Department updated five data elements that appear on the consumer website and/or the downloadable data files/API with more recent data values:</p>
+                    <ul>
+                      <li>Currently Operating Status Flag</li>
+                      <li>Accrediting Agency Name</li>
+                      <li>Accrediting Agency Code</li>
+                      <li>Title IV Approval Date</li>
+                    </ul>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+                <v-expansion-panel>                  
                   <v-expansion-panel-header>November 20, 2019</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <p>On November 20, 2019, the Department released a new version of the College Scorecard. This update includes:</p>
