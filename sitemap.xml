@@ -546,6 +546,7 @@
   <url><loc>https://collegescorecard.ed.gov/school/?129941-University_of_New_Haven</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?130004-Norwalk_Community_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?130040-Northwestern_Connecticut_Community_College</loc></url>
+  <url><loc>https://collegescorecard.ed.gov/school/?130110-Paier_College_of_Art_Inc</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?130174-Porter_and_Chester_Institute_of_Stratford</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?130183-Post_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?130217-Quinebaug_Valley_Community_College</loc></url>
@@ -627,6 +628,7 @@
   <url><loc>https://collegescorecard.ed.gov/school/?134291-George_Stone_Technical_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?134307-George_T_Baker_Aviation_Technical_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?134343-Gulf_Coast_State_College</loc></url>
+  <url><loc>https://collegescorecard.ed.gov/school/?134422-Key_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?134495-Hillsborough_Community_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?134510-Hobe_Sound_Bible_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?134529-Hollywood_Institute_of_Beauty_Careers</loc></url>
@@ -1047,7 +1049,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?153366-Graceland_University-Lamoni</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?153375-Grand_View_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?153384-Grinnell_College</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?153409-Purdue_University_Global-Mason_City</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?153418-Purdue_University_Global-Cedar_Rapids</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?153427-Hamilton_Technical_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?153445-Hawkeye_Community_College</loc></url>
@@ -1262,7 +1263,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?160199-Pineville_Beauty_School</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?160320-Aveda_Institute-Covington</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?160409-Saint_Joseph_Seminary_College</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?160445-Vanguard_College_of_Cosmetology-Slidell</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?160472-South_Louisiana_Beauty_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?160481-Fletcher_Technical_Community_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?160524-Remington_College-Lafayette_Campus</loc></url>
@@ -1325,7 +1325,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?162584-Frostburg_State_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?162609-Garrett_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?162654-Goucher_College</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?162681-Purdue_University_Global-Hagerstown</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?162690-Hagerstown_Community_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?162706-Harford_Community_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?162760-Hood_College</loc></url>
@@ -1649,7 +1648,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?175430-Blue_Mountain_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?175494-Chris_Beauty_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?175519-Coahoma_Community_College</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?175528-Antonelli_College-Jackson</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?175573-Copiah-Lincoln_Community_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?175607-Delta_Beauty_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?175616-Delta_State_University</loc></url>
@@ -2339,7 +2337,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?199625-Sampson_Community_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?199634-Sandhills_Community_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?199643-Shaw_University</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?199670-Sherrill%27s_University_of_Barber_&amp;_Cosmetology</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?199689-Paul_Mitchell_the_School-Fayetteville</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?199698-St._Andrews_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?199722-Southeastern_Community_College</loc></url>
@@ -2391,7 +2388,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?200800-University_of_Akron_Main_Campus</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?200846-University_of_Akron_Wayne_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?200873-Allegheny_Wesleyan_College</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?201016-Antonelli_College-Cincinnati</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?201034-Apollo_Career_Center</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?201061-Art_Academy_of_Cincinnati</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?201098-Ashland_County-West_Holmes_Career_Center</loc></url>
@@ -2615,6 +2611,7 @@
   <url><loc>https://collegescorecard.ed.gov/school/?208017-Virgil%27s_Beauty_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?208026-Indian_Capital_Technology_Center-Tahlequah</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?208035-Western_Oklahoma_State_College</loc></url>
+  <url><loc>https://collegescorecard.ed.gov/school/?208044-Woodward_Beauty_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?208053-High_Plains_Technology_Center</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?208187-Paul_Mitchell_the_School-Portland</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?208275-Blue_Mountain_Community_College</loc></url>
@@ -2727,7 +2724,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?212391-Empire_Beauty_School-Reading</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?212434-Erie_Institute_of_Technology_Inc</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?212452-Faith_Theological_Seminary</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?212568-Aria_Health_School_of_Nursing</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?212577-Franklin_and_Marshall_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?212601-Gannon_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?212656-Geneva_College</loc></url>
@@ -2869,7 +2865,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?216357-Thiel_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?216366-Thomas_Jefferson_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?216418-Fortis_Institute-Erie</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?216427-Triangle_Tech_Inc-Erie</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?216436-Triangle_Tech_Inc-Pittsburgh</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?216445-Triangle_Tech_Inc-Greensburg</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?216454-Triangle_Tech_Inc-Dubois</loc></url>
@@ -2905,7 +2900,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?217493-Rhode_Island_School_of_Design</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?217518-Roger_Williams_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?217536-Salve_Regina_University</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?217572-St_Joseph_School_of_Nursing</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?217581-Empire_Beauty_School-Warwick</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?217606-Northpoint_Bible_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?217615-Aiken_Technical_College</loc></url>
@@ -3112,6 +3106,7 @@
   <url><loc>https://collegescorecard.ed.gov/school/?223898-Cisco_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?223922-Clarendon_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?224004-Concordia_University_Texas</loc></url>
+  <url><loc>https://collegescorecard.ed.gov/school/?224013-Conlee%27s_College_of_Cosmetology</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?224110-North_Central_Texas_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?224147-Texas_A_&amp;_M_University-Corpus_Christi</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?224156-Cosmetology_Career_Center_LLC</loc></url>
@@ -3148,7 +3143,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?225548-Howard_Payne_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?225575-Huston-Tillotson_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?225627-University_of_the_Incarnate_Word</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?225779-International_Business_College-El_Paso</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?225876-Jacksonville_College-Main_Campus</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?225885-Jarvis_Christian_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?225991-KD_Conservatory_College_of_Film_and_Dramatic_Arts</loc></url>
@@ -3892,7 +3886,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?377564-University_of_Washington-Tacoma_Campus</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?377652-Valley_College-Beckley</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?377661-Valley_College-Martinsburg</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?377670-Valley_College-Princeton</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?377722-Bellus_Academy-Poway</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?377759-Capstone_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?378105-Central_Coast_College</loc></url>
@@ -3918,7 +3911,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?381486-Faust_Institute_of_Cosmetology-Spirit_Lake</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?381699-Cheeks_Beauty_Academy</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?381732-Colorado_School_of_Healing_Arts</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?381866-Healing_Arts_Institute</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?382258-Mt._Diablo_Adult_Education-Mt._Diablo_USD</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?382267-Royale_College_of_Beauty_and_Barbering</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?382416-Greater_Lowell_Technical_School</loc></url>
@@ -3939,7 +3931,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?383525-Erie_2_Chautauqua_Cattaraugus_BOCES-Practical_Nursing_Program</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?383765-Empire_Beauty_School-Brooklyn</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?383792-Houston_Training_School-Gulfgate</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?383950-Antonelli_College-Hattiesburg</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?383996-Eastern_New_Mexico_University_Ruidoso_Branch_Community_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?384236-United_Education_Institute-Ontario</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?384245-United_Education_Institute-Encino</loc></url>
@@ -3955,7 +3946,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?386153-Seminar_L%27moros_Bais_Yaakov</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?386472-Herzing_University-Winter_Park</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?387925-Cortiva_Institute-Pompano</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?388043-National_College-Nashville</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?388520-College_of_Biblical_Studies-Houston</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?388663-Inner_State_Beauty_School</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?389860-Mid-EastCTC-Adult_Education</loc></url>
@@ -4012,7 +4002,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?406486-Myotherapy_College_of_Utah</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?406547-City_College-Gainesville</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?407009-Arizona_State_University-West</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?407054-Cortiva_Institute-Westport</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?407090-G_Skin_&amp;_Beauty_Institute</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?407142-Cosmetology_Training_Center</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?407151-Stage_One-The_Hair_School</loc></url>
@@ -4095,6 +4084,7 @@
   <url><loc>https://collegescorecard.ed.gov/school/?417381-Empire_Beauty_School-Dunwoody</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?417442-Career_Center_of_Southern_Illinois</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?417503-Crave_Beauty_Academy</loc></url>
+  <url><loc>https://collegescorecard.ed.gov/school/?417549-Camelot_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?417600-Hastings_Beauty_School</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?417628-Kirksville_Area_Technical_Center</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?417637-South_Central_Career_Center</loc></url>
@@ -4144,7 +4134,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?418542-Lebanon_County_Area_Vocational_Technical_School</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?418560-Indiana_County_Technology_Center</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?418588-Northern_Tier_Career_Center</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?418603-Clarion_County_Career_Center_Practical_Nursing_Program</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?418612-Hazleton_Area_Career_Center</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?418658-All-State_Career_School-Pittsburgh</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?418764-Quality_Technical_and_Beauty_College</loc></url>
@@ -4168,7 +4157,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?419420-Putnam_Career_and_Technical_Center</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?419484-Crawford_County_Career_and_Technical_Center_Practical_Nursing_Program</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?419633-Texas_College_of_Cosmetology-San_Angelo</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?419660-Beauty_Schools_of_America-Hialeah</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?419703-Automeca_Technical_College-Bayamon</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?419712-Automeca_Technical_College-Caguas</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?419721-Automeca_Technical_College-Ponce</loc></url>
@@ -4201,7 +4189,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?421841-New_York_Conservatory_for_Dramatic_Arts</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?421878-Eastern_International_College-Jersey_City</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?421896-Academia_Serrant_Inc</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?422190-Champion_Institute_of_Cosmetology</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?422695-Pacific_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?422835-American_College_of_Healthcare_and_Technology</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?423120-Compu-Med_Vocational_Careers_Corp</loc></url>
@@ -4259,7 +4246,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?431600-Mercy_Hospital_School_of_Nursing</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?431716-Ocean_County_Vocational-Technical_School</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?431929-Trinity_College_of_Puerto_Rico</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?431956-Virginia_Sewing_Machines_and_School_Center</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?431983-Yeshiva_of_the_Telshe_Alumni</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?432074-Northeast_Technology_Center-Kansas</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?432117-Kenneth_Shuler_School_of_Cosmetology-Rock_Hill</loc></url>
@@ -4303,6 +4289,7 @@
   <url><loc>https://collegescorecard.ed.gov/school/?434900-Dewey_University-Carolina</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?434937-Yeshiva_College_of_the_Nations_Capital</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?435000-Louisiana_State_University_Health_Sciences_Center-Shreveport</loc></url>
+  <url><loc>https://collegescorecard.ed.gov/school/?436003-Central_Career_Institute_LLC</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?436030-Hair_Academy_II</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?436100-Mr_Leon%27s_School_of_Hair_Design-Lewiston</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?436304-River_Parishes_Community_College</loc></url>
@@ -4477,7 +4464,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?443340-Williamson_Christian_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?443377-Triangle_Tech_Inc-Sunbury</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?443410-DigiPen_Institute_of_Technology</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?443483-Cortiva_Institute-Groton</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?443492-Pierpont_Community_and_Technical_College</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?443562-Dewey_University-Hato_Rey</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?443571-InterCoast_Colleges-West_Covina</loc></url>
@@ -4674,7 +4660,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?449038-Strayer_University-Florida</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?449074-Pima_Medical_Institute-Renton</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?449092-College_of_Business_and_Technology-Hialeah</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?449117-Platt_College-Miller-Motte-Cary</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?449135-Dewey_University-Juana_Diaz</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?449250-The_College_of_Health_Care_Professions-San_Antonio</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?449311-Brittany_Beauty_Academy</loc></url>
@@ -4816,7 +4801,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?454458-Bryan_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?454537-The_Salon_Professional_Academy-Appleton</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?454546-Milan_Institute_of_Cosmetology-Fairfield</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?454573-Milan_Institute_of_Cosmetology-Visalia</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?454582-Ottawa_University-Online</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?454607-Paul_Mitchell_the_School-Esani</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?454616-Institute_of_Production_and_Recording</loc></url>
@@ -4846,7 +4830,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?454980-Tricoci_University_of_Beauty_Culture-Glendale_Heights</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?454999-Tricoci_University_of_Beauty_Culture-Peoria</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?455008-Tricoci_University_of_Beauty_Culture-Rockford</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?455017-Frederick_School_of_Cosmetology</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?455026-Omega_Studios%27_School_of_Applied_Recording_Arts_&amp;_Sciences</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?455062-French_Academy_of_Cosmetology</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?455071-Healing_Arts_Center</loc></url>
@@ -4919,7 +4902,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?456597-Salon_Success_Academy-Redlands</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?456621-Strayer_University-West_Virginia</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?456825-Vanguard_College_of_Cosmetology-Baton_Rouge</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?456861-Beauty_Schools_of_America-Homestead</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?456922-South_Texas_Vocational_Technical_Institute-Brownsville</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?456931-Platt_College-STVT-Corpus_Christi</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?456959-University_of_Minnesota-Rochester</loc></url>
@@ -5036,7 +5018,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?459107-Bryant_&amp;_Stratton_College-Hampton</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?459116-Paul_Mitchell_the_School-Phoenix</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?459125-All_Beauty_College</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?459161-Trinity_School_of_Health_and_Allied_Sciences</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?459170-Paul_Mitchell_the_School-Modesto</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?459198-Paul_Mitchell_the_School-Fresno</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?459204-Unitek_College</loc></url>
@@ -5370,7 +5351,6 @@
   <url><loc>https://collegescorecard.ed.gov/school/?480967-College_of_the_Muscogee_Nation</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?480976-The_Salon_Professional_Academy-Huntsville</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?480985-Midwives_College_of_Utah</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?480994-Aspen_Beauty_Academy_of_Laurel</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?481003-M_T_Training_Center</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?481021-Berks_Career_&amp;_Technology_Center</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?481049-Carthage_R9_School_District-Carthage_Technical_Center</loc></url>
@@ -5818,12 +5798,10 @@
   <url><loc>https://collegescorecard.ed.gov/school/?490692-Cincinnati_School_of_Barbering_&amp;_Hair_Design_Inc</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?490717-L_Makeup_Institute</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?490735-Peloton_College</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?490771-Purdue_University_Global-St._Louis</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?490805-Purdue_University_Northwest</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?490814-Ross_Medical_Education_Center_-_Kalamazoo</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?490832-Ross_College-Canton</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?490841-Ross_Medical_Education_Center-Grand_Rapids_North</loc></url>
-  <url><loc>https://collegescorecard.ed.gov/school/?490850-East-West_University</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?490869-American_Institute-Somerset</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?490878-Platt_College-Anaheim</loc></url>
   <url><loc>https://collegescorecard.ed.gov/school/?490948-Bull_City_Durham_Beauty_and_Barber_College</loc></url>
