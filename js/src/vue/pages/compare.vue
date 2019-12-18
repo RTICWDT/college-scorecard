@@ -524,7 +524,7 @@ export default {
       }
     },
     showShareUpdate(){
-      // Check to see if passed school matches local storage
+      // Check to see if passed school matches local storage, only show "update compare" if they do not match
       if(this.compareSchools.length === 0 && this.passedSchools.length > 0){
         return true;
       }
@@ -601,7 +601,7 @@ export default {
       this.passedSchools = (typeof(passed['s']) == 'string') ? [passed['s']] : passed['s'];
     }
 
-    // Create lookup object, default to shared or use compare drawer
+    // Create lookup object, default to url passed schools or use compare drawer
     if(this.passedSchools.length > 0){
       this.passedSchools.map(function (id){
         // TODO: Add number check?
@@ -623,7 +623,6 @@ export default {
       });
 
       // Update URL with schools from compare drawer using the share URL computed property.  Grabbing only query string from url string
-      // history.replaceState({},"", "/compare?" + this.shareUrl.substring(this.shareUrl.indexOf('?') + 1 ));
       history.replaceState({},"", "/compare?" + decodeURIComponent(this.shareUrl.substring(this.shareUrl.indexOf('?') + 1 )));
     }
 
@@ -660,7 +659,6 @@ export default {
       });
 
       this.loading = false;
-      // history.replaceState({},"", querystring.stringify({tennis: "yay"}));
 
     }).catch((responses) => {
       // TODO - How do we want to handle errors?
