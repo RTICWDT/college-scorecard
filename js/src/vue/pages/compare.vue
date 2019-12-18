@@ -418,7 +418,7 @@
           </v-col>
 
           <v-col lg="3">
-            <v-card v-if="passedSchools.length>0" class="pa-5 mb-3">
+            <v-card v-if="showShareUpdate" class="pa-5 mb-3">
               <p>You are viewing a shared comparison.</p>
               <v-btn small color="secondary" rounded @click="saveCompareList()">Update Your List</v-btn>
             </v-card>
@@ -522,6 +522,21 @@ export default {
       }else{
         return true;
       }
+    },
+    showShareUpdate(){
+      // Check to see if passed school matches local storage
+      if(this.compareSchools.length === 0 && this.passedSchools.length > 0){
+        return true;
+      }
+
+      if(this.compareSchools.length > 0 && this.passedSchools.length > 0){
+        let compareSchoolsIDs = this.compareSchools.map((school) => {return school.schoolId});
+        if(!_.isEqual(compareSchoolsIDs, this.passedSchools)){
+          return true;
+        }
+      }
+
+      return false;
     }
   },
   methods: {
@@ -597,6 +612,7 @@ export default {
           });
         }
       })
+
     }else{
       this.compareSchools.map(function (school) {
         let id = +school.schoolId || +school;
@@ -605,6 +621,10 @@ export default {
           id: id
         });
       });
+
+      // Update URL with schools from compare drawer using the share URL computed property.  Grabbing only query string from url string
+      // history.replaceState({},"", "/compare?" + this.shareUrl.substring(this.shareUrl.indexOf('?') + 1 ));
+      history.replaceState({},"", "/compare?" + decodeURIComponent(this.shareUrl.substring(this.shareUrl.indexOf('?') + 1 )));
     }
 
     // console.log(this.passedSchools);
@@ -636,11 +656,11 @@ export default {
           case 3:
             this.schools["4-year schools"].push(school);
             break;
-        }
-        
+        }  
       });
 
       this.loading = false;
+      // history.replaceState({},"", querystring.stringify({tennis: "yay"}));
 
     }).catch((responses) => {
       // TODO - How do we want to handle errors?
