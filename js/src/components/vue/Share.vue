@@ -25,7 +25,7 @@
         </v-list-item>
         
         <v-list-item v-if="showCopy" @click="copyURL">
-          <v-list-item-title>Copy URL</v-list-item-title>
+          <v-list-item-title>{{copyText}}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -54,7 +54,7 @@
         </v-list-item>
 
       <v-list-item v-if="showCopy" @click="copyURL">
-          <v-list-item-title >Copy URL</v-list-item-title>
+          <v-list-item-title>{{copyText}}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -75,7 +75,8 @@ export default {
         'text': {type: Boolean, default: false },
         'color': {type: String, default: 'secondary'},
         'hide': {type: Array, default: null},
-        'showCopy': {type: Boolean, default: false}
+        'showCopy': {type: Boolean, default: false},
+        'copyText': {type:String, default: "Share URL"}
     },
     computed: {
       items(){
