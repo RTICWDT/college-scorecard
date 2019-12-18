@@ -28,7 +28,7 @@
                     >&laquo; Back</v-btn>
                   </v-col>
                   <v-col cols="6" class="text-right">
-                    <share small text color="white" label="Share this Comparison" :url="shareUrl" />
+                    <share small text color="white" label="Share this Comparison" :url="shareUrl" :hide="hideShare" show-copy/>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -496,16 +496,22 @@ export default {
       mobilePanels: 0,
       desktopTabs: 1,
       passedSchools: [],
-      cacheList: []
+      cacheList: [],
+      hideShare:['email']
     };
   },
   computed: {
     shareUrl() {
-      let url = "";
-      this.compareSchools.map(function (itm, idx) {
-        url += "&s[]=" + itm.schoolId;
-      });
-      return window.location.origin + this.$baseUrl + '/compare/?' + encodeURIComponent(url.substr(1));
+      const compareBaseURL = window.location.origin + this.$baseUrl + '/compare/?';
+
+      // Default to passed schools
+      if(this.passedSchools.length > 0){
+        return compareBaseURL + encodeURIComponent(querystring.stringify({s: this.passedSchools}));
+      }else{
+        // Alter to desired structure
+        let schoolIDArray = this.compareSchools.map((school) => {return school.schoolId});
+        return compareBaseURL + encodeURIComponent(querystring.stringify({s: schoolIDArray}));
+      }
     },
     referrerLink() {
       return document.referrer || null;
@@ -571,41 +577,39 @@ export default {
     let query = {};
     let schoolArray = [];
     let paramArray = [];
-    let passed = querystring.parse(window.location.search.substr(1));
-    if(passed['s[]'])
-    {
-      this.passedSchools = passed['s[]'];
+
+    let passed = querystring.parse(decodeURIComponent(window.location.search.substr(1)));
+
+    // Check for passed schools first
+    if(passed['s']){
+      // Always set to array, if not convert to array
+      this.passedSchools = (typeof(passed['s']) == 'string') ? [passed['s']] : passed['s'];
     }
-    // handle case when we have just 
-    // one school
-    if(typeof(this.passedSchools) == 'string')
-    {
-      this.passedSchools = [this.passedSchools];
-    }
-    if(this.passedSchools.length>0)
-    {  
-      for(let i=0; i<this.passedSchools.length; i++)
-      {
-        let id = parseInt(this.passedSchools[i]);
-        if(id){
-          schoolArray.push(id);
+
+    // Create lookup object, default to shared or use compare drawer
+    if(this.passedSchools.length > 0){
+      this.passedSchools.map(function (id){
+        // TODO: Add number check?
+        if(parseInt(id)){
+          schoolArray.push(parseInt(id));
           paramArray.push({
-            id: id
+            id: parseInt(id)
           });
         }
-      }
-    }
-    else
-    {
+      })
+    }else{
       this.compareSchools.map(function (school) {
-        var id = +school.schoolId || +school;
+        let id = +school.schoolId || +school;
         schoolArray.push(id);
         paramArray.push({
           id: id
         });
       });
     }
+
+    // console.log(this.passedSchools);
     this.trackCompareList(schoolArray.join(';'));
+    
     this.loading = true;
     let request = apiGetAll(window.api.url, window.api.key, '/schools/', paramArray).then((responses) => {
 
