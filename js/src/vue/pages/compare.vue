@@ -514,7 +514,7 @@ export default {
       }
     },
     referrerLink() {
-      return document.referrer || null;
+      return document.referrer || `${this.$baseUrl}/search`;
     },
     showSearchForm(){
       if(this.schools['2-year schools'].length > 0 || this.schools['4-year schools'].length > 0 || this.schools['Certificate schools'].length > 0){
