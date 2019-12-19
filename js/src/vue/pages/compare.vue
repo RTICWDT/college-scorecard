@@ -623,7 +623,7 @@ export default {
       });
 
       // Update URL with schools from compare drawer using the share URL computed property.  Grabbing only query string from url string
-      history.replaceState({},"", "/compare?" + decodeURIComponent(this.shareUrl.substring(this.shareUrl.indexOf('?') + 1 )));
+      history.replaceState({},"", this.$baseUrl + "/compare?" + decodeURIComponent(this.shareUrl.substring(this.shareUrl.indexOf('?') + 1 )));
     }
 
     // console.log(this.passedSchools);
