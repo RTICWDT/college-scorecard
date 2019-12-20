@@ -39,7 +39,7 @@
                     >
                       <v-icon x-small class='mr-2'>fa fa-plus-circle</v-icon> Compare
                     </v-btn>
-                    <share small text color="white" label="Share this School" :url="shareLink" show-copy/>
+                    <share small text color="white" label="Share this School" :url="shareLink" show-copy :hide="['email']" />
                   </v-col>
                 </v-row>
                 <v-row>

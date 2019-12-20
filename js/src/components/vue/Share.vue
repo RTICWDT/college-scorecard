@@ -76,7 +76,7 @@ export default {
         'color': {type: String, default: 'secondary'},
         'hide': {type: Array, default: null},
         'showCopy': {type: Boolean, default: false},
-        'copyText': {type:String, default: "Share URL"}
+        'copyText': {type:String, default: "Copy URL to Clipboard"}
     },
     computed: {
       items(){
