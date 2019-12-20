@@ -106,7 +106,7 @@
                           </v-list-item-group>
                         </v-list>
                       </v-menu>
-                       <share :url="shareUrl" label="Share" small show-copy />
+                       <share :url="shareUrl" label="Share" small show-copy :hide="['email']" />
                       </p>
                     </div>
                   </v-col>
