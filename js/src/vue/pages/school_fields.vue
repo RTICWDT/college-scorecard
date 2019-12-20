@@ -176,6 +176,8 @@ export default {
   computed: {
     processedPrograms() {
       let programs = _.get(this.school, "latest.programs.cip_4_digit");
+      if(!programs) return null; 
+      
       this.programs = programs;
       let processedPrograms = {};
       let self = this;
@@ -255,12 +257,6 @@ export default {
       }).catch((response) => {
         console.warn('No School found for ID: ' + id);
       });
-
-    // TODO - Remove If not needed.
-    // picc.API.getSchool(id, params, function onSchoolLoad(error, school) {
-    //   self.school = school;
-    //   document.title = _.get(school, "school.name") + " Fields of Study | College Scorecard";
-    // });
   }
 };
 </script>

@@ -231,6 +231,7 @@ export default {
         allFieldsOfStudy() {
             if (!this.school) return null;
             let fos = _.get(this.school, this.fields['FIELD_OF_STUDY']);
+            if(!fos) return null;
 
             // Fix data issue where the apostrophe is dropped in bachelor's degree
             if(!fos.length)
