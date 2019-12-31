@@ -2,6 +2,7 @@ const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   mode: "production",
@@ -19,7 +20,7 @@ module.exports = {
       path.resolve('./js/src'),
       path.resolve('./node_modules')
     ]
-},
+  },
   module: {
     rules: [
       {
@@ -98,5 +99,18 @@ module.exports = {
       filename: '../css/app.css',
       // chunkFilename: '[id].css',
     }),
-  ]
+  ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          output: {
+            comments: false,
+          },
+        },
+        extractComments: false,
+      }),
+    ],
+  },
 };

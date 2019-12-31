@@ -3,6 +3,8 @@ import Vue from 'vue';
 import vuetify from './plugins/vuetify'
 import _ from 'lodash'
 import vueNumeralFilterInstaller from 'vue-numeral-filter';
+import VueClipboard from 'vue-clipboard2';
+Vue.use(VueClipboard);
 
 import IndexPage from './vue/pages/index.vue';
 

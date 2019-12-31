@@ -62,7 +62,14 @@ export default {
 
         let request = apiGet(window.api.url, window.api.key, "/schools", query).then((response) => {
           if (!response.data.results.length) { return {}; }
-          this.items = response.data.results;
+          let items = response.data.results;
+          let processed = {};
+          for(let i=0; i<items.length; i++)
+          {
+            if(!processed[items[i]['school.name']]) processed[items[i]['school.name']] = items[i]['id'];
+            else processed[items[i]['school.name']] += ','+items[i]['id'];
+          }
+          this.items = _.map(processed, (value, prop) => ({ "school.name": prop, "id": value }));
           this.isLoading = false;
         }).catch((error) => {
           this.items = [];
