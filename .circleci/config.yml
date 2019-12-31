@@ -61,6 +61,10 @@ buildtest: &buildtest
         command: ./test/ci.sh
 
     - run:
+        name: Wait Buffer for browser testing
+        command: sleep 30
+
+    - run:
         name: Run Browser tests
         command: npx codeceptjs run --steps --reporter xunit > test/reports/browser/browser.xml
         no_output_timeout: 20m

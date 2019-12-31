@@ -56,7 +56,7 @@
                       <v-icon small class="">fa fa-plus-circle</v-icon>
                       <span class='sr-only'>Compare</span>
                     </v-btn>                    
-                    <share small text color="white" label="Share this School" :url="shareLink" />
+                    <share small text color="white" label="Share this School" :url="shareLink" show-copy :hide="['email']" />
                   </v-col>
                 </v-row>
 

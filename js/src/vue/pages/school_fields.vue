@@ -39,7 +39,7 @@
                     >
                       <v-icon x-small class='mr-2'>fa fa-plus-circle</v-icon> Compare
                     </v-btn>
-                    <share small text color="white" label="Share this School" :url="shareLink" />
+                    <share small text color="white" label="Share this School" :url="shareLink" show-copy :hide="['email']" />
                   </v-col>
                 </v-row>
                 <v-row>
@@ -176,6 +176,8 @@ export default {
   computed: {
     processedPrograms() {
       let programs = _.get(this.school, "latest.programs.cip_4_digit");
+      if(!programs) return null; 
+      
       this.programs = programs;
       let processedPrograms = {};
       let self = this;
@@ -255,12 +257,6 @@ export default {
       }).catch((response) => {
         console.warn('No School found for ID: ' + id);
       });
-
-    // TODO - Remove If not needed.
-    // picc.API.getSchool(id, params, function onSchoolLoad(error, school) {
-    //   self.school = school;
-    //   document.title = _.get(school, "school.name") + " Fields of Study | College Scorecard";
-    // });
   }
 };
 </script>

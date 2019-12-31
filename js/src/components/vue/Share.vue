@@ -23,6 +23,10 @@
         >
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
+        
+        <v-list-item v-if="showCopy" @click="copyURL">
+          <v-list-item-title>{{copyText}}</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-menu>
     <v-menu offset-y>
@@ -48,6 +52,10 @@
         >
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
+
+      <v-list-item v-if="showCopy" @click="copyURL">
+          <v-list-item-title>{{copyText}}</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-menu>
   </span>
@@ -55,6 +63,8 @@
 
 <script>
 import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
+import _ from 'lodash';
+// import clipboard from 'clipboard';
 
 export default {
     mixins: [AnalyticsEvents],
@@ -63,16 +73,28 @@ export default {
         'label': { type: String, default: 'Share' },
         'small': { type: Boolean, default: false },
         'text': {type: Boolean, default: false },
-        'color': {type: String, default: 'secondary'}
+        'color': {type: String, default: 'secondary'},
+        'hide': {type: Array, default: null},
+        'showCopy': {type: Boolean, default: false},
+        'copyText': {type:String, default: "Copy URL to Clipboard"}
     },
     computed: {
       items(){
-        return [
+        let shareOptions =  [
             { title: 'Twitter' , 'url': 'https://twitter.com/intent/tweet?text='+this.sentence+'&amp;url='},
             { title: 'Facebook', 'url': 'https://www.facebook.com/sharer/sharer.php?u=' },
             { title: 'Email', 'url': 'mailto:?subject='+this.sentence.slice(0,-1)+'&body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A' }, 
             { title: 'LinkedIn', 'url': 'https://www.linkedin.com/shareArticle?mini=true&url='},
         ];
+
+        // Remove items that that should be hidden
+        return shareOptions.filter((option) => {
+          // Return if not in the hide prop array
+          if(_.indexOf(this.hide, option.title.toLowerCase()) < 0){
+            return option;
+          }
+        });
+
       },
       sentence(){
         let sentence = '';
@@ -92,10 +114,13 @@ export default {
       }
     },
     methods:{
-        picked(item){
-            this.trackShare(item.title);
-            window.open(item.url+this.url, "_blank"); 
-        }
+      picked(item){
+          this.trackShare(item.title);
+          window.open(item.url+this.url, "_blank");
+      },
+      copyURL(){
+        this.$copyText(this.url);
+      }
     }
 
 }

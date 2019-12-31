@@ -1,6 +1,6 @@
 <template>
   <div :class="classes" @click="$emit('update-highlight', 'school-'+school.id);">
-    <p class="subtitle-2 pb-0 mb-0">{{_.get(school, fields['NAME'])}}</p>
+    <p class="subtitle-2 pb-0 mb-0"><a :href="schoolLink">{{_.get(school, fields['NAME'])}}</a> </p>
 
     <horizontal-bar
       v-if="school && config.chart=='HorizontalBar' && value"
