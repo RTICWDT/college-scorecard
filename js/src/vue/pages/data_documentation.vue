@@ -62,6 +62,7 @@
                 >StackExchange</a> or email the help desk at
                 <a href="mailto:scorecarddata@rti.org">scorecarddata@rti.org</a> For inquiries by members of the press, please contact <a href="mailto:press@ed.gov">press@ed.gov</a>.
               </p>
+              
               <h2 class="display-1 font-weight-bold mb-2 mt-5">API Documentation</h2>
 
               <p>
@@ -73,7 +74,11 @@
                 <a
                   href="https://api.data.gov/signup"
                   target="_blank"
-                >https://api.data.gov/signup</a>.
+                >https://api.data.gov/signup</a>
+                or by completing the form
+                <a
+                  href="#api-key-signup"
+                >below</a>
               </p>
 
               <h3 class="title">Structure</h3>
@@ -112,7 +117,10 @@
                   class="button data-home-button"
                 >Download the Data Dictionary</v-btn>
               </p>
-
+              
+              <h3 class="title" id="api-key-signup">Register for an API key</h3>
+              <div id="apidatagov_signup" class="mb-2">Loading signup form...</div>
+              
               <p class="data-docs">
                 For guidance on querying the API and extracting results, see the
                 <a
@@ -138,6 +146,14 @@ export default {
   components: {
     'data-navigation': DataNavigation
   },
-  props: ["baseUrl", "dataBase_url", "dataDictionary"]
+  props: ["baseUrl", "dataBase_url", "dataDictionary"],
+  mounted(){
+   /* * * DON'T EDIT BELOW THIS LINE * * */
+   (function() {
+     var apiUmbrella = document.createElement('script'); apiUmbrella.type = 'text/javascript'; apiUmbrella.async = true;
+     apiUmbrella.src = 'https://api.data.gov/static/javascripts/signup_embed.js';
+     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(apiUmbrella);
+   })();
+  }
 };
 </script>

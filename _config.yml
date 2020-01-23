@@ -41,6 +41,8 @@ analytics: true
 API:
   baseurl: https://api.data.gov/ed/collegescorecard/v1/
   key: ''
+  # API key used for API Key Signup form.
+  signup_key: ''
 
 downloads:
   data-dictionary: CollegeScorecardDataDictionary.xlsx
