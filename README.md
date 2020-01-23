@@ -43,6 +43,15 @@ endpoint this is how to set those variables:
 export API_KEY=yourkeyhere; export API_BASE_URL=https://api.data.gov/ed/collegescorecard/v1/
 ```
 
+The application also expects some additional environment variables to be configured.
+ - `API_SIGNUP_KEY`: The API key used to facilitate the embedded API signup form.
+ - `BASEURL`: The application base URL.  This is used to ensure that asset pathing is working
+ throughout different deploy environments and accessible within the JavaScript frontend code.
+
+```
+export API_SIGNUP_KEY=yourkeyhere; export BASEURL=http://localhost:4000
+```
+
 To start up the local server, run:
 
 ```sh
