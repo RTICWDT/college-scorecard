@@ -13,13 +13,13 @@
                 <v-expansion-panel>                  
                   <v-expansion-panel-header>December 31, 2019</v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <p>On December 31 2019, the Department updated College Scorecard to version 2.1.2.  
+                    <p>On December 31 2019, the Department released a new version of the College Scorecard.
                       This update icludes:
                     </p>
                     <ul>
                       <li>Proper handling of instituions sharing a name while conducting a name search</li>
                       <li>"Share By Email" feature removed</li>
-                      <li>"Copy URL to Clipboard" feature added in "Share" menu</li> 
+                      <li>"Copy URL to Clipboard" feature added in "Share" menu</li>
                     </ul>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
