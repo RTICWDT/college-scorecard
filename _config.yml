@@ -44,6 +44,9 @@ API:
   # API key used for API Key Signup form.
   signup_key: ''
 
+# Captcha key used to protect from submissions
+recaptcha-site-key: ''
+
 downloads:
   data-dictionary: CollegeScorecardDataDictionary.xlsx
   data-base_url: https://ed-public-download.app.cloud.gov/downloads

@@ -114,12 +114,25 @@
                   rounded
                   color="secondary"
                   :href="baseUrl+'/assets/'+dataDictionary"
-                  class="button data-home-button"
+                  class="button data-home-button mb-4"
                 >Download the Data Dictionary</v-btn>
               </p>
               
               <h3 class="title" id="api-key-signup">Register for an API key</h3>
-              <div id="apidatagov_signup" class="mb-2">Loading signup form...</div>
+              
+              <div v-show="showCaptcha">
+                <p>
+                  Please complete security challange before signing up for a key.
+                </p>
+
+                <vue-recaptcha
+                  :sitekey="recaptchaSiteKey"
+                  @verify="onCaptchaVerify"
+                >
+                </vue-recaptcha>
+              </div>
+
+              <div id="apidatagov_signup" class="mb-2"></div>
               
               <p class="data-docs">
                 For guidance on querying the API and extracting results, see the
@@ -140,20 +153,32 @@
 <script>
 import DataNavigation from 'components/vue/DataNavigation.vue';
 import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
+import VueRecaptcha from 'vue-recaptcha';
 
 export default {
   mixins: [AnalyticsEvents],
   components: {
-    'data-navigation': DataNavigation
+    'data-navigation': DataNavigation,
+    VueRecaptcha
   },
-  props: ["baseUrl", "dataBase_url", "dataDictionary"],
-  mounted(){
-   /* * * DON'T EDIT BELOW THIS LINE * * */
-   (function() {
-     var apiUmbrella = document.createElement('script'); apiUmbrella.type = 'text/javascript'; apiUmbrella.async = true;
-     apiUmbrella.src = 'https://api.data.gov/static/javascripts/signup_embed.js';
-     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(apiUmbrella);
-   })();
+  props: ["baseUrl", "dataBase_url", "dataDictionary","recaptchaSiteKey"],
+  data(){
+    return{
+      showCaptcha: true
+    }
+  },
+  methods:{
+    onCaptchaVerify(){
+      this.showCaptcha = false;
+      this.loadEmbeddedForm();
+    },
+    loadEmbeddedForm(){
+      (function() {
+        var apiUmbrella = document.createElement('script'); apiUmbrella.type = 'text/javascript'; apiUmbrella.async = true;
+        apiUmbrella.src = 'https://api.data.gov/static/javascripts/signup_embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(apiUmbrella);
+      })();
+    }
   }
 };
 </script>
