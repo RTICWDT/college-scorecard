@@ -11,6 +11,20 @@
               <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
               <v-expansion-panels>
                 <v-expansion-panel>                  
+                  <v-expansion-panel-header>December 31, 2019</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <p>On December 31 2019, the Department updated College Scorecard to version 2.1.2.  
+                      This update icludes:
+                    </p>
+                    <ul>
+                      <li>Proper handling of instituions sharing a name while conducting a name search</li>
+                      <li>"Share By Email" feature removed</li>
+                      <li>"Copy URL to Clipboard" feature added in "Share" menu</li> 
+                    </ul>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+
+                <v-expansion-panel>                  
                   <v-expansion-panel-header>December 12, 2019</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <p>On December 12, 2019, the Department updated five data elements that appear on the consumer website and/or the downloadable data files/API with more recent data values:</p>
