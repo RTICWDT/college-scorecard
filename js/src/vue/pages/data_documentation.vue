@@ -122,7 +122,7 @@
               
               <div v-show="showCaptcha">
                 <p>
-                  Please complete security challange before signing up for a key.
+                  Please complete security challenge before signing up for a key.
                 </p>
 
                 <vue-recaptcha
