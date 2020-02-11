@@ -81,7 +81,7 @@
                 >below</a>
               </p>
 
-              <h3 class="title">Structure</h3>
+              <h3>Structure</h3>
 
               <p>
                 The basic structure of an API call is
@@ -108,17 +108,15 @@
 
               <p>All variables are listed in the Data Dictionary.</p>
 
-              <p>
-                <v-btn
-                  @click="trackDownload(dataDictionary)"
-                  rounded
-                  color="secondary"
-                  :href="baseUrl+'/assets/'+dataDictionary"
-                  class="button data-home-button mb-4"
-                >Download the Data Dictionary</v-btn>
-              </p>
+              <v-btn
+                @click="trackDownload(dataDictionary)"
+                rounded
+                color="secondary"
+                :href="baseUrl+'/assets/'+dataDictionary"
+                class="button data-home-button mb-4"
+              >Download the Data Dictionary</v-btn>
               
-              <h3 class="title" id="api-key-signup">Register for an API key</h3>
+              <h3 id="api-key-signup">Register for an API key</h3>
               <p>
                 To use the College Scorecard API you must have an API key. 
                 An API key is a unique identifier that is used to authenticate data requests associated with your project.
