@@ -119,20 +119,51 @@
               </p>
               
               <h3 class="title" id="api-key-signup">Register for an API key</h3>
-              
-              <div v-show="showCaptcha">
+              <p>
+                To use the College Scorecard API you must have an API key. 
+                An API key is a unique identifier that is used to authenticate data requests associated with your project.
+              </p>
+
+              <div>
                 <p>
-                  Please complete security challenge before signing up for a key.
+                  First, please complete the security challenge below.
+                  <v-scroll-x-transition>
+                    <v-icon
+                      v-if="!showCaptcha"
+                      size="medium"
+                      color="success"
+                    >
+                      mdi-check
+                    </v-icon>
+                  </v-scroll-x-transition>
                 </p>
 
-                <vue-recaptcha
-                  :sitekey="recaptchaSiteKey"
-                  @verify="onCaptchaVerify"
-                >
+                <p>
+                  <vue-recaptcha
+                    v-show="showCaptcha"
+                    :sitekey="recaptchaSiteKey"
+                    @verify="onCaptchaVerify"
+                  >
                 </vue-recaptcha>
+                </p>
               </div>
 
-              <div id="apidatagov_signup" class="mb-2"></div>
+              <div>
+                <v-fade-transition>
+                  <p v-show="!showCaptcha">
+                    Second, use the form below to complete the registration process and receive your API key.
+                  </p>
+                </v-fade-transition>
+
+                <v-fade-transition>
+                  <!-- Form Holder -->
+                  <div v-show="!showCaptcha"
+                    id="apidatagov_signup" 
+                    class="mb-2"
+                    >
+                  </div>
+                </v-fade-transition>
+              </div>
               
               <p class="data-docs">
                 For guidance on querying the API and extracting results, see the
@@ -141,6 +172,7 @@
                   target="_blank"
                 >HTTP API documentation</a>.
               </p>
+
             </v-card>
           </v-col>
         </v-row>
@@ -179,6 +211,12 @@ export default {
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(apiUmbrella);
       })();
     }
+  },
+  mounted(){
+    // setTimeout(()=>{
+    //   this.showCaptcha = false;
+    //   this.loadEmbeddedForm();
+    //   }, 2000)
   }
 };
 </script>
