@@ -129,8 +129,7 @@
                     <v-icon
                       v-if="!showCaptcha"
                       size="medium"
-                      color="success"
-                    >
+                      color="success">
                       mdi-check
                     </v-icon>
                   </v-scroll-x-transition>
@@ -150,6 +149,14 @@
                 <v-fade-transition>
                   <p v-show="!showCaptcha">
                     Second, use the form below to complete the registration process and receive your API key.
+                    <v-scroll-x-transition>
+                      <v-icon
+                        v-if="formSubmitted"
+                        size="medium"
+                        color="success">
+                        mdi-check
+                      </v-icon>
+                    </v-scroll-x-transition>
                   </p>
                 </v-fade-transition>
 
@@ -194,27 +201,38 @@ export default {
   props: ["baseUrl", "dataBase_url", "dataDictionary","recaptchaSiteKey"],
   data(){
     return{
-      showCaptcha: true
+      showCaptcha: true,
+      formSubmitted: false
     }
   },
   methods:{
     onCaptchaVerify(){
       this.showCaptcha = false;
-      this.loadEmbeddedForm();
+      this.loadEmbeddedForm(this.addFormSubmitListener);
     },
-    loadEmbeddedForm(){
-      (function() {
-        var apiUmbrella = document.createElement('script'); apiUmbrella.type = 'text/javascript'; apiUmbrella.async = true;
-        apiUmbrella.src = 'https://api.data.gov/static/javascripts/signup_embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(apiUmbrella);
-      })();
+    loadEmbeddedForm(callback = null){
+      let apiUmbrella = document.createElement('script'); apiUmbrella.type = 'text/javascript'; apiUmbrella.async = true;
+      apiUmbrella.src = 'https://api.data.gov/static/javascripts/signup_embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(apiUmbrella);
+      
+      if(callback){
+        apiUmbrella.onload = () => callback();
+      }
+    },
+    addFormSubmitListener(){
+      let apiForm = document.querySelector('#apidatagov_signup_form');
+      apiForm.addEventListener('submit', () =>{
+        // Listen for form submit and do whatever is needed
+        this.formSubmitted = true;
+      });
     }
   },
-  mounted(){
-    // setTimeout(()=>{
-    //   this.showCaptcha = false;
-    //   this.loadEmbeddedForm();
-    //   }, 2000)
-  }
+  // TODO - Remove if testing is no longer needed
+  // mounted(){
+  //   setTimeout(()=>{
+  //     this.showCaptcha = false;
+  //     this.loadEmbeddedForm(this.addFormSubmitListener);
+  //     }, 2000)
+  // }
 };
 </script>
