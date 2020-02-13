@@ -135,13 +135,22 @@
                   </v-scroll-x-transition>
                 </p>
 
-                <p>
+                <p class="d-none d-sm-block">
+                  <vue-recaptcha
+                    v-show="showCaptcha"
+                    :sitekey="recaptchaSiteKey"
+                    @verify="onCaptchaVerify">
+                  </vue-recaptcha>
+                </p>
+
+                <!-- Compact on XS -->
+                <p class="d-block d-sm-none">
                   <vue-recaptcha
                     v-show="showCaptcha"
                     :sitekey="recaptchaSiteKey"
                     @verify="onCaptchaVerify"
-                  >
-                </vue-recaptcha>
+                    size="compact">
+                  </vue-recaptcha>
                 </p>
               </div>
 
