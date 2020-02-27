@@ -909,6 +909,7 @@ export default {
       params.size = "420x380";
       params.key = this.apiKeyGoogleMaps;
       params.markers = params.center;
+      params.style = "feature:poi|element:labels|visibility:off";
 
       let qs = querystring.stringify(params);
       return googleMapsBaseURL + qs;
