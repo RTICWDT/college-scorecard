@@ -849,7 +849,7 @@ export default {
       }
 
       return this.allFieldsOfStudy.filter((fos) => {
-        return fos.credential.level === 3;
+        return fos.credential.level <= 3;
       }).length;
     }
   },
