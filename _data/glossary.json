@@ -35,8 +35,8 @@
   },
   "student-aid": {
     "title": "Students Receiving Federal Loans",
-    "default": "The share of undergraduate students who borrowed federal loans to help pay for college.",
-    "glossary": "<p>The proportion of all degree/certificate-seeking undergraduate students that borrowed through federal loan programs to help pay college costs. This value can help users appropriately interpret the information presented in metrics that are limited to federal borrowers.  Only loans where the student is the borrower are included; loans taken out by parents through the federal Parent PLUS loan program, which allows parents to borrow money to pay for their child's college costs, are not included in this metric. </p>",
+    "default": "The share of full-time, first-time undergraduate students who borrowed federal loans to help pay for college.",
+    "glossary": "<p>The proportion of full-time, first-time degree/certificate-seeking undergraduate students that borrowed through federal loan programs to help pay college costs. This value can help users appropriately interpret the information presented in metrics that are limited to federal borrowers.  Only loans where the student is the borrower are included; loans taken out by parents through the federal Parent PLUS loan program, which allows parents to borrow money to pay for their child's college costs, are not included in this metric. This proportion is calculated for full-time, first-time degree/certificate-seeking undergraduate students enrolled in either the fall (for academic year-based schools) or over the course of the whole year (for program calendar-based schools).</p>",
     "branch": false
   },
   "retention-rate": {
@@ -59,8 +59,8 @@
   },
   "socio-eco": {
     "title": "Socio-Economic Diversity",
-    "default": "Percent of students receiving an income-based federal Pell Grant intended for low-income students.",
-    "glossary": "<p>The percentage of students that receive a federal Pell Grant provides an indication of the level of socio-economic diversity at the school since Pell Grants are awarded based on income. Notably, this measure may not capture all low-income students since foreign nationals (including undocumented immigrants) are not eligible for Pell Grants, and some otherwise eligible students may not have completed the application for federal student aid, which is required to receive a Pell Grant. This proportion is calculated for undergraduate students enrolled in either the fall (for academic year-based schools) or over the course of the whole year (for program calendar-based schools). </p>",
+    "default": "Percent of full-time, first-time students receiving an income-based federal Pell Grant intended for low-income students.",
+    "glossary": "<p>The percentage of full-time, first-time degree/certificate-seeking undergraduate students that receive a federal Pell Grant provides an indication of the level of socio-economic diversity at the school since Pell Grants are awarded based on income. Notably, this measure may not capture all low-income students since foreign nationals (including undocumented immigrants) are not eligible for Pell Grants, and some otherwise eligible students may not have completed the application for federal student aid, which is required to receive a Pell Grant. This proportion is calculated for full-time, first-time degree/certificate-seeking undergraduate students enrolled in either the fall (for academic year-based schools) or over the course of the whole year (for program calendar-based schools).</p>",
     "branch": false
   },
   "test-scores": {
