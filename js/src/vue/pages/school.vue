@@ -449,7 +449,7 @@
                       >Lowest Debt</v-btn>
                     </p>
                     <p class="my-3" v-if="fieldsOfStudy.length">
-                      Out of {{allFieldsOfStudy.length | numeral }} undergraduate {{allFieldsOfStudy.length==1? 'field':'fields' }} of study at {{ schoolName }}, the {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} {{ hoistGroupText }} are shown below. ({{ hoistCount}} had relevant data on {{ hoistGroupData }}.)
+                      Out of {{fosUndergradCount| numeral }} undergraduate {{fosUndergradCount==1? 'field':'fields' }} of study at {{ schoolName }}, the {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} {{ hoistGroupText }} are shown below. ({{ hoistCount}} had relevant data on {{ hoistGroupData }}.)
                       <a
                         :href="fieldsLink"
                       >See All Fields of Study &raquo;</a>
@@ -842,6 +842,15 @@ export default {
       } else {
         return this.$baseUrl+"/search/";
       }
+    },
+    fosUndergradCount(){
+      if(!this.allFieldsOfStudy || this.allFieldsOfStudy.length === 0){
+        return 0;
+      }
+
+      return this.allFieldsOfStudy.filter((fos) => {
+        return fos.credential.level <= 3;
+      }).length;
     }
   },
   methods: {
