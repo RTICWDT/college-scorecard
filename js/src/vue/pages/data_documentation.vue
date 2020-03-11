@@ -78,7 +78,7 @@
                 or by completing the form
                 <a
                   href="#api-key-signup"
-                >below</a>
+                >below.</a>
               </p>
 
               <h3>Structure</h3>

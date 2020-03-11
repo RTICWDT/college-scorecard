@@ -11,6 +11,20 @@
               <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
               <v-expansion-panels>
                 <v-expansion-panel>                  
+                  <v-expansion-panel-header>March 10, 2020</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <p>On March 10, 2020, the Department completed an annual data refresh for the College Scorecard website/API with updated data for metrics derived from IPEDS and FSA data sources.  This data update includes 5 new API data fields:</p>
+                    <ul>
+                      <li><strong>aid.ftft_pell_grant_rate:</strong> Percentage of full-time, first-time undergraduate students awarded a Pell Grant</li>
+                      <li><strong>aid.ftft_federal_loan_rate:</strong> Percentage of full-time, first-time undergraduate students awarded a federal loan</li>
+                      <li><strong>student.ftft_undergrads_with_pell_grant_or_federal_student_loan:</strong> Number of full-time, first-time undergraduate students (denominator percent full-time, first-time receiving a pell grant or federal student loan</li>
+                      <li><strong>student.enrollment.undergrad_12_month:</strong> Unduplicated count of undergraduate students enrolled during a 12 month period</li>
+                      <li><strong>student.enrollment.grad_12_month:</strong> Unduplicated count of graduate students enrolled during a 12 month period</li>
+                    </ul>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+
+                <v-expansion-panel>                  
                   <v-expansion-panel-header>December 12, 2019</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <p>On December 12, 2019, the Department updated five data elements that appear on the consumer website and/or the downloadable data files/API with more recent data values:</p>
