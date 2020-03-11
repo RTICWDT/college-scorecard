@@ -39,7 +39,7 @@
                           </ul>
                         </simple-tooltip>
                       </p>
-                      <p>296 MB ZIP</p>
+                      <p>289 MB ZIP</p>
                     </div>
                   </v-card>
                 </v-col>
@@ -53,7 +53,7 @@
                   >
                     <div>
                       <p class="title font-weight-bold">Most Recent Institution-Level Data</p>
-                      <p>154 MB CSV</p>
+                      <p>148 MB CSV</p>
                     </div>
                   </v-card>
                 </v-col>
