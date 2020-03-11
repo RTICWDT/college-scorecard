@@ -16,7 +16,7 @@
 
               <p>
                 This data was
-                <strong>last updated December 12, 2019</strong>.
+                <strong>last updated March 10, 2020</strong>.
               </p>
               <v-row>
                 <v-col cols="12" sm="4">
@@ -33,9 +33,9 @@
                         <simple-tooltip>
                           <p>Contains the following data:</p>
                           <ul>
-                            <li>Institution-level data files for 1996-97 through 2017-18 containing aggregate data for each institution. Includes information on institutional characteristics, enrollment, student aid, costs, and student outcomes.</li>
+                            <li>Institution-level data files for 1996-97 through 2018-19 containing aggregate data for each institution. Includes information on institutional characteristics, enrollment, student aid, costs, and student outcomes.</li>
                             <li>Field of study-level data files for the pooled 2014-15, 2015-16 award years through the pooled 2015-16, 2016-17 award years containing data at the credential level and 4-digit CIP code combination for each institution. Includes information on cumulative debt at graduation and earnings one year after graduation.</li>
-                            <li>Crosswalk files for 2000-01 through 2017-18 that link the Department’s OPEID with an IPEDS UNITID for each institution.</li>
+                            <li>Crosswalk files for 2000-01 through 2018-19 that link the Department’s OPEID with an IPEDS UNITID for each institution.</li>
                           </ul>
                         </simple-tooltip>
                       </p>
