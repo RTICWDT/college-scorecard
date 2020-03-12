@@ -17,9 +17,9 @@
                     <ul>
                       <li><strong>aid.ftft_pell_grant_rate:</strong> Percentage of full-time, first-time undergraduate students awarded a Pell Grant</li>
                       <li><strong>aid.ftft_federal_loan_rate:</strong> Percentage of full-time, first-time undergraduate students awarded a federal loan</li>
-                      <li><strong>student.ftft_undergrads_with_pell_grant_or_federal_student_loan:</strong> Number of full-time, first-time undergraduate students (denominator percent full-time, first-time receiving a pell grant or federal student loan</li>
-                      <li><strong>student.enrollment.undergrad_12_month:</strong> Unduplicated count of undergraduate students enrolled during a 12 month period</li>
-                      <li><strong>student.enrollment.grad_12_month:</strong> Unduplicated count of graduate students enrolled during a 12 month period</li>
+                      <li><strong>student.ftft_undergrads_with_pell_grant_or_federal_student_loan:</strong> Number of full-time, first-time undergraduate students receiving a pell grant or federal student loan</li>
+                      <li><strong>student.enrollment.undergrad_12_month:</strong> Unduplicated count of undergraduate students enrolled during a 12-month period</li>
+                      <li><strong>student.enrollment.grad_12_month:</strong> Unduplicated count of graduate students enrolled during a 12-month period</li>
                     </ul>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
