@@ -83,7 +83,11 @@
                     <school-icons :school="school" :fields="fields" class="my-5" />
                   </v-col>
                   <v-col cols="12" md="5" class="px-sm-5 py-0">
-                    <div class="school-map" ref="map"></div>
+                    <!-- <div class="school-map" ref="map"></div> -->
+                    <div class="school-map" v-if="school">
+                      <v-img contain eager :src="generateMapURL(school)">
+                      </v-img>
+                    </div>
                   </v-col>
                 </v-row>
                 <v-row class="mt-3" v-if="specialDesignations.length>0">
@@ -449,7 +453,7 @@
                       >Lowest Debt</v-btn>
                     </p>
                     <p class="my-3" v-if="fieldsOfStudy.length">
-                      Out of {{allFieldsOfStudy.length | numeral }} undergraduate {{allFieldsOfStudy.length==1? 'field':'fields' }} of study at {{ schoolName }}, the {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} {{ hoistGroupText }} are shown below. ({{ hoistCount}} had relevant data on {{ hoistGroupData }}.)
+                      Out of {{fosUndergradCount| numeral }} undergraduate {{fosUndergradCount==1? 'field':'fields' }} of study at {{ schoolName }}, the {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} {{ hoistGroupText }} are shown below. ({{ hoistCount}} had relevant data on {{ hoistGroupData }}.)
                       <a
                         :href="fieldsLink"
                       >See All Fields of Study &raquo;</a>
@@ -706,7 +710,9 @@
     solid
     $black;
   border-radius: $base-border-radius;
-  height: 280px;
+  // height: 280px;
+  height: auto;
+  min-height: 280px;
   margin-top: $base-padding;
   width: 100%;
 }
@@ -730,6 +736,7 @@ import FieldData from "components/vue/FieldData.vue";
 import NetPriceLink from "components/vue/NetPriceLink.vue";
 import SearchForm from "components/vue/SearchForm.vue";
 import MultiRange from "components/vue/MultiRange.vue";
+import querystring from "querystring";
 
 import { compare } from "vue/mixins.js";
 import ComplexFields from "vue/mixins/ComplexFields.js";
@@ -739,7 +746,7 @@ import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
 
 export default {
   mixins: [compare, URLHistory, ComplexFields, AnalyticsEvents],
-  props: ["baseUrl", "compareSchools"],
+  props: ["baseUrl", "compareSchools","apiKeyGoogleMaps"],
   components: {
     donut: Donut,
     "name-autocomplete": NameAutocomplete,
@@ -842,6 +849,15 @@ export default {
       } else {
         return this.$baseUrl+"/search/";
       }
+    },
+    fosUndergradCount(){
+      if(!this.allFieldsOfStudy || this.allFieldsOfStudy.length === 0){
+        return 0;
+      }
+
+      return this.allFieldsOfStudy.filter((fos) => {
+        return fos.credential.level <= 3;
+      }).length;
     }
   },
   methods: {
@@ -894,6 +910,20 @@ export default {
         return map;
       });
     },
+    generateMapURL(school){
+      let googleMapsBaseURL = "https://maps.googleapis.com/maps/api/staticmap?";
+      let params = {};
+      params.center = school.location.lat + "," + school.location.lon;
+      params.zoom = 12;
+      params.size = "420x380";
+      params.key = this.apiKeyGoogleMaps;
+      params.markers = params.center;
+      params.style = "feature:poi|element:labels|visibility:off";
+
+      let qs = querystring.stringify(params);
+      return googleMapsBaseURL + qs;
+
+    },
     // expand all panels
     all() {
       this.panels = [...Array(this.num_panels).keys()].map((k, i) => i);
@@ -944,7 +974,8 @@ export default {
 
         this.school = response.data.results[0];
         document.title = _.get(this.school, "school.name") + " | College Scorecard";
-        this.createMap(this.school);
+        // this.createMap(this.school);
+
 
       }).catch((response) => {
         this.error = true;

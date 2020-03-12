@@ -11,6 +11,15 @@ module Jekyll
       if ENV['API_KEY']
         site.config['API']['key'] = ENV['API_KEY']
       end
+      if ENV['API_SIGNUP_KEY']
+        site.config['API']['signup_key'] = ENV['API_SIGNUP_KEY']
+      end
+      if ENV['RECAPTCHA_SITE_KEY']
+        site.config['recaptcha-site-key'] = ENV['RECAPTCHA_SITE_KEY']
+      end
+      if ENV['API_KEY_GOOGLE_MAPS']
+        site.config['api-key-google-maps'] = ENV['API_KEY_GOOGLE_MAPS']
+      end
       # puts "API: ------------------"
       # puts site.config['API']
       # puts "------------------"

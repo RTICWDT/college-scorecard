@@ -11,6 +11,16 @@
   
   scorecard_version = "{{ site.version }}";
   baseurl = "{{ site.baseurl }}";
+  recaptcha_site_key = "{{site.recaptcha-site-key}}"
+
+  // API Key Signup
+  var apiUmbrellaSignupOptions = {
+    registrationSource: 'college-scorecard',
+    apiKey: '{{ site.API.signup_key }}',
+    contactUrl: 'scorecarddata@rti.org',
+    siteName: 'College Scorecard',
+    emailFromName: 'College Scorecard',
+    exampleApiUrl: 'https://api.data.gov/ed/collegescorecard/v1/schools?api_key=API_KEY'
+};
 
 </script>
-

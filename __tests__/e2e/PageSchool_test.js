@@ -37,9 +37,6 @@ Scenario('Visit page and see all major page components.', (I) => {
   I.seeElement(locate('.school-key_figures li.icon-city').withText('City'));
   I.seeElement(locate('.school-key_figures li.icon-medium').withText('Medium'));
 
-  // See map with path
-  I.seeElement(locate('.leaflet-zoom-animated path'));
-
   //Hero Stats
   I.seeElement('#school-completion-rate-donut canvas#doughnut-chart');
   I.seeElement('#school-salary-after-complete .range-container .range-chart');
