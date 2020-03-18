@@ -19,14 +19,6 @@ buildtest: &buildtest
     - restore_cache:
         key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
 
-    # - run:
-    #     name: Install phantomjs
-    #     command: |
-    #       if ! [ $(which phantomjs) ]; then
-    #         sudo curl --output /usr/local/bin/phantomjs https://s3.amazonaws.com/circle-downloads/phantomjs-2.1.1
-    #       fi
-    #       sudo chmod ugo+x /usr/local/bin/phantomjs
-
     - run:
         name: NPM Install
         command: npm install
@@ -47,14 +39,6 @@ buildtest: &buildtest
         command: ln -s /tmp
         name: Run Jest unit tests
         command: JEST_JUNIT_OUTPUT_DIR="test/reports/unit" JEST_JUNIT_OUTPUT_NAME="unit.xml" npx jest --ci --reporters=default --reporters=jest-junit
-
-    # # XXX this is a workaround for a bug in WebDriverIO
-    # # that doesn't allow for absolute paths in the xunit
-    # # output directory:
-    # # <https://github.com/webdriverio/webdriverio/issues/926>
-    # - run:
-    #     name: WebDriverIO workaround directory
-    #     command: ln -s /tmp
 
     - run:
         name: Wait for Federalist Build
