@@ -11,15 +11,25 @@
               <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
               <v-expansion-panels>
                 <v-expansion-panel>                  
-                  <v-expansion-panel-header>March 10, 2020</v-expansion-panel-header>
+                  <v-expansion-panel-header>March XX, 2020</v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <p>On March 10, 2020, the Department completed an annual data refresh for the College Scorecard website/API with updated data for metrics derived from IPEDS and FSA data sources.  This data update includes 5 new API data fields:</p>
+                    <p>On March XX, 2020, the Department provided the following updates to the College Scorecard website/API:</p>
                     <ul>
-                      <li><strong>aid.ftft_pell_grant_rate:</strong> Percentage of full-time, first-time undergraduate students awarded a Pell Grant</li>
-                      <li><strong>aid.ftft_federal_loan_rate:</strong> Percentage of full-time, first-time undergraduate students awarded a federal loan</li>
-                      <li><strong>student.ftft_undergrads_with_pell_grant_or_federal_student_loan:</strong> Number of full-time, first-time undergraduate students (denominator percent full-time, first-time receiving a pell grant or federal student loan</li>
-                      <li><strong>student.enrollment.undergrad_12_month:</strong> Unduplicated count of undergraduate students enrolled during a 12 month period</li>
-                      <li><strong>student.enrollment.grad_12_month:</strong> Unduplicated count of graduate students enrolled during a 12 month period</li>
+                      <li>
+                        Updates to all data metrics derived from IPEDS with more recent data values from a new data collection year.
+                        Also, the addition of new IPEDS-derived data metrics including:
+                        <ul>
+                          <li>Percentage of full-time, first-time degree/certificate-seeking undergraduate students awarded a Pell Grant</li>
+                          <li>Percentage of full-time, first-time degree/certificate-seeking undergraduate students awarded a federal loan</li>
+                          <li>Number of full-time, first-time degree/certificate-seeking undergraduate students</li>
+                          <li>Unduplicated count of undergraduate students enrolled during a 12-month period</li>
+                          <li>Unduplicated count of graduate students enrolled during a 12-month period</li>
+                        </ul>
+                      </li>
+                      <li>Institutions not previously included in the historical data files from 1996-97 to 2016-17 (non-Title IV and deferment-only Title IV institutions) have been added to those data files. 
+                        As a result of adding these institutions, some metric values that are calculated for related sets of institutions (number of branch campuses, admissions rate for all related campuses, average SAT scores for all related campuses) have changed values.</li>
+                      <li>The Department corrected some metrics in the historical data files due to more current data being available and improved consistency in calculations involving precision and applicability rules.</li>
+                      <li>Updates (more recent data values) derived from Federal Student Aid sources for the following data metrics: Currently Operating Status Flag, Heightened Cash Monitoring Flag, Accrediting Agency Name and Code, Title IV Approval Date, and Cohort Default Rate.</li>
                     </ul>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
