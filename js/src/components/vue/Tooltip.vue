@@ -12,6 +12,7 @@
           <p v-if="limitedFoS">The data shown is for undergraduate fields of study (undergraduate certificates, associate's degrees, and bachelor's degrees) for which there is data. For more information on other credentials, including Graduate-level degrees and certificates, see <a :href='limitedFoS'>All Fields of Study</a> for this school.</p>
           <p v-if="showBranch">This information is based on all locations of this school.</p>
           <p v-if="showCompare">For schools with multiple locations, this information is based on all of their locations.</p>
+          <div v-if="info" v-html="info"></div>
           <p class='text-center mt-3' v-if='hasGlossary'>
             <v-btn :href="$baseUrl+'/data/glossary/#'+definition" small rounded color="secondary" class='px-4'>More Information</v-btn>
           </p>
@@ -53,6 +54,10 @@ export default {
     limitedFoS:{
       type: String, 
       default: null
+    },
+    showInfo:{
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -73,6 +78,9 @@ export default {
     content() {
       if(this.isCompare && this.entry['compare']) return this.entry['compare'];
       else return this.entry[this.version];
+    },
+    info(){
+      return this.entry['info'] && this.showInfo? this.entry['info']:false;
     },
     hasGlossary(){
       return this.entry['glossary']?true:false;
