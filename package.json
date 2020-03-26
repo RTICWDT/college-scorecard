@@ -5,7 +5,7 @@
   "author": "RTI International",
   "scripts": {
     "serve": "jekyll serve --baseurl='' -w",
-    "build": "webpack --config webpack.prod.vue.config.js",
+    "build": "node analytics.js && webpack --config webpack.prod.vue.config.js",
     "build:dev": "webpack --devtool source-map --config webpack.vue.config.js",
     "watch": "webpack --devtool source-map --config webpack.vue.config.js --watch",
     "test:e2e": "codeceptjs run --steps",

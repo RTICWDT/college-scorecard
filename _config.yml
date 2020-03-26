@@ -77,3 +77,4 @@ exclude:
   - js/src/*
   - __tests
   - output
+  - analytics.js
