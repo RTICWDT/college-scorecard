@@ -50,6 +50,9 @@ recaptcha-site-key: ''
 # Google Maps API key
 api-key-google-maps: ''
 
+# Analtyics string
+analytics-string: ''
+
 downloads:
   data-dictionary: CollegeScorecardDataDictionary.xlsx
   # data-base_url: https://ed-public-download.app.cloud.gov/downloads
@@ -77,3 +80,13 @@ exclude:
   - js/src/*
   - __tests
   - output
+  - build.log
+  - babel.config.js
+  - codecept.conf.js
+  - CONTRIBUTING.md
+  - LICENSE.md
+  - README.md
+  - webpack.prod.vue.config.js
+  - webpack.vue.config.js
+  - steps.d.ts
+  - steps_file.js
