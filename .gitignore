@@ -17,3 +17,4 @@ output/*.png
 .jekyll-cache
 __tests__/reports/*
 test/reports/*
+analytics.txt
