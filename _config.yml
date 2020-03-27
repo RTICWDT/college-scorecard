@@ -50,6 +50,9 @@ recaptcha-site-key: ''
 # Google Maps API key
 api-key-google-maps: ''
 
+# Analtyics string
+analytics-string: ''
+
 downloads:
   data-dictionary: CollegeScorecardDataDictionary.xlsx
   # data-base_url: https://ed-public-download.app.cloud.gov/downloads
