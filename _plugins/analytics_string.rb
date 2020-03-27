@@ -1,8 +1,6 @@
 module Jekyll
 
   class AnalyticsGenerator < Generator
-    
-    # include StaticFile
 
     def generate(site)
 
