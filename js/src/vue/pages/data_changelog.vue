@@ -11,9 +11,9 @@
               <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
               <v-expansion-panels>
                 <v-expansion-panel>                  
-                  <v-expansion-panel-header>March XX, 2020</v-expansion-panel-header>
+                  <v-expansion-panel-header>March 30, 2020</v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <p>On March XX, 2020, the Department provided the following updates to the College Scorecard website/API:</p>
+                    <p>On March 30, 2020, the Department provided the following updates to the College Scorecard website/API:</p>
                     <ul>
                       <li>
                         Updates to all data metrics derived from IPEDS with more recent data values from a new data collection year.
