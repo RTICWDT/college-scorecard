@@ -715,6 +715,10 @@
   min-height: 280px;
   margin-top: $base-padding;
   width: 100%;
+  text-size-adjust: 100%; 
+  -ms-text-size-adjust: 100%; 
+  -moz-text-size-adjust: 100%; 
+  -webkit-text-size-adjust: 100%;
 }
 </style>
 
