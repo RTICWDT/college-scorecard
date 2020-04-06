@@ -85,7 +85,7 @@
                   <v-col cols="12" md="5" class="px-sm-5 py-0">
                     <!-- <div class="school-map" ref="map"></div> -->
                     <div class="school-map" v-if="school">
-                      <v-img contain eager :src="generateMapURL(school)">
+                      <v-img contain eager max-height="380px" :src="generateMapURL(school)">
                       </v-img>
                     </div>
                   </v-col>
@@ -710,15 +710,11 @@
     solid
     $black;
   border-radius: $base-border-radius;
-  // height: 280px;
   height: auto;
   min-height: 280px;
+  max-height: 380px;
   margin-top: $base-padding;
-  width: 100%;
-  text-size-adjust: 100%; 
-  -ms-text-size-adjust: 100%; 
-  -moz-text-size-adjust: 100%; 
-  -webkit-text-size-adjust: 100%;
+  // width: auto;
 }
 </style>
 
