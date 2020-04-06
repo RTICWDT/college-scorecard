@@ -716,7 +716,6 @@
     solid
     $black;
   border-radius: $base-border-radius;
-  min-height: 250px;
   max-width: 420px;
   margin-top: $base-padding;
 }
