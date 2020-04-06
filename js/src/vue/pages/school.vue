@@ -84,8 +84,8 @@
                   </v-col>
                   <v-col cols="12" md="5" class="px-sm-5 py-0">
                     <!-- <div class="school-map" ref="map"></div> -->
-                    <div class="school-map" v-if="school">
-                      <v-img contain eager max-height="380px" :src="generateMapURL(school)">
+                    <div class="school-map mx-auto" v-if="school">
+                      <v-img contain eager max-height="380px" max-width="420px" :src="generateMapURL(school)">
                       </v-img>
                     </div>
                   </v-col>
@@ -715,6 +715,7 @@
   max-height: 380px;
   margin-top: $base-padding;
   // width: auto;
+  max-width: 420px;
 }
 </style>
 
