@@ -710,12 +710,12 @@
     solid
     $black;
   border-radius: $base-border-radius;
-  height: auto;
-  min-height: 280px;
+  // // height: 260px;
+  // min-height: 260px;
   max-height: 380px;
+  max-width: 420px;
   margin-top: $base-padding;
   // width: auto;
-  max-width: 420px;
 }
 </style>
 
