@@ -712,7 +712,7 @@
   border-radius: $base-border-radius;
   // // height: 260px;
   // min-height: 260px;
-  max-height: 380px;
+  // max-height: 380px;
   max-width: 420px;
   margin-top: $base-padding;
   // width: auto;
