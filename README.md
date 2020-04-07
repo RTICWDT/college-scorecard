@@ -31,25 +31,50 @@ Then install all the ruby gems you need:
 bundle
 ```
 
+## Environment Variables
 This Jekyll site features dynamic JavaScript that queries [api.data.gov](https://api.data.gov/).
-For the JavaScript to work, it needs an API key (register for one at
-[api.data.gov/signup/](https://api.data.gov/signup/))
-and a base URL. Jekyll will pull them from the local machine's
-environment variables at build time, so ensure that both the `API_KEY` and
-`API_BASE_URL` variables are set before running build scripts. On a Mac using the production api
-endpoint this is how to set those variables:
+For the JavaScript to work, ensure that all of the following keys are configured
+via local environment variables.
+
+### Required Environment Variables
+- `API_KEY`: The api key used to submit requests to Open Data Maker.  Authorization is
+handled by [api.data.gov](https://api.data.gov). Sign up for a key at: 
+[api.data.gov/signup/](https://api.data.gov/signup/)
+- `API_BASE_URL`: The API base URL for Open Data Maker.
+- `BASE_URL`: The base URL of the frontend application.  We use this value to assist with
+pathing during JavaScript builds.  This variable is automatically populated by federalist
+during remote builds but needs to be configured for local building.
+
+Typical configuration on a Unix based development environment:
 
 ```
-export API_KEY=yourkeyhere; export API_BASE_URL=https://api.data.gov/ed/collegescorecard/v1/
+export API_KEY=<API_KEY_HERE>
+export API_BASE_URL=https://api.data.gov/ed/collegescorecard/v1/
+export BASEURL=http://localhost:4000
 ```
 
-The application also expects some additional environment variables to be configured.
- - `API_SIGNUP_KEY`: The API key used to facilitate the embedded API signup form.
- - `BASEURL`: The application base URL.  This is used to ensure that asset pathing is working
- throughout different deploy environments and accessible within the JavaScript frontend code.
+### Optional Environment Variables
+The following environment variables should be set to ensure full functionality for all pages.
+These configurations are not required to view the site locally but will ensure all items are working
+as intended.
+
+ - `API_SIGNUP_KEY`: API key for [api.data.gov](https://api.data.gov) used during the embedded
+sign up form submission process (`data/documentation/#api-key-signup`). This key should be 
+configured by following
+[this documentation](https://api.data.gov/docs/agency-manual/#embedding-the-api-key-signup-form-on-your-own-documentation-site)
+- `RECAPTCHA_SITE_KEY`: Key used during `V2 ReCaptcha` workflows.  See 
+[documentation](https://developers.google.com/recaptcha/docs/display) for registration and
+configuration information.
+- `API_KEY_GOOGLE_MAPS`: API key for Google Static Maps functionality.  Refer to
+[Google Maps Developer Documentation](https://developers.google.com/maps/documentation)
+for configuration information.
+
+Typical configuration on a unix based development environment:
 
 ```
-export API_SIGNUP_KEY=yourkeyhere; export BASEURL=http://localhost:4000
+export API_SIGNUP_KEY=<API_KEY_HERE>
+export RECAPTCHA_SITE_KEY=<RECAPTCHA_API_KEY_HERE>
+export API_KEY_GOOGLE_MAPS=<GOOGLE_MAPS_API_KEY_HERE>
 ```
 
 To start up the local server, run:
