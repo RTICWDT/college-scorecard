@@ -58,7 +58,7 @@
     "extend": "^3.0.2",
     "fibers": "^3.1.1",
     "file-loader": "^4.2.0",
-    "jest": "^24.9.0",
+    "jest": "^25.3.0",
     "jest-junit": "^9.0.0",
     "jest-serializer-vue": "^2.0.2",
     "jshint": "^2.10.2",
@@ -90,7 +90,7 @@
     "watchify": "^3.11.1",
     "wdio-mocha-framework": "^0.6.4",
     "webdriverio": "^4.14.4",
-    "webpack": "^4.41.1",
+    "webpack": "^4.42.1",
     "webpack-cli": "^3.3.9",
     "xmlhttprequest": "^1.8.0"
   },
