@@ -42,8 +42,6 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
-    "babelify": "^10.0.0",
-    "browserify": "^12.0.1",
     "codeceptjs": "^2.3.5",
     "css-loader": "^3.2.0",
     "deepmerge": "^4.1.1",
@@ -79,9 +77,6 @@
     "vue-template-compiler": "^2.6.10",
     "vuetify": "^2.2.17",
     "vuetify-loader": "^1.2.2",
-    "watchify": "^3.11.1",
-    "wdio-mocha-framework": "^0.6.4",
-    "webdriverio": "^4.14.4",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.9",
     "xmlhttprequest": "^1.8.0"
