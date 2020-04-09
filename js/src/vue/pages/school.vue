@@ -84,8 +84,14 @@
                   </v-col>
                   <v-col cols="12" md="5" class="px-sm-5 py-0">
                     <!-- <div class="school-map" ref="map"></div> -->
-                    <div class="school-map" v-if="school">
-                      <v-img contain eager :src="generateMapURL(school)">
+                    <div class="school-map mx-auto" v-if="school">
+                      <v-img contain 
+                        eager 
+                        max-height="380px" 
+                        max-width="420px" 
+                        :src="generateMapURL(school)" 
+                        :alt="`Map showing location of ${schoolName}`"
+                      >
                       </v-img>
                     </div>
                   </v-col>
@@ -710,11 +716,8 @@
     solid
     $black;
   border-radius: $base-border-radius;
-  // height: 280px;
-  height: auto;
-  min-height: 280px;
+  max-width: 420px;
   margin-top: $base-padding;
-  width: 100%;
 }
 </style>
 
