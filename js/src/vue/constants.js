@@ -51,8 +51,10 @@ export const fields = {
   AVERAGE_TOTAL_DEBT:   'latest.aid.median_debt_suppressed.completers.overall',
   MONTHLY_LOAN_PAYMENT: 'latest.aid.median_debt_suppressed.completers.monthly_payments',
 
-  AID_PERCENTAGE:       'latest.aid.ftft_federal_loan_rate',
-  PELL_PERCENTAGE:      'latest.aid.ftft_pell_grant_rate',
+  // AID_PERCENTAGE:       'latest.aid.ftft_federal_loan_rate',
+  // PELL_PERCENTAGE:      'latest.aid.ftft_pell_grant_rate',
+  AID_PERCENTAGE:       'latest.aid.ftft_federal_loan_rate_pooled',
+  PELL_PERCENTAGE:      'latest.aid.ftft_pell_grant_rate_pooled',
 
   MEDIAN_EARNINGS:      'latest.earnings.10_yrs_after_entry.median',
 

@@ -373,7 +373,7 @@
                               v-if="debtRange.min"
                             >{{ debtRange.min.debt.monthly_debt_payment | numeral('$0,0') }}-{{ debtRange.max.debt.monthly_debt_payment | numeral('0,0') }}/mo</div>
                           </div>
-                          <div v-else class="data-na">Data not available.</div>
+                          <div v-else class="data-na">Data Not Available</div>
 
                           <p class="mt-2">
                             This is based on a standard 10-year payment plan, other
