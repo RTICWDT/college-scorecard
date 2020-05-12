@@ -20,7 +20,15 @@
       :value="initial_school"
       @update:search-input="runSearch"
       aria-label="Name Search"
-      />
+      no-filter
+      >
+
+      <template slot="item" slot-scope="{parent, item}">
+        {{item['school.name']}}
+      </template>
+
+    </v-combobox>
+
   </div>
 </template>
 
@@ -30,6 +38,7 @@ import { fields } from '../../vue/constants.js';
 import PrepareParams from '../../vue/mixins/PrepareParams.js'
 import { EventBus } from '../../vue/EventBus.js';
 import _ from 'lodash';
+import school_transitionVue from '../../vue/pages/school_transition.vue';
 
 export default {
   mixins:[PrepareParams],
@@ -47,36 +56,57 @@ export default {
   methods:{
     goToSchool: function(){
       this.items = [];
-      if(this.search)
-      {
-        this.$emit('school-name-selected',this.search);
-      }
+      // if(this.search)
+      // {
+      //   this.$emit('school-name-selected',this.search);
+      // }
+    },
+    customFilter(item, queryText, itemText){
+      return true;
     },
     runSearch: _.debounce(function(newVal){
       if(newVal)
       {
         this.isLoading = true
-        var query = { fields: ([fields.ID, fields.NAME]).join(','), per_page: 20 };
-        query[fields.NAME] = newVal;
+        var query = { 
+          fields: ([fields.ID, fields.NAME, fields.ALIAS, fields.SEARCH]).join(','), 
+          per_page: 20,
+          sort:`${fields.ALIAS}:asc` // To ensure items with alias are on first page
+        };
+
+        query['school.search'] = newVal;
         query = this.prepareParams(query);
 
         let request = apiGet(window.api.url, window.api.key, "/schools", query).then((response) => {
           if (!response.data.results.length) { return {}; }
-          let items = response.data.results;
+          let schools = response.data.results;
           let processed = {};
-          for(let i=0; i<items.length; i++)
-          {
-            if(!processed[items[i]['school.name']]) processed[items[i]['school.name']] = items[i]['id'];
-            else processed[items[i]['school.name']] += ','+items[i]['id'];
+
+          // Promote alias match to the top, remove from result list
+          // TODO - Improve: Break into words, Case Insensitive
+          let aliasMatch = _.remove(schools, (school) => {
+            return school['school.alias'] && school['school.alias'].indexOf(newVal) > -1;
+          });
+
+          // console.log("Alias Match: " + JSON.stringify(aliasMatch));
+
+          if(aliasMatch.length > 0){
+            // Add flag for alias Match
+            aliasMatch = aliasMatch.map(i => {
+              return {...i, 'alias': true}
+            });
+
+            // Add to the front of the result array
+            schools.unshift(...aliasMatch);
           }
-          this.items = _.map(processed, (value, prop) => ({ "school.name": prop, "id": value }));
+
+          this.items = schools;
           this.isLoading = false;
         }).catch((error) => {
           this.items = [];
           this.isLoading = false;
         });
       }
-
     },200)
   },
   mounted(){

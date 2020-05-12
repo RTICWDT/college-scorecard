@@ -12,7 +12,7 @@ const apiGet = function(baseURL,apiKey,uri,params = {}) {
 
   return apiInstance.get(uri, {
     params:{
-      api_key: apiKey,
+      // api_key: apiKey,
       ...params
     }
   });
