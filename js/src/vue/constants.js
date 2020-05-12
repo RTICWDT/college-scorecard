@@ -118,6 +118,7 @@ export const formMappings = {
     size:               fields.SIZE,
     avg_net_price:      fields.NET_PRICE,
     completion_rate:    fields.COMPLETION_RATE,
+    alias:              fields.ALIAS
   },
 
   control: {
