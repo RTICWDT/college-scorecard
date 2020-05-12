@@ -11,6 +11,20 @@
               <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
               <v-expansion-panels>
                 <v-expansion-panel>                  
+                  <v-expansion-panel-header>May XX, 2020</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <p>On May XX, 2020, the Department updated five data elements that appear on the consumer website and/or the downloadable data files/API with more recent data values:</p>
+                    <ul>
+                      <li>Currently Operating Status Flag</li>
+                      <li>Heightened Cash Monitoring Flag</li>
+                      <li>Accrediting Agency Name</li>
+                      <li>Accrediting Agency Code</li>
+                      <li>Title IV Approval Date</li>
+                    </ul>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+
+                <v-expansion-panel>                  
                   <v-expansion-panel-header>March 30, 2020</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <p>On March 30, 2020, the Department provided the following updates to the College Scorecard website/API:</p>
