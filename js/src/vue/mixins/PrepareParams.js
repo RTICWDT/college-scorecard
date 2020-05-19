@@ -7,6 +7,7 @@ const alias = {
   state:                fields.STATE,
   under_investigation:  fields.UNDER_INVESTIGATION,
   cip4:                 fields.FIELD_OF_STUDY_CODE,
+  search:               fields.SEARCH, // Name + Alias
 
   // slider ranges
   avg_net_price:        fields.NET_PRICE + '__range',
@@ -317,7 +318,11 @@ export default {
 
       // set the predominant degree to range '1..3' because ED expert guidance
       query[fields.PREDOMINANT_DEGREE + '__range'] = '1..3';
-
+      
+      if(query[fields.NAME != ""]){
+        delete query[fields.NAME]
+      }
+      
       return query;
     }
   }

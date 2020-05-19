@@ -57,10 +57,10 @@ export default {
   methods:{
     goToSchool: function(){
       this.items = [];
-      // if(this.search)
-      // {
-      //   this.$emit('school-name-selected',this.search);
-      // }
+      if(this.search)
+      {
+        this.$emit('school-name-selected',this.search);
+      }
     },
     customFilter(item, queryText, itemText){
       return true;
