@@ -319,8 +319,8 @@ export default {
       // set the predominant degree to range '1..3' because ED expert guidance
       query[fields.PREDOMINANT_DEGREE + '__range'] = '1..3';
       
-      if(query[fields.NAME != ""]){
-        delete query[fields.NAME]
+      if(query[fields.NAME != '']){
+        delete query[fields.NAME];
       }
       
       return query;
