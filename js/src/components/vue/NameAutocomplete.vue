@@ -25,7 +25,7 @@
 
       <!-- TODO - Add markup for alias match or highlighting -->
       <template slot="item" slot-scope="{parent, item}">
-        {{item['school.name']}}
+        <span class="name-complete-school-name">{{item['school.name']}}</span>
       </template>
 
     </v-combobox>
@@ -71,7 +71,7 @@ export default {
         this.isLoading = true
         var query = { 
           fields: ([fields.ID, fields.NAME, fields.ALIAS, fields.SEARCH]).join(','), 
-          per_page: 40,
+          per_page: 20,
           sort:`alias:asc` // Not perfect, helps to ensure items with alias are on first page.
         };
 
@@ -101,7 +101,7 @@ export default {
 
           // TODO - Demote items that do not have search text in school name
           // TODO - Main campus to the top?=
-          console.log("Alias Match: " + JSON.stringify(aliasMatch));
+          // console.log("Alias Match: " + JSON.stringify(aliasMatch));
 
           if(aliasMatch.length > 0){
             // Add flag for alias Match
@@ -120,7 +120,7 @@ export default {
           this.isLoading = false;
         });
       }
-    },200)
+    },300)
   },
   mounted(){
     this.search = this.initial_school;
