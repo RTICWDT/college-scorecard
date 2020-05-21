@@ -32,7 +32,7 @@
       <h4 class="subhead-2 font-weight-bold mb-2">Search by Name</h4>
       <name-autocomplete
         @school-name-selected="handleSchoolNameSelected"
-        :initial_school="input.name"
+        :initial_school="input.search"
       />
     </div>
 
@@ -436,6 +436,7 @@ export default {
         lat: null,
         long: null,
         locale: [],
+        search: ""
       },
       utility: {
         rules: {
@@ -680,6 +681,11 @@ export default {
         this.utility.location = "State";
       }
 
+      if(this.input.name != ""){
+        this.input.search = this.input.name
+        this.input.name = "";
+      }
+
     },
     processChangeEvent() {
     },
@@ -706,11 +712,13 @@ export default {
     },
     handleSchoolNameSelected(school) {
       if (typeof school == "string") {
-        this.input.name = school;
+        // this.input.name = school;
+        this.input.search = school;
         this.input.id = null;
       }
       else {
-        this.input.name = school['school.name'];
+        // this.input.name = school['school.name'];
+        this.input.search = school['school.name'];
         this.input.id = school.id;
       }
     }

@@ -6,6 +6,8 @@ export const fields = {
   CITY:                 'school.city',
   STATE:                'school.state',
   ZIP_CODE:             'school.zip',
+  SEARCH:               'school.search',
+  ALIAS:                'school.alias',
 
   SCHOOL_URL:           'school.school_url',
 
@@ -118,6 +120,7 @@ export const formMappings = {
     size:               fields.SIZE,
     avg_net_price:      fields.NET_PRICE,
     completion_rate:    fields.COMPLETION_RATE,
+    alias:              fields.ALIAS
   },
 
   control: {
