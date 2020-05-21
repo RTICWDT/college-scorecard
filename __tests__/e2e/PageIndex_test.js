@@ -24,11 +24,11 @@ Scenario('Test Name Autocomplete', (I) => {
   
   I.wait(2);
 
-  I.seeElement(locate(".name-complete-school-name").withText("Yale University"));
+  I.seeElement(locate('.name-complete-school-name').withText('Yale University'));
 
-  I.click(locate(".name-complete-school-name").withText("Yale University"));
+  I.click(locate('.name-complete-school-name').withText('Yale University'));
 
-  I.seeInCurrentUrl("/search");
+  I.seeInCurrentUrl('/search');
   I.seeInCurrentUrl('search=Yale%20University');
 });
 
