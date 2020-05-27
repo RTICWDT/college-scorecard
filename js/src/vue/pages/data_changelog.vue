@@ -21,6 +21,7 @@
                       <li>Accrediting Agency Code</li>
                       <li>Title IV Approval Date</li>
                     </ul>
+                    <br />
                     <p>In addition, the Department updated school identification information such as name and web address, and added new multi-year (rolling average) versions of the percentage of full-time, first-time degree/certificate-seeking undergraduate students who were 1) awarded a Pell Grant and 2) awarded a federal loan.</p>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
