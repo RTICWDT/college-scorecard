@@ -117,10 +117,10 @@
               >Download the Data Dictionary</v-btn>
               
               <h3 id="api-key-signup">Register for an API key</h3>
-              <p>
+              <!-- <p>
                 To use the College Scorecard API you must have an API key. 
                 An API key is a unique identifier that is used to authenticate data requests associated with your project.
-              </p>
+              </p> -->
 
               <!-- <div> -->
                 <!-- <p>
@@ -205,13 +205,13 @@
 <script>
 import DataNavigation from 'components/vue/DataNavigation.vue';
 import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
-import VueRecaptcha from 'vue-recaptcha';
+// import VueRecaptcha from 'vue-recaptcha';
 
 export default {
   mixins: [AnalyticsEvents],
   components: {
     'data-navigation': DataNavigation,
-    VueRecaptcha
+    // VueRecaptcha
   },
   props: ["baseUrl", "dataBase_url", "dataDictionary","recaptchaSiteKey"],
   data(){
