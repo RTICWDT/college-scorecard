@@ -6,6 +6,8 @@ export const fields = {
   CITY:                 'school.city',
   STATE:                'school.state',
   ZIP_CODE:             'school.zip',
+  SEARCH:               'school.search',
+  ALIAS:                'school.alias',
 
   SCHOOL_URL:           'school.school_url',
 
@@ -51,8 +53,10 @@ export const fields = {
   AVERAGE_TOTAL_DEBT:   'latest.aid.median_debt_suppressed.completers.overall',
   MONTHLY_LOAN_PAYMENT: 'latest.aid.median_debt_suppressed.completers.monthly_payments',
 
-  AID_PERCENTAGE:       'latest.aid.ftft_federal_loan_rate',
-  PELL_PERCENTAGE:      'latest.aid.ftft_pell_grant_rate',
+  // AID_PERCENTAGE:       'latest.aid.ftft_federal_loan_rate',
+  // PELL_PERCENTAGE:      'latest.aid.ftft_pell_grant_rate',
+  AID_PERCENTAGE:       'latest.aid.ftft_federal_loan_rate_pooled',
+  PELL_PERCENTAGE:      'latest.aid.ftft_pell_grant_rate_pooled',
 
   MEDIAN_EARNINGS:      'latest.earnings.10_yrs_after_entry.median',
 
@@ -116,6 +120,7 @@ export const formMappings = {
     size:               fields.SIZE,
     avg_net_price:      fields.NET_PRICE,
     completion_rate:    fields.COMPLETION_RATE,
+    alias:              fields.ALIAS
   },
 
   control: {

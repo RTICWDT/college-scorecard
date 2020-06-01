@@ -24,12 +24,12 @@ Scenario('Test Name Autocomplete', (I) => {
   
   I.wait(2);
 
-  I.seeElement(locate(".v-list-item__title").withText("Yale University"));
+  I.seeElement(locate('.name-complete-school-name').withText('Yale University'));
 
-  I.click(locate(".v-list-item__title").withText("Yale University"));
+  I.click(locate('.name-complete-school-name').withText('Yale University'));
 
-  I.seeInCurrentUrl("/search");
-  I.seeInCurrentUrl('name=Yale%20University');
+  I.seeInCurrentUrl('/search');
+  I.seeInCurrentUrl('search=Yale%20University');
 });
 
 Scenario('Test Show Me Options: Simple Elements', (I) => {
