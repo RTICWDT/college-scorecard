@@ -117,13 +117,13 @@
               >Download the Data Dictionary</v-btn>
               
               <h3 id="api-key-signup">Register for an API key</h3>
-              <p>
+              <!-- <p>
                 To use the College Scorecard API you must have an API key. 
                 An API key is a unique identifier that is used to authenticate data requests associated with your project.
-              </p>
+              </p> -->
 
-              <div>
-                <p>
+              <!-- <div> -->
+                <!-- <p>
                   First, please complete the security challenge below.
                   <v-scroll-x-transition>
                     <v-icon
@@ -133,29 +133,30 @@
                       mdi-check
                     </v-icon>
                   </v-scroll-x-transition>
-                </p>
+                </p> -->
 
-                <p class="d-none d-sm-block">
+                <!-- <p class="d-none d-sm-block">
                   <vue-recaptcha
                     v-show="showCaptcha"
                     :sitekey="recaptchaSiteKey"
                     @verify="onCaptchaVerify">
                   </vue-recaptcha>
-                </p>
+                </p> -->
 
                 <!-- Compact on XS -->
-                <p class="d-block d-sm-none">
+                <!-- <p class="d-block d-sm-none">
                   <vue-recaptcha
                     v-show="showCaptcha"
                     :sitekey="recaptchaSiteKey"
                     @verify="onCaptchaVerify"
                     size="compact">
                   </vue-recaptcha>
-                </p>
-              </div>
+                </p> -->
+
+              <!-- </div> -->
 
               <div>
-                <v-fade-transition>
+                <!-- <v-fade-transition>
                   <p v-show="!showCaptcha">
                     Second, use the form below to complete the registration process and receive your API key.
                     <v-scroll-x-transition>
@@ -167,16 +168,21 @@
                       </v-icon>
                     </v-scroll-x-transition>
                   </p>
-                </v-fade-transition>
+                </v-fade-transition> -->
 
-                <v-fade-transition>
+                <!-- <v-fade-transition> -->
                   <!-- Form Holder -->
-                  <div v-show="!showCaptcha"
+                  <!-- <div v-show="!showCaptcha"
                     id="apidatagov_signup" 
                     class="mb-2"
                     >
-                  </div>
-                </v-fade-transition>
+                  </div> -->
+                <!-- </v-fade-transition> -->
+
+                <div id="apidatagov_signup" 
+                    class="mb-2">
+                </div>
+
               </div>
               
               <p class="data-docs">
@@ -199,18 +205,19 @@
 <script>
 import DataNavigation from 'components/vue/DataNavigation.vue';
 import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
-import VueRecaptcha from 'vue-recaptcha';
+// import VueRecaptcha from 'vue-recaptcha';
 
 export default {
   mixins: [AnalyticsEvents],
   components: {
     'data-navigation': DataNavigation,
-    VueRecaptcha
+    // VueRecaptcha
   },
   props: ["baseUrl", "dataBase_url", "dataDictionary","recaptchaSiteKey"],
   data(){
     return{
-      showCaptcha: true,
+      // showCaptcha: true,
+      showCaptcha: false,
       formSubmitted: false
     }
   },
@@ -237,11 +244,13 @@ export default {
     }
   },
   // TODO - Remove if testing is no longer needed
-  // mounted(){
-  //   setTimeout(()=>{
-  //     this.showCaptcha = false;
-  //     this.loadEmbeddedForm(this.addFormSubmitListener);
-  //     }, 2000)
-  // }
+  mounted(){
+    // setTimeout(()=>{
+    //   this.showCaptcha = false;
+    //   this.loadEmbeddedForm(this.addFormSubmitListener);
+    //   }, 2000)
+    
+    this.loadEmbeddedForm();
+  }
 };
 </script>
