@@ -178,11 +178,6 @@
                     >
                   </div>
                 </v-fade-transition>
-
-                <!-- <div id="apidatagov_signup" 
-                    class="mb-2">
-                </div> -->
-
               </div>
               
               <p class="data-docs">
@@ -217,7 +212,6 @@ export default {
   data(){
     return{
       showCaptcha: true,
-      // showCaptcha: false,
       formSubmitted: false
     }
   },
@@ -243,20 +237,13 @@ export default {
       });
     }
   },
-  // TODO - Remove if testing is no longer needed
   mounted(){
-    // setTimeout(()=>{
-    //   this.showCaptcha = false;
-    //   this.loadEmbeddedForm(this.addFormSubmitListener);
-    //   }, 2000)
-
+    // Ran into an issue with script timing on IE11, created errors. Adding a script here fixes the problem
     let recaptchaScript = document.createElement('script')
     recaptchaScript.setAttribute('src', 'https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit')
     recaptchaScript.async = true;
     recaptchaScript.defer = true;
     document.head.appendChild(recaptchaScript);
-
-    // this.loadEmbeddedForm();
   }
 };
 </script>
