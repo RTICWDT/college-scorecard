@@ -56,7 +56,8 @@ analytics-string: ''
 downloads:
   data-dictionary: CollegeScorecardDataDictionary.xlsx
   data-base_url: https://ed-public-download.app.cloud.gov/downloads
-#  data-base_url: http://ed-public-download-05222020.app.cloud.gov/downloads
+  # data-base_url: http://ed-public-download-05222020.app.cloud.gov/downloads
+
 
 # specify paths to exclude from copying to _site
 # Note: files and directories with the '_' prefix are excluded
