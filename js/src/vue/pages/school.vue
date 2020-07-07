@@ -109,33 +109,48 @@
                     </div>
                   </v-col>
                 </v-row>
+
+                <!-- Institution Quick Stats -->
                 <v-row class="mt-3">
-                  <v-col id="school-completion-rate-donut" cols="12" md="6" class="px-sm-5">
-                    <h2 class="mb-4">
-                      <!--prettyhtml-ignore-->
-                      Graduation Rate&nbsp;<tooltip definition="graduation-rate" :version="completionRateFieldDefinition" />
-                    </h2>
-                    <donut
-                      v-if="completionRate"
-                      color="#0e365b"
-                      :value="completionRate * 100"
-                      :height="200"
-                    ></donut>
-                    <div v-else class="data-na">Data Not Available</div>
-                  </v-col>
                   <v-col cols="12" md="6" class="px-sm-5">
+                    <div id="school-completion-rate-donut">
+                      <h2 class="mb-4">
+                        <!--prettyhtml-ignore-->
+                        Graduation Rate&nbsp;<tooltip definition="graduation-rate" :version="completionRateFieldDefinition" />
+                      </h2>
+
+                      <!-- <donut
+                        v-if="completionRate"
+                        color="#0e365b"
+                        :value="completionRate * 100"
+                        :height="200"
+                      ></donut> -->
+
+                      <!-- TODO - Add Total Percent Text, Handle large display, maybe overlay and color change when certain percent?-->
+                      <horizontal-bar
+                        v-if="completionRate"
+                        :value="completionRate * 100"
+                        :min="0"
+                        :max="100"
+                        color="#0e365b"
+                        :height="25"
+                      ></horizontal-bar>
+                    
+                      <div v-else class="data-na">Data Not Available</div>
+                    </div>
+
                     <div id="school-salary-after-complete">
                       <h2 class="mb-3">
-                      <!--prettyhtml-ignore-->
-                      Salary After Completing&nbsp;
-                      <tooltip definition="fos-median-earnings" :isBranch="isBranch" :limitedFoS="fieldsLink" />
-                    </h2>
-                    <p>Salary after completing depends on field of study.</p>
-                    <multi-range
-                      :minmax="earningsRange"
-                      variable="earnings.median_earnings"
-                      :max=" { label: '$150,000', value: 150000 }"
-                    />
+                        <!--prettyhtml-ignore-->
+                        Salary After Completing&nbsp;
+                        <tooltip definition="fos-median-earnings" :isBranch="isBranch" :limitedFoS="fieldsLink" />
+                      </h2>
+                      <p>Salary after completing depends on field of study.</p>
+                      <multi-range
+                        :minmax="earningsRange"
+                        variable="earnings.median_earnings"
+                        :max=" { label: '$150,000', value: 150000 }"
+                      />
                     </div>
 
                     <div id="school-avg-cost">
@@ -150,16 +165,19 @@
                         <tooltip definition="avg-program-cost" />
                       </h2>
                       <p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
-
                       <h2
                         class="display-2 navy-text font-weight-bold mb-4"
                         v-if="netPrice"
                       >{{ netPrice | numeral('$0,0') }}</h2>
                       <div class="data-na" v-else>Data Not Available</div>
                     </div>
+                  </v-col>
+
+                  <v-col cols="12" md="6" class="px-sm-5">
 
                   </v-col>
                 </v-row>
+                <!-- end: Institution Quick Stats -->
               </v-card>
 
               <v-row>
