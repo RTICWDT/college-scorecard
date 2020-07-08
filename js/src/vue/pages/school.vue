@@ -174,7 +174,10 @@
                   </v-col>
 
                   <v-col cols="12" md="6" class="px-sm-5">
-
+                    <field-of-study-select
+                      :all-cip-two="CIP2"
+                      :display-fos-cip-four="allFieldsOfStudy"
+                    />
                   </v-col>
                 </v-row>
                 <!-- end: Institution Quick Stats -->
@@ -758,6 +761,7 @@ import NetPriceLink from "components/vue/NetPriceLink.vue";
 import SearchForm from "components/vue/SearchForm.vue";
 import MultiRange from "components/vue/MultiRange.vue";
 import querystring from "querystring";
+import FieldOfStudySelect from "components/vue/FieldOfStudySelect.vue";
 
 import { compare } from "vue/mixins.js";
 import ComplexFields from "vue/mixins/ComplexFields.js";
@@ -785,7 +789,8 @@ export default {
     "field-data": FieldData,
     "net-price-link": NetPriceLink,
     "search-form": SearchForm,
-    "multi-range": MultiRange
+    "multi-range": MultiRange,
+    'field-of-study-select': FieldOfStudySelect
   },
   data() {
     return {
