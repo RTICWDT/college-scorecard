@@ -572,6 +572,10 @@
                     <div v-else>
                       <v-row>
                         <v-col cols="12" md="6">
+                          <v-select
+                            :items="aidLoanSelectItems"
+                            v-model="aidLoanSelect"
+                          />
                           <h2 class="mb-3">
                             Students Receiving Federal Loans
                             <tooltip definition="student-aid" />
@@ -591,6 +595,11 @@
                             <tooltip definition="avg-debt" :isBranch="isBranch" :limitedFoS="fieldsLink" />
                           </h2>
                           <p>Total debt after graduation depends on field of study for undergraduate borrowers who complete college.</p>
+                          <v-checkbox
+                            v-model="aidDebtPriorInstitutions"
+                            label="Include debt borrowed at prior institutions"
+                          />
+
                           <multi-range
                             :minmax="debtRange"
                             variable="debt.median_debt"
@@ -601,6 +610,12 @@
                             Typical Monthly Loan Payment&nbsp;
                             <tooltip definition="avg-loan-payment" :isBranch="isBranch" :limitedFoS="fieldsLink" />
                           </h2>
+
+                          <v-checkbox
+                            v-model="aidPaymentPriorInstitutions"
+                            label="Include debt borrowed at prior institutions"
+                          />
+
                           <div v-if="debtRange && debtRange.single">
                             <div
                               class="display-2 navy-text font-weight-bold"
@@ -980,8 +995,31 @@
 
           <v-col lg="3" v-if="!error">
             <v-card outline class="pa-5 mb-3">
-              <p class="title mb-2">Find Another School</p>
-              <name-autocomplete id="school-name-auto-complete" @school-name-selected="handleSchoolNameSelected" />
+              <p class="title mb-2">New Search:</p>
+              <v-radio-group v-model="sidebarSearchToggle" row>
+                <v-radio
+                  label="School"
+                  value="school"
+                  color="green darken-1"
+                ></v-radio>
+                <v-radio
+                  label="Fields Of Study"
+                  value="fos"
+                  color="yellow lighten-2"
+                ></v-radio>
+              </v-radio-group>
+
+              <name-autocomplete
+                v-if="sidebarSearchToggle === 'school'"
+                id="school-name-auto-complete"
+               @school-name-selected="handleSchoolNameSelected"
+              />
+
+              <field-of-study-search
+                v-if="sidebarSearchToggle === 'fos'"
+                id="school-fos-search"
+              />
+
             </v-card>
             <v-card outline class="pa-5">
               <paying-for-college />
@@ -1039,6 +1077,7 @@ import SearchForm from "components/vue/SearchForm.vue";
 import MultiRange from "components/vue/MultiRange.vue";
 import querystring from "querystring";
 import FieldOfStudySelect from "components/vue/FieldOfStudySelect.vue";
+import FieldOfStudySearch from '../../components/vue/FieldOfStudySearch.vue';
 
 import { compare } from "vue/mixins.js";
 import ComplexFields from "vue/mixins/ComplexFields.js";
@@ -1067,7 +1106,8 @@ export default {
     "net-price-link": NetPriceLink,
     "search-form": SearchForm,
     "multi-range": MultiRange,
-    'field-of-study-select': FieldOfStudySelect
+    'field-of-study-select': FieldOfStudySelect,
+    'field-of-study-search': FieldOfStudySearch
   },
   data() {
     return {
@@ -1090,7 +1130,15 @@ export default {
         { text: "Financial Aid Recipients", value: "aid"},
         { text: "Pell Grant Recipients", value: "pell"}
       ],
-      fosFinancialCheckbox:false
+      fosFinancialCheckbox:false,
+      aidLoanSelect: "fed",
+      aidLoanSelectItems:[
+        { text: "Federal Student Loans", value: "fed"},
+        { text: "Parent Plus Loans", value:"plus"}
+      ],
+      aidDebtPriorInstitutions: false,
+      aidPaymentPriorInstitutions: false,
+      sidebarSearchToggle: "school"
     };
   },
   computed: {
