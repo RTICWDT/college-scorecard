@@ -174,10 +174,25 @@
                   </v-col>
 
                   <v-col cols="12" md="6" class="px-sm-5">
-                    <field-of-study-select
-                      :all-cip-two="CIP2"
-                      :display-fos-cip-four="allFieldsOfStudy"
-                    />
+                    <v-card
+                      class="pa-4"
+                      rounded
+                      raised
+                    >
+                      <p class="text-right overline">
+                        Compare Field Of Study 
+                        <v-icon>fa fa-plus-circle</v-icon> 
+                      </p>
+
+                      <h2>Fields Of Study Offered</h2>
+
+                      <field-of-study-select
+                        :all-cip-two="CIP2"
+                        :display-fos-cip-four="allFieldsOfStudy"
+                        v-model="selectedFOS"
+                      />
+                    </v-card>
+
                   </v-col>
                 </v-row>
                 <!-- end: Institution Quick Stats -->
@@ -190,6 +205,13 @@
                 </v-col>
               </v-row>
               <v-expansion-panels multiple focusable v-model="panels">
+                                <v-expansion-panel>
+                  <v-expansion-panel-header
+                    id="graduation"
+                    aria-controls="graduation-content"
+                    @click="trackAccordion('Graduation &amp; Retention')"
+                  >Graduation &amp; Retention</v-expansion-panel-header>
+                  <v-expansion-panel-content id="graduation-content" class="px-0 py-3 pa-sm-5">
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     id="cost"
@@ -806,7 +828,8 @@ export default {
       currentSankey: {
         enroll: "enroll_both",
         study: "study_both"
-      }
+      },
+      selectedFOS:null
     };
   },
   computed: {
