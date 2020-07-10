@@ -132,9 +132,10 @@ export default {
         if(_.includes([1,2,3], program.credential.level)) {
           processedPrograms[this.allCipTwo[twodigit]].push({
             selectTitle: `${program.title} - ${program.credential.title}`, // TODO - String Filter?
+            ...program
             // value: `${program.code}-${program.credential.level}`
-            code: program.code,
-            credential: program.credential
+            // code: program.code,
+            // credential: program.credential
           });
         }
       });

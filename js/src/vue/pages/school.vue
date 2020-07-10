@@ -191,6 +191,30 @@
                         :display-fos-cip-four="allFieldsOfStudy"
                         v-model="selectedFOS"
                       />
+
+                      <div>
+                        <v-row v-if="selectedFOSDetail">
+                          <v-col cols="12" md="6">
+                            <p class="overline mb-0">
+                              Median Earnings&nbsp;
+                              <tooltip definition="fos-median-earnings" />
+                            </p>
+                            <p v-if="selectedFOSDetail.earnings.median_earnings">{{selectedFOSDetail.earnings.median_earnings | numeral('$0,0') }}</p>
+                            <p v-else>--</p>
+                          </v-col>
+
+                          <v-col cols="12" md="6">
+                            <p class="overline mb-0">
+                              Number of Graduates&nbsp;
+                              <tooltip definition="fos-number-of-graduates" />
+                            </p>
+                            <p v-if="selectedFOSDetail.counts.ipeds_awards2">{{ selectedFOSDetail.counts.ipeds_awards2 | separator }}</p>
+                            <p v-else>--</p>    
+                          </v-col>
+                        </v-row>
+                      </div>
+
+
                     </v-card>
 
                   </v-col>
@@ -205,13 +229,129 @@
                 </v-col>
               </v-row>
               <v-expansion-panels multiple focusable v-model="panels">
-                                <v-expansion-panel>
+                <v-expansion-panel>
                   <v-expansion-panel-header
-                    id="graduation"
-                    aria-controls="graduation-content"
-                    @click="trackAccordion('Graduation &amp; Retention')"
-                  >Graduation &amp; Retention</v-expansion-panel-header>
-                  <v-expansion-panel-content id="graduation-content" class="px-0 py-3 pa-sm-5">
+                    id="fields-of-study"
+                    aria-controls="fos-content"
+                    @click="trackAccordion('Fields Of Study')"
+                  >Fields Of Study
+                  </v-expansion-panel-header>
+
+                  <v-expansion-panel-content id="fos-content" class="px-0 py-3 pa-sm-5">
+                    <v-row>
+                      <v-col cols="12" md="12">
+                        <p class="text-right overline">
+                          Compare Field Of Study 
+                          <v-icon>fa fa-plus-circle</v-icon> 
+                        </p>
+
+                        <p>Fields Of Study Offered At {{ schoolName }}</p>
+                        <field-of-study-select
+                          :all-cip-two="CIP2"
+                          :display-fos-cip-four="allFieldsOfStudy"
+                          v-model="selectedFOS"
+                        />
+                      </v-col>
+                    </v-row>
+
+                    <h2 class="mb-3">Top Fields of Study <tooltip definition="field-of-study" :limitedFoS="fieldsLink" /></h2>
+                    <p class="my-0">
+                      <span class="d-block d-sm-inline">Sort by:</span>
+                      <v-btn
+                        class="ma-1"
+                        :color="field_sort == 'ipeds_award_count'? 'secondary':null"
+                        small
+                        @click="field_sort = 'ipeds_award_count'"
+                      >Largest Size</v-btn>
+                      <v-btn
+                        class="ma-1"
+                        :color="field_sort == 'highest_earnings'? 'secondary':null"
+                        small
+                        @click="field_sort = 'highest_earnings'"
+                      >Highest Earnings</v-btn>
+                      <v-btn
+                        class="ma-1"
+                        :color="field_sort == 'lowest_debt'? 'secondary':null"
+                        small
+                        @click="field_sort = 'lowest_debt'"
+                      >Lowest Debt</v-btn>
+                    </p>
+                    <p class="my-3" v-if="fieldsOfStudy.length">
+                      Out of {{fosUndergradCount| numeral }} undergraduate {{fosUndergradCount==1? 'field':'fields' }} of study at {{ schoolName }}, the {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} {{ hoistGroupText }} are shown below. ({{ hoistCount}} had relevant data on {{ hoistGroupData }}.)
+                      <a
+                        :href="fieldsLink"
+                      >See All Fields of Study &raquo;</a>
+                    </p>
+                    <v-row class="mx-5 mt-5 d-none d-sm-flex" v-if="fieldsOfStudy.length">
+                      <v-col cols="12" sm="8" class="ma-0 px-2 py-0 font-weight-bold">Field of Study</v-col>
+                      <v-col cols="12" sm="4" class="ma-0 pa-0 font-weight-bold">{{currentHoist}}</v-col>
+                    </v-row>
+                    <v-row class="mx-0 mt-5 d-block d-sm-none" v-if="fieldsOfStudy.length">
+                      <v-col
+                        cols="12"
+                        class="ma-0 px-2 py-2 font-weight-bold"
+                      >Field of Study ({{currentHoist}})</v-col>
+                    </v-row>
+                    <v-expansion-panels class="my-3" v-if="fieldsOfStudy.length">
+                      <v-expansion-panel
+                        v-for="fos in fieldsOfStudy"
+                        :key="fos.code+'-'+fos.credential.level"
+                      >
+                        <v-expansion-panel-header class="py-0 pl-2 pl-sm-4">
+                          <v-row no-gutters class="my-0 d-none d-sm-flex" align="center">
+                            <v-col
+                              cols="12"
+                              sm="8"
+                              class="pa-2"
+                            >{{ fos.title.slice(0,-1) }} - {{ fos.credential.title }}</v-col>
+                            <v-col
+                              v-if="hoistCurrency"
+                              cols="12"
+                              class="navy-text px-5 font-weight-bold"
+                              sm="4"
+                            >{{ fos.hoist | numeral('$0,0') }}</v-col>
+                            <v-col
+                              v-else
+                              cols="12"
+                              class="navy-text px-5 font-weight-bold"
+                              sm="4"
+                            >{{ fos.hoist | separator }}</v-col>
+                          </v-row>
+                          <div class="d-block d-sm-none my-2 mx-1 pl-0">
+                            {{ fos.title.slice(0,-1) }} - {{ fos.credential.title }}
+                            <span
+                              v-if="hoistCurrency"
+                              class="navy-text font-weight-bold"
+                            >({{ fos.hoist | numeral('$0,0') }})</span>
+                            <span
+                              v-else
+                              class="navy-text font-weight-bold"
+                            >({{ fos.hoist | separator }})</span>
+                          </div>
+                        </v-expansion-panel-header>
+                        <v-expansion-panel-content>
+                          <field-data :fos="fos" />
+                        </v-expansion-panel-content>
+                      </v-expansion-panel>
+                    </v-expansion-panels>
+                    <div v-else>
+                      <v-alert
+                        type="info"
+                        class="mt-3"
+                      >There are no fields of study with data available for {{currentHoist}}.</v-alert>
+                    </div>
+                    <p class="text-center">
+                      <v-btn rounded color="secondary" :href="fieldsLink">
+                        <span class="d-none d-sm-flex">See All Available Fields of Study</span>
+                        <span class="d-block d-sm-none">See All</span>
+                      </v-btn>
+                    </p>
+                  </v-expansion-panel-content>
+
+                </v-expansion-panel>
+                  
+                
+                
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     id="cost"
@@ -471,14 +611,13 @@
                     />
                   </v-expansion-panel-content>
                 </v-expansion-panel>
-                <v-expansion-panel>
+                <!-- <v-expansion-panel>
                   <v-expansion-panel-header
                     id="academics"
                     aria-controls="academics-content"
                     @click="trackAccordion('Fields of Study')"
                   >Fields of Study</v-expansion-panel-header>
                   <v-expansion-panel-content id="academics-content" class="px-0 py-3 pa-sm-5">
-                    <!-- <div if=''> -->
                     <h2 class="mb-3">Top Fields of Study <tooltip definition="field-of-study" :limitedFoS="fieldsLink" /></h2>
                     <p class="my-0">
                       <span class="d-block d-sm-inline">Sort by:</span>
@@ -572,7 +711,7 @@
                       </v-btn>
                     </p>
                   </v-expansion-panel-content>
-                </v-expansion-panel>
+                </v-expansion-panel> -->
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     id="demographics"
@@ -907,6 +1046,18 @@ export default {
       return this.allFieldsOfStudy.filter((fos) => {
         return fos.credential.level <= 3;
       }).length;
+    },
+    selectedFOSDetail(){
+      // TODO - Deal with passing small amount of information, use find to get index;
+
+      // Null if it is not set
+      if(this.selectedFOS === "" || this.selectedFOS === {}){
+        return null;
+      }
+
+      return this.selectedFOS;
+      // Find the index
+      // let findIndex = _.findIndex(this.allFieldsOfStudy)
     }
   },
   methods: {
