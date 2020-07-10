@@ -199,7 +199,9 @@
                               Median Earnings&nbsp;
                               <tooltip definition="fos-median-earnings" />
                             </p>
-                            <p v-if="selectedFOSDetail.earnings.median_earnings">{{selectedFOSDetail.earnings.median_earnings | numeral('$0,0') }}</p>
+                            <p v-if="selectedFOSDetail.earnings.median_earnings">
+                              {{selectedFOSDetail.earnings.median_earnings | numeral('$0,0') }}
+                            </p>
                             <p v-else>--</p>
                           </v-col>
 
@@ -229,6 +231,8 @@
                 </v-col>
               </v-row>
               <v-expansion-panels multiple focusable v-model="panels">
+
+                <!--Field Of Study Panel-->
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     id="fields-of-study"
@@ -254,7 +258,57 @@
                       </v-col>
                     </v-row>
 
-                    <h2 class="mb-3">Top Fields of Study <tooltip definition="field-of-study" :limitedFoS="fieldsLink" /></h2>
+                    <div v-if="selectedFOSDetail">
+                      <h2>Number Of Graduates<tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" /></h2>
+                      <h3 class="display-2 navy-text font-weight-bold mb-4"
+                          v-if="selectedFOSDetail.counts.ipeds_awards2"
+                      >{{ selectedFOSDetail.counts.ipeds_awards2}}</h3>
+                      <div class="data-na" v-else>Data Not Available</div>
+
+                      <h2 class="grey lighten-4">Salary After Completing</h2>
+                      <div>
+                        <v-row>
+                          <v-col col="12" md="4">
+                            <v-select
+                              :items="fosSalarySelectItems"
+                              v-model="fosSalarySelect"
+                            />
+                          </v-col>
+
+                          <v-col col="12" md="4">
+                            <span>Median Earnings</span>
+                          </v-col>
+
+                          <v-col col="12" md="4">
+                            <span>Monthly Earnings</span>
+                          </v-col>
+                        </v-row>
+                      </div>
+
+                      <h2 class="grey lighten-4">Financial Aid &amp; Debt</h2>
+                      <div>
+                        <v-row>
+                          <v-col col="12" md="4">
+                            <v-checkbox
+                              v-model="fosFinancialCheckbox"
+                              label="Include debt borrowed at any prior institutions"
+                            ></v-checkbox>
+                          </v-col>
+
+                          <v-col col="12" md="4">
+                            <span>Median Earnings</span>
+                          </v-col>
+
+                          <v-col col="12" md="4">
+                            <span>Monthly Earnings</span>
+                          </v-col>
+                        </v-row>
+                      </div>
+
+
+                    </div>
+
+                    <h2 class="mb-3 grey lighten-4">Top Fields of Study at {{ schoolName }} <tooltip definition="field-of-study" :limitedFoS="fieldsLink" /></h2>
                     <p class="my-0">
                       <span class="d-block d-sm-inline">Sort by:</span>
                       <v-btn
@@ -349,9 +403,8 @@
                   </v-expansion-panel-content>
 
                 </v-expansion-panel>
-                  
-                
-                
+
+                <!--Costs - Panel-->
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     id="cost"
@@ -452,6 +505,8 @@
                     </v-row>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+
+                <!--Graduation and Retention - Panel-->
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     id="graduation"
@@ -499,6 +554,8 @@
                     </v-row>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+
+                <!--Financial Aid & Debt - Panel -->
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     id="aid"
@@ -568,6 +625,29 @@
                           </p>
                         </v-col>
                       </v-row>
+
+                      <div class="fos-inline-information"
+                        v-if="selectedFOSDetail"
+                      >
+                        <h3>{{selectedFOSDetail.selectTitle}}</h3>
+                        <v-row>
+                          <v-col col="12" md="4">
+                            <v-checkbox
+                                    v-model="fosFinancialCheckbox"
+                                    label="Include debt borrowed at any prior institutions"
+                            ></v-checkbox>
+                          </v-col>
+
+                          <v-col col="12" md="4">
+                            <span>Median Earnings</span>
+                          </v-col>
+
+                          <v-col col="12" md="4">
+                            <span>Monthly Earnings</span>
+                          </v-col>
+                        </v-row>
+                      </div>
+
                       <v-row>
                         <v-col cols="12">
                           <v-card color="grey lighten-4 pa-4">
@@ -592,6 +672,8 @@
                     </div>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+
+                <!--Salary After Completing Field Of Study - Panel-->
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     id="earnings"
@@ -603,14 +685,43 @@
                     aria-controls="earnings-content"
                     class="px-0 py-3 pa-sm-5"
                   >
-                    <p>Typical earnings in the first year after graduation with the range of highest and lowest median earnings for undergraduate and credential programs for which there is data. For more information, see Fields of Study for this school.</p>
-                    <multi-range
-                      :minmax="earningsRange"
-                      variable="earnings.median_earnings"
-                      :max="{ label: '$150,000', value: 150000 }"
-                    />
+                    <div>
+                      <p>Typical earnings in the first year after graduation with the range of highest and lowest median earnings for undergraduate and credential programs for which there is data. For more information, see Fields of Study for this school.</p>
+                      <multi-range
+                              :minmax="earningsRange"
+                              variable="earnings.median_earnings"
+                              :max="{ label: '$150,000', value: 150000 }"
+                      />
+                    </div>
+
+                    <div class="fos-inline-information mt-4"
+                     v-if="selectedFOSDetail"
+                    >
+                      <h3>{{selectedFOSDetail.selectTitle}}</h3>
+
+                      <v-row>
+                        <v-col col="12" md="4">
+                          <v-select
+                            :items="fosSalarySelectItems"
+                            v-model="fosSalarySelect"
+                          />
+                        </v-col>
+
+                        <v-col col="12" md="4">
+                          <span>Median Earnings</span>
+                        </v-col>
+
+                        <v-col col="12" md="4">
+                          <span>Monthly Earnings</span>
+                        </v-col>
+
+                      </v-row>
+                    </div>
+
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+
+                <!--Old Field Of Study - Panel-->
                 <!-- <v-expansion-panel>
                   <v-expansion-panel-header
                     id="academics"
@@ -712,6 +823,8 @@
                     </p>
                   </v-expansion-panel-content>
                 </v-expansion-panel> -->
+
+                <!--Student Body - Panel-->
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     id="demographics"
@@ -790,6 +903,8 @@
                     </v-row>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+
+                <!--Test Scores and Acceptance - Panel-->
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     id="selectivity"
@@ -858,6 +973,7 @@
                     </v-row>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+
               </v-expansion-panels>
             </div>
           </v-col>
@@ -968,7 +1084,13 @@ export default {
         enroll: "enroll_both",
         study: "study_both"
       },
-      selectedFOS:null
+      selectedFOS:null,
+      fosSalarySelect:"aid",
+      fosSalarySelectItems:[
+        { text: "Financial Aid Recipients", value: "aid"},
+        { text: "Pell Grant Recipients", value: "pell"}
+      ],
+      fosFinancialCheckbox:false
     };
   },
   computed: {
@@ -1001,7 +1123,7 @@ export default {
           fos.reverse();
         }
         this.hoistCount = fos.length;
-        fos = fos.slice(0, 10);
+        fos = fos.slice(0, 5);
       } else {
         fos = [fos];
       }
