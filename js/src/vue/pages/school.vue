@@ -1138,7 +1138,8 @@ export default {
       ],
       aidDebtPriorInstitutions: false,
       aidPaymentPriorInstitutions: false,
-      sidebarSearchToggle: "school"
+      sidebarSearchToggle: "school",
+      urlParams:null
     };
   },
   computed: {
@@ -1311,7 +1312,12 @@ export default {
       {
         window.location = this.$baseUrl+'/search/?name=' + encodeURIComponent(school['school.name']) + "&id="+school.id;
       }
-    }
+    },
+    parseURLParams(url = location.search.substr(1)) {
+      let query = querystring.parse(url);
+
+      return query || {};
+    },
   },
   mounted() {
     let self = this;
@@ -1351,6 +1357,16 @@ export default {
         this.error = true;
         console.warn('No School found for ID: ' + id);
       });
+
+    // set URL params
+    this.urlParams = this.parseURLParams(location.search.substr(1));
+
+    // Check URL for FOS Argument
+    // Set FOS from Array
+
+    // Update URL when a new one is selected
+
+    // There will be an issue with full select from menu, since it passes the whole object
   }
 };
 </script>
