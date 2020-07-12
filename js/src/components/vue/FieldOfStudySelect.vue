@@ -77,9 +77,16 @@
     </template>
   </v-combobox> -->
 
+<!--  <v-combobox-->
+<!--    :items="menuFOS"-->
+<!--    item-text="selectTitle"-->
+<!--    @input="handleChange"-->
+<!--    :value="value"-->
+<!--  >-->
+<!--  </v-combobox>-->
+
   <v-combobox
     :items="menuFOS"
-    item-text="selectTitle"
     @input="handleChange"
     :value="value"
   >
@@ -102,10 +109,6 @@ export default {
       type: Array,
       default: null
     },
-    allCipTwo:{
-      type: Object,
-      required: true
-    },
     value:{
     }
   },
@@ -114,59 +117,18 @@ export default {
   computed:{
   },
   methods:{
-    // TODO - Add tests to this method.  Maybe move it somewhere centralized;
-    organizeFieldsOfStudy(availableFieldsOfStudy4, filter = null){
-      let processedPrograms = {};
-      let self = this;
-
-      availableFieldsOfStudy4.forEach((program, idx) => {
-        if(program.credential.level==3) {
-          program.credential.title = "Bachelor's Degree";
-        }
-        
-        let twodigit = program.code.substr(0, 2);
-        if (_.includes([1,2,3], program.credential.level) && !processedPrograms[this.allCipTwo[twodigit]]){
-          processedPrograms[this.allCipTwo[twodigit]] = [];
-        }
-
-        if(_.includes([1,2,3], program.credential.level)) {
-          processedPrograms[this.allCipTwo[twodigit]].push({
-            selectTitle: `${program.title} - ${program.credential.title}`, // TODO - String Filter?
-            ...program
-            // value: `${program.code}-${program.credential.level}`
-            // code: program.code,
-            // credential: program.credential
-          });
-        }
-      });
-
-      let sorted = [];
-      for(var cip2 in processedPrograms){
-        sorted.push({
-        name: cip2,
-          fields: _.sortBy(processedPrograms[cip2], ['title'])
-        });
-      };
-
-      return _.sortBy(sorted, ['name']);
-    },
     handleChange(event){
       console.log(event);
       this.$emit('input', event);
     } 
   },
   mounted(){
-    this.displayFOS = this.organizeFieldsOfStudy(this.displayFosCipFour,null);
-    
     // Set up the select menu with cip2 headers and cip4 sub items;
-    this.menuFOS = this.displayFOS.reduce((final,item) => {
+    this.menuFOS = this.displayFosCipFour.reduce((final,item) => {
       final.push({header:item.name});
       final.push(...item.fields);
       return final;
     },[]);
-    // this.displayFOS = this.displayFOS.map((item) => {
-    //   return {fields: item.fields, value: 1, header:item.name}
-    // })
   }
 };
 </script>

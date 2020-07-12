@@ -5,6 +5,8 @@
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/_site" />
       <excludeFolder url="file://$MODULE_DIR$/assets" />
+      <excludeFolder url="file://$MODULE_DIR$/css/fonts" />
+      <excludeFolder url="file://$MODULE_DIR$/css/vendor" />
       <excludeFolder url="file://$MODULE_DIR$/js/vendor" />
       <excludeFolder url="file://$MODULE_DIR$/output" />
       <excludeFolder url="file://$MODULE_DIR$/temp" />

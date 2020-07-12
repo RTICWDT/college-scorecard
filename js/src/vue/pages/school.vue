@@ -187,8 +187,7 @@
                       <h2>Fields Of Study Offered</h2>
 
                       <field-of-study-select
-                        :all-cip-two="CIP2"
-                        :display-fos-cip-four="allFieldsOfStudy"
+                        :display-fos-cip-four="fieldOfStudySelectItems"
                         v-model="selectedFOS"
                       />
 
@@ -251,8 +250,7 @@
 
                         <p>Fields Of Study Offered At {{ schoolName }}</p>
                         <field-of-study-select
-                          :all-cip-two="CIP2"
-                          :display-fos-cip-four="allFieldsOfStudy"
+                          :display-fos-cip-four="fieldOfStudySelectItems"
                           v-model="selectedFOS"
                         />
                       </v-col>
@@ -644,7 +642,7 @@
                       <div class="fos-inline-information"
                         v-if="selectedFOSDetail"
                       >
-                        <h3>{{selectedFOSDetail.selectTitle}}</h3>
+                        <h3>{{selectedFOSDetail.title}}</h3>
                         <v-row>
                           <v-col col="12" md="4">
                             <v-checkbox
@@ -712,7 +710,7 @@
                     <div class="fos-inline-information mt-4"
                      v-if="selectedFOSDetail"
                     >
-                      <h3>{{selectedFOSDetail.selectTitle}}</h3>
+                      <h3>{{selectedFOSDetail.title}}</h3>
 
                       <v-row>
                         <v-col col="12" md="4">
@@ -1222,13 +1220,30 @@ export default {
       // TODO - Deal with passing small amount of information, use find to get index;
 
       // Null if it is not set
-      if(this.selectedFOS === "" || this.selectedFOS === {}){
+      if(this.selectedFOS === "" || this.selectedFOS === {} || this.selectedFOS === null){
         return null;
       }
 
-      return this.selectedFOS;
+      // Find full object
+      let locatedFOS = this.locateFOSObject(
+        this.allFieldsOfStudy,
+        this.selectedFOS.code,
+        this.selectedFOS.credential.level
+      );
+
+
+      return {
+        title: this.selectedFOS.text,
+        ...locatedFOS
+      }
+      // return this.selectedFOS;
       // Find the index
       // let findIndex = _.findIndex(this.allFieldsOfStudy)
+    },
+    fieldOfStudySelectItems(){
+      if (!this.school || !this.allFieldsOfStudy) return {};
+
+      return this.organizeFieldsOfStudy(this.allFieldsOfStudy, this.CIP2);
     }
   },
   methods: {
@@ -1318,6 +1333,75 @@ export default {
 
       return query || {};
     },
+    // TODO - Move? Make it more testible?
+    organizeFieldsOfStudy(availableFieldsOfStudy4,allCip2, filter = null){
+      let processedPrograms = {};
+      // let self = this;
+
+      availableFieldsOfStudy4.forEach((program, idx) => {
+        if(program.credential.level===3) {
+          program.credential.title = "Bachelor's Degree";
+        }
+
+        let twodigit = program.code.substr(0, 2);
+        if (_.includes([1,2,3], program.credential.level) && !processedPrograms[allCip2[twodigit]]){
+          processedPrograms[allCip2[twodigit]] = [];
+        }
+
+        if(_.includes([1,2,3], program.credential.level)) {
+          processedPrograms[allCip2[twodigit]].push(this.formatFOS(program));
+        }
+      });
+
+      let sorted = [];
+      for(var cip2 in processedPrograms){
+        sorted.push({
+          name: cip2,
+          fields: _.sortBy(processedPrograms[cip2], ['title'])
+        });
+      }
+
+      return _.sortBy(sorted, ['name']);
+    },
+    formatFOS(fosObject){
+      return {
+        text: `${fosObject.title} - ${fosObject.credential.title}`,
+        value: `${fosObject.code}.${fosObject.credential.level}`,
+        code: fosObject.code,
+        credential:{
+          level: fosObject.credential.level
+        }
+      }
+    },
+    locateFOSObject(elements,code,credentialLevel){
+      return _.find(elements,(fos) => {
+        return fos.code === code && fos.credential.level === credentialLevel;
+      });
+    },
+    mapFOSFromURL(params,elements){
+      // Exist and matches pattern
+      if(typeof params.fos_code === "undefined" &&
+        /^\d{3,4}$/.test(params.fos_code) === false
+      ){
+        return null;
+      }
+
+      if(typeof params.fos_credential === "undefined" &&
+        /^\d{1}$/.test(params.fos_credential) === false
+      ){
+        return null;
+      }
+
+      let locatedFOS = _.find(this.allFieldsOfStudy, (fos)=>{
+        return fos.code == params.fos_code && fos.credential.level == params.fos_credential;
+      });
+
+      if(typeof locatedFOS === 'undefined'){
+        return null
+      }else{
+        return this.formatFOS(locatedFOS);
+      }
+    }
   },
   mounted() {
     let self = this;
@@ -1352,21 +1436,34 @@ export default {
         document.title = _.get(this.school, "school.name") + " | College Scorecard";
         // this.createMap(this.school);
 
+        this.urlParams = this.parseURLParams(location.search.substr(1));
+        this.selectedFOS = this.mapFOSFromURL(this.urlParams, this.fieldOfStudySelectItems);
 
       }).catch((response) => {
         this.error = true;
         console.warn('No School found for ID: ' + id);
       });
 
+    // Organize
+
     // set URL params
-    this.urlParams = this.parseURLParams(location.search.substr(1));
+    // this.urlParams = this.parseURLParams(location.search.substr(1));
+    // this.selectedFOS = this.mapFOSFromURL(this.urlParams, this.fieldOfStudySelectItems);
 
     // Check URL for FOS Argument
-    // Set FOS from Array
 
-    // Update URL when a new one is selected
+    //CHECK FIRST;
 
-    // There will be an issue with full select from menu, since it passes the whole object
+
+  },
+  watch:{
+    selectedFOS(val, oldVal){
+      // Check for null with new and old values
+
+      // What needs to happen?
+      // Update the URL
+    }
   }
+
 };
 </script>
