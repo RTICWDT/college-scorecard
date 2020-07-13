@@ -1392,6 +1392,8 @@ export default {
         return null;
       }
 
+      // TODO - Replace with method
+      // TODO - make sure values are the correct type when checking
       let locatedFOS = _.find(this.allFieldsOfStudy, (fos)=>{
         return fos.code == params.fos_code && fos.credential.level == params.fos_credential;
       });
@@ -1401,6 +1403,16 @@ export default {
       }else{
         return this.formatFOS(locatedFOS);
       }
+    },
+    generateQueryString(params){
+      let qs = querystring.stringify(params)
+      return (
+        "?" +
+        qs
+          .replace(/^&+/, "")
+          .replace(/&{2,}/g, "&")
+          .replace(/%3A/g, ":")
+      );
     }
   },
   mounted() {
@@ -1458,10 +1470,19 @@ export default {
   },
   watch:{
     selectedFOS(val, oldVal){
-      // Check for null with new and old values
+      // Update the URL when this value changes;
+      if(val !== oldVal){
+        if(typeof val.code != "undefined" && typeof val.credential.level != "undefined"){
+          // To capture the first argument
+          let params = this.urlParams;
+          params.fos_code = val.code;
+          params.fos_credential = val.credential.level;
+          // Generate string but remove first equals sign due to current query structure '?schoolid-school-name' with no value;
+          let qs = this.generateQueryString(params).replace('=',"");
+          history.replaceState(params, "School Profile", qs);
+        }
+      }
 
-      // What needs to happen?
-      // Update the URL
     }
   }
 
