@@ -1477,12 +1477,11 @@ export default {
           let params = this.urlParams;
           params.fos_code = val.code;
           params.fos_credential = val.credential.level;
-          // Generate string but remove first equals sign due to current query structure '?schoolid-school-name' with no value;
+          // Generate string but remove first equals character due to current query structure '?schoolid-school-name' with no value;
           let qs = this.generateQueryString(params).replace('=',"");
           history.replaceState(params, "School Profile", qs);
         }
       }
-
     }
   }
 

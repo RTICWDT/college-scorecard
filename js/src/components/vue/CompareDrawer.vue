@@ -3,10 +3,10 @@
     <v-btn icon class="float-right" @click="toggleDrawer()">
       <v-icon>fas fa-times-circle</v-icon>
     </v-btn>
-    <p class="title">Compare Schools</p>
+    <p>Add up to 10 Schools and 10 Fields of Study to compare.</p>
     <v-row>
-      <v-col cols="12">
-        <p>You can add up to 10 schools to compare.</p>
+      <v-col cols="12" md="6">
+        <p class="title">Compare Schools</p>
         <div class="my-3">
           <v-checkbox
             @change="handleToggleCompareSchool(school)"
