@@ -9,7 +9,8 @@ permalink: /compare/
         page-permalink="{{ page.permalink }}" 
         base-url="{{site.baseurl}}" 
         :compare-schools="compareSchools"
+        :compare-fields-of-study="compareFieldsOfStudy"
         @compare-update-selection="refreshCompareSchools"
-        @toggle-compare-school="toggleCompareSchool"   
+        @toggle-compare-school="toggleCompareItem"
     />
 </div>

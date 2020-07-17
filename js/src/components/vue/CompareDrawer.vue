@@ -30,7 +30,7 @@
           <v-checkbox
             v-for="fieldOfStudy in fieldsOfStudy"
             @change="handleToggleCompareItem(fieldOfStudy, fieldOfStudyKey)"
-            :key="fieldOfStudy.id"
+            :key="generateFieldOfStudyString(fieldOfStudy)"
             hide-details
             v-model="selectedFieldsOfStudy"
             :value="generateFieldOfStudyString(fieldOfStudy)"
@@ -46,6 +46,9 @@
             </template>
           </v-checkbox>
         </div>
+        <p>
+          <v-btn rounded color="secondary" :href="$baseUrl+'/compare?toggle=fos'">Compare Fields Of Study</v-btn>
+        </p>
       </v-col>
     </v-row>
   </v-card>

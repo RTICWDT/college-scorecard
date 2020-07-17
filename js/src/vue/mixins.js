@@ -23,7 +23,7 @@ export const compare = {
       this.showCompare = false;
     },
     isSelected(data,collection) {
-      return _.findIndex(collection,data);
+      return _.findIndex(collection, data) >= 0;
     }
   }
 }
