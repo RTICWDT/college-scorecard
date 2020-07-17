@@ -1035,10 +1035,15 @@
       </v-container>
     </v-content>
     <scorecard-footer />
-    <compare-header :showCompare.sync="showCompare" :schools="compareSchools" />
+    <compare-header
+      :showCompare.sync="showCompare"
+      :schools="compareSchools"
+      :fields-of-study="compareFieldsOfStudy"
+    />
     <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
       <compare-drawer
         :schools="compareSchools"
+        :fields-of-study="compareFieldsOfStudy"
         @toggle-compare-school="handleToggleCompareSchool"
         v-on:close-modal="closeModal()"
       ></compare-drawer>

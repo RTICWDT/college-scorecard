@@ -59,6 +59,9 @@ export default {
   },
   props: {
     schools: Array,
+    fieldsOfStudy:{
+      type: Array
+    }
 
   },
   data() {
