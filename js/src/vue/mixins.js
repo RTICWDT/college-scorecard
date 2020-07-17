@@ -16,6 +16,9 @@ export const compare = {
     handleToggleCompareSchool(school) {
       this.$emit("toggle-compare-school", school);
     },
+    handleToggleCompareItem(item,key) {
+      this.$emit("toggle-compare-school", item,key);
+    },
     closeModal(){
       this.showCompare = false;
     },
