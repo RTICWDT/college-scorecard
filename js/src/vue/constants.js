@@ -144,6 +144,7 @@ export const formMappings = {
 
 export const localStorageKeys = {
   COMPARE_KEY: 'compare-schools',
+  COMPARE_FOS_KEY: 'compare-fos',
   SEARCH_URL_KEY: 'search-url'
 };
 

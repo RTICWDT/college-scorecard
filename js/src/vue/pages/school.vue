@@ -1085,7 +1085,7 @@ import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
 
 export default {
   mixins: [compare, URLHistory, ComplexFields, AnalyticsEvents],
-  props: ["baseUrl", "compareSchools","apiKeyGoogleMaps"],
+  props: ["baseUrl", "compareSchools","apiKeyGoogleMaps","compareFieldsOfStudy"],
   components: {
     donut: Donut,
     "name-autocomplete": NameAutocomplete,

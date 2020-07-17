@@ -24,6 +24,22 @@
           <v-btn rounded color="secondary" :href="$baseUrl+'/compare/'">Compare Schools</v-btn>
         </p>
       </v-col>
+      <v-col cols="12" md="6">
+        <p class="title">Compare Fields Of Study</p>
+        <div class="my-3">
+          <v-checkbox
+            @change="handleToggleCompareSchool(school)"
+            :label="school.schoolName"
+            v-for="school in schools"
+            :key="school.schoolId"
+            :value="school.schoolId"
+            hide-details
+            v-model="selected"
+            color="secondary"
+            class="ma-0 pa-0"
+          ></v-checkbox>
+        </div>
+      </v-col>
     </v-row>
   </v-card>
 </template>
@@ -42,7 +58,8 @@ export default {
     share: Share
   },
   props: {
-    schools: Array
+    schools: Array,
+
   },
   data() {
     return {
