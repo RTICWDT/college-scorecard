@@ -4,10 +4,13 @@ export const LocalStorage = {
   selectAll: function (key) {
     return JSON.parse(window.localStorage.getItem(key)) || [];
   },
-  isSelected: function (id, key) {
-    return (this.selectAll(key).map(function(fav){
-      return +fav.schoolId;
-    }).indexOf(id));
+  // isSelected: function (id, key) {
+  //   return (this.selectAll(key).map(function(fav){
+  //     return +fav.schoolId;
+  //   }).indexOf(id));
+  // },
+  isSelected: function(data, key){
+    return _.findIndex(this.selectAll(key), data);
   },
   // toggleCompare: function (el,key){
   //   let dataset = el.dataset;
@@ -33,7 +36,7 @@ export const LocalStorage = {
   // }
 
   toggleCompare: function(data,key){
-    let isSelected = this.isSelected(+data.schoolId, key);
+    let isSelected = this.isSelected(data,key);
     let selectedItems = this.selectAll(key);
 
     if (isSelected >= 0) {
