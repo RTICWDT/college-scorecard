@@ -41,7 +41,7 @@
                       text
                       small
                       class="d-none d-sm-inline"
-                      :color="isSelected?'amber':'white'"
+                      :color="isSelected({schoolId:String(id)},this.compareSchools)?'white':'amber'"
                       @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
                       <v-icon x-small class="mr-2">fa fa-plus-circle</v-icon>Compare
@@ -49,7 +49,7 @@
                     <v-btn
                       fab
                       x-small
-                      :color="isSelected?'amber':'white'"
+                      :color="isSelected({schoolId:String(id)},this.compareSchools)?'white':'amber'"
                       class="d-inline d-sm-none mr-2"
                       @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
@@ -179,10 +179,18 @@
                       rounded
                       raised
                     >
-                      <p class="text-right overline">
-                        Compare Field Of Study 
-                        <v-icon>fa fa-plus-circle</v-icon> 
-                      </p>
+                      <div v-if="selectedFOS">
+                        <v-btn
+                          text
+                          small
+                          class="d-none d-sm-inline"
+                          :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'green':'amber'"
+                          @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
+                        >
+                          <v-icon x-small class="mr-2">fa fa-plus-circle</v-icon>Compare Field of Study
+                        </v-btn>
+                      </div>
+
 
                       <h2>Fields Of Study Offered</h2>
 
@@ -1413,6 +1421,16 @@ export default {
           .replace(/&{2,}/g, "&")
           .replace(/%3A/g, ":")
       );
+    },
+    generateCompareFieldOfStudy(fosObject){
+      return {
+        id: fosObject.unit_id,
+        code: fosObject.code,
+        credentialLevel: fosObject.credential.level,
+        credentialTitle: fosObject.credential.title,
+        institutionName: fosObject.school.name,
+        fosTitle: fosObject.title
+      }
     }
   },
   mounted() {

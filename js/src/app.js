@@ -113,6 +113,14 @@ new Vue({
           }
           break;
         case localStorageKeys.COMPARE_FOS_KEY:
+          data = {
+            institutionName: item.institutionName,
+            credentialTitle: item.credentialTitle,
+            fosTitle: item.fosTitle,
+            id: item.id,
+            code: item.code,
+            credentialLevel: item.credentialLevel
+          }
           break;
         default:
           data = {
