@@ -31,6 +31,26 @@
                     <share small text color="white" label="Share this Comparison" :url="shareUrl" :hide="hideShare" show-copy/>
                   </v-col>
                 </v-row>
+
+                <h1>Compare</h1>
+                <div>
+                  <v-btn
+                    depressed
+                    small
+                    @click="displayToggle='institutions'"
+                  >Schools</v-btn>
+                  <v-btn
+                    depressed
+                    small
+                    @click="displayToggle='fos'"
+                  >Fields Of Study</v-btn>
+                </div>
+
+                <div>
+                  <!--TODO - Make this a component with a close event-->
+
+                </div>
+
                 <v-row>
                   <v-col cols="12" class="pa-sm-5">
                     <compare-section
@@ -521,12 +541,14 @@ export default {
       if(this.passedSchools.length > 0){
         paramArray.s = this.passedSchools;
       }else{
-        // Alter to desired structure
-        let schoolIDArray = this.compareSchools.map((school) => {return school.schoolId});
-        paramArray.s = schoolIDArray;
+        // If not passed from URL, use compare drawer
+        paramArray.s = this.compareSchools.map((school) => {
+          return school.schoolId
+        });
       }
 
       // Default to passed in FOS
+      // TODO - Add FOS to URL
 
       // Return Composite URL
       return compareBaseURL + this.prepareQueryString(paramArray);
@@ -563,7 +585,15 @@ export default {
       }else{
         return [];
       }
-    }
+    },
+    // passedFieldsOfStudy(){
+    //   if(this.queryStringParameters['fos']){
+    //     // Get from array, parse needed items
+    //
+    //   }else{
+    //     return [];
+    //   }
+    // }
   },
   methods: {
     all() {
