@@ -39,10 +39,10 @@
                       definition="avg-cost"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'netPrice', 
-                        color: '#0e365b', 
-                        max: 150000, 
+                      :config="{
+                        computedField: 'netPrice',
+                        color: '#0e365b',
+                        max: 150000,
                         type: 'currency',
                         chart: 'HorizontalBar'
                       }"
@@ -54,12 +54,12 @@
                       definition="graduation-rate"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'completionRate', 
-                        color: '#0e365b', 
-                        max: 100, 
+                      :config="{
+                        computedField: 'completionRate',
+                        color: '#0e365b',
+                        max: 100,
                         type: 'percent',
-                        chart: 'HorizontalBar' 
+                        chart: 'HorizontalBar'
                       }"
                     />
 
@@ -69,9 +69,9 @@
                       @update-highlight="currentHighlight = $event"
                       title="Salary After Completing"
                       definition="fos-median-earnings"
-                      :config="{ 
-                        computedField: 'earningsRange', 
-                        color: '#0e365b', 
+                      :config="{
+                        computedField: 'earningsRange',
+                        color: '#0e365b',
                         chart: 'MultiRange',
                         multiRangeVariable: 'earnings.median_earnings'
                       }"
@@ -97,12 +97,12 @@
                       definition="full-time"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'fullTimeEnrollment', 
-                        color: '#0e365b', 
-                        max: 100, 
+                      :config="{
+                        computedField: 'fullTimeEnrollment',
+                        color: '#0e365b',
+                        max: 100,
                         type: 'percent',
-                        chart: 'HorizontalBar' 
+                        chart: 'HorizontalBar'
                       }"
                     />
 
@@ -111,8 +111,8 @@
                       title="School Information"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        chart: 'SchoolInfo' 
+                      :config="{
+                        chart: 'SchoolInfo'
                        }"
                     />
 
@@ -122,12 +122,12 @@
                       definition="socio-eco"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'socioEconomicDiversity', 
-                        color: '#0e365b', 
-                        max: 100, 
+                      :config="{
+                        computedField: 'socioEconomicDiversity',
+                        color: '#0e365b',
+                        max: 100,
                         type: 'percent',
-                        chart: 'HorizontalBar' 
+                        chart: 'HorizontalBar'
                       }"
                     />
 
@@ -137,13 +137,13 @@
                       definition="race-eth"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'raceEthnicity', 
-                        color: '#0e365b', 
-                        max: 100, 
+                      :config="{
+                        computedField: 'raceEthnicity',
+                        color: '#0e365b',
+                        max: 100,
                         type: 'percent',
                         chart: 'HorizontalBar',
-                        currentRaceEthnicityFilter: currentRaceEthnicity 
+                        currentRaceEthnicityFilter: currentRaceEthnicity
                       }"
                     >
                       <p class="overline mb-1">Race/Ethnicity</p>
@@ -155,7 +155,7 @@
                             {label: 'Black', value:'Black'},
                             {label: 'Hispanic', value:'Hispanic'},
                             {label: 'Native Hawaiian/Pacific Islander', value:'Native Hawaiian/Pacific Islander'},
-                            {label: 'Non-resident alien', value:'Non-resident alien'},         
+                            {label: 'Non-resident alien', value:'Non-resident alien'},
                             {label: 'Two or more races', value:'Two or more races'},
                             {label: 'Unknown', value:'Unknown'},
                             {label: 'White', value:'White'},
@@ -179,12 +179,12 @@
                       definition="avg-cost"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'netPrice', 
-                        color: '#0e365b', 
-                        max: 150000, 
+                      :config="{
+                        computedField: 'netPrice',
+                        color: '#0e365b',
+                        max: 150000,
                         type: 'currency',
-                        chart: 'HorizontalBar' 
+                        chart: 'HorizontalBar'
                       }"
                     ><p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p></compare-section>
 
@@ -193,13 +193,13 @@
                       title="By Family Income Category"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'income', 
-                        color: '#0e365b', 
-                        max: 60000, 
+                      :config="{
+                        computedField: 'income',
+                        color: '#0e365b',
+                        max: 60000,
                         type: 'currency',
                         chart: 'HorizontalBar',
-                        currentIncomeFilter: currentIncomeFilter 
+                        currentIncomeFilter: currentIncomeFilter
                       }"
                     >
                       <p>Depending on the federal, state, or institutional grant aid available, students in your income bracket may pay more or less than the overall average costs.</p>
@@ -233,12 +233,12 @@
                       definition="graduation-rate"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'completionRate', 
-                        color: '#0e365b', 
-                        max: 100, 
+                      :config="{
+                        computedField: 'completionRate',
+                        color: '#0e365b',
+                        max: 100,
                         type: 'percent',
-                        chart: 'HorizontalBar' 
+                        chart: 'HorizontalBar'
                       }"
                     />
                     <compare-section
@@ -247,12 +247,12 @@
                       definition="retention-rate"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'retentionRate', 
-                        color: '#0e365b', 
-                        max: 100, 
+                      :config="{
+                        computedField: 'retentionRate',
+                        color: '#0e365b',
+                        max: 100,
                         type: 'percent',
-                        chart: 'HorizontalBar' 
+                        chart: 'HorizontalBar'
                       }"
                     />
                     <compare-section
@@ -261,8 +261,8 @@
                       definition="outcome-measures"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        color: '#0e365b', 
+                      :config="{
+                        color: '#0e365b',
                         chart: 'Sankey',
                         currentSankey: currentSankey
                       }"
@@ -282,12 +282,12 @@
                       definition="student-aid"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'studentsReceivingLoans', 
-                        color: '#0e365b', 
-                        max: 100, 
+                      :config="{
+                        computedField: 'studentsReceivingLoans',
+                        color: '#0e365b',
+                        max: 100,
                         type: 'percent',
-                        chart: 'HorizontalBar' 
+                        chart: 'HorizontalBar'
                       }"
                     />
                     <compare-section
@@ -296,9 +296,9 @@
                       definition="avg-debt"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'debtRange', 
-                        color: '#0e365b', 
+                      :config="{
+                        computedField: 'debtRange',
+                        color: '#0e365b',
                         chart: 'MultiRange',
                         multiRangeVariable: 'debt.median_debt'
                       }"
@@ -310,9 +310,9 @@
                       definition="avg-loan-payment"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'debtRange', 
-                        color: '#0e365b', 
+                      :config="{
+                        computedField: 'debtRange',
+                        color: '#0e365b',
                         chart: 'MultiRange',
                         multiRangeVariable: 'debt.monthly_debt_payment',
                         max: { value: 1000, label: '$1,000' }
@@ -330,9 +330,9 @@
                       title="Salary Ranges by Field of Study"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'earningsRange', 
-                        color: '#0e365b', 
+                      :config="{
+                        computedField: 'earningsRange',
+                        color: '#0e365b',
                         chart: 'MultiRange',
                         multiRangeVariable: 'earnings.median_earnings'
                       }"
@@ -355,9 +355,9 @@
                       title="SAT Reading"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'satReading', 
-                        color: '#0e365b', 
+                      :config="{
+                        computedField: 'satReading',
+                        color: '#0e365b',
                         chart: 'Range',
                       }"
                     />
@@ -366,9 +366,9 @@
                       title="SAT Math"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'satMath', 
-                        color: '#0e365b', 
+                      :config="{
+                        computedField: 'satMath',
+                        color: '#0e365b',
                         chart: 'Range',
                       }"
                     />
@@ -378,9 +378,9 @@
                       title="ACT"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'act', 
-                        color: '#0e365b', 
+                      :config="{
+                        computedField: 'act',
+                        color: '#0e365b',
                         chart: 'Range',
                       }"
                     />
@@ -390,12 +390,12 @@
                       title="Acceptance Rate"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'acceptanceRate', 
-                        color: '#0e365b', 
-                        max: 100, 
+                      :config="{
+                        computedField: 'acceptanceRate',
+                        color: '#0e365b',
+                        max: 100,
                         type: 'percent',
-                        chart: 'HorizontalBar' 
+                        chart: 'HorizontalBar'
                       }"
                     />
                   </v-expansion-panel-content>
@@ -464,9 +464,10 @@ import CannedSearchContainer from "components/vue/CannedSearchContainer.vue";
 import querystring from "querystring";
 import SearchForm from "components/vue/SearchForm.vue";
 import NameAutocomplete from "components/vue/NameAutocomplete.vue";
+import Router from "vue/mixins/Router.js";
 
 export default {
-  mixins: [compare, ComplexFields, AnalyticsEvents],
+  mixins: [compare, ComplexFields, AnalyticsEvents, Router],
   props: ["baseUrl", "compareSchools","compareFieldsOfStudy"],
   components: {
     tooltip: Tooltip,
@@ -500,23 +501,35 @@ export default {
       loading: true,
       mobilePanels: 0,
       desktopTabs: 1,
-      passedSchools: [],
+      // passedSchools: [],
       cacheList: [],
-      hideShare:['email']
+      hideShare:['email'],
+      displayToggle: "institutions"
     };
   },
   computed: {
     shareUrl() {
+      // const compareBaseURL = window.location.origin + this.$baseUrl + '/compare/?toggle=' + this.displayToggle + '&';
       const compareBaseURL = window.location.origin + this.$baseUrl + '/compare/?';
+
+      let paramArray = {
+        // Institution
+        toggle: this.displayToggle
+      };
 
       // Default to passed schools
       if(this.passedSchools.length > 0){
-        return compareBaseURL + encodeURIComponent(querystring.stringify({s: this.passedSchools}));
+        paramArray.s = this.passedSchools;
       }else{
         // Alter to desired structure
         let schoolIDArray = this.compareSchools.map((school) => {return school.schoolId});
-        return compareBaseURL + encodeURIComponent(querystring.stringify({s: schoolIDArray}));
+        paramArray.s = schoolIDArray;
       }
+
+      // Default to passed in FOS
+
+      // Return Composite URL
+      return compareBaseURL + this.prepareQueryString(paramArray);
     },
     referrerLink() {
       return document.referrer || `${this.$baseUrl}/search`;
@@ -542,6 +555,14 @@ export default {
       }
 
       return false;
+    },
+    passedSchools(){
+      if(this.queryStringParameters['s']){
+        // Always set to array, if not convert to array
+        return (typeof(this.queryStringParameters['s']) == 'string') ? [this.queryStringParameters['s']] : this.queryStringParameters['s'];
+      }else{
+        return [];
+      }
     }
   },
   methods: {
@@ -564,7 +585,7 @@ export default {
 
       // Direct to location.
       window.location.href = url;
-    }, 
+    },
     saveCompareList(){
       let i=0;
       // remove existing schools
@@ -577,99 +598,190 @@ export default {
       {
         this.$emit('toggle-compare-school',{ schoolId: this.cacheList[i].schoolId, schoolName: this.cacheList[i].schoolName });
       };
+    },
+    queryInstitutions(){
+      let params = {};
+      params[this.fields.OPERATING] = 1;
+      params[
+      this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
+        ] = true;
+      params[this.fields.SIZE + "__range"] = "0..";
+      params[this.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";
+      params[this.fields.ID + "__range"] = "..999999";
+      params["fields"] = "latest,school,id,location";
+      params["keys_nested"] = true;
+      params["all_programs"] = true;
+
+      let schoolArray = [];
+      let paramArray = [];
+
+      if(this.passedSchools.length > 0){
+        this.passedSchools.map(function (id){
+          // TODO: Add number check?
+          if(parseInt(id)){
+            schoolArray.push(parseInt(id));
+            paramArray.push({
+              id: parseInt(id)
+            });
+          }
+        })
+
+      }else{
+        this.compareSchools.map(function (school) {
+          let id = +school.schoolId || +school;
+          schoolArray.push(id);
+          paramArray.push({
+            id: id
+          });
+        });
+
+        // Update URL with schools from compare drawer using the share URL computed property.  Grabbing only query string from url string
+        history.replaceState(
+          {},
+          "",
+          this.$baseUrl + "/compare?" + decodeURIComponent(this.shareUrl.substring(this.shareUrl.indexOf('?') + 1 ))
+        );
+      }
+
+      this.trackCompareList(schoolArray.join(';'));
+
+      this.loading = true;
+      let request = apiGetAll(window.api.url, window.api.key, '/schools/', paramArray).then((responses) => {
+
+        let schoolData = responses.map(function (response) {
+          if (response.data.results[0]) {
+            return response.data.results[0];
+          }
+        });
+
+        schoolData.forEach((school) => {
+          // if you are passing in some, generate an object
+          // of passed in schools so they can be saved
+          if(this.passedSchools)
+          {
+            this.cacheList.push({ schoolId: _.get(school, this.fields["ID"]), schoolName: _.get(school, this.fields["NAME"])})
+          }
+          switch (_.get(school, this.fields["PREDOMINANT_DEGREE"])) {
+            case 1:
+              this.schools["Certificate schools"].push(school);
+              break;
+            case 2:
+              this.schools["2-year schools"].push(school);
+              break;
+            case 3:
+              this.schools["4-year schools"].push(school);
+              break;
+          }
+        });
+
+        this.loading = false;
+
+      }).catch((responses) => {
+        // TODO - How do we want to handle errors?
+        console.error("Issue locating schools for compare...");
+        this.loading = false;
+      });
     }
   },
   mounted() {
-    let self = this;
+    // set toggle from URL
+    if(typeof this.queryStringParameters.toggle != 'undefined'){
+      // Basic validation, if it is not equal to expected, keep default
+      if(this.queryStringParameters.toggle === 'fos'){
+        this.displayToggle = 'fos';
+      }
+    }
 
-    var params = {};
-    params[this.fields.OPERATING] = 1;
-    params[
-      this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
-    ] = true;
-    params[this.fields.SIZE + "__range"] = "0..";
-    params[this.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";
-    params[this.fields.ID + "__range"] = "..999999";
-    params["fields"] = "latest,school,id,location";
-    params["keys_nested"] = true;
-    params["all_programs"] = true;
+    this.queryInstitutions();
+    // let params = {};
+    // params[this.fields.OPERATING] = 1;
+    // params[
+    //   this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
+    // ] = true;
+    // params[this.fields.SIZE + "__range"] = "0..";
+    // params[this.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";
+    // params[this.fields.ID + "__range"] = "..999999";
+    // params["fields"] = "latest,school,id,location";
+    // params["keys_nested"] = true;
+    // params["all_programs"] = true;
+    //
+    // let query = {};
+    // let schoolArray = [];
+    // let paramArray = [];
 
-    let query = {};
-    let schoolArray = [];
-    let paramArray = [];
-
-    let passed = querystring.parse(decodeURIComponent(window.location.search.substr(1)));
+    // let passed = querystring.parse(decodeURIComponent(window.location.search.substr(1)));
 
     // Check for passed schools first
-    if(passed['s']){
-      // Always set to array, if not convert to array
-      this.passedSchools = (typeof(passed['s']) == 'string') ? [passed['s']] : passed['s'];
-    }
+    // if(passed['s']){
+    //   // Always set to array, if not convert to array
+    //   this.passedSchools = (typeof(passed['s']) == 'string') ? [passed['s']] : passed['s'];
+    // }
 
     // Create lookup object, default to url passed schools or use compare drawer
-    if(this.passedSchools.length > 0){
-      this.passedSchools.map(function (id){
-        // TODO: Add number check?
-        if(parseInt(id)){
-          schoolArray.push(parseInt(id));
-          paramArray.push({
-            id: parseInt(id)
-          });
-        }
-      })
-
-    }else{
-      this.compareSchools.map(function (school) {
-        let id = +school.schoolId || +school;
-        schoolArray.push(id);
-        paramArray.push({
-          id: id
-        });
-      });
-
-      // Update URL with schools from compare drawer using the share URL computed property.  Grabbing only query string from url string
-      history.replaceState({},"", this.$baseUrl + "/compare?" + decodeURIComponent(this.shareUrl.substring(this.shareUrl.indexOf('?') + 1 )));
-    }
+    // if(this.passedSchools.length > 0){
+    //   this.passedSchools.map(function (id){
+    //     // TODO: Add number check?
+    //     if(parseInt(id)){
+    //       schoolArray.push(parseInt(id));
+    //       paramArray.push({
+    //         id: parseInt(id)
+    //       });
+    //     }
+    //   })
+    //
+    // }else{
+    //   this.compareSchools.map(function (school) {
+    //     let id = +school.schoolId || +school;
+    //     schoolArray.push(id);
+    //     paramArray.push({
+    //       id: id
+    //     });
+    //   });
+    //
+    //   // Update URL with schools from compare drawer using the share URL computed property.  Grabbing only query string from url string
+    //   history.replaceState({},"", this.$baseUrl + "/compare?" + decodeURIComponent(this.shareUrl.substring(this.shareUrl.indexOf('?') + 1 )));
+    // }
 
     // console.log(this.passedSchools);
-    this.trackCompareList(schoolArray.join(';'));
-    
-    this.loading = true;
-    let request = apiGetAll(window.api.url, window.api.key, '/schools/', paramArray).then((responses) => {
 
-      let schoolData = responses.map(function (response) {
-        if (response.data.results[0]) {
-          return response.data.results[0];
-        }
-      });
-
-      schoolData.forEach((school) => {
-        // if you are passing in some, generate an object 
-        // of passed in schools so they can be saved
-        if(this.passedSchools)
-        {
-          this.cacheList.push({ schoolId: _.get(school, this.fields["ID"]), schoolName: _.get(school, this.fields["NAME"])})  
-        }
-        switch (_.get(school, this.fields["PREDOMINANT_DEGREE"])) {
-          case 1:
-            this.schools["Certificate schools"].push(school);
-            break;
-          case 2:
-            this.schools["2-year schools"].push(school);
-            break;
-          case 3:
-            this.schools["4-year schools"].push(school);
-            break;
-        }  
-      });
-
-      this.loading = false;
-
-    }).catch((responses) => {
-      // TODO - How do we want to handle errors?
-      console.error("Issue locating schools for compare...");
-      this.loading = false;
-    });
+    // this.trackCompareList(schoolArray.join(';'));
+    //
+    // this.loading = true;
+    // let request = apiGetAll(window.api.url, window.api.key, '/schools/', paramArray).then((responses) => {
+    //
+    //   let schoolData = responses.map(function (response) {
+    //     if (response.data.results[0]) {
+    //       return response.data.results[0];
+    //     }
+    //   });
+    //
+    //   schoolData.forEach((school) => {
+    //     // if you are passing in some, generate an object
+    //     // of passed in schools so they can be saved
+    //     if(this.passedSchools)
+    //     {
+    //       this.cacheList.push({ schoolId: _.get(school, this.fields["ID"]), schoolName: _.get(school, this.fields["NAME"])})
+    //     }
+    //     switch (_.get(school, this.fields["PREDOMINANT_DEGREE"])) {
+    //       case 1:
+    //         this.schools["Certificate schools"].push(school);
+    //         break;
+    //       case 2:
+    //         this.schools["2-year schools"].push(school);
+    //         break;
+    //       case 3:
+    //         this.schools["4-year schools"].push(school);
+    //         break;
+    //     }
+    //   });
+    //
+    //   this.loading = false;
+    //
+    // }).catch((responses) => {
+    //   // TODO - How do we want to handle errors?
+    //   console.error("Issue locating schools for compare...");
+    //   this.loading = false;
+    // });
   }
 };
 </script>
