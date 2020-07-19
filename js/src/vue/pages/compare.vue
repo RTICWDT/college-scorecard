@@ -658,6 +658,10 @@ export default {
               schoolName: value.schoolName
             },localStorageKeys.COMPARE_KEY);
           });
+
+          // Is no longer a shared comparison
+          this.isSharedComparison = false;
+
           break;
         case localStorageKeys.COMPARE_FOS_KEY:
           removeFromCompare.forEach((value,key) => {
