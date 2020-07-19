@@ -21,7 +21,7 @@
           ></v-checkbox>
         </div>
         <p>
-          <v-btn rounded color="secondary" :href="$baseUrl+'/compare/'">Compare Schools</v-btn>
+          <v-btn rounded color="secondary" :href="$baseUrl+'/compare'">Compare Schools</v-btn>
         </p>
       </v-col>
       <v-col cols="12" md="6">
@@ -47,7 +47,7 @@
           </v-checkbox>
         </div>
         <p>
-          <v-btn rounded color="secondary" :href="$baseUrl+'/compare?toggle=fos'">Compare Fields Of Study</v-btn>
+          <v-btn rounded color="secondary" :href="$baseUrl+'/compare/?toggle=fos'">Compare Fields Of Study</v-btn>
         </p>
       </v-col>
     </v-row>

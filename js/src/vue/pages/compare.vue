@@ -48,8 +48,13 @@
 
                 <div>
                   <!--TODO - Make this a component with a close event-->
-                  <v-chip>
-
+                  <v-chip
+                    v-for="institution in responseCache.institution"
+                    :key="institution.schoolId"
+                    close
+                    @click:close="handleChipCloseClick(institution, 'compare-schools')"
+                  >
+                    {{institution.schoolName}}
                   </v-chip>
                 </div>
 
@@ -429,7 +434,9 @@
             <div v-show="!loading && showSearchForm">
               <v-card class="pa-5 mb-2">
                 <h1 class="text-center pt-3">No schools selected to compare.</h1>
-                <p class="text-center mt-2">Try searching for schools and clicking the <v-icon>fa fa-plus-circle</v-icon> to add a school for comparison.</p>
+                <p class="text-center mt-2">
+                  Try searching for schools and clicking the <v-icon>fa fa-plus-circle</v-icon> to add a school for comparison.
+                </p>
 
               </v-card>
               <v-card class="px-5 pt-0 pb-5">
@@ -442,7 +449,15 @@
           <v-col lg="3">
             <v-card v-if="showShareUpdate" class="pa-5 mb-3">
               <p>You are viewing a shared comparison.</p>
-              <v-btn small color="secondary" rounded @click="saveCompareList()">Update Your List</v-btn>
+
+              <v-btn
+                small
+                color="secondary"
+                rounded @click="handleCompareListSaveClick()"
+              >
+                Update Your List
+              </v-btn>
+
             </v-card>
             <v-card class="pa-5">
               <paying-for-college />
@@ -487,6 +502,7 @@ import querystring from "querystring";
 import SearchForm from "components/vue/SearchForm.vue";
 import NameAutocomplete from "components/vue/NameAutocomplete.vue";
 import Router from "vue/mixins/Router.js";
+import { localStorageKeys } from '../constants';
 
 export default {
   mixins: [compare, ComplexFields, AnalyticsEvents, Router],
@@ -525,6 +541,10 @@ export default {
       desktopTabs: 1,
       // passedSchools: [],
       cacheList: [],
+      responseCache:{
+        institution:[],
+        fieldOfStudy:[]
+      }, // Cache values from return object for easy access.
       hideShare:['email'],
       displayToggle: "institutions"
     };
@@ -542,7 +562,7 @@ export default {
       // Default to passed schools
       if(this.passedSchools.length > 0){
         paramArray.s = this.passedSchools;
-      }else{
+      }else if(this.compareSchools.length > 0){
         // If not passed from URL, use compare drawer
         paramArray.s = this.compareSchools.map((school) => {
           return school.schoolId
@@ -618,20 +638,67 @@ export default {
       // Direct to location.
       window.location.href = url;
     },
-    saveCompareList(){
-      let i=0;
-      // remove existing schools
-      for(i=0; i<this.compareSchools.length; i++)
-      {
-        this.$emit('toggle-compare-school',{ schoolId: this.compareSchools[i].schoolId, schoolName: this.compareSchools[i].schoolName });
+    saveCompareList(compareKey, removeFromCompare, addToCompare){
+      // TODO - Maybe move this to the local storage mixin?
+
+      // TODO - Add formatting these data values as a function. No formatting inline.
+      // Put it in centralized location so all methods can use it.
+      switch(compareKey){
+        case localStorageKeys.COMPARE_KEY:
+          removeFromCompare.forEach((value,key) => {
+            this.$emit('toggle-compare-school',{
+              schoolId: value.schoolId,
+              schoolName: value.schoolName
+            },localStorageKeys.COMPARE_KEY);
+          });
+          addToCompare.forEach((value,key) => {
+            this.$emit('toggle-compare-school',{
+              schoolId: value.schoolId,
+              schoolName: value.schoolName
+            },localStorageKeys.COMPARE_KEY);
+          });
+          break;
+        case localStorageKeys.COMPARE_FOS_KEY:
+          removeFromCompare.forEach((value,key) => {
+            this.$emit('toggle-compare-school',{
+            },localStorageKeys.COMPARE_FOS_KEY);
+          });
+          addToCompare.forEach((value,key) => {
+            this.$emit('toggle-compare-school',{
+            },localStorageKeys.COMPARE_FOS_KEY);
+          });
+          break;
+        default:
+          removeFromCompare.forEach((value,key) => {
+            this.$emit('toggle-compare-school',{
+              schoolId: value.schoolId,
+              schoolName: value.schoolName
+            },localStorageKeys.COMPARE_KEY);
+          });
+          addToCompare.forEach((value,key) => {
+            this.$emit('toggle-compare-school',{
+              schoolId: value.schoolId,
+              schoolName: value.schoolName
+            },localStorageKeys.COMPARE_KEY);
+          });
+          break;
       }
-      // add compare schools
-      for(i=0; i<this.cacheList.length; i++)
-      {
-        this.$emit('toggle-compare-school',{ schoolId: this.cacheList[i].schoolId, schoolName: this.cacheList[i].schoolName });
-      };
+
+      // let i=0;
+      // // remove existing schools
+      // for(i=0; i<this.compareSchools.length; i++)
+      // {
+      //   this.$emit('toggle-compare-school',{ schoolId: this.compareSchools[i].schoolId, schoolName: this.compareSchools[i].schoolName });
+      // }
+      // // add compare schools
+      // for(i=0; i<this.responseCache.institution; i++)
+      // {
+      //   this.$emit('toggle-compare-school',{ schoolId: this.cacheList[i].schoolId, schoolName: this.cacheList[i].schoolName });
+      // };
     },
     queryInstitutions(){
+      // TODO - Refactor this, make it work for all querying.
+      // Data manipulation after the return.
       let params = {};
       params[this.fields.OPERATING] = 1;
       params[
@@ -671,8 +738,11 @@ export default {
         history.replaceState(
           {},
           "",
-          this.$baseUrl + "/compare?" + decodeURIComponent(this.shareUrl.substring(this.shareUrl.indexOf('?') + 1 ))
+          this.shareUrl
         );
+
+        //update URL parameters
+        this.queryStringParameters = this.parseURLParameters();
       }
 
       this.trackCompareList(schoolArray.join(';'));
@@ -691,8 +761,15 @@ export default {
           // of passed in schools so they can be saved
           if(this.passedSchools)
           {
-            this.cacheList.push({ schoolId: _.get(school, this.fields["ID"]), schoolName: _.get(school, this.fields["NAME"])})
+            this.responseCache.institution.push({
+              schoolId: _.get(school, this.fields["ID"]),
+              schoolName: _.get(school, this.fields["NAME"])
+            });
           }
+
+          // Organize data to fit page markup
+          // TODO - Refactor. Don't manipulate the response.  Keep response whole, filter at display time.
+          // It is harder the find data in the array when it is organized like this.
           switch (_.get(school, this.fields["PREDOMINANT_DEGREE"])) {
             case 1:
               this.schools["Certificate schools"].push(school);
@@ -713,6 +790,72 @@ export default {
         console.error("Issue locating schools for compare...");
         this.loading = false;
       });
+    },
+    handleCompareListSaveClick(compareKey = localStorageKeys.COMPARE_KEY){
+      if(compareKey === localStorageKeys.COMPARE_KEY){
+        this.saveCompareList(localStorageKeys.COMPARE_KEY, this.compareSchools, this.responseCache.institution);
+      }else{
+
+      }
+    },
+    handleChipCloseClick(removeData, compareKey = localStorageKeys.COMPARE_KEY){
+
+      switch(compareKey){
+        case localStorageKeys.COMPARE_KEY:
+          // Format Data Object
+          let filteredSchools = {};
+
+          // Remove from Results. Using lodash, not an array.
+          _.forEach(this.schools, (schools, year)=>{
+            filteredSchools[year] = schools.filter((school) => {
+              return Number(school.id) !== Number(removeData.schoolId)
+            });
+          })
+
+          this.schools = filteredSchools;
+
+          // remove from response cache.
+          this.responseCache.institution = this.responseCache.institution.filter((school) => {
+            return Number(school.schoolId) !== Number(removeData.schoolId);
+          })
+
+          // Remove from URL
+          // Ensure it is set and is an array
+          if(typeof this.queryStringParameters.s === 'object'){
+            this.queryStringParameters.s = this.queryStringParameters.s.filter((schoolId) => {
+              return Number(schoolId) !== Number(removeData.schoolId);
+            });
+          }else if (typeof this.queryStringParameters.s === 'string'){
+            this.queryStringParameters = _.omit(this.queryStringParameters,'s');
+          }
+
+          // Replace state
+          history.replaceState(
+            {},
+            "",
+            window.location.origin + this.$baseUrl + '/compare?' + this.prepareQueryString(this.queryStringParameters)
+          );
+
+          // If not viewing a shared comparison
+          // If it exists in the compare drawer
+          if(!this.showShareUpdate &&
+            _.findIndex(this.compareSchools,(school) => { return Number(school.schoolId) === Number(removeData.schoolId)}) >= 0)
+          {
+            // Delete from compare drawer
+            this.$emit('toggle-compare-school', removeData, localStorageKeys.COMPARE_KEY);
+          }
+
+          break;
+        case localStorageKeys.COMPARE_FOS_KEY:
+          // Format data object;
+          break;
+        default:
+          break;
+      }
+
+      // Remove from results
+      // Remove from URL or Remove from Compare
+
     }
   },
   mounted() {

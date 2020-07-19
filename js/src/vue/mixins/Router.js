@@ -20,8 +20,12 @@ export default {
     prepareQueryString(params){
       let qs = querystring.stringify(params);
 
-      return encodeURIComponent(qs);
-    }
+      return encodeURI(qs);
+    },
+    // removeParameterFromURL(removeParamter){
+    //   // Remove from QS params;
+    //   // Pepare
+    // }
   },
   created(){
     this.queryStringParameters = this.parseURLParameters(decodeURIComponent(window.location.search.substr(1)));
