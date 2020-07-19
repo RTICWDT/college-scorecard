@@ -48,7 +48,9 @@
 
                 <div>
                   <!--TODO - Make this a component with a close event-->
+                  <v-chip>
 
+                  </v-chip>
                 </div>
 
                 <v-row>
