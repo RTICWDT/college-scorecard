@@ -546,7 +546,8 @@ export default {
         fieldOfStudy:[]
       }, // Cache values from return object for easy access.
       hideShare:['email'],
-      displayToggle: "institutions"
+      displayToggle: "institutions",
+      isSharedComparison: false
     };
   },
   computed: {
@@ -837,14 +838,17 @@ export default {
           );
 
           // If not viewing a shared comparison
-          // If it exists in the compare drawer
-          if(!this.showShareUpdate &&
-            _.findIndex(this.compareSchools,(school) => { return Number(school.schoolId) === Number(removeData.schoolId)}) >= 0)
-          {
-            // Delete from compare drawer
-            this.$emit('toggle-compare-school', removeData, localStorageKeys.COMPARE_KEY);
-          }
+          if(!this.isSharedComparison){
+            // If it exists in the compare drawer
+            let compareIndex = _.findIndex(this.compareSchools, (school)=> {
+              return Number(school.schoolId) === Number(removeData.schoolId)
+            });
 
+            if(compareIndex >= 0)
+            {
+              this.$emit('toggle-compare-school', removeData, localStorageKeys.COMPARE_KEY);
+            }
+          }
           break;
         case localStorageKeys.COMPARE_FOS_KEY:
           // Format data object;
@@ -866,6 +870,9 @@ export default {
         this.displayToggle = 'fos';
       }
     }
+
+    // Did this initiate as a shared comparision
+    this.isSharedComparison = this.showShareUpdate;
 
     this.queryInstitutions();
     // let params = {};
