@@ -5,47 +5,64 @@
       <v-container>
         <v-row>
           <v-col cols="12" lg="9" class="school-left">
-            <div v-if="loading" class="show-loading">
-              <v-card class="pa-5">
-                <h1 class="title">
-                  Loading
-                  <v-icon color="#0e365b">fas fa-circle-notch fa-spin</v-icon>
-                </h1>
-              </v-card>
-            </div>
 
-            <div v-else-if="!loading && !showSearchForm" class="show-loaded" id="school">
-              <v-card class="pb-5 px-3">
-                <v-row class="csGreenBg">
-                  <v-col cols="6">
-                    <v-btn
-                      small
-                      color="white"
-                      text
-                      id="referrer-link"
-                      class="link-more"
-                      :href="referrerLink"
-                    >&laquo; Back</v-btn>
-                  </v-col>
-                  <v-col cols="6" class="text-right">
-                    <share small text color="white" label="Share this Comparison" :url="shareUrl" :hide="hideShare" show-copy/>
-                  </v-col>
-                </v-row>
+            <!-- Top Summary Container-->
+            <v-card class="pb-5 px-3">
 
-                <h1>Compare</h1>
-                <div>
+              <!--Page Header-->
+              <v-row class="csGreenBg">
+                <v-col cols="6">
                   <v-btn
-                    depressed
                     small
-                    @click="displayToggle='institutions'"
-                  >Schools</v-btn>
-                  <v-btn
-                    depressed
+                    color="white"
+                    text
+                    id="referrer-link"
+                    class="link-more"
+                    :href="referrerLink"
+                  >&laquo; Back</v-btn>
+                </v-col>
+                <v-col cols="6" class="text-right">
+                  <share
                     small
-                    @click="displayToggle='fos'"
-                  >Fields Of Study</v-btn>
-                </div>
+                    text
+                    color="white"
+                    label="Share this Comparison"
+                    :url="shareUrl"
+                    :hide="hideShare"
+                    show-copy
+                  />
+                </v-col>
+              </v-row>
 
+              <h1>Compare</h1>
+
+              <!-- Toggle Controls-->
+              <div>
+                <v-btn
+                  depressed
+                  small
+                  @click="displayToggle='institutions'"
+                >Schools</v-btn>
+                <v-btn
+                  depressed
+                  small
+                  @click="displayToggle='fos'"
+                >Fields Of Study</v-btn>
+              </div>
+
+              <!--Loader-->
+              <div v-if="loading" class="show-loading">
+                <v-card class="pa-5">
+                  <h1 class="title">
+                    Loading
+                    <v-icon color="#0e365b">fas fa-circle-notch fa-spin</v-icon>
+                  </h1>
+                </v-card>
+              </div>
+
+              <!-- Institution Top Summary-->
+              <div v-else-if="showResource === 'institutions'" class="show-loaded" id="school">
+                <!-- Institution Chips -->
                 <div>
                   <!--TODO - Make this a component with a close event-->
                   <v-chip
@@ -58,6 +75,7 @@
                   </v-chip>
                 </div>
 
+                <!--Institution Summary Metrics-->
                 <v-row>
                   <v-col cols="12" class="pa-sm-5">
                     <compare-section
@@ -105,14 +123,27 @@
                     />
                   </v-col>
                 </v-row>
-              </v-card>
+              </div><!-- End Institution Top Summary-->
+
+            </v-card> <!-- Top Summary Container-->
+
+            <!-- Institution Metrics-->
+            <div v-if="showResource === 'institutions'">
+
+              <!-- Accordion Controls-->
               <v-row>
                 <v-col class="text-right mt-5">
                   <v-btn primary @click="all">Expand All</v-btn>
                   <v-btn primary @click="none">Close All</v-btn>
                 </v-col>
               </v-row>
-              <v-expansion-panels class multiple focusable v-model="panels">
+
+              <v-expansion-panels
+                class
+                multiple
+                focusable
+                v-model="panels"
+              >
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     @click="trackAccordion('College Information')"
@@ -366,7 +397,6 @@
                     />
                   </v-expansion-panel-content>
                 </v-expansion-panel>
-
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     @click="trackAccordion('Test Scores & Acceptance')"
@@ -428,8 +458,8 @@
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
-            </div>
 
+            </div>
             <!-- Search Form Component -->
             <div v-show="!loading && showSearchForm">
               <v-card class="pa-5 mb-2">
@@ -444,8 +474,9 @@
               </v-card>
             </div>
 
-          </v-col>
+          </v-col> <!-- End Main Content Area -->
 
+          <!-- Left Aside -->
           <v-col lg="3">
             <v-card v-if="showShareUpdate" class="pa-5 mb-3">
               <p>You are viewing a shared comparison.</p>
@@ -463,9 +494,11 @@
               <paying-for-college />
             </v-card>
           </v-col>
+
         </v-row>
-      </v-container>
+      </v-container> <!-- End Page Content Container -->
     </v-content>
+
     <scorecard-footer />
 
     <compare-header
@@ -617,6 +650,16 @@ export default {
     //     return [];
     //   }
     // }
+    showResource(){
+      // Help decide what to show.
+      if(!this.loading && !this.showSearchForm && this.displayToggle === 'institutions'){
+        return this.displayToggle;
+      }else if(!this.loading && !this.showSearchForm && this.displayToggle === 'fos'){
+        return this.displayToggle;
+      }else{
+        return false;
+      }
+    }
   },
   methods: {
     all() {
@@ -688,18 +731,6 @@ export default {
           });
           break;
       }
-
-      // let i=0;
-      // // remove existing schools
-      // for(i=0; i<this.compareSchools.length; i++)
-      // {
-      //   this.$emit('toggle-compare-school',{ schoolId: this.compareSchools[i].schoolId, schoolName: this.compareSchools[i].schoolName });
-      // }
-      // // add compare schools
-      // for(i=0; i<this.responseCache.institution; i++)
-      // {
-      //   this.$emit('toggle-compare-school',{ schoolId: this.cacheList[i].schoolId, schoolName: this.cacheList[i].schoolName });
-      // };
     },
     queryInstitutions(){
       // TODO - Refactor this, make it work for all querying.
@@ -860,10 +891,6 @@ export default {
         default:
           break;
       }
-
-      // Remove from results
-      // Remove from URL or Remove from Compare
-
     }
   },
   mounted() {
