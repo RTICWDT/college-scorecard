@@ -38,16 +38,35 @@
 
               <!-- Toggle Controls-->
               <div>
-                <v-btn
-                  depressed
-                  small
-                  @click="displayToggle='institutions'"
-                >Schools</v-btn>
-                <v-btn
-                  depressed
-                  small
-                  @click="displayToggle='fos'"
-                >Fields Of Study</v-btn>
+                <v-row>
+                  <!--TODO - Style-->
+                  <v-col
+                    cols="12"
+                    md="6"
+                  >
+                    <v-btn
+                      block
+                      :depressed="displayToggle === 'institutions'"
+                      :disabled="displayToggle === 'institutions'"
+                      @click="handleDisplayToggleClick('institutions')"
+                    >Schools ({{countSchools}})
+                    </v-btn>
+                  </v-col>
+
+                  <v-col
+                    cols="12"
+                    md="6"
+                  >
+                    <v-btn
+                      block
+                      :depressed="displayToggle === 'fos'"
+                      :disabled="displayToggle === 'fos'"
+                      @click="handleDisplayToggleClick('fos')"
+                    >Fields Of Study({{countFieldsOfStudy}})
+                    </v-btn>
+                  </v-col>
+                </v-row>
+
               </div>
 
               <!--Loader-->
@@ -126,7 +145,21 @@
               </div><!-- End Institution Top Summary-->
 
               <div v-else-if="showResource === 'fos'">
-                <span>Field Of Study!!!!!!!!!!</span>
+                <!-- Field of Study Chips -->
+                <div>
+                  <!--TODO - Make this a component with a close event-->
+                  <v-chip
+                    v-for="fieldOfStudy in responseCache.fieldsOfStudy"
+                    :key="`${fieldOfStudy.unit_id}${fieldOfStudy.code}`"
+                    close
+                    x-large
+                    @click:close="handleChipCloseClick(fieldOfStudy, 'compare-fos')"
+                  >
+                    {{fieldOfStudy.title}}<br/>
+                    {{fieldOfStudy['credential.title']}}<br/>
+                    {{fieldOfStudy['school.name']}}
+                  </v-chip>
+                </div>
               </div>
 
             </v-card> <!-- Top Summary Container-->
@@ -464,6 +497,7 @@
               </v-expansion-panels>
 
             </div>
+
             <!-- Search Form Component -->
             <div v-show="!loading && showSearchForm">
               <v-card class="pa-5 mb-2">
@@ -581,7 +615,7 @@ export default {
       cacheList: [],
       responseCache:{
         institution:[],
-        fieldOfStudy:[]
+        fieldsOfStudy:[]
       }, // Cache values from return object for easy access.
       hideShare:['email'],
       displayToggle: "institutions",
@@ -625,11 +659,18 @@ export default {
       return document.referrer || `${this.$baseUrl}/search`;
     },
     showSearchForm(){
-      if(this.schools['2-year schools'].length > 0 || this.schools['4-year schools'].length > 0 || this.schools['Certificate schools'].length > 0){
+      // if(this.schools['2-year schools'].length > 0 || this.schools['4-year schools'].length > 0 || this.schools['Certificate schools'].length > 0){
+      //   return false;
+      // }else{
+      //   return true;
+      // }
+
+      if(this.displayToggle === 'institutions' && this.responseCache.institution.length > 0 ){
         return false;
-      }else{
-        return true;
+      }else if(this.displayToggle === 'fos' && this.responseCache.fieldsOfStudy.length > 0){
+        return false;
       }
+      return true;
     },
     showShareUpdate(){
       // Check to see if passed school matches local storage, only show "update compare" if they do not match
@@ -671,6 +712,12 @@ export default {
       }else{
         return false;
       }
+    },
+    countSchools(){
+      return this.passedSchools.length;
+    },
+    countFieldsOfStudy(){
+      return this.passedFieldsOfStudy.length;
     }
   },
   methods: {
@@ -851,34 +898,37 @@ export default {
       params[this.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";
       params[this.fields.ID + "__range"] = "..999999";
 
-      // Generate params array
+      // Generate params array, format for API
       let paramArray = fieldsOfStudy.map((fieldOfStudy) => {
         return {
           ...params,
-          ...fieldOfStudy
+          [this.fields.ID]: fieldOfStudy.id, //Unit ID of institution
+          [this.fields.FIELD_OF_STUDY_CODE]: fieldOfStudy.code,
+          [this.fields.FIELD_OF_STUDY_LENGTH]: fieldOfStudy.credential.level
         }
       });
 
-      console.log(paramArray);
-
       // TODO - Track Compare List for Fields Of Study
-      // this.loading = true;
-      // let request = apiGetAll(window.api.url, window.api.key, '/schools/', paramArray)
-      //   .then((responses) => {
-      //
-      //     let schoolData = responses.map(function (response) {
-      //       if (response.data.results[0]) {
-      //         return response.data.results[0];
-      //       }
-      //     });
-      //
-      //     this.loading = false;
-      //     // Return an array of objects, outside of institutions ready for formatting,
-      //   }).catch((responses) => {
-      //     // TODO - How do we want to handle errors?
-      //     console.error("Issue locating Fields Of Study for compare...");
-      //     this.loading = false;
-      //   });
+      this.loading = true;
+      let request = apiGetAll(window.api.url, window.api.key, '/schools/', paramArray)
+        .then((responses) => {
+
+          let fieldOfStudyData = responses.map(function (response) {
+            if (response.data.results[0]) {
+              // console.log(response.data.results[0]['latest.programs.cip_4_digit'][0]);
+              return response.data.results[0]['latest.programs.cip_4_digit'][0];
+            }
+          });
+
+          this.responseCache.fieldsOfStudy = fieldOfStudyData;
+
+          this.loading = false;
+          // Return an array of objects, outside of institutions ready for formatting,
+        }).catch((responses) => {
+          // TODO - How do we want to handle errors?
+          console.error("Issue locating Fields Of Study for compare...");
+          this.loading = false;
+        });
 
     },
     handleCompareListSaveClick(compareKey = localStorageKeys.COMPARE_KEY){
@@ -946,6 +996,17 @@ export default {
           break;
       }
     },
+    handleDisplayToggleClick(toggleValue){
+      this.displayToggle = toggleValue;
+
+      // TODO - Update url, Maybe a watch?
+
+      if(this.displayToggle === 'institutions' && this.responseCache.institution.length <= 0){
+        this.queryInstitutions();
+      }else if(this.displayToggle === 'fos' && this.responseCache.fieldsOfStudy.length <= 0){
+        this.queryFieldsOfStudy(this.locateFieldsOfStudy());
+      }
+    },
     locateFieldsOfStudy(){
 
       let itemsToQuery = [];
@@ -993,8 +1054,10 @@ export default {
       if(this.queryStringParameters.toggle === 'fos'){
         this.displayToggle = 'fos';
         this.queryFieldsOfStudy(this.locateFieldsOfStudy());
+      }else if(this.queryStringParameters.toggle === 'institutions'){
+        this.displayToggle = 'institutions';
+        this.queryInstitutions();
       }
-      this.queryInstitutions();
     }
 
     // Did this initiate as a shared comparision
