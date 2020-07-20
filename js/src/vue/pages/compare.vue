@@ -125,6 +125,10 @@
                 </v-row>
               </div><!-- End Institution Top Summary-->
 
+              <div v-else-if="showResource === 'fos'">
+                <span>Field Of Study!!!!!!!!!!</span>
+              </div>
+
             </v-card> <!-- Top Summary Container-->
 
             <!-- Institution Metrics-->
@@ -474,7 +478,7 @@
               </v-card>
             </div>
 
-          </v-col> <!-- End Main Content Area -->
+          </v-col> <!-- End Left Content Area -->
 
           <!-- Left Aside -->
           <v-col lg="3">
@@ -535,7 +539,8 @@ import querystring from "querystring";
 import SearchForm from "components/vue/SearchForm.vue";
 import NameAutocomplete from "components/vue/NameAutocomplete.vue";
 import Router from "vue/mixins/Router.js";
-import { localStorageKeys } from '../constants';
+import { fields, localStorageKeys } from '../constants';
+import {generateFieldOfStudyUUID, decodeFieldOfStudyUUID} from '../commonFormats';
 
 export default {
   mixins: [compare, ComplexFields, AnalyticsEvents, Router],
@@ -604,7 +609,14 @@ export default {
       }
 
       // Default to passed in FOS
-      // TODO - Add FOS to URL
+      if(this.passedFieldsOfStudy.length > 0){
+        paramArray.fos = this.passedFieldsOfStudy;
+      }else if(this.compareFieldsOfStudy.length > 0){
+        // If not passed from URL, use compare drawer and format
+        paramArray.fos = this.compareFieldsOfStudy.map((fieldOfStudy) => {
+          return generateFieldOfStudyUUID(fieldOfStudy.id,fieldOfStudy.code,fieldOfStudy.credentialLevel);
+        });
+      }
 
       // Return Composite URL
       return compareBaseURL + this.prepareQueryString(paramArray);
@@ -642,14 +654,14 @@ export default {
         return [];
       }
     },
-    // passedFieldsOfStudy(){
-    //   if(this.queryStringParameters['fos']){
-    //     // Get from array, parse needed items
-    //
-    //   }else{
-    //     return [];
-    //   }
-    // }
+    passedFieldsOfStudy(){
+      if(this.queryStringParameters['fos']){
+        // Get from array, parse needed items
+        return (typeof(this.queryStringParameters['fos']) == 'string') ? [this.queryStringParameters['fos']] : this.queryStringParameters['fos'];
+      }else{
+        return [];
+      }
+    },
     showResource(){
       // Help decide what to show.
       if(!this.loading && !this.showSearchForm && this.displayToggle === 'institutions'){
@@ -827,6 +839,48 @@ export default {
         this.loading = false;
       });
     },
+    queryFieldsOfStudy(fieldsOfStudy){
+      // Start by just doing a sloppy query. Seperate query even if items are at the same school.
+      // TODO - Centralize Common params object
+      let params = {};
+      params[this.fields.OPERATING] = 1;
+      params[
+      this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
+        ] = true;
+      params[this.fields.SIZE + "__range"] = "0..";
+      params[this.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";
+      params[this.fields.ID + "__range"] = "..999999";
+
+      // Generate params array
+      let paramArray = fieldsOfStudy.map((fieldOfStudy) => {
+        return {
+          ...params,
+          ...fieldOfStudy
+        }
+      });
+
+      console.log(paramArray);
+
+      // TODO - Track Compare List for Fields Of Study
+      // this.loading = true;
+      // let request = apiGetAll(window.api.url, window.api.key, '/schools/', paramArray)
+      //   .then((responses) => {
+      //
+      //     let schoolData = responses.map(function (response) {
+      //       if (response.data.results[0]) {
+      //         return response.data.results[0];
+      //       }
+      //     });
+      //
+      //     this.loading = false;
+      //     // Return an array of objects, outside of institutions ready for formatting,
+      //   }).catch((responses) => {
+      //     // TODO - How do we want to handle errors?
+      //     console.error("Issue locating Fields Of Study for compare...");
+      //     this.loading = false;
+      //   });
+
+    },
     handleCompareListSaveClick(compareKey = localStorageKeys.COMPARE_KEY){
       if(compareKey === localStorageKeys.COMPARE_KEY){
         this.saveCompareList(localStorageKeys.COMPARE_KEY, this.compareSchools, this.responseCache.institution);
@@ -891,6 +945,45 @@ export default {
         default:
           break;
       }
+    },
+    locateFieldsOfStudy(){
+
+      let itemsToQuery = [];
+
+      // If fields of study are present in the URL
+      if(this.passedFieldsOfStudy.length > 0){
+        this.passedFieldsOfStudy.map((fosString) => {
+          // Parse FOS string
+          let parsedFosString = decodeFieldOfStudyUUID(fosString);
+          // TODO - Pattern Match/Validation
+          itemsToQuery.push(parsedFosString);
+        })
+
+      }else{
+        this.compareFieldsOfStudy.map((fieldOfStudy) => {
+          // TODO Validation
+          itemsToQuery.push({
+            id: fieldOfStudy.id,
+            code: fieldOfStudy.code,
+            credential:{
+              level: fieldOfStudy.credentialLevel
+            }
+          })
+        });
+
+        // TODO - Remove URL updating from this method
+        // Update URL with schools from compare drawer using the share URL computed property.  Grabbing only query string from url string
+        history.replaceState(
+          {},
+          "",
+          this.shareUrl
+        );
+
+        //update URL parameters
+        this.queryStringParameters = this.parseURLParameters();
+      }
+
+      return itemsToQuery;
     }
   },
   mounted() {
@@ -899,13 +992,14 @@ export default {
       // Basic validation, if it is not equal to expected, keep default
       if(this.queryStringParameters.toggle === 'fos'){
         this.displayToggle = 'fos';
+        this.queryFieldsOfStudy(this.locateFieldsOfStudy());
       }
+      this.queryInstitutions();
     }
 
     // Did this initiate as a shared comparision
     this.isSharedComparison = this.showShareUpdate;
 
-    this.queryInstitutions();
     // let params = {};
     // params[this.fields.OPERATING] = 1;
     // params[
