@@ -144,6 +144,7 @@
                 </v-row>
               </div><!-- End Institution Top Summary-->
 
+              <!-- Field Of Study Container -->
               <div v-else-if="showResource === 'fos'">
                 <!-- Field of Study Chips -->
                 <div>
@@ -160,7 +161,16 @@
                     {{fieldOfStudy['school.name']}}
                   </v-chip>
                 </div>
-              </div>
+
+                <!-- Field Of Study Data Container -->
+                <div>
+                  <h2>Number Of Graduates</h2>
+
+                </div>
+
+
+
+              </div> <!-- Field Of Study Container End -->
 
             </v-card> <!-- Top Summary Container-->
 
@@ -548,7 +558,7 @@
       <compare-drawer
         :schools="compareSchools"
         :fields-of-study="compareFieldsOfStudy"
-        @toggle-compare-school="handleToggleCompareSchool"
+        @toggle-compare-school="handleToggleCompareItem"
         v-on:close-modal="closeModal()"
       ></compare-drawer>
     </v-bottom-sheet>
@@ -574,7 +584,7 @@ import SearchForm from "components/vue/SearchForm.vue";
 import NameAutocomplete from "components/vue/NameAutocomplete.vue";
 import Router from "vue/mixins/Router.js";
 import { fields, localStorageKeys } from '../constants';
-import {generateFieldOfStudyUUID, decodeFieldOfStudyUUID} from '../commonFormats';
+import {generateFieldOfStudyUUID, decodeFieldOfStudyUUID, fieldOfStudyCompareFormat} from '../commonFormats';
 
 export default {
   mixins: [compare, ComplexFields, AnalyticsEvents, Router],
@@ -619,7 +629,8 @@ export default {
       }, // Cache values from return object for easy access.
       hideShare:['email'],
       displayToggle: "institutions",
-      isSharedComparison: false
+      isSharedComparison: false,
+      isSharedFieldOfStudyComparison:false
     };
   },
   computed: {
@@ -685,6 +696,22 @@ export default {
         }
       }
 
+      return false;
+    },
+    showShareFieldOfStudyUpdate(){
+      // Quick Comparison
+      if(this.compareFieldsOfStudy.length === 0 && this.passedFieldsOfStudy.length > 0){
+        return true;
+      }
+
+      if(this.compareFieldsOfStudy.length > 0 && this.passedFieldsOfStudy.length > 0){
+        let compareFieldOfStudyStrings = this.compareFieldsOfStudy.map((fieldOfStudy) => {
+          return generateFieldOfStudyUUID(fieldOfStudy.id, fieldOfStudy.code, fieldOfStudy.credentialLevel);
+        });
+        if(!_.isEqual(compareFieldOfStudyStrings, this.passedFieldsOfStudy)){
+          return true;
+        }
+      }
       return false;
     },
     passedSchools(){
@@ -989,8 +1016,66 @@ export default {
             }
           }
           break;
+
         case localStorageKeys.COMPARE_FOS_KEY:
           // Format data object;
+          console.log(removeData);
+
+          // Remove from response cache
+          this.responseCache.fieldsOfStudy = this.responseCache.fieldsOfStudy.filter((fieldOfStudy) => {
+            if(Number(fieldOfStudy['unit_id']) !== Number(removeData['unit_id'])){
+              return true;
+            }
+
+            return Number(fieldOfStudy.code) !== Number(removeData.code) &&
+              Number(fieldOfStudy['credential.level']) === Number(removeData['credential.level']);
+          });
+
+          // region Remove From URL
+
+          // Ensure it is set and is an array
+          if(typeof this.queryStringParameters.fos === 'object'){
+            this.queryStringParameters.fos = this.queryStringParameters.fos.filter((fieldOfStudyString) => {
+              return  fieldOfStudyString !== generateFieldOfStudyUUID(removeData['unit_id'], removeData.code, removeData['credential.level']);
+            });
+          }else if (typeof this.queryStringParameters.fos === 'string'){
+            this.queryStringParameters = _.omitBy(this.queryStringParameters, (value,key)=>{
+              return key === 'fos' &&
+                value === generateFieldOfStudyUUID(removeData['unit_id'], removeData.code, removeData['credential.level']);
+            });
+          }
+
+          // Replace state
+          history.replaceState(
+            {},
+            "",
+            window.location.origin + this.$baseUrl + '/compare?' + this.prepareQueryString(this.queryStringParameters)
+          );
+          //endregion
+
+          //region Remove From Compare Drawer
+
+          // If not viewing a shared comparison
+          if(!this.isSharedFieldOfStudyComparison){
+            console.log("Remove from Compare");
+            // If it exists in the compare drawer
+            let compareIndex = _.findIndex(this.compareFieldsOfStudy, (fieldOfStudy)=> {
+              return Number(fieldOfStudy['id']) === Number(removeData['unit_id']) &&
+                Number(fieldOfStudy.code) === Number(removeData.code) &&
+                Number(fieldOfStudy.credentialLevel) === Number(removeData['credential.level']);
+            });
+
+            if(compareIndex >= 0)
+            {
+              this.$emit('toggle-compare-school',
+                fieldOfStudyCompareFormat(removeData),
+                localStorageKeys.COMPARE_FOS_KEY
+              );
+            }
+          }
+
+          //endregion
+
           break;
         default:
           break;
@@ -999,12 +1084,38 @@ export default {
     handleDisplayToggleClick(toggleValue){
       this.displayToggle = toggleValue;
 
-      // TODO - Update url, Maybe a watch?
+      if(this.displayToggle === 'institutions'){
+        // Query if not response cache is present
+        if(this.responseCache.institution.length === 0){
+          this.queryInstitutions();
+        }
 
-      if(this.displayToggle === 'institutions' && this.responseCache.institution.length <= 0){
-        this.queryInstitutions();
-      }else if(this.displayToggle === 'fos' && this.responseCache.fieldsOfStudy.length <= 0){
-        this.queryFieldsOfStudy(this.locateFieldsOfStudy());
+        // TODO - Move to a centralized location.
+        // update the URL
+        history.replaceState(
+          {},
+          "",
+          this.shareUrl
+        );
+
+        //update URL parameters
+        this.queryStringParameters = this.parseURLParameters();
+
+      }else if(this.displayToggle === 'fos'){
+        if(this.responseCache.fieldsOfStudy.length <= 0){
+          this.queryFieldsOfStudy(this.locateFieldsOfStudy());
+        }
+
+        // TODO - Move to a centralized location.
+        // update the URL
+        history.replaceState(
+          {},
+          "",
+          this.shareUrl
+        );
+
+        //update URL parameters
+        this.queryStringParameters = this.parseURLParameters();
       }
     },
     locateFieldsOfStudy(){
@@ -1049,19 +1160,17 @@ export default {
   },
   mounted() {
     // set toggle from URL
-    if(typeof this.queryStringParameters.toggle != 'undefined'){
-      // Basic validation, if it is not equal to expected, keep default
-      if(this.queryStringParameters.toggle === 'fos'){
-        this.displayToggle = 'fos';
-        this.queryFieldsOfStudy(this.locateFieldsOfStudy());
-      }else if(this.queryStringParameters.toggle === 'institutions'){
-        this.displayToggle = 'institutions';
-        this.queryInstitutions();
-      }
+    if(typeof this.queryStringParameters.toggle != 'undefined' && this.queryStringParameters.toggle === 'fos'){
+      this.displayToggle = 'fos';
+      this.queryFieldsOfStudy(this.locateFieldsOfStudy());
+    }else{
+      this.displayToggle = 'institutions';
+      this.queryInstitutions();
     }
 
     // Did this initiate as a shared comparision
     this.isSharedComparison = this.showShareUpdate;
+    this.isSharedFieldOfStudyComparison = this.showShareFieldOfStudyUpdate;
 
     // let params = {};
     // params[this.fields.OPERATING] = 1;

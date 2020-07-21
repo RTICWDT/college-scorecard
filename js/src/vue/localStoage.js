@@ -39,6 +39,9 @@ export const LocalStorage = {
     let isSelected = this.isSelected(data,key);
     let selectedItems = this.selectAll(key);
 
+    console.log("Selected Items");
+    console.log(selectedItems);
+
     if (isSelected >= 0) {
       selectedItems.splice(isSelected, 1);
 
@@ -54,6 +57,5 @@ export const LocalStorage = {
         window.localStorage.setItem(key, JSON.stringify(selectedItems));
       }
     }
-
   }
 }
