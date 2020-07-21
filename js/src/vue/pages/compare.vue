@@ -1057,7 +1057,6 @@ export default {
 
           // If not viewing a shared comparison
           if(!this.isSharedFieldOfStudyComparison){
-            console.log("Remove from Compare");
             // If it exists in the compare drawer
             let compareIndex = _.findIndex(this.compareFieldsOfStudy, (fieldOfStudy)=> {
               return Number(fieldOfStudy['id']) === Number(removeData['unit_id']) &&
