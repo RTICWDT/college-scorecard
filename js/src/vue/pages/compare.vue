@@ -969,10 +969,10 @@ export default {
 
       switch(compareKey){
         case localStorageKeys.COMPARE_KEY:
-          // Format Data Object
           let filteredSchools = {};
 
-          // Remove from Results. Using lodash, not an array.
+          //region Remove from Results
+          //Using lodash, not an array.
           _.forEach(this.schools, (schools, year)=>{
             filteredSchools[year] = schools.filter((school) => {
               return Number(school.id) !== Number(removeData.schoolId)
@@ -980,13 +980,14 @@ export default {
           })
 
           this.schools = filteredSchools;
+          //endregion
 
           // remove from response cache.
           this.responseCache.institution = this.responseCache.institution.filter((school) => {
             return Number(school.schoolId) !== Number(removeData.schoolId);
           })
 
-          // Remove from URL
+          //region Remove from URL
           // Ensure it is set and is an array
           if(typeof this.queryStringParameters.s === 'object'){
             this.queryStringParameters.s = this.queryStringParameters.s.filter((schoolId) => {
@@ -1002,6 +1003,9 @@ export default {
             "",
             window.location.origin + this.$baseUrl + '/compare?' + this.prepareQueryString(this.queryStringParameters)
           );
+          //endregion
+
+          //region Remove From Compare
 
           // If not viewing a shared comparison
           if(!this.isSharedComparison){
@@ -1015,13 +1019,12 @@ export default {
               this.$emit('toggle-compare-school', removeData, localStorageKeys.COMPARE_KEY);
             }
           }
+          //endregion
           break;
 
         case localStorageKeys.COMPARE_FOS_KEY:
-          // Format data object;
-          console.log(removeData);
 
-          // Remove from response cache
+          //region Remove from response cache
           this.responseCache.fieldsOfStudy = this.responseCache.fieldsOfStudy.filter((fieldOfStudy) => {
             if(Number(fieldOfStudy['unit_id']) !== Number(removeData['unit_id'])){
               return true;
@@ -1030,6 +1033,7 @@ export default {
             return Number(fieldOfStudy.code) !== Number(removeData.code) &&
               Number(fieldOfStudy['credential.level']) === Number(removeData['credential.level']);
           });
+          //endregion
 
           // region Remove From URL
 
