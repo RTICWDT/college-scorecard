@@ -695,7 +695,6 @@ export default {
           return true;
         }
       }
-
       return false;
     },
     showShareFieldOfStudyUpdate(){
@@ -924,6 +923,9 @@ export default {
       params[this.fields.SIZE + "__range"] = "0..";
       params[this.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";
       params[this.fields.ID + "__range"] = "..999999";
+
+      // Join this Array
+      // params['fields'] =
 
       // Generate params array, format for API
       let paramArray = fieldsOfStudy.map((fieldOfStudy) => {
@@ -1174,96 +1176,6 @@ export default {
     // Did this initiate as a shared comparision
     this.isSharedComparison = this.showShareUpdate;
     this.isSharedFieldOfStudyComparison = this.showShareFieldOfStudyUpdate;
-
-    // let params = {};
-    // params[this.fields.OPERATING] = 1;
-    // params[
-    //   this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
-    // ] = true;
-    // params[this.fields.SIZE + "__range"] = "0..";
-    // params[this.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";
-    // params[this.fields.ID + "__range"] = "..999999";
-    // params["fields"] = "latest,school,id,location";
-    // params["keys_nested"] = true;
-    // params["all_programs"] = true;
-    //
-    // let query = {};
-    // let schoolArray = [];
-    // let paramArray = [];
-
-    // let passed = querystring.parse(decodeURIComponent(window.location.search.substr(1)));
-
-    // Check for passed schools first
-    // if(passed['s']){
-    //   // Always set to array, if not convert to array
-    //   this.passedSchools = (typeof(passed['s']) == 'string') ? [passed['s']] : passed['s'];
-    // }
-
-    // Create lookup object, default to url passed schools or use compare drawer
-    // if(this.passedSchools.length > 0){
-    //   this.passedSchools.map(function (id){
-    //     // TODO: Add number check?
-    //     if(parseInt(id)){
-    //       schoolArray.push(parseInt(id));
-    //       paramArray.push({
-    //         id: parseInt(id)
-    //       });
-    //     }
-    //   })
-    //
-    // }else{
-    //   this.compareSchools.map(function (school) {
-    //     let id = +school.schoolId || +school;
-    //     schoolArray.push(id);
-    //     paramArray.push({
-    //       id: id
-    //     });
-    //   });
-    //
-    //   // Update URL with schools from compare drawer using the share URL computed property.  Grabbing only query string from url string
-    //   history.replaceState({},"", this.$baseUrl + "/compare?" + decodeURIComponent(this.shareUrl.substring(this.shareUrl.indexOf('?') + 1 )));
-    // }
-
-    // console.log(this.passedSchools);
-
-    // this.trackCompareList(schoolArray.join(';'));
-    //
-    // this.loading = true;
-    // let request = apiGetAll(window.api.url, window.api.key, '/schools/', paramArray).then((responses) => {
-    //
-    //   let schoolData = responses.map(function (response) {
-    //     if (response.data.results[0]) {
-    //       return response.data.results[0];
-    //     }
-    //   });
-    //
-    //   schoolData.forEach((school) => {
-    //     // if you are passing in some, generate an object
-    //     // of passed in schools so they can be saved
-    //     if(this.passedSchools)
-    //     {
-    //       this.cacheList.push({ schoolId: _.get(school, this.fields["ID"]), schoolName: _.get(school, this.fields["NAME"])})
-    //     }
-    //     switch (_.get(school, this.fields["PREDOMINANT_DEGREE"])) {
-    //       case 1:
-    //         this.schools["Certificate schools"].push(school);
-    //         break;
-    //       case 2:
-    //         this.schools["2-year schools"].push(school);
-    //         break;
-    //       case 3:
-    //         this.schools["4-year schools"].push(school);
-    //         break;
-    //     }
-    //   });
-    //
-    //   this.loading = false;
-    //
-    // }).catch((responses) => {
-    //   // TODO - How do we want to handle errors?
-    //   console.error("Issue locating schools for compare...");
-    //   this.loading = false;
-    // });
   }
 };
 </script>
