@@ -172,7 +172,7 @@
                       v-model="fosSalarySelect"
                     />
 
-                    <div>
+                    <div id="fos-median-earnings">
                       <h3>Median Earnings</h3>
                       <compare-block
                         v-for="credentialLevel in filteredFieldsOfStudy"
@@ -213,7 +213,7 @@
                       </compare-block>
                     </div>
 
-                    <div>
+                    <div id="fos-monthly-earnings">
                       <h3>Monthly Earnings</h3>
                       <compare-block
                         v-for="credentialLevel in filteredFieldsOfStudy"
@@ -262,7 +262,7 @@
                       label="Include debt borrowed at any prior institutions"
                     ></v-checkbox>
 
-                    <div>
+                    <div id="fos-median-total-debt">
                       <h3>Median Total Debt After Graduation</h3>
                       <compare-block
                         v-for="credentialLevel in filteredFieldsOfStudy"
@@ -303,7 +303,7 @@
                       </compare-block>
                     </div>
 
-                    <div>
+                    <div id="fos-monthly-loan">
                       <h3>Monthly Loan Payment</h3>
                       <compare-block
                         v-for="credentialLevel in filteredFieldsOfStudy"
@@ -345,7 +345,7 @@
                     </div>
                   </div>
 
-                  <div>
+                  <div id="fos-grad-count">
                     <h2>Number Of Graduates</h2>
                     <compare-block
                       v-for="credentialLevel in filteredFieldsOfStudy"
