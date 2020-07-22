@@ -164,7 +164,221 @@
 
                 <!-- Field Of Study Data Container -->
                 <div>
-                  <h2>Number Of Graduates</h2>
+
+                  <div>
+                    <h2>Salary After Completing</h2>
+                    <v-select
+                      :items="fosSalarySelectItems"
+                      v-model="fosSalarySelect"
+                    />
+
+                    <div>
+                      <h3>Median Earnings</h3>
+                      <compare-block
+                        v-for="credentialLevel in filteredFieldsOfStudy"
+                        :key="`${credentialLevel.key}-median-earnings`"
+                        :block_title="credentialLevel.title"
+                        :schools="credentialLevel.items"
+                        is-field-of-study
+                      >
+                        <template v-slot:fos-row="slotProps">
+                          <div v-if="fosSalarySelect === 'aid'">
+                            <horizontal-bar
+                              v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_FED]"
+                              :value="slotProps.school[fields.FOS_EARNINGS_FED]"
+                              :min="0"
+                              :max="150000"
+                              color='#0e365b'
+                              :height="25"
+                              type="currency"
+                              :labels="true"
+                            ></horizontal-bar>
+                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_FED]" class="data-na">Data Not Available</div>
+                          </div>
+
+                          <div v-else>
+                            <horizontal-bar
+                              v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_PELL]"
+                              :value="slotProps.school[fields.FOS_EARNINGS_PELL]"
+                              :min="0"
+                              :max="150000"
+                              color='#0e365b'
+                              :height="25"
+                              type="currency"
+                              :labels="true"
+                            ></horizontal-bar>
+                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_PELL]" class="data-na">Data Not Available</div>
+                          </div>
+                        </template>
+                      </compare-block>
+                    </div>
+
+                    <div>
+                      <h3>Monthly Earnings</h3>
+                      <compare-block
+                        v-for="credentialLevel in filteredFieldsOfStudy"
+                        :key="`${credentialLevel.key}-monthly-earnings`"
+                        :block_title="credentialLevel.title"
+                        :schools="credentialLevel.items"
+                        is-field-of-study
+                      >
+                        <template v-slot:fos-row="slotProps">
+                          <div v-if="fosSalarySelect === 'aid'">
+                            <horizontal-bar
+                              v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_FED]"
+                              :value="slotProps.school[fields.FOS_EARNINGS_FED]/12"
+                              :min="0"
+                              :max="30000"
+                              color='#0e365b'
+                              :height="25"
+                              type="currency"
+                              :labels="true"
+                            ></horizontal-bar>
+                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_FED]" class="data-na">Data Not Available</div>
+                          </div>
+
+                          <div v-else>
+                            <horizontal-bar
+                              v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_PELL]"
+                              :value="slotProps.school[fields.FOS_EARNINGS_PELL]/12"
+                              :min="0"
+                              :max="30000"
+                              color='#0e365b'
+                              :height="25"
+                              type="currency"
+                              :labels="true"
+                            ></horizontal-bar>
+                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_PELL]" class="data-na">Data Not Available</div>
+                          </div>
+                        </template>
+                      </compare-block>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h2>Financial Aid</h2>
+                    <v-checkbox
+                      v-model="fosFinancialCheckboxIncludePrior"
+                      label="Include debt borrowed at any prior institutions"
+                    ></v-checkbox>
+
+                    <div>
+                      <h3>Median Total Debt After Graduation</h3>
+                      <compare-block
+                        v-for="credentialLevel in filteredFieldsOfStudy"
+                        :key="`${credentialLevel.key}-median-debt`"
+                        :block_title="credentialLevel.title"
+                        :schools="credentialLevel.items"
+                        is-field-of-study
+                      >
+                        <template v-slot:fos-row="slotProps">
+                          <div v-if="!fosFinancialCheckboxIncludePrior">
+                            <horizontal-bar
+                              v-if="slotProps.school && slotProps.school[fields.FOS_DEBT_MEDIAN]"
+                              :value="slotProps.school[fields.FOS_DEBT_MEDIAN]"
+                              :min="0"
+                              :max="30000"
+                              color='#0e365b'
+                              :height="25"
+                              type="currency"
+                              :labels="true"
+                            ></horizontal-bar>
+                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_DEBT_MEDIAN]" class="data-na">Data Not Available</div>
+                          </div>
+
+                          <div v-else>
+                            <horizontal-bar
+                              v-if="slotProps.school && slotProps.school[fields.FOS_DEBT_MEDIAN_PRIOR]"
+                              :value="slotProps.school[fields.FOS_DEBT_MEDIAN_PRIOR]"
+                              :min="0"
+                              :max="30000"
+                              color='#0e365b'
+                              :height="25"
+                              type="currency"
+                              :labels="true"
+                            ></horizontal-bar>
+                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_DEBT_MEDIAN_PRIOR]" class="data-na">Data Not Available</div>
+                          </div>
+                        </template>
+                      </compare-block>
+                    </div>
+
+                    <div>
+                      <h3>Monthly Loan Payment</h3>
+                      <compare-block
+                        v-for="credentialLevel in filteredFieldsOfStudy"
+                        :key="`${credentialLevel.key}-monthly-payment`"
+                        :block_title="credentialLevel.title"
+                        :schools="credentialLevel.items"
+                        is-field-of-study
+                      >
+                        <template v-slot:fos-row="slotProps">
+                          <div v-if="!fosFinancialCheckboxIncludePrior">
+                            <horizontal-bar
+                              v-if="slotProps.school && slotProps.school[fields.FOS_DEBT_MONTHLY]"
+                              :value="slotProps.school[fields.FOS_DEBT_MONTHLY]"
+                              :min="0"
+                              :max="2000"
+                              color='#0e365b'
+                              :height="25"
+                              type="currency"
+                              :labels="true"
+                            ></horizontal-bar>
+                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_DEBT_MONTHLY]" class="data-na">Data Not Available</div>
+                          </div>
+
+                          <div v-else>
+                            <horizontal-bar
+                              v-if="slotProps.school && slotProps.school[fields.FOS_DEBT_MONTHLY_PRIOR]"
+                              :value="slotProps.school[fields.FOS_DEBT_MONTHLY_PRIOR]"
+                              :min="0"
+                              :max="2000"
+                              color='#0e365b'
+                              :height="25"
+                              type="currency"
+                              :labels="true"
+                            ></horizontal-bar>
+                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_DEBT_MONTHLY_PRIOR]" class="data-na">Data Not Available</div>
+                          </div>
+                        </template>
+                      </compare-block>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h2>Number Of Graduates</h2>
+                    <compare-block
+                      v-for="credentialLevel in filteredFieldsOfStudy"
+                      :key="`${credentialLevel.key}-grad-count`"
+                      :block_title="credentialLevel.title"
+                      :schools="credentialLevel.items"
+                      is-field-of-study
+                    >
+                      <template v-slot:fos-row="slotProps">
+                        <horizontal-bar
+                          v-if="slotProps.school && slotProps.school[fields.FOS_GRAD_COUNT]"
+                          :value="slotProps.school[fields.FOS_GRAD_COUNT]"
+                          :min="0"
+                          :max="400"
+                          color='#0e365b'
+                          :height="25"
+                          type="number"
+                          :labels="true"
+                        ></horizontal-bar>
+                        <div
+                          v-if="slotProps.school && !slotProps.school[fields.FOS_GRAD_COUNT]"
+                          class="data-na"
+                        >
+                          Data Not Available
+                        </div>
+                      </template>
+                    </compare-block>
+                  </div>
+
+
+
+                  <!-- TODO - TOOLTIP? -->
+
 
                 </div>
 
@@ -573,6 +787,7 @@ import CompareDrawer from "components/vue/CompareDrawer.vue";
 import CompareHeader from "components/vue/CompareHeader.vue";
 import HorizontalBar from "components/vue/HorizontalBar.vue";
 import CompareSection from "components/vue/compare/Section.vue";
+import CompareBlock from "components/vue/compare/Block.vue";
 import { compare } from "vue/mixins.js";
 import ComplexFields from "vue/mixins/ComplexFields.js";
 import SankeyButtons from "components/vue/SankeyButtons.vue";
@@ -597,6 +812,7 @@ export default {
     "compare-header": CompareHeader,
     "horizontal-bar": HorizontalBar,
     "compare-section": CompareSection,
+    "compare-block": CompareBlock,
     "sankey-buttons": SankeyButtons,
     "canned-search-container": CannedSearchContainer,
     "search-form": SearchForm,
@@ -630,7 +846,13 @@ export default {
       hideShare:['email'],
       displayToggle: "institutions",
       isSharedComparison: false,
-      isSharedFieldOfStudyComparison:false
+      isSharedFieldOfStudyComparison:false,
+      fosSalarySelect:"aid",
+      fosSalarySelectItems:[
+        { text: "Financial Aid Recipients", value: "aid"},
+        { text: "Pell Grant Recipients", value: "pell"}
+      ],
+      fosFinancialCheckboxIncludePrior: false
     };
   },
   computed: {
@@ -744,7 +966,44 @@ export default {
     },
     countFieldsOfStudy(){
       return this.passedFieldsOfStudy.length;
+    },
+    filteredFieldsOfStudy(){
+      // Set up return object
+      let filteredArray = [
+        {
+          key: 'certificate',
+          title: 'certificate',
+          filterValue: 1,
+          items: []
+        },
+        {
+          key: 'associate',
+          title: "associate's Degree",
+          filterValue: 2,
+          items: []
+        },
+        {
+          key: 'bachelor',
+          title: "bachelor's Degree",
+          filterValue: 3,
+          items:[]
+        }
+      ]
+
+      // Categorize field of study by credential type;
+      filteredArray = filteredArray.map((filterItem) => {
+        filterItem.items = this.responseCache.fieldsOfStudy.filter((fieldOfStudy) => {
+          return fieldOfStudy['credential.level'] === filterItem.filterValue;
+        });
+
+        return filterItem;
+      });
+
+      // Return only items that have counts
+      return filteredArray.filter((filterItem)=>{ return filterItem.items.length > 0; });
+      // return filteredArray;
     }
+
   },
   methods: {
     all() {
@@ -924,8 +1183,10 @@ export default {
       params[this.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";
       params[this.fields.ID + "__range"] = "..999999";
 
-      // Join this Array
-      // params['fields'] =
+      // params['fields'] = [
+      //   this.fields['PREDOMINANT_DEGREE'],
+      //   this.fields["FIELD_OF_STUDY"]
+      // ].join(',')
 
       // Generate params array, format for API
       let paramArray = fieldsOfStudy.map((fieldOfStudy) => {
@@ -944,7 +1205,6 @@ export default {
 
           let fieldOfStudyData = responses.map(function (response) {
             if (response.data.results[0]) {
-              // console.log(response.data.results[0]['latest.programs.cip_4_digit'][0]);
               return response.data.results[0]['latest.programs.cip_4_digit'][0];
             }
           });
