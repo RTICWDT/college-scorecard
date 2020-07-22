@@ -16,11 +16,14 @@ export const compare = {
     handleToggleCompareSchool(school) {
       this.$emit("toggle-compare-school", school);
     },
+    handleToggleCompareItem(item,key) {
+      this.$emit("toggle-compare-school", item,key);
+    },
     closeModal(){
       this.showCompare = false;
     },
     isSelected(data,collection) {
-      return _.findIndex(collection,data);
+      return _.findIndex(collection, data) >= 0;
     }
   }
 }

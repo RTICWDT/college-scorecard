@@ -5,32 +5,96 @@
       <v-container>
         <v-row>
           <v-col cols="12" lg="9" class="school-left">
-            <div v-if="loading" class="show-loading">
-              <v-card class="pa-5">
-                <h1 class="title">
-                  Loading
-                  <v-icon color="#0e365b">fas fa-circle-notch fa-spin</v-icon>
-                </h1>
-              </v-card>
-            </div>
 
-            <div v-else-if="!loading && !showSearchForm" class="show-loaded" id="school">
-              <v-card class="pb-5 px-3">
-                <v-row class="csGreenBg">
-                  <v-col cols="6">
+            <!-- Top Summary Container-->
+            <v-card class="pb-5 px-3">
+
+              <!--Page Header-->
+              <v-row class="csGreenBg">
+                <v-col cols="6">
+                  <v-btn
+                    small
+                    color="white"
+                    text
+                    id="referrer-link"
+                    class="link-more"
+                    :href="referrerLink"
+                  >&laquo; Back</v-btn>
+                </v-col>
+                <v-col cols="6" class="text-right">
+                  <share
+                    small
+                    text
+                    color="white"
+                    label="Share this Comparison"
+                    :url="shareUrl"
+                    :hide="hideShare"
+                    show-copy
+                  />
+                </v-col>
+              </v-row>
+
+              <h1>Compare</h1>
+
+              <!-- Toggle Controls-->
+              <div>
+                <v-row>
+                  <!--TODO - Style-->
+                  <v-col
+                    cols="12"
+                    md="6"
+                  >
                     <v-btn
-                      small
-                      color="white"
-                      text
-                      id="referrer-link"
-                      class="link-more"
-                      :href="referrerLink"
-                    >&laquo; Back</v-btn>
+                      block
+                      :depressed="displayToggle === 'institutions'"
+                      :disabled="displayToggle === 'institutions'"
+                      @click="handleDisplayToggleClick('institutions')"
+                    >Schools ({{countSchools}})
+                    </v-btn>
                   </v-col>
-                  <v-col cols="6" class="text-right">
-                    <share small text color="white" label="Share this Comparison" :url="shareUrl" :hide="hideShare" show-copy/>
+
+                  <v-col
+                    cols="12"
+                    md="6"
+                  >
+                    <v-btn
+                      block
+                      :depressed="displayToggle === 'fos'"
+                      :disabled="displayToggle === 'fos'"
+                      @click="handleDisplayToggleClick('fos')"
+                    >Fields Of Study({{countFieldsOfStudy}})
+                    </v-btn>
                   </v-col>
                 </v-row>
+
+              </div>
+
+              <!--Loader-->
+              <div v-if="loading" class="show-loading">
+                <v-card class="pa-5">
+                  <h1 class="title">
+                    Loading
+                    <v-icon color="#0e365b">fas fa-circle-notch fa-spin</v-icon>
+                  </h1>
+                </v-card>
+              </div>
+
+              <!-- Institution Top Summary-->
+              <div v-else-if="showResource === 'institutions'" class="show-loaded" id="school">
+                <!-- Institution Chips -->
+                <div>
+                  <!--TODO - Make this a component with a close event-->
+                  <v-chip
+                    v-for="institution in responseCache.institution"
+                    :key="institution.schoolId"
+                    close
+                    @click:close="handleChipCloseClick(institution, 'compare-schools')"
+                  >
+                    {{institution.schoolName}}
+                  </v-chip>
+                </div>
+
+                <!--Institution Summary Metrics-->
                 <v-row>
                   <v-col cols="12" class="pa-sm-5">
                     <compare-section
@@ -39,10 +103,10 @@
                       definition="avg-cost"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'netPrice', 
-                        color: '#0e365b', 
-                        max: 150000, 
+                      :config="{
+                        computedField: 'netPrice',
+                        color: '#0e365b',
+                        max: 150000,
                         type: 'currency',
                         chart: 'HorizontalBar'
                       }"
@@ -54,12 +118,12 @@
                       definition="graduation-rate"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'completionRate', 
-                        color: '#0e365b', 
-                        max: 100, 
+                      :config="{
+                        computedField: 'completionRate',
+                        color: '#0e365b',
+                        max: 100,
                         type: 'percent',
-                        chart: 'HorizontalBar' 
+                        chart: 'HorizontalBar'
                       }"
                     />
 
@@ -69,23 +133,278 @@
                       @update-highlight="currentHighlight = $event"
                       title="Salary After Completing"
                       definition="fos-median-earnings"
-                      :config="{ 
-                        computedField: 'earningsRange', 
-                        color: '#0e365b', 
+                      :config="{
+                        computedField: 'earningsRange',
+                        color: '#0e365b',
                         chart: 'MultiRange',
                         multiRangeVariable: 'earnings.median_earnings'
                       }"
                     />
                   </v-col>
                 </v-row>
-              </v-card>
+              </div><!-- End Institution Top Summary-->
+
+              <!-- Field Of Study Container -->
+              <div v-else-if="showResource === 'fos'">
+                <!-- Field of Study Chips -->
+                <div>
+                  <!--TODO - Make this a component with a close event-->
+                  <v-chip
+                    v-for="fieldOfStudy in responseCache.fieldsOfStudy"
+                    :key="`${fieldOfStudy.unit_id}${fieldOfStudy.code}`"
+                    close
+                    x-large
+                    @click:close="handleChipCloseClick(fieldOfStudy, 'compare-fos')"
+                  >
+                    {{fieldOfStudy.title}}<br/>
+                    {{fieldOfStudy['credential.title']}}<br/>
+                    {{fieldOfStudy['school.name']}}
+                  </v-chip>
+                </div>
+
+                <!-- Field Of Study Data Container -->
+                <div>
+
+                  <div>
+                    <h2>Salary After Completing</h2>
+                    <v-select
+                      :items="fosSalarySelectItems"
+                      v-model="fosSalarySelect"
+                    />
+
+                    <div id="fos-median-earnings">
+                      <h3>Median Earnings</h3>
+                      <compare-block
+                        v-for="credentialLevel in filteredFieldsOfStudy"
+                        :key="`${credentialLevel.key}-median-earnings`"
+                        :block_title="credentialLevel.title"
+                        :schools="credentialLevel.items"
+                        is-field-of-study
+                      >
+                        <template v-slot:fos-row="slotProps">
+                          <div v-if="fosSalarySelect === 'aid'">
+                            <horizontal-bar
+                              v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_FED]"
+                              :value="slotProps.school[fields.FOS_EARNINGS_FED]"
+                              :min="0"
+                              :max="150000"
+                              color='#0e365b'
+                              :height="25"
+                              type="currency"
+                              :labels="true"
+                            ></horizontal-bar>
+                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_FED]" class="data-na">Data Not Available</div>
+                          </div>
+
+                          <div v-else>
+                            <horizontal-bar
+                              v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_PELL]"
+                              :value="slotProps.school[fields.FOS_EARNINGS_PELL]"
+                              :min="0"
+                              :max="150000"
+                              color='#0e365b'
+                              :height="25"
+                              type="currency"
+                              :labels="true"
+                            ></horizontal-bar>
+                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_PELL]" class="data-na">Data Not Available</div>
+                          </div>
+                        </template>
+                      </compare-block>
+                    </div>
+
+                    <div id="fos-monthly-earnings">
+                      <h3>Monthly Earnings</h3>
+                      <compare-block
+                        v-for="credentialLevel in filteredFieldsOfStudy"
+                        :key="`${credentialLevel.key}-monthly-earnings`"
+                        :block_title="credentialLevel.title"
+                        :schools="credentialLevel.items"
+                        is-field-of-study
+                      >
+                        <template v-slot:fos-row="slotProps">
+                          <div v-if="fosSalarySelect === 'aid'">
+                            <horizontal-bar
+                              v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_FED]"
+                              :value="slotProps.school[fields.FOS_EARNINGS_FED]/12"
+                              :min="0"
+                              :max="30000"
+                              color='#0e365b'
+                              :height="25"
+                              type="currency"
+                              :labels="true"
+                            ></horizontal-bar>
+                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_FED]" class="data-na">Data Not Available</div>
+                          </div>
+
+                          <div v-else>
+                            <horizontal-bar
+                              v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_PELL]"
+                              :value="slotProps.school[fields.FOS_EARNINGS_PELL]/12"
+                              :min="0"
+                              :max="30000"
+                              color='#0e365b'
+                              :height="25"
+                              type="currency"
+                              :labels="true"
+                            ></horizontal-bar>
+                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_PELL]" class="data-na">Data Not Available</div>
+                          </div>
+                        </template>
+                      </compare-block>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h2>Financial Aid</h2>
+                    <v-checkbox
+                      v-model="fosFinancialCheckboxIncludePrior"
+                      label="Include debt borrowed at any prior institutions"
+                    ></v-checkbox>
+
+                    <div id="fos-median-total-debt">
+                      <h3>Median Total Debt After Graduation</h3>
+                      <compare-block
+                        v-for="credentialLevel in filteredFieldsOfStudy"
+                        :key="`${credentialLevel.key}-median-debt`"
+                        :block_title="credentialLevel.title"
+                        :schools="credentialLevel.items"
+                        is-field-of-study
+                      >
+                        <template v-slot:fos-row="slotProps">
+                          <div v-if="!fosFinancialCheckboxIncludePrior">
+                            <horizontal-bar
+                              v-if="slotProps.school && slotProps.school[fields.FOS_DEBT_MEDIAN]"
+                              :value="slotProps.school[fields.FOS_DEBT_MEDIAN]"
+                              :min="0"
+                              :max="30000"
+                              color='#0e365b'
+                              :height="25"
+                              type="currency"
+                              :labels="true"
+                            ></horizontal-bar>
+                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_DEBT_MEDIAN]" class="data-na">Data Not Available</div>
+                          </div>
+
+                          <div v-else>
+                            <horizontal-bar
+                              v-if="slotProps.school && slotProps.school[fields.FOS_DEBT_MEDIAN_PRIOR]"
+                              :value="slotProps.school[fields.FOS_DEBT_MEDIAN_PRIOR]"
+                              :min="0"
+                              :max="30000"
+                              color='#0e365b'
+                              :height="25"
+                              type="currency"
+                              :labels="true"
+                            ></horizontal-bar>
+                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_DEBT_MEDIAN_PRIOR]" class="data-na">Data Not Available</div>
+                          </div>
+                        </template>
+                      </compare-block>
+                    </div>
+
+                    <div id="fos-monthly-loan">
+                      <h3>Monthly Loan Payment</h3>
+                      <compare-block
+                        v-for="credentialLevel in filteredFieldsOfStudy"
+                        :key="`${credentialLevel.key}-monthly-payment`"
+                        :block_title="credentialLevel.title"
+                        :schools="credentialLevel.items"
+                        is-field-of-study
+                      >
+                        <template v-slot:fos-row="slotProps">
+                          <div v-if="!fosFinancialCheckboxIncludePrior">
+                            <horizontal-bar
+                              v-if="slotProps.school && slotProps.school[fields.FOS_DEBT_MONTHLY]"
+                              :value="slotProps.school[fields.FOS_DEBT_MONTHLY]"
+                              :min="0"
+                              :max="2000"
+                              color='#0e365b'
+                              :height="25"
+                              type="currency"
+                              :labels="true"
+                            ></horizontal-bar>
+                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_DEBT_MONTHLY]" class="data-na">Data Not Available</div>
+                          </div>
+
+                          <div v-else>
+                            <horizontal-bar
+                              v-if="slotProps.school && slotProps.school[fields.FOS_DEBT_MONTHLY_PRIOR]"
+                              :value="slotProps.school[fields.FOS_DEBT_MONTHLY_PRIOR]"
+                              :min="0"
+                              :max="2000"
+                              color='#0e365b'
+                              :height="25"
+                              type="currency"
+                              :labels="true"
+                            ></horizontal-bar>
+                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_DEBT_MONTHLY_PRIOR]" class="data-na">Data Not Available</div>
+                          </div>
+                        </template>
+                      </compare-block>
+                    </div>
+                  </div>
+
+                  <div id="fos-grad-count">
+                    <h2>Number Of Graduates</h2>
+                    <compare-block
+                      v-for="credentialLevel in filteredFieldsOfStudy"
+                      :key="`${credentialLevel.key}-grad-count`"
+                      :block_title="credentialLevel.title"
+                      :schools="credentialLevel.items"
+                      is-field-of-study
+                    >
+                      <template v-slot:fos-row="slotProps">
+                        <horizontal-bar
+                          v-if="slotProps.school && slotProps.school[fields.FOS_GRAD_COUNT]"
+                          :value="slotProps.school[fields.FOS_GRAD_COUNT]"
+                          :min="0"
+                          :max="400"
+                          color='#0e365b'
+                          :height="25"
+                          type="number"
+                          :labels="true"
+                        ></horizontal-bar>
+                        <div
+                          v-if="slotProps.school && !slotProps.school[fields.FOS_GRAD_COUNT]"
+                          class="data-na"
+                        >
+                          Data Not Available
+                        </div>
+                      </template>
+                    </compare-block>
+                  </div>
+
+
+
+                  <!-- TODO - TOOLTIP? -->
+
+
+                </div>
+
+
+
+              </div> <!-- Field Of Study Container End -->
+
+            </v-card> <!-- Top Summary Container-->
+
+            <!-- Institution Metrics-->
+            <div v-if="showResource === 'institutions'">
+
+              <!-- Accordion Controls-->
               <v-row>
                 <v-col class="text-right mt-5">
                   <v-btn primary @click="all">Expand All</v-btn>
                   <v-btn primary @click="none">Close All</v-btn>
                 </v-col>
               </v-row>
-              <v-expansion-panels class multiple focusable v-model="panels">
+
+              <v-expansion-panels
+                class
+                multiple
+                focusable
+                v-model="panels"
+              >
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     @click="trackAccordion('College Information')"
@@ -97,12 +416,12 @@
                       definition="full-time"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'fullTimeEnrollment', 
-                        color: '#0e365b', 
-                        max: 100, 
+                      :config="{
+                        computedField: 'fullTimeEnrollment',
+                        color: '#0e365b',
+                        max: 100,
                         type: 'percent',
-                        chart: 'HorizontalBar' 
+                        chart: 'HorizontalBar'
                       }"
                     />
 
@@ -111,8 +430,8 @@
                       title="School Information"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        chart: 'SchoolInfo' 
+                      :config="{
+                        chart: 'SchoolInfo'
                        }"
                     />
 
@@ -122,12 +441,12 @@
                       definition="socio-eco"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'socioEconomicDiversity', 
-                        color: '#0e365b', 
-                        max: 100, 
+                      :config="{
+                        computedField: 'socioEconomicDiversity',
+                        color: '#0e365b',
+                        max: 100,
                         type: 'percent',
-                        chart: 'HorizontalBar' 
+                        chart: 'HorizontalBar'
                       }"
                     />
 
@@ -137,13 +456,13 @@
                       definition="race-eth"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'raceEthnicity', 
-                        color: '#0e365b', 
-                        max: 100, 
+                      :config="{
+                        computedField: 'raceEthnicity',
+                        color: '#0e365b',
+                        max: 100,
                         type: 'percent',
                         chart: 'HorizontalBar',
-                        currentRaceEthnicityFilter: currentRaceEthnicity 
+                        currentRaceEthnicityFilter: currentRaceEthnicity
                       }"
                     >
                       <p class="overline mb-1">Race/Ethnicity</p>
@@ -155,7 +474,7 @@
                             {label: 'Black', value:'Black'},
                             {label: 'Hispanic', value:'Hispanic'},
                             {label: 'Native Hawaiian/Pacific Islander', value:'Native Hawaiian/Pacific Islander'},
-                            {label: 'Non-resident alien', value:'Non-resident alien'},         
+                            {label: 'Non-resident alien', value:'Non-resident alien'},
                             {label: 'Two or more races', value:'Two or more races'},
                             {label: 'Unknown', value:'Unknown'},
                             {label: 'White', value:'White'},
@@ -179,12 +498,12 @@
                       definition="avg-cost"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'netPrice', 
-                        color: '#0e365b', 
-                        max: 150000, 
+                      :config="{
+                        computedField: 'netPrice',
+                        color: '#0e365b',
+                        max: 150000,
                         type: 'currency',
-                        chart: 'HorizontalBar' 
+                        chart: 'HorizontalBar'
                       }"
                     ><p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p></compare-section>
 
@@ -193,13 +512,13 @@
                       title="By Family Income Category"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'income', 
-                        color: '#0e365b', 
-                        max: 60000, 
+                      :config="{
+                        computedField: 'income',
+                        color: '#0e365b',
+                        max: 60000,
                         type: 'currency',
                         chart: 'HorizontalBar',
-                        currentIncomeFilter: currentIncomeFilter 
+                        currentIncomeFilter: currentIncomeFilter
                       }"
                     >
                       <p>Depending on the federal, state, or institutional grant aid available, students in your income bracket may pay more or less than the overall average costs.</p>
@@ -233,12 +552,12 @@
                       definition="graduation-rate"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'completionRate', 
-                        color: '#0e365b', 
-                        max: 100, 
+                      :config="{
+                        computedField: 'completionRate',
+                        color: '#0e365b',
+                        max: 100,
                         type: 'percent',
-                        chart: 'HorizontalBar' 
+                        chart: 'HorizontalBar'
                       }"
                     />
                     <compare-section
@@ -247,12 +566,12 @@
                       definition="retention-rate"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'retentionRate', 
-                        color: '#0e365b', 
-                        max: 100, 
+                      :config="{
+                        computedField: 'retentionRate',
+                        color: '#0e365b',
+                        max: 100,
                         type: 'percent',
-                        chart: 'HorizontalBar' 
+                        chart: 'HorizontalBar'
                       }"
                     />
                     <compare-section
@@ -261,8 +580,8 @@
                       definition="outcome-measures"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        color: '#0e365b', 
+                      :config="{
+                        color: '#0e365b',
                         chart: 'Sankey',
                         currentSankey: currentSankey
                       }"
@@ -282,12 +601,12 @@
                       definition="student-aid"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'studentsReceivingLoans', 
-                        color: '#0e365b', 
-                        max: 100, 
+                      :config="{
+                        computedField: 'studentsReceivingLoans',
+                        color: '#0e365b',
+                        max: 100,
                         type: 'percent',
-                        chart: 'HorizontalBar' 
+                        chart: 'HorizontalBar'
                       }"
                     />
                     <compare-section
@@ -296,9 +615,9 @@
                       definition="avg-debt"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'debtRange', 
-                        color: '#0e365b', 
+                      :config="{
+                        computedField: 'debtRange',
+                        color: '#0e365b',
                         chart: 'MultiRange',
                         multiRangeVariable: 'debt.median_debt'
                       }"
@@ -310,9 +629,9 @@
                       definition="avg-loan-payment"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'debtRange', 
-                        color: '#0e365b', 
+                      :config="{
+                        computedField: 'debtRange',
+                        color: '#0e365b',
                         chart: 'MultiRange',
                         multiRangeVariable: 'debt.monthly_debt_payment',
                         max: { value: 1000, label: '$1,000' }
@@ -330,16 +649,15 @@
                       title="Salary Ranges by Field of Study"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'earningsRange', 
-                        color: '#0e365b', 
+                      :config="{
+                        computedField: 'earningsRange',
+                        color: '#0e365b',
                         chart: 'MultiRange',
                         multiRangeVariable: 'earnings.median_earnings'
                       }"
                     />
                   </v-expansion-panel-content>
                 </v-expansion-panel>
-
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     @click="trackAccordion('Test Scores & Acceptance')"
@@ -355,9 +673,9 @@
                       title="SAT Reading"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'satReading', 
-                        color: '#0e365b', 
+                      :config="{
+                        computedField: 'satReading',
+                        color: '#0e365b',
                         chart: 'Range',
                       }"
                     />
@@ -366,9 +684,9 @@
                       title="SAT Math"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'satMath', 
-                        color: '#0e365b', 
+                      :config="{
+                        computedField: 'satMath',
+                        color: '#0e365b',
                         chart: 'Range',
                       }"
                     />
@@ -378,9 +696,9 @@
                       title="ACT"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'act', 
-                        color: '#0e365b', 
+                      :config="{
+                        computedField: 'act',
+                        color: '#0e365b',
                         chart: 'Range',
                       }"
                     />
@@ -390,24 +708,27 @@
                       title="Acceptance Rate"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
-                      :config="{ 
-                        computedField: 'acceptanceRate', 
-                        color: '#0e365b', 
-                        max: 100, 
+                      :config="{
+                        computedField: 'acceptanceRate',
+                        color: '#0e365b',
+                        max: 100,
                         type: 'percent',
-                        chart: 'HorizontalBar' 
+                        chart: 'HorizontalBar'
                       }"
                     />
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
+
             </div>
 
             <!-- Search Form Component -->
             <div v-show="!loading && showSearchForm">
               <v-card class="pa-5 mb-2">
                 <h1 class="text-center pt-3">No schools selected to compare.</h1>
-                <p class="text-center mt-2">Try searching for schools and clicking the <v-icon>fa fa-plus-circle</v-icon> to add a school for comparison.</p>
+                <p class="text-center mt-2">
+                  Try searching for schools and clicking the <v-icon>fa fa-plus-circle</v-icon> to add a school for comparison.
+                </p>
 
               </v-card>
               <v-card class="px-5 pt-0 pb-5">
@@ -415,27 +736,43 @@
               </v-card>
             </div>
 
-          </v-col>
+          </v-col> <!-- End Left Content Area -->
 
+          <!-- Left Aside -->
           <v-col lg="3">
             <v-card v-if="showShareUpdate" class="pa-5 mb-3">
               <p>You are viewing a shared comparison.</p>
-              <v-btn small color="secondary" rounded @click="saveCompareList()">Update Your List</v-btn>
+
+              <v-btn
+                small
+                color="secondary"
+                rounded @click="handleCompareListSaveClick()"
+              >
+                Update Your List
+              </v-btn>
+
             </v-card>
             <v-card class="pa-5">
               <paying-for-college />
             </v-card>
           </v-col>
+
         </v-row>
-      </v-container>
+      </v-container> <!-- End Page Content Container -->
     </v-content>
+
     <scorecard-footer />
 
-    <compare-header :showCompare.sync="showCompare" :schools="compareSchools" />
+    <compare-header
+      :showCompare.sync="showCompare"
+      :schools="compareSchools"
+      :fields-of-study="compareFieldsOfStudy"
+    />
     <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
       <compare-drawer
         :schools="compareSchools"
-        @toggle-compare-school="handleToggleCompareSchool"
+        :fields-of-study="compareFieldsOfStudy"
+        @toggle-compare-school="handleToggleCompareItem"
         v-on:close-modal="closeModal()"
       ></compare-drawer>
     </v-bottom-sheet>
@@ -450,6 +787,7 @@ import CompareDrawer from "components/vue/CompareDrawer.vue";
 import CompareHeader from "components/vue/CompareHeader.vue";
 import HorizontalBar from "components/vue/HorizontalBar.vue";
 import CompareSection from "components/vue/compare/Section.vue";
+import CompareBlock from "components/vue/compare/Block.vue";
 import { compare } from "vue/mixins.js";
 import ComplexFields from "vue/mixins/ComplexFields.js";
 import SankeyButtons from "components/vue/SankeyButtons.vue";
@@ -459,10 +797,13 @@ import CannedSearchContainer from "components/vue/CannedSearchContainer.vue";
 import querystring from "querystring";
 import SearchForm from "components/vue/SearchForm.vue";
 import NameAutocomplete from "components/vue/NameAutocomplete.vue";
+import Router from "vue/mixins/Router.js";
+import { fields, localStorageKeys } from '../constants';
+import {generateFieldOfStudyUUID, decodeFieldOfStudyUUID, fieldOfStudyCompareFormat} from '../commonFormats';
 
 export default {
-  mixins: [compare, ComplexFields, AnalyticsEvents],
-  props: ["baseUrl", "compareSchools"],
+  mixins: [compare, ComplexFields, AnalyticsEvents, Router],
+  props: ["baseUrl", "compareSchools","compareFieldsOfStudy"],
   components: {
     tooltip: Tooltip,
     share: Share,
@@ -471,6 +812,7 @@ export default {
     "compare-header": CompareHeader,
     "horizontal-bar": HorizontalBar,
     "compare-section": CompareSection,
+    "compare-block": CompareBlock,
     "sankey-buttons": SankeyButtons,
     "canned-search-container": CannedSearchContainer,
     "search-form": SearchForm,
@@ -495,33 +837,73 @@ export default {
       loading: true,
       mobilePanels: 0,
       desktopTabs: 1,
-      passedSchools: [],
+      // passedSchools: [],
       cacheList: [],
-      hideShare:['email']
+      responseCache:{
+        institution:[],
+        fieldsOfStudy:[]
+      }, // Cache values from return object for easy access.
+      hideShare:['email'],
+      displayToggle: "institutions",
+      isSharedComparison: false,
+      isSharedFieldOfStudyComparison:false,
+      fosSalarySelect:"aid",
+      fosSalarySelectItems:[
+        { text: "Financial Aid Recipients", value: "aid"},
+        { text: "Pell Grant Recipients", value: "pell"}
+      ],
+      fosFinancialCheckboxIncludePrior: false
     };
   },
   computed: {
     shareUrl() {
+      // const compareBaseURL = window.location.origin + this.$baseUrl + '/compare/?toggle=' + this.displayToggle + '&';
       const compareBaseURL = window.location.origin + this.$baseUrl + '/compare/?';
+
+      let paramArray = {
+        // Institution
+        toggle: this.displayToggle
+      };
 
       // Default to passed schools
       if(this.passedSchools.length > 0){
-        return compareBaseURL + encodeURIComponent(querystring.stringify({s: this.passedSchools}));
-      }else{
-        // Alter to desired structure
-        let schoolIDArray = this.compareSchools.map((school) => {return school.schoolId});
-        return compareBaseURL + encodeURIComponent(querystring.stringify({s: schoolIDArray}));
+        paramArray.s = this.passedSchools;
+      }else if(this.compareSchools.length > 0){
+        // If not passed from URL, use compare drawer
+        paramArray.s = this.compareSchools.map((school) => {
+          return school.schoolId
+        });
       }
+
+      // Default to passed in FOS
+      if(this.passedFieldsOfStudy.length > 0){
+        paramArray.fos = this.passedFieldsOfStudy;
+      }else if(this.compareFieldsOfStudy.length > 0){
+        // If not passed from URL, use compare drawer and format
+        paramArray.fos = this.compareFieldsOfStudy.map((fieldOfStudy) => {
+          return generateFieldOfStudyUUID(fieldOfStudy.id,fieldOfStudy.code,fieldOfStudy.credentialLevel);
+        });
+      }
+
+      // Return Composite URL
+      return compareBaseURL + this.prepareQueryString(paramArray);
     },
     referrerLink() {
       return document.referrer || `${this.$baseUrl}/search`;
     },
     showSearchForm(){
-      if(this.schools['2-year schools'].length > 0 || this.schools['4-year schools'].length > 0 || this.schools['Certificate schools'].length > 0){
+      // if(this.schools['2-year schools'].length > 0 || this.schools['4-year schools'].length > 0 || this.schools['Certificate schools'].length > 0){
+      //   return false;
+      // }else{
+      //   return true;
+      // }
+
+      if(this.displayToggle === 'institutions' && this.responseCache.institution.length > 0 ){
         return false;
-      }else{
-        return true;
+      }else if(this.displayToggle === 'fos' && this.responseCache.fieldsOfStudy.length > 0){
+        return false;
       }
+      return true;
     },
     showShareUpdate(){
       // Check to see if passed school matches local storage, only show "update compare" if they do not match
@@ -535,9 +917,93 @@ export default {
           return true;
         }
       }
-
       return false;
+    },
+    showShareFieldOfStudyUpdate(){
+      // Quick Comparison
+      if(this.compareFieldsOfStudy.length === 0 && this.passedFieldsOfStudy.length > 0){
+        return true;
+      }
+
+      if(this.compareFieldsOfStudy.length > 0 && this.passedFieldsOfStudy.length > 0){
+        let compareFieldOfStudyStrings = this.compareFieldsOfStudy.map((fieldOfStudy) => {
+          return generateFieldOfStudyUUID(fieldOfStudy.id, fieldOfStudy.code, fieldOfStudy.credentialLevel);
+        });
+        if(!_.isEqual(compareFieldOfStudyStrings, this.passedFieldsOfStudy)){
+          return true;
+        }
+      }
+      return false;
+    },
+    passedSchools(){
+      if(this.queryStringParameters['s']){
+        // Always set to array, if not convert to array
+        return (typeof(this.queryStringParameters['s']) == 'string') ? [this.queryStringParameters['s']] : this.queryStringParameters['s'];
+      }else{
+        return [];
+      }
+    },
+    passedFieldsOfStudy(){
+      if(this.queryStringParameters['fos']){
+        // Get from array, parse needed items
+        return (typeof(this.queryStringParameters['fos']) == 'string') ? [this.queryStringParameters['fos']] : this.queryStringParameters['fos'];
+      }else{
+        return [];
+      }
+    },
+    showResource(){
+      // Help decide what to show.
+      if(!this.loading && !this.showSearchForm && this.displayToggle === 'institutions'){
+        return this.displayToggle;
+      }else if(!this.loading && !this.showSearchForm && this.displayToggle === 'fos'){
+        return this.displayToggle;
+      }else{
+        return false;
+      }
+    },
+    countSchools(){
+      return this.passedSchools.length;
+    },
+    countFieldsOfStudy(){
+      return this.passedFieldsOfStudy.length;
+    },
+    filteredFieldsOfStudy(){
+      // Set up return object
+      let filteredArray = [
+        {
+          key: 'certificate',
+          title: 'certificate',
+          filterValue: 1,
+          items: []
+        },
+        {
+          key: 'associate',
+          title: "associate's Degree",
+          filterValue: 2,
+          items: []
+        },
+        {
+          key: 'bachelor',
+          title: "bachelor's Degree",
+          filterValue: 3,
+          items:[]
+        }
+      ]
+
+      // Categorize field of study by credential type;
+      filteredArray = filteredArray.map((filterItem) => {
+        filterItem.items = this.responseCache.fieldsOfStudy.filter((fieldOfStudy) => {
+          return fieldOfStudy['credential.level'] === filterItem.filterValue;
+        });
+
+        return filterItem;
+      });
+
+      // Return only items that have counts
+      return filteredArray.filter((filterItem)=>{ return filterItem.items.length > 0; });
+      // return filteredArray;
     }
+
   },
   methods: {
     all() {
@@ -559,112 +1025,417 @@ export default {
 
       // Direct to location.
       window.location.href = url;
-    }, 
-    saveCompareList(){
-      let i=0;
-      // remove existing schools
-      for(i=0; i<this.compareSchools.length; i++)
-      {
-        this.$emit('toggle-compare-school',{ schoolId: this.compareSchools[i].schoolId, schoolName: this.compareSchools[i].schoolName });
+    },
+    saveCompareList(compareKey, removeFromCompare, addToCompare){
+      // TODO - Maybe move this to the local storage mixin?
+
+      // TODO - Add formatting these data values as a function. No formatting inline.
+      // Put it in centralized location so all methods can use it.
+      switch(compareKey){
+        case localStorageKeys.COMPARE_KEY:
+          removeFromCompare.forEach((value,key) => {
+            this.$emit('toggle-compare-school',{
+              schoolId: value.schoolId,
+              schoolName: value.schoolName
+            },localStorageKeys.COMPARE_KEY);
+          });
+          addToCompare.forEach((value,key) => {
+            this.$emit('toggle-compare-school',{
+              schoolId: value.schoolId,
+              schoolName: value.schoolName
+            },localStorageKeys.COMPARE_KEY);
+          });
+
+          // Is no longer a shared comparison
+          this.isSharedComparison = false;
+
+          break;
+        case localStorageKeys.COMPARE_FOS_KEY:
+          removeFromCompare.forEach((value,key) => {
+            this.$emit('toggle-compare-school',{
+            },localStorageKeys.COMPARE_FOS_KEY);
+          });
+          addToCompare.forEach((value,key) => {
+            this.$emit('toggle-compare-school',{
+            },localStorageKeys.COMPARE_FOS_KEY);
+          });
+          break;
+        default:
+          removeFromCompare.forEach((value,key) => {
+            this.$emit('toggle-compare-school',{
+              schoolId: value.schoolId,
+              schoolName: value.schoolName
+            },localStorageKeys.COMPARE_KEY);
+          });
+          addToCompare.forEach((value,key) => {
+            this.$emit('toggle-compare-school',{
+              schoolId: value.schoolId,
+              schoolName: value.schoolName
+            },localStorageKeys.COMPARE_KEY);
+          });
+          break;
       }
-      // add compare schools
-      for(i=0; i<this.cacheList.length; i++)
-      {
-        this.$emit('toggle-compare-school',{ schoolId: this.cacheList[i].schoolId, schoolName: this.cacheList[i].schoolName });
-      };
+    },
+    queryInstitutions(){
+      // TODO - Refactor this, make it work for all querying.
+      // Data manipulation after the return.
+      let params = {};
+      params[this.fields.OPERATING] = 1;
+      params[
+      this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
+        ] = true;
+      params[this.fields.SIZE + "__range"] = "0..";
+      params[this.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";
+      params[this.fields.ID + "__range"] = "..999999";
+      params["fields"] = "latest,school,id,location";
+      params["keys_nested"] = true;
+      params["all_programs"] = true;
+
+      let schoolArray = [];
+      let paramArray = [];
+
+      if(this.passedSchools.length > 0){
+        this.passedSchools.map(function (id){
+          // TODO: Add number check?
+          if(parseInt(id)){
+            schoolArray.push(parseInt(id));
+            paramArray.push({
+              id: parseInt(id)
+            });
+          }
+        })
+
+      }else{
+        this.compareSchools.map(function (school) {
+          let id = +school.schoolId || +school;
+          schoolArray.push(id);
+          paramArray.push({
+            id: id
+          });
+        });
+
+        // Update URL with schools from compare drawer using the share URL computed property.  Grabbing only query string from url string
+        history.replaceState(
+          {},
+          "",
+          this.shareUrl
+        );
+
+        //update URL parameters
+        this.queryStringParameters = this.parseURLParameters();
+      }
+
+      this.trackCompareList(schoolArray.join(';'));
+
+      this.loading = true;
+      let request = apiGetAll(window.api.url, window.api.key, '/schools/', paramArray).then((responses) => {
+
+        let schoolData = responses.map(function (response) {
+          if (response.data.results[0]) {
+            return response.data.results[0];
+          }
+        });
+
+        schoolData.forEach((school) => {
+          // if you are passing in some, generate an object
+          // of passed in schools so they can be saved
+          if(this.passedSchools)
+          {
+            this.responseCache.institution.push({
+              schoolId: _.get(school, this.fields["ID"]),
+              schoolName: _.get(school, this.fields["NAME"])
+            });
+          }
+
+          // Organize data to fit page markup
+          // TODO - Refactor. Don't manipulate the response.  Keep response whole, filter at display time.
+          // It is harder the find data in the array when it is organized like this.
+          switch (_.get(school, this.fields["PREDOMINANT_DEGREE"])) {
+            case 1:
+              this.schools["Certificate schools"].push(school);
+              break;
+            case 2:
+              this.schools["2-year schools"].push(school);
+              break;
+            case 3:
+              this.schools["4-year schools"].push(school);
+              break;
+          }
+        });
+
+        this.loading = false;
+
+      }).catch((responses) => {
+        // TODO - How do we want to handle errors?
+        console.error("Issue locating schools for compare...");
+        this.loading = false;
+      });
+    },
+    queryFieldsOfStudy(fieldsOfStudy){
+      // Start by just doing a sloppy query. Seperate query even if items are at the same school.
+      // TODO - Centralize Common params object
+      let params = {};
+      params[this.fields.OPERATING] = 1;
+      params[
+      this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
+        ] = true;
+      params[this.fields.SIZE + "__range"] = "0..";
+      params[this.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";
+      params[this.fields.ID + "__range"] = "..999999";
+
+      // params['fields'] = [
+      //   this.fields['PREDOMINANT_DEGREE'],
+      //   this.fields["FIELD_OF_STUDY"]
+      // ].join(',')
+
+      // Generate params array, format for API
+      let paramArray = fieldsOfStudy.map((fieldOfStudy) => {
+        return {
+          ...params,
+          [this.fields.ID]: fieldOfStudy.id, //Unit ID of institution
+          [this.fields.FIELD_OF_STUDY_CODE]: fieldOfStudy.code,
+          [this.fields.FIELD_OF_STUDY_LENGTH]: fieldOfStudy.credential.level
+        }
+      });
+
+      // TODO - Track Compare List for Fields Of Study
+      this.loading = true;
+      let request = apiGetAll(window.api.url, window.api.key, '/schools/', paramArray)
+        .then((responses) => {
+
+          let fieldOfStudyData = responses.map(function (response) {
+            if (response.data.results[0]) {
+              return response.data.results[0]['latest.programs.cip_4_digit'][0];
+            }
+          });
+
+          this.responseCache.fieldsOfStudy = fieldOfStudyData;
+
+          this.loading = false;
+          // Return an array of objects, outside of institutions ready for formatting,
+        }).catch((responses) => {
+          // TODO - How do we want to handle errors?
+          console.error("Issue locating Fields Of Study for compare...");
+          this.loading = false;
+        });
+
+    },
+    handleCompareListSaveClick(compareKey = localStorageKeys.COMPARE_KEY){
+      if(compareKey === localStorageKeys.COMPARE_KEY){
+        this.saveCompareList(localStorageKeys.COMPARE_KEY, this.compareSchools, this.responseCache.institution);
+      }else{
+
+      }
+    },
+    handleChipCloseClick(removeData, compareKey = localStorageKeys.COMPARE_KEY){
+
+      switch(compareKey){
+        case localStorageKeys.COMPARE_KEY:
+          let filteredSchools = {};
+
+          //region Remove from Results
+          //Using lodash, not an array.
+          _.forEach(this.schools, (schools, year)=>{
+            filteredSchools[year] = schools.filter((school) => {
+              return Number(school.id) !== Number(removeData.schoolId)
+            });
+          })
+
+          this.schools = filteredSchools;
+          //endregion
+
+          // remove from response cache.
+          this.responseCache.institution = this.responseCache.institution.filter((school) => {
+            return Number(school.schoolId) !== Number(removeData.schoolId);
+          })
+
+          //region Remove from URL
+          // Ensure it is set and is an array
+          if(typeof this.queryStringParameters.s === 'object'){
+            this.queryStringParameters.s = this.queryStringParameters.s.filter((schoolId) => {
+              return Number(schoolId) !== Number(removeData.schoolId);
+            });
+          }else if (typeof this.queryStringParameters.s === 'string'){
+            this.queryStringParameters = _.omit(this.queryStringParameters,'s');
+          }
+
+          // Replace state
+          history.replaceState(
+            {},
+            "",
+            window.location.origin + this.$baseUrl + '/compare?' + this.prepareQueryString(this.queryStringParameters)
+          );
+          //endregion
+
+          //region Remove From Compare
+
+          // If not viewing a shared comparison
+          if(!this.isSharedComparison){
+            // If it exists in the compare drawer
+            let compareIndex = _.findIndex(this.compareSchools, (school)=> {
+              return Number(school.schoolId) === Number(removeData.schoolId)
+            });
+
+            if(compareIndex >= 0)
+            {
+              this.$emit('toggle-compare-school', removeData, localStorageKeys.COMPARE_KEY);
+            }
+          }
+          //endregion
+          break;
+
+        case localStorageKeys.COMPARE_FOS_KEY:
+
+          //region Remove from response cache
+          this.responseCache.fieldsOfStudy = this.responseCache.fieldsOfStudy.filter((fieldOfStudy) => {
+            if(Number(fieldOfStudy['unit_id']) !== Number(removeData['unit_id'])){
+              return true;
+            }
+
+            return Number(fieldOfStudy.code) !== Number(removeData.code) &&
+              Number(fieldOfStudy['credential.level']) === Number(removeData['credential.level']);
+          });
+          //endregion
+
+          // region Remove From URL
+
+          // Ensure it is set and is an array
+          if(typeof this.queryStringParameters.fos === 'object'){
+            this.queryStringParameters.fos = this.queryStringParameters.fos.filter((fieldOfStudyString) => {
+              return  fieldOfStudyString !== generateFieldOfStudyUUID(removeData['unit_id'], removeData.code, removeData['credential.level']);
+            });
+          }else if (typeof this.queryStringParameters.fos === 'string'){
+            this.queryStringParameters = _.omitBy(this.queryStringParameters, (value,key)=>{
+              return key === 'fos' &&
+                value === generateFieldOfStudyUUID(removeData['unit_id'], removeData.code, removeData['credential.level']);
+            });
+          }
+
+          // Replace state
+          history.replaceState(
+            {},
+            "",
+            window.location.origin + this.$baseUrl + '/compare?' + this.prepareQueryString(this.queryStringParameters)
+          );
+          //endregion
+
+          //region Remove From Compare Drawer
+
+          // If not viewing a shared comparison
+          if(!this.isSharedFieldOfStudyComparison){
+            // If it exists in the compare drawer
+            let compareIndex = _.findIndex(this.compareFieldsOfStudy, (fieldOfStudy)=> {
+              return Number(fieldOfStudy['id']) === Number(removeData['unit_id']) &&
+                Number(fieldOfStudy.code) === Number(removeData.code) &&
+                Number(fieldOfStudy.credentialLevel) === Number(removeData['credential.level']);
+            });
+
+            if(compareIndex >= 0)
+            {
+              this.$emit('toggle-compare-school',
+                fieldOfStudyCompareFormat(removeData),
+                localStorageKeys.COMPARE_FOS_KEY
+              );
+            }
+          }
+
+          //endregion
+
+          break;
+        default:
+          break;
+      }
+    },
+    handleDisplayToggleClick(toggleValue){
+      this.displayToggle = toggleValue;
+
+      if(this.displayToggle === 'institutions'){
+        // Query if not response cache is present
+        if(this.responseCache.institution.length === 0){
+          this.queryInstitutions();
+        }
+
+        // TODO - Move to a centralized location.
+        // update the URL
+        history.replaceState(
+          {},
+          "",
+          this.shareUrl
+        );
+
+        //update URL parameters
+        this.queryStringParameters = this.parseURLParameters();
+
+      }else if(this.displayToggle === 'fos'){
+        if(this.responseCache.fieldsOfStudy.length <= 0){
+          this.queryFieldsOfStudy(this.locateFieldsOfStudy());
+        }
+
+        // TODO - Move to a centralized location.
+        // update the URL
+        history.replaceState(
+          {},
+          "",
+          this.shareUrl
+        );
+
+        //update URL parameters
+        this.queryStringParameters = this.parseURLParameters();
+      }
+    },
+    locateFieldsOfStudy(){
+
+      let itemsToQuery = [];
+
+      // If fields of study are present in the URL
+      if(this.passedFieldsOfStudy.length > 0){
+        this.passedFieldsOfStudy.map((fosString) => {
+          // Parse FOS string
+          let parsedFosString = decodeFieldOfStudyUUID(fosString);
+          // TODO - Pattern Match/Validation
+          itemsToQuery.push(parsedFosString);
+        })
+
+      }else{
+        this.compareFieldsOfStudy.map((fieldOfStudy) => {
+          // TODO Validation
+          itemsToQuery.push({
+            id: fieldOfStudy.id,
+            code: fieldOfStudy.code,
+            credential:{
+              level: fieldOfStudy.credentialLevel
+            }
+          })
+        });
+
+        // TODO - Remove URL updating from this method
+        // Update URL with schools from compare drawer using the share URL computed property.  Grabbing only query string from url string
+        history.replaceState(
+          {},
+          "",
+          this.shareUrl
+        );
+
+        //update URL parameters
+        this.queryStringParameters = this.parseURLParameters();
+      }
+
+      return itemsToQuery;
     }
   },
   mounted() {
-    let self = this;
-
-    var params = {};
-    params[this.fields.OPERATING] = 1;
-    params[
-      this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
-    ] = true;
-    params[this.fields.SIZE + "__range"] = "0..";
-    params[this.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";
-    params[this.fields.ID + "__range"] = "..999999";
-    params["fields"] = "latest,school,id,location";
-    params["keys_nested"] = true;
-    params["all_programs"] = true;
-
-    let query = {};
-    let schoolArray = [];
-    let paramArray = [];
-
-    let passed = querystring.parse(decodeURIComponent(window.location.search.substr(1)));
-
-    // Check for passed schools first
-    if(passed['s']){
-      // Always set to array, if not convert to array
-      this.passedSchools = (typeof(passed['s']) == 'string') ? [passed['s']] : passed['s'];
-    }
-
-    // Create lookup object, default to url passed schools or use compare drawer
-    if(this.passedSchools.length > 0){
-      this.passedSchools.map(function (id){
-        // TODO: Add number check?
-        if(parseInt(id)){
-          schoolArray.push(parseInt(id));
-          paramArray.push({
-            id: parseInt(id)
-          });
-        }
-      })
-
+    // set toggle from URL
+    if(typeof this.queryStringParameters.toggle != 'undefined' && this.queryStringParameters.toggle === 'fos'){
+      this.displayToggle = 'fos';
+      this.queryFieldsOfStudy(this.locateFieldsOfStudy());
     }else{
-      this.compareSchools.map(function (school) {
-        let id = +school.schoolId || +school;
-        schoolArray.push(id);
-        paramArray.push({
-          id: id
-        });
-      });
-
-      // Update URL with schools from compare drawer using the share URL computed property.  Grabbing only query string from url string
-      history.replaceState({},"", this.$baseUrl + "/compare?" + decodeURIComponent(this.shareUrl.substring(this.shareUrl.indexOf('?') + 1 )));
+      this.displayToggle = 'institutions';
+      this.queryInstitutions();
     }
 
-    // console.log(this.passedSchools);
-    this.trackCompareList(schoolArray.join(';'));
-    
-    this.loading = true;
-    let request = apiGetAll(window.api.url, window.api.key, '/schools/', paramArray).then((responses) => {
-
-      let schoolData = responses.map(function (response) {
-        if (response.data.results[0]) {
-          return response.data.results[0];
-        }
-      });
-
-      schoolData.forEach((school) => {
-        // if you are passing in some, generate an object 
-        // of passed in schools so they can be saved
-        if(this.passedSchools)
-        {
-          this.cacheList.push({ schoolId: _.get(school, this.fields["ID"]), schoolName: _.get(school, this.fields["NAME"])})  
-        }
-        switch (_.get(school, this.fields["PREDOMINANT_DEGREE"])) {
-          case 1:
-            this.schools["Certificate schools"].push(school);
-            break;
-          case 2:
-            this.schools["2-year schools"].push(school);
-            break;
-          case 3:
-            this.schools["4-year schools"].push(school);
-            break;
-        }  
-      });
-
-      this.loading = false;
-
-    }).catch((responses) => {
-      // TODO - How do we want to handle errors?
-      console.error("Issue locating schools for compare...");
-      this.loading = false;
-    });
+    // Did this initiate as a shared comparision
+    this.isSharedComparison = this.showShareUpdate;
+    this.isSharedFieldOfStudyComparison = this.showShareFieldOfStudyUpdate;
   }
 };
 </script>

@@ -107,6 +107,21 @@ export const fields = {
   FIELD_OF_STUDY_NAME:      'latest.programs.cip_4_digit.title',
   FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.median_earnings',
 
+  // New Field Of Study Metrics
+  // Full Paths
+  FIELD_OF_STUDY_EARNINGS_FED: 'latest.programs.cip_4_digit.earnings.test.median_fed',
+  FIELD_OF_STUDY_EARNINGS_PELL: 'latest.programs.cip_4_digit.earnings.test.median_pell',
+
+  // Relative Paths
+  FOS_GRAD_COUNT: 'counts.ipeds_awards2',
+  FOS_EARNINGS_FED: 'earnings.test.median_fed',
+  FOS_EARNINGS_PELL: 'earnings.test.median_pell',
+  FOS_DEBT_MEDIAN: 'debt.test.federal.median_total_at',
+  FOS_DEBT_MEDIAN_PRIOR: 'debt.test.federal.median_total_prior',
+  FOS_DEBT_MONTHLY: 'debt.test.federal.monthly_payment_at',
+  FOS_DEBT_MONTHLY_PRIOR: 'debt.test.federal.monthly_payment_prior',
+
+
   //Location
   LATITUDE:                 'location.lat',
   LONGITUDE:                'location.lon'

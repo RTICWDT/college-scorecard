@@ -9,36 +9,46 @@
         <p class="title">Compare Schools</p>
         <div class="my-3">
           <v-checkbox
-            @change="handleToggleCompareSchool(school)"
+            @change="handleToggleCompareItem(school,schoolKey)"
             :label="school.schoolName"
             v-for="school in schools"
             :key="school.schoolId"
             :value="school.schoolId"
             hide-details
-            v-model="selected"
+            v-model="selectedSchools"
             color="secondary"
             class="ma-0 pa-0"
           ></v-checkbox>
         </div>
         <p>
-          <v-btn rounded color="secondary" :href="$baseUrl+'/compare/'">Compare Schools</v-btn>
+          <v-btn rounded color="secondary" :href="$baseUrl+'/compare'">Compare Schools</v-btn>
         </p>
       </v-col>
       <v-col cols="12" md="6">
         <p class="title">Compare Fields Of Study</p>
         <div class="my-3">
           <v-checkbox
-            @change="handleToggleCompareSchool(school)"
-            :label="school.schoolName"
-            v-for="school in schools"
-            :key="school.schoolId"
-            :value="school.schoolId"
+            v-for="fieldOfStudy in fieldsOfStudy"
+            @change="handleToggleCompareItem(fieldOfStudy, fieldOfStudyKey)"
+            :key="generateFieldOfStudyString(fieldOfStudy)"
             hide-details
-            v-model="selected"
+            v-model="selectedFieldsOfStudy"
+            :value="generateFieldOfStudyString(fieldOfStudy)"
             color="secondary"
             class="ma-0 pa-0"
-          ></v-checkbox>
+          >
+            <template v-slot:label>
+              <div>
+                <span>{{fieldOfStudy.fosTitle}}</span><br>
+                <span>{{fieldOfStudy.credentialTitle}}</span><br>
+                <span>{{fieldOfStudy.institutionName}}</span>
+              </div>
+            </template>
+          </v-checkbox>
         </div>
+        <p>
+          <v-btn rounded color="secondary" :href="$baseUrl+'/compare/?toggle=fos'">Compare Fields Of Study</v-btn>
+        </p>
       </v-col>
     </v-row>
   </v-card>
@@ -52,6 +62,7 @@
 // This can work on any page, it just needs data passed in and events to react when school
 // is toggled.
 import Share from "components/vue/Share.vue";
+import {localStorageKeys} from '../../vue/constants';
 
 export default {
   components: {
@@ -59,20 +70,33 @@ export default {
   },
   props: {
     schools: Array,
-
+    fieldsOfStudy:{
+      type: Array
+    }
   },
   data() {
     return {
-      selected: Array
+      selectedSchools: [],
+      selectedFieldsOfStudy: [],
+      fieldOfStudyKey: localStorageKeys.COMPARE_FOS_KEY,
+      schoolKey: localStorageKeys.COMPARE_KEY
     };
   },
   watch: {
     schools() {
-      this.selected = _.map(this.schools, "schoolId");
+      this.selectedSchools = _.map(this.schools, "schoolId");
+    },
+    fieldsOfStudy(){
+      this.selectedFieldsOfStudy = _.map(this.fieldsOfStudy, (fieldOfStudy) => {
+        return this.generateFieldOfStudyString(fieldOfStudy);
+      });
     }
   },
   mounted() {
-    this.selected = _.map(this.schools, "schoolId");
+    this.selectedSchools = _.map(this.schools, "schoolId");
+    this.selectedFieldsOfStudy = _.map(this.fieldsOfStudy, (fieldOfStudy) => {
+      return this.generateFieldOfStudyString(fieldOfStudy);
+    });
   },
   methods: {
     handleToggleCompareSchool(school) {
@@ -81,8 +105,17 @@ export default {
 
       this.$emit("toggle-compare-school", school);
     },
+    handleToggleCompareItem(item,key) {
+      // TODO: The fade in/out or keep unchecked.
+      // Move to a local state that can be clicked again and eventually refreshed.
+      console.log(item);
+      this.$emit("toggle-compare-school", item, key);
+    },
     toggleDrawer() {
       this.$emit("close-modal");
+    },
+    generateFieldOfStudyString(fosObject){
+      return `${fosObject.id}-${fosObject.code}-${fosObject.credentialLevel}`;
     }
   }
 };

@@ -41,7 +41,7 @@
                       text
                       small
                       class="d-none d-sm-inline"
-                      :color="isSelected({schoolId:String(id)},this.compareSchools)?'white':'amber'"
+                      :color="isSelected({schoolId:String(id)},this.compareSchools)?'amber':'white'"
                       @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
                       <v-icon x-small class="mr-2">fa fa-plus-circle</v-icon>Compare
@@ -49,7 +49,7 @@
                     <v-btn
                       fab
                       x-small
-                      :color="isSelected({schoolId:String(id)},this.compareSchools)?'white':'amber'"
+                      :color="isSelected({schoolId:String(id)},this.compareSchools)?'amber':'white'"
                       class="d-inline d-sm-none mr-2"
                       @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
@@ -184,7 +184,7 @@
                           text
                           small
                           class="d-none d-sm-inline"
-                          :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'green':'amber'"
+                          :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'amber':'green'"
                           @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
                         >
                           <v-icon x-small class="mr-2">fa fa-plus-circle</v-icon>Compare Field of Study
@@ -1035,11 +1035,16 @@
       </v-container>
     </v-content>
     <scorecard-footer />
-    <compare-header :showCompare.sync="showCompare" :schools="compareSchools" />
+    <compare-header
+      :showCompare.sync="showCompare"
+      :schools="compareSchools"
+      :fields-of-study="compareFieldsOfStudy"
+    />
     <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
       <compare-drawer
         :schools="compareSchools"
-        @toggle-compare-school="handleToggleCompareSchool"
+        :fields-of-study="compareFieldsOfStudy"
+        @toggle-compare-school="handleToggleCompareItem"
         v-on:close-modal="closeModal()"
       ></compare-drawer>
     </v-bottom-sheet>
