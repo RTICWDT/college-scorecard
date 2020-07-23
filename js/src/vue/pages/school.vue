@@ -119,14 +119,6 @@
                         Graduation Rate&nbsp;<tooltip definition="graduation-rate" :version="completionRateFieldDefinition" />
                       </h2>
 
-                      <!-- <donut
-                        v-if="completionRate"
-                        color="#0e365b"
-                        :value="completionRate * 100"
-                        :height="200"
-                      ></donut> -->
-
-                      <!-- TODO - Add Total Percent Text, Handle large display, maybe overlay and color change when certain percent?-->
                       <horizontal-bar
                         v-if="completionRate"
                         :value="completionRate * 100"
@@ -134,8 +126,8 @@
                         :max="100"
                         color="#0e365b"
                         :height="25"
+                        :labels="true"
                       ></horizontal-bar>
-                    
                       <div v-else class="data-na">Data Not Available</div>
                     </div>
 
@@ -173,6 +165,7 @@
                     </div>
                   </v-col>
 
+                  <!--Field Of Study Select Container-->
                   <v-col cols="12" md="6" class="px-sm-5">
                     <v-card
                       class="pa-4"
@@ -225,8 +218,8 @@
 
 
                     </v-card>
-
                   </v-col>
+
                 </v-row>
                 <!-- end: Institution Quick Stats -->
               </v-card>
@@ -237,8 +230,8 @@
                   <v-btn primary @click="none">Close All</v-btn>
                 </v-col>
               </v-row>
-              <v-expansion-panels multiple focusable v-model="panels">
 
+              <v-expansion-panels multiple focusable v-model="panels">
                 <!--Field Of Study Panel-->
                 <v-expansion-panel>
                   <v-expansion-panel-header
@@ -280,14 +273,64 @@
                               v-model="fosSalarySelect"
                             />
                           </v-col>
-
+                          <!--Median Earnings-->
                           <v-col col="12" md="4">
-                            <span>Median Earnings</span>
+                            <h4>
+                              Median Earnings&nbsp
+                              <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                            </h4>
+
+                            <div v-if="fosSalarySelect === 'aid'">
+
+                              <div v-if="_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED)">
+                                <span>{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED) | numeral('$0,0') }}</span>
+                              </div>
+
+                              <div v-else>
+                                <span>N/A</span>
+                              </div>
+
+                            </div>
+
+                            <div v-else-if="fosSalarySelect === 'pell'">
+                              <div v-if="_.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL)">
+                                <span>{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL) | numeral('$0,0') }}</span>
+                              </div>
+
+                              <div v-else>
+                                <span>N/A</span>
+                              </div>
+                            </div>
+                          </v-col>
+                          <!--Monthly Earnings-->
+                          <v-col col="12" md="4">
+                            <h4>
+                              Monthly Earnings&nbsp
+                              <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                            </h4>
+
+                            <div v-if="fosSalarySelect === 'aid'">
+                              <div v-if="_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED)">
+                                <span>{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED) / 12 | numeral('$0,0') }}</span>
+                              </div>
+
+                              <div v-else>
+                                <span>N/A</span>
+                              </div>
+
+                            </div>
+
+                            <div v-else-if="fosSalarySelect === 'pell'">
+                              <div v-if="_.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL)">
+                                <span>{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL) / 12 | numeral('$0,0') }}</span>
+                              </div>
+
+                              <div v-else>
+                                <span>N/A</span>
+                              </div>
+                            </div>
                           </v-col>
 
-                          <v-col col="12" md="4">
-                            <span>Monthly Earnings</span>
-                          </v-col>
                         </v-row>
                       </div>
 
@@ -296,25 +339,76 @@
                         <v-row>
                           <v-col col="12" md="4">
                             <v-checkbox
-                              v-model="fosFinancialCheckbox"
+                              v-model="fosShowDebtAtPrior"
                               label="Include debt borrowed at any prior institutions"
                             ></v-checkbox>
                           </v-col>
 
+                          <!--Median Total-->
                           <v-col col="12" md="4">
-                            <span>Median Earnings</span>
-                          </v-col>
+                            <h4>
+                              Median Total Debt After Graduation&nbsp
+                              <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                            </h4>
 
+                            <div v-if="!fosShowDebtAtPrior">
+                              <div v-if="_.get(selectedFOSDetail, fields.FOS_DEBT_MEDIAN)">
+                                <span>{{_.get(selectedFOSDetail, fields.FOS_DEBT_MEDIAN) | numeral('$0,0') }}</span>
+                              </div>
+
+                              <div v-else>
+                                <span>N/A</span>
+                              </div>
+                            </div>
+
+                            <div v-else>
+                              <div v-if="_.get(selectedFOSDetail, fields.FOS_DEBT_MEDIAN_PRIOR)">
+                                <span>{{_.get(selectedFOSDetail, fields.FOS_DEBT_MEDIAN_PRIOR) | numeral('$0,0') }}</span>
+                              </div>
+
+                              <div v-else>
+                                <span>N/A</span>
+                              </div>
+                            </div>
+
+                          </v-col>
+                          <!--Monthly Loan-->
                           <v-col col="12" md="4">
-                            <span>Monthly Earnings</span>
+                            <h4>
+                              Monthly Loan Payment&nbsp
+                              <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                            </h4>
+
+                            <div v-if="!fosShowDebtAtPrior">
+                              <div v-if="_.get(selectedFOSDetail, fields.FOS_DEBT_MONTHLY)">
+                                <span>{{_.get(selectedFOSDetail,fields.FOS_DEBT_MONTHLY) | numeral('$0,0') }}</span>
+                              </div>
+
+                              <div v-else>
+                                <span>N/A</span>
+                              </div>
+                            </div>
+
+                            <div v-else>
+                              <div v-if="_.get(selectedFOSDetail, fields.FOS_DEBT_MONTHLY_PRIOR)">
+                                <span>{{_.get(selectedFOSDetail, fields.FOS_DEBT_MONTHLY_PRIOR) | numeral('$0,0') }}</span>
+                              </div>
+
+                              <div v-else>
+                                <span>N/A</span>
+                              </div>
+                            </div>
+
                           </v-col>
                         </v-row>
                       </div>
-
-
+                    </div>
+                    <div>
                     </div>
 
-                    <h2 class="mb-3 grey lighten-4">Top Fields of Study at {{ schoolName }} <tooltip definition="field-of-study" :limitedFoS="fieldsLink" /></h2>
+                    <h2 class="mb-3 grey lighten-4">
+                      Top Fields of Study at {{ schoolName }} <tooltip definition="field-of-study" :limitedFoS="fieldsLink" />
+                    </h2>
                     <p class="my-0">
                       <span class="d-block d-sm-inline">Sort by:</span>
                       <v-btn
@@ -650,21 +744,70 @@
                       <div class="fos-inline-information"
                         v-if="selectedFOSDetail"
                       >
-                        <h3>{{selectedFOSDetail.title}}</h3>
+                        <h3>{{selectedFOSDetail.title}} - {{selectedFOSDetail.school.name}}</h3>
                         <v-row>
                           <v-col col="12" md="4">
                             <v-checkbox
-                                    v-model="fosFinancialCheckbox"
-                                    label="Include debt borrowed at any prior institutions"
+                              v-model="fosShowDebtAtPrior"
+                              label="Include debt borrowed at any prior institutions"
                             ></v-checkbox>
                           </v-col>
 
+                          <!--Median Total-->
                           <v-col col="12" md="4">
-                            <span>Median Earnings</span>
-                          </v-col>
+                            <h4>
+                              Median Total Debt After Graduation&nbsp
+                              <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                            </h4>
 
+                            <div v-if="!fosShowDebtAtPrior">
+                              <div v-if="_.get(selectedFOSDetail, fields.FOS_DEBT_MEDIAN)">
+                                <span>{{_.get(selectedFOSDetail, fields.FOS_DEBT_MEDIAN) | numeral('$0,0') }}</span>
+                              </div>
+
+                              <div v-else>
+                                <span>N/A</span>
+                              </div>
+                            </div>
+
+                            <div v-else>
+                              <div v-if="_.get(selectedFOSDetail, fields.FOS_DEBT_MEDIAN_PRIOR)">
+                                <span>{{_.get(selectedFOSDetail, fields.FOS_DEBT_MEDIAN_PRIOR) | numeral('$0,0') }}</span>
+                              </div>
+
+                              <div v-else>
+                                <span>N/A</span>
+                              </div>
+                            </div>
+
+                          </v-col>
+                          <!--Monthly Loan-->
                           <v-col col="12" md="4">
-                            <span>Monthly Earnings</span>
+                            <h4>
+                              Monthly Loan Payment&nbsp
+                              <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                            </h4>
+
+                            <div v-if="!fosShowDebtAtPrior">
+                              <div v-if="_.get(selectedFOSDetail, fields.FOS_DEBT_MONTHLY)">
+                                <span>{{_.get(selectedFOSDetail,fields.FOS_DEBT_MONTHLY) | numeral('$0,0') }}</span>
+                              </div>
+
+                              <div v-else>
+                                <span>N/A</span>
+                              </div>
+                            </div>
+
+                            <div v-else>
+                              <div v-if="_.get(selectedFOSDetail, fields.FOS_DEBT_MONTHLY_PRIOR)">
+                                <span>{{_.get(selectedFOSDetail, fields.FOS_DEBT_MONTHLY_PRIOR) | numeral('$0,0') }}</span>
+                              </div>
+
+                              <div v-else>
+                                <span>N/A</span>
+                              </div>
+                            </div>
+
                           </v-col>
                         </v-row>
                       </div>
@@ -709,16 +852,16 @@
                     <div>
                       <p>Typical earnings in the first year after graduation with the range of highest and lowest median earnings for undergraduate and credential programs for which there is data. For more information, see Fields of Study for this school.</p>
                       <multi-range
-                              :minmax="earningsRange"
-                              variable="earnings.median_earnings"
-                              :max="{ label: '$150,000', value: 150000 }"
+                        :minmax="earningsRange"
+                        variable="earnings.median_earnings"
+                        :max="{ label: '$150,000', value: 150000 }"
                       />
                     </div>
 
                     <div class="fos-inline-information mt-4"
                      v-if="selectedFOSDetail"
                     >
-                      <h3>{{selectedFOSDetail.title}}</h3>
+                      <h3>{{selectedFOSDetail.title}} - {{selectedFOSDetail.school.name}}</h3>
 
                       <v-row>
                         <v-col col="12" md="4">
@@ -727,13 +870,62 @@
                             v-model="fosSalarySelect"
                           />
                         </v-col>
-
+                        <!--Median Earnings-->
                         <v-col col="12" md="4">
-                          <span>Median Earnings</span>
+                          <h4>
+                            Median Earnings&nbsp
+                            <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                          </h4>
+
+                          <div v-if="fosSalarySelect === 'aid'">
+
+                            <div v-if="_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED)">
+                              <span>{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED) | numeral('$0,0') }}</span>
+                            </div>
+
+                            <div v-else>
+                              <span>N/A</span>
+                            </div>
+
+                          </div>
+
+                          <div v-else-if="fosSalarySelect === 'pell'">
+                            <div v-if="_.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL)">
+                              <span>{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL) | numeral('$0,0') }}</span>
+                            </div>
+
+                            <div v-else>
+                              <span>N/A</span>
+                            </div>
+                          </div>
                         </v-col>
-
+                        <!--Monthly Earnings-->
                         <v-col col="12" md="4">
-                          <span>Monthly Earnings</span>
+                          <h4>
+                            Monthly Earnings&nbsp
+                            <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                          </h4>
+
+                          <div v-if="fosSalarySelect === 'aid'">
+                            <div v-if="_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED)">
+                              <span>{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED) / 12 | numeral('$0,0') }}</span>
+                            </div>
+
+                            <div v-else>
+                              <span>N/A</span>
+                            </div>
+
+                          </div>
+
+                          <div v-else-if="fosSalarySelect === 'pell'">
+                            <div v-if="_.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL)">
+                              <span>{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL) / 12 | numeral('$0,0') }}</span>
+                            </div>
+
+                            <div v-else>
+                              <span>N/A</span>
+                            </div>
+                          </div>
                         </v-col>
 
                       </v-row>
@@ -1141,7 +1333,7 @@ export default {
         { text: "Financial Aid Recipients", value: "aid"},
         { text: "Pell Grant Recipients", value: "pell"}
       ],
-      fosFinancialCheckbox:false,
+      fosShowDebtAtPrior:false,
       aidLoanSelect: "fed",
       aidLoanSelectItems:[
         { text: "Federal Student Loans", value: "fed"},
