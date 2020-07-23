@@ -244,10 +244,17 @@
                   <v-expansion-panel-content id="fos-content" class="px-0 py-3 pa-sm-5">
                     <v-row>
                       <v-col cols="12" md="12">
-                        <p class="text-right overline">
-                          Compare Field Of Study 
-                          <v-icon>fa fa-plus-circle</v-icon> 
-                        </p>
+                        <div v-if="selectedFOS">
+                          <v-btn
+                            text
+                            small
+                            class="d-none d-sm-inline"
+                            :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'amber':'green'"
+                            @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
+                          >
+                            <v-icon x-small class="mr-2">fa fa-plus-circle</v-icon>Compare Field of Study
+                          </v-btn>
+                        </div>
 
                         <p>Fields Of Study Offered At {{ schoolName }}</p>
                         <field-of-study-select
