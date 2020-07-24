@@ -410,6 +410,7 @@
                           </v-col>
                         </v-row>
                       </div>
+
                     </div>
                     <div>
                     </div>
@@ -492,7 +493,15 @@
                           </div>
                         </v-expansion-panel-header>
                         <v-expansion-panel-content>
-                          <field-data :fos="fos" />
+                          <field-data-extended
+                            :fos="fos"
+                            :fos-salary-select="fieldDataExtendedSalarySelect"
+                            :fos-salary-select-items="fosSalarySelectItems"
+                            @update-salary-select="fieldDataExtendedSalarySelect = $event"
+                            :fos-show-debt-prior-included.sync="fieldDataExtendedShowPrior"
+                            @update-debt-show-prior="fieldDataExtendedShowPrior = $event"
+                            :fields="fields"
+                          />
                         </v-expansion-panel-content>
                       </v-expansion-panel>
                     </v-expansion-panels>
@@ -1322,6 +1331,7 @@ import MultiRange from "components/vue/MultiRange.vue";
 import querystring from "querystring";
 import FieldOfStudySelect from "components/vue/FieldOfStudySelect.vue";
 import FieldOfStudySearch from '../../components/vue/FieldOfStudySearch.vue';
+import FieldDataExtended from '../../components/vue/FieldDataExtended.vue';
 
 import { compare } from "vue/mixins.js";
 import ComplexFields from "vue/mixins/ComplexFields.js";
@@ -1351,7 +1361,8 @@ export default {
     "search-form": SearchForm,
     "multi-range": MultiRange,
     'field-of-study-select': FieldOfStudySelect,
-    'field-of-study-search': FieldOfStudySearch
+    'field-of-study-search': FieldOfStudySearch,
+    'field-data-extended': FieldDataExtended
   },
   data() {
     return {
@@ -1383,7 +1394,9 @@ export default {
       aidShowMedianDebtWithPrior: false,
       aidShowMonthlyPaymentWithPrior: false,
       sidebarSearchToggle: "school",
-      urlParams:null
+      urlParams:null,
+      fieldDataExtendedSalarySelect:"aid",
+      fieldDataExtendedShowPrior: false,
     };
   },
   computed: {
@@ -1669,6 +1682,9 @@ export default {
         institutionName: fosObject.school.name,
         fosTitle: fosObject.title
       }
+    },
+    handleExtendedFieldSelect(event){
+      console.log(event);
     }
   },
   mounted() {
