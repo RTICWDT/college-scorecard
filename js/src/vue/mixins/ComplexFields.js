@@ -270,19 +270,19 @@ export default {
                     // TODO - Add correct names
                     if(this.aidShowMedianDebtWithPrior){
                         if(this.aidLoanSelect === 'fed'){
-                            tempObject.debt = fieldOfStudy.debt.test.federal.median_total_prior;
-                            tempObject.payment = fieldOfStudy.debt.test.federal.monthly_payment_prior;
+                            tempObject.debt = _.get(fieldOfStudy, fields['FOS_DEBT_MEDIAN_PRIOR']);
+                            tempObject.payment = _.get(fieldOfStudy, fields['FOS_DEBT_MONTHLY_PRIOR']);
                         }else{
-                            tempObject.debt = fieldOfStudy.debt.test.parent.median_total_prior;
-                            tempObject.payment = fieldOfStudy.debt.test.parent.monthly_payment_prior;
+                            tempObject.debt = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MEDIAN_PRIOR']);
+                            tempObject.payment = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MONTHLY_PRIOR']);
                         }
                     }else{
                         if(this.aidLoanSelect === 'fed'){
-                            tempObject.debt = fieldOfStudy.debt.test.federal.median_total_at;
-                            tempObject.payment = fieldOfStudy.debt.test.federal.monthly_payment_at;
+                            tempObject.debt = _.get(fieldOfStudy, fields['FOS_DEBT_MEDIAN']);
+                            tempObject.payment = _.get(fieldOfStudy, fields['FOS_DEBT_MONTHLY']);
                         }else{
-                            tempObject.debt = fieldOfStudy.debt.test.parent.median_total_at;
-                            tempObject.payment = fieldOfStudy.debt.test.parent.monthly_payment_at;
+                            tempObject.debt = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MEDIAN']);
+                            tempObject.payment = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MONTHLY']);
                         }
                     }
 

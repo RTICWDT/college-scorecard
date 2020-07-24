@@ -126,6 +126,11 @@ export const fields = {
   FOS_DEBT_MONTHLY: 'debt.test.federal.monthly_payment_at',
   FOS_DEBT_MONTHLY_PRIOR: 'debt.test.federal.monthly_payment_prior',
 
+  FOS_PP_DEBT_MEDIAN: 'debt.test.parent.median_total_at',
+  FOS_PP_DEBT_MEDIAN_PRIOR: 'debt.test.parent.median_total_prior',
+  FOS_PP_DEBT_MONTHLY: 'debt.test.parent.monthly_payment_at',
+  FOS_PP_DEBT_MONTHLY_PRIOR: 'debt.test.parent.monthly_payment_prior',
+
 
   //Location
   LATITUDE:                 'location.lat',
