@@ -170,10 +170,7 @@ export default {
     },
     fosSalarySelectItems:{
       type: Array,
-      default:[
-        { text: "Financial Aid Recipients", value: "aid"},
-        { text: "Pell Grant Recipients", value: "pell"}
-      ]
+      required: true
     },
     fosSalarySelect:{
       type: String,

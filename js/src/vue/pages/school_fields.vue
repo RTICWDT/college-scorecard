@@ -96,7 +96,15 @@
                           <span class="school-fields-fos-degree-title">{{ fos.title.slice(0,-1) }} - {{ fos.credential.title }}</span>
                         </v-expansion-panel-header>
                         <v-expansion-panel-content>
-                          <field-data :fos="fos" />
+                          <field-data-extended
+                            :fos="fos"
+                            :fos-salary-select-items="fosSalarySelectItems"
+                            :fos-salary-select="fieldDataExtendedSalarySelect"
+                            @update-salary-select="fieldDataExtendedSalarySelect = $event"
+                            :fos-show-debt-prior-included.sync="fieldDataExtendedShowPrior"
+                            @update-debt-show-prior="fieldDataExtendedShowPrior = $event"
+                            :fields="fields"
+                          />
                         </v-expansion-panel-content>
                       </v-expansion-panel>
                     </v-expansion-panels> 
@@ -141,6 +149,7 @@ import PayingForCollege from "components/vue/PayingForCollege.vue";
 import CompareDrawer from "components/vue/CompareDrawer.vue";
 import CompareHeader from "components/vue/CompareHeader.vue";
 import FieldData from "components/vue/FieldData.vue";
+import FieldDataExtended from '../../components/vue/FieldDataExtended.vue';
 import { compare } from 'vue/mixins.js';
 import { apiGet } from '../api.js';
 import { fields } from '../constants.js';
@@ -155,7 +164,8 @@ export default {
     "paying-for-college": PayingForCollege,
     "compare-drawer": CompareDrawer,
     "compare-header": CompareHeader,
-    'field-data': FieldData
+    'field-data': FieldData,
+    'field-data-extended': FieldDataExtended
   },
   data() {
     return {
@@ -175,7 +185,13 @@ export default {
         { id: 7, credential: "First Professional Degree" },
         { id: 8, credential: "Graduate/Professional Certificate" }
       ],
-      currentFilter: 0
+      currentFilter: 0,
+      fieldDataExtendedSalarySelect: 'aid',
+      fieldDataExtendedShowPrior: false,
+      fosSalarySelectItems: [
+        { text: "Financial Aid Recipients", value: "aid"},
+        { text: "Pell Grant Recipients", value: "pell"}
+      ]
     };
   },
   computed: {
