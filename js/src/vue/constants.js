@@ -94,6 +94,10 @@ export const fields = {
 
   NET_PRICE_CALC_URL:       'school.price_calculator_url',
 
+  // TEST
+  PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MIN: 'latest.aid.test.pecent_parent_plus_min',
+  PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MAX: 'latest.aid.test.pecent_parent_plus_max',
+
   // program reporters
   PROGRAM_REPORTER_OFFERED: 'latest.academics.program_reporter.programs_offered',
   PROGRAM_REPORTER_CIP:     'cip_6_digit',
@@ -116,10 +120,16 @@ export const fields = {
   FOS_GRAD_COUNT: 'counts.ipeds_awards2',
   FOS_EARNINGS_FED: 'earnings.test.median_fed',
   FOS_EARNINGS_PELL: 'earnings.test.median_pell',
+
   FOS_DEBT_MEDIAN: 'debt.test.federal.median_total_at',
   FOS_DEBT_MEDIAN_PRIOR: 'debt.test.federal.median_total_prior',
   FOS_DEBT_MONTHLY: 'debt.test.federal.monthly_payment_at',
   FOS_DEBT_MONTHLY_PRIOR: 'debt.test.federal.monthly_payment_prior',
+
+  FOS_PP_DEBT_MEDIAN: 'debt.test.parent.median_total_at',
+  FOS_PP_DEBT_MEDIAN_PRIOR: 'debt.test.parent.median_total_prior',
+  FOS_PP_DEBT_MONTHLY: 'debt.test.parent.monthly_payment_at',
+  FOS_PP_DEBT_MONTHLY_PRIOR: 'debt.test.parent.monthly_payment_prior',
 
 
   //Location
