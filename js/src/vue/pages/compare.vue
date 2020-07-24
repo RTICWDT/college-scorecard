@@ -405,6 +405,7 @@
                 focusable
                 v-model="panels"
               >
+                <!--College Information-->
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     @click="trackAccordion('College Information')"
@@ -489,6 +490,7 @@
                     </compare-section>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+                <!--Costs-->
                 <v-expansion-panel>
                   <v-expansion-panel-header @click="trackAccordion('Costs')">Costs</v-expansion-panel-header>
                   <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
@@ -541,6 +543,7 @@
                     </compare-section>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+                <!--Graduation & Retention-->
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     @click="trackAccordion('Graduation &amp; Retention')"
@@ -590,12 +593,29 @@
                     </compare-section>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+                <!--Financial Aid & Debt-->
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     @click="trackAccordion('Financial Aid &amp; Debt')"
                   >Financial Aid & Debt</v-expansion-panel-header>
                   <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
+                    <v-row>
+                      <v-col cols="12" md="6">
+                        <v-select
+                          :items="aidLoanSelectItems"
+                          v-model="aidLoanSelect"
+                        />
+                      </v-col>
+                      <v-col cols="12" md="6">
+                        <v-checkbox
+                          v-model="aidShowMedianDebtWithPrior"
+                          label="Include debt borrowed at prior institutions"
+                        />
+                      </v-col>
+                    </v-row>
+
                     <compare-section
+                      v-if="aidLoanSelect === 'fed'"
                       :schools="schools"
                       title="Students Receiving Federal Loans"
                       definition="student-aid"
@@ -609,6 +629,21 @@
                         chart: 'HorizontalBar'
                       }"
                     />
+
+                    <!--TODO - Update Tool Tip-->
+                    <compare-section
+                      v-else
+                      :schools="schools"
+                      title="Estimated percent of student who had a parent who borrowed"
+                      definition="student-aid"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
+                      :config="{
+                        computedField: 'estimatedParentBorrowedText',
+                        chart:'estimatedParentBorrowed'
+                      }"
+                    />
+
                     <compare-section
                       :schools="schools"
                       title="Median Total Debt After Graduation"
@@ -619,7 +654,10 @@
                         computedField: 'debtRange',
                         color: '#0e365b',
                         chart: 'MultiRange',
-                        multiRangeVariable: 'debt.median_debt'
+                        multiRangeVariable: 'debt',
+                        multiRangeReactive: true,
+                        multiRangeAidShowMedianDebtWithPrior: aidShowMedianDebtWithPrior,
+                        multiRangeAidLoanSelect: aidLoanSelect
                       }"
                     />
 
@@ -633,12 +671,16 @@
                         computedField: 'debtRange',
                         color: '#0e365b',
                         chart: 'MultiRange',
-                        multiRangeVariable: 'debt.monthly_debt_payment',
+                        multiRangeVariable: 'payment',
+                        multiRangeReactive: true,
+                        multiRangeAidShowMedianDebtWithPrior: aidShowMedianDebtWithPrior,
+                        multiRangeAidLoanSelect: aidLoanSelect,
                         max: { value: 1000, label: '$1,000' }
                       }"
                     />
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+                <!--Salary after Completing-->
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     @click="trackAccordion('Salary after Completing by Field of Study')"
@@ -658,6 +700,7 @@
                     />
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+                <!--Test Scores & Acceptance-->
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     @click="trackAccordion('Test Scores & Acceptance')"
@@ -852,7 +895,13 @@ export default {
         { text: "Financial Aid Recipients", value: "aid"},
         { text: "Pell Grant Recipients", value: "pell"}
       ],
-      fosFinancialCheckboxIncludePrior: false
+      fosFinancialCheckboxIncludePrior: false,
+      aidShowMedianDebtWithPrior: false,
+      aidLoanSelect:'fed',
+      aidLoanSelectItems:[
+        { text: "Federal Student Loans", value: "fed"},
+        { text: "Parent Plus Loans", value:"plus"}
+      ],
     };
   },
   computed: {

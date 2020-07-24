@@ -30,7 +30,7 @@
 
     <multi-range 
         v-if="school && config.chart=='MultiRange'"
-        :minmax="value" 
+        :minmax="value"
         :variable="config.multiRangeVariable" 
         :max="config.max? config.max: { label: '$150,000', value: 150000 }"
     />
@@ -58,6 +58,17 @@
             </v-col>
 
         </v-row>
+    </div>
+
+    <div
+      v-if="school && config.chart=='estimatedParentBorrowed'"
+      >
+        <div
+          v-if="estimatedParentBorrowedText"
+          class="display-2 navy-text font-weight-bold"
+        >{{estimatedParentBorrowedText}}
+        </div>
+        <div v-else class="data-na">Data Not Available</div>
     </div>
 
   </div>
@@ -123,6 +134,8 @@ export default {
           return this.income[this.config.currentIncomeFilter];
       } else if (this.config.type == "percent") {
         return Math.round(this[this.config.computedField] * 100);
+      }else if(this.config.multiRangeReactive){
+        return this.generateDebtRange(this.allFieldsOfStudy, this.config.multiRangeAidShowMedianDebtWithPrior, this.config.multiRangeAidLoanSelect);
       } else {
         return this[this.config.computedField];
       }
