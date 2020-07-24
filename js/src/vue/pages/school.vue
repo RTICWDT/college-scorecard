@@ -232,6 +232,7 @@
               </v-row>
 
               <v-expansion-panels multiple focusable v-model="panels">
+
                 <!--Field Of Study Panel-->
                 <v-expansion-panel>
                   <v-expansion-panel-header
@@ -677,39 +678,72 @@
                     <v-card v-else-if="aidFlag==3" color="blue" class='pa-5 white--text'>{{site.data.glossary.ogc.flag3}}</v-card>
                     <v-card v-else-if="aidFlag==8" color="blue" class='pa-5 white--text'>{{site.data.glossary.ogc.flag8}}</v-card>
                     <div v-else>
+
+                      <!--Federal/Parent PLUS select-->
+<!--                      <v-select-->
+<!--                        :items="aidLoanSelectItems"-->
+<!--                        v-model="aidLoanSelect"-->
+<!--                      />-->
+
                       <v-row>
                         <v-col cols="12" md="6">
                           <v-select
                             :items="aidLoanSelectItems"
                             v-model="aidLoanSelect"
                           />
-                          <h2 class="mb-3">
-                            Students Receiving Federal Loans
-                            <tooltip definition="student-aid" />
-                          </h2>
-                          <donut
-                            color="#0e365b"
-                            :value="studentsReceivingLoans * 100"
-                            :height="200"
-                            v-if="studentsReceivingLoans"
-                          ></donut>
-                          <div v-else class="data-na">Data Not Available</div>
-                          <p>At some schools where few students borrow federal loans, the typical undergraduate may leave school with $0 in debt.</p>
                         </v-col>
+                        <v-col cols="12" md="6">
+                          <v-checkbox
+                            v-model="aidShowMedianDebtWithPrior"
+                            label="Include debt borrowed at prior institutions"
+                          />
+                        </v-col>
+
+                        <v-col cols="12" md="6">
+                          <div v-if="aidLoanSelect === 'fed'">
+                            <h2 class="mb-3">
+                              Students Receiving Federal Loans
+                              <tooltip definition="student-aid" />
+                            </h2>
+                            <donut
+                              v-if="studentsReceivingLoans"
+                              color="#0e365b"
+                              :value="studentsReceivingLoans * 100"
+                              :height="200"
+                            ></donut>
+                            <div v-else class="data-na">Data Not Available</div>
+                            <p>At some schools where few students borrow federal loans, the typical undergraduate may leave school with $0 in debt.</p>
+                          </div>
+                          <div v-else>
+                            <h2 class="mb-3">
+                              Estimated percent of students who had a parent who borrowed
+                              <!--TODO Update Tool Tip-->
+                              <tooltip definition="student-aid" />
+                            </h2>
+                            <div
+                              v-if="estimatedParentBorrowedText"
+                              class="display-2 navy-text font-weight-bold"
+                            >{{estimatedParentBorrowedText}}
+                            </div>
+                            <div v-else class="data-na">Data Not Available</div>
+                            <p>Descriptive text about Parent Plus</p>
+                          </div>
+                        </v-col>
+
                         <v-col cols="12" md="6">
                           <h2 class="mb-3">
                             Median Total Debt After Graduation
                             <tooltip definition="avg-debt" :isBranch="isBranch" :limitedFoS="fieldsLink" />
                           </h2>
                           <p>Total debt after graduation depends on field of study for undergraduate borrowers who complete college.</p>
-                          <v-checkbox
-                            v-model="aidDebtPriorInstitutions"
-                            label="Include debt borrowed at prior institutions"
-                          />
+<!--                          <v-checkbox-->
+<!--                            v-model="aidShowMedianDebtWithPrior"-->
+<!--                            label="Include debt borrowed at prior institutions"-->
+<!--                          />-->
 
                           <multi-range
                             :minmax="debtRange"
-                            variable="debt.median_debt"
+                            variable="debt"
                             :max=" { label: '$100,000', value: 100000 }"
                           />
 
@@ -718,22 +752,22 @@
                             <tooltip definition="avg-loan-payment" :isBranch="isBranch" :limitedFoS="fieldsLink" />
                           </h2>
 
-                          <v-checkbox
-                            v-model="aidPaymentPriorInstitutions"
-                            label="Include debt borrowed at prior institutions"
-                          />
+<!--                          <v-checkbox-->
+<!--                            v-model="aidShowMedianDebtWithPrior"-->
+<!--                            label="Include debt borrowed at prior institutions"-->
+<!--                          />-->
 
                           <div v-if="debtRange && debtRange.single">
                             <div
                               class="display-2 navy-text font-weight-bold"
                               v-if="debtRange.min"
-                            >{{ debtRange.min.debt.monthly_debt_payment | numeral('$0,0') }}/mo</div>
+                            >{{ debtRange.min.payment | numeral('$0,0') }}/mo</div>
                           </div>
                           <div v-else-if="debtRange && debtRange.min">
                             <div
                               class="display-2 navy-text font-weight-bold"
                               v-if="debtRange.min"
-                            >{{ debtRange.min.debt.monthly_debt_payment | numeral('$0,0') }}-{{ debtRange.max.debt.monthly_debt_payment | numeral('0,0') }}/mo</div>
+                            >{{ debtRange.min.debt.payment | numeral('$0,0') }}-{{ debtRange.max.payment | numeral('0,0') }}/mo</div>
                           </div>
                           <div v-else class="data-na">Data Not Available</div>
 
@@ -1346,8 +1380,8 @@ export default {
         { text: "Federal Student Loans", value: "fed"},
         { text: "Parent Plus Loans", value:"plus"}
       ],
-      aidDebtPriorInstitutions: false,
-      aidPaymentPriorInstitutions: false,
+      aidShowMedianDebtWithPrior: false,
+      aidShowMonthlyPaymentWithPrior: false,
       sidebarSearchToggle: "school",
       urlParams:null
     };

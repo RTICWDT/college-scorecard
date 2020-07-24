@@ -248,19 +248,71 @@ export default {
             return fos;
         },
         debtRange() {
+            // TODO - This might need a refactor
             if (!this.allFieldsOfStudy) return null;
             let fos = this.allFieldsOfStudy;
             if(!fos.length)
             {
                 fos = [fos];
             }
-            let range = false; 
-            let cleanDebt = fos.filter(
-                obj => obj.debt.median_debt && obj.credential.level <= 3
-            );
+            let range = false;
+
+            let cleanDebt = fos.reduce((result, fieldOfStudy) => {
+                if(fieldOfStudy.credential.level <= 3){
+                    let tempObject = {
+                        debt:null,
+                        title: fieldOfStudy.title,
+                        credential:{
+                            title: fieldOfStudy.credential.title
+                        }
+                    }
+
+                    // TODO - Add correct names
+                    if(this.aidShowMedianDebtWithPrior){
+                        if(this.aidLoanSelect === 'fed'){
+                            tempObject.debt = fieldOfStudy.debt.test.federal.median_total_prior;
+                            tempObject.payment = fieldOfStudy.debt.test.federal.monthly_payment_prior;
+                        }else{
+                            tempObject.debt = fieldOfStudy.debt.test.parent.median_total_prior;
+                            tempObject.payment = fieldOfStudy.debt.test.parent.monthly_payment_prior;
+                        }
+                    }else{
+                        if(this.aidLoanSelect === 'fed'){
+                            tempObject.debt = fieldOfStudy.debt.test.federal.median_total_at;
+                            tempObject.payment = fieldOfStudy.debt.test.federal.monthly_payment_at;
+                        }else{
+                            tempObject.debt = fieldOfStudy.debt.test.parent.median_total_at;
+                            tempObject.payment = fieldOfStudy.debt.test.parent.monthly_payment_at;
+                        }
+                    }
+
+                    result.push(tempObject);
+                }
+
+                return result;
+            },[]);
+
+            // let cleanDebt = fos.filter((fieldOfStudy) => {
+            //     if(this.aidShowMedianDebtWithPrior){
+            //         if(this.aidLoanSelect === 'fed'){
+            //             return fieldOfStudy.debt.test.federal.median_total_prior && fieldOfStudy.credential.level <= 3
+            //         }else{
+            //             return fieldOfStudy.debt.test.parent.median_total_prior && fieldOfStudy.credential.level <= 3
+            //         }
+            //     }else{
+            //         if(this.aidLoanSelect === 'fed'){
+            //             return fieldOfStudy.debt.test.federal.median_total_at && fieldOfStudy.credential.level <= 3
+            //         }else{
+            //             return fieldOfStudy.debt.test.parent.median_total_at && fieldOfStudy.credential.level <= 3
+            //         }
+            //     }
+            //   }
+            // );
+
             let orderedDebt = cleanDebt.sort(
-                (a, b) => a.debt.median_debt - b.debt.median_debt
+                (a, b) => a.debt - b.debt
             );
+
             if(orderedDebt[0]==null)
             {
                 return null;
@@ -268,7 +320,7 @@ export default {
             else
             {
                 return {
-                    single: orderedDebt.length == 1 || (orderedDebt[0].debt.median_debt == orderedDebt[orderedDebt.length-1].debt.median_debt),
+                    single: orderedDebt.length == 1 || (orderedDebt[0].debt == orderedDebt[orderedDebt.length-1].debt),
                     min: orderedDebt[0],
                     max: orderedDebt[orderedDebt.length - 1]
                 }
@@ -357,6 +409,25 @@ export default {
             let id = _.get(this.school, this.fields['ID']);
             let name = _.get(this.school, this.fields['NAME'], '(unknown)');
             return this.$baseUrl+'/school/?' + id + '-' + name.replace(/\W+/g, '-');
+        },
+        estimatedParentBorrowedText(){
+            if (!this.school ||
+              _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MIN']) === 'undefined' ||
+              _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MAX']) === 'undefined'
+            ){
+                return null;
+            }
+
+            return this.formatParentPlusText(
+              _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MIN']),
+              _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MAX'])
+            );
+        }
+    },
+    methods: {
+        // Moving items down here for easier testing.
+        formatParentPlusText(min, max) {
+            return `${min}-${max}%`;
         }
     }
 }
