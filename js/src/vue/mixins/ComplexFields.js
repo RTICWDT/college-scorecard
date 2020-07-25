@@ -250,81 +250,68 @@ export default {
         debtRange() {
             // TODO - This might need a refactor
             if (!this.allFieldsOfStudy) return null;
-            let fos = this.allFieldsOfStudy;
-            if(!fos.length)
-            {
-                fos = [fos];
-            }
-            let range = false;
 
-            let cleanDebt = fos.reduce((result, fieldOfStudy) => {
-                if(fieldOfStudy.credential.level <= 3){
-                    let tempObject = {
-                        debt:null,
-                        title: fieldOfStudy.title,
-                        credential:{
-                            title: fieldOfStudy.credential.title
-                        }
-                    }
+            return this.generateDebtRange(this.allFieldsOfStudy, this.aidShowMedianDebtWithPrior, this.aidLoanSelect);
 
-                    // TODO - Add correct names
-                    if(this.aidShowMedianDebtWithPrior){
-                        if(this.aidLoanSelect === 'fed'){
-                            tempObject.debt = _.get(fieldOfStudy, fields['FOS_DEBT_MEDIAN_PRIOR']);
-                            tempObject.payment = _.get(fieldOfStudy, fields['FOS_DEBT_MONTHLY_PRIOR']);
-                        }else{
-                            tempObject.debt = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MEDIAN_PRIOR']);
-                            tempObject.payment = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MONTHLY_PRIOR']);
-                        }
-                    }else{
-                        if(this.aidLoanSelect === 'fed'){
-                            tempObject.debt = _.get(fieldOfStudy, fields['FOS_DEBT_MEDIAN']);
-                            tempObject.payment = _.get(fieldOfStudy, fields['FOS_DEBT_MONTHLY']);
-                        }else{
-                            tempObject.debt = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MEDIAN']);
-                            tempObject.payment = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MONTHLY']);
-                        }
-                    }
+            // let fos = this.allFieldsOfStudy;
+            // if(!fos.length)
+            // {
+            //     fos = [fos];
+            // }
+            // let range = false;
 
-                    result.push(tempObject);
-                }
-
-                return result;
-            },[]);
-
-            // let cleanDebt = fos.filter((fieldOfStudy) => {
-            //     if(this.aidShowMedianDebtWithPrior){
-            //         if(this.aidLoanSelect === 'fed'){
-            //             return fieldOfStudy.debt.test.federal.median_total_prior && fieldOfStudy.credential.level <= 3
-            //         }else{
-            //             return fieldOfStudy.debt.test.parent.median_total_prior && fieldOfStudy.credential.level <= 3
+            // let cleanDebt = fos.reduce((result, fieldOfStudy) => {
+            //     if(fieldOfStudy.credential.level <= 3){
+            //         let tempObject = {
+            //             debt:null,
+            //             title: fieldOfStudy.title,
+            //             credential:{
+            //                 title: fieldOfStudy.credential.title
+            //             }
             //         }
-            //     }else{
-            //         if(this.aidLoanSelect === 'fed'){
-            //             return fieldOfStudy.debt.test.federal.median_total_at && fieldOfStudy.credential.level <= 3
+            //
+            //         if(this.aidShowMedianDebtWithPrior){
+            //             if(this.aidLoanSelect === 'fed'){
+            //                 tempObject.debt = _.get(fieldOfStudy, fields['FOS_DEBT_MEDIAN_PRIOR']);
+            //                 tempObject.payment = _.get(fieldOfStudy, fields['FOS_DEBT_MONTHLY_PRIOR']);
+            //             }else{
+            //                 tempObject.debt = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MEDIAN_PRIOR']);
+            //                 tempObject.payment = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MONTHLY_PRIOR']);
+            //             }
             //         }else{
-            //             return fieldOfStudy.debt.test.parent.median_total_at && fieldOfStudy.credential.level <= 3
+            //             if(this.aidLoanSelect === 'fed'){
+            //                 tempObject.debt = _.get(fieldOfStudy, fields['FOS_DEBT_MEDIAN']);
+            //                 tempObject.payment = _.get(fieldOfStudy, fields['FOS_DEBT_MONTHLY']);
+            //             }else{
+            //                 tempObject.debt = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MEDIAN']);
+            //                 tempObject.payment = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MONTHLY']);
+            //             }
             //         }
+            //
+            //         result.push(tempObject);
             //     }
-            //   }
+            //
+            //     return result;
+            // },[]);
+
+            // let cleanDebt = this.cleanDebt(fos, this.aidShowMedianDebtWithPrior, this.aidLoanSelect);
+            //
+            // let orderedDebt = cleanDebt.sort(
+            //     (a, b) => a.debt - b.debt
             // );
-
-            let orderedDebt = cleanDebt.sort(
-                (a, b) => a.debt - b.debt
-            );
-
-            if(orderedDebt[0]==null)
-            {
-                return null;
-            }
-            else
-            {
-                return {
-                    single: orderedDebt.length == 1 || (orderedDebt[0].debt == orderedDebt[orderedDebt.length-1].debt),
-                    min: orderedDebt[0],
-                    max: orderedDebt[orderedDebt.length - 1]
-                }
-            }
+            //
+            // if(orderedDebt[0]==null)
+            // {
+            //     return null;
+            // }
+            // else
+            // {
+            //     return {
+            //         single: orderedDebt.length == 1 || (orderedDebt[0].debt == orderedDebt[orderedDebt.length-1].debt),
+            //         min: orderedDebt[0],
+            //         max: orderedDebt[orderedDebt.length - 1]
+            //     }
+            // }
         },
         earningsRange() {
             if (!this.allFieldsOfStudy) return null;
@@ -428,6 +415,100 @@ export default {
         // Moving items down here for easier testing.
         formatParentPlusText(min, max) {
             return `${min}-${max}%`;
+        },
+        cleanDebt(fos, aidShowMedianDebtWithPrior, aidLoanSelect){
+            let cleanDebt = fos.reduce((result, fieldOfStudy) => {
+                if(fieldOfStudy.credential.level <= 3){
+                    let tempObject = {
+                        debt:null,
+                        title: fieldOfStudy.title,
+                        credential:{
+                            title: fieldOfStudy.credential.title
+                        }
+                    }
+
+                    if(aidShowMedianDebtWithPrior){
+                        if(aidLoanSelect === 'fed'){
+                            tempObject.debt = _.get(fieldOfStudy, fields['FOS_DEBT_MEDIAN_PRIOR']);
+                            tempObject.payment = _.get(fieldOfStudy, fields['FOS_DEBT_MONTHLY_PRIOR']);
+                        }else{
+                            tempObject.debt = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MEDIAN_PRIOR']);
+                            tempObject.payment = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MONTHLY_PRIOR']);
+                        }
+                    }else{
+                        if(aidLoanSelect === 'fed'){
+                            tempObject.debt = _.get(fieldOfStudy, fields['FOS_DEBT_MEDIAN']);
+                            tempObject.payment = _.get(fieldOfStudy, fields['FOS_DEBT_MONTHLY']);
+                        }else{
+                            tempObject.debt = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MEDIAN']);
+                            tempObject.payment = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MONTHLY']);
+                        }
+                    }
+
+                    result.push(tempObject);
+                }
+
+                return result;
+            },[]);
+
+            return cleanDebt;
+        },
+        generateDebtRange(fieldsOfStudy, aidShowMedianDebtWithPrior, aidLoanSelect){
+            // let fos = this.allFieldsOfStudy;
+            if(!fieldsOfStudy.length)
+            {
+                fieldsOfStudy = [fieldsOfStudy];
+            }
+            let cleanDebt = fieldsOfStudy.reduce((result, fieldOfStudy) => {
+                if(fieldOfStudy.credential.level <= 3){
+                    let tempObject = {
+                        debt:null,
+                        title: fieldOfStudy.title,
+                        credential:{
+                            title: fieldOfStudy.credential.title
+                        }
+                    }
+
+                    if(aidShowMedianDebtWithPrior){
+                        if(aidLoanSelect === 'fed'){
+                            tempObject.debt = _.get(fieldOfStudy, fields['FOS_DEBT_MEDIAN_PRIOR']);
+                            tempObject.payment = _.get(fieldOfStudy, fields['FOS_DEBT_MONTHLY_PRIOR']);
+                        }else{
+                            tempObject.debt = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MEDIAN_PRIOR']);
+                            tempObject.payment = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MONTHLY_PRIOR']);
+                        }
+                    }else{
+                        if(aidLoanSelect === 'fed'){
+                            tempObject.debt = _.get(fieldOfStudy, fields['FOS_DEBT_MEDIAN']);
+                            tempObject.payment = _.get(fieldOfStudy, fields['FOS_DEBT_MONTHLY']);
+                        }else{
+                            tempObject.debt = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MEDIAN']);
+                            tempObject.payment = _.get(fieldOfStudy, fields['FOS_PP_DEBT_MONTHLY']);
+                        }
+                    }
+
+                    result.push(tempObject);
+                }
+
+                return result;
+            },[]);
+
+            let orderedDebt = cleanDebt.sort(
+              (a, b) => a.debt - b.debt
+            );
+
+            if(orderedDebt[0]==null)
+            {
+                return null;
+            }
+            else
+            {
+                return {
+                    single: orderedDebt.length == 1 || (orderedDebt[0].debt == orderedDebt[orderedDebt.length-1].debt),
+                    min: orderedDebt[0],
+                    max: orderedDebt[orderedDebt.length - 1]
+                }
+            }
         }
     }
 }
