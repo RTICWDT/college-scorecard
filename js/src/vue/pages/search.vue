@@ -22,13 +22,29 @@
         class="searchSidebar"
         clipped
       >
+
+        <context-toggle
+          :display-toggle="displayToggle"
+          @context-switch-click="handleContextToggle"
+        />
+
         <!-- Search Form Component -->
         <search-form
+          v-if="displayToggle === 'institutions'"
           :urlParsedParams="urlParsedParams"
           auto-submit
           display-all-filters
-          @search-query="searchAPI"
+          @search-query="handleInstitutionSearch"
         />
+
+        <!-- Search Fields of Study Component -->
+        <search-fos-form
+          v-else-if="displayToggle === 'fos'"
+          :url-parsed-params="urlParsedParams"
+          auto-submit
+          @search-query="handleFieldOfStudySearch"
+        />
+
       </v-navigation-drawer>
       <v-content>
         <v-container fluid class="pa-0">
@@ -152,7 +168,7 @@
                 </div>
 
                 <div class="search-result-cards-container" v-if="!isLoading">
-                  <v-row>
+                  <v-row v-if="displayToggle === 'institutions'">
                     <v-col
                       v-for="school in results.schools"
                       :key="school.id"
@@ -167,6 +183,19 @@
                         @toggle-compare-school="handleToggleCompareSchool"
                         :is-selected="isResultCardSelected(school.id,compareSchools)"
                       />
+                    </v-col>
+                  </v-row>
+                  <v-row v-else>
+                    <v-col
+                      v-for="school in results.schools"
+                      :key="school.id"
+                      cols="12"
+                      lg="3"
+                      md="4"
+                      sm="6"
+                      class="d-flex align-stretch"
+                    >
+                      <span>{{school.id}}</span>
                     </v-col>
                   </v-row>
                 </div>
@@ -245,6 +274,8 @@ import Share from "../../components/vue/Share.vue";
 import NameAutocomplete from "../../components/vue/NameAutocomplete.vue";
 import URLHistory from "../mixins/URLHistory.js";
 import PrepareParams from '../mixins/PrepareParams.js';
+import ContextToggle from '../../components/vue/ContextToggle.vue';
+import SearchFieldsOfStudyForm from '../../components/vue/SearchFieldsOfStudyForm.vue';
 
 import _ from "lodash";
 // import querystring from 'querystring';
@@ -264,7 +295,9 @@ export default {
     "canned-search-container": CannedSearchContainer,
     "compare-header": CompareHeader,
     "share": Share,
-    "name-autocomplete": NameAutocomplete
+    "name-autocomplete": NameAutocomplete,
+    'context-toggle': ContextToggle,
+    'search-fos-form': SearchFieldsOfStudyForm
   },
   mixins:[URLHistory,PrepareParams],
   props: {
@@ -313,7 +346,8 @@ export default {
         { type: "Annual Cost", field: "avg_net_price:asc" },
         { type: "Graduation Rate", field: "completion_rate:desc" }
       ],
-      shareUrl: null
+      shareUrl: null,
+      displayToggle: 'institutions'
     };
   },
   created() {
@@ -332,9 +366,23 @@ export default {
       ? Number(this.urlParsedParams.page) + 1
       : 1;
 
+    // Set Toggle Value
+    if(typeof this.urlParsedParams.toggle != 'undefined'){
+      if(this.urlParsedParams.toggle === 'institutions'){
+        this.displayToggle = 'institutions';
+      }else{
+        this.displayToggle = 'fos';
+      }
+    }
+
     // Create Debounce function for this page.
     this.debounceSearchUpdate = _.debounce(function(params) {
-      this.searchAPI(params, true);
+      // this.searchAPI(params, true);
+      if(this.displayToggle === 'institutions'){
+        this.handleInstitutionSearch(params);
+      }else{
+        this.handleFieldOfStudySearch(params);
+      }
     }, 1000);
   },
   mounted() {},
@@ -349,16 +397,16 @@ export default {
     }
   },
   methods: {
-    searchAPI(params = {}) {
+    searchAPI(params = {}, returnFields = []) {
       // TODO - Clean this method up, It does way more than just SearchAPI.
-      // Better Encapsilation.
+      // Better Encapsulation.
 
       this.$emit("loading", true);
 
       this.error.message = null;
 
-      let poppingState = false;
-      let alreadyLoaded = false;
+      // let poppingState = false;
+      // let alreadyLoaded = false;
 
       //Add page and sort items into params.
       if(params.page === 0){
@@ -374,52 +422,21 @@ export default {
 
       let query = this.prepareParams(params);
 
-      query.fields = [
-        // we need the id to link it
-        fields.ID,
-        // basic display fields
-        fields.NAME,
-        fields.CITY,
-        fields.STATE,
-        fields.SIZE,
-        fields.BRANCHES,
-        fields.LOCALE,
-        // to get "public" or "private"
-        fields.OWNERSHIP,
-        // to get the "four_year" or "lt_four_year" bit
-        fields.PREDOMINANT_DEGREE,
-        // program-reporter offered programs / flag
-        fields.PROGRAM_REPORTER_OFFERED,
-        // get all of the net price values
-        fields.NET_PRICE,
-        // completion rate
-        fields.COMPLETION_RATE,
-        // this has no sub-fields
-        fields.MEDIAN_EARNINGS,
-        // not sure if we need this, but let's get it anyway
-        fields.EARNINGS_GT_25K,
-        // under investigation flag
-        fields.UNDER_INVESTIGATION,
-
-        // new completion rates
-        fields.COMPLETION_OM,
-        fields.COMPLETION_200_4,
-        fields.COMPLETION_200_LT4,
-
-        fields.FIELD_OF_STUDY
-      ].join(",");
+      query.fields = returnFields;
 
       // TODO: Need to remove this when API
       // is processing requests better
       query['all_programs_nested'] = true;
-      
-      let qs = this.generateQueryString(params);
+
+      // Add toggle value + params
+      let qs = this.generateQueryString({
+        ...params,
+        toggle: this.displayToggle
+      });
+
       history.replaceState(params, "search", qs);
 
       this.addURLToStorage(qs);
-
-      // TODO Remove if needed.
-      let vm = this;
 
       let request = apiGet(window.api.url, window.api.key, "/schools", query).then((response) => {
         console.log("loaded schools:", response.data);
@@ -444,22 +461,6 @@ export default {
           this.showError("API 500 Error");
         }
       });
-      
-      // let req = picc.API.search(query, function(error, data) {
-      //   if (error) {
-      //     vm.$emit("loading", false);
-      //     vm.showError(error);
-      //     return;
-      //   }
-
-      //   console.log("loaded schools:", data);
-
-      //   vm.results.schools = data.results;
-      //   vm.results.meta = data.metadata;
-
-      //   vm.$emit("loading", false);
-      //   vm.shareUrl = window.location.href;
-      // });
     },
     showError(error) {
       // TODO: Loop through multiple error messages if needed.
@@ -529,7 +530,65 @@ export default {
       };
       
       EventBus.$emit('search-form-reset');
-    }
+    },
+    handleContextToggle(toggleValue){
+      this.displayToggle = toggleValue;
+      // TODO - Where is URL updated? Here or as a part of the query method?
+
+    },
+    handleInstitutionSearch(params){
+      let returnFields = [
+        // we need the id to link it
+        fields.ID,
+        // basic display fields
+        fields.NAME,
+        fields.CITY,
+        fields.STATE,
+        fields.SIZE,
+        fields.BRANCHES,
+        fields.LOCALE,
+        // to get "public" or "private"
+        fields.OWNERSHIP,
+        // to get the "four_year" or "lt_four_year" bit
+        fields.PREDOMINANT_DEGREE,
+        // program-reporter offered programs / flag
+        fields.PROGRAM_REPORTER_OFFERED,
+        // get all of the net price values
+        fields.NET_PRICE,
+        // completion rate
+        fields.COMPLETION_RATE,
+        // this has no sub-fields
+        fields.MEDIAN_EARNINGS,
+        // not sure if we need this, but let's get it anyway
+        fields.EARNINGS_GT_25K,
+        // under investigation flag
+        fields.UNDER_INVESTIGATION,
+
+        // new completion rates
+        fields.COMPLETION_OM,
+        fields.COMPLETION_200_4,
+        fields.COMPLETION_200_LT4,
+
+        fields.FIELD_OF_STUDY
+      ].join(",");
+
+      this.searchAPI(params, returnFields);
+    },
+    handleFieldOfStudySearch(params){
+      // TODO - refine fields
+      let returnFields = [
+        fields.ID,
+        // basic display fields
+        fields.NAME,
+        fields.CITY,
+        fields.STATE,
+        fields.SIZE,
+        fields.FIELD_OF_STUDY
+      ].join(',');
+
+      console.log("Searching FOS");
+      this.searchAPI(params, returnFields);
+    },
   }
 };
 </script>

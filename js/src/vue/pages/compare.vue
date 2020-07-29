@@ -66,7 +66,6 @@
                     </v-btn>
                   </v-col>
                 </v-row>
-
               </div>
 
               <!--Loader-->
