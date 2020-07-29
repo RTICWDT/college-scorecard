@@ -190,12 +190,15 @@
                       v-for="school in results.schools"
                       :key="school.id"
                       cols="12"
-                      lg="3"
-                      md="4"
-                      sm="6"
+                      lg="12"
+                      md="12"
+                      sm="12"
                       class="d-flex align-stretch"
                     >
-                      <span>{{school.id}}</span>
+                      <fos-result-card
+                        :school="school"
+                        :is-selected="isResultCardSelected(school.id,compareSchools)"
+                      />
                     </v-col>
                   </v-row>
                 </div>
@@ -276,6 +279,7 @@ import URLHistory from "../mixins/URLHistory.js";
 import PrepareParams from '../mixins/PrepareParams.js';
 import ContextToggle from '../../components/vue/ContextToggle.vue';
 import SearchFieldsOfStudyForm from '../../components/vue/SearchFieldsOfStudyForm.vue';
+import FieldOfStudyResultCard from '../../components/vue/FieldOfStudyResultCard.vue';
 
 import _ from "lodash";
 // import querystring from 'querystring';
@@ -297,7 +301,8 @@ export default {
     "share": Share,
     "name-autocomplete": NameAutocomplete,
     'context-toggle': ContextToggle,
-    'search-fos-form': SearchFieldsOfStudyForm
+    'search-fos-form': SearchFieldsOfStudyForm,
+    'fos-result-card': FieldOfStudyResultCard
   },
   mixins:[URLHistory,PrepareParams],
   props: {

@@ -1,8 +1,35 @@
+<style lang="scss">
+  #fos-chip-container{
+    width: 280px;
+  }
+
+  #fos-chip-container .v-chip {
+    margin: 8px;
+    height: auto;
+    white-space: normal;
+  }
+</style>
 <template>
   <v-form class="pa-2">
     <div class="mt-2">
       <p class="subhead-2" id="fields-label">Search By Fields Of Study</p>
-      <field-autocomplete v-model="input.cip4"></field-autocomplete>
+<!--      <field-autocomplete v-model="input.cip4"></field-autocomplete>-->
+      <field-of-study-search
+        @field-of-study-selected="handleFieldOfStudySelected"
+      />
+
+      <!--TODO: Chips-->
+      <div id="fos-chip-container">
+        <v-chip
+          v-for="fieldOfStudy in utility.cip4Cache"
+          :key="fieldOfStudy.cip4"
+          close
+          @click:close="handleFieldOfStudyChipClose(fieldOfStudy)"
+        >
+          {{fieldOfStudy.field}}
+        </v-chip>
+      </div>
+
     </div>
 
     <!-- Credential Type -->
@@ -39,6 +66,7 @@
       ></v-checkbox>
     </div>
 
+    <!-- Location -->
     <div class="mt-4">
       <p class="subhead-2" id="location-label">Location</p>
       <v-select
@@ -189,6 +217,7 @@
 
 <script>
   import FieldAutocomplete from './FieldAutocomplete.vue';
+  import FieldOfStudySearch from './FieldOfStudySearch.vue';
   import Tooltip from "./Tooltip.vue";
   import LocationCheck from '../../vue/mixins/LocationCheck.js';
   import { SiteData } from '../../vue/mixins/SiteData.js';
@@ -208,12 +237,13 @@
     },
     components:{
       'field-autocomplete': FieldAutocomplete,
+      'field-of-study-search': FieldOfStudySearch,
       'tooltip': Tooltip
     },
     data(){
       return{
         input:{
-          cip4:'',
+          cip4:[],
           cip4_degree: [],
           zip: '',
           distance: 10,
@@ -242,6 +272,7 @@
             max:50000
           },
           initialized: false,
+          cip4Cache:[]
         }
       }
     },
@@ -366,6 +397,8 @@
           // }
         });
 
+        // TODO - Look up cip and set cache for CHIPS
+
         if (this.input.lat && this.input.long) {
           this.utility.location = "Near Me";
           this.location.latLon = true;
@@ -378,6 +411,22 @@
         if (!_.isEmpty(this.input.state)) {
           this.utility.location = "State";
         }
+      },
+      handleFieldOfStudySelected(fieldOfStudy){
+        this.input.cip4 = _.union(this.input.cip4,[fieldOfStudy.cip4]);
+        this.utility.cip4Cache = _.unionBy(this.utility.cip4Cache,[fieldOfStudy],'cip4');
+      },
+      handleFieldOfStudyChipClose(fieldOfStudy){
+        console.log(fieldOfStudy);
+
+        // Remove from arrays
+        this.input.cip4 = this.input.cip4.filter((cip4)=>{
+          return Number(cip4) !== Number(fieldOfStudy.cip4);
+        });
+
+        this.utility.cip4Cache = this.utility.cip4Cache.filter((item)=>{
+          return Number(item.cip4) !== Number(fieldOfStudy.cip4)
+        });
       }
     }
   }
