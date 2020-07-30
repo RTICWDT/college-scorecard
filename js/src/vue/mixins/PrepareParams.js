@@ -6,7 +6,7 @@ const alias = {
   name:                 fields.NAME,
   state:                fields.STATE,
   under_investigation:  fields.UNDER_INVESTIGATION,
-  cip4:                 fields.FIELD_OF_STUDY_CODE,
+  // cip4:                 fields.FIELD_OF_STUDY_CODE,
   search:               fields.SEARCH, // Name + Alias
 
   // slider ranges
@@ -123,6 +123,22 @@ const alias = {
     query[fields.SIZE + '__range'] = Array.isArray(value)
       ? value.join(',')
       : value;
+    delete query[key];
+  },
+
+  cip4: function(query, value, key){
+
+    // If there is an array, format value list for API
+    if(typeof value === 'object'){
+      if(value.length > 0){
+        query[fields.FIELD_OF_STUDY_CODE] = value.join(',');
+      }else{
+        query[fields.FIELD_OF_STUDY_CODE] = value[0];
+      }
+    }else{
+      query[fields.FIELD_OF_STUDY_CODE] = value;
+    }
+
     delete query[key];
   },
 

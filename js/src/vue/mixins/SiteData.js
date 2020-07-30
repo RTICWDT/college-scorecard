@@ -40,6 +40,23 @@ export const SiteData = {
           states: states
         }
       }
+    };
+  },
+  methods:{
+    locateCip4Field(cip4Code){
+      let formattedCip4Code = cip4Code.toString();
+
+      // Grab code
+      let cip4Object = this.CIP4.find((cip4Object) => {
+        // Check for code, removing `.`;
+        return cip4Object.cip4.replace(/\./g,'') === formattedCip4Code.replace(/\./g,'');
+      });
+
+      if(cip4Object && cip4Object.field){
+        return cip4Object.field;
+      }else{
+        return null;
+      }
     }
   }
-}
+};

@@ -592,6 +592,7 @@ export default {
       ].join(',');
 
       console.log("Searching FOS");
+      console.log(params);
       this.searchAPI(params, returnFields);
     },
   }

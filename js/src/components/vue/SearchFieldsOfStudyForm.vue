@@ -299,6 +299,8 @@
         } else {
           _.unset(groomedInput, 'distance');
         }
+
+        return groomedInput;
       },
       locationButtonColor() {
         return (this.location.latLon ? 'primary' : '');
@@ -398,6 +400,43 @@
         });
 
         // TODO - Look up cip and set cache for CHIPS
+        // TODO - Validate?
+        if(this.input.cip4.length > 0){
+          // Add to cache and look up name
+          // Look up
+          // this.utility.cip4Cache = this.input.cip4.reduce((returnArray, cip4Code) => {
+          //   let locatedCip4Field = this.locateCip4Field(cip4Code);
+          //
+          //   if(locatedCip4Field){
+          //     returnArray.push({
+          //       cip4: cip4Code,
+          //       field: locatedCip4Field
+          //     })
+          //   }else{
+          //     // remove
+          //     this.input.cip4 = this.input.cip4.splice(this.input.cip4.indexOf(cip4Code));
+          //   }
+          //
+          //   return returnArray;
+          // },[]);
+
+          this.input.cip4.forEach((cip4Code) => {
+            let locatedCip4Field = this.locateCip4Field(cip4Code);
+
+            // Attempt to locate cip4 in site data;
+            if(locatedCip4Field) {
+              console.log(locatedCip4Field);
+              this.utility.cip4Cache.push({
+                cip4: cip4Code,
+                field: locatedCip4Field
+              });
+            }else{
+
+              // remove from input if not found;
+              this.input.cip4 = this.input.cip4.splice(this.input.cip4.indexOf(cip4Code),1);
+            }
+          });
+        }
 
         if (this.input.lat && this.input.long) {
           this.utility.location = "Near Me";
