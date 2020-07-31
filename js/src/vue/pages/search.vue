@@ -132,7 +132,7 @@
                         v-model="input.page"
                         :length="totalPages"
                         :total-visible="7"
-                        @input="searchAPI(parseURLParams())"
+                        @input="handlePaginationInput"
                         class='pr-0 mr-0'
                         circle
                       ></v-pagination>
@@ -218,7 +218,7 @@
                         v-model="input.page"
                         :length="totalPages"
                         :total-visible="7"
-                        @input="searchAPI(parseURLParams())"
+                        @input="handlePaginationInput"
                         circle
                       ></v-pagination>
                      
@@ -431,6 +431,11 @@ export default {
 
       query.fields = returnFields;
 
+      //Ensure that toggle is not sent to API
+      if(query.toggle){
+        delete query.toggle;
+      }
+
       // TODO: Need to remove this when API
       // is processing requests better
       if(allPrograms){
@@ -602,8 +607,16 @@ export default {
 
       console.log("Searching FOS");
       console.log(params);
+
       this.searchAPI(params, returnFields, false);
     },
+    handlePaginationInput(){
+      if(this.displayToggle === 'fos'){
+        this.handleFieldOfStudySearch(this.parseURLParams());
+      }else{
+        this.handleInstitutionSearch(this.parseURLParams());
+      }
+    }
   }
 };
 </script>

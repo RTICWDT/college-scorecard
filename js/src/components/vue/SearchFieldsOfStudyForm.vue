@@ -512,6 +512,7 @@
       },
       resetFormDefault(){
         this.input = _.cloneDeep(this.utility.formDefault);
+        this.utility.cip4Cache = [];
       }
     }
   }
