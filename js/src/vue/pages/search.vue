@@ -197,7 +197,8 @@
                     >
                       <fos-result-card
                         :school="school"
-                        :is-selected="isResultCardSelected(school.id,compareSchools)"
+                        :selected-fields-of-study="compareFieldsOfStudy"
+                        @toggle-compare-item="handleToggleCompareItem"
                       />
                     </v-col>
                   </v-row>
@@ -403,7 +404,7 @@ export default {
     }
   },
   methods: {
-    searchAPI(params = {}, returnFields = []) {
+    searchAPI(params = {}, returnFields = [], allPrograms = true) {
       // TODO - Clean this method up, It does way more than just SearchAPI.
       // Better Encapsulation.
 
@@ -432,7 +433,9 @@ export default {
 
       // TODO: Need to remove this when API
       // is processing requests better
-      query['all_programs_nested'] = true;
+      if(allPrograms){
+        query['all_programs_nested'] = true;
+      }
 
       // Add toggle value + params
       let qs = this.generateQueryString({
@@ -599,7 +602,7 @@ export default {
 
       console.log("Searching FOS");
       console.log(params);
-      this.searchAPI(params, returnFields);
+      this.searchAPI(params, returnFields, false);
     },
   }
 };

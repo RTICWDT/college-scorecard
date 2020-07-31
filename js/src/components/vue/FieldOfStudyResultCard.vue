@@ -10,7 +10,6 @@
     class="mx-auto pa-0 elevation-4"
     style="width:100%"
     outlined
-    :class="{'result-card-selected': isSelected}"
   >
     <v-card-text class="pa-3">
       <v-row>
@@ -50,40 +49,30 @@
             <span class='overline'>{{fieldCategory.title}}</span>
             <div
               v-for="fieldOfStudy in fieldCategory.items"
-              :key="`${school.id}-${fieldOfStudy.code}-${fieldOfStudy.credential.level}`"
+              :key="`${school.id}-${fieldOfStudy.code}-${_.get(fieldOfStudy,'credential.level')}`"
               class="grey lighten-4 pa-2 mt-2 mb-2"
             >
-              <a
-                :href="`${schoolLink}&fos_code=${fieldOfStudy.code}&fos_credential=${fieldOfStudy.credential.level}`"
-                target="_blank"
-              >
-                <span>{{fieldOfStudy.title | formatFieldOfStudyTitle}}</span>
-              </a>
 
-              <span class="float-right">
-                <v-btn
-                  text
-                  icon
+              <div :class="selectedFieldOfStudyClass(fieldOfStudy)">
+                <a
+                  :href="`${schoolLink}&fos_code=${fieldOfStudy.code}&fos_credential=${_.get(fieldOfStudy,'credential.level')}`"
+                  target="_blank"
                 >
-                  <v-icon>fa fa-plus-circle</v-icon>
-                  <span class='sr-only'>Compare</span>
-                </v-btn>
-              </span>
+                  <span>{{fieldOfStudy.title | formatFieldOfStudyTitle}}</span>
+                </a>
 
+                <span class="float-right">
+                  <v-btn
+                    text
+                    icon
+                    @click="$emit('toggle-compare-item', fieldOfStudyCompareFormat(fieldOfStudy), 'compare-fos')"
+                  >
+                    <v-icon>fa fa-plus-circle</v-icon>
+                    <span class='sr-only'>Compare</span>
+                  </v-btn>
+                </span>
 
-<!--              <div-->
-<!--                class="float-right"-->
-<!--              >-->
-<!--                <v-btn-->
-<!--                  text-->
-<!--                  icon-->
-<!--                >-->
-<!--                  <v-icon>fa fa-plus-circle</v-icon>-->
-<!--                  <span class='sr-only'>Compare</span>-->
-<!--                </v-btn>-->
-<!--              </div>-->
-
-
+              </div>
             </div>
           </div>
 
@@ -101,18 +90,6 @@
         </v-col>
       </v-row>
 
-
-
-<!--      <v-btn-->
-<!--        text-->
-<!--        icon-->
-<!--        class="float-right search-result-card-compare"-->
-<!--        :color="isSelected?'amber':'grey'"-->
-<!--        @click="$emit('toggle-compare-school',school)"-->
-<!--      >-->
-<!--        <v-icon>fa fa-plus-circle</v-icon>-->
-<!--        <span class='sr-only'>Compare</span>-->
-<!--      </v-btn>-->
     </v-card-text>
   </v-card>
 </template>
@@ -121,6 +98,7 @@
   import Tooltip from './Tooltip.vue';
   import SmallSchoolIcons from './SmallSchoolIcons.vue';
   import ComplexFields from '../../vue/mixins/ComplexFields.js';
+  import { fieldOfStudyCompareFormat } from '../../vue/commonFormats';
 
   export default {
     mixins:[ComplexFields],
@@ -130,9 +108,9 @@
         type: Object,
         required: true
       },
-      isSelected:{
-        type: Boolean,
-        default: false
+      selectedFieldsOfStudy:{
+        type: Array,
+        required: true
       },
       fosTotalDisplayCap:{
         type: Number,
@@ -180,6 +158,13 @@
       tooltip: Tooltip,
       'small-school-icons': SmallSchoolIcons
     },
+    methods:{
+      selectedFieldOfStudyClass(fieldOfStudy, compareList = this.selectedFieldsOfStudy){
+        if(_.findIndex(compareList, this.fieldOfStudyCompareFormat(fieldOfStudy)) >= 0){
+          return 'result-card-selected';
+        }
+      }
+    }
 
 
   }

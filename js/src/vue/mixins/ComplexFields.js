@@ -545,6 +545,17 @@ export default {
 
         // Return only items that have counts
         return filteredArray.filter((filterItem)=>{ return filterItem.items.length > 0; });
+        },
+        fieldOfStudyCompareFormat(fieldOfStudyReturnObject){
+            // Fixing small formatting issue with cred level 3 title formatting.  May be fixed in the data at some point;
+            return {
+                institutionName: _.get(fieldOfStudyReturnObject,'school.name'),
+                credentialTitle: (Number(_.get(fieldOfStudyReturnObject,'credential.level')) === 3) ? "Bachelor's Degree" : _.get(fieldOfStudyReturnObject,'credential.title'),
+                fosTitle: _.get(fieldOfStudyReturnObject,'title'),
+                id: _.get(fieldOfStudyReturnObject,'unit_id'),
+                code: _.get(fieldOfStudyReturnObject,'code'),
+                credentialLevel: _.get(fieldOfStudyReturnObject,'credential.level'),
+            };
         }
     }
 }
