@@ -255,7 +255,7 @@
         <compare-drawer
           :schools="compareSchools"
           :fields-of-study="compareFieldsOfStudy"
-          @toggle-compare-school="handleToggleCompareSchool"
+          @toggle-compare-school="handleToggleCompareItem"
           v-on:close-modal="closeModal()"
         ></compare-drawer>
       </v-bottom-sheet>
@@ -280,6 +280,7 @@ import PrepareParams from '../mixins/PrepareParams.js';
 import ContextToggle from '../../components/vue/ContextToggle.vue';
 import SearchFieldsOfStudyForm from '../../components/vue/SearchFieldsOfStudyForm.vue';
 import FieldOfStudyResultCard from '../../components/vue/FieldOfStudyResultCard.vue';
+import { compare } from "vue/mixins.js";
 
 import _ from "lodash";
 // import querystring from 'querystring';
@@ -304,7 +305,7 @@ export default {
     'search-fos-form': SearchFieldsOfStudyForm,
     'fos-result-card': FieldOfStudyResultCard
   },
-  mixins:[URLHistory,PrepareParams],
+  mixins:[URLHistory, PrepareParams, compare],
   props: {
     "page-permalink": String,
     states: Array,
