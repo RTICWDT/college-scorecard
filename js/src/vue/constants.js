@@ -133,6 +133,8 @@ export const fields = {
   FOS_PP_DEBT_MONTHLY: 'debt.test.parent.monthly_payment_at',
   FOS_PP_DEBT_MONTHLY_PRIOR: 'debt.test.parent.monthly_payment_prior',
 
+  FOS_CREDENTIAL_LEVEL: 'credential.level',
+
 
   //Location
   LATITUDE:                 'location.lat',

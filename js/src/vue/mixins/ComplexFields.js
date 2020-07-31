@@ -509,6 +509,42 @@ export default {
                     max: orderedDebt[orderedDebt.length - 1]
                 }
             }
+        },
+        // Take Institution Field of study return object and return categorized result by credential level
+        categorizeFieldsOfStudy(fieldsOfStudy){
+        // Set up return object
+        let filteredArray = [
+            {
+                key: 'certificate',
+                title: 'certificate',
+                filterValue: 1,
+                items: []
+            },
+            {
+                key: 'associate',
+                title: "associate's Degree",
+                filterValue: 2,
+                items: []
+            },
+            {
+                key: 'bachelor',
+                title: "bachelor's Degree",
+                filterValue: 3,
+                items:[]
+            }
+        ]
+
+        // Categorize field of study by credential type;
+        filteredArray = filteredArray.map((filterItem) => {
+            filterItem.items = fieldsOfStudy.filter((fieldOfStudy) => {
+                return _.get(fieldOfStudy, fields.FOS_CREDENTIAL_LEVEL) === filterItem.filterValue;
+            });
+
+            return filterItem;
+        });
+
+        // Return only items that have counts
+        return filteredArray.filter((filterItem)=>{ return filterItem.items.length > 0; });
         }
     }
 }

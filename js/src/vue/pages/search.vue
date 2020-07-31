@@ -589,6 +589,11 @@ export default {
         fields.CITY,
         fields.STATE,
         fields.SIZE,
+        // Degree size
+        fields.PREDOMINANT_DEGREE,
+        // to get "public" or "private"
+        fields.OWNERSHIP,
+        fields.LOCALE,
         fields.FIELD_OF_STUDY
       ].join(',');
 

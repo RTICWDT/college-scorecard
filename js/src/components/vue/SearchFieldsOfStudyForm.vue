@@ -284,7 +284,7 @@
       return{
         input:{
           cip4:[],
-          cip4_degree: [],
+          cip4_degree: ['c','a','b'],
           zip: '',
           distance: 10,
           lat: null,
@@ -328,7 +328,7 @@
           }
 
           //If the input value is not equal to default, return value.
-          if (!_.isEqual(value, defaultValues[key])) {
+          if (!_.isEqual(value, defaultValues[key]) || key === 'cip4_degree') {
             return value;
           }
         });
