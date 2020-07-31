@@ -261,6 +261,7 @@
   import LocationCheck from '../../vue/mixins/LocationCheck.js';
   import { SiteData } from '../../vue/mixins/SiteData.js';
   import _ from 'lodash';
+  import { EventBus } from '../../vue/EventBus.js';
 
 
   export default{
@@ -289,8 +290,8 @@
           lat: null,
           long: null,
           state: [],
-          fos_salary:[25,50],
-          fos_debt:[5,15]
+          fos_salary:[0,150],
+          fos_debt:[0,50]
         },
         utility:{
           formDefault: {},
@@ -407,6 +408,11 @@
       }, 1000);
 
     },
+    mounted() {
+      EventBus.$on('search-form-reset', (e) => {
+        this.resetFormDefault();
+      });
+    },
     methods:{
       handleLocationChange(e) {
         // TODO - Check to see if values need to be reset.
@@ -503,6 +509,9 @@
       handleClearAllChips(){
         this.input.cip4 = [];
         this.utility.cip4Cache = [];
+      },
+      resetFormDefault(){
+        this.input = _.cloneDeep(this.utility.formDefault);
       }
     }
   }
