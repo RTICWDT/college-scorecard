@@ -21,6 +21,8 @@ const alias = {
   lat:                  fields.LATITUDE + '__range',
   long:                 fields.LONGITUDE + '__range',
   religious:            fields.RELIGIOUS,
+  fos_salary:           fields.FIELD_OF_STUDY_EARNINGS + '__range',
+  fos_debt:             fields.FIELD_OF_STUDY_DEBT + '__range',
 
   // below allows you to just pluck one school 
   // if coming from a selected name search
@@ -137,10 +139,17 @@ const alias = {
       }
     }else{
       query[fields.FIELD_OF_STUDY_CODE] = value;
+      query[fields.FIELD_OF_STUDY_CODE] = value;
     }
 
     delete query[key];
   },
+  // fieldOfStudySalary: function(query, value, key){
+  //   console.log("YAAY");
+  //   query[fields.FIELD_OF_STUDY_EARNINGS + '__range'] = value.join('...');
+  //   console.log(query);
+  //   delete query[key];
+  // },
 
   // TODO - Remove old function.
   // degree: function(query, value, key) {

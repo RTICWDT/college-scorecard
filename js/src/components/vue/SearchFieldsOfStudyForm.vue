@@ -30,6 +30,13 @@
         </v-chip>
       </div>
 
+      <v-btn
+        v-show="input.cip4.length > 0"
+        @click="handleClearAllChips"
+      >
+        Clear All
+      </v-btn>
+
     </div>
 
     <!-- Credential Type -->
@@ -145,68 +152,100 @@
     </div>
 
     <div class="mt-4">
-      <p class="subhead-2" id="fos-salary-after-completing">Salary After Completing</p>
+      <p
+        class="subhead-2"
+        id="fos-salary-after-completing"
+      >
+        Salary After Completing
+        <v-btn
+          v-if="input.fos_salary.join(',') !== utility.formDefault.fos_salary.join(',')"
+          @click="input.fos_salary = _.cloneDeep(utility.formDefault.fos_salary)"
+          icon
+        >
+          <v-icon>fas fa-times-circle</v-icon>
+        </v-btn>
+      </p>
       <v-range-slider
-        v-model="input.salary"
-        :max="utility.salary.max"
-        :min="utility.salary.min"
+        v-model="input.fos_salary"
+        :max="utility.fieldOfStudySalary.max"
+        :min="utility.fieldOfStudySalary.min"
         hide-details
         class="align-center"
       >
         <template v-slot:prepend>
+          <span class="mt-2">$</span>
           <v-text-field
-            :value="input.salary[0]"
-            class="mt-0 pt-0"
+            :value="input.fos_salary[0]"
+            class="mt-0 pt-0 ml-2"
             hide-details
             single-line
             type="number"
             style="width: 60px"
-            @change="$set(input.salary, 0, $event)"
+            suffix="k"
+            @change="$set(input.fos_salary, 0, $event)"
           ></v-text-field>
         </template>
         <template v-slot:append>
+          <span class="mt-2">$</span>
           <v-text-field
-            :value="input.salary[1]"
-            class="mt-0 pt-0"
+            :value="input.fos_salary[1]"
+            class="mt-0 pt-0 ml-2"
             hide-details
             single-line
             type="number"
             style="width: 60px"
-            @change="$set(input.salary, 1, $event)"
+            suffix="k"
+            @change="$set(input.fos_salary, 1, $event)"
           ></v-text-field>
         </template>
       </v-range-slider>
     </div>
 
     <div class="mt-4">
-      <p class="subhead-2" id="fos-median-total-debt">Median Total Debt</p>
+      <p
+        class="subhead-2"
+        id="fos-median-total-debt"
+      >
+        Median Total Debt
+        <v-btn
+          v-if="input.fos_debt.join(',') !== utility.formDefault.fos_debt.join(',')"
+          @click="input.fos_debt = _.cloneDeep(utility.formDefault.fos_debt)"
+          icon
+        >
+          <v-icon>fas fa-times-circle</v-icon>
+        </v-btn>
+      </p>
       <v-range-slider
-        v-model="input.debt"
-        :max="utility.debt.max"
-        :min="utility.debt.min"
+        v-model="input.fos_debt"
+        :max="utility.fieldOfStudyDebt.max"
+        :min="utility.fieldOfStudyDebt.min"
         hide-details
         class="align-center"
       >
         <template v-slot:prepend>
+          <span class="mt-2">$</span>
           <v-text-field
-            :value="input.debt[0]"
-            class="mt-0 pt-0"
+            :value="input.fos_debt[0]"
+            class="mt-0 pt-0 ml-2"
             hide-details
             single-line
             type="number"
             style="width: 60px"
-            @change="$set(input.debt, 0, $event)"
+            suffix="k"
+            @change="$set(input.fos_debt, 0, $event)"
           ></v-text-field>
         </template>
         <template v-slot:append>
+          <span class="mt-2">$</span>
           <v-text-field
-            :value="input.debt[1]"
-            class="mt-0 pt-0"
+            :value="input.fos_debt[1]"
+            class="mt-0 pt-0 ml-2"
             hide-details
             single-line
             type="number"
             style="width: 60px"
-            @change="$set(input.debt, 1, $event)"
+            suffix="k"
+            @change="$set(input.fos_debt, 1, $event)"
           ></v-text-field>
         </template>
       </v-range-slider>
@@ -250,8 +289,8 @@
           lat: null,
           long: null,
           state: [],
-          salary:[0,50000],
-          debt:[0,10000]
+          fos_salary:[25,50],
+          fos_debt:[5,15]
         },
         utility:{
           formDefault: {},
@@ -263,13 +302,13 @@
               return pattern.test(value) || 'Numerical'
             }
           },
-          salary:{
+          fieldOfStudySalary:{
             min:0,
-            max:150000
+            max:150
           },
-          debt:{
+          fieldOfStudyDebt:{
             min:0,
-            max:50000
+            max:50
           },
           initialized: false,
           cip4Cache:[]
@@ -298,6 +337,15 @@
           groomedInput.distance = this.input.distance;
         } else {
           _.unset(groomedInput, 'distance');
+        }
+
+        // Format Sliders - Happens here to ensure if shows up in url in desired format
+        if (groomedInput.fos_salary) {
+          groomedInput.fos_salary = groomedInput.fos_salary[0] * 1000 + '..' +  groomedInput.fos_salary[1] * 1000;
+        }
+
+        if (groomedInput.fos_debt) {
+          groomedInput.fos_debt = groomedInput.fos_debt[0] * 1000 + '..' +  groomedInput.fos_debt[1] * 1000;
         }
 
         return groomedInput;
@@ -374,52 +422,32 @@
       mapInputFromProp(){
         // Merge import data object (used for v-models) with items passed from the URL
         _.mergeWith(this.input, this.urlParsedParams, function (objVal, newObjValue, key) {
-          if (_.isArray(objVal) && _.isString(newObjValue)) {
-            return [newObjValue];
+          // Perform Any alterations or validations with the URL components
+          switch (key) {
+            case 'fos_debt':
+            case 'fos_salary':
+              // Format range sliders from backend value to frontend value
+              let valueArray = newObjValue.split('..');
+              console.log('Test');
+              console.log(valueArray);
+              return valueArray.map((value) => {
+                if(Number(value) <= 0){
+                  return 0
+                }else{
+                  return Number(value / 1000)
+                }
+              });
+              break;
+              default:
+                if (_.isArray(objVal) && _.isString(newObjValue)) {
+                  return [newObjValue];
+                }
+                break;
           }
-
-          // Perform Any alterations from URL to frontend items
-          // TODO - Translate URL values for: Salary After Completing + medium total debt
-
-          // switch (key) {
-          //   case 'completion_rate':
-          //   case 'acceptance':
-          //     return parseFloat(newObjValue) * 100;
-          //     break;
-          //   case 'avg_net_price':
-          //     if (parseFloat(newObjValue.substr(2)) > 1000) {
-          //       return parseFloat(newObjValue.substr(2)) / 1000;
-          //     }
-          //     break;
-          //   case 'sat_math':
-          //   case 'sat_read':
-          //   case 'act':
-          //     return parseFloat(newObjValue.substr(2))
-          //     break;
-          // }
         });
 
-        // TODO - Look up cip and set cache for CHIPS
-        // TODO - Validate?
+        // Validate and fill chips
         if(this.input.cip4.length > 0){
-          // Add to cache and look up name
-          // Look up
-          // this.utility.cip4Cache = this.input.cip4.reduce((returnArray, cip4Code) => {
-          //   let locatedCip4Field = this.locateCip4Field(cip4Code);
-          //
-          //   if(locatedCip4Field){
-          //     returnArray.push({
-          //       cip4: cip4Code,
-          //       field: locatedCip4Field
-          //     })
-          //   }else{
-          //     // remove
-          //     this.input.cip4 = this.input.cip4.splice(this.input.cip4.indexOf(cip4Code));
-          //   }
-          //
-          //   return returnArray;
-          // },[]);
-
           this.input.cip4.forEach((cip4Code) => {
             let locatedCip4Field = this.locateCip4Field(cip4Code);
 
@@ -437,6 +465,11 @@
             }
           });
         }
+
+        //Validate and fill range sliders
+        // if(this.input.fos_debt){
+        //
+        // }
 
         if (this.input.lat && this.input.long) {
           this.utility.location = "Near Me";
@@ -466,6 +499,10 @@
         this.utility.cip4Cache = this.utility.cip4Cache.filter((item)=>{
           return Number(item.cip4) !== Number(fieldOfStudy.cip4)
         });
+      },
+      handleClearAllChips(){
+        this.input.cip4 = [];
+        this.utility.cip4Cache = [];
       }
     }
   }
