@@ -241,7 +241,7 @@ export default {
             for(let i=0; i<fos.length; i++)
             {
                 if(_.get(fos[i],'credential.level') === 3){
-                    _.set(fos[i],'credential.level', "Bachelor's Degree");
+                    _.set(fos[i],'credential.title', "Bachelor's Degree");
                 }
                 // if(fos[i].credential.level==3)
                 // {
