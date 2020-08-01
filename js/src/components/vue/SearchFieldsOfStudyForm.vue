@@ -262,8 +262,7 @@
   import { SiteData } from '../../vue/mixins/SiteData.js';
   import _ from 'lodash';
   import { EventBus } from '../../vue/EventBus.js';
-
-
+  
   export default{
     mixins: [SiteData, LocationCheck],
     props:{
