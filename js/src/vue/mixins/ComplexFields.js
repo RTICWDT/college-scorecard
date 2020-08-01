@@ -240,10 +240,13 @@ export default {
             }
             for(let i=0; i<fos.length; i++)
             {
-                if(fos[i].credential.level==3)
-                {
-                    fos[i].credential.title="Bachelor's Degree";
+                if(_.get(fos[i],'credential.level') === 3){
+                    _.set(fos[i],'credential.level', "Bachelor's Degree");
                 }
+                // if(fos[i].credential.level==3)
+                // {
+                //     fos[i].credential.title="Bachelor's Degree";
+                // }
             }
             return fos;
         },
@@ -321,10 +324,10 @@ export default {
                 fos = [fos];
             }
             let cleanEarnings = fos.filter(
-                obj => obj.earnings.median_earnings && obj.credential.level <= 3
+                obj => _.get(obj,'earnings.median_earnings') && _.get(obj,'credential.level') <= 3
             );
             let orderedEarnings = cleanEarnings.sort(
-                (a, b) => a.earnings.median_earnings - b.earnings.median_earnings
+                (a, b) => _.get(a,'earnings.median_earnings') - _.get(b, 'earnings.median_earnings')
             );
             if(orderedEarnings[0]==null)
             {

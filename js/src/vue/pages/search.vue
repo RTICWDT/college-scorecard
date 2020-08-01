@@ -573,9 +573,13 @@ export default {
       EventBus.$emit('search-form-reset');
     },
     handleContextToggle(toggleValue){
+      this.clearSearchForm();
       this.displayToggle = toggleValue;
-      // TODO - Where is URL updated? Here or as a part of the query method?
-
+      this.results.schools = []
+      this.results.meta = {
+        total: 0
+      }
+      // TODO - What happens to search filters?
     },
     handleInstitutionSearch(params){
       let returnFields = [
