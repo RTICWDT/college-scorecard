@@ -167,6 +167,19 @@
                   <p class="error-message">{{error.message}}</p>
                 </div>
 
+                <p class="white--text" v-if="displayToggle === 'fos' && !isLoading">
+                  <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
+                  Classification of Instructional Programs (CIP) and may not match the program titles at a
+                  given school. <a href="">Learn more about CIP.</a>
+                </p>
+
+                <v-card class="mt-4 mb-2 py-1 px-4 pageBar elevation-0 result-card-selected"  v-if="showFieldOfStudyWarning">
+                  <p>
+                    (!) The filter you've selected contains limited data. Displayed search results only represent schools
+                    for which there is sufficient data.  To see all schools within this field of study, reset search filters.
+                  </p>
+                </v-card>
+
                 <div class="search-result-cards-container" v-if="!isLoading">
                   <v-row v-if="displayToggle === 'institutions'">
                     <v-col
@@ -209,7 +222,6 @@
                 </div>
               </div>
               <!--results-main -->
-
               <v-card class="mt-4 mb-2 py-1 px-4 pageBar elevation-0"  v-if="!isLoading && results.schools.length > 0">
                 <v-row>
                   <v-col cols="12" class='pa-1'>
@@ -343,6 +355,7 @@ export default {
         formDefault: {},
         initailized: false,
         sortFAB: null,
+        previousParams:{}
       },
       error: {
         message: null
@@ -401,6 +414,20 @@ export default {
         // return the maximum amount of pages if operation produces a float.
         return Math.ceil(totalPages);
       }
+    },
+    showFieldOfStudyWarning(){
+      if(this.displayToggle !== 'fos'){
+        return false;
+      }
+
+      if(this.isLoading){
+        return false;
+      }
+
+      if(typeof this.utility.previousParams.fos_salary != 'undefined' || typeof this.utility.previousParams.fos_debt != 'undefined'){
+        return true;
+      }
+      // !isLoading && results.schools.length > 0
     }
   },
   methods: {
@@ -607,6 +634,9 @@ export default {
 
       console.log("Searching FOS");
       console.log(params);
+
+      // Cache params to power other content
+      this.utility.previousParams = params;
 
       this.searchAPI(params, returnFields, false);
     },
