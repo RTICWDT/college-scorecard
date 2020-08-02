@@ -45,36 +45,31 @@
     },
     methods:{
       handleFieldOfStudySelect(selectedItem){
-        // console.info('Field Of Study Selected');
-        // console.info(selectedItem);
+        // Clear Input Field
+        this.$nextTick(() => {
+          this.selected = []
+        });
 
         if (typeof selectedItem.code !== 'string' && selectedItem.code.length !== 6)
         {
           return null;
         }
 
-        let fieldOfStudy = {
-          cip4: selectedItem.code.slice(0,4),
-          field: this.CIP4.find((element) => {
-            return element.cip4.replace(/\./g,'') === selectedItem.code.slice(0,4);
-          }).field
-        }
-
-        // let fieldOfStudy = {
-        //   cip4: selectedItem.cip4.replace(/\./g,''), // Remove `.` from code string;
-        //   field: selectedItem.field
-        // }
-        //
-
-        // Clear Input Field
-        this.$nextTick(() => {
-          this.selected = []
+        // Ensure there is a cip 4 in data
+        let locateCip4 = this.CIP4.find((element) => {
+          return element.cip4.replace(/\./g,'') === selectedItem.code.slice(0,4);
         });
 
-        console.info('Field Of Study Selected');
-        console.info(fieldOfStudy);
-        //
-        // // Emit code.
+        if(typeof locateCip4 === 'undefined' || typeof locateCip4.field === 'undefined'){
+          return null;
+        }
+
+        let fieldOfStudy = {
+          cip4: selectedItem.code.slice(0,4),
+          field: locateCip4.field
+        }
+
+        // Emit code.
         this.$emit('field-of-study-selected', fieldOfStudy); // Remove `.` from code string;
       },
       handleFieldOfStudySearchInput(searchString){

@@ -1,14 +1,23 @@
 <style lang="scss">
   #fos-chip-container{
-    width: 280px;
+    width: 100%;
   }
 
-  #fos-chip-container .v-chip {
-    margin: 8px;
-    height: auto;
-    white-space: normal;
+  #fos-chip-container{
+    .v-chip {
+      height: auto;
+      white-space: normal;
+      width: 100%;
+    }
+    .v-chip .v-chip__content{
+      display: block;
+    }
+
   }
+
+
 </style>
+
 <template>
   <v-form class="pa-2">
     <div class="mt-2">
@@ -20,17 +29,18 @@
 
       <!--TODO: Chips-->
       <div id="fos-chip-container">
-        <v-chip
+        <field-of-study-detail-chip
           v-for="fieldOfStudy in utility.cip4Cache"
           :key="fieldOfStudy.cip4"
-          close
-          @click:close="handleFieldOfStudyChipClose(fieldOfStudy)"
-        >
-          {{fieldOfStudy.field}}
-        </v-chip>
+          :field-of-study="fieldOfStudy"
+          :cip-six-items="findAllCip6fromCip4(fieldOfStudy.cip4)"
+          @chip-close="handleFieldOfStudyChipClose"
+        />
+
       </div>
 
       <v-btn
+        class="mt-4"
         v-show="input.cip4.length > 0"
         @click="handleClearAllChips"
       >
@@ -257,6 +267,7 @@
 <script>
   import FieldAutocomplete from './FieldAutocomplete.vue';
   import FieldOfStudySearch from './FieldOfStudySearch.vue';
+  import FieldOfStudyDetailChip from './FieldOfStudyDetailChip.vue';
   import Tooltip from "./Tooltip.vue";
   import LocationCheck from '../../vue/mixins/LocationCheck.js';
   import { SiteData } from '../../vue/mixins/SiteData.js';
@@ -277,6 +288,7 @@
     components:{
       'field-autocomplete': FieldAutocomplete,
       'field-of-study-search': FieldOfStudySearch,
+      'field-of-study-detail-chip': FieldOfStudyDetailChip,
       'tooltip': Tooltip
     },
     data(){

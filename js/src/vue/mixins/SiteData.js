@@ -59,6 +59,11 @@ export const SiteData = {
       }else{
         return null;
       }
+    },
+    findAllCip6fromCip4(cip4Code){
+      return this.site.data.cip_6_digit.filter((cip6) => {
+        return Number(cip6.code.slice(0,4)) === Number(cip4Code);
+      })
     }
   }
 };
