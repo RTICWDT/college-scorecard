@@ -5,7 +5,7 @@ import race_ethnicity from "../../../../_data/race_ethnicity.json";
 import religious_affiliations from "../../../../_data/religious_affiliations.json";
 import special_designations from "../../../../_data/special_designations.json";
 import states from "../../../../_data/states.json";
-import cip_6_digit from "../../../../_data/cip_6_digit_2010.json";
+import cip_6_digit from "../../../../_data/cip_6_test.json";
 
 export const SiteData = {
   computed:{

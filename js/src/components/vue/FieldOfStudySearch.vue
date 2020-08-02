@@ -69,25 +69,26 @@
     },
     computed: {
       items() {
-        // return _.sortBy(this.CIP4, ['field']);
-        // return this.site.data.cip_6_digit;
-
-        let cleanItems = this.site.data.cip_6_digit.reduce((formattedArray, cip6) => {
-          // locate - Ensure we only have cip6 and cip4
-          let locatedCip4FieldName = this.locateCip4Field(cip6.code.slice(0,4));
-
-          if(locatedCip4FieldName){
-            formattedArray.push({
-              ...cip6,
-              cip4Title: locatedCip4FieldName
-            });
-          }
-
-          return formattedArray;
-        },[]);
-
-        return _.sortBy(cleanItems, ['title']);
+        return this.site.data.cip_6_digit;
       }
+
+      // TODO - use this to generate and cache cip info- It wasn't performant on runtime when switching search tabs.
+      //   let cleanItems = this.site.data.cip_6_digit.reduce((formattedArray, cip6) => {
+      //     // locate - Ensure we only have cip6 and cip4
+      //     let locatedCip4FieldName = this.locateCip4Field(cip6.code.slice(0,4));
+      //
+      //     if(locatedCip4FieldName){
+      //       formattedArray.push({
+      //         ...cip6,
+      //         cip4Title: locatedCip4FieldName
+      //       });
+      //     }
+      //
+      //     return formattedArray;
+      //   },[]);
+      //
+      //   return _.sortBy(cleanItems, ['title']);
+      // }
     },
     methods:{
       handleFieldOfStudySelect(selectedItem){
