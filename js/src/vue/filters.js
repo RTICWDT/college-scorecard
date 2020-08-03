@@ -126,4 +126,19 @@ Vue.filter('localeClass', function(id){
     return lookup[id];
 });
 
+Vue.filter('formatFieldOfStudyTitle', function (value) {
+    if (!value) return value;
+
+    // Check if the last character is a .
+    // Remove, send back.
+    value = value.toString()
+    // If last character is a period
+    if(value.slice(-1) === '.'){
+        // Remove it
+        return value.slice(0,-1);
+    }else{
+        return value;
+    }
+});
+
 

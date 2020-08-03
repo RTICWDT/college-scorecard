@@ -22,13 +22,29 @@
         class="searchSidebar"
         clipped
       >
+
+        <context-toggle
+          :display-toggle="displayToggle"
+          @context-switch-click="handleContextToggle"
+        />
+
         <!-- Search Form Component -->
         <search-form
+          v-if="displayToggle === 'institutions'"
           :urlParsedParams="urlParsedParams"
           auto-submit
           display-all-filters
-          @search-query="searchAPI"
+          @search-query="handleInstitutionSearch"
         />
+
+        <!-- Search Fields of Study Component -->
+        <search-fos-form
+          v-else-if="displayToggle === 'fos'"
+          :url-parsed-params="urlParsedParams"
+          auto-submit
+          @search-query="handleFieldOfStudySearch"
+        />
+
       </v-navigation-drawer>
       <v-content>
         <v-container fluid class="pa-0">
@@ -116,7 +132,7 @@
                         v-model="input.page"
                         :length="totalPages"
                         :total-visible="7"
-                        @input="searchAPI(parseURLParams())"
+                        @input="handlePaginationInput"
                         class='pr-0 mr-0'
                         circle
                       ></v-pagination>
@@ -151,8 +167,21 @@
                   <p class="error-message">{{error.message}}</p>
                 </div>
 
+                <p class="white--text" v-if="displayToggle === 'fos' && !isLoading">
+                  <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
+                  Classification of Instructional Programs (CIP) and may not match the program titles at a
+                  given school. <a href="">Learn more about CIP.</a>
+                </p>
+
+                <v-card class="mt-4 mb-2 py-1 px-4 pageBar elevation-0 result-card-selected"  v-if="showFieldOfStudyWarning">
+                  <p>
+                    (!) The filter you've selected contains limited data. Displayed search results only represent schools
+                    for which there is sufficient data.  To see all schools within this field of study, reset search filters.
+                  </p>
+                </v-card>
+
                 <div class="search-result-cards-container" v-if="!isLoading">
-                  <v-row>
+                  <v-row v-if="displayToggle === 'institutions'">
                     <v-col
                       v-for="school in results.schools"
                       :key="school.id"
@@ -169,6 +198,23 @@
                       />
                     </v-col>
                   </v-row>
+                  <v-row v-else>
+                    <v-col
+                      v-for="school in results.schools"
+                      :key="school.id"
+                      cols="12"
+                      lg="12"
+                      md="12"
+                      sm="12"
+                      class="d-flex align-stretch"
+                    >
+                      <fos-result-card
+                        :school="school"
+                        :selected-fields-of-study="compareFieldsOfStudy"
+                        @toggle-compare-item="handleToggleCompareItem"
+                      />
+                    </v-col>
+                  </v-row>
                 </div>
 
                 <div class="search-result-cards-container" v-else>
@@ -176,7 +222,6 @@
                 </div>
               </div>
               <!--results-main -->
-
               <v-card class="mt-4 mb-2 py-1 px-4 pageBar elevation-0"  v-if="!isLoading && results.schools.length > 0">
                 <v-row>
                   <v-col cols="12" class='pa-1'>
@@ -185,7 +230,7 @@
                         v-model="input.page"
                         :length="totalPages"
                         :total-visible="7"
-                        @input="searchAPI(parseURLParams())"
+                        @input="handlePaginationInput"
                         circle
                       ></v-pagination>
                      
@@ -223,7 +268,7 @@
         <compare-drawer
           :schools="compareSchools"
           :fields-of-study="compareFieldsOfStudy"
-          @toggle-compare-school="handleToggleCompareSchool"
+          @toggle-compare-school="handleToggleCompareItem"
           v-on:close-modal="closeModal()"
         ></compare-drawer>
       </v-bottom-sheet>
@@ -245,6 +290,10 @@ import Share from "../../components/vue/Share.vue";
 import NameAutocomplete from "../../components/vue/NameAutocomplete.vue";
 import URLHistory from "../mixins/URLHistory.js";
 import PrepareParams from '../mixins/PrepareParams.js';
+import ContextToggle from '../../components/vue/ContextToggle.vue';
+import SearchFieldsOfStudyForm from '../../components/vue/SearchFieldsOfStudyForm.vue';
+import FieldOfStudyResultCard from '../../components/vue/FieldOfStudyResultCard.vue';
+import { compare } from "vue/mixins.js";
 
 import _ from "lodash";
 // import querystring from 'querystring';
@@ -264,9 +313,12 @@ export default {
     "canned-search-container": CannedSearchContainer,
     "compare-header": CompareHeader,
     "share": Share,
-    "name-autocomplete": NameAutocomplete
+    "name-autocomplete": NameAutocomplete,
+    'context-toggle': ContextToggle,
+    'search-fos-form': SearchFieldsOfStudyForm,
+    'fos-result-card': FieldOfStudyResultCard
   },
-  mixins:[URLHistory,PrepareParams],
+  mixins:[URLHistory, PrepareParams, compare],
   props: {
     "page-permalink": String,
     states: Array,
@@ -303,6 +355,7 @@ export default {
         formDefault: {},
         initailized: false,
         sortFAB: null,
+        previousParams:{}
       },
       error: {
         message: null
@@ -313,7 +366,8 @@ export default {
         { type: "Annual Cost", field: "avg_net_price:asc" },
         { type: "Graduation Rate", field: "completion_rate:desc" }
       ],
-      shareUrl: null
+      shareUrl: null,
+      displayToggle: 'institutions'
     };
   },
   created() {
@@ -332,9 +386,23 @@ export default {
       ? Number(this.urlParsedParams.page) + 1
       : 1;
 
+    // Set Toggle Value
+    if(typeof this.urlParsedParams.toggle != 'undefined'){
+      if(this.urlParsedParams.toggle === 'institutions'){
+        this.displayToggle = 'institutions';
+      }else{
+        this.displayToggle = 'fos';
+      }
+    }
+
     // Create Debounce function for this page.
     this.debounceSearchUpdate = _.debounce(function(params) {
-      this.searchAPI(params, true);
+      // this.searchAPI(params, true);
+      if(this.displayToggle === 'institutions'){
+        this.handleInstitutionSearch(params);
+      }else{
+        this.handleFieldOfStudySearch(params);
+      }
     }, 1000);
   },
   mounted() {},
@@ -346,19 +414,33 @@ export default {
         // return the maximum amount of pages if operation produces a float.
         return Math.ceil(totalPages);
       }
+    },
+    showFieldOfStudyWarning(){
+      if(this.displayToggle !== 'fos'){
+        return false;
+      }
+
+      if(this.isLoading){
+        return false;
+      }
+
+      if(typeof this.utility.previousParams.fos_salary != 'undefined' || typeof this.utility.previousParams.fos_debt != 'undefined'){
+        return true;
+      }
+      // !isLoading && results.schools.length > 0
     }
   },
   methods: {
-    searchAPI(params = {}) {
+    searchAPI(params = {}, returnFields = [], allPrograms = true) {
       // TODO - Clean this method up, It does way more than just SearchAPI.
-      // Better Encapsilation.
+      // Better Encapsulation.
 
       this.$emit("loading", true);
 
       this.error.message = null;
 
-      let poppingState = false;
-      let alreadyLoaded = false;
+      // let poppingState = false;
+      // let alreadyLoaded = false;
 
       //Add page and sort items into params.
       if(params.page === 0){
@@ -374,52 +456,28 @@ export default {
 
       let query = this.prepareParams(params);
 
-      query.fields = [
-        // we need the id to link it
-        fields.ID,
-        // basic display fields
-        fields.NAME,
-        fields.CITY,
-        fields.STATE,
-        fields.SIZE,
-        fields.BRANCHES,
-        fields.LOCALE,
-        // to get "public" or "private"
-        fields.OWNERSHIP,
-        // to get the "four_year" or "lt_four_year" bit
-        fields.PREDOMINANT_DEGREE,
-        // program-reporter offered programs / flag
-        fields.PROGRAM_REPORTER_OFFERED,
-        // get all of the net price values
-        fields.NET_PRICE,
-        // completion rate
-        fields.COMPLETION_RATE,
-        // this has no sub-fields
-        fields.MEDIAN_EARNINGS,
-        // not sure if we need this, but let's get it anyway
-        fields.EARNINGS_GT_25K,
-        // under investigation flag
-        fields.UNDER_INVESTIGATION,
+      query.fields = returnFields;
 
-        // new completion rates
-        fields.COMPLETION_OM,
-        fields.COMPLETION_200_4,
-        fields.COMPLETION_200_LT4,
-
-        fields.FIELD_OF_STUDY
-      ].join(",");
+      //Ensure that toggle is not sent to API
+      if(query.toggle){
+        delete query.toggle;
+      }
 
       // TODO: Need to remove this when API
       // is processing requests better
-      query['all_programs_nested'] = true;
-      
-      let qs = this.generateQueryString(params);
+      if(allPrograms){
+        query['all_programs_nested'] = true;
+      }
+
+      // Add toggle value + params
+      let qs = this.generateQueryString({
+        ...params,
+        toggle: this.displayToggle
+      });
+
       history.replaceState(params, "search", qs);
 
       this.addURLToStorage(qs);
-
-      // TODO Remove if needed.
-      let vm = this;
 
       let request = apiGet(window.api.url, window.api.key, "/schools", query).then((response) => {
         console.log("loaded schools:", response.data);
@@ -444,22 +502,6 @@ export default {
           this.showError("API 500 Error");
         }
       });
-      
-      // let req = picc.API.search(query, function(error, data) {
-      //   if (error) {
-      //     vm.$emit("loading", false);
-      //     vm.showError(error);
-      //     return;
-      //   }
-
-      //   console.log("loaded schools:", data);
-
-      //   vm.results.schools = data.results;
-      //   vm.results.meta = data.metadata;
-
-      //   vm.$emit("loading", false);
-      //   vm.shareUrl = window.location.href;
-      // });
     },
     showError(error) {
       // TODO: Loop through multiple error messages if needed.
@@ -529,6 +571,85 @@ export default {
       };
       
       EventBus.$emit('search-form-reset');
+    },
+    handleContextToggle(toggleValue){
+      this.clearSearchForm();
+      this.displayToggle = toggleValue;
+      this.results.schools = []
+      this.results.meta = {
+        total: 0
+      }
+      // TODO - What happens to search filters?
+    },
+    handleInstitutionSearch(params){
+      let returnFields = [
+        // we need the id to link it
+        fields.ID,
+        // basic display fields
+        fields.NAME,
+        fields.CITY,
+        fields.STATE,
+        fields.SIZE,
+        fields.BRANCHES,
+        fields.LOCALE,
+        // to get "public" or "private"
+        fields.OWNERSHIP,
+        // to get the "four_year" or "lt_four_year" bit
+        fields.PREDOMINANT_DEGREE,
+        // program-reporter offered programs / flag
+        fields.PROGRAM_REPORTER_OFFERED,
+        // get all of the net price values
+        fields.NET_PRICE,
+        // completion rate
+        fields.COMPLETION_RATE,
+        // this has no sub-fields
+        fields.MEDIAN_EARNINGS,
+        // not sure if we need this, but let's get it anyway
+        fields.EARNINGS_GT_25K,
+        // under investigation flag
+        fields.UNDER_INVESTIGATION,
+
+        // new completion rates
+        fields.COMPLETION_OM,
+        fields.COMPLETION_200_4,
+        fields.COMPLETION_200_LT4,
+
+        fields.FIELD_OF_STUDY
+      ].join(",");
+
+      this.searchAPI(params, returnFields);
+    },
+    handleFieldOfStudySearch(params){
+      // TODO - refine fields
+      let returnFields = [
+        fields.ID,
+        // basic display fields
+        fields.NAME,
+        fields.CITY,
+        fields.STATE,
+        fields.SIZE,
+        // Degree size
+        fields.PREDOMINANT_DEGREE,
+        // to get "public" or "private"
+        fields.OWNERSHIP,
+        fields.LOCALE,
+        fields.FIELD_OF_STUDY
+      ].join(',');
+
+      console.log("Searching FOS");
+      console.log(params);
+
+      // Cache params to power other content
+      this.utility.previousParams = params;
+
+      this.searchAPI(params, returnFields, false);
+    },
+    handlePaginationInput(){
+      if(this.displayToggle === 'fos'){
+        this.handleFieldOfStudySearch(this.parseURLParams());
+      }else{
+        this.handleInstitutionSearch(this.parseURLParams());
+      }
     }
   }
 };

@@ -66,7 +66,6 @@
                     </v-btn>
                   </v-col>
                 </v-row>
-
               </div>
 
               <!--Loader-->
@@ -1017,40 +1016,41 @@ export default {
       return this.passedFieldsOfStudy.length;
     },
     filteredFieldsOfStudy(){
-      // Set up return object
-      let filteredArray = [
-        {
-          key: 'certificate',
-          title: 'certificate',
-          filterValue: 1,
-          items: []
-        },
-        {
-          key: 'associate',
-          title: "associate's Degree",
-          filterValue: 2,
-          items: []
-        },
-        {
-          key: 'bachelor',
-          title: "bachelor's Degree",
-          filterValue: 3,
-          items:[]
-        }
-      ]
-
-      // Categorize field of study by credential type;
-      filteredArray = filteredArray.map((filterItem) => {
-        filterItem.items = this.responseCache.fieldsOfStudy.filter((fieldOfStudy) => {
-          return fieldOfStudy['credential.level'] === filterItem.filterValue;
-        });
-
-        return filterItem;
-      });
-
-      // Return only items that have counts
-      return filteredArray.filter((filterItem)=>{ return filterItem.items.length > 0; });
-      // return filteredArray;
+      return this.categorizeFieldsOfStudy(this.responseCache.fieldsOfStudy);
+      // // Set up return object
+      // let filteredArray = [
+      //   {
+      //     key: 'certificate',
+      //     title: 'certificate',
+      //     filterValue: 1,
+      //     items: []
+      //   },
+      //   {
+      //     key: 'associate',
+      //     title: "associate's Degree",
+      //     filterValue: 2,
+      //     items: []
+      //   },
+      //   {
+      //     key: 'bachelor',
+      //     title: "bachelor's Degree",
+      //     filterValue: 3,
+      //     items:[]
+      //   }
+      // ]
+      //
+      // // Categorize field of study by credential type;
+      // filteredArray = filteredArray.map((filterItem) => {
+      //   filterItem.items = this.responseCache.fieldsOfStudy.filter((fieldOfStudy) => {
+      //     return fieldOfStudy['credential.level'] === filterItem.filterValue;
+      //   });
+      //
+      //   return filterItem;
+      // });
+      //
+      // // Return only items that have counts
+      // return filteredArray.filter((filterItem)=>{ return filterItem.items.length > 0; });
+      // // return filteredArray;
     }
 
   },

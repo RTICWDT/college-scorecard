@@ -240,10 +240,13 @@ export default {
             }
             for(let i=0; i<fos.length; i++)
             {
-                if(fos[i].credential.level==3)
-                {
-                    fos[i].credential.title="Bachelor's Degree";
+                if(_.get(fos[i],'credential.level') === 3){
+                    _.set(fos[i],'credential.title', "Bachelor's Degree");
                 }
+                // if(fos[i].credential.level==3)
+                // {
+                //     fos[i].credential.title="Bachelor's Degree";
+                // }
             }
             return fos;
         },
@@ -321,10 +324,10 @@ export default {
                 fos = [fos];
             }
             let cleanEarnings = fos.filter(
-                obj => obj.earnings.median_earnings && obj.credential.level <= 3
+                obj => _.get(obj,'earnings.median_earnings') && _.get(obj,'credential.level') <= 3
             );
             let orderedEarnings = cleanEarnings.sort(
-                (a, b) => a.earnings.median_earnings - b.earnings.median_earnings
+                (a, b) => _.get(a,'earnings.median_earnings') - _.get(b, 'earnings.median_earnings')
             );
             if(orderedEarnings[0]==null)
             {
@@ -509,6 +512,53 @@ export default {
                     max: orderedDebt[orderedDebt.length - 1]
                 }
             }
+        },
+        // Take Institution Field of study return object and return categorized result by credential level
+        categorizeFieldsOfStudy(fieldsOfStudy){
+        // Set up return object
+        let filteredArray = [
+            {
+                key: 'certificate',
+                title: 'certificate',
+                filterValue: 1,
+                items: []
+            },
+            {
+                key: 'associate',
+                title: "associate's Degree",
+                filterValue: 2,
+                items: []
+            },
+            {
+                key: 'bachelor',
+                title: "bachelor's Degree",
+                filterValue: 3,
+                items:[]
+            }
+        ]
+
+        // Categorize field of study by credential type;
+        filteredArray = filteredArray.map((filterItem) => {
+            filterItem.items = fieldsOfStudy.filter((fieldOfStudy) => {
+                return _.get(fieldOfStudy, fields.FOS_CREDENTIAL_LEVEL) === filterItem.filterValue;
+            });
+
+            return filterItem;
+        });
+
+        // Return only items that have counts
+        return filteredArray.filter((filterItem)=>{ return filterItem.items.length > 0; });
+        },
+        fieldOfStudyCompareFormat(fieldOfStudyReturnObject){
+            // Fixing small formatting issue with cred level 3 title formatting.  May be fixed in the data at some point;
+            return {
+                institutionName: _.get(fieldOfStudyReturnObject,'school.name'),
+                credentialTitle: (Number(_.get(fieldOfStudyReturnObject,'credential.level')) === 3) ? "Bachelor's Degree" : _.get(fieldOfStudyReturnObject,'credential.title'),
+                fosTitle: _.get(fieldOfStudyReturnObject,'title'),
+                id: _.get(fieldOfStudyReturnObject,'unit_id'),
+                code: _.get(fieldOfStudyReturnObject,'code'),
+                credentialLevel: _.get(fieldOfStudyReturnObject,'credential.level'),
+            };
         }
     }
 }

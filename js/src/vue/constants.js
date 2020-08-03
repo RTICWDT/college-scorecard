@@ -109,7 +109,9 @@ export const fields = {
   FIELD_OF_STUDY_CODE:      'latest.programs.cip_4_digit.code',
   FIELD_OF_STUDY_LENGTH:    'latest.programs.cip_4_digit.credential.level',
   FIELD_OF_STUDY_NAME:      'latest.programs.cip_4_digit.title',
-  FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.median_earnings',
+  // FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.median_earnings',
+  FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.earnings.median_earnings',
+  FIELD_OF_STUDY_DEBT:      'latest.programs.cip_4_digit.debt.median_debt',
 
   // New Field Of Study Metrics
   // Full Paths
@@ -130,6 +132,8 @@ export const fields = {
   FOS_PP_DEBT_MEDIAN_PRIOR: 'debt.test.parent.median_total_prior',
   FOS_PP_DEBT_MONTHLY: 'debt.test.parent.monthly_payment_at',
   FOS_PP_DEBT_MONTHLY_PRIOR: 'debt.test.parent.monthly_payment_prior',
+
+  FOS_CREDENTIAL_LEVEL: 'credential.level',
 
 
   //Location
