@@ -55,23 +55,173 @@ header {
       font-size: 1.19rem;
     }
   }
+
+  #mobile-nav-icon{
+    width: 20%;
+    button{
+      color: white;
+    }
+  }
+
+  #nav-site-title{
+    width: 50%;
+
+    /*@media screen and (max-width: 670px) {*/
+    /*  width:70%;*/
+    /*}*/
+
+    @media screen and (max-width: 960px) {
+      width:80%;
+    }
+  }
+
+  #nav-main-navigation{
+    width: 50%;
+    color: white;
+    text-align: right;
+
+    ul {
+      list-style-type: none;
+
+      li{
+        display: inline;
+      }
+
+      li a{
+        text-decoration: none;
+        color: white !important;
+        font-size: 1.4rem;
+        padding: 0 10px;
+      }
+
+      li a:hover, a:focus{
+        color: white;
+      }
+
+    }
+
+    ul li a{
+      text-decoration: none;
+      color: white;
+    }
+
+    @media screen and (max-width: 960px) {
+      // Text Resize
+    }
+
+  }
 }
 </style>
 
 <template>
-    <v-app-bar 
-      app 
+  <div>
+    <v-app-bar
+      app
       clipped-left
       :height="$vuetify.breakpoint.xsOnly?80:105"
       color="#0e365b"
       class="pa-0 ma=0"
     >
-      <a :href="$baseUrl+'/'">
-        <div class='logo'><img :src="$baseUrl+'/img/US-DeptOfEducation-Seal.svg'" alt="Department of Education Seal" /></div>
-        <div class='headerText'>
-          <span class='edLine'>U.S. Department of Education</span>
-          <span class='siteTitle'>College Scorecard</span>
-        </div>
-      </a>
+
+<!--      <div-->
+<!--        id="mobile-nav-icon"-->
+<!--        class="d-md-none"-->
+<!--      >-->
+<!--        <v-app-bar-nav-icon-->
+<!--          @click="drawer = true"-->
+<!--        >-->
+<!--        </v-app-bar-nav-icon>-->
+<!--      </div>-->
+
+      <div id="nav-site-title">
+        <a :href="$baseUrl+'/'">
+          <div class='logo'><img :src="$baseUrl+'/img/US-DeptOfEducation-Seal.svg'" alt="Department of Education Seal" /></div>
+          <div class='headerText'>
+            <span class='edLine'>U.S. Department of Education</span>
+            <span class='siteTitle'>College Scorecard</span>
+          </div>
+        </a>
+      </div>
+
+      <div id="nav-main-navigation"
+        class="d-none d-md-block"
+      >
+        <nav aria-labelledby="primary-navigation">
+          <ul>
+            <li><a :href="`${$baseUrl}/`">Home</a></li>
+            <li><a :href="`${$baseUrl}/search`">Search</a></li>
+            <li><a :href="`${$baseUrl}/data`">About the Data</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div
+        id="mobile-nav-icon"
+        class="d-md-none"
+      >
+        <v-app-bar-nav-icon
+          class="float-right"
+          @click="drawer = true"
+        >
+        </v-app-bar-nav-icon>
+      </div>
     </v-app-bar>
-</template> 
+
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      temporary
+      disable-resize-watcher
+      right
+    >
+      <v-list
+        nav
+        dense
+      >
+        <v-list-item-group
+          v-model="group"
+        >
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>
+              <a :href="`${$baseUrl}/`">Home</a>
+            </v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-satellite-variant</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>
+              <a :href="`${$baseUrl}/search`">Search</a>
+            </v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-book-open</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>
+              <a :href="`${$baseUrl}/data`">About the Data</a>
+            </v-list-item-title>
+          </v-list-item>
+
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+  </div>
+
+</template>
+
+<script>
+export default {
+  data(){
+    return {
+      drawer: false,
+      group: false,
+    }
+  }
+}
+</script>
