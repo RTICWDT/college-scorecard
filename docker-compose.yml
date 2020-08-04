@@ -1,0 +1,9 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: bash -c "jekyll serve --baseurl='' -w"
+    volumes:
+      - .:/myapp
+    ports:
+      - "4000:4000"
