@@ -1,7 +1,6 @@
 FROM ruby:2.6.5-alpine
-#RUN gem install bundler
-#RUN apt-get update -qq && apt-get install -y nodejs
-RUN apk add --update nodejs-lts nodejs-npm
+
+RUN apk add --update nodejs-lts nodejs-npm g++ gcc make musl-dev git
 RUN mkdir /myapp
 WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
@@ -10,5 +9,4 @@ RUN bundle install
 COPY . /myapp
 EXPOSE 4000
 
-# Start the main process.
-CMD echo jekyll serve --baseurl='' -w
+CMD ["jekyll", "serve", "--host", "0.0.0.0", "--baseurl", "''", "-w", "--trace"]
