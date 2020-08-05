@@ -1,11 +1,13 @@
 FROM ruby:2.6.5-alpine
 
-RUN apk add --update nodejs-lts nodejs-npm g++ gcc make musl-dev git
+RUN apk add --update g++ gcc make musl-dev git
+
 RUN mkdir /myapp
 WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install
+
 COPY . /myapp
 EXPOSE 4000
 
