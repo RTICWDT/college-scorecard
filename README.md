@@ -15,6 +15,30 @@ This repo contains the front end of a web app with its API created by an instanc
 
 
 ## Installation
+Create a local development environment using Docker containers or with a traditional
+unix system.
+
+### Docker Container
+- Copy `.env.example` to `.env`
+- Add values to `.env`
+- In App Root: Start Docker Containers 
+  - `docker-compose up`
+  - You can start it with `docker-compose up -d` to detach the process from the current shell if desired. 
+- Wait for output:
+```
+web_1   |     Server address: http://0.0.0.0:4000/
+web_1   |   Server running... press ctrl-c to stop.
+```
+- Start a new cli tab/window (if not running detached)
+- **Only on first run:** Install Dependencies in `node` container
+  - `docker-compose exec node npm install`
+  - Wait
+- Launch webpack with watch on the `node` container:
+  - `docker-compose exec node npm run watch`
+  - Wait for: `Entrypoint main = app.js app.js.map`
+- Site will be available at: `http://localhost:4000/`
+
+### Traditional Unix Development Environment
 This site is made with [Jekyll]. Once you've got [Ruby] on your computer, you
 can run:
 
