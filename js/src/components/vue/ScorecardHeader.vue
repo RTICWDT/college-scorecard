@@ -98,6 +98,10 @@ header {
         color: white;
       }
 
+      li .nav-active{
+        color: black !important;
+      }
+
     }
 
     ul li a{
@@ -122,17 +126,6 @@ header {
       color="#0e365b"
       class="pa-0 ma=0"
     >
-
-<!--      <div-->
-<!--        id="mobile-nav-icon"-->
-<!--        class="d-md-none"-->
-<!--      >-->
-<!--        <v-app-bar-nav-icon-->
-<!--          @click="drawer = true"-->
-<!--        >-->
-<!--        </v-app-bar-nav-icon>-->
-<!--      </div>-->
-
       <div id="nav-site-title">
         <a :href="$baseUrl+'/'">
           <div class='logo'><img :src="$baseUrl+'/img/US-DeptOfEducation-Seal.svg'" alt="Department of Education Seal" /></div>
@@ -148,9 +141,15 @@ header {
       >
         <nav aria-labelledby="primary-navigation">
           <ul>
-            <li><a :href="`${$baseUrl}/`">Home</a></li>
-            <li><a :href="`${$baseUrl}/search`">Search</a></li>
-            <li><a :href="`${$baseUrl}/data`">About the Data</a></li>
+            <li>
+              <a :href="`${$baseUrl}/`" :class="{'nav-active' : isActive('/')}">Home</a>
+            </li>
+            <li>
+              <a :href="`${$baseUrl}/search`" :class="{'nav-active' : isActive('search')}">Search</a>
+            </li>
+            <li>
+              <a :href="`${$baseUrl}/data`" :class="{'nav-active' : isActive('data')}">About the Data</a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -221,6 +220,37 @@ export default {
     return {
       drawer: false,
       group: false,
+    }
+  },
+  computed:{
+    // Computed property for URL
+  },
+  watch:{
+    // Watch for changes, deal with it.
+  },
+  methods:{
+    isActive(activeURLString, activeQueryString = null, urlPathName = location.pathname, urlQueryString = location.search){
+
+      let isActive = false;
+
+      // For Home Page
+      if(activeURLString === '/' && urlPathName === '/'){
+        isActive =  true;
+
+      }else{
+        let splitURL = urlPathName.split('/');
+        let lastURLSegment = splitURL.pop() || splitURL.pop();
+        isActive = activeURLString === lastURLSegment;
+
+        // Check URL for query string with Regular Expressions;
+        if(activeQueryString){
+          let regexPattern = new RegExp('[?&]' + activeQueryString,'gi');
+          isActive = regexPattern.test(urlQueryString);
+        }
+
+      }
+
+      return isActive;
     }
   }
 }
