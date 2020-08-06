@@ -72,7 +72,7 @@
                     />
 
                     <div class="mt-5 text-right">
-                      <a :href="`${$baseUrl}/search/?toggle=fos`">Custom Search</a>
+                      <a :href="`${$baseUrl}/search/?toggle=fos`">More Search Options</a>
                     </div>
                   </v-card>
                 </v-tab-item>
