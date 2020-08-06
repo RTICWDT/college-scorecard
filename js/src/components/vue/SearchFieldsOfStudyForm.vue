@@ -28,7 +28,9 @@
       />
 
       <!--TODO: Chips-->
-      <div id="fos-chip-container">
+      <div id="fos-chip-container"
+        class="mt-4"
+      >
         <field-of-study-detail-chip
           v-for="fieldOfStudy in utility.cip4Cache"
           :key="fieldOfStudy.cip4"

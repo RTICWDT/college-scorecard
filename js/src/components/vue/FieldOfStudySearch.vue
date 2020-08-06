@@ -22,6 +22,12 @@
     return-object
     autocomplete="off"
     clearable
+    outlined
+    hide-no-data
+    hide-details
+    color="secondary"
+    prepend-inner-icon="fas fa-search"
+    aria-label="Field of Study Search"
   >
     <template v-slot:item="data">
       <v-list-item-content>
@@ -36,6 +42,10 @@
 </template>
 
 <style lang="scss">
+
+  .v-application .primary--text{
+    color: green !important;
+  }
   .fos-search-result-item-container{
     width: 300px;
 
