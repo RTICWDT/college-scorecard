@@ -21,7 +21,6 @@
               offset-md="2"
               class="d-none d-sm-flex pb-10"
             >
-              <!-- Search Form Component -->
               <v-tabs
                 grow
                 background-color="rgba(0,0,0,0)"
@@ -32,20 +31,38 @@
                 show-arrows
                 v-model="desktopTabs"
               >
-                <v-tab @click="GATrackEvent('Home Tab','Tab','Custom Search')" v>
-                  <span class="hidden-sm-and-down">Custom Search</span>
-                  <span class="hidden-md-and-up">Search</span>
-                </v-tab>
-                <v-tab @click="GATrackEvent('Home Tab','Tab','Name Search')" color="white">Name Search</v-tab>
+<!--                <v-tab @click="GATrackEvent('Home Tab','Tab','Custom Search')">-->
+<!--                  <span class="hidden-sm-and-down">Custom Search</span>-->
+<!--                  <span class="hidden-md-and-up">Search</span>-->
+<!--                </v-tab>-->
+<!--                <v-tab @click="GATrackEvent('Home Tab','Tab','Name Search')" color="white">Name Search</v-tab>-->
+                <v-tab @click="GATrackEvent('Home Tab','Tab','Search Schools')" color="white">Search Schools</v-tab>
+                <v-tab @click="GATrackEvent('Home Tab','Tab','Search Fields of Study')" color="white">Search Fields of Study</v-tab>
                 <v-tab @click="GATrackEvent('Home Tab','Tab','Show Me Options')" color="white">Show Me Options</v-tab>
                 <v-tab-item>
-                  <v-card class="px-5 pt-0 pb-5">
-                    <search-form @search-query="directToSearch" />
-                  </v-card>
+<!--                  <v-card class="px-5 pt-0 pb-5">-->
+<!--                    <search-form @search-query="directToSearch" />-->
+<!--                  </v-card>-->
+                      <v-card class="pa-5 mb-3">
+                        <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
+
+                        <div class="mt-5 text-right">
+                          <a :href="`${$baseUrl}/search/?toggle=institutions`">Custom Search</a>
+                        </div>
+                      </v-card>
                 </v-tab-item>
                 <v-tab-item>
-                  <v-card class="pa-5 mb-3">
-                    <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
+<!--                  <v-card class="pa-5 mb-3">-->
+<!--                    <name-autocomplete @school-name-selected="handleSchoolNameSelected" />-->
+<!--                  </v-card>-->
+                  <v-card class="pa-5">
+                    <field-of-study-search
+                      @field-of-study-selected="handleFieldOfStudySelected"
+                    />
+
+                    <div class="mt-5 text-right">
+                      <a :href="`${$baseUrl}/search/?toggle=fos`">Custom Search</a>
+                    </div>
                   </v-card>
                 </v-tab-item>
                 <v-tab-item>
@@ -90,7 +107,7 @@
           </v-row>
         </v-container>
       </div>
-      <div class="homeContent mt-5">
+      <div class="homeContent mt-5 pa-6">
         <v-container class="pa-0 my-0">
           <v-row class="pa-0">
             <v-col
@@ -137,6 +154,7 @@
     <scorecard-footer />
   </v-app>
 </template>
+
 <style lang="scss" scoped>
 @import 'sass/_variables.scss';
 .home-splash {
@@ -156,9 +174,9 @@
     color: #FFFFFF !important;
   }
 .homeContent {
-  border-top: 20px
-    solid
-    #ffffff;
+  /*border-top: 20px*/
+  /*  solid*/
+  /*  #ffffff;*/
   background-color: #b5d7f4;
 }
 </style>
@@ -191,6 +209,7 @@
   text-decoration: none;
 }
 </style>
+
 <script>
 import PayingForCollege from "components/vue/PayingForCollege.vue";
 import CannedSearchContainer from "components/vue/CannedSearchContainer.vue";
@@ -198,25 +217,25 @@ import querystring from "querystring";
 import SearchForm from "components/vue/SearchForm.vue";
 import NameAutocomplete from "components/vue/NameAutocomplete.vue";
 import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
+import FieldOfStudySearch from '../../components/vue/FieldOfStudySearch.vue';
+
 export default {
   mixins: [AnalyticsEvents],
   components: {
     "paying-for-college": PayingForCollege,
     "canned-search-container": CannedSearchContainer,
     "search-form": SearchForm,
-    "name-autocomplete": NameAutocomplete
+    "name-autocomplete": NameAutocomplete,
+    "field-of-study-search": FieldOfStudySearch,
   },
   props: ["baseUrl"],
   data() {
     return {
       mobilePanels: 0,
-      desktopTabs: 1
+      desktopTabs: 0
     };
   },
   methods: {
-    // handleCannedSearchClick(cannedSearchData){
-    //   this.directToSearch(cannedSearchData);
-    // },
     directToSearch(params) {
       // Generate URL based on params,
       let qs = querystring.stringify(params);
@@ -235,15 +254,13 @@ export default {
       {
         // window.location = this.$baseUrl+'/search/?name=' + encodeURIComponent(school);
         window.location = this.$baseUrl+'/search/?search=' + encodeURIComponent(school);
-      }
-      else
-      {
+      }else{
         // window.location = this.$baseUrl+'/search/?name=' + encodeURIComponent(school['school.name']) + "&id="+school.id;
         window.location = this.$baseUrl+'/search/?search=' + encodeURIComponent(school['school.name']) + "&id="+school.id;
-
-        
-
       }
+    },
+    handleFieldOfStudySelected(fieldOfStudy){
+      window.location = this.$baseUrl+'/search/?toggle=fos&cip4=' + encodeURIComponent(fieldOfStudy.cip4);
     }
   }
 };
