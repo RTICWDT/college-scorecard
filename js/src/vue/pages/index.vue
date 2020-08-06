@@ -78,18 +78,28 @@
             <v-col cols="12" class="pa-5 d-block d-sm-none">
               <v-expansion-panels class="mb-2" v-model="mobilePanels">
                 <v-expansion-panel>
-                  <v-expansion-panel-header>Name Search</v-expansion-panel-header>
+                  <v-expansion-panel-header>Search Schools</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
                   </v-expansion-panel-content>
+<!--                  <v-expansion-panel-header>Name Search</v-expansion-panel-header>-->
+<!--                  <v-expansion-panel-content>-->
+<!--                    <name-autocomplete @school-name-selected="handleSchoolNameSelected" />-->
+<!--                  </v-expansion-panel-content>-->
                 </v-expansion-panel>
               </v-expansion-panels>
               <v-expansion-panels class="mb-2">
                 <v-expansion-panel>
-                  <v-expansion-panel-header>Custom Search</v-expansion-panel-header>
-                  <v-expansion-panel-content class="pa-0 ma-0 mt-n5 mx-n5">
-                    <search-form @search-query="directToSearch" />
+                  <v-expansion-panel-header>Search Field Of study</v-expansion-panel-header>
+                  <v-expansion-panel-content class="ma-0 mt-n5 mx-n5">
+                    <field-of-study-search
+                      @field-of-study-selected="handleFieldOfStudySelected"
+                    />
                   </v-expansion-panel-content>
+<!--                  <v-expansion-panel-header>Custom Search</v-expansion-panel-header>-->
+<!--                  <v-expansion-panel-content class="pa-0 ma-0 mt-n5 mx-n5">-->
+<!--                    <search-form @search-query="directToSearch" />-->
+<!--                  </v-expansion-panel-content>-->
                 </v-expansion-panel>
               </v-expansion-panels>
               <v-expansion-panels class="mb-2">
