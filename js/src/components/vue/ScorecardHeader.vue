@@ -142,13 +142,24 @@ header {
         <nav aria-labelledby="primary-navigation">
           <ul>
             <li>
-              <a :href="`${$baseUrl}/`" :class="{'nav-active' : isActive('/')}">Home</a>
+              <a
+                :href="`${$baseUrl}/`"
+                :class="{
+                  'nav-active' : activeNavElement === '/'}"
+              >
+                Home
+              </a>
             </li>
             <li>
-              <a :href="`${$baseUrl}/search`" :class="{'nav-active' : isActive('search')}">Search</a>
+              <a
+                :href="`${$baseUrl}/search`"
+                :class="{'nav-active' : activeNavElement === 'search'}"
+              >
+                Search
+              </a>
             </li>
             <li>
-              <a :href="`${$baseUrl}/data`" :class="{'nav-active' : isActive('data')}">About the Data</a>
+              <a :href="`${$baseUrl}/data`" :class="{'nav-active' : activeNavElement === 'data'}">About the Data</a>
             </li>
           </ul>
         </nav>
@@ -215,6 +226,9 @@ header {
 </template>
 
 <script>
+  // TODO -  I left off with trying to get ?toggle=fos to update with the URL
+  // May have to hack it with an event/listeners on bus
+
 export default {
   data(){
     return {
@@ -224,6 +238,26 @@ export default {
   },
   computed:{
     // Computed property for URL
+    currentURLLocationObject(){
+      return {
+        pathname: location.pathname,
+        search: location.search
+      }
+    },
+    activeNavElement(){
+      // This is ugly
+      if(this.isActive('/')){
+        return '/';
+      }else if (this.isActive('search', 'toggle=fos')){
+        return 'search-fos';
+      }else if(this.isActive('search', 'toggle=institutions')){
+        return 'search-institutions';
+      }else if(this.isActive('search')){
+        return 'search';
+      }else if(this.isActive('data')){
+        return 'data';
+      }
+    }
   },
   watch:{
     // Watch for changes, deal with it.
@@ -252,6 +286,11 @@ export default {
 
       return isActive;
     }
+  },
+  created(){
+    document.addEventListener('popstate', function() {
+      console.log('The hash has changed!')
+    }, false);
   }
 }
 </script>
