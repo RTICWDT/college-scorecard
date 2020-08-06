@@ -47,7 +47,18 @@
                         <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
 
                         <div class="mt-5 text-right">
-                          <a :href="`${$baseUrl}/search/?toggle=institutions`">Custom Search</a>
+<!--                          <a :href="`${$baseUrl}/search/?toggle=institutions`">Custom Search</a>-->
+                          <v-btn text small
+                            @click="toggleCustomSearch = !toggleCustomSearch"
+                          >
+                            Custom Search
+                            <v-icon v-if="toggleCustomSearch">mdi-menu-up</v-icon>
+                            <v-icon v-else>mdi-menu-down</v-icon>
+                          </v-btn>
+                        </div>
+
+                        <div v-if="toggleCustomSearch">
+                          <search-form @search-query="directToSearch" />
                         </div>
                       </v-card>
                 </v-tab-item>
@@ -75,6 +86,8 @@
                 </v-tab-item>
               </v-tabs>
             </v-col>
+
+            <!-- Mobile View -->
             <v-col cols="12" class="pa-5 d-block d-sm-none">
               <v-expansion-panels class="mb-2" v-model="mobilePanels">
                 <v-expansion-panel>
@@ -126,8 +139,10 @@
               offset-sm="1"
               class="homeCallout apprenticeships pa-0 my-0 mr-sm-3"
             >
-              <h2 class="title">Alternative Pathways to a Career</h2>
+              <div class="home-icon-wrapper">
 
+              </div>
+              <h2 class="title">Alternative Pathways to a Career</h2>
               <p>
                 <strong>Apprenticeships</strong> are another great way to jump-start your career.
               </p>
@@ -155,7 +170,9 @@
               </p>
             </v-col>
             <v-col cols="12" sm="5" class="homeCallout paying pa-0 my-0 ml-sm-3">
-              <paying-for-college />
+              <div class="home-icon-wrapper">
+              </div>
+              <paying-for-college></paying-for-college>
             </v-col>
           </v-row>
         </v-container>
@@ -192,13 +209,13 @@
 </style>
 <style lang="scss">
 .homeCallout {
-  background-color: #ffffff;
+  /*background-color: #ffffff;*/
   h2 {
     font-weight: bold !important;
-    color: #ffffff;
+    /*color: #ffffff;*/
     text-align: center;
     padding: 1rem;
-    margin-bottom: 2rem !important;
+    /*margin-bottom: 2rem !important;*/
   }
   p {
     text-align: center;
@@ -208,16 +225,24 @@
   }
   &.apprenticeships
     h2 {
-    background-color: #436692;
+    /*background-color: #436692;*/
   }
   &.paying
     h2 {
-    background-color: #436692;
+    /*background-color: #436692;*/
   }
 }
 .sublink {
   text-decoration: none;
 }
+  .home-icon-wrapper{
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+    background: #FFFFFF;
+    border-radius: 50%
+  }
+
 </style>
 
 <script>
@@ -242,7 +267,8 @@ export default {
   data() {
     return {
       mobilePanels: 0,
-      desktopTabs: 0
+      desktopTabs: 0,
+      toggleCustomSearch: false
     };
   },
   methods: {
