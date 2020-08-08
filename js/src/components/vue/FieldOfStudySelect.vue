@@ -1,80 +1,4 @@
 <template>
-  <!-- <div>
-    <v-text-field
-      label="Field Of Study"
-      outlined
-      dense
-      append-icon="mdi-map-marker"
-    ></v-text-field>
-
-    <v-card
-      height="400px"
-      style="overflow:scroll"
-    >
-      <v-list>
-       <v-list-group
-          v-for="(program, index) in displayFOS"
-          :key="index"
-          no-action
-        >
-          <template v-slot:activator>
-            <v-list-item-content>
-              <v-list-item-title v-text="program.name"></v-list-item-title>
-            </v-list-item-content>
-          </template>
-
-          <v-list-item
-            v-for="subItem in program.fields"
-            :key="subItem.title"
-            two-line
-            @click=""
-          >
-            <v-list-item-content>
-              <v-list-item-title v-text="subItem.title"></v-list-item-title>
-            </v-list-item-content>
-
-          </v-list-item>
-        </v-list-group>
-      </v-list>
-    </v-card>
-  </div> -->
-
-
-  <!-- I can't get this to work correctly.  Moving with a custom thing for now -->
-  <!-- <v-combobox
-    :items="displayFOS"
-  >
-    <template slot='item' slot-scope='{ item,on }'>
-      <v-list>
-       <v-list-group
-          no-action
-        >
-          <template v-slot:activator>
-            <v-list-item-content>
-              <v-list-item-title
-                v-text="item.name"
-              >
-              </v-list-item-title>
-            </v-list-item-content>
-          </template>
-
-          <v-list-item
-            v-for="subItem in item.fields"
-            :key="subItem.title"
-            two-line
-            @click=""
-          >
-            <v-list-item-content>
-              <v-list-item-title v-text="subItem.title"></v-list-item-title>
-            </v-list-item-content>
-
-          </v-list-item>
-
-        </v-list-group>
-      </v-list>
-    </template>
-  </v-combobox> -->
-
 <!--  <v-combobox-->
 <!--    :items="menuFOS"-->
 <!--    item-text="selectTitle"-->
@@ -89,8 +13,6 @@
 <!--    :value="value"-->
 <!--  >-->
 <!--  </v-combobox>-->
-
-<!--  Works but there are some issues with focus, blur-->
   <div id="field-of-study-select-search-container">
     <v-text-field
       id="field-of-study-select-search-text"
@@ -114,7 +36,7 @@
       id="field-of-study-select-search-result"
       v-show="displayMenu"
     >
-      <v-list>
+      <v-list v-if="displayFOS.length > 0">
         <v-list-group
           v-for="cip2 in displayFOS"
           :key="cip2.name"
@@ -140,121 +62,15 @@
             </v-list-item-content>
 
           </v-list-item>
-
         </v-list-group>
       </v-list>
+
+      <span>
+        No Results
+      </span>
+
     </v-card>
   </div>
-
-<!--    <div>-->
-<!--      <v-text-field-->
-<!--        v-model="fieldOfStudySearchInput"-->
-<!--        clearable-->
-<!--        hide-details-->
-<!--        @focus="handleSelectFocus"-->
-<!--        @blur="handleSelectBlur"-->
-<!--      >-->
-<!--        <template slot="append">-->
-<!--          <v-icon v-if="displayMenu">mdi-menu-up</v-icon>-->
-<!--          <v-icon v-else>mdi-menu-down</v-icon>-->
-<!--        </template>-->
-<!--      </v-text-field>-->
-
-<!--      <div id="field-of-study-select-search-result"-->
-
-<!--      >-->
-<!--      </div>-->
-
-<!--      <v-menu-->
-<!--        id="field-of-study-select-menu"-->
-<!--        :value="displayMenu"-->
-<!--        :close-on-click="false"-->
-<!--        attach="#field-of-study-select-search-result"-->
-<!--        absolute-->
-<!--        z-index="99"-->
-<!--      >-->
-<!--        <v-list>-->
-<!--          <v-list-group-->
-<!--            v-for="cip2 in cipTwoNestedCipFour"-->
-<!--            :key="cip2.name"-->
-<!--          >-->
-<!--            <template v-slot:activator>-->
-<!--              <v-list-item-content>-->
-<!--                <v-list-item-title-->
-<!--                  v-text="cip2.name"-->
-<!--                >-->
-<!--                </v-list-item-title>-->
-<!--              </v-list-item-content>-->
-<!--            </template>-->
-
-<!--            <v-list-item-->
-<!--              v-for="ci4 in cip2.fields"-->
-<!--              :key="ci4.text"-->
-<!--              two-line-->
-<!--              @click=""-->
-<!--            >-->
-<!--              <v-list-item-content>-->
-<!--                <v-list-item-title v-text="ci4.text"></v-list-item-title>-->
-<!--              </v-list-item-content>-->
-
-<!--            </v-list-item>-->
-
-<!--          </v-list-group>-->
-<!--        </v-list>-->
-<!--      </v-menu>-->
-
-<!--    </div>-->
-
-
-
-<!--    <v-menu-->
-<!--      id="field-of-study-select-menu"-->
-<!--      :value="displayMenu"-->
-<!--      :close-on-click="false"-->
-<!--      :close-on-content-click="false"-->
-<!--      attach="#field-of-study-select-search-result"-->
-<!--      absolute-->
-<!--      z-index="99"-->
-<!--    >-->
-<!--      <v-list>-->
-<!--        <v-list-group-->
-<!--          v-for="cip2 in cipTwoNestedCipFour"-->
-<!--          :key="cip2.name"-->
-<!--        >-->
-<!--          <template v-slot:activator>-->
-<!--            <v-list-item-content>-->
-<!--              <v-list-item-title-->
-<!--                v-text="cip2.name"-->
-<!--              >-->
-<!--              </v-list-item-title>-->
-<!--            </v-list-item-content>-->
-<!--          </template>-->
-
-<!--          <v-list-item-->
-<!--            v-for="ci4 in cip2.fields"-->
-<!--            :key="ci4.text"-->
-<!--            two-line-->
-<!--            @click=""-->
-<!--          >-->
-<!--            <v-list-item-content>-->
-<!--              <v-list-item-title v-text="ci4.text"></v-list-item-title>-->
-<!--            </v-list-item-content>-->
-
-<!--          </v-list-item>-->
-
-<!--        </v-list-group>-->
-<!--      </v-list>-->
-<!--    </v-menu>-->
-
-<!--    <div id="field-of-study-select-items"-->
-<!--      v-if="displayMenu"-->
-<!--    >-->
-
-
-<!--    </div>-->
-
-
-
 </template>
 
 <style lang="scss">
@@ -309,10 +125,6 @@ export default {
     }
   },
   props:{
-    // displayFosCipFour:{
-    //   type: Array,
-    //   default: null
-    // },
     cipTwoNestedCipFour:{
       type: Array,
       default: null,
@@ -324,14 +136,6 @@ export default {
   components:{
   },
   computed:{
-    displayDisable(){
-      // return this.displayFosCipFour.map((item) => {
-      //   return {
-      //     ...item,
-      //     // disabled:true
-      //   }
-      // });
-    }
   },
   methods:{
     setInputValue(value){
@@ -385,8 +189,8 @@ export default {
         this.displayFOS = _.cloneDeep(this.cipTwoNestedCipFour);
         return null;
       }
-      console.log("Search");
-      console.log(value);
+      // console.log("Search");
+      // console.log(value);
 
       let displayData = this.displayFOS.reduce((returnArray, cip2) => {
         let tmpFieldsArray = cip2.fields.reduce((cip4Array, cip4) => {
