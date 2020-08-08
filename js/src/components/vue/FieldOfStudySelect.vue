@@ -94,7 +94,8 @@
   <div>
     <v-text-field
       id="field-of-study-select-search-text"
-      :value="test(value)"
+      :value="setInputValue(value)"
+      @input="filterObject"
       @change="handleChange"
       clearable
       hide-details
@@ -115,7 +116,7 @@
     >
       <v-list>
         <v-list-group
-          v-for="cip2 in cipTwoNestedCipFour"
+          v-for="cip2 in displayFOS"
           :key="cip2.name"
         >
           <template v-slot:activator>
@@ -307,7 +308,7 @@ export default {
     }
   },
   methods:{
-    test(value){
+    setInputValue(value){
       if(this.value === {} || this.value === '' || this.value === null){
         return "";
       }else{
@@ -316,9 +317,13 @@ export default {
     },
     handleChange(event){
       // console.log(event);
-      this.$emit('input', event);
+      if(event && typeof event === 'object' && typeof event.level !== 'undefined'){
+        this.$emit('input', event);
+        this.displayFOS = _.cloneDeep(this.cipTwoNestedCipFour);
+      }
     },
     handleInputClear(e){
+      this.displayFOS = _.cloneDeep(this.cipTwoNestedCipFour);
       this.$emit('input-clear', e);
     },
     handleFieldOfStudySelectClick(cip4){
@@ -326,7 +331,7 @@ export default {
       // this.$nextTick(() => {
       //   this.
       // })
-
+      this.displayFOS = _.cloneDeep(this.cipTwoNestedCipFour);
       this.displayMenu = false;
       this.$emit('input',cip4);
     },
@@ -347,6 +352,32 @@ export default {
       // if(event.relatedTarget === null || event.relatedTarget.className !== "v-list-group__header v-list-item v-list-item--link theme--light"){
       //   this.displayMenu = false;
       // }
+    },
+    filterObject(value){
+      // console.log("Search");
+      // console.log(value);
+      if(!value || value === "")
+      {
+        this.displayFOS = _.cloneDeep(this.cipTwoNestedCipFour);
+        return null;
+      }
+
+      this.displayFOS = this.displayFOS.reduce((returnArray, cip2) => {
+        let tmpFieldsArray = cip2.fields.reduce((cip4Array, cip4) => {
+          if(cip4.text.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) > -1){
+            cip4Array.push(cip4);
+          }
+          return cip4Array;
+        },[])
+
+        if (tmpFieldsArray.length > 0){
+          let tmpCip2Array = cip2;
+          tmpCip2Array.fields = tmpFieldsArray;
+          returnArray.push(tmpCip2Array);
+        }
+
+        return returnArray;
+      },[])
     }
   },
   mounted(){
@@ -356,6 +387,9 @@ export default {
     //   final.push(...item.fields);
     //   return final;
     // },[]);
+
+    this.displayFOS = _.cloneDeep(this.cipTwoNestedCipFour);
+
 
     // Add listener for escape key
     document.addEventListener("keydown", e => {
