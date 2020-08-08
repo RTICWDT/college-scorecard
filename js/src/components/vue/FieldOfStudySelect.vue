@@ -261,9 +261,23 @@
   #field-of-study-select-search-result{
     position: absolute;
     width: 380px;
-    height: 400px;
+    max-height: 400px;
     overflow-y: scroll;
     z-index: 8;
+
+    .v-list-item__title{
+      text-overflow: unset;
+      overflow: unset;
+      white-space: unset;
+      overflow-wrap: break-word;
+    }
+
+    .v-list-item__subtitle{
+      text-overflow: unset;
+      overflow: unset;
+      white-space: unset;
+      overflow-wrap: break-word;
+    }
   }
 
 </style>
