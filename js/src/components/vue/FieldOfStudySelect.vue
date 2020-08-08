@@ -91,7 +91,7 @@
 <!--  </v-combobox>-->
 
 <!--  Works but there are some issues with focus, blur-->
-  <div>
+  <div id="field-of-study-select-search-container">
     <v-text-field
       id="field-of-study-select-search-text"
       :value="setInputValue(value)"
@@ -112,7 +112,7 @@
     <v-card
       class="pa-2 mt-1"
       id="field-of-study-select-search-result"
-      v-if="displayMenu"
+      v-show="displayMenu"
     >
       <v-list>
         <v-list-group
@@ -260,7 +260,7 @@
 <style lang="scss">
   #field-of-study-select-search-result{
     position: absolute;
-    width: 380px;
+    /*width: 380px;*/
     max-height: 400px;
     overflow-y: scroll;
     z-index: 8;
@@ -268,14 +268,14 @@
     .v-list-item__title{
       text-overflow: unset;
       overflow: unset;
-      white-space: unset;
+      white-space: normal;
       overflow-wrap: break-word;
     }
 
     .v-list-item__subtitle{
       text-overflow: unset;
       overflow: unset;
-      white-space: unset;
+      white-space: normal;
       overflow-wrap: break-word;
     }
   }
@@ -284,6 +284,18 @@
 
 <script>
 export default {
+  watch:{
+    displayMenu(newVal, oldVal){
+      // Adjust Menu Width.  Fixes issue in IE
+      if(newVal){
+        let menuWidth = document.getElementById('field-of-study-select-search-container').clientWidth;
+
+        if(menuWidth){
+          document.getElementById('field-of-study-select-search-result').style.width = menuWidth + "px";
+        }
+      }
+    }
+  },
   data(){
     return{
       displayFOS: null,
@@ -368,15 +380,15 @@ export default {
       // }
     },
     filterObject(value){
-      // console.log("Search");
-      // console.log(value);
       if(!value || value === "")
       {
         this.displayFOS = _.cloneDeep(this.cipTwoNestedCipFour);
         return null;
       }
+      console.log("Search");
+      console.log(value);
 
-      this.displayFOS = this.displayFOS.reduce((returnArray, cip2) => {
+      let displayData = this.displayFOS.reduce((returnArray, cip2) => {
         let tmpFieldsArray = cip2.fields.reduce((cip4Array, cip4) => {
           if(cip4.text.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) > -1){
             cip4Array.push(cip4);
@@ -392,6 +404,8 @@ export default {
 
         return returnArray;
       },[])
+
+      this.displayFOS = displayData;
     }
   },
   mounted(){
@@ -403,11 +417,13 @@ export default {
     // },[]);
 
     this.displayFOS = _.cloneDeep(this.cipTwoNestedCipFour);
-
+    // console.log(this.cipTwoNestedCipFour);
 
     // Add listener for escape key
     document.addEventListener("keydown", e => {
-      if(e.code === 'Escape'){
+      // console.log(e.code);
+      // console.log(e.key);
+      if(e.code === 'Escape' || e.key === 'Esc'){
         this.displayMenu = false;
         document.getElementById('field-of-study-select-search-text').blur();
       }
