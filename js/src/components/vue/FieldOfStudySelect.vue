@@ -34,9 +34,7 @@
             </v-list-item-content>
 
           </v-list-item>
-
         </v-list-group>
-
       </v-list>
     </v-card>
   </div> -->
@@ -85,14 +83,189 @@
 <!--  >-->
 <!--  </v-combobox>-->
 
-  <v-combobox
-    :items="menuFOS"
-    @input="handleChange"
-    :value="value"
-  >
-  </v-combobox>
+<!--  <v-combobox-->
+<!--    :items="displayDisable"-->
+<!--    @input="handleChange"-->
+<!--    :value="value"-->
+<!--  >-->
+<!--  </v-combobox>-->
+
+<!--  Works but there are some issues with focus, blur-->
+  <div>
+    <v-text-field
+      id="field-of-study-select-search-text"
+      :value="test(value)"
+      @change="handleChange"
+      clearable
+      hide-details
+      @focus="handleSelectFocus"
+      @blur="handleSelectBlur"
+      @click:clear="handleInputClear"
+    >
+      <template slot="append">
+        <v-icon v-if="displayMenu">mdi-menu-up</v-icon>
+        <v-icon v-else>mdi-menu-down</v-icon>
+      </template>
+    </v-text-field>
+
+    <v-card
+      class="pa-2 mt-1"
+      id="field-of-study-select-search-result"
+      v-if="displayMenu"
+    >
+      <v-list>
+        <v-list-group
+          v-for="cip2 in cipTwoNestedCipFour"
+          :key="cip2.name"
+        >
+          <template v-slot:activator>
+            <v-list-item-content class="field-of-study-search-item-title">
+              <v-list-item-title
+                class="field-of-study-search-item-title"
+                v-text="cip2.name"
+              >
+              </v-list-item-title>
+            </v-list-item-content>
+          </template>
+
+          <v-list-item
+            v-for="cip4 in cip2.fields"
+            :key="cip4.text"
+            two-line
+            @click="handleFieldOfStudySelectClick(cip4)"
+          >
+            <v-list-item-content>
+              <v-list-item-title v-text="cip4.text" class="field-of-study-search-item-body"></v-list-item-title>
+            </v-list-item-content>
+
+          </v-list-item>
+
+        </v-list-group>
+      </v-list>
+    </v-card>
+  </div>
+
+<!--    <div>-->
+<!--      <v-text-field-->
+<!--        v-model="fieldOfStudySearchInput"-->
+<!--        clearable-->
+<!--        hide-details-->
+<!--        @focus="handleSelectFocus"-->
+<!--        @blur="handleSelectBlur"-->
+<!--      >-->
+<!--        <template slot="append">-->
+<!--          <v-icon v-if="displayMenu">mdi-menu-up</v-icon>-->
+<!--          <v-icon v-else>mdi-menu-down</v-icon>-->
+<!--        </template>-->
+<!--      </v-text-field>-->
+
+<!--      <div id="field-of-study-select-search-result"-->
+
+<!--      >-->
+<!--      </div>-->
+
+<!--      <v-menu-->
+<!--        id="field-of-study-select-menu"-->
+<!--        :value="displayMenu"-->
+<!--        :close-on-click="false"-->
+<!--        attach="#field-of-study-select-search-result"-->
+<!--        absolute-->
+<!--        z-index="99"-->
+<!--      >-->
+<!--        <v-list>-->
+<!--          <v-list-group-->
+<!--            v-for="cip2 in cipTwoNestedCipFour"-->
+<!--            :key="cip2.name"-->
+<!--          >-->
+<!--            <template v-slot:activator>-->
+<!--              <v-list-item-content>-->
+<!--                <v-list-item-title-->
+<!--                  v-text="cip2.name"-->
+<!--                >-->
+<!--                </v-list-item-title>-->
+<!--              </v-list-item-content>-->
+<!--            </template>-->
+
+<!--            <v-list-item-->
+<!--              v-for="ci4 in cip2.fields"-->
+<!--              :key="ci4.text"-->
+<!--              two-line-->
+<!--              @click=""-->
+<!--            >-->
+<!--              <v-list-item-content>-->
+<!--                <v-list-item-title v-text="ci4.text"></v-list-item-title>-->
+<!--              </v-list-item-content>-->
+
+<!--            </v-list-item>-->
+
+<!--          </v-list-group>-->
+<!--        </v-list>-->
+<!--      </v-menu>-->
+
+<!--    </div>-->
+
+
+
+<!--    <v-menu-->
+<!--      id="field-of-study-select-menu"-->
+<!--      :value="displayMenu"-->
+<!--      :close-on-click="false"-->
+<!--      :close-on-content-click="false"-->
+<!--      attach="#field-of-study-select-search-result"-->
+<!--      absolute-->
+<!--      z-index="99"-->
+<!--    >-->
+<!--      <v-list>-->
+<!--        <v-list-group-->
+<!--          v-for="cip2 in cipTwoNestedCipFour"-->
+<!--          :key="cip2.name"-->
+<!--        >-->
+<!--          <template v-slot:activator>-->
+<!--            <v-list-item-content>-->
+<!--              <v-list-item-title-->
+<!--                v-text="cip2.name"-->
+<!--              >-->
+<!--              </v-list-item-title>-->
+<!--            </v-list-item-content>-->
+<!--          </template>-->
+
+<!--          <v-list-item-->
+<!--            v-for="ci4 in cip2.fields"-->
+<!--            :key="ci4.text"-->
+<!--            two-line-->
+<!--            @click=""-->
+<!--          >-->
+<!--            <v-list-item-content>-->
+<!--              <v-list-item-title v-text="ci4.text"></v-list-item-title>-->
+<!--            </v-list-item-content>-->
+
+<!--          </v-list-item>-->
+
+<!--        </v-list-group>-->
+<!--      </v-list>-->
+<!--    </v-menu>-->
+
+<!--    <div id="field-of-study-select-items"-->
+<!--      v-if="displayMenu"-->
+<!--    >-->
+
+
+<!--    </div>-->
+
+
 
 </template>
+
+<style lang="scss">
+  #field-of-study-select-search-result{
+    position: absolute;
+    width: 380px;
+    height: 400px;
+    overflow-y: scroll;
+    z-index: 8;
+  }
+
+</style>
 
 <script>
 export default {
@@ -101,13 +274,22 @@ export default {
       displayFOS: null,
       menuFOS:null,
       selectedCip2: null,
-      selectedCip4: null
+      selectedCip4: null,
+      displayMenu: false,
+      fieldOfStudySearchInput:"",
+      x:0,
+      y:0
     }
   },
   props:{
-    displayFosCipFour:{
+    // displayFosCipFour:{
+    //   type: Array,
+    //   default: null
+    // },
+    cipTwoNestedCipFour:{
       type: Array,
-      default: null
+      default: null,
+      required: true
     },
     value:{
     }
@@ -115,20 +297,98 @@ export default {
   components:{
   },
   computed:{
+    displayDisable(){
+      // return this.displayFosCipFour.map((item) => {
+      //   return {
+      //     ...item,
+      //     // disabled:true
+      //   }
+      // });
+    }
   },
   methods:{
+    test(value){
+      if(this.value === {} || this.value === '' || this.value === null){
+        return "";
+      }else{
+        return this.value.text;
+      }
+    },
     handleChange(event){
-      console.log(event);
+      // console.log(event);
       this.$emit('input', event);
-    } 
+    },
+    handleInputClear(e){
+      this.$emit('input-clear', e);
+    },
+    handleFieldOfStudySelectClick(cip4){
+      // console.log(cip4);
+      // this.$nextTick(() => {
+      //   this.
+      // })
+
+      this.displayMenu = false;
+      this.$emit('input',cip4);
+    },
+    handleSelectFocus(event){
+      // console.log(event);
+      // this.$nextTick(() => {
+      //   this.displayMenu = true
+      // })
+
+      event.preventDefault();
+      this.$nextTick(() => {
+        this.displayMenu = true
+      })
+    },
+    handleSelectBlur(event){
+      // console.log("Blur");
+      // console.log(event);
+      // if(event.relatedTarget === null || event.relatedTarget.className !== "v-list-group__header v-list-item v-list-item--link theme--light"){
+      //   this.displayMenu = false;
+      // }
+    }
   },
   mounted(){
     // Set up the select menu with cip2 headers and cip4 sub items;
-    this.menuFOS = this.displayFosCipFour.reduce((final,item) => {
-      final.push({header:item.name});
-      final.push(...item.fields);
-      return final;
-    },[]);
+    // this.menuFOS = this.displayFosCipFour.reduce((final,item) => {
+    //   final.push({header:item.name});
+    //   final.push(...item.fields);
+    //   return final;
+    // },[]);
+
+    // Add listener for escape key
+    document.addEventListener("keydown", e => {
+      if(e.code === 'Escape'){
+        this.displayMenu = false;
+        document.getElementById('field-of-study-select-search-text').blur();
+      }
+    });
+
+    // Click to close
+    document.addEventListener('click', e => {
+      // console.log('click: ');
+      // console.log(e);
+
+      if(e.target === null && typeof e.target.classList === 'undefined'){
+        return null;
+      }
+      var classList = e.target.classList
+
+      // Stay open for UI elements else close
+      if(
+        classList.contains('field-of-study-search-item-title') ||
+        classList.contains('field-of-study-search-item-body') ||
+        e.target.id === 'field-of-study-select-search-text'
+      ){
+        return null;
+      }else{
+        this.displayMenu = false;
+        document.getElementById('field-of-study-select-search-text').blur();
+      }
+
+
+    });
   }
 };
 </script>

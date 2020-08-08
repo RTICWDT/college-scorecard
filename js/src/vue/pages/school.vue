@@ -188,8 +188,9 @@
                       <h2>Fields Of Study Offered</h2>
 
                       <field-of-study-select
-                        :display-fos-cip-four="fieldOfStudySelectItems"
+                        :cip-two-nested-cip-four="fieldOfStudySelectItems"
                         v-model="selectedFOS"
+                        @input-clear="selectedFOS = null"
                       />
 
                       <div>
@@ -1292,6 +1293,7 @@
     </v-bottom-sheet>
   </v-app>
 </template>
+
 <style lang="scss">
 .leaflet-bottom {
   z-index: 100 !important;
@@ -1379,7 +1381,9 @@ export default {
         enroll: "enroll_both",
         study: "study_both"
       },
-      selectedFOS:null,
+      selectedFOS: {
+        text:""
+      },
       fosSalarySelect:"aid",
       fosSalarySelectItems:[
         { text: "Financial Aid Recipients", value: "aid"},
@@ -1743,7 +1747,7 @@ export default {
   watch:{
     selectedFOS(val, oldVal){
       // Update the URL when this value changes;
-      if(val !== oldVal){
+      if(val !== oldVal && val !== null){
         if(typeof val.code != "undefined" && typeof val.credential.level != "undefined"){
           // To capture the first argument
           let params = this.urlParams;
