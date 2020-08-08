@@ -1619,7 +1619,7 @@ export default {
       let sorted = [];
       for(var cip2 in processedPrograms){
         sorted.push({
-          name: cip2,
+          name: this.$options.filters.formatCip2Title(cip2),
           fields: _.sortBy(processedPrograms[cip2], ['title'])
         });
       }
@@ -1628,7 +1628,7 @@ export default {
     },
     formatFOS(fosObject){
       return {
-        text: `${fosObject.title} - ${fosObject.credential.title}`,
+        text: `${this.$options.filters.formatFieldOfStudyTitle(fosObject.title)} - ${fosObject.credential.title}`,
         value: `${fosObject.code}.${fosObject.credential.level}`,
         code: fosObject.code,
         credential:{
