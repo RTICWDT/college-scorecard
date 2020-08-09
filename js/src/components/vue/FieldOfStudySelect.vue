@@ -65,7 +65,7 @@
         </v-list-group>
       </v-list>
 
-      <span>
+      <span  v-else>
         No Results
       </span>
 
@@ -114,7 +114,7 @@ export default {
   },
   data(){
     return{
-      displayFOS: null,
+      displayFOS: [],
       menuFOS:null,
       selectedCip2: null,
       selectedCip4: null,
@@ -189,10 +189,10 @@ export default {
         this.displayFOS = _.cloneDeep(this.cipTwoNestedCipFour);
         return null;
       }
-      // console.log("Search");
-      // console.log(value);
+      console.log("Search");
+      console.log(value);
 
-      let displayData = this.displayFOS.reduce((returnArray, cip2) => {
+      let displayData = this.cipTwoNestedCipFour.reduce((returnArray, cip2) => {
         let tmpFieldsArray = cip2.fields.reduce((cip4Array, cip4) => {
           if(cip4.text.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) > -1){
             cip4Array.push(cip4);
