@@ -241,12 +241,14 @@ export default {
       if(e.target === null && typeof e.target.classList === 'undefined'){
         return null;
       }
-      var classList = e.target.classList
+      var classList = e.target.classList;
 
       // Stay open for UI elements else close
       if(
         classList.contains('field-of-study-search-item-title') ||
         classList.contains('field-of-study-search-item-body') ||
+        classList.contains('mdi-chevron-down') ||
+        classList.contains('mdi-chevron-up') ||
         e.target.id === 'field-of-study-select-search-text'
       ){
         return null;
