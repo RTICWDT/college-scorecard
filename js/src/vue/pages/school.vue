@@ -25,6 +25,7 @@
 
             <div v-else id="school">
               <v-card class="school-heading px-3 mb-5">
+                <!--Top Control Row-->
                 <v-row id="school-sub-nav-header" class="csGreenBg">
                   <v-col cols="6">
                     <v-btn
@@ -44,7 +45,7 @@
                       :color="isSelected({schoolId:String(id)},this.compareSchools)?'amber':'white'"
                       @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
-                      <v-icon x-small class="mr-2">fa fa-plus-circle</v-icon>Compare
+                      <v-icon x-small class="mr-2">fa fa-plus-circle</v-icon>Compare School
                     </v-btn>
                     <v-btn
                       fab
@@ -54,13 +55,15 @@
                       @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
                       <v-icon small class="">fa fa-plus-circle</v-icon>
-                      <span class='sr-only'>Compare</span>
+                      <span class='sr-only'>Compare School</span>
                     </v-btn>                    
                     <share small text color="white" label="Share this School" :url="shareLink" show-copy :hide="['email']" />
                   </v-col>
                 </v-row>
 
+                <!-- Institution Summary Container-->
                 <v-row>
+                  <!-- School Information and Icons-->
                   <v-col cols="12" md="7" class="px-sm-5">
                     <v-chip v-if="underInvestigation==1" color="error" label>
                       <!--prettyhtml-ignore-->
@@ -82,6 +85,7 @@
                     </h2>
                     <school-icons :school="school" :fields="fields" class="my-5" />
                   </v-col>
+                  <!-- Map -->
                   <v-col cols="12" md="5" class="px-sm-5 py-0">
                     <!-- <div class="school-map" ref="map"></div> -->
                     <div class="school-map mx-auto" v-if="school">
@@ -96,6 +100,8 @@
                     </div>
                   </v-col>
                 </v-row>
+
+                <!--Special Designations-->
                 <v-row class="mt-3" v-if="specialDesignations.length>0">
                   <v-col cols="12" class="px-sm-5">
                     <div class="school-special_designation">
@@ -110,10 +116,14 @@
                   </v-col>
                 </v-row>
 
-                <!-- Institution Quick Stats -->
+                <!-- Institution Summary and Field Of Study Select -->
                 <v-row class="mt-3">
-                  <v-col cols="12" md="6" class="px-sm-5">
-                    <div id="school-completion-rate-donut">
+
+                  <!--Institution Summary-->
+                  <v-col cols="12" md="6" class="">
+                    <div id="school-completion-rate-bar"
+                      class="mb-6"
+                    >
                       <h2 class="mb-4">
                         <!--prettyhtml-ignore-->
                         Graduation Rate&nbsp;<tooltip definition="graduation-rate" :version="completionRateFieldDefinition" />
@@ -121,7 +131,7 @@
 
                       <horizontal-bar
                         v-if="completionRate"
-                        :value="completionRate * 100"
+                        :value="parseFloat((completionRate * 100).toFixed(2))"
                         :min="0"
                         :max="100"
                         color="#0e365b"
@@ -131,8 +141,10 @@
                       <div v-else class="data-na">Data Not Available</div>
                     </div>
 
-                    <div id="school-salary-after-complete">
-                      <h2 class="mb-3">
+                    <div id="school-salary-after-complete"
+                    class="mb-6"
+                    >
+                      <h2 class="mb-4">
                         <!--prettyhtml-ignore-->
                         Salary After Completing&nbsp;
                         <tooltip definition="fos-median-earnings" :isBranch="isBranch" :limitedFoS="fieldsLink" />
@@ -142,10 +154,13 @@
                         :minmax="earningsRange"
                         variable="earnings.median_earnings"
                         :max=" { label: '$150,000', value: 150000 }"
+                        :addExtraPadding="false"
                       />
                     </div>
 
-                    <div id="school-avg-cost">
+                    <div id="school-avg-cost"
+                      class="mb-4"
+                    >
                       <h2 class="mt-5 mb-3" v-if="!isProgramReporter">
                         <!--prettyhtml-ignore-->
                         Average Annual Cost&nbsp;
@@ -158,7 +173,7 @@
                       </h2>
                       <p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
                       <h2
-                        class="display-2 navy-text font-weight-bold mb-4"
+                        class="display-2 navy-text font-weight-bold"
                         v-if="netPrice"
                       >{{ netPrice | numeral('$0,0') }}</h2>
                       <div class="data-na" v-else>Data Not Available</div>
@@ -166,26 +181,43 @@
                   </v-col>
 
                   <!--Field Of Study Select Container-->
-                  <v-col cols="12" md="6" class="px-sm-5">
+                  <v-col cols="12" md="6" class="">
                     <v-card
-                      class="pa-4"
-                      rounded
+                      class="pa-4 field-of-study-select-container"
+                      elevation="4"
                       raised
                     >
-                      <div v-if="selectedFOS">
+                      <div
+                        class="text-right mb-2"
+                      >
                         <v-btn
+                          v-if="selectedFOS"
                           text
                           small
                           class="d-none d-sm-inline"
-                          :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'amber':'green'"
+                          :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'amber':'black'"
                           @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
                         >
-                          <v-icon x-small class="mr-2">fa fa-plus-circle</v-icon>Compare Field of Study
+                          Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-plus-circle</v-icon>
                         </v-btn>
+                        <span v-else>
+                          Select Field Of Study
+                        </span>
                       </div>
 
+                      <div id="field-of-study-select-header">
+                        <div
+                          id="field-of-study-select-icon"
+                        >
+                          <v-icon>
+                            fas fa-award
+                          </v-icon>
+                        </div>
 
-                      <h2>Fields Of Study Offered</h2>
+                        <h3>
+                          Fields Of Study Offered
+                        </h3>
+                      </div>
 
                       <field-of-study-select
                         :cip-two-nested-cip-four="fieldOfStudySelectItems"
@@ -1301,15 +1333,49 @@
 </style>
 
 <style lang="scss" scoped>
-@import 'sass/_variables';
-.school-map {
-  border: 1px
-    solid
-    $black;
-  border-radius: $base-border-radius;
-  max-width: 420px;
-  margin-top: $base-padding;
-}
+  @import 'sass/_variables';
+  .school-map {
+    border: 1px
+      solid
+      $black;
+    border-radius: $base-border-radius;
+    max-width: 420px;
+    margin-top: $base-padding;
+  }
+
+  .field-of-study-select-container{
+    border-radius: 30px !important;
+  }
+
+
+  #field-of-study-select-header{
+
+    #field-of-study-select-icon{
+      width: 50px;
+      height: 50px;
+      background: $fos-color-gold;
+      border-radius: 50%;
+      display:inline-block;
+      color: black;
+      text-align: center;
+
+      i{
+        font-size: 35px;
+        margin-top:8px;
+      }
+    }
+
+    h3{
+      display: inline-block;
+      vertical-align: top;
+      margin-top: 15px;
+      margin-left: 10px;
+    }
+
+  }
+
+
+
 </style>
 
 <script>
