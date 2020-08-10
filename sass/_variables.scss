@@ -73,9 +73,13 @@ $meter-colors: (
   demographics: $lime-green
 );
 
+// Institution
+$institution-accent-color: #216d09;
+
 // Field of Study
 $fos-color-gold: #fec005;
-
+// Replace with this to remove color from name.
+$fos-accent-color: #fec005;
 
 // Background Color
 $base-background-color: $white;
