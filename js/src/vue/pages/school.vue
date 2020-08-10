@@ -120,7 +120,7 @@
                 <v-row class="mt-3">
 
                   <!--Institution Summary-->
-                  <v-col cols="12" md="6" class="">
+                  <v-col cols="12" md="5" class="">
                     <div id="school-completion-rate-bar"
                       class="mb-6"
                     >
@@ -181,15 +181,13 @@
                   </v-col>
 
                   <!--Field Of Study Select Container-->
-                  <v-col cols="12" md="6" class="">
+                  <v-col cols="12" md="7" class="">
                     <v-card
                       class="pa-4 field-of-study-select-container"
                       elevation="4"
                       raised
                     >
-                      <div
-                        class="text-right mb-2"
-                      >
+                      <div class="text-right mb-2">
                         <v-btn
                           v-if="selectedFOS"
                           text
@@ -228,23 +226,23 @@
 
                       <div>
                         <v-row>
-                          <v-col cols="12" md="12">
-                            <h2>
+                          <v-col cols="12" md="6">
+                            <h3 class="mb-3">
                               Salary After Completing Field of Study
                               <tooltip definition="fos-median-earnings" />
-                            </h2>
+                            </h3>
 
-                            <h3 class="display-2 navy-text font-weight-bold"
+                            <h4 class="display-2 navy-text font-weight-bold"
                               v-if="selectedFOSDetail && selectedFOSDetail.earnings.median_earnings"
                             >
                               {{selectedFOSDetail.earnings.median_earnings | numeral('$0,0') }}
-                            </h3>
+                            </h4>
 
-                            <h3 class="display-2 navy-text font-weight-bold"
+                            <h4 class="display-2 navy-text font-weight-bold"
                               v-else
                             >
                               N/A
-                            </h3>
+                            </h4>
 
 <!--                            <p class="overline mb-0">-->
 <!--                              Median Earnings&nbsp;-->
@@ -256,23 +254,25 @@
 <!--                            <p v-else>&#45;&#45;</p>-->
                           </v-col>
 
-                          <v-col cols="12" md="12">
-                            <h2>
-                              Number of Graduates
+                          <v-col cols="12" md="6" class="pl-6">
+                            <h3 class="mb-3">
+                              Number of <br> Graduates
                               <tooltip definition="fos-median-earnings" />
-                            </h2>
+                              <br>
+                              <br>
+                            </h3>
 
-                            <h3 class="display-2 navy-text font-weight-bold"
+                            <h4 class="display-2 navy-text font-weight-bold"
                                 v-if="selectedFOSDetail && selectedFOSDetail.counts.ipeds_awards2"
                             >
                               {{selectedFOSDetail.counts.ipeds_awards2}}
-                            </h3>
+                            </h4>
 
-                            <h3 class="display-2 navy-text font-weight-bold"
+                            <h4 class="display-2 navy-text font-weight-bold"
                                 v-else
                             >
                               N/A
-                            </h3>
+                            </h4>
 
 <!--                            <p v-if="selectedFOSDetail.counts.ipeds_awards2">{{ selectedFOSDetail.counts.ipeds_awards2 | separator }}</p>-->
 <!--                            <p v-else>&#45;&#45;</p>    -->
@@ -322,16 +322,20 @@
                     <v-expansion-panel-content id="fos-content" class="px-0 py-3 pa-sm-5">
                       <v-row>
                         <v-col cols="12" md="12">
-                          <div v-if="selectedFOS">
+                          <div class="text-right mb-2">
                             <v-btn
+                              v-if="selectedFOS"
                               text
                               small
                               class="d-none d-sm-inline"
-                              :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'amber':'green'"
+                              :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"
                               @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
                             >
-                              <v-icon x-small class="mr-2">fa fa-plus-circle</v-icon>Compare Field of Study
+                              Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-plus-circle</v-icon>
                             </v-btn>
+                            <span v-else>
+                          Select a Field Of Study
+                        </span>
                           </div>
 
                           <p>Fields Of Study Offered At {{ schoolName }}</p>
@@ -1349,7 +1353,7 @@
     text-align: center;
     display: inline-block !important;
     flex: none !important;
-
+    z-index: 8;
     i{
       font-size: 35px;
       margin-top:8px;
