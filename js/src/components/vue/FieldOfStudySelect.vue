@@ -19,15 +19,16 @@
       :value="setInputValue(value)"
       @input="filterObject"
       @change="handleChange"
-      clearable
-      hide-details
       @focus="handleSelectFocus"
       @blur="handleSelectBlur"
       @click:clear="handleInputClear"
+      clearable
+      outlined
+      hide-details
     >
       <template slot="append">
-        <v-icon v-if="displayMenu">mdi-menu-up</v-icon>
-        <v-icon v-else>mdi-menu-down</v-icon>
+        <v-icon class="fos-search-text-icon" v-if="displayMenu">mdi-menu-up</v-icon>
+        <v-icon class="fos-search-text-icon" v-else>mdi-menu-down</v-icon>
       </template>
     </v-text-field>
 
@@ -52,6 +53,7 @@
           </template>
 
           <v-list-item
+            class="field-of-study-search-item-list-content"
             v-for="cip4 in cip2.fields"
             :key="cip4.text"
             two-line
@@ -74,12 +76,21 @@
 </template>
 
 <style lang="scss">
+  @import 'sass/_variables';
+  #field-of-study-select-search-container{
+    .v-text-field--outlined fieldset {
+      color: $fos-color-gold !important;
+      border: 2px solid;
+    }
+  }
+
   #field-of-study-select-search-result{
     position: absolute;
     /*width: 380px;*/
     max-height: 400px;
     overflow-y: scroll;
     z-index: 8;
+    border: 2px $fos-color-gold solid;
 
     .v-list-item__title{
       text-overflow: unset;
@@ -94,6 +105,25 @@
       white-space: normal;
       overflow-wrap: break-word;
     }
+  }
+
+  #field-of-study-select-search-text{
+  }
+
+  .fos-search-text-icon{
+    color: $fos-color-gold !important;
+  }
+
+  .field-of-study-search-item-title{
+    /*border-bottom: 1px gray solid;*/
+  }
+
+  .field-of-study-search-item-list-content{
+
+  }
+
+  .field-of-study-search-item-body{
+    /*border: 1px solid black;*/
   }
 
 </style>

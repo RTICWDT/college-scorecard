@@ -195,17 +195,19 @@
                           text
                           small
                           class="d-none d-sm-inline"
-                          :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'amber':'black'"
+                          :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"
                           @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
                         >
                           Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-plus-circle</v-icon>
                         </v-btn>
                         <span v-else>
-                          Select Field Of Study
+                          Select a Field Of Study
                         </span>
                       </div>
 
-                      <div id="field-of-study-select-header">
+                      <div id="field-of-study-select-header"
+                        class="mb-4"
+                      >
                         <div
                           id="field-of-study-select-icon"
                         >
@@ -215,36 +217,67 @@
                         </div>
 
                         <h3>
-                          Fields Of Study Offered
+                          Fields Of Study Offered:
+                          <tooltip definition="graduation-rate" :version="completionRateFieldDefinition" />
                         </h3>
                       </div>
 
                       <field-of-study-select
                         :cip-two-nested-cip-four="fieldOfStudySelectItems"
                         v-model="selectedFOS"
-                        @input-clear="selectedFOS = null"
+                        @input-clear="handleFieldOfStudyClear"
                       />
 
                       <div>
-                        <v-row v-if="selectedFOSDetail">
-                          <v-col cols="12" md="6">
-                            <p class="overline mb-0">
-                              Median Earnings&nbsp;
+                        <v-row>
+                          <v-col cols="12" md="12">
+                            <h2>
+                              Salary After Completing Field of Study
                               <tooltip definition="fos-median-earnings" />
-                            </p>
-                            <p v-if="selectedFOSDetail.earnings.median_earnings">
+                            </h2>
+
+                            <h3 class="display-2 navy-text font-weight-bold"
+                              v-if="selectedFOSDetail && selectedFOSDetail.earnings.median_earnings"
+                            >
                               {{selectedFOSDetail.earnings.median_earnings | numeral('$0,0') }}
-                            </p>
-                            <p v-else>--</p>
+                            </h3>
+
+                            <h3 class="display-2 navy-text font-weight-bold"
+                              v-else
+                            >
+                              N/A
+                            </h3>
+
+<!--                            <p class="overline mb-0">-->
+<!--                              Median Earnings&nbsp;-->
+<!--                              <tooltip definition="fos-median-earnings" />-->
+<!--                            </p>-->
+<!--                            <p v-if="selectedFOSDetail && selectedFOSDetail.earnings.median_earnings">-->
+<!--                              {{selectedFOSDetail.earnings.median_earnings | numeral('$0,0') }}-->
+<!--                            </p>-->
+<!--                            <p v-else>&#45;&#45;</p>-->
                           </v-col>
 
-                          <v-col cols="12" md="6">
-                            <p class="overline mb-0">
-                              Number of Graduates&nbsp;
-                              <tooltip definition="fos-number-of-graduates" />
-                            </p>
-                            <p v-if="selectedFOSDetail.counts.ipeds_awards2">{{ selectedFOSDetail.counts.ipeds_awards2 | separator }}</p>
-                            <p v-else>--</p>    
+                          <v-col cols="12" md="12">
+                            <h2>
+                              Number of Graduates
+                              <tooltip definition="fos-median-earnings" />
+                            </h2>
+
+                            <h3 class="display-2 navy-text font-weight-bold"
+                                v-if="selectedFOSDetail && selectedFOSDetail.counts.ipeds_awards2"
+                            >
+                              {{selectedFOSDetail.counts.ipeds_awards2}}
+                            </h3>
+
+                            <h3 class="display-2 navy-text font-weight-bold"
+                                v-else
+                            >
+                              N/A
+                            </h3>
+
+<!--                            <p v-if="selectedFOSDetail.counts.ipeds_awards2">{{ selectedFOSDetail.counts.ipeds_awards2 | separator }}</p>-->
+<!--                            <p v-else>&#45;&#45;</p>    -->
                           </v-col>
                         </v-row>
                       </div>
@@ -1755,6 +1788,13 @@ export default {
     },
     handleExtendedFieldSelect(event){
       console.log(event);
+    },
+    handleFieldOfStudyClear(){
+      console.log("Clear");
+
+      this.$nextTick(() => {
+        this.selectedFOS = null;
+      });
     }
   },
   mounted() {
