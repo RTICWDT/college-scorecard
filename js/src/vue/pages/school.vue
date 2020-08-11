@@ -445,7 +445,16 @@
                               hide-details
                               v-model="fosShowDebtAtPrior"
                               label="Include debt borrowed at any prior institutions"
-                            ></v-checkbox>
+                            >
+                              <template v-slot:label>
+                                <span>
+                                  Include debt borrowed at any prior institutions
+                                  <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                                </span>
+                              </template>
+                            </v-checkbox>
+
+
                           </v-col>
 
                           <!--Median Total-->
@@ -805,7 +814,14 @@
                           <v-checkbox
                             v-model="aidShowMedianDebtWithPrior"
                             label="Include debt borrowed at prior institutions"
-                          />
+                          >
+                            <template v-slot:label>
+                              <span>
+                                Include debt borrowed at any prior institutions
+                                <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                              </span>
+                            </template>
+                          </v-checkbox>
                         </v-col>
 
                         <v-col cols="12" md="6">
@@ -912,7 +928,14 @@
                               hide-details
                               v-model="fosShowDebtAtPrior"
                               label="Include debt borrowed at any prior institutions"
-                            ></v-checkbox>
+                            >
+                              <template v-slot:label>
+                                <span>
+                                  Include debt borrowed at any prior institutions
+                                  <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                                </span>
+                              </template>
+                            </v-checkbox>
                           </v-col>
 
                           <!--Median Total-->

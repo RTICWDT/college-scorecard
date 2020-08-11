@@ -73,7 +73,14 @@
           hide-details
           v-model="checked"
           label="Include debt borrowed at any prior institutions"
-        ></v-checkbox>
+        >
+          <template v-slot:label>
+            <span>
+              Include debt borrowed at any prior institutions
+              <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+            </span>
+          </template>
+        </v-checkbox>
       </v-col>
 
       <!--Median Total-->
