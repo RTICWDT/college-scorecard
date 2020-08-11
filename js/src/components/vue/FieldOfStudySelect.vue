@@ -22,6 +22,7 @@
       @focus="handleSelectFocus"
       @blur="handleSelectBlur"
       @click:clear="handleInputClear"
+      placeholder="Type to search"
       clearable
       outlined
       hide-details
