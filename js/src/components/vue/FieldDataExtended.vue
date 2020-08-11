@@ -1,16 +1,17 @@
 <template>
-  <div class='pa-5'>
+  <div class='fos-field-data-container'>
     <h3 class="grey lighten-4 pa-2">Salary After Completing</h3>
     <v-row>
-      <v-col col="12" md="5">
+      <v-col cols="12" md="5">
         <v-select
+          hide-details
           :items="fosSalarySelectItems"
           :value="fosSalarySelect"
           @input="$emit('update-salary-select', $event)"
         />
       </v-col>
       <!--Median Earnings-->
-      <v-col col="12" md="3">
+      <v-col cols="12" md="3">
         <h4 class="mb-2">
           Median Earnings&nbsp
           <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
@@ -36,7 +37,7 @@
         </div>
       </v-col>
       <!--Monthly Earnings-->
-      <v-col col="12" md="3">
+      <v-col cols="12" md="3">
         <h4 class="mb-2">
           Monthly Earnings&nbsp
           <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
@@ -67,15 +68,16 @@
 
     <h3 class="grey lighten-4 pa-2">Financial Aid &amp; Debt</h3>
     <v-row>
-      <v-col col="12" md="5">
+      <v-col cols="12" md="5">
         <v-checkbox
+          hide-details
           v-model="checked"
           label="Include debt borrowed at any prior institutions"
         ></v-checkbox>
       </v-col>
 
       <!--Median Total-->
-      <v-col col="12" md="3">
+      <v-col cols="12" md="3">
         <h4 class="mb-2">
           Median Total Debt After Graduation&nbsp
           <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
@@ -103,7 +105,7 @@
 
       </v-col>
       <!--Monthly Loan-->
-      <v-col col="12" md="3">
+      <v-col cols="12" md="3">
         <h4 class="mb-2">
           Monthly Loan Payment&nbsp
           <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
@@ -157,6 +159,15 @@
 
 <style lang="scss">
   @import 'sass/_variables';
+
+  .fos-field-data-container{
+    padding: 4px 0px;
+
+    @media (min-width: 960px) {
+      padding: 10px;
+    }
+
+  }
 
   .fos-field-data-text{
     font-size: 1rem !important;

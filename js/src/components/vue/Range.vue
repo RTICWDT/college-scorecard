@@ -229,7 +229,6 @@ export default {
         this._min.value + this._max.value - this._upper.value
       );
       this.bar_styles.right = right+"%";
-      console.log(right);
 
       if(right < 20 && this.addExtraPadding)
       {
