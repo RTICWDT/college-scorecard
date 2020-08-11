@@ -13,7 +13,7 @@
 <!--    :value="value"-->
 <!--  >-->
 <!--  </v-combobox>-->
-  <div id="field-of-study-select-search-container">
+  <div :id="containerId" class="field-of-study-select-search-container">
     <v-text-field
       id="field-of-study-select-search-text"
       :value="setInputValue(value)"
@@ -33,8 +33,8 @@
     </v-text-field>
 
     <v-card
-      class="pa-2 mt-1"
-      id="field-of-study-select-search-result"
+      class="field-of-study-select-search-result pa-2 mt-1"
+      :id="resultId"
       v-show="displayMenu"
     >
       <v-list v-if="displayFOS.length > 0">
@@ -77,20 +77,20 @@
 
 <style lang="scss">
   @import 'sass/_variables';
-  #field-of-study-select-search-container{
+  .field-of-study-select-search-container{
     .v-text-field--outlined fieldset {
       color: $fos-color-gold !important;
       border: 2px solid;
     }
   }
 
-  #field-of-study-select-search-result{
-    position: absolute;
+  .field-of-study-select-search-result{
+    position: absolute !important;
     /*width: 380px;*/
     max-height: 400px;
     overflow-y: scroll;
     z-index: 8;
-    border: 2px $fos-color-gold solid;
+    border: 2px $fos-color-gold solid !important;
 
     .v-list-item__title{
       text-overflow: unset;
@@ -134,10 +134,10 @@ export default {
     displayMenu(newVal, oldVal){
       // Adjust Menu Width.  Fixes issue in IE
       if(newVal){
-        let menuWidth = document.getElementById('field-of-study-select-search-container').clientWidth;
+        let menuWidth = document.getElementById(this.containerId).clientWidth;
 
         if(menuWidth){
-          document.getElementById('field-of-study-select-search-result').style.width = menuWidth + "px";
+          document.getElementById(this.resultId).style.width = menuWidth + "px";
         }
       }
     }
@@ -161,7 +161,16 @@ export default {
       required: true
     },
     value:{
+    },
+    containerId:{
+      type: String,
+      default: "field-of-study-select-search-container"
+    },
+    resultId:{
+      type: String,
+      default:"field-of-study-select-search-result"
     }
+
   },
   components:{
   },
