@@ -1,8 +1,8 @@
 <template>
   <div class='pa-5'>
-    <h2 class="grey lighten-4">Salary After Completing</h2>
+    <h3 class="grey lighten-4 pa-2">Salary After Completing</h3>
     <v-row>
-      <v-col col="12" md="4">
+      <v-col col="12" md="5">
         <v-select
           :items="fosSalarySelectItems"
           :value="fosSalarySelect"
@@ -10,65 +10,64 @@
         />
       </v-col>
       <!--Median Earnings-->
-      <v-col col="12" md="4">
-        <h4>
+      <v-col col="12" md="3">
+        <h4 class="mb-2">
           Median Earnings&nbsp
-<!--            <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />-->
+          <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
         </h4>
 
         <div v-if="fosSalarySelect === 'aid'">
-
           <div v-if="_.get(fos, fields.FOS_EARNINGS_FED)">
-            <span>{{_.get(fos, fields.FOS_EARNINGS_FED) | numeral('$0,0') }}</span>
+            <span class="fos-field-data-text">{{_.get(fos, fields.FOS_EARNINGS_FED) | numeral('$0,0') }}</span>
           </div>
           <div v-else>
-            <span>N/A</span>
+            <span class="fos-field-data-text">N/A</span>
           </div>
 
         </div>
 
         <div v-else-if="fosSalarySelect === 'pell'">
           <div v-if="_.get(fos, fields.FOS_EARNINGS_PELL)">
-            <span>{{_.get(fos, fields.FOS_EARNINGS_PELL) | numeral('$0,0') }}</span>
+            <span class="fos-field-data-text">{{_.get(fos, fields.FOS_EARNINGS_PELL) | numeral('$0,0') }}</span>
           </div>
           <div v-else>
-            <span>N/A</span>
+            <span class="fos-field-data-text">N/A</span>
           </div>
         </div>
       </v-col>
       <!--Monthly Earnings-->
-      <v-col col="12" md="4">
-        <h4>
+      <v-col col="12" md="3">
+        <h4 class="mb-2">
           Monthly Earnings&nbsp
-<!--            <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />-->
+          <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
         </h4>
 
         <div v-if="fosSalarySelect === 'aid'">
           <div v-if="_.get(fos, fields.FOS_EARNINGS_FED)">
-            <span>{{_.get(fos, fields.FOS_EARNINGS_FED) / 12 | numeral('$0,0') }}</span>
+            <span class="fos-field-data-text">{{_.get(fos, fields.FOS_EARNINGS_FED) / 12 | numeral('$0,0') }}</span>
           </div>
 
           <div v-else>
-            <span>N/A</span>
+            <span class="fos-field-data-text">N/A</span>
           </div>
 
         </div>
 
         <div v-else-if="fosSalarySelect === 'pell'">
           <div v-if="_.get(fos, fields.FOS_EARNINGS_PELL)">
-            <span>{{_.get(fos, fields.FOS_EARNINGS_PELL) / 12 | numeral('$0,0') }}</span>
+            <span class="fos-field-data-text">{{_.get(fos, fields.FOS_EARNINGS_PELL) / 12 | numeral('$0,0') }}</span>
           </div>
 
           <div v-else>
-            <span>N/A</span>
+            <span class="fos-field-data-text">N/A</span>
           </div>
         </div>
       </v-col>
     </v-row>
 
-    <h2 class="grey lighten-4">Financial Aid &amp; Debt</h2>
+    <h3 class="grey lighten-4 pa-2">Financial Aid &amp; Debt</h3>
     <v-row>
-      <v-col col="12" md="4">
+      <v-col col="12" md="5">
         <v-checkbox
           v-model="checked"
           label="Include debt borrowed at any prior institutions"
@@ -76,76 +75,76 @@
       </v-col>
 
       <!--Median Total-->
-      <v-col col="12" md="4">
-        <h4>
+      <v-col col="12" md="3">
+        <h4 class="mb-2">
           Median Total Debt After Graduation&nbsp
-<!--          <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />-->
+          <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
         </h4>
 
         <div v-if="!fosShowDebtPriorIncluded">
           <div v-if="_.get(fos, fields.FOS_DEBT_MEDIAN)">
-            <span>{{_.get(fos, fields.FOS_DEBT_MEDIAN) | numeral('$0,0') }}</span>
+            <span class="fos-field-data-text">{{_.get(fos, fields.FOS_DEBT_MEDIAN) | numeral('$0,0') }}</span>
           </div>
 
           <div v-else>
-            <span>N/A</span>
+            <span class="fos-field-data-text">N/A</span>
           </div>
         </div>
 
         <div v-else>
           <div v-if="_.get(fos, fields.FOS_DEBT_MEDIAN_PRIOR)">
-            <span>{{_.get(fos, fields.FOS_DEBT_MEDIAN_PRIOR) | numeral('$0,0') }}</span>
+            <span class="fos-field-data-text">{{_.get(fos, fields.FOS_DEBT_MEDIAN_PRIOR) | numeral('$0,0') }}</span>
           </div>
 
           <div v-else>
-            <span>N/A</span>
+            <span class="fos-field-data-text">N/A</span>
           </div>
         </div>
 
       </v-col>
       <!--Monthly Loan-->
-      <v-col col="12" md="4">
-        <h4>
+      <v-col col="12" md="3">
+        <h4 class="mb-2">
           Monthly Loan Payment&nbsp
-<!--          <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />-->
+          <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
         </h4>
 
         <div v-if="!fosShowDebtPriorIncluded">
           <div v-if="_.get(fos, fields.FOS_DEBT_MONTHLY)">
-            <span>{{_.get(fos,fields.FOS_DEBT_MONTHLY) | numeral('$0,0') }}</span>
+            <span class="fos-field-data-text">{{_.get(fos,fields.FOS_DEBT_MONTHLY) | numeral('$0,0') }}</span>
           </div>
 
           <div v-else>
-            <span>N/A</span>
+            <span class="fos-field-data-text">N/A</span>
           </div>
         </div>
 
         <div v-else>
           <div v-if="_.get(fos, fields.FOS_DEBT_MONTHLY_PRIOR)">
-            <span>{{_.get(fos, fields.FOS_DEBT_MONTHLY_PRIOR) | numeral('$0,0') }}</span>
+            <span class="fos-field-data-text">{{_.get(fos, fields.FOS_DEBT_MONTHLY_PRIOR) | numeral('$0,0') }}</span>
           </div>
 
           <div v-else>
-            <span>N/A</span>
+            <span class="fos-field-data-text">N/A</span>
           </div>
         </div>
 
       </v-col>
     </v-row>
 
-    <h2 class="grey lighten-4">Additional Information</h2>
+    <h3 class="grey lighten-4 pa-2">Additional Information</h3>
     <v-row>
       <!--Number Of Graduates-->
-      <v-col cols="12" md="4">
-        <h4>
+      <v-col cols="12" md="5">
+        <h4 class="mb-2">
           Number Of Graduates&nbsp
-<!--          <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />-->
+          <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
         </h4>
          <div v-if="_.get(fos, fields.FOS_GRAD_COUNT)">
-           <span>{{_.get(fos, fields.FOS_GRAD_COUNT)}}</span>
+           <span class="fos-field-data-text">{{_.get(fos, fields.FOS_GRAD_COUNT)}}</span>
         </div>
         <div v-else>
-          <span>N/A</span>
+          <span class="fos-field-data-text">N/A</span>
         </div>
 
 
@@ -155,6 +154,16 @@
   </div>
 
 </template>
+
+<style lang="scss">
+  @import 'sass/_variables';
+
+  .fos-field-data-text{
+    font-size: 1rem !important;
+    /*font-weight: bold;*/
+  }
+
+</style>
 
 <script>
 import Tooltip from 'components/vue/Tooltip.vue';
