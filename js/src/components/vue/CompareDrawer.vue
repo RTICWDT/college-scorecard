@@ -8,20 +8,6 @@
       <v-col cols="12" md="5">
         <h3 class="title">Compare Schools</h3>
         <div class="my-3">
-<!--          <v-checkbox-->
-<!--            @change="handleToggleCompareItem(school,schoolKey)"-->
-<!--            :label="school.schoolName"-->
-<!--            v-for="school in schools"-->
-<!--            :key="school.schoolId"-->
-<!--            :value="school.schoolId"-->
-<!--            hide-details-->
-<!--            v-model="selectedSchools"-->
-<!--            color="secondary"-->
-<!--            class="ma-0 pa-0"-->
-<!--          >-->
-<!--            -->
-<!--          </v-checkbox>-->
-
           <v-checkbox
             @change="handleToggleCompareItem(school,schoolKey)"
             v-for="school in schools"
@@ -92,6 +78,7 @@
       </v-col>
     </v-row>
 
+    <!-- Compare Buttons, medium or larger-->
     <v-row>
       <v-col cols="12" md="5" class="text-center d-none d-md-block" >
         <v-btn
