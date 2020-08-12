@@ -141,4 +141,21 @@ Vue.filter('formatFieldOfStudyTitle', function (value) {
     }
 });
 
+Vue.filter('formatCip2Title', function(value){
+    if (!value) return value;
+
+    // Check if the last character is a .
+    value = value.toString()
+    let returnString = "";
+    // If last character is a period
+    if(value.slice(-1) === '.'){
+        // Remove it
+        returnString = value.slice(0,-1);
+    }else{
+        returnString =  value;
+    }
+
+    return _.startCase(returnString.toLocaleLowerCase());
+})
+
 

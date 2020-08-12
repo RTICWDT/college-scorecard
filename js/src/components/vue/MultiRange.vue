@@ -10,6 +10,7 @@
         :uppertip="minmax.max.title.slice(0,-1)+ ' - '+ minmax.max.credential.title"
         hideMiddle
         hideLower
+        :addExtraPadding="addExtraPadding"
       ></range>
     </div>
     <div v-else-if="minmax && minmax.min">
@@ -21,6 +22,7 @@
         :lowertip="minmax.min.title.slice(0,-1)+ ' - '+ minmax.min.credential.title"
         :uppertip="minmax.max.title.slice(0,-1)+ ' - '+ minmax.max.credential.title"
         hideMiddle
+        :addExtraPadding="addExtraPadding"
       ></range>
     </div>
     <div v-else class="data-na">
@@ -45,6 +47,10 @@ export default {
     max:{
         type: Object,
         default: { value: 150000, label: '$150,000' }
+    },
+    addExtraPadding:{
+      type: Boolean,
+      default: true
     }
   }
 };

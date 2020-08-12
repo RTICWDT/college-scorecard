@@ -259,7 +259,14 @@
                     <v-checkbox
                       v-model="fosFinancialCheckboxIncludePrior"
                       label="Include debt borrowed at any prior institutions"
-                    ></v-checkbox>
+                    >
+                      <template v-slot:label>
+                        <span>
+                          Include debt borrowed at any prior institutions
+                          <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                        </span>
+                      </template>
+                    </v-checkbox>
 
                     <div id="fos-median-total-debt">
                       <h3>Median Total Debt After Graduation</h3>
@@ -609,7 +616,14 @@
                         <v-checkbox
                           v-model="aidShowMedianDebtWithPrior"
                           label="Include debt borrowed at prior institutions"
-                        />
+                        >
+                          <template v-slot:label>
+                            <span>
+                              Include debt borrowed at any prior institutions
+                              <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                            </span>
+                          </template>
+                        </v-checkbox>
                       </v-col>
                     </v-row>
 

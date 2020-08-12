@@ -189,6 +189,10 @@ export default {
     hideLower:{
       type: Boolean,
       default: false
+    },
+    addExtraPadding:{
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -225,7 +229,8 @@ export default {
         this._min.value + this._max.value - this._upper.value
       );
       this.bar_styles.right = right+"%";
-      if(right < 20)
+
+      if(right < 20 && this.addExtraPadding)
       {
         this.extraPad['padding-right'] = '60px';
       }
