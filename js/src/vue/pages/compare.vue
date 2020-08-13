@@ -34,42 +34,67 @@
                 </v-col>
               </v-row>
 
-              <h1>Compare</h1>
+              <h1 class="my-5 mx-5">
+                Compare
+              </h1>
 
               <!-- Toggle Controls-->
-              <div>
-                <v-row>
-                  <!--TODO - Style-->
-                  <v-col
-                    cols="12"
-                    md="6"
-                  >
-                    <v-btn
-                      block
-                      :depressed="displayToggle === 'institutions'"
-                      :disabled="displayToggle === 'institutions'"
-                      @click="handleDisplayToggleClick('institutions')"
-                    >Schools ({{countSchools}})
-                    </v-btn>
-                  </v-col>
+              <div class="compare-fos-toggle">
+                <v-tabs v-model="controlTab"
+                  fixed-tabs
+                  centered
+                  slider-size="8"
+                  @change="handleDisplayToggleClick"
+                >
 
-                  <v-col
-                    cols="12"
-                    md="6"
+                  <v-tabs-slider :class="{'compare-fos-slider-gold': controlTab === 1}">
+
+                  </v-tabs-slider>
+
+                  <v-tab
+                    :class="{'compare-toggle-school-active': controlTab === 0}"
                   >
-                    <v-btn
-                      block
-                      :depressed="displayToggle === 'fos'"
-                      :disabled="displayToggle === 'fos'"
-                      @click="handleDisplayToggleClick('fos')"
-                    >Fields Of Study({{countFieldsOfStudy}})
-                    </v-btn>
-                  </v-col>
-                </v-row>
+                    <h3 class="compare-tab-title">Schools ({{countSchools}})</h3>
+                  </v-tab>
+
+                  <v-tab
+                    :class="{'compare-toggle-fos-active': controlTab === 1}"
+                  >
+                    <h3 class="compare-tab-title">Fields of Study ({{countFieldsOfStudy}})</h3>
+                  </v-tab>
+                </v-tabs>
+<!--                <v-row>-->
+<!--                  &lt;!&ndash;TODO - Style&ndash;&gt;-->
+<!--                  <v-col-->
+<!--                    cols="12"-->
+<!--                    md="6"-->
+<!--                  >-->
+<!--                    <v-btn-->
+<!--                      block-->
+<!--                      :depressed="displayToggle === 'institutions'"-->
+<!--                      :disabled="displayToggle === 'institutions'"-->
+<!--                      @click="handleDisplayToggleClick('institutions')"-->
+<!--                    >Schools ({{countSchools}})-->
+<!--                    </v-btn>-->
+<!--                  </v-col>-->
+
+<!--                  <v-col-->
+<!--                    cols="12"-->
+<!--                    md="6"-->
+<!--                  >-->
+<!--                    <v-btn-->
+<!--                      block-->
+<!--                      :depressed="displayToggle === 'fos'"-->
+<!--                      :disabled="displayToggle === 'fos'"-->
+<!--                      @click="handleDisplayToggleClick('fos')"-->
+<!--                    >Fields Of Study({{countFieldsOfStudy}})-->
+<!--                    </v-btn>-->
+<!--                  </v-col>-->
+<!--                </v-row>-->
               </div>
 
               <!--Loader-->
-              <div v-if="loading" class="show-loading">
+              <div v-if="loading" class="show-loading mx-5">
                 <v-card class="pa-5">
                   <h1 class="title">
                     Loading
@@ -79,11 +104,12 @@
               </div>
 
               <!-- Institution Top Summary-->
-              <div v-else-if="showResource === 'institutions'" class="show-loaded" id="school">
+              <div v-else-if="showResource === 'institutions'" class="show-loaded mx-5" id="school">
+
                 <!-- Institution Chips -->
-                <div>
-                  <!--TODO - Make this a component with a close event-->
+                <div class="compare-institution-chip-container py-5 mb-10">
                   <v-chip
+                    class="ma-2"
                     v-for="institution in responseCache.institution"
                     :key="institution.schoolId"
                     close
@@ -95,7 +121,7 @@
 
                 <!--Institution Summary Metrics-->
                 <v-row>
-                  <v-col cols="12" class="pa-sm-5">
+                  <v-col cols="12" class="px-sm-5 pt-0">
                     <compare-section
                       :schools="schools"
                       title="Average Annual Cost"
@@ -141,217 +167,267 @@
                     />
                   </v-col>
                 </v-row>
+
               </div><!-- End Institution Top Summary-->
 
               <!-- Field Of Study Container -->
-              <div v-else-if="showResource === 'fos'">
+              <div class="mx-5" v-else-if="showResource === 'fos'">
+
                 <!-- Field of Study Chips -->
-                <div>
-                  <!--TODO - Make this a component with a close event-->
+                <div class="compare-fos-chip-container mb-10 py-5">
                   <v-chip
+                    class="ma-2"
                     v-for="fieldOfStudy in responseCache.fieldsOfStudy"
                     :key="`${fieldOfStudy.unit_id}${fieldOfStudy.code}`"
                     close
-                    x-large
                     @click:close="handleChipCloseClick(fieldOfStudy, 'compare-fos')"
                   >
-                    {{fieldOfStudy.title}}<br/>
-                    {{fieldOfStudy['credential.title']}}<br/>
-                    {{fieldOfStudy['school.name']}}
+                    <div class="compare-fos-chip pa-2">
+                      <h4>{{fieldOfStudy.title | formatFieldOfStudyTitle}}</h4>
+                      <span>{{fieldOfStudy['credential.title']}}</span><br>
+                      <span>{{fieldOfStudy['school.name']}}</span>
+                    </div>
+
                   </v-chip>
                 </div>
 
                 <!-- Field Of Study Data Container -->
                 <div>
-
-                  <div>
+                  <div id="compare-salary-after-completing" class="compare-fos-section">
                     <h2>Salary After Completing</h2>
                     <v-select
+                      class="mx-5 my-5"
                       :items="fosSalarySelectItems"
                       v-model="fosSalarySelect"
                     />
 
-                    <div id="fos-median-earnings">
-                      <h3>Median Earnings</h3>
-                      <compare-block
-                        v-for="credentialLevel in filteredFieldsOfStudy"
-                        :key="`${credentialLevel.key}-median-earnings`"
-                        :block_title="credentialLevel.title"
-                        :schools="credentialLevel.items"
-                        is-field-of-study
-                      >
-                        <template v-slot:fos-row="slotProps">
-                          <div v-if="fosSalarySelect === 'aid'">
-                            <horizontal-bar
-                              v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_FED]"
-                              :value="slotProps.school[fields.FOS_EARNINGS_FED]"
-                              :min="0"
-                              :max="150000"
-                              color='#0e365b'
-                              :height="25"
-                              type="currency"
-                              :labels="true"
-                            ></horizontal-bar>
-                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_FED]" class="data-na">Data Not Available</div>
-                          </div>
+                    <div class="ml-3">
+                      <div id="fos-median-earnings" class="mb-5">
+                        <h3 class="mb-2">
+                          Median Earnings
+                        </h3>
 
-                          <div v-else>
-                            <horizontal-bar
-                              v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_PELL]"
-                              :value="slotProps.school[fields.FOS_EARNINGS_PELL]"
-                              :min="0"
-                              :max="150000"
-                              color='#0e365b'
-                              :height="25"
-                              type="currency"
-                              :labels="true"
-                            ></horizontal-bar>
-                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_PELL]" class="data-na">Data Not Available</div>
-                          </div>
-                        </template>
-                      </compare-block>
+                        <compare-block
+                          v-for="credentialLevel in filteredFieldsOfStudy"
+                          :key="`${credentialLevel.key}-median-earnings`"
+                          :block_title="credentialLevel.title"
+                          :schools="credentialLevel.items"
+                          :currentHighlight="currentFOSHighlight"
+                          @update-highlight="currentFOSHighlight = $event"
+                          is-field-of-study
+                        >
+                          <template v-slot:fos-row="slotProps">
+                            <div
+                               v-if="fosSalarySelect === 'aid'"
+                            >
+                              <horizontal-bar
+                                v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_FED]"
+                                :value="slotProps.school[fields.FOS_EARNINGS_FED]"
+                                :min="0"
+                                :max="150000"
+                                color='#0e365b'
+                                :height="25"
+                                type="currency"
+                                :labels="true"
+                              ></horizontal-bar>
+                              <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_FED]" class="data-na">Data Not Available</div>
+                            </div>
+
+                            <div v-else>
+                              <horizontal-bar
+                                v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_PELL]"
+                                :value="slotProps.school[fields.FOS_EARNINGS_PELL]"
+                                :min="0"
+                                :max="150000"
+                                color='#0e365b'
+                                :height="25"
+                                type="currency"
+                                :labels="true"
+                              ></horizontal-bar>
+                              <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_PELL]" class="data-na">Data Not Available</div>
+                            </div>
+                          </template>
+
+                        </compare-block>
+                      </div>
+
+                      <div id="fos-monthly-earnings" class="mb-5">
+                        <h3 class="mb-2">
+                          Monthly Earnings
+                        </h3>
+
+                        <compare-block
+                          v-for="credentialLevel in filteredFieldsOfStudy"
+                          :key="`${credentialLevel.key}-monthly-earnings`"
+                          :block_title="credentialLevel.title"
+                          :schools="credentialLevel.items"
+                          is-field-of-study
+                          :currentHighlight="currentFOSHighlight"
+                          @update-highlight="currentFOSHighlight = $event"
+                        >
+                          <template v-slot:fos-row="slotProps">
+                            <div v-if="fosSalarySelect === 'aid'">
+                              <horizontal-bar
+                                v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_FED]"
+                                :value="slotProps.school[fields.FOS_EARNINGS_FED]/12"
+                                :min="0"
+                                :max="30000"
+                                color='#0e365b'
+                                :height="25"
+                                type="currency"
+                                :labels="true"
+                              ></horizontal-bar>
+                              <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_FED]" class="data-na">Data Not Available</div>
+                            </div>
+
+                            <div v-else>
+                              <horizontal-bar
+                                v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_PELL]"
+                                :value="slotProps.school[fields.FOS_EARNINGS_PELL]/12"
+                                :min="0"
+                                :max="30000"
+                                color='#0e365b'
+                                :height="25"
+                                type="currency"
+                                :labels="true"
+                              ></horizontal-bar>
+                              <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_PELL]" class="data-na">Data Not Available</div>
+                            </div>
+                          </template>
+
+                        </compare-block>
+                      </div>
                     </div>
 
-                    <div id="fos-monthly-earnings">
-                      <h3>Monthly Earnings</h3>
-                      <compare-block
-                        v-for="credentialLevel in filteredFieldsOfStudy"
-                        :key="`${credentialLevel.key}-monthly-earnings`"
-                        :block_title="credentialLevel.title"
-                        :schools="credentialLevel.items"
-                        is-field-of-study
-                      >
-                        <template v-slot:fos-row="slotProps">
-                          <div v-if="fosSalarySelect === 'aid'">
-                            <horizontal-bar
-                              v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_FED]"
-                              :value="slotProps.school[fields.FOS_EARNINGS_FED]/12"
-                              :min="0"
-                              :max="30000"
-                              color='#0e365b'
-                              :height="25"
-                              type="currency"
-                              :labels="true"
-                            ></horizontal-bar>
-                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_FED]" class="data-na">Data Not Available</div>
-                          </div>
-
-                          <div v-else>
-                            <horizontal-bar
-                              v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_PELL]"
-                              :value="slotProps.school[fields.FOS_EARNINGS_PELL]/12"
-                              :min="0"
-                              :max="30000"
-                              color='#0e365b'
-                              :height="25"
-                              type="currency"
-                              :labels="true"
-                            ></horizontal-bar>
-                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_PELL]" class="data-na">Data Not Available</div>
-                          </div>
-                        </template>
-                      </compare-block>
-                    </div>
                   </div>
 
-                  <div>
+                  <div id="compare-financial-aid" class="compare-fos-section mt-10">
                     <h2>Financial Aid</h2>
-                    <v-checkbox
-                      v-model="fosFinancialCheckboxIncludePrior"
-                      label="Include debt borrowed at any prior institutions"
-                    >
-                      <template v-slot:label>
-                        <span>
-                          Include debt borrowed at any prior institutions
-                          <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
-                        </span>
-                      </template>
-                    </v-checkbox>
 
-                    <div id="fos-median-total-debt">
-                      <h3>Median Total Debt After Graduation</h3>
-                      <compare-block
-                        v-for="credentialLevel in filteredFieldsOfStudy"
-                        :key="`${credentialLevel.key}-median-debt`"
-                        :block_title="credentialLevel.title"
-                        :schools="credentialLevel.items"
-                        is-field-of-study
-                      >
-                        <template v-slot:fos-row="slotProps">
-                          <div v-if="!fosFinancialCheckboxIncludePrior">
-                            <horizontal-bar
-                              v-if="slotProps.school && slotProps.school[fields.FOS_DEBT_MEDIAN]"
-                              :value="slotProps.school[fields.FOS_DEBT_MEDIAN]"
-                              :min="0"
-                              :max="30000"
-                              color='#0e365b'
-                              :height="25"
-                              type="currency"
-                              :labels="true"
-                            ></horizontal-bar>
-                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_DEBT_MEDIAN]" class="data-na">Data Not Available</div>
-                          </div>
+                    <div class="ml-3">
+                      <div id="fos-median-total-debt" class="pt-5 mb-5">
+                        <h3 class="mb-2">
+                          Median Total Debt After Graduation
+                        </h3>
 
-                          <div v-else>
-                            <horizontal-bar
-                              v-if="slotProps.school && slotProps.school[fields.FOS_DEBT_MEDIAN_PRIOR]"
-                              :value="slotProps.school[fields.FOS_DEBT_MEDIAN_PRIOR]"
-                              :min="0"
-                              :max="30000"
-                              color='#0e365b'
-                              :height="25"
-                              type="currency"
-                              :labels="true"
-                            ></horizontal-bar>
-                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_DEBT_MEDIAN_PRIOR]" class="data-na">Data Not Available</div>
-                          </div>
-                        </template>
-                      </compare-block>
-                    </div>
+                        <v-checkbox
+                          class="mx-5 mb-5"
+                          hide-details
+                          v-model="fosFinancialCheckboxIncludePrior"
+                          label="Include debt borrowed at any prior institutions"
+                        >
+                          <template v-slot:label>
+                          <span>
+                            Include debt borrowed at any prior institutions
+                            <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                          </span>
+                          </template>
+                        </v-checkbox>
 
-                    <div id="fos-monthly-loan">
-                      <h3>Monthly Loan Payment</h3>
-                      <compare-block
-                        v-for="credentialLevel in filteredFieldsOfStudy"
-                        :key="`${credentialLevel.key}-monthly-payment`"
-                        :block_title="credentialLevel.title"
-                        :schools="credentialLevel.items"
-                        is-field-of-study
-                      >
-                        <template v-slot:fos-row="slotProps">
-                          <div v-if="!fosFinancialCheckboxIncludePrior">
-                            <horizontal-bar
-                              v-if="slotProps.school && slotProps.school[fields.FOS_DEBT_MONTHLY]"
-                              :value="slotProps.school[fields.FOS_DEBT_MONTHLY]"
-                              :min="0"
-                              :max="2000"
-                              color='#0e365b'
-                              :height="25"
-                              type="currency"
-                              :labels="true"
-                            ></horizontal-bar>
-                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_DEBT_MONTHLY]" class="data-na">Data Not Available</div>
-                          </div>
+                        <compare-block
+                          v-for="credentialLevel in filteredFieldsOfStudy"
+                          :key="`${credentialLevel.key}-median-debt`"
+                          :block_title="credentialLevel.title"
+                          :schools="credentialLevel.items"
+                          is-field-of-study
+                          :currentHighlight="currentFOSHighlight"
+                          @update-highlight="currentFOSHighlight = $event"
+                        >
+                          <template v-slot:fos-row="slotProps">
+                            <div v-if="!fosFinancialCheckboxIncludePrior">
+                              <horizontal-bar
+                                v-if="slotProps.school && slotProps.school[fields.FOS_DEBT_MEDIAN]"
+                                :value="slotProps.school[fields.FOS_DEBT_MEDIAN]"
+                                :min="0"
+                                :max="30000"
+                                color='#0e365b'
+                                :height="25"
+                                type="currency"
+                                :labels="true"
+                              ></horizontal-bar>
+                              <div v-if="slotProps.school && !slotProps.school[fields.FOS_DEBT_MEDIAN]" class="data-na">Data Not Available</div>
+                            </div>
 
-                          <div v-else>
-                            <horizontal-bar
-                              v-if="slotProps.school && slotProps.school[fields.FOS_DEBT_MONTHLY_PRIOR]"
-                              :value="slotProps.school[fields.FOS_DEBT_MONTHLY_PRIOR]"
-                              :min="0"
-                              :max="2000"
-                              color='#0e365b'
-                              :height="25"
-                              type="currency"
-                              :labels="true"
-                            ></horizontal-bar>
-                            <div v-if="slotProps.school && !slotProps.school[fields.FOS_DEBT_MONTHLY_PRIOR]" class="data-na">Data Not Available</div>
-                          </div>
-                        </template>
-                      </compare-block>
+                            <div v-else>
+                              <horizontal-bar
+                                v-if="slotProps.school && slotProps.school[fields.FOS_DEBT_MEDIAN_PRIOR]"
+                                :value="slotProps.school[fields.FOS_DEBT_MEDIAN_PRIOR]"
+                                :min="0"
+                                :max="30000"
+                                color='#0e365b'
+                                :height="25"
+                                type="currency"
+                                :labels="true"
+                              ></horizontal-bar>
+                              <div v-if="slotProps.school && !slotProps.school[fields.FOS_DEBT_MEDIAN_PRIOR]" class="data-na">Data Not Available</div>
+                            </div>
+                          </template>
+                        </compare-block>
+                      </div>
+
+                      <div id="fos-monthly-loan" class="mb-5">
+                        <h3 class="mb-2">
+                          Monthly Loan Payment
+                        </h3>
+
+                        <v-checkbox
+                          class="mx-5 mb-5"
+                          hide-details
+                          v-model="fosFinancialCheckboxIncludePrior"
+                          label="Include debt borrowed at any prior institutions"
+                        >
+                          <template v-slot:label>
+                          <span>
+                            Include debt borrowed at any prior institutions
+                            <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                          </span>
+                          </template>
+                        </v-checkbox>
+
+                        <compare-block
+                          v-for="credentialLevel in filteredFieldsOfStudy"
+                          :key="`${credentialLevel.key}-monthly-payment`"
+                          :block_title="credentialLevel.title"
+                          :schools="credentialLevel.items"
+                          is-field-of-study
+                          :currentHighlight="currentFOSHighlight"
+                          @update-highlight="currentFOSHighlight = $event"
+                        >
+                          <template v-slot:fos-row="slotProps">
+                            <div v-if="!fosFinancialCheckboxIncludePrior">
+                              <horizontal-bar
+                                v-if="slotProps.school && slotProps.school[fields.FOS_DEBT_MONTHLY]"
+                                :value="slotProps.school[fields.FOS_DEBT_MONTHLY]"
+                                :min="0"
+                                :max="2000"
+                                color='#0e365b'
+                                :height="25"
+                                type="currency"
+                                :labels="true"
+                              ></horizontal-bar>
+                              <div v-if="slotProps.school && !slotProps.school[fields.FOS_DEBT_MONTHLY]" class="data-na">Data Not Available</div>
+                            </div>
+
+                            <div v-else>
+                              <horizontal-bar
+                                v-if="slotProps.school && slotProps.school[fields.FOS_DEBT_MONTHLY_PRIOR]"
+                                :value="slotProps.school[fields.FOS_DEBT_MONTHLY_PRIOR]"
+                                :min="0"
+                                :max="2000"
+                                color='#0e365b'
+                                :height="25"
+                                type="currency"
+                                :labels="true"
+                              ></horizontal-bar>
+                              <div v-if="slotProps.school && !slotProps.school[fields.FOS_DEBT_MONTHLY_PRIOR]" class="data-na">Data Not Available</div>
+                            </div>
+                          </template>
+                        </compare-block>
+                      </div>
                     </div>
                   </div>
 
-                  <div id="fos-grad-count">
+                  <div id="fos-grad-count" class="my-10">
                     <h2>Number Of Graduates</h2>
                     <compare-block
                       v-for="credentialLevel in filteredFieldsOfStudy"
@@ -359,6 +435,8 @@
                       :block_title="credentialLevel.title"
                       :schools="credentialLevel.items"
                       is-field-of-study
+                      :currentHighlight="currentFOSHighlight"
+                      @update-highlight="currentFOSHighlight = $event"
                     >
                       <template v-slot:fos-row="slotProps">
                         <horizontal-bar
@@ -381,14 +459,7 @@
                     </compare-block>
                   </div>
 
-
-
-                  <!-- TODO - TOOLTIP? -->
-
-
                 </div>
-
-
 
               </div> <!-- Field Of Study Container End -->
 
@@ -496,6 +567,7 @@
                     </compare-section>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+
                 <!--Costs-->
                 <v-expansion-panel>
                   <v-expansion-panel-header @click="trackAccordion('Costs')">Costs</v-expansion-panel-header>
@@ -549,6 +621,7 @@
                     </compare-section>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+
                 <!--Graduation & Retention-->
                 <v-expansion-panel>
                   <v-expansion-panel-header
@@ -599,33 +672,23 @@
                     </compare-section>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+
                 <!--Financial Aid & Debt-->
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     @click="trackAccordion('Financial Aid &amp; Debt')"
-                  >Financial Aid & Debt</v-expansion-panel-header>
+                  >
+                    Financial Aid & Debt
+                  </v-expansion-panel-header>
+
                   <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
-                    <v-row>
-                      <v-col cols="12" md="6">
-                        <v-select
-                          :items="aidLoanSelectItems"
-                          v-model="aidLoanSelect"
-                        />
-                      </v-col>
-                      <v-col cols="12" md="6">
-                        <v-checkbox
-                          v-model="aidShowMedianDebtWithPrior"
-                          label="Include debt borrowed at prior institutions"
-                        >
-                          <template v-slot:label>
-                            <span>
-                              Include debt borrowed at any prior institutions
-                              <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
-                            </span>
-                          </template>
-                        </v-checkbox>
-                      </v-col>
-                    </v-row>
+
+                    <v-select
+                      class="mb-5 pt-0"
+                      hide-details
+                      :items="aidLoanSelectItems"
+                      v-model="aidLoanSelect"
+                    />
 
                     <compare-section
                       v-if="aidLoanSelect === 'fed'"
@@ -672,7 +735,23 @@
                         multiRangeAidShowMedianDebtWithPrior: aidShowMedianDebtWithPrior,
                         multiRangeAidLoanSelect: aidLoanSelect
                       }"
-                    />
+                    >
+                      <template>
+                        <v-checkbox
+                          class="my-0"
+                          v-model="aidShowMedianDebtWithPrior"
+                          hide-details
+                        >
+                          <template v-slot:label>
+                            <span>
+                              Include debt borrowed at any prior institutions
+                              <!--TODO - Update Tooltip-->
+                              <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                            </span>
+                          </template>
+                        </v-checkbox>
+                      </template>
+                    </compare-section>
 
                     <compare-section
                       :schools="schools"
@@ -690,9 +769,27 @@
                         multiRangeAidLoanSelect: aidLoanSelect,
                         max: { value: 1000, label: '$1,000' }
                       }"
-                    />
+                    >
+                      <template>
+                        <v-checkbox
+                          class="my-0"
+                          v-model="aidShowMedianDebtWithPrior"
+                          hide-details
+                        >
+                          <template v-slot:label>
+                            <span>
+                              Include debt borrowed at any prior institutions
+                              <!--TODO - Update Tooltip-->
+                              <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                            </span>
+                          </template>
+                        </v-checkbox>
+                      </template>
+                    </compare-section>
+
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+
                 <!--Salary after Completing-->
                 <v-expansion-panel>
                   <v-expansion-panel-header
@@ -713,6 +810,7 @@
                     />
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+
                 <!--Test Scores & Acceptance-->
                 <v-expansion-panel>
                   <v-expansion-panel-header
@@ -774,6 +872,7 @@
                     />
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+
               </v-expansion-panels>
 
             </div>
@@ -835,6 +934,60 @@
   </v-app>
 </template>
 
+<style lang="scss" scoped>
+  @import 'sass/_variables';
+
+  .compare-institution-chip-container{
+    border-bottom: 1px $light-gray solid;
+  }
+
+  .compare-fos-chip-container{
+    border-bottom: 1px $light-gray solid;
+
+    .v-chip {
+      height: auto;
+      white-space: normal;
+      width: 250px;
+    }
+
+    .compare-fos-chip{
+      width: 200px;
+
+      h5{
+        font-weight: normal;
+      }
+
+    }
+  }
+
+  .compare-fos-section{
+    padding-bottom: 20px;
+    border-bottom: 1px $light-gray solid;
+  }
+
+  .compare-tab-title{
+    letter-spacing: normal !important;
+    color: black !important;
+  }
+
+  .compare-fos-toggle{
+
+  }
+
+  .compare-toggle-school-active{
+    background-color: #dee8ef;
+  }
+
+  .compare-toggle-fos-active{
+    background-color: #fff6dc;
+  }
+
+  .compare-fos-slider-gold{
+    background-color: $fos-accent-color;
+  }
+
+</style>
+
 <script>
 import Tooltip from "components/vue/Tooltip.vue";
 import Share from "components/vue/Share.vue";
@@ -890,6 +1043,7 @@ export default {
         study: "study_both"
       },
       currentHighlight: "",
+      currentFOSHighlight:"",
       loading: true,
       mobilePanels: 0,
       desktopTabs: 1,
@@ -915,6 +1069,7 @@ export default {
         { text: "Federal Student Loans", value: "fed"},
         { text: "Parent Plus Loans", value:"plus"}
       ],
+      controlTab: 0
     };
   },
   computed: {
@@ -1409,7 +1564,16 @@ export default {
           break;
       }
     },
-    handleDisplayToggleClick(toggleValue){
+    handleDisplayToggleClick(sliderValue){
+
+      let toggleValue = null;
+
+      if(sliderValue === 0){
+        toggleValue = "institutions";
+      }else{
+        toggleValue = "fos";
+      }
+
       this.displayToggle = toggleValue;
 
       if(this.displayToggle === 'institutions'){
@@ -1445,6 +1609,42 @@ export default {
         //update URL parameters
         this.queryStringParameters = this.parseURLParameters();
       }
+
+      // this.displayToggle = toggleValue;
+      //
+      // if(this.displayToggle === 'institutions'){
+      //   // Query if not response cache is present
+      //   if(this.responseCache.institution.length === 0){
+      //     this.queryInstitutions();
+      //   }
+      //
+      //   // TODO - Move to a centralized location.
+      //   // update the URL
+      //   history.replaceState(
+      //     {},
+      //     "",
+      //     this.shareUrl
+      //   );
+      //
+      //   //update URL parameters
+      //   this.queryStringParameters = this.parseURLParameters();
+      //
+      // }else if(this.displayToggle === 'fos'){
+      //   if(this.responseCache.fieldsOfStudy.length <= 0){
+      //     this.queryFieldsOfStudy(this.locateFieldsOfStudy());
+      //   }
+      //
+      //   // TODO - Move to a centralized location.
+      //   // update the URL
+      //   history.replaceState(
+      //     {},
+      //     "",
+      //     this.shareUrl
+      //   );
+      //
+      //   //update URL parameters
+      //   this.queryStringParameters = this.parseURLParameters();
+      // }
     },
     locateFieldsOfStudy(){
 
@@ -1490,9 +1690,11 @@ export default {
     // set toggle from URL
     if(typeof this.queryStringParameters.toggle != 'undefined' && this.queryStringParameters.toggle === 'fos'){
       this.displayToggle = 'fos';
+      this.controlTab = 1;
       this.queryFieldsOfStudy(this.locateFieldsOfStudy());
     }else{
       this.displayToggle = 'institutions';
+      this.controlTab = 0;
       this.queryInstitutions();
     }
 
