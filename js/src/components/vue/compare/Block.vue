@@ -6,7 +6,13 @@
       :key="school.id" 
       class="ml-sm-5 ml-1 compareBlocks"
     >
-      <div v-if="isFieldOfStudy">
+      <div v-if="isFieldOfStudy"
+        :class="{'active': currentHighlight === `fos-${school.unit_id}-${school.code}-${school['credential.level']}`}"
+        @click="$emit(
+         'update-highlight',
+         `fos-${school.unit_id}-${school.code}-${school['credential.level']}`
+        );"
+      >
         <div class='pb-1 px-sm-5 px-1'>
           <p class="subtitle-2 pb-0 mb-0">
             <a
@@ -49,6 +55,10 @@
 @import 'sass/_variables';
 .compareBlocks{
     border-left: 1px solid $dark-gray;
+}
+
+.active{
+  background-color: #faefd2 !important;
 }
 </style>
 

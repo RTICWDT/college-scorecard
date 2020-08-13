@@ -212,10 +212,14 @@
                           :key="`${credentialLevel.key}-median-earnings`"
                           :block_title="credentialLevel.title"
                           :schools="credentialLevel.items"
+                          :currentHighlight="currentFOSHighlight"
+                          @update-highlight="currentFOSHighlight = $event"
                           is-field-of-study
                         >
                           <template v-slot:fos-row="slotProps">
-                            <div v-if="fosSalarySelect === 'aid'">
+                            <div
+                               v-if="fosSalarySelect === 'aid'"
+                            >
                               <horizontal-bar
                                 v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_FED]"
                                 :value="slotProps.school[fields.FOS_EARNINGS_FED]"
@@ -243,6 +247,7 @@
                               <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_PELL]" class="data-na">Data Not Available</div>
                             </div>
                           </template>
+
                         </compare-block>
                       </div>
 
@@ -257,6 +262,8 @@
                           :block_title="credentialLevel.title"
                           :schools="credentialLevel.items"
                           is-field-of-study
+                          :currentHighlight="currentFOSHighlight"
+                          @update-highlight="currentFOSHighlight = $event"
                         >
                           <template v-slot:fos-row="slotProps">
                             <div v-if="fosSalarySelect === 'aid'">
@@ -287,6 +294,7 @@
                               <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_PELL]" class="data-na">Data Not Available</div>
                             </div>
                           </template>
+
                         </compare-block>
                       </div>
                     </div>
@@ -322,6 +330,8 @@
                           :block_title="credentialLevel.title"
                           :schools="credentialLevel.items"
                           is-field-of-study
+                          :currentHighlight="currentFOSHighlight"
+                          @update-highlight="currentFOSHighlight = $event"
                         >
                           <template v-slot:fos-row="slotProps">
                             <div v-if="!fosFinancialCheckboxIncludePrior">
@@ -380,6 +390,8 @@
                           :block_title="credentialLevel.title"
                           :schools="credentialLevel.items"
                           is-field-of-study
+                          :currentHighlight="currentFOSHighlight"
+                          @update-highlight="currentFOSHighlight = $event"
                         >
                           <template v-slot:fos-row="slotProps">
                             <div v-if="!fosFinancialCheckboxIncludePrior">
@@ -423,6 +435,8 @@
                       :block_title="credentialLevel.title"
                       :schools="credentialLevel.items"
                       is-field-of-study
+                      :currentHighlight="currentFOSHighlight"
+                      @update-highlight="currentFOSHighlight = $event"
                     >
                       <template v-slot:fos-row="slotProps">
                         <horizontal-bar
@@ -972,7 +986,6 @@
     background-color: $fos-accent-color;
   }
 
-
 </style>
 
 <script>
@@ -1030,6 +1043,7 @@ export default {
         study: "study_both"
       },
       currentHighlight: "",
+      currentFOSHighlight:"",
       loading: true,
       mobilePanels: 0,
       desktopTabs: 1,
