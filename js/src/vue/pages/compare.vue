@@ -34,10 +34,12 @@
                 </v-col>
               </v-row>
 
-              <h1>Compare</h1>
+              <h1 class="my-5 mx-5">
+                Compare
+              </h1>
 
               <!-- Toggle Controls-->
-              <div>
+              <div class="mx-5">
                 <v-row>
                   <!--TODO - Style-->
                   <v-col
@@ -69,7 +71,7 @@
               </div>
 
               <!--Loader-->
-              <div v-if="loading" class="show-loading">
+              <div v-if="loading" class="show-loading mx-5">
                 <v-card class="pa-5">
                   <h1 class="title">
                     Loading
@@ -79,7 +81,7 @@
               </div>
 
               <!-- Institution Top Summary-->
-              <div v-else-if="showResource === 'institutions'" class="show-loaded" id="school">
+              <div v-else-if="showResource === 'institutions'" class="show-loaded mx-5" id="school">
                 <!-- Institution Chips -->
                 <div>
                   <!--TODO - Make this a component with a close event-->
@@ -94,7 +96,7 @@
                 </div>
 
                 <!--Institution Summary Metrics-->
-                <v-row>
+                <v-row class="mx-5">
                   <v-col cols="12" class="pa-sm-5">
                     <compare-section
                       :schools="schools"
@@ -144,35 +146,42 @@
               </div><!-- End Institution Top Summary-->
 
               <!-- Field Of Study Container -->
-              <div v-else-if="showResource === 'fos'">
+              <div class="mx-5" v-else-if="showResource === 'fos'">
+
                 <!-- Field of Study Chips -->
-                <div>
-                  <!--TODO - Make this a component with a close event-->
+                <div class="compare-fos-chip-container mb-10 pb-5">
                   <v-chip
+                    class="ma-2"
                     v-for="fieldOfStudy in responseCache.fieldsOfStudy"
                     :key="`${fieldOfStudy.unit_id}${fieldOfStudy.code}`"
                     close
-                    x-large
                     @click:close="handleChipCloseClick(fieldOfStudy, 'compare-fos')"
                   >
-                    {{fieldOfStudy.title}}<br/>
-                    {{fieldOfStudy['credential.title']}}<br/>
-                    {{fieldOfStudy['school.name']}}
+                    <div class="compare-fos-chip pa-2">
+                      <h4>{{fieldOfStudy.title | formatFieldOfStudyTitle}}</h4>
+                      <span>{{fieldOfStudy['credential.title']}}</span><br>
+                      <span>{{fieldOfStudy['school.name']}}</span>
+                    </div>
+
                   </v-chip>
                 </div>
 
                 <!-- Field Of Study Data Container -->
                 <div>
 
-                  <div>
+                  <div id="compare-salary-after-completing" class="compare-fos-section">
                     <h2>Salary After Completing</h2>
                     <v-select
+                      class="mx-5 my-5"
                       :items="fosSalarySelectItems"
                       v-model="fosSalarySelect"
                     />
 
-                    <div id="fos-median-earnings">
-                      <h3>Median Earnings</h3>
+                    <div id="fos-median-earnings" class="mb-5">
+                      <h3 class="mb-2">
+                        Median Earnings
+                      </h3>
+
                       <compare-block
                         v-for="credentialLevel in filteredFieldsOfStudy"
                         :key="`${credentialLevel.key}-median-earnings`"
@@ -212,8 +221,11 @@
                       </compare-block>
                     </div>
 
-                    <div id="fos-monthly-earnings">
-                      <h3>Monthly Earnings</h3>
+                    <div id="fos-monthly-earnings" class="mb-5">
+                      <h3 class="mb-2">
+                        Monthly Earnings
+                      </h3>
+
                       <compare-block
                         v-for="credentialLevel in filteredFieldsOfStudy"
                         :key="`${credentialLevel.key}-monthly-earnings`"
@@ -254,22 +266,28 @@
                     </div>
                   </div>
 
-                  <div>
+                  <div id="compare-financial-aid" class="compare-fos-section mt-10">
                     <h2>Financial Aid</h2>
-                    <v-checkbox
-                      v-model="fosFinancialCheckboxIncludePrior"
-                      label="Include debt borrowed at any prior institutions"
-                    >
-                      <template v-slot:label>
+
+                    <div id="fos-median-total-debt" class="pt-5 mb-5">
+                      <h3 class="mb-2">
+                        Median Total Debt After Graduation
+                      </h3>
+
+                      <v-checkbox
+                        class="mx-5 mb-5"
+                        hide-details
+                        v-model="fosFinancialCheckboxIncludePrior"
+                        label="Include debt borrowed at any prior institutions"
+                      >
+                        <template v-slot:label>
                         <span>
                           Include debt borrowed at any prior institutions
                           <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
                         </span>
-                      </template>
-                    </v-checkbox>
+                        </template>
+                      </v-checkbox>
 
-                    <div id="fos-median-total-debt">
-                      <h3>Median Total Debt After Graduation</h3>
                       <compare-block
                         v-for="credentialLevel in filteredFieldsOfStudy"
                         :key="`${credentialLevel.key}-median-debt`"
@@ -309,8 +327,25 @@
                       </compare-block>
                     </div>
 
-                    <div id="fos-monthly-loan">
-                      <h3>Monthly Loan Payment</h3>
+                    <div id="fos-monthly-loan" class="mb-5">
+                      <h3 class="mb-2">
+                        Monthly Loan Payment
+                      </h3>
+
+                      <v-checkbox
+                        class="mx-5 mb-5"
+                        hide-details
+                        v-model="fosFinancialCheckboxIncludePrior"
+                        label="Include debt borrowed at any prior institutions"
+                      >
+                        <template v-slot:label>
+                        <span>
+                          Include debt borrowed at any prior institutions
+                          <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                        </span>
+                        </template>
+                      </v-checkbox>
+                      
                       <compare-block
                         v-for="credentialLevel in filteredFieldsOfStudy"
                         :key="`${credentialLevel.key}-monthly-payment`"
@@ -834,6 +869,35 @@
     </v-bottom-sheet>
   </v-app>
 </template>
+
+<style lang="scss" scoped>
+  @import 'sass/_variables';
+
+  .compare-fos-chip-container{
+    border-bottom: 1px $light-gray solid;
+
+    .v-chip {
+      height: auto;
+      white-space: normal;
+      width: 250px;
+    }
+
+    .compare-fos-chip{
+      width: 200px;
+
+      h5{
+        font-weight: normal;
+      }
+
+    }
+  }
+
+  .compare-fos-section{
+    padding-bottom: 20px;
+    border-bottom: 1px $light-gray solid;
+  }
+
+</style>
 
 <script>
 import Tooltip from "components/vue/Tooltip.vue";
