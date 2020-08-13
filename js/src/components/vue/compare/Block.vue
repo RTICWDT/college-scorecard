@@ -9,8 +9,9 @@
       <div v-if="isFieldOfStudy">
         <div class='pb-1 px-sm-5 px-1'>
           <p class="subtitle-2 pb-0 mb-0">
-            <a href="/">
-              {{school.title}} - {{school['school.name']}}
+            <a
+              :href="`${$baseUrl}/school?${school.unit_id}&fos_code=${school.code}&fos_credential=${school['credential.level']}`">
+              {{school.title | formatFieldOfStudyTitle}} - {{school['school.name']}}
             </a>
           </p>
 
