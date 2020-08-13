@@ -39,35 +39,58 @@
               </h1>
 
               <!-- Toggle Controls-->
-              <div class="mx-5">
-                <v-row>
-                  <!--TODO - Style-->
-                  <v-col
-                    cols="12"
-                    md="6"
-                  >
-                    <v-btn
-                      block
-                      :depressed="displayToggle === 'institutions'"
-                      :disabled="displayToggle === 'institutions'"
-                      @click="handleDisplayToggleClick('institutions')"
-                    >Schools ({{countSchools}})
-                    </v-btn>
-                  </v-col>
+              <div class="compare-fos-toggle">
+                <v-tabs v-model="controlTab"
+                  fixed-tabs
+                  centered
+                  slider-size="8"
+                  @change="handleDisplayToggleClick"
+                >
 
-                  <v-col
-                    cols="12"
-                    md="6"
+                  <v-tabs-slider :class="{'compare-fos-slider-gold': controlTab === 1}">
+
+                  </v-tabs-slider>
+
+                  <v-tab
+                    :class="{'compare-toggle-school-active': controlTab === 0}"
                   >
-                    <v-btn
-                      block
-                      :depressed="displayToggle === 'fos'"
-                      :disabled="displayToggle === 'fos'"
-                      @click="handleDisplayToggleClick('fos')"
-                    >Fields Of Study({{countFieldsOfStudy}})
-                    </v-btn>
-                  </v-col>
-                </v-row>
+                    <h3 class="compare-tab-title">Schools ({{countSchools}})</h3>
+                  </v-tab>
+
+                  <v-tab
+                    :class="{'compare-toggle-fos-active': controlTab === 1}"
+                  >
+                    <h3 class="compare-tab-title">Fields of Study ({{countFieldsOfStudy}})</h3>
+                  </v-tab>
+                </v-tabs>
+<!--                <v-row>-->
+<!--                  &lt;!&ndash;TODO - Style&ndash;&gt;-->
+<!--                  <v-col-->
+<!--                    cols="12"-->
+<!--                    md="6"-->
+<!--                  >-->
+<!--                    <v-btn-->
+<!--                      block-->
+<!--                      :depressed="displayToggle === 'institutions'"-->
+<!--                      :disabled="displayToggle === 'institutions'"-->
+<!--                      @click="handleDisplayToggleClick('institutions')"-->
+<!--                    >Schools ({{countSchools}})-->
+<!--                    </v-btn>-->
+<!--                  </v-col>-->
+
+<!--                  <v-col-->
+<!--                    cols="12"-->
+<!--                    md="6"-->
+<!--                  >-->
+<!--                    <v-btn-->
+<!--                      block-->
+<!--                      :depressed="displayToggle === 'fos'"-->
+<!--                      :disabled="displayToggle === 'fos'"-->
+<!--                      @click="handleDisplayToggleClick('fos')"-->
+<!--                    >Fields Of Study({{countFieldsOfStudy}})-->
+<!--                    </v-btn>-->
+<!--                  </v-col>-->
+<!--                </v-row>-->
               </div>
 
               <!--Loader-->
@@ -151,7 +174,7 @@
               <div class="mx-5" v-else-if="showResource === 'fos'">
 
                 <!-- Field of Study Chips -->
-                <div class="compare-fos-chip-container mb-10 pb-5">
+                <div class="compare-fos-chip-container mb-10 py-5">
                   <v-chip
                     class="ma-2"
                     v-for="fieldOfStudy in responseCache.fieldsOfStudy"
@@ -647,7 +670,7 @@
                   <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
 
                     <v-select
-                      class="mx-5 mb-5 pt-0"
+                      class="mb-5 pt-0"
                       hide-details
                       :items="aidLoanSelectItems"
                       v-model="aidLoanSelect"
@@ -928,6 +951,28 @@
     border-bottom: 1px $light-gray solid;
   }
 
+  .compare-tab-title{
+    letter-spacing: normal !important;
+    color: black !important;
+  }
+
+  .compare-fos-toggle{
+
+  }
+
+  .compare-toggle-school-active{
+    background-color: #dee8ef;
+  }
+
+  .compare-toggle-fos-active{
+    background-color: #fff6dc;
+  }
+
+  .compare-fos-slider-gold{
+    background-color: $fos-accent-color;
+  }
+
+
 </style>
 
 <script>
@@ -1010,6 +1055,7 @@ export default {
         { text: "Federal Student Loans", value: "fed"},
         { text: "Parent Plus Loans", value:"plus"}
       ],
+      controlTab: 0
     };
   },
   computed: {
@@ -1504,7 +1550,16 @@ export default {
           break;
       }
     },
-    handleDisplayToggleClick(toggleValue){
+    handleDisplayToggleClick(sliderValue){
+
+      let toggleValue = null;
+
+      if(sliderValue === 0){
+        toggleValue = "institutions";
+      }else{
+        toggleValue = "fos";
+      }
+
       this.displayToggle = toggleValue;
 
       if(this.displayToggle === 'institutions'){
@@ -1540,6 +1595,42 @@ export default {
         //update URL parameters
         this.queryStringParameters = this.parseURLParameters();
       }
+
+      // this.displayToggle = toggleValue;
+      //
+      // if(this.displayToggle === 'institutions'){
+      //   // Query if not response cache is present
+      //   if(this.responseCache.institution.length === 0){
+      //     this.queryInstitutions();
+      //   }
+      //
+      //   // TODO - Move to a centralized location.
+      //   // update the URL
+      //   history.replaceState(
+      //     {},
+      //     "",
+      //     this.shareUrl
+      //   );
+      //
+      //   //update URL parameters
+      //   this.queryStringParameters = this.parseURLParameters();
+      //
+      // }else if(this.displayToggle === 'fos'){
+      //   if(this.responseCache.fieldsOfStudy.length <= 0){
+      //     this.queryFieldsOfStudy(this.locateFieldsOfStudy());
+      //   }
+      //
+      //   // TODO - Move to a centralized location.
+      //   // update the URL
+      //   history.replaceState(
+      //     {},
+      //     "",
+      //     this.shareUrl
+      //   );
+      //
+      //   //update URL parameters
+      //   this.queryStringParameters = this.parseURLParameters();
+      // }
     },
     locateFieldsOfStudy(){
 
@@ -1585,9 +1676,11 @@ export default {
     // set toggle from URL
     if(typeof this.queryStringParameters.toggle != 'undefined' && this.queryStringParameters.toggle === 'fos'){
       this.displayToggle = 'fos';
+      this.controlTab = 1;
       this.queryFieldsOfStudy(this.locateFieldsOfStudy());
     }else{
       this.displayToggle = 'institutions';
+      this.controlTab = 0;
       this.queryInstitutions();
     }
 
