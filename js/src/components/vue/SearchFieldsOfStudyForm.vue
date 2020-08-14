@@ -12,25 +12,39 @@
     .v-chip .v-chip__content{
       display: block;
     }
-
   }
 
+  #fos-search-form{
+    .subhead {
+      font-weight: 600;
+      font-family: 'Montserrat', sans-serif !important;
+    }
+
+    label.subhead{
+      display: inline-block;
+    }
+  }
 
 </style>
 
 <template>
-  <v-form class="pa-2">
-    <div class="mt-2">
-      <p class="subhead-2" id="fields-label">Search By Fields Of Study</p>
-<!--      <field-autocomplete v-model="input.cip4"></field-autocomplete>-->
+  <v-form class="py-2 px-5" id="fos-search-form">
+
+    <!-- Field Of Study Search and Chips -->
+    <div class="mt-2" id="fos-search-and-chips">
+      <label class="subhead mb-2" id="fields-label" for="fos-search">
+        Search By Fields Of Study
+      </label>
+
       <field-of-study-search
         @field-of-study-selected="handleFieldOfStudySelected"
-      />
+        id="fos-search"
+        name="fos-search"
+      >
+      </field-of-study-search>
 
       <!--TODO: Chips-->
-      <div id="fos-chip-container"
-        class="mt-4"
-      >
+      <div id="fos-chip-container" class="mt-2">
         <field-of-study-detail-chip
           v-for="fieldOfStudy in utility.cip4Cache"
           :key="fieldOfStudy.cip4"
@@ -41,21 +55,30 @@
 
       </div>
 
-      <v-btn
-        class="mt-4"
-        v-show="input.cip4.length > 0"
-        @click="handleClearAllChips"
-      >
-        Clear All
-      </v-btn>
+      <div class="text-right">
+        <v-btn
+          class="mt-2"
+          text
+          color="secondary"
+          v-show="input.cip4.length > 0"
+          @click="handleClearAllChips"
+        >
+          Clear All
+        </v-btn>
+      </div>
+
 
     </div>
 
     <!-- Credential Type -->
-    <div class="mt-4">
-      <p class="subhead-2">Credential Type</p>
+    <div class="mt-5">
+      <label class="subhead mb-2" id="search-fos-cred-level" for="search-fos-cred-level">
+        Search By Fields Of Study
+      </label>
+
       <v-checkbox
         id="search-form-fos-degree-c"
+        name="search-fos-cred-level"
         class="search-form-degree-cb my-0 py-0"
         v-model="input.cip4_degree"
         label="Certificate"
@@ -66,6 +89,7 @@
 
       <v-checkbox
         id="search-form-fos-degree-a"
+        name="search-fos-cred-level"
         class="search-form-degree-cb my-0 py-0"
         v-model="input.cip4_degree"
         label="Associate's Degree"
@@ -76,6 +100,7 @@
 
       <v-checkbox
         id="search-form-fos-degree-b"
+        name="search-fos-cred-level"
         class="search-form-degree-cb my-0 py-0"
         v-model="input.cip4_degree"
         label="Bachelor's Degree"
@@ -86,10 +111,15 @@
     </div>
 
     <!-- Location -->
-    <div class="mt-4">
-      <p class="subhead-2" id="location-label">Location</p>
+    <div class="mt-5">
+<!--      <p class="subhead-2" id="location-label">Location</p>-->
+      <label class="subhead mb-2" id="search-fos-location-select" for="search-fos-location-select">
+        Location
+      </label>
+
       <v-select
-        id="search-from-location-select"
+        id="search-fos-location-select"
+        name="search-fos-location-select"
         v-model="utility.location"
         @change="handleLocationChange"
         :items="['Near Me','ZIP Code','State']"
@@ -163,26 +193,32 @@
       ></v-select>
     </div>
 
-    <div class="mt-4">
-      <p
-        class="subhead-2"
-        id="fos-salary-after-completing"
-      >
+    <!-- Salary After Completing -->
+    <div class="mt-5">
+      <label class="subhead mb-2" id="search-fos-salary" for="search-fos-salary">
         Salary After Completing
+
         <v-btn
           v-if="input.fos_salary.join(',') !== utility.formDefault.fos_salary.join(',')"
           @click="input.fos_salary = _.cloneDeep(utility.formDefault.fos_salary)"
           icon
+          aria-label="Clear Input"
         >
           <v-icon>fas fa-times-circle</v-icon>
         </v-btn>
-      </p>
+      </label>
+
       <v-range-slider
+        id="search-fos-salary"
         v-model="input.fos_salary"
         :max="utility.fieldOfStudySalary.max"
         :min="utility.fieldOfStudySalary.min"
         hide-details
         class="align-center"
+        color="secondary"
+        track-color="secondary"
+        thumb-color="secondary"
+        thumb-label
       >
         <template v-slot:prepend>
           <span class="mt-2">$</span>
@@ -192,7 +228,7 @@
             hide-details
             single-line
             type="number"
-            style="width: 60px"
+            style="width: 54px"
             suffix="k"
             @change="$set(input.fos_salary, 0, $event)"
           ></v-text-field>
@@ -205,7 +241,7 @@
             hide-details
             single-line
             type="number"
-            style="width: 60px"
+            style="width: 54px"
             suffix="k"
             @change="$set(input.fos_salary, 1, $event)"
           ></v-text-field>
@@ -213,12 +249,10 @@
       </v-range-slider>
     </div>
 
-    <div class="mt-4">
-      <p
-        class="subhead-2"
-        id="fos-median-total-debt"
-      >
+    <div class="mt-5">
+      <label class="subhead mb-2" id="search-fos-median-debt" for="search-fos-median-debt">
         Median Total Debt
+
         <v-btn
           v-if="input.fos_debt.join(',') !== utility.formDefault.fos_debt.join(',')"
           @click="input.fos_debt = _.cloneDeep(utility.formDefault.fos_debt)"
@@ -226,13 +260,18 @@
         >
           <v-icon>fas fa-times-circle</v-icon>
         </v-btn>
-      </p>
+      </label>
+
       <v-range-slider
         v-model="input.fos_debt"
         :max="utility.fieldOfStudyDebt.max"
         :min="utility.fieldOfStudyDebt.min"
         hide-details
         class="align-center"
+        color="secondary"
+        track-color="secondary"
+        thumb-color="secondary"
+        thumb-label
       >
         <template v-slot:prepend>
           <span class="mt-2">$</span>
@@ -242,7 +281,7 @@
             hide-details
             single-line
             type="number"
-            style="width: 60px"
+            style="width: 54px"
             suffix="k"
             @change="$set(input.fos_debt, 0, $event)"
           ></v-text-field>
@@ -255,7 +294,7 @@
             hide-details
             single-line
             type="number"
-            style="width: 60px"
+            style="width: 54px"
             suffix="k"
             @change="$set(input.fos_debt, 1, $event)"
           ></v-text-field>
