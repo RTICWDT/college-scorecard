@@ -43,7 +43,6 @@
       >
       </field-of-study-search>
 
-      <!--TODO: Chips-->
       <div id="fos-chip-container" class="mt-2">
         <field-of-study-detail-chip
           v-for="fieldOfStudy in utility.cip4Cache"
@@ -56,18 +55,19 @@
       </div>
 
       <div class="text-right">
+
         <v-btn
           class="mt-2"
           text
           color="secondary"
           v-show="input.cip4.length > 0"
           @click="handleClearAllChips"
+          aria-label="Clear Selected Fields of Study"
         >
           Clear All
         </v-btn>
+
       </div>
-
-
     </div>
 
     <!-- Credential Type -->
@@ -125,7 +125,6 @@
         :items="['Near Me','ZIP Code','State']"
         hide-details
         class="mb-3 mt-0 pt-0"
-        aria-labelledby="location-label"
         :placeholder="utility.location ? undefined : 'Select an option'"
         clearable
       />
@@ -139,6 +138,7 @@
           class="mb-3 mr-3"
           type="number"
         ></v-text-field>
+
         <v-text-field
           v-model="input.distance"
           :rules="[utility.rules.required,utility.rules.numerical]"
@@ -152,22 +152,28 @@
       </div>
 
       <div class="d-flex align-center" v-if="utility.location==='Near Me'">
+
         <v-tooltip bottom max-width="250" color="rgba(0,0,0,0.95)">
+
           <template v-slot:activator="{ on }">
             <v-btn icon @click="handleLocationCheck">
               <v-icon
+                aria-label="Initiate Geo Location Search"
                 v-on="on"
                 :color="locationButtonColor"
                 v-html="location.isLoading ? 'fas fa-circle-notch fa-spin' : 'mdi-near-me'"
               ></v-icon>
             </v-btn>
           </template>
+
           Click the arrow to find your location based on your browser settings and then enter a distance to find schools near you.
         </v-tooltip>
+
         <v-text-field
           v-model="location.miles"
           :rules="[utility.rules.required,utility.rules.numerical]"
           label="Distance in Miles"
+          aria-label="Distance in Miles"
           :disabled="!location.latLon"
           hideDetails
           class="mb-3"
@@ -177,6 +183,7 @@
       </div>
 
       <v-select
+        aria-label="State Select Menu"
         v-model="input.state"
         id="search-form-state"
         :items="site.data.states"
@@ -202,7 +209,7 @@
           v-if="input.fos_salary.join(',') !== utility.formDefault.fos_salary.join(',')"
           @click="input.fos_salary = _.cloneDeep(utility.formDefault.fos_salary)"
           icon
-          aria-label="Clear Input"
+          aria-label="Clear Salary After Complete Input"
         >
           <v-icon>fas fa-times-circle</v-icon>
         </v-btn>
@@ -210,6 +217,7 @@
 
       <v-range-slider
         id="search-fos-salary"
+        name="search-fos-salary"
         v-model="input.fos_salary"
         :max="utility.fieldOfStudySalary.max"
         :min="utility.fieldOfStudySalary.min"
@@ -219,6 +227,7 @@
         track-color="secondary"
         thumb-color="secondary"
         thumb-label
+        aria-label="Salary After Complete Range Slider"
       >
         <template v-slot:prepend>
           <span class="mt-2">$</span>
@@ -231,6 +240,7 @@
             style="width: 54px"
             suffix="k"
             @change="$set(input.fos_salary, 0, $event)"
+            aria-label="Minimum Salary After Complete"
           ></v-text-field>
         </template>
         <template v-slot:append>
@@ -244,11 +254,13 @@
             style="width: 54px"
             suffix="k"
             @change="$set(input.fos_salary, 1, $event)"
+            aria-label="Maximum Salary After Complete"
           ></v-text-field>
         </template>
       </v-range-slider>
     </div>
 
+    <!-- Median Total Debt -->
     <div class="mt-5">
       <label class="subhead mb-2" id="search-fos-median-debt" for="search-fos-median-debt">
         Median Total Debt
@@ -257,12 +269,14 @@
           v-if="input.fos_debt.join(',') !== utility.formDefault.fos_debt.join(',')"
           @click="input.fos_debt = _.cloneDeep(utility.formDefault.fos_debt)"
           icon
+          aria-label="Clear Median Total Debt Input"
         >
           <v-icon>fas fa-times-circle</v-icon>
         </v-btn>
       </label>
 
       <v-range-slider
+        name="search-fos-median-debt"
         v-model="input.fos_debt"
         :max="utility.fieldOfStudyDebt.max"
         :min="utility.fieldOfStudyDebt.min"
@@ -272,6 +286,7 @@
         track-color="secondary"
         thumb-color="secondary"
         thumb-label
+        aria-label="Median Total Debt Range Slider"
       >
         <template v-slot:prepend>
           <span class="mt-2">$</span>
@@ -284,6 +299,7 @@
             style="width: 54px"
             suffix="k"
             @change="$set(input.fos_debt, 0, $event)"
+            aria-label="Minimum Median Total Debt"
           ></v-text-field>
         </template>
         <template v-slot:append>
@@ -297,6 +313,7 @@
             style="width: 54px"
             suffix="k"
             @change="$set(input.fos_debt, 1, $event)"
+            aria-label="Maximum Median Total Debt"
           ></v-text-field>
         </template>
       </v-range-slider>

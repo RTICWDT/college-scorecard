@@ -7,6 +7,7 @@
       <v-btn
         icon
         @click="showDetail = !showDetail"
+        aria-label="Toggle Field of Study Details"
       >
         <v-icon v-if="showDetail">mdi-menu-up</v-icon>
         <v-icon v-else>mdi-menu-down</v-icon>
@@ -17,54 +18,23 @@
       <v-btn
         @click="showDetail = !showDetail"
         text
+        aria-label="Toggle Field of Study Details"
       >
         <span class="search-fos-chip-title">{{fieldOfStudy.field}}</span>
       </v-btn>
     </div>
 
-<!--    <v-btn-->
-<!--      class="ml-4"-->
-<!--      icon-->
-<!--      absolute-->
-<!--      right-->
-<!--     @click="$emit('chip-close',fieldOfStudy)"-->
-<!--    >-->
-<!--      <v-icon>mdi-close-circle</v-icon>-->
-<!--    </v-btn>-->
-
     <div class="search-fos-chip-close-container">
       <v-btn
         icon
         @click="$emit('chip-close',fieldOfStudy)"
+        aria-label="Remove Field of Study"
       >
         <v-icon>mdi-close-circle</v-icon>
       </v-btn>
     </div>
 
-
-<!--    <v-row>-->
-<!--      <v-col sm="2">-->
-<!--        <v-btn icon-->
-<!--          @click="showDetail = !showDetail"-->
-<!--        >-->
-<!--          <v-icon v-if="showDetail">mdi-menu-up</v-icon>-->
-<!--          <v-icon v-else>mdi-menu-down</v-icon>-->
-<!--        </v-btn>-->
-<!--      </v-col>-->
-
-<!--      <v-col sm="8">-->
-<!--        {{fieldOfStudy.field}}-->
-<!--      </v-col>-->
-
-<!--      <v-col sm="2">-->
-<!--        <v-btn icon absolute right-->
-<!--         @click="$emit('chip-close',fieldOfStudy)"-->
-<!--        >-->
-<!--          <v-icon>mdi-close-circle</v-icon>-->
-<!--        </v-btn>-->
-<!--      </v-col>-->
-<!--    </v-row>-->
-
+    <!--Cip Details-->
     <div
       v-if="showDetail"
       class="fos-chip-detail mb-1 mt-2"
@@ -79,6 +49,7 @@
         </li>
       </ul>
     </div>
+
   </v-chip>
 </template>
 
