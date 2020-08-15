@@ -72,7 +72,7 @@
                       <!--prettyhtml-ignore-->
                       <strong>Under ED Monitoring</strong>&nbsp;<tooltip definition="hcm2" color="#FFFFFF" class="ml-2" :isBranch="isBranch" />
                     </v-chip>
-                    <h1 class="display-2 font-weight-bold pa-0 mb-2">{{ schoolName }}</h1>
+                    <h1 id="profile-institution-title" class="display-2 font-weight-bold pa-0 mb-2">{{ schoolName }}</h1>
                     <h2 class="title location">
                       <span>{{ city }}</span>,
                       <span>{{ state }}</span>
@@ -1347,6 +1347,11 @@
 
 <style lang="scss" scoped>
   @import 'sass/_variables';
+
+  #profile-institution-title{
+    line-height: 100% !important;
+  }
+
   .school-map {
     border: 1px
       solid
@@ -1359,7 +1364,6 @@
   .field-of-study-select-container{
     border-radius: 30px !important;
   }
-
 
   #field-of-study-select-header{
     #field-of-study-select-icon{
