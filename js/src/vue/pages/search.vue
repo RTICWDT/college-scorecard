@@ -22,11 +22,19 @@
         class="searchSidebar"
         clipped
       >
+        <div class="context-toggle-container pa-5 grey lighten-3">
+          <h3 class="mb-2">
+            Showing Results For:
+          </h3>
 
-        <context-toggle
-          :display-toggle="displayToggle"
-          @context-switch-click="handleContextToggle"
-        />
+          <context-toggle
+            :display-toggle="displayToggle"
+            :control-tab="controlTab"
+            @context-switch-click="handleContextToggle"
+            @context-tab-change="handleContextToggle"
+          />
+        </div>
+
 
         <!-- Search Form Component -->
         <search-form
@@ -367,7 +375,8 @@ export default {
         { type: "Graduation Rate", field: "completion_rate:desc" }
       ],
       shareUrl: null,
-      displayToggle: 'institutions'
+      displayToggle: 'institutions',
+      controlTab: 1
     };
   },
   created() {
@@ -390,8 +399,10 @@ export default {
     if(typeof this.urlParsedParams.toggle != 'undefined'){
       if(this.urlParsedParams.toggle === 'institutions'){
         this.displayToggle = 'institutions';
+        this.controlTab = 0;
       }else{
         this.displayToggle = 'fos';
+        this.controlTab = 1;
       }
     }
 
@@ -574,11 +585,12 @@ export default {
     },
     handleContextToggle(toggleValue){
       this.clearSearchForm();
-      this.displayToggle = toggleValue;
+      this.displayToggle = (toggleValue === 0)? 'institutions' : 'fos';
       this.results.schools = []
       this.results.meta = {
         total: 0
       }
+
       // TODO - What happens to search filters?
     },
     handleInstitutionSearch(params){

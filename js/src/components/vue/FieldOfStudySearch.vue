@@ -18,7 +18,7 @@
     :items="items"
     item-text="title"
     item-value="code"
-    placeholder="Start typing to search"
+    placeholder="Type to search"
     return-object
     autocomplete="off"
     clearable
@@ -29,6 +29,10 @@
     prepend-inner-icon="fas fa-search"
     aria-label="Field of Study Search"
   >
+    <template v-slot:label>
+      <slot name="label-pass-through"></slot>
+    </template>
+
     <template v-slot:item="data">
       <v-list-item-content>
         <div class="fos-search-result-item-container">
@@ -38,6 +42,7 @@
 
       </v-list-item-content>
     </template>
+
   </v-autocomplete>
 </template>
 

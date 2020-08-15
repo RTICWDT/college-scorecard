@@ -42,3 +42,10 @@
   line-height: 125% !important;
 }
 
+.hidden-button-label{
+  font-size: 0;
+  height: 1px;
+  overflow: hidden;
+  display: block;
+}
+

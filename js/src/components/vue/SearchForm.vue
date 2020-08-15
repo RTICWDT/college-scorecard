@@ -4,6 +4,7 @@
     display: none;
   }
 }
+
 .subhead-2 {
   margin-top: 1rem !important;
   margin-bottom: 0.3rem !important;
@@ -11,6 +12,7 @@
   font-family: 'Montserrat',
     sans-serif !important;
 }
+
 .search-panel-header {
   background-color: #c5d3e1;
   border-radius: 0px !important;
