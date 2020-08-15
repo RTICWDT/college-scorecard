@@ -411,6 +411,7 @@
                         <v-row>
                           <v-col cols="12" md="5">
                             <v-select
+                              id="profile-fos-salary-select"
                               hide-details
                               :items="fosSalarySelectItems"
                               v-model="fosSalarySelect"
@@ -489,10 +490,10 @@
                             <v-checkbox
                               hide-details
                               v-model="fosShowDebtAtPrior"
-                              label="Include debt borrowed at any prior institutions"
+                              aria-label="Include debt borrowed at any prior institutions"
                             >
                               <template v-slot:label>
-                                <span>
+                                <span class="profile-fos-include-prior-debt">
                                   Include debt borrowed at any prior institutions
                                   <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
                                 </span>
@@ -505,7 +506,7 @@
                           <!--Median Total-->
                           <v-col cols="12" sm="12" md="4">
                             <h4>
-                              Median Total Debt After Graduation&nbsp
+                              Median Total Debt <br class="d-none d-md-block">After Graduation&nbsp
                               <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
                             </h4>
 
@@ -975,7 +976,7 @@
                               label="Include debt borrowed at any prior institutions"
                             >
                               <template v-slot:label>
-                                <span>
+                                <span class="profile-fos-include-prior-debt">
                                   Include debt borrowed at any prior institutions
                                   <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
                                 </span>
@@ -1388,6 +1389,15 @@
 .leaflet-bottom {
   z-index: 100 !important;
 }
+
+  .profile-fos-include-prior-debt {
+    font-size: 12px;
+
+    @media (min-width: 960px){
+      font-size: 16px;
+    }
+
+  }
 </style>
 
 <style lang="scss" scoped>
@@ -1436,13 +1446,23 @@
 
   .fos-profile-panel{
     width: 100%;
-    border-left: 20px solid $fos-color-gold;
+    border-left: 10px solid $fos-color-gold;
     margin-bottom: 20px;
+
+    @media (min-width: 960px){
+      font-size: 16px;
+      border-left: 20px solid $fos-color-gold;
+    }
   }
 
   .institution-profile-panel{
     width: 100%;
-    border-left: 20px solid $institution-accent-color;
+    border-left: 10px solid $institution-accent-color;
+
+    @media (min-width: 960px){
+      font-size: 16px;
+      border-left: 20px solid $institution-accent-color;
+    }
   }
 
   .field-of-study-select-icon{
@@ -1483,8 +1503,6 @@
       vertical-align: middle;
     }
   }
-
-
 
 </style>
 

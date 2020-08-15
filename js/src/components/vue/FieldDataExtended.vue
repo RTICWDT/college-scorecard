@@ -10,6 +10,7 @@
           @input="$emit('update-salary-select', $event)"
         />
       </v-col>
+
       <!--Median Earnings-->
       <v-col cols="12" md="3">
         <h4 class="mb-2">
@@ -36,6 +37,7 @@
           </div>
         </div>
       </v-col>
+
       <!--Monthly Earnings-->
       <v-col cols="12" md="3">
         <h4 class="mb-2">
@@ -75,7 +77,7 @@
           label="Include debt borrowed at any prior institutions"
         >
           <template v-slot:label>
-            <span>
+            <span class="profile-fos-include-prior-debt">
               Include debt borrowed at any prior institutions
               <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
             </span>
@@ -109,8 +111,8 @@
             <span class="fos-field-data-text">N/A</span>
           </div>
         </div>
-
       </v-col>
+
       <!--Monthly Loan-->
       <v-col cols="12" md="3">
         <h4 class="mb-2">
@@ -143,6 +145,7 @@
 
     <h3 class="grey lighten-4 pa-2">Additional Information</h3>
     <v-row>
+
       <!--Number Of Graduates-->
       <v-col cols="12" md="5">
         <h4 class="mb-2">
@@ -155,7 +158,6 @@
         <div v-else>
           <span class="fos-field-data-text">N/A</span>
         </div>
-
 
       </v-col>
     </v-row>
