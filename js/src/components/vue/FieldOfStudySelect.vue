@@ -16,6 +16,7 @@
   <div :id="containerId" class="field-of-study-select-search-container">
     <v-text-field
       id="field-of-study-select-search-text"
+      aria-label="Field Of Study Select"
       :value="setInputValue(value)"
       @input="filterObject"
       @change="handleChange"
@@ -26,6 +27,7 @@
       clearable
       outlined
       hide-details
+
     >
       <template slot="append">
         <v-icon class="fos-search-text-icon" v-if="displayMenu">mdi-menu-up</v-icon>
@@ -34,7 +36,7 @@
     </v-text-field>
 
     <v-card
-      class="field-of-study-select-search-result pa-2 mt-1"
+      class="field-of-study-select-search-result pa-2"
       :id="resultId"
       v-show="displayMenu"
     >
@@ -62,7 +64,9 @@
           >
             <v-list-item-content>
               <v-list-item-title v-text="cip4.text" class="field-of-study-search-item-body"></v-list-item-title>
+<!--              <span>{{ cip4.text }}</span>-->
             </v-list-item-content>
+
 
           </v-list-item>
         </v-list-group>
@@ -92,6 +96,7 @@
     overflow-y: scroll;
     z-index: 8;
     border: 2px $fos-color-gold solid !important;
+    border-top: none !important;
 
     .v-list-item__title{
       text-overflow: unset;
@@ -116,7 +121,7 @@
   }
 
   .field-of-study-search-item-title{
-    /*border-bottom: 1px gray solid;*/
+    font-weight: bold;
   }
 
   .field-of-study-search-item-list-content{
@@ -124,6 +129,7 @@
   }
 
   .field-of-study-search-item-body{
+    padding-left: 20px;
     /*border: 1px solid black;*/
   }
 
@@ -176,6 +182,13 @@ export default {
   components:{
   },
   computed:{
+    // textFieldBorderStyle(){
+    //   if(this.displayMenu){
+    //     return {
+    //       borderBottom: 'none !important'
+    //     }
+    //   }
+    // }
   },
   methods:{
     setInputValue(value){

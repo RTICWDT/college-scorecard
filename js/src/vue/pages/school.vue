@@ -196,16 +196,37 @@
                           v-if="selectedFOS"
                           text
                           small
-                          class="d-none d-sm-inline"
                           :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"
                           @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
                         >
                           Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-plus-circle</v-icon>
                         </v-btn>
-                        <span v-else>
-                          Select a Field Of Study
-                        </span>
                       </div>
+                      <!-- Compare Button Desktop-->
+<!--                      <div class="text-right mb-2 d-none d-md-block">-->
+<!--                        <v-btn-->
+<!--                          v-if="selectedFOS"-->
+<!--                          text-->
+<!--                          small-->
+<!--                          :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"-->
+<!--                          @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"-->
+<!--                        >-->
+<!--                          Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-plus-circle</v-icon>-->
+<!--                        </v-btn>-->
+<!--                      </div>-->
+
+                      <!-- Compare Button Mobile-->
+<!--                      <div class="mb-2 d-md-none text-center">-->
+<!--                        <v-btn-->
+<!--                          v-if="selectedFOS"-->
+<!--                          text-->
+<!--                          small-->
+<!--                          :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"-->
+<!--                          @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"-->
+<!--                        >-->
+<!--                          Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-plus-circle</v-icon>-->
+<!--                        </v-btn>-->
+<!--                      </div>-->
 
                       <div id="field-of-study-select-header"
                         class="mb-4"
@@ -229,7 +250,7 @@
                       />
 
                       <div>
-                        <v-row>
+                        <v-row v-if="selectedFOS">
                           <v-col cols="12" md="6" sm="12">
                             <h3 class="mb-3">
                               Salary After Completing Field of Study
@@ -273,6 +294,7 @@
 <!--                            <p v-else>&#45;&#45;</p>    -->
                           </v-col>
                         </v-row>
+                        <div v-else class="mb-4"></div>
                       </div>
 
                     </v-card>
@@ -290,6 +312,7 @@
               </v-row>
 
               <v-expansion-panels multiple focusable v-model="panelsFOS">
+
                 <!--Field Of Study Panel-->
                 <v-expansion-panel class="fos-profile-panel">
                   <v-expansion-panel-header
@@ -317,16 +340,38 @@
                         v-if="selectedFOS"
                         text
                         small
-                        class="d-none d-sm-inline"
                         :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"
                         @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
                       >
                         Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-plus-circle</v-icon>
                       </v-btn>
-                      <span v-else>
-                            Select a Field Of Study
-                          </span>
                     </div>
+
+                    <!-- Compare Button Desktop-->
+<!--                    <div class="text-right mb-2 d-none d-md-block">-->
+<!--                      <v-btn-->
+<!--                        v-if="selectedFOS"-->
+<!--                        text-->
+<!--                        small-->
+<!--                        :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"-->
+<!--                        @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"-->
+<!--                      >-->
+<!--                        Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-plus-circle</v-icon>-->
+<!--                      </v-btn>-->
+<!--                    </div>-->
+
+                    <!-- Compare Button Mobile-->
+<!--                    <div class="mb-2 d-md-none text-center">-->
+<!--                      <v-btn-->
+<!--                        v-if="selectedFOS"-->
+<!--                        text-->
+<!--                        small-->
+<!--                        :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"-->
+<!--                        @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"-->
+<!--                      >-->
+<!--                        Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-plus-circle</v-icon>-->
+<!--                      </v-btn>-->
+<!--                    </div>-->
 
                     <h2 class="mb-4">Fields Of Study Offered At {{ schoolName }}</h2>
                     <div class="mb-4">
@@ -919,7 +964,7 @@
                         </span>
 
                         <h3 class="fos-profile-mini">
-                          {{selectedFOSDetail.title | formatFieldOfStudyTitle}} - {{selectedFOSDetail.school.name}}
+                          {{selectedFOSDetail.title | formatFieldOfStudyTitle}} - {{selectedFOSDetail.credential.title}}
                         </h3>
 
                         <v-row>
@@ -1055,7 +1100,7 @@
                         </v-icon>
                       </span>
 
-                      <h3>{{selectedFOSDetail.title | formatFieldOfStudyTitle}} - {{selectedFOSDetail.school.name}}</h3>
+                      <h3>{{selectedFOSDetail.title | formatFieldOfStudyTitle}} - {{selectedFOSDetail.credential.title}}</h3>
 
                       <v-row>
                         <v-col cols="12" md="5" sm="12">
