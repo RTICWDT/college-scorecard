@@ -19,11 +19,13 @@
 <!--    </v-btn>-->
 <!--  </div>-->
 
-  <v-tabs :value="controlTab"
-          fixed-tabs
-          centered
-          slider-size="8"
-          @change="$emit('context-tab-change', $event)"
+  <v-tabs
+    id="context-toggle"
+    :value="controlTab"
+    grow
+    :show-arrows="true"
+    slider-size="8"
+    @change="$emit('context-tab-change', $event)"
   >
 
     <v-tabs-slider :class="{'compare-fos-slider-gold': controlTab === 1}" />
@@ -42,10 +44,49 @@
 
   </v-tabs>
 
+<!--  <v-item-group-->
+<!--    v-model="selected"-->
+<!--  >-->
+<!--    <v-item v-slot:default="{ active, toggle }">-->
+<!--      <span>School</span>-->
+<!--    </v-item>-->
+
+<!--    <v-item>-->
+<!--      <span>Field of Study</span>-->
+<!--    </v-item>-->
+
+<!--  </v-item-group>-->
+
+
 </template>
 
 <style lang="scss" scoped>
   @import 'sass/_variables';
+
+  #context-toggle{
+    background-color: pink !important;
+    width: 300px;
+
+
+    /*.v-slide-group .v-slide-group__prev{*/
+    /*  display: none !important;*/
+    /*}*/
+
+    /*  .v-slide-group__prev{*/
+
+    /*  }*/
+
+    /*}*/
+  }
+
+ .v-slide-group__prev{
+    display: none;
+  }
+
+  .compare-tab-title{
+    letter-spacing: normal !important;
+    color: black !important;
+  }
 
   .compare-toggle-school-active{
     background-color: #dee8ef;
@@ -74,7 +115,13 @@
     },
     data(){
       return{
+        selected: null
       }
+    },
+    mounted(){
+      // Hacky way to remove the pagination slider arrows.
+      // document.querySelector('#context-toggle .v-slide-group .v-slide-group__prev').remove();
+      // document.querySelector('#context-toggle .v-slide-group .v-slide-group__next').remove();
     }
   }
 </script>

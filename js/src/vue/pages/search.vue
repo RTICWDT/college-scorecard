@@ -22,13 +22,19 @@
         class="searchSidebar"
         clipped
       >
+        <div class="context-toggle-container pa-5 grey lighten-3">
+          <h3 class="mb-2">
+            Showing Results For:
+          </h3>
 
-        <context-toggle
-          :display-toggle="displayToggle"
-          :control-tab="controlTab"
-          @context-switch-click="handleContextToggle"
-          @context-tab-change="handleContextToggle"
-        />
+          <context-toggle
+            :display-toggle="displayToggle"
+            :control-tab="controlTab"
+            @context-switch-click="handleContextToggle"
+            @context-tab-change="handleContextToggle"
+          />
+        </div>
+
 
         <!-- Search Form Component -->
         <search-form
@@ -579,7 +585,6 @@ export default {
     },
     handleContextToggle(toggleValue){
       this.clearSearchForm();
-      console.log(toggleValue);
       this.displayToggle = (toggleValue === 0)? 'institutions' : 'fos';
       this.results.schools = []
       this.results.meta = {
