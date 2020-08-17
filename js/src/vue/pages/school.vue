@@ -67,7 +67,7 @@
                 <v-row>
 
                   <!-- School Information and Icons-->
-                  <v-col cols="12" md="7" class="px-sm-5">
+                  <v-col cols="12" md="7" class="pl-sm-6 pr-sm-5">
                     <v-chip v-if="underInvestigation==1" color="error" label>
                       <!--prettyhtml-ignore-->
                       <strong>Under ED Monitoring</strong>&nbsp;<tooltip definition="hcm2" color="#FFFFFF" class="ml-2" :isBranch="isBranch" />
@@ -90,7 +90,7 @@
                   </v-col>
 
                   <!-- Map -->
-                  <v-col cols="12" md="5" class="px-sm-5 py-0">
+                  <v-col cols="12" md="5" class="pr-sm-6 pl-sm-5 py-0">
                     <!-- <div class="school-map" ref="map"></div> -->
                     <div class="school-map mx-auto" v-if="school">
                       <v-img contain 
