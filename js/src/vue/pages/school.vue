@@ -126,9 +126,7 @@
                   <!--Institution Summary-->
                   <v-col md="5" class="pr-sm-3">
 
-                    <div id="school-completion-rate-bar"
-                      class="mb-6"
-                    >
+                    <div id="school-completion-rate-bar" class="mb-6">
                       <h2 class="mb-4">
                         <!--prettyhtml-ignore-->
                         Graduation Rate&nbsp;<tooltip definition="graduation-rate" :version="completionRateFieldDefinition" />
@@ -155,12 +153,19 @@
                         Salary After Completing
                         <tooltip definition="fos-median-earnings" :isBranch="isBranch" :limitedFoS="fieldsLink" />
                       </h2>
+
                       <p>Salary after completing depends on field of study.</p>
+
                       <multi-range
                         :minmax="earningsRange"
                         variable="earnings.median_earnings"
-                        :max=" { label: '$150,000', value: 150000 }"
+                        :max=" { label: '$150,000', value: 150000 , style: {height: '60px'}}"
                         :addExtraPadding="false"
+                        :rangeChartStyle="{height: '50px'}"
+                        :lowerStyleOverride="{ height: '60px', 'border-left': '12px solid #0e365b'}"
+                        :lowerTipStyleOverride="{top: 'unset', bottom: '-1.1rem'}"
+                        :upperTipStyleOverride="{top: 'unset', bottom: '-1.1rem'}"
+                        :upperStyleOverride="{ height: '60px', 'border-right': '12px solid #0e365b'}"
                       />
                     </div>
 
@@ -191,9 +196,7 @@
                   <v-col md="7" class="pl-sm-3">
 
                     <v-card
-                      class="pa-4 field-of-study-select-container"
-                      raised
-                    >
+                      class="pa-4 field-of-study-select-container">
                       <!-- Compare Button -->
                       <div class="text-right mb-2">
                         <v-btn
@@ -844,6 +847,7 @@
                     aria-controls="aid-content"
                     @click="trackAccordion('Financial Aid &amp; Debt')"
                   >Financial Aid &amp; Debt</v-expansion-panel-header>
+
                   <v-expansion-panel-content id="aid-content" class="px-0 py-3 pa-sm-5">
                     <v-card
                       v-if="(aidFlag > 3) && (aidFlag < 8)"
@@ -853,14 +857,14 @@
                     <v-card v-else-if="aidFlag==8" color="blue" class='pa-5 white--text'>{{site.data.glossary.ogc.flag8}}</v-card>
                     <div v-else>
                       <v-row>
-                        <v-col cols="12" md="6">
+                        <v-col cols="12" md="8">
                           <v-select
                             :items="aidLoanSelectItems"
                             v-model="aidLoanSelect"
                           />
                         </v-col>
 
-                        <v-col cols="12" md="6">
+                        <v-col cols="12" md="4">
                           <v-checkbox
                             v-model="aidShowMedianDebtWithPrior"
                             label="Include debt borrowed at prior institutions"
