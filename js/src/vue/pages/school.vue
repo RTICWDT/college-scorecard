@@ -120,11 +120,11 @@
                   </v-col>
                 </v-row>
 
-                <!-- Institution Summary and Field Of Study Select -->
-                <v-row class="mt-3">
+                <!-- Institution Summary and Field Of Study Select + Summary -->
+                <v-row class="mt-3 px-sm-3">
 
                   <!--Institution Summary-->
-                  <v-col cols="12" md="5" class="">
+                  <v-col md="5" class="pr-sm-3">
 
                     <div id="school-completion-rate-bar"
                       class="mb-6"
@@ -140,8 +140,11 @@
                         :min="0"
                         :max="100"
                         color="#0e365b"
-                        :height="25"
+                        :height="50"
+                        :y-bar-thickness="50"
+                        :label-font-size="24"
                         :labels="true"
+
                       ></horizontal-bar>
                       <div v-else class="data-na">Data Not Available</div>
                     </div>
@@ -149,7 +152,7 @@
                     <div id="school-salary-after-complete" class="mb-6">
                       <h2 class="mb-4">
                         <!--prettyhtml-ignore-->
-                        Salary After Completing&nbsp;
+                        Salary After Completing
                         <tooltip definition="fos-median-earnings" :isBranch="isBranch" :limitedFoS="fieldsLink" />
                       </h2>
                       <p>Salary after completing depends on field of study.</p>
@@ -166,12 +169,12 @@
                     >
                       <h2 class="mt-5 mb-3" v-if="!isProgramReporter">
                         <!--prettyhtml-ignore-->
-                        Average Annual Cost&nbsp;
+                        Average Annual Cost
                         <tooltip definition="avg-cost" />
                       </h2>
                       <h2 v-else class="mt-5 mb-3">
                         <!--prettyhtml-ignore-->
-                        Average Annual Cost for Largest Program&nbsp;
+                        Average Annual Cost for Largest Program
                         <tooltip definition="avg-program-cost" />
                       </h2>
                       <p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
@@ -185,12 +188,13 @@
                   </v-col>
 
                   <!--Field Of Study Select Container-->
-                  <v-col cols="12" md="7" class="px-5">
+                  <v-col md="7" class="pl-sm-3">
+
                     <v-card
                       class="pa-4 field-of-study-select-container"
-                      elevation="4"
                       raised
                     >
+                      <!-- Compare Button -->
                       <div class="text-right mb-2">
                         <v-btn
                           v-if="selectedFOS"
