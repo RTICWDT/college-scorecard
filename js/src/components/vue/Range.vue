@@ -103,7 +103,7 @@
   }
 
   .picc-range-label {
-    /*height: 22px;*/
+    height: 22px;
     position: absolute;
     top: 0;
     transition: left 0.5s;
@@ -231,8 +231,10 @@ export default {
     },
     rangeChartStyle:{
       type: Object,
-      default: {
-        height: '15px'
+      default: () =>{
+        return {
+          height: '15px'
+        }
       }
     },
     labelMinMaxStyleOverride:{

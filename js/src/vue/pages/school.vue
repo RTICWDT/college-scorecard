@@ -1286,7 +1286,7 @@
                         <h4 class="overline">Critical Reading</h4>
                         <range
                           v-if="satReading.available"
-                          :lower="{ value: satReading.lower, label: satReading.lower }"
+                          :lower="{ value: satReading.lower, label: satReading.lower}"
                           :upper="{ value: satReading.upper, label: satReading.upper}"
                           :min="{ value: satReading.min, label: satReading.min }"
                           :max="{ value: satReading.max, label: satReading.max }"
