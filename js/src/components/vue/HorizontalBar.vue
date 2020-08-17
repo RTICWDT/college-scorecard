@@ -38,7 +38,7 @@ export default {
     },
     labelFontSize:{
       type: Number,
-      required: true
+      default: 15
     }
   },
   data() {
@@ -75,7 +75,7 @@ export default {
           datalabels: {
             display: this.labels,
             font: (context) => {
-              if(this.labelFontSize){
+              if(this.labelFontSize != '15'){
                 return { size: this.labelFontSize}
               }else{
                 if(context.chart.height<20)
