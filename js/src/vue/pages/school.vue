@@ -193,45 +193,7 @@
                   <!--Field Of Study Select Container-->
                   <v-col md="7" class="pl-sm-3">
 
-                    <v-card
-                      class="pa-4 field-of-study-select-container">
-                      <!-- Compare Button -->
-                      <div class="text-right mb-2">
-                        <v-btn
-                          v-if="selectedFOS"
-                          text
-                          small
-                          :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"
-                          @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
-                        >
-                          Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-plus-circle</v-icon>
-                        </v-btn>
-                      </div>
-                      <!-- Compare Button Desktop-->
-<!--                      <div class="text-right mb-2 d-none d-md-block">-->
-<!--                        <v-btn-->
-<!--                          v-if="selectedFOS"-->
-<!--                          text-->
-<!--                          small-->
-<!--                          :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"-->
-<!--                          @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"-->
-<!--                        >-->
-<!--                          Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-plus-circle</v-icon>-->
-<!--                        </v-btn>-->
-<!--                      </div>-->
-
-                      <!-- Compare Button Mobile-->
-<!--                      <div class="mb-2 d-md-none text-center">-->
-<!--                        <v-btn-->
-<!--                          v-if="selectedFOS"-->
-<!--                          text-->
-<!--                          small-->
-<!--                          :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"-->
-<!--                          @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"-->
-<!--                        >-->
-<!--                          Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-plus-circle</v-icon>-->
-<!--                        </v-btn>-->
-<!--                      </div>-->
+                    <v-card class="pa-4 field-of-study-select-container">
 
                       <div id="field-of-study-select-header"
                         class="mb-4"
@@ -276,11 +238,9 @@
                           </v-col>
 
                           <v-col cols="12" md="12" class="">
-                            <h3>
+                            <h3 class="mb-3">
                               Number of Graduates
                               <tooltip definition="fos-median-earnings" />
-                              <br>
-                              <br>
                             </h3>
 
                             <h4 class="display-2 navy-text font-weight-bold"
@@ -300,6 +260,19 @@
                           </v-col>
                         </v-row>
                         <div v-else class="mb-4"></div>
+                      </div>
+
+                      <!-- Compare Button -->
+                      <div class="text-right mb-2">
+                        <v-btn
+                          v-if="selectedFOS"
+                          text
+                          small
+                          :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"
+                          @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
+                        >
+                          Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-plus-circle</v-icon>
+                        </v-btn>
                       </div>
 
                     </v-card>
