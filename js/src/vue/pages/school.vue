@@ -125,6 +125,7 @@
 
                   <!--Institution Summary-->
                   <v-col cols="12" md="5" class="">
+
                     <div id="school-completion-rate-bar"
                       class="mb-6"
                     >
@@ -145,9 +146,7 @@
                       <div v-else class="data-na">Data Not Available</div>
                     </div>
 
-                    <div id="school-salary-after-complete"
-                    class="mb-6"
-                    >
+                    <div id="school-salary-after-complete" class="mb-6">
                       <h2 class="mb-4">
                         <!--prettyhtml-ignore-->
                         Salary After Completing&nbsp;
@@ -182,10 +181,11 @@
                       >{{ netPrice | numeral('$0,0') }}</h2>
                       <div class="data-na" v-else>Data Not Available</div>
                     </div>
+
                   </v-col>
 
                   <!--Field Of Study Select Container-->
-                  <v-col cols="12" md="7" class="">
+                  <v-col cols="12" md="7" class="px-5">
                     <v-card
                       class="pa-4 field-of-study-select-container"
                       elevation="4"
@@ -237,10 +237,10 @@
                           </v-icon>
                         </div>
 
-                        <h3>
+                        <h2>
                           Fields Of Study Offered:
                           <tooltip definition="graduation-rate" :version="completionRateFieldDefinition" />
-                        </h3>
+                        </h2>
                       </div>
 
                       <field-of-study-select
@@ -249,9 +249,9 @@
                         @input-clear="handleFieldOfStudyClear"
                       />
 
-                      <div>
+                      <div class="pa-4">
                         <v-row v-if="selectedFOS">
-                          <v-col cols="12" md="6" sm="12">
+                          <v-col cols="12" md="12" sm="12">
                             <h3 class="mb-3">
                               Salary After Completing Field of Study
                               <tooltip definition="fos-median-earnings" />
@@ -270,8 +270,8 @@
                             </h4>
                           </v-col>
 
-                          <v-col cols="12" md="6" class="pl-6">
-                            <h3 class="mb-3">
+                          <v-col cols="12" md="12" class="">
+                            <h3>
                               Number of Graduates
                               <tooltip definition="fos-median-earnings" />
                               <br>
@@ -1436,11 +1436,13 @@
       }
     }
 
-    h3{
+    h2{
+      font-size: 1.35rem;
       display: inline-block;
       vertical-align: top;
-      margin-top: 15px;
+      margin-top: 12px;
       margin-left: 10px;
+      text-transform: uppercase;
     }
   }
 
