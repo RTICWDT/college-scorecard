@@ -3,9 +3,10 @@
     <div v-if="minmax && minmax.single">
       <range
         :lower="{ value: 0, label: '$0' }"
-        :upper="{ value: _.get(minmax.max, variable), label: $options.filters.numeral(_.get(minmax.max, variable), '$0,0') }"
+        :upper="this._upper"
         :min="{ value: 0, label: '$0' }"
         :max="max"
+        :upperTipStyleOverride="upperTipStyleOverride"
         lowertip
         :uppertip="minmax.max.title.slice(0,-1)+ ' - '+ minmax.max.credential.title"
         hideMiddle
@@ -66,14 +67,19 @@ export default {
     },
     rangeChartStyle:{
       type: Object,
-      default: {
-        height: "15px"
+      default: ()=>{
+        return {
+          height: "15px"
+        }
       }
     },
     lowerStyleOverride:{
       type: Object,
       default: ()=>{
-        return {}
+        return {
+          height: '22px',
+          'border-left': '3px solid #0e365b'
+        }
       }
     },
     lowerTipStyleOverride: {
@@ -85,7 +91,10 @@ export default {
     upperStyleOverride:{
       type: Object,
       default: ()=>{
-        return {}
+        return {
+          height: '22px',
+          'border-right': '3px solid #0e365b'
+        }
       }
     },
     upperTipStyleOverride:{
