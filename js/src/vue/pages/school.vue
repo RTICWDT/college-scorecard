@@ -126,8 +126,8 @@
                   <!--Institution Summary-->
                   <v-col md="5" class="pr-sm-3">
 
-                    <div id="school-completion-rate-bar" class="mb-6">
-                      <h2 class="mb-4">
+                    <div id="school-completion-rate-bar" class="">
+                      <h2 class="mb-3">
                         <!--prettyhtml-ignore-->
                         Graduation Rate&nbsp;<tooltip definition="graduation-rate" :version="completionRateFieldDefinition" />
                       </h2>
@@ -147,42 +147,40 @@
                       <div v-else class="data-na">Data Not Available</div>
                     </div>
 
-                    <div id="school-salary-after-complete" class="mb-6">
-                      <h2 class="mb-4">
+                    <div id="school-salary-after-complete" class="">
+                      <h2 class="mb-3">
                         <!--prettyhtml-ignore-->
                         Salary After Completing
                         <tooltip definition="fos-median-earnings" :isBranch="isBranch" :limitedFoS="fieldsLink" />
                       </h2>
 
-                      <p>Salary after completing depends on field of study.</p>
+                      <p class="mb-1">Salary after completing depends on field of study.</p>
 
                       <multi-range
                         :minmax="earningsRange"
                         variable="earnings.median_earnings"
                         :max=" { label: '$150,000', value: 150000 , style: {height: '60px'}}"
                         :addExtraPadding="false"
-                        :rangeChartStyle="{height: '50px'}"
-                        :lowerStyleOverride="{ height: '60px', 'border-left': '12px solid #0e365b'}"
+                        :rangeChartStyle="{height: '40px'}"
+                        :lowerStyleOverride="{ height: '50px', 'border-left': '12px solid #0e365b'}"
                         :lowerTipStyleOverride="{top: 'unset', bottom: '-1.1rem'}"
                         :upperTipStyleOverride="{top: 'unset', bottom: '-1.1rem'}"
-                        :upperStyleOverride="{ height: '60px', 'border-right': '12px solid #0e365b'}"
+                        :upperStyleOverride="{ height: '50px', 'border-right': '12px solid #0e365b'}"
                       />
                     </div>
 
-                    <div id="school-avg-cost"
-                      class="mb-4"
-                    >
-                      <h2 class="mt-5 mb-3" v-if="!isProgramReporter">
+                    <div id="school-avg-cost" class="mb-4">
+                      <h2 class="mb-3" v-if="!isProgramReporter">
                         <!--prettyhtml-ignore-->
                         Average Annual Cost
                         <tooltip definition="avg-cost" />
                       </h2>
-                      <h2 v-else class="mt-5 mb-3">
+                      <h2 v-else class="mb-3">
                         <!--prettyhtml-ignore-->
                         Average Annual Cost for Largest Program
                         <tooltip definition="avg-program-cost" />
                       </h2>
-                      <p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
+                      <p class="mb-1">Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
                       <h2
                         class="display-2 navy-text font-weight-bold"
                         v-if="netPrice"
@@ -1512,6 +1510,12 @@
       display: inline;
       vertical-align: middle;
     }
+  }
+  #school-completion-rate-bar{
+    margin-bottom: 26px;
+  }
+  #school-salary-after-complete{
+    margin-bottom: 30px;
   }
 
 </style>
