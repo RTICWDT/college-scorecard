@@ -90,7 +90,7 @@
         >
           <template v-slot:label>
             <span class="profile-fos-include-prior-debt">
-              Include debt borrowed at any prior institutions
+              Include debt borrowed at any prior institutions&nbsp
               <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
             </span>
           </template>

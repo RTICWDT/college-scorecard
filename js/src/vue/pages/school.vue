@@ -519,8 +519,16 @@
                       </h2>
                     </div>
 
-                    <div class="pa-4">
-                      <p class="my-0">
+                    <!-- Top Fields of Study -->
+                    <div class="pa-sm-4">
+                      <p class="my-3" v-if="fieldsOfStudy.length">
+                        Out of {{fosUndergradCount| numeral }} undergraduate {{fosUndergradCount==1? 'field':'fields' }} of study at {{ schoolName }}, the {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} {{ hoistGroupText }} are shown below. ({{ hoistCount}} had relevant data on {{ hoistGroupData }}.)
+                        <a
+                          :href="fieldsLink"
+                        >See All Fields of Study &raquo;</a>
+                      </p>
+
+                      <p class="my-2">
                         <span class="d-block d-sm-inline">Sort by:</span>
                         <v-btn
                           class="ma-1"
@@ -540,13 +548,6 @@
                           small
                           @click="field_sort = 'lowest_debt'"
                         >Lowest Debt</v-btn>
-                      </p>
-
-                      <p class="my-3" v-if="fieldsOfStudy.length">
-                        Out of {{fosUndergradCount| numeral }} undergraduate {{fosUndergradCount==1? 'field':'fields' }} of study at {{ schoolName }}, the {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} {{ hoistGroupText }} are shown below. ({{ hoistCount}} had relevant data on {{ hoistGroupData }}.)
-                        <a
-                          :href="fieldsLink"
-                        >See All Fields of Study &raquo;</a>
                       </p>
 
                       <v-row class="mx-5 mt-5 d-none d-sm-flex" v-if="fieldsOfStudy.length">
@@ -626,6 +627,7 @@
                         </v-btn>
                       </p>
                     </div>
+
                   </v-expansion-panel-content>
               </v-expansion-panel>
               </v-expansion-panels>
