@@ -1399,9 +1399,25 @@
   }
 
   #field-of-study-select-header{
+    h2{
+      margin-top: 7px;
+      margin-left: 6px;
+      font-size: 1.35rem;
+      display: inline-block;
+      vertical-align: top;
+      text-transform: uppercase;
+    }
+
+    @media (min-width: 960px){
+      h2 {
+        margin-top: 12px;
+        margin-left: 10px;
+      }
+    }
+
     #field-of-study-select-icon{
-      width: 50px;
-      height: 50px;
+      height: 34px;
+      width: 34px;
       background: $fos-color-gold;
       border-radius: 50%;
       display:inline-block;
@@ -1409,18 +1425,19 @@
       text-align: center;
 
       i{
-        font-size: 35px;
-        margin-top:8px;
+        font-size: 24px;
+        margin-top: 5px;
       }
-    }
 
-    h2{
-      font-size: 1.35rem;
-      display: inline-block;
-      vertical-align: top;
-      margin-top: 12px;
-      margin-left: 10px;
-      text-transform: uppercase;
+      @media (min-width: 960px){
+        width: 50px;
+        height: 50px;
+
+        i{
+          font-size: 35px;
+          margin-top: 8px;
+        }
+      }
     }
   }
 
