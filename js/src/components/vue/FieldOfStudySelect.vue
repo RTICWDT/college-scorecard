@@ -27,7 +27,6 @@
       clearable
       outlined
       hide-details
-
     >
       <template slot="append">
         <v-icon class="fos-search-text-icon" v-if="displayMenu">mdi-menu-up</v-icon>

@@ -26,6 +26,15 @@
   text-align: center;
   margin: 0.8rem 0;
 }
+
+.mini-data-na{
+  padding: .5rem;
+  color: $dark-gray;
+  font-size: .85rem;
+  //font-weight: bold;
+  border: 1px dashed $light-gray;
+}
+
 .browsermessage{
   font-family: $header-font-family;
   background-color: $sky-blue;
