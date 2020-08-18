@@ -21,6 +21,8 @@
       @input="filterObject"
       @change="handleChange"
       @focus="handleSelectFocus"
+      @click="handleSelectFocus"
+      @click:append="handleSelectFocus"
       @blur="handleSelectBlur"
       @click:clear="handleInputClear"
       placeholder="Type to search"
@@ -219,10 +221,11 @@ export default {
     },
     handleSelectFocus(event){
       // console.log(event);
+      // console.log('focus');
       // this.$nextTick(() => {
       //   this.displayMenu = true
       // })
-
+      // this.displayMenu = true
       event.preventDefault();
       this.$nextTick(() => {
         this.displayMenu = true
@@ -265,12 +268,6 @@ export default {
     }
   },
   mounted(){
-    // Set up the select menu with cip2 headers and cip4 sub items;
-    // this.menuFOS = this.displayFosCipFour.reduce((final,item) => {
-    //   final.push({header:item.name});
-    //   final.push(...item.fields);
-    //   return final;
-    // },[]);
 
     this.displayFOS = _.cloneDeep(this.cipTwoNestedCipFour);
     // console.log(this.cipTwoNestedCipFour);
@@ -301,6 +298,8 @@ export default {
         classList.contains('field-of-study-search-item-body') ||
         classList.contains('mdi-chevron-down') ||
         classList.contains('mdi-chevron-up') ||
+        classList.contains('v-text-field__slot') ||
+        classList.contains('fos-search-text-icon') ||
         e.target.id === 'field-of-study-select-search-text'
       ){
         return null;
@@ -308,7 +307,6 @@ export default {
         this.displayMenu = false;
         document.getElementById('field-of-study-select-search-text').blur();
       }
-
 
     });
   }
