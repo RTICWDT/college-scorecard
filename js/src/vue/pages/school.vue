@@ -154,7 +154,7 @@
                         <tooltip definition="fos-median-earnings" :isBranch="isBranch" :limitedFoS="fieldsLink" />
                       </h2>
 
-                      <p class="mb-1">Salary after completing depends on field of study.</p>
+                      <p class="mb-1">Salary after completing depends on field<br class="d-none d-md-block">of study.</p>
 
                       <multi-range
                         :minmax="earningsRange"
@@ -336,10 +336,11 @@
 
                       <div class="pa-sm-4 mb-4" id="fos-number-grads">
 
-                        <h2 class="mr-4">
+<!--                        TODO - Adjust Class-->
+                        <h3 class="mr-4" style="font-weight: 500">
                           Number of Graduates
                           <tooltip class="ml-2" definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
-                        </h2>
+                        </h3>
 
                         <h3 class="display-2 navy-text font-weight-bold"
                             style="vertical-align: center"
@@ -353,10 +354,10 @@
 
                       <!-- Salary After Completing -->
                       <div class="fos-sub-title-header pa-4">
-                        <h2>Salary After Completing</h2>
+                        <h3>Salary After Completing</h3>
                       </div>
 
-                      <div class="px-5 pb-5 px-sm-5 py-sm-4">
+                      <div class="px-4 pb-5 px-sm-4 py-sm-4">
                         <v-row>
                           <v-col cols="12" md="5">
                             <v-select
@@ -433,7 +434,7 @@
 
                       <!-- Financial Aid &amp; Debt -->
                       <div class="fos-sub-title-header pa-4">
-                        <h2> Financial Aid &amp; Debt</h2>
+                        <h3> Financial Aid &amp; Debt</h3>
                       </div>
 
                       <div class="px-5 pb-5 px-sm-5 py-sm-4">
@@ -515,9 +516,9 @@
                     </div>
 
                     <div class="fos-sub-title-header pa-4">
-                      <h2>
+                      <h3>
                         Top Fields of Study at {{ schoolName }} <tooltip definition="field-of-study" :limitedFoS="fieldsLink" />
-                      </h2>
+                      </h3>
                     </div>
 
                     <!-- Top Fields of Study -->
@@ -1463,6 +1464,11 @@
 
   .fos-sub-title-header{
     background-color: #e5e5e5;
+
+    h3{
+      font-weight: 500;
+    }
+
   }
 
   .fos-small-data-bold{
@@ -1478,11 +1484,11 @@
   }
 
   #school-completion-rate-bar{
-    margin-bottom: 26px;
+    margin-bottom: 55px;
   }
 
   #school-salary-after-complete{
-    margin-bottom: 30px;
+    margin-bottom: 55px;
   }
 
   #profile-field-of-study-summary-metric-container{

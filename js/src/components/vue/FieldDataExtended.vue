@@ -1,7 +1,7 @@
 <template>
   <div class='fos-field-data-container'>
 
-    <h3 class="grey lighten-4 pa-3 mt-2">
+    <h3 class="grey lighten-4 pa-3 mt-2 fos-field-data-title">
       Salary After Completing
     </h3>
 
@@ -77,7 +77,7 @@
     </v-row>
 
     <!-- Financial Aid &amp; Debt-->
-    <h3 class="grey lighten-4 pa-3">
+    <h3 class="grey lighten-4 pa-3 fos-field-data-title">
       Financial Aid &amp; Debt
     </h3>
 
@@ -155,7 +155,7 @@
       </v-col>
     </v-row>
 
-    <h3 class="grey lighten-4 pa-3">
+    <h3 class="grey lighten-4 pa-3 fos-field-data-title">
       Additional Information
     </h3>
 
@@ -196,6 +196,10 @@
   .fos-field-data-text{
     font-size: 1rem !important;
     /*font-weight: bold;*/
+  }
+
+  .fos-field-data-title{
+    font-weight: 500;
   }
 
 </style>
