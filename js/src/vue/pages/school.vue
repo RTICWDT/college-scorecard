@@ -1581,7 +1581,7 @@ export default {
       aidLoanSelect: "fed",
       aidLoanSelectItems:[
         { text: "Federal Student Loans", value: "fed"},
-        { text: "Parent Plus Loans", value:"plus"}
+        { text: "Parent PLUS Loans", value:"plus"}
       ],
       aidShowMedianDebtWithPrior: false,
       aidShowMonthlyPaymentWithPrior: false,
