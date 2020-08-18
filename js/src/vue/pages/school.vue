@@ -846,7 +846,7 @@
                           </div>
                           <div v-else>
                             <h2 class="mb-3">
-                              Estimated percent of students who had a parent who borrowed
+                              Parent Borrowing Rate
                               <!--TODO Update Tool Tip-->
                               <tooltip definition="student-aid" />
                             </h2>
@@ -856,7 +856,7 @@
                             >{{estimatedParentBorrowedText}}
                             </div>
                             <div v-else class="data-na">Data Not Available</div>
-                            <p>Descriptive text about Parent Plus</p>
+                            <p class="mt-2">This is an estimated percentage of the number of students who had a parent who borrowed a Parent PLUS loan.</p>
                           </div>
                         </v-col>
 
