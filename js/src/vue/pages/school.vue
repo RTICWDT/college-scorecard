@@ -195,9 +195,7 @@
 
                     <v-card class="pa-4 field-of-study-select-container">
 
-                      <div id="field-of-study-select-header"
-                        class="mb-4"
-                      >
+                      <div id="field-of-study-select-header" class="mb-5 mt-1">
                         <div id="field-of-study-select-icon">
                           <v-icon>
                             fas fa-award
@@ -210,15 +208,18 @@
                         </h2>
                       </div>
 
-                      <field-of-study-select
-                        :cip-two-nested-cip-four="fieldOfStudySelectItems"
-                        v-model="selectedFOS"
-                        @input-clear="handleFieldOfStudyClear"
-                      />
+                      <div>
+                        <field-of-study-select
+                          :cip-two-nested-cip-four="fieldOfStudySelectItems"
+                          v-model="selectedFOS"
+                          @input-clear="handleFieldOfStudyClear"
+                        />
+                      </div>
 
-                      <div class="pa-4">
-                        <v-row v-if="selectedFOS">
-                          <v-col cols="12" md="12" sm="12">
+                      <div id="profile-field-of-study-summary-metric-container" class="pa-4">
+                        <div v-if="selectedFOS" id="profile-field-of-study-summary-metric-full">
+
+                          <div class="mb-6">
                             <h3 class="mb-3">
                               Salary After Completing Field of Study
                               <tooltip definition="fos-median-earnings" />
@@ -235,9 +236,9 @@
                             >
                               N/A
                             </h4>
-                          </v-col>
+                          </div>
 
-                          <v-col cols="12" md="12" class="">
+                          <div>
                             <h3 class="mb-3">
                               Number of Graduates
                               <tooltip definition="fos-median-earnings" />
@@ -254,12 +255,10 @@
                             >
                               N/A
                             </h4>
+                          </div>
+                        </div>
 
-<!--                            <p v-if="selectedFOSDetail.counts.ipeds_awards2">{{ selectedFOSDetail.counts.ipeds_awards2 | separator }}</p>-->
-<!--                            <p v-else>&#45;&#45;</p>    -->
-                          </v-col>
-                        </v-row>
-                        <div v-else class="mb-4"></div>
+                        <div v-else id="profile-field-of-study-summary-metric-empty" class="mb-4"></div>
                       </div>
 
                       <!-- Compare Button -->
@@ -1484,13 +1483,27 @@
       vertical-align: middle;
     }
   }
+
   #school-completion-rate-bar{
     margin-bottom: 26px;
   }
+
   #school-salary-after-complete{
     margin-bottom: 30px;
   }
 
+  #profile-field-of-study-summary-metric-container{
+    /*height: 320px;*/
+    padding-top: 20px !important;
+  }
+
+  #profile-field-of-study-summary-metric-full{
+    /*height: 320px;*/
+  }
+
+  #profile-field-of-study-summary-metric-empty{
+    height: 200px;
+  }
 </style>
 
 <script>
