@@ -216,7 +216,7 @@
                         />
                       </div>
 
-                      <div id="profile-field-of-study-summary-metric-container" class="pa-4">
+                      <div id="profile-field-of-study-summary-metric-container" class="pa-sm-4">
                         <div v-if="selectedFOS" id="profile-field-of-study-summary-metric-full">
 
                           <div class="mb-6">
