@@ -6,7 +6,7 @@
     </h3>
 
     <!-- Salary After Completing-->
-    <v-row class="mx-sm-1">
+    <v-row class="mx-1 mx-sm-1">
       <v-col cols="12" md="5">
         <v-select
           hide-details
@@ -81,7 +81,7 @@
       Financial Aid &amp; Debt
     </h3>
 
-    <v-row class="mx-sm-1">
+    <v-row class="mx-1 mx-sm-1">
       <v-col cols="12" md="5">
         <v-checkbox
           hide-details
@@ -159,7 +159,7 @@
       Additional Information
     </h3>
 
-    <v-row class="mx-sm-1">
+    <v-row class="mx-1 mx-sm-1">
       <!--Number Of Graduates-->
       <v-col cols="12" md="5">
         <h4 class="mb-2">

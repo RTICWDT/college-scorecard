@@ -320,7 +320,7 @@
                       </v-btn>
                     </div>
 
-                    <h2 class="mb-4">Fields Of Study Offered At {{ schoolName }}</h2>
+                    <h2 class="mb-4 pt-2 pt-sm-4">Fields Of Study Offered At {{ schoolName }}</h2>
 
                     <div class="mb-4">
                       <field-of-study-select
@@ -335,7 +335,7 @@
                     <div v-if="selectedFOSDetail">
 
                       <div class="pa-sm-4 mb-4" id="fos-number-grads">
-<!--                          <div class="d-inline-block"></div>-->
+
                         <h2 class="mr-4">
                           Number of Graduates
                           <tooltip class="ml-2" definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
@@ -356,7 +356,7 @@
                         <h2>Salary After Completing</h2>
                       </div>
 
-                      <div class="pa-4">
+                      <div class="px-5 pb-5 px-sm-5 py-sm-4">
                         <v-row>
                           <v-col cols="12" md="5">
                             <v-select
@@ -402,7 +402,7 @@
                           <!--Monthly Earnings-->
                           <v-col cols="12" sm="12" md="3" class="pl-sm-1">
                             <h4 class="mb-2">
-                              Monthly Earnings
+                              Monthly Earnings&nbsp
                               <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
                             </h4>
 
@@ -436,17 +436,18 @@
                         <h2> Financial Aid &amp; Debt</h2>
                       </div>
 
-                      <div class="pa-4">
+                      <div class="px-5 pb-5 px-sm-5 py-sm-4">
                         <v-row>
                           <v-col cols="12" md="5">
                             <v-checkbox
+                              class="mt-2"
                               hide-details
                               v-model="fosShowDebtAtPrior"
                               aria-label="Include debt borrowed at any prior institutions"
                             >
                               <template v-slot:label>
                                 <span class="profile-fos-include-prior-debt">
-                                  Include debt borrowed at any prior institutions
+                                  Include debt borrowed at any prior<br class="d-sm-none"> institutions&nbsp
                                   <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
                                 </span>
                               </template>
@@ -520,7 +521,7 @@
                     </div>
 
                     <!-- Top Fields of Study -->
-                    <div class="pa-sm-4">
+                    <div class="px-5 px-sm-5 py-sm-4">
                       <p class="my-3" v-if="fieldsOfStudy.length">
                         Out of {{fosUndergradCount| numeral }} undergraduate {{fosUndergradCount==1? 'field':'fields' }} of study at {{ schoolName }}, the {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} {{ hoistGroupText }} are shown below. ({{ hoistCount}} had relevant data on {{ hoistGroupData }}.)
                         <a
