@@ -1,19 +1,29 @@
 <template>
 <div class="range-container" :style="extraPad">
-  <div class="range-chart">
+  <div class="range-chart" :style="rangeChartStyle">
     <div
       v-if="!hideLower"
       :style="{ left: bar_styles.left, right: bar_styles.right }"
       class="picc-range-bar"
       ref="bar"
     ></div>
-    <span  class="picc-range-label picc-range-label-min" :style="_min.styles" ref="min">
+
+    <span  class="picc-range-label picc-range-label-min"
+           :style="_min.styles"
+           ref="min"
+    >
       <span v-html="_min.label"></span>
     </span>
-    <span class="picc-range-label picc-range-label-max" :style="_max.styles" ref="max">
+
+    <span class="picc-range-label picc-range-label-max"
+          :style="_max.styles"
+          ref="max"
+    >
       <span v-html="_max.label"></span>
     </span>
+
     <v-tooltip top v-if="!hideLower" :disabled="!lowertip">
+
       <template v-slot:activator="{ on }">
         <span
           class="picc-range-label picc-range-label-lower"
@@ -21,11 +31,15 @@
           ref="lower"
           v-on="on"
         >
-          <span v-html="_lower.label"></span>
+          <span v-html="_lower.label" :style="lowerTipStyleOverride"></span>
         </span>
       </template>
-      <span>{{lowertip}}</span>
+
+      <span>
+        {{lowertip}}
+      </span>
     </v-tooltip>
+
     <span
       v-if="!hideMiddle"
       class="picc-range-label picc-range-label-middle"
@@ -34,14 +48,24 @@
     >
       <span v-html="_middle.label"></span>
     </span>
+
     <v-tooltip top :disabled="!uppertip">
+
       <template v-slot:activator="{ on }">
-        <span class="picc-range-label picc-range-label-upper" :style="_upper.styles" ref="upper" v-on="on">
-          <span v-html="_upper.label"></span>
+        <span class="picc-range-label picc-range-label-upper"
+              :style="_upper.styles"
+              ref="upper"
+              v-on="on"
+        >
+          <span v-html="_upper.label" :style="upperTipStyleOverride"></span>
         </span>
       </template>
-      <span>{{uppertip}}</span>
+
+      <span>
+        {{uppertip}}
+      </span>
     </v-tooltip>
+
   </div>
   </div>
 </template>
@@ -62,7 +86,7 @@
 
   background-color: $light-gray;
   display: block;
-  height: 15px;
+  /*height: 30px;*/
   margin-bottom: 0;
   margin-top: 0;
   max-width: none;
@@ -122,7 +146,6 @@
     &.picc-range-label-min,
     &.picc-range-label-max,
     &.picc-range-label-middle {
-      bottom: -0.5em;
       top: auto;
 
       span {
@@ -178,9 +201,21 @@ export default {
       type: String,
       default: ""
     },
+    lowerTipStyleOverride:{
+      type: Object,
+      default: ()=>{
+        return {}
+      }
+    },
     uppertip: {
       type: String,
       default: ""
+    },
+    upperTipStyleOverride:{
+      type: Object,
+      default: ()=>{
+        return {}
+      }
     },
     hideMiddle: {
       type: Boolean,
@@ -193,6 +228,17 @@ export default {
     addExtraPadding:{
       type: Boolean,
       default: true
+    },
+    rangeChartStyle:{
+      type: Object,
+      default: () =>{
+        return {
+          height: '15px'
+        }
+      }
+    },
+    labelMinMaxStyleOverride:{
+      type: Object
     }
   },
   data() {
@@ -211,13 +257,25 @@ export default {
       return this.styleLabel(this.max);
     },
     _lower() {
-      return this.styleLabel(this.lower);
+      // return this.styleLabel(this.lower);
+      let styleLabel = this.styleLabel(this.lower);
+      styleLabel.styles = {
+        ...styleLabel.styles,
+        ...this.lower.styles
+      }
+      return styleLabel;
     },
     _middle() {
       return this.styleLabel(this.middle);
     },
     _upper() {
-      return this.styleLabel(this.upper);
+      // return this.styleLabel(this.upper);
+      let styleLabel = this.styleLabel(this.upper);
+      styleLabel.styles = {
+        ...styleLabel.styles,
+        ...this.upper.styles
+      }
+      return styleLabel;
     }
   },
   methods: {

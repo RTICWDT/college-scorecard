@@ -67,12 +67,12 @@
                 <v-row>
 
                   <!-- School Information and Icons-->
-                  <v-col cols="12" md="7" class="px-sm-5">
+                  <v-col cols="12" md="7" class="pl-sm-6 pr-sm-5">
                     <v-chip v-if="underInvestigation==1" color="error" label>
                       <!--prettyhtml-ignore-->
                       <strong>Under ED Monitoring</strong>&nbsp;<tooltip definition="hcm2" color="#FFFFFF" class="ml-2" :isBranch="isBranch" />
                     </v-chip>
-                    <h1 class="display-2 font-weight-bold pa-0 mb-2">{{ schoolName }}</h1>
+                    <h1 id="profile-institution-title" class="display-2 font-weight-bold pa-0 mb-2">{{ schoolName }}</h1>
                     <h2 class="title location">
                       <span>{{ city }}</span>,
                       <span>{{ state }}</span>
@@ -90,7 +90,7 @@
                   </v-col>
 
                   <!-- Map -->
-                  <v-col cols="12" md="5" class="px-sm-5 py-0">
+                  <v-col cols="12" md="5" class="pr-sm-6 pl-sm-5 py-0">
                     <!-- <div class="school-map" ref="map"></div> -->
                     <div class="school-map mx-auto" v-if="school">
                       <v-img contain 
@@ -120,15 +120,14 @@
                   </v-col>
                 </v-row>
 
-                <!-- Institution Summary and Field Of Study Select -->
-                <v-row class="mt-3">
+                <!-- Institution Summary and Field Of Study Select + Summary -->
+                <v-row class="mt-3 px-sm-3">
 
                   <!--Institution Summary-->
-                  <v-col cols="12" md="5" class="">
-                    <div id="school-completion-rate-bar"
-                      class="mb-6"
-                    >
-                      <h2 class="mb-4">
+                  <v-col md="5" class="pr-sm-3">
+
+                    <div id="school-completion-rate-bar" class="">
+                      <h2 class="mb-3">
                         <!--prettyhtml-ignore-->
                         Graduation Rate&nbsp;<tooltip definition="graduation-rate" :version="completionRateFieldDefinition" />
                       </h2>
@@ -139,98 +138,88 @@
                         :min="0"
                         :max="100"
                         color="#0e365b"
-                        :height="25"
+                        :height="50"
+                        :y-bar-thickness="50"
+                        :label-font-size="24"
                         :labels="true"
+
                       ></horizontal-bar>
                       <div v-else class="data-na">Data Not Available</div>
                     </div>
 
-                    <div id="school-salary-after-complete"
-                    class="mb-6"
-                    >
-                      <h2 class="mb-4">
+                    <div id="school-salary-after-complete" class="">
+                      <h2 class="mb-3">
                         <!--prettyhtml-ignore-->
-                        Salary After Completing&nbsp;
+                        Salary After Completing
                         <tooltip definition="fos-median-earnings" :isBranch="isBranch" :limitedFoS="fieldsLink" />
                       </h2>
-                      <p>Salary after completing depends on field of study.</p>
+
+                      <p class="mb-1">Salary after completing depends on field<br class="d-none d-md-block">of study.</p>
+
                       <multi-range
                         :minmax="earningsRange"
                         variable="earnings.median_earnings"
-                        :max=" { label: '$150,000', value: 150000 }"
+                        :max=" { label: '$150,000', value: 150000 , style: {height: '60px'}}"
                         :addExtraPadding="false"
+                        :rangeChartStyle="{height: '40px'}"
+                        :lowerStyleOverride="{ height: '50px', 'border-left': '12px solid #0e365b'}"
+                        :lowerTipStyleOverride="{top: 'unset', bottom: '-1.1rem'}"
+                        :upperTipStyleOverride="{top: 'unset', bottom: '-1.1rem'}"
+                        :upperStyleOverride="{ height: '50px', 'border-right': '12px solid #0e365b'}"
                       />
                     </div>
 
-                    <div id="school-avg-cost"
-                      class="mb-4"
-                    >
-                      <h2 class="mt-5 mb-3" v-if="!isProgramReporter">
+                    <div id="school-avg-cost" class="mb-4">
+                      <h2 class="mb-3" v-if="!isProgramReporter">
                         <!--prettyhtml-ignore-->
-                        Average Annual Cost&nbsp;
+                        Average Annual Cost
                         <tooltip definition="avg-cost" />
                       </h2>
-                      <h2 v-else class="mt-5 mb-3">
+                      <h2 v-else class="mb-3">
                         <!--prettyhtml-ignore-->
-                        Average Annual Cost for Largest Program&nbsp;
+                        Average Annual Cost for Largest Program
                         <tooltip definition="avg-program-cost" />
                       </h2>
-                      <p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
+                      <p class="mb-1">Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
                       <h2
                         class="display-2 navy-text font-weight-bold"
                         v-if="netPrice"
                       >{{ netPrice | numeral('$0,0') }}</h2>
                       <div class="data-na" v-else>Data Not Available</div>
                     </div>
+
                   </v-col>
 
                   <!--Field Of Study Select Container-->
-                  <v-col cols="12" md="7" class="">
-                    <v-card
-                      class="pa-4 field-of-study-select-container"
-                      elevation="4"
-                      raised
-                    >
-                      <div class="text-right mb-2">
-                        <v-btn
-                          v-if="selectedFOS"
-                          text
-                          small
-                          class="d-none d-sm-inline"
-                          :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"
-                          @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
-                        >
-                          Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-plus-circle</v-icon>
-                        </v-btn>
-                        <span v-else>
-                          Select a Field Of Study
-                        </span>
-                      </div>
+                  <v-col md="7" class="pl-sm-3">
 
-                      <div id="field-of-study-select-header"
-                        class="mb-4"
-                      >
+                    <v-card class="pa-4 field-of-study-select-container">
+
+                      <div id="field-of-study-select-header" class="mb-5 mt-1">
                         <div id="field-of-study-select-icon">
                           <v-icon>
                             fas fa-award
                           </v-icon>
                         </div>
 
-                        <h3>
+                        <h2>
                           Fields Of Study Offered:
                           <tooltip definition="graduation-rate" :version="completionRateFieldDefinition" />
-                        </h3>
+                        </h2>
                       </div>
 
-                      <field-of-study-select
-                        :cip-two-nested-cip-four="fieldOfStudySelectItems"
-                        v-model="selectedFOS"
-                        @input-clear="handleFieldOfStudyClear"
-                      />
-
                       <div>
-                        <v-row>
-                          <v-col cols="12" md="6" sm="12">
+                        <field-of-study-select
+                          :cip-two-nested-cip-four="fieldOfStudySelectItems"
+                          v-model="selectedFOS"
+                          @input-clear="handleFieldOfStudyClear"
+                        />
+                      </div>
+
+                      <div id="profile-field-of-study-summary-metric-container" class="pa-sm-4">
+                        <div v-if="selectedFOS" id="profile-field-of-study-summary-metric-full">
+
+                          <div class="mb-6">
                             <h3 class="mb-3">
                               Salary After Completing Field of Study
                               <tooltip definition="fos-median-earnings" />
@@ -242,19 +231,15 @@
                               {{selectedFOSDetail.earnings.median_earnings | numeral('$0,0') }}
                             </h4>
 
-                            <h4 class="display-2 navy-text font-weight-bold"
-                              v-else
-                            >
-                              N/A
-                            </h4>
-                          </v-col>
+                            <div v-else class="data-na">
+                              Data Not Available
+                            </div>
+                          </div>
 
-                          <v-col cols="12" md="6" class="pl-6">
+                          <div>
                             <h3 class="mb-3">
                               Number of Graduates
                               <tooltip definition="fos-median-earnings" />
-                              <br>
-                              <br>
                             </h3>
 
                             <h4 class="display-2 navy-text font-weight-bold"
@@ -263,16 +248,26 @@
                               {{selectedFOSDetail.counts.ipeds_awards2}}
                             </h4>
 
-                            <h4 class="display-2 navy-text font-weight-bold"
-                                v-else
-                            >
-                              N/A
-                            </h4>
+                            <div v-else class="data-na">
+                              Data Not Available
+                            </div>
+                          </div>
+                        </div>
 
-<!--                            <p v-if="selectedFOSDetail.counts.ipeds_awards2">{{ selectedFOSDetail.counts.ipeds_awards2 | separator }}</p>-->
-<!--                            <p v-else>&#45;&#45;</p>    -->
-                          </v-col>
-                        </v-row>
+                        <div v-else id="profile-field-of-study-summary-metric-empty" class="mb-4"></div>
+                      </div>
+
+                      <!-- Compare Button -->
+                      <div class="text-right mb-2">
+                        <v-btn
+                          v-if="selectedFOS"
+                          text
+                          small
+                          :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"
+                          @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
+                        >
+                          Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-plus-circle</v-icon>
+                        </v-btn>
                       </div>
 
                     </v-card>
@@ -290,6 +285,7 @@
               </v-row>
 
               <v-expansion-panels multiple focusable v-model="panelsFOS">
+
                 <!--Field Of Study Panel-->
                 <v-expansion-panel class="fos-profile-panel">
                   <v-expansion-panel-header
@@ -317,18 +313,15 @@
                         v-if="selectedFOS"
                         text
                         small
-                        class="d-none d-sm-inline"
                         :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"
                         @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
                       >
                         Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-plus-circle</v-icon>
                       </v-btn>
-                      <span v-else>
-                            Select a Field Of Study
-                          </span>
                     </div>
 
-                    <h2 class="mb-4">Fields Of Study Offered At {{ schoolName }}</h2>
+                    <h2 class="mb-4 pt-2 pt-sm-4">Fields Of Study Offered At {{ schoolName }}</h2>
+
                     <div class="mb-4">
                       <field-of-study-select
                         :cip-two-nested-cip-four="fieldOfStudySelectItems"
@@ -341,12 +334,13 @@
 
                     <div v-if="selectedFOSDetail">
 
-                      <div class="pa-4 mb-4" id="fos-number-grads">
-<!--                          <div class="d-inline-block"></div>-->
-                        <h2 class="mr-4">
+                      <div class="pa-sm-4 mb-4" id="fos-number-grads">
+
+<!--                        TODO - Adjust Class-->
+                        <h3 class="mr-4" style="font-weight: 500">
                           Number of Graduates
                           <tooltip class="ml-2" definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
-                        </h2>
+                        </h3>
 
                         <h3 class="display-2 navy-text font-weight-bold"
                             style="vertical-align: center"
@@ -355,25 +349,29 @@
                           {{ selectedFOSDetail.counts.ipeds_awards2}}
                         </h3>
 
-                        <div class="data-na" v-else>Data Not Available</div>
+                        <div class="data-na d-sm-inline-block" v-else>Data Not Available</div>
                       </div>
 
+                      <!-- Salary After Completing -->
                       <div class="fos-sub-title-header pa-4">
-                        <h2>Salary After Completing</h2>
+                        <h3>Salary After Completing</h3>
                       </div>
 
-                      <div class="pa-4">
+                      <div class="px-4 pb-5 px-sm-4 py-sm-4">
                         <v-row>
                           <v-col cols="12" md="5">
                             <v-select
+                              id="profile-fos-salary-select"
+                              aria-label="Salary After Complete Select Aid Type"
                               hide-details
                               :items="fosSalarySelectItems"
                               v-model="fosSalarySelect"
+                              color="secondary"
                             />
                           </v-col>
 
                           <!--Median Earnings-->
-                          <v-col cols="12" sm="12" md="3">
+                          <v-col cols="12" sm="12" md="4">
                             <h4 class="mb-2">
                               Median Earnings&nbsp
                               <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
@@ -385,8 +383,8 @@
                                 <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED) | numeral('$0,0') }}</h5>
                               </div>
 
-                              <div v-else>
-                                <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                              <div v-else class="mini-data-na text-center mr-sm-11">
+                                Data Not Available
                               </div>
 
                             </div>
@@ -396,14 +394,15 @@
                                 <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL) | numeral('$0,0') }}</h5>
                               </div>
 
-                              <div v-else>
-                                <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                              <div v-else class="mini-data-na text-center mr-sm-11">
+                                Data Not Available
                               </div>
+
                             </div>
                           </v-col>
 
                           <!--Monthly Earnings-->
-                          <v-col cols="12" sm="12" md="4">
+                          <v-col cols="12" sm="12" md="3" class="pl-sm-1">
                             <h4 class="mb-2">
                               Monthly Earnings&nbsp
                               <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
@@ -414,8 +413,8 @@
                                 <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED) / 12 | numeral('$0,0') }}</h5>
                               </div>
 
-                              <div v-else>
-                                <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                              <div v-else class="mini-data-na text-center">
+                                Data Not Available
                               </div>
 
                             </div>
@@ -425,8 +424,8 @@
                                 <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL) / 12 | numeral('$0,0') }}</h5>
                               </div>
 
-                              <div v-else>
-                                <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                              <div v-else class="mini-data-na text-center">
+                                Data Not Available
                               </div>
                             </div>
                           </v-col>
@@ -434,33 +433,34 @@
                         </v-row>
                       </div>
 
+                      <!-- Financial Aid &amp; Debt -->
                       <div class="fos-sub-title-header pa-4">
-                        <h2> Financial Aid &amp; Debt</h2>
+                        <h3> Financial Aid &amp; Debt</h3>
                       </div>
 
-                      <div class="pa-4">
+                      <div class="px-5 pb-5 px-sm-5 py-sm-4">
                         <v-row>
                           <v-col cols="12" md="5">
                             <v-checkbox
+                              class="mt-2"
                               hide-details
                               v-model="fosShowDebtAtPrior"
-                              label="Include debt borrowed at any prior institutions"
+                              aria-label="Include debt borrowed at any prior institutions"
+                              color="secondary"
                             >
                               <template v-slot:label>
-                                <span>
-                                  Include debt borrowed at any prior institutions
+                                <span class="profile-fos-include-prior-debt">
+                                  Include debt borrowed at any prior<br class="d-sm-none"> institutions&nbsp
                                   <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
                                 </span>
                               </template>
                             </v-checkbox>
-
-
                           </v-col>
 
                           <!--Median Total-->
                           <v-col cols="12" sm="12" md="4">
                             <h4>
-                              Median Total Debt After Graduation&nbsp
+                              Median Total Debt <br class="d-none d-md-block">After Graduation&nbsp
                               <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
                             </h4>
 
@@ -469,8 +469,8 @@
                                 <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_DEBT_MEDIAN) | numeral('$0,0') }}</h5>
                               </div>
 
-                              <div v-else>
-                                <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                              <div v-else class="mini-data-na text-center">
+                                Data Not Available
                               </div>
                             </div>
 
@@ -479,14 +479,14 @@
                                 <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_DEBT_MEDIAN_PRIOR) | numeral('$0,0') }}</h5>
                               </div>
 
-                              <div v-else>
-                                <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                              <div v-else class="mini-data-na text-center">
+                                Data Not Available
                               </div>
                             </div>
                           </v-col>
 
                           <!--Monthly Loan-->
-                          <v-col cols="12" sm="12" md="3">
+                          <v-col cols="12" sm="12" md="3" class="pl-sm-1">
                             <h4>
                               Monthly Loan Payment&nbsp
                               <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
@@ -497,8 +497,8 @@
                                 <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail,fields.FOS_DEBT_MONTHLY) | numeral('$0,0') }}</h5>
                               </div>
 
-                              <div v-else>
-                                <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                              <div v-else class="mini-data-na text-center">
+                                Data Not Available
                               </div>
                             </div>
 
@@ -507,8 +507,8 @@
                                 <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_DEBT_MONTHLY_PRIOR) | numeral('$0,0') }}</h5>
                               </div>
 
-                              <div v-else>
-                                <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                              <div v-else class="mini-data-na text-center">
+                                Data Not Available
                               </div>
                             </div>
 
@@ -518,13 +518,21 @@
                     </div>
 
                     <div class="fos-sub-title-header pa-4">
-                      <h2>
+                      <h3>
                         Top Fields of Study at {{ schoolName }} <tooltip definition="field-of-study" :limitedFoS="fieldsLink" />
-                      </h2>
+                      </h3>
                     </div>
 
-                    <div class="pa-4">
-                      <p class="my-0">
+                    <!-- Top Fields of Study -->
+                    <div class="px-5 px-sm-5 py-sm-4">
+                      <p class="my-3" v-if="fieldsOfStudy.length">
+                        Out of {{fosUndergradCount| numeral }} undergraduate {{fosUndergradCount==1? 'field':'fields' }} of study at {{ schoolName }}, the {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} {{ hoistGroupText }} are shown below. ({{ hoistCount}} had relevant data on {{ hoistGroupData }}.)
+                        <a
+                          :href="fieldsLink"
+                        >See All Fields of Study &raquo;</a>
+                      </p>
+
+                      <p class="my-2">
                         <span class="d-block d-sm-inline">Sort by:</span>
                         <v-btn
                           class="ma-1"
@@ -544,13 +552,6 @@
                           small
                           @click="field_sort = 'lowest_debt'"
                         >Lowest Debt</v-btn>
-                      </p>
-
-                      <p class="my-3" v-if="fieldsOfStudy.length">
-                        Out of {{fosUndergradCount| numeral }} undergraduate {{fosUndergradCount==1? 'field':'fields' }} of study at {{ schoolName }}, the {{ fieldsOfStudy.length<10? fieldsOfStudy.length : 10}} {{ hoistGroupText }} are shown below. ({{ hoistCount}} had relevant data on {{ hoistGroupData }}.)
-                        <a
-                          :href="fieldsLink"
-                        >See All Fields of Study &raquo;</a>
                       </p>
 
                       <v-row class="mx-5 mt-5 d-none d-sm-flex" v-if="fieldsOfStudy.length">
@@ -630,6 +631,7 @@
                         </v-btn>
                       </p>
                     </div>
+
                   </v-expansion-panel-content>
               </v-expansion-panel>
               </v-expansion-panels>
@@ -794,6 +796,7 @@
                     aria-controls="aid-content"
                     @click="trackAccordion('Financial Aid &amp; Debt')"
                   >Financial Aid &amp; Debt</v-expansion-panel-header>
+
                   <v-expansion-panel-content id="aid-content" class="px-0 py-3 pa-sm-5">
                     <v-card
                       v-if="(aidFlag > 3) && (aidFlag < 8)"
@@ -803,17 +806,19 @@
                     <v-card v-else-if="aidFlag==8" color="blue" class='pa-5 white--text'>{{site.data.glossary.ogc.flag8}}</v-card>
                     <div v-else>
                       <v-row>
-                        <v-col cols="12" md="6">
+                        <v-col cols="12" md="8">
                           <v-select
                             :items="aidLoanSelectItems"
                             v-model="aidLoanSelect"
+                            color="secondary"
                           />
                         </v-col>
 
-                        <v-col cols="12" md="6">
+                        <v-col cols="12" md="4">
                           <v-checkbox
                             v-model="aidShowMedianDebtWithPrior"
                             label="Include debt borrowed at prior institutions"
+                            color="secondary"
                           >
                             <template v-slot:label>
                               <span>
@@ -919,7 +924,7 @@
                         </span>
 
                         <h3 class="fos-profile-mini">
-                          {{selectedFOSDetail.title | formatFieldOfStudyTitle}} - {{selectedFOSDetail.school.name}}
+                          {{selectedFOSDetail.title | formatFieldOfStudyTitle}} - {{selectedFOSDetail.credential.title}}
                         </h3>
 
                         <v-row>
@@ -928,9 +933,10 @@
                               hide-details
                               v-model="fosShowDebtAtPrior"
                               label="Include debt borrowed at any prior institutions"
+                              color="secondary"
                             >
                               <template v-slot:label>
-                                <span>
+                                <span class="profile-fos-include-prior-debt">
                                   Include debt borrowed at any prior institutions
                                   <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
                                 </span>
@@ -950,9 +956,10 @@
                                 <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_DEBT_MEDIAN) | numeral('$0,0') }}</h5>
                               </div>
 
-                              <div v-else>
-                                <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                              <div v-else class="mini-data-na text-center">
+                                Data Not Available
                               </div>
+
                             </div>
 
                             <div v-else>
@@ -960,9 +967,10 @@
                                 <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_DEBT_MEDIAN_PRIOR) | numeral('$0,0') }}</h5>
                               </div>
 
-                              <div v-else>
-                                <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                              <div v-else class="mini-data-na text-center">
+                                Data Not Available
                               </div>
+
                             </div>
 
                           </v-col>
@@ -979,9 +987,10 @@
                                 <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail,fields.FOS_DEBT_MONTHLY) | numeral('$0,0') }}</h5>
                               </div>
 
-                              <div v-else>
-                                <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                              <div v-else class="mini-data-na text-center">
+                                Data Not Available
                               </div>
+
                             </div>
 
                             <div v-else>
@@ -989,9 +998,10 @@
                                 <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_DEBT_MONTHLY_PRIOR) | numeral('$0,0') }}</h5>
                               </div>
 
-                              <div v-else>
-                                <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                              <div v-else class="mini-data-na text-center">
+                                Data Not Available
                               </div>
+
                             </div>
 
                           </v-col>
@@ -1055,7 +1065,7 @@
                         </v-icon>
                       </span>
 
-                      <h3>{{selectedFOSDetail.title | formatFieldOfStudyTitle}} - {{selectedFOSDetail.school.name}}</h3>
+                      <h3>{{selectedFOSDetail.title | formatFieldOfStudyTitle}} - {{selectedFOSDetail.credential.title}}</h3>
 
                       <v-row>
                         <v-col cols="12" md="5" sm="12">
@@ -1063,6 +1073,7 @@
                             hide-details
                             :items="fosSalarySelectItems"
                             v-model="fosSalarySelect"
+                            color="secondary"
                           />
                         </v-col>
 
@@ -1079,8 +1090,8 @@
                               <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED) | numeral('$0,0') }}</h5>
                             </div>
 
-                            <div v-else>
-                              <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                            <div v-else class="mini-data-na text-center">
+                              Data Not Available
                             </div>
 
                           </div>
@@ -1090,8 +1101,8 @@
                               <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL) | numeral('$0,0') }}</h5>
                             </div>
 
-                            <div v-else>
-                              <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                            <div v-else class="mini-data-na text-center">
+                              Data Not Available
                             </div>
                           </div>
                         </v-col>
@@ -1108,8 +1119,8 @@
                               <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED) / 12 | numeral('$0,0') }}</h5>
                             </div>
 
-                            <div v-else>
-                              <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                            <div v-else class="mini-data-na text-center">
+                              Data Not Available
                             </div>
 
                           </div>
@@ -1119,9 +1130,10 @@
                               <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL) / 12 | numeral('$0,0') }}</h5>
                             </div>
 
-                            <div v-else>
-                              <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                            <div v-else class="mini-data-na text-center">
+                              Data Not Available
                             </div>
+
                           </div>
                         </v-col>
 
@@ -1232,7 +1244,7 @@
                         <h4 class="overline">Critical Reading</h4>
                         <range
                           v-if="satReading.available"
-                          :lower="{ value: satReading.lower, label: satReading.lower }"
+                          :lower="{ value: satReading.lower, label: satReading.lower}"
                           :upper="{ value: satReading.upper, label: satReading.upper}"
                           :min="{ value: satReading.min, label: satReading.min }"
                           :max="{ value: satReading.max, label: satReading.max }"
@@ -1343,10 +1355,24 @@
 .leaflet-bottom {
   z-index: 100 !important;
 }
+
+  .profile-fos-include-prior-debt {
+    font-size: 12px;
+
+    @media (min-width: 960px){
+      font-size: 16px;
+    }
+
+  }
 </style>
 
 <style lang="scss" scoped>
   @import 'sass/_variables';
+
+  #profile-institution-title{
+    line-height: 100% !important;
+  }
+
   .school-map {
     border: 1px
       solid
@@ -1360,11 +1386,26 @@
     border-radius: 30px !important;
   }
 
-
   #field-of-study-select-header{
+    h2{
+      margin-top: 7px;
+      margin-left: 6px;
+      font-size: 1.35rem;
+      display: inline-block;
+      vertical-align: top;
+      text-transform: uppercase;
+    }
+
+    @media (min-width: 960px){
+      h2 {
+        margin-top: 12px;
+        margin-left: 10px;
+      }
+    }
+
     #field-of-study-select-icon{
-      width: 50px;
-      height: 50px;
+      height: 34px;
+      width: 34px;
       background: $fos-color-gold;
       border-radius: 50%;
       display:inline-block;
@@ -1372,28 +1413,41 @@
       text-align: center;
 
       i{
-        font-size: 35px;
-        margin-top:8px;
+        font-size: 24px;
+        margin-top: 5px;
       }
-    }
 
-    h3{
-      display: inline-block;
-      vertical-align: top;
-      margin-top: 15px;
-      margin-left: 10px;
+      @media (min-width: 960px){
+        width: 50px;
+        height: 50px;
+
+        i{
+          font-size: 35px;
+          margin-top: 8px;
+        }
+      }
     }
   }
 
   .fos-profile-panel{
     width: 100%;
-    border-left: 20px solid $fos-color-gold;
+    border-left: 10px solid $fos-color-gold;
     margin-bottom: 20px;
+
+    @media (min-width: 960px){
+      font-size: 16px;
+      border-left: 20px solid $fos-color-gold;
+    }
   }
 
   .institution-profile-panel{
     width: 100%;
-    border-left: 20px solid $institution-accent-color;
+    border-left: 10px solid $institution-accent-color;
+
+    @media (min-width: 960px){
+      font-size: 16px;
+      border-left: 20px solid $institution-accent-color;
+    }
   }
 
   .field-of-study-select-icon{
@@ -1421,6 +1475,11 @@
 
   .fos-sub-title-header{
     background-color: #e5e5e5;
+
+    h3{
+      font-weight: 500;
+    }
+
   }
 
   .fos-small-data-bold{
@@ -1435,8 +1494,26 @@
     }
   }
 
+  #school-completion-rate-bar{
+    margin-bottom: 55px;
+  }
 
+  #school-salary-after-complete{
+    margin-bottom: 55px;
+  }
 
+  #profile-field-of-study-summary-metric-container{
+    /*height: 320px;*/
+    padding-top: 20px !important;
+  }
+
+  #profile-field-of-study-summary-metric-full{
+    /*height: 320px;*/
+  }
+
+  #profile-field-of-study-summary-metric-empty{
+    height: 200px;
+  }
 </style>
 
 <script>
@@ -1521,7 +1598,7 @@ export default {
       aidLoanSelect: "fed",
       aidLoanSelectItems:[
         { text: "Federal Student Loans", value: "fed"},
-        { text: "Parent Plus Loans", value:"plus"}
+        { text: "Parent PLUS Loans", value:"plus"}
       ],
       aidShowMedianDebtWithPrior: false,
       aidShowMonthlyPaymentWithPrior: false,

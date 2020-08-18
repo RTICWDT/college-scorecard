@@ -83,5 +83,10 @@ html{
     .v-navigation-drawer--is-mobile:not(.v-navigation-drawer--close){
       z-index: 120 !important;
     }
+
+    .overline{
+      font-family: $sans-serif !important;
+      font-size: 12px !important;
+    }
     
   }

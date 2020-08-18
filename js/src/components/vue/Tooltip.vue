@@ -6,7 +6,7 @@
       </template>
       <v-card>
         <v-btn @click="showDialog = false" icon class='float-right mt-3 mr-3'><v-icon>fas fa-times-circle</v-icon></v-btn>
-        <v-card-title>{{title}}</v-card-title>
+        <v-card-title class="tool-tip-dialog-title">{{title}}</v-card-title>
         <v-card-text class='pb-5'>
           <div v-html="content"></div>
           <p v-if="limitedFoS">The data shown is for undergraduate fields of study (undergraduate certificates, associate's degrees, and bachelor's degrees) for which there is data. For more information on other credentials, including Graduate-level degrees and certificates, see <a :href='limitedFoS'>All Fields of Study</a> for this school.</p>
@@ -23,9 +23,13 @@
 </template>
 
 <style lang="scss" scoped>
-.csTooltip {
-  font-size: 1rem;
-}
+  .csTooltip {
+    font-size: 1rem;
+  }
+
+  .tool-tip-dialog-title{
+    word-break: break-word;
+  }
 </style>
 
 <script>
