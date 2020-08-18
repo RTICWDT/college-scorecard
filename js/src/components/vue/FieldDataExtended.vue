@@ -13,6 +13,7 @@
           :items="fosSalarySelectItems"
           :value="fosSalarySelect"
           @input="$emit('update-salary-select', $event)"
+          color="secondary"
         />
       </v-col>
 
@@ -87,6 +88,7 @@
           hide-details
           v-model="checked"
           label="Include debt borrowed at any prior institutions"
+          color="secondary"
         >
           <template v-slot:label>
             <span class="profile-fos-include-prior-debt">

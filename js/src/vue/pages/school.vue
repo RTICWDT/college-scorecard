@@ -366,6 +366,7 @@
                               hide-details
                               :items="fosSalarySelectItems"
                               v-model="fosSalarySelect"
+                              color="secondary"
                             />
                           </v-col>
 
@@ -445,6 +446,7 @@
                               hide-details
                               v-model="fosShowDebtAtPrior"
                               aria-label="Include debt borrowed at any prior institutions"
+                              color="secondary"
                             >
                               <template v-slot:label>
                                 <span class="profile-fos-include-prior-debt">
@@ -808,6 +810,7 @@
                           <v-select
                             :items="aidLoanSelectItems"
                             v-model="aidLoanSelect"
+                            color="secondary"
                           />
                         </v-col>
 
@@ -815,6 +818,7 @@
                           <v-checkbox
                             v-model="aidShowMedianDebtWithPrior"
                             label="Include debt borrowed at prior institutions"
+                            color="secondary"
                           >
                             <template v-slot:label>
                               <span>
@@ -929,6 +933,7 @@
                               hide-details
                               v-model="fosShowDebtAtPrior"
                               label="Include debt borrowed at any prior institutions"
+                              color="secondary"
                             >
                               <template v-slot:label>
                                 <span class="profile-fos-include-prior-debt">
@@ -951,9 +956,10 @@
                                 <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_DEBT_MEDIAN) | numeral('$0,0') }}</h5>
                               </div>
 
-                              <div v-else>
-                                <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                              <div v-else class="mini-data-na text-center">
+                                Data Not Available
                               </div>
+
                             </div>
 
                             <div v-else>
@@ -961,9 +967,10 @@
                                 <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_DEBT_MEDIAN_PRIOR) | numeral('$0,0') }}</h5>
                               </div>
 
-                              <div v-else>
-                                <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                              <div v-else class="mini-data-na text-center">
+                                Data Not Available
                               </div>
+
                             </div>
 
                           </v-col>
@@ -980,9 +987,10 @@
                                 <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail,fields.FOS_DEBT_MONTHLY) | numeral('$0,0') }}</h5>
                               </div>
 
-                              <div v-else>
-                                <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                              <div v-else class="mini-data-na text-center">
+                                Data Not Available
                               </div>
+
                             </div>
 
                             <div v-else>
@@ -990,9 +998,10 @@
                                 <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_DEBT_MONTHLY_PRIOR) | numeral('$0,0') }}</h5>
                               </div>
 
-                              <div v-else>
-                                <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                              <div v-else class="mini-data-na text-center">
+                                Data Not Available
                               </div>
+
                             </div>
 
                           </v-col>
@@ -1064,6 +1073,7 @@
                             hide-details
                             :items="fosSalarySelectItems"
                             v-model="fosSalarySelect"
+                            color="secondary"
                           />
                         </v-col>
 
@@ -1080,8 +1090,8 @@
                               <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED) | numeral('$0,0') }}</h5>
                             </div>
 
-                            <div v-else>
-                              <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                            <div v-else class="mini-data-na text-center">
+                              Data Not Available
                             </div>
 
                           </div>
@@ -1091,8 +1101,8 @@
                               <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL) | numeral('$0,0') }}</h5>
                             </div>
 
-                            <div v-else>
-                              <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                            <div v-else class="mini-data-na text-center">
+                              Data Not Available
                             </div>
                           </div>
                         </v-col>
@@ -1109,8 +1119,8 @@
                               <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED) / 12 | numeral('$0,0') }}</h5>
                             </div>
 
-                            <div v-else>
-                              <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                            <div v-else class="mini-data-na text-center">
+                              Data Not Available
                             </div>
 
                           </div>
@@ -1120,9 +1130,10 @@
                               <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL) / 12 | numeral('$0,0') }}</h5>
                             </div>
 
-                            <div v-else>
-                              <h5 class="fos-small-data-bold navy-text">N/A</h5>
+                            <div v-else class="mini-data-na text-center">
+                              Data Not Available
                             </div>
+
                           </div>
                         </v-col>
 
