@@ -1898,11 +1898,13 @@ export default {
       console.log(event);
     },
     handleFieldOfStudyClear(){
-      console.log("Clear");
-
+      // console.log("Clear");
       this.$nextTick(() => {
         this.selectedFOS = null;
       });
+
+
+
     },
     handleFieldOfStudySelected(fieldOfStudy){
       window.location = this.$baseUrl+'/search/?toggle=fos&cip4=' + encodeURIComponent(fieldOfStudy.cip4);
@@ -1964,16 +1966,27 @@ export default {
   watch:{
     selectedFOS(val, oldVal){
       // Update the URL when this value changes;
-      if(val !== oldVal && val !== null){
-        if(typeof val.code != "undefined" && typeof val.credential.level != "undefined"){
-          // To capture the first argument
-          let params = this.urlParams;
+      if(val !== oldVal){
+
+        // To capture the first argument
+        let params = _.cloneDeep(this.urlParams);
+
+        if(val !== null && typeof val.code != "undefined" && typeof val.credential.level != "undefined"){
+
+          // Set additional params
           params.fos_code = val.code;
           params.fos_credential = val.credential.level;
-          // Generate string but remove first equals character due to current query structure '?schoolid-school-name' with no value;
-          let qs = this.generateQueryString(params).replace('=',"");
-          history.replaceState(params, "School Profile", qs);
+
+        }else{
+
+          // Remove params if currently set
+          delete params.fos_code;
+          delete params.fos_credential;
         }
+
+        // Generate string but remove first equals character due to current query structure '?schoolid-school-name' with no value;
+        let qs = this.generateQueryString(params).replace('=',"");
+        history.replaceState(params, "School Profile", qs);
       }
     }
   }
