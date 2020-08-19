@@ -88,5 +88,14 @@ html{
       font-family: $sans-serif !important;
       font-size: 12px !important;
     }
-    
+
+
+    #context-toggle{
+      // No slider animations on context toggle
+      .v-tabs-slider-wrapper{
+        transition: none !important;
+      }
+    }
+
+
   }

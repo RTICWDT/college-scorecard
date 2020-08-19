@@ -395,15 +395,13 @@ export default {
       ? Number(this.urlParsedParams.page) + 1
       : 1;
 
-    // Set Toggle Value
-    if(typeof this.urlParsedParams.toggle != 'undefined'){
-      if(this.urlParsedParams.toggle === 'institutions'){
-        this.displayToggle = 'institutions';
-        this.controlTab = 0;
-      }else{
-        this.displayToggle = 'fos';
-        this.controlTab = 1;
-      }
+    // Set Toggle Value - Default to institutions
+    if(typeof this.urlParsedParams.toggle === 'undefined' || this.urlParsedParams.toggle === 'institutions' ){
+      this.displayToggle = 'institutions';
+      this.controlTab = 0;
+    }else{
+      this.displayToggle = 'fos';
+      this.controlTab = 1;
     }
 
     // Create Debounce function for this page.
@@ -585,12 +583,12 @@ export default {
     },
     handleContextToggle(toggleValue){
       this.clearSearchForm();
+      this.controlTab = toggleValue;
       this.displayToggle = (toggleValue === 0)? 'institutions' : 'fos';
       this.results.schools = []
       this.results.meta = {
         total: 0
       }
-
       // TODO - What happens to search filters?
     },
     handleInstitutionSearch(params){

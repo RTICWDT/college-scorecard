@@ -22,21 +22,21 @@
   <v-tabs
     id="context-toggle"
     :value="controlTab"
-    grow
     :show-arrows="true"
     slider-size="8"
     @change="$emit('context-tab-change', $event)"
+    height="70px"
   >
 
-    <v-tabs-slider :class="{'compare-fos-slider-gold': controlTab === 1}" />
+    <v-tabs-slider id="context-toggle-slider" :class="{'compare-fos-slider-gold': controlTab === 1}" />
 
-    <v-tab :class="{'compare-toggle-school-active': controlTab === 0}">
+    <v-tab :id="tabID('institutions', controlTab)">
       <h3 class="compare-tab-title">
         Schools
       </h3>
     </v-tab>
 
-    <v-tab :class="{'compare-toggle-fos-active': controlTab === 1}">
+    <v-tab :id="tabID('fos', controlTab)">
       <h3 class="compare-tab-title">
         Fields of Study
       </h3>
@@ -65,18 +65,20 @@
 
   #context-toggle{
     background-color: pink !important;
-    width: 300px;
+    width: 260px;
 
+    .v-tab{
+      width: 130px;
+    }
 
-    /*.v-slide-group .v-slide-group__prev{*/
-    /*  display: none !important;*/
-    /*}*/
+    #compare-tab-inactive {
+      background-color: #eeeeee;
+      border-bottom: 8px solid #dcdada;
 
-    /*  .v-slide-group__prev{*/
-
-    /*  }*/
-
-    /*}*/
+      h3{
+        margin-bottom: -8px;
+      }
+    }
   }
 
  .v-slide-group__prev{
@@ -86,13 +88,15 @@
   .compare-tab-title{
     letter-spacing: normal !important;
     color: black !important;
+    text-transform: none !important;
+    font-weight: 500;
   }
 
-  .compare-toggle-school-active{
+  #compare-toggle-school-active{
     background-color: #dee8ef;
   }
 
-  .compare-toggle-fos-active{
+  #compare-toggle-fos-active{
     background-color: #fff6dc;
   }
 
@@ -116,6 +120,15 @@
     data(){
       return{
         selected: null
+      }
+    },
+    methods: {
+      tabID(context, controlTab){
+        if(context === 'institutions'){
+          return (controlTab === 0) ? 'compare-toggle-school-active' : 'compare-tab-inactive'
+        }else if(context === 'fos'){
+          return (controlTab === 1) ? 'compare-toggle-fos-active' : 'compare-tab-inactive'
+        }
       }
     },
     mounted(){
