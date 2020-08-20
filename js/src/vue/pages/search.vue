@@ -1,20 +1,42 @@
 <style lang="scss">
-.canned-search-wrapper {
-  margin-bottom: 8px;
-}
-.pageBar{
-  background-color: rgba(255,255,255,0.7) !important;
-}
-.searchFab{
-  z-index: 500 !important;
-}
+  .canned-search-wrapper {
+    margin-bottom: 8px;
+  }
+
+  .pageBar{
+    background-color: rgba(255,255,255,0.7) !important;
+  }
+
+  .searchFab{
+    z-index: 500 !important;
+  }
+
+  #search-fos-cip-warning{
+    width: 100%;
+
+    p{
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+
+    a{
+      color: white !important;
+    }
+
+    @media (min-width: 960px){
+      width: 60%;
+    }
+  }
 
 </style>
 
 <template>
   <div>
     <v-app id="search">
+
       <scorecard-header />
+
+      <!-- Search Form -->
       <v-navigation-drawer
         v-model="showSidebar"
         app
@@ -54,13 +76,19 @@
         />
 
       </v-navigation-drawer>
+
       <v-content>
         <v-container fluid class="pa-0">
           <div id="search-result-container" class='pa-sm-8 pa-2'>
+
             <div class="search-result-container">
+
               <v-card  class="mt-2 mb-4 py-1 px-4 elevaton-0 pageBar" v-if="!isLoading">
+
                 <v-row class="pa-0">
+
                   <v-col cols="12" sm="7" class="py-2 px-4">
+
                     <div id="search-result-info-count" class>
                       <p class="title mb-0">{{results.meta.total | separator }} Results
                         <v-btn
@@ -134,6 +162,7 @@
                       </p>
                     </div>
                   </v-col>
+
                   <v-col cols="12" sm="5" class="py-1 px-1" v-if="!isLoading && results.schools.length > 0">
                     <div class="text-md-right">
                       <v-pagination
@@ -146,8 +175,10 @@
                       ></v-pagination>
                     </div>
                   </v-col>
+
                 </v-row>
               </v-card>
+
             <div id="search-can-query-container" v-if="!isLoading && results.schools.length === 0">
             <!-- <div id="search-can-query-container" v-if="!isLoading"> -->
               <v-row>
@@ -175,14 +206,22 @@
                   <p class="error-message">{{error.message}}</p>
                 </div>
 
-                <p class="white--text" v-if="displayToggle === 'fos' && !isLoading">
-                  <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
-                  Classification of Instructional Programs (CIP) and may not match the program titles at a
-                  given school. <a href="">Learn more about CIP.</a>
-                </p>
+                <div id="search-fos-cip-warning"
+                     class="my-2"
+                     v-if="displayToggle === 'fos' && !isLoading"
+                >
+                  <p class="white--text">
+                    <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
+                    Classification of Instructional Programs (CIP) and may not match the program titles at a
+                    given school. <a href="">Learn more about CIP.</a>
+                  </p>
+                </div>
 
-                <v-card class="mt-4 mb-2 py-1 px-4 pageBar elevation-0 result-card-selected"  v-if="showFieldOfStudyWarning">
-                  <p>
+                <v-card id="search-fos-cip-filter-warning"
+                  class="result-card-selected mt-4 mb-2 pa-4"
+                  v-if="showFieldOfStudyWarning"
+                >
+                  <p class="mb-0">
                     (!) The filter you've selected contains limited data. Displayed search results only represent schools
                     for which there is sufficient data.  To see all schools within this field of study, reset search filters.
                   </p>
@@ -206,7 +245,9 @@
                       />
                     </v-col>
                   </v-row>
+
                   <v-row v-else>
+
                     <v-col
                       v-for="school in results.schools"
                       :key="school.id"
@@ -222,6 +263,7 @@
                         @toggle-compare-item="handleToggleCompareItem"
                       />
                     </v-col>
+
                   </v-row>
                 </div>
 
@@ -395,15 +437,13 @@ export default {
       ? Number(this.urlParsedParams.page) + 1
       : 1;
 
-    // Set Toggle Value
-    if(typeof this.urlParsedParams.toggle != 'undefined'){
-      if(this.urlParsedParams.toggle === 'institutions'){
-        this.displayToggle = 'institutions';
-        this.controlTab = 0;
-      }else{
-        this.displayToggle = 'fos';
-        this.controlTab = 1;
-      }
+    // Set Toggle Value - Default to institutions
+    if(typeof this.urlParsedParams.toggle === 'undefined' || this.urlParsedParams.toggle === 'institutions' ){
+      this.displayToggle = 'institutions';
+      this.controlTab = 0;
+    }else{
+      this.displayToggle = 'fos';
+      this.controlTab = 1;
     }
 
     // Create Debounce function for this page.
@@ -585,12 +625,12 @@ export default {
     },
     handleContextToggle(toggleValue){
       this.clearSearchForm();
+      this.controlTab = toggleValue;
       this.displayToggle = (toggleValue === 0)? 'institutions' : 'fos';
       this.results.schools = []
       this.results.meta = {
         total: 0
       }
-
       // TODO - What happens to search filters?
     },
     handleInstitutionSearch(params){
@@ -644,6 +684,8 @@ export default {
         fields.PREDOMINANT_DEGREE,
         // to get "public" or "private"
         fields.OWNERSHIP,
+        // under investigation flag
+        fields.UNDER_INVESTIGATION,
         fields.LOCALE,
         fields.FIELD_OF_STUDY
       ].join(',');

@@ -16,8 +16,11 @@
 
   #fos-search-form{
     .subhead {
+      margin-top: 1rem !important;
+      margin-bottom: 0.3rem !important;
       font-weight: 600;
-      font-family: 'Montserrat', sans-serif !important;
+      font-family: 'Montserrat',
+      sans-serif !important;
     }
 
     label.subhead{
@@ -31,9 +34,9 @@
   <v-form class="py-2 px-5" id="fos-search-form">
 
     <!-- Field Of Study Search and Chips -->
-    <div class="mt-2" id="fos-search-and-chips">
-      <label class="subhead mb-2" id="fields-label" for="fos-search">
-        Search By Fields Of Study
+    <div id="fos-search-and-chips">
+      <label class="subhead mb-2 mt-4" id="fields-label" for="fos-search">
+        Search by Fields of Study
       </label>
 
       <field-of-study-search
@@ -43,7 +46,9 @@
       >
       </field-of-study-search>
 
-      <div id="fos-chip-container" class="mt-2">
+      <div id="fos-chip-container" class="mt-2"
+        v-if="utility.cip4Cache.length > 0"
+      >
         <field-of-study-detail-chip
           v-for="fieldOfStudy in utility.cip4Cache"
           :key="fieldOfStudy.cip4"
@@ -71,7 +76,7 @@
     </div>
 
     <!-- Credential Type -->
-    <div class="mt-5">
+    <div class="">
       <label class="subhead mb-2" id="search-fos-cred-level" for="search-fos-cred-level">
         Search By Fields Of Study
       </label>
@@ -111,8 +116,7 @@
     </div>
 
     <!-- Location -->
-    <div class="mt-5">
-<!--      <p class="subhead-2" id="location-label">Location</p>-->
+    <div>
       <label class="subhead mb-2" id="search-fos-location-select" for="search-fos-location-select">
         Location
       </label>
@@ -124,9 +128,10 @@
         @change="handleLocationChange"
         :items="['Near Me','ZIP Code','State']"
         hide-details
-        class="mb-3 mt-0 pt-0"
+        class="mt-0 pt-0"
         :placeholder="utility.location ? undefined : 'Select an option'"
         clearable
+        color="secondary"
       />
 
       <div class="d-flex align-center" v-if="utility.location==='ZIP Code'">
@@ -201,7 +206,7 @@
     </div>
 
     <!-- Salary After Completing -->
-    <div class="mt-5">
+    <div>
       <label class="subhead mb-2" id="search-fos-salary" for="search-fos-salary">
         Salary After Completing
 
@@ -224,7 +229,7 @@
         hide-details
         class="align-center"
         color="secondary"
-        track-color="secondary"
+        track-color="dark-gray"
         thumb-color="secondary"
         thumb-label
         aria-label="Salary After Complete Range Slider"
@@ -261,7 +266,7 @@
     </div>
 
     <!-- Median Total Debt -->
-    <div class="mt-5">
+    <div>
       <label class="subhead mb-2" id="search-fos-median-debt" for="search-fos-median-debt">
         Median Total Debt
 
@@ -283,7 +288,7 @@
         hide-details
         class="align-center"
         color="secondary"
-        track-color="secondary"
+        track-color="dark-gray"
         thumb-color="secondary"
         thumb-label
         aria-label="Median Total Debt Range Slider"
