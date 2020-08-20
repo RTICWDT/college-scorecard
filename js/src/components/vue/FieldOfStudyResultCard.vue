@@ -3,6 +3,17 @@
     position: absolute;
     bottom: 0;
   }
+
+  .search-fos-result-credential-item-container{
+    background-color: #e3e3e3;
+
+    a{
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: unset;
+      /*text-transform: uppercase;*/
+    }
+  }
 </style>
 
 <template>
@@ -11,12 +22,13 @@
     style="width:100%"
     outlined
   >
-    <v-card-text class="pa-3">
+    <v-card-text class="pa-md-6">
       <v-row>
         <!--School Info-->
         <v-col
           cols="12"
           md="3"
+          class="py-0"
         >
           <p class="mt-1 mb-2" v-if="underInvestigation==1">
             <v-card color="error" class="px-2 py-1" flat>
@@ -38,7 +50,9 @@
           </v-row>
         </v-col>
 
+        <!-- Field of Study Info-->
         <v-col
+          class="py-md-0 pl-md-6"
           cols="12"
           md="9"
         >
@@ -46,33 +60,34 @@
             v-for="fieldCategory in categorizedFieldsOfStudy"
             :key="`${school.id}-${fieldCategory.title}`"
           >
+
             <span class='overline'>{{fieldCategory.title}}</span>
+
             <div
               v-for="fieldOfStudy in fieldCategory.items"
               :key="`${school.id}-${fieldOfStudy.code}-${_.get(fieldOfStudy,'credential.level')}`"
-              class="grey lighten-4 pa-2 mt-2 mb-2"
+              class="search-fos-result-credential-item-container pa-4 mt-2 mb-2"
+              :class="selectedFieldOfStudyClass(fieldOfStudy)"
             >
 
-              <div :class="selectedFieldOfStudyClass(fieldOfStudy)">
-                <a
-                  :href="`${schoolLink}&fos_code=${fieldOfStudy.code}&fos_credential=${_.get(fieldOfStudy,'credential.level')}`"
-                  target="_blank"
+              <a
+                :href="`${schoolLink}&fos_code=${fieldOfStudy.code}&fos_credential=${_.get(fieldOfStudy,'credential.level')}`"
+                target="_blank"
+              >
+                <span>{{fieldOfStudy.title | formatFieldOfStudyTitle}}</span>
+              </a>
+
+              <span class="float-right">
+                <v-btn
+                  text
+                  icon
+                  @click="$emit('toggle-compare-item', fieldOfStudyCompareFormat(fieldOfStudy), 'compare-fos')"
                 >
-                  <span>{{fieldOfStudy.title | formatFieldOfStudyTitle}}</span>
-                </a>
+                  <v-icon>fa fa-plus-circle</v-icon>
+                  <span class='sr-only'>Compare</span>
+                </v-btn>
+              </span>
 
-                <span class="float-right">
-                  <v-btn
-                    text
-                    icon
-                    @click="$emit('toggle-compare-item', fieldOfStudyCompareFormat(fieldOfStudy), 'compare-fos')"
-                  >
-                    <v-icon>fa fa-plus-circle</v-icon>
-                    <span class='sr-only'>Compare</span>
-                  </v-btn>
-                </span>
-
-              </div>
             </div>
           </div>
 
