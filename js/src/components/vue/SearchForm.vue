@@ -30,15 +30,23 @@
 
 <template>
   <v-form>
-    <div class="px-4 pt-2 pb-4 grey lighten-3" v-if="displayAllFilters">
-      <h4 class="subhead-2 font-weight-bold mb-2">Search by Name</h4>
-      <name-autocomplete
-        @school-name-selected="handleSchoolNameSelected"
-        :initial_school="input.search"
-      />
-    </div>
+<!--    <div class="px-4 pt-2 pb-2" v-if="displayAllFilters">-->
+<!--      <h4 class="subhead-2 font-weight-bold mb-2">Search by Name</h4>-->
+<!--      <name-autocomplete-->
+<!--        @school-name-selected="handleSchoolNameSelected"-->
+<!--        :initial_school="input.search"-->
+<!--      />-->
+<!--    </div>-->
 
     <div class="py-2 px-5">
+      <div class="" v-if="displayAllFilters">
+        <p class="subhead-2">Search by Name</p>
+        <name-autocomplete
+          @school-name-selected="handleSchoolNameSelected"
+          :initial_school="input.search"
+        />
+      </div>
+
       <p class="subhead-2" id="location-label">Location</p>
       <v-select
         id="search-from-location-select"

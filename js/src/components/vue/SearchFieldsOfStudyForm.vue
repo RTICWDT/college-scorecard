@@ -16,8 +16,11 @@
 
   #fos-search-form{
     .subhead {
+      margin-top: 1rem !important;
+      margin-bottom: 0.3rem !important;
       font-weight: 600;
-      font-family: 'Montserrat', sans-serif !important;
+      font-family: 'Montserrat',
+      sans-serif !important;
     }
 
     label.subhead{
@@ -32,9 +35,13 @@
 
     <!-- Field Of Study Search and Chips -->
     <div class="mt-2" id="fos-search-and-chips">
-      <label class="subhead mb-2" id="fields-label" for="fos-search">
-        Search By Fields Of Study
-      </label>
+<!--      <label class="subhead mb-2 mt-4" id="fields-label" for="fos-search">-->
+<!--        Search By Fields Of Study-->
+<!--      </label>-->
+
+      <p class="subhead" id="fields-label" for="fos-search">
+        Search by Fields of Study
+      </p>
 
       <field-of-study-search
         @field-of-study-selected="handleFieldOfStudySelected"
