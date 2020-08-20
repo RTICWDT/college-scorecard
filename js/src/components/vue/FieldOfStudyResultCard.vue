@@ -1,4 +1,5 @@
 <style lang="scss">
+
   .all-fields-container{
     position: absolute;
     bottom: 0;
@@ -13,6 +14,14 @@
       text-decoration: unset;
       /*text-transform: uppercase;*/
     }
+  }
+
+  .search-fos-result-compare-button{
+    float:right;
+  }
+
+  .search-fos-result-title{
+    padding-top: 8px !important;
   }
 </style>
 
@@ -56,7 +65,7 @@
           cols="12"
           md="9"
         >
-          <div
+          <div class="mb-6"
             v-for="fieldCategory in categorizedFieldsOfStudy"
             :key="`${school.id}-${fieldCategory.title}`"
           >
@@ -66,36 +75,45 @@
             <div
               v-for="fieldOfStudy in fieldCategory.items"
               :key="`${school.id}-${fieldOfStudy.code}-${_.get(fieldOfStudy,'credential.level')}`"
-              class="search-fos-result-credential-item-container pa-4 mt-2 mb-2"
+              class="search-fos-result-credential-item-container pa-3 my-3"
               :class="selectedFieldOfStudyClass(fieldOfStudy)"
             >
 
-              <a
-                :href="`${schoolLink}&fos_code=${fieldOfStudy.code}&fos_credential=${_.get(fieldOfStudy,'credential.level')}`"
-                target="_blank"
-              >
-                <span>{{fieldOfStudy.title | formatFieldOfStudyTitle}}</span>
-              </a>
-
-              <span class="float-right">
-                <v-btn
-                  text
-                  icon
-                  @click="$emit('toggle-compare-item', fieldOfStudyCompareFormat(fieldOfStudy), 'compare-fos')"
+              <div class="d-inline-block search-fos-result-title">
+                <a
+                  :href="`${schoolLink}&fos_code=${fieldOfStudy.code}&fos_credential=${_.get(fieldOfStudy,'credential.level')}`"
+                  target="_blank"
                 >
-                  <v-icon>fa fa-plus-circle</v-icon>
-                  <span class='sr-only'>Compare</span>
-                </v-btn>
-              </span>
+                <span>
+                  {{fieldOfStudy.title | formatFieldOfStudyTitle}}
+                </span>
+                </a>
+              </div>
+
+              <v-btn class="search-fos-result-compare-button d-none d-md-block"
+                icon
+                @click="$emit('toggle-compare-item', fieldOfStudyCompareFormat(fieldOfStudy), 'compare-fos')"
+              >
+                <v-icon>fa fa-plus-circle</v-icon>
+                <span class='sr-only'>Compare</span>
+              </v-btn>
+
+              <v-btn class="d-sm-none mt-2"
+               outlined
+               block
+               @click="$emit('toggle-compare-item', fieldOfStudyCompareFormat(fieldOfStudy), 'compare-fos')"
+              >
+                <span class="mr-4">Compare</span><v-icon>fa fa-plus-circle</v-icon>
+              </v-btn>
+
+              <div style="clear: both;"></div>
 
             </div>
           </div>
 
           <br />
 
-          <div
-            class="all-fields-container"
-          >
+          <div class="all-fields-container">
             <p class="text-center">
               <a :href='fieldsLink'
                  class="text-center"
