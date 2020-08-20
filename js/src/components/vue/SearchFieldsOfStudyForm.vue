@@ -229,7 +229,7 @@
         hide-details
         class="align-center"
         color="secondary"
-        track-color="secondary"
+        track-color="dark-gray"
         thumb-color="secondary"
         thumb-label
         aria-label="Salary After Complete Range Slider"
@@ -288,7 +288,7 @@
         hide-details
         class="align-center"
         color="secondary"
-        track-color="secondary"
+        track-color="dark-gray"
         thumb-color="secondary"
         thumb-label
         aria-label="Median Total Debt Range Slider"

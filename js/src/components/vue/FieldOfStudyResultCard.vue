@@ -6,7 +6,7 @@
   }
 
   .search-fos-result-credential-item-container{
-    background-color: #e3e3e3;
+    background-color: #f7f7f7;
 
     a{
       font-size: 16px;
@@ -90,6 +90,7 @@
                 </a>
               </div>
 
+              <!-- Compare on medium and above-->
               <v-btn class="search-fos-result-compare-button d-none d-md-block"
                 icon
                 @click="$emit('toggle-compare-item', fieldOfStudyCompareFormat(fieldOfStudy), 'compare-fos')"
@@ -98,7 +99,8 @@
                 <span class='sr-only'>Compare</span>
               </v-btn>
 
-              <v-btn class="d-sm-none mt-2"
+              <!-- Compare on small and below-->
+              <v-btn class="d-sm-none mt-4"
                outlined
                block
                @click="$emit('toggle-compare-item', fieldOfStudyCompareFormat(fieldOfStudy), 'compare-fos')"
