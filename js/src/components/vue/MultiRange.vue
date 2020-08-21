@@ -18,9 +18,9 @@
     <div v-else-if="minmax && minmax.min">
       <range
         :lower="this._lower"
+        :upper="this._upper"
         :lowerTipStyleOverride="lowerTipStyleOverride"
         :upperTipStyleOverride="upperTipStyleOverride"
-        :upper="this._upper"
         :min="{ value: 0, label: '$0' }"
         :max="max"
         :lowertip="minmax.min.title.slice(0,-1)+ ' - '+ minmax.min.credential.title"
