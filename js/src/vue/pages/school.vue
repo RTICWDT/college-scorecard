@@ -163,10 +163,17 @@
                         :addExtraPadding="false"
                         :rangeChartStyle="{height: '40px'}"
                         :lowerStyleOverride="{ height: '50px', 'border-left': '12px solid #0e365b'}"
-                        :upperStyleOverride="{ height: '50px', 'border-right': '12px solid #0e365b'}"
                         :lowerTipStyleOverride="{top: 'unset', bottom: '-1.1rem'}"
-                        :upperTipStyleOverride="{top: 'unset', bottom: '-1.1rem'}"
-
+                        :upperStyleOverride="checkUpperStyle(
+                          _.get(this.earningsRange.max, 'earnings.median_earnings'),
+                          150000,
+                          { height: '50px', 'border-right': '12px solid #0e365b'}
+                        )"
+                        :upperTipStyleOverride="checkTipUpperStyle(
+                          _.get(this.earningsRange.max, 'earnings.median_earnings'),
+                          150000,
+                          {top: 'unset', bottom: '-1.1rem'}
+                        )"
                       />
                     </div>
 
@@ -1909,6 +1916,26 @@ export default {
     },
     handleFieldOfStudySelected(fieldOfStudy){
       window.location = this.$baseUrl+'/search/?toggle=fos&cip4=' + encodeURIComponent(fieldOfStudy.cip4);
+    },
+    checkTipUpperStyle(upperValue, maxValue, upperStyleTipOverride){
+      // Fixing padding issue on max value
+      let additionalPaddingStyles = upperStyleTipOverride;
+
+      // Checking for max
+      if(Number(upperValue) >= (maxValue * .85)){
+        additionalPaddingStyles.left = "-3.1rem";
+      }
+
+      return additionalPaddingStyles;
+    },
+    checkUpperStyle(value, maxValue, upperStyleOverride){
+      let additionalPaddingStyles = upperStyleOverride;
+
+      if(Number(value) >= (maxValue * .97)){
+        additionalPaddingStyles.left = '97%';
+      }
+
+      return additionalPaddingStyles;
     }
   },
   mounted() {
