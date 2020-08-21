@@ -262,7 +262,32 @@
                           </div>
                         </div>
 
-                        <div v-else id="profile-field-of-study-summary-metric-empty" class="mb-4"></div>
+                        <div v-else id="profile-field-of-study-summary-metric-empty" class="">
+                          <h3 class="mb-3" style="font-weight: 500">
+                            Explore Field of Study Information
+                            <tooltip definition="fos-median-earnings" />
+                          </h3>
+
+                          <p style="overflow-wrap: break-word">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                          </p>
+
+<!--                          <p>-->
+<!--                            Amet consectetur adipiscing elit ut aliquam purus sit. Posuere ac ut consequat semper-->
+<!--                            viverra nam libero justo. Aliquet sagittis id consectetur purus ut faucibus pulvinar-->
+<!--                            elementum integer.-->
+<!--                          </p>-->
+
+                          <div class="fos-profile-mini-summary-info pa-2">
+                            <p class="mt-4">
+                              We have information on <strong>{{fosUndergradCount| numeral }} Undergraduate
+                              Fields of Study</strong> offered at <strong>{{ schoolName }}</strong>
+                            </p>
+                          </div>
+
+                        </div>
                       </div>
 
                       <!-- Compare Button -->
@@ -1448,6 +1473,19 @@
     }
   }
 
+  .fos-profile-mini-summary-info{
+    width: 100%;
+    /*background-color: #eaeaea;*/
+    border-left: 10px solid $fos-color-gold;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    -moz-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    /*<!--box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);-->*/
+    border-top: 1px solid #eaeaea;
+    border-right: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+  }
+
   .institution-profile-panel{
     width: 100%;
     border-left: 10px solid $institution-accent-color;
@@ -1520,7 +1558,8 @@
   }
 
   #profile-field-of-study-summary-metric-empty{
-    height: 200px;
+    /*height: 320px;*/
+    height: auto;
   }
 </style>
 
