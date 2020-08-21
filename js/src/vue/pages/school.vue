@@ -283,7 +283,7 @@
                           <div class="fos-profile-mini-summary-info pa-2">
                             <p class="mt-4">
                               We have information on <strong>{{fosUndergradCount| numeral }} Undergraduate
-                              Fields of Study</strong> offered at <strong>{{ schoolName }}</strong>
+                              {{fosUndergradCount==1? 'field':'fields' }} of Study</strong> offered at <strong>{{ schoolName }}</strong>
                             </p>
                           </div>
 
