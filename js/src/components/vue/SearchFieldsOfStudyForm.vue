@@ -78,7 +78,7 @@
     <!-- Credential Type -->
     <div class="">
       <label class="subhead mb-2" id="search-fos-cred-level" for="search-fos-cred-level">
-        Search By Fields Of Study
+        Credential Type
       </label>
 
       <v-checkbox
