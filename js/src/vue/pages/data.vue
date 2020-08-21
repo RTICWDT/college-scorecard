@@ -46,7 +46,7 @@
                 <v-col cols="12" sm="4">
                   <v-card
                     @click="trackDownload('Most-Recent-Cohorts-All-Data-Elements.csv')"
-                    :href="dataBase_url+'/Most-Recent-Cohorts-All-Data-Elements.csv'"
+                    href="https://data.ed.gov/dataset/9dc70e6b-8426-4d71-b9d5-70ce6094a3f4/resource/823ac095-bdfc-41b0-b508-4e8fc3110082/download/most-recent-cohorts-all-data-elements-1.csv'"
                     hover
                     class="pa-2 text-center fill-height d-flex align-center justify-center"
                     color="grey lighten-4"
@@ -62,7 +62,7 @@
                     class="pa-2 text-center fill-height d-flex align-center justify-center"
                     color="grey lighten-4"
                     @click="trackDownload('Most-Recent-Field-Data-Elements.csv')"
-                    :href="dataBase_url+'/Most-Recent-Field-Data-Elements.csv'"
+                    href="https://data.ed.gov/dataset/9dc70e6b-8426-4d71-b9d5-70ce6094a3f4/resource/ff68afc4-6d23-459d-9f60-4006e4f85583/download/most-recent-field-data-elements.csv"
                     hover
                   >
                     <div>
