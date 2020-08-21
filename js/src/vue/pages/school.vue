@@ -163,9 +163,10 @@
                         :addExtraPadding="false"
                         :rangeChartStyle="{height: '40px'}"
                         :lowerStyleOverride="{ height: '50px', 'border-left': '12px solid #0e365b'}"
+                        :upperStyleOverride="{ height: '50px', 'border-right': '12px solid #0e365b'}"
                         :lowerTipStyleOverride="{top: 'unset', bottom: '-1.1rem'}"
                         :upperTipStyleOverride="{top: 'unset', bottom: '-1.1rem'}"
-                        :upperStyleOverride="{ height: '50px', 'border-right': '12px solid #0e365b'}"
+
                       />
                     </div>
 

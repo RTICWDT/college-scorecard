@@ -19,7 +19,7 @@
       <range
         :lower="this._lower"
         :lowerTipStyleOverride="lowerTipStyleOverride"
-        :upperTipStyleOverride="upperTipStyleOverride"
+        :upperTipStyleOverride="checkTipUpperStyle(this._upper, this.max.value, upperTipStyleOverride)"
         :upper="this._upper"
         :min="{ value: 0, label: '$0' }"
         :max="max"
@@ -117,8 +117,30 @@ export default {
       return {
         value: _.get(this.minmax.max, this.variable),
         label: this.$options.filters.numeral(_.get(this.minmax.max, this.variable), '$0,0'),
-        styles: this.upperStyleOverride
+        styles: this.checkUpperStyle(_.get(this.minmax.max, this.variable), this.max.value, this.upperStyleOverride)
       }
+    }
+  },
+  methods:{
+    checkTipUpperStyle(upperDataObject, maxValue, upperStyleTipOverride){
+      // Fixing padding issue on max value
+      let additionalPaddingStyles = upperStyleTipOverride;
+
+      // Checking for max
+      if(Number(upperDataObject.value) >= (maxValue * .85)){
+        additionalPaddingStyles.left = "-3.1rem";
+      }
+
+      return additionalPaddingStyles;
+    },
+    checkUpperStyle(value,maxValue,upperStyleOverride){
+      let additionalPaddingStyles = upperStyleOverride;
+
+      if(Number(value) >= (maxValue * .97)){
+        additionalPaddingStyles.left = '97%';
+      }
+
+      return additionalPaddingStyles;
     }
   }
 };
