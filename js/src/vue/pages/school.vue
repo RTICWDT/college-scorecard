@@ -165,12 +165,12 @@
                         :lowerStyleOverride="{ height: '50px', 'border-left': '12px solid #0e365b'}"
                         :lowerTipStyleOverride="{top: 'unset', bottom: '-1.1rem'}"
                         :upperStyleOverride="checkUpperStyle(
-                          _.get(this.earningsRange.max, 'earnings.median_earnings'),
+                          _.get(this.earningsRange, 'max.earnings.median_earnings'),
                           150000,
                           { height: '50px', 'border-right': '12px solid #0e365b'}
                         )"
                         :upperTipStyleOverride="checkTipUpperStyle(
-                          _.get(this.earningsRange.max, 'earnings.median_earnings'),
+                          _.get(this.earningsRange, 'max.earnings.median_earnings'),
                           150000,
                           {top: 'unset', bottom: '-1.1rem'}
                         )"
