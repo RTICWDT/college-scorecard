@@ -268,9 +268,10 @@
                           </h3>
 
                           <p style="overflow-wrap: break-word">
-                            Find the field of study that’s the best fit for you! Explore field of study information,
-                            such as salary after completing and typical debt. Field of study titles come from the
-                            U.S. Department of Education and may not match the program titles at a given school.
+                            Find the field of study that’s the best fit for you! Explore field of study
+                            information, such as salary after completing and typical debt. Field of study
+                            titles come from the U.S. Department of Education and may not match the program titles
+                            at {{ schoolName }}.
                           </p>
 
 <!--                          <p>-->
