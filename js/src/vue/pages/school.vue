@@ -265,13 +265,12 @@
                         <div v-else id="profile-field-of-study-summary-metric-empty" class="">
                           <h3 class="mb-3" style="font-weight: 500">
                             Explore Field of Study Information
-                            <tooltip definition="fos-median-earnings" />
                           </h3>
 
                           <p style="overflow-wrap: break-word">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Find the field of study that’s the best fit for you! Explore field of study information,
+                            such as salary after completing and typical debt. Field of study titles come from the
+                            U.S. Department of Education and may not match the program titles at a given school.
                           </p>
 
 <!--                          <p>-->
@@ -282,8 +281,8 @@
 
                           <div class="fos-profile-mini-summary-info pa-2">
                             <p class="mt-4">
-                              We have information on <strong>{{fosUndergradCount| numeral }} Undergraduate
-                              {{fosUndergradCount==1? 'field':'fields' }} of Study</strong> offered at <strong>{{ schoolName }}</strong>
+                              We have information on <strong>{{fosUndergradCount| numeral }} undergraduate
+                              {{fosUndergradCount==1? 'Field':'Fields' }} of Study</strong> offered at <strong>{{ schoolName }}</strong>
                             </p>
                           </div>
 
