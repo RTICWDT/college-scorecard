@@ -39,68 +39,28 @@
               </h1>
 
               <!-- Toggle Controls-->
-              <div class="compare-fos-toggle">
-                <v-tabs v-model="controlTab"
-                  fixed-tabs
-                  centered
-                  slider-size="8"
-                  @change="handleDisplayToggleClick"
-                >
-
-                  <v-tabs-slider :class="{'compare-fos-slider-gold': controlTab === 1}">
-
-                  </v-tabs-slider>
-
-                  <v-tab
-                    :class="{'compare-toggle-school-active': controlTab === 0}"
-                  >
-                    <h3 class="compare-tab-title">Schools ({{countSchools}})</h3>
-                  </v-tab>
-
-                  <v-tab
-                    :class="{'compare-toggle-fos-active': controlTab === 1}"
-                  >
-                    <h3 class="compare-tab-title">Fields of Study ({{countFieldsOfStudy}})</h3>
-                  </v-tab>
-                </v-tabs>
-<!--                <v-row>-->
-<!--                  &lt;!&ndash;TODO - Style&ndash;&gt;-->
-<!--                  <v-col-->
-<!--                    cols="12"-->
-<!--                    md="6"-->
-<!--                  >-->
-<!--                    <v-btn-->
-<!--                      block-->
-<!--                      :depressed="displayToggle === 'institutions'"-->
-<!--                      :disabled="displayToggle === 'institutions'"-->
-<!--                      @click="handleDisplayToggleClick('institutions')"-->
-<!--                    >Schools ({{countSchools}})-->
-<!--                    </v-btn>-->
-<!--                  </v-col>-->
-
-<!--                  <v-col-->
-<!--                    cols="12"-->
-<!--                    md="6"-->
-<!--                  >-->
-<!--                    <v-btn-->
-<!--                      block-->
-<!--                      :depressed="displayToggle === 'fos'"-->
-<!--                      :disabled="displayToggle === 'fos'"-->
-<!--                      @click="handleDisplayToggleClick('fos')"-->
-<!--                    >Fields Of Study({{countFieldsOfStudy}})-->
-<!--                    </v-btn>-->
-<!--                  </v-col>-->
-<!--                </v-row>-->
+              <div class="mx-md-4">
+                <context-toggle
+                  :display-toggle="displayToggle"
+                  :control-tab="controlTab"
+                  :tab-container-style="{width: '100%'}"
+                  :tab-style="{width:'50%'}"
+                  @context-switch-click="handleDisplayToggleClick"
+                  @context-tab-change="handleDisplayToggleClick"
+                  :fill-space="true"
+                />
               </div>
 
               <!--Loader-->
-              <div v-if="loading" class="show-loading mx-5">
-                <v-card class="pa-5">
+              <div v-if="loading" class="show-loading ma-4">
+
+                <div class="pa-5">
                   <h1 class="title">
                     Loading
                     <v-icon color="#0e365b">fas fa-circle-notch fa-spin</v-icon>
                   </h1>
-                </v-card>
+                </div>
+
               </div>
 
               <!-- Institution Top Summary-->
@@ -1009,6 +969,7 @@ import NameAutocomplete from "components/vue/NameAutocomplete.vue";
 import Router from "vue/mixins/Router.js";
 import { fields, localStorageKeys } from '../constants';
 import {generateFieldOfStudyUUID, decodeFieldOfStudyUUID, fieldOfStudyCompareFormat} from '../commonFormats';
+import ContextToggle from "components/vue/ContextToggle.vue";
 
 export default {
   mixins: [compare, ComplexFields, AnalyticsEvents, Router],
@@ -1025,7 +986,8 @@ export default {
     "sankey-buttons": SankeyButtons,
     "canned-search-container": CannedSearchContainer,
     "search-form": SearchForm,
-    "name-autocomplete": NameAutocomplete
+    "name-autocomplete": NameAutocomplete,
+    "context-toggle": ContextToggle
   },
   data() {
     return {
@@ -1564,17 +1526,9 @@ export default {
           break;
       }
     },
-    handleDisplayToggleClick(sliderValue){
-
-      let toggleValue = null;
-
-      if(sliderValue === 0){
-        toggleValue = "institutions";
-      }else{
-        toggleValue = "fos";
-      }
-
-      this.displayToggle = toggleValue;
+    handleDisplayToggleClick(toggleValue){
+      this.displayToggle = (Number(toggleValue) === 0)? 'institutions' : 'fos';
+      this.controlTab = toggleValue;
 
       if(this.displayToggle === 'institutions'){
         // Query if not response cache is present
@@ -1609,42 +1563,6 @@ export default {
         //update URL parameters
         this.queryStringParameters = this.parseURLParameters();
       }
-
-      // this.displayToggle = toggleValue;
-      //
-      // if(this.displayToggle === 'institutions'){
-      //   // Query if not response cache is present
-      //   if(this.responseCache.institution.length === 0){
-      //     this.queryInstitutions();
-      //   }
-      //
-      //   // TODO - Move to a centralized location.
-      //   // update the URL
-      //   history.replaceState(
-      //     {},
-      //     "",
-      //     this.shareUrl
-      //   );
-      //
-      //   //update URL parameters
-      //   this.queryStringParameters = this.parseURLParameters();
-      //
-      // }else if(this.displayToggle === 'fos'){
-      //   if(this.responseCache.fieldsOfStudy.length <= 0){
-      //     this.queryFieldsOfStudy(this.locateFieldsOfStudy());
-      //   }
-      //
-      //   // TODO - Move to a centralized location.
-      //   // update the URL
-      //   history.replaceState(
-      //     {},
-      //     "",
-      //     this.shareUrl
-      //   );
-      //
-      //   //update URL parameters
-      //   this.queryStringParameters = this.parseURLParameters();
-      // }
     },
     locateFieldsOfStudy(){
 

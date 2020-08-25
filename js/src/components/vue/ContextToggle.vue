@@ -1,78 +1,49 @@
 <template>
-<!--  <div>-->
-<!--    &lt;!&ndash;TODO - Style&ndash;&gt;-->
-<!--    <v-btn-->
-<!--      block-->
-<!--      :depressed="displayToggle === 'institutions'"-->
-<!--      :disabled="displayToggle === 'institutions'"-->
-<!--      @click="$emit('context-switch-click','institutions')"-->
-<!--    >-->
-<!--      <slot name="school-button-text">Schools</slot>-->
-<!--    </v-btn>-->
-<!--    <v-btn-->
-<!--      block-->
-<!--      :depressed="displayToggle === 'fos'"-->
-<!--      :disabled="displayToggle === 'fos'"-->
-<!--      @click="$emit('context-switch-click','fos')"-->
-<!--    >-->
-<!--      <slot name="fos-button-text">Fields Of Study</slot>-->
-<!--    </v-btn>-->
-<!--  </div>-->
-
   <v-tabs
     id="context-toggle"
     :value="controlTab"
     :show-arrows="true"
     slider-size="8"
     @change="$emit('context-tab-change', $event)"
-    height="70px"
+    :height="tabsHeight"
+    :style="tabContainerStyle"
+    :grow="fillSpace"
   >
 
     <v-tabs-slider id="context-toggle-slider" :class="{'compare-fos-slider-gold': controlTab === 1}" />
 
-    <v-tab :id="tabID('institutions', controlTab)">
-      <h3 class="compare-tab-title">
-        Schools
-      </h3>
+    <v-tab :id="tabID('institutions', controlTab)"
+      :style="tabStyle"
+    >
+      <slot name="tab-school">
+
+        <h3 class="compare-tab-title">
+          Schools
+        </h3>
+      </slot>
     </v-tab>
 
-    <v-tab :id="tabID('fos', controlTab)">
-      <h3 class="compare-tab-title">
-        Fields of Study
-      </h3>
+    <v-tab :id="tabID('fos', controlTab)"
+      :style="tabStyle"
+    >
+      <slot name="tab-fos">
+
+        <h3 class="compare-tab-title">
+          Fields of Study
+        </h3>
+      </slot>
     </v-tab>
 
   </v-tabs>
-
-<!--  <v-item-group-->
-<!--    v-model="selected"-->
-<!--  >-->
-<!--    <v-item v-slot:default="{ active, toggle }">-->
-<!--      <span>School</span>-->
-<!--    </v-item>-->
-
-<!--    <v-item>-->
-<!--      <span>Field of Study</span>-->
-<!--    </v-item>-->
-
-<!--  </v-item-group>-->
-
-
 </template>
 
 <style lang="scss" scoped>
   @import 'sass/_variables';
 
   #context-toggle{
-    background-color: pink !important;
-    width: 260px;
-
-    .v-tab{
-      width: 130px;
-    }
 
     #compare-tab-inactive {
-      background-color: #eeeeee;
+      /*background-color: #eeeeee;*/
       border-bottom: 8px solid #dcdada;
 
       h3{
@@ -115,6 +86,30 @@
       controlTab:{
         type: Number,
         default: 0
+      },
+      tabsHeight:{
+        type: String,
+        default: "70px"
+      },
+      tabContainerStyle:{
+        type: Object,
+        default(){
+          return{
+            width: '260px'
+          }
+        }
+      },
+      tabStyle:{
+        type: Object,
+        default(){
+          return{
+            width: '130px'
+          }
+        }
+      },
+      fillSpace:{
+        type: Boolean,
+        default: false
       }
     },
     data(){
