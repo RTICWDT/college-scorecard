@@ -177,7 +177,10 @@
                 <!-- Field Of Study Data Container -->
                 <div class="mx-md-5 mx-2">
                   <div id="compare-salary-after-completing" class="compare-fos-section">
-                    <h2>Salary After Completing</h2>
+                    <h2>
+                      Salary After Completing
+                    </h2>
+
                     <v-select
                       class="mx-5 my-5"
                       :items="fosSalarySelectItems"
@@ -187,7 +190,7 @@
                     <div class="ml-3">
                       <div id="fos-median-earnings" class="mb-5">
                         <h3 class="mb-2">
-                          Median Earnings
+                          Median Earnings&nbsp;<tooltip definition="fos-number-of-graduates" :isCompare="true" />
                         </h3>
 
                         <compare-block
@@ -236,7 +239,7 @@
 
                       <div id="fos-monthly-earnings" class="mb-5">
                         <h3 class="mb-2">
-                          Monthly Earnings
+                          Monthly Earnings&nbsp;<tooltip definition="fos-number-of-graduates" :isCompare="true" />
                         </h3>
 
                         <compare-block
@@ -290,7 +293,7 @@
                     <div class="ml-3">
                       <div id="fos-median-total-debt" class="pt-5 mb-5">
                         <h3 class="mb-2">
-                          Median Total Debt After Graduation
+                          Median Total Debt After Graduation&nbsp;<tooltip definition="fos-number-of-graduates" :isCompare="true" />
                         </h3>
 
                         <v-checkbox
@@ -350,7 +353,7 @@
 
                       <div id="fos-monthly-loan" class="mb-5">
                         <h3 class="mb-2">
-                          Monthly Loan Payment
+                          Monthly Loan Payment&nbsp;<tooltip definition="fos-number-of-graduates" :isCompare="true" />
                         </h3>
 
                         <v-checkbox
@@ -411,7 +414,7 @@
                   </div>
 
                   <div id="fos-grad-count" class="my-10">
-                    <h2>Number Of Graduates</h2>
+                    <h2>Number Of Graduates&nbsp;<tooltip definition="fos-number-of-graduates" :isCompare="true" /></h2>
                     <compare-block
                       v-for="credentialLevel in filteredFieldsOfStudy"
                       :key="`${credentialLevel.key}-grad-count`"
