@@ -878,15 +878,53 @@
             <!-- Search Form Component -->
             <div v-show="!loading && showSearchForm">
               <v-card class="pa-5 mb-2">
-                <h1 class="text-center pt-3">No schools selected to compare.</h1>
-                <p class="text-center mt-2">
-                  Try searching for schools and clicking the <v-icon>fa fa-plus-circle</v-icon> to add a school for comparison.
-                </p>
+                <div v-if="displayToggle === 'institutions'">
+                  <h1 class="text-center py-3">
+                    No schools selected to compare.
+                  </h1>
+
+                  <div class="text-center py-4">
+                    <v-btn
+                      rounded
+                      color="secondary"
+                      :href="`${$baseUrl}/search?toggle=institutions`"
+                    >
+                      Visit the institution search page
+                    </v-btn>
+                  </div>
+
+                  <p class="text-center my-4">
+                    Try searching for schools and clicking the <v-icon>fa fa-plus-circle</v-icon> to add a school for comparison.
+                  </p>
+
+                </div>
+
+                <div v-else>
+                  <h1 class="text-center py-3">
+                    No fields of study selected to compare.
+                  </h1>
+
+                  <div class="text-center py-4">
+                    <v-btn
+                      rounded
+                      color="secondary"
+                      :href="`${$baseUrl}/search?toggle=fos`"
+                    >
+                      Visit the fields of study search page
+                    </v-btn>
+                  </div>
+
+                  <p class="text-center my-4">
+                    Try searching for fields of study and clicking the <v-icon>fa fa-plus-circle</v-icon> to add a
+                    field of study for comparison.
+                  </p>
+                </div>
+
 
               </v-card>
-              <v-card class="px-5 pt-0 pb-5">
-                <search-form @search-query="directToSearch" />
-              </v-card>
+<!--              <v-card class="px-5 pt-0 pb-5">-->
+<!--                <search-form @search-query="directToSearch" />-->
+<!--              </v-card>-->
             </div>
 
           </v-col> <!-- End Left Content Area -->
