@@ -5,8 +5,10 @@
     </v-btn>
     <p>Add up to 10 Schools and 10 Fields of Study to compare.</p>
     <v-row style="height: 100%">
-      <v-col cols="12" md="5">
+      <v-col cols="12" md="6">
+
         <h3 class="title">Compare Schools</h3>
+
         <div class="my-3">
           <v-checkbox
             @change="handleToggleCompareItem(school,schoolKey)"
@@ -40,7 +42,7 @@
 
       </v-col>
 
-      <v-col cols="12" md="7" id="compare-drawer-fos-container">
+      <v-col cols="12" md="6">
         <h3 class="title compare-drawer-fos-title">Compare Fields Of Study</h3>
 
         <div class="my-3 compare-drawer-fos-checkbox-container">
@@ -115,7 +117,7 @@
 
   .compare-drawer-fos-title{
     @media (min-width: 960px) {
-      padding-left: 24px;
+      padding-left: 12px;
     }
   }
 
@@ -124,10 +126,8 @@
   }
 
   .compare-drawer-fos-checkbox-container{
-
-
-
     @media (min-width: 960px){
+      margin-left: -12px;
       padding-left: 24px;
       border-left: 1px solid $light-gray;
       min-height: 420px;
@@ -148,6 +148,7 @@
   }
 
 </style>
+
 <script>
 // This can work on any page, it just needs data passed in and events to react when school
 // is toggled.
