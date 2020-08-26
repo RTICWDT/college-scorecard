@@ -4,9 +4,11 @@
       <v-icon>fas fa-times-circle</v-icon>
     </v-btn>
     <p>Add up to 10 Schools and 10 Fields of Study to compare.</p>
-    <v-row style="height: 100%">
-      <v-col cols="12" md="5">
+    <v-row class="compare-drawer-content-container">
+      <v-col cols="12" md="6">
+
         <h3 class="title">Compare Schools</h3>
+
         <div class="my-3">
           <v-checkbox
             @change="handleToggleCompareItem(school,schoolKey)"
@@ -19,9 +21,11 @@
             class="my-5 pa-0"
           >
             <template v-slot:label>
-              <h4>
-                {{school.schoolName}}
-              </h4>
+              <div class="compare-drawer-fos-checkbox-label">
+                <h4>
+                  {{school.schoolName}}
+                </h4>
+              </div>
             </template>
           </v-checkbox>
 
@@ -40,7 +44,7 @@
 
       </v-col>
 
-      <v-col cols="12" md="7" id="compare-drawer-fos-container">
+      <v-col cols="12" md="6">
         <h3 class="title compare-drawer-fos-title">Compare Fields Of Study</h3>
 
         <div class="my-3 compare-drawer-fos-checkbox-container">
@@ -55,10 +59,10 @@
             class="my-5"
           >
             <template v-slot:label>
-              <div class="">
+              <div class="compare-drawer-fos-checkbox-label">
                 <h4>{{fieldOfStudy.fosTitle | formatCip2Title}}</h4>
-                <h5>{{fieldOfStudy.credentialTitle}}</h5>
-                <h5>{{fieldOfStudy.institutionName}}</h5>
+                <p class="mb-0">{{fieldOfStudy.credentialTitle}}</p>
+                <p class="mb-0">{{fieldOfStudy.institutionName}}</p>
               </div>
             </template>
           </v-checkbox>
@@ -115,7 +119,7 @@
 
   .compare-drawer-fos-title{
     @media (min-width: 960px) {
-      padding-left: 24px;
+      padding-left: 12px;
     }
   }
 
@@ -124,10 +128,8 @@
   }
 
   .compare-drawer-fos-checkbox-container{
-
-
-
     @media (min-width: 960px){
+      margin-left: -12px;
       padding-left: 24px;
       border-left: 1px solid $light-gray;
       min-height: 420px;
@@ -136,8 +138,12 @@
   }
 
   #compare-schools-content{
+    overflow-y: auto;
+    height: 90vh;
+
     @media (min-width: 960px){
       min-height: 500px;
+      height: auto;
     }
 
   }
@@ -147,7 +153,26 @@
     /*bottom: 24px;*/
   }
 
+  .compare-drawer-fos-checkbox-label{
+    h4{
+      font-size: 13px;
+    }
+    p{
+      font-size: 13px;
+    }
+
+    @media (min-width: 960px){
+      h4{
+        font-size: 16px;
+      }
+      p{
+        font-size:16px;
+      }
+    }
+  }
+
 </style>
+
 <script>
 // This can work on any page, it just needs data passed in and events to react when school
 // is toggled.

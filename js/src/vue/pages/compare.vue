@@ -39,68 +39,40 @@
               </h1>
 
               <!-- Toggle Controls-->
-              <div class="compare-fos-toggle">
-                <v-tabs v-model="controlTab"
-                  fixed-tabs
-                  centered
-                  slider-size="8"
-                  @change="handleDisplayToggleClick"
+              <div class="mx-md-4">
+                <context-toggle
+                  :display-toggle="displayToggle"
+                  :control-tab="controlTab"
+                  :tab-container-style="{width: '100%'}"
+                  :tab-style="{width:'50%'}"
+                  @context-switch-click="handleDisplayToggleClick"
+                  @context-tab-change="handleDisplayToggleClick"
+                  :fill-space="true"
                 >
+                  <template v-slot:tab-school>
+                    <h3 class="compare-tab-title">
+                      Schools ({{countSchools}})
+                    </h3>
+                  </template>
+                  <template v-slot:tab-fos>
+                    <h3 class="compare-tab-title">
+                      Fields of Study ({{countFieldsOfStudy}})
+                    </h3>
+                  </template>
 
-                  <v-tabs-slider :class="{'compare-fos-slider-gold': controlTab === 1}">
-
-                  </v-tabs-slider>
-
-                  <v-tab
-                    :class="{'compare-toggle-school-active': controlTab === 0}"
-                  >
-                    <h3 class="compare-tab-title">Schools ({{countSchools}})</h3>
-                  </v-tab>
-
-                  <v-tab
-                    :class="{'compare-toggle-fos-active': controlTab === 1}"
-                  >
-                    <h3 class="compare-tab-title">Fields of Study ({{countFieldsOfStudy}})</h3>
-                  </v-tab>
-                </v-tabs>
-<!--                <v-row>-->
-<!--                  &lt;!&ndash;TODO - Style&ndash;&gt;-->
-<!--                  <v-col-->
-<!--                    cols="12"-->
-<!--                    md="6"-->
-<!--                  >-->
-<!--                    <v-btn-->
-<!--                      block-->
-<!--                      :depressed="displayToggle === 'institutions'"-->
-<!--                      :disabled="displayToggle === 'institutions'"-->
-<!--                      @click="handleDisplayToggleClick('institutions')"-->
-<!--                    >Schools ({{countSchools}})-->
-<!--                    </v-btn>-->
-<!--                  </v-col>-->
-
-<!--                  <v-col-->
-<!--                    cols="12"-->
-<!--                    md="6"-->
-<!--                  >-->
-<!--                    <v-btn-->
-<!--                      block-->
-<!--                      :depressed="displayToggle === 'fos'"-->
-<!--                      :disabled="displayToggle === 'fos'"-->
-<!--                      @click="handleDisplayToggleClick('fos')"-->
-<!--                    >Fields Of Study({{countFieldsOfStudy}})-->
-<!--                    </v-btn>-->
-<!--                  </v-col>-->
-<!--                </v-row>-->
+                </context-toggle>
               </div>
 
               <!--Loader-->
-              <div v-if="loading" class="show-loading mx-5">
-                <v-card class="pa-5">
+              <div v-if="loading" class="show-loading ma-4">
+
+                <div class="pa-5">
                   <h1 class="title">
                     Loading
                     <v-icon color="#0e365b">fas fa-circle-notch fa-spin</v-icon>
                   </h1>
-                </v-card>
+                </div>
+
               </div>
 
               <!-- Institution Top Summary-->
@@ -108,15 +80,17 @@
 
                 <!-- Institution Chips -->
                 <div class="compare-institution-chip-container py-5 mb-10">
-                  <v-chip
-                    class="ma-2"
-                    v-for="institution in responseCache.institution"
-                    :key="institution.schoolId"
-                    close
-                    @click:close="handleChipCloseClick(institution, 'compare-schools')"
-                  >
-                    {{institution.schoolName}}
-                  </v-chip>
+                  <v-chip-group column>
+                    <v-chip
+                      class="pa-4 ma-2"
+                      v-for="institution in responseCache.institution"
+                      :key="institution.schoolId"
+                      close
+                      @click:close="handleChipCloseClick(institution, 'compare-schools')"
+                    >
+                      {{institution.schoolName}}
+                    </v-chip>
+                  </v-chip-group>
                 </div>
 
                 <!--Institution Summary Metrics-->
@@ -171,30 +145,54 @@
               </div><!-- End Institution Top Summary-->
 
               <!-- Field Of Study Container -->
-              <div class="mx-5" v-else-if="showResource === 'fos'">
+              <div v-else-if="showResource === 'fos'">
 
                 <!-- Field of Study Chips -->
-                <div class="compare-fos-chip-container mb-10 py-5">
-                  <v-chip
-                    class="ma-2"
-                    v-for="fieldOfStudy in responseCache.fieldsOfStudy"
-                    :key="`${fieldOfStudy.unit_id}${fieldOfStudy.code}`"
-                    close
-                    @click:close="handleChipCloseClick(fieldOfStudy, 'compare-fos')"
-                  >
-                    <div class="compare-fos-chip pa-2">
-                      <h4>{{fieldOfStudy.title | formatFieldOfStudyTitle}}</h4>
-                      <span>{{fieldOfStudy['credential.title']}}</span><br>
-                      <span>{{fieldOfStudy['school.name']}}</span>
-                    </div>
+                <div class="compare-fos-chip-container mb-10 py-5 mx-md-5">
 
-                  </v-chip>
+                  <!-- Mobile Chip Layout -->
+                  <v-chip-group show-arrows class="d-md-none">
+                    <v-chip
+                      v-for="fieldOfStudy in responseCache.fieldsOfStudy"
+                      :key="`${fieldOfStudy.unit_id}${fieldOfStudy.code}`"
+                      close
+                      @click:close="handleChipCloseClick(fieldOfStudy, 'compare-fos')"
+                    >
+                      <div class="compare-fos-chip pa-2">
+                        <h4>{{fieldOfStudy.title | formatFieldOfStudyTitle}}</h4>
+                        <span>{{fieldOfStudy['credential.title']}}</span><br>
+                        <span>{{fieldOfStudy['school.name']}}</span>
+                      </div>
+
+                    </v-chip>
+                  </v-chip-group>
+
+                  <!-- MD and larger chip layout -->
+                  <v-chip-group class="d-none d-md-block" column>
+                    <v-chip
+                      class="ma-2"
+                      v-for="fieldOfStudy in responseCache.fieldsOfStudy"
+                      :key="`${fieldOfStudy.unit_id}${fieldOfStudy.code}`"
+                      close
+                      @click:close="handleChipCloseClick(fieldOfStudy, 'compare-fos')"
+                    >
+                      <div class="compare-fos-chip pa-2">
+                        <h4>{{fieldOfStudy.title | formatFieldOfStudyTitle}}</h4>
+                        <span>{{fieldOfStudy['credential.title']}}</span><br>
+                        <span>{{fieldOfStudy['school.name']}}</span>
+                      </div>
+
+                    </v-chip>
+                  </v-chip-group>
                 </div>
 
                 <!-- Field Of Study Data Container -->
-                <div>
+                <div class="mx-md-5 mx-2">
                   <div id="compare-salary-after-completing" class="compare-fos-section">
-                    <h2>Salary After Completing</h2>
+                    <h2>
+                      Salary After Completing
+                    </h2>
+
                     <v-select
                       class="mx-5 my-5"
                       :items="fosSalarySelectItems"
@@ -204,7 +202,7 @@
                     <div class="ml-3">
                       <div id="fos-median-earnings" class="mb-5">
                         <h3 class="mb-2">
-                          Median Earnings
+                          Median Earnings&nbsp;<tooltip definition="fos-number-of-graduates" :isCompare="true" />
                         </h3>
 
                         <compare-block
@@ -253,7 +251,7 @@
 
                       <div id="fos-monthly-earnings" class="mb-5">
                         <h3 class="mb-2">
-                          Monthly Earnings
+                          Monthly Earnings&nbsp;<tooltip definition="fos-number-of-graduates" :isCompare="true" />
                         </h3>
 
                         <compare-block
@@ -307,7 +305,7 @@
                     <div class="ml-3">
                       <div id="fos-median-total-debt" class="pt-5 mb-5">
                         <h3 class="mb-2">
-                          Median Total Debt After Graduation
+                          Median Total Debt After Graduation&nbsp;<tooltip definition="fos-number-of-graduates" :isCompare="true" />
                         </h3>
 
                         <v-checkbox
@@ -317,7 +315,7 @@
                           label="Include debt borrowed at any prior institutions"
                         >
                           <template v-slot:label>
-                          <span>
+                          <span class="profile-fos-include-prior-debt">
                             Include debt borrowed at any prior institutions
                             <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
                           </span>
@@ -367,7 +365,7 @@
 
                       <div id="fos-monthly-loan" class="mb-5">
                         <h3 class="mb-2">
-                          Monthly Loan Payment
+                          Monthly Loan Payment&nbsp;<tooltip definition="fos-number-of-graduates" :isCompare="true" />
                         </h3>
 
                         <v-checkbox
@@ -377,7 +375,7 @@
                           label="Include debt borrowed at any prior institutions"
                         >
                           <template v-slot:label>
-                          <span>
+                          <span class="profile-fos-include-prior-debt">
                             Include debt borrowed at any prior institutions
                             <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
                           </span>
@@ -428,7 +426,7 @@
                   </div>
 
                   <div id="fos-grad-count" class="my-10">
-                    <h2>Number Of Graduates</h2>
+                    <h2>Number Of Graduates&nbsp;<tooltip definition="fos-number-of-graduates" :isCompare="true" /></h2>
                     <compare-block
                       v-for="credentialLevel in filteredFieldsOfStudy"
                       :key="`${credentialLevel.key}-grad-count`"
@@ -880,15 +878,53 @@
             <!-- Search Form Component -->
             <div v-show="!loading && showSearchForm">
               <v-card class="pa-5 mb-2">
-                <h1 class="text-center pt-3">No schools selected to compare.</h1>
-                <p class="text-center mt-2">
-                  Try searching for schools and clicking the <v-icon>fa fa-plus-circle</v-icon> to add a school for comparison.
-                </p>
+                <div v-if="displayToggle === 'institutions'">
+                  <h1 class="text-center py-3">
+                    No schools selected to compare.
+                  </h1>
+
+                  <div class="text-center py-4">
+                    <v-btn
+                      rounded
+                      color="secondary"
+                      :href="`${$baseUrl}/search?toggle=institutions`"
+                    >
+                      Visit the institution search page
+                    </v-btn>
+                  </div>
+
+                  <p class="text-center my-4">
+                    Try searching for schools and clicking the <v-icon>fa fa-plus-circle</v-icon> to add a school for comparison.
+                  </p>
+
+                </div>
+
+                <div v-else>
+                  <h1 class="text-center py-3">
+                    No fields of study selected to compare.
+                  </h1>
+
+                  <div class="text-center py-4">
+                    <v-btn
+                      rounded
+                      color="secondary"
+                      :href="`${$baseUrl}/search?toggle=fos`"
+                    >
+                      Visit the fields of study search page
+                    </v-btn>
+                  </div>
+
+                  <p class="text-center my-4">
+                    Try searching for fields of study and clicking the <v-icon>fa fa-plus-circle</v-icon> to add a
+                    field of study for comparison.
+                  </p>
+                </div>
+
 
               </v-card>
-              <v-card class="px-5 pt-0 pb-5">
-                <search-form @search-query="directToSearch" />
-              </v-card>
+<!--              <v-card class="px-5 pt-0 pb-5">-->
+<!--                <search-form @search-query="directToSearch" />-->
+<!--              </v-card>-->
             </div>
 
           </v-col> <!-- End Left Content Area -->
@@ -939,6 +975,11 @@
 
   .compare-institution-chip-container{
     border-bottom: 1px $light-gray solid;
+
+    .v-chip {
+      height: auto;
+      white-space: normal;
+    }
   }
 
   .compare-fos-chip-container{
@@ -947,7 +988,12 @@
     .v-chip {
       height: auto;
       white-space: normal;
-      width: 250px;
+      width:200px;
+
+      @media (min-width: 960px){
+        width: 250px;
+      }
+
     }
 
     .compare-fos-chip{
@@ -1009,6 +1055,7 @@ import NameAutocomplete from "components/vue/NameAutocomplete.vue";
 import Router from "vue/mixins/Router.js";
 import { fields, localStorageKeys } from '../constants';
 import {generateFieldOfStudyUUID, decodeFieldOfStudyUUID, fieldOfStudyCompareFormat} from '../commonFormats';
+import ContextToggle from "components/vue/ContextToggle.vue";
 
 export default {
   mixins: [compare, ComplexFields, AnalyticsEvents, Router],
@@ -1025,7 +1072,8 @@ export default {
     "sankey-buttons": SankeyButtons,
     "canned-search-container": CannedSearchContainer,
     "search-form": SearchForm,
-    "name-autocomplete": NameAutocomplete
+    "name-autocomplete": NameAutocomplete,
+    "context-toggle": ContextToggle
   },
   data() {
     return {
@@ -1564,17 +1612,9 @@ export default {
           break;
       }
     },
-    handleDisplayToggleClick(sliderValue){
-
-      let toggleValue = null;
-
-      if(sliderValue === 0){
-        toggleValue = "institutions";
-      }else{
-        toggleValue = "fos";
-      }
-
-      this.displayToggle = toggleValue;
+    handleDisplayToggleClick(toggleValue){
+      this.displayToggle = (Number(toggleValue) === 0)? 'institutions' : 'fos';
+      this.controlTab = toggleValue;
 
       if(this.displayToggle === 'institutions'){
         // Query if not response cache is present
@@ -1609,42 +1649,6 @@ export default {
         //update URL parameters
         this.queryStringParameters = this.parseURLParameters();
       }
-
-      // this.displayToggle = toggleValue;
-      //
-      // if(this.displayToggle === 'institutions'){
-      //   // Query if not response cache is present
-      //   if(this.responseCache.institution.length === 0){
-      //     this.queryInstitutions();
-      //   }
-      //
-      //   // TODO - Move to a centralized location.
-      //   // update the URL
-      //   history.replaceState(
-      //     {},
-      //     "",
-      //     this.shareUrl
-      //   );
-      //
-      //   //update URL parameters
-      //   this.queryStringParameters = this.parseURLParameters();
-      //
-      // }else if(this.displayToggle === 'fos'){
-      //   if(this.responseCache.fieldsOfStudy.length <= 0){
-      //     this.queryFieldsOfStudy(this.locateFieldsOfStudy());
-      //   }
-      //
-      //   // TODO - Move to a centralized location.
-      //   // update the URL
-      //   history.replaceState(
-      //     {},
-      //     "",
-      //     this.shareUrl
-      //   );
-      //
-      //   //update URL parameters
-      //   this.queryStringParameters = this.parseURLParameters();
-      // }
     },
     locateFieldsOfStudy(){
 

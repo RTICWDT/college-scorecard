@@ -95,7 +95,16 @@ html{
       .v-tabs-slider-wrapper{
         transition: none !important;
       }
+
+      .v-tabs-bar{
+        background-color: unset;
+      }
     }
 
+  .compare-drawer-fos-checkbox-label{
+    .v-label{
+      font-size: 30px;
+    }
+  }
 
   }
