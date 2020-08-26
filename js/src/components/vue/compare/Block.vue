@@ -17,7 +17,7 @@
           <p class="subtitle-2 pb-0 mb-0">
             <a
               :href="`${$baseUrl}/school?${school.unit_id}&fos_code=${school.code}&fos_credential=${school['credential.level']}`">
-              {{school.title | formatFieldOfStudyTitle}} - {{school['school.name']}}
+              <strong>{{school.title | formatFieldOfStudyTitle}}</strong> - {{school['school.name']}}
             </a>
           </p>
 
