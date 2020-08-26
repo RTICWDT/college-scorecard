@@ -68,15 +68,17 @@
 
                 <!-- Institution Chips -->
                 <div class="compare-institution-chip-container py-5 mb-10">
-                  <v-chip
-                    class="ma-2"
-                    v-for="institution in responseCache.institution"
-                    :key="institution.schoolId"
-                    close
-                    @click:close="handleChipCloseClick(institution, 'compare-schools')"
-                  >
-                    {{institution.schoolName}}
-                  </v-chip>
+                  <v-chip-group column>
+                    <v-chip
+                      class="pa-4 ma-2"
+                      v-for="institution in responseCache.institution"
+                      :key="institution.schoolId"
+                      close
+                      @click:close="handleChipCloseClick(institution, 'compare-schools')"
+                    >
+                      {{institution.schoolName}}
+                    </v-chip>
+                  </v-chip-group>
                 </div>
 
                 <!--Institution Summary Metrics-->
@@ -131,28 +133,49 @@
               </div><!-- End Institution Top Summary-->
 
               <!-- Field Of Study Container -->
-              <div class="mx-5" v-else-if="showResource === 'fos'">
+              <div v-else-if="showResource === 'fos'">
 
                 <!-- Field of Study Chips -->
-                <div class="compare-fos-chip-container mb-10 py-5">
-                  <v-chip
-                    class="ma-2"
-                    v-for="fieldOfStudy in responseCache.fieldsOfStudy"
-                    :key="`${fieldOfStudy.unit_id}${fieldOfStudy.code}`"
-                    close
-                    @click:close="handleChipCloseClick(fieldOfStudy, 'compare-fos')"
-                  >
-                    <div class="compare-fos-chip pa-2">
-                      <h4>{{fieldOfStudy.title | formatFieldOfStudyTitle}}</h4>
-                      <span>{{fieldOfStudy['credential.title']}}</span><br>
-                      <span>{{fieldOfStudy['school.name']}}</span>
-                    </div>
+                <div class="compare-fos-chip-container mb-10 py-5 mx-md-5">
 
-                  </v-chip>
+                  <!-- Mobile Chip Layout -->
+                  <v-chip-group show-arrows class="d-md-none">
+                    <v-chip
+                      v-for="fieldOfStudy in responseCache.fieldsOfStudy"
+                      :key="`${fieldOfStudy.unit_id}${fieldOfStudy.code}`"
+                      close
+                      @click:close="handleChipCloseClick(fieldOfStudy, 'compare-fos')"
+                    >
+                      <div class="compare-fos-chip pa-2">
+                        <h4>{{fieldOfStudy.title | formatFieldOfStudyTitle}}</h4>
+                        <span>{{fieldOfStudy['credential.title']}}</span><br>
+                        <span>{{fieldOfStudy['school.name']}}</span>
+                      </div>
+
+                    </v-chip>
+                  </v-chip-group>
+
+                  <!-- MD and larger chip layout -->
+                  <v-chip-group class="d-none d-md-block" column>
+                    <v-chip
+                      class="ma-2"
+                      v-for="fieldOfStudy in responseCache.fieldsOfStudy"
+                      :key="`${fieldOfStudy.unit_id}${fieldOfStudy.code}`"
+                      close
+                      @click:close="handleChipCloseClick(fieldOfStudy, 'compare-fos')"
+                    >
+                      <div class="compare-fos-chip pa-2">
+                        <h4>{{fieldOfStudy.title | formatFieldOfStudyTitle}}</h4>
+                        <span>{{fieldOfStudy['credential.title']}}</span><br>
+                        <span>{{fieldOfStudy['school.name']}}</span>
+                      </div>
+
+                    </v-chip>
+                  </v-chip-group>
                 </div>
 
                 <!-- Field Of Study Data Container -->
-                <div>
+                <div class="mx-md-5 mx-2">
                   <div id="compare-salary-after-completing" class="compare-fos-section">
                     <h2>Salary After Completing</h2>
                     <v-select
@@ -899,6 +922,11 @@
 
   .compare-institution-chip-container{
     border-bottom: 1px $light-gray solid;
+
+    .v-chip {
+      height: auto;
+      white-space: normal;
+    }
   }
 
   .compare-fos-chip-container{
@@ -907,7 +935,12 @@
     .v-chip {
       height: auto;
       white-space: normal;
-      width: 250px;
+      width:200px;
+
+      @media (min-width: 960px){
+        width: 250px;
+      }
+
     }
 
     .compare-fos-chip{
