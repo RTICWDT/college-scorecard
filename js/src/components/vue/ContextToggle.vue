@@ -16,7 +16,6 @@
       :style="tabStyle"
     >
       <slot name="tab-school">
-
         <h3 class="compare-tab-title">
           Schools
         </h3>
@@ -27,7 +26,6 @@
       :style="tabStyle"
     >
       <slot name="tab-fos">
-
         <h3 class="compare-tab-title">
           Fields of Study
         </h3>

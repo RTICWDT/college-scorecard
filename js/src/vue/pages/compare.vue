@@ -48,7 +48,19 @@
                   @context-switch-click="handleDisplayToggleClick"
                   @context-tab-change="handleDisplayToggleClick"
                   :fill-space="true"
-                />
+                >
+                  <template v-slot:tab-school>
+                    <h3 class="compare-tab-title">
+                      Schools ({{countSchools}})
+                    </h3>
+                  </template>
+                  <template v-slot:tab-fos>
+                    <h3 class="compare-tab-title">
+                      Fields of Study ({{countFieldsOfStudy}})
+                    </h3>
+                  </template>
+
+                </context-toggle>
               </div>
 
               <!--Loader-->
