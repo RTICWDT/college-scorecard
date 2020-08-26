@@ -13,7 +13,7 @@
          `fos-${school.unit_id}-${school.code}-${school['credential.level']}`
         );"
       >
-        <div class='pb-1 px-sm-5 px-1'>
+        <div class='pb-5 pb-md-1 px-md-5 px-1'>
           <p class="subtitle-2 pb-0 mb-0">
             <a
               :href="`${$baseUrl}/school?${school.unit_id}&fos_code=${school.code}&fos_credential=${school['credential.level']}`">
