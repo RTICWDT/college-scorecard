@@ -303,7 +303,7 @@
                           label="Include debt borrowed at any prior institutions"
                         >
                           <template v-slot:label>
-                          <span>
+                          <span class="profile-fos-include-prior-debt">
                             Include debt borrowed at any prior institutions
                             <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
                           </span>
@@ -363,7 +363,7 @@
                           label="Include debt borrowed at any prior institutions"
                         >
                           <template v-slot:label>
-                          <span>
+                          <span class="profile-fos-include-prior-debt">
                             Include debt borrowed at any prior institutions
                             <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
                           </span>
