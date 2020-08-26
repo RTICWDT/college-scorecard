@@ -135,7 +135,7 @@
         <compare-drawer
           :schools="compareSchools"
           :fields-of-study="compareFieldsOfStudy"
-          @toggle-compare-school="handleToggleCompareSchool"
+          @toggle-compare-school="handleToggleCompareItem"
           v-on:close-modal="closeModal()"
         ></compare-drawer>
       </v-bottom-sheet>
