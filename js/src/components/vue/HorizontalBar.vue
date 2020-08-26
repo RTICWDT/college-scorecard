@@ -113,6 +113,7 @@ export default {
               }
             },
             anchor: 'end',
+            clamp: true,
             formatter: function(value, context) {
               if(context.datasetIndex==0)
               {
