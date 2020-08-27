@@ -20,7 +20,7 @@
         text
         aria-label="Toggle Field of Study Details"
       >
-        <span class="search-fos-chip-title">{{fieldOfStudy.field}}</span>
+        <span class="search-fos-chip-title text-left pl-2">{{fieldOfStudy.field}}</span>
       </v-btn>
     </div>
 
