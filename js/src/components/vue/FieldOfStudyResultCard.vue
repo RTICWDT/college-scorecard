@@ -1,8 +1,7 @@
 <style lang="scss">
 
   .all-fields-container{
-    position: absolute;
-    bottom: 0;
+    position: relative;
   }
 
   .search-fos-result-credential-item-container{
@@ -24,6 +23,12 @@
     padding-top: 8px !important;
   }
 
+  #result-fos-card-credential-section{
+    /*:last-child{*/
+    /*  margin-bottom: 0 !important;*/
+    /*  background-color: black;*/
+    /*}*/
+  }
 
 </style>
 
@@ -63,6 +68,7 @@
 
         <!-- Field of Study Info-->
         <v-col
+          id="result-fos-card-credential-section"
           class="py-md-0 pl-md-6"
           cols="12"
           md="9"
@@ -117,12 +123,9 @@
             </div>
           </div>
 
-          <br />
-
           <div class="all-fields-container">
-            <p class="text-center">
+            <p class="text-right mb-0">
               <a :href='fieldsLink'
-                 class="text-center"
               >View all Fields of study at {{schoolName}}</a>
             </p>
           </div>
