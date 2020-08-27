@@ -123,9 +123,11 @@ export const fields = {
   FOS_EARNINGS_FED: 'earnings.test.median_fed',
   FOS_EARNINGS_PELL: 'earnings.test.median_pell',
 
-  FOS_DEBT_MEDIAN: 'debt.test.federal.median_total_at',
+  // FOS_DEBT_MEDIAN: 'debt.test.federal.median_total_at',
+  FOS_DEBT_MEDIAN: 'debt.median_debt',
   FOS_DEBT_MEDIAN_PRIOR: 'debt.test.federal.median_total_prior',
-  FOS_DEBT_MONTHLY: 'debt.test.federal.monthly_payment_at',
+  // FOS_DEBT_MONTHLY: 'debt.test.federal.monthly_payment_at',
+  FOS_DEBT_MONTHLY: 'debt.monthly_debt_payment',
   FOS_DEBT_MONTHLY_PRIOR: 'debt.test.federal.monthly_payment_prior',
 
   FOS_PP_DEBT_MEDIAN: 'debt.test.parent.median_total_at',

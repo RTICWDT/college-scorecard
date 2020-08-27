@@ -413,7 +413,8 @@
                             <div v-if="fosSalarySelect === 'aid'">
 
                               <div v-if="_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED)">
-                                <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED) | numeral('$0,0') }}</h5>
+                                <h5 class="fos-small-data-bold navy-text">
+                                  {{_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED) | numeral('$0,0') }}</h5>
                               </div>
 
                               <div v-else class="mini-data-na text-center mr-sm-11">
@@ -492,7 +493,7 @@
 
                           <!--Median Total-->
                           <v-col cols="12" sm="12" md="4">
-                            <h4>
+                            <h4 class="mb-2">
                               Median Total Debt <br class="d-none d-md-block">After Graduation&nbsp
                               <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
                             </h4>
@@ -502,7 +503,7 @@
                                 <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_DEBT_MEDIAN) | numeral('$0,0') }}</h5>
                               </div>
 
-                              <div v-else class="mini-data-na text-center">
+                              <div v-else class="mini-data-na text-center mr-sm-11">
                                 Data Not Available
                               </div>
                             </div>
@@ -520,7 +521,7 @@
 
                           <!--Monthly Loan-->
                           <v-col cols="12" sm="12" md="3" class="pl-sm-1">
-                            <h4>
+                            <h4 class="mb-2">
                               Monthly Loan Payment&nbsp
                               <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
                             </h4>
@@ -924,13 +925,13 @@
                             <div
                               class="display-2 navy-text font-weight-bold"
                               v-if="debtRange.min"
-                            >{{ debtRange.min.payment | numeral('$0,0') }}/mo</div>
+                            >{{ _.get(debtRange,'min.payment') | numeral('$0,0') }}/mo</div>
                           </div>
                           <div v-else-if="debtRange && debtRange.min">
                             <div
                               class="display-2 navy-text font-weight-bold"
                               v-if="debtRange.min"
-                            >{{ debtRange.min.debt.payment | numeral('$0,0') }}-{{ debtRange.max.payment | numeral('0,0') }}/mo</div>
+                            >{{ _.get(debtRange,'min.debt.payment') | numeral('$0,0') }}-{{ debtRange.max.payment | numeral('0,0') }}/mo</div>
                           </div>
                           <div v-else class="data-na">Data Not Available</div>
 
