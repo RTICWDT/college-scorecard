@@ -26,7 +26,7 @@
       :style="tabStyle"
     >
       <slot name="tab-fos">
-        <h3 class="compare-tab-title">
+        <h3 class="compare-tab-title pb-1">
           Fields of Study
         </h3>
       </slot>
