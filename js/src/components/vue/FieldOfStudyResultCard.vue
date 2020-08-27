@@ -23,6 +23,8 @@
   .search-fos-result-title{
     padding-top: 8px !important;
   }
+
+
 </style>
 
 <template>
@@ -94,6 +96,7 @@
               <v-btn class="search-fos-result-compare-button d-none d-md-block"
                 icon
                 @click="$emit('toggle-compare-item', fieldOfStudyCompareFormat(fieldOfStudy), 'compare-fos')"
+                :color="selectedFieldOfStudyClass(fieldOfStudy) === 'result-card-selected'? 'amber' : 'gray'"
               >
                 <v-icon>fa fa-plus-circle</v-icon>
                 <span class='sr-only'>Compare</span>
@@ -104,6 +107,7 @@
                outlined
                block
                @click="$emit('toggle-compare-item', fieldOfStudyCompareFormat(fieldOfStudy), 'compare-fos')"
+               :color="selectedFieldOfStudyClass(fieldOfStudy) === 'result-card-selected'? 'amber' : 'gray'"
               >
                 <span class="mr-4">Compare</span><v-icon>fa fa-plus-circle</v-icon>
               </v-btn>
