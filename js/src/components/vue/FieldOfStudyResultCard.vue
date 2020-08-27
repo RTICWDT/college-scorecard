@@ -21,6 +21,11 @@
 
   .search-fos-result-title{
     padding-top: 8px !important;
+    text-transform: uppercase;
+
+    a:hover{
+      text-decoration: underline;
+    }
   }
 
   #result-fos-card-credential-section{
