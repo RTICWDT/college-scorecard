@@ -213,7 +213,7 @@
                   <p class="white--text">
                     <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
                     Classification of Instructional Programs (CIP) and may not match the program titles at a
-                    given school. <a href="">Learn more about CIP.</a>
+                    given school. <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">Learn more about CIP.</a>
                   </p>
                 </div>
 
