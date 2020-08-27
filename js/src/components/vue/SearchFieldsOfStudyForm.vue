@@ -216,7 +216,7 @@
           icon
           aria-label="Clear Salary After Complete Input"
         >
-          <v-icon>fas fa-times-circle</v-icon>
+          <v-icon>mdi mdi-close</v-icon>
         </v-btn>
       </label>
 
@@ -276,7 +276,7 @@
           icon
           aria-label="Clear Median Total Debt Input"
         >
-          <v-icon>fas fa-times-circle</v-icon>
+          <v-icon>mdi mdi-close</v-icon>
         </v-btn>
       </label>
 
