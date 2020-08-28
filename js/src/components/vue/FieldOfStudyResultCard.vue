@@ -171,6 +171,8 @@
     computed:{
       categorizedFieldsOfStudy(){
         // return this.categorizeFieldsOfStudy(this.school['latest.programs.cip_4_digit']);
+        // console.log(this.school['latest.programs.cip_4_digit']);
+        // console.log(this.categorizeFieldsOfStudy(this.school['latest.programs.cip_4_digit']));
 
         // Sort Item Arrays alpha ASC
         let categorizedFieldsOfStudy = this.categorizeFieldsOfStudy(this.school['latest.programs.cip_4_digit']);
