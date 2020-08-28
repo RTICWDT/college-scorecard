@@ -627,6 +627,8 @@ export default {
         page: 1,
         sort: this.defaultSort
       };
+
+      this.urlParsedParams = {};
       
       EventBus.$emit('search-form-reset');
     },
@@ -697,8 +699,8 @@ export default {
         fields.FIELD_OF_STUDY
       ].join(',');
 
-      console.log("Searching FOS");
-      console.log(params);
+      // console.log("Searching FOS");
+      // console.log(params);
 
       // Cache params to power other content
       this.utility.previousParams = params;

@@ -586,6 +586,8 @@
       },
       resetFormDefault(){
         this.input = _.cloneDeep(this.utility.formDefault);
+        // console.log("Should Reset: ");
+        // console.log(this.input);
         this.utility.cip4Cache = [];
       }
     }
