@@ -20,8 +20,25 @@
   }
 
   .search-fos-result-title{
-    padding-top: 8px !important;
-    text-transform: uppercase;
+    padding-top: 0 !important;
+    /*text-transform: uppercase;*/
+    text-decoration: underline;
+    line-height: 1.6rem;
+
+    span{
+      font-size: 14px;
+    }
+
+    @media (min-width: 960px){
+      padding-top: 8px !important;
+      text-decoration: none;
+      font-size: 16px;
+      line-height: unset;
+
+      span{
+        font-size: 16px;
+      }
+    }
 
     a:hover{
       text-decoration: underline;
@@ -33,6 +50,10 @@
     /*  margin-bottom: 0 !important;*/
     /*  background-color: black;*/
     /*}*/
+  }
+
+  .fos-result-compare-button-mobile{
+    margin: auto;
   }
 
 </style>
@@ -98,7 +119,7 @@
                   target="_blank"
                 >
                 <span>
-                  {{fieldOfStudy.title | formatFieldOfStudyTitle}}
+                  {{fieldOfStudy.title | formatFieldOfStudyTitle}}&nbsp;&raquo;
                 </span>
                 </a>
               </div>
@@ -114,14 +135,16 @@
               </v-btn>
 
               <!-- Compare on small and below-->
-              <v-btn class="d-sm-none mt-4"
-               outlined
-               block
-               @click="$emit('toggle-compare-item', fieldOfStudyCompareFormat(fieldOfStudy), 'compare-fos')"
-               :color="selectedFieldOfStudyClass(fieldOfStudy) === 'result-card-selected'? 'amber' : 'gray'"
-              >
-                <span class="mr-4">Compare</span><v-icon>fa fa-plus-circle</v-icon>
-              </v-btn>
+              <div class="fos-result-compare-button-mobile">
+                <v-btn class="d-block d-sm-none mt-4 mx-auto"
+                 outlined
+                 @click="$emit('toggle-compare-item', fieldOfStudyCompareFormat(fieldOfStudy), 'compare-fos')"
+                 :color="selectedFieldOfStudyClass(fieldOfStudy) === 'result-card-selected'? 'amber' : 'gray'"
+                >
+                  <span class="mr-4">Compare</span><v-icon>fa fa-plus-circle</v-icon>
+                </v-btn>
+              </div>
+
 
               <div style="clear: both;"></div>
 

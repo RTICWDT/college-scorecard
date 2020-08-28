@@ -9,15 +9,23 @@
 
   .searchFab{
     z-index: 500 !important;
+    bottom: 64px;
   }
 
   #search-fos-cip-warning{
     width: 100%;
 
     p{
-      font-size: 14px;
+      font-size: 13px;
       margin-bottom: 0;
     }
+
+    @media (min-width: 960px){
+      p{
+        font-size: 14px;
+      }
+    }
+
 
     a{
       color: white !important;
@@ -294,7 +302,6 @@
           <v-btn
             fab
             fixed
-            bottom
             right
             color="secondary"
             rounded
