@@ -230,6 +230,9 @@
                   v-if="showFieldOfStudyWarning"
                 >
                   <p class="mb-0">
+                    <span if="fieldOfStudyRangeFiltersHidingCount > 0">
+                      {{fieldOfStudyRangeFiltersHidingCount}}
+                    </span>
                     (!) The filter you've selected contains limited data. Displayed search results only represent schools
                     for which there is sufficient data.  To see all schools within this field of study, reset search filters.
                   </p>
@@ -425,7 +428,8 @@ export default {
       ],
       shareUrl: null,
       displayToggle: 'institutions',
-      controlTab: 1
+      controlTab: 1,
+      fieldOfStudyTotalCountWithoutRangeFilters: 0
     };
   },
   created() {
@@ -486,6 +490,14 @@ export default {
         return true;
       }
       // !isLoading && results.schools.length > 0
+    },
+    fieldOfStudyRangeFiltersHidingCount(){
+      // Total count minus showing count.
+      if(this.fieldOfStudyTotalCountWithoutRangeFilters > 0 && this.results.meta.total > 0){
+        return this.fieldOfStudyTotalCountWithoutRangeFilters - this.results.meta.total;
+      }else{
+        return 0;
+      }
     }
   },
   methods: {
@@ -705,15 +717,26 @@ export default {
         fields.FIELD_OF_STUDY
       ].join(',');
 
-      // console.log("Searching FOS");
-      // console.log(params);
+      console.log("Searching FOS");
+      console.log(params);
 
-      console.log("New Query Method");
-      let query = this.queryAPI(params);
-      query.then((response)=>{
-        console.log("test")
-        console.log(response);
-      });
+      // Do we need the second query?
+      if(Object.keys(params).includes('fos_salary') || Object.keys(params).includes('fos_debt')){
+        console.log("Will Second Query");
+
+        // Strip arguments from params to get actual count
+        let filteredParams = _.omit(params,['fos_salary','fos_debt']);
+
+        let query = this.queryAPI(filteredParams);
+
+        query.then((response)=>{
+          // Store count for alteration
+          this.fieldOfStudyTotalCountWithoutRangeFilters = response.data.metadata.total;
+        }).catch((error) => {
+          // TODO - What does the error look like?
+          this.fieldOfStudyTotalCountWithoutRangeFilters = 0;
+        });
+      }
 
       // Cache params to power other content
       this.utility.previousParams = params;
