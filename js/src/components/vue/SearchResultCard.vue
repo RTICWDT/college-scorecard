@@ -17,6 +17,7 @@
     solid
     #eeba28 !important;
 }
+
 .moreDetails{
   font-size: 0.9rem;
   text-decoration: none;

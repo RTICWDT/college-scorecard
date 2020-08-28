@@ -9,15 +9,23 @@
 
   .searchFab{
     z-index: 500 !important;
+    bottom: 64px;
   }
 
   #search-fos-cip-warning{
     width: 100%;
 
     p{
-      font-size: 14px;
+      font-size: 13px;
       margin-bottom: 0;
     }
+
+    @media (min-width: 960px){
+      p{
+        font-size: 14px;
+      }
+    }
+
 
     a{
       color: white !important;
@@ -213,7 +221,7 @@
                   <p class="white--text">
                     <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
                     Classification of Instructional Programs (CIP) and may not match the program titles at a
-                    given school. <a href="">Learn more about CIP.</a>
+                    given school. <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">Learn more about CIP.</a>
                   </p>
                 </div>
 
@@ -294,7 +302,6 @@
           <v-btn
             fab
             fixed
-            bottom
             right
             color="secondary"
             rounded
@@ -620,6 +627,8 @@ export default {
         page: 1,
         sort: this.defaultSort
       };
+
+      this.urlParsedParams = {};
       
       EventBus.$emit('search-form-reset');
     },
@@ -690,8 +699,8 @@ export default {
         fields.FIELD_OF_STUDY
       ].join(',');
 
-      console.log("Searching FOS");
-      console.log(params);
+      // console.log("Searching FOS");
+      // console.log(params);
 
       // Cache params to power other content
       this.utility.previousParams = params;
