@@ -561,6 +561,12 @@ export default {
         }
       });
     },
+    queryAPI(params={}){
+      // Generic API Query Method that returns API results
+      let query = this.prepareParams(params);
+
+      return apiGet(window.api.url, window.api.key, "/schools", query);
+    },
     showError(error) {
       // TODO: Loop through multiple error messages if needed.
       console.error("error:", error);
@@ -701,6 +707,13 @@ export default {
 
       // console.log("Searching FOS");
       // console.log(params);
+
+      console.log("New Query Method");
+      let query = this.queryAPI(params);
+      query.then((response)=>{
+        console.log("test")
+        console.log(response);
+      });
 
       // Cache params to power other content
       this.utility.previousParams = params;
