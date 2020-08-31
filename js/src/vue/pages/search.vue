@@ -203,7 +203,7 @@
               <div class="results-main-alert">
 
                 <!-- Loading -->
-                <div class="show-loading" v-show="isLoading">
+                <div class="show-loading mt-2" v-show="isLoading">
                   <v-card class="py-4 px-4 pageBar">
                     <h1 class="title">
                       Loading
