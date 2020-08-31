@@ -36,9 +36,24 @@
   }
 
   #search-fos-cip-filter-warning{
-    /*border: 4px*/
-    /*solid*/
-    /*#eeba28 !important;*/
+    p{
+      font-size: 13px;
+    }
+
+    .v-alert__border{
+      border-width: 6px;
+    }
+
+    .v-icon{
+      font-size: 38px;
+    }
+
+    @media (min-width: 960px){
+      p{
+        font-size: 16px;
+      }
+    }
+
   }
 </style>
 
@@ -248,21 +263,29 @@
 <!--                  </p>-->
 <!--                </v-card>-->
 
+                <!-- Field of Study Filter Warning -->
                 <v-alert
                   v-if="showFieldOfStudyWarning"
+                  id="search-fos-cip-filter-warning"
                   type="warning"
                   class="mt-4 mb-2 pa-4"
                   colored-border
                   border="left"
                   dense
                 >
+                  <template v-slot:prepend>
+                    <div>
+                      <v-icon class="warning--text">mdi mdi-exclamation</v-icon>
+                    </div>
+                  </template>
+
                   <h4 if="fieldOfStudyRangeFiltersHidingCount > 0">
                     {{fieldOfStudyRangeFiltersHidingCount}} institutions hidden<br/>
                   </h4>
 
-                  The filter you've selected contains <strong>limited data</strong>. Displayed search results only
+                  <p class="mb-0">The filter you've selected contains <strong>limited data</strong>. Displayed search results only
                   represent schools for which there is sufficient data.  To see all schools within this field of study,
-                  clear search filters.
+                  clear search filters.</p>
                 </v-alert>
 
                 <!-- Institution Results -->
