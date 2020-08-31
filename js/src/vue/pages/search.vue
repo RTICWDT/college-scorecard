@@ -250,22 +250,7 @@
                 </div>
 
                 <!-- Field of Study Filter Warning -->
-<!--                <v-card id="search-fos-cip-filter-warning"-->
-<!--                  class="mt-4 mb-2 pa-4"-->
-<!--                  v-if="showFieldOfStudyWarning"-->
-<!--                >-->
-<!--                  <p class="mb-0">-->
-<!--                    <span if="fieldOfStudyRangeFiltersHidingCount > 0">-->
-<!--                      {{fieldOfStudyRangeFiltersHidingCount}}-->
-<!--                    </span>-->
-<!--                    (!) The filter you've selected contains limited data. Displayed search results only represent schools-->
-<!--                    for which there is sufficient data.  To see all schools within this field of study, reset search filters.-->
-<!--                  </p>-->
-<!--                </v-card>-->
-
-                <!-- Field of Study Filter Warning -->
-                <v-alert
-                  v-if="showFieldOfStudyWarning"
+                <v-alert v-if="showFieldOfStudyWarning"
                   id="search-fos-cip-filter-warning"
                   type="warning"
                   class="mt-4 mb-2 pa-4"
