@@ -26,7 +26,6 @@
       }
     }
 
-
     a{
       color: white !important;
     }
@@ -36,6 +35,26 @@
     }
   }
 
+  #search-fos-cip-filter-warning{
+    p{
+      font-size: 13px;
+    }
+
+    .v-alert__border{
+      border-width: 6px;
+    }
+
+    .v-icon{
+      font-size: 38px;
+    }
+
+    @media (min-width: 960px){
+      p{
+        font-size: 16px;
+      }
+    }
+
+  }
 </style>
 
 <template>
@@ -91,12 +110,11 @@
 
             <div class="search-result-container">
 
+              <!-- Search Result Info and controls -->
               <v-card  class="mt-2 mb-4 py-1 px-4 elevaton-0 pageBar" v-if="!isLoading">
-
                 <v-row class="pa-0">
 
                   <v-col cols="12" sm="7" class="py-2 px-4">
-
                     <div id="search-result-info-count" class>
                       <p class="title mb-0">{{results.meta.total | separator }} Results
                         <v-btn
@@ -187,20 +205,24 @@
                 </v-row>
               </v-card>
 
-            <div id="search-can-query-container" v-if="!isLoading && results.schools.length === 0">
-            <!-- <div id="search-can-query-container" v-if="!isLoading"> -->
-              <v-row>
-                <v-col cols="12">
-                  <v-card class='pa-5'>
-                    <h3>Show Me Options</h3>
-                    <p>Select one or more options below to create a list of schools that fit your needs.</p>
-                    <canned-search-container @canned-search-submit="handleCannedSearchClick"></canned-search-container>
-                  </v-card>
-                </v-col>
-             </v-row>
-            </div>
+              <!-- Canned Search Container -->
+              <div id="search-can-query-container" v-if="!isLoading && results.schools.length === 0">
+                <v-row>
+                  <v-col cols="12">
+                    <v-card class='pa-5'>
+                      <h3>Show Me Options</h3>
+                      <p>Select one or more options below to create a list of schools that fit your needs.</p>
+                      <canned-search-container @canned-search-submit="handleCannedSearchClick"></canned-search-container>
+                    </v-card>
+                  </v-col>
+                </v-row>
+              </div>
+
+              <!-- Main Search Results -->
               <div class="results-main-alert">
-                <div class="show-loading" v-show="isLoading">
+
+                <!-- Loading -->
+                <div class="show-loading mt-2" v-show="isLoading">
                   <v-card class="py-4 px-4 pageBar">
                     <h1 class="title">
                       Loading
@@ -209,14 +231,16 @@
                   </v-card>
                 </div>
 
+                <!-- Search Query Error-->
                 <div class="show-error" v-show="error.message">
                   <h1>Something went wrong:</h1>
                   <p class="error-message">{{error.message}}</p>
                 </div>
 
-                <div id="search-fos-cip-warning"
-                     class="my-2"
-                     v-if="displayToggle === 'fos' && !isLoading"
+                <!-- Field Of Study CIP 4 Information -->
+                <div v-if="displayToggle === 'fos' && !isLoading"
+                  id="search-fos-cip-warning"
+                   class="my-2"
                 >
                   <p class="white--text">
                     <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
@@ -225,17 +249,33 @@
                   </p>
                 </div>
 
-                <v-card id="search-fos-cip-filter-warning"
-                  class="result-card-selected mt-4 mb-2 pa-4"
-                  v-if="showFieldOfStudyWarning"
+                <!-- Field of Study Filter Warning -->
+                <v-alert v-if="showFieldOfStudyWarning"
+                  id="search-fos-cip-filter-warning"
+                  type="warning"
+                  class="mt-4 mb-2 pa-4"
+                  colored-border
+                  border="left"
+                  dense
                 >
-                  <p class="mb-0">
-                    (!) The filter you've selected contains limited data. Displayed search results only represent schools
-                    for which there is sufficient data.  To see all schools within this field of study, reset search filters.
-                  </p>
-                </v-card>
+                  <template v-slot:prepend>
+                    <div>
+                      <v-icon class="warning--text">mdi mdi-exclamation</v-icon>
+                    </div>
+                  </template>
 
+                  <h4 if="fieldOfStudyRangeFiltersHidingCount > 0">
+                    {{fieldOfStudyRangeFiltersHidingCount}} institutions hidden<br/>
+                  </h4>
+
+                  <p class="mb-0">The filter you've selected contains <strong>limited data</strong>. Displayed search results only
+                  represent schools for which there is sufficient data.  To see all schools within this field of study,
+                  clear search filters.</p>
+                </v-alert>
+
+                <!-- Institution Results -->
                 <div class="search-result-cards-container" v-if="!isLoading">
+                  <!-- Institution Results -->
                   <v-row v-if="displayToggle === 'institutions'">
                     <v-col
                       v-for="school in results.schools"
@@ -254,8 +294,8 @@
                     </v-col>
                   </v-row>
 
+                  <!-- Fields of Study Results -->
                   <v-row v-else>
-
                     <v-col
                       v-for="school in results.schools"
                       :key="school.id"
@@ -275,11 +315,13 @@
                   </v-row>
                 </div>
 
+                <!-- Field of Study Results -->
                 <div class="search-result-cards-container" v-else>
-                  <!-- Fake Cards -->
+
                 </div>
               </div>
-              <!--results-main -->
+
+              <!-- Bottom Pagination -->
               <v-card class="mt-4 mb-2 py-1 px-4 pageBar elevation-0"  v-if="!isLoading && results.schools.length > 0">
                 <v-row>
                   <v-col cols="12" class='pa-1'>
@@ -296,9 +338,11 @@
                   </v-col>
                 </v-row>
               </v-card>
+
             </div>
           </div>
 
+          <!-- Floating Mobile Search Button -->
           <v-btn
             fab
             fixed
@@ -311,6 +355,7 @@
           >
             <v-icon>fas fa-search</v-icon>
           </v-btn>
+
         </v-container>
       </v-content>
       
@@ -425,7 +470,8 @@ export default {
       ],
       shareUrl: null,
       displayToggle: 'institutions',
-      controlTab: 1
+      controlTab: 1,
+      fieldOfStudyTotalCountWithoutRangeFilters: 0
     };
   },
   created() {
@@ -485,7 +531,14 @@ export default {
       if(typeof this.utility.previousParams.fos_salary != 'undefined' || typeof this.utility.previousParams.fos_debt != 'undefined'){
         return true;
       }
-      // !isLoading && results.schools.length > 0
+    },
+    fieldOfStudyRangeFiltersHidingCount(){
+      // Total count minus showing count.
+      if(this.fieldOfStudyTotalCountWithoutRangeFilters > 0 && this.results.meta.total > 0){
+        return this.fieldOfStudyTotalCountWithoutRangeFilters - this.results.meta.total;
+      }else{
+        return 0;
+      }
     }
   },
   methods: {
@@ -560,6 +613,12 @@ export default {
           this.showError("API 500 Error");
         }
       });
+    },
+    queryAPI(params={}){
+      // Generic API Query Method that returns API results
+      let query = this.prepareParams(params);
+
+      return apiGet(window.api.url, window.api.key, "/schools", query);
     },
     showError(error) {
       // TODO: Loop through multiple error messages if needed.
@@ -699,8 +758,26 @@ export default {
         fields.FIELD_OF_STUDY
       ].join(',');
 
-      // console.log("Searching FOS");
-      // console.log(params);
+      console.log("Searching FOS");
+      console.log(params);
+
+      // Do we need the second query?
+      if(Object.keys(params).includes('fos_salary') || Object.keys(params).includes('fos_debt')){
+        console.log("Will Second Query");
+
+        // Strip arguments from params to get actual count
+        let filteredParams = _.omit(params,['fos_salary','fos_debt']);
+
+        let query = this.queryAPI(filteredParams);
+
+        query.then((response)=>{
+          // Store count for alteration
+          this.fieldOfStudyTotalCountWithoutRangeFilters = response.data.metadata.total;
+        }).catch((error) => {
+          // TODO - What does the error look like?
+          this.fieldOfStudyTotalCountWithoutRangeFilters = 0;
+        });
+      }
 
       // Cache params to power other content
       this.utility.previousParams = params;
