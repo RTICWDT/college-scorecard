@@ -59,20 +59,20 @@
 
       </div>
 
-      <div class="text-right">
+      <!-- Clear All button -->
+<!--      <div class="text-right">-->
+<!--        <v-btn-->
+<!--          class="mt-2"-->
+<!--          text-->
+<!--          color="secondary"-->
+<!--          v-show="input.cip4.length > 0"-->
+<!--          @click="handleClearAllChips"-->
+<!--          aria-label="Clear Selected Fields of Study"-->
+<!--        >-->
+<!--          Clear All-->
+<!--        </v-btn>-->
+<!--      </div>-->
 
-        <v-btn
-          class="mt-2"
-          text
-          color="secondary"
-          v-show="input.cip4.length > 0"
-          @click="handleClearAllChips"
-          aria-label="Clear Selected Fields of Study"
-        >
-          Clear All
-        </v-btn>
-
-      </div>
     </div>
 
     <!-- Credential Type -->
