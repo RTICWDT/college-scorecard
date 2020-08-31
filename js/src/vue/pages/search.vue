@@ -91,12 +91,11 @@
 
             <div class="search-result-container">
 
+              <!-- Search Result Info and controls -->
               <v-card  class="mt-2 mb-4 py-1 px-4 elevaton-0 pageBar" v-if="!isLoading">
-
                 <v-row class="pa-0">
 
                   <v-col cols="12" sm="7" class="py-2 px-4">
-
                     <div id="search-result-info-count" class>
                       <p class="title mb-0">{{results.meta.total | separator }} Results
                         <v-btn
@@ -187,19 +186,23 @@
                 </v-row>
               </v-card>
 
-            <div id="search-can-query-container" v-if="!isLoading && results.schools.length === 0">
-            <!-- <div id="search-can-query-container" v-if="!isLoading"> -->
-              <v-row>
-                <v-col cols="12">
-                  <v-card class='pa-5'>
-                    <h3>Show Me Options</h3>
-                    <p>Select one or more options below to create a list of schools that fit your needs.</p>
-                    <canned-search-container @canned-search-submit="handleCannedSearchClick"></canned-search-container>
-                  </v-card>
-                </v-col>
-             </v-row>
-            </div>
+              <!-- Canned Search Container -->
+              <div id="search-can-query-container" v-if="!isLoading && results.schools.length === 0">
+                <v-row>
+                  <v-col cols="12">
+                    <v-card class='pa-5'>
+                      <h3>Show Me Options</h3>
+                      <p>Select one or more options below to create a list of schools that fit your needs.</p>
+                      <canned-search-container @canned-search-submit="handleCannedSearchClick"></canned-search-container>
+                    </v-card>
+                  </v-col>
+                </v-row>
+              </div>
+
+              <!-- Main Search Results -->
               <div class="results-main-alert">
+
+                <!-- Loading -->
                 <div class="show-loading" v-show="isLoading">
                   <v-card class="py-4 px-4 pageBar">
                     <h1 class="title">
@@ -209,14 +212,16 @@
                   </v-card>
                 </div>
 
+                <!-- Search Query Error-->
                 <div class="show-error" v-show="error.message">
                   <h1>Something went wrong:</h1>
                   <p class="error-message">{{error.message}}</p>
                 </div>
 
-                <div id="search-fos-cip-warning"
-                     class="my-2"
-                     v-if="displayToggle === 'fos' && !isLoading"
+                <!-- Field Of Study CIP 4 Information -->
+                <div v-if="displayToggle === 'fos' && !isLoading"
+                  id="search-fos-cip-warning"
+                   class="my-2"
                 >
                   <p class="white--text">
                     <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
@@ -225,6 +230,7 @@
                   </p>
                 </div>
 
+                <!-- Field of Study Filter Warning -->
                 <v-card id="search-fos-cip-filter-warning"
                   class="result-card-selected mt-4 mb-2 pa-4"
                   v-if="showFieldOfStudyWarning"
@@ -238,7 +244,9 @@
                   </p>
                 </v-card>
 
+                <!-- Institution Results -->
                 <div class="search-result-cards-container" v-if="!isLoading">
+                  <!-- Institution Results -->
                   <v-row v-if="displayToggle === 'institutions'">
                     <v-col
                       v-for="school in results.schools"
@@ -257,8 +265,8 @@
                     </v-col>
                   </v-row>
 
+                  <!-- Fields of Study Results -->
                   <v-row v-else>
-
                     <v-col
                       v-for="school in results.schools"
                       :key="school.id"
@@ -278,11 +286,13 @@
                   </v-row>
                 </div>
 
+                <!-- Field of Study Results -->
                 <div class="search-result-cards-container" v-else>
-                  <!-- Fake Cards -->
+
                 </div>
               </div>
-              <!--results-main -->
+
+              <!-- Bottom Pagination -->
               <v-card class="mt-4 mb-2 py-1 px-4 pageBar elevation-0"  v-if="!isLoading && results.schools.length > 0">
                 <v-row>
                   <v-col cols="12" class='pa-1'>
@@ -299,9 +309,11 @@
                   </v-col>
                 </v-row>
               </v-card>
+
             </div>
           </div>
 
+          <!-- Floating Mobile Search Button -->
           <v-btn
             fab
             fixed
@@ -314,6 +326,7 @@
           >
             <v-icon>fas fa-search</v-icon>
           </v-btn>
+
         </v-container>
       </v-content>
       
@@ -489,7 +502,6 @@ export default {
       if(typeof this.utility.previousParams.fos_salary != 'undefined' || typeof this.utility.previousParams.fos_debt != 'undefined'){
         return true;
       }
-      // !isLoading && results.schools.length > 0
     },
     fieldOfStudyRangeFiltersHidingCount(){
       // Total count minus showing count.
