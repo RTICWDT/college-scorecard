@@ -211,7 +211,7 @@
                         </div>
 
                         <h2>
-                          Fields Of Study Offered:
+                          Fields of Study Offered:
                           <tooltip definition="graduation-rate" :version="completionRateFieldDefinition" />
                         </h2>
                       </div>
@@ -324,7 +324,7 @@
                   <v-expansion-panel-header
                     id="fields-of-study"
                     aria-controls="fos-content"
-                    @click="trackAccordion('Fields Of Study')"
+                    @click="trackAccordion('o Study')"
                   >
                     <span class="field-of-study-select-icon mr-2"
                       style="width: 35px;height: 35px;"
@@ -335,7 +335,7 @@
                     </span>
 
                     <span>
-                      Fields Of Study
+                      Fields of Study
                     </span>
 
                   </v-expansion-panel-header>
@@ -353,7 +353,7 @@
                       </v-btn>
                     </div>
 
-                    <h2 class="mb-4 pt-2 pt-sm-4">Fields Of Study Offered At {{ schoolName }}</h2>
+                    <h2 class="mb-4 pt-2 pt-sm-4">Fields of Study Offered At {{ schoolName }}</h2>
 
                     <div class="mb-4">
                       <field-of-study-select
@@ -1342,7 +1342,7 @@
                 ></v-radio>
 
                 <v-radio
-                  label="Fields Of Study"
+                  label="Fields of Study"
                   value="fos"
                   color="#fec005"
                 ></v-radio>
