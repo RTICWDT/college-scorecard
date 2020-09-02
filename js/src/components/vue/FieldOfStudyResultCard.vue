@@ -163,11 +163,8 @@
 
           <div class="all-fields-container">
             <div v-if="showFieldOfStudyTruncated" class="mb-1">
-<!--              <v-icon class="warning&#45;&#45;text mr-md-1">fas fa-exclamation-circle</v-icon>-->
-<!--              <p class="mb-0 d-inline-block result-card-fos-item-truncated">Results are limited to 5 Fields of Study per credential level.</p>-->
-
               <p class="mb-0">
-                <v-icon class="warning--text">fas fa-exclamation-circle</v-icon>
+                <v-icon class="warning-orange">fas fa-exclamation-circle</v-icon>
                 <span style="vertical-align: middle;">&nbsp;Results are limited to 5 Fields of Study per credential level.</span>
               </p>
 
