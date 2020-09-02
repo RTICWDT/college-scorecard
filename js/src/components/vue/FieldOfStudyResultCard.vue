@@ -2,6 +2,12 @@
 
   .all-fields-container{
     position: relative;
+    text-align: center;
+
+    @media (min-width: 960px){
+      text-align: right;
+    }
+
   }
 
   .search-fos-result-credential-item-container{
@@ -54,6 +60,10 @@
 
   .fos-result-compare-button-mobile{
     margin: auto;
+  }
+
+  .result-card-fos-item-truncated{
+    vertical-align: middle;
   }
 
 </style>
@@ -152,9 +162,19 @@
           </div>
 
           <div class="all-fields-container">
-            <p class="text-right mb-0">
-              <a :href='fieldsLink'
-              >View all Fields of study at {{schoolName}}</a>
+            <div v-if="showFieldOfStudyTruncated" class="mb-1">
+<!--              <v-icon class="warning&#45;&#45;text mr-md-1">fas fa-exclamation-circle</v-icon>-->
+<!--              <p class="mb-0 d-inline-block result-card-fos-item-truncated">Results are limited to 5 Fields of Study per credential level.</p>-->
+
+              <p class="mb-0">
+                <v-icon class="warning--text">fas fa-exclamation-circle</v-icon>
+                <span style="vertical-align: middle;">&nbsp;Results are limited to 5 Fields of Study per credential level.</span>
+              </p>
+
+            </div>
+
+            <p class="mb-0">
+              <a :href='fieldsLink'>View all Fields of study at {{schoolName}}</a>
             </p>
           </div>
         </v-col>
@@ -191,6 +211,11 @@
         default: 5
       }
     },
+    data(){
+      return{
+        showFieldOfStudyTruncated: false
+      }
+    },
     computed:{
       categorizedFieldsOfStudy(){
         // return this.categorizeFieldsOfStudy(this.school['latest.programs.cip_4_digit']);
@@ -206,6 +231,9 @@
           // Total cap per section
           if(objectCopy.items.length > this.fosCredentialLevelDisplayCap){
             objectCopy.items = objectCopy.items.slice(0,5);
+
+            // Add visual Warning Flag.
+            this.showFieldOfStudyTruncated = true;
           }
 
           objectCopy.items = objectCopy.items.sort((a,b) => {
@@ -213,8 +241,6 @@
             if(a.title > b.title) { return 1; }
             return 0;
           })
-
-
 
           return objectCopy;
         });
@@ -237,7 +263,5 @@
         }
       }
     }
-
-
   }
 </script>
