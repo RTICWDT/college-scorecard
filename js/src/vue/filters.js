@@ -158,4 +158,17 @@ Vue.filter('formatCip2Title', function(value){
     return _.startCase(returnString.toLocaleLowerCase());
 })
 
+Vue.filter('formatFieldOfStudyCredentialTitle', function(value){
+    // Only for "Bachelors Degree". Issue with data source.
+
+    switch (value){
+        case "Bachelors Degree":
+            return "Bachelor's Degree";
+        case "Undergraduate Certificate or Diploma":
+            return "Certificate";
+        default:
+            return value;
+    }
+});
+
 

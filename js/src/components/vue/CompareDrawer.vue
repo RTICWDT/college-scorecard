@@ -61,7 +61,7 @@
             <template v-slot:label>
               <div class="compare-drawer-fos-checkbox-label">
                 <h4>{{fieldOfStudy.fosTitle | formatCip2Title}}</h4>
-                <p class="mb-0">{{fieldOfStudy.credentialTitle}}</p>
+                <p class="mb-0 text-uppercase">{{fieldOfStudy.credentialTitle | formatFieldOfStudyCredentialTitle}}</p>
                 <p class="mb-0">{{fieldOfStudy.institutionName}}</p>
               </div>
             </template>
@@ -142,8 +142,7 @@
     height: 90vh;
 
     @media (min-width: 960px){
-      min-height: 500px;
-      height: auto;
+      height: 50vh;
     }
 
   }
