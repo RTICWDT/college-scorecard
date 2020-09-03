@@ -1,10 +1,13 @@
 <template>
   <v-card id="compare-schools-content" class="pa-5">
+
     <v-btn icon class="float-right" @click="toggleDrawer()">
       <v-icon>fas fa-times-circle</v-icon>
     </v-btn>
+
     <p>Add up to 10 Schools and 10 Fields of Study to compare.</p>
-    <v-row class="compare-drawer-content-container">
+
+    <v-row class="compare-drawer-content-container mb-md-4">
       <v-col cols="12" md="6">
 
         <h3 class="title">Compare Schools</h3>
@@ -61,14 +64,14 @@
             <template v-slot:label>
               <div class="compare-drawer-fos-checkbox-label">
                 <h4>{{fieldOfStudy.fosTitle | formatCip2Title}}</h4>
-                <p class="mb-0 text-uppercase">{{fieldOfStudy.credentialTitle | formatFieldOfStudyCredentialTitle}}</p>
+                <p class="mb-0 fos-uppercase-credential-title">{{fieldOfStudy.credentialTitle | formatFieldOfStudyCredentialTitle}}</p>
                 <p class="mb-0">{{fieldOfStudy.institutionName}}</p>
               </div>
             </template>
           </v-checkbox>
         </div>
 
-        <!-- Medium and smaller button-->
+        <!-- sm and smaller button-->
         <div class="d-md-none mt-5 text-center">
           <v-btn class="compare-drawer-button"
                  rounded
@@ -83,26 +86,30 @@
     </v-row>
 
     <!-- Compare Buttons, medium or larger-->
-    <v-row>
-      <v-col cols="12" md="5" class="text-center d-none d-md-block" >
-        <v-btn
-          rounded
-          color="secondary"
-          :href="$baseUrl+'/compare'"
-        >
-          Compare Schools
-        </v-btn>
-      </v-col>
-      <v-col cols="12" md="7" class="text-center compare-drawer-button-container d-none d-md-block">
-        <v-btn class="compare-drawer-button"
-               rounded
-               color="secondary"
-               :href="$baseUrl+'/compare/?toggle=fos'"
-        >
-          Compare Fields Of Study
-        </v-btn>
-      </v-col>
-    </v-row>
+    <div id="compare-drawer-md-button-row" v-resize="onResize">
+      <v-row>
+        <v-col cols="12" md="5" class="text-center d-none d-md-block" >
+          <v-btn
+            rounded
+            color="secondary"
+            :href="$baseUrl+'/compare'"
+          >
+            Compare Schools
+          </v-btn>
+        </v-col>
+        <v-col cols="12" md="7" class="text-center compare-drawer-button-container d-none d-md-block">
+          <v-btn class="compare-drawer-button"
+                 rounded
+                 color="secondary"
+                 :href="$baseUrl+'/compare/?toggle=fos'"
+          >
+            Compare Fields Of Study
+          </v-btn>
+        </v-col>
+      </v-row>
+    </div>
+
+
 
   </v-card>
 </template>
@@ -170,6 +177,11 @@
     }
   }
 
+  #compare-drawer-md-button-row{
+    position: fixed;
+    bottom: 0px;
+  }
+
 </style>
 
 <script>
@@ -211,6 +223,8 @@ export default {
     this.selectedFieldsOfStudy = _.map(this.fieldsOfStudy, (fieldOfStudy) => {
       return this.generateFieldOfStudyString(fieldOfStudy);
     });
+
+    // this.onResize();
   },
   methods: {
     handleToggleCompareSchool(school) {
@@ -230,6 +244,11 @@ export default {
     },
     generateFieldOfStudyString(fosObject){
       return `${fosObject.id}-${fosObject.code}-${fosObject.credentialLevel}`;
+    },
+    onResize(){
+      // setting the width for fixed position elements
+      let desiredWidth = document.querySelector("#compare-header").clientWidth;
+      document.querySelector("#compare-drawer-md-button-row").style.width = `${desiredWidth}px`;
     }
   }
 };

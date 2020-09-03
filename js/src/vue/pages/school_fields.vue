@@ -6,6 +6,8 @@
       <v-container>
         <v-row>
           <v-col cols="12" lg="9" class="school-left">
+
+            <!-- Loader -->
             <div v-if="!school.id" class="show-loading">
               <v-card class="pa-5">
                 <h1 class="title">
@@ -16,8 +18,11 @@
             </div>
 
             <div v-else class="show-loaded" id="school">
-              
+
+              <!-- School Header -->
               <v-card class="school-heading px-3 mb-5">
+
+                <!-- Green Header Bar -->
                 <v-row class='csGreenBg'>
                   <v-col cols="6">
                      <v-btn
@@ -42,6 +47,8 @@
                     <share small text color="white" label="Share this School" :url="shareLink" show-copy :hide="['email']" />
                   </v-col>
                 </v-row>
+
+                <!-- Monitoring Flag -->
                 <v-row>
                   <v-col cols="12" md="6" class="pt-3 mb-n5" v-if="_.get(school, fields['UNDER_INVESTIGATION'])==1">
                     <v-chip
@@ -55,15 +62,22 @@
                   </v-col>
                 </v-row>
 
+                <!-- School Header Info -->
                 <v-row>
                   <v-col cols="12" class="pa-sm-5">
                     <h1
                       class="display-1 pa-0 ma-0 font-weight-bold"
-                    >All Fields of Study Offered at {{ _.get(school, fields['NAME'], 'School Name') }}</h1>
+                    >
+                      All Fields of Study Offered at <a :href="schoolLink">
+                      {{ _.get(school, fields['NAME'], 'School Name') }}
+                    </a>
+                    </h1>
                   </v-col>
                 </v-row>
+
               </v-card>
-              <!-- /.school-card_container-school -->
+
+              <!-- School Selector -->
               <v-card class="mb-4 pa-3">
                 <v-select
                   id="school-field-fos-degree"
@@ -78,14 +92,26 @@
                   color="secondary"
                 ></v-select>
               </v-card>
+
+              <!-- Warnings -->
               <v-alert
                 v-if="currentFilter === 4"
                 color="warning"
-              >No data on the number of graduates are displayed because of definitional differences with other data sources. Fields of study on this page include undergraduate-level programs that may be classified as undergraduate certificates in other data sources.</v-alert>
+              >
+                No data on the number of graduates are displayed because of definitional differences
+                with other data sources. Fields of study on this page include undergraduate-level
+                programs that may be classified as undergraduate certificates in other data sources.
+              </v-alert>
+
               <v-alert
                 v-if="currentFilter === 8"
                 color="warning"
-              >Fields of study on this page include graduate-level programs that may be labeled “postbaccalaureate certificates” in other data sources.</v-alert>
+              >
+                Fields of study on this page include graduate-level programs that may be labeled
+                “postbaccalaureate certificates” in other data sources.
+              </v-alert>
+
+              <!-- Fields of Study -->
               <v-expansion-panels v-if="!_.isEmpty(processedPrograms)">
                 <v-expansion-panel v-for="(prog, index) in processedPrograms" :key="index">
                   <v-expansion-panel-header>{{ _.startCase(_.toLower(prog.name).slice(0,-1)) }}</v-expansion-panel-header>
@@ -111,12 +137,15 @@
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
+
               <v-card v-else color="pa-5">
                 <p class='ma-0 text-center'><em>This institution does not offer any fields of study with this degree.</em></p>
               </v-card>
+
             </div>
           </v-col>
 
+          <!-- Sidbar -->
           <v-col lg="3">
             <v-card class="pa-5">
               <paying-for-college />
@@ -152,11 +181,12 @@ import FieldData from "components/vue/FieldData.vue";
 import FieldDataExtended from '../../components/vue/FieldDataExtended.vue';
 import { compare } from 'vue/mixins.js';
 import { apiGet } from '../api.js';
-import { fields } from '../constants.js';
+// import { fields } from '../constants.js';
 import { SiteData } from '../mixins/SiteData.js';
+import ComplexFields from "vue/mixins/ComplexFields.js";
 
 export default {
-  mixins: [compare,SiteData],
+  mixins: [compare,SiteData,ComplexFields],
   props: ["baseUrl", "compareSchools","compareFieldsOfStudy"],
   components: {
     tooltip: Tooltip,
@@ -170,7 +200,6 @@ export default {
   data() {
     return {
       school: {},
-      fields: [],
       panels: [],
       num_panels: 7,
       cip2: {},
@@ -239,7 +268,7 @@ export default {
   },
   mounted() {
     let self = this;
-    this.fields = fields;
+    // this.fields = fields;
     this.cip2 = this.CIP2; // From SiteData mixin.
 
     if (!location.search) {
