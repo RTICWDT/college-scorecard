@@ -8,7 +8,7 @@ module.exports = {
   mode: "production",
   entry: './js/src/app.js',
   output: {
-    filename: 'app.js',
+    filename: 'app.[contenthash].js',
     path: __dirname + '/js',
   },
   // For template compiler.
@@ -96,8 +96,7 @@ module.exports = {
     new VueLoaderPlugin(),
     new VuetifyLoaderPlugin(),
     new MiniCssExtractPlugin({
-      filename: '../css/app.css',
-      // chunkFilename: '[id].css',
+      filename: '../css/app.[contenthash].css',
     }),
   ],
   optimization: {
