@@ -43,8 +43,11 @@
         @field-of-study-selected="handleFieldOfStudySelected"
         id="fos-search"
         name="fos-search"
+        :disabled="cipSelectionLimitReached"
       >
       </field-of-study-search>
+
+      <p v-if="cipSelectionLimitReached" class="mb-0 mt-2 warning-orange text-center">Limit of 5 reached</p>
 
       <div id="fos-chip-container" class="mt-2"
         v-if="utility.cip4Cache.length > 0"
@@ -428,6 +431,13 @@
       locationButtonColor() {
         return (this.location.latLon ? 'primary' : '');
       },
+      cipSelectionLimitReached(){
+        if(this.input.cip4.length >= 5){
+          return true;
+        }
+
+        return false;
+      }
     },
     watch: {
       cleanInput: {

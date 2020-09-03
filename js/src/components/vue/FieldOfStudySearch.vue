@@ -28,6 +28,7 @@
     color="secondary"
     prepend-inner-icon="fas fa-search"
     aria-label="Field of Study Search"
+    :disabled="disabled"
   >
     <template v-slot:label>
       <slot name="label-pass-through"></slot>
@@ -77,6 +78,12 @@
 
   export default {
     mixins:[SiteData],
+    props:{
+      disabled:{
+        type: Boolean,
+        default: false
+      }
+    },
     data(){
       return{
         selected:null,

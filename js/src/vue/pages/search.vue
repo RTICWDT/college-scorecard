@@ -253,6 +253,7 @@
                 <v-alert v-if="showFieldOfStudyWarning"
                   id="search-fos-cip-filter-warning"
                   type="warning"
+                  color="#D16E00"
                   class="mt-4 mb-2 pa-4"
                   colored-border
                   border="left"
@@ -260,7 +261,7 @@
                 >
                   <template v-slot:prepend>
                     <div>
-                      <v-icon class="warning--text">mdi mdi-exclamation</v-icon>
+                      <v-icon class="warning-orange">mdi mdi-exclamation</v-icon>
                     </div>
                   </template>
 
