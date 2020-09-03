@@ -160,7 +160,10 @@
                     >
                       <div class="compare-fos-chip pa-2">
                         <h4>{{fieldOfStudy.title | formatFieldOfStudyTitle}}</h4>
-                        <span>{{fieldOfStudy['credential.title']}}</span><br>
+                        <span class="fos-uppercase-credential-title">
+                          {{fieldOfStudy['credential.title'] | formatFieldOfStudyCredentialTitle}}
+                        </span>
+                        <br>
                         <span>{{fieldOfStudy['school.name']}}</span>
                       </div>
 
@@ -178,7 +181,7 @@
                     >
                       <div class="compare-fos-chip pa-2">
                         <h4>{{fieldOfStudy.title | formatFieldOfStudyTitle}}</h4>
-                        <span class="text-uppercase">{{fieldOfStudy['credential.title'] | formatFieldOfStudyCredentialTitle}}</span><br>
+                        <span class="fos-uppercase-credential-title">{{fieldOfStudy['credential.title'] | formatFieldOfStudyCredentialTitle}}</span><br>
                         <span>{{fieldOfStudy['school.name']}}</span>
                       </div>
 
