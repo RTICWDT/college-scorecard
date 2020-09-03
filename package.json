@@ -5,16 +5,17 @@
   "author": "RTI International",
   "scripts": {
     "serve": "jekyll serve --baseurl='' -w",
-    "build": "webpack --config webpack.prod.vue.config.js",
-    "build:dev": "webpack --devtool source-map --config webpack.vue.config.js",
-    "watch": "webpack --devtool source-map --config webpack.vue.config.js --watch",
+    "build": "npm run clean && webpack --config webpack.prod.vue.config.js",
+    "build:dev": "npm run clean && webpack --devtool source-map --config webpack.vue.config.js",
+    "watch": "npm run clean && webpack --devtool source-map --config webpack.vue.config.js --watch",
     "test:e2e": "codeceptjs run --steps",
     "test:unit": "jest",
     "test-a11y": "./test/a11y.js",
     "test-ci": "wdio test/wdio.ci.js",
     "test-quick": "wdio test/wdio.quick.js",
     "test-sauce": "wdio test/wdio.sauce.js",
-    "test-unit-ci": "XUNIT_FILE=test/reports/mocha/unit.xml mocha -R spec-xunit-file -- test/unit"
+    "test-unit-ci": "XUNIT_FILE=test/reports/mocha/unit.xml mocha -R spec-xunit-file -- test/unit",
+    "clean": "rm -f js/app.* && rm -f css/app.*"
   },
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
