@@ -140,7 +140,6 @@
       padding-left: 24px;
       border-left: 1px solid $light-gray;
       min-height: 420px;
-      /*height: 100%;*/
     }
   }
 
@@ -152,6 +151,14 @@
       height: 50vh;
     }
 
+  }
+
+  .compare-drawer-content-container{
+    padding-bottom: 80px;
+
+    @media (min-width: 960px){
+      padding-bottom: 0;
+    }
   }
 
   .compare-drawer-button{
