@@ -130,6 +130,7 @@
           </v-row>
         </v-container>
       </div>
+
       <div class="homeContent mt-5 pa-6">
         <v-container class="pa-0 my-0">
           <v-row class="pa-0">

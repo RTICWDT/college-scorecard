@@ -114,6 +114,15 @@ header {
     }
 
   }
+
+  #nav-search-container{
+    border-radius: 50%;
+    background-color: #0075B2;
+    margin: 0 auto;
+    width: 50px;
+    height: 50px;
+    padding-top: 8px;
+  }
 }
 </style>
 
@@ -136,31 +145,42 @@ header {
         </a>
       </div>
 
-      <div id="nav-main-navigation"
-        class="d-none d-md-block"
-      >
+      <div id="nav-main-navigation" class="d-none d-md-block">
         <nav aria-labelledby="primary-navigation">
           <ul>
+
             <li>
-              <a
-                :href="`${$baseUrl}/`"
-                :class="{
-                  'nav-active' : activeNavElement === '/'}"
+              <a :href="`${$baseUrl}/`"
+                :class="{'nav-active' : activeLink === '/'}"
               >
                 Home
               </a>
             </li>
+
             <li>
-              <a
-                :href="`${$baseUrl}/search`"
-                :class="{'nav-active' : activeNavElement === 'search'}"
+              <a :href="`${$baseUrl}/data`"
+                 :class="{'nav-active' : activeLink === 'data'}"
               >
-                Search
+                About the Data
               </a>
             </li>
+
             <li>
-              <a :href="`${$baseUrl}/data`" :class="{'nav-active' : activeNavElement === 'data'}">About the Data</a>
+              <a href="mailto:scorecarddata@rti.org">
+                Contact
+              </a>
             </li>
+
+            <li>
+              <div id="nav-search-container" class="d-inline-block">
+                <a :href="`${$baseUrl}/search`"
+                   aria-label="Navigate to Search Page"
+                >
+                  <v-icon color="white" size="30">mdi mdi-magnify</v-icon>
+                </a>
+              </div>
+            </li>
+            
           </ul>
         </nav>
       </div>
@@ -226,10 +246,15 @@ header {
 </template>
 
 <script>
-  // TODO -  I left off with trying to get ?toggle=fos to update with the URL
-  // May have to hack it with an event/listeners on bus
 
 export default {
+  // since the header is set page level, we can just pass it which page is currently active via prop.
+  props:{
+    activeLink:{
+      type: String,
+      required: true
+    }
+  },
   data(){
     return {
       drawer: false,
@@ -238,59 +263,59 @@ export default {
   },
   computed:{
     // Computed property for URL
-    currentURLLocationObject(){
-      return {
-        pathname: location.pathname,
-        search: location.search
-      }
-    },
-    activeNavElement(){
-      // This is ugly
-      if(this.isActive('/')){
-        return '/';
-      }else if (this.isActive('search', 'toggle=fos')){
-        return 'search-fos';
-      }else if(this.isActive('search', 'toggle=institutions')){
-        return 'search-institutions';
-      }else if(this.isActive('search')){
-        return 'search';
-      }else if(this.isActive('data')){
-        return 'data';
-      }
-    }
+    // currentURLLocationObject(){
+    //   return {
+    //     pathname: location.pathname,
+    //     search: location.search
+    //   }
+    // },
+    // activeNavElement(){
+    //   // This is ugly
+    //   if(this.isActive('/')){
+    //     return '/';
+    //   }else if (this.isActive('search', 'toggle=fos')){
+    //     return 'search-fos';
+    //   }else if(this.isActive('search', 'toggle=institutions')){
+    //     return 'search-institutions';
+    //   }else if(this.isActive('search')){
+    //     return 'search';
+    //   }else if(this.isActive('data')){
+    //     return 'data';
+    //   }
+    // }
   },
   watch:{
     // Watch for changes, deal with it.
   },
   methods:{
-    isActive(activeURLString, activeQueryString = null, urlPathName = location.pathname, urlQueryString = location.search){
-
-      let isActive = false;
-
-      // For Home Page
-      if(activeURLString === '/' && urlPathName === '/'){
-        isActive =  true;
-
-      }else{
-        let splitURL = urlPathName.split('/');
-        let lastURLSegment = splitURL.pop() || splitURL.pop();
-        isActive = activeURLString === lastURLSegment;
-
-        // Check URL for query string with Regular Expressions;
-        if(activeQueryString){
-          let regexPattern = new RegExp('[?&]' + activeQueryString,'gi');
-          isActive = regexPattern.test(urlQueryString);
-        }
-
-      }
-
-      return isActive;
-    }
+    // isActive(activeURLString, activeQueryString = null, urlPathName = location.pathname, urlQueryString = location.search){
+    //
+    //   let isActive = false;
+    //
+    //   // For Home Page
+    //   if(activeURLString === '/' && urlPathName === '/'){
+    //     isActive =  true;
+    //
+    //   }else{
+    //     let splitURL = urlPathName.split('/');
+    //     let lastURLSegment = splitURL.pop() || splitURL.pop();
+    //     isActive = activeURLString === lastURLSegment;
+    //
+    //     // Check URL for query string with Regular Expressions;
+    //     if(activeQueryString){
+    //       let regexPattern = new RegExp('[?&]' + activeQueryString,'gi');
+    //       isActive = regexPattern.test(urlQueryString);
+    //     }
+    //
+    //   }
+    //
+    //   return isActive;
+    // }
   },
   created(){
-    document.addEventListener('popstate', function() {
-      console.log('The hash has changed!')
-    }, false);
+    // document.addEventListener('popstate', function() {
+    //   console.log('The hash has changed!')
+    // }, false);
   }
 }
 </script>
