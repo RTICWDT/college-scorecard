@@ -52,6 +52,7 @@
                   <tooltip definition="hcm2" color="#FFFFFF" class="ml-2" :isBranch="isBranch" />
                 </v-chip>
                 <a
+                  style="word-wrap: break-word;"
                 target="_blank"
                 :href="$baseUrl+'/school/transition/?url='+schoolUrl"
                 >{{ _.get(school, fields['SCHOOL_URL'], 'ed.gov') | formatUrlText }}</a>

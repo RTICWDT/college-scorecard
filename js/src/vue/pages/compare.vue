@@ -487,7 +487,9 @@
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     @click="trackAccordion('College Information')"
-                  >College Information</v-expansion-panel-header>
+                  >College Information
+                  </v-expansion-panel-header>
+
                   <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
                     <compare-section
                       :schools="schools"
