@@ -201,6 +201,7 @@ header {
 
     <v-navigation-drawer
       v-model="drawer"
+      v-if="drawer"
       absolute
       temporary
       disable-resize-watcher
