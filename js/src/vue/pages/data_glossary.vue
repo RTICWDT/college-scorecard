@@ -1,6 +1,7 @@
 <template>
   <v-app id="data-glossary">
-    <scorecard-header />
+
+    <scorecard-header active-link="data"/>
 
     <v-content>
       <data-navigation current="/data/glossary/" />

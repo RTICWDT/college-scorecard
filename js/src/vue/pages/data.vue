@@ -1,6 +1,6 @@
 <template>
   <v-app id="data">
-    <scorecard-header />
+    <scorecard-header active-link="data" />
     <v-content>
       <data-navigation current="/data/" />
       <v-container>

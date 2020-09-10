@@ -1,6 +1,8 @@
 <template>
   <v-app id='index'>
-    <scorecard-header />
+
+    <scorecard-header active-link="/"/>
+    
     <v-content>
       <div class="home-splash">
         <v-container class="pt-0">

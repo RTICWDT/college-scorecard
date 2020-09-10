@@ -99,7 +99,7 @@ header {
       }
 
       li .nav-active{
-        color: black !important;
+        color: $nav-active-color !important;
       }
 
     }
@@ -145,6 +145,7 @@ header {
         </a>
       </div>
 
+      <!-- Medium and above navigation -->
       <div id="nav-main-navigation" class="d-none d-md-block">
         <nav aria-labelledby="primary-navigation">
           <ul>
@@ -195,6 +196,7 @@ header {
         >
         </v-app-bar-nav-icon>
       </div>
+
     </v-app-bar>
 
     <v-navigation-drawer
@@ -252,7 +254,7 @@ export default {
   props:{
     activeLink:{
       type: String,
-      required: true
+      default: null
     }
   },
   data(){
