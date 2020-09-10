@@ -61,7 +61,7 @@
   <div>
     <v-app id="search">
 
-      <scorecard-header />
+      <scorecard-header active-link="search"/>
 
       <!-- Search Form -->
       <v-navigation-drawer

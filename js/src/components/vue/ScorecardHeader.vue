@@ -99,7 +99,7 @@ header {
       }
 
       li .nav-active{
-        color: black !important;
+        color: $nav-active-color !important;
       }
 
     }
@@ -114,6 +114,28 @@ header {
     }
 
   }
+
+  #nav-search-container{
+    border-radius: 50%;
+    background-color: #0075B2;
+    margin: 0 auto;
+    width: 50px;
+    height: 50px;
+    padding-top: 8px;
+  }
+
+  #mobile-navigation-container{
+    a{
+      text-decoration: none;
+      color: white !important;
+      font-size: 1.4rem;
+    }
+
+    a:hover, a:focus{
+      color: white;
+    }
+  }
+
 }
 </style>
 
@@ -136,31 +158,43 @@ header {
         </a>
       </div>
 
-      <div id="nav-main-navigation"
-        class="d-none d-md-block"
-      >
+      <!-- Medium and above navigation -->
+      <div id="nav-main-navigation" class="d-none d-md-block">
         <nav aria-labelledby="primary-navigation">
           <ul>
+
             <li>
-              <a
-                :href="`${$baseUrl}/`"
-                :class="{
-                  'nav-active' : activeNavElement === '/'}"
+              <a :href="`${$baseUrl}/`"
+                :class="{'nav-active' : activeLink === '/'}"
               >
                 Home
               </a>
             </li>
+
             <li>
-              <a
-                :href="`${$baseUrl}/search`"
-                :class="{'nav-active' : activeNavElement === 'search'}"
+              <a :href="`${$baseUrl}/data`"
+                 :class="{'nav-active' : activeLink === 'data'}"
               >
-                Search
+                About the Data
               </a>
             </li>
+
             <li>
-              <a :href="`${$baseUrl}/data`" :class="{'nav-active' : activeNavElement === 'data'}">About the Data</a>
+              <a href="mailto:scorecarddata@rti.org">
+                Contact
+              </a>
             </li>
+
+            <li>
+              <div id="nav-search-container" class="d-inline-block">
+                <a :href="`${$baseUrl}/search`"
+                   aria-label="Navigate to Search Page"
+                >
+                  <v-icon color="white" size="30">mdi mdi-magnify</v-icon>
+                </a>
+              </div>
+            </li>
+
           </ul>
         </nav>
       </div>
@@ -175,10 +209,13 @@ header {
         >
         </v-app-bar-nav-icon>
       </div>
+
     </v-app-bar>
 
+    <!-- Mobile Navigation Drawer -->
     <v-navigation-drawer
       v-model="drawer"
+      v-if="drawer"
       absolute
       temporary
       disable-resize-watcher
@@ -186,36 +223,40 @@ header {
     >
       <v-list
         nav
-        dense
       >
         <v-list-item-group
           v-model="group"
         >
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-home</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>
-              <a :href="`${$baseUrl}/`">Home</a>
-            </v-list-item-title>
+          <v-list-item class="mobile-navigation-item" @click="mobileNavClick(`${$baseUrl}/`)">
+            <v-list-item-content>
+              <v-list-item-title>
+                Home
+              </v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
 
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-satellite-variant</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>
-              <a :href="`${$baseUrl}/search`">Search</a>
-            </v-list-item-title>
+          <v-list-item class="mobile-navigation-item" @click="mobileNavClick(`${$baseUrl}/data`)">
+            <v-list-item-content>
+              <v-list-item-title class="mobile-navigation-item">
+                About the Data
+              </v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
 
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-book-open</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>
-              <a :href="`${$baseUrl}/data`">About the Data</a>
-            </v-list-item-title>
+          <v-list-item class="mobile-navigation-item" @click="mobileNavClick('mailto:scorecarddata@rti.org')">
+            <v-list-item-content>
+              <v-list-item-title class="mobile-navigation-item">
+                Contact
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item class="mobile-navigation-item" @click="mobileNavClick(`${$baseUrl}/search`)">
+            <v-list-item-content>
+              <v-list-item-title class="mobile-navigation-item">
+                Search
+              </v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
 
         </v-list-item-group>
@@ -226,10 +267,14 @@ header {
 </template>
 
 <script>
-  // TODO -  I left off with trying to get ?toggle=fos to update with the URL
-  // May have to hack it with an event/listeners on bus
 
 export default {
+  props:{
+    activeLink:{
+      type: String,
+      default: null
+    }
+  },
   data(){
     return {
       drawer: false,
@@ -237,60 +282,16 @@ export default {
     }
   },
   computed:{
-    // Computed property for URL
-    currentURLLocationObject(){
-      return {
-        pathname: location.pathname,
-        search: location.search
-      }
-    },
-    activeNavElement(){
-      // This is ugly
-      if(this.isActive('/')){
-        return '/';
-      }else if (this.isActive('search', 'toggle=fos')){
-        return 'search-fos';
-      }else if(this.isActive('search', 'toggle=institutions')){
-        return 'search-institutions';
-      }else if(this.isActive('search')){
-        return 'search';
-      }else if(this.isActive('data')){
-        return 'data';
-      }
-    }
   },
   watch:{
-    // Watch for changes, deal with it.
   },
   methods:{
-    isActive(activeURLString, activeQueryString = null, urlPathName = location.pathname, urlQueryString = location.search){
-
-      let isActive = false;
-
-      // For Home Page
-      if(activeURLString === '/' && urlPathName === '/'){
-        isActive =  true;
-
-      }else{
-        let splitURL = urlPathName.split('/');
-        let lastURLSegment = splitURL.pop() || splitURL.pop();
-        isActive = activeURLString === lastURLSegment;
-
-        // Check URL for query string with Regular Expressions;
-        if(activeQueryString){
-          let regexPattern = new RegExp('[?&]' + activeQueryString,'gi');
-          isActive = regexPattern.test(urlQueryString);
-        }
-
-      }
-
-      return isActive;
+    mobileNavClick(urlString){
+      window.location.href = urlString;
     }
   },
   created(){
-    document.addEventListener('popstate', function() {
-      console.log('The hash has changed!')
-    }, false);
+
   }
 }
 </script>

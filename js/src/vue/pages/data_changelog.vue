@@ -1,8 +1,12 @@
 <template>
   <v-app id="data-changelog">
-    <scorecard-header />
+
+    <scorecard-header active-link="data"/>
+
     <v-content>
+
       <data-navigation current="/data/changelog/" />
+
       <v-container>
         <v-row>
           <v-col cols="12" md="10" offset-md="1">

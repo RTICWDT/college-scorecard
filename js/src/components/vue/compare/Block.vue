@@ -21,13 +21,16 @@
             </a>
           </p>
 
-          <slot
-            name="fos-row"
-            v-bind:school='school'
-            :config='config'
-            :currentHighlight='currentHighlight'
-          >
-          </slot>
+          <div class="compare-fos-metric-container">
+            <slot
+              name="fos-row"
+              v-bind:school='school'
+              :config='config'
+              :currentHighlight='currentHighlight'
+            >
+            </slot>
+          </div>
+
         </div>
       </div>
 
@@ -60,6 +63,10 @@
 .active{
   background-color: #faefd2 !important;
 }
+
+  .compare-fos-metric-container{
+    margin: 0.8rem 0;
+  }
 </style>
 
 <script>
