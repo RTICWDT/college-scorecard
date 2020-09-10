@@ -123,6 +123,19 @@ header {
     height: 50px;
     padding-top: 8px;
   }
+
+  #mobile-navigation-container{
+    a{
+      text-decoration: none;
+      color: white !important;
+      font-size: 1.4rem;
+    }
+
+    a:hover, a:focus{
+      color: white;
+    }
+  }
+
 }
 </style>
 
@@ -199,6 +212,7 @@ header {
 
     </v-app-bar>
 
+    <!-- Mobile Navigation Drawer -->
     <v-navigation-drawer
       v-model="drawer"
       v-if="drawer"
@@ -206,39 +220,44 @@ header {
       temporary
       disable-resize-watcher
       right
+      color="rgb(14, 54, 91)"
     >
       <v-list
         nav
-        dense
       >
         <v-list-item-group
           v-model="group"
         >
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-home</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>
-              <a :href="`${$baseUrl}/`">Home</a>
-            </v-list-item-title>
+          <v-list-item class="mobile-navigation-item" @click="mobileNavClick(`${$baseUrl}/`)">
+            <v-list-item-content>
+              <v-list-item-title>
+                Home
+              </v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
 
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-satellite-variant</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>
-              <a :href="`${$baseUrl}/search`">Search</a>
-            </v-list-item-title>
+          <v-list-item class="mobile-navigation-item" @click="mobileNavClick(`${$baseUrl}/data`)">
+            <v-list-item-content>
+              <v-list-item-title class="mobile-navigation-item">
+                About the Data
+              </v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
 
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-book-open</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>
-              <a :href="`${$baseUrl}/data`">About the Data</a>
-            </v-list-item-title>
+          <v-list-item class="mobile-navigation-item" @click="mobileNavClick('mailto:scorecarddata@rti.org')">
+            <v-list-item-content>
+              <v-list-item-title class="mobile-navigation-item">
+                Contact
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item class="mobile-navigation-item" @click="mobileNavClick(`${$baseUrl}/search`)">
+            <v-list-item-content>
+              <v-list-item-title class="mobile-navigation-item">
+                Search
+              </v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
 
         </v-list-item-group>
@@ -251,7 +270,6 @@ header {
 <script>
 
 export default {
-  // since the header is set page level, we can just pass it which page is currently active via prop.
   props:{
     activeLink:{
       type: String,
@@ -265,60 +283,16 @@ export default {
     }
   },
   computed:{
-    // Computed property for URL
-    // currentURLLocationObject(){
-    //   return {
-    //     pathname: location.pathname,
-    //     search: location.search
-    //   }
-    // },
-    // activeNavElement(){
-    //   // This is ugly
-    //   if(this.isActive('/')){
-    //     return '/';
-    //   }else if (this.isActive('search', 'toggle=fos')){
-    //     return 'search-fos';
-    //   }else if(this.isActive('search', 'toggle=institutions')){
-    //     return 'search-institutions';
-    //   }else if(this.isActive('search')){
-    //     return 'search';
-    //   }else if(this.isActive('data')){
-    //     return 'data';
-    //   }
-    // }
   },
   watch:{
-    // Watch for changes, deal with it.
   },
   methods:{
-    // isActive(activeURLString, activeQueryString = null, urlPathName = location.pathname, urlQueryString = location.search){
-    //
-    //   let isActive = false;
-    //
-    //   // For Home Page
-    //   if(activeURLString === '/' && urlPathName === '/'){
-    //     isActive =  true;
-    //
-    //   }else{
-    //     let splitURL = urlPathName.split('/');
-    //     let lastURLSegment = splitURL.pop() || splitURL.pop();
-    //     isActive = activeURLString === lastURLSegment;
-    //
-    //     // Check URL for query string with Regular Expressions;
-    //     if(activeQueryString){
-    //       let regexPattern = new RegExp('[?&]' + activeQueryString,'gi');
-    //       isActive = regexPattern.test(urlQueryString);
-    //     }
-    //
-    //   }
-    //
-    //   return isActive;
-    // }
+    mobileNavClick(urlString){
+      window.location.href = urlString;
+    }
   },
   created(){
-    // document.addEventListener('popstate', function() {
-    //   console.log('The hash has changed!')
-    // }, false);
+
   }
 }
 </script>
