@@ -220,7 +220,6 @@ header {
       temporary
       disable-resize-watcher
       right
-      color="rgb(14, 54, 91)"
     >
       <v-list
         nav
