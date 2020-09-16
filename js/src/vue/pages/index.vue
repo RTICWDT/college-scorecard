@@ -144,7 +144,7 @@
 
           <v-row class="mt-md-12 pa-0">
 
-            <v-col class="homeCallout apprenticeships pa-0 my-0 mr-sm-3"
+            <v-col class="homeCallout apprenticeships pa-0 my-md-0 mr-sm-3"
               cols="12"
               sm="5"
               offset-sm="1"
@@ -172,6 +172,7 @@
 
                 <p>
                   <v-btn
+                    block
                     rounded
                     color="secondary"
                     href="https://www.apprenticeship.gov/apprenticeship-finder"
@@ -190,6 +191,7 @@
 
                 <p>
                   <v-btn
+                    block
                     rounded
                     color="secondary"
                     href="https://www.onetonline.org/find/"
@@ -242,6 +244,7 @@
 
                 <p class="text-center">
                   <v-btn
+                    block
                     rounded
                     color="secondary"
                     href="https://fafsa.ed.gov/"
@@ -289,7 +292,7 @@
 <style lang="scss" scoped>
 @import 'sass/_variables.scss';
 .home-splash {
-  min-height: 500px;
+  min-height: 380px;
   padding-top: 1.5rem;
 }
 .v-tab {
@@ -311,17 +314,25 @@
   /*  #ffffff;*/
   background-color: #b5d7f4;
 }
+
   #home-content-container{
-    height: 800px;
-    background: linear-gradient(to bottom, #97CFF5 50%, #0075B2 50%);
+    height: auto;
+
+    @media (min-width: 960px) {
+      height: 900px;
+      background: linear-gradient(to bottom, #97CFF5 50%, #0075B2 50%);
+    }
   }
 
   .home-callout-container{
+    margin-bottom: 80px;
     height: 600px;
     background-color: white;
+    box-shadow: 0px 3px 6px #00000029;
 
-    /*@media screen and (max-width: 960px) {*/
-    /*}*/
+    @media (min-width: 960px) {
+      margin-bottom: inherit;
+    }
   }
 
   .home-callout-top{
@@ -391,6 +402,7 @@
   height: 133px;
   background: #FFFFFF;
   border-radius: 50%;
+  box-shadow: 0px 3px 6px #00000029;
 
 }
 
