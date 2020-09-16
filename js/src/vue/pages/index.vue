@@ -4,14 +4,18 @@
     <scorecard-header active-link="/"/>
     
     <v-content>
+
       <div class="home-splash">
         <v-container class="pt-0">
           <v-row>
             <v-col cols="12">
-              <h1 class="white--text text-uppercase text-center">Find the Right Fit.</h1>
-              <p
-                class="white--text text-center"
-              >Find out about colleges: their programs, costs, admissions, results, and more.</p>
+              <h1 class="white--text text-uppercase text-center">
+                Find the Right Fit.
+              </h1>
+
+              <p class="white--text text-center">
+                Search and compare colleges: their fields of study, costs, admissions, results, and more.
+              </p>
             </v-col>
           </v-row>
           <v-row>
@@ -133,53 +137,150 @@
         </v-container>
       </div>
 
-      <div class="homeContent mt-5 pa-6">
+      <!-- Bottom Content -->
+      <div id="home-content-container" class="mt-5 pa-6">
+
         <v-container class="pa-0 my-0">
-          <v-row class="pa-0">
-            <v-col
+
+          <v-row class="mt-md-12 pa-0">
+
+            <v-col class="homeCallout apprenticeships pa-0 my-0 mr-sm-3"
               cols="12"
               sm="5"
               offset-sm="1"
-              class="homeCallout apprenticeships pa-0 my-0 mr-sm-3"
             >
-              <div class="home-icon-wrapper">
+
+              <div class="home-callout-container mx-md-4">
+
+                <div class="home-callout-top mb-12">
+
+                  <div class="home-icon-wrapper">
+                    <div class="home-icon">
+                      <img :src="`${$baseUrl}/img/icon-pathways.svg`" alt="Pathways Icon">
+                    </div>
+                  </div>
+
+                  <h2 class="title">
+                    There’s more than one pathway to a career.
+                  </h2>
+
+                </div>
+
+                <p>
+                  <strong>Apprenticeships</strong> are another great way to jump-start your career.
+                </p>
+
+                <p>
+                  <v-btn
+                    rounded
+                    color="secondary"
+                    href="https://www.apprenticeship.gov/apprenticeship-finder"
+                    target="_blank"
+                    @click="trackOutboundLink($event)"
+                  >Go to apprenticeship.gov</v-btn>
+                </p>
+
+                <h3>
+                  What career is right for you?
+                </h3>
+
+                <p>
+                  Curious what careers are out there? O*NET’s career explorer is there to help!
+                </p>
+
+                <p>
+                  <v-btn
+                    rounded
+                    color="secondary"
+                    href="https://www.onetonline.org/find/"
+                    target="_blank"
+                    @click="trackOutboundLink($event)"
+                  >Go to O’NET’s Career explorer</v-btn>
+                </p>
 
               </div>
-              <h2 class="title">Alternative Pathways to a Career</h2>
-              <p>
-                <strong>Apprenticeships</strong> are another great way to jump-start your career.
-              </p>
-              <p>
-                <v-btn
-                  rounded
-                  color="secondary"
-                  href="https://www.apprenticeship.gov/apprenticeship-finder"
-                  target="_blank"
-                  @click="trackOutboundLink($event)"
-                >Find one that's right for you!</v-btn>
-              </p>
-              <p>
-                Curious what careers are out there?
-                <strong>O*NET’s career explorer</strong> is there to help!
-              </p>
-              <p>
-                <v-btn
-                  rounded
-                  color="secondary"
-                  href="https://www.onetonline.org/find/"
-                  target="_blank"
-                  @click="trackOutboundLink($event)"
-                >Explore Careers</v-btn>
-              </p>
+
             </v-col>
-            <v-col cols="12" sm="5" class="homeCallout paying pa-0 my-0 ml-sm-3">
-              <div class="home-icon-wrapper">
+
+            <v-col class="homeCallout paying pa-0 my-0 ml-sm-3"
+              cols="12"
+              sm="5"
+            >
+              <div class="home-callout-container mx-md-4">
+
+                <div class="home-callout-top mb-12">
+
+                  <div class="home-icon-wrapper">
+                    <div class="home-icon">
+                      <img :src="`${$baseUrl}/img/icon-financial-aid.svg`" alt="Financial Aid Icon">
+                    </div>
+                  </div>
+
+                  <h2 class="title">
+                    Learn More About Paying for College
+                  </h2>
+
+                </div>
+
+                <h3>
+                  Get started with Financial Aid
+                </h3>
+
+                <p>
+                  To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA).
+                  Use the
+
+                  <a href="https://fafsa.ed.gov/FAFSA/app/f4cForm"
+                     target="_blank"
+                     @click="trackOutboundLink($event)"
+                  >
+                    FAFSA<em>4caster</em>
+                  </a>
+
+                  to see how much aid may be available to you.
+                </p>
+
+                <p class="text-center">
+                  <v-btn
+                    rounded
+                    color="secondary"
+                    href="https://fafsa.ed.gov/"
+                    target="_blank"
+                    @click="trackOutboundLink($event)"
+                  >Start Your FAFSA&reg; Application</v-btn>
+                </p>
+
+                <p>
+                  Also look into other programs such as
+
+                  <a
+                    href="https://www.vets.gov/gi-bill-comparison-tool"
+                    target="_blank"
+                    @click="trackOutboundLink($event)"
+                  >
+                    GI Bill&reg; Benefits
+                  </a>
+
+                  that may also help you pay for school.
+                </p>
+
+
+
+<!--                <div class="home-icon-wrapper">-->
+<!--                  <div class="home-icon pa-2">-->
+<!--                    <img :src="`${$baseUrl}/img/icon-financial-aid.svg`" alt="Financial Aid Icon">-->
+<!--                  </div>-->
+<!--                </div>-->
+
+<!--                <paying-for-college></paying-for-college>-->
               </div>
-              <paying-for-college></paying-for-college>
+
             </v-col>
+
           </v-row>
         </v-container>
       </div>
+
     </v-content>
     <scorecard-footer />
   </v-app>
@@ -203,12 +304,47 @@
 .theme--light.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active){
     color: #FFFFFF !important;
   }
+
 .homeContent {
   /*border-top: 20px*/
   /*  solid*/
   /*  #ffffff;*/
   background-color: #b5d7f4;
 }
+  #home-content-container{
+    height: 800px;
+    background: linear-gradient(to bottom, #97CFF5 50%, #0075B2 50%);
+  }
+
+  .home-callout-container{
+    height: 600px;
+    background-color: white;
+
+    /*@media screen and (max-width: 960px) {*/
+    /*}*/
+  }
+
+  .home-callout-top{
+    background-color: #c4e4f9;
+    height: 180px;
+
+    h2{
+      position: relative;
+      bottom: 50px;
+    }
+  }
+
+  .home-icon{
+    img{
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+  }
+
 </style>
 <style lang="scss">
 .homeCallout {
@@ -220,11 +356,18 @@
     padding: 1rem;
     /*margin-bottom: 2rem !important;*/
   }
+
+  h3{
+    text-align: center;
+    margin-bottom: .5rem !important;
+  }
+
   p {
     text-align: center;
     padding: 0rem
-      2rem
-      0.4rem;
+      2rem;
+
+    margin-bottom: 2rem !important;
   }
   &.apprenticeships
     h2 {
@@ -235,16 +378,21 @@
     /*background-color: #436692;*/
   }
 }
+
 .sublink {
   text-decoration: none;
 }
-  .home-icon-wrapper{
-    margin: 0 auto;
-    width: 100px;
-    height: 100px;
-    background: #FFFFFF;
-    border-radius: 50%
-  }
+
+.home-icon-wrapper{
+  position: relative;
+  top: -50px;
+  margin: 0 auto;
+  width: 133px;
+  height: 133px;
+  background: #FFFFFF;
+  border-radius: 50%;
+
+}
 
 </style>
 
