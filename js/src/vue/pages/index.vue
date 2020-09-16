@@ -5,10 +5,13 @@
     
     <v-content>
 
+      <!-- Top Splash and Search-->
       <div class="home-splash">
         <v-container class="pt-0">
           <v-row>
+            <!-- Header Info -->
             <v-col cols="12">
+
               <h1 class="white--text text-uppercase text-center">
                 Find the Right Fit.
               </h1>
@@ -16,15 +19,15 @@
               <p class="white--text text-center">
                 Search and compare colleges: their fields of study, costs, admissions, results, and more.
               </p>
+
             </v-col>
           </v-row>
-          <v-row>
+
+          <v-row class="px-md-6">
+
+            <!-- Medium and Larger Tabs and Search Content -->
             <v-col
               cols="12"
-              sm="10"
-              offset-sm="1"
-              md="8"
-              offset-md="2"
               class="d-none d-sm-flex pb-10"
             >
               <v-tabs
@@ -37,42 +40,58 @@
                 show-arrows
                 v-model="desktopTabs"
               >
-<!--                <v-tab @click="GATrackEvent('Home Tab','Tab','Custom Search')">-->
-<!--                  <span class="hidden-sm-and-down">Custom Search</span>-->
-<!--                  <span class="hidden-md-and-up">Search</span>-->
-<!--                </v-tab>-->
-<!--                <v-tab @click="GATrackEvent('Home Tab','Tab','Name Search')" color="white">Name Search</v-tab>-->
-                <v-tab @click="GATrackEvent('Home Tab','Tab','Search Schools')" color="white">Search Schools</v-tab>
-                <v-tab @click="GATrackEvent('Home Tab','Tab','Search Fields of Study')" color="white">Search Fields of Study</v-tab>
-                <v-tab @click="GATrackEvent('Home Tab','Tab','Show Me Options')" color="white">Show Me Options</v-tab>
+                <v-tab
+                  @click="GATrackEvent('Home Tab','Tab','Search Schools')"
+                  color="white"
+                >
+                  Search Schools
+                </v-tab>
+
+                <v-tab
+                  @click="GATrackEvent('Home Tab','Tab','Search Fields of Study')"
+                  color="white"
+                >
+                  Search Fields of Study
+                </v-tab>
+
+                <v-tab
+                  @click="GATrackEvent('Home Tab','Tab','Show Me Options')"
+                  color="white"
+                >
+                  Show Me Options
+                </v-tab>
+
+                <!-- Institution Search-->
                 <v-tab-item>
-<!--                  <v-card class="px-5 pt-0 pb-5">-->
-<!--                    <search-form @search-query="directToSearch" />-->
-<!--                  </v-card>-->
-                      <v-card class="pa-5 mb-3">
-                        <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
+                  <v-card class="pa-5"
+                    height="150"
+                  >
+                    <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
 
-                        <div class="mt-5 text-right">
-<!--                          <a :href="`${$baseUrl}/search/?toggle=institutions`">Custom Search</a>-->
-                          <v-btn text small
-                            @click="toggleCustomSearch = !toggleCustomSearch"
-                          >
-                            Custom Search
-                            <v-icon v-if="toggleCustomSearch">mdi-menu-up</v-icon>
-                            <v-icon v-else>mdi-menu-down</v-icon>
-                          </v-btn>
-                        </div>
+                    <div class="mt-5 text-right">
+                      <v-btn
+                        text
+                        small
+                        @click="toggleCustomSearch = !toggleCustomSearch"
+                      >
+                        Custom Search
+                        <v-icon v-if="toggleCustomSearch">mdi-menu-up</v-icon>
+                        <v-icon v-else>mdi-menu-down</v-icon>
+                      </v-btn>
+                    </div>
 
-                        <div v-if="toggleCustomSearch">
-                          <search-form @search-query="directToSearch" />
-                        </div>
-                      </v-card>
+                    <div v-if="toggleCustomSearch">
+                      <search-form @search-query="directToSearch" />
+                    </div>
+                  </v-card>
+
                 </v-tab-item>
+
+                <!-- Field Of Study Search-->
                 <v-tab-item>
-<!--                  <v-card class="pa-5 mb-3">-->
-<!--                    <name-autocomplete @school-name-selected="handleSchoolNameSelected" />-->
-<!--                  </v-card>-->
-                  <v-card class="pa-5">
+                  <v-card class="pa-5"
+                    height="150"
+                  >
                     <field-of-study-search
                       @field-of-study-selected="handleFieldOfStudySelected"
                     />
@@ -82,75 +101,92 @@
                     </div>
                   </v-card>
                 </v-tab-item>
+
+                <!-- Show Me Options-->
                 <v-tab-item>
                   <v-card style="min-height: 300px" class="px-10 py-5">
-                    <p
-                      class="my-2 text-center"
-                    >Select one or more options to create a list of schools that fit your needs.</p>
+                    <p class="my-2 text-center">
+                      Select one or more options to create a list of schools that fit your needs.
+                    </p>
+
                     <canned-search-container @canned-search-submit="directToSearch"></canned-search-container>
                   </v-card>
                 </v-tab-item>
               </v-tabs>
             </v-col>
 
-            <!-- Mobile View -->
+            <!-- Mobile Expansion Panels and Search -->
             <v-col cols="12" class="pa-5 d-block d-sm-none">
               <v-expansion-panels class="mb-2" v-model="mobilePanels">
+
+                <!-- Mobile Institution Search -->
                 <v-expansion-panel>
-                  <v-expansion-panel-header>Search Schools</v-expansion-panel-header>
+                  <v-expansion-panel-header>
+                    Search Schools
+                  </v-expansion-panel-header>
+
                   <v-expansion-panel-content>
                     <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
                   </v-expansion-panel-content>
-<!--                  <v-expansion-panel-header>Name Search</v-expansion-panel-header>-->
-<!--                  <v-expansion-panel-content>-->
-<!--                    <name-autocomplete @school-name-selected="handleSchoolNameSelected" />-->
-<!--                  </v-expansion-panel-content>-->
+
                 </v-expansion-panel>
               </v-expansion-panels>
+
+
+              <!-- Mobile FoS Search-->
               <v-expansion-panels class="mb-2">
                 <v-expansion-panel>
-                  <v-expansion-panel-header>Search Field Of study</v-expansion-panel-header>
-                  <v-expansion-panel-content class="ma-0 mt-n5 mx-n5">
+                  <v-expansion-panel-header>
+                    Search Field Of study
+                  </v-expansion-panel-header>
+
+                  <v-expansion-panel-content>
                     <field-of-study-search
                       @field-of-study-selected="handleFieldOfStudySelected"
                     />
                   </v-expansion-panel-content>
-<!--                  <v-expansion-panel-header>Custom Search</v-expansion-panel-header>-->
-<!--                  <v-expansion-panel-content class="pa-0 ma-0 mt-n5 mx-n5">-->
-<!--                    <search-form @search-query="directToSearch" />-->
-<!--                  </v-expansion-panel-content>-->
+
                 </v-expansion-panel>
               </v-expansion-panels>
+
+              <!-- Mobile Show me Options-->
               <v-expansion-panels class="mb-2">
                 <v-expansion-panel>
-                  <v-expansion-panel-header>Show Me Options</v-expansion-panel-header>
+                  <v-expansion-panel-header>
+                    Show Me Options
+                  </v-expansion-panel-header>
+
                   <v-expansion-panel-content>
                     <p
                       class="my-2"
                     >Select one or more options to create a list of schools that fit your needs.</p>
                     <canned-search-container @canned-search-submit="directToSearch" class="mx-5"></canned-search-container>
                   </v-expansion-panel-content>
+
                 </v-expansion-panel>
               </v-expansion-panels>
+
             </v-col>
+
           </v-row>
         </v-container>
       </div>
 
       <!-- Bottom Content -->
-      <div id="home-content-container" class="mt-5 pa-6">
+      <div id="home-content-container" class="mt-5 pa-md-6">
 
-        <v-container class="pa-0 my-0">
+        <v-container class="my-0">
 
-          <v-row class="mt-md-12 pa-0">
+          <v-row class="mt-md-12 px-md-6">
 
-            <v-col class="homeCallout apprenticeships pa-0 my-md-0 mr-sm-3"
+            <!-- apprenticeships callout -->
+            <v-col class="homeCallout apprenticeships"
               cols="12"
-              sm="5"
-              offset-sm="1"
+              md="6"
+              sm="12"
             >
 
-              <div class="home-callout-container mx-md-4">
+              <div class="home-callout-container mr-md-3">
 
                 <div class="home-callout-top mb-12">
 
@@ -204,11 +240,14 @@
 
             </v-col>
 
-            <v-col class="homeCallout paying pa-0 my-0 ml-sm-3"
+            <!-- paying callout -->
+            <v-col class="homeCallout paying"
               cols="12"
-              sm="5"
+              md="6"
+              sm="12"
             >
-              <div class="home-callout-container mx-md-4">
+
+              <div class="home-callout-container ml-md-3">
 
                 <div class="home-callout-top mb-12">
 
