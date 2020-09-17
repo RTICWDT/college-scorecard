@@ -63,9 +63,7 @@
 
                 <!-- Institution Search-->
                 <v-tab-item>
-                  <v-card class="pa-5"
-                    height="150"
-                  >
+                  <v-card class="pa-5 homepage-search-container">
                     <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
 
                     <div class="mt-5 text-right">
@@ -89,9 +87,7 @@
 
                 <!-- Field Of Study Search-->
                 <v-tab-item>
-                  <v-card class="pa-5"
-                    height="150"
-                  >
+                  <v-card class="pa-5 homepage-search-container">
                     <field-of-study-search
                       @field-of-study-selected="handleFieldOfStudySelected"
                     />
@@ -393,6 +389,10 @@
       right: 0;
       margin: auto;
     }
+  }
+
+  .homepage-search-container{
+    min-height: 150px;
   }
 
 </style>
