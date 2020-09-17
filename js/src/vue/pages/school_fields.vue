@@ -39,7 +39,7 @@
                     <v-btn
                       text
                       small
-                      :color="isSelected?'amber':'white'"
+                      :color="isSelected({schoolId:String(this.school.id)},this.compareSchools)?'amber':'white'"
                       @click="$emit('toggle-compare-school', { schoolId: school.id, schoolName: school.school.name } )"
                     >
                       <v-icon x-small class='mr-2'>fa fa-plus-circle</v-icon> Compare
