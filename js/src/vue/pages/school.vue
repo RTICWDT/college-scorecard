@@ -38,6 +38,7 @@
                       :href="searchURL"
                     >&laquo; Back to search</v-btn>
                   </v-col>
+
                   <v-col cols="6" class="text-right">
                     <v-btn
                       text
@@ -49,6 +50,7 @@
                       <v-icon x-small class="mr-2">fa fa-plus-circle</v-icon>
                       Compare School
                     </v-btn>
+
                     <v-btn
                       fab
                       x-small
@@ -58,8 +60,10 @@
                     >
                       <v-icon small class="">fa fa-plus-circle</v-icon>
                       <span class='sr-only'>Compare School</span>
-                    </v-btn>                    
+                    </v-btn>
+
                     <share small text color="white" label="Share this School" :url="shareLink" show-copy :hide="['email']" />
+
                   </v-col>
                 </v-row>
 
@@ -134,7 +138,7 @@
 
                       <horizontal-bar
                         v-if="completionRate"
-                        :value="parseFloat((completionRate * 100).toFixed(2))"
+                        :value="parseInt((completionRate * 100))"
                         :min="0"
                         :max="100"
                         color="#0e365b"
