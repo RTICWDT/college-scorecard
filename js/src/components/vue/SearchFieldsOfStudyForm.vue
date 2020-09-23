@@ -29,14 +29,12 @@
   }
 
   .fos-limited-data{
-    /*More rules in Override*/
 
+    /*More rules in Override*/
     span{
       font-size: 14px;
-      /*For better alignment with icon*/
-      display: block;
-      margin-top: 4px;
     }
+
   }
 
 </style>
@@ -266,12 +264,12 @@
 
       <!-- Limited Data Alert -->
       <v-alert v-if="input.fos_salary.join(',') !== utility.formDefault.fos_salary.join(',')"
-        type="warning"
-        color="#D16E00"
-        class="fos-limited-data mt-2 mb-0 pa-2"
-        colored-border
-        border="left"
-        dense
+               type="warning"
+               color="#D16E00"
+               class="fos-limited-data mt-2 mb-2 pa-2"
+               colored-border
+               border="left"
+               dense
       >
         <template v-slot:prepend>
           <div class="mx-2">
@@ -279,13 +277,15 @@
           </div>
         </template>
 
-        <span>Limited Data</span>
+        <div style="margin-top:1px">
+          <span>Limited Data</span>
+        </div>
       </v-alert>
 
     </div>
 
     <!-- Median Total Debt -->
-    <div>
+    <div class="mb-4">
       <label class="subhead mb-2" id="search-fos-median-debt" for="search-fos-median-debt">
         Median Total Debt
 
@@ -357,8 +357,11 @@
           </div>
         </template>
 
-        <span>Limited Data</span>
+        <div style="margin-top:1ßpx;">
+          <span>Limited Data</span>
+        </div>
       </v-alert>
+
     </div>
 
   </v-form>
