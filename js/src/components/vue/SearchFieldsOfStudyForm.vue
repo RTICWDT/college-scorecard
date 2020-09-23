@@ -518,8 +518,7 @@
             case 'fos_salary':
               // Format range sliders from backend value to frontend value
               let valueArray = newObjValue.split('..');
-              console.log('Test');
-              console.log(valueArray);
+
               return valueArray.map((value) => {
                 if(Number(value) <= 0){
                   return 0

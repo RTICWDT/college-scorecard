@@ -248,7 +248,7 @@
                     given school. <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">Learn more about CIP.</a>
                   </p>
                 </div>
-                
+
                 <!-- Institution Results -->
                 <div class="search-result-cards-container" v-if="!isLoading">
                   <!-- Institution Results -->
@@ -374,8 +374,6 @@ import FieldOfStudyResultCard from '../../components/vue/FieldOfStudyResultCard.
 import { compare } from "vue/mixins.js";
 
 import _ from "lodash";
-// import querystring from 'querystring';
-// import { EventBus } from "../js/src/vue/EventBus.js";
 import { EventBus } from "../EventBus.js";
 import {apiGet} from '../api.js';
 import {fields} from '../constants.js';
@@ -733,27 +731,6 @@ export default {
         fields.LOCALE,
         fields.FIELD_OF_STUDY
       ].join(',');
-
-      console.log("Searching FOS");
-      console.log(params);
-
-      // Do we need the second query?
-      if(Object.keys(params).includes('fos_salary') || Object.keys(params).includes('fos_debt')){
-        console.log("Will Second Query");
-
-        // Strip arguments from params to get actual count
-        let filteredParams = _.omit(params,['fos_salary','fos_debt']);
-
-        let query = this.queryAPI(filteredParams);
-
-        query.then((response)=>{
-          // Store count for alteration
-          this.fieldOfStudyTotalCountWithoutRangeFilters = response.data.metadata.total;
-        }).catch((error) => {
-          // TODO - What does the error look like?
-          this.fieldOfStudyTotalCountWithoutRangeFilters = 0;
-        });
-      }
 
       // Cache params to power other content
       this.utility.previousParams = params;
