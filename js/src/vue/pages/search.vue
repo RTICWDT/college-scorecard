@@ -342,6 +342,7 @@
         :schools="compareSchools"
         :fields-of-study="compareFieldsOfStudy"
       />
+
       <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
         <compare-drawer
           :schools="compareSchools"

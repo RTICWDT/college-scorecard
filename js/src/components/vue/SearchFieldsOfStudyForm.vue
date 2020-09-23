@@ -28,6 +28,17 @@
     }
   }
 
+  .fos-limited-data{
+    /*More rules in Override*/
+
+    span{
+      font-size: 14px;
+      /*For better alignment with icon*/
+      display: block;
+      margin-top: 4px;
+    }
+  }
+
 </style>
 
 <template>
@@ -61,20 +72,6 @@
         />
 
       </div>
-
-      <!-- Clear All button -->
-<!--      <div class="text-right">-->
-<!--        <v-btn-->
-<!--          class="mt-2"-->
-<!--          text-->
-<!--          color="secondary"-->
-<!--          v-show="input.cip4.length > 0"-->
-<!--          @click="handleClearAllChips"-->
-<!--          aria-label="Clear Selected Fields of Study"-->
-<!--        >-->
-<!--          Clear All-->
-<!--        </v-btn>-->
-<!--      </div>-->
 
     </div>
 
@@ -266,6 +263,25 @@
           ></v-text-field>
         </template>
       </v-range-slider>
+
+      <!-- Limited Data Alert -->
+      <v-alert v-if="input.fos_salary.join(',') !== utility.formDefault.fos_salary.join(',')"
+        type="warning"
+        color="#D16E00"
+        class="fos-limited-data mt-2 mb-0 pa-2"
+        colored-border
+        border="left"
+        dense
+      >
+        <template v-slot:prepend>
+          <div class="mx-2">
+            <tooltip definition="fos-limited-data" />
+          </div>
+        </template>
+
+        <span>Limited Data</span>
+      </v-alert>
+
     </div>
 
     <!-- Median Total Debt -->
@@ -325,6 +341,24 @@
           ></v-text-field>
         </template>
       </v-range-slider>
+
+      <!-- Limited Data Alert -->
+      <v-alert v-if="input.fos_debt.join(',') !== utility.formDefault.fos_debt.join(',')"
+               type="warning"
+               color="#D16E00"
+               class="fos-limited-data mt-2 mb-2 pa-2"
+               colored-border
+               border="left"
+               dense
+      >
+        <template v-slot:prepend>
+          <div class="mx-2">
+            <tooltip definition="fos-limited-data" />
+          </div>
+        </template>
+
+        <span>Limited Data</span>
+      </v-alert>
     </div>
 
   </v-form>
@@ -339,7 +373,7 @@
   import { SiteData } from '../../vue/mixins/SiteData.js';
   import _ from 'lodash';
   import { EventBus } from '../../vue/EventBus.js';
-  
+
   export default{
     mixins: [SiteData, LocationCheck],
     props:{
