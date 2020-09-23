@@ -131,6 +131,7 @@
                             <span class='sr-only'>Clear Search</span>
                           </span>
                         </v-btn>
+
                         <v-btn
                           id="search-button-clear"
                           color="primary"
@@ -144,6 +145,7 @@
                             <v-icon small class='mr-1'>mdi-close-circle</v-icon> Clear
                           </span>
                         </v-btn>
+
                         <v-menu offset-y>
                         <template v-slot:activator="{ on }">
                           <v-btn id="search-button-sort" rounded color="primary" small v-on="on" class="d-none d-sm-inline">
@@ -156,8 +158,7 @@
                               v-for="(item, index) in sorts"
                               :key="item.field"
                               @click="resort(item.field);"
-                              :value="item.field"                              
-                              
+                              :value="item.field"
                             >
                               <v-list-item-title>{{ item.type }}</v-list-item-title>
                             </v-list-item>
@@ -205,14 +206,48 @@
                 </v-row>
               </v-card>
 
-              <!-- Canned Search Container -->
-              <div id="search-can-query-container" v-if="!isLoading && results.schools.length === 0">
+              <!-- Field Of Study CIP 4 Information -->
+              <div v-if="displayToggle === 'fos' && !isLoading"
+                   id="search-fos-cip-warning"
+                   class="my-2"
+              >
+                <p class="white--text">
+                  <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
+                  Classification of Instructional Programs (CIP) and may not match the program titles at a
+                  given school. <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">Learn more about CIP.</a>
+                </p>
+              </div>
+
+              <!-- No Results/Canned Search/ -->
+              <div id="search-can-query-container"
+                v-if="!isLoading && results.schools.length === 0"
+              >
                 <v-row>
-                  <v-col cols="12">
+                  <v-col cols="12" v-if="displayToggle === 'institutions'">
                     <v-card class='pa-5'>
                       <h3>Show Me Options</h3>
                       <p>Select one or more options below to create a list of schools that fit your needs.</p>
                       <canned-search-container @canned-search-submit="handleCannedSearchClick"></canned-search-container>
+                    </v-card>
+                  </v-col>
+
+                  <v-col cols="12" v-if="displayToggle === 'fos'">
+                    <v-card class='pa-5 text-center'>
+                      <h3 class="text-center">No Results Found</h3>
+                      <br>
+                      <v-btn
+                        id="search-button-clear-filters"
+                        color="primary"
+                        text-color="white"
+                        @click="clearSearchForm"
+                        rounded
+                      >
+                        <span>
+                          <v-icon class='mr-1'>mdi-close-circle</v-icon> Clear Search Filters
+                        </span>
+                      </v-btn>
+
+
                     </v-card>
                   </v-col>
                 </v-row>
@@ -235,18 +270,6 @@
                 <div class="show-error" v-show="error.message">
                   <h1>Something went wrong:</h1>
                   <p class="error-message">{{error.message}}</p>
-                </div>
-
-                <!-- Field Of Study CIP 4 Information -->
-                <div v-if="displayToggle === 'fos' && !isLoading"
-                  id="search-fos-cip-warning"
-                   class="my-2"
-                >
-                  <p class="white--text">
-                    <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
-                    Classification of Instructional Programs (CIP) and may not match the program titles at a
-                    given school. <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">Learn more about CIP.</a>
-                  </p>
                 </div>
 
                 <!-- Institution Results -->
