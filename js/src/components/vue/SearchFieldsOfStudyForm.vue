@@ -354,7 +354,7 @@
           </div>
         </template>
 
-        <div style="margin-top:1ßpx;">
+        <div style="margin-top:1px;">
           <span>Limited Data</span>
         </div>
       </v-alert>
