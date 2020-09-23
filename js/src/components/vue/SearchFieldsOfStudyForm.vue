@@ -29,12 +29,9 @@
   }
 
   .fos-limited-data{
-
-    /*More rules in Override*/
     span{
       font-size: 14px;
     }
-
   }
 
 </style>
