@@ -248,32 +248,7 @@
                     given school. <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">Learn more about CIP.</a>
                   </p>
                 </div>
-
-                <!-- Field of Study Filter Warning -->
-                <v-alert v-if="showFieldOfStudyWarning"
-                  id="search-fos-cip-filter-warning"
-                  type="warning"
-                  color="#D16E00"
-                  class="mt-4 mb-2 pa-4"
-                  colored-border
-                  border="left"
-                  dense
-                >
-                  <template v-slot:prepend>
-                    <div>
-                      <v-icon class="warning-orange">mdi mdi-exclamation</v-icon>
-                    </div>
-                  </template>
-
-                  <h4 if="fieldOfStudyRangeFiltersHidingCount > 0">
-                    {{fieldOfStudyRangeFiltersHidingCount}} institutions hidden<br/>
-                  </h4>
-
-                  <p class="mb-0">The filter you've selected contains <strong>limited data</strong>. Displayed search results only
-                  represent schools for which there is sufficient data.  To see all schools within this field of study,
-                  clear search filters.</p>
-                </v-alert>
-
+                
                 <!-- Institution Results -->
                 <div class="search-result-cards-container" v-if="!isLoading">
                   <!-- Institution Results -->
