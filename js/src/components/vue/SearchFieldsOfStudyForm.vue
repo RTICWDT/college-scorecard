@@ -344,12 +344,12 @@
 
       <!-- Limited Data Alert -->
       <v-alert v-if="input.fos_debt.join(',') !== utility.formDefault.fos_debt.join(',')"
-               type="warning"
-               color="#D16E00"
-               class="fos-limited-data mt-2 mb-2 pa-2"
-               colored-border
-               border="left"
-               dense
+        type="warning"
+        color="#D16E00"
+        class="fos-limited-data mt-2 mb-2 pa-2"
+        colored-border
+        border="left"
+        dense
       >
         <template v-slot:prepend>
           <div class="mx-2">
