@@ -118,7 +118,7 @@
                 <!-- Mobile Institution Search -->
                 <v-expansion-panel>
                   <v-expansion-panel-header>
-                    Search Schools
+                    <span class="home-mobile-search-title">Search Schools</span>
                   </v-expansion-panel-header>
 
                   <v-expansion-panel-content>
@@ -133,7 +133,7 @@
               <v-expansion-panels class="mb-2">
                 <v-expansion-panel>
                   <v-expansion-panel-header>
-                    Search Field Of study
+                    <span class="home-mobile-search-title">Search Field Of Study</span>
                   </v-expansion-panel-header>
 
                   <v-expansion-panel-content>
@@ -149,7 +149,7 @@
               <v-expansion-panels class="mb-2">
                 <v-expansion-panel>
                   <v-expansion-panel-header>
-                    Show Me Options
+                    <span class="home-mobile-search-title">Show Me Option</span>
                   </v-expansion-panel-header>
 
                   <v-expansion-panel-content>
@@ -192,17 +192,21 @@
                     </div>
                   </div>
 
-                  <h2 class="title">
-                    There’s more than one pathway to a career.
+                  <h2 class="title mt-4 mt-md-0">
+                    There's More than One Pathway to a Career
                   </h2>
 
                 </div>
 
-                <p>
-                  <strong>Apprenticeships</strong> are another great way to jump-start your career.
-                </p>
+                <h3>
+                  Jump start your career
+                </h3>
 
                 <p>
+                  Find an apprenticeship that’s right for you
+                </p>
+
+                <p class="home-callout-button-wrapper">
                   <v-btn
                     block
                     rounded
@@ -218,10 +222,10 @@
                 </h3>
 
                 <p>
-                  Curious what careers are out there? O*NET’s career explorer is there to help!
+                  Curious what careers are out there? O*NET's Career Explorer is here to help!
                 </p>
 
-                <p>
+                <p class="home-callout-button-wrapper">
                   <v-btn
                     block
                     rounded
@@ -253,7 +257,7 @@
                     </div>
                   </div>
 
-                  <h2 class="title">
+                  <h2 class="title mt-4 mt-md-0">
                     Learn More About Paying for College
                   </h2>
 
@@ -277,7 +281,7 @@
                   to see how much aid may be available to you.
                 </p>
 
-                <p class="text-center">
+                <p class="text-center home-callout-button-wrapper">
                   <v-btn
                     block
                     rounded
@@ -301,16 +305,6 @@
 
                   that may also help you pay for school.
                 </p>
-
-
-
-<!--                <div class="home-icon-wrapper">-->
-<!--                  <div class="home-icon pa-2">-->
-<!--                    <img :src="`${$baseUrl}/img/icon-financial-aid.svg`" alt="Financial Aid Icon">-->
-<!--                  </div>-->
-<!--                </div>-->
-
-<!--                <paying-for-college></paying-for-college>-->
               </div>
 
             </v-col>
@@ -361,22 +355,27 @@
 
   .home-callout-container{
     margin-bottom: 80px;
-    height: 600px;
+    height: 500px;
     background-color: white;
     box-shadow: 0px 3px 6px #00000029;
 
     @media (min-width: 960px) {
       margin-bottom: inherit;
+      height: 600px;
     }
   }
 
   .home-callout-top{
     background-color: #c4e4f9;
-    height: 180px;
+    height: 120px;
 
     h2{
       position: relative;
       bottom: 50px;
+    }
+
+    @media (min-width: 960px) {
+      height: 180px;
     }
   }
 
@@ -388,6 +387,11 @@
       left: 0;
       right: 0;
       margin: auto;
+      width: 75%;
+
+      @media (min-width: 960px) {
+        width: unset;
+      }
     }
   }
 
@@ -435,28 +439,44 @@
 
 .home-icon-wrapper{
   position: relative;
-  top: -50px;
   margin: 0 auto;
-  width: 133px;
-  height: 133px;
+  width: 75px;
+  height: 75px;
+  top: -35px;
   background: #FFFFFF;
   border-radius: 50%;
   box-shadow: 0px 3px 6px #00000029;
 
+  @media (min-width: 960px) {
+    width: 133px;
+    height: 133px;
+    top: -50px;
+  }
 }
+  .home-callout-button-wrapper{
+    margin: unset;
+
+    @media (min-width: 960px) {
+      margin: 0 60px;
+    }
+  }
+
+  .home-mobile-search-title{
+    font-size: 16px;
+  }
 
 </style>
 
 <script>
-import PayingForCollege from "components/vue/PayingForCollege.vue";
-import CannedSearchContainer from "components/vue/CannedSearchContainer.vue";
-import querystring from "querystring";
-import SearchForm from "components/vue/SearchForm.vue";
-import NameAutocomplete from "components/vue/NameAutocomplete.vue";
-import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
-import FieldOfStudySearch from '../../components/vue/FieldOfStudySearch.vue';
+  import PayingForCollege from 'components/vue/PayingForCollege.vue';
+  import CannedSearchContainer from 'components/vue/CannedSearchContainer.vue';
+  import querystring from 'querystring';
+  import SearchForm from 'components/vue/SearchForm.vue';
+  import NameAutocomplete from 'components/vue/NameAutocomplete.vue';
+  import AnalyticsEvents from 'vue/mixins/AnalyticsEvents.js';
+  import FieldOfStudySearch from '../../components/vue/FieldOfStudySearch.vue';
 
-export default {
+  export default {
   mixins: [AnalyticsEvents],
   components: {
     "paying-for-college": PayingForCollege,
