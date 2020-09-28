@@ -192,7 +192,7 @@
                     </div>
                   </div>
 
-                  <h2 class="title">
+                  <h2 class="title mt-4 mt-md-0">
                     There's More than One Pathway to a Career
                   </h2>
 
@@ -257,7 +257,7 @@
                     </div>
                   </div>
 
-                  <h2 class="title">
+                  <h2 class="title mt-4 mt-md-0">
                     Learn More About Paying for College
                   </h2>
 
@@ -367,11 +367,15 @@
 
   .home-callout-top{
     background-color: #c4e4f9;
-    height: 180px;
+    height: 120px;
 
     h2{
       position: relative;
       bottom: 50px;
+    }
+
+    @media (min-width: 960px) {
+      height: 180px;
     }
   }
 
@@ -383,6 +387,11 @@
       left: 0;
       right: 0;
       margin: auto;
+      width: 75%;
+
+      @media (min-width: 960px) {
+        width: unset;
+      }
     }
   }
 
@@ -430,13 +439,19 @@
 
 .home-icon-wrapper{
   position: relative;
-  top: -50px;
   margin: 0 auto;
-  width: 133px;
-  height: 133px;
+  width: 75px;
+  height: 75px;
+  top: -35px;
   background: #FFFFFF;
   border-radius: 50%;
   box-shadow: 0px 3px 6px #00000029;
+
+  @media (min-width: 960px) {
+    width: 133px;
+    height: 133px;
+    top: -50px;
+  }
 }
   .home-callout-button-wrapper{
     margin: unset;
