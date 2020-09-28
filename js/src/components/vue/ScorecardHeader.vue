@@ -179,22 +179,6 @@ header {
               </a>
             </li>
 
-            <li>
-              <a href="mailto:scorecarddata@rti.org">
-                Contact
-              </a>
-            </li>
-
-            <li>
-              <div id="nav-search-container" class="d-inline-block">
-                <a :href="`${$baseUrl}/search`"
-                   aria-label="Navigate to Search Page"
-                >
-                  <v-icon color="white" size="30">mdi mdi-magnify</v-icon>
-                </a>
-              </div>
-            </li>
-
           </ul>
         </nav>
       </div>
@@ -239,22 +223,6 @@ header {
             <v-list-item-content>
               <v-list-item-title class="mobile-navigation-item">
                 About the Data
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-list-item class="mobile-navigation-item" @click="mobileNavClick('mailto:scorecarddata@rti.org')">
-            <v-list-item-content>
-              <v-list-item-title class="mobile-navigation-item">
-                Contact
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-list-item class="mobile-navigation-item" @click="mobileNavClick(`${$baseUrl}/search`)">
-            <v-list-item-content>
-              <v-list-item-title class="mobile-navigation-item">
-                Search
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
