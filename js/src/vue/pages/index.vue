@@ -118,7 +118,7 @@
                 <!-- Mobile Institution Search -->
                 <v-expansion-panel>
                   <v-expansion-panel-header>
-                    Search Schools
+                    <span class="home-mobile-search-title">Search Schools</span>
                   </v-expansion-panel-header>
 
                   <v-expansion-panel-content>
@@ -133,7 +133,7 @@
               <v-expansion-panels class="mb-2">
                 <v-expansion-panel>
                   <v-expansion-panel-header>
-                    Search Field Of Study
+                    <span class="home-mobile-search-title">Search Field Of Study</span>
                   </v-expansion-panel-header>
 
                   <v-expansion-panel-content>
@@ -149,7 +149,7 @@
               <v-expansion-panels class="mb-2">
                 <v-expansion-panel>
                   <v-expansion-panel-header>
-                    Show Me Options
+                    <span class="home-mobile-search-title">Show Me Option</span>
                   </v-expansion-panel-header>
 
                   <v-expansion-panel-content>
@@ -459,6 +459,10 @@
     @media (min-width: 960px) {
       margin: 0 60px;
     }
+  }
+
+  .home-mobile-search-title{
+    font-size: 16px;
   }
 
 </style>
