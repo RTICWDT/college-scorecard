@@ -164,31 +164,37 @@
         </div>
       </div>
 
-      <check-range
-        legend-title="Graduation Rate"
-        id="search-form-completion-rate"
-        v-model="input.completion_rate"
-        :enable="utility.enable.completion_rate"
-        @slider-toggle="utility.enable.completion_rate = $event"
-        :min="0"
-        :max="100"
-        :step="5"
-        appendText="%"
-        class="mt-5"
-        andUp
-      ></check-range>
+      <!-- Graduation Rate -->
+      <div>
+        <check-range
+          legend-title="Graduation Rate"
+          id="search-form-completion-rate"
+          v-model="input.completion_rate"
+          :enable="utility.enable.completion_rate"
+          @slider-toggle="utility.enable.completion_rate = $event"
+          :min="0"
+          :max="100"
+          :step="5"
+          appendText="%"
+          class="mt-5"
+          andUp
+        ></check-range>
+      </div>
 
-      <check-range
-        legend-title="Average Annual Cost"
-        id="search-form-avg-net-price"
-        v-model="input.avg_net_price"
-        :enable="utility.enable.avg_net_price"
-        @slider-toggle="utility.enable.avg_net_price = $event"
-        :min="0"
-        :max="100"
-        :step="5"
-        appendText="k"
-      ></check-range>
+      <!-- Average Annual Cost -->
+      <div>
+        <check-range
+          legend-title="Average Annual Cost"
+          id="search-form-avg-net-price"
+          v-model="input.avg_net_price"
+          :enable="utility.enable.avg_net_price"
+          @slider-toggle="utility.enable.avg_net_price = $event"
+          :min="0"
+          :max="100"
+          :step="5"
+          appendText="k"
+        ></check-range>
+      </div>
     </div>
 
     <div v-if="displayAllFilters" class="px-5 extraFilters">
@@ -409,6 +415,10 @@ export default {
       default: false
     },
     displayAllFilters: {
+      type: Boolean,
+      default: false
+    },
+    condenseSliders:{
       type: Boolean,
       default: false
     }

@@ -202,7 +202,7 @@
                   <strong>Apprenticeships</strong> are another great way to jump-start your career.
                 </p>
 
-                <p>
+                <p class="home-callout-button-wrapper">
                   <v-btn
                     block
                     rounded
@@ -221,7 +221,7 @@
                   Curious what careers are out there? O*NET’s career explorer is there to help!
                 </p>
 
-                <p>
+                <p class="home-callout-button-wrapper">
                   <v-btn
                     block
                     rounded
@@ -277,7 +277,7 @@
                   to see how much aid may be available to you.
                 </p>
 
-                <p class="text-center">
+                <p class="text-center home-callout-button-wrapper">
                   <v-btn
                     block
                     rounded
@@ -301,16 +301,6 @@
 
                   that may also help you pay for school.
                 </p>
-
-
-
-<!--                <div class="home-icon-wrapper">-->
-<!--                  <div class="home-icon pa-2">-->
-<!--                    <img :src="`${$baseUrl}/img/icon-financial-aid.svg`" alt="Financial Aid Icon">-->
-<!--                  </div>-->
-<!--                </div>-->
-
-<!--                <paying-for-college></paying-for-college>-->
               </div>
 
             </v-col>
@@ -361,12 +351,13 @@
 
   .home-callout-container{
     margin-bottom: 80px;
-    height: 600px;
+    height: 500px;
     background-color: white;
     box-shadow: 0px 3px 6px #00000029;
 
     @media (min-width: 960px) {
       margin-bottom: inherit;
+      height: 600px;
     }
   }
 
@@ -442,21 +433,27 @@
   background: #FFFFFF;
   border-radius: 50%;
   box-shadow: 0px 3px 6px #00000029;
-
 }
+  .home-callout-button-wrapper{
+    margin: unset;
+
+    @media (min-width: 960px) {
+      margin: 0 60px;
+    }
+  }
 
 </style>
 
 <script>
-import PayingForCollege from "components/vue/PayingForCollege.vue";
-import CannedSearchContainer from "components/vue/CannedSearchContainer.vue";
-import querystring from "querystring";
-import SearchForm from "components/vue/SearchForm.vue";
-import NameAutocomplete from "components/vue/NameAutocomplete.vue";
-import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
-import FieldOfStudySearch from '../../components/vue/FieldOfStudySearch.vue';
+  import PayingForCollege from 'components/vue/PayingForCollege.vue';
+  import CannedSearchContainer from 'components/vue/CannedSearchContainer.vue';
+  import querystring from 'querystring';
+  import SearchForm from 'components/vue/SearchForm.vue';
+  import NameAutocomplete from 'components/vue/NameAutocomplete.vue';
+  import AnalyticsEvents from 'vue/mixins/AnalyticsEvents.js';
+  import FieldOfStudySearch from '../../components/vue/FieldOfStudySearch.vue';
 
-export default {
+  export default {
   mixins: [AnalyticsEvents],
   components: {
     "paying-for-college": PayingForCollege,
