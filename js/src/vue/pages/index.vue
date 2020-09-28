@@ -133,7 +133,7 @@
               <v-expansion-panels class="mb-2">
                 <v-expansion-panel>
                   <v-expansion-panel-header>
-                    Search Field Of study
+                    Search Field Of Study
                   </v-expansion-panel-header>
 
                   <v-expansion-panel-content>
@@ -193,13 +193,17 @@
                   </div>
 
                   <h2 class="title">
-                    There’s more than one pathway to a career.
+                    There's More than One Pathway to a Career
                   </h2>
 
                 </div>
 
+                <h3>
+                  Jump start your career
+                </h3>
+
                 <p>
-                  <strong>Apprenticeships</strong> are another great way to jump-start your career.
+                  Find an apprenticeship that’s right for you
                 </p>
 
                 <p class="home-callout-button-wrapper">
@@ -218,7 +222,7 @@
                 </h3>
 
                 <p>
-                  Curious what careers are out there? O*NET’s career explorer is there to help!
+                  Curious what careers are out there? O*NET's Career Explorer is here to help!
                 </p>
 
                 <p class="home-callout-button-wrapper">

@@ -200,7 +200,7 @@ header {
     <v-navigation-drawer
       v-model="drawer"
       v-if="drawer"
-      absolute
+      fixed
       temporary
       disable-resize-watcher
       right
