@@ -171,7 +171,7 @@
             </div>
 
             <p class="mb-0">
-              <a :href='fieldsLink'>View all Fields of study at {{schoolName}}</a>
+              <a :href='fieldsLink'>View all Fields of Study at {{schoolName}}</a>
             </p>
           </div>
         </v-col>

@@ -214,7 +214,22 @@
                 <p class="white--text">
                   <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
                   Classification of Instructional Programs (CIP) and may not match the program titles at a
-                  given school. <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">Learn more about CIP.</a>
+                  given school.
+                  <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">
+                    Learn more about CIP
+                    <v-icon
+                      x-small
+                      color="white"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>
+
+                  </a>
+
+<!--                  <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">-->
+
+<!--                  </a>-->
+
                 </p>
               </div>
 

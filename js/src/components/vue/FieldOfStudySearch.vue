@@ -1,16 +1,4 @@
 <template>
-<!--  <v-autocomplete-->
-<!--    :value="selected"-->
-<!--    @input="handleFieldOfStudySelect"-->
-<!--    :items="items"-->
-<!--    item-text="field"-->
-<!--    item-value="cip4"-->
-<!--    placeholder="Start typing to search"-->
-<!--    return-object-->
-<!--    autocomplete="off"-->
-<!--    clearable-->
-<!--  >-->
-<!--  </v-autocomplete>-->
   <v-autocomplete
     :value="selected"
     @input="handleFieldOfStudySelect"
