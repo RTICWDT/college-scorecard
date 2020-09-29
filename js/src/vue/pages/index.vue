@@ -93,7 +93,15 @@
                     />
 
                     <div class="mt-5 text-right">
-                      <a :href="`${$baseUrl}/search/?toggle=fos`">More Search Options</a>
+                      <v-btn
+                        text
+                        small
+                        role="link"
+                        @click="handleFoSMoreOptionsClick"
+                      >
+                        More Search Options
+                        <v-icon>mdi-menu-right</v-icon>
+                      </v-btn>
                     </div>
                   </v-card>
                 </v-tab-item>
@@ -519,6 +527,9 @@
     },
     handleFieldOfStudySelected(fieldOfStudy){
       window.location = this.$baseUrl+'/search/?toggle=fos&cip4=' + encodeURIComponent(fieldOfStudy.cip4);
+    },
+    handleFoSMoreOptionsClick(){
+      window.location = `${this.$baseUrl}/search/?toggle=fos`;
     }
   }
 };
