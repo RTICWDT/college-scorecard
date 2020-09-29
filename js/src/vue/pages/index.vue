@@ -207,11 +207,11 @@
                 </div>
 
                 <h3>
-                  Jump start your career
+                  Jump start your career with an apprenticeship
                 </h3>
 
                 <p>
-                  Find an apprenticeship that’s right for you
+                  Find the right one for you.
                 </p>
 
                 <p class="home-callout-button-wrapper">
