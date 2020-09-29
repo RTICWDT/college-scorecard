@@ -100,6 +100,7 @@ header {
 
       li .nav-active{
         color: $nav-active-color !important;
+        text-decoration: underline;
       }
 
     }

@@ -93,7 +93,15 @@
                     />
 
                     <div class="mt-5 text-right">
-                      <a :href="`${$baseUrl}/search/?toggle=fos`">More Search Options</a>
+                      <v-btn
+                        text
+                        small
+                        role="link"
+                        @click="handleFoSMoreOptionsClick"
+                      >
+                        More Search Options
+                        <v-icon>mdi-menu-right</v-icon>
+                      </v-btn>
                     </div>
                   </v-card>
                 </v-tab-item>
@@ -199,11 +207,11 @@
                 </div>
 
                 <h3>
-                  Jump start your career
+                  Jump start your career with an apprenticeship
                 </h3>
 
                 <p>
-                  Find an apprenticeship that’s right for you
+                  Find the right one for you.
                 </p>
 
                 <p class="home-callout-button-wrapper">
@@ -519,6 +527,9 @@
     },
     handleFieldOfStudySelected(fieldOfStudy){
       window.location = this.$baseUrl+'/search/?toggle=fos&cip4=' + encodeURIComponent(fieldOfStudy.cip4);
+    },
+    handleFoSMoreOptionsClick(){
+      window.location = `${this.$baseUrl}/search/?toggle=fos`;
     }
   }
 };
