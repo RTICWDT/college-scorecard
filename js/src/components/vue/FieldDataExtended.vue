@@ -7,20 +7,11 @@
 
     <!-- Salary After Completing-->
     <v-row class="mx-1 mx-sm-1">
-      <v-col cols="12" md="5">
-        <v-select
-          hide-details
-          :items="fosSalarySelectItems"
-          :value="fosSalarySelect"
-          @input="$emit('update-salary-select', $event)"
-          color="secondary"
-        />
-      </v-col>
 
       <!--Median Earnings-->
-      <v-col cols="12" md="3">
+      <v-col cols="12" md="5">
         <h4 class="mb-2 field-data-header-title">
-          Median <br class="d-none d-md-block">Earnings&nbsp
+          Median Earnings&nbsp
           <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
         </h4>
 
@@ -49,7 +40,7 @@
       <!--Monthly Earnings-->
       <v-col cols="12" md="4">
         <h4 class="mb-2">
-          Monthly <br class="d-none d-md-block">Earnings&nbsp
+          Monthly Earnings&nbsp
           <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
         </h4>
 

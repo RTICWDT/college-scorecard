@@ -321,9 +321,9 @@
                 </v-col>
               </v-row>
 
+              <!--Field Of Study Panel-->
               <v-expansion-panels multiple focusable v-model="panelsFOS">
 
-                <!--Field Of Study Panel-->
                 <v-expansion-panel class="fos-profile-panel">
                   <v-expansion-panel-header
                     id="fields-of-study"
@@ -345,6 +345,7 @@
                   </v-expansion-panel-header>
 
                   <v-expansion-panel-content id="fos-content" class="px-0 py-3 pa-sm-5">
+                    <!-- Compare Button -->
                     <div class="text-right mb-2">
                       <v-btn
                         v-if="selectedFOS"
@@ -373,7 +374,7 @@
 
                       <div class="pa-sm-4 mb-4" id="fos-number-grads">
 
-<!--                        TODO - Adjust Class-->
+                        <!--TODO - Adjust Class-->
                         <h3 class="mr-4" style="font-weight: 500">
                           Number of Graduates
                           <tooltip class="ml-2" definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
@@ -396,19 +397,8 @@
 
                       <div class="px-4 pb-5 px-sm-4 py-sm-4">
                         <v-row>
-                          <v-col cols="12" md="5">
-                            <v-select
-                              id="profile-fos-salary-select"
-                              aria-label="Salary After Complete Select Aid Type"
-                              hide-details
-                              :items="fosSalarySelectItems"
-                              v-model="fosSalarySelect"
-                              color="secondary"
-                            />
-                          </v-col>
-
                           <!--Median Earnings-->
-                          <v-col cols="12" sm="12" md="4">
+                          <v-col cols="12" sm="12" md="5">
                             <h4 class="mb-2">
                               Median Earnings&nbsp
                               <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
@@ -440,7 +430,7 @@
                           </v-col>
 
                           <!--Monthly Earnings-->
-                          <v-col cols="12" sm="12" md="3" class="pl-sm-1">
+                          <v-col cols="12" sm="12" md="4" class="pl-sm-1">
                             <h4 class="mb-2">
                               Monthly Earnings&nbsp
                               <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
@@ -1077,14 +1067,21 @@
                     id="earnings"
                     aria-controls="earnings-content"
                     @click="trackAccordion('Salary After Completing by Field of Study')"
-                  >Salary After Completing by Field of Study</v-expansion-panel-header>
+                  >
+                    Salary After Completing by Field of Study
+                  </v-expansion-panel-header>
+
                   <v-expansion-panel-content
                     id="earnings-content"
                     aria-controls="earnings-content"
                     class="px-0 py-3 pa-sm-5"
                   >
                     <div>
-                      <p>Typical earnings in the first year after graduation with the range of highest and lowest median earnings for undergraduate and credential programs for which there is data. For more information, see Fields of Study for this school.</p>
+                      <p>Typical earnings in the first year after graduation with the range of highest and lowest
+                        median earnings for undergraduate and credential programs for which there is data.
+                        For more information, see Fields of Study for this school.
+                      </p>
+
                       <multi-range
                         :minmax="earningsRange"
                         variable="earnings.median_earnings"
@@ -1106,17 +1103,8 @@
                       <h3>{{selectedFOSDetail.title | formatFieldOfStudyTitle}} - {{selectedFOSDetail.credential.title}}</h3>
 
                       <v-row>
-                        <v-col cols="12" md="5" sm="12">
-                          <v-select
-                            hide-details
-                            :items="fosSalarySelectItems"
-                            v-model="fosSalarySelect"
-                            color="secondary"
-                          />
-                        </v-col>
-
                         <!--Median Earnings-->
-                        <v-col cols="12" md="3" sm="12">
+                        <v-col cols="12" md="5" sm="12">
                           <h4 class="mb-2">
                             Median Earnings&nbsp
                             <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
