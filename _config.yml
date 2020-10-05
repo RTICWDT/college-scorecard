@@ -91,3 +91,9 @@ exclude:
   - webpack.vue.config.js
   - steps.d.ts
   - steps_file.js
+  - package-lock.json
+  - manifest.yml
+  - localstorage_helper.js
+  - jsconfig.json
+  - Dockerfile
+  - docker-compose.yml
