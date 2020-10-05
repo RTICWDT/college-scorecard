@@ -90,6 +90,7 @@
                   label="Filter by Degree Level"
                   hide-details
                   color="secondary"
+                  clearable
                 ></v-select>
               </v-card>
 
