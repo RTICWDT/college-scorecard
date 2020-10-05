@@ -1,5 +1,5 @@
 {
-  "name": "college-choice-js",
+  "name": "college-choice",
   "version": "0.0.0",
   "description": "Scripts for the college-choice project.",
   "author": "RTI International",
@@ -85,10 +85,10 @@
   "engines": {
     "node": ">= 10.17.0"
   },
-  "license": "CC0",
+  "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "git@github.com:18F/college-choice.git"
+    "url": "git+ssh://git@github.com/18F/college-choice.git"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -107,5 +107,14 @@
     "snapshotSerializers": [
       "jest-serializer-vue"
     ]
+  },
+  "bugs": {
+    "url": "https://github.com/18F/college-choice/issues"
+  },
+  "homepage": "https://github.com/18F/college-choice#readme",
+  "main": "babel.config.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
   }
 }
