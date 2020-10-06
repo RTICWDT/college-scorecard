@@ -32,7 +32,19 @@
         v-if="school && config.chart=='MultiRange'"
         :minmax="value"
         :variable="config.multiRangeVariable" 
-        :max="config.max? config.max: { label: '$150,000', value: 150000 }"
+        :max="config.max? config.max: { label: '$150,000', value: 150000 }":addExtraPadding="false"
+        :lowerTipStyleOverride="{top: 'unset', bottom: '-1.1rem'}"
+        :upperStyleOverride="checkUpperStyle(
+          _.get(this.earningsRange, 'max.earnings.median_earnings'),
+          150000,
+          {}
+        )"
+        :upperTipStyleOverride="checkTipUpperStyle(
+          _.get(this.earningsRange, 'max.earnings.median_earnings'),
+          150000,
+          {top: 'unset', bottom: '-1.1rem'}
+        )"
+
     />
 
     <div
@@ -140,8 +152,29 @@ export default {
       } else {
         return this[this.config.computedField];
       }
-    }
+    },
+  },
+  methods:{
+    checkTipUpperStyle(upperValue, maxValue, upperStyleTipOverride){
+      // Fixing padding issue on max value
+      let additionalPaddingStyles = upperStyleTipOverride;
 
+      // Checking for max
+      if(Number(upperValue) >= (maxValue * .85)){
+        additionalPaddingStyles.left = "-3.1rem";
+      }
+
+      return additionalPaddingStyles;
+    },
+    checkUpperStyle(value, maxValue, upperStyleOverride){
+      let additionalPaddingStyles = upperStyleOverride;
+
+      if(Number(value) >= (maxValue * .97)){
+        additionalPaddingStyles.left = '97%';
+      }
+
+      return additionalPaddingStyles;
+    }
   }
 };
 </script>
