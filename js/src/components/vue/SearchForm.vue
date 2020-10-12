@@ -28,9 +28,10 @@
 }
 
 ::v-deep .v-chip .v-chip__content {
-    word-wrap: break-word;
-    white-space: break-spaces;
-    line-height: 100%;
+  word-wrap: break-word;
+  white-space: normal;
+  padding: 8px;
+  line-height: 100%;
 }
 
 ::v-deep .v-chip.v-size--default {
