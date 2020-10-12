@@ -192,18 +192,12 @@
                 <!-- Field Of Study Data Container -->
                 <div class="mx-md-5 mx-2">
                   <div id="compare-salary-after-completing" class="compare-fos-section">
-                    <h2>
+                    <h2 class="pt-5">
                       Salary After Completing
                     </h2>
 
-                    <v-select
-                      class="mx-5 my-5"
-                      :items="fosSalarySelectItems"
-                      v-model="fosSalarySelect"
-                    />
-
                     <div class="ml-3">
-                      <div id="fos-median-earnings" class="mb-5">
+                      <div id="fos-median-earnings" class="pt-5 mb-5">
                         <h3 class="mb-2">
                           Median Earnings&nbsp;<tooltip definition="fos-number-of-graduates" :isCompare="true" />
                         </h3>

@@ -28,23 +28,23 @@
       </v-col>
       <v-col md="6" cols="12" class="text-center canned-search-wrapper py-0 my-0">
         <canned-search-slider
+          id="canned-search-degree-c"
+          label="I Want a Certificate"
+          :add-to-query="[{cip4_degree:['c']}]"
+          @canned-search-toggle="handleCannedToggle"
+        ></canned-search-slider>
+
+        <canned-search-slider
           id="canned-search-degree-a"
-          label="I want an Associate's Degree"
+          label="I Want an Associate's Degree"
           :add-to-query="[{cip4_degree:['a']}]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
         
         <canned-search-slider
           id="canned-search-degree-b"
-          label="I want a Bachelor's Degree"
+          label="I Want a Bachelor's Degree"
           :add-to-query="[{cip4_degree:['b']}]"
-          @canned-search-toggle="handleCannedToggle"
-        ></canned-search-slider>
-
-        <canned-search-slider
-          id="canned-search-degree-c"
-          label="I want a Certificate"
-          :add-to-query="[{cip4_degree:['c']}]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
       </v-col>

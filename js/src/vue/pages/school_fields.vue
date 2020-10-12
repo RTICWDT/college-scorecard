@@ -90,13 +90,17 @@
                   label="Filter by Degree Level"
                   hide-details
                   color="secondary"
+                  clearable
                 ></v-select>
               </v-card>
 
               <!-- Warnings -->
               <v-alert
                 v-if="currentFilter === 4"
-                color="warning"
+                colored-border
+                border="left"
+                dense
+                color="#D16E00"
               >
                 No data on the number of graduates are displayed because of definitional differences
                 with other data sources. Fields of study on this page include undergraduate-level
@@ -105,7 +109,10 @@
 
               <v-alert
                 v-if="currentFilter === 8"
-                color="warning"
+                colored-border
+                border="left"
+                dense
+                color="#D16E00"
               >
                 Fields of study on this page include graduate-level programs that may be labeled
                 “postbaccalaureate certificates” in other data sources.
