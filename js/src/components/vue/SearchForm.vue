@@ -27,6 +27,12 @@
   padding-bottom: 100px !important;
 }
 
+::v-deep .v-chip .v-chip__content {
+    word-wrap: break-word;
+    white-space: break-spaces;
+    padding: 5px 0 5px 0;
+    line-height: 100%;
+}
 </style>
 
 <template>
