@@ -1,7 +1,7 @@
 {
-  "name": "college-choice-js",
-  "version": "0.0.0",
-  "description": "Scripts for the college-choice project.",
+  "name": "college-scorecard",
+  "version": "2.4.0",
+  "description": "Scripts for the college-scorecard project.",
   "author": "RTI International",
   "scripts": {
     "serve": "jekyll serve --baseurl='' -w",
@@ -85,10 +85,10 @@
   "engines": {
     "node": ">= 10.17.0"
   },
-  "license": "CC0",
+  "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "git@github.com:18F/college-choice.git"
+    "url": "git+ssh://git@github.com/RTICWDT/college-scorecard.git"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -107,5 +107,14 @@
     "snapshotSerializers": [
       "jest-serializer-vue"
     ]
+  },
+  "bugs": {
+    "url": "https://github.com/RTICWDT/college-scorecard/issues"
+  },
+  "homepage": "https://github.com/RTICWDT/college-scorecard#readme",
+  "main": "babel.config.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
   }
 }

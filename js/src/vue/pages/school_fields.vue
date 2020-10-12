@@ -126,7 +126,7 @@
                     <v-expansion-panels>
                       <v-expansion-panel v-for="fos in prog.fields" :key="fos.code+'-'+fos.credential.level">
                         <v-expansion-panel-header>
-                          <span class="school-fields-fos-degree-title">{{ fos.title.slice(0,-1) }} - {{ fos.credential.title }}</span>
+                          <span class="school-fields-fos-degree-title">{{ fos.title.replace(/\.$/, '') }} - {{ fos.credential.title }}</span>
                         </v-expansion-panel-header>
                         <v-expansion-panel-content>
                           <field-data-extended
