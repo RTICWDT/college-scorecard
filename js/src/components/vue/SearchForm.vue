@@ -26,6 +26,7 @@
 .extraFilters{
   padding-bottom: 100px !important;
 }
+
 </style>
 
 <template>
