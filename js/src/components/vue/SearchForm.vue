@@ -68,6 +68,7 @@
         class="mb-3 mt-0 pt-0"
         aria-labelledby="location-label"
         :placeholder="utility.location ? undefined : 'Select an option'"
+        clearable
       />
 
       <div class="d-flex align-center" v-if="utility.location=='ZIP Code'">
@@ -92,18 +93,12 @@
       </div>
 
       <div class="d-flex align-center" v-if="utility.location=='Near Me'">
-        <v-tooltip bottom max-width="250" color="rgba(0,0,0,0.95)">
-          <template v-slot:activator="{ on }">
-            <v-btn icon @click="handleLocationCheck">
-              <v-icon
-                v-on="on"
-                :color="locationButtonColor"
-                v-html="location.isLoading ? 'fas fa-circle-notch fa-spin' : 'mdi-near-me'"
-              ></v-icon>
-            </v-btn>
-          </template>
-          Click the arrow to find your location based on your browser settings and then enter a distance to find schools near you.
-        </v-tooltip>
+        <v-icon
+          v-on="on"
+          :color="locationButtonColor"
+          v-html="location.isLoading ? 'fas fa-circle-notch fa-spin' : 'mdi-near-me'"
+        ></v-icon>
+
         <v-text-field
           v-model="location.miles"
           :rules="[utility.rules.required,utility.rules.numerical]"
@@ -113,6 +108,7 @@
           class="mb-3"
           type="number"
         ></v-text-field>
+
         <span v-show="location.error" class="overline">{{location.error}}</span>
       </div>
 
@@ -532,6 +528,11 @@ export default {
     'location.miles'() {
       this.handleLocationCheck();
     },
+    'utility.location'(newValue, oldValue){
+      if(newValue === 'Near Me' && oldValue !== 'Near Me'){
+        this.handleLocationCheck();
+      }
+    }
   },
   computed: {
     // Remove items that are not set
