@@ -135,24 +135,39 @@
               </div>
 
               <!-- Compare on medium and above-->
-              <v-btn class="search-fos-result-compare-button d-none d-md-block"
-                icon
-                @click="$emit('toggle-compare-item', fieldOfStudyCompareFormat(fieldOfStudy), 'compare-fos')"
-                :color="selectedFieldOfStudyClass(fieldOfStudy) === 'result-card-selected'? 'amber' : 'gray'"
-              >
-                <v-icon>fa fa-plus-circle</v-icon>
-                <span class='sr-only'>Compare</span>
-              </v-btn>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn class="search-fos-result-compare-button d-none d-md-block"
+                         icon
+                         @click="$emit('toggle-compare-item', fieldOfStudyCompareFormat(fieldOfStudy), 'compare-fos')"
+                         :color="selectedFieldOfStudyClass(fieldOfStudy) === 'result-card-selected'? 'amber' : 'gray'"
+                         v-bind="attrs"
+                         v-on="on"
+                  >
+                    <v-icon>fa fa-plus-circle</v-icon>
+                    <span class='sr-only'>Compare</span>
+                  </v-btn>
+                </template>
+
+                <span>Add field of study to compare</span>
+              </v-tooltip>
 
               <!-- Compare on small and below-->
               <div class="fos-result-compare-button-mobile">
-                <v-btn class="d-block d-sm-none mt-4 mx-auto"
-                 outlined
-                 @click="$emit('toggle-compare-item', fieldOfStudyCompareFormat(fieldOfStudy), 'compare-fos')"
-                 :color="selectedFieldOfStudyClass(fieldOfStudy) === 'result-card-selected'? 'amber' : 'gray'"
-                >
-                  <span class="mr-4">Compare</span><v-icon>fa fa-plus-circle</v-icon>
-                </v-btn>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn class="d-block d-sm-none mt-4 mx-auto"
+                     outlined
+                     @click="$emit('toggle-compare-item', fieldOfStudyCompareFormat(fieldOfStudy), 'compare-fos')"
+                     :color="selectedFieldOfStudyClass(fieldOfStudy) === 'result-card-selected'? 'amber' : 'gray'"
+                     v-bind="attrs"
+                     v-on="on"
+                    >
+                      <span class="mr-4">Compare</span><v-icon>fa fa-plus-circle</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Add field of study to compare</span>
+                </v-tooltip>
               </div>
 
 

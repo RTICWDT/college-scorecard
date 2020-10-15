@@ -42,16 +42,26 @@
         </v-card>
       </p>
 
-      <v-btn
-        text
-        icon
-        class="float-right search-result-card-compare"
-        :color="isSelected?'amber':'grey'"
-        @click="$emit('toggle-compare-school',school)"
-      >
-        <v-icon>fa fa-plus-circle</v-icon>
-        <span class='sr-only'>Compare</span>
-      </v-btn>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            text
+            icon
+            class="float-right search-result-card-compare"
+            :color="isSelected?'amber':'grey'"
+            @click="$emit('toggle-compare-school',school)"
+            v-bind="attrs"
+            v-on="on"
+            aria-label="Add to compare"
+          >
+            <v-icon>fa fa-plus-circle</v-icon>
+            <span class='sr-only'>Compare</span>
+          </v-btn>
+        </template>
+
+        <span>Add school to compare</span>
+      </v-tooltip>
+
       <p class="overline mb-1">{{ city }}, {{ state }}</p>
       <h2 class="title mt-0 font-weight-bold">
         <a class="nameLink" :href="schoolLink">{{ schoolName }}</a>
