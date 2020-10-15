@@ -888,7 +888,7 @@
                       color="secondary"
                       :href="`${$baseUrl}/search?toggle=institutions`"
                     >
-                      Visit the institution search page
+                      search schools
                     </v-btn>
                   </div>
 
@@ -909,7 +909,7 @@
                       color="secondary"
                       :href="`${$baseUrl}/search?toggle=fos`"
                     >
-                      Visit the fields of study search page
+                      SEARCH FIELDS OF STUDY
                     </v-btn>
                   </div>
 
