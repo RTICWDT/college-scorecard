@@ -89,7 +89,7 @@
             </v-card>
           </p>
 
-          <p class="overline font-weight-bold mb-1">{{ city }}, {{ state }}</p>
+          <p class="overline mb-1">{{ city }}, {{ state }}</p>
           <h2 class="title mt-0 font-weight-bold">
             <a class="nameLink" :href="schoolLink">{{ schoolName }}</a>
           </h2>
