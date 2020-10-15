@@ -128,48 +128,41 @@
         v-if="utility.location=='State'"
       ></v-select>
 
-      <p class="subhead-2">
-        Field of Study Offered
-        <tooltip definition="field-of-study" />
-      </p>
-      <div id="search-form-sub-degree-container" class="mt-4 pl-4 ml-2">
-        <p class="subhead-2" id="fields-label">Academic Fields</p>
-        <field-autocomplete v-model="input.cip4"></field-autocomplete>
+      <!-- cip4 - Degree subfield -->
+      <p class="subhead-2" id="fields-label">Academic Fields</p>
+      <field-autocomplete v-model="input.cip4"></field-autocomplete>
 
-        <!-- cip4 - Degree subfield -->
-        <div>
-          <p class="subhead-2">Degrees/Certificate</p>
-          <v-checkbox
-            id="search-form-fos-degree-c"
-            class="search-form-degree-cb my-0 py-0"
-            v-model="input.cip4_degree"
-            label="Certificate"
-            value="c"
-            color="secondary"
-            hide-details
-          ></v-checkbox>
+      <!-- Credential Level -->
+      <p class="subhead-2">Degrees/Certificate</p>
+      <v-checkbox
+        id="search-form-fos-degree-c"
+        class="search-form-degree-cb my-0 py-0"
+        v-model="input.cip4_degree"
+        label="Certificate"
+        value="c"
+        color="secondary"
+        hide-details
+      ></v-checkbox>
 
-          <v-checkbox
-            id="search-form-fos-degree-a"
-            class="search-form-degree-cb my-0 py-0"
-            v-model="input.cip4_degree"
-            label="Associate's Degree"
-            value="a"
-            color="secondary"
-            hide-details
-          ></v-checkbox>
+      <v-checkbox
+        id="search-form-fos-degree-a"
+        class="search-form-degree-cb my-0 py-0"
+        v-model="input.cip4_degree"
+        label="Associate's Degree"
+        value="a"
+        color="secondary"
+        hide-details
+      ></v-checkbox>
 
-          <v-checkbox
-            id="search-form-fos-degree-b"
-            class="search-form-degree-cb my-0 py-0"
-            v-model="input.cip4_degree"
-            label="Bachelor's Degree"
-            value="b"
-            color="secondary"
-            hide-details
-          ></v-checkbox>
-        </div>
-      </div>
+      <v-checkbox
+        id="search-form-fos-degree-b"
+        class="search-form-degree-cb my-0 py-0"
+        v-model="input.cip4_degree"
+        label="Bachelor's Degree"
+        value="b"
+        color="secondary"
+        hide-details
+      ></v-checkbox>
 
       <!-- Graduation Rate -->
       <div>
