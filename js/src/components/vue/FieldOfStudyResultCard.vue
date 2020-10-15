@@ -126,7 +126,6 @@
               <div class="d-inline-block search-fos-result-title">
                 <a
                   :href="`${schoolLink}&fos_code=${fieldOfStudy.code}&fos_credential=${_.get(fieldOfStudy,'credential.level')}`"
-                  target="_blank"
                 >
                 <span>
                   {{fieldOfStudy.title | formatFieldOfStudyTitle}}&nbsp;&raquo;
