@@ -137,6 +137,43 @@ header {
     }
   }
 
+  .nav-compare-icon{
+    border-radius: 50%;
+    display:inline-block;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    vertical-align: top;
+
+    i{
+      font-size: 28px;
+      margin-top: 6px;
+    }
+
+    /*i{*/
+    /*  font-size: 24px;*/
+    /*  margin-top: 5px;*/
+    /*}*/
+
+    /*@media (min-width: 960px){*/
+    /*  width: 50px;*/
+    /*  height: 50px;*/
+
+    /*  i{*/
+    /*    font-size: 35px;*/
+    /*    margin-top: 8px;*/
+    /*  }*/
+    /*}*/
+  }
+
+  #nav-compare-icon-school{
+    background: #91C191;
+  }
+
+  #nav-compare-icon-fos{
+    background: $fos-color-gold;
+  }
+
 }
 </style>
 
@@ -180,6 +217,56 @@ header {
               </a>
             </li>
 
+            <li>
+              <a :href="`${$baseUrl}/compare`"
+                 :class="{'nav-active' : activeLink === 'compare'}"
+              >
+                Compare:
+              </a>
+
+
+                <div class="nav-compare-icon" id="nav-compare-icon-school">
+                  <v-badge
+                    bottom
+                    offset-x="10"
+                    content="6"
+                    color="#E3EEF6"
+                  >
+                    <v-icon
+                      color="#122E51"
+                    >
+                      fas fa-university
+                    </v-icon>
+                  </v-badge>
+                </div>
+
+              <div class="nav-compare-icon" id="nav-compare-icon-fos">
+                <v-icon
+                  color="black"
+                >
+                  fas fa-award
+                </v-icon>
+              </div>
+            </li>
+
+            <li>
+<!--              <div class="nav-compare-icon">-->
+<!--                <v-icon-->
+<!--                  color=""-->
+<!--                >-->
+<!--                  fas fa-university-->
+<!--                </v-icon>-->
+<!--              </div>-->
+
+<!--              <div class="nav-compare-icon">-->
+<!--                <v-icon-->
+<!--                  color=""-->
+<!--                >-->
+<!--                  fas fa-award-->
+<!--                </v-icon>-->
+<!--              </div>-->
+
+            </li>
           </ul>
         </nav>
       </div>
