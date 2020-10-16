@@ -1,6 +1,9 @@
 <template>
   <v-app id="data">
-    <scorecard-header active-link="data" />
+    <scorecard-header active-link="data"
+      :compare-institutions-count="compareSchools.length"
+      :compare-fields-of-study-count="compareFieldsOfStudy.length"
+    />
     <v-content>
       <data-navigation current="/data/" />
       <v-container>

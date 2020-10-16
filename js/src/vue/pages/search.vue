@@ -62,8 +62,8 @@
     <v-app id="search">
 
       <scorecard-header active-link="search"
-                        :compare-institutions-count="compareSchools.length"
-                        :compare-fields-of-study-count="compareFieldsOfStudy.length"
+        :compare-institutions-count="compareSchools.length"
+        :compare-fields-of-study-count="compareFieldsOfStudy.length"
       />
 
       <!-- Search Form -->

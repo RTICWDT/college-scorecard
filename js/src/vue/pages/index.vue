@@ -1,7 +1,10 @@
 <template>
   <v-app id='index'>
 
-    <scorecard-header active-link="/"/>
+    <scorecard-header active-link="/"
+      :compare-institutions-count="compareSchools.length"
+      :compare-fields-of-study-count="compareFieldsOfStudy.length"
+    />
     
     <v-content>
 

@@ -1,6 +1,9 @@
 <template>
   <v-app id="four-oh-four">
-    <scorecard-header compare-institutions-count="compareSchools.count()" />
+    <scorecard-header
+      :compare-institutions-count="compareSchools.length"
+      :compare-fields-of-study-count="compareFieldsOfStudy.length"
+    />
     <v-content class="home-splash">
       <v-container>
         <v-row>

@@ -1,7 +1,10 @@
 <template>
   <v-app id="data-changelog">
 
-    <scorecard-header active-link="data"/>
+    <scorecard-header active-link="data"
+      :compare-institutions-count="compareSchools.length"
+      :compare-fields-of-study-count="compareFieldsOfStudy.length"
+    />
 
     <v-content>
 

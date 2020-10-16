@@ -1,6 +1,9 @@
 <template>
   <v-app id="school-transition">
-    <scorecard-header />
+    <scorecard-header
+      :compare-institutions-count="compareSchools.length"
+      :compare-fields-of-study-count="compareFieldsOfStudy.length"
+    />
 
     <v-content>
       <div class="home-splash">
