@@ -165,14 +165,10 @@ header {
   /*  !*  }*!*/
   /*  !*}*!*/
   /*}*/
-
-  #nav-compare-icon-school{
-    background: #91C191;
+  .nav-compare-icon{
+    vertical-align: middle;
   }
 
-  #nav-compare-icon-fos{
-    background: $fos-color-gold;
-  }
 
 }
 </style>
@@ -217,64 +213,73 @@ header {
               </a>
             </li>
 
-            <li>
+            <li style="display: inline-table">
               <a :href="`${$baseUrl}/compare`"
-                 :class="{'nav-active' : activeLink === 'compare'}"
+                 :class="{'nav-active' : activeLink === 'compare','pr-2':true}"
+                 aria-label="Navigate to compare page"
               >
                 Compare:
               </a>
 
-              <!-- Institution Compare Button -->
-              <v-badge
-                class="nav-compare-icon"
-                bottom
-                offset-x="14"
-                offset-y="10"
-                :content="compareInstitutionsCount"
-                :value="compareInstitutionsCount"
-                color="#E3EEF6"
+<!--              <div class="mb-2 d-inline-block">-->
+                <!-- Institution Compare Button -->
+                <v-badge
+                  class="nav-compare-icon mb-2 mr-3"
+                  bottom
+                  offset-x="14"
+                  offset-y="10"
+                  :content="compareInstitutionsCount"
+                  :value="compareInstitutionsCount"
+                  color="#E3EEF6"
 
-              >
-                <v-btn
-                  small
-                  fab
-                  color="#91C191"
                 >
-                  <v-icon
-                    color="#122E51"
+                  <v-btn
+                    small
+                    fab
+                    color="#91C191"
+                    @click=""
+                    aria-label="Show Compare Drawer"
                   >
-                    fas fa-university
-                  </v-icon>
-                </v-btn>
-              </v-badge>
+                    <v-icon
+                      color="#122E51"
+                    >
+                      fas fa-university
+                    </v-icon>
+                  </v-btn>
+                </v-badge>
 
-              <div class="nav-compare-icon" id="nav-compare-icon-fos">
-                <v-icon
-                  color="black"
+                <!-- FoS Compare Button -->
+                <v-badge
+                  class="nav-compare-icon mb-2"
+                  bottom
+                  offset-x="14"
+                  offset-y="10"
+                  :content="compareFieldsOfStudyCount"
+                  :value="compareFieldsOfStudyCount"
+                  color="#E3EEF6"
                 >
-                  fas fa-award
-                </v-icon>
-              </div>
+                  <v-btn
+                    small
+                    fab
+                    color="#fec005"
+                    @click=""
+                    aria-label="Show Compare Drawer"
+                  >
+                    <v-icon
+                      color="black"
+                    >
+                      fas fa-award
+                    </v-icon>
+                  </v-btn>
+                </v-badge>
+<!--              </div>-->
+
+
             </li>
 
             <li>
-<!--              <div class="nav-compare-icon">-->
-<!--                <v-icon-->
-<!--                  color=""-->
-<!--                >-->
-<!--                  fas fa-university-->
-<!--                </v-icon>-->
-<!--              </div>-->
-
-<!--              <div class="nav-compare-icon">-->
-<!--                <v-icon-->
-<!--                  color=""-->
-<!--                >-->
-<!--                  fas fa-award-->
-<!--                </v-icon>-->
-<!--              </div>-->
-
             </li>
+
           </ul>
         </nav>
       </div>
