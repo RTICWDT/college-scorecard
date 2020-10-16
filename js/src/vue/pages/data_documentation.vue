@@ -209,7 +209,7 @@ export default {
     'data-navigation': DataNavigation,
     VueRecaptcha
   },
-  props: ["baseUrl", "dataBase_url", "dataDictionary","recaptchaSiteKey"],
+  props: ["baseUrl", "dataBase_url", "dataDictionary","recaptchaSiteKey",'compareSchools','compareFieldsOfStudy'],
   data(){
     return{
       showCaptcha: true,

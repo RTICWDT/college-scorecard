@@ -1,6 +1,6 @@
 <template>
   <v-app id="four-oh-four">
-    <scorecard-header />
+    <scorecard-header compare-institutions-count="compareSchools.count()" />
     <v-content class="home-splash">
       <v-container>
         <v-row>
@@ -30,7 +30,7 @@ export default {
   components: {
     'name-autocomplete': NameAutocomplete
   },
-  props:['baseUrl','pagePermalink'],
+  props:['baseUrl','pagePermalink','compareSchools','compareFieldsOfStudy'],
   methods:{
     handleSchoolNameSelected(school){
       if(typeof school == "string")

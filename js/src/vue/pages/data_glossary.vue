@@ -29,7 +29,7 @@ export default {
   components: {
     'data-navigation': DataNavigation
   },
-  props: ["baseUrl", "dataBase_url"],
+  props: ["baseUrl", "dataBase_url",'compareSchools','compareFieldsOfStudy'],
   computed: {
     glossary() {
       let glossary = siteDataAll.glossary;

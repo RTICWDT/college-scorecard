@@ -101,6 +101,6 @@ export default {
     "data-navigation": DataNavigation,
     "simple-tooltip": SimpleTooltip
   },
-  props: ["baseUrl", "dataBase_url", "dataDictionary"]
+  props: ["baseUrl", "dataBase_url", "dataDictionary",'compareSchools','compareFieldsOfStudy']
 };
 </script>

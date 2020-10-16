@@ -493,7 +493,7 @@
     "name-autocomplete": NameAutocomplete,
     "field-of-study-search": FieldOfStudySearch,
   },
-  props: ["baseUrl"],
+  props: ["baseUrl",'compareSchools','compareFieldsOfStudy'],
   data() {
     return {
       mobilePanels: 0,

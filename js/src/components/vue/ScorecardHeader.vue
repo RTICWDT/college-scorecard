@@ -137,34 +137,34 @@ header {
     }
   }
 
-  .nav-compare-icon{
-    border-radius: 50%;
-    display:inline-block;
-    text-align: center;
-    width: 40px;
-    height: 40px;
-    vertical-align: top;
+  /*.nav-compare-icon{*/
+  /*  border-radius: 50%;*/
+  /*  display:inline-block;*/
+  /*  text-align: center;*/
+  /*  width: 40px;*/
+  /*  height: 40px;*/
+  /*  vertical-align: top;*/
 
-    i{
-      font-size: 28px;
-      margin-top: 6px;
-    }
+  /*  i{*/
+  /*    font-size: 28px;*/
+  /*    margin-top: 6px;*/
+  /*  }*/
 
-    /*i{*/
-    /*  font-size: 24px;*/
-    /*  margin-top: 5px;*/
-    /*}*/
+  /*  !*i{*!*/
+  /*  !*  font-size: 24px;*!*/
+  /*  !*  margin-top: 5px;*!*/
+  /*  !*}*!*/
 
-    /*@media (min-width: 960px){*/
-    /*  width: 50px;*/
-    /*  height: 50px;*/
+  /*  !*@media (min-width: 960px){*!*/
+  /*  !*  width: 50px;*!*/
+  /*  !*  height: 50px;*!*/
 
-    /*  i{*/
-    /*    font-size: 35px;*/
-    /*    margin-top: 8px;*/
-    /*  }*/
-    /*}*/
-  }
+  /*  !*  i{*!*/
+  /*  !*    font-size: 35px;*!*/
+  /*  !*    margin-top: 8px;*!*/
+  /*  !*  }*!*/
+  /*  !*}*!*/
+  /*}*/
 
   #nav-compare-icon-school{
     background: #91C191;
@@ -224,21 +224,29 @@ header {
                 Compare:
               </a>
 
+              <!-- Institution Compare Button -->
+              <v-badge
+                class="nav-compare-icon"
+                bottom
+                offset-x="14"
+                offset-y="10"
+                :content="compareInstitutionsCount"
+                :value="compareInstitutionsCount"
+                color="#E3EEF6"
 
-                <div class="nav-compare-icon" id="nav-compare-icon-school">
-                  <v-badge
-                    bottom
-                    offset-x="10"
-                    content="6"
-                    color="#E3EEF6"
+              >
+                <v-btn
+                  small
+                  fab
+                  color="#91C191"
+                >
+                  <v-icon
+                    color="#122E51"
                   >
-                    <v-icon
-                      color="#122E51"
-                    >
-                      fas fa-university
-                    </v-icon>
-                  </v-badge>
-                </div>
+                    fas fa-university
+                  </v-icon>
+                </v-btn>
+              </v-badge>
 
               <div class="nav-compare-icon" id="nav-compare-icon-fos">
                 <v-icon
@@ -329,6 +337,14 @@ export default {
     activeLink:{
       type: String,
       default: null
+    },
+    compareInstitutionsCount:{
+      type: Number,
+      default: 0
+    },
+    compareFieldsOfStudyCount:{
+      type: Number,
+      default: 0
     }
   },
   data(){

@@ -39,7 +39,7 @@ const querystring = require("querystring");
 export default {
   components: {
   },
-  props: ["baseUrl"],
+  props: ["baseUrl",'compareSchools','compareFieldsOfStudy'],
   data() {
     return {
         query: {}
