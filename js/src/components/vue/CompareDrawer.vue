@@ -86,7 +86,7 @@
     </v-row>
 
     <!-- Compare Buttons, medium or larger-->
-    <div id="compare-drawer-md-button-row" v-resize="onResize">
+    <div id="compare-drawer-md-button-row" v-resize="onResize" v-if="schools.length > 0 || fieldsOfStudy.length > 0">
       <v-row>
         <v-col cols="12" md="5" class="text-center d-none d-md-block" >
           <v-btn
@@ -254,8 +254,14 @@ export default {
     },
     onResize(){
       // setting the width for fixed position elements
-      let desiredWidth = document.querySelector("#compare-header").clientWidth;
-      document.querySelector("#compare-drawer-md-button-row").style.width = `${desiredWidth}px`;
+      let desiredWidth = (document.querySelector("#compare-header")) ?
+        document.querySelector("#compare-header").clientWidth : null;
+
+      if(desiredWidth != null){
+        document.querySelector("#compare-drawer-md-button-row").style.width = `${desiredWidth}px`;
+      }else{
+        document.querySelector("#compare-drawer-md-button-row").style.width = `600px`;
+      }
     }
   }
 };
