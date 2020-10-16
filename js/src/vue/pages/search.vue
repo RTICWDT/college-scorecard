@@ -525,7 +525,11 @@ export default {
       }
     }, 1000);
   },
-  mounted() {},
+  mounted() {
+    EventBus.$on('compare-drawer-show', (e) => {
+      this.showCompare = true;
+    });
+  },
   computed: {
     totalPages() {
       if (this.results.meta.per_page && this.results.meta.total) {

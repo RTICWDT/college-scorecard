@@ -326,6 +326,21 @@
 
     </v-content>
     <scorecard-footer />
+
+    <compare-header
+      :showCompare.sync="showCompare"
+      :schools="compareSchools"
+      :fields-of-study="compareFieldsOfStudy"
+    />
+
+    <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
+      <compare-drawer
+        :schools="compareSchools"
+        :fields-of-study="compareFieldsOfStudy"
+        @toggle-compare-school="handleToggleCompareItem"
+        v-on:close-modal="closeModal()"
+      ></compare-drawer>
+    </v-bottom-sheet>
   </v-app>
 </template>
 
@@ -486,15 +501,21 @@
   import NameAutocomplete from 'components/vue/NameAutocomplete.vue';
   import AnalyticsEvents from 'vue/mixins/AnalyticsEvents.js';
   import FieldOfStudySearch from '../../components/vue/FieldOfStudySearch.vue';
+  import { compare } from "vue/mixins.js";
+  import CompareDrawer from "components/vue/CompareDrawer.vue";
+  import CompareHeader from "components/vue/CompareHeader.vue";
+  import { EventBus } from "../EventBus.js";
 
   export default {
-  mixins: [AnalyticsEvents],
+  mixins: [AnalyticsEvents, compare],
   components: {
     "paying-for-college": PayingForCollege,
     "canned-search-container": CannedSearchContainer,
     "search-form": SearchForm,
     "name-autocomplete": NameAutocomplete,
     "field-of-study-search": FieldOfStudySearch,
+    "compare-drawer": CompareDrawer,
+    "compare-header": CompareHeader,
   },
   props: ["baseUrl",'compareSchools','compareFieldsOfStudy'],
   data() {
@@ -534,6 +555,11 @@
     handleFoSMoreOptionsClick(){
       window.location = `${this.$baseUrl}/search/?toggle=fos`;
     }
+  },
+  mounted() {
+    EventBus.$on('compare-drawer-show', (e) => {
+      this.showCompare = true;
+    });
   }
-};
+  };
 </script>

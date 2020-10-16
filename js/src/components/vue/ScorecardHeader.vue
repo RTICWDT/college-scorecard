@@ -137,34 +137,6 @@ header {
     }
   }
 
-  /*.nav-compare-icon{*/
-  /*  border-radius: 50%;*/
-  /*  display:inline-block;*/
-  /*  text-align: center;*/
-  /*  width: 40px;*/
-  /*  height: 40px;*/
-  /*  vertical-align: top;*/
-
-  /*  i{*/
-  /*    font-size: 28px;*/
-  /*    margin-top: 6px;*/
-  /*  }*/
-
-  /*  !*i{*!*/
-  /*  !*  font-size: 24px;*!*/
-  /*  !*  margin-top: 5px;*!*/
-  /*  !*}*!*/
-
-  /*  !*@media (min-width: 960px){*!*/
-  /*  !*  width: 50px;*!*/
-  /*  !*  height: 50px;*!*/
-
-  /*  !*  i{*!*/
-  /*  !*    font-size: 35px;*!*/
-  /*  !*    margin-top: 8px;*!*/
-  /*  !*  }*!*/
-  /*  !*}*!*/
-  /*}*/
   .nav-compare-icon{
     vertical-align: middle;
   }
@@ -221,7 +193,6 @@ header {
                 Compare:
               </a>
 
-<!--              <div class="mb-2 d-inline-block">-->
                 <!-- Institution Compare Button -->
                 <v-badge
                   class="nav-compare-icon mb-2 mr-3"
@@ -237,7 +208,7 @@ header {
                     small
                     fab
                     color="#91C191"
-                    @click=""
+                    @click="handleCompareIconClick"
                     aria-label="Show Compare Drawer"
                   >
                     <v-icon
@@ -262,7 +233,7 @@ header {
                     small
                     fab
                     color="#fec005"
-                    @click=""
+                    @click="handleCompareIconClick"
                     aria-label="Show Compare Drawer"
                   >
                     <v-icon
@@ -272,8 +243,6 @@ header {
                     </v-icon>
                   </v-btn>
                 </v-badge>
-<!--              </div>-->
-
 
             </li>
 
@@ -336,6 +305,7 @@ header {
 </template>
 
 <script>
+import { EventBus } from '../../vue/EventBus.js';
 
 export default {
   props:{
@@ -365,6 +335,9 @@ export default {
   methods:{
     mobileNavClick(urlString){
       window.location.href = urlString;
+    },
+    handleCompareIconClick(resourceType = "institution"){
+      EventBus.$emit('compare-drawer-show', false);
     }
   },
   created(){

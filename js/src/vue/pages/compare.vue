@@ -1058,6 +1058,7 @@ import Router from "vue/mixins/Router.js";
 import { fields, localStorageKeys } from '../constants';
 import {generateFieldOfStudyUUID, decodeFieldOfStudyUUID, fieldOfStudyCompareFormat} from '../commonFormats';
 import ContextToggle from "components/vue/ContextToggle.vue";
+import { EventBus } from "../EventBus.js";
 
 export default {
   mixins: [compare, ComplexFields, AnalyticsEvents, Router],
@@ -1707,6 +1708,10 @@ export default {
     // Did this initiate as a shared comparision
     this.isSharedComparison = this.showShareUpdate;
     this.isSharedFieldOfStudyComparison = this.showShareFieldOfStudyUpdate;
+
+    EventBus.$on('compare-drawer-show', (e) => {
+      this.showCompare = true;
+    });
   }
 };
 </script>

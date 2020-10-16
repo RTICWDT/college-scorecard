@@ -519,18 +519,44 @@
       </v-container>
     </v-content>
     <scorecard-footer />
+
+    <compare-header
+      :showCompare.sync="showCompare"
+      :schools="compareSchools"
+      :fields-of-study="compareFieldsOfStudy"
+    />
+
+    <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
+      <compare-drawer
+        :schools="compareSchools"
+        :fields-of-study="compareFieldsOfStudy"
+        @toggle-compare-school="handleToggleCompareItem"
+        v-on:close-modal="closeModal()"
+      ></compare-drawer>
+    </v-bottom-sheet>
   </v-app>
 </template>
 
 <script>
 import DataNavigation from 'components/vue/DataNavigation.vue';
 import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
+import CompareDrawer from "components/vue/CompareDrawer.vue";
+import CompareHeader from "components/vue/CompareHeader.vue";
+import { compare } from "vue/mixins.js";
+import { EventBus } from "../EventBus.js";
 
 export default {
-  mixins: [AnalyticsEvents],
+  mixins: [AnalyticsEvents,compare],
   components: {
-    'data-navigation': DataNavigation
+    'data-navigation': DataNavigation,
+    "compare-drawer": CompareDrawer,
+    "compare-header": CompareHeader,
   },
   props: ["baseUrl", "dataBase_url", "dataDictionary",'compareSchools','compareFieldsOfStudy'],
+  mounted() {
+    EventBus.$on('compare-drawer-show', (e) => {
+      this.showCompare = true;
+    });
+  }
 };
 </script>

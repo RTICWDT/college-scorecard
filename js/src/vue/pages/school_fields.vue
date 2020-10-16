@@ -194,6 +194,7 @@ import { apiGet } from '../api.js';
 // import { fields } from '../constants.js';
 import { SiteData } from '../mixins/SiteData.js';
 import ComplexFields from "vue/mixins/ComplexFields.js";
+import { EventBus } from "../EventBus.js";
 
 export default {
   mixins: [compare,SiteData,ComplexFields],
@@ -205,7 +206,7 @@ export default {
     "compare-drawer": CompareDrawer,
     "compare-header": CompareHeader,
     'field-data': FieldData,
-    'field-data-extended': FieldDataExtended
+    'field-data-extended': FieldDataExtended,
   },
   data() {
     return {
@@ -317,6 +318,10 @@ export default {
       }).catch((response) => {
         console.warn('No School found for ID: ' + id);
       });
+
+    EventBus.$on('compare-drawer-show', (e) => {
+      this.showCompare = true;
+    });
   }
 };
 </script>

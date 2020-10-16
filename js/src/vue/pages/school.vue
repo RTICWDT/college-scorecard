@@ -1587,6 +1587,7 @@ import ComplexFields from "vue/mixins/ComplexFields.js";
 import URLHistory from "vue/mixins/URLHistory.js";
 import { apiGet } from '../api.js';
 import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
+import { EventBus } from "../EventBus.js";
 
 export default {
   mixins: [compare, URLHistory, ComplexFields, AnalyticsEvents],
@@ -2014,17 +2015,9 @@ export default {
         console.warn('No School found for ID: ' + id);
       });
 
-    // Organize
-
-    // set URL params
-    // this.urlParams = this.parseURLParams(location.search.substr(1));
-    // this.selectedFOS = this.mapFOSFromURL(this.urlParams, this.fieldOfStudySelectItems);
-
-    // Check URL for FOS Argument
-
-    //CHECK FIRST;
-
-
+    EventBus.$on('compare-drawer-show', (e) => {
+      this.showCompare = true;
+    });
   },
   watch:{
     selectedFOS(val, oldVal){

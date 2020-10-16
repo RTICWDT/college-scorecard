@@ -14,5 +14,7 @@ permalink: /data/documentation/
       recaptcha-site-key="{{site.recaptcha-site-key}}"
       :compare-schools="compareSchools"
       :compare-fields-of-study="compareFieldsOfStudy"
+      @compare-update-selection="refreshCompareSchools"
+      @toggle-compare-school="toggleCompareItem"
     />
 </div>

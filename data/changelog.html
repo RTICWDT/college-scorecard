@@ -12,5 +12,7 @@ permalink: /data/changelog/
       data-dictionary="{{site.downloads.data-dictionary}}"
       :compare-schools="compareSchools"
       :compare-fields-of-study="compareFieldsOfStudy"
+      @compare-update-selection="refreshCompareSchools"
+      @toggle-compare-school="toggleCompareItem"
     />
 </div>
