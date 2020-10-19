@@ -172,34 +172,26 @@ header {
             <li>
               <a :href="`${$baseUrl}/`"
                 :class="{'nav-active' : activeLink === '/'}"
-              >
-                Home
-              </a>
+              >Home</a>
             </li>
 
             <li>
               <a :href="`${$baseUrl}/data`"
                  :class="{'nav-active' : activeLink === 'data'}"
-              >
-                About the Data
-              </a>
+              >About the Data</a>
             </li>
 
             <li>
               <a :href="`${$baseUrl}/search`"
                  :class="{'nav-active' : activeLink === 'search'}"
-              >
-                Search
-              </a>
+              >Search</a>
             </li>
 
             <li style="display: inline-table">
               <a :href="`${$baseUrl}/compare`"
                  :class="{'nav-active' : activeLink === 'compare','pr-2':true}"
                  aria-label="Navigate to compare page"
-              >
-                Compare:
-              </a>
+              >Compare:</a>
 
                 <!-- Institution Compare Button -->
                 <v-badge

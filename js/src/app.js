@@ -106,6 +106,8 @@ new Vue({
       // Need where it goes,
       let data = {};
 
+      let previousCompareCount = this.compareSchools.length + this.compareFieldsOfStudy.length;
+
       switch (storageKey) {
         case localStorageKeys.COMPARE_KEY:
           data = {
@@ -135,7 +137,7 @@ new Vue({
       this.refreshCompareSchools();
 
       // Toggle compare drawer when first element is added.
-      if(this.compareSchools.length + this.compareFieldsOfStudy.length === 1){
+      if(previousCompareCount === 0){
         EventBus.$emit('compare-drawer-show', false);
       }
     }
