@@ -3,6 +3,7 @@
     <scorecard-header
       :compare-institutions-count="compareSchools.length"
       :compare-fields-of-study-count="compareFieldsOfStudy.length"
+      active-link="compare"
     />
     <v-content>
       <v-container>

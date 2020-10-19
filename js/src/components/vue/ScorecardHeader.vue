@@ -185,6 +185,14 @@ header {
               </a>
             </li>
 
+            <li>
+              <a :href="`${$baseUrl}/search`"
+                 :class="{'nav-active' : activeLink === 'search'}"
+              >
+                Search
+              </a>
+            </li>
+
             <li style="display: inline-table">
               <a :href="`${$baseUrl}/compare`"
                  :class="{'nav-active' : activeLink === 'compare','pr-2':true}"
@@ -202,7 +210,6 @@ header {
                   :content="compareInstitutionsCount"
                   :value="compareInstitutionsCount"
                   color="#E3EEF6"
-
                 >
                   <v-btn
                     small
@@ -293,6 +300,30 @@ header {
             <v-list-item-content>
               <v-list-item-title class="mobile-navigation-item">
                 About the Data
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item class="mobile-navigation-item" @click="mobileNavClick(`${$baseUrl}/search`)">
+            <v-list-item-content>
+              <v-list-item-title class="mobile-navigation-item">
+                Search
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item class="mobile-navigation-item" @click="mobileNavClick(`${$baseUrl}/compare/?toggle=institutions`)">
+            <v-list-item-content>
+              <v-list-item-title class="mobile-navigation-item">
+                Compare Institutions
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item class="mobile-navigation-item" @click="mobileNavClick(`${$baseUrl}/compare/?toggle=fos`)">
+            <v-list-item-content>
+              <v-list-item-title class="mobile-navigation-item">
+                Compare Fields of Study
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
