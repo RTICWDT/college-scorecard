@@ -27,6 +27,7 @@ import './vue/mixins.js'
 import './plugins/chartjs.js';
 import {localStorageKeys} from './vue/constants.js';
 import {LocalStorage} from './vue/localStoage.js';
+import {EventBus} from './vue/EventBus.js';
 
 import ScorecardHeader from './components/vue/ScorecardHeader.vue';
 import ScorecardFooter from './components/vue/ScorecardFooter.vue';
@@ -132,6 +133,11 @@ new Vue({
 
       LocalStorage.toggleCompare(data, storageKey);
       this.refreshCompareSchools();
+
+      // Toggle compare drawer when first element is added.
+      if(this.compareSchools.length + this.compareFieldsOfStudy.length === 1){
+        EventBus.$emit('compare-drawer-show', false);
+      }
     }
   }
 });
