@@ -42,7 +42,23 @@
     <v-row class="compare-drawer-content-container mb-md-4">
       <v-col cols="12" md="6">
 
-        <h3 class="title">Compare Schools</h3>
+        <div class="compare-drawer-section-header-wrapper ml-4">
+          <div class="compare-icon-wrapper d-inline-block mr-4"
+               style="background: #91C191;"
+          >
+            <v-icon
+              class="mt-1"
+              color="#122E51"
+              small
+            >
+              fas fa-university
+            </v-icon>
+          </div>
+
+          <div class="compare-drawer-section-header">
+            <h3 class="title">Compare Schools</h3>
+          </div>
+        </div>
 
         <div class="my-3">
           <v-checkbox
@@ -80,7 +96,24 @@
       </v-col>
 
       <v-col cols="12" md="6">
-        <h3 class="title compare-drawer-fos-title">Compare Fields Of Study</h3>
+
+        <div class="compare-drawer-section-header-wrapper ml-4">
+          <div class="compare-icon-wrapper d-inline-block mr-4"
+               style="background: #fec005;"
+          >
+            <v-icon
+              class="mt-1"
+              color="black"
+              small
+            >
+              fas fa-award
+            </v-icon>
+          </div>
+
+          <div class="compare-drawer-section-header">
+            <h3 class="title">Compare Fields of Study</h3>
+          </div>
+        </div>
 
         <div class="my-3 compare-drawer-fos-checkbox-container">
           <v-checkbox
@@ -224,6 +257,23 @@
 
   #compare-drawer-info{
     background: #F7F7F7;
+  }
+
+  .compare-icon-wrapper{
+    border-radius: 50%;
+    box-shadow: 0px 3px 6px #00000029;
+    border: white 3px solid;
+    width: 36px;
+    height: 36px;
+    text-align: center;
+  }
+  .compare-drawer-section-header-wrapper{
+    display: inline-table;
+  }
+
+  .compare-drawer-section-header{
+    display: table-cell;
+    vertical-align: middle;
   }
 
 </style>
