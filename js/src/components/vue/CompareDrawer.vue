@@ -1,11 +1,43 @@
 <template>
   <v-card id="compare-schools-content" class="pa-5">
 
-    <v-btn icon class="float-right" @click="toggleDrawer()">
-      <v-icon>fas fa-times-circle</v-icon>
-    </v-btn>
+    <div>
+      <span>
+        <v-icon
+          class="mr-2"
+          color="#0075B2"
+        >
+          fas fa-check-circle
+        </v-icon>
+        Add up to 10 Schools and 10 Fields of Study to compare.
+      </span>
 
-    <p>Add up to 10 Schools and 10 Fields of Study to compare.</p>
+      <div class="float-right">
+        <v-btn icon @click="showCompareInfo = !showCompareInfo">
+          <v-icon v-if="showCompareInfo">fas fa-minus-circle</v-icon>
+          <v-icon v-else>fas fa-plus-circle</v-icon>
+        </v-btn>
+
+        <v-btn icon @click="toggleDrawer()">
+          <v-icon>fas fa-times-circle</v-icon>
+        </v-btn>
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+
+    <v-card v-if="showCompareInfo"
+      id="compare-drawer-info"
+      class="pa-4 my-4"
+      rounded
+      flat
+      outlined
+    >
+      <p class="mb-0">
+        <strong>You have just added your first item to compare.</strong> As you add items to compare, they will be listed here.
+        When you are ready to compare, you simply click the buttons to go to the compare page.
+      </p>
+    </v-card>
+
 
     <v-row class="compare-drawer-content-container mb-md-4">
       <v-col cols="12" md="6">
@@ -146,6 +178,7 @@
   #compare-schools-content{
     overflow-y: auto;
     height: 90vh;
+    border-top: 10px solid black;
 
     @media (min-width: 960px){
       height: 50vh;
@@ -189,6 +222,10 @@
     bottom: 0px;
   }
 
+  #compare-drawer-info{
+    background: #F7F7F7;
+  }
+
 </style>
 
 <script>
@@ -205,6 +242,10 @@ export default {
     schools: Array,
     fieldsOfStudy:{
       type: Array
+    },
+    showInfoText:{
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -212,7 +253,8 @@ export default {
       selectedSchools: [],
       selectedFieldsOfStudy: [],
       fieldOfStudyKey: localStorageKeys.COMPARE_FOS_KEY,
-      schoolKey: localStorageKeys.COMPARE_KEY
+      schoolKey: localStorageKeys.COMPARE_KEY,
+      showCompareInfo: false
     };
   },
   watch: {
@@ -231,6 +273,7 @@ export default {
       return this.generateFieldOfStudyString(fieldOfStudy);
     });
 
+    this.showCompareInfo = this.showInfoText;
     // this.onResize();
   },
   methods: {
@@ -248,6 +291,7 @@ export default {
     },
     toggleDrawer() {
       this.$emit("close-modal");
+      this.showCompareInfo = false;
     },
     generateFieldOfStudyString(fosObject){
       return `${fosObject.id}-${fosObject.code}-${fosObject.credentialLevel}`;

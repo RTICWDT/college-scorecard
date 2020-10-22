@@ -138,7 +138,7 @@ new Vue({
 
       // Toggle compare drawer when first element is added.
       if(previousCompareCount === 0){
-        EventBus.$emit('compare-drawer-show', false);
+        EventBus.$emit('compare-drawer-show', true);
       }
     }
   }
