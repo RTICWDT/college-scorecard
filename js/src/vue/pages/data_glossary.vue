@@ -34,8 +34,10 @@
       <compare-drawer
         :schools="compareSchools"
         :fields-of-study="compareFieldsOfStudy"
+        :show-info-text="showInfoText"
         @toggle-compare-school="handleToggleCompareItem"
         v-on:close-modal="closeModal()"
+        @toggle-more-info="showInfoText = !showInfoText"
       ></compare-drawer>
     </v-bottom-sheet>
   </v-app>
@@ -70,8 +72,9 @@ export default {
       this.$vuetify.goTo(window.location.hash, { offset: 30 })
     }
 
-    EventBus.$on('compare-drawer-show', (e) => {
+    EventBus.$on('compare-drawer-show', (showCompareInfo) => {
       this.showCompare = true;
+      this.showInfoText = showCompareInfo;
     });
   }
 };

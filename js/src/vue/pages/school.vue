@@ -1376,6 +1376,7 @@
         :show-info-text="showInfoText"
         @toggle-compare-school="handleToggleCompareItem"
         v-on:close-modal="closeModal()"
+        @toggle-more-info="showInfoText = !showInfoText"
       ></compare-drawer>
     </v-bottom-sheet>
   </v-app>

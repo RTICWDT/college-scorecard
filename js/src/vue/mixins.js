@@ -16,6 +16,7 @@ export const compare = {
     },
     closeModal(){
       this.showCompare = false;
+      this.showInfoText = false;
     },
     isSelected(data,collection) {
       return _.findIndex(collection, data) >= 0;

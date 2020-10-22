@@ -13,8 +13,8 @@
       </span>
 
       <div class="float-right">
-        <v-btn icon @click="showCompareInfo = !showCompareInfo">
-          <v-icon v-if="showCompareInfo">fas fa-minus-circle</v-icon>
+        <v-btn icon @click="toggleMoreInfo()">
+          <v-icon v-if="showInfoText">fas fa-minus-circle</v-icon>
           <v-icon v-else>fas fa-plus-circle</v-icon>
         </v-btn>
 
@@ -25,7 +25,7 @@
       <div style="clear: both;"></div>
     </div>
 
-    <v-card v-if="showCompareInfo"
+    <v-card v-if="showInfoText"
       id="compare-drawer-info"
       class="pa-4 my-4"
       rounded
@@ -304,7 +304,7 @@ export default {
       selectedFieldsOfStudy: [],
       fieldOfStudyKey: localStorageKeys.COMPARE_FOS_KEY,
       schoolKey: localStorageKeys.COMPARE_KEY,
-      showCompareInfo: false
+      // showCompareInfo: false
     };
   },
   watch: {
@@ -315,7 +315,10 @@ export default {
       this.selectedFieldsOfStudy = _.map(this.fieldsOfStudy, (fieldOfStudy) => {
         return this.generateFieldOfStudyString(fieldOfStudy);
       });
-    }
+    },
+    // showInfoText(newValue,oldValue){
+    //   this.showCompareInfo = newValue;
+    // }
   },
   mounted() {
     this.selectedSchools = _.map(this.schools, "schoolId");
@@ -323,7 +326,7 @@ export default {
       return this.generateFieldOfStudyString(fieldOfStudy);
     });
 
-    this.showCompareInfo = this.showInfoText;
+    // this.showCompareInfo = this.showInfoText;
     // this.onResize();
   },
   methods: {
@@ -341,7 +344,9 @@ export default {
     },
     toggleDrawer() {
       this.$emit("close-modal");
-      this.showCompareInfo = false;
+    },
+    toggleMoreInfo(){
+      this.$emit("toggle-more-info");
     },
     generateFieldOfStudyString(fosObject){
       return `${fosObject.id}-${fosObject.code}-${fosObject.credentialLevel}`;

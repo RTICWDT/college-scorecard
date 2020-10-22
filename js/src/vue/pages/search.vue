@@ -389,8 +389,10 @@
         <compare-drawer
           :schools="compareSchools"
           :fields-of-study="compareFieldsOfStudy"
+          :show-info-text="showInfoText"
           @toggle-compare-school="handleToggleCompareItem"
           v-on:close-modal="closeModal()"
+          @toggle-more-info="showInfoText = !showInfoText"
         ></compare-drawer>
       </v-bottom-sheet>
     </v-app>
@@ -527,8 +529,9 @@ export default {
     }, 1000);
   },
   mounted() {
-    EventBus.$on('compare-drawer-show', (e) => {
+    EventBus.$on('compare-drawer-show', (showCompareInfo) => {
       this.showCompare = true;
+      this.showInfoText = showCompareInfo;
     });
   },
   computed: {
@@ -698,9 +701,6 @@ export default {
     resort(sort) {
       this.input.sort = sort;
       this.debounceSearchUpdate(this.parseURLParams());
-    },
-    closeModal(){
-      this.showCompare = false;
     },
     clearSearchForm(){
       this.input = {
