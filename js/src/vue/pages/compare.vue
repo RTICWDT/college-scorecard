@@ -199,7 +199,7 @@
                     <div class="ml-3">
                       <div id="fos-median-earnings" class="pt-5 mb-5">
                         <h3 class="mb-2">
-                          Median Earnings&nbsp;<tooltip definition="fos-number-of-graduates" :isCompare="true" />
+                          Median Earnings&nbsp;<tooltip definition="fos-median-earnings" :isCompare="true" />
                         </h3>
 
                         <compare-block
@@ -248,7 +248,7 @@
 
                       <div id="fos-monthly-earnings" class="mb-5">
                         <h3 class="mb-2">
-                          Monthly Earnings&nbsp;<tooltip definition="fos-number-of-graduates" :isCompare="true" />
+                          Monthly Earnings&nbsp;<tooltip definition="fos-monthly-earnings" :isCompare="true" />
                         </h3>
 
                         <compare-block
@@ -302,7 +302,7 @@
                     <div class="ml-3">
                       <div id="fos-median-total-debt" class="pt-5 mb-5">
                         <h3 class="mb-2">
-                          Median Total Debt After Graduation&nbsp;<tooltip definition="fos-number-of-graduates" :isCompare="true" />
+                          Median Total Debt After Graduation&nbsp;<tooltip definition="fos-median-debt" :isCompare="true" />
                         </h3>
 
                         <v-checkbox
@@ -314,7 +314,7 @@
                           <template v-slot:label>
                           <span class="profile-fos-include-prior-debt">
                             Include debt borrowed at any prior institutions
-                            <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                            <tooltip definition="include-debt-prior-inst" />
                           </span>
                           </template>
                         </v-checkbox>
@@ -362,7 +362,9 @@
 
                       <div id="fos-monthly-loan" class="mb-5">
                         <h3 class="mb-2">
-                          Monthly Loan Payment&nbsp;<tooltip definition="fos-number-of-graduates" :isCompare="true" />
+                          Monthly Loan Payment&nbsp;
+                              <tooltip v-if="!fosShowDebtAtPrior" definition="fos-monthly-debt-payment" :limitedFoS="fieldsLink" />
+                              <tooltip v-else definition="fos-monthly-debt-payment-all-schools" :limitedFoS="fieldsLink" />
                         </h3>
 
                         <v-checkbox
@@ -374,7 +376,7 @@
                           <template v-slot:label>
                           <span class="profile-fos-include-prior-debt">
                             Include debt borrowed at any prior institutions
-                            <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                            <tooltip definition="include-debt-prior-inst" />
                           </span>
                           </template>
                         </v-checkbox>
@@ -743,7 +745,7 @@
                             <span>
                               Include debt borrowed at any prior institutions
                               <!--TODO - Update Tooltip-->
-                              <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                              <tooltip definition="include-debt-prior-inst" />
                             </span>
                           </template>
                         </v-checkbox>
@@ -777,7 +779,7 @@
                             <span>
                               Include debt borrowed at any prior institutions
                               <!--TODO - Update Tooltip-->
-                              <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+                              <tooltip definition="include-debt-prior-inst" />
                             </span>
                           </template>
                         </v-checkbox>
