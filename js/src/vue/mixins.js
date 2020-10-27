@@ -1,16 +1,11 @@
 export const compare = {
   data: function () {
     return {
-      showCompare: false
-    }
+      showCompare: false,
+      showInfoText: false
+    };
   },
   computed:{
-    // isSelected() {
-    // if (_.findIndex(this.compareSchools, ["schoolId", String(_.get(this.school, this.fields['ID']))]) >= 0) {
-    //     return true;
-    // }
-    // return false;
-    // },
   },
   methods:{
     handleToggleCompareSchool(school) {
@@ -21,6 +16,7 @@ export const compare = {
     },
     closeModal(){
       this.showCompare = false;
+      this.showInfoText = false;
     },
     isSelected(data,collection) {
       return _.findIndex(collection, data) >= 0;

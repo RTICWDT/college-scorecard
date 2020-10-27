@@ -90,7 +90,7 @@ header {
       li a{
         text-decoration: none;
         color: white !important;
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         padding: 0 10px;
       }
 
@@ -137,6 +137,11 @@ header {
     }
   }
 
+  .nav-compare-icon{
+    vertical-align: middle;
+  }
+
+
 }
 </style>
 
@@ -167,17 +172,80 @@ header {
             <li>
               <a :href="`${$baseUrl}/`"
                 :class="{'nav-active' : activeLink === '/'}"
-              >
-                Home
-              </a>
+              >Home</a>
             </li>
 
             <li>
               <a :href="`${$baseUrl}/data`"
                  :class="{'nav-active' : activeLink === 'data'}"
-              >
-                About the Data
-              </a>
+              >About the Data</a>
+            </li>
+
+            <li>
+              <a :href="`${$baseUrl}/search`"
+                 :class="{'nav-active' : activeLink === 'search'}"
+              >Search</a>
+            </li>
+
+            <li style="display: inline-table">
+              <a :href="`${$baseUrl}/compare`"
+                 :class="{'nav-active' : activeLink === 'compare','pr-2':true}"
+                 aria-label="Navigate to compare page"
+              >Compare:</a>
+
+                <!-- Institution Compare Button -->
+                <v-badge
+                  class="nav-compare-icon mb-2 mr-3"
+                  bottom
+                  offset-x="14"
+                  offset-y="10"
+                  :content="compareInstitutionsCount"
+                  :value="compareInstitutionsCount"
+                  color="#E3EEF6"
+                >
+                  <v-btn
+                    small
+                    fab
+                    color="#91C191"
+                    @click="handleCompareIconClick"
+                    aria-label="Show Compare Drawer"
+                  >
+                    <v-icon
+                      color="#122E51"
+                    >
+                      fas fa-university
+                    </v-icon>
+                  </v-btn>
+                </v-badge>
+
+                <!-- FoS Compare Button -->
+                <v-badge
+                  class="nav-compare-icon mb-2"
+                  bottom
+                  offset-x="14"
+                  offset-y="10"
+                  :content="compareFieldsOfStudyCount"
+                  :value="compareFieldsOfStudyCount"
+                  color="#E3EEF6"
+                >
+                  <v-btn
+                    small
+                    fab
+                    color="#fec005"
+                    @click="handleCompareIconClick"
+                    aria-label="Show Compare Drawer"
+                  >
+                    <v-icon
+                      color="black"
+                    >
+                      fas fa-award
+                    </v-icon>
+                  </v-btn>
+                </v-badge>
+
+            </li>
+
+            <li>
             </li>
 
           </ul>
@@ -228,6 +296,30 @@ header {
             </v-list-item-content>
           </v-list-item>
 
+          <v-list-item class="mobile-navigation-item" @click="mobileNavClick(`${$baseUrl}/search`)">
+            <v-list-item-content>
+              <v-list-item-title class="mobile-navigation-item">
+                Search
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item class="mobile-navigation-item" @click="mobileNavClick(`${$baseUrl}/compare/?toggle=institutions`)">
+            <v-list-item-content>
+              <v-list-item-title class="mobile-navigation-item">
+                Compare Institutions
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item class="mobile-navigation-item" @click="mobileNavClick(`${$baseUrl}/compare/?toggle=fos`)">
+            <v-list-item-content>
+              <v-list-item-title class="mobile-navigation-item">
+                Compare Fields of Study
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -236,12 +328,21 @@ header {
 </template>
 
 <script>
+import { EventBus } from '../../vue/EventBus.js';
 
 export default {
   props:{
     activeLink:{
       type: String,
       default: null
+    },
+    compareInstitutionsCount:{
+      type: Number,
+      default: 0
+    },
+    compareFieldsOfStudyCount:{
+      type: Number,
+      default: 0
     }
   },
   data(){
@@ -257,6 +358,9 @@ export default {
   methods:{
     mobileNavClick(urlString){
       window.location.href = urlString;
+    },
+    handleCompareIconClick(resourceType = "institution"){
+      EventBus.$emit('compare-drawer-show', false);
     }
   },
   created(){

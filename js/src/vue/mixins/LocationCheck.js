@@ -27,7 +27,7 @@ export default {
         
       } else {
         this.location.isLoading = false;
-        this.location.error = "Not Available"
+        this.location.error = "Not Available";
       }
     },
     //Distance: Referenced from: https://stackoverflow.com/a/25025590

@@ -68,6 +68,7 @@
         class="mb-3 mt-0 pt-0"
         aria-labelledby="location-label"
         :placeholder="utility.location ? undefined : 'Select an option'"
+        clearable
       />
 
       <div class="d-flex align-center" v-if="utility.location=='ZIP Code'">
@@ -92,18 +93,12 @@
       </div>
 
       <div class="d-flex align-center" v-if="utility.location=='Near Me'">
-        <v-tooltip bottom max-width="250" color="rgba(0,0,0,0.95)">
-          <template v-slot:activator="{ on }">
-            <v-btn icon @click="handleLocationCheck">
-              <v-icon
-                v-on="on"
-                :color="locationButtonColor"
-                v-html="location.isLoading ? 'fas fa-circle-notch fa-spin' : 'mdi-near-me'"
-              ></v-icon>
-            </v-btn>
-          </template>
-          Click the arrow to find your location based on your browser settings and then enter a distance to find schools near you.
-        </v-tooltip>
+        <v-icon
+          v-on="on"
+          :color="locationButtonColor"
+          v-html="location.isLoading ? 'fas fa-circle-notch fa-spin' : 'mdi-near-me'"
+        ></v-icon>
+
         <v-text-field
           v-model="location.miles"
           :rules="[utility.rules.required,utility.rules.numerical]"
@@ -113,6 +108,7 @@
           class="mb-3"
           type="number"
         ></v-text-field>
+
         <span v-show="location.error" class="overline">{{location.error}}</span>
       </div>
 
@@ -132,48 +128,41 @@
         v-if="utility.location=='State'"
       ></v-select>
 
-      <p class="subhead-2">
-        Field of Study Offered
-        <tooltip definition="field-of-study" />
-      </p>
-      <div id="search-form-sub-degree-container" class="mt-4 pl-4 ml-2">
-        <p class="subhead-2" id="fields-label">Academic Fields</p>
-        <field-autocomplete v-model="input.cip4"></field-autocomplete>
+      <!-- cip4 - Degree subfield -->
+      <p class="subhead-2" id="fields-label">Academic Fields</p>
+      <field-autocomplete v-model="input.cip4"></field-autocomplete>
 
-        <!-- cip4 - Degree subfield -->
-        <div>
-          <p class="subhead-2">Degrees/Certificate</p>
-          <v-checkbox
-            id="search-form-fos-degree-c"
-            class="search-form-degree-cb my-0 py-0"
-            v-model="input.cip4_degree"
-            label="Certificate"
-            value="c"
-            color="secondary"
-            hide-details
-          ></v-checkbox>
+      <!-- Credential Level -->
+      <p class="subhead-2">Degrees/Certificate</p>
+      <v-checkbox
+        id="search-form-fos-degree-c"
+        class="search-form-degree-cb my-0 py-0"
+        v-model="input.cip4_degree"
+        label="Certificate"
+        value="c"
+        color="secondary"
+        hide-details
+      ></v-checkbox>
 
-          <v-checkbox
-            id="search-form-fos-degree-a"
-            class="search-form-degree-cb my-0 py-0"
-            v-model="input.cip4_degree"
-            label="Associate's Degree"
-            value="a"
-            color="secondary"
-            hide-details
-          ></v-checkbox>
+      <v-checkbox
+        id="search-form-fos-degree-a"
+        class="search-form-degree-cb my-0 py-0"
+        v-model="input.cip4_degree"
+        label="Associate's Degree"
+        value="a"
+        color="secondary"
+        hide-details
+      ></v-checkbox>
 
-          <v-checkbox
-            id="search-form-fos-degree-b"
-            class="search-form-degree-cb my-0 py-0"
-            v-model="input.cip4_degree"
-            label="Bachelor's Degree"
-            value="b"
-            color="secondary"
-            hide-details
-          ></v-checkbox>
-        </div>
-      </div>
+      <v-checkbox
+        id="search-form-fos-degree-b"
+        class="search-form-degree-cb my-0 py-0"
+        v-model="input.cip4_degree"
+        label="Bachelor's Degree"
+        value="b"
+        color="secondary"
+        hide-details
+      ></v-checkbox>
 
       <!-- Graduation Rate -->
       <div>
@@ -532,6 +521,11 @@ export default {
     'location.miles'() {
       this.handleLocationCheck();
     },
+    'utility.location'(newValue, oldValue){
+      if(newValue === 'Near Me' && oldValue !== 'Near Me'){
+        this.handleLocationCheck();
+      }
+    }
   },
   computed: {
     // Remove items that are not set

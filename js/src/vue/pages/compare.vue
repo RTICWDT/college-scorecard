@@ -1,6 +1,10 @@
 <template>
   <v-app id="compare" class="compare-page">
-    <scorecard-header />
+    <scorecard-header
+      :compare-institutions-count="compareSchools.length"
+      :compare-fields-of-study-count="compareFieldsOfStudy.length"
+      active-link="compare"
+    />
     <v-content>
       <v-container>
         <v-row>
@@ -890,7 +894,7 @@
                       color="secondary"
                       :href="`${$baseUrl}/search?toggle=institutions`"
                     >
-                      Visit the institution search page
+                      search schools
                     </v-btn>
                   </div>
 
@@ -911,7 +915,7 @@
                       color="secondary"
                       :href="`${$baseUrl}/search?toggle=fos`"
                     >
-                      Visit the fields of study search page
+                      SEARCH FIELDS OF STUDY
                     </v-btn>
                   </div>
 
@@ -964,8 +968,10 @@
       <compare-drawer
         :schools="compareSchools"
         :fields-of-study="compareFieldsOfStudy"
+        :show-info-text="showInfoText"
         @toggle-compare-school="handleToggleCompareItem"
         v-on:close-modal="closeModal()"
+        @toggle-more-info="showInfoText = !showInfoText"
       ></compare-drawer>
     </v-bottom-sheet>
   </v-app>
@@ -1057,6 +1063,7 @@ import Router from "vue/mixins/Router.js";
 import { fields, localStorageKeys } from '../constants';
 import {generateFieldOfStudyUUID, decodeFieldOfStudyUUID, fieldOfStudyCompareFormat} from '../commonFormats';
 import ContextToggle from "components/vue/ContextToggle.vue";
+import { EventBus } from "../EventBus.js";
 
 export default {
   mixins: [compare, ComplexFields, AnalyticsEvents, Router],
@@ -1706,6 +1713,11 @@ export default {
     // Did this initiate as a shared comparision
     this.isSharedComparison = this.showShareUpdate;
     this.isSharedFieldOfStudyComparison = this.showShareFieldOfStudyUpdate;
+
+    EventBus.$on('compare-drawer-show', (showCompareInfo) => {
+      this.showCompare = true;
+      this.showInfoText = showCompareInfo;
+    });
   }
 };
 </script>

@@ -1,7 +1,10 @@
 <template>
   <v-app id="school" class="school-page">
     <!-- Search results -->
-    <scorecard-header />
+    <scorecard-header
+      :compare-institutions-count="compareSchools.length"
+      :compare-fields-of-study-count="compareFieldsOfStudy.length"
+    />
 
     <v-content>
       <v-container>
@@ -1380,8 +1383,10 @@
       <compare-drawer
         :schools="compareSchools"
         :fields-of-study="compareFieldsOfStudy"
+        :show-info-text="showInfoText"
         @toggle-compare-school="handleToggleCompareItem"
         v-on:close-modal="closeModal()"
+        @toggle-more-info="showInfoText = !showInfoText"
       ></compare-drawer>
     </v-bottom-sheet>
   </v-app>
@@ -1594,6 +1599,7 @@ import ComplexFields from "vue/mixins/ComplexFields.js";
 import URLHistory from "vue/mixins/URLHistory.js";
 import { apiGet } from '../api.js';
 import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
+import { EventBus } from "../EventBus.js";
 
 export default {
   mixins: [compare, URLHistory, ComplexFields, AnalyticsEvents],
@@ -2021,17 +2027,10 @@ export default {
         console.warn('No School found for ID: ' + id);
       });
 
-    // Organize
-
-    // set URL params
-    // this.urlParams = this.parseURLParams(location.search.substr(1));
-    // this.selectedFOS = this.mapFOSFromURL(this.urlParams, this.fieldOfStudySelectItems);
-
-    // Check URL for FOS Argument
-
-    //CHECK FIRST;
-
-
+    EventBus.$on('compare-drawer-show', (showCompareInfo) => {
+      this.showCompare = true;
+      this.showInfoText = showCompareInfo;
+    });
   },
   watch:{
     selectedFOS(val, oldVal){

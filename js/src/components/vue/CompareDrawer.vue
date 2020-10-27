@@ -1,16 +1,64 @@
 <template>
   <v-card id="compare-schools-content" class="pa-5">
 
-    <v-btn icon class="float-right" @click="toggleDrawer()">
-      <v-icon>fas fa-times-circle</v-icon>
-    </v-btn>
+    <div>
+      <span>
+        <v-icon
+          class="mr-2"
+          color="#0075B2"
+        >
+          fas fa-check-circle
+        </v-icon>
+        Add up to 10 Schools and 10 Fields of Study to compare.
+      </span>
 
-    <p>Add up to 10 Schools and 10 Fields of Study to compare.</p>
+      <div class="float-right">
+        <v-btn icon @click="toggleMoreInfo()">
+          <v-icon v-if="showInfoText">fas fa-minus-circle</v-icon>
+          <v-icon v-else>fas fa-plus-circle</v-icon>
+        </v-btn>
+
+        <v-btn icon @click="toggleDrawer()">
+          <v-icon>fas fa-times-circle</v-icon>
+        </v-btn>
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+
+    <v-card v-if="showInfoText"
+      id="compare-drawer-info"
+      class="pa-4 my-4"
+      rounded
+      flat
+      outlined
+    >
+      <p class="mb-0">
+        <strong>You have just added your first item to compare.</strong> As you add items to compare, they will be listed here.
+        When you are ready to compare, you simply click the buttons to go to the compare page.
+      </p>
+    </v-card>
+
 
     <v-row class="compare-drawer-content-container mb-md-4">
       <v-col cols="12" md="6">
 
-        <h3 class="title">Compare Schools</h3>
+        <div class="compare-drawer-section-header-wrapper ml-4">
+          <div class="compare-icon-wrapper d-inline-block mr-4"
+               style="background: #91C191;"
+          >
+            <v-icon
+              class="mt-1"
+              color="#122E51"
+              small
+            >
+              fas fa-university
+            </v-icon>
+          </div>
+
+          <div class="compare-drawer-section-header">
+            <h3 class="title">Compare Schools</h3>
+          </div>
+        </div>
 
         <div class="my-3">
           <v-checkbox
@@ -48,7 +96,24 @@
       </v-col>
 
       <v-col cols="12" md="6">
-        <h3 class="title compare-drawer-fos-title">Compare Fields Of Study</h3>
+
+        <div class="compare-drawer-section-header-wrapper ml-4">
+          <div class="compare-icon-wrapper d-inline-block mr-4"
+               style="background: #fec005;"
+          >
+            <v-icon
+              class="mt-1"
+              color="black"
+              small
+            >
+              fas fa-award
+            </v-icon>
+          </div>
+
+          <div class="compare-drawer-section-header">
+            <h3 class="title">Compare Fields of Study</h3>
+          </div>
+        </div>
 
         <div class="my-3 compare-drawer-fos-checkbox-container">
           <v-checkbox
@@ -86,7 +151,7 @@
     </v-row>
 
     <!-- Compare Buttons, medium or larger-->
-    <div id="compare-drawer-md-button-row" v-resize="onResize">
+    <div id="compare-drawer-md-button-row" v-resize="onResize" v-if="schools.length > 0 || fieldsOfStudy.length > 0">
       <v-row>
         <v-col cols="12" md="5" class="text-center d-none d-md-block" >
           <v-btn
@@ -146,6 +211,7 @@
   #compare-schools-content{
     overflow-y: auto;
     height: 90vh;
+    border-top: 10px solid black;
 
     @media (min-width: 960px){
       height: 50vh;
@@ -189,6 +255,27 @@
     bottom: 0px;
   }
 
+  #compare-drawer-info{
+    background: #F7F7F7;
+  }
+
+  .compare-icon-wrapper{
+    border-radius: 50%;
+    box-shadow: 0px 3px 6px #00000029;
+    border: white 3px solid;
+    width: 36px;
+    height: 36px;
+    text-align: center;
+  }
+  .compare-drawer-section-header-wrapper{
+    display: inline-table;
+  }
+
+  .compare-drawer-section-header{
+    display: table-cell;
+    vertical-align: middle;
+  }
+
 </style>
 
 <script>
@@ -205,6 +292,10 @@ export default {
     schools: Array,
     fieldsOfStudy:{
       type: Array
+    },
+    showInfoText:{
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -212,7 +303,8 @@ export default {
       selectedSchools: [],
       selectedFieldsOfStudy: [],
       fieldOfStudyKey: localStorageKeys.COMPARE_FOS_KEY,
-      schoolKey: localStorageKeys.COMPARE_KEY
+      schoolKey: localStorageKeys.COMPARE_KEY,
+      // showCompareInfo: false
     };
   },
   watch: {
@@ -223,7 +315,10 @@ export default {
       this.selectedFieldsOfStudy = _.map(this.fieldsOfStudy, (fieldOfStudy) => {
         return this.generateFieldOfStudyString(fieldOfStudy);
       });
-    }
+    },
+    // showInfoText(newValue,oldValue){
+    //   this.showCompareInfo = newValue;
+    // }
   },
   mounted() {
     this.selectedSchools = _.map(this.schools, "schoolId");
@@ -231,6 +326,7 @@ export default {
       return this.generateFieldOfStudyString(fieldOfStudy);
     });
 
+    // this.showCompareInfo = this.showInfoText;
     // this.onResize();
   },
   methods: {
@@ -249,13 +345,22 @@ export default {
     toggleDrawer() {
       this.$emit("close-modal");
     },
+    toggleMoreInfo(){
+      this.$emit("toggle-more-info");
+    },
     generateFieldOfStudyString(fosObject){
       return `${fosObject.id}-${fosObject.code}-${fosObject.credentialLevel}`;
     },
     onResize(){
       // setting the width for fixed position elements
-      let desiredWidth = document.querySelector("#compare-header").clientWidth;
-      document.querySelector("#compare-drawer-md-button-row").style.width = `${desiredWidth}px`;
+      let desiredWidth = (document.querySelector("#compare-header")) ?
+        document.querySelector("#compare-header").clientWidth : null;
+
+      if(desiredWidth != null){
+        document.querySelector("#compare-drawer-md-button-row").style.width = `${desiredWidth}px`;
+      }else{
+        document.querySelector("#compare-drawer-md-button-row").style.width = `600px`;
+      }
     }
   }
 };
