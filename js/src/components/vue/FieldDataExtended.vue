@@ -12,7 +12,7 @@
       <v-col cols="12" md="5">
         <h4 class="mb-2 field-data-header-title">
           Median Earnings&nbsp
-          <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+          <tooltip definition="fos-median-earnings" :limitedFoS="fieldsLink" />
         </h4>
 
         <div v-if="fosSalarySelect === 'aid'">
@@ -41,7 +41,7 @@
       <v-col cols="12" md="4">
         <h4 class="mb-2">
           Monthly Earnings&nbsp
-          <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+          <tooltip definition="fos-monthly-earnings" :limitedFoS="fieldsLink" />
         </h4>
 
         <div v-if="fosSalarySelect === 'aid'">
@@ -84,7 +84,7 @@
           <template v-slot:label>
             <span class="profile-fos-include-prior-debt">
               Include debt borrowed at any prior institutions&nbsp
-              <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+              <tooltip definition="include-debt-prior-inst" />
             </span>
           </template>
         </v-checkbox>
@@ -157,7 +157,7 @@
       <v-col cols="12" md="5">
         <h4 class="mb-2">
           Number Of Graduates&nbsp
-          <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+          <tooltip definition="fos-number-of-graduates" />
         </h4>
          <div v-if="_.get(fos, fields.FOS_GRAD_COUNT)">
            <span class="fos-field-data-text">{{_.get(fos, fields.FOS_GRAD_COUNT)}}</span>
