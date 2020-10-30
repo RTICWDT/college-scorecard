@@ -50,7 +50,7 @@
                       :color="isSelected({schoolId:String(id)},this.compareSchools)?'amber':'white'"
                       @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
-                      <v-icon x-small class="mr-2">fa fa-plus-circle</v-icon>
+                      <v-icon x-small class="mr-2">fa fa-check-circle</v-icon>
                       Compare School
                     </v-btn>
 
@@ -61,7 +61,7 @@
                       class="d-inline d-sm-none mr-2"
                       @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
-                      <v-icon small class="">fa fa-plus-circle</v-icon>
+                      <v-icon small class="">fa fa-check-circle</v-icon>
                       <span class='sr-only'>Compare School</span>
                     </v-btn>
 
@@ -306,7 +306,7 @@
                           :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"
                           @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
                         >
-                          Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-plus-circle</v-icon>
+                          Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-check-circle</v-icon>
                         </v-btn>
                       </div>
 
@@ -357,7 +357,7 @@
                         :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"
                         @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
                       >
-                        Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-plus-circle</v-icon>
+                        Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-check-circle</v-icon>
                       </v-btn>
                     </div>
 

@@ -899,7 +899,7 @@
                   </div>
 
                   <p class="text-center my-4">
-                    Try searching for schools and clicking the <v-icon>fa fa-plus-circle</v-icon> to add a school for comparison.
+                    Try searching for schools and clicking the <v-icon>fa fa-check-circle</v-icon> to add a school for comparison.
                   </p>
 
                 </div>
@@ -920,7 +920,7 @@
                   </div>
 
                   <p class="text-center my-4">
-                    Try searching for fields of study and clicking the <v-icon>fa fa-plus-circle</v-icon> to add a
+                    Try searching for fields of study and clicking the <v-icon>fa fa-check-circle</v-icon> to add a
                     field of study for comparison.
                   </p>
                 </div>

@@ -139,11 +139,11 @@
                   <v-btn class="search-fos-result-compare-button d-none d-md-block"
                          icon
                          @click="$emit('toggle-compare-item', fieldOfStudyCompareFormat(fieldOfStudy), 'compare-fos')"
-                         :color="selectedFieldOfStudyClass(fieldOfStudy) === 'result-card-selected'? 'amber' : 'gray'"
+                         :color="selectedFieldOfStudyClass(fieldOfStudy) === 'result-card-selected'? '#0075B2' : 'gray'"
                          v-bind="attrs"
                          v-on="on"
                   >
-                    <v-icon>fa fa-plus-circle</v-icon>
+                    <v-icon>fa fa-check-circle</v-icon>
                     <span class='sr-only'>Compare</span>
                   </v-btn>
                 </template>
@@ -162,7 +162,7 @@
                      v-bind="attrs"
                      v-on="on"
                     >
-                      <span class="mr-4">Compare</span><v-icon>fa fa-plus-circle</v-icon>
+                      <span class="mr-4">Compare</span><v-icon>fa fa-check-circle</v-icon>
                     </v-btn>
                   </template>
                   <span>Add field of study to compare</span>
