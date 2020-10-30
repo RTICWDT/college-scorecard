@@ -15,7 +15,7 @@
 .result-card-selected {
   border: 4px
     solid
-    #eeba28 !important;
+    #91c191 !important;
 }
 
 .moreDetails{
@@ -48,13 +48,13 @@
             text
             icon
             class="float-right search-result-card-compare"
-            :color="isSelected?'amber':'grey'"
+            :color="isSelected?'#0075B2':'grey'"
             @click="$emit('toggle-compare-school',school)"
             v-bind="attrs"
             v-on="on"
             aria-label="Add to compare"
           >
-            <v-icon>fa fa-plus-circle</v-icon>
+            <v-icon>fa fa-check-circle</v-icon>
             <span class='sr-only'>Compare</span>
           </v-btn>
         </template>

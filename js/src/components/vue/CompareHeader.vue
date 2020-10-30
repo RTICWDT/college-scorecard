@@ -6,7 +6,7 @@
   >
     <div v-if="currentSchoolCount < 10 || currentFieldOfStudyCount < 10">
       <span v-if="currentSchoolCount < 10">
-        <v-icon color="amber" small class='pr-2'>fas fa-plus-circle</v-icon>
+        <v-icon color="amber" small class='pr-2'>fas fa-check-circle</v-icon>
         {{currentSchoolCount}} {{schoolText}} and
       </span>
       <span v-else>
