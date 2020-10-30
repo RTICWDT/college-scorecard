@@ -13,10 +13,10 @@
       </span>
 
       <div class="float-right">
-        <v-btn icon @click="toggleMoreInfo()">
+        <!--<v-btn icon @click="toggleMoreInfo()">
           <v-icon v-if="showInfoText">fas fa-minus-circle</v-icon>
           <v-icon v-else>fas fa-plus-circle</v-icon>
-        </v-btn>
+        </v-btn> -->
 
         <v-btn icon @click="toggleDrawer()">
           <v-icon>fas fa-times-circle</v-icon>

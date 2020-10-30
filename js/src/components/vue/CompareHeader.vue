@@ -6,7 +6,7 @@
   >
     <div>
       <span v-if="currentSchoolCount < 10">
-        <v-icon color="amber" small class='pr-2'>fas fa-check-circle</v-icon>
+        <v-icon color="#0075B2" small class='pr-2'>fas fa-check-circle</v-icon>
         {{currentSchoolCount}} {{schoolText}} and
       </span>
       <span v-else>
@@ -18,7 +18,7 @@
       <span v-else>
         &nbsp;<v-icon color="red" small class=''>fas fa-exclamation-circle</v-icon>&nbsp;Maximum of 10 fields of study reached.
       </span>
-    </div >>
+    </div >
 
 
   </div>

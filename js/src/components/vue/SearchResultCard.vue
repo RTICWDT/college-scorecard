@@ -15,7 +15,7 @@
 .result-card-selected {
   border: 4px
     solid
-    #CEE4F3 !important;
+    #A6CFE4 !important;
 }
 
 .moreDetails{
