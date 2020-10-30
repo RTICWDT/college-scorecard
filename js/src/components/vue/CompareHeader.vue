@@ -4,7 +4,7 @@
        @click="toggleDrawer()"
        v-if="currentSchoolCount > 0 || currentFieldOfStudyCount > 0"
   >
-    <div v-if="currentSchoolCount < 10 || currentFieldOfStudyCount < 10">
+    <div>
       <span v-if="currentSchoolCount < 10">
         <v-icon color="amber" small class='pr-2'>fas fa-check-circle</v-icon>
         {{currentSchoolCount}} {{schoolText}} and
@@ -18,7 +18,7 @@
       <span v-else>
         &nbsp;<v-icon color="red" small class=''>fas fa-exclamation-circle</v-icon>&nbsp;Maximum of 10 fields of study reached.
       </span>
-    </div >
+    </div >>
 
 
   </div>
