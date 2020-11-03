@@ -94,7 +94,8 @@
       <v-col cols="12" md="3">
         <h4 class="mb-2">
           Median Total <br class="d-none d-md-block">Debt After Graduation&nbsp
-          <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+            <tooltip v-if="!fosShowDebtPriorIncluded" definition="fos-median-debt" :limitedFoS="fieldsLink" />
+            <tooltip v-else definition="fos-median-debt-all-schools" :limitedFoS="fieldsLink" />
         </h4>
 
         <div v-if="!fosShowDebtPriorIncluded">
@@ -122,7 +123,8 @@
       <v-col cols="12" md="3">
         <h4 class="mb-2">
           Monthly Loan Payment&nbsp
-          <tooltip definition="fos-number-of-graduates" :limitedFoS="fieldsLink" />
+            <tooltip v-if="!fosShowDebtPriorIncluded" definition="fos-monthly-debt-payment" :limitedFoS="fieldsLink" />
+            <tooltip v-else definition="fos-monthly-debt-payment-all-schools" :limitedFoS="fieldsLink" />
         </h4>
 
         <div v-if="!fosShowDebtPriorIncluded">

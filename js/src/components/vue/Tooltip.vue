@@ -82,6 +82,7 @@ export default {
     content() {
       if(this.isCompare && this.entry['compare']) return this.entry['compare'];
       else if(this.isGraduate && this.entry['graduate']) return this.entry['graduate'];
+      else if(this.isNegative && this.entry['negative']) return this.entry['negative'];
       else return this.entry[this.version];
     },
     info(){

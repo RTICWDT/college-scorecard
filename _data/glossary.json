@@ -24,7 +24,7 @@
   },
   "avg-loan-payment": {
     "title": "Monthly Student Loan Payment for Loans Taken Out at This School",
-    "default": "<p>The median monthly loan payment for student borrowers who completed, based only on federal loan debt originated at the school awarding the credential, if it were repaid over 10 years at a 2.75% interest rate. This 10-year fixed payment plan is just one of several plans available to federal borrowers, please see the <a href=\"https://studentloans.gov/myDirectLoan/repaymentEstimator.action\" target=\"_blank\">repayment calculator</a>(to estimate monthly payments for alternative payment plans.</p>",
+    "default": "<p>The median monthly loan payment for student borrowers who completed, based only on federal loan debt originated at the school awarding the credential, if it were repaid over 10 years at a 2.75% interest rate. This 10-year fixed payment plan is just one of several plans available to federal borrowers, please see the <a href=\"https://studentloans.gov/myDirectLoan/repaymentEstimator.action\" target=\"_blank\">repayment calculator</a> (to estimate monthly payments for alternative payment plans.</p>",
     "glossary": "<p>The median monthly loan payment is based on the typical total debt after graduation, based only on federal loan debt originated at the school awarding the credential, and assumes standard repayment terms of a 10 year amortization using the current interest rate for subsidized federal loans, 2.75%. This 10-year fixed payment plan is just one of several plans available to federal borrowers, please see the <a href=\"https://studentloans.gov/myDirectLoan/repaymentEstimator.action\" target=\"_blank\">repayment calculator</a> to estimate monthly payments for alternative payment plans. Please see the entry for typical total debt after graduation for information on what types of loans are included in this monthly payment. For schools with multiple locations, this information is based on all of their locations.</p>",
     "branch": true
   },
@@ -56,7 +56,7 @@
   "avg-debt-all-schools": {
     "title": "Median Total Debt After Graduation for All Federal Loans",
     "default": "<p>The median cumulative federal debt of undergraduate borrowers who graduated. This figure includes federal loans originated at any school attended prior to award of this credential; it excludes private student loans and Parent PLUS loans.</p>",
-    "glossary": "<p>TThe median federal loan debt accumulated among undergraduate student borrowers at any school attended prior to award of this credential. Non-federal loans and federal loans not made to students (e.g., Parent PLUS loans) are not included in this value. For schools with multiple locations, this information is based on all of their locations.</p><p>Note that the cohort described by the median total federal student loan debt after graduation differs from the cohort described by the “students receiving federal loans” metric.</p>",
+    "glossary": "<p>The median federal loan debt accumulated among undergraduate student borrowers at any school attended prior to award of this credential. Non-federal loans and federal loans not made to students (e.g., Parent PLUS loans) are not included in this value. For schools with multiple locations, this information is based on all of their locations.</p><p>Note that the cohort described by the median total federal student loan debt after graduation differs from the cohort described by the “students receiving federal loans” metric.</p>",
     "info": "<p>Note that this value includes federal loan debt from all undergraduate borrowers that completed their program.</p>",
     "branch": true
   },
@@ -110,7 +110,7 @@
   },
   "test-scores": {
     "title": "Test Scores",
-    "default": "At schools that report their test scores, 50 percent had scores within this range. Of the remaining 50 percent, half were above the range and half were below. Not all schools require test scores",
+    "default": "At schools that report their test scores, 50 percent had scores within this range. Of the remaining 50 percent, half were above the range and half were below. Not all schools require test scores.",
     "glossary": "<p>Tests scores shown are a range that covers the middle 50 percent (between the 25th and 75th percentiles) of first-time students enrolled at the school in the fall. Twenty-five (25) percent of first-time students scored below this range, and 25 percent of first-time students scored above this range. Scores from students that were admitted, but did not enroll, are not included. Not all schools require test scores for admission.</p>",
     "branch": false
   },
@@ -182,8 +182,8 @@
   },
   "fos-monthly-earnings": {
     "title": "Field of Study Monthly Earnings",
-    "default": "<p>TThe median annual earnings divided by 12 for students who received federal aid.</p><p>These data are based on school-reported information about students’ program of completion. The U.S. Department of Education Department cannot fully confirm the completeness of these reported data for this school.</p>",
-    "glossary": "<p>Monthly earnings are derived from the median annual earnings by dividing the median annual value by 12. Median annual earnings are earnings of individuals who received federal financial aid during their studies and completed an award at the indicated field of study. To be included in the median earnings calculation, the individuals needed to be working and not enrolled in school during in the year when earnings are measured. Median earnings are measured in the second full year after the student completed their award.</p></p>TThese data are based on school-reported information about students’ program of completion. The U.S. Department of Education Department cannot fully confirm the completeness of these reported data for this school.</p><p>For schools with multiple locations, this information is based on all of their locations.</p>",
+    "default": "<p>The median annual earnings divided by 12 for students who received federal aid.</p><p>These data are based on school-reported information about students’ program of completion. The U.S. Department of Education Department cannot fully confirm the completeness of these reported data for this school.</p>",
+    "glossary": "<p>Monthly earnings are derived from the median annual earnings by dividing the median annual value by 12. Median annual earnings are earnings of individuals who received federal financial aid during their studies and completed an award at the indicated field of study. To be included in the median earnings calculation, the individuals needed to be working and not enrolled in school during in the year when earnings are measured. Median earnings are measured in the second full year after the student completed their award.</p></p>These data are based on school-reported information about students’ program of completion. The U.S. Department of Education Department cannot fully confirm the completeness of these reported data for this school.</p><p>For schools with multiple locations, this information is based on all of their locations.</p>",
     "branch": true
   },
   "include-debt-prior-inst":{
@@ -209,6 +209,6 @@
   },
   "fos-limited-data":{
     "title": "Limited Data",
-    "default": "<p>Limited Data</p>"
+    "default": "<p>The filter you have selected limits results. Clear the filters to see all schools offering the selected field of study.</p>"
   }
 }
