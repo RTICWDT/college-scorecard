@@ -12,7 +12,7 @@
       <v-col cols="12" md="5">
         <h4 class="mb-2 field-data-header-title">
           Median Earnings&nbsp
-          <tooltip definition="fos-median-earnings" :limitedFoS="fieldsLink" />
+          <tooltip definition="fos-median-earnings" />
         </h4>
 
         <div v-if="fosSalarySelect === 'aid'">
@@ -41,7 +41,7 @@
       <v-col cols="12" md="4">
         <h4 class="mb-2">
           Monthly Earnings&nbsp
-          <tooltip definition="fos-monthly-earnings" :limitedFoS="fieldsLink" />
+          <tooltip definition="fos-monthly-earnings" />
         </h4>
 
         <div v-if="fosSalarySelect === 'aid'">
@@ -94,8 +94,8 @@
       <v-col cols="12" md="3">
         <h4 class="mb-2">
           Median Total <br class="d-none d-md-block">Debt After Graduation&nbsp
-            <tooltip v-if="!fosShowDebtPriorIncluded" definition="fos-median-debt" :limitedFoS="fieldsLink" />
-            <tooltip v-else definition="fos-median-debt-all-schools" :limitedFoS="fieldsLink" />
+            <tooltip v-if="!fosShowDebtPriorIncluded" definition="fos-median-debt" />
+            <tooltip v-else definition="fos-median-debt-all-schools" />
         </h4>
 
         <div v-if="!fosShowDebtPriorIncluded">
@@ -123,8 +123,8 @@
       <v-col cols="12" md="3">
         <h4 class="mb-2">
           Monthly Loan Payment&nbsp
-            <tooltip v-if="!fosShowDebtPriorIncluded" definition="fos-monthly-debt-payment" :limitedFoS="fieldsLink" />
-            <tooltip v-else definition="fos-monthly-debt-payment-all-schools" :limitedFoS="fieldsLink" />
+            <tooltip v-if="!fosShowDebtPriorIncluded" definition="fos-monthly-debt-payment" />
+            <tooltip v-else definition="fos-monthly-debt-payment-all-schools" />
         </h4>
 
         <div v-if="!fosShowDebtPriorIncluded">

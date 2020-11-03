@@ -252,7 +252,8 @@
 
                       <div id="fos-monthly-earnings" class="mb-5">
                         <h3 class="mb-2">
-                          Monthly Earnings&nbsp;<tooltip definition="fos-monthly-earnings" :isCompare="true" />
+                          Monthly Earnings&nbsp;
+                            <tooltip definition="fos-monthly-earnings" :isCompare="true" />
                         </h3>
 
                         <compare-block
@@ -306,7 +307,9 @@
                     <div class="ml-3">
                       <div id="fos-median-total-debt" class="pt-5 mb-5">
                         <h3 class="mb-2">
-                          Median Total Debt After Graduation&nbsp;<tooltip definition="fos-median-debt" :isCompare="true" />
+                          Median Total Debt After Graduation&nbsp;
+                            <tooltip v-if="!fosFinancialCheckboxIncludePrior" definition="fos-median-debt" />
+                            <tooltip v-else-if="fosFinancialCheckboxIncludePrior" definition="fos-median-debt-all-schools" />
                         </h3>
 
                         <v-checkbox
@@ -367,8 +370,8 @@
                       <div id="fos-monthly-loan" class="mb-5">
                         <h3 class="mb-2">
                           Monthly Loan Payment&nbsp;
-                              <tooltip v-if="!fosShowDebtAtPrior" definition="fos-monthly-debt-payment" :limitedFoS="fieldsLink" />
-                              <tooltip v-else definition="fos-monthly-debt-payment-all-schools" :limitedFoS="fieldsLink" />
+                              <tooltip v-if="!fosFinancialCheckboxIncludePrior" definition="fos-monthly-debt-payment" />
+                              <tooltip v-else-if="fosFinancialCheckboxIncludePrior" definition="fos-monthly-debt-payment-all-schools" />
                         </h3>
 
                         <v-checkbox
@@ -709,12 +712,11 @@
                       }"
                     />
 
-                    <!--TODO - Update Tool Tip-->
                     <compare-section
                       v-else
                       :schools="schools"
                       title="Estimated percent of student who had a parent who borrowed"
-                      definition="student-aid"
+                      definition="parent-borrowing-rate"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{
@@ -738,7 +740,7 @@
                         multiRangeAidShowMedianDebtWithPrior: aidShowMedianDebtWithPrior,
                         multiRangeAidLoanSelect: aidLoanSelect
                       }"
-                    >
+                    />                                                        
                       <template>
                         <v-checkbox
                           class="my-0"
@@ -748,7 +750,6 @@
                           <template v-slot:label>
                             <span>
                               Include debt borrowed at any prior institutions
-                              <!--TODO - Update Tooltip-->
                               <tooltip definition="include-debt-prior-inst" />
                             </span>
                           </template>
@@ -772,7 +773,7 @@
                         multiRangeAidLoanSelect: aidLoanSelect,
                         max: { value: 1000, label: '$1,000' }
                       }"
-                    >
+                    />                                                         
                       <template>
                         <v-checkbox
                           class="my-0"
@@ -782,7 +783,6 @@
                           <template v-slot:label>
                             <span>
                               Include debt borrowed at any prior institutions
-                              <!--TODO - Update Tooltip-->
                               <tooltip definition="include-debt-prior-inst" />
                             </span>
                           </template>
@@ -1128,7 +1128,7 @@ export default {
       controlTab: 0
     };
   },
-  computed: {
+  computed: {   
     shareUrl() {
       // const compareBaseURL = window.location.origin + this.$baseUrl + '/compare/?toggle=' + this.displayToggle + '&';
       const compareBaseURL = window.location.origin + this.$baseUrl + '/compare/?';
