@@ -308,8 +308,8 @@
                       <div id="fos-median-total-debt" class="pt-5 mb-5">
                         <h3 class="mb-2">
                           Median Total Debt After Graduation&nbsp;
-                            <tooltip v-if="!fosFinancialCheckboxIncludePrior" definition="fos-median-debt" />
-                            <tooltip v-else-if="fosFinancialCheckboxIncludePrior" definition="fos-median-debt-all-schools" />
+                            <tooltip v-if="!fosFinancialCheckboxIncludePrior" definition="fos-median-debt" :isCompare="true" />
+                            <tooltip v-else-if="fosFinancialCheckboxIncludePrior" definition="fos-median-debt-all-schools" :isCompare="true" />
                         </h3>
 
                         <v-checkbox
@@ -740,7 +740,7 @@
                         multiRangeAidShowMedianDebtWithPrior: aidShowMedianDebtWithPrior,
                         multiRangeAidLoanSelect: aidLoanSelect
                       }"
-                    />                                                        
+                    >                                                        
                       <template>
                         <v-checkbox
                           class="my-0"
@@ -1027,8 +1027,9 @@
 
   }
 
+
   .compare-toggle-school-active{
-    background-color: #dee8ef;
+    background-color: #91C191;
   }
 
   .compare-toggle-fos-active{
@@ -1715,8 +1716,8 @@ export default {
     this.isSharedFieldOfStudyComparison = this.showShareFieldOfStudyUpdate;
 
     EventBus.$on('compare-drawer-show', (showCompareInfo) => {
-      this.showCompare = true;
-      this.showInfoText = showCompareInfo;
+        this.showCompare = true;
+        this.showInfoText = showCompareInfo;
     });
   }
 };

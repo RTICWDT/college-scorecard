@@ -10,13 +10,12 @@
         {{currentSchoolCount}} {{schoolText}} and
       </span>
       <span v-else>
-        <v-icon color="red" small class='pr-2'>fas fa-exclamation-circle</v-icon>
-        Maximum of 10 schools reached.
+        &nbsp;<v-icon color="red" small class='pr-2'>fas fa-exclamation-circle</v-icon>&nbsp;Maximum of 10 Schools reached.
       </span>
 
       <span v-if="currentFieldOfStudyCount < 10">{{currentFieldOfStudyCount}} {{fieldOfStudyText}} to compare and share.</span>
       <span v-else>
-        &nbsp;<v-icon color="red" small class=''>fas fa-exclamation-circle</v-icon>&nbsp;Maximum of 10 fields of study reached.
+        &nbsp;<v-icon color="red" small class=''>fas fa-exclamation-circle</v-icon>&nbsp;Maximum of 10 Fields of Study reached.
       </span>
     </div >
 

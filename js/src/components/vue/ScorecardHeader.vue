@@ -94,6 +94,11 @@ header {
         padding: 0 10px;
       }
 
+      li a.disabled{
+        cursor: default;
+        color: white;
+      }      
+
       li a:hover, a:focus{
         color: white;
       }
@@ -140,8 +145,6 @@ header {
   .nav-compare-icon{
     vertical-align: middle;
   }
-
-
 }
 </style>
 
@@ -188,9 +191,9 @@ header {
             </li>
 
             <li style="display: inline-table">
-              <a :href="`${$baseUrl}/compare`"
-                 :class="{'nav-active' : activeLink === 'compare','pr-2':true}"
+              <a :class="{'nav-active' : activeLink === 'compare','pr-2':true, disabled: disableCompare}"
                  aria-label="Navigate to compare page"
+                 @click="handleCompareLinkClick(`${$baseUrl}/compare`)"
               >Compare:</a>
 
                 <!-- Institution Compare Button -->
@@ -348,10 +351,13 @@ export default {
   data(){
     return {
       drawer: false,
-      group: false,
+      group: false
     }
   },
   computed:{
+    disableCompare(){
+      return (this.compareFieldsOfStudyCount == 0 && this.compareInstitutionsCount == 0);
+    },
   },
   watch:{
   },
@@ -361,7 +367,16 @@ export default {
     },
     handleCompareIconClick(resourceType = "institution"){
       EventBus.$emit('compare-drawer-show', false);
-    }
+    },
+    handleCompareLinkClick(urlString){
+      if (this.compareFieldsOfStudyCount == 0 && this.compareInstitutionsCount == 0) {
+        EventBus.$emit('compare-drawer-show', true);
+      }
+      else {
+        window.location.href = urlString;
+      }
+      
+    }    
   },
   created(){
 

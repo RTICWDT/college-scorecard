@@ -5,6 +5,10 @@
   }
 }
 
+  .v-application .primary--text{
+    color: green !important;
+  }
+
 .subhead-2 {
   margin-top: 1rem !important;
   margin-bottom: 0.3rem !important;

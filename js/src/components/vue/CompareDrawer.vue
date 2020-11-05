@@ -3,12 +3,6 @@
 
     <div>
       <span>
-        <v-icon
-          class="mr-2"
-          color="#0075B2"
-        >
-          fas fa-check-circle
-        </v-icon>
         Add up to 10 Schools and 10 Fields of Study to compare.
       </span>
 
@@ -34,14 +28,27 @@
     >
       <p class="mb-0">
         <strong>You have just added your first item to compare.</strong> As you add items to compare, they will be listed here.
-        When you are ready to compare, you simply click the buttons to go to the compare page.
+        When you are ready to compare, click the buttons below to go to the compare page.
+      </p>
+    </v-card>
+
+    <v-card v-if="showNoneText"
+      id="compare-drawer-info"
+      class="pa-4 my-4"
+      rounded
+      flat
+      outlined
+    >
+      <p class="mb-0">
+        <strong>You have not selected anything to compare.</strong> Start by searching for Schools or Fields of Study to find items to compare. 
       </p>
     </v-card>
 
 
+
     <v-row class="compare-drawer-content-container mb-md-4">
       <v-col cols="12" md="6">
-
+        <div  class="compare-drawer-section-wrapper">
         <div class="compare-drawer-section-header-wrapper ml-4">
           <div class="compare-icon-wrapper d-inline-block mr-4"
                style="background: #91C191;"
@@ -69,7 +76,7 @@
             hide-details
             v-model="selectedSchools"
             color="secondary"
-            class="my-5 pa-0"
+            class="my-5 pa-0 checkbox-list"
           >
             <template v-slot:label>
               <div class="compare-drawer-fos-checkbox-label">
@@ -92,11 +99,11 @@
             Compare Schools
           </v-btn>
         </div>
-
+      </div>
       </v-col>
 
       <v-col cols="12" md="6">
-
+        <div  class="compare-drawer-section-wrapper">
         <div class="compare-drawer-section-header-wrapper ml-4">
           <div class="compare-icon-wrapper d-inline-block mr-4"
                style="background: #fec005;"
@@ -124,7 +131,7 @@
             v-model="selectedFieldsOfStudy"
             :value="generateFieldOfStudyString(fieldOfStudy)"
             color="secondary"
-            class="my-5"
+            class="my-5 checkbox-list"
           >
             <template v-slot:label>
               <div class="compare-drawer-fos-checkbox-label">
@@ -146,7 +153,7 @@
             Compare Fields Of Study
           </v-btn>
         </div>
-
+      </div>
       </v-col>
     </v-row>
 
@@ -185,6 +192,10 @@
     color: #ffffff !important;
   }
 
+  .my-3{
+    margin-left:24px;
+  }
+
   #compare-drawer-fos-container{
     min-height: 400px;
   }
@@ -201,18 +212,18 @@
 
   .compare-drawer-fos-checkbox-container{
     @media (min-width: 960px){
-      margin-left: -12px;
-      padding-left: 24px;
-      border-left: 1px solid $light-gray;
       min-height: 420px;
     }
+  }
+  .compare-drawer-section-wrapper {
+    border-left: 1px solid $light-gray;
+    margin-left: -24px;
   }
 
   #compare-schools-content{
     overflow-y: auto;
     height: 90vh;
     border-top: 10px solid black;
-
     @media (min-width: 960px){
       height: 50vh;
     }
@@ -235,17 +246,22 @@
   .compare-drawer-fos-checkbox-label{
     h4{
       font-size: 13px;
+        color:#000;
     }
     p{
       font-size: 13px;
+        color:#000;
+      
     }
 
     @media (min-width: 960px){
       h4{
         font-size: 16px;
+          color:#000;
       }
       p{
         font-size:16px;
+          color:#000;
       }
     }
   }
@@ -269,6 +285,9 @@
   }
   .compare-drawer-section-header-wrapper{
     display: inline-table;
+    h3.title {
+      font-weight:bold;
+    }
   }
 
   .compare-drawer-section-header{

@@ -74,6 +74,7 @@
         </v-col>
       </v-row>
       <v-divider />
+      <p class="overline mb-1 pt-3">Institutional Highlights:</p>
       <v-row class="v-flex align-center">
         <v-col cols="7" class="py-2">
           <!--prettyhtml-ignore-->
@@ -86,7 +87,7 @@
       <v-row class="result-card-info-container v-flex align-center">
         <v-col cols="7" class="py-2">
           <!--prettyhtml-ignore-->
-          <span>Salary After Completing&nbsp;<tooltip definition="fos-median-earnings" :isBranch="isBranch" :limitedFoS="fieldsLink" /></span>
+          <span>Salary After Completing&nbsp;<tooltip definition="fos-median-earnings" :isBranch="isBranch" /></span>
         </v-col>
         <v-col cols="5" class="pr-0 text--black py-2">
           <h3 class="navy-text">{{displayEarn}}</h3>

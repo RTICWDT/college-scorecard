@@ -129,8 +129,8 @@ export default {
   props: ["baseUrl", "dataBase_url", "dataDictionary",'compareSchools','compareFieldsOfStudy'],
   mounted() {
     EventBus.$on('compare-drawer-show', (showCompareInfo) => {
-      this.showCompare = true;
-      this.showInfoText = showCompareInfo;
+        this.showCompare = true;
+        this.showInfoText = showCompareInfo;
     });
   }
 };

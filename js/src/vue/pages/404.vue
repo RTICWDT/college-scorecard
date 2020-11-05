@@ -73,8 +73,8 @@ export default {
   },
   mounted() {
     EventBus.$on('compare-drawer-show', (showCompareInfo) => {
-      this.showCompare = true;
-      this.showInfoText = showCompareInfo;
+        this.showCompare = true;
+        this.showInfoText = showCompareInfo;
     });
   }
 }

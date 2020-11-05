@@ -273,8 +273,8 @@ export default {
     document.head.appendChild(recaptchaScript);
 
     EventBus.$on('compare-drawer-show', (showCompareInfo) => {
-      this.showCompare = true;
-      this.showInfoText = showCompareInfo;
+        this.showCompare = true;
+        this.showInfoText = showCompareInfo;
     });
   }
 };

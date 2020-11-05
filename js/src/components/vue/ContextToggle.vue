@@ -62,7 +62,7 @@
   }
 
   #compare-toggle-school-active{
-    background-color: #dee8ef;
+    background-color: #91c191;
   }
 
   #compare-toggle-fos-active{
