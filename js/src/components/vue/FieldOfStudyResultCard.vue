@@ -148,7 +148,7 @@
                   </v-btn>
                 </template>
 
-                <span>Add field of study to compare</span>
+                <span>Add Field of Study to compare</span>
               </v-tooltip>
 
               <!-- Compare on small and below-->
@@ -158,14 +158,14 @@
                     <v-btn class="d-block d-sm-none mt-4 mx-auto"
                      outlined
                      @click="$emit('toggle-compare-item', fieldOfStudyCompareFormat(fieldOfStudy), 'compare-fos')"
-                     :color="selectedFieldOfStudyClass(fieldOfStudy) === 'result-card-selected'? 'amber' : 'gray'"
+                     :color="selectedFieldOfStudyClass(fieldOfStudy) === 'result-card-selected'? '#0075B2' : 'gray'"
                      v-bind="attrs"
                      v-on="on"
                     >
                       <span class="mr-4">Compare</span><v-icon>fa fa-check-circle</v-icon>
                     </v-btn>
                   </template>
-                  <span>Add field of study to compare</span>
+                  <span>Add Field of Study to compare</span>
                 </v-tooltip>
               </div>
 

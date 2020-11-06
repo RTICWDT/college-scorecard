@@ -1473,7 +1473,7 @@ export default {
         }
       });
 
-      // TODO - Track Compare List for Fields Of Study
+      // TODO - Track Compare List for Fields of Study
       this.loading = true;
       let request = apiGetAll(window.api.url, window.api.key, '/schools/', paramArray)
         .then((responses) => {
@@ -1490,7 +1490,7 @@ export default {
           // Return an array of objects, outside of institutions ready for formatting,
         }).catch((responses) => {
           // TODO - How do we want to handle errors?
-          console.error("Issue locating Fields Of Study for compare...");
+          console.error("Issue locating Fields of Study for compare...");
           this.loading = false;
         });
 

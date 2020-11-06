@@ -32,7 +32,7 @@
       </p>
     </v-card>
 
-    <v-card v-if="showNoneText"
+    <v-card v-if="schools.length == 0 && fieldsOfStudy.length == 0"
       id="compare-drawer-info"
       class="pa-4 my-4"
       rounded
@@ -43,6 +43,18 @@
         <strong>You have not selected anything to compare.</strong> Start by searching for Schools or Fields of Study to find items to compare. 
       </p>
     </v-card>
+
+    <v-card v-if="schools.length == 10 || fieldsOfStudy.length == 10"
+      id="compare-drawer-info"
+      class="pa-4 my-4"
+      rounded
+      flat
+      outlined
+    >
+      <p class="mb-0">
+        <strong v-if="schools.length == 10">Maximum of 10 Schools reached.</strong> <strong v-if="fieldsOfStudy.length == 10">Maximum of 10 Fields of Study reached.</strong>   
+      </p>
+    </v-card>    
 
 
 
@@ -193,7 +205,7 @@
   }
 
   .my-3{
-    margin-left:24px;
+    margin-left:22px;
   }
 
   #compare-drawer-fos-container{
@@ -251,6 +263,7 @@
     p{
       font-size: 13px;
         color:#000;
+        font-family: "Montserrat","Helvetica Neue",Helvetica,arial,sans-serif !important;
       
     }
 
@@ -260,8 +273,9 @@
           color:#000;
       }
       p{
-        font-size:16px;
+        font-size:12px;
           color:#000;
+          font-family: "Montserrat","Helvetica Neue",Helvetica,arial,sans-serif !important;
       }
     }
   }
