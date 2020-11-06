@@ -79,7 +79,7 @@
           </div>
         </div>
 
-        <div class="my-3">
+        <div class="my-3 pr-1">
           <v-checkbox
             @change="handleToggleCompareItem(school,schoolKey)"
             v-for="school in schools"
@@ -134,7 +134,7 @@
           </div>
         </div>
 
-        <div class="my-3 compare-drawer-fos-checkbox-container">
+        <div class="my-3 compare-drawer-fos-checkbox-container pr-1">
           <v-checkbox
             v-for="fieldOfStudy in fieldsOfStudy"
             @change="handleToggleCompareItem(fieldOfStudy, fieldOfStudyKey)"
