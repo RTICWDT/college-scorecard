@@ -9,7 +9,7 @@ const opts = {
     theme: {
         themes: {
           light: {
-            primary: '#216d09',
+            primary: '#2b6091',
             secondary: '#216d09',
             accent: '#8c9eff',
             error: '#b71c1c',

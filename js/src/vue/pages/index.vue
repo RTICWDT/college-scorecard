@@ -144,7 +144,7 @@
               <v-expansion-panels class="mb-2">
                 <v-expansion-panel>
                   <v-expansion-panel-header>
-                    <span class="home-mobile-search-title">Search Field Of Study</span>
+                    <span class="home-mobile-search-title">Search Fields of Study</span>
                   </v-expansion-panel-header>
 
                   <v-expansion-panel-content>
@@ -160,7 +160,7 @@
               <v-expansion-panels class="mb-2">
                 <v-expansion-panel>
                   <v-expansion-panel-header>
-                    <span class="home-mobile-search-title">Show Me Option</span>
+                    <span class="home-mobile-search-title">Show Me Options</span>
                   </v-expansion-panel-header>
 
                   <v-expansion-panel-content>

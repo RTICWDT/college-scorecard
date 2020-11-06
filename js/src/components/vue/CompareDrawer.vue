@@ -19,7 +19,7 @@
       <div style="clear: both;"></div>
     </div>
 
-    <v-card v-if="showInfoText"
+    <v-card v-if="showInfoText && fieldsOfStudy.length + schools.length == 1"
       id="compare-drawer-info"
       class="pa-4 my-4"
       rounded
@@ -52,7 +52,7 @@
       outlined
     >
       <p class="mb-0">
-        <strong v-if="schools.length == 10">Maximum of 10 Schools reached.</strong> <strong v-if="fieldsOfStudy.length == 10">Maximum of 10 Fields of Study reached.</strong>   
+        <strong v-if="schools.length == 10">Maximum of 10 Schools reached. </strong>&nbsp;<strong v-if="fieldsOfStudy.length == 10">Maximum of 10 Fields of Study reached. </strong>   
       </p>
     </v-card>    
 
@@ -162,7 +162,7 @@
                  color="secondary"
                  :href="$baseUrl+'/compare/?toggle=fos'"
           >
-            Compare Fields Of Study
+            Compare Fields of Study
           </v-btn>
         </div>
       </div>
@@ -187,7 +187,7 @@
                  color="secondary"
                  :href="$baseUrl+'/compare/?toggle=fos'"
           >
-            Compare Fields Of Study
+            Compare Fields of Study
           </v-btn>
         </v-col>
       </v-row>

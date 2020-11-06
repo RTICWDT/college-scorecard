@@ -132,7 +132,7 @@
 
                   <!--Institution Summary-->
                   <v-col md="5" class="pr-sm-3">
-                    <h3 class="overline pb-5 pt-1" style="font-size:16px !important;">Institutional Highlights:</h3>
+                    <h3 class="overline pb-5 pt-1" style="font-size:18px !important;">Institutional Highlights:</h3>
                     <div id="school-completion-rate-bar" class="">
                       <h2 class="mb-3">
                         <!--prettyhtml-ignore-->
