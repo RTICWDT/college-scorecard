@@ -38,6 +38,10 @@
 <style lang="scss" scoped>
   @import 'sass/_variables';
 
+  #context-toggle-slider {
+    background-color: $institution-accent-color;
+  }
+
   #context-toggle{
 
     #compare-tab-inactive {
@@ -62,7 +66,7 @@
   }
 
   #compare-toggle-school-active{
-    background-color: #91c191;
+    background-color: #91c191 !important;
   }
 
   #compare-toggle-fos-active{
