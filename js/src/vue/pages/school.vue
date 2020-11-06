@@ -47,22 +47,27 @@
                       text
                       small
                       class="d-none d-sm-inline"
-                      :color="isSelected({schoolId:String(id)},this.compareSchools)?'amber':'white'"
+                      :color="isSelected({schoolId:String(id)},this.compareSchools)?'black':'white'"
+                      v-bind:class="{ 'compare-selected-text': isSelected({schoolId:String(id)},this.compareSchools), 'rounded-pill': '' }"
                       @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
-                      <v-icon x-small class="mr-2">fa fa-check-circle</v-icon>
-                      Compare School
+
+                      <v-icon x-small class="mr-2" :color="isSelected({schoolId:String(id)},this.compareSchools)?'#0075B2':'white'">fa fa-check-circle</v-icon> 
+                      <div v-if="!isSelected({schoolId:String(id)},this.compareSchools)" >Added to Compare</div>
+                      <div v-else>Add to Compare School</div>
                     </v-btn>
 
                     <v-btn
                       fab
                       x-small
-                      :color="isSelected({schoolId:String(id)},this.compareSchools)?'amber':'white'"
+                      :color="isSelected({schoolId:String(id)},this.compareSchools)?'black':'white'"
                       class="d-inline d-sm-none mr-2"
                       @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
-                      <v-icon small class="">fa fa-check-circle</v-icon>
-                      <span class='sr-only'>Compare School</span>
+
+                      <v-icon x-small class="mr-2" :color="isSelected({schoolId:String(id)},this.compareSchools)?'#0075B2':'white'">fa fa-check-circle</v-icon> 
+                      <div v-if="!isSelected({schoolId:String(id)},this.compareSchools)" >Added to Compare</div>
+                      <div v-else>Add to Compare School</div>
                     </v-btn>
 
                     <share small text color="white" label="Share this School" :url="shareLink" show-copy :hide="['email']" />
@@ -132,7 +137,7 @@
 
                   <!--Institution Summary-->
                   <v-col md="5" class="pr-sm-3">
-                    <h3 class="overline pb-5 pt-1" style="font-size:18px !important;">Institutional Highlights:</h3>
+                    <h3 class="overline pb-5 pt-1" style="">Institutional Highlights:</h3>
                     <div id="school-completion-rate-bar" class="">
                       <h2 class="mb-3">
                         <!--prettyhtml-ignore-->
@@ -223,6 +228,21 @@
                         </h2>
                       </div>
 
+                      <!-- Compare Button -->
+                      <div class="text-right pa-2 field-of-study-select-container-header">
+                        <v-btn
+                          v-if="selectedFOS"
+                          text
+                          small
+                          :color="black"
+                          @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
+                        >
+                        <v-icon class="mr-2" :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#0075B2':'black'">fa fa-check-circle</v-icon> 
+                          <div v-if="!isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)">Add to Compare Field of Study</div>
+                          <div v-else>&nbsp;Added to Compare</div>
+                        </v-btn>
+                      </div>
+
                       <div>
                         <field-of-study-select
                           :cip-two-nested-cip-four="fieldOfStudySelectItems"
@@ -296,20 +316,6 @@
 
                         </div>
                       </div>
-
-                      <!-- Compare Button -->
-                      <div class="text-right mb-2">
-                        <v-btn
-                          v-if="selectedFOS"
-                          text
-                          small
-                          :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"
-                          @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
-                        >
-                          Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-check-circle</v-icon>
-                        </v-btn>
-                      </div>
-
                     </v-card>
                   </v-col>
 
@@ -348,20 +354,22 @@
                   </v-expansion-panel-header>
 
                   <v-expansion-panel-content id="fos-content" class="px-0 py-3 pa-sm-5">
-                    <!-- Compare Button -->
-                    <div class="text-right mb-2">
-                      <v-btn
-                        v-if="selectedFOS"
-                        text
-                        small
-                        :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#ffc107':'black'"
-                        @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
-                      >
-                        Compare Field of Study&nbsp<v-icon class="ml-2">fa fa-check-circle</v-icon>
-                      </v-btn>
-                    </div>
-
                     <h2 class="mb-4 pt-2 pt-sm-4">Fields of Study Offered At {{ schoolName }}</h2>
+
+                      <div class="text-right pa-2 field-of-study-select-container-header">
+                        <v-btn
+                          v-if="selectedFOS"
+                          text
+                          small
+                          :color="black"
+                          @click="$emit('toggle-compare-school', generateCompareFieldOfStudy(selectedFOSDetail),'compare-fos')"
+                        >
+
+                        <v-icon class="mr-2" :color="isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)?'#0075B2':'black'">fa fa-check-circle</v-icon> 
+                          <div v-if="!isSelected(this.generateCompareFieldOfStudy(this.selectedFOSDetail),this.compareFieldsOfStudy)">Add to Compare Field of Study</div>
+                          <div v-else>&nbsp;Added to Compare</div>
+                        </v-btn>
+                      </div>                 
 
                     <div class="mb-4">
                       <field-of-study-select
@@ -1410,6 +1418,11 @@
 <style lang="scss" scoped>
   @import 'sass/_variables';
 
+
+.compare-selected-text {
+  background-color: $light-blue !important;
+}
+
   #profile-institution-title{
     line-height: 100% !important;
   }
@@ -1423,8 +1436,14 @@
     margin-top: $base-padding;
   }
 
-  .field-of-study-select-container{
-    border-radius: 30px !important;
+  /*.field-of-study-select-container{
+    //border-radius: 20px !important;
+    //border-left: 20px solid #fec005 !important;
+  }*/
+
+  .field-of-study-select-container-header {
+    background-color:#FEDE7E;
+    border-radius: 5px 5px 0px 0px !important;
   }
 
   #field-of-study-select-header{
@@ -1569,6 +1588,7 @@
     /*height: 320px;*/
     height: auto;
   }
+
 </style>
 
 <script>

@@ -110,7 +110,10 @@ export const fields = {
   FIELD_OF_STUDY_LENGTH:    'latest.programs.cip_4_digit.credential.level',
   FIELD_OF_STUDY_NAME:      'latest.programs.cip_4_digit.title',
   // FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.median_earnings',
-  FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.earnings.median_earnings',
+  // FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.earnings.median_earnings',
+  // FIELD_OF_STUDY_DEBT:      'latest.programs.cip_4_digit.debt.median_debt',
+
+  FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.earnings.highest.2_yr.overall_median_earnings',
   FIELD_OF_STUDY_DEBT:      'latest.programs.cip_4_digit.debt.median_debt',
 
   // New Field Of Study Metrics
