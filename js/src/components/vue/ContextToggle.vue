@@ -74,7 +74,7 @@
   }
 
   .compare-fos-slider-gold{
-    background-color: $fos-accent-color;
+    background-color: $fos-accent-color !important;
   }
 
 </style>
