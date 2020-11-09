@@ -39,7 +39,7 @@
                           <li>Median earnings 2 years after completion</li>
                           <li>Number of graduates earning more than one and a half times the poverty threshold</li>
                           <li>Median and mean student debt by Pell Grant status and by sex</li>
-                          <li>Median and mean Parent Plus Loan debt, overall and disaggregated by Pell Grant status and by sex</li>
+                          <li>Median and mean Parent PLUS Loan debt, overall and disaggregated by Pell Grant status and by sex</li>
                         </ul>
                         </li>
                       </ul>

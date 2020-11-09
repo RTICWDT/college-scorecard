@@ -96,9 +96,9 @@
       <v-row class="result-card-info-container v-flex align-center">
         <v-col cols="7" class="py-2">
           <!--prettyhtml-ignore-->
-          <span v-if="!isProgramReporter">Average Annual Cost&nbsp;<tooltip definition="avg-cost" :isNegative="this.netPrice < 0" /></span>
+          <span v-if="!isProgramReporter">Average Annual Cost&nbsp;<tooltip definition="avg-cost" :isNegative="netPrice < 0 ? 'true': 'false'" /></span>
           <!--prettyhtml-ignore-->
-          <span v-else>Average Annual Cost for Largest Program&nbsp;<tooltip definition="avg-program-cost" :isNegative="this.netPrice < 0"/></span>
+          <span v-else>Average Annual Cost for Largest Program&nbsp;<tooltip definition="avg-program-cost" :isNegative="netPrice < 0"/></span>
         </v-col>
         <v-col cols="5" class="pr-2 text--black py-0">
           <h3 class="navy-text">{{displayAvgCost}}</h3>

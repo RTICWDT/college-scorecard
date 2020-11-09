@@ -62,7 +62,11 @@ export default {
     showInfo:{
       type: Boolean,
       default: true
-    }
+    },
+    isNegative:{
+      type: Boolean, 
+      default: false
+    }    
   },
   data() {
     return {
@@ -80,9 +84,9 @@ export default {
       return this.entry['title'];
     },
     content() {
-      if(this.isCompare && this.entry['compare']) return this.entry['compare'];
+      if(this.isNegative && this.entry['negative']) return this.entry['negative'];
+      else if(this.isCompare && this.entry['compare']) return this.entry['compare'];
       else if(this.isGraduate && this.entry['graduate']) return this.entry['graduate'];
-      else if(this.isNegative && this.entry['negative']) return this.entry['negative'];
       else return this.entry[this.version];
     },
     info(){

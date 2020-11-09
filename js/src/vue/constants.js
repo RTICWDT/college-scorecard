@@ -118,25 +118,25 @@ export const fields = {
 
   // New Field Of Study Metrics
   // Full Paths
-  FIELD_OF_STUDY_EARNINGS_FED: 'latest.programs.cip_4_digit.earnings.test.median_fed',
-  FIELD_OF_STUDY_EARNINGS_PELL: 'latest.programs.cip_4_digit.earnings.test.median_pell',
+  FIELD_OF_STUDY_EARNINGS_FED: 'latest.programs.cip_4_digit.earnings.highest.2_yr.median_fed',
+  FIELD_OF_STUDY_EARNINGS_PELL: 'latest.programs.cip_4_digit.earnings.highest.2_yr.median_pell',
 
   // Relative Paths
   FOS_GRAD_COUNT: 'counts.ipeds_awards2',
-  FOS_EARNINGS_FED: 'earnings.test.median_fed',
-  FOS_EARNINGS_PELL: 'earnings.test.median_pell',
+  FOS_EARNINGS_FED: 'earnings.highest.2_yr.overall_median_earnings',
+  FOS_EARNINGS_PELL: 'earnings.highest.2_yr.overall_median_earnings',
 
   // FOS_DEBT_MEDIAN: 'debt.test.federal.median_total_at',
-  FOS_DEBT_MEDIAN: 'debt.median_debt',
-  FOS_DEBT_MEDIAN_PRIOR: 'debt.test.federal.median_total_prior',
+  FOS_DEBT_MEDIAN: 'debt.staff_grad_plus.all.eval_inst.median',
+  FOS_DEBT_MEDIAN_PRIOR: 'debt.staff_grad_plus.all.all_inst.median',
   // FOS_DEBT_MONTHLY: 'debt.test.federal.monthly_payment_at',
-  FOS_DEBT_MONTHLY: 'debt.monthly_debt_payment',
-  FOS_DEBT_MONTHLY_PRIOR: 'debt.test.federal.monthly_payment_prior',
+  FOS_DEBT_MONTHLY: 'debt.staff_grad_plus.all.eval_inst.median_payment',
+  FOS_DEBT_MONTHLY_PRIOR: 'debt.staff_grad_plus.all.all_inst.median_payment',
 
-  FOS_PP_DEBT_MEDIAN: 'debt.test.parent.median_total_at',
-  FOS_PP_DEBT_MEDIAN_PRIOR: 'debt.test.parent.median_total_prior',
-  FOS_PP_DEBT_MONTHLY: 'debt.test.parent.monthly_payment_at',
-  FOS_PP_DEBT_MONTHLY_PRIOR: 'debt.test.parent.monthly_payment_prior',
+  FOS_PP_DEBT_MEDIAN: 'debt.parent_plus.all.eval_inst.median',
+  FOS_PP_DEBT_MEDIAN_PRIOR: 'debt.parent_plus.all.all_inst.median',
+  FOS_PP_DEBT_MONTHLY: 'debt.parent_plus.all.eval_inst.median_payment',
+  FOS_PP_DEBT_MONTHLY_PRIOR: 'debt.parent_plus.all.all_inst.median_payment',
 
   FOS_CREDENTIAL_LEVEL: 'credential.level',
 
