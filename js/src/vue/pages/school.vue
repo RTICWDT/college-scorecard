@@ -170,19 +170,19 @@
 
                       <multi-range
                         :minmax="earningsRange"
-                        variable="earnings.median_earnings"
+                        variable="earnings.highest['2_yr'].overall_median_earnings"
                         :max=" { label: '$150,000', value: 150000 , style: {height: '60px'}}"
                         :addExtraPadding="false"
                         :rangeChartStyle="{height: '40px'}"
                         :lowerStyleOverride="{ height: '50px', 'border-left': '12px solid #0e365b'}"
                         :lowerTipStyleOverride="{top: 'unset', bottom: '-1.1rem'}"
                         :upperStyleOverride="checkUpperStyle(
-                          _.get(this.earningsRange, 'max.earnings.median_earnings'),
+                          _.get(this.earningsRange, 'max.earnings.highest.2_yr.overall_median_earnings'),
                           150000,
                           { height: '50px', 'border-right': '12px solid #0e365b'}
                         )"
                         :upperTipStyleOverride="checkTipUpperStyle(
-                          _.get(this.earningsRange, 'max.earnings.median_earnings'),
+                          _.get(this.earningsRange, 'max.earnings.highest.2_yr.overall_median_earnings'),
                           150000,
                           {top: 'unset', bottom: '-1.1rem'}
                         )"
@@ -1100,12 +1100,12 @@
                     <div>
                       <p>Typical earnings in the first year after graduation with the range of highest and lowest
                         median earnings for undergraduate and credential programs for which there is data.
-                        For more information, see <a :href='limitedFoS'>All Fields of Study</a> for this school.
+                        For more information, see <a :href='fieldsLink'>All Fields of Study</a> for this school.
                       </p>
 
                       <multi-range
                         :minmax="earningsRange"
-                        variable="earnings.median_earnings"
+                        variable="earnings.highest['2_yr'].overall_median_earnings"
                         :max="{ label: '$150,000', value: 150000 }"
                       />
                     </div>
@@ -1700,8 +1700,8 @@ export default {
       } else if (fos.length) {
         for (let q = 0; q < fos.length; q++) {
           fos[q].ipeds_award_count = fos[q].counts.ipeds_awards2;
-          fos[q].highest_earnings = fos[q].earnings.median_earnings;
-          fos[q].lowest_debt = fos[q].debt.median_debt;
+          fos[q].highest_earnings = fos[q].earnings.highest["2_yr"].overall_median_earnings;
+          fos[q].lowest_debt = fos[q].debt.staff_grad_plus.all.eval_inst.median;
           fos[q].hoist = fos[q][self.field_sort];
         }
         fos = fos.filter(field => field.credential.level <= 3 && field.hoist);

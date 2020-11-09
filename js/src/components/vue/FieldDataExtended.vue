@@ -15,7 +15,7 @@
           <tooltip definition="fos-median-earnings" />
         </h4>
 
-        <div v-if="fosSalarySelect === 'aid'">
+        <div>
           <div v-if="_.get(fos, fields.FOS_EARNINGS_FED)">
             <span class="fos-field-data-text">{{_.get(fos, fields.FOS_EARNINGS_FED) | numeral('$0,0') }}</span>
           </div>
@@ -24,16 +24,6 @@
             Data Not Available
           </div>
 
-        </div>
-
-        <div v-else-if="fosSalarySelect === 'pell'">
-          <div v-if="_.get(fos, fields.FOS_EARNINGS_PELL)">
-            <span class="fos-field-data-text">{{_.get(fos, fields.FOS_EARNINGS_PELL) | numeral('$0,0') }}</span>
-          </div>
-
-          <div v-else class="mini-data-na text-center">
-            Data Not Available
-          </div>
         </div>
       </v-col>
 
@@ -44,20 +34,9 @@
           <tooltip definition="fos-monthly-earnings" />
         </h4>
 
-        <div v-if="fosSalarySelect === 'aid'">
+        <div>
           <div v-if="_.get(fos, fields.FOS_EARNINGS_FED)">
             <span class="fos-field-data-text">{{_.get(fos, fields.FOS_EARNINGS_FED) / 12 | numeral('$0,0') }}</span>
-          </div>
-
-          <div v-else class="mini-data-na text-center">
-            Data Not Available
-          </div>
-
-        </div>
-
-        <div v-else-if="fosSalarySelect === 'pell'">
-          <div v-if="_.get(fos, fields.FOS_EARNINGS_PELL)">
-            <span class="fos-field-data-text">{{_.get(fos, fields.FOS_EARNINGS_PELL) / 12 | numeral('$0,0') }}</span>
           </div>
 
           <div v-else class="mini-data-na text-center">
