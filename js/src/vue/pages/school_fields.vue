@@ -213,6 +213,11 @@
       border-left: 20px solid $fos-color-gold;
     }
   }
+
+.compare-selected-text {
+  background-color: $light-blue !important;
+}
+
 </style>
 
 <script>

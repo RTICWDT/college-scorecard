@@ -18,9 +18,9 @@
               <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
               <v-expansion-panels>
                 <v-expansion-panel>                  
-                  <v-expansion-panel-header>November 9, 2020</v-expansion-panel-header>
+                  <v-expansion-panel-header>November XX, 2020</v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <p>On November 9, 2020, the Department updated the College Scorecard website with the second installment of its annual refresh that includes newer, updated data for metrics from NSLDS and Treasury Department data sources. The user interface of the consumer site was also refreshed with an updated look and feel and closer integration of the Field of Study data within the institution profile. This includes additional search options and methods, simplified navigation and updated comparison tool. Data updates in this release include:</p>
+                    <p>On November XX, 2020, the Department updated the College Scorecard website with the second installment of its annual refresh that includes newer, updated data for metrics from NSLDS and Treasury Department data sources. The user interface of the consumer site was also refreshed with an updated look and feel and closer integration of the Field of Study data within the institution profile. This includes additional search options and methods, simplified navigation and updated comparison tool. Data updates in this release include:</p>
                     <ul>
                       <li>
                         Refreshed institution-level data adding a new cohort for cumulative debt and completion rate metrics, and more recent data values for

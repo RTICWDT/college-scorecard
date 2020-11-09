@@ -198,7 +198,7 @@
                       <h2 v-else class="mb-3">
                         <!--prettyhtml-ignore-->
                         Average Annual Cost for Largest Program
-                        <tooltip definition="avg-program-cost" />
+                        <tooltip definition="avg-program-cost" :isNegative="this.netPrice < 0"/>
                       </h2>
                       <p class="mb-1">Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
                       <h2
@@ -705,7 +705,7 @@
                           <div v-else>
                             <h2 class="mb-3">
                               Average Annual Cost for Largest Program
-                              <tooltip definition="avg-program-cost" />
+                              <tooltip definition="avg-program-cost" :isNegative="this.netPrice < 0"/>
                             </h2>
                             <p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
                             <h2 class="title my-3">
