@@ -140,7 +140,7 @@
                         computedField: 'earningsRange',
                         color: '#0e365b',
                         chart: 'MultiRange',
-                        multiRangeVariable: 'earnings.median_earnings'
+                        multiRangeVariable: 'earnings.highest.2_yr.overall_median_earnings'
                       }"
                     />
                   </v-col>
