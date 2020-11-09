@@ -59,7 +59,7 @@
           </v-btn>
         </template>
 
-        <span>Add school to compare</span>
+        <span>Add School to compare</span>
       </v-tooltip>
 
       <p class="overline mb-1">{{ city }}, {{ state }}</p>

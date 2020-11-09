@@ -7,7 +7,7 @@
     <div>
         <div  v-if="currentSchoolCount < 10"  style="display:inline-block;">
           <div class="compare-icon-wrapper d-inline-block mr-2"
-               style="background: #91C191;"
+               style="background: #C4DEC4;"
           >
             <v-icon
               class="mt-1"
@@ -16,9 +16,9 @@
             >
               fas fa-university
             </v-icon>
-          </div>{{currentSchoolCount}} {{schoolText}} and &nbsp;&nbsp;</div>
+          </div>{{currentSchoolCount}} {{schoolText}} &nbsp;&nbsp;</div>
       <div v-else  style="display:inline-block;">
-        &nbsp;<v-icon color="red" small class='pr-2'>fas fa-exclamation-circle</v-icon>&nbsp;Maximum of 10 Schools reached. &nbsp;&nbsp;
+        &nbsp;<v-icon color="red" medium class='pr-2' style="font-size:36px;">fas fa-exclamation-circle</v-icon>&nbsp;Maximum of 10 Schools reached. &nbsp;&nbsp;
       </div>
         <div v-if="currentFieldOfStudyCount < 10" style="display:inline-block;">
           <div class="compare-icon-wrapper d-inline-block mr-2"
@@ -33,7 +33,7 @@
             </v-icon>
             </div>{{currentFieldOfStudyCount}} {{fieldOfStudyText}} to compare and share.</div>
       <div v-else  style="display:inline-block;">
-        &nbsp;<v-icon color="red" small class='pr-2'>fas fa-exclamation-circle</v-icon>&nbsp;Maximum of 10 Fields of Study reached.
+        &nbsp;<v-icon color="red" medium class='pr-2' style="font-size:36px;">fas fa-exclamation-circle</v-icon>&nbsp;Maximum of 10 Fields of Study reached.
       </div>
     </div >
 
@@ -93,10 +93,11 @@
         return this.fieldsOfStudy.length;
       },
       schoolText(){
-        return(this.schools.length > 1 || this.schools.length === 0)?'schools':'school';
+        var ret = (this.schools.length > 1 || this.schools.length === 0)?'Schools':'School';
+        return (this.schools.length > 0 && this.fieldsOfStudy.length == 10) ? ret + " to compare and share." : ret + " and ";
       },
       fieldOfStudyText(){
-        return(this.fieldsOfStudy.length > 1 || this.fieldsOfStudy.length === 0)?'fields of study':'field of study';
+        return(this.fieldsOfStudy.length > 1 || this.fieldsOfStudy.length === 0)?'Fields of Study':'Field of study';
       }
     }
   }

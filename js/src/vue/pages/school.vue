@@ -65,9 +65,9 @@
                       @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
 
-                      <v-icon x-small class="mr-2" :color="isSelected({schoolId:String(id)},this.compareSchools)?'#0075B2':'white'">fa fa-check-circle</v-icon> 
-                      <div v-if="isSelected({schoolId:String(id)},this.compareSchools)" >Added to Compare</div>
-                      <div v-else>Add to Compare School</div>
+                      <v-icon small class="" :color="isSelected({schoolId:String(id)},this.compareSchools)?'#0075B2':'white'">fa fa-check-circle</v-icon> 
+                      <div class="sr-only" v-if="isSelected({schoolId:String(id)},this.compareSchools)" >Added to Compare</div>
+                      <div class="sr-only" v-else>Add to Compare School</div>
                     </v-btn>
 
                     <share small text color="white" label="Share this School" :url="shareLink" show-copy :hide="['email']" />
@@ -1436,13 +1436,13 @@
     margin-top: $base-padding;
   }
 
-  /*.field-of-study-select-container{
-    //border-radius: 20px !important;
-    //border-left: 20px solid #fec005 !important;
-  }*/
+  .field-of-study-select-container{
+    border-radius: 20px !important;
+    border-left: 20px solid #fec005 !important;
+  }
 
   .field-of-study-select-container-header {
-    background-color:#FEDE7E;
+    background-color:#fff6dc;
     border-radius: 5px 5px 0px 0px !important;
   }
 

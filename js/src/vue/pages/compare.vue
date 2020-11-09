@@ -168,7 +168,7 @@
                           {{fieldOfStudy['credential.title'] | formatFieldOfStudyCredentialTitle}}
                         </span>
                         <br>
-                        <span>{{fieldOfStudy['school.name']}}</span>
+                        <span class="fos-school-name-text">{{fieldOfStudy['school.name']}}</span>
                       </div>
 
                     </v-chip>
@@ -186,7 +186,7 @@
                       <div class="compare-fos-chip pa-2">
                         <h4>{{fieldOfStudy.title | formatFieldOfStudyTitle}}</h4>
                         <span class="fos-uppercase-credential-title">{{fieldOfStudy['credential.title'] | formatFieldOfStudyCredentialTitle}}</span><br>
-                        <span>{{fieldOfStudy['school.name']}}</span>
+                        <span class="fos-school-name-text">{{fieldOfStudy['school.name']}}</span>
                       </div>
 
                     </v-chip>
@@ -1029,7 +1029,7 @@
 
 
   .compare-toggle-school-active{
-    background-color: #91C191 !important;
+    background-color: #C4DEC4 !important;
   }
 
   .compare-toggle-fos-active{

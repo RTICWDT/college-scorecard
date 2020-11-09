@@ -60,10 +60,10 @@
 
     <v-row class="compare-drawer-content-container mb-md-4">
       <v-col cols="12" md="6">
-        <div  class="compare-drawer-section-wrapper">
+        <div  class="compare-drawer-section-wrapper my-4">
         <div class="compare-drawer-section-header-wrapper ml-4">
           <div class="compare-icon-wrapper d-inline-block mr-4"
-               style="background: #91C191;"
+               style="background: #C4DEC4 ;"
           >
             <v-icon
               class="mt-1"
@@ -79,7 +79,7 @@
           </div>
         </div>
 
-        <div class="my-3 pr-1">
+        <div class="my-3 pr-1 mr-1">
           <v-checkbox
             @change="handleToggleCompareItem(school,schoolKey)"
             v-for="school in schools"
@@ -115,7 +115,7 @@
       </v-col>
 
       <v-col cols="12" md="6">
-        <div  class="compare-drawer-section-wrapper">
+        <div  class="compare-drawer-section-wrapper my-4">
         <div class="compare-drawer-section-header-wrapper ml-4">
           <div class="compare-icon-wrapper d-inline-block mr-4"
                style="background: #fec005;"
@@ -149,7 +149,7 @@
               <div class="compare-drawer-fos-checkbox-label">
                 <h4>{{fieldOfStudy.fosTitle | formatCip2Title}}</h4>
                 <p class="mb-0 fos-uppercase-credential-title">{{fieldOfStudy.credentialTitle | formatFieldOfStudyCredentialTitle}}</p>
-                <p class="mb-0">{{fieldOfStudy.institutionName}}</p>
+                <p class="mb-0 fos-school-name-text">{{fieldOfStudy.institutionName}}</p>
               </div>
             </template>
           </v-checkbox>
@@ -267,6 +267,9 @@
       
     }
 
+    .fos-school-name-text {
+      font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+    }
     @media (min-width: 960px){
       h4{
         font-size: 16px;
@@ -277,6 +280,10 @@
           color:#000;
           font-family: "Montserrat","Helvetica Neue",Helvetica,arial,sans-serif !important;
       }
+
+      .fos-school-name-text {
+        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+      }      
     }
   }
 
