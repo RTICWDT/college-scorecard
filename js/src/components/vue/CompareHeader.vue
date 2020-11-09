@@ -18,7 +18,7 @@
             </v-icon>
           </div>{{currentSchoolCount}} {{schoolText}} &nbsp;&nbsp;</div>
       <div v-else class="compare-header-text mb-1">
-        <v-icon color="red" medium class='' style="font-size:36px;border-radius:50%;border:3px solid white;">fas fa-exclamation-circle</v-icon>&nbsp;Maximum of 10 Schools reached. &nbsp;&nbsp;
+        <v-icon color="red" medium class='' style="font-size:30px;border-radius:50%;border:3px solid white;">fas fa-exclamation-circle</v-icon>&nbsp;Maximum of 10 Schools reached. &nbsp;&nbsp;
       </div>
         <div v-if="currentFieldOfStudyCount < 10" class="compare-header-text mb-1">
           <div class="compare-icon-wrapper d-inline-block mr-2"
@@ -33,7 +33,7 @@
             </v-icon>
             </div>{{currentFieldOfStudyCount}} {{fieldOfStudyText}} to compare and share.</div>
       <div v-else class="compare-header-text mb-1">
-        <v-icon color="red" medium class='' style="font-size:36px;border-radius:50%;border:3px solid white;">fas fa-exclamation-circle</v-icon>&nbsp;Maximum of 10 Fields of Study reached.
+        <v-icon color="red" medium class='' style="font-size:30px;border-radius:50%;border:3px solid white;">fas fa-exclamation-circle</v-icon>&nbsp;Maximum of 10 Fields of Study reached.
       </div>
     </div >
 
