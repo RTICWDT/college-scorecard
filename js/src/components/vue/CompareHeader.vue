@@ -97,7 +97,7 @@
         return (this.schools.length > 0 && this.fieldsOfStudy.length == 10) ? ret + " to compare and share." : ret + " and ";
       },
       fieldOfStudyText(){
-        return(this.fieldsOfStudy.length > 1 || this.fieldsOfStudy.length === 0)?'Fields of Study':'Field of study';
+        return(this.fieldsOfStudy.length > 1 || this.fieldsOfStudy.length === 0)?'Fields of Study':'Field of Study';
       }
     }
   }
