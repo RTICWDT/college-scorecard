@@ -276,7 +276,7 @@ export default {
       return this.$baseUrl+'/school/?' + id + '-' + name.replace(/\W+/g, '-');
     },
     shareLink(){
-      return window.location.href || null;
+      return encodeURIComponent(window.location.href) || null;
     }
   },
   mounted() {

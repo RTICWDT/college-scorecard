@@ -189,7 +189,7 @@
                           </v-list-item-group>
                         </v-list>
                       </v-menu>
-                       <share :url="shareUrl" label="Share" small show-copy :hide="['email']" />
+                       <share :url="encodeURIComponent(shareUrl)" label="Share" small show-copy :hide="['email']" />
                       </p>
                     </div>
                   </v-col>

@@ -1690,7 +1690,7 @@ export default {
       return document.referrer || this.$baseUrl+"/search/";
     },
     shareLink() {
-      return window.location.href || null;
+      return encodeURIComponent(window.location.href) || null;
     },
     fieldsOfStudy() {
       let self = this;

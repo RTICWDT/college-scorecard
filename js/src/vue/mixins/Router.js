@@ -20,7 +20,7 @@ export default {
     prepareQueryString(params){
       let qs = querystring.stringify(params);
 
-      return encodeURI(qs);
+      return encodeURIComponent(qs);
     },
     // removeParameterFromURL(removeParamter){
     //   // Remove from QS params;
