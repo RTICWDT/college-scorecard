@@ -31,7 +31,7 @@
 
                 <!--Top Control Row-->
                 <v-row id="school-sub-nav-header" class="csGreenBg">
-                  <v-col cols="6">
+                  <v-col cols="3">
                     <v-btn
                       small
                       color="white"
@@ -42,7 +42,7 @@
                     >&laquo; Back to search</v-btn>
                   </v-col>
 
-                  <v-col cols="6" class="text-right">
+                  <v-col cols="9" class="text-right">
                     <v-btn
                       text
                       small
@@ -65,7 +65,7 @@
                       @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
 
-                      <v-icon small class="" :color="isSelected({schoolId:String(id)},this.compareSchools)?'#0075B2':'white'">fa fa-check-circle</v-icon> 
+                      <v-icon small class="" :color="isSelected({schoolId:String(id)},this.compareSchools)?'#0075B2':'grey'">fa fa-check-circle</v-icon> 
                       <div class="sr-only" v-if="isSelected({schoolId:String(id)},this.compareSchools)" >Added to Compare</div>
                       <div class="sr-only" v-else>Add to Compare School</div>
                     </v-btn>

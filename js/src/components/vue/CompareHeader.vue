@@ -5,7 +5,7 @@
        v-if="currentSchoolCount > 0 || currentFieldOfStudyCount > 0"
   >
     <div>
-        <div  v-if="currentSchoolCount < 10"  style="display:inline-block;">
+        <div v-if="currentSchoolCount < 10"  class="compare-header-text mb-1">
           <div class="compare-icon-wrapper d-inline-block mr-2"
                style="background: #C4DEC4;"
           >
@@ -17,10 +17,10 @@
               fas fa-university
             </v-icon>
           </div>{{currentSchoolCount}} {{schoolText}} &nbsp;&nbsp;</div>
-      <div v-else  style="display:inline-block;">
-        &nbsp;<v-icon color="red" medium class='pr-2' style="font-size:36px;">fas fa-exclamation-circle</v-icon>&nbsp;Maximum of 10 Schools reached. &nbsp;&nbsp;
+      <div v-else class="compare-header-text mb-1">
+        <v-icon color="red" medium class='' style="font-size:36px;border-radius:50%;border:3px solid white;">fas fa-exclamation-circle</v-icon>&nbsp;Maximum of 10 Schools reached. &nbsp;&nbsp;
       </div>
-        <div v-if="currentFieldOfStudyCount < 10" style="display:inline-block;">
+        <div v-if="currentFieldOfStudyCount < 10" class="compare-header-text mb-1">
           <div class="compare-icon-wrapper d-inline-block mr-2"
                style="background: #fec005;"
           >
@@ -32,8 +32,8 @@
               fas fa-award
             </v-icon>
             </div>{{currentFieldOfStudyCount}} {{fieldOfStudyText}} to compare and share.</div>
-      <div v-else  style="display:inline-block;">
-        &nbsp;<v-icon color="red" medium class='pr-2' style="font-size:36px;">fas fa-exclamation-circle</v-icon>&nbsp;Maximum of 10 Fields of Study reached.
+      <div v-else class="compare-header-text mb-1">
+        <v-icon color="red" medium class='' style="font-size:36px;border-radius:50%;border:3px solid white;">fas fa-exclamation-circle</v-icon>&nbsp;Maximum of 10 Fields of Study reached.
       </div>
     </div >
 
@@ -68,6 +68,10 @@
     height: 36px;
     text-align: center;
   }  
+
+  .compare-header-text {
+    display:inline-block;
+  }
 </style>
 
 <script>

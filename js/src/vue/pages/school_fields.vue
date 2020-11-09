@@ -27,7 +27,7 @@
 
                 <!-- Green Header Bar -->
                 <v-row class='csGreenBg'>
-                  <v-col cols="6">
+                  <v-col cols="3">
                      <v-btn
                       small
                       color="white"
@@ -38,14 +38,32 @@
                     >&laquo; Back to School Profile</v-btn>
 
                   </v-col>
-                  <v-col cols="6" class='text-right'>
+                  <v-col cols="9" class='text-right'>
                     <v-btn
                       text
                       small
-                      :color="isSelected({schoolId:String(this.school.id)},this.compareSchools)?'amber':'white'"
-                      @click="$emit('toggle-compare-school', { schoolId: school.id, schoolName: school.school.name } )"
+                      class="d-none d-sm-inline"
+                      :color="isSelected({schoolId:String(id)},this.compareSchools)?'black':'white'"
+                      v-bind:class="{ 'compare-selected-text': isSelected({schoolId:String(id)},this.compareSchools), 'rounded-pill': '' }"
+                      @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
-                      <v-icon x-small class='mr-2'>fa fa-check-circle</v-icon> Compare
+
+                      <v-icon x-small class="mr-2" :color="isSelected({schoolId:String(id)},this.compareSchools)?'#0075B2':'white'">fa fa-check-circle</v-icon> 
+                      <div v-if="isSelected({schoolId:String(id)},this.compareSchools)" >Added to Compare</div>
+                      <div v-else>Add to Compare School</div>
+                    </v-btn>
+
+                    <v-btn
+                      fab
+                      x-small
+                      :color="isSelected({schoolId:String(id)},this.compareSchools)?'black':'white'"
+                      class="d-inline d-sm-none mr-2"
+                      @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
+                    >
+
+                      <v-icon small class="" :color="isSelected({schoolId:String(id)},this.compareSchools)?'#0075B2':'grey'">fa fa-check-circle</v-icon> 
+                      <div class="sr-only" v-if="isSelected({schoolId:String(id)},this.compareSchools)" >Added to Compare</div>
+                      <div class="sr-only" v-else>Add to Compare School</div>
                     </v-btn>
                     <share small text color="white" label="Share this School" :url="shareLink" show-copy :hide="['email']" />
                   </v-col>
@@ -123,7 +141,7 @@
 
               <!-- Fields of Study -->
               <v-expansion-panels v-if="!_.isEmpty(processedPrograms)">
-                <v-expansion-panel v-for="(prog, index) in processedPrograms" :key="index">
+                <v-expansion-panel v-for="(prog, index) in processedPrograms" :key="index" class="fos-profile-panel">
                   <v-expansion-panel-header>{{ _.startCase(_.toLower(prog.name).slice(0,-1)) }}</v-expansion-panel-header>
                   <v-expansion-panel-content eager>
                     <v-expansion-panels>
@@ -182,6 +200,20 @@
       </v-bottom-sheet>
   </v-app>
 </template>
+
+<style lang="scss" scoped>
+  @import 'sass/_variables';
+  
+  .fos-profile-panel{
+    width: 100%;
+    border-left: 10px solid $fos-color-gold;
+
+    @media (min-width: 960px){
+      font-size: 16px;
+      border-left: 20px solid $fos-color-gold;
+    }
+  }
+</style>
 
 <script>
 import Tooltip from "components/vue/Tooltip.vue";

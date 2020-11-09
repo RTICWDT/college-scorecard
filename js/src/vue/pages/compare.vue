@@ -55,12 +55,12 @@
                 >
                   <template v-slot:tab-school>
                     <h3 class="compare-tab-title">
-                      Schools ({{countSchools}})
+                      Schools ({{countSchools()}})
                     </h3>
                   </template>
                   <template v-slot:tab-fos>
                     <h3 class="compare-tab-title">
-                      Fields of Study ({{countFieldsOfStudy}})
+                      Fields of Study ({{countFieldsOfStudy()}})
                     </h3>
                   </template>
 
@@ -1126,7 +1126,14 @@ export default {
         { text: "Federal Student Loans", value: "fed"},
         { text: "Parent Plus Loans", value:"plus"}
       ],
-      controlTab: 0
+      controlTab: 0,
+    countSchools(){
+      //return this.passedSchools.length;
+      return this.passedSchools.length || this.responseCache.institution.length;
+    },
+    countFieldsOfStudy(){
+      return this.passedFieldsOfStudy.length || this.responseCache.fieldsOfStudy.length;
+    }      
     };
   },
   computed: {   
@@ -1234,12 +1241,6 @@ export default {
       }else{
         return false;
       }
-    },
-    countSchools(){
-      return this.passedSchools.length;
-    },
-    countFieldsOfStudy(){
-      return this.passedFieldsOfStudy.length;
     },
     filteredFieldsOfStudy(){
       return this.categorizeFieldsOfStudy(this.responseCache.fieldsOfStudy);
