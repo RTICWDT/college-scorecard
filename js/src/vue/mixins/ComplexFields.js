@@ -324,10 +324,10 @@ export default {
                 fos = [fos];
             }
             let cleanEarnings = fos.filter(
-                obj => _.get(obj,'earnings.median_earnings') && _.get(obj,'credential.level') <= 3
+                obj => _.get(obj,'earnings.highest.2_yr.overall_median_earnings') && _.get(obj,'credential.level') <= 3
             );
             let orderedEarnings = cleanEarnings.sort(
-                (a, b) => _.get(a,'earnings.median_earnings') - _.get(b, 'earnings.median_earnings')
+                (a, b) => _.get(a,'earnings.highest.2_yr.overall_median_earnings') - _.get(b, 'earnings.highest.2_yr.overall_median_earnings')
             );
             if(orderedEarnings[0]==null)
             {
@@ -336,7 +336,7 @@ export default {
             else
             {
                 return {
-                    single: orderedEarnings.length == 1 || (orderedEarnings[0].earnings.median_earnings == orderedEarnings[orderedEarnings.length-1].earnings.median_earnings),
+                    single: orderedEarnings.length == 1 || (orderedEarnings[0].earnings.highest['2_yr'].overall_median_earnings== orderedEarnings[orderedEarnings.length-1].earnings.highest['2_yr'].overall_median_earnings),
                     min: orderedEarnings[0],
                     max: orderedEarnings[orderedEarnings.length - 1]
                 }

@@ -1100,7 +1100,7 @@
                     <div>
                       <p>Typical earnings in the first year after graduation with the range of highest and lowest
                         median earnings for undergraduate and credential programs for which there is data.
-                        For more information, see Fields of Study for this school.
+                        For more information, see <a :href='limitedFoS'>All Fields of Study</a> for this school.
                       </p>
 
                       <multi-range
