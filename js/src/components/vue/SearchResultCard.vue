@@ -142,10 +142,10 @@ export default {
         return 'N/A';
       }
       else if (this.earningsRange.single) {
-        return this.$options.filters.numeral(this.earningsRange.min.earnings.median_earnings, '$0a');
+        return this.$options.filters.numeral(this.earningsRange.min.earnings.highest["2_yr"].overall_median_earnings, '$0a');
       }
       else {
-        return this.$options.filters.numeral(this.earningsRange.min.earnings.median_earnings, '$0a') + '-' + this.$options.filters.numeral(this.earningsRange.max.earnings.median_earnings, '0a');
+        return this.$options.filters.numeral(this.earningsRange.min.earnings.highest["2_yr"].overall_median_earnings, '$0a') + '-' + this.$options.filters.numeral(this.earningsRange.max.earnings.highest["2_yr"].overall_median_earnings, '0a');
       }
 
     },
