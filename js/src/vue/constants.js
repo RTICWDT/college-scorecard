@@ -113,7 +113,7 @@ export const fields = {
   // FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.earnings.median_earnings',
   // FIELD_OF_STUDY_DEBT:      'latest.programs.cip_4_digit.debt.median_debt',
 
-  FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.earnings.highest["2_yr"].overall_median_earnings',
+  FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.earnings.highest.2_yr.overall_median_earnings',
   FIELD_OF_STUDY_DEBT:      'latest.programs.cip_4_digit.debt.staff_grad_plus.all.all_inst.median',
 
   // New Field Of Study Metrics
