@@ -134,7 +134,7 @@ export default {
         return 'N/A';
       }
       else {
-        return this.$options.filters.numeral(this.completionRate, '0.%');
+        return this.$options.filters.numeral(parseFloat(this.completionRate), '0.%');
       }
     },
     displayEarn() {

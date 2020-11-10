@@ -65,7 +65,7 @@
                       @click="$emit('toggle-compare-school', { schoolId: id, schoolName: schoolName } )"
                     >
 
-                      <v-icon small class="" :color="isSelected({schoolId:String(id)},this.compareSchools)?'#0075B2':'grey'">fa fa-check-circle</v-icon> 
+                      <v-icon small class="" :color="isSelected({schoolId:String(id)},this.compareSchools)?'#0075B2':'black'">fa fa-check-circle</v-icon> 
                       <div class="sr-only" v-if="isSelected({schoolId:String(id)},this.compareSchools)" >Added to Compare</div>
                       <div class="sr-only" v-else>Add to Compare School</div>
                     </v-btn>
@@ -146,7 +146,7 @@
 
                       <horizontal-bar
                         v-if="completionRate"
-                        :value="parseInt((completionRate * 100))"
+                        :value="Math.round(parseFloat(completionRate) * 100)"
                         :min="0"
                         :max="100"
                         color="#0e365b"
@@ -417,20 +417,9 @@
 
                             <div v-if="fosSalarySelect === 'aid'">
 
-                              <div v-if="_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED)">
+                              <div v-if="_.get(selectedFOSDetail, earnings.highest['2_yr'].overall_median_earnings)">
                                 <h5 class="fos-small-data-bold navy-text">
-                                  {{_.get(selectedFOSDetail, fields.FOS_EARNINGS_FED) | numeral('$0,0') }}</h5>
-                              </div>
-
-                              <div v-else class="mini-data-na text-center mr-sm-11">
-                                Data Not Available
-                              </div>
-
-                            </div>
-
-                            <div v-else-if="fosSalarySelect === 'pell'">
-                              <div v-if="_.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL)">
-                                <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL) | numeral('$0,0') }}</h5>
+                                  {{_.get(selectedFOSDetail, earnings.highest['2_yr'].overall_median_earnings) | numeral('$0,0') }}</h5>
                               </div>
 
                               <div v-else class="mini-data-na text-center mr-sm-11">
@@ -456,16 +445,6 @@
                                 Data Not Available
                               </div>
 
-                            </div>
-
-                            <div v-else-if="fosSalarySelect === 'pell'">
-                              <div v-if="_.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL)">
-                                <h5 class="fos-small-data-bold navy-text">{{_.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL) / 12 | numeral('$0,0') }}</h5>
-                              </div>
-
-                              <div v-else class="mini-data-na text-center">
-                                Data Not Available
-                              </div>
                             </div>
                           </v-col>
 
@@ -798,7 +777,7 @@
                           <donut
                             v-if="completionRate"
                             color="#0e365b"
-                            :value="completionRate * 100"
+                            :value="Math.round(parseFloat(completionRate) * 100)"
                             :height="200"
                           ></donut>
                           <div v-else class="data-na">Data Not Available</div>

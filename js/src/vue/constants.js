@@ -135,8 +135,8 @@ export const fields = {
 
   FOS_PP_DEBT_MEDIAN: 'debt.parent_plus.all.eval_inst.median',
   FOS_PP_DEBT_MEDIAN_PRIOR: 'debt.parent_plus.all.all_inst.median',
-  FOS_PP_DEBT_MONTHLY: 'debt.parent_plus.all.eval_inst.median_payment',
-  FOS_PP_DEBT_MONTHLY_PRIOR: 'debt.parent_plus.all.all_inst.median_payment',
+  FOS_PP_DEBT_MONTHLY: 'debt.parent_plus.all.all_inst.median_payment',
+  FOS_PP_DEBT_MONTHLY_PRIOR: 'debt.parent_plus.all.eval_inst.median_payment',
 
   FOS_CREDENTIAL_LEVEL: 'credential.level',
 

@@ -214,11 +214,15 @@ export default {
 
         fullTimeEnrollment() {
             if (!this.school) return null;
-            return 1 - (_.get(this.school, this.fields['PART_TIME_SHARE'])).toFixed(2);
+            let fte = _.get(this.school, this.fields['PART_TIME_SHARE']);
+            if (!fte) return null;
+            return 1 - (fte).toFixed(2);
         },
         partTimeEnrollment() {
             if (!this.school) return null;
-            return (_.get(this.school, this.fields['PART_TIME_SHARE'])).toFixed(2);
+            let pte = _.get(this.school, this.fields['PART_TIME_SHARE']);
+            if (!pte) return null;
+            return pte.toFixed(2);
         },
         socioEconomicDiversity() {
             if (!this.school) return null;
@@ -328,7 +332,7 @@ export default {
             );
             let orderedEarnings = cleanEarnings.sort(
                 (a, b) => _.get(a,'earnings.highest.2_yr.overall_median_earnings') - _.get(b, 'earnings.highest.2_yr.overall_median_earnings')
-            );
+            ).filter(x => x.earnings.highest["2_yr"].overall_median_earnings);
             if(orderedEarnings[0]==null)
             {
                 return null;
@@ -498,8 +502,7 @@ export default {
 
             let orderedDebt = cleanDebt.sort(
               (a, b) => a.debt - b.debt
-            );
-
+            ).filter(x => x.debt);
             if(orderedDebt[0]==null)
             {
                 return null;
