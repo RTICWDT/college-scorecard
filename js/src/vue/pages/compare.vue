@@ -220,8 +220,8 @@
                                v-if="fosSalarySelect === 'aid'"
                             >
                               <horizontal-bar
-                                v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_FED]"
-                                :value="slotProps.school[fields.FOS_EARNINGS_FED]"
+                                v-if="slotProps.school && slotProps.school['earnings.highest.2_yr.overall_median_earnings']"
+                                :value="slotProps.school['earnings.highest.2_yr.overall_median_earnings']"
                                 :min="0"
                                 :max="150000"
                                 color='#0e365b'
@@ -229,7 +229,7 @@
                                 type="currency"
                                 :labels="true"
                               ></horizontal-bar>
-                              <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_FED]" class="data-na">Data Not Available</div>
+                              <div v-if="slotProps.school && !slotProps.school['earnings.highest.2_yr.overall_median_earnings']" class="data-na">Data Not Available</div>
                             </div>
 
                             <div v-else>
@@ -266,10 +266,10 @@
                           @update-highlight="currentFOSHighlight = $event"
                         >
                           <template v-slot:fos-row="slotProps">
-                            <div v-if="fosSalarySelect === 'aid'">
+                            <div>
                               <horizontal-bar
-                                v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_FED]"
-                                :value="slotProps.school[fields.FOS_EARNINGS_FED]/12"
+                                v-if="slotProps.school && slotProps.school['earnings.highest.2_yr.overall_median_earnings']"
+                                :value="slotProps.school['earnings.highest.2_yr.overall_median_earnings']/12"
                                 :min="0"
                                 :max="30000"
                                 color='#0e365b'
@@ -277,21 +277,7 @@
                                 type="currency"
                                 :labels="true"
                               ></horizontal-bar>
-                              <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_FED]" class="data-na">Data Not Available</div>
-                            </div>
-
-                            <div v-else>
-                              <horizontal-bar
-                                v-if="slotProps.school && slotProps.school[fields.FOS_EARNINGS_PELL]"
-                                :value="slotProps.school[fields.FOS_EARNINGS_PELL]/12"
-                                :min="0"
-                                :max="30000"
-                                color='#0e365b'
-                                :height="25"
-                                type="currency"
-                                :labels="true"
-                              ></horizontal-bar>
-                              <div v-if="slotProps.school && !slotProps.school[fields.FOS_EARNINGS_PELL]" class="data-na">Data Not Available</div>
+                              <div v-if="slotProps.school && !slotProps.school['earnings.highest.2_yr.overall_median_earnings']" class="data-na">Data Not Available</div>
                             </div>
                           </template>
 
@@ -808,7 +794,7 @@
                         computedField: 'earningsRange',
                         color: '#0e365b',
                         chart: 'MultiRange',
-                        multiRangeVariable: 'earnings.median_earnings'
+                        multiRangeVariable: 'earnings.highest.2_yr.overall_median_earnings'
                       }"
                     />
                   </v-expansion-panel-content>
