@@ -411,7 +411,7 @@ export default {
             ){
                 return null;
             }
-
+            
             return this.formatParentPlusText(
               _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MIN']),
               _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MAX'])
@@ -503,12 +503,21 @@ export default {
             let orderedDebt = cleanDebt.sort(
               (a, b) => a.debt - b.debt
             ).filter(x => x.debt);
+
+
             if(orderedDebt[0]==null)
             {
                 return null;
             }
             else
             {
+
+                console.log(JSON.stringify({
+                    single: orderedDebt.length == 1 || (orderedDebt[0].debt == orderedDebt[orderedDebt.length-1].debt),
+                    min: orderedDebt[0],
+                    max: orderedDebt[orderedDebt.length - 1]
+                }));
+
                 return {
                     single: orderedDebt.length == 1 || (orderedDebt[0].debt == orderedDebt[orderedDebt.length-1].debt),
                     min: orderedDebt[0],

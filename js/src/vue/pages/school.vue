@@ -920,7 +920,7 @@
                             <div
                               class="display-2 navy-text font-weight-bold"
                               v-if="debtRange.min"
-                            >{{ _.get(debtRange,'min.debt.payment') | numeral('$0,0') }}-{{ debtRange.max.payment | numeral('0,0') }}/mo</div>
+                            >{{ _.get(debtRange,'min.payment') | numeral('$0,0') }}-{{ debtRange.max.payment | numeral('0,0') }}/mo</div>
                           </div>
                           <div v-else class="data-na">Data Not Available</div>
 
