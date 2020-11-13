@@ -67,10 +67,16 @@
 
   #compare-toggle-school-active{
     background-color: #C4DEC4 !important;
+    h3 {
+      font-weight:bold !important;
+  }
   }
 
   #compare-toggle-fos-active{
     background-color: #fff6dc;
+    h3 {
+      font-weight:bold !important;
+  }
   }
 
   .compare-fos-slider-gold{
