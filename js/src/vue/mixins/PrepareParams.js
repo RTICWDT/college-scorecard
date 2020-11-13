@@ -34,7 +34,7 @@ const alias = {
     else
     {
         // exclude perfect-only children per ED
-        query[fields.ID + '__range'] = '..999999';
+        query[fields.ID + '__range'] = '..999999';f
     }
   },
   // special designations: women/men only, minority groups
@@ -53,7 +53,7 @@ const alias = {
   },
 
   zip: function(query, value, key) {
-    // if there is no distance query, use the fully-qualified zip code
+    // if there is no distance query, use the fully-qualified zip codef
     // field to match schools in that zip:
     // ?zip=XXXXXX&distance=0 will always return zero results because it
     // does a distance calculation; whereas
@@ -295,7 +295,7 @@ export default {
       // by default, filter out schools for which school.size is null
       // with a numeric range query
       if (!query.size) {
-        query[fields.SIZE + '__range'] = '0..';
+        query[fields.SIZE + '__range'] = '1..';
       }
       
       /*

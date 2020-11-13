@@ -2006,11 +2006,18 @@ export default {
     // Note, Must add key as a param.
     let request = apiGet(window.api.url, window.api.key, '/schools/', { id: id })
       .then((response) => {
+        console.log(JSON.stringify(response));
         if (response.data.metadata.total > 1) {
           this.error = true;
           console.warn('More than one school found for ID: "' + id + '"');
           return null;
         }
+
+        if (!response.data.results.latest.student.size) {
+          this.error = true;
+          console.warn('School size is 0 for ID: "' + id + '"');
+          return null;
+        }        
 
         this.school = response.data.results[0];
         document.title = _.get(this.school, "school.name") + " | College Scorecard";
