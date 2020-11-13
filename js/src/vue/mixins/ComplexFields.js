@@ -214,14 +214,14 @@ export default {
 
         fullTimeEnrollment() {
             if (!this.school) return null;
-            let fte = _.get(this.school, this.fields['PART_TIME_SHARE']);
-            if (!fte) return null;
-            return 1 - (fte).toFixed(2);
+            let fte = _.get(this.school, this.fields['PART_TIME_SHARE']);  
+            if (fte == null) return null;
+            return (1 - fte).toFixed(2);
         },
         partTimeEnrollment() {
             if (!this.school) return null;
             let pte = _.get(this.school, this.fields['PART_TIME_SHARE']);
-            if (!pte) return null;
+            if (pte == null) return null;
             return pte.toFixed(2);
         },
         socioEconomicDiversity() {
