@@ -339,11 +339,6 @@ export default {
             }
             else
             {
-                var ret = {single: orderedEarnings.length == 1 || (orderedEarnings[0].earnings.highest['2_yr'].overall_median_earnings== orderedEarnings[orderedEarnings.length-1].earnings.highest['2_yr'].overall_median_earnings),
-                min: orderedEarnings[0],
-                max: orderedEarnings[orderedEarnings.length - 1]};
-
-                console.log(ret);
                 return {
                     single: orderedEarnings.length == 1 || (orderedEarnings[0].earnings.highest['2_yr'].overall_median_earnings== orderedEarnings[orderedEarnings.length-1].earnings.highest['2_yr'].overall_median_earnings),
                     min: orderedEarnings[0],
