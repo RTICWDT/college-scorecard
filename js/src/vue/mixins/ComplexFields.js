@@ -423,11 +423,13 @@ export default {
         estimatedParentBorrowedText(){
             if (!this.school ||
               _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MIN']) === 'undefined' ||
-              _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MAX']) === 'undefined'
+              _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MAX']) === 'undefined' ||
+              _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MIN']) === null ||
+              _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MAX']) === null
             ){
                 return null;
             }
-            
+            console.log( _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MIN']));
             return this.formatParentPlusText(
               _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MIN']),
               _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MAX'])

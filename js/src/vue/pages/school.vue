@@ -907,9 +907,9 @@
                         v-else-if="parentPlusDebtAll && aidLoanSelect === 'plus' && aidShowMedianDebtWithPrior"
                       >{{ parentPlusDebtAll | numeral('$0,0') }}</h2>
 
-                      <div class="data-na" v-else>Data Not Available</div>                        
+                      <div class="data-na" v-else-if="aidLoanSelect === 'plus'">Data Not Available</div>                        
 
-                          <h2 class="mb-3">
+                          <h2 class="mb-3 mt-3">
                             Typical Monthly Loan Payment&nbsp;
                                 <tooltip v-if="aidLoanSelect === 'fed' && !aidShowMedianDebtWithPrior" definition="avg-loan-payment" :isBranch="isBranch" :limitedFoS="fieldsLink" />
                                 <tooltip v-else-if="aidLoanSelect === 'fed' && aidShowMedianDebtWithPrior" definition="avg-loan-payment-all-schools" :isBranch="isBranch" :limitedFoS="fieldsLink" />
@@ -938,10 +938,10 @@
 
                             <div v-else-if="aidLoanSelect === 'plus'">
                               <div v-if="parentPlusPayment && !aidShowMedianDebtWithPrior">
-                                <h5 class="fos-small-data-bold navy-text">{{parentPlusPayment | numeral('$0,0') }}</h5>
+                                <h2 class="display-2 navy-text font-weight-bold">{{parentPlusPayment | numeral('$0,0') }}</h2>
                               </div>
                               <div v-else-if="parentPlusPaymentAll && aidShowMedianDebtWithPrior">
-                                <h5 class="fos-small-data-bold navy-text">{{parentPlusPaymentAll | numeral('$0,0') }}</h5>
+                                <h2 class="display-2 navy-text font-weight-bold">{{parentPlusPaymentAll | numeral('$0,0') }}</h2>
                               </div>
                               <div v-else class="mini-data-na text-center">
                                 Data Not Available
