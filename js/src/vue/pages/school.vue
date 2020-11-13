@@ -254,22 +254,6 @@
                       <div id="profile-field-of-study-summary-metric-container" class="pa-sm-4">
                         <div v-if="selectedFOS" id="profile-field-of-study-summary-metric-full">
 
-                          <div class="mb-6">
-                            <h3 class="mb-3">
-                              Salary After Completing Field of Study
-                              <tooltip definition="fos-median-earnings" />
-                            </h3>
-
-                            <h4 class="display-2 navy-text font-weight-bold"
-                              v-if="selectedFOSDetail && selectedFOSDetail.earnings.highest['2_yr'].overall_median_earnings"
-                            >
-                              {{selectedFOSDetail.earnings.highest['2_yr'].overall_median_earnings | numeral('$0,0') }}
-                            </h4>
-
-                            <div v-else class="data-na">
-                              Data Not Available
-                            </div>
-                          </div>
 
                           <div>
                             <h3 class="mb-3">
@@ -417,9 +401,9 @@
 
                             <div v-if="fosSalarySelect === 'aid'">
 
-                              <div v-if="_.get(selectedFOSDetail, earnings.highest['2_yr'].overall_median_earnings)">
+                              <div v-if="_.get(selectedFOSDetail, 'earnings.highest.2_yr.overall_median_earnings')">
                                 <h5 class="fos-small-data-bold navy-text">
-                                  {{_.get(selectedFOSDetail, earnings.highest['2_yr'].overall_median_earnings) | numeral('$0,0') }}</h5>
+                                  {{_.get(selectedFOSDetail, 'earnings.highest.2_yr.overall_median_earnings') | numeral('$0,0') }}</h5>
                               </div>
 
                               <div v-else class="mini-data-na text-center mr-sm-11">
@@ -1755,7 +1739,6 @@ export default {
         this.selectedFOS.credential.level
       );
 
-
       return {
         title: this.selectedFOS.text,
         ...locatedFOS
@@ -1923,7 +1906,7 @@ export default {
       let locatedFOS = _.find(this.allFieldsOfStudy, (fos)=>{
         return fos.code == params.fos_code && fos.credential.level == params.fos_credential;
       });
-
+      
       if(typeof locatedFOS === 'undefined'){
         return null
       }else{
