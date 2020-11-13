@@ -73,6 +73,18 @@ export default {
             if (!this.school) return null;
             return _.get(this.school, this.fields['PARENT_PLUS_TOTAL_DEBT'])
         },        
+        parentPlusDebtAll() {
+            if (!this.school) return null;
+            return _.get(this.school, this.fields['PARENT_PLUS_TOTAL_DEBT_ALL'])
+        },    
+        parentPlusPayment() {
+            if (!this.school) return null;
+            return _.get(this.school, this.fields['PARENT_PLUS_LOAN_PAYMENT'])
+        },        
+        parentPlusPaymentAll() {
+            if (!this.school) return null;
+            return _.get(this.school, this.fields['PARENT_PLUS_LOAN_PAYMENT_ALL'])
+        },               
         undergraduates() {
             if (!this.school) return null;
             return _.get(this.school, this.fields['SIZE'])
@@ -515,13 +527,6 @@ export default {
             }
             else
             {
-
-                console.log(JSON.stringify({
-                    single: orderedDebt.length == 1 || (orderedDebt[0].debt == orderedDebt[orderedDebt.length-1].debt),
-                    min: orderedDebt[0],
-                    max: orderedDebt[orderedDebt.length - 1]
-                }));
-
                 return {
                     single: orderedDebt.length == 1 || (orderedDebt[0].debt == orderedDebt[orderedDebt.length-1].debt),
                     min: orderedDebt[0],

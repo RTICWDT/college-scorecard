@@ -899,8 +899,14 @@
 
                       <h2
                         class="display-2 navy-text font-weight-bold"
-                        v-if="parentPlusDebt && aidLoanSelect === 'plus'"
+                        v-if="parentPlusDebt && aidLoanSelect === 'plus' && !aidShowMedianDebtWithPrior"
                       >{{ parentPlusDebt | numeral('$0,0') }}</h2>
+
+                      <h2
+                        class="display-2 navy-text font-weight-bold"
+                        v-else-if="parentPlusDebtAll && aidLoanSelect === 'plus' && aidShowMedianDebtWithPrior"
+                      >{{ parentPlusDebtAll | numeral('$0,0') }}</h2>
+
                       <div class="data-na" v-else>Data Not Available</div>                        
 
                           <h2 class="mb-3">
@@ -931,10 +937,12 @@
                           <div v-else-if="aidLoanSelect === 'fed'" class="data-na">Data Not Available</div>
 
                             <div v-else-if="aidLoanSelect === 'plus'">
-                              <div v-if="_.get(school, fields.PARENT_PLUS_LOAN_PAYMENT)">
-                                <h5 class="fos-small-data-bold navy-text">{{_.get(school, fields.PARENT_PLUS_LOAN_PAYMENT) | numeral('$0,0') }}</h5>
+                              <div v-if="parentPlusPayment && !aidShowMedianDebtWithPrior">
+                                <h5 class="fos-small-data-bold navy-text">{{parentPlusPayment | numeral('$0,0') }}</h5>
                               </div>
-
+                              <div v-else-if="parentPlusPaymentAll && aidShowMedianDebtWithPrior">
+                                <h5 class="fos-small-data-bold navy-text">{{parentPlusPaymentAll | numeral('$0,0') }}</h5>
+                              </div>
                               <div v-else class="mini-data-na text-center">
                                 Data Not Available
                               </div>
