@@ -61,6 +61,7 @@
   .compare-tab-title{
     letter-spacing: normal !important;
     color: black !important;
+    text-transform: none !important;
     font-weight:500;
   }
 
