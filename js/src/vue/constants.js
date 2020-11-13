@@ -97,6 +97,8 @@ export const fields = {
   // TEST
   PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MIN: 'latest.aid.plus_loan_pct_lower_pooled',
   PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MAX: 'latest.aid.plus_loan_pct_upper_pooled',
+  PARENT_PLUS_TOTAL_DEBT: 'latest.aid.plus_debt.all.all_inst.median',
+  PARENT_PLUS_LOAN_PAYMENT: 'latest.aid.plus_debt.all.completers.all_inst.median',
 
   // program reporters
   PROGRAM_REPORTER_OFFERED: 'latest.academics.program_reporter.programs_offered',

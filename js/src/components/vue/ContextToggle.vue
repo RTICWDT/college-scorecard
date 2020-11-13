@@ -17,7 +17,7 @@
     >
       <slot name="tab-school">
         <h3 class="compare-tab-title">
-          Schools
+          Schools ({{compareInstitutionsCount}})
         </h3>
       </slot>
     </v-tab>
@@ -27,7 +27,7 @@
     >
       <slot name="tab-fos">
         <h3 class="compare-tab-title pb-1">
-          Fields of Study
+          Fields of Study ({{compareFieldsOfStudyCount}})
         </h3>
       </slot>
     </v-tab>
@@ -61,8 +61,8 @@
   .compare-tab-title{
     letter-spacing: normal !important;
     color: black !important;
-    text-transform: none !important;
-    font-weight: 500;
+    font-weight:bold;
+    text-transform: uppercase;
   }
 
   #compare-toggle-school-active{
@@ -86,6 +86,14 @@
         type: String
       },
       controlTab:{
+        type: Number,
+        default: 0
+      },
+      compareInstitutionsCount:{
+        type: Number,
+        default: 0
+      },
+      compareFieldsOfStudyCount:{
         type: Number,
         default: 0
       },

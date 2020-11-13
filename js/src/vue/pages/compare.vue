@@ -52,17 +52,10 @@
                   @context-switch-click="handleDisplayToggleClick"
                   @context-tab-change="handleDisplayToggleClick"
                   :fill-space="true"
+                  :compare-institutions-count="compareSchools.length"
+                  :compare-fields-of-study-count="compareFieldsOfStudy.length"
                 >
-                  <template v-slot:tab-school>
-                    <h3 class="compare-tab-title">
-                      Schools ({{countSchools()}})
-                    </h3>
-                  </template>
-                  <template v-slot:tab-fos>
-                    <h3 class="compare-tab-title">
-                      Fields of Study ({{countFieldsOfStudy()}})
-                    </h3>
-                  </template>
+
 
                 </context-toggle>
               </div>
@@ -1007,6 +1000,8 @@
   .compare-tab-title{
     letter-spacing: normal !important;
     color: black !important;
+    font-weight:bold;
+    text-transform: uppercase;
   }
 
   .compare-fos-toggle{
@@ -1115,10 +1110,10 @@ export default {
       controlTab: 0,
     countSchools(){
       //return this.passedSchools.length;
-      return this.passedSchools.length || this.responseCache.institution.length;
+      return this.passedSchools.length || this.responseCache.institution.length || compareSchools.length;
     },
     countFieldsOfStudy(){
-      return this.passedFieldsOfStudy.length || this.responseCache.fieldsOfStudy.length;
+      return this.passedFieldsOfStudy.length || this.responseCache.fieldsOfStudy.length || compareFieldsOfStudy.length;
     }      
     };
   },

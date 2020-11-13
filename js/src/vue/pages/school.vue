@@ -885,17 +885,23 @@
                                 <tooltip v-else-if="aidLoanSelect === 'plus' && !aidShowMedianDebtWithPrior" definition="parent-plus-avg-debt" :isBranch="isBranch" />
                                 <tooltip v-else-if="aidLoanSelect === 'plus' && aidShowMedianDebtWithPrior" definition="parent-plus-avg-debt-all-schools" :isBranch="isBranch" /> 
                           </h2>
-                          <p>Total debt after graduation depends on field of study for undergraduate borrowers who complete college.</p>
+                          <p v-if="aidLoanSelect === 'fed'">Total debt after graduation depends on field of study for undergraduate borrowers who complete college.</p>
                           <!--                          <v-checkbox-->
                           <!--                            v-model="aidShowMedianDebtWithPrior"-->
                           <!--                            label="Include debt borrowed at prior institutions"-->
                           <!--                          />-->
 
-                          <multi-range
+                          <multi-range v-if="aidLoanSelect === 'fed'"
                             :minmax="debtRange"
                             variable="debt"
                             :max=" { label: '$100,000', value: 100000 }"
                           />
+
+                      <h2
+                        class="display-2 navy-text font-weight-bold"
+                        v-if="parentPlusDebt && aidLoanSelect === 'plus'"
+                      >{{ parentPlusDebt | numeral('$0,0') }}</h2>
+                      <div class="data-na" v-else>Data Not Available</div>                        
 
                           <h2 class="mb-3">
                             Typical Monthly Loan Payment&nbsp;
@@ -910,19 +916,30 @@
                           <!--                            label="Include debt borrowed at prior institutions"-->
                           <!--                          />-->
 
-                          <div v-if="debtRange && debtRange.single">
+                          <div v-if="debtRange && debtRange.single && aidLoanSelect === 'fed'" >
                             <div
                               class="display-2 navy-text font-weight-bold"
                               v-if="debtRange.min"
                             >{{ _.get(debtRange,'min.payment') | numeral('$0,0') }}/mo</div>
                           </div>
-                          <div v-else-if="debtRange && debtRange.min">
+                          <div v-else-if="debtRange && debtRange.min && aidLoanSelect === 'fed'">
                             <div
                               class="display-2 navy-text font-weight-bold"
                               v-if="debtRange.min"
                             >{{ _.get(debtRange,'min.payment') | numeral('$0,0') }}-{{ debtRange.max.payment | numeral('0,0') }}/mo</div>
                           </div>
-                          <div v-else class="data-na">Data Not Available</div>
+                          <div v-else-if="aidLoanSelect === 'fed'" class="data-na">Data Not Available</div>
+
+                            <div v-else-if="aidLoanSelect === 'plus'">
+                              <div v-if="_.get(school, fields.PARENT_PLUS_LOAN_PAYMENT)">
+                                <h5 class="fos-small-data-bold navy-text">{{_.get(school, fields.PARENT_PLUS_LOAN_PAYMENT) | numeral('$0,0') }}</h5>
+                              </div>
+
+                              <div v-else class="mini-data-na text-center">
+                                Data Not Available
+                              </div>
+
+                            </div>                   
 
                           <p class="mt-2">
                             This is based on a standard 10-year payment plan, other
@@ -1997,7 +2014,7 @@ export default {
     params[
       this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
     ] = true;
-    params[this.fields.SIZE + "__range"] = "0..";
+    params[this.fields.SIZE + "__range"] = "1..";
     params[this.fields.PREDOMINANT_DEGREE + "__range"] = "1..3";
     params[this.fields.ID + "__range"] = "..999999";
     params["fields"] = "latest,school,id,location";
@@ -2006,19 +2023,16 @@ export default {
     // Note, Must add key as a param.
     let request = apiGet(window.api.url, window.api.key, '/schools/', { id: id })
       .then((response) => {
-        console.log(JSON.stringify(response));
         if (response.data.metadata.total > 1) {
           this.error = true;
           console.warn('More than one school found for ID: "' + id + '"');
           return null;
         }
-
-        if (!response.data.results.latest.student.size) {
+        else if (response.data.results[0].latest.student.size <= 0) {
           this.error = true;
-          console.warn('School size is 0 for ID: "' + id + '"');
+          console.warn('School has size <= 0 for ID: "' + id + '"');
           return null;
-        }        
-
+        }
         this.school = response.data.results[0];
         document.title = _.get(this.school, "school.name") + " | College Scorecard";
         // this.createMap(this.school);

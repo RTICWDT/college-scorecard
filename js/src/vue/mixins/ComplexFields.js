@@ -69,6 +69,10 @@ export default {
             if (!this.school) return null;
             return _.get(this.school, this.fields['NET_PRICE'])
         },
+        parentPlusDebt() {
+            if (!this.school) return null;
+            return _.get(this.school, this.fields['PARENT_PLUS_TOTAL_DEBT'])
+        },        
         undergraduates() {
             if (!this.school) return null;
             return _.get(this.school, this.fields['SIZE'])
