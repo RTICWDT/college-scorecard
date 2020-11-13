@@ -55,7 +55,16 @@
                   :compare-institutions-count="compareSchools.length"
                   :compare-fields-of-study-count="compareFieldsOfStudy.length"
                 >
-
+                  <template v-slot:tab-school>
+                    <h3 class="compare-tab-title">
+                      Schools ({{compareSchools.length}})
+                    </h3>
+                  </template>
+                  <template v-slot:tab-fos>
+                    <h3 class="compare-tab-title">
+                      Fields of Study ({{compareFieldsOfStudy.length}})
+                    </h3>
+                  </template>
 
                 </context-toggle>
               </div>
