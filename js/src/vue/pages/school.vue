@@ -926,22 +926,22 @@
                             <div
                               class="display-2 navy-text font-weight-bold"
                               v-if="debtRange.min"
-                            >{{ _.get(debtRange,'min.payment') | numeral('$0,0') }}/mo</div>
+                            >{{ Math.round(parseFloat(_.get(debtRange,'min.payment'))) | Math.round(parseFloat(numeral('$0,0'))) }}/mo</div>
                           </div>
                           <div v-else-if="debtRange && debtRange.min && aidLoanSelect === 'fed'">
                             <div
                               class="display-2 navy-text font-weight-bold"
                               v-if="debtRange.min"
-                            >{{ _.get(debtRange,'min.payment') | numeral('$0,0') }}-{{ debtRange.max.payment | numeral('0,0') }}/mo</div>
+                            >{{ Math.round(parseFloat(_.get(debtRange,'min.payment'))) | numeral('$0,0') }}-{{ Math.round(parseFloat(debtRange.max.payment)) | numeral('0,0') }}/mo</div>
                           </div>
                           <div v-else-if="aidLoanSelect === 'fed'" class="data-na">Data Not Available</div>
 
                             <div v-else-if="aidLoanSelect === 'plus'">
                               <div v-if="parentPlusPayment && !aidShowMedianDebtWithPrior">
-                                <h2 class="display-2 navy-text font-weight-bold">{{parentPlusPayment | numeral('$0,0') }}</h2>
+                                <h2 class="display-2 navy-text font-weight-bold">{{Math.round(parseFloat(parentPlusPayment))}}</h2>
                               </div>
                               <div v-else-if="parentPlusPaymentAll && aidShowMedianDebtWithPrior">
-                                <h2 class="display-2 navy-text font-weight-bold">{{parentPlusPaymentAll | numeral('$0,0') }}</h2>
+                                <h2 class="display-2 navy-text font-weight-bold">{{Math.round(parseFloat(parentPlusPaymentAll)) | numeral('$0,0') }}</h2>
                               </div>
                               <div v-else class="mini-data-na text-center">
                                 Data Not Available
@@ -1331,10 +1331,11 @@
                         <donut
                           color="#0e365b"
                           :value="acceptanceRate*100"
-                          v-if="openAdmissions!=1"
+                          v-if="openAdmissions!=1 && acceptanceRate"
                           chart-id="acceptance-chart"
                           :height="200"
                         ></donut>
+                        <p v-else-if="!acceptanceRate" class="data-na">Data Not Available</p>
                         <p v-else>This school has an open admissions policy.</p>
                       </v-col>
                     </v-row>
