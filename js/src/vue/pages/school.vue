@@ -465,7 +465,7 @@
                             >
                               <template v-slot:label>
                                 <span class="profile-fos-include-prior-debt">
-                                  Include debt borrowed at any prior<br class="d-sm-none"> institutions&nbsp
+                                  Include debt borrowed at any prior<br class="d-sm-none"> institution&nbsp;
                                   <tooltip definition="include-debt-prior-inst" />
                                 </span>
                               </template>
@@ -895,6 +895,7 @@
                             :minmax="debtRange"
                             variable="debt"
                             :max=" { label: '$100,000', value: 100000 }"
+                            :key="aidShowMedianDebtWithPrior"
                           />
 
                       <h2
