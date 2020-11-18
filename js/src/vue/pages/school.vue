@@ -926,13 +926,13 @@
                           <div v-if="debtRange && debtRange.single && aidLoanSelect === 'fed'" >
                             <div
                               class="display-2 navy-text font-weight-bold"
-                              v-if="debtRange.min"
-                            >{{ Math.round(parseFloat(_.get(debtRange,'min.payment'))) | Math.round(parseFloat(numeral('$0,0'))) }}/mo</div>
+                              v-if="debtRange.min.payment"
+                            >{{ Math.round(parseFloat(_.get(debtRange,'min.payment'))) | numeral('$0,0') }}/mo</div>
                           </div>
                           <div v-else-if="debtRange && debtRange.min && aidLoanSelect === 'fed'">
                             <div
                               class="display-2 navy-text font-weight-bold"
-                              v-if="debtRange.min"
+                              v-if="debtRange.min.payment && debtRange.max.payment"
                             >{{ Math.round(parseFloat(_.get(debtRange,'min.payment'))) | numeral('$0,0') }}-{{ Math.round(parseFloat(debtRange.max.payment)) | numeral('0,0') }}/mo</div>
                           </div>
                           <div v-else-if="aidLoanSelect === 'fed'" class="data-na">Data Not Available</div>
