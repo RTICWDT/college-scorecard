@@ -82,7 +82,7 @@
                   @click="trackOutboundLink($event)"
                   target="_blank"
                 >StackExchange</a> or email the help desk at
-                <a href="mailto:scorecarddata@rti.org">scorecarddata@rti.org</a> For inquiries by members of the press, please contact <a href="mailto:press@ed.gov">press@ed.gov</a>.
+                <a href="mailto:scorecarddata@rti.org">scorecarddata@rti.org</a>. For inquiries by members of the press, please contact <a href="mailto:press@ed.gov">press@ed.gov</a>.
               </p>
             </v-card>
           </v-col>

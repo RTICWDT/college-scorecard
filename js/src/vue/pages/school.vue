@@ -1116,7 +1116,7 @@
                          v-if="selectedFOSDetail"
                     >
                       <span class="field-of-study-select-icon mr-2"
-                            style="width: 35px;height: 35px;"
+                            style="width: 35px;height: 35px; float:left;"
                       >
                         <v-icon size="20">
                           fas fa-award

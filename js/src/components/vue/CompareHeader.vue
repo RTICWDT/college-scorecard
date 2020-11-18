@@ -70,7 +70,9 @@
   }  
 
   .compare-header-text {
-    display:inline-block;
+    line-height:1.5;
+    display: flex;
+    align-items: center;
   }
 </style>
 
