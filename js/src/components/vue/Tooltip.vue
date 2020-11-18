@@ -28,7 +28,10 @@
   }
 
   .tool-tip-dialog-title{
-    word-break: break-word;
+    word-break: normal;
+    word-wrap: break-word;
+     display:inline-block;
+   width:450px;
   }
 </style>
 
