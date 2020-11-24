@@ -14,66 +14,43 @@
               <p>
                 Download the data that appear on the College Scorecard, as well as
                 supporting data on student completion, debt and repayment, earnings,
-                and more.
+                and more. The data is available on <a href="https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources">data.ed.gov</a> and include the following data files:
               </p>
 
-              <p>
+              <ul>
+                <li>All Data Files
+                  <ul>
+                    <li>Institution-level data files for 1996-97 through 2018-19 containing aggregate data for each institution. Includes information on institutional characteristics, enrollment, student aid, costs, and student outcomes.</li>
+                    <li>Field of study-level data files for the pooled 2014-15, 2015-16 award years through the pooled 2015-16, 2016-17 award years containing data at the credential level and 4-digit CIP code combination for each institution. Includes information on cumulative debt at graduation and earnings one year after graduation.</li>
+                    <li>Crosswalk files for 2000-01 through 2018-19 that link the Department’s OPEID with an IPEDS UNITID for each institution.</li>
+                  </ul>
+                </li>
+                <li>Most Recent Institution-Level Data</li>
+                <li>Most Recent Data by Field of Study</li>
+              </ul>
+
+              <p class="pt-4">
                 This data was
-                <strong>last updated June 1, 2020</strong>.
+                <strong>last updated December 1, 2020</strong>.
               </p>
               <v-row>
-                <v-col cols="12" sm="4">
+                <v-col cols="12" sm="10" offset="1">
                   <v-card
                     class="pa-2 text-center fill-height d-flex align-center justify-center"
                     color="grey lighten-4"
-                    :href="dataBase_url+'/CollegeScorecard_Raw_Data.zip'"
-                    @click="trackDownload('CollegeScorecard_Raw_Data.zip')"
+                    href="https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources"
+                    target="_blank"
+                    @click="trackOutboundLink($event)"
                     hover
                   >
                     <div>
                       <p class="title font-weight-bold">
-                        All Data Files&nbsp;
-                        <simple-tooltip>
-                          <p>Contains the following data:</p>
-                          <ul>
-                            <li>Institution-level data files for 1996-97 through 2018-19 containing aggregate data for each institution. Includes information on institutional characteristics, enrollment, student aid, costs, and student outcomes.</li>
-                            <li>Field of study-level data files for the pooled 2014-15, 2015-16 award years through the pooled 2015-16, 2016-17 award years containing data at the credential level and 4-digit CIP code combination for each institution. Includes information on cumulative debt at graduation and earnings one year after graduation.</li>
-                            <li>Crosswalk files for 2000-01 through 2018-19 that link the Department’s OPEID with an IPEDS UNITID for each institution.</li>
-                          </ul>
-                        </simple-tooltip>
+                        Visit data.ed.gov To Download The Data&nbsp;
                       </p>
-                      <p>289 MB ZIP</p>
                     </div>
                   </v-card>
                 </v-col>
-                <v-col cols="12" sm="4">
-                  <v-card
-                    @click="trackDownload('Most-Recent-Cohorts-All-Data-Elements.csv')"
-                    :href="dataBase_url+'/Most-Recent-Cohorts-All-Data-Elements.csv'"
-                    hover
-                    class="pa-2 text-center fill-height d-flex align-center justify-center"
-                    color="grey lighten-4"
-                  >
-                    <div>
-                      <p class="title font-weight-bold">Most Recent Institution-Level Data</p>
-                      <p>148 MB CSV</p>
-                    </div>
-                  </v-card>
-                </v-col>
-                <v-col cols="12" sm="4">
-                  <v-card
-                    class="pa-2 text-center fill-height d-flex align-center justify-center"
-                    color="grey lighten-4"
-                    @click="trackDownload('Most-Recent-Field-Data-Elements.csv')"
-                    :href="dataBase_url+'/Most-Recent-Field-Data-Elements.csv'"
-                    hover
-                  >
-                    <div>
-                      <p class="title font-weight-bold">Most Recent Data by Field of Study</p>
-                      <p>51 MB CSV</p>
-                    </div>
-                  </v-card>
-                </v-col>
+                
               </v-row>
               <p class="mt-8">
                 <strong>Looking for help?</strong> Visit
