@@ -18,15 +18,15 @@
               </p>
 
               <ul>
-                <li>All Data Files
-                  <ul>
+                <li class="font-weight-bold">All Data Files
+                  <ul class="font-weight-regular">
                     <li>Institution-level data files for 1996-97 through 2018-19 containing aggregate data for each institution. Includes information on institutional characteristics, enrollment, student aid, costs, and student outcomes.</li>
                     <li>Field of study-level data files for the pooled 2014-15, 2015-16 award years through the pooled 2015-16, 2016-17 award years containing data at the credential level and 4-digit CIP code combination for each institution. Includes information on cumulative debt at graduation and earnings one year after graduation.</li>
                     <li>Crosswalk files for 2000-01 through 2018-19 that link the Department’s OPEID with an IPEDS UNITID for each institution.</li>
                   </ul>
                 </li>
-                <li>Most Recent Institution-Level Data</li>
-                <li>Most Recent Data by Field of Study</li>
+                <li class="font-weight-bold">Most Recent Institution-Level Data</li>
+                <li class="font-weight-bold">Most Recent Data by Field of Study</li>
               </ul>
 
               <p class="pt-4">
@@ -44,9 +44,9 @@
                     hover
                   >
                     <div>
-                      <p class="title font-weight-bold">
+                      <span class="title font-weight-bold">
                         Visit data.ed.gov To Download The Data&nbsp;
-                      </p>
+                      </span>
                     </div>
                   </v-card>
                 </v-col>
