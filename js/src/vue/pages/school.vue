@@ -853,7 +853,7 @@
                               <tooltip definition="student-aid" />
                             </h2>
                             <donut
-                              v-if="studentsReceivingLoans"
+                              v-if="studentsReceivingLoans || studentsReceivingLoans == '0'"
                               color="#0e365b"
                               :value="studentsReceivingLoans * 100"
                               :height="200"

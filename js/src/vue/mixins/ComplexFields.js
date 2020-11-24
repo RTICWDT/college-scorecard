@@ -429,7 +429,7 @@ export default {
             ){
                 return null;
             }
-            console.log( _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MIN']));
+
             return this.formatParentPlusText(
               _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MIN']),
               _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MAX'])

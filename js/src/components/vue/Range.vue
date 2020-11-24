@@ -82,7 +82,7 @@
   $label-height: 1.5em;
   $label-offset: 1.5em;
   $label-margin: $label-offset + $label-height;
-  $label-width: 8em;
+  $label-width: 10em;
 
   background-color: $light-gray;
   display: block;
@@ -141,6 +141,14 @@
     &.picc-range-label-upper {
       border-left: none;
       border-right: 3px solid $dark-blue;
+      span {
+        padding-left:.25em;
+      }
+    }
+    &.picc-range-label-lower {
+      span {
+        padding-right:.25em;
+      }
     }
 
     &.picc-range-label-min,
@@ -258,7 +266,7 @@ export default {
     },
     _lower() {
       // return this.styleLabel(this.lower);
-      let styleLabel = this.styleLabel(this.lower);
+      let styleLabel = this.styleLabel(this.lower, true);
       styleLabel.styles = {
         ...styleLabel.styles,
         ...this.lower.styles
@@ -270,7 +278,7 @@ export default {
     },
     _upper() {
       // return this.styleLabel(this.upper);
-      let styleLabel = this.styleLabel(this.upper);
+      let styleLabel = this.styleLabel(this.upper, false);
       styleLabel.styles = {
         ...styleLabel.styles,
         ...this.upper.styles
@@ -300,8 +308,9 @@ export default {
     percent(v) {
       return (this.scale(v) * 100).toFixed(1) ;
     },
-    styleLabel(obj) {
+    styleLabel(obj, fixLabels=false) {
       let newObj = { ...obj };
+      console.log(newObj);
       newObj.styles = {};
       newObj.styles.display = newObj.label ? "block" : "none";
       let left = this.percent(newObj.value);
