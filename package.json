@@ -96,6 +96,10 @@
       "json",
       "vue"
     ],
+    "moduleDirectories": [
+      "node_modules",
+      "js/src"
+    ],
     "transform": {
       ".*\\.(vue)$": "vue-jest",
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
