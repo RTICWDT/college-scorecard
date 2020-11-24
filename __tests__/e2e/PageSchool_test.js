@@ -38,13 +38,13 @@ Scenario('Visit page and see all major page components.', (I) => {
   I.seeElement(locate('.school-key_figures li.icon-medium').withText('Medium'));
 
   //Hero Stats
-  I.seeElement('#school-completion-rate-donut canvas#doughnut-chart');
+  I.seeElement('#school-completion-rate-bar canvas#horizontalbar-chart');
   I.seeElement('#school-salary-after-complete .range-container .range-chart');
   I.seeElement(locate('#school-avg-cost h2').at(2));
 
   // Check number of expansion panels.
   I.seeNumberOfVisibleElements(".v-expansion-panel",7);
-  I.click(locate('.v-expansion-panel').at('1'));
+  I.click(locate('.v-expansion-panel').at('2'));
   I.seeElement('#costs-content');
 
   // Sidebar conent
@@ -58,8 +58,8 @@ Scenario('Visit page and test compare functionality', (I) => {
 
   I.click(locate('#school-sub-nav-header button').withText('Compare'));
   I.wait(1);
-  I.seeElement('#compare-header');
-  I.click('#compare-header');
-  I.seeElement('#compare_schools-content');
-  I.seeElement(locate('#compare_schools-content label').withText('Yale University'));
+  //I.seeElement('#compare-header');
+  //I.click('#compare-header');
+  I.seeElement('#compare-schools-content');
+  I.seeElement(locate('#compare-schools-content label').withText('Yale University'));
 });
