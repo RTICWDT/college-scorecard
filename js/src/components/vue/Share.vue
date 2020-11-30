@@ -81,10 +81,10 @@ export default {
     computed: {
       items(){
         let shareOptions =  [
-            { title: 'Twitter' , 'url': 'https://twitter.com/intent/tweet?text='+this.sentence+'&amp;url='},
+            { title: 'Twitter' , 'url': 'https://twitter.com/intent/tweet?text='+this.sentence+'&url='},
             { title: 'Facebook', 'url': 'https://www.facebook.com/sharer/sharer.php?u=' },
             { title: 'Email', 'url': 'mailto:?subject='+this.sentence.slice(0,-1)+'&body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A' }, 
-            { title: 'LinkedIn', 'url': 'https://www.linkedin.com/shareArticle?mini=true&url='},
+            { title: 'LinkedIn', 'url': 'https://www.linkedin.com/sharing/share-offsite/?url='},
         ];
 
         // Remove items that that should be hidden

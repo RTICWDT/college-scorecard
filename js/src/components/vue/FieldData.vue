@@ -7,14 +7,21 @@
         <p v-else>--</p>        
       </v-col>
       <v-col cols="12" sm="4" class="pa-0">
-        <p class="overline mb-0">Median Total Debt&nbsp;<tooltip definition="fos-median-debt" :isBranch="isBranch" /></p>
-        <p v-if="fos.debt.median_debt" >{{fos.debt.median_debt | numeral('$0,0') }}</p>
+        <p class="overline mb-0">Median Total Debt&nbsp;
+          <tooltip v-if="!fosShowDebtAtPrior" definition="fos-median-debt" :isBranch="isBranch" />
+          <tooltip v-else-if="fosShowDebtAtPrior" definition="fos-median-debt-all-schools" :isBranch="isBranch" />
+        </p>
+        <p v-if="fos.debt.staff_grad_plus.all.eval_inst.median && !fosShowDebtAtPrior">{{fos.debt.staff_grad_plus.all.eval_inst.median | numeral('$0,0') }}</p>
+        <p v-else-if="debt.staff_grad_plus.all.all_inst.median && fosShowDebtAtPrior">{{debt.staff_grad_plus.all.all_inst | numeral('$0,0') }}</p>
         <p v-else>--</p>
       </v-col>
       <v-col cols="12" sm="4" class="pa-0">
-        <p class="overline mb-0">Monthly Loan Payment&nbsp;<tooltip definition="fos-monthly-debt-payment" :isBranch="isBranch" :version="[5,6,7,8].indexOf(fos.credential.level)<0?'default':'graduate'" /></p>
-        <p v-if="fos.debt.median_debt">{{fos.debt.monthly_debt_payment | numeral('$0,0') }}/mo.</p>
-        <p v-else>--</p>
+        <p class="overline mb-0">Monthly Loan Payment&nbsp;
+          <tooltip v-if="!fosShowDebtAtPrior" definition="fos-monthly-debt-payment" :isBranch="isBranch" :version="[5,6,7,8].indexOf(fos.credential.level)<0?'default':'graduate'" />
+          <tooltip v-else-if="fosShowDebtAtPrior" definition="fos-monthly-debt-payment-all-schools" :isBranch="isBranch" :version="[5,6,7,8].indexOf(fos.credential.level)<0?'default':'graduate'" />
+          </p>
+        <p v-if="fos.debt.staff_grad_plus.all.eval_inst.median_payment && !fosShowDebtAtPrior">{{fos.debt.staff_grad_plus.all.eval_inst.median_payment| numeral('$0,0') }}/mo.</p>
+        <p v-else-if="fos.debt.staff_grad_plus.all.all_inst.median_payment && fosShowDebtAtPrior">{{fos.debt.staff_grad_plus.all.all_inst.median_payment| numeral('$0,0') }}/mo.</p>
       </v-col>
   </v-row>
   <v-row>

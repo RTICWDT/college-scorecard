@@ -111,7 +111,8 @@ Scenario('Test Show Me Options: Simple Elements', (I) => {
 Scenario('Test Custom Search', (I) => {
   I.amOnPage(BASE_URL);
 
-  I.click(locate('.v-tab').withText("Custom Search"));
+  I.click(locate('.v-tab').withText("Search Schools"));
+  I.click(locate('button').withText('Custom Search'));
   
   I.seeElement(locate(".v-window-item p").withText("Location"));
   I.click('#search-from-location-select');

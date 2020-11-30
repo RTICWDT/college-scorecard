@@ -6,7 +6,7 @@
       </template>
       <v-card>
         <v-btn @click="showDialog = false" icon class='float-right mt-3 mr-3'><v-icon>fas fa-times-circle</v-icon></v-btn>
-        <v-card-title>{{title}}</v-card-title>
+        <v-card-title class="tool-tip-dialog-title">{{title}}</v-card-title>
         <v-card-text class='pb-5'>
           <div v-html="content"></div>
           <p v-if="limitedFoS">The data shown is for undergraduate fields of study (undergraduate certificates, associate's degrees, and bachelor's degrees) for which there is data. For more information on other credentials, including Graduate-level degrees and certificates, see <a :href='limitedFoS'>All Fields of Study</a> for this school.</p>
@@ -23,9 +23,16 @@
 </template>
 
 <style lang="scss" scoped>
-.csTooltip {
-  font-size: 1rem;
-}
+  .csTooltip {
+    font-size: 1rem;
+  }
+
+  .tool-tip-dialog-title{
+    word-break: normal;
+    word-wrap: break-word;
+     display:inline-block;
+   width:450px;
+  }
 </style>
 
 <script>
@@ -58,7 +65,11 @@ export default {
     showInfo:{
       type: Boolean,
       default: true
-    }
+    },
+    isNegative:{
+      type: Boolean, 
+      default: false
+    }    
   },
   data() {
     return {
@@ -76,7 +87,9 @@ export default {
       return this.entry['title'];
     },
     content() {
-      if(this.isCompare && this.entry['compare']) return this.entry['compare'];
+      if(this.isNegative && this.entry['negative']) return this.entry['negative'];
+      else if(this.isCompare && this.entry['compare']) return this.entry['compare'];
+      else if(this.isGraduate && this.entry['graduate']) return this.entry['graduate'];
       else return this.entry[this.version];
     },
     info(){

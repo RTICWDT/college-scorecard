@@ -31,6 +31,14 @@ export default {
     type:{
       type: String, 
       default: 'percent'
+    },
+    yBarThickness:{
+      type: Number,
+      default: 25
+    },
+    labelFontSize:{
+      type: Number,
+      default: 15
     }
   },
   data() {
@@ -57,7 +65,7 @@ export default {
           ],
           yAxes: [
             {
-              barThickness: 25,
+              barThickness: this.yBarThickness,
               display: false,
               stacked: true
             }
@@ -66,14 +74,18 @@ export default {
         plugins: {
           datalabels: {
             display: this.labels,
-            font: function(context){
-              if(context.chart.height<20)
-              {
-                return { size: 10 }
-              }
-              else
-              {
-                return { size: 15 }
+            font: (context) => {
+              if(this.labelFontSize != '15'){
+                return { size: this.labelFontSize}
+              }else{
+                if(context.chart.height<20)
+                {
+                  return { size: 10 }
+                }
+                else
+                {
+                  return { size: 15 }
+                }
               }
             },
             color: function(context){
@@ -101,6 +113,7 @@ export default {
               }
             },
             anchor: 'end',
+            clamp: true,
             formatter: function(value, context) {
               if(context.datasetIndex==0)
               {

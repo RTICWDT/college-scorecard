@@ -1,24 +1,26 @@
 export const compare = {
-    data: function () {
-      return {
-        showCompare: false,
-      }
+  data: function () {
+    return {
+      showCompare: false,
+      showInfoText: false
+    };
+  },
+  computed:{
+  },
+  methods:{
+    handleToggleCompareSchool(school) {
+      this.$emit("toggle-compare-school", school);
     },
-    computed:{
-        isSelected() {
-        if (_.findIndex(this.compareSchools, ["schoolId", String(_.get(this.school, this.fields['ID']))]) >= 0) {
-            return true;
-        }
-        return false;
-        }
+    handleToggleCompareItem(item,key) {
+      this.$emit("toggle-compare-school", item,key);
     },
-    methods:{
-        handleToggleCompareSchool(school) {
-            this.$emit("toggle-compare-school", school);
-        },
-        closeModal(){
-            this.showCompare = false;
-        }
+    closeModal(){
+      this.showCompare = false;
+      this.showInfoText = false;
+    },
+    isSelected(data,collection) {
+      return _.findIndex(collection, data) >= 0;
     }
   }
+}
   
