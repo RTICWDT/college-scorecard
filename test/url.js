@@ -1,7 +1,7 @@
 /* jshint node: true */
 var url = 'http://localhost:4000';
 var env = process.env;
-
+console.log(env);
 var branch = env.CIRCLE_BRANCH;
 var user = env.CIRCLE_PROJECT_USERNAME;
 var repo = env.CIRCLE_PROJECT_REPONAME;
