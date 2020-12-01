@@ -40,7 +40,7 @@ buildtest: &buildtest
 
     - run:
         name: Wait for Federalist Build
-        command: ./test/ci.sh
+        command: ./__tests__/utility/ci.sh
 
     - run:
         name: Wait Buffer for browser testing
