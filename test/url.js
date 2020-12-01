@@ -20,7 +20,6 @@ if (branch === 'master') {
   }
 }
 
-
 if (module.parent) {
   if (env.CIRCLE_PR_USERNAME && env.CIRCLE_PR_USERNAME != user) {
     console.warn('exiting from forked branch');
