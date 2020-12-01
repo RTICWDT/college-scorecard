@@ -10,7 +10,7 @@ if (branch === 'master') {
   url = 'https://collegescorecard.ed.gov';
 } else if (branch && user && repo) {
   var path = [user, repo, branch].join('/');
-  if(repo=='private-scorecard')
+  if(repo=='RTICWDT/private-scorecard')
   {
     url = 'https://federalist-d623c0f7-8399-4159-ab13-eaae6047be2e.app.cloud.gov/' + path.toLowerCase();
   }
