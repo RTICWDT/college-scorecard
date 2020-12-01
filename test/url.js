@@ -1,7 +1,6 @@
 /* jshint node: true */
 var url = 'http://localhost:4000';
 var env = process.env;
-console.log(env);
 var branch = env.CIRCLE_BRANCH;
 var user = env.CIRCLE_PROJECT_USERNAME;
 var repo = env.CIRCLE_PROJECT_REPONAME;
@@ -12,7 +11,7 @@ if (branch === 'master') {
   var path = [user, repo, branch].join('/');
   if(repo==='private-scorecard')
   {
-    url = 'https://federalist-d623c0f7-8399-4159-ab13-eaae6047be2e.app.cloud.gov/preview/' + path.toLowerCase();
+    url = 'https://federalist-a267b602-ea49-4771-8115-ea94f984a5ca.app.cloud.gov/preview/' + path.toLowerCase();
   }
   else
   {
