@@ -12,7 +12,7 @@ if (branch === 'master') {
   var path = [user, repo, branch].join('/');
   if(repo=='private-scorecard')
   {
-    url = 'https://federalist-d623c0f7-8399-4159-ab13-eaae6047be2e.app.cloud.gov/' + path.toLowerCase();
+    url = 'https://federalist-d623c0f7-8399-4159-ab13-eaae6047be2e.app.cloud.gov/preview/' + path.toLowerCase();
   }
   else
   {
