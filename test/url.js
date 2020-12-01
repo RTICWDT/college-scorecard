@@ -26,6 +26,7 @@ if (module.parent) {
     process.exit(0);
     module.exports = '';
   } else {
+    console.log(repo);
     module.exports = url;
   }
 } else {
