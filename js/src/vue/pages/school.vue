@@ -1100,7 +1100,7 @@
                     class="px-0 py-3 pa-sm-5"
                   >
                     <div>
-                      <p>Typical earnings in the first year after graduation with the range of highest and lowest
+                      <p>Typical earnings in the second year after graduation with the range of highest and lowest
                         median earnings for undergraduate and credential programs for which there is data.
                         For more information, see <a :href='fieldsLink'>All Fields of Study</a> for this school.
                       </p>

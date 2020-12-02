@@ -31,7 +31,7 @@
 
               <p class="pt-4">
                 This data was
-                <strong>last updated December 1, 2020</strong>.
+                <strong>last updated December 2, 2020</strong>.
               </p>
               <v-row>
                 <v-col cols="12" sm="10" offset="1">
