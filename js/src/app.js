@@ -27,6 +27,7 @@ import './vue/mixins.js'
 import './plugins/chartjs.js';
 import {localStorageKeys} from './vue/constants.js';
 import {LocalStorage} from './vue/localStoage.js';
+import {EventBus} from './vue/EventBus.js';
 
 import ScorecardHeader from './components/vue/ScorecardHeader.vue';
 import ScorecardFooter from './components/vue/ScorecardFooter.vue';
@@ -57,7 +58,8 @@ new Vue({
       }
     },
     isLoading: true,
-    compareSchools:null
+    compareSchools:null,
+    compareFieldsOfStudy:null
   },
   components:{
     'index-page': IndexPage,
@@ -81,13 +83,14 @@ new Vue({
     // Refresh Compare Schools from Local Storage.
     refreshCompareSchools(){
       this.compareSchools = LocalStorage.selectAll(localStorageKeys.COMPARE_KEY);
+      this.compareFieldsOfStudy = LocalStorage.selectAll(localStorageKeys.COMPARE_FOS_KEY);
     },
     // Toggle Compare School in local storage.
     toggleCompareSchool(school){
-      // Prepare Data, Make a call to the picc function.    
+      // Prepare Data, Make a call to the picc function.
       let schoolData = {
         dataset:{
-          bind:"selected_school",
+          // bind:"selected_school",
           school:"compare-schools",
           schoolId: (school.schoolId) ? String(school.schoolId) : String(school.id),
           schoolName: (school.schoolName) ? school.schoolName : school['school.name'],
@@ -97,6 +100,46 @@ new Vue({
       // picc.school.selection.vueToggle(schoolData);
       LocalStorage.toggleCompare(schoolData, localStorageKeys.COMPARE_KEY);
       this.refreshCompareSchools();
+    },
+    // General function for adding item to local storage
+    toggleCompareItem(item, storageKey = localStorageKeys.COMPARE_KEY){
+      // Need where it goes,
+      let data = {};
+
+      let previousCompareCount = this.compareSchools.length + this.compareFieldsOfStudy.length;
+
+      switch (storageKey) {
+        case localStorageKeys.COMPARE_KEY:
+          data = {
+            schoolId: (item.schoolId) ? String(item.schoolId) : String(item.id),
+            schoolName: (item.schoolName) ? item.schoolName : item['school.name'],
+          }
+          break;
+        case localStorageKeys.COMPARE_FOS_KEY:
+          data = {
+            institutionName: item.institutionName,
+            credentialTitle: item.credentialTitle,
+            fosTitle: item.fosTitle,
+            id: item.id,
+            code: item.code,
+            credentialLevel: item.credentialLevel
+          }
+          break;
+        default:
+          data = {
+            schoolId: (item.schoolId) ? String(item.schoolId) : String(item.id),
+            schoolName: (item.schoolName) ? item.schoolName : item['school.name'],
+          }
+          break;
+      }
+
+      LocalStorage.toggleCompare(data, storageKey);
+      this.refreshCompareSchools();
+
+      // Toggle compare drawer when first element is added.
+      if(previousCompareCount === 0){
+        EventBus.$emit('compare-drawer-show', true);
+      }
     }
   }
 });

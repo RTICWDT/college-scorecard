@@ -46,7 +46,7 @@
             dense
             :prefix="prefix"
             :suffix="appendText"
-            style="width: 100px;"
+            style=""
             :aria-labelledby="generatedId"
           ></v-text-field>
         </template>

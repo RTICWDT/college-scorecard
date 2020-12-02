@@ -1,20 +1,73 @@
 <style lang="scss">
-.canned-search-wrapper {
-  margin-bottom: 8px;
-}
-.pageBar{
-  background-color: rgba(255,255,255,0.7) !important;
-}
-.searchFab{
-  z-index: 500 !important;
-}
+  .canned-search-wrapper {
+    margin-bottom: 8px;
+  }
 
+  .pageBar{
+    background-color: rgba(255,255,255,0.7) !important;
+  }
+
+  .searchFab{
+    z-index: 500 !important;
+    bottom: 64px;
+  }
+
+  #search-fos-cip-warning{
+    width: 100%;
+
+    p{
+      font-size: 13px;
+      margin-bottom: 0;
+    }
+
+    @media (min-width: 960px){
+      p{
+        font-size: 14px;
+      }
+    }
+
+    a{
+      color: white !important;
+    }
+
+    @media (min-width: 960px){
+      width: 60%;
+    }
+  }
+
+  #search-fos-cip-filter-warning{
+    p{
+      font-size: 13px;
+    }
+
+    .v-alert__border{
+      border-width: 6px;
+    }
+
+    .v-icon{
+      font-size: 38px;
+    }
+
+    @media (min-width: 960px){
+      p{
+        font-size: 16px;
+      }
+    }
+
+  }
 </style>
 
 <template>
   <div>
     <v-app id="search">
-      <scorecard-header />
+
+      <scorecard-header
+        active-link="search"
+        :compare-institutions-count="compareSchools.length"
+        :compare-fields-of-study-count="compareFieldsOfStudy.length"
+      />
+
+      <!-- Search Form -->
       <v-navigation-drawer
         v-model="showSidebar"
         app
@@ -22,20 +75,49 @@
         class="searchSidebar"
         clipped
       >
+        <div class="context-toggle-container pa-5 grey lighten-3">
+          <h3 class="mb-2">
+            Showing Results For:
+          </h3>
+
+          <context-toggle
+            :display-toggle="displayToggle"
+            :control-tab="controlTab"
+            @context-switch-click="handleContextToggle"
+            @context-tab-change="handleContextToggle"
+          />
+        </div>
+
+
         <!-- Search Form Component -->
         <search-form
+          v-if="displayToggle === 'institutions'"
           :urlParsedParams="urlParsedParams"
           auto-submit
           display-all-filters
-          @search-query="searchAPI"
+          @search-query="handleInstitutionSearch"
         />
+
+        <!-- Search Fields of Study Component -->
+        <search-fos-form
+          v-else-if="displayToggle === 'fos'"
+          :url-parsed-params="urlParsedParams"
+          auto-submit
+          @search-query="handleFieldOfStudySearch"
+        />
+
       </v-navigation-drawer>
+
       <v-content>
         <v-container fluid class="pa-0">
           <div id="search-result-container" class='pa-sm-8 pa-2'>
+
             <div class="search-result-container">
+
+              <!-- Search Result Info and controls -->
               <v-card  class="mt-2 mb-4 py-1 px-4 elevaton-0 pageBar" v-if="!isLoading">
                 <v-row class="pa-0">
+
                   <v-col cols="12" sm="7" class="py-2 px-4">
                     <div id="search-result-info-count" class>
                       <p class="title mb-0">{{results.meta.total | separator }} Results
@@ -53,6 +135,7 @@
                             <span class='sr-only'>Clear Search</span>
                           </span>
                         </v-btn>
+
                         <v-btn
                           id="search-button-clear"
                           color="primary"
@@ -66,6 +149,7 @@
                             <v-icon small class='mr-1'>mdi-close-circle</v-icon> Clear
                           </span>
                         </v-btn>
+
                         <v-menu offset-y>
                         <template v-slot:activator="{ on }">
                           <v-btn id="search-button-sort" rounded color="primary" small v-on="on" class="d-none d-sm-inline">
@@ -78,8 +162,7 @@
                               v-for="(item, index) in sorts"
                               :key="item.field"
                               @click="resort(item.field);"
-                              :value="item.field"                              
-                              
+                              :value="item.field"
                             >
                               <v-list-item-title>{{ item.type }}</v-list-item-title>
                             </v-list-item>
@@ -106,38 +189,94 @@
                           </v-list-item-group>
                         </v-list>
                       </v-menu>
-                       <share :url="shareUrl" label="Share" small show-copy :hide="['email']" />
+                       <share :url="encodeURIComponent(shareUrl)" label="Share" small show-copy :hide="['email']" />
                       </p>
                     </div>
                   </v-col>
+
                   <v-col cols="12" sm="5" class="py-1 px-1" v-if="!isLoading && results.schools.length > 0">
                     <div class="text-md-right">
                       <v-pagination
                         v-model="input.page"
                         :length="totalPages"
                         :total-visible="7"
-                        @input="searchAPI(parseURLParams())"
+                        @input="handlePaginationInput"
                         class='pr-0 mr-0'
                         circle
                       ></v-pagination>
                     </div>
                   </v-col>
+
                 </v-row>
               </v-card>
-            <div id="search-can-query-container" v-if="!isLoading && results.schools.length === 0">
-            <!-- <div id="search-can-query-container" v-if="!isLoading"> -->
-              <v-row>
-                <v-col cols="12">
-                  <v-card class='pa-5'>
-                    <h3>Show Me Options</h3>
-                    <p>Select one or more options below to create a list of schools that fit your needs.</p>
-                    <canned-search-container @canned-search-submit="handleCannedSearchClick"></canned-search-container>
-                  </v-card>
-                </v-col>
-             </v-row>
-            </div>
+
+              <!-- Field Of Study CIP 4 Information -->
+              <div v-if="displayToggle === 'fos' && !isLoading"
+                   id="search-fos-cip-warning"
+                   class="my-2"
+              >
+                <p class="white--text">
+                  <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
+                  Classification of Instructional Programs (CIP) and may not match the program titles at a
+                  given school.
+                  <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">
+                    Learn more about CIP
+                    <v-icon
+                      x-small
+                      color="white"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>
+
+                  </a>
+
+<!--                  <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">-->
+
+<!--                  </a>-->
+
+                </p>
+              </div>
+
+              <!-- No Results/Canned Search/ -->
+              <div id="search-can-query-container"
+                v-if="!isLoading && results.schools.length === 0"
+              >
+                <v-row>
+                  <v-col cols="12" v-if="displayToggle === 'institutions'">
+                    <v-card class='pa-5'>
+                      <h3>Show Me Options</h3>
+                      <p>Select one or more options below to create a list of schools that fit your needs.</p>
+                      <canned-search-container @canned-search-submit="handleCannedSearchClick"></canned-search-container>
+                    </v-card>
+                  </v-col>
+
+                  <v-col cols="12" v-if="displayToggle === 'fos'">
+                    <v-card class='pa-5 text-center'>
+                      <h3 class="text-center">No Results Found</h3>
+                      <br>
+                      <v-btn
+                        id="search-button-clear-filters"
+                        color="primary"
+                        text-color="white"
+                        @click="clearSearchForm"
+                        rounded
+                      >
+                        <span>
+                          <v-icon class='mr-1'>mdi-close-circle</v-icon> Clear Search Filters
+                        </span>
+                      </v-btn>
+
+
+                    </v-card>
+                  </v-col>
+                </v-row>
+              </div>
+
+              <!-- Main Search Results -->
               <div class="results-main-alert">
-                <div class="show-loading" v-show="isLoading">
+
+                <!-- Loading -->
+                <div class="show-loading mt-2" v-show="isLoading">
                   <v-card class="py-4 px-4 pageBar">
                     <h1 class="title">
                       Loading
@@ -146,13 +285,16 @@
                   </v-card>
                 </div>
 
+                <!-- Search Query Error-->
                 <div class="show-error" v-show="error.message">
                   <h1>Something went wrong:</h1>
                   <p class="error-message">{{error.message}}</p>
                 </div>
 
+                <!-- Institution Results -->
                 <div class="search-result-cards-container" v-if="!isLoading">
-                  <v-row>
+                  <!-- Institution Results -->
+                  <v-row v-if="displayToggle === 'institutions'">
                     <v-col
                       v-for="school in results.schools"
                       :key="school.id"
@@ -169,14 +311,35 @@
                       />
                     </v-col>
                   </v-row>
+
+                  <!-- Fields of Study Results -->
+                  <v-row v-else>
+                    <v-col
+                      v-for="school in results.schools"
+                      :key="school.id"
+                      cols="12"
+                      lg="12"
+                      md="12"
+                      sm="12"
+                      class="d-flex align-stretch"
+                    >
+                      <fos-result-card
+                        :school="school"
+                        :selected-fields-of-study="compareFieldsOfStudy"
+                        @toggle-compare-item="handleToggleCompareItem"
+                      />
+                    </v-col>
+
+                  </v-row>
                 </div>
 
+                <!-- Field of Study Results -->
                 <div class="search-result-cards-container" v-else>
-                  <!-- Fake Cards -->
+
                 </div>
               </div>
-              <!--results-main -->
 
+              <!-- Bottom Pagination -->
               <v-card class="mt-4 mb-2 py-1 px-4 pageBar elevation-0"  v-if="!isLoading && results.schools.length > 0">
                 <v-row>
                   <v-col cols="12" class='pa-1'>
@@ -185,7 +348,7 @@
                         v-model="input.page"
                         :length="totalPages"
                         :total-visible="7"
-                        @input="searchAPI(parseURLParams())"
+                        @input="handlePaginationInput"
                         circle
                       ></v-pagination>
                      
@@ -193,13 +356,14 @@
                   </v-col>
                 </v-row>
               </v-card>
+
             </div>
           </div>
 
+          <!-- Floating Mobile Search Button -->
           <v-btn
             fab
             fixed
-            bottom
             right
             color="secondary"
             rounded
@@ -209,17 +373,26 @@
           >
             <v-icon>fas fa-search</v-icon>
           </v-btn>
+
         </v-container>
       </v-content>
       
       <scorecard-footer />
 
-      <compare-header :showCompare.sync="showCompare" :schools="compareSchools" />
+      <compare-header
+        :showCompare.sync="showCompare"
+        :schools="compareSchools"
+        :fields-of-study="compareFieldsOfStudy"
+      />
+
       <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
         <compare-drawer
           :schools="compareSchools"
-          @toggle-compare-school="handleToggleCompareSchool"
+          :fields-of-study="compareFieldsOfStudy"
+          :show-info-text="showInfoText"
+          @toggle-compare-school="handleToggleCompareItem"
           v-on:close-modal="closeModal()"
+          @toggle-more-info="showInfoText = !showInfoText"
         ></compare-drawer>
       </v-bottom-sheet>
     </v-app>
@@ -240,10 +413,12 @@ import Share from "../../components/vue/Share.vue";
 import NameAutocomplete from "../../components/vue/NameAutocomplete.vue";
 import URLHistory from "../mixins/URLHistory.js";
 import PrepareParams from '../mixins/PrepareParams.js';
+import ContextToggle from '../../components/vue/ContextToggle.vue';
+import SearchFieldsOfStudyForm from '../../components/vue/SearchFieldsOfStudyForm.vue';
+import FieldOfStudyResultCard from '../../components/vue/FieldOfStudyResultCard.vue';
+import { compare } from "vue/mixins.js";
 
 import _ from "lodash";
-// import querystring from 'querystring';
-// import { EventBus } from "../js/src/vue/EventBus.js";
 import { EventBus } from "../EventBus.js";
 import {apiGet} from '../api.js';
 import {fields} from '../constants.js';
@@ -259,9 +434,12 @@ export default {
     "canned-search-container": CannedSearchContainer,
     "compare-header": CompareHeader,
     "share": Share,
-    "name-autocomplete": NameAutocomplete
+    "name-autocomplete": NameAutocomplete,
+    'context-toggle': ContextToggle,
+    'search-fos-form': SearchFieldsOfStudyForm,
+    'fos-result-card': FieldOfStudyResultCard
   },
-  mixins:[URLHistory,PrepareParams],
+  mixins:[URLHistory, PrepareParams, compare],
   props: {
     "page-permalink": String,
     states: Array,
@@ -273,7 +451,8 @@ export default {
       default: "completion_rate:desc"
     },
     isLoading: Boolean,
-    compareSchools: Array
+    compareSchools: Array,
+    compareFieldsOfStudy: Array
   },
   data() {
     return {
@@ -297,6 +476,7 @@ export default {
         formDefault: {},
         initailized: false,
         sortFAB: null,
+        previousParams:{}
       },
       error: {
         message: null
@@ -307,7 +487,10 @@ export default {
         { type: "Annual Cost", field: "avg_net_price:asc" },
         { type: "Graduation Rate", field: "completion_rate:desc" }
       ],
-      shareUrl: null
+      shareUrl: null,
+      displayToggle: 'institutions',
+      controlTab: 1,
+      fieldOfStudyTotalCountWithoutRangeFilters: 0
     };
   },
   created() {
@@ -326,12 +509,31 @@ export default {
       ? Number(this.urlParsedParams.page) + 1
       : 1;
 
+    // Set Toggle Value - Default to institutions
+    if(typeof this.urlParsedParams.toggle === 'undefined' || this.urlParsedParams.toggle === 'institutions' ){
+      this.displayToggle = 'institutions';
+      this.controlTab = 0;
+    }else{
+      this.displayToggle = 'fos';
+      this.controlTab = 1;
+    }
+
     // Create Debounce function for this page.
     this.debounceSearchUpdate = _.debounce(function(params) {
-      this.searchAPI(params, true);
+      // this.searchAPI(params, true);
+      if(this.displayToggle === 'institutions'){
+        this.handleInstitutionSearch(params);
+      }else{
+        this.handleFieldOfStudySearch(params);
+      }
     }, 1000);
   },
-  mounted() {},
+  mounted() {
+    EventBus.$on('compare-drawer-show', (showCompareInfo) => {
+        this.showCompare = true;
+        this.showInfoText = showCompareInfo;
+    });
+  },
   computed: {
     totalPages() {
       if (this.results.meta.per_page && this.results.meta.total) {
@@ -340,19 +542,40 @@ export default {
         // return the maximum amount of pages if operation produces a float.
         return Math.ceil(totalPages);
       }
+    },
+    showFieldOfStudyWarning(){
+      if(this.displayToggle !== 'fos'){
+        return false;
+      }
+
+      if(this.isLoading){
+        return false;
+      }
+
+      if(typeof this.utility.previousParams.fos_salary != 'undefined' || typeof this.utility.previousParams.fos_debt != 'undefined'){
+        return true;
+      }
+    },
+    fieldOfStudyRangeFiltersHidingCount(){
+      // Total count minus showing count.
+      if(this.fieldOfStudyTotalCountWithoutRangeFilters > 0 && this.results.meta.total > 0){
+        return this.fieldOfStudyTotalCountWithoutRangeFilters - this.results.meta.total;
+      }else{
+        return 0;
+      }
     }
   },
   methods: {
-    searchAPI(params = {}) {
+    searchAPI(params = {}, returnFields = [], allPrograms = true) {
       // TODO - Clean this method up, It does way more than just SearchAPI.
-      // Better Encapsilation.
+      // Better Encapsulation.
 
       this.$emit("loading", true);
 
       this.error.message = null;
 
-      let poppingState = false;
-      let alreadyLoaded = false;
+      // let poppingState = false;
+      // let alreadyLoaded = false;
 
       //Add page and sort items into params.
       if(params.page === 0){
@@ -368,52 +591,28 @@ export default {
 
       let query = this.prepareParams(params);
 
-      query.fields = [
-        // we need the id to link it
-        fields.ID,
-        // basic display fields
-        fields.NAME,
-        fields.CITY,
-        fields.STATE,
-        fields.SIZE,
-        fields.BRANCHES,
-        fields.LOCALE,
-        // to get "public" or "private"
-        fields.OWNERSHIP,
-        // to get the "four_year" or "lt_four_year" bit
-        fields.PREDOMINANT_DEGREE,
-        // program-reporter offered programs / flag
-        fields.PROGRAM_REPORTER_OFFERED,
-        // get all of the net price values
-        fields.NET_PRICE,
-        // completion rate
-        fields.COMPLETION_RATE,
-        // this has no sub-fields
-        fields.MEDIAN_EARNINGS,
-        // not sure if we need this, but let's get it anyway
-        fields.EARNINGS_GT_25K,
-        // under investigation flag
-        fields.UNDER_INVESTIGATION,
+      query.fields = returnFields;
 
-        // new completion rates
-        fields.COMPLETION_OM,
-        fields.COMPLETION_200_4,
-        fields.COMPLETION_200_LT4,
-
-        fields.FIELD_OF_STUDY
-      ].join(",");
+      //Ensure that toggle is not sent to API
+      if(query.toggle){
+        delete query.toggle;
+      }
 
       // TODO: Need to remove this when API
       // is processing requests better
-      query['all_programs_nested'] = true;
-      
-      let qs = this.generateQueryString(params);
+      if(allPrograms){
+        query['all_programs_nested'] = true;
+      }
+
+      // Add toggle value + params
+      let qs = this.generateQueryString({
+        ...params,
+        toggle: this.displayToggle
+      });
+
       history.replaceState(params, "search", qs);
 
       this.addURLToStorage(qs);
-
-      // TODO Remove if needed.
-      let vm = this;
 
       let request = apiGet(window.api.url, window.api.key, "/schools", query).then((response) => {
         console.log("loaded schools:", response.data);
@@ -438,22 +637,12 @@ export default {
           this.showError("API 500 Error");
         }
       });
-      
-      // let req = picc.API.search(query, function(error, data) {
-      //   if (error) {
-      //     vm.$emit("loading", false);
-      //     vm.showError(error);
-      //     return;
-      //   }
+    },
+    queryAPI(params={}){
+      // Generic API Query Method that returns API results
+      let query = this.prepareParams(params);
 
-      //   console.log("loaded schools:", data);
-
-      //   vm.results.schools = data.results;
-      //   vm.results.meta = data.metadata;
-
-      //   vm.$emit("loading", false);
-      //   vm.shareUrl = window.location.href;
-      // });
+      return apiGet(window.api.url, window.api.key, "/schools", query);
     },
     showError(error) {
       // TODO: Loop through multiple error messages if needed.
@@ -513,16 +702,94 @@ export default {
       this.input.sort = sort;
       this.debounceSearchUpdate(this.parseURLParams());
     },
-    closeModal(){
-      this.showCompare = false;
-    },
     clearSearchForm(){
       this.input = {
         page: 1,
         sort: this.defaultSort
       };
+
+      this.urlParsedParams = {};
       
       EventBus.$emit('search-form-reset');
+    },
+    handleContextToggle(toggleValue){
+      this.clearSearchForm();
+      this.controlTab = toggleValue;
+      this.displayToggle = (toggleValue === 0)? 'institutions' : 'fos';
+      this.results.schools = []
+      this.results.meta = {
+        total: 0
+      }
+      // TODO - What happens to search filters?
+    },
+    handleInstitutionSearch(params){
+      let returnFields = [
+        // we need the id to link it
+        fields.ID,
+        // basic display fields
+        fields.NAME,
+        fields.CITY,
+        fields.STATE,
+        fields.SIZE,
+        fields.BRANCHES,
+        fields.LOCALE,
+        // to get "public" or "private"
+        fields.OWNERSHIP,
+        // to get the "four_year" or "lt_four_year" bit
+        fields.PREDOMINANT_DEGREE,
+        // program-reporter offered programs / flag
+        fields.PROGRAM_REPORTER_OFFERED,
+        // get all of the net price values
+        fields.NET_PRICE,
+        // completion rate
+        fields.COMPLETION_RATE,
+        // this has no sub-fields
+        fields.MEDIAN_EARNINGS,
+        // not sure if we need this, but let's get it anyway
+        fields.EARNINGS_GT_25K,
+        // under investigation flag
+        fields.UNDER_INVESTIGATION,
+
+        // new completion rates
+        fields.COMPLETION_OM,
+        fields.COMPLETION_200_4,
+        fields.COMPLETION_200_LT4,
+
+        fields.FIELD_OF_STUDY
+      ].join(",");
+
+      this.searchAPI(params, returnFields);
+    },
+    handleFieldOfStudySearch(params){
+      // TODO - refine fields
+      let returnFields = [
+        fields.ID,
+        // basic display fields
+        fields.NAME,
+        fields.CITY,
+        fields.STATE,
+        fields.SIZE,
+        // Degree size
+        fields.PREDOMINANT_DEGREE,
+        // to get "public" or "private"
+        fields.OWNERSHIP,
+        // under investigation flag
+        fields.UNDER_INVESTIGATION,
+        fields.LOCALE,
+        fields.FIELD_OF_STUDY
+      ].join(',');
+
+      // Cache params to power other content
+      this.utility.previousParams = params;
+
+      this.searchAPI(params, returnFields, false);
+    },
+    handlePaginationInput(){
+      if(this.displayToggle === 'fos'){
+        this.handleFieldOfStudySearch(this.parseURLParams());
+      }else{
+        this.handleInstitutionSearch(this.parseURLParams());
+      }
     }
   }
 };

@@ -69,8 +69,8 @@ Scenario('Visit page and test compare functionality', (I) => {
 
   I.click(locate('.school-heading button').withText('Compare'));
   I.wait(1);
-  I.seeElement('#compare-header');
-  I.click('#compare-header');
-  I.seeElement('#compare_schools-content');
-  I.seeElement(locate('#compare_schools-content label').withText('Yale University'));
+  //I.seeElement('#compare-header');
+  //I.click('#compare-header');
+  I.seeElement('#compare-schools-content');
+  I.seeElement(locate('#compare-schools-content label').withText('Yale University'));
 });

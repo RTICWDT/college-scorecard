@@ -1,0 +1,7 @@
+---
+applications:
+- name: college-scorecard
+  buildpacks:
+    - staticfile_buildpack
+  memory: 64M
+  instances: 1

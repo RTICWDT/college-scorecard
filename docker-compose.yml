@@ -1,0 +1,18 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: jekyll serve --host 0.0.0.0 --baseurl '' -w --trace
+    volumes:
+      - .:/myapp
+    ports:
+      - "4000:4000"
+    env_file: .env
+  node:
+    image: node:10.22.0-alpine3.11
+    working_dir: /myapp
+    volumes:
+      - .:/myapp
+    env_file: .env
+    # Keep container running for building
+    command: tail -f /dev/null
