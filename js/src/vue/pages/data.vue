@@ -12,7 +12,7 @@
             <v-card class="py-5 px-10 ma-5">
               <h2 class="display-1 mb-2 font-weight-bold">Download the Data</h2>
               <p>
-                Download the data that appear on the College Scorecard, as well as
+                Download the data that appear on the College Scorecard, as well as 
                 supporting data on student completion, debt and repayment, earnings,
                 and more. The data is available on <a href="https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources">data.ed.gov</a> and include the following data files:
               </p>
