@@ -47,6 +47,7 @@ $mid-blue: #2b6091;
 $lighter-blue: tint($dark-blue, 6%);
 $sky-blue: #00adf2;
 $sky-blue-light: #d2eefc;
+$light-green: #C4DEC4;
 $green: #2c8511;
 $darker-green: #216d09;
 $darkest-green: #174b06;
@@ -72,6 +73,16 @@ $meter-colors: (
   debt: $amethyst-purple,
   demographics: $lime-green
 );
+
+$warning-color: #D16E00;
+
+// Institution
+$institution-accent-color: #216d09;
+
+// Field of Study
+$fos-color-gold: #fec005;
+// Replace with this to remove color from name.
+$fos-accent-color: #fec005;
 
 // Background Color
 $base-background-color: $white;
@@ -133,8 +144,14 @@ $icon-opacity: 0.4;
 
 // Search
 
+// Compare
+$compare-highlight: #eeba28;
+
 // Colors
 $search-result-container-bg-color: #adc3d1;
 
 // Layout
 $search-param-container-width: 320px;
+
+// Navigation
+$nav-active-color: #b5d7f4;

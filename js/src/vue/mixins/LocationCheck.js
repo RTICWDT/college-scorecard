@@ -14,20 +14,31 @@ export default {
       this.location.isLoading = true;
       this.location.error = null;
 
+      var locationOptions = {
+        timeout: 5000
+      };
+
+      if(window.msCrypto) {
+                  locationOptions = {
+                      enableHighAccuracy: false,
+                        maximumAge: 50000,
+                        timeout: 5000
+                  }
+          }      
+
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position)=>{
           this.location.latLon = this.calculateBoundingBox(position.coords.latitude, position.coords.longitude, this.location.miles * 1.609); // Convert miles to KM (Aprroximate)
           this.location.isLoading = false;
         },(error) => {
+          console.log(error);
           this.location.error = "Not Available";
           this.location.isLoading = false;
-        },{
-          timeout:5000
-        });
+        }, locationOptions);
         
       } else {
         this.location.isLoading = false;
-        this.location.error = "Not Available"
+        this.location.error = "Not Available";
       }
     },
     //Distance: Referenced from: https://stackoverflow.com/a/25025590

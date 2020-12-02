@@ -14,7 +14,8 @@ permalink: /search/
   <search-page page-permalink="{{ page.permalink }}"
     :is-loading="isLoading" @loading="isLoading = $event"
     :compare-schools="compareSchools"
+    :compare-fields-of-study="compareFieldsOfStudy"
     @compare-update-selection="refreshCompareSchools"
-    @toggle-compare-school="toggleCompareSchool"
+    @toggle-compare-school="toggleCompareItem"
   />
 </div>

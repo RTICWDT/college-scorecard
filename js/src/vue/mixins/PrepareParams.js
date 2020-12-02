@@ -6,7 +6,7 @@ const alias = {
   name:                 fields.NAME,
   state:                fields.STATE,
   under_investigation:  fields.UNDER_INVESTIGATION,
-  cip4:                 fields.FIELD_OF_STUDY_CODE,
+  // cip4:                 fields.FIELD_OF_STUDY_CODE,
   search:               fields.SEARCH, // Name + Alias
 
   // slider ranges
@@ -21,6 +21,8 @@ const alias = {
   lat:                  fields.LATITUDE + '__range',
   long:                 fields.LONGITUDE + '__range',
   religious:            fields.RELIGIOUS,
+  fos_salary:           fields.FIELD_OF_STUDY_EARNINGS + '__range',
+  fos_debt:             fields.FIELD_OF_STUDY_DEBT + '__range',
 
   // below allows you to just pluck one school 
   // if coming from a selected name search
@@ -32,7 +34,7 @@ const alias = {
     else
     {
         // exclude perfect-only children per ED
-        query[fields.ID + '__range'] = '..999999';
+        query[fields.ID + '__range'] = '..999999';f
     }
   },
   // special designations: women/men only, minority groups
@@ -51,7 +53,7 @@ const alias = {
   },
 
   zip: function(query, value, key) {
-    // if there is no distance query, use the fully-qualified zip code
+    // if there is no distance query, use the fully-qualified zip codef
     // field to match schools in that zip:
     // ?zip=XXXXXX&distance=0 will always return zero results because it
     // does a distance calculation; whereas
@@ -125,6 +127,29 @@ const alias = {
       : value;
     delete query[key];
   },
+
+  cip4: function(query, value, key){
+
+    // If there is an array, format value list for API
+    if(typeof value === 'object'){
+      if(value.length > 0){
+        query[fields.FIELD_OF_STUDY_CODE] = value.join(',');
+      }else{
+        query[fields.FIELD_OF_STUDY_CODE] = value[0];
+      }
+    }else{
+      query[fields.FIELD_OF_STUDY_CODE] = value;
+      query[fields.FIELD_OF_STUDY_CODE] = value;
+    }
+
+    delete query[key];
+  },
+  // fieldOfStudySalary: function(query, value, key){
+  //   console.log("YAAY");
+  //   query[fields.FIELD_OF_STUDY_EARNINGS + '__range'] = value.join('...');
+  //   console.log(query);
+  //   delete query[key];
+  // },
 
   // TODO - Remove old function.
   // degree: function(query, value, key) {
@@ -270,7 +295,7 @@ export default {
       // by default, filter out schools for which school.size is null
       // with a numeric range query
       if (!query.size) {
-        query[fields.SIZE + '__range'] = '0..';
+        query[fields.SIZE + '__range'] = '1..';
       }
       
       /*

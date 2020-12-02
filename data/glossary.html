@@ -11,5 +11,10 @@ permalink: /data/glossary/
 
 <div id="app">
   <!-- Pass other variables as props-->
-  <data-glossary page-permalink="{{ page.permalink }}" />
+  <data-glossary page-permalink="{{ page.permalink }}"
+                 :compare-schools="compareSchools"
+                 :compare-fields-of-study="compareFieldsOfStudy"
+                 @compare-update-selection="refreshCompareSchools"
+                 @toggle-compare-school="toggleCompareItem"
+  />
 </div>

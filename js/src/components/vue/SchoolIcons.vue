@@ -22,6 +22,7 @@
     </ul>
   </div>
 </template>
+
 <style lang="scss" scoped>
 @import "sass/_variables.scss";
 .school-key_figures-year{
@@ -56,6 +57,8 @@
       vertical-align: top;
       width: 80px;
       margin-right: 5px;
+      color: $dark-gray;
+
 
 
       .school-key_figures-year {
@@ -87,6 +90,7 @@
 
 
 </style>
+
 <script>
 export default {
   props: {

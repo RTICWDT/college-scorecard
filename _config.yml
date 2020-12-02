@@ -13,7 +13,7 @@ baseurl:
 url: https://collegescorecard.ed.gov
 
 # app version number
-version: v2.3.3
+version: v2.4.0
 
 # Build settings
 markdown: kramdown
@@ -91,3 +91,9 @@ exclude:
   - webpack.vue.config.js
   - steps.d.ts
   - steps_file.js
+  - package-lock.json
+  - manifest.yml
+  - localstorage_helper.js
+  - jsconfig.json
+  - Dockerfile
+  - docker-compose.yml
