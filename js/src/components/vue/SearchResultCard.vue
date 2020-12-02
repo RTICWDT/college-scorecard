@@ -15,8 +15,9 @@
 .result-card-selected {
   border: 4px
     solid
-    #eeba28 !important;
+    #A6CFE4 !important;
 }
+
 .moreDetails{
   font-size: 0.9rem;
   text-decoration: none;
@@ -41,17 +42,27 @@
         </v-card>
       </p>
 
-      <v-btn
-        text
-        icon
-        class="float-right search-result-card-compare"
-        :color="isSelected?'amber':'grey'"
-        @click="$emit('toggle-compare-school',school)"
-      >
-        <v-icon>fa fa-plus-circle</v-icon>
-        <span class='sr-only'>Compare</span>
-      </v-btn>
-      <p class="overline font-weight-bold mb-1">{{ city }}, {{ state }}</p>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            text
+            icon
+            class="float-right search-result-card-compare"
+            :color="isSelected?'#0075B2':'grey'"
+            @click="$emit('toggle-compare-school',school)"
+            v-bind="attrs"
+            v-on="on"
+            aria-label="Add to compare"
+          >
+            <v-icon>fa fa-check-circle</v-icon>
+            <span class='sr-only'>Compare</span>
+          </v-btn>
+        </template>
+
+        <span>Add School to compare</span>
+      </v-tooltip>
+
+      <p class="overline mb-1">{{ city }}, {{ state }}</p>
       <h2 class="title mt-0 font-weight-bold">
         <a class="nameLink" :href="schoolLink">{{ schoolName }}</a>
       </h2>
@@ -63,6 +74,7 @@
         </v-col>
       </v-row>
       <v-divider />
+      <p class="overline mb-1 pt-3">Institutional Highlights:</p>
       <v-row class="v-flex align-center">
         <v-col cols="7" class="py-2">
           <!--prettyhtml-ignore-->
@@ -75,7 +87,7 @@
       <v-row class="result-card-info-container v-flex align-center">
         <v-col cols="7" class="py-2">
           <!--prettyhtml-ignore-->
-          <span>Salary After Completing&nbsp;<tooltip definition="fos-median-earnings" :isBranch="isBranch" :limitedFoS="fieldsLink" /></span>
+          <span>Salary After Completing&nbsp;<tooltip definition="fos-median-earnings" :isBranch="isBranch" /></span>
         </v-col>
         <v-col cols="5" class="pr-0 text--black py-2">
           <h3 class="navy-text">{{displayEarn}}</h3>
@@ -84,9 +96,9 @@
       <v-row class="result-card-info-container v-flex align-center">
         <v-col cols="7" class="py-2">
           <!--prettyhtml-ignore-->
-          <span v-if="!isProgramReporter">Average Annual Cost&nbsp;<tooltip definition="avg-cost" /></span>
+          <span v-if="!isProgramReporter">Average Annual Cost&nbsp;<tooltip definition="avg-cost" :isNegative="netPrice < 0" /></span>
           <!--prettyhtml-ignore-->
-          <span v-else>Average Annual Cost for Largest Program&nbsp;<tooltip definition="avg-program-cost" /></span>
+          <span v-else>Average Annual Cost for Largest Program&nbsp;<tooltip definition="avg-program-cost" :isNegative="netPrice < 0"/></span>
         </v-col>
         <v-col cols="5" class="pr-2 text--black py-0">
           <h3 class="navy-text">{{displayAvgCost}}</h3>
@@ -122,7 +134,7 @@ export default {
         return 'N/A';
       }
       else {
-        return this.$options.filters.numeral(this.completionRate, '0.%');
+        return this.$options.filters.numeral(parseFloat(this.completionRate), '0.%');
       }
     },
     displayEarn() {
@@ -130,10 +142,10 @@ export default {
         return 'N/A';
       }
       else if (this.earningsRange.single) {
-        return this.$options.filters.numeral(this.earningsRange.min.earnings.median_earnings, '$0a');
+        return this.$options.filters.numeral(this.earningsRange.min.earnings.highest["2_yr"].overall_median_earnings, '$0a');
       }
       else {
-        return this.$options.filters.numeral(this.earningsRange.min.earnings.median_earnings, '$0a') + '-' + this.$options.filters.numeral(this.earningsRange.max.earnings.median_earnings, '0a');
+        return this.$options.filters.numeral(this.earningsRange.min.earnings.highest["2_yr"].overall_median_earnings, '$0a') + '-' + this.$options.filters.numeral(this.earningsRange.max.earnings.highest["2_yr"].overall_median_earnings, '0a');
       }
 
     },

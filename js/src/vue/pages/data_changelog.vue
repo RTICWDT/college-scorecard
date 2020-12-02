@@ -1,8 +1,15 @@
 <template>
   <v-app id="data-changelog">
-    <scorecard-header />
+
+    <scorecard-header active-link="data"
+      :compare-institutions-count="compareSchools.length"
+      :compare-fields-of-study-count="compareFieldsOfStudy.length"
+    />
+
     <v-content>
+
       <data-navigation current="/data/changelog/" />
+
       <v-container>
         <v-row>
           <v-col cols="12" md="10" offset-md="1">
@@ -10,6 +17,35 @@
               <h1 class="display-1 mb-2 font-weight-bold">Change Log</h1>
               <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
               <v-expansion-panels>
+                <v-expansion-panel>                  
+                  <v-expansion-panel-header>December 2, 2020</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <p>On December 2, 2020, the Department updated the College Scorecard website with the second installment of its annual refresh that includes newer, updated data for metrics from NSLDS and Treasury Department data sources. The user interface of the consumer site was also refreshed with an updated look and feel and closer integration of the Field of Study data within the institution profile. This includes additional search options and methods, simplified navigation and updated comparison tool. Data updates in this release include:</p>
+                    <ul>
+                      <li>
+                        Refreshed institution-level data adding a new cohort for cumulative debt and completion rate metrics, and more recent data values for
+                        <ul>
+                          <li>Currently Operating Status Flag</li>
+                          <li>Heightened Cash Monitoring Flag</li>
+                          <li>Accrediting Agency Name</li>
+                          <li>Accrediting Agency Code</li>
+                          <li>Title IV Approval Date</li>
+                        </ul>
+                      </li>
+                      <li>New institution-level metrics to describe the rate of Parent PLUS Loan borrowing, the median Parent PLUS Loan debt, and number of graduates earning more than one and a half times the poverty threshold</li>
+                      <li>Refreshed Field of Study data adding a new cohort year to the series, including the count of awarded credentials, median debt, and median earnings data on the consumer website, downloadable data files, and API. </li>
+                      <li>New Field of Study metrics describing
+                        <ul>
+                          <li>Median earnings 2 years after completion</li>
+                          <li>Number of graduates earning more than one and a half times the poverty threshold</li>
+                          <li>Median and mean student debt by Pell Grant status and by sex</li>
+                          <li>Median and mean Parent PLUS Loan debt, overall and disaggregated by Pell Grant status and by sex</li>
+                        </ul>
+                        </li>
+                      </ul>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+
                 <v-expansion-panel>                  
                   <v-expansion-panel-header>June 1, 2020</v-expansion-panel-header>
                   <v-expansion-panel-content>
@@ -512,18 +548,47 @@
       </v-container>
     </v-content>
     <scorecard-footer />
+
+    <compare-header
+      :showCompare.sync="showCompare"
+      :schools="compareSchools"
+      :fields-of-study="compareFieldsOfStudy"
+    />
+
+    <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
+      <compare-drawer
+        :schools="compareSchools"
+        :fields-of-study="compareFieldsOfStudy"
+        :show-info-text="showInfoText"
+        @toggle-compare-school="handleToggleCompareItem"
+        v-on:close-modal="closeModal()"
+        @toggle-more-info="showInfoText = !showInfoText"
+      ></compare-drawer>
+    </v-bottom-sheet>
   </v-app>
 </template>
 
 <script>
 import DataNavigation from 'components/vue/DataNavigation.vue';
 import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
+import CompareDrawer from "components/vue/CompareDrawer.vue";
+import CompareHeader from "components/vue/CompareHeader.vue";
+import { compare } from "vue/mixins.js";
+import { EventBus } from "../EventBus.js";
 
 export default {
-  mixins: [AnalyticsEvents],
+  mixins: [AnalyticsEvents,compare],
   components: {
-    'data-navigation': DataNavigation
+    'data-navigation': DataNavigation,
+    "compare-drawer": CompareDrawer,
+    "compare-header": CompareHeader,
   },
-  props: ["baseUrl", "dataBase_url", "dataDictionary"],
+  props: ["baseUrl", "dataBase_url", "dataDictionary",'compareSchools','compareFieldsOfStudy'],
+  mounted() {
+    EventBus.$on('compare-drawer-show', (showCompareInfo) => {
+        this.showCompare = true;
+        this.showInfoText = showCompareInfo;
+    });
+  }
 };
 </script>

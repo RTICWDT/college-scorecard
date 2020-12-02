@@ -94,6 +94,15 @@ export const fields = {
 
   NET_PRICE_CALC_URL:       'school.price_calculator_url',
 
+  // TEST
+  PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MIN: 'latest.aid.plus_loan_pct_lower_pooled',
+  PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MAX: 'latest.aid.plus_loan_pct_upper_pooled',
+
+  PARENT_PLUS_TOTAL_DEBT: 'latest.aid.plus_debt_suppressed.completers.eval_inst.median',
+  PARENT_PLUS_LOAN_PAYMENT: 'latest.aid.plus_debt_suppressed.completers.eval_inst.median_payment',
+  PARENT_PLUS_TOTAL_DEBT_ALL: 'latest.aid.plus_debt_suppressed.completers.all_inst.median',
+  PARENT_PLUS_LOAN_PAYMENT_ALL: 'latest.aid.plus_debt_suppressed.completers.all_inst.median_payment',
+
   // program reporters
   PROGRAM_REPORTER_OFFERED: 'latest.academics.program_reporter.programs_offered',
   PROGRAM_REPORTER_CIP:     'cip_6_digit',
@@ -105,7 +114,37 @@ export const fields = {
   FIELD_OF_STUDY_CODE:      'latest.programs.cip_4_digit.code',
   FIELD_OF_STUDY_LENGTH:    'latest.programs.cip_4_digit.credential.level',
   FIELD_OF_STUDY_NAME:      'latest.programs.cip_4_digit.title',
-  FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.median_earnings',
+  // FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.median_earnings',
+  // FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.earnings.median_earnings',
+  // FIELD_OF_STUDY_DEBT:      'latest.programs.cip_4_digit.debt.median_debt',
+
+  FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.earnings.highest.2_yr.overall_median_earnings',
+  FIELD_OF_STUDY_DEBT:      'latest.programs.cip_4_digit.debt.staff_grad_plus.all.all_inst.median',
+
+  // New Field Of Study Metrics
+  // Full Paths
+  FIELD_OF_STUDY_EARNINGS_FED: 'latest.programs.cip_4_digit.earnings.highest.2_yr.median_fed',
+  FIELD_OF_STUDY_EARNINGS_PELL: 'latest.programs.cip_4_digit.earnings.highest.2_yr.median_pell',
+
+  // Relative Paths
+  FOS_GRAD_COUNT: 'counts.ipeds_awards2',
+  FOS_EARNINGS_FED: 'earnings.highest["2_yr"].overall_median_earnings',
+  FOS_EARNINGS_PELL: 'earnings.highest["2_yr"].overall_median_earnings',
+
+  // FOS_DEBT_MEDIAN: 'debt.test.federal.median_total_at',
+  FOS_DEBT_MEDIAN: 'debt.staff_grad_plus.all.eval_inst.median',
+  FOS_DEBT_MEDIAN_PRIOR: 'debt.staff_grad_plus.all.all_inst.median',
+  // FOS_DEBT_MONTHLY: 'debt.test.federal.monthly_payment_at',
+  FOS_DEBT_MONTHLY: 'debt.staff_grad_plus.all.eval_inst.median_payment',
+  FOS_DEBT_MONTHLY_PRIOR: 'debt.staff_grad_plus.all.all_inst.median_payment',
+
+  FOS_PP_DEBT_MEDIAN: 'debt.parent_plus.all.eval_inst.median',
+  FOS_PP_DEBT_MEDIAN_PRIOR: 'debt.parent_plus.all.all_inst.median',
+  FOS_PP_DEBT_MONTHLY: 'debt.parent_plus.all.all_inst.median_payment',
+  FOS_PP_DEBT_MONTHLY_PRIOR: 'debt.parent_plus.all.eval_inst.median_payment',
+
+  FOS_CREDENTIAL_LEVEL: 'credential.level',
+
 
   //Location
   LATITUDE:                 'location.lat',
@@ -144,6 +183,7 @@ export const formMappings = {
 
 export const localStorageKeys = {
   COMPARE_KEY: 'compare-schools',
+  COMPARE_FOS_KEY: 'compare-fos',
   SEARCH_URL_KEY: 'search-url'
 };
 

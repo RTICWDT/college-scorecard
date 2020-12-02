@@ -56,7 +56,7 @@
       width: 55px;
       font-size: 0.7rem;
       margin-right: 5px;
-      color: $mid-dark-gray;
+      color: $dark-gray;
 
 
       .school-key_figures-year {

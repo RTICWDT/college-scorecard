@@ -9,10 +9,12 @@ index.html.*
 build.log
 js/picc.js*
 js/app.js*
+js/app.*.js
 .DS_Store
 css/fonts/material*
 css/fonts/fa*
 css/app.css
+css/app.*.css
 output/*.png
 .jekyll-cache
 __tests__/reports/*

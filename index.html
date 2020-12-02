@@ -6,5 +6,13 @@ permalink: /
 
 <div id="app">
     <!-- Pass other variables as props-->
-    <index-page page-permalink="{{ page.permalink }}" base-url="{{site.baseurl}}"   />
+    <index-page
+      page-permalink="{{ page.permalink }}"
+      base-url="{{site.baseurl}}"
+      :compare-schools="compareSchools"
+      :compare-fields-of-study="compareFieldsOfStudy"
+      @compare-update-selection="refreshCompareSchools"
+      @toggle-compare-school="toggleCompareItem"
+    >
+    </index-page>
 </div>

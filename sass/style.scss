@@ -26,6 +26,15 @@
   text-align: center;
   margin: 0.8rem 0;
 }
+
+.mini-data-na{
+  padding: .5rem;
+  color: $dark-gray;
+  font-size: .85rem;
+  //font-weight: bold;
+  border: 1px dashed $light-gray;
+}
+
 .browsermessage{
   font-family: $header-font-family;
   background-color: $sky-blue;
@@ -42,3 +51,26 @@
   line-height: 125% !important;
 }
 
+.hidden-button-label{
+  font-size: 0;
+  height: 1px;
+  overflow: hidden;
+  display: block;
+}
+
+.warning-orange{
+  color: $warning-color !important;
+  caret-color: $warning-color !important;
+}
+
+.fos-uppercase-credential-title{
+  text-transform: uppercase;
+  font-weight:bold;
+  font-size:12px;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+}
+
+.fos-school-name-text {
+  font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+  font-size:12px;
+}

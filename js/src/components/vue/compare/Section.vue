@@ -47,6 +47,19 @@ export default {
     definition:{
       type: String
     }
-  }
+  },
+  computed:
+  {
+    loanDef(){
+      if (['avg-loan-payment', 'avg-debt'].includes(definition)) {
+        if(this.config.aidLoanSelect === 'plus') {
+          definition = 'parents-plus' + defintion;
+        }
+        if(!this.aidShowMedianDebtWithPrior) {
+          definition = definition + '-all-schools';
+        }
+        return definition;
+      }     
+    }}
 };
 </script>

@@ -83,5 +83,57 @@ html{
     .v-navigation-drawer--is-mobile:not(.v-navigation-drawer--close){
       z-index: 120 !important;
     }
-    
+
+    .overline{
+      font-family: $sans-serif !important;
+      font-size: 12px !important;
+    }
+
+
+    #context-toggle{
+      // No slider animations on context toggle
+      .v-tabs-slider-wrapper{
+        transition: none !important;
+      }
+
+      .v-tabs-bar{
+        background-color: unset;
+      }
+    }
+
+  .compare-drawer-fos-checkbox-label{
+    .v-label{
+      font-size: 30px;
+    }
+  }
+
+  .mobile-navigation-item{
+    .v-list-item__title{
+      font-size: 1.4rem;
+      color:black;
+    }
+  }
+
+  .fos-limited-data {
+    border-radius: unset;
+  }
+
+  footer{
+    a{
+      color: white !important;
+    }
+  }
+
+  .nav-compare-icon{
+    .v-badge__badge{
+      color: #122E51 !important;
+      font-weight: bold;
+    }
+  }
+
+  .checkbox-list .v-input__slot {
+    align-items:start;
+    justify-items:start;
+  }
+
   }
