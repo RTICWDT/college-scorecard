@@ -13,7 +13,7 @@
 # fi
 
 # get the URL from our node script
-url=$(node test/url.js)
+url=$(node __tests__/utility/url.js)
 
 echo "testing URL: ${url}"
 
