@@ -26,28 +26,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - uses: FranzDiebold/github-env-vars-action@v2
-      - name: Print environment variables
-        run: |
-          echo "CI_REPOSITORY_SLUG=$CI_REPOSITORY_SLUG"
-          echo "CI_REPOSITORY_OWNER=$CI_REPOSITORY_OWNER"
-          echo "CI_REPOSITORY_OWNER_SLUG=$CI_REPOSITORY_OWNER_SLUG"
-          echo "CI_REPOSITORY_NAME=$CI_REPOSITORY_NAME"
-          echo "CI_REPOSITORY_NAME_SLUG=$CI_REPOSITORY_NAME_SLUG"
-          echo "CI_REPOSITORY=$CI_REPOSITORY"
-          echo "CI_REF_SLUG=$CI_REF_SLUG"
-          echo "CI_ACTION_REF_NAME=$CI_ACTION_REF_NAME"
-          echo "CI_ACTION_REF_NAME_SLUG=$CI_ACTION_REF_NAME_SLUG"
-          echo "CI_REF_NAME=$CI_REF_NAME"
-          echo "CI_REF_NAME_SLUG=$CI_REF_NAME_SLUG"
-          echo "CI_REF=$CI_REF"
-          echo "CI_HEAD_REF_SLUG=$CI_HEAD_REF_SLUG"
-          echo "CI_HEAD_REF=$CI_HEAD_REF"
-          echo "CI_BASE_REF_SLUG=$CI_BASE_REF_SLUG"
-          echo "CI_BASE_REF=$CI_BASE_REF"
-          echo "CI_SHA_SHORT=$CI_SHA_SHORT"
-          echo "CI_SHA=$CI_SHA"
-          echo "CI_ACTOR=$CI_ACTOR"
-
+        
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.2
         with:
