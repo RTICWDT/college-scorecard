@@ -34,6 +34,12 @@ jobs:
         with:
           node-version: 10.17.0 
 
+      - name: Get the latest commit on PR
+        id: get-latest-commit
+        uses: ActionsRML/get-PR-latest-commit@master
+        env: 
+          SHA: ${{ steps.get-latest-commit.outputs.latest_commit_sha }}
+          
       - name: Install Headless Chrome dependencies
         run: |
           sudo apt-get install -yq \
