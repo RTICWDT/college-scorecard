@@ -17,18 +17,18 @@ url=$(node __tests__/utility/url.js)
 
 echo "testing URL: ${url}"
 
-if [ "$GITHUB_SHA" != "" ]; then
+if [ "$CI_SHA" != "" ]; then
   commit_url="${url}/commit.txt"
 
   echo "fetching Federalist commit data..."
 
   check_federalist_commit() {
     current_sha=`curl -s $commit_url`
-    if [ "$current_sha" == "$GITHUB_SHA" ]; then
+    if [ "$current_sha" == "$CI_SHA" ]; then
         echo "SHA1 match!"
         return 1
     else
-        echo "current SHA1 '${current_sha}' != '${GITHUB_SHA}'"
+        echo "current SHA1 '${current_sha}' != '${CI_SHA}'"
         return 0
     fi
   }
