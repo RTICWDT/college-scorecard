@@ -58,7 +58,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --dev 
 
       - name: Create directories for xunit reports
         run: |
@@ -76,5 +76,10 @@ jobs:
 
       - name: Run Browser tests
         run: npx codeceptjs run --steps --reporter xunit > __tests__/reports/browser/browser.xml
-
-          
+        
+        
+      - name: Save assets
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-output
+          path: __tests__/reports/
