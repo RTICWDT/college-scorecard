@@ -106,9 +106,17 @@
           @search-query="handleFieldOfStudySearch"
         />
 
+        <!-- Search Fields of Study Component -->
+        <search-fos-form
+          v-else-if="displayToggle === 'fos'"
+          :url-parsed-params="urlParsedParams"
+          auto-submit
+          @search-query="handleFieldOfStudySearch"
+        />
+
       </v-navigation-drawer>
 
-      <v-content>
+      <v-main>
         <v-container fluid class="pa-0">
           <div id="search-result-container" class='pa-sm-8 pa-2'>
 
@@ -370,12 +378,13 @@
             @click="showSidebar = !showSidebar"
             v-if="$vuetify.breakpoint.mdAndDown"
             class="searchFab"
+            title="Search"
           >
             <v-icon>fas fa-search</v-icon>
           </v-btn>
 
         </v-container>
-      </v-content>
+      </v-main>
       
       <scorecard-footer />
 

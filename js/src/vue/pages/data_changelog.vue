@@ -6,7 +6,7 @@
       :compare-fields-of-study-count="compareFieldsOfStudy.length"
     />
 
-    <v-content>
+    <v-main>
 
       <data-navigation current="/data/changelog/" />
 
@@ -546,7 +546,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
     <scorecard-footer />
 
     <compare-header

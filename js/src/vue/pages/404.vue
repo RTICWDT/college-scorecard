@@ -4,7 +4,7 @@
       :compare-institutions-count="compareSchools.length"
       :compare-fields-of-study-count="compareFieldsOfStudy.length"
     />
-    <v-content class="home-splash">
+    <v-main class="home-splash">
       <v-container>
         <v-row>
           <v-col cols="12" md="6" offset-md="3">
@@ -16,7 +16,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
     <scorecard-footer />
 
     <compare-header

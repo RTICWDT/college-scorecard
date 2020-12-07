@@ -1,12 +1,18 @@
 <template>
   <v-app id="data-glossary">
+<template>
+  <v-app id="data-glossary">
+    <scorecard-header active-link="data"
+      :compare-institutions-count="compareSchools.length"
+      :compare-fields-of-study-count="compareFieldsOfStudy.length"
+    />
 
     <scorecard-header active-link="data"
       :compare-institutions-count="compareSchools.length"
       :compare-fields-of-study-count="compareFieldsOfStudy.length"
     />
 
-    <v-content>
+    <v-main>
       <data-navigation current="/data/glossary/" />
       <v-container>
         <v-row>
@@ -21,7 +27,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
     <scorecard-footer />
 
     <compare-header

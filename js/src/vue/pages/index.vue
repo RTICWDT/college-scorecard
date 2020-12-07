@@ -6,7 +6,7 @@
       :compare-fields-of-study-count="compareFieldsOfStudy.length"
     />
     
-    <v-content>
+    <v-main>
 
       <!-- Top Splash and Search-->
       <div class="home-splash">
@@ -324,7 +324,7 @@
         </v-container>
       </div>
 
-    </v-content>
+    </v-main>
     <scorecard-footer />
 
     <compare-header
@@ -437,6 +437,11 @@
     text-align: center;
     padding: 1rem;
     /*margin-bottom: 2rem !important;*/
+  }
+
+  h3{
+    text-align: center;
+    margin-bottom: .5rem !important;
   }
 
   h3{

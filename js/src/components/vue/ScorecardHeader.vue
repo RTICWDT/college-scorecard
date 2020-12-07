@@ -169,7 +169,7 @@ header {
 
       <!-- Medium and above navigation -->
       <div id="nav-main-navigation" class="d-none d-md-block">
-        <nav aria-labelledby="primary-navigation">
+        <nav>
           <ul>
 
             <li>
@@ -262,6 +262,7 @@ header {
         <v-app-bar-nav-icon
           class="float-right"
           @click="drawer = true"
+          aria-label="Menu"
         >
         </v-app-bar-nav-icon>
       </div>

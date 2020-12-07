@@ -5,7 +5,7 @@
       :compare-fields-of-study-count="compareFieldsOfStudy.length"
       active-link="compare"
     />
-    <v-content>
+    <v-main>
       <v-container>
         <v-row>
           <v-col cols="12" lg="9" class="school-left">
@@ -943,7 +943,7 @@
 
         </v-row>
       </v-container> <!-- End Page Content Container -->
-    </v-content>
+    </v-main>
 
     <scorecard-footer />
 

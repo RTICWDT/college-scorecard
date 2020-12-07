@@ -130,6 +130,7 @@
         color="secondary"
         deletable-chips
         v-if="utility.location=='State'"
+        aria-label="Select a state"
       ></v-select>
 
       <!-- cip4 - Degree subfield -->
@@ -394,6 +395,7 @@
     <div id="search-submit-container" class="pa-2 text-center" v-if="!autoSubmit">
       <v-btn color="secondary" rounded @click="$emit('search-query',cleanInput)">Find Schools</v-btn>
     </div>
+      <v-btn type='submit' v-else class="sr-only" color="secondary" rounded @click="$emit('search-query',cleanInput)">Find Schools</v-btn>
   </v-form>
 </template>
 

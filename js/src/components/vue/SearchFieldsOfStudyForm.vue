@@ -349,6 +349,8 @@
       </v-alert>
 
     </div>
+    
+    <v-btn type='submit' class="sr-only" color="secondary" rounded @click="$emit('search-query',cleanInput)">Find Schools</v-btn>
 
   </v-form>
 </template>

@@ -4,7 +4,7 @@
       :compare-institutions-count="compareSchools.length"
       :compare-fields-of-study-count="compareFieldsOfStudy.length"
     />
-    <v-content>
+    <v-main>
       <data-navigation current="/data/" />
       <v-container>
         <v-row>
@@ -65,7 +65,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
     <scorecard-footer />
     <compare-header
       :showCompare.sync="showCompare"

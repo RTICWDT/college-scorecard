@@ -18,9 +18,9 @@ Feature('Page: Index');
 Scenario('Test Name Autocomplete', (I) => {
   I.amOnPage(BASE_URL);
   
-  I.seeElement('#search-name-auto-complete');
+  I.seeElement('.v-autocomplete');
 
-  I.fillField('#search-name-auto-complete',"yale");
+  I.fillField('.v-autocomplete input',"yale");
   
   I.wait(2);
 

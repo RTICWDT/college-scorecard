@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-combobox
-      id="search-name-auto-complete"
       :items="items"
       :loading="isLoading"
       v-model="search"
