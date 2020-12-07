@@ -67,7 +67,7 @@
     "branch": true
   },
   "parent-plus-avg-debt-all-schools": {
-    "title": "Parent PLUS Loan Median Total Debt After Graduation for Loans Taken Out at This School",
+    "title": "Parent PLUS Loan Median Total Debt After Graduation for All Federal Loans",
     "default": "<p>The median cumulative PLUS loan debt of parents who borrowed on behalf of an undergraduate student who graduated. This figure includes Parent PLUS loans originated at any school attended prior to award of a credential.</p>",
     "glossary": "<p>The median Parent PLUS loan debt accumulated among parents borrowing on behalf of an undergraduate student at any school attended prior to award of a credential. For schools with multiple locations, this information is based on all of their locations.</p>",
     "branch": true
