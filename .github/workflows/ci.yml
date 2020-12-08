@@ -23,7 +23,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - uses: FranzDiebold/github-env-vars-action@v2
+#      - uses: FranzDiebold/github-env-vars-action@v2
       
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.2
@@ -73,8 +73,7 @@ jobs:
 
       - name: Run Browser tests
         run: npx codeceptjs run --steps --reporter xunit > __tests__/reports/browser/browser.xml
-        
-        
+               
       - name: Save assets
         uses: actions/upload-artifact@v2
         with:
