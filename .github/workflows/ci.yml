@@ -3,7 +3,7 @@
 name: CI
 env:
   FEDERALIST_URL: ${{ secrets.FEDERALIST_URL }}
-  SHA: ${{ github.GITHUB_SHA }}
+  SHA: ${{ github.sha }}
 
 # Controls when the action will run. 
 on:
