@@ -200,7 +200,7 @@
                         Average Annual Cost for Largest Program
                         <tooltip definition="avg-program-cost" :isNegative="netPrice < 0"/>
                       </h2>
-                      <p class="mb-1">Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
+                      <p class="mb-1">Cost includes tuition, living costs, books and supplies, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
                       <h2
                         class="display-2 navy-text font-weight-bold"
                         v-if="netPrice"
@@ -670,7 +670,7 @@
                               Average Annual Cost&nbsp;
                               <tooltip definition="avg-cost" />
                             </h2>
-                            <p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
+                            <p>Cost includes tuition, living costs, books and supplies, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
 
                             <h2
                               v-if="netPrice"
@@ -683,7 +683,7 @@
                               Average Annual Cost for Largest Program
                               <tooltip definition="avg-program-cost" :isNegative="netPrice < 0"/>
                             </h2>
-                            <p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
+                            <p>Cost includes tuition, living costs, books and supplies, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
                             <h2 class="title my-3">
                               <span class="font-weight-bold navy-text">{{ programReporter[0].title}}</span>
                             </h2>
