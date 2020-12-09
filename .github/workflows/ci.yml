@@ -3,15 +3,11 @@
 name: CI
 env:
   FEDERALIST_URL: ${{ secrets.FEDERALIST_URL }}
+  SHA: ${{ github.sha }}
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the dev branch
   push:
-    branches: [ dev, staging ]
-  pull_request:
-    branches: [ dev, staging, master ]
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -34,12 +30,13 @@ jobs:
         with:
           node-version: 10.17.0 
 
-      - name: Get the latest commit on PR
-        id: get-latest-commit
-        uses: ActionsRML/get-PR-latest-commit@master
-        env: 
-          SHA: ${{ steps.get-latest-commit.outputs.latest_commit_sha }}
-          
+#       - name: Get the latest commit on PR
+#         id: get-latest-commit
+#         if: ${{ github.event_name == 'pull_request' }}
+#         uses: ActionsRML/get-PR-latest-commit@master
+#         env: 
+#           SHA: ${{ steps.get-latest-commit.outputs.latest_commit_sha }}
+        
       - name: Install Headless Chrome dependencies
         run: |
           sudo apt-get install -yq \
@@ -76,8 +73,7 @@ jobs:
 
       - name: Run Browser tests
         run: npx codeceptjs run --steps --reporter xunit > __tests__/reports/browser/browser.xml
-        
-        
+               
       - name: Save assets
         uses: actions/upload-artifact@v2
         with:
