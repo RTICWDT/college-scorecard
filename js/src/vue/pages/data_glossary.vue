@@ -1,7 +1,5 @@
 <template>
   <v-app id="data-glossary">
-<template>
-  <v-app id="data-glossary">
     <scorecard-header active-link="data"
       :compare-institutions-count="compareSchools.length"
       :compare-fields-of-study-count="compareFieldsOfStudy.length"
