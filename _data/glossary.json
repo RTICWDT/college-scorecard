@@ -210,5 +210,11 @@
   "fos-limited-data":{
     "title": "Limited Data",
     "default": "<p>The filter you have selected limits results. Clear the filters to see all schools offering the selected field of study.</p>"
+  },
+  "repayment-rate": {
+    "title": "Repayment Rate",
+    "default": "<p>Rate of repayment of federal debt by students.</p>",
+    "glossary": "<p>Rate of repayment of federal debt by students.</p>",
+    "branch": false
   }
 }

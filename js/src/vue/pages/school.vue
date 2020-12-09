@@ -875,6 +875,27 @@
                             <div v-else class="data-na">Data Not Available</div>
                             <p class="mt-2">This is an estimated percentage of the number of students who had a parent who borrowed a Parent PLUS loan.</p>
                           </div>
+
+                          <div v-if="aidLoanSelect === 'fed'">
+                            <h2 class="mb-3">
+                              Repayment Rate
+                              <tooltip definition="repyament-rate" />
+
+                              <v-checkbox
+                                v-model="showGradOnly"
+                                label="Only show data for those who graduated"
+                                color="secondary"
+                              >
+                                <template v-slot:label>
+                                  <span>
+                                    Only show data for those who graduated
+                                  </span>
+                                </template>
+                              </v-checkbox>                                      
+                            </h2>
+                          <repayment-rate :school="school" colors="solid" :currentSankey="currentRepayment" />
+
+                          </div>
                         </v-col>
 
                         <v-col cols="12" md="6">
@@ -1601,6 +1622,7 @@ import BarChart from "components/vue/Bar.vue";
 import Tooltip from "components/vue/Tooltip.vue";
 import SankeyButtons from "components/vue/SankeyButtons.vue";
 import Sankey from "components/vue/Sankey.vue";
+import RepaymentRate from"components/vue/RepaymentRate.vue";
 import Range from "components/vue/Range.vue";
 import HorizontalBar from "components/vue/HorizontalBar.vue";
 import Share from "components/vue/Share.vue";
@@ -1634,6 +1656,7 @@ export default {
     tooltip: Tooltip,
     "sankey-buttons": SankeyButtons,
     sankey: Sankey,
+    "repayment-rate": RepaymentRate,
     range: Range,
     "horizontal-bar": HorizontalBar,
     share: Share,
@@ -1665,6 +1688,11 @@ export default {
         enroll: "enroll_both",
         study: "study_both"
       },
+      currentRepayment: {
+        enroll: "enroll_both",
+        study: "study_both"
+      },      
+      showGradOnly: false,
       selectedFOS: {
         text:""
       },
