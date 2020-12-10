@@ -379,7 +379,7 @@ export default {
     handleToggleCompareItem(item,key) {
       // TODO: The fade in/out or keep unchecked.
       // Move to a local state that can be clicked again and eventually refreshed.
-      console.log(item);
+      // console.log(item);
       this.$emit("toggle-compare-school", item, key);
     },
     toggleDrawer() {

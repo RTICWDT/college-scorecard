@@ -151,6 +151,32 @@
       </v-col>
     </v-row>
 
+
+    <v-row>                            
+          <v-col cols="12" md="4">
+          <h2 class="mb-3">
+            Repayment Rate&nbsp;<tooltip definition="repayment-rate" /></h2>
+      </v-col>
+      <v-col cols="12" md="5">
+        <v-checkbox
+          v-model="showGradOnly"
+          label="Only show data for those who graduated"
+          color="secondary"
+          class="mt-0"
+        >
+          <template v-slot:label>
+            <span>
+              Only show data for those who graduated
+            </span>
+          </template>
+        </v-checkbox> 
+        </v-col>    
+    </v-row>
+    <v-row> 
+        <v-col>                            
+          <repayment-rate :school="fos" colors="solid" :gradOnly="showGradOnly" />
+        </v-col>
+    </v-row>             
   </div>
 
 </template>
@@ -180,10 +206,12 @@
 
 <script>
 import Tooltip from 'components/vue/Tooltip.vue';
+import RepaymentRate from"components/vue/RepaymentRate.vue";
 
 export default {
   components: {
-    'tooltip': Tooltip
+    'tooltip': Tooltip,
+    'repayment-rate': RepaymentRate
   },
   props: {
     fos:{
@@ -205,7 +233,8 @@ export default {
     fosShowDebtPriorIncluded:{
       type: Boolean,
       default: false
-    }
+    },
+    showGradOnly: false
   },
   computed:{
     isBranch(){

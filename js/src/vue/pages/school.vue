@@ -960,9 +960,33 @@
                           </p>
                         </v-col>
                       </v-row>
-
+                      <v-row v-if="aidLoanSelect === 'fed'">                            
+                        <v-col cols="12" md="5">
+                        <h2 class="mb-3">
+                          Repayment Rate&nbsp;<tooltip definition="repayment-rate" /></h2>
+                    </v-col>
+                    <v-col cols="12" md="5">
+                        <v-checkbox
+                          v-model="showGradOnly"
+                          label="Only show data for those who graduated"
+                          color="secondary"
+                          class="mt-0"
+                        >
+                          <template v-slot:label>
+                            <span>
+                              Only show data for those who graduated
+                            </span>
+                          </template>
+                        </v-checkbox> 
+                        </v-col>    
+                    </v-row>
+                    <v-row v-if="aidLoanSelect === 'fed'" class="mb-2"> 
+                        <v-col>                            
+                          <repayment-rate v-if="aidLoanSelect === 'fed'" :school="school" colors="solid" :gradOnly="showGradOnly" />
+                        </v-col>
+                    </v-row>                          
                       <div class="fos-profile-panel fos-profile-mini pl-4"
-                           v-if="selectedFOSDetail"
+                           v-if="selectedFOSDetail && aidLoanSelect === 'fed'"
                       >
                         <span class="field-of-study-select-icon mr-2"
                               style="width: 35px;height: 35px;float: left;"
@@ -1601,6 +1625,7 @@ import BarChart from "components/vue/Bar.vue";
 import Tooltip from "components/vue/Tooltip.vue";
 import SankeyButtons from "components/vue/SankeyButtons.vue";
 import Sankey from "components/vue/Sankey.vue";
+import RepaymentRate from"components/vue/RepaymentRate.vue";
 import Range from "components/vue/Range.vue";
 import HorizontalBar from "components/vue/HorizontalBar.vue";
 import Share from "components/vue/Share.vue";
@@ -1634,6 +1659,7 @@ export default {
     tooltip: Tooltip,
     "sankey-buttons": SankeyButtons,
     sankey: Sankey,
+    "repayment-rate": RepaymentRate,
     range: Range,
     "horizontal-bar": HorizontalBar,
     share: Share,
@@ -1665,6 +1691,11 @@ export default {
         enroll: "enroll_both",
         study: "study_both"
       },
+      currentRepayment: {
+        enroll: "enroll_both",
+        study: "study_both"
+      },      
+      showGradOnly: false,
       selectedFOS: {
         text:""
       },
