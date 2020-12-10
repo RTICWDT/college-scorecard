@@ -64,6 +64,7 @@ jobs:
         run: |
           mkdir -p __tests__/reports/unit
           mkdir -p __tests__/reports/browser
+          mkdir -p __tests__/reports/e2e
     
       - name: Run Jest unit tests
         run: JEST_JUNIT_OUTPUT_DIR="__tests__/reports/unit" JEST_JUNIT_OUTPUT_NAME="unit.xml" npx jest --ci --reporters=default --reporters=jest-junit
