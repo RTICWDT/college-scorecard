@@ -875,27 +875,6 @@
                             <div v-else class="data-na">Data Not Available</div>
                             <p class="mt-2">This is an estimated percentage of the number of students who had a parent who borrowed a Parent PLUS loan.</p>
                           </div>
-
-                          <div v-if="aidLoanSelect === 'fed'">
-                            <h2 class="mb-3">
-                              Repayment Rate
-                              <tooltip definition="repyament-rate" />
-
-                              <v-checkbox
-                                v-model="showGradOnly"
-                                label="Only show data for those who graduated"
-                                color="secondary"
-                              >
-                                <template v-slot:label>
-                                  <span>
-                                    Only show data for those who graduated
-                                  </span>
-                                </template>
-                              </v-checkbox>                                      
-                            </h2>
-                          <repayment-rate :school="school" colors="solid" :currentSankey="currentRepayment" />
-
-                          </div>
                         </v-col>
 
                         <v-col cols="12" md="6">
@@ -981,9 +960,33 @@
                           </p>
                         </v-col>
                       </v-row>
-
+                      <v-row v-if="aidLoanSelect === 'fed'">                            
+                        <v-col cols="12" md="5">
+                        <h2 class="mb-3">
+                          Repayment Rate&nbsp;<tooltip definition="repayment-rate" /></h2>
+                    </v-col>
+                    <v-col cols="12" md="5">
+                        <v-checkbox
+                          v-model="showGradOnly"
+                          label="Only show data for those who graduated"
+                          color="secondary"
+                          class="mt-0"
+                        >
+                          <template v-slot:label>
+                            <span>
+                              Only show data for those who graduated
+                            </span>
+                          </template>
+                        </v-checkbox> 
+                        </v-col>    
+                    </v-row>
+                    <v-row v-if="aidLoanSelect === 'fed'" class="mb-2"> 
+                        <v-col>                            
+                          <repayment-rate v-if="aidLoanSelect === 'fed'" :school="school" colors="solid" :gradOnly="showGradOnly" />
+                        </v-col>
+                    </v-row>                          
                       <div class="fos-profile-panel fos-profile-mini pl-4"
-                           v-if="selectedFOSDetail"
+                           v-if="selectedFOSDetail && aidLoanSelect === 'fed'"
                       >
                         <span class="field-of-study-select-icon mr-2"
                               style="width: 35px;height: 35px;float: left;"
