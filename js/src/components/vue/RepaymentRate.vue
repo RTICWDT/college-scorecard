@@ -26,9 +26,9 @@
     padding-right: $base-padding;
   }
   .om_sankey{
-    width: 100%;
+    width: 30%;
     height: 300px;
-    margin-top: $base-padding;
+    
     padding-left: $base-padding;
 
     text[text-anchor="end"]{
@@ -159,11 +159,14 @@ export default {
      
       for (var q in currentData) {
         percent = Math.round(currentData[q] * 100);
-        if (percent > 0) {
+        if (currentData[q] == null) {
+          rows.push(["NA - " + friendlyMetrics[q], "Group", 2]);
+        }
+        else if (percent > 1) {
           rows.push([percent + "% " + friendlyMetrics[q], "Group", percent]);
         }
-        else if (percent == 0) {
-          rows.push([percent + "% " + friendlyMetrics[q], "Group", 1]);
+        else if (0 <= percent <= 1) {
+          rows.push([percent + "% " + friendlyMetrics[q], "Group", 2]);
         }        
         else if (!percent) {
           rows.push(["NA - " + friendlyMetrics[q], "Group", 2]);
@@ -214,11 +217,11 @@ export default {
             node: {
               colors: colors,
               width: 80,
-              //nodePadding: 0,
+              nodePadding: '10px',
               label: {
                 fontName:
                   'Public Sans,"Helvetica Neue",Helvetica,arial,sans-serif',
-                fontSize: 14,
+                fontSize: 12,
                 color: "#040404"
               },
               interactivity: false,
