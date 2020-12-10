@@ -2,7 +2,7 @@ var baseUrl = require('./__tests__/utility/url');
 
 exports.config = {
   tests: './__tests__/e2e/*_test.js',
-  output: './output',
+  output: './__tests__/output',
   helpers: {
     Puppeteer: {
       url: baseUrl || 'http://localhost:4000',

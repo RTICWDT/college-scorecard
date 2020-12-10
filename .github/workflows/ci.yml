@@ -30,6 +30,9 @@ jobs:
         with:
           node-version: 10.17.0 
 
+      - name: GitHub Action for npx
+        uses: mikeal/npx@1.0.0
+
 #       - name: Get the latest commit on PR
 #         id: get-latest-commit
 #         if: ${{ github.event_name == 'pull_request' }}
