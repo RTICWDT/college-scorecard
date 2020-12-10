@@ -961,16 +961,17 @@
                         </v-col>
                       </v-row>
                       <v-row v-if="aidLoanSelect === 'fed'">                            
-                        <v-col cols="12" md="5">
-                        <h2 class="mb-3">
+                        <v-col cols="12" md="6">
+                        <h2 class="mb-0">
                           Repayment Rate&nbsp;<tooltip definition="repayment-rate" /></h2>
                     </v-col>
-                    <v-col cols="12" md="5">
+                    <v-col cols="12" md="6">
                         <v-checkbox
                           v-model="showGradOnly"
                           label="Only show data for those who graduated"
                           color="secondary"
                           class="mt-0"
+                          id="showGradOnly"
                         >
                           <template v-slot:label>
                             <span>
@@ -981,7 +982,7 @@
                         </v-col>    
                     </v-row>
                     <v-row v-if="aidLoanSelect === 'fed'" class="mb-2"> 
-                        <v-col>                            
+                        <v-col class="pt-0 pb-2">                            
                           <repayment-rate v-if="aidLoanSelect === 'fed'" :school="school" colors="solid" :gradOnly="showGradOnly" />
                         </v-col>
                     </v-row>                          
@@ -1614,6 +1615,12 @@
   #profile-field-of-study-summary-metric-empty{
     /*height: 320px;*/
     height: auto;
+  }
+
+  #showGradOnly {
+    .v-messages {
+      display:none;
+    }
   }
 
 </style>
