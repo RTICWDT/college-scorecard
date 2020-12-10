@@ -75,7 +75,7 @@ jobs:
         run: sleep 30
 
       - name: Run Browser tests
-        run: npx codeceptjs run --steps --reporter xunit > __tests__/reports/browser/browser.xml
+        run: npx codeceptjs run --steps
                
       - name: Save assets
         uses: actions/upload-artifact@v2
