@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "sass/_variables.scss";
   
 
@@ -123,18 +123,18 @@ export default {
             }
       }`*/
       
-      this.outcomes = JSON.parse(outcomesString);
+     //this.outcomes = JSON.parse(this.outcomes);
     },
 
     drawSankeyChart() {
       var links = {
         ugcomp: {
-            variable: "graduates",
+            variable: "ugcomp",
             text:
               "Out of students who started college here and started their studies full-time..."
         },
         ug: {
-            variable: "all",
+            variable: "ug",
             text:
               "Out of students who started college here and started their studies full-time..."
         }        
@@ -145,36 +145,39 @@ export default {
         makingprogress: "Making Progress",
         noprogress: "Not Making Progress",
         deferment: "Deferment",
-        deqlinquent: "Delinquent",
+        delinquent: "Delinquent",
         default: "Defaulted",
-        discharged: "Discharged",
-        forebearance: "Forebearance",        
+        discharge: "Discharged",
+        forbearance: "Forbearance",        
       };
+      
 
-      var metricVariable = (this.gradOnly ? links.graduates.variable : links.all.variable);
+      var metricVariable = (this.gradOnly ? links.ugcomp.variable : links.ug.variable);
       var currentData = _.get(
         this.outcomes,
         metricVariable
       );
+
+      console.log(currentData);
+
       var rows = [];
       var percent;
      
       for (var q in currentData) {
         percent = Math.round(currentData[q] * 100);
-        if (currentData[q] == null) {
+        if (currentData[q] == null && friendlyMetrics[q]) {
           rows.push(["NA - " + friendlyMetrics[q], "Group", 2]);
         }
-        else if (percent > 1) {
+        else if (percent > 1 && friendlyMetrics[q]) {
           rows.push([percent + "% " + friendlyMetrics[q], "Group", percent]);
         }
-        else if (0 <= percent <= 1) {
+        else if (0 <= percent <= 1 && friendlyMetrics[q]) {
           rows.push([percent + "% " + friendlyMetrics[q], "Group", 2]);
         }        
-        else if (!percent) {
-          rows.push(["NA - " + friendlyMetrics[q], "Group", 2]);
+        else if (!percent && friendlyMetrics[q]) {
+          rows.push(["N/A - " + friendlyMetrics[q], "Group", 2]);
         }
       }
-
       if (rows.length > 0) {
         this.has_data = true;
         var data = new google.visualization.DataTable();
