@@ -26,7 +26,7 @@
     padding-right: $base-padding;
   }
   .om_sankey{
-    width: 30%;
+    width: 250px;
     height: 300px;
 
 
