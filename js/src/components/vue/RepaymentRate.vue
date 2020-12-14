@@ -26,10 +26,9 @@
     padding-right: $base-padding;
   }
   .om_sankey{
-    width: 30%;
+    width: 250px;
     height: 300px;
-    
-    padding-left: $base-padding;
+
 
     text[text-anchor="end"]{
       display:none;
@@ -94,12 +93,14 @@ export default {
 
   methods: {
     extractData() {
+
+      var repayment_field = "latest.repayment.1_yr_bb_fed_repayment"
       this.outcomes = _.get(
         this.school,
-        "latest.completion.outcome_percentage_suppressed"
+        repayment_field
       );
 
-      var outcomesString = `{
+      /*var outcomesString = `{
         "graduates": {
             "paid_in_full": 0.25,
             "making_progress": 0.25,
@@ -120,59 +121,63 @@ export default {
             "discharged": 0.3500,
             "forebearance": 0.0395
             }
-      }`
-      this.outcomes = JSON.parse(outcomesString);
+      }`*/
+      
+     //this.outcomes = JSON.parse(this.outcomes);
     },
 
     drawSankeyChart() {
       var links = {
-        graduates: {
-            variable: "graduates",
+        ugcomp: {
+            variable: "ugcomp",
             text:
               "Out of students who started college here and started their studies full-time..."
         },
-        all: {
-            variable: "all",
+        ug: {
+            variable: "ug",
             text:
               "Out of students who started college here and started their studies full-time..."
         }        
       };
 
       var friendlyMetrics = {
-        paid_in_full: "Paid In Full",
-        making_progress: "Making Progress",
-        not_making_progress: "Not Making Progress",
+        fullypaid: "Paid In Full",
+        makingprogress: "Making Progress",
+        noprogress: "Not Making Progress",
         deferment: "Deferment",
-        deqlinquent: "Delinquent",
-        defaulted: "Defaulted",
-        discharged: "Discharged",
-        forebearance: "Forebearance",        
+        delinquent: "Delinquent",
+        default: "Defaulted",
+        discharge: "Discharged",
+        forbearance: "Forbearance",        
       };
+      
 
-      var metricVariable = (this.gradOnly ? links.graduates.variable : links.all.variable);
+      var metricVariable = (this.gradOnly ? links.ugcomp.variable : links.ug.variable);
       var currentData = _.get(
         this.outcomes,
         metricVariable
       );
+
+      console.log(currentData);
+
       var rows = [];
       var percent;
      
       for (var q in currentData) {
         percent = Math.round(currentData[q] * 100);
-        if (currentData[q] == null) {
+        if (currentData[q] == null && friendlyMetrics[q]) {
           rows.push(["NA - " + friendlyMetrics[q], "Group", 2]);
         }
-        else if (percent > 1) {
+        else if (percent > 1 && friendlyMetrics[q]) {
           rows.push([percent + "% " + friendlyMetrics[q], "Group", percent]);
         }
-        else if (0 <= percent <= 1) {
+        else if (0 <= percent <= 1 && friendlyMetrics[q]) {
           rows.push([percent + "% " + friendlyMetrics[q], "Group", 2]);
         }        
-        else if (!percent) {
-          rows.push(["NA - " + friendlyMetrics[q], "Group", 2]);
+        else if (!percent && friendlyMetrics[q]) {
+          rows.push(["N/A - " + friendlyMetrics[q], "Group", 2]);
         }
       }
-
       if (rows.length > 0) {
         this.has_data = true;
         var data = new google.visualization.DataTable();
