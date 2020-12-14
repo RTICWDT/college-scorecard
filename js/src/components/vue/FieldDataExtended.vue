@@ -186,8 +186,7 @@ import Tooltip from 'components/vue/Tooltip.vue';
 
 export default {
   components: {
-    'tooltip': Tooltip,
-    'repayment-rate': RepaymentRate
+    'tooltip': Tooltip
   },
   props: {
     fos:{
