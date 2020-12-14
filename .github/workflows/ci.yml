@@ -30,6 +30,9 @@ jobs:
         with:
           node-version: 10.17.0 
 
+      - name: GitHub Action for npx
+        uses: mikeal/npx@1.0.0
+
 #       - name: Get the latest commit on PR
 #         id: get-latest-commit
 #         if: ${{ github.event_name == 'pull_request' }}
@@ -61,6 +64,7 @@ jobs:
         run: |
           mkdir -p __tests__/reports/unit
           mkdir -p __tests__/reports/browser
+          mkdir -p __tests__/reports/e2e
     
       - name: Run Jest unit tests
         run: JEST_JUNIT_OUTPUT_DIR="__tests__/reports/unit" JEST_JUNIT_OUTPUT_NAME="unit.xml" npx jest --ci --reporters=default --reporters=jest-junit
@@ -72,7 +76,7 @@ jobs:
         run: sleep 30
 
       - name: Run Browser tests
-        run: npx codeceptjs run --steps --reporter xunit > __tests__/reports/browser/browser.xml
+        run: npx codeceptjs run --steps
                
       - name: Save assets
         uses: actions/upload-artifact@v2

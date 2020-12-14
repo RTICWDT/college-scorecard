@@ -2,7 +2,7 @@ var baseUrl = require('./__tests__/utility/url');
 
 exports.config = {
   tests: './__tests__/e2e/*_test.js',
-  output: './output',
+  output: './__tests__/reports/e2e',
   helpers: {
     Puppeteer: {
       url: baseUrl || 'http://localhost:4000',
@@ -20,11 +20,11 @@ exports.config = {
       }
     },
     LocalStorage: {
-      require: './localstorage_helper.js',
+      require: './__tests__/utility/localstorage_helper.js',
     },
   },
   include: {
-    I: './steps_file.js'
+    I: './__tests__/utility/steps_file.js'
   },
   bootstrap: null,
   mocha: {},
