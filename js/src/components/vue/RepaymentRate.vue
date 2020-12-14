@@ -93,11 +93,8 @@ export default {
 
   methods: {
     extractData() {
-      var repayment_field = "latest.repayment.1_yr_bb_fed_repayment.ug";
-      if (showGradOnly) {
-        repayment_field = "latest.repayment.1_yr_bb_fed_repayment.ugcomp"
-      }
-      repayment_field = "latest.repayment.1_yr_bb_fed_repayment"
+
+      var repayment_field = "latest.repayment.1_yr_bb_fed_repayment"
       this.outcomes = _.get(
         this.school,
         repayment_field
@@ -125,6 +122,7 @@ export default {
             "forebearance": 0.0395
             }
       }`*/
+      
       this.outcomes = JSON.parse(outcomesString);
     },
 
