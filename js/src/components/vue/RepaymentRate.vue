@@ -28,8 +28,7 @@
   .om_sankey{
     width: 30%;
     height: 300px;
-    
-    padding-left: $base-padding;
+
 
     text[text-anchor="end"]{
       display:none;
@@ -94,12 +93,17 @@ export default {
 
   methods: {
     extractData() {
+      var repayment_field = "latest.repayment.1_yr_bb_fed_repayment.ug";
+      if (showGradOnly) {
+        repayment_field = "latest.repayment.1_yr_bb_fed_repayment.ugcomp"
+      }
+      repayment_field = "latest.repayment.1_yr_bb_fed_repayment"
       this.outcomes = _.get(
         this.school,
-        "latest.completion.outcome_percentage_suppressed"
+        repayment_field
       );
 
-      var outcomesString = `{
+      /*var outcomesString = `{
         "graduates": {
             "paid_in_full": 0.25,
             "making_progress": 0.25,
@@ -120,18 +124,18 @@ export default {
             "discharged": 0.3500,
             "forebearance": 0.0395
             }
-      }`
+      }`*/
       this.outcomes = JSON.parse(outcomesString);
     },
 
     drawSankeyChart() {
       var links = {
-        graduates: {
+        ugcomp: {
             variable: "graduates",
             text:
               "Out of students who started college here and started their studies full-time..."
         },
-        all: {
+        ug: {
             variable: "all",
             text:
               "Out of students who started college here and started their studies full-time..."
@@ -139,12 +143,12 @@ export default {
       };
 
       var friendlyMetrics = {
-        paid_in_full: "Paid In Full",
-        making_progress: "Making Progress",
-        not_making_progress: "Not Making Progress",
+        fullypaid: "Paid In Full",
+        makingprogress: "Making Progress",
+        noprogress: "Not Making Progress",
         deferment: "Deferment",
         deqlinquent: "Delinquent",
-        defaulted: "Defaulted",
+        default: "Defaulted",
         discharged: "Discharged",
         forebearance: "Forebearance",        
       };
