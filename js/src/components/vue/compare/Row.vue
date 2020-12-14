@@ -28,6 +28,8 @@
 
     <sankey v-if="school && config.chart=='Sankey'" :school="school" colors="solid" :currentSankey="config.currentSankey" />
 
+     <repayment-rate v-if="school && config.chart=='RepaymentRate'" :school="school" colors="solid" :currentSankey="config.currentSankey" />
+
     <multi-range 
         v-if="school && config.chart=='MultiRange'"
         :minmax="value"

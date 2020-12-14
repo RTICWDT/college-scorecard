@@ -166,7 +166,7 @@ export default {
       for (var q in currentData) {
         percent = Math.round(currentData[q] * 100);
         if (currentData[q] == null && friendlyMetrics[q]) {
-          rows.push(["NA - " + friendlyMetrics[q], "Group", 2]);
+          rows.push(["N/A - " + friendlyMetrics[q], "Group", 2]);
         }
         else if (percent > 1 && friendlyMetrics[q]) {
           rows.push([percent + "% " + friendlyMetrics[q], "Group", percent]);
