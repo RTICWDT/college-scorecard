@@ -781,7 +781,7 @@
                     />
                     <compare-section
                       :schools="schools"
-                      title="Outcomes 8 Years After Attending"
+                      title="Repayment Rates"
                       definition="outcome-measures"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
