@@ -53,7 +53,7 @@
     </h3>
 
     <v-row class="mx-1 mx-sm-1">
-      <v-col cols="12" md="5" class="d-flex">
+      <v-col cols="12" md="5">
         <v-checkbox
           hide-details
           v-model="checked"
@@ -63,10 +63,10 @@
           <template v-slot:label>
             <span class="profile-fos-include-prior-debt">
               Include debt borrowed at any prior institutions&nbsp
+              <tooltip definition="include-debt-prior-inst" />
             </span>
           </template>
         </v-checkbox>
-        <tooltip definition="include-debt-prior-inst" />
       </v-col>
 
       <!--Median Total-->
