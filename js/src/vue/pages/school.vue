@@ -839,11 +839,11 @@
                           >
                             <template v-slot:label>
                               <span>
-                                Include debt borrowed at any prior institutions
+                                Include debt borrowed at any prior institutions&nbsp;<tooltip definition="include-debt-prior-inst" />
                               </span>
                             </template>
                           </v-checkbox>
-                          <tooltip definition="include-debt-prior-inst" />
+                          
                         </v-col>
 
                         <v-col cols="12" md="6">
@@ -1011,17 +1011,16 @@
                             >
                               <template v-slot:label>
                                 <span class="profile-fos-include-prior-debt">
-                                  Include debt borrowed at any prior institutions
+                                  Include debt borrowed at any prior institutions&nbsp;<tooltip definition="include-debt-prior-inst" />
                                 </span>
                               </template>
                             </v-checkbox>
-                            <tooltip definition="include-debt-prior-inst" />
                           </v-col>
 
                           <!--Median Total-->
                           <v-col cols="12" md="4" sm="12">
                             <h4 class="mb-2">
-                              Median Total Debt After Graduation&nbsp
+                              Median Total Debt After Graduation&nbsp;
                               <tooltip v-if="!fosShowDebtAtPrior" definition="fos-median-debt" />
                               <tooltip v-else definition="fos-median-debt-all-schools" />
                             </h4>

@@ -761,7 +761,7 @@
                         multiRangeAidLoanSelect: aidLoanSelect,
                         max: { value: 1000, label: '$1,000' }
                       }"
-                    />                                                         
+                    >                                                         
                       <template>
                         <v-checkbox
                           class="my-0"
@@ -778,19 +778,31 @@
                       </template>
                     </compare-section>
 
-                    />
                     <compare-section
                       :schools="schools"
-                      title="Repayment Rates"
-                      definition="outcome-measures"
+                      title="Repayment Rate"
+                      definition="repayment-rate"
                       :currentHighlight="currentHighlight"
                       @update-highlight="currentHighlight = $event"
                       :config="{
                         color: '#0e365b',
                         chart: 'RepaymentRate',
-                        currentSankey: currentSankey
+                        showGradOnly: showGradOnly
                       }"
                     >
+                      <template>
+                        <v-checkbox
+                          class="my-0"
+                          v-model="showGradOnly"
+                          hide-details
+                        >
+                          <template v-slot:label>
+                            <span>
+                              Only show data for those who graduated
+                            </span>
+                          </template>
+                        </v-checkbox>
+                      </template>
                     </compare-section>
 
                   </v-expansion-panel-content>
@@ -1126,6 +1138,7 @@ export default {
       ],
       fosFinancialCheckboxIncludePrior: false,
       aidShowMedianDebtWithPrior: false,
+      showGradOnly: false,
       aidLoanSelect:'fed',
       aidLoanSelectItems:[
         { text: "Federal Student Loans", value: "fed"},
