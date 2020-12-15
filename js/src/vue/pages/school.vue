@@ -839,11 +839,11 @@
                           >
                             <template v-slot:label>
                               <span>
-                                Include debt borrowed at any prior institutions&nbsp;<tooltip definition="include-debt-prior-inst" />
+                                Include debt borrowed at any prior institutions&nbsp;
                               </span>
                             </template>
                           </v-checkbox>
-                          
+                          <tooltip definition="include-debt-prior-inst" />
                         </v-col>
 
                         <v-col cols="12" md="6">
@@ -1011,10 +1011,11 @@
                             >
                               <template v-slot:label>
                                 <span class="profile-fos-include-prior-debt">
-                                  Include debt borrowed at any prior institutions&nbsp;<tooltip definition="include-debt-prior-inst" />
+                                  Include debt borrowed at any prior institutions&nbsp;
                                 </span>
                               </template>
                             </v-checkbox>
+                            <tooltip definition="include-debt-prior-inst" />
                           </v-col>
 
                           <!--Median Total-->
