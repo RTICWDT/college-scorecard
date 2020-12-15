@@ -158,8 +158,6 @@ export default {
         metricVariable
       );
 
-      console.log(currentData);
-
       var rows = [];
       var percent;
      

@@ -963,7 +963,7 @@
                       <v-row v-if="aidLoanSelect === 'fed'">                            
                         <v-col cols="12" md="12">
                         <h2 class="mb-0">
-                          Repayment Rate&nbsp;<tooltip definition="repayment-rate" /></h2>
+                          Repayment Rate&nbsp;<tooltip definition="repayment-rate" :isBranch="isBranch" /></h2>
                     </v-col>
                     <v-col cols="12" md="6">
                         <v-checkbox
