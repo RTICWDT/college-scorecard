@@ -94,7 +94,7 @@ export default {
   methods: {
     extractData() {
 
-      var repayment_field = "latest.repayment.1_yr_bb_fed_repayment"
+      var repayment_field = "latest.2_yr_bb_fed_repayment_suppressed"
       this.outcomes = _.get(
         this.school,
         repayment_field
