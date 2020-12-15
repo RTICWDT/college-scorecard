@@ -300,21 +300,19 @@
                             <tooltip v-else-if="fosFinancialCheckboxIncludePrior" definition="fos-median-debt-all-schools" :isCompare="true" />
                         </h3>
 
-                        <div class="d-flex">
-                          <v-checkbox
-                            class="mx-5 mb-5"
-                            hide-details
-                            v-model="fosFinancialCheckboxIncludePrior"
-                            label="Include debt borrowed at any prior institutions"
-                          >
-                            <template v-slot:label>
-                            <span class="profile-fos-include-prior-debt">
-                              Include debt borrowed at any prior institutions
-                            </span>
-                            </template>
-                          </v-checkbox>
-                          <tooltip definition="include-debt-prior-inst" />
-                        </div>
+                        <v-checkbox
+                          class="mx-5 mb-5"
+                          hide-details
+                          v-model="fosFinancialCheckboxIncludePrior"
+                          label="Include debt borrowed at any prior institutions"
+                        >
+                          <template v-slot:label>
+                          <span class="profile-fos-include-prior-debt">
+                            Include debt borrowed at any prior institutions
+                            <tooltip definition="include-debt-prior-inst" />
+                          </span>
+                          </template>
+                        </v-checkbox>
 
                         <compare-block
                           v-for="credentialLevel in filteredFieldsOfStudy"
@@ -364,21 +362,19 @@
                               <tooltip v-else-if="fosFinancialCheckboxIncludePrior" definition="fos-monthly-debt-payment-all-schools" />
                         </h3>
 
-                        <div class="d-flex">
-                          <v-checkbox
-                            class="mx-5 mb-5"
-                            hide-details
-                            v-model="fosFinancialCheckboxIncludePrior"
-                            label="Include debt borrowed at any prior institutions"
-                          >
-                            <template v-slot:label>
-                            <span class="profile-fos-include-prior-debt">
-                              Include debt borrowed at any prior institutions
-                            </span>
-                            </template>
-                          </v-checkbox>
-                          <tooltip definition="include-debt-prior-inst" />
-                        </div>
+                        <v-checkbox
+                          class="mx-5 mb-5"
+                          hide-details
+                          v-model="fosFinancialCheckboxIncludePrior"
+                          label="Include debt borrowed at any prior institutions"
+                        >
+                          <template v-slot:label>
+                          <span class="profile-fos-include-prior-debt">
+                            Include debt borrowed at any prior institutions
+                            <tooltip definition="include-debt-prior-inst" />
+                          </span>
+                          </template>
+                        </v-checkbox>
 
                         <compare-block
                           v-for="credentialLevel in filteredFieldsOfStudy"
@@ -734,20 +730,18 @@
                       }"
                     >                                                        
                       <template>
-                        <div class="d-flex">
-                          <v-checkbox
-                            class="my-0"
-                            v-model="aidShowMedianDebtWithPrior"
-                            hide-details
-                          >
-                            <template v-slot:label>
-                              <span>
-                                Include debt borrowed at any prior institutions
-                              </span>
-                            </template>
-                          </v-checkbox>
-                          <tooltip definition="include-debt-prior-inst" />
-                        </div>
+                        <v-checkbox
+                          class="my-0"
+                          v-model="aidShowMedianDebtWithPrior"
+                          hide-details
+                        >
+                          <template v-slot:label>
+                            <span>
+                              Include debt borrowed at any prior institutions
+                              <tooltip definition="include-debt-prior-inst" />
+                            </span>
+                          </template>
+                        </v-checkbox>
                       </template>
                     </compare-section>
 
@@ -767,22 +761,47 @@
                         multiRangeAidLoanSelect: aidLoanSelect,
                         max: { value: 1000, label: '$1,000' }
                       }"
-                    />                                                         
+                    >                                                         
                       <template>
-                        <div class="d-flex">
-                          <v-checkbox
-                            class="my-0"
-                            v-model="aidShowMedianDebtWithPrior"
-                            hide-details
-                          >
-                            <template v-slot:label>
-                              <span>
-                                Include debt borrowed at any prior institutions
-                              </span>
-                            </template>
-                          </v-checkbox>
-                          <tooltip definition="include-debt-prior-inst" />
-                        </div>
+                        <v-checkbox
+                          class="my-0"
+                          v-model="aidShowMedianDebtWithPrior"
+                          hide-details
+                        >
+                          <template v-slot:label>
+                            <span>
+                              Include debt borrowed at any prior institutions
+                              <tooltip definition="include-debt-prior-inst" />
+                            </span>
+                          </template>
+                        </v-checkbox>
+                      </template>
+                    </compare-section>
+
+                    <compare-section
+                      :schools="schools"
+                      title="Repayment Rate"
+                      definition="repayment-rate"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
+                      :config="{
+                        color: '#0e365b',
+                        chart: 'RepaymentRate',
+                        showGradOnly: showGradOnly
+                      }"
+                    >
+                      <template>
+                        <v-checkbox
+                          class="my-0"
+                          v-model="showGradOnly"
+                          hide-details
+                        >
+                          <template v-slot:label>
+                            <span>
+                              Only show data for those who graduated
+                            </span>
+                          </template>
+                        </v-checkbox>
                       </template>
                     </compare-section>
 
@@ -1119,6 +1138,7 @@ export default {
       ],
       fosFinancialCheckboxIncludePrior: false,
       aidShowMedianDebtWithPrior: false,
+      showGradOnly: false,
       aidLoanSelect:'fed',
       aidLoanSelectItems:[
         { text: "Federal Student Loans", value: "fed"},
