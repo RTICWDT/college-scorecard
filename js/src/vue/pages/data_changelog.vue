@@ -18,6 +18,27 @@
               <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
               <v-expansion-panels>
                 <v-expansion-panel>                  
+                  <v-expansion-panel-header>December XX, 2020</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <p>On December XX, 2020, the Department updated the College Scorecard website with new post-enrollment repayment status information in the institution profiles on the consumer website. Data updates in this release include:</p>
+                    <ul>
+                      <li>
+                        More recent data values for
+                        <ul>
+                          <li>Currently Operating Status Flag</li>
+                          <li>Heightened Cash Monitoring Flag</li>
+                          <li>Accrediting Agency Name</li>
+                          <li>Accrediting Agency Code</li>
+                          <li>Title IV Approval Date</li>
+                        </ul>
+                      </li>
+                      <li>New institution-level metrics that describe repayment progress based on the amount originally borrowed compared to the balance amount at various measurement points.</li>
+                      <li>New institution-level metrics that describe the proportions of borrowers that fall into one of eight loan status categories: default, delinquent, forbearance, deferment, not making progress, making progress, paid in full, and discharged.</li>
+                      </ul>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+
+                <v-expansion-panel>                  
                   <v-expansion-panel-header>December 2, 2020</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <p>On December 2, 2020, the Department updated the College Scorecard website with the second installment of its annual refresh that includes newer, updated data for metrics from NSLDS and Treasury Department data sources. The user interface of the consumer site was also refreshed with an updated look and feel and closer integration of the Field of Study data within the institution profile. This includes additional search options and methods, simplified navigation and updated comparison tool. Data updates in this release include:</p>
