@@ -928,7 +928,7 @@
                     <v-btn
                       rounded
                       color="secondary"
-                      :href="`${$baseUrl}/search?toggle=fos`"
+                      :href="`${$baseUrl}/search/?toggle=fos`"
                     >
                       SEARCH FIELDS OF STUDY
                     </v-btn>
