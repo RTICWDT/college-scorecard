@@ -26,7 +26,7 @@
     padding-right: $base-padding;
   }
   .om_sankey{
-    width: 300px;
+    width: 330px;
     height: 300px;
 
 
@@ -70,7 +70,7 @@ export default {
     return {
       outcomes: Object,
       outcome_cohorts: Object,
-      has_data: true
+      has_data: false
     };
   },
   computed:{
@@ -167,16 +167,18 @@ export default {
         }
         else if (percent > 1 && friendlyMetrics[sortable[q][0]]) {
           rows.push([percent + "% " + friendlyMetrics[sortable[q][0]], "Group", percent]);
+          this.has_data = true;
         }
         else if (0 <= percent <= 1 && friendlyMetrics[sortable[q][0]]) {
           rows.push([percent + "% " + friendlyMetrics[sortable[q][0]], "Group", 2]);
+          this.has_data = true;
         }        
         else if (!percent && friendlyMetrics[sortable[q][0]]) {
           rows.push(["Data Not Available - " + friendlyMetrics[sortable[q][0]], "Group", 2]);
+          this.has_data = true;
         }
       }
       if (rows.length > 0) {
-        this.has_data = true;
         var data = new google.visualization.DataTable();
         data.addColumn("string", "From");
         data.addColumn("string", "To");
