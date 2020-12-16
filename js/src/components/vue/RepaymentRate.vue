@@ -26,7 +26,7 @@
     padding-right: $base-padding;
   }
   .om_sankey{
-    width: 250px;
+    width: 300px;
     height: 300px;
 
 
@@ -99,31 +99,6 @@ export default {
         this.school,
         repayment_field
       );
-
-      /*var outcomesString = `{
-        "graduates": {
-            "paid_in_full": 0.25,
-            "making_progress": 0.25,
-            "not_making_progress": 0.035,
-            "deferment": 0.1000,
-            "deqlinquent": 0.0500,
-            "defaulted": 0.0500,
-            "discharged": 0.0195,
-            "forebearance": null
-            },
-        "all": {
-            "paid_in_full": 0.0300,
-            "making_progress": 0.0105,
-            "not_making_progress": 0,
-            "deferment": 0.1000,
-            "deqlinquent": 0.100,
-            "defaulted": 0.3505,
-            "discharged": 0.3500,
-            "forebearance": 0.0395
-            }
-      }`*/
-      
-     //this.outcomes = JSON.parse(this.outcomes);
     },
 
     drawSankeyChart() {
@@ -150,7 +125,6 @@ export default {
         discharge: "Discharged",
         forbearance: "Forbearance",        
       };
-      
 
       var metricVariable = (this.gradOnly ? links.ugcomp.variable : links.ug.variable);
       var currentData = _.get(
@@ -158,38 +132,62 @@ export default {
         metricVariable
       );
 
+      
+      delete currentData['count'];
+      
       var rows = [];
       var percent;
      
-      for (var q in currentData) {
-        percent = Math.round(currentData[q] * 100);
-        if (currentData[q] == null && friendlyMetrics[q]) {
-          rows.push(["N/A - " + friendlyMetrics[q], "Group", 2]);
+      var colors = [];
+       var sortable = [];
+        for (var node in currentData) {
+            sortable.push([node, currentData[node]]);
         }
-        else if (percent > 1 && friendlyMetrics[q]) {
-          rows.push([percent + "% " + friendlyMetrics[q], "Group", percent]);
+
+        sortable.sort(function(a, b) {
+            return b[1] - a[1];
+        });
+
+        sortable.forEach(function (item, index) {
+          if (index == 1) {
+            colors.push("#FFFFFF");
+          }
+          if (sortable[index][1] == null) {
+            colors.push("#bbbbbb");
+         }
+         else {
+           colors.push("#0e365b");
+         }
+        });
+
+      for (var q in sortable) {
+        percent = Math.round(sortable[q][1] * 100);
+        if (sortable[q][1] == null && friendlyMetrics[sortable[q][0]]) {
+          rows.push(["Data Not Available - " + friendlyMetrics[sortable[q][0]], "Group", 2]);
         }
-        else if (0 <= percent <= 1 && friendlyMetrics[q]) {
-          rows.push([percent + "% " + friendlyMetrics[q], "Group", 2]);
+        else if (percent > 1 && friendlyMetrics[sortable[q][0]]) {
+          rows.push([percent + "% " + friendlyMetrics[sortable[q][0]], "Group", percent]);
+        }
+        else if (0 <= percent <= 1 && friendlyMetrics[sortable[q][0]]) {
+          rows.push([percent + "% " + friendlyMetrics[sortable[q][0]], "Group", 2]);
         }        
-        else if (!percent && friendlyMetrics[q]) {
-          rows.push(["N/A - " + friendlyMetrics[q], "Group", 2]);
+        else if (!percent && friendlyMetrics[sortable[q][0]]) {
+          rows.push(["Data Not Available - " + friendlyMetrics[sortable[q][0]], "Group", 2]);
         }
       }
       if (rows.length > 0) {
         this.has_data = true;
         var data = new google.visualization.DataTable();
-        var colors = [];
         data.addColumn("string", "From");
         data.addColumn("string", "To");
         data.addColumn("number", "Percent");
         data.addRows(rows);
-        if (this.colors == "solid") {
+       /* if (this.colors == "solid") {
           colors = [
-            "#0e365b",
+            "#ff0000",
             "#FFFFFF",
-            "#0e365b",
-            "#0e365b",
+            "#00ff00",
+            "#0000ff",
             "#0e365b",
             "#0e365b",
             "#0e365b",
@@ -205,9 +203,12 @@ export default {
             "#49ACEC",
             "#37608D",
             "#49ACEC",
-            "#37608D"            
+            "#37608D",
+            "#37608D"         
           ];
-        }
+        }*/
+
+
 
         // Sets chart options.
         var options = {
