@@ -51,14 +51,16 @@
           ></v-text-field>
         </template>
         <template v-slot:prepend>
-          <v-checkbox v-model="enableSlider"
-            :id="`${id}-check`"
-            @change="handleEnable" 
-            color="secondary"
-            class="pa-0 ma-0"
-            hide-details
-            :aria-labelledby="generatedId"
-          ></v-checkbox>
+          <div style="display:inline-flex;min-width:100%;">
+            <v-checkbox v-model="enableSlider"
+              :id="`${id}-check`"
+              @change="handleEnable" 
+              color="secondary"
+              class="pa-0 ma-0"
+              hide-details
+              :aria-labelledby="generatedId"
+            ></v-checkbox>
+          </div>
         </template>
 
       </v-slider>
