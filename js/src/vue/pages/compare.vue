@@ -779,6 +779,7 @@
                     </compare-section>
 
                     <compare-section
+                      v-if="aidLoanSelect === 'fed'"
                       :schools="schools"
                       title="Repayment Rate"
                       definition="repayment-rate"

@@ -158,13 +158,7 @@ header {
       class="pa-0 ma=0"
     >
       <div id="nav-site-title">
-        <a :href="$baseUrl+'/'">
-          <div class='logo'><img :src="$baseUrl+'/img/US-DeptOfEducation-Seal.svg'" alt="Department of Education Seal" /></div>
-          <div class='headerText'>
-            <span class='edLine'>U.S. Department of Education</span>
-            <span class='siteTitle'>College Scorecard</span>
-          </div>
-        </a>
+        <a :href="$baseUrl+'/'"><div class='logo'><img :src="$baseUrl+'/img/US-DeptOfEducation-Seal.svg'" alt="Department of Education Seal" /></div><div class='headerText'><span class='edLine'>U.S. Department of Education</span><span class='siteTitle'>College Scorecard</span></div></a>
       </div>
 
       <!-- Medium and above navigation -->
