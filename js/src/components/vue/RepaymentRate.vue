@@ -134,6 +134,7 @@ export default {
 
       
       delete currentData['count'];
+      this.has_data = false;
       
       var rows = [];
       var percent;
