@@ -965,13 +965,13 @@
                         <h2 class="mb-0">
                           Repayment Rate&nbsp;<tooltip definition="repayment-rate" :isBranch="isBranch" /></h2>
                     </v-col>
-                    <v-col cols="12" md="6">
+                    <v-col cols="12" md="6" 
+                          id="showGradOnly">
                         <v-checkbox
                           v-model="showGradOnly"
                           label="Only show data for those who graduated"
                           color="secondary"
                           class="mt-0"
-                          id="showGradOnly"
                         >
                           <template v-slot:label>
                             <span>

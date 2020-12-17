@@ -793,7 +793,7 @@
                     >
                       <template>
                         <v-checkbox
-                          class="my-0"
+                          class="my-0 mb-2"
                           v-model="showGradOnly"
                           hide-details
                         >
