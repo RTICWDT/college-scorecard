@@ -961,12 +961,10 @@
                         </v-col>
                       </v-row>
                       <v-row v-if="aidLoanSelect === 'fed'">                            
-                        <v-col cols="12" md="12">
-                        <h2 class="mb-0">
-                          Repayment Rate&nbsp;<tooltip definition="repayment-rate" :isBranch="isBranch" /></h2>
-                    </v-col>
                     <v-col cols="12" md="6" 
                           id="showGradOnly">
+                        <h2 class="mb-3">
+                          Repayment Rate&nbsp;<tooltip definition="repayment-rate" :isBranch="isBranch" /></h2>                          
                           <span>
                             See <a v-bind:href="$baseUrl+'/data/glossary/#repayment-rate'">the glossary</a> for category definitions
                           </span>                          
