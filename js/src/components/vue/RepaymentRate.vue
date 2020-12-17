@@ -153,7 +153,7 @@ export default {
             colors.push("#FFFFFF");
           }
           if (sortable[index][1] == null) {
-            colors.push("#bbbbbb");
+            colors.push("#E4E4E4");
          }
          else {
            colors.push("#0e365b");
