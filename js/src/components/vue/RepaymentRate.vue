@@ -48,7 +48,7 @@
   }
 }
 .na{
-  height: 300px;
+  height: 250px;
 }
 
 </style>
@@ -179,7 +179,7 @@ export default {
           this.has_data = true;
         }
       }
-      if (rows.length > 0) {
+      if (rows.length > 0 && this.has_data) {
         var data = new google.visualization.DataTable();
         data.addColumn("string", "From");
         data.addColumn("string", "To");
