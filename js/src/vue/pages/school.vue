@@ -978,7 +978,10 @@
                               Only show data for those who graduated
                             </span>
                           </template>
-                        </v-checkbox> 
+                        </v-checkbox>
+                          <span>
+                            See <a v-bind:href="$baseUrl+'/data/glossary/#repayment-rate'">the glossary</a> for category definitions
+                          </span>
                         </v-col>    
                     </v-row>
                     <v-row v-if="aidLoanSelect === 'fed'" class="mb-2"> 

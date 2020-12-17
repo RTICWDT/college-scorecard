@@ -803,6 +803,9 @@
                             </span>
                           </template>
                         </v-checkbox>
+                          <span>
+                            See <a v-bind:href="$baseUrl+'/data/glossary/#repayment-rate'">the glossary</a> for category definitions
+                          </span>                        
                       </template>
                     </compare-section>
 
