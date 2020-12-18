@@ -181,7 +181,7 @@
         multiple
         chips
         hide-details
-        placeholder="Select a state..."
+        :placeholder="input.state.length > 0 ? undefined : 'Select a state...'"
         class="mt-0 pt-0"
         color="secondary"
         deletable-chips
