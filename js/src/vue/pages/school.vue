@@ -966,7 +966,7 @@
                         <h2 class="mb-3">
                           Repayment Rate&nbsp;<tooltip definition="repayment-rate" :isBranch="isBranch" /></h2>                          
                           <span>
-                            See <a v-bind:href="$baseUrl+'/data/glossary/#repayment-rate'">the glossary</a> for category definitions
+                            See <a v-bind:href="$baseUrl+'/data/glossary/#repayment-rate'">the glossary</a> for category definitions.
                           </span>                          
                         <v-checkbox
                           v-model="showGradOnly"
