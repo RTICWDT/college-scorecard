@@ -961,10 +961,12 @@
                         </v-col>
                       </v-row>
                       <v-row v-if="aidLoanSelect === 'fed'">                            
-                    <v-col cols="12" md="6" 
+                    <v-col cols="12" md="12" 
                           id="showGradOnly">
-                        <h2 class="mb-3">
-                          Repayment Rate&nbsp;<tooltip definition="repayment-rate" :isBranch="isBranch" /></h2>                          
+                        <h2 class="mb-3"  v-if="showGradOnly">
+                          Repayment Rate&nbsp;<tooltip definition="repayment-rate" :isBranch="isBranch" /></h2>  
+                        <h2 class="mb-3"  v-else>
+                          Repayment Rate&nbsp;<tooltip definition="repayment-rate-completers" :isBranch="isBranch" /></h2>                                                    
                           <span v-if="showGradOnly">
                            Percentage of borrowers in each category 2 years after entering repayment. For category definitions, please see <a v-bind:href="$baseUrl+'/data/glossary/#repayment-rate-completers'">the glossary</a>.
                           </span> 
