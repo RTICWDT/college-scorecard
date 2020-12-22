@@ -965,8 +965,11 @@
                           id="showGradOnly">
                         <h2 class="mb-3">
                           Repayment Rate&nbsp;<tooltip definition="repayment-rate" :isBranch="isBranch" /></h2>                          
-                          <span>
-                            See <a v-bind:href="$baseUrl+'/data/glossary/#repayment-rate'">the glossary</a> for category definitions.
+                          <span v-if="showGradOnly">
+                           Percentage of borrowers in each category 2 years after entering repayment. For category definitions, please see <a v-bind:href="$baseUrl+'/data/glossary/#repayment-rate-completers'">the glossary</a>.
+                          </span> 
+                          <span v-else>
+                           Percentage of borrowers in each category 2 years after entering repayment. For category definitions, please see <a v-bind:href="$baseUrl+'/data/glossary/#repayment-rate'">the glossary</a>.
                           </span>                          
                         <v-checkbox
                           v-model="showGradOnly"

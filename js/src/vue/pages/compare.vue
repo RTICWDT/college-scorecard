@@ -792,9 +792,12 @@
                       }"
                     >
                       <template>
-                          <span>
-                            See <a v-bind:href="$baseUrl+'/data/glossary/#repayment-rate'">the glossary</a> for category definitions
-                          </span>                             
+                          <span v-if="showGradOnly">
+                           Percentage of borrowers in each category 2 years after entering repayment. For category definitions, please see <a v-bind:href="$baseUrl+'/data/glossary/#repayment-rate-completers'">the glossary</a>.
+                          </span> 
+                          <span v-else>
+                           Percentage of borrowers in each category 2 years after entering repayment. For category definitions, please see <a v-bind:href="$baseUrl+'/data/glossary/#repayment-rate'">the glossary</a>.
+                          </span>                           
                         <v-checkbox
                           class="my-0 mb-2"
                           v-model="showGradOnly"
