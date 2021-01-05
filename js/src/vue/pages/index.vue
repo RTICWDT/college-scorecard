@@ -402,13 +402,13 @@
 
   .home-callout-container{
     margin-bottom: 80px;
-    height: 500px;
+    height: 630px;
     background-color: white;
     box-shadow: 0px 3px 6px #00000029;
 
     @media (min-width: 960px) {
       margin-bottom: inherit;
-      height: 600px;
+      height: 720px;
     }
   }
 
