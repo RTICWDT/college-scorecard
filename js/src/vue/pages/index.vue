@@ -247,6 +247,25 @@
                   >Go to O’NET’s Career explorer</v-btn>
                 </p>
 
+                <h3>
+                  Discover your Future
+                </h3>
+
+                <p>
+                  Search for training and career opportunities.
+                </p>
+
+                <p class="home-callout-button-wrapper">
+                  <v-btn
+                    block
+                    rounded
+                    color="secondary"
+                    href="https://www.trainingproviderresults.gov/#!/"
+                    target="_blank"
+                    @click="trackOutboundLink($event)"
+                  >Visit trainingproviderresults.gov</v-btn>
+                </p>
+
               </div>
 
             </v-col>
