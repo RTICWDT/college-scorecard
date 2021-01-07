@@ -471,7 +471,7 @@
   p {
     text-align: center;
     padding: 0rem
-      2rem;
+      0.9rem;
 
     margin-bottom: 2rem !important;
   }
