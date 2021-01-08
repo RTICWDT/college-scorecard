@@ -248,7 +248,7 @@
                 </p>
 
                 <h3>
-                  Discover your Future
+                  Discover your future
                 </h3>
 
                 <p>
