@@ -18,9 +18,9 @@
               <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
               <v-expansion-panels>
                 <v-expansion-panel>                  
-                  <v-expansion-panel-header>December XX, 2020</v-expansion-panel-header>
+                  <v-expansion-panel-header>January 12, 2020</v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <p>On December XX, 2020, the Department updated the College Scorecard website with new post-enrollment repayment status information in the institution profiles on the consumer website. Data updates in this release include:</p>
+                    <p>On January 12, 2020, the Department updated the College Scorecard website with new post-enrollment repayment status information in the institution profiles on the consumer website. Data updates in this release include:</p>
                     <ul>
                       <li>
                         More recent data values for

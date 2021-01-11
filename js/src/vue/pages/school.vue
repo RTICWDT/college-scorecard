@@ -939,7 +939,7 @@
 
                             <div v-else-if="aidLoanSelect === 'plus'">
                               <div v-if="parentPlusPayment && !aidShowMedianDebtWithPrior">
-                                <h2 class="display-2 navy-text font-weight-bold">{{Math.round(parseFloat(parentPlusPayment))}}</h2>
+                                <h2 class="display-2 navy-text font-weight-bold">{{Math.round(parseFloat(parentPlusPayment)) | numeral('$0,0')}}</h2>
                               </div>
                               <div v-else-if="parentPlusPaymentAll && aidShowMedianDebtWithPrior">
                                 <h2 class="display-2 navy-text font-weight-bold">{{Math.round(parseFloat(parentPlusPaymentAll)) | numeral('$0,0') }}</h2>
