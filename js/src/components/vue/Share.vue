@@ -58,8 +58,22 @@
         </v-list-item>
       </v-list>
     </v-menu>
+    <v-dialog v-model="showCopyNotify" @close="showCopyNotify = false" content-class="vCopyNotify" overlay-opacity=".15" max-width="180" transition="fade-transition">
+      <v-card>
+        <v-btn @click="showCopyNotify = false" icon class='float-right mt-3 mr-3'><v-icon>fas fa-times-circle</v-icon></v-btn>
+        <v-card-text class='pb-5 pt-5' style="text-align:center;">
+          <div>Copied!</div>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </span>
 </template>
+
+<style lang="scss">
+  .vCopyNotify {
+    overflow: hidden;
+  }
+</style>
 
 <script>
 import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
@@ -76,7 +90,8 @@ export default {
         'color': {type: String, default: 'secondary'},
         'hide': {type: Array, default: null},
         'showCopy': {type: Boolean, default: false},
-        'copyText': {type:String, default: "Copy URL to Clipboard"}
+        'copyText': {type:String, default: "Copy URL to Clipboard"},
+        'showCopyNotify': {type:Boolean, default: false}
     },
     computed: {
       items(){
@@ -120,6 +135,8 @@ export default {
       },
       copyURL(){
         this.$copyText(this.url);
+        this.showCopyNotify = true;
+        setTimeout(() => (this.showCopyNotify = false), 3000);
       }
     }
 

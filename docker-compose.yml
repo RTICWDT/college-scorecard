@@ -9,7 +9,7 @@ services:
       - "4000:4000"
     env_file: .env
   node:
-    image: node:10.22.0-alpine3.11
+    image: node:12.20.0-alpine3.12
     working_dir: /myapp
     volumes:
       - .:/myapp

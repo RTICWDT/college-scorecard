@@ -5,7 +5,7 @@
       :compare-institutions-count="compareSchools.length"
       :compare-fields-of-study-count="compareFieldsOfStudy.length"
     />
-    <v-content>
+    <v-main>
       <v-container>
         <v-row>
           <v-col cols="12" lg="9" class="school-left">
@@ -181,7 +181,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
     <scorecard-footer />
         <compare-header
           :showCompare.sync="showCompare"

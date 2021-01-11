@@ -4,7 +4,7 @@
       :compare-institutions-count="compareSchools.length"
       :compare-fields-of-study-count="compareFieldsOfStudy.length"
     />
-    <v-content>
+    <v-main>
       <data-navigation current="/data/" />
       <v-container>
         <v-row>
@@ -12,7 +12,7 @@
             <v-card class="py-5 px-10 ma-5">
               <h2 class="display-1 mb-2 font-weight-bold">Download the Data</h2>
               <p>
-                Download the data that appear on the College Scorecard, as well as
+                Download the data that appear on the College Scorecard, as well as 
                 supporting data on student completion, debt and repayment, earnings,
                 and more. The data is available on <a href="https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources">data.ed.gov</a> and include the following data files:
               </p>
@@ -31,7 +31,7 @@
 
               <p class="pt-4">
                 This data was
-                <strong>last updated December 2, 2020</strong>.
+                <strong>last updated January 12, 2020</strong>.
               </p>
               <v-row>
                 <v-col cols="12" sm="10" offset="1">
@@ -65,7 +65,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
     <scorecard-footer />
     <compare-header
       :showCompare.sync="showCompare"
