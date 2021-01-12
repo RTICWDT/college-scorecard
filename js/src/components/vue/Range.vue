@@ -310,7 +310,6 @@ export default {
     },
     styleLabel(obj, fixLabels=false) {
       let newObj = { ...obj };
-      let newObj = { ...obj };
       // console.log(newObj);
       newObj.styles = {};
       newObj.styles.display = newObj.label ? "block" : "none";
