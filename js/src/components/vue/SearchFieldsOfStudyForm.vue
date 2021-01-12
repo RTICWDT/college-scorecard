@@ -181,7 +181,7 @@
         multiple
         chips
         hide-details
-        placeholder="Select a state..."
+        :placeholder="input.state.length > 0 ? undefined : 'Select a state...'"
         class="mt-0 pt-0"
         color="secondary"
         deletable-chips
@@ -219,18 +219,20 @@
         aria-label="Salary After Complete Range Slider"
       >
         <template v-slot:prepend>
-          <span class="mt-2">$</span>
-          <v-text-field
-            :value="input.fos_salary[0]"
-            class="mt-0 pt-0 ml-2"
-            hide-details
-            single-line
-            type="number"
-            style="width: 54px"
-            suffix="k"
-            @change="$set(input.fos_salary, 0, $event)"
-            aria-label="Minimum Salary After Complete"
-          ></v-text-field>
+          <div style="display:inline-flex;min-width:100%;">
+            <span class="mt-2">$</span>
+            <v-text-field
+              :value="input.fos_salary[0]"
+              class="mt-0 pt-0 ml-2"
+              hide-details
+              single-line
+              type="number"
+              style="width: 54px;min-width:54px;"
+              suffix="k"
+              @change="$set(input.fos_salary, 0, $event)"
+              aria-label="Minimum Salary After Complete"
+            ></v-text-field>
+          </div>
         </template>
         <template v-slot:append>
           <span class="mt-2">$</span>
@@ -240,7 +242,7 @@
             hide-details
             single-line
             type="number"
-            style="width: 54px"
+            style="width: 54px;min-width:54px;"
             suffix="k"
             @change="$set(input.fos_salary, 1, $event)"
             aria-label="Maximum Salary After Complete"
@@ -299,18 +301,20 @@
         aria-label="Median Total Debt Range Slider"
       >
         <template v-slot:prepend>
-          <span class="mt-2">$</span>
-          <v-text-field
-            :value="input.fos_debt[0]"
-            class="mt-0 pt-0 ml-2"
-            hide-details
-            single-line
-            type="number"
-            style="width: 54px"
-            suffix="k"
-            @change="$set(input.fos_debt, 0, $event)"
-            aria-label="Minimum Median Total Debt"
-          ></v-text-field>
+          <div style="display:inline-flex;min-width:100%;">
+            <span class="mt-2">$</span>
+            <v-text-field
+              :value="input.fos_debt[0]"
+              class="mt-0 pt-0 ml-2"
+              hide-details
+              single-line
+              type="number"
+              style="width: 54px;min-width:54px;"
+              suffix="k"
+              @change="$set(input.fos_debt, 0, $event)"
+              aria-label="Minimum Median Total Debt"
+            ></v-text-field>
+          </div>
         </template>
         <template v-slot:append>
           <span class="mt-2">$</span>
@@ -320,7 +324,7 @@
             hide-details
             single-line
             type="number"
-            style="width: 54px"
+            style="width: 54px;min-width:54px;"
             suffix="k"
             @change="$set(input.fos_debt, 1, $event)"
             aria-label="Maximum Median Total Debt"
@@ -349,6 +353,8 @@
       </v-alert>
 
     </div>
+    
+    <v-btn type='submit' class="sr-only" color="secondary" rounded @click="$emit('search-query',cleanInput)">Find Schools</v-btn>
 
   </v-form>
 </template>
@@ -570,7 +576,7 @@
 
             // Attempt to locate cip4 in site data;
             if(locatedCip4Field) {
-              console.log(locatedCip4Field);
+              // console.log(locatedCip4Field);
               this.utility.cip4Cache.push({
                 cip4: cip4Code,
                 field: locatedCip4Field

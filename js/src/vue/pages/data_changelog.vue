@@ -6,7 +6,7 @@
       :compare-fields-of-study-count="compareFieldsOfStudy.length"
     />
 
-    <v-content>
+    <v-main>
 
       <data-navigation current="/data/changelog/" />
 
@@ -17,6 +17,27 @@
               <h1 class="display-1 mb-2 font-weight-bold">Change Log</h1>
               <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
               <v-expansion-panels>
+                <v-expansion-panel>                  
+                  <v-expansion-panel-header>January 12, 2020</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <p>On January 12, 2020, the Department updated the College Scorecard website with new post-enrollment repayment status information in the institution profiles on the consumer website. Data updates in this release include:</p>
+                    <ul>
+                      <li>
+                        More recent data values for
+                        <ul>
+                          <li>Currently Operating Status Flag</li>
+                          <li>Heightened Cash Monitoring Flag</li>
+                          <li>Accrediting Agency Name</li>
+                          <li>Accrediting Agency Code</li>
+                          <li>Title IV Approval Date</li>
+                        </ul>
+                      </li>
+                      <li>New institution-level metrics that describe repayment progress based on the amount originally borrowed compared to the balance amount at various measurement points.</li>
+                      <li>New institution-level metrics that describe the proportions of borrowers that fall into one of eight loan status categories: default, delinquent, forbearance, deferment, not making progress, making progress, paid in full, and discharged.</li>
+                      </ul>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+
                 <v-expansion-panel>                  
                   <v-expansion-panel-header>December 2, 2020</v-expansion-panel-header>
                   <v-expansion-panel-content>
@@ -546,7 +567,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
     <scorecard-footer />
 
     <compare-header

@@ -310,7 +310,7 @@ export default {
     },
     styleLabel(obj, fixLabels=false) {
       let newObj = { ...obj };
-      console.log(newObj);
+      // console.log(newObj);
       newObj.styles = {};
       newObj.styles.display = newObj.label ? "block" : "none";
       let left = this.percent(newObj.value);

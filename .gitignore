@@ -20,3 +20,4 @@ output/*.png
 __tests__/reports/*
 test/reports/*
 analytics.txt
+__tests__/output/*.png

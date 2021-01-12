@@ -6,7 +6,7 @@
       :compare-fields-of-study-count="compareFieldsOfStudy.length"
     />
 
-    <v-content>
+    <v-main>
       <v-container>
         <v-row>
           <v-col cols="12" lg="9" class="school-left">
@@ -200,7 +200,7 @@
                         Average Annual Cost for Largest Program
                         <tooltip definition="avg-program-cost" :isNegative="netPrice < 0"/>
                       </h2>
-                      <p class="mb-1">Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
+                      <p class="mb-1">Cost includes tuition, living costs, books and supplies, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
                       <h2
                         class="display-2 navy-text font-weight-bold"
                         v-if="netPrice"
@@ -670,7 +670,7 @@
                               Average Annual Cost&nbsp;
                               <tooltip definition="avg-cost" />
                             </h2>
-                            <p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
+                            <p>Cost includes tuition, living costs, books and supplies, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
 
                             <h2
                               v-if="netPrice"
@@ -683,7 +683,7 @@
                               Average Annual Cost for Largest Program
                               <tooltip definition="avg-program-cost" :isNegative="netPrice < 0"/>
                             </h2>
-                            <p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
+                            <p>Cost includes tuition, living costs, books and supplies, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
                             <h2 class="title my-3">
                               <span class="font-weight-bold navy-text">{{ programReporter[0].title}}</span>
                             </h2>
@@ -839,7 +839,7 @@
                           >
                             <template v-slot:label>
                               <span>
-                                Include debt borrowed at any prior institutions
+                                Include debt borrowed at any prior institutions&nbsp;
                                 <tooltip definition="include-debt-prior-inst" />
                               </span>
                             </template>
@@ -939,7 +939,7 @@
 
                             <div v-else-if="aidLoanSelect === 'plus'">
                               <div v-if="parentPlusPayment && !aidShowMedianDebtWithPrior">
-                                <h2 class="display-2 navy-text font-weight-bold">{{Math.round(parseFloat(parentPlusPayment))}}</h2>
+                                <h2 class="display-2 navy-text font-weight-bold">{{Math.round(parseFloat(parentPlusPayment)) | numeral('$0,0')}}</h2>
                               </div>
                               <div v-else-if="parentPlusPaymentAll && aidShowMedianDebtWithPrior">
                                 <h2 class="display-2 navy-text font-weight-bold">{{Math.round(parseFloat(parentPlusPaymentAll)) | numeral('$0,0') }}</h2>
@@ -960,12 +960,43 @@
                           </p>
                         </v-col>
                       </v-row>
-
+                      <v-row v-if="aidLoanSelect === 'fed'">                            
+                    <v-col cols="12" md="12" 
+                          id="showGradOnly">
+                        <h2 class="mb-3"  v-if="showGradOnly">
+                          Repayment Rate&nbsp;<tooltip definition="repayment-rate" :isBranch="isBranch" /></h2>  
+                        <h2 class="mb-3"  v-else>
+                          Repayment Rate&nbsp;<tooltip definition="repayment-rate-completers" :isBranch="isBranch" /></h2>                                                    
+                          <span v-if="showGradOnly">
+                           Percentage of borrowers in each category 2 years after entering repayment. For category definitions, please see <a v-bind:href="$baseUrl+'/data/glossary/#repayment-rate-completers'">the glossary</a>.
+                          </span> 
+                          <span v-else>
+                           Percentage of borrowers in each category 2 years after entering repayment. For category definitions, please see <a v-bind:href="$baseUrl+'/data/glossary/#repayment-rate'">the glossary</a>.
+                          </span>                          
+                        <v-checkbox
+                          v-model="showGradOnly"
+                          label="Only show data for those who graduated"
+                          color="secondary"
+                          class="mt-0"
+                        >
+                          <template v-slot:label>
+                            <span>
+                              Only show data for those who graduated
+                            </span>
+                          </template>
+                        </v-checkbox>
+                        </v-col>    
+                    </v-row>
+                    <v-row v-if="aidLoanSelect === 'fed'" class="mb-2"> 
+                        <v-col class="pt-0 pb-2">                            
+                          <repayment-rate v-if="aidLoanSelect === 'fed'" :school="school" colors="solid" :gradOnly="showGradOnly" />
+                        </v-col>
+                    </v-row>                          
                       <div class="fos-profile-panel fos-profile-mini pl-4"
-                           v-if="selectedFOSDetail"
+                           v-if="selectedFOSDetail && aidLoanSelect === 'fed'"
                       >
                         <span class="field-of-study-select-icon mr-2"
-                              style="width: 35px;height: 35px;"
+                              style="width: 35px;height: 35px;float: left;"
                         >
                           <v-icon size="20">
                             fas fa-award
@@ -986,7 +1017,7 @@
                             >
                               <template v-slot:label>
                                 <span class="profile-fos-include-prior-debt">
-                                  Include debt borrowed at any prior institutions
+                                  Include debt borrowed at any prior institutions&nbsp;
                                   <tooltip definition="include-debt-prior-inst" />
                                 </span>
                               </template>
@@ -996,7 +1027,7 @@
                           <!--Median Total-->
                           <v-col cols="12" md="4" sm="12">
                             <h4 class="mb-2">
-                              Median Total Debt After Graduation&nbsp
+                              Median Total Debt After Graduation&nbsp;
                               <tooltip v-if="!fosShowDebtAtPrior" definition="fos-median-debt" />
                               <tooltip v-else definition="fos-median-debt-all-schools" />
                             </h4>
@@ -1383,7 +1414,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
     <scorecard-footer />
     <compare-header
       :showCompare.sync="showCompare"
@@ -1592,6 +1623,12 @@
     height: auto;
   }
 
+  #showGradOnly {
+    .v-messages {
+      display:none;
+    }
+  }
+
 </style>
 
 <script>
@@ -1601,6 +1638,7 @@ import BarChart from "components/vue/Bar.vue";
 import Tooltip from "components/vue/Tooltip.vue";
 import SankeyButtons from "components/vue/SankeyButtons.vue";
 import Sankey from "components/vue/Sankey.vue";
+import RepaymentRate from"components/vue/RepaymentRate.vue";
 import Range from "components/vue/Range.vue";
 import HorizontalBar from "components/vue/HorizontalBar.vue";
 import Share from "components/vue/Share.vue";
@@ -1634,6 +1672,7 @@ export default {
     tooltip: Tooltip,
     "sankey-buttons": SankeyButtons,
     sankey: Sankey,
+    "repayment-rate": RepaymentRate,
     range: Range,
     "horizontal-bar": HorizontalBar,
     share: Share,
@@ -1665,6 +1704,11 @@ export default {
         enroll: "enroll_both",
         study: "study_both"
       },
+      currentRepayment: {
+        enroll: "enroll_both",
+        study: "study_both"
+      },      
+      showGradOnly: false,
       selectedFOS: {
         text:""
       },
@@ -1693,7 +1737,7 @@ export default {
       return document.referrer || this.$baseUrl+"/search/";
     },
     shareLink() {
-      return encodeURIComponent(window.location.href) || null;
+      return encodeURI(window.location.href) || null;
     },
     fieldsOfStudy() {
       let self = this;

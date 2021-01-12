@@ -149,8 +149,7 @@
         </div>
 
       </v-col>
-    </v-row>
-
+    </v-row>          
   </div>
 
 </template>
@@ -175,7 +174,11 @@
   .fos-field-data-title{
     font-weight: 500;
   }
-
+  #showGradOnly {
+    .v-messages {
+      display:none;
+    }
+  }
 </style>
 
 <script>

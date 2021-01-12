@@ -6,7 +6,7 @@
       :compare-fields-of-study-count="compareFieldsOfStudy.length"
     />
     
-    <v-content>
+    <v-main>
 
       <!-- Top Splash and Search-->
       <div class="home-splash">
@@ -247,6 +247,25 @@
                   >Go to O’NET’s Career explorer</v-btn>
                 </p>
 
+                <h3>
+                  Discover your future
+                </h3>
+
+                <p>
+                  Search for training and career opportunities.
+                </p>
+
+                <p class="home-callout-button-wrapper">
+                  <v-btn
+                    block
+                    rounded
+                    color="secondary"
+                    href="https://www.trainingproviderresults.gov/#!/"
+                    target="_blank"
+                    @click="trackOutboundLink($event)"
+                  >Visit trainingproviderresults.gov</v-btn>
+                </p>
+
               </div>
 
             </v-col>
@@ -324,7 +343,7 @@
         </v-container>
       </div>
 
-    </v-content>
+    </v-main>
     <scorecard-footer />
 
     <compare-header
@@ -383,13 +402,13 @@
 
   .home-callout-container{
     margin-bottom: 80px;
-    height: 500px;
+    height: 630px;
     background-color: white;
     box-shadow: 0px 3px 6px #00000029;
 
     @media (min-width: 960px) {
       margin-bottom: inherit;
-      height: 600px;
+      height: 720px;
     }
   }
 
@@ -444,10 +463,15 @@
     margin-bottom: .5rem !important;
   }
 
+  h3{
+    text-align: center;
+    margin-bottom: .5rem !important;
+  }
+
   p {
     text-align: center;
     padding: 0rem
-      2rem;
+      0.9rem;
 
     margin-bottom: 2rem !important;
   }

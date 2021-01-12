@@ -8,11 +8,6 @@ best suited to them, and ensure a broad and flexible definition of elements that
 
 This repo contains the front end of a web app with its API created by an instance of [Open Data Maker](https://github.com/RTICWDT/open-data-maker) which is configured with a specific data set. For more details on setting up the back end of the web app, see below: [Running the API Locally](#running-the-api-locally).  However, you can run the web app with the hosted API following the installation instructions in the next section.
 
-#### Build Status
-* [production](https://github.com/RTICWDT/college-scorecard/tree/master/) [![Circle CI](https://circleci.com/gh/RTICWDT/college-scorecard.svg?style=svg)](https://circleci.com/gh/RTICWDT/college-scorecard)
-* [staging](https://github.com/RTICWDT/college-scorecard/tree/staging/) [![Circle CI](https://circleci.com/gh/RTICWDT/college-scorecard/tree/staging.svg?style=svg)](https://circleci.com/gh/RTICWDT/college-scorecard/tree/staging)
-* [development](https://github.com/RTICWDT/college-scorecard/tree/dev/) [![Circle CI](https://circleci.com/gh/RTICWDT/college-scorecard/tree/dev.svg?style=svg)](https://circleci.com/gh/RTICWDT/college-scorecard/tree/dev)
-
 
 ## Installation
 Create a local development environment using Docker containers or with a traditional
@@ -126,11 +121,6 @@ workflows.
   level AA.
 - We test the site's accessibility with [pa11y](http://pa11y.org/).
 
-
-## Content
-For the content on the College Scorecard, we are following the [18F Content Guide].
-
-
 ## Running the API Locally
 To set up the API (as a developer), follow the [Open Data Maker installation
 instructions](https://github.com/RTICWDT/open-data-maker/blob/dev/INSTALL.md) then:
@@ -180,24 +170,3 @@ instructions](https://github.com/RTICWDT/open-data-maker/blob/dev/INSTALL.md) th
     ```sh
     tail -f log/development.log
     ```
-
-
-## System Architecture
-This repository drives the "front end" of the College Scorecard application and
-is hosted on [Federalist]. The back end is an instance of the [Open Data Maker].
-Here's how the different parts work together in our production environment:
-
-![system architecture](docs/architecture-diagram.png)
-
-
-## Content
-For the content on the College Scorecard, we are following the [18F Content Guide].
-
-[18F Content Guide]: https://pages.18f.gov/content-guide/
-[Federalist]: https://federalist.fr.cloud.gov
-[full data set]: https://ed-public-download.app.cloud.gov/downloads/CollegeScorecard_Raw_Data.zip
-[Open Data Maker]: https://github.com/RTICWDT/open-data-maker/
-[Jekyll]: http://jekyllrb.com/
-[Montserrat]: https://www.google.com/fonts/specimen/Montserrat
-[Ruby]: https://www.ruby-lang.org/
-[Sass]: http://sass-lang.com/
