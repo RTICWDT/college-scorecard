@@ -1,12 +1,16 @@
 <template>
   <v-app id="data-documentation">
+    <scorecard-header active-link="data"
+      :compare-institutions-count="compareSchools.length"
+      :compare-fields-of-study-count="compareFieldsOfStudy.length"
+    />
 
     <scorecard-header active-link="data"
       :compare-institutions-count="compareSchools.length"
       :compare-fields-of-study-count="compareFieldsOfStudy.length"
     />
 
-    <v-content>
+    <v-main>
       <data-navigation current="/data/documentation/" />
       <v-container>
         <v-row>
@@ -141,19 +145,23 @@
 
                 <p class="d-none d-sm-block">
                   <vue-recaptcha
+                    ref="recapcha"
                     v-show="showCaptcha"
                     :sitekey="recaptchaSiteKey"
-                    @verify="onCaptchaVerify">
+                    @verify="onCaptchaVerify"
+                    v-on:render="addAria">
                   </vue-recaptcha>
                 </p>
 
                 <!-- Compact on XS -->
                 <p class="d-block d-sm-none">
                   <vue-recaptcha
+                    ref="recapcha"
                     v-show="showCaptcha"
                     :sitekey="recaptchaSiteKey"
                     @verify="onCaptchaVerify"
-                    size="compact">
+                    size="compact"
+                    v-on:render="addAria">
                   </vue-recaptcha>
                 </p>
 
@@ -196,7 +204,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
     <scorecard-footer />
 
     <compare-header
@@ -262,6 +270,17 @@ export default {
         // Listen for form submit and do whatever is needed
         this.formSubmitted = true;
       });
+    },
+    addAria(id){
+      switch(id){
+        case 0:
+            document.body.querySelector('#g-recaptcha-response').setAttribute('aria-label','ReCAPTCHA Response');
+          break;
+        case 1: 
+            document.body.querySelector('#g-recaptcha-response-1').setAttribute('aria-label','ReCAPTCHA Response');
+            document.body.querySelectors('iframe').map((itm)=>itm.setAttribute('title','ReCAPTCHA Frame'));
+          break;
+      }
     }
   },
   mounted(){

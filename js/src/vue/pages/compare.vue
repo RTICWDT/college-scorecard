@@ -5,7 +5,7 @@
       :compare-fields-of-study-count="compareFieldsOfStudy.length"
       active-link="compare"
     />
-    <v-content>
+    <v-main>
       <v-container>
         <v-row>
           <v-col cols="12" lg="9" class="school-left">
@@ -115,7 +115,7 @@
                         type: 'currency',
                         chart: 'HorizontalBar'
                       }"
-                    ><p class='my-n3'>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p></compare-section>
+                    ><p class='my-n3'>Cost includes tuition, living costs, books and supplies, and fees minus the average grants and scholarships for federal financial aid recipients.</p></compare-section>
 
                     <compare-section
                       :schools="schools"
@@ -579,7 +579,7 @@
                         type: 'currency',
                         chart: 'HorizontalBar'
                       }"
-                    ><p>Cost includes tuition, living costs, books, and fees minus the average grants and scholarships for federal financial aid recipients.</p></compare-section>
+                    ><p>Cost includes tuition, living costs, books and supplies, and fees minus the average grants and scholarships for federal financial aid recipients.</p></compare-section>
 
                     <compare-section
                       :schools="schools"
@@ -761,7 +761,7 @@
                         multiRangeAidLoanSelect: aidLoanSelect,
                         max: { value: 1000, label: '$1,000' }
                       }"
-                    />                                                         
+                    >                                                         
                       <template>
                         <v-checkbox
                           class="my-0"
@@ -775,6 +775,40 @@
                             </span>
                           </template>
                         </v-checkbox>
+                      </template>
+                    </compare-section>
+
+                    <compare-section
+                      v-if="aidLoanSelect === 'fed'"
+                      :schools="schools"
+                      title="Repayment Rate"
+                      definition="repayment-rate"
+                      :currentHighlight="currentHighlight"
+                      @update-highlight="currentHighlight = $event"
+                      :config="{
+                        color: '#0e365b',
+                        chart: 'RepaymentRate',
+                        showGradOnly: showGradOnly
+                      }"
+                    >
+                      <template>
+                          <span v-if="showGradOnly">
+                           Percentage of borrowers in each category 2 years after entering repayment. For category definitions, please see <a v-bind:href="$baseUrl+'/data/glossary/#repayment-rate-completers'">the glossary</a>.
+                          </span> 
+                          <span v-else>
+                           Percentage of borrowers in each category 2 years after entering repayment. For category definitions, please see <a v-bind:href="$baseUrl+'/data/glossary/#repayment-rate'">the glossary</a>.
+                          </span>                           
+                        <v-checkbox
+                          class="my-0 mb-2"
+                          v-model="showGradOnly"
+                          hide-details
+                        >
+                          <template v-slot:label>
+                            <span>
+                              Only show data for those who graduated
+                            </span>
+                          </template>
+                        </v-checkbox>                   
                       </template>
                     </compare-section>
 
@@ -901,7 +935,7 @@
                     <v-btn
                       rounded
                       color="secondary"
-                      :href="`${$baseUrl}/search?toggle=fos`"
+                      :href="`${$baseUrl}/search/?toggle=fos`"
                     >
                       SEARCH FIELDS OF STUDY
                     </v-btn>
@@ -943,7 +977,7 @@
 
         </v-row>
       </v-container> <!-- End Page Content Container -->
-    </v-content>
+    </v-main>
 
     <scorecard-footer />
 
@@ -1111,6 +1145,7 @@ export default {
       ],
       fosFinancialCheckboxIncludePrior: false,
       aidShowMedianDebtWithPrior: false,
+      showGradOnly: false,
       aidLoanSelect:'fed',
       aidLoanSelectItems:[
         { text: "Federal Student Loans", value: "fed"},

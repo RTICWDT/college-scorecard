@@ -5,7 +5,7 @@
       :compare-fields-of-study-count="compareFieldsOfStudy.length"
     />
 
-    <v-content>
+    <v-main>
       <div class="home-splash">
         <v-container class="pt-0">
           <v-row>
@@ -27,7 +27,7 @@
           </v-row>
         </v-container>
       </div>
-    </v-content>
+    </v-main>
     <scorecard-footer />
 
     <compare-header

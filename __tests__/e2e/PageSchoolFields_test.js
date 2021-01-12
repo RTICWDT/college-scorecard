@@ -24,7 +24,7 @@ Scenario('Visit page and see all page components', async (I) => {
   // Click Degree level
   I.click('#school-field-fos-degree');
   // See Options within degree filter
-  I.seeElement('.v-list.v-sheet.v-sheet--tile');
+  I.seeElement('.v-list.v-sheet');
   I.seeElement('.v-list-item.v-list-item--link');
   // Close Select Menu
   I.pressKey("Escape");

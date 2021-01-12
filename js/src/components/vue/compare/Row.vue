@@ -28,6 +28,8 @@
 
     <sankey v-if="school && config.chart=='Sankey'" :school="school" colors="solid" :currentSankey="config.currentSankey" />
 
+    <repayment-rate v-if="school && config.chart=='RepaymentRate'" :school="school" colors="solid" :gradOnly="config.showGradOnly" />
+
     <multi-range 
         v-if="school && config.chart=='MultiRange'"
         :minmax="value"
@@ -108,6 +110,7 @@ import Sankey from "components/vue/Sankey.vue";
 import SchoolIcons from "components/vue/SmallSchoolIcons.vue";
 import ComplexFields from "vue/mixins/ComplexFields.js";
 import Tooltip from "components/vue/Tooltip.vue";
+import RepaymentRate from "components/vue/RepaymentRate.vue";
 
 export default {
   mixins: [ComplexFields],
@@ -117,7 +120,8 @@ export default {
     sankey: Sankey,
     "multi-range": MultiRange,
     "school-icons": SchoolIcons,
-    "tooltip": Tooltip
+    "tooltip": Tooltip,
+    "repayment-rate": RepaymentRate,    
   },
   props: {
     school: {

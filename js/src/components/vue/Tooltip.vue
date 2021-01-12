@@ -1,9 +1,10 @@
 <template>
   <span>
+    <v-btn @click.stop.prevent="showDialog = true" icon small>
+        <v-icon x-small allow-overflow :color="color" dark>fas fa-info-circle</v-icon>
+        <span class='sr-only'>info</span>
+    </v-btn>
     <v-dialog max-width='500px' v-model="showDialog">
-      <template v-slot:activator="{ on }">
-        <v-icon x-small allow-overflow :color="color" dark v-on.stop="on">fas fa-info-circle</v-icon>
-      </template>
       <v-card>
         <v-btn @click="showDialog = false" icon class='float-right mt-3 mr-3'><v-icon>fas fa-times-circle</v-icon></v-btn>
         <v-card-title class="tool-tip-dialog-title">{{title}}</v-card-title>

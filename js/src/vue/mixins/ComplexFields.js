@@ -529,11 +529,6 @@ export default {
             }
             else
             {
-                console.log({
-                    single: orderedDebt.length == 1 || (orderedDebt[0].debt == orderedDebt[orderedDebt.length-1].debt),
-                    min: orderedDebt[0],
-                    max: orderedDebt[orderedDebt.length - 1]
-                });
                 return {
                     single: orderedDebt.length == 1 || (orderedDebt[0].debt == orderedDebt[orderedDebt.length-1].debt),
                     min: orderedDebt[0],

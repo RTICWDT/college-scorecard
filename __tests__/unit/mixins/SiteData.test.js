@@ -51,7 +51,7 @@ describe('Mixin: SiteData', () => {
     });
 
     expect(wrapper.vm.RELIGIOUS_AFFILIATIONS_BY_NUMBER).toBeDefined();
-    expect(wrapper.vm.RELIGIOUS_AFFILIATIONS_BY_NUMBER['99']).toStrictEqual('Other (none of the above)');
+    expect(wrapper.vm.RELIGIOUS_AFFILIATIONS_BY_NUMBER['99']).toStrictEqual('Religious Affiliation: Other');
 
     expect(wrapper.vm.CIP2).toBeDefined();
     expect(wrapper.vm.CIP2['01']).toStrictEqual('AGRICULTURAL/ANIMAL/PLANT/VETERINARY SCIENCE AND RELATED FIELDS.');
