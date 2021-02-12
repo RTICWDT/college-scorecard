@@ -175,6 +175,7 @@ header {
             <li>
               <a :href="`${$baseUrl}/data`"
                  :class="{'nav-active' : activeLink === 'data'}"
+                 target="_blank"
               >About the Data</a>
             </li>
 
@@ -286,7 +287,7 @@ header {
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item class="mobile-navigation-item" @click="mobileNavClick(`${$baseUrl}/data`)">
+          <v-list-item class="mobile-navigation-item" @click="mobileNavClick(`${$baseUrl}/data`, true)">
             <v-list-item-content>
               <v-list-item-title class="mobile-navigation-item">
                 About the Data
@@ -357,8 +358,14 @@ export default {
   watch:{
   },
   methods:{
-    mobileNavClick(urlString){
-      window.location.href = urlString;
+    mobileNavClick(urlString, newWindow = false){
+      if (!newWindow) {
+        window.location.href = urlString;
+      }
+      else {
+        window.open(urlString);
+      }
+
     },
     handleCompareIconClick(resourceType = "institution"){
       EventBus.$emit('compare-drawer-show', false);
