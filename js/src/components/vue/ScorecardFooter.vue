@@ -9,7 +9,7 @@
       color="#0e365b"
     >
       <p class='pb-2 mt-5 mb-0 body-2 white--text'>
-        Powered by <a :href="$baseUrl+'/data/'">College Scorecard Data</a> |
+        Powered by <a :href="$baseUrl+'/data/'" target="_blank">College Scorecard Data</a> |
         <a href="https://github.com/RTICWDT/college-scorecard/releases" target="_blank">{{version}}</a> |
         <a href="mailto:scorecarddata@rti.org">Contact Us</a> |
         <a href="http://www2.ed.gov/notices/index.html?src=ft" target="_blank">Notices</a> |
