@@ -18,26 +18,6 @@
        url('public-sans/PublicSans-Regular.ttf') format('truetype')
 }
 
-/* @font-face {
-  font-family: 'Public Sans';
-  font-style: normal;
-  font-weight: 500;
-  src: url('public-sans/PublicSans-Regular.woff2') format('woff2'),
-       url('public-sans/PublicSans-Regular.woff') format('woff'),
-       url('public-sans/PublicSans-Regular.ttf') format('truetype'),
-
-} */
-
-/* @font-face {
-  font-family: 'Public Sans';
-  font-style: normal;
-  font-weight: 600;
-  src: url('public-sans/PublicSans-Medium.woff2') format('woff2'),
-       url('public-sans/PublicSans-Medium.woff') format('woff'),
-       url('public-sans/PublicSans-Medium.ttf') format('truetype'),
-
-} */
-
 @font-face {
   font-family: 'Public Sans';
   font-style: normal;
@@ -47,17 +27,6 @@
        url('public-sans/PublicSans-Bold.woff') format('woff'),
        url('public-sans/PublicSans-Bold.ttf') format('truetype');
 }
-
-/* @font-face {
-  font-family: 'Public Sans';
-  font-style: normal;
-  font-weight: 800;
-  src: url('public-sans/PublicSans-Black.woff2') format('woff2'),
-       url('public-sans/PublicSans-Black.woff') format('woff'),
-       url('public-sans/PublicSans-Black.ttf') format('truetype'),
-
-} */
- 
 
 @font-face {
   font-family: 'Montserrat';
