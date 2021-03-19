@@ -157,10 +157,10 @@ header {
       class="pa-0 ma=0"
     >
       <div id="nav-site-title">
-        <a :href="$baseUrl + '/'"
+        <a href="/"
           ><div class="logo">
             <img
-              :src="$baseUrl + '/img/US-DeptOfEducation-Seal.svg'"
+              src="/img/US-DeptOfEducation-Seal.svg"
               alt="Department of Education Seal"
             />
           </div>
@@ -176,24 +176,18 @@ header {
         <nav>
           <ul>
             <li>
-              <a
-                :href="`${$baseUrl}/`"
-                :class="{ 'nav-active': activeLink === '/' }"
-                >Home</a
-              >
+              <a href="/" :class="{ 'nav-active': activeLink === '/' }">Home</a>
             </li>
 
             <li>
-              <a
-                :href="`${$baseUrl}/data`"
-                :class="{ 'nav-active': activeLink === 'data' }"
+              <a href="/data" :class="{ 'nav-active': activeLink === 'data' }"
                 >About the Data</a
               >
             </li>
 
             <li>
               <a
-                :href="`${$baseUrl}/search`"
+                href="/search"
                 :class="{ 'nav-active': activeLink === 'search' }"
                 >Search</a
               >
@@ -207,7 +201,7 @@ header {
                   disabled: disableCompare,
                 }"
                 aria-label="Navigate to compare page"
-                @click="handleCompareLinkClick(`${$baseUrl}/compare`)"
+                @click="handleCompareLinkClick(`/compare`)"
                 >Compare:</a
               >
 
@@ -286,7 +280,7 @@ header {
         <v-list-item-group v-model="group">
           <v-list-item
             class="mobile-navigation-item"
-            @click="mobileNavClick(`${$baseUrl}/`)"
+            @click="mobileNavClick(`/`)"
           >
             <v-list-item-content>
               <v-list-item-title>
@@ -297,7 +291,7 @@ header {
 
           <v-list-item
             class="mobile-navigation-item"
-            @click="mobileNavClick(`${$baseUrl}/data`)"
+            @click="mobileNavClick(`/data`)"
           >
             <v-list-item-content>
               <v-list-item-title class="mobile-navigation-item">
@@ -308,7 +302,7 @@ header {
 
           <v-list-item
             class="mobile-navigation-item"
-            @click="mobileNavClick(`${$baseUrl}/search`)"
+            @click="mobileNavClick(`/search`)"
           >
             <v-list-item-content>
               <v-list-item-title class="mobile-navigation-item">
@@ -319,7 +313,7 @@ header {
 
           <v-list-item
             class="mobile-navigation-item"
-            @click="mobileNavClick(`${$baseUrl}/compare/?toggle=institutions`)"
+            @click="mobileNavClick(`/compare/?toggle=institutions`)"
           >
             <v-list-item-content>
               <v-list-item-title class="mobile-navigation-item">
@@ -330,7 +324,7 @@ header {
 
           <v-list-item
             class="mobile-navigation-item"
-            @click="mobileNavClick(`${$baseUrl}/compare/?toggle=fos`)"
+            @click="mobileNavClick(`/compare/?toggle=fos`)"
           >
             <v-list-item-content>
               <v-list-item-title class="mobile-navigation-item">
@@ -345,7 +339,7 @@ header {
 </template>
 
 <script>
-import { EventBus } from "../../vue/EventBus.js"
+import { EventBus } from "~/js/EventBus.js"
 
 export default {
   props: {

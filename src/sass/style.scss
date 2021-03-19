@@ -1,7 +1,7 @@
 // All New Styles
 @import "_variables.scss";
 
-//@import '../css/fonts/fonts.css';
+@import "fonts/fonts.css";
 @import "~@mdi/font/css/materialdesignicons.css";
 @import "~vuetify/dist/vuetify.min";
 @import "_vuetify-overrides.scss";
