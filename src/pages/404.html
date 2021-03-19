@@ -1,0 +1,13 @@
+---
+layout: default
+---
+<div id="app">
+  <!-- Pass other variables as props-->
+  <four-oh-four page-permalink="{{ page.permalink }}"
+                base-url="{{site.baseurl}}"
+                :compare-schools="compareSchools"
+                :compare-fields-of-study="compareFieldsOfStudy"
+                @compare-update-selection="refreshCompareSchools"
+                @toggle-compare-school="toggleCompareItem"
+  />
+</div>
