@@ -142,13 +142,7 @@ export default {
     yearIcon() {
       let icon = this.$options.filters.yearsClass(this.years)
       if (icon) {
-        return (
-          "url(" +
-          this.$baseUrl +
-          "/img/school-icons/" +
-          icon.substr(5) +
-          ".svg)"
-        )
+        return "url(/img/school-icons/" + icon.substr(5) + ".svg)"
       } else {
         return "none"
       }
@@ -158,13 +152,7 @@ export default {
         _.get(this.school, this.fields["OWNERSHIP"], "-1")
       )
       if (icon) {
-        return (
-          "url(" +
-          this.$baseUrl +
-          "/img/school-icons/" +
-          icon.substr(5) +
-          ".svg)"
-        )
+        return "url(/img/school-icons/" + icon.substr(5) + ".svg)"
       } else {
         return "none"
       }
@@ -174,13 +162,7 @@ export default {
         _.get(this.school, this.fields["LOCALE"], "-1")
       )
       if (icon) {
-        return (
-          "url(" +
-          this.$baseUrl +
-          "/img/school-icons/" +
-          icon.substr(5) +
-          ".svg)"
-        )
+        return "url(/img/school-icons/" + icon.substr(5) + ".svg)"
       } else {
         return "none"
       }
@@ -190,13 +172,7 @@ export default {
         _.get(this.school, this.fields["SIZE"])
       )
       if (icon) {
-        return (
-          "url(" +
-          this.$baseUrl +
-          "/img/school-icons/" +
-          icon.substr(5) +
-          ".svg)"
-        )
+        return "url(/img/school-icons/" + icon.substr(5) + ".svg)"
       } else {
         return "none"
       }

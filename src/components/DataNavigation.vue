@@ -8,16 +8,12 @@
           v-model="dataTabs"
           show-arrows
         >
-          <v-tab :href="$baseUrl + '/data/'" value="home">Data Home</v-tab>
-          <v-tab :href="$baseUrl + '/data/documentation/'" value="documentation"
+          <v-tab href="/data/" value="home">Data Home</v-tab>
+          <v-tab href="/data/documentation/" value="documentation"
             >Documentation</v-tab
           >
-          <v-tab :href="$baseUrl + '/data/changelog/'" value="changelog"
-            >Change Log</v-tab
-          >
-          <v-tab :href="$baseUrl + '/data/glossary/'" value="glossary"
-            >Glossary</v-tab
-          >
+          <v-tab href="/data/changelog/" value="changelog">Change Log</v-tab>
+          <v-tab href="/data/glossary/" value="glossary">Glossary</v-tab>
         </v-tabs>
       </v-container>
     </div>

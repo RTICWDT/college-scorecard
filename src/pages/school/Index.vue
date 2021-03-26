@@ -186,9 +186,7 @@
                     <h2 class="title school-url mt-0">
                       <a
                         target="_blank"
-                        :href="
-                          $baseUrl + '/school/transition/?url=' + schoolUrl
-                        "
+                        :href="'/school/transition/?url=' + schoolUrl"
                         >{{ schoolUrlDisplay | formatUrlText }}</a
                       >
                     </h2>
@@ -1594,8 +1592,7 @@
                             please see
                             <a
                               v-bind:href="
-                                $baseUrl +
-                                  '/data/glossary/#repayment-rate-completers'
+                                '/data/glossary/#repayment-rate-completers'
                               "
                               >the glossary</a
                             >.
@@ -1604,10 +1601,7 @@
                             Percentage of borrowers in each category 2 years
                             after entering repayment. For category definitions,
                             please see
-                            <a
-                              v-bind:href="
-                                $baseUrl + '/data/glossary/#repayment-rate'
-                              "
+                            <a v-bind:href="'/data/glossary/#repayment-rate'"
                               >the glossary</a
                             >.
                           </span>
@@ -2441,10 +2435,6 @@
   padding-top: 20px !important;
 }
 
-#profile-field-of-study-summary-metric-full {
-  /*height: 320px;*/
-}
-
 #profile-field-of-study-summary-metric-empty {
   /*height: 320px;*/
   height: auto;
@@ -2565,7 +2555,7 @@ export default {
   },
   computed: {
     referer() {
-      return document.referrer || this.$baseUrl + "/search/"
+      return document.referrer || "/search/"
     },
     shareLink() {
       return encodeURI(window.location.href) || null
@@ -2629,9 +2619,9 @@ export default {
     searchURL() {
       let qs = this.returnURLFromStorage()
       if (qs) {
-        return this.$baseUrl + "/search/" + qs
+        return "/search/" + qs
       } else {
-        return this.$baseUrl + "/search/"
+        return "/search/"
       }
     },
     fosUndergradCount() {
@@ -2751,11 +2741,9 @@ export default {
     },
     handleSchoolNameSelected(school) {
       if (typeof school == "string") {
-        window.location =
-          this.$baseUrl + "/search/?name=" + encodeURIComponent(school)
+        window.location = "/search/?name=" + encodeURIComponent(school)
       } else {
         window.location =
-          this.$baseUrl +
           "/search/?name=" +
           encodeURIComponent(school["school.name"]) +
           "&id=" +
@@ -2879,9 +2867,7 @@ export default {
     },
     handleFieldOfStudySelected(fieldOfStudy) {
       window.location =
-        this.$baseUrl +
-        "/search/?toggle=fos&cip4=" +
-        encodeURIComponent(fieldOfStudy.cip4)
+        "/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4)
     },
     checkTipUpperStyle(upperValue, maxValue, upperStyleTipOverride) {
       // Fixing padding issue on max value
@@ -2925,7 +2911,7 @@ export default {
     params["keys_nested"] = true
 
     // Note, Must add key as a param.
-    let request = apiGet(window.api.url, window.api.key, "/schools/", {
+    let request = apiGet("/schools/", {
       id: id,
     })
       .then((response) => {

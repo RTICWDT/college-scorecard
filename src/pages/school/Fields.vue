@@ -417,7 +417,7 @@ export default {
     referrerLink() {
       let id = _.get(this.school, this.fields["ID"])
       let name = _.get(this.school, this.fields["NAME"], "(unknown)")
-      return this.$baseUrl + "/school/?" + id + "-" + name.replace(/\W+/g, "-")
+      return "/school/?" + id + "-" + name.replace(/\W+/g, "-")
     },
     shareLink() {
       return encodeURIComponent(window.location.href) || null
@@ -451,7 +451,7 @@ export default {
     params["keys_nested"] = true
 
     // TODO - Handle Error.
-    let request = apiGet(window.api.url, window.api.key, "/schools/", {
+    let request = apiGet("/schools/", {
       id: id,
     })
       .then((response) => {

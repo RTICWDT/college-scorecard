@@ -73,7 +73,7 @@ export default {
         query["school.search"] = newVal
         query = this.prepareParams(query)
 
-        let request = apiGet(window.api.url, window.api.key, "/schools", query)
+        let request = apiGet("/schools", query)
           .then((response) => {
             if (!response.data.results.length) {
               return {}

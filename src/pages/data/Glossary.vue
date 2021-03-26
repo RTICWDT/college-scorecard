@@ -6,12 +6,6 @@
       :compare-fields-of-study-count="compareFieldsOfStudy.length"
     />
 
-    <scorecard-header
-      active-link="data"
-      :compare-institutions-count="compareSchools.length"
-      :compare-fields-of-study-count="compareFieldsOfStudy.length"
-    />
-
     <v-main>
       <data-navigation current="/data/glossary/" />
       <v-container>
@@ -59,7 +53,7 @@ import CompareDrawer from "~/components/CompareDrawer.vue"
 import CompareHeader from "~/components/CompareHeader.vue"
 import { compare } from "~/js/mixins.js"
 import { EventBus } from "~/js/EventBus.js"
-
+import Glossary from "~/data/glossary.json"
 export default {
   mixins: [compare],
   components: {
@@ -70,11 +64,10 @@ export default {
   props: ["baseUrl", "dataBase_url", "compareSchools", "compareFieldsOfStudy"],
   computed: {
     glossary() {
-      let glossary = siteDataAll.glossary
-      for (var key in glossary) {
-        glossary[key].id = key
+      for (var key in Glossary) {
+        Glossary[key].id = key
       }
-      return _.orderBy(siteDataAll.glossary, "title")
+      return _.orderBy(Glossary, "title")
     },
   },
   mounted() {

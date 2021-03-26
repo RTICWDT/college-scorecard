@@ -3,7 +3,7 @@
     rounded
     color="secondary"
     target="_blank"
-    :href="$baseUrl+'/school/transition/?url='+fixedUrl"
+    :href="'/school/transition/?url=' + fixedUrl"
     v-if="url"
   >
     <v-icon small class="mx-1">fas fa-calculator</v-icon>
@@ -14,13 +14,13 @@
 
 <script>
 export default {
-  props: ['url'],
+  props: ["url"],
   computed: {
     fixedUrl() {
-      if (this.url == '#') return false;
-      else if (this.url.match(/^http/)) return encodeURIComponent(this.url);
-      else return 'http://' + encodeURIComponent(this.url);
-    }
-  }
+      if (this.url == "#") return false
+      else if (this.url.match(/^http/)) return encodeURIComponent(this.url)
+      else return "http://" + encodeURIComponent(this.url)
+    },
+  },
 }
 </script>

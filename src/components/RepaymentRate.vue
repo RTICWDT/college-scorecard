@@ -50,6 +50,7 @@
 </style>
 
 <script>
+import { GoogleCharts } from "google-charts"
 export default {
   props: {
     school: Object,
@@ -76,7 +77,7 @@ export default {
 
   mounted() {
     this.extractData()
-    google.charts.load("current", {
+    GoogleCharts.load("current", {
       packages: ["corechart", "table", "sankey"],
       callback: this.drawSankeyChart,
     })
@@ -183,7 +184,7 @@ export default {
         }
       }
       if (rows.length > 0 && this.has_data) {
-        var data = new google.visualization.DataTable()
+        var data = new GoogleCharts.api.visualization.DataTable()
         data.addColumn("string", "From")
         data.addColumn("string", "To")
         data.addColumn("number", "Percent")
@@ -241,7 +242,9 @@ export default {
             tooltip: false,
           },
         }
-        var chart = new google.visualization.Sankey(this.$refs["sankey"])
+        var chart = new GoogleCharts.api.visualization.Sankey(
+          this.$refs["sankey"]
+        )
 
         // delay this so the height can get setup before the
         // chart is drawn when transitioning from no data

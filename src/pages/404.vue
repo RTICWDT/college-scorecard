@@ -67,11 +67,9 @@ export default {
   methods: {
     handleSchoolNameSelected(school) {
       if (typeof school == "string") {
-        window.location =
-          this.$baseUrl + "/search/?name=" + encodeURIComponent(school)
+        window.location = "/search/?name=" + encodeURIComponent(school)
       } else {
         window.location =
-          this.$baseUrl +
           "/search/?name=" +
           encodeURIComponent(school["school.name"]) +
           "&id=" +

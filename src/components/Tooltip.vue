@@ -31,7 +31,7 @@
           <div v-if="info" v-html="info"></div>
           <p class="text-center mt-3" v-if="hasGlossary">
             <v-btn
-              :href="$baseUrl + '/data/glossary/#' + definition"
+              :href="'/data/glossary/#' + definition"
               small
               rounded
               color="secondary"

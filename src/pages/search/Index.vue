@@ -673,7 +673,7 @@ export default {
 
       this.addURLToStorage(qs)
 
-      let request = apiGet(window.api.url, window.api.key, "/schools", query)
+      let request = apiGet("/schools", query)
         .then((response) => {
           console.log("loaded schools:", response.data)
 
@@ -703,7 +703,7 @@ export default {
       // Generic API Query Method that returns API results
       let query = this.prepareParams(params)
 
-      return apiGet(window.api.url, window.api.key, "/schools", query)
+      return apiGet("/schools", query)
     },
     showError(error) {
       // TODO: Loop through multiple error messages if needed.

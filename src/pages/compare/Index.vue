@@ -983,8 +983,7 @@
                           see
                           <a
                             v-bind:href="
-                              $baseUrl +
-                                '/data/glossary/#repayment-rate-completers'
+                              '/data/glossary/#repayment-rate-completers'
                             "
                             >the glossary</a
                           >.
@@ -993,10 +992,7 @@
                           Percentage of borrowers in each category 2 years after
                           entering repayment. For category definitions, please
                           see
-                          <a
-                            v-bind:href="
-                              $baseUrl + '/data/glossary/#repayment-rate'
-                            "
+                          <a v-bind:href="'/data/glossary/#repayment-rate'"
                             >the glossary</a
                           >.
                         </span>
@@ -1124,7 +1120,7 @@
                     <v-btn
                       rounded
                       color="secondary"
-                      :href="`${$baseUrl}/search?toggle=institutions`"
+                      :href="`/search?toggle=institutions`"
                     >
                       search schools
                     </v-btn>
@@ -1146,7 +1142,7 @@
                     <v-btn
                       rounded
                       color="secondary"
-                      :href="`${$baseUrl}/search/?toggle=fos`"
+                      :href="`/search/?toggle=fos`"
                     >
                       SEARCH FIELDS OF STUDY
                     </v-btn>
@@ -1253,9 +1249,6 @@
   color: black !important;
   font-weight: bold;
   text-transform: uppercase;
-}
-
-.compare-fos-toggle {
 }
 
 .compare-toggle-school-active {
@@ -1380,9 +1373,7 @@ export default {
   },
   computed: {
     shareUrl() {
-      // const compareBaseURL = window.location.origin + this.$baseUrl + '/compare/?toggle=' + this.displayToggle + '&';
-      const compareBaseURL =
-        window.location.origin + this.$baseUrl + "/compare/?"
+      const compareBaseURL = window.location.origin + "/compare/?"
 
       let paramArray = {
         // Institution
@@ -1417,7 +1408,7 @@ export default {
       return compareBaseURL + this.prepareQueryString(paramArray)
     },
     referrerLink() {
-      return document.referrer || `${this.$baseUrl}/search`
+      return document.referrer || `/search`
     },
     showSearchForm() {
       // if(this.schools['2-year schools'].length > 0 || this.schools['4-year schools'].length > 0 || this.schools['Certificate schools'].length > 0){
@@ -1571,7 +1562,6 @@ export default {
       // Generate URL based on params,
       let qs = querystring.stringify(params)
       let url =
-        this.$baseUrl +
         "/search/?" +
         qs
           .replace(/^&+/, "")
@@ -1700,12 +1690,7 @@ export default {
       this.trackCompareList(schoolArray.join(";"))
 
       this.loading = true
-      let request = apiGetAll(
-        window.api.url,
-        window.api.key,
-        "/schools/",
-        paramArray
-      )
+      let request = apiGetAll("/schools/", paramArray)
         .then((responses) => {
           let schoolData = responses.map(function(response) {
             if (response.data.results[0]) {
@@ -1776,12 +1761,7 @@ export default {
 
       // TODO - Track Compare List for Fields of Study
       this.loading = true
-      let request = apiGetAll(
-        window.api.url,
-        window.api.key,
-        "/schools/",
-        paramArray
-      )
+      let request = apiGetAll("/schools/", paramArray)
         .then((responses) => {
           let fieldOfStudyData = responses.map(function(response) {
             if (response.data.results[0]) {
@@ -1853,7 +1833,6 @@ export default {
             {},
             "",
             window.location.origin +
-              this.$baseUrl +
               "/compare?" +
               this.prepareQueryString(this.queryStringParameters)
           )
@@ -1937,7 +1916,6 @@ export default {
             {},
             "",
             window.location.origin +
-              this.$baseUrl +
               "/compare?" +
               this.prepareQueryString(this.queryStringParameters)
           )

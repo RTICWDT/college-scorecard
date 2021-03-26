@@ -11,7 +11,9 @@
         :class="{
           active:
             currentHighlight ===
-            `fos-${school.unit_id}-${school.code}-${school['credential.level']}`,
+            `fos-${school.unit_id}-${school.code}-${
+              school['credential.level']
+            }`,
         }"
         @click="
           $emit(
@@ -24,7 +26,9 @@
           <p class="subtitle-2 pb-0 mb-0">
             <a
               :href="
-                `${$baseUrl}/school?${school.unit_id}&fos_code=${school.code}&fos_credential=${school['credential.level']}`
+                `$/school?${school.unit_id}&fos_code=${
+                  school.code
+                }&fos_credential=${school['credential.level']}`
               "
             >
               <strong>{{ school.title | formatFieldOfStudyTitle }}</strong> -

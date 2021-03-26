@@ -461,12 +461,6 @@
 
     margin-bottom: 2rem !important;
   }
-  &.apprenticeships h2 {
-    /*background-color: #436692;*/
-  }
-  &.paying h2 {
-    /*background-color: #436692;*/
-  }
 }
 
 .sublink {
@@ -539,7 +533,6 @@ export default {
       // Generate URL based on params,
       let qs = querystring.stringify(params)
       let url =
-        this.$baseUrl +
         "/search/?" +
         qs
           .replace(/^&+/, "")
@@ -551,13 +544,9 @@ export default {
     },
     handleSchoolNameSelected(school) {
       if (typeof school == "string") {
-        // window.location = this.$baseUrl+'/search/?name=' + encodeURIComponent(school);
-        window.location =
-          this.$baseUrl + "/search/?search=" + encodeURIComponent(school)
+        window.location = "/search/?search=" + encodeURIComponent(school)
       } else {
-        // window.location = this.$baseUrl+'/search/?name=' + encodeURIComponent(school['school.name']) + "&id="+school.id;
         window.location =
-          this.$baseUrl +
           "/search/?search=" +
           encodeURIComponent(school["school.name"]) +
           "&id=" +
@@ -566,12 +555,10 @@ export default {
     },
     handleFieldOfStudySelected(fieldOfStudy) {
       window.location =
-        this.$baseUrl +
-        "/search/?toggle=fos&cip4=" +
-        encodeURIComponent(fieldOfStudy.cip4)
+        "/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4)
     },
     handleFoSMoreOptionsClick() {
-      window.location = `${this.$baseUrl}/search/?toggle=fos`
+      window.location = `/search/?toggle=fos`
     },
   },
   mounted() {

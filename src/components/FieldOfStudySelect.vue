@@ -112,19 +112,12 @@
     overflow-wrap: break-word;
   }
 }
-
-#field-of-study-select-search-text {
-}
-
 .fos-search-text-icon {
   color: $fos-color-gold !important;
 }
 
 .field-of-study-search-item-title {
   font-weight: bold;
-}
-
-.field-of-study-search-item-list-content {
 }
 
 .field-of-study-search-item-body {

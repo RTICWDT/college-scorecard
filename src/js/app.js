@@ -1,46 +1,10 @@
 // import "@babel/polyfill";
-import Vue from 'vue';
-import vuetify from './plugins/vuetify'
-import _ from 'lodash'
+// import Vue from 'vue';
+// import vuetify from './plugins/vuetify'
 import vueNumeralFilterInstaller from 'vue-numeral-filter';
 import VueClipboard from 'vue-clipboard2';
-Vue.use(VueClipboard);
-
-import IndexPage from './vue/pages/index.vue';
-
-import SchoolPage from './vue/pages/school.vue';
-import SchoolProgramsPage from './vue/pages/school_fields.vue';
-import TransitionPage from './vue/pages/school_transition.vue';
-
-import SearchPage from './vue/pages/search.vue';
-
-import DataIndexPage from './vue/pages/data.vue';
-import DataChangelogPage from './vue/pages/data_changelog.vue';
-import DataDocumentationPage from './vue/pages/data_documentation.vue';
-import DataGlossaryPage from './vue/pages/data_glossary.vue';
-
-import ComparePage from './vue/pages/compare.vue';
-import FourOhFourPage from './vue/pages/404.vue';
-
-import './vue/filters.js'
-import './vue/mixins.js'
-import './plugins/chartjs.js';
-import {localStorageKeys} from './vue/constants.js';
-import {LocalStorage} from './vue/localStoage.js';
-import {EventBus} from './vue/EventBus.js';
-
-import ScorecardHeader from '.~/components/ScorecardHeader.vue';
-import ScorecardFooter from '.~/components/ScorecardFooter.vue';
-
-Vue.prototype._ = _
 Vue.use(vueNumeralFilterInstaller, { locale: 'en' });
 
-import style from '../../sass/style.scss';
-
-Vue.component('scorecard-header', ScorecardHeader);
-Vue.component('scorecard-footer', ScorecardFooter);
-
-Vue.prototype.$baseUrl = window.baseurl;
 
 
 new Vue({

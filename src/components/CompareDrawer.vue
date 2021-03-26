@@ -105,7 +105,7 @@
 
           <!-- Medium and smaller button-->
           <div class="d-md-none mt-5 text-center">
-            <v-btn rounded color="secondary" :href="$baseUrl + '/compare'">
+            <v-btn rounded color="secondary" :href="'/compare'">
               Compare Schools
             </v-btn>
           </div>
@@ -163,7 +163,7 @@
               class="compare-drawer-button"
               rounded
               color="secondary"
-              :href="$baseUrl + '/compare/?toggle=fos'"
+              :href="'/compare/?toggle=fos'"
             >
               Compare Fields of Study
             </v-btn>
@@ -180,7 +180,7 @@
     >
       <v-row>
         <v-col cols="12" md="5" class="text-center d-none d-md-block">
-          <v-btn rounded color="secondary" :href="$baseUrl + '/compare'">
+          <v-btn rounded color="secondary" :href="'/compare'">
             Compare Schools
           </v-btn>
         </v-col>
@@ -193,7 +193,7 @@
             class="compare-drawer-button"
             rounded
             color="secondary"
-            :href="$baseUrl + '/compare/?toggle=fos'"
+            :href="'/compare/?toggle=fos'"
           >
             Compare Fields of Study
           </v-btn>
@@ -223,9 +223,6 @@
   }
 }
 
-.compare-drawer-button-container {
-}
-
 .compare-drawer-fos-checkbox-container {
   @media (min-width: 960px) {
     min-height: 420px;
@@ -251,11 +248,6 @@
   @media (min-width: 960px) {
     padding-bottom: 0;
   }
-}
-
-.compare-drawer-button {
-  /*position: absolute;*/
-  /*bottom: 24px;*/
 }
 
 .compare-drawer-fos-checkbox-label {

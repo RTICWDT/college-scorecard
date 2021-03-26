@@ -52,6 +52,8 @@
 </style>
 
 <script>
+import { GoogleCharts } from "google-charts"
+
 export default {
   props: {
     school: Object,
@@ -82,7 +84,7 @@ export default {
 
   mounted() {
     this.extractData()
-    google.charts.load("current", {
+    GoogleCharts.load("current", {
       packages: ["corechart", "table", "sankey"],
       callback: this.drawSankeyChart,
     })
@@ -215,7 +217,7 @@ export default {
 
       if (rows.length > 0) {
         this.has_data = true
-        var data = new google.visualization.DataTable()
+        var data = new GoogleCharts.api.visualization.DataTable()
         var colors = []
         data.addColumn("string", "From")
         data.addColumn("string", "To")
@@ -268,7 +270,9 @@ export default {
             tooltip: false,
           },
         }
-        var chart = new google.visualization.Sankey(this.$refs["sankey"])
+        var chart = new GoogleCharts.api.visualization.Sankey(
+          this.$refs["sankey"]
+        )
         this.group_count = _.get(
           this.outcome_cohorts,
           this.study + "." + this.enroll
