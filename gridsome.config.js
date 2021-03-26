@@ -6,5 +6,7 @@
 
 module.exports = {
   siteName: 'Gridsome',
-  plugins: []
+  plugins: [],
+  pathPrefix: '', //use for federalist
+
 }
