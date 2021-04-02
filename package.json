@@ -7,7 +7,7 @@
     "serve": "bundle exec jekyll serve --baseurl=''",
     "build": "npm run clean && webpack --config webpack.prod.vue.config.js",
     "build:dev": "npm run clean && webpack --devtool source-map --config webpack.vue.config.js",
-    "watch": "npm run clean && webpack --devtool source-map --config webpack.vue.config.js --watch",
+    "watch": "npm run clean && webpack --devtool source-map --config webpack.vue.config.js -w --watch-poll",
     "test:e2e": "codeceptjs run --steps",
     "test:unit": "jest",
     "test:a11y": "./test/a11y.js",

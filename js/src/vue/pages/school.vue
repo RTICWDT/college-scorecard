@@ -1059,7 +1059,7 @@
                           <!--Monthly Loan-->
                           <v-col cols="12" md="4" sm="12">
                             <h4 class="mb-2">
-                              Monthly Loan<br> Payment&nbsp
+                              Monthly Loan<br> Payment&nbsp;
                               <tooltip v-if="!fosShowDebtAtPrior" definition="fos-monthly-debt-payment" />
                               <tooltip v-else definition="fos-monthly-debt-payment-all-schools" />
                             </h4>
