@@ -18,6 +18,19 @@
               <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
               <v-expansion-panels>
                 <v-expansion-panel>                  
+                  <v-expansion-panel-header>April 4, 2021</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <p>On April 4, 2021, the College Scorecard API was updated to improve stability and efficiency. If you encounter any problems with this revision of the API, please submit an issue at <a href="http://github.com/rticwdt/college-scorecard/" target="_blank" @click="trackOutboundLink($event)">http://github.com/rticwdt/college-scorecard/</a></p>
+                    <p>Changes include: </p>
+                    <ul><li><strong>By default, only “<em>latest</em>” data will be returned.</strong> Before this update, the API returned data for all years available unless filtered by the <em>fields</em> parameter. With this update, it now returns only the <em>latest</em> object by default. If your implementation relies on the previous functionality, the flag <em>“&all_years=true”</em> can be appended to your API call to receive data for all years available.</li>
+                    <li><strong>Only specific fields will be available for <em>sort</em> and <em>filter</em> conditions.</strong> Previously, the API allowed any field in the dataset to be used to sort or filter results. Following this update, only a subset of fields will be indexed and available for sorting and filtering. The fields are identified in the latest Data Dictionary under the column <em>INDEX</em> and are generated using only the latest data.</li>
+                    <li><strong>School name autocomplete improvements.</strong> An autocomplete endpoint for institution name is now available. This endpoint takes into account institution aliases and returns IDs and a relevance score based on the text string sent. Individual words must be at least three characters long to produce results. The new endpoint is:
+                    <ul class='mt-4'><li>/v1/name-autocomplete?school_search={string}</li></ul></li>
+                    </ul>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+                                
+                <v-expansion-panel>                  
                   <v-expansion-panel-header>January 19, 2021</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <p>On January 19, 2021, the Department updated the College Scorecard downloadable data files and the API as indicated below.</p>
