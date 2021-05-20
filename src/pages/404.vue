@@ -1,9 +1,6 @@
 <template>
   <v-app id="four-oh-four">
-    <scorecard-header
-      :compare-institutions-count="compareSchools.length"
-      :compare-fields-of-study-count="compareFieldsOfStudy.length"
-    />
+    <scorecard-header />
     <v-main class="home-splash">
       <v-container>
         <v-row>
@@ -24,16 +21,10 @@
     </v-main>
     <scorecard-footer />
 
-    <compare-header
-      :showCompare.sync="showCompare"
-      :schools="compareSchools"
-      :fields-of-study="compareFieldsOfStudy"
-    />
+    <compare-header :showCompare.sync="showCompare" />
 
     <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
       <compare-drawer
-        :schools="compareSchools"
-        :fields-of-study="compareFieldsOfStudy"
         :show-info-text="showInfoText"
         @toggle-compare-school="handleToggleCompareItem"
         v-on:close-modal="closeModal()"
@@ -63,7 +54,6 @@ export default {
     "compare-drawer": CompareDrawer,
     "compare-header": CompareHeader,
   },
-  props: ["baseUrl", "pagePermalink", "compareSchools", "compareFieldsOfStudy"],
   methods: {
     handleSchoolNameSelected(school) {
       if (typeof school == "string") {

@@ -1,11 +1,7 @@
 <template>
   <default-layout>
     <v-app id="data-changelog">
-      <scorecard-header
-        active-link="data"
-        :compare-institutions-count="compareSchools.length"
-        :compare-fields-of-study-count="compareFieldsOfStudy.length"
-      />
+      <scorecard-header active-link="data" />
 
       <v-main>
         <data-navigation current="/data/changelog/" />
@@ -585,9 +581,7 @@
                                 @click="
                                   trackDownload('FullDataDocumentation.pdf')
                                 "
-                                :href="
-                                  baseUrl + '/assets/FullDataDocumentation.pdf'
-                                "
+                                :href="'/assets/FullDataDocumentation.pdf'"
                                 target="_blank"
                                 >Documentation Report</a
                               >. As this was the default sort of the search
@@ -1302,16 +1296,10 @@
       </v-main>
       <scorecard-footer />
 
-      <compare-header
-        :showCompare.sync="showCompare"
-        :schools="compareSchools"
-        :fields-of-study="compareFieldsOfStudy"
-      />
+      <compare-header :showCompare.sync="showCompare" />
 
       <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
         <compare-drawer
-          :schools="compareSchools"
-          :fields-of-study="compareFieldsOfStudy"
           :show-info-text="showInfoText"
           @toggle-compare-school="handleToggleCompareItem"
           v-on:close-modal="closeModal()"
@@ -1339,13 +1327,6 @@ export default {
     "compare-drawer": CompareDrawer,
     "compare-header": CompareHeader,
   },
-  props: [
-    "baseUrl",
-    "dataBase_url",
-    "dataDictionary",
-    "compareSchools",
-    "compareFieldsOfStudy",
-  ],
   mounted() {
     EventBus.$on("compare-drawer-show", (showCompareInfo) => {
       this.showCompare = true

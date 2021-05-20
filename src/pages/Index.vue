@@ -1,10 +1,6 @@
 <template>
   <v-app id="index">
-    <scorecard-header
-      active-link="/"
-      :compare-institutions-count="compareSchools.length"
-      :compare-fields-of-study-count="compareFieldsOfStudy.length"
-    />
+    <scorecard-header active-link="/" />
 
     <v-main>
       <!-- Top Splash and Search-->
@@ -334,16 +330,10 @@
     </v-main>
     <scorecard-footer />
 
-    <compare-header
-      :showCompare.sync="showCompare"
-      :schools="compareSchools"
-      :fields-of-study="compareFieldsOfStudy"
-    />
+    <compare-header :showCompare.sync="showCompare" />
 
     <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
       <compare-drawer
-        :schools="compareSchools"
-        :fields-of-study="compareFieldsOfStudy"
         :show-info-text="showInfoText"
         @toggle-compare-school="handleToggleCompareItem"
         v-on:close-modal="closeModal()"
@@ -520,7 +510,6 @@ export default {
     "compare-drawer": CompareDrawer,
     "compare-header": CompareHeader,
   },
-  props: ["baseUrl", "compareSchools", "compareFieldsOfStudy"],
   data() {
     return {
       mobilePanels: 0,

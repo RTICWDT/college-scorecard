@@ -1,16 +1,6 @@
 <template>
   <v-app id="data-documentation">
-    <scorecard-header
-      active-link="data"
-      :compare-institutions-count="compareSchools.length"
-      :compare-fields-of-study-count="compareFieldsOfStudy.length"
-    />
-
-    <scorecard-header
-      active-link="data"
-      :compare-institutions-count="compareSchools.length"
-      :compare-fields-of-study-count="compareFieldsOfStudy.length"
-    />
+    <scorecard-header active-link="data" />
 
     <v-main>
       <data-navigation current="/data/documentation/" />
@@ -35,7 +25,7 @@
                     class="pa-2 text-center fill-height d-flex align-center justify-center"
                     color="grey lighten-4"
                     @click="trackDownload(dataDictionary)"
-                    :href="baseUrl + '/assets/' + dataDictionary"
+                    :href="'/assets/' + dataDictionary"
                     target="_blank"
                     hover
                   >
@@ -49,7 +39,7 @@
                     class="pa-2 text-center fill-height d-flex align-center justify-center"
                     color="grey lighten-4"
                     @click="trackDownload('FullDataDocumentation.pdf')"
-                    :href="baseUrl + '/assets/FullDataDocumentation.pdf'"
+                    :href="'/assets/FullDataDocumentation.pdf'"
                     target="_blank"
                     hover
                   >
@@ -63,9 +53,7 @@
                     class="pa-2 text-center fill-height d-flex align-center justify-center"
                     color="grey lighten-4"
                     @click="trackDownload('FieldOfStudyDataDocumentation.pdf')"
-                    :href="
-                      baseUrl + '/assets/FieldOfStudyDataDocumentation.pdf'
-                    "
+                    :href="'/assets/FieldOfStudyDataDocumentation.pdf'"
                     target="_blank"
                     hover
                   >
@@ -138,7 +126,7 @@
                 @click="trackDownload(dataDictionary)"
                 rounded
                 color="secondary"
-                :href="baseUrl + '/assets/' + dataDictionary"
+                :href="'/assets/' + dataDictionary"
                 class="button data-home-button mb-4"
                 >Download the Data Dictionary</v-btn
               >
@@ -227,16 +215,10 @@
     </v-main>
     <scorecard-footer />
 
-    <compare-header
-      :showCompare.sync="showCompare"
-      :schools="compareSchools"
-      :fields-of-study="compareFieldsOfStudy"
-    />
+    <compare-header :showCompare.sync="showCompare" />
 
     <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
       <compare-drawer
-        :schools="compareSchools"
-        :fields-of-study="compareFieldsOfStudy"
         :show-info-text="showInfoText"
         @toggle-compare-school="handleToggleCompareItem"
         v-on:close-modal="closeModal()"
@@ -263,14 +245,7 @@ export default {
     "compare-drawer": CompareDrawer,
     "compare-header": CompareHeader,
   },
-  props: [
-    "baseUrl",
-    "dataBase_url",
-    "dataDictionary",
-    "recaptchaSiteKey",
-    "compareSchools",
-    "compareFieldsOfStudy",
-  ],
+  props: ["dataDictionary", "recaptchaSiteKey"],
   data() {
     return {
       showCaptcha: true,

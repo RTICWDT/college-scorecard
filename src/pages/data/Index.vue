@@ -1,10 +1,6 @@
 <template>
   <v-app id="data">
-    <scorecard-header
-      active-link="data"
-      :compare-institutions-count="compareSchools.length"
-      :compare-fields-of-study-count="compareFieldsOfStudy.length"
-    />
+    <scorecard-header active-link="data" />
     <v-main>
       <data-navigation current="/data/" />
       <v-container>
@@ -97,15 +93,9 @@
       </v-container>
     </v-main>
     <scorecard-footer />
-    <compare-header
-      :showCompare.sync="showCompare"
-      :schools="compareSchools"
-      :fields-of-study="compareFieldsOfStudy"
-    />
+    <compare-header :showCompare.sync="showCompare" />
     <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
       <compare-drawer
-        :schools="compareSchools"
-        :fields-of-study="compareFieldsOfStudy"
         :show-info-text="showInfoText"
         @toggle-compare-school="handleToggleCompareItem"
         v-on:close-modal="closeModal()"
@@ -131,19 +121,6 @@ export default {
     "simple-tooltip": SimpleTooltip,
     "compare-drawer": CompareDrawer,
     "compare-header": CompareHeader,
-  },
-  props: [
-    "baseUrl",
-    "dataBase_url",
-    "dataDictionary",
-    "compareSchools",
-    "compareFieldsOfStudy",
-  ],
-  mounted() {
-    EventBus.$on("compare-drawer-show", (showCompareInfo) => {
-      this.showCompare = true
-      this.showInfoText = showCompareInfo
-    })
   },
 }
 </script>

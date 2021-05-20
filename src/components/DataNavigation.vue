@@ -32,10 +32,10 @@
 <script>
 export default {
   props: ["current"],
-  computed: {
-    dataTabs() {
-      return this.current
-    },
+  data() {
+    return {
+      dataTabs: this.current,
+    }
   },
 }
 </script>

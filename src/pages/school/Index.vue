@@ -1,10 +1,7 @@
 <template>
   <v-app id="school" class="school-page">
     <!-- Search results -->
-    <scorecard-header
-      :compare-institutions-count="compareSchools.length"
-      :compare-fields-of-study-count="compareFieldsOfStudy.length"
-    />
+    <scorecard-header />
 
     <v-main>
       <v-container>
@@ -2243,13 +2240,9 @@
     <scorecard-footer />
     <compare-header
       :showCompare.sync="showCompare"
-      :schools="compareSchools"
-      :fields-of-study="compareFieldsOfStudy"
     />
     <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
       <compare-drawer
-        :schools="compareSchools"
-        :fields-of-study="compareFieldsOfStudy"
         :show-info-text="showInfoText"
         @toggle-compare-school="handleToggleCompareItem"
         v-on:close-modal="closeModal()"
@@ -2480,12 +2473,7 @@ import { EventBus } from "~/js/EventBus.js"
 
 export default {
   mixins: [compare, URLHistory, ComplexFields, AnalyticsEvents],
-  props: [
-    "baseUrl",
-    "compareSchools",
-    "apiKeyGoogleMaps",
-    "compareFieldsOfStudy",
-  ],
+  props: ["apiKeyGoogleMaps"],
   components: {
     donut: Donut,
     "name-autocomplete": NameAutocomplete,
