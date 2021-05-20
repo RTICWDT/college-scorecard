@@ -90,36 +90,32 @@
 
 <script>
 export default {
-  props: ["schools", "fieldsOfStudy"],
-  data() {
-    return {}
-  },
   methods: {
     toggleDrawer() {
       this.$emit("update:showCompare", true)
     },
   },
   computed: {
-    // currentCount(){
-    //     return this.schools.length
-    // },
     currentSchoolCount() {
-      return this.schools.length
+      return this.$store.state.institutions.length
     },
     currentFieldOfStudyCount() {
-      return this.fieldsOfStudy.length
+      return this.$store.state.fos.length
     },
     schoolText() {
       var ret =
-        this.schools.length > 1 || this.schools.length === 0
+        this.$store.state.institutions.length > 1 ||
+        this.$store.state.institutions.length === 0
           ? "Schools"
           : "School"
-      return this.schools.length > 0 && this.fieldsOfStudy.length == 10
+      return this.$store.state.institutions.length > 0 &&
+        this.$store.state.fos.length == 10
         ? ret + " to compare and share."
         : ret + " and "
     },
     fieldOfStudyText() {
-      return this.fieldsOfStudy.length > 1 || this.fieldsOfStudy.length === 0
+      return this.$store.state.fos.length > 1 ||
+        this.$store.state.fos.length === 0
         ? "Fields of Study"
         : "Field of Study"
     },

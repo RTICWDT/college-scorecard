@@ -142,13 +142,7 @@
                   <v-btn
                     class="search-fos-result-compare-button d-none d-md-block"
                     icon
-                    @click="
-                      $emit(
-                        'toggle-compare-item',
-                        fieldOfStudyCompareFormat(fieldOfStudy),
-                        'compare-fos'
-                      )
-                    "
+                    @click="$store.commit('toggleFieldOfStudy', fieldOfStudy)"
                     :color="
                       selectedFieldOfStudyClass(fieldOfStudy) ===
                       'result-card-selected'
@@ -307,7 +301,7 @@ export default {
   methods: {
     selectedFieldOfStudyClass(
       fieldOfStudy,
-      compareList = this.selectedFieldsOfStudy
+      compareList = this.$store.state.fos
     ) {
       if (
         _.findIndex(

@@ -1,5 +1,12 @@
 <template>
-  <router-view :compareFieldsOfStudy="[]" :compareSchools="[]" />
+  <router-view
+    :compareFieldsOfStudy="[]"
+    :compareSchools="[]"
+    @compare-update-selection="refreshCompareSchools"
+    @toggle-compare-school="toggleCompareItem"
+    :is-loading="isLoading"
+    @loading="isLoading = $event"
+  />
 </template>
 
 <static-query>
@@ -14,7 +21,6 @@ query {
 <script>
 import "~/js/filters.js"
 import "~/js/mixins.js"
-//import "~/js/plugins/chartjs.js"
 
 import { localStorageKeys } from "~/js/constants.js"
 import { LocalStorage } from "~/js/localStoage.js"

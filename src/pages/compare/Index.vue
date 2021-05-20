@@ -1,10 +1,6 @@
 <template>
   <v-app id="compare" class="compare-page">
-    <scorecard-header
-      :compare-institutions-count="compareSchools.length"
-      :compare-fields-of-study-count="compareFieldsOfStudy.length"
-      active-link="compare"
-    />
+    <scorecard-header active-link="compare" />
     <v-main>
       <v-container>
         <v-row>
@@ -51,8 +47,8 @@
                   @context-switch-click="handleDisplayToggleClick"
                   @context-tab-change="handleDisplayToggleClick"
                   :fill-space="true"
-                  :compare-institutions-count="compareSchools.length"
-                  :compare-fields-of-study-count="compareFieldsOfStudy.length"
+                  :compare-institutions-count="$store.state.institutions.length"
+                  :compare-fields-of-study-count="$store.state.fos.length"
                 >
                   <template v-slot:tab-school>
                     <h3 class="compare-tab-title">
@@ -1294,7 +1290,6 @@ import { EventBus } from "~/js/EventBus.js"
 
 export default {
   mixins: [compare, ComplexFields, AnalyticsEvents, Router],
-  props: ["baseUrl", "compareSchools", "compareFieldsOfStudy"],
   components: {
     tooltip: Tooltip,
     share: Share,
@@ -1372,6 +1367,12 @@ export default {
     }
   },
   computed: {
+    compareSchools() {
+      return this.$store.state.institutions
+    },
+    compareFieldsOfStudy() {
+      return this.$store.state.fos
+    },
     shareUrl() {
       const compareBaseURL = window.location.origin + "/compare/?"
 

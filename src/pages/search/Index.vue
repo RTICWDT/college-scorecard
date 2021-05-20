@@ -118,10 +118,10 @@
             <div class="search-result-container">
               <!-- Search Result Info and controls -->
               <v-card
-                class="mt-2 mb-4 py-1 px-4 elevaton-0 pageBar"
+                class="mt-2 mb-4 py-4 px-4 elevaton-0 pageBar"
                 v-if="!isLoading"
               >
-                <v-row class="pa-0">
+                <v-row class="">
                   <v-col cols="12" sm="7" class="py-2 px-4">
                     <div id="search-result-info-count" class>
                       <p class="title mb-0">
@@ -244,7 +244,6 @@
                         :total-visible="7"
                         @input="handlePaginationInput"
                         class="pr-0 mr-0"
-                        circle
                       ></v-pagination>
                     </div>
                   </v-col>
@@ -354,9 +353,6 @@
                       <search-result-card
                         :school="school"
                         @toggle-compare-school="handleToggleCompareSchool"
-                        :is-selected="
-                          isResultCardSelected(school.id, compareSchools)
-                        "
                       />
                     </v-col>
                   </v-row>
@@ -579,6 +575,8 @@ export default {
     }, 1000)
   },
   mounted() {
+    this.$store.commit("increment")
+    console.log(this.$store.state.count)
     EventBus.$on("compare-drawer-show", (showCompareInfo) => {
       this.showCompare = true
       this.showInfoText = showCompareInfo

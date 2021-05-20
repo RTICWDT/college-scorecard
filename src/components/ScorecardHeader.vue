@@ -211,8 +211,8 @@ header {
                 bottom
                 offset-x="14"
                 offset-y="10"
-                :content="compareInstitutionsCount"
-                :value="compareInstitutionsCount"
+                :content="$store.state.institutions.length"
+                :value="$store.state.institutions.length"
                 color="#E3EEF6"
               >
                 <v-btn
@@ -234,8 +234,8 @@ header {
                 bottom
                 offset-x="14"
                 offset-y="10"
-                :content="compareFieldsOfStudyCount"
-                :value="compareFieldsOfStudyCount"
+                :content="$store.state.fos.length"
+                :value="$store.state.fos.length"
                 color="#E3EEF6"
               >
                 <v-btn
@@ -346,14 +346,6 @@ export default {
     activeLink: {
       type: String,
       default: null,
-    },
-    compareInstitutionsCount: {
-      type: Number,
-      default: 0,
-    },
-    compareFieldsOfStudyCount: {
-      type: Number,
-      default: 0,
     },
   },
   data() {

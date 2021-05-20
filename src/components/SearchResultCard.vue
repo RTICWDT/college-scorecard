@@ -45,7 +45,7 @@
             icon
             class="float-right search-result-card-compare"
             :color="isSelected ? '#0075B2' : 'grey'"
-            @click="$emit('toggle-compare-school', school)"
+            @click="$store.commit('toggleSchool', school)"
             v-bind="attrs"
             v-on="on"
             aria-label="Add to compare"
@@ -139,7 +139,6 @@ export default {
   },
   props: {
     school: Object,
-    isSelected: Boolean,
   },
   computed: {
     displayGradRate() {
@@ -183,6 +182,13 @@ export default {
       } else {
         return this.$options.filters.numeral(this.netPrice, "$0a")
       }
+    },
+    isSelected() {
+      return (
+        this.$store.state.institutions.find(
+          ({ schoolId }) => schoolId == this.school.id
+        ) != undefined
+      )
     },
   },
 }

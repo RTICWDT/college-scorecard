@@ -24,7 +24,7 @@ const apiGetAll = function(uri, paramArray){
 
   for(let i = 0; i < paramArray.length; i++){
     promises.push(
-      apiGet(apiKey, uri, paramArray[i])
+      apiGet(uri, paramArray[i])
     );
   }
 

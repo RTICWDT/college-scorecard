@@ -84,7 +84,7 @@
 
           <div class="my-3 pr-1 mr-1">
             <v-checkbox
-              @change="handleToggleCompareItem(school, schoolKey)"
+              @change="handleToggleCompareSchool(school)"
               v-for="school in schools"
               :key="school.schoolId"
               :value="school.schoolId"
@@ -132,7 +132,7 @@
           <div class="my-3 compare-drawer-fos-checkbox-container pr-1">
             <v-checkbox
               v-for="fieldOfStudy in fieldsOfStudy"
-              @change="handleToggleCompareItem(fieldOfStudy, fieldOfStudyKey)"
+              @change="handleToggleCompareFoS(fieldOfStudy)"
               :key="generateFieldOfStudyString(fieldOfStudy)"
               hide-details
               v-model="selectedFieldsOfStudy"
@@ -315,17 +315,12 @@
 // This can work on any page, it just needs data passed in and events to react when school
 // is toggled.
 import Share from "~/components/Share.vue"
-import { localStorageKeys } from "~/js/constants"
 
 export default {
   components: {
     share: Share,
   },
   props: {
-    schools: Array,
-    fieldsOfStudy: {
-      type: Array,
-    },
     showInfoText: {
       type: Boolean,
       default: false,
@@ -335,45 +330,23 @@ export default {
     return {
       selectedSchools: [],
       selectedFieldsOfStudy: [],
-      fieldOfStudyKey: localStorageKeys.COMPARE_FOS_KEY,
-      schoolKey: localStorageKeys.COMPARE_KEY,
-      // showCompareInfo: false
     }
   },
-  watch: {
+  computed: {
     schools() {
-      this.selectedSchools = _.map(this.schools, "schoolId")
+      return this.$store.state.institutions
     },
     fieldsOfStudy() {
-      this.selectedFieldsOfStudy = _.map(this.fieldsOfStudy, (fieldOfStudy) => {
-        return this.generateFieldOfStudyString(fieldOfStudy)
-      })
+      return this.$store.state.fos
     },
-    // showInfoText(newValue,oldValue){
-    //   this.showCompareInfo = newValue;
-    // }
   },
-  mounted() {
-    this.selectedSchools = _.map(this.schools, "schoolId")
-    this.selectedFieldsOfStudy = _.map(this.fieldsOfStudy, (fieldOfStudy) => {
-      return this.generateFieldOfStudyString(fieldOfStudy)
-    })
 
-    // this.showCompareInfo = this.showInfoText;
-    // this.onResize();
-  },
   methods: {
     handleToggleCompareSchool(school) {
-      // TODO: The fade in/out or keep unchecked.
-      // Move to a local state that can be clicked again and eventually refreshed.
-
-      this.$emit("toggle-compare-school", school)
+      this.$store.commit("toggleSchool", school)
     },
-    handleToggleCompareItem(item, key) {
-      // TODO: The fade in/out or keep unchecked.
-      // Move to a local state that can be clicked again and eventually refreshed.
-      // console.log(item);
-      this.$emit("toggle-compare-school", item, key)
+    handleToggleCompareFoS(fos) {
+      this.$store.commit("toggleFieldOfStudy", fos)
     },
     toggleDrawer() {
       this.$emit("close-modal")
@@ -400,6 +373,12 @@ export default {
         ).style.width = `600px`
       }
     },
+  },
+  mounted() {
+    this.selectedSchools = _.map(this.schools, "schoolId")
+    this.selectedFieldsOfStudy = _.map(this.fieldsOfStudy, (fieldOfStudy) => {
+      return this.generateFieldOfStudyString(fieldOfStudy)
+    })
   },
 }
 </script>

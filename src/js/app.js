@@ -51,10 +51,8 @@ new Vue({
     },
     // Toggle Compare School in local storage.
     toggleCompareSchool(school){
-      // Prepare Data, Make a call to the picc function.
       let schoolData = {
         dataset:{
-          // bind:"selected_school",
           school:"compare-schools",
           schoolId: (school.schoolId) ? String(school.schoolId) : String(school.id),
           schoolName: (school.schoolName) ? school.schoolName : school['school.name'],
