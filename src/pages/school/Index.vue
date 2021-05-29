@@ -4,7 +4,7 @@
     <scorecard-header />
 
     <v-main>
-      <v-container>
+      <v-container class="mt-5">
         <v-row>
           <v-col cols="12" lg="9" class="school-left">
             <div v-if="!school.id && !error" class="show-loading">
@@ -42,103 +42,7 @@
                   </v-col>
 
                   <v-col cols="9" class="text-right">
-                    <v-btn
-                      text
-                      small
-                      class="d-none d-sm-inline"
-                      :color="
-                        isSelected(
-                          { schoolId: String(id) },
-                          this.compareSchools
-                        )
-                          ? 'black'
-                          : 'white'
-                      "
-                      v-bind:class="{
-                        'compare-selected-text': isSelected(
-                          { schoolId: String(id) },
-                          this.compareSchools
-                        ),
-                        'rounded-pill': '',
-                      }"
-                      @click="
-                        $emit('toggle-compare-school', {
-                          schoolId: id,
-                          schoolName: schoolName,
-                        })
-                      "
-                    >
-                      <v-icon
-                        x-small
-                        class="mr-2"
-                        :color="
-                          isSelected(
-                            { schoolId: String(id) },
-                            this.compareSchools
-                          )
-                            ? '#0075B2'
-                            : 'white'
-                        "
-                        >fa fa-check-circle</v-icon
-                      >
-                      <div
-                        v-if="
-                          isSelected(
-                            { schoolId: String(id) },
-                            this.compareSchools
-                          )
-                        "
-                      >
-                        Added to Compare
-                      </div>
-                      <div v-else>Add to Compare School</div>
-                    </v-btn>
-
-                    <v-btn
-                      fab
-                      x-small
-                      :color="
-                        isSelected(
-                          { schoolId: String(id) },
-                          this.compareSchools
-                        )
-                          ? 'black'
-                          : 'white'
-                      "
-                      class="d-inline d-sm-none mr-2"
-                      @click="
-                        $emit('toggle-compare-school', {
-                          schoolId: id,
-                          schoolName: schoolName,
-                        })
-                      "
-                    >
-                      <v-icon
-                        small
-                        class=""
-                        :color="
-                          isSelected(
-                            { schoolId: String(id) },
-                            this.compareSchools
-                          )
-                            ? '#0075B2'
-                            : 'black'
-                        "
-                        >fa fa-check-circle</v-icon
-                      >
-                      <div
-                        class="sr-only"
-                        v-if="
-                          isSelected(
-                            { schoolId: String(id) },
-                            this.compareSchools
-                          )
-                        "
-                      >
-                        Added to Compare
-                      </div>
-                      <div class="sr-only" v-else>Add to Compare School</div>
-                    </v-btn>
+                    <add-to-compare :school="school" />
 
                     <share
                       small
@@ -2238,17 +2142,6 @@
       </v-container>
     </v-main>
     <scorecard-footer />
-    <compare-header
-      :showCompare.sync="showCompare"
-    />
-    <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
-      <compare-drawer
-        :show-info-text="showInfoText"
-        @toggle-compare-school="handleToggleCompareItem"
-        v-on:close-modal="closeModal()"
-        @toggle-more-info="showInfoText = !showInfoText"
-      ></compare-drawer>
-    </v-bottom-sheet>
   </v-app>
 </template>
 
@@ -2453,8 +2346,6 @@ import HorizontalBar from "~/components/HorizontalBar.vue"
 import Share from "~/components/Share.vue"
 import PayingForCollege from "~/components/PayingForCollege.vue"
 import SchoolIcons from "~/components/SchoolIcons.vue"
-import CompareDrawer from "~/components/CompareDrawer.vue"
-import CompareHeader from "~/components/CompareHeader.vue"
 import FieldData from "~/components/FieldData.vue"
 import NetPriceLink from "~/components/NetPriceLink.vue"
 import SearchForm from "~/components/SearchForm.vue"
@@ -2464,16 +2355,14 @@ import FieldOfStudySelect from "~/components/FieldOfStudySelect.vue"
 import FieldOfStudySearch from "~/components/FieldOfStudySearch.vue"
 import FieldDataExtended from "~/components/FieldDataExtended.vue"
 
-import { compare } from "~/js/mixins.js"
 import ComplexFields from "~/js/mixins/ComplexFields.js"
 import URLHistory from "~/js/mixins/URLHistory.js"
 import { apiGet } from "~/js/api.js"
 import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
-import { EventBus } from "~/js/EventBus.js"
+import AddToCompare from "~/components/AddToCompare.vue"
 
 export default {
-  mixins: [compare, URLHistory, ComplexFields, AnalyticsEvents],
-  props: ["apiKeyGoogleMaps"],
+  mixins: [URLHistory, ComplexFields, AnalyticsEvents],
   components: {
     donut: Donut,
     "name-autocomplete": NameAutocomplete,
@@ -2487,8 +2376,6 @@ export default {
     share: Share,
     "paying-for-college": PayingForCollege,
     "school-icons": SchoolIcons,
-    "compare-drawer": CompareDrawer,
-    "compare-header": CompareHeader,
     "field-data": FieldData,
     "net-price-link": NetPriceLink,
     "search-form": SearchForm,
@@ -2496,6 +2383,7 @@ export default {
     "field-of-study-select": FieldOfStudySelect,
     "field-of-study-search": FieldOfStudySearch,
     "field-data-extended": FieldDataExtended,
+    "add-to-compare": AddToCompare,
   },
   data() {
     return {
@@ -2710,8 +2598,8 @@ export default {
       params.center = school.location.lat + "," + school.location.lon
       params.zoom = 12
       params.size = "420x380"
-      params.key = this.apiKeyGoogleMaps
-      params.markers = params.center
+      ;(params.key = process.env.GRIDSOME_GOOGLE_MAPS_KEY),
+        (params.markers = params.center)
       params.style = "feature:poi|element:labels|visibility:off"
 
       let qs = querystring.stringify(params)
@@ -2927,11 +2815,6 @@ export default {
         this.error = true
         console.warn("No School found for ID: " + id)
       })
-
-    EventBus.$on("compare-drawer-show", (showCompareInfo) => {
-      this.showCompare = true
-      this.showInfoText = showCompareInfo
-    })
   },
   watch: {
     selectedFOS(val, oldVal) {

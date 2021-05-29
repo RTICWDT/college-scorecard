@@ -32,103 +32,7 @@
                     >
                   </v-col>
                   <v-col cols="9" class="text-right">
-                    <v-btn
-                      text
-                      small
-                      class="d-none d-sm-inline"
-                      :color="
-                        isSelected(
-                          { schoolId: String(id) },
-                          this.compareSchools
-                        )
-                          ? 'black'
-                          : 'white'
-                      "
-                      v-bind:class="{
-                        'compare-selected-text': isSelected(
-                          { schoolId: String(id) },
-                          this.compareSchools
-                        ),
-                        'rounded-pill': '',
-                      }"
-                      @click="
-                        $emit('toggle-compare-school', {
-                          schoolId: id,
-                          schoolName: schoolName,
-                        })
-                      "
-                    >
-                      <v-icon
-                        x-small
-                        class="mr-2"
-                        :color="
-                          isSelected(
-                            { schoolId: String(id) },
-                            this.compareSchools
-                          )
-                            ? '#0075B2'
-                            : 'white'
-                        "
-                        >fa fa-check-circle</v-icon
-                      >
-                      <div
-                        v-if="
-                          isSelected(
-                            { schoolId: String(id) },
-                            this.compareSchools
-                          )
-                        "
-                      >
-                        Added to Compare
-                      </div>
-                      <div v-else>Add to Compare School</div>
-                    </v-btn>
-
-                    <v-btn
-                      fab
-                      x-small
-                      :color="
-                        isSelected(
-                          { schoolId: String(id) },
-                          this.compareSchools
-                        )
-                          ? 'black'
-                          : 'white'
-                      "
-                      class="d-inline d-sm-none mr-2"
-                      @click="
-                        $emit('toggle-compare-school', {
-                          schoolId: id,
-                          schoolName: schoolName,
-                        })
-                      "
-                    >
-                      <v-icon
-                        small
-                        class=""
-                        :color="
-                          isSelected(
-                            { schoolId: String(id) },
-                            this.compareSchools
-                          )
-                            ? '#0075B2'
-                            : 'grey'
-                        "
-                        >fa fa-check-circle</v-icon
-                      >
-                      <div
-                        class="sr-only"
-                        v-if="
-                          isSelected(
-                            { schoolId: String(id) },
-                            this.compareSchools
-                          )
-                        "
-                      >
-                        Added to Compare
-                      </div>
-                      <div class="sr-only" v-else>Add to Compare School</div>
-                    </v-btn>
+                    <add-to-compare :school="school" />
                     <share
                       small
                       text
@@ -288,15 +192,6 @@
       </v-container>
     </v-main>
     <scorecard-footer />
-    <compare-header :showCompare.sync="showCompare" />
-    <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
-      <compare-drawer
-        :show-info-text="showInfoText"
-        @toggle-compare-school="handleToggleCompareItem"
-        v-on:close-modal="closeModal()"
-        @toggle-more-info="showInfoText = !showInfoText"
-      ></compare-drawer>
-    </v-bottom-sheet>
   </v-app>
 </template>
 
@@ -322,27 +217,23 @@
 import Tooltip from "~/components/Tooltip.vue"
 import Share from "~/components/Share.vue"
 import PayingForCollege from "~/components/PayingForCollege.vue"
-import CompareDrawer from "~/components/CompareDrawer.vue"
-import CompareHeader from "~/components/CompareHeader.vue"
 import FieldData from "~/components/FieldData.vue"
 import FieldDataExtended from "~/components/FieldDataExtended.vue"
-import { compare } from "~/js/mixins.js"
 import { apiGet } from "~/js/api.js"
 // import { fields } from '../constants.js';
 import { SiteData } from "~/js/mixins/SiteData.js"
 import ComplexFields from "~/js/mixins/ComplexFields.js"
-import { EventBus } from "~/js/EventBus.js"
+import AddToCompare from "~/components/AddToCompare.vue"
 
 export default {
-  mixins: [compare, SiteData, ComplexFields],
+  mixins: [SiteData, ComplexFields],
   components: {
     tooltip: Tooltip,
     share: Share,
     "paying-for-college": PayingForCollege,
-    "compare-drawer": CompareDrawer,
-    "compare-header": CompareHeader,
     "field-data": FieldData,
     "field-data-extended": FieldDataExtended,
+    "add-to-compare": AddToCompare,
   },
   data() {
     return {
@@ -457,11 +348,6 @@ export default {
       .catch((response) => {
         console.warn("No School found for ID: " + id)
       })
-
-    EventBus.$on("compare-drawer-show", (showCompareInfo) => {
-      this.showCompare = true
-      this.showInfoText = showCompareInfo
-    })
   },
 }
 </script>

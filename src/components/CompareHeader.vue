@@ -92,7 +92,7 @@
 export default {
   methods: {
     toggleDrawer() {
-      this.$emit("update:showCompare", true)
+      this.$store.commit("toggleDrawer", true)
     },
   },
   computed: {

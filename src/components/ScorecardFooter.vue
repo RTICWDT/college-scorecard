@@ -31,15 +31,34 @@
         under a Creative Commons Attribution 3.0 License.
       </p>
     </v-footer>
+    <compare-header />
+    <v-bottom-sheet id="compare-modal" v-model="$store.state.drawerOpen" inset>
+      <compare-drawer :show-info-text="false"></compare-drawer>
+    </v-bottom-sheet>
   </div>
 </template>
 
 <script>
+import CompareDrawer from "~/components/CompareDrawer.vue"
+import CompareHeader from "~/components/CompareHeader.vue"
+
 export default {
+  components: {
+    "compare-drawer": CompareDrawer,
+    "compare-header": CompareHeader,
+  },
   computed: {
     version() {
-      return window.scorecard_version
+      return this.$static.metadata.version
     },
   },
 }
 </script>
+
+<static-query>
+query {
+  metadata {
+    version
+  }
+}
+</static-query>

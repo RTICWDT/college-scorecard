@@ -213,7 +213,9 @@
         :max="800"
         :step="20"
       >
-        <template v-slot:label>SAT Math</template>
+        <template v-slot:label
+          >SAT Math</template
+        >
       </check-range>
 
       <check-range
@@ -225,7 +227,9 @@
         :max="800"
         :step="20"
       >
-        <template v-slot:label>SAT Critical Reading</template>
+        <template v-slot:label
+          >SAT Critical Reading</template
+        >
       </check-range>
 
       <check-range
@@ -237,7 +241,9 @@
         :max="36"
         :step="1"
       >
-        <template v-slot:label>ACT Score</template>
+        <template v-slot:label
+          >ACT Score</template
+        >
       </check-range>
 
       <check-range
@@ -251,7 +257,9 @@
         appendText="%"
         andUp
       >
-        <template v-slot:label>Acceptance Rate</template>
+        <template v-slot:label
+          >Acceptance Rate</template
+        >
       </check-range>
 
       <!-- <p class='overline'>School Characteristics</p> -->
@@ -428,7 +436,6 @@ import NameAutocomplete from "~/components/NameAutocomplete.vue"
 import FieldAutocomplete from "~/components/FieldAutocomplete.vue"
 import { SiteData } from "~/js/mixins/SiteData.js"
 import LocationCheck from "~/js/mixins/LocationCheck.js"
-import { EventBus } from "~/js/EventBus.js"
 import Tooltip from "~/components/Tooltip.vue"
 
 export default {
@@ -687,7 +694,7 @@ export default {
     }, 1000)
   },
   mounted() {
-    EventBus.$on("search-form-reset", (e) => {
+    this.$root.$on("search-form-reset", (e) => {
       this.resetFormDefault()
     })
   },

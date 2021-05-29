@@ -24,8 +24,10 @@
                   <v-card
                     class="pa-2 text-center fill-height d-flex align-center justify-center"
                     color="grey lighten-4"
-                    @click="trackDownload(dataDictionary)"
-                    :href="'/assets/' + dataDictionary"
+                    @click="
+                      trackDownload('CollegeScorecardDataDictionary.xlsx')
+                    "
+                    href="/assets/CollegeScorecardDataDictionary.xlsx"
                     target="_blank"
                     hover
                   >
@@ -123,10 +125,10 @@
               <p>All variables are listed in the Data Dictionary.</p>
 
               <v-btn
-                @click="trackDownload(dataDictionary)"
+                @click="trackDownload('CollegeScorecardDataDictionary.xlsx')"
                 rounded
                 color="secondary"
-                :href="'/assets/' + dataDictionary"
+                href="/assets/CollegeScorecardDataDictionary.xlsx"
                 class="button data-home-button mb-4"
                 >Download the Data Dictionary</v-btn
               >
@@ -214,17 +216,6 @@
       </v-container>
     </v-main>
     <scorecard-footer />
-
-    <compare-header :showCompare.sync="showCompare" />
-
-    <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
-      <compare-drawer
-        :show-info-text="showInfoText"
-        @toggle-compare-school="handleToggleCompareItem"
-        v-on:close-modal="closeModal()"
-        @toggle-more-info="showInfoText = !showInfoText"
-      ></compare-drawer>
-    </v-bottom-sheet>
   </v-app>
 </template>
 
@@ -232,25 +223,23 @@
 import DataNavigation from "~/components/DataNavigation.vue"
 import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 import VueRecaptcha from "vue-recaptcha"
-import CompareDrawer from "~/components/CompareDrawer.vue"
-import CompareHeader from "~/components/CompareHeader.vue"
-import { compare } from "~/js/mixins.js"
-import { EventBus } from "~/js/EventBus.js"
 
 export default {
-  mixins: [AnalyticsEvents, compare],
+  mixins: [AnalyticsEvents],
   components: {
     "data-navigation": DataNavigation,
     VueRecaptcha,
-    "compare-drawer": CompareDrawer,
-    "compare-header": CompareHeader,
   },
-  props: ["dataDictionary", "recaptchaSiteKey"],
   data() {
     return {
       showCaptcha: true,
       formSubmitted: false,
     }
+  },
+  computed: {
+    recaptchaSiteKey() {
+      return process.env.GRIDSOME_RECAPTCHA_KEY
+    },
   },
   methods: {
     onCaptchaVerify() {
@@ -290,9 +279,10 @@ export default {
           document.body
             .querySelector("#g-recaptcha-response-1")
             .setAttribute("aria-label", "ReCAPTCHA Response")
-          document.body
-            .querySelectors("iframe")
-            .map((itm) => itm.setAttribute("title", "ReCAPTCHA Frame"))
+          let iframes = document.body.querySelector("iframe")
+          for (let q = 0; q < iframes.length; q++) {
+            iframes[q].setAttribute("title", "ReCAPTCHA Frame")
+          }
           break
       }
     },
@@ -308,10 +298,15 @@ export default {
     recaptchaScript.defer = true
     document.head.appendChild(recaptchaScript)
 
-    EventBus.$on("compare-drawer-show", (showCompareInfo) => {
-      this.showCompare = true
-      this.showInfoText = showCompareInfo
-    })
+    window.apiUmbrellaSignupOptions = {
+      registrationSource: "college-scorecard",
+      apiKey: process.env.GRIDSOME_API_SIGNUP_KEY,
+      contactUrl: "scorecarddata@rti.org",
+      siteName: "College Scorecard",
+      emailFromName: "College Scorecard",
+      exampleApiUrl:
+        "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=[api_key]", // To ignore curly braces
+    }
   },
 }
 </script>

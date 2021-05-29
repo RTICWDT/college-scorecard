@@ -48,17 +48,6 @@
       </div>
     </v-main>
     <scorecard-footer />
-
-    <compare-header :showCompare.sync="showCompare" />
-
-    <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
-      <compare-drawer
-        :show-info-text="showInfoText"
-        @toggle-compare-school="handleToggleCompareItem"
-        v-on:close-modal="closeModal()"
-        @toggle-more-info="showInfoText = !showInfoText"
-      ></compare-drawer>
-    </v-bottom-sheet>
   </v-app>
 </template>
 <style lang="scss" scoped>
@@ -67,18 +56,9 @@
 }
 </style>
 <script>
-import { EventBus } from "~/js/EventBus.js"
 const querystring = require("querystring")
-import CompareDrawer from "~/components/CompareDrawer.vue"
-import CompareHeader from "~/components/CompareHeader.vue"
-import { compare } from "~/js/mixins.js"
 
 export default {
-  mixins: [compare],
-  components: {
-    "compare-drawer": CompareDrawer,
-    "compare-header": CompareHeader,
-  },
   data() {
     return {
       query: {},
@@ -104,11 +84,6 @@ export default {
   mounted() {
     let query = querystring.parse(window.location.search.substring(1))
     this.query = query || {}
-
-    EventBus.$on("compare-drawer-show", (showCompareInfo) => {
-      this.showCompare = true
-      this.showInfoText = showCompareInfo
-    })
   },
 }
 </script>

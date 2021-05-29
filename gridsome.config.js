@@ -8,5 +8,4 @@ module.exports = {
   siteName: 'College Scorecard',
   plugins: [],
   pathPrefix: '', //use for federalist
-
 }

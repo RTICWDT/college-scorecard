@@ -20,7 +20,7 @@
     </p>
 
     <v-row>
-      <v-col class="py-0 d-flex justify-space-around align-content-center">
+      <v-col class="my-2 py-0 d-flex justify-space-around align-content-center">
         <v-slider
           v-model="sliderValue"
           :id="id"
@@ -71,8 +71,6 @@
 </template>
 
 <script>
-import { EventBus } from "~/js/EventBus.js"
-
 export default {
   props: {
     legendTitle: {
@@ -131,12 +129,6 @@ export default {
       this.trackColor = "secondary"
       this.trackBackground = "grey"
     }
-
-    EventBus.$on("search-form-reset", () => {
-      // TODO - State is changed in parent component.
-      // this.enableSlider = false;
-      // this.sliderValue = null;
-    })
   },
   methods: {
     handleInput(e) {

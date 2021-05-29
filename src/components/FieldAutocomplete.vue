@@ -22,10 +22,8 @@
 </template>
 
 <script>
-import { find } from "lodash"
-import { EventBus } from "~/js/EventBus.js"
+import { find, sortBy, isEmpty } from "lodash"
 import { SiteData } from "~/js/mixins/SiteData.js"
-import _ from "lodash"
 
 export default {
   mixins: [SiteData],
@@ -47,19 +45,12 @@ export default {
   },
   computed: {
     items() {
-      return _.sortBy(this.CIP4, ["field"])
+      return sortBy(this.CIP4, ["field"])
     },
   },
   created() {
     // Transform value prop to expected component state.
     this.cip4 = this.mapValuePropToState(this.value)
-  },
-  mounted() {
-    // Clear form event.
-    EventBus.$on("search-form-reset", () => {
-      // TODO - Remove if not needed.
-      // this.cip4 = {};
-    })
   },
   methods: {
     // Digest URL value and look up in program index.
@@ -74,7 +65,7 @@ export default {
       return locatedCip4 ? locatedCip4 : null
     },
     change() {
-      if (!_.isEmpty(this.cip4)) {
+      if (!isEmpty(this.cip4)) {
         this.$emit("input", this.cip4.cip4.replace("\.", ""))
       }
     },

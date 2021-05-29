@@ -49,13 +49,6 @@
   }
 }
 
-#result-fos-card-credential-section {
-  /*:last-child{*/
-  /*  margin-bottom: 0 !important;*/
-  /*  background-color: black;*/
-  /*}*/
-}
-
 .fos-result-compare-button-mobile {
   margin: auto;
 }
@@ -232,10 +225,6 @@ export default {
     school: {
       // The School object
       type: Object,
-      required: true,
-    },
-    selectedFieldsOfStudy: {
-      type: Array,
       required: true,
     },
     fosTotalDisplayCap: {

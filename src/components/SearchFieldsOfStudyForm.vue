@@ -407,7 +407,6 @@ import Tooltip from "~/components/Tooltip.vue"
 import LocationCheck from "~/js/mixins/LocationCheck.js"
 import { SiteData } from "~/js/mixins/SiteData.js"
 import _ from "lodash"
-import { EventBus } from "~/js/EventBus.js"
 
 export default {
   mixins: [SiteData, LocationCheck],
@@ -580,7 +579,7 @@ export default {
     }, 1000)
   },
   mounted() {
-    EventBus.$on("search-form-reset", (e) => {
+    this.$root.$on("search-form-reset", (e) => {
       this.resetFormDefault()
     })
   },

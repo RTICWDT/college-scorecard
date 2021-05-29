@@ -339,8 +339,6 @@ header {
 </template>
 
 <script>
-import { EventBus } from "~/js/EventBus.js"
-
 export default {
   props: {
     activeLink: {
@@ -368,14 +366,14 @@ export default {
       window.location.href = urlString
     },
     handleCompareIconClick(resourceType = "institution") {
-      EventBus.$emit("compare-drawer-show", false)
+      this.$store.commit("toggleDrawer")
     },
     handleCompareLinkClick(urlString) {
       if (
         this.compareFieldsOfStudyCount == 0 &&
         this.compareInstitutionsCount == 0
       ) {
-        EventBus.$emit("compare-drawer-show", true)
+        this.$store.commit("toggleDrawer")
       } else {
         window.location.href = urlString
       }

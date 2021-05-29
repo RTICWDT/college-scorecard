@@ -20,17 +20,6 @@
       </v-container>
     </v-main>
     <scorecard-footer />
-
-    <compare-header :showCompare.sync="showCompare" />
-
-    <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
-      <compare-drawer
-        :show-info-text="showInfoText"
-        @toggle-compare-school="handleToggleCompareItem"
-        v-on:close-modal="closeModal()"
-        @toggle-more-info="showInfoText = !showInfoText"
-      ></compare-drawer>
-    </v-bottom-sheet>
   </v-app>
 </template>
 
@@ -42,17 +31,10 @@
 
 <script>
 import NameAutocomplete from "~/components/NameAutocomplete.vue"
-import { compare } from "~/js/mixins.js"
-import CompareDrawer from "~/components/CompareDrawer.vue"
-import CompareHeader from "~/components/CompareHeader.vue"
-import { EventBus } from "~/js/EventBus.js"
 
 export default {
-  mixins: [compare],
   components: {
     "name-autocomplete": NameAutocomplete,
-    "compare-drawer": CompareDrawer,
-    "compare-header": CompareHeader,
   },
   methods: {
     handleSchoolNameSelected(school) {
@@ -66,12 +48,6 @@ export default {
           school.id
       }
     },
-  },
-  mounted() {
-    EventBus.$on("compare-drawer-show", (showCompareInfo) => {
-      this.showCompare = true
-      this.showInfoText = showCompareInfo
-    })
   },
 }
 </script>

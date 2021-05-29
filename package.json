@@ -1,6 +1,7 @@
 {
   "name": "scorecard-vue",
   "private": true,
+  "version": "2.6.0",
   "scripts": {
     "build": "gridsome build",
     "develop": "gridsome develop",

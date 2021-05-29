@@ -14,12 +14,11 @@ import _ from 'lodash';
 import ScorecardHeader from '~/components/ScorecardHeader.vue';
 import ScorecardFooter from '~/components/ScorecardFooter.vue';
 
-//import Vuetify from '~/js/plugins/vuetify';
-
 import VuexPersistence from 'vuex-persist'
 
 const vuexLocal = new VuexPersistence({
-  storage: window.localStorage
+  storage: window.localStorage,
+  filter: (mutation) => mutation.type != 'toggleDrawer'
 })
 
 export default function (Vue, { router, head, isClient, appOptions }) {
@@ -50,11 +49,11 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     state: {
       fos: [],
       institutions: [],
-      count: 0
+      drawerOpen: false,
+      clearForm: false
     },
     mutations: {
       toggleSchool(state, obj) {
-        console.log(obj);
         let entry;
         if (obj.schoolId) {
           entry = obj
@@ -72,7 +71,6 @@ export default function (Vue, { router, head, isClient, appOptions }) {
         }
       },
       toggleFieldOfStudy(state, obj) {
-        console.log(obj);
         let entry;
         if (obj.fosTitle) {
           entry = obj;
@@ -88,7 +86,6 @@ export default function (Vue, { router, head, isClient, appOptions }) {
           }
         }
         if (state.fos.some(fos => { return fos.code == entry.code && fos.id == entry.id && fos.credentialLevel == entry.credentialLevel})) {
-          console.log('remove');
           state.fos = state.fos.filter((fos)=>{
             return (
               !(fos.code == entry.code && fos.id == entry.id && fos.credentialLevel == entry.credentialLevel)
@@ -99,8 +96,17 @@ export default function (Vue, { router, head, isClient, appOptions }) {
           state.fos.push(entry)
         }
       },
-      increment(state) {
-        state.count++;
+      toggleDrawer(state, value = null) {
+        if (!value) {
+          state.drawerOpen = !state.drawerOpen;
+        }
+        else
+        {
+          state.drawerOpen = value
+        }
+      },
+      clearForm(state) {
+        state.clearForm = true;
       }
     },
     plugins: [vuexLocal.plugin]

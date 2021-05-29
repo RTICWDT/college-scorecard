@@ -93,15 +93,6 @@
       </v-container>
     </v-main>
     <scorecard-footer />
-    <compare-header :showCompare.sync="showCompare" />
-    <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
-      <compare-drawer
-        :show-info-text="showInfoText"
-        @toggle-compare-school="handleToggleCompareItem"
-        v-on:close-modal="closeModal()"
-        @toggle-more-info="showInfoText = !showInfoText"
-      ></compare-drawer>
-    </v-bottom-sheet>
   </v-app>
 </template>
 
@@ -110,17 +101,12 @@ import DataNavigation from "~/components/DataNavigation.vue"
 import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 import SimpleTooltip from "~/components/SimpleTooltip.vue"
 import { compare } from "~/js/mixins.js"
-import CompareDrawer from "~/components/CompareDrawer.vue"
-import CompareHeader from "~/components/CompareHeader.vue"
-import { EventBus } from "~/js/EventBus.js"
 
 export default {
   mixins: [AnalyticsEvents, compare],
   components: {
     "data-navigation": DataNavigation,
     "simple-tooltip": SimpleTooltip,
-    "compare-drawer": CompareDrawer,
-    "compare-header": CompareHeader,
   },
 }
 </script>

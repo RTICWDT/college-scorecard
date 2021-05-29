@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul
-      class="school-key_figures key-figures ma-0 pa-0 d-flex justify-space-around"
+      class="school-key_figures key-figures mx-0 my-3 pa-0 d-flex justify-space-around"
     >
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">

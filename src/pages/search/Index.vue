@@ -129,7 +129,7 @@
                           x-small
                           rounded
                           fab
-                          class="d-inline d-sm-none"
+                          class="d-inline d-sm-none mr-1"
                         >
                           <span>
                             <v-icon class="">mdi-close-circle</v-icon>
@@ -144,7 +144,7 @@
                           @click="clearSearchForm"
                           small
                           rounded
-                          class="d-none d-sm-inline"
+                          class="d-none d-sm-inline mr-1"
                         >
                           <span>
                             <v-icon small class="mr-1">mdi-close-circle</v-icon>
@@ -160,7 +160,7 @@
                               color="primary"
                               small
                               v-on="on"
-                              class="d-none d-sm-inline"
+                              class="d-none d-sm-inline mr-1"
                             >
                               <v-icon small class="mr-1">fas fa-sort</v-icon>
                               Sort
@@ -240,6 +240,7 @@
                         :total-visible="7"
                         @input="handlePaginationInput"
                         class="pr-0 mr-0"
+                        circle
                       ></v-pagination>
                     </div>
                   </v-col>
@@ -346,10 +347,7 @@
                       sm="6"
                       class="d-flex align-stretch"
                     >
-                      <search-result-card
-                        :school="school"
-                        @toggle-compare-school="handleToggleCompareSchool"
-                      />
+                      <search-result-card :school="school" />
                     </v-col>
                   </v-row>
 
@@ -367,7 +365,6 @@
                       <fos-result-card
                         :school="school"
                         :selected-fields-of-study="compareFieldsOfStudy"
-                        @toggle-compare-item="handleToggleCompareItem"
                       />
                     </v-col>
                   </v-row>
@@ -415,19 +412,7 @@
           </v-btn>
         </v-container>
       </v-main>
-
       <scorecard-footer />
-
-      <compare-header :showCompare.sync="showCompare" />
-
-      <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
-        <compare-drawer
-          :show-info-text="showInfoText"
-          @toggle-compare-school="handleToggleCompareItem"
-          v-on:close-modal="closeModal()"
-          @toggle-more-info="showInfoText = !showInfoText"
-        ></compare-drawer>
-      </v-bottom-sheet>
     </v-app>
   </div>
   <!--End of root -->
@@ -439,9 +424,7 @@
 import SearchResultCard from "~/components/SearchResultCard.vue"
 import SearchForm from "~/components/SearchForm.vue"
 import CannedSearchButton from "~/components/CannedSearchButton.vue"
-import CompareDrawer from "~/components/CompareDrawer.vue"
 import CannedSearchContainer from "~/components/CannedSearchContainer.vue"
-import CompareHeader from "~/components/CompareHeader.vue"
 import Share from "~/components/Share.vue"
 import NameAutocomplete from "~/components/NameAutocomplete.vue"
 import URLHistory from "~/js/mixins/URLHistory.js"
@@ -449,10 +432,8 @@ import PrepareParams from "~/js/mixins/PrepareParams.js"
 import ContextToggle from "~/components/ContextToggle.vue"
 import SearchFieldsOfStudyForm from "~/components/SearchFieldsOfStudyForm.vue"
 import FieldOfStudyResultCard from "~/components/FieldOfStudyResultCard.vue"
-import { compare } from "~/js/mixins.js"
 
 import _ from "lodash"
-import { EventBus } from "~/js/EventBus.js"
 import { apiGet } from "~/js/api.js"
 import { fields } from "~/js/constants.js"
 
@@ -463,16 +444,14 @@ export default {
     "search-result-card": SearchResultCard,
     "search-form": SearchForm,
     "canned-search-button": CannedSearchButton,
-    "compare-drawer": CompareDrawer,
     "canned-search-container": CannedSearchContainer,
-    "compare-header": CompareHeader,
     share: Share,
     "name-autocomplete": NameAutocomplete,
     "context-toggle": ContextToggle,
     "search-fos-form": SearchFieldsOfStudyForm,
     "fos-result-card": FieldOfStudyResultCard,
   },
-  mixins: [URLHistory, PrepareParams, compare],
+  mixins: [URLHistory, PrepareParams],
   props: {
     "page-permalink": String,
     states: Array,
@@ -563,14 +542,6 @@ export default {
         this.handleFieldOfStudySearch(params)
       }
     }, 1000)
-  },
-  mounted() {
-    this.$store.commit("increment")
-    console.log(this.$store.state.count)
-    EventBus.$on("compare-drawer-show", (showCompareInfo) => {
-      this.showCompare = true
-      this.showInfoText = showCompareInfo
-    })
   },
   computed: {
     totalPages() {
@@ -702,22 +673,6 @@ export default {
       } else {
         this.error.message = "There was an unexpected API error."
       }
-
-      // if (typeof error.responseText != "undefined") {
-      //   // 500 doesn't have JSON text return.
-      //   if (error.status === 500) {
-      //     this.error.message = "There was an unexpected API error.";
-      //   } else {
-      //     var errorText = JSON.parse(error.responseText);
-      //     error = errorText.errors[0].message;
-
-      //     this.error.message =
-      //       String(error) || "There was an unexpected API error.";
-      //   }
-      // }
-    },
-    handleToggleCompareSchool(school) {
-      this.$emit("toggle-compare-school", school)
     },
     handleCannedSearchClick(cannedSearchData) {
       if (cannedSearchData) {
@@ -756,10 +711,8 @@ export default {
         page: 1,
         sort: this.defaultSort,
       }
-
       this.urlParsedParams = {}
-
-      EventBus.$emit("search-form-reset")
+      this.$root.$emit("search-form-reset")
     },
     handleContextToggle(toggleValue) {
       this.clearSearchForm()

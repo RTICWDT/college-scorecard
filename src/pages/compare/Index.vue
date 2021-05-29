@@ -1180,18 +1180,7 @@
       </v-container>
       <!-- End Page Content Container -->
     </v-main>
-
     <scorecard-footer />
-
-    <compare-header :showCompare.sync="showCompare" />
-    <v-bottom-sheet id="compare-modal" v-model="showCompare" inset>
-      <compare-drawer
-        :show-info-text="showInfoText"
-        @toggle-compare-school="handleToggleCompareItem"
-        v-on:close-modal="closeModal()"
-        @toggle-more-info="showInfoText = !showInfoText"
-      ></compare-drawer>
-    </v-bottom-sheet>
   </v-app>
 </template>
 
@@ -1280,16 +1269,13 @@ import {
   fieldOfStudyCompareFormat,
 } from "~/js/commonFormats"
 import ContextToggle from "~/components/ContextToggle.vue"
-import { EventBus } from "~/js/EventBus.js"
 
 export default {
-  mixins: [compare, ComplexFields, AnalyticsEvents, Router],
+  mixins: [ComplexFields, AnalyticsEvents, Router],
   components: {
     tooltip: Tooltip,
     share: Share,
     "paying-for-college": PayingForCollege,
-    "compare-drawer": CompareDrawer,
-    "compare-header": CompareHeader,
     "horizontal-bar": HorizontalBar,
     "compare-section": CompareSection,
     "compare-block": CompareBlock,
@@ -2031,11 +2017,6 @@ export default {
     // Did this initiate as a shared comparision
     this.isSharedComparison = this.showShareUpdate
     this.isSharedFieldOfStudyComparison = this.showShareFieldOfStudyUpdate
-
-    EventBus.$on("compare-drawer-show", (showCompareInfo) => {
-      this.showCompare = true
-      this.showInfoText = showCompareInfo
-    })
   },
 }
 </script>

@@ -33,7 +33,6 @@
 import { apiGet } from "~/js/api.js"
 import { fields } from "~/js/constants.js"
 import PrepareParams from "~/js/mixins/PrepareParams.js"
-import { EventBus } from "~/js/EventBus.js"
 import _ from "lodash"
 
 export default {
@@ -126,7 +125,7 @@ export default {
   },
   mounted() {
     this.search = this.initial_school
-    EventBus.$on("search-form-reset", (e) => {
+    this.$root.$on("search-form-reset", (e) => {
       this.search = null
     })
   },

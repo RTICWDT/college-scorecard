@@ -179,7 +179,7 @@
       v-if="schools.length > 0 || fieldsOfStudy.length > 0"
     >
       <v-row>
-        <v-col cols="12" md="5" class="text-center d-none d-md-block">
+        <v-col cols="12" md="5" class="text-center d-none d-md-block my-2">
           <v-btn rounded color="secondary" :href="'/compare'">
             Compare Schools
           </v-btn>
@@ -187,7 +187,7 @@
         <v-col
           cols="12"
           md="7"
-          class="text-center compare-drawer-button-container d-none d-md-block"
+          class="text-center compare-drawer-button-container d-none d-md-block my-2"
         >
           <v-btn
             class="compare-drawer-button"
@@ -349,7 +349,7 @@ export default {
       this.$store.commit("toggleFieldOfStudy", fos)
     },
     toggleDrawer() {
-      this.$emit("close-modal")
+      this.$store.commit("toggleDrawer", false)
     },
     toggleMoreInfo() {
       this.$emit("toggle-more-info")
