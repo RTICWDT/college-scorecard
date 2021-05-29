@@ -1,7 +1,5 @@
 <template>
-  <v-app id="index">
-    <scorecard-header active-link="/" />
-
+  <div>
     <v-main>
       <!-- Top Splash and Search-->
       <div class="home-splash">
@@ -328,8 +326,7 @@
         </v-container>
       </div>
     </v-main>
-    <scorecard-footer />
-  </v-app>
+  </div>
 </template>
 
 <style lang="scss" scoped>

@@ -1,198 +1,193 @@
 <template>
-  <v-app id="school-fields" class="school-page">
-    <scorecard-header />
-    <v-main>
-      <v-container>
-        <v-row>
-          <v-col cols="12" lg="9" class="school-left">
-            <!-- Loader -->
-            <div v-if="!school.id" class="show-loading">
-              <v-card class="pa-5">
-                <h1 class="title">
-                  Loading
-                  <v-icon color="#0e365b">fas fa-circle-notch fa-spin</v-icon>
-                </h1>
-              </v-card>
-            </div>
-
-            <div v-else class="show-loaded" id="school">
-              <!-- School Header -->
-              <v-card class="school-heading px-3 mb-5">
-                <!-- Green Header Bar -->
-                <v-row class="csGreenBg">
-                  <v-col cols="3">
-                    <v-btn
-                      small
-                      color="white"
-                      text
-                      id="referrer-link"
-                      class="link-more"
-                      :href="referrerLink"
-                      >&laquo; Back to School Profile</v-btn
-                    >
-                  </v-col>
-                  <v-col cols="9" class="text-right">
-                    <add-to-compare :school="school" />
-                    <share
-                      small
-                      text
-                      color="white"
-                      label="Share this School"
-                      :url="shareLink"
-                      show-copy
-                      :hide="['email']"
-                    />
-                  </v-col>
-                </v-row>
-
-                <!-- Monitoring Flag -->
-                <v-row>
-                  <v-col
-                    cols="12"
-                    md="6"
-                    class="pt-3 mb-n5"
-                    v-if="_.get(school, fields['UNDER_INVESTIGATION']) == 1"
-                  >
-                    <v-chip
-                      v-if="_.get(school, fields['UNDER_INVESTIGATION']) == 1"
-                      color="error"
-                      label
-                    >
-                      <strong>Under ED Monitoring</strong>
-                      <tooltip
-                        definition="hcm2"
-                        color="#FFFFFF"
-                        class="ml-2"
-                        :isBranch="isBranch"
-                      />
-                    </v-chip>
-                  </v-col>
-                </v-row>
-
-                <!-- School Header Info -->
-                <v-row>
-                  <v-col cols="12" class="pa-sm-5">
-                    <h1 class="display-1 pa-0 ma-0 font-weight-bold">
-                      All Fields of Study Offered at
-                      <a :href="schoolLink">
-                        {{ _.get(school, fields["NAME"], "School Name") }}
-                      </a>
-                    </h1>
-                  </v-col>
-                </v-row>
-              </v-card>
-
-              <!-- School Selector -->
-              <v-card class="mb-4 pa-3">
-                <v-select
-                  id="school-field-fos-degree"
-                  outlined
-                  dense
-                  :items="filters"
-                  item-text="credential"
-                  item-value="id"
-                  v-model="currentFilter"
-                  label="Filter by Degree Level"
-                  hide-details
-                  color="secondary"
-                  clearable
-                ></v-select>
-              </v-card>
-
-              <!-- Warnings -->
-              <v-alert
-                v-if="currentFilter === 4"
-                colored-border
-                border="left"
-                dense
-                color="#D16E00"
-              >
-                No data on the number of graduates are displayed because of
-                definitional differences with other data sources. Fields of
-                study on this page include undergraduate-level programs that may
-                be classified as undergraduate certificates in other data
-                sources.
-              </v-alert>
-
-              <v-alert
-                v-if="currentFilter === 8"
-                colored-border
-                border="left"
-                dense
-                color="#D16E00"
-              >
-                Fields of study on this page include graduate-level programs
-                that may be labeled “postbaccalaureate certificates” in other
-                data sources.
-              </v-alert>
-
-              <!-- Fields of Study -->
-              <v-expansion-panels v-if="!_.isEmpty(processedPrograms)">
-                <v-expansion-panel
-                  v-for="(prog, index) in processedPrograms"
-                  :key="index"
-                  class="fos-profile-panel"
-                >
-                  <v-expansion-panel-header>{{
-                    _.startCase(_.toLower(prog.name).slice(0, -1))
-                  }}</v-expansion-panel-header>
-                  <v-expansion-panel-content eager>
-                    <v-expansion-panels>
-                      <v-expansion-panel
-                        v-for="fos in prog.fields"
-                        :key="fos.code + '-' + fos.credential.level"
-                      >
-                        <v-expansion-panel-header>
-                          <span class="school-fields-fos-degree-title"
-                            >{{ fos.title.replace(/\.$/, "") }} -
-                            {{ fos.credential.title }}</span
-                          >
-                        </v-expansion-panel-header>
-                        <v-expansion-panel-content>
-                          <field-data-extended
-                            :fos="fos"
-                            :fos-salary-select-items="fosSalarySelectItems"
-                            :fos-salary-select="fieldDataExtendedSalarySelect"
-                            @update-salary-select="
-                              fieldDataExtendedSalarySelect = $event
-                            "
-                            :fos-show-debt-prior-included.sync="
-                              fieldDataExtendedShowPrior
-                            "
-                            @update-debt-show-prior="
-                              fieldDataExtendedShowPrior = $event
-                            "
-                            :fields="fields"
-                          />
-                        </v-expansion-panel-content>
-                      </v-expansion-panel>
-                    </v-expansion-panels>
-                  </v-expansion-panel-content>
-                </v-expansion-panel>
-              </v-expansion-panels>
-
-              <v-card v-else color="pa-5">
-                <p class="ma-0 text-center">
-                  <em
-                    >This institution does not offer any fields of study with
-                    this degree.</em
-                  >
-                </p>
-              </v-card>
-            </div>
-          </v-col>
-
-          <!-- Sidbar -->
-          <v-col lg="3">
+  <v-main>
+    <v-container>
+      <v-row>
+        <v-col cols="12" lg="9" class="school-left">
+          <!-- Loader -->
+          <div v-if="!school.id" class="show-loading">
             <v-card class="pa-5">
-              <paying-for-college />
+              <h1 class="title">
+                Loading
+                <v-icon color="#0e365b">fas fa-circle-notch fa-spin</v-icon>
+              </h1>
             </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-    <scorecard-footer />
-  </v-app>
+          </div>
+
+          <div v-else class="show-loaded" id="school">
+            <!-- School Header -->
+            <v-card class="school-heading px-3 mb-5">
+              <!-- Green Header Bar -->
+              <v-row class="csGreenBg">
+                <v-col cols="3">
+                  <v-btn
+                    small
+                    color="white"
+                    text
+                    id="referrer-link"
+                    class="link-more"
+                    :href="referrerLink"
+                    >&laquo; Back to School Profile</v-btn
+                  >
+                </v-col>
+                <v-col cols="9" class="text-right">
+                  <add-to-compare :school="school" />
+                  <share
+                    small
+                    text
+                    color="white"
+                    label="Share this School"
+                    :url="shareLink"
+                    show-copy
+                    :hide="['email']"
+                  />
+                </v-col>
+              </v-row>
+
+              <!-- Monitoring Flag -->
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="6"
+                  class="pt-3 mb-n5"
+                  v-if="_.get(school, fields['UNDER_INVESTIGATION']) == 1"
+                >
+                  <v-chip
+                    v-if="_.get(school, fields['UNDER_INVESTIGATION']) == 1"
+                    color="error"
+                    label
+                  >
+                    <strong>Under ED Monitoring</strong>
+                    <tooltip
+                      definition="hcm2"
+                      color="#FFFFFF"
+                      class="ml-2"
+                      :isBranch="isBranch"
+                    />
+                  </v-chip>
+                </v-col>
+              </v-row>
+
+              <!-- School Header Info -->
+              <v-row>
+                <v-col cols="12" class="pa-sm-5">
+                  <h1 class="display-1 pa-0 ma-0 font-weight-bold">
+                    All Fields of Study Offered at
+                    <a :href="schoolLink">
+                      {{ _.get(school, fields["NAME"], "School Name") }}
+                    </a>
+                  </h1>
+                </v-col>
+              </v-row>
+            </v-card>
+
+            <!-- School Selector -->
+            <v-card class="mb-4 pa-3">
+              <v-select
+                id="school-field-fos-degree"
+                outlined
+                dense
+                :items="filters"
+                item-text="credential"
+                item-value="id"
+                v-model="currentFilter"
+                label="Filter by Degree Level"
+                hide-details
+                color="secondary"
+                clearable
+              ></v-select>
+            </v-card>
+
+            <!-- Warnings -->
+            <v-alert
+              v-if="currentFilter === 4"
+              colored-border
+              border="left"
+              dense
+              color="#D16E00"
+            >
+              No data on the number of graduates are displayed because of
+              definitional differences with other data sources. Fields of study
+              on this page include undergraduate-level programs that may be
+              classified as undergraduate certificates in other data sources.
+            </v-alert>
+
+            <v-alert
+              v-if="currentFilter === 8"
+              colored-border
+              border="left"
+              dense
+              color="#D16E00"
+            >
+              Fields of study on this page include graduate-level programs that
+              may be labeled “postbaccalaureate certificates” in other data
+              sources.
+            </v-alert>
+
+            <!-- Fields of Study -->
+            <v-expansion-panels v-if="!_.isEmpty(processedPrograms)">
+              <v-expansion-panel
+                v-for="(prog, index) in processedPrograms"
+                :key="index"
+                class="fos-profile-panel"
+              >
+                <v-expansion-panel-header>{{
+                  _.startCase(_.toLower(prog.name).slice(0, -1))
+                }}</v-expansion-panel-header>
+                <v-expansion-panel-content eager>
+                  <v-expansion-panels>
+                    <v-expansion-panel
+                      v-for="fos in prog.fields"
+                      :key="fos.code + '-' + fos.credential.level"
+                    >
+                      <v-expansion-panel-header>
+                        <span class="school-fields-fos-degree-title"
+                          >{{ fos.title.replace(/\.$/, "") }} -
+                          {{ fos.credential.title }}</span
+                        >
+                      </v-expansion-panel-header>
+                      <v-expansion-panel-content>
+                        <field-data-extended
+                          :fos="fos"
+                          :fos-salary-select-items="fosSalarySelectItems"
+                          :fos-salary-select="fieldDataExtendedSalarySelect"
+                          @update-salary-select="
+                            fieldDataExtendedSalarySelect = $event
+                          "
+                          :fos-show-debt-prior-included.sync="
+                            fieldDataExtendedShowPrior
+                          "
+                          @update-debt-show-prior="
+                            fieldDataExtendedShowPrior = $event
+                          "
+                          :fields="fields"
+                        />
+                      </v-expansion-panel-content>
+                    </v-expansion-panel>
+                  </v-expansion-panels>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
+
+            <v-card v-else color="pa-5">
+              <p class="ma-0 text-center">
+                <em
+                  >This institution does not offer any fields of study with this
+                  degree.</em
+                >
+              </p>
+            </v-card>
+          </div>
+        </v-col>
+
+        <!-- Sidbar -->
+        <v-col lg="3">
+          <v-card class="pa-5 mt-0">
+            <paying-for-college />
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-main>
 </template>
 
 <style lang="scss" scoped>

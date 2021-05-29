@@ -58,364 +58,357 @@
 
 <template>
   <div>
-    <v-app id="search">
-      <scorecard-header active-link="search" />
+    <!-- Search Form -->
+    <v-navigation-drawer
+      v-model="showSidebar"
+      app
+      width="300"
+      class="searchSidebar"
+      clipped
+    >
+      <div class="context-toggle-container pa-5 grey lighten-3">
+        <h3 class="mb-2">
+          Showing Results For:
+        </h3>
 
-      <!-- Search Form -->
-      <v-navigation-drawer
-        v-model="showSidebar"
-        app
-        width="300"
-        class="searchSidebar"
-        clipped
-      >
-        <div class="context-toggle-container pa-5 grey lighten-3">
-          <h3 class="mb-2">
-            Showing Results For:
-          </h3>
-
-          <context-toggle
-            :display-toggle="displayToggle"
-            :control-tab="controlTab"
-            @context-switch-click="handleContextToggle"
-            @context-tab-change="handleContextToggle"
-          />
-        </div>
-
-        <!-- Search Form Component -->
-        <search-form
-          v-if="displayToggle === 'institutions'"
-          :urlParsedParams="urlParsedParams"
-          auto-submit
-          display-all-filters
-          @search-query="handleInstitutionSearch"
+        <context-toggle
+          :display-toggle="displayToggle"
+          :control-tab="controlTab"
+          @context-switch-click="handleContextToggle"
+          @context-tab-change="handleContextToggle"
         />
+      </div>
 
-        <!-- Search Fields of Study Component -->
-        <search-fos-form
-          v-else-if="displayToggle === 'fos'"
-          :url-parsed-params="urlParsedParams"
-          auto-submit
-          @search-query="handleFieldOfStudySearch"
-        />
+      <!-- Search Form Component -->
+      <search-form
+        v-if="displayToggle === 'institutions'"
+        :urlParsedParams="urlParsedParams"
+        auto-submit
+        display-all-filters
+        @search-query="handleInstitutionSearch"
+      />
 
-        <!-- Search Fields of Study Component -->
-        <search-fos-form
-          v-else-if="displayToggle === 'fos'"
-          :url-parsed-params="urlParsedParams"
-          auto-submit
-          @search-query="handleFieldOfStudySearch"
-        />
-      </v-navigation-drawer>
+      <!-- Search Fields of Study Component -->
+      <search-fos-form
+        v-else-if="displayToggle === 'fos'"
+        :url-parsed-params="urlParsedParams"
+        auto-submit
+        @search-query="handleFieldOfStudySearch"
+      />
 
-      <v-main>
-        <v-container fluid class="pa-0">
-          <div id="search-result-container" class="pa-sm-8 pa-2">
-            <div class="search-result-container">
-              <!-- Search Result Info and controls -->
-              <v-card
-                class="mt-2 mb-4 py-4 px-4 elevaton-0 pageBar"
-                v-if="!isLoading"
-              >
-                <v-row class="">
-                  <v-col cols="12" sm="7" class="py-2 px-4">
-                    <div id="search-result-info-count" class>
-                      <p class="title mb-0">
-                        {{ results.meta.total | separator }} Results
-                        <v-btn
-                          color="primary"
-                          text-color="white"
-                          @click="clearSearchForm"
-                          x-small
-                          rounded
-                          fab
-                          class="d-inline d-sm-none mr-1"
-                        >
-                          <span>
-                            <v-icon class="">mdi-close-circle</v-icon>
-                            <span class="sr-only">Clear Search</span>
-                          </span>
-                        </v-btn>
+      <!-- Search Fields of Study Component -->
+      <search-fos-form
+        v-else-if="displayToggle === 'fos'"
+        :url-parsed-params="urlParsedParams"
+        auto-submit
+        @search-query="handleFieldOfStudySearch"
+      />
+    </v-navigation-drawer>
 
-                        <v-btn
-                          id="search-button-clear"
-                          color="primary"
-                          text-color="white"
-                          @click="clearSearchForm"
-                          small
-                          rounded
-                          class="d-none d-sm-inline mr-1"
-                        >
-                          <span>
-                            <v-icon small class="mr-1">mdi-close-circle</v-icon>
-                            Clear
-                          </span>
-                        </v-btn>
-
-                        <v-menu offset-y>
-                          <template v-slot:activator="{ on }">
-                            <v-btn
-                              id="search-button-sort"
-                              rounded
-                              color="primary"
-                              small
-                              v-on="on"
-                              class="d-none d-sm-inline mr-1"
-                            >
-                              <v-icon small class="mr-1">fas fa-sort</v-icon>
-                              Sort
-                            </v-btn>
-                          </template>
-                          <v-list min-width="200">
-                            <v-list-item-group
-                              v-model="input.sort"
-                              color="primary"
-                            >
-                              <v-list-item
-                                v-for="(item, index) in sorts"
-                                :key="item.field"
-                                @click="resort(item.field)"
-                                :value="item.field"
-                              >
-                                <v-list-item-title>{{
-                                  item.type
-                                }}</v-list-item-title>
-                              </v-list-item>
-                            </v-list-item-group>
-                          </v-list>
-                        </v-menu>
-                        <v-menu offset-y>
-                          <template v-slot:activator="{ on }">
-                            <v-btn
-                              rounded
-                              color="primary"
-                              x-small
-                              v-on="on"
-                              fab
-                              class="d-inline d-sm-none"
-                            >
-                              <v-icon small class="">fas fa-sort</v-icon>
-                              <span class="sr-only">Sort</span>
-                            </v-btn>
-                          </template>
-                          <v-list min-width="200">
-                            <v-list-item-group
-                              v-model="input.sort"
-                              color="primary"
-                            >
-                              <v-list-item
-                                v-for="(item, index) in sorts"
-                                :key="item.field"
-                                @click="resort(item.field)"
-                                :value="item.field"
-                              >
-                                <v-list-item-title>{{
-                                  item.type
-                                }}</v-list-item-title>
-                              </v-list-item>
-                            </v-list-item-group>
-                          </v-list>
-                        </v-menu>
-                        <share
-                          :url="encodeURI(shareUrl)"
-                          label="Share"
-                          small
-                          show-copy
-                          :hide="['email']"
-                        />
-                      </p>
-                    </div>
-                  </v-col>
-
-                  <v-col
-                    cols="12"
-                    sm="5"
-                    class="py-1 px-1"
-                    v-if="!isLoading && results.schools.length > 0"
-                  >
-                    <div class="text-md-right">
-                      <v-pagination
-                        v-model="input.page"
-                        :length="totalPages"
-                        :total-visible="7"
-                        @input="handlePaginationInput"
-                        class="pr-0 mr-0"
-                        circle
-                      ></v-pagination>
-                    </div>
-                  </v-col>
-                </v-row>
-              </v-card>
-
-              <!-- Field Of Study CIP 4 Information -->
-              <div
-                v-if="displayToggle === 'fos' && !isLoading"
-                id="search-fos-cip-warning"
-                class="my-2"
-              >
-                <p class="white--text">
-                  <strong>Note:</strong> Field of Study titles are based on the
-                  US Department of Education's Classification of Instructional
-                  Programs (CIP) and may not match the program titles at a given
-                  school.
-                  <a
-                    target="_blank"
-                    href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56"
-                  >
-                    Learn more about CIP
-                    <v-icon x-small color="white">
-                      fas fa-external-link-alt
-                    </v-icon>
-                  </a>
-
-                  <!--                  <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">-->
-
-                  <!--                  </a>-->
-                </p>
-              </div>
-
-              <!-- No Results/Canned Search/ -->
-              <div
-                id="search-can-query-container"
-                v-if="!isLoading && results.schools.length === 0"
-              >
-                <v-row>
-                  <v-col cols="12" v-if="displayToggle === 'institutions'">
-                    <v-card class="pa-5">
-                      <h3>Show Me Options</h3>
-                      <p>
-                        Select one or more options below to create a list of
-                        schools that fit your needs.
-                      </p>
-                      <canned-search-container
-                        @canned-search-submit="handleCannedSearchClick"
-                      ></canned-search-container>
-                    </v-card>
-                  </v-col>
-
-                  <v-col cols="12" v-if="displayToggle === 'fos'">
-                    <v-card class="pa-5 text-center">
-                      <h3 class="text-center">No Results Found</h3>
-                      <br />
+    <v-main>
+      <v-container fluid class="pa-0">
+        <div id="search-result-container" class="pa-sm-8 pa-2">
+          <div class="search-result-container">
+            <!-- Search Result Info and controls -->
+            <v-card
+              class="mt-2 mb-4 py-4 px-4 elevaton-0 pageBar"
+              v-if="!isLoading"
+            >
+              <v-row class="">
+                <v-col cols="12" sm="7" class="py-2 px-4">
+                  <div id="search-result-info-count" class>
+                    <p class="title mb-0">
+                      {{ results.meta.total | separator }} Results
                       <v-btn
-                        id="search-button-clear-filters"
                         color="primary"
                         text-color="white"
                         @click="clearSearchForm"
+                        x-small
                         rounded
+                        fab
+                        class="d-inline d-sm-none mr-1"
                       >
                         <span>
-                          <v-icon class="mr-1">mdi-close-circle</v-icon> Clear
-                          Search Filters
+                          <v-icon class="">mdi-close-circle</v-icon>
+                          <span class="sr-only">Clear Search</span>
                         </span>
                       </v-btn>
-                    </v-card>
-                  </v-col>
-                </v-row>
-              </div>
 
-              <!-- Main Search Results -->
-              <div class="results-main-alert">
-                <!-- Loading -->
-                <div class="show-loading mt-2" v-show="isLoading">
-                  <v-card class="py-4 px-4 pageBar">
-                    <h1 class="title">
-                      Loading
-                      <v-icon color="#0e365b"
-                        >fas fa-circle-notch fa-spin</v-icon
+                      <v-btn
+                        id="search-button-clear"
+                        color="primary"
+                        text-color="white"
+                        @click="clearSearchForm"
+                        small
+                        rounded
+                        class="d-none d-sm-inline mr-1"
                       >
-                    </h1>
-                  </v-card>
-                </div>
+                        <span>
+                          <v-icon small class="mr-1">mdi-close-circle</v-icon>
+                          Clear
+                        </span>
+                      </v-btn>
 
-                <!-- Search Query Error-->
-                <div class="show-error" v-show="error.message">
-                  <h1>Something went wrong:</h1>
-                  <p class="error-message">{{ error.message }}</p>
-                </div>
-
-                <!-- Institution Results -->
-                <div class="search-result-cards-container" v-if="!isLoading">
-                  <!-- Institution Results -->
-                  <v-row v-if="displayToggle === 'institutions'">
-                    <v-col
-                      v-for="school in results.schools"
-                      :key="school.id"
-                      cols="12"
-                      lg="3"
-                      md="4"
-                      sm="6"
-                      class="d-flex align-stretch"
-                    >
-                      <search-result-card :school="school" />
-                    </v-col>
-                  </v-row>
-
-                  <!-- Fields of Study Results -->
-                  <v-row v-else>
-                    <v-col
-                      v-for="school in results.schools"
-                      :key="school.id"
-                      cols="12"
-                      lg="12"
-                      md="12"
-                      sm="12"
-                      class="d-flex align-stretch"
-                    >
-                      <fos-result-card
-                        :school="school"
-                        :selected-fields-of-study="compareFieldsOfStudy"
+                      <v-menu offset-y>
+                        <template v-slot:activator="{ on }">
+                          <v-btn
+                            id="search-button-sort"
+                            rounded
+                            color="primary"
+                            small
+                            v-on="on"
+                            class="d-none d-sm-inline mr-1"
+                          >
+                            <v-icon small class="mr-1">fas fa-sort</v-icon>
+                            Sort
+                          </v-btn>
+                        </template>
+                        <v-list min-width="200">
+                          <v-list-item-group
+                            v-model="input.sort"
+                            color="primary"
+                          >
+                            <v-list-item
+                              v-for="(item, index) in sorts"
+                              :key="item.field"
+                              @click="resort(item.field)"
+                              :value="item.field"
+                            >
+                              <v-list-item-title>{{
+                                item.type
+                              }}</v-list-item-title>
+                            </v-list-item>
+                          </v-list-item-group>
+                        </v-list>
+                      </v-menu>
+                      <v-menu offset-y>
+                        <template v-slot:activator="{ on }">
+                          <v-btn
+                            rounded
+                            color="primary"
+                            x-small
+                            v-on="on"
+                            fab
+                            class="d-inline d-sm-none"
+                          >
+                            <v-icon small class="">fas fa-sort</v-icon>
+                            <span class="sr-only">Sort</span>
+                          </v-btn>
+                        </template>
+                        <v-list min-width="200">
+                          <v-list-item-group
+                            v-model="input.sort"
+                            color="primary"
+                          >
+                            <v-list-item
+                              v-for="(item, index) in sorts"
+                              :key="item.field"
+                              @click="resort(item.field)"
+                              :value="item.field"
+                            >
+                              <v-list-item-title>{{
+                                item.type
+                              }}</v-list-item-title>
+                            </v-list-item>
+                          </v-list-item-group>
+                        </v-list>
+                      </v-menu>
+                      <share
+                        :url="encodeURI(shareUrl)"
+                        label="Share"
+                        small
+                        show-copy
+                        :hide="['email']"
                       />
-                    </v-col>
-                  </v-row>
-                </div>
+                    </p>
+                  </div>
+                </v-col>
 
-                <!-- Field of Study Results -->
-                <div class="search-result-cards-container" v-else></div>
+                <v-col
+                  cols="12"
+                  sm="5"
+                  class="py-1 px-1"
+                  v-if="!isLoading && results.schools.length > 0"
+                >
+                  <div class="text-md-right">
+                    <v-pagination
+                      v-model="input.page"
+                      :length="totalPages"
+                      :total-visible="7"
+                      @input="handlePaginationInput"
+                      class="pr-0 mr-0"
+                      circle
+                    ></v-pagination>
+                  </div>
+                </v-col>
+              </v-row>
+            </v-card>
+
+            <!-- Field Of Study CIP 4 Information -->
+            <div
+              v-if="displayToggle === 'fos' && !isLoading"
+              id="search-fos-cip-warning"
+              class="my-2"
+            >
+              <p class="white--text">
+                <strong>Note:</strong> Field of Study titles are based on the US
+                Department of Education's Classification of Instructional
+                Programs (CIP) and may not match the program titles at a given
+                school.
+                <a
+                  target="_blank"
+                  href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56"
+                >
+                  Learn more about CIP
+                  <v-icon x-small color="white">
+                    fas fa-external-link-alt
+                  </v-icon>
+                </a>
+
+                <!--                  <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">-->
+
+                <!--                  </a>-->
+              </p>
+            </div>
+
+            <!-- No Results/Canned Search/ -->
+            <div
+              id="search-can-query-container"
+              v-if="!isLoading && results.schools.length === 0"
+            >
+              <v-row>
+                <v-col cols="12" v-if="displayToggle === 'institutions'">
+                  <v-card class="pa-5">
+                    <h3>Show Me Options</h3>
+                    <p>
+                      Select one or more options below to create a list of
+                      schools that fit your needs.
+                    </p>
+                    <canned-search-container
+                      @canned-search-submit="handleCannedSearchClick"
+                    ></canned-search-container>
+                  </v-card>
+                </v-col>
+
+                <v-col cols="12" v-if="displayToggle === 'fos'">
+                  <v-card class="pa-5 text-center">
+                    <h3 class="text-center">No Results Found</h3>
+                    <br />
+                    <v-btn
+                      id="search-button-clear-filters"
+                      color="primary"
+                      text-color="white"
+                      @click="clearSearchForm"
+                      rounded
+                    >
+                      <span>
+                        <v-icon class="mr-1">mdi-close-circle</v-icon> Clear
+                        Search Filters
+                      </span>
+                    </v-btn>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </div>
+
+            <!-- Main Search Results -->
+            <div class="results-main-alert">
+              <!-- Loading -->
+              <div class="show-loading mt-2" v-show="isLoading">
+                <v-card class="py-4 px-4 pageBar">
+                  <h1 class="title">
+                    Loading
+                    <v-icon color="#0e365b">fas fa-circle-notch fa-spin</v-icon>
+                  </h1>
+                </v-card>
               </div>
 
-              <!-- Bottom Pagination -->
-              <v-card
-                class="mt-4 mb-2 py-1 px-4 pageBar elevation-0"
-                v-if="!isLoading && results.schools.length > 0"
-              >
-                <v-row>
-                  <v-col cols="12" class="pa-1">
-                    <div class="text-right">
-                      <v-pagination
-                        v-model="input.page"
-                        :length="totalPages"
-                        :total-visible="7"
-                        @input="handlePaginationInput"
-                        circle
-                      ></v-pagination>
-                    </div>
+              <!-- Search Query Error-->
+              <div class="show-error" v-show="error.message">
+                <h1>Something went wrong:</h1>
+                <p class="error-message">{{ error.message }}</p>
+              </div>
+
+              <!-- Institution Results -->
+              <div class="search-result-cards-container" v-if="!isLoading">
+                <!-- Institution Results -->
+                <v-row v-if="displayToggle === 'institutions'">
+                  <v-col
+                    v-for="school in results.schools"
+                    :key="school.id"
+                    cols="12"
+                    lg="3"
+                    md="4"
+                    sm="6"
+                    class="d-flex align-stretch"
+                  >
+                    <search-result-card :school="school" />
                   </v-col>
                 </v-row>
-              </v-card>
-            </div>
-          </div>
 
-          <!-- Floating Mobile Search Button -->
-          <v-btn
-            fab
-            fixed
-            right
-            color="secondary"
-            rounded
-            @click="showSidebar = !showSidebar"
-            v-if="$vuetify.breakpoint.mdAndDown"
-            class="searchFab"
-            title="Search"
-          >
-            <v-icon>fas fa-search</v-icon>
-          </v-btn>
-        </v-container>
-      </v-main>
-      <scorecard-footer />
-    </v-app>
+                <!-- Fields of Study Results -->
+                <v-row v-else>
+                  <v-col
+                    v-for="school in results.schools"
+                    :key="school.id"
+                    cols="12"
+                    lg="12"
+                    md="12"
+                    sm="12"
+                    class="d-flex align-stretch"
+                  >
+                    <fos-result-card
+                      :school="school"
+                      :selected-fields-of-study="compareFieldsOfStudy"
+                    />
+                  </v-col>
+                </v-row>
+              </div>
+
+              <!-- Field of Study Results -->
+              <div class="search-result-cards-container" v-else></div>
+            </div>
+
+            <!-- Bottom Pagination -->
+            <v-card
+              class="mt-4 mb-2 py-1 px-4 pageBar elevation-0"
+              v-if="!isLoading && results.schools.length > 0"
+            >
+              <v-row>
+                <v-col cols="12" class="pa-1">
+                  <div class="text-right">
+                    <v-pagination
+                      v-model="input.page"
+                      :length="totalPages"
+                      :total-visible="7"
+                      @input="handlePaginationInput"
+                      circle
+                    ></v-pagination>
+                  </div>
+                </v-col>
+              </v-row>
+            </v-card>
+          </div>
+        </div>
+
+        <!-- Floating Mobile Search Button -->
+        <v-btn
+          fab
+          fixed
+          right
+          color="secondary"
+          rounded
+          @click="showSidebar = !showSidebar"
+          v-if="$vuetify.breakpoint.mdAndDown"
+          class="searchFab"
+          title="Search"
+        >
+          <v-icon>fas fa-search</v-icon>
+        </v-btn>
+      </v-container>
+    </v-main>
+    <!--End of root -->
   </div>
-  <!--End of root -->
 </template>
 
 <script>

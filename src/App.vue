@@ -1,5 +1,9 @@
 <template>
-  <router-view :is-loading="isLoading" @loading="isLoading = $event" />
+  <v-app>
+    <scorecard-header />
+    <router-view :is-loading="isLoading" @loading="isLoading = $event" />
+    <scorecard-footer />
+  </v-app>
 </template>
 
 <static-query>

@@ -148,13 +148,13 @@ header {
 </style>
 
 <template>
-  <div>
+  <div class="">
     <v-app-bar
       app
       clipped-left
       :height="$vuetify.breakpoint.xsOnly ? 80 : 105"
       color="#0e365b"
-      class="pa-0 ma=0"
+      class="pa-0 ma-0"
     >
       <div id="nav-site-title">
         <a href="/"
@@ -340,16 +340,11 @@ header {
 
 <script>
 export default {
-  props: {
-    activeLink: {
-      type: String,
-      default: null,
-    },
-  },
   data() {
     return {
       drawer: false,
       group: false,
+      activeLink: null,
     }
   },
   computed: {
@@ -360,8 +355,26 @@ export default {
       )
     },
   },
-  watch: {},
+  watch: {
+    $route() {
+      this.setActiveLink()
+    },
+  },
   methods: {
+    setActiveLink() {
+      let path = window.location.pathname
+      if (path.match(/search/)) {
+        this.activeLink = "search"
+      } else if (path.match(/compare/)) {
+        this.activeLink = "compare"
+      } else if (path.match(/data/)) {
+        this.activeLink = "data"
+      } else if (path.match(/\//)) {
+        this.activeLink = "/"
+      } else {
+        this.activeLink = null
+      }
+    },
     mobileNavClick(urlString) {
       window.location.href = urlString
     },
@@ -375,10 +388,12 @@ export default {
       ) {
         this.$store.commit("toggleDrawer")
       } else {
-        window.location.href = urlString
+        this.$router.push(urlString)
       }
     },
   },
-  created() {},
+  created() {
+    this.setActiveLink()
+  },
 }
 </script>
