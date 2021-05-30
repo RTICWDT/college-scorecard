@@ -158,7 +158,7 @@ export default {
   methods: {
     picked(item) {
       this.trackShare(item.title)
-      window.open(item.url + this.url, "_blank")
+      window.open(item.url + encodeURIComponent(this.url), "_blank")
     },
     copyURL() {
       this.$copyText(this.url)
