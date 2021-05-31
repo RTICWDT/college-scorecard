@@ -155,12 +155,13 @@ header {
       :height="$vuetify.breakpoint.xsOnly ? 80 : 105"
       color="#0e365b"
       class="pa-0 ma-0"
+      flat
     >
       <div id="nav-site-title">
         <a href="/"
           ><div class="logo">
             <img
-              src="/img/US-DeptOfEducation-Seal.svg"
+              src="/img/US-DeptOfEducation-Seal.png"
               alt="Department of Education Seal"
             />
           </div>

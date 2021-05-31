@@ -232,6 +232,7 @@
                 >
                   <div class="text-md-right">
                     <v-pagination
+                      flat
                       v-model="input.page"
                       :length="totalPages"
                       :total-visible="7"

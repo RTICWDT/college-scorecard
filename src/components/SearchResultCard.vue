@@ -70,35 +70,37 @@
         </v-col>
       </v-row>
       <v-divider />
-      <p class="overline mb-1 pt-3">Institutional Highlights:</p>
+      <p class="overline mb-0 pt-3">Institutional Highlights:</p>
       <v-row class="v-flex align-center">
-        <v-col cols="7" class="py-2">
+        <v-col class="">
           <!--prettyhtml-ignore-->
           <span
             >Graduation Rate&nbsp;<tooltip
               definition="graduation-rate"
               :version="completionRateFieldDefinition"
           /></span>
-        </v-col>
-        <v-col cols="5" class="pr-0 text--black py-2">
-          <h3 class="navy-text">{{ displayGradRate }}</h3>
+        </v-col> </v-row
+      ><v-row class="mt-0">
+        <v-col class="text--black py-0">
+          <h3 class="navy-text ma-0 pa-0">{{ displayGradRate }}</h3>
         </v-col>
       </v-row>
       <v-row class="result-card-info-container v-flex align-center">
-        <v-col cols="7" class="py-2">
+        <v-col class="py-0 my-0 mt-4">
           <!--prettyhtml-ignore-->
           <span
             >Salary After Completing&nbsp;<tooltip
               definition="fos-median-earnings"
               :isBranch="isBranch"
           /></span>
-        </v-col>
-        <v-col cols="5" class="pr-0 text--black py-2">
-          <h3 class="navy-text">{{ displayEarn }}</h3>
+        </v-col> </v-row
+      ><v-row>
+        <v-col class="text--black py-0">
+          <h3 class="navy-text ma-0">{{ displayEarn }}</h3>
         </v-col>
       </v-row>
       <v-row class="result-card-info-container v-flex align-center">
-        <v-col cols="7" class="py-2">
+        <v-col class="py-0 mt-4">
           <!--prettyhtml-ignore-->
           <span v-if="!isProgramReporter"
             >Average Annual Cost&nbsp;<tooltip
@@ -107,17 +109,18 @@
           /></span>
           <!--prettyhtml-ignore-->
           <span v-else
-            >Average Annual Cost for Largest Program&nbsp;<tooltip
+            >Average Annual Cost for Largest<br />Program&nbsp;<tooltip
               definition="avg-program-cost"
               :isNegative="netPrice < 0"
           /></span>
-        </v-col>
-        <v-col cols="5" class="pr-2 text--black py-0">
-          <h3 class="navy-text">{{ displayAvgCost }}</h3>
+        </v-col> </v-row
+      ><v-row>
+        <v-col class="pr-2 text--black py-0">
+          <h3 class="navy-text my-0">{{ displayAvgCost }}</h3>
         </v-col>
       </v-row>
     </v-card-text>
-    <v-card-actions class="py-0">
+    <v-card-actions class="">
       <p class="px-1">
         <a :href="schoolLink" class="moreDetails">View More Details &raquo;</a>
       </p>

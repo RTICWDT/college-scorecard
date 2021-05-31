@@ -23,19 +23,14 @@
                 the views expressed or the data and facts presented on this
                 external site.
               </p>
-              <v-btn
-                class="mb-1"
-                color="secondary"
-                rounded
-                :href="url"
-                v-if="url"
+              <v-btn class="mb-1 mr-2" color="secondary" :href="url" v-if="url"
                 >Continue to Website</v-btn
               >
               <span v-else class="px-4 mb-1"
                 ><v-icon small>fas fa-exclamation-triangle</v-icon> Invalid
                 URL</span
               >
-              <v-btn class="mb-1" rounded :href="referrer"
+              <v-btn class="mb-1" :href="referrer"
                 >Return to Previous Page</v-btn
               >
             </v-card>
