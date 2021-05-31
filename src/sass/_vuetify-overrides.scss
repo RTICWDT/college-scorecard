@@ -17,6 +17,9 @@ html {
   .v-btn--is-elevated {
     box-shadow: none !important;
   }
+  .v-pagination {
+    justify-content: flex-end;
+  }
 
   .v-pagination__item {
     box-shadow: none !important;

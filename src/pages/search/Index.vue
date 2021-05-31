@@ -124,9 +124,8 @@
                         text-color="white"
                         @click="clearSearchForm"
                         x-small
-                        rounded
                         fab
-                        class="d-inline d-sm-none mr-1"
+                        class="d-inline d-sm-none mr-2"
                       >
                         <span>
                           <v-icon class="">mdi-close-circle</v-icon>
@@ -140,8 +139,7 @@
                         text-color="white"
                         @click="clearSearchForm"
                         small
-                        rounded
-                        class="d-none d-sm-inline mr-1"
+                        class="d-none d-sm-inline mr-2"
                       >
                         <span>
                           <v-icon small class="mr-1">mdi-close-circle</v-icon>
@@ -153,7 +151,6 @@
                         <template v-slot:activator="{ on }">
                           <v-btn
                             id="search-button-sort"
-                            rounded
                             color="primary"
                             small
                             v-on="on"
@@ -184,7 +181,6 @@
                       <v-menu offset-y>
                         <template v-slot:activator="{ on }">
                           <v-btn
-                            rounded
                             color="primary"
                             x-small
                             v-on="on"
@@ -230,7 +226,7 @@
                   class="py-1 px-1"
                   v-if="!isLoading && results.schools.length > 0"
                 >
-                  <div class="text-md-right">
+                  <div class="text-md-right justify-end">
                     <v-pagination
                       flat
                       v-model="input.page"
@@ -238,7 +234,6 @@
                       :total-visible="7"
                       @input="handlePaginationInput"
                       class="pr-0 mr-0"
-                      circle
                     ></v-pagination>
                   </div>
                 </v-col>
@@ -300,10 +295,9 @@
                       color="primary"
                       text-color="white"
                       @click="clearSearchForm"
-                      rounded
                     >
                       <span>
-                        <v-icon class="mr-1">mdi-close-circle</v-icon> Clear
+                        <v-icon class="mr-2">mdi-close-circle</v-icon> Clear
                         Search Filters
                       </span>
                     </v-btn>
@@ -376,14 +370,14 @@
               v-if="!isLoading && results.schools.length > 0"
             >
               <v-row>
-                <v-col cols="12" class="pa-1">
+                <v-col cols="12" class="py-3 px-3">
                   <div class="text-right">
                     <v-pagination
                       v-model="input.page"
                       :length="totalPages"
                       :total-visible="7"
                       @input="handlePaginationInput"
-                      circle
+                      class="pr-0 mr-0"
                     ></v-pagination>
                   </div>
                 </v-col>

@@ -9,14 +9,22 @@
 .search-result-card {
   border: 4px solid #ffffff !important;
   width: 100%;
+  position: realtive;
+  padding-bottom: 60px;
 }
 .result-card-selected {
   border: 4px solid #a6cfe4 !important;
+}
+.card-actions {
+  position: absolute;
+  bottom: 0;
 }
 
 .moreDetails {
   font-size: 0.9rem;
   text-decoration: none;
+  font-weight: bold;
+
   &:hover {
     text-decoration: underline;
   }
@@ -25,12 +33,12 @@
 
 <template>
   <v-card
-    class="search-result-card mx-auto pa-0 elevation-4"
+    class="search-result-card mx-auto elevation-4"
     outlined
     :class="{ 'result-card-selected': isSelected }"
   >
     <!-- Better Selected style -->
-    <v-card-text class="pa-3">
+    <v-card-text class="pa-3" style="flex-grow:1">
       <p class="mt-1 mb-2" v-if="underInvestigation == 1">
         <v-card color="error" class="px-2 py-1" flat>
           <strong class="white--text">Under ED Monitoring</strong>
@@ -120,7 +128,7 @@
         </v-col>
       </v-row>
     </v-card-text>
-    <v-card-actions class="">
+    <v-card-actions class="card-actions">
       <p class="px-1">
         <a :href="schoolLink" class="moreDetails">View More Details &raquo;</a>
       </p>
