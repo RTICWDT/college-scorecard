@@ -1,6 +1,6 @@
 <template>
   <v-main>
-    <v-container>
+    <v-container class="mt-5">
       <v-row>
         <v-col cols="12" lg="9" class="school-left">
           <!-- Loader -->
@@ -29,7 +29,7 @@
                     >&laquo; Back to School Profile</v-btn
                   >
                 </v-col>
-                <v-col cols="9" class="text-right">
+                <v-col cols="9" class="d-flex justify-end">
                   <add-to-compare :school="school" />
                   <share
                     small
@@ -180,7 +180,7 @@
         </v-col>
 
         <!-- Sidbar -->
-        <v-col lg="3">
+        <v-col lg="3" class="pt-0">
           <v-card class="pa-5 mt-0">
             <paying-for-college />
           </v-card>

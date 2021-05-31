@@ -1,14 +1,10 @@
 <template>
   <div>
     <v-btn
-      text
+      :text="!isSelected"
       small
       class="d-none d-sm-inline"
-      :color="isSelected ? 'black' : 'white'"
-      v-bind:class="{
-        'compare-selected-text': isSelected,
-        'rounded-pill': '',
-      }"
+      color="white"
       @click="
         $store.commit('toggleSchool', {
           schoolId: school.id,
@@ -28,7 +24,7 @@
     <v-btn
       fab
       x-small
-      :color="isSelected ? 'black' : 'white'"
+      color="white"
       class="d-inline d-sm-none mr-2"
       @click="
         $store.commit('toggleSchool', {

@@ -37,7 +37,7 @@
                   >
                 </v-col>
 
-                <v-col cols="9" class="text-right">
+                <v-col cols="9" class="text-right d-flex justify-end">
                   <add-to-compare :school="school" />
 
                   <share
@@ -419,8 +419,8 @@
 
             <v-row>
               <v-col class="text-right">
-                <v-btn primary @click="all">Expand All</v-btn>
-                <v-btn primary @click="none">Close All</v-btn>
+                <v-btn primary @click="all" class="my-2 mr-2">Expand All</v-btn>
+                <v-btn primary @click="none" class="my-2">Close All</v-btn>
               </v-col>
             </v-row>
 
@@ -2054,7 +2054,7 @@
           </div>
         </v-col>
 
-        <v-col lg="3" v-if="!error">
+        <v-col lg="3" v-if="!error" class="pt-0">
           <v-card outline class="pa-5 mb-3">
             <p class="title mb-2">New Search:</p>
             <v-radio-group v-model="sidebarSearchToggle" row>

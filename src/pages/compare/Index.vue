@@ -1145,7 +1145,7 @@
         <!-- End Left Content Area -->
 
         <!-- Left Aside -->
-        <v-col lg="3">
+        <v-col lg="3" class="pt-0">
           <v-card v-if="showShareUpdate" class="pa-5 mb-3">
             <p>You are viewing a shared comparison.</p>
 
