@@ -30,6 +30,7 @@
 .v-tabs-bar a {
   letter-spacing: 0 !important;
   font-family: $header-font-family !important;
+  font-weight: 600 !important;
 }
 </style>
 <script>
