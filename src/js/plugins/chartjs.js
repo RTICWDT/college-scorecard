@@ -1,3 +1,5 @@
+import Chart from 'chart.js'
+
 Chart.defaults.global.defaultFontFamily = "'Montserrat', 'Helvetica', 'Arial', sans-serif"
 Chart.defaults.global.defaultFontSize= 16;
 Chart.defaults.global.defaultFontColor = 'rgba(0, 0, 0, 0.87)';

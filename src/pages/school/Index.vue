@@ -269,7 +269,7 @@
                     <div
                       class="text-right pa-2 field-of-study-select-container-header"
                     >
-                      <v-btn
+                      <!-- <v-btn
                         v-if="selectedFOS"
                         text
                         small
@@ -309,7 +309,7 @@
                           Add to Compare Field of Study
                         </div>
                         <div v-else>&nbsp;Added to Compare</div>
-                      </v-btn>
+                      </v-btn> -->
                     </div>
 
                     <div>
@@ -457,7 +457,7 @@
                   <div
                     class="text-right pa-2 field-of-study-select-container-header"
                   >
-                    <v-btn
+                    <!-- <v-btn
                       v-if="selectedFOS"
                       text
                       small
@@ -497,7 +497,7 @@
                         Add to Compare Field of Study
                       </div>
                       <div v-else>&nbsp;Added to Compare</div>
-                    </v-btn>
+                    </v-btn> -->
                   </div>
 
                   <div class="mb-4">

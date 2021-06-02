@@ -26,7 +26,7 @@
           <p class="subtitle-2 pb-0 mb-0">
             <a
               :href="
-                `$/school?${school.unit_id}&fos_code=${
+                `/school?${school.unit_id}&fos_code=${
                   school.code
                 }&fos_credential=${school['credential.level']}`
               "

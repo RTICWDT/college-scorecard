@@ -57,6 +57,11 @@ html {
     }
   }
 
+  .v-btn {
+    font-family: $header-font-family !important;
+    letter-spacing: 0;
+  }
+
   .v-btn.secondary {
     color: #ffffff !important;
   }
@@ -90,7 +95,6 @@ html {
   .v-card {
     overflow-wrap: normal;
     box-shadow: none !important;
-    border-radius: 0 !important;
   }
   .theme--light.v-card > .v-card__text {
     color: rgba(0, 0, 0, 0.87) !important;

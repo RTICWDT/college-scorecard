@@ -4,6 +4,7 @@ import Vuetify from 'vuetify'
 import Vuex from 'vuex'
 
 import "~/sass/style.scss";
+import '~/js/plugins/chartjs.js';
 
 import vueNumeralFilterInstaller from 'vue-numeral-filter';
 import VueClipboard from 'vue-clipboard2';

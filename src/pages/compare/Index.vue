@@ -82,7 +82,7 @@
                 <v-chip-group column>
                   <v-chip
                     class="pa-4 ma-2"
-                    v-for="institution in responseCache.institution"
+                    v-for="institution in $store.state.institutions"
                     :key="institution.schoolId"
                     close
                     @click:close="
@@ -158,8 +158,8 @@
                 <!-- Mobile Chip Layout -->
                 <v-chip-group show-arrows class="d-md-none">
                   <v-chip
-                    v-for="fieldOfStudy in responseCache.fieldsOfStudy"
-                    :key="`${fieldOfStudy.unit_id}${fieldOfStudy.code}`"
+                    v-for="fieldOfStudy in $store.state.fos"
+                    :key="`${fieldOfStudy.id}${fieldOfStudy.code}`"
                     close
                     @click:close="
                       handleChipCloseClick(fieldOfStudy, 'compare-fos')
@@ -167,17 +167,17 @@
                   >
                     <div class="compare-fos-chip pa-2">
                       <h4>
-                        {{ fieldOfStudy.title | formatFieldOfStudyTitle }}
+                        {{ fieldOfStudy.fosTitle | formatFieldOfStudyTitle }}
                       </h4>
                       <span class="fos-uppercase-credential-title">
                         {{
-                          fieldOfStudy["credential.title"]
+                          fieldOfStudy.credentialTitle
                             | formatFieldOfStudyCredentialTitle
                         }}
                       </span>
                       <br />
                       <span class="fos-school-name-text">{{
-                        fieldOfStudy["school.name"]
+                        fieldOfStudy.institutionName
                       }}</span>
                     </div>
                   </v-chip>
@@ -187,8 +187,8 @@
                 <v-chip-group class="d-none d-md-block" column>
                   <v-chip
                     class="ma-2"
-                    v-for="fieldOfStudy in responseCache.fieldsOfStudy"
-                    :key="`${fieldOfStudy.unit_id}${fieldOfStudy.code}`"
+                    v-for="fieldOfStudy in $store.state.fos"
+                    :key="`${fieldOfStudy.id}${fieldOfStudy.code}`"
                     close
                     @click:close="
                       handleChipCloseClick(fieldOfStudy, 'compare-fos')
@@ -196,15 +196,15 @@
                   >
                     <div class="compare-fos-chip pa-2">
                       <h4>
-                        {{ fieldOfStudy.title | formatFieldOfStudyTitle }}
+                        {{ fieldOfStudy.fosTitle | formatFieldOfStudyTitle }}
                       </h4>
                       <span class="fos-uppercase-credential-title">{{
-                        fieldOfStudy["credential.title"]
+                        fieldOfStudy.credentialTitle
                           | formatFieldOfStudyCredentialTitle
                       }}</span
                       ><br />
                       <span class="fos-school-name-text">{{
-                        fieldOfStudy["school.name"]
+                        fieldOfStudy.institutionName
                       }}</span>
                     </div>
                   </v-chip>
@@ -614,8 +614,8 @@
             <!-- Accordion Controls-->
             <v-row>
               <v-col class="text-right mt-5">
-                <v-btn primary @click="all">Expand All</v-btn>
-                <v-btn primary @click="none">Close All</v-btn>
+                <v-btn primary @click="all" class="my-2 mr-2">Expand All</v-btn>
+                <v-btn primary @click="none" class="my-2">Close All</v-btn>
               </v-col>
             </v-row>
 
@@ -1137,9 +1137,6 @@
                 </p>
               </div>
             </v-card>
-            <!--              <v-card class="px-5 pt-0 pb-5">-->
-            <!--                <search-form @search-query="directToSearch" />-->
-            <!--              </v-card>-->
           </div>
         </v-col>
         <!-- End Left Content Area -->
@@ -1312,19 +1309,10 @@ export default {
       ],
       controlTab: 0,
       countSchools() {
-        //return this.passedSchools.length;
-        return (
-          this.passedSchools.length ||
-          this.responseCache.institution.length ||
-          compareSchools.length
-        )
+        return this.passedSchools.length || compareSchools.length
       },
       countFieldsOfStudy() {
-        return (
-          this.passedFieldsOfStudy.length ||
-          this.responseCache.fieldsOfStudy.length ||
-          compareFieldsOfStudy.length
-        )
+        return this.passedFieldsOfStudy.length || compareFieldsOfStudy.length
       },
     }
   },
@@ -1374,20 +1362,14 @@ export default {
       return document.referrer || `/search`
     },
     showSearchForm() {
-      // if(this.schools['2-year schools'].length > 0 || this.schools['4-year schools'].length > 0 || this.schools['Certificate schools'].length > 0){
-      //   return false;
-      // }else{
-      //   return true;
-      // }
-
       if (
         this.displayToggle === "institutions" &&
-        this.responseCache.institution.length > 0
+        this.$store.state.institutions.length > 0
       ) {
         return false
       } else if (
         this.displayToggle === "fos" &&
-        this.responseCache.fieldsOfStudy.length > 0
+        this.$store.state.fos.length > 0
       ) {
         return false
       }
@@ -1477,40 +1459,6 @@ export default {
     },
     filteredFieldsOfStudy() {
       return this.categorizeFieldsOfStudy(this.responseCache.fieldsOfStudy)
-      // // Set up return object
-      // let filteredArray = [
-      //   {
-      //     key: 'certificate',
-      //     title: 'certificate',
-      //     filterValue: 1,
-      //     items: []
-      //   },
-      //   {
-      //     key: 'associate',
-      //     title: "associate's Degree",
-      //     filterValue: 2,
-      //     items: []
-      //   },
-      //   {
-      //     key: 'bachelor',
-      //     title: "bachelor's Degree",
-      //     filterValue: 3,
-      //     items:[]
-      //   }
-      // ]
-      //
-      // // Categorize field of study by credential type;
-      // filteredArray = filteredArray.map((filterItem) => {
-      //   filterItem.items = this.responseCache.fieldsOfStudy.filter((fieldOfStudy) => {
-      //     return fieldOfStudy['credential.level'] === filterItem.filterValue;
-      //   });
-      //
-      //   return filterItem;
-      // });
-      //
-      // // Return only items that have counts
-      // return filteredArray.filter((filterItem)=>{ return filterItem.items.length > 0; });
-      // // return filteredArray;
     },
   },
   methods: {
@@ -1521,19 +1469,7 @@ export default {
     none() {
       this.panels = []
     },
-    directToSearch(params) {
-      // Generate URL based on params,
-      let qs = querystring.stringify(params)
-      let url =
-        "/search/?" +
-        qs
-          .replace(/^&+/, "")
-          .replace(/&{2,}/g, "&")
-          .replace(/%3A/g, ":")
 
-      // Direct to location.
-      window.location.href = url
-    },
     saveCompareList(compareKey, removeFromCompare, addToCompare) {
       // TODO - Maybe move this to the local storage mixin?
 
@@ -1644,7 +1580,7 @@ export default {
         })
 
         // Update URL with schools from compare drawer using the share URL computed property.  Grabbing only query string from url string
-        history.replaceState({}, "", this.shareUrl)
+        this.modifyUrl()
 
         //update URL parameters
         this.queryStringParameters = this.parseURLParameters()
@@ -1759,164 +1695,20 @@ export default {
     ) {
       switch (compareKey) {
         case localStorageKeys.COMPARE_KEY:
-          let filteredSchools = {}
-
-          //region Remove from Results
-          //Using lodash, not an array.
-          _.forEach(this.schools, (schools, year) => {
-            filteredSchools[year] = schools.filter((school) => {
-              return Number(school.id) !== Number(removeData.schoolId)
-            })
-          })
-
-          this.schools = filteredSchools
-          //endregion
-
-          // remove from response cache.
-          this.responseCache.institution = this.responseCache.institution.filter(
-            (school) => {
-              return Number(school.schoolId) !== Number(removeData.schoolId)
-            }
-          )
-
-          //region Remove from URL
-          // Ensure it is set and is an array
-          if (typeof this.queryStringParameters.s === "object") {
-            this.queryStringParameters.s = this.queryStringParameters.s.filter(
-              (schoolId) => {
-                return Number(schoolId) !== Number(removeData.schoolId)
-              }
-            )
-          } else if (typeof this.queryStringParameters.s === "string") {
-            this.queryStringParameters = _.omit(this.queryStringParameters, "s")
-          }
-
-          // Replace state
-          history.replaceState(
-            {},
-            "",
-            window.location.origin +
-              "/compare?" +
-              this.prepareQueryString(this.queryStringParameters)
-          )
-          //endregion
-
-          //region Remove From Compare
-
-          // If not viewing a shared comparison
-          if (!this.isSharedComparison) {
-            // If it exists in the compare drawer
-            let compareIndex = _.findIndex(this.compareSchools, (school) => {
-              return Number(school.schoolId) === Number(removeData.schoolId)
-            })
-
-            if (compareIndex >= 0) {
-              this.$emit(
-                "toggle-compare-school",
-                removeData,
-                localStorageKeys.COMPARE_KEY
-              )
-            }
-          }
-          //endregion
+          this.$store.commit("toggleSchool", removeData)
+          this.modifyUrl()
           break
 
         case localStorageKeys.COMPARE_FOS_KEY:
-          //region Remove from response cache
-          this.responseCache.fieldsOfStudy = this.responseCache.fieldsOfStudy.filter(
-            (fieldOfStudy) => {
-              if (
-                Number(fieldOfStudy["unit_id"]) !==
-                Number(removeData["unit_id"])
-              ) {
-                return true
-              }
-
-              return (
-                Number(fieldOfStudy.code) !== Number(removeData.code) &&
-                Number(fieldOfStudy["credential.level"]) ===
-                  Number(removeData["credential.level"])
-              )
-            }
-          )
-          //endregion
-
-          // region Remove From URL
-
-          // Ensure it is set and is an array
-          if (typeof this.queryStringParameters.fos === "object") {
-            this.queryStringParameters.fos = this.queryStringParameters.fos.filter(
-              (fieldOfStudyString) => {
-                return (
-                  fieldOfStudyString !==
-                  generateFieldOfStudyUUID(
-                    removeData["unit_id"],
-                    removeData.code,
-                    removeData["credential.level"]
-                  )
-                )
-              }
-            )
-          } else if (typeof this.queryStringParameters.fos === "string") {
-            this.queryStringParameters = _.omitBy(
-              this.queryStringParameters,
-              (value, key) => {
-                return (
-                  key === "fos" &&
-                  value ===
-                    generateFieldOfStudyUUID(
-                      removeData["unit_id"],
-                      removeData.code,
-                      removeData["credential.level"]
-                    )
-                )
-              }
-            )
-          }
-
-          // Replace state
-          history.replaceState(
-            {},
-            "",
-            window.location.origin +
-              "/compare?" +
-              this.prepareQueryString(this.queryStringParameters)
-          )
-          //endregion
-
-          //region Remove From Compare Drawer
-
-          // If not viewing a shared comparison
-          if (!this.isSharedFieldOfStudyComparison) {
-            // If it exists in the compare drawer
-            let compareIndex = _.findIndex(
-              this.compareFieldsOfStudy,
-              (fieldOfStudy) => {
-                return (
-                  Number(fieldOfStudy["id"]) ===
-                    Number(removeData["unit_id"]) &&
-                  Number(fieldOfStudy.code) === Number(removeData.code) &&
-                  Number(fieldOfStudy.credentialLevel) ===
-                    Number(removeData["credential.level"])
-                )
-              }
-            )
-
-            if (compareIndex >= 0) {
-              this.$emit(
-                "toggle-compare-school",
-                fieldOfStudyCompareFormat(removeData),
-                localStorageKeys.COMPARE_FOS_KEY
-              )
-            }
-          }
-
-          //endregion
-
+          this.$store.commit("toggleFieldOfStudy", removeData)
+          this.modifyUrl()
           break
         default:
           break
       }
+    },
+    modifyUrl() {
+      history.replaceState({}, "", this.shareUrl)
     },
     handleDisplayToggleClick(toggleValue) {
       this.displayToggle = Number(toggleValue) === 0 ? "institutions" : "fos"
@@ -1927,10 +1719,7 @@ export default {
         if (this.responseCache.institution.length === 0) {
           this.queryInstitutions()
         }
-
-        // TODO - Move to a centralized location.
-        // update the URL
-        history.replaceState({}, "", this.shareUrl)
+        this.modifyUrl()
 
         //update URL parameters
         this.queryStringParameters = this.parseURLParameters()
@@ -1939,9 +1728,7 @@ export default {
           this.queryFieldsOfStudy(this.locateFieldsOfStudy())
         }
 
-        // TODO - Move to a centralized location.
-        // update the URL
-        history.replaceState({}, "", this.shareUrl)
+        this.modifyUrl()
 
         //update URL parameters
         this.queryStringParameters = this.parseURLParameters()
@@ -1970,9 +1757,7 @@ export default {
           })
         })
 
-        // TODO - Remove URL updating from this method
-        // Update URL with schools from compare drawer using the share URL computed property.  Grabbing only query string from url string
-        history.replaceState({}, "", this.shareUrl)
+        this.modifyUrl()
 
         //update URL parameters
         this.queryStringParameters = this.parseURLParameters()
