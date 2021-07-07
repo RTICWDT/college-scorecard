@@ -74,7 +74,7 @@ new Vue({
     'data-glossary': DataGlossaryPage,
     'compare-page': ComparePage,
     'four-oh-four': FourOhFourPage,
-    'training-page': TrainingPage 
+    'training-page': TrainingPage
   },
   created(){
     this.refreshCompareSchools();
