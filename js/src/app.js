@@ -13,7 +13,7 @@ import SchoolProgramsPage from './vue/pages/school_fields.vue';
 import TransitionPage from './vue/pages/school_transition.vue';
 
 import SearchPage from './vue/pages/search.vue';
-import TrainingPage from './vue/pages/training.vue'
+import TrainingPage from './vue/pages/training.vue';
 
 import DataIndexPage from './vue/pages/data.vue';
 import DataChangelogPage from './vue/pages/data_changelog.vue';
@@ -74,7 +74,7 @@ new Vue({
     'data-glossary': DataGlossaryPage,
     'compare-page': ComparePage,
     'four-oh-four': FourOhFourPage,
-    'training-page': TrainingPage 
+    'training-page': TrainingPage
   },
   created(){
     this.refreshCompareSchools();
