@@ -52,7 +52,7 @@ export default {
         this.showInfoText = showCompareInfo;
     });
 
-    window.location.href = '/'
+    
   }
 };
 </script>
