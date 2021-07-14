@@ -19,9 +19,9 @@
               <v-expansion-panels>
                 <v-expansion-panel>
                                   
-                  <v-expansion-panel-header>July XX, 2021</v-expansion-panel-header>
+                  <v-expansion-panel-header>July 20, 2021</v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <p>On July XX, 2021, the Department provided the following updates to the College Scorecard website/API</p>
+                    <p>On July 20, 2021, the Department provided the following updates to the College Scorecard website/API:</p>
                     <ul><li>Updates to all data metrics derived from IPEDS with more recent data values from a new data collection year. Also, the addition of new IPEDS-derived data metrics including:
                     <ul>
                       <li>Estimated costs for books and supplies and living expenses for full-time, first-time degree/certificate-seeking undergraduate students at academic-year calendar-based institutions</li>
