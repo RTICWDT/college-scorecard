@@ -17,8 +17,8 @@
                 Find the Right Fit.
               </h1>
 
-              <p class="white--text text-center">
-                Search  for things. All the things.
+              <p class="white--text text-center"> 
+                Does Jekyll polling work?
               </p>
 
             </v-col>
@@ -31,39 +31,6 @@
               cols="12"
               class="d-none d-sm-flex pb-10"
             >
-              <v-tabs
-                grow
-                background-color="rgba(0,0,0,0)"
-                color="white"
-                slider-size="8"
-                slider-color="#74B3E8"
-                class="ma-0"
-                show-arrows
-                v-model="desktopTabs"
-              >
-                <v-tab
-                  @click="GATrackEvent('Home Tab','Tab','Search Schools')"
-                  color="white"
-                >
-                  Search Schools
-                </v-tab>
-
-                <v-tab
-                  @click="GATrackEvent('Home Tab','Tab','Search Fields of Study')"
-                  color="white"
-                >
-                  Search Fields of Study
-                </v-tab>
-
-                <v-tab
-                  @click="GATrackEvent('Home Tab','Tab','Show Me Options')"
-                  color="white"
-                >
-                  Show Me Options
-                </v-tab>
-
-                <!-- Institution Search-->
-                <v-tab-item>
                   <v-card class="pa-5 homepage-search-container">
                     <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
 
@@ -83,41 +50,6 @@
                       <search-form @search-query="directToSearch" />
                     </div>
                   </v-card>
-
-                </v-tab-item>
-
-                <!-- Field Of Study Search-->
-                <v-tab-item>
-                  <v-card class="pa-5 homepage-search-container">
-                    <field-of-study-search
-                      @field-of-study-selected="handleFieldOfStudySelected"
-                    />
-
-                    <div class="mt-5 text-right">
-                      <v-btn
-                        text
-                        small
-                        role="link"
-                        @click="handleFoSMoreOptionsClick"
-                      >
-                        More Search Options
-                        <v-icon>mdi-menu-right</v-icon>
-                      </v-btn>
-                    </div>
-                  </v-card>
-                </v-tab-item>
-
-                <!-- Show Me Options-->
-                <v-tab-item>
-                  <v-card style="min-height: 300px" class="px-10 py-5">
-                    <p class="my-2 text-center">
-                      Select one or more options to create a list of schools that fit your needs.
-                    </p>
-
-                    <canned-search-container @canned-search-submit="directToSearch"></canned-search-container>
-                  </v-card>
-                </v-tab-item>
-              </v-tabs>
             </v-col>
 
             <!-- Mobile Expansion Panels and Search -->
@@ -132,40 +64,6 @@
 
                   <v-expansion-panel-content>
                     <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
-                  </v-expansion-panel-content>
-
-                </v-expansion-panel>
-              </v-expansion-panels>
-
-
-              <!-- Mobile FoS Search-->
-              <v-expansion-panels class="mb-2">
-                <v-expansion-panel>
-                  <v-expansion-panel-header>
-                    <span class="home-mobile-search-title">Search Fields of Study</span>
-                  </v-expansion-panel-header>
-
-                  <v-expansion-panel-content>
-                    <field-of-study-search
-                      @field-of-study-selected="handleFieldOfStudySelected"
-                    />
-                  </v-expansion-panel-content>
-
-                </v-expansion-panel>
-              </v-expansion-panels>
-
-              <!-- Mobile Show me Options-->
-              <v-expansion-panels class="mb-2">
-                <v-expansion-panel>
-                  <v-expansion-panel-header>
-                    <span class="home-mobile-search-title">Show Me Options</span>
-                  </v-expansion-panel-header>
-
-                  <v-expansion-panel-content>
-                    <p
-                      class="my-2"
-                    >Select one or more options to create a list of schools that fit your needs.</p>
-                    <canned-search-container @canned-search-submit="directToSearch" class="mx-5"></canned-search-container>
                   </v-expansion-panel-content>
 
                 </v-expansion-panel>

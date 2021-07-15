@@ -2,7 +2,7 @@ version: '3'
 services:
   web:
     build: .
-    command: jekyll serve --host 0.0.0.0 --baseurl '' -w -i --trace
+    command: jekyll serve --host 0.0.0.0 --baseurl '' -w -i --force_polling --trace
     volumes:
       - .:/myapp
     ports:
