@@ -17,7 +17,24 @@
               <h1 class="display-1 mb-2 font-weight-bold">Change Log</h1>
               <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
               <v-expansion-panels>
-                <v-expansion-panel>                  
+                <v-expansion-panel>
+                                  
+                  <v-expansion-panel-header>July 20, 2021</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <p>On July 20, 2021, the Department provided the following updates to the College Scorecard website/API:</p>
+                    <ul><li>Updates to all data metrics derived from IPEDS with more recent data values from a new data collection year. Also, the addition of new IPEDS-derived data metrics including:
+                    <ul>
+                      <li>Estimated costs for books and supplies and living expenses for full-time, first-time degree/certificate-seeking undergraduate students at academic-year calendar-based institutions</li>
+                      <li>Beginning and end of fiscal year endowment values</li>
+                    </ul></li>
+                    <li>Updates (more recent data values) derived from Federal Student Aid sources for the following data metrics: Cohort Default Rates, Currently Operating Status Flag, Heightened Cash Monitoring Flag, Accrediting Agency Name and Code, Title IV Approval Date, Cohort Default Rate, and Federal School Code.</li>
+                    <li>Updates derived from the Office of Postsecondary Education (OPE) eligibility matrix for data metrics identifying Minority Serving Institutions.</li>
+                    </ul>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+
+                <v-expansion-panel>
+
                   <v-expansion-panel-header>April 4, 2021</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <p>On April 4, 2021, the College Scorecard API was updated to improve stability and efficiency. If you encounter any problems with this revision of the API, please submit an issue at <a href="http://github.com/rticwdt/college-scorecard/" target="_blank" @click="trackOutboundLink($event)">http://github.com/rticwdt/college-scorecard/</a></p>
