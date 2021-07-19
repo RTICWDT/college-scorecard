@@ -356,9 +356,9 @@
 
     <!-- WIOA Programs -->
     <div class="">
-      <label class="subhead mb-2" id="search-fos-cred-level" for="search-fos-cred-level">
-        WIOA Programs
-      </label>
+      <label class="subhead mb-2" id="search-fos-wioa" for="search-fos-wioa">
+        WIOA Programs 
+      </label><tooltip definition="wioa-participants"/>
 
       <v-checkbox
         id="search-form-fos-wioa"

@@ -392,7 +392,7 @@
       ></v-select>
 
           <!-- WIOA Programs -->
-      <p class="subhead-2">WIOA Programs</p>
+      <p class="subhead-2">WIOA Programs</p><tooltip definition="wioa-participants"/>
       <v-checkbox
         id="search-form-fos-wioa"
         class="search-form-wioa-cb my-0 py-0"
