@@ -390,7 +390,21 @@
         clearable
         aria-labelledby="religions-affiliation-label"
       ></v-select>
+
+          <!-- WIOA Programs -->
+      <p class="subhead-2">WIOA Programs</p>
+      <v-checkbox
+        id="search-form-fos-wioa"
+        class="search-form-wioa-cb my-0 py-0"
+        v-model="input.wioa"
+        label="Only show schools that have Department of Labor WIOA programs"
+        value="true"
+        color="secondary"
+        hide-details
+      ></v-checkbox>      
     </div>
+
+
 
     <div id="search-submit-container" class="pa-2 text-center" v-if="!autoSubmit">
       <v-btn color="secondary" rounded @click="$emit('search-query',cleanInput)">Find Schools</v-btn>
@@ -462,7 +476,8 @@ export default {
         lat: null,
         long: null,
         locale: [],
-        search: ""
+        search: "",
+        wioa: null
       },
       utility: {
         rules: {

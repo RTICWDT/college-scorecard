@@ -353,6 +353,24 @@
       </v-alert>
 
     </div>
+
+    <!-- WIOA Programs -->
+    <div class="">
+      <label class="subhead mb-2" id="search-fos-cred-level" for="search-fos-cred-level">
+        WIOA Programs
+      </label>
+
+      <v-checkbox
+        id="search-form-fos-wioa"
+        name="search-fos-wioa"
+        class="search-form-wioa-cb my-0 py-0"
+        v-model="input.cip4_degree"
+        label="Only show schools that have Department of Labor WIOA programs"
+        value="true"
+        color="secondary"
+        hide-details
+      ></v-checkbox>
+    </div>    
     
     <v-btn type='submit' class="sr-only" color="secondary" rounded @click="$emit('search-query',cleanInput)">Find Schools</v-btn>
 
@@ -397,7 +415,8 @@
           long: null,
           state: [],
           fos_salary:[0,150],
-          fos_debt:[0,50]
+          fos_debt:[0,50],
+          wioa: null
         },
         utility:{
           formDefault: {},

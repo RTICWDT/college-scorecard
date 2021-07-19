@@ -106,14 +106,6 @@
           @search-query="handleFieldOfStudySearch"
         />
 
-        <!-- Search Fields of Study Component -->
-        <search-fos-form
-          v-else-if="displayToggle === 'fos'"
-          :url-parsed-params="urlParsedParams"
-          auto-submit
-          @search-query="handleFieldOfStudySearch"
-        />
-
       </v-navigation-drawer>
 
       <v-main>
@@ -167,7 +159,7 @@
                         <v-list min-width="200">
                           <v-list-item-group v-model="input.sort" color="primary">
                             <v-list-item
-                              v-for="(item, index) in sorts"
+                              v-for="item in sorts"
                               :key="item.field"
                               @click="resort(item.field);"
                               :value="item.field"
@@ -187,7 +179,7 @@
                         <v-list min-width="200">
                           <v-list-item-group v-model="input.sort" color="primary">
                             <v-list-item
-                              v-for="(item, index) in sorts"
+                              v-for="item in sorts"
                               :key="item.field"
                               @click="resort(item.field);"
                               :value="item.field"
