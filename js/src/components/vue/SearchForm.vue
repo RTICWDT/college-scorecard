@@ -392,11 +392,11 @@
       ></v-select>
 
           <!-- WIOA Programs -->
-      <p class="subhead-2">WIOA Programs</p><tooltip definition="wioa-participants"/>
+      <p class="subhead-2">WIOA Programs<tooltip definition="wioa-participants"/></p>
       <v-checkbox
-        id="search-form-fos-wioa"
-        class="search-form-wioa-cb my-0 py-0"
-        v-model="input.wioa"
+        id="search-form-fos-dolflag"
+        class="search-form-dolflag-cb my-0 py-0"
+        v-model="input.dolflag"
         label="Only show schools that have Department of Labor WIOA programs"
         value="true"
         color="secondary"
@@ -477,7 +477,7 @@ export default {
         long: null,
         locale: [],
         search: "",
-        wioa: null
+        dolflag: null
       },
       utility: {
         rules: {

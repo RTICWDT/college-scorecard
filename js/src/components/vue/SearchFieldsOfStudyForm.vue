@@ -356,15 +356,15 @@
 
     <!-- WIOA Programs -->
     <div class="">
-      <label class="subhead mb-2" id="search-fos-wioa" for="search-fos-wioa">
+      <label class="subhead mb-2" id="search-fos-dolflag" for="search-fos-dolflag">
         WIOA Programs 
       </label><tooltip definition="wioa-participants"/>
 
       <v-checkbox
-        id="search-form-fos-wioa"
-        name="search-fos-wioa"
-        class="search-form-wioa-cb my-0 py-0"
-        v-model="input.cip4_degree"
+        id="search-form-fos-dolflag"
+        name="search-fos-dolflag"
+        class="search-form-dolflag-cb my-0 py-0"
+        v-model="input.dolflag"
         label="Only show schools that have Department of Labor WIOA programs"
         value="true"
         color="secondary"
@@ -416,7 +416,7 @@
           state: [],
           fos_salary:[0,150],
           fos_debt:[0,50],
-          wioa: null
+          dolflag: null
         },
         utility:{
           formDefault: {},
