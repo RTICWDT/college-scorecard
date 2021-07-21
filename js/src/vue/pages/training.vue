@@ -341,8 +341,6 @@
     min-height: 150px;
   }
 
-</style>
-<style lang="scss">
 .homeCallout {
   /*background-color: #ffffff;*/
   h2 {
@@ -364,7 +362,7 @@
   }
 
   p {
-    text-align: center;
+    text-align: left;
     padding: 0rem
       0.9rem;
 

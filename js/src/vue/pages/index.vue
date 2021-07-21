@@ -196,76 +196,90 @@
               <div class="home-callout-container mr-md-3">
 
                 <div class="home-callout-top mb-12">
-
+                  <div class="home-callout-text">
+                    <h2 class="title mt-4 mt-md-0">
+                      There's more than one pathway to a career
+                    </h2>
+                  </div>
                   <div class="home-icon-wrapper">
                     <div class="home-icon">
                       <img :src="`${$baseUrl}/img/icon-pathways.svg`" alt="Pathways Icon">
                     </div>
                   </div>
-
-                  <h2 class="title mt-4 mt-md-0">
-                    There's More than One Pathway to a Career
-                  </h2>
-
                 </div>
 
-                <h3>
-                  Jump start your career with an apprenticeship
-                </h3>
+                <p>
+                  Start your career and build your skill set through <strong>apprenticeships:</strong>
+                </p>
+
+                 <a class="homeCallout-indent" href="https://www.apprenticeship.gov/apprenticeship-finder"
+                     target="_blank"
+                     @click="trackOutboundLink($event)"
+                  >
+                    Go to apprenticeship.gov
+                    <v-icon
+                      x-small
+                      color="green"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>                    
+                  </a>
+
+                <hr/>
 
                 <p>
-                  Find the right one for you.
+                  Build your future with O*NET online, your tool for <strong>career exploration and job analysis:</strong>
                 </p>
 
-                <p class="home-callout-button-wrapper">
-                  <v-btn
-                    block
-                    rounded
-                    color="secondary"
-                    href="https://www.apprenticeship.gov/apprenticeship-finder"
-                    target="_blank"
-                    @click="trackOutboundLink($event)"
-                  >Go to apprenticeship.gov</v-btn>
-                </p>
+                 <a class="homeCallout-indent" href="https://www.onetonline.org/find/"
+                     target="_blank"
+                     @click="trackOutboundLink($event)"
+                  >
+                    Go to ONETonline.org
+                    <v-icon
+                      x-small
+                      color="green"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>                    
+                  </a>
 
-                <h3>
-                  What career is right for you?
-                </h3>
+                <hr/>        
 
                 <p>
-                  Curious what careers are out there? O*NET's Career Explorer is here to help!
+                  Discover Career One Stop, your source for <strong>career exploration training and jobs:</strong>
                 </p>
 
-                <p class="home-callout-button-wrapper">
-                  <v-btn
-                    block
-                    rounded
-                    color="secondary"
-                    href="https://www.onetonline.org/find/"
-                    target="_blank"
-                    @click="trackOutboundLink($event)"
-                  >Go to O’NET’s Career explorer</v-btn>
-                </p>
+                 <a class="homeCallout-indent" href="https://careeronestop.org"
+                     target="_blank"
+                     @click="trackOutboundLink($event)"
+                  >
+                    Go to CareerOneStop.org
+                    <v-icon
+                      x-small
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>                    
+                  </a>
 
-                <h3>
-                  Discover your future
-                </h3>
+                <hr/>                        
 
                 <p>
-                  Search for training and career opportunities.
+                  <strong>Find training programs:</strong> compare completion rates, employment rates, and more:
                 </p>
 
-                <p class="home-callout-button-wrapper">
-                  <v-btn
-                    block
-                    rounded
-                    color="secondary"
-                    href="https://www.trainingproviderresults.gov/#!/"
-                    target="_blank"
-                    @click="trackOutboundLink($event)"
-                  >Visit trainingproviderresults.gov</v-btn>
-                </p>
-
+                 <a class="homeCallout-indent" href="https://trainingproviderresults.gov"
+                     target="_blank"
+                     @click="trackOutboundLink($event)"
+                  >
+                    Go to TrainingProviderResults.gov
+                    <v-icon
+                      x-small
+                      color="green"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>                    
+                  </a>
               </div>
 
             </v-col>
@@ -280,32 +294,50 @@
               <div class="home-callout-container ml-md-3">
 
                 <div class="home-callout-top mb-12">
-
+                  <div class="home-callout-text">
+                    <h2 class="title mt-4 mt-md-0">
+                      Learn More About Paying for College
+                    </h2>
+                  </div>
                   <div class="home-icon-wrapper">
                     <div class="home-icon">
                       <img :src="`${$baseUrl}/img/icon-financial-aid.svg`" alt="Financial Aid Icon">
                     </div>
                   </div>
-
-                  <h2 class="title mt-4 mt-md-0">
-                    Learn More About Paying for College
-                  </h2>
-
                 </div>
 
-                <h3>
-                  Get started with Financial Aid
-                </h3>
+                <p>
+                  You can learn more about the types of financial aid that are available at
+
+                 <a href="https://studentaid.gov"
+                     target="_blank"
+                     @click="trackOutboundLink($event)"
+                  >
+                    StudentAid.gov
+                    <v-icon
+                      x-small
+                      color="green"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>                    
+                  </a>                  
+                </p>
 
                 <p>
-                  To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA).
-                  Use the
+                  To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA&#174;) form.
+                  You can use
 
                   <a href="https://fafsa.ed.gov/FAFSA/app/f4cForm"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
                     FAFSA<em>4caster</em>
+                    <v-icon
+                      x-small
+                      color="green"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>                     
                   </a>
 
                   to see how much aid may be available to you.
@@ -319,21 +351,36 @@
                     href="https://fafsa.ed.gov/"
                     target="_blank"
                     @click="trackOutboundLink($event)"
-                  >Start Your FAFSA&reg; Application</v-btn>
+                  >Start Your FAFSA&reg; Application
+                    <v-icon
+                      x-small
+                      color="green"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>
+                  </v-btn>
                 </p>
 
+                <hr/>
+
                 <p>
-                  Also look into other programs such as
+                  Veterans are eligible for higher education fudning through the G.I. Bill benefits. Use the 
 
                   <a
                     href="https://www.vets.gov/gi-bill-comparison-tool"
                     target="_blank"
                     @click="trackOutboundLink($event)"
                   >
-                    GI Bill&reg; Benefits
+                    GI Bill&reg; comparison tool 
+                    <v-icon
+                      x-small
+                      color="green"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>
                   </a>
 
-                  that may also help you pay for school.
+                  to learn about education programs and compare benefits by school.
                 </p>
               </div>
 
@@ -396,19 +443,23 @@
 
     @media (min-width: 960px) {
       height: 900px;
-      background: linear-gradient(to bottom, #97CFF5 50%, #0075B2 50%);
+      background: linear-gradient(to bottom, #97CFF5 70%, #0075B2 30%);
     }
+  }
+
+  .home-callout-text {
+    width:70%;
   }
 
   .home-callout-container{
     margin-bottom: 80px;
-    height: 630px;
+    height: 680px;
     background-color: white;
     box-shadow: 0px 3px 6px #00000029;
 
     @media (min-width: 960px) {
       margin-bottom: inherit;
-      height: 720px;
+      height: 820px;
     }
   }
 
@@ -448,32 +499,41 @@
 
 </style>
 <style lang="scss">
+@import 'sass/_variables.scss';
 .homeCallout {
   /*background-color: #ffffff;*/
+  a i {
+    color:$darker-green;
+  }
+  hr {
+    margin: 2rem 2rem;
+    height: 2px;
+  }
+  a.homeCallout-indent {
+    padding:0rem 2rem;
+  }
+
   h2 {
     font-weight: bold !important;
     /*color: #ffffff;*/
-    text-align: center;
+    text-align: left;
     padding: 1rem;
     /*margin-bottom: 2rem !important;*/
   }
 
   h3{
-    text-align: center;
+    text-align: left;
     margin-bottom: .5rem !important;
   }
 
   h3{
-    text-align: center;
+    text-align: left;
     margin-bottom: .5rem !important;
   }
 
   p {
-    text-align: center;
-    padding: 0rem
-      0.9rem;
-
-    margin-bottom: 2rem !important;
+    text-align: left;
+    padding: 0rem 2rem;
   }
   &.apprenticeships
     h2 {
@@ -494,15 +554,13 @@
   margin: 0 auto;
   width: 75px;
   height: 75px;
-  top: -35px;
+
   background: #FFFFFF;
-  border-radius: 50%;
-  box-shadow: 0px 3px 6px #00000029;
 
   @media (min-width: 960px) {
     width: 133px;
     height: 133px;
-    top: -50px;
+
   }
 }
   .home-callout-button-wrapper{
