@@ -7,13 +7,27 @@
         href="https://studentaid.ed.gov/sa/types#aid-from-the-federal-government"
         target="_blank"
         @click="trackOutboundLink($event)"
-      >StudentAid.gov</a>.
+      >StudentAid.gov
+        <v-icon
+          x-small
+          class="green-link"
+        >
+          fas fa-external-link-alt
+        </v-icon>        
+      </a>.
     </p>
     <p>
       To receive financial aid, you must complete the
       <em>Free Application for Federal Student Aid</em> (FAFSA&reg;) form. You can use
       <!--prettyhtml-ignore-->
-      <a href="https://fafsa.ed.gov/FAFSA/app/f4cForm" target="_blank" @click="trackOutboundLink($event)">FAFSA<em>4caster</em></a>
+      <a href="https://fafsa.ed.gov/FAFSA/app/f4cForm" target="_blank" @click="trackOutboundLink($event)">FAFSA<em>4caster</em> 
+        <v-icon
+          x-small
+          class="green-link"
+        >
+          fas fa-external-link-alt
+        </v-icon>        
+      </a>
       to see how much aid may be available to you.
     </p>
 
@@ -24,7 +38,13 @@
         href="https://fafsa.ed.gov/"
         target="_blank"
         @click="trackOutboundLink($event)"
-      >Start My FAFSA&reg; Form</v-btn>
+      >Start My FAFSA&reg; Form 
+        <v-icon
+          x-small
+        >
+          fas fa-external-link-alt
+        </v-icon>        
+      </v-btn>
     </p>
 
     <p>
@@ -33,7 +53,14 @@
         href="https://www.vets.gov/gi-bill-comparison-tool"
         target="_blank"
         @click="trackOutboundLink($event)"
-      >GI Bill Benefits</a> that may also help you pay for school.
+      >GI Bill Benefits 
+        <v-icon
+          x-small
+          class="green-link"
+        >
+          fas fa-external-link-alt
+        </v-icon>        
+      </a> that may also help you pay for school.
     </p>
   </div>
 </template>

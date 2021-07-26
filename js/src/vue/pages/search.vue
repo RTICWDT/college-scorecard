@@ -1,5 +1,4 @@
 <style lang="scss">
-@import "sass/_variables.scss";
   .canned-search-wrapper {
     margin-bottom: 8px;
   }
@@ -30,9 +29,8 @@
     a{
       color: white !important;
     }
-
-    @media (min-width: 960px){
-      width: 60%;
+   .dolflag-chip a{
+      color: rgba(0, 0, 0, 0.87) !important;
     }
   }
 
@@ -59,15 +57,12 @@
 </style>
 
 <style lang="scss" scoped>
+@import "sass/_variables.scss";
   .dolflag-chip {
     height: auto !important;
     white-space: normal;
     padding:30px;
     margin-right:30px;
-    .mdi-close-circle {
-      font-size:32px !important;
-      background: $green;
-    }
   }
 </style>
 
@@ -231,18 +226,14 @@
               >
               <v-row>
                 <v-col cols="12" sm="5" md="5" class="py-1 px-1">
-                  <v-chip class="dolflag-chip" large close @click:close="document.getElementById('search-form-dolflag').checked = false;"><span>Only show schools that have programs that qualify for the Department of Labor's WIOA program.<tooltip definition="wioa-participants"/></span></v-chip>
+                  <v-chip class="dolflag-chip" large close @click:close="handleDOLFlag"><span>Only show schools that have programs that qualify for the Department of Labor's WIOA program.<tooltip definition="wioa-participants"/></span></v-chip>
                   </v-col>
-                <v-col cols="12" sm="5" md="5" class="py-1 px-1">
+                <v-col cols="12" sm="7" md="7" class="py-1 px-1">
                   <p class="white--text">
                     Learn more about the Department of Labor's WIOA program at 
                     <a target="_blank" href="https://collegescorecard.ed.gov/training" class="white--text" >
                       CollegeScorecard.ed.gov/training.
                     </a>
-
-  <!--                  <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">-->
-
-  <!--                  </a>-->
 
                   </p>
                 </v-col>
@@ -250,24 +241,23 @@
               </div>              
 
               <!-- Field Of Study CIP 4 Information -->
-              <div v-if="displayToggle === 'fos' && !isLoading"
+              <div v-if="displayToggle === 'fos' && !isLoading && this.displayFlag"
                    id="search-fos-cip-warning"
                    class="my-2"
               >
               <v-row>
-                <v-col cols="6" sm="3" class="py-1 px-1 d-flex" v-if="displayFlag">
-                  <v-chip class="dolflag-chip" close  @click:close="document.getElementById('search-form-dolflag').checked = false;">
+                <v-col cols="12" sm="5" md="5" class="py-1 px-1">
+                  <v-chip class="dolflag-chip" large close @click:close="handleDOLFlag">
                     <span>Only show schools that have programs that qualify for the Department of Labor's WIOA program.<tooltip definition="wioa-participants"/>
                   <br/>
                     Learn more about the Department of Labor's WIOA program at 
                     <a target="_blank" href="https://collegescorecard.ed.gov/training">
                       CollegeScorecard.ed.gov/training.
                     </a>
-                    </span>
+                    </span>                    
                   </v-chip>
-
                 </v-col>
-               <v-col cols="6" sm="3" class="py-1 px-1 d-flex">
+                <v-col cols="12" sm="7" md="7" class="py-1 px-1">
                 <p class="white--text">
                   <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
                   Classification of Instructional Programs (CIP) and may not match the program titles at a
@@ -282,16 +272,9 @@
                     </v-icon>
 
                   </a>
-
-<!--                  <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">-->
-
-<!--                  </a>-->
-
                 </p>
-                </v-col>                
+                </v-col>
                 </v-row>              
-
-
               </div>
 
               <!-- No Results/Canned Search/ -->
@@ -866,6 +849,13 @@ export default {
       }else{
         this.handleInstitutionSearch(this.parseURLParams());
       }
+    },
+    handleDOLFlag() {
+      this.input.dolflag = false;
+      alert(JSON.stringify(this.$route.params));
+      this.urlParsedParams = this.parseURLParams();
+      
+      EventBus.$emit('reset-dol-flag');
     }
   }
 };

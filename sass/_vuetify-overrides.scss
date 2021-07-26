@@ -136,4 +136,13 @@ html{
     justify-items:start;
   }
 
+  .v-chip__close {
+    font-size:32px !important;
+    //background: $green !important;
+    color: $darker-green !important;
+  }  
+
+  .green-link {
+    color: $darker-green !important;
+  }
   }

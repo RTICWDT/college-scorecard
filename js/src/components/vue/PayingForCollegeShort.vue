@@ -7,7 +7,14 @@
         href="https://studentaid.ed.gov/sa/types#aid-from-the-federal-government"
         target="_blank"
         @click="trackOutboundLink($event)"
-      >FAFSA4caster</a> to see how much aid may be available to you.
+      >FAFSA4caster 
+        <v-icon
+          x-small
+          class="green-link"
+        >
+          fas fa-external-link-alt
+        </v-icon>      
+      </a> to see how much aid may be available to you.
     </p>
     <p class="text-center">
       <v-btn
@@ -16,7 +23,13 @@
         href="https://fafsa.ed.gov/"
         target="_blank"
         @click="trackOutboundLink($event)"
-      >Start Your FAFSA&reg;<br/> Application</v-btn>
+      >Start Your FAFSA&reg;<br/> Application 
+        <v-icon
+          x-small
+        >
+          fas fa-external-link-alt
+        </v-icon>      
+      </v-btn>
     </p>    
   </div>
 </template>

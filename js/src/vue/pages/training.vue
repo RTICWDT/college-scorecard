@@ -45,14 +45,15 @@
                    </v-col>
                    <v-col cols="12" md="6" sm="12" align="center">
                      <div class="search-nearby-container">
-                    <p class="text-center home-callout-button-wrapper justify-center" style="padding:10px; margin:20px 10px !important;">
+                    <p class="text-center home-callout-button-wrapper justify-center py-3 my-5">
 
                       <v-btn
                         large
                         color="secondary"
                         @click="handleSearchNearbySchools()"
+                        style="border:2px solid white !important;"
                       >
-                      <img :src="`${$baseUrl}/img/icon-Location.svg`" alt="Department of Labor Icon" style="padding:10px 30px 10px 10px; !important"/> SEARCH NEARBY SCHOOLS
+                      <img :src="`${$baseUrl}/img/icon-Location.svg`" alt="Department of Labor Icon" class="py-3 pl-3 pr-8"/> SEARCH NEARBY SCHOOLS
 
                       </v-btn>
                     </p>    
@@ -119,7 +120,13 @@
                     href="https://trainingproviderresults.gov"
                     target="_blank"
                     @click="trackOutboundLink($event)"
-                  >TRAININGPROVIDERRESULTS.GOV</a>
+                  >TRAININGPROVIDERRESULTS.GOV 
+                    <v-icon
+                      x-small
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>                  
+                  </a>
                 </p>
 
               </div>
@@ -154,7 +161,13 @@
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    FAFSA<em>4caster</em>
+                    FAFSA<em>4caster</em> 
+                    <v-icon
+                      x-small
+                      class="green-link"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>                    
                   </a>
 
                   to see how much aid may be available for you.
@@ -170,6 +183,7 @@
                   >Start Your FAFSA&reg; Application 
                     <v-icon
                       x-small
+                      color="white"
                     >
                       fas fa-external-link-alt
                     </v-icon>
@@ -207,6 +221,12 @@
 
 <style lang="scss" scoped>
 @import 'sass/_variables.scss';
+.home-splash {
+  background-image: url("../../../../img/background-2.svg") !important;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 .home-splash {
   min-height: 200px;
   padding-top: 1.5rem;
@@ -429,7 +449,7 @@
       window.location = `${this.$baseUrl}/search/?toggle=fos`;
     },
     handleSearchNearbySchools(){
-      this.handleLocationCheck(this.$baseUrl+'/search/?toggle=institutions&dolflag=1');
+      this.handleLocationCheck(this.$baseUrl+'/search/?toggle=institutions&dolflag=true');
       //window.location = this.$baseUrl+'/search/?toggle=institutions&dolflag=1&lat=0..0&long=0..0';
     },
   },

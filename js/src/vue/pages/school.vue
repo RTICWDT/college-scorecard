@@ -1410,7 +1410,7 @@
             </v-card>
 
             <v-card outline class="pa-5 mb-4" v-if="dolflag">
-              <wioa-eligible />
+              <wioa-eligible :schoolName="schoolName" />
             </v-card>
 
             <v-card outline class="pa-5"  v-if="dolflag">

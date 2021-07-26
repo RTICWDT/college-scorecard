@@ -204,7 +204,7 @@
         ></check-range>
       </div>
 
-      <p class="subhead-2">WIOA Programs<tooltip definition="wioa-participants"/></p>
+      <p v-if="!displayAllFilters" class="subhead-2">WIOA Programs<tooltip definition="wioa-participants"/></p>
       <v-checkbox
         id="search-form-dolflag"
         class="search-form-dolflag-cb my-0 py-0"
@@ -213,6 +213,7 @@
         value="true"
         color="secondary"
         hide-details
+        v-if="!displayAllFilters"
       ></v-checkbox>         
     </div>
 
@@ -403,7 +404,18 @@
         color="secondary"
         clearable
         aria-labelledby="religions-affiliation-label"
-      ></v-select>   
+      ></v-select>
+
+      <p class="subhead-2">WIOA Programs<tooltip definition="wioa-participants"/></p>
+      <v-checkbox
+        id="search-form-dolflag"
+        class="search-form-dolflag-cb my-0 py-0"
+        v-model="input.dolflag"
+        label="Only show schools that have Department of Labor WIOA programs"
+        value="true"
+        color="secondary"
+        hide-details
+      ></v-checkbox>        
     </div>
 
     <div id="search-submit-container" class="pa-2 text-center" v-if="!autoSubmit">
