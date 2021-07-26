@@ -146,7 +146,7 @@
 
                   <div class="home-icon-wrapper">
                     <div class="home-icon">
-                      <img :src="`${$baseUrl}/img/Icon-Financial-Aid-training.svg`" alt="Financial Aid Icon">
+                      <img :src="`${$baseUrl}/img/icon-Financial-Aid-training.svg`" alt="Financial Aid Icon">
                     </div>
                   </div>
                 </div>
