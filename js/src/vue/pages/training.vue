@@ -222,7 +222,7 @@
 <style lang="scss" scoped>
 @import 'sass/_variables.scss';
 .home-splash {
-  background-image: url("../../../../img/background-2.svg") !important;
+  background-image: url(this.$baseUrl + "/img/background-2.svg") !important;
   background-position:center;
   background-repeat: no-repeat;
   background-attachment: fixed;
