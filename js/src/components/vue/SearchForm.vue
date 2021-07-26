@@ -1,4 +1,7 @@
 <style lang="scss" scoped>
+.search-form-dolflag-cb div .v-input__slot  {
+      align-items: start;
+}
 .search-form-degree-wrapper {
   .v-messages {
     display: none;
@@ -200,6 +203,17 @@
           appendText="k"
         ></check-range>
       </div>
+
+      <p class="subhead-2">WIOA Programs<tooltip definition="wioa-participants"/></p>
+      <v-checkbox
+        id="search-form-dolflag"
+        class="search-form-dolflag-cb my-0 py-0"
+        v-model="input.dolflag"
+        label="Only show schools that have Department of Labor WIOA programs"
+        value="true"
+        color="secondary"
+        hide-details
+      ></v-checkbox>         
     </div>
 
     <div v-if="displayAllFilters" class="px-5 extraFilters">
@@ -389,22 +403,8 @@
         color="secondary"
         clearable
         aria-labelledby="religions-affiliation-label"
-      ></v-select>
-
-          <!-- WIOA Programs -->
-      <p class="subhead-2">WIOA Programs<tooltip definition="wioa-participants"/></p>
-      <v-checkbox
-        id="search-form-fos-dolflag"
-        class="search-form-dolflag-cb my-0 py-0"
-        v-model="input.dolflag"
-        label="Only show schools that have Department of Labor WIOA programs"
-        value="true"
-        color="secondary"
-        hide-details
-      ></v-checkbox>      
+      ></v-select>   
     </div>
-
-
 
     <div id="search-submit-container" class="pa-2 text-center" v-if="!autoSubmit">
       <v-btn color="secondary" rounded @click="$emit('search-query',cleanInput)">Find Schools</v-btn>

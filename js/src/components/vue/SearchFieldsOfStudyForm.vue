@@ -1,4 +1,7 @@
 <style lang="scss">
+.search-form-dolflag-cb div .v-input__slot {
+      align-items: start;
+}
   #fos-chip-container{
     width: 100%;
   }
@@ -361,7 +364,7 @@
       </label><tooltip definition="wioa-participants"/>
 
       <v-checkbox
-        id="search-form-fos-dolflag"
+        id="search-form-dolflag"
         name="search-fos-dolflag"
         class="search-form-dolflag-cb my-0 py-0"
         v-model="input.dolflag"

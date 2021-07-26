@@ -1,4 +1,5 @@
 <style lang="scss">
+@import "sass/_variables.scss";
   .canned-search-wrapper {
     margin-bottom: 8px;
   }
@@ -63,6 +64,10 @@
     white-space: normal;
     padding:30px;
     margin-right:30px;
+    .mdi-close-circle {
+      font-size:32px !important;
+      background: $green;
+    }
   }
 </style>
 
@@ -225,10 +230,10 @@
                    class="my-2"
               >
               <v-row>
-                <v-col cols="12" sm="5" class="py-1 px-1">
-                  <v-chip class="dolflag-chip" large close><span>Only show schools that have programs that qualify for the Department of Labor's WIOA program.<tooltip definition="wioa-participants"/></span></v-chip>
+                <v-col cols="12" sm="5" md="5" class="py-1 px-1">
+                  <v-chip class="dolflag-chip" large close @click:close="document.getElementById('search-form-dolflag').checked = false;"><span>Only show schools that have programs that qualify for the Department of Labor's WIOA program.<tooltip definition="wioa-participants"/></span></v-chip>
                   </v-col>
-                <v-col cols="12" sm="5" class="py-1 px-1">
+                <v-col cols="12" sm="5" md="5" class="py-1 px-1">
                   <p class="white--text">
                     Learn more about the Department of Labor's WIOA program at 
                     <a target="_blank" href="https://collegescorecard.ed.gov/training" class="white--text" >
@@ -250,8 +255,8 @@
                    class="my-2"
               >
               <v-row>
-                <v-col cols="12" sm="6" class="py-1 px-1" v-if="displayFlag">
-                  <v-chip class="dolflag-chip" close>
+                <v-col cols="6" sm="3" class="py-1 px-1 d-flex" v-if="displayFlag">
+                  <v-chip class="dolflag-chip" close  @click:close="document.getElementById('search-form-dolflag').checked = false;">
                     <span>Only show schools that have programs that qualify for the Department of Labor's WIOA program.<tooltip definition="wioa-participants"/>
                   <br/>
                     Learn more about the Department of Labor's WIOA program at 
@@ -262,7 +267,7 @@
                   </v-chip>
 
                 </v-col>
-               <v-col cols="12" sm="6" class="py-1 px-1">
+               <v-col cols="6" sm="3" class="py-1 px-1 d-flex">
                 <p class="white--text">
                   <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
                   Classification of Instructional Programs (CIP) and may not match the program titles at a

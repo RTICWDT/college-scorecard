@@ -5,72 +5,76 @@
       :compare-fields-of-study-count="compareFieldsOfStudy.length"
     />
     <v-main>
-
+    <div class="justify-center text-center" style="background:#fff;">
+      
+      <div class="text-center justify-center ms-8 py-4" style="width: max-content; margin: auto !important;"> 
+        <img :src="`${$baseUrl}/img/icon-Note.svg`" alt="Note Icon" style="vertical-align: middle;"/>  <span>The College Scorecard shows all schools and programs that qualify for Pell Grants <tooltip definition="wioa-participants"/></span>
+      </div>        
+      </div>
       <!-- Top Splash and Search-->
       <div class="home-splash">
         <v-container class="pt-0">
           <v-row>
             <!-- Header Info -->
-            <v-col cols="12">
+            <v-col cols="2"></v-col>
+            <v-col cols="8">
 
               <h1 class="white--text text-uppercase text-center">
-                Find the Right Fit.
+                Find the Right Training Program For You.
               </h1>
 
-              <p class="white--text text-center"> 
-                Does Jekyll polling work?
+              <p class="white--text text-center ms-8"> 
+                Training programs are a great way to jumpstart or reinvigorate your career. You may be eligible for free money to help pay for higher education!
               </p>
 
             </v-col>
+            <v-col cols="2"></v-col>
           </v-row>
 
           <v-row class="px-md-6">
+            <v-col
+              cols="12"
+              class="d-flex pb-10"
+            >
+              <v-card class="pa-8" width="100%">
+               <v-container>
+                 <v-row align="center">
+                   <v-col cols="12" md="6" sm="12">
+                     <h3 class="text-left pb-2">Schools with qualifying programs:<tooltip definition="wioa-participants"/></h3>
+                     <p>Search nearby schools that accept Pell Grants. These colleges also have eligible training programs for participants in Workforce Innovation and Opportunity Act (WIOA) programs, which are funded by the U.S. Department of Labor and operated by state and local grantees.</p>
+                   </v-col>
+                   <v-col cols="12" md="6" sm="12" align="center">
+                     <div class="search-nearby-container">
+                    <p class="text-center home-callout-button-wrapper justify-center" style="padding:10px; margin:20px 10px !important;">
+
+                      <v-btn
+                        large
+                        color="secondary"
+                        @click="handleSearchNearbySchools()"
+                      >
+                      <img :src="`${$baseUrl}/img/icon-Location.svg`" alt="Department of Labor Icon" style="padding:10px 30px 10px 10px; !important"/> SEARCH NEARBY SCHOOLS
+
+                      </v-btn>
+                    </p>    
+                    </div>                 
+                   </v-col>
+                 </v-row>
+               </v-container>     
+              </v-card> 
+            </v-col>
 
             <!-- Medium and Larger Tabs and Search Content -->
             <v-col
               cols="12"
-              class="d-none d-sm-flex pb-10"
-            >
-                  <v-card class="pa-5 homepage-search-container">
-                    <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
-
-                    <div class="mt-5 text-right">
-                      <v-btn
-                        text
-                        small
-                        @click="toggleCustomSearch = !toggleCustomSearch"
-                      >
-                        Custom Search
-                        <v-icon v-if="toggleCustomSearch">mdi-menu-up</v-icon>
-                        <v-icon v-else>mdi-menu-down</v-icon>
-                      </v-btn>
-                    </div>
-
-                    <div v-if="toggleCustomSearch">
-                      <search-form @search-query="directToSearch" />
-                    </div>
-                  </v-card>
+              class="d-sm-flex pb-10"
+            >           
+              <v-card class="pa-8" width="100%">
+                <h3 class="text-center pb-2">Search fields of study at schools that have WIOA training programs:<tooltip definition="wioa-participants"/></h3>
+                <field-of-study-search
+                  @field-of-study-selected="handleFieldOfStudySelected"
+                />             
+              </v-card>
             </v-col>
-
-            <!-- Mobile Expansion Panels and Search -->
-            <v-col cols="12" class="pa-5 d-block d-sm-none">
-              <v-expansion-panels class="mb-2" v-model="mobilePanels">
-
-                <!-- Mobile Institution Search -->
-                <v-expansion-panel>
-                  <v-expansion-panel-header>
-                    <span class="home-mobile-search-title">Search Schools</span>
-                  </v-expansion-panel-header>
-
-                  <v-expansion-panel-content>
-                    <name-autocomplete @school-name-selected="handleSchoolNameSelected" />
-                  </v-expansion-panel-content>
-
-                </v-expansion-panel>
-              </v-expansion-panels>
-
-            </v-col>
-
           </v-row>
         </v-container>
       </div>
@@ -95,71 +99,27 @@
 
                   <div class="home-icon-wrapper">
                     <div class="home-icon">
-                      <img :src="`${$baseUrl}/img/icon-pathways.svg`" alt="Pathways Icon">
+                      <img :src="`${$baseUrl}/img/Logo-Department-of-Labor.png`" alt="Department of Labor Icon">
                     </div>
                   </div>
 
-                  <h2 class="title mt-4 mt-md-0">
-                    There's More than One Pathway to a Career
-                  </h2>
 
                 </div>
 
                 <h3>
-                  Jump start your career with an apprenticeship
+                  Department of Labor WIOA Program
                 </h3>
 
                 <p>
-                  Find the right one for you.
+                  Department of Labor WIOA Program Some training programs are eligible for funding through the Workforce Innovation and Opportunity Act (WIOA), depending on your state and local needs. Search all training programs that are funded through WIOA on TrainingProviderResults.gov. This Department of Labor tool provides key outcome data on WIOA programs such as training completion, credential attainment, employment and wages.
                 </p>
 
-                <p class="home-callout-button-wrapper">
-                  <v-btn
-                    block
-                    rounded
-                    color="secondary"
-                    href="https://www.apprenticeship.gov/apprenticeship-finder"
+                <p class="home-callout-button-wrapper text-center">
+                  <a
+                    href="https://trainingproviderresults.gov"
                     target="_blank"
                     @click="trackOutboundLink($event)"
-                  >Go to apprenticeship.gov</v-btn>
-                </p>
-
-                <h3>
-                  What career is right for you?
-                </h3>
-
-                <p>
-                  Curious what careers are out there? O*NET's Career Explorer is here to help!
-                </p>
-
-                <p class="home-callout-button-wrapper">
-                  <v-btn
-                    block
-                    rounded
-                    color="secondary"
-                    href="https://www.onetonline.org/find/"
-                    target="_blank"
-                    @click="trackOutboundLink($event)"
-                  >Go to O’NET’s Career explorer</v-btn>
-                </p>
-
-                <h3>
-                  Discover your future
-                </h3>
-
-                <p>
-                  Search for training and career opportunities.
-                </p>
-
-                <p class="home-callout-button-wrapper">
-                  <v-btn
-                    block
-                    rounded
-                    color="secondary"
-                    href="https://www.trainingproviderresults.gov/#!/"
-                    target="_blank"
-                    @click="trackOutboundLink($event)"
-                  >Visit trainingproviderresults.gov</v-btn>
+                  >TRAININGPROVIDERRESULTS.GOV</a>
                 </p>
 
               </div>
@@ -179,24 +139,17 @@
 
                   <div class="home-icon-wrapper">
                     <div class="home-icon">
-                      <img :src="`${$baseUrl}/img/icon-financial-aid.svg`" alt="Financial Aid Icon">
+                      <img :src="`${$baseUrl}/img/Icon-Financial-Aid-training.svg`" alt="Financial Aid Icon">
                     </div>
                   </div>
-
-                  <h2 class="title mt-4 mt-md-0">
-                    Learn More About Paying for College
-                  </h2>
-
                 </div>
 
-                <h3>
+                <h2>
                   Get started with Financial Aid
-                </h3>
+                </h2>
 
                 <p>
-                  To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA).
-                  Use the
-
+                  Get Started with Financial Aid To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA). You also may qualify for a Pell Grant, which is a federal program that provides free money for higher education. In order to see if you qualify for a Pell Grant, you must submit a FAFSA. Use the  
                   <a href="https://fafsa.ed.gov/FAFSA/app/f4cForm"
                      target="_blank"
                      @click="trackOutboundLink($event)"
@@ -204,33 +157,25 @@
                     FAFSA<em>4caster</em>
                   </a>
 
-                  to see how much aid may be available to you.
+                  to see how much aid may be available for you.
                 </p>
 
                 <p class="text-center home-callout-button-wrapper">
                   <v-btn
                     block
-                    rounded
                     color="secondary"
                     href="https://fafsa.ed.gov/"
                     target="_blank"
                     @click="trackOutboundLink($event)"
-                  >Start Your FAFSA&reg; Application</v-btn>
+                  >Start Your FAFSA&reg; Application 
+                    <v-icon
+                      x-small
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>
+                  </v-btn>
                 </p>
 
-                <p>
-                  Also look into other programs such as
-
-                  <a
-                    href="https://www.vets.gov/gi-bill-comparison-tool"
-                    target="_blank"
-                    @click="trackOutboundLink($event)"
-                  >
-                    GI Bill&reg; Benefits
-                  </a>
-
-                  that may also help you pay for school.
-                </p>
               </div>
 
             </v-col>
@@ -263,8 +208,14 @@
 <style lang="scss" scoped>
 @import 'sass/_variables.scss';
 .home-splash {
-  min-height: 380px;
+  min-height: 200px;
   padding-top: 1.5rem;
+}
+.search-nearby-container{
+  background: #BFDDF2 0% 0% no-repeat padding-box;
+  border-radius: 16px;
+  padding:15px;
+  width:100%;
 }
 .v-tab {
   font-family: $header-font-family;
@@ -309,7 +260,7 @@
 
   .home-callout-top{
     background-color: #c4e4f9;
-    height: 120px;
+    height: 70px;
 
     h2{
       position: relative;
@@ -317,7 +268,7 @@
     }
 
     @media (min-width: 960px) {
-      height: 180px;
+      height: 70px;
     }
   }
 
@@ -424,9 +375,11 @@
   import CompareDrawer from "components/vue/CompareDrawer.vue";
   import CompareHeader from "components/vue/CompareHeader.vue";
   import { EventBus } from "../EventBus.js";
+  import Tooltip from "../../components/vue/Tooltip.vue";
+  import LocationCheck from '../../vue/mixins/LocationCheck.js'
 
   export default {
-  mixins: [AnalyticsEvents, compare],
+  mixins: [AnalyticsEvents, compare, LocationCheck],
   components: {
     "paying-for-college": PayingForCollege,
     "canned-search-container": CannedSearchContainer,
@@ -435,6 +388,7 @@
     "field-of-study-search": FieldOfStudySearch,
     "compare-drawer": CompareDrawer,
     "compare-header": CompareHeader,
+    'tooltip': Tooltip,
   },
   props: ["baseUrl",'compareSchools','compareFieldsOfStudy'],
   data() {
@@ -469,11 +423,15 @@
       }
     },
     handleFieldOfStudySelected(fieldOfStudy){
-      window.location = this.$baseUrl+'/search/?toggle=fos&cip4=' + encodeURIComponent(fieldOfStudy.cip4);
+      window.location = this.$baseUrl+'/search/?toggle=fos&dolflag=1&cip4=' + encodeURIComponent(fieldOfStudy.cip4);
     },
     handleFoSMoreOptionsClick(){
       window.location = `${this.$baseUrl}/search/?toggle=fos`;
-    }
+    },
+    handleSearchNearbySchools(){
+      this.handleLocationCheck(this.$baseUrl+'/search/?toggle=institutions&dolflag=1');
+      //window.location = this.$baseUrl+'/search/?toggle=institutions&dolflag=1&lat=0..0&long=0..0';
+    },
   },
   mounted() {
     EventBus.$on('compare-drawer-show', (showCompareInfo) => {

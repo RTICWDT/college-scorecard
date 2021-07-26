@@ -196,16 +196,20 @@
               <div class="home-callout-container mr-md-3">
 
                 <div class="home-callout-top mb-12">
-                  <div class="home-callout-text">
-                    <h2 class="title mt-4 mt-md-0">
-                      There's more than one pathway to a career
-                    </h2>
-                  </div>
-                  <div class="home-icon-wrapper">
-                    <div class="home-icon">
-                      <img :src="`${$baseUrl}/img/icon-pathways.svg`" alt="Pathways Icon">
+                  <v-row align="center">
+                    <v-col cols="8">
+                      <h2 class="title mt-4 mt-md-0 ml-8">
+                        There's more than one pathway to a career
+                      </h2>
+                    </v-col>
+                    <v-col cols="4">
+                    <div class="home-icon-wrapper  mr-8">
+                      <div class="home-icon">
+                        <img :src="`${$baseUrl}/img/icon-pathways-blue.svg`" alt="Pathways Icon">
+                      </div>
                     </div>
-                  </div>
+                    </v-col>
+                  </v-row>
                 </div>
 
                 <p>
@@ -219,7 +223,6 @@
                     Go to apprenticeship.gov
                     <v-icon
                       x-small
-                      color="green"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
@@ -238,7 +241,6 @@
                     Go to ONETonline.org
                     <v-icon
                       x-small
-                      color="green"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
@@ -275,7 +277,6 @@
                     Go to TrainingProviderResults.gov
                     <v-icon
                       x-small
-                      color="green"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
@@ -292,20 +293,22 @@
             >
 
               <div class="home-callout-container ml-md-3">
-
                 <div class="home-callout-top mb-12">
-                  <div class="home-callout-text">
-                    <h2 class="title mt-4 mt-md-0">
+                <v-row align="center">
+                  <v-col cols="8">
+                    <h2 class="title mt-4 mt-md-0 ml-8">
                       Learn More About Paying for College
                     </h2>
-                  </div>
-                  <div class="home-icon-wrapper">
+                  </v-col>
+                  <v-col cols="4">
+                  <div class="home-icon-wrapper mr-8">
                     <div class="home-icon">
                       <img :src="`${$baseUrl}/img/icon-financial-aid.svg`" alt="Financial Aid Icon">
                     </div>
                   </div>
+                  </v-col>
+                  </v-row>
                 </div>
-
                 <p>
                   You can learn more about the types of financial aid that are available at
 
@@ -316,7 +319,6 @@
                     StudentAid.gov
                     <v-icon
                       x-small
-                      color="green"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
@@ -334,7 +336,6 @@
                     FAFSA<em>4caster</em>
                     <v-icon
                       x-small
-                      color="green"
                     >
                       fas fa-external-link-alt
                     </v-icon>                     
@@ -354,7 +355,6 @@
                   >Start Your FAFSA&reg; Application
                     <v-icon
                       x-small
-                      color="green"
                     >
                       fas fa-external-link-alt
                     </v-icon>
@@ -374,7 +374,6 @@
                     GI Bill&reg; comparison tool 
                     <v-icon
                       x-small
-                      color="green"
                     >
                       fas fa-external-link-alt
                     </v-icon>
@@ -468,7 +467,6 @@
     height: 120px;
 
     h2{
-      position: relative;
       bottom: 50px;
     }
 
@@ -503,11 +501,14 @@
 .homeCallout {
   /*background-color: #ffffff;*/
   a i {
-    color:$darker-green;
+    color:$darker-green !important;
   }
   hr {
     margin: 2rem 2rem;
-    height: 2px;
+    height: 1px;
+    border: none;
+    color: #000;
+    background-color: #000;
   }
   a.homeCallout-indent {
     padding:0rem 2rem;
@@ -554,8 +555,6 @@
   margin: 0 auto;
   width: 75px;
   height: 75px;
-
-  background: #FFFFFF;
 
   @media (min-width: 960px) {
     width: 133px;
