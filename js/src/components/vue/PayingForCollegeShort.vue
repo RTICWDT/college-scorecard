@@ -7,10 +7,10 @@
         href="https://studentaid.ed.gov/sa/types#aid-from-the-federal-government"
         target="_blank"
         @click="trackOutboundLink($event)"
-      >FAFSA4caster 
+      >FAFSA4caster
         <v-icon
           x-small
-          class="green-link"
+          class="green-link pl-1"
         >
           fas fa-external-link-alt
         </v-icon>      
@@ -23,9 +23,10 @@
         href="https://fafsa.ed.gov/"
         target="_blank"
         @click="trackOutboundLink($event)"
-      >Start Your FAFSA&reg;<br/> Application 
+      >Start Your FAFSA&reg;<br/> Application
         <v-icon
           x-small
+          class="pl-1"
         >
           fas fa-external-link-alt
         </v-icon>      

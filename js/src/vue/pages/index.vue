@@ -198,12 +198,12 @@
                 <div class="home-callout-top mb-12">
                   <v-row align="center">
                     <v-col cols="8">
-                      <h2 class="title mt-4 mt-md-0 ml-8">
+                      <h2 class="title mt-4 mt-md-0 ml-10">
                         There's more than one pathway to a career
                       </h2>
                     </v-col>
                     <v-col cols="4">
-                    <div class="home-icon-wrapper  mr-8">
+                    <div class="home-icon-wrapper  mr-10">
                       <div class="home-icon">
                         <img :src="`${$baseUrl}/img/icon-pathways-blue.svg`" alt="Pathways Icon">
                       </div>
@@ -212,17 +212,18 @@
                   </v-row>
                 </div>
 
-                <p>
+                <p class="mx-10">
                   Start your career and build your skill set through <strong>apprenticeships:</strong>
                 </p>
 
-                 <a class="homeCallout-indent" href="https://www.apprenticeship.gov/apprenticeship-finder"
+                 <a class="homeCallout-indent mx-10" href="https://www.apprenticeship.gov/apprenticeship-finder"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
                     Go to apprenticeship.gov
                     <v-icon
                       x-small
+                      class="pl-1"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
@@ -230,17 +231,18 @@
 
                 <hr/>
 
-                <p>
+                <p class="mx-10">
                   Build your future with O*NET online, your tool for <strong>career exploration and job analysis:</strong>
                 </p>
 
-                 <a class="homeCallout-indent" href="https://www.onetonline.org/find/"
+                 <a class="homeCallout-indent mx-10" href="https://www.onetonline.org/find/"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
                     Go to ONETonline.org
                     <v-icon
                       x-small
+                      class="pl-1"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
@@ -248,17 +250,18 @@
 
                 <hr/>        
 
-                <p>
+                <p class="mx-10">
                   Discover Career One Stop, your source for <strong>career exploration training and jobs:</strong>
                 </p>
 
-                 <a class="homeCallout-indent" href="https://careeronestop.org"
+                 <a class="homeCallout-indent mx-10" href="https://careeronestop.org"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
                     Go to CareerOneStop.org
                     <v-icon
                       x-small
+                      class="pl-1"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
@@ -266,17 +269,18 @@
 
                 <hr/>                        
 
-                <p>
+                <p class="mx-10">
                   <strong>Find training programs:</strong> compare completion rates, employment rates, and more:
                 </p>
 
-                 <a class="homeCallout-indent" href="https://trainingproviderresults.gov"
+                 <a class="homeCallout-indent mx-10" href="https://trainingproviderresults.gov"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
                     Go to TrainingProviderResults.gov
                     <v-icon
                       x-small
+                      class="pl-1"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
@@ -296,12 +300,12 @@
                 <div class="home-callout-top mb-12">
                 <v-row align="center">
                   <v-col cols="8">
-                    <h2 class="title mt-4 mt-md-0 ml-8">
+                    <h2 class="title mt-4 mt-md-0 ml-10">
                       Learn More About Paying for College
                     </h2>
                   </v-col>
                   <v-col cols="4">
-                  <div class="home-icon-wrapper mr-8">
+                  <div class="home-icon-wrapper mr-10">
                     <div class="home-icon">
                       <img :src="`${$baseUrl}/img/icon-financial-aid.svg`" alt="Financial Aid Icon">
                     </div>
@@ -309,7 +313,7 @@
                   </v-col>
                   </v-row>
                 </div>
-                <p>
+                <p class="mx-10">
                   You can learn more about the types of financial aid that are available at
 
                  <a href="https://studentaid.gov"
@@ -319,13 +323,14 @@
                     StudentAid.gov
                     <v-icon
                       x-small
+                      class="pl-1"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
                   </a>                  
                 </p>
 
-                <p>
+                <p class="mx-10">
                   To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA&#174;) form.
                   You can use
 
@@ -336,6 +341,7 @@
                     FAFSA<em>4caster</em>
                     <v-icon
                       x-small
+                      class="pl-1"
                     >
                       fas fa-external-link-alt
                     </v-icon>                     
@@ -344,7 +350,7 @@
                   to see how much aid may be available to you.
                 </p>
 
-                <p class="text-center home-callout-button-wrapper">
+                <p class="text-center home-callout-button-wrapper mx-10">
                   <v-btn
                     block
                     rounded
@@ -355,6 +361,8 @@
                   >Start Your FAFSA&reg; Application
                     <v-icon
                       x-small
+                      color="white"
+                      class="pl-1"
                     >
                       fas fa-external-link-alt
                     </v-icon>
@@ -363,7 +371,7 @@
 
                 <hr/>
 
-                <p>
+                <p class="mx-10">
                   Veterans are eligible for higher education fudning through the G.I. Bill benefits. Use the 
 
                   <a
@@ -371,9 +379,10 @@
                     target="_blank"
                     @click="trackOutboundLink($event)"
                   >
-                    GI Bill&reg; comparison tool 
+                    GI Bill&reg; comparison tool
                     <v-icon
                       x-small
+                      class="pl-1"
                     >
                       fas fa-external-link-alt
                     </v-icon>
@@ -471,7 +480,7 @@
     }
 
     @media (min-width: 960px) {
-      height: 180px;
+      height: 160px;
     }
   }
 
@@ -504,14 +513,14 @@
     color:$darker-green !important;
   }
   hr {
-    margin: 2rem 2rem;
+    margin: 2rem 56px;
     height: 1px;
     border: none;
-    color: #000;
-    background-color: #000;
+    color: #9d9d9d;
+    background-color: #9d9d9d;
   }
   a.homeCallout-indent {
-    padding:0rem 2rem;
+    padding:0rem 1rem;
   }
 
   h2 {
@@ -534,7 +543,7 @@
 
   p {
     text-align: left;
-    padding: 0rem 2rem;
+    padding: 0rem 1rem;
   }
   &.apprenticeships
     h2 {

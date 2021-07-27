@@ -21,10 +21,9 @@
                                   
                   <v-expansion-panel-header>July 30, 2021</v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <p>On July 30, 2021, the Department published a new page on the College Scorecard that provided information on the Department of Labor’s Workforce Innovation and Opportunity Act (WIOA) training providers and how they intersect with the schools available on the College Scorecard. Visitors can now search for institutions on the Scorecard that offer training programs that qualify for WIOA.</p>
-                    <p>In addition, the Department updated data elements that appear on the College Scorecard website/API:</p>
-                    <ul><li>Added a data flag to indicate whether an institution appears in the Department of Labor’s list of Workforce Innovation and Opportunity Act (WIOA) approved training providers based on matching institutional identifying information.</li>
-                    <li>Included updates (more recent data values) derived from Federal Student Aid sources for the following data metrics: Cohort Default Rates, Currently Operating Status Flag, Heightened Cash Monitoring Flag, Accrediting Agency Name and Code, Title IV Approval Date, Cohort Default Rate, and Federal School Code.</li>
+                    <p>On July 30, 2021, the Department updated and added new data elements that appear on the consumer website and/or the downloadable data files/API:</p>
+                    <ul><li>Additions: a new data point that indicates whether an institution appears in the Department of Labor’s WIOA list of approved training providers based on matching institutional identifying information.</li>
+                    <li>Updates: more recent data values derived from Federal Student Aid sources for the following data metrics: Currently Operating Status Flag, Accrediting Agency Name and Code, Title IV Approval Date, and Federal School Code.</li>
                     </ul>
                   </v-expansion-panel-content>
                 </v-expansion-panel>

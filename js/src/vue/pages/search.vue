@@ -12,7 +12,7 @@
     bottom: 64px;
   }
 
-  #search-fos-cip-warning, #Search-institutions-dolflag{
+  #search-fos-cip-warning, #search-institutions-dolflag{
     width: 100%;
 
     p{
@@ -61,7 +61,7 @@
   .dolflag-chip {
     height: auto !important;
     white-space: normal;
-    padding:30px;
+    padding:18px;
     margin-right:30px;
   }
 </style>
@@ -140,8 +140,8 @@
                           class="d-inline d-sm-none"
                         >
                           <span >
-                            <v-icon class=''>mdi-close-circle</v-icon>
                             <span class='sr-only'>Clear Search</span>
+                            <v-icon class=''>mdi-close-circle</v-icon>
                           </span>
                         </v-btn>
 
@@ -155,14 +155,14 @@
                           class="d-none d-sm-inline"
                         >
                           <span >
-                            <v-icon small class='mr-1'>mdi-close-circle</v-icon> Clear
+                            Clear <v-icon small class='mr-1'>mdi-close-circle</v-icon>
                           </span>
                         </v-btn>
 
                         <v-menu offset-y>
                         <template v-slot:activator="{ on }">
                           <v-btn id="search-button-sort" rounded color="primary" small v-on="on" class="d-none d-sm-inline">
-                            <v-icon small class='mr-1'>fas fa-sort</v-icon> Sort
+                            Sort <v-icon small class='mr-1'>fas fa-sort</v-icon>
                           </v-btn>                          
                         </template>
                         <v-list min-width="200">
@@ -181,8 +181,8 @@
                       <v-menu offset-y>
                         <template v-slot:activator="{ on }">
                           <v-btn rounded color="primary" x-small v-on="on" fab class="d-inline d-sm-none">
-                            <v-icon small class=''>fas fa-sort</v-icon>
                             <span class='sr-only'>Sort</span>
+                            <v-icon small class=''>fas fa-sort</v-icon>
                           </v-btn>
                         </template>
                         <v-list min-width="200">
@@ -225,8 +225,8 @@
                    class="my-2"
               >
               <v-row>
-                <v-col cols="12" sm="5" md="5" class="py-1 px-1">
-                  <v-chip class="dolflag-chip" large close @click:close="handleDOLFlag"><span>Only show schools that have programs that qualify for the Department of Labor's WIOA program.<tooltip definition="wioa-participants"/></span></v-chip>
+                <v-col cols="12" sm="5" md="5" class="py-1 pl-3 pr-1">
+                  <v-chip class="dolflag-chip" close @click:close="handleDOLFlag"><span>Only show schools that have programs that qualify for the Department of Labor's WIOA program.<tooltip definition="wioa-participants"/></span></v-chip>
                   </v-col>
                 <v-col cols="12" sm="7" md="7" class="py-1 px-1">
                   <p class="white--text">
@@ -246,8 +246,8 @@
                    class="my-2"
               >
               <v-row>
-                <v-col cols="12" sm="5" md="5" class="py-1 px-1">
-                  <v-chip class="dolflag-chip" large close @click:close="handleDOLFlag">
+                <v-col cols="12" sm="5" md="5" class="py-1 pl-3 pr-1">
+                  <v-chip class="dolflag-chip" close @click:close="handleDOLFlag">
                     <span>Only show schools that have programs that qualify for the Department of Labor's WIOA program.<tooltip definition="wioa-participants"/>
                   <br/>
                     Learn more about the Department of Labor's WIOA program at 
@@ -257,7 +257,7 @@
                     </span>                    
                   </v-chip>
                 </v-col>
-                <v-col cols="12" sm="7" md="7" class="py-1 px-1">
+                <v-col cols="12" sm="7" md="7" class="py-1 px-4">
                 <p class="white--text">
                   <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
                   Classification of Instructional Programs (CIP) and may not match the program titles at a
@@ -267,6 +267,7 @@
                     <v-icon
                       x-small
                       color="white"
+                      class="pl-1"
                     >
                       fas fa-external-link-alt
                     </v-icon>
@@ -625,12 +626,12 @@ export default {
 
       this.error.message = null;
 
-        if (typeof params['dolflag'] === 'undefined' || params['dolflag'] === 'false' ){
-            this.displayFlag = false;
-        }
-        else{
-            this.displayFlag = true;
-        }      
+      if (typeof params['dolflag'] === 'undefined' || params['dolflag'] === 'false' ){
+          this.displayFlag = false;
+      }
+      else{
+          this.displayFlag = true;
+      }      
 
       // let poppingState = false;
       // let alreadyLoaded = false;
@@ -852,9 +853,13 @@ export default {
     },
     handleDOLFlag() {
       this.input.dolflag = false;
-      alert(JSON.stringify(this.$route.params));
       this.urlParsedParams = this.parseURLParams();
-      
+      delete this.urlParsedParams.dolflag;
+      if(this.displayToggle === 'fos'){
+        this.handleFieldOfStudySearch(this.urlParsedParams);
+      }else{
+        this.handleInstitutionSearch(this.urlParsedParams);
+      }
       EventBus.$emit('reset-dol-flag');
     }
   }

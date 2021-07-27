@@ -8,10 +8,10 @@
           rounded
           :small="small"
           :text="text"
-          class='d-none d-sm-inline'
+          class='d-none d-sm-inline share'
         >
       
-          <v-icon x-small class='mr-2'>fas fa-share</v-icon> {{label}}
+          {{label}} <v-icon x-small class='ml-2'>fas fa-share</v-icon>
         </v-btn>
       </template>
       <v-list min-width="200">
@@ -37,9 +37,9 @@
           rounded
           fab 
           :x-small="small"
-          class='d-inline d-sm-none'
+          class='d-inline d-sm-none share'
         >
-          <v-icon x-small>fas fa-share</v-icon>
+          <v-icon x-small class='share'>fas fa-share</v-icon>
           <span class='sr-only'>Share</span>
         </v-btn>
       </template>

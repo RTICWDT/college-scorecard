@@ -140,7 +140,7 @@
               sm="12"
             >
 
-              <div class="home-callout-container ml-md-3 px-10">
+              <div class="home-callout-container ml-md-3">
 
                 <div class="home-callout-top mb-12">
 
@@ -151,17 +151,17 @@
                   </div>
                 </div>
 
-                <h3 class="pb-5">
+                <h3 class="pb-5  mx-10">
                   Get Started with Financial Aid
                 </h3>
 
-                <p>
+                <p class="mx-10">
                   To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA). You also may qualify for a Pell Grant, which is a federal program that provides free money for higher education. In order to see if you qualify for a Pell Grant, you must submit a FAFSA. Use the  
                   <a href="https://fafsa.ed.gov/FAFSA/app/f4cForm"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    FAFSA<em>4caster</em> 
+                    FAFSA<em>4caster</em>
                     <v-icon
                       x-small
                       class="green-link pl-1"
@@ -173,9 +173,8 @@
                   to see how much aid may be available for you.
                 </p>
 
-                <p class="text-center home-callout-button-wrapper white--text">
+                <p class="text-center home-callout-button-wrapper white--text mx-10">
                   <v-btn
-                    block
                     color="secondary"
                     href="https://fafsa.ed.gov/"
                     target="_blank"
@@ -228,7 +227,7 @@
     background-image: linear-gradient(to bottom, rgb(39, 113, 173, .24) 30%, rgb(0, 54, 94, 1) 30% 65%, rgb(39, 113, 173, 1) 65% 100%), url("data:image/svg+xml,%3Csvg width='84' height='48' viewBox='0 0 84 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h12v6H0V0zm28 8h12v6H28V8zm14-8h12v6H42V0zm14 0h12v6H56V0zm0 8h12v6H56V8zM42 8h12v6H42V8zm0 16h12v6H42v-6zm14-8h12v6H56v-6zm14 0h12v6H70v-6zm0-16h12v6H70V0zM28 32h12v6H28v-6zM14 16h12v6H14v-6zM0 24h12v6H0v-6zm0 8h12v6H0v-6zm14 0h12v6H14v-6zm14 8h12v6H28v-6zm-14 0h12v6H14v-6zm28 0h12v6H42v-6zm14-8h12v6H56v-6zm0-8h12v6H56v-6zm14 8h12v6H70v-6zm0 8h12v6H70v-6zM14 24h12v6H14v-6zm14-8h12v6H28v-6zM14 8h12v6H14V8zM0 8h12v6H0V8z' fill='%233d82b1' fill-opacity='0.24' fill-rule='evenodd'/%3E%3C/svg%3E") !important;  
 }
 .home-splash {
-  background-image: url("/img/background-2.svg") !important;
+  background-image: linear-gradient(to bottom, rgb(39, 113, 173, .24) 30%, rgb(0, 54, 94, 1) 30% 65%), url("/img/background-2.svg") !important;
   background-position:center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -453,7 +452,7 @@
       }
     },
     handleFieldOfStudySelected(fieldOfStudy){
-      window.location = this.$baseUrl+'/search/?toggle=fos&dolflag=1&cip4=' + encodeURIComponent(fieldOfStudy.cip4);
+      window.location = this.$baseUrl+'/search/?toggle=fos&dolflag=true&cip4=' + encodeURIComponent(fieldOfStudy.cip4);
     },
     handleFoSMoreOptionsClick(){
       window.location = `${this.$baseUrl}/search/?toggle=fos`;

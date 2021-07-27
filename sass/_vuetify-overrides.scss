@@ -33,13 +33,14 @@ html{
         max-width: 1300px;
       }
     }
-    .v-btn.secondary{
+    .v-btn.secondary:not(.share):not(.fos-button):not(.filter-button){
       letter-spacing: normal;
       height:50px !important;
       border-radius: 16px !important;
       border:2px solid white !important;
       border-color:#fff !important;
       color:#fff !important;
+      padding:0 34px;
     }
 
     .title, .display-1, .display-2, .display-3, .display-4
@@ -139,11 +140,14 @@ html{
     justify-items:start;
   }
 
-  .v-chip__close {
+  .dolflag-chip .v-chip__close {
     font-size:32px !important;
-    //background: $green !important;
-    color: $darker-green !important;
+    margin-right:16px !important;
   }  
+
+  .v-chip__close {
+    color: $darker-green !important;
+  }
 
   .green-link {
     color: $darker-green !important;

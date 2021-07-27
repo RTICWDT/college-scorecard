@@ -552,19 +552,19 @@
                       <p class="my-2">
                         <span class="d-block d-sm-inline">Sort by:</span>
                         <v-btn
-                          class="ma-1"
+                          class="ma-1 fos-button"
                           :color="field_sort == 'ipeds_award_count'? 'secondary':null"
                           small
                           @click="field_sort = 'ipeds_award_count'"
                         >Largest Size</v-btn>
                         <v-btn
-                          class="ma-1"
+                          class="ma-1 fos-button"
                           :color="field_sort == 'highest_earnings'? 'secondary':null"
                           small
                           @click="field_sort = 'highest_earnings'"
                         >Highest Earnings</v-btn>
                         <v-btn
-                          class="ma-1"
+                          class="ma-1 fos-button"
                           :color="field_sort == 'lowest_debt'? 'secondary':null"
                           small
                           @click="field_sort = 'lowest_debt'"

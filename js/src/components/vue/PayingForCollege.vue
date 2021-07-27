@@ -10,7 +10,7 @@
       >StudentAid.gov
         <v-icon
           x-small
-          class="green-link"
+          class="green-link pl-1"
         >
           fas fa-external-link-alt
         </v-icon>        
@@ -23,7 +23,7 @@
       <a href="https://fafsa.ed.gov/FAFSA/app/f4cForm" target="_blank" @click="trackOutboundLink($event)">FAFSA<em>4caster</em> 
         <v-icon
           x-small
-          class="green-link"
+          class="green-link pl-1"
         >
           fas fa-external-link-alt
         </v-icon>        
@@ -38,9 +38,10 @@
         href="https://fafsa.ed.gov/"
         target="_blank"
         @click="trackOutboundLink($event)"
-      >Start My FAFSA&reg; Form 
+      >Start My FAFSA&reg; Form
         <v-icon
           x-small
+          class="pl-1 green-link"
         >
           fas fa-external-link-alt
         </v-icon>        
@@ -53,10 +54,10 @@
         href="https://www.vets.gov/gi-bill-comparison-tool"
         target="_blank"
         @click="trackOutboundLink($event)"
-      >GI Bill Benefits 
+      >GI Bill Benefits
         <v-icon
           x-small
-          class="green-link"
+          class="green-link pl-1"
         >
           fas fa-external-link-alt
         </v-icon>        
