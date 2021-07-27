@@ -228,5 +228,11 @@
     "default": "<p>WIOA participants are schools that participate in the Workforce Innovation and Opportunity Act (WIOA) Dislocated Worker or Adult program which provides unemployment benefits while enrolled. Note that not all program offerings within participating schools necessarily offer unemployment benefits and prospective students interested in enrolling should contact their state unemployment insurance to understand which program offerings are eligible.</p>",
     "glossary": "<p>WIOA participants are schools that participate in the Workforce Innovation and Opportunity Act (WIOA) Dislocated Worker or Adult program which provides unemployment benefits while enrolled. Note that not all program offerings within participating schools necessarily offer unemployment benefits and prospective students interested in enrolling should contact their state unemployment insurance to understand which program offerings are eligible.</p>",
     "branch": false    
+  },
+  "pell-grant": {
+    "title": "Pell Grant",
+    "default": "<p>A Pell Grant is a grant provided by the federal government that is usually awarded only to undergraduate students who display exceptional financial need and have not earned a bachelor's, graduate, or professional degree. A Federal Pell Grant, unlike a loan, does not have to be repaid, except under certain circumstances.</p>",
+    "glossary": "<p>A Pell Grant is a grant provided by the federal government that is usually awarded only to undergraduate students who display exceptional financial need and have not earned a bachelor's, graduate, or professional degree. A Federal Pell Grant, unlike a loan, does not have to be repaid, except under certain circumstances.</p>",
+    "branch": false    
   }
 }
