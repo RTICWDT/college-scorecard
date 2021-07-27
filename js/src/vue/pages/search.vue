@@ -140,8 +140,8 @@
                           class="d-inline d-sm-none"
                         >
                           <span >
-                            <span class='sr-only'>Clear Search</span>
                             <v-icon class=''>mdi-close-circle</v-icon>
+                            <span class='sr-only'>Clear Search</span>
                           </span>
                         </v-btn>
 
@@ -155,14 +155,14 @@
                           class="d-none d-sm-inline"
                         >
                           <span >
-                            Clear <v-icon small class='mr-1'>mdi-close-circle</v-icon>
+                            <v-icon small class='mr-1'>mdi-close-circle</v-icon> Clear
                           </span>
                         </v-btn>
 
                         <v-menu offset-y>
                         <template v-slot:activator="{ on }">
                           <v-btn id="search-button-sort" rounded color="primary" small v-on="on" class="d-none d-sm-inline">
-                            Sort <v-icon small class='mr-1'>fas fa-sort</v-icon>
+                            <v-icon small class='mr-1'>fas fa-sort</v-icon> Sort
                           </v-btn>                          
                         </template>
                         <v-list min-width="200">
@@ -181,8 +181,8 @@
                       <v-menu offset-y>
                         <template v-slot:activator="{ on }">
                           <v-btn rounded color="primary" x-small v-on="on" fab class="d-inline d-sm-none">
-                            <span class='sr-only'>Sort</span>
                             <v-icon small class=''>fas fa-sort</v-icon>
+                            <span class='sr-only'>Sort</span>
                           </v-btn>
                         </template>
                         <v-list min-width="200">
@@ -257,7 +257,7 @@
                     </span>                    
                   </v-chip>
                 </v-col>
-                <v-col cols="12" sm="7" md="7" class="py-1 px-4">
+                <v-col cols="12" sm="7" md="7" class="py-1 px-1">
                 <p class="white--text">
                   <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
                   Classification of Instructional Programs (CIP) and may not match the program titles at a

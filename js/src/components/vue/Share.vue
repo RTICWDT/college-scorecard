@@ -11,7 +11,7 @@
           class='d-none d-sm-inline share'
         >
       
-          {{label}} <v-icon x-small class='ml-2'>fas fa-share</v-icon>
+          <v-icon x-small class='mr-2'>fas fa-share</v-icon> {{label}}
         </v-btn>
       </template>
       <v-list min-width="200">
