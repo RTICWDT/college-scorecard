@@ -91,7 +91,7 @@
                 <a
                   href="https://api.data.gov/docs/rate-limits/"
                   target="_blank"
-                >data.gov</a>
+                >data.gov</a>.
               </p>
 
               <h3>Structure</h3>

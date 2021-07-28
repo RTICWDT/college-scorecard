@@ -819,7 +819,7 @@
                 <v-expansion-panel>
                   <v-expansion-panel-header
                     @click="trackAccordion('Salary after Completing by Field of Study')"
-                  >Salary after Completing by Field of Study</v-expansion-panel-header>
+                  >Salary After Completing by Field of Study</v-expansion-panel-header>
                   <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
                     <compare-section
                       :schools="schools"
