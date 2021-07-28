@@ -86,7 +86,12 @@
                 or by completing the form
                 <a
                   href="#api-key-signup"
-                >below.</a>
+                >below.</a> 
+                Read more about the API rate limit on 
+                <a
+                  href="https://api.data.gov/socs/rate-limits/"
+                  target="_blank"
+                >data.gov</a>
               </p>
 
               <h3>Structure</h3>
