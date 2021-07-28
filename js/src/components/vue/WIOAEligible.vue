@@ -5,7 +5,7 @@
       Some training programs are eligible for funding through the Workforce Innovation and Opportunity Act (WIOA), depending on your state and 
       local needs. Search for all eligible WIOA programs available at {{schoolName}} on 
       <a
-        href="trainingproviderresults.gov"
+        href="https://trainingproviderresults.gov"
         target="_blank"
         @click="trackOutboundLink($event)"
       >TrainingProviderResults.gov

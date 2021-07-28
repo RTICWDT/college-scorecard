@@ -350,9 +350,8 @@
                   to see how much aid may be available to you.
                 </p>
 
-                <p class="text-center home-callout-button-wrapper mx-10">
+                <p class="text-center home-callout-button-wrapper mx-10 pb-3 pt-9">
                   <v-btn
-                    block
                     rounded
                     color="secondary"
                     href="https://fafsa.ed.gov/"
