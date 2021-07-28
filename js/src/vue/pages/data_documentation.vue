@@ -89,7 +89,7 @@
                 >below.</a> 
                 Read more about the API rate limit on 
                 <a
-                  href="https://api.data.gov/socs/rate-limits/"
+                  href="https://api.data.gov/docs/rate-limits/"
                   target="_blank"
                 >data.gov</a>
               </p>
