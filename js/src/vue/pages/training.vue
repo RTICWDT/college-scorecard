@@ -443,24 +443,11 @@
       // Direct to location.
       window.location.href = url;
     },
-    handleSchoolNameSelected(school) {
-      if(typeof school == "string")
-      {
-        // window.location = this.$baseUrl+'/search/?name=' + encodeURIComponent(school);
-        window.location = this.$baseUrl+'/search/?search=' + encodeURIComponent(school);
-      }else{
-        // window.location = this.$baseUrl+'/search/?name=' + encodeURIComponent(school['school.name']) + "&id="+school.id;
-        window.location = this.$baseUrl+'/search/?search=' + encodeURIComponent(school['school.name']) + "&id="+school.id;
-      }
-    },
     handleFieldOfStudySelected(fieldOfStudy){
-      window.location = this.$baseUrl+'/search/?toggle=fos&dolflag=true&cip4=' + encodeURIComponent(fieldOfStudy.cip4);
-    },
-    handleFoSMoreOptionsClick(){
-      window.location = `${this.$baseUrl}/search/?toggle=fos`;
+      this.handleLocationCheck(this.$baseUrl+'/search/?toggle=fos&dolflag=true&sort=avg_net_price:asc&cip4=' + encodeURIComponent(fieldOfStudy.cip4));
     },
     handleSearchNearbySchools(){
-      this.handleLocationCheck(this.$baseUrl+'/search/?toggle=institutions&dolflag=true');
+      this.handleLocationCheck(this.$baseUrl+'/search/?toggle=institutions&dolflag=true&sort=avg_net_price:asc');
       //window.location = this.$baseUrl+'/search/?toggle=institutions&dolflag=1&lat=0..0&long=0..0';
     },
   },

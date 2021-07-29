@@ -88,6 +88,7 @@
 
   .search-fos-chip-close-container{
     display: inline-block;
+    width:24px;
     i {
       color:$darker-green !important;
     }
