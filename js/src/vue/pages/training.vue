@@ -24,7 +24,7 @@
               </h1>
 
               <p class="white--text text-center ms-8"> 
-                Training programs are a great way to jumpstart or reinvigorate your career. You may be eligible for free money to help pay for higher education!
+                Training programs are a great way to jumpstart or reinvigorate your career. You may be eligible for funding to help pay for higher education!
               </p>
 
             </v-col>
@@ -41,7 +41,7 @@
                  <v-row align="center">
                    <v-col cols="12" md="6" sm="12">
                      <h3 class="text-left pb-2">Schools with qualifying programs<tooltip definition="wioa-participants"/></h3>
-                     <p>Search nearby schools that accept Pell Grants. These colleges also have eligible training programs for participants in Workforce Innovation and Opportunity Act (WIOA) programs, which are funded by the U.S. Department of Labor and operated by state and local grantees.</p>
+                     <p>Search nearby schools that accept Pell Grants. These colleges may also have eligible training programs for participants in Workforce Innovation and Opportunity Act (WIOA) programs, which are funded by the U.S. Department of Labor and operated by state and local grantees.</p>
                    </v-col>
                    <v-col cols="12" md="6" sm="12" align="center">
                      <div class="search-nearby-container">
