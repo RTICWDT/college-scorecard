@@ -44,7 +44,13 @@
                      <p>Search nearby schools that both accept Pell Grants and are Workforce Innovation and Opportunity Act (WIOA) eligible training providers.</p>
                      <p>These colleges have eligible training programs where participants may be able to receive funding from WIOA in addition to Pell Grants. <em>In some states, Unemployment Insurance (UI) recipients can attend school or training and continue to receive UI benefits (<a href="https://www.dol.gov/general/topic/unemployment-insurance"
                         target="_blank"
-                        @click="trackOutboundLink($event)">learn more about UI benefits</a> in your state).</em></p>
+                        @click="trackOutboundLink($event)">learn more about UI benefits
+                    <v-icon
+                      x-small
+                      class="pl-1"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon></a> in your state).</em></p>
                    </v-col>
                    <v-col cols="12" md="6" sm="12" align="center">
                      <div class="search-nearby-container">
@@ -362,6 +368,10 @@
     /*background-color: #436692;*/
   }
 }
+
+  a i {
+    color:$darker-green !important;
+  }
 
 .sublink {
   text-decoration: none;
