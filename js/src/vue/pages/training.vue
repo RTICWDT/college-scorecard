@@ -8,7 +8,7 @@
     <div class="justify-center" style="background:#fff;width:100%;">    
         <v-container><v-row>
           <v-col cols="1" class="justify-end"><img :src="`${$baseUrl}/img/icon-Note.svg`" alt="Note Icon" style="vertical-align: middle;float:right;"/></v-col>
-          <v-col cols="11"><p class="align-left text-left" style="">CollegeScorecard.ed.gov/training provides information on colleges that provide Pell Grants<tooltip definition="pell-grant" style="vertical-align: text-bottom;"/> and that also have workforce programs approved by the Department of Labor. For the full list of colleges, click &nbsp;<a href="/">here</a>.</p></v-col>
+          <v-col cols="11"><p class="align-left text-left" style="">CollegeScorecard.ed.gov/training provides information on colleges that provide Pell Grants<tooltip definition="pell-grant" style="vertical-align: text-bottom;"/> and that also have workforce programs approved by the Department of Labor. For the full list of colleges, click <a href="/">here</a>.</p></v-col>
           </v-row></v-container>     
       </div>
       <!-- Top Splash and Search-->
@@ -42,8 +42,7 @@
                    <v-col cols="12" md="6" sm="12">
                      <h3 class="text-left pb-2">Schools with WIOA eligible programs<tooltip definition="wioa-participants"/></h3>
                      <p>Search nearby schools that both accept Pell Grants and are Workforce Innovation and Opportunity Act (WIOA) eligible training providers.</p>
-                     <p>These colleges have eligible training programs where participants may be able to receive funding from WIOA in addition to Pell Grants. <em>In some states, Unemployment Insurance (UI) recipients can attend school or training and continue to receive UI benefits (
-                       <a href="https://www.dol.gov/general/topic/unemployment-insurance"
+                     <p>These colleges have eligible training programs where participants may be able to receive funding from WIOA in addition to Pell Grants. <em>In some states, Unemployment Insurance (UI) recipients can attend school or training and continue to receive UI benefits (<a href="https://www.dol.gov/general/topic/unemployment-insurance"
                         target="_blank"
                         @click="trackOutboundLink($event)">learn more about UI benefits</a> in your state).</em></p>
                    </v-col>
