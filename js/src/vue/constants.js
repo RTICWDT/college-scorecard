@@ -32,6 +32,7 @@ export const fields = {
   HIGHEST_DEGREE:       'school.degrees_awarded.highest',
   UNDER_INVESTIGATION:  'school.under_investigation',
   AID_ELIGIBILITY:      'school.title_iv.eligibility_type',
+  DOLFLAG:              'school.dolflag',
 
   // net price
   NET_PRICE:            'latest.cost.avg_net_price.overall',

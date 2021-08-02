@@ -552,19 +552,19 @@
                       <p class="my-2">
                         <span class="d-block d-sm-inline">Sort by:</span>
                         <v-btn
-                          class="ma-1"
+                          class="ma-1 fos-button"
                           :color="field_sort == 'ipeds_award_count'? 'secondary':null"
                           small
                           @click="field_sort = 'ipeds_award_count'"
                         >Largest Size</v-btn>
                         <v-btn
-                          class="ma-1"
+                          class="ma-1 fos-button"
                           :color="field_sort == 'highest_earnings'? 'secondary':null"
                           small
                           @click="field_sort = 'highest_earnings'"
                         >Highest Earnings</v-btn>
                         <v-btn
-                          class="ma-1"
+                          class="ma-1 fos-button"
                           :color="field_sort == 'lowest_debt'? 'secondary':null"
                           small
                           @click="field_sort = 'lowest_debt'"
@@ -1408,9 +1408,18 @@
               />
 
             </v-card>
-            <v-card outline class="pa-5">
-              <paying-for-college />
+
+            <v-card outline class="pa-5 mb-4" v-if="dolflag">
+              <wioa-eligible :schoolName="schoolName" />
             </v-card>
+
+            <v-card outline class="pa-5"  v-if="dolflag">
+              <paying-for-college-short />
+            </v-card>
+            <v-card outline class="pa-5"  v-else>
+              <paying-for-college />
+            </v-card>            
+
           </v-col>
         </v-row>
       </v-container>
@@ -1661,6 +1670,8 @@ import URLHistory from "vue/mixins/URLHistory.js";
 import { apiGet } from '../api.js';
 import AnalyticsEvents from "vue/mixins/AnalyticsEvents.js";
 import { EventBus } from "../EventBus.js";
+import WIOAEligible from '../../components/vue/WIOAEligible.vue';
+import PayingForCollegeShort from "../../components/vue/PayingForCollegeShort.vue";
 
 export default {
   mixins: [compare, URLHistory, ComplexFields, AnalyticsEvents],
@@ -1686,7 +1697,9 @@ export default {
     "multi-range": MultiRange,
     'field-of-study-select': FieldOfStudySelect,
     'field-of-study-search': FieldOfStudySearch,
-    'field-data-extended': FieldDataExtended
+    'field-data-extended': FieldDataExtended,
+    'wioa-eligible': WIOAEligible,
+    "paying-for-college-short": PayingForCollegeShort
   },
   data() {
     return {

@@ -21,3 +21,4 @@ __tests__/reports/*
 test/reports/*
 analytics.txt
 __tests__/output/*.png
+_includes/js-config.html
