@@ -8,7 +8,7 @@
     <div class="justify-center" style="background:#fff;width:100%;">    
         <v-container><v-row>
           <v-col cols="1" class="justify-end"><img :src="`${$baseUrl}/img/icon-Note.svg`" alt="Note Icon" style="vertical-align: middle;float:right;"/></v-col>
-          <v-col cols="11"><p class="align-left text-left" style="">CollegeScorecard.ed.gov/training provides information on colleges that provide Pell Grants<tooltip definition="pell-grant" style="vertical-align: text-bottom;"/> and that also have workforce programs approved by the Department of Labor. For the full list of colleges, click <a href="/">here</a>.</p></v-col>
+          <v-col cols="11"><p class="align-left text-left" style="">CollegeScorecard.ed.gov/training provides information on colleges that provide Pell Grants<tooltip definition="pell-grant" style="vertical-align: text-bottom;margin-left:-5px;"/>and that also have workforce programs approved by the Department of Labor. For the full list of colleges, click <a href="/">here</a>.</p></v-col>
           </v-row></v-container>     
       </div>
       <!-- Top Splash and Search-->
