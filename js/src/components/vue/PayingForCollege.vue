@@ -38,10 +38,11 @@
         href="https://fafsa.ed.gov/"
         target="_blank"
         @click="trackOutboundLink($event)"
-      >Start My FAFSA&reg; Form
+      >Start Your FAFSA&reg;<br/>Application
         <v-icon
           x-small
-          class="pl-1 green-link"
+          class="pl-1"
+          style="margin-top: 10px;margin-left: -20px;"
         >
           fas fa-external-link-alt
         </v-icon>        
