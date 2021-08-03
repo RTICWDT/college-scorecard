@@ -23,6 +23,7 @@ const alias = {
   religious:            fields.RELIGIOUS,
   fos_salary:           fields.FIELD_OF_STUDY_EARNINGS + '__range',
   fos_debt:             fields.FIELD_OF_STUDY_DEBT + '__range',
+  dolflag:              fields.DOLFLAG,
 
   // below allows you to just pluck one school 
   // if coming from a selected name search
