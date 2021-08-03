@@ -27,7 +27,7 @@
         <v-icon
           x-small
           class="pl-1"
-          style="margin-top: 10px;margin-left: -20px;"
+          style="margin-top: 15px;margin-left: -24px;"
         >
           fas fa-external-link-alt
         </v-icon>      
