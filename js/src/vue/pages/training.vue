@@ -6,9 +6,9 @@
     />
     <v-main>
     <div class="justify-center" style="background:#fff;width:100%;">    
-        <v-container><v-row>
+        <v-container><v-row class="ml-2">
           <v-col cols="1" class="justify-end"><img :src="`${$baseUrl}/img/icon-Note.svg`" alt="Note Icon" style="vertical-align: middle;float:right;"/></v-col>
-          <v-col cols="11"><p class="align-left text-left" style="">CollegeScorecard.ed.gov/training provides information on colleges that provide Pell Grants<tooltip definition="pell-grant" style="vertical-align: text-bottom;margin-left:-5px;"/>and that also have workforce programs approved by the Department of Labor. For the full list of colleges, click <a href="/">here</a>.</p></v-col>
+          <v-col cols="11"><p class="align-left text-left" style="">CollegeScorecard.ed.gov/training provides information on colleges that provide Pell Grants<tooltip definition="pell-grant" style="vertical-align: text-bottom;margin-left:-5px;margin-right:-5px;"/>and that also have workforce programs approved by the Department of Labor. For the full list of colleges, click <a href="/">here</a>.</p></v-col>
           </v-row></v-container>     
       </div>
       <!-- Top Splash and Search-->
@@ -23,7 +23,7 @@
                 Find the Right Training Program For You.
               </h1>
 
-              <p class="white--text text-center ms-8"> 
+              <p class="white--text text-center mx-8"> 
                 Training programs are a great way to jumpstart or reinvigorate your career. You may be eligible for funding to help pay for higher education!
               </p>
 
@@ -39,7 +39,7 @@
               <v-card class="pa-8" width="100%">
                <v-container>
                  <v-row align="center">
-                   <v-col cols="12" md="6" sm="12">
+                   <v-col cols="12" lg="6" md="12" sm="12">
                      <h3 class="text-left pb-2">Schools with WIOA eligible programs<tooltip definition="wioa-participants"/></h3>
                      <p>Search nearby schools that both accept Pell Grants and are Workforce Innovation and Opportunity Act (WIOA) eligible training providers.</p>
                      <p>These colleges have eligible training programs where participants may be able to receive funding from WIOA in addition to Pell Grants. <em>In some states, Unemployment Insurance (UI) recipients can attend school or training and continue to receive UI benefits (<a href="https://www.dol.gov/general/topic/unemployment-insurance"
@@ -52,7 +52,7 @@
                       fas fa-external-link-alt
                     </v-icon></a> in your state).</em></p>
                    </v-col>
-                   <v-col cols="12" md="6" sm="12" align="center">
+                   <v-col cols="12" lg="6" md="12" sm="12" align="center">
                      <div class="search-nearby-container">
                     <p class="text-center home-callout-button-wrapper justify-center py-3 my-5">
 
