@@ -12,7 +12,7 @@
     bottom: 64px;
   }
 
-  #search-fos-cip-warning{
+  #search-fos-cip-warning, #search-institutions-dolflag{
     width: 100%;
 
     p{
@@ -29,9 +29,8 @@
     a{
       color: white !important;
     }
-
-    @media (min-width: 960px){
-      width: 60%;
+   .dolflag-chip a{
+      color: rgba(0, 0, 0, 0.87) !important;
     }
   }
 
@@ -54,6 +53,16 @@
       }
     }
 
+  }
+</style>
+
+<style lang="scss" scoped>
+@import "sass/_variables.scss";
+  .dolflag-chip {
+    height: auto !important;
+    white-space: normal;
+    padding:18px;
+    margin-right:30px;
   }
 </style>
 
@@ -96,14 +105,6 @@
           auto-submit
           display-all-filters
           @search-query="handleInstitutionSearch"
-        />
-
-        <!-- Search Fields of Study Component -->
-        <search-fos-form
-          v-else-if="displayToggle === 'fos'"
-          :url-parsed-params="urlParsedParams"
-          auto-submit
-          @search-query="handleFieldOfStudySearch"
         />
 
         <!-- Search Fields of Study Component -->
@@ -167,7 +168,7 @@
                         <v-list min-width="200">
                           <v-list-item-group v-model="input.sort" color="primary">
                             <v-list-item
-                              v-for="(item, index) in sorts"
+                              v-for="item in sorts"
                               :key="item.field"
                               @click="resort(item.field);"
                               :value="item.field"
@@ -187,7 +188,7 @@
                         <v-list min-width="200">
                           <v-list-item-group v-model="input.sort" color="primary">
                             <v-list-item
-                              v-for="(item, index) in sorts"
+                              v-for="item in sorts"
                               :key="item.field"
                               @click="resort(item.field);"
                               :value="item.field"
@@ -218,11 +219,45 @@
                 </v-row>
               </v-card>
 
+              <!-- Instituition Information -->
+              <div v-if="displayToggle === 'institutions' && !isLoading && this.displayFlag"
+                   id="search-institutions-dolflag"
+                   class="my-2"
+              >
+              <v-row>
+                <v-col cols="12" sm="5" md="5" class="py-1 pl-3 pr-1">
+                  <v-chip class="dolflag-chip" close @click:close="handleDOLFlag"><span>Only show schools that have programs that qualify for the Department of Labor's WIOA program.<tooltip definition="wioa-participants"/></span></v-chip>
+                  </v-col>
+                <v-col cols="12" sm="7" md="7" class="py-1 px-1">
+                  <p class="white--text">
+                    Learn more about the Department of Labor's WIOA program at 
+                    <a target="_blank" href="https://collegescorecard.ed.gov/training" class="white--text" >
+                      CollegeScorecard.ed.gov/training.
+                    </a>
+
+                  </p>
+                </v-col>
+                </v-row>
+              </div>              
+
               <!-- Field Of Study CIP 4 Information -->
-              <div v-if="displayToggle === 'fos' && !isLoading"
+              <div v-if="displayToggle === 'fos' && !isLoading && this.displayFlag"
                    id="search-fos-cip-warning"
                    class="my-2"
               >
+              <v-row>
+                <v-col cols="12" sm="5" md="5" class="py-1 pl-3 pr-1">
+                  <v-chip class="dolflag-chip" close @click:close="handleDOLFlag">
+                    <span>Only show schools that have programs that qualify for the Department of Labor's WIOA program.<tooltip definition="wioa-participants"/>
+                  <br/>
+                    Learn more about the Department of Labor's WIOA program at 
+                    <a target="_blank" href="https://collegescorecard.ed.gov/training">
+                      CollegeScorecard.ed.gov/training.
+                    </a>
+                    </span>                    
+                  </v-chip>
+                </v-col>
+                <v-col cols="12" sm="7" md="7" class="py-1 px-1">
                 <p class="white--text">
                   <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
                   Classification of Instructional Programs (CIP) and may not match the program titles at a
@@ -232,17 +267,15 @@
                     <v-icon
                       x-small
                       color="white"
+                      class="pl-1"
                     >
                       fas fa-external-link-alt
                     </v-icon>
 
                   </a>
-
-<!--                  <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">-->
-
-<!--                  </a>-->
-
                 </p>
+                </v-col>
+                </v-row>              
               </div>
 
               <!-- No Results/Canned Search/ -->
@@ -426,6 +459,7 @@ import ContextToggle from '../../components/vue/ContextToggle.vue';
 import SearchFieldsOfStudyForm from '../../components/vue/SearchFieldsOfStudyForm.vue';
 import FieldOfStudyResultCard from '../../components/vue/FieldOfStudyResultCard.vue';
 import { compare } from "vue/mixins.js";
+import Tooltip from "../../components/vue/Tooltip.vue";
 
 import _ from "lodash";
 import { EventBus } from "../EventBus.js";
@@ -446,7 +480,8 @@ export default {
     "name-autocomplete": NameAutocomplete,
     'context-toggle': ContextToggle,
     'search-fos-form': SearchFieldsOfStudyForm,
-    'fos-result-card': FieldOfStudyResultCard
+    'fos-result-card': FieldOfStudyResultCard,
+    'tooltip': Tooltip
   },
   mixins:[URLHistory, PrepareParams, compare],
   props: {
@@ -499,7 +534,8 @@ export default {
       shareUrl: null,
       displayToggle: 'institutions',
       controlTab: 1,
-      fieldOfStudyTotalCountWithoutRangeFilters: 0
+      fieldOfStudyTotalCountWithoutRangeFilters: 0,
+      displayFlag: false
     };
   },
   created() {
@@ -507,7 +543,7 @@ export default {
     this.utility.formDefault = _.cloneDeep(this.input);
 
     this.urlParsedParams = this.parseURLParams();
-
+    
     // Add sort to state if it exists
     this.input.sort = this.urlParsedParams.sort
       ? this.urlParsedParams.sort
@@ -525,6 +561,13 @@ export default {
     }else{
       this.displayToggle = 'fos';
       this.controlTab = 1;
+    }
+
+    if (typeof this.urlParsedParams.dolflag === 'undefined' || this.urlParsedParams.dolflag === 'false' ){
+        this.displayFlag = false;
+    }
+    else{
+        this.displayFlag = true;
     }
 
     // Create Debounce function for this page.
@@ -583,6 +626,13 @@ export default {
 
       this.error.message = null;
 
+      if (typeof params['dolflag'] === 'undefined' || params['dolflag'] === 'false' ){
+          this.displayFlag = false;
+      }
+      else{
+          this.displayFlag = true;
+      }      
+
       // let poppingState = false;
       // let alreadyLoaded = false;
 
@@ -619,6 +669,7 @@ export default {
         toggle: this.displayToggle
       });
 
+
       history.replaceState(params, "search", qs);
 
       this.addURLToStorage(qs);
@@ -634,7 +685,7 @@ export default {
       }).catch((error) => {
         console.warn("Error fetching search.");
         this.$emit("loading", false);
-        
+
         this.results = {
           meta: {},
           schools:[]
@@ -799,6 +850,17 @@ export default {
       }else{
         this.handleInstitutionSearch(this.parseURLParams());
       }
+    },
+    handleDOLFlag() {
+      this.input.dolflag = false;
+      this.urlParsedParams = this.parseURLParams();
+      delete this.urlParsedParams.dolflag;
+      if(this.displayToggle === 'fos'){
+        this.handleFieldOfStudySearch(this.urlParsedParams);
+      }else{
+        this.handleInstitutionSearch(this.urlParsedParams);
+      }
+      EventBus.$emit('reset-dol-flag');
     }
   }
 };

@@ -8,6 +8,11 @@ env:
 # Controls when the action will run. 
 on:
   push:
+    branches:
+      - dev
+      - staging
+      - master
+      
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -17,6 +22,7 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-18.04
+    timeout-minutes: 20
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:

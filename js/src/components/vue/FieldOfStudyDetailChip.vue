@@ -54,6 +54,7 @@
 </template>
 
 <style lang="scss">
+@import "sass/_variables.scss";
   .fos-chip-detail {
     max-height: 200px;
     overflow-y: auto;
@@ -87,6 +88,10 @@
 
   .search-fos-chip-close-container{
     display: inline-block;
+    width:24px;
+    i {
+      color:$darker-green !important;
+    }
   }
 
 </style>
