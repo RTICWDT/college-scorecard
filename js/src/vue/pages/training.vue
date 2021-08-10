@@ -461,7 +461,6 @@
     },
     handleSearchNearbySchools(){
       this.handleLocationCheck(this.$baseUrl+'/search/?toggle=institutions&dolflag=true&sort=avg_net_price:asc');
-      //window.location = this.$baseUrl+'/search/?toggle=institutions&dolflag=1&lat=0..0&long=0..0';
     },
   },
   mounted() {
