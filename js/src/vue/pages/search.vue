@@ -241,12 +241,12 @@
               </div>              
 
               <!-- Field Of Study CIP 4 Information -->
-              <div v-if="displayToggle === 'fos' && !isLoading && this.displayFlag"
+              <div 
                    id="search-fos-cip-warning"
                    class="my-2"
               >
               <v-row>
-                <v-col cols="12" sm="5" md="5" class="py-1 pl-3 pr-1">
+                <v-col cols="12" sm="5" md="5" class="py-1 pl-3 pr-1" v-if="displayToggle === 'fos' && !isLoading && this.displayFlag">
                   <v-chip class="dolflag-chip" close @click:close="handleDOLFlag">
                     <span>Only show schools that have programs that qualify for the Department of Labor's WIOA program.<tooltip definition="wioa-participants"/>
                   <br/>
@@ -257,8 +257,8 @@
                     </span>                    
                   </v-chip>
                 </v-col>
-                <v-col cols="12" sm="7" md="7" class="py-1 px-1">
-                <p class="white--text">
+                <v-col cols="12" sm="7" md="7" class="py-1 px-1"  v-if="displayToggle === 'fos'">
+                <p class="white--text pl-2">
                   <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
                   Classification of Instructional Programs (CIP) and may not match the program titles at a
                   given school.
@@ -628,9 +628,11 @@ export default {
 
       if (typeof params['dolflag'] === 'undefined' || params['dolflag'] === 'false' ){
           this.displayFlag = false;
+          this.input.dolflag = null;
       }
       else{
           this.displayFlag = true;
+          this.input.dolflag = null;
       }      
 
       // let poppingState = false;
@@ -852,15 +854,14 @@ export default {
       }
     },
     handleDOLFlag() {
-      this.input.dolflag = false;
+      //this.input.dolflag = null;
+      //delete this.input.dolflag;
       this.urlParsedParams = this.parseURLParams();
       delete this.urlParsedParams.dolflag;
-      if(this.displayToggle === 'fos'){
-        this.handleFieldOfStudySearch(this.urlParsedParams);
-      }else{
-        this.handleInstitutionSearch(this.urlParsedParams);
-      }
+      this.debounceSearchUpdate(this.urlParsedParams);
       EventBus.$emit('reset-dol-flag');
+
+      
     }
   }
 };

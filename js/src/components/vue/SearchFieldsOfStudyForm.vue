@@ -551,6 +551,9 @@
     mounted() {
       EventBus.$on('search-form-reset', (e) => {
         this.resetFormDefault();
+      }),
+      EventBus.$on('reset-dol-flag', (e) => {
+          this.input.dolflag = null;
       });
     },
     methods:{
