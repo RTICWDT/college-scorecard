@@ -269,47 +269,39 @@
                     <div
                       class="text-right pa-2 field-of-study-select-container-header"
                     >
-                      <!-- <v-btn
+                      <v-btn
                         v-if="selectedFOS"
                         text
                         small
-                        :color="black"
-                        @click="
-                          $emit(
-                            'toggle-compare-school',
-                            generateCompareFieldOfStudy(selectedFOSDetail),
-                            'compare-fos'
+                        :color="
+                          $store.state.fos.find(
+                            (itm) =>
+                              itm.code === selectedFOS.code &&
+                              itm.credential.level ===
+                                selectedFOS.credential.level
                           )
+                            ? '#0470AA'
+                            : 'black'
+                        "
+                        @click="
+                          $store.commit('toggleFieldOfStudy', selectedFOSDetail)
                         "
                       >
-                        <v-icon
-                          class="mr-2"
-                          :color="
-                            isSelected(
-                              this.generateCompareFieldOfStudy(
-                                this.selectedFOSDetail
-                              ),
-                              this.compareFieldsOfStudy
-                            )
-                              ? '#0075B2'
-                              : 'black'
-                          "
-                          >fa fa-check-circle</v-icon
-                        >
+                        <v-icon class="mr-2">fa fa-check-circle</v-icon>
                         <div
                           v-if="
-                            !isSelected(
-                              this.generateCompareFieldOfStudy(
-                                this.selectedFOSDetail
-                              ),
-                              this.compareFieldsOfStudy
+                            !$store.state.fos.find(
+                              (itm) =>
+                                itm.code === selectedFOS.code &&
+                                itm.credential.level ===
+                                  selectedFOS.credential.level
                             )
                           "
                         >
                           Add to Compare Field of Study
                         </div>
                         <div v-else>&nbsp;Added to Compare</div>
-                      </v-btn> -->
+                      </v-btn>
                     </div>
 
                     <div>
@@ -392,12 +384,6 @@
                           program titles at {{ schoolName }}.
                         </p>
 
-                        <!--                          <p>-->
-                        <!--                            Amet consectetur adipiscing elit ut aliquam purus sit. Posuere ac ut consequat semper-->
-                        <!--                            viverra nam libero justo. Aliquet sagittis id consectetur purus ut faucibus pulvinar-->
-                        <!--                            elementum integer.-->
-                        <!--                          </p>-->
-
                         <div class="fos-profile-mini-summary-info pa-2">
                           <p class="mt-4">
                             We have information on
@@ -430,7 +416,7 @@
                 <v-expansion-panel-header
                   id="fields-of-study"
                   aria-controls="fos-content"
-                  @click="trackAccordion('o Study')"
+                  @click="trackAccordion('Field of Study')"
                 >
                   <span
                     class="field-of-study-select-icon mr-2"
@@ -2541,10 +2527,9 @@ export default {
       params.center = school.location.lat + "," + school.location.lon
       params.zoom = 12
       params.size = "420x380"
-      ;(params.key = process.env.GRIDSOME_GOOGLE_MAPS_KEY),
-        (params.markers = params.center)
+      params.key = process.env.GRIDSOME_GOOGLE_MAPS_KEY
+      params.markers = params.center
       params.style = "feature:poi|element:labels|visibility:off"
-
       let qs = querystring.stringify(params)
       return googleMapsBaseURL + qs
     },

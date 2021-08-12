@@ -56,7 +56,7 @@ export default {
   },
   computed: {
     referrer() {
-      return document.referrer
+      return process.isClient ? document.referrer : ""
     },
     url() {
       let url = decodeURI(this.query.url)
@@ -72,8 +72,10 @@ export default {
     },
   },
   mounted() {
-    let query = querystring.parse(window.location.search.substring(1))
-    this.query = query || {}
+    if (isClient) {
+      let query = querystring.parse(window.location.search.substring(1))
+      this.query = query || {}
+    }
   },
 }
 </script>

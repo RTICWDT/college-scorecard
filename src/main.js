@@ -16,10 +16,7 @@ import ScorecardFooter from '~/components/ScorecardFooter.vue';
 
 import VuexPersistence from 'vuex-persist'
 
-const vuexLocal = new VuexPersistence({
-  storage: window.localStorage,
-  filter: (mutation) => mutation.type != 'toggleDrawer'
-})
+
 
 export default function (Vue, { router, head, isClient, appOptions }) {
   // Set default layout as a global component
@@ -30,12 +27,20 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   Vue.component('scorecard-header', ScorecardHeader);
   Vue.component('scorecard-footer', ScorecardFooter);
 
+    const vuexLocal = new VuexPersistence({
+      storage: isClient?window.localStorage:null,
+      filter: (mutation) => mutation.type != 'toggleDrawer'
+    })
+  
+
   appOptions.vuetify = new Vuetify({
     theme: {
       themes: {
         light: {
           primary: '#2B6091',
           secondary: '#216D0A',
+          accent: '#8c9eff',
+          error: '#b61d1c'
         },
       },
     },
@@ -51,6 +56,10 @@ export default function (Vue, { router, head, isClient, appOptions }) {
       institutions: [],
       drawerOpen: false,
       clearForm: false
+    },
+    getters: {
+      getInstitutions: state => state.institutions,
+      getFieldsOfStudy: state => state.fos
     },
     mutations: {
       toggleSchool(state, obj) {
@@ -110,5 +119,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
       }
     },
     plugins: [vuexLocal.plugin]
-})
+  })
+
+  
 }

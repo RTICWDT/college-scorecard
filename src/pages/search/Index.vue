@@ -675,7 +675,10 @@ export default {
       }
       return false
     },
-    parseURLParams(url = location.search.substr(1)) {
+    parseURLParams(url) {
+      if (!url && process.isClient) {
+        url = location.search.substr(1)
+      }
       let query = querystring.parse(url)
 
       return query || {}

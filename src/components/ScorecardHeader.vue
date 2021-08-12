@@ -363,7 +363,7 @@ export default {
   },
   methods: {
     setActiveLink() {
-      let path = window.location.pathname
+      let path = process.isClient ? window.location.pathname : ""
       if (path.match(/search/)) {
         this.activeLink = "search"
       } else if (path.match(/compare/)) {
