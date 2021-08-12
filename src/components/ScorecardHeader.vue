@@ -161,7 +161,7 @@ header {
         <a href="/"
           ><div class="logo">
             <img
-              src="/img/US-DeptOfEducation-Seal.png"
+              src="img/US-DeptOfEducation-Seal.png"
               alt="Department of Education Seal"
             />
           </div>
@@ -181,14 +181,14 @@ header {
             </li>
 
             <li>
-              <a href="/data" :class="{ 'nav-active': activeLink === 'data' }"
+              <a href="data" :class="{ 'nav-active': activeLink === 'data' }"
                 >About the Data</a
               >
             </li>
 
             <li>
               <a
-                href="/search"
+                href="search"
                 :class="{ 'nav-active': activeLink === 'search' }"
                 >Search</a
               >
