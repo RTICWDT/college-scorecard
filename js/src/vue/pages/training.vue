@@ -43,7 +43,7 @@
                <v-container>
                  <v-row align="center">
                    <v-col cols="12" lg="6" md="12" sm="12">
-                     <h3 class="text-left pb-2">Search for schools with training programs<tooltip definition="wioa-participants"/></h3>
+                     <h3 class="text-left pb-2">Search for schools with training programs</h3>
                      <p>Search nearby schools that accept Pell Grants, and may also have eligible training programs where participants may be able to receive funding from the Workforce Innovation and Opportunity Act (WIOA). If you are receiving Unemployment Insurance, you should be sure to <a href="https://www.dol.gov/general/topic/unemployment-insurance"
                         target="_blank"
                         @click="trackOutboundLink($event)">contact your state workforce agency
