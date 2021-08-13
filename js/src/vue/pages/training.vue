@@ -14,21 +14,21 @@
       <!-- Top Splash and Search-->
       <div class="home-splash">
         <v-container class="pt-0">
-          <v-row class="pb-16 dol-header">
+          <v-row class="pb-8 dol-header">
             <!-- Header Info -->
-            <v-col cols="2"></v-col>
-            <v-col cols="8">
-
-              <h1 class="white--text text-uppercase text-center">
+              <h1 class="white--text text-uppercase text-center pb-6 mx-auto px-2 mt-3">
                 Find the Right Training Program For You.
-              </h1>
-
-              <p class="white--text text-center mx-8"> 
-                Training programs are a great way to jumpstart or reinvigorate your career. You may be eligible for funding to help pay for higher education!
-              </p>
-
+              </h1>            
+            <v-col cols="12" lg="6">
+              <p class="white--text mr-16 ml-16 font-weight-bold text-left"> 
+                Training programs offered by colleges and universities may be a great way to develop new skills and get credentials that will help you advance your career. To decide where to enroll, you should consider the costs and benefits of different programs in relation to your interests and the job opportunities in your community.
+              </p>              
             </v-col>
-            <v-col cols="2"></v-col>
+            <v-col cols="12" lg="6">
+              <p class="white--text mr-16 ml-16 font-weight-bold text-left"> 
+                The College Scorecard will help you compare programs that lead to certificates and degrees at colleges where you may be eligible to receive Pell Grants from the Department of Education, which provide up to $6,495 to cover tuition, fees, and living expenses.
+                </p>
+            </v-col>
           </v-row>
 
           <v-row class="px-md-6">
@@ -40,17 +40,16 @@
                <v-container>
                  <v-row align="center">
                    <v-col cols="12" lg="6" md="12" sm="12">
-                     <h3 class="text-left pb-2">Schools with WIOA eligible programs<tooltip definition="wioa-participants"/></h3>
-                     <p>Search nearby schools that both accept Pell Grants and are Workforce Innovation and Opportunity Act (WIOA) eligible training providers.</p>
-                     <p>These colleges have eligible training programs where participants may be able to receive funding from WIOA in addition to Pell Grants. <em>In some states, Unemployment Insurance (UI) recipients can attend school or training and continue to receive UI benefits (<a href="https://www.dol.gov/general/topic/unemployment-insurance"
+                     <h3 class="text-left pb-2">Search for schools with training programs</h3>
+                     <p class="pr-16">Search nearby schools that accept Pell Grants, and may also have eligible training programs where participants may be able to receive funding from the Workforce Innovation and Opportunity Act (WIOA). If you are receiving Unemployment Insurance, you should be sure to <a href="https://www.dol.gov/general/topic/unemployment-insurance"
                         target="_blank"
-                        @click="trackOutboundLink($event)">learn more about UI benefits
+                        @click="trackOutboundLink($event)">contact your state workforce agency
                     <v-icon
                       x-small
                       class="pl-1"
                     >
                       fas fa-external-link-alt
-                    </v-icon></a> in your state).</em></p>
+                    </v-icon></a> for information on additional benefits that may be available to you if you pursue training.</p>
                    </v-col>
                    <v-col cols="12" lg="6" md="12" sm="12" align="center">
                      <div class="search-nearby-container">
@@ -78,7 +77,7 @@
               class="d-sm-flex pb-10"
             >           
               <v-card class="pa-8" width="100%">
-                <h3 class="text-center pb-2">Search fields of study at schools that have WIOA training programs<tooltip definition="wioa-participants"/></h3>
+                <h3 class="text-center pb-2">Search for training programs by field of study</h3>
                 <field-of-study-search
                   @field-of-study-selected="handleFieldOfStudySelected"
                 />             
@@ -237,7 +236,7 @@
 }
 .home-splash {
   min-height: 200px;
-  padding-top: 5rem;
+  padding-top: 2rem;
   h1 {
     font-size:30px;
   }
@@ -247,6 +246,7 @@
   background-position:center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  text-align:center;
 }
 
 .search-nearby-container{
