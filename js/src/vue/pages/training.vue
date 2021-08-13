@@ -14,24 +14,24 @@
       <!-- Top Splash and Search-->
       <div class="home-splash">
         <v-container class="pt-0">
-          <v-row class="pb-16 dol-header">
+          <v-row class="pb-8 dol-header">
             <!-- Header Info -->
-            <v-col cols="2"></v-col>
-            <v-col cols="8">
+            <v-col cols="1"></v-col>
+            <v-col cols="10">
 
-              <h1 class="white--text text-uppercase text-center">
+              <h1 class="white--text text-uppercase text-center pb-2">
                 Find the Right Training Program For You.
               </h1>
 
-              <p class="white--text text-center mx-8"> 
+              <p class="white--text mx-8"> 
                 Training programs offered by colleges and universities may be a great way to develop new skills and get credentials that will help you advance your career. To decide where to enroll, you should consider the costs and benefits of different programs in relation to your interests and the job opportunities in your community.
               </p>
-              <p class="white--text text-center mx-8"> 
+              <p class="white--text mx-8"> 
                 The College Scorecard will help you compare programs that lead to certificates and degrees at colleges where you may be eligible to receive Pell Grants from the Department of Education, which provide up to $6,495 to cover tuition, fees, and living expenses.
                 </p>
 
             </v-col>
-            <v-col cols="2"></v-col>
+            <v-col cols="1"></v-col>
           </v-row>
 
           <v-row class="px-md-6">
@@ -239,7 +239,7 @@
 }
 .home-splash {
   min-height: 200px;
-  padding-top: 5rem;
+  padding-top: 2rem;
   h1 {
     font-size:30px;
   }
