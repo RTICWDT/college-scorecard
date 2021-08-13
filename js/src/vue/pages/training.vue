@@ -80,7 +80,7 @@
               class="d-sm-flex pb-10"
             >           
               <v-card class="pa-8" width="100%">
-                <h3 class="text-center pb-2">Search for training programs by field of study<tooltip definition="wioa-participants"/></h3>
+                <h3 class="text-center pb-2">Search for training programs by field of study</h3>
                 <field-of-study-search
                   @field-of-study-selected="handleFieldOfStudySelected"
                 />             
