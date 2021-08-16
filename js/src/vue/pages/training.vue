@@ -41,15 +41,23 @@
                  <v-row align="center">
                    <v-col cols="12" lg="6" md="12" sm="12">
                      <h3 class="text-left pb-2">Search for schools with training programs</h3>
-                     <p class="pr-16">Search nearby schools that accept Pell Grants, and may also have eligible training programs where participants may be able to receive funding from the Workforce Innovation and Opportunity Act (WIOA). If you are receiving Unemployment Insurance, you should be sure to <a href="https://www.dol.gov/general/topic/unemployment-insurance"
+                     <p class="pr-16">Search nearby schools that accept Pell Grants, and may also have eligible training programs for participants in Workforce Innovation and Opportunity Act (WIOA) programs. If you need help taking the next step in your career, find an <a href="https://www.dol.gov/general/topic/unemployment-insurance"
                         target="_blank"
-                        @click="trackOutboundLink($event)">contact your state workforce agency
+                        @click="trackOutboundLink($event)">American Job Center
                     <v-icon
                       x-small
                       class="pl-1"
                     >
                       fas fa-external-link-alt
-                    </v-icon></a> for information on additional benefits that may be available to you if you pursue training.</p>
+                    </v-icon></a>. In some states, Unemployment Insurance (UI) recipients can attend school or training and continue to receive UI benefits (<a href="https://www.dol.gov/general/topic/unemployment-insurance"
+                        target="_blank"
+                        @click="trackOutboundLink($event)">learn more about UI benefits
+                    <v-icon
+                      x-small
+                      class="pl-1"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon></a> in your state).</p>
                    </v-col>
                    <v-col cols="12" lg="6" md="12" sm="12" align="center">
                      <div class="search-nearby-container">
