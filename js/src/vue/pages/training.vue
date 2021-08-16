@@ -41,7 +41,7 @@
                  <v-row align="center">
                    <v-col cols="12" lg="6" md="12" sm="12">
                      <h3 class="text-left pb-2">Search for schools with training programs</h3>
-                     <p class="pr-16">Search nearby schools that accept Pell Grants, and may also have eligible training programs for participants in Workforce Innovation and Opportunity Act (WIOA) programs. If you need help taking the next step in your career, find an <a href="https://www.dol.gov/general/topic/unemployment-insurance"
+                     <p class="pr-16">Search nearby schools that accept Pell Grants, and may also have eligible training programs for participants in Workforce Innovation and Opportunity Act (WIOA) programs. If you need help taking the next step in your career, find an <a href="https://www.careeronestop.org/LocalHelp/AmericanJobCenters/american-job-centers.aspx"
                         target="_blank"
                         @click="trackOutboundLink($event)">American Job Center
                     <v-icon
