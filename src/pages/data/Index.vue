@@ -22,7 +22,7 @@
                 All Data Files
                 <ul class="font-weight-regular">
                   <li>
-                    Institution-level data files for 1996-97 through 2018-19
+                    Institution-level data files for 1996-97 through 2019-20
                     containing aggregate data for each institution. Includes
                     information on institutional characteristics, enrollment,
                     student aid, costs, and student outcomes.
@@ -50,46 +50,43 @@
               </li>
             </ul>
 
-            <p class="pt-4">
-              This data was
-              <strong>last updated January 19, 2020</strong>.
-            </p>
-            <v-row>
-              <v-col cols="12" sm="10" offset="1">
-                <v-card
-                  class="pa-2 text-center fill-height d-flex align-center justify-center"
-                  color="grey lighten-4"
-                  href="https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources"
-                  target="_blank"
+              <p class="pt-4">
+                This data was
+                <strong>last updated August 3, 2021</strong>.
+              </p>
+              <v-row>
+                <v-col cols="12" sm="10" offset="1">
+                  <v-card
+                    class="pa-2 text-center fill-height d-flex align-center justify-center"
+                    color="grey lighten-4"
+                    href="https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources"
+                    target="_blank"
+                    @click="trackOutboundLink($event)"
+                    hover
+                  >
+                    <div>
+                      <span class="title font-weight-bold">
+                        Visit data.ed.gov To Download The Data&nbsp;
+                      </span>
+                    </div>
+                  </v-card>
+                </v-col>
+                
+              </v-row>
+              <p class="mt-8">
+                <strong>Looking for help?</strong> Visit
+                <a
+                  href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
                   @click="trackOutboundLink($event)"
-                  hover
-                >
-                  <div>
-                    <span class="title font-weight-bold">
-                      Visit data.ed.gov To Download The Data&nbsp;
-                    </span>
-                  </div>
-                </v-card>
-              </v-col>
-            </v-row>
-            <p class="mt-8">
-              <strong>Looking for help?</strong> Visit
-              <a
-                href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
-                @click="trackOutboundLink($event)"
-                target="_blank"
-                >StackExchange</a
-              >
-              or email the help desk at
-              <a href="mailto:scorecarddata@rti.org">scorecarddata@rti.org</a>.
-              For inquiries by members of the press, please contact
-              <a href="mailto:press@ed.gov">press@ed.gov</a>.
-            </p>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-main>
+                  target="_blank"
+                >StackExchange</a> or email the help desk at
+                <a href="mailto:scorecarddata@rti.org">scorecarddata@rti.org</a>. For inquiries by members of the press, please contact <a href="mailto:press@ed.gov">press@ed.gov</a>.
+              </p>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
 </template>
 
 <script>

@@ -434,7 +434,11 @@ export default {
               _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MIN']),
               _.get(this.school, fields['PARENT_PLUS_ESTIMATED_PARENT_BORROWED_MAX'])
             );
-        }
+        },
+        dolflag() {
+            if (!this.school) return null;
+            return _.get(this.school, this.fields['DOLFLAG'])
+        },        
     },
     methods: {
         // Moving items down here for easier testing.

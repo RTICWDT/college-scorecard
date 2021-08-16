@@ -12,8 +12,8 @@
   bottom: 64px;
 }
 
-#search-fos-cip-warning {
-  width: 100%;
+  #search-fos-cip-warning, #search-institutions-dolflag{
+    width: 100%;
 
   p {
     font-size: 13px;
@@ -26,14 +26,13 @@
     }
   }
 
-  a {
-    color: white !important;
+    a{
+      color: white !important;
+    }
+   .dolflag-chip a{
+      color: rgba(0, 0, 0, 0.87) !important;
+    }
   }
-
-  @media (min-width: 960px) {
-    width: 60%;
-  }
-}
 
 #search-fos-cip-filter-warning {
   p {
@@ -54,6 +53,16 @@
     }
   }
 }
+</style>
+
+<style lang="scss" scoped>
+@import "~/sass/_variables.scss";
+  .dolflag-chip {
+    height: auto !important;
+    white-space: normal;
+    padding:18px;
+    margin-right:30px;
+  }
 </style>
 
 <template>
@@ -96,14 +105,7 @@
         @search-query="handleFieldOfStudySearch"
       />
 
-      <!-- Search Fields of Study Component -->
-      <search-fos-form
-        v-else-if="displayToggle === 'fos'"
-        :url-parsed-params="urlParsedParams"
-        auto-submit
-        @search-query="handleFieldOfStudySearch"
-      />
-    </v-navigation-drawer>
+      </v-navigation-drawer>
 
     <v-main>
       <v-container fluid class="pa-0">
@@ -133,19 +135,20 @@
                         </span>
                       </v-btn>
 
-                      <v-btn
-                        id="search-button-clear"
-                        color="primary"
-                        text-color="white"
-                        @click="clearSearchForm"
-                        small
-                        class="d-none d-sm-inline mr-2"
-                      >
-                        <span>
-                          <v-icon small class="mr-1">mdi-close-circle</v-icon>
-                          Clear
-                        </span>
-                      </v-btn>
+                        <v-btn
+                          id="search-button-clear"
+                          color="primary"
+                          text-color="white"
+                          @click="clearSearchForm"
+                          small
+                          rounded
+                          class="d-none d-sm-inline"
+                        >
+                          <span >
+                            <v-icon small class='mr-1'>mdi-close-circle</v-icon>
+			     Clear
+                          </span>
+                        </v-btn>
 
                       <v-menu offset-y>
                         <template v-slot:activator="{ on }">
@@ -153,6 +156,7 @@
                             id="search-button-sort"
                             color="primary"
                             small
+                            rounded
                             v-on="on"
                             class="d-none d-sm-inline mr-1"
                           >
@@ -240,32 +244,64 @@
               </v-row>
             </v-card>
 
-            <!-- Field Of Study CIP 4 Information -->
-            <div
-              v-if="displayToggle === 'fos' && !isLoading"
-              id="search-fos-cip-warning"
-              class="my-2"
-            >
-              <p class="white--text">
-                <strong>Note:</strong> Field of Study titles are based on the US
-                Department of Education's Classification of Instructional
-                Programs (CIP) and may not match the program titles at a given
-                school.
-                <a
-                  target="_blank"
-                  href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56"
-                >
-                  Learn more about CIP
-                  <v-icon x-small color="white">
-                    fas fa-external-link-alt
-                  </v-icon>
-                </a>
+              <!-- Instituition Information -->
+              <div v-if="displayToggle === 'institutions' && !isLoading && this.displayFlag"
+                   id="search-institutions-dolflag"
+                   class="my-2"
+              >
+              <v-row>
+                <v-col cols="12" sm="5" md="5" class="py-1 pl-3 pr-1">
+                  <v-chip class="dolflag-chip" close @click:close="handleDOLFlag"><span>Only show schools that have programs that qualify for the Department of Labor's WIOA program.<tooltip definition="wioa-participants"/></span></v-chip>
+                  </v-col>
+                <v-col cols="12" sm="7" md="7" class="py-1 px-1">
+                  <p class="white--text">
+                    Learn more about the Department of Labor's WIOA program at 
+                    <a target="_blank" href="https://collegescorecard.ed.gov/training" class="white--text" >
+                      CollegeScorecard.ed.gov/training.
+                    </a>
 
-                <!--                  <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">-->
+                  </p>
+                </v-col>
+                </v-row>
+              </div>              
 
-                <!--                  </a>-->
-              </p>
-            </div>
+              <!-- Field Of Study CIP 4 Information -->
+              <div 
+                   id="search-fos-cip-warning"
+                   class="my-2"
+              >
+              <v-row>
+                <v-col cols="12" sm="5" md="5" class="py-1 pl-3 pr-1" v-if="displayToggle === 'fos' && !isLoading && this.displayFlag">
+                  <v-chip class="dolflag-chip" close @click:close="handleDOLFlag">
+                    <span>Only show schools that have programs that qualify for the Department of Labor's WIOA program.<tooltip definition="wioa-participants"/>
+                  <br/>
+                    Learn more about the Department of Labor's WIOA program at 
+                    <a target="_blank" href="https://collegescorecard.ed.gov/training">
+                      CollegeScorecard.ed.gov/training.
+                    </a>
+                    </span>                    
+                  </v-chip>
+                </v-col>
+                <v-col cols="12" sm="7" md="7" class="py-1 px-1"  v-if="displayToggle === 'fos'">
+                <p class="white--text pl-2">
+                  <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
+                  Classification of Instructional Programs (CIP) and may not match the program titles at a
+                  given school.
+                  <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">
+                    Learn more about CIP
+                    <v-icon
+                      x-small
+                      color="white"
+                      class="pl-1"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>
+
+                  </a>
+                </p>
+                </v-col>
+                </v-row>              
+              </div>
 
             <!-- No Results/Canned Search/ -->
             <div
@@ -420,6 +456,7 @@ import PrepareParams from "~/js/mixins/PrepareParams.js"
 import ContextToggle from "~/components/ContextToggle.vue"
 import SearchFieldsOfStudyForm from "~/components/SearchFieldsOfStudyForm.vue"
 import FieldOfStudyResultCard from "~/components/FieldOfStudyResultCard.vue"
+import Tooltip from "~/components/Tooltip.vue";
 
 import _ from "lodash"
 import { apiGet } from "~/js/api.js"
@@ -438,6 +475,7 @@ export default {
     "context-toggle": ContextToggle,
     "search-fos-form": SearchFieldsOfStudyForm,
     "fos-result-card": FieldOfStudyResultCard,
+    "tooltip": Tooltip,
   },
   mixins: [URLHistory, PrepareParams],
   props: {
@@ -491,6 +529,7 @@ export default {
       displayToggle: "institutions",
       controlTab: 1,
       fieldOfStudyTotalCountWithoutRangeFilters: 0,
+      displayFlag: false
     }
   },
   created() {
@@ -519,6 +558,13 @@ export default {
     } else {
       this.displayToggle = "fos"
       this.controlTab = 1
+    }
+
+    if (typeof this.urlParsedParams.dolflag === 'undefined' || this.urlParsedParams.dolflag === 'false' ){
+        this.displayFlag = false;
+    }
+    else{
+        this.displayFlag = true;
     }
 
     // Create Debounce function for this page.
@@ -579,6 +625,13 @@ export default {
       this.$emit("loading", true)
 
       this.error.message = null
+
+      if (typeof params['dolflag'] === 'undefined' || params['dolflag'] === 'false' ){
+          this.displayFlag = false;
+      }
+      else{
+          this.displayFlag = true;
+      }      
 
       // let poppingState = false;
       // let alreadyLoaded = false;
@@ -781,6 +834,14 @@ export default {
         this.handleInstitutionSearch(this.parseURLParams())
       }
     },
-  },
-}
+    handleDOLFlag() {
+      this.urlParsedParams = this.parseURLParams()
+      delete this.urlParsedParams.dolflag
+      this.debounceSearchUpdate(this.urlParsedParams)
+      this.$root.$emit('reset-dol-flag')
+
+      
+    }
+  }
+};
 </script>

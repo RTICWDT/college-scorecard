@@ -2,160 +2,123 @@
   <v-main>
     <data-navigation current="/data/changelog/" />
 
-    <v-container>
-      <v-row>
-        <v-col cols="12" md="10" offset-md="1">
-          <v-card class="py-5 px-10 ma-5">
-            <h1 class="display-1 mb-2 font-weight-bold">Change Log</h1>
-            <p>
-              This page includes a description and timeline for the changes that
-              have been made to either the College Scorecard tool or to the
-              underlying data. Check back for updates to learn more about the
-              updates and improvements we have made.
-            </p>
-            <v-expansion-panels>
-              <v-expansion-panel>
-                <v-expansion-panel-header
-                  >January 19, 2021</v-expansion-panel-header
-                >
-                <v-expansion-panel-content>
-                  <p>
-                    On January 19, 2021, the Department updated the College
-                    Scorecard downloadable data files and the API as indicated
-                    below.
-                  </p>
-                  <ul>
-                    <li>
-                      More recent data values for
-                      <ul>
-                        <li>Currently Operating Status Flag</li>
-                        <li>Heightened Cash Monitoring Flag</li>
-                        <li>Accrediting Agency Name</li>
-                        <li>Accrediting Agency Code</li>
-                        <li>Title IV Approval Date</li>
-                      </ul>
-                    </li>
-                    <li>
-                      New institution-level metrics that show the outstanding
-                      loan portfolios at each institution in the Stafford,
-                      Parent PLUS, and Grad PLUS loan programs.
-                    </li>
-                    <li>
-                      The federal school code has been added to the
-                      institution-level data file.
-                    </li>
-                    <li>
-                      New field of study-level metrics that describe the
-                      proportions of borrowers that fall into one of eight loan
-                      status categories: default, delinquent, forbearance,
-                      deferment, not making progress, making progress, paid in
-                      full, and discharged.
-                    </li>
-                  </ul>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
+      <v-container>
+        <v-row>
+          <v-col cols="12" md="10" offset-md="1">
+            <v-card class="py-5 px-10 ma-5">
+              <h1 class="display-1 mb-2 font-weight-bold">Change Log</h1>
+              <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
+              <v-expansion-panels>
+                <v-expansion-panel>
+                                  
+                  <v-expansion-panel-header>August 3, 2021</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <p>On August 3, 2021, the Department updated and added new data elements that appear on the consumer website and/or the downloadable data files/API:</p>
+                    <ul><li>Additions: a new data point that indicates whether an institution appears in the Department of Labor’s WIOA list of approved training providers based on matching institutional identifying information.</li>
+                    <li>Updates: more recent data values derived from Federal Student Aid sources for the following data metrics: Currently Operating Status Flag, Accrediting Agency Name and Code, Title IV Approval Date, and Federal School Code.</li>
+                    </ul>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+              <v-expansion-panels>
+                <v-expansion-panel>
+                                  
+                  <v-expansion-panel-header>July 20, 2021</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <p>On July 20, 2021, the Department provided the following updates to the College Scorecard website/API:</p>
+                    <ul><li>Updates to all data metrics derived from IPEDS with more recent data values from a new data collection year. Also, the addition of new IPEDS-derived data metrics including:
+                    <ul>
+                      <li>Estimated costs for books and supplies and living expenses for full-time, first-time degree/certificate-seeking undergraduate students at academic-year calendar-based institutions</li>
+                      <li>Beginning and end of fiscal year endowment values</li>
+                    </ul></li>
+                    <li>Updates (more recent data values) derived from Federal Student Aid sources for the following data metrics: Cohort Default Rates, Currently Operating Status Flag, Heightened Cash Monitoring Flag, Accrediting Agency Name and Code, Title IV Approval Date, Cohort Default Rate, and Federal School Code.</li>
+                    <li>Updates derived from the Office of Postsecondary Education (OPE) eligibility matrix for data metrics identifying Minority Serving Institutions.</li>
+                    </ul>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
 
-              <v-expansion-panel>
-                <v-expansion-panel-header
-                  >January 12, 2021</v-expansion-panel-header
-                >
-                <v-expansion-panel-content>
-                  <p>
-                    On January 12, 2021, the Department updated the College
-                    Scorecard website with new post-enrollment repayment status
-                    information in the institution profiles on the consumer
-                    website. Data updates in this release include:
-                  </p>
-                  <ul>
-                    <li>
-                      More recent data values for
-                      <ul>
-                        <li>Currently Operating Status Flag</li>
-                        <li>Heightened Cash Monitoring Flag</li>
-                        <li>Accrediting Agency Name</li>
-                        <li>Accrediting Agency Code</li>
-                        <li>Title IV Approval Date</li>
-                      </ul>
-                    </li>
-                    <li>
-                      New institution-level metrics that describe repayment
-                      progress based on the amount originally borrowed compared
-                      to the balance amount at various measurement points.
-                    </li>
-                    <li>
-                      New institution-level metrics that describe the
-                      proportions of borrowers that fall into one of eight loan
-                      status categories: default, delinquent, forbearance,
-                      deferment, not making progress, making progress, paid in
-                      full, and discharged.
-                    </li>
-                  </ul>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
+                <v-expansion-panel>
 
-              <v-expansion-panel>
-                <v-expansion-panel-header
-                  >December 2, 2020</v-expansion-panel-header
-                >
-                <v-expansion-panel-content>
-                  <p>
-                    On December 2, 2020, the Department updated the College
-                    Scorecard website with the second installment of its annual
-                    refresh that includes newer, updated data for metrics from
-                    NSLDS and Treasury Department data sources. The user
-                    interface of the consumer site was also refreshed with an
-                    updated look and feel and closer integration of the Field of
-                    Study data within the institution profile. This includes
-                    additional search options and methods, simplified navigation
-                    and updated comparison tool. Data updates in this release
-                    include:
-                  </p>
-                  <ul>
-                    <li>
-                      Refreshed institution-level data adding a new cohort for
-                      cumulative debt and completion rate metrics, and more
-                      recent data values for
-                      <ul>
-                        <li>Currently Operating Status Flag</li>
-                        <li>Heightened Cash Monitoring Flag</li>
-                        <li>Accrediting Agency Name</li>
-                        <li>Accrediting Agency Code</li>
-                        <li>Title IV Approval Date</li>
+                  <v-expansion-panel-header>April 4, 2021</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <p>On April 4, 2021, the College Scorecard API was updated to improve stability and efficiency. If you encounter any problems with this revision of the API, please submit an issue at <a href="http://github.com/rticwdt/college-scorecard/" target="_blank" @click="trackOutboundLink($event)">http://github.com/rticwdt/college-scorecard/</a></p>
+                    <p>Changes include: </p>
+                    <ul><li><strong>By default, only “<em>latest</em>” data will be returned.</strong> Before this update, the API returned data for all years available unless filtered by the <em>fields</em> parameter. With this update, it now returns only the <em>latest</em> object by default. If your implementation relies on the previous functionality, the flag <em>“&all_years=true”</em> can be appended to your API call to receive data for all years available.</li>
+                    <li><strong>Only specific fields will be available for <em>sort</em> and <em>filter</em> conditions.</strong> Previously, the API allowed any field in the dataset to be used to sort or filter results. Following this update, only a subset of fields will be indexed and available for sorting and filtering. The fields are identified in the latest Data Dictionary under the column <em>INDEX</em> and are generated using only the latest data.</li>
+                    <li><strong>School name autocomplete improvements.</strong> An autocomplete endpoint for institution name is now available. This endpoint takes into account institution aliases and returns IDs and a relevance score based on the text string sent. Individual words must be at least three characters long to produce results. The new endpoint is:
+                    <ul class='mt-4'><li>/v1/name-autocomplete?school_search={string}</li></ul></li>
+                    </ul>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+                                
+                <v-expansion-panel>                  
+                  <v-expansion-panel-header>January 19, 2021</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <p>On January 19, 2021, the Department updated the College Scorecard downloadable data files and the API as indicated below.</p>
+                    <ul>
+                    <li>More recent data values for 
+                    <ul><li>Currently Operating Status Flag </li>
+                    <li>Heightened Cash Monitoring Flag </li>
+                    <li>Accrediting Agency Name </li>
+                    <li>Accrediting Agency Code </li>
+                    <li>Title IV Approval Date</li> </ul></li>
+                    <li>New institution-level metrics that show the outstanding loan portfolios at each institution in the Stafford, Parent PLUS, and Grad PLUS loan programs. </li>
+                    <li>The federal school code has been added to the institution-level data file. </li>
+                    <li>New field of study-level metrics that describe the proportions of borrowers that fall into one of eight loan status categories: default, delinquent, forbearance, deferment, not making progress, making progress, paid in full, and discharged.  </li>
+                    </ul>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+
+
+                <v-expansion-panel>                  
+                  <v-expansion-panel-header>January 12, 2021</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <p>On January 12, 2021, the Department updated the College Scorecard website with new post-enrollment repayment status information in the institution profiles on the consumer website. Data updates in this release include:</p>
+                    <ul>
+                      <li>
+                        More recent data values for
+                        <ul>
+                          <li>Currently Operating Status Flag</li>
+                          <li>Heightened Cash Monitoring Flag</li>
+                          <li>Accrediting Agency Name</li>
+                          <li>Accrediting Agency Code</li>
+                          <li>Title IV Approval Date</li>
+                        </ul>
+                      </li>
+                      <li>New institution-level metrics that describe repayment progress based on the amount originally borrowed compared to the balance amount at various measurement points.</li>
+                      <li>New institution-level metrics that describe the proportions of borrowers that fall into one of eight loan status categories: default, delinquent, forbearance, deferment, not making progress, making progress, paid in full, and discharged.</li>
                       </ul>
-                    </li>
-                    <li>
-                      New institution-level metrics to describe the rate of
-                      Parent PLUS Loan borrowing, the median Parent PLUS Loan
-                      debt, and number of graduates earning more than one and a
-                      half times the poverty threshold
-                    </li>
-                    <li>
-                      Refreshed Field of Study data adding a new cohort year to
-                      the series, including the count of awarded credentials,
-                      median debt, and median earnings data on the consumer
-                      website, downloadable data files, and API.
-                    </li>
-                    <li>
-                      New Field of Study metrics describing
-                      <ul>
-                        <li>Median earnings 2 years after completion</li>
-                        <li>
-                          Number of graduates earning more than one and a half
-                          times the poverty threshold
-                        </li>
-                        <li>
-                          Median and mean student debt by Pell Grant status and
-                          by sex
-                        </li>
-                        <li>
-                          Median and mean Parent PLUS Loan debt, overall and
-                          disaggregated by Pell Grant status and by sex
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+
+                <v-expansion-panel>                  
+                  <v-expansion-panel-header>December 2, 2020</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <p>On December 2, 2020, the Department updated the College Scorecard website with the second installment of its annual refresh that includes newer, updated data for metrics from NSLDS and Treasury Department data sources. The user interface of the consumer site was also refreshed with an updated look and feel and closer integration of the Field of Study data within the institution profile. This includes additional search options and methods, simplified navigation and updated comparison tool. Data updates in this release include:</p>
+                    <ul>
+                      <li>
+                        Refreshed institution-level data adding a new cohort for cumulative debt and completion rate metrics, and more recent data values for
+                        <ul>
+                          <li>Currently Operating Status Flag</li>
+                          <li>Heightened Cash Monitoring Flag</li>
+                          <li>Accrediting Agency Name</li>
+                          <li>Accrediting Agency Code</li>
+                          <li>Title IV Approval Date</li>
+                        </ul>
+                      </li>
+                      <li>New institution-level metrics to describe the rate of Parent PLUS Loan borrowing, the median Parent PLUS Loan debt, and number of graduates earning more than one and a half times the poverty threshold</li>
+                      <li>Refreshed Field of Study data adding a new cohort year to the series, including the count of awarded credentials, median debt, and median earnings data on the consumer website, downloadable data files, and API. </li>
+                      <li>New Field of Study metrics describing
+                        <ul>
+                          <li>Median earnings 2 years after completion</li>
+                          <li>Number of graduates earning more than one and a half times the poverty threshold</li>
+                          <li>Median and mean student debt by Pell Grant status and by sex</li>
+                          <li>Median and mean Parent PLUS Loan debt, overall and disaggregated by Pell Grant status and by sex</li>
+                        </ul>
                         </li>
                       </ul>
-                    </li>
-                  </ul>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
 
               <v-expansion-panel>
                 <v-expansion-panel-header

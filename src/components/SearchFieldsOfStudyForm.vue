@@ -1,7 +1,10 @@
 <style lang="scss">
-#fos-chip-container {
-  width: 100%;
+.search-form-dolflag-cb div .v-input__slot {
+      align-items: start;
 }
+  #fos-chip-container{
+    width: 100%;
+  }
 
 #fos-chip-container {
   .v-chip {
@@ -386,16 +389,29 @@
           <span>Limited Data</span>
         </div>
       </v-alert>
+
     </div>
 
-    <v-btn
-      type="submit"
-      class="sr-only"
-      color="secondary"
-      rounded
-      @click="$emit('search-query', cleanInput)"
-      >Find Schools</v-btn
-    >
+    <!-- WIOA Programs -->
+    <div class="">
+      <label class="subhead mb-2" id="search-fos-dolflag" for="search-fos-dolflag">
+        WIOA Programs 
+      </label><tooltip definition="wioa-participants"/>
+
+      <v-checkbox
+        id="search-form-dolflag"
+        name="search-fos-dolflag"
+        class="search-form-dolflag-cb my-0 py-0"
+        v-model="input.dolflag"
+        label="Only show schools that have Department of Labor WIOA programs"
+        value="true"
+        color="secondary"
+        hide-details
+      ></v-checkbox>
+    </div>    
+    
+    <v-btn type='submit' class="sr-only" color="secondary" rounded @click="$emit('search-query',cleanInput)">Find Schools</v-btn>
+
   </v-form>
 </template>
 
@@ -437,6 +453,7 @@ export default {
         state: [],
         fos_salary: [0, 150],
         fos_debt: [0, 50],
+	dolflag: null
       },
       utility: {
         formDefault: {},
