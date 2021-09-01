@@ -1444,6 +1444,75 @@
                           colors="solid"
                           :gradOnly="showGradOnly"
                         />
+                      <v-simple-table class="school-table">
+                        <caption class="sr-only">
+                          Average cost by family income
+                        </caption>
+                        <thead>
+                          <tr>
+                            <th>Repayment Status</th>
+                            <th>Percent</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Making Progress</td>
+                            <td v-if="income['0-30000']">
+                              {{ income["0-30000"] | numeral("$0,0") }}
+                            </td>
+                            <td v-else>--</td>
+                          </tr>
+                          <tr>
+                            <td>Not Making Progress</td>
+                            <td v-if="income['30001-48000']">
+                              {{ income["30001-48000"] | numeral("$0,0") }}
+                            </td>
+                            <td v-else>--</td>
+                          </tr>
+                          <tr>
+                            <td>Deferment</td>
+                            <td v-if="income['48001-75000']">
+                              {{ income["48001-75000"] | numeral("$0,0") }}
+                            </td>
+                            <td v-else>--</td>
+                          </tr>
+                          <tr>
+                            <td>Paid in Full</td>
+                            <td v-if="income['75001-110000']">
+                              {{ income["75001-110000"] | numeral("$0,0") }}
+                            </td>
+                            <td v-else>--</td>
+                          </tr>
+                          <tr>
+                            <td>Forbearance</td>
+                            <td v-if="income['110001-plus']">
+                              {{ income["110001-plus"] | numeral("$0,0") }}
+                            </td>
+                            <td v-else>--</td>
+                          </tr>
+                          <tr>
+                            <td>Defaulted</td>
+                            <td v-if="income['110001-plus']">
+                              {{ income["110001-plus"] | numeral("$0,0") }}
+                            </td>
+                            <td v-else>--</td>
+                          </tr>
+                          <tr>
+                            <td>Delinquent</td>
+                            <td v-if="income['110001-plus']">
+                              {{ income["110001-plus"] | numeral("$0,0") }}
+                            </td>
+                            <td v-else>--</td>
+                          </tr>
+                          <tr>
+                            <td>Discharged</td>
+                            <td v-if="income['110001-plus']">
+                              {{ income["110001-plus"] | numeral("$0,0") }}
+                            </td>
+                            <td v-else>--</td>
+                          </tr>                                                                              
+                        </tbody>
+                      </v-simple-table>                        
                       </v-col>
                     </v-row>
                     <div
