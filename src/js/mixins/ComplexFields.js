@@ -536,9 +536,11 @@ export default {
                 return {
                     single: orderedDebt.length == 1 || (orderedDebt[0].debt == orderedDebt[orderedDebt.length-1].debt),
                     min: orderedDebt[0],
-                    max: orderedDebt[orderedDebt.length - 1]
+                    max: orderedDebt[orderedDebt.length - 1],
+                    median: orderedDebt[Math.floor(orderedDebt.length / 2)]
                 }
             }
+            
         },
         // Take Institution Field of study return object and return categorized result by credential level
         categorizeFieldsOfStudy(fieldsOfStudy){

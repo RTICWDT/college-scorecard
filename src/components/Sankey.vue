@@ -225,12 +225,12 @@ export default {
         data.addRows(rows)
         if (this.colors == "solid") {
           colors = [
-            "#0e365b",
+            "#1874DC",
             "#FFFFFF",
-            "#0e365b",
-            "#0e365b",
-            "#0e365b",
-            "#0e365b",
+            "#1874DC",
+            "#1874DC",
+            "#1874DC",
+            "#1874DC",
           ]
         } else {
           colors = [

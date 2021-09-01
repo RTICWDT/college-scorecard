@@ -130,10 +130,7 @@
               <!-- Institution Summary and Field Of Study Select + Summary -->
               <v-row class="mt-3 px-sm-3">
                 <!--Institution Summary-->
-                <v-col md="5" class="pr-sm-3">
-                  <h3 class="overline pb-5 pt-1" style="">
-                    Institutional Highlights:
-                  </h3>
+                <v-col md="6" class="pr-sm-3">
                   <div id="school-completion-rate-bar" class="">
                     <h2 class="mb-3">
                       <!--prettyhtml-ignore-->
@@ -143,7 +140,7 @@
                       />
                     </h2>
 
-                    <horizontal-bar
+                    <bar-chart
                       v-if="completionRate"
                       :value="Math.round(parseFloat(completionRate) * 100)"
                       :min="0"
@@ -153,7 +150,7 @@
                       :y-bar-thickness="50"
                       :label-font-size="24"
                       :labels="true"
-                    ></horizontal-bar>
+                    ></bar-chart>
                     <div v-else class="data-na">Data Not Available</div>
                   </div>
 
@@ -245,174 +242,117 @@
                     <div class="data-na" v-else>Data Not Available</div>
                   </div>
                 </v-col>
-
-                <!--Field Of Study Select Container-->
-                <v-col md="7" class="pl-sm-3">
-                  <v-card class="pa-4 field-of-study-select-container">
-                    <div id="field-of-study-select-header" class="mb-5 mt-1">
-                      <div id="field-of-study-select-icon">
-                        <v-icon>
-                          fas fa-award
-                        </v-icon>
-                      </div>
-
-                      <h2>
-                        Fields of Study Offered:
-                        <tooltip
-                          definition="field-of-study"
-                          :version="completionRateFieldDefinition"
-                        />
-                      </h2>
-                    </div>
-
-                    <!-- Compare Button -->
-                    <div
-                      class="text-right pa-2 field-of-study-select-container-header"
-                    >
-                      <!-- <v-btn
-                        v-if="selectedFOS"
-                        text
-                        small
-                        :color="black"
-                        @click="
-                          $emit(
-                            'toggle-compare-school',
-                            generateCompareFieldOfStudy(selectedFOSDetail),
-                            'compare-fos'
-                          )
-                        "
-                      >
-                        <v-icon
-                          class="mr-2"
-                          :color="
-                            isSelected(
-                              this.generateCompareFieldOfStudy(
-                                this.selectedFOSDetail
-                              ),
-                              this.compareFieldsOfStudy
-                            )
-                              ? '#0075B2'
-                              : 'black'
-                          "
-                          >fa fa-check-circle</v-icon
-                        >
-                        <div
-                          v-if="
-                            !isSelected(
-                              this.generateCompareFieldOfStudy(
-                                this.selectedFOSDetail
-                              ),
-                              this.compareFieldsOfStudy
-                            )
-                          "
-                        >
-                          Add to Compare Field of Study
-                        </div>
-                        <div v-else>&nbsp;Added to Compare</div>
-                      </v-btn> -->
-                    </div>
-
-                    <div>
-                      <field-of-study-select
-                        :cip-two-nested-cip-four="fieldOfStudySelectItems"
-                        v-model="selectedFOS"
-                        @input-clear="handleFieldOfStudyClear"
+                <v-col md="6" class="pr-sm-3">
+                  <div id="school-avg-cost" class="mb-4">
+                    <h2 class="mb-3" v-if="!isProgramReporter">
+                      <!--prettyhtml-ignore-->
+                      Average Annual Cost
+                      <tooltip definition="avg-cost" />
+                    </h2>
+                    <h2 v-else class="mb-3">
+                      <!--prettyhtml-ignore-->
+                      Average Annual Cost for Largest Program
+                      <tooltip
+                        definition="avg-program-cost"
+                        :isNegative="netPrice < 0"
                       />
-                    </div>
-
-                    <div
-                      id="profile-field-of-study-summary-metric-container"
-                      class="pa-sm-4"
+                    </h2>
+                    <p class="mb-1">
+                      Cost includes tuition, living costs, books and supplies,
+                      and fees minus the average grants and scholarships for
+                      federal financial aid recipients.
+                    </p>
+                    <h2
+                      class="display-2 navy-text font-weight-bold"
+                      v-if="netPrice"
                     >
-                      <div
-                        v-if="selectedFOS"
-                        id="profile-field-of-study-summary-metric-full"
-                      >
-                        <div class="mb-6">
-                          <h3 class="mb-3">
-                            Salary After Completing Field of Study
-                            <tooltip definition="fos-median-earnings" />
-                          </h3>
+                      {{ netPrice | numeral("$0,0") }}
+                    </h2>
+                    <div class="data-na" v-else>Data Not Available</div>
+                  </div>
+                  <div id="school-completion-rate-bar" class="">
+                    <h2 class="mb-3">
+                      <!--prettyhtml-ignore-->
+                      Graduation Rate&nbsp;<tooltip
+                        definition="graduation-rate"
+                        :version="completionRateFieldDefinition"
+                      />
+                    </h2>
 
-                          <h4
-                            class="display-2 navy-text font-weight-bold"
-                            v-if="
-                              selectedFOSDetail &&
-                                selectedFOSDetail.earnings.highest['2_yr']
-                                  .overall_median_earnings
-                            "
-                          >
-                            {{
-                              selectedFOSDetail.earnings.highest["2_yr"]
-                                .overall_median_earnings | numeral("$0,0")
-                            }}
-                          </h4>
+                    <horizontal-bar
+                      v-if="completionRate"
+                      :value="Math.round(parseFloat(completionRate) * 100)"
+                      :min="0"
+                      :max="100"
+                      color="#0e365b"
+                      :height="50"
+                      :y-bar-thickness="50"
+                      :label-font-size="24"
+                      :labels="true"
+                    ></horizontal-bar>
+                    <div v-else class="data-na">Data Not Available</div>
+                  </div>
 
-                          <div v-else class="data-na">
-                            Data Not Available
-                          </div>
-                        </div>
+                  <div id="school-salary-after-complete" class="">
+                    <h2 class="mb-3">
+                      <!--prettyhtml-ignore-->
+                      Salary After Completing
+                      <tooltip
+                        definition="fos-median-earnings"
+                        :isBranch="isBranch"
+                      />
+                    </h2>
 
-                        <div>
-                          <h3 class="mb-3">
-                            Number of Graduates
-                            <tooltip definition="fos-number-of-graduates" />
-                          </h3>
+                    <p class="mb-1">
+                      Salary after completing depends on field<br
+                        class="d-none d-md-block"
+                      />of study.
+                    </p>
 
-                          <h4
-                            class="display-2 navy-text font-weight-bold"
-                            v-if="
-                              selectedFOSDetail &&
-                                selectedFOSDetail.counts.ipeds_awards2
-                            "
-                          >
-                            {{ selectedFOSDetail.counts.ipeds_awards2 }}
-                          </h4>
-
-                          <div v-else class="data-na">
-                            Data Not Available
-                          </div>
-                        </div>
-                      </div>
-
-                      <div
-                        v-else
-                        id="profile-field-of-study-summary-metric-empty"
-                        class=""
-                      >
-                        <h3 class="mb-3" style="font-weight: 500">
-                          Explore Field of Study Information
-                        </h3>
-
-                        <p style="overflow-wrap: break-word">
-                          Explore field of study information, such as salary
-                          after completing and typical debt. Field of study
-                          titles come from National Center for Education
-                          Statistics groupings and may not match the exact
-                          program titles at {{ schoolName }}.
-                        </p>
-
-                        <!--                          <p>-->
-                        <!--                            Amet consectetur adipiscing elit ut aliquam purus sit. Posuere ac ut consequat semper-->
-                        <!--                            viverra nam libero justo. Aliquet sagittis id consectetur purus ut faucibus pulvinar-->
-                        <!--                            elementum integer.-->
-                        <!--                          </p>-->
-
-                        <div class="fos-profile-mini-summary-info pa-2">
-                          <p class="mt-4">
-                            We have information on
-                            <strong
-                              >{{ fosUndergradCount | numeral }} undergraduate
-                              {{ fosUndergradCount == 1 ? "Field" : "Fields" }}
-                              of Study</strong
-                            >
-                            offered at <strong>{{ schoolName }}</strong>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </v-card>
-                </v-col>
+                    <multi-range
+                      :minmax="earningsRange"
+                      variable="earnings.highest['2_yr'].overall_median_earnings"
+                      :max="{
+                        label: '$150,000',
+                        value: 150000,
+                        style: { height: '60px' },
+                      }"
+                      :addExtraPadding="false"
+                      :rangeChartStyle="{ height: '40px' }"
+                      :lowerStyleOverride="{
+                        height: '50px',
+                        'border-left': '12px solid #0e365b',
+                      }"
+                      :lowerTipStyleOverride="{
+                        top: 'unset',
+                        bottom: '-1.1rem',
+                      }"
+                      :upperStyleOverride="
+                        checkUpperStyle(
+                          _.get(
+                            this.earningsRange,
+                            'max.earnings.highest.2_yr.overall_median_earnings'
+                          ),
+                          150000,
+                          {
+                            height: '50px',
+                            'border-right': '12px solid #0e365b',
+                          }
+                        )
+                      "
+                      :upperTipStyleOverride="
+                        checkTipUpperStyle(
+                          _.get(
+                            this.earningsRange,
+                            'max.earnings.highest.2_yr.overall_median_earnings'
+                          ),
+                          150000,
+                          { top: 'unset', bottom: '-1.1rem' }
+                        )
+                      "
+                    />
+                  </div>
+                </v-col>                
               </v-row>
               <!-- end: Institution Quick Stats -->
             </v-card>
@@ -951,18 +891,12 @@
                   class="px-0 py-3 pa-sm-5"
                 >
                   <v-row>
-                    <v-col cols="12" md="6">
+                    <v-col cols="12" md="12">
                       <div v-if="!isProgramReporter">
                         <h2 class="mb-3">
                           Average Annual Cost&nbsp;
                           <tooltip definition="avg-cost" />
                         </h2>
-                        <p>
-                          Cost includes tuition, living costs, books and
-                          supplies, and fees minus the average grants and
-                          scholarships for federal financial aid recipients.
-                        </p>
-
                         <h2
                           v-if="netPrice"
                           class="display-2 navy-text font-weight-bold"
@@ -970,6 +904,11 @@
                           {{ netPrice | numeral("$0,0") }}
                         </h2>
                         <div class="data-na" v-else>Data Not Available</div>
+                        <p>
+                          Cost includes tuition, living costs, books and
+                          supplies, and fees minus the average grants and
+                          scholarships for federal financial aid recipients.
+                        </p>                        
                       </div>
                       <div v-else>
                         <h2 class="mb-3">
@@ -979,11 +918,6 @@
                             :isNegative="netPrice < 0"
                           />
                         </h2>
-                        <p>
-                          Cost includes tuition, living costs, books and
-                          supplies, and fees minus the average grants and
-                          scholarships for federal financial aid recipients.
-                        </p>
                         <h2 class="title my-3">
                           <span class="font-weight-bold navy-text">{{
                             programReporter[0].title
@@ -1007,15 +941,13 @@
                           >
                         </h2>
                         <div v-else class="data-na">Data Not Available</div>
+                        <p>
+                          Cost includes tuition, living costs, books and
+                          supplies, and fees minus the average grants and
+                          scholarships for federal financial aid recipients.
+                        </p>                        
                       </div>
-                      <h2 class="mb-3 mt-5">Personal Net Price</h2>
-                      <p>
-                        Institutions provide a custom net price calculator.
-                      </p>
-                      <net-price-link :url="netPriceCalculatorUrl" />
-                    </v-col>
-
-                    <v-col cols="12" md="6">
+                      
                       <h2 class="mb-3">By Family Income</h2>
                       <p>
                         Depending on the federal, state, or institutional grant
@@ -1071,6 +1003,9 @@
                           </tr>
                         </tbody>
                       </v-simple-table>
+                      <p class="text-center">
+                        <net-price-link :url="netPriceCalculatorUrl" />                      
+                      </p>
                     </v-col>
                   </v-row>
                 </v-expansion-panel-content>
@@ -1089,30 +1024,32 @@
                   class="px-0 py-3 pa-sm-5"
                 >
                   <v-row>
-                    <v-col cols="12" md="6">
+                    <v-col cols="12" md="12">
                       <h2 class="mb-3">
                         Graduation Rate&nbsp;
                         <tooltip definition="graduation-rate" />
                       </h2>
-                      <donut
+                      <horizontal-bar
                         v-if="completionRate"
-                        color="#0e365b"
                         :value="Math.round(parseFloat(completionRate) * 100)"
-                        :height="200"
-                      ></donut>
+                        :min="0"
+                        :max="100"
+                        color="#1874DC"
+                        :height="25"
+                      ></horizontal-bar>                      
                       <div v-else class="data-na">Data Not Available</div>
-                    </v-col>
-                    <v-col cols="12" md="6">
                       <h2 class="mb-3">
                         Students Who Return After Their First Year&nbsp;
                         <tooltip definition="retention-rate" />
                       </h2>
-                      <donut
+                      <horizontal-bar
                         v-if="retentionRate"
-                        color="#0e365b"
                         :value="retentionRate * 100"
-                        :height="200"
-                      ></donut>
+                        :min="0"
+                        :max="100"
+                        color="#1874DC"
+                        :height="25"
+                      ></horizontal-bar>                        
                       <div v-else class="data-na">Data Not Available</div>
                     </v-col>
                   </v-row>
@@ -1203,7 +1140,7 @@
                               studentsReceivingLoans ||
                                 studentsReceivingLoans == '0'
                             "
-                            color="#0e365b"
+                            color="#1874DC"
                             :value="studentsReceivingLoans * 100"
                             :height="200"
                           ></donut>
@@ -1282,13 +1219,12 @@
                         <!--                            label="Include debt borrowed at prior institutions"-->
                         <!--                          />-->
 
-                        <multi-range
-                          v-if="aidLoanSelect === 'fed'"
-                          :minmax="debtRange"
-                          variable="debt"
-                          :max="{ label: '$100,000', value: 100000 }"
-                          :key="aidShowMedianDebtWithPrior"
-                        />
+                          <div
+                            class="display-2 navy-text font-weight-bold"
+                            v-if="debtRange.median.debt"
+                          >
+                            {{ debtRange.median.debt | numeral("$0,0") }}
+                          </div>
 
                         <h2
                           class="display-2 navy-text font-weight-bold"
@@ -2297,7 +2233,7 @@ import querystring from "querystring"
 import FieldOfStudySelect from "~/components/FieldOfStudySelect.vue"
 import FieldOfStudySearch from "~/components/FieldOfStudySearch.vue"
 import FieldDataExtended from "~/components/FieldDataExtended.vue"
-
+//import VeticalBar from "~/components/VerticalBar.vue"
 import ComplexFields from "~/js/mixins/ComplexFields.js"
 import URLHistory from "~/js/mixins/URLHistory.js"
 import { apiGet } from "~/js/api.js"
@@ -2711,7 +2647,8 @@ export default {
   },
   mounted() {
     let self = this
-
+    this.panelsFOS = [0]
+    
     if (!location.search) {
       return null
     }
