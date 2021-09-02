@@ -7,5 +7,5 @@
 module.exports = {
   siteName: 'College Scorecard',
   plugins: [],
-  pathPrefix: '', //use for federalist
+  pathPrefix: process.env.BASEURL || '', //use for federalist
 }

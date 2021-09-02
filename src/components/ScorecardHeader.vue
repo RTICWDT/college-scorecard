@@ -161,7 +161,7 @@ header {
         <a href="/"
           ><div class="logo">
             <img
-              src="/img/US-DeptOfEducation-Seal.png"
+              src="img/US-DeptOfEducation-Seal.png"
               alt="Department of Education Seal"
             />
           </div>
@@ -181,14 +181,14 @@ header {
             </li>
 
             <li>
-              <a href="/data" :class="{ 'nav-active': activeLink === 'data' }"
+              <a href="data" :class="{ 'nav-active': activeLink === 'data' }"
                 >About the Data</a
               >
             </li>
 
             <li>
               <a
-                href="/search"
+                href="search"
                 :class="{ 'nav-active': activeLink === 'search' }"
                 >Search</a
               >
@@ -363,7 +363,7 @@ export default {
   },
   methods: {
     setActiveLink() {
-      let path = window.location.pathname
+      let path = process.isClient ? window.location.pathname : ""
       if (path.match(/search/)) {
         this.activeLink = "search"
       } else if (path.match(/compare/)) {

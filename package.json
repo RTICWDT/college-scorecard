@@ -5,7 +5,8 @@
   "scripts": {
     "build": "gridsome build",
     "develop": "gridsome develop",
-    "explore": "gridsome explore"
+    "explore": "gridsome explore",
+    "federalist": "gridsome build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",

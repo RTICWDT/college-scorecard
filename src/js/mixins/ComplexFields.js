@@ -412,13 +412,13 @@ export default {
             if (!this.school) return null;
             let id = _.get(this.school, this.fields["ID"]);
             let name = _.get(this.school, this.fields["NAME"], "(unknown)");
-            return "/school/fields/?" + id + "-" + name.replace(/\W+/g, "-");
+            return "school/fields/?" + id + "-" + name.replace(/\W+/g, "-");
         },
         schoolLink() {
             if (!this.school) return null;
             let id = _.get(this.school, this.fields['ID']);
             let name = _.get(this.school, this.fields['NAME'], '(unknown)');
-            return '/school/?' + id + '-' + name.replace(/\W+/g, '-');
+            return 'school/?' + id + '-' + name.replace(/\W+/g, '-');
         },
         estimatedParentBorrowedText(){
             if (!this.school ||

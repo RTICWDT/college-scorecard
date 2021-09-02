@@ -27,7 +27,14 @@ export default {
     //   // Pepare
     // }
   },
-  created(){
-    this.queryStringParameters = this.parseURLParameters(decodeURIComponent(window.location.search.substr(1)));
+  created() {
+    let url
+    if (process.isClient) {
+      url = window.location.search.substr(1)
+    }
+    else {
+      url = ""
+    }
+    this.queryStringParameters = this.parseURLParameters(decodeURIComponent(url));
   }
 }

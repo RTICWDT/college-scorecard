@@ -45,17 +45,17 @@
                 @context-switch-click="handleDisplayToggleClick"
                 @context-tab-change="handleDisplayToggleClick"
                 :fill-space="true"
-                :compare-institutions-count="$store.state.institutions.length"
-                :compare-fields-of-study-count="$store.state.fos.length"
+                :compare-institutions-count="countSchools"
+                :compare-fields-of-study-count="countFieldsOfStudy"
               >
                 <template v-slot:tab-school>
                   <h3 class="compare-tab-title">
-                    Schools ({{ compareSchools.length }})
+                    Schools ({{ countSchools }})
                   </h3>
                 </template>
                 <template v-slot:tab-fos>
                   <h3 class="compare-tab-title">
-                    Fields of Study ({{ compareFieldsOfStudy.length }})
+                    Fields of Study ({{ countFieldsOfStudy }})
                   </h3>
                 </template>
               </context-toggle>
@@ -82,7 +82,7 @@
                 <v-chip-group column>
                   <v-chip
                     class="pa-4 ma-2"
-                    v-for="institution in $store.state.institutions"
+                    v-for="institution in responseCache.institution"
                     :key="institution.schoolId"
                     close
                     @click:close="
@@ -158,7 +158,7 @@
                 <!-- Mobile Chip Layout -->
                 <v-chip-group show-arrows class="d-md-none">
                   <v-chip
-                    v-for="fieldOfStudy in $store.state.fos"
+                    v-for="fieldOfStudy in responseCache.fieldsOfStudy"
                     :key="`${fieldOfStudy.id}${fieldOfStudy.code}`"
                     close
                     @click:close="
@@ -167,17 +167,17 @@
                   >
                     <div class="compare-fos-chip pa-2">
                       <h4>
-                        {{ fieldOfStudy.fosTitle | formatFieldOfStudyTitle }}
+                        {{ fieldOfStudy.title | formatFieldOfStudyTitle }}
                       </h4>
                       <span class="fos-uppercase-credential-title">
                         {{
-                          fieldOfStudy.credentialTitle
+                          fieldOfStudy["credential.title"]
                             | formatFieldOfStudyCredentialTitle
                         }}
                       </span>
                       <br />
                       <span class="fos-school-name-text">{{
-                        fieldOfStudy.institutionName
+                        fieldOfStudy["school.name"]
                       }}</span>
                     </div>
                   </v-chip>
@@ -187,7 +187,7 @@
                 <v-chip-group class="d-none d-md-block" column>
                   <v-chip
                     class="ma-2"
-                    v-for="fieldOfStudy in $store.state.fos"
+                    v-for="fieldOfStudy in responseCache.fieldsOfStudy"
                     :key="`${fieldOfStudy.id}${fieldOfStudy.code}`"
                     close
                     @click:close="
@@ -196,15 +196,15 @@
                   >
                     <div class="compare-fos-chip pa-2">
                       <h4>
-                        {{ fieldOfStudy.fosTitle | formatFieldOfStudyTitle }}
+                        {{ fieldOfStudy.title | formatFieldOfStudyTitle }}
                       </h4>
                       <span class="fos-uppercase-credential-title">{{
-                        fieldOfStudy.credentialTitle
+                        fieldOfStudy["credential.title"]
                           | formatFieldOfStudyCredentialTitle
                       }}</span
                       ><br />
                       <span class="fos-school-name-text">{{
-                        fieldOfStudy.institutionName
+                        fieldOfStudy["school.name"]
                       }}</span>
                     </div>
                   </v-chip>
@@ -1248,6 +1248,7 @@ import {
   fieldOfStudyCompareFormat,
 } from "~/js/commonFormats"
 import ContextToggle from "~/components/ContextToggle.vue"
+import { mapGetters } from "vuex"
 
 export default {
   mixins: [ComplexFields, AnalyticsEvents, Router],
@@ -1308,23 +1309,28 @@ export default {
         { text: "Parent Plus Loans", value: "plus" },
       ],
       controlTab: 0,
-      countSchools() {
-        return this.passedSchools.length || compareSchools.length
-      },
-      countFieldsOfStudy() {
-        return this.passedFieldsOfStudy.length || compareFieldsOfStudy.length
-      },
     }
   },
-  computed: {
+  watch: {
     compareSchools() {
-      return this.$store.state.institutions
+      this.responseCache.institution = []
+      this.schools["2-year schools"] = []
+      this.schools["4-year schools"] = []
+      this.schools["Certificate schools"] = []
+      this.queryInstitutions()
     },
     compareFieldsOfStudy() {
-      return this.$store.state.fos
+      this.responseCache.fieldsOfStudy = []
+      this.schools["2-year schools"] = []
+      this.schools["4-year schools"] = []
+      this.schools["Certificate schools"] = []
+      this.queryFieldsOfStudy(this.locateFieldsOfStudy())
     },
+  },
+  computed: {
     shareUrl() {
-      const compareBaseURL = window.location.origin + "/compare/?"
+      let origin = process.isClient ? window.location.origin : ""
+      const compareBaseURL = origin + "/compare/?"
 
       let paramArray = {
         // Institution
@@ -1359,17 +1365,25 @@ export default {
       return compareBaseURL + this.prepareQueryString(paramArray)
     },
     referrerLink() {
-      return document.referrer || `/search`
+      let referrer
+      if (process.isClient) {
+        referrer = document.referrer
+      } else {
+        referrer = null
+      }
+      return referrer || `/search`
     },
     showSearchForm() {
       if (
         this.displayToggle === "institutions" &&
-        this.$store.state.institutions.length > 0
+        (this.$store.state.institutions.length > 0 ||
+          this.passedSchools.length > 0)
       ) {
         return false
       } else if (
         this.displayToggle === "fos" &&
-        this.$store.state.fos.length > 0
+        (this.$store.state.fos.length > 0 ||
+          this.passedFieldsOfStudy.length > 0)
       ) {
         return false
       }
@@ -1460,6 +1474,16 @@ export default {
     filteredFieldsOfStudy() {
       return this.categorizeFieldsOfStudy(this.responseCache.fieldsOfStudy)
     },
+    ...mapGetters({
+      compareSchools: "getInstitutions",
+      compareFieldsOfStudy: "getFieldsOfStudy",
+    }),
+    countSchools() {
+      return this.passedSchools.length || this.compareSchools.length
+    },
+    countFieldsOfStudy() {
+      return this.passedFieldsOfStudy.length || this.compareFieldsOfStudy.length
+    },
   },
   methods: {
     all() {
@@ -1470,78 +1494,6 @@ export default {
       this.panels = []
     },
 
-    saveCompareList(compareKey, removeFromCompare, addToCompare) {
-      // TODO - Maybe move this to the local storage mixin?
-
-      // TODO - Add formatting these data values as a function. No formatting inline.
-      // Put it in centralized location so all methods can use it.
-      switch (compareKey) {
-        case localStorageKeys.COMPARE_KEY:
-          removeFromCompare.forEach((value, key) => {
-            this.$emit(
-              "toggle-compare-school",
-              {
-                schoolId: value.schoolId,
-                schoolName: value.schoolName,
-              },
-              localStorageKeys.COMPARE_KEY
-            )
-          })
-          addToCompare.forEach((value, key) => {
-            this.$emit(
-              "toggle-compare-school",
-              {
-                schoolId: value.schoolId,
-                schoolName: value.schoolName,
-              },
-              localStorageKeys.COMPARE_KEY
-            )
-          })
-
-          // Is no longer a shared comparison
-          this.isSharedComparison = false
-
-          break
-        case localStorageKeys.COMPARE_FOS_KEY:
-          removeFromCompare.forEach((value, key) => {
-            this.$emit(
-              "toggle-compare-school",
-              {},
-              localStorageKeys.COMPARE_FOS_KEY
-            )
-          })
-          addToCompare.forEach((value, key) => {
-            this.$emit(
-              "toggle-compare-school",
-              {},
-              localStorageKeys.COMPARE_FOS_KEY
-            )
-          })
-          break
-        default:
-          removeFromCompare.forEach((value, key) => {
-            this.$emit(
-              "toggle-compare-school",
-              {
-                schoolId: value.schoolId,
-                schoolName: value.schoolName,
-              },
-              localStorageKeys.COMPARE_KEY
-            )
-          })
-          addToCompare.forEach((value, key) => {
-            this.$emit(
-              "toggle-compare-school",
-              {
-                schoolId: value.schoolId,
-                schoolName: value.schoolName,
-              },
-              localStorageKeys.COMPARE_KEY
-            )
-          })
-          break
-      }
-    },
     queryInstitutions() {
       // TODO - Refactor this, make it work for all querying.
       // Data manipulation after the return.
@@ -1679,15 +1631,20 @@ export default {
           this.loading = false
         })
     },
-    handleCompareListSaveClick(compareKey = localStorageKeys.COMPARE_KEY) {
-      if (compareKey === localStorageKeys.COMPARE_KEY) {
-        this.saveCompareList(
-          localStorageKeys.COMPARE_KEY,
-          this.compareSchools,
-          this.responseCache.institution
-        )
-      } else {
-      }
+    handleCompareListSaveClick() {
+      this.responseCache.institution.map((school) => {
+        this.$store.commit("toggleSchool", school)
+      })
+      this.responseCache.fieldsOfStudy.map((fos) => {
+        this.$store.commit("toggleFieldOfStudy", {
+          code: fos.code,
+          credentialTitle: fos["credential.title"],
+          fosTitle: fos.title,
+          id: fos.unit_id,
+          institutionName: fos["school.name"],
+          credentialLevel: fos["credential.level"],
+        })
+      })
     },
     handleChipCloseClick(
       removeData,
