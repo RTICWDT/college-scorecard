@@ -371,7 +371,7 @@
                 <hr/>
 
                 <p class="mx-10">
-                  Veterans are eligible for higher education fudning through the G.I. Bill benefits. Use the 
+                  Veterans are eligible for higher education funding through the G.I. Bill benefits. Use the 
 
                   <a
                     href="https://www.vets.gov/gi-bill-comparison-tool"
