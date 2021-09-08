@@ -140,17 +140,18 @@
                       />
                     </h2>
 
-                    <bar-chart
+                    <vertical-bar-median
                       v-if="completionRate"
                       :value="Math.round(parseFloat(completionRate) * 100)"
                       :min="0"
                       :max="100"
+                      :median="50"
                       color="#0e365b"
                       :height="50"
                       :y-bar-thickness="50"
                       :label-font-size="24"
                       :labels="true"
-                    ></bar-chart>
+                    ></vertical-bar-median>
                     <div v-else class="data-na">Data Not Available</div>
                   </div>
 
@@ -2284,7 +2285,7 @@
 <script>
 import Donut from "~/components/Donut.vue"
 import NameAutocomplete from "~/components/NameAutocomplete.vue"
-import BarChart from "~/components/Bar.vue"
+import VerticalBarMedian from "~/components/VerticalBarMedian.vue"
 import Tooltip from "~/components/Tooltip.vue"
 import SankeyButtons from "~/components/SankeyButtons.vue"
 import Sankey from "~/components/Sankey.vue"
@@ -2314,7 +2315,7 @@ export default {
   components: {
     donut: Donut,
     "name-autocomplete": NameAutocomplete,
-    "bar-chart": BarChart,
+    "vertical-bar-median": VerticalBarMedian,
     tooltip: Tooltip,
     "sankey-buttons": SankeyButtons,
     sankey: Sankey,
@@ -2331,7 +2332,7 @@ export default {
     "field-of-study-select": FieldOfStudySelect,
     "field-of-study-search": FieldOfStudySearch,
     "field-data-extended": FieldDataExtended,
-    "add-to-compare": AddToCompare,
+    "add-to-compare": AddToCompare
   },
   data() {
     return {
