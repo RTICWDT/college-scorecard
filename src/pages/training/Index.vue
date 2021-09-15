@@ -2,7 +2,7 @@
   <div class="v-application-override">
     <div class="justify-center" style="background:#fff;width:100%;padding-top:105px;">    
         <v-container><v-row class="ml-2">
-          <v-col cols="1" class="justify-end"><img src="/img/icon-Note.svg" alt="Note Icon" style="vertical-align: middle;float:right;"/></v-col>
+          <v-col cols="1" class="justify-end"><img src="img/icon-Note.svg" alt="Note Icon" style="vertical-align: middle;float:right;"/></v-col>
           <v-col cols="11"><p class="align-left text-left" style="">CollegeScorecard.ed.gov/training provides information on colleges that provide Pell Grants<tooltip definition="pell-grant" style="vertical-align: text-bottom;margin-left:-5px;margin-right:-5px;"/>and that also have workforce programs approved by the Department of Labor. For the full list of colleges, click <a href="/">here</a>.</p></v-col>
           </v-row></v-container>     
       </div>
@@ -63,7 +63,7 @@
                         color="secondary"
                         @click="handleSearchNearbySchools()"
                       >
-                      <img src="/img/icon-Location.svg" alt="Department of Labor Icon" class="py-3 pl-3 pr-1"/> SEARCH NEARBY SCHOOLS
+                      <img src="img/icon-Location.svg" alt="Department of Labor Icon" class="py-3 pl-3 pr-1"/> SEARCH NEARBY SCHOOLS
 
                       </v-btn>
                     </p>    
@@ -110,7 +110,7 @@
 
                   <div class="home-icon-wrapper">
                     <div class="home-icon">
-                      <img src="/img/Logo-Department-of-Labor.png" alt="Department of Labor Icon">
+                      <img src="img/Logo-Department-of-Labor.png" alt="Department of Labor Icon">
                     </div>
                   </div>
 
@@ -157,7 +157,7 @@
 
                   <div class="home-icon-wrapper">
                     <div class="home-icon">
-                      <img src="/img/icon-Financial-Aid-training.svg" alt="Financial Aid Icon">
+                      <img src="img/icon-Financial-Aid-training.svg" alt="Financial Aid Icon">
                     </div>
                   </div>
                 </div>
