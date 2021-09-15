@@ -6,50 +6,50 @@
     v-if="currentSchoolCount > 0 || currentFieldOfStudyCount > 0"
   >
     <div>
-      <div v-if="currentSchoolCount < 10" class="compare-header-text mb-1">
+      <span class="compare-header-text ml-8 mr-6">Ready to Compare: </span>
+      <span v-if="currentSchoolCount < 10" class="compare-header-text mb-1">
         <div
-          class="compare-icon-wrapper d-inline-block mr-2"
+          class="compare-icon-wrapper d-inline-block mx-2"
           style="background: #C4DEC4;"
         >
-          <v-icon class="mt-1" color="#122E51" small>
+          <v-icon class="mt-1" color="#122E51" size="24">
             fas fa-university
           </v-icon>
         </div>
         {{ currentSchoolCount }} {{ schoolText }} &nbsp;&nbsp;
-      </div>
-      <div v-else class="compare-header-text mb-1  mr-2">
+      </span>
+      <span v-else class="compare-header-text d-inline-block mb-1 ml-4">
         <v-icon
           color="red"
           medium
           class="mr-2"
-          style="font-size:30px;border-radius:50%;border:3px solid white;"
+          style="font-size:40px;border-radius:50%;"
           >fas fa-exclamation-circle</v-icon
-        >Maximum of 10 Schools reached.
-      </div>
-      <div
+        >Maximum of 10 Schools reached
+      </span>
+      <span
         v-if="currentFieldOfStudyCount < 10"
-        class="compare-header-text mb-1"
+        class="compare-header-text mb-1 ml-6"
       >
         <div
           class="compare-icon-wrapper d-inline-block mr-2"
           style="background: #fec005;"
         >
-          <v-icon class="mt-1" color="black" small>
+          <v-icon class="mt-1" color="black"  size="24">
             fas fa-award
           </v-icon>
         </div>
-        {{ currentFieldOfStudyCount }} {{ fieldOfStudyText }} to compare and
-        share.
-      </div>
-      <div v-else class="compare-header-text mb-1">
+        {{ currentFieldOfStudyCount }} {{ fieldOfStudyText }} 
+      </span>
+      <span v-else class="compare-header-text d-inline-block mb-1 mr-2 ml-6">
         <v-icon
           color="red"
           medium
           class="mr-2"
-          style="font-size:30px;border-radius:50%;border:3px solid white;"
+          style="font-size:30px;border-radius:50%;"
           >fas fa-exclamation-circle</v-icon
-        >Maximum of 10 Fields of Study reached.
-      </div>
+        >Maximum of 10 Fields of Study reached
+      </span>
     </div>
   </div>
 </template>
@@ -61,7 +61,7 @@
   width: 50%;
   left: 25%;
   bottom: 0px;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.98);
   color: #ffffff;
   z-index: 200;
   border-radius: 3px 3px 0 0;
@@ -75,15 +75,16 @@
 .compare-icon-wrapper {
   border-radius: 50%;
   box-shadow: 0px 3px 6px #00000029;
-  border: white 3px solid;
-  width: 36px;
-  height: 36px;
+  //border: white 3px solid;
+  width: 40px;
+  height: 40px;
   text-align: center;
 }
 
 .compare-header-text {
-  line-height: 1.5;
-  display: flex;
+  line-height: 2.0;
+  display: inline-flex;
+  justify-content: center;
   align-items: center;
 }
 </style>
@@ -110,8 +111,8 @@ export default {
           : "School"
       return this.$store.state.institutions.length > 0 &&
         this.$store.state.fos.length == 10
-        ? ret + " to compare and share."
-        : ret + " and "
+        ? ret
+        : ret
     },
     fieldOfStudyText() {
       return this.$store.state.fos.length > 1 ||

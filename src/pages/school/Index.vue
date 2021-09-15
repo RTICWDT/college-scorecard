@@ -142,12 +142,27 @@
 
                     <vertical-bar-median
                       v-if="completionRate"
-                      :value="Math.round(parseFloat(completionRate) * 100)"
-                      :min="0"
-                      :max="100"
-                      :median="50"
+                      :value="{
+                        label: Math.round(parseFloat(completionRate) * 100) + '%',
+                        value: Math.round(parseFloat(completionRate) * 100)
+                      }"
+                      :min="{
+                        label: '0%',
+                        value: 0,
+                        style: { height: '60px' },
+                      }"
+                      :max="{
+                        label: '100%',
+                        value: 100,
+                        style: { height: '60px' },
+                      }"
+                      :median="{
+                        label: '50%',
+                        value: 50,
+                        style: { height: '60px' },
+                      }"
                       color="#0e365b"
-                      :height="50"
+                      :height="500"
                       :y-bar-thickness="50"
                       :label-font-size="24"
                       :labels="true"
@@ -560,7 +575,7 @@
 
                     <div class="px-5 pb-5 px-sm-5 py-sm-4">
                       <v-row>
-                        <v-col cols="12" md="5">
+                        <v-col cols="12" md="5" class="d-flex">
                           <v-checkbox
                             class="mt-2"
                             hide-details
@@ -574,10 +589,10 @@
                                   class="d-sm-none"
                                 />
                                 institution&nbsp;
-                                <tooltip definition="include-debt-prior-inst" />
                               </span>
                             </template>
                           </v-checkbox>
+                          <tooltip definition="include-debt-prior-inst" />                          
                         </v-col>
 
                         <!--Median Total-->
@@ -1114,7 +1129,7 @@
                         />
                       </v-col>
 
-                      <v-col cols="12" md="4">
+                      <v-col cols="12" md="4" class="d-flex">
                         <v-checkbox
                           v-model="aidShowMedianDebtWithPrior"
                           label="Include debt borrowed at prior institutions"
@@ -1124,10 +1139,10 @@
                             <span>
                               Include debt borrowed at any prior
                               institutions&nbsp;
-                              <tooltip definition="include-debt-prior-inst" />
                             </span>
                           </template>
                         </v-checkbox>
+                        <tooltip definition="include-debt-prior-inst" />
                       </v-col>
 
                       <v-col cols="12" md="6">
@@ -1535,7 +1550,7 @@
                       </h3>
 
                       <v-row>
-                        <v-col cols="12" md="4" sm="12">
+                        <v-col cols="12" md="4" sm="12"  class="d-flex">
                           <v-checkbox
                             hide-details
                             v-model="fosShowDebtAtPrior"
@@ -1546,10 +1561,10 @@
                               <span class="profile-fos-include-prior-debt">
                                 Include debt borrowed at any prior
                                 institutions&nbsp;
-                                <tooltip definition="include-debt-prior-inst" />
                               </span>
                             </template>
                           </v-checkbox>
+                          <tooltip definition="include-debt-prior-inst" />
                         </v-col>
 
                         <!--Median Total-->
@@ -2303,7 +2318,6 @@ import querystring from "querystring"
 import FieldOfStudySelect from "~/components/FieldOfStudySelect.vue"
 import FieldOfStudySearch from "~/components/FieldOfStudySearch.vue"
 import FieldDataExtended from "~/components/FieldDataExtended.vue"
-//import VeticalBar from "~/components/VerticalBar.vue"
 import ComplexFields from "~/js/mixins/ComplexFields.js"
 import URLHistory from "~/js/mixins/URLHistory.js"
 import { apiGet } from "~/js/api.js"

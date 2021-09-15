@@ -29,6 +29,10 @@
     text-decoration: underline;
   }
 }
+
+.noCompareAllow {
+  cursor: not-allowed !important;
+}
 </style>
 
 <template>
@@ -54,6 +58,7 @@
             class="float-right search-result-card-compare"
             :color="isSelected ? '#0075B2' : 'grey'"
             @click="$store.commit('toggleSchool', school)"
+            :class="isSelected ? '' : (compareSchoolsLength > 9 ? 'noCompareAllow' : '')"
             v-bind="attrs"
             v-on="on"
             aria-label="Add to compare"
@@ -63,7 +68,8 @@
           </v-btn>
         </template>
 
-        <span>Add School to compare</span>
+        <!--<span>Add School to compare</span>-->
+        <span>{{compareHoverCountText}}</span>
       </v-tooltip>
 
       <p class="overline mb-1">{{ city }}, {{ state }}</p>
@@ -150,6 +156,7 @@ export default {
   },
   props: {
     school: Object,
+    "schoolsCount": Number,    
   },
   computed: {
     displayGradRate() {
@@ -162,6 +169,17 @@ export default {
         )
       }
     },
+    compareHoverCountText() {
+      if (this.schoolsCount > 9){
+        return "Maximum of 10 schools reached";
+      }
+      else{
+        return "Add School to compare";
+      }
+    },
+    compareSchoolsLength() {
+      return this.schoolsCount;
+    },    
     displayEarn() {
       if (!this.earningsRange) {
         return "N/A"

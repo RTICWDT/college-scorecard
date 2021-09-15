@@ -56,6 +56,11 @@
 .result-card-fos-item-truncated {
   vertical-align: middle;
 }
+
+.noCompareAllow {
+  cursor: not-allowed !important;
+}
+
 </style>
 
 <template>
@@ -139,9 +144,10 @@
                     :color="
                       selectedFieldOfStudyClass(fieldOfStudy) ===
                       'result-card-selected'
-                        ? '#0075B2'
-                        : 'gray'
-                    "
+                        ? '' 
+                        : (compareFOSLength > 9 
+                        ? 'noCompareAllow' 
+                        : '')"
                     v-bind="attrs"
                     v-on="on"
                   >
@@ -150,7 +156,8 @@
                   </v-btn>
                 </template>
 
-                <span>Add Field of Study to compare</span>
+                  <!--<span>Add Field of Study to compare</span>-->
+                  <span>{{compareFOSHoverCountText}}</span>
               </v-tooltip>
 
               <!-- Compare on small and below-->
@@ -170,8 +177,10 @@
                       :color="
                         selectedFieldOfStudyClass(fieldOfStudy) ===
                         'result-card-selected'
-                          ? '#0075B2'
-                          : 'gray'
+                          ? '' 
+                          : (compareFOSLength > 9 
+                          ? 'noCompareAllow' 
+                          : '')
                       "
                       v-bind="attrs"
                       v-on="on"
@@ -181,6 +190,7 @@
                     </v-btn>
                   </template>
                   <span>Add Field of Study to compare</span>
+                  <!--<span>Add Field of Study to compare</span>-->
                 </v-tooltip>
               </div>
 
@@ -282,6 +292,17 @@ export default {
       //   totalCount += fieldCategory.items.length;
       // },0);
     },
+      compareFOSHoverCountText() {
+        if (this.selectedFieldsOfStudy.length > 9){
+          return "Maximum of 10 Fields of Study reached";
+        }
+        else{
+          return "Add Field of Study to compare";
+        }
+      },
+      compareFOSLength() {
+        return this.selectedFieldsOfStudy.length;
+      },    
   },
   components: {
     tooltip: Tooltip,

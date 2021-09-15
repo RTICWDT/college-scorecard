@@ -70,7 +70,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "~/sass/_variables.scss";
 .range-container {
   overflow: visible;
