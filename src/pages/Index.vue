@@ -193,7 +193,7 @@
                     <v-col cols="4">
                     <div class="home-icon-wrapper  mr-10">
                       <div class="home-icon">
-                        <img src="/img/icon-pathways-blue.svg" alt="Pathways Icon">
+                        <img src="img/icon-pathways-blue.svg" alt="Pathways Icon">
                       </div>
                     </div>
                     </v-col>
@@ -290,7 +290,7 @@
                   <div class="home-icon-wrapper mr-10">
                     <div class="home-icon">
                       <img
-                        src="/img/icon-financial-aid.svg"
+                        src="img/icon-financial-aid.svg"
                         alt="Financial Aid Icon"
                       />
                     </div>
