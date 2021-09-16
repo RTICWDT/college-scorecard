@@ -83,6 +83,8 @@
   $label-offset: 1.5em;
   $label-margin: $label-offset + $label-height;
   $label-width: 10em;
+  $bar-width: 100px;
+  $arrow-size: 7px;
 
   background-color: $light-gray;
   display: block;
@@ -241,7 +243,7 @@ export default {
       type: Object,
       default: () => {
         return {
-          height: "15px",
+          height: "100px",
         }
       },
     },

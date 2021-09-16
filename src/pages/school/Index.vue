@@ -169,95 +169,8 @@
                     ></vertical-bar-median>
                     <div v-else class="data-na">Data Not Available</div>
                   </div>
-
-                  <div id="school-salary-after-complete" class="">
-                    <h2 class="mb-3">
-                      <!--prettyhtml-ignore-->
-                      Salary After Completing
-                      <tooltip
-                        definition="fos-median-earnings"
-                        :isBranch="isBranch"
-                      />
-                    </h2>
-
-                    <p class="mb-1">
-                      Salary after completing depends on field<br
-                        class="d-none d-md-block"
-                      />of study.
-                    </p>
-
-                    <multi-range
-                      :minmax="earningsRange"
-                      variable="earnings.highest['2_yr'].overall_median_earnings"
-                      :max="{
-                        label: '$150,000',
-                        value: 150000,
-                        style: { height: '60px' },
-                      }"
-                      :addExtraPadding="false"
-                      :rangeChartStyle="{ height: '40px' }"
-                      :lowerStyleOverride="{
-                        height: '50px',
-                        'border-left': '12px solid #0e365b',
-                      }"
-                      :lowerTipStyleOverride="{
-                        top: 'unset',
-                        bottom: '-1.1rem',
-                      }"
-                      :upperStyleOverride="
-                        checkUpperStyle(
-                          _.get(
-                            this.earningsRange,
-                            'max.earnings.highest.2_yr.overall_median_earnings'
-                          ),
-                          150000,
-                          {
-                            height: '50px',
-                            'border-right': '12px solid #0e365b',
-                          }
-                        )
-                      "
-                      :upperTipStyleOverride="
-                        checkTipUpperStyle(
-                          _.get(
-                            this.earningsRange,
-                            'max.earnings.highest.2_yr.overall_median_earnings'
-                          ),
-                          150000,
-                          { top: 'unset', bottom: '-1.1rem' }
-                        )
-                      "
-                    />
-                  </div>
-
-                  <div id="school-avg-cost" class="mb-4">
-                    <h2 class="mb-3" v-if="!isProgramReporter">
-                      <!--prettyhtml-ignore-->
-                      Average Annual Cost
-                      <tooltip definition="avg-cost" />
-                    </h2>
-                    <h2 v-else class="mb-3">
-                      <!--prettyhtml-ignore-->
-                      Average Annual Cost for Largest Program
-                      <tooltip
-                        definition="avg-program-cost"
-                        :isNegative="netPrice < 0"
-                      />
-                    </h2>
-                    <p class="mb-1">
-                      Cost includes tuition, living costs, books and supplies,
-                      and fees minus the average grants and scholarships for
-                      federal financial aid recipients.
-                    </p>
-                    <h2
-                      class="display-2 navy-text font-weight-bold"
-                      v-if="netPrice"
-                    >
-                      {{ netPrice | numeral("$0,0") }}
-                    </h2>
-                    <div class="data-na" v-else>Data Not Available</div>
-                  </div>
                 </v-col>
+
                 <v-col md="6" class="pr-sm-3">
                   <div id="school-avg-cost" class="mb-4">
                     <h2 class="mb-3" v-if="!isProgramReporter">
@@ -273,11 +186,7 @@
                         :isNegative="netPrice < 0"
                       />
                     </h2>
-                    <p class="mb-1">
-                      Cost includes tuition, living costs, books and supplies,
-                      and fees minus the average grants and scholarships for
-                      federal financial aid recipients.
-                    </p>
+
                     <h2
                       class="display-2 navy-text font-weight-bold"
                       v-if="netPrice"
@@ -285,6 +194,7 @@
                       {{ netPrice | numeral("$0,0") }}
                     </h2>
                     <div class="data-na" v-else>Data Not Available</div>
+                    <em>Median for 4-yr Schools: $25,000</em>
                   </div>
                   <div id="school-completion-rate-bar" class="">
                     <h2 class="mb-3">
@@ -1237,7 +1147,7 @@
 
                           <div
                             class="display-2 navy-text font-weight-bold"
-                            v-if="debtRange.median.debt"
+                            v-if="debtRange && debtRange.median.debt"
                           >
                             {{ debtRange.median.debt | numeral("$0,0") }}
                           </div>
@@ -1323,7 +1233,7 @@
                         >
                           <div
                             class="display-2 navy-text font-weight-bold"
-                            v-if="debtRange.min.payment"
+                            v-if="debtRange && debtRange.min.payment"
                           >
                             {{
                               Math.round(
@@ -2301,6 +2211,7 @@
 import Donut from "~/components/Donut.vue"
 import NameAutocomplete from "~/components/NameAutocomplete.vue"
 import VerticalBarMedian from "~/components/VerticalBarMedian.vue"
+import HorizontalBarMedian from "~/components/HorizontalBarMedian.vue"
 import Tooltip from "~/components/Tooltip.vue"
 import SankeyButtons from "~/components/SankeyButtons.vue"
 import Sankey from "~/components/Sankey.vue"
@@ -2330,6 +2241,7 @@ export default {
     donut: Donut,
     "name-autocomplete": NameAutocomplete,
     "vertical-bar-median": VerticalBarMedian,
+    "horizontal-bar-median": HorizontalBarMedian,
     tooltip: Tooltip,
     "sankey-buttons": SankeyButtons,
     sankey: Sankey,

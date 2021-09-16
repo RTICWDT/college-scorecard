@@ -436,10 +436,10 @@
       window.location.href = url;
     },
     handleFieldOfStudySelected(fieldOfStudy){
-      this.handleLocationCheck('search/?toggle=fos&dolflag=true&sort=avg_net_price:asc&cip4=' + encodeURIComponent(fieldOfStudy.cip4));
+      this.handleLocationCheck('/search/?toggle=fos&dolflag=true&sort=avg_net_price:asc&cip4=' + encodeURIComponent(fieldOfStudy.cip4));
     },
     handleSearchNearbySchools(){
-      this.handleLocationCheck('search/?toggle=institutions&dolflag=true&sort=avg_net_price:asc');
+      this.handleLocationCheck('/search/?toggle=institutions&dolflag=true&sort=avg_net_price:asc');
     },
   },
   mounted() {

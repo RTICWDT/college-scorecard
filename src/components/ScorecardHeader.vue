@@ -161,7 +161,7 @@ header {
         <a href="/"
           ><div class="logo">
             <img
-              src="/img/US-DeptOfEducation-Seal.png"
+              :src="pathPrefix + '/img/US-DeptOfEducation-Seal.png'"
               alt="Department of Education Seal"
             />
           </div>
