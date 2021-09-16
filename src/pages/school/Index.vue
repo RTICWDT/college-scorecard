@@ -2476,7 +2476,6 @@ export default {
       ;(params.key = process.env.GRIDSOME_GOOGLE_MAPS_KEY),
         (params.markers = params.center)
       params.style = "feature:poi|element:labels|visibility:off"
-
       let qs = querystring.stringify(params)
       return googleMapsBaseURL + qs
     },

@@ -161,7 +161,7 @@ header {
         <a href="/"
           ><div class="logo">
             <img
-              :src="pathPrefix + '/img/US-DeptOfEducation-Seal.png'"
+              src="@/assets/img/US-DeptOfEducation-Seal.png"
               alt="Department of Education Seal"
             />
           </div>
@@ -181,14 +181,14 @@ header {
             </li>
 
             <li>
-              <a href="data" :class="{ 'nav-active': activeLink === 'data' }"
+              <a href="/data" :class="{ 'nav-active': activeLink === 'data' }"
                 >About the Data</a
               >
             </li>
 
             <li>
               <a
-                href="search"
+                href="/search"
                 :class="{ 'nav-active': activeLink === 'search' }"
                 >Search</a
               >
@@ -346,6 +346,8 @@ export default {
       drawer: false,
       group: false,
       activeLink: null,
+      pathPre: process.env.GRIDSOME_BASEURL,
+
     }
   },
   computed: {
@@ -354,7 +356,7 @@ export default {
         this.compareFieldsOfStudyCount == 0 &&
         this.compareInstitutionsCount == 0
       )
-    },
+    }   
   },
   watch: {
     $route() {

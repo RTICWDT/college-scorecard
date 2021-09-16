@@ -293,7 +293,7 @@ export default {
       // },0);
     },
       compareFOSHoverCountText() {
-        if (this.selectedFieldsOfStudy.length > 9){
+        if (this.selectedFieldsOfStudy  && this.selectedFieldsOfStudy.length > 9){
           return "Maximum of 10 Fields of Study reached";
         }
         else{
@@ -301,6 +301,7 @@ export default {
         }
       },
       compareFOSLength() {
+        if (this.selectedFieldsOfStudy)
         return this.selectedFieldsOfStudy.length;
       },    
   },

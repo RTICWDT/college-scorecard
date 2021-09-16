@@ -48,7 +48,7 @@ export default {
           name: "description",
           content: this.$static.metadata.siteDescription,
         },
-      ],
+      ]
     }
   },
 }
