@@ -160,7 +160,7 @@ header {
       <div id="nav-site-title">
         <router-link to="/"
           ><div class="logo">
-            <img
+            <v-img
               src="/img/US-DeptOfEducation-Seal.png"
               alt="Department of Education Seal"
             />
