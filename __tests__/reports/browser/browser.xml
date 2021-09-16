@@ -27,7 +27,7 @@ Scenario Steps:
 - I.amOnPage(&#x22;/school/fields/?130794-Yale-University&#x22;) at Test.Scenario (__tests__/e2e/AllPagesRender_test.js:32:5)
 
 </failure></testcase>
-<testcase classname="Ensure that all pages render and mount to window.:" name="Visit /data" time="2.952"/>
+<testcase classname="Ensure that all pages render and mount to window.:" name="Visit /data/home" time="2.952"/>
 <testcase classname="Ensure that all pages render and mount to window.:" name="Visit /data/documentation" time="2.932"/>
 <testcase classname="Ensure that all pages render and mount to window.:" name="Visit /data/changelog" time="3.035"/>
 <testcase classname="Ensure that all pages render and mount to window.:" name="Visit /data/glossary" time="2.948"/>

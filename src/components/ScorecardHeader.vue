@@ -164,6 +164,10 @@ header {
               src="/assets/img/US-DeptOfEducation-Seal.png"
               alt="Department of Education Seal"
             />
+                        <img
+              src="/assets/img/school-icons/city.png"
+              alt="Department of Education Seal"
+            />
           </div>
           <div class="headerText">
             <span class="edLine">U.S. Department of Education</span
@@ -187,10 +191,10 @@ header {
             </li>
 
             <li>
-              <a
-                href="/search"
+              <router-link 
+                to="/search"
                 :class="{ 'nav-active': activeLink === 'search' }"
-                >Search</a
+                >Search</router-link
               >
             </li>
 
@@ -292,7 +296,7 @@ header {
 
           <v-list-item
             class="mobile-navigation-item"
-            @click="mobileNavClick(`/data`)"
+            @click="mobileNavClick(`/data/home`)"
           >
             <v-list-item-content>
               <v-list-item-title class="mobile-navigation-item">
