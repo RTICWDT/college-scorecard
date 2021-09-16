@@ -158,21 +158,17 @@ header {
       flat
     >
       <div id="nav-site-title">
-        <a href="/"
+        <router-link to="/"
           ><div class="logo">
             <img
-              src="/assets/img/US-DeptOfEducation-Seal.png"
-              alt="Department of Education Seal"
-            />
-                        <img
-              src="/assets/img/school-icons/city.png"
+              src="/img/US-DeptOfEducation-Seal.png"
               alt="Department of Education Seal"
             />
           </div>
           <div class="headerText">
             <span class="edLine">U.S. Department of Education</span
             ><span class="siteTitle">College Scorecard</span>
-          </div></a
+          </div></router-link
         >
       </div>
 
@@ -181,11 +177,11 @@ header {
         <nav>
           <ul>
             <li>
-              <a href="/" :class="{ 'nav-active': activeLink === '/' }">Home</a>
+              <router-link to="/" :class="{ 'nav-active': activeLink === '/' }">Home</router-link>
             </li>
 
             <li>
-              <router-link to="data" :class="{ 'nav-active': activeLink === 'data' }">
+              <router-link to="/data/home/" :class="{ 'nav-active': activeLink === 'data' }">
                 About the Data
               </router-link>
             </li>
