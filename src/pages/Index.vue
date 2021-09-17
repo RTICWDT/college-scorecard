@@ -193,7 +193,7 @@
                     <v-col cols="4">
                     <div class="home-icon-wrapper  mr-10">
                       <div class="home-icon">
-                        <img :src"$url('img/icon-pathways-blue.svg')" alt="Pathways Icon">
+                        <img :src="$url('img/icon-pathways-blue.svg')" alt="Pathways Icon">
                       </div>
                     </div>
                     </v-col>
@@ -467,7 +467,7 @@
   min-height: 150px;
 }
 </style>
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~/sass/_variables.scss';
 .homeCallout {
   /*background-color: #ffffff;*/
