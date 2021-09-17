@@ -158,7 +158,7 @@ header {
       flat
     >
       <div id="nav-site-title">
-        <a href="/"
+        <a :href="$url('/')"
           ><div class="logo">
             <img
               :src="$url('/img/US-DeptOfEducation-Seal.png')"
@@ -181,14 +181,14 @@ header {
             </li>
 
             <li>
-              <a :href="$url('data')" :class="{ 'nav-active': activeLink === 'data' }"
+              <a :href="$url('/data')" :class="{ 'nav-active': activeLink === 'data' }"
                 >About the Data</a
               >
             </li>
 
             <li>
               <a
-                :href="$url('search')"
+                :href="$url('/search')"
                 :class="{ 'nav-active': activeLink === 'search' }"
                 >Search</a
               >

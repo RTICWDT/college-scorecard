@@ -98,7 +98,7 @@
           <v-row class="mt-md-12 px-md-6">
 
             <!-- apprenticeships callout -->
-            <v-col class="homeCallout apprenticeships"
+            <v-col class="trainingCallout apprenticeships"
               cols="12"
               md="6"
               sm="12"
@@ -108,9 +108,9 @@
 
                 <div class="home-callout-top mb-12">
 
-                  <div class="home-icon-wrapper">
+                  <div class="landing-icon-wrapper">
                     <div class="home-icon">
-                      <img src="img/Logo-Department-of-Labor.png" alt="Department of Labor Icon">
+                      <img :src="$url('img/Logo-Department-of-Labor.png')" alt="Department of Labor Icon">
                     </div>
                   </div>
 
@@ -145,7 +145,7 @@
             </v-col>
 
             <!-- paying callout -->
-            <v-col class="homeCallout paying"
+            <v-col class="trainingCallout paying"
               cols="12"
               md="6"
               sm="12"
@@ -155,7 +155,7 @@
 
                 <div class="home-callout-top mb-12">
 
-                  <div class="home-icon-wrapper">
+                  <div class="landing-icon-wrapper">
                     <div class="home-icon">
                       <img :src="$url('img/icon-Financial-Aid-training.svg')" alt="Financial Aid Icon">
                     </div>
@@ -212,7 +212,7 @@
 </template>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~/sass/_variables.scss';
 .v-application-override {
     background-repeat: repeat !important;
@@ -317,7 +317,7 @@
     min-height: 150px;
   }
 
-.homeCallout {
+.trainingCallout {
   /*background-color: #ffffff;*/
   h2 {
     font-weight: bold !important;
@@ -362,7 +362,7 @@
   text-decoration: none;
 }
 
-.home-icon-wrapper{
+.landing-icon-wrapper{
   position: relative;
   margin: 0 auto;
   width: 75px;

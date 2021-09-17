@@ -1,6 +1,6 @@
 <template>
   <v-main>
-    <data-navigation current="/data/glossary/" />
+    <data-navigation :current="$url('/data/glossary/')" />
     <v-container>
       <v-row>
         <v-col cols="12" md="10" offset-md="1">

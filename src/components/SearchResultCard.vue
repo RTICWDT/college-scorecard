@@ -136,7 +136,7 @@
     </v-card-text>
     <v-card-actions class="card-actions">
       <p class="px-1">
-        <a :href="schoolLink" class="moreDetails">View More Details &raquo;</a>
+        <a :href="$url(schoolLink)" class="moreDetails">View More Details &raquo;</a>
       </p>
     </v-card-actions>
   </v-card>

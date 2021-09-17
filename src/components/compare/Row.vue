@@ -4,7 +4,7 @@
     @click="$emit('update-highlight', 'school-' + school.id)"
   >
     <p class="subtitle-2 pb-0 mb-0">
-      <a :href="schoolLink">{{ _.get(school, fields["NAME"]) }}</a>
+      <a :href="$url(schoolLink)">{{ _.get(school, fields["NAME"]) }}</a>
     </p>
 
     <horizontal-bar

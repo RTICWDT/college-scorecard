@@ -1,6 +1,6 @@
 <template>
   <v-main>
-    <data-navigation current="/data/documentation/" />
+    <data-navigation :current="$url('/data/documentation/')" />
     <v-container>
       <v-row>
         <v-col cols="12" md="10" offset-md="1">
@@ -22,7 +22,7 @@
                   class="pa-2 text-center fill-height d-flex align-center justify-center"
                   color="grey lighten-4"
                   @click="trackDownload('CollegeScorecardDataDictionary.xlsx')"
-                  href="/assets/CollegeScorecardDataDictionary.xlsx"
+                  :href="$url('/assets/CollegeScorecardDataDictionary.xlsx')"
                   target="_blank"
                   hover
                 >
@@ -36,7 +36,7 @@
                   class="pa-2 text-center fill-height d-flex align-center justify-center"
                   color="grey lighten-4"
                   @click="trackDownload('FullDataDocumentation.pdf')"
-                  :href="'/assets/FullDataDocumentation.pdf'"
+                  :href="$url('/assets/FullDataDocumentation.pdf')"
                   target="_blank"
                   hover
                 >
@@ -50,7 +50,7 @@
                   class="pa-2 text-center fill-height d-flex align-center justify-center"
                   color="grey lighten-4"
                   @click="trackDownload('FieldOfStudyDataDocumentation.pdf')"
-                  :href="'/assets/FieldOfStudyDataDocumentation.pdf'"
+                  :href="$url('/assets/FieldOfStudyDataDocumentation.pdf')"
                   target="_blank"
                   hover
                 >

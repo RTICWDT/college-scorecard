@@ -1,6 +1,6 @@
 <template>
   <v-main>
-    <data-navigation current="/data/changelog/" />
+    <data-navigation :current="$url('/data/changelog/')" />
 
       <v-container>
         <v-row>

@@ -72,7 +72,7 @@
                 <v-col cols="12" class="pa-sm-5">
                   <h1 class="display-1 pa-0 ma-0 font-weight-bold">
                     All Fields of Study Offered at
-                    <a :href="schoolLink">
+                    <a :href="$url(schoolLink)">
                       {{ _.get(school, fields["NAME"], "School Name") }}
                     </a>
                   </h1>
