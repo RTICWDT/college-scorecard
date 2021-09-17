@@ -9,7 +9,7 @@
             :class="years | yearsClass"
             v-if="!sizeOnly"
             v-on="on"
-            :style="{ 'background-image': yearIcon }"
+            :style="{ 'background-image': 'url(' + $url(yearIcon) + ')' }"
           >
             <span>{{ years | formatYearsLabel }}</span>
           </li>
@@ -19,21 +19,21 @@
       <li
         :class="_.get(school, fields['OWNERSHIP'], '-1') | controlClass"
         v-if="!sizeOnly"
-        :style="{ 'background-image': ownershipIcon }"
+        :style="{ 'background-image': 'url(' + $url(ownershipIcon) + ')' }"
       >
         <span>{{ _.get(school, fields["OWNERSHIP"], "-1") | control }}</span>
       </li>
       <li
         :class="_.get(school, fields['LOCALE'], '-1') | localeClass"
         v-if="!sizeOnly"
-        :style="{ 'background-image': localeIcon }"
+        :style="{ 'background-image': 'url(' + $url(localeIcon) + ')' }"
       >
         <span>{{ _.get(school, fields["LOCALE"], "-1") | locale }}</span>
       </li>
 
       <li
         :class="_.get(school, fields['SIZE'], '-1') | sizeCategoryClass"
-        :style="{ 'background-image': sizeIcon }"
+        :style="{ 'background-image': 'url(' + $url(sizeIcon) + ')' }"
       >
         <span>{{ _.get(school, fields["SIZE"], "-1") | sizeCategory }}</span>
       </li>
@@ -147,7 +147,7 @@ export default {
     yearIcon() {
       let icon = this.$options.filters.yearsClass(this.years)
       if (icon) {
-        return "url(/img/school-icons/" + icon.substr(5) + ".svg)"
+        return "/img/school-icons/" + icon.substr(5) + ".svg"
       } else {
         return "none"
       }
@@ -157,7 +157,7 @@ export default {
         _.get(this.school, this.fields["OWNERSHIP"], "-1")
       )
       if (icon) {
-        return "url(/img/school-icons/" + icon.substr(5) + ".svg)"
+        return "/img/school-icons/" + icon.substr(5) + ".svg"
       } else {
         return "none"
       }
@@ -167,7 +167,7 @@ export default {
         _.get(this.school, this.fields["LOCALE"], "-1")
       )
       if (icon) {
-        return "url(/img/school-icons/" + icon.substr(5) + ".svg)"
+        return "/img/school-icons/" + icon.substr(5) + ".svg"
       } else {
         return "none"
       }
@@ -177,7 +177,7 @@ export default {
         _.get(this.school, this.fields["SIZE"])
       )
       if (icon) {
-        return "url(/img/school-icons/" + icon.substr(5) + ".svg)"
+        return "/img/school-icons/" + icon.substr(5) + ".svg"
       } else {
         return "none"
       }

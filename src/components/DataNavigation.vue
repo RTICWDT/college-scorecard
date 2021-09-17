@@ -7,13 +7,13 @@
         v-model="dataTabs"
         show-arrows
         class="ml-10"
-        optional
       >
-        <v-tab to="/data/home/" value="home">Data Home</v-tab>
-        <v-tab to="/data/documentation/" value="documentation"
-          >Documentation</v-tab>
-        <v-tab to="/data/changelog/" value="changelog">Change Log</v-tab>
-        <v-tab to="/data/glossary/" value="glossary">Glossary</v-tab>
+        <v-tab :href="$url('/data/')" value="home">Data Home</v-tab>
+        <v-tab :href="$url('/data/documentation/')" value="documentation"
+          >Documentation</v-tab
+        >
+        <v-tab :href="$url('/data/changelog/')" value="changelog">Change Log</v-tab>
+        <v-tab :href="$url('/data/glossary/')" value="glossary">Glossary</v-tab>
       </v-tabs>
     </div>
   </div>

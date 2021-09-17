@@ -158,17 +158,17 @@ header {
       flat
     >
       <div id="nav-site-title">
-        <router-link to="/"
+        <a href="/"
           ><div class="logo">
-            <v-img
-              src="/img/US-DeptOfEducation-Seal.png"
+            <img
+              :src="$url('/img/US-DeptOfEducation-Seal.png')"
               alt="Department of Education Seal"
             />
           </div>
           <div class="headerText">
             <span class="edLine">U.S. Department of Education</span
             ><span class="siteTitle">College Scorecard</span>
-          </div></router-link
+          </div></a
         >
       </div>
 
@@ -177,20 +177,20 @@ header {
         <nav>
           <ul>
             <li>
-              <router-link to="/" :class="{ 'nav-active': activeLink === '/' }">Home</router-link>
+              <a href="/" :class="{ 'nav-active': activeLink === '/' }">Home</a>
             </li>
 
             <li>
-              <router-link to="/data/home/" :class="{ 'nav-active': activeLink === 'data' }">
-                About the Data
-              </router-link>
+              <a href="data" :class="{ 'nav-active': activeLink === 'data' }"
+                >About the Data</a
+              >
             </li>
 
             <li>
-              <router-link 
-                to="/search"
+              <a
+                href="search"
                 :class="{ 'nav-active': activeLink === 'search' }"
-                >Search</router-link
+                >Search</a
               >
             </li>
 
@@ -292,7 +292,7 @@ header {
 
           <v-list-item
             class="mobile-navigation-item"
-            @click="mobileNavClick(`/data/home`)"
+            @click="mobileNavClick(`/data`)"
           >
             <v-list-item-content>
               <v-list-item-title class="mobile-navigation-item">
@@ -346,8 +346,6 @@ export default {
       drawer: false,
       group: false,
       activeLink: null,
-      pathPre: process.env.GRIDSOME_BASEURL,
-
     }
   },
   computed: {
@@ -356,7 +354,7 @@ export default {
         this.compareFieldsOfStudyCount == 0 &&
         this.compareInstitutionsCount == 0
       )
-    }   
+    },
   },
   watch: {
     $route() {
