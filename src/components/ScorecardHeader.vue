@@ -177,18 +177,18 @@ header {
         <nav>
           <ul>
             <li>
-              <a href="/" :class="{ 'nav-active': activeLink === '/' }">Home</a>
+              <a :href="$url('/')" :class="{ 'nav-active': activeLink === '/' }">Home</a>
             </li>
 
             <li>
-              <a href="data" :class="{ 'nav-active': activeLink === 'data' }"
+              <a :href="$url('data')" :class="{ 'nav-active': activeLink === 'data' }"
                 >About the Data</a
               >
             </li>
 
             <li>
               <a
-                href="search"
+                :href="$url('search')"
                 :class="{ 'nav-active': activeLink === 'search' }"
                 >Search</a
               >
