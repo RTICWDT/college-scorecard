@@ -42,12 +42,13 @@
       </v-tooltip>
 
       <span
-        v-if="!hideMiddle"
-        class="picc-range-label picc-range-label-middle"
-        :style="_middle.styles"
-        ref="middle"
+        v-if="!hideMedian"
+        class="picc-range-label picc-range-label-median"
+        :style="_median.styles"
+        ref="median"
       >
-        <span v-html="_middle.label"></span>
+        <span v-html="_median.label"></span>
+        <span class="arrow-left"></span>        
       </span>
 
       <v-tooltip top :disabled="!uppertip">
@@ -74,7 +75,7 @@
 @import "~/sass/_variables.scss";
 .range-container {
   overflow: visible;
-  height: 70px;
+  height: 140px;
   padding-top: 20px;
   padding-right: 0px;
 }
@@ -95,7 +96,7 @@
   position: relative;
 
   .picc-range-bar {
-    background-color: $dark-blue;
+    background-color: $medium-blue;
     height: 100%;
     left: 0;
     position: absolute;
@@ -122,8 +123,8 @@
     &.picc-range-label-min,
     &.picc-range-label-max,
     &.picc-range-label-middle {
-      color: $dark-gray;
-      font-size: 0.7rem;
+      color: #000;
+      font-size: 1rem;
     }
 
     &.picc-range-label-max,
@@ -134,15 +135,15 @@
       }
     }
 
-    &.picc-range-label-middle,
+    &.picc-range-label-median,
     &.picc-range-label-lower,
     &.picc-range-label-upper {
-      border-left: 3px solid $dark-blue;
+      border-left: 1px solid #000;
     }
 
     &.picc-range-label-upper {
       border-left: none;
-      border-right: 3px solid $dark-blue;
+      border-right: none;
       span {
         padding-left: 0.25em;
       }
@@ -150,7 +151,9 @@
     &.picc-range-label-lower {
       span {
         padding-right: 0.25em;
+        border-left:none;
       }
+      display:none;
     }
 
     &.picc-range-label-min,
@@ -164,10 +167,30 @@
       }
     }
 
-    &.picc-range-label-middle {
-      span {
-        margin-left: -($label-width / 2);
+    &.picc-range-label-median {
+      top: 0;
+      bottom: 0;
+      height: $bar-width;
+      position: absolute;
+      margin-top:0;
+      margin-bottom:0;
+      height:100%;
+      width:1px;
+      background-color:#000;  
+      span:not(.arrow-left) {
+        margin-bottom: $bar-width + $arrow-size + 10;
         text-align: center;
+        color:#000;
+        margin-top:-10px;
+      }
+      span.arrow-left {
+        width: 0; 
+        height: 0; 
+        border-left: $arrow-size solid transparent;
+        border-bottom: $arrow-size solid black;
+        border-right: $arrow-size solid transparent;
+        margin-left:$bar-width + 5;
+        margin-top: -7px;
       }
     }
   }
@@ -195,10 +218,10 @@ export default {
         return { value: 25, label: "Lower" }
       },
     },
-    middle: {
+    median: {
       type: Object,
       default: function() {
-        return { value: 50, label: "Middle" }
+        return { value: 50, label: "Median" }
       },
     },
     upper: {
@@ -227,9 +250,9 @@ export default {
         return {}
       },
     },
-    hideMiddle: {
+    hideMedian: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     hideLower: {
       type: Boolean,
@@ -243,7 +266,7 @@ export default {
       type: Object,
       default: () => {
         return {
-          height: "100px",
+          height: "40px",
         }
       },
     },
@@ -275,8 +298,8 @@ export default {
       }
       return styleLabel
     },
-    _middle() {
-      return this.styleLabel(this.middle)
+    _median() {
+      return this.styleLabel(this.median)
     },
     _upper() {
       // return this.styleLabel(this.upper);

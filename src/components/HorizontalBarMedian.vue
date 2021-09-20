@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="minmax && minmax.single">
+    <div v-if="value">
       <range
         :lower="{ value: 0, label: '0' }"
         :upper="{ value: value.value, label: value.label }"
@@ -9,6 +9,7 @@
         :upperTipStyleOverride="upperTipStyleOverride"
         :addExtraPadding="addExtraPadding"
         :rangeChartStyle="rangeChartStyle"
+        :median=median        
       ></range>
     </div>
     <div v-else class="data-na">
@@ -18,10 +19,10 @@
 </template>
 
 <script>
-import Range from "~/components/Range.vue"
+import HorizontalBarRange from "~/components/HorizontalBarRange.vue"
 export default {
   components: {
-    range: Range,
+    range: HorizontalBarRange,
   },
   props: {
     min: {
@@ -37,7 +38,7 @@ export default {
     },
     median: {
       type: Object,
-      default: { value: 50, label: "50%" },
+      default: { value: 30, label: "30%" },
     },
     value: {
       type: Object,
@@ -59,7 +60,7 @@ export default {
       type: Object,
       default: () => {
         return {
-          height: "15px",
+          height: "40px",
         }
       },
     },

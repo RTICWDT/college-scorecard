@@ -9,6 +9,7 @@
         :upperTipStyleOverride="upperTipStyleOverride"
         :addExtraPadding="addExtraPadding"
         :rangeChartStyle="rangeChartStyle"
+        :median=median
       ></range>
     </div>
     <div v-else class="data-na">
@@ -37,7 +38,7 @@ export default {
     },
     median: {
       type: Object,
-      default: { value: 50, label: "50%" },
+      default: { value: 30, label: "30%" },
     },
     value: {
       type: Object,

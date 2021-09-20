@@ -157,8 +157,8 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: '50%',
-                        value: 50,
+                        label: 'Median',
+                        value: 30,
                         style: { height: '60px' },
                       }"
                       color="#0e365b"
@@ -195,88 +195,34 @@
                     </h2>
                     <div class="data-na" v-else>Data Not Available</div>
                     <em>Median for 4-yr Schools: $25,000</em>
-                  </div>
-                  <div id="school-completion-rate-bar" class="">
-                    <h2 class="mb-3">
-                      <!--prettyhtml-ignore-->
-                      Graduation Rate&nbsp;<tooltip
-                        definition="graduation-rate"
-                        :version="completionRateFieldDefinition"
-                      />
-                    </h2>
 
-                    <horizontal-bar
+                    <horizontal-bar-median
                       v-if="completionRate"
-                      :value="Math.round(parseFloat(completionRate) * 100)"
-                      :min="0"
-                      :max="100"
+                      :value="{
+                        label: Math.round(parseFloat(completionRate) * 100) + '%',
+                        value: Math.round(parseFloat(completionRate) * 100)
+                      }"
+                      :min="{
+                        label: '0%',
+                        value: 0,
+                        style: { height: '60px' },
+                      }"
+                      :max="{
+                        label: '100%',
+                        value: 100,
+                        style: { height: '60px' },
+                      }"
+                      :median="{
+                        label: 'Median',
+                        value: 30,
+                        style: { height: '60px' },
+                      }"
                       color="#0e365b"
-                      :height="50"
+                      :height="500"
                       :y-bar-thickness="50"
                       :label-font-size="24"
                       :labels="true"
-                    ></horizontal-bar>
-                    <div v-else class="data-na">Data Not Available</div>
-                  </div>
-
-                  <div id="school-salary-after-complete" class="">
-                    <h2 class="mb-3">
-                      <!--prettyhtml-ignore-->
-                      Salary After Completing
-                      <tooltip
-                        definition="fos-median-earnings"
-                        :isBranch="isBranch"
-                      />
-                    </h2>
-
-                    <p class="mb-1">
-                      Salary after completing depends on field<br
-                        class="d-none d-md-block"
-                      />of study.
-                    </p>
-
-                    <multi-range
-                      :minmax="earningsRange"
-                      variable="earnings.highest['2_yr'].overall_median_earnings"
-                      :max="{
-                        label: '$150,000',
-                        value: 150000,
-                        style: { height: '60px' },
-                      }"
-                      :addExtraPadding="false"
-                      :rangeChartStyle="{ height: '40px' }"
-                      :lowerStyleOverride="{
-                        height: '50px',
-                        'border-left': '12px solid #0e365b',
-                      }"
-                      :lowerTipStyleOverride="{
-                        top: 'unset',
-                        bottom: '-1.1rem',
-                      }"
-                      :upperStyleOverride="
-                        checkUpperStyle(
-                          _.get(
-                            this.earningsRange,
-                            'max.earnings.highest.2_yr.overall_median_earnings'
-                          ),
-                          150000,
-                          {
-                            height: '50px',
-                            'border-right': '12px solid #0e365b',
-                          }
-                        )
-                      "
-                      :upperTipStyleOverride="
-                        checkTipUpperStyle(
-                          _.get(
-                            this.earningsRange,
-                            'max.earnings.highest.2_yr.overall_median_earnings'
-                          ),
-                          150000,
-                          { top: 'unset', bottom: '-1.1rem' }
-                        )
-                      "
-                    />
+                    ></horizontal-bar-median>                    
                   </div>
                 </v-col>                
               </v-row>
