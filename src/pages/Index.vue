@@ -601,7 +601,7 @@ export default {
         this.$url("/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4))
     },
     handleFoSMoreOptionsClick() {
-      this.$router.go(this.$url("/search/?toggle=fos"))
+      this.$router.push("/search/?toggle=fos")
     },
   },
 }
