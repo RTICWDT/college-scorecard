@@ -296,7 +296,7 @@
                 <v-expansion-panel-header
                   id="fields-of-study"
                   aria-controls="fos-content"
-                  @click="trackAccordion('o Study')"
+                  @click="trackAccordion('Fields of Study')"
                 >
                   <span
                     class="field-of-study-select-icon mr-2"

@@ -78,7 +78,7 @@
 
           <p class="overline mb-1">{{ city }}, {{ state }}</p>
           <h2 class="title mt-0 font-weight-bold">
-            <a class="nameLink" :href="$(schoolLink)">{{ schoolName }}</a>
+            <a class="nameLink" :href="$url(schoolLink)">{{ schoolName }}</a>
           </h2>
           <p class="body-2 mt-1">{{ undergraduates | separator }} undergrads</p>
           <v-divider />
