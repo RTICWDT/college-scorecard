@@ -583,14 +583,14 @@ export default {
           .replace(/%3A/g, ":")
 
       // Direct to location.
-      window.location.href = $ulr(url)
+      window.location.href = this.$url(url)
     },
     handleSchoolNameSelected(school) {
       if (typeof school == "string") {
-        window.location = $ulr("/search/?search=" + encodeURIComponent(school))
+        window.location = this.$url("/search/?search=" + encodeURIComponent(school))
       } else {
         window.location =
-          $ulr("/search/?search=" +
+          this.$url("/search/?search=" +
           encodeURIComponent(school["school.name"]) +
           "&id=" +
           school.id)
@@ -598,10 +598,10 @@ export default {
     },
     handleFieldOfStudySelected(fieldOfStudy) {
       window.location =
-        $ulr("/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4))
+        this.$url("/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4))
     },
     handleFoSMoreOptionsClick() {
-      window.location = $ulr("/search/?toggle=fos")
+      window.location = this.$url("/search/?toggle=fos")
     },
   },
 }

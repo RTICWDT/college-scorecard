@@ -296,7 +296,7 @@ export default {
       return "/school/?" + id + "-" + name.replace(/\W+/g, "-")
     },
     shareLink() {
-      return encodeURIComponent(window.location.href) || null
+      return encodeURIComponent(this.$url(window.location.href)) || null
     },
   },
   mounted() {

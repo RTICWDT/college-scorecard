@@ -2309,7 +2309,7 @@ export default {
       return document.referrer || "/search/"
     },
     shareLink() {
-      return encodeURI(window.location.href) || null
+      return encodeURI(this.$url(window.location.href)) || null
     },
     fieldsOfStudy() {
       let self = this
@@ -2491,13 +2491,13 @@ export default {
     },
     handleSchoolNameSelected(school) {
       if (typeof school == "string") {
-        window.location = "/search/?name=" + encodeURIComponent(school)
+        window.location = this.$url("/search/?name=" + encodeURIComponent(school))
       } else {
         window.location =
-          "/search/?name=" +
+          this.$url("/search/?name=" +
           encodeURIComponent(school["school.name"]) +
           "&id=" +
-          school.id
+          school.id)
       }
     },
     parseURLParams(url = location.search.substr(1)) {
@@ -2617,7 +2617,7 @@ export default {
     },
     handleFieldOfStudySelected(fieldOfStudy) {
       window.location =
-        "/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4)
+        this.$url("/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4))
     },
     checkTipUpperStyle(upperValue, maxValue, upperStyleTipOverride) {
       // Fixing padding issue on max value

@@ -433,13 +433,13 @@
           .replace(/%3A/g, ":");
 
       // Direct to location.
-      window.location.href = url;
+      window.location.href = this.$url(url);
     },
     handleFieldOfStudySelected(fieldOfStudy){
-      this.handleLocationCheck('/search/?toggle=fos&dolflag=true&sort=avg_net_price:asc&cip4=' + encodeURIComponent(fieldOfStudy.cip4));
+      this.handleLocationCheck(this.$url('/search/?toggle=fos&dolflag=true&sort=avg_net_price:asc&cip4=' + encodeURIComponent(fieldOfStudy.cip4)));
     },
     handleSearchNearbySchools(){
-      this.handleLocationCheck('/search/?toggle=institutions&dolflag=true&sort=avg_net_price:asc');
+      this.handleLocationCheck(this.$url'/search/?toggle=institutions&dolflag=true&sort=avg_net_price:asc'));
     },
   },
   mounted() {
