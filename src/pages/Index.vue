@@ -583,25 +583,25 @@ export default {
           .replace(/%3A/g, ":")
 
       // Direct to location.
-      window.location.href = url
+      window.location.href = $ulr(url)
     },
     handleSchoolNameSelected(school) {
       if (typeof school == "string") {
-        window.location = "/search/?search=" + encodeURIComponent(school)
+        window.location = $ulr("/search/?search=" + encodeURIComponent(school))
       } else {
         window.location =
-          "/search/?search=" +
+          $ulr("/search/?search=" +
           encodeURIComponent(school["school.name"]) +
           "&id=" +
-          school.id
+          school.id)
       }
     },
     handleFieldOfStudySelected(fieldOfStudy) {
       window.location =
-        "/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4)
+        $ulr("/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4))
     },
     handleFoSMoreOptionsClick() {
-      window.location = `/search/?toggle=fos`
+      window.location = $ulr("/search/?toggle=fos")
     },
   },
 }
