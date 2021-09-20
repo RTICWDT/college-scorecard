@@ -433,7 +433,8 @@
           .replace(/%3A/g, ":");
 
       // Direct to location.
-      window.location.href = this.$url(url);
+      //window.location.href = this.$url(url);
+      this.$router.push(url)
     },
     handleFieldOfStudySelected(fieldOfStudy){
       this.handleLocationCheck(this.$url('/search/?toggle=fos&dolflag=true&sort=avg_net_price:asc&cip4=' + encodeURIComponent(fieldOfStudy.cip4)));

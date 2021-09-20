@@ -2437,10 +2437,9 @@ export default {
     },
     handleSchoolNameSelected(school) {
       if (typeof school == "string") {
-        window.location = this.$url("/search/?name=" + encodeURIComponent(school))
+        this.$router.push("/search/?name=" + encodeURIComponent(school))
       } else {
-        window.location =
-          this.$url("/search/?name=" +
+        this.$router.push("/search/?name=" +
           encodeURIComponent(school["school.name"]) +
           "&id=" +
           school.id)
@@ -2562,8 +2561,7 @@ export default {
       })
     },
     handleFieldOfStudySelected(fieldOfStudy) {
-      window.location =
-        this.$url("/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4))
+      this.$router.push("/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4))
     },
     checkTipUpperStyle(upperValue, maxValue, upperStyleTipOverride) {
       // Fixing padding issue on max value

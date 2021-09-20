@@ -583,22 +583,21 @@ export default {
           .replace(/%3A/g, ":")
 
       // Direct to location.
-      window.location.href = this.$url(url)
+      //window.location.href = this.$url(url)
+      this.$router.push(url)
     },
     handleSchoolNameSelected(school) {
       if (typeof school == "string") {
-        window.location = this.$url("/search/?search=" + encodeURIComponent(school))
+        this.$router.push("/search/?search=" + encodeURIComponent(school))
       } else {
-        window.location =
-          this.$url("/search/?search=" +
+        this.$router.push("/search/?search=" +
           encodeURIComponent(school["school.name"]) +
           "&id=" +
           school.id)
       }
     },
     handleFieldOfStudySelected(fieldOfStudy) {
-      window.location =
-        this.$url("/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4))
+      this.$router.push("/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4))
     },
     handleFoSMoreOptionsClick() {
       this.$router.push("/search/?toggle=fos")

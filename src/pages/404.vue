@@ -35,10 +35,9 @@ export default {
   methods: {
     handleSchoolNameSelected(school) {
       if (typeof school == "string") {
-        window.location = this.$url("/search/?name=" + encodeURIComponent(school))
+        this.$router.push("/search/?name=" + encodeURIComponent(school))
       } else {
-        window.location =
-          this.$url("/search/?name=" +
+        this.$router.push("/search/?name=" +
           encodeURIComponent(school["school.name"]) +
           "&id=" +
           school.id)

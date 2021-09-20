@@ -377,7 +377,8 @@ export default {
       }
     },
     mobileNavClick(urlString) {
-      window.location.href = this.$url(urlString)
+      //window.location.href = this.$url(urlString)
+      this.$router.push(urlString)
     },
     handleCompareIconClick(resourceType = "institution") {
       this.$store.commit("toggleDrawer")
