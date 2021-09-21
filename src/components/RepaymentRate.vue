@@ -93,6 +93,7 @@ export default {
     extractData() {
       var repayment_field = "latest.repayment.2_yr_bb_fed_repayment_suppressed"
       this.outcomes = _.get(this.school, repayment_field)
+      console.log(this.outcomes)
     },
 
     drawSankeyChart() {

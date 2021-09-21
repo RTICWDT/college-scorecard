@@ -50,6 +50,7 @@ export const fields = {
   RETENTION_RATE:       'latest.student.retention_rate_suppressed',
 
   REPAYMENT_RATE:       'latest.repayment.3_yr_repayment_suppressed.overall',
+  REPAYMENT_RATES:      'latest.repayment.2_yr_bb_fed_repayment_suppressed',
 
   AVERAGE_TOTAL_DEBT:   'latest.aid.median_debt_suppressed.completers.overall',
   MONTHLY_LOAN_PAYMENT: 'latest.aid.median_debt_suppressed.completers.monthly_payments',

@@ -1281,7 +1281,7 @@
                           see
                           <a
                             v-bind:href="
-                              '/data/glossary/#repayment-rate-completers'
+                              $url('/data/glossary/#repayment-rate-completers')
                             "
                             >the glossary</a
                           >.
@@ -1290,7 +1290,7 @@
                           Percentage of borrowers in each category 2 years after
                           entering repayment. For category definitions, please
                           see
-                          <a v-bind:href="'/data/glossary/#repayment-rate'"
+                          <a v-bind:href="$url('/data/glossary/#repayment-rate')"
                             >the glossary</a
                           >.
                         </span>
@@ -1310,12 +1310,6 @@
                     </v-row>
                     <v-row v-if="aidLoanSelect === 'fed'" class="mb-2">
                       <v-col class="pt-0 pb-2">
-                        <repayment-rate
-                          v-if="aidLoanSelect === 'fed'"
-                          :school="school"
-                          colors="solid"
-                          :gradOnly="showGradOnly"
-                        />
                       <v-simple-table class="school-table">
                         <caption class="sr-only">
                           Average cost by family income
@@ -1329,57 +1323,57 @@
                         <tbody>
                           <tr>
                             <td>Making Progress</td>
-                            <td v-if="income['0-30000']">
-                              {{ income["0-30000"] | numeral("$0,0") }}
+                            <td v-if="repaymentRates[gradSubgroup]['makingprogress']">
+                              {{ repaymentRates[gradSubgroup]['makingprogress'] | numeral("0.000%") }}
                             </td>
                             <td v-else>--</td>
                           </tr>
                           <tr>
                             <td>Not Making Progress</td>
-                            <td v-if="income['30001-48000']">
-                              {{ income["30001-48000"] | numeral("$0,0") }}
+                            <td v-if="repaymentRates[gradSubgroup]['noprogress']">
+                              {{ repaymentRates[gradSubgroup]['noprogress'] | numeral("0.000%") }}
                             </td>
                             <td v-else>--</td>
                           </tr>
                           <tr>
                             <td>Deferment</td>
-                            <td v-if="income['48001-75000']">
-                              {{ income["48001-75000"] | numeral("$0,0") }}
+                            <td v-if="repaymentRates[gradSubgroup]['deferment']">
+                              {{ repaymentRates[gradSubgroup]['deferment'] | numeral("0.000%") }}
                             </td>
                             <td v-else>--</td>
                           </tr>
                           <tr>
                             <td>Paid in Full</td>
-                            <td v-if="income['75001-110000']">
-                              {{ income["75001-110000"] | numeral("$0,0") }}
+                            <td v-if="repaymentRates[gradSubgroup]['fullypaid']">
+                              {{ repaymentRates[gradSubgroup]['fullypaid'] | numeral("0.000%") }}
                             </td>
                             <td v-else>--</td>
                           </tr>
                           <tr>
                             <td>Forbearance</td>
-                            <td v-if="income['110001-plus']">
-                              {{ income["110001-plus"] | numeral("$0,0") }}
+                            <td v-if="repaymentRates[gradSubgroup]['forbearance']">
+                              {{ repaymentRates[gradSubgroup]['forbearance'] | numeral("0.000%") }}
                             </td>
                             <td v-else>--</td>
                           </tr>
                           <tr>
                             <td>Defaulted</td>
-                            <td v-if="income['110001-plus']">
-                              {{ income["110001-plus"] | numeral("$0,0") }}
+                            <td v-if="repaymentRates[gradSubgroup]['default']">
+                              {{ repaymentRates[gradSubgroup]['default']| numeral("0.000%") }}
                             </td>
                             <td v-else>--</td>
                           </tr>
                           <tr>
                             <td>Delinquent</td>
-                            <td v-if="income['110001-plus']">
-                              {{ income["110001-plus"] | numeral("$0,0") }}
+                            <td v-if="repaymentRates[gradSubgroup]['delinquent']">
+                              {{ repaymentRates[gradSubgroup]['delinquent'] | numeral("0.000%") }}
                             </td>
                             <td v-else>--</td>
                           </tr>
                           <tr>
                             <td>Discharged</td>
-                            <td v-if="income['110001-plus']">
-                              {{ income["110001-plus"] | numeral("$0,0") }}
+                            <td v-if="repaymentRates[gradSubgroup]['discharge']">
+                              {{ repaymentRates[gradSubgroup]['discharge'] | numeral("0.000%") }}
                             </td>
                             <td v-else>--</td>
                           </tr>                                                                              
@@ -2362,6 +2356,9 @@ export default {
 
       return this.organizeFieldsOfStudy(this.allFieldsOfStudy, this.CIP2)
     },
+    gradSubgroup() {
+      return this.showGradOnly ? 'ugcomp' : 'ug'
+    }
   },
   methods: {
     createMap(school) {
@@ -2635,7 +2632,7 @@ export default {
         console.warn("No School found for ID: " + id)
       })
   },
-  watch: {
+  watch: {  
     selectedFOS(val, oldVal) {
       // Update the URL when this value changes;
       if (val !== oldVal) {

@@ -438,7 +438,11 @@ export default {
         dolflag() {
             if (!this.school) return null;
             return _.get(this.school, this.fields['DOLFLAG'])
-        },        
+        },
+        repaymentRates()  {
+            if (!this.school) return null;
+            return _.get(this.school, fields['REPAYMENT_RATES'])      
+        },
     },
     methods: {
         // Moving items down here for easier testing.

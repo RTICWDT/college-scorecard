@@ -42,7 +42,8 @@ export default {
           this.location.error = "Not Available";
           this.location.isLoading = false;
           if (redirect !== "") {
-            window.location = redirect;
+            //window.location = redirect;
+            this.$router.push(redirect)
           }
         }, locationOptions);
         
@@ -50,7 +51,8 @@ export default {
         this.location.isLoading = false;
         this.location.error = "Not Available";
         if (redirect !== "") {
-          window.location = redirect;
+          //window.location = redirect;
+          this.$router.push(redirect)
         }
       }
     },
