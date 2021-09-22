@@ -325,7 +325,7 @@ export default {
         styleLabel.styles.bottom = ''
         styleLabel.styles.top = (100 - this.percent(styleLabel.value)) + '%'
       }
-      console.log(styleLabel);
+      //console.log(styleLabel);
       return styleLabel
     },
   },

@@ -17,7 +17,7 @@
     <v-tab :id="tabID('institutions', controlTab)" :style="tabStyle">
       <slot name="tab-school">
         <h3 class="compare-tab-title">
-          Median for Group Schools
+          Median for {{groupName}} Schools
         </h3>
       </slot>
     </v-tab>
@@ -84,6 +84,9 @@
 export default {
   props: {
     displayToggle: {
+      type: String,
+    },
+    groupName: {
       type: String,
     },
     controlTab: {

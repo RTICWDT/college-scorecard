@@ -130,7 +130,16 @@
               <!-- Institution Summary and Field Of Study Select + Summary -->
               <v-row class="mt-3 px-sm-3">
                 <!--Institution Summary-->
-                <v-col md="6" class="pr-sm-3">
+                <v-col cols="12">
+                    <median-toggle
+                      :display-toggle="medianToggle"
+                      :control-tab="controlTab"
+                      @median-switch-click="handleMedianToggle"
+                      @median-tab-change="handleMedianToggle"
+                      :group-name="this.$options.filters.yearsText(groupName)"
+                    />                  
+                </v-col>                 
+                <v-col md="6" class="pr-sm-3">                
                   <div id="school-completion-rate-bar" class="">
                     <h2 class="mb-3">
                       <!--prettyhtml-ignore-->
@@ -139,7 +148,6 @@
                         :version="completionRateFieldDefinition"
                       />
                     </h2>
-
                     <vertical-bar-median
                       v-if="completionRate"
                       :value="{
@@ -194,7 +202,7 @@
                       {{ netPrice | numeral("$0,0") }}
                     </h2>
                     <div class="data-na" v-else>Data Not Available</div>
-                    <em>Median for 4-yr Schools: $25,000</em>
+                    <em>Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: $25,000</em>
 
                     <horizontal-bar-median
                       v-if="completionRate"
@@ -2174,6 +2182,7 @@ import URLHistory from "~/js/mixins/URLHistory.js"
 import { apiGet } from "~/js/api.js"
 import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 import AddToCompare from "~/components/AddToCompare.vue"
+import MedianToggle from "~/components/MedianToggle.vue"
 
 export default {
   mixins: [URLHistory, ComplexFields, AnalyticsEvents],
@@ -2198,7 +2207,8 @@ export default {
     "field-of-study-select": FieldOfStudySelect,
     "field-of-study-search": FieldOfStudySearch,
     "field-data-extended": FieldDataExtended,
-    "add-to-compare": AddToCompare
+    "add-to-compare": AddToCompare,
+    "median-toggle": MedianToggle,
   },
   data() {
     return {
@@ -2242,6 +2252,11 @@ export default {
       urlParams: null,
       fieldDataExtendedSalarySelect: "aid",
       fieldDataExtendedShowPrior: false,
+      medianToggle: "group",
+      medianToggleCost: "group",
+      medianToggleGrad: "group",
+      medianToggleEarnings: "group",
+      controlTab: 0,
     }
   },
   computed: {
@@ -2251,6 +2266,9 @@ export default {
     shareLink() {
       return encodeURI(this.$url(window.location.href)) || null
     },
+    groupName() {
+      return _.get(this.school, this.fields["PREDOMINANT_DEGREE"])
+    },    
     fieldsOfStudy() {
       let self = this
       let fos = this.allFieldsOfStudy
@@ -2579,6 +2597,11 @@ export default {
       }
 
       return additionalPaddingStyles
+    },
+    handleMedianToggle(toggleValue) {
+      this.controlTab = toggleValue
+      this.medianToggle = toggleValue === 0 ? "group" : "all"
+      console.log(this.medianToggle)
     },
   },
   mounted() {

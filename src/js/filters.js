@@ -40,6 +40,14 @@ Vue.filter('yearsClass', function(value){
       return 'icon-certificate';
 });
 
+Vue.filter('yearsText', function(value){
+    switch(+value){
+        case 2: return '2-yr';
+        case 3: return '4-yr';
+      }
+      return '4-yr';
+});
+
 Vue.filter('control', function(id){
     let lookup = {
         '-1': 'Unknown',
