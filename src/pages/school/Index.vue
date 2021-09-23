@@ -133,7 +133,6 @@
                 <v-col cols="12">
                     <median-toggle
                       :display-toggle="medianToggle"
-                      :control-tab="controlTab"
                       @median-switch-click="handleMedianToggle"
                       @median-tab-change="handleMedianToggle"
                       :group-name="this.$options.filters.yearsText(groupName)"
@@ -191,6 +190,59 @@
                       Average Annual Cost for Largest Program
                       <tooltip
                         definition="avg-program-cost"
+                        :isNegative="netPrice < 0"
+                      />
+                    </h2>
+
+                    <h2
+                      class="display-2 navy-text font-weight-bold"
+                      v-if="netPrice"
+                    >
+                      {{ netPrice | numeral("$0,0") }}
+                    </h2>
+                    <div class="data-na" v-else>Data Not Available</div>
+                    <em>Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: $25,000</em>
+
+                    <horizontal-bar-median
+                      v-if="completionRate"
+                      :value="{
+                        label: Math.round(parseFloat(completionRate) * 100) + '%',
+                        value: Math.round(parseFloat(completionRate) * 100)
+                      }"
+                      :min="{
+                        label: '0%',
+                        value: 0,
+                        style: { height: '60px' },
+                      }"
+                      :max="{
+                        label: '100%',
+                        value: 100,
+                        style: { height: '60px' },
+                      }"
+                      :median="{
+                        label: 'Median',
+                        value: 30,
+                        style: { height: '60px' },
+                      }"
+                      color="#0e365b"
+                      :height="500"
+                      :y-bar-thickness="50"
+                      :label-font-size="24"
+                      :labels="true"
+                    ></horizontal-bar-median>                    
+                  </div>
+
+                  <div id="school-median-earnings" class="mb-4">
+                    <h2 class="mb-3" v-if="!isProgramReporter">
+                      <!--prettyhtml-ignore-->
+                      Median Earnings
+                      <tooltip definition="fos-median-earnings" />
+                    </h2>
+                    <h2 v-else class="mb-3">
+                      <!--prettyhtml-ignore-->
+                      Median Earnings for Largest Program
+                      <tooltip
+                        definition="fos-median-earnings"
                         :isNegative="netPrice < 0"
                       />
                     </h2>
@@ -788,7 +840,43 @@
                           Cost includes tuition, living costs, books and
                           supplies, and fees minus the average grants and
                           scholarships for federal financial aid recipients.
-                        </p>                        
+                        </p> 
+
+                        <median-toggle
+                          :display-toggle="medianToggleCost"
+                          :control-tab="controlTab"
+                          @median-switch-click="handleMedianToggle"
+                          @median-tab-change="handleMedianToggle"
+                          :group-name="this.$options.filters.yearsText(groupName)"
+                        />  
+
+                      <horizontal-bar-median
+                        v-if="netPrice"
+                        :value="{
+                          label: Math.round(parseFloat(completionRate) * 100) + '%',
+                          value: Math.round(parseFloat(completionRate) * 100)
+                        }"
+                        :min="{
+                          label: '0%',
+                          value: 0,
+                          style: { height: '60px' },
+                        }"
+                        :max="{
+                          label: '100%',
+                          value: 100,
+                          style: { height: '60px' },
+                        }"
+                        :median="{
+                          label: 'Median',
+                          value: 30,
+                          style: { height: '60px' },
+                        }"
+                        color="#0e365b"
+                        :height="500"
+                        :y-bar-thickness="50"
+                        :label-font-size="24"
+                        :labels="true"
+                      ></horizontal-bar-median>                                             
                       </div>
                       <div v-else>
                         <h2 class="mb-3">
@@ -825,7 +913,43 @@
                           Cost includes tuition, living costs, books and
                           supplies, and fees minus the average grants and
                           scholarships for federal financial aid recipients.
-                        </p>                        
+                        </p>            
+
+                        <median-toggle
+                          :display-toggle="medianToggleCost"
+                          :control-tab="controlTab"
+                          @median-switch-click="handleMedianToggle"
+                          @median-tab-change="handleMedianToggle"
+                          :group-name="this.$options.filters.yearsText(groupName)"
+                        />  
+
+                      <horizontal-bar-median
+                        v-if="netPrice"
+                        :value="{
+                          label: Math.round(parseFloat(completionRate) * 100) + '%',
+                          value: Math.round(parseFloat(completionRate) * 100)
+                        }"
+                        :min="{
+                          label: '0%',
+                          value: 0,
+                          style: { height: '60px' },
+                        }"
+                        :max="{
+                          label: '100%',
+                          value: 100,
+                          style: { height: '60px' },
+                        }"
+                        :median="{
+                          label: 'Median',
+                          value: 30,
+                          style: { height: '60px' },
+                        }"
+                        color="#0e365b"
+                        :height="500"
+                        :y-bar-thickness="50"
+                        :label-font-size="24"
+                        :labels="true"
+                      ></horizontal-bar-median>                                      
                       </div>
                       
                       <h2 class="mb-3">By Family Income</h2>
@@ -904,41 +1028,116 @@
                   class="px-0 py-3 pa-sm-5"
                 >
                   <v-row>
-                    <v-col cols="12" md="12">
+                    <v-col cols="12" md="12" id="showPellOnlyGrad">
+                      <v-col cols="12" md="12" sm="12"  class="d-flex">
                       <h2 class="mb-3">
                         Graduation Rate&nbsp;
                         <tooltip definition="graduation-rate" />
                       </h2>
-                      <horizontal-bar
-                        v-if="completionRate"
-                        :value="Math.round(parseFloat(completionRate) * 100)"
-                        :min="0"
-                        :max="100"
-                        color="#1874DC"
-                        :height="25"
-                      ></horizontal-bar>                      
+                      <v-checkbox
+                        v-model="showPellOnlyGrad"
+                        label="Show Pell Grant Recipients Only"
+                        color="secondary"
+                        class="mt-0 ml-auto"
+                      >
+                        <template v-slot:label>
+                          <span>
+                            Show Pell Grant Recipients Only&nbsp;
+                          </span>
+                        </template>
+                      </v-checkbox>                      
+                      </v-col>  
+                        <median-toggle
+                          :display-toggle="medianToggleGrad"
+                          :control-tab="controlTab"
+                          @median-switch-click="handleMedianToggle"
+                          @median-tab-change="handleMedianToggle"
+                          :group-name="this.$options.filters.yearsText(groupName)"
+                        />                                                           
+                    <horizontal-bar-median
+                      v-if="completionRate"
+                      :value="{
+                        label: Math.round(parseFloat(completionRate) * 100) + '%',
+                        value: Math.round(parseFloat(completionRate) * 100)
+                      }"
+                      :min="{
+                        label: '0%',
+                        value: 0,
+                        style: { height: '60px' },
+                      }"
+                      :max="{
+                        label: '100%',
+                        value: 100,
+                        style: { height: '60px' },
+                      }"
+                      :median="{
+                        label: 'Median',
+                        value: 30,
+                        style: { height: '60px' },
+                      }"
+                      color="#0e365b"
+                      :height="500"
+                      :y-bar-thickness="50"
+                      :label-font-size="24"
+                      :labels="true"
+                    ></horizontal-bar-median>                       
                       <div v-else class="data-na">Data Not Available</div>
                       <h2 class="mb-3">
                         Students Who Return After Their First Year&nbsp;
                         <tooltip definition="retention-rate" />
                       </h2>
-                      <horizontal-bar
-                        v-if="retentionRate"
-                        :value="retentionRate * 100"
-                        :min="0"
-                        :max="100"
-                        color="#1874DC"
-                        :height="25"
-                      ></horizontal-bar>                        
+
+                    <horizontal-bar-median
+                      v-if="retentionRate"
+                      :value="{
+                        label: Math.round(parseFloat(retentionRate) * 100) + '%',
+                        value: Math.round(parseFloat(retentionRate) * 100)
+                      }"
+                      :min="{
+                        label: '0%',
+                        value: 0,
+                        style: { height: '60px' },
+                      }"
+                      :max="{
+                        label: '100%',
+                        value: 100,
+                        style: { height: '60px' },
+                      }"
+                      :median="{
+                        label: 'Median',
+                        value: 30,
+                        style: { height: '60px' },
+                      }"
+                      color="#0e365b"
+                      :height="500"
+                      :y-bar-thickness="50"
+                      :label-font-size="24"
+                      :labels="true"
+                    ></horizontal-bar-median> 
+
                       <div v-else class="data-na">Data Not Available</div>
                     </v-col>
                   </v-row>
                   <v-row>
-                    <v-col cols="12">
+                    <v-col cols="12" id="showPellOnlyOutcomes">
+                      <v-col cols="12" md="12" sm="12"  class="d-flex">
                       <h2 class="mb-3 mt-5">
                         Outcomes 8 Years After Attending&nbsp;
                         <tooltip definition="outcome-measures" />
                       </h2>
+                      <v-checkbox
+                        v-model="showPellOnlyOutcomes"
+                        label="Show Pell Grant Recipients Only"
+                        color="secondary"
+                        class="mt-5  ml-auto"
+                      >
+                        <template v-slot:label>
+                          <span>
+                            Show Pell Grant Recipients Only&nbsp;
+                          </span>
+                        </template>
+                      </v-checkbox>                           
+                      </v-col>
                       <sankey-buttons
                         v-on:update-sankey="currentSankey = $event"
                       />
@@ -1578,16 +1777,16 @@
                 </v-expansion-panel-content>
               </v-expansion-panel>
 
-              <!--Salary After Completing Field Of Study - Panel-->
+              <!--Typical Earnings - Panel-->
               <v-expansion-panel class="institution-profile-panel">
                 <v-expansion-panel-header
                   id="earnings"
                   aria-controls="earnings-content"
                   @click="
-                    trackAccordion('Salary After Completing by Field of Study')
+                    trackAccordion('Typical Earnings')
                   "
                 >
-                  Salary After Completing by Field of Study
+                  Typical Earnings
                 </v-expansion-panel-header>
 
                 <v-expansion-panel-content
@@ -1596,145 +1795,77 @@
                   class="px-0 py-3 pa-sm-5"
                 >
                   <div>
-                    <p>
-                      Typical earnings in the second year after graduation with
-                      the range of highest and lowest median earnings for
-                      undergraduate and credential programs for which there is
-                      data. For more information, see
-                      <a :href="fieldsLink">All Fields of Study</a> for this
-                      school.
-                    </p>
-
-                    <multi-range
-                      :minmax="earningsRange"
-                      variable="earnings.highest['2_yr'].overall_median_earnings"
-                      :max="{ label: '$150,000', value: 150000 }"
-                    />
-                  </div>
-
-                  <div
-                    class="fos-profile-panel fos-profile-mini mt-4 pl-4"
-                    v-if="selectedFOSDetail"
-                  >
-                    <span
-                      class="field-of-study-select-icon mr-2"
-                      style="width: 35px;height: 35px; float:left;"
+                  <h2 class="mb-3" v-if="showGradOnly">
+                          Median Earnings&nbsp;<tooltip
+                            definition="fos-median-earnings"
+                            :isBranch="isBranch"
+                          />
+                        </h2>
+                    <h2
+                      class="display-2 navy-text font-weight-bold"
+                      v-if="netPrice"
                     >
-                      <v-icon size="20">
-                        fas fa-award
-                      </v-icon>
-                    </span>
+                      {{ netPrice | numeral("$0,0") }}
+                    </h2>   
+                    <p>
+                      The median earnings of former students who received federal financial aid at 10 years after entering the school.
+                    </p>
+                    <median-toggle
+                      :display-toggle="medianToggleEarnings"
+                      :control-tab="controlTab"
+                      @median-switch-click="handleMedianToggle"
+                      @median-tab-change="handleMedianToggle"
+                      :group-name="this.$options.filters.yearsText(groupName)"
+                    />                                           
+                    <horizontal-bar-median
+                      v-if="netPrice"
+                      :value="{
+                        label: this.$options.filters.numeral(netPrice,'$0,0'),
+                        value: netPrice,
+                      }"
+                      :min="{
+                        label: '0$',
+                        value: 0,
+                        style: { height: '60px' },
+                      }"
+                      :max="{
+                        label: '$100,000',
+                        value: 100000,
+                        style: { height: '60px' },
+                      }"
+                      :median="{
+                        label: 'Median',
+                        value: 30000,
+                        style: { height: '60px' },
+                      }"
+                      color="#0e365b"
+                      :height="500"
+                      :y-bar-thickness="50"
+                      :label-font-size="24"
+                      :labels="true"
+                    ></horizontal-bar-median> 
+                    <h2 class="mb-3">
+                          Percentage Earning Above a High School Graduate&nbsp;<tooltip
+                            definition="fos-median-earnings"
+                          />
+                        </h2>
+                    <div class="d-flex align-end mb-3"><h2
+                      class="display-2 navy-text font-weight-bold"
+                      v-if="completionRate"
+                    >
+                      {{ completionRate |  numeral("0%") }}
+                    </h2><span class="mb-2"> &nbsp; of students</span></div>
 
-                    <h3>
-                      {{ selectedFOSDetail.title | formatFieldOfStudyTitle }}
-                      - {{ selectedFOSDetail.credential.title }}
-                    </h3>
+                    <h2 class="mb-3">
+                          Earnings After Completing Field of Study&nbsp;<tooltip
+                            definition="fos-median-earnings"
+                          />
+                        </h2>
 
-                    <v-row>
-                      <!--Median Earnings-->
-                      <v-col cols="12" md="5" sm="12">
-                        <h4 class="mb-2">
-                          Median Earnings&nbsp
-                          <tooltip definition="fos-median-earnings" />
-                        </h4>
-
-                        <div v-if="fosSalarySelect === 'aid'">
-                          <div
-                            v-if="
-                              _.get(selectedFOSDetail, fields.FOS_EARNINGS_FED)
-                            "
-                          >
-                            <h5 class="fos-small-data-bold navy-text">
-                              {{
-                                _.get(
-                                  selectedFOSDetail,
-                                  fields.FOS_EARNINGS_FED
-                                ) | numeral("$0,0")
-                              }}
-                            </h5>
-                          </div>
-
-                          <div v-else class="mini-data-na text-center">
-                            Data Not Available
-                          </div>
-                        </div>
-
-                        <div v-else-if="fosSalarySelect === 'pell'">
-                          <div
-                            v-if="
-                              _.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL)
-                            "
-                          >
-                            <h5 class="fos-small-data-bold navy-text">
-                              {{
-                                _.get(
-                                  selectedFOSDetail,
-                                  fields.FOS_EARNINGS_PELL
-                                ) | numeral("$0,0")
-                              }}
-                            </h5>
-                          </div>
-
-                          <div v-else class="mini-data-na text-center">
-                            Data Not Available
-                          </div>
-                        </div>
-                      </v-col>
-
-                      <!--Monthly Earnings-->
-                      <v-col cols="12" md="4" sm="12">
-                        <h4 class="mb-2">
-                          Monthly Earnings&nbsp
-                          <tooltip definition="fos-monthly-earnings" />
-                        </h4>
-
-                        <div v-if="fosSalarySelect === 'aid'">
-                          <div
-                            v-if="
-                              _.get(selectedFOSDetail, fields.FOS_EARNINGS_FED)
-                            "
-                          >
-                            <h5 class="fos-small-data-bold navy-text">
-                              {{
-                                (_.get(
-                                  selectedFOSDetail,
-                                  fields.FOS_EARNINGS_FED
-                                ) /
-                                  12)
-                                  | numeral("$0,0")
-                              }}
-                            </h5>
-                          </div>
-
-                          <div v-else class="mini-data-na text-center">
-                            Data Not Available
-                          </div>
-                        </div>
-
-                        <div v-else-if="fosSalarySelect === 'pell'">
-                          <div
-                            v-if="
-                              _.get(selectedFOSDetail, fields.FOS_EARNINGS_PELL)
-                            "
-                          >
-                            <h5 class="fos-small-data-bold navy-text">
-                              {{
-                                (_.get(
-                                  selectedFOSDetail,
-                                  fields.FOS_EARNINGS_PELL
-                                ) /
-                                  12)
-                                  | numeral("$0,0")
-                              }}
-                            </h5>
-                          </div>
-
-                          <div v-else class="mini-data-na text-center">
-                            Data Not Available
-                          </div>
-                        </div>
-                      </v-col>
-                    </v-row>
+                    <p class="mt-2">
+                      Salary information for Fields of Study available at this school are in the
+                      <a :href="fieldsLink">All Fields of Study</a> page.
+                    </p>
                   </div>
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -2148,7 +2279,7 @@
   height: auto;
 }
 
-#showGradOnly {
+#showGradOnly, #showPellOnlyGrad, #showPellOnlyOutcomes {
   .v-messages {
     display: none;
   }
@@ -2183,6 +2314,7 @@ import { apiGet } from "~/js/api.js"
 import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 import AddToCompare from "~/components/AddToCompare.vue"
 import MedianToggle from "~/components/MedianToggle.vue"
+import numeral from "numeral"
 
 export default {
   mixins: [URLHistory, ComplexFields, AnalyticsEvents],
@@ -2231,6 +2363,8 @@ export default {
         study: "study_both",
       },
       showGradOnly: false,
+      showPellOnlyGrad: false,
+      showPellOnlyOutcomes: false,
       selectedFOS: {
         text: "",
       },
@@ -2601,7 +2735,6 @@ export default {
     handleMedianToggle(toggleValue) {
       this.controlTab = toggleValue
       this.medianToggle = toggleValue === 0 ? "group" : "all"
-      console.log(this.medianToggle)
     },
   },
   mounted() {

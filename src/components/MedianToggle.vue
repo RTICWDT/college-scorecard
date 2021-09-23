@@ -1,4 +1,5 @@
 <template>
+<div style="border-bottom:2px solid #dcdada;">
   <v-tabs
     id="median-toggle"
     :value="controlTab"
@@ -14,22 +15,23 @@
       :class="{ 'median-group-slider-green': controlTab === 1 }"
     />
 
-    <v-tab :id="tabID('institutions', controlTab)" :style="tabStyle">
-      <slot name="tab-school">
-        <h3 class="compare-tab-title">
+    <v-tab :id="tabID('group', controlTab)" :style="tabStyle">
+      <slot name="tab-group">
+        <span class="compare-tab-title">
           Median for {{groupName}} Schools
-        </h3>
+        </span>
       </slot>
     </v-tab>
 
-    <v-tab :id="tabID('fos', controlTab)" :style="tabStyle">
-      <slot name="tab-fos">
-        <h3 class="compare-tab-title pb-1">
+    <v-tab :id="tabID('all', controlTab)" :style="tabStyle">
+      <slot name="tab-all">
+        <span class="compare-tab-title">
           Median for All Schools
-        </h3>
+        </span>
       </slot>
     </v-tab>
   </v-tabs>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -39,13 +41,23 @@
   background-color: $institution-accent-color;
 }
 
+.v-tab {
+  text-transform:none !important;
+  span {
+    color:#000;
+    letter-spacing: normal !important;
+  }
+}
+
 #median-toggle {
   #median-tab-inactive {
     /*background-color: #eeeeee;*/
-    border-bottom: 8px solid #dcdada;
+    border-bottom: 8px solid #fff;
+  }
 
-    h3 {
-      margin-bottom: -8px;
+  #median-tab-active {
+    span {
+      font-weight: bold;
     }
   }
 }
@@ -58,26 +70,10 @@
   letter-spacing: normal !important;
   color: black !important;
   text-transform: none !important;
-  font-weight: 500;
+
+  
 }
 
-#median-toggle-school-active {
-  background-color: #c4dec4 !important;
-  h3 {
-    font-weight: bold !important;
-  }
-}
-
-#median-toggle-fos-active {
-  background-color: #fff6dc;
-  h3 {
-    font-weight: bold !important;
-  }
-}
-
-.median-fos-slider-gold {
-  background-color: $fos-accent-color !important;
-}
 </style>
 
 <script>
@@ -89,10 +85,6 @@ export default {
     groupName: {
       type: String,
     },
-    controlTab: {
-      type: Number,
-      default: 0,
-    },
     compareInstitutionsCount: {
       type: Number,
       default: 0,
@@ -103,13 +95,13 @@ export default {
     },
     tabsHeight: {
       type: String,
-      default: "70px",
+      default: "50px",
     },
     tabContainerStyle: {
       type: Object,
       default() {
         return {
-          width: "260px",
+          width: "460px",
         }
       },
     },
@@ -117,7 +109,7 @@ export default {
       type: Object,
       default() {
         return {
-          width: "130px",
+          width: "230px",
         }
       },
     },
@@ -131,15 +123,23 @@ export default {
       selected: null,
     }
   },
+  computed: {
+    controlTab() {
+      if (this.displayToggle == 'group')
+      return 0
+      else 
+      return 1
+    }
+    },  
   methods: {
     tabID(context, controlTab) {
       if (context === "group") {
         return controlTab === 0
-          ? "median-toggle-group-active"
+          ? "median-tab-active"
           : "median-tab-inactive"
-      } else if (context === "fos") {
+      } else if (context === "all") {
         return controlTab === 1
-          ? "median-toggle-all-active"
+          ? "median-tab-active"
           : "median-tab-inactive"
       }
     },
