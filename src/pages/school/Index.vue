@@ -136,6 +136,10 @@
                       @median-switch-click="handleMedianToggle"
                       @median-tab-change="handleMedianToggle"
                       :group-name="this.$options.filters.yearsText(groupName)"
+                      label-prefix="Median for "
+                      :tab-style="{
+                        width: '30%',
+                      }"
                     />                  
                 </v-col>                 
                 <v-col md="6" class="pr-sm-3">                
@@ -204,24 +208,24 @@
                     <em>Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: $25,000</em>
 
                     <horizontal-bar-median
-                      v-if="completionRate"
+                      v-if="netPrice"
                       :value="{
-                        label: Math.round(parseFloat(completionRate) * 100) + '%',
-                        value: Math.round(parseFloat(completionRate) * 100)
+                        label:  this.$options.filters.numeral(netPrice,'$0,0'),
+                        value: netPrice
                       }"
                       :min="{
-                        label: '0%',
+                        label: '$0',
                         value: 0,
                         style: { height: '60px' },
                       }"
                       :max="{
-                        label: '100%',
-                        value: 100,
+                        label: '$100,000',
+                        value: 100000,
                         style: { height: '60px' },
                       }"
                       :median="{
                         label: 'Median',
-                        value: 30,
+                        value: 25000,
                         style: { height: '60px' },
                       }"
                       color="#0e365b"
@@ -229,7 +233,8 @@
                       :y-bar-thickness="50"
                       :label-font-size="24"
                       :labels="true"
-                    ></horizontal-bar-median>                    
+                    ></horizontal-bar-median>
+                    <div class="data-na" v-else>Data Not Available</div>                    
                   </div>
 
                   <div id="school-median-earnings" class="mb-4">
@@ -257,24 +262,24 @@
                     <em>Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: $25,000</em>
 
                     <horizontal-bar-median
-                      v-if="completionRate"
+                      v-if="netPrice"
                       :value="{
-                        label: Math.round(parseFloat(completionRate) * 100) + '%',
-                        value: Math.round(parseFloat(completionRate) * 100)
+                        label:  this.$options.filters.numeral(netPrice,'$0,0'),
+                        value: netPrice
                       }"
                       :min="{
-                        label: '0%',
+                        label: '$0',
                         value: 0,
                         style: { height: '60px' },
                       }"
                       :max="{
-                        label: '100%',
-                        value: 100,
+                        label: '$100,000',
+                        value: 100000,
                         style: { height: '60px' },
                       }"
                       :median="{
                         label: 'Median',
-                        value: 30,
+                        value: 25000,
                         style: { height: '60px' },
                       }"
                       color="#0e365b"
@@ -282,7 +287,8 @@
                       :y-bar-thickness="50"
                       :label-font-size="24"
                       :labels="true"
-                    ></horizontal-bar-median>                    
+                    ></horizontal-bar-median>
+                    <div class="data-na" v-else>Data Not Available</div>
                   </div>
                 </v-col>                
               </v-row>
@@ -848,27 +854,28 @@
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
                           :group-name="this.$options.filters.yearsText(groupName)"
+                          class="mb-3"
                         />  
 
                       <horizontal-bar-median
                         v-if="netPrice"
                         :value="{
-                          label: Math.round(parseFloat(completionRate) * 100) + '%',
-                          value: Math.round(parseFloat(completionRate) * 100)
+                        label:  this.$options.filters.numeral(netPrice,'$0,0'),
+                        value: netPrice
                         }"
                         :min="{
-                          label: '0%',
+                          label: '$0',
                           value: 0,
                           style: { height: '60px' },
                         }"
                         :max="{
-                          label: '100%',
-                          value: 100,
+                          label: '$100,000',
+                          value: 100000,
                           style: { height: '60px' },
                         }"
                         :median="{
                           label: 'Median',
-                          value: 30,
+                          value: 25000,
                           style: { height: '60px' },
                         }"
                         color="#0e365b"
@@ -876,7 +883,8 @@
                         :y-bar-thickness="50"
                         :label-font-size="24"
                         :labels="true"
-                      ></horizontal-bar-median>                                             
+                      ></horizontal-bar-median>     
+                    <div class="data-na" v-else>Data Not Available</div>                                                              
                       </div>
                       <div v-else>
                         <h2 class="mb-3">
@@ -923,33 +931,33 @@
                           :group-name="this.$options.filters.yearsText(groupName)"
                         />  
 
-                      <horizontal-bar-median
-                        v-if="netPrice"
-                        :value="{
-                          label: Math.round(parseFloat(completionRate) * 100) + '%',
-                          value: Math.round(parseFloat(completionRate) * 100)
-                        }"
-                        :min="{
-                          label: '0%',
-                          value: 0,
-                          style: { height: '60px' },
-                        }"
-                        :max="{
-                          label: '100%',
-                          value: 100,
-                          style: { height: '60px' },
-                        }"
-                        :median="{
-                          label: 'Median',
-                          value: 30,
-                          style: { height: '60px' },
-                        }"
-                        color="#0e365b"
-                        :height="500"
-                        :y-bar-thickness="50"
-                        :label-font-size="24"
-                        :labels="true"
-                      ></horizontal-bar-median>                                      
+                        <horizontal-bar-median
+                          v-if="netPrice"
+                          :value="{
+                          label:  this.$options.filters.numeral(netPrice,'$0,0'),
+                          value: netPrice
+                          }"
+                          :min="{
+                            label: '$0',
+                            value: 0,
+                            style: { height: '60px' },
+                          }"
+                          :max="{
+                            label: '$100,000%',
+                            value: 100000,
+                            style: { height: '60px' },
+                          }"
+                          :median="{
+                            label: 'Median',
+                            value: 30,
+                            style: { height: '60px' },
+                          }"
+                          color="#0e365b"
+                          :height="500"
+                          :y-bar-thickness="50"
+                          :label-font-size="24"
+                          :labels="true"
+                        ></horizontal-bar-median>                                      
                       </div>
                       
                       <h2 class="mb-3">By Family Income</h2>
@@ -1053,6 +1061,7 @@
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
                           :group-name="this.$options.filters.yearsText(groupName)"
+                          class="mb-3"
                         />                                                           
                     <horizontal-bar-median
                       v-if="completionRate"
@@ -1101,11 +1110,6 @@
                       :max="{
                         label: '100%',
                         value: 100,
-                        style: { height: '60px' },
-                      }"
-                      :median="{
-                        label: 'Median',
-                        value: 30,
                         style: { height: '60px' },
                       }"
                       color="#0e365b"
@@ -1844,18 +1848,18 @@
                       :label-font-size="24"
                       :labels="true"
                     ></horizontal-bar-median> 
+                    <div v-else class="data-na">Data Not Available</div>
                     <h2 class="mb-3">
                           Percentage Earning Above a High School Graduate&nbsp;<tooltip
                             definition="fos-median-earnings"
                           />
                         </h2>
-                    <div class="d-flex align-end mb-3"><h2
+                    <div class="d-flex align-end mb-4" v-if="completionRate"><h2
                       class="display-2 navy-text font-weight-bold"
-                      v-if="completionRate"
                     >
                       {{ completionRate |  numeral("0%") }}
                     </h2><span class="mb-2"> &nbsp; of students</span></div>
-
+                    <div v-else class="data-na mb-4">Data Not Available</div>
                     <h2 class="mb-3">
                           Earnings After Completing Field of Study&nbsp;<tooltip
                             definition="fos-median-earnings"

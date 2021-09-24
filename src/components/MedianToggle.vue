@@ -1,5 +1,6 @@
 <template>
-<div style="border-bottom:2px solid #dcdada;">
+<div :class="labelPrefix ? 'median-toggle-container d-flex align-end' : 'd-flex align-end' ">
+  <em v-if="!labelPrefix" class="d-flex  mr-2">Show median for:</em>
   <v-tabs
     id="median-toggle"
     :value="controlTab"
@@ -18,7 +19,7 @@
     <v-tab :id="tabID('group', controlTab)" :style="tabStyle">
       <slot name="tab-group">
         <span class="compare-tab-title">
-          Median for {{groupName}} Schools
+          {{ labelPrefix }}{{groupName}} Schools
         </span>
       </slot>
     </v-tab>
@@ -26,7 +27,7 @@
     <v-tab :id="tabID('all', controlTab)" :style="tabStyle">
       <slot name="tab-all">
         <span class="compare-tab-title">
-          Median for All Schools
+         {{ labelPrefix }}All Schools
         </span>
       </slot>
     </v-tab>
@@ -39,6 +40,10 @@
 
 #median-toggle-slider {
   background-color: $institution-accent-color;
+}
+
+.median-toggle-container {
+  border-bottom: 2px solid #dadada;
 }
 
 .v-tab {
@@ -82,6 +87,10 @@ export default {
     displayToggle: {
       type: String,
     },
+    labelPrefix: {
+      type: String,
+      default: "",
+    },
     groupName: {
       type: String,
     },
@@ -101,7 +110,7 @@ export default {
       type: Object,
       default() {
         return {
-          width: "460px",
+          width: "60%",
         }
       },
     },
@@ -109,7 +118,7 @@ export default {
       type: Object,
       default() {
         return {
-          width: "230px",
+          width: "20%",
         }
       },
     },

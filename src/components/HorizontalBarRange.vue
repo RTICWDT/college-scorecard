@@ -115,7 +115,7 @@
     span {
       font-weight: 200;
       position: absolute;
-      top: $label-height;
+      top: $label-height / 2;
       width: $label-width;
       cursor: pointer;
     }
@@ -152,6 +152,7 @@
       span {
         padding-right: 0.25em;
         border-left:none;
+        display:none;
       }
       display:none;
     }
@@ -177,11 +178,17 @@
       height:100%;
       width:1px;
       background-color:#000;  
+      span {
+        top: 40px !important;
+      }
       span:not(.arrow-left) {
-        margin-bottom: $bar-width + $arrow-size + 10;
+        //margin-bottom: $bar-width + $arrow-size + 10;
         text-align: center;
         color:#000;
-        margin-top:-10px;
+        top: 62px !important;
+        margin-left:-68px !important;
+        font-weight:400;
+        font-size: 0.85rem;
       }
       span.arrow-left {
         width: 0; 
@@ -189,8 +196,7 @@
         border-left: $arrow-size solid transparent;
         border-bottom: $arrow-size solid black;
         border-right: $arrow-size solid transparent;
-        margin-left:$bar-width + 5;
-        margin-top: -7px;
+        margin-left:-7px;
       }
     }
   }

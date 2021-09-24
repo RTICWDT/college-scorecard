@@ -38,7 +38,7 @@ export default {
     },
     median: {
       type: Object,
-      default: { value: 30, label: "30%" },
+      default: () => ({  }),
     },
     value: {
       type: Object,

@@ -128,7 +128,7 @@
     &.picc-range-label-max,
     &.picc-range-label-median {
       color: #000;
-      font-size: 1rem;
+      font-size: 0.85rem;
     }
 
     &.picc-range-label-max,
