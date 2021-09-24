@@ -856,7 +856,9 @@
                           :group-name="this.$options.filters.yearsText(groupName)"
                           class="mb-3"
                         />  
-
+                      <v-row>
+                      <v-col cols="2"></v-col>
+                      <v-col cols="8">
                       <horizontal-bar-median
                         v-if="netPrice"
                         :value="{
@@ -883,8 +885,11 @@
                         :y-bar-thickness="50"
                         :label-font-size="24"
                         :labels="true"
-                      ></horizontal-bar-median>     
-                    <div class="data-na" v-else>Data Not Available</div>                                                              
+                      ></horizontal-bar-median>  
+                      <div class="data-na" v-else>Data Not Available</div> 
+                      </v-col>  
+                       <v-col cols="2"></v-col>     
+                      </v-row>                                                         
                       </div>
                       <div v-else>
                         <h2 class="mb-3">

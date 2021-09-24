@@ -138,7 +138,7 @@
     &.picc-range-label-median,
     &.picc-range-label-lower,
     &.picc-range-label-upper {
-      border-left: 1px solid #000;
+      border-left: none;
     }
 
     &.picc-range-label-upper {
@@ -178,6 +178,7 @@
       height:100%;
       width:1px;
       background-color:#000;  
+      border-left: 1px solid #000;
       span {
         top: 40px !important;
       }
