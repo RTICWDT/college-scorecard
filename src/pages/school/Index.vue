@@ -177,6 +177,7 @@
                       :y-bar-thickness="50"
                       :label-font-size="24"
                       :labels="true"
+                      class="mt-4"
                     ></vertical-bar-median>
                     <div v-else class="data-na">Data Not Available</div>
                   </div>
@@ -224,7 +225,7 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Median',
+                        label: 'Median: ' + this.$options.filters.numeral(25000,'$0,0'),
                         value: 25000,
                         style: { height: '60px' },
                       }"
@@ -278,7 +279,7 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Median',
+                        label: 'Median: ' + this.$options.filters.numeral(25000,'$0,0'),
                         value: 25000,
                         style: { height: '60px' },
                       }"
@@ -876,7 +877,7 @@
                           style: { height: '60px' },
                         }"
                         :median="{
-                          label: 'Median',
+                          label: 'Median: ' + this.$options.filters.numeral(netPrice,'$0,0'),
                           value: 25000,
                           style: { height: '60px' },
                         }"
@@ -935,7 +936,9 @@
                           @median-tab-change="handleMedianToggle"
                           :group-name="this.$options.filters.yearsText(groupName)"
                         />  
-
+                      <v-row>
+                      <v-col cols="2"></v-col>
+                      <v-col cols="8">
                         <horizontal-bar-median
                           v-if="netPrice"
                           :value="{
@@ -953,8 +956,8 @@
                             style: { height: '60px' },
                           }"
                           :median="{
-                            label: 'Median',
-                            value: 30,
+                            label: 'Median: ' + this.$options.filters.numeral(30000,'$0,0'),
+                            value: 30000,
                             style: { height: '60px' },
                           }"
                           color="#0e365b"
@@ -962,7 +965,11 @@
                           :y-bar-thickness="50"
                           :label-font-size="24"
                           :labels="true"
-                        ></horizontal-bar-median>                                      
+                        ></horizontal-bar-median>
+                      <div class="data-na" v-else>Data Not Available</div> 
+                      </v-col>  
+                       <v-col cols="2"></v-col>     
+                      </v-row>                       
                       </div>
                       
                       <h2 class="mb-3">By Family Income</h2>
@@ -1067,7 +1074,10 @@
                           @median-tab-change="handleMedianToggle"
                           :group-name="this.$options.filters.yearsText(groupName)"
                           class="mb-3"
-                        />                                                           
+                        />
+                       <v-row>
+                      <v-col cols="2"></v-col>
+                      <v-col cols="8">                       
                     <horizontal-bar-median
                       v-if="completionRate"
                       :value="{
@@ -1085,7 +1095,7 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Median',
+                        label: 'Median: ' + Math.round(parseFloat(30) * 100) + '%',
                         value: 30,
                         style: { height: '60px' },
                       }"
@@ -1096,11 +1106,16 @@
                       :labels="true"
                     ></horizontal-bar-median>                       
                       <div v-else class="data-na">Data Not Available</div>
+                      </v-col>  
+                       <v-col cols="2"></v-col>     
+                      </v-row>                       
                       <h2 class="mb-3">
                         Students Who Return After Their First Year&nbsp;
                         <tooltip definition="retention-rate" />
                       </h2>
-
+                       <v-row>
+                      <v-col cols="2"></v-col>
+                      <v-col cols="8">   
                     <horizontal-bar-median
                       v-if="retentionRate"
                       :value="{
@@ -1123,8 +1138,10 @@
                       :label-font-size="24"
                       :labels="true"
                     ></horizontal-bar-median> 
-
                       <div v-else class="data-na">Data Not Available</div>
+                      </v-col>  
+                       <v-col cols="2"></v-col>     
+                      </v-row>  
                     </v-col>
                   </v-row>
                   <v-row>
@@ -1825,7 +1842,10 @@
                       @median-switch-click="handleMedianToggle"
                       @median-tab-change="handleMedianToggle"
                       :group-name="this.$options.filters.yearsText(groupName)"
-                    />                                           
+                    />          
+                       <v-row>
+                      <v-col cols="2"></v-col>
+                      <v-col cols="8">                                                     
                     <horizontal-bar-median
                       v-if="netPrice"
                       :value="{
@@ -1843,7 +1863,7 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Median',
+                        label: 'Median: ' + this.$options.filters.numeral(30000,'$0,0'),
                         value: 30000,
                         style: { height: '60px' },
                       }"
@@ -1853,13 +1873,16 @@
                       :label-font-size="24"
                       :labels="true"
                     ></horizontal-bar-median> 
-                    <div v-else class="data-na">Data Not Available</div>
+                      <div v-else class="data-na">Data Not Available</div>
+                      </v-col>  
+                       <v-col cols="2"></v-col>     
+                      </v-row> 
                     <h2 class="mb-3">
                           Percentage Earning Above a High School Graduate&nbsp;<tooltip
                             definition="fos-median-earnings"
                           />
                         </h2>
-                    <div class="d-flex align-end mb-4" v-if="completionRate"><h2
+                    <div class="d-flex align-end mb-8" v-if="completionRate"><h2
                       class="display-2 navy-text font-weight-bold"
                     >
                       {{ completionRate |  numeral("0%") }}

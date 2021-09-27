@@ -146,15 +146,18 @@
       border-right: none;
       span {
         padding-left: 0.25em;
+        font-size:18pt !important;
+        font-family: "Montserrat", sans-serif !important;        
       }
     }
     &.picc-range-label-lower {
       span {
         padding-right: 0.25em;
-        border-left:none;
+        
         display:none;
       }
       display:none;
+      border-left: none !important;
     }
 
     &.picc-range-label-min,
@@ -165,6 +168,8 @@
       span {
         bottom: 100%;
         top: auto;
+        font-size: 12pt;
+        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;        
       }
     }
 
@@ -181,6 +186,7 @@
       border-left: 1px solid #000;
       span {
         top: 40px !important;
+
       }
       span:not(.arrow-left) {
         //margin-bottom: $bar-width + $arrow-size + 10;
@@ -189,7 +195,9 @@
         top: 62px !important;
         margin-left:-68px !important;
         font-weight:400;
-        font-size: 0.85rem;
+        font-size: 14pt;
+        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+
       }
       span.arrow-left {
         width: 0; 

@@ -155,7 +155,9 @@
       margin-right:0;       
 
       span {
-        position:relative !important;     
+        position:relative !important;
+        font-size:18pt !important;
+        font-family: "Montserrat", sans-serif !important;
       }
     }
     &.picc-range-label-lower {
@@ -176,6 +178,8 @@
       span {
         top: auto;
         position:relative !important;
+        font-size: 12pt;
+        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;          
       }
     }
 
@@ -195,6 +199,8 @@
         text-align: center;
         color:#000;
         margin-top:-10px;
+        font-size: 14pt !important;
+        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;        
       }
       span.arrow-left {
         width: 0; 
