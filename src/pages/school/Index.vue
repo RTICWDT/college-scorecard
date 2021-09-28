@@ -1966,7 +1966,7 @@
                         federal Pell grant intended for low-income students.
                       </p>
                       <donut
-                        color="#0e365b"
+                        color="#1874DC"
                         :value="socioEconomicDiversity * 100"
                         :height="200"
                         v-if="aidFlag < 3 && socioEconomicDiversity"
@@ -1984,7 +1984,7 @@
                           :value="Math.round(item.value * 100)"
                           :min="0"
                           :max="100"
-                          color="#0e365b"
+                          color="#1874DC"
                           :height="25"
                         ></horizontal-bar>
                         <strong>{{ item.value | numeral("0.%") }}</strong>
@@ -2078,7 +2078,7 @@
                         <tooltip definition="acceptance-rate" />
                       </h2>
                       <donut
-                        color="#0e365b"
+                        color="#1874DC"
                         :value="acceptanceRate * 100"
                         v-if="openAdmissions != 1 && acceptanceRate"
                         chart-id="acceptance-chart"
