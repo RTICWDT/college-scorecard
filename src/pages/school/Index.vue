@@ -1095,7 +1095,7 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Median: ' + Math.round(parseFloat(30) * 100) + '%',
+                        label: 'Median: ' + Math.round(parseFloat(0.3) * 100) + '%',
                         value: 30,
                         style: { height: '60px' },
                       }"

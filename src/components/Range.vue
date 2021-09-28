@@ -93,7 +93,7 @@
   position: relative;
 
   .picc-range-bar {
-    background-color: $dark-blue;
+    background-color: $medium-blue;
     height: 100%;
     left: 0;
     position: absolute;
@@ -135,12 +135,12 @@
     &.picc-range-label-middle,
     &.picc-range-label-lower,
     &.picc-range-label-upper {
-      border-left: 3px solid $dark-blue;
+      border-left: 3px solid $medium-blue;
     }
 
     &.picc-range-label-upper {
       border-left: none;
-      border-right: 3px solid $dark-blue;
+      border-right: 3px solid $medium-blue;
       span {
         padding-left: 0.25em;
       }
