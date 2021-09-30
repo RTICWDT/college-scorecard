@@ -147,7 +147,8 @@
       span {
         padding-left: 0.25em;
         font-size:18pt !important;
-        font-family: "Montserrat", sans-serif !important;        
+        font-family: "Montserrat", sans-serif !important;     
+        font-weight:bold;   
       }
     }
     &.picc-range-label-lower {
