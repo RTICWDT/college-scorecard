@@ -100,20 +100,6 @@
         </v-col>
       </v-row>
       <v-row class="result-card-info-container v-flex align-center">
-        <v-col class="py-0 my-0 mt-4">
-          <!--prettyhtml-ignore-->
-          <span
-            >Salary After Completing&nbsp;<tooltip
-              definition="fos-median-earnings"
-              :isBranch="isBranch"
-          /></span>
-        </v-col> </v-row
-      ><v-row>
-        <v-col class="text--black py-0">
-          <h3 class="navy-text ma-0">{{ displayEarn }}</h3>
-        </v-col>
-      </v-row>
-      <v-row class="result-card-info-container v-flex align-center">
         <v-col class="py-0 mt-4">
           <!--prettyhtml-ignore-->
           <span v-if="!isProgramReporter"
@@ -133,6 +119,20 @@
           <h3 class="navy-text my-0">{{ displayAvgCost }}</h3>
         </v-col>
       </v-row>
+      <v-row class="result-card-info-container v-flex align-center">
+        <v-col class="py-0 my-0 mt-4">
+          <!--prettyhtml-ignore-->
+          <span
+            >Median Earnings&nbsp;<tooltip
+              definition="fos-median-earnings"
+              :isBranch="isBranch"
+          /></span>
+        </v-col> </v-row
+      ><v-row>
+        <v-col class="text--black py-0">
+          <h3 class="navy-text ma-0">{{ displayEarn }}</h3>
+        </v-col>
+      </v-row>      
     </v-card-text>
     <v-card-actions class="card-actions">
       <p class="px-1">
