@@ -850,7 +850,7 @@
                         </p> 
 
                         <median-toggle
-                          :display-toggle="medianToggleCost"
+                          :display-toggle="medianToggle"
                           :control-tab="controlTab"
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
@@ -930,7 +930,7 @@
                         </p>            
 
                         <median-toggle
-                          :display-toggle="medianToggleCost"
+                          :display-toggle="medianToggle"
                           :control-tab="controlTab"
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
@@ -1068,7 +1068,7 @@
                       </v-checkbox>                      
                       </v-col>  
                         <median-toggle
-                          :display-toggle="medianToggleGrad"
+                          :display-toggle="medianToggle"
                           :control-tab="controlTab"
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
@@ -1837,7 +1837,7 @@
                       The median earnings of former students who received federal financial aid at 10 years after entering the school.
                     </p>
                     <median-toggle
-                      :display-toggle="medianToggleEarnings"
+                      :display-toggle="medianToggle"
                       :control-tab="controlTab"
                       @median-switch-click="handleMedianToggle"
                       @median-tab-change="handleMedianToggle"
@@ -2494,9 +2494,9 @@ export default {
     searchURL() {
       let qs = this.returnURLFromStorage()
       if (qs) {
-        return "/search/" + qs
+        return this.$url("/search/" + qs)
       } else {
-        return "/search/"
+        return this.$url("/search/")
       }
     },
     fosUndergradCount() {
