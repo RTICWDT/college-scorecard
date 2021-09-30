@@ -471,7 +471,7 @@
 @import '~/sass/_variables.scss';
 .homeCallout {
   /*background-color: #ffffff;*/
-  a i {
+  a i:not(.fa-external-link-alt) {
     color:$darker-green !important;
   }
   hr {
