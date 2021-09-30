@@ -115,7 +115,7 @@
     span {
       font-weight: 200;
       position: absolute;
-      top: $label-height / 2;
+      top: 4px;
       width: $label-width;
       cursor: pointer;
     }
@@ -192,8 +192,8 @@
         //margin-bottom: $bar-width + $arrow-size + 10;
         text-align: center;
         color:#000;
-        top: 62px !important;
-        margin-left:-68px !important;
+        top: 50px !important;
+        margin-left:-88px !important;
         font-weight:400;
         font-size: 14pt;
         font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
@@ -206,6 +206,7 @@
         border-bottom: $arrow-size solid black;
         border-right: $arrow-size solid transparent;
         margin-left:-7px;
+        margin-top: 5px;
       }
     }
   }

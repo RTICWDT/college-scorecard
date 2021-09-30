@@ -91,7 +91,9 @@ export default {
     upperTipStyleOverride: {
       type: Object,
       default: () => {
-        return {}
+        return {
+          
+        }
       },
     },
   },

@@ -144,7 +144,7 @@
                 </v-col>                 
                 <v-col md="6" class="pr-sm-3">                
                   <div id="school-completion-rate-bar" class="">
-                    <h2 class="mb-3">
+                    <h2 class="mb-0">
                       <!--prettyhtml-ignore-->
                       Graduation Rate&nbsp;<tooltip
                         definition="graduation-rate"
@@ -177,9 +177,10 @@
                       :y-bar-thickness="50"
                       :label-font-size="24"
                       :labels="true"
-                      class="mt-4"
+                      class="mb-4"
                     ></vertical-bar-median>
                     <div v-else class="data-na">Data Not Available</div>
+                    <div class="text-center"><em class="mx-auto">Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: 30%</em></div>
                   </div>
                 </v-col>
 
@@ -200,12 +201,12 @@
                     </h2>
 
                     <h2
-                      class="display-2 navy-text font-weight-bold"
+                      class="display-2 navy-text font-weight-bold pb-3"
                       v-if="netPrice"
                     >
                       {{ netPrice | numeral("$0,0") }}
                     </h2>
-                    <div class="data-na" v-else>Data Not Available</div>
+                    <div class="data-na pb-3" v-else>Data Not Available</div>
                     <em>Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: $25,000</em>
 
                     <horizontal-bar-median
@@ -225,15 +226,19 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Median: ' + this.$options.filters.numeral(25000,'$0,0'),
+                        label: 'Median',
                         value: 25000,
                         style: { height: '60px' },
+                      }"
+                      :upperTipStyleOverride="{
+                        display: 'none',
                       }"
                       color="#0e365b"
                       :height="500"
                       :y-bar-thickness="50"
                       :label-font-size="24"
                       :labels="true"
+                      class="pt-3"
                     ></horizontal-bar-median>
                     <div class="data-na" v-else>Data Not Available</div>                    
                   </div>
@@ -254,12 +259,12 @@
                     </h2>
 
                     <h2
-                      class="display-2 navy-text font-weight-bold"
+                      class="display-2 navy-text font-weight-bold pb-3"
                       v-if="netPrice"
                     >
                       {{ netPrice | numeral("$0,0") }}
                     </h2>
-                    <div class="data-na" v-else>Data Not Available</div>
+                    <div class="data-na pb-3" v-else>Data Not Available</div>
                     <em>Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: $25,000</em>
 
                     <horizontal-bar-median
@@ -279,15 +284,19 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Median: ' + this.$options.filters.numeral(25000,'$0,0'),
+                        label: 'Median',
                         value: 25000,
                         style: { height: '60px' },
                       }"
+                      :upperTipStyleOverride="{
+                        display: 'none',
+                      }"                      
                       color="#0e365b"
                       :height="500"
                       :y-bar-thickness="50"
                       :label-font-size="24"
                       :labels="true"
+                      class="pt-3"
                     ></horizontal-bar-median>
                     <div class="data-na" v-else>Data Not Available</div>
                   </div>
@@ -877,7 +886,7 @@
                           style: { height: '60px' },
                         }"
                         :median="{
-                          label: 'Median: ' + this.$options.filters.numeral(netPrice,'$0,0'),
+                          label: 'Median: ' + this.$options.filters.numeral(25000,'$0,0'),
                           value: 25000,
                           style: { height: '60px' },
                         }"
@@ -2099,7 +2108,7 @@
         <v-col lg="3" v-if="!error" class="pt-0">
           <v-card outline class="pa-5 mb-3">
             <p class="title mb-2">New Search:</p>
-            <v-radio-group v-model="sidebarSearchToggle" row>
+            <v-radio-group v-model="sidebarSearchToggle" column>
               <v-radio label="School" value="school" color="#216d09"></v-radio>
 
               <v-radio
@@ -2315,6 +2324,16 @@
   .v-messages {
     display: none;
   }
+}
+
+span.arrow-left {
+   $arrow-size: 7px;
+  width: 0; 
+  height: 0; 
+  border-top: $arrow-size solid transparent;
+  border-bottom: $arrow-size solid transparent;
+  border-right: $arrow-size solid black;
+  margin-top:0;
 }
 </style>
 

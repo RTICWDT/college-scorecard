@@ -1,6 +1,6 @@
 <template>
 <div :class="labelPrefix ? 'median-toggle-container d-flex align-end' : 'd-flex align-end' ">
-  <em v-if="!labelPrefix" class="d-flex  mr-2">Show median for:</em>
+  <em v-if="!labelPrefix" class="d-flex  mr-2">Show Median for:</em>
   <v-tabs
     id="median-toggle"
     :value="controlTab"
@@ -40,10 +40,17 @@
 
 #median-toggle-slider {
   background-color: $institution-accent-color;
+
 }
 
 .median-toggle-container {
   border-bottom: 2px solid #dadada;
+  #median-toggle {
+    #median-tab-inactive {
+    /*background-color: #eeeeee;*/
+    border-bottom: none !important;
+  }
+  }  
 }
 
 .v-tab {
@@ -57,7 +64,7 @@
 #median-toggle {
   #median-tab-inactive {
     /*background-color: #eeeeee;*/
-    border-bottom: 8px solid #fff;
+    border-bottom: 8px solid #dcdada;
   }
 
   #median-tab-active {

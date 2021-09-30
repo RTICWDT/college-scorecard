@@ -83,8 +83,8 @@
   margin-right:auto;
 }
 .range-chart {
-  $label-height: 1.5em;
-  $label-offset: 1.5em;
+  $label-height: 1em;
+  $label-offset: 1em;
   $label-margin: $label-offset + $label-height;
   $label-width: 4em;
   $bar-width: 100px;
@@ -158,6 +158,7 @@
         position:relative !important;
         font-size:18pt !important;
         font-family: "Montserrat", sans-serif !important;
+        font-weight: bold;  
       }
     }
     &.picc-range-label-lower {
@@ -179,13 +180,17 @@
         top: auto;
         position:relative !important;
         font-size: 12pt;
-        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;          
+        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;        
       }
     }
 
     &.picc-range-label-min {
-      bottom: -30px;
+      bottom: 0;
     }
+
+    &.picc-range-label-max {
+      top: 5px;
+    }    
 
     &.picc-range-label-median {
       top: auto;
@@ -200,7 +205,8 @@
         color:#000;
         margin-top:-10px;
         font-size: 14pt !important;
-        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;        
+        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;       
+        font-style: italic;
       }
       span.arrow-left {
         width: 0; 
@@ -209,7 +215,7 @@
         border-bottom: $arrow-size solid transparent;
         border-right: $arrow-size solid black;
         margin-left:$bar-width + 5;
-        margin-top: -7px;
+        margin-top:0;
       }
     }
   }
@@ -327,10 +333,10 @@ export default {
         ...styleLabel.styles,
         ...this.upper.styles,
       }
-      if (styleLabel.value >= 85) {
+      /*if (styleLabel.value >= 85) {
         styleLabel.styles.bottom = ''
         styleLabel.styles.top = (100 - this.percent(styleLabel.value)) + '%'
-      }
+      }*/
       //console.log(styleLabel);
       return styleLabel
     },
@@ -345,7 +351,7 @@ export default {
       )
       this.bar_styles.top = top + "%"
       if (top < 20 && this.addExtraPadding) {
-        this.extraPad["padding-top"] = "60px"
+        this.extraPad["padding-top"] = "30px"
       }
     },
     scale(v) {
