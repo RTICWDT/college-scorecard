@@ -170,7 +170,7 @@
         bottom: 100%;
         top: auto;
         font-size: 12pt;
-        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;        
+        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
       }
     }
 
@@ -198,6 +198,7 @@
         font-weight:400;
         font-size: 14pt;
         font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+        font-style:italic;
 
       }
       span.arrow-left {
