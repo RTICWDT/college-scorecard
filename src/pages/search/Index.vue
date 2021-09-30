@@ -524,6 +524,7 @@ export default {
         { type: "Name", field: "name:asc" },
         { type: "Annual Cost", field: "avg_net_price:asc" },
         { type: "Graduation Rate", field: "completion_rate:desc" },
+        { type: "Threshold Earnings", field: "completion_rate:desc" },
       ],
       shareUrl: null,
       displayToggle: "institutions",
