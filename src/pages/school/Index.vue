@@ -1264,6 +1264,8 @@
                             loans, the typical undergraduate may leave school
                             with $0 in debt.
                           </p>
+
+                          <p>Approximately {{ Math.round(parseFloat(studentsReceivingLoans * 100)) }}% of students also have private loans for this type of institution.</p>
                         </div>
                         <div v-else>
                           <h2 class="mb-3">
@@ -1325,8 +1327,7 @@
                           />
                         </h2>
                         <p v-if="aidLoanSelect === 'fed'">
-                          Total debt after graduation depends on field of study
-                          for undergraduate borrowers who complete college.
+                          The typical total debt for undergraduate borrowers who complete college.
                         </p>
                         <!--                          <v-checkbox-->
                         <!--                            v-model="aidShowMedianDebtWithPrior"-->
@@ -1335,14 +1336,14 @@
 
                           <div
                             class="display-2 navy-text font-weight-bold"
-                            v-if="debtRange && debtRange.median.debt"
+                            v-if="debtRange && debtRange.median.debt && aidLoanSelect !== 'plus'"
                           >
                             {{ debtRange.median.debt | numeral("$0,0") }}
                           </div>
 
                         <h2
                           class="display-2 navy-text font-weight-bold"
-                          v-if="
+                          v-else-if="
                             parentPlusDebt &&
                               aidLoanSelect === 'plus' &&
                               !aidShowMedianDebtWithPrior
@@ -1364,7 +1365,7 @@
 
                         <div
                           class="data-na"
-                          v-else-if="aidLoanSelect === 'plus'"
+                          v-else
                         >
                           Data Not Available
                         </div>
@@ -1499,7 +1500,7 @@
                             @click="trackOutboundLink($event)"
                             >payment options</a
                           >
-                          are available.
+                          are available, like income-driven repayment. An income-driven repayment plan sets your monthly student loan payment at an amount that is intended to be affordable based on your income and family size.
                         </p>
                       </v-col>
                     </v-row>
@@ -1830,7 +1831,7 @@
                   class="px-0 py-3 pa-sm-5"
                 >
                   <div>
-                  <h2 class="mb-3" v-if="showGradOnly">
+                  <h2 class="mb-3" v-if="netPrice">
                           Median Earnings&nbsp;<tooltip
                             definition="fos-median-earnings"
                             :isBranch="isBranch"

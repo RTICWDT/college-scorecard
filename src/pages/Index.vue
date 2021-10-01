@@ -346,7 +346,7 @@
                     <v-icon
                       x-small
                       color="white"
-                      class="pl-1"
+                      class="pl-1 pb-1"
                     >
                       fas fa-external-link-alt
                     </v-icon>
