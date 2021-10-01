@@ -1498,9 +1498,27 @@
                             href="https://studentloans.gov/myDirectLoan/repaymentEstimator.action"
                             target="_blank"
                             @click="trackOutboundLink($event)"
-                            >payment options</a
+                            >payment options 
+                          <v-icon
+                              x-small
+                              class="pl-1"
+                            >
+                              fas fa-external-link-alt
+                            </v-icon> 
+                          </a>
+                          are available, like income-driven repayment. An 
+                          <a 
+                          target="_blank" 
+                          href="https://studentaid.gov/manage-loans/repayment/plans/income-driven"
+                          @click="trackOutboundLink($event)"
+                          >income-driven repayment                     
+                          <v-icon
+                            x-small
+                            class="pl-1"
                           >
-                          are available, like income-driven repayment. An income-driven repayment plan sets your monthly student loan payment at an amount that is intended to be affordable based on your income and family size.
+                            fas fa-external-link-alt
+                          </v-icon>   
+                          </a> plan sets your monthly student loan payment at an amount that is intended to be affordable based on your income and family size.
                         </p>
                       </v-col>
                     </v-row>
@@ -1567,56 +1585,56 @@
                           <tr>
                             <td>Making Progress</td>
                             <td v-if="repaymentRates[gradSubgroup]['makingprogress']">
-                              {{ repaymentRates[gradSubgroup]['makingprogress'] | numeral("0.000%") }}
+                              {{ repaymentRates[gradSubgroup]['makingprogress'] | numeral("0%") }}
                             </td>
                             <td v-else>--</td>
                           </tr>
                           <tr>
                             <td>Not Making Progress</td>
                             <td v-if="repaymentRates[gradSubgroup]['noprogress']">
-                              {{ repaymentRates[gradSubgroup]['noprogress'] | numeral("0.000%") }}
+                              {{ repaymentRates[gradSubgroup]['noprogress'] | numeral("0%") }}
                             </td>
                             <td v-else>--</td>
                           </tr>
                           <tr>
                             <td>Deferment</td>
                             <td v-if="repaymentRates[gradSubgroup]['deferment']">
-                              {{ repaymentRates[gradSubgroup]['deferment'] | numeral("0.000%") }}
+                              {{ repaymentRates[gradSubgroup]['deferment'] | numeral("0%") }}
                             </td>
                             <td v-else>--</td>
                           </tr>
                           <tr>
                             <td>Paid in Full</td>
                             <td v-if="repaymentRates[gradSubgroup]['fullypaid']">
-                              {{ repaymentRates[gradSubgroup]['fullypaid'] | numeral("0.000%") }}
+                              {{ repaymentRates[gradSubgroup]['fullypaid'] | numeral("0%") }}
                             </td>
                             <td v-else>--</td>
                           </tr>
                           <tr>
                             <td>Forbearance</td>
                             <td v-if="repaymentRates[gradSubgroup]['forbearance']">
-                              {{ repaymentRates[gradSubgroup]['forbearance'] | numeral("0.000%") }}
+                              {{ repaymentRates[gradSubgroup]['forbearance'] | numeral("0%") }}
                             </td>
                             <td v-else>--</td>
                           </tr>
                           <tr>
                             <td>Defaulted</td>
                             <td v-if="repaymentRates[gradSubgroup]['default']">
-                              {{ repaymentRates[gradSubgroup]['default']| numeral("0.000%") }}
+                              {{ repaymentRates[gradSubgroup]['default']| numeral("0%") }}
                             </td>
                             <td v-else>--</td>
                           </tr>
                           <tr>
                             <td>Delinquent</td>
                             <td v-if="repaymentRates[gradSubgroup]['delinquent']">
-                              {{ repaymentRates[gradSubgroup]['delinquent'] | numeral("0.000%") }}
+                              {{ repaymentRates[gradSubgroup]['delinquent'] | numeral("0%") }}
                             </td>
                             <td v-else>--</td>
                           </tr>
                           <tr>
                             <td>Discharged</td>
                             <td v-if="repaymentRates[gradSubgroup]['discharge']">
-                              {{ repaymentRates[gradSubgroup]['discharge'] | numeral("0.000%") }}
+                              {{ repaymentRates[gradSubgroup]['discharge'] | numeral("0%") }}
                             </td>
                             <td v-else>--</td>
                           </tr>                                                                              
