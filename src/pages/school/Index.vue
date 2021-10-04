@@ -199,7 +199,7 @@
                       {{ netPrice | numeral("$0,0") }}
                     </h2>
                     <div class="data-na pb-3" v-else>Data Not Available</div>
-                    <em>Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: $25,000</em>
+                    <em style="font-size:14pt;">Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: $25,000</em>
 
                     <horizontal-bar-median
                       v-if="netPrice"

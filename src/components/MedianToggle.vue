@@ -125,7 +125,7 @@ export default {
       type: Object,
       default() {
         return {
-          width: "20%",
+          width: "25%",
         }
       },
     },
