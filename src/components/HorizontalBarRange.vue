@@ -208,7 +208,7 @@
         border-bottom: $arrow-size solid black;
         border-right: $arrow-size solid transparent;
         margin-left:-7px;
-        margin-top: 5px;
+        margin-top: 0px;
       }
     }
   }

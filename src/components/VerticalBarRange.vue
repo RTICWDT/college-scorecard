@@ -76,7 +76,7 @@
 .range-container {
   overflow: visible;
   width: 140px;
-  height:350px;
+  height:450px;
   padding-left: 20px;
   padding-top: 0px;
   margin-left:auto;
@@ -92,7 +92,7 @@
 
   background-color: $light-gray;
   display: block;
-  height: 300px;
+  height: 400px;
   margin-bottom: 0;
   margin-top: 0;
   max-height: none;
@@ -137,6 +137,8 @@
       span {
         right: 0;
         text-align: center;
+        font-size: 12pt;
+        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
       }
     }
 
@@ -189,7 +191,7 @@
     }
 
     &.picc-range-label-max {
-      top: 5px;
+      top: 0px;
     }    
 
     &.picc-range-label-median {
@@ -214,7 +216,7 @@
         border-top: $arrow-size solid transparent;
         border-bottom: $arrow-size solid transparent;
         border-right: $arrow-size solid black;
-        margin-left:$bar-width + 5;
+        margin-left:$bar-width;
         margin-top:0;
       }
     }

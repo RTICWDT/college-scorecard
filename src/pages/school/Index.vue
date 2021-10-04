@@ -53,7 +53,7 @@
               </v-row>
 
               <!-- Institution Summary Container-->
-              <v-row>
+              <v-row class="pl-5">
                 <!-- School Information and Icons-->
                 <v-col cols="12" md="7" class="pl-sm-6 pr-sm-5">
                   <v-chip v-if="underInvestigation == 1" color="error" label>
@@ -112,7 +112,7 @@
               </v-row>
 
               <!--Special Designations-->
-              <v-row class="mt-3" v-if="specialDesignations.length > 0">
+              <v-row class="mt-3 pl-5" v-if="specialDesignations.length > 0">
                 <v-col cols="12" class="px-sm-5">
                   <div class="school-special_designation">
                     <v-chip
@@ -128,9 +128,9 @@
               </v-row>
 
               <!-- Institution Summary and Field Of Study Select + Summary -->
-              <v-row class="mt-3 px-sm-3">
+              <v-row class="mt-3 pr-sm-3 pl-5">
                 <!--Institution Summary-->
-                <v-col cols="12">
+                <v-col cols="12" class="py-3 pa-sm-5">
                     <median-toggle
                       :display-toggle="medianToggle"
                       @median-switch-click="handleMedianToggle"
@@ -143,7 +143,7 @@
                     />                  
                 </v-col>                 
                 <v-col md="6" class="pr-sm-3">                
-                  <div id="school-completion-rate-bar" class="">
+                  <div id="school-completion-rate-bar" class="py-3 pa-sm-3">
                     <h2 class="mb-0">
                       <!--prettyhtml-ignore-->
                       Graduation Rate&nbsp;<tooltip
@@ -175,7 +175,7 @@
                       color="#0e365b"
                       :height="500"
                       :y-bar-thickness="50"
-                      :label-font-size="24"
+                      :label-font-size="16"
                       :labels="true"
                       class="mb-4"
                     ></vertical-bar-median>
@@ -186,18 +186,10 @@
 
                 <v-col md="6" class="pr-sm-3">
                   <div id="school-avg-cost" class="mb-4">
-                    <h2 class="mb-3" v-if="!isProgramReporter">
+                    <h2 class="mb-3">
                       <!--prettyhtml-ignore-->
                       Average Annual Cost
                       <tooltip definition="avg-cost" />
-                    </h2>
-                    <h2 v-else class="mb-3">
-                      <!--prettyhtml-ignore-->
-                      Average Annual Cost for Largest Program
-                      <tooltip
-                        definition="avg-program-cost"
-                        :isNegative="netPrice < 0"
-                      />
                     </h2>
 
                     <h2
@@ -244,18 +236,10 @@
                   </div>
 
                   <div id="school-median-earnings" class="mb-4">
-                    <h2 class="mb-3" v-if="!isProgramReporter">
+                    <h2 class="mb-3">
                       <!--prettyhtml-ignore-->
                       Median Earnings
                       <tooltip definition="fos-median-earnings" />
-                    </h2>
-                    <h2 v-else class="mb-3">
-                      <!--prettyhtml-ignore-->
-                      Median Earnings for Largest Program
-                      <tooltip
-                        definition="fos-median-earnings"
-                        :isNegative="netPrice < 0"
-                      />
                     </h2>
 
                     <h2
@@ -658,7 +642,7 @@
                     </div>
                   </div>
 
-                  <div class="fos-sub-title-header pa-4">
+                  <div class="fos-sub-title-header pa-4 top-fos-sub-title-header" style="background:none !important;">
                     <h3>
                       Top Fields of Study at {{ schoolName }}
                       <tooltip definition="field-of-study" />
@@ -684,7 +668,7 @@
                     <p class="my-2">
                       <span class="d-block d-sm-inline">Sort by:</span>
                       <v-btn
-                        class="ma-1"
+                        class="ma-1 component-toggle-button"
                         :color="
                           field_sort == 'ipeds_award_count' ? 'secondary' : null
                         "
@@ -693,7 +677,7 @@
                         >Largest Size</v-btn
                       >
                       <v-btn
-                        class="ma-1"
+                        class="ma-1 component-toggle-button"
                         :color="
                           field_sort == 'highest_earnings' ? 'secondary' : null
                         "
@@ -702,7 +686,7 @@
                         >Highest Earnings</v-btn
                       >
                       <v-btn
-                        class="ma-1"
+                        class="ma-1 component-toggle-button"
                         :color="
                           field_sort == 'lowest_debt' ? 'secondary' : null
                         "
@@ -840,7 +824,7 @@
                 >
                   <v-row>
                     <v-col cols="12" md="12">
-                      <div v-if="!isProgramReporter">
+                      <div>
                         <h2 class="mb-3">
                           Average Annual Cost&nbsp;
                           <tooltip definition="avg-cost" />
@@ -901,7 +885,7 @@
                        <v-col cols="2"></v-col>     
                       </v-row>                                                         
                       </div>
-                      <div v-else>
+                      <!--<div v-else>
                         <h2 class="mb-3">
                           Average Annual Cost for Largest Program
                           <tooltip
@@ -979,7 +963,7 @@
                       </v-col>  
                        <v-col cols="2"></v-col>     
                       </v-row>                       
-                      </div>
+                      </div> -->
                       
                       <h2 class="mb-3">By Family Income</h2>
                       <p>
@@ -988,7 +972,7 @@
                         more or less than the overall average costs.
                       </p>
 
-                      <v-simple-table class="school-table">
+                      <v-simple-table class="school-table mb-4">
                         <caption class="sr-only">
                           Average cost by family income
                         </caption>
@@ -2301,7 +2285,7 @@
   }
 }
 
-.fos-sub-title-header {
+.fos-sub-title-header:not(.top-fos-sub-title-header) {
   background-color: #e5e5e5;
 
   h3 {

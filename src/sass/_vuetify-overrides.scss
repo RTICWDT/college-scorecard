@@ -57,7 +57,7 @@ html {
         max-width: 1300px;
       }
     }
-    .v-btn.secondary:not(.share):not(.fos-button):not(.filter-button){
+    .v-btn.secondary:not(.share):not(.fos-button):not(.filter-button):not(.component-toggle-button){
       letter-spacing: normal;
       height:50px !important;
       border-radius: 16px !important;
@@ -74,6 +74,10 @@ html {
   .display-4 .subtitle-1,
   .subtitle-2 {
     font-family: $header-font-family !important;
+  }
+
+  .display-2 {
+    font-size: 24pt !important;
   }
 
   .v-expansion-panel-header {

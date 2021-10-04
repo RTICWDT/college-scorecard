@@ -5,7 +5,7 @@
         Show data for students who
       </p>
       <v-btn
-        class="ma-1 d-block d-sm-inline"
+        class="ma-1 d-block d-sm-inline component-toggle-button"
         small
         :color="enroll == 'enroll_first_time' ? 'secondary' : null"
         @click="
@@ -15,7 +15,7 @@
         >started college here</v-btn
       >
       <v-btn
-        class="ma-1 d-block d-sm-inline"
+        class="ma-1 d-block d-sm-inline component-toggle-button"
         small
         :color="enroll == 'enroll_not_first_time' ? 'secondary' : null"
         @click="
@@ -25,7 +25,7 @@
         >transferred in</v-btn
       >
       <v-btn
-        class="ma-1 d-block d-sm-inline"
+        class="ma-1 d-block d-sm-inline component-toggle-button"
         small
         :color="enroll == 'enroll_both' ? 'secondary' : null"
         @click="
@@ -38,7 +38,7 @@
     <div>
       <p class="outcomes_intro d-inline-block ">and started their studies</p>
       <v-btn
-        class="ma-1 d-block d-sm-inline"
+        class="ma-1 d-block d-sm-inline component-toggle-button"
         small
         :color="study == 'study_full_time' ? 'secondary' : null"
         @click="
@@ -48,7 +48,7 @@
         >full-time</v-btn
       >
       <v-btn
-        class="ma-1 d-block d-sm-inline"
+        class="ma-1 d-block d-sm-inline component-toggle-button"
         small
         :color="study == 'study_part_time' ? 'secondary' : null"
         @click="
@@ -58,7 +58,7 @@
         >part-time</v-btn
       >
       <v-btn
-        class="ma-1 d-block d-sm-inline"
+        class="ma-1 d-block d-sm-inline component-toggle-button"
         small
         :color="study == 'study_both' ? 'secondary' : null"
         @click="

@@ -9,7 +9,7 @@
       color="#0e365b"
     >
       <p class="pb-2 mt-5 mb-0 body-2 white--text">
-        Powered by <a :href="$url('/data/home/')">College Scorecard Data</a> |
+        Powered by <a :href="$url('/data')">College Scorecard Data</a> |
         <a
           href="https://github.com/RTICWDT/college-scorecard/releases"
           target="_blank"
