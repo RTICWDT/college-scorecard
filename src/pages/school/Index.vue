@@ -2168,7 +2168,7 @@
 }
 
 .school-map {
-  border: 1px solid $black;
+  border: 0px solid $black;
   border-radius: $base-border-radius;
   max-width: 420px;
   margin-top: $base-padding;

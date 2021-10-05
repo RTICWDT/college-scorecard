@@ -84,7 +84,7 @@
         </v-col>
       </v-row>
       <v-divider />
-      <p class="overline mb-0 pt-3">Institutional Highlights:</p>
+      <!-- <p class="overline mb-0 pt-3">Institutional Highlights:</p>-->
       <v-row class="v-flex align-center">
         <v-col class="">
           <!--prettyhtml-ignore-->

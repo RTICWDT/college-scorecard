@@ -335,10 +335,10 @@ export default {
         ...styleLabel.styles,
         ...this.upper.styles,
       }
-      /*if (styleLabel.value >= 85) {
+      if (styleLabel.value >= 85) {
         styleLabel.styles.bottom = ''
         styleLabel.styles.top = (100 - this.percent(styleLabel.value)) + '%'
-      }*/
+      }
       //console.log(styleLabel);
       return styleLabel
     },

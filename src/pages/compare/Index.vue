@@ -1340,8 +1340,8 @@ export default {
   },
   computed: {
     shareUrl() {
-      let origin = process.isClient ? window.location.origin : ""
-      const compareBaseURL = origin + "/compare/?"
+      //let origin = process.isClient ? window.location.origin : ""
+      const compareBaseURL = "/compare/?"
 
       let paramArray = {
         // Institution
@@ -1373,7 +1373,7 @@ export default {
       }
 
       // Return Composite URL
-      return compareBaseURL + this.prepareQueryString(paramArray)
+      return this.$url(compareBaseURL + this.prepareQueryString(paramArray))
     },
     referrerLink() {
       let referrer
@@ -1382,7 +1382,7 @@ export default {
       } else {
         referrer = null
       }
-      return referrer || `/search`
+      return referrer || this.$url('/search')
     },
     showSearchForm() {
       if (
