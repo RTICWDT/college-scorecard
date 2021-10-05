@@ -662,7 +662,7 @@
                         hoistCount
                       }}
                       had relevant data on {{ hoistGroupData }}.)
-                      <a :href="fieldsLink">See All Fields of Study &raquo;</a>
+                      <a :href="this.$url(fieldsLink)">See All Fields of Study &raquo;</a>
                     </p>
 
                     <p class="my-2">
