@@ -202,7 +202,7 @@ header {
                   disabled: disableCompare,
                 }"
                 aria-label="Navigate to compare page"
-                @click="handleCompareLinkClick($url(`/compare`))"
+                @click="handleCompareLinkClick(`/compare`)"
                 >Compare:</a
               >
 

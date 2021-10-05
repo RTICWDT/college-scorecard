@@ -70,7 +70,7 @@
           <div class="compare-drawer-section-header-wrapper ml-4">
             <div
               class="compare-icon-wrapper d-inline-block mr-4"
-              style="background: #C4DEC4 ;"
+              style="background: #C4DEC4;"
             >
               <v-icon class="mt-1" color="#122E51" small>
                 fas fa-university
@@ -180,7 +180,7 @@
     >
       <v-row>
         <v-col cols="12" md="5" class="text-center d-none d-md-block my-2">
-          <v-btn rounded color="secondary" :href="'/compare'">
+          <v-btn rounded color="secondary" :href="this.$url('/compare')">
             Compare Schools
           </v-btn>
         </v-col>
@@ -193,7 +193,7 @@
             class="compare-drawer-button"
             rounded
             color="secondary"
-            :href="'/compare/?toggle=fos'"
+            :href="this.$url('/compare/?toggle=fos')"
           >
             Compare Fields of Study
           </v-btn>
