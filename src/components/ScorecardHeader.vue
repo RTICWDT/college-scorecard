@@ -106,6 +106,7 @@ header {
       li .nav-active {
         color: $nav-active-color !important;
         text-decoration: underline;
+        font-weight:600;
       }
     }
 
@@ -153,7 +154,7 @@ header {
       app
       clipped-left
       :height="$vuetify.breakpoint.xsOnly ? 80 : 105"
-      color="#0e365b"
+      color="#00365e"
       class="pa-0 ma-0"
       flat
     >
@@ -242,7 +243,7 @@ header {
                 <v-btn
                   small
                   fab
-                  color="#fec005"
+                  color="#fdbf32"
                   @click="handleCompareIconClick"
                   aria-label="Show Compare Drawer"
                 >

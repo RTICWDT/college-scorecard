@@ -41,20 +41,21 @@ $light-gray: #eaeaea;
 $lighter-gray: #eeeeee;
 $light-blue: #d5dfe8;
 $medium-blue: #1874DC;
-$dark-blue: #0e365b;
+$dark-blue: #00365e; // was 0e365b
 $darker-blue: #092236;
 $darkest-blue: #040404;
-$mid-blue: #2b6091;
+$mid-blue: #0076b7; // primary in app, was 2b6091 
 $lighter-blue: tint($dark-blue, 6%);
 $sky-blue: #00adf2;
 $sky-blue-light: #d2eefc;
 $light-green: #C4DEC4;
 $green: #2c8511;
-$darker-green: #216d09;
+$darker-green: #007000; //was 216d09
 $darkest-green: #174b06;
 $lime-green: #77b713;
 $emerald-green: #13b79e;
 $yellow: #f0d704;
+$lighter-yellow: #fff6d9;
 $darker-yellow: #eeba28;
 $light-orange: #f3ddca;
 $orange: #d37c39; 
@@ -78,12 +79,12 @@ $meter-colors: (
 $warning-color: #D16E00;
 
 // Institution
-$institution-accent-color: #216d09;
+$institution-accent-color: $darker-green;
 
 // Field of Study
-$fos-color-gold: #fec005;
+$fos-color-gold: #fdbf32;
 // Replace with this to remove color from name.
-$fos-accent-color: #fec005;
+$fos-accent-color: #fdbf32;
 
 // Background Color
 $base-background-color: $white;

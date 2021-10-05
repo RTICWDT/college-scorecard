@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
+import "~/sass/_variables";
 
 Vue.use(Vuetify)
 
@@ -8,8 +9,8 @@ const vuetify = new Vuetify({
   theme: {
     themes: {
       light: {
-            primary: '#2b6091',
-            secondary: '#216d09',
+            primary: $mid-blue,
+            secondary: $darker-green, // was 216d09
             accent: '#8c9eff',
             error: '#b61d1c',
       },

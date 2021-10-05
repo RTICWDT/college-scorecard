@@ -62,14 +62,14 @@
 }
 
 #compare-toggle-school-active {
-  background-color: #c4dec4 !important;
+  background-color: #83c38c !important;
   h3 {
     font-weight: bold !important;
   }
 }
 
 #compare-toggle-fos-active {
-  background-color: #fff6dc;
+  background-color: $lighter-yellow;
   h3 {
     font-weight: bold !important;
   }

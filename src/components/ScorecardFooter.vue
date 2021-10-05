@@ -6,7 +6,7 @@
       app
       absolute
       height="100"
-      color="#0e365b"
+      color="#00365e"
     >
       <p class="pb-2 mt-5 mb-0 body-2 white--text">
         Powered by <a :href="$url('/data')">College Scorecard Data</a> |

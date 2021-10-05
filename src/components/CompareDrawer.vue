@@ -117,7 +117,7 @@
           <div class="compare-drawer-section-header-wrapper ml-4">
             <div
               class="compare-icon-wrapper d-inline-block mr-4"
-              style="background: #fec005;"
+              style="background: #fdbf32;"
             >
               <v-icon class="mt-1" color="black" small>
                 fas fa-award

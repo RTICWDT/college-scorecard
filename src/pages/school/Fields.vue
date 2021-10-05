@@ -8,7 +8,7 @@
             <v-card class="pa-5">
               <h1 class="title">
                 Loading
-                <v-icon color="#0e365b">fas fa-circle-notch fa-spin</v-icon>
+                <v-icon color="#00365e">fas fa-circle-notch fa-spin</v-icon>
               </h1>
             </v-card>
           </div>

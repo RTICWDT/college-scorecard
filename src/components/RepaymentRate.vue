@@ -51,6 +51,8 @@
 
 <script>
 import { GoogleCharts } from "google-charts"
+import "~/sass/_variables.scss";
+
 export default {
   props: {
     school: Object,
@@ -149,7 +151,7 @@ export default {
         if (sortable[index][1] == null) {
           colors.push("#E4E4E4")
         } else {
-          colors.push("#0e365b")
+          colors.push("#00365e")
         }
       })
 
@@ -196,11 +198,11 @@ export default {
             "#FFFFFF",
             "#00ff00",
             "#0000ff",
-            "#0e365b",
-            "#0e365b",
-            "#0e365b",
-            "#0e365b",
-            "#0e365b",            
+            "#00365e",
+            "#00365e",
+            "#00365e",
+            "#00365e",
+            "#00365e",            
           ];
         } else {
           colors = [

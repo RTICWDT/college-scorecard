@@ -69,7 +69,7 @@ export default {
       default: () => {
         return {
           height: "22px",
-          "border-left": "3px solid #0e365b",
+          "border-left": "3px solid #00365e",
         }
       },
     },
@@ -84,7 +84,7 @@ export default {
       default: () => {
         return {
           height: "22px",
-          "border-right": "3px solid #0e365b",
+          "border-right": "3px solid #00365e",
         }
       },
     },

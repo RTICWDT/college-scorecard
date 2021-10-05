@@ -66,7 +66,7 @@
               <div class="pa-5">
                 <h1 class="title">
                   Loading
-                  <v-icon color="#0e365b">fas fa-circle-notch fa-spin</v-icon>
+                  <v-icon color="#00365e">fas fa-circle-notch fa-spin</v-icon>
                 </h1>
               </div>
             </div>
@@ -105,7 +105,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'netPrice',
-                      color: '#0e365b',
+                      color: '#00365e',
                       max: 150000,
                       type: 'currency',
                       chart: 'HorizontalBar',
@@ -125,7 +125,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'completionRate',
-                      color: '#0e365b',
+                      color: '#00365e',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -140,7 +140,7 @@
                     definition="fos-median-earnings"
                     :config="{
                       computedField: 'earningsRange',
-                      color: '#0e365b',
+                      color: '#00365e',
                       chart: 'MultiRange',
                       multiRangeVariable:
                         'earnings.highest.2_yr.overall_median_earnings',
@@ -641,7 +641,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'fullTimeEnrollment',
-                      color: '#0e365b',
+                      color: '#00365e',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -666,7 +666,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'socioEconomicDiversity',
-                      color: '#0e365b',
+                      color: '#00365e',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -681,7 +681,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'raceEthnicity',
-                      color: '#0e365b',
+                      color: '#00365e',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -739,7 +739,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'netPrice',
-                      color: '#0e365b',
+                      color: '#00365e',
                       max: 150000,
                       type: 'currency',
                       chart: 'HorizontalBar',
@@ -758,7 +758,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'income',
-                      color: '#0e365b',
+                      color: '#00365e',
                       max: 60000,
                       type: 'currency',
                       chart: 'HorizontalBar',
@@ -805,7 +805,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'completionRate',
-                      color: '#0e365b',
+                      color: '#00365e',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -819,7 +819,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'retentionRate',
-                      color: '#0e365b',
+                      color: '#00365e',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -832,7 +832,7 @@
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
                     :config="{
-                      color: '#0e365b',
+                      color: '#00365e',
                       chart: 'Sankey',
                       currentSankey: currentSankey,
                     }"
@@ -869,7 +869,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'studentsReceivingLoans',
-                      color: '#0e365b',
+                      color: '#00365e',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -897,7 +897,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'debtRange',
-                      color: '#0e365b',
+                      color: '#00365e',
                       chart: 'MultiRange',
                       multiRangeVariable: 'debt',
                       multiRangeReactive: true,
@@ -932,7 +932,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'debtRange',
-                      color: '#0e365b',
+                      color: '#00365e',
                       chart: 'MultiRange',
                       multiRangeVariable: 'payment',
                       multiRangeReactive: true,
@@ -968,7 +968,7 @@
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
                     :config="{
-                      color: '#0e365b',
+                      color: '#00365e',
                       chart: 'RepaymentRate',
                       showGradOnly: showGradOnly,
                     }"
@@ -1024,7 +1024,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'earningsRange',
-                      color: '#0e365b',
+                      color: '#00365e',
                       chart: 'MultiRange',
                       multiRangeVariable:
                         'earnings.highest.2_yr.overall_median_earnings',
@@ -1055,7 +1055,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'satReading',
-                      color: '#0e365b',
+                      color: '#00365e',
                       chart: 'Range',
                     }"
                   />
@@ -1066,7 +1066,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'satMath',
-                      color: '#0e365b',
+                      color: '#00365e',
                       chart: 'Range',
                     }"
                   />
@@ -1078,7 +1078,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'act',
-                      color: '#0e365b',
+                      color: '#00365e',
                       chart: 'Range',
                     }"
                   />
@@ -1090,7 +1090,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'acceptanceRate',
-                      color: '#0e365b',
+                      color: '#00365e',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -1113,7 +1113,7 @@
                   <v-btn
                     rounded
                     color="secondary"
-                    :href="`/search?toggle=institutions`"
+                    :href="this.$url('/search?toggle=institutions')"
                   >
                     search schools
                   </v-btn>
@@ -1135,7 +1135,7 @@
                   <v-btn
                     rounded
                     color="secondary"
-                    :href="`/search/?toggle=fos`"
+                    :href="this.$url('/search/?toggle=fos')"
                   >
                     SEARCH FIELDS OF STUDY
                   </v-btn>
@@ -1222,11 +1222,11 @@
 }
 
 .compare-toggle-school-active {
-  background-color: #c4dec4 !important;
+  background-color: #83c38c !important;
 }
 
 .compare-toggle-fos-active {
-  background-color: #fff6dc;
+  background-color: $lighter-yellow;
 }
 
 .compare-fos-slider-gold {

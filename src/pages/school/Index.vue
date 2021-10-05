@@ -7,7 +7,7 @@
             <v-card class="pa-5">
               <h1 class="title">
                 Loading
-                <v-icon color="#0e365b">fas fa-circle-notch fa-spin</v-icon>
+                <v-icon color="#00365e">fas fa-circle-notch fa-spin</v-icon>
               </h1>
             </v-card>
           </div>
@@ -172,7 +172,7 @@
                         value: 30,
                         style: { height: '60px' },
                       }"
-                      color="#0e365b"
+                      color="#00365e"
                       :height="500"
                       :y-bar-thickness="50"
                       :label-font-size="16"
@@ -225,7 +225,7 @@
                       :upperTipStyleOverride="{
                         display: 'none',
                       }"
-                      color="#0e365b"
+                      color="#00365e"
                       :height="500"
                       :y-bar-thickness="50"
                       :label-font-size="24"
@@ -275,7 +275,7 @@
                       :upperTipStyleOverride="{
                         display: 'none',
                       }"                      
-                      color="#0e365b"
+                      color="#00365e"
                       :height="500"
                       :y-bar-thickness="50"
                       :label-font-size="24"
@@ -874,7 +874,7 @@
                           value: 25000,
                           style: { height: '60px' },
                         }"
-                        color="#0e365b"
+                        color="#00365e"
                         :height="500"
                         :y-bar-thickness="50"
                         :label-font-size="24"
@@ -953,7 +953,7 @@
                             value: 30000,
                             style: { height: '60px' },
                           }"
-                          color="#0e365b"
+                          color="#00365e"
                           :height="500"
                           :y-bar-thickness="50"
                           :label-font-size="24"
@@ -1092,7 +1092,7 @@
                         value: 30,
                         style: { height: '60px' },
                       }"
-                      color="#0e365b"
+                      color="#00365e"
                       :height="500"
                       :y-bar-thickness="50"
                       :label-font-size="24"
@@ -1125,7 +1125,7 @@
                         value: 100,
                         style: { height: '60px' },
                       }"
-                      color="#0e365b"
+                      color="#00365e"
                       :height="500"
                       :y-bar-thickness="50"
                       :label-font-size="24"
@@ -1879,7 +1879,7 @@
                         value: 30000,
                         style: { height: '60px' },
                       }"
-                      color="#0e365b"
+                      color="#00365e"
                       :height="500"
                       :y-bar-thickness="50"
                       :label-font-size="24"
@@ -2112,12 +2112,12 @@
           <v-card outline class="pa-5 mb-3">
             <p class="title mb-2">New Search:</p>
             <v-radio-group v-model="sidebarSearchToggle" column>
-              <v-radio label="School" value="school" color="#216d09"></v-radio>
+              <v-radio label="School" value="school" color="#007000"></v-radio>
 
               <v-radio
                 label="Fields of Study"
                 value="fos"
-                color="#fec005"
+                color="#fdbf32"
               ></v-radio>
             </v-radio-group>
 
@@ -2176,11 +2176,11 @@
 
 .field-of-study-select-container {
   border-radius: 20px !important;
-  border-left: 20px solid #fec005 !important;
+  border-left: 20px solid #fdbf32 !important;
 }
 
 .field-of-study-select-container-header {
-  background-color: #fff6dc;
+  background-color: $lighter-yellow;
   border-radius: 5px 5px 0px 0px !important;
 }
 

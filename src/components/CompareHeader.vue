@@ -33,7 +33,7 @@
       >
         <div
           class="compare-icon-wrapper d-inline-block mr-2"
-          style="background: #fec005;"
+          style="background: #fdbf32;"
         >
           <v-icon class="mt-1" color="black"  size="24">
             fas fa-award
