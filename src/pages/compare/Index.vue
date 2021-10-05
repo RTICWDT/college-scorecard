@@ -14,7 +14,7 @@
                   text
                   id="referrer-link"
                   class="link-more"
-                  :href="$url(referrerLink)"
+                  :href="referrerLink"
                   >&laquo; Back</v-btn
                 >
               </v-col>
@@ -255,7 +255,7 @@
                               "
                               :min="0"
                               :max="150000"
-                              color="#1874DC"
+                              color="#0e365b"
                               :height="25"
                               type="currency"
                               :labels="true"
@@ -284,7 +284,7 @@
                               "
                               :min="0"
                               :max="150000"
-                              color="#1874DC"
+                              color="#0e365b"
                               :height="25"
                               type="currency"
                               :labels="true"
@@ -337,7 +337,7 @@
                               "
                               :min="0"
                               :max="30000"
-                              color="#1874DC"
+                              color="#0e365b"
                               :height="25"
                               type="currency"
                               :labels="true"
@@ -418,7 +418,7 @@
                               :value="slotProps.school[fields.FOS_DEBT_MEDIAN]"
                               :min="0"
                               :max="30000"
-                              color="#1874DC"
+                              color="#0e365b"
                               :height="25"
                               type="currency"
                               :labels="true"
@@ -445,7 +445,7 @@
                               "
                               :min="0"
                               :max="30000"
-                              color="#1874DC"
+                              color="#0e365b"
                               :height="25"
                               type="currency"
                               :labels="true"
@@ -514,7 +514,7 @@
                               :value="slotProps.school[fields.FOS_DEBT_MONTHLY]"
                               :min="0"
                               :max="2000"
-                              color="#1874DC"
+                              color="#0e365b"
                               :height="25"
                               type="currency"
                               :labels="true"
@@ -543,7 +543,7 @@
                               "
                               :min="0"
                               :max="2000"
-                              color="#1874DC"
+                              color="#0e365b"
                               :height="25"
                               type="currency"
                               :labels="true"
@@ -591,7 +591,7 @@
                         :value="slotProps.school[fields.FOS_GRAD_COUNT]"
                         :min="0"
                         :max="400"
-                        color="#1874DC"
+                        color="#0e365b"
                         :height="25"
                         type="number"
                         :labels="true"
@@ -1340,8 +1340,8 @@ export default {
   },
   computed: {
     shareUrl() {
-      //let origin = process.isClient ? window.location.origin : ""
-      const compareBaseURL = "/compare/?"
+      let origin = process.isClient ? window.location.origin : ""
+      const compareBaseURL = origin + "/compare/?"
 
       let paramArray = {
         // Institution
@@ -1373,7 +1373,7 @@ export default {
       }
 
       // Return Composite URL
-      return this.$url(compareBaseURL + this.prepareQueryString(paramArray))
+      return compareBaseURL + this.prepareQueryString(paramArray)
     },
     referrerLink() {
       let referrer
@@ -1382,7 +1382,7 @@ export default {
       } else {
         referrer = null
       }
-      return referrer || this.$url('/search')
+      return referrer || `/search`
     },
     showSearchForm() {
       if (
