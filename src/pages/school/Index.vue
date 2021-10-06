@@ -53,7 +53,7 @@
               </v-row>
 
               <!-- Institution Summary Container-->
-              <v-row class="pl-5">
+              <v-row class="px-5 pt-5">
                 <!-- School Information and Icons-->
                 <v-col cols="12" md="7" class="pl-sm-6 pr-sm-5">
                   <v-chip v-if="underInvestigation == 1" color="error" label>
@@ -95,7 +95,7 @@
                 </v-col>
 
                 <!-- Map -->
-                <v-col cols="12" md="5" class="pr-sm-6 pl-sm-5 py-0">
+                <v-col cols="12" md="5" class="pr-8 pl-sm-5 py-0">
                   <!-- <div class="school-map" ref="map"></div> -->
                   <div class="school-map mx-auto" v-if="school">
                     <v-img
@@ -112,7 +112,7 @@
               </v-row>
 
               <!--Special Designations-->
-              <v-row class="mt-3 pl-5" v-if="specialDesignations.length > 0">
+              <v-row class="mt-3 pl-5 pt-5" v-if="specialDesignations.length > 0">
                 <v-col cols="12" class="px-sm-5">
                   <div class="school-special_designation">
                     <v-chip
@@ -128,7 +128,7 @@
               </v-row>
 
               <!-- Institution Summary and Field Of Study Select + Summary -->
-              <v-row class="mt-3 pr-sm-3 pl-5">
+              <v-row class="mt-3 pr-8 pl-5">
                 <!--Institution Summary-->
                 <v-col cols="12" class="py-3 pa-sm-5">
                     <median-toggle
@@ -186,10 +186,18 @@
 
                 <v-col md="6" class="pr-sm-3">
                   <div id="school-avg-cost" class="mb-4">
-                    <h2 class="mb-3">
+                    <h2 class="mb-3" v-if="!isProgramReporter">
                       <!--prettyhtml-ignore-->
                       Average Annual Cost
                       <tooltip definition="avg-cost" />
+                    </h2>
+                    <h2 v-else class="mb-3">
+                      <!--prettyhtml-ignore-->
+                      Average Annual Cost for Largest Program
+                      <tooltip
+                        definition="avg-program-cost"
+                        :isNegative="netPrice < 0"
+                      />
                     </h2>
 
                     <h2
@@ -236,10 +244,18 @@
                   </div>
 
                   <div id="school-median-earnings" class="mb-4">
-                    <h2 class="mb-3">
+                    <h2 class="mb-3" v-if="!isProgramReporter">
                       <!--prettyhtml-ignore-->
                       Median Earnings
                       <tooltip definition="fos-median-earnings" />
+                    </h2>
+                    <h2 v-else class="mb-3">
+                      <!--prettyhtml-ignore-->
+                      Median Earnings for Largest Program
+                      <tooltip
+                        definition="fos-median-earnings"
+                        :isNegative="netPrice < 0"
+                      />
                     </h2>
 
                     <h2
@@ -824,14 +840,14 @@
                 >
                   <v-row>
                     <v-col cols="12" md="12">
-                      <div>
+                      <div v-if="!isProgramReporter">
                         <h2 class="mb-3">
                           Average Annual Cost&nbsp;
                           <tooltip definition="avg-cost" />
                         </h2>
                         <h2
                           v-if="netPrice"
-                          class="display-2 navy-text font-weight-bold"
+                          class="display-2 navy-text font-weight-bold mb-3"
                         >
                           {{ netPrice | numeral("$0,0") }}
                         </h2>
@@ -848,7 +864,7 @@
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
                           :group-name="this.$options.filters.yearsText(groupName)"
-                          class="mb-3"
+                          class="mb-7"
                         />  
                       <v-row>
                       <v-col cols="2"></v-col>
@@ -885,7 +901,7 @@
                        <v-col cols="2"></v-col>     
                       </v-row>                                                         
                       </div>
-                      <!--<div v-else>
+                      <div v-else>
                         <h2 class="mb-3">
                           Average Annual Cost for Largest Program
                           <tooltip
@@ -963,7 +979,7 @@
                       </v-col>  
                        <v-col cols="2"></v-col>     
                       </v-row>                       
-                      </div> -->
+                      </div>
                       
                       <h2 class="mb-3">By Family Income</h2>
                       <p>
@@ -1042,16 +1058,19 @@
                 >
                   <v-row>
                     <v-col cols="12" md="12" id="showPellOnlyGrad">
-                      <v-col cols="12" md="12" sm="12"  class="d-flex">
+                      <v-row class="d-flex">
+                      <v-col cols="7" md="7" sm="12">
                       <h2 class="mb-3">
                         Graduation Rate&nbsp;
                         <tooltip definition="graduation-rate" />
                       </h2>
+                      </v-col>
+                      <v-col cols="5" md="5" sm="12" class="d-flex justify-end">
                       <v-checkbox
                         v-model="showPellOnlyGrad"
                         label="Show Pell Grant Recipients Only"
                         color="secondary"
-                        class="mt-0 ml-auto"
+                        class="mt-0"
                       >
                         <template v-slot:label>
                           <span>
@@ -1060,6 +1079,7 @@
                         </template>
                       </v-checkbox>                      
                       </v-col>  
+                      </v-row>
                         <median-toggle
                           :display-toggle="medianToggle"
                           :control-tab="controlTab"
@@ -1139,11 +1159,14 @@
                   </v-row>
                   <v-row>
                     <v-col cols="12" id="showPellOnlyOutcomes">
-                      <v-col cols="12" md="12" sm="12"  class="d-flex">
+                      <v-row class="d-flex">
+                      <v-col cols="7" md="7" sm="12">
                       <h2 class="mb-3 mt-5">
                         Outcomes 8 Years After Attending&nbsp;
                         <tooltip definition="outcome-measures" />
                       </h2>
+                      </v-col>
+                      <v-col cols="5" md="5" sm="12" class="d-flex justify-end">                      
                       <v-checkbox
                         v-model="showPellOnlyOutcomes"
                         label="Show Pell Grant Recipients Only"
@@ -1155,8 +1178,9 @@
                             Show Pell Grant Recipients Only&nbsp;
                           </span>
                         </template>
-                      </v-checkbox>                           
+                      </v-checkbox>
                       </v-col>
+                      </v-row>
                       <sankey-buttons
                         v-on:update-sankey="currentSankey = $event"
                       />
@@ -1216,6 +1240,8 @@
                           v-model="aidShowMedianDebtWithPrior"
                           label="Include debt borrowed at prior institutions"
                           color="secondary"
+                          class="shrink"
+                          hide-details
                         >
                           <template v-slot:label>
                             <span>
@@ -1840,7 +1866,7 @@
                           />
                         </h2>
                     <h2
-                      class="display-2 navy-text font-weight-bold"
+                      class="display-2 navy-text font-weight-bold mb-3"
                       v-if="netPrice"
                     >
                       {{ netPrice | numeral("$0,0") }}
@@ -1854,6 +1880,7 @@
                       @median-switch-click="handleMedianToggle"
                       @median-tab-change="handleMedianToggle"
                       :group-name="this.$options.filters.yearsText(groupName)"
+                      class="mb-7"
                     />          
                        <v-row>
                       <v-col cols="2"></v-col>

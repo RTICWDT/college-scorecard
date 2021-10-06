@@ -64,7 +64,7 @@
 #median-toggle {
   #median-tab-inactive {
     /*background-color: #eeeeee;*/
-    border-bottom: 8px solid #dcdada;
+    border-bottom: 1px solid #707070;
   }
 
   #median-tab-active {

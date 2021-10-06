@@ -1,16 +1,7 @@
 <template>
   <div>
-    <h2 class="title mb-2">Learn More About Paying for College</h2>
-    <p>
-      Paying for college can be a concern, but there are options to help! You
-      can learn more about the types of financial aid that are available at
-      <a
-        href="https://studentaid.ed.gov/sa/types#aid-from-the-federal-government"
-        target="_blank"
-        @click="trackOutboundLink($event)"
-        >StudentAid.gov</a
-      >.
-    </p>
+    <img :src="$url('img/icon-Financial-Aid-training.svg')" alt="Financial Aid Icon" style="margin: 0 auto; display:block;" class="mb-2">
+    <h2 class="title mb-2">Start Your FAFSA&reg; Application</h2>
     <p>
       To receive financial aid, you must complete the
       <em>Free Application for Federal Student Aid</em> (FAFSA&reg;) form. You
@@ -32,7 +23,16 @@
         href="https://fafsa.ed.gov/"
         target="_blank"
         @click="trackOutboundLink($event)"
-        >Start My FAFSA&reg; Form</v-btn
+        >Start Your FAFSA&reg;<br/>Application
+          <v-icon
+            x-small
+            color="white"
+            class="pl-1 pb-1 align-self-end"
+            style="position: absolute;right: 5px;"
+          >
+            fas fa-external-link-alt
+          </v-icon>        
+        </v-btn
       >
     </p>
 
