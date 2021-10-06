@@ -26,11 +26,13 @@
 .v-tab--active {
   background-color: $darker-green !important;
   color: $white !important;
+  font-weight: bold !important;
 }
 .v-tabs-bar a {
   letter-spacing: 0 !important;
   font-family: $header-font-family !important;
-  font-weight: 600 !important;
+  font-weight: normal;
+  font-size: 14pt !important;
 }
 </style>
 <script>
