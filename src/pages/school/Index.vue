@@ -2793,7 +2793,6 @@ export default {
   },
   mounted() {
     let self = this
-    this.panelsFOS = [0]
     
     if (!location.search) {
       return null
@@ -2836,6 +2835,9 @@ export default {
           this.urlParams,
           this.fieldOfStudySelectItems
         )
+        if (this.selectedFOS) {
+          this.panelsFOS = [0]
+        }
       })
       .catch((response) => {
         this.error = true
