@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img :src="$url('img/icon-Financial-Aid-training.svg')" alt="Financial Aid Icon" style="margin: 0 auto; display:block;" class="mb-2">
+    <img :src="$url('img/icon-Financial-Aid-training.svg')" alt="Financial Aid Icon" style="" class="mb-2">
     <h2 class="title mb-2">Start Your FAFSA&reg; Application</h2>
     <p>
       To receive financial aid, you must complete the

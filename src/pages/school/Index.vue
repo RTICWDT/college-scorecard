@@ -144,17 +144,25 @@
                 </v-col>                 
                 <v-col md="6" class="pr-sm-3">                
                   <div id="school-completion-rate-bar" class="py-3 pa-sm-3">
-                    <h2 class="mb-0">
+                    <h2 class="mb-3">
                       <!--prettyhtml-ignore-->
                       Graduation Rate&nbsp;<tooltip
                         definition="graduation-rate"
                         :version="completionRateFieldDefinition"
                       />
                     </h2>
+                    <h2
+                      class="display-2 navy-text font-weight-bold pb-3"
+                      v-if="completionRate"
+                    >
+                      {{ completionRate |  numeral("0%") }}
+                    </h2>
+                    <div class="data-na pb-3" v-else>Data Not Available</div>
+                    <em style="font-size:14pt;">Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: $25,000</em>                    
                     <vertical-bar-median
                       v-if="completionRate"
                       :value="{
-                        label: Math.round(parseFloat(completionRate) * 100) + '%',
+                        label: '',
                         value: Math.round(parseFloat(completionRate) * 100)
                       }"
                       :min="{
@@ -180,7 +188,6 @@
                       class="mb-4"
                     ></vertical-bar-median>
                     <div v-else class="data-na">Data Not Available</div>
-                    <div class="text-center"><em class="mx-auto">Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: 30%</em></div>
                   </div>
                 </v-col>
 
