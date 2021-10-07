@@ -76,7 +76,8 @@ html {
   }
 
   .display-2 {
-    font-size: 28pt !important;
+    font-size: 28px !important;
+    line-height:32px !important;
   }
 
   .v-expansion-panel-header {
@@ -98,7 +99,7 @@ html {
   }
   .v-card {
     overflow-wrap: normal;
-    box-shadow: none !important;
+    //box-shadow: none !important;
   }
   .theme--light.v-card > .v-card__text {
     color: rgba(0, 0, 0, 0.87) !important;

@@ -666,7 +666,7 @@
                   </div>
 
                   <!-- Top Fields of Study -->
-                  <div class="px-5 px-sm-5 py-sm-4">
+                  <div class="px-5 px-sm-5 pb-sm-4">
                     <p class="my-3" v-if="fieldsOfStudy.length">
                       Out of {{ fosUndergradCount | numeral }} undergraduate
                       {{ fosUndergradCount == 1 ? "field" : "fields" }} of study
@@ -923,12 +923,12 @@
                               programReporter[0].annualized ==
                                 programReporter[0].full_program
                             "
-                            >for a
+                            > for a
                             {{ programReporter[0].avg_month_completion }}-month
                             program</span
                           >
                           <span class="costDescription" v-else
-                            >per year on average</span
+                            > per year on average</span
                           >
                         </h2>
                         <div v-else class="data-na">Data Not Available</div>
@@ -1267,8 +1267,9 @@
                             color="#1874DC"
                             :value="studentsReceivingLoans * 100"
                             :height="200"
+                            class="pb-3"
                           ></donut>
-                          <div v-else class="data-na">Data Not Available</div>
+                          <div v-else class="data-na pb-3">Data Not Available</div>
                           <p>
                             At some schools where few students borrow federal
                             loans, the typical undergraduate may leave school
@@ -1431,7 +1432,7 @@
                           "
                         >
                           <div
-                            class="display-2 navy-text font-weight-bold"
+                            class="display-2 navy-text font-weight-bold pb-3"
                             v-if="debtRange && debtRange.min.payment"
                           >
                             {{
@@ -1449,7 +1450,7 @@
                           "
                         >
                           <div
-                            class="display-2 navy-text font-weight-bold"
+                            class="display-2 navy-text font-weight-bold pb-3"
                             v-if="
                               debtRange.min.payment && debtRange.max.payment
                             "
@@ -1466,7 +1467,7 @@
                         </div>
                         <div
                           v-else-if="aidLoanSelect === 'fed'"
-                          class="data-na"
+                          class="data-na pb-3"
                         >
                           Data Not Available
                         </div>
@@ -1652,7 +1653,7 @@
                       </v-simple-table>                        
                       </v-col>
                     </v-row>
-                    <div
+                   <!-- <div
                       class="fos-profile-panel fos-profile-mini pl-4"
                       v-if="selectedFOSDetail && aidLoanSelect === 'fed'"
                     >
@@ -1688,7 +1689,7 @@
                           <tooltip definition="include-debt-prior-inst" />
                         </v-col>
 
-                        <!--Median Total-->
+                        //Median Total
                         <v-col cols="12" md="4" sm="12">
                           <h4 class="mb-2">
                             Median Total Debt After Graduation&nbsp;
@@ -1748,7 +1749,7 @@
                           </div>
                         </v-col>
 
-                        <!--Monthly Loan-->
+                        //Monthly Loan
                         <v-col cols="12" md="4" sm="12">
                           <h4 class="mb-2">
                             Monthly Loan<br />
@@ -1812,7 +1813,7 @@
                           </div>
                         </v-col>
                       </v-row>
-                    </div>
+                    </div> -->
 
                     <v-row>
                       <v-col cols="12">
@@ -1831,7 +1832,16 @@
                               href="https://fafsa.ed.gov/spa/fafsa"
                               target="_blank"
                               @click="trackOutboundLink($event)"
-                              >Start My FAFSA&reg; Form</v-btn
+                              >Start My FAFSA&reg; Form
+                                <v-icon
+                                  x-small
+                                  color="white"
+                                  class="pl-1 pb-1 align-self-end"
+                                  style=""
+                                >
+                                  fas fa-external-link-alt
+                                </v-icon>                                
+                              </v-btn
                             >
                           </p>
                         </v-card>
@@ -2334,6 +2344,7 @@
 
 #school-completion-rate-bar {
   margin-bottom: 55px;
+  padding-top: 0px !important;
 }
 
 #school-salary-after-complete {

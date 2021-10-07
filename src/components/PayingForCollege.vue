@@ -11,7 +11,14 @@
         href="https://fafsa.ed.gov/FAFSA/app/f4cForm"
         target="_blank"
         @click="trackOutboundLink($event)"
-        >FAFSA<em>4caster</em></a
+        >FAFSA<em>4caster</em>
+        <v-icon
+            x-small
+            class="pl-1"
+          >
+            fas fa-external-link-alt
+          </v-icon>       
+        </a
       >
       to see how much aid may be available to you.
     </p>

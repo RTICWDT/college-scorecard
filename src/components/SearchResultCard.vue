@@ -37,7 +37,7 @@
 
 <template>
   <v-card
-    class="search-result-card mx-auto elevation-4"
+    class="search-result-card mx-auto elevation-0"
     outlined
     :class="{ 'result-card-selected': isSelected }"
   >
