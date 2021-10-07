@@ -32,7 +32,7 @@
   letter-spacing: 0 !important;
   font-family: $header-font-family !important;
   font-weight: normal;
-  font-size: 14pt !important;
+  font-size: 14px !important;
 }
 </style>
 <script>

@@ -195,7 +195,7 @@
         color:#000;
         top: 50px !important;
         margin-left:-88px !important;
-        font-weight:400;
+        font-weight:420;
         font-size: 14pt;
         font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
         font-style:italic;

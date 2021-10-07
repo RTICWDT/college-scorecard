@@ -23,7 +23,7 @@ html {
   }
 
   .v-pagination__item {
-    box-shadow: none !important;
+    //box-shadow: none !important;
   }
 
   h1,
@@ -38,7 +38,7 @@ html {
   header #nav-main-navigation {
     font-family: $header-font-family !important;
     a {
-      font-size: 16pt !important;
+      font-size: 16px !important;
       text-transform: none !important;
     }
   }

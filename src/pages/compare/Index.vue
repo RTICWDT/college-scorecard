@@ -14,7 +14,7 @@
                   text
                   id="referrer-link"
                   class="link-more"
-                  :href="$url(referrerLink)"
+                  :href="this.$url(referrerLink)"
                   >&laquo; Back</v-btn
                 >
               </v-col>

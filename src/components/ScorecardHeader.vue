@@ -89,7 +89,7 @@ header {
       li a {
         text-decoration: none;
         color: white !important;
-        font-size: 1.3rem;
+        font-size: 1rem;
         padding: 0 10px;
       }
 

@@ -25,7 +25,7 @@
                     text
                     id="referrer-link"
                     class="link-more"
-                    :href="referrerLink"
+                    :href="this.$url(referrerLink)"
                     >&laquo; Back to School Profile</v-btn
                   >
                 </v-col>

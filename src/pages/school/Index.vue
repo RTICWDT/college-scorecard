@@ -813,7 +813,7 @@
                     </div>
 
                     <p class="text-center">
-                      <v-btn rounded color="secondary" :href="fieldsLink">
+                      <v-btn rounded color="secondary" :href="this.$url(fieldsLink)">
                         <span class="d-none d-sm-flex"
                           >See All Available Fields of Study</span
                         >
@@ -1892,7 +1892,7 @@
                         value: netPrice,
                       }"
                       :min="{
-                        label: '0$',
+                        label: '$0',
                         value: 0,
                         style: { height: '60px' },
                       }"
