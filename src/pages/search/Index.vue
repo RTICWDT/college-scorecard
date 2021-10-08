@@ -238,6 +238,7 @@
                       :total-visible="7"
                       @input="handlePaginationInput"
                       class="pr-0 mr-0"
+                      circle
                     ></v-pagination>
                   </div>
                 </v-col>
