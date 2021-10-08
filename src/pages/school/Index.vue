@@ -527,11 +527,11 @@
                                 Include debt borrowed at any prior<br
                                   class="d-sm-none"
                                 />
-                                institution&nbsp;
+                                institution<tooltip definition="include-debt-prior-inst" class="pt-2" /> 
                               </span>
                             </template>
                           </v-checkbox>
-                          <tooltip definition="include-debt-prior-inst" class="pt-2" />                          
+                         
                         </v-col>
 
                         <!--Median Total-->
@@ -951,6 +951,7 @@
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
                           :group-name="this.$options.filters.yearsText(groupName)"
+                          class="mb-7"
                         />  
                       <v-row>
                       <v-col cols="2"></v-col>
@@ -1253,11 +1254,11 @@
                           <template v-slot:label>
                             <span>
                               Include debt borrowed at any prior
-                              institutions&nbsp;
+                              institutions<tooltip definition="include-debt-prior-inst" class="pt-2 pl-2" />
                             </span>
                           </template>
                         </v-checkbox>
-                        <tooltip definition="include-debt-prior-inst" class="pt-2" />
+                        
                       </v-col>
 
                       <v-col cols="12" md="6">
@@ -1353,14 +1354,14 @@
                         <!--                          />-->
 
                           <div
-                            class="display-2 navy-text font-weight-bold"
+                            class="display-2 navy-text font-weight-bold  pb-5"
                             v-if="debtRange && debtRange.median.debt && aidLoanSelect !== 'plus'"
                           >
                             {{ debtRange.median.debt | numeral("$0,0") }}
                           </div>
 
                         <h2
-                          class="display-2 navy-text font-weight-bold"
+                          class="display-2 navy-text font-weight-bold  pb-5"
                           v-else-if="
                             parentPlusDebt &&
                               aidLoanSelect === 'plus' &&
@@ -1371,7 +1372,7 @@
                         </h2>
 
                         <h2
-                          class="display-2 navy-text font-weight-bold"
+                          class="display-2 navy-text font-weight-bold pb-5"
                           v-else-if="
                             parentPlusDebtAll &&
                               aidLoanSelect === 'plus' &&
@@ -1389,8 +1390,7 @@
                         </div>
 
                         <h2 class="mb-3 mt-3">
-                          Typical Monthly Loan Payment&nbsp;
-                          <tooltip
+                          Typical Monthly Loan Payment<tooltip
                             v-if="
                               aidLoanSelect === 'fed' &&
                                 !aidShowMedianDebtWithPrior
@@ -1398,6 +1398,7 @@
                             definition="avg-loan-payment"
                             :isBranch="isBranch"
                             :limitedFoS="fieldsLink"
+                            style="padding-left:2px;"
                           />
                           <tooltip
                             v-else-if="
@@ -1407,6 +1408,7 @@
                             definition="avg-loan-payment-all-schools"
                             :isBranch="isBranch"
                             :limitedFoS="fieldsLink"
+                            style="padding-left:2px;"
                           />
                           <tooltip
                             v-else-if="
@@ -1415,6 +1417,7 @@
                             "
                             definition="parent-plus-avg-loan-payment"
                             :isBranch="isBranch"
+                            style="padding-left:2px;"
                           />
                           <tooltip
                             v-else-if="
@@ -1423,6 +1426,7 @@
                             "
                             definition="parent-plus-avg-loan-payment-all-schools"
                             :isBranch="isBranch"
+                            style="padding-left:2px;"
                           />
                         </h2>
 
@@ -1942,7 +1946,7 @@
                       class="display-2 navy-text font-weight-bold"
                     >
                       {{ completionRate |  numeral("0%") }}
-                    </h2><span class="mb-2"> &nbsp; of students</span></div>
+                    </h2><span> &nbsp; of students</span></div>
                     <div v-else class="data-na mb-4">Data Not Available</div>
                     <h2 class="mb-3">
                           Earnings After Completing Field of Study&nbsp;<tooltip

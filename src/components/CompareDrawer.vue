@@ -105,7 +105,7 @@
 
           <!-- Medium and smaller button-->
           <div class="d-md-none mt-5 text-center">
-            <v-btn rounded color="secondary" :href="'/compare'">
+            <v-btn rounded color="secondary" :href="this.$url('/compare')">
               Compare Schools
             </v-btn>
           </div>
@@ -163,7 +163,7 @@
               class="compare-drawer-button"
               rounded
               color="secondary"
-              :href="'/compare/?toggle=fos'"
+              :href="this.$url('/compare/?toggle=fos')"
             >
               Compare Fields of Study
             </v-btn>

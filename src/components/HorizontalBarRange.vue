@@ -108,12 +108,12 @@
   .picc-range-label {
     height: 22px;
     position: absolute;
-    top: 0;
+    top: 3px;
     transition: left 0.5s;
     font-size: 0.85rem;
 
     span {
-      font-weight: 200;
+      font-weight: 400;
       position: absolute;
       top: 0px;
       width: $label-width;
