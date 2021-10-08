@@ -531,7 +531,7 @@
                               </span>
                             </template>
                           </v-checkbox>
-                          <tooltip definition="include-debt-prior-inst" />                          
+                          <tooltip definition="include-debt-prior-inst" class="pt-2" />                          
                         </v-col>
 
                         <!--Median Total-->
@@ -1257,7 +1257,7 @@
                             </span>
                           </template>
                         </v-checkbox>
-                        <tooltip definition="include-debt-prior-inst" />
+                        <tooltip definition="include-debt-prior-inst" class="pt-2" />
                       </v-col>
 
                       <v-col cols="12" md="6">

@@ -1,6 +1,6 @@
 <template>
   <span>
-    <v-btn @click.stop.prevent="showDialog = true" icon small class="align-start">
+    <v-btn @click.stop.prevent="showDialog = true" icon small class="align-start ml-n2">
       <v-icon x-small allow-overflow :color="color" dark
         >fas fa-info-circle</v-icon
       >
