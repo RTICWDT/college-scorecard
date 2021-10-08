@@ -115,7 +115,7 @@
     span {
       font-weight: 200;
       position: absolute;
-      top: 4px;
+      top: 0px;
       width: $label-width;
       cursor: pointer;
     }
