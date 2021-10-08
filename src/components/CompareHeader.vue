@@ -10,7 +10,7 @@
       <span v-if="currentSchoolCount < 10" class="compare-header-text mb-1">
         <div
           class="compare-icon-wrapper d-inline-block mx-2"
-          style="background: #C4DEC4;"
+          style="background: #83C38C;"
         >
           <v-icon class="mt-1" color="#122E51" size="24">
             fas fa-university

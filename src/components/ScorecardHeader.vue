@@ -220,7 +220,7 @@ header {
                 <v-btn
                   small
                   fab
-                  color="#91C191"
+                  color="#83C38C"
                   @click="handleCompareIconClick"
                   aria-label="Show Compare Drawer"
                 >
