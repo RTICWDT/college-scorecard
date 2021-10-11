@@ -31,10 +31,7 @@
         under a Creative Commons Attribution 3.0 License.
       </p>
     </v-footer>
-    <compare-header />
-    <v-bottom-sheet id="compare-modal" v-model="$store.state.drawerOpen" inset>
-      
-    </v-bottom-sheet>
+
   </div>
 </template>
 
