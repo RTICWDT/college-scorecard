@@ -31,9 +31,7 @@
         under a Creative Commons Attribution 3.0 License.
       </p>
     <compare-header />
-    <v-bottom-sheet id="compare-modal" v-model="$store.state.drawerOpen" inset>
-      <compare-drawer :show-info-text="false"></compare-drawer>
-    </v-bottom-sheet>      
+     
     </v-footer>
   </div>
 </template>
