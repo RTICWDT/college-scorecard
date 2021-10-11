@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+    <compare-header-new />
     <v-footer
       class="d-block pl-md-12"
       inset
@@ -31,7 +31,7 @@
         <a href="http://www.geonames.org/">GeoNames</a>
         under a Creative Commons Attribution 3.0 License.
       </p>
-   <compare-header-new />
+   
     </v-footer>
   </div>
 </template>
