@@ -92,16 +92,22 @@
 export default {
   computed: {
     currentSchoolCount() {
-     return 5
+      return this.$store.state.institutions.length
     },
     currentFieldOfStudyCount() {
-      return 5
+      return this.$store.state.fos.length
     },
     schoolText() {
-        return "Schools"
+        return this.$store.state.institutions.length > 1 ||
+        this.$store.state.institutions.length === 0
+          ? "Schools"
+          : "School"
     },
     fieldOfStudyText() {
-      return "Fields of Study"
+      return this.$store.state.fos.length > 1 ||
+        this.$store.state.fos.length === 0
+        ? "Fields of Study"
+        : "Field of Study"
     },
   },
 }
