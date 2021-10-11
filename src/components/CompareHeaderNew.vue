@@ -1,20 +1,34 @@
 <template>
+  <div
+    id="compare-header"
+    class="header pa-3 elevation-4"
+    @click="toggleDrawer()"
+    v-if="currentSchoolCount > 0 || currentFieldOfStudyCount > 0"
+  >
     <div>
-        <span class="compare-header-text ml-8 mr-6">Ready to Compare: 
-
-        </span>
-        <span class="compare-header-text mb-1">
-            <div
-            class="compare-icon-wrapper d-inline-block mx-2"
-            style="background: #83C38C;"
-            >
-            <v-icon class="mt-1" color="#122E51" size="24">
-                fas fa-university
-            </v-icon>
-            </div>
-            10 Schools to Compare &nbsp;&nbsp;
-        </span>
+      <span class="compare-header-text ml-8 mr-6">Ready to Compare: </span>
+      <span v-if="currentSchoolCount < 10" class="compare-header-text mb-1">
+        <div
+          class="compare-icon-wrapper d-inline-block mx-2"
+          style="background: #83C38C;"
+        >
+          <v-icon class="mt-1" color="#122E51" size="24">
+            fas fa-university
+          </v-icon>
+        </div>
+        {{ currentSchoolCount }} {{ schoolText }} &nbsp;&nbsp;
+      </span>
+      <span v-else class="compare-header-text d-inline-block mb-1 ml-4">
+        <v-icon
+          color="red"
+          medium
+          class="mr-2"
+          style="font-size:40px;border-radius:50%;"
+          >fas fa-exclamation-circle</v-icon
+        >Maximum of 10 Schools reached
+      </span>
       <span
+        v-if="currentFieldOfStudyCount < 10"
         class="compare-header-text mb-1 ml-6"
       >
         <div
@@ -25,8 +39,17 @@
             fas fa-award
           </v-icon>
         </div>
-        5 FoS to Compare
-      </span>        
+        {{ currentFieldOfStudyCount }} {{ fieldOfStudyText }} 
+      </span>
+      <span v-else class="compare-header-text d-inline-block mb-1 mr-2 ml-6">
+        <v-icon
+          color="red"
+          medium
+          class="mr-2"
+          style="font-size:30px;border-radius:50%;"
+          >fas fa-exclamation-circle</v-icon
+        >Maximum of 10 Fields of Study reached
+      </span>
     </div>
+  </div>
 </template>
-
