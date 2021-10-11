@@ -15,6 +15,7 @@ import ScorecardHeader from '~/components/ScorecardHeader.vue';
 import ScorecardFooter from '~/components/ScorecardFooter.vue';
 import CompareHeader from '~/components/CompareHeader.vue';
 import CompareDrawer from '~/components/CompareDrawer.vue';
+import MedianToggle from '~/components/MedianToggle.vue';
 
 import VuexPersistence from 'vuex-persist'
 
@@ -30,6 +31,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   Vue.component('scorecard-footer', ScorecardFooter);
   Vue.component('compare-header', CompareHeader);
   Vue.component('compare-drawer', CompareDrawer);
+  Vue.component('median-toggle', MedianToggle);
 
     const vuexLocal = new VuexPersistence({
       storage: isClient?window.localStorage:null,
