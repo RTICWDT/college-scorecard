@@ -30,8 +30,7 @@
         <a href="http://www.geonames.org/">GeoNames</a>
         under a Creative Commons Attribution 3.0 License.
       </p>
-    <compare-header />
-     
+   
     </v-footer>
   </div>
 </template>
