@@ -1,6 +1,6 @@
 <template>
   <div>
-    <compare-header-new />
+    <compare-header />
     <v-footer
       class="d-block pl-md-12"
       inset
