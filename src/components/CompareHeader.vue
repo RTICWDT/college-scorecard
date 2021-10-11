@@ -99,15 +99,11 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({
-      compareSchools: "getInstitutions",
-      compareFieldsOfStudy: "getFieldsOfStudy",
-    }),    
     currentSchoolCount() {
-      return compareSchools.length
+      return this.$store.state.institutions.length
     },
     currentFieldOfStudyCount() {
-      return compareFieldsOfStudy.length
+      return this.$store.state.fos.length
     },
     schoolText() {
       var ret =
