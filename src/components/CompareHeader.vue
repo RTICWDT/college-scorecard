@@ -2,7 +2,6 @@
   <div
     id="compare-header"
     class="header pa-3 elevation-4"
-    @click="toggleDrawer()"
     v-if="currentSchoolCount > 0 || currentFieldOfStudyCount > 0"
   >
     <div>
@@ -104,15 +103,10 @@ export default {
       return this.$store.state.fos.length
     },
     schoolText() {
-      var ret =
-        this.$store.state.institutions.length > 1 ||
+        return this.$store.state.institutions.length > 1 ||
         this.$store.state.institutions.length === 0
           ? "Schools"
           : "School"
-      return this.$store.state.institutions.length > 0 &&
-        this.$store.state.fos.length == 10
-        ? ret
-        : ret
     },
     fieldOfStudyText() {
       return this.$store.state.fos.length > 1 ||
