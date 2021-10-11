@@ -90,29 +90,18 @@
 
 <script>
 export default {
-  methods: {
-    toggleDrawer() {
-      this.$store.commit("toggleDrawer", true)
-    },
-  },
   computed: {
     currentSchoolCount() {
-      return this.$store.state.institutions.length
+     return 5
     },
     currentFieldOfStudyCount() {
-      return this.$store.state.fos.length
+      return 5
     },
     schoolText() {
-        return this.$store.state.institutions.length > 1 ||
-        this.$store.state.institutions.length === 0
-          ? "Schools"
-          : "School"
+        return "Schools"
     },
     fieldOfStudyText() {
-      return this.$store.state.fos.length > 1 ||
-        this.$store.state.fos.length === 0
-        ? "Fields of Study"
-        : "Field of Study"
+      return "Fields of Study"
     },
   },
 }
