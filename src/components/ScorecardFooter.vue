@@ -32,17 +32,20 @@
       </p>
    
     </v-footer>
+    <compare-header-new />
   </div>
 </template>
 
 <script>
 import CompareDrawer from "~/components/CompareDrawer.vue"
 import CompareHeader from "~/components/CompareHeader.vue"
+import CompareHeaderNew from "~/components/CompareHeaderNew.vue"
 
 export default {
   components: {
     "compare-drawer": CompareDrawer,
     "compare-header": CompareHeader,
+    "compare-header-new": CompareHeaderNew,
   },
   computed: {
     version() {

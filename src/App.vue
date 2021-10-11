@@ -1,10 +1,12 @@
 <template>
   <v-app>
     <scorecard-header />
-
     <router-view :is-loading="isLoading" @loading="isLoading = $event" />
-    <median-toggle />
-    <scorecard-footer />   
+    <scorecard-footer />
+    
+    <!--<v-bottom-sheet id="compare-modal" v-model="$store.state.drawerOpen" inset>
+      <compare-drawer :show-info-text="false"></compare-drawer>
+    </v-bottom-sheet>       -->
   </v-app>
 </template>
 
@@ -23,7 +25,6 @@ import "~/js/mixins.js"
 
 import { localStorageKeys } from "~/js/constants.js"
 import { LocalStorage } from "~/js/localStoage.js"
-
 
 export default {
   data() {
