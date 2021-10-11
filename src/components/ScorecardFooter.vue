@@ -1,5 +1,6 @@
 <template>
   <div>
+    <compare-header-new />
     <v-footer
       class="d-block pl-md-12"
       inset
@@ -32,7 +33,6 @@
       </p>
    
     </v-footer>
-    <compare-header-new />
   </div>
 </template>
 
