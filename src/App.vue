@@ -3,10 +3,6 @@
     <scorecard-header />
     <router-view :is-loading="isLoading" @loading="isLoading = $event" />
     <scorecard-footer />
-    
-    <!--<v-bottom-sheet id="compare-modal" v-model="$store.state.drawerOpen" inset>
-      <compare-drawer :show-info-text="false"></compare-drawer>
-    </v-bottom-sheet>       -->
   </v-app>
 </template>
 

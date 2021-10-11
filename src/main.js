@@ -13,9 +13,6 @@ import _ from 'lodash';
 
 import ScorecardHeader from '~/components/ScorecardHeader.vue';
 import ScorecardFooter from '~/components/ScorecardFooter.vue';
-import CompareHeader from '~/components/CompareHeader.vue';
-import CompareHeaderNew from '~/components/CompareHeaderNew.vue';
-import CompareDrawer from '~/components/CompareDrawer.vue';
 
 import VuexPersistence from 'vuex-persist'
 
@@ -29,9 +26,6 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   Vue.use(vueNumeralFilterInstaller, { locale: 'en' });
   Vue.component('scorecard-header', ScorecardHeader);
   Vue.component('scorecard-footer', ScorecardFooter);
-  Vue.component('compare-header', CompareHeader);
-  Vue.component('compare-header-new', CompareHeaderNew);
-  Vue.component('compare-drawer', CompareDrawer);
 
     const vuexLocal = new VuexPersistence({
       storage: isClient?window.localStorage:null,

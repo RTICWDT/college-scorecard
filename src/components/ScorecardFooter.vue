@@ -1,6 +1,5 @@
 <template>
   <div>
-    <compare-header-new />
     <v-footer
       class="d-block pl-md-12"
       inset
@@ -31,21 +30,22 @@
         <a href="http://www.geonames.org/">GeoNames</a>
         under a Creative Commons Attribution 3.0 License.
       </p>
-   
     </v-footer>
+    <compare-header app />
+    <v-bottom-sheet id="compare-modal" v-model="$store.state.drawerOpen" inset app>
+      <compare-drawer :show-info-text="false" app></compare-drawer>
+    </v-bottom-sheet>
   </div>
 </template>
 
 <script>
 import CompareDrawer from "~/components/CompareDrawer.vue"
 import CompareHeader from "~/components/CompareHeader.vue"
-import CompareHeaderNew from "~/components/CompareHeaderNew.vue"
 
 export default {
   components: {
     "compare-drawer": CompareDrawer,
     "compare-header": CompareHeader,
-    "compare-header-new": CompareHeaderNew,
   },
   computed: {
     version() {
