@@ -1166,6 +1166,42 @@
               Update Your List
             </v-btn>
           </v-card>
+          <v-card outline v-bind:class="sidebarSearchClass" class="pa-4 mb-3">
+              <p class="title mb-2">Search For:</p>
+              <v-radio-group v-model="sidebarSearchToggle" column>
+                <v-radio
+                  value="school"
+                  color="#007000"
+                >
+                  <template v-slot:label>
+                    <div v-bind:style="{ 'font-weight': sidebarRadioSchoolStyle}">School</div>
+                  </template>
+                </v-radio>
+
+                <v-radio
+                  value="fos"
+                  color="#fdbf32"
+                >
+                  <template v-slot:label>
+                    <div v-bind:style="{ 'font-weight': sidebarRadioFOSStyle}">Fields of Study</div>
+                  </template>
+                </v-radio>
+              </v-radio-group>
+
+              <name-autocomplete
+                v-if="sidebarSearchToggle === 'school'"
+                id="school-name-auto-complete"
+               @school-name-selected="handleSchoolNameSelected"
+              />
+
+              <field-of-study-search
+                v-if="sidebarSearchToggle === 'fos'"
+                id="school-fos-search"
+                @field-of-study-selected="handleFieldOfStudySelected"
+                :customColor="fosSearchColor"
+              />
+              <div></div><!--Due to CSS styling where last element in card copies border radius of parent element-->
+            </v-card>
           <v-card class="pa-5 mt-0">
             <paying-for-college />
           </v-card>
@@ -1232,6 +1268,16 @@
 .compare-fos-slider-gold {
   background-color: $fos-accent-color;
 }
+
+.field-of-study-select-container{
+  border-radius: 20px !important;
+  border-left: 20px solid $fos-color-gold !important;
+}
+
+.institution-context-panel{
+  border-radius: 20px !important;
+  border-left: 20px solid $darker-green !important;
+}
 </style>
 
 <script>
@@ -1251,6 +1297,7 @@ import CannedSearchContainer from "~/components/CannedSearchContainer.vue"
 import querystring from "querystring"
 import SearchForm from "~/components/SearchForm.vue"
 import NameAutocomplete from "~/components/NameAutocomplete.vue"
+import FieldOfStudySearch from '~/components/FieldOfStudySearch.vue';
 import Router from "~/js/mixins/Router.js"
 import { fields, localStorageKeys } from "~/js/constants"
 import {
@@ -1274,6 +1321,7 @@ export default {
     "canned-search-container": CannedSearchContainer,
     "search-form": SearchForm,
     "name-autocomplete": NameAutocomplete,
+    "field-of-study-search": FieldOfStudySearch,
     "context-toggle": ContextToggle,
   },
   data() {
@@ -1320,6 +1368,7 @@ export default {
         { text: "Parent Plus Loans", value: "plus" },
       ],
       controlTab: 0,
+      sidebarSearchToggle: "school",
     }
   },
   watch: {
@@ -1496,6 +1545,28 @@ export default {
     countFieldsOfStudy() {
       return this.passedFieldsOfStudy.length || this.compareFieldsOfStudy.length
     },
+    sidebarSearchClass(){
+      if(this.sidebarSearchToggle === "fos"){
+        //return "field-of-study-select-container fosComboboxCustomColor";
+        return "field-of-study-select-container";
+      }else{
+        return "institution-context-panel";
+      }
+    },
+    sidebarRadioSchoolStyle(){
+      if(this.sidebarSearchToggle === "fos"){
+        return "normal";
+      }else{
+        return "bold";
+      }
+    },
+    sidebarRadioFOSStyle(){
+      if(this.sidebarSearchToggle === "fos"){
+        return "bold";
+      }else{
+        return "normal";
+      }
+    }
   },
   methods: {
     all() {
@@ -1734,6 +1805,19 @@ export default {
 
       return itemsToQuery
     },
+    handleSchoolNameSelected(school) {
+      if(typeof school == "string")
+      {
+        window.location = this.$baseUrl+'/search/?name=' + encodeURIComponent(school);
+      }
+      else
+      {
+        window.location = this.$baseUrl+'/search/?name=' + encodeURIComponent(school['school.name']) + "&id="+school.id;
+      }
+    },
+    handleFieldOfStudySelected(fieldOfStudy){
+      window.location = this.$baseUrl+'/search/?toggle=fos&cip4=' + encodeURIComponent(fieldOfStudy.cip4);
+    }
   },
   mounted() {
     // set toggle from URL

@@ -13,7 +13,7 @@
     outlined
     hide-no-data
     hide-details
-    color="secondary"
+    color="fos-search-color"
     prepend-inner-icon="fas fa-search"
     aria-label="Field of Study Search"
     :disabled="disabled"
@@ -36,8 +36,12 @@
 </template>
 
 <style lang="scss">
+@import "~/sass/_variables.scss";
 .v-application .primary--text {
   color: green !important;
+}
+.v-application .fos-search-color--text {
+  color: $fos-color-gold !important;
 }
 .fos-search-result-item-container {
   width: 300px;

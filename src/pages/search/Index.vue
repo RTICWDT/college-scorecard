@@ -1,4 +1,6 @@
 <style lang="scss">
+@import "~/sass/_variables";
+
 .canned-search-wrapper {
   margin-bottom: 8px;
 }
@@ -53,6 +55,15 @@
     }
   }
 }
+
+.field-of-study-context-panel{
+  border-radius: 20px !important;
+  border-left: 20px solid $fos-color-gold !important;
+}
+.institution-context-panel{
+  border-radius: 20px !important;
+  border-left: 20px solid $darker-green !important;
+}
 </style>
 
 <style lang="scss" scoped>
@@ -75,7 +86,7 @@
       class="searchSidebar"
       clipped
     >
-      <div class="context-toggle-container pa-5 grey lighten-3">
+      <!--<div class="context-toggle-container pa-5 grey lighten-3">
         <h3 class="mb-2">
           Showing Results For:
         </h3>
@@ -86,7 +97,31 @@
           @context-switch-click="handleContextToggle"
           @context-tab-change="handleContextToggle"
         />
-      </div>
+      </div>-->
+      
+      <v-card outline v-bind:class="contextRadioClass" class="pa-5 mb-3">
+          <p class="title mb-2">Search For:</p>
+          <v-radio-group v-model="controlRadio" @change="handleContextToggleTwo" column>
+            <v-radio
+              value="0"
+              color="#007000"
+            >
+              <template v-slot:label>
+                <div v-bind:style="{ 'font-weight': contextRadioSchoolStyle}">School</div>
+              </template>
+            </v-radio>
+
+            <v-radio
+              value="1"
+              color="#fdbf32"
+            >
+              <template v-slot:label>
+                <div v-bind:style="{ 'font-weight': contextRadioFOSStyle}">Fields of Study</div>
+              </template>
+            </v-radio>
+          </v-radio-group>
+
+        </v-card>
 
       <!-- Search Form Component -->
       <search-form
@@ -495,7 +530,7 @@ export default {
   data() {
     return {
       showSidebar: true,
-      sidebar: {
+      sidebar: {controlRadio: "1",
         fixed: false,
         absolute: true,
       },
@@ -529,6 +564,7 @@ export default {
       shareUrl: null,
       displayToggle: "institutions",
       controlTab: 1,
+      controlRadio: "1",
       fieldOfStudyTotalCountWithoutRangeFilters: 0,
       displayFlag: false
     }
@@ -556,9 +592,11 @@ export default {
     ) {
       this.displayToggle = "institutions"
       this.controlTab = 0
+      this.controlRadio = "0"
     } else {
       this.displayToggle = "fos"
       this.controlTab = 1
+      this.controlRadio = "1"
     }
 
     if (typeof this.urlParsedParams.dolflag === 'undefined' || this.urlParsedParams.dolflag === 'false' ){
@@ -617,6 +655,27 @@ export default {
         return 0
       }
     },
+    contextRadioClass(){
+      if(this.controlRadio === "1"){
+        return "field-of-study-context-panel";
+      }else{
+        return "institution-context-panel";
+      }
+    },
+    contextRadioSchoolStyle(){
+      if(this.controlRadio === "1"){
+        return "normal";
+      }else{
+        return "bold";
+      }
+    },
+    contextRadioFOSStyle(){
+      if(this.controlRadio === "1"){
+        return "bold";
+      }else{
+        return "normal";
+      }
+    }
   },
   methods: {
     searchAPI(params = {}, returnFields = [], allPrograms = true) {
@@ -766,6 +825,15 @@ export default {
       this.results.schools = []
       this.results.meta = {
         total: 0,
+      }
+      // TODO - What happens to search filters?
+    },
+    handleContextToggleTwo(toggleValue){
+      this.clearSearchForm();
+      this.displayToggle = (toggleValue === "1")? 'fos' : 'institutions';
+      this.results.schools = []
+      this.results.meta = {
+        total: 0
       }
       // TODO - What happens to search filters?
     },

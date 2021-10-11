@@ -2109,16 +2109,21 @@
         </v-col>
 
         <v-col lg="3" v-if="!error" class="pt-0">
-          <v-card outline class="pa-5 mb-3">
-            <p class="title mb-2">New Search:</p>
+          <v-card outline v-bind:class="sidebarSearchClass" class="pa-4 mb-3">
+            <p class="title mb-2">Search For:</p>
             <v-radio-group v-model="sidebarSearchToggle" column>
-              <v-radio label="School" value="school" color="#007000"></v-radio>
+              <v-radio value="school" color="#007000"><template v-slot:label>
+                    <div v-bind:style="{ 'font-weight': sidebarRadioSchoolStyle}">School</div>
+                  </template>
+                </v-radio>
 
               <v-radio
-                label="Fields of Study"
                 value="fos"
                 color="#fdbf32"
-              ></v-radio>
+              ><template v-slot:label>
+                    <div v-bind:style="{ 'font-weight': sidebarRadioFOSStyle}">Fields of Study</div>
+                  </template>
+                </v-radio>
             </v-radio-group>
 
             <name-autocomplete
@@ -2132,6 +2137,7 @@
               id="school-fos-search"
               @field-of-study-selected="handleFieldOfStudySelected"
             />
+            <div></div><!--Due to CSS styling where last element in card copies border radius of parent element-->
           </v-card>
           <v-card outline class="pa-5">
             <paying-for-college />
@@ -2176,12 +2182,17 @@
 
 .field-of-study-select-container {
   border-radius: 20px !important;
-  border-left: 20px solid #fdbf32 !important;
+  border-left: 20px solid $fos-color-gold !important;
 }
 
 .field-of-study-select-container-header {
   background-color: $lighter-yellow;
   border-radius: 5px 5px 0px 0px !important;
+}
+
+.institution-context-panel{
+  border-radius: 20px !important;
+  border-left: 20px solid $darker-green !important;
 }
 
 #field-of-study-select-header {
@@ -2564,6 +2575,27 @@ export default {
     },
     gradSubgroup() {
       return this.showGradOnly ? 'ugcomp' : 'ug'
+    },
+    sidebarSearchClass(){
+      if(this.sidebarSearchToggle === "fos"){
+        return "field-of-study-select-container";
+      }else{
+        return "institution-context-panel";
+      }
+    },
+    sidebarRadioSchoolStyle(){
+      if(this.sidebarSearchToggle === "fos"){
+        return "normal";
+      }else{
+        return "bold";
+      }
+    },
+    sidebarRadioFOSStyle(){
+      if(this.sidebarSearchToggle === "fos"){
+        return "bold";
+      }else{
+        return "normal";
+      }
     }
   },
   methods: {

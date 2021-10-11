@@ -10,7 +10,7 @@
       autocomplete="off"
       hide-details
       class="pt-0 mt-0"
-      color="secondary"
+      color="institution-search-color"
       outlined
       prepend-inner-icon="fas fa-search"
       hide-no-data
@@ -28,6 +28,13 @@
     </v-combobox>
   </div>
 </template>
+
+<style lang="scss">
+@import "~/sass/_variables.scss";
+.v-application .institution-search-color--text {
+  color: $darker-green !important;
+}
+</style>
 
 <script>
 import { apiGet } from "~/js/api.js"
