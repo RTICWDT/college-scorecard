@@ -31,6 +31,7 @@
         under a Creative Commons Attribution 3.0 License.
       </p>
     </v-footer>
+    <compare-header />
 
   </div>
 </template>
