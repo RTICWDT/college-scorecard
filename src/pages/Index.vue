@@ -380,9 +380,7 @@
         </v-container>
       </div>
     <compare-header />
-    <v-bottom-sheet id="compare-modal" v-model="$store.state.drawerOpen" inset>
-      <compare-drawer :show-info-text="false"></compare-drawer>
-    </v-bottom-sheet>      
+    
     </v-main>
   </div>
 </template>
@@ -558,7 +556,7 @@ import SearchForm from "~/components/SearchForm.vue"
 import NameAutocomplete from "~/components/NameAutocomplete.vue"
 import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 import FieldOfStudySearch from "~/components/FieldOfStudySearch.vue"
-import CompareDrawer from "~/components/CompareDrawer.vue"
+
 import CompareHeader from "~/components/CompareHeader.vue"
 
 export default {
@@ -569,7 +567,7 @@ export default {
     "search-form": SearchForm,
     "name-autocomplete": NameAutocomplete,
     "field-of-study-search": FieldOfStudySearch,
-    "compare-drawer": CompareDrawer,
+
     "compare-header": CompareHeader,    
   },
   data() {
