@@ -1,5 +1,5 @@
 <template>
-  <!--<div
+  <div
     id="compare-header"
     class="header pa-3 elevation-4"
     @click="toggleDrawer()"
@@ -51,11 +51,10 @@
         >Maximum of 10 Fields of Study reached
       </span>
     </div>
-  </div> -->
-  <div><p>testing if this will owrk at all on federalist</p></div>
+  </div>
 </template>
 
-<!-- <style lang="scss" scoped>
+<style lang="scss" scoped>
 @import "~/sass/_variables";
 .header {
   position: fixed;
@@ -123,4 +122,4 @@ export default {
     },
   },
 }
-</script> -->
+</script>

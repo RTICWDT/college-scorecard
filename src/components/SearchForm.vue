@@ -205,7 +205,7 @@
         ></check-range>
       </div>
 
-      <p v-if="!displayAllFilters" class="subhead-2">WIOA Programs<tooltip definition="wioa-participants"/></p>
+      <p v-if="!displayAllFilters" class="subhead-2">WIOA Programs&nbsp;<tooltip definition="wioa-participants"/></p>
       <v-checkbox
         id="search-form-dolflag"
         class="search-form-dolflag-cb my-0 py-0"
@@ -418,7 +418,7 @@
         aria-labelledby="religions-affiliation-label"
       ></v-select>
 
-      <p class="subhead-2">WIOA Programs<tooltip definition="wioa-participants"/></p>
+      <p class="subhead-2">WIOA Programs&nbsp;<tooltip definition="wioa-participants"/></p>
       <v-checkbox
         id="search-form-dolflag"
         class="search-form-dolflag-cb my-0 py-0"
