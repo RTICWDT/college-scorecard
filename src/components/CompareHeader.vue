@@ -2,6 +2,7 @@
   <div
     id="compare-header"
     class="header pa-3 elevation-4"
+    @click="toggleDrawer()"
     v-if="currentSchoolCount > 0 || currentFieldOfStudyCount > 0"
   >
     <div>
@@ -9,7 +10,7 @@
       <span v-if="currentSchoolCount < 10" class="compare-header-text mb-1">
         <div
           class="compare-icon-wrapper d-inline-block mx-2"
-          style="background: #83C38C;"
+          style="background: #C4DEC4;"
         >
           <v-icon class="mt-1" color="#122E51" size="24">
             fas fa-university
@@ -32,7 +33,7 @@
       >
         <div
           class="compare-icon-wrapper d-inline-block mr-2"
-          style="background: #fdbf32;"
+          style="background: #fec005;"
         >
           <v-icon class="mt-1" color="black"  size="24">
             fas fa-award
@@ -89,19 +90,35 @@
 </style>
 
 <script>
+import { mapGetters } from "vuex"
+
 export default {
+  methods: {
+    toggleDrawer() {
+      this.$store.commit("toggleDrawer", true)
+    },
+  },
   computed: {
+    ...mapGetters({
+      compareSchools: "getInstitutions",
+      compareFieldsOfStudy: "getFieldsOfStudy",
+    }),    
     currentSchoolCount() {
-      return this.$store.state.institutions.length
+      return compareSchools.length
     },
     currentFieldOfStudyCount() {
-      return this.$store.state.fos.length
+      return compareFieldsOfStudy.length
     },
     schoolText() {
-        return this.$store.state.institutions.length > 1 ||
+      var ret =
+        this.$store.state.institutions.length > 1 ||
         this.$store.state.institutions.length === 0
           ? "Schools"
           : "School"
+      return this.$store.state.institutions.length > 0 &&
+        this.$store.state.fos.length == 10
+        ? ret
+        : ret
     },
     fieldOfStudyText() {
       return this.$store.state.fos.length > 1 ||

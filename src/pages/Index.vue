@@ -378,9 +378,7 @@
             </v-col>
           </v-row>
         </v-container>
-      </div>
-    <compare-header />
-    
+      </div>    
     </v-main>
   </div>
 </template>
