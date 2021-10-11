@@ -53,3 +53,73 @@
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+@import "~/sass/_variables";
+.header {
+  position: fixed;
+  width: 50%;
+  left: 25%;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0, 0.98);
+  color: #ffffff;
+  z-index: 200;
+  border-radius: 3px 3px 0 0;
+  cursor: pointer;
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+    left: 0;
+  }
+}
+
+.compare-icon-wrapper {
+  border-radius: 50%;
+  box-shadow: 0px 3px 6px #00000029;
+  //border: white 3px solid;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+}
+
+.compare-header-text {
+  line-height: 2.0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
+
+<script>
+export default {
+  methods: {
+    toggleDrawer() {
+      this.$store.commit("toggleDrawer", true)
+    },
+  },
+  computed: {
+    currentSchoolCount() {
+      return this.$store.state.institutions.length
+    },
+    currentFieldOfStudyCount() {
+      return this.$store.state.fos.length
+    },
+    schoolText() {
+      var ret =
+        this.$store.state.institutions.length > 1 ||
+        this.$store.state.institutions.length === 0
+          ? "Schools"
+          : "School"
+      return this.$store.state.institutions.length > 0 &&
+        this.$store.state.fos.length == 10
+        ? ret
+        : ret
+    },
+    fieldOfStudyText() {
+      return this.$store.state.fos.length > 1 ||
+        this.$store.state.fos.length === 0
+        ? "Fields of Study"
+        : "Field of Study"
+    },
+  },
+}
+</script>
