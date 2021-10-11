@@ -90,34 +90,30 @@
 </style>
 
 <script>
-import { mapGetters } from "vuex"
-
 export default {
   methods: {
     toggleDrawer() {
-      //this.$store.commit("toggleDrawer", true)
+      this.$store.commit("toggleDrawer", true)
     },
   },
   computed: {
     currentSchoolCount() {
-      return 5
+      return this.$store.state.institutions.length
     },
     currentFieldOfStudyCount() {
-      return 5
+      return this.$store.state.fos.length
     },
     schoolText() {
-     /* return this.$store.state.institutions.length > 1 ||
+      return this.$store.state.institutions.length > 1 ||
         this.$store.state.institutions.length === 0
           ? "Schools"
-          : "School"*/
-          "Schools"
+          : "School"
     },
     fieldOfStudyText() {
-      /*return this.$store.state.fos.length > 1 ||
+      return this.$store.state.fos.length > 1 ||
         this.$store.state.fos.length === 0
         ? "Fields of Study"
-        : "Field of Study"*/
-        "Fields of Study"
+        : "Field of Study"
     },
   },
 }
