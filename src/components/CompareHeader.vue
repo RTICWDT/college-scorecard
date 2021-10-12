@@ -3,11 +3,11 @@
     id="compare-header"
     class="header pa-3 elevation-4"
     @click="toggleDrawer()"
-    v-if="$store.state.institutions.length > 0 || currentFieldOfStudyCount > 0"
+    v-if="currentSchoolCount > 0 || currentFieldOfStudyCount > 0"
   >
     <div>
       <span class="compare-header-text ml-8 mr-6">Ready to Compare: </span>
-      <span v-if="$store.state.institutions.length < 10" class="compare-header-text mb-1">
+      <span v-if="currentSchoolCount < 10" class="compare-header-text mb-1">
         <div
           class="compare-icon-wrapper d-inline-block mx-2"
           style="background: #C4DEC4;"
@@ -16,7 +16,7 @@
             fas fa-university
           </v-icon>
         </div>
-        {{ $store.state.institutions.length }} {{ $store.state.institutions.length == 1 ? 'School' : 'Schools' }} &nbsp;&nbsp;
+        {{ currentSchoolCount }} {{ schoolText }} &nbsp;&nbsp;
       </span>
       <span v-else class="compare-header-text d-inline-block mb-1 ml-4">
         <v-icon
@@ -28,7 +28,7 @@
         >Maximum of 10 Schools reached
       </span>
       <span
-        v-if="$store.state.fos.length < 10"
+        v-if="currentFieldOfStudyCount < 10"
         class="compare-header-text mb-1 ml-6"
       >
         <div
@@ -39,7 +39,7 @@
             fas fa-award
           </v-icon>
         </div>
-        {{ $store.state.fos.length }} {{ $store.state.fos.length == 1 ? 'Field of Study' : 'Fields of Study' }} 
+        {{ currentFieldOfStudyCount }} {{ fieldOfStudyText }} 
       </span>
       <span v-else class="compare-header-text d-inline-block mb-1 mr-2 ml-6">
         <v-icon
@@ -94,6 +94,26 @@ export default {
   methods: {
     toggleDrawer() {
       this.$store.commit("toggleDrawer", true)
+    },
+  },
+  computed: {
+    currentSchoolCount() {
+      return this.$store.state.institutions.length
+    },
+    currentFieldOfStudyCount() {
+      return this.$store.state.fos.length
+    },
+    schoolText() {
+      return this.$store.state.institutions.length > 1 ||
+        this.$store.state.institutions.length === 0
+          ? "Schools"
+          : "School"
+    },
+    fieldOfStudyText() {
+      return this.$store.state.fos.length > 1 ||
+        this.$store.state.fos.length === 0
+        ? "Fields of Study"
+        : "Field of Study"
     },
   },
 }
