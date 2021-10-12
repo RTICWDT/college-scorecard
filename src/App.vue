@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <scorecard-header />
+    <!-- <scorecard-header /> -->
     <router-view :is-loading="isLoading" @loading="isLoading = $event" />
-    <scorecard-footer />
+    <!-- <scorecard-footer /> -->
   </v-app>
 </template>
 
