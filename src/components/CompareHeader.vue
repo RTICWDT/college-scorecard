@@ -7,7 +7,7 @@
   >
     <div>
       <span class="compare-header-text ml-8 mr-6">Ready to Compare: </span>
-      <span v-if="currentSchoolCount < 10" class="compare-header-text mb-1">
+      <div v-if="currentSchoolCount < 10" class="compare-header-text mb-1">
         <div
           class="compare-icon-wrapper d-inline-block mx-2"
           style="background: #C4DEC4;"
@@ -17,8 +17,8 @@
           </v-icon>
         </div>
         {{ currentSchoolCount }} {{ schoolText }} &nbsp;&nbsp;
-      </span>
-      <span v-else class="compare-header-text d-inline-block mb-1 ml-4">
+      </div>
+      <div v-else class="compare-header-text d-inline-block mb-1 ml-4">
         <v-icon
           color="red"
           medium
@@ -26,8 +26,8 @@
           style="font-size:40px;border-radius:50%;"
           >fas fa-exclamation-circle</v-icon
         >Maximum of 10 Schools reached
-      </span>
-      <span
+      </div>
+      <div
         v-if="currentFieldOfStudyCount < 10"
         class="compare-header-text mb-1 ml-6"
       >
@@ -40,8 +40,8 @@
           </v-icon>
         </div>
         {{ currentFieldOfStudyCount }} {{ fieldOfStudyText }} 
-      </span>
-      <span v-else class="compare-header-text d-inline-block mb-1 mr-2 ml-6">
+      </div>
+      <div v-else class="compare-header-text d-inline-block mb-1 mr-2 ml-6">
         <v-icon
           color="red"
           medium
@@ -49,7 +49,7 @@
           style="font-size:30px;border-radius:50%;"
           >fas fa-exclamation-circle</v-icon
         >Maximum of 10 Fields of Study reached
-      </span>
+      </div>
     </div>
   </div>
 </template>

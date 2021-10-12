@@ -272,7 +272,7 @@ header {
     <!-- Mobile Navigation Drawer -->
     <v-navigation-drawer
       v-model="drawer"
-      v-if="drawer"
+      v-show="drawer"
       fixed
       temporary
       disable-resize-watcher
