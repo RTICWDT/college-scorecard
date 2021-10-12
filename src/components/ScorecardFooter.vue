@@ -32,9 +32,9 @@
       </p>
     </v-footer>
     <compare-header app />
-    <v-bottom-sheet id="compare-modal" v-model="$store.state.drawerOpen" inset>
+    <!--<v-bottom-sheet id="compare-modal" v-model="$store.state.drawerOpen" inset>
       <compare-drawer :show-info-text="false"></compare-drawer>
-    </v-bottom-sheet>
+    </v-bottom-sheet> -->
   </div>
 </template>
 
