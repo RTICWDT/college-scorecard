@@ -5,7 +5,6 @@
     @click="toggleDrawer()"
     v-if="currentSchoolCount > 0 || currentFieldOfStudyCount > 0"
   >
-    <div>
       <span class="compare-header-text ml-8 mr-6">Ready to Compare: </span>
       <div v-if="currentSchoolCount < 10" class="compare-header-text mb-1">
         <div
@@ -51,7 +50,6 @@
         >Maximum of 10 Fields of Study reached
       </div>
     </div>
-  </div>
 </template>
 
 <style lang="scss" scoped>
