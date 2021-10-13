@@ -213,8 +213,8 @@ header {
                 bottom
                 offset-x="14"
                 offset-y="10"
-                :content="$store.state.institutions.length"
-                :value="$store.state.institutions.length"
+                :content="currentSchoolCount"
+                :value="currentSchoolCount"
                 color="#E3EEF6"
               >
                 <v-btn
@@ -236,8 +236,8 @@ header {
                 bottom
                 offset-x="14"
                 offset-y="10"
-                :content="$store.state.fos.length"
-                :value="$store.state.fos.length"
+                :content="currentFieldOfStudyCount"
+                :value="currentFieldOfStudyCount"
                 color="#E3EEF6"
               >
                 <v-btn
@@ -356,6 +356,12 @@ export default {
         this.compareInstitutionsCount == 0
       )
     },
+    currentSchoolCount() {
+      return this.$store.state.institutions.length
+    },
+    currentFieldOfStudyCount() {
+      return this.$store.state.fos.length
+    },    
   },
   watch: {
     $route() {
