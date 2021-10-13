@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <div>
     <v-btn @click.stop.prevent="showDialog = true" icon small class="align-start ml-n2">
       <v-icon x-small allow-overflow :color="color" dark
         >fas fa-info-circle</v-icon
@@ -42,7 +42,7 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-  </span>
+  </div>
 </template>
 
 <style lang="scss" scoped>
