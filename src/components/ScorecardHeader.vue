@@ -355,13 +355,7 @@ export default {
         this.compareFieldsOfStudyCount == 0 &&
         this.compareInstitutionsCount == 0
       )
-    },
-    currentSchoolCount() {
-      return this.$store.state.institutions.length
-    },
-    currentFieldOfStudyCount() {
-      return this.$store.state.fos.length
-    },    
+    },   
   },
   watch: {
     $route() {
@@ -400,6 +394,12 @@ export default {
         this.$router.push(urlString)
       }
     },
+    currentSchoolCount() {
+      return this.$store.state.institutions.length
+    },
+    currentFieldOfStudyCount() {
+      return this.$store.state.fos.length
+    },     
   },
   created() {
     this.setActiveLink()
