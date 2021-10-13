@@ -149,6 +149,7 @@ header {
 </style>
 
 <template>
+<client-only>
   <div class="">
     <v-app-bar
       app
@@ -338,6 +339,7 @@ header {
       </v-list>
     </v-navigation-drawer>
   </div>
+  </client-only>
 </template>
 
 <script>
