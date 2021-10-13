@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="title mb-2">Start Your FAFSA&reg; Application</h2>
-    <p>
+    <div class="my-4">
       To receive financial aid, you must complete the
       <em>Free Application for Federal Student Aid</em> (FAFSA&reg;) form. You
       can use
@@ -20,9 +20,9 @@
         </a
       >
       to see how much aid may be available to you.
-    </p>
+    </div>
 
-    <p class="text-center">
+    <div class="text-center my-4">
       <v-btn
         rounded
         color="secondary"
@@ -40,9 +40,9 @@
           </v-icon>        
         </v-btn
       >
-    </p>
+    </div>
 
-    <p>
+    <div class="my-4">
       Don't forget: Do fill out the FAFSA® form, but also look into other
       programs such as
       <a
@@ -52,7 +52,7 @@
         >GI Bill Benefits</a
       >
       that may also help you pay for school.
-    </p>
+    </div>
   </div>
 </template>
 

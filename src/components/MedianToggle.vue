@@ -101,14 +101,6 @@ export default {
     groupName: {
       type: String,
     },
-    compareInstitutionsCount: {
-      type: Number,
-      default: 0,
-    },
-    compareFieldsOfStudyCount: {
-      type: Number,
-      default: 0,
-    },
     tabsHeight: {
       type: String,
       default: "50px",

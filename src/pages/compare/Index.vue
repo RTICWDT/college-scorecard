@@ -62,7 +62,7 @@
             </div>
 
             <!--Loader-->
-            <div v-if="loading" class="show-loading ma-4">
+            <div v-show="loading" class="show-loading ma-4">
               <div class="pa-5">
                 <h1 class="title">
                   Loading
@@ -73,7 +73,7 @@
 
             <!-- Institution Top Summary-->
             <div
-              v-else-if="showResource === 'institutions'"
+              v-show="showResource === 'institutions' && !loading"
               class="show-loaded mx-5"
               id="school"
             >
@@ -152,7 +152,7 @@
             <!-- End Institution Top Summary-->
 
             <!-- Field Of Study Container -->
-            <div v-else-if="showResource === 'fos'">
+            <div v-show="showResource === 'fos' && !loading">
               <!-- Field of Study Chips -->
               <div class="compare-fos-chip-container mb-10 py-5 mx-md-5">
                 <!-- Mobile Chip Layout -->
@@ -1104,7 +1104,7 @@
           <!-- Search Form Component -->
           <div v-show="!loading && showSearchForm">
             <v-card class="pa-5 mb-2">
-              <div v-if="displayToggle === 'institutions'">
+              <div v-show="displayToggle === 'institutions'">
                 <h1 class="text-center py-3">
                   No schools selected to compare.
                 </h1>
@@ -1119,14 +1119,14 @@
                   </v-btn>
                 </div>
 
-                <p class="text-center my-4">
+                <div class="text-center my-4">
                   Try searching for schools and clicking the
                   <v-icon>fa fa-check-circle</v-icon> to add a school for
                   comparison.
-                </p>
+                </div>
               </div>
 
-              <div v-else>
+              <div v-show="displayToggle !== 'institutions'">
                 <h1 class="text-center py-3">
                   No fields of study selected to compare.
                 </h1>
@@ -1141,11 +1141,11 @@
                   </v-btn>
                 </div>
 
-                <p class="text-center my-4">
+                <div class="text-center my-4">
                   Try searching for fields of study and clicking the
                   <v-icon>fa fa-check-circle</v-icon> to add a field of study
                   for comparison.
-                </p>
+                </div>
               </div>
             </v-card>
           </div>
@@ -1154,7 +1154,7 @@
 
         <!-- Left Aside -->
         <v-col lg="3" class="pt-0">
-          <v-card v-if="showShareUpdate" class="pa-5 mb-3">
+          <v-card v-show="showShareUpdate" class="pa-5 mb-3">
             <p>You are viewing a shared comparison.</p>
 
             <v-btn

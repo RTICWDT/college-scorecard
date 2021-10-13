@@ -1,24 +1,24 @@
 <template>
+<client-only>
   <div
     id="compare-header"
     class="header pa-3 elevation-4"
     @click="toggleDrawer()"
     v-if="currentSchoolCount > 0 || currentFieldOfStudyCount > 0"
   >
-    <div>
       <span class="compare-header-text ml-8 mr-6">Ready to Compare: </span>
-      <span v-if="currentSchoolCount < 10" class="compare-header-text mb-1">
+      <div v-if="currentSchoolCount < 10" class="compare-header-text mb-1">
         <div
           class="compare-icon-wrapper d-inline-block mx-2"
-          style="background: #83C38C;"
+          style="background: #C4DEC4;"
         >
           <v-icon class="mt-1" color="#122E51" size="24">
             fas fa-university
           </v-icon>
         </div>
         {{ currentSchoolCount }} {{ schoolText }} &nbsp;&nbsp;
-      </span>
-      <span v-else class="compare-header-text d-inline-block mb-1 ml-4">
+      </div>
+      <div v-else class="compare-header-text d-inline-block mb-1 ml-4">
         <v-icon
           color="red"
           medium
@@ -26,22 +26,22 @@
           style="font-size:40px;border-radius:50%;"
           >fas fa-exclamation-circle</v-icon
         >Maximum of 10 Schools reached
-      </span>
-      <span
+      </div>
+      <div
         v-if="currentFieldOfStudyCount < 10"
         class="compare-header-text mb-1 ml-6"
       >
         <div
           class="compare-icon-wrapper d-inline-block mr-2"
-          style="background: #fdbf32;"
+          style="background: #fec005;"
         >
           <v-icon class="mt-1" color="black"  size="24">
             fas fa-award
           </v-icon>
         </div>
         {{ currentFieldOfStudyCount }} {{ fieldOfStudyText }} 
-      </span>
-      <span v-else class="compare-header-text d-inline-block mb-1 mr-2 ml-6">
+      </div>
+      <div v-else class="compare-header-text d-inline-block mb-1 mr-2 ml-6">
         <v-icon
           color="red"
           medium
@@ -49,9 +49,9 @@
           style="font-size:30px;border-radius:50%;"
           >fas fa-exclamation-circle</v-icon
         >Maximum of 10 Fields of Study reached
-      </span>
+      </div>
     </div>
-  </div>
+    </client-only>
 </template>
 
 <style lang="scss" scoped>
@@ -75,7 +75,6 @@
 .compare-icon-wrapper {
   border-radius: 50%;
   box-shadow: 0px 3px 6px #00000029;
-  //border: white 3px solid;
   width: 40px;
   height: 40px;
   text-align: center;
@@ -104,15 +103,10 @@ export default {
       return this.$store.state.fos.length
     },
     schoolText() {
-      var ret =
-        this.$store.state.institutions.length > 1 ||
+      return this.$store.state.institutions.length > 1 ||
         this.$store.state.institutions.length === 0
           ? "Schools"
           : "School"
-      return this.$store.state.institutions.length > 0 &&
-        this.$store.state.fos.length == 10
-        ? ret
-        : ret
     },
     fieldOfStudyText() {
       return this.$store.state.fos.length > 1 ||
