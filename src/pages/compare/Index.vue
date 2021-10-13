@@ -62,7 +62,7 @@
             </div>
 
             <!--Loader-->
-            <div v-if="loading" class="show-loading ma-4">
+            <div v-show="loading" class="show-loading ma-4">
               <div class="pa-5">
                 <h1 class="title">
                   Loading
@@ -73,7 +73,7 @@
 
             <!-- Institution Top Summary-->
             <div
-              v-else-if="showResource === 'institutions'"
+              v-show="showResource === 'institutions' && !loading"
               class="show-loaded mx-5"
               id="school"
             >
@@ -152,7 +152,7 @@
             <!-- End Institution Top Summary-->
 
             <!-- Field Of Study Container -->
-            <div v-else-if="showResource === 'fos'">
+            <div v-show="showResource === 'fos' && !loading">
               <!-- Field of Study Chips -->
               <div class="compare-fos-chip-container mb-10 py-5 mx-md-5">
                 <!-- Mobile Chip Layout -->
