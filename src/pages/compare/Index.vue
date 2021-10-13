@@ -1119,11 +1119,11 @@
                   </v-btn>
                 </div>
 
-                <p class="text-center my-4">
+                <span class="text-center my-4">
                   Try searching for schools and clicking the
                   <v-icon>fa fa-check-circle</v-icon> to add a school for
                   comparison.
-                </p>
+                </span>
               </div>
 
               <div v-show="displayToggle !== 'institutions'">
@@ -1141,11 +1141,11 @@
                   </v-btn>
                 </div>
 
-                <p class="text-center my-4">
+                <span class="text-center my-4">
                   Try searching for fields of study and clicking the
                   <v-icon>fa fa-check-circle</v-icon> to add a field of study
                   for comparison.
-                </p>
+                </span>
               </div>
             </v-card>
           </div>
