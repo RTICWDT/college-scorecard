@@ -205,7 +205,7 @@
         ></check-range>
       </div>
 
-      <p v-if="!displayAllFilters" class="subhead-2">WIOA Programs&nbsp;<tooltip definition="wioa-participants"/></p>
+      <div v-if="!displayAllFilters" class="subhead-2">WIOA Programs&nbsp;<tooltip definition="wioa-participants"/></div>
       <v-checkbox
         id="search-form-dolflag"
         class="search-form-dolflag-cb my-0 py-0"
