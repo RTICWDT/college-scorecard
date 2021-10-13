@@ -213,8 +213,8 @@ header {
                 bottom
                 offset-x="14"
                 offset-y="10"
-                :content="currentSchoolCount"
-                :value="currentSchoolCount"
+                :content="currentSchoolCount()"
+                :value="currentSchoolCount()"
                 color="#E3EEF6"
               >
                 <v-btn
@@ -236,8 +236,8 @@ header {
                 bottom
                 offset-x="14"
                 offset-y="10"
-                :content="currentFieldOfStudyCount"
-                :value="currentFieldOfStudyCount"
+                :content="currentFieldOfStudyCount()"
+                :value="currentFieldOfStudyCount()"
                 color="#E3EEF6"
               >
                 <v-btn
