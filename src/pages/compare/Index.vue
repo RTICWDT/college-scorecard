@@ -1104,7 +1104,7 @@
           <!-- Search Form Component -->
           <div v-show="!loading && showSearchForm">
             <v-card class="pa-5 mb-2">
-              <div v-if="displayToggle === 'institutions'">
+              <div v-show="displayToggle === 'institutions'">
                 <h1 class="text-center py-3">
                   No schools selected to compare.
                 </h1>
@@ -1126,7 +1126,7 @@
                 </p>
               </div>
 
-              <div v-else>
+              <div v-show="displayToggle !== 'institutions'">
                 <h1 class="text-center py-3">
                   No fields of study selected to compare.
                 </h1>
