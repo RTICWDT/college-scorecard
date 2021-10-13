@@ -158,7 +158,7 @@
                       {{ completionRate |  numeral("0%") }}
                     </h2>
                     <div class="data-na pb-3" v-else>Data Not Available</div>
-                    <em style="font-size:14pt;">Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: $25,000</em>                    
+                    <em style="font-size:14pt;">Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[3] ,'0%')}}</em>                    
                     <vertical-bar-median
                       v-if="completionRate"
                       :value="{
@@ -177,7 +177,7 @@
                       }"
                       :median="{
                         label: 'Median',
-                        value: 30,
+                        value: this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] * 100 : fakeGraduationRate[3] * 100,
                         style: { height: '60px' },
                       }"
                       color="#00365e"
@@ -214,7 +214,7 @@
                       {{ netPrice | numeral("$0,0") }}
                     </h2>
                     <div class="data-na pb-3" v-else>Data Not Available</div>
-                    <em style="font-size:14pt;">Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: $25,000</em>
+                    <em style="font-size:14pt;">Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[3] ,'$0,0')}}</em>
 
                     <horizontal-bar-median
                       v-if="netPrice"
@@ -234,7 +234,7 @@
                       }"
                       :median="{
                         label: 'Median',
-                        value: 25000,
+                        value: this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[3],
                         style: { height: '60px' },
                       }"
                       :upperTipStyleOverride="{
@@ -261,24 +261,24 @@
                       Median Earnings for Largest Program
                       <tooltip
                         definition="fos-median-earnings"
-                        :isNegative="netPrice < 0"
+                        :isNegative="medianEarnings < 0"
                       />
                     </h2>
 
                     <h2
                       class="display-2 navy-text font-weight-bold pb-3"
-                      v-if="netPrice"
+                      v-if="medianEarnings"
                     >
-                      {{ netPrice | numeral("$0,0") }}
+                      {{ medianEarnings | numeral("$0,0") }}
                     </h2>
                     <div class="data-na pb-3" v-else>Data Not Available</div>
-                    <em>Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: $25,000</em>
+                    <em>Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</em>
 
                     <horizontal-bar-median
-                      v-if="netPrice"
+                      v-if="medianEarnings"
                       :value="{
-                        label:  this.$options.filters.numeral(netPrice,'$0,0'),
-                        value: netPrice
+                        label:  this.$options.filters.numeral(medianEarnings,'$0,0'),
+                        value: medianEarnings
                       }"
                       :min="{
                         label: '$0',
@@ -292,7 +292,7 @@
                       }"
                       :median="{
                         label: 'Median',
-                        value: 25000,
+                        value: this.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[3],
                         style: { height: '60px' },
                       }"
                       :upperTipStyleOverride="{
@@ -893,8 +893,8 @@
                           style: { height: '60px' },
                         }"
                         :median="{
-                          label: 'Median: ' + this.$options.filters.numeral(25000,'$0,0'),
-                          value: 25000,
+                          label: 'Median: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[3] ,'$0,0'),
+                          value: this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[3] ,
                           style: { height: '60px' },
                         }"
                         color="#00365e"
@@ -1116,8 +1116,8 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Median: ' + Math.round(parseFloat(0.3) * 100) + '%',
-                        value: 30,
+                        label: 'Median: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[3] ,'0%'),
+                        value: this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] * 100 : fakeGraduationRate[3] * 100,
                         style: { height: '60px' },
                       }"
                       color="#00365e"
@@ -1880,7 +1880,7 @@
                   class="px-0 py-3 pa-sm-5"
                 >
                   <div>
-                  <h2 class="mb-3" v-if="netPrice">
+                  <h2 class="mb-3" v-if="medianEarnings">
                           Median Earnings&nbsp;<tooltip
                             definition="fos-median-earnings"
                             :isBranch="isBranch"
@@ -1888,9 +1888,9 @@
                         </h2>
                     <h2
                       class="display-2 navy-text font-weight-bold mb-3"
-                      v-if="netPrice"
+                      v-if="medianEarnings"
                     >
-                      {{ netPrice | numeral("$0,0") }}
+                      {{ medianEarnings | numeral("$0,0") }}
                     </h2>   
                     <p>
                       The median earnings of former students who received federal financial aid at 10 years after entering the school.
@@ -1905,12 +1905,12 @@
                     />          
                        <v-row>
                       <v-col cols="2"></v-col>
-                      <v-col cols="8">                                                     
+                      <v-col cols="8">
                     <horizontal-bar-median
-                      v-if="netPrice"
+                      v-if="medianEarnings"
                       :value="{
-                        label: this.$options.filters.numeral(netPrice,'$0,0'),
-                        value: netPrice,
+                        label: this.$options.filters.numeral(medianEarnings,'$0,0'),
+                        value: medianEarnings,
                       }"
                       :min="{
                         label: '$0',
@@ -1923,8 +1923,8 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Median: ' + this.$options.filters.numeral(30000,'$0,0'),
-                        value: 30000,
+                        label: 'Median: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeMedianEarnings[groupName] : fakeMedianEarnings[4] ,'$0,0'),
+                        value: this.medianToggle === 'group' ? fakeMedianEarnings[groupName] : fakeMedianEarnings[4],
                         style: { height: '60px' },
                       }"
                       color="#00365e"
@@ -2490,9 +2490,6 @@ export default {
       fieldDataExtendedSalarySelect: "aid",
       fieldDataExtendedShowPrior: false,
       medianToggle: "group",
-      medianToggleCost: "group",
-      medianToggleGrad: "group",
-      medianToggleEarnings: "group",
       controlTab: 0,
     }
   },
@@ -2841,6 +2838,7 @@ export default {
     },
   },
   mounted() {
+    
     let self = this
     this.panelsFOS = [0]
     
