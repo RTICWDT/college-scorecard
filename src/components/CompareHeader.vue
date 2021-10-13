@@ -73,7 +73,6 @@
 .compare-icon-wrapper {
   border-radius: 50%;
   box-shadow: 0px 3px 6px #00000029;
-  //border: white 3px solid;
   width: 40px;
   height: 40px;
   text-align: center;
