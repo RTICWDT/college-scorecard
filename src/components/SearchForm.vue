@@ -433,7 +433,7 @@
     <div id="search-submit-container" class="pa-2 text-center" v-show="!autoSubmit">
       <v-btn color="secondary" rounded @click="$emit('search-query',cleanInput)">Find Schools</v-btn>
     </div>
-      <v-btn type='submit' v-else class="sr-only" color="secondary" rounded @click="$emit('search-query',cleanInput)">Find Schools</v-btn>
+      <v-btn type='submit' v-show="autoSubmit" class="sr-only" color="secondary" rounded @click="$emit('search-query',cleanInput)">Find Schools</v-btn>
   </v-form>
 </template>
 
