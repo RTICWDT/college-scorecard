@@ -198,12 +198,6 @@ export default {
       } else {
         return (
           this.$options.filters.numeral(
-            this.earningsRange.min.earnings.highest["2_yr"]
-              .overall_median_earnings,
-            "$0a"
-          ) +
-          "-" +
-          this.$options.filters.numeral(
             this.earningsRange.max.earnings.highest["2_yr"]
               .overall_median_earnings,
             "0a"

@@ -160,7 +160,7 @@
                             v-on="on"
                             class="d-none d-sm-inline mr-1"
                           >
-                            <v-icon small class="mr-1">fas fa-sort</v-icon>
+                            <v-icon small class="mx-1">fas fa-sort</v-icon>
                             Sort
                           </v-btn>
                         </template>
