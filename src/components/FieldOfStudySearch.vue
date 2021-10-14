@@ -1,4 +1,5 @@
 <template>
+<client-only>
   <v-autocomplete
     :value="selected"
     @input="handleFieldOfStudySelect"
@@ -33,6 +34,7 @@
       </v-list-item-content>
     </template>
   </v-autocomplete>
+  </client-only>
 </template>
 
 <style lang="scss">
