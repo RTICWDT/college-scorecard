@@ -75,7 +75,7 @@
         clearable
       />
 
-      <div class="d-flex align-center" v-show="utility.location == 'ZIP Code'">
+      <div class="d-flex align-center" v-if="utility.location === 'ZIP Code'">
         <v-text-field
           id="search-form-zip-text"
           v-model="input.zip"
@@ -96,7 +96,7 @@
         ></v-text-field>
       </div>
 
-      <div class="d-flex align-center" v-show="utility.location == 'Near Me'">
+      <div class="d-flex align-center" v-if="utility.location === 'Near Me'">
         <v-icon
           v-on="on"
           :color="locationButtonColor"
