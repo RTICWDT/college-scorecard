@@ -200,7 +200,7 @@ export default {
           this.$options.filters.numeral(
             this.earningsRange.max.earnings.highest["2_yr"]
               .overall_median_earnings,
-            "0a"
+            "$0a"
           )
         )
       }
