@@ -53,7 +53,7 @@
               </v-row>
 
               <!-- Institution Summary Container-->
-              <v-row class="pl-5">
+              <v-row class="px-5 pt-5">
                 <!-- School Information and Icons-->
                 <v-col cols="12" md="7" class="pl-sm-6 pr-sm-5">
                   <v-chip v-if="underInvestigation == 1" color="error" label>
@@ -95,7 +95,7 @@
                 </v-col>
 
                 <!-- Map -->
-                <v-col cols="12" md="5" class="pr-sm-6 pl-sm-5 py-0">
+                <v-col cols="12" md="5" class="pr-8 pl-sm-5 py-0">
                   <!-- <div class="school-map" ref="map"></div> -->
                   <div class="school-map mx-auto" v-if="school">
                     <v-img
@@ -112,7 +112,7 @@
               </v-row>
 
               <!--Special Designations-->
-              <v-row class="mt-3 pl-5" v-if="specialDesignations.length > 0">
+              <v-row class="mt-3 pl-5 pt-5" v-if="specialDesignations.length > 0">
                 <v-col cols="12" class="px-sm-5">
                   <div class="school-special_designation">
                     <v-chip
@@ -128,7 +128,7 @@
               </v-row>
 
               <!-- Institution Summary and Field Of Study Select + Summary -->
-              <v-row class="mt-3 pr-sm-3 pl-5">
+              <v-row class="mt-3 pr-8 pl-5">
                 <!--Institution Summary-->
                 <v-col cols="12" class="py-3 pa-sm-5">
                     <median-toggle
@@ -144,17 +144,25 @@
                 </v-col>                 
                 <v-col md="6" class="pr-sm-3">                
                   <div id="school-completion-rate-bar" class="py-3 pa-sm-3">
-                    <h2 class="mb-0">
+                    <h2 class="mb-3">
                       <!--prettyhtml-ignore-->
                       Graduation Rate&nbsp;<tooltip
                         definition="graduation-rate"
                         :version="completionRateFieldDefinition"
                       />
                     </h2>
+                    <h2
+                      class="display-2 navy-text font-weight-bold pb-3"
+                      v-if="completionRate"
+                    >
+                      {{ completionRate |  numeral("0%") }}
+                    </h2>
+                    <div class="data-na pb-3" v-else>Data Not Available</div>
+                    <em style="font-size:14pt;">Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</em>                    
                     <vertical-bar-median
                       v-if="completionRate"
                       :value="{
-                        label: Math.round(parseFloat(completionRate) * 100) + '%',
+                        label: '',
                         value: Math.round(parseFloat(completionRate) * 100)
                       }"
                       :min="{
@@ -169,7 +177,7 @@
                       }"
                       :median="{
                         label: 'Median',
-                        value: 30,
+                        value: this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] * 100 : fakeGraduationRate[4] * 100,
                         style: { height: '60px' },
                       }"
                       color="#00365e"
@@ -180,16 +188,23 @@
                       class="mb-4"
                     ></vertical-bar-median>
                     <div v-else class="data-na">Data Not Available</div>
-                    <div class="text-center"><em class="mx-auto">Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: 30%</em></div>
                   </div>
                 </v-col>
 
                 <v-col md="6" class="pr-sm-3">
                   <div id="school-avg-cost" class="mb-4">
-                    <h2 class="mb-3">
+                    <h2 class="mb-3" v-if="!isProgramReporter">
                       <!--prettyhtml-ignore-->
                       Average Annual Cost
                       <tooltip definition="avg-cost" />
+                    </h2>
+                    <h2 v-else class="mb-3">
+                      <!--prettyhtml-ignore-->
+                      Average Annual Cost for Largest Program
+                      <tooltip
+                        definition="avg-program-cost"
+                        :isNegative="netPrice < 0"
+                      />
                     </h2>
 
                     <h2
@@ -199,7 +214,7 @@
                       {{ netPrice | numeral("$0,0") }}
                     </h2>
                     <div class="data-na pb-3" v-else>Data Not Available</div>
-                    <em style="font-size:14pt;">Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: $25,000</em>
+                    <em style="font-size:14pt;">Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0')}}</em>
 
                     <horizontal-bar-median
                       v-if="netPrice"
@@ -219,7 +234,7 @@
                       }"
                       :median="{
                         label: 'Median',
-                        value: 25000,
+                        value: this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4],
                         style: { height: '60px' },
                       }"
                       :upperTipStyleOverride="{
@@ -236,26 +251,34 @@
                   </div>
 
                   <div id="school-median-earnings" class="mb-4">
-                    <h2 class="mb-3">
+                    <h2 class="mb-3" v-if="!isProgramReporter">
                       <!--prettyhtml-ignore-->
                       Median Earnings
                       <tooltip definition="fos-median-earnings" />
                     </h2>
+                    <h2 v-else class="mb-3">
+                      <!--prettyhtml-ignore-->
+                      Median Earnings for Largest Program
+                      <tooltip
+                        definition="fos-median-earnings"
+                        :isNegative="medianEarnings < 0"
+                      />
+                    </h2>
 
                     <h2
                       class="display-2 navy-text font-weight-bold pb-3"
-                      v-if="netPrice"
+                      v-if="medianEarnings"
                     >
-                      {{ netPrice | numeral("$0,0") }}
+                      {{ medianEarnings | numeral("$0,0") }}
                     </h2>
                     <div class="data-na pb-3" v-else>Data Not Available</div>
-                    <em>Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: $25,000</em>
+                    <em>Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</em>
 
                     <horizontal-bar-median
-                      v-if="netPrice"
+                      v-if="medianEarnings"
                       :value="{
-                        label:  this.$options.filters.numeral(netPrice,'$0,0'),
-                        value: netPrice
+                        label:  this.$options.filters.numeral(medianEarnings,'$0,0'),
+                        value: medianEarnings
                       }"
                       :min="{
                         label: '$0',
@@ -269,7 +292,7 @@
                       }"
                       :median="{
                         label: 'Median',
-                        value: 25000,
+                        value: this.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4],
                         style: { height: '60px' },
                       }"
                       :upperTipStyleOverride="{
@@ -504,11 +527,11 @@
                                 Include debt borrowed at any prior<br
                                   class="d-sm-none"
                                 />
-                                institution&nbsp;
+                                institution<tooltip definition="include-debt-prior-inst" class="pt-2" /> 
                               </span>
                             </template>
                           </v-checkbox>
-                          <tooltip definition="include-debt-prior-inst" />                          
+                         
                         </v-col>
 
                         <!--Median Total-->
@@ -650,7 +673,7 @@
                   </div>
 
                   <!-- Top Fields of Study -->
-                  <div class="px-5 px-sm-5 py-sm-4">
+                  <div class="px-5 px-sm-5 pb-sm-4">
                     <p class="my-3" v-if="fieldsOfStudy.length">
                       Out of {{ fosUndergradCount | numeral }} undergraduate
                       {{ fosUndergradCount == 1 ? "field" : "fields" }} of study
@@ -797,7 +820,7 @@
                     </div>
 
                     <p class="text-center">
-                      <v-btn rounded color="secondary" :href="fieldsLink">
+                      <v-btn rounded color="secondary" :href="this.$url(fieldsLink)">
                         <span class="d-none d-sm-flex"
                           >See All Available Fields of Study</span
                         >
@@ -824,14 +847,14 @@
                 >
                   <v-row>
                     <v-col cols="12" md="12">
-                      <div>
+                      <div v-if="!isProgramReporter">
                         <h2 class="mb-3">
                           Average Annual Cost&nbsp;
                           <tooltip definition="avg-cost" />
                         </h2>
                         <h2
                           v-if="netPrice"
-                          class="display-2 navy-text font-weight-bold"
+                          class="display-2 navy-text font-weight-bold mb-3"
                         >
                           {{ netPrice | numeral("$0,0") }}
                         </h2>
@@ -848,7 +871,7 @@
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
                           :group-name="this.$options.filters.yearsText(groupName)"
-                          class="mb-3"
+                          class="mb-7"
                         />  
                       <v-row>
                       <v-col cols="2"></v-col>
@@ -870,8 +893,8 @@
                           style: { height: '60px' },
                         }"
                         :median="{
-                          label: 'Median: ' + this.$options.filters.numeral(25000,'$0,0'),
-                          value: 25000,
+                          label: 'Median: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0'),
+                          value: this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,
                           style: { height: '60px' },
                         }"
                         color="#00365e"
@@ -885,7 +908,7 @@
                        <v-col cols="2"></v-col>     
                       </v-row>                                                         
                       </div>
-                      <!--<div v-else>
+                      <div v-else>
                         <h2 class="mb-3">
                           Average Annual Cost for Largest Program
                           <tooltip
@@ -907,12 +930,12 @@
                               programReporter[0].annualized ==
                                 programReporter[0].full_program
                             "
-                            >for a
+                            > for a
                             {{ programReporter[0].avg_month_completion }}-month
                             program</span
                           >
                           <span class="costDescription" v-else
-                            >per year on average</span
+                            > per year on average</span
                           >
                         </h2>
                         <div v-else class="data-na">Data Not Available</div>
@@ -928,6 +951,7 @@
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
                           :group-name="this.$options.filters.yearsText(groupName)"
+                          class="mb-7"
                         />  
                       <v-row>
                       <v-col cols="2"></v-col>
@@ -963,7 +987,7 @@
                       </v-col>  
                        <v-col cols="2"></v-col>     
                       </v-row>                       
-                      </div> -->
+                      </div>
                       
                       <h2 class="mb-3">By Family Income</h2>
                       <p>
@@ -1042,16 +1066,19 @@
                 >
                   <v-row>
                     <v-col cols="12" md="12" id="showPellOnlyGrad">
-                      <v-col cols="12" md="12" sm="12"  class="d-flex">
+                      <v-row class="d-flex">
+                      <v-col cols="7" md="7" sm="12">
                       <h2 class="mb-3">
                         Graduation Rate&nbsp;
                         <tooltip definition="graduation-rate" />
                       </h2>
+                      </v-col>
+                      <v-col cols="5" md="5" sm="12" class="d-flex justify-end">
                       <v-checkbox
                         v-model="showPellOnlyGrad"
                         label="Show Pell Grant Recipients Only"
                         color="secondary"
-                        class="mt-0 ml-auto"
+                        class="mt-0"
                       >
                         <template v-slot:label>
                           <span>
@@ -1060,6 +1087,7 @@
                         </template>
                       </v-checkbox>                      
                       </v-col>  
+                      </v-row>
                         <median-toggle
                           :display-toggle="medianToggle"
                           :control-tab="controlTab"
@@ -1088,8 +1116,8 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Median: ' + Math.round(parseFloat(0.3) * 100) + '%',
-                        value: 30,
+                        label: 'Median: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%'),
+                        value: this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] * 100 : fakeGraduationRate[4] * 100,
                         style: { height: '60px' },
                       }"
                       color="#00365e"
@@ -1139,11 +1167,14 @@
                   </v-row>
                   <v-row>
                     <v-col cols="12" id="showPellOnlyOutcomes">
-                      <v-col cols="12" md="12" sm="12"  class="d-flex">
+                      <v-row class="d-flex">
+                      <v-col cols="7" md="7" sm="12">
                       <h2 class="mb-3 mt-5">
                         Outcomes 8 Years After Attending&nbsp;
                         <tooltip definition="outcome-measures" />
                       </h2>
+                      </v-col>
+                      <v-col cols="5" md="5" sm="12" class="d-flex justify-end">                      
                       <v-checkbox
                         v-model="showPellOnlyOutcomes"
                         label="Show Pell Grant Recipients Only"
@@ -1155,8 +1186,9 @@
                             Show Pell Grant Recipients Only&nbsp;
                           </span>
                         </template>
-                      </v-checkbox>                           
+                      </v-checkbox>
                       </v-col>
+                      </v-row>
                       <sankey-buttons
                         v-on:update-sankey="currentSankey = $event"
                       />
@@ -1216,15 +1248,17 @@
                           v-model="aidShowMedianDebtWithPrior"
                           label="Include debt borrowed at prior institutions"
                           color="secondary"
+                          class="shrink"
+                          hide-details
                         >
                           <template v-slot:label>
                             <span>
                               Include debt borrowed at any prior
-                              institutions&nbsp;
+                              institutions<tooltip definition="include-debt-prior-inst" class="pt-2 pl-2" />
                             </span>
                           </template>
                         </v-checkbox>
-                        <tooltip definition="include-debt-prior-inst" />
+                        
                       </v-col>
 
                       <v-col cols="12" md="6">
@@ -1241,8 +1275,9 @@
                             color="#1874DC"
                             :value="studentsReceivingLoans * 100"
                             :height="200"
+                            class="pb-3"
                           ></donut>
-                          <div v-else class="data-na">Data Not Available</div>
+                          <div v-else class="data-na pb-3">Data Not Available</div>
                           <p>
                             At some schools where few students borrow federal
                             loans, the typical undergraduate may leave school
@@ -1319,14 +1354,14 @@
                         <!--                          />-->
 
                           <div
-                            class="display-2 navy-text font-weight-bold"
+                            class="display-2 navy-text font-weight-bold  pb-5"
                             v-if="debtRange && debtRange.median.debt && aidLoanSelect !== 'plus'"
                           >
                             {{ debtRange.median.debt | numeral("$0,0") }}
                           </div>
 
                         <h2
-                          class="display-2 navy-text font-weight-bold"
+                          class="display-2 navy-text font-weight-bold  pb-5"
                           v-else-if="
                             parentPlusDebt &&
                               aidLoanSelect === 'plus' &&
@@ -1337,7 +1372,7 @@
                         </h2>
 
                         <h2
-                          class="display-2 navy-text font-weight-bold"
+                          class="display-2 navy-text font-weight-bold pb-5"
                           v-else-if="
                             parentPlusDebtAll &&
                               aidLoanSelect === 'plus' &&
@@ -1355,8 +1390,7 @@
                         </div>
 
                         <h2 class="mb-3 mt-3">
-                          Typical Monthly Loan Payment&nbsp;
-                          <tooltip
+                          Typical Monthly Loan Payment<tooltip
                             v-if="
                               aidLoanSelect === 'fed' &&
                                 !aidShowMedianDebtWithPrior
@@ -1364,6 +1398,7 @@
                             definition="avg-loan-payment"
                             :isBranch="isBranch"
                             :limitedFoS="fieldsLink"
+                            style="padding-left:2px;"
                           />
                           <tooltip
                             v-else-if="
@@ -1373,6 +1408,7 @@
                             definition="avg-loan-payment-all-schools"
                             :isBranch="isBranch"
                             :limitedFoS="fieldsLink"
+                            style="padding-left:2px;"
                           />
                           <tooltip
                             v-else-if="
@@ -1381,6 +1417,7 @@
                             "
                             definition="parent-plus-avg-loan-payment"
                             :isBranch="isBranch"
+                            style="padding-left:2px;"
                           />
                           <tooltip
                             v-else-if="
@@ -1389,6 +1426,7 @@
                             "
                             definition="parent-plus-avg-loan-payment-all-schools"
                             :isBranch="isBranch"
+                            style="padding-left:2px;"
                           />
                         </h2>
 
@@ -1405,7 +1443,7 @@
                           "
                         >
                           <div
-                            class="display-2 navy-text font-weight-bold"
+                            class="display-2 navy-text font-weight-bold pb-3"
                             v-if="debtRange && debtRange.min.payment"
                           >
                             {{
@@ -1423,7 +1461,7 @@
                           "
                         >
                           <div
-                            class="display-2 navy-text font-weight-bold"
+                            class="display-2 navy-text font-weight-bold pb-3"
                             v-if="
                               debtRange.min.payment && debtRange.max.payment
                             "
@@ -1440,7 +1478,7 @@
                         </div>
                         <div
                           v-else-if="aidLoanSelect === 'fed'"
-                          class="data-na"
+                          class="data-na pb-3"
                         >
                           Data Not Available
                         </div>
@@ -1626,7 +1664,7 @@
                       </v-simple-table>                        
                       </v-col>
                     </v-row>
-                    <div
+                   <!-- <div
                       class="fos-profile-panel fos-profile-mini pl-4"
                       v-if="selectedFOSDetail && aidLoanSelect === 'fed'"
                     >
@@ -1662,7 +1700,7 @@
                           <tooltip definition="include-debt-prior-inst" />
                         </v-col>
 
-                        <!--Median Total-->
+                        //Median Total
                         <v-col cols="12" md="4" sm="12">
                           <h4 class="mb-2">
                             Median Total Debt After Graduation&nbsp;
@@ -1722,7 +1760,7 @@
                           </div>
                         </v-col>
 
-                        <!--Monthly Loan-->
+                        //Monthly Loan
                         <v-col cols="12" md="4" sm="12">
                           <h4 class="mb-2">
                             Monthly Loan<br />
@@ -1786,7 +1824,7 @@
                           </div>
                         </v-col>
                       </v-row>
-                    </div>
+                    </div> -->
 
                     <v-row>
                       <v-col cols="12">
@@ -1805,7 +1843,16 @@
                               href="https://fafsa.ed.gov/spa/fafsa"
                               target="_blank"
                               @click="trackOutboundLink($event)"
-                              >Start My FAFSA&reg; Form</v-btn
+                              >Start My FAFSA&reg; Form
+                                <v-icon
+                                  x-small
+                                  color="white"
+                                  class="pl-1 pb-1 align-self-end"
+                                  style=""
+                                >
+                                  fas fa-external-link-alt
+                                </v-icon>                                
+                              </v-btn
                             >
                           </p>
                         </v-card>
@@ -1833,17 +1880,17 @@
                   class="px-0 py-3 pa-sm-5"
                 >
                   <div>
-                  <h2 class="mb-3" v-if="netPrice">
+                  <h2 class="mb-3" v-if="medianEarnings">
                           Median Earnings&nbsp;<tooltip
                             definition="fos-median-earnings"
                             :isBranch="isBranch"
                           />
                         </h2>
                     <h2
-                      class="display-2 navy-text font-weight-bold"
-                      v-if="netPrice"
+                      class="display-2 navy-text font-weight-bold mb-3"
+                      v-if="medianEarnings"
                     >
-                      {{ netPrice | numeral("$0,0") }}
+                      {{ medianEarnings | numeral("$0,0") }}
                     </h2>   
                     <p>
                       The median earnings of former students who received federal financial aid at 10 years after entering the school.
@@ -1854,18 +1901,19 @@
                       @median-switch-click="handleMedianToggle"
                       @median-tab-change="handleMedianToggle"
                       :group-name="this.$options.filters.yearsText(groupName)"
+                      class="mb-7"
                     />          
                        <v-row>
                       <v-col cols="2"></v-col>
-                      <v-col cols="8">                                                     
+                      <v-col cols="8">
                     <horizontal-bar-median
-                      v-if="netPrice"
+                      v-if="medianEarnings"
                       :value="{
-                        label: this.$options.filters.numeral(netPrice,'$0,0'),
-                        value: netPrice,
+                        label: this.$options.filters.numeral(medianEarnings,'$0,0'),
+                        value: medianEarnings,
                       }"
                       :min="{
-                        label: '0$',
+                        label: '$0',
                         value: 0,
                         style: { height: '60px' },
                       }"
@@ -1875,8 +1923,8 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Median: ' + this.$options.filters.numeral(30000,'$0,0'),
-                        value: 30000,
+                        label: 'Median: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeMedianEarnings[groupName] : fakeMedianEarnings[4] ,'$0,0'),
+                        value: this.medianToggle === 'group' ? fakeMedianEarnings[groupName] : fakeMedianEarnings[4],
                         style: { height: '60px' },
                       }"
                       color="#00365e"
@@ -1898,7 +1946,7 @@
                       class="display-2 navy-text font-weight-bold"
                     >
                       {{ completionRate |  numeral("0%") }}
-                    </h2><span class="mb-2"> &nbsp; of students</span></div>
+                    </h2><span> &nbsp; of students</span></div>
                     <div v-else class="data-na mb-4">Data Not Available</div>
                     <h2 class="mb-3">
                           Earnings After Completing Field of Study&nbsp;<tooltip
@@ -2307,6 +2355,7 @@
 
 #school-completion-rate-bar {
   margin-bottom: 55px;
+  padding-top: 0px !important;
 }
 
 #school-salary-after-complete {
@@ -2441,9 +2490,6 @@ export default {
       fieldDataExtendedSalarySelect: "aid",
       fieldDataExtendedShowPrior: false,
       medianToggle: "group",
-      medianToggleCost: "group",
-      medianToggleGrad: "group",
-      medianToggleEarnings: "group",
       controlTab: 0,
     }
   },
@@ -2792,6 +2838,7 @@ export default {
     },
   },
   mounted() {
+    
     let self = this
     
     if (!location.search) {

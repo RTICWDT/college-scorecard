@@ -33,11 +33,17 @@
 .noCompareAllow {
   cursor: not-allowed !important;
 }
+
+.search-result-card {
+  h3 {
+    font-size:24px;
+  }
+}
 </style>
 
 <template>
   <v-card
-    class="search-result-card mx-auto elevation-4"
+    class="search-result-card mx-auto elevation-0"
     outlined
     :class="{ 'result-card-selected': isSelected }"
   >
@@ -76,7 +82,7 @@
       <h2 class="title mt-0 font-weight-bold">
         <a class="nameLink" :href="$url(schoolLink)">{{ schoolName }}</a>
       </h2>
-      <p class="body-2 mt-1">{{ undergraduates | separator }} undergrads</p>
+      <!--<p class="body-2 mt-1">{{ undergraduates | separator }} undergrads</p> -->
       <v-divider />
       <v-row>
         <v-col cols="12">
@@ -192,15 +198,9 @@ export default {
       } else {
         return (
           this.$options.filters.numeral(
-            this.earningsRange.min.earnings.highest["2_yr"]
-              .overall_median_earnings,
-            "$0a"
-          ) +
-          "-" +
-          this.$options.filters.numeral(
             this.earningsRange.max.earnings.highest["2_yr"]
               .overall_median_earnings,
-            "0a"
+            "$0a"
           )
         )
       }

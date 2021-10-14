@@ -89,7 +89,7 @@ header {
       li a {
         text-decoration: none;
         color: white !important;
-        font-size: 1.3rem;
+        font-size: 1rem;
         padding: 0 10px;
       }
 
@@ -149,6 +149,7 @@ header {
 </style>
 
 <template>
+<client-only>
   <div class="">
     <v-app-bar
       app
@@ -213,14 +214,14 @@ header {
                 bottom
                 offset-x="14"
                 offset-y="10"
-                :content="$store.state.institutions.length"
-                :value="$store.state.institutions.length"
+                :content="currentSchoolCount()"
+                :value="currentSchoolCount()"
                 color="#E3EEF6"
               >
                 <v-btn
                   small
                   fab
-                  color="#91C191"
+                  color="#83C38C"
                   @click="handleCompareIconClick"
                   aria-label="Show Compare Drawer"
                 >
@@ -236,8 +237,8 @@ header {
                 bottom
                 offset-x="14"
                 offset-y="10"
-                :content="$store.state.fos.length"
-                :value="$store.state.fos.length"
+                :content="currentFieldOfStudyCount()"
+                :value="currentFieldOfStudyCount()"
                 color="#E3EEF6"
               >
                 <v-btn
@@ -272,7 +273,7 @@ header {
     <!-- Mobile Navigation Drawer -->
     <v-navigation-drawer
       v-model="drawer"
-      v-if="drawer"
+      v-show="drawer"
       fixed
       temporary
       disable-resize-watcher
@@ -338,6 +339,7 @@ header {
       </v-list>
     </v-navigation-drawer>
   </div>
+  </client-only>
 </template>
 
 <script>
@@ -355,7 +357,7 @@ export default {
         this.compareFieldsOfStudyCount == 0 &&
         this.compareInstitutionsCount == 0
       )
-    },
+    },   
   },
   watch: {
     $route() {
@@ -394,6 +396,12 @@ export default {
         this.$router.push(urlString)
       }
     },
+    currentSchoolCount() {
+      return this.$store.state.institutions.length
+    },
+    currentFieldOfStudyCount() {
+      return this.$store.state.fos.length
+    },     
   },
   created() {
     this.setActiveLink()

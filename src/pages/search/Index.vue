@@ -160,7 +160,7 @@
                             v-on="on"
                             class="d-none d-sm-inline mr-1"
                           >
-                            <v-icon small class="mr-1">fas fa-sort</v-icon>
+                            <v-icon small class="mx-1">fas fa-sort</v-icon>
                             Sort
                           </v-btn>
                         </template>
@@ -238,6 +238,7 @@
                       :total-visible="7"
                       @input="handlePaginationInput"
                       class="pr-0 mr-0"
+                      circle
                     ></v-pagination>
                   </div>
                 </v-col>
@@ -524,7 +525,7 @@ export default {
         { type: "Name", field: "name:asc" },
         { type: "Annual Cost", field: "avg_net_price:asc" },
         { type: "Graduation Rate", field: "completion_rate:desc" },
-        { type: "Threshold Earnings", field: "completion_rate:desc" },
+        { type: "Percent Earning Above HS Grad", field: "completion_rate:asc" },
       ],
       shareUrl: null,
       displayToggle: "institutions",

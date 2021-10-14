@@ -1,6 +1,6 @@
 <template>
-  <span>
-    <v-btn @click.stop.prevent="showDialog = true" icon small>
+  <div class="icon-placement">
+    <v-btn @click.stop.prevent="showDialog = true" icon small class="align-start ml-n2">
       <v-icon x-small allow-overflow :color="color" dark
         >fas fa-info-circle</v-icon
       >
@@ -42,7 +42,7 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-  </span>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -55,6 +55,11 @@
   word-wrap: break-word;
   display: inline-block;
   width: 450px;
+}
+
+.icon-placement {
+  width:30px;
+  display:inline;
 }
 </style>
 
