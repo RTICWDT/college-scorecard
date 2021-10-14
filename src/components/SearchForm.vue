@@ -54,7 +54,7 @@
     <!--    </div>-->
 
     <div class="py-2 px-5">
-      <div class="" v-if="displayAllFilters">
+      <div class="" v-show="displayAllFilters">
         <p class="subhead-2">Search by Name</p>
         <name-autocomplete
           @school-name-selected="handleSchoolNameSelected"
@@ -75,7 +75,7 @@
         clearable
       />
 
-      <div class="d-flex align-center" v-if="utility.location == 'ZIP Code'">
+      <div class="d-flex align-center" v-show="utility.location == 'ZIP Code'">
         <v-text-field
           id="search-form-zip-text"
           v-model="input.zip"
@@ -96,7 +96,7 @@
         ></v-text-field>
       </div>
 
-      <div class="d-flex align-center" v-if="utility.location == 'Near Me'">
+      <div class="d-flex align-center" v-show="utility.location == 'Near Me'">
         <v-icon
           v-on="on"
           :color="locationButtonColor"
@@ -133,7 +133,7 @@
         class="mt-0 pt-0"
         color="secondary"
         deletable-chips
-        v-if="utility.location == 'State'"
+        v-show="utility.location == 'State'"
         aria-label="Select a state"
       ></v-select>
 
@@ -205,7 +205,7 @@
         ></check-range>
       </div>
 
-      <div v-if="!displayAllFilters" class="subhead-2">WIOA Programs&nbsp;<tooltip definition="wioa-participants"/></div>
+      <div v-show="!displayAllFilters" class="subhead-2">WIOA Programs&nbsp;<tooltip definition="wioa-participants"/></div>
       <v-checkbox
         id="search-form-dolflag"
         class="search-form-dolflag-cb my-0 py-0"
@@ -214,11 +214,11 @@
         value="true"
         color="secondary"
         hide-details
-        v-if="!displayAllFilters"
+        v-show="!displayAllFilters"
       ></v-checkbox>         
     </div>
 
-    <div v-if="displayAllFilters" class="px-5 extraFilters">
+    <div v-show="displayAllFilters" class="px-5 extraFilters">
       <check-range
         v-model="input.sat_math"
         id="search-form-sat-math"
@@ -430,7 +430,7 @@
       ></v-checkbox>        
     </div>
 
-    <div id="search-submit-container" class="pa-2 text-center" v-if="!autoSubmit">
+    <div id="search-submit-container" class="pa-2 text-center" v-show="!autoSubmit">
       <v-btn color="secondary" rounded @click="$emit('search-query',cleanInput)">Find Schools</v-btn>
     </div>
       <v-btn type='submit' v-else class="sr-only" color="secondary" rounded @click="$emit('search-query',cleanInput)">Find Schools</v-btn>
