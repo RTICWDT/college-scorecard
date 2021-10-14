@@ -23,7 +23,6 @@
       @focus="handleSelectFocus"
       @click="handleSelectFocus"
       @click:append="handleSelectFocus"
-      @blur="handleSelectBlur"
       @click:clear="handleInputClear"
       placeholder="Type to search"
       clearable

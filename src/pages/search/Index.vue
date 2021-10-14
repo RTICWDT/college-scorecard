@@ -114,7 +114,7 @@
             <!-- Search Result Info and controls -->
             <v-card
               class="mt-2 mb-4 py-4 px-4 elevaton-0 pageBar"
-              v-if="!isLoading"
+              v-show="!isLoading"
             >
               <v-row class="">
                 <v-col cols="12" sm="7" class="py-2 px-4">
@@ -228,7 +228,7 @@
                   cols="12"
                   sm="5"
                   class="py-1 px-1"
-                  v-if="!isLoading && results.schools.length > 0"
+                  v-show="!isLoading && results.schools.length > 0"
                 >
                   <div class="text-md-right justify-end">
                     <v-pagination
