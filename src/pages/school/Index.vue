@@ -527,7 +527,8 @@
                                 Include debt borrowed at any prior<br
                                   class="d-sm-none"
                                 />
-                                institution<tooltip definition="include-debt-prior-inst" class="pt-2" /> 
+                                institution&nbsp;
+                                <tooltip definition="include-debt-prior-inst" class="pt-2" /> 
                               </span>
                             </template>
                           </v-checkbox>
@@ -535,7 +536,7 @@
                         </v-col>
 
                         <!--Median Total-->
-                        <v-col cols="12" sm="12" md="4">
+                        <v-col cols="12" sm="12" md="4" class="pl-sm-1">
                           <h4 class="mb-2">
                             Median Total Debt
                             <br class="d-none d-md-block" />After

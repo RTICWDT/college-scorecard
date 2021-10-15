@@ -142,7 +142,7 @@
                           @click="clearSearchForm"
                           small
                           rounded
-                          class="d-none d-sm-inline"
+                          class="d-none d-sm-inline mr-1"
                         >
                           <span >
                             <v-icon small class='mr-1'>mdi-close-circle</v-icon>
