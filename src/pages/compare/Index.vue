@@ -97,6 +97,16 @@
               <!--Institution Summary Metrics-->
               <v-row>
                 <v-col cols="12" class="px-sm-5 pt-0">
+                    <median-toggle
+                      :display-toggle="medianToggle"
+                      @median-switch-click="handleMedianToggle"
+                      @median-tab-change="handleMedianToggle"
+                      group-name="School Type"
+                      label-prefix="Median for "
+                      :tab-style="{
+                        width: '30%',
+                      }"
+                    />                    
                   <compare-section
                     :schools="schools"
                     title="Average Annual Cost"
@@ -106,11 +116,21 @@
                     :config="{
                       computedField: 'netPrice',
                       color: '#00365e',
-                      max: 150000,
-                      type: 'currency',
-                      chart: 'HorizontalBar',
+                      min: {
+                        label: '$0',
+                        value: 0,
+                        style: { height: '60px' },
+                      },                      
+                      max: {
+                        label: '$100,000',
+                        value: 100000,
+                        style: { height: '60px' },
+                      },                
+                      type: 'average-annual-cost',
+                      chart: 'HorizontalBarMedian',
+                      medianToggle: medianToggle
                     }"
-                    ><p class="my-n3">
+                    ><p class="my-3">
                       Cost includes tuition, living costs, books and supplies,
                       and fees minus the average grants and scholarships for
                       federal financial aid recipients.
@@ -126,9 +146,19 @@
                     :config="{
                       computedField: 'completionRate',
                       color: '#00365e',
-                      max: 100,
-                      type: 'percent',
-                      chart: 'HorizontalBar',
+                      min: {
+                        label: '0%',
+                        value: 0,
+                        style: { height: '60px' },
+                      },                      
+                      max: {
+                        label: '100%',
+                        value: 100,
+                        style: { height: '60px' },
+                      },                
+                      type: 'graduation-rate',
+                      chart: 'HorizontalBarMedian',
+                      medianToggle: medianToggle
                     }"
                   />
 
@@ -136,14 +166,24 @@
                     :schools="schools"
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
-                    title="Salary After Completing"
+                    title="Median Earnings"
                     definition="fos-median-earnings"
                     :config="{
-                      computedField: 'earningsRange',
+                      computedField: 'medianEarnings',
                       color: '#00365e',
-                      chart: 'MultiRange',
-                      multiRangeVariable:
-                        'earnings.highest.2_yr.overall_median_earnings',
+                      min: {
+                        label: '$0',
+                        value: 0,
+                        style: { height: '60px' },
+                      },                      
+                      max: {
+                        label: '$100,000',
+                        value: 100000,
+                        style: { height: '60px' },
+                      },                
+                      type: 'median-earnings',
+                      chart: 'HorizontalBarMedian',
+                      medianToggle: medianToggle
                     }"
                   />
                 </v-col>
@@ -740,11 +780,21 @@
                     :config="{
                       computedField: 'netPrice',
                       color: '#00365e',
-                      max: 150000,
-                      type: 'currency',
-                      chart: 'HorizontalBar',
+                      min: {
+                        label: '$0',
+                        value: 0,
+                        style: { height: '60px' },
+                      },                      
+                      max: {
+                        label: '$100,000',
+                        value: 100000,
+                        style: { height: '60px' },
+                      },                
+                      type: 'average-annual-cost',
+                      chart: 'HorizontalBarMedian',
+                      medianToggle: medianToggle
                     }"
-                    ><p>
+                    ><p class="my-3">
                       Cost includes tuition, living costs, books and supplies,
                       and fees minus the average grants and scholarships for
                       federal financial aid recipients.
@@ -806,9 +856,19 @@
                     :config="{
                       computedField: 'completionRate',
                       color: '#00365e',
-                      max: 100,
-                      type: 'percent',
-                      chart: 'HorizontalBar',
+                      min: {
+                        label: '0%',
+                        value: 0,
+                        style: { height: '60px' },
+                      },                      
+                      max: {
+                        label: '100%',
+                        value: 100,
+                        style: { height: '60px' },
+                      },                
+                      type: 'graduation-rate',
+                      chart: 'HorizontalBarMedian',
+                      medianToggle: medianToggle
                     }"
                   />
                   <compare-section
@@ -835,11 +895,26 @@
                       color: '#00365e',
                       chart: 'Sankey',
                       currentSankey: currentSankey,
+                      showPellOnly: showPellOnly
                     }"
                   >
+                  <template>
+                      <v-checkbox
+                        v-model="showPellOnly"
+                        label="Show Pell Grant Recipients Only"
+                        color="secondary"
+                        class="mt-0"
+                      >
+                        <template v-slot:label>
+                          <span>
+                            Show Pell Grant Recipients Only&nbsp;
+                          </span>
+                        </template>
+                      </v-checkbox>
                     <sankey-buttons
                       v-on:update-sankey="currentSankey = $event"
                     />
+                    </template>
                   </compare-section>
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -853,6 +928,7 @@
                 </v-expansion-panel-header>
 
                 <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
+                  
                   <v-select
                     class="mb-5 pt-0"
                     hide-details
@@ -971,26 +1047,29 @@
                       color: '#00365e',
                       chart: 'RepaymentRate',
                       showGradOnly: showGradOnly,
+                      repaymentStatus: currentRepaymentStatus
                     }"
                   >
-                    <template>
-                      <span v-if="showGradOnly">
-                        Percentage of borrowers in each category 2 years after
-                        entering repayment. For category definitions, please see
-                        <a
-                          v-bind:href="
-                            '/data/glossary/#repayment-rate-completers'
-                          "
-                          >the glossary</a
-                        >.
-                      </span>
-                      <span v-else>
-                        Percentage of borrowers in each category 2 years after
-                        entering repayment. For category definitions, please see
-                        <a v-bind:href="'/data/glossary/#repayment-rate'"
-                          >the glossary</a
-                        >.
-                      </span>
+                  <template>
+                        <span v-if="showGradOnly">
+                          Percentage of borrowers in each category 2 years after
+                          entering repayment. For category definitions, please
+                          see
+                          <a
+                            v-bind:href="
+                              $url('/data/glossary/#repayment-rate-completers')
+                            "
+                            >the glossary</a
+                          >.
+                        </span>
+                        <span v-else>
+                          Percentage of borrowers in each category 2 years after
+                          entering repayment. For category definitions, please
+                          see
+                          <a v-bind:href="$url('/data/glossary/#repayment-rate')"
+                            >the glossary</a
+                          >.
+                        </span>                    
                       <v-checkbox
                         class="my-0 mb-2"
                         v-model="showGradOnly"
@@ -1002,6 +1081,26 @@
                           </span>
                         </template>
                       </v-checkbox>
+                    <p class="overline mb-1 mt-3">Repayment Status</p>
+                    <v-select
+                      :items="[
+                        { label: 'Making Progress', value: 'makingprogress' },
+                        { label: 'Not Making Progress', value: 'noprogress' },
+                        { label: 'Deferment', value: 'deferment' },
+                        { label: 'Paid in Full', value: 'fullypaid' },
+                        { label: 'Forbearance', value: 'forbearance' },
+                        { label: 'Defaulted', value: 'default' },
+                        { label: 'Delinquent', value: 'delinquent' },
+                        { label: 'Discharged', value: 'discharge' },                        
+                      ]"
+                      item-text="label"
+                      item-value="value"
+                      label="Repayment Status"
+                      v-model="currentRepaymentStatus"
+                      color="secondary"
+                      solo
+                    ></v-select>
+
                     </template>
                   </compare-section>
                 </v-expansion-panel-content>
@@ -1013,21 +1112,31 @@
                   @click="
                     trackAccordion('Salary after Completing by Field of Study')
                   "
-                  >Salary after Completing by Field of
-                  Study</v-expansion-panel-header
+                  >Typical Earnings</v-expansion-panel-header
                 >
                 <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
                   <compare-section
                     :schools="schools"
-                    title="Salary Ranges by Field of Study"
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
+                    title="Median Earnings"
+                    definition="fos-median-earnings"
                     :config="{
-                      computedField: 'earningsRange',
+                      computedField: 'medianEarnings',
                       color: '#00365e',
-                      chart: 'MultiRange',
-                      multiRangeVariable:
-                        'earnings.highest.2_yr.overall_median_earnings',
+                      min: {
+                        label: '$0',
+                        value: 0,
+                        style: { height: '60px' },
+                      },                      
+                      max: {
+                        label: '$100,000',
+                        value: 100000,
+                        style: { height: '60px' },
+                      },                
+                      type: 'median-earnings',
+                      chart: 'HorizontalBarMedian',
+                      medianToggle: medianToggle
                     }"
                   />
                 </v-expansion-panel-content>
@@ -1232,6 +1341,12 @@
 .compare-fos-slider-gold {
   background-color: $fos-accent-color;
 }
+
+#showPellOnly {
+  .v-messages {
+    display: none;
+  }
+}
 </style>
 
 <script>
@@ -1240,6 +1355,7 @@ import Share from "~/components/Share.vue"
 import PayingForCollege from "~/components/PayingForCollege.vue"
 import CompareDrawer from "~/components/CompareDrawer.vue"
 import HorizontalBar from "~/components/HorizontalBar.vue"
+import HorizontalBarMedian from "~/components/HorizontalBarMedian.vue"
 import CompareSection from "~/components/compare/Section.vue"
 import CompareBlock from "~/components/compare/Block.vue"
 import { compare } from "~/js/mixins.js"
@@ -1260,6 +1376,7 @@ import {
 } from "~/js/commonFormats"
 import ContextToggle from "~/components/ContextToggle.vue"
 import { mapGetters } from "vuex"
+import MedianToggle from "~/components/MedianToggle.vue"
 
 export default {
   mixins: [ComplexFields, AnalyticsEvents, Router],
@@ -1275,6 +1392,7 @@ export default {
     "search-form": SearchForm,
     "name-autocomplete": NameAutocomplete,
     "context-toggle": ContextToggle,
+    "median-toggle": MedianToggle,
   },
   data() {
     return {
@@ -1287,6 +1405,7 @@ export default {
       },
       currentRaceEthnicity: "American Indian/Alaska Native",
       currentIncomeFilter: "0-30000",
+      currentRepaymentStatus: "makingprogress",
       currentSankey: {
         enroll: "enroll_both",
         study: "study_both",
@@ -1314,11 +1433,14 @@ export default {
       fosFinancialCheckboxIncludePrior: false,
       aidShowMedianDebtWithPrior: false,
       showGradOnly: false,
+      showPellOnly: false,
       aidLoanSelect: "fed",
       aidLoanSelectItems: [
         { text: "Federal Student Loans", value: "fed" },
         { text: "Parent Plus Loans", value: "plus" },
       ],
+      medianToggle: "group",
+      controlTabMedian: 0,
       controlTab: 0,
     }
   },
@@ -1734,6 +1856,10 @@ export default {
 
       return itemsToQuery
     },
+    handleMedianToggle(toggleValue) {
+      this.controlTabMedian = toggleValue
+      this.medianToggle = toggleValue === 0 ? "group" : "all"
+    },    
   },
   mounted() {
     // set toggle from URL
