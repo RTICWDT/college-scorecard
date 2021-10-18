@@ -343,7 +343,13 @@
                     target="_blank"
                     @click="trackOutboundLink($event)"
                   >Start Your FAFSA&reg; Application
- 
+                    <v-icon
+                      x-small
+                      color="white"
+                      class="pl-1 pb-1"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>
                   </v-btn>
                 </p>
 
