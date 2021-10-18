@@ -4,12 +4,12 @@
       <range
         :lower="{ value: 0, label: '0' }"
         :upper="{ value: value.value, label: value.label }"
-        :min=min
-        :max=max
+        :min="min"
+        :max="max"
         :upperTipStyleOverride="upperTipStyleOverride"
         :addExtraPadding="addExtraPadding"
         :rangeChartStyle="rangeChartStyle"
-        :median=median        
+        :median="median"
       ></range>
     </div>
     <div v-else class="data-na">
