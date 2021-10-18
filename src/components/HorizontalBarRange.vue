@@ -75,7 +75,7 @@
 @import "~/sass/_variables.scss";
 .range-container {
   overflow: visible;
-  height: 140px;
+  height: 100px;
   padding-top: 20px;
   padding-right: 0px;
 }
@@ -353,7 +353,6 @@ export default {
     },
     styleLabel(obj, fixLabels = false) {
       let newObj = { ...obj }
-      // console.log(newObj);
       newObj.styles = {}
       newObj.styles.display = newObj.label ? "block" : "none"
       let left = this.percent(newObj.value)
@@ -367,7 +366,6 @@ export default {
     },
     styleValueLabel(obj, fixLabels = false) {
       let newObj = { ...obj }
-      // console.log(newObj);
       newObj.styles = {}
       newObj.styles.display = newObj.label ? "block" : "none"
       let left = this.percent(newObj.value)
@@ -378,17 +376,14 @@ export default {
       }
       newObj.styles.left = left + "%"
 
-
-      let right = this.percent(
-        this._min.value + this._max.value - this._upper.value
-      )
-
-      if (right < 20 && this.addExtraPadding) {
-        //this.extraPad["padding-right"] = "60px"
+      if (left > 80) {
         let s = left.replace(/[0-9]+%\s?/g, '');
-        newObj.styles.left = (s - 10) + '%';
+        if (obj.label.includes('$'))
+          newObj.styles.left = (s - 25) + '%';
+        else
+          newObj.styles.left = (s - 12) + '%';
+        newObj.styles.color = '#ffffff'
       }
-
 
       return newObj
     }, 

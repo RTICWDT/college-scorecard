@@ -61,6 +61,7 @@
               </context-toggle>
             </div>
 
+
             <!--Loader-->
             <div v-show="loading" class="show-loading ma-4">
               <div class="pa-5">
@@ -71,14 +72,15 @@
               </div>
             </div>
 
+            
+
             <!-- Institution Top Summary-->
             <div
-              v-show="showResource === 'institutions' && !loading"
-              class="show-loaded mx-5"
+              class="mx-5"
               id="school"
             >
               <!-- Institution Chips -->
-              <div class="compare-institution-chip-container py-5 mb-10">
+              <div v-show="showResource === 'institutions' && !loading" class="compare-institution-chip-container py-5 mb-10 show-loaded">
                 <v-chip-group column>
                   <v-chip
                     class="pa-4 ma-2"
@@ -106,6 +108,7 @@
                       :tab-style="{
                         width: '30%',
                       }"
+                      v-if="showResource === 'institutions'  && !loading"
                     />                    
                   <compare-section
                     :schools="schools"
@@ -130,7 +133,9 @@
                       chart: 'HorizontalBarMedian',
                       medianToggle: medianToggle
                     }"
-                    ><p class="my-3">
+                    class="mt-5"
+                    v-show="showResource === 'institutions' && !loading"
+                    ><p class="my-3" v-show="showResource === 'institutions' && !loading">
                       Cost includes tuition, living costs, books and supplies,
                       and fees minus the average grants and scholarships for
                       federal financial aid recipients.
@@ -159,7 +164,9 @@
                       type: 'graduation-rate',
                       chart: 'HorizontalBarMedian',
                       medianToggle: medianToggle
+                      
                     }"
+                    v-show="showResource === 'institutions' && !loading"
                   />
 
                   <compare-section
@@ -185,6 +192,7 @@
                       chart: 'HorizontalBarMedian',
                       medianToggle: medianToggle
                     }"
+                    v-show="showResource === 'institutions' && !loading"
                   />
                 </v-col>
               </v-row>
@@ -771,6 +779,18 @@
                   >Costs</v-expansion-panel-header
                 >
                 <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
+                    <median-toggle
+                      :display-toggle="medianToggle"
+                      @median-switch-click="handleMedianToggle"
+                      @median-tab-change="handleMedianToggle"
+                      group-name="School Type"
+                      label-prefix="Median for "
+                      :tab-style="{
+                        width: '30%',
+                      }"
+                      v-show="showResource === 'institutions'"
+                    />    
+
                   <compare-section
                     :schools="schools"
                     title="Average Annual Cost"
@@ -794,6 +814,7 @@
                       chart: 'HorizontalBarMedian',
                       medianToggle: medianToggle
                     }"
+                    class="mt-5"
                     ><p class="my-3">
                       Cost includes tuition, living costs, books and supplies,
                       and fees minus the average grants and scholarships for
@@ -847,6 +868,18 @@
                   >Graduation & Retention</v-expansion-panel-header
                 >
                 <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
+                    <median-toggle
+                      :display-toggle="medianToggle"
+                      @median-switch-click="handleMedianToggle"
+                      @median-tab-change="handleMedianToggle"
+                      group-name="School Type"
+                      label-prefix="Median for "
+                      :tab-style="{
+                        width: '30%',
+                      }"
+                      v-show="showResource === 'institutions'"
+                    />    
+
                   <compare-section
                     :schools="schools"
                     title="Graduation Rate"
@@ -870,6 +903,7 @@
                       chart: 'HorizontalBarMedian',
                       medianToggle: medianToggle
                     }"
+                    class="mt-5"
                   />
                   <compare-section
                     :schools="schools"
@@ -1115,6 +1149,18 @@
                   >Typical Earnings</v-expansion-panel-header
                 >
                 <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
+                    <median-toggle
+                      :display-toggle="medianToggle"
+                      @median-switch-click="handleMedianToggle"
+                      @median-tab-change="handleMedianToggle"
+                      group-name="School Type"
+                      label-prefix="Median for "
+                      :tab-style="{
+                        width: '30%',
+                      }"
+                      v-show="showResource === 'institutions'"
+                    />    
+
                   <compare-section
                     :schools="schools"
                     :currentHighlight="currentHighlight"
@@ -1138,6 +1184,7 @@
                       chart: 'HorizontalBarMedian',
                       medianToggle: medianToggle
                     }"
+                    class="mt-5"
                   />
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -1495,7 +1542,7 @@ export default {
       }
 
       // Return Composite URL
-      console.log(this.$url(compareBaseURL + this.prepareQueryString(paramArray)))
+      //console.log(this.$url(compareBaseURL + this.prepareQueryString(paramArray)))
       return this.$url(compareBaseURL + this.prepareQueryString(paramArray))
     },
     referrerLink() {
@@ -1710,6 +1757,7 @@ export default {
           })
 
           this.loading = false
+
         })
         .catch((responses) => {
           // TODO - How do we want to handle errors?
@@ -1875,6 +1923,9 @@ export default {
       this.controlTab = 0
       this.queryInstitutions()
     }
+
+    this.medianToggle = "group";
+    this.controlTabMedian = 0;
 
     // Did this initiate as a shared comparision
     this.isSharedComparison = this.showShareUpdate

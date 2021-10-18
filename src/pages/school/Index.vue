@@ -135,7 +135,7 @@
                       :display-toggle="medianToggle"
                       @median-switch-click="handleMedianToggle"
                       @median-tab-change="handleMedianToggle"
-                      :group-name="this.$options.filters.yearsText(groupName)"
+                      :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
                       label-prefix="Median for "
                       :tab-style="{
                         width: '30%',
@@ -246,6 +246,7 @@
                       :label-font-size="24"
                       :labels="true"
                       class="pt-3"
+                      style="height:140px"
                     ></horizontal-bar-median>
                     <div class="data-na" v-else>Data Not Available</div>                    
                   </div>
@@ -304,6 +305,7 @@
                       :label-font-size="24"
                       :labels="true"
                       class="pt-3"
+                      style="height:140px"                      
                     ></horizontal-bar-median>
                     <div class="data-na" v-else>Data Not Available</div>
                   </div>
@@ -870,7 +872,7 @@
                           :control-tab="controlTab"
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
-                          :group-name="this.$options.filters.yearsText(groupName)"
+                          :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
                           class="mb-7"
                         />  
                       <v-row>
@@ -950,7 +952,7 @@
                           :control-tab="controlTab"
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
-                          :group-name="this.$options.filters.yearsText(groupName)"
+                          :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
                           class="mb-7"
                         />  
                       <v-row>
@@ -1093,7 +1095,7 @@
                           :control-tab="controlTab"
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
-                          :group-name="this.$options.filters.yearsText(groupName)"
+                          :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
                           class="mb-3"
                         />
                        <v-row>
@@ -1900,7 +1902,7 @@
                       :control-tab="controlTab"
                       @median-switch-click="handleMedianToggle"
                       @median-tab-change="handleMedianToggle"
-                      :group-name="this.$options.filters.yearsText(groupName)"
+                      :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
                       class="mb-7"
                     />          
                        <v-row>
