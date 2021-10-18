@@ -1,11 +1,11 @@
 <template>
   <div>
     <h4 class="overline my-3">{{ block_title }}</h4>
-     <em v-show="config.medianToggle && config.type == 'average-annual-cost'" style="font-size:14pt;">Median for {{config.medianToggle === 'group' ? block_title : "All Schools"}} : {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0')}}</em>
-     <em v-show="config.medianToggle && config.type == 'median-earnings'" style="font-size:14pt;">Median for {{config.medianToggle === 'group' ? block_title : "All Schools"}} : {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</em>
-     <em v-show="config.medianToggle && config.type == 'graduation-rate'" style="font-size:14pt;">Median for {{config.medianToggle === 'group' ? block_title : "All Schools"}} : {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</em>     
+     <em v-if="config && config.medianToggle && config.type == 'average-annual-cost'" style="font-size:14pt;">Median for {{config.medianToggle === 'group' ? block_title : "All Schools"}} : {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0')}}</em>
+     <em v-if="config && config.medianToggle && config.type == 'median-earnings'" style="font-size:14pt;">Median for {{config.medianToggle === 'group' ? block_title : "All Schools"}} : {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</em>
+     <em v-if="config && config.medianToggle && config.type == 'graduation-rate'" style="font-size:14pt;">Median for {{config.medianToggle === 'group' ? block_title : "All Schools"}} : {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</em>     
 
-      <div v-if="config.chart == 'RepaymentRate'">
+      <div v-if="config && config.chart == 'RepaymentRate'">
       <v-simple-table class="school-table">
         <caption class="sr-only">
           Average cost by family income

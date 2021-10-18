@@ -116,7 +116,6 @@
       font-weight: 400;
       position: absolute;
       top: 0px;
-      width: $label-width;
       cursor: pointer;
     }
 
@@ -187,7 +186,7 @@
       border-left: 1px solid #000;
       span {
         top: 40px !important;
-
+              width: $label-width;
       }
       span:not(.arrow-left) {
         //margin-bottom: $bar-width + $arrow-size + 10;
@@ -295,6 +294,7 @@ export default {
   data() {
     return {
       bar_styles: { left: 0, right: 0 },
+      label_styles: { left: 0, right: 0 },
       extraPad: {
         "padding-right": 0,
       },
@@ -320,7 +320,7 @@ export default {
       return this.styleLabel(this.median)
     },
     _upper() {
-      // return this.styleLabel(this.upper);
+      return this.styleLabel(this.upper);
       let styleLabel = this.styleLabel(this.upper, false)
       styleLabel.styles = {
         ...styleLabel.styles,
@@ -340,7 +340,9 @@ export default {
       this.bar_styles.right = right + "%"
 
       if (right < 20 && this.addExtraPadding) {
-        this.extraPad["padding-right"] = "60px"
+        //this.extraPad["padding-right"] = "60px"
+        var s = this._upper.styles.left.replace(/[0-9]+%\s?/g, '');
+        this._upper.styles.left = (s - 10) + '%';
       }
     },
     scale(v) {

@@ -39,7 +39,14 @@
         label: 'Median',
         value: config.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] * 100 : fakeGraduationRate[4] * 100,
         style: { height: '60px' },
-      }"                      
+      }"         
+      :upperStyleOverride="
+        checkUpperStyle(
+          completionRate,
+          100,
+          {}
+        )
+      "                          
       color="#00365e"
       :height="500"
       :y-bar-thickness="50"
@@ -62,7 +69,14 @@
       }"
       :upperTipStyleOverride="{
         display: 'none',
-      }"                      
+      }" 
+      :upperStyleOverride="
+        checkUpperStyle(
+          netPrice,
+          100000,
+          {}
+        )
+      "                        
       color="#00365e"
       :height="500"
       :y-bar-thickness="50"
