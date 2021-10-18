@@ -507,14 +507,6 @@
     text-align: left;
     padding: 0rem 1rem;
   }
-  &.apprenticeships
-    h2 {
-    /*background-color: #436692;*/
-  }
-  &.paying
-    h2 {
-    /*background-color: #436692;*/
-  }
 }
 
 .sublink {

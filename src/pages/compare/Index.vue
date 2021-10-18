@@ -106,7 +106,7 @@
                       group-name="School Type"
                       label-prefix="Median for "
                       :tab-style="{
-                        width: '30%',
+                        width: '32%',
                       }"
                       v-if="showResource === 'institutions'  && !loading"
                     />                    
@@ -786,7 +786,7 @@
                       group-name="School Type"
                       label-prefix="Median for "
                       :tab-style="{
-                        width: '30%',
+                        width: '32%',
                       }"
                       v-show="showResource === 'institutions'"
                     />    
@@ -875,7 +875,7 @@
                       group-name="School Type"
                       label-prefix="Median for "
                       :tab-style="{
-                        width: '30%',
+                        width: '32%',
                       }"
                       v-show="showResource === 'institutions'"
                     />    
@@ -1156,7 +1156,7 @@
                       group-name="School Type"
                       label-prefix="Median for "
                       :tab-style="{
-                        width: '30%',
+                        width: '32%',
                       }"
                       v-show="showResource === 'institutions'"
                     />    

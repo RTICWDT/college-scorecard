@@ -109,7 +109,7 @@ export default {
       type: Object,
       default() {
         return {
-          width: "60%",
+          width: "64%",
         }
       },
     },
@@ -117,7 +117,7 @@ export default {
       type: Object,
       default() {
         return {
-          width: "25%",
+          width: "32%",
         }
       },
     },

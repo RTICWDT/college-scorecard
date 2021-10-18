@@ -138,7 +138,7 @@
                       :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
                       label-prefix="Median for "
                       :tab-style="{
-                        width: '30%',
+                        width: '32%',
                       }"
                     />                  
                 </v-col>                 
@@ -441,7 +441,7 @@
                         <!--Median Earnings-->
                         <v-col cols="12" sm="12" md="5">
                           <h4 class="mb-2">
-                            Median Earnings&nbsp
+                            Median Earnings&nbsp;
                             <tooltip definition="fos-median-earnings" />
                           </h4>
 
@@ -476,7 +476,7 @@
                         <!--Monthly Earnings-->
                         <v-col cols="12" sm="12" md="4" class="pl-sm-1">
                           <h4 class="mb-2">
-                            Monthly Earnings&nbsp
+                            Monthly Earnings&nbsp;
                             <tooltip definition="fos-monthly-earnings" />
                           </h4>
 
@@ -542,7 +542,7 @@
                           <h4 class="mb-2">
                             Median Total Debt
                             <br class="d-none d-md-block" />After
-                            Graduation&nbsp
+                            Graduation&nbsp;
                             <tooltip
                               v-if="!fosShowDebtAtPrior"
                               definition="fos-median-debt"
@@ -605,7 +605,7 @@
                         <!--Monthly Loan-->
                         <v-col cols="12" sm="12" md="3" class="pl-sm-1">
                           <h4 class="mb-2">
-                            Monthly Loan Payment&nbsp
+                            Monthly Loan Payment&nbsp;
                             <tooltip
                               v-if="!fosShowDebtAtPrior"
                               definition="fos-monthly-debt-payment"
@@ -681,9 +681,7 @@
                       Out of {{ fosUndergradCount | numeral }} undergraduate
                       {{ fosUndergradCount == 1 ? "field" : "fields" }} of study
                       at {{ schoolName }}, the
-                      {{
-                        fieldsOfStudy.length < 10 ? fieldsOfStudy.length : 10
-                      }}
+                      {{ fieldsOfStudy.length < 10 ? fieldsOfStudy.length : 10 }}
                       {{ hoistGroupText }} are shown below. ({{
                         hoistCount
                       }}
@@ -1836,7 +1834,7 @@
                           <p>
                             Submit a
                             <em>Free Application for Federal Student Aid</em>
-                            (FAFSA&reg) form. You may be eligible to receive
+                            (FAFSA&reg;) form. You may be eligible to receive
                             federal grants or loans.
                           </p>
                           <p class="text-center">
