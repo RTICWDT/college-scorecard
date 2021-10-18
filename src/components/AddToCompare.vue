@@ -1,7 +1,7 @@
 <template>
   <div>  
     <v-btn
-      :text="!isSelected"
+      :text="!isSelected && !isFull"
       small
       class="d-none d-sm-inline"
       color="white"
@@ -12,12 +12,15 @@
         })
       "
     >
-      <v-icon x-small class="mr-2" :color="isSelected ? '#0075B2' : 'white'"
+      <v-icon x-small class="mr-2" :color="isSelected || isFull ? '#0075B2' : 'white'"
         >fa fa-check-circle</v-icon
       >
       <div v-if="isSelected">
         Added to Compare
       </div>
+      <div v-else-if="isFull">
+        Maximum of 10 Schools Reached
+      </div>        
       <div v-else>Add to Compare School</div>
     </v-btn>
 
@@ -39,6 +42,9 @@
       <div class="sr-only" v-if="isSelected">
         Added to Compare
       </div>
+      <div class="sr-only" v-else-if="isFull">
+        Maximum of 10 Schools Reached
+      </div>      
       <div class="sr-only" v-else>Add to Compare School</div>
     </v-btn>
   </div>
@@ -55,6 +61,10 @@ export default {
         ) != undefined
       )
     },
+    isFull() {
+      return this.$store.state.institutions.length >= 10
+    }
   },
+
 }
 </script>

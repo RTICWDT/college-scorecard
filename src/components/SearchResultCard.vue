@@ -176,15 +176,15 @@ export default {
       }
     },
     compareHoverCountText() {
-      if (this.schoolsCount > 9){
-        return "Maximum of 10 schools reached";
+      if (this.$store.state.institutions.length > 9){
+        return "Maximum of 10 Schools reached";
       }
       else{
         return "Add School to compare";
       }
     },
     compareSchoolsLength() {
-      return this.schoolsCount;
+      return this.$store.state.institutions.length;
     },    
     displayEarn() {
       /*if (!this.earningsRange) {

@@ -689,7 +689,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'fullTimeEnrollment',
-                      color: '#00365e',
+                      color: '#1874DC',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -714,7 +714,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'socioEconomicDiversity',
-                      color: '#00365e',
+                      color: '#1874DC',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -729,7 +729,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'raceEthnicity',
-                      color: '#00365e',
+                      color: '#1874DC',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -829,7 +829,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'income',
-                      color: '#00365e',
+                      color: '#1874DC',
                       max: 60000,
                       type: 'currency',
                       chart: 'HorizontalBar',
@@ -913,7 +913,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'retentionRate',
-                      color: '#00365e',
+                      color: '#1874DC',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -926,7 +926,7 @@
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
                     :config="{
-                      color: '#00365e',
+                      color: '#1874DC',
                       chart: 'Sankey',
                       currentSankey: currentSankey,
                       showPellOnly: showPellOnly
@@ -979,7 +979,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'studentsReceivingLoans',
-                      color: '#00365e',
+                      color: '#1874DC',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -1246,7 +1246,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'acceptanceRate',
-                      color: '#00365e',
+                      color: '#1874DC',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',

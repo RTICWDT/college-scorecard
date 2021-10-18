@@ -305,7 +305,7 @@ export default {
       return (v - this.min.value) / (this.max.value - this.min.value)
     },
     percent(v) {
-      return (this.scale(v) * 100).toFixed(1)
+      return (this.scale(v) * 100).toFixed(2)
     },
     styleLabel(obj, fixLabels = false) {
       let newObj = { ...obj }

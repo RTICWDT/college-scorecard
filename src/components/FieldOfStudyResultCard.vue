@@ -287,7 +287,7 @@ export default {
       })
     },
     totalFieldOfStudyCount() {
-      return this.allFieldsOfStudy.length
+      return this.$store.state.fos.length
       // return this.categorizedFieldsOfStudy.reduce((totalCount, fieldCategory) => {
       //   totalCount += fieldCategory.items.length;
       // },0);

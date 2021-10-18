@@ -2047,7 +2047,7 @@
                           :value="Math.round(item.value * 100)"
                           :min="0"
                           :max="100"
-                          color="#1874DC"
+                          color="#00365e"
                           :height="25"
                         ></horizontal-bar>
                         <strong>{{ item.value | numeral("0.%") }}</strong>
