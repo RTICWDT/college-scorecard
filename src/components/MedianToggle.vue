@@ -19,7 +19,7 @@
     <v-tab :id="tabID('group', controlTab)" :style="tabStyle">
       <slot name="tab-group">
         <span class="compare-tab-title">
-          {{ labelPrefix }}{{groupName}} Schools
+          {{ labelPrefix }}{{groupName}}
         </span>
       </slot>
     </v-tab>

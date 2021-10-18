@@ -75,7 +75,7 @@
 @import "~/sass/_variables.scss";
 .range-container {
   overflow: visible;
-  height: 140px;
+  height: 100px;
   padding-top: 20px;
   padding-right: 0px;
 }
@@ -320,8 +320,8 @@ export default {
       return this.styleLabel(this.median)
     },
     _upper() {
-      return this.styleLabel(this.upper);
-      let styleLabel = this.styleLabel(this.upper, false)
+      //return this.styleLabel(this.upper);
+      let styleLabel = this.styleValueLabel(this.upper, false)
       styleLabel.styles = {
         ...styleLabel.styles,
         ...this.upper.styles,
@@ -353,7 +353,6 @@ export default {
     },
     styleLabel(obj, fixLabels = false) {
       let newObj = { ...obj }
-      // console.log(newObj);
       newObj.styles = {}
       newObj.styles.display = newObj.label ? "block" : "none"
       let left = this.percent(newObj.value)
@@ -365,6 +364,29 @@ export default {
       newObj.styles.left = left + "%"
       return newObj
     },
+    styleValueLabel(obj, fixLabels = false) {
+      let newObj = { ...obj }
+      newObj.styles = {}
+      newObj.styles.display = newObj.label ? "block" : "none"
+      let left = this.percent(newObj.value)
+      if (left > 100) {
+        left = 100
+        newObj.label = ">" + this._max.label
+        newObj.value = this._max.value
+      }
+      newObj.styles.left = left + "%"
+
+      if (left > 80) {
+        let s = left.replace(/[0-9]+%\s?/g, '');
+        if (obj.label.includes('$'))
+          newObj.styles.left = (s - 25) + '%';
+        else
+          newObj.styles.left = (s - 12) + '%';
+        newObj.styles.color = '#ffffff'
+      }
+
+      return newObj
+    }, 
   },
 
   mounted() {

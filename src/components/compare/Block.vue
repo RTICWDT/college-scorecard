@@ -1,9 +1,9 @@
 <template>
   <div>
     <h4 class="overline my-3">{{ block_title }}</h4>
-     <em v-if="config && config.medianToggle && config.type == 'average-annual-cost'" style="font-size:14pt;">Median for {{config.medianToggle === 'group' ? block_title : "All Schools"}} : {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0')}}</em>
-     <em v-if="config && config.medianToggle && config.type == 'median-earnings'" style="font-size:14pt;">Median for {{config.medianToggle === 'group' ? block_title : "All Schools"}} : {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</em>
-     <em v-if="config && config.medianToggle && config.type == 'graduation-rate'" style="font-size:14pt;">Median for {{config.medianToggle === 'group' ? block_title : "All Schools"}} : {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</em>     
+     <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'average-annual-cost'" style="">Median for {{config.medianToggle === 'group' ? block_title : "All Schools"}} : {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0')}}</p>
+     <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'median-earnings'" style="font-size:14pt;text-align:right !important;">Median for {{config.medianToggle === 'group' ? block_title : "All Schools"}} : {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</p>
+     <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'graduation-rate'" style="font-size:14pt;text-align:right !important;">Median for {{config.medianToggle === 'group' ? block_title : "All Schools"}} : {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</p>     
 
       <div v-if="config && config.chart == 'RepaymentRate'">
       <v-simple-table class="school-table">
@@ -108,6 +108,12 @@
 
 .compare-fos-metric-container {
   margin: 0.8rem 0;
+}
+
+.median-value-text {
+  font-size:12pt;
+  text-align:right;
+  font-style:italic;
 }
 </style>
 

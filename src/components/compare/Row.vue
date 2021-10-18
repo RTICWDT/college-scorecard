@@ -67,9 +67,6 @@
         value: config.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4],
         style: { height: '60px' },
       }"
-      :upperTipStyleOverride="{
-        display: 'none',
-      }" 
       :upperStyleOverride="
         checkUpperStyle(
           netPrice,

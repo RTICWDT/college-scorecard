@@ -187,7 +187,7 @@ export default {
       return this.schoolsCount;
     },    
     displayEarn() {
-      if (!this.earningsRange) {
+      /*if (!this.earningsRange) {
         return "N/A"
       } else if (this.earningsRange.single) {
         return this.$options.filters.numeral(
@@ -203,7 +203,8 @@ export default {
             "$0a"
           )
         )
-      }
+      }*/
+      return this.$options.filters.numeral(this.medianEarnings, "$0a")
     },
     displayAvgCost() {
       if (!this.netPrice) {
