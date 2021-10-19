@@ -5,19 +5,25 @@
     @click="toggleDrawer()"
     v-if="currentSchoolCount > 0 || currentFieldOfStudyCount > 0"
   >
-      <span class="compare-header-text ml-8 mr-6">Ready to Compare: </span>
-      <div v-if="currentSchoolCount < 10" class="compare-header-text mb-1">
+      <div class="compare-header-text ml-8 mr-6  mb-1">
+
+          <v-icon class="mt-1" color="black"  size="24">
+            
+          </v-icon>
+       
+        Ready to Compare: </div>
+      <div v-if="currentSchoolCount < 10" class="compare-header-text mb-1 ml-4">
         <div
-          class="compare-icon-wrapper d-inline-block mx-2"
+          class="compare-icon-wrapper d-inline-block mr-2"
           style="background: #83c38c;"
         >
-          <v-icon class="mt-1" color="#122E51" size="24">
+          <v-icon class="mt-1" color="black"  size="24">
             fas fa-university
           </v-icon>
         </div>
         {{ currentSchoolCount }} {{ schoolText }} &nbsp;&nbsp;
       </div>
-      <div v-else class="compare-header-text d-inline-block mb-1 ml-4">
+      <div v-else class="compare-header-text mb-1 ml-4">
         <v-icon
           color="red"
           medium
@@ -45,7 +51,7 @@
           color="red"
           medium
           class="mr-2"
-          style="font-size:30px;border-radius:50%;"
+          style="font-size:40px;border-radius:50%;"
           >fas fa-exclamation-circle</v-icon
         >Maximum of 10 Fields of Study reached
       </div>
@@ -72,7 +78,6 @@
 
 .compare-icon-wrapper {
   border-radius: 50%;
-  box-shadow: 0px 3px 6px #00000029;
   width: 40px;
   height: 40px;
   text-align: center;
@@ -84,6 +89,7 @@
   justify-content: center;
   align-items: center;
   white-space: nowrap;
+  height:40px;
 }
 </style>
 
