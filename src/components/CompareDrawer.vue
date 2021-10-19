@@ -329,8 +329,7 @@ export default {
   },
   data() {
     return {
-      selectedSchools: [],
-      selectedFieldsOfStudy: [],
+
     }
   },
   computed: {
@@ -340,6 +339,14 @@ export default {
     fieldsOfStudy() {
       return this.$store.state.fos
     },
+    selectedSchools() {
+      return _.map(this.$store.state.institutions, "schoolId");
+    },
+    selectedFieldsOfStudy() {
+      return _.map(this.$store.state.fos, (fieldOfStudy) => {
+        return this.generateFieldOfStudyString(fieldOfStudy)
+      })
+    }
   },
 
   methods: {
@@ -376,10 +383,7 @@ export default {
     },
   },
   mounted() {
-    this.selectedSchools = _.map(this.schools, "schoolId")
-    this.selectedFieldsOfStudy = _.map(this.fieldsOfStudy, (fieldOfStudy) => {
-      return this.generateFieldOfStudyString(fieldOfStudy)
-    })
+
   },
 }
 </script>
