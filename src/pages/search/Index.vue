@@ -677,7 +677,7 @@ export default {
 
       let request = apiGet("/schools", query)
         .then((response) => {
-          console.log("loaded schools:", response.data)
+          //console.log("loaded schools:", response.data)
 
           this.results.schools = response.data.results
           this.results.meta = response.data.metadata

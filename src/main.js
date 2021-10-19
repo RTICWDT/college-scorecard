@@ -82,13 +82,15 @@ export default function (Vue, { router, head, isClient, appOptions }) {
       },
       toggleFieldOfStudy(state, obj) {
         let entry;
+        //console.log(state);
+        //console.log(obj);
         if (obj.fosTitle) {
           entry = obj;
         }
         else {
           entry = {
             code: obj.code,
-            credentialTitle: obj.credential.title,
+            credentialTitle: (obj.credential.level === 3 ? "Bachelor's Degree" : obj.credential.title), 
             fosTitle: obj.title,
             id: obj.unit_id,
             institutionName: obj.school.name,

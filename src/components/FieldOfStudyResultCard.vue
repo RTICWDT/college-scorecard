@@ -141,7 +141,9 @@
                     class="search-fos-result-compare-button d-none d-md-block"
                     icon
                     @click="$store.commit('toggleFieldOfStudy', fieldOfStudy)"
-                    :color="
+                    :color="selectedFieldOfStudyClass(fieldOfStudy) ===
+                      'result-card-selected' ? '#0075B2' : 'grey'"
+                    :class="
                       selectedFieldOfStudyClass(fieldOfStudy) ===
                       'result-card-selected'
                         ? '' 
@@ -167,18 +169,14 @@
                     <v-btn
                       class="d-block d-sm-none mt-4 mx-auto"
                       outlined
-                      @click="
-                        $emit(
-                          'toggle-compare-item',
-                          fieldOfStudyCompareFormat(fieldOfStudy),
-                          'compare-fos'
-                        )
-                      "
-                      :color="
+                      @click="$store.commit('toggleFieldOfStudy', fieldOfStudy)"
+                      :color="selectedFieldOfStudyClass(fieldOfStudy) ===
+                        'result-card-selected' ? '#0075B2' : 'grey'"                      
+                      :class="
                         selectedFieldOfStudyClass(fieldOfStudy) ===
                         'result-card-selected'
                           ? '' 
-                          : (compareFOSLength > 9 
+                          : (totalFieldOfStudyCount > 9 
                           ? 'noCompareAllow' 
                           : '')
                       "
@@ -293,7 +291,7 @@ export default {
       // },0);
     },
       compareFOSHoverCountText() {
-        if (this.selectedFieldsOfStudy  && this.selectedFieldsOfStudy.length > 9){
+        if (this.totalFieldOfStudyCount.length > 9){
           return "Maximum of 10 Fields of Study reached";
         }
         else{

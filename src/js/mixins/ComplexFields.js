@@ -1,5 +1,6 @@
 import { fields } from '../constants.js';
 import { SiteData } from './SiteData.js';
+import "~/js/filters.js"
 import _ from 'lodash';
 
 export default {
@@ -263,6 +264,7 @@ export default {
                 if(_.get(fos[i],'credential.level') === 3){
                     _.set(fos[i],'credential.title', "Bachelor's Degree");
                 }
+                
                 // if(fos[i].credential.level==3)
                 // {
                 //     fos[i].credential.title="Bachelor's Degree";
