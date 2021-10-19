@@ -68,14 +68,14 @@
       <v-col cols="12" md="6">
         <div class="compare-drawer-section-wrapper my-4">
           <div class="compare-drawer-section-header-wrapper ml-4">
-            <div
-              class="compare-icon-wrapper d-inline-block mr-4"
-              style="background: #C4DEC4;"
-            >
-              <v-icon class="mt-1" color="#122E51" small>
-                fas fa-university
-              </v-icon>
-            </div>
+        <div
+          class="compare-icon-wrapper d-inline-block mr-2"
+          style="background: #83c38c;"
+        >
+          <v-icon style="margin-top:6px;" color="black"  size="24">
+            fas fa-university
+          </v-icon>
+        </div>
 
             <div class="compare-drawer-section-header">
               <h3 class="title">Compare Schools</h3>
@@ -115,14 +115,14 @@
       <v-col cols="12" md="6">
         <div class="compare-drawer-section-wrapper my-4">
           <div class="compare-drawer-section-header-wrapper ml-4">
-            <div
-              class="compare-icon-wrapper d-inline-block mr-4"
-              style="background: #fdbf32;"
-            >
-              <v-icon class="mt-1" color="black" small>
-                fas fa-award
-              </v-icon>
-            </div>
+        <div
+          class="compare-icon-wrapper d-inline-block mr-2"
+          style="background: #fec005;"
+        >
+          <v-icon  style="margin-top:6px;" color="black"  size="24">
+            fas fa-award
+          </v-icon>
+        </div>
 
             <div class="compare-drawer-section-header">
               <h3 class="title">Compare Fields of Study</h3>
@@ -293,10 +293,8 @@
 
 .compare-icon-wrapper {
   border-radius: 50%;
-  box-shadow: 0px 3px 6px #00000029;
-  border: white 3px solid;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   text-align: center;
 }
 .compare-drawer-section-header-wrapper {
