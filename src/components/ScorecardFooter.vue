@@ -32,11 +32,12 @@
       </p>
     </v-footer>
     
+    <client-only>
     <compare-header app />
     <v-bottom-sheet id="compare-modal" v-model="$store.state.drawerOpen" inset>
       <compare-drawer :show-info-text="false"></compare-drawer>
     </v-bottom-sheet>
-    
+    </client-only>
   </div>
 </template>
 

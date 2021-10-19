@@ -1,5 +1,4 @@
 <template>
-<client-only>
   <div
     id="compare-header"
     class="header pa-3 elevation-4"
@@ -51,7 +50,6 @@
         >Maximum of 10 Fields of Study reached
       </div>
     </div>
-    </client-only>
 </template>
 
 <style lang="scss" scoped>

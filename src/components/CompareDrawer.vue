@@ -1,5 +1,4 @@
 <template>
-<client-only>
   <v-card id="compare-schools-content" class="pa-5">
     <div>
       <span>
@@ -202,7 +201,7 @@
       </v-row>
     </div>
   </v-card>
-</client-only>
+
 </template>
 
 <style lang="scss" scoped>
