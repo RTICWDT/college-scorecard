@@ -12,8 +12,7 @@
               earnings, and more. The data is available on
               <a
                 href="https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources"
-                >data.ed.gov
-                  <v-icon
+                >data.ed.gov<v-icon
                     x-small
                     class="pl-1"
                     color="#007000"            
@@ -87,8 +86,7 @@
                   href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
                   @click="trackOutboundLink($event)"
                   target="_blank"
-                >StackExchange
-                  <v-icon
+                >StackExchange<v-icon
                     x-small
                     class="pl-1"
                     color="#007000"            

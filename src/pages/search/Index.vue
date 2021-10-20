@@ -289,8 +289,7 @@
                   Classification of Instructional Programs (CIP) and may not match the program titles at a
                   given school.
                   <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">
-                    Learn more about CIP
-                    <v-icon
+                    Learn more about CIP<v-icon
                       x-small
                       color="white"
                       class="pl-1"

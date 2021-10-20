@@ -38,16 +38,14 @@
                      <h3 class="text-left pb-5">Search for schools with training programs</h3>
                      <p class="pr-16">Search nearby schools that accept Pell Grants, and may also have eligible training programs for participants in Workforce Innovation and Opportunity Act (WIOA) programs. If you need help taking the next step in your career, find an <a href="https://www.careeronestop.org/LocalHelp/AmericanJobCenters/american-job-centers.aspx"
                         target="_blank"
-                        @click="trackOutboundLink($event)">American Job Center
-                    <v-icon
+                        @click="trackOutboundLink($event)">American Job Center<v-icon
                       x-small
                       class="pl-1"
                     >
                       fas fa-external-link-alt
                     </v-icon></a>. In some states, Unemployment Insurance (UI) recipients can attend school or training and continue to receive UI benefits (<a href="https://www.dol.gov/general/topic/unemployment-insurance"
                         target="_blank"
-                        @click="trackOutboundLink($event)">learn more about UI benefits
-                    <v-icon
+                        @click="trackOutboundLink($event)">learn more about UI benefits<v-icon
                       x-small
                       class="pl-1"
                     >
@@ -130,8 +128,7 @@
                     href="https://trainingproviderresults.gov"
                     target="_blank"
                     @click="trackOutboundLink($event)"
-                  >TrainingProviderResults.gov
-                    <v-icon
+                  >TrainingProviderResults.gov<v-icon
                       x-small
                       class="pl-1"
                     >
@@ -172,8 +169,7 @@
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    FAFSA<em>4caster</em>
-                    <v-icon
+                    FAFSA<em>4caster</em><v-icon
                       x-small
                       class="green-link pl-1"
                     >
@@ -190,8 +186,7 @@
                     href="https://fafsa.ed.gov/"
                     target="_blank"
                     @click="trackOutboundLink($event)"
-                  >Start Your FAFSA&reg; Application 
-                    <v-icon
+                  >Start Your FAFSA&reg; Application<v-icon
                       x-small
                       color="white"
                       class="pl-1"

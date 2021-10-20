@@ -88,8 +88,7 @@
                 href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
                 @click="trackOutboundLink($event)"
                 target="_blank"
-                >StackExchange
-                  <v-icon
+                >StackExchange<v-icon
                     x-small
                     class="pl-1"
                     color="#007000"            
@@ -114,8 +113,7 @@
               endpoint for querying all data is <strong>/v1/schools</strong>.
               Developers may register for an API key at
               <a href="https://api.data.gov/signup" target="_blank"
-                >https://api.data.gov/signup
-                  <v-icon
+                >https://api.data.gov/signup<v-icon
                     x-small
                     class="pl-1"
                     color="#007000"            
@@ -242,8 +240,7 @@
               <a
                 href="https://github.com/RTICWDT/open-data-maker/blob/master/API.md"
                 target="_blank"
-                >HTTP API documentation
-                  <v-icon
+                >HTTP API documentation<v-icon
                     x-small
                     class="pl-1"
                     color="#007000"            

@@ -10,8 +10,7 @@
         href="https://fafsa.ed.gov/FAFSA/app/f4cForm"
         target="_blank"
         @click="trackOutboundLink($event)"
-        >FAFSA<em>4caster</em>
-        <v-icon
+        >FAFSA<em>4caster</em><v-icon
             x-small
             class="pl-1"
           >
@@ -29,8 +28,7 @@
         href="https://fafsa.ed.gov/"
         target="_blank"
         @click="trackOutboundLink($event)"
-        >Start Your FAFSA&reg;<br/>Application
-          <v-icon
+        >Start Your FAFSA&reg;<br/>Application<v-icon
             x-small
             color="white"
             class="pl-1 pb-1 align-self-end"

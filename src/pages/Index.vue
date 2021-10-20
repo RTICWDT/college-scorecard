@@ -208,8 +208,7 @@
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    Go to apprenticeship.gov
-                    <v-icon
+                    Go to apprenticeship.gov<v-icon
                       x-small
                       class="pl-1"
                     >
@@ -227,8 +226,7 @@
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    Go to ONETonline.org
-                    <v-icon
+                    Go to ONETonline.org<v-icon
                       x-small
                       class="pl-1"
                     >
@@ -246,8 +244,7 @@
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    Go to CareerOneStop.org
-                    <v-icon
+                    Go to CareerOneStop.org<v-icon
                       x-small
                       class="pl-1"
                     >
@@ -265,8 +262,7 @@
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    Go to TrainingProviderResults.gov
-                    <v-icon
+                    Go to TrainingProviderResults.gov<v-icon
                       x-small
                       class="pl-1"
                     >
@@ -305,8 +301,7 @@
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    StudentAid.gov
-                    <v-icon
+                    StudentAid.gov<v-icon
                       x-small
                       class="pl-1"
                     >
@@ -323,8 +318,7 @@
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    FAFSA<em>4caster</em>
-                    <v-icon
+                    FAFSA<em>4caster</em><v-icon
                       x-small
                       class="pl-1"
                     >
@@ -342,8 +336,7 @@
                     href="https://fafsa.ed.gov/"
                     target="_blank"
                     @click="trackOutboundLink($event)"
-                  >Start Your FAFSA&reg; Application
-                    <v-icon
+                  >Start Your FAFSA&reg; Application<v-icon
                       x-small
                       color="white"
                       class="pl-1 pb-1"
@@ -363,8 +356,7 @@
                     target="_blank"
                     @click="trackOutboundLink($event)"
                   >
-                    GI Bill&reg; comparison tool
-                    <v-icon
+                    GI Bill&reg; comparison tool<v-icon
                       x-small
                       class="pl-1"
                     >

@@ -84,8 +84,7 @@
                     <a
                       target="_blank"
                       :href="'/school/transition/?url=' + schoolUrl"
-                      >{{ schoolUrlDisplay | formatUrlText }}
-                  <v-icon
+                      >{{ schoolUrlDisplay | formatUrlText }}<v-icon
                     x-small
                     class="pl-1"
                     color="#007000"            
@@ -1529,10 +1528,10 @@
                             href="https://studentloans.gov/myDirectLoan/repaymentEstimator.action"
                             target="_blank"
                             @click="trackOutboundLink($event)"
-                            >payment options 
-                          <v-icon
+                            >payment options<v-icon
                               x-small
                               class="pl-1"
+                              color="#007000"
                             >
                               fas fa-external-link-alt
                             </v-icon> 
@@ -1542,10 +1541,10 @@
                           target="_blank" 
                           href="https://studentaid.gov/manage-loans/repayment/plans/income-driven"
                           @click="trackOutboundLink($event)"
-                          >income-driven repayment                     
-                          <v-icon
+                          >income-driven repayment<v-icon
                             x-small
                             class="pl-1"
+                            color="#007000"
                           >
                             fas fa-external-link-alt
                           </v-icon>   
@@ -1852,8 +1851,7 @@
                               href="https://fafsa.ed.gov/spa/fafsa"
                               target="_blank"
                               @click="trackOutboundLink($event)"
-                              >Start My FAFSA&reg; Form
-                                <v-icon
+                              >Start My FAFSA&reg; Form<v-icon
                                   x-small
                                   color="white"
                                   class="pl-1 pb-1 align-self-end"
