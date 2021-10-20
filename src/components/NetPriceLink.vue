@@ -3,7 +3,7 @@
     rounded
     color="secondary"
     target="_blank"
-    :href="'/school/transition/?url=' + fixedUrl"
+    :href="$url('/school/transition/?url=' + fixedUrl)"
     v-if="url"
   >
     <v-icon small class="mx-1">fas fa-calculator</v-icon>

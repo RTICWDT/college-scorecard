@@ -180,7 +180,7 @@
           <a
             style="word-wrap: break-word;"
             target="_blank"
-            :href="'/school/transition/?url=' + schoolUrl"
+            :href="$url('/school/transition/?url=' + schoolUrl)"
             >{{
               _.get(school, fields["SCHOOL_URL"], "ed.gov") | formatUrlText
             }}<v-icon

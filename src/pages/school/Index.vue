@@ -83,7 +83,7 @@
                   <h2 class="title school-url mt-0">
                     <a
                       target="_blank"
-                      :href="'/school/transition/?url=' + schoolUrl"
+                      :href="$url('/school/transition/?url=' + schoolUrl)"
                       >{{ schoolUrlDisplay | formatUrlText }}<v-icon
                     x-small
                     class="pl-1"
