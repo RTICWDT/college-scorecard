@@ -57,7 +57,7 @@ export default {
   computed: {
     referrer() {
       //return process.isClient ? document.referrer : ""
-      return document.referrer
+      return ""
     },
     url() {
       let url = decodeURI(this.query.url)
