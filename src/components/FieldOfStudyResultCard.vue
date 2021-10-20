@@ -210,7 +210,7 @@
             </div>
 
             <p class="mb-0">
-              <a :href="fieldsLink" target="_blank">
+              <a :href="$url(fieldsLink)" target="_blank">
                 View all Fields of Study at {{ schoolName }} &raquo;
               </a>
             </p>

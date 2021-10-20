@@ -170,8 +170,7 @@
         </v-col>
         <v-col cols="12" sm="3" class="text-center">
           <v-chip small v-if="underInvestigation == 1" color="error" label>
-            <strong>Under ED Monitoring</strong>
-            <tooltip
+            <strong>Under ED Monitoring</strong><tooltip
               definition="hcm2"
               color="#FFFFFF"
               class="ml-2"
@@ -184,7 +183,13 @@
             :href="'/school/transition/?url=' + schoolUrl"
             >{{
               _.get(school, fields["SCHOOL_URL"], "ed.gov") | formatUrlText
-            }}</a
+            }}<v-icon
+                      x-small
+                      color="#007000"
+                      class="pl-1"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon></a
           >
         </v-col>
       </v-row>

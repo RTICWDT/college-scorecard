@@ -211,6 +211,7 @@
                     Go to apprenticeship.gov<v-icon
                       x-small
                       class="pl-1"
+                      color="#007000"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
@@ -229,6 +230,7 @@
                     Go to ONETonline.org<v-icon
                       x-small
                       class="pl-1"
+                      color="#007000"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
@@ -247,6 +249,7 @@
                     Go to CareerOneStop.org<v-icon
                       x-small
                       class="pl-1"
+                      color="#007000"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
@@ -265,6 +268,7 @@
                     Go to TrainingProviderResults.gov<v-icon
                       x-small
                       class="pl-1"
+                      color="#007000"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
@@ -304,6 +308,7 @@
                     StudentAid.gov<v-icon
                       x-small
                       class="pl-1"
+                      color="#007000"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
@@ -321,6 +326,7 @@
                     FAFSA<em>4caster</em><v-icon
                       x-small
                       class="pl-1"
+                      color="#007000"
                     >
                       fas fa-external-link-alt
                     </v-icon>                     
@@ -359,6 +365,7 @@
                     GI Bill&reg; comparison tool<v-icon
                       x-small
                       class="pl-1"
+                      color="#007000"
                     >
                       fas fa-external-link-alt
                     </v-icon>

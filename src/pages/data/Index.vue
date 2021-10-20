@@ -73,7 +73,13 @@
                   >
                     <div>
                       <span class="title font-weight-bold">
-                        Visit data.ed.gov To Download The Data&nbsp;
+                        Visit data.ed.gov To Download The Data<v-icon
+                              x-small
+                              class="pl-1"
+                              color="#007000"
+                            >
+                              fas fa-external-link-alt
+                            </v-icon>
                       </span>
                     </div>
                   </v-card>

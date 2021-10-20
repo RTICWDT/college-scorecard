@@ -11,11 +11,12 @@
         target="_blank"
         @click="trackOutboundLink($event)"
         >FAFSA<em>4caster</em><v-icon
-            x-small
-            class="pl-1"
-          >
-            fas fa-external-link-alt
-          </v-icon>       
+                      x-small
+                      color="#007000"
+                      class="pl-1"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>       
         </a
       >
       to see how much aid may be available to you.
@@ -47,7 +48,13 @@
         href="https://www.vets.gov/gi-bill-comparison-tool"
         target="_blank"
         @click="trackOutboundLink($event)"
-        >GI Bill Benefits</a
+        >GI Bill Benefits<v-icon
+                      x-small
+                      color="#007000"
+                      class="pl-1"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon></a
       >
       that may also help you pay for school.
     </div>
