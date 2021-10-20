@@ -1024,12 +1024,12 @@
                         >
                           <template v-slot:label>
                             <span>
-                              Include debt borrowed at any prior institutions
-                              
+                              Include debt borrowed at any prior institutions&nbsp;
+                              <tooltip definition="include-debt-prior-inst" />
                             </span>
                           </template>
                         </v-checkbox>
-                        <tooltip definition="include-debt-prior-inst" />
+                        
                       </div>
                     </template>
                   </compare-section>
@@ -1060,12 +1060,12 @@
                         >
                           <template v-slot:label>
                             <span>
-                              Include debt borrowed at any prior institutions
-                              
+                              Include debt borrowed at any prior institutions&nbsp;
+                              <tooltip definition="include-debt-prior-inst" />
                             </span>
                           </template>
                         </v-checkbox>
-                        <tooltip definition="include-debt-prior-inst" />
+                        
                       </div>
                     </template>
                   </compare-section>

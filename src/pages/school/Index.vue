@@ -596,7 +596,7 @@
                               </h5>
                             </div>
 
-                            <div v-else class="mini-data-na text-center">
+                            <div v-else class="mini-data-na text-center mr-sm-11">
                               Data Not Available
                             </div>
                           </div>
@@ -635,7 +635,7 @@
                               </h5>
                             </div>
 
-                            <div v-else class="mini-data-na text-center">
+                            <div v-else class="mini-data-na text-center mr-sm-11">
                               Data Not Available
                             </div>
                           </div>
@@ -659,7 +659,7 @@
                               </h5>
                             </div>
 
-                            <div v-else class="mini-data-na text-center">
+                            <div v-else class="mini-data-na text-center mr-sm-11">
                               Data Not Available
                             </div>
                           </div>
@@ -1997,7 +1997,7 @@
                         }}</span>
                         <br />
                         <strong>
-                          Full-time
+                          Full-time&nbsp;
                           <tooltip definition="full-time" />
                         </strong>
                       </div>
@@ -2037,7 +2037,7 @@
                     </v-col>
                     <v-col cols="12" md="6">
                       <h2 class="mb-3">
-                        Race/Ethnicity&nbsp;
+                        Race/Ethnicity
                         <tooltip definition="race-eth" />
                       </h2>
                       <div v-for="item in raceEthnicity" :key="item.label">
