@@ -439,12 +439,11 @@
                         >
                           <template v-slot:label>
                             <span class="profile-fos-include-prior-debt">
-                              Include debt borrowed at any prior institutions
-                              
+                              Include debt borrowed at any prior institutions&nbsp;
+                              <tooltip definition="include-debt-prior-inst" />
                             </span>
                           </template>
                         </v-checkbox>
-                        <tooltip definition="include-debt-prior-inst" />
                       </div>
 
                       <compare-block
@@ -536,12 +535,11 @@
                         >
                           <template v-slot:label>
                             <span class="profile-fos-include-prior-debt">
-                              Include debt borrowed at any prior institutions
-                              
+                              Include debt borrowed at any prior institutions&nbsp;
+                              <tooltip definition="include-debt-prior-inst" />
                             </span>
                           </template>
                         </v-checkbox>
-                        <tooltip definition="include-debt-prior-inst" />
                       </div>
                       <compare-block
                         v-for="credentialLevel in filteredFieldsOfStudy"

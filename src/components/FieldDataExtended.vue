@@ -9,7 +9,7 @@
       <!--Median Earnings-->
       <v-col cols="12" md="5">
         <h4 class="mb-2 field-data-header-title">
-          Median Earnings&nbsp
+          Median Earnings&nbsp;
           <tooltip definition="fos-median-earnings" />
         </h4>
 
@@ -29,7 +29,7 @@
       <!--Monthly Earnings-->
       <v-col cols="12" md="4">
         <h4 class="mb-2">
-          Monthly Earnings&nbsp
+          Monthly Earnings&nbsp;
           <tooltip definition="fos-monthly-earnings" />
         </h4>
 
@@ -63,17 +63,17 @@
           <template v-slot:label>
             <span class="profile-fos-include-prior-debt">
               Include debt borrowed at any prior institutions&nbsp;
+              <tooltip definition="include-debt-prior-inst" />  
             </span>
           </template>
         </v-checkbox>
-        <tooltip definition="include-debt-prior-inst" />        
       </v-col>
 
       <!--Median Total-->
       <v-col cols="12" md="3">
         <h4 class="mb-2">
           Median Total <br class="d-none d-md-block" />Debt After
-          Graduation&nbsp
+          Graduation&nbsp;
           <tooltip
             v-if="!fosShowDebtPriorIncluded"
             definition="fos-median-debt"
@@ -109,7 +109,7 @@
       <!--Monthly Loan-->
       <v-col cols="12" md="3">
         <h4 class="mb-2">
-          Monthly Loan Payment&nbsp
+          Monthly Loan Payment&nbsp;
           <tooltip
             v-if="!fosShowDebtPriorIncluded"
             definition="fos-monthly-debt-payment"
@@ -151,7 +151,7 @@
       <!--Number Of Graduates-->
       <v-col cols="12" md="5">
         <h4 class="mb-2">
-          Number Of Graduates&nbsp
+          Number Of Graduates&nbsp;
           <tooltip definition="fos-number-of-graduates" />
         </h4>
         <div v-if="_.get(fos, fields.FOS_GRAD_COUNT)">

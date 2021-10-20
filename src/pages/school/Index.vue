@@ -1255,7 +1255,7 @@
                           <template v-slot:label>
                             <span>
                               Include debt borrowed at any prior
-                              institutions<tooltip definition="include-debt-prior-inst" class="pt-2 pl-2" />
+                              institutions&nbsp;<tooltip definition="include-debt-prior-inst" class="pt-2 pl-2" />
                             </span>
                           </template>
                         </v-checkbox>
