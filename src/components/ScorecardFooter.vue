@@ -13,21 +13,52 @@
         <a
           href="https://github.com/RTICWDT/college-scorecard/releases"
           target="_blank"
-          >{{ version }}</a
-        >
+          >{{ version }}
+          <v-icon
+            x-small
+            class="pl-1"
+            color="white"            
+          >
+            fas fa-external-link-alt
+          </v-icon>          
+          </a>
         | <a href="mailto:scorecarddata@rti.org">Contact Us</a> |
         <a href="http://www2.ed.gov/notices/index.html?src=ft" target="_blank"
-          >Notices</a
+          >Notices 
+          <v-icon
+            x-small
+            class="pl-1"
+            color="white"            
+          >
+            fas fa-external-link-alt
+          </v-icon>          
+        </a
         >
         | <a :href="$url('/data/glossary/')">Glossary</a> |
         <a href="http://www.ed.gov/" target="_blank"
-          >U.S. Department of Education</a
+          >U.S. Department of Education
+          <v-icon
+            x-small
+            class="pl-1"
+            color="white"
+          >
+            fas fa-external-link-alt
+          </v-icon>          
+          </a
         >
       </p>
 
       <p class="py-0 body-2 white--text">
         ZIP Code latitude and longitude provided by
-        <a href="http://www.geonames.org/">GeoNames</a>
+        <a href="http://www.geonames.org/">GeoNames
+          <v-icon
+            x-small
+            class="pl-1"
+            color="white"            
+          >
+            fas fa-external-link-alt
+          </v-icon>        
+        </a>
         under a Creative Commons Attribution 3.0 License.
       </p>
     </v-footer>

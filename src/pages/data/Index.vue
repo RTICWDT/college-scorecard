@@ -12,7 +12,15 @@
               earnings, and more. The data is available on
               <a
                 href="https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources"
-                >data.ed.gov</a
+                >data.ed.gov
+                  <v-icon
+                    x-small
+                    class="pl-1"
+                    color="#007000"            
+                  >
+                    fas fa-external-link-alt
+                  </v-icon>                  
+                </a
               >
               and include the following data files:
             </p>
@@ -79,7 +87,15 @@
                   href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
                   @click="trackOutboundLink($event)"
                   target="_blank"
-                >StackExchange</a> or email the help desk at
+                >StackExchange
+                  <v-icon
+                    x-small
+                    class="pl-1"
+                    color="#007000"            
+                  >
+                    fas fa-external-link-alt
+                  </v-icon>                  
+                </a> or email the help desk at
                 <a href="mailto:scorecarddata@rti.org">scorecarddata@rti.org</a>. For inquiries by members of the press, please contact <a href="mailto:press@ed.gov">press@ed.gov</a>.
               </p>
             </v-card>

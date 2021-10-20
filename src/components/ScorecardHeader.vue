@@ -351,6 +351,9 @@ export default {
       activeLink: null,
     }
   },
+  mounted(){
+    store.state.drawerOpen = false;
+  },  
   computed: {
     disableCompare() {
       return (
@@ -384,14 +387,14 @@ export default {
       this.$router.push(urlString)
     },
     handleCompareIconClick(resourceType = "institution") {
-      this.$store.commit("toggleDrawer")
+      this.$store.commit("toggleDrawer", true)
     },
     handleCompareLinkClick(urlString) {
       if (
         this.compareFieldsOfStudyCount == 0 &&
         this.compareInstitutionsCount == 0
       ) {
-        this.$store.commit("toggleDrawer")
+        this.$store.commit("toggleDrawer", false)
       } else {
         this.$router.push(urlString)
       }

@@ -84,7 +84,15 @@
                     <a
                       target="_blank"
                       :href="'/school/transition/?url=' + schoolUrl"
-                      >{{ schoolUrlDisplay | formatUrlText }}</a
+                      >{{ schoolUrlDisplay | formatUrlText }}
+                  <v-icon
+                    x-small
+                    class="pl-1"
+                    color="#007000"            
+                  >
+                    fas fa-external-link-alt
+                  </v-icon>                        
+                      </a
                     >
                   </h2>
                   <school-icons
