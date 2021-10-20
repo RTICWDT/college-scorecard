@@ -330,6 +330,9 @@ export default {
 
     }
   },
+  mounted() {
+    this.$store.commit("toggleDrawer", false)
+  },
   computed: {
     schools() {
       return this.$store.state.institutions

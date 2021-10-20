@@ -352,7 +352,7 @@ export default {
     }
   },
   mounted(){
-    store.state.drawerOpen = false;
+
   },  
   computed: {
     disableCompare() {

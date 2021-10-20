@@ -26,9 +26,16 @@
                   target="_blank"
                   hover
                 >
-                  <p class="title font-weight-bold btnText">
+                  <span class="title font-weight-bold btnText">
                     Data Dictionary
-                  </p>
+                      <v-icon
+                        x-small
+                        class="pl-1"
+                        color="#007000"            
+                      >
+                        fas fa-download
+                      </v-icon>                     
+                  </span>
                 </v-card>
               </v-col>
               <v-col cols="12" sm="4">
@@ -40,9 +47,16 @@
                   target="_blank"
                   hover
                 >
-                  <p class="title font-weight-bold btnText">
+                  <span class="title font-weight-bold btnText">
                     Technical Documentation for Institution-Level Data Files
-                  </p>
+                      <v-icon
+                        x-small
+                        class="pl-1"
+                        color="#007000"            
+                      >
+                        fas fa-download
+                      </v-icon>                      
+                  </span>
                 </v-card>
               </v-col>
               <v-col cols="12" sm="4">
@@ -54,9 +68,16 @@
                   target="_blank"
                   hover
                 >
-                  <p class="title font-weight-bold btnText">
+                  <span class="title font-weight-bold btnText">
                     Technical Documentation for Data Files by Field of Study
-                  </p>
+                      <v-icon
+                        x-small
+                        class="pl-1"
+                        color="#007000"            
+                      >
+                        fas fa-download
+                      </v-icon>                      
+                  </span>
                 </v-card>
               </v-col>
             </v-row>
@@ -140,7 +161,15 @@
               color="secondary"
               href="/assets/CollegeScorecardDataDictionary.xlsx"
               class="button data-home-button mb-4"
-              >Download the Data Dictionary</v-btn
+              >Download the Data Dictionary
+                      <v-icon
+                        x-small
+                        class="pl-1"
+                        color="white"            
+                      >
+                        fas fa-download
+                      </v-icon>                
+              </v-btn
             >
 
             <h3 id="api-key-signup">Register for an API key</h3>
