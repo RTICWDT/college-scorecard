@@ -204,7 +204,7 @@
                   Start your career and build your skill set through <strong>apprenticeships:</strong>
                 </p>
 
-                 <a class="homeCallout-indent mx-10" href="https://www.apprenticeship.gov/apprenticeship-finder"
+                 <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.apprenticeship.gov/apprenticeship-finder'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
@@ -223,7 +223,7 @@
                   Build your future with O*NET online, your tool for <strong>career exploration and job analysis:</strong>
                 </p>
 
-                 <a class="homeCallout-indent mx-10" href="https://www.onetonline.org/find/"
+                 <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.onetonline.org/find/'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
@@ -242,7 +242,7 @@
                   Discover Career One Stop, your source for <strong>career exploration training and jobs:</strong>
                 </p>
 
-                 <a class="homeCallout-indent mx-10" href="https://careeronestop.org"
+                 <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://careeronestop.org'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
@@ -261,7 +261,7 @@
                   <strong>Find training programs:</strong> compare completion rates, employment rates, and more:
                 </p>
 
-                 <a class="homeCallout-indent mx-10" href="https://trainingproviderresults.gov"
+                 <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://trainingproviderresults.gov'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
@@ -301,7 +301,7 @@
                 <p class="mx-10">
                   You can learn more about the types of financial aid that are available at
 
-                 <a href="https://studentaid.gov"
+                 <a :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
@@ -319,7 +319,7 @@
                   To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA&#174;) form.
                   You can use
 
-                  <a href="https://fafsa.ed.gov/FAFSA/app/f4cForm"
+                  <a :href="$url('/school/transition/?url=' + encodeURIComponent('https://fafsa.ed.gov/FAFSA/app/f4cForm'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
@@ -339,7 +339,7 @@
                   <v-btn
                     rounded
                     color="secondary"
-                    href="https://fafsa.ed.gov/"
+                    :href="$url('/school/transition/?url=' + encodeURIComponent('https://fafsa.ed.gov/'))"
                     target="_blank"
                     @click="trackOutboundLink($event)"
                   >Start Your FAFSA&reg; Application<v-icon
@@ -358,7 +358,7 @@
                   Veterans are eligible for higher education funding through the G.I. Bill benefits. Use the 
 
                   <a
-                    href="https://www.vets.gov/gi-bill-comparison-tool"
+                    :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.vets.gov/gi-bill-comparison-tool'))"
                     target="_blank"
                     @click="trackOutboundLink($event)"
                   >

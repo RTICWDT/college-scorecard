@@ -11,7 +11,7 @@
       <p class="pb-2 mt-5 mb-0 body-2 white--text">
         Powered by <a :href="$url('/data')">College Scorecard Data</a> |
         <a
-          href="https://github.com/RTICWDT/college-scorecard/releases"
+          :href="$url('/school/transition/?url=' + encodeURIComponent('https://github.com/RTICWDT/college-scorecard/releases'))"
           target="_blank"
           >{{ version }}<v-icon
             x-small
@@ -22,7 +22,7 @@
           </v-icon>          
           </a>
         | <a href="mailto:scorecarddata@rti.org">Contact Us</a> |
-        <a href="http://www2.ed.gov/notices/index.html?src=ft" target="_blank"
+        <a :href="$url('/school/transition/?url=' + encodeURIComponent('http://www2.ed.gov/notices/index.html?src=ft'))" target='_blank'
           >Notices<v-icon
             x-small
             class="pl-1"
@@ -33,7 +33,7 @@
         </a
         >
         | <a :href="$url('/data/glossary/')">Glossary</a> |
-        <a href="http://www.ed.gov/" target="_blank"
+        <a :href="$url('/school/transition/?url=' + encodeURIComponent('http://www.ed.gov/'))" target="_blank"
           >U.S. Department of Education<v-icon
             x-small
             class="pl-1"
@@ -47,7 +47,7 @@
 
       <p class="py-0 body-2 white--text">
         ZIP Code latitude and longitude provided by
-        <a href="http://www.geonames.org/">GeoNames<v-icon
+        <a :href="$url('/school/transition/?url=' + encodeURIComponent('http://www.geonames.org/'))">GeoNames<v-icon
             x-small
             class="pl-1"
             color="white"            

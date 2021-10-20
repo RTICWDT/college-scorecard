@@ -7,7 +7,7 @@
       can use
       <!--prettyhtml-ignore-->
       <a
-        href="https://fafsa.ed.gov/FAFSA/app/f4cForm"
+        :href="$url('/school/transition/?url=' + encodeURIComponent('https://fafsa.ed.gov/FAFSA/app/f4cForm'))"
         target="_blank"
         @click="trackOutboundLink($event)"
         >FAFSA<em>4caster</em><v-icon
@@ -26,7 +26,7 @@
       <v-btn
         rounded
         color="secondary"
-        href="https://fafsa.ed.gov/"
+        :href="$url('/school/transition/?url=' + encodeURIComponent('https://fafsa.ed.gov/'))"
         target="_blank"
         @click="trackOutboundLink($event)"
         >Start Your FAFSA&reg;<br/>Application<v-icon
@@ -45,7 +45,7 @@
       Don't forget: Do fill out the FAFSA® form, but also look into other
       programs such as
       <a
-        href="https://www.vets.gov/gi-bill-comparison-tool"
+        :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.vets.gov/gi-bill-comparison-tool'))"
         target="_blank"
         @click="trackOutboundLink($event)"
         >GI Bill Benefits<v-icon

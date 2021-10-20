@@ -1525,7 +1525,7 @@
                           This is based on a standard 10-year payment plan,
                           other
                           <a
-                            href="https://studentloans.gov/myDirectLoan/repaymentEstimator.action"
+                            :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentloans.gov/myDirectLoan/repaymentEstimator.action'))"
                             target="_blank"
                             @click="trackOutboundLink($event)"
                             >payment options<v-icon
@@ -1539,7 +1539,7 @@
                           are available, like income-driven repayment. An 
                           <a 
                           target="_blank" 
-                          href="https://studentaid.gov/manage-loans/repayment/plans/income-driven"
+                          :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov/manage-loans/repayment/plans/income-driven'))"
                           @click="trackOutboundLink($event)"
                           >income-driven repayment<v-icon
                             x-small
@@ -1848,7 +1848,7 @@
                             <v-btn
                               rounded
                               color="secondary"
-                              href="https://fafsa.ed.gov/spa/fafsa"
+                              :href="$url('/school/transition/?url=' + encodeURIComponent('https://fafsa.ed.gov/spa/fafsa'))"
                               target="_blank"
                               @click="trackOutboundLink($event)"
                               >Start My FAFSA&reg; Form<v-icon

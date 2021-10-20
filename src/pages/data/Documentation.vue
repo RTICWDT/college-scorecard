@@ -85,7 +85,7 @@
             <p class="mt-8">
               <strong>Looking for help?</strong> Visit
               <a
-                href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
+                :href="$url('/school/transition/?url=' + encodeURIComponent('http://opendata.stackexchange.com/questions/tagged/collegescorecard'))"
                 @click="trackOutboundLink($event)"
                 target="_blank"
                 >StackExchange<v-icon
@@ -112,7 +112,7 @@
               <strong>http://api.data.gov/ed/collegescorecard/</strong>. The
               endpoint for querying all data is <strong>/v1/schools</strong>.
               Developers may register for an API key at
-              <a href="https://api.data.gov/signup" target="_blank"
+              <a :href="$url('/school/transition/?url=' + encodeURIComponent('https://api.data.gov/signup'))" target="_blank"
                 >https://api.data.gov/signup<v-icon
                     x-small
                     class="pl-1"
@@ -238,7 +238,7 @@
             <p class="data-docs">
               For guidance on querying the API and extracting results, see the
               <a
-                href="https://github.com/RTICWDT/open-data-maker/blob/master/API.md"
+                :href="$url('/school/transition/?url=' + encodeURIComponent('https://github.com/RTICWDT/open-data-maker/blob/master/API.md'))"
                 target="_blank"
                 >HTTP API documentation<v-icon
                     x-small
