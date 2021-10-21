@@ -111,7 +111,7 @@
 }
 
 .median-value-text {
-  font-size:12pt;
+  font-size:12px;
   text-align:right;
   font-style:italic;
 }

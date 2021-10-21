@@ -145,7 +145,7 @@
       border-right: none;
       span {
         padding-left: 0.25em;
-        font-size:18pt !important;
+        font-size:18px !important;
         font-family: "Montserrat", sans-serif !important;     
         font-weight:bold;   
       }
@@ -168,7 +168,7 @@
       span {
         bottom: 100%;
         top: auto;
-        font-size: 12pt;
+        font-size: 12px;
         font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
       }
     }
@@ -195,7 +195,7 @@
         top: 50px !important;
         margin-left:-80px !important;
         font-weight:420;
-        font-size: 12pt;
+        font-size: 12px;
         font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
         font-style:italic;
 

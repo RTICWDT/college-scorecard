@@ -137,7 +137,7 @@
       span {
         right: 0;
         text-align: center;
-        font-size: 12pt;
+        font-size: 12px;
         font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
       }
     }
@@ -158,7 +158,7 @@
 
       span {
         position:relative !important;
-        font-size:18pt !important;
+        font-size:18px !important;
         font-family: "Montserrat", sans-serif !important;
         font-weight: bold;  
       }
@@ -182,7 +182,7 @@
       span {
         top: auto;
         position:relative !important;
-        font-size: 12pt;
+        font-size: 12px;
         font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;        
       }
     }
@@ -207,7 +207,7 @@
         text-align: center;
         color:#000;
         margin-top:-10px;
-        font-size: 14pt !important;
+        font-size: 14px !important;
         font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;       
         font-style: italic;
       }
