@@ -1837,11 +1837,19 @@ export default {
           break
 
         case localStorageKeys.COMPARE_FOS_KEY:
-          this.$store.commit("toggleFieldOfStudy", removeData)
+          let delObj = {
+            code: removeData.code,
+            credentialTitle: removeData["credential.title"],
+            fosTitle: removeData.title,
+            id: removeData.unit_id,
+            institutionName: removeData["school.name"],
+            credentialLevel: removeData["credential.level"],
+        }
+          this.$store.commit("toggleFieldOfStudy", delObj)
           this.modifyUrl()
           break
-        default:
-          break
+      default:
+        break
       }
     },
     modifyUrl() {

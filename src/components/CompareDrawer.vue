@@ -343,10 +343,15 @@ export default {
     selectedSchools() {
       return _.map(this.$store.state.institutions, "schoolId");
     },
-    selectedFieldsOfStudy() {
-      return _.map(this.$store.state.fos, (fieldOfStudy) => {
-        return this.generateFieldOfStudyString(fieldOfStudy)
-      })
+    selectedFieldsOfStudy: {
+      get() {
+        return _.map(this.$store.state.fos, (fieldOfStudy) => {
+            return this.generateFieldOfStudyString(fieldOfStudy)
+        })
+      },
+      set(fieldOfStudy){
+        return fieldOfStudy;
+      }
     }
   },
 

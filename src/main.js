@@ -83,7 +83,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
       toggleFieldOfStudy(state, obj) {
         let entry;
         //console.log(state);
-        //console.log(obj);
+        console.log(obj);
         if (obj.fosTitle) {
           entry = obj;
         }
