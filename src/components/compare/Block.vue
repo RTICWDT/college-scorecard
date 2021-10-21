@@ -150,13 +150,13 @@ export default {
   computed: {
     groupName() {
       switch (this.block_title) {
-        case "Certificate schools":
+        case "Certificate Schools":
           return 1
           break
-        case "2-year schools":
+        case "2-year Schools":
           return 2
           break
-        case "4-year schools":
+        case "4-year Schools":
           return 3
           break
       }      
