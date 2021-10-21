@@ -108,7 +108,7 @@
   .picc-range-label {
     height: 22px;
     position: absolute;
-    top: 3px;
+    top: 6px;
     transition: left 0.5s;
     font-size: 0.85rem;
 
@@ -193,8 +193,8 @@
         text-align: center;
         color:#000;
         top: 50px !important;
-        margin-left:-80px !important;
-        font-weight:420;
+        margin-left:-3.75rem !important;
+        font-weight:400;
         font-size: 12px;
         font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
         font-style:italic;
@@ -381,7 +381,7 @@ export default {
         if (obj.label.includes('$'))
           newObj.styles.left = (s - 25) + '%';
         else
-          newObj.styles.left = (s - 12) + '%';
+          newObj.styles.left = (s - 10) + '%';
         newObj.styles.color = '#ffffff'
       }
 
