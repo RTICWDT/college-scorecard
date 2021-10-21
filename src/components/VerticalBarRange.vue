@@ -206,7 +206,7 @@
         margin-left: $bar-width + $arrow-size + 10;
         text-align: center;
         color:#000;
-        margin-top:-10px;
+        margin-top:-3px;
         font-size: 14px !important;
         font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;       
         font-style: italic;

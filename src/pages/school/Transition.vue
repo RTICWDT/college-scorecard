@@ -13,16 +13,11 @@
           <v-col cols="12" sm="8" offset-sm="2">
             <v-card class="pa-5">
               <p>
-                Links are provided by the institutions during data collection
-                and are only updated about once a year. As such, over the course
-                of the year, some links may break or websites may be taken
-                offline.
+                The U.S. Department of Education does not necessarily endorse the views expressed or the data and facts presented on this external site.
               </p>
               <p>
-                The U.S. Department of Education does not necessarily endorse
-                the views expressed or the data and facts presented on this
-                external site.
-              </p>
+                Links are provided by the institutions and are only updated about once a year. As such, over the course of the year, some links may break or websites may be taken offline.
+              </p>              
               <v-btn class="mb-1 mr-2" color="secondary" :href="url" v-if="url"
                 >Continue to Website</v-btn
               >
