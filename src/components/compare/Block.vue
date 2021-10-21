@@ -1,9 +1,9 @@
 <template>
   <div>
     <h4 class="overline my-3">{{ block_title }}</h4>
-     <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'average-annual-cost'" >Median for {{config.medianToggle === 'group' ? block_title : "All Schools"}} : {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0')}}</p>
-     <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'median-earnings'" >Median for {{config.medianToggle === 'group' ? block_title : "All Schools"}} : {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</p>
-     <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'graduation-rate'" >Median for {{config.medianToggle === 'group' ? block_title : "All Schools"}} : {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</p>     
+     <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'average-annual-cost'" >Median for {{config.medianToggle === 'group' ? block_title : "All Schools"}}: {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0')}}</p>
+     <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'median-earnings'" >Median for {{config.medianToggle === 'group' ? block_title : "All Schools"}}: {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</p>
+     <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'graduation-rate'" >Median for {{config.medianToggle === 'group' ? block_title : "All Schools"}}: {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</p>     
 
       <div v-if="config && config.chart == 'RepaymentRate'">
       <v-simple-table class="school-table">
