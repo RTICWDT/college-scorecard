@@ -57,11 +57,11 @@
 }
 
 .field-of-study-context-panel{
-  border-radius: 20px !important;
+  border-radius: 0px 0px 20px 20px !important;
   border-left: 20px solid $fos-color-gold !important;
 }
 .institution-context-panel{
-  border-radius: 20px !important;
+  border-radius: 0px 0px 20px 20px !important;
   border-left: 20px solid $darker-green !important;
 }
 </style>
@@ -99,15 +99,15 @@
         />
       </div>-->
       
-      <v-card outline v-bind:class="contextRadioClass" class="pa-5 mb-3">
-          <p class="title mb-2">Search For:</p>
+      <v-card outline v-bind:class="contextRadioClass" class="pa-5 mb-3" style="box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%) !important;">
+          <p class="searchForTitle mb-2">SEARCH FOR:</p>
           <v-radio-group v-model="controlRadio" @change="handleContextToggleTwo" column>
             <v-radio
               value="0"
               color="#007000"
             >
               <template v-slot:label>
-                <div v-bind:style="{ 'font-weight': contextRadioSchoolStyle}">School</div>
+                <div v-bind:style="{ 'font-weight': contextRadioSchoolStyle, 'color': 'black'}">School</div>
               </template>
             </v-radio>
 
@@ -116,7 +116,7 @@
               color="#fdbf32"
             >
               <template v-slot:label>
-                <div v-bind:style="{ 'font-weight': contextRadioFOSStyle}">Fields of Study</div>
+                <div v-bind:style="{ 'font-weight': contextRadioFOSStyle, 'color': 'black'}">Field of Study</div>
               </template>
             </v-radio>
           </v-radio-group>

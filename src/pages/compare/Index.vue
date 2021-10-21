@@ -1167,14 +1167,14 @@
             </v-btn>
           </v-card>
           <v-card outline v-bind:class="sidebarSearchClass" class="pa-4 mb-3">
-              <p class="title mb-2">Search For:</p>
+              <p class="searchForTitle mb-2">SEARCH FOR:</p>
               <v-radio-group v-model="sidebarSearchToggle" column>
                 <v-radio
                   value="school"
                   color="#007000"
                 >
                   <template v-slot:label>
-                    <div v-bind:style="{ 'font-weight': sidebarRadioSchoolStyle}">School</div>
+                    <div v-bind:style="{ 'font-weight': sidebarRadioSchoolStyle, 'color': 'black'}">School</div>
                   </template>
                 </v-radio>
 
@@ -1183,7 +1183,7 @@
                   color="#fdbf32"
                 >
                   <template v-slot:label>
-                    <div v-bind:style="{ 'font-weight': sidebarRadioFOSStyle}">Fields of Study</div>
+                    <div v-bind:style="{ 'font-weight': sidebarRadioFOSStyle, 'color': 'black'}">Field of Study</div>
                   </template>
                 </v-radio>
               </v-radio-group>
