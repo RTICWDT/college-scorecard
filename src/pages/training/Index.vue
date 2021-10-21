@@ -396,7 +396,8 @@
   import AnalyticsEvents from '~/js/mixins/AnalyticsEvents.js';
   import FieldOfStudySearch from '../../components/FieldOfStudySearch.vue';
   import Tooltip from "~/components/Tooltip.vue";
-  import LocationCheck from '~/js/mixins/LocationCheck.js'
+  import LocationCheck from '~/js/mixins/LocationCheck.js';
+  import styles from '~/sass/_variables.scss';
 
   export default {
   mixins: [AnalyticsEvents, LocationCheck],
