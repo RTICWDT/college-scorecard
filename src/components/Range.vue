@@ -107,7 +107,7 @@
     position: absolute;
     top: 0;
     transition: left 0.5s;
-    font-size: 12pt;
+    font-size: 12px;
     font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
 
     span {
@@ -122,7 +122,7 @@
     &.picc-range-label-max,
     &.picc-range-label-middle {
       color: #000;
-      font-size: 12pt;
+      font-size: 12px;
     }
 
     &.picc-range-label-max,
