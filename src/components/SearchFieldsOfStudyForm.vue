@@ -288,15 +288,10 @@
         colored-border
         border="left"
         dense
+        icon=' '
       >
-        <template v-slot:prepend>
-          <div class="mx-2">
-            <tooltip definition="fos-limited-data" />
-          </div>
-        </template>
-
-        <div style="margin-top:1px">
-          <span>Limited Data</span>
+        <div style="margin-top:1px;">
+          <span>Limited Data&nbsp;<tooltip definition="fos-limited-data" /></span>
         </div>
       </v-alert>
     </div>
@@ -378,15 +373,10 @@
         colored-border
         border="left"
         dense
+        icon=' '
       >
-        <template v-slot:prepend>
-          <div class="mx-2">
-            <tooltip definition="fos-limited-data" />
-          </div>
-        </template>
-
         <div style="margin-top:1px;">
-          <span>Limited Data</span>
+          <span>Limited Data&nbsp;<tooltip definition="fos-limited-data" /></span>
         </div>
       </v-alert>
 
@@ -395,7 +385,7 @@
     <!-- WIOA Programs -->
     <div class="">
       <label class="subhead mb-2" id="search-fos-dolflag" for="search-fos-dolflag">
-        WIOA Programs 
+        WIOA Programs&nbsp;
       </label><tooltip definition="wioa-participants"/>
 
       <v-checkbox

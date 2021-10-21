@@ -11,30 +11,60 @@
       <p class="pb-2 mt-5 mb-0 body-2 white--text">
         Powered by <a :href="$url('/data')">College Scorecard Data</a> |
         <a
-          href="https://github.com/RTICWDT/college-scorecard/releases"
+          :href="$url('/school/transition/?url=' + encodeURIComponent('https://github.com/RTICWDT/college-scorecard/releases'))"
           target="_blank"
-          >{{ version }}</a
-        >
+          >{{ version }}<v-icon
+            x-small
+            class="pl-1"
+            color="white"            
+          >
+            fas fa-external-link-alt
+          </v-icon>          
+          </a>
         | <a href="mailto:scorecarddata@rti.org">Contact Us</a> |
-        <a href="http://www2.ed.gov/notices/index.html?src=ft" target="_blank"
-          >Notices</a
+        <a :href="$url('/school/transition/?url=' + encodeURIComponent('http://www2.ed.gov/notices/index.html?src=ft'))" target='_blank'
+          >Notices<v-icon
+            x-small
+            class="pl-1"
+            color="white"            
+          >
+            fas fa-external-link-alt
+          </v-icon>          
+        </a
         >
         | <a :href="$url('/data/glossary/')">Glossary</a> |
-        <a href="http://www.ed.gov/" target="_blank"
-          >U.S. Department of Education</a
+        <a :href="$url('/school/transition/?url=' + encodeURIComponent('http://www.ed.gov/'))" target="_blank"
+          >U.S. Department of Education<v-icon
+            x-small
+            class="pl-1"
+            color="white"
+          >
+            fas fa-external-link-alt
+          </v-icon>          
+          </a
         >
       </p>
 
       <p class="py-0 body-2 white--text">
         ZIP Code latitude and longitude provided by
-        <a href="http://www.geonames.org/">GeoNames</a>
+        <a :href="$url('/school/transition/?url=' + encodeURIComponent('http://www.geonames.org/'))">GeoNames<v-icon
+            x-small
+            class="pl-1"
+            color="white"            
+          >
+            fas fa-external-link-alt
+          </v-icon>        
+        </a>
         under a Creative Commons Attribution 3.0 License.
       </p>
     </v-footer>
-    <compare-header />
+    
+    <client-only>
+    <compare-header app />
     <v-bottom-sheet id="compare-modal" v-model="$store.state.drawerOpen" inset>
       <compare-drawer :show-info-text="false"></compare-drawer>
     </v-bottom-sheet>
+    </client-only>
   </div>
 </template>
 

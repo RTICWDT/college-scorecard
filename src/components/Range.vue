@@ -107,10 +107,11 @@
     position: absolute;
     top: 0;
     transition: left 0.5s;
-    font-size: 0.85rem;
+    font-size: 12pt;
+    font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
 
     span {
-      font-weight: 200;
+      font-weight: 400;
       position: absolute;
       top: $label-height;
       width: $label-width;
@@ -120,8 +121,8 @@
     &.picc-range-label-min,
     &.picc-range-label-max,
     &.picc-range-label-middle {
-      color: $dark-gray;
-      font-size: 0.7rem;
+      color: #000;
+      font-size: 12pt;
     }
 
     &.picc-range-label-max,
@@ -304,7 +305,7 @@ export default {
       return (v - this.min.value) / (this.max.value - this.min.value)
     },
     percent(v) {
-      return (this.scale(v) * 100).toFixed(1)
+      return (this.scale(v) * 100).toFixed(2)
     },
     styleLabel(obj, fixLabels = false) {
       let newObj = { ...obj }

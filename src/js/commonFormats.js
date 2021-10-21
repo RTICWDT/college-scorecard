@@ -1,3 +1,4 @@
+import "~/js/filters.js"
 // Helper methods to generate and decode common formats;
 
 export const generateFieldOfStudyUUID = (institutionUnitId,fieldOfStudyCode,FieldOfStudyCredentialLevel) => {
@@ -25,7 +26,8 @@ export const fieldOfStudyCompareFormat = (fieldOfStudyReturnObject) => {
   // Fixing small formatting issue with cred level 3 title formatting.  May be fixed in the data at some point;
   return {
     institutionName: fieldOfStudyReturnObject['school.name'],
-    credentialTitle: (Number(fieldOfStudyReturnObject['credential.level']) === 3) ? "Bachelor's Degree" : fieldOfStudyReturnObject['credential.title'],
+    credentialTitle: this.$options.filters.formatFieldOfStudyCredentialTitle(fieldOfStudyReturnObject['credential.title']),
+    //credentialTitle: fieldOfStudyReturnObject['credential.title'],
     fosTitle: fieldOfStudyReturnObject['title'],
     id: fieldOfStudyReturnObject['unit_id'],
     code: fieldOfStudyReturnObject['code'],

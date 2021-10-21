@@ -204,14 +204,14 @@
                   Start your career and build your skill set through <strong>apprenticeships:</strong>
                 </p>
 
-                 <a class="homeCallout-indent mx-10" href="https://www.apprenticeship.gov/apprenticeship-finder"
+                 <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.apprenticeship.gov/apprenticeship-finder'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    Go to apprenticeship.gov
-                    <v-icon
+                    Go to apprenticeship.gov<v-icon
                       x-small
                       class="pl-1"
+                      color="#007000"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
@@ -223,14 +223,14 @@
                   Build your future with O*NET online, your tool for <strong>career exploration and job analysis:</strong>
                 </p>
 
-                 <a class="homeCallout-indent mx-10" href="https://www.onetonline.org/find/"
+                 <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.onetonline.org/find/'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    Go to ONETonline.org
-                    <v-icon
+                    Go to ONETonline.org<v-icon
                       x-small
                       class="pl-1"
+                      color="#007000"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
@@ -242,14 +242,14 @@
                   Discover Career One Stop, your source for <strong>career exploration training and jobs:</strong>
                 </p>
 
-                 <a class="homeCallout-indent mx-10" href="https://careeronestop.org"
+                 <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://careeronestop.org'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    Go to CareerOneStop.org
-                    <v-icon
+                    Go to CareerOneStop.org<v-icon
                       x-small
                       class="pl-1"
+                      color="#007000"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
@@ -261,14 +261,14 @@
                   <strong>Find training programs:</strong> compare completion rates, employment rates, and more:
                 </p>
 
-                 <a class="homeCallout-indent mx-10" href="https://trainingproviderresults.gov"
+                 <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://trainingproviderresults.gov'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    Go to TrainingProviderResults.gov
-                    <v-icon
+                    Go to TrainingProviderResults.gov<v-icon
                       x-small
                       class="pl-1"
+                      color="#007000"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
@@ -301,14 +301,14 @@
                 <p class="mx-10">
                   You can learn more about the types of financial aid that are available at
 
-                 <a href="https://studentaid.gov"
+                 <a :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    StudentAid.gov
-                    <v-icon
+                    StudentAid.gov<v-icon
                       x-small
                       class="pl-1"
+                      color="#007000"
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
@@ -319,14 +319,14 @@
                   To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA&#174;) form.
                   You can use
 
-                  <a href="https://fafsa.ed.gov/FAFSA/app/f4cForm"
+                  <a :href="$url('/school/transition/?url=' + encodeURIComponent('https://fafsa.ed.gov/FAFSA/app/f4cForm'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    FAFSA<em>4caster</em>
-                    <v-icon
+                    FAFSA<em>4caster</em><v-icon
                       x-small
                       class="pl-1"
+                      color="#007000"
                     >
                       fas fa-external-link-alt
                     </v-icon>                     
@@ -339,11 +339,10 @@
                   <v-btn
                     rounded
                     color="secondary"
-                    href="https://fafsa.ed.gov/"
+                    :href="$url('/school/transition/?url=' + encodeURIComponent('https://fafsa.ed.gov/'))"
                     target="_blank"
                     @click="trackOutboundLink($event)"
-                  >Start Your FAFSA&reg; Application
-                    <v-icon
+                  >Start Your FAFSA&reg; Application<v-icon
                       x-small
                       color="white"
                       class="pl-1 pb-1"
@@ -359,14 +358,14 @@
                   Veterans are eligible for higher education funding through the G.I. Bill benefits. Use the 
 
                   <a
-                    href="https://www.vets.gov/gi-bill-comparison-tool"
+                    :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.vets.gov/gi-bill-comparison-tool'))"
                     target="_blank"
                     @click="trackOutboundLink($event)"
                   >
-                    GI Bill&reg; comparison tool
-                    <v-icon
+                    GI Bill&reg; comparison tool<v-icon
                       x-small
                       class="pl-1"
+                      color="#007000"
                     >
                       fas fa-external-link-alt
                     </v-icon>
@@ -378,7 +377,7 @@
             </v-col>
           </v-row>
         </v-container>
-      </div>
+      </div>    
     </v-main>
   </div>
 </template>
@@ -507,14 +506,6 @@
     text-align: left;
     padding: 0rem 1rem;
   }
-  &.apprenticeships
-    h2 {
-    /*background-color: #436692;*/
-  }
-  &.paying
-    h2 {
-    /*background-color: #436692;*/
-  }
 }
 
 .sublink {
@@ -554,6 +545,8 @@ import SearchForm from "~/components/SearchForm.vue"
 import NameAutocomplete from "~/components/NameAutocomplete.vue"
 import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 import FieldOfStudySearch from "~/components/FieldOfStudySearch.vue"
+import CompareDrawer from "~/components/CompareDrawer.vue"
+import CompareHeader from "~/components/CompareHeader.vue"
 
 export default {
   mixins: [AnalyticsEvents],
@@ -563,6 +556,8 @@ export default {
     "search-form": SearchForm,
     "name-autocomplete": NameAutocomplete,
     "field-of-study-search": FieldOfStudySearch,
+    "compare-drawer": CompareDrawer,
+    "compare-header": CompareHeader,    
   },
   data() {
     return {

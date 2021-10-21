@@ -76,7 +76,7 @@
 .range-container {
   overflow: visible;
   width: 140px;
-  height:450px;
+  height:320px;
   padding-left: 20px;
   padding-top: 0px;
   margin-left:auto;
@@ -92,7 +92,7 @@
 
   background-color: $light-gray;
   display: block;
-  height: 400px;
+  height: 320px;
   margin-bottom: 0;
   margin-top: 0;
   max-height: none;
@@ -172,11 +172,12 @@
     &.picc-range-label-min,
     &.picc-range-label-max {
       top: auto;
-      left: 0;
-      right: 0;
-      margin-left:0;
+      left: none;
+      right: 105px;
+      margin-left: 0;
       margin-right:0;
-      text-align:center;
+      text-align:right;
+      position:absolute;
 
       span {
         top: auto;

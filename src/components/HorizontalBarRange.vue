@@ -75,7 +75,7 @@
 @import "~/sass/_variables.scss";
 .range-container {
   overflow: visible;
-  height: 140px;
+  height: 100px;
   padding-top: 20px;
   padding-right: 0px;
 }
@@ -108,15 +108,14 @@
   .picc-range-label {
     height: 22px;
     position: absolute;
-    top: 0;
+    top: 3px;
     transition: left 0.5s;
     font-size: 0.85rem;
 
     span {
-      font-weight: 200;
+      font-weight: 400;
       position: absolute;
-      top: 4px;
-      width: $label-width;
+      top: 0px;
       cursor: pointer;
     }
 
@@ -187,16 +186,16 @@
       border-left: 1px solid #000;
       span {
         top: 40px !important;
-
+              width: $label-width;
       }
       span:not(.arrow-left) {
         //margin-bottom: $bar-width + $arrow-size + 10;
         text-align: center;
         color:#000;
         top: 50px !important;
-        margin-left:-88px !important;
-        font-weight:400;
-        font-size: 14pt;
+        margin-left:-80px !important;
+        font-weight:420;
+        font-size: 12pt;
         font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
         font-style:italic;
 
@@ -295,6 +294,7 @@ export default {
   data() {
     return {
       bar_styles: { left: 0, right: 0 },
+      label_styles: { left: 0, right: 0 },
       extraPad: {
         "padding-right": 0,
       },
@@ -320,8 +320,8 @@ export default {
       return this.styleLabel(this.median)
     },
     _upper() {
-      // return this.styleLabel(this.upper);
-      let styleLabel = this.styleLabel(this.upper, false)
+      //return this.styleLabel(this.upper);
+      let styleLabel = this.styleValueLabel(this.upper, false)
       styleLabel.styles = {
         ...styleLabel.styles,
         ...this.upper.styles,
@@ -340,7 +340,9 @@ export default {
       this.bar_styles.right = right + "%"
 
       if (right < 20 && this.addExtraPadding) {
-        this.extraPad["padding-right"] = "60px"
+        //this.extraPad["padding-right"] = "60px"
+        var s = this._upper.styles.left.replace(/[0-9]+%\s?/g, '');
+        this._upper.styles.left = (s - 10) + '%';
       }
     },
     scale(v) {
@@ -351,7 +353,6 @@ export default {
     },
     styleLabel(obj, fixLabels = false) {
       let newObj = { ...obj }
-      // console.log(newObj);
       newObj.styles = {}
       newObj.styles.display = newObj.label ? "block" : "none"
       let left = this.percent(newObj.value)
@@ -363,6 +364,29 @@ export default {
       newObj.styles.left = left + "%"
       return newObj
     },
+    styleValueLabel(obj, fixLabels = false) {
+      let newObj = { ...obj }
+      newObj.styles = {}
+      newObj.styles.display = newObj.label ? "block" : "none"
+      let left = this.percent(newObj.value)
+      if (left > 100) {
+        left = 100
+        newObj.label = ">" + this._max.label
+        newObj.value = this._max.value
+      }
+      newObj.styles.left = left + "%"
+
+      if (left > 80) {
+        let s = left.replace(/[0-9]+%\s?/g, '');
+        if (obj.label.includes('$'))
+          newObj.styles.left = (s - 25) + '%';
+        else
+          newObj.styles.left = (s - 12) + '%';
+        newObj.styles.color = '#ffffff'
+      }
+
+      return newObj
+    }, 
   },
 
   mounted() {

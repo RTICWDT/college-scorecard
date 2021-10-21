@@ -149,7 +149,7 @@
             <!-- Search Result Info and controls -->
             <v-card
               class="mt-2 mb-4 py-4 px-4 elevaton-0 pageBar"
-              v-if="!isLoading"
+              v-show="!isLoading"
             >
               <v-row class="">
                 <v-col cols="12" sm="7" class="py-2 px-4">
@@ -177,7 +177,7 @@
                           @click="clearSearchForm"
                           small
                           rounded
-                          class="d-none d-sm-inline"
+                          class="d-none d-sm-inline mr-1"
                         >
                           <span >
                             <v-icon small class='mr-1'>mdi-close-circle</v-icon>
@@ -195,7 +195,7 @@
                             v-on="on"
                             class="d-none d-sm-inline mr-1"
                           >
-                            <v-icon small class="mr-1">fas fa-sort</v-icon>
+                            <v-icon small class="mx-1">fas fa-sort</v-icon>
                             Sort
                           </v-btn>
                         </template>
@@ -263,7 +263,7 @@
                   cols="12"
                   sm="5"
                   class="py-1 px-1"
-                  v-if="!isLoading && results.schools.length > 0"
+                  v-show="!isLoading && results.schools.length > 0"
                 >
                   <div class="text-md-right justify-end">
                     <v-pagination
@@ -273,6 +273,7 @@
                       :total-visible="7"
                       @input="handlePaginationInput"
                       class="pr-0 mr-0"
+                      circle
                     ></v-pagination>
                   </div>
                 </v-col>
@@ -322,9 +323,8 @@
                   <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
                   Classification of Instructional Programs (CIP) and may not match the program titles at a
                   given school.
-                  <a target="_blank" href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56">
-                    Learn more about CIP
-                    <v-icon
+                  <a target="_blank" :href="$url('/school/transition/?url=' + encodeURIComponent('https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56'))">
+                    Learn more about CIP<v-icon
                       x-small
                       color="white"
                       class="pl-1"
@@ -559,7 +559,7 @@ export default {
         { type: "Name", field: "name:asc" },
         { type: "Annual Cost", field: "avg_net_price:asc" },
         { type: "Graduation Rate", field: "completion_rate:desc" },
-        { type: "Threshold Earnings", field: "completion_rate:desc" },
+        { type: "Percent Earning Above HS Grad", field: "completion_rate:asc" },
       ],
       shareUrl: null,
       displayToggle: "institutions",
@@ -735,7 +735,7 @@ export default {
 
       let request = apiGet("/schools", query)
         .then((response) => {
-          console.log("loaded schools:", response.data)
+          //console.log("loaded schools:", response.data)
 
           this.results.schools = response.data.results
           this.results.meta = response.data.metadata

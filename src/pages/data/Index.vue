@@ -11,8 +11,15 @@
               supporting data on student completion, debt and repayment,
               earnings, and more. The data is available on
               <a
-                href="https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources"
-                >data.ed.gov</a
+                :href="$url('/school/transition/?url=' + encodeURIComponent('https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources'))"
+                >data.ed.gov<v-icon
+                    x-small
+                    class="pl-1"
+                    color="#007000"            
+                  >
+                    fas fa-external-link-alt
+                  </v-icon>                  
+                </a
               >
               and include the following data files:
             </p>
@@ -59,14 +66,20 @@
                   <v-card
                     class="pa-2 text-center fill-height d-flex align-center justify-center"
                     color="grey lighten-4"
-                    href="https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources"
+                    :href="$url('/school/transition/?url=' + encodeURIComponent('https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources'))"
                     target="_blank"
                     @click="trackOutboundLink($event)"
                     hover
                   >
                     <div>
                       <span class="title font-weight-bold">
-                        Visit data.ed.gov To Download The Data&nbsp;
+                        Visit data.ed.gov To Download The Data<v-icon
+                              x-small
+                              class="pl-1"
+                              color="#007000"
+                            >
+                              fas fa-external-link-alt
+                            </v-icon>
                       </span>
                     </div>
                   </v-card>
@@ -76,10 +89,17 @@
               <p class="mt-8">
                 <strong>Looking for help?</strong> Visit
                 <a
-                  href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
+                  :href="$url('/school/transition/?url=' + encodeURIComponent('http://opendata.stackexchange.com/questions/tagged/collegescorecard'))"
                   @click="trackOutboundLink($event)"
                   target="_blank"
-                >StackExchange</a> or email the help desk at
+                >StackExchange<v-icon
+                    x-small
+                    class="pl-1"
+                    color="#007000"            
+                  >
+                    fas fa-external-link-alt
+                  </v-icon>                  
+                </a> or email the help desk at
                 <a href="mailto:scorecarddata@rti.org">scorecarddata@rti.org</a>. For inquiries by members of the press, please contact <a href="mailto:press@ed.gov">press@ed.gov</a>.
               </p>
             </v-card>

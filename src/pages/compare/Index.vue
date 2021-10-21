@@ -14,7 +14,7 @@
                   text
                   id="referrer-link"
                   class="link-more"
-                  :href="$url(referrerLink)"
+                  :href="referrerLink"
                   >&laquo; Back</v-btn
                 >
               </v-col>
@@ -61,8 +61,9 @@
               </context-toggle>
             </div>
 
+
             <!--Loader-->
-            <div v-if="loading" class="show-loading ma-4">
+            <div v-show="loading" class="show-loading ma-4">
               <div class="pa-5">
                 <h1 class="title">
                   Loading
@@ -71,14 +72,15 @@
               </div>
             </div>
 
+            
+
             <!-- Institution Top Summary-->
             <div
-              v-else-if="showResource === 'institutions'"
-              class="show-loaded mx-5"
+              class="mx-5"
               id="school"
             >
               <!-- Institution Chips -->
-              <div class="compare-institution-chip-container py-5 mb-10">
+              <div v-show="showResource === 'institutions' && !loading" class="compare-institution-chip-container py-5 mb-10 show-loaded">
                 <v-chip-group column>
                   <v-chip
                     class="pa-4 ma-2"
@@ -97,6 +99,17 @@
               <!--Institution Summary Metrics-->
               <v-row>
                 <v-col cols="12" class="px-sm-5 pt-0">
+                    <median-toggle
+                      :display-toggle="medianToggle"
+                      @median-switch-click="handleMedianToggle"
+                      @median-tab-change="handleMedianToggle"
+                      group-name="School Type"
+                      label-prefix="Median for "
+                      :tab-style="{
+                        width: '32%',
+                      }"
+                      v-if="showResource === 'institutions'  && !loading"
+                    />                    
                   <compare-section
                     :schools="schools"
                     title="Average Annual Cost"
@@ -106,11 +119,23 @@
                     :config="{
                       computedField: 'netPrice',
                       color: '#00365e',
-                      max: 150000,
-                      type: 'currency',
-                      chart: 'HorizontalBar',
+                      min: {
+                        label: '$0',
+                        value: 0,
+                        style: { height: '60px' },
+                      },                      
+                      max: {
+                        label: '$100,000',
+                        value: 100000,
+                        style: { height: '60px' },
+                      },                
+                      type: 'average-annual-cost',
+                      chart: 'HorizontalBarMedian',
+                      medianToggle: medianToggle
                     }"
-                    ><p class="my-n3">
+                    class="mt-5"
+                    v-show="showResource === 'institutions' && !loading"
+                    ><p class="my-3" v-show="showResource === 'institutions' && !loading">
                       Cost includes tuition, living costs, books and supplies,
                       and fees minus the average grants and scholarships for
                       federal financial aid recipients.
@@ -126,25 +151,48 @@
                     :config="{
                       computedField: 'completionRate',
                       color: '#00365e',
-                      max: 100,
-                      type: 'percent',
-                      chart: 'HorizontalBar',
+                      min: {
+                        label: '0%',
+                        value: 0,
+                        style: { height: '60px' },
+                      },                      
+                      max: {
+                        label: '100%',
+                        value: 100,
+                        style: { height: '60px' },
+                      },                
+                      type: 'graduation-rate',
+                      chart: 'HorizontalBarMedian',
+                      medianToggle: medianToggle
+                      
                     }"
+                    v-show="showResource === 'institutions' && !loading"
                   />
 
                   <compare-section
                     :schools="schools"
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
-                    title="Salary After Completing"
+                    title="Median Earnings"
                     definition="fos-median-earnings"
                     :config="{
-                      computedField: 'earningsRange',
+                      computedField: 'medianEarnings',
                       color: '#00365e',
-                      chart: 'MultiRange',
-                      multiRangeVariable:
-                        'earnings.highest.2_yr.overall_median_earnings',
+                      min: {
+                        label: '$0',
+                        value: 0,
+                        style: { height: '60px' },
+                      },                      
+                      max: {
+                        label: '$100,000',
+                        value: 100000,
+                        style: { height: '60px' },
+                      },                
+                      type: 'median-earnings',
+                      chart: 'HorizontalBarMedian',
+                      medianToggle: medianToggle
                     }"
+                    v-show="showResource === 'institutions' && !loading"
                   />
                 </v-col>
               </v-row>
@@ -152,7 +200,7 @@
             <!-- End Institution Top Summary-->
 
             <!-- Field Of Study Container -->
-            <div v-else-if="showResource === 'fos'">
+            <div v-show="showResource === 'fos' && !loading">
               <!-- Field of Study Chips -->
               <div class="compare-fos-chip-container mb-10 py-5 mx-md-5">
                 <!-- Mobile Chip Layout -->
@@ -391,12 +439,11 @@
                         >
                           <template v-slot:label>
                             <span class="profile-fos-include-prior-debt">
-                              Include debt borrowed at any prior institutions
-                              
+                              Include debt borrowed at any prior institutions&nbsp;
+                              <tooltip definition="include-debt-prior-inst" />
                             </span>
                           </template>
                         </v-checkbox>
-                        <tooltip definition="include-debt-prior-inst" />
                       </div>
 
                       <compare-block
@@ -488,12 +535,11 @@
                         >
                           <template v-slot:label>
                             <span class="profile-fos-include-prior-debt">
-                              Include debt borrowed at any prior institutions
-                              
+                              Include debt borrowed at any prior institutions&nbsp;
+                              <tooltip definition="include-debt-prior-inst" />
                             </span>
                           </template>
                         </v-checkbox>
-                        <tooltip definition="include-debt-prior-inst" />
                       </div>
                       <compare-block
                         v-for="credentialLevel in filteredFieldsOfStudy"
@@ -641,7 +687,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'fullTimeEnrollment',
-                      color: '#00365e',
+                      color: '#1874DC',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -666,7 +712,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'socioEconomicDiversity',
-                      color: '#00365e',
+                      color: '#1874DC',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -681,7 +727,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'raceEthnicity',
-                      color: '#00365e',
+                      color: '#1874DC',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -731,6 +777,18 @@
                   >Costs</v-expansion-panel-header
                 >
                 <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
+                    <median-toggle
+                      :display-toggle="medianToggle"
+                      @median-switch-click="handleMedianToggle"
+                      @median-tab-change="handleMedianToggle"
+                      group-name="School Type"
+                      label-prefix="Median for "
+                      :tab-style="{
+                        width: '32%',
+                      }"
+                      v-show="showResource === 'institutions'"
+                    />    
+
                   <compare-section
                     :schools="schools"
                     title="Average Annual Cost"
@@ -740,11 +798,22 @@
                     :config="{
                       computedField: 'netPrice',
                       color: '#00365e',
-                      max: 150000,
-                      type: 'currency',
-                      chart: 'HorizontalBar',
+                      min: {
+                        label: '$0',
+                        value: 0,
+                        style: { height: '60px' },
+                      },                      
+                      max: {
+                        label: '$100,000',
+                        value: 100000,
+                        style: { height: '60px' },
+                      },                
+                      type: 'average-annual-cost',
+                      chart: 'HorizontalBarMedian',
+                      medianToggle: medianToggle
                     }"
-                    ><p>
+                    class="mt-5"
+                    ><p class="my-3">
                       Cost includes tuition, living costs, books and supplies,
                       and fees minus the average grants and scholarships for
                       federal financial aid recipients.
@@ -758,7 +827,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'income',
-                      color: '#00365e',
+                      color: '#1874DC',
                       max: 60000,
                       type: 'currency',
                       chart: 'HorizontalBar',
@@ -797,6 +866,18 @@
                   >Graduation & Retention</v-expansion-panel-header
                 >
                 <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
+                    <median-toggle
+                      :display-toggle="medianToggle"
+                      @median-switch-click="handleMedianToggle"
+                      @median-tab-change="handleMedianToggle"
+                      group-name="School Type"
+                      label-prefix="Median for "
+                      :tab-style="{
+                        width: '32%',
+                      }"
+                      v-show="showResource === 'institutions'"
+                    />    
+
                   <compare-section
                     :schools="schools"
                     title="Graduation Rate"
@@ -806,10 +887,21 @@
                     :config="{
                       computedField: 'completionRate',
                       color: '#00365e',
-                      max: 100,
-                      type: 'percent',
-                      chart: 'HorizontalBar',
+                      min: {
+                        label: '0%',
+                        value: 0,
+                        style: { height: '60px' },
+                      },                      
+                      max: {
+                        label: '100%',
+                        value: 100,
+                        style: { height: '60px' },
+                      },                
+                      type: 'graduation-rate',
+                      chart: 'HorizontalBarMedian',
+                      medianToggle: medianToggle
                     }"
+                    class="mt-5"
                   />
                   <compare-section
                     :schools="schools"
@@ -819,7 +911,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'retentionRate',
-                      color: '#00365e',
+                      color: '#1874DC',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -832,14 +924,29 @@
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
                     :config="{
-                      color: '#00365e',
+                      color: '#1874DC',
                       chart: 'Sankey',
                       currentSankey: currentSankey,
+                      showPellOnly: showPellOnly
                     }"
                   >
+                  <template>
+                      <v-checkbox
+                        v-model="showPellOnly"
+                        label="Show Pell Grant Recipients Only"
+                        color="secondary"
+                        class="mt-0"
+                      >
+                        <template v-slot:label>
+                          <span>
+                            Show Pell Grant Recipients Only&nbsp;
+                          </span>
+                        </template>
+                      </v-checkbox>
                     <sankey-buttons
                       v-on:update-sankey="currentSankey = $event"
                     />
+                    </template>
                   </compare-section>
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -853,6 +960,7 @@
                 </v-expansion-panel-header>
 
                 <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
+                  
                   <v-select
                     class="mb-5 pt-0"
                     hide-details
@@ -869,7 +977,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'studentsReceivingLoans',
-                      color: '#00365e',
+                      color: '#1874DC',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -914,12 +1022,12 @@
                         >
                           <template v-slot:label>
                             <span>
-                              Include debt borrowed at any prior institutions
-                              
+                              Include debt borrowed at any prior institutions&nbsp;
+                              <tooltip definition="include-debt-prior-inst" />
                             </span>
                           </template>
                         </v-checkbox>
-                        <tooltip definition="include-debt-prior-inst" />
+                        
                       </div>
                     </template>
                   </compare-section>
@@ -950,12 +1058,12 @@
                         >
                           <template v-slot:label>
                             <span>
-                              Include debt borrowed at any prior institutions
-                              
+                              Include debt borrowed at any prior institutions&nbsp;
+                              <tooltip definition="include-debt-prior-inst" />
                             </span>
                           </template>
                         </v-checkbox>
-                        <tooltip definition="include-debt-prior-inst" />
+                        
                       </div>
                     </template>
                   </compare-section>
@@ -971,26 +1079,29 @@
                       color: '#00365e',
                       chart: 'RepaymentRate',
                       showGradOnly: showGradOnly,
+                      repaymentStatus: currentRepaymentStatus
                     }"
                   >
-                    <template>
-                      <span v-if="showGradOnly">
-                        Percentage of borrowers in each category 2 years after
-                        entering repayment. For category definitions, please see
-                        <a
-                          v-bind:href="
-                            '/data/glossary/#repayment-rate-completers'
-                          "
-                          >the glossary</a
-                        >.
-                      </span>
-                      <span v-else>
-                        Percentage of borrowers in each category 2 years after
-                        entering repayment. For category definitions, please see
-                        <a v-bind:href="'/data/glossary/#repayment-rate'"
-                          >the glossary</a
-                        >.
-                      </span>
+                  <template>
+                        <span v-if="showGradOnly">
+                          Percentage of borrowers in each category 2 years after
+                          entering repayment. For category definitions, please
+                          see
+                          <a
+                            v-bind:href="
+                              $url('/data/glossary/#repayment-rate-completers')
+                            "
+                            >the glossary</a
+                          >.
+                        </span>
+                        <span v-else>
+                          Percentage of borrowers in each category 2 years after
+                          entering repayment. For category definitions, please
+                          see
+                          <a v-bind:href="$url('/data/glossary/#repayment-rate')"
+                            >the glossary</a
+                          >.
+                        </span>                    
                       <v-checkbox
                         class="my-0 mb-2"
                         v-model="showGradOnly"
@@ -1002,6 +1113,26 @@
                           </span>
                         </template>
                       </v-checkbox>
+                    <p class="overline mb-1 mt-3">Repayment Status</p>
+                    <v-select
+                      :items="[
+                        { label: 'Making Progress', value: 'makingprogress' },
+                        { label: 'Not Making Progress', value: 'noprogress' },
+                        { label: 'Deferment', value: 'deferment' },
+                        { label: 'Paid in Full', value: 'fullypaid' },
+                        { label: 'Forbearance', value: 'forbearance' },
+                        { label: 'Defaulted', value: 'default' },
+                        { label: 'Delinquent', value: 'delinquent' },
+                        { label: 'Discharged', value: 'discharge' },                        
+                      ]"
+                      item-text="label"
+                      item-value="value"
+                      label="Repayment Status"
+                      v-model="currentRepaymentStatus"
+                      color="secondary"
+                      solo
+                    ></v-select>
+
                     </template>
                   </compare-section>
                 </v-expansion-panel-content>
@@ -1013,22 +1144,45 @@
                   @click="
                     trackAccordion('Salary after Completing by Field of Study')
                   "
-                  >Salary after Completing by Field of
-                  Study</v-expansion-panel-header
+                  >Typical Earnings</v-expansion-panel-header
                 >
                 <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
+                    <median-toggle
+                      :display-toggle="medianToggle"
+                      @median-switch-click="handleMedianToggle"
+                      @median-tab-change="handleMedianToggle"
+                      group-name="School Type"
+                      label-prefix="Median for "
+                      :tab-style="{
+                        width: '32%',
+                      }"
+                      v-show="showResource === 'institutions'"
+                    />    
+
                   <compare-section
                     :schools="schools"
-                    title="Salary Ranges by Field of Study"
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
+                    title="Median Earnings"
+                    definition="fos-median-earnings"
                     :config="{
-                      computedField: 'earningsRange',
+                      computedField: 'medianEarnings',
                       color: '#00365e',
-                      chart: 'MultiRange',
-                      multiRangeVariable:
-                        'earnings.highest.2_yr.overall_median_earnings',
+                      min: {
+                        label: '$0',
+                        value: 0,
+                        style: { height: '60px' },
+                      },                      
+                      max: {
+                        label: '$100,000',
+                        value: 100000,
+                        style: { height: '60px' },
+                      },                
+                      type: 'median-earnings',
+                      chart: 'HorizontalBarMedian',
+                      medianToggle: medianToggle
                     }"
+                    class="mt-5"
                   />
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -1090,7 +1244,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'acceptanceRate',
-                      color: '#00365e',
+                      color: '#1874DC',
                       max: 100,
                       type: 'percent',
                       chart: 'HorizontalBar',
@@ -1104,7 +1258,7 @@
           <!-- Search Form Component -->
           <div v-show="!loading && showSearchForm">
             <v-card class="pa-5 mb-2">
-              <div v-if="displayToggle === 'institutions'">
+              <div v-show="displayToggle === 'institutions'">
                 <h1 class="text-center py-3">
                   No schools selected to compare.
                 </h1>
@@ -1119,14 +1273,14 @@
                   </v-btn>
                 </div>
 
-                <p class="text-center my-4">
+                <div class="text-center my-4">
                   Try searching for schools and clicking the
                   <v-icon>fa fa-check-circle</v-icon> to add a school for
                   comparison.
-                </p>
+                </div>
               </div>
 
-              <div v-else>
+              <div v-show="displayToggle !== 'institutions'">
                 <h1 class="text-center py-3">
                   No fields of study selected to compare.
                 </h1>
@@ -1141,11 +1295,11 @@
                   </v-btn>
                 </div>
 
-                <p class="text-center my-4">
+                <div class="text-center my-4">
                   Try searching for fields of study and clicking the
                   <v-icon>fa fa-check-circle</v-icon> to add a field of study
                   for comparison.
-                </p>
+                </div>
               </div>
             </v-card>
           </div>
@@ -1154,7 +1308,7 @@
 
         <!-- Left Aside -->
         <v-col lg="3" class="pt-0">
-          <v-card v-if="showShareUpdate" class="pa-5 mb-3">
+          <v-card v-show="showShareUpdate" class="pa-5 mb-3">
             <p>You are viewing a shared comparison.</p>
 
             <v-btn
@@ -1198,7 +1352,6 @@
                 v-if="sidebarSearchToggle === 'fos'"
                 id="school-fos-search"
                 @field-of-study-selected="handleFieldOfStudySelected"
-                :customColor="fosSearchColor"
               />
               <div></div><!--Due to CSS styling where last element in card copies border radius of parent element-->
             </v-card>
@@ -1286,6 +1439,7 @@ import Share from "~/components/Share.vue"
 import PayingForCollege from "~/components/PayingForCollege.vue"
 import CompareDrawer from "~/components/CompareDrawer.vue"
 import HorizontalBar from "~/components/HorizontalBar.vue"
+import HorizontalBarMedian from "~/components/HorizontalBarMedian.vue"
 import CompareSection from "~/components/compare/Section.vue"
 import CompareBlock from "~/components/compare/Block.vue"
 import { compare } from "~/js/mixins.js"
@@ -1307,6 +1461,7 @@ import {
 } from "~/js/commonFormats"
 import ContextToggle from "~/components/ContextToggle.vue"
 import { mapGetters } from "vuex"
+import MedianToggle from "~/components/MedianToggle.vue"
 
 export default {
   mixins: [ComplexFields, AnalyticsEvents, Router],
@@ -1323,6 +1478,7 @@ export default {
     "name-autocomplete": NameAutocomplete,
     "field-of-study-search": FieldOfStudySearch,
     "context-toggle": ContextToggle,
+    "median-toggle": MedianToggle,
   },
   data() {
     return {
@@ -1335,6 +1491,7 @@ export default {
       },
       currentRaceEthnicity: "American Indian/Alaska Native",
       currentIncomeFilter: "0-30000",
+      currentRepaymentStatus: "makingprogress",
       currentSankey: {
         enroll: "enroll_both",
         study: "study_both",
@@ -1362,11 +1519,14 @@ export default {
       fosFinancialCheckboxIncludePrior: false,
       aidShowMedianDebtWithPrior: false,
       showGradOnly: false,
+      showPellOnly: false,
       aidLoanSelect: "fed",
       aidLoanSelectItems: [
         { text: "Federal Student Loans", value: "fed" },
         { text: "Parent Plus Loans", value: "plus" },
       ],
+      medianToggle: "group",
+      controlTabMedian: 0,
       controlTab: 0,
       sidebarSearchToggle: "school",
     }
@@ -1422,7 +1582,7 @@ export default {
       }
 
       // Return Composite URL
-      console.log(this.$url(compareBaseURL + this.prepareQueryString(paramArray)))
+      //console.log(this.$url(compareBaseURL + this.prepareQueryString(paramArray)))
       return this.$url(compareBaseURL + this.prepareQueryString(paramArray))
     },
     referrerLink() {
@@ -1659,6 +1819,7 @@ export default {
           })
 
           this.loading = false
+
         })
         .catch((responses) => {
           // TODO - How do we want to handle errors?
@@ -1740,11 +1901,19 @@ export default {
           break
 
         case localStorageKeys.COMPARE_FOS_KEY:
-          this.$store.commit("toggleFieldOfStudy", removeData)
+          let delObj = {
+            code: removeData.code,
+            credentialTitle: removeData["credential.title"],
+            fosTitle: removeData.title,
+            id: removeData.unit_id,
+            institutionName: removeData["school.name"],
+            credentialLevel: removeData["credential.level"],
+        }
+          this.$store.commit("toggleFieldOfStudy", delObj)
           this.modifyUrl()
           break
-        default:
-          break
+      default:
+        break
       }
     },
     modifyUrl() {
@@ -1805,19 +1974,23 @@ export default {
 
       return itemsToQuery
     },
+    handleMedianToggle(toggleValue) {
+      this.controlTabMedian = toggleValue
+      this.medianToggle = toggleValue === 0 ? "group" : "all"
+    },  
     handleSchoolNameSelected(school) {
-      if(typeof school == "string")
-      {
-        window.location = this.$baseUrl+'/search/?name=' + encodeURIComponent(school);
-      }
-      else
-      {
-        window.location = this.$baseUrl+'/search/?name=' + encodeURIComponent(school['school.name']) + "&id="+school.id;
+      if (typeof school == "string") {
+        this.$router.push("/search/?search=" + encodeURIComponent(school))
+      } else {
+        this.$router.push("/search/?search=" +
+          encodeURIComponent(school["school.name"]) +
+          "&id=" +
+          school.id)
       }
     },
-    handleFieldOfStudySelected(fieldOfStudy){
-      window.location = this.$baseUrl+'/search/?toggle=fos&cip4=' + encodeURIComponent(fieldOfStudy.cip4);
-    }
+    handleFieldOfStudySelected(fieldOfStudy) {
+      this.$router.push("/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4))
+    },      
   },
   mounted() {
     // set toggle from URL
@@ -1833,6 +2006,9 @@ export default {
       this.controlTab = 0
       this.queryInstitutions()
     }
+
+    this.medianToggle = "group";
+    this.controlTabMedian = 0;
 
     // Did this initiate as a shared comparision
     this.isSharedComparison = this.showShareUpdate

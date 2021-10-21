@@ -56,10 +56,12 @@ export default {
   },
   computed: {
     referrer() {
-      return process.isClient ? document.referrer : ""
+      //return process.isClient ? document.referrer : ""
+      return ""
     },
     url() {
       let url = decodeURI(this.query.url)
+
       if (
         url.match(
           /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
@@ -72,7 +74,7 @@ export default {
     },
   },
   mounted() {
-    if (isClient) {
+    if (true) {
       let query = querystring.parse(window.location.search.substring(1))
       this.query = query || {}
     }

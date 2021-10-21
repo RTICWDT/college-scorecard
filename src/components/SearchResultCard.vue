@@ -33,11 +33,17 @@
 .noCompareAllow {
   cursor: not-allowed !important;
 }
+
+.search-result-card {
+  h3 {
+    font-size:24px;
+  }
+}
 </style>
 
 <template>
   <v-card
-    class="search-result-card mx-auto elevation-4"
+    class="search-result-card mx-auto elevation-0"
     outlined
     :class="{ 'result-card-selected': isSelected }"
   >
@@ -76,17 +82,17 @@
       <h2 class="title mt-0 font-weight-bold">
         <a class="nameLink" :href="$url(schoolLink)">{{ schoolName }}</a>
       </h2>
-      <p class="body-2 mt-1">{{ undergraduates | separator }} undergrads</p>
-      <v-divider />
+      <!--<p class="body-2 mt-1">{{ undergraduates | separator }} undergrads</p> -->
+
       <v-row>
         <v-col cols="12">
           <small-school-icons :school="school" :fields="fields" size="small" />
         </v-col>
       </v-row>
-      <v-divider />
+      <v-divider class="pb-3"/>
       <!-- <p class="overline mb-0 pt-3">Institutional Highlights:</p>-->
       <v-row class="v-flex align-center">
-        <v-col class="">
+        <v-col class="pb-1">
           <!--prettyhtml-ignore-->
           <span
             >Graduation Rate&nbsp;<tooltip
@@ -94,13 +100,13 @@
               :version="completionRateFieldDefinition"
           /></span>
         </v-col> </v-row
-      ><v-row class="mt-0">
+      ><v-row class="mt-1">
         <v-col class="text--black py-0">
           <h3 class="navy-text ma-0 pa-0">{{ displayGradRate }}</h3>
         </v-col>
       </v-row>
-      <v-row class="result-card-info-container v-flex align-center">
-        <v-col class="py-0 mt-4">
+      <v-row class="v-flex align-center">
+        <v-col class="pb-1">
           <!--prettyhtml-ignore-->
           <span v-if="!isProgramReporter"
             >Average Annual Cost&nbsp;<tooltip
@@ -114,9 +120,9 @@
               :isNegative="netPrice < 0"
           /></span>
         </v-col> </v-row
-      ><v-row>
-        <v-col class="pr-2 text--black py-0">
-          <h3 class="navy-text my-0">{{ displayAvgCost }}</h3>
+      ><v-row class="mt-1">
+        <v-col class="text--black py-0">
+          <h3 class="navy-text ma-0 pa-0">{{ displayAvgCost }}</h3>
         </v-col>
       </v-row>
       <v-row class="result-card-info-container v-flex align-center">
@@ -128,7 +134,7 @@
               :isBranch="isBranch"
           /></span>
         </v-col> </v-row
-      ><v-row>
+      ><v-row class="mt-1">
         <v-col class="text--black py-0">
           <h3 class="navy-text ma-0">{{ displayEarn }}</h3>
         </v-col>
@@ -170,18 +176,18 @@ export default {
       }
     },
     compareHoverCountText() {
-      if (this.schoolsCount > 9){
-        return "Maximum of 10 schools reached";
+      if (this.$store.state.institutions.length > 9){
+        return "Maximum of 10 Schools reached";
       }
       else{
         return "Add School to compare";
       }
     },
     compareSchoolsLength() {
-      return this.schoolsCount;
+      return this.$store.state.institutions.length;
     },    
     displayEarn() {
-      if (!this.earningsRange) {
+      /*if (!this.earningsRange) {
         return "N/A"
       } else if (this.earningsRange.single) {
         return this.$options.filters.numeral(
@@ -192,18 +198,13 @@ export default {
       } else {
         return (
           this.$options.filters.numeral(
-            this.earningsRange.min.earnings.highest["2_yr"]
-              .overall_median_earnings,
-            "$0a"
-          ) +
-          "-" +
-          this.$options.filters.numeral(
             this.earningsRange.max.earnings.highest["2_yr"]
               .overall_median_earnings,
-            "0a"
+            "$0a"
           )
         )
-      }
+      }*/
+      return this.$options.filters.numeral(this.medianEarnings, "$0a")
     },
     displayAvgCost() {
       if (!this.netPrice) {

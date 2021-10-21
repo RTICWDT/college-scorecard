@@ -1,5 +1,6 @@
 import { fields } from '../constants.js';
 import { SiteData } from './SiteData.js';
+import "~/js/filters.js"
 import _ from 'lodash';
 
 export default {
@@ -263,6 +264,7 @@ export default {
                 if(_.get(fos[i],'credential.level') === 3){
                     _.set(fos[i],'credential.title', "Bachelor's Degree");
                 }
+                
                 // if(fos[i].credential.level==3)
                 // {
                 //     fos[i].credential.title="Bachelor's Degree";
@@ -443,6 +445,34 @@ export default {
             if (!this.school) return null;
             return _.get(this.school, fields['REPAYMENT_RATES'])      
         },
+        medianEarnings() {
+            if (!this.school) return null;
+            return _.get(this.school, fields['MEDIAN_EARNINGS']) 
+        },
+        fakeMedianEarnings() {
+            var medians = 
+                    { 1 : 43316,
+                     2: 46124 ,
+                     3 : 64896,
+                     4 : 51445}
+            return medians;
+        },
+        fakeAverageAnnualCost() {
+            var medians = 
+                    { 1 : 20031,
+                     2: 26850 ,
+                     3 : 39520,
+                     4 : 34090}
+            return medians;
+        },      
+        fakeGraduationRate() {
+            var medians = 
+                    { 1 : .30,
+                     2: .32 ,
+                     3 : .60,
+                     4 : .46}
+            return medians;
+        }
     },
     methods: {
         // Moving items down here for easier testing.

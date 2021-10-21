@@ -19,7 +19,7 @@
     <v-tab :id="tabID('group', controlTab)" :style="tabStyle">
       <slot name="tab-group">
         <span class="compare-tab-title">
-          {{ labelPrefix }}{{groupName}} Schools
+          {{ labelPrefix }}{{groupName}}
         </span>
       </slot>
     </v-tab>
@@ -64,7 +64,7 @@
 #median-toggle {
   #median-tab-inactive {
     /*background-color: #eeeeee;*/
-    border-bottom: 8px solid #dcdada;
+    border-bottom: 1px solid #707070;
   }
 
   #median-tab-active {
@@ -101,14 +101,6 @@ export default {
     groupName: {
       type: String,
     },
-    compareInstitutionsCount: {
-      type: Number,
-      default: 0,
-    },
-    compareFieldsOfStudyCount: {
-      type: Number,
-      default: 0,
-    },
     tabsHeight: {
       type: String,
       default: "50px",
@@ -117,7 +109,7 @@ export default {
       type: Object,
       default() {
         return {
-          width: "60%",
+          width: "64%",
         }
       },
     },
@@ -125,7 +117,7 @@ export default {
       type: Object,
       default() {
         return {
-          width: "25%",
+          width: "32%",
         }
       },
     },

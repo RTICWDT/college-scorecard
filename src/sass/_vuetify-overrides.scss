@@ -23,7 +23,7 @@ html {
   }
 
   .v-pagination__item {
-    box-shadow: none !important;
+    //box-shadow: none !important;
   }
 
   h1,
@@ -38,7 +38,7 @@ html {
   header #nav-main-navigation {
     font-family: $header-font-family !important;
     a {
-      font-size: 16pt !important;
+      font-size: 16px !important;
       text-transform: none !important;
     }
   }
@@ -56,7 +56,7 @@ html {
         max-width: 1300px;
       }
     }
-    .v-btn.secondary:not(.share):not(.fos-button):not(.filter-button):not(.component-toggle-button){
+    .v-btn.secondary:not(.share):not(.fos-button):not(.filter-button):not(.component-toggle-button):not(.searchFab){
       letter-spacing: normal;
       height:50px !important;
       border-radius: 16px !important;
@@ -81,7 +81,8 @@ html {
   }
 
   .display-2 {
-    font-size: 24pt !important;
+    font-size: 28px !important;
+    line-height:32px !important;
   }
 
   .v-expansion-panel-header {
@@ -103,7 +104,7 @@ html {
   }
   .v-card {
     overflow-wrap: normal;
-    box-shadow: none !important;
+    //box-shadow: none !important;
   }
   .theme--light.v-card > .v-card__text {
     color: rgba(0, 0, 0, 0.87) !important;
@@ -168,9 +169,11 @@ html {
     }
   }
 
-  .checkbox-list .v-input__slot {
-    align-items: start;
-    justify-items: start;
+
+
+  .v-input__slot {
+    align-items: flex-start;
+    justify-items: flex-start;
   }
 
   .dolflag-chip .v-chip__close {

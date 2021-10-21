@@ -23,7 +23,6 @@
       @focus="handleSelectFocus"
       @click="handleSelectFocus"
       @click:append="handleSelectFocus"
-      @blur="handleSelectBlur"
       @click:clear="handleInputClear"
       placeholder="Type to search"
       clearable
@@ -43,7 +42,7 @@
       :id="resultId"
       v-show="displayMenu"
     >
-      <v-list v-if="displayFOS.length > 0">
+      <v-list v-show="displayFOS.length > 0">
         <v-list-group v-for="cip2 in displayFOS" :key="cip2.name">
           <template v-slot:activator>
             <v-list-item-content class="field-of-study-search-item-title">
@@ -73,7 +72,7 @@
         </v-list-group>
       </v-list>
 
-      <span v-else>
+      <span v-show="displayFOS.length <= 0">
         No Results
       </span>
     </v-card>

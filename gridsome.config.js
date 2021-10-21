@@ -8,4 +8,7 @@ module.exports = {
   siteName: 'College Scorecard',
   plugins: [],
   pathPrefix: process.env.BASEURL || '/', //use for federalist
+  chainWebpack (config) {
+    config.mode('development')
+  }, 
 }

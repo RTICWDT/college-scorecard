@@ -141,7 +141,9 @@
                     class="search-fos-result-compare-button d-none d-md-block"
                     icon
                     @click="$store.commit('toggleFieldOfStudy', fieldOfStudy)"
-                    :color="
+                    :color="selectedFieldOfStudyClass(fieldOfStudy) ===
+                      'result-card-selected' ? '#0075B2' : 'grey'"
+                    :class="
                       selectedFieldOfStudyClass(fieldOfStudy) ===
                       'result-card-selected'
                         ? '' 
@@ -167,18 +169,14 @@
                     <v-btn
                       class="d-block d-sm-none mt-4 mx-auto"
                       outlined
-                      @click="
-                        $emit(
-                          'toggle-compare-item',
-                          fieldOfStudyCompareFormat(fieldOfStudy),
-                          'compare-fos'
-                        )
-                      "
-                      :color="
+                      @click="$store.commit('toggleFieldOfStudy', fieldOfStudy)"
+                      :color="selectedFieldOfStudyClass(fieldOfStudy) ===
+                        'result-card-selected' ? '#0075B2' : 'grey'"                      
+                      :class="
                         selectedFieldOfStudyClass(fieldOfStudy) ===
                         'result-card-selected'
                           ? '' 
-                          : (compareFOSLength > 9 
+                          : (totalFieldOfStudyCount > 9 
                           ? 'noCompareAllow' 
                           : '')
                       "
@@ -212,7 +210,7 @@
             </div>
 
             <p class="mb-0">
-              <a :href="fieldsLink" target="_blank">
+              <a :href="$url(fieldsLink)" target="_blank">
                 View all Fields of Study at {{ schoolName }} &raquo;
               </a>
             </p>
@@ -287,13 +285,13 @@ export default {
       })
     },
     totalFieldOfStudyCount() {
-      return this.allFieldsOfStudy.length
+      return this.$store.state.fos.length
       // return this.categorizedFieldsOfStudy.reduce((totalCount, fieldCategory) => {
       //   totalCount += fieldCategory.items.length;
       // },0);
     },
       compareFOSHoverCountText() {
-        if (this.selectedFieldsOfStudy  && this.selectedFieldsOfStudy.length > 9){
+        if (this.totalFieldOfStudyCount.length > 9){
           return "Maximum of 10 Fields of Study reached";
         }
         else{

@@ -68,14 +68,14 @@
       <v-col cols="12" md="6">
         <div class="compare-drawer-section-wrapper my-4">
           <div class="compare-drawer-section-header-wrapper ml-4">
-            <div
-              class="compare-icon-wrapper d-inline-block mr-4"
-              style="background: #C4DEC4;"
-            >
-              <v-icon class="mt-1" color="#122E51" small>
-                fas fa-university
-              </v-icon>
-            </div>
+        <div
+          class="compare-icon-wrapper d-inline-block mr-2"
+          style="background: #83c38c;"
+        >
+          <v-icon style="margin-top:6px;" color="black"  size="24">
+            fas fa-university
+          </v-icon>
+        </div>
 
             <div class="compare-drawer-section-header">
               <h3 class="title">Compare Schools</h3>
@@ -105,7 +105,7 @@
 
           <!-- Medium and smaller button-->
           <div class="d-md-none mt-5 text-center">
-            <v-btn rounded color="secondary" :href="'/compare'">
+            <v-btn rounded color="secondary" :href="this.$url('/compare')">
               Compare Schools
             </v-btn>
           </div>
@@ -115,14 +115,14 @@
       <v-col cols="12" md="6">
         <div class="compare-drawer-section-wrapper my-4">
           <div class="compare-drawer-section-header-wrapper ml-4">
-            <div
-              class="compare-icon-wrapper d-inline-block mr-4"
-              style="background: #fdbf32;"
-            >
-              <v-icon class="mt-1" color="black" small>
-                fas fa-award
-              </v-icon>
-            </div>
+        <div
+          class="compare-icon-wrapper d-inline-block mr-2"
+          style="background: #fec005;"
+        >
+          <v-icon  style="margin-top:6px;" color="black"  size="24">
+            fas fa-award
+          </v-icon>
+        </div>
 
             <div class="compare-drawer-section-header">
               <h3 class="title">Compare Fields of Study</h3>
@@ -163,7 +163,7 @@
               class="compare-drawer-button"
               rounded
               color="secondary"
-              :href="'/compare/?toggle=fos'"
+              :href="this.$url('/compare/?toggle=fos')"
             >
               Compare Fields of Study
             </v-btn>
@@ -201,6 +201,7 @@
       </v-row>
     </div>
   </v-card>
+
 </template>
 
 <style lang="scss" scoped>
@@ -292,10 +293,8 @@
 
 .compare-icon-wrapper {
   border-radius: 50%;
-  box-shadow: 0px 3px 6px #00000029;
-  border: white 3px solid;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   text-align: center;
 }
 .compare-drawer-section-header-wrapper {
@@ -328,9 +327,11 @@ export default {
   },
   data() {
     return {
-      selectedSchools: [],
-      selectedFieldsOfStudy: [],
+
     }
+  },
+  mounted() {
+    this.$store.commit("toggleDrawer", false)
   },
   computed: {
     schools() {
@@ -339,6 +340,19 @@ export default {
     fieldsOfStudy() {
       return this.$store.state.fos
     },
+    selectedSchools() {
+      return _.map(this.$store.state.institutions, "schoolId");
+    },
+    selectedFieldsOfStudy: {
+      get() {
+        return _.map(this.$store.state.fos, (fieldOfStudy) => {
+            return this.generateFieldOfStudyString(fieldOfStudy)
+        })
+      },
+      set(fieldOfStudy){
+        return fieldOfStudy;
+      }
+    }
   },
 
   methods: {
@@ -375,10 +389,7 @@ export default {
     },
   },
   mounted() {
-    this.selectedSchools = _.map(this.schools, "schoolId")
-    this.selectedFieldsOfStudy = _.map(this.fieldsOfStudy, (fieldOfStudy) => {
-      return this.generateFieldOfStudyString(fieldOfStudy)
-    })
+
   },
 }
 </script>

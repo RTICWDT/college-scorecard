@@ -76,18 +76,21 @@ export default function (Vue, { router, head, isClient, appOptions }) {
             return value.schoolId != entry.schoolId;
           })  
         } else {
-          state.institutions.push(entry);
+          if (state.institutions.length < 10)
+            state.institutions.push(entry);
         }
       },
       toggleFieldOfStudy(state, obj) {
         let entry;
+        //console.log(state);
+        console.log(obj);
         if (obj.fosTitle) {
           entry = obj;
         }
         else {
           entry = {
             code: obj.code,
-            credentialTitle: obj.credential.title,
+            credentialTitle: (obj.credential.level === 3 ? "Bachelor's Degree" : obj.credential.title), 
             fosTitle: obj.title,
             id: obj.unit_id,
             institutionName: obj.school.name,
@@ -102,7 +105,8 @@ export default function (Vue, { router, head, isClient, appOptions }) {
           });
         }
         else {
-          state.fos.push(entry)
+          if (state.fos.length < 10) 
+            state.fos.push(entry)
         }
       },
       toggleDrawer(state, value = null) {
