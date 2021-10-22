@@ -169,7 +169,10 @@ html {
     }
   }
 
-
+  .compare-select .v-input__slot {
+    align-items: center !important;
+    justify-items: center !important;
+  }
 
   .v-input__slot {
     align-items: flex-start;

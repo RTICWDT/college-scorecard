@@ -3,7 +3,7 @@
     id="compare-header"
     class="header pa-3 elevation-4"
     @click="toggleDrawer()"
-    v-if="currentSchoolCount > 0 || currentFieldOfStudyCount > 0"
+    v-show="currentSchoolCount > 0 || currentFieldOfStudyCount > 0 && showByIndex == 1"
   >
       <div class="compare-header-text ml-8 mr-6  mb-1">
 

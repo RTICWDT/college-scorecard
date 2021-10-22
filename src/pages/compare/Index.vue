@@ -766,6 +766,7 @@
                       v-model="currentRaceEthnicity"
                       color="secondary"
                       solo
+                      class="compare-select"
                     ></v-select>
                   </compare-section>
                 </v-expansion-panel-content>
@@ -854,6 +855,7 @@
                       v-model="currentIncomeFilter"
                       color="secondary"
                       solo
+                      class="compare-select"
                     ></v-select>
                   </compare-section>
                 </v-expansion-panel-content>
@@ -1131,6 +1133,7 @@
                       v-model="currentRepaymentStatus"
                       color="secondary"
                       solo
+                      class="compare-select"
                     ></v-select>
 
                     </template>
@@ -1430,6 +1433,11 @@
 .institution-context-panel{
   border-radius: 20px !important;
   border-left: 20px solid $darker-green !important;
+}
+
+.compare-select .v-input__slot {
+      align-items: center !important;
+      justify-items: center !important;
 }
 </style>
 
