@@ -1204,6 +1204,7 @@
                         :school="school"
                         colors="solid"
                         :currentSankey="currentSankey"
+                        :showPellOnly="showPellOnlyOutcomes"
                       />
                     </v-col>
                   </v-row>
@@ -1275,16 +1276,20 @@
                             Students Receiving Federal Loans
                             <tooltip definition="student-aid" />
                           </h2>
-                          <donut
-                            v-if="
-                              studentsReceivingLoans ||
-                                studentsReceivingLoans == '0'
-                            "
-                            color="#1874DC"
-                            :value="studentsReceivingLoans * 100"
-                            :height="200"
-                            class="pb-3"
-                          ></donut>
+                          <div
+                            v-if="studentsReceivingLoans ||
+                                  studentsReceivingLoans == '0'">
+                            <donut
+                              color="#1874DC"
+                              :value="studentsReceivingLoans * 100"
+                              :height="200"
+                              class="pb-3"
+                            >                          
+                          </donut>
+                            <div class="sr-only">
+                              Students Receiving Federal Loans: {{ Math.round(studentsReceivingLoans * 100)+"%" }}
+                            </div>                          
+                          </div>
                           <div v-else class="data-na pb-3">Data Not Available</div>
                           <p>
                             At some schools where few students borrow federal
@@ -2032,13 +2037,16 @@
                         The percentage of students who received an income-based
                         federal Pell grant intended for low-income students.
                       </p>
+                      <div v-if="aidFlag < 3 && socioEconomicDiversity">
                       <donut
                         color="#1874DC"
                         :value="socioEconomicDiversity * 100"
                         :height="200"
-                        v-if="aidFlag < 3 && socioEconomicDiversity"
-                        >></donut
-                      >
+                        ></donut>
+                          <div class="sr-only">
+                            Socio-Economic Diversity: {{ Math.round(socioEconomicDiversity * 100)+"%" }}
+                          </div>                          
+                        </div>                        
                       <div v-else class="data-na">Data Not Available</div>
                     </v-col>
                     <v-col cols="12" md="6">
@@ -2144,13 +2152,18 @@
                         Acceptance Rate
                         <tooltip definition="acceptance-rate" />
                       </h2>
+                      <div v-if="openAdmissions != 1 && acceptanceRate">
                       <donut
                         color="#1874DC"
                         :value="acceptanceRate * 100"
-                        v-if="openAdmissions != 1 && acceptanceRate"
                         chart-id="acceptance-chart"
                         :height="200"
+                        label="Acceptance Rate"
                       ></donut>
+                          <div class="sr-only">
+                            Socio-Economic Diversity: {{ Math.round(acceptanceRate * 100)+"%" }}
+                          </div>                          
+                        </div>                      
                       <p v-else-if="!acceptanceRate" class="data-na">
                         Data Not Available
                       </p>

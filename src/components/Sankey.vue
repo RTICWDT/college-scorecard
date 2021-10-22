@@ -64,6 +64,9 @@ export default {
     currentSankey: {
       type: Object,
     },
+    showPellOnly: {
+      type: Boolean,
+    }
   },
   data() {
     return {
@@ -80,10 +83,13 @@ export default {
     study() {
       return this.currentSankey.study
     },
+    pell() {
+      return this.showPellOnly
+    }
   },
 
   mounted() {
-    this.extractData()
+    this.extractData(this.showPellOnly)
     GoogleCharts.load("current", {
       packages: ["corechart", "table", "sankey"],
       callback: this.drawSankeyChart,
@@ -97,10 +103,14 @@ export default {
     enroll: function() {
       this.drawSankeyChart()
     },
+    pell: function() {
+      this.extractData(this.showPellOnly)
+      this.drawSankeyChart()
+    },
   },
 
   methods: {
-    extractData() {
+    extractData(showPellOnly) {
       this.outcomes = _.get(
         this.school,
         "latest.completion.outcome_percentage_suppressed"
@@ -109,39 +119,45 @@ export default {
         this.school,
         "latest.completion.outcome_cohort"
       )
+
+      let subgroup = "8yr_pooled";
+      if (showPellOnly)
+        subgroup = "8yr";
+
       this.outcome_cohorts = {
         study_full_time: {
           enroll_first_time:
-            outcome_cohort_data.full_time.first_time["8yr_pooled"],
+            outcome_cohort_data.full_time.first_time[subgroup],
           enroll_not_first_time:
-            outcome_cohort_data.full_time.not_first_time["8yr_pooled"],
+            outcome_cohort_data.full_time.not_first_time[subgroup],
           enroll_both:
-            outcome_cohort_data.full_time.first_time["8yr_pooled"] +
-            outcome_cohort_data.full_time.not_first_time["8yr_pooled"],
+            outcome_cohort_data.full_time.first_time[subgroup] +
+            outcome_cohort_data.full_time.not_first_time[subgroup],
         },
         study_part_time: {
           enroll_first_time:
-            outcome_cohort_data.part_time.first_time["8yr_pooled"],
+            outcome_cohort_data.part_time.first_time[subgroup],
           enroll_not_first_time:
-            outcome_cohort_data.part_time.not_first_time["8yr_pooled"],
+            outcome_cohort_data.part_time.not_first_time[subgroup],
           enroll_both:
-            outcome_cohort_data.part_time.first_time["8yr_pooled"] +
-            outcome_cohort_data.part_time.not_first_time["8yr_pooled"],
+            outcome_cohort_data.part_time.first_time[subgroup] +
+            outcome_cohort_data.part_time.not_first_time[subgroup],
         },
         study_both: {
           enroll_first_time:
-            outcome_cohort_data.full_time.first_time["8yr_pooled"] +
-            outcome_cohort_data.part_time.first_time["8yr_pooled"],
+            outcome_cohort_data.full_time.first_time[subgroup] +
+            outcome_cohort_data.part_time.first_time[subgroup],
           enroll_not_first_time:
-            outcome_cohort_data.full_time.not_first_time["8yr_pooled"] +
-            outcome_cohort_data.part_time.not_first_time["8yr_pooled"],
+            outcome_cohort_data.full_time.not_first_time[subgroup] +
+            outcome_cohort_data.part_time.not_first_time[subgroup],
           enroll_both:
-            outcome_cohort_data.full_time.first_time["8yr_pooled"] +
-            outcome_cohort_data.full_time.not_first_time["8yr_pooled"] +
-            outcome_cohort_data.part_time.first_time["8yr_pooled"] +
-            outcome_cohort_data.part_time.not_first_time["8yr_pooled"],
+            outcome_cohort_data.full_time.first_time[subgroup] +
+            outcome_cohort_data.full_time.not_first_time[subgroup] +
+            outcome_cohort_data.part_time.first_time[subgroup] +
+            outcome_cohort_data.part_time.not_first_time[subgroup],
         },
-      }
+      }   
+      console.log(this.outcome_cohorts)   
     },
 
     drawSankeyChart() {
@@ -273,10 +289,10 @@ export default {
         var chart = new GoogleCharts.api.visualization.Sankey(
           this.$refs["sankey"]
         )
+
         this.group_count = _.get(
           this.outcome_cohorts,
-          this.study + "." + this.enroll
-        )
+          this.study + "." + this.enroll)
         // delay this so the height can get setup before the
         // chart is drawn when transitioning from no data
         setTimeout(function() {
