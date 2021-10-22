@@ -2,13 +2,19 @@
   <v-main>
     <data-navigation :current="$url('/data/changelog/')" />
 
-      <v-container>
+      <v-container>      
         <v-row>
           <v-col cols="12" md="10" offset-md="1">
             <v-card class="py-5 px-10 ma-5">
               <h1 class="display-1 mb-2 font-weight-bold">Change Log</h1>
               <p>This page includes a description and timeline for the changes that have been made to either the College Scorecard tool or to the underlying data. Check back for updates to learn more about the updates and improvements we have made.</p>
-              <v-expansion-panels>
+              <v-row>
+                <v-col class="text-right">
+                  <v-btn primary @click="all" class="my-2 mr-2">Expand All</v-btn>
+                  <v-btn primary @click="none" class="my-2">Close All</v-btn>
+                </v-col>
+              </v-row>                
+              <v-expansion-panels multiple v-model="panels">
                 <v-expansion-panel>
                                   
                   <v-expansion-panel-header>August 3, 2021</v-expansion-panel-header>
@@ -19,8 +25,6 @@
                     </ul>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
-              </v-expansion-panels>
-              <v-expansion-panels>
                 <v-expansion-panel>
                                   
                   <v-expansion-panel-header>July 20, 2021</v-expansion-panel-header>
@@ -1222,5 +1226,19 @@ export default {
   components: {
     "data-navigation": DataNavigation,
   },
+  data() {
+    return {
+      panels: [],
+    }
+  },
+  methods: {
+    all() {
+      this.panels = [...Array(23).keys()].map((k, i) => i)
+    },
+    // Reset the panel
+    none() {
+      this.panels = []
+    },    
+  }
 }
 </script>
