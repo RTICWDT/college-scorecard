@@ -24,8 +24,12 @@
 <script>
 import DataNavigation from "~/components/DataNavigation.vue"
 import Glossary from "~/data/glossary.json"
+import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
+
+ 
 
 export default {
+  mixins: [AnalyticsEvents],
   components: {
     "data-navigation": DataNavigation,
   },
@@ -63,6 +67,7 @@ export default {
         const to = '/school/transition/?url=' + encodeURIComponent(target.href)
         if (window.location.pathname !== to && event.preventDefault) {
           event.preventDefault()
+          this.trackOutboundLink(event)          
           this.$router.push(to)
         }
       }
