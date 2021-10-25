@@ -125,5 +125,54 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     plugins: [vuexLocal.plugin]
   })
 
-  
+  // Google Analytics and Console verification codes
+  head.meta.push({
+    name: 'google-site-verification',
+    content: 'joZQgj-M8GQ05V29ojfVsbsNk44SRgGqJfws9tBcnPU'
+  })
+
+  head.meta.push({
+    name: 'google-site-verification',
+    content: 'V-KEdRwSWd6GSLEWRBddZy6B5yLCs6vkRRflrImQiKE'
+  })
+
+  // Legacy mobile metas
+  head.meta.push({
+    name: 'HandheldFriendly',
+    content: 'True'
+  })
+  head.meta.push({
+    name: 'MobileOptimized',
+    content: '320'
+  })   
+
+  //Twitter and OpenGraph
+  head.meta.push({
+    name: 'og:type',
+    content: 'website'
+  })   
+  head.meta.push({
+    name: 'og:image',
+    content: 'https://collegescorecard.ed.gov/img/Scorecard-Preview.jpg'
+  })    
+  head.meta.push({
+    name: 'twitter:card',
+    content: 'summary_large_image'
+  })  
+  head.meta.push({
+    name: 'twitter:image',
+    content: 'https://collegescorecard.ed.gov/img/Scorecard-Preview.jpg'
+  })  
+  head.meta.push({
+    name: 'og:description',
+    content: 'Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs,graduation, and post-college earnings.'
+  })    
+  head.meta.push({
+    name: 'twitter:description',
+    content: 'Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs,graduation, and post-college earnings.'
+  })    
+  head.meta.push({
+    name: 'description',
+    content: 'Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs,graduation, and post-college earnings.'
+  })     
 }

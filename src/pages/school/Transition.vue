@@ -17,17 +17,19 @@
               </p>
               <p>
                 Links are provided by the institutions and are only updated about once a year. As such, over the course of the year, some links may break or websites may be taken offline.
-              </p>              
-              <v-btn class="mb-1 mr-2" color="secondary" :href="url" v-if="url"
-                >Continue to Website</v-btn
-              >
-              <span v-else class="px-4 mb-1"
-                ><v-icon small>fas fa-exclamation-triangle</v-icon> Invalid
-                URL</span
-              >
-              <v-btn class="mb-1" :href="referrer"
-                >Return to Previous Page</v-btn
-              >
+              </p>        
+              <div class="d-flex justify-center">
+                <v-btn class="mb-1 mr-2 transition-button" color="secondary" :href="url" v-if="url"
+                  >Continue to Website</v-btn
+                >
+                <span v-else class="px-4 mb-1"
+                  ><v-icon small>fas fa-exclamation-triangle</v-icon> Invalid
+                  URL</span
+                >
+                <v-btn class="mb-1" @click="close" color="secondary"
+                  >Return to Previous Page</v-btn
+                >
+              </div>
             </v-card>
           </v-col>
         </v-row>
@@ -66,6 +68,11 @@ export default {
       } else {
         return false
       }
+    },
+  },
+  methods: {
+    close() {
+      window.close();
     },
   },
   mounted() {

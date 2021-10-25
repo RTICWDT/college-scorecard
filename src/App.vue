@@ -43,13 +43,6 @@ export default {
   metaInfo() {
     return {
       title: this.$static.metadata.siteName,
-      meta: [
-        {
-          key: "description",
-          name: "description",
-          content: this.$static.metadata.siteDescription,
-        },
-      ]
     }
   },
 }
