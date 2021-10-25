@@ -19,14 +19,14 @@
                 Links are provided by the institutions and are only updated about once a year. As such, over the course of the year, some links may break or websites may be taken offline.
               </p>        
               <div class="d-flex justify-center">
-                <v-btn class="mb-1 mr-2 transition-button" color="secondary" :href="url" v-if="url"
+                <v-btn class="mb-1 mr-2 transition-button pr-2" color="secondary" :href="url" v-if="url"
                   >Continue to Website</v-btn
                 >
-                <span v-else class="px-4 mb-1"
+                <span v-else class="px-4 mb-1 pr-2"
                   ><v-icon small>fas fa-exclamation-triangle</v-icon> Invalid
                   URL</span
                 >
-                <v-btn class="mb-1 transition-button" @click="close" 
+                <v-btn class="mb-1 transition-button pl-2" @click="close" 
                   >Return to Previous Page</v-btn
                 >
               </div>
