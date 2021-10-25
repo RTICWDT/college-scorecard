@@ -56,13 +56,22 @@ html {
         max-width: 1300px;
       }
     }
-    .v-btn.secondary:not(.share):not(.fos-button):not(.filter-button):not(.component-toggle-button):not(.searchFab){
+    .v-btn.secondary:not(.share):not(.fos-button):not(.filter-button):not(.component-toggle-button):not(.searchFab) {
       letter-spacing: normal;
       height:50px !important;
       border-radius: 16px !important;
       //border:2px solid white !important;
       //border-color:#fff !important;
       color:#fff !important;
+      padding:0 10%;
+    }
+    .v-btn.transition-button {
+      letter-spacing: normal;
+      height:50px !important;
+      border-radius: 16px !important;
+      //border:2px solid white !important;
+      //border-color:#fff !important;
+      color:#000 !important;
       padding:0 10%;
     }
 

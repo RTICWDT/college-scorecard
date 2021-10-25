@@ -26,7 +26,7 @@
                   ><v-icon small>fas fa-exclamation-triangle</v-icon> Invalid
                   URL</span
                 >
-                <v-btn class="mb-1" @click="close" color="secondary"
+                <v-btn class="mb-1 transition-button" @click="close" 
                   >Return to Previous Page</v-btn
                 >
               </div>
