@@ -6,14 +6,14 @@
      <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'graduation-rate'" >Median for {{config.medianToggle === 'group' ? block_title.replace('schools', 'Schools') : "All Schools"}}: {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</p>     
 
       <div v-if="config && config.chart == 'RepaymentRate'">
-      <v-simple-table class="school-table">
+      <v-simple-table class="repayment-table">
         <caption class="sr-only">
           Average cost by family income
         </caption>
         <thead>
           <tr>
             <th>School</th>
-            <th>Percent</th>
+            <th>Percent {{repaymentCategory}}</th>
           </tr>
         </thead>
         <tbody>
@@ -115,6 +115,11 @@
   text-align:right;
   font-style:italic;
 }
+
+.repayment-table td {
+  width:25%;
+}
+
 </style>
 
 <script>
@@ -160,6 +165,34 @@ export default {
           return 3
           break
       }      
+    },
+    repaymentCategory() {
+        switch (this.config.repaymentStatus) {
+          case "fullypaid": 
+            return "Paid In Full"
+            break
+          case "makingprogress": 
+            return"Making Progress"
+            break
+          case "noprogress": 
+            return"Not Making Progress"
+            break
+          case "deferment": 
+            return"Deferment"
+            break
+          case "delinquent": 
+            return"Delinquent"
+            break
+          case "default": 
+            return"Defaulted"
+            break
+          case "discharge": 
+            return"Discharged"
+            break
+          case "forbearance": 
+            return"Forbearance"
+            break
+      }
     }
   },
 }

@@ -1,10 +1,10 @@
 <template>
   <tr>
     <td>{{ _.get(school, fields["NAME"]) }}</td>
-    <td v-if="repaymentStatuses[gradSubgroup][this.config.repaymentStatus]">
+    <td class="data-cell" v-if="repaymentStatuses[gradSubgroup][this.config.repaymentStatus]">
       {{ repaymentStatuses[gradSubgroup][this.config.repaymentStatus] | numeral("0%") }}
     </td>
-    <td v-else>--</td>
+    <td class="data-cell" v-else>--</td>
   </tr> 
 
 </template>
@@ -19,6 +19,10 @@
 }
 .active {
   background-color: #faefd2 !important;
+}
+.data-cell {
+  width:25%;
+  text-align:center;
 }
 </style> 
 
