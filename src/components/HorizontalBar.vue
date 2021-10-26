@@ -74,13 +74,22 @@ export default {
           datalabels: {
             display: this.labels,
             font: (context) => {
-              if (this.labelFontSize != "15") {
-                return { size: this.labelFontSize }
+              if (this.labelFontSize != "18") {
+                return { 
+                  family: '"Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif',
+                  weight: 700,                  
+                  size: this.labelFontSize }
               } else {
                 if (context.chart.height < 20) {
-                  return { size: 10 }
+                  return { 
+                    family: '"Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif',
+                    weight: 700,                    
+                    size: 18 }
                 } else {
-                  return { size: 15 }
+                  return { 
+                    family: '"Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif',
+                    weight: 700,
+                    size: 18 }
                 }
               }
             },

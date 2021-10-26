@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4 class="overline my-3">{{ block_title }}</h4>
+    <h4 class="overline my-3 pt-15">{{ block_title }}</h4>
      <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'average-annual-cost'" >Median for {{config.medianToggle === 'group' ? block_title.replace('schools', 'Schools') : "All Schools"}}: {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0')}}</p>
      <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'median-earnings'" >Median for {{config.medianToggle === 'group' ? block_title.replace('schools', 'Schools') : "All Schools"}}: {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</p>
      <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'graduation-rate'" >Median for {{config.medianToggle === 'group' ? block_title.replace('schools', 'Schools') : "All Schools"}}: {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</p>     
@@ -155,13 +155,13 @@ export default {
   computed: {
     groupName() {
       switch (this.block_title) {
-        case "Certificate Schools":
+        case "Certificate schools":
           return 1
           break
-        case "2-year Schools":
+        case "2-year schools":
           return 2
           break
-        case "4-year Schools":
+        case "4-year schools":
           return 3
           break
       }      

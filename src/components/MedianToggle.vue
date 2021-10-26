@@ -53,13 +53,6 @@
   }  
 }
 
-.v-tab {
-  text-transform:none !important;
-  span {
-    color:#000;
-    letter-spacing: normal !important;
-  }
-}
 
 #median-toggle {
   #median-tab-inactive {
@@ -72,6 +65,25 @@
       font-weight: bold;
     }
   }
+
+  .v-tab {
+    text-transform:none !important;
+
+    span {
+      color:#000;
+      letter-spacing: normal !important;
+    }
+  }
+
+  .v-tab--active {
+      background:#c4dec4;
+
+  }
+
+  .v-tab--active:hover {
+    background:#c4dec4;
+  }
+
 }
 
 .v-slide-group__prev {
