@@ -67,7 +67,7 @@
                   </v-chip>
                   <h1
                     id="profile-institution-title"
-                    class="display-2 font-weight-bold pa-0 mb-2"
+                    class="display-3 font-weight-bold pa-0 mb-2"
                   >
                     {{ schoolName }}
                   </h1>

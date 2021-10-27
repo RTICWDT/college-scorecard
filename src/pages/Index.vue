@@ -208,7 +208,7 @@
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    Go to apprenticeship.gov<v-icon
+                    apprenticeship.gov<v-icon
                       x-small
                       class="pl-1"
                       color="#007000"
@@ -227,7 +227,7 @@
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    Go to ONETonline.org<v-icon
+                    ONETonline.org<v-icon
                       x-small
                       class="pl-1"
                       color="#007000"
@@ -246,7 +246,7 @@
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    Go to CareerOneStop.org<v-icon
+                    CareerOneStop.org<v-icon
                       x-small
                       class="pl-1"
                       color="#007000"
@@ -265,7 +265,7 @@
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    Go to TrainingProviderResults.gov<v-icon
+                    TrainingProviderResults.gov<v-icon
                       x-small
                       class="pl-1"
                       color="#007000"
