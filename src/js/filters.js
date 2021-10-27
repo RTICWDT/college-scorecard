@@ -53,8 +53,8 @@ Vue.filter('control', function(id){
     let lookup = {
         '-1': 'Unknown',
         '1': 'Public',
-        '2': 'Private',
-        '3': 'For-Profit'
+        '2': 'Private Nonprofit',
+        '3': 'Private For-Profit'
     }
     return lookup[id];
 });
