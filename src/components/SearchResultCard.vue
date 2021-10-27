@@ -115,7 +115,7 @@
           /></span>
           <!--prettyhtml-ignore-->
           <span v-else
-            >Average Annual Cost for Largest<br />Program&nbsp;<tooltip
+            >Average Annual Cost for Largest Program&nbsp;<tooltip
               definition="avg-program-cost"
               :isNegative="netPrice < 0"
           /></span>

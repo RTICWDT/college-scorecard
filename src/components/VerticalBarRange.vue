@@ -353,9 +353,6 @@ export default {
         this._min.value + this._max.value - this._upper.value
       )
       this.bar_styles.top = top + "%"
-      if (top < 20 && this.addExtraPadding) {
-        this.extraPad["padding-top"] = "30px"
-      }
     },
     scale(v) {
       return (v - this.min.value) / (this.max.value - this.min.value)
