@@ -73,5 +73,8 @@ export default {
       }
     }
   },
+ metaInfo: {
+    title: 'Glossary',
+  }    
 }
 </script>

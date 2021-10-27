@@ -346,5 +346,8 @@ export default {
         "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=[api_key]", // To ignore curly braces
     }
   },
+ metaInfo: {
+    title: 'Documentation',
+  }    
 }
 </script>

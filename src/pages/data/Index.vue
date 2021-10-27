@@ -121,5 +121,8 @@ export default {
     "data-navigation": DataNavigation,
     "simple-tooltip": SimpleTooltip,
   },
+ metaInfo: {
+    title: 'Data Home',
+  }    
 }
 </script>

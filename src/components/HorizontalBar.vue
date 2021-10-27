@@ -34,7 +34,7 @@ export default {
     },
     yBarThickness: {
       type: Number,
-      default: 25,
+      default: 30,
     },
     labelFontSize: {
       type: Number,

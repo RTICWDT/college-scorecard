@@ -1239,6 +1239,9 @@ export default {
     none() {
       this.panels = []
     },    
-  }
+  },
+ metaInfo: {
+    title: 'Change Log',
+  }    
 }
 </script>

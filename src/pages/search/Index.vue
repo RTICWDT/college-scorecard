@@ -914,6 +914,9 @@ export default {
 
       
     }
-  }
+  },
+ metaInfo: {
+    title: 'Search',
+  }    
 };
 </script>

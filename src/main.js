@@ -174,5 +174,14 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   head.meta.push({
     name: 'description',
     content: 'Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs,graduation, and post-college earnings.'
-  })     
+  })    
+  
+  head.script.push({
+    id: '_fed_an_ua_tag',
+    src: 'https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js',
+  })  
+  head.script.push({
+    type: 'text/javascript',
+    src: 'https://www.gstatic.com/charts/loader.js',
+  })    
 }

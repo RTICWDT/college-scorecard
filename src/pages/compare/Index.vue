@@ -304,7 +304,7 @@
                               :min="0"
                               :max="150000"
                               color="#1874DC"
-                              :height="25"
+                              :height="30"
                               type="currency"
                               :labels="true"
                             ></horizontal-bar>
@@ -333,7 +333,7 @@
                               :min="0"
                               :max="150000"
                               color="#1874DC"
-                              :height="25"
+                              :height="30"
                               type="currency"
                               :labels="true"
                             ></horizontal-bar>
@@ -386,7 +386,7 @@
                               :min="0"
                               :max="30000"
                               color="#1874DC"
-                              :height="25"
+                              :height="30"
                               type="currency"
                               :labels="true"
                             ></horizontal-bar>
@@ -466,7 +466,7 @@
                               :min="0"
                               :max="30000"
                               color="#1874DC"
-                              :height="25"
+                              :height="30"
                               type="currency"
                               :labels="true"
                             ></horizontal-bar>
@@ -493,7 +493,7 @@
                               :min="0"
                               :max="30000"
                               color="#1874DC"
-                              :height="25"
+                              :height="30"
                               type="currency"
                               :labels="true"
                             ></horizontal-bar>
@@ -561,7 +561,7 @@
                               :min="0"
                               :max="2000"
                               color="#1874DC"
-                              :height="25"
+                              :height="30"
                               type="currency"
                               :labels="true"
                             ></horizontal-bar>
@@ -590,7 +590,7 @@
                               :min="0"
                               :max="2000"
                               color="#1874DC"
-                              :height="25"
+                              :height="30"
                               type="currency"
                               :labels="true"
                             ></horizontal-bar>
@@ -638,7 +638,7 @@
                         :min="0"
                         :max="400"
                         color="#1874DC"
-                        :height="25"
+                        :height="30"
                         type="number"
                         :labels="true"
                       ></horizontal-bar>
@@ -1426,12 +1426,12 @@
 }
 
 .field-of-study-select-container{
-  border-radius: 20px !important;
+  border-radius: 4px !important;
   border-left: 20px solid $fos-color-gold !important;
 }
 
 .institution-context-panel{
-  border-radius: 20px !important;
+  border-radius: 4px !important;
   border-left: 20px solid $darker-green !important;
 }
 
@@ -2022,5 +2022,8 @@ export default {
     this.isSharedComparison = this.showShareUpdate
     this.isSharedFieldOfStudyComparison = this.showShareFieldOfStudyUpdate
   },
+ metaInfo: {
+    title: 'Compare',
+  }    
 }
 </script>

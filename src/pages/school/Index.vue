@@ -675,7 +675,7 @@
                     </div>
                   </div>
 
-                  <div class="fos-sub-title-header pa-4 top-fos-sub-title-header" style="background:none !important;">
+                  <div class="fos-sub-title-header px-4 pt-4 pb-0 top-fos-sub-title-header" style="background:none !important;">
                     <h3>
                       Top Fields of Study at {{ schoolName }}
                       <tooltip definition="field-of-study" />
@@ -2249,7 +2249,7 @@
 }
 
 .field-of-study-select-container {
-  border-radius: 20px !important;
+  border-radius: 4px !important;
   border-left: 20px solid $fos-color-gold !important;
 }
 
@@ -2259,7 +2259,7 @@
 }
 
 .institution-context-panel{
-  border-radius: 20px !important;
+  border-radius: px !important;
   border-left: 20px solid $darker-green !important;
 }
 

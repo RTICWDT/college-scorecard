@@ -125,8 +125,8 @@
           <h3 class="navy-text ma-0 pa-0">{{ displayAvgCost }}</h3>
         </v-col>
       </v-row>
-      <v-row class="result-card-info-container v-flex align-center">
-        <v-col class="py-0 my-0 mt-4">
+      <v-row class="v-flex align-center">
+        <v-col class="pb-1">
           <!--prettyhtml-ignore-->
           <span
             >Median Earnings&nbsp;<tooltip

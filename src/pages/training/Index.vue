@@ -440,6 +440,9 @@
     },
   },
   mounted() {
-  }
+  },
+ metaInfo: {
+    title: 'Training Programs',
+  }    
   };
 </script>

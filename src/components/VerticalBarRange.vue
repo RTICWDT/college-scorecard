@@ -106,14 +106,14 @@
     //right: 0;
     top: 0;
     bottom: 0;
-    transition: left 0.5s, right 0.5s;
+    transition: bottom 0.5s, right 0.5s;
   }
 
   .picc-range-label {
     height: 22px;
     position: absolute;
     top: 0;
-    transition: left 0.5s;
+    transition: bottom 0.5s;
     font-size: 0.85rem;
 
     span {
@@ -206,8 +206,8 @@
         margin-left: $bar-width + $arrow-size + 10;
         text-align: center;
         color:#000;
-        margin-top:-3px;
-        font-size: 14px !important;
+        margin-top:-0px;
+        font-size: 12px !important;
         font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;       
         font-style: italic;
       }
