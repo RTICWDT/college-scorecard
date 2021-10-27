@@ -306,7 +306,7 @@ export default {
     return {
       bar_styles: { top: 0, bottom: 0 },
       extraPad: {
-        "padding-top": 0,
+        "padding-top": '30px',
       },
     }
   },
