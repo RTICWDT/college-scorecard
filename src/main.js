@@ -184,4 +184,9 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     type: 'text/javascript',
     src: 'https://www.gstatic.com/charts/loader.js',
   })    
+  
+  head.script.push({
+    type: 'text/javascript',
+    src: '/js/picc-analytics.js',
+  })    
 }
