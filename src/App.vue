@@ -47,17 +47,17 @@ export default {
       script: [
         {
           type: 'text/javascript',
-          src:  this.$url('picc-analytics.js'),          
+          src:  this.$url('/js/picc-analytics.js'),          
         }
       ],
       meta: [
         {
           name: 'og:image',
-          content: this.$url('img/Scorecard-Preview.jpg')
+          content: this.$url('/img/Scorecard-Preview.jpg')
         },
         {
           name: 'twitter:image',
-          content: this.$url('img/Scorecard-Preview.jpg')
+          content: this.$url('/img/Scorecard-Preview.jpg')
         }        
       ]
     }
