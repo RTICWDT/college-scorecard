@@ -152,16 +152,8 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     content: 'website'
   })   
   head.meta.push({
-    name: 'og:image',
-    content: 'https://collegescorecard.ed.gov/img/Scorecard-Preview.jpg'
-  })    
-  head.meta.push({
     name: 'twitter:card',
     content: 'summary_large_image'
-  })  
-  head.meta.push({
-    name: 'twitter:image',
-    content: 'https://collegescorecard.ed.gov/img/Scorecard-Preview.jpg'
   })  
   head.meta.push({
     name: 'og:description',
@@ -183,10 +175,5 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   head.script.push({
     type: 'text/javascript',
     src: 'https://www.gstatic.com/charts/loader.js',
-  })    
-  
-  head.script.push({
-    type: 'text/javascript',
-    src: '~/js/picc-analytics.js',
-  })    
+  })     
 }

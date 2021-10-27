@@ -43,7 +43,23 @@ export default {
   metaInfo() {
     return {
       title: this.$static.metadata.siteName,
-      titleTemplate: '%s | College Scorecard'
+      titleTemplate: '%s | College Scorecard',
+      script: [
+        {
+          type: 'text/javascript',
+          src:  this.$url('picc-analytics.js'),          
+        }
+      ],
+      meta: [
+        {
+          name: 'og:image',
+          content: this.$url('img/Scorecard-Preview.jpg')
+        },
+        {
+          name: 'twitter:image',
+          content: this.$url('img/Scorecard-Preview.jpg')
+        }        
+      ]
     }
   },
 }
