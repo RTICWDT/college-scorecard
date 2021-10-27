@@ -187,6 +187,6 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   
   head.script.push({
     type: 'text/javascript',
-    src: '/js/picc-analytics.js',
+    src: 'picc-analytics.js',
   })    
 }

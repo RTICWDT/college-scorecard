@@ -43,6 +43,7 @@ export default {
   metaInfo() {
     return {
       title: this.$static.metadata.siteName,
+      titleTemplate: '%s | College Scorecard'
     }
   },
 }

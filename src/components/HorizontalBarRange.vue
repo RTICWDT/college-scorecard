@@ -116,7 +116,7 @@
       font-weight: 400;
       position: absolute;
       top: 0px;
-      cursor: pointer;
+      //cursor: pointer;
     }
 
     &.picc-range-label-min,

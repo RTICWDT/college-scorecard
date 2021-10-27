@@ -121,7 +121,7 @@
       position: absolute;
       top: $label-height;
       //width: $label-width;
-      cursor: pointer;
+      //cursor: pointer;
     }
 
     &.picc-range-label-min,

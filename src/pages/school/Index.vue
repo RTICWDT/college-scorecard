@@ -997,7 +997,7 @@
                       </v-row>                       
                       </div>
                       
-                      <h2 class="mb-3">By Family Income</h2>
+                      <h2 class="mb-3 mt-5">By Family Income</h2>
                       <p>
                         Depending on the federal, state, or institutional grant
                         aid available, students in your income bracket may pay
@@ -1138,7 +1138,7 @@
                       </v-col>  
                        <v-col cols="2"></v-col>     
                       </v-row>                       
-                      <h2 class="mb-3">
+                      <h2 class="mb-3 mt-5">
                         Students Who Return After Their First Year&nbsp;
                         <tooltip definition="retention-rate" />
                       </h2>
@@ -1949,7 +1949,7 @@
                       </v-col>  
                        <v-col cols="2"></v-col>     
                       </v-row> 
-                    <h2 class="mb-3">
+                    <h2 class="mb-3 mt-5">
                           Percentage Earning Above a High School Graduate&nbsp;<tooltip
                             definition="fos-median-earnings"
                           />
@@ -1960,7 +1960,7 @@
                       {{ completionRate |  numeral("0%") }}
                     </h2><span> &nbsp; of students</span></div>
                     <div v-else class="data-na mb-4">Data Not Available</div>
-                    <h2 class="mb-3">
+                    <h2 class="mb-3 mt-5">
                           Earnings After Completing Field of Study&nbsp;<tooltip
                             definition="fos-median-earnings"
                           />
@@ -2002,7 +2002,7 @@
                       </div>
                     </v-col>
                     <v-col cols="12" md="6" class="d-flex justify-space-around">
-                      <div class="text-right">
+                      <div class="text-center">
                         <span class="display-2 navy-text font-weight-bold">{{
                           fullTimeEnrollment | numeral("0.%")
                         }}</span>
@@ -2018,7 +2018,7 @@
                           >/</span
                         >
                       </div>
-                      <div class="text-left">
+                      <div class="text-center">
                         <span class="display-2 navy-text font-weight-bold">{{
                           partTimeEnrollment | numeral("0.%")
                         }}</span>
