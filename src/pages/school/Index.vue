@@ -2259,7 +2259,7 @@
 }
 
 .institution-context-panel{
-  border-radius: px !important;
+  border-radius: 4px !important;
   border-left: 20px solid $darker-green !important;
 }
 
