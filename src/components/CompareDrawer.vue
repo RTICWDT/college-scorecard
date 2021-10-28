@@ -105,7 +105,7 @@
 
           <!-- Medium and smaller button-->
           <div class="d-md-none mt-5 text-center">
-            <v-btn rounded color="secondary" :href="this.$url('/compare')">
+            <v-btn rounded color="secondary" @click="toggleDrawer()" :href="this.$url('/compare')">
               Compare Schools
             </v-btn>
           </div>
@@ -163,6 +163,7 @@
               class="compare-drawer-button"
               rounded
               color="secondary"
+              @click="toggleDrawer()"
               :href="this.$url('/compare/?toggle=fos')"
             >
               Compare Fields of Study
@@ -180,7 +181,7 @@
     >
       <v-row>
         <v-col cols="12" md="5" class="text-center d-none d-md-block my-2">
-          <v-btn rounded color="secondary" :href="this.$url('/compare')">
+          <v-btn rounded color="secondary" @click="toggleDrawer()" :href="this.$url('/compare')">
             Compare Schools
           </v-btn>
         </v-col>
@@ -193,6 +194,7 @@
             class="compare-drawer-button"
             rounded
             color="secondary"
+            @click="toggleDrawer()"
             :href="this.$url('/compare/?toggle=fos')"
           >
             Compare Fields of Study
