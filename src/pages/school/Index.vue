@@ -137,7 +137,7 @@
               <!-- Institution Summary and Field Of Study Select + Summary -->
               <v-row class="mt-3 pr-8 pl-5">
                 <!--Institution Summary-->
-                <v-col cols="12" class="py-3 pa-sm-5">
+                <v-col cols="12" class="pt-12 pb-8 pa-sm-5">
                     <median-toggle
                       :display-toggle="medianToggle"
                       @median-switch-click="handleMedianToggle"
@@ -870,7 +870,7 @@
                           {{ netPrice | numeral("$0,0") }}
                         </h2>
                         <div class="data-na" v-else>Data Not Available</div>
-                        <p>
+                        <p class="mb-0">
                           Cost includes tuition, living costs, books and
                           supplies, and fees minus the average grants and
                           scholarships for federal financial aid recipients.
@@ -882,7 +882,7 @@
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
                           :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
-                          class="mb-7"
+                          class="pt-12 pb-8"
                         />  
                       <v-row>
                       <v-col cols="2"></v-col>
@@ -962,7 +962,7 @@
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
                           :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
-                          class="mb-7"
+                          class="pt-12 pb-8"
                         />  
                       <v-row>
                       <v-col cols="2"></v-col>
@@ -1105,7 +1105,7 @@
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
                           :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
-                          class="mb-3"
+                          class="pt-12 pb-8"
                         />
                        <v-row>
                       <v-col cols="2"></v-col>
@@ -1136,12 +1136,13 @@
                       :y-bar-thickness="50"
                       :label-font-size="24"
                       :labels="true"
+                      class="pb-15"
                     ></horizontal-bar-median>                       
                       <div v-else class="data-na">Data Not Available</div>
                       </v-col>  
                        <v-col cols="2"></v-col>     
                       </v-row>                       
-                      <h2 class="mb-3 mt-5">
+                      <h2 class="mb-12 mt-5">
                         Students Who Return After Their First Year&nbsp;
                         <tooltip definition="retention-rate" />
                       </h2>
@@ -1463,7 +1464,7 @@
                           >{{
                               monthlyLoanPayment
                                 | numeral("$0,0")
-                            }}/mo
+                            }}
                           </div>
                         </div>
                         <div
@@ -1478,7 +1479,7 @@
                           >{{
                               monthlyLoanPaymentAll
                                 | numeral("$0,0")
-                            }}/mo
+                            }}
                           </div>
                         </div>                        
                         <div
@@ -1518,7 +1519,7 @@
                           </div>
                         </div>
 
-                        <p class="mt-2">
+                        <p class="mt-3 mb-0 pb-15">
                           This is based on a standard 10-year payment plan,
                           other
                           <a
@@ -1597,7 +1598,7 @@
                       </v-col>
                     </v-row>
                     <v-row v-if="aidLoanSelect === 'fed'" class="mb-2">
-                      <v-col class="pt-0 pb-2">
+                      <v-col class="pt-0 pb-15">
                       <v-simple-table class="school-table">
                         <caption class="sr-only">
                           Average cost by family income
@@ -1884,7 +1885,7 @@
                   class="px-0 py-3 pa-sm-5"
                 >
                   <div>
-                  <h2 class="mb-3" v-if="medianEarnings">
+                  <h2 class="pb-3" v-if="medianEarnings">
                           Median Earnings&nbsp;<tooltip
                             definition="fos-median-earnings"
                             :isBranch="isBranch"
@@ -1896,7 +1897,7 @@
                     >
                       {{ medianEarnings | numeral("$0,0") }}
                     </h2>   
-                    <p>
+                    <p class="mb-0">
                       The median earnings of former students who received federal financial aid at 10 years after entering the school.
                     </p>
                     <median-toggle
@@ -1905,7 +1906,7 @@
                       @median-switch-click="handleMedianToggle"
                       @median-tab-change="handleMedianToggle"
                       :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
-                      class="mb-7"
+                      class="pt-12 pb-8"
                     />          
                        <v-row>
                       <v-col cols="2"></v-col>
@@ -1946,7 +1947,7 @@
                             definition="fos-median-earnings"
                           />
                         </h2>
-                    <div class="d-flex align-end mb-8" v-if="completionRate"><h2
+                    <div class="d-flex align-end mb-16" v-if="completionRate"><h2
                       class="display-2 navy-text font-weight-bold"
                     >
                       {{ completionRate |  numeral("0%") }}

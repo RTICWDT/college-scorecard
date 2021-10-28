@@ -98,7 +98,7 @@
 
               <!--Institution Summary Metrics-->
               <v-row>
-                <v-col cols="12" class="px-sm-5 pt-0">
+                <v-col cols="12" class="px-sm-5 pt-0 pb-4">
                     <median-toggle
                       :display-toggle="medianToggle"
                       @median-switch-click="handleMedianToggle"
@@ -134,7 +134,7 @@
                       medianToggle: medianToggle
                     }"
                     v-show="showResource === 'institutions' && !loading"
-                    ><p class="" v-show="showResource === 'institutions' && !loading">
+                    ><p class="mb-0" v-show="showResource === 'institutions' && !loading">
                       Cost includes tuition, living costs, books and supplies,
                       and fees minus the average grants and scholarships for
                       federal financial aid recipients.
@@ -787,6 +787,7 @@
                         width: '32%',
                       }"
                       v-show="showResource === 'institutions'"
+                      class="mt-10"
                     />    
 
                   <compare-section
@@ -877,6 +878,7 @@
                         width: '32%',
                       }"
                       v-show="showResource === 'institutions'"
+                      class="mt-10"
                     />    
 
                   <compare-section
@@ -1154,6 +1156,7 @@
                         width: '32%',
                       }"
                       v-show="showResource === 'institutions'"
+                      class="mt-10"
                     />    
 
                   <compare-section

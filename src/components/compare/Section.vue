@@ -8,7 +8,7 @@
       />
     </h2>
     <v-row v-if="this.$slots.default">
-      <v-col cols="10" class="pa-3">
+      <v-col cols="10" class="px-3 pt-3">
         <slot></slot>
       </v-col>
     </v-row>
