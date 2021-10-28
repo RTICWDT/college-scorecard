@@ -72,7 +72,7 @@
           class="compare-icon-wrapper d-inline-block mr-2"
           style="background: #83c38c;"
         >
-          <v-icon style="margin-top:6px;" color="black"  size="24">
+          <v-icon style="margin-top:7px;" color="black"  size="24">
             fas fa-university
           </v-icon>
         </div>
@@ -119,7 +119,7 @@
           class="compare-icon-wrapper d-inline-block mr-2"
           style="background: #fec005;"
         >
-          <v-icon  style="margin-top:6px;" color="black"  size="24">
+          <v-icon  style="margin-top:7px;" color="black"  size="24">
             fas fa-award
           </v-icon>
         </div>
@@ -257,11 +257,14 @@
   h4 {
     font-size: 13px;
     color: #000;
+    margin-top:3px;
+    font-weight:500;
   }
   p {
     font-size: 13px;
     color: #000;
     font-family: "Montserrat", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+    font-weight:500;
   }
 
   .fos-school-name-text {
