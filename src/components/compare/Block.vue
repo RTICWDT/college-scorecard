@@ -1,9 +1,9 @@
 <template>
   <div>
     <h4 class="overline mb-6 mt-8 ml-4">{{ block_title }}</h4>
-     <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'average-annual-cost'" >Median for {{config.medianToggle === 'group' ? block_title.replace('schools', 'Schools') : "All Schools"}}: {{$options.filters.numeral(config.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0')}}</p>
-     <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'median-earnings'" >Median for {{config.medianToggle === 'group' ? block_title.replace('schools', 'Schools') : "All Schools"}}: {{$options.filters.numeral(config.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</p>
-     <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'graduation-rate'" >Median for {{config.medianToggle === 'group' ? block_title.replace('schools', 'Schools') : "All Schools"}}: {{$options.filters.numeral(config.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</p>     
+     <div class="mx-sm-6 mx-2 compareBlockHeader" v-if="config && config.medianToggle && config.type == 'average-annual-cost'" ><p class="median-value-text" >Median for {{config.medianToggle === 'group' ? block_title.replace('schools', 'Schools') : "All Schools"}}: {{$options.filters.numeral(config.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0')}}</p></div>
+     <div class="mx-sm-6 mx-2 compareBlockHeader" v-if="config && config.medianToggle && config.type == 'median-earnings'" ><p class="median-value-text" >Median for {{config.medianToggle === 'group' ? block_title.replace('schools', 'Schools') : "All Schools"}}: {{$options.filters.numeral(config.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</p></div>
+     <div class="mx-sm-6 mx-2 compareBlockHeader" v-if="config && config.medianToggle && config.type == 'graduation-rate'" ><p class="median-value-text" >Median for {{config.medianToggle === 'group' ? block_title.replace('schools', 'Schools') : "All Schools"}}: {{$options.filters.numeral(config.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</p></div>  
 
       <div v-if="config && config.chart == 'RepaymentRate'">
       <v-simple-table class="repayment-table">
@@ -115,12 +115,16 @@
   font-size:12px;
   text-align:right;
   font-style:italic;
-  padding-bottom:0;
-  margin-bottom:16px;
+  padding-bottom:16px;
+  margin-bottom:0;
 }
 
 .repayment-table td {
   width:25%;
+}
+
+.compareBlockHeader {
+  border-left:1px solid #666;
 }
 
 </style>
