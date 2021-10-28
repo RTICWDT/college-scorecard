@@ -67,7 +67,7 @@
               <div class="pa-5">
                 <h1 class="title">
                   Loading
-                  <v-icon color="#00365e">fas fa-circle-notch fa-spin</v-icon>
+                  <v-icon color="#1874DC">fas fa-circle-notch fa-spin</v-icon>
                 </h1>
               </div>
             </div>
@@ -118,7 +118,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'netPrice',
-                      color: '#00365e',
+                      color: '#1874DC',
                       min: {
                         label: '$0',
                         value: 0,
@@ -133,9 +133,8 @@
                       chart: 'HorizontalBarMedian',
                       medianToggle: medianToggle
                     }"
-                    class="mt-5"
                     v-show="showResource === 'institutions' && !loading"
-                    ><p class="my-3" v-show="showResource === 'institutions' && !loading">
+                    ><p class="" v-show="showResource === 'institutions' && !loading">
                       Cost includes tuition, living costs, books and supplies,
                       and fees minus the average grants and scholarships for
                       federal financial aid recipients.
@@ -150,7 +149,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'completionRate',
-                      color: '#00365e',
+                      color: '#1874DC',
                       min: {
                         label: '0%',
                         value: 0,
@@ -177,7 +176,7 @@
                     definition="fos-median-earnings"
                     :config="{
                       computedField: 'medianEarnings',
-                      color: '#00365e',
+                      color: '#1874DC',
                       min: {
                         label: '$0',
                         value: 0,
@@ -798,7 +797,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'netPrice',
-                      color: '#00365e',
+                      color: '#1874DC',
                       min: {
                         label: '$0',
                         value: 0,
@@ -888,7 +887,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'completionRate',
-                      color: '#00365e',
+                      color: '#1874DC',
                       min: {
                         label: '0%',
                         value: 0,
@@ -1006,13 +1005,11 @@
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
                     :config="{
-                      computedField: 'debtRange',
-                      color: '#00365e',
-                      chart: 'MultiRange',
-                      multiRangeVariable: 'debt',
-                      multiRangeReactive: true,
-                      multiRangeAidShowMedianDebtWithPrior: aidShowMedianDebtWithPrior,
-                      multiRangeAidLoanSelect: aidLoanSelect,
+                      computedField: aidShowMedianDebtWithPrior ? 'parentPlusDebt' : 'parentPlusDebtAll',
+                      color: '#1874DC',
+                      type: 'currency',
+                      max: 150000,
+                      chart: 'HorizontalBar',
                     }"
                   >
                     <template>
@@ -1041,14 +1038,11 @@
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
                     :config="{
-                      computedField: 'debtRange',
-                      color: '#00365e',
-                      chart: 'MultiRange',
-                      multiRangeVariable: 'payment',
-                      multiRangeReactive: true,
-                      multiRangeAidShowMedianDebtWithPrior: aidShowMedianDebtWithPrior,
-                      multiRangeAidLoanSelect: aidLoanSelect,
-                      max: { value: 1000, label: '$1,000' },
+                      computedField: aidShowMedianDebtWithPrior ? 'monthlyLoanPaymentAll' : 'monthlyLoanPayment',
+                      color: '#1874DC',
+                      type: 'currency',
+                      max: 1000,
+                      chart: 'HorizontalBar',
                     }"
                   >
                     <template>
@@ -1078,7 +1072,7 @@
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
                     :config="{
-                      color: '#00365e',
+                      color: '#1874DC',
                       chart: 'RepaymentRate',
                       showGradOnly: showGradOnly,
                       repaymentStatus: currentRepaymentStatus
@@ -1170,7 +1164,7 @@
                     definition="fos-median-earnings"
                     :config="{
                       computedField: 'medianEarnings',
-                      color: '#00365e',
+                      color: '#1874DC',
                       min: {
                         label: '$0',
                         value: 0,
@@ -1212,7 +1206,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'satReading',
-                      color: '#00365e',
+                      color: '#1874DC',
                       chart: 'Range',
                     }"
                   />
@@ -1223,7 +1217,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'satMath',
-                      color: '#00365e',
+                      color: '#1874DC',
                       chart: 'Range',
                     }"
                   />
@@ -1235,7 +1229,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'act',
-                      color: '#00365e',
+                      color: '#1874DC',
                       chart: 'Range',
                     }"
                   />

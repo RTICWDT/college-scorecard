@@ -75,8 +75,8 @@
 @import "~/sass/_variables.scss";
 .range-container {
   overflow: visible;
-  height: 100px;
-  padding-top: 20px;
+  height: 90px;
+  padding-top: 16px;
   padding-right: 0px;
 }
 .range-chart {
@@ -108,7 +108,7 @@
   .picc-range-label {
     height: 22px;
     position: absolute;
-    top: 6px;
+    top: 4px;
     transition: left 0.5s;
     font-size: 0.85rem;
 
@@ -283,7 +283,7 @@ export default {
       type: Object,
       default: () => {
         return {
-          height: "40px",
+          height: "35px",
         }
       },
     },

@@ -247,6 +247,9 @@
                       :upperTipStyleOverride="{
                         display: 'none',
                       }"
+                      :rangeChartStyle="{
+                        height: '35px'
+                        }"
                       color="#00365e"
                       :height="500"
                       :y-bar-thickness="50"
@@ -1450,45 +1453,34 @@
 
                         <div
                           v-if="
-                            debtRange &&
-                              debtRange.single &&
-                              aidLoanSelect === 'fed'
+                            monthlyLoanPayment &&
+                              aidLoanSelect === 'fed' &&
+                              !aidShowMedianDebtWithPrior
                           "
                         >
                           <div
                             class="display-2 navy-text font-weight-bold pb-3"
-                            v-if="debtRange && debtRange.min.payment"
-                          >
-                            {{
-                              Math.round(
-                                parseFloat(_.get(debtRange, "min.payment"))
-                              ) | numeral("$0,0")
+                          >{{
+                              monthlyLoanPayment
+                                | numeral("$0,0")
                             }}/mo
                           </div>
                         </div>
                         <div
                           v-else-if="
-                            debtRange &&
-                              debtRange.min &&
-                              aidLoanSelect === 'fed'
+                            monthlyLoanPayment &&
+                              aidLoanSelect === 'fed' &&
+                              aidShowMedianDebtWithPrior
                           "
                         >
                           <div
                             class="display-2 navy-text font-weight-bold pb-3"
-                            v-if="
-                              debtRange.min.payment && debtRange.max.payment
-                            "
-                          >
-                            {{
-                              Math.round(
-                                parseFloat(_.get(debtRange, "min.payment"))
-                              ) | numeral("$0,0")
-                            }}-{{
-                              Math.round(parseFloat(debtRange.max.payment))
-                                | numeral("0,0")
+                          >{{
+                              monthlyLoanPaymentAll
+                                | numeral("$0,0")
                             }}/mo
                           </div>
-                        </div>
+                        </div>                        
                         <div
                           v-else-if="aidLoanSelect === 'fed'"
                           class="data-na pb-3"

@@ -60,7 +60,7 @@ export default {
       type: Object,
       default: () => {
         return {
-          height: "40px",
+          height: "35px",
         }
       },
     },

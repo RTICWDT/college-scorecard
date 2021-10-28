@@ -75,13 +75,8 @@
     }
   }
 
-  .v-tab--active {
-      background:#c4dec4;
-
-  }
-
   .v-tab--active:hover {
-    background:#c4dec4;
+    background:#c4dec4 !important;
   }
 
 }

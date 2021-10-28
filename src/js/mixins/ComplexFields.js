@@ -85,7 +85,17 @@ export default {
         parentPlusPaymentAll() {
             if (!this.school) return null;
             return _.get(this.school, this.fields['PARENT_PLUS_LOAN_PAYMENT_ALL'])
-        },               
+        }, 
+        monthlyLoanPayment() {
+            if (!this.school) return null;
+            return _.get(this.school, this.fields['MONTHLY_LOAN_PAYMENT'])
+        },        
+        monthlyLoanPaymentAll() {
+            if (!this.school) return null;
+            var test = _.get(this.school, this.fields['MONTHLY_LOAN_PAYMENT'])
+            if (test)
+            return (test + 89)
+        },                        
         undergraduates() {
             if (!this.school) return null;
             return _.get(this.school, this.fields['SIZE'])

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4 class="overline my-3 pt-15">{{ block_title }}</h4>
+    <h4 class="overline mb-3 pt-8">{{ block_title }}</h4>
      <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'average-annual-cost'" >Median for {{config.medianToggle === 'group' ? block_title.replace('schools', 'Schools') : "All Schools"}}: {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0')}}</p>
      <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'median-earnings'" >Median for {{config.medianToggle === 'group' ? block_title.replace('schools', 'Schools') : "All Schools"}}: {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</p>
      <p class="median-value-text" v-if="config && config.medianToggle && config.type == 'graduation-rate'" >Median for {{config.medianToggle === 'group' ? block_title.replace('schools', 'Schools') : "All Schools"}}: {{this.$options.filters.numeral(config.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</p>     
@@ -18,7 +18,7 @@
         </thead>
         <tbody>
               <compare-table-row v-for="school in schools"
-            :key="school.id"
+                :key="school.id"
                 :school="school"
                 :config="config"
                 :currentHighlight="currentHighlight"
@@ -114,6 +114,7 @@
   font-size:12px;
   text-align:right;
   font-style:italic;
+  padding-top:10px;
 }
 
 .repayment-table td {

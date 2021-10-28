@@ -3,7 +3,7 @@
     :class="classes"
     @click="$emit('update-highlight', 'school-' + school.id)"
   >
-    <p class="subtitle-2 pb-0 mb-0">
+    <p class="subtitle-2 pb-0 mb-0 pt-4">
       <a :href="$url(schoolLink)">{{ _.get(school, fields["NAME"]) }}</a>
     </p>
 
@@ -25,7 +25,7 @@
       :y-bar-thickness="50"
       :label-font-size="24"
       :labels="true"
-      class="pt-3"
+      class="pt-4"
     ></horizontal-bar-median>
     <horizontal-bar-median
       v-if="school && config.chart == 'HorizontalBarMedian' && value && config.type == 'graduation-rate'"
@@ -52,7 +52,7 @@
       :y-bar-thickness="50"
       :label-font-size="24"
       :labels="true"
-      class="pt-3"
+      class="pt-4"
     ></horizontal-bar-median>    
     <horizontal-bar-median
       v-if="school && config.chart == 'HorizontalBarMedian' && value && config.type == 'median-earnings'"
@@ -79,7 +79,7 @@
       :y-bar-thickness="50"
       :label-font-size="24"
       :labels="true"
-      class="pt-3"
+      class="pt-4"
     ></horizontal-bar-median>      
     <div
       v-if="school && config.chart == 'HorizontalBarMedian' && !value"
@@ -267,6 +267,8 @@ export default {
       }
     },
     value() {
+      //console.log(this.config.computedField + ': ' + this[this.config.computedField])
+      //console.log(this['debtRange'])
       if (this.config.currentRaceEthnicityFilter) {
         let entry = this.raceEthnicity.filter(
           (obj) => obj.label === this.config.currentRaceEthnicityFilter
@@ -283,6 +285,7 @@ export default {
           this.config.multiRangeAidLoanSelect
         )
       } else {
+        
         return this[this.config.computedField]
       }
     },
