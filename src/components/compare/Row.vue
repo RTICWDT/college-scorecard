@@ -57,7 +57,7 @@
     <horizontal-bar-median
       v-if="school && config.chart == 'HorizontalBarMedian' && value && config.type == 'median-earnings'"
       :value="{
-        label:  this.$options.filters.numeral(netPrice,'$0,0'),
+        label:  this.$options.filters.numeral(medianEarnings,'$0,0'),
         value: medianEarnings
       }"
       :min="config.min"
@@ -161,7 +161,7 @@
     />
 
     <div v-if="school && config.chart == 'SchoolInfo'">
-      <v-row>
+      <v-row class="mb-0">
         <v-col cols="12" sm="6">
           <school-icons :school="school" :fields="fields" />
         </v-col>
