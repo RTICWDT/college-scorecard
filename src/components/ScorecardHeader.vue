@@ -84,13 +84,15 @@ header {
 
       li {
         display: inline;
+        
       }
 
       li a {
         text-decoration: none;
         color: white !important;
         font-size: 1rem;
-        padding: 0 10px;
+        margin-right:40px;
+        font-weight:400;
       }
 
       li a.disabled {
@@ -105,8 +107,10 @@ header {
 
       li .nav-active {
         color: $nav-active-color !important;
-        text-decoration: underline;
-        font-weight:600;
+        text-decoration: none;
+        font-weight:700;
+        padding-bottom:10px;
+        border-bottom:3px solid #97CFF5;
       }
     }
 
