@@ -1961,7 +1961,7 @@
 
                     <p class="mt-2">
                       Salary information for Fields of Study available at this school are in the
-                      <a :href="fieldsLink">All Fields of Study</a> page.
+                      <a :href="this.$url(fieldsLink)">All Fields of Study</a> page.
                     </p>
                   </div>
                 </v-expansion-panel-content>
