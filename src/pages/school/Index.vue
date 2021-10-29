@@ -1885,7 +1885,7 @@
                   class="px-0 py-3 pa-sm-5"
                 >
                   <div>
-                  <h2 class="pb-3" v-if="medianEarnings">
+                  <h2 class="pb-3">
                           Median Earnings&nbsp;<tooltip
                             definition="median-earnings"
                             :isBranch="isBranch"
