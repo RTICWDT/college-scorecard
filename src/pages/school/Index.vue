@@ -1986,36 +1986,35 @@
                         :fields="fields"
                         :sizeOnly="true"
                       />
-                      <div class="text-center">
-                        <strong class="display-2 navy-text font-weight-bold">{{
+                      <div class="text-center my-2 px-0 py-0 justify-space-around">
+                        <div class="mb-2"><strong class="display-2 navy-text font-weight-bold pb-2">{{
                           undergraduates | separator
-                        }}</strong>
-                        <br />
+                        }}</strong></div>
                         <strong>Undergraduate Students</strong>
                       </div>
                     </v-col>
                     <v-col cols="12" md="6" class="d-flex justify-space-around">
-                      <div class="text-center">
-                        <span class="display-2 navy-text font-weight-bold">{{
+                      <div class="text-center my-2 px-0 py-0 justify-space-around">
+                        <div class="mb-2"><span class="display-2 navy-text font-weight-bold">{{
                           fullTimeEnrollment | numeral("0.%")
                         }}</span>
-                        <br />
+                        </div>
                         <strong>
                           Full-time&nbsp;
                           <tooltip definition="full-time" />
                         </strong>
                       </div>
-                      <div>
+                      <div class="text-center my-2 px-0 py-0 justify-space-around">
                         <span
-                          class="display-2 navy-text font-weight-bold divide"
+                          class="display-2 navy-text font-weight-bold divide "
                           >/</span
                         >
                       </div>
-                      <div class="text-center">
-                        <span class="display-2 navy-text font-weight-bold">{{
+                      <div class="text-center my-2 px-0 py-0 justify-space-around">
+                        <div class="mb-2"><span class="display-2 navy-text font-weight-bold">{{
                           partTimeEnrollment | numeral("0.%")
                         }}</span>
-                        <br />
+                        </div>
                         <strong>Part-time</strong>
                       </div>
                     </v-col>

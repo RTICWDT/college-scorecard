@@ -185,7 +185,7 @@
       background-color:#000;  
       border-left: 1px solid #000;
       span {
-        top: 40px !important;
+        top: 35px !important;
               width: $label-width;
       }
       span:not(.arrow-left) {

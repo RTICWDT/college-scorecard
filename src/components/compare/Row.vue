@@ -179,7 +179,7 @@
             />
           </v-chip>
           <a
-            style="word-wrap: break-word;"
+            style="word-wrap: break-word; font-size:14px;"
             target="_blank"
             :href="$url('/school/transition/?url=' + schoolUrl)"
             >{{
