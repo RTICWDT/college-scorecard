@@ -173,7 +173,7 @@
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
                     title="Median Earnings"
-                    definition="fos-median-earnings"
+                    definition="median-earnings"
                     :config="{
                       computedField: 'medianEarnings',
                       color: '#1874DC',
@@ -1164,7 +1164,7 @@
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
                     title="Median Earnings"
-                    definition="fos-median-earnings"
+                    definition="median-earnings"
                     :config="{
                       computedField: 'medianEarnings',
                       color: '#1874DC',

@@ -180,6 +180,12 @@
     "glossary": "<p>The median annual earnings of individuals who received federal financial aid during their studies and completed an award at the indicated field of study. To be included in the median earnings calculation, the individuals needed to be working and not enrolled in school during in the year when earnings are measured. Median earnings are measured in the second full year after the student completed their award. </p><p>These data are based on school-reported information about students’ program of completion. The U.S. Department of Education cannot fully confirm the completeness of these reported data for this school.</p><p>For schools with multiple locations, this information is based on all of their locations.</p>",
     "branch": true
   },
+  "median-earnings": {
+    "title": "Median Earnings",
+    "default": "<p>The median annual earnings of students two years after graduation. Only data from students who received federal financial aid are included in the calculation.</p><p>These data are based on school-reported information about students’ program of completion. The U.S. Department of Education cannot fully confirm the completeness of these reported data for this school.</p>",
+    "glossary": "<p>The median annual earnings of individuals who received federal financial aid during their studies and completed an award at the indicated field of study. To be included in the median earnings calculation, the individuals needed to be working and not enrolled in school during in the year when earnings are measured. Median earnings are measured in the second full year after the student completed their award. </p><p>These data are based on school-reported information about students’ program of completion. The U.S. Department of Education cannot fully confirm the completeness of these reported data for this school.</p><p>For schools with multiple locations, this information is based on all of their locations.</p>",
+    "branch": true
+  },  
   "fos-monthly-earnings": {
     "title": "Field of Study Monthly Earnings",
     "default": "<p>The median annual earnings divided by 12 for students who received federal aid.</p><p>These data are based on school-reported information about students’ program of completion. The U.S. Department of Education cannot fully confirm the completeness of these reported data for this school.</p>",
@@ -234,5 +240,10 @@
     "default": "<p>A Pell Grant is a grant provided by the federal government that is usually awarded only to undergraduate students who display exceptional financial need and have not earned a bachelor's, graduate, or professional degree. A Federal Pell Grant, unlike a loan, does not have to be repaid, except under certain circumstances.</p>",
     "glossary": "<p>A Pell Grant is a grant provided by the federal government that is usually awarded only to undergraduate students who display exceptional financial need and have not earned a bachelor's, graduate, or professional degree. A Federal Pell Grant, unlike a loan, does not have to be repaid, except under certain circumstances.</p>",
     "branch": false    
+  },
+  "placeholder": {
+    "title": "Tooltip",
+    "default": "<p>Placeholder tooltip definition.</p>",
+    "glossary": "<p>Placeholder tooltip definition</p>"
   }
 }

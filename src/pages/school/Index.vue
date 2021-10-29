@@ -265,13 +265,13 @@
                     <h2 class="mb-3" v-if="!isProgramReporter">
                       <!--prettyhtml-ignore-->
                       Median Earnings
-                      <tooltip definition="fos-median-earnings" />
+                      <tooltip definition="median-earnings" />
                     </h2>
                     <h2 v-else class="mb-3">
                       <!--prettyhtml-ignore-->
                       Median Earnings for Largest Program
                       <tooltip
-                        definition="fos-median-earnings"
+                        definition="median-earnings"
                         :isNegative="medianEarnings < 0"
                       />
                     </h2>
@@ -1887,7 +1887,7 @@
                   <div>
                   <h2 class="pb-3" v-if="medianEarnings">
                           Median Earnings&nbsp;<tooltip
-                            definition="fos-median-earnings"
+                            definition="median-earnings"
                             :isBranch="isBranch"
                           />
                         </h2>
@@ -1944,7 +1944,7 @@
                       </v-row> 
                     <h2 class="mb-3 mt-10">
                           Percentage Earning Above a High School Graduate&nbsp;<tooltip
-                            definition="fos-median-earnings"
+                            definition="placeholder"
                           />
                         </h2>
                     <div class="d-flex align-end mb-16" v-if="completionRate"><h2

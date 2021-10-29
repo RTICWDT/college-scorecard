@@ -1,22 +1,17 @@
 <template>
-<div class="compare-header-wrapper">
   <div
     id="compare-header"
     class="header pa-3 elevation-4"
     @click="toggleDrawer()"
     v-show="currentSchoolCount > 0 || currentFieldOfStudyCount > 0 && showByIndex == 1"
   >
-  <v-row>
-    <v-col cols='2'  >
-      <div class="compare-header-text mr-12  mb-1">
+      <div class="compare-header-text ml-8 mr-6  mb-1">
 
           <v-icon class="mt-1" color="black"  size="24">
             
           </v-icon>
        
         Ready to Compare: </div>
-    </v-col>
-    <v-col  cols='5'>
       <div v-if="currentSchoolCount < 10" class="compare-header-text mb-1 ml-4">
         <div
           class="compare-icon-wrapper d-inline-block mr-2"
@@ -38,11 +33,9 @@
         </div>
         Maximum of 10 Schools reached &nbsp;&nbsp;
       </div>
-    </v-col>
-    <v-col cols='5'>
       <div
         v-if="currentFieldOfStudyCount < 10"
-        class="compare-header-text mb-1 ml-4 mr-6"
+        class="compare-header-text mb-1 ml-6"
       >
         <div
           class="compare-icon-wrapper d-inline-block mr-2"
@@ -54,7 +47,7 @@
         </div>
         {{ currentFieldOfStudyCount }} {{ fieldOfStudyText }} 
       </div>
-      <div v-else class="compare-header-text mb-1 ml-4 mr-6">
+      <div v-else class="compare-header-text mb-1 ml-4">
         <div
           class="compare-icon-wrapper d-inline-block mr-2 mt-n1"
         >
@@ -64,33 +57,25 @@
         </div>
         Maximum of 10 Fields of Study reached &nbsp;&nbsp;
       </div>
-    </v-col>
-  </v-row>
-  </div>
-</div>
+    </div>
 </template>
 
 <style lang="scss" scoped>
 @import "~/sass/_variables";
 .header {
+  position: fixed;
+  width: 50%;
+  left: 25%;
+  bottom: 0px;
   background-color: rgba(0, 0, 0, 0.98);
   color: #ffffff;
-  width:50%;
+  z-index: 200;
   border-radius: 3px 3px 0 0;
   cursor: pointer;
   @media only screen and (max-width: 600px) {
     width: 100%;
     left: 0;
   }
-}
-
-.compare-header-wrapper {
-  position: fixed;
-  bottom:0px;
-  display:flex;
-  justify-content: center;
-  width:100%;
-   z-index: 200;
 }
 
 .compare-icon-wrapper {
