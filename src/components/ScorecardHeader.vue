@@ -91,8 +91,8 @@ header {
         text-decoration: none;
         color: white !important;
         font-size: 1rem;
-        margin-right:40px;
-        font-weight:400;
+        margin-right: 40px;
+        font-weight: 500;
       }
 
       li a.disabled {

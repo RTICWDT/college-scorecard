@@ -3,7 +3,7 @@
     :class="classes"
     @click="$emit('update-highlight', 'school-' + school.id)"
   >
-    <p class="subtitle-2 pb-1 mb-0 pb-4">
+    <p class="subtitle-2 pb-1 mb-0 pb-2">
       <a :href="$url(schoolLink)">{{ _.get(school, fields["NAME"]) }}</a>
     </p>
 
@@ -25,7 +25,7 @@
       :y-bar-thickness="50"
       :label-font-size="24"
       :labels="true"
-      class="pb-4"
+      class="pb-0"
     ></horizontal-bar-median>
     <horizontal-bar-median
       v-if="school && config.chart == 'HorizontalBarMedian' && value && config.type == 'graduation-rate'"
@@ -52,7 +52,7 @@
       :y-bar-thickness="50"
       :label-font-size="24"
       :labels="true"
-      class="pb-4"
+      class="pb-0"
     ></horizontal-bar-median>    
     <horizontal-bar-median
       v-if="school && config.chart == 'HorizontalBarMedian' && value && config.type == 'median-earnings'"
@@ -79,7 +79,7 @@
       :y-bar-thickness="50"
       :label-font-size="24"
       :labels="true"
-      class="pt-4"
+      class="pt-0"
     ></horizontal-bar-median>      
     <div
       v-if="school && config.chart == 'HorizontalBarMedian' && !value"
@@ -262,7 +262,7 @@ export default {
     classes() {
       return {
         active: "school-" + this.school.id == this.currentHighlight,
-        "pb-4": true,
+        "pb-0": true,
         "px-sm-5": true,
         "px-1": true,
       }

@@ -1,5 +1,5 @@
 <template>
-  <div @update-highlight="$emit('update-highlight', $event)" class="mb-8 mt-12">
+  <div @update-highlight="$emit('update-highlight', $event)" class="mb-8 mt-8">
     <h2 class="heading">
       {{ title }}&nbsp;<tooltip
         v-if="definition"

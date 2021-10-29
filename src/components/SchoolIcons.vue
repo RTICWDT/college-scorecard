@@ -14,7 +14,7 @@
             <span>{{ years | formatYearsLabel }}</span>
           </li>
         </template>
-        <span>{{ tip }}</span>
+        <div class="hover-tip">{{ tip }}</div>
       </v-tooltip>
       <li
         :class="_.get(school, fields['OWNERSHIP'], '-1') | controlClass"

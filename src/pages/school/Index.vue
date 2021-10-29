@@ -882,7 +882,7 @@
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
                           :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
-                          class="pt-12 pb-8"
+                          class="pt-8 pb-8"
                         />  
                       <v-row>
                       <v-col cols="2"></v-col>
@@ -962,7 +962,7 @@
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
                           :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
-                          class="pt-12 pb-8"
+                          class="pt-8 pb-8"
                         />  
                       <v-row>
                       <v-col cols="2"></v-col>
@@ -1105,7 +1105,7 @@
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
                           :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
-                          class="pt-12 pb-8"
+                          class="pt-0 pb-8"
                         />
                        <v-row>
                       <v-col cols="2"></v-col>
@@ -1136,7 +1136,7 @@
                       :y-bar-thickness="50"
                       :label-font-size="24"
                       :labels="true"
-                      class="pb-15"
+                      class="pb-10"
                     ></horizontal-bar-median>                       
                       <div v-else class="data-na">Data Not Available</div>
                       </v-col>  
@@ -1942,7 +1942,7 @@
                       </v-col>  
                        <v-col cols="2"></v-col>     
                       </v-row> 
-                    <h2 class="mb-3 mt-5">
+                    <h2 class="mb-3 mt-10">
                           Percentage Earning Above a High School Graduate&nbsp;<tooltip
                             definition="fos-median-earnings"
                           />
@@ -2005,10 +2005,10 @@
                         </strong>
                       </div>
                       <div class="text-center my-2 px-0 py-0 justify-space-around">
-                        <span
+                       <!-- <span
                           class="display-2 navy-text font-weight-bold divide "
                           >/</span
-                        >
+                        > -->
                       </div>
                       <div class="text-center my-2 px-0 py-0 justify-space-around">
                         <div class="mb-2"><span class="display-2 navy-text font-weight-bold">{{

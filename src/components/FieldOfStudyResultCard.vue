@@ -159,7 +159,7 @@
                 </template>
 
                   <!--<span>Add Field of Study to compare</span>-->
-                  <span>{{compareFOSHoverCountText}}</span>
+                  <div class="hover-tip">{{compareFOSHoverCountText}}</div>
               </v-tooltip>
 
               <!-- Compare on small and below-->
@@ -187,7 +187,7 @@
                       ><v-icon>fa fa-check-circle</v-icon>
                     </v-btn>
                   </template>
-                  <span>Add Field of Study to compare</span>
+                  <div class="hover-tip">Add Field of Study to compare</div>
                   <!--<span>Add Field of Study to compare</span>-->
                 </v-tooltip>
               </div>

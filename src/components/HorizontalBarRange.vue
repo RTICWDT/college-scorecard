@@ -36,9 +36,9 @@
           </span>
         </template>
 
-        <span>
+        <div class="hover-tip">
           {{ lowertip }}
-        </span>
+        </div>
       </v-tooltip>
 
       <span
@@ -63,9 +63,9 @@
           </span>
         </template>
 
-        <span>
+        <div class="hover-tip">
           {{ uppertip }}
-        </span>
+        </div>
       </v-tooltip>
     </div>
   </div>
@@ -192,7 +192,7 @@
         //margin-bottom: $bar-width + $arrow-size + 10;
         text-align: center;
         color:#000;
-        top: 50px !important;
+        top: 44px !important;
         margin-left:-3.75rem !important;
         font-weight:400;
         font-size: 12px;

@@ -36,9 +36,9 @@
           </span>
         </template>
 
-        <span>
+        <div class="hover-tip">
           {{ lowertip }}
-        </span>
+        </div>
       </v-tooltip>
 
       <span
@@ -62,9 +62,9 @@
           </span>
         </template>
 
-        <span>
+        <div class="hover-tip">
           {{ uppertip }}
-        </span>
+        </div>
       </v-tooltip>
     </div>
   </div>

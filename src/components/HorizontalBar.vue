@@ -38,7 +38,7 @@ export default {
     },
     labelFontSize: {
       type: Number,
-      default: 15,
+      default: 18,
     },
   },
   data() {
