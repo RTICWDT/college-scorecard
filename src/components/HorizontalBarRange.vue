@@ -379,7 +379,7 @@ export default {
       if (left > 80) {
         let s = left.replace(/[0-9]+%\s?/g, '');
         if (obj.label.includes('$'))
-          newObj.styles.left = (s - 25) + '%';
+          newObj.styles.left = (s - 15) + '%';
         else
           newObj.styles.left = (s - 10) + '%';
         newObj.styles.color = '#ffffff'

@@ -58,7 +58,7 @@
       v-if="school && config.chart == 'HorizontalBarMedian' && value && config.type == 'median-earnings'"
       :value="{
         label:  this.$options.filters.numeral(netPrice,'$0,0'),
-        value: netPrice
+        value: medianEarnings
       }"
       :min="config.min"
       :max="config.max"
@@ -69,7 +69,7 @@
       }"
       :upperStyleOverride="
         checkUpperStyle(
-          netPrice,
+          medianEarnings,
           100000,
           {}
         )
