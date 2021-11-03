@@ -187,7 +187,7 @@
                   <v-row align="center">
                     <v-col cols="8">
                       <h2 class="title mt-4 mt-md-0 ml-10">
-                        ALternative Pathways to Careers:
+                        Alternative Pathways to a Career
                       </h2>
                     </v-col>
                     <v-col cols="4">
@@ -199,12 +199,10 @@
                     </v-col>
                   </v-row>
                 </div>
-                <p class="mx-10">
-                  The Department of Labor offers a variet of resources to support your career exploration: 
-                </p>
+
                 <p class="mx-10">
                   Visit                  
-                  <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.apprenticeship.gov/apprenticeship-finder'))"
+                  <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.apprenticeship.gov/apprenticeship-finder'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
@@ -217,10 +215,10 @@
                     </v-icon>                    
                   </a> to search apprenticeship jobs and programs.
                 </p>
-
+                <hr/>
                 <p class="mx-10">
                   Visit the 
-                 <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.mynextmove.org'))"
+                 <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.mynextmove.org'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
@@ -233,10 +231,10 @@
                     </v-icon>                    
                   </a> tool for career exploration and job analysis.     
                 </p>
-
+                <hr/>
                 <p class="mx-10">
                   Visit 
-                 <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://careeronestop.org'))"
+                 <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://careeronestop.org'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
@@ -248,16 +246,11 @@
                       fas fa-external-link-alt
                     </v-icon>                    
                   </a>, your source for career exploration training and jobs.
-
                 </p>
-
-
-
-                <hr/>                        
-
+                <hr/>
                 <p class="mx-10">
                   Visit 
-                 <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://trainingproviderresults.gov'))"
+                 <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://trainingproviderresults.gov'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
@@ -271,14 +264,14 @@
                   </a>
                   to find approved training programs.
                 </p>    
-
+                <hr/>
                 <p class="mx-10">
                   Explore 
-                 <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://bls.gov'))"
+                 <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://bls.gov/ooh/'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    Occupatinoal Outlook Handbook (OOH)<v-icon
+                    Occupational Outlook Handbook (OOH)<v-icon
                       x-small
                       class="pl-1"
                       color="#007000"
@@ -288,23 +281,7 @@
                   </a>
                   to learn detailed information about over 300 occupational profiles.
                 </p>    
-
-                <p class="mx-10">
-                  Explore 
-                 <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://bls.gov'))"
-                     target="_blank"
-                     @click="trackOutboundLink($event)"
-                  >
-                    Occupatinoal Outlook Handbook (OOH)<v-icon
-                      x-small
-                      class="pl-1"
-                      color="#007000"
-                    >
-                      fas fa-external-link-alt
-                    </v-icon>                    
-                  </a>
-                  to learn detailed information about over 300 occupational profiles.
-                </p>                                              
+                                             
               </div>
             </v-col>
 
@@ -461,7 +438,7 @@
 
     @media (min-width: 960px) {
       margin-bottom: inherit;
-      height: 820px;
+      height: 750px;
     }
   }
 
@@ -513,7 +490,7 @@
     background-color: #9d9d9d;
   }
   a.homeCallout-indent {
-    padding:0rem 1rem;
+    padding:0rem 0rem;
   }
 
   h2 {
