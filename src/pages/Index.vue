@@ -233,7 +233,7 @@
                 </p>
                 <hr/>
                 <p class="mx-10">
-                  Find approved training programs on 
+                  Find training programs on 
                  <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://trainingproviderresults.gov'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
