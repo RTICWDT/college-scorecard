@@ -187,7 +187,7 @@
                   <v-row align="center">
                     <v-col cols="8">
                       <h2 class="title mt-4 mt-md-0 ml-10">
-                        There's more than one pathway to a career
+                        ALternative Pathways to Careers:
                       </h2>
                     </v-col>
                     <v-col cols="4">
@@ -199,12 +199,12 @@
                     </v-col>
                   </v-row>
                 </div>
-
                 <p class="mx-10">
-                  Start your career and build your skill set through <strong>apprenticeships:</strong>
+                  The Department of Labor offers a variet of resources to support your career exploration: 
                 </p>
-
-                 <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.apprenticeship.gov/apprenticeship-finder'))"
+                <p class="mx-10">
+                  Visit                  
+                  <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.apprenticeship.gov/apprenticeship-finder'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
@@ -215,15 +215,12 @@
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
-                  </a>
-
-                <hr/>
-
-                <p class="mx-10">
-                  Build your future with O*NET online, your tool for <strong>career exploration and job analysis:</strong>
+                  </a> to search apprenticeship jobs and programs.
                 </p>
 
-                 <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.onetonline.org/find/'))"
+                <p class="mx-10">
+                  Visit the 
+                 <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.mynextmove.org'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
@@ -234,9 +231,8 @@
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
-                  </a>
-
-                <hr/>        
+                  </a> tool for career exploration and job analysis.     
+                </p>
 
                 <p class="mx-10">
                   Discover Career One Stop, your source for <strong>career exploration training and jobs:</strong>
