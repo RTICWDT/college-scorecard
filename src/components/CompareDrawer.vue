@@ -19,7 +19,7 @@
     </div>
 
     <v-card
-      v-if="showInfoText && fieldsOfStudy.length + schools.length == 1"
+      v-show="showInfoText && fieldsOfStudy.length + schools.length == 1"
       id="compare-drawer-info"
       class="pa-4 my-4"
       rounded
@@ -327,7 +327,7 @@ export default {
   props: {
     showInfoText: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   data() {

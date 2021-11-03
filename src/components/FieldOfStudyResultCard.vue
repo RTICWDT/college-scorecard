@@ -147,7 +147,7 @@
                       selectedFieldOfStudyClass(fieldOfStudy) ===
                       'result-card-selected'
                         ? '' 
-                        : (compareFOSLength > 9 
+                        : (totalFieldOfStudyCount > 9 
                         ? 'noCompareAllow' 
                         : '')"
                     v-bind="attrs"
@@ -187,7 +187,7 @@
                       ><v-icon>fa fa-check-circle</v-icon>
                     </v-btn>
                   </template>
-                  <div class="hover-tip">Add Field of Study to compare</div>
+                  <div class="hover-tip">{{compareFOSHoverCountText}}</div>
                   <!--<span>Add Field of Study to compare</span>-->
                 </v-tooltip>
               </div>
@@ -291,17 +291,13 @@ export default {
       // },0);
     },
       compareFOSHoverCountText() {
-        if (this.totalFieldOfStudyCount.length > 9){
+        if (this.totalFieldOfStudyCount > 9){
           return "Maximum of 10 Fields of Study reached";
         }
         else{
           return "Add Field of Study to compare";
         }
-      },
-      compareFOSLength() {
-        if (this.selectedFieldsOfStudy)
-        return this.selectedFieldsOfStudy.length;
-      },    
+      },   
   },
   components: {
     tooltip: Tooltip,
