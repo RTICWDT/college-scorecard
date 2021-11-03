@@ -356,7 +356,7 @@ export default {
     }
   },
   mounted(){
-
+    this.$store.commit("toggleDrawer", false)
   },  
   computed: {
     disableCompare() {
