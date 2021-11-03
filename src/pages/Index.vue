@@ -235,9 +235,7 @@
                 </p>
 
                 <p class="mx-10">
-                  Discover Career One Stop, your source for <strong>career exploration training and jobs:</strong>
-                </p>
-
+                  Visit 
                  <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://careeronestop.org'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
@@ -249,14 +247,16 @@
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
-                  </a>
+                  </a>, your source for career exploration training and jobs.
+
+                </p>
+
+
 
                 <hr/>                        
 
                 <p class="mx-10">
-                  <strong>Find training programs:</strong> compare completion rates, employment rates, and more:
-                </p>
-
+                  Visit 
                  <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://trainingproviderresults.gov'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
@@ -269,6 +269,42 @@
                       fas fa-external-link-alt
                     </v-icon>                    
                   </a>
+                  to find approved training programs.
+                </p>    
+
+                <p class="mx-10">
+                  Explore 
+                 <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://bls.gov'))"
+                     target="_blank"
+                     @click="trackOutboundLink($event)"
+                  >
+                    Occupatinoal Outlook Handbook (OOH)<v-icon
+                      x-small
+                      class="pl-1"
+                      color="#007000"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>                    
+                  </a>
+                  to learn detailed information about over 300 occupational profiles.
+                </p>    
+
+                <p class="mx-10">
+                  Explore 
+                 <a class="homeCallout-indent mx-10" :href="$url('/school/transition/?url=' + encodeURIComponent('https://bls.gov'))"
+                     target="_blank"
+                     @click="trackOutboundLink($event)"
+                  >
+                    Occupatinoal Outlook Handbook (OOH)<v-icon
+                      x-small
+                      class="pl-1"
+                      color="#007000"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>                    
+                  </a>
+                  to learn detailed information about over 300 occupational profiles.
+                </p>                                              
               </div>
             </v-col>
 
