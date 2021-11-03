@@ -201,7 +201,7 @@
                 </div>
 
                 <p class="mx-10">
-                  Visit                  
+                  Search for apprenticeship jobs and programs on                  
                   <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.apprenticeship.gov/apprenticeship-finder'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
@@ -213,16 +213,16 @@
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
-                  </a> to search apprenticeship jobs and programs.
+                  </a>.
                 </p>
                 <hr/>
                 <p class="mx-10">
-                  Visit the 
+                  Use the 
                  <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.mynextmove.org'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    ONETonline.org<v-icon
+                    MyNextMove.org<v-icon
                       x-small
                       class="pl-1"
                       color="#007000"
@@ -232,6 +232,22 @@
                   </a> tool for career exploration and job analysis.     
                 </p>
                 <hr/>
+                <p class="mx-10">
+                  Find approved training programs on 
+                 <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://trainingproviderresults.gov'))"
+                     target="_blank"
+                     @click="trackOutboundLink($event)"
+                  >
+                    TrainingProviderResults.gov<v-icon
+                      x-small
+                      class="pl-1"
+                      color="#007000"
+                    >
+                      fas fa-external-link-alt
+                    </v-icon>                    
+                  </a>.
+                </p>    
+                <hr/>                
                 <p class="mx-10">
                   Visit 
                  <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://careeronestop.org'))"
@@ -249,24 +265,7 @@
                 </p>
                 <hr/>
                 <p class="mx-10">
-                  Visit 
-                 <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://trainingproviderresults.gov'))"
-                     target="_blank"
-                     @click="trackOutboundLink($event)"
-                  >
-                    TrainingProviderResults.gov<v-icon
-                      x-small
-                      class="pl-1"
-                      color="#007000"
-                    >
-                      fas fa-external-link-alt
-                    </v-icon>                    
-                  </a>
-                  to find approved training programs.
-                </p>    
-                <hr/>
-                <p class="mx-10">
-                  Explore 
+                  Explore the  
                  <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://bls.gov/ooh/'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
@@ -278,8 +277,8 @@
                     >
                       fas fa-external-link-alt
                     </v-icon>                    
-                  </a>
-                  to learn detailed information about over 300 occupational profiles.
+                  </a> 
+                  for detailed information about over 300 occupational profiles.
                 </p>    
                                              
               </div>
