@@ -233,7 +233,7 @@
                 </p>
                 <hr/>
                 <p class="mx-10">
-                  Find training programs on 
+                  Find training programs: compare completion rates, employment rates, and more on
                  <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://trainingproviderresults.gov'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
@@ -244,7 +244,7 @@
                       color="#007000"
                     >
                       fas fa-external-link-alt
-                    </v-icon>                    
+                    </v-icon>               
                   </a>.
                 </p>    
                 <hr/>                
