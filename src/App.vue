@@ -39,6 +39,9 @@ export default {
       isLoading: true,
     }
   },
+  mounted(){
+    this.$store.commit("toggleDrawer", false)
+  },    
 
   metaInfo() {
     return {
