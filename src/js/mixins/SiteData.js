@@ -6,6 +6,7 @@ import religious_affiliations from "~/data/religious_affiliations.json";
 import special_designations from "~/data/special_designations.json";
 import states from "~/data/states.json";
 import cip_6_digit from "~/data/cip_6_test.json";
+import repayment_rates from "~/data/repayment_rates.json"
 
 export const SiteData = {
   computed:{
@@ -39,7 +40,8 @@ export const SiteData = {
           race_ethnicity: race_ethnicity,
           religious_affiliations: religious_affiliations,
           special_designations: special_designations,
-          states: states
+          states: states,
+          repayment_rates: repayment_rates,
         }
       }
     };

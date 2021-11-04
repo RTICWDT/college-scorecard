@@ -1601,7 +1601,7 @@
                       <v-col class="pt-0 pb-15">
                       <v-simple-table class="school-table">
                         <caption class="sr-only">
-                          Average cost by family income
+                          Repayment Rates
                         </caption>
                         <thead>
                           <tr>
@@ -1610,14 +1610,15 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>Making Progress</td>
-                            <td v-if="repaymentRates[gradSubgroup]['makingprogress']">
-                              {{ repaymentRates[gradSubgroup]['makingprogress'] | numeral("0%") }}
+
+                          <tr v-for="(rate, index) in repaymentRates[gradSubgroup]" :key="index">
+                            <td>{{ rate['label'] }}</td>
+                            <td v-if="rate['value']">
+                              {{ rate['value'] | numeral("0%") }}
                             </td>
                             <td v-else>--</td>
                           </tr>
-                          <tr>
+                          <!-- <tr>
                             <td>Not Making Progress</td>
                             <td v-if="repaymentRates[gradSubgroup]['noprogress']">
                               {{ repaymentRates[gradSubgroup]['noprogress'] | numeral("0%") }}
@@ -1665,7 +1666,7 @@
                               {{ repaymentRates[gradSubgroup]['discharge'] | numeral("0%") }}
                             </td>
                             <td v-else>--</td>
-                          </tr>                                                                              
+                          </tr>    -->                                                                          
                         </tbody>
                       </v-simple-table>                        
                       </v-col>

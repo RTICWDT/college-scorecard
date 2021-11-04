@@ -161,7 +161,8 @@ export const formMappings = {
     size:               fields.SIZE,
     avg_net_price:      fields.NET_PRICE,
     completion_rate:    fields.COMPLETION_RATE,
-    alias:              fields.ALIAS
+    alias:              fields.ALIAS,
+    median_earnings:    fields.MEDIAN_EARNINGS
   },
 
   control: {

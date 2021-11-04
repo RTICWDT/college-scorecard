@@ -8,7 +8,7 @@
       <div v-if="config && config.chart == 'RepaymentRate'">
       <v-simple-table class="repayment-table">
         <caption class="sr-only">
-          Average cost by family income
+          Repayment Rates
         </caption>
         <thead>
           <tr>

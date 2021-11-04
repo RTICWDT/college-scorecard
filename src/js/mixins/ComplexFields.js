@@ -453,8 +453,36 @@ export default {
         },
         repaymentRates()  {
             if (!this.school) return null;
-            return _.get(this.school, fields['REPAYMENT_RATES'])      
-        },
+            let output = {};
+            output['ug'] = []
+            output['ugcomp'] = []
+            let types = ['ug','ugcomp']
+            var rr = this.site.data.repayment_rates;
+            let rates = _.get(this.school, this.fields['REPAYMENT_RATES']);
+            let include = [
+                "default",
+                "deferment",
+                "discharge",
+                "fullypaid",
+                "delinquent",
+                "noprogress",
+                "forbearance",
+                "makingprogress"
+            ];
+            types.forEach(function (item, index) {
+                for (let p = 0; p < include.length; p++) {
+                    output[types[index]].push({
+                        label: rr[include[p]],
+                        value: rates[item][include[p]]
+                    });
+                }
+            });
+            var ret = {}
+            ret['ug'] = this.orderByWithNullsAtEnd(output['ug'], "value", true)
+            ret['ugcomp'] = this.orderByWithNullsAtEnd(output['ugcomp'], "value", true)
+            console.log(ret);
+            return ret;           
+        },       
         medianEarnings() {
             if (!this.school) return null;
             return _.get(this.school, fields['MEDIAN_EARNINGS']) 
@@ -485,10 +513,14 @@ export default {
         }
     },
     methods: {
+        orderByWithNullsAtEnd(pArray, pAttr, pReverse) {
+            const partition = _.partition(pArray, (x) => !!_.get(x, pAttr, null));
+            return _.concat(_.orderBy(partition[0], pAttr, (pReverse ? 'desc' : 'asc')), partition[1]);
+          },        
         // Moving items down here for easier testing.
         formatParentPlusText(min, max) {
             return `${min}-${max}%`;
-        },
+        },    
         cleanDebt(fos, aidShowMedianDebtWithPrior, aidLoanSelect){
             let cleanDebt = fos.reduce((result, fieldOfStudy) => {
                 if(fieldOfStudy.credential.level <= 3){
