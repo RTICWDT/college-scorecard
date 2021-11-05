@@ -522,7 +522,7 @@ export default {
     specializedMission: Object,
     defaultSort: {
       type: String,
-      default: "completion_rate:desc",
+      default: "median_earnings:desc",
     },
     isLoading: Boolean,
     compareSchools: Array,

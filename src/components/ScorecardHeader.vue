@@ -93,6 +93,7 @@ header {
         font-size: 1rem;
         margin-right: 40px;
         font-weight: 500;
+        letter-spacing: 0.235px
       }
 
       li a.disabled {
@@ -100,9 +101,12 @@ header {
         color: white;
       }
 
-      li a:hover,
-      a:focus {
+      li a:hover:not(.nav-active),
+      a:focus:not(.nav-active) {
         color: white;
+        font-weight:700;
+        text-decoration: none;
+        letter-spacing: 0
       }
 
       li .nav-active {
@@ -204,7 +208,7 @@ header {
               <a
                 :class="{
                   'nav-active': activeLink === 'compare',
-                  'pr-2': true,
+                  'pr-2 mr-5': true,
                   disabled: disableCompare,
                 }"
                 aria-label="Navigate to compare page"

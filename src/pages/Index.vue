@@ -437,7 +437,7 @@
 
     @media (min-width: 960px) {
       margin-bottom: inherit;
-      height: 750px;
+      height: 770px;
     }
   }
 
