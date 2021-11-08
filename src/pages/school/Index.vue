@@ -149,7 +149,7 @@
                       }"
                     />                  
                 </v-col>                 
-                <v-col md="6" class="pr-sm-3">                
+                <v-col md="6" cols="12" class="pr-sm-3">                
                   <div id="school-completion-rate-bar" class="py-3 pa-sm-3">
                     <h2 class="mb-3">
                       <!--prettyhtml-ignore-->
@@ -198,7 +198,7 @@
                   </div>
                 </v-col>
 
-                <v-col md="6" class="pr-sm-3">
+                <v-col cols="12" md="6" class="pr-sm-3">
                   <div id="school-avg-cost" class="mb-4">
                     <h2 class="mb-3" v-if="!isProgramReporter">
                       <!--prettyhtml-ignore-->
