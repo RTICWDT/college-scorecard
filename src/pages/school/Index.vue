@@ -2087,7 +2087,7 @@
                       </p>
 
                       <p>{{ standardizedTestText }}</p>
-                    <div v-show="standardizedTestValue != 3 && (satReading.available || satMath.available || act.available)">
+                    <div v-show="standardizedTestValue != 3">
                       <h3 class="h2 mb-2">SAT</h3>
 
                       <h4 class="overline">Critical Reading</h4>
