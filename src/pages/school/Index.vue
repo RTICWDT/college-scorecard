@@ -2086,6 +2086,8 @@
                         standardized test scores in these ranges.
                       </p>
 
+                      <p>{{ standardizedTestText }}</p>
+
                       <h3 class="h2 mb-2">SAT</h3>
 
                       <h4 class="overline">Critical Reading</h4>

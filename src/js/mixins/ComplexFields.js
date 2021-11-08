@@ -510,7 +510,21 @@ export default {
                      3 : .60,
                      4 : .46}
             return medians;
-        }
+        },
+        standardizedTestText() {
+            if (!this.school) return null;
+            switch (this.id % 4) {
+                case 0:
+                    return "This school requires admission test scores (SAT/ACT).";
+                case 1:
+                    return "This school considers but does not require admission test scores (SAT/ACT).2"
+                case 2:
+                    return "This school recommends admission test scores (SAT/ACT).";
+                case 3:
+                    return "This school does not require or recommend admission test scores (SAT/ACT).";                    
+            }
+            return null;
+        }        
     },
     methods: {
         orderByWithNullsAtEnd(pArray, pAttr, pReverse) {
