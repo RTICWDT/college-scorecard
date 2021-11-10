@@ -1111,7 +1111,7 @@
                       <v-col cols="2"></v-col>
                       <v-col cols="8">                       
                     <horizontal-bar-median
-                      v-if="completionRate"
+                      v-if="completionRate && !showPellOnlyGrad"
                       :value="{
                         label: Math.round(parseFloat(completionRate) * 100) + '%',
                         value: Math.round(parseFloat(completionRate) * 100)
@@ -1137,7 +1137,35 @@
                       :label-font-size="24"
                       :labels="true"
                       class="pb-10"
-                    ></horizontal-bar-median>                       
+                    ></horizontal-bar-median>   
+                    <horizontal-bar-median
+                      v-else-if="completionRate && showPellOnlyGrad"
+                      :value="{
+                        label: Math.round((parseFloat(completionRate) - 0.05) * 100) + '%',
+                        value: Math.round((parseFloat(completionRate) - 0.05) * 100)
+                      }"
+                      :min="{
+                        label: '0%',
+                        value: 0,
+                        style: { height: '60px' },
+                      }"
+                      :max="{
+                        label: '100%',
+                        value: 100,
+                        style: { height: '60px' },
+                      }"
+                      :median="{
+                        label: 'Median: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%'),
+                        value: this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] * 100 : fakeGraduationRate[4] * 100,
+                        style: { height: '60px' },
+                      }"
+                      color="#00365e"
+                      :height="500"
+                      :y-bar-thickness="50"
+                      :label-font-size="24"
+                      :labels="true"
+                      class="pb-10"
+                    ></horizontal-bar-median>                                         
                       <div v-else class="data-na">Data Not Available</div>
                       </v-col>  
                        <v-col cols="2"></v-col>     
