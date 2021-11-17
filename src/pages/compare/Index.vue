@@ -1020,6 +1020,7 @@
                           class="my-0"
                           v-model="aidShowMedianDebtWithPrior"
                           hide-details
+                           v-if="aidLoanSelect == 'fed'"
                         >
                           <template v-slot:label>
                             <span>
