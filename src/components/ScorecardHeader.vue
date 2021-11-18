@@ -384,6 +384,8 @@ export default {
         this.activeLink = "compare"
       } else if (path.match(/data/)) {
         this.activeLink = "data"
+      } else if (path.match(/school/)) {
+        this.activeLink = null        
       } else if (path.match(/\//)) {
         this.activeLink = "/"
       } else {
