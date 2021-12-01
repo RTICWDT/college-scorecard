@@ -249,7 +249,7 @@ export default {
     median: {
       type: Object,
       default: function() {
-        return { value: 50, label: "Median" }
+        return { value: 50, label: "Comparison" }
       },
     },
     upper: {

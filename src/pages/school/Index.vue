@@ -142,7 +142,7 @@
                       :display-toggle="medianToggle"
                       @median-switch-click="handleMedianToggle"
                       @median-tab-change="handleMedianToggle"
-                      :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
+                      :group-name="this.$options.filters.yearsText(groupName)"
                       label-prefix="Median for "
                       :tab-style="{
                         width: '32%',
@@ -165,7 +165,7 @@
                       {{ completionRate |  numeral("0%") }}
                     </h2>
                     <div class="data-na pb-3" v-else>Data Not Available</div>
-                    <em>Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</em>                    
+                    <em>National {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) + " " : ""}} Comparison: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</em>                    
                     <vertical-bar-median
                       v-if="completionRate"
                       :value="{
@@ -221,7 +221,7 @@
                       {{ netPrice | numeral("$0,0") }}
                     </h2>
                     <div class="data-na pb-3" v-else>Data Not Available</div>
-                    <em>Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0')}}</em>
+                    <em>National {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) + " " : ""}}Comparison: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0')}}</em>
 
                     <horizontal-bar-median
                       v-if="netPrice"
@@ -283,7 +283,7 @@
                       {{ medianEarnings | numeral("$0,0") }}
                     </h2>
                     <div class="data-na pb-3" v-else>Data Not Available</div>
-                    <em>Median for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) : "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</em>
+                    <em>National {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) + " " : ""}}Comparison: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</em>
 
                     <horizontal-bar-median
                       v-if="medianEarnings"
@@ -881,7 +881,7 @@
                           :control-tab="controlTab"
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
-                          :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
+                          :group-name="this.$options.filters.yearsText(groupName)"
                           class="pt-8 pb-8"
                         />  
                       <v-row>
@@ -961,7 +961,7 @@
                           :control-tab="controlTab"
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
-                          :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
+                          :group-name="this.$options.filters.yearsText(groupName)"
                           class="pt-8 pb-8"
                         />  
                       <v-row>
@@ -1104,7 +1104,7 @@
                           :control-tab="controlTab"
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
-                          :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
+                          :group-name="this.$options.filters.yearsText(groupName)"
                           class="pt-0 pb-8"
                         />
                        <v-row>
@@ -1935,7 +1935,7 @@
                       :control-tab="controlTab"
                       @median-switch-click="handleMedianToggle"
                       @median-tab-change="handleMedianToggle"
-                      :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
+                      :group-name="this.$options.filters.yearsText(groupName)"
                       class="pt-12 pb-8"
                     />          
                        <v-row>

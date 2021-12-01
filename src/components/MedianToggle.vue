@@ -1,6 +1,6 @@
 <template>
 <div :class="labelPrefix ? 'median-toggle-container d-flex align-end' : 'd-flex align-end' ">
-  <em v-if="!labelPrefix" class="d-flex  mr-2">Show Median for:</em>
+  <em v-if="!labelPrefix" class="d-flex  mr-2">Show Comparison for:</em>
   <v-tabs
     id="median-toggle"
     :value="controlTab"
@@ -19,7 +19,7 @@
     <v-tab :id="tabID('group', controlTab)" :style="tabStyle">
       <slot name="tab-group">
         <span class="compare-tab-title">
-          {{ labelPrefix }}{{groupName}}
+          National {{groupName}} Comparison
         </span>
       </slot>
     </v-tab>
@@ -27,7 +27,7 @@
     <v-tab :id="tabID('all', controlTab)" :style="tabStyle">
       <slot name="tab-all">
         <span class="compare-tab-title">
-         {{ labelPrefix }}All Schools
+         National Comparison
         </span>
       </slot>
     </v-tab>
