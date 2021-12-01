@@ -183,7 +183,7 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Median',
+                        label: 'Comparison',
                         value: this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] * 100 : fakeGraduationRate[4] * 100,
                         style: { height: '60px' },
                       }"
@@ -240,7 +240,7 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Median',
+                        label: 'Comparison',
                         value: this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4],
                         style: { height: '60px' },
                       }"
@@ -302,7 +302,7 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Median',
+                        label: 'Comparison',
                         value: this.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4],
                         style: { height: '60px' },
                       }"
@@ -904,7 +904,7 @@
                           style: { height: '60px' },
                         }"
                         :median="{
-                          label: 'Median: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0'),
+                          label: 'Comparison: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0'),
                           value: this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,
                           style: { height: '60px' },
                         }"
@@ -985,7 +985,7 @@
                           }"
                           :median="{
                             label: 'Median: ' + this.$options.filters.numeral(30000,'$0,0'),
-                            value: 30000,
+                            value: Comparison,
                             style: { height: '60px' },
                           }"
                           color="#00365e"
@@ -1127,7 +1127,7 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Median: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%'),
+                        label: 'Comparison: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%'),
                         value: this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] * 100 : fakeGraduationRate[4] * 100,
                         style: { height: '60px' },
                       }"
@@ -1155,7 +1155,7 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Median: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%'),
+                        label: 'Comparison: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%'),
                         value: this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] * 100 : fakeGraduationRate[4] * 100,
                         style: { height: '60px' },
                       }"
@@ -1958,7 +1958,7 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Median: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeMedianEarnings[groupName] : fakeMedianEarnings[4] ,'$0,0'),
+                        label: 'Comparison: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeMedianEarnings[groupName] : fakeMedianEarnings[4] ,'$0,0'),
                         value: this.medianToggle === 'group' ? fakeMedianEarnings[groupName] : fakeMedianEarnings[4],
                         style: { height: '60px' },
                       }"
