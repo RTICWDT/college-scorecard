@@ -20,7 +20,7 @@
       To receive financial aid, you must complete the
       <em>Free Application for Federal Student Aid</em> (FAFSA&reg;) form. You can use
       <!--prettyhtml-ignore-->
-      <a href="https://fafsa.ed.gov/FAFSA/app/f4cForm" target="_blank" @click="trackOutboundLink($event)">FAFSA<em>4caster</em> 
+      <a href="https://studentaid.gov/aid-estimator/" target="_blank" @click="trackOutboundLink($event)">Federal Student Aid Estimator
         <v-icon
           x-small
           class="green-link pl-1"
