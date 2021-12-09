@@ -4,10 +4,10 @@
     <p>
       To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA). Use the 
       <a
-        href="https://studentaid.ed.gov/sa/types#aid-from-the-federal-government"
+        href="https://studentaid.gov/aid-estimator/"
         target="_blank"
         @click="trackOutboundLink($event)"
-      >FAFSA4caster
+      >Federal Student Aid Estimator
         <v-icon
           x-small
           class="green-link pl-1"
