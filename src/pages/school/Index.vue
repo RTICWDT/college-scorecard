@@ -1291,7 +1291,7 @@
                           color="secondary"
                           class="shrink"
                           hide-details
-                          v-if="aidLoanSelect == 'fed'"
+                          v-if="aidLoanSelect == 'plus'"
                         >
                           <template v-slot:label>
                             <span>

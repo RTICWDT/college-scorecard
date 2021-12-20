@@ -1020,7 +1020,7 @@
                           class="my-0"
                           v-model="aidShowMedianDebtWithPrior"
                           hide-details
-                           v-if="aidLoanSelect == 'fed'"
+                           v-if="aidLoanSelect == 'plus'"
                         >
                           <template v-slot:label>
                             <span>
@@ -1054,6 +1054,7 @@
                           class="my-0"
                           v-model="aidShowMedianDebtWithPrior"
                           hide-details
+                          v-if="aidLoanSelect == 'plus'"
                         >
                           <template v-slot:label>
                             <span>
