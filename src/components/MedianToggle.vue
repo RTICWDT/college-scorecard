@@ -19,7 +19,7 @@
     <v-tab :id="tabID('group', controlTab)" :style="tabStyle">
       <slot name="tab-group">
         <span class="compare-tab-title">
-          National {{groupName}} Midpoint
+          {{ labelPrefix }}{{groupName}} Schools
         </span>
       </slot>
     </v-tab>
@@ -27,7 +27,7 @@
     <v-tab :id="tabID('all', controlTab)" :style="tabStyle">
       <slot name="tab-all">
         <span class="compare-tab-title">
-         National Midpoint
+         {{ labelPrefix }}All Schools
         </span>
       </slot>
     </v-tab>

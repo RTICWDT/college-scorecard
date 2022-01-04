@@ -143,7 +143,7 @@
                       @median-switch-click="handleMedianToggle"
                       @median-tab-change="handleMedianToggle"
                       :group-name="this.$options.filters.yearsText(groupName)"
-                      label-prefix="Median for "
+                      label-prefix="Midpoint for "
                       :tab-style="{
                         width: '32%',
                       }"
@@ -165,7 +165,7 @@
                       {{ completionRate |  numeral("0%") }}
                     </h2>
                     <div class="data-na pb-3" v-else>Data Not Available</div>
-                    <em>National {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) + " " : ""}} Midpoint: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</em>                    
+                    <em>Midpoint for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) + " " : "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</em>                    
                     <vertical-bar-median
                       v-if="completionRate"
                       :value="{
@@ -183,7 +183,7 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'National ' + this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) + ' ' : '' + 'Midpoint:',
+                        label: 'National ' + this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName): '' + 'Midpoint:',
                         value: this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] * 100 : fakeGraduationRate[4] * 100,
                         style: { height: '60px' },
                       }"
@@ -221,7 +221,7 @@
                       {{ netPrice | numeral("$0,0") }}
                     </h2>
                     <div class="data-na pb-3" v-else>Data Not Available</div>
-                    <em>National {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) + " " : ""}}Midpoint: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0')}}</em>
+                    <em>Midpoint for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName): "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0')}}</em>
 
                     <horizontal-bar-median
                       v-if="netPrice"
@@ -283,7 +283,7 @@
                       {{ medianEarnings | numeral("$0,0") }}
                     </h2>
                     <div class="data-na pb-3" v-else>Data Not Available</div>
-                    <em>National {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) + " " : ""}}Midpoint: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</em>
+                    <em>Midpoint for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) + " " : ""}}: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</em>
 
                     <horizontal-bar-median
                       v-if="medianEarnings"
@@ -904,7 +904,7 @@
                           style: { height: '60px' },
                         }"
                         :median="{
-                          label: 'Midpoint: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0'),
+                          label: 'Midpoint for ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0'),
                           value: this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,
                           style: { height: '60px' },
                         }"
