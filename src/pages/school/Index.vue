@@ -183,7 +183,7 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'National ' + this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName): '' + 'Midpoint:',
+                        label: 'Midpoint for ' + (this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName): 'All') + ' Schools',
                         value: this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] * 100 : fakeGraduationRate[4] * 100,
                         style: { height: '60px' },
                       }"
@@ -240,7 +240,7 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'National ' + this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) + ' ' : '' + 'Midpoint:',
+                        label: 'Midpoint for ' + (this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName): 'All') + ' Schools',
                         value: this.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4],
                         style: { height: '60px' },
                       }"
@@ -283,7 +283,7 @@
                       {{ medianEarnings | numeral("$0,0") }}
                     </h2>
                     <div class="data-na pb-3" v-else>Data Not Available</div>
-                    <em>Midpoint for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) + " " : ""}}: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</em>
+                    <em>Midpoint for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName): "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</em>
 
                     <horizontal-bar-median
                       v-if="medianEarnings"
@@ -302,7 +302,7 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'National ' + this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) + ' ' : '' + 'Midpoint:',
+                        label: 'Midpoint for ' + (this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName): 'All') + ' Schools',
                         value: this.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4],
                         style: { height: '60px' },
                       }"
