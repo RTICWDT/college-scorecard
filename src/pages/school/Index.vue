@@ -165,7 +165,7 @@
                       {{ completionRate |  numeral("0%") }}
                     </h2>
                     <div class="data-na pb-3" v-else>Data Not Available</div>
-                    <em>National {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) + " " : ""}} Comparison: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</em>                    
+                    <em>National {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) + " " : ""}} Midpoint: {{this.$options.filters.numeral(this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</em>                    
                     <vertical-bar-median
                       v-if="completionRate"
                       :value="{
@@ -984,8 +984,8 @@
                             style: { height: '60px' },
                           }"
                           :median="{
-                            label: 'Median: ' + this.$options.filters.numeral(30000,'$0,0'),
-                            value: Comparison,
+                            label: 'Midpoint: ' + this.$options.filters.numeral(30000,'$0,0'),
+                            value: Midpoint,
                             style: { height: '60px' },
                           }"
                           color="#00365e"
