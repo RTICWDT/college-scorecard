@@ -2114,7 +2114,6 @@
                         Students who were admitted and enrolled typically had
                         standardized test scores in these ranges.
                       </p>
-
                       <p>{{ standardizedTestText }}</p>
                     <div v-show="standardizedTestValue != 3">
                       <h3 class="h2 mb-2">SAT</h3>
