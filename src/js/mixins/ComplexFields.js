@@ -514,15 +514,20 @@ export default {
         standardizedTestText() {
             var categoryText = "";
             var rangeText = "";
-            var acceptanceText = "";
-            var stValue = standardizedTestValue;
+
+            var stValue = this.standardizedTestValue;
             
             if (!this.school) return null;
             if (!this.satReading.availabe && !this.satMath.available && !this.act.available)
 
-            var acceptanceText = this.schoolName + "has an acceptance rate of " + this.acceptanceRate;
-            if (this.acceptanceRate == "100%")
-                acceptanceText += ", which means that all students who apply are accepted"
+            var acceptanceText = "  ";
+            
+            if (this.acceptanceRate == 1) {
+                acceptanceText = this.schoolName + " has ann acceptance rate of 100%, which means that all students who apply are accepted. "
+            }
+            else {
+                acceptanceText =  this.schoolName + " has an acceptance rate of " + Math.round(this.acceptanceRate * 100)+"%" + ". "
+            }
 
             categoryText = "This school does not require or recommend admission test scores (SAT/ACT).";
 
@@ -538,7 +543,8 @@ export default {
                 case 3:
                     categoryText = "does not require admission test scores (SAT/ACT) during the application process and does recommend that students provide them.";                    
             }
-            return this.schoolName + ' ' + categoryText + ' ' + rangeText;
+            
+            return acceptanceText + this.schoolName + ' ' + categoryText + ' ' + rangeText;
         },
         standardizedTestValue() {
             if (!this.school) return null;
