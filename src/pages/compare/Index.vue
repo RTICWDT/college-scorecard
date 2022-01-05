@@ -1050,6 +1050,35 @@
                   >
                     <template>
                       <div class="d-flex">
+                        <p class="mb-0">
+                          This is based on a standard 10-year payment plan,
+                          other
+                          <a
+                            :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentloans.gov/myDirectLoan/repaymentEstimator.action'))"
+                            target="_blank"
+                            @click="trackOutboundLink($event)"
+                            >payment options<v-icon
+                              x-small
+                              class="pl-1"
+                              color="#007000"
+                            >
+                              fas fa-external-link-alt
+                            </v-icon> 
+                          </a>
+                          are available, like income-driven repayment. An 
+                          <a 
+                          target="_blank" 
+                          :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov/manage-loans/repayment/plans/income-driven'))"
+                          @click="trackOutboundLink($event)"
+                          >income-driven repayment<v-icon
+                            x-small
+                            class="pl-1"
+                            color="#007000"
+                          >
+                            fas fa-external-link-alt
+                          </v-icon>   
+                          </a> plan sets your monthly student loan payment at an amount that is intended to be affordable based on your income and family size.
+                        </p>                                           
                         <v-checkbox
                           class="my-0"
                           v-model="aidShowMedianDebtWithPrior"
@@ -1061,7 +1090,7 @@
                               Include debt borrowed at any prior institutions&nbsp;
                               <tooltip definition="include-debt-prior-inst" />
                             </span>
-                          </template>
+                          </template>   
                         </v-checkbox>
                         
                       </div>
