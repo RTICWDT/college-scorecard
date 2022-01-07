@@ -338,6 +338,7 @@ export default {
         this._min.value + this._max.value - this._upper.value
       )
       this.bar_styles.right = right + "%"
+      console.log(this.bar_styles.right);
 
       if (right < 20 && this.addExtraPadding) {
         //this.extraPad["padding-right"] = "60px"
@@ -358,7 +359,7 @@ export default {
       let left = this.percent(newObj.value)
       if (left > 100) {
         left = 100
-        newObj.label = ">" + this._max.label
+        //newObj.label = ">" + this._max.label
         newObj.value = this._max.value
       }
       newObj.styles.left = left + "%"
@@ -371,7 +372,7 @@ export default {
       let left = this.percent(newObj.value)
       if (left > 100) {
         left = 100
-        newObj.label = ">" + this._max.label
+        //newObj.label = ">" + this._max.label
         newObj.value = this._max.value
       }
       newObj.styles.left = left + "%"

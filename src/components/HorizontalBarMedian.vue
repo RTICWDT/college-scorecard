@@ -3,7 +3,7 @@
     <div v-if="value">
       <range
         :lower="{ value: 0, label: '0' }"
-        :upper="{ value: value.value, label: value.label }"
+        :upper="value"
         :min="min"
         :max="max"
         :upperTipStyleOverride="upperTipStyleOverride"
@@ -42,7 +42,7 @@ export default {
     },
     value: {
       type: Object,
-      default: { value: 50, label: "50%" },
+      default: () => ({  }),
     },
     // min:{
     //   type: Object,

@@ -1111,38 +1111,10 @@
                       <v-col cols="2"></v-col>
                       <v-col cols="8">                       
                     <horizontal-bar-median
-                      v-if="completionRate && !showPellOnlyGrad"
+                      v-if="completionRate"
                       :value="{
-                        label: Math.round(parseFloat(completionRate) * 100) + '%',
-                        value: Math.round(parseFloat(completionRate) * 100)
-                      }"
-                      :min="{
-                        label: '0%',
-                        value: 0,
-                        style: { height: '60px' },
-                      }"
-                      :max="{
-                        label: '100%',
-                        value: 100,
-                        style: { height: '60px' },
-                      }"
-                      :median="{
-                        label: 'Median: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%'),
-                        value: this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] * 100 : fakeGraduationRate[4] * 100,
-                        style: { height: '60px' },
-                      }"
-                      color="#00365e"
-                      :height="500"
-                      :y-bar-thickness="50"
-                      :label-font-size="24"
-                      :labels="true"
-                      class="pb-10"
-                    ></horizontal-bar-median>   
-                    <horizontal-bar-median
-                      v-else-if="completionRate && showPellOnlyGrad"
-                      :value="{
-                        label: Math.round((parseFloat(completionRate) - 0.05) * 100) + '%',
-                        value: Math.round((parseFloat(completionRate) - 0.05) * 100)
+                        label: showPellOnlyGrad ? Math.round((parseFloat(completionRate) -0.05) * 100) + '%' :  Math.round(parseFloat(completionRate) * 100) + '%',
+                        value: showPellOnlyGrad ? Math.round((parseFloat(completionRate) - 0.05) * 100) : Math.round(parseFloat(completionRate) * 100)
                       }"
                       :min="{
                         label: '0%',
@@ -1330,7 +1302,7 @@
                             with $0 in debt.
                           </p>
 
-                          <p>Approximately {{ Math.round(parseFloat(studentsReceivingLoans * 100)) }}% of students also have private loans for this type of institution.</p>
+                          
                         </div>
                         <div v-else>
                           <h2 class="mb-3">
@@ -1911,7 +1883,6 @@
 
                 <v-expansion-panel-content
                   id="earnings-content"
-                  aria-controls="earnings-content"
                   class="px-0 py-3 pa-sm-5"
                 >
                   <div>

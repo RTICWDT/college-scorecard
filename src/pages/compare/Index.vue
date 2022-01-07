@@ -905,7 +905,22 @@
                       medianToggle: medianToggle
                     }"
                     class="mt-5"
-                  />
+                  >
+                                    <template>
+                      <v-checkbox
+                        v-model="showPellOnly"
+                        label="Show Pell Grant Recipients Only"
+                        color="secondary"
+                        class="mt-0"
+                      >
+                        <template v-slot:label>
+                          <span>
+                            Show Pell Grant Recipients Only&nbsp;
+                          </span>
+                        </template>
+                      </v-checkbox>
+                      </template>
+                  </compare-section>
                   <compare-section
                     :schools="schools"
                     title="Students Who Return After Their First Year"
@@ -1015,7 +1030,10 @@
                     }"
                   >
                     <template>
-                      <div class="d-flex">                      
+                      <div class="d-flex">       
+                        <p v-if="aidLoanSelect === 'fed'">
+                          The typical total debt for undergraduate borrowers who complete college.
+                        </p>                                       
                         <v-checkbox
                           class="my-0"
                           v-model="aidShowMedianDebtWithPrior"
@@ -1078,7 +1096,9 @@
                             fas fa-external-link-alt
                           </v-icon>   
                           </a> plan sets your monthly student loan payment at an amount that is intended to be affordable based on your income and family size.
-                        </p>                                           
+                        </p>                      
+                        </div>
+                      <div class="d-flex">                                           
                         <v-checkbox
                           class="my-0"
                           v-model="aidShowMedianDebtWithPrior"
@@ -1094,6 +1114,7 @@
                         </v-checkbox>
                         
                       </div>
+                        
                     </template>
                   </compare-section>
 
@@ -1214,7 +1235,11 @@
                       medianToggle: medianToggle
                     }"
                     class="mt-5"
-                  />
+                  >
+                  <template>
+                    <p>The median earnings of former students who received federal financial aid at 10 years after entering the school.</p>
+                  </template>
+                  </compare-section>
                 </v-expansion-panel-content>
               </v-expansion-panel>
 

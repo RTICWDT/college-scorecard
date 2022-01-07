@@ -315,10 +315,11 @@ export default {
       let left = this.percent(newObj.value)
       if (left > 100) {
         left = 100
-        newObj.label = ">" + this._max.label
+        //newObj.label = ">" + this._max.label
         newObj.value = this._max.value
       }
       newObj.styles.left = left + "%"
+      console.log(newObj);
       return newObj
     },
   },
