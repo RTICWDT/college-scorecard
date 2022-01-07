@@ -340,7 +340,7 @@ export default {
       this.bar_styles.right = right + "%"
       console.log(this.bar_styles.right);
 
-      if (right < 20 && this.addExtraPadding) {
+      if (right < 80 && this.addExtraPadding) {
         //this.extraPad["padding-right"] = "60px"
         var s = this._upper.styles.left.replace(/[0-9]+%\s?/g, '');
         this._upper.styles.left = (s - 10) + '%';
@@ -377,7 +377,7 @@ export default {
       }
       newObj.styles.left = left + "%"
 
-      if (left > 80) {
+      if (left > 20) {
         //let s = left.replace(/[0-9]+%\s?/g, '');
         if (obj.label.includes('$'))
           newObj.styles.left = (left - 15) + '%';
