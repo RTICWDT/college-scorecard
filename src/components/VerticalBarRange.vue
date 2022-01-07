@@ -210,6 +210,7 @@
         font-size: 12px !important;
         font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;       
         font-style: italic;
+        line-height: 14px;
       }
       span.arrow-left {
         width: 0; 
@@ -249,7 +250,7 @@ export default {
     median: {
       type: Object,
       default: function() {
-        return { value: 50, label: "Median" }
+        return { value: 50, label: "Midpoint" }
       },
     },
     upper: {

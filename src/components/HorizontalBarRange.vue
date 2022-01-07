@@ -186,7 +186,7 @@
       border-left: 1px solid #000;
       span {
         top: 35px !important;
-              width: $label-width;
+        width: $label-width;
       }
       span:not(.arrow-left) {
         //margin-bottom: $bar-width + $arrow-size + 10;
@@ -198,6 +198,7 @@
         font-size: 12px;
         font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
         font-style:italic;
+        line-height: 14px;       
 
       }
       span.arrow-left {
@@ -238,7 +239,7 @@ export default {
     median: {
       type: Object,
       default: function() {
-        return { value: 50, label: "Median" }
+        return { value: 50, label: "Midpoint" }
       },
     },
     upper: {

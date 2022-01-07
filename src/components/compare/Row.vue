@@ -16,7 +16,7 @@
       :min="config.min"
       :max="config.max"
       :median="{
-        label: 'Median',
+        label: 'Midpoint',
         value: config.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4],
         style: { height: '60px' },
       }"                      
@@ -36,7 +36,7 @@
       :min="config.min"
       :max="config.max"
       :median="{
-        label: 'Median',
+        label: 'Midpoint',
         value: config.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] * 100 : fakeGraduationRate[4] * 100,
         style: { height: '60px' },
       }"         
@@ -63,7 +63,7 @@
       :min="config.min"
       :max="config.max"
       :median="{
-        label: 'Median',
+        label: 'Midpoint',
         value: config.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4],
         style: { height: '60px' },
       }"

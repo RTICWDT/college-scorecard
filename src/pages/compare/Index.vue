@@ -104,7 +104,7 @@
                       @median-switch-click="handleMedianToggle"
                       @median-tab-change="handleMedianToggle"
                       group-name="School Type"
-                      label-prefix="Median for "
+                      label-prefix="Midpoint for "
                       :tab-style="{
                         width: '32%',
                       }"
@@ -782,7 +782,7 @@
                       @median-switch-click="handleMedianToggle"
                       @median-tab-change="handleMedianToggle"
                       group-name="School Type"
-                      label-prefix="Median for "
+                      label-prefix="Midpoint for "
                       :tab-style="{
                         width: '32%',
                       }"
@@ -873,7 +873,7 @@
                       @median-switch-click="handleMedianToggle"
                       @median-tab-change="handleMedianToggle"
                       group-name="School Type"
-                      label-prefix="Median for "
+                      label-prefix="Midpoint for "
                       :tab-style="{
                         width: '32%',
                       }"
@@ -1203,7 +1203,7 @@
                       @median-switch-click="handleMedianToggle"
                       @median-tab-change="handleMedianToggle"
                       group-name="School Type"
-                      label-prefix="Median for "
+                      label-prefix="Midpoint for "
                       :tab-style="{
                         width: '32%',
                       }"
