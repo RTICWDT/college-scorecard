@@ -142,7 +142,7 @@
                       :display-toggle="medianToggle"
                       @median-switch-click="handleMedianToggle"
                       @median-tab-change="handleMedianToggle"
-                      :group-name="this.$options.filters.yearsText(groupName)"
+                      :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
                       label-prefix="Midpoint for "
                       :tab-style="{
                         width: '32%',
@@ -881,7 +881,7 @@
                           :control-tab="controlTab"
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
-                          :group-name="this.$options.filters.yearsText(groupName)"
+                          :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
                           class="pt-8 pb-8"
                         />  
                       <v-row>
@@ -961,7 +961,7 @@
                           :control-tab="controlTab"
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
-                          :group-name="this.$options.filters.yearsText(groupName)"
+                          :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
                           class="pt-8 pb-8"
                         />  
                       <v-row>
@@ -1104,7 +1104,7 @@
                           :control-tab="controlTab"
                           @median-switch-click="handleMedianToggle"
                           @median-tab-change="handleMedianToggle"
-                          :group-name="this.$options.filters.yearsText(groupName)"
+                          :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
                           class="pt-0 pb-8"
                         />
                        <v-row>
@@ -1935,7 +1935,7 @@
                       :control-tab="controlTab"
                       @median-switch-click="handleMedianToggle"
                       @median-tab-change="handleMedianToggle"
-                      :group-name="this.$options.filters.yearsText(groupName)"
+                      :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
                       class="pt-12 pb-8"
                     />          
                        <v-row>
