@@ -210,7 +210,7 @@
         font-size: 12px !important;
         font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;       
         font-style: italic;
-        line-height: $bar-width;
+        line-height: 14px;
       }
       span.arrow-left {
         width: 0; 

@@ -198,7 +198,7 @@
         font-size: 12px;
         font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
         font-style:italic;
-        line-height: $bar-width;        
+        line-height: 14px;       
 
       }
       span.arrow-left {
