@@ -89,6 +89,15 @@
   <script src="{{ site.baseurl }}/js/picc-analytics.js"></script>
   <script src="{{ site.baseurl }}/js/hotjar.js"></script>
   <script src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js" id="_fed_an_ua_tag"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-48605964-29"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-48605964-29');
+  </script>
   {% endif %}
 
 </head>
