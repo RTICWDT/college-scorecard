@@ -378,7 +378,7 @@ export default {
       }
       newObj.styles.left = left + "%"
 
-      if (left > 20) {
+      if (left > 15) {
         //let s = left.replace(/[0-9]+%\s?/g, '');
         if (obj.label.includes('$'))
           newObj.styles.left = (left - 15) + '%';
