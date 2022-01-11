@@ -175,5 +175,10 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   head.script.push({
     type: 'text/javascript',
     src: 'https://www.gstatic.com/charts/loader.js',
-  })     
+  })    
+  head.script.push({
+    type: 'text/javascript',
+    src: 'https://www.googletagmanager.com/gtag/js?id=UA-48605964-29',
+    async: true,
+  })    
 }
