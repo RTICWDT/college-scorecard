@@ -192,7 +192,11 @@
                       medianToggle: medianToggle
                     }"
                     v-show="showResource === 'institutions' && !loading"
-                  />
+                  >
+                    <template>
+                      <p>The median earnings of former students who received federal financial aid at 10 years after entering the school.</p>
+                    </template>
+                  </compare-section>
                 </v-col>
               </v-row>
             </div>
@@ -1236,10 +1240,25 @@
                     }"
                     class="mt-5"
                   >
-                  <template>
-                    <p>The median earnings of former students who received federal financial aid at 10 years after entering the school.</p>
-                  </template>
+                    <template>
+                      <p>The median earnings of former students who received federal financial aid at 10 years after entering the school.</p>
+                    </template>
                   </compare-section>
+
+                  <compare-section
+                    :schools="schools"
+                    title="Percentage Earning Above a High School Graduate"
+                    definition="placeholder"
+                    :currentHighlight="currentHighlight"
+                    @update-highlight="currentHighlight = $event"
+                    :config="{
+                      computedField: 'completionRate',
+                      color: '#1874DC',
+                      max: 100,
+                      type: 'percent',
+                      chart: 'HorizontalBar',
+                    }"
+                  />                  
                 </v-expansion-panel-content>
               </v-expansion-panel>
 

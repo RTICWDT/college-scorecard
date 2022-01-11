@@ -45,7 +45,7 @@
         >
       </p>
 
-      <p class="py-0 body-2 white--text">
+      <!--<p class="py-0 body-2 white--text">
         ZIP Code latitude and longitude provided by
         <a :href="$url('/school/transition/?url=' + encodeURIComponent('http://www.geonames.org/'))">GeoNames<v-icon
             x-small
@@ -56,7 +56,7 @@
           </v-icon>        
         </a>
         under a Creative Commons Attribution 3.0 License.
-      </p>
+      </p> -->
     </v-footer>
     
     <client-only>
