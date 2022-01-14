@@ -1247,7 +1247,7 @@
 
                   <compare-section
                     :schools="schools"
-                    title="Percentage Earning Above a High School Graduate"
+                    title="Percentage Earning More Than a High School Graduate"
                     definition="placeholder"
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
