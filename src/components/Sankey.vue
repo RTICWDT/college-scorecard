@@ -223,7 +223,7 @@ export default {
       )
       var rows = []
       var percent
-
+      
       for (var q in currentData) {
         percent = Math.round(currentData[q] * 100)
         if (percent > 0) {

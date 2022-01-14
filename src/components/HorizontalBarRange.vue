@@ -3,7 +3,7 @@
     <div class="range-chart" :style="rangeChartStyle">
       <div
         v-if="!hideLower"
-        :style="{ left: bar_styles.left, right: bar_styles.right }"
+        :style="_bar.styles"
         class="picc-range-bar"
         ref="bar"
       ></div>
@@ -302,6 +302,9 @@ export default {
     }
   },
   computed: {
+    _bar() {
+      return this.styleBar(this.bar)
+    },
     _min() {
       return this.styleLabel(this.min)
     },
@@ -327,6 +330,7 @@ export default {
         ...styleLabel.styles,
         ...this.upper.styles,
       }
+      
       return styleLabel
     },
   },
@@ -339,7 +343,6 @@ export default {
         this._min.value + this._max.value - this._upper.value
       )
       this.bar_styles.right = right + "%"
-      console.log(this.bar_styles.right);
 
       if (right < 80 && this.addExtraPadding) {
         //this.extraPad["padding-right"] = "60px"
@@ -353,6 +356,18 @@ export default {
     percent(v) {
       return (this.scale(v) * 100).toFixed(1)
     },
+    styleBar(obj, fixLabels = false) {
+      let newObj = { ...obj }
+      newObj.styles = {}
+      var min = this._min.value
+      var max = this._max.value
+      newObj.styles.left = this.percent(this._lower.value) + "%"
+      let right = this.percent(
+        this._min.value + this._max.value - this._upper.value
+      )
+      newObj.styles.right = right + "%"
+      return newObj
+    },    
     styleLabel(obj, fixLabels = false) {
       let newObj = { ...obj }
       newObj.styles = {}

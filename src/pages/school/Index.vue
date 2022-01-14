@@ -1113,7 +1113,7 @@
                     <horizontal-bar-median
                       v-if="completionRate"
                       :value="{
-                        label: showPellOnlyGrad ? Math.round((parseFloat(completionRate) -0.05) * 100) + '%' :  Math.round(parseFloat(completionRate) * 100) + '%',
+                        label: showPellOnlyGrad ? Math.round((parseFloat(completionRate) - 0.05) * 100) + '%' :  Math.round(parseFloat(completionRate) * 100) + '%',
                         value: showPellOnlyGrad ? Math.round((parseFloat(completionRate) - 0.05) * 100) : Math.round(parseFloat(completionRate) * 100)
                       }"
                       :min="{
@@ -1127,7 +1127,6 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Midpoint: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%'),
                         label: 'Midpoint: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%'),
                         value: this.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] * 100 : fakeGraduationRate[4] * 100,
                         style: { height: '60px' },
@@ -1945,7 +1944,7 @@
                        <v-col cols="2"></v-col>     
                       </v-row> 
                     <h2 class="mb-3 mt-10">
-                          Percentage Earning Above a High School Graduate&nbsp;<tooltip
+                          Percentage Earning More Than a High School Graduate&nbsp;<tooltip
                             definition="placeholder"
                           />
                         </h2>
