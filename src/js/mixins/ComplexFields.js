@@ -480,7 +480,7 @@ export default {
             var ret = {}
             ret['ug'] = this.orderByWithNullsAtEnd(output['ug'], "value", true)
             ret['ugcomp'] = this.orderByWithNullsAtEnd(output['ugcomp'], "value", true)
-            console.log(ret);
+            //console.log(ret);
             return ret;           
         },       
         medianEarnings() {
@@ -489,26 +489,26 @@ export default {
         },
         fakeMedianEarnings() {
             var medians = 
-                    { 1 : 43316,
-                     2: 46124 ,
-                     3 : 64896,
-                     4 : 51445}
+                    { 1 : 27754,
+                     2: 36066,
+                     3 : 47975.5,
+                     4 : 37078}
             return medians;
         },
         fakeAverageAnnualCost() {
             var medians = 
-                    { 1 : 20031,
-                     2: 26850 ,
-                     3 : 39520,
-                     4 : 34090}
+                    { 1 : 14805.5,
+                     2: 8430 ,
+                     3 : 19202,
+                     4 : 15387.5}
             return medians;
         },      
         fakeGraduationRate() {
             var medians = 
-                    { 1 : .30,
-                     2: .32 ,
-                     3 : .60,
-                     4 : .46}
+                    { 1 : 0.6842,
+                     2: 0.2924 ,
+                     3 : 0.5623,
+                     4 : 0.5845}
             return medians;
         },
         standardizedTestText() {
