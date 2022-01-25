@@ -500,33 +500,27 @@ export default {
             if (!this.school) return null;
             return _.get(this.school, fields['MEDIAN_EARNINGS']) 
         },
-        fakeMedianEarnings() {
+        toggleMedianEarnings() {
             if (!this.school) return null;
             var medians = 
-                    { 1 : _.get(this.school, fields['EARNINGS_MIDPOINT_PRED_DEGREE']),
-                     2: _.get(this.school, fields['EARNINGS_MIDPOINT_PRED_DEGREE']),
-                     3 : _.get(this.school, fields['EARNINGS_MIDPOINT_PRED_DEGREE']),
-                     4 : _.get(this.school, fields['EARNINGS_MIDPOINT_ALL'])}
+                    { 0 : _.get(this.school, fields['EARNINGS_MIDPOINT_PRED_DEGREE']),
+                     1 : _.get(this.school, fields['EARNINGS_MIDPOINT_ALL'])}
             return medians;
         },
-        fakeAverageAnnualCost() {
+        toggleAverageAnnualCost() {
             if (!this.school) return null;
             var medians = 
-                    { 1 : _.get(this.school, fields['AVG_COST_MIDPOINT_PRED_DEGREE']),
-                    2: _.get(this.school, fields['AVG_COST_MIDPOINT_PRED_DEGREE']),
-                    3 : _.get(this.school, fields['AVG_COST_MIDPOINT_PRED_DEGREE']),
-                    4 : _.get(this.school, fields['AVG_COST_MIDPOINT_ALL'])}
+                    { 0 : _.get(this.school, fields['AVG_COST_MIDPOINT_PRED_DEGREE']),
+                    1 : _.get(this.school, fields['AVG_COST_MIDPOINT_ALL'])}
             return medians;
         },      
-        fakeGraduationRate() {
+        toggleGraduationRate() {
             if (!this.school) return null;
             var medians = 
-                    { 1 : _.get(this.school, fields['COMPLETION_MIDPOINT_PRED_DEGREE']),
-                    2: _.get(this.school, fields['COMPLETION_MIDPOINT_PRED_DEGREE']),
-                    3 : _.get(this.school, fields['COMPLETION_MIDPOINT_PRED_DEGREE']),
-                    4 : _.get(this.school, fields['COMPLETION_MIDPOINT_ALL'])}
+                    { 0 : _.get(this.school, fields['COMPLETION_MIDPOINT_PRED_DEGREE']),
+                    1 : _.get(this.school, fields['COMPLETION_MIDPOINT_ALL'])}
             return medians;
-        },
+        },     
         standardizedTestText() {
             if (!this.school) return null;
             if (!this.satReading.availabe && !this.satMath.available && !this.act.available)

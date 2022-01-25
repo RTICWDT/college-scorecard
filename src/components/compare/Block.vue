@@ -1,9 +1,9 @@
 <template>
   <div>
     <h4 class="overline mb-6 mt-8 ml-4">{{ block_title }}</h4>
-     <div class="mx-sm-6 mx-2 compareBlockHeader" v-if="config && config.medianToggle && config.type == 'average-annual-cost'" ><p class="median-value-text" >National {{config.medianToggle === 'group' ? block_title.replace('schools', 'Midpoint') : "Midpoint"}}: {{$options.filters.numeral(config.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4] ,'$0,0')}}</p></div>
-     <div class="mx-sm-6 mx-2 compareBlockHeader" v-if="config && config.medianToggle && config.type == 'median-earnings'" ><p class="median-value-text" >National {{config.medianToggle === 'group' ? block_title.replace('schools', 'Midpoint') : "Midpoint"}}: {{$options.filters.numeral(config.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4] ,'$0,0')}}</p></div>
-     <div class="mx-sm-6 mx-2 compareBlockHeader" v-if="config && config.medianToggle && config.type == 'graduation-rate'" ><p class="median-value-text" >National {{config.medianToggle === 'group' ? block_title.replace('schools', 'Midpoint') : "Midpoint"}}: {{$options.filters.numeral(config.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] : fakeGraduationRate[4] ,'0%')}}</p></div>  
+     <div class="mx-sm-6 mx-2 compareBlockHeader" v-if="config && config.medianToggle && config.type == 'average-annual-cost'" ><p class="median-value-text" >National {{config.medianToggle === 'group' ? block_title.replace('schools', 'Midpoint') : "Midpoint"}}: {{$options.filters.numeral(config.medianToggle === 'group' ? _.get(schools[0], fields['AVG_COST_MIDPOINT_ALL']) : _.get(schools[0], fields['AVG_COST_MIDPOINT_PRED_DEGREE']) ,'$0,0')}}</p></div>
+     <div class="mx-sm-6 mx-2 compareBlockHeader" v-if="config && config.medianToggle && config.type == 'median-earnings'" ><p class="median-value-text" >National {{config.medianToggle === 'group' ? block_title.replace('schools', 'Midpoint') : "Midpoint"}}: {{$options.filters.numeral(config.medianToggle === 'group' ? _.get(schools[0], fields['EARNINGS_MIDPOINT_ALL']): _.get(schools[0], fields['EARNINGS_MIDPOINT_PRED_DEGREE']) ,'$0,0')}}</p></div>
+     <div class="mx-sm-6 mx-2 compareBlockHeader" v-if="config && config.medianToggle && config.type == 'graduation-rate'" ><p class="median-value-text" >National {{config.medianToggle === 'group' ? block_title.replace('schools', 'Midpoint') : "Midpoint"}}: {{$options.filters.numeral(config.medianToggle === 'group' ? _.get(schools[0], fields['COMPLETION_MIDPOINT_ALL']) : _.get(schools[0], fields['COMPLETION_MIDPOINT_PRED_DEGREE']) ,'0%')}}</p></div>  
 
       <div v-if="config && config.chart == 'RepaymentRate'">
       <v-simple-table class="repayment-table">
@@ -161,6 +161,7 @@ export default {
   },
   computed: {
     groupName() {
+      console.log(this.schools[0]['latest']['cost']['avg_net_price']);
       switch (this.block_title) {
         case "Certificate schools":
           return 1
@@ -172,6 +173,9 @@ export default {
           return 3
           break
       }      
+    },
+    schOne() {
+      return this.schools[0];
     },
     repaymentCategory() {
         switch (this.config.repaymentStatus) {

@@ -17,7 +17,7 @@
       :max="config.max"
       :median="{
         label: 'Midpoint',
-        value: config.medianToggle === 'group' ? fakeAverageAnnualCost[parseInt(groupName)] : fakeAverageAnnualCost[4],
+        value: config.medianToggle === 'group' ? toggleAverageAnnualCost[0] : toggleAverageAnnualCost[1],
         style: { height: '60px' },
       }"                      
       color="#00365e"
@@ -37,7 +37,7 @@
       :max="config.max"
       :median="{
         label: 'Midpoint',
-        value: config.medianToggle === 'group' ? fakeGraduationRate[parseInt(groupName)] * 100 : fakeGraduationRate[4] * 100,
+        value: config.medianToggle === 'group' ? toggleGraduationRate[0] * 100 : toggleGraduationRate[1] * 100,
         style: { height: '60px' },
       }"         
       :upperStyleOverride="
@@ -64,7 +64,7 @@
       :max="config.max"
       :median="{
         label: 'Midpoint',
-        value: config.medianToggle === 'group' ? fakeMedianEarnings[parseInt(groupName)] : fakeMedianEarnings[4],
+        value: config.medianToggle === 'group' ? toggleMedianEarnings[0] : toggleMedianEarnings[1],
         style: { height: '60px' },
       }"
       :upperStyleOverride="

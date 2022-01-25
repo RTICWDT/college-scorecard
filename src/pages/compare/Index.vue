@@ -1252,7 +1252,7 @@
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
                     :config="{
-                      computedField: 'completionRate',
+                      computedField: 'percentMoreThanHS',
                       color: '#1874DC',
                       max: 100,
                       type: 'percent',
