@@ -1113,8 +1113,8 @@
                     <horizontal-bar-median
                       v-if="completionRate"
                       :value="{
-                        label: showPellOnlyGrad ? Math.round((parseFloat(completionRate) - 0.05) * 100) + '%' :  Math.round(parseFloat(completionRate) * 100) + '%',
-                        value: showPellOnlyGrad ? Math.round((parseFloat(completionRate) - 0.05) * 100) : Math.round(parseFloat(completionRate) * 100)
+                        label: showPellOnlyGrad ? Math.round(parseFloat(completionRatePell) * 100) + '%' :  Math.round(parseFloat(completionRate) * 100) + '%',
+                        value: showPellOnlyGrad ? Math.round(parseFloat(completionRatePell) * 100) : Math.round(parseFloat(completionRate) * 100)
                       }"
                       :min="{
                         label: '0%',
@@ -1948,10 +1948,10 @@
                             definition="placeholder"
                           />
                         </h2>
-                    <div class="d-flex align-end mb-16" v-if="completionRate"><h2
+                    <div class="d-flex align-end mb-16" v-if="percentMoreThanHS"><h2
                       class="display-2 navy-text font-weight-bold"
                     >
-                      {{ completionRate |  numeral("0%") }}
+                      {{ percentMoreThanHS |  numeral("0%") }}
                     </h2><span> &nbsp; of students</span></div>
                     <div v-else class="data-na mb-4">Data Not Available</div>
                     <h2 class="mb-3 mt-5">

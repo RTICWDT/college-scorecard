@@ -41,11 +41,18 @@ export const fields = {
   // completion rate
   //COMPLETION_RATE:      'latest.completion.rate_suppressed.overall',
   COMPLETION_RATE:      'latest.completion.consumer_rate',
+  //COMPLETION_RATE_PELL:      'latest.completion.completion_cohort_lt_four_year_150_pell_pooled',
+  COMPLETION_RATE_PELL: 'latest.completion.rate_suppressed_pell.four_year_150_pooled',
 
   // new rates
   COMPLETION_OM:        'latest.completion.outcome_percentage_suppressed.all_students.8yr.award_pooled',
   COMPLETION_200_4:     'latest.completion.rate_suppressed.four_year_200percent',
   COMPLETION_200_LT4:   'latest.completion.rate_suppressed.lt_four_year',
+
+  // new rates Pell
+  COMPLETION_OM_PELL:        'latest.completion.outcome_percentage_pell_suppressed.all_students.8yr.award_pooled',
+  COMPLETION_200_4_PELL:     'latest.completion.rate_suppressed_pell.four_year_150_pooled',
+  COMPLETION_200_LT4_PELL:   'latest.completion.rate_suppressed.lt_four_year',
   
   RETENTION_RATE:       'latest.student.retention_rate_suppressed',
 
@@ -63,6 +70,7 @@ export const fields = {
   MEDIAN_EARNINGS:      'latest.earnings.10_yrs_after_entry.median',
 
   EARNINGS_GT_25K:      'latest.earnings.6_yrs_after_entry.percent_greater_than_25000',
+  EARNINGS_GT_HS:      'latest.earnings.6_yrs_after_entry.gt_threshold_suppressed',
 
   PROGRAM_PERCENTAGE:   'latest.academics.program_percentage',
   PROGRAM_OFFERED:      'latest.academics.program',
@@ -146,6 +154,14 @@ export const fields = {
   FOS_PP_DEBT_MONTHLY_PRIOR: 'debt.parent_plus.all.eval_inst.median_payment',
 
   FOS_CREDENTIAL_LEVEL: 'credential.level',
+
+  // Medians (Midpoints) for bar graphs
+  COMPLETION_MIDPOINT_ALL: 'latest.completion.rate_suppressed.consumer.overall_median',
+  COMPLETION_MIDPOINT_PRED_DEGREE: 'latest.completion.rate_suppressed.consumer.median_by_pred_degree',
+  AVG_COST_MIDPOINT_ALL: 'latest.cost.avg_net_price.consumer.overall_median',
+  AVG_COST_MIDPOINT_PRED_DEGREE: 'latest.cost.avg_net_price.consumer.median_by_pred_degree',
+  EARNINGS_MIDPOINT_ALL: 'latest.earnings.10_yrs_after_entry.consumer.overall_median',
+  EARNINGS_MIDPOINT_PRED_DEGREE: 'latest.earnings.10_yrs_after_entry.consumer.median_by_pred_degree',
 
 
   //Location

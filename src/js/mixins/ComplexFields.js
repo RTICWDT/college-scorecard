@@ -201,6 +201,19 @@ export default {
                 return this.years == 3 ? G200_4 : G200_LT4;
             }
         },
+        completionRatePell() {
+            if (!this.school) return null;
+            let OM = _.get(this.school, this.fields.COMPLETION_OM_PELL);
+            let G200_4 = _.get(this.school, this.fields.COMPLETION_200_4_PELL);
+            let G200_LT4 = _.get(this.school, this.fields.COMPLETION_200_LT4_PELL);
+            if (!OM && !G200_4 && !G200_LT4) {
+                return false;
+            } else if (OM) {
+                return OM;
+            } else {
+                return this.years == 3 ? G200_4 : G200_LT4;
+            }
+        },        
         completionRateFieldDefinition(){
             if (!this.school) return null;
             let OM = _.get(this.school, this.fields.COMPLETION_OM);
@@ -488,27 +501,30 @@ export default {
             return _.get(this.school, fields['MEDIAN_EARNINGS']) 
         },
         fakeMedianEarnings() {
+            if (!this.school) return null;
             var medians = 
-                    { 1 : 27754,
-                     2: 36066,
-                     3 : 47975.5,
-                     4 : 37078}
+                    { 1 : _.get(this.school, fields['EARNINGS_MIDPOINT_PRED_DEGREE']),
+                     2: _.get(this.school, fields['EARNINGS_MIDPOINT_PRED_DEGREE']),
+                     3 : _.get(this.school, fields['EARNINGS_MIDPOINT_PRED_DEGREE']),
+                     4 : _.get(this.school, fields['EARNINGS_MIDPOINT_ALL'])}
             return medians;
         },
         fakeAverageAnnualCost() {
+            if (!this.school) return null;
             var medians = 
-                    { 1 : 14805.5,
-                     2: 8430 ,
-                     3 : 19202,
-                     4 : 15387.5}
+                    { 1 : _.get(this.school, fields['AVG_COST_MIDPOINT_PRED_DEGREE']),
+                    2: _.get(this.school, fields['AVG_COST_MIDPOINT_PRED_DEGREE']),
+                    3 : _.get(this.school, fields['AVG_COST_MIDPOINT_PRED_DEGREE']),
+                    4 : _.get(this.school, fields['AVG_COST_MIDPOINT_ALL'])}
             return medians;
         },      
         fakeGraduationRate() {
+            if (!this.school) return null;
             var medians = 
-                    { 1 : 0.6842,
-                     2: 0.2924 ,
-                     3 : 0.5623,
-                     4 : 0.5845}
+                    { 1 : _.get(this.school, fields['COMPLETION_MIDPOINT_PRED_DEGREE']),
+                    2: _.get(this.school, fields['COMPLETION_MIDPOINT_PRED_DEGREE']),
+                    3 : _.get(this.school, fields['COMPLETION_MIDPOINT_PRED_DEGREE']),
+                    4 : _.get(this.school, fields['COMPLETION_MIDPOINT_ALL'])}
             return medians;
         },
         standardizedTestText() {
@@ -532,7 +548,11 @@ export default {
             if (!this.satReading.available && !this.satMath.available && !this.act.available)
                 return 3;
             return this.id % 4;
-        }           
+        }  ,
+        percentMoreThanHS() {
+            if (!this.school) return null;
+            return _.get(this.school, this.fields['EARNINGS_GT_HS'])            
+        }        
     },
     methods: {
         orderByWithNullsAtEnd(pArray, pAttr, pReverse) {
