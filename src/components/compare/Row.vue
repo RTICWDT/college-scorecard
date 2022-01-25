@@ -278,7 +278,10 @@ export default {
       } else if (this.config.currentIncomeFilter) {
         return this.income[this.config.currentIncomeFilter]
       } else if (this.config.type == "percent") {
-        return Math.round(this[this.config.computedField] * 100)
+          if (this.config.showAlt)
+            return Math.round(this[this.config.altComputedField] * 100)
+          else
+            return Math.round(this[this.config.computedField] * 100)
       } else if (this.config.multiRangeReactive) {
         return this.generateDebtRange(
           this.allFieldsOfStudy,
@@ -286,7 +289,9 @@ export default {
           this.config.multiRangeAidLoanSelect
         )
       } else {
-        
+        if (this.config.showAlt)
+          return this[this.config.altComputedField]
+        else
         return this[this.config.computedField]
       }
     },

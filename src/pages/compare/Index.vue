@@ -893,6 +893,7 @@
                     @update-highlight="currentHighlight = $event"
                     :config="{
                       computedField: 'completionRate',
+                      altComputedField: 'completionRatePell',
                       color: '#1874DC',
                       min: {
                         label: '0%',
@@ -906,7 +907,8 @@
                       },                
                       type: 'graduation-rate',
                       chart: 'HorizontalBarMedian',
-                      medianToggle: medianToggle
+                      medianToggle: medianToggle,
+                      showAlt: showPellOnly
                     }"
                     class="mt-5"
                   >

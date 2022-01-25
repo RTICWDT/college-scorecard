@@ -202,16 +202,21 @@ export default {
             }
         },
         completionRatePell() {
+            console.log('s');
             if (!this.school) return null;
             let OM = _.get(this.school, this.fields.COMPLETION_OM_PELL);
             let G200_4 = _.get(this.school, this.fields.COMPLETION_200_4_PELL);
             let G200_LT4 = _.get(this.school, this.fields.COMPLETION_200_LT4_PELL);
             if (!OM && !G200_4 && !G200_LT4) {
+                console.log('falsie');
                 return false;
             } else if (OM) {
+                console.log('OM: ' + OM);
                 return OM;
             } else {
-                return this.years == 3 ? G200_4 : G200_LT4;
+                console.log(this.years);
+                //return this.years == 3 ? G200_4 : G200_LT4;
+                return null;
             }
         },        
         completionRateFieldDefinition(){

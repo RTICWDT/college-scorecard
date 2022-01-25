@@ -1127,7 +1127,7 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Midpoint: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? toggleGraduationRate[1] : toggleGraduationRate[0] ,'0%'),
+                        label: 'Midpoint: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? toggleGraduationRate[0] : toggleGraduationRate[1] ,'0%'),
                         value: this.medianToggle === 'group' ? toggleGraduationRate[0] * 100 : toggleGraduationRate[1] * 100,
                         style: { height: '60px' },
                       }"
@@ -2849,7 +2849,7 @@ export default {
       }
     },
     handleExtendedFieldSelect(event) {
-      console.log(event)
+      //console.log(event)
     },
     handleFieldOfStudyClear() {
       // console.log("Clear");

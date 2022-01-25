@@ -161,7 +161,6 @@ export default {
   },
   computed: {
     groupName() {
-      console.log(this.schools[0]['latest']['cost']['avg_net_price']);
       switch (this.block_title) {
         case "Certificate schools":
           return 1
