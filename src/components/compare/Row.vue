@@ -30,13 +30,15 @@
     <horizontal-bar-median
       v-if="school && config.chart == 'HorizontalBarMedian' && value && config.type == 'graduation-rate'"
       :value="{
-        label:  this.$options.filters.numeral(completionRate,'0%'),
-        value: completionRate * 100
+        label:  this.$options.filters.numeral(value,'0%'),
+        value: Math.round(parseFloat(value * 100))
       }"
       :min="config.min"
       :max="config.max"
       :median="{
         label: 'Midpoint',
+        //  label: showPellOnlyGrad ? Math.round(parseFloat(completionRatePell) * 100) + '%' :  Math.round(parseFloat(completionRate) * 100) + '%',
+        // Math.round(parseFloat(completionRatePell) * 100) : Math.round(parseFloat(completionRate) * 100)
         value: config.medianToggle === 'group' ? toggleGraduationRate[0] * 100 : toggleGraduationRate[1] * 100,
         style: { height: '60px' },
       }"         
@@ -278,7 +280,7 @@ export default {
       } else if (this.config.currentIncomeFilter) {
         return this.income[this.config.currentIncomeFilter]
       } else if (this.config.type == "percent") {
-          if (this.config.showAlt)
+          if (this.config.showPellOnly)
             return Math.round(this[this.config.altComputedField] * 100)
           else
             return Math.round(this[this.config.computedField] * 100)
@@ -289,8 +291,10 @@ export default {
           this.config.multiRangeAidLoanSelect
         )
       } else {
-        if (this.config.showAlt)
+        if (this.config.showPellOnly) {
+          console.log(this[this.config.altComputedField])
           return this[this.config.altComputedField]
+        }
         else
         return this[this.config.computedField]
       }

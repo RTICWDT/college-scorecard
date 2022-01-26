@@ -1111,7 +1111,7 @@
                       <v-col cols="2"></v-col>
                       <v-col cols="8">                       
                     <horizontal-bar-median
-                      v-if="completionRate"
+                      v-if="(completionRate && !showPellOnlyGrad) || (completionRatePell && showPellOnlyGrad)"
                       :value="{
                         label: showPellOnlyGrad ? Math.round(parseFloat(completionRatePell) * 100) + '%' :  Math.round(parseFloat(completionRate) * 100) + '%',
                         value: showPellOnlyGrad ? Math.round(parseFloat(completionRatePell) * 100) : Math.round(parseFloat(completionRate) * 100)

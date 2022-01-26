@@ -113,7 +113,7 @@ export default {
     extractData(showPellOnly) {
       this.outcomes = _.get(
         this.school,
-        "latest.completion.outcome_percentage_suppressed"
+        showPellOnly ? "latest.completion.outcome_percentage_pell_suppressed" : "latest.completion.outcome_percentage_suppressed"
       )
       let outcome_cohort_data = _.get(
         this.school,
@@ -157,7 +157,7 @@ export default {
             outcome_cohort_data.part_time.not_first_time[subgroup],
         },
       }   
-      console.log(this.outcome_cohorts)   
+      //console.log(this.outcome_cohorts)   
     },
 
     drawSankeyChart() {

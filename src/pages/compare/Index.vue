@@ -908,7 +908,7 @@
                       type: 'graduation-rate',
                       chart: 'HorizontalBarMedian',
                       medianToggle: medianToggle,
-                      showAlt: showPellOnly
+                      showPellOnly: showPellOnly,
                     }"
                     class="mt-5"
                   >
