@@ -321,16 +321,7 @@ export default {
       }
       newObj.styles.left = left + "%"
 
-      if (left > 20 && !fixLabels) {
-        let s = left.replace(/[0-9]+%\s?/g, '');
-
-        if (obj.label.indexOf('$') > -1)
-          newObj.styles.left = (s - 15) + '%';
-        else
-          newObj.styles.left = (s - 10) + '%';
-
-        newObj.styles.color = '#ffffff'
-      }      
+  
       return newObj
     },
   },

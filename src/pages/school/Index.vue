@@ -2082,7 +2082,7 @@
                         <tooltip definition="test-scores" />
                       </h2>
                       <p>{{ standardizedTestText }}</p>
-                    <div v-show="standardizedTestValue != 3 && standardizedTestValue != 2">
+                    <div v-show="standardizedTestValue != 3 && standardizedTestValue != 4 && standardizedTestValue != 5 && standardizedTestValue != null">
                       <h3 class="h2 mb-2">SAT</h3>
 
                       <h4 class="overline">Critical Reading</h4>

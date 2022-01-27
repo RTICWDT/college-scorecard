@@ -530,7 +530,6 @@ export default {
             var stValue = this.standardizedTestValue;
             
             if (!this.school) return null;
-            if (!this.satReading.availabe && !this.satMath.available && !this.act.available)
 
             var acceptanceText = "  ";
             
@@ -543,20 +542,28 @@ export default {
 
             switch (stValue) {
                 case 1:
-                    categoryText = "requires admission test scores (SAT/ACT) during the application process.";
-                    rangeText = "Students who were admitted to" + this.schoolName +  "and enrolled typically had admission test scores in these ranges.";
+                    categoryText = this.schoolName + " requires admission test scores (SAT/ACT) during the application process.";
+                    rangeText = "Students who were admitted to " + this.schoolName +  " and enrolled typically had admission test scores in these ranges.";
+                    break;
                 case 5:
-                    categoryText = "considers admission test scores (SAT/ACT) during the application process, but does not require them.";
-                    rangeText = "Students who were admitted to" + this.schoolName +  "and enrolled typically had admission test scores in these ranges.";
+                    categoryText = this.schoolName + " considers admission test scores (SAT/ACT) during the application process, but does not require them.";
+                    rangeText = "Students who were admitted to " + this.schoolName +  " and enrolled typically had admission test scores in these ranges.";
+                    break;
                 case 2:
-                    categoryText = "recommends students provide admission test scores (SAT/ACT), during the application process.";
+                    categoryText = this.schoolName + " recommends students provide admission test scores (SAT/ACT), during the application process.";
+                    break;
                 case 3:
-                    categoryText = "does not require admission test scores (SAT/ACT) during the application process and does not recommend that students provide them.";
-                case 3:
-                    categoryText = "does not require admission test scores (SAT/ACT) during the application process and does not recommend that students provide them.";                                                                           
+                    categoryText = this.schoolName + " does not require admission test scores (SAT/ACT) during the application process and does not recommend that students provide them.";
+                    break;
+                case 4:
+                    categoryText = ""; 
+                    break;     
+                case null:
+                    categoryText = ""; 
+                    break;                                                                                 
             }
-            
-            return acceptanceText + this.schoolName + ' ' + categoryText + ' ' + rangeText;
+            console.log(stValue)
+            return acceptanceText + categoryText + ' ' + rangeText;
         },
         standardizedTestValue() {
             if (!this.school) return null;
