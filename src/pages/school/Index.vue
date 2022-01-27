@@ -2081,13 +2081,8 @@
                         Test Scores
                         <tooltip definition="test-scores" />
                       </h2>
-                      <p v-show="standardizedTestValue != 3 && (satReading.available || satMath.available || act.available)">
-                        Students who were admitted and enrolled typically had
-                        standardized test scores in these ranges.
-                      </p>
-
                       <p>{{ standardizedTestText }}</p>
-                    <div v-show="standardizedTestValue != 3">
+                    <div v-show="standardizedTestValue != 3 && standardizedTestValue != 2">
                       <h3 class="h2 mb-2">SAT</h3>
 
                       <h4 class="overline">Critical Reading</h4>
