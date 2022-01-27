@@ -1857,7 +1857,7 @@
                                   class="pl-1 pb-1 align-self-end"
                                   style=""
                                 >
-                                  fas fa-external-link-alt
+                                  fas fa-external-link-alt2
                                 </v-icon>                                
                               </v-btn
                             >

@@ -307,7 +307,7 @@ export default {
     percent(v) {
       return (this.scale(v) * 100).toFixed(2)
     },
-    styleLabel(obj, fixLabels = false) {
+    styleLabel(obj, fixLabels = true) {
       let newObj = { ...obj }
       // console.log(newObj);
       newObj.styles = {}
@@ -316,16 +316,19 @@ export default {
       if (left > 100) {
         left = 100
         //newObj.label = ">" + this._max.label
-        newObj.value = this._max.value
+        newObj.label = this._max.label;
+        newObj.value = this._max.value;
       }
       newObj.styles.left = left + "%"
 
-      if (left > 20) {
+      if (left > 20 && !fixLabels) {
         let s = left.replace(/[0-9]+%\s?/g, '');
-        if (obj.label.includes('$'))
+
+        if (obj.label.indexOf('$') > -1)
           newObj.styles.left = (s - 15) + '%';
         else
           newObj.styles.left = (s - 10) + '%';
+
         newObj.styles.color = '#ffffff'
       }      
       return newObj

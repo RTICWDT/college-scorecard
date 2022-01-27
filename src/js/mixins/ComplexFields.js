@@ -527,23 +527,23 @@ export default {
             if (!this.school) return null;
             if (!this.satReading.availabe && !this.satMath.available && !this.act.available)
                 return "This school does not require or recommend admission test scores (SAT/ACT).";
-            switch (this.id % 4) {
-                case 0:
-                    return "This school requires admission test scores (SAT/ACT).";
+            switch (this.actstandardizedTestValue) {
                 case 1:
-                    return "This school considers but does not require admission test scores (SAT/ACT).";
+                    return "This school requires admission test scores (SAT/ACT).";
                 case 2:
                     return "This school recommends admission test scores (SAT/ACT).";
                 case 3:
+                    return "This school does not require or recommend admission test scores (SAT/ACT).";
+                case 4:
                     return "This school does not require or recommend admission test scores (SAT/ACT).";                    
+                case 5:
+                    return "This school considers but does not require admission test scores (SAT/ACT).";                                     
             }
             return null;
         },
         standardizedTestValue() {
             if (!this.school) return null;
-            if (!this.satReading.available && !this.satMath.available && !this.act.available)
-                return 3;
-            return this.id % 4;
+            return _.get(this.school, this.fields['TEST_REQUIREMENTS'])
         }  ,
         percentMoreThanHS() {
             if (!this.school) return null;

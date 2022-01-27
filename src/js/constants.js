@@ -81,6 +81,8 @@ export const fields = {
   RACE_ETHNICITY:       'latest.student.demographics.race_ethnicity',
   AGE_ENTRY:            'latest.student.demographics.age_entry',
 
+  TEST_REQUIREMENTS:    'latest.admissions.test_requirements',
+
   ACT_25TH_PCTILE:      'latest.admissions.act_scores.25th_percentile.cumulative',
   ACT_75TH_PCTILE:      'latest.admissions.act_scores.75th_percentile.cumulative',
   ACT_MIDPOINT:         'latest.admissions.act_scores.midpoint.cumulative',
