@@ -123,6 +123,6 @@ export default {
   },
  metaInfo: {
     title: 'Data Home',
-  }    
+  }  
 }
 </script>
