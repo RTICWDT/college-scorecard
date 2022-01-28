@@ -191,28 +191,28 @@ export default {
         completionRate() {
             if (!this.school) return null;
             let OM = _.get(this.school, this.fields.COMPLETION_OM);
-            let G200_4 = _.get(this.school, this.fields.COMPLETION_200_4);
-            let G200_LT4 = _.get(this.school, this.fields.COMPLETION_200_LT4);
-            if (!OM && !G200_4 && !G200_LT4) {
+            let G150_4 = _.get(this.school, this.fields.COMPLETION_150_4);
+            let G150_LT4 = _.get(this.school, this.fields.COMPLETION_150_LT4);
+            if (!OM && !G150_4 && !G150_LT4) {
                 return false;
             } else if (OM) {
                 return OM;
             } else {
-                return this.years == 3 ? G200_4 : G200_LT4;
+                return this.years == 3 ? G150_4 : G150_LT4;
             }
         },
         completionRatePell() {
             if (!this.school) return null;
             let OM = _.get(this.school, this.fields.COMPLETION_OM_PELL);
-            let G200_4 = _.get(this.school, this.fields.COMPLETION_200_4_PELL);
-            let G200_LT4 = _.get(this.school, this.fields.COMPLETION_200_LT4_PELL);
+            let G150_4 = _.get(this.school, this.fields.COMPLETION_200_4_PELL);
+            let G2150_LT4 = _.get(this.school, this.fields.COMPLETION_200_LT4_PELL);
 
-            if (!OM && !G200_4 && !G200_LT4) {
+            if (!OM && !G150_4 && !G2150_LT4) {
                 return false;
             } else if (OM) {
                 return OM;
             } else {
-                return this.years == 3 ? G200_4 : null;
+                return this.years == 3 ? G150_4 : G2150_LT4;
 
             }
         },        

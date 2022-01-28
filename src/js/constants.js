@@ -46,13 +46,13 @@ export const fields = {
 
   // new rates
   COMPLETION_OM:        'latest.completion.outcome_percentage_suppressed.all_students.8yr.award_pooled',
-  COMPLETION_200_4:     'latest.completion.rate_suppressed.four_year_200percent',
-  COMPLETION_200_LT4:   'latest.completion.rate_suppressed.lt_four_year',
+  COMPLETION_150_4:     'latest.completion.rate_suppressed.four_year',
+  COMPLETION_150_LT4:   'latest.completion.rate_suppressed.lt_four_year',
 
   // new rates Pell
   COMPLETION_OM_PELL:        'latest.completion.outcome_percentage_pell_suppressed.all_students.8yr.award_pooled',
-  COMPLETION_200_4_PELL:     'latest.completion.rate_suppressed_pell.four_year_150_pooled',
-  COMPLETION_200_LT4_PELL:   'latest.completion.rate_suppressed._pelllt_four_year_150_pooled',
+  COMPLETION_150_4_PELL:     'latest.completion.rate_suppressed_pell.four_year_150_pooled',
+  COMPLETION_150_LT4_PELL:   'latest.completion.rate_suppressed._pelllt_four_year_150_pooled',
   
   RETENTION_RATE:       'latest.student.retention_rate_suppressed',
 
