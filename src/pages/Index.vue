@@ -606,5 +606,8 @@ export default {
       this.$router.push("/search/?toggle=fos")
     },
   },
+ metaInfo: {
+    title: 'College Scorecard',
+  }    
 }
 </script>

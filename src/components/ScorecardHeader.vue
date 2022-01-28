@@ -376,20 +376,25 @@ export default {
     },
   },
   methods: {
-    setActiveLink() {
-      let path = process.isClient ? window.location.pathname : ""
-      if (path.match(/search/)) {
-        this.activeLink = "search"
-      } else if (path.match(/compare/)) {
-        this.activeLink = "compare"
-      } else if (path.match(/data/)) {
-        this.activeLink = "data"
-      } else if (path.match(/school/)) {
-        this.activeLink = null        
-      } else if (path.match(/\//)) {
-        this.activeLink = "/"
-      } else {
-        this.activeLink = null
+    setActiveLink(linkToSet = "") {
+      if (linkToSet) {
+        this.activeLink = linkToSet;
+      }
+      else {
+        let path = process.isClient ? window.location.pathname : ""
+        if (path.match(/search/)) {
+          this.activeLink = "search"
+        } else if (path.match(/compare/)) {
+          this.activeLink = "compare"
+        } else if (path.match(/data/)) {
+          this.activeLink = "data"
+        } else if (path.match(/school/)) {
+          this.activeLink = null        
+        } else if (path.match(/\//)) {
+          this.activeLink = "/"
+        } else {
+          this.activeLink = null
+        }
       }
     },
     mobileNavClick(urlString) {
