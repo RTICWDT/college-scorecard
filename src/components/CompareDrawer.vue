@@ -181,7 +181,7 @@
     >
       <v-row>
         <v-col cols="12" md="5" class="text-center d-none d-md-block my-2">
-          <v-btn rounded color="secondary" @click="toggleDrawer()" :href="this.$url('/compare')">
+          <v-btn rounded color="secondary" @click="toggleDrawer()" :href="this.$url('/compare')" class="compare-button-school">
             Compare Schools
           </v-btn>
         </v-col>
@@ -191,7 +191,7 @@
           class="text-center compare-drawer-button-container d-none d-md-block my-2"
         >
           <v-btn
-            class="compare-drawer-button"
+            class="compare-drawer-button compare-button-fos"
             rounded
             color="secondary"
             @click="toggleDrawer()"
