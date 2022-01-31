@@ -1185,7 +1185,7 @@
                       <v-col cols="7" md="7" sm="12">
                       <h2 class="mb-3 mt-5">
                         Outcomes 8 Years After Attending&nbsp;
-                        <tooltip definition="outcome-measures" />
+                        <tooltip definition="outcome-measures" :isPell="showPellOnlyOutcomes" />
                       </h2>
                       </v-col>
                       <v-col cols="5" md="5" sm="12" class="d-flex justify-end">                      
