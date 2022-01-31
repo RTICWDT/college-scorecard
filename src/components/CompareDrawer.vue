@@ -77,7 +77,7 @@
           </v-icon>
         </div>
 
-            <div class="compare-drawer-section-header  compare-button-school">
+            <div class="compare-drawer-section-header compare-button-school">
               <h3 class="title">Compare Schools</h3>
             </div>
           </div>
@@ -105,7 +105,7 @@
 
           <!-- Medium and smaller button-->
           <div class="d-md-none mt-5 text-center">
-            <v-btn rounded color="secondary" @click="toggleDrawer()" :href="this.$url('/compare')">
+            <v-btn rounded color="secondary" @click="toggleDrawer()" :href="this.$url('/compare')" class="compare-button-school">
               Compare Schools
             </v-btn>
           </div>
@@ -160,7 +160,7 @@
           <!-- sm and smaller button-->
           <div class="d-md-none mt-5 text-center">
             <v-btn
-              class="compare-drawer-button"
+              class="compare-button-fos"
               rounded
               color="secondary"
               @click="toggleDrawer()"
