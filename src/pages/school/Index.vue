@@ -221,7 +221,7 @@
                       {{ netPrice | numeral("$0,0") }}
                     </h2>
                     <div class="data-na pb-3" v-else>Data Not Available</div>
-                    <em>Midpoint for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName): "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? toggleAverageAnnualCost[0] : toggleAverageAnnualCost[1] ,'$0,0')}}</em>
+                    <em>Midpoint for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName): "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? Math.round(parseFloat(toggleAverageAnnualCost[0])) : Math.round(parseFloat(toggleAverageAnnualCost[1])) ,'$0,0')}}</em>
 
                     <horizontal-bar-median
                       v-if="netPrice"
@@ -283,7 +283,7 @@
                       {{ medianEarnings | numeral("$0,0") }}
                     </h2>
                     <div class="data-na pb-3" v-else>Data Not Available</div>
-                    <em>Midpoint for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName): "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? toggleMedianEarnings[0] : toggleMedianEarnings[1] ,'$0,0')}}</em>
+                    <em>Midpoint for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName): "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? Math.round(parseFloat(toggleMedianEarnings[0])) : Math.round(parseFloat(toggleMedianEarnings[1])) ,'$0,0')}}</em>
 
                     <horizontal-bar-median
                       v-if="medianEarnings"
@@ -904,7 +904,7 @@
                           style: { height: '60px' },
                         }"
                         :median="{
-                          label: 'Midpoint: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? toggleAverageAnnualCost[0] : toggleAverageAnnualCost[1] ,'$0,0'),
+                          label: 'Midpoint: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? Math.round(parseFloat(toggleAverageAnnualCost[0])) : Math.round(parseFloat(toggleAverageAnnualCost[1])) ,'$0,0'),
                           value: this.medianToggle === 'group' ? toggleAverageAnnualCost[0] : toggleAverageAnnualCost[1] ,
                           style: { height: '60px' },
                         }"
@@ -984,8 +984,8 @@
                             style: { height: '60px' },
                           }"
                           :median="{
-                            label: 'Midpoint: ' + this.$options.filters.numeral(30000,'$0,0'),
-                            value: Midpoint,
+                            label: 'Midpoint: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? Math.round(parseFloat(toggleAverageAnnualCost[0])) : Math.round(parseFloat(toggleAverageAnnualCost[1])) ,'$0,0'),
+                            value: this.medianToggle === 'group' ? toggleAverageAnnualCost[0] : toggleAverageAnnualCost[1] ,
                             style: { height: '60px' },
                           }"
                           color="#00365e"
@@ -1931,7 +1931,7 @@
                         style: { height: '60px' },
                       }"
                       :median="{
-                        label: 'Midpoint: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? toggleMedianEarnings[0] : toggleMedianEarnings[1] ,'$0,0'),
+                        label: 'Midpoint: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? Math.round(parseFloat(toggleMedianEarnings[0])) : Math.round(parseFloat(toggleMedianEarnings[1])) ,'$0,0'),
                         value: this.medianToggle === 'group' ? toggleMedianEarnings[0] : toggleMedianEarnings[1],
                         style: { height: '60px' },
                       }"

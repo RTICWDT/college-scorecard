@@ -77,7 +77,7 @@
           </v-icon>
         </div>
 
-            <div class="compare-drawer-section-header">
+            <div class="compare-drawer-section-header  compare-button-school">
               <h3 class="title">Compare Schools</h3>
             </div>
           </div>
@@ -124,7 +124,7 @@
           </v-icon>
         </div>
 
-            <div class="compare-drawer-section-header">
+            <div class="compare-drawer-section-header compare-button-fos">
               <h3 class="title">Compare Fields of Study</h3>
             </div>
           </div>
