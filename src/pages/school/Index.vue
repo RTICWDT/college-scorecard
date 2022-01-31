@@ -265,13 +265,13 @@
                     <h2 class="mb-3" v-if="!isProgramReporter">
                       <!--prettyhtml-ignore-->
                       Median Earnings
-                      <tooltip definition="median-earnings" />
+                      <tooltip definition="institution-median-earnings" />
                     </h2>
                     <h2 v-else class="mb-3">
                       <!--prettyhtml-ignore-->
                       Median Earnings for Largest Program
                       <tooltip
-                        definition="median-earnings"
+                        definition="institution-median-earnings"
                         :isNegative="medianEarnings < 0"
                       />
                     </h2>
@@ -1081,7 +1081,9 @@
                       <v-col cols="7" md="7" sm="12">
                       <h2 class="mb-3">
                         Graduation Rate&nbsp;
-                        <tooltip definition="graduation-rate" />
+                        <tooltip definition="graduation-rate" 
+                        :version="completionRateFieldDefinition"
+                        :isPell="showPellOnlyGrad" />
                       </h2>
                       </v-col>
                       <v-col cols="5" md="5" sm="12" class="d-flex justify-end">
@@ -1524,7 +1526,7 @@
                           This is based on a standard 10-year payment plan,
                           other
                           <a
-                            :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentloans.gov/myDirectLoan/repaymentEstimator.action'))"
+                            :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov/loan-simulator'))"
                             target="_blank"
                             @click="trackOutboundLink($event)"
                             >payment options<v-icon
@@ -1888,7 +1890,7 @@
                   <div>
                   <h2 class="pb-3">
                           Median Earnings&nbsp;<tooltip
-                            definition="median-earnings"
+                            definition="institution-median-earnings"
                             :isBranch="isBranch"
                           />
                         </h2>
@@ -1945,7 +1947,7 @@
                       </v-row> 
                     <h2 class="mb-3 mt-10">
                           Percentage Earning More Than a High School Graduate&nbsp;<tooltip
-                            definition="placeholder"
+                            definition="threshold-earnings"
                           />
                         </h2>
                     <div class="d-flex align-end mb-16" v-if="percentMoreThanHS"><h2

@@ -173,7 +173,7 @@
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
                     title="Median Earnings"
-                    definition="median-earnings"
+                    definition="institution-median-earnings"
                     :config="{
                       computedField: 'medianEarnings',
                       color: '#1874DC',
@@ -1078,7 +1078,7 @@
                           This is based on a standard 10-year payment plan,
                           other
                           <a
-                            :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentloans.gov/myDirectLoan/repaymentEstimator.action'))"
+                            :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov/loan-simulator'))"
                             target="_blank"
                             @click="trackOutboundLink($event)"
                             >payment options<v-icon
@@ -1222,7 +1222,7 @@
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
                     title="Median Earnings"
-                    definition="median-earnings"
+                    definition="institution-median-earnings"
                     :config="{
                       computedField: 'medianEarnings',
                       color: '#1874DC',
@@ -1250,7 +1250,7 @@
                   <compare-section
                     :schools="schools"
                     title="Percentage Earning More Than a High School Graduate"
-                    definition="placeholder"
+                    definition="threshold-earnings"
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
                     :config="{

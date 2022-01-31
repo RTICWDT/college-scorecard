@@ -98,6 +98,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isPell: {
+      type: Boolean,
+      default: false,
+    },    
   },
   data() {
     return {
@@ -121,6 +125,10 @@ export default {
         return this.entry["compare"]
       else if (this.isGraduate && this.entry["graduate"])
         return this.entry["graduate"]
+      else if (this.isPell && this.entry["pell"])
+        return this.entry["pell"]      
+      else if (this.isPell)
+        return this.entry[this.version + "-pell"]            
       else return this.entry[this.version]
     },
     info() {

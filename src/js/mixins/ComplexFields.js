@@ -219,7 +219,7 @@ export default {
         completionRateFieldDefinition(){
             if (!this.school) return null;
             let OM = _.get(this.school, this.fields.COMPLETION_OM);
-            return (OM)?'default':'gr200';
+            return (OM)?'default':'gr150';
         },
         programReporter() {
             if (!this.school) return null;
