@@ -130,7 +130,7 @@
           <!--prettyhtml-ignore-->
           <span
             >Median Earnings&nbsp;<tooltip
-              definition="median-earnings"
+              definition="institution-median-earnings"
               :isBranch="isBranch"
           /></span>
         </v-col> </v-row

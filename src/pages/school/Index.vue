@@ -1375,9 +1375,9 @@
 
                           <div
                             class="display-2 navy-text font-weight-bold  pb-5"
-                            v-if="debtRange && debtRange.median.debt && aidLoanSelect !== 'plus'"
+                            v-if="federalDebt !== 'plus'"
                           >
-                            {{ debtRange.median.debt | numeral("$0,0") }}
+                            {{ federalDebt | numeral("$0,0") }}
                           </div>
 
                         <h2

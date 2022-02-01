@@ -193,6 +193,7 @@ export default {
             let OM = _.get(this.school, this.fields.COMPLETION_OM);
             let G150_4 = _.get(this.school, this.fields.COMPLETION_150_4);
             let G150_LT4 = _.get(this.school, this.fields.COMPLETION_150_LT4);
+            console.log("OM: " + OM + "G150_4: " + G150_4 + "G150_LT4: " + G150_LT4 );
             if (!OM && !G150_4 && !G150_LT4) {
                 return false;
             } else if (OM) {
@@ -205,14 +206,14 @@ export default {
             if (!this.school) return null;
             let OM = _.get(this.school, this.fields.COMPLETION_OM_PELL);
             let G150_4 = _.get(this.school, this.fields.COMPLETION_200_4_PELL);
-            let G2150_LT4 = _.get(this.school, this.fields.COMPLETION_200_LT4_PELL);
+            let G150_LT4 = _.get(this.school, this.fields.COMPLETION_200_LT4_PELL);
 
-            if (!OM && !G150_4 && !G2150_LT4) {
+            if (!OM && !G150_4 && !G150_LT4) {
                 return false;
             } else if (OM) {
                 return OM;
             } else {
-                return this.years == 3 ? G150_4 : G2150_LT4;
+                return this.years == 3 ? G150_4 : G150_LT4;
 
             }
         },        
@@ -501,6 +502,10 @@ export default {
         medianEarnings() {
             if (!this.school) return null;
             return _.get(this.school, fields['MEDIAN_EARNINGS']) 
+        },
+        federalDebt() {
+            if (!this.school) return null;
+            return _.get(this.school, fields['AVERAGE_TOTAL_DEBT']) 
         },
         toggleMedianEarnings() {
             if (!this.school) return null;
