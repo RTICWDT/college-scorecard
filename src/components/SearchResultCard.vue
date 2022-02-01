@@ -166,11 +166,11 @@ export default {
   },
   computed: {
     displayGradRate() {
-      if (!this.completionRate) {
+      if (!this.completionRateOverall) {
         return "N/A"
       } else {
         return this.$options.filters.numeral(
-          parseFloat(this.completionRate),
+          parseFloat(this.completionRateOverall),
           "0.%"
         )
       }
