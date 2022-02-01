@@ -868,8 +868,8 @@ export default {
 
         // new completion rates
         fields.COMPLETION_OM,
-        fields.COMPLETION_200_4,
-        fields.COMPLETION_200_LT4,
+        fields.COMPLETION_150_4,
+        fields.COMPLETION_150_LT4,    
 
         fields.FIELD_OF_STUDY,
       ].join(",")
