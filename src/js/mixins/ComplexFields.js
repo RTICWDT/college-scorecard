@@ -193,7 +193,6 @@ export default {
             let OM = _.get(this.school, this.fields.COMPLETION_OM);
             let G150_4 = _.get(this.school, this.fields.COMPLETION_150_4);
             let G150_LT4 = _.get(this.school, this.fields.COMPLETION_150_LT4);
-            console.log("OM: " + OM + "G150_4: " + G150_4 + "G150_LT4: " + G150_LT4 );
             if (!OM && !G150_4 && !G150_LT4) {
                 return false;
             } else if (OM) {
