@@ -205,8 +205,8 @@ export default {
         completionRatePell() {
             if (!this.school) return null;
             let OM = _.get(this.school, this.fields.COMPLETION_OM_PELL);
-            let G150_4 = _.get(this.school, this.fields.COMPLETION_200_4_PELL);
-            let G150_LT4 = _.get(this.school, this.fields.COMPLETION_200_LT4_PELL);
+            let G150_4 = _.get(this.school, this.fields.COMPLETION_150_4_PELL);
+            let G150_LT4 = _.get(this.school, this.fields.COMPLETION_150_LT4_PELL);
 
             if (!OM && !G150_4 && !G150_LT4) {
                 return false;
