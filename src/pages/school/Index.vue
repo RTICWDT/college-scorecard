@@ -1375,7 +1375,8 @@
 
                           <div
                             class="display-2 navy-text font-weight-bold  pb-5"
-                            v-if="federalDebt !== 'plus'"
+                            v-if="federalDebt &&
+                              aidLoanSelect !== 'plus'"
                           >
                             {{ federalDebt | numeral("$0,0") }}
                           </div>
@@ -1469,22 +1470,7 @@
                                 | numeral("$0,0")
                             }}
                           </div>
-                        </div>
-                        <div
-                          v-else-if="
-                            monthlyLoanPayment &&
-                              aidLoanSelect === 'fed' &&
-                              aidShowMedianDebtWithPrior
-                          "
-                        >
-                          <div
-                            class="display-2 navy-text font-weight-bold pb-3"
-                          >{{
-                              monthlyLoanPaymentAll
-                                | numeral("$0,0")
-                            }}
-                          </div>
-                        </div>                        
+                        </div>                       
                         <div
                           v-else-if="aidLoanSelect === 'fed'"
                           class="data-na pb-3"

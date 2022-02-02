@@ -59,7 +59,7 @@
 
               <p class="pt-4">
                 This data was
-                <strong>last updated August 3, 2021</strong>.
+                <strong>last updated February 7, 2022</strong>.
               </p>
               <v-row>
                 <v-col cols="12" sm="10" offset="1">
