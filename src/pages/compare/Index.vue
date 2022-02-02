@@ -1065,7 +1065,7 @@
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
                     :config="{
-                      computedField: aidShowMedianDebtWithPrior ? 'monthlyLoanPaymentAll' : 'monthlyLoanPayment',
+                      computedField: aidLoanSelect == 'fed' ? 'monthlyLoanPayment' : (aidShowMedianDebtWithPrior ? 'parentPlusPaymentAll' : 'parentPlusPayment'),
                       color: '#1874DC',
                       type: 'currency',
                       max: 1000,

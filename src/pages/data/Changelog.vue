@@ -15,6 +15,65 @@
                 </v-col>
               </v-row>                
               <v-expansion-panels multiple v-model="panels">
+              <v-expansion-panel>
+                <v-expansion-panel-header
+                  >February 7, 2022</v-expansion-panel-header
+                >
+                <v-expansion-panel-content>
+                  <p>
+                    On February 7, 2022, the Department updated the College Scorecard 
+                    website with more recent data for metrics from the National Students
+                     Loan Data System (NSLDS) and the Internal Revenue Service (IRS). 
+                     The user interface of the consumer site was updated to show additional 
+                     institution-level data as well as midpoint values for select metrics 
+                     to help site visitors compare the institution’s value of the metric 
+                     against national medians. In addition, the user interface of the 
+                     consumer site also added graduation rate by Pell Grant status and 
+                     more information about admissions test requirements.
+                  </p>
+                  <p>
+                    Specific data updates in this release include:
+                  </p>
+                  <ul>
+                    <li>
+                      Re-incorporated entry cohort earnings metrics at the institution-level
+                       for 6-, 8-, and 10-years after entering the institution including:
+                       <ul>
+                          <li>Median earnings at the institution-level</li>
+                          <li>Disaggregated median earnings (mean earnings were calculated previously) by 
+                            family income, dependent status, and sex</li>
+                          <li>Proportion of earners earning above a typical high school graduate</li>
+                       </ul>
+                    </li>
+                    <li>
+                      Refreshed cumulative loan debt data metrics derived from NSLDS at the institution-level 
+                      and for individual fields of study.
+                    </li>
+                    <li>
+                      Added borrower-based repayment rates measured 3 years after entry into repayment 
+                      (both institution-level and field of study-level data).
+                    </li>
+                    <li>
+                      Added outcomes 8-years after entry into the institution specific to Pell Grant 
+                      recipients and added demographic breakouts for dependency status, sex, and Pell 
+                      Grant recipient status to the borrower-based repayment rates at the institution level.
+                    </li>
+                    <li>
+                      Added new information about admissions testing requirements derived from IPEDS.
+                    </li>
+                    <li>
+                      Updated data derived from Federal Student Aid sources to more recent values for the following data metrics: 
+                      <ul>
+                        <li>Currently Operating Status Flag</li>
+                        <li>Heightened Cash Monitoring Flag</li>
+                        <li>Accrediting Agency Name and Code</li>
+                        <li>Title IV Approval Date</li>
+                        <li>Federal School Code</li>
+                      </ul>
+                    </li>
+                  </ul>                                                                           
+                </v-expansion-panel-content>
+              </v-expansion-panel>                
                 <v-expansion-panel>
                                   
                   <v-expansion-panel-header>August 3, 2021</v-expansion-panel-header>
