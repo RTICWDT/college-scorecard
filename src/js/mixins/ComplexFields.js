@@ -540,12 +540,15 @@ export default {
 
             var acceptanceText = "  ";
             
-            if (this.acceptanceRate == 1) {
-                acceptanceText = this.schoolName + " has ann acceptance rate of 100%, which means that all students who apply are accepted. "
+            if (this.acceptanceRate == 1 && this.openAdmissions != 1) {
+                acceptanceText = this.schoolName + " has an acceptance rate of 100%, which means that all students who apply are accepted. "
             }
             else if (this.openAdmissions != 1) {
                 acceptanceText =  this.schoolName + " has an acceptance rate of " + Math.round(this.acceptanceRate * 100)+"%" + ". "
             }
+            else if (this.openAdmissions == 1) {
+                acceptanceText =  this.schoolName + " has an open admission policy, which means that all students who apply are accepted. "
+            }            
             else {
                 acceptanceText = "";
             }

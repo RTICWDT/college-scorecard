@@ -2139,13 +2139,25 @@
                         label="Acceptance Rate"
                       ></donut>
                           <div class="sr-only">
-                            Socio-Economic Diversity: {{ Math.round(acceptanceRate * 100)+"%" }}
+                            Acceptance Rate: {{ Math.round(acceptanceRate * 100)+"%" }}
                           </div>                          
-                        </div>                      
+                        </div>
+                      <div v-else-if="openAdmissions == 1">
+                      <donut
+                        color="#1874DC"
+                        :value="100"
+                        chart-id="acceptance-chart"
+                        :height="200"
+                        label="Acceptance Rate"
+                      ></donut>
+                          <div class="sr-only">
+                            Acceptance Rate: {{ Math.round(100)+"%" }}
+                          </div>                          
+                        </div>                            
                       <p v-else-if="!acceptanceRate" class="data-na">
                         Data Not Available
                       </p>
-                      <p v-else>This school has an open admissions policy.</p>
+                      <!--<p v-else>This school has an open admissions policy.</p>-->
                     </v-col>
                   </v-row>
                 </v-expansion-panel-content>

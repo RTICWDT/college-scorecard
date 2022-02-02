@@ -252,10 +252,5 @@
     "default": "<p>A Pell Grant is a grant provided by the federal government that is usually awarded only to undergraduate students who display exceptional financial need and have not earned a bachelor's, graduate, or professional degree. A Federal Pell Grant, unlike a loan, does not have to be repaid, except under certain circumstances.</p>",
     "glossary": "<p>A Pell Grant is a grant provided by the federal government that is usually awarded only to undergraduate students who display exceptional financial need and have not earned a bachelor's, graduate, or professional degree. A Federal Pell Grant, unlike a loan, does not have to be repaid, except under certain circumstances.</p>",
     "branch": false    
-  },
-  "placeholder": {
-    "title": "Tooltip",
-    "default": "<p>Placeholder tooltip definition.</p>",
-    "glossary": "<p>Placeholder tooltip definition</p>"
   }
 }
