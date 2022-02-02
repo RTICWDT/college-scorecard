@@ -117,12 +117,12 @@ export default {
       )
       let outcome_cohort_data = _.get(
         this.school,
-        "latest.completion.outcome_cohort"
+        showPellOnly ? "latest.completion.outcome_cohort_pell" : "latest.completion.outcome_cohort"
       )
 
       let subgroup = "8yr_pooled";
       if (showPellOnly)
-        subgroup = "8yr";
+        subgroup = "8yr_pooled";
 
       this.outcome_cohorts = {
         study_full_time: {
@@ -157,7 +157,7 @@ export default {
             outcome_cohort_data.part_time.not_first_time[subgroup],
         },
       }   
-      //console.log(this.outcome_cohorts)   
+      console.log(this.outcome_cohorts)   
     },
 
     drawSankeyChart() {
