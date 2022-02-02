@@ -36,14 +36,14 @@
                   </li>
                   <li>
                     Field of study-level data files for the pooled 2014-15,
-                    2015-16 award years through the pooled 2016-17, 2017-18
+                    2015-16 award years through the pooled 2017-18, 2018-19
                     award years containing data at the credential level and
                     4-digit CIP code combination for each institution. Includes
                     information on cumulative debt at graduation and earnings
                     one year after graduation.
                   </li>
                   <li>
-                    Crosswalk files for 2000-01 through 2018-19 that link the
+                    Crosswalk files for 2000-01 through 2019-20 that link the
                     Department’s OPEID with an IPEDS UNITID for each
                     institution.
                   </li>
