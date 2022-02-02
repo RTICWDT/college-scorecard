@@ -1459,8 +1459,7 @@
                         <div
                           v-if="
                             monthlyLoanPayment &&
-                              aidLoanSelect === 'fed' &&
-                              !aidShowMedianDebtWithPrior
+                              aidLoanSelect === 'fed'
                           "
                         >
                           <div
