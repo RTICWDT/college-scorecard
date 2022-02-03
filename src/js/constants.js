@@ -102,6 +102,7 @@ export const fields = {
   SAT_WRITING_MIDPOINT:     'latest.admissions.sat_scores.midpoint.writing',
 
   ACCEPTANCE_RATE:          'latest.admissions.admission_rate.overall',
+  ACCEPTANCE_RATE_CONSUMER:          'latest.admissions.admission_rate.consumer_rate',
   OPEN_ADMISSIONS:          'school.open_admissions_policy',
 
   NET_PRICE_CALC_URL:       'school.price_calculator_url',

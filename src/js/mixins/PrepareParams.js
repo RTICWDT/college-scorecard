@@ -17,7 +17,7 @@ const alias = {
   act:                  fields.ACT_MIDPOINT + '__range',
   sat_math:             fields.SAT_MATH_MIDPOINT + '__range',
   sat_read:             fields.SAT_READING_MIDPOINT + '__range',
-  acceptance:           fields.ACCEPTANCE_RATE + '__range',
+  acceptance:           fields.ACCEPTANCE_RATE_CONSUMER + '__range',
   lat:                  fields.LATITUDE + '__range',
   long:                 fields.LONGITUDE + '__range',
   religious:            fields.RELIGIOUS,
