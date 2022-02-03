@@ -1,5 +1,5 @@
 <template>
-  <v-card id="compare-schools-content" class="pa-5">
+  <v-card id="compare-schools-content" class="pa-5" >
     <div>
       <span>
         Add up to 10 Schools and 10 Fields of Study to compare.

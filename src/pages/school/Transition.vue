@@ -80,6 +80,7 @@ export default {
       let query = querystring.parse(window.location.search.substring(1))
       this.query = query || {}
     }
+    this.$store.commit("toggleDrawer", false);
   },
 }
 </script>
