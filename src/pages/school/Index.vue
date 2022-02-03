@@ -1102,6 +1102,7 @@
                       </v-col>  
                       </v-row>
                         <median-toggle
+                          v-if="!showPellOnlyGrad"
                           :display-toggle="medianToggle"
                           :control-tab="controlTab"
                           @median-switch-click="handleMedianToggle"
@@ -1132,6 +1133,7 @@
                         label: 'Midpoint: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? toggleGraduationRate[0] : toggleGraduationRate[1] ,'0%'),
                         value: this.medianToggle === 'group' ? toggleGraduationRate[0] * 100 : toggleGraduationRate[1] * 100,
                         style: { height: '60px' },
+                        show: !showPellOnlyGrad
                       }"
                       color="#00365e"
                       :height="500"
@@ -2048,7 +2050,7 @@
                         <tooltip definition="test-scores" />
                       </h2>
                       <p>{{ standardizedTestText }}</p>
-                    <div v-show="standardizedTestValue != 3 && standardizedTestValue != 4 && standardizedTestValue != 5 && standardizedTestValue != null">
+                    <div v-show="standardizedTestValue != 3 && standardizedTestValue != 4 && standardizedTestValue != 2 && standardizedTestValue != null">
                       <h3 class="h2 mb-2">SAT</h3>
 
                       <h4 class="overline">Critical Reading</h4>

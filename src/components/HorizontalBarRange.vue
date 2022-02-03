@@ -239,7 +239,7 @@ export default {
     median: {
       type: Object,
       default: function() {
-        return { value: 50, label: "Midpoint" }
+        return { value: 50, label: "Midpoint", show: true }
       },
     },
     upper: {
@@ -321,7 +321,9 @@ export default {
       return styleLabel
     },
     _median() {
-      return this.styleLabel(this.median)
+      let styleLabel = this.styleLabel(this.median);
+      styleLabel.styles.display = this.median.show ? "block" : "none";
+      return styleLabel;
     },
     _upper() {
       //return this.styleLabel(this.upper);
