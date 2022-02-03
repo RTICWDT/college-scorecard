@@ -183,7 +183,7 @@
                 <p class="text-center home-callout-button-wrapper white--text mx-10">
                   <v-btn
                     color="secondary"
-                    :href="$url('/school/transition/?url=' + encodeURIComponent('https://fafsa.ed.gov/'))"
+                    :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov/h/apply-for-aid/fafsa'))"
                     target="_blank"
                     @click="trackOutboundLink($event)"
                   >Start Your FAFSA&reg; Application<v-icon

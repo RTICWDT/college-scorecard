@@ -7,10 +7,10 @@
       can use
       <!--prettyhtml-ignore-->
       <a
-        :href="$url('/school/transition/?url=' + encodeURIComponent('https://fafsa.ed.gov/FAFSA/app/f4cForm'))"
+        :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov/aid-estimator/'))"
         target="_blank"
         @click="trackOutboundLink($event)"
-        >FAFSA<em>4caster</em><v-icon
+        >Federal Student Aid Estimator<v-icon
                       x-small
                       color="#007000"
                       class="pl-1"
@@ -26,7 +26,7 @@
       <v-btn
         rounded
         color="secondary"
-        :href="$url('/school/transition/?url=' + encodeURIComponent('https://fafsa.ed.gov/'))"
+        :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov/h/apply-for-aid/fafsa'))"
         target="_blank"
         @click="trackOutboundLink($event)"
         >Start Your FAFSA&reg;<br/>Application<v-icon

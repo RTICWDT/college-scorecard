@@ -327,7 +327,7 @@
                   To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA&#174;) form.
                   You can use
 
-                  <a :href="$url('/school/transition/?url=' + encodeURIComponent('https://fafsa.ed.gov/FAFSA/app/f4cForm'))"
+                  <a :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov/aid-estimator/'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
@@ -347,7 +347,7 @@
                   <v-btn
                     rounded
                     color="secondary"
-                    :href="$url('/school/transition/?url=' + encodeURIComponent('https://fafsa.ed.gov/'))"
+                    :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov/h/apply-for-aid/fafsa'))"
                     target="_blank"
                     @click="trackOutboundLink($event)"
                   >Start Your FAFSA&reg; Application<v-icon

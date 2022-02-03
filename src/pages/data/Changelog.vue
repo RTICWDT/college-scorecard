@@ -22,7 +22,7 @@
                 <v-expansion-panel-content>
                   <p>
                     On February 7, 2022, the Department updated the College Scorecard 
-                    website with more recent data for metrics from the National Students
+                    website with more recent data for metrics from the National Student
                      Loan Data System (NSLDS) and the Internal Revenue Service (IRS). 
                      The user interface of the consumer site was updated to show additional 
                      institution-level data as well as midpoint values for select metrics 
