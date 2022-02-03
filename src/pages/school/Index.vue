@@ -243,6 +243,7 @@
                         label: 'Midpoint for ' + (this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName): 'All') + ' Schools',
                         value: this.medianToggle === 'group' ? toggleAverageAnnualCost[0] : toggleAverageAnnualCost[1],
                         style: { height: '60px' },
+                        show: true
                       }"
                       :upperTipStyleOverride="{
                         display: 'none',
@@ -305,6 +306,7 @@
                         label: 'Midpoint for ' + (this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName): 'All') + ' Schools',
                         value: this.medianToggle === 'group' ? toggleMedianEarnings[0] : toggleMedianEarnings[1],
                         style: { height: '60px' },
+                        show: true
                       }"
                       :upperTipStyleOverride="{
                         display: 'none',
@@ -907,6 +909,7 @@
                           label: 'Midpoint: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? Math.round(parseFloat(toggleAverageAnnualCost[0])) : Math.round(parseFloat(toggleAverageAnnualCost[1])) ,'$0,0'),
                           value: this.medianToggle === 'group' ? toggleAverageAnnualCost[0] : toggleAverageAnnualCost[1] ,
                           style: { height: '60px' },
+                          show: true
                         }"
                         color="#00365e"
                         :height="500"
@@ -987,6 +990,7 @@
                             label: 'Midpoint: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? Math.round(parseFloat(toggleAverageAnnualCost[0])) : Math.round(parseFloat(toggleAverageAnnualCost[1])) ,'$0,0'),
                             value: this.medianToggle === 'group' ? toggleAverageAnnualCost[0] : toggleAverageAnnualCost[1] ,
                             style: { height: '60px' },
+                            show: true
                           }"
                           color="#00365e"
                           :height="500"
@@ -1900,6 +1904,7 @@
                         label: 'Midpoint: ' + this.$options.filters.numeral(this.medianToggle === 'group' ? Math.round(parseFloat(toggleMedianEarnings[0])) : Math.round(parseFloat(toggleMedianEarnings[1])) ,'$0,0'),
                         value: this.medianToggle === 'group' ? toggleMedianEarnings[0] : toggleMedianEarnings[1],
                         style: { height: '60px' },
+                        show: true
                       }"
                       color="#00365e"
                       :height="500"

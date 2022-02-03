@@ -19,6 +19,7 @@
         label: 'Midpoint',
         value: config.medianToggle === 'group' ? toggleAverageAnnualCost[0] : toggleAverageAnnualCost[1],
         style: { height: '60px' },
+        show: true
       }"                      
       color="#00365e"
       :height="500"
@@ -41,6 +42,7 @@
         // Math.round(parseFloat(completionRatePell) * 100) : Math.round(parseFloat(completionRate) * 100)
         value: config.medianToggle === 'group' ? toggleGraduationRate[0] * 100 : toggleGraduationRate[1] * 100,
         style: { height: '60px' },
+        show: true        
       }"         
       :upperStyleOverride="
         checkUpperStyle(
@@ -68,6 +70,7 @@
         label: 'Midpoint',
         value: config.medianToggle === 'group' ? toggleMedianEarnings[0] : toggleMedianEarnings[1],
         style: { height: '60px' },
+        show: true        
       }"
       :upperStyleOverride="
         checkUpperStyle(
