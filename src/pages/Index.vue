@@ -331,7 +331,7 @@
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    FAFSA<em>4caster</em><v-icon
+                    Federal Student Aid Estimator<v-icon
                       x-small
                       class="pl-1"
                       color="#007000"

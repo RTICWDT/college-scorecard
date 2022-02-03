@@ -165,11 +165,11 @@
 
                 <p class="mx-10">
                   To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA). You also may qualify for a Pell Grant, which is a federal program that provides free money for higher education. In order to see if you qualify for a Pell Grant, you must submit a FAFSA. Use the  
-                  <a :href="$url('/school/transition/?url=' + encodeURIComponent('https://fafsa.ed.gov/FAFSA/app/f4cForm'))"
+                  <a :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov/aid-estimator/'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
-                    FAFSA<em>4caster</em><v-icon
+                    Federal Student Aid Estimator<v-icon
                       x-small
                       class="green-link pl-1"
                     >
