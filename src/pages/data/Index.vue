@@ -12,6 +12,7 @@
               earnings, and more. The data is available on
               <a
                 :href="$url('/school/transition/?url=' + encodeURIComponent('https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources'))"
+                target="_blank"
                 >data.ed.gov<v-icon
                     x-small
                     class="pl-1"

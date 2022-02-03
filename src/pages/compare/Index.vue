@@ -881,8 +881,8 @@
                       :tab-style="{
                         width: '32%',
                       }"
-                      v-show="showResource === 'institutions'"
-                      class="mt-10"
+                      v-show="(showResource === 'institutions' && !showPellOnly)"
+                      class="mt-10 fadeAway"
                       v-if="!showPellOnly"
                     />    
 
@@ -1444,6 +1444,13 @@
 
 <style lang="scss" scoped>
 @import "~/sass/_variables";
+
+.fadeAway {
+  display:none;
+  transition-property: display;
+  transition-duration: 4s;
+  transition-delay: 2s;
+}
 
 .compare-institution-chip-container {
   border-bottom: 1px $light-gray solid;

@@ -104,7 +104,7 @@
 
                   <v-expansion-panel-header>April 4, 2021</v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <p>On April 4, 2021, the College Scorecard API was updated to improve stability and efficiency. If you encounter any problems with this revision of the API, please submit an issue at <a href="http://github.com/rticwdt/college-scorecard/" target="_blank" @click="trackOutboundLink($event)">http://github.com/rticwdt/college-scorecard/</a></p>
+                    <p>On April 4, 2021, the College Scorecard API was updated to improve stability and efficiency. If you encounter any problems with this revision of the API, please submit an issue at <a :href="$url('/school/transition/?url=' + encodeURIComponent('http://github.com/rticwdt/college-scorecard/'))" target="_blank" @click="trackOutboundLink($event)">http://github.com/rticwdt/college-scorecard/<i aria-hidden="true" class="v-icon notranslate pl-1 fas fa-external-link-alt theme--light" style="font-size: 12px; color: rgb(0, 112, 0); caret-color: rgb(0, 112, 0);"></i></a>.</p>
                     <p>Changes include: </p>
                     <ul><li><strong>By default, only “<em>latest</em>” data will be returned.</strong> Before this update, the API returned data for all years available unless filtered by the <em>fields</em> parameter. With this update, it now returns only the <em>latest</em> object by default. If your implementation relies on the previous functionality, the flag <em>“&all_years=true”</em> can be appended to your API call to receive data for all years available.</li>
                     <li><strong>Only specific fields will be available for <em>sort</em> and <em>filter</em> conditions.</strong> Previously, the API allowed any field in the dataset to be used to sort or filter results. Following this update, only a subset of fields will be indexed and available for sorting and filtering. The fields are identified in the latest Data Dictionary under the column <em>INDEX</em> and are generated using only the latest data.</li>
@@ -1212,7 +1212,13 @@
                       "
                       href="http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls"
                       target="_blank"
-                      >http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls</a
+                      >http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls<v-icon
+                    x-small
+                    class="pl-1"
+                    color="#007000"            
+                  >
+                    fas fa-external-link-alt
+                  </v-icon></a
                     >. For the purpose of the indicators included in Scorecard,
                     some of these programs were combined (and others were not
                     relevant). Values of 5, 6, or ‘E’ in the Matrix yielded a
@@ -1292,7 +1298,7 @@ export default {
   },
   methods: {
     all() {
-      this.panels = [...Array(23).keys()].map((k, i) => i)
+      this.panels = [...Array(24).keys()].map((k, i) => i)
     },
     // Reset the panel
     none() {
