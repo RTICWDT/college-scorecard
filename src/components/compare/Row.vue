@@ -42,7 +42,7 @@
         // Math.round(parseFloat(completionRatePell) * 100) : Math.round(parseFloat(completionRate) * 100)
         value: config.medianToggle === 'group' ? toggleGraduationRate[0] * 100 : toggleGraduationRate[1] * 100,
         style: { height: '60px' },
-        show: !config.showPell        
+        show: !config.showPellOnly
       }"         
       :upperStyleOverride="
         checkUpperStyle(

@@ -881,8 +881,9 @@
                       :tab-style="{
                         width: '32%',
                       }"
-                      v-show="showResource === 'institutions' && !showPellOnly"
+                      v-show="showResource === 'institutions'"
                       class="mt-10"
+                      v-if="!showPellOnly"
                     />    
 
                   <compare-section
