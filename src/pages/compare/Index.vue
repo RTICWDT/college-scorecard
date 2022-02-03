@@ -881,7 +881,7 @@
                       :tab-style="{
                         width: '32%',
                       }"
-                      v-show="showResource === 'institutions'"
+                      v-show="showResource === 'institutions' && !showPellOnly"
                       class="mt-10"
                     />    
 
