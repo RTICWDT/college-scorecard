@@ -42,8 +42,8 @@
                 <v-card
                   class="pa-2 text-center fill-height d-flex align-center justify-center"
                   color="grey lighten-4"
-                  @click="trackDownload('FullDataDocumentation.pdf')"
-                  :href="$url('/assets/FullDataDocumentation.pdf')"
+                  @click="trackDownload('InstitutionDataDocumentation.pdf')"
+                  :href="$url('/assets/InstitutionDataDocumentation.pdf')"
                   target="_blank"
                   hover
                 >
