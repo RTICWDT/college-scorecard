@@ -233,8 +233,8 @@ export default {
         this.displayFOS = _.cloneDeep(this.cipTwoNestedCipFour)
         return null
       }
-      console.log("Search")
-      console.log(value)
+      //console.log("Search")
+      //console.log(value)
 
       let displayData = this.cipTwoNestedCipFour.reduce((returnArray, cip2) => {
         let tmpFieldsArray = cip2.fields.reduce((cip4Array, cip4) => {

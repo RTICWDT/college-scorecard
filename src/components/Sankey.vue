@@ -157,7 +157,7 @@ export default {
             outcome_cohort_data.part_time.not_first_time[subgroup],
         },
       }   
-      console.log(this.outcome_cohorts)   
+      //console.log(this.outcome_cohorts)   
     },
 
     drawSankeyChart() {

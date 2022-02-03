@@ -681,7 +681,7 @@ export default {
       )
     },
     handleFieldOfStudyChipClose(fieldOfStudy) {
-      console.log(fieldOfStudy)
+      //console.log(fieldOfStudy)
 
       // Remove from arrays
       this.input.cip4 = this.input.cip4.filter((cip4) => {

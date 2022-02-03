@@ -332,7 +332,7 @@ export default {
   },
   data() {
     return {
-
+        
     }
   },
   mounted() {
@@ -345,8 +345,13 @@ export default {
     fieldsOfStudy() {
       return this.$store.state.fos
     },
-    selectedSchools() {
-      return _.map(this.$store.state.institutions, "schoolId");
+    selectedSchools: {
+      get() {
+        return _.map(this.$store.state.institutions, "schoolId");
+      },
+      set(school) {
+        return school;
+      }
     },
     selectedFieldsOfStudy: {
       get() {

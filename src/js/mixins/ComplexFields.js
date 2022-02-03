@@ -188,7 +188,6 @@ export default {
         },
         completionRate() {
             if (!this.school) return null;
-            console.log(this.school);
             let OM = _.get(this.school, this.fields.COMPLETION_OM);
             let G150_4 = _.get(this.school, this.fields.COMPLETION_150_4);
             let G150_LT4 = _.get(this.school, this.fields.COMPLETION_150_LT4);

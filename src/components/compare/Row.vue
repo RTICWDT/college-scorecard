@@ -295,7 +295,7 @@ export default {
         )
       } else {
         if (this.config.showPellOnly) {
-          console.log(this[this.config.altComputedField])
+          //console.log(this[this.config.altComputedField])
           return this[this.config.altComputedField]
         }
         else
