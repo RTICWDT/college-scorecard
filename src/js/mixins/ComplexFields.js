@@ -568,10 +568,10 @@ export default {
                     categoryText = this.schoolName + " does not require admission test scores (SAT/ACT) during the application process and does not recommend that students provide them. ";
                     break;
                 case 4:
-                    categoryText = "The admission test score (SAT/ACT) policy for " + this.schoolName + " is unknown. "; 
+                    categoryText = ""; 
                     break;     
                 case null:
-                    categoryText = "The admission test score (SAT/ACT) policy for " + this.schoolName + " is unknown. "; 
+                    categoryText = ""; 
                     break;                                                                                 
             }
             return acceptanceText + categoryText + rangeText;

@@ -585,8 +585,8 @@
                           Removal of Percentage Earning above High School
                           Graduate given caveats described in the
                           <a
-                            @click="trackDownload('FullDataDocumentation.pdf')"
-                            :href="'/assets/FullDataDocumentation.pdf'"
+                            @click="trackDownload('InstitutionDataDocumentation.pdf')"
+                            :href="'/assets/InstitutionDataDocumentation.pdf'"
                             target="_blank"
                             >Documentation Report</a
                           >. As this was the default sort of the search results,
