@@ -1332,19 +1332,9 @@
                           Median Total Debt After Graduation
                           <tooltip
                             v-if="
-                              aidLoanSelect === 'fed' &&
-                                !aidShowMedianDebtWithPrior
+                              aidLoanSelect === 'fed'
                             "
                             definition="avg-debt"
-                            :isBranch="isBranch"
-                            :limitedFoS="fieldsLink"
-                          />
-                          <tooltip
-                            v-else-if="
-                              aidLoanSelect === 'fed' &&
-                                aidShowMedianDebtWithPrior
-                            "
-                            definition="avg-debt-all-schools"
                             :isBranch="isBranch"
                             :limitedFoS="fieldsLink"
                           />
@@ -1413,20 +1403,9 @@
                         <h2 class="mb-3 mt-3">
                           Typical Monthly Loan Payment<tooltip
                             v-if="
-                              aidLoanSelect === 'fed' &&
-                                !aidShowMedianDebtWithPrior
+                              aidLoanSelect === 'fed'
                             "
                             definition="avg-loan-payment"
-                            :isBranch="isBranch"
-                            :limitedFoS="fieldsLink"
-                            style="padding-left:2px;"
-                          />
-                          <tooltip
-                            v-else-if="
-                              aidLoanSelect === 'fed' &&
-                                aidShowMedianDebtWithPrior
-                            "
-                            definition="avg-loan-payment-all-schools"
                             :isBranch="isBranch"
                             :limitedFoS="fieldsLink"
                             style="padding-left:2px;"
