@@ -57,3 +57,17 @@ export GRIDSOME_API_SIGNUP_KEY=<API_KEY_HERE>
 export GRIDSOME_RECAPTCHA_KEY=<RECAPTCHA_API_KEY_HERE>
 export GRIDSOME_GOOGLE_MAPS_KEY=<GOOGLE_MAPS_API_KEY_HERE>
 ```
+
+## Front End Development
+
+### Stylesheets
+- We use [Sass] to generate our CSS.  Webpack is configured to translate standalone Sass files or styles within [VueJS Single File Components](https://vuejs.org/v2/guide/single-file-components.html)
+
+### JavaScript
+See the [JavaScript docs](js/#readme) for more information on our scripting tools and
+workflows.
+
+### Accessibility
+- We adhere to [Web Content Accessibility Guidelines 2.0](https://www.w3.org/WAI/WCAG20/quickref/),
+  level AA.
+- We test the site's accessibility with [pa11y](http://pa11y.org/).
