@@ -167,7 +167,6 @@ export default {
   computed: {
     displayGradRate() {
       if (!this.completionRateOverall) {
-        console.log(!this.completionRateOverall)
         return "N/A"
       } else {
         return this.$options.filters.numeral(
@@ -205,10 +204,16 @@ export default {
           )
         )
       }*/
-      return this.$options.filters.numeral(this.medianEarnings, "$0a")
+      if (!this.medianEarnings) {
+        return "N/A";
+      }
+      else {
+        return this.$options.filters.numeral(this.medianEarnings, "$0a")
+      }
     },
     displayAvgCost() {
       if (!this.netPrice) {
+        console.log(this.netPrice)
         return "N/A"
       } else {
         return this.$options.filters.numeral(this.netPrice, "$0a")

@@ -110,7 +110,6 @@ export default function (Vue, { router, head, isClient, appOptions }) {
         }
       },
       toggleDrawer(state, value = null) {
-        console.log("state: " + state + "val: " + value)
         if (state.fos.length == 0 && state.institutions.length == 0)
         {
           state.drawerOpen = false;
