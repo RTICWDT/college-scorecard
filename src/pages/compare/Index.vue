@@ -1321,7 +1321,7 @@
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
                     :config="{
-                      computedField: 'acceptanceRate',
+                      computedField: 'acceptanceRateActual',
                       color: '#1874DC',
                       max: 100,
                       type: 'percent',

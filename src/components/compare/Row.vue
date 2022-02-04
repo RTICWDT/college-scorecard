@@ -94,7 +94,7 @@
     </div>     
 
     <horizontal-bar
-      v-if="school && config.chart == 'HorizontalBar' && value"
+      v-if="school && config.chart == 'HorizontalBar' && value != null"
       :value="value"
       :min="0"
       :max="config.max"
@@ -104,7 +104,7 @@
       :labels="true"
     ></horizontal-bar>
     <div
-      v-if="school && config.chart == 'HorizontalBar' && !value"
+      v-if="school && config.chart == 'HorizontalBar' && value == null"
       class="data-na"
     >
       Data Not Available
@@ -283,8 +283,11 @@ export default {
       } else if (this.config.currentIncomeFilter) {
         return this.income[this.config.currentIncomeFilter]
       } else if (this.config.type == "percent") {
+        console.log(this.config.altComputedField + " : " + this[this.config.computedField])
           if (this.config.showPellOnly)
             return Math.round(this[this.config.altComputedField] * 100)
+          else if (_.get(this.school, this.fields["OPEN_ADMISSIONS"]) == 1 && this.config.computedField == 'acceptanceRateActual')
+            return 100   
           else
             return Math.round(this[this.config.computedField] * 100)
       } else if (this.config.multiRangeReactive) {
