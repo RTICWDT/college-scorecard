@@ -207,7 +207,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "~/sass/_variables";
+@import "~/sass/_variables.scss";
 .v-input--selection-controls.v-input .v-label {
   color: #ffffff !important;
 }

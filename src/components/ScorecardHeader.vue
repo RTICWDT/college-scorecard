@@ -1,5 +1,5 @@
 <style lang="scss" scoped>
-@import "~/sass/_variables";
+@import "~/sass/_variables.scss";
 header {
   z-index: 101 !important;
   .logo {

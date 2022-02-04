@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
-import "~/sass/_variables";
+@import "~/sass/_variables.scss";
 
 Vue.use(Vuetify)
 

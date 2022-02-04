@@ -1,5 +1,5 @@
 <style lang="scss">
-@import "~/sass/_variables";
+@import "~/sass/_variables.scss";
 
 .canned-search-wrapper {
   margin-bottom: 8px;

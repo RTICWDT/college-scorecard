@@ -98,7 +98,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "~/sass/_variables";
+@import "~/sass/_variables.scss";
 .compareBlocks {
   border-left: 1px solid $dark-gray;
 }

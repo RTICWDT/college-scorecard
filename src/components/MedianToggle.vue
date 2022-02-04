@@ -38,7 +38,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "~/sass/_variables";
+@import "~/sass/_variables.scss";
 
 #median-toggle-slider {
   background-color: $institution-accent-color;

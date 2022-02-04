@@ -17,7 +17,7 @@
   </v-switch>
 </template>
 <style lang="scss">
-@import "~/sass/_variables";
+@import "~/sass/_variables.scss";
 .v-input--switch.v-input .v-label {
   color: $darker-green !important;
   font-weight: bold;

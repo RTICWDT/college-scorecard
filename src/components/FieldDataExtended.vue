@@ -169,7 +169,7 @@
 </template>
 
 <style lang="scss">
-@import "~/sass/_variables";
+@import "~/sass/_variables.scss";
 
 .fos-field-data-container {
   /*padding: 4px 0px;*/

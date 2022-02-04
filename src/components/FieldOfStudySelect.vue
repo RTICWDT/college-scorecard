@@ -80,7 +80,7 @@
 </template>
 
 <style lang="scss">
-@import "~/sass/_variables";
+@import "~/sass/_variables.scss";
 .field-of-study-select-search-container {
   .v-text-field--outlined fieldset {
     color: $fos-color-gold !important;
