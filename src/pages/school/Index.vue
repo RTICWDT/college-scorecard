@@ -2118,16 +2118,16 @@
                         Acceptance Rate
                         <tooltip definition="acceptance-rate" />
                       </h2>
-                      <div v-if="openAdmissions != 1 && acceptanceRate">
+                      <div v-if="openAdmissions != 1 && acceptanceRateActual">
                       <donut
                         color="#1874DC"
-                        :value="acceptanceRate * 100"
+                        :value="acceptanceRateActual * 100"
                         chart-id="acceptance-chart"
                         :height="200"
                         label="Acceptance Rate"
                       ></donut>
                           <div class="sr-only">
-                            Acceptance Rate: {{ Math.round(acceptanceRate * 100)+"%" }}
+                            Acceptance Rate: {{ Math.round(acceptanceRateActual * 100)+"%" }}
                           </div>                          
                         </div>
                       <div v-else-if="openAdmissions == 1">
