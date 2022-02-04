@@ -1,5 +1,6 @@
 <template>
-<div :class="labelPrefix ? 'median-toggle-container d-flex align-end' : 'd-flex align-end' ">
+
+<div :class="labelPrefix ? 'median-toggle-container align-end flex' : 'align-end flex' ">
   <em v-if="!labelPrefix" class="d-flex  mr-2">Show Midpoint for:</em>
   <v-tabs
     id="median-toggle"
@@ -33,6 +34,7 @@
     </v-tab>
   </v-tabs>
   </div>
+
 </template>
 
 <style lang="scss" scoped>
@@ -41,6 +43,9 @@
 #median-toggle-slider {
   background-color: $institution-accent-color;
 
+}
+.flex {
+  display: flex;
 }
 
 .median-toggle-container {
@@ -96,7 +101,9 @@
 </style>
 
 <script>
+import Transition from '@/pages/school/Transition.vue'
 export default {
+  components: { Transition },
   props: {
     displayToggle: {
       type: String,

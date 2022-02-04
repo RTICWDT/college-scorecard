@@ -872,6 +872,7 @@
                   >Graduation & Retention</v-expansion-panel-header
                 >
                 <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
+                  <v-expand-transition>
                     <median-toggle
                       :display-toggle="medianToggle"
                       @median-switch-click="handleMedianToggle"
@@ -882,10 +883,9 @@
                         width: '32%',
                       }"
                       v-show="(showResource === 'institutions' && !showPellOnly)"
-                      class="mt-10 fadeAway"
-                      v-if="!showPellOnly"
+                      class="mt-10"
                     />    
-
+                  </v-expand-transition>
                   <compare-section
                     :schools="schools"
                     title="Graduation Rate"

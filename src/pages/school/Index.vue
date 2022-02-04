@@ -1105,8 +1105,9 @@
                       </v-checkbox>                      
                       </v-col>  
                       </v-row>
+                        <v-expand-transition>
                         <median-toggle
-                          v-if="!showPellOnlyGrad"
+                          v-show="!showPellOnlyGrad"
                           :display-toggle="medianToggle"
                           :control-tab="controlTab"
                           @median-switch-click="handleMedianToggle"
@@ -1114,6 +1115,7 @@
                           :group-name="this.$options.filters.yearsText(groupName) + ' Schools'"
                           class="pt-0 pb-8"
                         />
+                        </v-expand-transition>
                        <v-row>
                       <v-col cols="2"></v-col>
                       <v-col cols="8">                       
