@@ -33,7 +33,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "~/sass/_variables";
+@import "~/sass/_variables.scss";
 
 #context-toggle-slider {
   background-color: $institution-accent-color;

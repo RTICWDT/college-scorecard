@@ -1443,7 +1443,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "~/sass/_variables";
+@import "~/sass/_variables.scss";
 
 .fadeAway {
   display:none;
