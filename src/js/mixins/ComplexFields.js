@@ -423,7 +423,7 @@ export default {
         },
         acceptanceRate() {
             if (!this.school) return null;
-            return _.get(this.school, this.fields['ACCEPTANCE_RATE'])
+            return _.get(this.school, this.fields['ACCEPTANCE_RATE_CONSUMER'])
         },
         openAdmissions() {
             if (!this.school) return null;
