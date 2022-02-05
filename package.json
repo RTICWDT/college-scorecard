@@ -1,6 +1,6 @@
 {
   "name": "college-scorecard",
-  "private": false,
+  "private": true,
   "version": "2.7.0",
   "scripts": {
     "build": "gridsome build",
