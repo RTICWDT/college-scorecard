@@ -1,0 +1,11 @@
+{
+    "default": "Defaulted",
+    "deferment": "Deferment",
+    "discharge": "Discharged",
+    "fullypaid": "Paid in Full",
+    "delinquent": "Delinquent",
+    "noprogress": "Not Making Progress",
+    "forbearance": "Forbearance",
+    "makingprogress": "Making Progress"
+  }
+  

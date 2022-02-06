@@ -11,12 +11,6 @@ if (branch === 'master') {
 } else if (branch && user && repo) {
   var path = [user, repo, branch].join('/');
   url = env.FEDERALIST_URL+ "/preview/" + path.toLowerCase();
-  {
-    url = 'https://federalist-a267b602-ea49-4771-8115-ea94f984a5ca.app.cloud.gov/preview/' + path.toLowerCase();
-  }
-  else
-  {
-  }
 }
 
 if (module.parent) {
