@@ -1,120 +1,30 @@
 {
   "name": "college-scorecard",
-  "version": "2.4.0",
-  "description": "Scripts for the college-scorecard project.",
-  "author": "RTI International",
+  "private": true,
+  "version": "2.7.0",
   "scripts": {
-    "serve": "bundle exec jekyll serve --baseurl=''",
-    "build": "npm run clean && webpack --config webpack.prod.vue.config.js",
-    "build:dev": "npm run clean && webpack --devtool source-map --config webpack.vue.config.js",
-    "watch": "npm run clean && webpack --devtool source-map --config webpack.vue.config.js -w --watch-poll",
-    "test:e2e": "codeceptjs run --steps",
-    "test:unit": "jest",
-    "test:a11y": "./test/a11y.js",
-    "clean": "rm -f js/app.* && rm -f css/app.*"
+    "build": "gridsome build",
+    "develop": "gridsome develop",
+    "explore": "gridsome explore",
+    "federalist": "gridsome build"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.6.0",
-    "async": "^3.1.0",
-    "axios": "^0.21.2",
-    "chart.js": "^2.8.0",
+    "@fortawesome/fontawesome-free": "^5.15.3",
+    "@mdi/font": "^5.9.55",
+    "axios": "^0.21.1",
+    "chart.js": "^2.9.4",
     "chartjs-plugin-datalabels": "^0.7.0",
-    "core-js": "^2.6.10",
-    "jquery": "^3.5.0",
-    "leaflet": "^0.7.7",
-    "lodash": "^4.17.21",
-    "vue-chartjs": "^3.4.2",
-    "vue-clipboard2": "^0.3.1",
-    "vue-numeral-filter": "^1.1.1",
-    "vue-recaptcha": "^1.3.0"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.6.4",
-    "@babel/core": "^7.6.4",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/preset-env": "^7.6.3",
-    "@fortawesome/fontawesome-free": "^5.11.2",
-    "@mdi/font": "^4.5.95",
-    "@vue/test-utils": "^1.0.0-beta.29",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^24.9.0",
-    "babel-loader": "^8.0.6",
-    "codeceptjs": "^2.3.5",
-    "css-loader": "^3.2.0",
-    "deepmerge": "^4.1.1",
-    "extend": "^3.0.2",
-    "fibers": "^4.0.3",
-    "file-loader": "^4.2.0",
-    "jest": "^25.3.0",
-    "jest-junit": "^9.0.0",
-    "jest-serializer-vue": "^2.0.2",
-    "jshint": "^2.10.2",
-    "mini-css-extract-plugin": "^0.8.0",
-    "minifyify": "^7.3.5",
-    "mocha": "^6.2.1",
+    "google-charts": "^2.0.0",
+    "gridsome": "^0.7.0",
+    "node-sass": "^5.0.0",
     "numeral": "^2.0.6",
-    "pa11y": "^4.13.2",
-    "puppeteer": "^1.20.0",
-    "request": "^2.88.0",
-    "sass": "^1.23.0",
-    "sass-loader": "^8.0.0",
-    "simple-statistics": "^1.0.1",
-    "sinon": "^1.17.7",
-    "spec-xunit-file": "0.0.1-3",
-    "stream-array": "^1.1.1",
-    "style-loader": "^1.0.0",
-    "terser-webpack-plugin": "^4.2.3",
-    "tito": "^0.4.0",
-    "uglify-js": "^3.6.1",
-    "vue": "^2.6.10",
-    "vue-cli-plugin-vuetify": "^0.6.3",
-    "vue-jest": "^3.0.5",
-    "vue-loader": "^15.7.1",
-    "vue-style-loader": "^4.1.2",
-    "vue-template-compiler": "^2.6.10",
-    "vuetify": "^2.3.18",
-    "vuetify-loader": "^1.2.2",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.12",
-    "xmlhttprequest": "^1.8.0"
-  },
-  "engines": {
-    "node": ">=10.0.0 <11.0.0"
-  },
-  "license": "UNLICENSED",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/RTICWDT/college-scorecard.git"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "vue"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "js/src"
-    ],
-    "transform": {
-      ".*\\.(vue)$": "vue-jest",
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
-    },
-    "testRegex": "(/__tests__/unit/.*|(\\.|/)(test|spec))\\.[jt]sx?$",
-    "transformIgnorePatterns": [
-      "<rootDir>/node_modules/(?!vue-numeral-filter/.*)"
-    ],
-    "snapshotSerializers": [
-      "jest-serializer-vue"
-    ]
-  },
-  "bugs": {
-    "url": "https://github.com/RTICWDT/college-scorecard/issues"
-  },
-  "homepage": "https://github.com/RTICWDT/college-scorecard#readme",
-  "main": "babel.config.js",
-  "directories": {
-    "doc": "docs",
-    "test": "test"
+    "sass-loader": "10.1.1",
+    "vue-chartjs": "^3.5.1",
+    "vue-clipboard2": "^0.3.1",
+    "vue-numeral-filter": "^2.0.0",
+    "vue-recaptcha": "^1.3.0",
+    "vuetify": "^2.4.7",
+    "vuex": "^3.6.2",
+    "vuex-persist": "^3.1.3"
   }
 }
