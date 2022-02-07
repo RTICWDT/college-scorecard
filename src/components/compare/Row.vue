@@ -17,7 +17,7 @@
       :max="config.max"
       :median="{
         label: 'Midpoint',
-        value: config.medianToggle === 'group' ? toggleAverageAnnualCost[0] : toggleAverageAnnualCost[1],
+        value: config.medianToggle === 'group' ? fakeAverageAnnualCost[_.get(school, fields['PREDOMINANT_DEGREE'])][0] : fakeAverageAnnualCost[_.get(school, fields['PREDOMINANT_DEGREE'])][1],
         style: { height: '60px' },
         show: true
       }"                      
@@ -40,7 +40,7 @@
         label: 'Midpoint',
         //  label: showPellOnlyGrad ? Math.round(parseFloat(completionRatePell) * 100) + '%' :  Math.round(parseFloat(completionRate) * 100) + '%',
         // Math.round(parseFloat(completionRatePell) * 100) : Math.round(parseFloat(completionRate) * 100)
-        value: config.medianToggle === 'group' ? toggleGraduationRate[0] * 100 : toggleGraduationRate[1] * 100,
+        value: config.medianToggle === 'group' ? fakeGraduationRate[_.get(school, fields['PREDOMINANT_DEGREE'])][0] * 100 : fakeGraduationRate[_.get(school, fields['PREDOMINANT_DEGREE'])][1] * 100,
         style: { height: '60px' },
         show: !config.showPellOnly
       }"         
@@ -68,7 +68,7 @@
       :max="config.max"
       :median="{
         label: 'Midpoint',
-        value: config.medianToggle === 'group' ? toggleMedianEarnings[0] : toggleMedianEarnings[1],
+        value: config.medianToggle === 'group' ? fakeMedianEarnings[_.get(school, fields['PREDOMINANT_DEGREE'])][0] : fakeMedianEarnings[_.get(school, fields['PREDOMINANT_DEGREE'])][1],
         style: { height: '60px' },
         show: true        
       }"
