@@ -2507,7 +2507,7 @@ export default {
       return document.referrer || "/search/"
     },
     shareLink() {
-      return encodeURI(this.$url(window.location.href)) || null
+      return encodeURI(window.location.href) || null
     },
     groupName() {
       return _.get(this.school, this.fields["PREDOMINANT_DEGREE"])
