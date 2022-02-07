@@ -173,11 +173,11 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   }) 
   head.meta.push({
     name: 'og:image',
-    content: '/img/Scorecard-Preview-2022.jpg'
+    content: 'https://collegescorecard.ed.gov/img/Scorecard-Preview-2022.jpg'
   })   
   head.meta.push({
     name: 'twitter:image',
-    content: '/img/Scorecard-Preview-2022.jpg'  
+    content: 'https://collegescorecard.ed.gov/img/Scorecard-Preview-2022.jpg'  
   })    
   
   head.script.push({
