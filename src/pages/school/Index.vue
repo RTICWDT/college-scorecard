@@ -165,7 +165,7 @@
                       {{ completionRate |  numeral("0%") }}
                     </h2>
                     <div  class="data-na pb-3" v-else>Data Not Available</div>
-                    <em v-if="completionRate">Midpoint for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) + " " : "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? toggleGraduationRate[0] : toggleGraduationRate[1] ,'0%')}}</em>                    
+                    <em v-if="completionRate && (this.medianToggle === 'group' ? toggleGraduationRate[0] : toggleGraduationRate[1])">Midpoint for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName) + " " : "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? toggleGraduationRate[0] : toggleGraduationRate[1] ,'0%')}}</em>                    
                     <vertical-bar-median
                       v-if="completionRate"
                       :value="{
@@ -221,7 +221,7 @@
                       {{ netPrice | numeral("$0,0") }}
                     </h2>
                     <div class="data-na pb-3" v-else>Data Not Available</div>
-                    <em v-if="netPrice">Midpoint for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName): "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? Math.round(parseFloat(toggleAverageAnnualCost[0])) : Math.round(parseFloat(toggleAverageAnnualCost[1])) ,'$0,0')}}</em>
+                    <em v-if="netPrice && (this.medianToggle === 'group' ? toggleAverageAnnualCost[0] : toggleAverageAnnualCost[1])">Midpoint for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName): "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? Math.round(parseFloat(toggleAverageAnnualCost[0])) : Math.round(parseFloat(toggleAverageAnnualCost[1])) ,'$0,0')}}</em>
 
                     <horizontal-bar-median
                       v-if="netPrice"
@@ -284,7 +284,7 @@
                       {{ medianEarnings | numeral("$0,0") }}
                     </h2>
                     <div class="data-na pb-3" v-else>Data Not Available</div>
-                    <em v-if="medianEarnings">Midpoint for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName): "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? Math.round(parseFloat(toggleMedianEarnings[0])) : Math.round(parseFloat(toggleMedianEarnings[1])) ,'$0,0')}}</em>
+                    <em v-if="medianEarnings && (this.medianToggle === 'group' ? toggleMedianEarnings[0] : toggleMedianEarnings[1])">Midpoint for {{this.medianToggle === 'group' ? this.$options.filters.yearsText(groupName): "All"}} Schools: {{this.$options.filters.numeral(this.medianToggle === 'group' ? Math.round(parseFloat(toggleMedianEarnings[0])) : Math.round(parseFloat(toggleMedianEarnings[1])) ,'$0,0')}}</em>
 
                     <horizontal-bar-median
                       v-if="medianEarnings"
@@ -2948,5 +2948,21 @@ export default {
       }
     },
   },
+ metaInfo: {
+    //title: this.schoolName + " | College Scorecard",
+    meta: [
+      {
+        key: 'og:title',
+        name: 'og:title',
+        content: "College Scorecard"
+      },     
+      {
+        key: 'twitter:title',
+        name: 'twitter:title',
+        content: "College Scorecard"
+      },       
+    ]
+
+  }
 }
 </script>

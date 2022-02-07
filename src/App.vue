@@ -62,14 +62,7 @@ export default {
         }             
       ],
       meta: [
-        {
-          name: 'og:image',
-          content: this.$url('/img/Scorecard-Preview.jpg')
-        },
-        {
-          name: 'twitter:image',
-          content: this.$url('/img/Scorecard-Preview.jpg')
-        }        
+        
       ]
     }
   },

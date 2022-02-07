@@ -66,7 +66,7 @@
 
     <v-row class="compare-drawer-content-container mb-md-4">
       <v-col cols="12" md="6">
-        <div class="compare-drawer-section-wrapper my-4">
+        <div class="ml-n6 my-4">
           <div class="compare-drawer-section-header-wrapper ml-4">
         <div
           class="compare-icon-wrapper d-inline-block mr-2"
