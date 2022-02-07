@@ -535,6 +535,49 @@ export default {
                     1 : _.get(this.school, fields['COMPLETION_MIDPOINT_ALL'])}
             return medians;
         },     
+        fakeMedianEarnings() {
+            var medians = {
+                1 : 
+                    { 0 : 27754,
+                    1 : 37078 },
+                2 : 
+                    { 0 : 36066,
+                    1 : 37078 },
+                3 : 
+                    { 0 : 47975.5,
+                    1 : 37078 },                                
+            }
+
+            return medians;
+        },
+        fakeAverageAnnualCosts() {
+            var medians = {
+                1 : 
+                    { 0 : 14805.5,
+                    1 : 15387.5 },
+                2 : 
+                    { 0 : 8430,
+                    1 : 15387.5 },
+                3 : 
+                    { 0 : 19202,
+                    1 : 15387.5 },                                
+            }
+            return medians;
+        },      
+        fakeGraduationRate() {
+            var medians = {
+                1 : 
+                    { 0 : 0.6842,
+                    1 : 0.5845 },
+                2 : 
+                    { 0 : 0.2924,
+                    1 : 0.5845 },
+                3 : 
+                    { 0 : 0.5623,
+                    1 : 0.5845 },                                
+            }
+            return medians;
+        },        
         standardizedTestText() {
             var categoryText = "";
             var rangeText = "";

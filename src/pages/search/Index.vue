@@ -918,6 +918,18 @@ export default {
   },
  metaInfo: {
     title: 'Search',
-  }    
+    meta: [
+      {
+        key: 'og:title',
+        name: 'og:title',
+        content: "Search | College Scorecard"
+      },     
+      {
+        key: 'twitter:title',
+        name: 'twitter:title',
+        content: "Search | College Scorecard"
+      },       
+    ]     
+  }
 };
 </script>
