@@ -266,7 +266,7 @@
                 <hr/>
                 <p class="mx-10">
                   Explore the  
-                 <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://bls.gov/ooh/'))"
+                 <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.bls.gov/ooh/'))"
                      target="_blank"
                      @click="trackOutboundLink($event)"
                   >
