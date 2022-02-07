@@ -1,8 +1,9 @@
 {
-  "compilerOption": {
-    "allowJs": true
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "typeAcquisition": { 
-    "include": [ "jest" ] 
-  }
+  "exclude": ["node_modules", "dist"]
 }

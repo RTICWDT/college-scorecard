@@ -38,8 +38,8 @@ Scenario('Visit school/fields', (I) => {
 });
 
 // Data Pages
-Scenario('Visit /data', (I) => {
-  I.amOnPage('/data');
+Scenario('Visit /data/home', (I) => {
+  I.amOnPage('/data/home');
   // Check for Mounted
   I.seeElement('.v-application');
   // Check for page element.
