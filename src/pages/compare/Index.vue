@@ -2106,6 +2106,18 @@ export default {
   },
  metaInfo: {
     title: 'Compare',
+    meta: [
+      {
+        key: 'og:title',
+        name: 'og:title',
+        content: "Compare | College Scorecard"
+      },     
+      {
+        key: 'twitter:title',
+        name: 'twitter:title',
+        content: "Compare | College Scorecard"
+      },       
+    ]    
   }    
 }
 </script>
