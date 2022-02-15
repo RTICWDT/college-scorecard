@@ -813,7 +813,6 @@ export default {
       this.location.error = null
     },
     handleSchoolNameSelected(school) {
-      console.log('sarch! ' + school)
       if (typeof school == "string") {
         // this.input.name = school;
         this.input.search = school

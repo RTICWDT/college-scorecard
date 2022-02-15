@@ -71,25 +71,14 @@ export default {
       return true
     },
     runSearch: _.debounce(function(newVal) {
-      //if (newVal) {
+      if (newVal) {
         this.isLoading = true
-        if (newVal) {
-          var query = {
-            fields: [fields.ID, fields.NAME, fields.ALIAS, fields.SEARCH].join(
-              ","
-            ),
-            per_page: 20,
-            sort: `alias:asc`, // Not perfect, helps to ensure items with alias are on first page.
-          }
-        }
-        else {
-          var query = {
-            fields: [fields.ID, fields.NAME,, fields.SEARCH].join(
-              ","
-            ),
-            per_page: 20,
-            sort: `name:asc`, // Not perfect, helps to ensure items with alias are on first page.
-          }          
+        var query = {
+          fields: [fields.ID, fields.NAME, fields.ALIAS, fields.SEARCH].join(
+            ","
+          ),
+          per_page: 20,
+          sort: `alias:asc`, // Not perfect, helps to ensure items with alias are on first page.
         }
 
         query["school.search"] = newVal ? newVal : ""
@@ -144,7 +133,7 @@ export default {
             this.isLoading = false
           })
       //}
-    }, 300),
+    }, 300)
   },
   mounted() {
     this.search = this.initial_school
