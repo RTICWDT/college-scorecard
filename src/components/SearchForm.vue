@@ -784,10 +784,10 @@ export default {
         this.utility.location = "State"
       }
 
-      if (this.input.name != "") {
+      //if (this.input.name != "") {
         this.input.search = this.input.name
         this.input.name = ""
-      }
+     // }
     },
     processChangeEvent() {},
     //Reset form to default.

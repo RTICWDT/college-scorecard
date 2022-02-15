@@ -20,6 +20,8 @@
       @update:search-input="runSearch"
       aria-label="Name Search"
       no-filter
+      clearable
+      @click:clear="runSearch"
     >
       <!-- TODO - Add markup for alias match or highlighting -->
       <template slot="item" slot-scope="{ parent, item }">
@@ -136,5 +138,10 @@ export default {
       this.search = null
     })
   },
+  watch: {
+      select() {
+        this.search = ''
+    }
+  }
 }
 </script>
