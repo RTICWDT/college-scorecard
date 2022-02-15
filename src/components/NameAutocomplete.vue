@@ -20,8 +20,6 @@
       @update:search-input="runSearch"
       aria-label="Name Search"
       no-filter
-      clearable
-      @click:clear="goToSchool"
     >
       <!-- TODO - Add markup for alias match or highlighting -->
       <template slot="item" slot-scope="{ parent, item }">
@@ -51,6 +49,10 @@ export default {
       type: String,
       default: null,
     },
+    searchEmptyName: {
+      type: Boolean,
+      default: true
+    }
   },
   data: () => ({
     items: [],
@@ -63,7 +65,7 @@ export default {
       if (this.search) {
         this.$emit("school-name-selected", this.search)
       }
-      else {
+      else if (this.searchEmptyName) {
         this.$emit("school-name-selected", "")
       }
     },
@@ -132,8 +134,8 @@ export default {
             this.items = []
             this.isLoading = false
           })
-      //}
-    }, 300)
+      }
+    }, 300),
   },
   mounted() {
     this.search = this.initial_school
