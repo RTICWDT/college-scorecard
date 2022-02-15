@@ -10,6 +10,7 @@
         :addExtraPadding="addExtraPadding"
         :rangeChartStyle="rangeChartStyle"
         :median="median"
+        :hideMedian="!median.value"
       ></range>
     </div>
     <div v-else class="data-na">

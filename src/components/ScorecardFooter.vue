@@ -5,7 +5,7 @@
       inset
       app
       absolute
-      height="100"
+      height="125"
       color="#00365e"
     >
       <p class="pb-2 mt-5 mb-0 body-2 white--text">

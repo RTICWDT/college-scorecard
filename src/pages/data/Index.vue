@@ -67,7 +67,7 @@
                   <v-card
                     class="pa-2 text-center fill-height d-flex align-center justify-center"
                     color="grey lighten-4"
-                    :href="$url('/school/transition/?url=' + encodeURIComponent('https://data.ed.gov/dataset/college-scorecard-all-data-files-through-6-2020/resources'))"
+                    :href="$url('/school/transition/?url=' + encodeURIComponent('https://data.ed.gov/dataset/college-scorecard-all-data-files/resources'))"
                     target="_blank"
                     @click="trackOutboundLink($event)"
                     hover

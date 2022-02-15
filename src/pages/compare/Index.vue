@@ -1639,7 +1639,7 @@ export default {
   },
   computed: {
     shareUrl() {
-      //let origin = process.isClient ? window.location.origin : ""
+      let origin = process.isClient ? window.location.origin : ""
       const compareBaseURL = "/compare/?"
 
       let paramArray = {
@@ -1673,7 +1673,7 @@ export default {
 
       // Return Composite URL
       //console.log(this.$url(compareBaseURL + this.prepareQueryString(paramArray)))
-      return this.$url(compareBaseURL + this.prepareQueryString(paramArray))
+      return origin + compareBaseURL + this.prepareQueryString(paramArray)
     },
     referrerLink() {
       let referrer
@@ -2106,6 +2106,18 @@ export default {
   },
  metaInfo: {
     title: 'Compare',
+    meta: [
+      {
+        key: 'og:title',
+        name: 'og:title',
+        content: "Compare | College Scorecard"
+      },     
+      {
+        key: 'twitter:title',
+        name: 'twitter:title',
+        content: "Compare | College Scorecard"
+      },       
+    ]    
   }    
 }
 </script>
