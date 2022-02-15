@@ -17,6 +17,7 @@
               <p>Try searching for a school by name:</p>
               <name-autocomplete
                 @school-name-selected="handleSchoolNameSelected"
+                :searchEmptyName="false"
               />
             </v-card>
           </div>
@@ -2176,6 +2177,7 @@
               v-if="sidebarSearchToggle === 'school'"
               id="school-name-auto-complete"
               @school-name-selected="handleSchoolNameSelected"
+              :searchEmptyName="false"
             />
 
             <field-of-study-search

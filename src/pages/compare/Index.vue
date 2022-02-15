@@ -1424,6 +1424,7 @@
                 v-if="sidebarSearchToggle === 'school'"
                 id="school-name-auto-complete"
                @school-name-selected="handleSchoolNameSelected"
+               :searchEmptyName="false"
               />
 
               <field-of-study-search
