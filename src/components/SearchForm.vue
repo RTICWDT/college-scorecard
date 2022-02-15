@@ -59,6 +59,7 @@
         <name-autocomplete
           @school-name-selected="handleSchoolNameSelected"
           :initial_school="input.search"
+          @school-name-cleared="handleSchoolNameSelected"
         />
       </div>
 
@@ -784,10 +785,10 @@ export default {
         this.utility.location = "State"
       }
 
-      //if (this.input.name != "") {
+      if (this.input.name != "") {
         this.input.search = this.input.name
         this.input.name = ""
-     // }
+      }
     },
     processChangeEvent() {},
     //Reset form to default.
@@ -812,6 +813,7 @@ export default {
       this.location.error = null
     },
     handleSchoolNameSelected(school) {
+      console.log('sarch! ' + school)
       if (typeof school == "string") {
         // this.input.name = school;
         this.input.search = school

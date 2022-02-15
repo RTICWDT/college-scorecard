@@ -21,7 +21,7 @@
       aria-label="Name Search"
       no-filter
       clearable
-      @click:clear="runSearch"
+      @click:clear="goToSchool"
     >
       <!-- TODO - Add markup for alias match or highlighting -->
       <template slot="item" slot-scope="{ parent, item }">
@@ -63,22 +63,36 @@ export default {
       if (this.search) {
         this.$emit("school-name-selected", this.search)
       }
+      else {
+        this.$emit("school-name-selected", "")
+      }
     },
     customFilter(item, queryText, itemText) {
       return true
     },
     runSearch: _.debounce(function(newVal) {
-      if (newVal) {
+      //if (newVal) {
         this.isLoading = true
-        var query = {
-          fields: [fields.ID, fields.NAME, fields.ALIAS, fields.SEARCH].join(
-            ","
-          ),
-          per_page: 20,
-          sort: `alias:asc`, // Not perfect, helps to ensure items with alias are on first page.
+        if (newVal) {
+          var query = {
+            fields: [fields.ID, fields.NAME, fields.ALIAS, fields.SEARCH].join(
+              ","
+            ),
+            per_page: 20,
+            sort: `alias:asc`, // Not perfect, helps to ensure items with alias are on first page.
+          }
+        }
+        else {
+          var query = {
+            fields: [fields.ID, fields.NAME,, fields.SEARCH].join(
+              ","
+            ),
+            per_page: 20,
+            sort: `name:asc`, // Not perfect, helps to ensure items with alias are on first page.
+          }          
         }
 
-        query["school.search"] = newVal
+        query["school.search"] = newVal ? newVal : ""
         query = this.prepareParams(query)
 
         let request = apiGet("/schools", query)
@@ -129,7 +143,7 @@ export default {
             this.items = []
             this.isLoading = false
           })
-      }
+      //}
     }, 300),
   },
   mounted() {
@@ -137,11 +151,6 @@ export default {
     this.$root.$on("search-form-reset", (e) => {
       this.search = null
     })
-  },
-  watch: {
-      select() {
-        this.search = ''
-    }
   }
 }
 </script>
