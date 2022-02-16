@@ -17,7 +17,7 @@
       :max="config.max"
       :median="{
         label: 'Midpoint',
-        value: config.medianToggle === 'group' ? fakeAverageAnnualCost[_.get(school, fields['PREDOMINANT_DEGREE'])][0] : fakeAverageAnnualCost[_.get(school, fields['PREDOMINANT_DEGREE'])][1],
+        value: config.medianToggle === 'group' ? fakeAverageAnnualCosts[_.get(school, fields['PREDOMINANT_DEGREE'])][0] : fakeAverageAnnualCosts[_.get(school, fields['PREDOMINANT_DEGREE'])][1],
         style: { height: '60px' },
         show: true
       }"                      
