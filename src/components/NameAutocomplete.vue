@@ -49,6 +49,10 @@ export default {
       type: String,
       default: null,
     },
+    searchEmptyName: {
+      type: Boolean,
+      default: true
+    }
   },
   data: () => ({
     items: [],
@@ -60,6 +64,9 @@ export default {
       this.items = []
       if (this.search) {
         this.$emit("school-name-selected", this.search)
+      }
+      else if (this.searchEmptyName) {
+        this.$emit("school-name-selected", "")
       }
     },
     customFilter(item, queryText, itemText) {
@@ -76,7 +83,7 @@ export default {
           sort: `alias:asc`, // Not perfect, helps to ensure items with alias are on first page.
         }
 
-        query["school.search"] = newVal
+        query["school.search"] = newVal ? newVal : ""
         query = this.prepareParams(query)
 
         let request = apiGet("/schools", query)
@@ -135,6 +142,6 @@ export default {
     this.$root.$on("search-form-reset", (e) => {
       this.search = null
     })
-  },
+  }
 }
 </script>

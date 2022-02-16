@@ -213,7 +213,7 @@ export default {
     },
     displayAvgCost() {
       if (!this.netPrice) {
-        console.log(this.netPrice)
+        //console.log(this.netPrice)
         return "N/A"
       } else {
         return this.$options.filters.numeral(this.netPrice, "$0a")

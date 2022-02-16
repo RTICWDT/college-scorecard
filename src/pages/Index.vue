@@ -59,6 +59,7 @@
                   <v-card class="pa-5 homepage-search-container">
                     <name-autocomplete
                       @school-name-selected="handleSchoolNameSelected"
+                      :searchEmptyName="false"
                     />
 
                     <div class="mt-5 text-right">
@@ -128,6 +129,7 @@
                   <v-expansion-panel-content>
                     <name-autocomplete
                       @school-name-selected="handleSchoolNameSelected"
+                      :searchEmptyName="false"
                     />
                   </v-expansion-panel-content>
                 </v-expansion-panel>

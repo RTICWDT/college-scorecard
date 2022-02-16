@@ -11,6 +11,7 @@
             </p>
             <name-autocomplete
               @school-name-selected="handleSchoolNameSelected"
+              :searchEmptyName="false"
             />
           </v-card>
         </v-col>
