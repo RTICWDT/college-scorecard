@@ -59,6 +59,7 @@
         <name-autocomplete
           @school-name-selected="handleSchoolNameSelected"
           :initial_school="input.search"
+          @school-name-cleared="handleSchoolNameSelected"
         />
       </div>
 

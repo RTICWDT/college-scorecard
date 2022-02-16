@@ -1029,7 +1029,7 @@
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
                     :config="{
-                      computedField: aidShowMedianDebtWithPrior ? 'parentPlusDebt' : 'parentPlusDebtAll',
+                      computedField: aidShowMedianDebtWithPrior ? 'parentPlusDebtAll' : 'parentPlusDebt',
                       color: '#1874DC',
                       type: 'currency',
                       max: 150000,
@@ -1424,6 +1424,7 @@
                 v-if="sidebarSearchToggle === 'school'"
                 id="school-name-auto-complete"
                @school-name-selected="handleSchoolNameSelected"
+               :searchEmptyName="false"
               />
 
               <field-of-study-search
