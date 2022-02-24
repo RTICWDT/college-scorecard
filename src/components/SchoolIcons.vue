@@ -150,7 +150,6 @@ export default {
       const cat = this.$options.filters.sizeCategory(
         _.get(this.school, this.fields["SIZE"], "-1")
       )
-      console.log(cat)
       switch (cat) {
         case "Small":
           return "Up to 2,000 undergraduates"
