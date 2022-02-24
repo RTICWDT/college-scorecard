@@ -1,6 +1,11 @@
 <template>
   <div class="icon-placement">
-    <v-btn @click.stop.prevent="showDialog = true" icon small class="align-start ml-n2">
+    <v-btn
+      @click.stop.prevent="showDialog = true"
+      icon
+      small
+      class="align-start ml-n2"
+    >
       <v-icon x-small allow-overflow :color="color" dark
         >fas fa-info-circle</v-icon
       >
@@ -36,6 +41,7 @@
               rounded
               color="secondary"
               class="px-4"
+              target="_blank"
               >More Information</v-btn
             >
           </p>
@@ -58,8 +64,8 @@
 }
 
 .icon-placement {
-  width:30px;
-  display:inline;
+  width: 30px;
+  display: inline;
 }
 </style>
 
@@ -101,7 +107,7 @@ export default {
     isPell: {
       type: Boolean,
       default: false,
-    },    
+    },
   },
   data() {
     return {
@@ -125,10 +131,8 @@ export default {
         return this.entry["compare"]
       else if (this.isGraduate && this.entry["graduate"])
         return this.entry["graduate"]
-      else if (this.isPell && this.entry["pell"])
-        return this.entry["pell"]      
-      else if (this.isPell)
-        return this.entry[this.version + "-pell"]            
+      else if (this.isPell && this.entry["pell"]) return this.entry["pell"]
+      else if (this.isPell) return this.entry[this.version + "-pell"]
       else return this.entry[this.version]
     },
     info() {
