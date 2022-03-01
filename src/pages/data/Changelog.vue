@@ -42,7 +42,7 @@
                     </li>
                     <li>
                       Adding a three-year median earnings measurement point to
-                      the Field of Student data files, overall and by Pell Grant
+                      the Field of Study data files, overall and by Pell Grant
                       recipient status and sex.
                     </li>
                     <li>

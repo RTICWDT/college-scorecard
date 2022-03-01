@@ -22,8 +22,8 @@
                 class="ml-2 green-text"
                 href="https://ed-public-download.app.cloud.gov/downloads/CollegeScorecard_Raw_Data_03102022.zip"
                 >Download
-                <v-icon right dark>
-                  mdi-cloud-download
+                <v-icon right dark x-small>
+                  fas fa-download
                 </v-icon></v-btn
               >
             </h2>
@@ -55,8 +55,8 @@
                 class="ml-2"
                 href="https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Institution_03102022.zip"
                 >Download
-                <v-icon right dark>
-                  mdi-cloud-download
+                <v-icon right dark x-small>
+                  fas fa-download
                 </v-icon></v-btn
               >
             </h4>
@@ -67,8 +67,8 @@
                 class="ml-2 btnText"
                 href=" https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Field-of-Study_03102022.zip"
                 >Download
-                <v-icon right dark>
-                  mdi-cloud-download
+                <v-icon right dark x-small>
+                  fas fa-download
                 </v-icon></v-btn
               >
             </h4>
@@ -87,7 +87,7 @@
                 @click="trackOutboundLink($event)"
                 target="_blank"
                 >StackExchange<v-icon x-small class="pl-1" color="#007000">
-                  fas fa-external-link-alt
+                  fas fa-download
                 </v-icon>
               </a>
               or email the help desk at
