@@ -131,18 +131,18 @@ export const fields = {
   // FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.earnings.median_earnings',
   // FIELD_OF_STUDY_DEBT:      'latest.programs.cip_4_digit.debt.median_debt',
 
-  FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.earnings.highest.2_yr.overall_median_earnings',
+  FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.earnings.highest.3_yr.overall_median_earnings',
   FIELD_OF_STUDY_DEBT:      'latest.programs.cip_4_digit.debt.staff_grad_plus.all.all_inst.median',
 
   // New Field Of Study Metrics
   // Full Paths
-  FIELD_OF_STUDY_EARNINGS_FED: 'latest.programs.cip_4_digit.earnings.highest.2_yr.median_fed',
-  FIELD_OF_STUDY_EARNINGS_PELL: 'latest.programs.cip_4_digit.earnings.highest.2_yr.median_pell',
+  FIELD_OF_STUDY_EARNINGS_FED: 'latest.programs.cip_4_digit.earnings.highest.3_yr.overall_median_earnings',
+  FIELD_OF_STUDY_EARNINGS_PELL: 'latest.programs.cip_4_digit.earnings.highest.3_yr.pell_median_earnings',
 
   // Relative Paths
   FOS_GRAD_COUNT: 'counts.ipeds_awards2',
-  FOS_EARNINGS_FED: 'earnings.3_yr.not_enrolled.median_earnings',
-  FOS_EARNINGS_PELL: 'earnings.3_yr.pell.not_enrolled.median_earnings',
+  FOS_EARNINGS_FED: 'earnings.highest.3_yr.overall_median_earnings',
+  FOS_EARNINGS_PELL: 'earnings.highest.3_yr.pell_median_earnings',
 
   // FOS_DEBT_MEDIAN: 'debt.test.federal.median_total_at',
   FOS_DEBT_MEDIAN: 'debt.staff_grad_plus.all.eval_inst.median',
