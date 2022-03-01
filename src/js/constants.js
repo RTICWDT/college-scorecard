@@ -141,8 +141,8 @@ export const fields = {
 
   // Relative Paths
   FOS_GRAD_COUNT: 'counts.ipeds_awards2',
-  FOS_EARNINGS_FED: 'earnings.highest["2_yr"].overall_median_earnings',
-  FOS_EARNINGS_PELL: 'earnings.highest["2_yr"].overall_median_earnings',
+  FOS_EARNINGS_FED: 'earnings.3_yr.not_enrolled.median_earnings',
+  FOS_EARNINGS_PELL: 'earnings.3_yr.pell.not_enrolled.median_earnings',
 
   // FOS_DEBT_MEDIAN: 'debt.test.federal.median_total_at',
   FOS_DEBT_MEDIAN: 'debt.staff_grad_plus.all.eval_inst.median',
