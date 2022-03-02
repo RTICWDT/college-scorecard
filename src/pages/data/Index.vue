@@ -87,7 +87,7 @@
                 @click="trackOutboundLink($event)"
                 target="_blank"
                 >StackExchange<v-icon x-small class="pl-1" color="#007000">
-                  fas fa-download
+                  fas fa-external-link-alt
                 </v-icon>
               </a>
               or email the help desk at

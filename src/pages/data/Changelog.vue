@@ -36,12 +36,12 @@
                   </p>
                   <ul>
                     <li>
-                      Refreshing 1-year earnings cohort to the Field of Study
+                      Refreshed 1-year earnings cohort to the Field of Study
                       data files and expanding to include disaggregation by Pell
                       Grant recipient status and sex.
                     </li>
                     <li>
-                      Adding a three-year median earnings measurement point to
+                      Added a three-year median earnings measurement point to
                       the Field of Study data files, overall and by Pell Grant
                       recipient status and sex.
                     </li>
