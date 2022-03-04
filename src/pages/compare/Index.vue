@@ -626,7 +626,7 @@
                       <horizontal-bar
                         v-if="
                           slotProps.school &&
-                            slotProps.school[fields.FOS_GRAD_COUNT]
+                            slotProps.school[fields.FOS_GRAD_COUNT] != null
                         "
                         :value="slotProps.school[fields.FOS_GRAD_COUNT]"
                         :min="0"
@@ -639,7 +639,7 @@
                       <div
                         v-if="
                           slotProps.school &&
-                            !slotProps.school[fields.FOS_GRAD_COUNT]
+                            slotProps.school[fields.FOS_GRAD_COUNT] == null
                         "
                         class="data-na"
                       >

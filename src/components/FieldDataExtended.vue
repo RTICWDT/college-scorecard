@@ -208,12 +208,12 @@
           <!--Number Of Graduates-->
           <td width="50%">
             <h4>
-              Number Of Graduates&nbsp;
+              Number of Graduates&nbsp;
               <tooltip definition="fos-number-of-graduates" />
             </h4>
           </td>
           <td>
-            <div v-if="_.get(fos, fields.FOS_GRAD_COUNT)">
+            <div v-if="_.get(fos, fields.FOS_GRAD_COUNT) != null">
               <span class="display-2 navy-text font-weight-bold">{{
                 _.get(fos, fields.FOS_GRAD_COUNT)
               }}</span>
