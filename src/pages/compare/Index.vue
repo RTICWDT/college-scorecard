@@ -2100,10 +2100,9 @@ export default {
         this.$router.push("/search/?search=" + encodeURIComponent(school))
       } else {
         this.$router.push(
-          "/search/?search=" +
-            encodeURIComponent(school["school.name"]) +
-            "&id=" +
-            school.id
+          "/search/?search=" + encodeURIComponent(school["school.name"]) //+
+          // "&id=" +
+          // school.id
         )
       }
     },

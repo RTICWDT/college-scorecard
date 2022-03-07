@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
-.search-form-dolflag-cb div .v-input__slot  {
-      align-items: start;
+.search-form-dolflag-cb div .v-input__slot {
+  align-items: start;
 }
 .search-form-degree-wrapper {
   .v-messages {
@@ -206,7 +206,9 @@
         ></check-range>
       </div>
 
-      <div v-show="!displayAllFilters" class="subhead-2">WIOA Programs&nbsp;<tooltip definition="wioa-participants"/></div>
+      <div v-show="!displayAllFilters" class="subhead-2">
+        WIOA Programs&nbsp;<tooltip definition="wioa-participants" />
+      </div>
       <v-checkbox
         id="search-form-dolflag"
         class="search-form-dolflag-cb my-0 py-0"
@@ -216,7 +218,7 @@
         color="secondary"
         hide-details
         v-show="!displayAllFilters"
-      ></v-checkbox>         
+      ></v-checkbox>
     </div>
 
     <div v-show="displayAllFilters" class="px-5 extraFilters">
@@ -419,7 +421,9 @@
         aria-labelledby="religions-affiliation-label"
       ></v-select>
 
-      <p class="subhead-2">WIOA Programs&nbsp;<tooltip definition="wioa-participants"/></p>
+      <p class="subhead-2">
+        WIOA Programs&nbsp;<tooltip definition="wioa-participants" />
+      </p>
       <v-checkbox
         id="search-form-dolflag"
         class="search-form-dolflag-cb my-0 py-0"
@@ -428,13 +432,30 @@
         value="true"
         color="secondary"
         hide-details
-      ></v-checkbox>        
+      ></v-checkbox>
     </div>
 
-    <div id="search-submit-container" class="pa-2 text-center" v-show="!autoSubmit">
-      <v-btn color="secondary" rounded @click="$emit('search-query',cleanInput)">Find Schools</v-btn>
+    <div
+      id="search-submit-container"
+      class="pa-2 text-center"
+      v-show="!autoSubmit"
+    >
+      <v-btn
+        color="secondary"
+        rounded
+        @click="$emit('search-query', cleanInput)"
+        >Find Schools</v-btn
+      >
     </div>
-      <v-btn type='submit' v-show="autoSubmit" class="sr-only" color="secondary" rounded @click="$emit('search-query',cleanInput)">Find Schools</v-btn>
+    <v-btn
+      type="submit"
+      v-show="autoSubmit"
+      class="sr-only"
+      color="secondary"
+      rounded
+      @click="$emit('search-query', cleanInput)"
+      >Find Schools</v-btn
+    >
   </v-form>
 </template>
 
@@ -501,7 +522,7 @@ export default {
         long: null,
         locale: [],
         search: "",
-        dolflag: null
+        dolflag: null,
       },
       utility: {
         rules: {
@@ -816,11 +837,11 @@ export default {
       if (typeof school == "string") {
         // this.input.name = school;
         this.input.search = school
-        this.input.id = null
+        // this.input.id = null
       } else {
         // this.input.name = school['school.name'];
         this.input.search = school["school.name"]
-        this.input.id = school.id
+        // this.input.id = school.id
       }
     },
   },
