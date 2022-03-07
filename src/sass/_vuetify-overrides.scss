@@ -141,6 +141,8 @@ html {
   .overline {
     font-family: $sans-serif !important;
     font-size: 12px !important;
+    line-height: 160% !important;
+    letter-spacing: normal !important;
   }
 
   #context-toggle {
