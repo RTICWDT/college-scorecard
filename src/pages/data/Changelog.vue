@@ -22,11 +22,11 @@
             <v-expansion-panels multiple v-model="panels">
               <v-expansion-panel>
                 <v-expansion-panel-header
-                  >March 10, 2022</v-expansion-panel-header
+                  >March 14, 2022</v-expansion-panel-header
                 >
                 <v-expansion-panel-content>
                   <p>
-                    On March 10, 2022, the Department updated the College
+                    On March 14, 2022, the Department updated the College
                     Scorecard website with more recent data for metrics from the
                     Internal Revenue Service (IRS).
                   </p>
