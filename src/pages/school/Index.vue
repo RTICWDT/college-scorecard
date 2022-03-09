@@ -565,7 +565,7 @@
                               v-if="
                                 _.get(
                                   selectedFOSDetail,
-                                  'earnings.highest.2_yr.overall_median_earnings'
+                                  fields.FOS_EARNINGS_FED
                                 )
                               "
                             >
@@ -573,7 +573,7 @@
                                 {{
                                   _.get(
                                     selectedFOSDetail,
-                                    "earnings.highest.2_yr.overall_median_earnings"
+                                    fields.FOS_EARNINGS_FED
                                   ) | numeral("$0,0")
                                 }}
                               </h5>
@@ -2828,10 +2828,15 @@ export default {
         return []
       } else if (fos.length) {
         for (let q = 0; q < fos.length; q++) {
-          fos[q].ipeds_award_count = fos[q].counts.ipeds_awards2
-          fos[q].highest_earnings =
-            fos[q].earnings.highest["2_yr"].overall_median_earnings
-          fos[q].lowest_debt = fos[q].debt.staff_grad_plus.all.eval_inst.median
+          fos[q].ipeds_award_count = _.get(
+            fos[q],
+            this.fields["FOS_GRAD_COUNT"]
+          )
+          fos[q].highest_earnings = _.get(
+            fos[q],
+            this.fields["FOS_EARNINGS_FED"]
+          )
+          fos[q].lowest_debt = _.get(fos[q], this.fields["FOS_DEBT_MEDIAN"])
           fos[q].hoist = fos[q][self.field_sort]
         }
         fos = fos.filter((field) => field.credential.level <= 3 && field.hoist)
