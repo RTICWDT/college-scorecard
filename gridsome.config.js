@@ -11,5 +11,5 @@ module.exports = {
   chainWebpack (config) {
     config.mode('development')
   }, 
-  siteDescription: "Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs,graduation, and post-college earnings."
+  siteDescription: "Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs, graduation, and post-college earnings."
 }
