@@ -84,7 +84,6 @@ header {
 
       li {
         display: inline;
-        
       }
 
       li a {
@@ -93,7 +92,7 @@ header {
         font-size: 1rem;
         margin-right: 40px;
         font-weight: 500;
-        letter-spacing: 0.235px
+        letter-spacing: 0.235px;
       }
 
       li a.disabled {
@@ -104,17 +103,17 @@ header {
       li a:hover:not(.nav-active),
       a:focus:not(.nav-active) {
         color: white;
-        font-weight:700;
+        font-weight: 700;
         text-decoration: none;
-        letter-spacing: 0
+        letter-spacing: 0;
       }
 
       li .nav-active {
         color: $nav-active-color !important;
         text-decoration: none;
-        font-weight:700;
-        padding-bottom:10px;
-        border-bottom:3px solid #97CFF5;
+        font-weight: 700;
+        padding-bottom: 10px;
+        border-bottom: 3px solid #97cff5;
       }
     }
 
@@ -157,196 +156,202 @@ header {
 </style>
 
 <template>
-<client-only>
-  <div class="">
-    <v-app-bar
-      app
-      clipped-left
-      :height="$vuetify.breakpoint.xsOnly ? 80 : 105"
-      color="#00365e"
-      class="pa-0 ma-0"
-      flat
-    >
-      <div id="nav-site-title">
-        <a :href="$url('/')"
-          ><div class="logo">
-            <img
-              :src="$url('/img/US-DeptOfEducation-Seal.png')"
-              alt="Department of Education Seal"
-            />
-          </div>
-          <div class="headerText">
-            <span class="edLine">U.S. Department of Education</span
-            ><span class="siteTitle">College Scorecard</span>
-          </div></a
-        >
-      </div>
+  <client-only>
+    <div class="d-print-none">
+      <v-app-bar
+        app
+        clipped-left
+        :height="$vuetify.breakpoint.xsOnly ? 80 : 105"
+        color="#00365e"
+        class="pa-0 ma-0"
+        flat
+      >
+        <div id="nav-site-title">
+          <a :href="$url('/')"
+            ><div class="logo">
+              <img
+                :src="$url('/img/US-DeptOfEducation-Seal.png')"
+                alt="Department of Education Seal"
+              />
+            </div>
+            <div class="headerText">
+              <span class="edLine">U.S. Department of Education</span
+              ><span class="siteTitle">College Scorecard</span>
+            </div></a
+          >
+        </div>
 
-      <!-- Medium and above navigation -->
-      <div id="nav-main-navigation" class="d-none d-md-block">
-        <nav>
-          <ul>
-            <li>
-              <a :href="$url('/')" :class="{ 'nav-active': activeLink === '/' }">Home</a>
-            </li>
-
-            <li>
-              <a :href="$url('/data')" :class="{ 'nav-active': activeLink === 'data' }"
-                >About the Data</a
-              >
-            </li>
-
-            <li>
-              <a
-                :href="$url('/search')"
-                :class="{ 'nav-active': activeLink === 'search' }"
-                >Search</a
-              >
-            </li>
-
-            <li style="display: inline-table">
-              <a
-                :class="{
-                  'nav-active': activeLink === 'compare',
-                  'pr-2 mr-5': true,
-                  disabled: disableCompare,
-                }"
-                aria-label="Navigate to compare page"
-                @click="handleCompareLinkClick(`/compare`)"
-                >Compare:</a
-              >
-
-              <!-- Institution Compare Button -->
-              <v-badge
-                class="nav-compare-icon mb-2 mr-3"
-                bottom
-                offset-x="14"
-                offset-y="10"
-                :content="currentSchoolCount()"
-                :value="currentSchoolCount()"
-                color="#E3EEF6"
-              >
-                <v-btn
-                  small
-                  fab
-                  color="#83C38C"
-                  @click="handleCompareIconClick"
-                  aria-label="Show Compare Drawer"
+        <!-- Medium and above navigation -->
+        <div id="nav-main-navigation" class="d-none d-md-block">
+          <nav>
+            <ul>
+              <li>
+                <a
+                  :href="$url('/')"
+                  :class="{ 'nav-active': activeLink === '/' }"
+                  >Home</a
                 >
-                  <v-icon color="#122E51">
-                    fas fa-university
-                  </v-icon>
-                </v-btn>
-              </v-badge>
+              </li>
 
-              <!-- FoS Compare Button -->
-              <v-badge
-                class="nav-compare-icon mb-2"
-                bottom
-                offset-x="14"
-                offset-y="10"
-                :content="currentFieldOfStudyCount()"
-                :value="currentFieldOfStudyCount()"
-                color="#E3EEF6"
-              >
-                <v-btn
-                  small
-                  fab
-                  color="#fdbf32"
-                  @click="handleCompareIconClick"
-                  aria-label="Show Compare Drawer"
+              <li>
+                <a
+                  :href="$url('/data')"
+                  :class="{ 'nav-active': activeLink === 'data' }"
+                  >About the Data</a
                 >
-                  <v-icon color="black">
-                    fas fa-award
-                  </v-icon>
-                </v-btn>
-              </v-badge>
-            </li>
+              </li>
 
-            <li></li>
-          </ul>
-        </nav>
-      </div>
+              <li>
+                <a
+                  :href="$url('/search')"
+                  :class="{ 'nav-active': activeLink === 'search' }"
+                  >Search</a
+                >
+              </li>
 
-      <div id="mobile-nav-icon" class="d-md-none">
-        <v-app-bar-nav-icon
-          class="float-right"
-          @click="drawer = true"
-          aria-label="Menu"
-        >
-        </v-app-bar-nav-icon>
-      </div>
-    </v-app-bar>
+              <li style="display: inline-table">
+                <a
+                  :class="{
+                    'nav-active': activeLink === 'compare',
+                    'pr-2 mr-5': true,
+                    disabled: disableCompare,
+                  }"
+                  aria-label="Navigate to compare page"
+                  @click="handleCompareLinkClick(`/compare`)"
+                  >Compare:</a
+                >
 
-    <!-- Mobile Navigation Drawer -->
-    <v-navigation-drawer
-      v-model="drawer"
-      v-show="drawer"
-      fixed
-      temporary
-      disable-resize-watcher
-      right
-    >
-      <v-list nav>
-        <v-list-item-group v-model="group">
-          <v-list-item
-            class="mobile-navigation-item"
-            @click="mobileNavClick(`/`)"
+                <!-- Institution Compare Button -->
+                <v-badge
+                  class="nav-compare-icon mb-2 mr-3"
+                  bottom
+                  offset-x="14"
+                  offset-y="10"
+                  :content="currentSchoolCount()"
+                  :value="currentSchoolCount()"
+                  color="#E3EEF6"
+                >
+                  <v-btn
+                    small
+                    fab
+                    color="#83C38C"
+                    @click="handleCompareIconClick"
+                    aria-label="Show Compare Drawer"
+                  >
+                    <v-icon color="#122E51">
+                      fas fa-university
+                    </v-icon>
+                  </v-btn>
+                </v-badge>
+
+                <!-- FoS Compare Button -->
+                <v-badge
+                  class="nav-compare-icon mb-2"
+                  bottom
+                  offset-x="14"
+                  offset-y="10"
+                  :content="currentFieldOfStudyCount()"
+                  :value="currentFieldOfStudyCount()"
+                  color="#E3EEF6"
+                >
+                  <v-btn
+                    small
+                    fab
+                    color="#fdbf32"
+                    @click="handleCompareIconClick"
+                    aria-label="Show Compare Drawer"
+                  >
+                    <v-icon color="black">
+                      fas fa-award
+                    </v-icon>
+                  </v-btn>
+                </v-badge>
+              </li>
+
+              <li></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div id="mobile-nav-icon" class="d-md-none">
+          <v-app-bar-nav-icon
+            class="float-right"
+            @click="drawer = true"
+            aria-label="Menu"
           >
-            <v-list-item-content>
-              <v-list-item-title>
-                Home
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+          </v-app-bar-nav-icon>
+        </div>
+      </v-app-bar>
 
-          <v-list-item
-            class="mobile-navigation-item"
-            @click="mobileNavClick(`/data`)"
-          >
-            <v-list-item-content>
-              <v-list-item-title class="mobile-navigation-item">
-                About the Data
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+      <!-- Mobile Navigation Drawer -->
+      <v-navigation-drawer
+        v-model="drawer"
+        v-show="drawer"
+        fixed
+        temporary
+        disable-resize-watcher
+        right
+      >
+        <v-list nav>
+          <v-list-item-group v-model="group">
+            <v-list-item
+              class="mobile-navigation-item"
+              @click="mobileNavClick(`/`)"
+            >
+              <v-list-item-content>
+                <v-list-item-title>
+                  Home
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
 
-          <v-list-item
-            class="mobile-navigation-item"
-            @click="mobileNavClick(`/search`)"
-          >
-            <v-list-item-content>
-              <v-list-item-title class="mobile-navigation-item">
-                Search
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+            <v-list-item
+              class="mobile-navigation-item"
+              @click="mobileNavClick(`/data`)"
+            >
+              <v-list-item-content>
+                <v-list-item-title class="mobile-navigation-item">
+                  About the Data
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
 
-          <v-list-item
-            class="mobile-navigation-item"
-            @click="mobileNavClick(`/compare/?toggle=institutions`)"
-          >
-            <v-list-item-content>
-              <v-list-item-title class="mobile-navigation-item">
-                Compare Institutions
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+            <v-list-item
+              class="mobile-navigation-item"
+              @click="mobileNavClick(`/search`)"
+            >
+              <v-list-item-content>
+                <v-list-item-title class="mobile-navigation-item">
+                  Search
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
 
-          <v-list-item
-            class="mobile-navigation-item"
-            @click="mobileNavClick(`/compare/?toggle=fos`)"
-          >
-            <v-list-item-content>
-              <v-list-item-title class="mobile-navigation-item">
-                Compare Fields of Study
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
-  </div>
+            <v-list-item
+              class="mobile-navigation-item"
+              @click="mobileNavClick(`/compare/?toggle=institutions`)"
+            >
+              <v-list-item-content>
+                <v-list-item-title class="mobile-navigation-item">
+                  Compare Institutions
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item
+              class="mobile-navigation-item"
+              @click="mobileNavClick(`/compare/?toggle=fos`)"
+            >
+              <v-list-item-content>
+                <v-list-item-title class="mobile-navigation-item">
+                  Compare Fields of Study
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </v-navigation-drawer>
+    </div>
   </client-only>
 </template>
 
@@ -359,16 +364,16 @@ export default {
       activeLink: null,
     }
   },
-  mounted(){
+  mounted() {
     this.$store.commit("toggleDrawer", false)
-  },  
+  },
   computed: {
     disableCompare() {
       return (
         this.compareFieldsOfStudyCount == 0 &&
         this.compareInstitutionsCount == 0
       )
-    },   
+    },
   },
   watch: {
     $route() {
@@ -376,8 +381,8 @@ export default {
     },
   },
   methods: {
-    setActiveLink() {    
-      let path = process.isClient ? window.location.pathname : "";
+    setActiveLink() {
+      let path = process.isClient ? window.location.pathname : ""
       if (path.match(/search/)) {
         this.activeLink = "search"
       } else if (path.match(/compare/)) {
@@ -385,7 +390,7 @@ export default {
       } else if (path.match(/data/)) {
         this.activeLink = "data"
       } else if (path.match(/school/)) {
-        this.activeLink = null        
+        this.activeLink = null
       } else if (path.match(/\//)) {
         this.activeLink = "/"
       } else {
@@ -414,7 +419,7 @@ export default {
     },
     currentFieldOfStudyCount() {
       return this.$store.state.fos.length
-    },     
+    },
   },
   created() {
     this.setActiveLink()

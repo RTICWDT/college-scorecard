@@ -61,7 +61,6 @@
               </context-toggle>
             </div>
 
-
             <!--Loader-->
             <div v-show="loading" class="show-loading ma-4">
               <div class="pa-5">
@@ -72,15 +71,13 @@
               </div>
             </div>
 
-            
-
             <!-- Institution Top Summary-->
-            <div
-              class="mx-5"
-              id="school"
-            >
+            <div class="mx-5" id="school">
               <!-- Institution Chips -->
-              <div v-show="showResource === 'institutions' && !loading" class="compare-institution-chip-container py-5 mb-10 show-loaded">
+              <div
+                v-show="showResource === 'institutions' && !loading"
+                class="compare-institution-chip-container py-5 mb-10 show-loaded"
+              >
                 <v-chip-group column>
                   <v-chip
                     class="pa-4 ma-2"
@@ -99,17 +96,17 @@
               <!--Institution Summary Metrics-->
               <v-row>
                 <v-col cols="12" class="px-sm-5 pt-0 pb-4">
-                    <median-toggle
-                      :display-toggle="medianToggle"
-                      @median-switch-click="handleMedianToggle"
-                      @median-tab-change="handleMedianToggle"
-                      group-name="School Type"
-                      label-prefix="Midpoint for "
-                      :tab-style="{
-                        width: '32%',
-                      }"
-                      v-if="showResource === 'institutions'  && !loading"
-                    />                    
+                  <median-toggle
+                    :display-toggle="medianToggle"
+                    @median-switch-click="handleMedianToggle"
+                    @median-tab-change="handleMedianToggle"
+                    group-name="School Type"
+                    label-prefix="Midpoint for "
+                    :tab-style="{
+                      width: '32%',
+                    }"
+                    v-if="showResource === 'institutions' && !loading"
+                  />
                   <compare-section
                     :schools="schools"
                     title="Average Annual Cost"
@@ -123,18 +120,21 @@
                         label: '$0',
                         value: 0,
                         style: { height: '60px' },
-                      },                      
+                      },
                       max: {
                         label: '$100,000',
                         value: 100000,
                         style: { height: '60px' },
-                      },                
+                      },
                       type: 'average-annual-cost',
                       chart: 'HorizontalBarMedian',
-                      medianToggle: medianToggle
+                      medianToggle: medianToggle,
                     }"
                     v-show="showResource === 'institutions' && !loading"
-                    ><p class="mb-0" v-show="showResource === 'institutions' && !loading">
+                    ><p
+                      class="mb-0"
+                      v-show="showResource === 'institutions' && !loading"
+                    >
                       Cost includes tuition, living costs, books and supplies,
                       and fees minus the average grants and scholarships for
                       federal financial aid recipients.
@@ -154,16 +154,15 @@
                         label: '0%',
                         value: 0,
                         style: { height: '60px' },
-                      },                      
+                      },
                       max: {
                         label: '100%',
                         value: 100,
                         style: { height: '60px' },
-                      },                
+                      },
                       type: 'graduation-rate',
                       chart: 'HorizontalBarMedian',
-                      medianToggle: medianToggle
-                      
+                      medianToggle: medianToggle,
                     }"
                     v-show="showResource === 'institutions' && !loading"
                   />
@@ -181,20 +180,24 @@
                         label: '$0',
                         value: 0,
                         style: { height: '60px' },
-                      },                      
+                      },
                       max: {
                         label: '$100,000',
                         value: 100000,
                         style: { height: '60px' },
-                      },                
+                      },
                       type: 'median-earnings',
                       chart: 'HorizontalBarMedian',
-                      medianToggle: medianToggle
+                      medianToggle: medianToggle,
                     }"
                     v-show="showResource === 'institutions' && !loading"
                   >
                     <template>
-                      <p>The median earnings of former students who received federal financial aid at 10 years after entering the school.</p>
+                      <p>
+                        The median earnings of former students who received
+                        federal financial aid at 10 years after entering the
+                        school.
+                      </p>
                     </template>
                   </compare-section>
                 </v-col>
@@ -295,15 +298,9 @@
                             <horizontal-bar
                               v-if="
                                 slotProps.school &&
-                                  slotProps.school[
-                                    'earnings.highest.2_yr.overall_median_earnings'
-                                  ]
+                                  slotProps.school[fields.FOS_EARNINGS_FED]
                               "
-                              :value="
-                                slotProps.school[
-                                  'earnings.highest.2_yr.overall_median_earnings'
-                                ]
-                              "
+                              :value="slotProps.school[fields.FOS_EARNINGS_FED]"
                               :min="0"
                               :max="150000"
                               color="#1874DC"
@@ -314,9 +311,7 @@
                             <div
                               v-if="
                                 slotProps.school &&
-                                  !slotProps.school[
-                                    'earnings.highest.2_yr.overall_median_earnings'
-                                  ]
+                                  !slotProps.school[fields.FOS_EARNINGS_FED]
                               "
                               class="data-na"
                             >
@@ -377,14 +372,10 @@
                             <horizontal-bar
                               v-if="
                                 slotProps.school &&
-                                  slotProps.school[
-                                    'earnings.highest.2_yr.overall_median_earnings'
-                                  ]
+                                  slotProps.school[fields.FOS_EARNINGS_FED]
                               "
                               :value="
-                                slotProps.school[
-                                  'earnings.highest.2_yr.overall_median_earnings'
-                                ] / 12
+                                slotProps.school[fields.FOS_EARNINGS_FED] / 12
                               "
                               :min="0"
                               :max="30000"
@@ -396,9 +387,7 @@
                             <div
                               v-if="
                                 slotProps.school &&
-                                  !slotProps.school[
-                                    'earnings.highest.2_yr.overall_median_earnings'
-                                  ]
+                                  !slotProps.school[fields.FOS_EARNINGS_FED]
                               "
                               class="data-na"
                             >
@@ -442,7 +431,8 @@
                         >
                           <template v-slot:label>
                             <span class="profile-fos-include-prior-debt">
-                              Include debt borrowed at any prior institutions&nbsp;
+                              Include debt borrowed at any prior
+                              institutions&nbsp;
                               <tooltip definition="include-debt-prior-inst" />
                             </span>
                           </template>
@@ -538,7 +528,8 @@
                         >
                           <template v-slot:label>
                             <span class="profile-fos-include-prior-debt">
-                              Include debt borrowed at any prior institutions&nbsp;
+                              Include debt borrowed at any prior
+                              institutions&nbsp;
                               <tooltip definition="include-debt-prior-inst" />
                             </span>
                           </template>
@@ -635,7 +626,7 @@
                       <horizontal-bar
                         v-if="
                           slotProps.school &&
-                            slotProps.school[fields.FOS_GRAD_COUNT]
+                            slotProps.school[fields.FOS_GRAD_COUNT] != null
                         "
                         :value="slotProps.school[fields.FOS_GRAD_COUNT]"
                         :min="0"
@@ -648,7 +639,7 @@
                       <div
                         v-if="
                           slotProps.school &&
-                            !slotProps.school[fields.FOS_GRAD_COUNT]
+                            slotProps.school[fields.FOS_GRAD_COUNT] == null
                         "
                         class="data-na"
                       >
@@ -781,18 +772,18 @@
                   >Costs</v-expansion-panel-header
                 >
                 <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
-                    <median-toggle
-                      :display-toggle="medianToggle"
-                      @median-switch-click="handleMedianToggle"
-                      @median-tab-change="handleMedianToggle"
-                      group-name="School Type"
-                      label-prefix="Midpoint for "
-                      :tab-style="{
-                        width: '32%',
-                      }"
-                      v-show="showResource === 'institutions'"
-                      class="mt-10"
-                    />    
+                  <median-toggle
+                    :display-toggle="medianToggle"
+                    @median-switch-click="handleMedianToggle"
+                    @median-tab-change="handleMedianToggle"
+                    group-name="School Type"
+                    label-prefix="Midpoint for "
+                    :tab-style="{
+                      width: '32%',
+                    }"
+                    v-show="showResource === 'institutions'"
+                    class="mt-10"
+                  />
 
                   <compare-section
                     :schools="schools"
@@ -807,15 +798,15 @@
                         label: '$0',
                         value: 0,
                         style: { height: '60px' },
-                      },                      
+                      },
                       max: {
                         label: '$100,000',
                         value: 100000,
                         style: { height: '60px' },
-                      },                
+                      },
                       type: 'average-annual-cost',
                       chart: 'HorizontalBarMedian',
-                      medianToggle: medianToggle
+                      medianToggle: medianToggle,
                     }"
                     class="mt-5"
                     ><p class="my-3">
@@ -882,9 +873,9 @@
                       :tab-style="{
                         width: '32%',
                       }"
-                      v-show="(showResource === 'institutions' && !showPellOnly)"
+                      v-show="showResource === 'institutions' && !showPellOnly"
                       class="mt-10"
-                    />    
+                    />
                   </v-expand-transition>
                   <compare-section
                     :schools="schools"
@@ -900,12 +891,12 @@
                         label: '0%',
                         value: 0,
                         style: { height: '60px' },
-                      },                      
+                      },
                       max: {
                         label: '100%',
                         value: 100,
                         style: { height: '60px' },
-                      },                
+                      },
                       type: 'graduation-rate',
                       chart: 'HorizontalBarMedian',
                       medianToggle: medianToggle,
@@ -913,7 +904,7 @@
                     }"
                     class="mt-5"
                   >
-                                    <template>
+                    <template>
                       <v-checkbox
                         v-model="showPellOnly"
                         label="Show Pell Grant Recipients Only"
@@ -926,7 +917,7 @@
                           </span>
                         </template>
                       </v-checkbox>
-                      </template>
+                    </template>
                   </compare-section>
                   <compare-section
                     :schools="schools"
@@ -952,10 +943,10 @@
                       color: '#1874DC',
                       chart: 'Sankey',
                       currentSankey: currentSankey,
-                      showPellOnly: showPellOnly
+                      showPellOnly: showPellOnly,
                     }"
                   >
-                  <template>
+                    <template>
                       <v-checkbox
                         v-model="showPellOnly"
                         label="Show Pell Grant Recipients Only"
@@ -968,9 +959,9 @@
                           </span>
                         </template>
                       </v-checkbox>
-                    <sankey-buttons
-                      v-on:update-sankey="currentSankey = $event"
-                    />
+                      <sankey-buttons
+                        v-on:update-sankey="currentSankey = $event"
+                      />
                     </template>
                   </compare-section>
                 </v-expansion-panel-content>
@@ -985,7 +976,6 @@
                 </v-expansion-panel-header>
 
                 <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
-                  
                   <v-select
                     class="mb-5 pt-0"
                     hide-details
@@ -1029,7 +1019,12 @@
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
                     :config="{
-                      computedField: (aidLoanSelect == 'fed') ? 'federalDebt' : (aidShowMedianDebtWithPrior ? 'parentPlusDebtAll' : 'parentPlusDebt'),
+                      computedField:
+                        aidLoanSelect == 'fed'
+                          ? 'federalDebt'
+                          : aidShowMedianDebtWithPrior
+                          ? 'parentPlusDebtAll'
+                          : 'parentPlusDebt',
                       color: '#1874DC',
                       type: 'currency',
                       max: 150000,
@@ -1037,24 +1032,25 @@
                     }"
                   >
                     <template>
-                      <div class="d-flex">       
+                      <div class="d-flex">
                         <p v-if="aidLoanSelect === 'fed'">
-                          The typical total debt for undergraduate borrowers who complete college.
-                        </p>                                       
+                          The typical total debt for undergraduate borrowers who
+                          complete college.
+                        </p>
                         <v-checkbox
                           class="my-0"
                           v-model="aidShowMedianDebtWithPrior"
                           hide-details
-                           v-if="aidLoanSelect == 'plus'"
+                          v-if="aidLoanSelect == 'plus'"
                         >
                           <template v-slot:label>
                             <span>
-                              Include debt borrowed at any prior institutions&nbsp;
+                              Include debt borrowed at any prior
+                              institutions&nbsp;
                               <tooltip definition="include-debt-prior-inst" />
                             </span>
                           </template>
                         </v-checkbox>
-                        
                       </div>
                     </template>
                   </compare-section>
@@ -1066,7 +1062,12 @@
                     :currentHighlight="currentHighlight"
                     @update-highlight="currentHighlight = $event"
                     :config="{
-                      computedField: aidLoanSelect == 'fed' ? 'monthlyLoanPayment' : (aidShowMedianDebtWithPrior ? 'parentPlusPaymentAll' : 'parentPlusPayment'),
+                      computedField:
+                        aidLoanSelect == 'fed'
+                          ? 'monthlyLoanPayment'
+                          : aidShowMedianDebtWithPrior
+                          ? 'parentPlusPaymentAll'
+                          : 'parentPlusPayment',
                       color: '#1874DC',
                       type: 'currency',
                       max: 1000,
@@ -1079,7 +1080,14 @@
                           This is based on a standard 10-year payment plan,
                           other
                           <a
-                            :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov/loan-simulator'))"
+                            :href="
+                              $url(
+                                '/school/transition/?url=' +
+                                  encodeURIComponent(
+                                    'https://studentaid.gov/loan-simulator'
+                                  )
+                              )
+                            "
                             target="_blank"
                             @click="trackOutboundLink($event)"
                             >payment options<v-icon
@@ -1088,24 +1096,34 @@
                               color="#007000"
                             >
                               fas fa-external-link-alt
-                            </v-icon> 
+                            </v-icon>
                           </a>
-                          are available, like income-driven repayment. An 
-                          <a 
-                          target="_blank" 
-                          :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov/manage-loans/repayment/plans/income-driven'))"
-                          @click="trackOutboundLink($event)"
-                          >income-driven repayment<v-icon
-                            x-small
-                            class="pl-1"
-                            color="#007000"
-                          >
-                            fas fa-external-link-alt
-                          </v-icon>   
-                          </a> plan sets your monthly student loan payment at an amount that is intended to be affordable based on your income and family size.
-                        </p>                      
-                        </div>
-                      <div class="d-flex">                                           
+                          are available, like income-driven repayment. An
+                          <a
+                            target="_blank"
+                            :href="
+                              $url(
+                                '/school/transition/?url=' +
+                                  encodeURIComponent(
+                                    'https://studentaid.gov/manage-loans/repayment/plans/income-driven'
+                                  )
+                              )
+                            "
+                            @click="trackOutboundLink($event)"
+                            >income-driven repayment<v-icon
+                              x-small
+                              class="pl-1"
+                              color="#007000"
+                            >
+                              fas fa-external-link-alt
+                            </v-icon>
+                          </a>
+                          plan sets your monthly student loan payment at an
+                          amount that is intended to be affordable based on your
+                          income and family size.
+                        </p>
+                      </div>
+                      <div class="d-flex">
                         <v-checkbox
                           class="my-0"
                           v-model="aidShowMedianDebtWithPrior"
@@ -1114,14 +1132,13 @@
                         >
                           <template v-slot:label>
                             <span>
-                              Include debt borrowed at any prior institutions&nbsp;
+                              Include debt borrowed at any prior
+                              institutions&nbsp;
                               <tooltip definition="include-debt-prior-inst" />
                             </span>
-                          </template>   
+                          </template>
                         </v-checkbox>
-                        
                       </div>
-                        
                     </template>
                   </compare-section>
 
@@ -1136,29 +1153,27 @@
                       color: '#1874DC',
                       chart: 'RepaymentRate',
                       showGradOnly: showGradOnly,
-                      repaymentStatus: currentRepaymentStatus
+                      repaymentStatus: currentRepaymentStatus,
                     }"
                   >
-                  <template>
-                        <span v-if="showGradOnly">
-                          Percentage of borrowers in each category 2 years after
-                          entering repayment. For category definitions, please
-                          see
-                          <a
-                            v-bind:href="
-                              $url('/data/glossary/#repayment-rate-completers')
-                            "
-                            >the glossary</a
-                          >.
-                        </span>
-                        <span v-else>
-                          Percentage of borrowers in each category 2 years after
-                          entering repayment. For category definitions, please
-                          see
-                          <a v-bind:href="$url('/data/glossary/#repayment-rate')"
-                            >the glossary</a
-                          >.
-                        </span>                    
+                    <template>
+                      <span v-if="showGradOnly">
+                        Percentage of borrowers in each category 2 years after
+                        entering repayment. For category definitions, please see
+                        <a
+                          v-bind:href="
+                            $url('/data/glossary/#repayment-rate-completers')
+                          "
+                          >the glossary</a
+                        >.
+                      </span>
+                      <span v-else>
+                        Percentage of borrowers in each category 2 years after
+                        entering repayment. For category definitions, please see
+                        <a v-bind:href="$url('/data/glossary/#repayment-rate')"
+                          >the glossary</a
+                        >.
+                      </span>
                       <v-checkbox
                         class="my-0 mb-2"
                         v-model="showGradOnly"
@@ -1170,27 +1185,26 @@
                           </span>
                         </template>
                       </v-checkbox>
-                    <p class="overline mb-1 mt-3">Repayment Status</p>
-                    <v-select
-                      :items="[
-                        { label: 'Making Progress', value: 'makingprogress' },
-                        { label: 'Not Making Progress', value: 'noprogress' },
-                        { label: 'Deferment', value: 'deferment' },
-                        { label: 'Paid in Full', value: 'fullypaid' },
-                        { label: 'Forbearance', value: 'forbearance' },
-                        { label: 'Defaulted', value: 'default' },
-                        { label: 'Delinquent', value: 'delinquent' },
-                        { label: 'Discharged', value: 'discharge' },                        
-                      ]"
-                      item-text="label"
-                      item-value="value"
-                      label="Repayment Status"
-                      v-model="currentRepaymentStatus"
-                      color="secondary"
-                      solo
-                      class="compare-select"
-                    ></v-select>
-
+                      <p class="overline mb-1 mt-3">Repayment Status</p>
+                      <v-select
+                        :items="[
+                          { label: 'Making Progress', value: 'makingprogress' },
+                          { label: 'Not Making Progress', value: 'noprogress' },
+                          { label: 'Deferment', value: 'deferment' },
+                          { label: 'Paid in Full', value: 'fullypaid' },
+                          { label: 'Forbearance', value: 'forbearance' },
+                          { label: 'Defaulted', value: 'default' },
+                          { label: 'Delinquent', value: 'delinquent' },
+                          { label: 'Discharged', value: 'discharge' },
+                        ]"
+                        item-text="label"
+                        item-value="value"
+                        label="Repayment Status"
+                        v-model="currentRepaymentStatus"
+                        color="secondary"
+                        solo
+                        class="compare-select"
+                      ></v-select>
                     </template>
                   </compare-section>
                 </v-expansion-panel-content>
@@ -1205,18 +1219,18 @@
                   >Typical Earnings</v-expansion-panel-header
                 >
                 <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
-                    <median-toggle
-                      :display-toggle="medianToggle"
-                      @median-switch-click="handleMedianToggle"
-                      @median-tab-change="handleMedianToggle"
-                      group-name="School Type"
-                      label-prefix="Midpoint for "
-                      :tab-style="{
-                        width: '32%',
-                      }"
-                      v-show="showResource === 'institutions'"
-                      class="mt-10"
-                    />    
+                  <median-toggle
+                    :display-toggle="medianToggle"
+                    @median-switch-click="handleMedianToggle"
+                    @median-tab-change="handleMedianToggle"
+                    group-name="School Type"
+                    label-prefix="Midpoint for "
+                    :tab-style="{
+                      width: '32%',
+                    }"
+                    v-show="showResource === 'institutions'"
+                    class="mt-10"
+                  />
 
                   <compare-section
                     :schools="schools"
@@ -1231,20 +1245,24 @@
                         label: '$0',
                         value: 0,
                         style: { height: '60px' },
-                      },                      
+                      },
                       max: {
                         label: '$100,000',
                         value: 100000,
                         style: { height: '60px' },
-                      },                
+                      },
                       type: 'median-earnings',
                       chart: 'HorizontalBarMedian',
-                      medianToggle: medianToggle
+                      medianToggle: medianToggle,
                     }"
                     class="mt-5"
                   >
                     <template>
-                      <p>The median earnings of former students who received federal financial aid at 10 years after entering the school.</p>
+                      <p>
+                        The median earnings of former students who received
+                        federal financial aid at 10 years after entering the
+                        school.
+                      </p>
                     </template>
                   </compare-section>
 
@@ -1261,7 +1279,7 @@
                       type: 'percent',
                       chart: 'HorizontalBar',
                     }"
-                  />                  
+                  />
                 </v-expansion-panel-content>
               </v-expansion-panel>
 
@@ -1399,41 +1417,50 @@
             </v-btn>
           </v-card>
           <v-card outline v-bind:class="sidebarSearchClass" class="pa-4 mb-3">
-              <p class="searchForTitle mb-2">SEARCH FOR:</p>
-              <v-radio-group v-model="sidebarSearchToggle" column>
-                <v-radio
-                  value="school"
-                  color="#007000"
-                >
-                  <template v-slot:label>
-                    <div v-bind:style="{ 'font-weight': sidebarRadioSchoolStyle, 'color': 'black'}">School</div>
-                  </template>
-                </v-radio>
+            <p class="searchForTitle mb-2">SEARCH FOR:</p>
+            <v-radio-group v-model="sidebarSearchToggle" column>
+              <v-radio value="school" color="#007000">
+                <template v-slot:label>
+                  <div
+                    v-bind:style="{
+                      'font-weight': sidebarRadioSchoolStyle,
+                      color: 'black',
+                    }"
+                  >
+                    School
+                  </div>
+                </template>
+              </v-radio>
 
-                <v-radio
-                  value="fos"
-                  color="#fdbf32"
-                >
-                  <template v-slot:label>
-                    <div v-bind:style="{ 'font-weight': sidebarRadioFOSStyle, 'color': 'black'}">Field of Study</div>
-                  </template>
-                </v-radio>
-              </v-radio-group>
+              <v-radio value="fos" color="#fdbf32">
+                <template v-slot:label>
+                  <div
+                    v-bind:style="{
+                      'font-weight': sidebarRadioFOSStyle,
+                      color: 'black',
+                    }"
+                  >
+                    Field of Study
+                  </div>
+                </template>
+              </v-radio>
+            </v-radio-group>
 
-              <name-autocomplete
-                v-if="sidebarSearchToggle === 'school'"
-                id="school-name-auto-complete"
-               @school-name-selected="handleSchoolNameSelected"
-               :searchEmptyName="false"
-              />
+            <name-autocomplete
+              v-if="sidebarSearchToggle === 'school'"
+              id="school-name-auto-complete"
+              @school-name-selected="handleSchoolNameSelected"
+              :searchEmptyName="false"
+            />
 
-              <field-of-study-search
-                v-if="sidebarSearchToggle === 'fos'"
-                id="school-fos-search"
-                @field-of-study-selected="handleFieldOfStudySelected"
-              />
-              <div></div><!--Due to CSS styling where last element in card copies border radius of parent element-->
-            </v-card>
+            <field-of-study-search
+              v-if="sidebarSearchToggle === 'fos'"
+              id="school-fos-search"
+              @field-of-study-selected="handleFieldOfStudySelected"
+            />
+            <div></div>
+            <!--Due to CSS styling where last element in card copies border radius of parent element-->
+          </v-card>
           <v-card class="pa-5 mt-0">
             <paying-for-college />
           </v-card>
@@ -1447,7 +1474,7 @@
 @import "~/sass/_variables";
 
 .fadeAway {
-  display:none;
+  display: none;
   transition-property: display;
   transition-duration: 4s;
   transition-delay: 2s;
@@ -1508,19 +1535,19 @@
   background-color: $fos-accent-color;
 }
 
-.field-of-study-select-container{
+.field-of-study-select-container {
   border-radius: 4px !important;
   border-left: 20px solid $fos-color-gold !important;
 }
 
-.institution-context-panel{
+.institution-context-panel {
   border-radius: 4px !important;
   border-left: 20px solid $darker-green !important;
 }
 
 .compare-select .v-input__slot {
-      align-items: center !important;
-      justify-items: center !important;
+  align-items: center !important;
+  justify-items: center !important;
 }
 </style>
 
@@ -1542,7 +1569,7 @@ import CannedSearchContainer from "~/components/CannedSearchContainer.vue"
 import querystring from "querystring"
 import SearchForm from "~/components/SearchForm.vue"
 import NameAutocomplete from "~/components/NameAutocomplete.vue"
-import FieldOfStudySearch from '~/components/FieldOfStudySearch.vue';
+import FieldOfStudySearch from "~/components/FieldOfStudySearch.vue"
 import Router from "~/js/mixins/Router.js"
 import { fields, localStorageKeys } from "~/js/constants"
 import {
@@ -1683,7 +1710,7 @@ export default {
       } else {
         referrer = null
       }
-      return referrer || this.$url('/search')
+      return referrer || this.$url("/search")
     },
     showSearchForm() {
       if (
@@ -1796,28 +1823,28 @@ export default {
     countFieldsOfStudy() {
       return this.passedFieldsOfStudy.length || this.compareFieldsOfStudy.length
     },
-    sidebarSearchClass(){
-      if(this.sidebarSearchToggle === "fos"){
+    sidebarSearchClass() {
+      if (this.sidebarSearchToggle === "fos") {
         //return "field-of-study-select-container fosComboboxCustomColor";
-        return "field-of-study-select-container";
-      }else{
-        return "institution-context-panel";
+        return "field-of-study-select-container"
+      } else {
+        return "institution-context-panel"
       }
     },
-    sidebarRadioSchoolStyle(){
-      if(this.sidebarSearchToggle === "fos"){
-        return "normal";
-      }else{
-        return "bold";
+    sidebarRadioSchoolStyle() {
+      if (this.sidebarSearchToggle === "fos") {
+        return "normal"
+      } else {
+        return "bold"
       }
     },
-    sidebarRadioFOSStyle(){
-      if(this.sidebarSearchToggle === "fos"){
-        return "bold";
-      }else{
-        return "normal";
+    sidebarRadioFOSStyle() {
+      if (this.sidebarSearchToggle === "fos") {
+        return "bold"
+      } else {
+        return "normal"
       }
-    }
+    },
   },
   methods: {
     all() {
@@ -1910,7 +1937,6 @@ export default {
           })
 
           this.loading = false
-
         })
         .catch((responses) => {
           // TODO - How do we want to handle errors?
@@ -1999,12 +2025,12 @@ export default {
             id: removeData.unit_id,
             institutionName: removeData["school.name"],
             credentialLevel: removeData["credential.level"],
-        }
+          }
           this.$store.commit("toggleFieldOfStudy", delObj)
           this.modifyUrl()
           break
-      default:
-        break
+        default:
+          break
       }
     },
     modifyUrl() {
@@ -2068,20 +2094,23 @@ export default {
     handleMedianToggle(toggleValue) {
       this.controlTabMedian = toggleValue
       this.medianToggle = toggleValue === 0 ? "group" : "all"
-    },  
+    },
     handleSchoolNameSelected(school) {
       if (typeof school == "string") {
         this.$router.push("/search/?search=" + encodeURIComponent(school))
       } else {
-        this.$router.push("/search/?search=" +
-          encodeURIComponent(school["school.name"]) +
-          "&id=" +
-          school.id)
+        this.$router.push(
+          "/search/?search=" + encodeURIComponent(school["school.name"]) //+
+          // "&id=" +
+          // school.id
+        )
       }
     },
     handleFieldOfStudySelected(fieldOfStudy) {
-      this.$router.push("/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4))
-    },      
+      this.$router.push(
+        "/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4)
+      )
+    },
   },
   mounted() {
     // set toggle from URL
@@ -2098,27 +2127,27 @@ export default {
       this.queryInstitutions()
     }
 
-    this.medianToggle = "group";
-    this.controlTabMedian = 0;
+    this.medianToggle = "group"
+    this.controlTabMedian = 0
 
     // Did this initiate as a shared comparision
     this.isSharedComparison = this.showShareUpdate
     this.isSharedFieldOfStudyComparison = this.showShareFieldOfStudyUpdate
   },
- metaInfo: {
-    title: 'Compare',
+  metaInfo: {
+    title: "Compare",
     meta: [
       {
-        key: 'og:title',
-        name: 'og:title',
-        content: "Compare | College Scorecard"
-      },     
+        key: "og:title",
+        name: "og:title",
+        content: "Compare | College Scorecard",
+      },
       {
-        key: 'twitter:title',
-        name: 'twitter:title',
-        content: "Compare | College Scorecard"
-      },       
-    ]    
-  }    
+        key: "twitter:title",
+        name: "twitter:title",
+        content: "Compare | College Scorecard",
+      },
+    ],
+  },
 }
 </script>

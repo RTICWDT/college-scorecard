@@ -51,30 +51,30 @@ html {
     color: $darker-green !important;
   }
 
-    @media (min-width: 1904px){
-      .container{
-        max-width: 1300px;
-      }
+  @media (min-width: 1904px) {
+    .container {
+      max-width: 1300px;
     }
-    .v-btn.secondary:not(.share):not(.fos-button):not(.filter-button):not(.component-toggle-button):not(.searchFab) {
-      letter-spacing: normal;
-      height:50px !important;
-      border-radius: 16px !important;
-      //border:2px solid white !important;
-      //border-color:#fff !important;
-      color:#fff !important;
-      padding:0 10%;
-    }
+  }
+  .v-btn.secondary:not(.share):not(.fos-button):not(.filter-button):not(.component-toggle-button):not(.searchFab) {
+    letter-spacing: normal;
+    height: 50px !important;
+    border-radius: 16px !important;
+    //border:2px solid white !important;
+    //border-color:#fff !important;
+    color: #fff !important;
+    padding: 0 10%;
+  }
 
-    .v-btn.transition-button {
-      letter-spacing: normal;
-      height:50px !important;
-      border-radius: 16px !important;
-      //border:2px solid white !important;
-      //border-color:#fff !important;
-      color:#000 !important;
-      padding:0 10%;
-    }
+  .v-btn.transition-button {
+    letter-spacing: normal;
+    height: 50px !important;
+    border-radius: 16px !important;
+    //border:2px solid white !important;
+    //border-color:#fff !important;
+    color: #000 !important;
+    padding: 0 10%;
+  }
 
   .title,
   .display-1,
@@ -85,19 +85,19 @@ html {
     font-family: $header-font-family !important;
   }
 
-  .searchForTitle{
+  .searchForTitle {
     font-weight: 600;
     font-family: "Montserrat", sans-serif !important;
   }
 
   .display-2 {
     font-size: 28px !important;
-    line-height:32px !important;
+    line-height: 32px !important;
   }
 
   .display-3 {
     font-size: 3rem !important;
-    line-height:32px !important;    
+    line-height: 32px !important;
   }
 
   .v-expansion-panel-header {
@@ -141,6 +141,8 @@ html {
   .overline {
     font-family: $sans-serif !important;
     font-size: 12px !important;
+    line-height: 160% !important;
+    letter-spacing: normal !important;
   }
 
   #context-toggle {
@@ -195,10 +197,10 @@ html {
   }
 
   .dolflag-chip .v-chip__close {
-    font-size:32px !important;
-    margin-right:16px !important;
-    margin-left:16px !important;
-  }  
+    font-size: 32px !important;
+    margin-right: 16px !important;
+    margin-left: 16px !important;
+  }
 
   .v-chip__close {
     color: $darker-green !important;
@@ -207,4 +209,10 @@ html {
   .green-link {
     color: $darker-green !important;
   }
+}
+
+@media print {
+  .v-main {
+    padding-top: 20px !important;
   }
+}
