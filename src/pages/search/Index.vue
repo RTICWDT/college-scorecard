@@ -522,7 +522,7 @@ export default {
     specializedMission: Object,
     defaultSort: {
       type: String,
-      default: "median_earnings:desc",
+      default: "latest.earnings.6_yrs_after_entry.gt_threshold_suppressed:desc",
     },
     isLoading: Boolean,
     compareSchools: Array,
