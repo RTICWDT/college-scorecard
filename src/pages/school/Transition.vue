@@ -45,6 +45,7 @@
 <script>
 const querystring = require("querystring")
 import approved from "~/data/redirect_approved_list.json";
+import { useRouter } from "vue-router";
 
 export default {
   data() {
@@ -53,11 +54,13 @@ export default {
       approved_list: approved,
     }
   },
+  beforeRouteEnter(to, from, next) {
+      next(vm => {
+          vm.prevRoute = from;
+  });
+},
   computed: {
-    referrer() {
-      //return process.isClient ? document.referrer : ""
-      return ""
-    },
+    referrer() {return this.prevRoute ? 'therealdeal' : '/'},
     url() {
       let url = decodeURI(this.query.url)
 
@@ -66,7 +69,7 @@ export default {
           /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
         )
         && 
-        this.approved_list.includes(url)
+        (this.approved_list.includes(url) || this.referrer == 'therealdeal')
       ) {
         return url
       } else {
@@ -78,6 +81,9 @@ export default {
     close() {
       window.close();
     },
+  },
+  created() {
+    this.prevPath = this.$router.options
   },
   mounted() {
     if (true) {
