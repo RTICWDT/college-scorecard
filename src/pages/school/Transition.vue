@@ -44,11 +44,13 @@
 </style>
 <script>
 const querystring = require("querystring")
+import approved from "~/data/redirect_approved_list.json";
 
 export default {
   data() {
     return {
       query: {},
+      approved_list: approved,
     }
   },
   computed: {
@@ -63,6 +65,8 @@ export default {
         url.match(
           /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
         )
+        && 
+        this.approved_list.includes(url)
       ) {
         return url
       } else {
