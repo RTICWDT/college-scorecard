@@ -45,32 +45,25 @@
 <script>
 const querystring = require("querystring")
 import approved from "~/data/redirect_approved_list.json";
-import { useRouter } from "vue-router";
+import { mapGetters } from "vuex"
 
 export default {
   data() {
     return {
       query: {},
       approved_list: approved,
+      outboundUrl: ""
     }
   },
-  beforeRouteEnter(to, from, next) {
-      next(vm => {
-          vm.prevRoute = from;
-  });
-},
   computed: {
-    referrer() {return this.prevRoute ? 'therealdeal' : '/'},
     url() {
-      let url = decodeURI(this.query.url)
-
+      let url = this.outboundUrl;
+      console.log(this.outboundUrl)
       if (
         url.match(
           /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
-        )
-        && 
-        (this.approved_list.includes(url) || this.referrer == 'therealdeal')
-      ) {
+        ))
+     {
         return url
       } else {
         return false
@@ -82,13 +75,11 @@ export default {
       window.close();
     },
   },
-  created() {
-    this.prevPath = this.$router.options
-  },
   mounted() {
     if (true) {
       let query = querystring.parse(window.location.search.substring(1))
       this.query = query || {}
+      this.outboundUrl = this.$store.state.outboundUrl
     }
     this.$store.commit("toggleDrawer", false);
   },

@@ -41,6 +41,7 @@ export default {
   },
   mounted(){
     this.$store.commit("toggleDrawer", false)
+    this.$store.commit("setOutboundUrl", "")
   },    
 
   metaInfo() {

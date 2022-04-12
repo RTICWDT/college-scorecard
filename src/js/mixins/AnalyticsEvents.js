@@ -16,6 +16,10 @@ export default {
             }
             this.GATrackEvent('Outbound Links', href);
         },
+        transitionOutboundLink(event, url) {
+            this.$store.commit("setOutboundUrl", url)
+            this.trackOutboundLink(event)
+          },        
         trackDownload(file) {
             this.GATrackEvent('Downloads', file);
         },

@@ -210,14 +210,11 @@
                     <a
                       :href="
                         $url(
-                          '/school/transition/?url=' +
-                            encodeURIComponent(
-                              'http://github.com/rticwdt/college-scorecard/'
-                            )
+                          '/school/transition/'
                         )
                       "
                       target="_blank"
-                      @click="trackOutboundLink($event)"
+                      @click="transitionOutboundLink($event, 'http://github.com/rticwdt/college-scorecard/')"
                       >http://github.com/rticwdt/college-scorecard/<i
                         aria-hidden="true"
                         class="v-icon notranslate pl-1 fas fa-external-link-alt theme--light"

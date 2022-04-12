@@ -7,9 +7,9 @@
       can use
       <!--prettyhtml-ignore-->
       <a
-        :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov/aid-estimator/'))"
+        :href="$url('/school/transition/')"
         target="_blank"
-        @click="trackOutboundLink($event)"
+        @click="transitionOutboundLink($event, 'https://studentaid.gov/aid-estimator/')"
         >Federal Student Aid Estimator<v-icon
                       x-small
                       color="#007000"
@@ -26,9 +26,9 @@
       <v-btn
         rounded
         color="secondary"
-        :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov/h/apply-for-aid/fafsa'))"
+        :href="$url('/school/transition/')"
         target="_blank"
-        @click="trackOutboundLink($event)"
+        @click="transitionOutboundLink($event, 'https://studentaid.gov/h/apply-for-aid/fafsa')"
         >Start Your FAFSA&reg;<br/>Application<v-icon
             x-small
             color="white"
@@ -45,9 +45,9 @@
       Don't forget: Do fill out the FAFSA® form, but also look into other
       programs such as
       <a
-        :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.vets.gov/gi-bill-comparison-tool'))"
+        :href="$url('/school/transition/')"
         target="_blank"
-        @click="trackOutboundLink($event)"
+        @click="transitionOutboundLink($event,'https://www.vets.gov/gi-bill-comparison-tool')"
         >GI Bill Benefits<v-icon
                       x-small
                       color="#007000"

@@ -209,16 +209,11 @@
                   Search for apprenticeship jobs and programs on
                   <a
                     class="homeCallout-indent"
-                    :href="
-                      $url(
-                        '/school/transition/?url=' +
-                          encodeURIComponent(
-                            'https://www.apprenticeship.gov/apprenticeship-finder'
-                          )
-                      )
-                    "
+                    :href="$url('/school/transition/')"
                     target="_blank"
-                    @click="trackOutboundLink($event)"
+                    @click="transitionOutboundLink($event, 
+                            'https://www.apprenticeship.gov/apprenticeship-finder'
+                      )"
                   >
                     apprenticeship.gov<v-icon
                       x-small
@@ -236,12 +231,10 @@
                     class="homeCallout-indent"
                     :href="
                       $url(
-                        '/school/transition/?url=' +
-                          encodeURIComponent('https://www.mynextmove.org')
-                      )
+                        '/school/transition/')
                     "
                     target="_blank"
-                    @click="trackOutboundLink($event)"
+                    @click="transitionOutboundLink($event, 'https://www.mynextmove.org')"
                   >
                     MyNextMove.org<v-icon x-small class="pl-1" color="#007000">
                       fas fa-external-link-alt
@@ -257,14 +250,11 @@
                     class="homeCallout-indent"
                     :href="
                       $url(
-                        '/school/transition/?url=' +
-                          encodeURIComponent(
-                            'https://trainingproviderresults.gov'
+                        '/school/transition/'
                           )
-                      )
                     "
                     target="_blank"
-                    @click="trackOutboundLink($event)"
+                    @click="transitionOutboundLink($event, 'https://trainingproviderresults.gov')"
                   >
                     TrainingProviderResults.gov<v-icon
                       x-small
@@ -282,12 +272,11 @@
                     class="homeCallout-indent"
                     :href="
                       $url(
-                        '/school/transition/?url=' +
-                          encodeURIComponent('https://careeronestop.org')
-                      )
+                        '/school/transition/'
+                        )
                     "
                     target="_blank"
-                    @click="trackOutboundLink($event)"
+                    @click="transitionOutboundLink($event, 'https://careeronestop.org')"
                   >
                     CareerOneStop.org<v-icon
                       x-small
@@ -305,12 +294,11 @@
                     class="homeCallout-indent"
                     :href="
                       $url(
-                        '/school/transition/?url=' +
-                          encodeURIComponent('https://www.bls.gov/ooh/')
+                        '/school/transition/'
                       )
                     "
                     target="_blank"
-                    @click="trackOutboundLink($event)"
+                    @click="transitionOutboundLink($event, 'https://www.bls.gov/ooh/')"
                   >
                     Occupational Outlook Handbook (OOH)<v-icon
                       x-small
@@ -354,12 +342,11 @@
                   <a
                     :href="
                       $url(
-                        '/school/transition/?url=' +
-                          encodeURIComponent('https://studentaid.gov')
+                        '/school/transition/'
                       )
                     "
                     target="_blank"
-                    @click="trackOutboundLink($event)"
+                    @click="transitionOutboundLink($event, 'https://studentaid.gov')"
                   >
                     StudentAid.gov<v-icon x-small class="pl-1" color="#007000">
                       fas fa-external-link-alt
@@ -375,14 +362,11 @@
                   <a
                     :href="
                       $url(
-                        '/school/transition/?url=' +
-                          encodeURIComponent(
-                            'https://studentaid.gov/aid-estimator/'
-                          )
+                        '/school/transition/'
                       )
                     "
                     target="_blank"
-                    @click="trackOutboundLink($event)"
+                    @click="transitionOutboundLink($event, 'https://studentaid.gov/aid-estimator/')"
                   >
                     Federal Student Aid Estimator<v-icon
                       x-small
@@ -404,14 +388,11 @@
                     color="secondary"
                     :href="
                       $url(
-                        '/school/transition/?url=' +
-                          encodeURIComponent(
-                            'https://studentaid.gov/h/apply-for-aid/fafsa'
-                          )
+                        '/school/transition/'
                       )
                     "
                     target="_blank"
-                    @click="trackOutboundLink($event)"
+                    @click="transitionOutboundLink($event, 'https://studentaid.gov/h/apply-for-aid/fafsa')"
                     >Start Your FAFSA&reg; Application<v-icon
                       x-small
                       color="white"
@@ -431,14 +412,11 @@
                   <a
                     :href="
                       $url(
-                        '/school/transition/?url=' +
-                          encodeURIComponent(
-                            'https://www.vets.gov/gi-bill-comparison-tool'
-                          )
+                        '/school/transition/'
                       )
                     "
                     target="_blank"
-                    @click="trackOutboundLink($event)"
+                    @click="transitionOutboundLink($event, 'https://www.vets.gov/gi-bill-comparison-tool')"
                   >
                     GI Bill&reg; comparison tool<v-icon
                       x-small

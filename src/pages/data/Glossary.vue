@@ -64,10 +64,10 @@ export default {
         // don't handle right clicks
         if (button !== undefined && button !== 0) return
 
-        const to = '/school/transition/?url=' + encodeURIComponent(target.href)
+        const to = '/school/transition'
         if (window.location.pathname !== to && event.preventDefault) {
           event.preventDefault()
-          this.trackOutboundLink(event)          
+          this.transitionOutboundLink(event, target.href)          
           this.$router.push(to)
         }
       }
