@@ -58,7 +58,6 @@ export default {
   computed: {
     url() {
       let url = this.outboundUrl;
-      console.log(this.outboundUrl)
       if (
         url.match(
           /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
@@ -81,7 +80,13 @@ export default {
       this.query = query || {}
       this.outboundUrl = this.$store.state.outboundUrl
     }
-    this.$store.commit("toggleDrawer", false);
+
+  if (!url) {
+    this.$router.push('/')
+  }
+
+  this.$store.commit("toggleDrawer", false);
+  this.$store.commit("setOutboundUrl", url);
   },
 }
 </script>
