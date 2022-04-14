@@ -560,7 +560,7 @@ export default {
         { type: "Name", field: "name:asc" },
         { type: "Annual Cost", field: "avg_net_price:asc" },
         { type: "Graduation Rate", field: "completion_rate:desc" },
-        { type: "Percent Earning More Than HS Grad", field: "latest.earnings.6_yrs_after_entry.gt_threshold_suppressed:desc" },
+        { type: "% Earning More Than a High School Grad", field: "latest.earnings.6_yrs_after_entry.gt_threshold_suppressed:desc" },
       ],
       shareUrl: null,
       displayToggle: "institutions",
