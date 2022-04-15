@@ -72,19 +72,18 @@ export default {
       window.close();
     },
   },
+  created() {
+    
+  },
   mounted() {
     if (true) {
       let query = querystring.parse(window.location.search.substring(1))
       this.query = query || {}
-      this.outboundUrl = this.$store.state.outboundUrl
     }
-
-  if (!url) {
-    this.$router.push('/')
-  }
+  this.outboundUrl = this.$store.state.outboundUrl
 
   this.$store.commit("toggleDrawer", false);
-  this.$store.commit("setOutboundUrl", url);
+  this.$store.commit("setOutboundUrl", this.outboundUrl);
   },
 }
 </script>
