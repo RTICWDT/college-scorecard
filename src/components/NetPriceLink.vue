@@ -3,7 +3,8 @@
     rounded
     color="secondary"
     target="_blank"
-    :href="$url('/school/transition/?url=' + fixedUrl)"
+    :href="$url('/school/transition/')"
+    @click="transitionOutboundLink($event, fixedUrl)"
     v-if="url"
   >
     <v-icon small class="mx-1">fas fa-calculator</v-icon>
@@ -20,13 +21,15 @@
 </template>
 
 <script>
+import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 export default {
+  mixins: [AnalyticsEvents],
   props: ["url"],
   computed: {
     fixedUrl() {
       if (this.url == "#") return false
-      else if (this.url.match(/^http/)) return encodeURIComponent(this.url)
-      else return "http://" + encodeURIComponent(this.url)
+      else if (this.url.match(/^http/)) this.url
+      else return "http://" + this.url
     },
   },
 }

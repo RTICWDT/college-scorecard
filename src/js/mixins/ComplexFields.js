@@ -252,8 +252,8 @@ export default {
             if (!this.school) return null;
             let url = _.get(this.school, this.fields['SCHOOL_URL'], '#');
             if (url == '#') return false;
-            else if (url.match(/^http/)) return encodeURIComponent(url);
-            else return 'http://' + encodeURIComponent(url);
+            else if (url.match(/^http/)) return url;
+            else return 'http://' + url;
         },
 
         fullTimeEnrollment() {

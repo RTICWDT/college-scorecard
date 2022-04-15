@@ -1082,14 +1082,11 @@
                           <a
                             :href="
                               $url(
-                                '/school/transition/?url=' +
-                                  encodeURIComponent(
-                                    'https://studentaid.gov/loan-simulator'
-                                  )
+                                '/school/transition/'
                               )
                             "
                             target="_blank"
-                            @click="trackOutboundLink($event)"
+                            @click="transitionOutboundLink($event, 'https://studentaid.gov/loan-simulator')"
                             >payment options<v-icon
                               x-small
                               class="pl-1"
@@ -1103,13 +1100,10 @@
                             target="_blank"
                             :href="
                               $url(
-                                '/school/transition/?url=' +
-                                  encodeURIComponent(
-                                    'https://studentaid.gov/manage-loans/repayment/plans/income-driven'
-                                  )
+                                '/school/transition/'
                               )
                             "
-                            @click="trackOutboundLink($event)"
+                            @click="transitionOutboundLink($event, 'https://studentaid.gov/manage-loans/repayment/plans/income-driven')"
                             >income-driven repayment<v-icon
                               x-small
                               class="pl-1"
