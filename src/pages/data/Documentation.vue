@@ -113,7 +113,7 @@
               endpoint for querying all data is <strong>/v1/schools</strong>.
               Developers may register for an API key at
               <a :href="$url('/school/transition/')" target="_blank"
-              @click="transitionOutboundLink('https://api.data.gov/signup')"
+              @click="transitionOutboundLink($event, 'https://api.data.gov/signup')"
                 >https://api.data.gov/signup<v-icon
                     x-small
                     class="pl-1"
@@ -241,7 +241,7 @@
               <a
                 :href="$url('/school/transition/')"
                 target="_blank"
-                @click="transitionOutboundLink('https://github.com/RTICWDT/open-data-maker/blob/master/API.md')"
+                @click="transitionOutboundLink($event, 'https://github.com/RTICWDT/open-data-maker/blob/master/API.md')"
                 >HTTP API documentation<v-icon
                     x-small
                     class="pl-1"
