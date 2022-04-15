@@ -55,11 +55,12 @@ export default function (Vue, { router, head, isClient, appOptions }) {
       fos: [],
       institutions: [],
       drawerOpen: false,
-      clearForm: false
+      clearForm: false,
+      outboundUrl: null,
     },
     getters: {
       getInstitutions: state => state.institutions,
-      getFieldsOfStudy: state => state.fos
+      getFieldsOfStudy: state => state.fos,
     },
     mutations: {
       toggleSchool(state, obj) {
@@ -124,7 +125,10 @@ export default function (Vue, { router, head, isClient, appOptions }) {
       },
       clearForm(state) {
         state.clearForm = true;
-      }
+      },
+      setOutboundUrl(state, value = null) {
+        state.outboundUrl = value;
+      }      
     },
     plugins: [vuexLocal.plugin]
   })

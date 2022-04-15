@@ -84,7 +84,8 @@
                   <h2 class="title school-url mt-0">
                     <a
                       target="_blank"
-                      :href="$url('/school/transition/?url=' + schoolUrl)"
+                      :href="$url('/school/transition/')"
+                      @click="transitionOutboundLink($event, schoolUrl)"
                       >{{ schoolUrlDisplay | formatUrlText
                       }}<v-icon x-small class="pl-1" color="#007000">
                         fas fa-external-link-alt
@@ -1714,14 +1715,11 @@
                           <a
                             :href="
                               $url(
-                                '/school/transition/?url=' +
-                                  encodeURIComponent(
-                                    'https://studentaid.gov/loan-simulator'
-                                  )
+                                '/school/transition/'
                               )
                             "
                             target="_blank"
-                            @click="trackOutboundLink($event)"
+                            @click="transitionOutboundLink($event, 'https://studentaid.gov/loan-simulator')"
                             >payment options<v-icon
                               x-small
                               class="pl-1"
@@ -1735,13 +1733,10 @@
                             target="_blank"
                             :href="
                               $url(
-                                '/school/transition/?url=' +
-                                  encodeURIComponent(
-                                    'https://studentaid.gov/manage-loans/repayment/plans/income-driven'
-                                  )
+                                '/school/transition/'
                               )
                             "
-                            @click="trackOutboundLink($event)"
+                            @click="transitionOutboundLink($event, 'https://studentaid.gov/manage-loans/repayment/plans/income-driven')"
                             >income-driven repayment<v-icon
                               x-small
                               class="pl-1"
@@ -2060,14 +2055,11 @@
                               color="secondary"
                               :href="
                                 $url(
-                                  '/school/transition/?url=' +
-                                    encodeURIComponent(
-                                      'https://studentaid.gov/h/apply-for-aid/fafsa'
-                                    )
+                                  '/school/transition/'
                                 )
                               "
                               target="_blank"
-                              @click="trackOutboundLink($event)"
+                              @click="transitionOutboundLink($event, 'https://studentaid.gov/h/apply-for-aid/fafsa')"
                               >Start My FAFSA&reg; Form<v-icon
                                 x-small
                                 color="white"
