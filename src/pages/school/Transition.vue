@@ -44,14 +44,12 @@
 </style>
 <script>
 const querystring = require("querystring")
-import approved from "~/data/redirect_approved_list.json";
 import { mapGetters } from "vuex"
 
 export default {
   data() {
     return {
       query: {},
-      approved_list: approved,
       outboundUrl: ""
     }
   },
