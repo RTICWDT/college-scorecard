@@ -86,8 +86,10 @@
 <script>
 import CompareDrawer from "~/components/CompareDrawer.vue"
 import CompareHeader from "~/components/CompareHeader.vue"
+import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 
 export default {
+  mixins: [AnalyticsEvents],
   components: {
     "compare-drawer": CompareDrawer,
     "compare-header": CompareHeader,
