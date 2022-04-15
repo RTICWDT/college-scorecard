@@ -3,7 +3,8 @@
     rounded
     color="secondary"
     target="_blank"
-    :href="$url('/school/transition/?url=' + fixedUrl)"
+    :href="$url('/school/transition/')"
+    @click="transitionOutboundLink($event, fixedUrl)"
     v-if="url"
   >
     <v-icon small class="mx-1">fas fa-calculator</v-icon>

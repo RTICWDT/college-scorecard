@@ -78,13 +78,10 @@
               <a
                 :href="
                   $url(
-                    '/school/transition/?url=' +
-                      encodeURIComponent(
-                        'http://opendata.stackexchange.com/questions/tagged/collegescorecard'
-                      )
+                    '/school/transition/'
                   )
                 "
-                @click="trackOutboundLink($event)"
+                @click="transitionOutboundLink($event, 'http://opendata.stackexchange.com/questions/tagged/collegescorecard')"
                 target="_blank"
                 >StackExchange<v-icon x-small class="pl-1" color="#007000">
                   fas fa-external-link-alt
