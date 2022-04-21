@@ -2401,7 +2401,7 @@
                         Acceptance Rate
                         <tooltip definition="acceptance-rate" />
                       </h2>
-                      <div v-if="openAdmissions != 1 && acceptanceRate != null">
+                      <div v-if="openAdmissions != 1 && acceptanceRateActual != null">
                         <donut
                           color="#1874DC"
                           :value="acceptanceRateActual * 100"
