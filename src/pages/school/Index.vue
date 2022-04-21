@@ -2426,7 +2426,7 @@
                           Acceptance Rate: {{ Math.round(100) + "%" }}
                         </div>
                       </div>
-                      <p v-else-if="!acceptanceRate" class="data-na">
+                      <p v-else-if="!acceptanceRateActual" class="data-na">
                         Data Not Available
                       </p>
                       <!--<p v-else>This school has an open admissions policy.</p>-->
