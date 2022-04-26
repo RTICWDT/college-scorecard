@@ -35,7 +35,7 @@
                     <li>
                       Updates (more recent data values) derived from Federal Student Aid sources for the following data metrics: 
                       Cohort Default Rate, Currently Operating Status Flag, Heightened Cash Monitoring Flag, Accrediting Agency
-                      Name and Code, Title IV Approval Date, and Federal School Code
+                      Name and Code, Title IV Approval Date, and Federal School Code.
                     </li>
                   </ul>
                 </v-expansion-panel-content>
