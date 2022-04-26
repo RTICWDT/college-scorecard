@@ -96,6 +96,9 @@
   align-items: center;
   white-space: nowrap;
   height: 40px;
+  @media only screen and (max-width: 600px) {
+    display:inline;
+  }  
 }
 </style>
 
