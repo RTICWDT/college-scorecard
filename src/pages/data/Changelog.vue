@@ -26,7 +26,7 @@
                 >
                 <v-expansion-panel-content>
                   <p>
-                    On April 29, 2022, the Department provided the following updates to the College Scorecard website/API:
+                    On May 2, 2022, the Department provided the following updates to the College Scorecard website/API:
                   </p>
                   <ul>
                     <li>
