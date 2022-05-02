@@ -494,6 +494,7 @@ import ContextToggle from "~/components/ContextToggle.vue"
 import SearchFieldsOfStudyForm from "~/components/SearchFieldsOfStudyForm.vue"
 import FieldOfStudyResultCard from "~/components/FieldOfStudyResultCard.vue"
 import Tooltip from "~/components/Tooltip.vue";
+import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 
 import _ from "lodash"
 import { apiGet } from "~/js/api.js"
