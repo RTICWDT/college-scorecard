@@ -13,14 +13,14 @@
             </p>
             <p class="pb-4">
               This data was
-              <strong>last updated March 14, 2022</strong>.
+              <strong>last updated May 2, 2022</strong>.
             </p>
 
             <h2 class="my-5">
               All Data Files
               <v-btn
                 class="ml-2 green-text"
-                href="https://ed-public-download.app.cloud.gov/downloads/CollegeScorecard_Raw_Data_03142022.zip"
+                href="https://ed-public-download.app.cloud.gov/downloads/CollegeScorecard_Raw_Data_04262022.zip"
                 >Download
                 <v-icon right dark x-small>
                   fas fa-download
@@ -30,7 +30,7 @@
 
             <ul class="font-weight-regular">
               <li>
-                Institution-level data files for 1996-97 through 2019-20
+                Institution-level data files for 1996-97 through 2020-21
                 containing aggregate data for each institution. Includes
                 information on institutional characteristics, enrollment,
                 student aid, costs, and student outcomes.
@@ -44,7 +44,7 @@
                 graduation.
               </li>
               <li>
-                Crosswalk files for 2000-01 through 2019-20 that link the
+                Crosswalk files for 2000-01 through 2020-21 that link the
                 Department’s OPEID with an IPEDS UNITID for each institution.
               </li>
             </ul>
@@ -53,7 +53,7 @@
               <v-btn
                 small
                 class="ml-2"
-                href="https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Institution_03142022.zip"
+                href="https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Institution_04262022.zip"
                 >Download
                 <v-icon right dark x-small>
                   fas fa-download
@@ -65,7 +65,7 @@
               <v-btn
                 small
                 class="ml-2 btnText"
-                href=" https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Field-of-Study_03142022.zip"
+                href=" https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Field-of-Study_04262022.zip"
                 >Download
                 <v-icon right dark x-small>
                   fas fa-download
