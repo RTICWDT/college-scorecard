@@ -2401,7 +2401,7 @@
                         Acceptance Rate
                         <tooltip definition="acceptance-rate" />
                       </h2>
-                      <div v-if="openAdmissions != 1 && acceptanceRate != null">
+                      <div v-if="openAdmissions != 1 && acceptanceRateActual != null">
                         <donut
                           color="#1874DC"
                           :value="acceptanceRateActual * 100"
@@ -2426,7 +2426,7 @@
                           Acceptance Rate: {{ Math.round(100) + "%" }}
                         </div>
                       </div>
-                      <p v-else-if="!acceptanceRate" class="data-na">
+                      <p v-else-if="!acceptanceRateActual" class="data-na">
                         Data Not Available
                       </p>
                       <!--<p v-else>This school has an open admissions policy.</p>-->

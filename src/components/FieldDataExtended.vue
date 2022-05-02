@@ -52,7 +52,8 @@
           <td width="50%">
             <h4>
               Median Earnings&nbsp;
-              <tooltip definition="fos-median-earnings" />
+              <tooltip definition="fos-median-earnings"
+              :isBranch="isBranch" />
             </h4>
           </td>
           <td>
@@ -74,7 +75,8 @@
           <td cols="12" md="6">
             <h4>
               Monthly Earnings&nbsp;
-              <tooltip definition="fos-monthly-earnings" />
+              <tooltip definition="fos-monthly-earnings"
+              :isBranch="isBranch" />
             </h4>
           </td>
           <td>
@@ -124,8 +126,10 @@
               <tooltip
                 v-if="!fosShowDebtPriorIncluded"
                 definition="fos-median-debt"
+                :isBranch="isBranch"
               />
-              <tooltip v-else definition="fos-median-debt-all-schools" />
+              <tooltip v-else definition="fos-median-debt-all-schools"
+              :isBranch="isBranch" />
             </h4>
           </td>
           <td>
@@ -162,10 +166,22 @@
               <tooltip
                 v-if="!fosShowDebtPriorIncluded"
                 definition="fos-monthly-debt-payment"
+                :isBranch="isBranch"
+                :version="
+                  [5, 6, 7, 8].indexOf(fos.credential.level) < 0
+                    ? 'default'
+                    : 'graduate'
+                "                
               />
               <tooltip
                 v-else
                 definition="fos-monthly-debt-payment-all-schools"
+                :isBranch="isBranch"
+                :version="
+                  [5, 6, 7, 8].indexOf(fos.credential.level) < 0
+                    ? 'default'
+                    : 'graduate'
+                "                
               />
             </h4>
           </td>
