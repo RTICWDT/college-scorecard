@@ -515,7 +515,7 @@ export default {
     "fos-result-card": FieldOfStudyResultCard,
     "tooltip": Tooltip,
   },
-  mixins: [URLHistory, PrepareParams],
+  mixins: [URLHistory, PrepareParams, AnalyticsEvents],
   props: {
     "page-permalink": String,
     states: Array,
