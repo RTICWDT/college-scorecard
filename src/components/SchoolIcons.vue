@@ -30,13 +30,20 @@
       >
         <span>{{ _.get(school, fields["LOCALE"], "-1") | locale }}</span>
       </li>
-
-      <li
-        :class="_.get(school, fields['SIZE'], '-1') | sizeCategoryClass"
-        :style="{ 'background-image': 'url(' + $url(sizeIcon) + ')' }"
-      >
-        <span>{{ _.get(school, fields["SIZE"], "-1") | sizeCategory }}</span>
-      </li>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <li
+            :class="_.get(school, fields['SIZE'], '-1') | sizeCategoryClass"
+            v-on="on"
+            :style="{ 'background-image': 'url(' + $url(sizeIcon) + ')' }"
+          >
+            <span>{{
+              _.get(school, fields["SIZE"], "-1") | sizeCategory
+            }}</span>
+          </li>
+        </template>
+        <div class="hover-tip">{{ sizeTip }}</div>
+      </v-tooltip>
     </ul>
   </div>
 </template>
@@ -136,6 +143,25 @@ export default {
           break
         default:
           return "Most awards earned at this school are at this level, but other degrees or certificates may be offered."
+          break
+      }
+    },
+    sizeTip() {
+      const cat = this.$options.filters.sizeCategory(
+        _.get(this.school, this.fields["SIZE"], "-1")
+      )
+      switch (cat) {
+        case "Small":
+          return "Up to 2,000 undergraduates"
+          break
+        case "Medium":
+          return "Between 2,000 and 15,000 undergraduates"
+          break
+        case "Large":
+          return "Over 15,000 undergraduates"
+          break
+        default:
+          return "Unavailable"
           break
       }
     },

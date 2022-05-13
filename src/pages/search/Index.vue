@@ -323,7 +323,8 @@
                   <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
                   Classification of Instructional Programs (CIP) and may not match the program titles at a
                   given school.
-                  <a target="_blank" :href="$url('/school/transition/?url=' + encodeURIComponent('https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56'))">
+                  <a target="_blank" :href="$url('/school/transition/')"
+                  @click="transitionOutboundLink($event, 'https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56')">
                     Learn more about CIP<v-icon
                       x-small
                       color="white"
@@ -493,6 +494,7 @@ import ContextToggle from "~/components/ContextToggle.vue"
 import SearchFieldsOfStudyForm from "~/components/SearchFieldsOfStudyForm.vue"
 import FieldOfStudyResultCard from "~/components/FieldOfStudyResultCard.vue"
 import Tooltip from "~/components/Tooltip.vue";
+import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 
 import _ from "lodash"
 import { apiGet } from "~/js/api.js"
@@ -513,7 +515,7 @@ export default {
     "fos-result-card": FieldOfStudyResultCard,
     "tooltip": Tooltip,
   },
-  mixins: [URLHistory, PrepareParams],
+  mixins: [URLHistory, PrepareParams, AnalyticsEvents],
   props: {
     "page-permalink": String,
     states: Array,
@@ -522,7 +524,7 @@ export default {
     specializedMission: Object,
     defaultSort: {
       type: String,
-      default: "median_earnings:desc",
+      default: "latest.earnings.6_yrs_after_entry.gt_threshold_suppressed:desc",
     },
     isLoading: Boolean,
     compareSchools: Array,
@@ -560,7 +562,7 @@ export default {
         { type: "Name", field: "name:asc" },
         { type: "Annual Cost", field: "avg_net_price:asc" },
         { type: "Graduation Rate", field: "completion_rate:desc" },
-        { type: "Percent Earning More Than HS Grad", field: "latest.earnings.6_yrs_after_entry.gt_threshold_suppressed:desc" },
+        { type: "% Earning More Than a High School Grad", field: "latest.earnings.6_yrs_after_entry.gt_threshold_suppressed:desc" },
       ],
       shareUrl: null,
       displayToggle: "institutions",

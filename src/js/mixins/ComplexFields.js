@@ -252,8 +252,8 @@ export default {
             if (!this.school) return null;
             let url = _.get(this.school, this.fields['SCHOOL_URL'], '#');
             if (url == '#') return false;
-            else if (url.match(/^http/)) return encodeURIComponent(url);
-            else return 'http://' + encodeURIComponent(url);
+            else if (url.match(/^http/)) return url;
+            else return 'http://' + url;
         },
 
         fullTimeEnrollment() {
@@ -538,14 +538,14 @@ export default {
         fakeMedianEarnings() {
             var medians = {
                 1 : 
-                    { 0 : 27754,
-                    1 : 37078 },
+                    { 0 : 27928,
+                    1 : 36819 },
                 2 : 
-                    { 0 : 36066,
-                    1 : 37078 },
+                    { 0 : 35996,
+                    1 : 36819 },
                 3 : 
-                    { 0 : 47975.5,
-                    1 : 37078 },                                
+                    { 0 : 47891,
+                    1 : 36819 },                                
             }
 
             return medians;
@@ -553,28 +553,28 @@ export default {
         fakeAverageAnnualCosts() {
             var medians = {
                 1 : 
-                    { 0 : 14805.5,
-                    1 : 15387.5 },
+                    { 0 : 15765,
+                    1 : 15965 },
                 2 : 
-                    { 0 : 8430,
-                    1 : 15387.5 },
+                    { 0 : 8843,
+                    1 : 15965 },
                 3 : 
-                    { 0 : 19202,
-                    1 : 15387.5 },                                
+                    { 0 : 19534,
+                    1 : 15965 },                                
             }
             return medians;
         },      
         fakeGraduationRate() {
             var medians = {
                 1 : 
-                    { 0 : 0.6842,
-                    1 : 0.5845 },
+                    { 0 : 0.6835,
+                    1 : 0.5872 },
                 2 : 
-                    { 0 : 0.2924,
-                    1 : 0.5845 },
+                    { 0 : 0.3037,
+                    1 : 0.5872 },
                 3 : 
-                    { 0 : 0.5623,
-                    1 : 0.5845 },                                
+                    { 0 : 0.5686,
+                    1 : 0.5872 },                                
             }
             return medians;
         },        
@@ -588,10 +588,10 @@ export default {
 
             var acceptanceText = "  ";
             
-            if (this.acceptanceRate == 1 && this.openAdmissions != 1) {
+            if (this.acceptanceRateActual == 1 && this.openAdmissions != 1) {
                 acceptanceText = this.schoolName + " has an acceptance rate of 100%, which means that all students who apply are accepted. "
             }
-            else if (this.openAdmissions != 1) {
+            else if (this.openAdmissions != 1 && this.acceptanceRateActual) {
                 acceptanceText =  this.schoolName + " has an acceptance rate of " + Math.round(this.acceptanceRateActual * 100)+"%" + ". "
             }
             else if (this.openAdmissions == 1) {

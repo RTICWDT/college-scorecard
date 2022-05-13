@@ -44,26 +44,23 @@
 </style>
 <script>
 const querystring = require("querystring")
+import { mapGetters } from "vuex"
 
 export default {
   data() {
     return {
       query: {},
+      outboundUrl: ""
     }
   },
   computed: {
-    referrer() {
-      //return process.isClient ? document.referrer : ""
-      return ""
-    },
     url() {
-      let url = decodeURI(this.query.url)
-
+      let url = this.outboundUrl;
       if (
         url.match(
           /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
-        )
-      ) {
+        ))
+     {
         return url
       } else {
         return false
@@ -75,12 +72,18 @@ export default {
       window.close();
     },
   },
+  created() {
+    
+  },
   mounted() {
     if (true) {
       let query = querystring.parse(window.location.search.substring(1))
       this.query = query || {}
     }
-    this.$store.commit("toggleDrawer", false);
+  this.outboundUrl = this.$store.state.outboundUrl
+
+  this.$store.commit("toggleDrawer", false);
+  this.$store.commit("setOutboundUrl", this.outboundUrl);
   },
 }
 </script>

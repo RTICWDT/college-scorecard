@@ -145,7 +145,7 @@
                           {{ fos.credential.title }}</span
                         >
                       </v-expansion-panel-header>
-                      <v-expansion-panel-content>
+                      <v-expansion-panel-content class="pa-0 ma-0">
                         <field-data-extended
                           :fos="fos"
                           :fos-salary-select-items="fosSalarySelectItems"

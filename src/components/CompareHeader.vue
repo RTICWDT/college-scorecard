@@ -1,63 +1,67 @@
 <template>
   <div
     id="compare-header"
-    class="header pa-3 elevation-4"
+    class="header pa-3 elevation-4 d-print-none"
     @click="toggleDrawer()"
-    v-show="(currentSchoolCount > 0 || currentFieldOfStudyCount > 0)"
+    v-show="currentSchoolCount > 0 || currentFieldOfStudyCount > 0"
   >
-      <div class="compare-header-text ml-8 mr-6 mb-1">
+    <div class="compare-header-text ml-8 mr-6 mb-1">
+      <v-icon class="mt-1" color="black" size="24"> </v-icon>
 
-          <v-icon class="mt-1" color="black"  size="24">
-            
-          </v-icon>
-       
-        Ready to Compare: </div>
-      <div v-if="currentSchoolCount < 10" class="compare-header-text mb-1 ml-4">
-        <div
-          class="compare-icon-wrapper d-inline-block mr-2"
-          style="background: #83c38c;"
-        >
-          <v-icon class="mt-1" color="black"  size="24">
-            fas fa-university
-          </v-icon>
-        </div>
-        {{ currentSchoolCount }} {{ schoolText }} &nbsp;&nbsp;
-      </div>
-      <div v-else class="compare-header-text mb-1 ml-4">
-        <div
-          class="compare-icon-wrapper d-inline-block mr-2 mt-n1"
-        >
-          <v-icon class="mt-1" color="red" medium style="font-size:40px;border-radius:50%;">
-            fas fa-exclamation-circle
-          </v-icon>
-        </div>
-        Maximum of 10 Schools reached &nbsp;&nbsp;
-      </div>
-      <div
-        v-if="currentFieldOfStudyCount < 10"
-        class="compare-header-text mb-1 ml-6"
-      >
-        <div
-          class="compare-icon-wrapper d-inline-block mr-2"
-          style="background: #fec005;"
-        >
-          <v-icon class="mt-1" color="black"  size="24">
-            fas fa-award
-          </v-icon>
-        </div>
-        {{ currentFieldOfStudyCount }} {{ fieldOfStudyText }} 
-      </div>
-      <div v-else class="compare-header-text mb-1 ml-4">
-        <div
-          class="compare-icon-wrapper d-inline-block mr-2 mt-n1"
-        >
-          <v-icon class="mt-1" color="red" medium style="font-size:40px;border-radius:50%;">
-            fas fa-exclamation-circle
-          </v-icon>
-        </div>
-        Maximum of 10 Fields of Study reached &nbsp;&nbsp;
-      </div>
+      Ready to Compare:
     </div>
+    <div v-if="currentSchoolCount < 10" class="compare-header-text mb-1 ml-4">
+      <div
+        class="compare-icon-wrapper d-inline-block mr-2"
+        style="background: #83c38c;"
+      >
+        <v-icon class="mt-1" color="black" size="24">
+          fas fa-university
+        </v-icon>
+      </div>
+      {{ currentSchoolCount }} {{ schoolText }} &nbsp;&nbsp;
+    </div>
+    <div v-else class="compare-header-text mb-1 ml-4">
+      <div class="compare-icon-wrapper d-inline-block mr-2 mt-n1">
+        <v-icon
+          class="mt-1"
+          color="red"
+          medium
+          style="font-size:40px;border-radius:50%;"
+        >
+          fas fa-exclamation-circle
+        </v-icon>
+      </div>
+      Maximum of 10 Schools reached &nbsp;&nbsp;
+    </div>
+    <div
+      v-if="currentFieldOfStudyCount < 10"
+      class="compare-header-text mb-1 ml-6"
+    >
+      <div
+        class="compare-icon-wrapper d-inline-block mr-2"
+        style="background: #fec005;"
+      >
+        <v-icon class="mt-1" color="black" size="24">
+          fas fa-award
+        </v-icon>
+      </div>
+      {{ currentFieldOfStudyCount }} {{ fieldOfStudyText }}
+    </div>
+    <div v-else class="compare-header-text mb-1 ml-4">
+      <div class="compare-icon-wrapper d-inline-block mr-2 mt-n1">
+        <v-icon
+          class="mt-1"
+          color="red"
+          medium
+          style="font-size:40px;border-radius:50%;"
+        >
+          fas fa-exclamation-circle
+        </v-icon>
+      </div>
+      Maximum of 10 Fields of Study reached &nbsp;&nbsp;
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -86,12 +90,12 @@
 }
 
 .compare-header-text {
-  line-height: 2.0;
+  line-height: 2;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   white-space: nowrap;
-  height:40px;
+  height: 40px;
 }
 </style>
 
@@ -112,8 +116,8 @@ export default {
     schoolText() {
       return this.$store.state.institutions.length > 1 ||
         this.$store.state.institutions.length === 0
-          ? "Schools"
-          : "School"
+        ? "Schools"
+        : "School"
     },
     fieldOfStudyText() {
       return this.$store.state.fos.length > 1 ||

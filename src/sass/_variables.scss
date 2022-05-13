@@ -100,7 +100,7 @@ $base-accent-color: $mid-blue;
 $base-padding: 1.25em; //20px
 $base-padding-tb: 1.1em;
 //this is for use with $base-padding for a top-bottom shorter view
-$base-padding-lite: $base-padding/3;
+$base-padding-lite: calc($base-padding/3);
 $base-padding-large: 1.875em; //30px
 $base-padding-extra: 3.125em; //50px
 

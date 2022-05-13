@@ -193,20 +193,27 @@
                       </h2>
                     </v-col>
                     <v-col cols="4">
-                    <div class="home-icon-wrapper  mr-10">
-                      <div class="home-icon">
-                        <img :src="$url('img/icon-pathways-blue.svg')" alt="Pathways Icon">
+                      <div class="home-icon-wrapper  mr-10">
+                        <div class="home-icon">
+                          <img
+                            :src="$url('img/icon-pathways-blue.svg')"
+                            alt="Pathways Icon"
+                          />
+                        </div>
                       </div>
-                    </div>
                     </v-col>
                   </v-row>
                 </div>
 
                 <p class="mx-10">
-                  Search for apprenticeship jobs and programs on                  
-                  <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.apprenticeship.gov/apprenticeship-finder'))"
-                     target="_blank"
-                     @click="trackOutboundLink($event)"
+                  Search for apprenticeship jobs and programs on
+                  <a
+                    class="homeCallout-indent"
+                    :href="$url('/school/transition/')"
+                    target="_blank"
+                    @click="transitionOutboundLink($event, 
+                            'https://www.apprenticeship.gov/apprenticeship-finder'
+                      )"
                   >
                     apprenticeship.gov<v-icon
                       x-small
@@ -214,31 +221,40 @@
                       color="#007000"
                     >
                       fas fa-external-link-alt
-                    </v-icon>                    
-                  </a>.
+                    </v-icon> </a
+                  >.
                 </p>
-                <hr/>
+                <hr />
                 <p class="mx-10">
-                  Use the 
-                 <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.mynextmove.org'))"
-                     target="_blank"
-                     @click="trackOutboundLink($event)"
+                  Use the
+                  <a
+                    class="homeCallout-indent"
+                    :href="
+                      $url(
+                        '/school/transition/')
+                    "
+                    target="_blank"
+                    @click="transitionOutboundLink($event, 'https://www.mynextmove.org')"
                   >
-                    MyNextMove.org<v-icon
-                      x-small
-                      class="pl-1"
-                      color="#007000"
-                    >
+                    MyNextMove.org<v-icon x-small class="pl-1" color="#007000">
                       fas fa-external-link-alt
-                    </v-icon>                    
-                  </a> tool for career exploration and job analysis.     
+                    </v-icon>
+                  </a>
+                  tool for career exploration and job analysis.
                 </p>
-                <hr/>
+                <hr />
                 <p class="mx-10">
-                  Find training programs: compare completion rates, employment rates, and more on
-                 <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://trainingproviderresults.gov'))"
-                     target="_blank"
-                     @click="trackOutboundLink($event)"
+                  Find training programs: compare completion rates, employment
+                  rates, and more on
+                  <a
+                    class="homeCallout-indent"
+                    :href="
+                      $url(
+                        '/school/transition/'
+                          )
+                    "
+                    target="_blank"
+                    @click="transitionOutboundLink($event, 'https://trainingproviderresults.gov')"
                   >
                     TrainingProviderResults.gov<v-icon
                       x-small
@@ -246,15 +262,21 @@
                       color="#007000"
                     >
                       fas fa-external-link-alt
-                    </v-icon>               
-                  </a>.
-                </p>    
-                <hr/>                
+                    </v-icon> </a
+                  >.
+                </p>
+                <hr />
                 <p class="mx-10">
-                  Visit 
-                 <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://careeronestop.org'))"
-                     target="_blank"
-                     @click="trackOutboundLink($event)"
+                  Visit
+                  <a
+                    class="homeCallout-indent"
+                    :href="
+                      $url(
+                        '/school/transition/'
+                        )
+                    "
+                    target="_blank"
+                    @click="transitionOutboundLink($event, 'https://careeronestop.org')"
                   >
                     CareerOneStop.org<v-icon
                       x-small
@@ -262,15 +284,21 @@
                       color="#007000"
                     >
                       fas fa-external-link-alt
-                    </v-icon>                    
-                  </a>, your source for career exploration training and jobs.
+                    </v-icon> </a
+                  >, your source for career exploration training and jobs.
                 </p>
-                <hr/>
+                <hr />
                 <p class="mx-10">
-                  Explore the  
-                 <a class="homeCallout-indent" :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.bls.gov/ooh/'))"
-                     target="_blank"
-                     @click="trackOutboundLink($event)"
+                  Explore the
+                  <a
+                    class="homeCallout-indent"
+                    :href="
+                      $url(
+                        '/school/transition/'
+                      )
+                    "
+                    target="_blank"
+                    @click="transitionOutboundLink($event, 'https://www.bls.gov/ooh/')"
                   >
                     Occupational Outlook Handbook (OOH)<v-icon
                       x-small
@@ -278,11 +306,10 @@
                       color="#007000"
                     >
                       fas fa-external-link-alt
-                    </v-icon>                    
-                  </a> 
+                    </v-icon>
+                  </a>
                   for detailed information about over 300 occupational profiles.
-                </p>    
-                                             
+                </p>
               </div>
             </v-col>
 
@@ -290,48 +317,56 @@
             <v-col class="homeCallout paying" cols="12" md="6" sm="12">
               <div class="home-callout-container ml-md-3">
                 <div class="home-callout-top mb-12">
-                <v-row align="center">
-                  <v-col cols="8">
-                    <h2 class="title mt-4 mt-md-0 ml-10">
-                      Learn More About Paying for College
-                    </h2>
-                  </v-col>
-                  <v-col cols="4">
-                  <div class="home-icon-wrapper mr-10">
-                    <div class="home-icon">
-                      <img
-                        :src="$url('img/icon-financial-aid.svg')"
-                        alt="Financial Aid Icon"
-                      />
-                    </div>
-                  </div>
-                  </v-col>
+                  <v-row align="center">
+                    <v-col cols="8">
+                      <h2 class="title mt-4 mt-md-0 ml-10">
+                        Learn More About Paying for College
+                      </h2>
+                    </v-col>
+                    <v-col cols="4">
+                      <div class="home-icon-wrapper mr-10">
+                        <div class="home-icon">
+                          <img
+                            :src="$url('img/icon-financial-aid.svg')"
+                            alt="Financial Aid Icon"
+                          />
+                        </div>
+                      </div>
+                    </v-col>
                   </v-row>
                 </div>
                 <p class="mx-10">
-                  You can learn more about the types of financial aid that are available at
+                  You can learn more about the types of financial aid that are
+                  available at
 
-                 <a :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov'))"
-                     target="_blank"
-                     @click="trackOutboundLink($event)"
+                  <a
+                    :href="
+                      $url(
+                        '/school/transition/'
+                      )
+                    "
+                    target="_blank"
+                    @click="transitionOutboundLink($event, 'https://studentaid.gov')"
                   >
-                    StudentAid.gov<v-icon
-                      x-small
-                      class="pl-1"
-                      color="#007000"
-                    >
+                    StudentAid.gov<v-icon x-small class="pl-1" color="#007000">
                       fas fa-external-link-alt
-                    </v-icon>                    
-                  </a>                  
+                    </v-icon>
+                  </a>
                 </p>
 
                 <p class="mx-10">
-                  To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA&#174;) form.
-                  You can use
+                  To receive financial aid, you must complete the Free
+                  Application for Federal Student Aid (FAFSA&#174;) form. You
+                  can use
 
-                  <a :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov/aid-estimator/'))"
-                     target="_blank"
-                     @click="trackOutboundLink($event)"
+                  <a
+                    :href="
+                      $url(
+                        '/school/transition/'
+                      )
+                    "
+                    target="_blank"
+                    @click="transitionOutboundLink($event, 'https://studentaid.gov/aid-estimator/')"
                   >
                     Federal Student Aid Estimator<v-icon
                       x-small
@@ -339,20 +374,26 @@
                       color="#007000"
                     >
                       fas fa-external-link-alt
-                    </v-icon>                     
+                    </v-icon>
                   </a>
 
                   to see how much aid may be available to you.
                 </p>
 
-                <p class="text-center home-callout-button-wrapper mx-10 pb-3 pt-9">
+                <p
+                  class="text-center home-callout-button-wrapper mx-10 pb-3 pt-9"
+                >
                   <v-btn
                     rounded
                     color="secondary"
-                    :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov/h/apply-for-aid/fafsa'))"
+                    :href="
+                      $url(
+                        '/school/transition/'
+                      )
+                    "
                     target="_blank"
-                    @click="trackOutboundLink($event)"
-                  >Start Your FAFSA&reg; Application<v-icon
+                    @click="transitionOutboundLink($event, 'https://studentaid.gov/h/apply-for-aid/fafsa')"
+                    >Start Your FAFSA&reg; Application<v-icon
                       x-small
                       color="white"
                       class="pl-1 pb-1"
@@ -362,15 +403,20 @@
                   </v-btn>
                 </p>
 
-                <hr/>
+                <hr />
 
                 <p class="mx-10">
-                  Veterans are eligible for higher education funding through the G.I. Bill benefits. Use the 
+                  Veterans are eligible for higher education funding through the
+                  G.I. Bill benefits. Use the
 
                   <a
-                    :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.vets.gov/gi-bill-comparison-tool'))"
+                    :href="
+                      $url(
+                        '/school/transition/'
+                      )
+                    "
                     target="_blank"
-                    @click="trackOutboundLink($event)"
+                    @click="transitionOutboundLink($event, 'https://www.vets.gov/gi-bill-comparison-tool')"
                   >
                     GI Bill&reg; comparison tool<v-icon
                       x-small
@@ -381,13 +427,14 @@
                     </v-icon>
                   </a>
 
-                  to learn about education programs and compare benefits by school.
+                  to learn about education programs and compare benefits by
+                  school.
                 </p>
               </div>
             </v-col>
           </v-row>
         </v-container>
-      </div>    
+      </div>
     </v-main>
   </div>
 </template>
@@ -421,40 +468,40 @@
 #home-content-container {
   height: auto;
 
-    @media (min-width: 960px) {
-      height: 900px;
-      background: linear-gradient(to bottom, #97CFF5 70%, #0075B2 30%);
-    }
+  @media (min-width: 960px) {
+    height: 900px;
+    background: linear-gradient(to bottom, #97cff5 70%, #0075b2 30%);
   }
+}
 
-  .home-callout-text {
-    width:70%;
+.home-callout-text {
+  width: 70%;
+}
+
+.home-callout-container {
+  margin-bottom: 80px;
+  height: 680px;
+  background-color: white;
+  box-shadow: 0px 3px 6px #00000029;
+
+  @media (min-width: 960px) {
+    margin-bottom: inherit;
+    height: 770px;
   }
-
-  .home-callout-container{
-    margin-bottom: 80px;
-    height: 680px;
-    background-color: white;
-    box-shadow: 0px 3px 6px #00000029;
-
-    @media (min-width: 960px) {
-      margin-bottom: inherit;
-      height: 770px;
-    }
-  }
+}
 
 .home-callout-top {
   background-color: #c4e4f9;
   height: 120px;
 
-    h2{
-      bottom: 50px;
-    }
-
-    @media (min-width: 960px) {
-      height: 160px;
-    }
+  h2 {
+    bottom: 50px;
   }
+
+  @media (min-width: 960px) {
+    height: 160px;
+  }
+}
 
 .home-icon {
   img {
@@ -477,11 +524,11 @@
 }
 </style>
 <style lang="scss" scoped>
-@import '~/sass/_variables.scss';
+@import "~/sass/_variables.scss";
 .homeCallout {
   /*background-color: #ffffff;*/
   a i:not(.fa-external-link-alt) {
-    color:$darker-green !important;
+    color: $darker-green !important;
   }
   hr {
     margin: 2rem 56px;
@@ -491,7 +538,7 @@
     background-color: #9d9d9d;
   }
   a.homeCallout-indent {
-    padding:0rem 0rem;
+    padding: 0rem 0rem;
   }
 
   h2 {
@@ -502,14 +549,14 @@
     /*margin-bottom: 2rem !important;*/
   }
 
-  h3{
+  h3 {
     text-align: left;
-    margin-bottom: .5rem !important;
+    margin-bottom: 0.5rem !important;
   }
 
-  h3{
+  h3 {
     text-align: left;
-    margin-bottom: .5rem !important;
+    margin-bottom: 0.5rem !important;
   }
 
   p {
@@ -522,7 +569,7 @@
   text-decoration: none;
 }
 
-.home-icon-wrapper{
+.home-icon-wrapper {
   position: relative;
   margin: 0 auto;
   width: 75px;
@@ -531,7 +578,6 @@
   @media (min-width: 960px) {
     width: 133px;
     height: 133px;
-
   }
 }
 .home-callout-button-wrapper {
@@ -567,7 +613,7 @@ export default {
     "name-autocomplete": NameAutocomplete,
     "field-of-study-search": FieldOfStudySearch,
     "compare-drawer": CompareDrawer,
-    "compare-header": CompareHeader,    
+    "compare-header": CompareHeader,
   },
   data() {
     return {
@@ -595,21 +641,24 @@ export default {
       if (typeof school == "string") {
         this.$router.push("/search/?search=" + encodeURIComponent(school))
       } else {
-        this.$router.push("/search/?search=" +
-          encodeURIComponent(school["school.name"]) +
-          "&id=" +
-          school.id)
+        this.$router.push(
+          "/search/?search=" + encodeURIComponent(school["school.name"]) //+
+          //"&id=" +
+          //school.id
+        )
       }
     },
     handleFieldOfStudySelected(fieldOfStudy) {
-      this.$router.push("/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4))
+      this.$router.push(
+        "/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4)
+      )
     },
     handleFoSMoreOptionsClick() {
       this.$router.push("/search/?toggle=fos")
     },
   },
- metaInfo: {
-    title: 'College Scorecard',
-  }    
+  metaInfo: {
+    title: "College Scorecard",
+  },
 }
 </script>

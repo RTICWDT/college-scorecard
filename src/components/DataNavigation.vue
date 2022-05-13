@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="d-print-none">
     <div class="data-navigation">
       <v-tabs
         hide-slider
@@ -12,7 +12,9 @@
         <v-tab :href="$url('/data/documentation/')" value="documentation"
           >Documentation</v-tab
         >
-        <v-tab :href="$url('/data/changelog/')" value="changelog">Change Log</v-tab>
+        <v-tab :href="$url('/data/changelog/')" value="changelog"
+          >Change Log</v-tab
+        >
         <v-tab :href="$url('/data/glossary/')" value="glossary">Glossary</v-tab>
       </v-tabs>
     </div>
@@ -22,19 +24,19 @@
 @import "~/sass/_variables";
 .data-navigation {
   background-color: $white;
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
-.v-tabs-bar
-  .v-tab--active {
-    background-color: $darker-green !important;
+.v-tabs-bar .v-tab--active {
+  background-color: $darker-green !important;
+  color: $white !important;
+  font-weight: bold !important;
+  a {
     color: $white !important;
-    font-weight: bold !important;
-    a {
-      color:$white !important;
-    }
   }
- a {
+}
+a {
   letter-spacing: 0 !important;
   font-family: $header-font-family !important;
   font-weight: normal;

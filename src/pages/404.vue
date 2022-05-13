@@ -38,10 +38,11 @@ export default {
       if (typeof school == "string") {
         this.$router.push("/search/?name=" + encodeURIComponent(school))
       } else {
-        this.$router.push("/search/?name=" +
-          encodeURIComponent(school["school.name"]) +
-          "&id=" +
-          school.id)
+        this.$router.push(
+          "/search/?name=" + encodeURIComponent(school["school.name"]) // +
+          //"&id=" +
+          //school.id
+        )
       }
     },
   },

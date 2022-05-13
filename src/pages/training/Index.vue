@@ -36,16 +36,16 @@
                  <v-row align="center">
                    <v-col cols="12" lg="6" md="12" sm="12">
                      <h3 class="text-left pb-5">Search for schools with training programs</h3>
-                     <p class="pr-16">Search nearby schools that accept Pell Grants, and may also have eligible training programs for participants in Workforce Innovation and Opportunity Act (WIOA) programs. If you need help taking the next step in your career, find an <a :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.careeronestop.org/LocalHelp/AmericanJobCenters/american-job-centers.aspx'))"
+                     <p class="pr-16">Search nearby schools that accept Pell Grants, and may also have eligible training programs for participants in Workforce Innovation and Opportunity Act (WIOA) programs. If you need help taking the next step in your career, find an <a :href="$url('/school/transition/')"
                         target="_blank"
-                        @click="trackOutboundLink($event)">American Job Center<v-icon
+                        @click="transitionOutboundLink($event, 'https://www.careeronestop.org/LocalHelp/AmericanJobCenters/american-job-centers.aspx')">American Job Center<v-icon
                       x-small
                       class="pl-1"
                     >
                       fas fa-external-link-alt
-                    </v-icon></a>. In some states, Unemployment Insurance (UI) recipients can attend school or training and continue to receive UI benefits (<a :href="$url('/school/transition/?url=' + encodeURIComponent('https://www.dol.gov/general/topic/unemployment-insurance'))"
+                    </v-icon></a>. In some states, Unemployment Insurance (UI) recipients can attend school or training and continue to receive UI benefits (<a :href="$url('/school/transition/')"
                         target="_blank"
-                        @click="trackOutboundLink($event)">learn more about UI benefits<v-icon
+                        @click="transitionOutboundLink($event, 'https://www.dol.gov/general/topic/unemployment-insurance')">learn more about UI benefits<v-icon
                       x-small
                       class="pl-1"
                     >
@@ -125,9 +125,9 @@
 
                 <p class="home-callout-button-wrapper text-center">
                   <a
-                    :href="$url('/school/transition/?url=' + encodeURIComponent('https://trainingproviderresults.gov'))"
+                    :href="$url('/school/transition/')"
                     target="_blank"
-                    @click="trackOutboundLink($event)"
+                    @click="transitionOutboundLink($event, 'https://trainingproviderresults.gov')"
                   >TrainingProviderResults.gov<v-icon
                       x-small
                       class="pl-1"
@@ -165,9 +165,9 @@
 
                 <p class="mx-10">
                   To receive financial aid, you must complete the Free Application for Federal Student Aid (FAFSA). You also may qualify for a Pell Grant, which is a federal program that provides free money for higher education. In order to see if you qualify for a Pell Grant, you must submit a FAFSA. Use the  
-                  <a :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov/aid-estimator/'))"
+                  <a :href="$url('/school/transition/')"
                      target="_blank"
-                     @click="trackOutboundLink($event)"
+                     @click="transitionOutboundLink($event,'https://studentaid.gov/aid-estimator/')"
                   >
                     Federal Student Aid Estimator<v-icon
                       x-small
@@ -183,9 +183,9 @@
                 <p class="text-center home-callout-button-wrapper white--text mx-10">
                   <v-btn
                     color="secondary"
-                    :href="$url('/school/transition/?url=' + encodeURIComponent('https://studentaid.gov/h/apply-for-aid/fafsa'))"
+                    :href="$url('/school/transition/')"
                     target="_blank"
-                    @click="trackOutboundLink($event)"
+                    @click="transitionOutboundLink($event,'https://studentaid.gov/h/apply-for-aid/fafsa')"
                   >Start Your FAFSA&reg; Application<v-icon
                       x-small
                       color="white"
