@@ -165,7 +165,7 @@
 
     &.picc-range-label-middle {
       span {
-        margin-left: -($label-width / 2);
+        margin-left: - calc($label-width / 2);
         text-align: center;
       }
     }
