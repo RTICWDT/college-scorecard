@@ -524,7 +524,7 @@ export default {
     specializedMission: Object,
     defaultSort: {
       type: String,
-      default: "latest.earnings.6_yrs_after_entry.gt_threshold_suppressed:desc",
+      default: "threshold_earnings:desc",
     },
     isLoading: Boolean,
     compareSchools: Array,
@@ -562,7 +562,7 @@ export default {
         { type: "Name", field: "name:asc" },
         { type: "Annual Cost", field: "avg_net_price:asc" },
         { type: "Graduation Rate", field: "completion_rate:desc" },
-        { type: "% Earning More Than a High School Grad", field: "latest.earnings.6_yrs_after_entry.gt_threshold_suppressed:desc" },
+        { type: "% Earning More Than a High School Grad", field: "threshold_earnings:desc" },
       ],
       shareUrl: null,
       displayToggle: "institutions",
@@ -754,8 +754,10 @@ export default {
             meta: {},
             schools: [],
           }
-
-          if (error.response.data.errors) {
+          if (error == "Error: Request aborted") {
+            
+          }
+          else if (error.response.data.errors) {
             this.showError(error.response.data.errors[0])
           } else if (error.response.status === 500) {
             this.showError("API 500 Error")
