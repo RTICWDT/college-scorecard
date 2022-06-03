@@ -1662,7 +1662,7 @@ export default {
   computed: {
     shareUrl() {
       let origin = process.isClient ? window.location.origin : ""
-      const compareBaseURL = "/compare/?"
+      const compareBaseURL = this.$url('/compare/?')
 
       let paramArray = {
         // Institution
