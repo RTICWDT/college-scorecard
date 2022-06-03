@@ -8,3 +8,4 @@ dist
 .env.*
 manifest.yml
 !.env.example
+__tests__/e2e/output/
