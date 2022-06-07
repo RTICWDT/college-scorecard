@@ -74,6 +74,7 @@
         aria-labelledby="location-label"
         :placeholder="utility.location ? undefined : 'Select an option'"
         clearable
+         @keydown.enter="$event.preventDefault()"
       />
 
       <div class="d-flex align-center" v-if="utility.location === 'ZIP Code'">
