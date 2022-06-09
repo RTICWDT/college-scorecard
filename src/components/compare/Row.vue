@@ -1,7 +1,7 @@
 <template>
   <div
     :class="classes"
-    @click="$emit('update-highlight', 'school-' + school.id)"
+    @click="currentHighlight != 'school-' + school.id ? $emit('update-highlight', 'school-' + school.id) : $emit('update-highlight','')"
   >
     <p class="subtitle-2 pb-1 mb-0 pb-2">
       <a :href="$url(schoolLink)">{{ _.get(school, fields["NAME"]) }}</a>
@@ -284,7 +284,7 @@ export default {
       } else if (this.config.currentIncomeFilter) {
         return this.income[this.config.currentIncomeFilter]
       } else if (this.config.type == "percent") {
-        console.log(this.config.altComputedField + " : " + this[this.config.computedField])
+        //console.log(this.config.altComputedField + " : " + this[this.config.computedField])
           if (this.config.showPellOnly)
             return Math.round(this[this.config.altComputedField] * 100)
           else if (_.get(this.school, this.fields["OPEN_ADMISSIONS"]) == 1 && this.config.computedField == 'acceptanceRateActual')

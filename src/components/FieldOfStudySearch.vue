@@ -1,6 +1,6 @@
 <template>
 <client-only>
-  <v-autocomplete
+  <v-combobox
     :value="selected"
     @input="handleFieldOfStudySelect"
     @update:search-input="handleFieldOfStudySearchInput"
@@ -33,7 +33,7 @@
         </div>
       </v-list-item-content>
     </template>
-  </v-autocomplete>
+  </v-combobox>
   </client-only>
 </template>
 

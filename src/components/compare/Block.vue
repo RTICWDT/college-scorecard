@@ -45,10 +45,13 @@
             }`,
         }"
         @click="
+        currentHighlight != `fos-${school.unit_id}-${school.code}-${school['credential.level']}` ?
           $emit(
             'update-highlight',
             `fos-${school.unit_id}-${school.code}-${school['credential.level']}`
-          )
+          ) : 
+          $emit(
+            'update-highlight', '')
         "
       >
         <div class="pb-5 pb-md-1 px-md-5 px-1">

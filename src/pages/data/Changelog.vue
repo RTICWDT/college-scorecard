@@ -22,11 +22,11 @@
             <v-expansion-panels multiple v-model="panels">
               <v-expansion-panel>
                 <v-expansion-panel-header
-                  >April 29, 2022</v-expansion-panel-header
+                  >May 2, 2022</v-expansion-panel-header
                 >
                 <v-expansion-panel-content>
                   <p>
-                    On April 29, 2022, the Department provided the following updates to the College Scorecard website/API:
+                    On May 2, 2022, the Department provided the following updates to the College Scorecard website/API:
                   </p>
                   <ul>
                     <li>
@@ -35,7 +35,7 @@
                     <li>
                       Updates (more recent data values) derived from Federal Student Aid sources for the following data metrics: 
                       Cohort Default Rate, Currently Operating Status Flag, Heightened Cash Monitoring Flag, Accrediting Agency
-                      Name and Code, Title IV Approval Date, and Federal School Code
+                      Name and Code, Title IV Approval Date, and Federal School Code.
                     </li>
                   </ul>
                 </v-expansion-panel-content>

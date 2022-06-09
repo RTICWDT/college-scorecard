@@ -203,6 +203,7 @@
                           <v-list-item-group
                             v-model="input.sort"
                             color="primary"
+                            mandatory
                           >
                             <v-list-item
                               v-for="(item, index) in sorts"
@@ -494,6 +495,7 @@ import ContextToggle from "~/components/ContextToggle.vue"
 import SearchFieldsOfStudyForm from "~/components/SearchFieldsOfStudyForm.vue"
 import FieldOfStudyResultCard from "~/components/FieldOfStudyResultCard.vue"
 import Tooltip from "~/components/Tooltip.vue";
+import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 
 import _ from "lodash"
 import { apiGet } from "~/js/api.js"
@@ -514,7 +516,7 @@ export default {
     "fos-result-card": FieldOfStudyResultCard,
     "tooltip": Tooltip,
   },
-  mixins: [URLHistory, PrepareParams],
+  mixins: [URLHistory, PrepareParams, AnalyticsEvents],
   props: {
     "page-permalink": String,
     states: Array,
@@ -523,7 +525,7 @@ export default {
     specializedMission: Object,
     defaultSort: {
       type: String,
-      default: "latest.earnings.6_yrs_after_entry.gt_threshold_suppressed:desc",
+      default: "threshold_earnings:desc",
     },
     isLoading: Boolean,
     compareSchools: Array,
@@ -561,7 +563,7 @@ export default {
         { type: "Name", field: "name:asc" },
         { type: "Annual Cost", field: "avg_net_price:asc" },
         { type: "Graduation Rate", field: "completion_rate:desc" },
-        { type: "% Earning More Than a High School Grad", field: "latest.earnings.6_yrs_after_entry.gt_threshold_suppressed:desc" },
+        { type: "% Earning More Than a High School Grad", field: "threshold_earnings:desc" },
       ],
       shareUrl: null,
       displayToggle: "institutions",
@@ -708,7 +710,7 @@ export default {
         params.page = this.input.page - 1
       }
 
-      params.sort = this.input.sort
+      params.sort = this.input.sort ? this.input.sort : this.defaultSort
 
       let query = this.prepareParams(params)
 
@@ -753,8 +755,10 @@ export default {
             meta: {},
             schools: [],
           }
-
-          if (error.response.data.errors) {
+          if (error == "Error: Request aborted") {
+            
+          }
+          else if (error.response.data.errors) {
             this.showError(error.response.data.errors[0])
           } else if (error.response.status === 500) {
             this.showError("API 500 Error")
@@ -810,7 +814,8 @@ export default {
     },
     resort(sort) {
       this.input.sort = sort
-      this.debounceSearchUpdate(this.parseURLParams())
+      var params =this.parseURLParams()
+      this.debounceSearchUpdate(params)
     },
     clearSearchForm() {
       this.input = {
@@ -874,7 +879,7 @@ export default {
 
         fields.FIELD_OF_STUDY,
       ].join(",")
-
+      
       this.searchAPI(params, returnFields)
     },
     handleFieldOfStudySearch(params) {
