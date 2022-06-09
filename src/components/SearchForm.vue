@@ -85,6 +85,8 @@
           hideDetails
           class="mb-3 mr-3"
           type="number"
+          :rules="[utility.rules.zip]"
+          min="0"
         ></v-text-field>
         <v-text-field
           v-model="input.distance"
@@ -532,6 +534,7 @@ export default {
             const pattern = /^\d+$/
             return pattern.test(value) || "Numerical"
           },
+          zip: (value) => /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(value) || 'Must be ZIP code format',
         },
         // Hold Default state of form data.
         formDefault: {},
