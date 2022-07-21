@@ -1,7 +1,7 @@
 {
   "name": "college-scorecard",
   "private": true,
-  "version": "2.9.1",
+  "version": "2.9.2",
   "scripts": {
     "build": "gridsome build",
     "develop": "gridsome develop",
@@ -33,6 +33,7 @@
     "trim-newlines": "^3.0.1",
     "glob-parent": "^5.1.2",
     "moment": "^2.29.2",
-    "sharp": "^0.30.5"
+    "sharp": "^0.30.5",
+    "got": "^11.8.5"
   }
 }
