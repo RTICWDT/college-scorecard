@@ -10,7 +10,7 @@
 
       Ready to Compare:
     </div>
-    <div v-if="currentSchoolCount < 10" class="compare-header-text mb-1 ml-4">
+    <div v-if="currentSchoolCount < 10" class="compare-header-text mb-1 ml-4 mr-2">
       <div
         class="compare-icon-wrapper d-inline-block mr-2"
         style="background: #83c38c;"
@@ -21,7 +21,7 @@
       </div>
       {{ currentSchoolCount }} {{ schoolText }} &nbsp;&nbsp;
     </div>
-    <div v-else class="compare-header-text mb-1 ml-4">
+    <div v-else class="compare-header-text mb-1 ml-4 mr-2">
       <div class="compare-icon-wrapper d-inline-block mr-2 mt-n1">
         <v-icon
           class="mt-1"
@@ -36,7 +36,7 @@
     </div>
     <div
       v-if="currentFieldOfStudyCount < 10"
-      class="compare-header-text mb-1 ml-6"
+      class="compare-header-text mb-1 ml-4"
     >
       <div
         class="compare-icon-wrapper d-inline-block mr-2"
@@ -96,6 +96,9 @@
   align-items: center;
   white-space: nowrap;
   height: 40px;
+  @media only screen and (max-width: 600px) {
+    display:inline;
+  }  
 }
 </style>
 
