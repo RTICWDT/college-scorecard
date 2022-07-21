@@ -203,6 +203,7 @@
                           <v-list-item-group
                             v-model="input.sort"
                             color="primary"
+                            mandatory
                           >
                             <v-list-item
                               v-for="(item, index) in sorts"
@@ -709,7 +710,7 @@ export default {
         params.page = this.input.page - 1
       }
 
-      params.sort = this.input.sort
+      params.sort = this.input.sort ? this.input.sort : this.defaultSort
 
       let query = this.prepareParams(params)
 
@@ -813,7 +814,8 @@ export default {
     },
     resort(sort) {
       this.input.sort = sort
-      this.debounceSearchUpdate(this.parseURLParams())
+      var params =this.parseURLParams()
+      this.debounceSearchUpdate(params)
     },
     clearSearchForm() {
       this.input = {
@@ -877,7 +879,7 @@ export default {
 
         fields.FIELD_OF_STUDY,
       ].join(",")
-
+      
       this.searchAPI(params, returnFields)
     },
     handleFieldOfStudySearch(params) {
