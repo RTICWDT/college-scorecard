@@ -28,7 +28,7 @@ export default {
   computed: {
     fixedUrl() {
       if (this.url == "#") return false
-      else if (this.url.match(/^http/)) this.url
+      else if (this.url.match(/^http/)) return this.url
       else return "http://" + this.url
     },
   },
