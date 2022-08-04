@@ -9,3 +9,5 @@ dist
 manifest.yml
 !.env.example
 __tests__/e2e/output/
+CollegeScorecard/
+src-cordova/
