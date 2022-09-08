@@ -17,8 +17,20 @@
               </p>
               <p>
                 Links are provided by the institutions and are only updated about once a year. As such, over the course of the year, some links may break or websites may be taken offline.
-              </p>        
-              <div class="d-flex justify-center">
+              </p>     
+              <div v-if="$vuetify.breakpoint.smAndDown" class="d-flex justify-center">
+                <v-btn class="mb-1 mr-2 transition-button" color="secondary" :href="url" v-if="url"
+                  >Continue to Website</v-btn
+                >
+                <span v-else class="mb-1 mr-2"
+                  ><v-icon small>fas fa-exclamation-triangle</v-icon> Invalid
+                  URL</span
+                >
+                <v-btn class="mb-1 transition-button" @click="close" 
+                  >Return to Previous Page</v-btn
+                >
+              </div>                 
+              <div v-else class="d-flex justify-center">
                 <v-btn class="mb-1 mr-2 transition-button" color="secondary" :href="url" v-if="url"
                   >Continue to Website</v-btn
                 >
