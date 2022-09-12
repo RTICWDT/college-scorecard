@@ -22,11 +22,11 @@
             <v-expansion-panels multiple v-model="panels">
               <v-expansion-panel>
                 <v-expansion-panel-header
-                  >September XX, 2022</v-expansion-panel-header
+                  >September 14, 2022</v-expansion-panel-header
                 >
                 <v-expansion-panel-content>
                   <p>
-                    On September XX, 2022, the Department provided the following updates to the College Scorecard website/API:
+                    On September 14, 2022, the Department provided the following updates to the College Scorecard website/API:
                   </p>
                   <ul>
                     <li>
