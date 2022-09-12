@@ -213,7 +213,7 @@
         id="search-fos-salary"
         for="search-fos-salary"
       >
-        Median Earnings
+        Salary After Completing
 
         <v-btn
           v-if="
