@@ -18,7 +18,7 @@
               <p>
                 Links are provided by the institutions and are only updated about once a year. As such, over the course of the year, some links may break or websites may be taken offline.
               </p>     
-              <div v-if="$vuetify.breakpoint.smAndDown" class="d-flex justify-center">
+              <div v-if="$vuetify.breakpoint.smAndDown" class="d-flex flex-column align-center">
                 <v-btn class="mb-1 mr-2 transition-button" color="secondary" :href="url" v-if="url"
                   >Continue to Website</v-btn
                 >
