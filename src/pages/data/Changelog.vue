@@ -1577,7 +1577,7 @@ export default {
   },
   methods: {
     all() {
-      this.panels = [...Array(25).keys()].map((k, i) => i)
+      this.panels = [...Array(27).keys()].map((k, i) => i)
     },
     // Reset the panel
     none() {
