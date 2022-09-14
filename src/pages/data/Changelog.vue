@@ -22,6 +22,39 @@
             <v-expansion-panels multiple v-model="panels">
               <v-expansion-panel>
                 <v-expansion-panel-header
+                  >September 14, 2022</v-expansion-panel-header
+                >
+                <v-expansion-panel-content>
+                  <p>
+                    On September 14, 2022, the Department provided the following updates to the College Scorecard website/API:
+                  </p>
+                  <ul>
+                    <li>
+                      Updates (more recent data values) derived from Federal Student Aid sources for the following data metrics: 
+                      Currently Operating Status Flag, Heightened Cash Monitoring Flag, Accrediting Agency Name and Code, Title IV 
+                      Approval Date, and Federal School Code. 
+                    </li>
+                    <li>
+                      Updates derived from the Office of Postsecondary Education (OPE) eligibility matrix for data metrics 
+                      identifying Minority Serving Institutions.
+                    </li>
+                    <li>
+                      Records were added to the institution-level data file for institutions that participate in the 
+                      Integrated Postsecondary Education Data System (IPEDS) but do not have an Office of Postsecondary 
+                      Education Identification number (OPEID).
+                    </li>
+                    <li>
+                      Corrections were made to the Field of Study data to resolve incorrect information in an underlying 
+                      data source, resulting in removal of several rows from the data files.
+                    </li>
+                    <li>
+                      The 2020-21 OPEID/UNITID crosswalk was added to the data file download package.
+                    </li>
+                  </ul>
+                </v-expansion-panel-content>
+              </v-expansion-panel>                          
+              <v-expansion-panel>
+                <v-expansion-panel-header
                   >May 2, 2022</v-expansion-panel-header
                 >
                 <v-expansion-panel-content>
@@ -1544,7 +1577,7 @@ export default {
   },
   methods: {
     all() {
-      this.panels = [...Array(24).keys()].map((k, i) => i)
+      this.panels = [...Array(25).keys()].map((k, i) => i)
     },
     // Reset the panel
     none() {

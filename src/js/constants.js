@@ -2,6 +2,7 @@
 export const fields = {
   ID:                   'id',
   // OPEID8:               'ope8_id',
+  OPEID:                'ope6_id',
   NAME:                 'school.name',
   CITY:                 'school.city',
   STATE:                'school.state',
