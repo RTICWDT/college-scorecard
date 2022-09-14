@@ -1854,6 +1854,7 @@ export default {
       // Data manipulation after the return.
       let params = {}
       params[this.fields.OPERATING] = 1
+      params[this.fields.OPEID + '__not'] = "null"
       params[
         this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
       ] = true
@@ -1943,6 +1944,7 @@ export default {
       // TODO - Centralize Common params object
       let params = {}
       params[this.fields.OPERATING] = 1
+      params[this.fields.OPEID + '__not'] = "null"
       params[
         this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
       ] = true
