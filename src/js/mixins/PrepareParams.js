@@ -286,6 +286,7 @@ export default {
 
       // only get open schools
       query[fields.OPERATING] = 1;
+      query[fields.OPEID + '__not'] = 'null';
       
       // ignore distance if no zip is provided
       if (query.distance && !query.zip) {

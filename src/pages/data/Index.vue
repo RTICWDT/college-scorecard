@@ -20,7 +20,7 @@
               All Data Files
               <v-btn
                 class="ml-2 green-text"
-                href="https://ed-public-download.app.cloud.gov/downloads/CollegeScorecard_Raw_Data_04262022.zip"
+                href="https://ed-public-download.app.cloud.gov/downloads/CollegeScorecard_Raw_Data_09012022.zip"
                 >Download
                 <v-icon right dark x-small>
                   fas fa-download
@@ -53,7 +53,7 @@
               <v-btn
                 small
                 class="ml-2"
-                href="https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Institution_04262022.zip"
+                href="https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Institution_09012022.zip"
                 >Download
                 <v-icon right dark x-small>
                   fas fa-download
@@ -65,7 +65,7 @@
               <v-btn
                 small
                 class="ml-2 btnText"
-                href=" https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Field-of-Study_04262022.zip"
+                href=" https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Field-of-Study_09012022.zip"
                 >Download
                 <v-icon right dark x-small>
                   fas fa-download
