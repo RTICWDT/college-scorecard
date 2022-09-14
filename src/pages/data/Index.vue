@@ -13,7 +13,7 @@
             </p>
             <p class="pb-4">
               This data was
-              <strong>last updated May 2, 2022</strong>.
+              <strong>last updated September 14, 2022</strong>.
             </p>
 
             <h2 class="my-5">
