@@ -153,7 +153,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   //Twitter and OpenGraph
   head.meta.push({
     'http-equiv':'Content-Security-Policy',
-    content: "default-src 'unsafe-inline' 'unsafe-eval'; img-src 'self' data:; child-src 'none'; script-src-elem * 'unsafe-inline'; style-src-elem 'self' 'unsafe-inline'; prefetch-src 'self'; connect-src https:// 'self'; font-src 'self'"
+    content: "default-src 'unsafe-inline' 'unsafe-eval'; img-src 'self' data:; child-src 'none'; script-src-elem * 'unsafe-inline'; style-src-elem 'self' 'unsafe-inline'; prefetch-src 'self'; connect-src https://api.data.gov 'self'; font-src 'self'"
   })
   head.meta.push({
     name: 'og:type',
