@@ -40,6 +40,7 @@
             <v-text-field
               v-model="sliderValue"
               :id="`${id}-field`"
+              :title="`${id}-field`"
               hide-details
               type="number"
               min="0"
