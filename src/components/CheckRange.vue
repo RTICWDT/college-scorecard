@@ -34,6 +34,7 @@
           thumb-color="secondary"
           :aria-labelledby="generatedId"
           thumb-label
+          :title="id"
         >
           <template v-slot:append>
             <v-text-field
