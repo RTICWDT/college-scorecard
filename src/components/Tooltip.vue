@@ -1,16 +1,18 @@
-<template>
+<template v-slot:activator="{ on, attrs }">
   <div class="icon-placement">
     <v-btn
       @click.stop.prevent="showDialog = true"
       icon
       small
       class="align-start ml-n2"
-      aria-label=title
+      v-bind="attrs"
+      v-on="on"
+      aria-label="More Information"
     >
       <v-icon x-small allow-overflow :color="color" dark
         >fas fa-info-circle</v-icon
       >
-      <span class="sr-only">info</span>
+      <span class="sr-only">More Information</span>
     </v-btn>
     <v-dialog max-width="500px" v-model="showDialog">
       <v-card>
