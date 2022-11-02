@@ -5,6 +5,7 @@
       icon
       small
       class="align-start ml-n2"
+      aria-label="More information for " + title
     >
       <v-icon x-small allow-overflow :color="color" dark
         >fas fa-info-circle</v-icon
