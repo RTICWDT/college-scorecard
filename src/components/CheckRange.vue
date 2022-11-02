@@ -33,7 +33,7 @@
           :track-color="trackBackground"
           thumb-color="secondary"
           :aria-labelledby="generatedId"
-          :label="generatedId"
+          :aria-label="generatedId"
           thumb-label
           :title="id"
         >
