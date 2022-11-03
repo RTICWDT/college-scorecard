@@ -1,12 +1,10 @@
-<template v-slot:activator="{ on, attrs }">
+<template>
   <div class="icon-placement">
     <v-btn
       @click.stop.prevent="showDialog = true"
       icon
       small
       class="align-start ml-n2"
-      v-bind="attrs"
-      v-on="on"
       aria-label="More Information"
     >
       <v-icon x-small allow-overflow :color="color" dark
