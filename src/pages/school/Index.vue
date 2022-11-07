@@ -442,7 +442,6 @@
               <v-expansion-panel class="fos-profile-panel">
                 <v-expansion-panel-header
                   id="fields-of-study"
-                  aria-controls="fos-content"
                   @click="trackAccordion('Fields of Study')"
                 >
                   <span
@@ -976,7 +975,6 @@
               <v-expansion-panel class="institution-profile-panel">
                 <v-expansion-panel-header
                   id="cost"
-                  aria-controls="costs-content"
                   @click="trackAccordion('Costs')"
                   >Costs</v-expansion-panel-header
                 >
@@ -1246,7 +1244,6 @@
               <v-expansion-panel class="institution-profile-panel">
                 <v-expansion-panel-header
                   id="graduation"
-                  aria-controls="graduation-content"
                   @click="trackAccordion('Graduation &amp; Retention')"
                   >Graduation &amp; Retention</v-expansion-panel-header
                 >
@@ -1448,7 +1445,6 @@
               <v-expansion-panel class="institution-profile-panel">
                 <v-expansion-panel-header
                   id="aid"
-                  aria-controls="aid-content"
                   @click="trackAccordion('Financial Aid &amp; Debt')"
                   >Financial Aid &amp; Debt</v-expansion-panel-header
                 >
@@ -2081,7 +2077,6 @@
               <v-expansion-panel class="institution-profile-panel">
                 <v-expansion-panel-header
                   id="earnings"
-                  aria-controls="earnings-content"
                   @click="trackAccordion('Typical Earnings')"
                 >
                   Typical Earnings
@@ -2209,7 +2204,6 @@
               <v-expansion-panel class="institution-profile-panel">
                 <v-expansion-panel-header
                   id="demographics"
-                  aria-controls="demographics-content"
                   @click="trackAccordion('Student Body')"
                   >Student Body</v-expansion-panel-header
                 >
@@ -2318,8 +2312,7 @@
               <v-expansion-panel class="institution-profile-panel">
                 <v-expansion-panel-header
                   id="selectivity"
-                  aria-controls="selectivity-content"
-                  @click="trackAccordion('Test Scores and Acceptance')"
+                    @click="trackAccordion('Test Scores and Acceptance')"
                   >Test Scores &amp; Acceptance</v-expansion-panel-header
                 >
                 <v-expansion-panel-content
