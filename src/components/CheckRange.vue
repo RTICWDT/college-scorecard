@@ -33,12 +33,15 @@
           :track-color="trackBackground"
           thumb-color="secondary"
           :aria-labelledby="generatedId"
+          :aria-label="generatedId"
           thumb-label
+          :title="id"
         >
           <template v-slot:append>
             <v-text-field
               v-model="sliderValue"
               :id="`${id}-field`"
+              :title="`${id}-field`"
               hide-details
               type="number"
               min="0"

@@ -428,7 +428,7 @@
         WIOA Programs&nbsp;<tooltip definition="wioa-participants" />
       </p>
       <v-checkbox
-        id="search-form-dolflag"
+        id="search-form-dolflag-2"
         class="search-form-dolflag-cb my-0 py-0"
         v-model="input.dolflag"
         label="Only show schools that have Department of Labor WIOA programs"
