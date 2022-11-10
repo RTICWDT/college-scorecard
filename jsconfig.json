@@ -5,5 +5,11 @@
       "@/*": ["./src/*"]
     }
   },
+  "vueCompilerOptions": {
+    "target": 2,
+    "extensions": [
+      ".vue"
+    ]
+  },
   "exclude": ["node_modules", "dist"]
 }

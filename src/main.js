@@ -153,7 +153,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   //Twitter and OpenGraph
   head.meta.push({
     'http-equiv':'Content-Security-Policy',
-    content: "default-src 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: *.cloud.gov *.googleapis.com; child-src 'none'; script-src-elem * 'unsafe-inline'; style-src-elem 'self' 'unsafe-inline'; prefetch-src 'self'; connect-src https://api.data.gov 'self'; font-src 'self'"
+    content: "default-src 'unsafe-inline' 'unsafe-eval' 'self' https://dap.digitalgov.gov https://static.hotjar.com https://www.google-analytics.com https://www.gstatic.com https://www.googletagmanager.com https://script.hotjar.com; img-src 'self' data: *.cloud.gov *.googleapis.com *.google-analytics.com; child-src 'none'; script-src-elem * 'unsafe-inline'; style-src-elem 'self' 'unsafe-inline'; connect-src https://api.data.gov https://www.google-analytics.com *.hotjar.com https://dap.digitalgov.gov https://stats.g.doubleclick.net *.hotjar.io 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; frame-src https://vars.hotjar.com"
   })
   head.meta.push({
     name: 'og:type',
