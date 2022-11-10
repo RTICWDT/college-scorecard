@@ -312,7 +312,7 @@ export default {
       switch (id) {
         case 0:
           document.body
-            .querySelector("#g-recaptcha-response")
+            .querySelector("#g-recaptcha-response-2")
             .setAttribute("aria-label", "ReCAPTCHA Response")
           break
         case 1:
