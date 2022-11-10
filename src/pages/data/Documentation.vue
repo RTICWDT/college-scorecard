@@ -329,6 +329,16 @@ export default {
             iframes[q].setAttribute("title", "ReCAPTCHA Frame")
           }
           break
+          case 2:
+          document.body
+            .querySelector("#g-recaptcha-response-2")
+            .setAttribute("aria-label", "ReCAPTCHA Response")    
+          break      
+          case 3:
+          document.body
+            .querySelector("#g-recaptcha-response-3")
+            .setAttribute("aria-label", "ReCAPTCHA Response")
+          break          
       }
     },
   },
