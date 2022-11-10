@@ -309,10 +309,11 @@ export default {
       })
     },
     addAria(id) {
+      console.log(id);
       switch (id) {
         case 0:
           document.body
-            .querySelector("#g-recaptcha-response-2")
+            .querySelector(".g-recaptcha-response")
             .setAttribute("aria-label", "ReCAPTCHA Response")
           break
         case 1:
