@@ -312,20 +312,17 @@ export default {
       console.log(id);
       switch (id) {
         case 0:
-          document.body
-            .querySelector(".g-recaptcha-response")
-            .setAttribute("aria-label", "ReCAPTCHA Response")
           break
         case 1:
-          document.body
-            .querySelector(".g-recaptcha-response-1")
-            .setAttribute("aria-label", "ReCAPTCHA Response")
           let iframes = document.body.querySelector("iframe")
           for (let q = 0; q < iframes.length; q++) {
             iframes[q].setAttribute("title", "ReCAPTCHA Frame")
           }
           break
       }
+      document.body
+            .querySelector("textarea.g-recaptcha-response")
+            .setAttribute("aria-label", "ReCAPTCHA Response")      
     },
   },
   mounted() {
