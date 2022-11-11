@@ -314,9 +314,9 @@ export default {
           r.setAttribute("aria-label", "ReCAPTCHA Response")
         else {
           let rs = "#g-recaptcha-response-" + id
-              r = document.body.querySelector(rs)
-          if (r.length > 0)
-            r.setAttribute("aria-label", "ReCAPTCHA Response")          
+          r = document.body.querySelector(rs)
+          if (r)
+            r.setAttribute("aria-label", "ReCAPTCHA Response")   
           if (id % 2 == 1) {
             let iframes = document.body.querySelector("iframe")
             for (let q = 0; q < iframes.length; q++) {
