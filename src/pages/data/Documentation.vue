@@ -309,37 +309,21 @@ export default {
       })
     },
     addAria(id) {
-      console.log(id)
-      switch (id) {
-        case 0:
-          let recaptchaResponse = document.body
-            .querySelector("#g-recaptcha-response")
-
-            console.log(recaptchaResponse)
-          document.body
-            .querySelector("#g-recaptcha-response")
-            .setAttribute("aria-label", "ReCAPTCHA Response")
-          break
-        case 1:
-          document.body
-            .querySelector("#g-recaptcha-response-1")
-            .setAttribute("aria-label", "ReCAPTCHA Response")
-          let iframes = document.body.querySelector("iframe")
-          for (let q = 0; q < iframes.length; q++) {
-            iframes[q].setAttribute("title", "ReCAPTCHA Frame")
+      let r = document.body.querySelector("#g-recaptcha-response")  
+        if (id == 0 && r)  
+          r.setAttribute("aria-label", "ReCAPTCHA Response")
+        else {
+          let rs = "#g-recaptcha-response-" + id
+              r = document.body.querySelector(rs)
+          if (r.length > 0)
+            r.setAttribute("aria-label", "ReCAPTCHA Response")          
+          if (id % 2 == 1) {
+            let iframes = document.body.querySelector("iframe")
+            for (let q = 0; q < iframes.length; q++) {
+              iframes[q].setAttribute("title", "ReCAPTCHA Frame")
+            }
           }
-          break
-          case 2:
-          document.body
-            .querySelector("#g-recaptcha-response-2")
-            .setAttribute("aria-label", "ReCAPTCHA Response")    
-          break      
-          case 3:
-          document.body
-            .querySelector("#g-recaptcha-response-3")
-            .setAttribute("aria-label", "ReCAPTCHA Response")
-          break          
-      }
+        }
     },
   },
   mounted() {
