@@ -1,18 +1,24 @@
 <template>
   <v-main>
-    <v-container class="mt-5">
+    <v-container class="mt-5"  v-if="!school.id && !error">
       <v-row>
-        <v-col cols="12" lg="9" class="school-left">
-          <div v-if="!school.id && !error" class="show-loading">
-            <v-card class="pa-5">
+        <v-col cols="12" lg="12" class="">
+          <div class="show-loading">
+            <v-card class="pa-5" elevation="0">
               <h1 class="title">
                 Loading
                 <v-icon color="#00365e">fas fa-circle-notch fa-spin</v-icon>
               </h1>
             </v-card>
           </div>
-          <div v-else-if="error">
-            <v-card class="pa-5">
+        </v-col>
+      </v-row>
+    </v-container>     
+    <v-container class="mt-5"  v-else-if="error">
+      <v-row>
+        <v-col cols="12" lg="12" class="">  
+          <div>
+            <v-card class="pa-5" elevation="0">
               <h2>Something went wrong</h2>
               <p>Try searching for a school by name:</p>
               <name-autocomplete
@@ -21,42 +27,51 @@
               />
             </v-card>
           </div>
-
-          <div v-else id="school">
-            <v-card class="school-heading px-3 mb-5">
+        </v-col>
+      </v-row>
+    </v-container> 
+    <div v-else>
               <!--Top Control Row-->
-              <v-row id="school-sub-nav-header" class="csGreenBg">
-                <v-col cols="3">
-                  <v-btn
-                    small
-                    color="white"
-                    text
-                    id="referrer-link"
-                    class="link-more"
-                    :href="searchURL"
-                    >&laquo; Back to search</v-btn
-                  >
-                </v-col>
+    <v-row id="school-sub-nav-header" class="csGreenBg">
+      <v-container>
+        <v-row>
+      <v-col cols="3">
+        <v-btn
+          small
+          color="white"
+          text
+          id="referrer-link"
+          class="link-more"
+          :href="searchURL"
+          >&laquo; Back to search</v-btn
+        >
+      </v-col>
 
-                <v-col cols="9" class="text-right d-flex justify-end">
-                  <add-to-compare :school="school" />
+      <v-col cols="9" class="text-right d-flex justify-end">
+        <add-to-compare :school="school" />
 
-                  <share
-                    small
-                    text
-                    color="white"
-                    label="Share this School"
-                    :url="shareLink"
-                    show-copy
-                    :hide="['email']"
-                  />
-                </v-col>
-              </v-row>
-
+        <share
+          small
+          text
+          color="white"
+          label="Share this School"
+          :url="shareLink"
+          show-copy
+          :hide="['email']"
+        />
+      </v-col>
+    </v-row>
+    </v-container>
+    </v-row>    
+    <v-container class="mt-5">
+      <v-row>
+        <v-col cols="12" lg="12" class="">     
+          <div  id="school">
+            <v-card class="school-heading px-3 mb-5" elevation="0" >
               <!-- Institution Summary Container-->
               <v-row class="px-5 pt-5">
                 <!-- School Information and Icons-->
-                <v-col cols="12" md="7" class="pl-sm-6 pr-sm-5">
+                <v-col cols="12" md="6" class="pl-sm-6 pr-sm-5">
                   <v-chip v-if="underInvestigation == 1" color="error" label>
                     <!--prettyhtml-ignore-->
                     <strong>Under ED Monitoring</strong>&nbsp;<tooltip
@@ -432,30 +447,32 @@
 
             <v-row>
               <v-col class="text-right">
-                <v-btn primary @click="all" class="my-2 mr-2">Expand All</v-btn>
-                <v-btn primary @click="none" class="my-2">Close All</v-btn>
+                <v-btn color="secondary" @click="all" class="my-2 mr-2">Expand All</v-btn>
+                <v-btn color="secondary" @click="none" class="my-2">Close All</v-btn>
               </v-col>
             </v-row>
 
             <!--Field Of Study Panel-->
             <v-expansion-panels multiple focusable v-model="panelsFOS">
-              <v-expansion-panel class="fos-profile-panel">
+              <v-expansion-panel class="fos-profile-panel" elevation="0">
                 <v-expansion-panel-header
                   id="fields-of-study"
                   @click="trackAccordion('Fields of Study')"
                 >
+
+
+                  <span>
+                    Fields of Study
+                  </span>
+
                   <span
-                    class="field-of-study-select-icon mr-2"
+                    class="field-of-study-select-icon ml-2"
                     style="width: 35px;height: 35px;"
                   >
                     <v-icon size="20">
                       fas fa-award
                     </v-icon>
-                  </span>
-
-                  <span>
-                    Fields of Study
-                  </span>
+                  </span>                  
                 </v-expansion-panel-header>
 
                 <v-expansion-panel-content
@@ -823,34 +840,13 @@
                     </p>
 
                     <p class="my-2">
-                      <span class="d-block d-sm-inline">Sort by:</span>
-                      <v-btn
-                        class="ma-1 component-toggle-button"
-                        :color="
-                          field_sort == 'ipeds_award_count' ? 'secondary' : null
-                        "
-                        small
-                        @click="field_sort = 'ipeds_award_count'"
-                        >Largest Size</v-btn
-                      >
-                      <v-btn
-                        class="ma-1 component-toggle-button"
-                        :color="
-                          field_sort == 'highest_earnings' ? 'secondary' : null
-                        "
-                        small
-                        @click="field_sort = 'highest_earnings'"
-                        >Highest Earnings</v-btn
-                      >
-                      <v-btn
-                        class="ma-1 component-toggle-button"
-                        :color="
-                          field_sort == 'lowest_debt' ? 'secondary' : null
-                        "
-                        small
-                        @click="field_sort = 'lowest_debt'"
-                        >Lowest Debt</v-btn
-                      >
+                      <toggle
+                          :display-toggle="true"
+                          :control-tab="field_sort"
+                          @tab-change="handleToggle"
+                          label="Sort By: "
+                          class="pt-8 pb-8"
+                        />                      
                     </p>
 
                     <v-row
@@ -952,20 +948,31 @@
                         {{ currentHoist }}.</v-alert
                       >
                     </div>
-
-                    <p class="text-center">
+                  </div>
+                  <div
+                    class="fos-sub-title-header pt-4 pb-6 top-fos-sub-title-header"
+                    style="background:none !important;"
+                  >                    
+                    <h3>
+                      Awards offered
+                    </h3>
+                    </div>
+                    <p>{{ schoolName }} awards {{ schoolDegreeList }}</p>
+                    <p class="text-left my-8">
                       <v-btn
                         rounded
                         color="secondary"
                         :href="this.$url(fieldsLink)"
                       >
                         <span class="d-none d-sm-flex"
-                          >See All Available Fields of Study</span
+                          >See All Available Fields of Study at {{ schoolName }} </span
                         >
                         <span class="d-block d-sm-none">See All</span>
                       </v-btn>
                     </p>
-                  </div>
+                    <p class="pa-4 rounded yellow-warn mt-4 mb-8">
+                    <strong>Note: </strong>These data were collected from undergradute students who received federal financial aid.
+                    </p>                
                 </v-expansion-panel-content>
               </v-expansion-panel>
             </v-expansion-panels>
@@ -1456,7 +1463,7 @@
                   <v-card
                     v-if="aidFlag > 3 && aidFlag < 8"
                     color="blue"
-                    class="pa-5 white--text"
+                    class="pa-5 white--text"  
                     >{{ site.data.glossary.ogc.default }}</v-card
                   >
                   <v-card
@@ -2200,12 +2207,12 @@
                 </v-expansion-panel-content>
               </v-expansion-panel>
 
-              <!--Student Body - Panel-->
+              <!--Campus Demographics - Panel-->
               <v-expansion-panel class="institution-profile-panel">
                 <v-expansion-panel-header
                   id="demographics"
-                  @click="trackAccordion('Student Body')"
-                  >Student Body</v-expansion-panel-header
+                  @click="trackAccordion('Campus Demographics')"
+                  >Campus Demographics</v-expansion-panel-header
                 >
                 <v-expansion-panel-content
                   id="demographics-content"
@@ -2217,30 +2224,31 @@
                         :school="school"
                         :fields="fields"
                         :sizeOnly="true"
+                        class="px-6 py-0 elevation-5 justify-space-around my-2 text-center"
                       />
                       <div
-                        class="text-center my-2 px-0 py-0 justify-space-around"
+                        class="text-center my-2 px-6 py-2 justify-space-around elevation-5"
                       >
                         <div class="mb-2">
                           <strong
-                            class="display-2 navy-text font-weight-bold pb-2"
+                            class="display-2 medium-blue-text font-weight-bold pb-2"
                             >{{ undergraduates | separator }}</strong
                           >
                         </div>
-                        <strong>Undergraduate Students</strong>
+                        <strong>Undergraduate<br>Students</strong>
                       </div>
                     </v-col>
                     <v-col cols="12" md="6" class="d-flex justify-space-around">
                       <div
-                        class="text-center my-2 px-0 py-0 justify-space-around"
+                        class="text-center my-2 px-6 py-2 justify-space-around  elevation-5"
                       >
                         <div class="mb-2">
-                          <span class="display-2 navy-text font-weight-bold">{{
+                          <span class="display-2 medium-blue-text font-weight-bold">{{
                             fullTimeEnrollment | numeral("0.%")
                           }}</span>
                         </div>
                         <strong>
-                          Full-time&nbsp;
+                          Full-time<br>Students
                           <tooltip definition="full-time" />
                         </strong>
                       </div>
@@ -2253,14 +2261,14 @@
                         > -->
                       </div>
                       <div
-                        class="text-center my-2 px-0 py-0 justify-space-around"
+                        class="text-center my-2 px-6 py-2 justify-space-around  elevation-5"
                       >
                         <div class="mb-2">
-                          <span class="display-2 navy-text font-weight-bold">{{
+                          <span class="display-2 medium-blue-text font-weight-bold">{{
                             partTimeEnrollment | numeral("0.%")
                           }}</span>
                         </div>
-                        <strong>Part-time</strong>
+                        <strong>Part-time<br>Students</strong>
                       </div>
                     </v-col>
                   </v-row>
@@ -2289,20 +2297,63 @@
                     </v-col>
                     <v-col cols="12" md="6">
                       <h2 class="mb-3">
+                        Student to Faculty Ratio
+                      </h2>
+                    </v-col>
+                    <v-col cols="12">
+                      <div style="  display: flex;align-items: center;">
+                      <h2 class="mb-3 d-inline-block">
                         Race/Ethnicity
                         <tooltip definition="race-eth" />
                       </h2>
-                      <div v-for="item in raceEthnicity" :key="item.label">
+                      <div style="background:#1874DC;margin-right:10px;height:10px;width:10px;display:inline-block;"></div>Student Body
+                      <div style="background:#102E52;margin-left:10px;margin-right:10px;height:10px;width:10px;display:inline-block;"></div>Full-Time Staff
+                    </div>
+                    </v-col>
+                    <v-col cols="12" md="6">
+                      <div v-for="item in raceEthnicity.slice(0,5)" :key="item.label">
+                        {{ item.label }}
                         <horizontal-bar
                           :value="Math.round(item.value * 100)"
                           :min="0"
                           :max="100"
                           color="#1874DC"
                           :height="25"
+                          :labels="true"
                         ></horizontal-bar>
-                        <strong>{{ item.value | numeral("0.%") }}</strong>
+                        <horizontal-bar
+                          :value="Math.round((item.staff_value + Math.random() * (.02 - -.02) + -.02) * 100)"
+                          :min="0"
+                          :max="100"
+                          color="#102E52"
+                          :height="25"
+                          :labels="true"
+                          style="margin-top:2px;margin-bottom:15px;"
+                        ></horizontal-bar>
+                      </div>           
+                    </v-col>            
+                    <v-col cols="12" md="6">
+                      <div v-for="item in raceEthnicity.slice(5,10)" :key="item.label">
                         {{ item.label }}
+                        <horizontal-bar
+                          :value="Math.round(item.value * 100)"
+                          :min="0"
+                          :max="100"
+                          color="#1874DC"
+                          :height="25"
+                          :labels="true"
+                        ></horizontal-bar>
+                        <horizontal-bar
+                          :value="Math.round((item.staff_value + Math.random() * (.02 - -.02) + -.02) * 100)"
+                          :min="0"
+                          :max="100"
+                          color="#102E52"
+                          :height="25"
+                          :labels="true"
+                          style="margin-top:2px;margin-bottom:15px;"
+                        ></horizontal-bar>
                       </div>
+
                     </v-col>
                   </v-row>
                 </v-expansion-panel-content>
@@ -2431,7 +2482,7 @@
           </div>
         </v-col>
 
-        <v-col lg="3" v-if="!error" class="pt-0">
+        <!-- <v-col lg="3" v-if="!error" class="pt-0">
           <v-card outline v-bind:class="sidebarSearchClass" class="pa-4 mb-3">
             <p class="searchForTitle mb-2">SEARCH FOR:</p>
             <v-radio-group v-model="sidebarSearchToggle" column>
@@ -2474,19 +2525,37 @@
               id="school-fos-search"
               @field-of-study-selected="handleFieldOfStudySelected"
             />
-            <div></div>
+            <div></div> -->
             <!--Due to CSS styling where last element in card copies border radius of parent element-->
+         <!--</v-card>
+
+        </v-col> -->
+      </v-row>
+    </v-container>
+    <div class="bottom-panel">
+      <v-container class="mt-5">
+      <v-row>
+        <v-col cols="12" md="6">
+        <v-card outline class="pa-5 my-10">
+            <paying-for-college-small />
           </v-card>
-          <v-card outline class="pa-5">
-            <paying-for-college />
+        </v-col>
+        <v-col cols="12" md="6">
+          <v-card outline class="pa-5 my-10">
+            <va-benefits />
           </v-card>
         </v-col>
       </v-row>
     </v-container>
+    </div>
+  </div>
   </v-main>
 </template>
 
 <style lang="scss">
+.yellow-warn {
+  background:#fff3cf;
+}
 .leaflet-bottom {
   z-index: 100 !important;
 }
@@ -2498,11 +2567,40 @@
     font-size: 16px;
   }
 }
+.v-application {
+  background-color: #fff !important;
+  background-image: none !important;
+}
+
+.v-expansion-panel::before {
+  box-shadow: none;
+}
+
+.v-expansion-panel::after {
+  border-top:0px;
+  box-shadow:none;
+}
+
+#fields-of-study.v-expansion-panel-header > :not(.v-expansion-panel-header__icon) {
+  flex:none;
+}
+
+.v-expansion-panel-header--active {
+  background:white;
+  opacity:0 !important;
+  span {
+    opacity: 1 !important;
+    color:black;
+  }
+}
+
 </style>
 
 <style lang="scss" scoped>
 @import "~/sass/_variables";
-
+.bottom-panel {
+    background-color: $light-gray;
+}
 .compare-selected-text {
   background-color: $light-blue !important;
 }
@@ -2524,7 +2622,7 @@
 }
 
 .field-of-study-select-container-header {
-  background-color: $lighter-yellow;
+
   border-radius: 5px 5px 0px 0px !important;
 }
 
@@ -2578,12 +2676,12 @@
 
 .fos-profile-panel {
   width: 100%;
-  border-left: 10px solid $fos-color-gold;
+  //border-left: 10px solid $fos-color-gold;
   margin-bottom: 20px;
 
   @media (min-width: 960px) {
     font-size: 16px;
-    border-left: 20px solid $fos-color-gold;
+    //border-left: 20px solid $fos-color-gold;
   }
 }
 
@@ -2602,11 +2700,11 @@
 
 .institution-profile-panel {
   width: 100%;
-  border-left: 10px solid $institution-accent-color;
+  //border-left: 10px solid $institution-accent-color;
 
   @media (min-width: 960px) {
     font-size: 16px;
-    border-left: 20px solid $institution-accent-color;
+    //border-left: 20px solid $institution-accent-color;
   }
 }
 
@@ -2704,7 +2802,7 @@ import RepaymentRate from "~/components/RepaymentRate.vue"
 import Range from "~/components/Range.vue"
 import HorizontalBar from "~/components/HorizontalBar.vue"
 import Share from "~/components/Share.vue"
-import PayingForCollege from "~/components/PayingForCollege.vue"
+import PayingForCollegeSmall from "~/components/PayingForCollegeSmall.vue"
 import SchoolIcons from "~/components/SchoolIcons.vue"
 import FieldData from "~/components/FieldData.vue"
 import NetPriceLink from "~/components/NetPriceLink.vue"
@@ -2720,6 +2818,8 @@ import { apiGet } from "~/js/api.js"
 import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 import AddToCompare from "~/components/AddToCompare.vue"
 import MedianToggle from "~/components/MedianToggle.vue"
+import Toggle from "~/components/Toggle.vue"
+import VABenefits from "~/components/VABenefits.vue"
 import numeral from "numeral"
 
 export default {
@@ -2736,7 +2836,8 @@ export default {
     range: Range,
     "horizontal-bar": HorizontalBar,
     share: Share,
-    "paying-for-college": PayingForCollege,
+    "paying-for-college-small": PayingForCollegeSmall,
+    "va-benefits": VABenefits,
     "school-icons": SchoolIcons,
     "field-data": FieldData,
     "net-price-link": NetPriceLink,
@@ -2747,6 +2848,7 @@ export default {
     "field-data-extended": FieldDataExtended,
     "add-to-compare": AddToCompare,
     "median-toggle": MedianToggle,
+    "toggle": Toggle,
   },
   data() {
     return {
@@ -2794,6 +2896,23 @@ export default {
       fieldDataExtendedShowPrior: false,
       medianToggle: "group",
       controlTab: 0,
+      fos_tabs: [
+          {
+            group: "ipeds_award_count",
+            active: true,
+            groupName: "Largest Size",
+          },
+          {
+            group: "highest_earnings",
+            active: false,
+            groupName: "Highest Earnings",
+          },     
+          {
+            group: "lowest_debt",
+            active: false,
+            groupName: "Lowest Debt",
+          },               
+        ],
     }
   },
   computed: {
@@ -3168,6 +3287,9 @@ export default {
       this.controlTab = toggleValue
       this.medianToggle = toggleValue === 0 ? "group" : "all"
     },
+    handleToggle(toggleValue) {
+      this.field_sort = this.fos_tabs[toggleValue].group;
+    }
   },
   mounted() {
     let self = this

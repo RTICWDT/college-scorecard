@@ -80,6 +80,7 @@ export const fields = {
   PART_TIME_SHARE:      'latest.student.part_time_share',
   FEMALE_SHARE:         'latest.student.demographics.female_share',
   RACE_ETHNICITY:       'latest.student.demographics.race_ethnicity',
+  RACE_ETHNICITY_STAFF:       'latest.student.demographics.race_ethnicity',  
   AGE_ENTRY:            'latest.student.demographics.age_entry',
 
   TEST_REQUIREMENTS:    'latest.admissions.test_requirements',

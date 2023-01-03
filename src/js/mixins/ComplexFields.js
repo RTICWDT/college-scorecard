@@ -146,6 +146,7 @@ export default {
             if (!this.school) return null;
             let output = [];
             let re = _.get(this.school, this.fields["RACE_ETHNICITY"]);
+            let re_staff = _.get(this.school, this.fields["RACE_ETHNICITY_STAFF"]);
             let include = [
                 "aian",
                 "asian",
@@ -160,11 +161,12 @@ export default {
             for (let p = 0; p < include.length; p++) {
                 output.push({
                     label: this.site.data.race_ethnicity[include[p]],
-                    value: re[include[p]]
+                    value: re[include[p]],
+                    staff_value: re_staff[include[p]]
                 });
             }
 
-            return _.sortBy(output, ["value"]).reverse();
+            return _.sortBy(output, ["label"]);
         },
         retentionRate() {
             if (!this.school) return null;
@@ -632,7 +634,12 @@ export default {
         percentMoreThanHS() {
             if (!this.school) return null;
             return _.get(this.school, this.fields['EARNINGS_GT_HS'])            
-        }        
+        },
+        schoolDegreeList() {
+            if (!this.school) return null;
+            //return _.get(this.school, this.fields['EARNINGS_GT_HS']) 
+            return "Bachelor's, Master's and Doctoral Degrees, as well as Graduate/Professional Certificates"  
+        }      
     },
     methods: {
         orderByWithNullsAtEnd(pArray, pAttr, pReverse) {

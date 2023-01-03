@@ -179,7 +179,7 @@
       </div>
 
       <!-- Bottom Content -->
-      <div id="home-content-container" class="mt-5 pa-md-6">
+      <div id="home-content-container" class="mt-0 pa-md-6">
         <v-container class="my-0">
           <v-row class="mt-md-12 px-md-6">
             <!-- apprenticeships callout -->
@@ -444,6 +444,12 @@
 .home-splash {
   min-height: 380px;
   padding-top: 1.5rem;
+  font-family: $base-font-family !important;
+  background-repeat: repeat !important;
+  background-color: #2c74ad !important;
+  //background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 200 200'%3E%3Cpolygon fill='%23266aa4' fill-opacity='0.50' points='100 0 0 100 100 100 100 200 200 100 200 0'/%3E%3C/svg%3E") !important;
+  background-image: url("data:image/svg+xml,%3Csvg width='84' height='48' viewBox='0 0 84 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h12v6H0V0zm28 8h12v6H28V8zm14-8h12v6H42V0zm14 0h12v6H56V0zm0 8h12v6H56V8zM42 8h12v6H42V8zm0 16h12v6H42v-6zm14-8h12v6H56v-6zm14 0h12v6H70v-6zm0-16h12v6H70V0zM28 32h12v6H28v-6zM14 16h12v6H14v-6zM0 24h12v6H0v-6zm0 8h12v6H0v-6zm14 0h12v6H14v-6zm14 8h12v6H28v-6zm-14 0h12v6H14v-6zm28 0h12v6H42v-6zm14-8h12v6H56v-6zm0-8h12v6H56v-6zm14 8h12v6H70v-6zm0 8h12v6H70v-6zM14 24h12v6H14v-6zm14-8h12v6H28v-6zM14 8h12v6H14V8zM0 8h12v6H0V8z' fill='%233d82b1' fill-opacity='0.24' fill-rule='evenodd'/%3E%3C/svg%3E") !important;
+
 }
 .v-tab {
   font-family: $header-font-family;

@@ -96,7 +96,7 @@ export default {
             color: function(context) {
               let value = context.dataset.data[context.dataIndex]
               let max = context.chart.options.scales.xAxes[0].ticks.max
-              if (value > max / 10) {
+              if (value > max - (max / 10)) {
                 return "#FFFFFF"
               } else {
                 return "#000000"
@@ -105,7 +105,7 @@ export default {
             align: function(context) {
               let value = context.dataset.data[context.dataIndex]
               let max = context.chart.options.scales.xAxes[0].ticks.max
-              if (value > max / 10) {
+              if (value > max - (max / 10)) {
                 return "start"
               } else {
                 return "end"
