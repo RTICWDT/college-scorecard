@@ -74,7 +74,7 @@
         aria-labelledby="location-label"
         :placeholder="utility.location ? undefined : 'Select an option'"
         clearable
-         @keydown.enter="$event.preventDefault()"
+        @keydown.enter="$event.preventDefault()"
       />
 
       <div class="d-flex align-center" v-if="utility.location === 'ZIP Code'">
@@ -438,15 +438,8 @@
       ></v-checkbox>
     </div>
 
-    <div
-      id="search-submit-container"
-      class="pa-2 text-center"
-      v-show="!autoSubmit"
-    >
-      <v-btn
-        color="secondary"
-        rounded
-        @click="$emit('search-query', cleanInput)"
+    <div id="search-submit-container" class="pa-5" v-show="!autoSubmit">
+      <v-btn color="secondary" large @click="$emit('search-query', cleanInput)"
         >Find Schools</v-btn
       >
     </div>
@@ -455,7 +448,7 @@
       v-show="autoSubmit"
       class="sr-only"
       color="secondary"
-      rounded
+      large
       @click="$emit('search-query', cleanInput)"
       >Find Schools</v-btn
     >
@@ -534,7 +527,9 @@ export default {
             const pattern = /^\d+$/
             return pattern.test(value) || "Numerical"
           },
-          zip: (value) => /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(value) || 'Must be ZIP code format',
+          zip: (value) =>
+            /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(value) ||
+            "Must be ZIP code format",
         },
         // Hold Default state of form data.
         formDefault: {},

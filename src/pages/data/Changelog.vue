@@ -2,11 +2,12 @@
   <v-main>
     <data-navigation :current="$url('/data/changelog/')" />
 
-    <v-container>
+    <v-container class="px-0">
       <v-row>
-        <v-col cols="12" md="10" offset-md="1">
-          <v-card class="py-5 px-10 ma-5">
+        <v-col cols="12">
+          <v-card class="py-5 px-10 ma-5" flat>
             <h1 class="display-1 mb-2 font-weight-bold">Change Log</h1>
+            <hr />
             <p>
               This page includes a description and timeline for the changes that
               have been made to either the College Scorecard tool or to the
@@ -15,8 +16,12 @@
             </p>
             <v-row>
               <v-col class="text-right">
-                <v-btn primary @click="all" class="my-2 mr-2">Expand All</v-btn>
-                <v-btn primary @click="none" class="my-2">Close All</v-btn>
+                <v-btn color="secondary" @click="all" class="my-2 mr-2"
+                  >Expand All</v-btn
+                >
+                <v-btn color="secondary" @click="none" class="my-2"
+                  >Close All</v-btn
+                >
               </v-col>
             </v-row>
             <v-expansion-panels multiple v-model="panels">
@@ -26,53 +31,64 @@
                 >
                 <v-expansion-panel-content>
                   <p>
-                    On September 14, 2022, the Department provided the following updates to the College Scorecard website/API:
+                    On September 14, 2022, the Department provided the following
+                    updates to the College Scorecard website/API:
                   </p>
                   <ul>
                     <li>
-                      Updates (more recent data values) derived from Federal Student Aid sources for the following data metrics: 
-                      Currently Operating Status Flag, Heightened Cash Monitoring Flag, Accrediting Agency Name and Code, Title IV 
-                      Approval Date, and Federal School Code. 
+                      Updates (more recent data values) derived from Federal
+                      Student Aid sources for the following data metrics:
+                      Currently Operating Status Flag, Heightened Cash
+                      Monitoring Flag, Accrediting Agency Name and Code, Title
+                      IV Approval Date, and Federal School Code.
                     </li>
                     <li>
-                      Updates derived from the Office of Postsecondary Education (OPE) eligibility matrix for data metrics 
-                      identifying Minority Serving Institutions.
+                      Updates derived from the Office of Postsecondary Education
+                      (OPE) eligibility matrix for data metrics identifying
+                      Minority Serving Institutions.
                     </li>
                     <li>
-                      Records were added to the institution-level data file for institutions that participate in the 
-                      Integrated Postsecondary Education Data System (IPEDS) but do not have an Office of Postsecondary 
-                      Education Identification number (OPEID).
+                      Records were added to the institution-level data file for
+                      institutions that participate in the Integrated
+                      Postsecondary Education Data System (IPEDS) but do not
+                      have an Office of Postsecondary Education Identification
+                      number (OPEID).
                     </li>
                     <li>
-                      Corrections were made to the Field of Study data to resolve incorrect information in an underlying 
-                      data source, resulting in removal of several rows from the data files.
+                      Corrections were made to the Field of Study data to
+                      resolve incorrect information in an underlying data
+                      source, resulting in removal of several rows from the data
+                      files.
                     </li>
                     <li>
-                      The 2020-21 OPEID/UNITID crosswalk was added to the data file download package.
+                      The 2020-21 OPEID/UNITID crosswalk was added to the data
+                      file download package.
                     </li>
                   </ul>
                 </v-expansion-panel-content>
-              </v-expansion-panel>                          
+              </v-expansion-panel>
               <v-expansion-panel>
-                <v-expansion-panel-header
-                  >May 2, 2022</v-expansion-panel-header
-                >
+                <v-expansion-panel-header>May 2, 2022</v-expansion-panel-header>
                 <v-expansion-panel-content>
                   <p>
-                    On May 2, 2022, the Department provided the following updates to the College Scorecard website/API:
+                    On May 2, 2022, the Department provided the following
+                    updates to the College Scorecard website/API:
                   </p>
                   <ul>
                     <li>
-                      Updates to all data metrics derived from IPEDS with more recent data values from a new data collection year. 
+                      Updates to all data metrics derived from IPEDS with more
+                      recent data values from a new data collection year.
                     </li>
                     <li>
-                      Updates (more recent data values) derived from Federal Student Aid sources for the following data metrics: 
-                      Cohort Default Rate, Currently Operating Status Flag, Heightened Cash Monitoring Flag, Accrediting Agency
-                      Name and Code, Title IV Approval Date, and Federal School Code.
+                      Updates (more recent data values) derived from Federal
+                      Student Aid sources for the following data metrics: Cohort
+                      Default Rate, Currently Operating Status Flag, Heightened
+                      Cash Monitoring Flag, Accrediting Agency Name and Code,
+                      Title IV Approval Date, and Federal School Code.
                     </li>
                   </ul>
                 </v-expansion-panel-content>
-              </v-expansion-panel>              
+              </v-expansion-panel>
               <v-expansion-panel>
                 <v-expansion-panel-header
                   >March 14, 2022</v-expansion-panel-header
@@ -261,13 +277,14 @@
                     problems with this revision of the API, please submit an
                     issue at
                     <a
-                      :href="
-                        $url(
-                          '/school/transition/'
+                      :href="$url('/school/transition/')"
+                      target="_blank"
+                      @click="
+                        transitionOutboundLink(
+                          $event,
+                          'http://github.com/rticwdt/college-scorecard/'
                         )
                       "
-                      target="_blank"
-                      @click="transitionOutboundLink($event, 'http://github.com/rticwdt/college-scorecard/')"
                       >http://github.com/rticwdt/college-scorecard/<i
                         aria-hidden="true"
                         class="v-icon notranslate pl-1 fas fa-external-link-alt theme--light"

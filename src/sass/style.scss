@@ -1,7 +1,9 @@
 // All New Styles
 @import "_variables.scss";
 
-@import "fonts/fonts.css";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+@import url("https://use.typekit.net/nmj8tls.css");
+
 @import "~@mdi/font/css/materialdesignicons.css";
 @import "~vuetify/dist/vuetify.min";
 @import "_vuetify-overrides.scss";
@@ -16,7 +18,7 @@
 }
 
 .hover-tip {
-  max-width:270px;
+  max-width: 270px;
 }
 
 .navy-text {

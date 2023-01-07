@@ -3,27 +3,26 @@
     <v-main>
       <!-- Top Splash and Search-->
       <div class="home-splash">
-        <v-container class="pt-0">
+        <v-container class="mb-n10 pt-16">
           <v-row>
             <!-- Header Info -->
             <v-col cols="12">
-              <h1 class="white--text text-uppercase text-center">
-                Find the Right Fit.
+              <h1 class="white--text">
+                Find the right fit
               </h1>
 
-              <p class="white--text text-center">
+              <p class="white--text">
                 Search and compare colleges: their fields of study, costs,
                 admissions, results, and more.
               </p>
             </v-col>
           </v-row>
 
-          <v-row class="px-md-6">
+          <v-row>
             <!-- Medium and Larger Tabs and Search Content -->
-            <v-col cols="12" class="d-none d-sm-flex pb-10">
+            <v-col cols="12" class="d-none d-sm-flex pb-0">
               <v-tabs
-                grow
-                background-color="rgba(0,0,0,0)"
+                background-color="transparent"
                 color="white"
                 slider-size="8"
                 slider-color="#74B3E8"
@@ -56,7 +55,7 @@
 
                 <!-- Institution Search-->
                 <v-tab-item>
-                  <v-card class="pa-5 homepage-search-container">
+                  <v-card class="pa-5" flat>
                     <name-autocomplete
                       @school-name-selected="handleSchoolNameSelected"
                       :searchEmptyName="false"
@@ -82,7 +81,7 @@
 
                 <!-- Field Of Study Search-->
                 <v-tab-item>
-                  <v-card class="pa-5 homepage-search-container">
+                  <v-card class="pa-5 homepage-search-container" flat>
                     <field-of-study-search
                       @field-of-study-selected="handleFieldOfStudySelected"
                     />
@@ -103,8 +102,8 @@
 
                 <!-- Show Me Options-->
                 <v-tab-item>
-                  <v-card style="min-height: 300px" class="px-10 py-5">
-                    <p class="my-2 text-center">
+                  <v-card style="min-height: 300px" class="px-10 py-5" flat>
+                    <p class="my-5">
                       Select one or more options to create a list of schools
                       that fit your needs.
                     </p>
@@ -179,41 +178,28 @@
       </div>
 
       <!-- Bottom Content -->
-      <div id="home-content-container" class="mt-0 pa-md-6">
-        <v-container class="my-0">
-          <v-row class="mt-md-12 px-md-6">
+      <div class="home-links pt-15 mb-15">
+        <v-container class="mt-8">
+          <v-row>
             <!-- apprenticeships callout -->
-            <v-col class="homeCallout apprenticeships" cols="12" md="6" sm="12">
-              <div class="home-callout-container mr-md-3">
-                <div class="home-callout-top mb-12">
-                  <v-row align="center">
-                    <v-col cols="8">
-                      <h2 class="title mt-4 mt-md-0 ml-10">
-                        Alternative Pathways to a Career
-                      </h2>
-                    </v-col>
-                    <v-col cols="4">
-                      <div class="home-icon-wrapper  mr-10">
-                        <div class="home-icon">
-                          <img
-                            :src="$url('img/icon-pathways-blue.svg')"
-                            alt="Pathways Icon"
-                          />
-                        </div>
-                      </div>
-                    </v-col>
-                  </v-row>
-                </div>
-
-                <p class="mx-10">
+            <v-col cols="12" md="6" class="align-stretch">
+              <v-card flat class="pa-8">
+                <h2 class="display-2">
+                  Alternative Pathways to a Career
+                </h2>
+                <hr />
+                <p>
                   Search for apprenticeship jobs and programs on
                   <a
                     class="homeCallout-indent"
                     :href="$url('/school/transition/')"
                     target="_blank"
-                    @click="transitionOutboundLink($event, 
-                            'https://www.apprenticeship.gov/apprenticeship-finder'
-                      )"
+                    @click="
+                      transitionOutboundLink(
+                        $event,
+                        'https://www.apprenticeship.gov/apprenticeship-finder'
+                      )
+                    "
                   >
                     apprenticeship.gov<v-icon
                       x-small
@@ -225,16 +211,18 @@
                   >.
                 </p>
                 <hr />
-                <p class="mx-10">
+                <p>
                   Use the
                   <a
                     class="homeCallout-indent"
-                    :href="
-                      $url(
-                        '/school/transition/')
-                    "
+                    :href="$url('/school/transition/')"
                     target="_blank"
-                    @click="transitionOutboundLink($event, 'https://www.mynextmove.org')"
+                    @click="
+                      transitionOutboundLink(
+                        $event,
+                        'https://www.mynextmove.org'
+                      )
+                    "
                   >
                     MyNextMove.org<v-icon x-small class="pl-1" color="#007000">
                       fas fa-external-link-alt
@@ -243,18 +231,19 @@
                   tool for career exploration and job analysis.
                 </p>
                 <hr />
-                <p class="mx-10">
+                <p>
                   Find training programs: compare completion rates, employment
                   rates, and more on
                   <a
                     class="homeCallout-indent"
-                    :href="
-                      $url(
-                        '/school/transition/'
-                          )
-                    "
+                    :href="$url('/school/transition/')"
                     target="_blank"
-                    @click="transitionOutboundLink($event, 'https://trainingproviderresults.gov')"
+                    @click="
+                      transitionOutboundLink(
+                        $event,
+                        'https://trainingproviderresults.gov'
+                      )
+                    "
                   >
                     TrainingProviderResults.gov<v-icon
                       x-small
@@ -266,17 +255,18 @@
                   >.
                 </p>
                 <hr />
-                <p class="mx-10">
+                <p>
                   Visit
                   <a
                     class="homeCallout-indent"
-                    :href="
-                      $url(
-                        '/school/transition/'
-                        )
-                    "
+                    :href="$url('/school/transition/')"
                     target="_blank"
-                    @click="transitionOutboundLink($event, 'https://careeronestop.org')"
+                    @click="
+                      transitionOutboundLink(
+                        $event,
+                        'https://careeronestop.org'
+                      )
+                    "
                   >
                     CareerOneStop.org<v-icon
                       x-small
@@ -288,17 +278,15 @@
                   >, your source for career exploration training and jobs.
                 </p>
                 <hr />
-                <p class="mx-10">
+                <p>
                   Explore the
                   <a
                     class="homeCallout-indent"
-                    :href="
-                      $url(
-                        '/school/transition/'
-                      )
-                    "
+                    :href="$url('/school/transition/')"
                     target="_blank"
-                    @click="transitionOutboundLink($event, 'https://www.bls.gov/ooh/')"
+                    @click="
+                      transitionOutboundLink($event, 'https://www.bls.gov/ooh/')
+                    "
                   >
                     Occupational Outlook Handbook (OOH)<v-icon
                       x-small
@@ -310,43 +298,26 @@
                   </a>
                   for detailed information about over 300 occupational profiles.
                 </p>
-              </div>
+              </v-card>
             </v-col>
 
             <!-- paying callout -->
-            <v-col class="homeCallout paying" cols="12" md="6" sm="12">
-              <div class="home-callout-container ml-md-3">
-                <div class="home-callout-top mb-12">
-                  <v-row align="center">
-                    <v-col cols="8">
-                      <h2 class="title mt-4 mt-md-0 ml-10">
-                        Learn More About Paying for College
-                      </h2>
-                    </v-col>
-                    <v-col cols="4">
-                      <div class="home-icon-wrapper mr-10">
-                        <div class="home-icon">
-                          <img
-                            :src="$url('img/icon-financial-aid.svg')"
-                            alt="Financial Aid Icon"
-                          />
-                        </div>
-                      </div>
-                    </v-col>
-                  </v-row>
-                </div>
-                <p class="mx-10">
+            <v-col cols="12" md="6" sm="12">
+              <v-card flat class="pa-8">
+                <h2 class="display-2">
+                  Learn More About Paying for College
+                </h2>
+                <hr />
+                <p>
                   You can learn more about the types of financial aid that are
                   available at
 
                   <a
-                    :href="
-                      $url(
-                        '/school/transition/'
-                      )
-                    "
+                    :href="$url('/school/transition/')"
                     target="_blank"
-                    @click="transitionOutboundLink($event, 'https://studentaid.gov')"
+                    @click="
+                      transitionOutboundLink($event, 'https://studentaid.gov')
+                    "
                   >
                     StudentAid.gov<v-icon x-small class="pl-1" color="#007000">
                       fas fa-external-link-alt
@@ -354,19 +325,20 @@
                   </a>
                 </p>
 
-                <p class="mx-10">
+                <p>
                   To receive financial aid, you must complete the Free
                   Application for Federal Student Aid (FAFSA&#174;) form. You
                   can use
 
                   <a
-                    :href="
-                      $url(
-                        '/school/transition/'
+                    :href="$url('/school/transition/')"
+                    target="_blank"
+                    @click="
+                      transitionOutboundLink(
+                        $event,
+                        'https://studentaid.gov/aid-estimator/'
                       )
                     "
-                    target="_blank"
-                    @click="transitionOutboundLink($event, 'https://studentaid.gov/aid-estimator/')"
                   >
                     Federal Student Aid Estimator<v-icon
                       x-small
@@ -380,23 +352,21 @@
                   to see how much aid may be available to you.
                 </p>
 
-                <p
-                  class="text-center home-callout-button-wrapper mx-10 pb-3 pt-9"
-                >
+                <p class="my-10">
                   <v-btn
-                    rounded
                     color="secondary"
-                    :href="
-                      $url(
-                        '/school/transition/'
+                    :href="$url('/school/transition/')"
+                    target="_blank"
+                    x-large
+                    @click="
+                      transitionOutboundLink(
+                        $event,
+                        'https://studentaid.gov/h/apply-for-aid/fafsa'
                       )
                     "
-                    target="_blank"
-                    @click="transitionOutboundLink($event, 'https://studentaid.gov/h/apply-for-aid/fafsa')"
                     >Start Your FAFSA&reg; Application<v-icon
                       x-small
-                      color="white"
-                      class="pl-1 pb-1"
+                      class="pl-1"
                     >
                       fas fa-external-link-alt
                     </v-icon>
@@ -405,18 +375,19 @@
 
                 <hr />
 
-                <p class="mx-10">
+                <p>
                   Veterans are eligible for higher education funding through the
                   G.I. Bill benefits. Use the
 
                   <a
-                    :href="
-                      $url(
-                        '/school/transition/'
+                    :href="$url('/school/transition/')"
+                    target="_blank"
+                    @click="
+                      transitionOutboundLink(
+                        $event,
+                        'https://www.vets.gov/gi-bill-comparison-tool'
                       )
                     "
-                    target="_blank"
-                    @click="transitionOutboundLink($event, 'https://www.vets.gov/gi-bill-comparison-tool')"
                   >
                     GI Bill&reg; comparison tool<v-icon
                       x-small
@@ -430,7 +401,7 @@
                   to learn about education programs and compare benefits by
                   school.
                 </p>
-              </div>
+              </v-card>
             </v-col>
           </v-row>
         </v-container>
@@ -441,159 +412,33 @@
 
 <style lang="scss" scoped>
 @import "~/sass/_variables.scss";
-.home-splash {
-  min-height: 380px;
-  padding-top: 1.5rem;
-  font-family: $base-font-family !important;
-  background-repeat: repeat !important;
-  background-color: #2c74ad !important;
-  //background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 200 200'%3E%3Cpolygon fill='%23266aa4' fill-opacity='0.50' points='100 0 0 100 100 100 100 200 200 100 200 0'/%3E%3C/svg%3E") !important;
-  background-image: url("data:image/svg+xml,%3Csvg width='84' height='48' viewBox='0 0 84 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h12v6H0V0zm28 8h12v6H28V8zm14-8h12v6H42V0zm14 0h12v6H56V0zm0 8h12v6H56V8zM42 8h12v6H42V8zm0 16h12v6H42v-6zm14-8h12v6H56v-6zm14 0h12v6H70v-6zm0-16h12v6H70V0zM28 32h12v6H28v-6zM14 16h12v6H14v-6zM0 24h12v6H0v-6zm0 8h12v6H0v-6zm14 0h12v6H14v-6zm14 8h12v6H28v-6zm-14 0h12v6H14v-6zm28 0h12v6H42v-6zm14-8h12v6H56v-6zm0-8h12v6H56v-6zm14 8h12v6H70v-6zm0 8h12v6H70v-6zM14 24h12v6H14v-6zm14-8h12v6H28v-6zM14 8h12v6H14V8zM0 8h12v6H0V8z' fill='%233d82b1' fill-opacity='0.24' fill-rule='evenodd'/%3E%3C/svg%3E") !important;
 
+h1 {
+  font-size: 50px;
+  text-transform: none;
+}
+.v-card {
+  height: 100%;
+}
+.v-tabs .v-card {
+  border-top-left-radius: 0px;
+}
+.home-splash {
+  font-family: $base-font-family !important;
+  background-color: #026aa2 !important;
+}
+.home-links {
+  background-color: $bg-gray;
 }
 .v-tab {
   font-family: $header-font-family;
   font-size: 1rem;
-  font-weight: bold;
   color: #bbbbbb !important;
+  letter-spacing: normal;
 }
 .v-tab.v-tab--active {
   color: #ffffff !important;
 }
-.theme--light.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active) {
-  color: #ffffff !important;
-}
-
-.homeContent {
-  /*border-top: 20px*/
-  /*  solid*/
-  /*  #ffffff;*/
-  background-color: #b5d7f4;
-}
-
-#home-content-container {
-  height: auto;
-
-  @media (min-width: 960px) {
-    height: 900px;
-    background: linear-gradient(to bottom, #97cff5 70%, #0075b2 30%);
-  }
-}
-
-.home-callout-text {
-  width: 70%;
-}
-
-.home-callout-container {
-  margin-bottom: 80px;
-  height: 680px;
-  background-color: white;
-  box-shadow: 0px 3px 6px #00000029;
-
-  @media (min-width: 960px) {
-    margin-bottom: inherit;
-    height: 770px;
-  }
-}
-
-.home-callout-top {
-  background-color: #c4e4f9;
-  height: 120px;
-
-  h2 {
-    bottom: 50px;
-  }
-
-  @media (min-width: 960px) {
-    height: 160px;
-  }
-}
-
-.home-icon {
-  img {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 75%;
-
-    @media (min-width: 960px) {
-      width: unset;
-    }
-  }
-}
-
-.homepage-search-container {
-  min-height: 150px;
-}
-</style>
-<style lang="scss" scoped>
-@import "~/sass/_variables.scss";
-.homeCallout {
-  /*background-color: #ffffff;*/
-  a i:not(.fa-external-link-alt) {
-    color: $darker-green !important;
-  }
-  hr {
-    margin: 2rem 56px;
-    height: 1px;
-    border: none;
-    color: #9d9d9d;
-    background-color: #9d9d9d;
-  }
-  a.homeCallout-indent {
-    padding: 0rem 0rem;
-  }
-
-  h2 {
-    font-weight: bold !important;
-    /*color: #ffffff;*/
-    text-align: left;
-    padding: 1rem;
-    /*margin-bottom: 2rem !important;*/
-  }
-
-  h3 {
-    text-align: left;
-    margin-bottom: 0.5rem !important;
-  }
-
-  h3 {
-    text-align: left;
-    margin-bottom: 0.5rem !important;
-  }
-
-  p {
-    text-align: left;
-    padding: 0rem 1rem;
-  }
-}
-
-.sublink {
-  text-decoration: none;
-}
-
-.home-icon-wrapper {
-  position: relative;
-  margin: 0 auto;
-  width: 75px;
-  height: 75px;
-
-  @media (min-width: 960px) {
-    width: 133px;
-    height: 133px;
-  }
-}
-.home-callout-button-wrapper {
-  margin: unset;
-
-  @media (min-width: 960px) {
-    margin: 0 60px;
-  }
-}
-
 .home-mobile-search-title {
   font-size: 16px;
 }

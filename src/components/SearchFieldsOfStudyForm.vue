@@ -1,10 +1,10 @@
 <style lang="scss">
 .search-form-dolflag-cb div .v-input__slot {
-      align-items: start;
+  align-items: start;
 }
-  #fos-chip-container{
-    width: 100%;
-  }
+#fos-chip-container {
+  width: 100%;
+}
 
 #fos-chip-container {
   .v-chip {
@@ -288,10 +288,12 @@
         colored-border
         border="left"
         dense
-        icon=' '
+        icon=" "
       >
         <div style="margin-top:1px;">
-          <span>Limited Data&nbsp;<tooltip definition="fos-limited-data" /></span>
+          <span
+            >Limited Data&nbsp;<tooltip definition="fos-limited-data"
+          /></span>
         </div>
       </v-alert>
     </div>
@@ -373,20 +375,25 @@
         colored-border
         border="left"
         dense
-        icon=' '
+        icon=" "
       >
         <div style="margin-top:1px;">
-          <span>Limited Data&nbsp;<tooltip definition="fos-limited-data" /></span>
+          <span
+            >Limited Data&nbsp;<tooltip definition="fos-limited-data"
+          /></span>
         </div>
       </v-alert>
-
     </div>
 
     <!-- WIOA Programs -->
     <div class="">
-      <label class="subhead mb-2" id="search-fos-dolflag" for="search-fos-dolflag">
-        WIOA Programs&nbsp;
-      </label><tooltip definition="wioa-participants"/>
+      <label
+        class="subhead mb-2"
+        id="search-fos-dolflag"
+        for="search-fos-dolflag"
+      >
+        WIOA Programs&nbsp; </label
+      ><tooltip definition="wioa-participants" />
 
       <v-checkbox
         id="search-form-dolflag"
@@ -398,10 +405,16 @@
         color="secondary"
         hide-details
       ></v-checkbox>
-    </div>    
-    
-    <v-btn type='submit' class="sr-only" color="secondary" rounded @click="$emit('search-query',cleanInput)">Find Schools</v-btn>
+    </div>
 
+    <v-btn
+      type="submit"
+      class="sr-only"
+      color="secondary"
+      large
+      @click="$emit('search-query', cleanInput)"
+      >Find Schools</v-btn
+    >
   </v-form>
 </template>
 
@@ -443,7 +456,7 @@ export default {
         state: [],
         fos_salary: [0, 150],
         fos_debt: [0, 50],
-	dolflag: null
+        dolflag: null,
       },
       utility: {
         formDefault: {},

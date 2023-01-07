@@ -37,8 +37,8 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     theme: {
       themes: {
         light: {
-          primary: '#2B6091',
-          secondary: '#216D0A',
+          primary: '#027A48',
+          secondary: '#027A48',
           accent: '#8c9eff',
           error: '#b61d1c'
         },

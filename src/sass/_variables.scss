@@ -10,9 +10,10 @@ $weight-semibold: 600;
 $weight-bold: 700;
 $weight-black: 800;
 
-$sans-serif: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif;
+$sans-serif: "Inter", "Helvetica Neue", Helvetica, arial, sans-serif;
 $base-font-family: $sans-serif;
-$header-font-family: "Montserrat", "Helvetica Neue", Helvetica, arial, sans-serif;
+$header-font-family: neue-haas-grotesk-display, "Helvetica Neue", Helvetica,
+  arial, sans-serif;
 $base-font-weight: $weight-book;
 
 // z-index
@@ -22,7 +23,6 @@ $z-first: 100;
 $z-second: 200;
 $z-third: 300;
 $z-rooftop: 10000;
-
 
 // Sizes
 $base-font-size: 1;
@@ -40,15 +40,15 @@ $mid-gray: #e1e1e1;
 $light-gray: #eaeaea;
 $lighter-gray: #eeeeee;
 $light-blue: #d5dfe8;
-$medium-blue: #1874DC;
+$medium-blue: #1874dc;
 $dark-blue: #00365e; // was 0e365b
 $darker-blue: #092236;
 $darkest-blue: #040404;
-$mid-blue: #0076b7; // primary in app, was 2b6091 
+$mid-blue: #0076b7; // primary in app, was 2b6091
 $lighter-blue: tint($dark-blue, 6%);
 $sky-blue: #00adf2;
 $sky-blue-light: #d2eefc;
-$light-green: #C4DEC4;
+$light-green: #c4dec4;
 $green: #2c8511;
 $darker-green: #007000; //was 216d09
 $darkest-green: #174b06;
@@ -58,12 +58,12 @@ $yellow: #f0d704;
 $lighter-yellow: #fff6d9;
 $darker-yellow: #eeba28;
 $light-orange: #f3ddca;
-$orange: #d37c39; 
+$orange: #d37c39;
 $red: #d44116;
 $darker-red: #b93610;
 $purple: #8c57f6;
 $amethyst-purple: #9384e9;
-
+$bg-gray: #eff1f5;
 $black-transparent: rgba(0, 0, 0, 0.8);
 
 $meter-colors: (
@@ -73,10 +73,10 @@ $meter-colors: (
   acceptance: $emerald-green,
   retention: $amethyst-purple,
   debt: $amethyst-purple,
-  demographics: $lime-green
+  demographics: $lime-green,
 );
 
-$warning-color: #D16E00;
+$warning-color: #d16e00;
 
 // Institution
 $institution-accent-color: $darker-green;
@@ -113,8 +113,8 @@ $base-button-color: $green;
 $hover-button-color: $darker-green;
 $secondary-button-color: $yellow;
 $secondary-hover-button-color: $darker-yellow;
-$base-button-padding: .85em 2.1em;
-$secondary-button-padding: .7em 2.1em;
+$base-button-padding: 0.85em 2.1em;
+$secondary-button-padding: 0.7em 2.1em;
 
 // Radius
 $base-border-radius: 2px;
@@ -142,7 +142,6 @@ $splash-height: 37em;
 
 // Icons
 $icon-opacity: 0.4;
-
 
 // Search
 

@@ -162,7 +162,7 @@ header {
         app
         clipped-left
         :height="$vuetify.breakpoint.xsOnly ? 80 : 105"
-        color="#00365e"
+        color="#102E52"
         class="pa-0 ma-0"
         flat
       >

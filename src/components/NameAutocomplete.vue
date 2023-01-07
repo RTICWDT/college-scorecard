@@ -6,7 +6,7 @@
       v-model="search"
       search.sync="search"
       item-text="school.name"
-      placeholder="Type to search"
+      placeholder="Enter a School"
       autocomplete="off"
       hide-details
       class="pt-0 mt-0"
@@ -51,8 +51,8 @@ export default {
     },
     searchEmptyName: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   data: () => ({
     items: [],
@@ -64,8 +64,7 @@ export default {
       this.items = []
       if (this.search) {
         this.$emit("school-name-selected", this.search)
-      }
-      else if (this.searchEmptyName) {
+      } else if (this.searchEmptyName) {
         this.$emit("school-name-selected", "")
       }
     },
@@ -84,7 +83,7 @@ export default {
         }
 
         query["school.search"] = newVal ? newVal : ""
-        query[fields.OPEID + '__not'] = 'null';
+        query[fields.OPEID + "__not"] = "null"
         query = this.prepareParams(query)
 
         let request = apiGet("/schools", query)
@@ -143,6 +142,6 @@ export default {
     this.$root.$on("search-form-reset", (e) => {
       this.search = null
     })
-  }
+  },
 }
 </script>
