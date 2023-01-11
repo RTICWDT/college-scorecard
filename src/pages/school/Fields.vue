@@ -1,191 +1,200 @@
 <template>
   <v-main>
-    <v-container class="mt-5">
-      <v-row>
-        <v-col cols="12" lg="9" class="school-left">
-          <!-- Loader -->
-          <div v-if="!school.id" class="show-loading">
-            <v-card class="pa-5">
-              <h1 class="title">
-                Loading
-                <v-icon color="#00365e">fas fa-circle-notch fa-spin</v-icon>
-              </h1>
-            </v-card>
-          </div>
-
-          <div v-else class="show-loaded" id="school">
-            <!-- School Header -->
-            <v-card class="school-heading px-3 mb-5">
-              <!-- Green Header Bar -->
-              <v-row class="csGreenBg">
-                <v-col cols="3">
+    <div class="school-heading">
+      <v-container class="">
+        <v-row>
+          <v-col class="school-lef mb-n10">
+            <div class="show-loaded" id="school">
+              <v-row class="mb-8">
+                <v-col>
                   <v-btn
-                    small
-                    color="white"
                     text
+                    color="white"
                     id="referrer-link"
                     class="link-more"
                     :href="this.$url(referrerLink)"
-                    >&laquo; Back to School Profile</v-btn
+                    >&laquo; Back to [Search]</v-btn
                   >
                 </v-col>
-                <v-col cols="9" class="d-flex justify-end">
-                  <add-to-compare :school="school" />
-                  <share
-                    small
-                    text
-                    color="white"
-                    label="Share this School"
-                    :url="shareLink"
-                    show-copy
-                    :hide="['email']"
-                  />
-                </v-col>
-              </v-row>
-
-              <!-- Monitoring Flag -->
-              <v-row>
-                <v-col
-                  cols="12"
-                  md="6"
-                  class="pt-3 mb-n5"
-                  v-if="_.get(school, fields['UNDER_INVESTIGATION']) == 1"
-                >
-                  <v-chip
-                    v-if="_.get(school, fields['UNDER_INVESTIGATION']) == 1"
-                    color="error"
-                    label
+                <v-col class="text-right">
+                  <v-btn :href="$url(schoolLink)" text color="white"
+                    >School Profile &raquo;</v-btn
                   >
-                    <strong>Under ED Monitoring</strong>
-                    <tooltip
-                      definition="hcm2"
-                      color="#FFFFFF"
-                      class="ml-2"
-                      :isBranch="isBranch"
-                    />
-                  </v-chip>
                 </v-col>
               </v-row>
 
               <!-- School Header Info -->
               <v-row>
-                <v-col cols="12" class="pa-sm-5">
+                <v-col cols="12" md="6" class="white--text">
+                  <p class="mb-0">All Fields of Study Offered at</p>
                   <h1 class="display-1 pa-0 ma-0 font-weight-bold">
-                    All Fields of Study Offered at
-                    <a :href="$url(schoolLink)">
-                      {{ _.get(school, fields["NAME"], "School Name") }}
-                    </a>
+                    {{ _.get(school, fields["NAME"], "School Name") }}
                   </h1>
+                  <p class="mb-0">
+                    <strong>{{ undergraduates | separator }}</strong>
+                    undergraduate students
+                  </p>
+                  <p class="">
+                    <a
+                      target="_blank"
+                      :href="$url('/school/transition/')"
+                      class="white--text"
+                      @click="transitionOutboundLink($event, schoolUrl)"
+                      >{{ schoolUrlDisplay | formatUrlText
+                      }}<v-icon x-small class="pl-1" color="white">
+                        fas fa-external-link-alt
+                      </v-icon>
+                    </a>
+                  </p>
+                  <p
+                    class="mb-10"
+                    v-if="_.get(school, fields['UNDER_INVESTIGATION']) == 1"
+                  >
+                    <v-chip color="error" label>
+                      <strong>Under ED Monitoring</strong>
+                      <tooltip
+                        definition="hcm2"
+                        color="#FFFFFF"
+                        class="ml-2"
+                        :isBranch="isBranch"
+                      />
+                    </v-chip>
+                  </p>
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-card class="pa-5">
+                    <h2 class="mb-6 d-inline-block">
+                      Filter Fields of Study Offered
+                    </h2>
+                    <v-avatar color="#fec005" size="40" class="ml-3">
+                      <v-icon color="black">
+                        fas fa-award
+                      </v-icon>
+                    </v-avatar>
+                    <v-text-field
+                      outlined
+                      label="Search Fields of Study"
+                      v-model="currentTextFilter"
+                    ></v-text-field>
+                    <div class="d-flex">
+                      <v-select
+                        id="school-field-fos-degree"
+                        outlined
+                        :items="filters"
+                        item-text="credential"
+                        item-value="id"
+                        v-model="currentFilter"
+                        label="Search Degree Type"
+                        hide-details
+                        color="primary"
+                        clearable
+                      ></v-select>
+                      <v-btn x-large color="secondary" class="ml-3"
+                        >Filter</v-btn
+                      >
+                    </div>
+                  </v-card>
                 </v-col>
               </v-row>
-            </v-card>
+            </div></v-col
+          ></v-row
+        ></v-container
+      >
+    </div>
+    <v-container class="my-10">
+      <div v-if="!school.id" class="show-loading">
+        <h1 class="title text-center my-15">
+          Loading
+          <v-icon color="#00365e">fas fa-circle-notch fa-spin</v-icon>
+        </h1>
+      </div>
 
-            <!-- School Selector -->
-            <v-card class="mb-4 pa-3">
-              <v-select
-                id="school-field-fos-degree"
-                outlined
-                dense
-                :items="filters"
-                item-text="credential"
-                item-value="id"
-                v-model="currentFilter"
-                label="Filter by Degree Level"
-                hide-details
-                color="secondary"
-                clearable
-              ></v-select>
-            </v-card>
+      <v-row v-else
+        ><v-col>
+          <v-alert
+            v-if="currentFilter === 4"
+            colored-border
+            border="left"
+            dense
+            color="#D16E00"
+            elevation="2"
+          >
+            No data on the number of graduates are displayed because of
+            definitional differences with other data sources. Fields of study on
+            this page include undergraduate-level programs that may be
+            classified as undergraduate certificates in other data sources.
+          </v-alert>
 
-            <!-- Warnings -->
-            <v-alert
-              v-if="currentFilter === 4"
-              colored-border
-              border="left"
-              dense
-              color="#D16E00"
+          <v-alert
+            v-if="currentFilter === 8"
+            colored-border
+            border="left"
+            dense
+            color="#D16E00"
+            elevation="2"
+          >
+            Fields of study on this page include graduate-level programs that
+            may be labeled “postbaccalaureate certificates” in other data
+            sources.
+          </v-alert>
+          <h2 class="mb-4">{{ totalCount }} Results</h2>
+          <!-- Fields of Study -->
+          <v-expansion-panels
+            v-if="!_.isEmpty(processedPrograms)"
+            v-model="panels"
+            multiple
+          >
+            <v-expansion-panel
+              v-for="(prog, index) in processedPrograms"
+              :key="index"
+              class=""
             >
-              No data on the number of graduates are displayed because of
-              definitional differences with other data sources. Fields of study
-              on this page include undergraduate-level programs that may be
-              classified as undergraduate certificates in other data sources.
-            </v-alert>
+              <v-expansion-panel-header>{{
+                _.startCase(_.toLower(prog.name).slice(0, -1))
+              }}</v-expansion-panel-header>
+              <v-expansion-panel-content eager>
+                <v-expansion-panels>
+                  <v-expansion-panel
+                    v-for="fos in prog.fields"
+                    :key="fos.code + '-' + fos.credential.level"
+                  >
+                    <v-expansion-panel-header>
+                      <span class="school-fields-fos-degree-title"
+                        >{{ fos.title.replace(/\.$/, "") }} -
+                        {{ fos.credential.title }}</span
+                      >
+                    </v-expansion-panel-header>
+                    <v-expansion-panel-content class="pa-0 ma-0">
+                      <field-data-extended
+                        :fos="fos"
+                        :fos-salary-select-items="fosSalarySelectItems"
+                        :fos-salary-select="fieldDataExtendedSalarySelect"
+                        @update-salary-select="
+                          fieldDataExtendedSalarySelect = $event
+                        "
+                        :fos-show-debt-prior-included.sync="
+                          fieldDataExtendedShowPrior
+                        "
+                        @update-debt-show-prior="
+                          fieldDataExtendedShowPrior = $event
+                        "
+                        :fields="fields"
+                      />
+                    </v-expansion-panel-content>
+                  </v-expansion-panel>
+                </v-expansion-panels>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
 
-            <v-alert
-              v-if="currentFilter === 8"
-              colored-border
-              border="left"
-              dense
-              color="#D16E00"
-            >
-              Fields of study on this page include graduate-level programs that
-              may be labeled “postbaccalaureate certificates” in other data
-              sources.
-            </v-alert>
-
-            <!-- Fields of Study -->
-            <v-expansion-panels v-if="!_.isEmpty(processedPrograms)">
-              <v-expansion-panel
-                v-for="(prog, index) in processedPrograms"
-                :key="index"
-                class="fos-profile-panel"
-              >
-                <v-expansion-panel-header>{{
-                  _.startCase(_.toLower(prog.name).slice(0, -1))
-                }}</v-expansion-panel-header>
-                <v-expansion-panel-content eager>
-                  <v-expansion-panels>
-                    <v-expansion-panel
-                      v-for="fos in prog.fields"
-                      :key="fos.code + '-' + fos.credential.level"
-                    >
-                      <v-expansion-panel-header>
-                        <span class="school-fields-fos-degree-title"
-                          >{{ fos.title.replace(/\.$/, "") }} -
-                          {{ fos.credential.title }}</span
-                        >
-                      </v-expansion-panel-header>
-                      <v-expansion-panel-content class="pa-0 ma-0">
-                        <field-data-extended
-                          :fos="fos"
-                          :fos-salary-select-items="fosSalarySelectItems"
-                          :fos-salary-select="fieldDataExtendedSalarySelect"
-                          @update-salary-select="
-                            fieldDataExtendedSalarySelect = $event
-                          "
-                          :fos-show-debt-prior-included.sync="
-                            fieldDataExtendedShowPrior
-                          "
-                          @update-debt-show-prior="
-                            fieldDataExtendedShowPrior = $event
-                          "
-                          :fields="fields"
-                        />
-                      </v-expansion-panel-content>
-                    </v-expansion-panel>
-                  </v-expansion-panels>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-expansion-panels>
-
-            <v-card v-else color="pa-5">
-              <p class="ma-0 text-center">
-                <em
-                  >This institution does not offer any fields of study with this
-                  degree.</em
-                >
-              </p>
-            </v-card>
-          </div>
-        </v-col>
-
-        <!-- Sidbar -->
-        <v-col lg="3" class="pt-0">
-          <v-card class="pa-5 mt-0">
-            <paying-for-college />
+          <v-card v-else color="pa-5">
+            <p class="ma-0 text-center">
+              This institution does not offer any fields of study with this
+              degree.
+            </p>
           </v-card>
-        </v-col>
-      </v-row>
+        </v-col></v-row
+      >
     </v-container>
   </v-main>
 </template>
@@ -193,18 +202,20 @@
 <style lang="scss" scoped>
 @import "~/sass/_variables";
 
-.fos-profile-panel {
-  width: 100%;
-  border-left: 10px solid $fos-color-gold;
-
-  @media (min-width: 960px) {
-    font-size: 16px;
-    border-left: 20px solid $fos-color-gold;
-  }
+.school-heading {
+  background-color: $bg-blue;
 }
-
-.compare-selected-text {
-  background-color: $light-blue !important;
+.v-expansion-panel-header--active {
+  background-color: $bg-yellow;
+  & + div {
+    background-color: $bg-yellow;
+    .v-expansion-panel-header--active {
+      background-color: white;
+      & + div {
+        background-color: white;
+      }
+    }
+  }
 }
 </style>
 
@@ -215,7 +226,6 @@ import PayingForCollege from "~/components/PayingForCollege.vue"
 import FieldData from "~/components/FieldData.vue"
 import FieldDataExtended from "~/components/FieldDataExtended.vue"
 import { apiGet } from "~/js/api.js"
-// import { fields } from '../constants.js';
 import { SiteData } from "~/js/mixins/SiteData.js"
 import ComplexFields from "~/js/mixins/ComplexFields.js"
 import AddToCompare from "~/components/AddToCompare.vue"
@@ -234,7 +244,7 @@ export default {
     return {
       school: {},
       panels: [],
-      num_panels: 7,
+      num_panels: 0,
       cip2: {},
       programs: [],
       filters: [
@@ -248,12 +258,14 @@ export default {
         { id: 8, credential: "Graduate/Professional Certificate" },
       ],
       currentFilter: 0,
+      currentTextFilter: "",
       fieldDataExtendedSalarySelect: "aid",
       fieldDataExtendedShowPrior: false,
       fosSalarySelectItems: [
         { text: "Financial Aid Recipients", value: "aid" },
         { text: "Pell Grant Recipients", value: "pell" },
       ],
+      totalCount: 0,
     }
   },
   computed: {
@@ -270,23 +282,36 @@ export default {
           program.credential.title = "Bachelor's Degree"
         }
         if (
-          !self.currentFilter ||
-          self.currentFilter == program.credential.level
+          (!self.currentFilter ||
+            self.currentFilter == program.credential.level) &&
+          (!self.currentTextFilter ||
+            program.title.match(new RegExp(self.currentTextFilter, "ig")))
         ) {
           let twodigit = program.code.substr(0, 2)
           if (!processedPrograms[self.cip2[twodigit]]) {
             processedPrograms[self.cip2[twodigit]] = []
           }
           processedPrograms[self.cip2[twodigit]].push(program)
+          //this.totalCount = this.totalCount + 1
         }
       })
 
+      this.totalCount = 0
+      this.num_panels = 0
       let sorted = []
       for (var cip2 in processedPrograms) {
         sorted.push({
           name: cip2,
           fields: _.sortBy(processedPrograms[cip2], ["title"]),
         })
+        this.totalCount = this.totalCount + processedPrograms[cip2].length
+        this.num_panels++
+      }
+
+      if (this.currentTextFilter || this.currentFilter) {
+        this.panels = [...Array(this.num_panels).keys()].map((k, i) => i)
+      } else {
+        this.panels = []
       }
       return _.sortBy(sorted, ["name"])
     },
@@ -317,7 +342,7 @@ export default {
 
     var params = {}
     params[this.fields.OPERATING] = 1
-    params[this.fields.OPEID + '__not'] = "null"
+    params[this.fields.OPEID + "__not"] = "null"
     params[
       this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
     ] = true

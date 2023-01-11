@@ -2,38 +2,44 @@
   <v-main>
     <v-container class="mt-5">
       <v-row>
-        <v-col cols="12" lg="9" class="school-left">
+        <v-col cols="6">
+          <v-btn small id="referrer-link" class="link-more" :href="referrerLink"
+            >&laquo; Back</v-btn
+          >
+        </v-col>
+        <v-col cols="6" class="text-right">
+          <share
+            small
+            label="Share this Comparison"
+            :url="shareUrl"
+            :hide="hideShare"
+            show-copy
+          />
+        </v-col>
+      </v-row>
+
+      <v-row>
+        <v-card v-show="showShareUpdate" class="pa-5 mb-3">
+          <p>You are viewing a shared comparison.</p>
+
+          <v-btn
+            small
+            color="secondary"
+            rounded
+            @click="handleCompareListSaveClick()"
+          >
+            Update Your List
+          </v-btn>
+        </v-card>
+        <v-col cols="12" class="school-left">
           <!-- Top Summary Container-->
-          <v-card class="pb-5 px-3">
+          <v-card class="pb-5 px-3" flat>
             <!--Page Header-->
-            <v-row class="csGreenBg">
-              <v-col cols="6">
-                <v-btn
-                  small
-                  color="white"
-                  text
-                  id="referrer-link"
-                  class="link-more"
-                  :href="referrerLink"
-                  >&laquo; Back</v-btn
-                >
-              </v-col>
-              <v-col cols="6" class="text-right">
-                <share
-                  small
-                  text
-                  color="white"
-                  label="Share this Comparison"
-                  :url="shareUrl"
-                  :hide="hideShare"
-                  show-copy
-                />
-              </v-col>
-            </v-row>
 
             <h1 class="my-5 mx-5">
               Compare
             </h1>
+            <hr />
 
             <!-- Toggle Controls-->
             <div class="mx-md-4">
@@ -1080,13 +1086,14 @@
                           This is based on a standard 10-year payment plan,
                           other
                           <a
-                            :href="
-                              $url(
-                                '/school/transition/'
+                            :href="$url('/school/transition/')"
+                            target="_blank"
+                            @click="
+                              transitionOutboundLink(
+                                $event,
+                                'https://studentaid.gov/loan-simulator'
                               )
                             "
-                            target="_blank"
-                            @click="transitionOutboundLink($event, 'https://studentaid.gov/loan-simulator')"
                             >payment options<v-icon
                               x-small
                               class="pl-1"
@@ -1098,12 +1105,13 @@
                           are available, like income-driven repayment. An
                           <a
                             target="_blank"
-                            :href="
-                              $url(
-                                '/school/transition/'
+                            :href="$url('/school/transition/')"
+                            @click="
+                              transitionOutboundLink(
+                                $event,
+                                'https://studentaid.gov/manage-loans/repayment/plans/income-driven'
                               )
                             "
-                            @click="transitionOutboundLink($event, 'https://studentaid.gov/manage-loans/repayment/plans/income-driven')"
                             >income-driven repayment<v-icon
                               x-small
                               class="pl-1"
@@ -1394,71 +1402,6 @@
             </v-card>
           </div>
         </v-col>
-        <!-- End Left Content Area -->
-
-        <!-- Left Aside -->
-        <v-col lg="3" class="pt-0">
-          <v-card v-show="showShareUpdate" class="pa-5 mb-3">
-            <p>You are viewing a shared comparison.</p>
-
-            <v-btn
-              small
-              color="secondary"
-              rounded
-              @click="handleCompareListSaveClick()"
-            >
-              Update Your List
-            </v-btn>
-          </v-card>
-          <v-card outline v-bind:class="sidebarSearchClass" class="pa-4 mb-3">
-            <p class="searchForTitle mb-2">SEARCH FOR:</p>
-            <v-radio-group v-model="sidebarSearchToggle" column>
-              <v-radio value="school" color="#007000">
-                <template v-slot:label>
-                  <div
-                    v-bind:style="{
-                      'font-weight': sidebarRadioSchoolStyle,
-                      color: 'black',
-                    }"
-                  >
-                    School
-                  </div>
-                </template>
-              </v-radio>
-
-              <v-radio value="fos" color="#fdbf32">
-                <template v-slot:label>
-                  <div
-                    v-bind:style="{
-                      'font-weight': sidebarRadioFOSStyle,
-                      color: 'black',
-                    }"
-                  >
-                    Field of Study
-                  </div>
-                </template>
-              </v-radio>
-            </v-radio-group>
-
-            <name-autocomplete
-              v-if="sidebarSearchToggle === 'school'"
-              id="school-name-auto-complete"
-              @school-name-selected="handleSchoolNameSelected"
-              :searchEmptyName="false"
-            />
-
-            <field-of-study-search
-              v-if="sidebarSearchToggle === 'fos'"
-              id="school-fos-search"
-              @field-of-study-selected="handleFieldOfStudySelected"
-            />
-            <div></div>
-            <!--Due to CSS styling where last element in card copies border radius of parent element-->
-          </v-card>
-          <v-card class="pa-5 mt-0">
-            <paying-for-college />
-          </v-card>
-        </v-col>
       </v-row>
     </v-container>
   </v-main>
@@ -1662,7 +1605,7 @@ export default {
   computed: {
     shareUrl() {
       let origin = process.isClient ? window.location.origin : ""
-      const compareBaseURL = this.$url('/compare/?')
+      const compareBaseURL = this.$url("/compare/?")
 
       let paramArray = {
         // Institution
@@ -1854,7 +1797,7 @@ export default {
       // Data manipulation after the return.
       let params = {}
       params[this.fields.OPERATING] = 1
-      params[this.fields.OPEID + '__not'] = "null"
+      params[this.fields.OPEID + "__not"] = "null"
       params[
         this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
       ] = true
@@ -1944,7 +1887,7 @@ export default {
       // TODO - Centralize Common params object
       let params = {}
       params[this.fields.OPERATING] = 1
-      params[this.fields.OPEID + '__not'] = "null"
+      params[this.fields.OPEID + "__not"] = "null"
       params[
         this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
       ] = true

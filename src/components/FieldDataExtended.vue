@@ -1,62 +1,13 @@
 <template>
   <div class="fos-field-data-container">
-    <h2>
-      Salary After Completing
-    </h2>
-
-    <!-- Salary After Completing-->
-    <!--<v-row>
-      <v-col cols="12" md="6">
-        <h4>
-          Median Earnings&nbsp;
-          <tooltip definition="fos-median-earnings" />
-        </h4>
-
-        <div>
-          <div v-if="_.get(fos, fields.FOS_EARNINGS_FED)">
-            <span class="display-2 navy-text font-weight-bold ">{{
-              _.get(fos, fields.FOS_EARNINGS_FED) | numeral("$0,0")
-            }}</span>
-          </div>
-
-          <div v-else class="mini-data-na text-center">
-            Data Not Available
-          </div>
-        </div>
-      </v-col>
-
-      <v-col cols="12" md="6">
-        <h4>
-          Monthly Earnings&nbsp;
-          <tooltip definition="fos-monthly-earnings" />
-        </h4>
-
-        <div>
-          <div v-if="_.get(fos, fields.FOS_EARNINGS_FED)">
-            <span class="display-2 navy-text font-weight-bold">{{
-              (_.get(fos, fields.FOS_EARNINGS_FED) / 12) | numeral("$0,0")
-            }}</span>
-          </div>
-
-          <div v-else class="mini-data-na text-center">
-            Data Not Available
-          </div>
-        </div>
-      </v-col>
-    </v-row>-->
-
-    <v-simple-table>
-      <tbody>
-        <tr>
-          <!--Median Earnings-->
-          <td width="50%">
-            <h4>
+    <v-container class="pa-0">
+      <v-row>
+        <v-col>
+          <v-card flat class="pa-5">
+            <h3>
               Median Earnings&nbsp;
-              <tooltip definition="fos-median-earnings"
-              :isBranch="isBranch" />
-            </h4>
-          </td>
-          <td>
+              <tooltip definition="fos-median-earnings" :isBranch="isBranch" />
+            </h3>
             <div>
               <div v-if="_.get(fos, fields.FOS_EARNINGS_FED)">
                 <span class="display-2 navy-text font-weight-bold ">{{
@@ -68,71 +19,23 @@
                 Data Not Available
               </div>
             </div>
-          </td>
-        </tr>
-        <tr>
-          <!--Monthly Earnings-->
-          <td cols="12" md="6">
-            <h4>
-              Monthly Earnings&nbsp;
-              <tooltip definition="fos-monthly-earnings"
-              :isBranch="isBranch" />
-            </h4>
-          </td>
-          <td>
-            <div>
-              <div v-if="_.get(fos, fields.FOS_EARNINGS_FED)">
-                <span class="display-2 navy-text font-weight-bold">{{
-                  (_.get(fos, fields.FOS_EARNINGS_FED) / 12) | numeral("$0,0")
-                }}</span>
-              </div>
-
-              <div v-else class="mini-data-na text-center">
-                Data Not Available
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </v-simple-table>
-
-    <!-- Financial Aid &amp; Debt-->
-
-    <h2 class="mb-0">
-      Financial Aid &amp; Debt
-    </h2>
-    <v-checkbox
-      hide-details
-      v-model="checked"
-      label="Include debt borrowed at any prior institutions"
-      color="secondary"
-      class="mt-1 mb-4"
-    >
-      <template v-slot:label>
-        <span class="profile-fos-include-prior-debt">
-          Include debt borrowed at any prior institutions&nbsp;
-          <tooltip definition="include-debt-prior-inst" />
-        </span>
-      </template>
-    </v-checkbox>
-
-    <v-simple-table>
-      <tbody>
-        <tr>
-          <!--Median Total-->
-          <td width="50%">
-            <h4>
+          </v-card> </v-col
+        ><v-col>
+          <v-card flat class="pa-5">
+            <!--Median Total-->
+            <h3>
               Median Total Debt After Graduation&nbsp;
               <tooltip
                 v-if="!fosShowDebtPriorIncluded"
                 definition="fos-median-debt"
                 :isBranch="isBranch"
               />
-              <tooltip v-else definition="fos-median-debt-all-schools"
-              :isBranch="isBranch" />
-            </h4>
-          </td>
-          <td>
+              <tooltip
+                v-else
+                definition="fos-median-debt-all-schools"
+                :isBranch="isBranch"
+              />
+            </h3>
             <div v-if="!fosShowDebtPriorIncluded">
               <div v-if="_.get(fos, fields.FOS_DEBT_MEDIAN)">
                 <span class="display-2 navy-text font-weight-bold">{{
@@ -156,12 +59,31 @@
                 Data Not Available
               </div>
             </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <!--Monthly Loan-->
-            <h4>
+          </v-card>
+        </v-col></v-row
+      >
+      <v-row>
+        <v-col>
+          <v-card flat class="pa-5">
+            <h3>
+              Monthly Earnings&nbsp;
+              <tooltip definition="fos-monthly-earnings" :isBranch="isBranch" />
+            </h3>
+            <div>
+              <div v-if="_.get(fos, fields.FOS_EARNINGS_FED)">
+                <span class="display-2 navy-text font-weight-bold">{{
+                  (_.get(fos, fields.FOS_EARNINGS_FED) / 12) | numeral("$0,0")
+                }}</span>
+              </div>
+
+              <div v-else class="mini-data-na text-center">
+                Data Not Available
+              </div>
+            </div>
+          </v-card> </v-col
+        ><v-col>
+          <v-card flat class="pa-5">
+            <h3>
               Monthly Loan Payment&nbsp;
               <tooltip
                 v-if="!fosShowDebtPriorIncluded"
@@ -171,7 +93,7 @@
                   [5, 6, 7, 8].indexOf(fos.credential.level) < 0
                     ? 'default'
                     : 'graduate'
-                "                
+                "
               />
               <tooltip
                 v-else
@@ -181,11 +103,9 @@
                   [5, 6, 7, 8].indexOf(fos.credential.level) < 0
                     ? 'default'
                     : 'graduate'
-                "                
+                "
               />
-            </h4>
-          </td>
-          <td>
+            </h3>
             <div v-if="!fosShowDebtPriorIncluded">
               <div v-if="_.get(fos, fields.FOS_DEBT_MONTHLY)">
                 <span class="display-2 navy-text font-weight-bold">{{
@@ -209,26 +129,14 @@
                 Data Not Available
               </div>
             </div>
-          </td>
-        </tr>
-      </tbody></v-simple-table
-    >
-
-    <h2>
-      Additional Information
-    </h2>
-
-    <v-simple-table>
-      <tbody>
-        <tr>
-          <!--Number Of Graduates-->
-          <td width="50%">
-            <h4>
+          </v-card> </v-col
+        ><v-col>
+          <v-card flat class="pa-5">
+            <h3>
               Number of Graduates&nbsp;
               <tooltip definition="fos-number-of-graduates" />
-            </h4>
-          </td>
-          <td>
+            </h3>
+
             <div v-if="_.get(fos, fields.FOS_GRAD_COUNT) != null">
               <span class="display-2 navy-text font-weight-bold">{{
                 _.get(fos, fields.FOS_GRAD_COUNT)
@@ -238,29 +146,43 @@
             <div v-else class="mini-data-na text-center">
               Data Not Available
             </div>
-          </td>
-        </tr>
-      </tbody>
-    </v-simple-table>
+          </v-card>
+        </v-col></v-row
+      >
+      <v-row
+        ><v-col>
+          <v-checkbox
+            hide-details
+            v-model="checked"
+            label="Include debt borrowed at any prior institutions"
+            color="secondary"
+            class="mt-1 mb-4"
+          >
+            <template v-slot:label>
+              <span class="profile-fos-include-prior-debt">
+                Include debt borrowed at any prior institutions&nbsp;
+                <tooltip definition="include-debt-prior-inst" />
+              </span>
+            </template>
+          </v-checkbox> </v-col
+        ><v-col class="text-right">
+          <v-btn
+            @click="$store.commit('toggleFieldOfStudy', fos)"
+            :class="{ secondary: selectedFieldOfStudyClass() }"
+          >
+            Compare
+            <v-icon small class="ml-1">fa fa-check-circle</v-icon>
+          </v-btn>
+        </v-col></v-row
+      ></v-container
+    >
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "~/sass/_variables";
-
-h2 {
-  margin: 2rem 0 0.5rem;
-}
-.display-2 {
-  font-size: 22px !important;
-}
-.fos-field-data-title {
-  font-weight: 500;
-}
-#showGradOnly {
-  .v-messages {
-    display: none;
-  }
+.navy-text {
+  color: #1470ef;
 }
 </style>
 
@@ -291,6 +213,19 @@ export default {
     fosShowDebtPriorIncluded: {
       type: Boolean,
       default: false,
+    },
+  },
+  methods: {
+    selectedFieldOfStudyClass() {
+      if (
+        _.findIndex(this.$store.state.fos, {
+          code: this.fos.code,
+          credentialLevel: this.fos.credential.level,
+          id: this.fos.unit_id,
+        }) >= 0
+      ) {
+        return true
+      } else return false
     },
   },
   computed: {

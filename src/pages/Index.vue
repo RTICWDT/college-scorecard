@@ -425,7 +425,7 @@ h1 {
 }
 .home-splash {
   font-family: $base-font-family !important;
-  background-color: #026aa2 !important;
+  background-color: $bg-blue !important;
 }
 .home-links {
   background-color: $bg-gray;
