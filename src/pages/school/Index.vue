@@ -4,12 +4,10 @@
       <v-row>
         <v-col cols="12" lg="12" class="">
           <div class="show-loading">
-            <v-card class="pa-5" elevation="0">
-              <h1 class="title">
-                Loading
-                <v-icon color="#00365e">fas fa-circle-notch fa-spin</v-icon>
-              </h1>
-            </v-card>
+            <h1 class="title text-center mt-15">
+              <v-icon color="#00365e">fas fa-circle-notch fa-spin</v-icon>
+              Loading
+            </h1>
           </div>
         </v-col>
       </v-row>
@@ -128,7 +126,7 @@
       <div class="white mt-5">
         <v-container
           ><v-row>
-            <v-col cols="12" class="py-0">
+            <v-col cols="12" class="pb-0 pt-5">
               <median-toggle
                 :display-toggle="medianToggle"
                 @median-switch-click="handleMedianToggle"
@@ -561,283 +559,25 @@
                         />
                       </div>
 
-                      <div v-if="selectedFOSDetail">
-                        <div class="pa-sm-4 mb-4" id="fos-number-grads">
-                          <!--TODO - Adjust Class-->
-                          <h3 class="mr-4" style="font-weight: 500">
-                            Number of Graduates
-                            <tooltip
-                              class="ml-2"
-                              definition="fos-number-of-graduates"
-                            />
-                          </h3>
-
-                          <h3
-                            class="display-2 navy-text font-weight-bold"
-                            style="vertical-align: center"
-                            v-if="selectedFOSDetail.counts.ipeds_awards2"
-                          >
-                            {{ selectedFOSDetail.counts.ipeds_awards2 }}
-                          </h3>
-
-                          <div class="data-na d-sm-inline-block" v-else>
-                            Data Not Available
-                          </div>
-                        </div>
-
-                        <!-- Salary After Completing -->
-                        <div class="fos-sub-title-header pa-4">
-                          <h3>Salary After Completing</h3>
-                        </div>
-
-                        <div class="px-4 pb-5 px-sm-4 py-sm-4">
-                          <v-row>
-                            <!--Median Earnings-->
-                            <v-col cols="12" sm="12" md="5">
-                              <h4 class="mb-2">
-                                Median Earnings&nbsp;
-                                <tooltip definition="fos-median-earnings" />
-                              </h4>
-
-                              <div v-if="fosSalarySelect === 'aid'">
-                                <div
-                                  v-if="
-                                    _.get(
-                                      selectedFOSDetail,
-                                      fields.FOS_EARNINGS_FED
-                                    )
-                                  "
-                                >
-                                  <h5 class="fos-small-data-bold navy-text">
-                                    {{
-                                      _.get(
-                                        selectedFOSDetail,
-                                        fields.FOS_EARNINGS_FED
-                                      ) | numeral("$0,0")
-                                    }}
-                                  </h5>
-                                </div>
-
-                                <div
-                                  v-else
-                                  class="mini-data-na text-center mr-sm-11"
-                                >
-                                  Data Not Available
-                                </div>
-                              </div>
-                            </v-col>
-
-                            <!--Monthly Earnings-->
-                            <v-col cols="12" sm="12" md="4" class="pl-sm-1">
-                              <h4 class="mb-2">
-                                Monthly Earnings&nbsp;
-                                <tooltip definition="fos-monthly-earnings" />
-                              </h4>
-
-                              <div v-if="fosSalarySelect === 'aid'">
-                                <div
-                                  v-if="
-                                    _.get(
-                                      selectedFOSDetail,
-                                      fields.FOS_EARNINGS_FED
-                                    )
-                                  "
-                                >
-                                  <h5 class="fos-small-data-bold navy-text">
-                                    {{
-                                      (_.get(
-                                        selectedFOSDetail,
-                                        fields.FOS_EARNINGS_FED
-                                      ) /
-                                        12)
-                                        | numeral("$0,0")
-                                    }}
-                                  </h5>
-                                </div>
-
-                                <div v-else class="mini-data-na text-center">
-                                  Data Not Available
-                                </div>
-                              </div>
-                            </v-col>
-                          </v-row>
-                        </div>
-
-                        <!-- Financial Aid &amp; Debt -->
-                        <div class="fos-sub-title-header pa-4">
-                          <h3>Financial Aid &amp; Debt</h3>
-                        </div>
-
-                        <div class="px-5 pb-5 px-sm-5 py-sm-4">
-                          <v-row>
-                            <v-col cols="12" md="5" class="d-flex">
-                              <v-checkbox
-                                class="mt-2"
-                                hide-details
-                                v-model="fosShowDebtAtPrior"
-                                aria-label="Include debt borrowed at any prior institutions"
-                                color="secondary"
-                              >
-                                <template v-slot:label>
-                                  <span class="profile-fos-include-prior-debt">
-                                    Include debt borrowed at any prior<br
-                                      class="d-sm-none"
-                                    />
-                                    institution&nbsp;
-                                    <tooltip
-                                      definition="include-debt-prior-inst"
-                                      class="pt-2"
-                                    />
-                                  </span>
-                                </template>
-                              </v-checkbox>
-                            </v-col>
-
-                            <!--Median Total-->
-                            <v-col cols="12" sm="12" md="4" class="pl-sm-1">
-                              <h4 class="mb-2">
-                                Median Total Debt
-                                <br class="d-none d-md-block" />After
-                                Graduation&nbsp;
-                                <tooltip
-                                  v-if="!fosShowDebtAtPrior"
-                                  definition="fos-median-debt"
-                                />
-                                <tooltip
-                                  v-else
-                                  definition="fos-median-debt-all-schools"
-                                />
-                              </h4>
-
-                              <div v-if="!fosShowDebtAtPrior">
-                                <div
-                                  v-if="
-                                    _.get(
-                                      selectedFOSDetail,
-                                      fields.FOS_DEBT_MEDIAN
-                                    )
-                                  "
-                                >
-                                  <h5 class="fos-small-data-bold navy-text">
-                                    {{
-                                      _.get(
-                                        selectedFOSDetail,
-                                        fields.FOS_DEBT_MEDIAN
-                                      ) | numeral("$0,0")
-                                    }}
-                                  </h5>
-                                </div>
-
-                                <div
-                                  v-else
-                                  class="mini-data-na text-center mr-sm-11"
-                                >
-                                  Data Not Available
-                                </div>
-                              </div>
-
-                              <div v-else>
-                                <div
-                                  v-if="
-                                    _.get(
-                                      selectedFOSDetail,
-                                      fields.FOS_DEBT_MEDIAN_PRIOR
-                                    )
-                                  "
-                                >
-                                  <h5 class="fos-small-data-bold navy-text">
-                                    {{
-                                      _.get(
-                                        selectedFOSDetail,
-                                        fields.FOS_DEBT_MEDIAN_PRIOR
-                                      ) | numeral("$0,0")
-                                    }}
-                                  </h5>
-                                </div>
-
-                                <div
-                                  v-else
-                                  class="mini-data-na text-center mr-sm-11"
-                                >
-                                  Data Not Available
-                                </div>
-                              </div>
-                            </v-col>
-
-                            <!--Monthly Loan-->
-                            <v-col cols="12" sm="12" md="3" class="pl-sm-1">
-                              <h4 class="mb-2">
-                                Monthly Loan Payment&nbsp;
-                                <tooltip
-                                  v-if="!fosShowDebtAtPrior"
-                                  definition="fos-monthly-debt-payment"
-                                />
-                                <tooltip
-                                  v-else
-                                  definition="fos-monthly-debt-payment-all-schools"
-                                />
-                              </h4>
-
-                              <div v-if="!fosShowDebtAtPrior">
-                                <div
-                                  v-if="
-                                    _.get(
-                                      selectedFOSDetail,
-                                      fields.FOS_DEBT_MONTHLY
-                                    )
-                                  "
-                                >
-                                  <h5 class="fos-small-data-bold navy-text">
-                                    {{
-                                      _.get(
-                                        selectedFOSDetail,
-                                        fields.FOS_DEBT_MONTHLY
-                                      ) | numeral("$0,0")
-                                    }}
-                                  </h5>
-                                </div>
-
-                                <div
-                                  v-else
-                                  class="mini-data-na text-center mr-sm-11"
-                                >
-                                  Data Not Available
-                                </div>
-                              </div>
-
-                              <div v-else>
-                                <div
-                                  v-if="
-                                    _.get(
-                                      selectedFOSDetail,
-                                      fields.FOS_DEBT_MONTHLY_PRIOR
-                                    )
-                                  "
-                                >
-                                  <h5 class="fos-small-data-bold navy-text">
-                                    {{
-                                      _.get(
-                                        selectedFOSDetail,
-                                        fields.FOS_DEBT_MONTHLY_PRIOR
-                                      ) | numeral("$0,0")
-                                    }}
-                                  </h5>
-                                </div>
-
-                                <div
-                                  v-else
-                                  class="mini-data-na text-center mr-sm-11"
-                                >
-                                  Data Not Available
-                                </div>
-                              </div>
-                            </v-col>
-                          </v-row>
-                        </div>
-                      </div>
+                      <field-data-extended
+                        v-if="selectedFOSDetail"
+                        :fos="selectedFOSDetail"
+                        :fos-salary-select-items="fosSalarySelectItems"
+                        :fos-salary-select="fieldDataExtendedSalarySelect"
+                        @update-salary-select="
+                          fieldDataExtendedSalarySelect = $event
+                        "
+                        :fos-show-debt-prior-included.sync="
+                          fieldDataExtendedShowPrior
+                        "
+                        @update-debt-show-prior="
+                          fieldDataExtendedShowPrior = $event
+                        "
+                        :fields="fields"
+                      />
 
                       <div
-                        class="fos-sub-title-header px-4 pt-4 pb-0 top-fos-sub-title-header"
+                        class="fos-sub-title-header pt-4 pb-0 top-fos-sub-title-header"
                         style="background:none !important;"
                       >
                         <h3>
@@ -847,7 +587,7 @@
                       </div>
 
                       <!-- Top Fields of Study -->
-                      <div class="px-5 px-sm-5 pb-sm-4">
+                      <div class="pb-sm-4">
                         <p class="my-3" v-if="fieldsOfStudy.length">
                           Out of {{ fosUndergradCount | numeral }} undergraduate
                           {{ fosUndergradCount == 1 ? "field" : "fields" }} of
@@ -883,7 +623,7 @@
                           <v-col
                             cols="12"
                             sm="8"
-                            class="ma-0 px-2 py-0 font-weight-bold"
+                            class="ma-0 px-2 pt-0 pb-3 font-weight-bold"
                             >Field of Study</v-col
                           >
                           <v-col
@@ -968,6 +708,7 @@
                                   fieldDataExtendedShowPrior = $event
                                 "
                                 :fields="fields"
+                                class="mt-5"
                               />
                             </v-expansion-panel-content>
                           </v-expansion-panel>

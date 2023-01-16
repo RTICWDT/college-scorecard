@@ -1,21 +1,9 @@
 <style lang="scss">
 @import "~/sass/_variables";
 
-.canned-search-wrapper {
-  margin-bottom: 8px;
-}
-
-.pageBar {
-  background-color: rgba(255, 255, 255, 0.7) !important;
-}
-
-.searchFab {
-  z-index: 500 !important;
-  bottom: 64px;
-}
-
-  #search-fos-cip-warning, #search-institutions-dolflag{
-    width: 100%;
+#search-fos-cip-warning,
+#search-institutions-dolflag {
+  width: 100%;
 
   p {
     font-size: 13px;
@@ -28,13 +16,13 @@
     }
   }
 
-    a{
-      color: white !important;
-    }
-   .dolflag-chip a{
-      color: rgba(0, 0, 0, 0.87) !important;
-    }
+  a {
+    color: white !important;
   }
+  .dolflag-chip a {
+    color: rgba(0, 0, 0, 0.87) !important;
+  }
+}
 
 #search-fos-cip-filter-warning {
   p {
@@ -55,25 +43,16 @@
     }
   }
 }
-
-.field-of-study-context-panel{
-  border-radius: 0px 0px 20px 20px !important;
-  border-left: 20px solid $fos-color-gold !important;
-}
-.institution-context-panel{
-  border-radius: 0px 0px 20px 20px !important;
-  border-left: 20px solid $darker-green !important;
-}
 </style>
 
 <style lang="scss" scoped>
 @import "~/sass/_variables.scss";
-  .dolflag-chip {
-    height: auto !important;
-    white-space: normal;
-    padding:18px;
-    margin-right:30px;
-  }
+.dolflag-chip {
+  height: auto !important;
+  white-space: normal;
+  padding: 18px;
+  margin-right: 30px;
+}
 </style>
 
 <template>
@@ -84,45 +63,9 @@
       app
       width="300"
       class="searchSidebar"
+      overlay
       clipped
     >
-      <!--<div class="context-toggle-container pa-5 grey lighten-3">
-        <h3 class="mb-2">
-          Showing Results For:
-        </h3>
-
-        <context-toggle
-          :display-toggle="displayToggle"
-          :control-tab="controlTab"
-          @context-switch-click="handleContextToggle"
-          @context-tab-change="handleContextToggle"
-        />
-      </div>-->
-      
-      <v-card outline v-bind:class="contextRadioClass" class="pa-5 mb-3" style="box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%) !important;">
-          <p class="searchForTitle mb-2">SEARCH FOR:</p>
-          <v-radio-group v-model="controlRadio" @change="handleContextToggleTwo" column>
-            <v-radio
-              value="0"
-              color="#007000"
-            >
-              <template v-slot:label>
-                <div v-bind:style="{ 'font-weight': contextRadioSchoolStyle, 'color': 'black'}">School</div>
-              </template>
-            </v-radio>
-
-            <v-radio
-              value="1"
-              color="#fdbf32"
-            >
-              <template v-slot:label>
-                <div v-bind:style="{ 'font-weight': contextRadioFOSStyle, 'color': 'black'}">Field of Study</div>
-              </template>
-            </v-radio>
-          </v-radio-group>
-
-        </v-card>
-
       <!-- Search Form Component -->
       <search-form
         v-if="displayToggle === 'institutions'"
@@ -131,19 +74,138 @@
         display-all-filters
         @search-query="handleInstitutionSearch"
       />
-
-      <!-- Search Fields of Study Component -->
-      <search-fos-form
-        v-else-if="displayToggle === 'fos'"
-        :url-parsed-params="urlParsedParams"
-        auto-submit
-        @search-query="handleFieldOfStudySearch"
-      />
-
-      </v-navigation-drawer>
+    </v-navigation-drawer>
 
     <v-main>
+      <v-card tile>
+        <v-btn class="float-right" @click="showSidebar = !showSidebar">
+          Show Drawer
+        </v-btn>
+        <v-tabs class="">
+          <p class="'mb-0'">SEARCH FOR:</p>
+          <v-tab
+            to="/search/"
+            @click="displayToggle = 'institutions'"
+            color="#007000"
+          >
+            School
+          </v-tab>
+
+          <v-tab to="/search/fos" color="#fdbf32">
+            Field of Study
+          </v-tab>
+        </v-tabs>
+      </v-card>
+      <div class="bg-blue">
+        <v-container fluid>
+          <v-row
+            ><v-col class="pa-10">
+              <h1>Search Schools</h1>
+              <p>
+                Search schools that might be a good fit, and add to your compare
+                list to see how they match up.
+              </p></v-col
+            ></v-row
+          ></v-container
+        >
+      </div>
       <v-container fluid class="pa-0">
+        <v-card tile>
+          <name-autocomplete
+            @school-name-selected="handleSchoolNameSelected"
+            :initial_school="input.search"
+            @school-name-cleared="handleSchoolNameSelected"
+          />
+          <!--<div class="py-2 px-5">
+            <p class="subhead-2" id="location-label">Location</p>
+            <v-select
+              id="search-from-location-select"
+              v-model="utility.location"
+              @change="handleLocationChange"
+              :items="['Near Me', 'ZIP Code', 'State']"
+              hide-details
+              class="mb-3 mt-0 pt-0"
+              aria-labelledby="location-label"
+              :placeholder="utility.location ? undefined : 'Select an option'"
+              clearable
+              @keydown.enter="$event.preventDefault()"
+            />
+
+            <div
+              class="d-flex align-center"
+              v-if="utility.location === 'ZIP Code'"
+            >
+              <v-text-field
+                id="search-form-zip-text"
+                v-model="input.zip"
+                label="ZIP Code"
+                hideDetails
+                class="mb-3 mr-3"
+                type="number"
+                :rules="[utility.rules.zip]"
+                min="0"
+              ></v-text-field>
+              <v-text-field
+                v-model="input.distance"
+                :rules="[utility.rules.required, utility.rules.numerical]"
+                label="Distance in Miles"
+                :disabled="!input.zip"
+                hideDetails
+                class="mb-3"
+                type="number"
+                min="1"
+              ></v-text-field>
+            </div>
+
+            <div
+              class="d-flex align-center"
+              v-if="utility.location === 'Near Me'"
+            >
+              <v-icon
+                v-on="on"
+                :color="locationButtonColor"
+                v-html="
+                  location.isLoading
+                    ? 'fas fa-circle-notch fa-spin'
+                    : 'mdi-near-me'
+                "
+              ></v-icon>
+
+              <v-text-field
+                v-model="location.miles"
+                :rules="[utility.rules.required, utility.rules.numerical]"
+                label="Distance in Miles"
+                :disabled="!location.latLon"
+                hideDetails
+                class="mb-3"
+                type="number"
+              ></v-text-field>
+
+              <span v-show="location.error" class="overline">{{
+                location.error
+              }}</span>
+            </div>
+
+            <v-select
+              v-model="input.state"
+              id="search-form-state"
+              :items="site.data.states"
+              item-text="name"
+              item-value="abbr"
+              multiple
+              chips
+              hide-details
+              :placeholder="
+                input.state.length > 0 ? undefined : 'Select a state...'
+              "
+              class="mt-0 pt-0"
+              color="secondary"
+              deletable-chips
+              v-show="utility.location == 'State'"
+              aria-label="Select a state"
+            ></v-select>
+          </div>-->
+        </v-card>
         <div id="search-result-container" class="pa-sm-8 pa-2">
           <div class="search-result-container">
             <!-- Search Result Info and controls -->
@@ -170,20 +232,20 @@
                         </span>
                       </v-btn>
 
-                        <v-btn
-                          id="search-button-clear"
-                          color="primary"
-                          text-color="white"
-                          @click="clearSearchForm"
-                          small
-                          rounded
-                          class="d-none d-sm-inline mr-1"
-                        >
-                          <span >
-                            <v-icon small class='mr-1'>mdi-close-circle</v-icon>
-			     Clear
-                          </span>
-                        </v-btn>
+                      <v-btn
+                        id="search-button-clear"
+                        color="primary"
+                        text-color="white"
+                        @click="clearSearchForm"
+                        small
+                        rounded
+                        class="d-none d-sm-inline mr-1"
+                      >
+                        <span>
+                          <v-icon small class="mr-1">mdi-close-circle</v-icon>
+                          Clear
+                        </span>
+                      </v-btn>
 
                       <v-menu offset-y>
                         <template v-slot:activator="{ on }">
@@ -274,71 +336,116 @@
                       :total-visible="7"
                       @input="handlePaginationInput"
                       class="pr-0 mr-0"
-                      circle
                     ></v-pagination>
                   </div>
                 </v-col>
               </v-row>
             </v-card>
 
-              <!-- Instituition Information -->
-              <div v-if="displayToggle === 'institutions' && !isLoading && this.displayFlag"
-                   id="search-institutions-dolflag"
-                   class="my-2"
-              >
+            <!-- Instituition Information -->
+            <div
+              v-if="
+                displayToggle === 'institutions' &&
+                  !isLoading &&
+                  this.displayFlag
+              "
+              id="search-institutions-dolflag"
+              class="my-2"
+            >
               <v-row>
                 <v-col cols="12" sm="5" md="5" class="py-1 pl-3 pr-1">
-                  <v-chip class="dolflag-chip" close @click:close="handleDOLFlag"><span>Only show schools that have programs that qualify for the Department of Labor's WIOA program.<tooltip definition="wioa-participants"/></span></v-chip>
-                  </v-col>
+                  <v-chip
+                    class="dolflag-chip"
+                    close
+                    @click:close="handleDOLFlag"
+                    ><span
+                      >Only show schools that have programs that qualify for the
+                      Department of Labor's WIOA program.<tooltip
+                        definition="wioa-participants"/></span
+                  ></v-chip>
+                </v-col>
                 <v-col cols="12" sm="7" md="7" class="py-1 px-1">
                   <p class="white--text">
-                    Learn more about the Department of Labor's WIOA program at 
-                    <a target="_blank" href="https://collegescorecard.ed.gov/training" class="white--text" >
+                    Learn more about the Department of Labor's WIOA program at
+                    <a
+                      target="_blank"
+                      href="https://collegescorecard.ed.gov/training"
+                      class="white--text"
+                    >
                       CollegeScorecard.ed.gov/training.
                     </a>
-
                   </p>
                 </v-col>
-                </v-row>
-              </div>              
+              </v-row>
+            </div>
 
-              <!-- Field Of Study CIP 4 Information -->
-              <div 
-                   id="search-fos-cip-warning"
-                   class="my-2"
-              >
+            <!-- Field Of Study CIP 4 Information -->
+            <div id="search-fos-cip-warning" class="my-2">
               <v-row>
-                <v-col cols="12" sm="5" md="5" class="py-1 pl-3 pr-1" v-if="displayToggle === 'fos' && !isLoading && this.displayFlag">
-                  <v-chip class="dolflag-chip" close @click:close="handleDOLFlag">
-                    <span>Only show schools that have programs that qualify for the Department of Labor's WIOA program.<tooltip definition="wioa-participants"/>
-                  <br/>
-                    Learn more about the Department of Labor's WIOA program at 
-                    <a target="_blank" href="https://collegescorecard.ed.gov/training">
-                      CollegeScorecard.ed.gov/training.
-                    </a>
-                    </span>                    
+                <v-col
+                  cols="12"
+                  sm="5"
+                  md="5"
+                  class="py-1 pl-3 pr-1"
+                  v-if="
+                    displayToggle === 'fos' && !isLoading && this.displayFlag
+                  "
+                >
+                  <v-chip
+                    class="dolflag-chip"
+                    close
+                    @click:close="handleDOLFlag"
+                  >
+                    <span
+                      >Only show schools that have programs that qualify for the
+                      Department of Labor's WIOA program.<tooltip
+                        definition="wioa-participants"
+                      />
+                      <br />
+                      Learn more about the Department of Labor's WIOA program at
+                      <a
+                        target="_blank"
+                        href="https://collegescorecard.ed.gov/training"
+                      >
+                        CollegeScorecard.ed.gov/training.
+                      </a>
+                    </span>
                   </v-chip>
                 </v-col>
-                <v-col cols="12" sm="7" md="7" class="py-1 px-1"  v-if="displayToggle === 'fos'">
-                <p class="white--text pl-2">
-                  <strong>Note:</strong> Field of Study titles are based on the US Department of Education's
-                  Classification of Instructional Programs (CIP) and may not match the program titles at a
-                  given school.
-                  <a target="_blank" :href="$url('/school/transition/')"
-                  @click="transitionOutboundLink($event, 'https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56')">
-                    Learn more about CIP<v-icon
-                      x-small
-                      color="white"
-                      class="pl-1"
+                <v-col
+                  cols="12"
+                  sm="7"
+                  md="7"
+                  class="py-1 px-1"
+                  v-if="displayToggle === 'fos'"
+                >
+                  <p class="white--text pl-2">
+                    <strong>Note:</strong> Field of Study titles are based on
+                    the US Department of Education's Classification of
+                    Instructional Programs (CIP) and may not match the program
+                    titles at a given school.
+                    <a
+                      target="_blank"
+                      :href="$url('/school/transition/')"
+                      @click="
+                        transitionOutboundLink(
+                          $event,
+                          'https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56'
+                        )
+                      "
                     >
-                      fas fa-external-link-alt
-                    </v-icon>
-
-                  </a>
-                </p>
+                      Learn more about CIP<v-icon
+                        x-small
+                        color="white"
+                        class="pl-1"
+                      >
+                        fas fa-external-link-alt
+                      </v-icon>
+                    </a>
+                  </p>
                 </v-col>
-                </v-row>              
-              </div>
+              </v-row>
+            </div>
 
             <!-- No Results/Canned Search/ -->
             <div
@@ -451,7 +558,7 @@
                       :total-visible="7"
                       @input="handlePaginationInput"
                       class="pr-0 mr-0"
-                      circle                      
+                      circle
                     ></v-pagination>
                   </div>
                 </v-col>
@@ -494,7 +601,7 @@ import PrepareParams from "~/js/mixins/PrepareParams.js"
 import ContextToggle from "~/components/ContextToggle.vue"
 import SearchFieldsOfStudyForm from "~/components/SearchFieldsOfStudyForm.vue"
 import FieldOfStudyResultCard from "~/components/FieldOfStudyResultCard.vue"
-import Tooltip from "~/components/Tooltip.vue";
+import Tooltip from "~/components/Tooltip.vue"
 import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 
 import _ from "lodash"
@@ -514,7 +621,8 @@ export default {
     "context-toggle": ContextToggle,
     "search-fos-form": SearchFieldsOfStudyForm,
     "fos-result-card": FieldOfStudyResultCard,
-    "tooltip": Tooltip,
+    tooltip: Tooltip,
+    NameAutocomplete,
   },
   mixins: [URLHistory, PrepareParams, AnalyticsEvents],
   props: {
@@ -534,10 +642,7 @@ export default {
   data() {
     return {
       showSidebar: true,
-      sidebar: {controlRadio: "1",
-        fixed: false,
-        absolute: true,
-      },
+      sidebar: { controlRadio: "1", fixed: false, absolute: true },
       results: {
         schools: [],
         meta: {
@@ -563,14 +668,17 @@ export default {
         { type: "Name", field: "name:asc" },
         { type: "Annual Cost", field: "avg_net_price:asc" },
         { type: "Graduation Rate", field: "completion_rate:desc" },
-        { type: "% Earning More Than a High School Grad", field: "threshold_earnings:desc" },
+        {
+          type: "% Earning More Than a High School Grad",
+          field: "threshold_earnings:desc",
+        },
       ],
       shareUrl: null,
       displayToggle: "institutions",
       controlTab: 1,
       controlRadio: "1",
       fieldOfStudyTotalCountWithoutRangeFilters: 0,
-      displayFlag: false
+      displayFlag: false,
     }
   },
   created() {
@@ -603,11 +711,13 @@ export default {
       this.controlRadio = "1"
     }
 
-    if (typeof this.urlParsedParams.dolflag === 'undefined' || this.urlParsedParams.dolflag === 'false' ){
-        this.displayFlag = false;
-    }
-    else{
-        this.displayFlag = true;
+    if (
+      typeof this.urlParsedParams.dolflag === "undefined" ||
+      this.urlParsedParams.dolflag === "false"
+    ) {
+      this.displayFlag = false
+    } else {
+      this.displayFlag = true
     }
 
     // Create Debounce function for this page.
@@ -659,27 +769,27 @@ export default {
         return 0
       }
     },
-    contextRadioClass(){
-      if(this.controlRadio === "1"){
-        return "field-of-study-context-panel";
-      }else{
-        return "institution-context-panel";
+    contextRadioClass() {
+      if (this.controlRadio === "1") {
+        return "field-of-study-context-panel"
+      } else {
+        return "institution-context-panel"
       }
     },
-    contextRadioSchoolStyle(){
-      if(this.controlRadio === "1"){
-        return "normal";
-      }else{
-        return "bold";
+    contextRadioSchoolStyle() {
+      if (this.controlRadio === "1") {
+        return "normal"
+      } else {
+        return "bold"
       }
     },
-    contextRadioFOSStyle(){
-      if(this.controlRadio === "1"){
-        return "bold";
-      }else{
-        return "normal";
+    contextRadioFOSStyle() {
+      if (this.controlRadio === "1") {
+        return "bold"
+      } else {
+        return "normal"
       }
-    }
+    },
   },
   methods: {
     searchAPI(params = {}, returnFields = [], allPrograms = true) {
@@ -690,12 +800,14 @@ export default {
 
       this.error.message = null
 
-      if (typeof params['dolflag'] === 'undefined' || params['dolflag'] === 'false' ){
-          this.displayFlag = false;
+      if (
+        typeof params["dolflag"] === "undefined" ||
+        params["dolflag"] === "false"
+      ) {
+        this.displayFlag = false
+      } else {
+        this.displayFlag = true
       }
-      else{
-          this.displayFlag = true;
-      }      
 
       // let poppingState = false;
       // let alreadyLoaded = false;
@@ -756,9 +868,7 @@ export default {
             schools: [],
           }
           if (error == "Error: Request aborted") {
-            
-          }
-          else if (error.response.data.errors) {
+          } else if (error.response.data.errors) {
             this.showError(error.response.data.errors[0])
           } else if (error.response.status === 500) {
             this.showError("API 500 Error")
@@ -814,7 +924,7 @@ export default {
     },
     resort(sort) {
       this.input.sort = sort
-      var params =this.parseURLParams()
+      var params = this.parseURLParams()
       this.debounceSearchUpdate(params)
     },
     clearSearchForm() {
@@ -824,25 +934,6 @@ export default {
       }
       this.urlParsedParams = {}
       this.$root.$emit("search-form-reset")
-    },
-    handleContextToggle(toggleValue) {
-      this.clearSearchForm()
-      this.controlTab = toggleValue
-      this.displayToggle = toggleValue === 0 ? "institutions" : "fos"
-      this.results.schools = []
-      this.results.meta = {
-        total: 0,
-      }
-      // TODO - What happens to search filters?
-    },
-    handleContextToggleTwo(toggleValue){
-      this.clearSearchForm();
-      this.displayToggle = (toggleValue === "1")? 'fos' : 'institutions';
-      this.results.schools = []
-      this.results.meta = {
-        total: 0
-      }
-      // TODO - What happens to search filters?
     },
     handleInstitutionSearch(params) {
       let returnFields = [
@@ -875,11 +966,11 @@ export default {
         // new completion rates
         fields.COMPLETION_OM,
         fields.COMPLETION_150_4,
-        fields.COMPLETION_150_LT4,    
+        fields.COMPLETION_150_LT4,
 
         fields.FIELD_OF_STUDY,
       ].join(",")
-      
+
       this.searchAPI(params, returnFields)
     },
     handleFieldOfStudySearch(params) {
@@ -917,25 +1008,46 @@ export default {
       this.urlParsedParams = this.parseURLParams()
       delete this.urlParsedParams.dolflag
       this.debounceSearchUpdate(this.urlParsedParams)
-      this.$root.$emit('reset-dol-flag')
+      this.$root.$emit("reset-dol-flag")
+    },
+    handleSchoolNameSelected(school) {
+      if (typeof school == "string") {
+        // this.input.name = school;
+        this.input.search = school
+        // this.input.id = null
+      } else {
+        // this.input.name = school['school.name'];
+        this.input.search = school["school.name"]
+        // this.input.id = school.id
+      }
+    },
+    // Reset values for sub objects to default
+    handleLocationChange(e) {
+      // TODO - Check to see if values need to be reset.
+      this.input.zip = ""
+      this.input.state = []
 
-      
-    }
+      this.input.lat = null
+      this.input.long = null
+
+      this.location.latLon = null
+      this.location.error = null
+    },
   },
- metaInfo: {
-    title: 'Search',
+  metaInfo: {
+    title: "Search",
     meta: [
       {
-        key: 'og:title',
-        name: 'og:title',
-        content: "Search | College Scorecard"
-      },     
+        key: "og:title",
+        name: "og:title",
+        content: "Search | College Scorecard",
+      },
       {
-        key: 'twitter:title',
-        name: 'twitter:title',
-        content: "Search | College Scorecard"
-      },       
-    ]     
-  }
-};
+        key: "twitter:title",
+        name: "twitter:title",
+        content: "Search | College Scorecard",
+      },
+    ],
+  },
+}
 </script>

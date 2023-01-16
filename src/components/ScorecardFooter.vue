@@ -5,13 +5,13 @@
       inset
       app
       absolute
-      height="150"
+      :height="$vuetify.breakpoint.smAndDown ? 300 : 250"
       color="#10274E"
     >
-      <v-container class="px-0 py-8">
+      <v-container class="py-8">
         <v-row>
           <v-col>
-            <ul class="d-flex justify-space-between  ma-0 pa-0">
+            <ul class="d-md-flex justify-space-between  ma-0 pa-0">
               <li>
                 <a
                   :href="$url('/')"
@@ -53,7 +53,11 @@
           <v-col>
             <p class="mb-0">
               <small>
-                Powered by <a :href="$url('/data')">College Scorecard Data</a> |
+                Powered by <a :href="$url('/data')">College Scorecard Data</a>
+              </small>
+            </p>
+            <p class="mb-0">
+              <small>
                 <a
                   :href="$url('/school/transition/')"
                   target="_blank"
@@ -63,16 +67,12 @@
                       'https://github.com/RTICWDT/college-scorecard/releases'
                     )
                   "
-                  >{{ version
-                  }}<v-icon x-small class="pl-1" color="white">
+                  >{{ version }}
+                  <v-icon x-small class="pl-1" color="white">
                     fas fa-external-link-alt
                   </v-icon>
                 </a>
-              </small>
-            </p>
-            <p>
-              <small>
-                <a href="mailto:scorecarddata@rti.org">Contact Us</a> |
+                | <a href="mailto:scorecarddata@rti.org">Contact Us</a> |
                 <a
                   :href="$url('/school/transition/')"
                   target="_blank"
@@ -86,7 +86,11 @@
                     fas fa-external-link-alt
                   </v-icon>
                 </a>
-                | <a :href="$url('/data/glossary/')">Glossary</a> |
+                | <a :href="$url('/data/glossary/')">Glossary</a>
+              </small>
+            </p>
+            <p>
+              <small>
                 <a
                   :href="$url('/school/transition/')"
                   @click="transitionOutboundLink($event, 'http://www.ed.gov/')"
@@ -98,8 +102,8 @@
                   >
                     fas fa-external-link-alt
                   </v-icon>
-                </a>
-              </small>
+                </a></small
+              >
             </p>
           </v-col>
         </v-row>

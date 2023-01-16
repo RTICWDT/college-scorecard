@@ -83,7 +83,8 @@
             >
             <hr />
             <p class="mt-8">
-              <strong>Looking for help?</strong> Visit
+              <strong>Looking for help?</strong><br />
+              Visit
               <a
                 :href="$url('/school/transition/')"
                 @click="
@@ -98,7 +99,8 @@
                 </v-icon>
               </a>
               or email the help desk at
-              <a href="mailto:scorecarddata@rti.org">scorecarddata@rti.org</a>.
+              <a href="mailto:scorecarddata@rti.org">scorecarddata@rti.org</a
+              >.<br />
               For inquiries by members of the press, please contact
               <a href="mailto:press@ed.gov">press@ed.gov</a>.
             </p>
