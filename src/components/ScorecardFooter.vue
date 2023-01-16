@@ -153,6 +153,32 @@ export default {
       return this.$static.metadata.version
     },
   },
+  watch: {
+    $route() {
+      this.setActiveLink()
+    },
+  },
+  methods: {
+    setActiveLink() {
+      let path = process.isClient ? window.location.pathname : ""
+      if (path.match(/search/)) {
+        this.activeLink = "search"
+      } else if (path.match(/compare/)) {
+        this.activeLink = "compare"
+      } else if (path.match(/data/)) {
+        this.activeLink = "data"
+      } else if (path.match(/school/)) {
+        this.activeLink = null
+      } else if (path.match(/\//)) {
+        this.activeLink = "/"
+      } else {
+        this.activeLink = null
+      }
+    },
+  },
+  created() {
+    this.setActiveLink()
+  },
 }
 </script>
 
