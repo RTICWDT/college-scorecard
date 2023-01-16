@@ -16,12 +16,10 @@
             </p>
             <v-row>
               <v-col class="text-right">
-                <v-btn color="secondary" @click="all" class="my-2 mr-2"
+                <v-btn color="" @click="all" class="my-2 mr-2"
                   >Expand All</v-btn
                 >
-                <v-btn color="secondary" @click="none" class="my-2"
-                  >Close All</v-btn
-                >
+                <v-btn color="" @click="none" class="my-2">Close All</v-btn>
               </v-col>
             </v-row>
             <v-expansion-panels multiple v-model="panels">
