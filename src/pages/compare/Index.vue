@@ -1,6 +1,6 @@
 <template>
   <v-main>
-    <v-container class="mt-5">
+    <v-container class="mt-5 mb-10">
       <v-row>
         <v-col cols="6">
           <v-btn small id="referrer-link" class="link-more" :href="referrerLink"
@@ -19,18 +19,22 @@
       </v-row>
 
       <v-row>
-        <v-card v-show="showShareUpdate" class="pa-5 mb-3">
-          <p>You are viewing a shared comparison.</p>
+        <v-col>
+          <v-card flat v-show="showShareUpdate" class="pa-5">
+            <div>
+              You are viewing a shared comparison.
 
-          <v-btn
-            small
-            color="secondary"
-            rounded
-            @click="handleCompareListSaveClick()"
+              <v-btn
+                small
+                color="secondary"
+                @click="handleCompareListSaveClick()"
+              >
+                Update Your List
+              </v-btn>
+            </div></v-card
           >
-            Update Your List
-          </v-btn>
-        </v-card>
+        </v-col> </v-row
+      ><v-row>
         <v-col cols="12" class="school-left">
           <!-- Top Summary Container-->
           <v-card class="pb-5 px-3" flat>
@@ -1404,6 +1408,7 @@
         </v-col>
       </v-row>
     </v-container>
+    <bottom-callouts />
   </v-main>
 </template>
 
@@ -1491,7 +1496,6 @@
 <script>
 import Tooltip from "~/components/Tooltip.vue"
 import Share from "~/components/Share.vue"
-import PayingForCollege from "~/components/PayingForCollege.vue"
 import CompareDrawer from "~/components/CompareDrawer.vue"
 import HorizontalBar from "~/components/HorizontalBar.vue"
 import HorizontalBarMedian from "~/components/HorizontalBarMedian.vue"
@@ -1517,13 +1521,13 @@ import {
 import ContextToggle from "~/components/ContextToggle.vue"
 import { mapGetters } from "vuex"
 import MedianToggle from "~/components/MedianToggle.vue"
+import BottomCallouts from "~/components/BottomCallouts.vue"
 
 export default {
   mixins: [ComplexFields, AnalyticsEvents, Router],
   components: {
     tooltip: Tooltip,
     share: Share,
-    "paying-for-college": PayingForCollege,
     "horizontal-bar": HorizontalBar,
     "compare-section": CompareSection,
     "compare-block": CompareBlock,
@@ -1534,6 +1538,7 @@ export default {
     "field-of-study-search": FieldOfStudySearch,
     "context-toggle": ContextToggle,
     "median-toggle": MedianToggle,
+    "bottom-callouts": BottomCallouts,
   },
   data() {
     return {

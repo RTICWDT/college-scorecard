@@ -26,40 +26,44 @@
               <!-- School Header Info -->
               <v-row>
                 <v-col cols="12" md="6" class="white--text">
-                  <p class="mb-0">All Fields of Study Offered at</p>
-                  <h1 class="display-1 pa-0 ma-0 font-weight-bold">
-                    {{ _.get(school, fields["NAME"], "School Name") }}
-                  </h1>
-                  <p class="mb-0">
-                    <strong>{{ undergraduates | separator }}</strong>
-                    undergraduate students
-                  </p>
-                  <p class="">
-                    <a
-                      target="_blank"
-                      :href="$url('/school/transition/')"
-                      class="white--text"
-                      @click="transitionOutboundLink($event, schoolUrl)"
-                      >{{ schoolUrlDisplay | formatUrlText
-                      }}<v-icon x-small class="pl-1" color="white">
-                        fas fa-external-link-alt
-                      </v-icon>
-                    </a>
-                  </p>
-                  <p
-                    class="mb-10"
-                    v-if="_.get(school, fields['UNDER_INVESTIGATION']) == 1"
-                  >
-                    <v-chip color="error" label>
-                      <strong>Under ED Monitoring</strong>
-                      <tooltip
-                        definition="hcm2"
-                        color="#FFFFFF"
-                        class="ml-2"
-                        :isBranch="isBranch"
-                      />
-                    </v-chip>
-                  </p>
+                  <div v-if="school.id">
+                    <p class="mb-3 text-uppercase">
+                      All Fields of Study Offered at
+                    </p>
+                    <h1 class="display-1 mb-3 font-weight-bold">
+                      {{ _.get(school, fields["NAME"], "School Name") }}
+                    </h1>
+                    <p class="mb-0">
+                      <strong>{{ undergraduates | separator }}</strong>
+                      undergraduate students
+                    </p>
+                    <p class="">
+                      <a
+                        target="_blank"
+                        :href="$url('/school/transition/')"
+                        class="white--text"
+                        @click="transitionOutboundLink($event, schoolUrl)"
+                        >{{ schoolUrlDisplay | formatUrlText
+                        }}<v-icon x-small class="pl-1" color="white">
+                          fas fa-external-link-alt
+                        </v-icon>
+                      </a>
+                    </p>
+                    <p
+                      class="mb-10"
+                      v-if="_.get(school, fields['UNDER_INVESTIGATION']) == 1"
+                    >
+                      <v-chip color="error" label>
+                        <strong>Under ED Monitoring</strong>
+                        <tooltip
+                          definition="hcm2"
+                          color="#FFFFFF"
+                          class="ml-2"
+                          :isBranch="isBranch"
+                        />
+                      </v-chip>
+                    </p>
+                  </div>
                 </v-col>
                 <v-col cols="12" md="6">
                   <v-card class="pa-5">
@@ -75,37 +79,32 @@
                       outlined
                       label="Search Fields of Study"
                       v-model="currentTextFilter"
+                      clearable
+                      hide-details="auto"
+                      class="mb-4"
                     ></v-text-field>
-                    <div class="d-flex">
-                      <v-select
-                        id="school-field-fos-degree"
-                        outlined
-                        :items="filters"
-                        item-text="credential"
-                        item-value="id"
-                        v-model="currentFilter"
-                        label="Search Degree Type"
-                        hide-details
-                        color="primary"
-                        clearable
-                      ></v-select>
-                      <v-btn x-large color="secondary" class="ml-3"
-                        >Filter</v-btn
-                      >
-                    </div>
+                    <v-select
+                      id="school-field-fos-degree"
+                      outlined
+                      :items="filters"
+                      item-text="credential"
+                      item-value="id"
+                      v-model="currentFilter"
+                      label="Search Degree Type"
+                      color="primary"
+                      clearable
+                      hide-details="auto"
+                    ></v-select>
                   </v-card>
                 </v-col>
-              </v-row>
-            </div></v-col
-          ></v-row
-        ></v-container
-      >
+              </v-row></div></v-col></v-row
+      ></v-container>
     </div>
     <v-container class="my-10">
       <div v-if="!school.id" class="show-loading">
         <h1 class="title text-center my-15">
-          Loading
           <v-icon color="#00365e">fas fa-circle-notch fa-spin</v-icon>
+          Loading
         </h1>
       </div>
 
@@ -196,6 +195,7 @@
         </v-col></v-row
       >
     </v-container>
+    <bottom-callouts />
   </v-main>
 </template>
 
@@ -222,23 +222,23 @@
 <script>
 import Tooltip from "~/components/Tooltip.vue"
 import Share from "~/components/Share.vue"
-import PayingForCollege from "~/components/PayingForCollege.vue"
 import FieldData from "~/components/FieldData.vue"
 import FieldDataExtended from "~/components/FieldDataExtended.vue"
 import { apiGet } from "~/js/api.js"
 import { SiteData } from "~/js/mixins/SiteData.js"
 import ComplexFields from "~/js/mixins/ComplexFields.js"
 import AddToCompare from "~/components/AddToCompare.vue"
+import BottomCallouts from "~/components/BottomCallouts.vue"
 
 export default {
   mixins: [SiteData, ComplexFields],
   components: {
     tooltip: Tooltip,
     share: Share,
-    "paying-for-college": PayingForCollege,
     "field-data": FieldData,
     "field-data-extended": FieldDataExtended,
     "add-to-compare": AddToCompare,
+    "bottom-callouts": BottomCallouts,
   },
   data() {
     return {

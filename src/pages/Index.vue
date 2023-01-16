@@ -180,9 +180,9 @@
       <!-- Bottom Content -->
       <div class="home-links pt-15 mb-15">
         <v-container class="mt-8">
-          <v-row>
+          <v-row class="align-stretch">
             <!-- apprenticeships callout -->
-            <v-col cols="12" md="6" class="align-stretch">
+            <v-col cols="12" md="6">
               <v-card flat class="pa-8">
                 <h2 class="display-2">
                   Alternative Pathways to a Career
@@ -445,7 +445,6 @@ h1 {
 </style>
 
 <script>
-import PayingForCollege from "~/components/PayingForCollege.vue"
 import CannedSearchContainer from "~/components/CannedSearchContainer.vue"
 import querystring from "querystring"
 import SearchForm from "~/components/SearchForm.vue"
@@ -458,7 +457,6 @@ import CompareHeader from "~/components/CompareHeader.vue"
 export default {
   mixins: [AnalyticsEvents],
   components: {
-    "paying-for-college": PayingForCollege,
     "canned-search-container": CannedSearchContainer,
     "search-form": SearchForm,
     "name-autocomplete": NameAutocomplete,

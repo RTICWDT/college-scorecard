@@ -143,7 +143,7 @@
           </v-row>
         </v-container>
       </div>
-      <div class="white">
+      <div class="white pb-10">
         <v-container>
           <v-row>
             <v-col cols="12" lg="12" class="">
@@ -2395,22 +2395,8 @@
           </v-row>
         </v-container>
       </div>
-      <div class="bottom-panel">
-        <v-container class="">
-          <v-row>
-            <v-col cols="12" md="6">
-              <v-card outline class="pa-5 my-10">
-                <paying-for-college-small />
-              </v-card>
-            </v-col>
-            <v-col cols="12" md="6">
-              <v-card outline class="pa-5 my-10">
-                <va-benefits />
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-container>
-      </div>
+
+      <bottom-callouts />
     </div>
   </v-main>
 </template>
@@ -2441,9 +2427,7 @@
   flex: none;
 }
 
-.bottom-panel {
-  background-color: $light-gray;
-}
+
 .compare-selected-text {
   background-color: $light-blue !important;
 }
@@ -2637,7 +2621,6 @@ import RepaymentRate from "~/components/RepaymentRate.vue"
 import Range from "~/components/Range.vue"
 import HorizontalBar from "~/components/HorizontalBar.vue"
 import Share from "~/components/Share.vue"
-import PayingForCollegeSmall from "~/components/PayingForCollegeSmall.vue"
 import SchoolIcons from "~/components/SchoolIcons.vue"
 import FieldData from "~/components/FieldData.vue"
 import NetPriceLink from "~/components/NetPriceLink.vue"
@@ -2654,7 +2637,7 @@ import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 import AddToCompare from "~/components/AddToCompare.vue"
 import MedianToggle from "~/components/MedianToggle.vue"
 import Toggle from "~/components/Toggle.vue"
-import VABenefits from "~/components/VABenefits.vue"
+import BottomCallouts from "~/components/BottomCallouts.vue"
 import numeral from "numeral"
 
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet"
@@ -2674,8 +2657,7 @@ export default {
     range: Range,
     "horizontal-bar": HorizontalBar,
     share: Share,
-    "paying-for-college-small": PayingForCollegeSmall,
-    "va-benefits": VABenefits,
+    "bottom-callouts": BottomCallouts,
     "school-icons": SchoolIcons,
     "field-data": FieldData,
     "net-price-link": NetPriceLink,

@@ -5,10 +5,9 @@
         <v-btn
           :color="color"
           v-on="on"
-          rounded
           :small="small"
           :text="text"
-          class='d-none d-sm-inline share'
+          class="d-none d-sm-inline share"
         >
           <v-icon x-small class="mr-2 share">fas fa-share</v-icon> {{ label }}
         </v-btn>
