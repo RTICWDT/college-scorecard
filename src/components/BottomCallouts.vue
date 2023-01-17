@@ -88,7 +88,7 @@
                   'https://www.vets.gov/gi-bill-comparison-tool'
                 )
               "
-              ><img src="/img/VA-Logo.svg" style="max-width: 300px" alt="VA Logo" /></a></p>
+              ><v-img  :src="$url('/img/VA-Logo.svg')" style="max-width: 300px" alt="VA Logo" /></a></p>
           </p>
         </v-card>
       </v-col>
