@@ -42,7 +42,7 @@
     <!-- Location -->
     <div>
       <label
-        class="subhead mb-2"
+        class="subhead"
         id="search-fos-location-select"
         for="search-fos-location-select"
       >
@@ -56,10 +56,12 @@
         @change="handleLocationChange"
         :items="['Near Me', 'ZIP Code', 'State']"
         hide-details
-        class="mt-0 pt-0"
+        class="mt-0 pt-0 mb-5"
         :placeholder="utility.location ? undefined : 'Select an option'"
         clearable
         color="secondary"
+        outlined
+        dense
       />
 
       <div class="d-flex align-center" v-if="utility.location === 'ZIP Code'">
@@ -70,6 +72,8 @@
           hideDetails
           class="mb-3 mr-3"
           type="number"
+          outlined
+          dense
         ></v-text-field>
 
         <v-text-field
@@ -81,6 +85,8 @@
           class="mb-3"
           type="number"
           min="1"
+          outlined
+          dense
         ></v-text-field>
       </div>
 
@@ -101,6 +107,8 @@
           hideDetails
           class="mb-3"
           type="number"
+          outlined
+          dense
         ></v-text-field>
 
         <span v-show="location.error" class="overline">{{
@@ -123,6 +131,8 @@
         color="secondary"
         deletable-chips
         v-if="utility.location == 'State'"
+        outlined
+        dense
       ></v-select>
     </div>
 

@@ -8,6 +8,7 @@
           :small="small"
           :text="text"
           class="d-none d-sm-inline share"
+          outlined
         >
           <v-icon x-small class="mr-2 share">fas fa-share</v-icon> {{ label }}
         </v-btn>

@@ -205,12 +205,10 @@
 
                           <v-btn
                             id="search-button-clear"
-                            color="primary"
-                            text-color="white"
                             @click="clearSearchForm"
                             small
-                            rounded
                             class="d-none d-sm-inline mr-1"
+                            outlined
                           >
                             <span>
                               <v-icon small class="mr-1"
@@ -224,11 +222,10 @@
                             <template v-slot:activator="{ on }">
                               <v-btn
                                 id="search-button-sort"
-                                color="primary"
                                 small
-                                rounded
                                 v-on="on"
                                 class="d-none d-sm-inline mr-1"
+                                outlined
                               >
                                 <v-icon small class="mx-1">fas fa-sort</v-icon>
                                 Sort

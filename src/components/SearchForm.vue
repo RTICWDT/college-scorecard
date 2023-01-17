@@ -308,6 +308,8 @@
             color="secondary"
             clearable
             aria-labelledby="specialized-mission-label"
+            dense
+            outlined
           ></v-select> </v-expansion-panel-content></v-expansion-panel
       ><v-expansion-panel
         ><v-expansion-panel-header
@@ -324,6 +326,8 @@
             color="secondary"
             clearable
             aria-labelledby="religions-affiliation-label"
+            dense
+            outlined
           ></v-select>
         </v-expansion-panel-content> </v-expansion-panel
       ><v-expansion-panel>
