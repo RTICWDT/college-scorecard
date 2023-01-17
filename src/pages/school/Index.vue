@@ -108,17 +108,7 @@
           <v-col cols="12" md="6" class="">
             <!-- <div class="school-map" ref="map"></div> -->
             <div class="school-map mx-auto" v-if="school">
-              <l-map
-                style="height: 300px; z-index:80; border: 10px solid white; border-radius: 5px;"
-                :zoom="12"
-                :center="school.location"
-              >
-                <l-tile-layer
-                  url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-                ></l-tile-layer>
-                <l-marker :lat-lng="school.location"></l-marker>
-              </l-map>
+              <Map :location="school.location" />
             </div>
           </v-col>
         </v-row>
@@ -2637,10 +2627,7 @@ import MedianToggle from "~/components/MedianToggle.vue"
 import Toggle from "~/components/Toggle.vue"
 import BottomCallouts from "~/components/BottomCallouts.vue"
 import numeral from "numeral"
-
-import { LMap, LTileLayer, LMarker } from "vue2-leaflet"
-import { Icon } from "leaflet"
-
+import Map from "./components/Map.vue"
 export default {
   mixins: [URLHistory, ComplexFields, AnalyticsEvents],
   components: {
@@ -2667,9 +2654,7 @@ export default {
     "add-to-compare": AddToCompare,
     "median-toggle": MedianToggle,
     toggle: Toggle,
-    LMap,
-    LTileLayer,
-    LMarker,
+    Map,
   },
   data() {
     return {
@@ -2882,69 +2867,6 @@ export default {
     },
   },
   methods: {
-    createMap(school) {
-      var location = school.location
-
-      if (!location || !Number(location.lat) || !Number(location.lon)) {
-        container.classList.add("hidden")
-        return false
-      }
-
-      var center = L.latLng(location.lat, location.lon)
-      this.$nextTick(() => {
-        var map = L.map(this.$refs["map"], {
-          zoomControl: false,
-          panControl: false,
-          attributionControl: false,
-          dragging: false,
-          scrollWheelZoom: false,
-          touchZoom: false,
-          doubleClickZoom: false,
-          boxZoom: false,
-        }).setView(center, 10)
-
-        L.tileLayer(
-          "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-        ) // jshint ignore:line
-          .on("tileload", function(tileEvent) {
-            tileEvent.tile.setAttribute("alt", "Map tile image")
-          })
-          .addTo(map)
-
-        L.control
-          .attribution({
-            position: "bottomleft",
-            prefix: false,
-          })
-          .addAttribution(
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-          )
-          .addTo(map)
-
-        var marker = L.circle(center, 1000, {
-          color: "#183658",
-          opacity: 1,
-          strokeWidth: 1,
-          fillColor: "white",
-          fillOpacity: 1,
-        }).addTo(map)
-
-        marker.bindPopup(school.school.name)
-        return map
-      })
-    },
-    generateMapURL(school) {
-      let googleMapsBaseURL = "https://maps.googleapis.com/maps/api/staticmap?"
-      let params = {}
-      params.center = school.location.lat + "," + school.location.lon
-      params.zoom = 12
-      params.size = "420x380"
-      ;(params.key = process.env.GRIDSOME_GOOGLE_MAPS_KEY),
-        (params.markers = params.center)
-      params.style = "feature:poi|element:labels|visibility:off"
-      let qs = querystring.stringify(params)
-      return googleMapsBaseURL + qs
-    },
     // expand all panels
     all() {
       this.panels = [...Array(this.num_panels).keys()].map((k, i) => i)
@@ -3192,13 +3114,6 @@ export default {
         // Generate string but remove first equals character due to current query structure '?schoolid-school-name' with no value;
         let qs = this.generateQueryString(params).replace("=", "")
         history.replaceState(params, "School Profile", qs)
-
-        delete Icon.Default.prototype._getIconUrl
-        Icon.Default.mergeOptions({
-          iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
-          iconUrl: require("leaflet/dist/images/marker-icon.png"),
-          shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
-        })
       }
     },
   },
