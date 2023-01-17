@@ -1,39 +1,40 @@
 <template>
-<client-only>
-  <v-combobox
-    :value="selected"
-    @input="handleFieldOfStudySelect"
-    @update:search-input="handleFieldOfStudySearchInput"
-    :items="items"
-    item-text="title"
-    item-value="code"
-    placeholder="Type to search"
-    return-object
-    autocomplete="off"
-    clearable
-    outlined
-    hide-no-data
-    hide-details
-    color="fos-search-color"
-    prepend-inner-icon="fas fa-search"
-    aria-label="Field of Study Search"
-    :disabled="disabled"
-  >
-    <template v-slot:label>
-      <slot name="label-pass-through"></slot>
-    </template>
+  <client-only>
+    <v-combobox
+      :value="selected"
+      @input="handleFieldOfStudySelect"
+      @update:search-input="handleFieldOfStudySearchInput"
+      :items="items"
+      item-text="title"
+      item-value="code"
+      placeholder="Type to search"
+      return-object
+      autocomplete="off"
+      clearable
+      outlined
+      hide-no-data
+      hide-details
+      color="fos-search-color"
+      prepend-inner-icon="fas fa-search"
+      aria-label="Field of Study Search"
+      :disabled="disabled"
+      :dense="dense"
+    >
+      <template v-slot:label>
+        <slot name="label-pass-through"></slot>
+      </template>
 
-    <template v-slot:item="data">
-      <v-list-item-content>
-        <div class="fos-search-result-item-container">
-          <v-list-item-title v-html="data.item.title"></v-list-item-title>
-          <v-list-item-subtitle
-            v-html="data.item.cip4Title"
-          ></v-list-item-subtitle>
-        </div>
-      </v-list-item-content>
-    </template>
-  </v-combobox>
+      <template v-slot:item="data">
+        <v-list-item-content>
+          <div class="fos-search-result-item-container">
+            <v-list-item-title v-html="data.item.title"></v-list-item-title>
+            <v-list-item-subtitle
+              v-html="data.item.cip4Title"
+            ></v-list-item-subtitle>
+          </div>
+        </v-list-item-content>
+      </template>
+    </v-combobox>
   </client-only>
 </template>
 
@@ -72,6 +73,10 @@ export default {
   mixins: [SiteData],
   props: {
     disabled: {
+      type: Boolean,
+      default: false,
+    },
+    dense: {
       type: Boolean,
       default: false,
     },

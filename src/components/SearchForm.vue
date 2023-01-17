@@ -34,7 +34,7 @@
 
 <template>
   <v-form>
-    <v-expansion-panels accordion multiple>
+    <v-expansion-panels accordion multiple style="border-radius: 0">
       <v-expansion-panel>
         <v-expansion-panel-header>Academic Fields</v-expansion-panel-header>
         <v-expansion-panel-content>

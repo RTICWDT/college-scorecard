@@ -122,6 +122,22 @@
             </div>
           </v-col>
         </v-row>
+        <v-row class="mt-3 pt-5" v-if="specialDesignations.length > 0">
+          <v-col cols="12" class="px-sm-5">
+            <p>Special Designations:</p>
+            <div class="school-special_designation">
+              <v-chip
+                class="special mr-1 mb-1"
+                color="blue lighten-3"
+                label
+                :ripple="false"
+                v-for="designation in specialDesignations"
+                :key="designation"
+                >{{ designation }}</v-chip
+              >
+            </div>
+          </v-col>
+        </v-row>
       </v-container>
       <div class="white mt-5">
         <v-container
@@ -150,23 +166,6 @@
               <div id="school">
                 <div class="school-heading px-3 mb-5" elevation="0">
                   <!--Special Designations-->
-                  <v-row
-                    class="mt-3 pl-5 pt-5"
-                    v-if="specialDesignations.length > 0"
-                  >
-                    <v-col cols="12" class="px-sm-5">
-                      <div class="school-special_designation">
-                        <v-chip
-                          class="special mr-1 mb-1"
-                          color="blue lighten-3"
-                          label
-                          v-for="designation in specialDesignations"
-                          :key="designation"
-                          >{{ designation }}</v-chip
-                        >
-                      </div>
-                    </v-col>
-                  </v-row>
 
                   <!-- Institution Summary and Field Of Study Select + Summary -->
                   <v-row class="mt-3 pr-8 pl-5">
@@ -2426,7 +2425,6 @@
   > :not(.v-expansion-panel-header__icon) {
   flex: none;
 }
-
 
 .compare-selected-text {
   background-color: $light-blue !important;

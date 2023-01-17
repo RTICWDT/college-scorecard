@@ -20,6 +20,7 @@
       @update:search-input="runSearch"
       aria-label="Name Search"
       no-filter
+      :dense="dense"
     >
       <!-- TODO - Add markup for alias match or highlighting -->
       <template slot="item" slot-scope="{ parent, item }">
@@ -52,6 +53,10 @@ export default {
     searchEmptyName: {
       type: Boolean,
       default: true,
+    },
+    dense: {
+      type: Boolean,
+      default: false,
     },
   },
   data: () => ({

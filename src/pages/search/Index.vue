@@ -43,6 +43,10 @@
     }
   }
 }
+.v-tab {
+  letter-spacing: normal;
+  text-transform: none;
+}
 </style>
 
 <style lang="scss" scoped>
@@ -58,41 +62,23 @@
 <template>
   <div>
     <!-- Search Form -->
-    <v-navigation-drawer
-      v-model="showSidebar"
-      app
-      width="300"
-      class="searchSidebar"
-      overlay
-      clipped
-    >
-      <!-- Search Form Component -->
-      <search-form
-        v-if="displayToggle === 'institutions'"
-        :urlParsedParams="urlParsedParams"
-        auto-submit
-        display-all-filters
-        @search-query="handleInstitutionSearch"
-      />
-    </v-navigation-drawer>
 
     <v-main>
       <v-card tile>
-        <v-btn class="float-right" @click="showSidebar = !showSidebar">
-          Show Drawer
-        </v-btn>
-        <v-tabs class="">
-          <p class="'mb-0'">SEARCH FOR:</p>
+        <v-tabs>
+          <p class="mb-0 px-5 d-flex align-self-center black--text">
+            <strong>SEARCH:</strong>
+          </p>
           <v-tab
             to="/search/"
             @click="displayToggle = 'institutions'"
             color="#007000"
           >
-            School
+            Schools
           </v-tab>
 
           <v-tab to="/search/fos" color="#fdbf32">
-            Field of Study
+            Fields of Study
           </v-tab>
         </v-tabs>
       </v-card>
@@ -106,467 +92,518 @@
                 list to see how they match up.
               </p></v-col
             ></v-row
-          ></v-container
-        >
+          >
+        </v-container>
       </div>
-      <v-container fluid class="pa-0">
-        <v-card tile>
-          <name-autocomplete
-            @school-name-selected="handleSchoolNameSelected"
-            :initial_school="input.search"
-            @school-name-cleared="handleSchoolNameSelected"
-          />
-          <!--<div class="py-2 px-5">
-            <p class="subhead-2" id="location-label">Location</p>
-            <v-select
-              id="search-from-location-select"
-              v-model="utility.location"
-              @change="handleLocationChange"
-              :items="['Near Me', 'ZIP Code', 'State']"
-              hide-details
-              class="mb-3 mt-0 pt-0"
-              aria-labelledby="location-label"
-              :placeholder="utility.location ? undefined : 'Select an option'"
-              clearable
-              @keydown.enter="$event.preventDefault()"
-            />
+      <v-container
+        fluid
+        class="white elevation-2"
+        style="z-index:50; position:relative"
+      >
+        <v-row>
+          <v-col>
+            <v-card flat class="white d-flex align-center">
+              <div class="mx-3">School:</div>
+              <name-autocomplete
+                @school-name-selected="handleSchoolNameSelected"
+                :initial_school="input.search"
+                @school-name-cleared="handleSchoolNameSelected"
+                :dense="true"
+              />
 
-            <div
-              class="d-flex align-center"
-              v-if="utility.location === 'ZIP Code'"
-            >
-              <v-text-field
-                id="search-form-zip-text"
-                v-model="input.zip"
-                label="ZIP Code"
-                hideDetails
-                class="mb-3 mr-3"
-                type="number"
-                :rules="[utility.rules.zip]"
-                min="0"
-              ></v-text-field>
-              <v-text-field
-                v-model="input.distance"
-                :rules="[utility.rules.required, utility.rules.numerical]"
-                label="Distance in Miles"
-                :disabled="!input.zip"
-                hideDetails
-                class="mb-3"
-                type="number"
-                min="1"
-              ></v-text-field>
-            </div>
+              <div class="mx-3" id="location-label">Location:</div>
+              <v-select
+                id="search-from-location-select"
+                v-model="utility.location"
+                @change="handleLocationChange"
+                :items="['Near Me', 'ZIP Code', 'State']"
+                hide-details
+                outlined
+                dense
+                aria-labelledby="location-label"
+                :placeholder="utility.location ? undefined : 'Select an option'"
+                clearable
+                @keydown.enter="$event.preventDefault()"
+              />
 
-            <div
-              class="d-flex align-center"
-              v-if="utility.location === 'Near Me'"
-            >
-              <v-icon
-                v-on="on"
-                :color="locationButtonColor"
-                v-html="
-                  location.isLoading
-                    ? 'fas fa-circle-notch fa-spin'
-                    : 'mdi-near-me'
+              <div
+                class="d-flex align-center"
+                v-if="utility.location === 'ZIP Code'"
+              >
+                <v-text-field
+                  id="search-form-zip-text"
+                  v-model="input.zip"
+                  label="ZIP Code"
+                  hideDetails
+                  class="mx-3"
+                  type="number"
+                  dense
+                  :rules="[utility.rules.zip]"
+                  min="0"
+                  outlined
+                ></v-text-field>
+                <v-text-field
+                  v-model="input.distance"
+                  :rules="[utility.rules.required, utility.rules.numerical]"
+                  label="Distance in Miles"
+                  :disabled="!input.zip"
+                  hideDetails
+                  type="number"
+                  min="1"
+                  dense
+                  outlined
+                ></v-text-field>
+              </div>
+
+              <div
+                class="d-flex align-center"
+                v-if="utility.location === 'Near Me'"
+              >
+                <v-icon
+                  v-on="on"
+                  :color="locationButtonColor"
+                  v-html="
+                    location.isLoading
+                      ? 'fas fa-circle-notch fa-spin'
+                      : 'mdi-near-me'
+                  "
+                ></v-icon>
+
+                <v-text-field
+                  v-model="location.miles"
+                  :rules="[utility.rules.required, utility.rules.numerical]"
+                  label="Distance in Miles"
+                  :disabled="!location.latLon"
+                  hideDetails
+                  type="number"
+                  outlined
+                  dense
+                  class="mx-3"
+                ></v-text-field>
+
+                <span v-show="location.error" class="overline">{{
+                  location.error
+                }}</span>
+              </div>
+
+              <v-select
+                v-model="input.state"
+                id="search-form-state"
+                :items="site.data.states"
+                item-text="name"
+                item-value="abbr"
+                multiple
+                chips
+                hide-details
+                :placeholder="
+                  input.state.length > 0 ? undefined : 'Select a state...'
                 "
-              ></v-icon>
-
-              <v-text-field
-                v-model="location.miles"
-                :rules="[utility.rules.required, utility.rules.numerical]"
-                label="Distance in Miles"
-                :disabled="!location.latLon"
-                hideDetails
-                class="mb-3"
-                type="number"
-              ></v-text-field>
-
-              <span v-show="location.error" class="overline">{{
-                location.error
-              }}</span>
-            </div>
-
-            <v-select
-              v-model="input.state"
-              id="search-form-state"
-              :items="site.data.states"
-              item-text="name"
-              item-value="abbr"
-              multiple
-              chips
-              hide-details
-              :placeholder="
-                input.state.length > 0 ? undefined : 'Select a state...'
-              "
-              class="mt-0 pt-0"
-              color="secondary"
-              deletable-chips
-              v-show="utility.location == 'State'"
-              aria-label="Select a state"
-            ></v-select>
-          </div>-->
-        </v-card>
-        <div id="search-result-container" class="pa-sm-8 pa-2">
-          <div class="search-result-container">
-            <!-- Search Result Info and controls -->
-            <v-card
-              class="mt-2 mb-4 py-4 px-4 elevaton-0 pageBar"
-              v-show="!isLoading"
+                class="mt-0 pt-0 mx-3"
+                color="secondary"
+                deletable-chips
+                v-show="utility.location == 'State'"
+                aria-label="Select a state"
+                outlined
+                dense
+              ></v-select>
+              <v-btn class="mx-3" @click="showSidebar = !showSidebar">
+                Show Drawer
+              </v-btn>
+            </v-card>
+          </v-col></v-row
+        >
+      </v-container>
+      <v-container fluid class="pa-0">
+        <v-row>
+          <v-col cols="3" :class="{ 'd-none': !showSidebar }" class="pr-0">
+            <v-navigation-drawer
+              v-model="showSidebar"
+              :width="$vuetify.breakpoint.smAndDown ? '250' : 'auto'"
+              class="searchSidebar elevation-0 pr-0"
+              :absolute="$vuetify.breakpoint.smAndDown"
+              :temporary="$vuetify.breakpoint.smAndDown"
+              :hide-overlay="$vuetify.breakpoint.smAndUp"
             >
-              <v-row class="">
-                <v-col cols="12" sm="7" class="py-2 px-4">
-                  <div id="search-result-info-count" class>
-                    <p class="title mb-0">
-                      {{ results.meta.total | separator }} Results
-                      <v-btn
-                        color="primary"
-                        text-color="white"
-                        @click="clearSearchForm"
-                        x-small
-                        fab
-                        class="d-inline d-sm-none mr-2"
-                      >
-                        <span>
-                          <v-icon class="">mdi-close-circle</v-icon>
-                          <span class="sr-only">Clear Search</span>
-                        </span>
-                      </v-btn>
-
-                      <v-btn
-                        id="search-button-clear"
-                        color="primary"
-                        text-color="white"
-                        @click="clearSearchForm"
-                        small
-                        rounded
-                        class="d-none d-sm-inline mr-1"
-                      >
-                        <span>
-                          <v-icon small class="mr-1">mdi-close-circle</v-icon>
-                          Clear
-                        </span>
-                      </v-btn>
-
-                      <v-menu offset-y>
-                        <template v-slot:activator="{ on }">
+              <!-- Search Form Component -->
+              <search-form
+                v-if="displayToggle === 'institutions'"
+                :urlParsedParams="urlParsedParams"
+                auto-submit
+                display-all-filters
+                @search-query="handleInstitutionSearch"
+              />
+            </v-navigation-drawer> </v-col
+          ><v-col :cols="showSidebar ? 9 : 12" class="pa-10">
+            <div id="search-result-container">
+              <div class="search-result-container">
+                <!-- Search Result Info and controls -->
+                <v-card
+                  class="mt-2 mb-4 py-4 px-4 elevaton-0 pageBar"
+                  v-show="!isLoading"
+                >
+                  <v-row class="">
+                    <v-col cols="12" sm="7" class="py-2 px-4">
+                      <div id="search-result-info-count" class>
+                        <p class="title mb-0">
+                          {{ results.meta.total | separator }} Results
                           <v-btn
-                            id="search-button-sort"
                             color="primary"
+                            text-color="white"
+                            @click="clearSearchForm"
+                            x-small
+                            fab
+                            class="d-inline d-sm-none mr-2"
+                          >
+                            <span>
+                              <v-icon class="">mdi-close-circle</v-icon>
+                              <span class="sr-only">Clear Search</span>
+                            </span>
+                          </v-btn>
+
+                          <v-btn
+                            id="search-button-clear"
+                            color="primary"
+                            text-color="white"
+                            @click="clearSearchForm"
                             small
                             rounded
-                            v-on="on"
                             class="d-none d-sm-inline mr-1"
                           >
-                            <v-icon small class="mx-1">fas fa-sort</v-icon>
-                            Sort
+                            <span>
+                              <v-icon small class="mr-1"
+                                >mdi-close-circle</v-icon
+                              >
+                              Clear
+                            </span>
                           </v-btn>
-                        </template>
-                        <v-list min-width="200">
-                          <v-list-item-group
-                            v-model="input.sort"
-                            color="primary"
-                            mandatory
-                          >
-                            <v-list-item
-                              v-for="(item, index) in sorts"
-                              :key="item.field"
-                              @click="resort(item.field)"
-                              :value="item.field"
-                            >
-                              <v-list-item-title>{{
-                                item.type
-                              }}</v-list-item-title>
-                            </v-list-item>
-                          </v-list-item-group>
-                        </v-list>
-                      </v-menu>
-                      <v-menu offset-y>
-                        <template v-slot:activator="{ on }">
-                          <v-btn
-                            color="primary"
-                            x-small
-                            v-on="on"
-                            fab
-                            class="d-inline d-sm-none"
-                          >
-                            <v-icon small class="">fas fa-sort</v-icon>
-                            <span class="sr-only">Sort</span>
-                          </v-btn>
-                        </template>
-                        <v-list min-width="200">
-                          <v-list-item-group
-                            v-model="input.sort"
-                            color="primary"
-                          >
-                            <v-list-item
-                              v-for="(item, index) in sorts"
-                              :key="item.field"
-                              @click="resort(item.field)"
-                              :value="item.field"
-                            >
-                              <v-list-item-title>{{
-                                item.type
-                              }}</v-list-item-title>
-                            </v-list-item>
-                          </v-list-item-group>
-                        </v-list>
-                      </v-menu>
-                      <share
-                        :url="encodeURI(shareUrl)"
-                        label="Share"
-                        small
-                        show-copy
-                        :hide="['email']"
-                      />
-                    </p>
-                  </div>
-                </v-col>
 
-                <v-col
-                  cols="12"
-                  sm="5"
-                  class="py-1 px-1"
-                  v-show="!isLoading && results.schools.length > 0"
-                >
-                  <div class="text-md-right justify-end">
-                    <v-pagination
-                      flat
-                      v-model="input.page"
-                      :length="totalPages"
-                      :total-visible="7"
-                      @input="handlePaginationInput"
-                      class="pr-0 mr-0"
-                    ></v-pagination>
-                  </div>
-                </v-col>
-              </v-row>
-            </v-card>
+                          <v-menu offset-y>
+                            <template v-slot:activator="{ on }">
+                              <v-btn
+                                id="search-button-sort"
+                                color="primary"
+                                small
+                                rounded
+                                v-on="on"
+                                class="d-none d-sm-inline mr-1"
+                              >
+                                <v-icon small class="mx-1">fas fa-sort</v-icon>
+                                Sort
+                              </v-btn>
+                            </template>
+                            <v-list min-width="200">
+                              <v-list-item-group
+                                v-model="input.sort"
+                                color="primary"
+                                mandatory
+                              >
+                                <v-list-item
+                                  v-for="(item, index) in sorts"
+                                  :key="item.field"
+                                  @click="resort(item.field)"
+                                  :value="item.field"
+                                >
+                                  <v-list-item-title>{{
+                                    item.type
+                                  }}</v-list-item-title>
+                                </v-list-item>
+                              </v-list-item-group>
+                            </v-list>
+                          </v-menu>
+                          <v-menu offset-y>
+                            <template v-slot:activator="{ on }">
+                              <v-btn
+                                color="primary"
+                                x-small
+                                v-on="on"
+                                fab
+                                class="d-inline d-sm-none"
+                              >
+                                <v-icon small class="">fas fa-sort</v-icon>
+                                <span class="sr-only">Sort</span>
+                              </v-btn>
+                            </template>
+                            <v-list min-width="200">
+                              <v-list-item-group
+                                v-model="input.sort"
+                                color="primary"
+                              >
+                                <v-list-item
+                                  v-for="(item, index) in sorts"
+                                  :key="item.field"
+                                  @click="resort(item.field)"
+                                  :value="item.field"
+                                >
+                                  <v-list-item-title>{{
+                                    item.type
+                                  }}</v-list-item-title>
+                                </v-list-item>
+                              </v-list-item-group>
+                            </v-list>
+                          </v-menu>
+                          <share
+                            :url="encodeURI(shareUrl)"
+                            label="Share"
+                            small
+                            show-copy
+                            :hide="['email']"
+                          />
+                        </p>
+                      </div>
+                    </v-col>
 
-            <!-- Instituition Information -->
-            <div
-              v-if="
-                displayToggle === 'institutions' &&
-                  !isLoading &&
-                  this.displayFlag
-              "
-              id="search-institutions-dolflag"
-              class="my-2"
-            >
-              <v-row>
-                <v-col cols="12" sm="5" md="5" class="py-1 pl-3 pr-1">
-                  <v-chip
-                    class="dolflag-chip"
-                    close
-                    @click:close="handleDOLFlag"
-                    ><span
-                      >Only show schools that have programs that qualify for the
-                      Department of Labor's WIOA program.<tooltip
-                        definition="wioa-participants"/></span
-                  ></v-chip>
-                </v-col>
-                <v-col cols="12" sm="7" md="7" class="py-1 px-1">
-                  <p class="white--text">
-                    Learn more about the Department of Labor's WIOA program at
-                    <a
-                      target="_blank"
-                      href="https://collegescorecard.ed.gov/training"
-                      class="white--text"
+                    <v-col
+                      cols="12"
+                      sm="5"
+                      class="py-1 px-1"
+                      v-show="!isLoading && results.schools.length > 0"
                     >
-                      CollegeScorecard.ed.gov/training.
-                    </a>
-                  </p>
-                </v-col>
-              </v-row>
-            </div>
+                      <div class="text-md-right justify-end">
+                        <v-pagination
+                          flat
+                          v-model="input.page"
+                          :length="totalPages"
+                          :total-visible="7"
+                          @input="handlePaginationInput"
+                          class="pr-0 mr-0"
+                        ></v-pagination>
+                      </div>
+                    </v-col>
+                  </v-row>
+                </v-card>
 
-            <!-- Field Of Study CIP 4 Information -->
-            <div id="search-fos-cip-warning" class="my-2">
-              <v-row>
-                <v-col
-                  cols="12"
-                  sm="5"
-                  md="5"
-                  class="py-1 pl-3 pr-1"
+                <!-- Instituition Information -->
+                <div
                   v-if="
-                    displayToggle === 'fos' && !isLoading && this.displayFlag
+                    displayToggle === 'institutions' &&
+                      !isLoading &&
+                      this.displayFlag
                   "
+                  id="search-institutions-dolflag"
+                  class="my-2"
                 >
-                  <v-chip
-                    class="dolflag-chip"
-                    close
-                    @click:close="handleDOLFlag"
-                  >
-                    <span
-                      >Only show schools that have programs that qualify for the
-                      Department of Labor's WIOA program.<tooltip
-                        definition="wioa-participants"
-                      />
-                      <br />
-                      Learn more about the Department of Labor's WIOA program at
-                      <a
-                        target="_blank"
-                        href="https://collegescorecard.ed.gov/training"
-                      >
-                        CollegeScorecard.ed.gov/training.
-                      </a>
-                    </span>
-                  </v-chip>
-                </v-col>
-                <v-col
-                  cols="12"
-                  sm="7"
-                  md="7"
-                  class="py-1 px-1"
-                  v-if="displayToggle === 'fos'"
-                >
-                  <p class="white--text pl-2">
-                    <strong>Note:</strong> Field of Study titles are based on
-                    the US Department of Education's Classification of
-                    Instructional Programs (CIP) and may not match the program
-                    titles at a given school.
-                    <a
-                      target="_blank"
-                      :href="$url('/school/transition/')"
-                      @click="
-                        transitionOutboundLink(
-                          $event,
-                          'https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56'
-                        )
+                  <v-row>
+                    <v-col cols="12" sm="5" md="5" class="">
+                      <v-chip
+                        class="dolflag-chip"
+                        close
+                        @click:close="handleDOLFlag"
+                        ><span
+                          >Only show schools that have programs that qualify for
+                          the Department of Labor's WIOA program.<tooltip
+                            definition="wioa-participants"/></span
+                      ></v-chip>
+                    </v-col>
+                    <v-col cols="12" sm="7" md="7" class="py-1 px-1">
+                      <p class="white--text">
+                        Learn more about the Department of Labor's WIOA program
+                        at
+                        <a
+                          target="_blank"
+                          href="https://collegescorecard.ed.gov/training"
+                          class="white--text"
+                        >
+                          CollegeScorecard.ed.gov/training.
+                        </a>
+                      </p>
+                    </v-col>
+                  </v-row>
+                </div>
+
+                <!-- Field Of Study CIP 4 Information -->
+                <div id="search-fos-cip-warning" class="my-2">
+                  <v-row>
+                    <v-col
+                      cols="12"
+                      sm="5"
+                      md="5"
+                      class="py-1 pl-3 pr-1"
+                      v-if="
+                        displayToggle === 'fos' &&
+                          !isLoading &&
+                          this.displayFlag
                       "
                     >
-                      Learn more about CIP<v-icon
-                        x-small
-                        color="white"
-                        class="pl-1"
+                      <v-chip
+                        class="dolflag-chip"
+                        close
+                        @click:close="handleDOLFlag"
                       >
-                        fas fa-external-link-alt
-                      </v-icon>
-                    </a>
-                  </p>
-                </v-col>
-              </v-row>
-            </div>
-
-            <!-- No Results/Canned Search/ -->
-            <div
-              id="search-can-query-container"
-              v-if="!isLoading && results.schools.length === 0"
-            >
-              <v-row>
-                <v-col cols="12" v-if="displayToggle === 'institutions'">
-                  <v-card class="pa-5">
-                    <h3>Show Me Options</h3>
-                    <p>
-                      Select one or more options below to create a list of
-                      schools that fit your needs.
-                    </p>
-                    <canned-search-container
-                      @canned-search-submit="handleCannedSearchClick"
-                    ></canned-search-container>
-                  </v-card>
-                </v-col>
-
-                <v-col cols="12" v-if="displayToggle === 'fos'">
-                  <v-card class="pa-5 text-center">
-                    <h3 class="text-center">No Results Found</h3>
-                    <br />
-                    <v-btn
-                      id="search-button-clear-filters"
-                      color="primary"
-                      text-color="white"
-                      @click="clearSearchForm"
+                        <span
+                          >Only show schools that have programs that qualify for
+                          the Department of Labor's WIOA program.<tooltip
+                            definition="wioa-participants"
+                          />
+                          <br />
+                          Learn more about the Department of Labor's WIOA
+                          program at
+                          <a
+                            target="_blank"
+                            href="https://collegescorecard.ed.gov/training"
+                          >
+                            CollegeScorecard.ed.gov/training.
+                          </a>
+                        </span>
+                      </v-chip>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm="7"
+                      md="7"
+                      class="py-1 px-1"
+                      v-if="displayToggle === 'fos'"
                     >
-                      <span>
-                        <v-icon class="mr-2">mdi-close-circle</v-icon> Clear
-                        Search Filters
-                      </span>
-                    </v-btn>
-                  </v-card>
-                </v-col>
-              </v-row>
-            </div>
+                      <p class="white--text pl-2">
+                        <strong>Note:</strong> Field of Study titles are based
+                        on the US Department of Education's Classification of
+                        Instructional Programs (CIP) and may not match the
+                        program titles at a given school.
+                        <a
+                          target="_blank"
+                          :href="$url('/school/transition/')"
+                          @click="
+                            transitionOutboundLink(
+                              $event,
+                              'https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56'
+                            )
+                          "
+                        >
+                          Learn more about CIP<v-icon
+                            x-small
+                            color="white"
+                            class="pl-1"
+                          >
+                            fas fa-external-link-alt
+                          </v-icon>
+                        </a>
+                      </p>
+                    </v-col>
+                  </v-row>
+                </div>
 
-            <!-- Main Search Results -->
-            <div class="results-main-alert">
-              <!-- Loading -->
-              <div class="show-loading mt-2" v-show="isLoading">
-                <v-card class="py-4 px-4 pageBar">
-                  <h1 class="title">
-                    Loading
-                    <v-icon color="#00365e">fas fa-circle-notch fa-spin</v-icon>
-                  </h1>
+                <!-- No Results/Canned Search/ -->
+                <div
+                  id="search-can-query-container"
+                  v-if="!isLoading && results.schools.length === 0"
+                >
+                  <v-row>
+                    <v-col cols="12" v-if="displayToggle === 'institutions'">
+                      <v-card class="pa-5">
+                        <h3>Show Me Options</h3>
+                        <p>
+                          Select one or more options below to create a list of
+                          schools that fit your needs.
+                        </p>
+                        <canned-search-container
+                          @canned-search-submit="handleCannedSearchClick"
+                        ></canned-search-container>
+                      </v-card>
+                    </v-col>
+
+                    <v-col cols="12" v-if="displayToggle === 'fos'">
+                      <v-card class="pa-5 text-center">
+                        <h3 class="text-center">No Results Found</h3>
+                        <br />
+                        <v-btn
+                          id="search-button-clear-filters"
+                          color="primary"
+                          text-color="white"
+                          @click="clearSearchForm"
+                        >
+                          <span>
+                            <v-icon class="mr-2">mdi-close-circle</v-icon> Clear
+                            Search Filters
+                          </span>
+                        </v-btn>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </div>
+
+                <!-- Main Search Results -->
+                <div class="results-main-alert">
+                  <!-- Loading -->
+                  <div class="show-loading mt-2" v-show="isLoading">
+                    <v-card class="py-4 px-4 pageBar">
+                      <h1 class="title">
+                        Loading
+                        <v-icon color="#00365e"
+                          >fas fa-circle-notch fa-spin</v-icon
+                        >
+                      </h1>
+                    </v-card>
+                  </div>
+
+                  <!-- Search Query Error-->
+                  <div class="show-error" v-show="error.message">
+                    <h1>Something went wrong:</h1>
+                    <p class="error-message">{{ error.message }}</p>
+                  </div>
+
+                  <!-- Institution Results -->
+                  <div class="search-result-cards-container" v-if="!isLoading">
+                    <!-- Institution Results -->
+                    <v-row v-if="displayToggle === 'institutions'">
+                      <v-col
+                        v-for="school in results.schools"
+                        :key="school.id"
+                        cols="12"
+                        lg="3"
+                        md="4"
+                        sm="6"
+                        class="d-flex align-stretch"
+                      >
+                        <search-result-card :school="school" />
+                      </v-col>
+                    </v-row>
+
+                    <!-- Fields of Study Results -->
+                    <v-row v-else>
+                      <v-col
+                        v-for="school in results.schools"
+                        :key="school.id"
+                        cols="12"
+                        lg="12"
+                        md="12"
+                        sm="12"
+                        class="d-flex align-stretch"
+                      >
+                        <fos-result-card
+                          :school="school"
+                          :selected-fields-of-study="compareFieldsOfStudy"
+                        />
+                      </v-col>
+                    </v-row>
+                  </div>
+
+                  <!-- Field of Study Results -->
+                  <div class="search-result-cards-container" v-else></div>
+                </div>
+
+                <!-- Bottom Pagination -->
+                <v-card
+                  class="mt-4 mb-2 py-1 px-4 pageBar elevation-0"
+                  v-if="!isLoading && results.schools.length > 0"
+                >
+                  <v-row>
+                    <v-col cols="12" class="py-3 px-3">
+                      <div class="text-right">
+                        <v-pagination
+                          v-model="input.page"
+                          :length="totalPages"
+                          :total-visible="7"
+                          @input="handlePaginationInput"
+                          class="pr-0 mr-0"
+                          circle
+                        ></v-pagination>
+                      </div>
+                    </v-col>
+                  </v-row>
                 </v-card>
               </div>
-
-              <!-- Search Query Error-->
-              <div class="show-error" v-show="error.message">
-                <h1>Something went wrong:</h1>
-                <p class="error-message">{{ error.message }}</p>
-              </div>
-
-              <!-- Institution Results -->
-              <div class="search-result-cards-container" v-if="!isLoading">
-                <!-- Institution Results -->
-                <v-row v-if="displayToggle === 'institutions'">
-                  <v-col
-                    v-for="school in results.schools"
-                    :key="school.id"
-                    cols="12"
-                    lg="3"
-                    md="4"
-                    sm="6"
-                    class="d-flex align-stretch"
-                  >
-                    <search-result-card :school="school" />
-                  </v-col>
-                </v-row>
-
-                <!-- Fields of Study Results -->
-                <v-row v-else>
-                  <v-col
-                    v-for="school in results.schools"
-                    :key="school.id"
-                    cols="12"
-                    lg="12"
-                    md="12"
-                    sm="12"
-                    class="d-flex align-stretch"
-                  >
-                    <fos-result-card
-                      :school="school"
-                      :selected-fields-of-study="compareFieldsOfStudy"
-                    />
-                  </v-col>
-                </v-row>
-              </div>
-
-              <!-- Field of Study Results -->
-              <div class="search-result-cards-container" v-else></div>
             </div>
-
-            <!-- Bottom Pagination -->
-            <v-card
-              class="mt-4 mb-2 py-1 px-4 pageBar elevation-0"
-              v-if="!isLoading && results.schools.length > 0"
-            >
-              <v-row>
-                <v-col cols="12" class="py-3 px-3">
-                  <div class="text-right">
-                    <v-pagination
-                      v-model="input.page"
-                      :length="totalPages"
-                      :total-visible="7"
-                      @input="handlePaginationInput"
-                      class="pr-0 mr-0"
-                      circle
-                    ></v-pagination>
-                  </div>
-                </v-col>
-              </v-row>
-            </v-card>
-          </div>
-        </div>
-
+          </v-col>
+        </v-row>
         <!-- Floating Mobile Search Button -->
         <v-btn
           fab
@@ -603,6 +640,8 @@ import SearchFieldsOfStudyForm from "~/components/SearchFieldsOfStudyForm.vue"
 import FieldOfStudyResultCard from "~/components/FieldOfStudyResultCard.vue"
 import Tooltip from "~/components/Tooltip.vue"
 import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
+import { SiteData } from "~/js/mixins/SiteData.js"
+import LocationCheck from "~/js/mixins/LocationCheck.js"
 
 import _ from "lodash"
 import { apiGet } from "~/js/api.js"
@@ -624,7 +663,7 @@ export default {
     tooltip: Tooltip,
     NameAutocomplete,
   },
-  mixins: [URLHistory, PrepareParams, AnalyticsEvents],
+  mixins: [URLHistory, PrepareParams, AnalyticsEvents, SiteData, LocationCheck],
   props: {
     "page-permalink": String,
     states: Array,
@@ -652,6 +691,7 @@ export default {
       input: {
         sort: null,
         page: 1,
+        state: [],
       },
       urlParsedParams: {},
       utility: {
@@ -679,6 +719,35 @@ export default {
       controlRadio: "1",
       fieldOfStudyTotalCountWithoutRangeFilters: 0,
       displayFlag: false,
+      utility: {
+        rules: {
+          required: (value) => !!value || "Required.",
+          numerical: (value) => {
+            const pattern = /^\d+$/
+            return pattern.test(value) || "Numerical"
+          },
+          zip: (value) =>
+            /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(value) ||
+            "Must be ZIP code format",
+        },
+        // Hold Default state of form data.
+        formDefault: {},
+        // Helper to activate debounced query after initial load.
+        initialized: false,
+        showMore: false,
+        // Hold Default for checkrange enables.
+        enableDefault: {},
+        // State object
+        enable: {
+          completion_rate: false,
+          avg_net_price: false,
+          sat_math: false,
+          sat_read: false,
+          act: false,
+          acceptance: false,
+        },
+        location: null,
+      },
     }
   },
   created() {
@@ -729,6 +798,33 @@ export default {
         this.handleFieldOfStudySearch(params)
       }
     }, 1000)
+  },
+  watch: {
+    "location.latLon": {
+      // Proccess Lat/Long object for url values.
+      handler(newValue, oldValue) {
+        if (
+          newValue != null &&
+          newValue.min_lat &&
+          newValue.max_lat &&
+          newValue.min_lat &&
+          newValue.max_lat
+        ) {
+          this.input.lat =
+            newValue.min_lat.toFixed(4) + ".." + newValue.max_lat.toFixed(4)
+          this.input.long =
+            newValue.min_lon.toFixed(4) + ".." + newValue.max_lon.toFixed(4)
+        }
+      },
+    },
+    "location.miles"() {
+      this.handleLocationCheck()
+    },
+    "utility.location"(newValue, oldValue) {
+      if (newValue === "Near Me" && oldValue !== "Near Me") {
+        this.handleLocationCheck()
+      }
+    },
   },
   computed: {
     totalPages() {
@@ -1033,9 +1129,12 @@ export default {
       this.location.latLon = null
       this.location.error = null
     },
+    locationButtonColor() {
+      return this.location.latLon ? "primary" : ""
+    },
   },
   metaInfo: {
-    title: "Search",
+    title: "Search Schools",
     meta: [
       {
         key: "og:title",

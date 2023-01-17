@@ -17,7 +17,7 @@
         <v-btn @click="showDialog = false" icon class="float-right mt-3 mr-3"
           ><v-icon>fas fa-times-circle</v-icon></v-btn
         >
-        <v-card-title class="tool-tip-dialog-title">{{ title }}</v-card-title>
+        <v-card-title>{{ title }}</v-card-title>
         <v-card-text class="pb-5">
           <div v-html="content"></div>
           <!-- <p v-if="limitedFoS">
@@ -35,11 +35,10 @@
             all of their locations.
           </p>
           <div v-if="info" v-html="info"></div>
-          <p class="text-center mt-3" v-if="hasGlossary">
+          <p class="mt-3" v-if="hasGlossary">
             <v-btn
               :href="$url('/data/glossary/#' + definition)"
               small
-              rounded
               color="secondary"
               class="px-4"
               target="_blank"
