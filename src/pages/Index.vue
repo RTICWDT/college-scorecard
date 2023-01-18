@@ -26,9 +26,10 @@
                 color="white"
                 slider-size="8"
                 slider-color="#74B3E8"
-                class="ma-0"
+                class="home-tabs ma-0"
                 show-arrows
                 v-model="desktopTabs"
+                @change="colorSlider"
               >
                 <v-tab
                   @click="GATrackEvent('Home Tab', 'Tab', 'Search Schools')"
@@ -52,7 +53,7 @@
                 >
                   Show Me Options
                 </v-tab>
-
+                <v-tabs-slider :color="sliderColor" />
                 <!-- Institution Search-->
                 <v-tab-item>
                   <v-card class="pa-5" flat>
@@ -184,8 +185,15 @@
             <!-- apprenticeships callout -->
             <v-col cols="12" md="6">
               <v-card flat class="pa-8">
-                <h2 class="display-2">
-                  Alternative Pathways to a Career
+                <h2 class="display-2 d-flex justify-space-between align-center">
+                  <span>Alternative Pathways<br />to a Career</span>
+                  <v-avatar color="#D1E9FF">
+                    <img
+                      :src="$url('img/icon-pathways-blue.svg')"
+                      alt="Pathways Icon"
+                      class="pa-2"
+                    />
+                  </v-avatar>
                 </h2>
                 <hr />
                 <p>
@@ -304,8 +312,15 @@
             <!-- paying callout -->
             <v-col cols="12" md="6" sm="12">
               <v-card flat class="pa-8">
-                <h2 class="display-2">
-                  Learn More About Paying for College
+                <h2 class="display-2 d-flex justify-space-between align-center">
+                  <span class="">Learn More About<br />Paying for College</span>
+                  <v-avatar color="#D1E9FF">
+                    <img
+                      :src="$url('img/icon-financial-aid.svg')"
+                      alt="Financial Aid Icon"
+                      class="pa-2"
+                    />
+                  </v-avatar>
                 </h2>
                 <hr />
                 <p>
@@ -436,11 +451,15 @@ h1 {
   color: #bbbbbb !important;
   letter-spacing: normal;
 }
+
 .v-tab.v-tab--active {
   color: #ffffff !important;
 }
 .home-mobile-search-title {
   font-size: 16px;
+}
+.v-tabs-slider {
+  border-radius: 5px 5px 0 0;
 }
 </style>
 
@@ -469,9 +488,24 @@ export default {
       mobilePanels: 0,
       desktopTabs: 0,
       toggleCustomSearch: false,
+      sliderColor: "#7BD88C",
     }
   },
   methods: {
+    colorSlider(num) {
+      let color
+      switch (num) {
+        case 0:
+          this.sliderColor = "#7BD88C"
+          break
+        case 1:
+          this.sliderColor = "#FDB022"
+          break
+        default:
+          this.sliderColor = "#FFFFFF88"
+          break
+      }
+    },
     directToSearch(params) {
       // Generate URL based on params,
       let qs = querystring.stringify(params)
@@ -499,11 +533,11 @@ export default {
     },
     handleFieldOfStudySelected(fieldOfStudy) {
       this.$router.push(
-        "/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4)
+        "/search/fos?cip4=" + encodeURIComponent(fieldOfStudy.cip4)
       )
     },
     handleFoSMoreOptionsClick() {
-      this.$router.push("/search/?toggle=fos")
+      this.$router.push("/search/fos")
     },
   },
   metaInfo: {
