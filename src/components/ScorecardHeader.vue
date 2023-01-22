@@ -4,54 +4,14 @@ header {
   z-index: 101 !important;
   .logo {
     display: inline-block;
-    padding: 10px 20px 10px 30px;
     vertical-align: middle;
-    margin-top: -30px;
 
     img {
-      width: 70px;
+      height: 65px;
 
       @media screen and (max-width: 600px) {
-        width: 40px !important;
+        height: 50px !important;
       }
-    }
-
-    @media screen and (max-width: 600px) {
-      margin-top: -10px !important;
-      padding: 10px 10px 10px 20px;
-    }
-  }
-  .headerText {
-    display: inline-block;
-    line-height: 200%;
-    margin-top: 0px;
-
-    @media screen and (max-width: 600px) {
-      line-height: 130%;
-    }
-  }
-
-  .edLine {
-    display: block;
-    font-size: 1.12rem;
-    padding-top: 15px;
-    font-family: $header-font-family;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #9c9c9c;
-
-    @media screen and (max-width: 600px) {
-      font-size: 0.6rem;
-    }
-  }
-
-  .siteTitle {
-    display: block;
-    font-size: 2.24rem;
-    font-family: $header-font-family;
-    color: $white;
-    @media screen and (max-width: 600px) {
-      font-size: 1.19rem;
     }
   }
 
@@ -63,11 +23,7 @@ header {
   }
 
   #nav-site-title {
-    width: 50%;
-
-    /*@media screen and (max-width: 670px) {*/
-    /*  width:70%;*/
-    /*}*/
+    width: 40%;
 
     @media screen and (max-width: 960px) {
       width: 80%;
@@ -75,7 +31,7 @@ header {
   }
 
   #nav-main-navigation {
-    width: 50%;
+    width: 60%;
     color: white;
     text-align: right;
 
@@ -170,15 +126,11 @@ header {
           <a :href="$url('/')"
             ><div class="logo">
               <img
-                :src="$url('/img/US-DeptOfEducation-Seal.png')"
-                alt="Department of Education Seal"
+                :src="$url('/img/US-DOE-CollegeScorecard-Logo.svg')"
+                alt="US Department of Education College Scorecard"
               />
             </div>
-            <div class="headerText">
-              <span class="edLine">U.S. Department of Education</span
-              ><span class="siteTitle">College Scorecard</span>
-            </div></a
-          >
+          </a>
         </div>
 
         <!-- Medium and above navigation -->
