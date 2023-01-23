@@ -37,6 +37,11 @@
                   </v-btn>
                 </v-col></v-row
               >
+              <v-row>
+                <v-col>
+                  <h3>Technical Documentation</h3>
+                </v-col>
+              </v-row>
               <v-row class="my-0">
                 <v-col>
                   <v-btn
@@ -51,7 +56,7 @@
                     <v-icon x-small class="pr-1">
                       fas fa-file-pdf
                     </v-icon>
-                    Technical Documentation for Institution-Level Data Files
+                    Institution-Level Data Files
                   </v-btn>
                   <v-btn
                     color="secondary"
@@ -65,7 +70,7 @@
                     <v-icon x-small class="pr-1">
                       fas fa-file-pdf
                     </v-icon>
-                    Technical Documentation for Data Files by Field of Study
+                    Field of Study Data Files
                   </v-btn>
                 </v-col></v-row
               >
