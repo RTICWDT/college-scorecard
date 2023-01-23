@@ -58,7 +58,7 @@
                 <v-btn
                   small
                   color="secondary"
-                  class="ml-2"
+                  class="ml-0 ml-sm-2"
                   href="https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Institution_09012022.zip"
                   >Download
                   <v-icon right dark x-small>
@@ -71,7 +71,7 @@
                 </h4>
                 <v-btn
                   small
-                  class="ml-2"
+                  class="ml-0 ml-sm-2"
                   color="secondary"
                   href=" https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Field-of-Study_09012022.zip"
                   >Download
@@ -100,7 +100,7 @@
               </a>
               or email the help desk at
               <a href="mailto:scorecarddata@rti.org">scorecarddata@rti.org</a
-              >.<br />
+              >.<br class="d-none d-md-block" />
               For inquiries by members of the press, please contact
               <a href="mailto:press@ed.gov">press@ed.gov</a>.
             </p>
