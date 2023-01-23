@@ -61,22 +61,7 @@
 
     <v-main>
       <v-card tile>
-        <v-tabs>
-          <p class="mb-0 px-5 d-flex align-self-center black--text">
-            <strong>SEARCH:</strong>
-          </p>
-          <v-tab
-            to="/search/"
-            @click="displayToggle = 'institutions'"
-            color="#007000"
-          >
-            Schools
-          </v-tab>
-
-          <v-tab to="/search/fos" color="#fdbf32">
-            Fields of Study
-          </v-tab>
-        </v-tabs>
+        <search-tabs />
       </v-card>
       <div class="bg-blue">
         <v-container fluid>
@@ -167,8 +152,6 @@
               :temporary="$vuetify.breakpoint.smAndDown"
               :hide-overlay="$vuetify.breakpoint.smAndUp"
             >
-              <!-- Search Form Component -->
-
               <!-- Search Fields of Study Component -->
               <search-fos-form
                 :url-parsed-params="urlParsedParams"
@@ -312,44 +295,6 @@
                   </v-row>
                 </v-card>
 
-                <!-- Instituition Information -->
-                <div
-                  v-if="
-                    displayToggle === 'institutions' &&
-                      !isLoading &&
-                      this.displayFlag
-                  "
-                  id="search-institutions-dolflag"
-                  class="my-2"
-                >
-                  <v-row>
-                    <v-col cols="12" sm="5" md="5" class="">
-                      <v-chip
-                        class="dolflag-chip"
-                        close
-                        @click:close="handleDOLFlag"
-                        ><span
-                          >Only show schools that have programs that qualify for
-                          the Department of Labor's WIOA program.<tooltip
-                            definition="wioa-participants"/></span
-                      ></v-chip>
-                    </v-col>
-                    <v-col cols="12" sm="7" md="7" class="py-1 px-1">
-                      <p class="white--text">
-                        Learn more about the Department of Labor's WIOA program
-                        at
-                        <a
-                          target="_blank"
-                          href="https://collegescorecard.ed.gov/training"
-                          class="white--text"
-                        >
-                          CollegeScorecard.ed.gov/training.
-                        </a>
-                      </p>
-                    </v-col>
-                  </v-row>
-                </div>
-
                 <!-- Field Of Study CIP 4 Information -->
                 <div id="search-fos-cip-warning" class="my-2">
                   <v-row>
@@ -427,19 +372,6 @@
                   v-if="!isLoading && results.schools.length === 0"
                 >
                   <v-row>
-                    <v-col cols="12" v-if="displayToggle === 'institutions'">
-                      <v-card class="pa-5">
-                        <h3>Show Me Options</h3>
-                        <p>
-                          Select one or more options below to create a list of
-                          schools that fit your needs.
-                        </p>
-                        <canned-search-container
-                          @canned-search-submit="handleCannedSearchClick"
-                        ></canned-search-container>
-                      </v-card>
-                    </v-col>
-
                     <v-col cols="12" v-if="displayToggle === 'fos'">
                       <v-card class="pa-5 text-center">
                         <h3 class="text-center">No Results Found</h3>
@@ -552,17 +484,9 @@
 </template>
 
 <script>
-// TODO - This needs major cleanup.  How can it be cleaned?, Seperate files for legacy Javascript items?
-
-import SearchResultCard from "~/components/SearchResultCard.vue"
-import SearchForm from "~/components/SearchForm.vue"
-import CannedSearchButton from "~/components/CannedSearchButton.vue"
-import CannedSearchContainer from "~/components/CannedSearchContainer.vue"
 import Share from "~/components/Share.vue"
-import NameAutocomplete from "~/components/NameAutocomplete.vue"
 import URLHistory from "~/js/mixins/URLHistory.js"
 import PrepareParams from "~/js/mixins/PrepareParams.js"
-import ContextToggle from "~/components/ContextToggle.vue"
 import SearchFieldsOfStudyForm from "~/components/SearchFieldsOfStudyForm.vue"
 import FieldOfStudyResultCard from "~/components/FieldOfStudyResultCard.vue"
 import Tooltip from "~/components/Tooltip.vue"
@@ -574,27 +498,21 @@ import _ from "lodash"
 import { apiGet } from "~/js/api.js"
 import { fields } from "~/js/constants.js"
 
-import FieldAutocomplete from "~/components/FieldAutocomplete.vue"
 import FieldOfStudySearch from "~/components/FieldOfStudySearch.vue"
 import FieldOfStudyDetailChip from "~/components/FieldOfStudyDetailChip.vue"
+import SearchTabs from "~/components/SearchTabs.vue"
 
 const querystring = require("querystring")
 
 export default {
   components: {
-    "search-result-card": SearchResultCard,
-    "search-form": SearchForm,
-    "canned-search-button": CannedSearchButton,
-    "canned-search-container": CannedSearchContainer,
     share: Share,
-    "name-autocomplete": NameAutocomplete,
-    "context-toggle": ContextToggle,
     "search-fos-form": SearchFieldsOfStudyForm,
     "fos-result-card": FieldOfStudyResultCard,
     tooltip: Tooltip,
-    NameAutocomplete,
     "field-of-study-search": FieldOfStudySearch,
     "field-of-study-detail-chip": FieldOfStudyDetailChip,
+    SearchTabs,
   },
   mixins: [URLHistory, PrepareParams, AnalyticsEvents, SiteData, LocationCheck],
   props: {
@@ -614,7 +532,7 @@ export default {
   data() {
     return {
       showSidebar: true,
-      sidebar: { controlRadio: "1", fixed: false, absolute: true },
+      sidebar: { fixed: false, absolute: true },
       results: {
         schools: [],
         meta: {
@@ -649,9 +567,6 @@ export default {
         },
       ],
       shareUrl: null,
-      displayToggle: "fos",
-      controlTab: 1,
-      controlRadio: "1",
       fieldOfStudyTotalCountWithoutRangeFilters: 0,
       displayFlag: false,
       degreeTypes: [
@@ -695,7 +610,7 @@ export default {
           act: false,
           acceptance: false,
         },
-        location: null,
+
         cip4Cache: [],
       },
     }

@@ -34,7 +34,12 @@
 
 <template>
   <v-form>
-    <v-expansion-panels accordion multiple style="border-radius: 0">
+    <v-expansion-panels
+      accordion
+      multiple
+      style="border-radius: 0"
+      v-model="panels"
+    >
       <v-expansion-panel>
         <v-expansion-panel-header>Academic Fields</v-expansion-panel-header>
         <v-expansion-panel-content>
@@ -111,22 +116,6 @@
           ></check-range>
         </v-expansion-panel-content>
       </v-expansion-panel>
-      <v-expansion-panel v-show="!displayAllFilters">
-        <v-expansion-panel-header>
-          WIOA Programs&nbsp;<tooltip definition="wioa-participants" />
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
-          <v-checkbox
-            id="search-form-dolflag"
-            class="search-form-dolflag-cb my-0 py-0"
-            v-model="input.dolflag"
-            label="Only show schools that have Department of Labor WIOA programs"
-            value="true"
-            color="secondary"
-            hide-details
-            v-show="!displayAllFilters"
-          ></v-checkbox> </v-expansion-panel-content
-      ></v-expansion-panel>
       <v-expansion-panel>
         <v-expansion-panel-header> Test Scores</v-expansion-panel-header
         ><v-expansion-panel-content>
@@ -186,7 +175,6 @@
           </check-range>
         </v-expansion-panel-content></v-expansion-panel
       ><v-expansion-panel>
-        <!-- <p class='overline'>School Characteristics</p> -->
         <v-expansion-panel-header> Size</v-expansion-panel-header>
         <v-expansion-panel-content>
           <v-checkbox
@@ -401,6 +389,8 @@ export default {
   },
   data() {
     return {
+      panels: [0, 1],
+
       input: {
         id: null,
         state: [],
@@ -482,31 +472,6 @@ export default {
         this.mapInputFromProp()
       },
       deep: true,
-    },
-    "location.latLon": {
-      // Proccess Lat/Long object for url values.
-      handler(newValue, oldValue) {
-        if (
-          newValue != null &&
-          newValue.min_lat &&
-          newValue.max_lat &&
-          newValue.min_lat &&
-          newValue.max_lat
-        ) {
-          this.input.lat =
-            newValue.min_lat.toFixed(4) + ".." + newValue.max_lat.toFixed(4)
-          this.input.long =
-            newValue.min_lon.toFixed(4) + ".." + newValue.max_lon.toFixed(4)
-        }
-      },
-    },
-    "location.miles"() {
-      this.handleLocationCheck()
-    },
-    "utility.location"(newValue, oldValue) {
-      if (newValue === "Near Me" && oldValue !== "Near Me") {
-        this.handleLocationCheck()
-      }
     },
   },
   computed: {
