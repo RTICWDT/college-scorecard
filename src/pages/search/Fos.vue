@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 @import "~/sass/_variables";
 
 #search-fos-cip-warning,
@@ -42,6 +42,9 @@
       font-size: 16px;
     }
   }
+}
+.container--fluid {
+  max-width: none !important;
 }
 </style>
 

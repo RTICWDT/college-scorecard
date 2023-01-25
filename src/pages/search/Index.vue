@@ -27,6 +27,9 @@
     color: white !important;
   }
 }
+.container--fluid {
+  max-width: none !important;
+}
 </style>
 
 <template>
@@ -81,7 +84,12 @@
       </v-container>
       <v-container fluid class="pa-0">
         <v-row>
-          <v-col cols="3" :class="{ 'd-none': !showSidebar }" class="pr-0">
+          <v-col
+            cols="3"
+            xl="2"
+            :class="{ 'd-none': !showSidebar }"
+            class="pr-0"
+          >
             <v-navigation-drawer
               v-model="showSidebar"
               :width="$vuetify.breakpoint.smAndDown ? '250' : 'auto'"
@@ -98,12 +106,12 @@
                 @search-query="handleInstitutionSearch"
               />
             </v-navigation-drawer> </v-col
-          ><v-col :cols="showSidebar ? 9 : 12" class="pa-10">
+          ><v-col :cols="showSidebar ? 9 : 12" xl="10" class="pa-10">
             <div id="search-result-container">
               <div class="search-result-container">
                 <!-- Search Result Info and controls -->
                 <v-card
-                  class="mt-2 mb-4 py-4 px-4 elevaton-0 pageBar"
+                  class="mt-2 mb-4 py-4 px-4 elevation-0 pageBar"
                   v-show="!isLoading"
                 >
                   <v-row class="">
@@ -222,7 +230,6 @@
                     >
                       <div class="text-md-right justify-end">
                         <v-pagination
-                          flat
                           v-model="displayPage"
                           :length="totalPages"
                           :total-visible="7"
@@ -293,7 +300,7 @@
                 <div class="results-main-alert">
                   <!-- Loading -->
                   <div class="show-loading mt-2" v-show="isLoading">
-                    <v-card class="py-4 px-4 pageBar">
+                    <v-card class="py-4 px-4 pageBar elevation-0">
                       <h1 class="title">
                         Loading
                         <v-icon color="#00365e"
@@ -317,6 +324,7 @@
                         v-for="school in results.schools"
                         :key="school.id"
                         cols="12"
+                        xl="2"
                         lg="3"
                         md="4"
                         sm="6"
@@ -345,7 +353,6 @@
                           :total-visible="7"
                           @input="handlePaginationInput"
                           class="pr-0 mr-0"
-                          circle
                         ></v-pagination>
                       </div>
                     </v-col>
