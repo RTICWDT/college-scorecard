@@ -13,7 +13,6 @@ export default {
     handleLocationCheck: function(redirect = ""){
       this.location.isLoading = true;
       this.location.error = null;
-
       var locationOptions = {
         timeout: 5000
       };
@@ -34,7 +33,7 @@ export default {
           if (redirect !== "") {
             var lat = this.location.latLon.min_lat.toFixed(4) + ".." + this.location.latLon.max_lat.toFixed(4);
             var long = this.location.latLon.min_lon.toFixed(4) + ".." + this.location.latLon.max_lon.toFixed(4);            
-            window.location = redirect + '&lat=' + lat + '&long=' + long;
+            //window.location = redirect + '&lat=' + lat + '&long=' + long;
             //window.location = redirect;
           }
         },(error) => {

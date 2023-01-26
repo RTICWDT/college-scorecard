@@ -493,7 +493,6 @@ export default {
   },
   methods: {
     colorSlider(num) {
-      let color
       switch (num) {
         case 0:
           this.sliderColor = "#7BD88C"

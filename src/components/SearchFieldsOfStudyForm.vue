@@ -22,7 +22,6 @@
     margin-top: 1rem !important;
     margin-bottom: 0.3rem !important;
     font-weight: 600;
-    font-family: "Montserrat", sans-serif !important;
   }
 
   label.subhead {

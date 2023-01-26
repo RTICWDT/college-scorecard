@@ -4,6 +4,7 @@
       id="search-from-location-select"
       v-model="utility.location"
       @change="handleLocationChange"
+      @click:clear="handleLocationChange"
       :items="['Near Me', 'ZIP Code', 'State']"
       hide-details
       outlined
@@ -15,13 +16,13 @@
     />
 
     <div class="d-flex align-center" v-if="utility.location === 'Near Me'">
-      <v-icon
-        v-on="on"
-        :color="locationButtonColor"
-        v-html="
-          location.isLoading ? 'fas fa-circle-notch fa-spin' : 'mdi-near-me'
-        "
-      ></v-icon>
+      <v-btn @click="handleLocationCheck">
+        <v-icon
+          v-html="
+            location.isLoading ? 'fas fa-circle-notch fa-spin' : 'mdi-near-me'
+          "
+        ></v-icon
+      ></v-btn>
 
       <v-text-field
         v-model="location.miles"
@@ -107,7 +108,7 @@ export default {
     },
     initial_distance: {
       type: String,
-      default: null,
+      default: "10",
     },
     horizontal: {
       type: Boolean,
@@ -149,12 +150,6 @@ export default {
       this.utility.location = "Near Me"
     }
   },
-  updated(e) {
-    console.log(e)
-    // if (!this.state && !this.zip && !this.distance) {
-    //   this.utility.location = null
-    // }
-  },
   watch: {
     initial_state() {
       this.input.state = this.initial_state
@@ -180,10 +175,13 @@ export default {
           this.input.long =
             newValue.min_lon.toFixed(4) + ".." + newValue.max_lon.toFixed(4)
         }
+        this.$emit("search-query", this.input)
       },
     },
     "location.miles"() {
-      this.handleLocationCheck()
+      this.$emit("search-query", this.input)
+
+      //      this.handleLocationCheck()
     },
     "utility.location"(newValue, oldValue) {
       if (newValue === "Near Me" && oldValue !== "Near Me") {
@@ -202,9 +200,8 @@ export default {
 
       this.location.latLon = null
       this.location.error = null
-    },
-    handleLocationCheck() {
-      this.$emit("handle-location-selection", this.input)
+
+      this.$emit("search-query", this.input)
     },
 
     locationButtonColor() {

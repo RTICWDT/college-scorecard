@@ -36,7 +36,7 @@
   <div>
     <v-main>
       <v-card tile>
-        <search-tabs />
+        <search-tabs :selected="0" />
       </v-card>
       <div class="bg-blue">
         <v-container fluid>
@@ -76,7 +76,8 @@
                 :horizontal="true"
               />
               <v-btn class="mx-3" @click="showSidebar = !showSidebar">
-                Show Drawer
+                <v-icon small class="pr-1">fas fa-sliders-h</v-icon>
+                {{ showSidebar ? "Hide" : "Show" }} Filters
               </v-btn>
             </v-card>
           </v-col></v-row
@@ -545,10 +546,6 @@ export default {
     async searchAPI() {
       // TODO - Clean this method up, It does way more than just SearchAPI.
       // Better Encapsulation.
-
-      console.log("searchAPI")
-      console.log("input")
-      console.log(this.input)
       let params = this.input
 
       this.$emit("loading", true)
@@ -564,19 +561,8 @@ export default {
         this.displayFlag = true
       }
 
-      // let poppingState = false;
-      // let alreadyLoaded = false;
-
       //Add page and sort items into params.
-      if (params.page === 0) {
-        // Reset page when passed 0
-        this.input.page = 1
-      } else if (this.input.page >= 1) {
-        // Use local page counter;
-        // The API function off of a 0 index;
-        params.page = this.input.page - 1
-      }
-
+      params.page = this.input.page ? this.input.page - 1 : 0
       params.sort = this.input.sort ? this.input.sort : this.defaultSort
 
       let query = this.prepareParams(params)
@@ -676,7 +662,12 @@ export default {
     },
 
     handleLocationSelection(params) {
-      this.input = params
+      this.input = { ...this.input, ...params }
+      this.input = Object.fromEntries(
+        Object.entries(this.input).filter(([_, v]) => v != null)
+      )
+
+      this.input.page = 1
       this.searchAPI()
     },
     parseURLParams(url) {
@@ -712,7 +703,11 @@ export default {
     },
 
     handleInstitutionSearch(params) {
-      this.input = params
+      // merge the search form in with the existing input
+      this.input = { ...this.input, ...params }
+
+      // reset the page to the start
+      this.input.page = 1
       this.searchAPI()
     },
 
@@ -730,14 +725,12 @@ export default {
 
     handleSchoolNameSelected(school) {
       if (typeof school == "string") {
-        // this.input.name = school;
         this.input.search = school
-        // this.input.id = null
       } else {
-        // this.input.name = school['school.name'];
         this.input.search = school["school.name"]
-        // this.input.id = school.id
       }
+      // reset page
+      this.input.page = 1
       this.searchAPI()
     },
   },

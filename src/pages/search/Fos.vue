@@ -64,7 +64,7 @@
 
     <v-main>
       <v-card tile>
-        <search-tabs />
+        <search-tabs :selected="1" />
       </v-card>
       <div class="bg-blue">
         <v-container fluid>
@@ -138,7 +138,8 @@
               </div>
 
               <v-btn class="mx-3" @click="showSidebar = !showSidebar">
-                Show Drawer
+                <v-icon small class="pr-1">fas fa-sliders-h</v-icon>
+                {{ showSidebar ? "Hide" : "Show" }} Filters
               </v-btn>
             </v-card>
           </v-col></v-row
@@ -167,7 +168,7 @@
               <div class="search-result-container">
                 <!-- Search Result Info and controls -->
                 <v-card
-                  class="mt-2 mb-4 py-4 px-4 elevaton-0 pageBar"
+                  class="mt-2 mb-4 py-4 px-4 elevation-0 pageBar"
                   v-show="!isLoading"
                 >
                   <v-row class="">
@@ -376,7 +377,7 @@
                 >
                   <v-row>
                     <v-col cols="12" v-if="displayToggle === 'fos'">
-                      <v-card class="pa-5 text-center">
+                      <v-card class="pa-5 text-center elevation-0">
                         <h3 class="text-center">No Results Found</h3>
                         <br />
                         <v-btn
@@ -399,7 +400,7 @@
                 <div class="results-main-alert">
                   <!-- Loading -->
                   <div class="show-loading mt-2" v-show="isLoading">
-                    <v-card class="py-4 px-4 pageBar">
+                    <v-card class="py-4 px-4 pageBar elevation-0">
                       <h1 class="title">
                         Loading
                         <v-icon color="#00365e"
