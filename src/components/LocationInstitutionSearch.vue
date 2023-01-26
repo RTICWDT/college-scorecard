@@ -146,9 +146,10 @@ export default {
       this.utility.location = "ZIP Code"
       this.input.zip = this.initial_zip
       this.input.distance = this.initial_distance
-    } else if (this.initial_distance) {
-      this.utility.location = "Near Me"
     }
+    //else if (this.initial_distance) {
+    //  this.utility.location = "Near Me"
+    //}
   },
   watch: {
     initial_state() {
