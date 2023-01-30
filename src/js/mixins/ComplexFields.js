@@ -274,6 +274,10 @@ export default {
             if (!this.school) return null;
             return _.get(this.school, this.fields['PELL_PERCENTAGE']);
         },
+        studentRatio() {
+            if (!this.school) return null;
+            return _.get(this.school, this.fields['STUDENT_RATIO']);
+        },          
         netPriceCalculatorUrl() {
             if (!this.school) return null;
             return _.get(this.school, this.fields['NET_PRICE_CALC_URL'], '#');

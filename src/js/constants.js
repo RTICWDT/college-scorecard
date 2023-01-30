@@ -168,6 +168,9 @@ export const fields = {
   EARNINGS_MIDPOINT_ALL: 'latest.earnings.10_yrs_after_entry.consumer.overall_median',
   EARNINGS_MIDPOINT_PRED_DEGREE: 'latest.earnings.10_yrs_after_entry.consumer.median_by_pred_degree',
 
+  
+  STUDENT_RATIO: 'latest.student.demographics.student_faculty_ratio',
+
 
   //Location
   LATITUDE:                 'location.lat',

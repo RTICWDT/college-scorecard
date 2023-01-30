@@ -2015,195 +2015,172 @@
                     </v-expansion-panel-content>
                   </v-expansion-panel>
 
-                  <!--Campus Demographics - Panel-->
-                  <v-expansion-panel class="institution-profile-panel">
-                    <v-expansion-panel-header
-                      id="demographics"
-                      @click="trackAccordion('Campus Demographics')"
-                      >Campus Demographics</v-expansion-panel-header
-                    >
-                    <v-expansion-panel-content
-                      id="demographics-content"
-                      class="px-0 py-3 pa-sm-5"
-                    >
-                      <v-row>
-                        <v-col
-                          cols="12"
-                          md="6"
-                          class="d-flex justify-space-around"
-                        >
-                          <school-icons
-                            :school="school"
-                            :fields="fields"
-                            :sizeOnly="true"
-                            class="px-6 py-0 elevation-5 justify-space-around my-2 text-center"
-                          />
-                          <div
-                            class="text-center my-2 px-6 py-2 justify-space-around elevation-5"
+              <!--Campus Diversity - Panel-->
+              <v-expansion-panel class="institution-profile-panel">
+                <v-expansion-panel-header
+                  id="demographics"
+                  @click="trackAccordion('Campus Diversity')"
+                  >Campus Diversity</v-expansion-panel-header
+                >
+                <v-expansion-panel-content
+                  id="demographics-content"
+                  class="px-0 py-3 pa-sm-5"
+                >
+                  <v-row>
+                    <v-col cols="12" md="6" class="d-flex justify-space-around">
+                      <school-icons
+                        :school="school"
+                        :fields="fields"
+                        :sizeOnly="true"
+                        class="px-6 py-0 elevation-5 justify-space-around my-2 text-center"
+                      />
+                      <div
+                        class="text-center my-2 px-6 py-2 justify-space-around elevation-5"
+                      >
+                        <div class="mb-2">
+                          <strong
+                            class="display-2 medium-blue-text font-weight-bold pb-2"
+                            >{{ undergraduates | separator }}</strong
                           >
-                            <div class="mb-2">
-                              <strong
-                                class="display-2 medium-blue-text font-weight-bold pb-2"
-                                >{{ undergraduates | separator }}</strong
-                              >
-                            </div>
-                            <strong>Undergraduate<br />Students</strong>
-                          </div>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          md="6"
-                          class="d-flex justify-space-around"
-                        >
-                          <div
-                            class="text-center my-2 px-6 py-2 justify-space-around  elevation-5"
-                          >
-                            <div class="mb-2">
-                              <span
-                                class="display-2 medium-blue-text font-weight-bold"
-                                >{{ fullTimeEnrollment | numeral("0.%") }}</span
-                              >
-                            </div>
-                            <strong>
-                              Full-time<br />Students
-                              <tooltip definition="full-time" />
-                            </strong>
-                          </div>
-                          <div
-                            class="text-center my-2 px-0 py-0 justify-space-around"
-                          >
-                            <!-- <span
+                        </div>
+                        <strong>Undergraduate<br>Students</strong>
+                      </div>
+                    </v-col>
+                    <v-col cols="12" md="6" class="d-flex justify-space-around">
+                      <div
+                        class="text-center my-2 px-6 py-2 justify-space-around  elevation-5"
+                      >
+                        <div class="mb-2">
+                          <span class="display-2 medium-blue-text font-weight-bold">{{
+                            fullTimeEnrollment | numeral("0.%")
+                          }}</span>
+                        </div>
+                        <strong>
+                          Full-time<br>Students
+                          <tooltip definition="full-time" />
+                        </strong>
+                      </div>
+                      <div
+                        class="text-center my-2 px-0 py-0 justify-space-around"
+                      >
+                        <!-- <span
                           class="display-2 navy-text font-weight-bold divide "
                           >/</span
                         > -->
-                          </div>
-                          <div
-                            class="text-center my-2 px-6 py-2 justify-space-around  elevation-5"
-                          >
-                            <div class="mb-2">
-                              <span
-                                class="display-2 medium-blue-text font-weight-bold"
-                                >{{ partTimeEnrollment | numeral("0.%") }}</span
-                              >
-                            </div>
-                            <strong>Part-time<br />Students</strong>
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <v-row>
-                        <v-col cols="12" md="6">
-                          <h2 class="mb-3">
-                            Socio-Economic Diversity
-                            <tooltip definition="socio-eco" />
-                          </h2>
-                          <p class>
-                            The percentage of students who received an
-                            income-based federal Pell grant intended for
-                            low-income students.
-                          </p>
-                          <div v-if="aidFlag < 3 && socioEconomicDiversity">
-                            <donut
-                              color="#1874DC"
-                              :value="socioEconomicDiversity * 100"
-                              :height="200"
-                            ></donut>
-                            <div class="sr-only">
-                              Socio-Economic Diversity:
-                              {{
-                                Math.round(socioEconomicDiversity * 100) + "%"
-                              }}
-                            </div>
-                          </div>
-                          <div v-else class="data-na">Data Not Available</div>
-                        </v-col>
-                        <v-col cols="12" md="6">
-                          <h2 class="mb-3">
-                            Student to Faculty Ratio
-                          </h2>
-                        </v-col>
-                        <v-col cols="12">
-                          <div style="  display: flex;align-items: center;">
-                            <h2 class="mb-3 d-inline-block">
-                              Race/Ethnicity
-                              <tooltip definition="race-eth" />
-                            </h2>
-                            <div
-                              style="background:#1874DC;margin-right:10px;height:10px;width:10px;display:inline-block;"
-                            ></div>
-                            Student Body
-                            <div
-                              style="background:#102E52;margin-left:10px;margin-right:10px;height:10px;width:10px;display:inline-block;"
-                            ></div>
-                            Full-Time Staff
-                          </div>
-                        </v-col>
-                        <v-col cols="12" md="6">
-                          <div
-                            v-for="item in raceEthnicity.slice(0, 5)"
-                            :key="item.label"
-                          >
-                            {{ item.label }}
-                            <horizontal-bar
-                              :value="Math.round(item.value * 100)"
-                              :min="0"
-                              :max="100"
-                              color="#1874DC"
-                              :height="25"
-                              :labels="true"
-                            ></horizontal-bar>
-                            <horizontal-bar
-                              :value="
-                                Math.round(
-                                  (item.staff_value +
-                                    Math.random() * (0.02 - -0.02) +
-                                    -0.02) *
-                                    100
-                                )
-                              "
-                              :min="0"
-                              :max="100"
-                              color="#102E52"
-                              :height="25"
-                              :labels="true"
-                              style="margin-top:2px;margin-bottom:15px;"
-                            ></horizontal-bar>
-                          </div>
-                        </v-col>
-                        <v-col cols="12" md="6">
-                          <div
-                            v-for="item in raceEthnicity.slice(5, 10)"
-                            :key="item.label"
-                          >
-                            {{ item.label }}
-                            <horizontal-bar
-                              :value="Math.round(item.value * 100)"
-                              :min="0"
-                              :max="100"
-                              color="#1874DC"
-                              :height="25"
-                              :labels="true"
-                            ></horizontal-bar>
-                            <horizontal-bar
-                              :value="
-                                Math.round(
-                                  (item.staff_value +
-                                    Math.random() * (0.02 - -0.02) +
-                                    -0.02) *
-                                    100
-                                )
-                              "
-                              :min="0"
-                              :max="100"
-                              color="#102E52"
-                              :height="25"
-                              :labels="true"
-                              style="margin-top:2px;margin-bottom:15px;"
-                            ></horizontal-bar>
-                          </div>
-                        </v-col>
-                      </v-row>
-                    </v-expansion-panel-content>
-                  </v-expansion-panel>
+                      </div>
+                      <div
+                        class="text-center my-2 px-6 py-2 justify-space-around  elevation-5"
+                      >
+                        <div class="mb-2">
+                          <span class="display-2 medium-blue-text font-weight-bold">{{
+                            partTimeEnrollment | numeral("0.%")
+                          }}</span>
+                        </div>
+                        <strong>Part-time<br>Students</strong>
+                      </div>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="12" md="6">
+                      <h2 class="mb-3">
+                        Socio-Economic Diversity
+                        <tooltip definition="socio-eco" />
+                      </h2>
+                      <h4 class="mb-2  sub-title">
+                        The percentage of students who received an income-based
+                        federal Pell grant intended for low-income students.
+                      </h4>
+                      <div v-if="aidFlag < 3 && socioEconomicDiversity">
+                        <donut
+                          color="#1874DC"
+                          :value="socioEconomicDiversity * 100"
+                          :height="200"
+                        ></donut>
+                        <div class="sr-only">
+                          Socio-Economic Diversity:
+                          {{ Math.round(socioEconomicDiversity * 100) + "%" }}
+                        </div>
+                      </div>
+                      <div v-else class="data-na">Data Not Available</div>
+                    </v-col>
+                    <v-col cols="12" md="6">
+                      <div class="pa-4">
+                      <h2 class="mb-3">
+                        Student to Faculty Ratio
+                      </h2>
+                      <h4 class="mb-2 sub-title">
+                        The ratio of full-time students to full-time instructional faculty.
+                      </h4>                      
+                      <div v-if="studentRatio" class="text-center">
+                        <ratio
+                          :value="studentRatio"
+                        ></ratio>
+                        <div class="sr-only">
+                          Socio-Economic Diversity:
+                          {{ studentRatio + " to 1" }}
+                        </div>
+                      </div>
+                      <div v-else class="data-na">Data Not Available</div>
+                    </div>                      
+                    </v-col>
+                    <v-col cols="12">
+                      <div style="  display: flex;align-items: center;">
+                      <h2 class="mb-1 d-inline-block">
+                        Race/Ethnicity
+                        <tooltip definition="race-eth" />
+                      </h2>
+                      <div style="background:#1874DC;margin-right:10px;height:10px;width:10px;display:inline-block;"></div>Student Body
+                      <div style="background:#102E52;margin-left:10px;margin-right:10px;height:10px;width:10px;display:inline-block;"></div>Full-Time Staff
+                    </div>
+                    </v-col>
+                    <v-col cols="12" md="6">
+                      <div v-for="item in raceEthnicity.slice(0,5)" :key="item.label">
+                        {{ item.label }}
+                        <horizontal-bar
+                          :value="Math.round(item.value * 100)"
+                          :min="0"
+                          :max="100"
+                          color="#1874DC"
+                          :height="25"
+                          :labels="true"
+                        ></horizontal-bar>
+                        <horizontal-bar
+                          :value="Math.round(item.staff_value * 100)"
+                          :min="0"
+                          :max="100"
+                          color="#102E52"
+                          :height="25"
+                          :labels="true"
+                          style="margin-top:2px;margin-bottom:15px;"
+                        ></horizontal-bar>
+                      </div>           
+                    </v-col>            
+                    <v-col cols="12" md="6">
+                      <div v-for="item in raceEthnicity.slice(5,10)" :key="item.label">
+                        {{ item.label }}
+                        <horizontal-bar
+                          :value="Math.round(item.value * 100)"
+                          :min="0"
+                          :max="100"
+                          color="#1874DC"
+                          :height="25"
+                          :labels="true"
+                        ></horizontal-bar>
+                        <horizontal-bar
+                          :value="Math.round(item.staff_value * 100)"
+                          :min="0"
+                          :max="100"
+                          color="#102E52"
+                          :height="25"
+                          :labels="true"
+                          style="margin-top:2px;margin-bottom:15px;"
+                        ></horizontal-bar>
+                      </div>
+
+                    </v-col>
+                  </v-row>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
 
                   <!--Test Scores and Acceptance - Panel-->
                   <v-expansion-panel class="institution-profile-panel">
@@ -2628,6 +2605,8 @@ import Toggle from "~/components/Toggle.vue"
 import BottomCallouts from "~/components/BottomCallouts.vue"
 import numeral from "numeral"
 import Map from "./components/Map.vue"
+import Ratio from "./components/Ratio.vue"
+
 export default {
   mixins: [URLHistory, ComplexFields, AnalyticsEvents],
   components: {
@@ -2655,6 +2634,7 @@ export default {
     "median-toggle": MedianToggle,
     toggle: Toggle,
     Map,
+    "ratio": Ratio,
   },
   data() {
     return {
