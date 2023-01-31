@@ -1374,7 +1374,7 @@
 
           <!-- Search Form Component -->
           <div v-show="!loading && showSearchForm">
-            <v-card class="pa-5 mb-2">
+            <v-card class="pa-5 mb-2 mt-5" flat>
               <div v-show="displayToggle === 'institutions'">
                 <h1 class="text-center py-3">
                   No schools selected to compare.
@@ -1382,11 +1382,11 @@
 
                 <div class="text-center py-4">
                   <v-btn
-                    rounded
                     color="secondary"
+                    large
                     :href="this.$url('/search?toggle=institutions')"
                   >
-                    search schools
+                    Search Schools
                   </v-btn>
                 </div>
 
@@ -1404,11 +1404,11 @@
 
                 <div class="text-center py-4">
                   <v-btn
-                    rounded
+                    large
                     color="secondary"
                     :href="this.$url('/search/?toggle=fos')"
                   >
-                    SEARCH FIELDS OF STUDY
+                    Search Fields of Study
                   </v-btn>
                 </div>
 
