@@ -3,10 +3,10 @@
     <v-main>
       <!-- Top Splash and Search-->
       <div class="home-splash">
-        <v-container class="mb-n10 pt-16">
+        <v-container class="mb-n10 pt-sm-16 pt-5">
           <v-row>
             <!-- Header Info -->
-            <v-col cols="12">
+            <v-col cols="12" class="px-6 px-sm-3">
               <h1 class="white--text">
                 Find the right fit
               </h1>
@@ -75,6 +75,24 @@
                     </div>
 
                     <div v-if="toggleCustomSearch">
+                      <v-expansion-panels
+                        accordion
+                        multiple
+                        style="border-radius: 0"
+                        v-model="panels"
+                      >
+                        <v-expansion-panel>
+                          <v-expansion-panel-header
+                            >Location</v-expansion-panel-header
+                          >
+                          <v-expansion-panel-content>
+                            <location-institution-search
+                              @search-query=""
+                              :horizontal="false"
+                            />
+                          </v-expansion-panel-content>
+                        </v-expansion-panel>
+                      </v-expansion-panels>
                       <search-form @search-query="directToSearch" />
                     </div>
                   </v-card>
@@ -179,7 +197,7 @@
       </div>
 
       <!-- Bottom Content -->
-      <div class="home-links pt-15 mb-15">
+      <div class="home-links pt-sm-15 mb-15">
         <v-container class="mt-8">
           <v-row class="align-stretch">
             <!-- apprenticeships callout -->
@@ -472,7 +490,7 @@ import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 import FieldOfStudySearch from "~/components/FieldOfStudySearch.vue"
 import CompareDrawer from "~/components/CompareDrawer.vue"
 import CompareHeader from "~/components/CompareHeader.vue"
-
+import LocationInstitutionSearch from "~/components/LocationInstitutionSearch.vue"
 export default {
   mixins: [AnalyticsEvents],
   components: {
@@ -482,6 +500,7 @@ export default {
     "field-of-study-search": FieldOfStudySearch,
     "compare-drawer": CompareDrawer,
     "compare-header": CompareHeader,
+    LocationInstitutionSearch,
   },
   data() {
     return {
