@@ -46,7 +46,7 @@
               type="number"
               min="0"
               @input="handleInput"
-              solo
+              outlined
               dense
               :prefix="prefix"
               :suffix="appendText"
