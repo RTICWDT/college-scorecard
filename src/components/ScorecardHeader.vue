@@ -59,15 +59,14 @@ header {
       li a:hover:not(.nav-active),
       a:focus:not(.nav-active) {
         color: white;
-        font-weight: 700;
         text-decoration: none;
-        letter-spacing: 0;
+        border-bottom: 3px solid #97cff5;
+        padding-bottom: 10px;
       }
 
       li .nav-active {
         color: $nav-active-color !important;
         text-decoration: none;
-        font-weight: 700;
         padding-bottom: 10px;
         border-bottom: 3px solid #97cff5;
       }
