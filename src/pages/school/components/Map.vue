@@ -3,12 +3,14 @@
     style="height: 300px; z-index:80; border: 10px solid white; border-radius: 5px;"
     :zoom="12"
     :center="location"
+    :options="{ attributionControl: false }"
   >
     <l-tile-layer
       url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
     ></l-tile-layer>
     <l-marker :lat-lng="location"></l-marker>
+    <l-control-attribution prefix=""></l-control-attribution>
   </l-map>
 </template>
 <script>
@@ -24,6 +26,7 @@ export default {
     LMap: Vue2Leaflet.LMap,
     LTileLayer: Vue2Leaflet.LTileLayer,
     LMarker: Vue2Leaflet.LMarker,
+    LControlAttribution: Vue2Leaflet.LControlAttribution,
   },
   props: {
     location: {
