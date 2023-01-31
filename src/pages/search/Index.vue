@@ -2,30 +2,14 @@
 @import "~/sass/_variables.scss";
 .dolflag-chip {
   height: auto !important;
+  font-size: 16px;
   white-space: normal;
-  padding: 18px;
-  margin-right: 30px;
   a {
     color: rgba(0, 0, 0, 0.87) !important;
   }
 }
 #search-institutions-dolflag {
   width: 100%;
-
-  p {
-    font-size: 13px;
-    margin-bottom: 0;
-  }
-
-  @media (min-width: 960px) {
-    p {
-      font-size: 14px;
-    }
-  }
-
-  a {
-    color: white !important;
-  }
 }
 .container--fluid {
   max-width: none !important;
@@ -249,10 +233,11 @@
                   class="my-2"
                 >
                   <v-row>
-                    <v-col cols="12" sm="5" md="5" class="">
+                    <v-col cols="12" sm="6" md="6" class="">
                       <v-chip
-                        class="dolflag-chip"
+                        class="dolflag-chip pa-3"
                         close
+                        label
                         @click:close="handleDOLFlag"
                         ><span
                           >Only show schools that have programs that qualify for
@@ -260,18 +245,17 @@
                             definition="wioa-participants"/></span
                       ></v-chip>
                     </v-col>
-                    <v-col cols="12" sm="7" md="7" class="py-1 px-1">
-                      <p class="white--text">
+                    <v-col cols="12" sm="6" md="" class="">
+                      <v-card outlined class="pa-3">
                         Learn more about the Department of Labor's WIOA program
                         at
                         <a
                           target="_blank"
                           href="https://collegescorecard.ed.gov/training"
-                          class="white--text"
                         >
                           CollegeScorecard.ed.gov/training.
                         </a>
-                      </p>
+                      </v-card>
                     </v-col>
                   </v-row>
                 </div>
@@ -283,7 +267,7 @@
                 >
                   <v-row>
                     <v-col cols="12">
-                      <v-card class="pa-5">
+                      <v-card outlined class="pa-5">
                         <h3>Show Me Options</h3>
                         <p>
                           Select one or more options below to create a list of
@@ -546,6 +530,12 @@ export default {
     async searchAPI() {
       // TODO - Clean this method up, It does way more than just SearchAPI.
       // Better Encapsulation.
+
+      // remove null/empty values from the input
+      this.input = Object.fromEntries(
+        Object.entries(this.input).filter(([_, v]) => v != null)
+      )
+
       let params = this.input
 
       this.$emit("loading", true)
@@ -654,19 +644,13 @@ export default {
       }
     },
     handleCannedSearchClick(cannedSearchData) {
-      if (cannedSearchData) {
-        this.urlParsedParams = this.parseURLParams(
-          this.generateQueryString(cannedSearchData).substr(1)
-        )
-      }
+      this.input = cannedSearchData
+      this.input.page = 1
+      this.searchAPI()
     },
 
     handleLocationSelection(params) {
       this.input = { ...this.input, ...params }
-      this.input = Object.fromEntries(
-        Object.entries(this.input).filter(([_, v]) => v != null)
-      )
-
       this.input.page = 1
       this.searchAPI()
     },

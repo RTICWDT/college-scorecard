@@ -270,12 +270,10 @@
   p {
     font-size: 13px;
     color: #000;
-    font-family: "Montserrat", "Helvetica Neue", Helvetica, arial, sans-serif !important;
     font-weight: 500;
   }
 
   .fos-school-name-text {
-    font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
   }
   @media (min-width: 960px) {
     h4 {
@@ -285,11 +283,9 @@
     p {
       font-size: 12px;
       color: #000;
-      font-family: "Montserrat", "Helvetica Neue", Helvetica, arial, sans-serif !important;
     }
 
     .fos-school-name-text {
-      font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
     }
   }
 }

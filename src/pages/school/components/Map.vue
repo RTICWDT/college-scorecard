@@ -1,6 +1,6 @@
 <template>
   <l-map
-    style="height: 300px; z-index:80; border: 10px solid white; border-radius: 5px;"
+    style="height: 300px; z-index:5; border: 10px solid white; border-radius: 5px;"
     :zoom="12"
     :center="location"
     :options="{ attributionControl: false }"

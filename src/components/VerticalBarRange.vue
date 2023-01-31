@@ -8,11 +8,7 @@
         ref="bar"
       ></div>
 
-      <span
-        class="picc-range-label picc-range-label-min"
-        
-        ref="min"
-      >
+      <span class="picc-range-label picc-range-label-min" ref="min">
         <span v-html="_min.label"></span>
       </span>
 
@@ -76,11 +72,11 @@
 .range-container {
   overflow: visible;
   width: 140px;
-  height:320px;
+  height: 320px;
   padding-left: 20px;
   padding-top: 0px;
-  margin-left:auto;
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 .range-chart {
   $label-height: 1em;
@@ -138,7 +134,6 @@
         right: 0;
         text-align: center;
         font-size: 12px;
-        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
       }
     }
 
@@ -150,17 +145,16 @@
 
     &.picc-range-label-upper {
       border-bottom: none;
-      text-align:center;
+      text-align: center;
       left: 0;
       right: 0;
-      margin-left:0;
-      margin-right:0;       
+      margin-left: 0;
+      margin-right: 0;
 
       span {
-        position:relative !important;
-        font-size:18px !important;
-        font-family: "Montserrat", sans-serif !important;
-        font-weight: bold;  
+        position: relative !important;
+        font-size: 18px !important;
+        font-weight: bold;
       }
     }
     &.picc-range-label-lower {
@@ -175,15 +169,14 @@
       left: none;
       right: 105px;
       margin-left: 0;
-      margin-right:0;
-      text-align:right;
-      position:absolute;
+      margin-right: 0;
+      text-align: right;
+      position: absolute;
 
       span {
         top: auto;
-        position:relative !important;
+        position: relative !important;
         font-size: 12px;
-        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;        
       }
     }
 
@@ -193,33 +186,34 @@
 
     &.picc-range-label-max {
       top: 0px;
-    }    
+    }
 
     &.picc-range-label-median {
       top: auto;
       left: 0;
       right: 0;
-      margin-left:0;
-      margin-right:0;
-      width:100%;      
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
       span:not(.arrow-left) {
         margin-left: $bar-width + $arrow-size + 10;
         text-align: center;
-        color:#000;
-        margin-top:-0px;
+        color: #000;
+        margin-top: -0px;
         font-size: 12px !important;
-        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;       
+        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial,
+          sans-serif !important;
         font-style: italic;
         line-height: 14px;
       }
       span.arrow-left {
-        width: 0; 
-        height: 0; 
+        width: 0;
+        height: 0;
         border-top: $arrow-size solid transparent;
         border-bottom: $arrow-size solid transparent;
         border-right: $arrow-size solid black;
-        margin-left:$bar-width;
-        margin-top:0;
+        margin-left: $bar-width;
+        margin-top: 0;
       }
     }
   }
@@ -307,7 +301,7 @@ export default {
     return {
       bar_styles: { top: 0, bottom: 0 },
       extraPad: {
-        "padding-top": '30px',
+        "padding-top": "30px",
       },
     }
   },
@@ -338,8 +332,8 @@ export default {
         ...this.upper.styles,
       }
       if (styleLabel.value >= 85) {
-        styleLabel.styles.bottom = ''
-        styleLabel.styles.top = (100 - this.percent(styleLabel.value)) + '%'
+        styleLabel.styles.bottom = ""
+        styleLabel.styles.top = 100 - this.percent(styleLabel.value) + "%"
       }
       //console.log(styleLabel);
       return styleLabel

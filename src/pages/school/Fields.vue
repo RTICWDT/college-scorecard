@@ -1,28 +1,40 @@
 <template>
   <v-main>
     <div class="school-heading">
-      <v-container class="">
+      <div class="white">
+        <v-container>
+          <v-row class=" meta-nv">
+            <v-col>
+              <v-btn
+                text
+                small
+                id="referrer-link"
+                class="link-more"
+                :href="this.$url(referrerLink)"
+                >&laquo; Back</v-btn
+              >
+            </v-col>
+            <v-col class="text-right">
+              <share
+                small
+                text
+                color=""
+                label="Share these Fields of Study"
+                :url="shareLink"
+                show-copy
+                :hide="['email']"
+              />
+              <v-btn :href="$url(schoolLink)" text small
+                >School Profile &raquo;</v-btn
+              >
+            </v-col>
+          </v-row></v-container
+        >
+      </div>
+      <v-container class="mt-10">
         <v-row>
           <v-col class="school-lef mb-n10">
             <div class="show-loaded" id="school">
-              <v-row class="mb-8">
-                <v-col>
-                  <v-btn
-                    text
-                    color="white"
-                    id="referrer-link"
-                    class="link-more"
-                    :href="this.$url(referrerLink)"
-                    >&laquo; Back to [Search]</v-btn
-                  >
-                </v-col>
-                <v-col class="text-right">
-                  <v-btn :href="$url(schoolLink)" text color="white"
-                    >School Profile &raquo;</v-btn
-                  >
-                </v-col>
-              </v-row>
-
               <!-- School Header Info -->
               <v-row>
                 <v-col cols="12" md="6" class="white--text">
