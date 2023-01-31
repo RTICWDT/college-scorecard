@@ -772,6 +772,36 @@ export default {
                 title: "bachelor's Degree",
                 filterValue: 3,
                 items:[]
+            },
+            {
+                key: 'postbaccalaureate',
+                title: "post-baccalaureate Certificate",
+                filterValue: 4,
+                items:[]
+            },
+            {
+                key: 'master',
+                title: "master's Degree",
+                filterValue: 5,
+                items:[]
+            },
+            {
+                key: 'doctor',
+                title: "doctoral Degree",
+                filterValue: 6,
+                items:[]
+            },
+            {
+                key: 'firstprofessional',
+                title: "first Professional Degree",
+                filterValue: 7,
+                items:[]
+            },
+            {
+                key: 'graduatecertificate',
+                title: "graduate/Professional Certificate",
+                filterValue: 8,
+                items:[]
             }
         ]
 
