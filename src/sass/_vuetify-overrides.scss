@@ -41,8 +41,11 @@ html {
   body,
   p {
     font-family: $base-font-family !important;
+    max-width: 800px;
   }
-
+  li {
+    max-width: 800px;
+  }
   a {
     color: $darker-green;
   }
