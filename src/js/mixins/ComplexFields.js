@@ -10,6 +10,7 @@ export default {
             return fields;
         },
         id() {
+            console.log(this.school)
             if (!this.school) return null;
             return _.get(this.school, this.fields['ID']);
         },
@@ -25,6 +26,10 @@ export default {
             if (!this.school) return null;
             return _.get(this.school, this.fields['STATE'], 'N/A')
         },
+        zip() {
+            if (!this.school) return null;
+            return _.get(this.school, this.fields['ZIP_CODE'], 'N/A');
+        },        
         schoolUrlDisplay() {
             if (!this.school) return null;
             return _.get(this.school, this.fields['SCHOOL_URL'], 'ed.gov')

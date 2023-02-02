@@ -17,7 +17,7 @@
       color="fos-search-color"
       prepend-inner-icon="fas fa-search"
       aria-label="Field of Study Search"
-      :disabled="disabled"
+
       :dense="dense"
     >
       <template v-slot:label>
@@ -112,9 +112,9 @@ export default {
   methods: {
     handleFieldOfStudySelect(selectedItem) {
       // Clear Input Field
-      this.$nextTick(() => {
+      /*this.$nextTick(() => {
         this.selected = []
-      })
+      })*/
 
       if (
         typeof selectedItem === "undefined" ||

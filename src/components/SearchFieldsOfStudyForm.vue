@@ -455,7 +455,7 @@ export default {
       return this.location.latLon ? "primary" : ""
     },
     cipSelectionLimitReached() {
-      if (this.input.cip4.length >= 5) {
+      if (this.input.cip4.length >= 1) {
         return true
       }
 

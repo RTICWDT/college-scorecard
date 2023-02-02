@@ -96,20 +96,21 @@
                   name="fos-search"
                   :disabled="cipSelectionLimitReached"
                   :dense="true"
+                  :rules="[utility.rules.required]"
                 >
                 </field-of-study-search>
 
                 <p
-                  v-if="cipSelectionLimitReached"
+                  v-if="cipSelectionLimitReached && 0"
                   class="mb-0 mt-2 warning-orange text-center"
                 >
-                  Limit of 5 reached
+                  You may only select one Field of Study
                 </p>
 
                 <div
                   id="fos-chip-container"
                   class="mt-2"
-                  v-if="utility.cip4Cache.length > 0"
+                  v-if="utility.cip4Cache.length > 0  && 0"
                 >
                   <field-of-study-detail-chip
                     v-for="fieldOfStudy in utility.cip4Cache"
@@ -133,6 +134,7 @@
                   outlined
                   hide-details
                   placeholder="Select one"
+                  :rules="[utility.rules.required]"
                 >
                 </v-select>
               </div>
@@ -432,7 +434,7 @@
                         class="d-flex align-stretch"
                       >
                         <fos-result-card
-                          :school="school"
+                          :fos="school"
                           :selected-fields-of-study="compareFieldsOfStudy"
                         />
                       </v-col>
@@ -527,7 +529,7 @@ export default {
     specializedMission: Object,
     defaultSort: {
       type: String,
-      default: "threshold_earnings:desc",
+      default: "latest.programs.cip_4_digit.earnings.4_yr.overall.median_earnings:desc",
     },
     isLoading: Boolean,
     compareSchools: Array,
@@ -562,12 +564,12 @@ export default {
       },
       showCompare: false,
       sorts: [
-        { type: "Name", field: "name:asc" },
-        { type: "Annual Cost", field: "avg_net_price:asc" },
-        { type: "Graduation Rate", field: "completion_rate:desc" },
+        { type: "School Name", field: "name:asc" },
+        { type: "Earnings", field: "latest.programs.cip_4_digit.earnings.4_yr.overall.median_earnings:asc" },
+        { type: "Debt", field: "latest.programs.cip_4_digit.debt.staff_grad_plus.all.all_inst.median:desc" },
         {
-          type: "% Earning More Than a High School Grad",
-          field: "threshold_earnings:desc",
+          type: "Graduates",
+          field: "latest.programs.cip_4_digit.counts.ipeds_awards1:desc",
         },
       ],
       shareUrl: null,
@@ -756,7 +758,7 @@ export default {
       }
     },
     cipSelectionLimitReached() {
-      if (this.input.cip4.length >= 5) {
+      if (this.input.cip4.length >= 1) {
         return true
       }
 
@@ -821,9 +823,9 @@ export default {
 
       this.addURLToStorage(qs)
 
-      let request = apiGet("/schools", query)
+      let request = apiGet("/fos", query)
         .then((response) => {
-          //console.log("loaded schools:", response.data)
+          console.log("loaded fos:", response.data)
 
           this.results.schools = response.data.results
           this.results.meta = response.data.metadata
@@ -851,7 +853,7 @@ export default {
       // Generic API Query Method that returns API results
       let query = this.prepareParams(params)
 
-      return apiGet("/schools", query)
+      return apiGet("/fos", query)
     },
     showError(error) {
       // TODO: Loop through multiple error messages if needed.
