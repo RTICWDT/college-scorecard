@@ -357,7 +357,7 @@
                             :label-font-size="24"
                             :labels="true"
                             class="pt-3"
-                            style="height:140px"
+                            style="height:100px"
                           ></horizontal-bar-median>
                           <div class="data-na" v-else>Data Not Available</div>
                         </div>
@@ -461,7 +461,7 @@
                             :label-font-size="24"
                             :labels="true"
                             class="pt-3"
-                            style="height:140px"
+                            style="height:100px"
                           ></horizontal-bar-median>
                           <div class="data-na" v-else>Data Not Available</div>
                         </div>
@@ -856,7 +856,6 @@
                                       show: true,
                                     }"
                                     color="#00365e"
-                                    :height="500"
                                     :y-bar-thickness="50"
                                     :label-font-size="24"
                                     :labels="true"
