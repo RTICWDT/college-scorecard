@@ -75,24 +75,6 @@
                     </div>
 
                     <div v-if="toggleCustomSearch">
-                      <v-expansion-panels
-                        accordion
-                        multiple
-                        style="border-radius: 0"
-                        v-model="panels"
-                      >
-                        <v-expansion-panel>
-                          <v-expansion-panel-header
-                            >Location</v-expansion-panel-header
-                          >
-                          <v-expansion-panel-content>
-                            <location-institution-search
-                              @search-query=""
-                              :horizontal="false"
-                            />
-                          </v-expansion-panel-content>
-                        </v-expansion-panel>
-                      </v-expansion-panels>
                       <search-form @search-query="directToSearch" />
                     </div>
                   </v-card>
@@ -490,7 +472,6 @@ import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 import FieldOfStudySearch from "~/components/FieldOfStudySearch.vue"
 import CompareDrawer from "~/components/CompareDrawer.vue"
 import CompareHeader from "~/components/CompareHeader.vue"
-import LocationInstitutionSearch from "~/components/LocationInstitutionSearch.vue"
 export default {
   mixins: [AnalyticsEvents],
   components: {
@@ -500,7 +481,6 @@ export default {
     "field-of-study-search": FieldOfStudySearch,
     "compare-drawer": CompareDrawer,
     "compare-header": CompareHeader,
-    LocationInstitutionSearch,
   },
   data() {
     return {

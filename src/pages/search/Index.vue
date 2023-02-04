@@ -89,6 +89,7 @@
                 auto-submit
                 display-all-filters
                 @search-query="handleInstitutionSearch"
+                :hideLocation="true"
               />
             </v-navigation-drawer> </v-col
           ><v-col :cols="showSidebar ? 9 : 12" xl="10" class="pa-10">
