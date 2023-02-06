@@ -2107,6 +2107,7 @@
                       <div class="pa-4">
                       <h2 class="mb-3">
                         Student to Faculty Ratio
+                        <tooltip definition="stu-fac" />
                       </h2>
                       <h4 class="mb-2 sub-title">
                         The ratio of full-time students to full-time instructional faculty.

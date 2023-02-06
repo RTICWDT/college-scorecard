@@ -71,7 +71,7 @@ export const fields = {
   MEDIAN_EARNINGS:      'latest.earnings.10_yrs_after_entry.median',
 
   EARNINGS_GT_25K:      'latest.earnings.6_yrs_after_entry.percent_greater_than_25000',
-  EARNINGS_GT_HS:      'latest.earnings.6_yrs_after_entry.gt_threshold',
+  EARNINGS_GT_HS:      'latest.earnings.6_yrs_after_entry.gt_threshold_suppressed',
 
   PROGRAM_PERCENTAGE:   'latest.academics.program_percentage',
   PROGRAM_OFFERED:      'latest.academics.program',
