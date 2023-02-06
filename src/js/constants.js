@@ -71,7 +71,7 @@ export const fields = {
   MEDIAN_EARNINGS:      'latest.earnings.10_yrs_after_entry.median',
 
   EARNINGS_GT_25K:      'latest.earnings.6_yrs_after_entry.percent_greater_than_25000',
-  EARNINGS_GT_HS:      'latest.earnings.6_yrs_after_entry.gt_threshold_suppressed',
+  EARNINGS_GT_HS:      'latest.earnings.6_yrs_after_entry.gt_threshold',
 
   PROGRAM_PERCENTAGE:   'latest.academics.program_percentage',
   PROGRAM_OFFERED:      'latest.academics.program',
@@ -80,7 +80,7 @@ export const fields = {
   PART_TIME_SHARE:      'latest.student.part_time_share',
   FEMALE_SHARE:         'latest.student.demographics.female_share',
   RACE_ETHNICITY:       'latest.student.demographics.race_ethnicity',
-  RACE_ETHNICITY_STAFF:       'latest.student.demographics.race_ethnicity',  
+  RACE_ETHNICITY_STAFF:       'latest.student.demographics.faculty.race_ethnicity',  
   AGE_ENTRY:            'latest.student.demographics.age_entry',
 
   TEST_REQUIREMENTS:    'latest.admissions.test_requirements',
