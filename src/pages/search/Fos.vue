@@ -627,6 +627,8 @@ export default {
 
     this.urlParsedParams = this.parseURLParams()
 
+    this.input = this.input.urlParsedParams
+
     // Add sort to state if it exists
     this.input.sort = this.urlParsedParams.sort
       ? this.urlParsedParams.sort
@@ -636,6 +638,8 @@ export default {
     this.input.page = this.urlParsedParams.page
       ? Number(this.urlParsedParams.page) + 1
       : 1
+
+    this.input.cip4 = this.urlParsedParams.cip4
 
     // Set Toggle Value - Default to institutions
     if (
@@ -949,22 +953,7 @@ export default {
     },
     handleFieldOfStudySearch(params) {
       // TODO - refine fields
-      let returnFields = [
-        fields.ID,
-        // basic display fields
-        fields.NAME,
-        fields.CITY,
-        fields.STATE,
-        fields.SIZE,
-        // Degree size
-        fields.PREDOMINANT_DEGREE,
-        // to get "public" or "private"
-        fields.OWNERSHIP,
-        // under investigation flag
-        fields.UNDER_INVESTIGATION,
-        fields.LOCALE,
-        fields.FIELD_OF_STUDY,
-      ].join(",")
+      let returnFields = ""
 
       // Cache params to power other content
       this.utility.previousParams = params
@@ -984,17 +973,6 @@ export default {
       this.debounceSearchUpdate(this.urlParsedParams)
       this.$root.$emit("reset-dol-flag")
     },
-    handleSchoolNameSelected(school) {
-      if (typeof school == "string") {
-        // this.input.name = school;
-        this.input.search = school
-        // this.input.id = null
-      } else {
-        // this.input.name = school['school.name'];
-        this.input.search = school["school.name"]
-        // this.input.id = school.id
-      }
-    },
     // Reset values for sub objects to default
     handleLocationChange(e) {
       // TODO - Check to see if values need to be reset.
@@ -1011,12 +989,22 @@ export default {
       return this.location.latLon ? "primary" : ""
     },
     handleFieldOfStudySelected(fieldOfStudy) {
-      this.input.cip4 = _.union(this.input.cip4, [fieldOfStudy.cip4])
+
+      /*this.input.cip4 = _.union(this.input.cip4, [fieldOfStudy.cip4])
       this.utility.cip4Cache = _.unionBy(
         this.utility.cip4Cache,
         [fieldOfStudy],
         "cip4"
-      )
+      )*/
+      
+
+      
+      this.urlParsedParams = this.parseURLParams()
+      this.input.cip4 = fieldOfStudy.cip4
+      this.utility.cip4Cache = fieldOfStudy.cip4
+      this.urlParsedParams.cip4 = this.input.cip4
+      this.debounceSearchUpdate(this.urlParsedParams)
+      //this.$root.$emit("reset-dol-flag")
     },
     handleFieldOfStudyChipClose(fieldOfStudy) {
       //console.log(fieldOfStudy)

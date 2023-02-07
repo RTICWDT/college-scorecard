@@ -98,6 +98,22 @@
                         <v-icon>mdi-menu-right</v-icon>
                       </v-btn>
                     </div>
+              <div class="mx-3" id="location-label">Degree Type:</div>
+              <!-- Credential Type -->
+              <div class="">
+                <v-select
+                  v-model="input.cip4_degree"
+                  :items="degreeTypes"
+                  item-text="label"
+                  item-value="value"
+                  multiple
+                  dense
+                  outlined
+                  hide-details
+                  placeholder="Select one"
+                >
+                </v-select>
+              </div>                    
                   </v-card>
                 </v-tab-item>
 
@@ -470,6 +486,7 @@ import SearchForm from "~/components/SearchForm.vue"
 import NameAutocomplete from "~/components/NameAutocomplete.vue"
 import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 import FieldOfStudySearch from "~/components/FieldOfStudySearch.vue"
+import FieldOfStudySearchNameAndDegree from "~/components/FieldOfStudySearchNameAndDegree.vue"
 import CompareDrawer from "~/components/CompareDrawer.vue"
 import CompareHeader from "~/components/CompareHeader.vue"
 
@@ -480,6 +497,7 @@ export default {
     "search-form": SearchForm,
     "name-autocomplete": NameAutocomplete,
     "field-of-study-search": FieldOfStudySearch,
+    "field-of-study-search-name-and-degree": FieldOfStudySearchNameAndDegree,
     "compare-drawer": CompareDrawer,
     "compare-header": CompareHeader,
   },
