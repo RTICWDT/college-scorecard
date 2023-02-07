@@ -74,7 +74,7 @@
 
         <!-- Field of Study Info-->
         <v-col
-          id="result-fos-card-credential-section"
+          id="result-fos-card-earnings-section"
           class="py-md-0 pl-md-6"
           cols="12"
           md="9"

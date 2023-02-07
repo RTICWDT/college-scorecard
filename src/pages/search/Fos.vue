@@ -627,7 +627,7 @@ export default {
 
     this.urlParsedParams = this.parseURLParams()
 
-    this.input = this.input.urlParsedParams
+   // this.input = this.input.urlParsedParams
 
     // Add sort to state if it exists
     this.input.sort = this.urlParsedParams.sort
