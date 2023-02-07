@@ -146,6 +146,9 @@ export const fields = {
   FOS_EARNINGS_FED: 'earnings.highest.3_yr.overall_median_earnings',
   FOS_EARNINGS_PELL: 'earnings.highest.3_yr.pell_median_earnings',
 
+  FOS_EARNINGS_FED_4YR: 'earnings.4_yr.overall_median_earnings',
+  FOS_EARNINGS_PELL_4YR: 'earnings.4_yr.pell_median_earnings',
+
   // FOS_DEBT_MEDIAN: 'debt.test.federal.median_total_at',
   FOS_DEBT_MEDIAN: 'debt.staff_grad_plus.all.eval_inst.median',
   FOS_DEBT_MEDIAN_PRIOR: 'debt.staff_grad_plus.all.all_inst.median',

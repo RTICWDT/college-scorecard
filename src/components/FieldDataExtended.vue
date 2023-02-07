@@ -9,9 +9,9 @@
               <tooltip definition="fos-median-earnings" :isBranch="isBranch" />
             </h3>
             <div>
-              <div v-if="_.get(fos, fields.FOS_EARNINGS_FED)">
+              <div v-if="_.get(fos, fields.FOS_EARNINGS_FED_4YR)">
                 <span class="display-2 navy-text font-weight-bold ">{{
-                  _.get(fos, fields.FOS_EARNINGS_FED) | numeral("$0,0")
+                  _.get(fos, fields.FOS_EARNINGS_FED_4YR) | numeral("$0,0")
                 }}</span>
               </div>
 
@@ -70,9 +70,9 @@
               <tooltip definition="fos-monthly-earnings" :isBranch="isBranch" />
             </h3>
             <div>
-              <div v-if="_.get(fos, fields.FOS_EARNINGS_FED)">
+              <div v-if="_.get(fos, fields.FOS_EARNINGS_FED_4YR)">
                 <span class="display-2 navy-text font-weight-bold">{{
-                  (_.get(fos, fields.FOS_EARNINGS_FED) / 12) | numeral("$0,0")
+                  (_.get(fos, fields.FOS_EARNINGS_FED_4YR) / 12) | numeral("$0,0")
                 }}</span>
               </div>
 

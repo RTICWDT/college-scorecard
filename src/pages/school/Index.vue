@@ -2107,6 +2107,7 @@
                       <div class="pa-4">
                       <h2 class="mb-3">
                         Student to Faculty Ratio
+                        <tooltip definition="stu-fac" />
                       </h2>
                       <h4 class="mb-2 sub-title">
                         The ratio of full-time students to full-time instructional faculty.
@@ -2724,7 +2725,7 @@ export default {
           )
           fos[q].highest_earnings = _.get(
             fos[q],
-            this.fields["FOS_EARNINGS_FED"]
+            this.fields["FOS_EARNINGS_FED_4YR"]
           )
           fos[q].lowest_debt = _.get(fos[q], this.fields["FOS_DEBT_MEDIAN"])
           fos[q].hoist = fos[q][self.field_sort]
