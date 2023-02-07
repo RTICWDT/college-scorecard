@@ -98,22 +98,6 @@
                         <v-icon>mdi-menu-right</v-icon>
                       </v-btn>
                     </div>
-              <div class="mx-3" id="location-label">Degree Type:</div>
-              <!-- Credential Type -->
-              <div class="">
-                <v-select
-                  v-model="input.cip4_degree"
-                  :items="degreeTypes"
-                  item-text="label"
-                  item-value="value"
-                  multiple
-                  dense
-                  outlined
-                  hide-details
-                  placeholder="Select one"
-                >
-                </v-select>
-              </div>                    
                   </v-card>
                 </v-tab-item>
 
