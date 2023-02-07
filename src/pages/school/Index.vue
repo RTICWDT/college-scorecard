@@ -2725,7 +2725,7 @@ export default {
           )
           fos[q].highest_earnings = _.get(
             fos[q],
-            this.fields["FOS_EARNINGS_FED"]
+            this.fields["FOS_EARNINGS_FED_4YR"]
           )
           fos[q].lowest_debt = _.get(fos[q], this.fields["FOS_DEBT_MEDIAN"])
           fos[q].hoist = fos[q][self.field_sort]
