@@ -169,7 +169,17 @@
           ><v-col :cols="showSidebar ? 9 : 12" class="pa-10">
             <div v-if="!isLoading">
                     <h2>{{ selectedFoSLabel }}</h2>
-                  </div>
+                    <div v-if="showDescription">
+                      A program that prepares individuals to practice the profession of accounting and to perform related 
+                      business functions. Includes instruction in accounting principles and theory, financial accounting, 
+                      managerial accounting, cost accounting, budget control, tax accounting, legal aspects of accounting, 
+                      auditing, reporting procedures, statement analysis, planning and consulting, business information systems, 
+                      accounting research methods, professional standards and ethics, and applications to specific for-profit, 
+                      public, and non-profit organizations.
+                    </div>
+                    <a v-if="!showDescription">Show Description</a>
+                    <a v-else>Hide Description</a>
+              </div>
             <div id="search-result-container">
               <div class="search-result-container">
                 <!-- Search Result Info and controls -->
@@ -429,11 +439,9 @@
 
                     <v-card class="mx-auto pa-0 " style="width:100%" outlined>
                         <v-card-text class="pa-md-6">
-                          <v-row>
-
-                              <v-row class="mb-2">
+                              <v-row class="mb-2 py-4 ">
                               <v-col
-                              class="py-md-0"
+                              class="py-md-0 "
                               cols="12"
                               md="3">
                                 School 
@@ -465,8 +473,7 @@
                               cols="12"
                               md="1">
                                 Compare 
-                            </v-col>                                                                                       
-                            </v-row>                      
+                            </v-col>                                                                                                           
                           </v-row>
                           <!-- Fields of Study Results -->
                           <v-row>

@@ -65,7 +65,7 @@
 
 <template>
         <!--School Info-->
-        <v-col cols="12" md="3" class="py-0">
+        <v-col cols="12" md="3" class="pt-0 pb-8">
           <p class="mt-1 mb-2" v-if="underInvestigation == 1">
             <v-card color="error" class="px-2 py-1" flat>
               <strong class="white--text">Under ED Monitoring</strong>

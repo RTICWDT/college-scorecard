@@ -78,7 +78,7 @@
           md="3"
         >
         <v-row>
-        <span>Median Earnings</span>
+        <span class="text-uppercase  font-weight-bold">Median Earnings</span>
         <tooltip
             definition="fos-median-earnings"
             :isBranch="isBranch"
@@ -101,15 +101,16 @@
               :type="'currency'"
               :labels="false"
               :yBarThickness="10"
-            ></horizontal-bar>       
+            ></horizontal-bar>    
+            <span>0k</span><span class="float-right">100k</span>   
           </div>       
             </div>
             <div v-else class="mini-data-na text-center">
               Data Not Available
             </div>
         </v-row>
-        <v-row>
-          <span>Monthly Earnings</span>
+        <v-row class="pt-4">
+          <span class="text-uppercase font-weight-bold">Monthly Earnings</span>
         <tooltip
             definition="fos-monthly-earnings"
             :isBranch="isBranch"
@@ -134,7 +135,7 @@
           md="3"
         >
         <v-row>
-        <span>Median Debt</span>
+        <span class="text-uppercase font-weight-bold">Median Debt</span>
         <tooltip
             definition="fos-median-debt"
             :isBranch="isBranch"
@@ -157,15 +158,16 @@
               :type="'currency'"
               :labels="false"
               :yBarThickness="10"
-            ></horizontal-bar>       
+            ></horizontal-bar> 
+            <span>0k</span><span class="float-right">100k</span>
           </div>               
             </div>
             <div v-else class="mini-data-na text-center">
               Data Not Available
             </div>          
           </v-row>          
-        <v-row>
-          <span>Monthly Debt</span>
+        <v-row  class="pt-4">
+          <span class="text-uppercase font-weight-bold">Monthly Loan Payment</span>
         <tooltip
             definition="fos-monthly-debt-payment"
             :isBranch="isBranch"
