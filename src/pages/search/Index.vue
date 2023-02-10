@@ -25,7 +25,7 @@
       <div class="bg-blue">
         <v-container fluid>
           <v-row
-            ><v-col class="pa-10">
+            ><v-col class="pa-sm-10 pa-5">
               <h1>Search Schools</h1>
               <p>
                 Search schools that might be a good fit, and add to your compare
@@ -42,8 +42,8 @@
       >
         <v-row>
           <v-col>
-            <v-card flat class="white d-flex align-center">
-              <div class="mx-3">School:</div>
+            <v-card flat class="white d-sm-flex align-center">
+              <div class="mx-1 mx-sm-3">School:</div>
               <name-autocomplete
                 @school-name-selected="handleSchoolNameSelected"
                 :initial_school="input.search"
@@ -51,7 +51,9 @@
                 :dense="true"
               />
 
-              <div class="mx-3" id="location-label">Location:</div>
+              <div class="mx-1 mx-sm-3 mt-3 my-sm-0" id="location-label">
+                Location:
+              </div>
               <location-institution-search
                 @search-query="handleLocationSelection"
                 :initial_state="input.state"
@@ -59,7 +61,10 @@
                 :initial_distance="input.distance"
                 :horizontal="true"
               />
-              <v-btn class="mx-3" @click="showSidebar = !showSidebar">
+              <v-btn
+                class="ml-sm-auto mx-sm-3 my-3 my-sm-0 float-right float-sm-none"
+                @click="showSidebar = !showSidebar"
+              >
                 <v-icon small class="pr-1">fas fa-sliders-h</v-icon>
                 {{ showSidebar ? "Hide" : "Show" }} Filters
               </v-btn>
@@ -92,7 +97,7 @@
                 :hideLocation="true"
               />
             </v-navigation-drawer> </v-col
-          ><v-col :cols="showSidebar ? 9 : 12" xl="10" class="pa-10">
+          ><v-col :cols="showSidebar ? 9 : 12" xl="10" class="pa-6 pa-sm-8`">
             <div id="search-result-container">
               <div class="search-result-container">
                 <!-- Search Result Info and controls -->
@@ -105,26 +110,13 @@
                       <div id="search-result-info-count" class>
                         <p class="title mb-0">
                           {{ results.meta.total | separator }} Results
-                          <v-btn
-                            color="primary"
-                            text-color="white"
-                            @click="clearSearchForm"
-                            x-small
-                            fab
-                            class="d-inline d-sm-none mr-2"
-                          >
-                            <span>
-                              <v-icon class="">mdi-close-circle</v-icon>
-                              <span class="sr-only">Clear Search</span>
-                            </span>
-                          </v-btn>
 
                           <v-btn
                             id="search-button-clear"
                             @click="clearSearchForm"
                             small
                             outlined
-                            class="d-none d-sm-inline mr-1"
+                            class=" d-sm-inline mr-1"
                           >
                             <span>
                               <v-icon small class="mr-1"
@@ -141,7 +133,7 @@
                                 small
                                 v-on="on"
                                 outlined
-                                class="d-none d-sm-inline mr-1"
+                                class="mr-1"
                               >
                                 <v-icon small class="mx-1">fas fa-sort</v-icon>
                                 Sort
@@ -166,37 +158,7 @@
                               </v-list-item-group>
                             </v-list>
                           </v-menu>
-                          <v-menu offset-y>
-                            <template v-slot:activator="{ on }">
-                              <v-btn
-                                color="primary"
-                                x-small
-                                v-on="on"
-                                fab
-                                class="d-inline d-sm-none"
-                              >
-                                <v-icon small class="">fas fa-sort</v-icon>
-                                <span class="sr-only">Sort</span>
-                              </v-btn>
-                            </template>
-                            <v-list min-width="200">
-                              <v-list-item-group
-                                v-model="input.sort"
-                                color="primary"
-                              >
-                                <v-list-item
-                                  v-for="(item, index) in sorts"
-                                  :key="item.field"
-                                  @click="resort(item.field)"
-                                  :value="item.field"
-                                >
-                                  <v-list-item-title>{{
-                                    item.type
-                                  }}</v-list-item-title>
-                                </v-list-item>
-                              </v-list-item-group>
-                            </v-list>
-                          </v-menu>
+
                           <share
                             :url="encodeURI(shareUrl)"
                             label="Share"
@@ -214,13 +176,13 @@
                       class="py-1 px-1"
                       v-show="!isLoading && results.schools.length > 0"
                     >
-                      <div class="text-md-right justify-end">
+                      <div class="d-block text-right">
                         <v-pagination
                           v-model="displayPage"
                           :length="totalPages"
                           :total-visible="7"
                           @input="handlePaginationInput"
-                          class="pr-0 mr-0"
+                          class="pr-0 mr-0 justify-end text-right"
                         ></v-pagination>
                       </div>
                     </v-col>
@@ -332,7 +294,7 @@
                 >
                   <v-row>
                     <v-col cols="12" class="py-3 px-3">
-                      <div class="text-right">
+                      <div class="text-left text-sm-right">
                         <v-pagination
                           v-model="displayPage"
                           :length="totalPages"
@@ -348,20 +310,6 @@
             </div>
           </v-col>
         </v-row>
-        <!-- Floating Mobile Search Button -->
-        <v-btn
-          fab
-          fixed
-          right
-          color="secondary"
-          rounded
-          @click="showSidebar = !showSidebar"
-          v-if="$vuetify.breakpoint.mdAndDown"
-          class="searchFab"
-          title="Search"
-        >
-          <v-icon>fas fa-search</v-icon>
-        </v-btn>
       </v-container>
     </v-main>
     <!--End of root -->
@@ -644,17 +592,7 @@ export default {
         this.error.message = "There was an unexpected API error."
       }
     },
-    handleCannedSearchClick(cannedSearchData) {
-      this.input = cannedSearchData
-      this.input.page = 1
-      this.searchAPI()
-    },
 
-    handleLocationSelection(params) {
-      this.input = { ...this.input, ...params }
-      this.input.page = 1
-      this.searchAPI()
-    },
     parseURLParams(url) {
       if (!url && process.isClient) {
         url = location.search.substr(1)
@@ -689,13 +627,25 @@ export default {
 
     handleInstitutionSearch(params) {
       // merge the search form in with the existing input
-      this.input = { ...this.input, ...params }
+      this.input = { ...params }
 
       // reset the page to the start
       this.input.page = 1
       this.searchAPI()
     },
 
+    handleCannedSearchClick(cannedSearchData) {
+      this.input = cannedSearchData
+      this.input.page = 1
+      this.searchAPI()
+      this.urlParsedParams = this.parseURLParams()
+    },
+
+    handleLocationSelection(params) {
+      this.input = { ...this.input, ...params }
+      this.input.page = 1
+      this.searchAPI()
+    },
     handlePaginationInput(page) {
       this.input.page = page
       this.searchAPI()

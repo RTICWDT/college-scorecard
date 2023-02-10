@@ -402,7 +402,6 @@ export default {
     "name-autocomplete": NameAutocomplete,
     "field-autocomplete": FieldAutocomplete,
     tooltip: Tooltip,
-
     LocationInstitutionSearch,
   },
 
@@ -601,7 +600,6 @@ export default {
       if (groomedInput.dolflag) {
         this.panels.push(11)
       }
-      console.log(groomedInput)
       return groomedInput
     },
     // Generate a URI string of params for forwarding to search page.
@@ -739,7 +737,6 @@ export default {
       this.utility.location = null
     },
     handleLocationSelection(params) {
-      console.log(params)
       this.input = { ...this.input, ...params }
       this.input.page = 1
     },

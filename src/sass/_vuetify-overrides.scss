@@ -14,6 +14,9 @@ html {
 
   .v-pagination {
     justify-content: flex-end;
+    @media screen and (max-width: 600px) {
+      justify-content: space-between;
+    }
     button {
       box-shadow: 0px 1px 1px #0000001a !important;
       border: 1px solid $bg-gray;

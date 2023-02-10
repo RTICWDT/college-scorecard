@@ -7,8 +7,7 @@
           v-on="on"
           :small="small"
           :text="text"
-          class="d-none d-sm-inline share"
-          outlined
+          class="share"
         >
           <v-icon x-small class="mr-2 share">fas fa-share</v-icon> {{ label }}
         </v-btn>
@@ -28,35 +27,7 @@
         </v-list-item>
       </v-list>
     </v-menu>
-    <v-menu offset-y>
-      <template v-slot:activator="{ on }">
-        <v-btn
-          :color="color"
-          v-on="on"
-          rounded
-          fab
-          :x-small="small"
-          class="d-inline d-sm-none share"
-        >
-          <v-icon x-small>fas fa-share</v-icon>
-          <span class="sr-only">Share</span>
-        </v-btn>
-      </template>
-      <v-list min-width="200">
-        <v-list-item
-          v-for="(item, index) in items"
-          :key="index"
-          @click="picked(item)"
-          role="menuitem"
-        >
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item>
 
-        <v-list-item v-if="showCopy" @click="copyURL">
-          <v-list-item-title>{{ copyText }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
     <v-dialog
       v-model="showCopyNotify"
       @close="showCopyNotify = false"

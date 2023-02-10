@@ -88,7 +88,7 @@
       <!--<p class="body-2 mt-1">{{ undergraduates | separator }} undergrads</p> -->
 
       <v-row>
-        <v-col cols="12">
+        <v-col cols="12" class="my-4 mb-1">
           <small-school-icons :school="school" :fields="fields" size="small" />
         </v-col>
       </v-row>
