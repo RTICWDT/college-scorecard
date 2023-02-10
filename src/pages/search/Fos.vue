@@ -71,6 +71,7 @@
           <v-row
             ><v-col class="pa-10">
               <h1>Search Fields of Study</h1>
+             
               <p>
                 Search and compare the fields of study offered at each college
                 by degree type.
@@ -166,11 +167,14 @@
               />
             </v-navigation-drawer> </v-col
           ><v-col :cols="showSidebar ? 9 : 12" class="pa-10">
+            <div v-if="!isLoading">
+                    <h2>{{ selectedFoSLabel }}</h2>
+                  </div>
             <div id="search-result-container">
               <div class="search-result-container">
                 <!-- Search Result Info and controls -->
                 <v-card
-                  class="mt-2 mb-4 py-4 px-4 elevation-0 pageBar"
+                  class="mt-2 mb-4 py-4 px-4 elevation-0 pageBar mb-10"
                   v-show="!isLoading"
                 >
                   <v-row class="">
@@ -372,6 +376,7 @@
                   </v-row>
                 </div>
 
+                
                 <!-- No Results/Canned Search/ -->
                 <div
                   id="search-can-query-container"
@@ -400,6 +405,7 @@
 
                 <!-- Main Search Results -->
                 <div class="results-main-alert">
+                  
                   <!-- Loading -->
                   <div class="show-loading mt-2" v-show="isLoading">
                     <v-card class="py-4 px-4 pageBar elevation-0">
@@ -417,28 +423,73 @@
                     <h1>Something went wrong:</h1>
                     <p class="error-message">{{ error.message }}</p>
                   </div>
-
+                  
                   <!-- Institution Results -->
                   <div class="search-result-cards-container" v-if="!isLoading">
-                    <!-- Institution Results -->
 
-                    <!-- Fields of Study Results -->
-                    <v-row>
-                      <v-col
-                        v-for="school in results.schools"
-                        :key="school.id"
-                        cols="12"
-                        lg="12"
-                        md="12"
-                        sm="12"
-                        class="d-flex align-stretch"
-                      >
-                        <fos-result-card
-                          :fos="school"
-                          :selected-fields-of-study="compareFieldsOfStudy"
-                        />
-                      </v-col>
-                    </v-row>
+                    <v-card class="mx-auto pa-0 " style="width:100%" outlined>
+                        <v-card-text class="pa-md-6">
+                          <v-row>
+
+                              <v-row class="mb-2">
+                              <v-col
+                              class="py-md-0"
+                              cols="12"
+                              md="3">
+                                School 
+                                <i class="fa fa-sort" aria-hidden="true"></i>
+                            </v-col>
+                            <v-col
+                              class="py-md-0"
+                              cols="12"
+                              md="3">
+                                Earnings 
+                                <i class="fa fa-sort" aria-hidden="true"></i>
+                            </v-col>
+                            <v-col
+                              class="py-md-0 "
+                              cols="12"
+                              md="3">
+                                Debt 
+                                <i class="fa fa-sort" aria-hidden="true"></i>
+                            </v-col>
+                            <v-col
+                              class="py-md-0"
+                              cols="12"
+                              md="2">
+                                Graduates 
+                                <i class="fa fa-sort" aria-hidden="true"></i>
+                            </v-col> 
+                            <v-col
+                              class="py-md-0 pl-md-6"
+                              cols="12"
+                              md="1">
+                                Compare 
+                            </v-col>                                                                                       
+                            </v-row>                      
+                          </v-row>
+                          <!-- Fields of Study Results -->
+                          <v-row>
+                            <v-col
+                              v-for="school in results.schools"
+                              :key="school.id"
+                              cols="12"
+                              lg="12"
+                              md="12"
+                              sm="12"
+                              class="d-flex align-stretch"
+                            >
+
+
+                              <fos-result-card
+                                :fos="school"
+                                :selected-fields-of-study="compareFieldsOfStudy"
+                              />
+
+                            </v-col>
+                          </v-row>
+                        </v-card-text>
+                        </v-card>
                   </div>
 
                   <!-- Field of Study Results -->
@@ -489,6 +540,23 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+@import "~/sass/_variables";
+
+.fa-stack {
+  text-align: center;
+}
+
+.fa-stack .fa-caret-down {
+  position: absolute;
+  bottom: 0;
+}
+
+.fa-stack .fa-caret-up {
+  position: absolute;
+  top: 0;
+}
+</style>
 <script>
 import Share from "~/components/Share.vue"
 import URLHistory from "~/js/mixins/URLHistory.js"
@@ -702,6 +770,12 @@ export default {
     },
   },
   computed: {
+    selectedFoSLabel() {
+      if (this.input.cip4)
+        return _.find(this.site.data.cip_4_digit, ["label", this.input.cip4.substr(0, 2) + '.' + this.input.cip4.substr(2)])['value'].replace('.','')
+      else
+        return ""
+    },
     totalPages() {
       if (this.results.meta.per_page && this.results.meta.total) {
         let totalPages = this.results.meta.total / this.results.meta.per_page

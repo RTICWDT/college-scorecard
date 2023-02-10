@@ -115,4 +115,4 @@ import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 export default {
   mixins: [AnalyticsEvents],
 }
-</scrip>
+</script>

@@ -20,6 +20,10 @@ export default {
       type: String,
       default: "#333333",
     },
+    bgcolor: {
+      type: String,
+      default: "#EAEAEA"
+    },
     labels: {
       type: Boolean,
       default: false,
@@ -149,7 +153,7 @@ export default {
           },
           {
             data: [this.max],
-            backgroundColor: "#EAEAEA",
+            backgroundColor: this.bgcolor,
             barThickness: this.yBarThickness,
           },
         ],

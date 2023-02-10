@@ -64,32 +64,159 @@
 </style>
 
 <template>
-  <v-card class="mx-auto pa-0 elevation-4" style="width:100%" outlined>
-    <v-card-text class="pa-md-6">
+
+    
       <v-row>
         <!--School Info-->
         <fos-school-result
           :school="this.fos['institution']"
         />
-
-        <!-- Field of Study Info-->
         <v-col
           id="result-fos-card-earnings-section"
           class="py-md-0 pl-md-6"
           cols="12"
-          md="9"
+          md="3"
+        >
+        <v-row>
+        <span>Median Earnings</span>
+        <tooltip
+            definition="fos-median-earnings"
+            :isBranch="isBranch"
+            class="ml-1"
+          />
+        </v-row>
+          <v-row>
+            <div v-if="_.get(fos, fields.FOS_EARNINGS_FED_4YR)">
+              <span class="display-2 navy-text font-weight-bold ">{{
+                _.get(fos, fields.FOS_EARNINGS_FED_4YR) | numeral("$0,0")
+              }}</span>
+              <div style="max-width:160px;height:30px;">
+            <horizontal-bar
+              :value="_.get(fos, fields.FOS_EARNINGS_FED_4YR)"
+              :min="0"
+              :max="100000"
+              :color="'#1874DC'"
+              :bgcolor="'#DFE6F0'"
+              :height="25"
+              :type="'currency'"
+              :labels="false"
+              :yBarThickness="10"
+            ></horizontal-bar>       
+          </div>       
+            </div>
+            <div v-else class="mini-data-na text-center">
+              Data Not Available
+            </div>
+        </v-row>
+        <v-row>
+          <span>Monthly Earnings</span>
+        <tooltip
+            definition="fos-monthly-earnings"
+            :isBranch="isBranch"
+            class="ml-1"
+          /> 
+        </v-row>
+        <v-row>
+          <div v-if="_.get(fos, fields.FOS_EARNINGS_FED_4YR)">
+              <span class="display-2 navy-text font-weight-bold ">{{
+                _.get(fos, fields.FOS_EARNINGS_FED_4YR / 12) | numeral("$0,0")
+              }}</span>
+            </div>
+            <div v-else class="mini-data-na text-center">
+              Data Not Available
+            </div>          
+          </v-row>       
+        </v-col>
+        <v-col
+          id="result-fos-card-debt-section"
+          class="py-md-0 pl-md-6"
+          cols="12"
+          md="3"
+        >
+        <v-row>
+        <span>Median Debt</span>
+        <tooltip
+            definition="fos-median-debt"
+            :isBranch="isBranch"
+            class="ml-1"
+          />
+        </v-row>
+        <v-row>
+          <div v-if="_.get(fos, fields.FOS_DEBT_MEDIAN)">
+              <span class="display-2 navy-text font-weight-bold ">{{
+                _.get(fos, fields.FOS_DEBT_MEDIAN) | numeral("$0,0")
+              }}</span>
+              <div style="max-width:160px;height:30px;">
+            <horizontal-bar
+              :value="_.get(fos, fields.FOS_DEBT_MEDIAN)"
+              :min="0"
+              :max="100000"
+              :color="'#1874DC'"
+              :bgcolor="'#DFE6F0'"
+              :height="25"
+              :type="'currency'"
+              :labels="false"
+              :yBarThickness="10"
+            ></horizontal-bar>       
+          </div>               
+            </div>
+            <div v-else class="mini-data-na text-center">
+              Data Not Available
+            </div>          
+          </v-row>          
+        <v-row>
+          <span>Monthly Debt</span>
+        <tooltip
+            definition="fos-monthly-debt-payment"
+            :isBranch="isBranch"
+            class="ml-1"
+          /> 
+          </v-row> 
+          <v-row>
+          <div v-if="_.get(fos, fields.FOS_DEBT_MONTHLY)">
+              <span class="display-2 navy-text font-weight-bold ">{{
+                _.get(fos, fields.FOS_DEBT_MONTHLY) | numeral("$0,0")
+              }}</span>
+            </div>
+            <div v-else class="mini-data-na text-center">
+              Data Not Available
+            </div>          
+          </v-row>             
+        </v-col>    
+          <v-col id="result-fos-card-count-section"
+          class="py-md-0 pl-md-6"
+          cols="12"
+          md="1"
+        >
+        <v-row>
+          <div v-if="_.get(fos, fields.FOS_GRAD_COUNT)" class="pt-7">
+              <span class="display-2 navy-text font-weight-bold">{{
+                _.get(fos, fields.FOS_GRAD_COUNT) | numeral("0,0")
+              }}</span>
+            </div>
+            <div v-else class="mini-data-na text-center">
+              Data Not Available
+            </div>          
+          </v-row> 
+        </v-col>          
+        <!-- Field of Study Info-->
+        <v-col
+          id="result-fos-card-compare-section"
+          class="py-md-0 pl-md-6"
+          cols="12"
+          md="2"
         >
           <div
             class="mb-6"
             :key="`${institution.id}-${fos.title}`"
           >
-            <span class="overline">{{ fos.title }}</span>
+            
 
               <!-- Compare on medium and above-->
               <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
-                    class="search-fos-result-compare-button d-none d-md-block"
+                    class="search-fos-result-compare-button d-none d-md-block pt-7"
                     icon
                     @click="$store.commit('toggleFieldOfStudy', fos)"
                     :color="selectedFieldOfStudyClass(fos) ===
@@ -159,8 +286,8 @@
           </div>
         </v-col>
       </v-row>
-    </v-card-text>
-  </v-card>
+    
+
 </template>
 
 <script>
@@ -169,6 +296,7 @@ import SmallSchoolIcons from "~/components/SmallSchoolIcons.vue"
 import ComplexFields from "~/js/mixins/ComplexFields.js"
 import { fieldOfStudyCompareFormat } from "~/js/commonFormats"
 import FieldOfStudySchoolResult from "~/components/FieldOfStudySchoolResult.vue"
+import HorizontalBar from "~/components/HorizontalBar.vue"
 
 export default {
   mixins: [ComplexFields],
@@ -218,7 +346,8 @@ export default {
   components: {
     tooltip: Tooltip,
     "small-school-icons": SmallSchoolIcons,
-    "fos-school-result": FieldOfStudySchoolResult
+    "fos-school-result": FieldOfStudySchoolResult,
+    "horizontal-bar": HorizontalBar
   },
   methods: {
     selectedFieldOfStudyClass(

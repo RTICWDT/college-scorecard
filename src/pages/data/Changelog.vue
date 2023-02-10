@@ -25,6 +25,56 @@
             <v-expansion-panels multiple v-model="panels">
               <v-expansion-panel>
                 <v-expansion-panel-header
+                  >February XX, 2022</v-expansion-panel-header
+                >
+                <v-expansion-panel-content>
+                  <p>
+                    On February XX, 2023, the Department updated the College Scorecard website with more recent data for metrics from 
+                    the National Student Loan Data System (NSLDS) and the Internal Revenue Service (IRS). The website was updated to 
+                    add information on graduate-level fields of study offered at colleges to the Field of Study search and to refresh 
+                    the overall design of the user interface. In addition, new data on Campus Diversity—including Race/Ethnicity for 
+                    Full-Time staff and Student to Faculty ratio—were added to the individual institution profiles. 
+                  </p>
+                  <p>
+                    Specific data updates in this release include:
+                  </p>
+                  <ul>
+                    <li>
+                      Refreshed cumulative loan debt data metrics derived from NSLDS 
+                      at the institution-level and for individual fields of study.  
+                    </li>
+                    <li>
+                      Refreshed dollar-based repayment rates data metrics derived 
+                      from NSLDS at the institution-level. 
+                    </li>
+                    <li>
+                      Added borrower-based repayment rates measured 4 years after
+                       entry into repayment (both institution-level and field of study-level data). 
+                    </li>
+                    <li>
+                      Added median earnings measured 4 years after completion 
+                      of a credential (both institution-level and field of study-level data). 
+                    </li>
+                    <li>
+                      Added undergraduate student/faculty ratio and the metrics 
+                      describing the share of staff by race/ethnicity and by gender. 
+                    </li>
+                    <li>
+                      Updated data derived from Federal Student Aid sources to
+                      more recent values for the following data metrics:
+                      <ul>
+                        <li>Currently Operating Status Flag</li>
+                        <li>Heightened Cash Monitoring Flag</li>
+                        <li>Accrediting Agency Name and Code</li>
+                        <li>Title IV Approval Date</li>
+                        <li>Federal School Code</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </v-expansion-panel-content>
+              </v-expansion-panel>              
+              <v-expansion-panel>
+                <v-expansion-panel-header
                   >September 14, 2022</v-expansion-panel-header
                 >
                 <v-expansion-panel-content>
@@ -1592,7 +1642,7 @@ export default {
   },
   methods: {
     all() {
-      this.panels = [...Array(27).keys()].map((k, i) => i)
+      this.panels = [...Array(28).keys()].map((k, i) => i)
     },
     // Reset the panel
     none() {
