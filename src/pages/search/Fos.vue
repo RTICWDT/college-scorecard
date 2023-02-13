@@ -168,7 +168,7 @@
             </v-navigation-drawer> </v-col
           ><v-col :cols="showSidebar ? 9 : 12" class="pa-10">
             <div v-if="!isLoading">
-                    <h2>{{ selectedFoSLabel }}</h2>
+                    <h2>{{ selectedFoSLabel }}</h2>                   
                     <div v-if="showDescription">
                       A program that prepares individuals to practice the profession of accounting and to perform related 
                       business functions. Includes instruction in accounting principles and theory, financial accounting, 
@@ -177,8 +177,10 @@
                       accounting research methods, professional standards and ethics, and applications to specific for-profit, 
                       public, and non-profit organizations.
                     </div>
-                    <a v-if="!showDescription">Show Description</a>
-                    <a v-else>Hide Description</a>
+                    <div class="py-8">
+                      <a v-if="!showDescription" v-on:click="showDescription = true" class="pt-8 text-underline">Show Description</a>
+                      <a v-else v-on:click="showDescription = false" class="pt-8 text-underline">Hide Description</a>
+                    </div>
               </div>
             <div id="search-result-container">
               <div class="search-result-container">
@@ -439,7 +441,7 @@
 
                     <v-card class="mx-auto pa-0 " style="width:100%" outlined>
                         <v-card-text class="pa-md-6">
-                              <v-row class="mb-2 py-4 ">
+                              <v-row class="mb-8 py-4" style="border-bottom:2px solid #eee">
                               <v-col
                               class="py-md-0 "
                               cols="12"
@@ -638,6 +640,7 @@ export default {
         message: null,
       },
       showCompare: false,
+      showDescription: false,
       sorts: [
         { type: "School Name", field: "name:asc" },
         { type: "Earnings", field: "latest.programs.cip_4_digit.earnings.4_yr.overall.median_earnings:asc" },
@@ -742,11 +745,9 @@ export default {
     // Create Debounce function for this page.
     this.debounceSearchUpdate = _.debounce(function(params) {
       // this.searchAPI(params, true);
-      if (this.displayToggle === "institutions") {
-        this.handleInstitutionSearch(params)
-      } else {
+
         this.handleFieldOfStudySearch(params)
-      }
+      
     }, 1000)
   },
   watch: {
@@ -984,7 +985,7 @@ export default {
     resort(sort) {
       this.input.sort = sort
       var params = this.parseURLParams()
-      this.debounceSearchUpdate(params)
+      this.handleFieldOfStudySearch(params)
     },
     clearSearchForm() {
       this.input = {
@@ -1042,11 +1043,7 @@ export default {
       this.searchAPI(params, returnFields, false)
     },
     handlePaginationInput() {
-      if (this.displayToggle === "fos") {
         this.handleFieldOfStudySearch(this.parseURLParams())
-      } else {
-        this.handleInstitutionSearch(this.parseURLParams())
-      }
     },
     handleDOLFlag() {
       this.urlParsedParams = this.parseURLParams()
@@ -1081,12 +1078,21 @@ export default {
 
       
       this.urlParsedParams = this.parseURLParams()
-      this.input.cip4 = fieldOfStudy.cip4
+      //this.input.cip4 = fieldOfStudy.cip4
       this.utility.cip4Cache = fieldOfStudy.cip4
       this.urlParsedParams.cip4 = this.input.cip4
       this.debounceSearchUpdate(this.urlParsedParams)
       //this.$root.$emit("reset-dol-flag")
     },
+    handleDegreeSelected(fosDegree) {
+
+    this.urlParsedParams = this.parseURLParams()
+    this.input.cip4 = fosDegree.cip4
+
+    this.urlParsedParams.cip4 = this.input.cip4
+    this.debounceSearchUpdate(this.urlParsedParams)
+    //this.$root.$emit("reset-dol-flag")
+    },    
     handleFieldOfStudyChipClose(fieldOfStudy) {
       //console.log(fieldOfStudy)
 

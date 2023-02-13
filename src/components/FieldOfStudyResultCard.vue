@@ -324,7 +324,7 @@ export default {
   },
   computed: {
     school() {
-      console.log(this.fos['institution.school'])
+      //console.log(this.fos['institution.school'])
       return this.fos['institution.school']
     },
     institution() {
