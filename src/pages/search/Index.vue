@@ -83,6 +83,10 @@
               :temporary="$vuetify.breakpoint.smAndDown"
               :hide-overlay="$vuetify.breakpoint.smAndUp"
             >
+            <div class="pl-6 pt-6 pr-6">
+              <h2 class="float-left">More Filters</h2>
+              <a class="float-right" @click="showSidebar = !showSidebar"> <- Close filters</a>
+          </div>
               <!-- Search Form Component -->
               <search-form
                 :urlParsedParams="urlParsedParams"
