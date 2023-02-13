@@ -80,17 +80,12 @@
               class="display-3 font-weight-bold pa-0 mb-4"
             >
               {{ schoolName }}
-            </h1>
-            <h2 class="title location my-1">
-              <span>{{ city }}</span
-              >,
-              <span>{{ state }}</span>
-            </h2>
-            <h2 class="title population my-1">
-              <span>{{ undergraduates | separator }}</span>
+            </h1> 
+            <div class="population my-1">
+              <span class="font-weight-bold">{{ undergraduates | separator }}</span>
               undergraduate students
-            </h2>
-            <h2 class="title school-url my-1">
+            </div>
+            <div class="school-url my-1">
               <a
                 target="_blank"
                 :href="$url('/school/transition/')"
@@ -100,7 +95,7 @@
                   fas fa-external-link-alt
                 </v-icon>
               </a>
-            </h2>
+            </div>
             <school-icons
               :school="school"
               :fields="fields"
@@ -114,7 +109,27 @@
             <div class="school-map mx-auto" v-if="school">
               <Map :location="school.location" />
             </div>
+            <div class="location mt-4">
+              <div class="float-left">
+              <location-icon class="location-icon pt-1" target="_blank"></location-icon>
+              <span class="ml-2">{{ city }}</span
+              >,
+              <span>{{ state }}</span>
+              <span class="ml-2">{{ zip }}</span>
+            </div>
+            <div class="float-right"><a 
+              :href="$url('/school/transition/')"
+                  @click="transitionOutboundLink($event, generateMapLink(school))"
+                  target="_blank">View on map<v-icon
+                                    x-small
+                                    class="pl-1"
+                                    color="#007000"
+                                  >
+                                    fas fa-external-link-alt
+                                  </v-icon></a></div>
+            </div>            
           </v-col>
+
         </v-row>
         <v-row class="mt-3 pt-5" v-if="specialDesignations.length > 0">
           <v-col cols="12" class="px-sm-5">
@@ -242,7 +257,7 @@
                                   : fakeGraduationRate[groupName][1] * 100,
                               style: { height: '60px' },
                             }"
-                            color="#00365e"
+                            color="#1570EF"
                             :height="500"
                             :y-bar-thickness="50"
                             :label-font-size="16"
@@ -1963,7 +1978,7 @@
                               The percentage of students who received an
                               income-based federal Pell grant intended for
                               low-income students.
-                            </h4>
+                            </p>
                             <div class='py-4' v-if="aidFlag < 3 && socioEconomicDiversity">
                               <donut
                                 color="#1874DC"
@@ -2257,6 +2272,7 @@
 
 #profile-institution-title {
   line-height: 100% !important;
+  color: #10274E;
 }
 
 .field-of-study-select-container {
@@ -2326,6 +2342,11 @@
     //border-left: 20px solid $fos-color-gold;
   }
 }
+
+#fields-of-study.v-expansion-panel-header {
+  background-color:$fos-color-yellow !important;
+}
+
 
 .fos-profile-mini-summary-info {
   width: 100%;
@@ -2430,6 +2451,11 @@ span.arrow-left {
   border-right: $arrow-size solid black;
   margin-top: 0;
 }
+
+.location-icon {
+  height:20px;
+  width:20px;
+}
 </style>
 
 <script>
@@ -2464,6 +2490,7 @@ import BottomCallouts from "~/components/BottomCallouts.vue"
 import numeral from "numeral"
 import Map from "./components/Map.vue"
 import Ratio from "./components/Ratio.vue"
+import LocationIcon from "~/components/LocationIcon.vue"
 
 export default {
   mixins: [URLHistory, ComplexFields, AnalyticsEvents],
@@ -2493,6 +2520,7 @@ export default {
     toggle: Toggle,
     Map,
     ratio: Ratio,
+    "location-icon": LocationIcon,
   },
   data() {
     return {
@@ -2726,6 +2754,14 @@ export default {
         )
       }
     },
+    generateMapLink(school) {
+      let googleMapsBaseURL = "https://www.google.com/maps/search/?"
+      let params = {}
+      params.api=1
+      params.query = school.location.lat + "," + school.location.lon
+      let qs = querystring.stringify(params)
+      return googleMapsBaseURL + qs
+    },   
     parseURLParams(url = location.search.substr(1)) {
       let query = querystring.parse(url)
 

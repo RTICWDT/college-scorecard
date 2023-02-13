@@ -47,7 +47,6 @@ header {
         color: white !important;
         font-size: 1rem;
         margin-right: 40px;
-        font-weight: 500;
         letter-spacing: 0.235px;
       }
 
@@ -69,6 +68,9 @@ header {
         text-decoration: none;
         padding-bottom: 10px;
         border-bottom: 3px solid #97cff5;
+        a {
+          font-weight:bold;
+        }
       }
     }
 

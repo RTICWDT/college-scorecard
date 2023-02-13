@@ -71,7 +71,7 @@
 
   li {
     display: inline-block;
-    font-weight: 600;
+    font-weight: normal;
     line-height: 1.1;
     min-height: $height;
     padding-top: ($height + 5px);
@@ -79,7 +79,7 @@
     vertical-align: top;
     width: 80px;
     margin-right: 5px;
-    color: $dark-gray;
+    color: $medium-dark-blue;
 
     .school-key_figures-year {
       display: block;

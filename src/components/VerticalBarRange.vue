@@ -86,7 +86,7 @@
   $bar-width: 100px;
   $arrow-size: 7px;
 
-  background-color: $light-gray;
+  background-color: $bg-bar-chart;
   display: block;
   height: 320px;
   margin-bottom: 0;
