@@ -1,23 +1,34 @@
 <template>
   <v-main>
+    <div id="school-sub-nav-header">
+      <v-container>
+        <v-row>
+          <v-col cols="6">
+            <v-btn
+              small
+              text
+              color="white"
+              id="referrer-link"
+              class="link-more"
+              :href="referrerLink"
+              >&laquo; Back</v-btn
+            >
+          </v-col>
+          <v-col cols="6" class="text-right">
+            <share
+              small
+              label="Share this Comparison"
+              :url="shareUrl"
+              :hide="hideShare"
+              show-copy
+              color="white"
+              text
+            />
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
     <v-container class="mt-5 mb-10">
-      <v-row>
-        <v-col cols="6">
-          <v-btn small id="referrer-link" class="link-more" :href="referrerLink"
-            >&laquo; Back</v-btn
-          >
-        </v-col>
-        <v-col cols="6" class="text-right">
-          <share
-            small
-            label="Share this Comparison"
-            :url="shareUrl"
-            :hide="hideShare"
-            show-copy
-          />
-        </v-col>
-      </v-row>
-
       <v-row>
         <v-col>
           <v-card flat v-show="showShareUpdate" class="pa-5">
@@ -41,7 +52,7 @@
             <!--Page Header-->
 
             <h1 class="my-5 mx-5">
-              Compare
+              Compare Schools and Fields of Study
             </h1>
             <hr />
 
@@ -90,10 +101,12 @@
               >
                 <v-chip-group column>
                   <v-chip
-                    class="pa-4 ma-2"
+                    class="pa-4 my-2"
                     v-for="institution in responseCache.institution"
                     :key="institution.schoolId"
                     close
+                    label
+                    outlined
                     @click:close="
                       handleChipCloseClick(institution, 'compare-schools')
                     "
@@ -225,6 +238,8 @@
                     v-for="fieldOfStudy in responseCache.fieldsOfStudy"
                     :key="`${fieldOfStudy.id}${fieldOfStudy.code}`"
                     close
+                    label
+                    outlined
                     @click:close="
                       handleChipCloseClick(fieldOfStudy, 'compare-fos')
                     "
@@ -250,10 +265,12 @@
                 <!-- MD and larger chip layout -->
                 <v-chip-group class="d-none d-md-block" column>
                   <v-chip
-                    class="ma-2"
+                    class="my-2"
                     v-for="fieldOfStudy in responseCache.fieldsOfStudy"
                     :key="`${fieldOfStudy.id}${fieldOfStudy.code}`"
                     close
+                    label
+                    outlined
                     @click:close="
                       handleChipCloseClick(fieldOfStudy, 'compare-fos')
                     "
@@ -766,10 +783,10 @@
                       ]"
                       item-text="label"
                       item-value="value"
-                      label="Race/Ethnicity"
                       v-model="currentRaceEthnicity"
                       color="secondary"
-                      solo
+                      outlined
+                      hide-details
                       class="compare-select"
                     ></v-select>
                   </compare-section>
@@ -856,10 +873,9 @@
                       ]"
                       item-text="label"
                       item-value="value"
-                      label="What's your family income?"
                       v-model="currentIncomeFilter"
                       color="secondary"
-                      solo
+                      outlined
                       class="compare-select"
                     ></v-select>
                   </compare-section>
@@ -1205,10 +1221,9 @@
                         ]"
                         item-text="label"
                         item-value="value"
-                        label="Repayment Status"
                         v-model="currentRepaymentStatus"
                         color="secondary"
-                        solo
+                        outlined
                         class="compare-select"
                       ></v-select>
                     </template>
@@ -1359,7 +1374,7 @@
 
           <!-- Search Form Component -->
           <div v-show="!loading && showSearchForm">
-            <v-card class="pa-5 mb-2">
+            <v-card class="pa-5 mb-2 mt-5" flat>
               <div v-show="displayToggle === 'institutions'">
                 <h1 class="text-center py-3">
                   No schools selected to compare.
@@ -1367,11 +1382,11 @@
 
                 <div class="text-center py-4">
                   <v-btn
-                    rounded
                     color="secondary"
+                    large
                     :href="this.$url('/search?toggle=institutions')"
                   >
-                    search schools
+                    Search Schools
                   </v-btn>
                 </div>
 
@@ -1389,11 +1404,11 @@
 
                 <div class="text-center py-4">
                   <v-btn
-                    rounded
+                    large
                     color="secondary"
                     :href="this.$url('/search/?toggle=fos')"
                   >
-                    SEARCH FIELDS OF STUDY
+                    Search Fields of Study
                   </v-btn>
                 </div>
 
@@ -1415,6 +1430,9 @@
 <style lang="scss" scoped>
 @import "~/sass/_variables";
 
+#school-sub-nav-header {
+  background-color: $bg-blue;
+}
 .fadeAway {
   display: none;
   transition-property: display;
@@ -1467,24 +1485,6 @@
 
 .compare-toggle-school-active {
   background-color: #83c38c !important;
-}
-
-.compare-toggle-fos-active {
-  background-color: $lighter-yellow;
-}
-
-.compare-fos-slider-gold {
-  background-color: $fos-accent-color;
-}
-
-.field-of-study-select-container {
-  border-radius: 4px !important;
-  border-left: 20px solid $fos-color-gold !important;
-}
-
-.institution-context-panel {
-  border-radius: 4px !important;
-  border-left: 20px solid $darker-green !important;
 }
 
 .compare-select .v-input__slot {

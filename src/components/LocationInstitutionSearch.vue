@@ -16,7 +16,10 @@
     />
 
     <div class="d-flex align-center" v-if="utility.location === 'Near Me'">
-      <v-btn @click="handleLocationCheck">
+      <v-btn
+        @click="handleLocationCheck"
+        :class="[horizontal ? 'mr-2 ml-3' : 'my-3 mr-2']"
+      >
         <v-icon
           v-html="
             location.isLoading ? 'fas fa-circle-notch fa-spin' : 'mdi-near-me'
@@ -33,11 +36,16 @@
         type="number"
         outlined
         dense
-        class="mx-3"
+        :class="[horizontal ? 'mx-2' : 'my-3']"
         @change="handleSearch"
       ></v-text-field>
 
-      <span v-show="location.error" class="overline">{{ location.error }}</span>
+      <span
+        v-show="location.error"
+        class="overline"
+        :class="[horizontal ? 'mx-3' : 'my-3 ml-2']"
+        >{{ location.error }}</span
+      >
     </div>
     <div class="d-flex align-center" v-if="utility.location === 'ZIP Code'">
       <v-text-field
@@ -45,7 +53,7 @@
         v-model="input.zip"
         label="ZIP Code"
         hideDetails
-        class="mx-3"
+        :class="[horizontal ? 'mx-3' : 'my-3 mr-2']"
         type="number"
         dense
         :rules="[utility.rules.zip]"
@@ -76,10 +84,11 @@
       multiple
       chips
       hide-details
+      :single-line="true"
       :placeholder="
         input.state && input.state.length > 0 ? undefined : 'Select a state...'
       "
-      class="mt-0 pt-0 mx-3"
+      :class="[horizontal ? 'mx-3 mt-0  pt-0' : 'my-3']"
       color="secondary"
       deletable-chips
       v-show="utility.location == 'State'"
@@ -108,7 +117,7 @@ export default {
     },
     initial_distance: {
       type: String,
-      default: "10",
+      default: null,
     },
     horizontal: {
       type: Boolean,
@@ -181,8 +190,6 @@ export default {
     },
     "location.miles"() {
       this.$emit("search-query", this.input)
-
-      //      this.handleLocationCheck()
     },
     "utility.location"(newValue, oldValue) {
       if (newValue === "Near Me" && oldValue !== "Near Me") {
@@ -193,7 +200,7 @@ export default {
   methods: {
     handleLocationChange(e) {
       // TODO - Check to see if values need to be reset.
-      this.input.zip = ""
+      this.input.zip = null
       this.input.state = []
 
       this.input.lat = null
@@ -205,9 +212,6 @@ export default {
       this.$emit("search-query", this.input)
     },
 
-    locationButtonColor() {
-      return this.location.latLon ? "primary" : ""
-    },
     handleSearch() {
       let o = Object.fromEntries(
         Object.entries(this.input).filter(([_, v]) => v != null)

@@ -3,10 +3,10 @@
     <v-main>
       <!-- Top Splash and Search-->
       <div class="home-splash">
-        <v-container class="mb-n10 pt-16">
+        <v-container class="mb-n10 pt-sm-16 pt-5">
           <v-row>
             <!-- Header Info -->
-            <v-col cols="12">
+            <v-col cols="12" class="px-6 px-sm-3">
               <h1 class="white--text">
                 Find the right fit
               </h1>
@@ -67,6 +67,7 @@
                         text
                         small
                         @click="toggleCustomSearch = !toggleCustomSearch"
+                        class=" text-uppercase"
                       >
                         Custom Search
                         <v-icon v-if="toggleCustomSearch">mdi-menu-up</v-icon>
@@ -179,7 +180,7 @@
       </div>
 
       <!-- Bottom Content -->
-      <div class="home-links pt-15 mb-15">
+      <div class="home-links pt-sm-15 mb-15">
         <v-container class="mt-8">
           <v-row class="align-stretch">
             <!-- apprenticeships callout -->
@@ -473,7 +474,6 @@ import FieldOfStudySearch from "~/components/FieldOfStudySearch.vue"
 import FieldOfStudySearchNameAndDegree from "~/components/FieldOfStudySearchNameAndDegree.vue"
 import CompareDrawer from "~/components/CompareDrawer.vue"
 import CompareHeader from "~/components/CompareHeader.vue"
-
 export default {
   mixins: [AnalyticsEvents],
   components: {

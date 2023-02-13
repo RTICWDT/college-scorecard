@@ -13,6 +13,18 @@
                 <span class="display-2 navy-text font-weight-bold ">{{
                   _.get(fos, fields.FOS_EARNINGS_FED_4YR) | numeral("$0,0")
                 }}</span>
+
+                <horizontal-bar
+                  v-if="_.get(fos, fields.FOS_EARNINGS_FED)"
+                  :value="_.get(fos, fields.FOS_EARNINGS_FED)"
+                  :min="0"
+                  :max="130000"
+                  color="#1470ef"
+                  :height="25"
+                  :labels="true"
+                  type="currency"
+                  class="mt-3"
+                ></horizontal-bar>
               </div>
 
               <div v-else class="mini-data-na text-center">
@@ -41,6 +53,18 @@
                 <span class="display-2 navy-text font-weight-bold">{{
                   _.get(fos, fields.FOS_DEBT_MEDIAN) | numeral("$0,0")
                 }}</span>
+
+                <horizontal-bar
+                  v-if="_.get(fos, fields.FOS_DEBT_MEDIAN)"
+                  :value="_.get(fos, fields.FOS_DEBT_MEDIAN)"
+                  :min="0"
+                  :max="100000"
+                  color="#1470ef"
+                  :height="25"
+                  :labels="true"
+                  type="currency"
+                  class="mt-3"
+                ></horizontal-bar>
               </div>
 
               <div v-else class="mini-data-na text-center">
@@ -53,6 +77,17 @@
                 <span class="display-2 navy-text font-weight-bold">{{
                   _.get(fos, fields.FOS_DEBT_MEDIAN_PRIOR) | numeral("$0,0")
                 }}</span>
+                <horizontal-bar
+                  v-if="_.get(fos, fields.FOS_DEBT_MEDIAN_PRIOR)"
+                  :value="_.get(fos, fields.FOS_DEBT_MEDIAN_PRIOR)"
+                  :min="0"
+                  :max="100000"
+                  color="#1470ef"
+                  :height="25"
+                  :labels="true"
+                  type="currency"
+                  class="mt-3"
+                ></horizontal-bar>
               </div>
 
               <div v-else class="mini-data-na text-center">
@@ -188,10 +223,11 @@
 
 <script>
 import Tooltip from "~/components/Tooltip.vue"
-
+import HorizontalBar from "~/components/HorizontalBar.vue"
 export default {
   components: {
     tooltip: Tooltip,
+    HorizontalBar,
   },
   props: {
     fos: {

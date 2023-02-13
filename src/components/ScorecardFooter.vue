@@ -41,6 +41,7 @@
                   :class="{
                     'nav-active': activeLink === 'compare',
                   }"
+                  :href="$url('/compare')"
                   aria-label="Navigate to compare page"
                   @click="handleCompareLinkClick(`/compare`)"
                   >Compare</a

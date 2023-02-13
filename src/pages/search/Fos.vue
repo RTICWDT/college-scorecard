@@ -844,7 +844,7 @@ export default {
       }
     },
     cipSelectionLimitReached() {
-      if (this.input.cip4.length >= 1) {
+      if (this.input.cip4 && this.input.cip4.length >= 1) {
         return true
       }
 
