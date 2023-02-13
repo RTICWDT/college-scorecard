@@ -333,7 +333,8 @@ export default {
       return "/school/?" + id + "-" + name.replace(/\W+/g, "-")
     },
     shareLink() {
-      return encodeURIComponent(this.$url(window.location.href)) || null
+      let path = process.isClient ? window.location.href : ""
+      return encodeURIComponent(this.$url(path)) || null
     },
   },
   mounted() {
