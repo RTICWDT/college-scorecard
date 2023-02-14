@@ -1078,7 +1078,7 @@ export default {
 
       
       this.urlParsedParams = this.parseURLParams()
-      //this.input.cip4 = fieldOfStudy.cip4
+      this.input.cip4 = fieldOfStudy.cip4
       this.utility.cip4Cache = fieldOfStudy.cip4
       this.urlParsedParams.cip4 = this.input.cip4
       this.debounceSearchUpdate(this.urlParsedParams)
