@@ -71,7 +71,7 @@
           <v-row
             ><v-col class="pa-10">
               <h1>Search Fields of Study</h1>
-             
+
               <p>
                 Search and compare the fields of study offered at each college
                 by degree type.
@@ -111,7 +111,7 @@
                 <div
                   id="fos-chip-container"
                   class="mt-2"
-                  v-if="utility.cip4Cache.length > 0  && 0"
+                  v-if="utility.cip4Cache.length > 0 && 0"
                 >
                   <field-of-study-detail-chip
                     v-for="fieldOfStudy in utility.cip4Cache"
@@ -127,10 +127,9 @@
               <div class="">
                 <v-select
                   v-model="input.cip4_degree"
-                  :items="degreeTypes"
+                  :items="fosDegrees"
                   item-text="label"
                   item-value="value"
-                  multiple
                   dense
                   outlined
                   hide-details
@@ -168,20 +167,33 @@
             </v-navigation-drawer> </v-col
           ><v-col :cols="showSidebar ? 9 : 12" class="pa-10">
             <div v-if="!isLoading">
-                    <h2>{{ selectedFoSLabel }}</h2>                   
-                    <div v-if="showDescription">
-                      A program that prepares individuals to practice the profession of accounting and to perform related 
-                      business functions. Includes instruction in accounting principles and theory, financial accounting, 
-                      managerial accounting, cost accounting, budget control, tax accounting, legal aspects of accounting, 
-                      auditing, reporting procedures, statement analysis, planning and consulting, business information systems, 
-                      accounting research methods, professional standards and ethics, and applications to specific for-profit, 
-                      public, and non-profit organizations.
-                    </div>
-                    <div class="py-8">
-                      <a v-if="!showDescription" v-on:click="showDescription = true" class="pt-8 text-underline">Show Description</a>
-                      <a v-else v-on:click="showDescription = false" class="pt-8 text-underline">Hide Description</a>
-                    </div>
+              <h2>{{ selectedFoSLabel }}</h2>
+              <!-- <div v-if="showDescription">
+                A program that prepares individuals to practice the profession
+                of accounting and to perform related business functions.
+                Includes instruction in accounting principles and theory,
+                financial accounting, managerial accounting, cost accounting,
+                budget control, tax accounting, legal aspects of accounting,
+                auditing, reporting procedures, statement analysis, planning and
+                consulting, business information systems, accounting research
+                methods, professional standards and ethics, and applications to
+                specific for-profit, public, and non-profit organizations.
               </div>
+              <div class="py-8">
+                <a
+                  v-if="!showDescription"
+                  v-on:click="showDescription = true"
+                  class="pt-8 text-underline"
+                  >Show Description</a
+                >
+                <a
+                  v-else
+                  v-on:click="showDescription = false"
+                  class="pt-8 text-underline"
+                  >Hide Description</a
+                >
+              </div> -->
+            </div>
             <div id="search-result-container">
               <div class="search-result-container">
                 <!-- Search Result Info and controls -->
@@ -388,7 +400,6 @@
                   </v-row>
                 </div>
 
-                
                 <!-- No Results/Canned Search/ -->
                 <div
                   id="search-can-query-container"
@@ -417,7 +428,6 @@
 
                 <!-- Main Search Results -->
                 <div class="results-main-alert">
-                  
                   <!-- Loading -->
                   <div class="show-loading mt-2" v-show="isLoading">
                     <v-card class="py-4 px-4 pageBar elevation-0">
@@ -435,70 +445,56 @@
                     <h1>Something went wrong:</h1>
                     <p class="error-message">{{ error.message }}</p>
                   </div>
-                  
+
                   <!-- Institution Results -->
                   <div class="search-result-cards-container" v-if="!isLoading">
-
                     <v-card class="mx-auto pa-0 " style="width:100%" outlined>
-                        <v-card-text class="pa-md-6">
-                              <v-row class="mb-8 py-4" style="border-bottom:2px solid #eee">
-                              <v-col
-                              class="py-md-0 "
-                              cols="12"
-                              md="3">
-                                School 
-                                <i class="fa fa-sort" aria-hidden="true"></i>
-                            </v-col>
-                            <v-col
-                              class="py-md-0"
-                              cols="12"
-                              md="3">
-                                Earnings 
-                                <i class="fa fa-sort" aria-hidden="true"></i>
-                            </v-col>
-                            <v-col
-                              class="py-md-0 "
-                              cols="12"
-                              md="3">
-                                Debt 
-                                <i class="fa fa-sort" aria-hidden="true"></i>
-                            </v-col>
-                            <v-col
-                              class="py-md-0"
-                              cols="12"
-                              md="2">
-                                Graduates 
-                                <i class="fa fa-sort" aria-hidden="true"></i>
-                            </v-col> 
-                            <v-col
-                              class="py-md-0 pl-md-6"
-                              cols="12"
-                              md="1">
-                                Compare 
-                            </v-col>                                                                                                           
-                          </v-row>
-                          <!-- Fields of Study Results -->
-                          <v-row>
-                            <v-col
-                              v-for="school in results.schools"
-                              :key="school.id"
-                              cols="12"
-                              lg="12"
-                              md="12"
-                              sm="12"
-                              class="d-flex align-stretch"
-                            >
-
-
-                              <fos-result-card
-                                :fos="school"
-                                :selected-fields-of-study="compareFieldsOfStudy"
-                              />
-
-                            </v-col>
-                          </v-row>
-                        </v-card-text>
-                        </v-card>
+                      <v-card-text class="pa-md-6">
+                        <v-row
+                          class="mb-2 py-4"
+                          style="border-bottom:2px solid #eee"
+                        >
+                          <v-col class="py-md-0 " cols="12" md="3">
+                            School
+                            <i class="fa fa-sort" aria-hidden="true"></i>
+                          </v-col>
+                          <v-col class="py-md-0" cols="12" md="3">
+                            Earnings
+                            <i class="fa fa-sort" aria-hidden="true"></i>
+                          </v-col>
+                          <v-col class="py-md-0 " cols="12" md="3">
+                            Debt
+                            <i class="fa fa-sort" aria-hidden="true"></i>
+                          </v-col>
+                          <v-col class="py-md-0" cols="12" md="2">
+                            Graduates
+                            <i class="fa fa-sort" aria-hidden="true"></i>
+                          </v-col>
+                          <v-col class="py-md-0 pl-md-6" cols="12" md="1">
+                            Compare
+                          </v-col>
+                        </v-row>
+                        <!-- Fields of Study Results -->
+                        <v-row>
+                          <v-col
+                            v-for="school in results.schools"
+                            :key="school.id"
+                            cols="12"
+                            lg="12"
+                            md="12"
+                            sm="12"
+                            class="d-flex align-stretch"
+                          >
+                            <fos-result-card
+                              :fos="school"
+                              :selected-fields-of-study="compareFieldsOfStudy"
+                              class="my-1 py-1"
+                              style="border-bottom: 1px solid #E0E6F1"
+                            />
+                          </v-col>
+                        </v-row>
+                      </v-card-text>
+                    </v-card>
                   </div>
 
                   <!-- Field of Study Results -->
@@ -519,7 +515,6 @@
                           :total-visible="7"
                           @input="handlePaginationInput"
                           class="pr-0 mr-0"
-                          circle
                         ></v-pagination>
                       </div>
                     </v-col>
@@ -579,7 +574,7 @@ import LocationCheck from "~/js/mixins/LocationCheck.js"
 
 import _ from "lodash"
 import { apiGet } from "~/js/api.js"
-import { fields } from "~/js/constants.js"
+import { fields, formMappings } from "~/js/constants.js"
 
 import FieldOfStudySearch from "~/components/FieldOfStudySearch.vue"
 import FieldOfStudyDetailChip from "~/components/FieldOfStudyDetailChip.vue"
@@ -606,7 +601,8 @@ export default {
     specializedMission: Object,
     defaultSort: {
       type: String,
-      default: "latest.programs.cip_4_digit.earnings.4_yr.overall.median_earnings:desc",
+      default:
+        "latest.programs.cip_4_digit.earnings.4_yr.overall.median_earnings:desc",
     },
     isLoading: Boolean,
     compareSchools: Array,
@@ -643,8 +639,16 @@ export default {
       showDescription: false,
       sorts: [
         { type: "School Name", field: "name:asc" },
-        { type: "Earnings", field: "latest.programs.cip_4_digit.earnings.4_yr.overall.median_earnings:asc" },
-        { type: "Debt", field: "latest.programs.cip_4_digit.debt.staff_grad_plus.all.all_inst.median:desc" },
+        {
+          type: "Earnings",
+          field:
+            "latest.programs.cip_4_digit.earnings.4_yr.overall.median_earnings:asc",
+        },
+        {
+          type: "Debt",
+          field:
+            "latest.programs.cip_4_digit.debt.staff_grad_plus.all.all_inst.median:desc",
+        },
         {
           type: "Graduates",
           field: "latest.programs.cip_4_digit.counts.ipeds_awards1:desc",
@@ -705,7 +709,7 @@ export default {
 
     this.urlParsedParams = this.parseURLParams()
 
-   // this.input = this.input.urlParsedParams
+    // this.input = this.input.urlParsedParams
 
     // Add sort to state if it exists
     this.input.sort = this.urlParsedParams.sort
@@ -746,8 +750,7 @@ export default {
     this.debounceSearchUpdate = _.debounce(function(params) {
       // this.searchAPI(params, true);
 
-        this.handleFieldOfStudySearch(params)
-      
+      this.handleFieldOfStudySearch(params)
     }, 1000)
   },
   watch: {
@@ -780,9 +783,11 @@ export default {
   computed: {
     selectedFoSLabel() {
       if (this.input.cip4)
-        return _.find(this.site.data.cip_4_digit, ["label", this.input.cip4.substr(0, 2) + '.' + this.input.cip4.substr(2)])['value'].replace('.','')
-      else
-        return ""
+        return _.find(this.site.data.cip_4_digit, [
+          "label",
+          this.input.cip4.substr(0, 2) + "." + this.input.cip4.substr(2),
+        ])["value"].replace(".", "")
+      else return ""
     },
     totalPages() {
       if (this.results.meta.per_page && this.results.meta.total) {
@@ -849,6 +854,9 @@ export default {
       }
 
       return false
+    },
+    fosDegrees() {
+      return formMappings.fosDegrees
     },
   },
   methods: {
@@ -1043,7 +1051,7 @@ export default {
       this.searchAPI(params, returnFields, false)
     },
     handlePaginationInput() {
-        this.handleFieldOfStudySearch(this.parseURLParams())
+      this.handleFieldOfStudySearch(this.parseURLParams())
     },
     handleDOLFlag() {
       this.urlParsedParams = this.parseURLParams()
@@ -1067,16 +1075,13 @@ export default {
       return this.location.latLon ? "primary" : ""
     },
     handleFieldOfStudySelected(fieldOfStudy) {
-
       /*this.input.cip4 = _.union(this.input.cip4, [fieldOfStudy.cip4])
       this.utility.cip4Cache = _.unionBy(
         this.utility.cip4Cache,
         [fieldOfStudy],
         "cip4"
       )*/
-      
 
-      
       this.urlParsedParams = this.parseURLParams()
       //this.input.cip4 = fieldOfStudy.cip4
       this.utility.cip4Cache = fieldOfStudy.cip4
@@ -1085,14 +1090,13 @@ export default {
       //this.$root.$emit("reset-dol-flag")
     },
     handleDegreeSelected(fosDegree) {
+      this.urlParsedParams = this.parseURLParams()
+      this.input.cip4 = fosDegree.cip4
 
-    this.urlParsedParams = this.parseURLParams()
-    this.input.cip4 = fosDegree.cip4
-
-    this.urlParsedParams.cip4 = this.input.cip4
-    this.debounceSearchUpdate(this.urlParsedParams)
-    //this.$root.$emit("reset-dol-flag")
-    },    
+      this.urlParsedParams.cip4 = this.input.cip4
+      this.debounceSearchUpdate(this.urlParsedParams)
+      //this.$root.$emit("reset-dol-flag")
+    },
     handleFieldOfStudyChipClose(fieldOfStudy) {
       //console.log(fieldOfStudy)
 

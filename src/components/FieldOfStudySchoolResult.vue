@@ -60,34 +60,28 @@
 .noCompareAllow {
   cursor: not-allowed !important;
 }
-
 </style>
 
 <template>
-        <!--School Info-->
-        <v-col cols="12" md="3" class="pt-0 pb-8">
-          <p class="mt-1 mb-2" v-if="underInvestigation == 1">
-            <v-card color="error" class="px-2 py-1" flat>
-              <strong class="white--text">Under ED Monitoring</strong>
-              <tooltip definition="hcm2" color="#FFFFFF" class="ml-2" />
-            </v-card>
-          </p>
+  <!--School Info-->
+  <v-col cols="12" md="3" class="pt-0 pb-8">
+    <p class="mt-1 mb-2" v-if="underInvestigation == 1">
+      <v-card color="error" class="px-2 py-1" flat>
+        <strong class="white--text">Under ED Monitoring</strong>
+        <tooltip definition="hcm2" color="#FFFFFF" class="ml-2" />
+      </v-card>
+    </p>
 
-          <h2 class="title mt-0 font-weight-bold">
-            <a class="nameLink" :href="$url(schoolLink)">{{ schoolName }}</a>
-          </h2>
-          <p class="mb-1 font-weight-bold">{{ city }}, {{ state }} {{ zip }}</p>
-          <v-divider />
-          <v-row>
-            <v-col cols="12">
-              <small-school-icons
-                :school="school"
-                :fields="fields"
-                size="small"
-              />
-            </v-col>
-          </v-row>
-        </v-col>
+    <h2 class="title mt-0 font-weight-bold">
+      <a class="nameLink" :href="$url(schoolLink)">{{ schoolName }}</a>
+    </h2>
+    <p class="mb-1 font-weight-bold">{{ city }}, {{ state }} {{ zip }}</p>
+    <v-row>
+      <v-col cols="12">
+        <small-school-icons :school="school" :fields="fields" size="small" />
+      </v-col>
+    </v-row>
+  </v-col>
 </template>
 
 <script>
@@ -97,14 +91,14 @@ import ComplexFields from "~/js/mixins/ComplexFields.js"
 import { fieldOfStudyCompareFormat } from "~/js/commonFormats"
 
 export default {
-  name: 'FieldOfStudySchoolResult',
+  name: "FieldOfStudySchoolResult",
   mixins: [ComplexFields],
   props: {
     school: {
       // The FoS object
       type: Object,
       required: true,
-    },  
+    },
     fosTotalDisplayCap: {
       type: Number,
       default: 10,
@@ -121,7 +115,7 @@ export default {
   },
   computed: {
     institution() {
-      return this.school['institution']
+      return this.school["institution"]
     },
     totalFieldOfStudyCount() {
       return this.$store.state.fos.length
@@ -129,14 +123,13 @@ export default {
       //   totalCount += fieldCategory.items.length;
       // },0);
     },
-      compareFOSHoverCountText() {
-        if (this.totalFieldOfStudyCount > 9){
-          return "Maximum of 10 Fields of Study reached";
-        }
-        else{
-          return "Add Field of Study to compare";
-        }
-      },   
+    compareFOSHoverCountText() {
+      if (this.totalFieldOfStudyCount > 9) {
+        return "Maximum of 10 Fields of Study reached"
+      } else {
+        return "Add Field of Study to compare"
+      }
+    },
   },
   components: {
     tooltip: Tooltip,

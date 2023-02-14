@@ -209,7 +209,17 @@ export const formMappings = {
     a: '2',
     b: '3',
     c: '1'
-  }
+  },
+  fosDegrees: [
+    { 'value': '1', 'label': 'Undergraduate Certificate or Diploma' },
+    { 'value': '2', 'label': 'Associate\'s Degree' },
+    { 'value': '3', 'label': 'Bachelor\'s Degree' },
+    { 'value': '4', 'label': 'Post-baccalaureate Certificate' },
+    { 'value': '5', 'label': 'Master\'s Degree' },
+    { 'value': '6', 'label': 'Doctoral Degree' },
+    { 'value': '7', 'label': 'First Professional Degree' },
+    { 'value': '8', 'label': 'Graduate/Professional Certificate' }
+  ]
 };
 
 export const localStorageKeys = {
