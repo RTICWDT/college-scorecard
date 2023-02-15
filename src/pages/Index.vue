@@ -187,7 +187,7 @@
         <v-container class="mt-8">
           <v-row class="align-stretch">
             <!-- apprenticeships callout -->
-            <v-col cols="12" md="6"  class="pr-8">
+            <v-col cols="12" md="6" class="pr-sm-8">
               <v-card flat class="pa-8">
                 <h2 class="display-2 d-flex justify-space-between align-center">
                   <span>Alternative Pathways<br />to a Career</span>
@@ -312,9 +312,9 @@
                 </p>
               </v-card>
             </v-col>
-            
+
             <!-- paying callout -->
-            <v-col cols="12" md="6" sm="12" class="pl-8">
+            <v-col cols="12" md="6" sm="12" class="pl-sm-8">
               <v-card flat class="pa-8">
                 <h2 class="display-2 d-flex justify-space-between align-center">
                   <span class="">Learn More About<br />Paying for College</span>
