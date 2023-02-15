@@ -56,6 +56,9 @@
   padding: 18px;
   margin-right: 30px;
 }
+.tab-card{
+  border:none;
+}
 </style>
 
 <template>
@@ -63,7 +66,7 @@
     <!-- Search Form -->
 
     <v-main>
-      <v-card tile>
+      <v-card tile class="tab-card">
         <search-tabs :selected="1" />
       </v-card>
       <div class="bg-blue">

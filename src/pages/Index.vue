@@ -56,7 +56,7 @@
                 <v-tabs-slider :color="sliderColor" />
                 <!-- Institution Search-->
                 <v-tab-item>
-                  <v-card class="pa-5" flat>
+                  <v-card class="pa-5" flat style="border:none;">
                     <name-autocomplete
                       @school-name-selected="handleSchoolNameSelected"
                       :searchEmptyName="false"

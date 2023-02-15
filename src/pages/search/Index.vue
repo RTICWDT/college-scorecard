@@ -14,12 +14,16 @@
 .container--fluid {
   max-width: none !important;
 }
+
+.tab-card {
+  border:none;
+}
 </style>
 
 <template>
   <div>
     <v-main>
-      <v-card tile>
+      <v-card tile class="tab-card">
         <search-tabs :selected="0" />
       </v-card>
       <div class="bg-blue">
