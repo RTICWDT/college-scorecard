@@ -94,6 +94,7 @@
                         small
                         role="link"
                         @click="handleFoSMoreOptionsClick"
+                        class=" text-uppercase"
                       >
                         More Search Options
                         <v-icon>mdi-menu-right</v-icon>
@@ -190,7 +191,7 @@
                   <span>Alternative Pathways<br />to a Career</span>
                   <v-avatar color="#D1E9FF">
                     <img
-                      :src="$url('img/icon-pathways-blue.svg')"
+                      :src="$url('img/icon-pathways-black.svg')"
                       alt="Pathways Icon"
                       class="pa-2"
                     />
@@ -317,7 +318,7 @@
                   <span class="">Learn More About<br />Paying for College</span>
                   <v-avatar color="#D1E9FF">
                     <img
-                      :src="$url('img/icon-financial-aid.svg')"
+                      :src="$url('img/icon-financial-aid-black.svg')"
                       alt="Financial Aid Icon"
                       class="pa-2"
                     />
