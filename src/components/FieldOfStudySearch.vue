@@ -17,7 +17,6 @@
       color="fos-search-color"
       prepend-inner-icon="fas fa-search"
       aria-label="Field of Study Search"
-
       :dense="dense"
     >
       <template v-slot:label>
@@ -80,52 +79,27 @@ export default {
       type: Boolean,
       default: false,
     },
-  },
-  data() {
-    return {
-      selected: null,
-    }
+    selected: {
+      type: String,
+      default: null,
+    },
   },
   computed: {
     items() {
       return this.site.data.cip_6_digit
     },
-
-    // TODO - use this to generate and cache cip info- It wasn't performant on runtime when switching search tabs.
-    //   let cleanItems = this.site.data.cip_6_digit.reduce((formattedArray, cip6) => {
-    //     // locate - Ensure we only have cip6 and cip4
-    //     let locatedCip4FieldName = this.locateCip4Field(cip6.code.slice(0,4));
-    //
-    //     if(locatedCip4FieldName){
-    //       formattedArray.push({
-    //         ...cip6,
-    //         cip4Title: locatedCip4FieldName
-    //       });
-    //     }
-    //
-    //     return formattedArray;
-    //   },[]);
-    //
-    //   return _.sortBy(cleanItems, ['title']);
-    // }
   },
   methods: {
     handleFieldOfStudySelect(selectedItem) {
-      // Clear Input Field
-      /*this.$nextTick(() => {
-        this.selected = []
-      })*/
-
       if (
         typeof selectedItem === "undefined" ||
         typeof selectedItem.code !== "string" ||
         selectedItem.code.length !== 6
       ) {
-
         let fieldOfStudy = {
-        cip4: null,
-        field: null,
-      }
+          cip4: null,
+          field: null,
+        }
 
         this.$emit("field-of-study-selected", fieldOfStudy)
       }
