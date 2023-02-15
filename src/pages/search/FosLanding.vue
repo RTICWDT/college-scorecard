@@ -2,7 +2,7 @@
   <div>
     <v-main>
       <div class="home-splash">
-        <v-card tile>
+        <v-card tile class="tab-card">
           <search-tabs :selected="1" />
         </v-card>
         <v-container class="mb-n10 pt-sm-16 pt-5">
@@ -116,6 +116,9 @@ h1 {
 }
 .home-links {
   background-color: $bg-gray;
+}
+.tab-card{
+  border:none;
 }
 </style>
 

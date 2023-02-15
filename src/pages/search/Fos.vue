@@ -161,7 +161,7 @@
               :temporary="$vuetify.breakpoint.smAndDown"
               :hide-overlay="$vuetify.breakpoint.smAndUp"
             >
-            <div class="pl-6 pt-6 pr-6">
+            <div class="p-6">
               <h2 class="float-left">More Filters</h2>
               <a class="float-right close-filter" @click="showSidebar = !showSidebar"> &lt; Close filters</a>
           </div>            
