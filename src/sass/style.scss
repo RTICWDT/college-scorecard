@@ -102,3 +102,13 @@
 .medium-blue {
   background-color: $medium-blue;
 }
+
+a.close-filter {
+  color: #6c737c;
+  &:active {
+    color: #6c737c;
+  }
+  &:hover {
+    color: #6c737c;
+  }
+}
