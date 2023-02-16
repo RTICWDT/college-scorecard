@@ -1,7 +1,7 @@
 <template>
   <client-only>
     <v-combobox
-      :value="selected"
+      :value="selectedFoS"
       @input="handleFieldOfStudySelect"
       @update:search-input="handleFieldOfStudySearchInput"
       :items="items"
@@ -87,6 +87,15 @@ export default {
   computed: {
     items() {
       return this.site.data.cip_6_digit
+    },
+    selectedFoS() {
+      let field = null
+      if (this.selected) {
+        field = this.CIP4.find((itm) => {
+          return this.selected == itm.cip4.replace(".", "")
+        })["field"]
+      }
+      return field
     },
   },
   methods: {
