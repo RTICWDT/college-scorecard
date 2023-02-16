@@ -88,7 +88,7 @@ export default {
         }
 
         query["school.search"] = newVal ? newVal : ""
-        query[fields.OPEID + "__not"] = "null"
+        //query[fields.OPEID + "__not"] = "null"
         query = this.prepareParams(query)
 
         let request = apiGet("/schools", query)

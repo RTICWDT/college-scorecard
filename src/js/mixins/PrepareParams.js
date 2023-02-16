@@ -272,7 +272,7 @@ export default {
 
       // only get open schools
       query[fields.OPERATING] = 1;
-      query[fields.OPEID + '__not'] = 'null';
+      //query[fields.OPEID + '__not'] = 'null';
       
       // ignore distance if no zip is provided
       if (query.distance && !query.zip) {
@@ -298,7 +298,7 @@ export default {
       */
       
       if (!query.degree) {
-        query[fields.DEGREE_OFFERED + '.assoc_or_bachelors_or_certificate'] = true;
+        //query[fields.DEGREE_OFFERED + '.assoc_or_bachelors_or_certificate'] = true;
       }
 
       for (var key in query) {
