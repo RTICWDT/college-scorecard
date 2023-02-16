@@ -18,6 +18,7 @@
 .tab-card {
   border:none;
 }
+
 </style>
 
 <template>
@@ -66,7 +67,8 @@
                 :horizontal="true"
               />
               <v-btn
-                class="ml-sm-auto mx-sm-3 my-3 my-sm-0 float-right float-sm-none"
+              outlined
+                class="ml-sm-auto mx-sm-3 my-3 my-sm-0 float-right float-sm-none toggle-sidebar"
                 @click="showSidebar = !showSidebar"
               >
                 <v-icon small class="pr-1">fas fa-sliders-h</v-icon>
@@ -92,7 +94,7 @@
               :temporary="$vuetify.breakpoint.smAndDown"
               :hide-overlay="$vuetify.breakpoint.smAndUp"
             >
-            <div class="pl-6 pt-6 pr-6">
+            <div class="pa-6">
               <h2 class="float-left">More Filters</h2>
               <a class="float-right close-filter" @click="showSidebar = !showSidebar"> &lt; Close filters</a>
           </div>

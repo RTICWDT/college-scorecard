@@ -46,6 +46,7 @@
 .container--fluid {
   max-width: none !important;
 }
+
 </style>
 
 <style lang="scss" scoped>
@@ -142,7 +143,7 @@
                 </v-select>
               </div>
 
-              <v-btn class="mx-3" @click="showSidebar = !showSidebar">
+              <v-btn outlined class="mx-3 toggle-sidebar" @click="showSidebar = !showSidebar">
                 <v-icon small class="pr-1">fas fa-sliders-h</v-icon>
                 {{ showSidebar ? "Hide" : "Show" }} Filters
               </v-btn>
@@ -161,7 +162,7 @@
               :temporary="$vuetify.breakpoint.smAndDown"
               :hide-overlay="$vuetify.breakpoint.smAndUp"
             >
-            <div class="p-6">
+            <div class="pa-6">
               <h2 class="float-left">More Filters</h2>
               <a class="float-right close-filter" @click="showSidebar = !showSidebar"> &lt; Close filters</a>
           </div>            

@@ -104,11 +104,15 @@
 }
 
 a.close-filter {
-  color: #6c737c;
+  color: #6c737c !important;
   &:active {
     color: #6c737c;
   }
   &:hover {
     color: #6c737c;
   }
+
+  .v-select__slot input::placeholder {
+    color: black !important;
+} 
 }

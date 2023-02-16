@@ -212,3 +212,14 @@ html {
     padding-top: 20px !important;
   }
 }
+
+.toggle-sidebar.v-btn--outlined {
+  border: 1px solid #d8dfe8 !important;
+}
+
+.theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state)
+    > .v-input__control
+    > .v-input__slot
+    fieldset {
+    color: #dfe6f0;
+  }

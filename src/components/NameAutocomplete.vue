@@ -35,6 +35,7 @@
 .v-application .institution-search-color--text {
   color: $darker-green !important;
 }
+
 </style>
 
 <script>
