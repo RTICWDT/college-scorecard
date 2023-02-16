@@ -256,24 +256,36 @@
                           class="mb-2 py-4"
                           style="border-bottom:2px solid #eee"
                         >
-                          <v-col class="py-md-0 " cols="12" md="3">
-                            School
-                            <i class="fa fa-sort" aria-hidden="true"></i>
-                          </v-col>
-                          <v-col class="py-md-0" cols="12" md="3">
-                            Earnings
-                            <i class="fa fa-sort" aria-hidden="true"></i>
-                          </v-col>
-                          <v-col class="py-md-0 " cols="12" md="3">
-                            Debt
-                            <i class="fa fa-sort" aria-hidden="true"></i>
-                          </v-col>
-                          <v-col class="py-md-0" cols="12" md="2">
-                            Graduates
-                            <i class="fa fa-sort" aria-hidden="true"></i>
-                          </v-col>
-                          <v-col class="py-md-0 pl-md-6" cols="12" md="1">
-                            Compare
+                          <v-col
+                            class="py-md-0 "
+                            cols="12"
+                            md="3"
+                            v-for="sort in sorts"
+                            :key="sort.type"
+                          >
+                            <a
+                              :class="{
+                                'font-weight-bold': sort.current,
+                                'text-decoration-underline': sort.current,
+                              }"
+                              @click="changeSort(sort.type)"
+                              >{{ sort.type }}
+                              <i
+                                class="fa"
+                                :class="[
+                                  { 'fa-sort': sort.current == false },
+                                  {
+                                    'fa-sort-up':
+                                      sort.current && sort.direction == 'desc',
+                                  },
+                                  {
+                                    'fa-sort-down':
+                                      sort.current && sort.direction == 'asc',
+                                  },
+                                ]"
+                                aria-hidden="true"
+                              ></i
+                            ></a>
                           </v-col>
                         </v-row>
                         <!-- Fields of Study Results -->
@@ -392,22 +404,35 @@ export default {
       showCompare: false,
       showDescription: false,
       sorts: [
-        { type: "School Name", field: "name:asc" },
+        {
+          type: "School Name",
+          field: "name",
+          current: true,
+          direction: "asc",
+        },
         {
           type: "Earnings",
           field:
-            "latest.programs.cip_4_digit.earnings.4_yr.overall.median_earnings:asc",
+            "latest.programs.cip_4_digit.earnings.4_yr.overall.median_earnings",
+          current: false,
+          direction: "asc",
         },
         {
           type: "Debt",
           field:
-            "latest.programs.cip_4_digit.debt.staff_grad_plus.all.all_inst.median:desc",
+            "latest.programs.cip_4_digit.debt.staff_grad_plus.all.all_inst.median",
+          current: false,
+          direction: "asc",
         },
         {
           type: "Graduates",
-          field: "latest.programs.cip_4_digit.counts.ipeds_awards1:desc",
+          field: "latest.programs.cip_4_digit.counts.ipeds_awards1",
+          current: false,
+          direction: "asc",
         },
       ],
+      sortDir: "asc",
+      currentSort: "school",
       shareUrl: null,
       displayFlag: false,
 
@@ -608,6 +633,19 @@ export default {
     handleDegreeSelected() {
       this.input.page = 0
       this.debounceSearchUpdate()
+    },
+    changeSort(selected) {
+      this.sorts.map((itm) => {
+        if (itm.type == selected) {
+          itm.current = true
+          itm.direction = itm.direction == "asc" ? "desc" : "asc"
+          this.input.sort = `${itm.field}:${itm.direction}`
+        } else {
+          itm.current = false
+        }
+      })
+      this.input.page = 0
+      this.searchAPI()
     },
   },
   metaInfo: {

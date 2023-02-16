@@ -10,7 +10,6 @@
       placeholder="Type to search"
       return-object
       autocomplete="off"
-      clearable
       outlined
       hide-no-data
       hide-details
