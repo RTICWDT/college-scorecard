@@ -65,7 +65,11 @@
                 </v-select>
               </div>
 
-              <v-btn class="mx-3 ml-auto" @click="showSidebar = !showSidebar">
+              <v-btn
+                class="mx-3 ml-auto toggle-sidebar"
+                outlined
+                @click="showSidebar = !showSidebar"
+              >
                 <v-icon small class="pr-1">fas fa-sliders-h</v-icon>
                 {{ showSidebar ? "Hide" : "Show" }} Filters
               </v-btn>
