@@ -1,73 +1,16 @@
 <style lang="scss" scoped>
-@import "~/sass/_variables";
-
-#search-fos-cip-warning,
-#search-institutions-dolflag {
-  width: 100%;
-
-  p {
-    font-size: 13px;
-    margin-bottom: 0;
+.data-row {
+  border-bottom: 1px solid #eee;
+  &:last-child {
+    border-bottom-style: none;
   }
-
-  @media (min-width: 960px) {
-    p {
-      font-size: 14px;
-    }
-  }
-
-  a {
-    color: white !important;
-  }
-  .dolflag-chip a {
-    color: rgba(0, 0, 0, 0.87) !important;
-  }
-}
-
-#search-fos-cip-filter-warning {
-  p {
-    font-size: 13px;
-  }
-
-  .v-alert__border {
-    border-width: 6px;
-  }
-
-  .v-icon {
-    font-size: 38px;
-  }
-
-  @media (min-width: 960px) {
-    p {
-      font-size: 16px;
-    }
-  }
-}
-.container--fluid {
-  max-width: none !important;
-}
-
-</style>
-
-<style lang="scss" scoped>
-@import "~/sass/_variables.scss";
-.dolflag-chip {
-  height: auto !important;
-  white-space: normal;
-  padding: 18px;
-  margin-right: 30px;
-}
-.tab-card{
-  border:none;
 }
 </style>
 
 <template>
   <div>
-    <!-- Search Form -->
-
     <v-main>
-      <v-card tile class="tab-card">
+      <v-card tile>
         <search-tabs :selected="1" />
       </v-card>
       <div class="bg-blue">
@@ -93,38 +36,16 @@
           <v-col>
             <v-card flat class="white d-flex align-center">
               <div class="mx-3">Field of Study:</div>
-              <!-- Field Of Study Search and Chips -->
               <div id="fos-search-and-chips">
                 <field-of-study-search
                   @field-of-study-selected="handleFieldOfStudySelected"
                   id="fos-search"
                   name="fos-search"
-                  :disabled="cipSelectionLimitReached"
                   :dense="true"
                   :rules="[utility.rules.required]"
+                  :selected="input.cip4"
                 >
                 </field-of-study-search>
-
-                <p
-                  v-if="cipSelectionLimitReached && 0"
-                  class="mb-0 mt-2 warning-orange text-center"
-                >
-                  You may only select one Field of Study
-                </p>
-
-                <div
-                  id="fos-chip-container"
-                  class="mt-2"
-                  v-if="utility.cip4Cache.length > 0 && 0"
-                >
-                  <field-of-study-detail-chip
-                    v-for="fieldOfStudy in utility.cip4Cache"
-                    :key="fieldOfStudy.cip4"
-                    :field-of-study="fieldOfStudy"
-                    :cip-six-items="findAllCip6fromCip4(fieldOfStudy.cip4)"
-                    @chip-close="handleFieldOfStudyChipClose"
-                  />
-                </div>
               </div>
               <div class="mx-3" id="location-label">Degree Type:</div>
               <!-- Credential Type -->
@@ -139,11 +60,12 @@
                   hide-details
                   placeholder="Select one"
                   :rules="[utility.rules.required]"
+                  @change="handleDegreeSelected"
                 >
                 </v-select>
               </div>
 
-              <v-btn outlined class="mx-3 toggle-sidebar" @click="showSidebar = !showSidebar">
+              <v-btn class="mx-3 ml-auto" @click="showSidebar = !showSidebar">
                 <v-icon small class="pr-1">fas fa-sliders-h</v-icon>
                 {{ showSidebar ? "Hide" : "Show" }} Filters
               </v-btn>
@@ -162,10 +84,6 @@
               :temporary="$vuetify.breakpoint.smAndDown"
               :hide-overlay="$vuetify.breakpoint.smAndUp"
             >
-            <div class="pa-6">
-              <h2 class="float-left">More Filters</h2>
-              <a class="float-right close-filter" @click="showSidebar = !showSidebar"> &lt; Close filters</a>
-          </div>            
               <!-- Search Fields of Study Component -->
               <search-fos-form
                 :url-parsed-params="urlParsedParams"
@@ -175,7 +93,10 @@
             </v-navigation-drawer> </v-col
           ><v-col :cols="showSidebar ? 9 : 12" class="pa-10">
             <div v-if="!isLoading">
-              <h2>{{ selectedFoSLabel }}</h2>
+              <h2 class="mb-4">
+                {{ selectedFoSLabel }}
+                <v-chip class="ml-2">{{ selectedFoSDegree }}</v-chip>
+              </h2>
               <!-- <div v-if="showDescription">
                 A program that prepares individuals to practice the profession
                 of accounting and to perform related business functions.
@@ -206,7 +127,7 @@
               <div class="search-result-container">
                 <!-- Search Result Info and controls -->
                 <v-card
-                  class="mt-2 mb-4 py-4 px-4 elevation-0 pageBar mb-10"
+                  class="mt-2 mb-4 py-4 px-4 elevation-0 pageBar mb-4"
                   v-show="!isLoading"
                 >
                   <v-row class="">
@@ -214,98 +135,7 @@
                       <div id="search-result-info-count" class>
                         <p class="title mb-0">
                           {{ results.meta.total | separator }} Results
-                          <v-btn
-                            color="primary"
-                            text-color="white"
-                            @click="clearSearchForm"
-                            x-small
-                            fab
-                            class="d-inline d-sm-none mr-2"
-                          >
-                            <span>
-                              <v-icon class="">mdi-close-circle</v-icon>
-                              <span class="sr-only">Clear Search</span>
-                            </span>
-                          </v-btn>
 
-                          <v-btn
-                            id="search-button-clear"
-                            @click="clearSearchForm"
-                            small
-                            class="d-none d-sm-inline mr-1"
-                            outlined
-                          >
-                            <span>
-                              <v-icon small class="mr-1"
-                                >mdi-close-circle</v-icon
-                              >
-                              Clear
-                            </span>
-                          </v-btn>
-
-                          <v-menu offset-y>
-                            <template v-slot:activator="{ on }">
-                              <v-btn
-                                id="search-button-sort"
-                                small
-                                v-on="on"
-                                class="d-none d-sm-inline mr-1"
-                                outlined
-                              >
-                                <v-icon small class="mx-1">fas fa-sort</v-icon>
-                                Sort
-                              </v-btn>
-                            </template>
-                            <v-list min-width="200">
-                              <v-list-item-group
-                                v-model="input.sort"
-                                color="primary"
-                                mandatory
-                              >
-                                <v-list-item
-                                  v-for="(item, index) in sorts"
-                                  :key="item.field"
-                                  @click="resort(item.field)"
-                                  :value="item.field"
-                                >
-                                  <v-list-item-title>{{
-                                    item.type
-                                  }}</v-list-item-title>
-                                </v-list-item>
-                              </v-list-item-group>
-                            </v-list>
-                          </v-menu>
-                          <v-menu offset-y>
-                            <template v-slot:activator="{ on }">
-                              <v-btn
-                                color="primary"
-                                x-small
-                                v-on="on"
-                                fab
-                                class="d-inline d-sm-none"
-                              >
-                                <v-icon small class="">fas fa-sort</v-icon>
-                                <span class="sr-only">Sort</span>
-                              </v-btn>
-                            </template>
-                            <v-list min-width="200">
-                              <v-list-item-group
-                                v-model="input.sort"
-                                color="primary"
-                              >
-                                <v-list-item
-                                  v-for="(item, index) in sorts"
-                                  :key="item.field"
-                                  @click="resort(item.field)"
-                                  :value="item.field"
-                                >
-                                  <v-list-item-title>{{
-                                    item.type
-                                  }}</v-list-item-title>
-                                </v-list-item>
-                              </v-list-item-group>
-                            </v-list>
-                          </v-menu>
                           <share
                             :url="encodeURI(shareUrl)"
                             label="Share"
@@ -326,7 +156,7 @@
                       <div class="text-md-right justify-end">
                         <v-pagination
                           flat
-                          v-model="input.page"
+                          v-model="displayPage"
                           :length="totalPages"
                           :total-visible="7"
                           @input="handlePaginationInput"
@@ -338,23 +168,17 @@
                 </v-card>
 
                 <!-- Field Of Study CIP 4 Information -->
-                <div id="search-fos-cip-warning" class="my-2">
+                <div>
                   <v-row>
                     <v-col
                       cols="12"
-                      sm="5"
-                      md="5"
-                      class="py-1 pl-3 pr-1"
-                      v-if="
-                        displayToggle === 'fos' &&
-                          !isLoading &&
-                          this.displayFlag
-                      "
+                      v-if="!isLoading && this.input.dolflag == 'true'"
                     >
-                      <v-chip
-                        class="dolflag-chip"
-                        close
-                        @click:close="handleDOLFlag"
+                      <v-alert
+                        color="primary"
+                        border="left"
+                        colored-border
+                        class="mb-0"
                       >
                         <span
                           >Only show schools that have programs that qualify for
@@ -371,16 +195,12 @@
                             CollegeScorecard.ed.gov/training.
                           </a>
                         </span>
-                      </v-chip>
+                      </v-alert>
                     </v-col>
-                    <v-col
-                      cols="12"
-                      sm="7"
-                      md="7"
-                      class="py-1 px-1"
-                      v-if="displayToggle === 'fos'"
-                    >
-                      <p class="white--text pl-2">
+                  </v-row>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-alert>
                         <strong>Note:</strong> Field of Study titles are based
                         on the US Department of Education's Classification of
                         Instructional Programs (CIP) and may not match the
@@ -395,15 +215,11 @@
                             )
                           "
                         >
-                          Learn more about CIP<v-icon
-                            x-small
-                            color="white"
-                            class="pl-1"
-                          >
+                          Learn more about CIP<v-icon x-small class="pl-1">
                             fas fa-external-link-alt
                           </v-icon>
                         </a>
-                      </p>
+                      </v-alert>
                     </v-col>
                   </v-row>
                 </div>
@@ -414,21 +230,9 @@
                   v-if="!isLoading && results.schools.length === 0"
                 >
                   <v-row>
-                    <v-col cols="12" v-if="displayToggle === 'fos'">
+                    <v-col cols="12">
                       <v-card class="pa-5 text-center elevation-0">
                         <h3 class="text-center">No Results Found</h3>
-                        <br />
-                        <v-btn
-                          id="search-button-clear-filters"
-                          color="primary"
-                          text-color="white"
-                          @click="clearSearchForm"
-                        >
-                          <span>
-                            <v-icon class="mr-2">mdi-close-circle</v-icon> Clear
-                            Search Filters
-                          </span>
-                        </v-btn>
                       </v-card>
                     </v-col>
                   </v-row>
@@ -455,31 +259,45 @@
                   </div>
 
                   <!-- Institution Results -->
-                  <div class="search-result-cards-container" v-if="!isLoading">
+                  <div
+                    class="search-result-cards-container"
+                    v-if="!isLoading && results.schools.length > 0"
+                  >
                     <v-card class="mx-auto pa-0 " style="width:100%" outlined>
-                      <v-card-text class="pa-md-6">
+                      <v-card-text>
                         <v-row
                           class="mb-2 py-4"
                           style="border-bottom:2px solid #eee"
                         >
-                          <v-col class="py-md-0 " cols="12" md="3">
-                            School
-                            <i class="fa fa-sort" aria-hidden="true"></i>
-                          </v-col>
-                          <v-col class="py-md-0" cols="12" md="3">
-                            Earnings
-                            <i class="fa fa-sort" aria-hidden="true"></i>
-                          </v-col>
-                          <v-col class="py-md-0 " cols="12" md="3">
-                            Debt
-                            <i class="fa fa-sort" aria-hidden="true"></i>
-                          </v-col>
-                          <v-col class="py-md-0" cols="12" md="2">
-                            Graduates
-                            <i class="fa fa-sort" aria-hidden="true"></i>
-                          </v-col>
-                          <v-col class="py-md-0 pl-md-6" cols="12" md="1">
-                            Compare
+                          <v-col
+                            class="py-md-0 "
+                            cols="3"
+                            v-for="sort in sorts"
+                            :key="sort.type"
+                          >
+                            <a
+                              :class="{
+                                'font-weight-bold': sort.current,
+                                'text-decoration-underline': sort.current,
+                              }"
+                              @click="changeSort(sort.type)"
+                              >{{ sort.type }}
+                              <i
+                                class="fa"
+                                :class="[
+                                  { 'fa-sort': sort.current == false },
+                                  {
+                                    'fa-sort-up':
+                                      sort.current && sort.direction == 'desc',
+                                  },
+                                  {
+                                    'fa-sort-down':
+                                      sort.current && sort.direction == 'asc',
+                                  },
+                                ]"
+                                aria-hidden="true"
+                              ></i
+                            ></a>
                           </v-col>
                         </v-row>
                         <!-- Fields of Study Results -->
@@ -491,14 +309,9 @@
                             lg="12"
                             md="12"
                             sm="12"
-                            class="d-flex align-stretch"
+                            class="d-flex align-stretch data-row"
                           >
-                            <fos-result-card
-                              :fos="school"
-                              :selected-fields-of-study="compareFieldsOfStudy"
-                              class="my-1 py-1"
-                              style="border-bottom: 1px solid #E0E6F1"
-                            />
+                            <fos-result-card :fos="school" />
                           </v-col>
                         </v-row>
                       </v-card-text>
@@ -518,7 +331,7 @@
                     <v-col cols="12" class="py-3 px-3">
                       <div class="text-right">
                         <v-pagination
-                          v-model="input.page"
+                          v-model="displayPage"
                           :length="totalPages"
                           :total-visible="7"
                           @input="handlePaginationInput"
@@ -532,43 +345,12 @@
             </div>
           </v-col>
         </v-row>
-        <!-- Floating Mobile Search Button -->
-        <v-btn
-          fab
-          fixed
-          right
-          color="secondary"
-          rounded
-          @click="showSidebar = !showSidebar"
-          v-if="$vuetify.breakpoint.mdAndDown"
-          class="searchFab"
-          title="Search"
-        >
-          <v-icon>fas fa-search</v-icon>
-        </v-btn>
       </v-container>
     </v-main>
     <!--End of root -->
   </div>
 </template>
 
-<style lang="scss" scoped>
-@import "~/sass/_variables";
-
-.fa-stack {
-  text-align: center;
-}
-
-.fa-stack .fa-caret-down {
-  position: absolute;
-  bottom: 0;
-}
-
-.fa-stack .fa-caret-up {
-  position: absolute;
-  top: 0;
-}
-</style>
 <script>
 import Share from "~/components/Share.vue"
 import URLHistory from "~/js/mixins/URLHistory.js"
@@ -582,42 +364,27 @@ import LocationCheck from "~/js/mixins/LocationCheck.js"
 
 import _ from "lodash"
 import { apiGet } from "~/js/api.js"
-import { fields, formMappings } from "~/js/constants.js"
+import { formMappings } from "~/js/constants.js"
+import * as forms from "~/js/forms.js"
 
 import FieldOfStudySearch from "~/components/FieldOfStudySearch.vue"
 import FieldOfStudyDetailChip from "~/components/FieldOfStudyDetailChip.vue"
 import SearchTabs from "~/components/SearchTabs.vue"
 
-const querystring = require("querystring")
-
 export default {
   components: {
-    share: Share,
+    Share,
     "search-fos-form": SearchFieldsOfStudyForm,
     "fos-result-card": FieldOfStudyResultCard,
-    tooltip: Tooltip,
-    "field-of-study-search": FieldOfStudySearch,
-    "field-of-study-detail-chip": FieldOfStudyDetailChip,
+    Tooltip,
+    FieldOfStudySearch,
+    FieldOfStudyDetailChip,
     SearchTabs,
   },
   mixins: [URLHistory, PrepareParams, AnalyticsEvents, SiteData, LocationCheck],
-  props: {
-    "page-permalink": String,
-    states: Array,
-    programs: Array,
-    religiousAffiliations: Array,
-    specializedMission: Object,
-    defaultSort: {
-      type: String,
-      default:
-        "latest.programs.cip_4_digit.earnings.4_yr.overall.median_earnings:desc",
-    },
-    isLoading: Boolean,
-    compareSchools: Array,
-    compareFieldsOfStudy: Array,
-  },
   data() {
     return {
+      isLoading: true,
       showSidebar: true,
       sidebar: { fixed: false, absolute: true },
       results: {
@@ -629,56 +396,49 @@ export default {
       input: {
         sort: null,
         page: 1,
-        state: [],
-        cip4: [],
-        cip4_degree: [],
+        cip4: null,
+        cip4_degree: null,
+        dolflag: false,
       },
       urlParsedParams: {},
       utility: {
         formDefault: {},
-        initailized: false,
-        sortFAB: null,
-        previousParams: {},
       },
       error: {
         message: null,
       },
-      showCompare: false,
       showDescription: false,
       sorts: [
-        { type: "School Name", field: "name:asc" },
+        {
+          type: "School Name",
+          field: "name",
+          current: true,
+          direction: "asc",
+        },
         {
           type: "Earnings",
           field:
-            "latest.programs.cip_4_digit.earnings.4_yr.overall.median_earnings:asc",
+            "latest.programs.cip_4_digit.earnings.4_yr.overall.median_earnings",
+          current: false,
+          direction: "asc",
         },
         {
           type: "Debt",
           field:
-            "latest.programs.cip_4_digit.debt.staff_grad_plus.all.all_inst.median:desc",
+            "latest.programs.cip_4_digit.debt.staff_grad_plus.all.all_inst.median",
+          current: false,
+          direction: "asc",
         },
         {
           type: "Graduates",
-          field: "latest.programs.cip_4_digit.counts.ipeds_awards1:desc",
+          field: "latest.programs.cip_4_digit.counts.ipeds_awards1",
+          current: false,
+          direction: "asc",
         },
       ],
+      defaultSort: "name:asc",
       shareUrl: null,
-      fieldOfStudyTotalCountWithoutRangeFilters: 0,
-      displayFlag: false,
-      degreeTypes: [
-        {
-          label: "Certificate",
-          value: "c",
-        },
-        {
-          label: "Associate's Degree",
-          value: "a",
-        },
-        {
-          label: "Bachelor's Degree",
-          value: "b",
-        },
-      ],
+
       utility: {
         rules: {
           required: (value) => !!value || "Required.",
@@ -692,101 +452,31 @@ export default {
         },
         // Hold Default state of form data.
         formDefault: {},
-        // Helper to activate debounced query after initial load.
-        initialized: false,
-        showMore: false,
-        // Hold Default for checkrange enables.
-        enableDefault: {},
-        // State object
-        enable: {
-          completion_rate: false,
-          avg_net_price: false,
-          sat_math: false,
-          sat_read: false,
-          act: false,
-          acceptance: false,
-        },
-
-        cip4Cache: [],
       },
     }
   },
   created() {
     // Copy default form input state.
     this.utility.formDefault = _.cloneDeep(this.input)
-
-    this.urlParsedParams = this.parseURLParams()
-
-    // this.input = this.input.urlParsedParams
+    this.urlParsedParams = forms.parseURLParams()
 
     // Add sort to state if it exists
     this.input.sort = this.urlParsedParams.sort
       ? this.urlParsedParams.sort
       : this.defaultSort
 
-    // if Page is in the url, add it here.
-    this.input.page = this.urlParsedParams.page
-      ? Number(this.urlParsedParams.page) + 1
-      : 1
-
     this.input.cip4 = this.urlParsedParams.cip4
+    this.input.cip4_degree = this.urlParsedParams.cip4_degree
 
-    // Set Toggle Value - Default to institutions
-    if (
-      typeof this.urlParsedParams.toggle === "undefined" ||
-      this.urlParsedParams.toggle === "institutions"
-    ) {
-      this.displayToggle = "institutions"
-      this.controlTab = 0
-      this.controlRadio = "0"
-    } else {
-      this.displayToggle = "fos"
-      this.controlTab = 1
-      this.controlRadio = "1"
+    if (!this.input.cip4 || !this.input.cip4_degree) {
+      this.$router.push("/search/fos-landing")
     }
-
-    if (
-      typeof this.urlParsedParams.dolflag === "undefined" ||
-      this.urlParsedParams.dolflag === "false"
-    ) {
-      this.displayFlag = false
-    } else {
-      this.displayFlag = true
-    }
+    this.searchAPI()
 
     // Create Debounce function for this page.
-    this.debounceSearchUpdate = _.debounce(function(params) {
-      // this.searchAPI(params, true);
-
-      this.handleFieldOfStudySearch(params)
+    this.debounceSearchUpdate = _.debounce(function() {
+      this.searchAPI()
     }, 1000)
-  },
-  watch: {
-    "location.latLon": {
-      // Proccess Lat/Long object for url values.
-      handler(newValue, oldValue) {
-        if (
-          newValue != null &&
-          newValue.min_lat &&
-          newValue.max_lat &&
-          newValue.min_lat &&
-          newValue.max_lat
-        ) {
-          this.input.lat =
-            newValue.min_lat.toFixed(4) + ".." + newValue.max_lat.toFixed(4)
-          this.input.long =
-            newValue.min_lon.toFixed(4) + ".." + newValue.max_lon.toFixed(4)
-        }
-      },
-    },
-    "location.miles"() {
-      this.handleLocationCheck()
-    },
-    "utility.location"(newValue, oldValue) {
-      if (newValue === "Near Me" && oldValue !== "Near Me") {
-        this.handleLocationCheck()
-      }
-    },
   },
   computed: {
     selectedFoSLabel() {
@@ -797,6 +487,14 @@ export default {
         ])["value"].replace(".", "")
       else return ""
     },
+    selectedFoSDegree() {
+      if (this.input.cip4_degree) {
+        let degree = formMappings.fosDegrees.find((itm) => {
+          return itm.value == this.input.cip4_degree
+        })
+        return degree.label
+      } else return ""
+    },
     totalPages() {
       if (this.results.meta.per_page && this.results.meta.total) {
         let totalPages = this.results.meta.total / this.results.meta.per_page
@@ -805,137 +503,53 @@ export default {
         return Math.ceil(totalPages)
       }
     },
-    showFieldOfStudyWarning() {
-      if (this.displayToggle !== "fos") {
-        return false
-      }
-
-      if (this.isLoading) {
-        return false
-      }
-
-      if (
-        typeof this.utility.previousParams.fos_salary != "undefined" ||
-        typeof this.utility.previousParams.fos_debt != "undefined"
-      ) {
-        return true
-      }
-    },
-    fieldOfStudyRangeFiltersHidingCount() {
-      // Total count minus showing count.
-      if (
-        this.fieldOfStudyTotalCountWithoutRangeFilters > 0 &&
-        this.results.meta.total > 0
-      ) {
-        return (
-          this.fieldOfStudyTotalCountWithoutRangeFilters -
-          this.results.meta.total
-        )
-      } else {
-        return 0
-      }
-    },
-    contextRadioClass() {
-      if (this.controlRadio === "1") {
-        return "field-of-study-context-panel"
-      } else {
-        return "institution-context-panel"
-      }
-    },
-    contextRadioSchoolStyle() {
-      if (this.controlRadio === "1") {
-        return "normal"
-      } else {
-        return "bold"
-      }
-    },
-    contextRadioFOSStyle() {
-      if (this.controlRadio === "1") {
-        return "bold"
-      } else {
-        return "normal"
-      }
-    },
-    cipSelectionLimitReached() {
-      if (this.input.cip4 && this.input.cip4.length >= 1) {
-        return true
-      }
-
-      return false
-    },
     fosDegrees() {
       return formMappings.fosDegrees
     },
+    displayPage: {
+      get() {
+        return this.input.page + 1
+      },
+      set(newValue) {
+        this.input.page = newValue - 1
+      },
+    },
   },
   methods: {
-    searchAPI(params = {}, returnFields = [], allPrograms = true) {
-      // TODO - Clean this method up, It does way more than just SearchAPI.
-      // Better Encapsulation.
-
-      this.$emit("loading", true)
+    searchAPI() {
+      let params = this.input
+      this.isLoading = true
 
       this.error.message = null
-
-      if (
-        typeof params["dolflag"] === "undefined" ||
-        params["dolflag"] === "false"
-      ) {
-        this.displayFlag = false
-      } else {
-        this.displayFlag = true
-      }
-
-      // let poppingState = false;
-      // let alreadyLoaded = false;
-
-      //Add page and sort items into params.
-      if (params.page === 0) {
-        // Reset page when passed 0
-        this.input.page = 1
-      } else if (this.input.page >= 1) {
-        // Use local page counter;
-        // The API function off of a 0 index;
-        params.page = this.input.page - 1
-      }
-
       params.sort = this.input.sort ? this.input.sort : this.defaultSort
 
       let query = this.prepareParams(params)
 
-      query.fields = returnFields
-
-      //Ensure that toggle is not sent to API
-      if (query.toggle) {
-        delete query.toggle
-      }
-
-      // TODO: Need to remove this when API
-      // is processing requests better
-      if (allPrograms) {
-        query["all_programs_nested"] = true
-      }
-
       // Add toggle value + params
-      let qs = this.generateQueryString({
+      let qs = forms.generateQueryString({
         ...params,
-        toggle: this.displayToggle,
       })
 
-      history.replaceState(params, "search", qs)
-
+      if (process.isClient) {
+        history.replaceState(params, "search", qs)
+      }
       this.addURLToStorage(qs)
 
-      let request = apiGet("/fos", query)
+      apiGet("/fos", query)
         .then((response) => {
+          this.isLoading = false
           console.log("loaded fos:", response.data)
 
           this.results.schools = response.data.results
           this.results.meta = response.data.metadata
 
           this.$emit("loading", false)
-          this.shareUrl = window.location.href
+          if (process.isClient) {
+            this.shareUrl = window.location.href
+          }
         })
         .catch((error) => {
+          this.isLoading = false
           console.warn("Error fetching search.")
           this.$emit("loading", false)
 
@@ -951,12 +565,7 @@ export default {
           }
         })
     },
-    queryAPI(params = {}) {
-      // Generic API Query Method that returns API results
-      let query = this.prepareParams(params)
 
-      return apiGet("/fos", query)
-    },
     showError(error) {
       // TODO: Loop through multiple error messages if needed.
       console.error("error:", error)
@@ -967,164 +576,46 @@ export default {
         this.error.message = "There was an unexpected API error."
       }
     },
-    handleCannedSearchClick(cannedSearchData) {
-      if (cannedSearchData) {
-        this.urlParsedParams = this.parseURLParams(
-          this.generateQueryString(cannedSearchData).substr(1)
-        )
-      }
-    },
-    isResultCardSelected(schoolId, compareSchools) {
-      if (_.findIndex(compareSchools, ["schoolId", String(schoolId)]) >= 0) {
-        return true
-      }
-      return false
-    },
-    parseURLParams(url) {
-      if (!url && process.isClient) {
-        url = location.search.substr(1)
-      }
-      let query = querystring.parse(url)
 
-      return query || {}
-    },
-    generateQueryString(params) {
-      let qs = querystring.stringify(params)
-      return (
-        "?" +
-        qs
-          .replace(/^&+/, "")
-          .replace(/&{2,}/g, "&")
-          .replace(/%3A/g, ":")
-      )
-    },
-    resort(sort) {
-      this.input.sort = sort
-      var params = this.parseURLParams()
-      this.handleFieldOfStudySearch(params)
-    },
-    clearSearchForm() {
-      this.input = {
-        page: 1,
-        sort: this.defaultSort,
-      }
-      this.urlParsedParams = {}
-      this.$root.$emit("search-form-reset")
-    },
-    handleInstitutionSearch(params) {
-      let returnFields = [
-        // we need the id to link it
-        fields.ID,
-        // basic display fields
-        fields.NAME,
-        fields.CITY,
-        fields.STATE,
-        fields.SIZE,
-        fields.BRANCHES,
-        fields.LOCALE,
-        // to get "public" or "private"
-        fields.OWNERSHIP,
-        // to get the "four_year" or "lt_four_year" bit
-        fields.PREDOMINANT_DEGREE,
-        // program-reporter offered programs / flag
-        fields.PROGRAM_REPORTER_OFFERED,
-        // get all of the net price values
-        fields.NET_PRICE,
-        // completion rate
-        fields.COMPLETION_RATE,
-        // this has no sub-fields
-        fields.MEDIAN_EARNINGS,
-        // not sure if we need this, but let's get it anyway
-        fields.EARNINGS_GT_25K,
-        // under investigation flag
-        fields.UNDER_INVESTIGATION,
-
-        // new completion rates
-        fields.COMPLETION_OM,
-        fields.COMPLETION_150_4,
-        fields.COMPLETION_150_LT4,
-
-        fields.FIELD_OF_STUDY,
-      ].join(",")
-
-      this.searchAPI(params, returnFields)
-    },
     handleFieldOfStudySearch(params) {
-      // TODO - refine fields
-      let returnFields = ""
+      console.log(params)
+      this.input = { ...this.input, ...params }
+      this.input = Object.fromEntries(
+        Object.entries(this.input).filter(([_, v]) => v != null)
+      )
 
-      // Cache params to power other content
-      this.utility.previousParams = params
-
-      this.searchAPI(params, returnFields, false)
+      this.input.page = 0
+      this.searchAPI()
     },
     handlePaginationInput() {
-      this.handleFieldOfStudySearch(this.parseURLParams())
+      this.searchAPI()
     },
-    handleDOLFlag() {
-      this.urlParsedParams = this.parseURLParams()
-      delete this.urlParsedParams.dolflag
-      this.debounceSearchUpdate(this.urlParsedParams)
-      this.$root.$emit("reset-dol-flag")
-    },
-    // Reset values for sub objects to default
-    handleLocationChange(e) {
-      // TODO - Check to see if values need to be reset.
-      this.input.zip = ""
-      this.input.state = []
-
-      this.input.lat = null
-      this.input.long = null
-
-      this.location.latLon = null
-      this.location.error = null
-    },
-    locationButtonColor() {
-      return this.location.latLon ? "primary" : ""
+    resort(sort) {
+      this.input.page = 0
+      this.input.sort = sort
+      this.searchAPI()
     },
     handleFieldOfStudySelected(fieldOfStudy) {
-      /*this.input.cip4 = _.union(this.input.cip4, [fieldOfStudy.cip4])
-      this.utility.cip4Cache = _.unionBy(
-        this.utility.cip4Cache,
-        [fieldOfStudy],
-        "cip4"
-      )*/
-
-      this.urlParsedParams = this.parseURLParams()
+      this.input.page = 0
       this.input.cip4 = fieldOfStudy.cip4
-      this.utility.cip4Cache = fieldOfStudy.cip4
-      this.urlParsedParams.cip4 = this.input.cip4
-      this.debounceSearchUpdate(this.urlParsedParams)
-      //this.$root.$emit("reset-dol-flag")
+      this.debounceSearchUpdate()
     },
-    handleDegreeSelected(fosDegree) {
-      this.urlParsedParams = this.parseURLParams()
-      this.input.cip4 = fosDegree.cip4
-
-      this.urlParsedParams.cip4 = this.input.cip4
-      this.debounceSearchUpdate(this.urlParsedParams)
-      //this.$root.$emit("reset-dol-flag")
+    handleDegreeSelected() {
+      this.input.page = 0
+      this.debounceSearchUpdate()
     },
-    handleFieldOfStudyChipClose(fieldOfStudy) {
-      //console.log(fieldOfStudy)
-
-      // Remove from arrays
-      this.input.cip4 = this.input.cip4.filter((cip4) => {
-        return Number(cip4) !== Number(fieldOfStudy.cip4)
+    changeSort(selected) {
+      this.sorts.map((itm) => {
+        if (itm.type == selected) {
+          itm.current = true
+          itm.direction = itm.direction == "asc" ? "desc" : "asc"
+          this.input.sort = `${itm.field}:${itm.direction}`
+        } else {
+          itm.current = false
+        }
       })
-
-      this.utility.cip4Cache = this.utility.cip4Cache.filter((item) => {
-        return Number(item.cip4) !== Number(fieldOfStudy.cip4)
-      })
-    },
-    handleClearAllChips() {
-      this.input.cip4 = []
-      this.utility.cip4Cache = []
-    },
-    resetFormDefault() {
-      this.input = _.cloneDeep(this.utility.formDefault)
-      this.utility.location = null
-      this.utility.cip4Cache = []
+      this.input.page = 0
+      this.searchAPI()
     },
   },
   metaInfo: {

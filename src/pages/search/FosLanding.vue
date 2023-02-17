@@ -27,6 +27,7 @@
                     <p>Search Fields of Study</p>
                     <field-of-study-search
                       @field-of-study-selected="handleFieldOfStudySelected"
+                      :selected="input.cip4"
                     />
                   </v-col>
                   <v-col cols="12" sm="4">

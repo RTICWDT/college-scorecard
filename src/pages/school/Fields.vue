@@ -99,8 +99,8 @@
                       id="school-field-fos-degree"
                       outlined
                       :items="filters"
-                      item-text="credential"
-                      item-value="id"
+                      item-text="label"
+                      item-value="value"
                       v-model="currentFilter"
                       label="Search Degree Type"
                       color="primary"
@@ -238,6 +238,7 @@ import FieldData from "~/components/FieldData.vue"
 import FieldDataExtended from "~/components/FieldDataExtended.vue"
 import { apiGet } from "~/js/api.js"
 import { SiteData } from "~/js/mixins/SiteData.js"
+import { formMappings } from "~/js/constants.js"
 import ComplexFields from "~/js/mixins/ComplexFields.js"
 import AddToCompare from "~/components/AddToCompare.vue"
 import BottomCallouts from "~/components/BottomCallouts.vue"
@@ -259,16 +260,7 @@ export default {
       num_panels: 0,
       cip2: {},
       programs: [],
-      filters: [
-        { id: 1, credential: "Undergraduate Certificate or Diploma" },
-        { id: 2, credential: "Associate's Degree" },
-        { id: 3, credential: "Bachelor's Degree" },
-        { id: 4, credential: "Post-baccalaureate Certificate" },
-        { id: 5, credential: "Master's Degree" },
-        { id: 6, credential: "Doctoral Degree" },
-        { id: 7, credential: "First Professional Degree" },
-        { id: 8, credential: "Graduate/Professional Certificate" },
-      ],
+
       currentFilter: 0,
       currentTextFilter: "",
       fieldDataExtendedSalarySelect: "aid",
@@ -335,6 +327,9 @@ export default {
     shareLink() {
       let path = process.isClient ? window.location.href : ""
       return encodeURIComponent(this.$url(path)) || null
+    },
+    filters() {
+      return formMappings.fosDegrees
     },
   },
   mounted() {
