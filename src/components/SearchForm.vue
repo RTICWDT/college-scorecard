@@ -39,6 +39,7 @@
       multiple
       style="border-radius: 0"
       v-model="panels"
+      class="elevation-0"
     >
       <v-expansion-panel>
         <v-expansion-panel-header>Academic Fields</v-expansion-panel-header>
@@ -56,7 +57,7 @@
             class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="Certificate"
-            value="c"
+            value="1"
             color="secondary"
             hide-details
           ></v-checkbox>
@@ -66,7 +67,7 @@
             class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="Associate's Degree"
-            value="a"
+            value="2"
             color="secondary"
             hide-details
           ></v-checkbox>
@@ -76,7 +77,7 @@
             class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="Bachelor's Degree"
-            value="b"
+            value="3"
             color="secondary"
             hide-details
           ></v-checkbox> </v-expansion-panel-content

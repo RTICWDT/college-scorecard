@@ -80,6 +80,17 @@
       <v-container fluid class="pa-0">
         <v-row>
           <v-col cols="3" :class="{ 'd-none': !showSidebar }" class="pr-0">
+            <div class="pa-6 white" style="border-right: 5px solid #DFE6F0;">
+              <a
+                class="float-right close-filter"
+                @click="showSidebar = !showSidebar"
+              >
+                &lt; Close filters</a
+              >
+              <h2>
+                More Filters
+              </h2>
+            </div>
             <v-navigation-drawer
               v-model="showSidebar"
               :width="$vuetify.breakpoint.smAndDown ? '250' : 'auto'"

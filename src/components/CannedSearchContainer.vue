@@ -34,21 +34,21 @@
         <canned-search-slider
           id="canned-search-degree-c"
           label="I Want a Certificate"
-          :add-to-query="[{ cip4_degree: ['c'] }]"
+          :add-to-query="[{ cip4_degree: ['1'] }]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
 
         <canned-search-slider
           id="canned-search-degree-a"
           label="I Want an Associate's Degree"
-          :add-to-query="[{ cip4_degree: ['a'] }]"
+          :add-to-query="[{ cip4_degree: ['2'] }]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
 
         <canned-search-slider
           id="canned-search-degree-b"
           label="I Want a Bachelor's Degree"
-          :add-to-query="[{ cip4_degree: ['b'] }]"
+          :add-to-query="[{ cip4_degree: ['3'] }]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
       </v-col>

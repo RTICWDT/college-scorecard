@@ -16,9 +16,8 @@
 }
 
 .tab-card {
-  border:none;
+  border: none;
 }
-
 </style>
 
 <template>
@@ -67,7 +66,7 @@
                 :horizontal="true"
               />
               <v-btn
-              outlined
+                outlined
                 class="ml-sm-auto mx-sm-3 my-3 my-sm-0 float-right float-sm-none toggle-sidebar"
                 @click="showSidebar = !showSidebar"
               >
@@ -94,10 +93,17 @@
               :temporary="$vuetify.breakpoint.smAndDown"
               :hide-overlay="$vuetify.breakpoint.smAndUp"
             >
-            <div class="pa-6">
-              <h2 class="float-left">More Filters</h2>
-              <a class="float-right close-filter" @click="showSidebar = !showSidebar"> &lt; Close filters</a>
-          </div>
+              <div class="pa-6">
+                <a
+                  class="float-right close-filter"
+                  @click="showSidebar = !showSidebar"
+                >
+                  &lt; Close filters</a
+                >
+                <h2>
+                  More Filters
+                </h2>
+              </div>
               <!-- Search Form Component -->
               <search-form
                 :urlParsedParams="urlParsedParams"
