@@ -151,9 +151,10 @@
         class="search-form-dolflag-cb my-0 py-0"
         v-model="input.dolflag"
         label="Only show schools that have Department of Labor WIOA programs"
-        value="true"
         color="secondary"
         hide-details
+        true-value="true"
+        false-value="false"
       ></v-checkbox>
     </div>
 
@@ -177,6 +178,7 @@ import LocationCheck from "~/js/mixins/LocationCheck.js"
 import { SiteData } from "~/js/mixins/SiteData.js"
 import _ from "lodash"
 import LocationInstitutionSearch from "~/components/LocationInstitutionSearch.vue"
+import { megaMerge } from "~/js/forms.js"
 
 export default {
   mixins: [SiteData, LocationCheck],
@@ -202,9 +204,23 @@ export default {
         fos_salary: [0, 150],
         fos_debt: [0, 50],
         dolflag: null,
+        state: null,
+        zip: null,
+        distance: null,
+        lat: null,
+        long: null,
       },
       utility: {
-        formDefault: {},
+        formDefault: {
+          fos_salary: [0, 150],
+          fos_debt: [0, 50],
+          dolflag: null,
+          state: null,
+          zip: null,
+          distance: 50,
+          lat: null,
+          long: null,
+        },
         rules: {
           required: (value) => !!value || "Required.",
           numerical: (value) => {
@@ -228,18 +244,20 @@ export default {
     cleanInput() {
       let defaultValues = _.cloneDeep(this.utility.formDefault)
 
-      // Pick only values that are different from default state.
-      let groomedInput = _.pickBy(this.input, (value, key) => {
-        // If it does not exist in the default state object, remove.
+      let groomedInput = {}
+      for (const key in this.input) {
         if (!_.has(defaultValues, key)) {
-          return false
+          continue
         }
-
-        //If the input value is not equal to default, return value.
-        if (!_.isEqual(value, defaultValues[key]) || key === "cip4_degree") {
-          return value
+        if (
+          !_.isEqual(this.input[key], defaultValues[key]) ||
+          key === "cip4_degree"
+        ) {
+          groomedInput[key] = this.input[key]
+        } else {
+          groomedInput[key] = null
         }
-      })
+      }
 
       // Handle edge case for distance :(
       if (groomedInput.zip) {
@@ -340,8 +358,9 @@ export default {
     },
 
     handleLocationSelection(params) {
+      console.log(params)
       this.input = { ...this.input, ...params }
-      this.$emit("search-query", this.input)
+      //this.$emit("search-query", this.cleanInput)
     },
   },
 }

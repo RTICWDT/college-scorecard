@@ -364,13 +364,12 @@ import LocationCheck from "~/js/mixins/LocationCheck.js"
 
 import _ from "lodash"
 import { apiGet } from "~/js/api.js"
-import { fields, formMappings } from "~/js/constants.js"
+import { formMappings } from "~/js/constants.js"
+import * as forms from "~/js/forms.js"
 
 import FieldOfStudySearch from "~/components/FieldOfStudySearch.vue"
 import FieldOfStudyDetailChip from "~/components/FieldOfStudyDetailChip.vue"
 import SearchTabs from "~/components/SearchTabs.vue"
-
-const querystring = require("querystring")
 
 export default {
   components: {
@@ -397,7 +396,6 @@ export default {
       input: {
         sort: null,
         page: 1,
-        state: [],
         cip4: null,
         cip4_degree: null,
         dolflag: false,
@@ -409,7 +407,6 @@ export default {
       error: {
         message: null,
       },
-      showCompare: false,
       showDescription: false,
       sorts: [
         {
@@ -461,7 +458,7 @@ export default {
   created() {
     // Copy default form input state.
     this.utility.formDefault = _.cloneDeep(this.input)
-    this.urlParsedParams = this.parseURLParams()
+    this.urlParsedParams = forms.parseURLParams()
 
     // Add sort to state if it exists
     this.input.sort = this.urlParsedParams.sort
@@ -473,15 +470,6 @@ export default {
 
     if (!this.input.cip4 || !this.input.cip4_degree) {
       this.$router.push("/search/fos-landing")
-    }
-
-    if (
-      typeof this.urlParsedParams.dolflag === "undefined" ||
-      this.urlParsedParams.dolflag === "false"
-    ) {
-      this.displayFlag = false
-    } else {
-      this.displayFlag = true
     }
     this.searchAPI()
 
@@ -533,16 +521,6 @@ export default {
       this.isLoading = true
 
       this.error.message = null
-
-      if (
-        typeof params["dolflag"] === "undefined" ||
-        params["dolflag"] === "false"
-      ) {
-        this.displayFlag = false
-      } else {
-        this.displayFlag = true
-      }
-
       params.sort = this.input.sort ? this.input.sort : this.defaultSort
 
       let query = this.prepareParams(params)
@@ -553,7 +531,7 @@ export default {
       })
 
       if (process.isClient) {
-      history.replaceState(params, "search", qs)
+        history.replaceState(params, "search", qs)
       }
       this.addURLToStorage(qs)
 
@@ -567,7 +545,7 @@ export default {
 
           this.$emit("loading", false)
           if (process.isClient) {
-          this.shareUrl = window.location.href
+            this.shareUrl = window.location.href
           }
         })
         .catch((error) => {
@@ -599,25 +577,8 @@ export default {
       }
     },
 
-    parseURLParams(url) {
-      if (!url && process.isClient) {
-        url = location.search.substr(1)
-      }
-      let query = querystring.parse(url)
-
-      return query || {}
-    },
-    generateQueryString(params) {
-      let qs = querystring.stringify(params)
-      return (
-        "?" +
-        qs
-          .replace(/^&+/, "")
-          .replace(/&{2,}/g, "&")
-          .replace(/%3A/g, ":")
-      )
-    },
     handleFieldOfStudySearch(params) {
+      console.log(params)
       this.input = { ...this.input, ...params }
       this.input = Object.fromEntries(
         Object.entries(this.input).filter(([_, v]) => v != null)

@@ -225,6 +225,21 @@ export default {
     "fos-school-result": FieldOfStudySchoolResult,
     "horizontal-bar": HorizontalBar,
   },
+  methods: {
+    selectedFieldOfStudyClass(
+      fieldOfStudy,
+      compareList = this.$store.state.fos
+    ) {
+      if (
+        _.findIndex(
+          compareList,
+          this.fieldOfStudyCompareFormat(fieldOfStudy)
+        ) >= 0
+      ) {
+        return "result-card-selected"
+      }
+    },
+  },
   mounted() {
     // flatten the school to work with the computed fields.
     this.school = _.merge(this.fos.institution, this.fos.institution.school)
