@@ -548,12 +548,13 @@ export default {
       let query = this.prepareParams(params)
 
       // Add toggle value + params
-      let qs = this.generateQueryString({
+      let qs = forms.generateQueryString({
         ...params,
       })
 
+      if (process.isClient) {
       history.replaceState(params, "search", qs)
-
+      }
       this.addURLToStorage(qs)
 
       apiGet("/fos", query)
@@ -565,7 +566,9 @@ export default {
           this.results.meta = response.data.metadata
 
           this.$emit("loading", false)
+          if (process.isClient) {
           this.shareUrl = window.location.href
+          }
         })
         .catch((error) => {
           this.isLoading = false
