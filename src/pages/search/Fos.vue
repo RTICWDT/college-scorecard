@@ -1,7 +1,14 @@
+<style lang="scss" scoped>
+.data-row {
+  border-bottom: 1px solid #eee;
+  &:last-child {
+    border-bottom-style: none;
+  }
+}
+</style>
+
 <template>
   <div>
-    <!-- Search Form -->
-
     <v-main>
       <v-card tile>
         <search-tabs :selected="1" />
@@ -163,7 +170,10 @@
                 <!-- Field Of Study CIP 4 Information -->
                 <div>
                   <v-row>
-                    <v-col cols="12" v-if="!isLoading && this.displayFlag">
+                    <v-col
+                      cols="12"
+                      v-if="!isLoading && this.input.dolflag == 'true'"
+                    >
                       <v-alert
                         color="primary"
                         border="left"
@@ -249,17 +259,19 @@
                   </div>
 
                   <!-- Institution Results -->
-                  <div class="search-result-cards-container" v-if="!isLoading">
+                  <div
+                    class="search-result-cards-container"
+                    v-if="!isLoading && results.schools.length > 0"
+                  >
                     <v-card class="mx-auto pa-0 " style="width:100%" outlined>
-                      <v-card-text class="pa-md-6">
+                      <v-card-text>
                         <v-row
                           class="mb-2 py-4"
                           style="border-bottom:2px solid #eee"
                         >
                           <v-col
                             class="py-md-0 "
-                            cols="12"
-                            md="3"
+                            cols="3"
                             v-for="sort in sorts"
                             :key="sort.type"
                           >
@@ -297,13 +309,9 @@
                             lg="12"
                             md="12"
                             sm="12"
-                            class="d-flex align-stretch"
+                            class="d-flex align-stretch data-row"
                           >
-                            <fos-result-card
-                              :fos="school"
-                              class="my-1 py-1"
-                              style="border-bottom: 1px solid #E0E6F1"
-                            />
+                            <fos-result-card :fos="school" />
                           </v-col>
                         </v-row>
                       </v-card-text>
@@ -431,10 +439,8 @@ export default {
           direction: "asc",
         },
       ],
-      sortDir: "asc",
-      currentSort: "school",
+      defaultSort: "name:asc",
       shareUrl: null,
-      displayFlag: false,
 
       utility: {
         rules: {
