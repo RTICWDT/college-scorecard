@@ -213,9 +213,13 @@ export default {
     },
     dynamicLink() {
       if (this.fos.credential.level <= 3) {
-        return this.schoolLink
+        return `${this.schoolLink}&fos_code=${this.fos.code}&fos_credential=${
+          this.fos.credential.level
+        }`
       } else {
-        return this.fieldsLink
+        return `${this.fieldsLink}&fos_code=${this.fos.code}&fos_credential=${
+          this.fos.credential.level
+        }`
       }
     },
   },
