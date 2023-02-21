@@ -87,22 +87,50 @@
                 <!-- Field Of Study Search-->
                 <v-tab-item>
                   <v-card class="pa-5 homepage-search-container" flat>
-                    <field-of-study-search
-                      @field-of-study-selected="handleFieldOfStudySelected"
-                    />
-
-                    <div class="mt-5 text-right">
-                      <v-btn
-                        text
-                        small
-                        role="link"
-                        @click="handleFoSMoreOptionsClick"
-                        class=" text-uppercase"
+                    <v-row>
+                      <v-col cols="12" sm="5">
+                        <label class="d-block mb-2" for="fosSearch"
+                          >Search Fields of Study</label
+                        >
+                        <field-of-study-search
+                          @field-of-study-selected="handleFieldOfStudySelected"
+                          :selected="input.cip4"
+                          id="fosSearch"
+                        />
+                      </v-col>
+                      <v-col cols="12" sm="4">
+                        <label class="d-block  mb-2" for="fosDegree"
+                          >Select Degree Type</label
+                        >
+                        <v-select
+                          :items="fosDegrees"
+                          item-text="label"
+                          item-value="value"
+                          outlined
+                          placeholder="Select one"
+                          v-model="input.cip4_degree"
+                          hide-details
+                          id="fosDegree"
+                          color="fos-search-color"
+                        >
+                        </v-select>
+                      </v-col>
+                      <v-col col="1" sm="3" class="">
+                        <div class="d-none d-sm-block" style="height: 32px">
+                          &nbsp;
+                        </div>
+                        <v-btn
+                          @click="handleFormSubmit"
+                          width="100%"
+                          x-large
+                          color="secondary"
+                          :disabled="disableSearch"
+                        >
+                          Search
+                          <v-icon>mdi-menu-right</v-icon>
+                        </v-btn></v-col
                       >
-                        More Search Options
-                        <v-icon>mdi-menu-right</v-icon>
-                      </v-btn>
-                    </div>
+                    </v-row>
                   </v-card>
                 </v-tab-item>
 
@@ -150,9 +178,50 @@
                   </v-expansion-panel-header>
 
                   <v-expansion-panel-content>
-                    <field-of-study-search
-                      @field-of-study-selected="handleFieldOfStudySelected"
-                    />
+                    <v-row>
+                      <v-col cols="12" sm="5">
+                        <label class="d-block mb-2" for="fosSearch"
+                          >Search Fields of Study</label
+                        >
+                        <field-of-study-search
+                          @field-of-study-selected="handleFieldOfStudySelected"
+                          :selected="input.cip4"
+                          id="fosSearch"
+                        />
+                      </v-col>
+                      <v-col cols="12" sm="4">
+                        <label class="d-block  mb-2" for="fosDegree"
+                          >Select Degree Type</label
+                        >
+                        <v-select
+                          :items="fosDegrees"
+                          item-text="label"
+                          item-value="value"
+                          outlined
+                          placeholder="Select one"
+                          v-model="input.cip4_degree"
+                          hide-details
+                          id="fosDegree"
+                          color="fos-search-color"
+                        >
+                        </v-select>
+                      </v-col>
+                      <v-col col="12" sm="3" class="">
+                        <div class="d-none d-sm-block" style="height: 32px">
+                          &nbsp;
+                        </div>
+                        <v-btn
+                          @click="handleFormSubmit"
+                          width="100%"
+                          x-large
+                          color="secondary"
+                          :disabled="disableSearch"
+                        >
+                          Search
+                          <v-icon>mdi-menu-right</v-icon>
+                        </v-btn></v-col
+                      >
+                    </v-row>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
@@ -475,9 +544,9 @@ import SearchForm from "~/components/SearchForm.vue"
 import NameAutocomplete from "~/components/NameAutocomplete.vue"
 import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 import FieldOfStudySearch from "~/components/FieldOfStudySearch.vue"
-import FieldOfStudySearchNameAndDegree from "~/components/FieldOfStudySearchNameAndDegree.vue"
 import CompareDrawer from "~/components/CompareDrawer.vue"
 import CompareHeader from "~/components/CompareHeader.vue"
+import { formMappings } from "~/js/constants.js"
 export default {
   mixins: [AnalyticsEvents],
   components: {
@@ -485,7 +554,6 @@ export default {
     "search-form": SearchForm,
     "name-autocomplete": NameAutocomplete,
     "field-of-study-search": FieldOfStudySearch,
-    "field-of-study-search-name-and-degree": FieldOfStudySearchNameAndDegree,
     "compare-drawer": CompareDrawer,
     "compare-header": CompareHeader,
   },
@@ -495,7 +563,19 @@ export default {
       desktopTabs: 0,
       toggleCustomSearch: false,
       sliderColor: "#7BD88C",
+      input: {
+        cip4: null,
+        cip4_degree: null,
+      },
     }
+  },
+  computed: {
+    fosDegrees() {
+      return formMappings.fosDegrees
+    },
+    disableSearch() {
+      return this.input.cip4 === null || this.input.cip4_degree === null
+    },
   },
   methods: {
     colorSlider(num) {
@@ -537,12 +617,14 @@ export default {
       }
     },
     handleFieldOfStudySelected(fieldOfStudy) {
-      this.$router.push(
-        "/search/fos?cip4=" + encodeURIComponent(fieldOfStudy.cip4)
-      )
+      this.input.cip4 = fieldOfStudy.cip4
     },
-    handleFoSMoreOptionsClick() {
-      this.$router.push("/search/fos")
+    handleFormSubmit() {
+      this.$router.push(
+        `/search/fos?cip4=${encodeURIComponent(
+          this.input.cip4
+        )}&cip4_degree=${encodeURIComponent(this.input.cip4_degree)}`
+      )
     },
   },
   metaInfo: {
