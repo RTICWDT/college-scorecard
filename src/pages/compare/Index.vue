@@ -10,7 +10,7 @@
               color="white"
               id="referrer-link"
               class="link-more"
-              :href="referrerLink"
+              @click="$router.back()"
               >&laquo; Back</v-btn
             >
           </v-col>
@@ -327,7 +327,9 @@
                                 slotProps.school &&
                                   slotProps.school[fields.FOS_EARNINGS_FED_4YR]
                               "
-                              :value="slotProps.school[fields.FOS_EARNINGS_FED_4YR]"
+                              :value="
+                                slotProps.school[fields.FOS_EARNINGS_FED_4YR]
+                              "
                               :min="0"
                               :max="150000"
                               color="#1874DC"
@@ -365,7 +367,9 @@
                             <div
                               v-if="
                                 slotProps.school &&
-                                  !slotProps.school[fields.FOS_EARNINGS_PELL_4YR]
+                                  !slotProps.school[
+                                    fields.FOS_EARNINGS_PELL_4YR
+                                  ]
                               "
                               class="data-na"
                             >
@@ -402,7 +406,8 @@
                                   slotProps.school[fields.FOS_EARNINGS_FED_4YR]
                               "
                               :value="
-                                slotProps.school[fields.FOS_EARNINGS_FED_4YR] / 12
+                                slotProps.school[fields.FOS_EARNINGS_FED_4YR] /
+                                  12
                               "
                               :min="0"
                               :max="30000"
@@ -1645,15 +1650,7 @@ export default {
       //console.log(this.$url(compareBaseURL + this.prepareQueryString(paramArray)))
       return origin + compareBaseURL + this.prepareQueryString(paramArray)
     },
-    referrerLink() {
-      let referrer
-      if (process.isClient) {
-        referrer = document.referrer
-      } else {
-        referrer = null
-      }
-      return referrer || this.$url("/search")
-    },
+
     showSearchForm() {
       if (
         this.displayToggle === "institutions" &&

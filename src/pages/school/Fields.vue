@@ -10,7 +10,7 @@
                 small
                 id="referrer-link"
                 class="link-more"
-                :href="this.$url(referrerLink)"
+                @click="$router.back()"
                 >&laquo; Back</v-btn
               >
             </v-col>
@@ -318,11 +318,6 @@ export default {
         this.panels = []
       }
       return _.sortBy(sorted, ["name"])
-    },
-    referrerLink() {
-      let id = _.get(this.school, this.fields["ID"])
-      let name = _.get(this.school, this.fields["NAME"], "(unknown)")
-      return "/school/?" + id + "-" + name.replace(/\W+/g, "-")
     },
     shareLink() {
       let path = process.isClient ? window.location.href : ""

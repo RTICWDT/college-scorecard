@@ -40,8 +40,8 @@
                 text
                 id="referrer-link"
                 class="link-more"
-                :href="searchURL"
-                >&laquo; Back to search</v-btn
+                @click="$router.back()"
+                >&laquo; Back</v-btn
               >
             </v-col>
 
@@ -80,9 +80,11 @@
               class="display-3 font-weight-bold pa-0 mb-4"
             >
               {{ schoolName }}
-            </h1> 
+            </h1>
             <div class="population my-1">
-              <span class="font-weight-bold">{{ undergraduates | separator }}</span>
+              <span class="font-weight-bold">{{
+                undergraduates | separator
+              }}</span>
               undergraduate students
             </div>
             <div class="school-url my-1">
@@ -111,25 +113,29 @@
             </div>
             <div class="location mt-4">
               <div class="float-left">
-              <location-icon class="location-icon pt-1" target="_blank"></location-icon>
-              <span class="ml-2">{{ city }}</span
-              >,
-              <span>{{ state }}</span>
-              <span class="ml-2">{{ zip }}</span>
+                <location-icon
+                  class="location-icon pt-1"
+                  target="_blank"
+                ></location-icon>
+                <span class="ml-2">{{ city }}</span
+                >,
+                <span>{{ state }}</span>
+                <span class="ml-2">{{ zip }}</span>
+              </div>
+              <div class="float-right">
+                <a
+                  :href="$url('/school/transition/')"
+                  @click="
+                    transitionOutboundLink($event, generateMapLink(school))
+                  "
+                  target="_blank"
+                  >View on map<v-icon x-small class="pl-1" color="#007000">
+                    fas fa-external-link-alt
+                  </v-icon></a
+                >
+              </div>
             </div>
-            <div class="float-right"><a 
-              :href="$url('/school/transition/')"
-                  @click="transitionOutboundLink($event, generateMapLink(school))"
-                  target="_blank">View on map<v-icon
-                                    x-small
-                                    class="pl-1"
-                                    color="#007000"
-                                  >
-                                    fas fa-external-link-alt
-                                  </v-icon></a></div>
-            </div>            
           </v-col>
-
         </v-row>
         <v-row class="mt-3 pt-5" v-if="specialDesignations.length > 0">
           <v-col cols="12" class="px-sm-5">
@@ -1698,7 +1704,7 @@
                         </v-card>
 
                         <v-row>
-                          <v-col cols="12" lg="8" >
+                          <v-col cols="12" lg="8">
                             <v-card color="grey lighten-4 pa-4 mt-4">
                               <h2 class="mb-3">Get Help Paying for College</h2>
                               <p>
@@ -1901,26 +1907,18 @@
                       class="px-0 py-3 pa-sm-5"
                     >
                       <v-row>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="3"
-                        >
-                        <v-card flat class='pa-4'>
-                          <school-icons
-                            :school="school"
-                            :fields="fields"
-                            :sizeOnly="true"
-                            class=""
-                          />
-                        </v-card>
+                        <v-col cols="12" sm="6" md="3">
+                          <v-card flat class="pa-4">
+                            <school-icons
+                              :school="school"
+                              :fields="fields"
+                              :sizeOnly="true"
+                              class=""
+                            />
+                          </v-card>
                         </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="3"
-                        >
-                        <v-card flat class='pa-4 text-center'>
+                        <v-col cols="12" sm="6" md="3">
+                          <v-card flat class="pa-4 text-center">
                             <div class="mb-2">
                               <strong
                                 class="display-2 medium-blue-text font-weight-bold pb-2"
@@ -1930,13 +1928,8 @@
                             <strong>Undergraduate<br />Students</strong>
                           </v-card>
                         </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="3"
-                        >
-
-                        <v-card flat class='pa-4 text-center'>
+                        <v-col cols="12" sm="6" md="3">
+                          <v-card flat class="pa-4 text-center">
                             <div class="mb-2">
                               <span
                                 class="display-2 medium-blue-text font-weight-bold"
@@ -1949,14 +1942,8 @@
                             </strong>
                           </v-card>
                         </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="3"
-                        >
-
-                        <v-card flat class='pa-4 text-center'>
-
+                        <v-col cols="12" sm="6" md="3">
+                          <v-card flat class="pa-4 text-center">
                             <div class="mb-2">
                               <span
                                 class="display-2 medium-blue-text font-weight-bold"
@@ -1979,7 +1966,10 @@
                               income-based federal Pell grant intended for
                               low-income students.
                             </p>
-                            <div class='py-4' v-if="aidFlag < 3 && socioEconomicDiversity">
+                            <div
+                              class="py-4"
+                              v-if="aidFlag < 3 && socioEconomicDiversity"
+                            >
                               <donut
                                 color="#1874DC"
                                 :value="socioEconomicDiversity * 100"
@@ -2017,76 +2007,76 @@
                           </v-card>
                         </v-col>
                       </v-row>
-                        <v-card class='pa-4 mt-4' flat>
-                      <v-row>
-                        <v-col cols="12">
-                          <div style="  display: flex;align-items: center;">
-                            <h2 class="mb-1 d-inline-block">
-                              Race/Ethnicity
-                              <tooltip definition="race-eth" />
-                            </h2>
+                      <v-card class="pa-4 mt-4" flat>
+                        <v-row>
+                          <v-col cols="12">
+                            <div style="  display: flex;align-items: center;">
+                              <h2 class="mb-1 d-inline-block">
+                                Race/Ethnicity
+                                <tooltip definition="race-eth" />
+                              </h2>
+                              <div
+                                style="background:#1874DC;margin-right:10px;height:10px;width:10px;display:inline-block;"
+                              ></div>
+                              Student Body
+                              <div
+                                style="background:#102E52;margin-left:10px;margin-right:10px;height:10px;width:10px;display:inline-block;"
+                              ></div>
+                              Full-Time Staff
+                            </div>
+                          </v-col>
+                          <v-col cols="12" md="6">
                             <div
-                              style="background:#1874DC;margin-right:10px;height:10px;width:10px;display:inline-block;"
-                            ></div>
-                            Student Body
+                              v-for="item in raceEthnicity.slice(0, 5)"
+                              :key="item.label"
+                            >
+                              {{ item.label }}
+                              <horizontal-bar
+                                :value="Math.round(item.value * 100)"
+                                :min="0"
+                                :max="100"
+                                color="#1874DC"
+                                :height="25"
+                                :labels="true"
+                              ></horizontal-bar>
+                              <horizontal-bar
+                                :value="Math.round(item.staff_value * 100)"
+                                :min="0"
+                                :max="100"
+                                color="#102E52"
+                                :height="25"
+                                :labels="true"
+                                style="margin-top:2px;margin-bottom:15px;"
+                              ></horizontal-bar>
+                            </div>
+                          </v-col>
+                          <v-col cols="12" md="6">
                             <div
-                              style="background:#102E52;margin-left:10px;margin-right:10px;height:10px;width:10px;display:inline-block;"
-                            ></div>
-                            Full-Time Staff
-                          </div>
-                        </v-col>
-                        <v-col cols="12" md="6">
-                          <div
-                            v-for="item in raceEthnicity.slice(0, 5)"
-                            :key="item.label"
-                          >
-                            {{ item.label }}
-                            <horizontal-bar
-                              :value="Math.round(item.value * 100)"
-                              :min="0"
-                              :max="100"
-                              color="#1874DC"
-                              :height="25"
-                              :labels="true"
-                            ></horizontal-bar>
-                            <horizontal-bar
-                              :value="Math.round(item.staff_value * 100)"
-                              :min="0"
-                              :max="100"
-                              color="#102E52"
-                              :height="25"
-                              :labels="true"
-                              style="margin-top:2px;margin-bottom:15px;"
-                            ></horizontal-bar>
-                          </div>
-                        </v-col>
-                        <v-col cols="12" md="6">
-                          <div
-                            v-for="item in raceEthnicity.slice(5, 10)"
-                            :key="item.label"
-                          >
-                            {{ item.label }}
-                            <horizontal-bar
-                              :value="Math.round(item.value * 100)"
-                              :min="0"
-                              :max="100"
-                              color="#1874DC"
-                              :height="25"
-                              :labels="true"
-                            ></horizontal-bar>
-                            <horizontal-bar
-                              :value="Math.round(item.staff_value * 100)"
-                              :min="0"
-                              :max="100"
-                              color="#102E52"
-                              :height="25"
-                              :labels="true"
-                              style="margin-top:2px;margin-bottom:15px;"
-                            ></horizontal-bar>
-                          </div>
-                        </v-col>
-                      </v-row>
-                        </v-card>
+                              v-for="item in raceEthnicity.slice(5, 10)"
+                              :key="item.label"
+                            >
+                              {{ item.label }}
+                              <horizontal-bar
+                                :value="Math.round(item.value * 100)"
+                                :min="0"
+                                :max="100"
+                                color="#1874DC"
+                                :height="25"
+                                :labels="true"
+                              ></horizontal-bar>
+                              <horizontal-bar
+                                :value="Math.round(item.staff_value * 100)"
+                                :min="0"
+                                :max="100"
+                                color="#102E52"
+                                :height="25"
+                                :labels="true"
+                                style="margin-top:2px;margin-bottom:15px;"
+                              ></horizontal-bar>
+                            </div>
+                          </v-col>
+                        </v-row>
+                      </v-card>
                     </v-expansion-panel-content>
                   </v-expansion-panel>
 
@@ -2272,7 +2262,7 @@
 
 #profile-institution-title {
   line-height: 100% !important;
-  color: #10274E;
+  color: #10274e;
 }
 
 .field-of-study-select-container {
@@ -2344,9 +2334,8 @@
 }
 
 #fields-of-study.v-expansion-panel-header {
-  background-color:$fos-color-yellow !important;
+  background-color: $fos-color-yellow !important;
 }
-
 
 .fos-profile-mini-summary-info {
   width: 100%;
@@ -2453,8 +2442,8 @@ span.arrow-left {
 }
 
 .location-icon {
-  height:20px;
-  width:20px;
+  height: 20px;
+  width: 20px;
 }
 </style>
 
@@ -2757,11 +2746,11 @@ export default {
     generateMapLink(school) {
       let googleMapsBaseURL = "https://www.google.com/maps/search/?"
       let params = {}
-      params.api=1
+      params.api = 1
       params.query = school.location.lat + "," + school.location.lon
       let qs = querystring.stringify(params)
       return googleMapsBaseURL + qs
-    },   
+    },
     parseURLParams(url = location.search.substr(1)) {
       let query = querystring.parse(url)
 
