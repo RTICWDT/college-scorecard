@@ -524,6 +524,7 @@ h1 {
   font-size: 1rem;
   color: #bbbbbb !important;
   letter-spacing: normal;
+  font-weight:700;
 }
 
 .v-tab.v-tab--active {
