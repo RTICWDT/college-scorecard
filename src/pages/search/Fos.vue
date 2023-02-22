@@ -34,8 +34,8 @@
       >
         <v-row>
           <v-col>
-            <v-card flat class="white d-flex align-center">
-              <div class="mx-3">Field of Study:</div>
+            <v-card flat class="white d-sm-flex align-center">
+              <div class="mx-sm-3">Field of Study:</div>
               <div id="fos-search-and-chips">
                 <field-of-study-search
                   @field-of-study-selected="handleFieldOfStudySelected"
@@ -47,7 +47,10 @@
                 >
                 </field-of-study-search>
               </div>
-              <div class="mx-3" id="location-label">Degree Type:</div>
+
+              <div class="mx-sm-3 mt-2 mt-sm-0" id="location-label">
+                Degree Type:
+              </div>
               <!-- Credential Type -->
               <div class="">
                 <v-select
@@ -61,12 +64,13 @@
                   placeholder="Select one"
                   :rules="[utility.rules.required]"
                   @change="handleDegreeSelected"
+                  color="fos-search-color"
                 >
                 </v-select>
               </div>
 
               <v-btn
-                class="mx-3 ml-auto toggle-sidebar"
+                class="mx-sm-3 mx-0 my-2 my-sm-0 ml-sm-auto toggle-sidebar float-right float-sm-none"
                 outlined
                 @click="showSidebar = !showSidebar"
               >

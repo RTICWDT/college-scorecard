@@ -40,8 +40,8 @@
                 text
                 id="referrer-link"
                 class="link-more"
-                :href="searchURL"
-                >&laquo; Back to search</v-btn
+                @click="$router.back()"
+                >&laquo; Back</v-btn
               >
             </v-col>
 
@@ -80,9 +80,11 @@
               class="display-3 font-weight-bold pa-0 mb-4"
             >
               {{ schoolName }}
-            </h1> 
+            </h1>
             <div class="population my-1">
-              <span class="font-weight-bold">{{ undergraduates | separator }}</span>
+              <span class="font-weight-bold">{{
+                undergraduates | separator
+              }}</span>
               undergraduate students
             </div>
             <div class="school-url my-1">
@@ -111,25 +113,29 @@
             </div>
             <div class="location mt-4">
               <div class="float-left">
-              <location-icon class="location-icon pt-1" target="_blank"></location-icon>
-              <span class="ml-2">{{ city }}</span
-              >,
-              <span>{{ state }}</span>
-              <span class="ml-2">{{ zip }}</span>
+                <location-icon
+                  class="location-icon pt-1"
+                  target="_blank"
+                ></location-icon>
+                <span class="ml-2">{{ city }}</span
+                >,
+                <span>{{ state }}</span>
+                <span class="ml-2">{{ zip }}</span>
+              </div>
+              <div class="float-right">
+                <a
+                  :href="$url('/school/transition/')"
+                  @click="
+                    transitionOutboundLink($event, generateMapLink(school))
+                  "
+                  target="_blank"
+                  >View on map<v-icon x-small class="pl-1" color="#007000">
+                    fas fa-external-link-alt
+                  </v-icon></a
+                >
+              </div>
             </div>
-            <div class="float-right"><a 
-              :href="$url('/school/transition/')"
-                  @click="transitionOutboundLink($event, generateMapLink(school))"
-                  target="_blank">View on map<v-icon
-                                    x-small
-                                    class="pl-1"
-                                    color="#007000"
-                                  >
-                                    fas fa-external-link-alt
-                                  </v-icon></a></div>
-            </div>            
           </v-col>
-
         </v-row>
         <v-row class="mt-3 pt-5" v-if="specialDesignations.length > 0">
           <v-col cols="12" class="px-sm-5">
@@ -522,83 +528,65 @@
                       id="fos-content"
                       class="px-0 py-3 pa-sm-5"
                     >
-                      <h2 class="mb-4 pt-2 pt-sm-4">
-                        Fields of Study Offered at {{ schoolName }}
-                      </h2>
+                      <v-row>
+                        <v-col cols="12" md="8">
+                          <h2 class="mb-4 pt-2 pt-sm-4">
+                            Fields of Study Offered at {{ schoolName }}
+                          </h2>
 
-                      <div
-                        class="text-right pa-2 field-of-study-select-container-header"
+                          <div
+                            class="text-right pa-2 field-of-study-select-container-header"
+                          ></div>
+
+                          <div class="mb-4">
+                            <field-of-study-select
+                              :cip-two-nested-cip-four="fieldOfStudySelectItems"
+                              v-model="selectedFOS"
+                              @input-clear="handleFieldOfStudyClear"
+                              container-id="field-of-study-select-search-container2"
+                              result-id="field-of-study-select-search-result2"
+                            />
+                          </div>
+
+                          <field-data-extended
+                            v-if="selectedFOSDetail"
+                            :fos="selectedFOSDetail"
+                            :fos-salary-select-items="fosSalarySelectItems"
+                            :fos-salary-select="fieldDataExtendedSalarySelect"
+                            @update-salary-select="
+                              fieldDataExtendedSalarySelect = $event
+                            "
+                            :fos-show-debt-prior-included.sync="
+                              fieldDataExtendedShowPrior
+                            "
+                            @update-debt-show-prior="
+                              fieldDataExtendedShowPrior = $event
+                            "
+                            :fields="fields"
+                          /> </v-col
+                        ><v-col cols="12" md="4">
+                          <div
+                            class="fos-sub-title-header pt-4 pb-6 top-fos-sub-title-header"
+                            style="background:none !important;"
+                          >
+                            <h3>
+                              Awards Offered
+                            </h3>
+                          </div>
+                          <p>{{ schoolName }} awards {{ schoolDegreeList }}.</p>
+                          <p class="text-left my-8">
+                            <v-btn
+                              color="secondary"
+                              :href="this.$url(fieldsLink)"
+                            >
+                              <span class="d-none d-sm-flex"
+                                >See All Available Fields of Study
+                              </span>
+                              <span class="d-block d-sm-none">See All</span>
+                            </v-btn>
+                          </p>
+                        </v-col></v-row
                       >
-                        <!-- <v-btn
-                      v-if="selectedFOS"
-                      text
-                      small
-                      :color="black"
-                      @click="
-                        $emit(
-                          'toggle-compare-school',
-                          generateCompareFieldOfStudy(selectedFOSDetail),
-                          'compare-fos'
-                        )
-                      "
-                    >
-                      <v-icon
-                        class="mr-2"
-                        :color="
-                          isSelected(
-                            this.generateCompareFieldOfStudy(
-                              this.selectedFOSDetail
-                            ),
-                            this.compareFieldsOfStudy
-                          )
-                            ? '#0075B2'
-                            : 'black'
-                        "
-                        >fa fa-check-circle</v-icon
-                      >
-                      <div
-                        v-if="
-                          !isSelected(
-                            this.generateCompareFieldOfStudy(
-                              this.selectedFOSDetail
-                            ),
-                            this.compareFieldsOfStudy
-                          )
-                        "
-                      >
-                        Add to Compare Field of Study
-                      </div>
-                      <div v-else>&nbsp;Added to Compare</div>
-                    </v-btn> -->
-                      </div>
-
-                      <div class="mb-4">
-                        <field-of-study-select
-                          :cip-two-nested-cip-four="fieldOfStudySelectItems"
-                          v-model="selectedFOS"
-                          @input-clear="handleFieldOfStudyClear"
-                          container-id="field-of-study-select-search-container2"
-                          result-id="field-of-study-select-search-result2"
-                        />
-                      </div>
-
-                      <field-data-extended
-                        v-if="selectedFOSDetail"
-                        :fos="selectedFOSDetail"
-                        :fos-salary-select-items="fosSalarySelectItems"
-                        :fos-salary-select="fieldDataExtendedSalarySelect"
-                        @update-salary-select="
-                          fieldDataExtendedSalarySelect = $event
-                        "
-                        :fos-show-debt-prior-included.sync="
-                          fieldDataExtendedShowPrior
-                        "
-                        @update-debt-show-prior="
-                          fieldDataExtendedShowPrior = $event
-                        "
-                        :fields="fields"
-                      />
-
                       <div
                         class="fos-sub-title-header pt-4 pb-0 top-fos-sub-title-header"
                         style="background:none !important;"
@@ -744,29 +732,11 @@
                           >
                         </div>
                       </div>
-                      <div
-                        class="fos-sub-title-header pt-4 pb-6 top-fos-sub-title-header"
-                        style="background:none !important;"
-                      >
-                        <h3>
-                          Awards offered
-                        </h3>
-                      </div>
-                      <p>{{ schoolName }} awards {{ schoolDegreeList }}</p>
-                      <p class="text-left my-8">
-                        <v-btn color="secondary" :href="this.$url(fieldsLink)">
-                          <span class="d-none d-sm-flex"
-                            >See All Available Fields of Study at
-                            {{ schoolName }}
-                          </span>
-                          <span class="d-block d-sm-none">See All</span>
-                        </v-btn>
-                      </p>
-                      <p class="pa-4 rounded yellow-warn mt-4 mb-8">
+                      <div class="pa-4 rounded yellow-warn mt-4 mb-8">
                         <strong>Note: </strong>These data were collected from
                         undergradute students who received federal financial
                         aid.
-                      </p>
+                      </div>
                     </v-expansion-panel-content>
                   </v-expansion-panel>
                 </v-expansion-panels>
@@ -784,8 +754,8 @@
                       class="px-0 py-3 pa-sm-5"
                     >
                       <v-row>
-                        <v-col cols="12" md="12">
-                          <v-card flat class="pa-4">
+                        <v-col cols="12" sm="6">
+                          <v-card flat class="pa-4 fill-height">
                             <div v-if="!isProgramReporter">
                               <h2 class="mb-3">
                                 Average Annual Cost&nbsp;
@@ -818,69 +788,61 @@
                                 "
                                 class="pt-8 pb-8"
                               />
-                              <v-row>
-                                <v-col cols="2"></v-col>
-                                <v-col cols="8">
-                                  <horizontal-bar-median
-                                    v-if="netPrice"
-                                    :value="{
-                                      label: this.$options.filters.numeral(
-                                        netPrice,
-                                        '$0,0'
-                                      ),
-                                      value: netPrice,
-                                    }"
-                                    :min="{
-                                      label: '$0',
-                                      value: 0,
-                                      style: { height: '60px' },
-                                    }"
-                                    :max="{
-                                      label: '$100,000',
-                                      value: 100000,
-                                      style: { height: '60px' },
-                                    }"
-                                    :median="{
-                                      label:
-                                        'Midpoint: ' +
-                                        this.$options.filters.numeral(
-                                          this.medianToggle === 'group'
-                                            ? Math.round(
-                                                parseFloat(
-                                                  fakeAverageAnnualCosts[
-                                                    groupName
-                                                  ][0]
-                                                )
-                                              )
-                                            : Math.round(
-                                                parseFloat(
-                                                  fakeAverageAnnualCosts[
-                                                    groupName
-                                                  ][1]
-                                                )
-                                              ),
-                                          '$0,0'
-                                        ),
-                                      value:
-                                        this.medianToggle === 'group'
-                                          ? fakeAverageAnnualCosts[groupName][0]
-                                          : fakeAverageAnnualCosts[
-                                              groupName
-                                            ][1],
-                                      style: { height: '60px' },
-                                      show: true,
-                                    }"
-                                    color="#00365e"
-                                    :y-bar-thickness="50"
-                                    :label-font-size="24"
-                                    :labels="true"
-                                  ></horizontal-bar-median>
-                                  <div class="data-na" v-else>
-                                    Data Not Available
-                                  </div>
-                                </v-col>
-                                <v-col cols="2"></v-col>
-                              </v-row>
+                              <horizontal-bar-median
+                                v-if="netPrice"
+                                :value="{
+                                  label: this.$options.filters.numeral(
+                                    netPrice,
+                                    '$0,0'
+                                  ),
+                                  value: netPrice,
+                                }"
+                                :min="{
+                                  label: '$0',
+                                  value: 0,
+                                  style: { height: '60px' },
+                                }"
+                                :max="{
+                                  label: '$100,000',
+                                  value: 100000,
+                                  style: { height: '60px' },
+                                }"
+                                :median="{
+                                  label:
+                                    'Midpoint: ' +
+                                    this.$options.filters.numeral(
+                                      this.medianToggle === 'group'
+                                        ? Math.round(
+                                            parseFloat(
+                                              fakeAverageAnnualCosts[
+                                                groupName
+                                              ][0]
+                                            )
+                                          )
+                                        : Math.round(
+                                            parseFloat(
+                                              fakeAverageAnnualCosts[
+                                                groupName
+                                              ][1]
+                                            )
+                                          ),
+                                      '$0,0'
+                                    ),
+                                  value:
+                                    this.medianToggle === 'group'
+                                      ? fakeAverageAnnualCosts[groupName][0]
+                                      : fakeAverageAnnualCosts[groupName][1],
+                                  style: { height: '60px' },
+                                  show: true,
+                                }"
+                                color="#00365e"
+                                :y-bar-thickness="50"
+                                :label-font-size="24"
+                                :labels="true"
+                              ></horizontal-bar-median>
+                              <div class="data-na" v-else>
+                                Data Not Available
+                              </div>
                             </div>
                             <div v-else>
                               <h2 class="mb-3">
@@ -999,8 +961,10 @@
                                 </v-col>
                                 <v-col cols="2"></v-col>
                               </v-row>
-                            </div> </v-card
-                          ><v-card flat class="pa-4 mt-4">
+                            </div>
+                          </v-card> </v-col
+                        ><v-col cols="12" sm="6">
+                          <v-card flat class="pa-4">
                             <h2 class="mb-3">By Family Income</h2>
                             <p>
                               Depending on the federal, state, or institutional
@@ -1086,39 +1050,28 @@
                       class="px-0 py-3 pa-sm-5"
                     >
                       <v-row>
-                        <v-col cols="12" md="12" id="showPellOnlyGrad">
-                          <v-card flat class="pa-4">
-                            <v-row class="d-flex">
-                              <v-col cols="7" md="7" sm="12">
-                                <h2 class="mb-3">
-                                  Graduation Rate&nbsp;
-                                  <tooltip
-                                    definition="graduation-rate"
-                                    :version="completionRateFieldDefinition"
-                                    :isPell="showPellOnlyGrad"
-                                  />
-                                </h2>
-                              </v-col>
-                              <v-col
-                                cols="5"
-                                md="5"
-                                sm="12"
-                                class="d-flex justify-end"
-                              >
-                                <v-checkbox
-                                  v-model="showPellOnlyGrad"
-                                  label="Show Pell Grant Recipients Only"
-                                  color="secondary"
-                                  class="mt-0"
-                                >
-                                  <template v-slot:label>
-                                    <span>
-                                      Show Pell Grant Recipients Only&nbsp;
-                                    </span>
-                                  </template>
-                                </v-checkbox>
-                              </v-col>
-                            </v-row>
+                        <v-col cols="12" md="6" id="showPellOnlyGrad">
+                          <v-card flat class="pa-4 fill-height">
+                            <h2 class="mb-3">
+                              Graduation Rate&nbsp;
+                              <tooltip
+                                definition="graduation-rate"
+                                :version="completionRateFieldDefinition"
+                                :isPell="showPellOnlyGrad"
+                              />
+                            </h2>
+                            <v-checkbox
+                              v-model="showPellOnlyGrad"
+                              label="Show Pell Grant Recipients Only"
+                              color="secondary"
+                              class="mt-0"
+                            >
+                              <template v-slot:label>
+                                <span>
+                                  Show Pell Grant Recipients Only&nbsp;
+                                </span>
+                              </template>
+                            </v-checkbox>
                             <v-expand-transition>
                               <median-toggle
                                 v-show="!showPellOnlyGrad"
@@ -1133,116 +1086,101 @@
                                 class="pt-0 pb-8"
                               />
                             </v-expand-transition>
-                            <v-row>
-                              <v-col cols="2"></v-col>
-                              <v-col cols="8">
-                                <horizontal-bar-median
-                                  v-if="
-                                    (completionRate && !showPellOnlyGrad) ||
-                                      (completionRatePell && showPellOnlyGrad)
-                                  "
-                                  :value="{
-                                    label: showPellOnlyGrad
-                                      ? Math.round(
-                                          parseFloat(completionRatePell) * 100
-                                        ) + '%'
-                                      : Math.round(
-                                          parseFloat(completionRate) * 100
-                                        ) + '%',
-                                    value: showPellOnlyGrad
-                                      ? Math.round(
-                                          parseFloat(completionRatePell) * 100
-                                        )
-                                      : Math.round(
-                                          parseFloat(completionRate) * 100
-                                        ),
-                                  }"
-                                  :min="{
-                                    label: '0%',
-                                    value: 0,
-                                    style: { height: '60px' },
-                                  }"
-                                  :max="{
-                                    label: '100%',
-                                    value: 100,
-                                    style: { height: '60px' },
-                                  }"
-                                  :median="{
-                                    label:
-                                      'Midpoint: ' +
-                                      this.$options.filters.numeral(
-                                        this.medianToggle === 'group'
-                                          ? fakeGraduationRate[groupName][0]
-                                          : fakeGraduationRate[groupName][1],
-                                        '0%'
-                                      ),
-                                    value:
-                                      this.medianToggle === 'group'
-                                        ? fakeGraduationRate[groupName][0] * 100
-                                        : fakeGraduationRate[groupName][1] *
-                                          100,
-                                    style: { height: '60px' },
-                                    show: !showPellOnlyGrad,
-                                  }"
-                                  color="#00365e"
-                                  :height="500"
-                                  :y-bar-thickness="50"
-                                  :label-font-size="24"
-                                  :labels="true"
-                                  class="pb-10"
-                                ></horizontal-bar-median>
-                                <div v-else class="data-na">
-                                  Data Not Available
-                                </div>
-                              </v-col>
-                            </v-row>
+                            <horizontal-bar-median
+                              v-if="
+                                (completionRate && !showPellOnlyGrad) ||
+                                  (completionRatePell && showPellOnlyGrad)
+                              "
+                              :value="{
+                                label: showPellOnlyGrad
+                                  ? Math.round(
+                                      parseFloat(completionRatePell) * 100
+                                    ) + '%'
+                                  : Math.round(
+                                      parseFloat(completionRate) * 100
+                                    ) + '%',
+                                value: showPellOnlyGrad
+                                  ? Math.round(
+                                      parseFloat(completionRatePell) * 100
+                                    )
+                                  : Math.round(
+                                      parseFloat(completionRate) * 100
+                                    ),
+                              }"
+                              :min="{
+                                label: '0%',
+                                value: 0,
+                                style: { height: '60px' },
+                              }"
+                              :max="{
+                                label: '100%',
+                                value: 100,
+                                style: { height: '60px' },
+                              }"
+                              :median="{
+                                label:
+                                  'Midpoint: ' +
+                                  this.$options.filters.numeral(
+                                    this.medianToggle === 'group'
+                                      ? fakeGraduationRate[groupName][0]
+                                      : fakeGraduationRate[groupName][1],
+                                    '0%'
+                                  ),
+                                value:
+                                  this.medianToggle === 'group'
+                                    ? fakeGraduationRate[groupName][0] * 100
+                                    : fakeGraduationRate[groupName][1] * 100,
+                                style: { height: '60px' },
+                                show: !showPellOnlyGrad,
+                              }"
+                              color="#00365e"
+                              :height="500"
+                              :y-bar-thickness="50"
+                              :label-font-size="24"
+                              :labels="true"
+                              class="pb-10"
+                            ></horizontal-bar-median>
+                            <div v-else class="data-na">
+                              Data Not Available
+                            </div>
                           </v-card>
-                          <v-row
-                            ><v-col cols="12" class="mt-4">
-                              <v-card flat class="pa-4">
-                                <h2 class="mb-12">
-                                  Students Who Return After Their First
-                                  Year&nbsp;
-                                  <tooltip definition="retention-rate" />
-                                </h2>
-                                <v-row>
-                                  <v-col cols="2"></v-col>
-                                  <v-col cols="8">
-                                    <horizontal-bar-median
-                                      v-if="retentionRate"
-                                      :value="{
-                                        label:
-                                          Math.round(
-                                            parseFloat(retentionRate) * 100
-                                          ) + '%',
-                                        value: Math.round(
-                                          parseFloat(retentionRate) * 100
-                                        ),
-                                      }"
-                                      :min="{
-                                        label: '0%',
-                                        value: 0,
-                                        style: { height: '60px' },
-                                      }"
-                                      :max="{
-                                        label: '100%',
-                                        value: 100,
-                                        style: { height: '60px' },
-                                      }"
-                                      color="#00365e"
-                                      :height="500"
-                                      :y-bar-thickness="50"
-                                      :label-font-size="24"
-                                      :labels="true"
-                                    ></horizontal-bar-median>
-                                    <div v-else class="data-na">
-                                      Data Not Available
-                                    </div>
-                                  </v-col></v-row
-                                ></v-card
-                              >
-                            </v-col>
-                          </v-row>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                          <v-card flat class="pa-4 fill-height">
+                            <h2 class="mb-12">
+                              Students Who Return After Their First Year&nbsp;
+                              <tooltip definition="retention-rate" />
+                            </h2>
+                            <horizontal-bar-median
+                              v-if="retentionRate"
+                              :value="{
+                                label:
+                                  Math.round(parseFloat(retentionRate) * 100) +
+                                  '%',
+                                value: Math.round(
+                                  parseFloat(retentionRate) * 100
+                                ),
+                              }"
+                              :min="{
+                                label: '0%',
+                                value: 0,
+                                style: { height: '60px' },
+                              }"
+                              :max="{
+                                label: '100%',
+                                value: 100,
+                                style: { height: '60px' },
+                              }"
+                              color="#00365e"
+                              :height="500"
+                              :y-bar-thickness="50"
+                              :label-font-size="24"
+                              :labels="true"
+                            ></horizontal-bar-median>
+                            <div v-else class="data-na">
+                              Data Not Available
+                            </div>
+                          </v-card>
                         </v-col>
                       </v-row>
                       <v-row>
@@ -1354,7 +1292,7 @@
                             </v-checkbox>
                           </v-col>
 
-                          <v-col cols="12" md="6">
+                          <v-col cols="12" md="5">
                             <v-card class="pa-4 fill-height" flat>
                               <div v-if="aidLoanSelect === 'fed'">
                                 <h2 class="mb-3">
@@ -1415,7 +1353,7 @@
                             </v-card>
                           </v-col>
 
-                          <v-col cols="12" md="6">
+                          <v-col cols="12" md="7">
                             <v-card flat class="pa-4">
                               <h2 class="mb-3">
                                 Median Total Debt After Graduation
@@ -1609,96 +1547,97 @@
                             </v-card>
                           </v-col>
                         </v-row>
-                        <v-card
-                          class="pa-4 fill-height mt-4"
-                          flat
-                          v-if="aidLoanSelect === 'fed'"
-                        >
-                          <v-row v-if="aidLoanSelect === 'fed'">
-                            <v-col cols="12" md="12" id="showGradOnly">
-                              <h2 class="mb-3" v-if="showGradOnly">
-                                Repayment Rate&nbsp;<tooltip
-                                  definition="repayment-rate"
-                                  :isBranch="isBranch"
-                                />
-                              </h2>
-                              <h2 class="mb-3" v-else>
-                                Repayment Rate&nbsp;<tooltip
-                                  definition="repayment-rate-completers"
-                                  :isBranch="isBranch"
-                                />
-                              </h2>
-                              <span v-if="showGradOnly">
-                                Percentage of borrowers in each category 2 years
-                                after entering repayment. For category
-                                definitions, please see
-                                <a
-                                  v-bind:href="
-                                    $url(
-                                      '/data/glossary/#repayment-rate-completers'
-                                    )
-                                  "
-                                  >the glossary</a
-                                >.
-                              </span>
-                              <span v-else>
-                                Percentage of borrowers in each category 2 years
-                                after entering repayment. For category
-                                definitions, please see
-                                <a
-                                  v-bind:href="
-                                    $url('/data/glossary/#repayment-rate')
-                                  "
-                                  >the glossary</a
-                                >.
-                              </span>
-                              <v-checkbox
-                                v-model="showGradOnly"
-                                label="Only show data for those who graduated"
-                                color="secondary"
-                                class="mt-0"
-                              >
-                                <template v-slot:label>
-                                  <span>
-                                    Only show data for those who graduated
-                                  </span>
-                                </template>
-                              </v-checkbox>
-                            </v-col>
-                          </v-row>
-                          <v-row v-if="aidLoanSelect === 'fed'" class="mb-2">
-                            <v-col class="pt-0">
-                              <v-simple-table class="school-table">
-                                <caption class="sr-only">
-                                  Repayment Rates
-                                </caption>
-                                <thead>
-                                  <tr>
-                                    <th>Repayment Status</th>
-                                    <th>Percent</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr
-                                    v-for="(rate, index) in repaymentRates[
-                                      gradSubgroup
-                                    ]"
-                                    :key="index"
-                                  >
-                                    <td>{{ rate["label"] }}</td>
-                                    <td v-if="rate['value']">
-                                      {{ rate["value"] | numeral("0%") }}
-                                    </td>
-                                    <td v-else>--</td>
-                                  </tr>
-                                </tbody>
-                              </v-simple-table>
-                            </v-col>
-                          </v-row>
-                        </v-card>
-
                         <v-row>
-                          <v-col cols="12" lg="8" >
+                          <v-col
+                            cols="12"
+                            sm="8"
+                            v-if="aidLoanSelect === 'fed'"
+                          >
+                            <v-card class="pa-4 fill-height mt-4" flat>
+                              <v-row>
+                                <v-col cols="12" md="12" id="showGradOnly">
+                                  <h2 class="mb-3" v-if="showGradOnly">
+                                    Repayment Rate&nbsp;<tooltip
+                                      definition="repayment-rate"
+                                      :isBranch="isBranch"
+                                    />
+                                  </h2>
+                                  <h2 class="mb-3" v-else>
+                                    Repayment Rate&nbsp;<tooltip
+                                      definition="repayment-rate-completers"
+                                      :isBranch="isBranch"
+                                    />
+                                  </h2>
+                                  <span v-if="showGradOnly">
+                                    Percentage of borrowers in each category 2
+                                    years after entering repayment. For category
+                                    definitions, please see
+                                    <a
+                                      v-bind:href="
+                                        $url(
+                                          '/data/glossary/#repayment-rate-completers'
+                                        )
+                                      "
+                                      >the glossary</a
+                                    >.
+                                  </span>
+                                  <span v-else>
+                                    Percentage of borrowers in each category 2
+                                    years after entering repayment. For category
+                                    definitions, please see
+                                    <a
+                                      v-bind:href="
+                                        $url('/data/glossary/#repayment-rate')
+                                      "
+                                      >the glossary</a
+                                    >.
+                                  </span>
+                                  <v-checkbox
+                                    v-model="showGradOnly"
+                                    label="Only show data for those who graduated"
+                                    color="secondary"
+                                    class="mt-0"
+                                  >
+                                    <template v-slot:label>
+                                      <span>
+                                        Only show data for those who graduated
+                                      </span>
+                                    </template>
+                                  </v-checkbox>
+                                </v-col>
+                              </v-row>
+                              <v-row class="mb-2">
+                                <v-col class="pt-0">
+                                  <v-simple-table class="school-table">
+                                    <caption class="sr-only">
+                                      Repayment Rates
+                                    </caption>
+                                    <thead>
+                                      <tr>
+                                        <th>Repayment Status</th>
+                                        <th>Percent</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr
+                                        v-for="(rate, index) in repaymentRates[
+                                          gradSubgroup
+                                        ]"
+                                        :key="index"
+                                      >
+                                        <td>{{ rate["label"] }}</td>
+                                        <td v-if="rate['value']">
+                                          {{ rate["value"] | numeral("0%") }}
+                                        </td>
+                                        <td v-else>--</td>
+                                      </tr>
+                                    </tbody>
+                                  </v-simple-table>
+                                </v-col>
+                              </v-row>
+                            </v-card>
+                          </v-col>
+                          <v-col cols="12" lg="4">
                             <v-card color="grey lighten-4 pa-4 mt-4">
                               <h2 class="mb-3">Get Help Paying for College</h2>
                               <p>
@@ -1733,6 +1672,7 @@
                             </v-card>
                           </v-col>
                         </v-row>
+                        <v-row> </v-row>
                       </div>
                     </v-expansion-panel-content>
                   </v-expansion-panel>
@@ -1750,142 +1690,132 @@
                       id="earnings-content"
                       class="px-0 py-3 pa-sm-5"
                     >
-                      <div>
-                        <v-card flat class="pa-4">
-                          <h2 class="pb-3">
-                            Median Earnings&nbsp;<tooltip
-                              definition="institution-median-earnings"
-                              :isBranch="isBranch"
+                      <v-row class="mt-4">
+                        <v-col sm="7">
+                          <v-card flat class="pa-4">
+                            <h2 class="pb-3">
+                              Median Earnings&nbsp;<tooltip
+                                definition="institution-median-earnings"
+                                :isBranch="isBranch"
+                              />
+                            </h2>
+                            <h2
+                              class="display-2 navy-text font-weight-bold mb-3"
+                              v-if="medianEarnings"
+                            >
+                              {{ medianEarnings | numeral("$0,0") }}
+                            </h2>
+                            <p class="mb-0">
+                              The median earnings of former students who
+                              received federal financial aid at 10 years after
+                              entering the school.
+                            </p>
+                            <median-toggle
+                              :display-toggle="medianToggle"
+                              :control-tab="controlTab"
+                              @median-switch-click="handleMedianToggle"
+                              @median-tab-change="handleMedianToggle"
+                              :group-name="
+                                this.$options.filters.yearsText(groupName) +
+                                  ' Schools'
+                              "
+                              class="pt-12 pb-8"
                             />
-                          </h2>
-                          <h2
-                            class="display-2 navy-text font-weight-bold mb-3"
-                            v-if="medianEarnings"
-                          >
-                            {{ medianEarnings | numeral("$0,0") }}
-                          </h2>
-                          <p class="mb-0">
-                            The median earnings of former students who received
-                            federal financial aid at 10 years after entering the
-                            school.
-                          </p>
-                          <median-toggle
-                            :display-toggle="medianToggle"
-                            :control-tab="controlTab"
-                            @median-switch-click="handleMedianToggle"
-                            @median-tab-change="handleMedianToggle"
-                            :group-name="
-                              this.$options.filters.yearsText(groupName) +
-                                ' Schools'
-                            "
-                            class="pt-12 pb-8"
-                          />
 
-                          <v-row>
-                            <v-col cols="2"></v-col>
-                            <v-col cols="8">
-                              <horizontal-bar-median
-                                v-if="medianEarnings"
-                                :value="{
-                                  label: this.$options.filters.numeral(
-                                    medianEarnings,
+                            <horizontal-bar-median
+                              v-if="medianEarnings"
+                              :value="{
+                                label: this.$options.filters.numeral(
+                                  medianEarnings,
+                                  '$0,0'
+                                ),
+                                value: medianEarnings,
+                              }"
+                              :min="{
+                                label: '$0',
+                                value: 0,
+                                style: { height: '60px' },
+                              }"
+                              :max="{
+                                label: '$100,000',
+                                value: 100000,
+                                style: { height: '60px' },
+                              }"
+                              :median="{
+                                label:
+                                  'Midpoint: ' +
+                                  this.$options.filters.numeral(
+                                    this.medianToggle === 'group'
+                                      ? Math.round(
+                                          parseFloat(
+                                            fakeMedianEarnings[groupName][0]
+                                          )
+                                        )
+                                      : Math.round(
+                                          parseFloat(
+                                            fakeMedianEarnings[groupName][1]
+                                          )
+                                        ),
                                     '$0,0'
                                   ),
-                                  value: medianEarnings,
-                                }"
-                                :min="{
-                                  label: '$0',
-                                  value: 0,
-                                  style: { height: '60px' },
-                                }"
-                                :max="{
-                                  label: '$100,000',
-                                  value: 100000,
-                                  style: { height: '60px' },
-                                }"
-                                :median="{
-                                  label:
-                                    'Midpoint: ' +
-                                    this.$options.filters.numeral(
-                                      this.medianToggle === 'group'
-                                        ? Math.round(
-                                            parseFloat(
-                                              fakeMedianEarnings[groupName][0]
-                                            )
-                                          )
-                                        : Math.round(
-                                            parseFloat(
-                                              fakeMedianEarnings[groupName][1]
-                                            )
-                                          ),
-                                      '$0,0'
-                                    ),
-                                  value:
-                                    this.medianToggle === 'group'
-                                      ? fakeMedianEarnings[groupName][0]
-                                      : fakeMedianEarnings[groupName][1],
-                                  style: { height: '60px' },
-                                  show: true,
-                                }"
-                                color="#00365e"
-                                :height="500"
-                                :y-bar-thickness="50"
-                                :label-font-size="24"
-                                :labels="true"
-                              ></horizontal-bar-median>
-                              <div v-else class="data-na">
-                                Data Not Available
-                              </div>
-                            </v-col>
-                            <v-col cols="2"></v-col>
-                          </v-row>
-                        </v-card>
-                        <v-row class="mt-4">
-                          <v-col sm="6">
-                            <v-card flat class="pa-4 fill-height">
-                              <h2 class="mb-2">
-                                Percentage Earning More Than a High School
-                                Graduate&nbsp;<tooltip
-                                  definition="threshold-earnings"
-                                />
+                                value:
+                                  this.medianToggle === 'group'
+                                    ? fakeMedianEarnings[groupName][0]
+                                    : fakeMedianEarnings[groupName][1],
+                                style: { height: '60px' },
+                                show: true,
+                              }"
+                              color="#00365e"
+                              :height="500"
+                              :y-bar-thickness="50"
+                              :label-font-size="24"
+                              :labels="true"
+                            ></horizontal-bar-median>
+                            <div v-else class="data-na">
+                              Data Not Available
+                            </div>
+                          </v-card>
+                        </v-col>
+                        <v-col sm="5">
+                          <v-card flat class="pa-4 mb-4 ">
+                            <h2 class="mb-2">
+                              Percentage Earning More Than a High School
+                              Graduate&nbsp;<tooltip
+                                definition="threshold-earnings"
+                              />
+                            </h2>
+                            <div
+                              class="d-flex align-end"
+                              v-if="percentMoreThanHS"
+                            >
+                              <h2 class="display-2 navy-text font-weight-bold">
+                                {{ percentMoreThanHS | numeral("0%") }}
                               </h2>
-                              <div
-                                class="d-flex align-end"
-                                v-if="percentMoreThanHS"
-                              >
-                                <h2
-                                  class="display-2 navy-text font-weight-bold"
-                                >
-                                  {{ percentMoreThanHS | numeral("0%") }}
-                                </h2>
-                                <span> &nbsp; of students</span>
-                              </div>
-                              <div v-else class="data-na mb-4">
-                                Data Not Available
-                              </div>
-                            </v-card>
-                          </v-col>
-                          <v-col sm="6">
-                            <v-card flat class="pa-4 fill-height">
-                              <h2>
-                                Earnings After Completing Field of
-                                Study&nbsp;<tooltip
-                                  definition="fos-median-earnings"
-                                />
-                              </h2>
+                              <span> &nbsp; of students</span>
+                            </div>
+                            <div v-else class="data-na mb-4">
+                              Data Not Available
+                            </div>
+                          </v-card>
+                          <v-card flat class="pa-4">
+                            <h2>
+                              Earnings After Completing Field of
+                              Study&nbsp;<tooltip
+                                definition="fos-median-earnings"
+                              />
+                            </h2>
 
-                              <p class="mt-2">
-                                Salary information for Fields of Study available
-                                at this school are in the
-                                <a :href="this.$url(fieldsLink)"
-                                  >All Fields of Study</a
-                                >
-                                page.
-                              </p>
-                            </v-card>
-                          </v-col>
-                        </v-row>
-                      </div>
+                            <p class="mt-2">
+                              Salary information for Fields of Study available
+                              at this school are in the
+                              <a :href="this.$url(fieldsLink)"
+                                >All Fields of Study</a
+                              >
+                              page.
+                            </p>
+                          </v-card>
+                        </v-col>
+                      </v-row>
                     </v-expansion-panel-content>
                   </v-expansion-panel>
 
@@ -1901,26 +1831,18 @@
                       class="px-0 py-3 pa-sm-5"
                     >
                       <v-row>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="3"
-                        >
-                        <v-card flat class='pa-4'>
-                          <school-icons
-                            :school="school"
-                            :fields="fields"
-                            :sizeOnly="true"
-                            class=""
-                          />
-                        </v-card>
+                        <v-col cols="12" sm="6" md="3">
+                          <v-card flat class="pa-4 fill-height">
+                            <school-icons
+                              :school="school"
+                              :fields="fields"
+                              :sizeOnly="true"
+                              class=""
+                            />
+                          </v-card>
                         </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="3"
-                        >
-                        <v-card flat class='pa-4 text-center'>
+                        <v-col cols="12" sm="6" md="3">
+                          <v-card flat class="pa-4 text-center fill-height">
                             <div class="mb-2">
                               <strong
                                 class="display-2 medium-blue-text font-weight-bold pb-2"
@@ -1930,13 +1852,8 @@
                             <strong>Undergraduate<br />Students</strong>
                           </v-card>
                         </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="3"
-                        >
-
-                        <v-card flat class='pa-4 text-center'>
+                        <v-col cols="12" sm="6" md="3">
+                          <v-card flat class="pa-4 text-center fill-height">
                             <div class="mb-2">
                               <span
                                 class="display-2 medium-blue-text font-weight-bold"
@@ -1949,14 +1866,8 @@
                             </strong>
                           </v-card>
                         </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="3"
-                        >
-
-                        <v-card flat class='pa-4 text-center'>
-
+                        <v-col cols="12" sm="6" md="3">
+                          <v-card flat class="pa-4 text-center fill-height">
                             <div class="mb-2">
                               <span
                                 class="display-2 medium-blue-text font-weight-bold"
@@ -1969,7 +1880,7 @@
                       </v-row>
                       <v-row>
                         <v-col cols="12" md="6">
-                          <v-card flat class="pa-4">
+                          <v-card flat class="pa-4 fill-height">
                             <h2 class="mb-3">
                               Socio-Economic Diversity
                               <tooltip definition="socio-eco" />
@@ -1979,7 +1890,10 @@
                               income-based federal Pell grant intended for
                               low-income students.
                             </p>
-                            <div class='py-4' v-if="aidFlag < 3 && socioEconomicDiversity">
+                            <div
+                              class="py-4"
+                              v-if="aidFlag < 3 && socioEconomicDiversity"
+                            >
                               <donut
                                 color="#1874DC"
                                 :value="socioEconomicDiversity * 100"
@@ -2017,76 +1931,76 @@
                           </v-card>
                         </v-col>
                       </v-row>
-                        <v-card class='pa-4 mt-4' flat>
-                      <v-row>
-                        <v-col cols="12">
-                          <div style="  display: flex;align-items: center;">
-                            <h2 class="mb-1 d-inline-block">
-                              Race/Ethnicity
-                              <tooltip definition="race-eth" />
-                            </h2>
+                      <v-card class="pa-4 mt-4" flat>
+                        <v-row>
+                          <v-col cols="12">
+                            <div style="  display: flex;align-items: center;">
+                              <h2 class="mb-1 d-inline-block">
+                                Race/Ethnicity
+                                <tooltip definition="race-eth" />
+                              </h2>
+                              <div
+                                style="background:#1874DC;margin-right:10px;height:10px;width:10px;display:inline-block;"
+                              ></div>
+                              Student Body
+                              <div
+                                style="background:#102E52;margin-left:10px;margin-right:10px;height:10px;width:10px;display:inline-block;"
+                              ></div>
+                              Full-Time Staff
+                            </div>
+                          </v-col>
+                          <v-col cols="12" md="6">
                             <div
-                              style="background:#1874DC;margin-right:10px;height:10px;width:10px;display:inline-block;"
-                            ></div>
-                            Student Body
+                              v-for="item in raceEthnicity.slice(0, 5)"
+                              :key="item.label"
+                            >
+                              {{ item.label }}
+                              <horizontal-bar
+                                :value="Math.round(item.value * 100)"
+                                :min="0"
+                                :max="100"
+                                color="#1874DC"
+                                :height="25"
+                                :labels="true"
+                              ></horizontal-bar>
+                              <horizontal-bar
+                                :value="Math.round(item.staff_value * 100)"
+                                :min="0"
+                                :max="100"
+                                color="#102E52"
+                                :height="25"
+                                :labels="true"
+                                style="margin-top:2px;margin-bottom:15px;"
+                              ></horizontal-bar>
+                            </div>
+                          </v-col>
+                          <v-col cols="12" md="6">
                             <div
-                              style="background:#102E52;margin-left:10px;margin-right:10px;height:10px;width:10px;display:inline-block;"
-                            ></div>
-                            Full-Time Staff
-                          </div>
-                        </v-col>
-                        <v-col cols="12" md="6">
-                          <div
-                            v-for="item in raceEthnicity.slice(0, 5)"
-                            :key="item.label"
-                          >
-                            {{ item.label }}
-                            <horizontal-bar
-                              :value="Math.round(item.value * 100)"
-                              :min="0"
-                              :max="100"
-                              color="#1874DC"
-                              :height="25"
-                              :labels="true"
-                            ></horizontal-bar>
-                            <horizontal-bar
-                              :value="Math.round(item.staff_value * 100)"
-                              :min="0"
-                              :max="100"
-                              color="#102E52"
-                              :height="25"
-                              :labels="true"
-                              style="margin-top:2px;margin-bottom:15px;"
-                            ></horizontal-bar>
-                          </div>
-                        </v-col>
-                        <v-col cols="12" md="6">
-                          <div
-                            v-for="item in raceEthnicity.slice(5, 10)"
-                            :key="item.label"
-                          >
-                            {{ item.label }}
-                            <horizontal-bar
-                              :value="Math.round(item.value * 100)"
-                              :min="0"
-                              :max="100"
-                              color="#1874DC"
-                              :height="25"
-                              :labels="true"
-                            ></horizontal-bar>
-                            <horizontal-bar
-                              :value="Math.round(item.staff_value * 100)"
-                              :min="0"
-                              :max="100"
-                              color="#102E52"
-                              :height="25"
-                              :labels="true"
-                              style="margin-top:2px;margin-bottom:15px;"
-                            ></horizontal-bar>
-                          </div>
-                        </v-col>
-                      </v-row>
-                        </v-card>
+                              v-for="item in raceEthnicity.slice(5, 10)"
+                              :key="item.label"
+                            >
+                              {{ item.label }}
+                              <horizontal-bar
+                                :value="Math.round(item.value * 100)"
+                                :min="0"
+                                :max="100"
+                                color="#1874DC"
+                                :height="25"
+                                :labels="true"
+                              ></horizontal-bar>
+                              <horizontal-bar
+                                :value="Math.round(item.staff_value * 100)"
+                                :min="0"
+                                :max="100"
+                                color="#102E52"
+                                :height="25"
+                                :labels="true"
+                                style="margin-top:2px;margin-bottom:15px;"
+                              ></horizontal-bar>
+                            </div>
+                          </v-col>
+                        </v-row>
+                      </v-card>
                     </v-expansion-panel-content>
                   </v-expansion-panel>
 
@@ -2102,7 +2016,7 @@
                       class="px-0 py-3 pa-sm-5"
                     >
                       <v-row>
-                        <v-col cols="12" md="6">
+                        <v-col cols="12" md="9">
                           <v-card flat class="pa-4">
                             <h2 class="mb-4">
                               Test Scores
@@ -2179,7 +2093,7 @@
                             </div>
                           </v-card>
                         </v-col>
-                        <v-col cols="12" md="6">
+                        <v-col cols="12" md="3">
                           <v-card class="pa-4 fill-height" flat>
                             <h2 class="mb-4">
                               Acceptance Rate
@@ -2272,7 +2186,7 @@
 
 #profile-institution-title {
   line-height: 100% !important;
-  color: #10274E;
+  color: #10274e;
 }
 
 .field-of-study-select-container {
@@ -2344,9 +2258,8 @@
 }
 
 #fields-of-study.v-expansion-panel-header {
-  background-color:$fos-color-yellow !important;
+  background-color: $fos-color-yellow !important;
 }
-
 
 .fos-profile-mini-summary-info {
   width: 100%;
@@ -2453,8 +2366,8 @@ span.arrow-left {
 }
 
 .location-icon {
-  height:20px;
-  width:20px;
+  height: 20px;
+  width: 20px;
 }
 </style>
 
@@ -2757,11 +2670,11 @@ export default {
     generateMapLink(school) {
       let googleMapsBaseURL = "https://www.google.com/maps/search/?"
       let params = {}
-      params.api=1
+      params.api = 1
       params.query = school.location.lat + "," + school.location.lon
       let qs = querystring.stringify(params)
       return googleMapsBaseURL + qs
-    },   
+    },
     parseURLParams(url = location.search.substr(1)) {
       let query = querystring.parse(url)
 

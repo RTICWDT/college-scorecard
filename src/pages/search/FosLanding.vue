@@ -40,6 +40,7 @@
                       placeholder="Select one"
                       v-model="input.cip4_degree"
                       hide-details
+                      color="fos-search-color"
                     >
                     </v-select>
                   </v-col>
@@ -118,8 +119,8 @@ h1 {
 .home-links {
   background-color: $bg-gray;
 }
-.tab-card{
-  border:none;
+.tab-card {
+  border: none;
 }
 </style>
 
