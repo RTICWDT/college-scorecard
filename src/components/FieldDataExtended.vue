@@ -2,8 +2,8 @@
   <div class="fos-field-data-container">
     <v-container class="pa-0">
       <v-row>
-        <v-col>
-          <v-card flat class="pa-5">
+        <v-col cols="12" md="6">
+          <v-card flat class="pa-5 fill-height">
             <h3>
               Median Earnings&nbsp;
               <tooltip definition="fos-median-earnings" :isBranch="isBranch" />
@@ -31,9 +31,10 @@
                 Data Not Available
               </div>
             </div>
-          </v-card> </v-col
-        ><v-col>
-          <v-card flat class="pa-5">
+          </v-card>
+        </v-col>
+        <v-col cols="12" md="6">
+          <v-card flat class="pa-5  fill-height">
             <!--Median Total-->
             <h3>
               Median Total Debt After Graduation&nbsp;
@@ -98,8 +99,8 @@
         </v-col></v-row
       >
       <v-row>
-        <v-col>
-          <v-card flat class="pa-5">
+        <v-col cols="12" md="4">
+          <v-card flat class="pa-5  fill-height">
             <h3>
               Monthly Earnings&nbsp;
               <tooltip definition="fos-monthly-earnings" :isBranch="isBranch" />
@@ -116,9 +117,10 @@
                 Data Not Available
               </div>
             </div>
-          </v-card> </v-col
-        ><v-col>
-          <v-card flat class="pa-5">
+          </v-card>
+        </v-col>
+        <v-col cols="12" md="4">
+          <v-card flat class="pa-5  fill-height">
             <h3>
               Monthly Loan Payment&nbsp;
               <tooltip
@@ -165,9 +167,11 @@
                 Data Not Available
               </div>
             </div>
-          </v-card> </v-col
-        ><v-col>
-          <v-card flat class="pa-5">
+          </v-card>
+        </v-col>
+
+        <v-col cols="12" md="4">
+          <v-card flat class="pa-5  fill-height">
             <h3>
               Number of Graduates&nbsp;
               <tooltip definition="fos-number-of-graduates" />
