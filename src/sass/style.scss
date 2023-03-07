@@ -116,3 +116,11 @@ a.close-filter {
     color: black !important;
 } 
 }
+
+.selected-sort {
+  color:$mid-dark-gray !important;
+}
+
+.unselected-sort {
+  color:$mid-light-blue !important;
+}

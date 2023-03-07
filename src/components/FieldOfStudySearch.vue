@@ -7,7 +7,7 @@
       :items="items"
       item-text="title"
       item-value="code"
-      placeholder="Type to search"
+      placeholder="Type to search (required)"
       return-object
       autocomplete="off"
       outlined

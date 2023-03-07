@@ -225,7 +225,7 @@ html {
   }
 
 
-  .theme--light.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active) {
+  .theme--light.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active):not(.search-tab) {
     color:#fff !important;
     font-weight:lighter !important;
     font-family: $base-font-family; 

@@ -381,6 +381,8 @@
 
 .homepage-search-container {
   min-height: 150px;
+  box-shadow: 0px 10px 16px #0000001a !important;
+  border-radius: 0px 6px 6px 6px;
 }
 
 .trainingCallout {

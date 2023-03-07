@@ -79,7 +79,7 @@
     vertical-align: top;
     width: 80px;
     margin-right: 5px;
-    color: $dark-gray;
+    color: $black;
 
     .school-key_figures-year {
       display: block;

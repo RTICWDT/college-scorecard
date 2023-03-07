@@ -122,6 +122,11 @@ h1 {
 .tab-card {
   border: none;
 }
+
+.homepage-search-container {
+  box-shadow: 0px 10px 16px #0000001a !important;
+  border-radius: 0px 6px 6px 6px;
+}
 </style>
 
 <script>

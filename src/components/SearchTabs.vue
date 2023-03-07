@@ -3,13 +3,13 @@
     <div class="mb-0 px-5 d-flex align-self-center black--text light-grey">
       <strong>SEARCH:</strong>
     </div>
-    <v-tab to="/search/" class="school" :class="{ current: selected == 0 }">
+    <v-tab to="/search/" class="school search-tab" :class="{ current: selected == 0 }">
       Schools
     </v-tab>
 
     <v-tab
       to="/search/fos-landing"
-      class="fos"
+      class="fos search-tab"
       :class="{ current: selected == 1 }"
     >
       Fields of Study

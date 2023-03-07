@@ -1,5 +1,5 @@
 <template>
-  <v-form class="pa-5" id="fos-search-form">
+  <v-form class="px-5 pb-5 pt-3" id="fos-search-form">
     <h3 class="my-4">Location</h3>
     <location-institution-search
       @search-query="handleLocationSelection"

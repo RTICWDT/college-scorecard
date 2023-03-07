@@ -10,7 +10,7 @@
 <template>
   <div>
     <v-main>
-      <v-card tile>
+      <v-card tile class="tab-card">
         <search-tabs :selected="1" />
       </v-card>
       <div class="bg-blue">
@@ -84,7 +84,7 @@
       <v-container fluid class="pa-0">
         <v-row>
           <v-col cols="3" :class="{ 'd-none': !showSidebar }" class="pr-0">
-            <div class="pa-6 white" style="border-right: 5px solid #DFE6F0;">
+            <div class="px-6 pt-6 white" style="border-right: 5px solid #DFE6F0;">
               <a
                 class="float-right close-filter"
                 @click="showSidebar = !showSidebar"
@@ -298,6 +298,8 @@
                               :class="{
                                 'font-weight-bold': sort.current,
                                 'text-decoration-underline': sort.current,
+                                'selected-sort': sort.current,
+                                'unselected-sort': !sort.current,
                               }"
                               @click="changeSort(sort.type)"
                               >{{ sort.type }}

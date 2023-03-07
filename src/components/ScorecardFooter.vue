@@ -52,6 +52,7 @@
             </ul>
           </v-col>
           <v-col>
+            <div class="float-right">
             <p class="mb-0">
               <small>
                 Powered by <a :href="$url('/data')">College Scorecard Data</a>
@@ -106,6 +107,7 @@
                 </a></small
               >
             </p>
+          </div>
           </v-col>
         </v-row>
       </v-container>

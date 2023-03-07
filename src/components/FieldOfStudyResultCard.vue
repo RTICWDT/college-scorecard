@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
 .text-uppercase {
-  font-size: 11px;
+  font-size: 12px;
 }
 .display-2 {
   display: block;
@@ -18,7 +18,7 @@
       <h2 class="">
         <a class="nameLink mb-2" :href="$url(dynamicLink)">{{ schoolName }}</a>
       </h2>
-      <p class="font-weight-bold">{{ city }}, {{ state }} {{ zip }}</p>
+      <p class="">{{ city }}, {{ state }} {{ zip }}</p>
       <small-school-icons :school="school" :fields="fields" size="small" />
       <p v-if="underInvestigation == 1">
         <v-card color="error" class="px-2 py-1" flat>
@@ -29,7 +29,7 @@
     </v-col>
     <v-col cols="4" md="3">
       <div class="cell">
-        <div class="text-uppercase font-weight-bold">
+        <div class="text-uppercase">
           Median Earnings
           <tooltip definition="fos-median-earnings" :isBranch="isBranch" />
         </div>
@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="cell">
-        <div class="text-uppercase font-weight-bold">
+        <div class="text-uppercase">
           Monthly Earnings
           <tooltip definition="fos-monthly-earnings" :isBranch="isBranch" />
         </div>
@@ -74,7 +74,7 @@
     </v-col>
     <v-col cols="4" md="3">
       <div class="cell">
-        <div class="text-uppercase font-weight-bold">
+        <div class="text-uppercase">
           Median Debt
           <tooltip
             definition="fos-median-debt"
@@ -106,7 +106,7 @@
         </div>
       </div>
       <div class="cell">
-        <div class="text-uppercase font-weight-bold">
+        <div class="text-uppercase">
           Monthly Loan Payment
           <tooltip
             definition="fos-monthly-debt-payment"
