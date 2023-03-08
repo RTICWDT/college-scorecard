@@ -164,7 +164,7 @@
                 _.startCase(_.toLower(prog.name).slice(0, -1))
               }}</v-expansion-panel-header>
               <v-expansion-panel-content eager>
-                <v-expansion-panels>
+                <v-expansion-panels v-model="subpanel">
                   <v-expansion-panel
                     v-for="fos in prog.fields"
                     :key="fos.code + '-' + fos.credential.level"
@@ -242,6 +242,7 @@ import { formMappings } from "~/js/constants.js"
 import ComplexFields from "~/js/mixins/ComplexFields.js"
 import AddToCompare from "~/components/AddToCompare.vue"
 import BottomCallouts from "~/components/BottomCallouts.vue"
+import querystring from "querystring"
 
 export default {
   mixins: [SiteData, ComplexFields],
@@ -258,6 +259,7 @@ export default {
       school: {},
       panels: [],
       num_panels: 0,
+      subpanel: null,
       cip2: {},
       programs: [],
 
@@ -332,6 +334,14 @@ export default {
     // this.fields = fields;
     this.cip2 = this.CIP2 // From SiteData mixin.
 
+    this.urlParams = this.parseURLParams(location.search.substr(1))
+
+    this.selectedFOS = this.mapFOSFromURL(
+      this.urlParams,
+      this.fieldOfStudySelectItems
+    )
+
+
     if (!location.search) {
       return null
     }
@@ -372,6 +382,44 @@ export default {
       .catch((response) => {
         console.warn("No School found for ID: " + id)
       })
+  },
+  methods: {
+    mapFOSFromURL(params, elements) {
+      // Exist and matches pattern
+      if (
+        typeof params.fos_code === "undefined" &&
+        /^\d{3,4}$/.test(params.fos_code) === false
+      ) {
+        return null
+      }
+
+      if (
+        typeof params.fos_credential === "undefined" &&
+        /^\d{1}$/.test(params.fos_credential) === false
+      ) {
+        return null
+      }
+
+      // TODO - Replace with method
+      // TODO - make sure values are the correct type when checking
+
+      let field = null
+      if (params.fos_code) {
+        field = this.site.data.cip_4_digit.find((itm) => {
+          return params.fos_code == itm.label.replace(".", "")
+        })['value'].replace(".","")
+      }
+      
+    this.currentFilter = params.fos_credential
+    this.currentTextFilter = field
+    this.subpanel = 0
+
+    },    
+    parseURLParams(url = location.search.substr(1)) {
+      let query = querystring.parse(url)
+
+      return query || {}
+    },  
   },
 }
 </script>
