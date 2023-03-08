@@ -192,6 +192,7 @@
                     <v-col
                       cols="12"
                       v-if="!isLoading && this.input.dolflag == 'true'"
+                      class="pl-5"
                     >
                       <v-alert
                         color="primary"
@@ -219,7 +220,7 @@
                   </v-row>
                   <v-row>
                     <v-col cols="12">
-                      <v-alert>
+                      <v-alert class="pl-5">
                         <strong>Note:</strong> Field of Study titles are based
                         on the US Department of Education's Classification of
                         Instructional Programs (CIP) and may not match the
@@ -289,7 +290,7 @@
                           style="border-bottom:2px solid #eee"
                         >
                           <v-col
-                            class="py-md-0 "
+                            class="py-md-0 pl-5"
                             cols="3"
                             v-for="sort in sorts"
                             :key="sort.type"
@@ -330,7 +331,7 @@
                             lg="12"
                             md="12"
                             sm="12"
-                            class="d-flex align-stretch data-row"
+                            class="d-flex align-stretch data-row pl-5"
                           >
                             <fos-result-card :fos="school" />
                           </v-col>
