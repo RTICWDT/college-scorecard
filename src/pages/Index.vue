@@ -536,6 +536,10 @@ h1 {
 .v-tabs-slider {
   border-radius: 5px 5px 0 0;
 }
+
+h2 span {
+  font-weight:600 !important;
+}
 </style>
 
 <script>

@@ -526,20 +526,10 @@
 
                     <v-expansion-panel-content
                       id="fos-content"
-                      class="px-0 py-3 pa-sm-5"
+                      class="px-0 pb-3 px-sm-5 pb-sm-5"
                     >
-                      <v-row>
-                        <v-col cols="12" md="8">
-                          <v-card flat class="mb-4 fill-height pa-4">
-                            <h2 class="mb-3">
-                              Fields of Study Offered at {{ schoolName }}
-                            </h2>
-
-                            <div
-                              class="text-right pa-2 field-of-study-select-container-header"
-                            ></div>
-
-                            <div class="mb-4">
+                    <div style="background-color: pink;">
+                            <div class="mb-4 mx-n11">
                               <field-of-study-select
                                 :cip-two-nested-cip-four="
                                   fieldOfStudySelectItems
@@ -550,7 +540,7 @@
                                 result-id="field-of-study-select-search-result2"
                               />
                             </div>
-
+                          </div>
                             <field-data-extended
                               v-if="selectedFOSDetail"
                               :fos="selectedFOSDetail"
@@ -566,34 +556,7 @@
                                 fieldDataExtendedShowPrior = $event
                               "
                               :fields="fields"
-                            /> </v-card></v-col
-                        ><v-col cols="12" md="4">
-                          <v-card flat class="pa-4 fill-height">
-                            <h2 class="mb-3">
-                              Awards Offered
-                            </h2>
-                            <p>
-                              {{ schoolName }} awards {{ schoolDegreeList }}.
-                            </p>
-                            <p class="text-left my-8">
-                              <v-btn
-                                color="secondary"
-                                :href="this.$url(fieldsLink)"
-                              >
-                                <span class="d-none d-sm-flex"
-                                  >See All Available Fields of Study
-                                </span>
-                                <span class="d-block d-sm-none">See All</span>
-                              </v-btn>
-                            </p>
-                            <div class="pa-4 rounded yellow-warn mt-4 mb-8">
-                              <strong>Note: </strong>These data were collected
-                              from undergradute students who received federal
-                              financial aid.
-                            </div>
-                          </v-card>
-                        </v-col></v-row
-                      >
+                            />
                       <v-row
                         ><v-col>
                           <!-- Top Fields of Study -->
@@ -745,6 +708,34 @@
                           </v-card></v-col
                         ></v-row
                       >
+                      <v-row>
+                        <v-col cols="12">
+                          <v-card flat class="pa-4 fill-height">
+                            <h2 class="mb-3">
+                              Awards Offered
+                            </h2>
+                            <p>
+                              {{ schoolName }} awards {{ schoolDegreeList }}.
+                            </p>
+                            <p class="text-left my-8">
+                              <v-btn
+                                color="secondary"
+                                :href="this.$url(fieldsLink)"
+                              >
+                                <span class="d-none d-sm-flex"
+                                  >See All Available Fields of Study
+                                </span>
+                                <span class="d-block d-sm-none">See All</span>
+                              </v-btn>
+                            </p>
+                            <div class="pa-4 rounded yellow-warn mt-4 mb-8">
+                              <strong>Note: </strong>These data were collected
+                              from undergradute students who received federal
+                              financial aid.
+                            </div>
+                          </v-card>
+                        </v-col>
+                      </v-row>
                     </v-expansion-panel-content>
                   </v-expansion-panel>
                 </v-expansion-panels>
@@ -1830,7 +1821,7 @@
                               :school="school"
                               :fields="fields"
                               :sizeOnly="true"
-                              class=""
+                              :font-class="font-weight-bolder"
                             />
                           </v-card>
                         </v-col>
@@ -2254,6 +2245,10 @@
   background-color: $fos-color-yellow !important;
 }
 
+#fields-of-study.v-expansion-panel-header:before {
+  opacity:0 !important;
+}
+
 .fos-profile-mini-summary-info {
   width: 100%;
   /*background-color: #eaeaea;*/
@@ -2361,6 +2356,11 @@ span.arrow-left {
 .location-icon {
   height: 20px;
   width: 20px;
+}
+
+#field-of-study-select-search-container2 {
+  background-color:$fos-color-yellow;
+  padding-bottom:24px;
 }
 </style>
 

@@ -29,7 +29,7 @@
       outlined
       hide-details
       prepend-inner-icon="fas fa-search"
-      rounded
+      class=" mx-11"
     >
       <template slot="append">
         <v-icon class="fos-search-text-icon" v-if="displayMenu"

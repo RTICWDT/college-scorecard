@@ -21,6 +21,7 @@
       aria-label="Name Search"
       no-filter
       :dense="dense"
+      id="institution-search-box"
     >
       <!-- TODO - Add markup for alias match or highlighting -->
       <template slot="item" slot-scope="{ parent, item }">

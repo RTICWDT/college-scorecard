@@ -225,7 +225,7 @@ html {
   }
 
 
-  .theme--light.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active):not(.search-tab) {
+  .theme--light.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active):not(.search-tab):not(.data-tab) {
     color:#fff !important;
     font-weight:lighter !important;
     font-family: $base-font-family; 
@@ -233,4 +233,10 @@ html {
 
   #fos-search-and-chips .v-icon.v-icon {
     font-size:18px;
+  }
+
+  #institution-search-box {
+    font-weight:600;
+    color: $darker-gray;
+    font-size: 14px;
   }

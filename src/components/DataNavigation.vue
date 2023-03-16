@@ -8,14 +8,14 @@
           v-model="dataTabs"
           show-arrows
         >
-          <v-tab :href="$url('/data/')" value="home">Data Home</v-tab>
-          <v-tab :href="$url('/data/documentation/')" value="documentation"
+          <v-tab class="data-tab" :href="$url('/data/')" value="home">Data Home</v-tab>
+          <v-tab class="data-tab" :href="$url('/data/documentation/')" value="documentation"
             >Documentation</v-tab
           >
-          <v-tab :href="$url('/data/changelog/')" value="changelog"
+          <v-tab class="data-tab" :href="$url('/data/changelog/')" value="changelog"
             >Change Log</v-tab
           >
-          <v-tab :href="$url('/data/glossary/')" value="glossary"
+          <v-tab class="data-tab" :href="$url('/data/glossary/')" value="glossary"
             >Glossary</v-tab
           >
         </v-tabs>
@@ -32,7 +32,7 @@
 }
 
 .v-tabs-bar .v-tab--active {
-  background-color: $darker-green !important;
+  background-color: var(--v-primary-base)!important;
   color: $white !important;
   font-weight: bold !important;
   a {
