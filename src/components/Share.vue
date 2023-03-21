@@ -7,7 +7,9 @@
           v-on="on"
           :small="small"
           :text="text"
-          class="share"
+          :class="{ share: true, fos: fos }"
+          :outlined="fos"
+          :elevation="fos ? 1 : 0"
         >
           <v-icon x-small class="mr-2 share">fas fa-share</v-icon> {{ label }}
         </v-btn>
@@ -51,9 +53,16 @@
   </span>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import "~/sass/_variables";
 .vCopyNotify {
   overflow: hidden;
+}
+
+.fos {
+  color:black !important;
+  border: thin solid $bg-gray !important;
+  font-weight:normal !important;
 }
 </style>
 
@@ -69,6 +78,7 @@ export default {
     label: { type: String, default: "Share" },
     small: { type: Boolean, default: false },
     text: { type: Boolean, default: false },
+    fos: { type: Boolean, default: false },
     color: { type: String, default: "secondary" },
     hide: { type: Array, default: null },
     showCopy: { type: Boolean, default: false },

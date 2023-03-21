@@ -494,10 +494,10 @@
 
                 <v-row>
                   <v-col class="text-right">
-                    <v-btn color="secondary" @click="all" class="my-2 mr-2"
+                    <v-btn color="secondary" @click="all" class="my-2 mr-2 text-uppercase"
                       >Expand All</v-btn
                     >
-                    <v-btn color="secondary" @click="none" class="my-2"
+                    <v-btn color="secondary" @click="none" class="my-2 text-uppercase"
                       >Close All</v-btn
                     >
                   </v-col>

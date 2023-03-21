@@ -114,7 +114,7 @@
             <div v-if="!isLoading">
               <h2 class="mb-4">
                 {{ selectedFoSLabel }}
-                <v-chip class="ml-2">{{ selectedFoSDegree }}</v-chip>
+                <v-chip class="ml-2 font-weight-regular text-uppercase" color="#D8DFE8">{{ selectedFoSDegree }}</v-chip>
               </h2>
               <!-- <div v-if="showDescription">
                 A program that prepares individuals to practice the profession
@@ -160,7 +160,9 @@
                             label="Share"
                             small
                             show-copy
+                            color="#eff1f5"
                             :hide="['email']"
+                            fos
                           />
                         </p>
                       </div>
