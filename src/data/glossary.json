@@ -113,7 +113,7 @@
   "hcm2": {
     "title": "Under ED Monitoring",
     "default": "Heightened Cash Monitoring 2 is when the Department of Education provides additional oversight because of financial or federal compliance issues.",
-    "glossary": "<p>Heightened Cash Monitoring 2 is when the Department of Education provides additional oversight because of financial or federal compliance issues, including but not limited to, concern around the school’s administrative capabilities, concern around a schools’ financial responsibility and possibly severe findings uncovered during a program review. Some schools are on this list because of preliminary findings made during a program review that is still open. This designation is updated approximately quarterly. For schools with multiple locations, this information is based on all of their locations.</p><p>Relevant variables:<br/>HCM2, as of December 2022</p>",
+    "glossary": "<p>Heightened Cash Monitoring 2 is when the Department of Education provides additional oversight because of financial or federal compliance issues, including but not limited to, concern around the school’s administrative capabilities, concern around a schools’ financial responsibility and possibly severe findings uncovered during a program review. Some schools are on this list because of preliminary findings made during a program review that is still open. This designation is updated approximately quarterly. For schools with multiple locations, this information is based on all of their locations.</p><p>Relevant variables:<br/>HCM2, as of June 2022</p>",
     "branch": true
   },
   "award-level": {

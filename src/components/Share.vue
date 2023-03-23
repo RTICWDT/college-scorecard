@@ -8,8 +8,8 @@
           :small="small"
           :text="text"
           :class="{ share: true, fos: fos }"
-          :outlined="fos"
-          :elevation="fos ? 1 : 0"
+          outlined
+          :elevation="1"
         >
           <v-icon x-small class="mr-2 share">fas fa-share</v-icon> {{ label }}
         </v-btn>
