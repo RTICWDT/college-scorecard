@@ -132,13 +132,14 @@
                             @click="clearSearchForm"
                             small
                             outlined
-                            class=" d-sm-inline mr-1"
+                            class=" d-sm-inline mr-1 searchbtn"
+                            elevation="1"
                           >
                             <span>
                               <v-icon small class="mr-1"
                                 >mdi-close-circle</v-icon
                               >
-                              Clear
+                              Reset Filters
                             </span>
                           </v-btn>
 
@@ -149,10 +150,11 @@
                                 small
                                 v-on="on"
                                 outlined
-                                class="mr-1"
+                                class="mr-1 searchbtn"
+                                elevation="1"
                               >
                                 <v-icon small class="mx-1">fas fa-sort</v-icon>
-                                Sort
+                                Sort: {{ sorts.find(el => el.field === input.sort).type }}
                               </v-btn>
                             </template>
                             <v-list min-width="200">
@@ -181,6 +183,7 @@
                             small
                             show-copy
                             :hide="['email']"
+                            color="#eff1f5"
                           />
                         </p>
                       </div>
@@ -630,6 +633,7 @@ export default {
     resort(sort) {
       this.input.sort = sort
       var params = this.parseURLParams()
+      params.sort = this.input.sort
       this.debounceSearchUpdate(params)
     },
     clearSearchForm() {

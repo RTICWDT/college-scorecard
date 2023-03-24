@@ -155,6 +155,22 @@
                         <p class="title mb-0">
                           {{ results.meta.total | separator }} Results
 
+                          <v-btn
+                            id="search-button-clear"
+                            @click="clearSearchForm"
+                            small
+                            outlined
+                            class=" d-sm-inline mr-1 searchbtn"
+                            elevation="1"
+                          >
+                            <span>
+                              <v-icon small class="mr-1"
+                                >mdi-close-circle</v-icon
+                              >
+                              Reset Filters
+                            </span>
+                          </v-btn>                          
+
                           <share
                             :url="encodeURI(shareUrl)"
                             label="Share"
@@ -619,6 +635,17 @@ export default {
       this.input.sort = sort
       this.searchAPI()
     },
+    clearSearchForm() {
+      this.input = {
+        page: 1,
+        sort: this.defaultSort,
+      }
+      this.urlParsedParams = {}
+      this.$root.$emit("search-form-reset")
+
+      this.$router.push(
+          "/search/fos-landing")      
+    },    
     handleFieldOfStudySelected(fieldOfStudy) {
       this.input.page = 0
       this.input.cip4 = fieldOfStudy.cip4

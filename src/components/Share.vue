@@ -7,7 +7,7 @@
           v-on="on"
           :small="small"
           :text="text"
-          :class="{ share: true, fos: fos }"
+          :class="{ share: true, searchbtn: true }"
           outlined
           :elevation="1"
         >
@@ -57,12 +57,6 @@
 @import "~/sass/_variables";
 .vCopyNotify {
   overflow: hidden;
-}
-
-.fos {
-  color:black !important;
-  border: thin solid $bg-gray !important;
-  font-weight:normal !important;
 }
 </style>
 
