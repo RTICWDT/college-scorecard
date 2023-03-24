@@ -129,4 +129,12 @@ a.close-filter {
   color:black !important;
   border: thin solid $bg-gray !important;
   font-weight:normal !important;
+  
+  .v-btn__content {
+    max-width:175px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+  }
 }
