@@ -1,4 +1,6 @@
 <style lang="scss">
+@import "~/sass/_variables.scss";
+
 .nameLink {
   text-decoration: none;
   line-height: 125%;
@@ -19,6 +21,14 @@
   position: absolute;
   bottom: 0;
   width: 100%;
+  a {
+    border-color:#D8DFE8 !important;
+    color:black !important;
+  }
+  a:hover {
+    background:$primary-green;
+    color:#fff !important;
+  }
 }
 
 .moreDetails {
@@ -39,6 +49,12 @@
   h3 {
     font-size: 24px;
   }
+}
+
+.search-result-label {
+  font-size:13px;
+  text-transform: uppercase;
+  color:$black;
 }
 </style>
 
@@ -96,7 +112,7 @@
       <v-row class="v-flex align-center">
         <v-col class="pb-1">
           <!--prettyhtml-ignore-->
-          <span
+          <span class="search-result-label"
             >Graduation Rate&nbsp;<tooltip
               definition="graduation-rate"
               :version="completionRateFieldDefinition"
@@ -110,13 +126,13 @@
       <v-row class="v-flex align-center">
         <v-col class="pb-1">
           <!--prettyhtml-ignore-->
-          <span v-if="!isProgramReporter"
+          <span v-if="!isProgramReporter" class="search-result-label"
             >Average Annual Cost&nbsp;<tooltip
               definition="avg-cost"
               :isNegative="netPrice < 0"
           /></span>
           <!--prettyhtml-ignore-->
-          <span v-else
+          <span v-else class="search-result-label"
             >Average Annual Cost for Largest Program&nbsp;<tooltip
               definition="avg-program-cost"
               :isNegative="netPrice < 0"
@@ -130,7 +146,7 @@
       <v-row class="v-flex align-center">
         <v-col class="pb-1">
           <!--prettyhtml-ignore-->
-          <span
+          <span class="search-result-label"
             >Median Earnings&nbsp;<tooltip
               definition="institution-median-earnings"
               :isBranch="isBranch"
@@ -147,7 +163,7 @@
         :href="$url(schoolLink)"
         class="text-center"
         outlined
-        color="secondary"
+        color="black"
         width="100%"
         >View School</v-btn
       >

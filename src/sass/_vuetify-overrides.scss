@@ -95,12 +95,12 @@ html {
   .v-expansion-panel-header {
     font-weight: 500;
     font-family: $header-font-family !important;
-    font-size: 1.1rem;
+    font-size: 18px;
     line-height: 140%;
   }
   .v-expansion-panel-content {
     .v-expansion-panel-header {
-      font-size: 0.9rem;
+      font-size: 18px;
       font-weight: normal;
       line-height: 140%;
     }
@@ -243,7 +243,7 @@ html {
 
   .v-input--checkbox  {
     .v-icon.v-icon {
-      color:#ebf0f3 !important;
+      color:#ebf0f3 !important; //this seems wrong to me. too light. 
     }
     .v-input__slot {
       align-items: center;

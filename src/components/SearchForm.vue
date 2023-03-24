@@ -13,6 +13,10 @@
   border-radius: 0px !important;
 }
 
+.search-subhead {
+  color:#A8B0BA;
+}
+
 #search-form-sub-degree-container {
   border-left: 1px solid black;
 }
@@ -50,8 +54,9 @@
 
       <!-- Credential Level -->
       <v-expansion-panel>
-        <v-expansion-panel-header>Degrees/Certificate</v-expansion-panel-header>
+        <v-expansion-panel-header>Degree Types</v-expansion-panel-header>
         <v-expansion-panel-content>
+          <span class="search-subhead">Undergraduate</span>
           <v-checkbox
             id="search-form-fos-degree-c"
             class="search-form-degree-cb my-0 py-0"
@@ -74,13 +79,66 @@
 
           <v-checkbox
             id="search-form-fos-degree-b"
-            class="search-form-degree-cb my-0 py-0"
+            class="search-form-degree-cb my-0 pt-0 pb-5"
             v-model="input.cip4_degree"
             label="Bachelor's Degree"
             value="3"
             color="secondary"
             hide-details
-          ></v-checkbox> </v-expansion-panel-content
+          ></v-checkbox> 
+
+
+          <span class="search-subhead pt-5">Graduate</span>
+          <v-checkbox
+            id="search-form-fos-degree-c"
+            class="search-form-degree-cb my-0 py-0"
+            v-model="input.cip4_degree"
+            label="Master's Degree"
+            value="4"
+            color="secondary"
+            hide-details
+          ></v-checkbox>
+
+          <v-checkbox
+            id="search-form-fos-degree-a"
+            class="search-form-degree-cb my-0 py-0"
+            v-model="input.cip4_degree"
+            label="Post-baccalaureate Certificate"
+            value="5"
+            color="secondary"
+            hide-details
+          ></v-checkbox>
+
+          <v-checkbox
+            id="search-form-fos-degree-b"
+            class="search-form-degree-cb my-0 py-0"
+            v-model="input.cip4_degree"
+            label="Doctoral Degree"
+            value="6"
+            color="secondary"
+            hide-details
+          ></v-checkbox>       
+          
+          <v-checkbox
+            id="search-form-fos-degree-a"
+            class="search-form-degree-cb my-0 py-0"
+            v-model="input.cip4_degree"
+            label="First Professional Degree"
+            value="7"
+            color="secondary"
+            hide-details
+          ></v-checkbox>
+
+          <v-checkbox
+            id="search-form-fos-degree-b"
+            class="search-form-degree-cb my-0 py-0"
+            v-model="input.cip4_degree"
+            label="Graduate/Professional Certificate"
+            value="8"
+            color="secondary"
+            hide-details
+          ></v-checkbox>            
+          </v-expansion-panel-content
       ></v-expansion-panel>
 
       <v-expansion-panel v-if="!hideLocation">

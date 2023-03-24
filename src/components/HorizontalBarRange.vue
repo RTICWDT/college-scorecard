@@ -96,7 +96,7 @@
   position: relative;
 
   .picc-range-bar {
-    background-color: $medium-blue;
+    background-color: $mid-light-blue;
     height: 100%;
     left: 0;
     position: absolute;

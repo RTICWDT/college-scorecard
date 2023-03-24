@@ -3,7 +3,7 @@
   <v-container class="">
     <v-row class="align-stretch">
       <v-col cols="12" md="6" class="my-md-10">
-        <v-card outline class="pa-5 fill-height">
+        <v-card outline class="pa-5 fill-height bg-gray">
           <div>
             <h2 class="">Start Your FAFSA&reg; Application</h2>
             <hr />
@@ -34,7 +34,7 @@
               </p>
             </div>
 
-            <div class="my-4">
+            <div class="my-4 ">
               <v-btn
                 color="secondary"
                 :href="$url('/school/transition/')"
@@ -105,6 +105,10 @@
     a{
         color: #7BD88C;
     }
+}
+
+.bg-gray {
+  background: $bg-gray;
 }
 .bottom-panel {
   background-color: $light-gray;

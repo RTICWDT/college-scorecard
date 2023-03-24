@@ -47,7 +47,7 @@
         <v-row>
           <v-col>
             <v-card flat class="white d-sm-flex align-center">
-              <div class="mx-1 mx-sm-3">School:</div>
+              <div class="mx-1 mx-sm-3 search-label">School:</div>
               <name-autocomplete
                 @school-name-selected="handleSchoolNameSelected"
                 :initial_school="input.search"
@@ -55,7 +55,7 @@
                 :dense="true"
               />
 
-              <div class="mx-1 mx-sm-3 mt-3 my-sm-0" id="location-label">
+              <div class="mx-1 mx-sm-3 mt-3 my-sm-0  search-label" id="location-label">
                 Location:
               </div>
               <location-institution-search
@@ -132,7 +132,7 @@
                             @click="clearSearchForm"
                             small
                             outlined
-                            class=" d-sm-inline mr-1 searchbtn"
+                            class=" d-sm-inline mr-3 searchbtn ml-2"
                             elevation="1"
                           >
                             <span>
@@ -150,7 +150,7 @@
                                 small
                                 v-on="on"
                                 outlined
-                                class="mr-1 searchbtn"
+                                class="mr-3 searchbtn"
                                 elevation="1"
                               >
                                 <v-icon small class="mx-1">fas fa-sort</v-icon>

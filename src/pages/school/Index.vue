@@ -200,7 +200,7 @@
                             />
                           </h2>
                           <h2
-                            class="display-2 navy-text font-weight-bold pb-3"
+                            class="display-2 medium-light-blue-text font-weight-bold pb-3"
                             v-if="completionRate"
                           >
                             {{ completionRate | numeral("0%") }}
@@ -293,7 +293,7 @@
                           </h2>
 
                           <h2
-                            class="display-2 navy-text font-weight-bold pb-3"
+                            class="display-2 medium-light-blue-text font-weight-bold pb-3"
                             v-if="netPrice"
                           >
                             {{ netPrice | numeral("$0,0") }}
@@ -400,7 +400,7 @@
                           </h2>
 
                           <h2
-                            class="display-2 navy-text font-weight-bold pb-3"
+                            class="display-2 medium-light-blue-text font-weight-bold pb-3"
                             v-if="medianEarnings"
                           >
                             {{ medianEarnings | numeral("$0,0") }}
@@ -647,14 +647,14 @@
                                     <v-col
                                       v-if="hoistCurrency"
                                       cols="12"
-                                      class="navy-text px-5 font-weight-bold"
+                                      class="medium-light-blue-text px-5 font-weight-bold"
                                       sm="4"
                                       >{{ fos.hoist | numeral("$0,0") }}</v-col
                                     >
                                     <v-col
                                       v-else
                                       cols="12"
-                                      class="navy-text px-5 font-weight-bold"
+                                      class="medium-light-blue-text px-5 font-weight-bold"
                                       sm="4"
                                       >{{ fos.hoist | separator }}</v-col
                                     >
@@ -664,12 +664,12 @@
                                     {{ fos.credential.title }}
                                     <span
                                       v-if="hoistCurrency"
-                                      class="navy-text font-weight-bold"
+                                      class="medium-light-blue-text font-weight-bold"
                                       >({{ fos.hoist | numeral("$0,0") }})</span
                                     >
                                     <span
                                       v-else
-                                      class="navy-text font-weight-bold"
+                                      class="medium-light-blue-text font-weight-bold"
                                       >({{ fos.hoist | separator }})</span
                                     >
                                   </div>
@@ -762,7 +762,7 @@
                               </h2>
                               <h2
                                 v-if="netPrice"
-                                class="display-2 navy-text font-weight-bold mb-3"
+                                class="display-2 medium-light-blue-text font-weight-bold mb-3"
                               >
                                 {{ netPrice | numeral("$0,0") }}
                               </h2>
@@ -852,12 +852,12 @@
                                 />
                               </h2>
                               <h2 class="title my-3">
-                                <span class="font-weight-bold navy-text">{{
+                                <span class="font-weight-bold medium-light-blue-text">{{
                                   programReporter[0].title
                                 }}</span>
                               </h2>
                               <h2 class="title my-3" v-if="netPrice">
-                                <span class="navy-text font-weight-bold">{{
+                                <span class="medium-light-blue-text font-weight-bold">{{
                                   netPrice | numeral("$0,0")
                                 }}</span>
                                 <span
@@ -1321,7 +1321,7 @@
                                 </h2>
                                 <div
                                   v-if="estimatedParentBorrowedText"
-                                  class="display-2 navy-text font-weight-bold"
+                                  class="display-2 medium-light-blue-text font-weight-bold"
                                 >
                                   {{ estimatedParentBorrowedText }}
                                 </div>
@@ -1370,14 +1370,14 @@
                               </p>
 
                               <div
-                                class="display-2 navy-text font-weight-bold  pb-5"
+                                class="display-2 medium-light-blue-text font-weight-bold  pb-5"
                                 v-if="federalDebt && aidLoanSelect !== 'plus'"
                               >
                                 {{ federalDebt | numeral("$0,0") }}
                               </div>
 
                               <h2
-                                class="display-2 navy-text font-weight-bold  pb-5"
+                                class="display-2 medium-light-blue-text font-weight-bold  pb-5"
                                 v-else-if="
                                   parentPlusDebt &&
                                     aidLoanSelect === 'plus' &&
@@ -1388,7 +1388,7 @@
                               </h2>
 
                               <h2
-                                class="display-2 navy-text font-weight-bold pb-5"
+                                class="display-2 medium-light-blue-text font-weight-bold pb-5"
                                 v-else-if="
                                   parentPlusDebtAll &&
                                     aidLoanSelect === 'plus' &&
@@ -1437,7 +1437,7 @@
                                 "
                               >
                                 <div
-                                  class="display-2 navy-text font-weight-bold pb-3"
+                                  class="display-2 medium-light-blue-text font-weight-bold pb-3"
                                 >
                                   {{ monthlyLoanPayment | numeral("$0,0") }}
                                 </div>
@@ -1457,7 +1457,7 @@
                                   "
                                 >
                                   <h2
-                                    class="display-2 navy-text font-weight-bold"
+                                    class="display-2 medium-light-blue-text font-weight-bold"
                                   >
                                     {{
                                       Math.round(parseFloat(parentPlusPayment))
@@ -1472,7 +1472,7 @@
                                   "
                                 >
                                   <h2
-                                    class="display-2 navy-text font-weight-bold"
+                                    class="display-2 medium-light-blue-text font-weight-bold"
                                   >
                                     {{
                                       Math.round(
@@ -1684,7 +1684,7 @@
                               />
                             </h2>
                             <h2
-                              class="display-2 navy-text font-weight-bold mb-3"
+                              class="display-2 medium-light-blue-text font-weight-bold mb-3"
                               v-if="medianEarnings"
                             >
                               {{ medianEarnings | numeral("$0,0") }}
@@ -1772,7 +1772,7 @@
                               class="d-flex align-end"
                               v-if="percentMoreThanHS"
                             >
-                              <h2 class="display-2 navy-text font-weight-bold">
+                              <h2 class="display-2 medium-light-blue-text font-weight-bold">
                                 {{ percentMoreThanHS | numeral("0%") }}
                               </h2>
                               <span> &nbsp; of students</span>

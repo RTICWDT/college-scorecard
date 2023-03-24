@@ -29,6 +29,10 @@
   color: $medium-blue;
 }
 
+.medium-light-blue-text {
+  color: $mid-light-blue;
+}
+
 .data-na {
   padding: 1rem;
   border: 1px dashed $light-gray;
@@ -105,6 +109,7 @@
 
 a.close-filter {
   color: #6c737c !important;
+  font-size:14px;
   &:active {
     color: #6c737c;
   }
@@ -137,4 +142,9 @@ a.close-filter {
     white-space: nowrap;
     display: inline-block;
   }
+}
+
+.search-label {
+  font-weight:600;
+  font-size:14px;
 }

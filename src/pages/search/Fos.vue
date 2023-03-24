@@ -160,7 +160,7 @@
                             @click="clearSearchForm"
                             small
                             outlined
-                            class=" d-sm-inline mr-1 searchbtn"
+                            class=" d-sm-inline mr-3 searchbtn ml-2"
                             elevation="1"
                           >
                             <span>
