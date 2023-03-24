@@ -1,3 +1,9 @@
+<style lang="scss" scoped>
+.tab-card {
+  border: none;
+}
+</style>
+
 <template>
   <div>
     <v-main>
@@ -118,12 +124,7 @@ h1 {
 }
 .home-links {
   background-color: $bg-gray;
-}
-.tab-card {
-  border: none;
-}
-
-.homepage-search-container {
+}.homepage-search-container {
   box-shadow: 0px 10px 16px #0000001a !important;
   border-radius: 0px 6px 6px 6px;
 }

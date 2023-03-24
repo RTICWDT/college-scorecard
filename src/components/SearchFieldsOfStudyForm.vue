@@ -36,9 +36,9 @@
         :min="utility.fieldOfStudySalary.min"
         hide-details
         class="align-center"
-        color="secondary"
+        color="primaryfos"
         track-color="dark-gray"
-        thumb-color="secondary"
+        thumb-color="primaryfos"
         thumb-label
         aria-label="Salary After Complete Range Slider"
       >
@@ -99,9 +99,9 @@
         :min="utility.fieldOfStudyDebt.min"
         hide-details
         class="align-center"
-        color="secondary"
+        color="primaryfos"
         track-color="dark-gray"
-        thumb-color="secondary"
+        thumb-color="primaryfos"
         thumb-label
         aria-label="Median Total Debt Range Slider"
       >

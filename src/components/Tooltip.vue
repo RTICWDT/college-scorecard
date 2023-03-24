@@ -78,7 +78,7 @@ export default {
     definition: String,
     color: {
       type: String,
-      default: "blue darken-3",
+      default: "darkgrey",
     },
     version: {
       type: String,

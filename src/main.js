@@ -45,7 +45,8 @@ export default function (Vue, { router, head, isClient, appOptions }) {
           accent: '#8c9eff',
           error: '#b61d1c',
           primaryfos: '#fdb022',
-          tertiary: '#ebf0f3'
+          tertiary: '#ebf0f3',
+          darkgrey: '#6c737c'
         },
       },
     },

@@ -5,6 +5,10 @@
     border-bottom-style: none;
   }
 }
+
+.tab-card {
+  border: none;
+}
 </style>
 
 <template>
