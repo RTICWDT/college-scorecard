@@ -197,6 +197,11 @@ export default {
       }
     },
   },
+  mounted() {
+    this.$root.$on("search-form-reset", (e) => {
+      this.resetFormDefault()
+    })
+  },  
   methods: {
     handleLocationChange(e) {
       // TODO - Check to see if values need to be reset.
@@ -209,9 +214,16 @@ export default {
       this.location.latLon = null
       this.location.error = null
 
+      if (e == null) {
+        alert(e)
+        utility.location = null
+      }
+
       this.$emit("search-query", this.input)
     },
-
+    resetFormDefault() {
+      this.utility.location = null
+    },
     handleSearch() {
       let o = Object.fromEntries(
         Object.entries(this.input).filter(([_, v]) => v != null)

@@ -324,7 +324,11 @@ export default {
       })
     }, 1000)
   },
-
+  mounted() {
+    this.$root.$on("search-form-reset", (e) => {
+      this.resetFormDefault()
+    })
+  },
   methods: {
     mapInputFromProp() {
       // Merge import data object (used for v-models) with items passed from the URL
@@ -358,10 +362,21 @@ export default {
     },
 
     handleLocationSelection(params) {
-      console.log(params)
       this.input = { ...this.input, ...params }
       //this.$emit("search-query", this.cleanInput)
     },
+    resetFormDefault() {
+      // TODO - Create reset value method, pass desired fields to method, return default values from object.
+      this.input = _.cloneDeep(this.utility.formDefault)
+      this.utility.enable = _.cloneDeep(this.utility.formDefault)
+      this.location.latLon = null
+      this.location.error = null
+      this.utility.location = null
+    },
+    handleLocationSelection(params) {
+      this.input = { ...this.input, ...params }
+      this.input.page = 1
+    },    
   },
 }
 </script>

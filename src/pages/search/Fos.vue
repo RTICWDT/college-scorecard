@@ -643,12 +643,14 @@ export default {
       this.input = {
         page: 1,
         sort: this.defaultSort,
+        cip4: this.urlParsedParams.cip4,
+        cip4_degree: this.urlParsedParams.cip4_degree,
       }
-      this.urlParsedParams = {}
+
       this.$root.$emit("search-form-reset")
 
-      this.$router.push(
-          "/search/fos-landing")      
+      /*this.$router.push(
+          "/search/fos-landing")   */   
     },    
     handleFieldOfStudySelected(fieldOfStudy) {
       this.input.page = 0
