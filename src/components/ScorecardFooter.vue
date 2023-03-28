@@ -61,12 +61,11 @@
             <p class="mb-0">
               <small>
                 <a
-                  :href="$url('/school/transition/')"
+                  href="https://github.com/RTICWDT/college-scorecard/releases"
                   target="_blank"
                   @click="
-                    transitionOutboundLink(
+                    trackOutboundLink(
                       $event,
-                      'https://github.com/RTICWDT/college-scorecard/releases'
                     )
                   "
                   >{{ version }}
@@ -76,12 +75,11 @@
                 </a>
                 | <a href="mailto:scorecarddata@rti.org">Contact Us</a> |
                 <a
-                  :href="$url('/school/transition/')"
+                  href="http://www2.ed.gov/notices/index.html?src=ft"
                   target="_blank"
                   @click="
-                    transitionOutboundLink(
+                    trackOutboundLink(
                       $event,
-                      'http://www2.ed.gov/notices/index.html?src=ft'
                     )
                   "
                   >Notices<v-icon x-small class="pl-1" color="white">
@@ -94,8 +92,8 @@
             <p>
               <small>
                 <a
-                  :href="$url('/school/transition/')"
-                  @click="transitionOutboundLink($event, 'http://www.ed.gov/')"
+                  href="http://www.ed.gov/"
+                  @click="trackOutboundLink($event)"
                   target="_blank"
                   >U.S. Department of Education<v-icon
                     x-small
