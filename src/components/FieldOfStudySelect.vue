@@ -129,6 +129,12 @@
 #field-of-study-select-search-text {
   padding-left:20px;
 }
+
+#field-of-study-select-search-container2 {
+  fieldset {
+    background:white;
+  }
+}
 </style>
 
 <script>
