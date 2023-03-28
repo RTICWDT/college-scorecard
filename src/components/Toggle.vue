@@ -1,49 +1,46 @@
 <template>
 
-<div :class="labelPrefix ? 'median-toggle-container align-end flex' : 'align-end flex' ">
+<div class="pa-4 rounded-lg fos-sort-toggle-container">
+<div class="align-center flex">
   <span v-if="!labelPrefix" class="d-flex  mr-2">{{ label }}</span>
   <v-tabs
-    id="median-toggle"
+    id="fos-sort-toggle"
     :show-arrows="true"
-    slider-size="8"
+    slider-size="0"
     @change="$emit('tab-change', $event)"
     :height="tabsHeight"
     :style="tabContainerStyle"
     :grow="fillSpace"
+    fixed-tabs
   >
-    <v-tabs-slider
-      id="median-toggle-slider"
-      class="median-group-slider-green"
-    />
+
 
     <v-tab 
-      v-for="tab in tabs"
-      :id="tab.group" :style="tabStyle" :class="tab.active">
+      v-for="tab in tabs"  v-bind:key="tab.group"
+      :id="tab.group" :style="tabStyle" :class="[{tab,active}, 'fos-sort-tab']">
       <slot name="tab-{{tab.group}}">
-        <span class="compare-tab-title">
+        <span class="fos-sort-tab-title">
           {{ labelPrefix }}{{tab.groupName}}
         </span>
       </slot>
     </v-tab>
   </v-tabs>
-  </div>
+  </div></div>
 
 </template>
 
 <style lang="scss" scoped>
 @import "~/sass/_variables";
 
-#median-toggle-slider {
-  background-color: $institution-accent-color;
-
-}
 .flex {
   display: flex;
 }
 
-.median-toggle-container {
-  border-bottom: 2px solid #dadada;
-  #median-toggle {
+.fos-sort-toggle-container {
+
+  background-color:#eff1f5 !important;
+  width:60%;
+  #fos-sort-toggle {
     #median-tab-inactive {
     /*background-color: #eeeeee;*/
     border-bottom: none !important;
@@ -52,31 +49,48 @@
 }
 
 
-#median-toggle {
-  #median-tab-inactive {
+#fos-sort-toggle {
+  .v-tab.v-tab--active {
+    background-color:#fff;
+    border-radius:10px;
+  }
+  #fos-sort-tab-inactive {
     /*background-color: #eeeeee;*/
-    border-bottom: 1px solid #707070;
+    border: 1px solid #707070;
+    background-color: #707070;
   }
 
   #median-tab-active {
     span {
       font-weight: bold;
+      
     }
   }
 
   .v-tab {
     text-transform:none !important;
+    background:#eff1f5;
 
     span {
       color:#000;
       letter-spacing: normal !important;
+      font-size:16px;
     }
   }
 
-  .v-tab--active:hover {
-    background:#c4dec4 !important;
+  
+  .v-tab--active
+  {
+    font-weight:bold;
   }
+    :hover {
+      background:#fff !important;
+    }
 
+}
+
+.v-tabs-bar {
+  height:30PX !important;
 }
 
 .v-slide-group__prev {
@@ -133,7 +147,7 @@ export default {
     },
     tabsHeight: {
       type: String,
-      default: "50px",
+      default: "30px",
     },
     tabContainerStyle: {
       type: Object,

@@ -225,7 +225,7 @@ html {
   }
 
 
-  .theme--light.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active):not(.search-tab):not(.data-tab) {
+  .theme--light.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active):not(.search-tab):not(.data-tab):not(.fos-sort-tab) {
     color:#fff !important;
     font-weight:lighter !important;
     font-family: $base-font-family; 
@@ -263,6 +263,10 @@ html {
       align-items: center;
       margin-top:5px;
     }
+  }
+
+  .mdi-checkbox-marked::before { //v-checkbox checked
+    color:#000;
   }
 
   .v-application .elevation-2 {

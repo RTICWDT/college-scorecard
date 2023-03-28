@@ -585,15 +585,15 @@
                               >
                             </p>
 
-                            <p class="my-2">
+
                               <toggle
                                 :display-toggle="true"
                                 :control-tab="field_sort"
                                 @tab-change="handleToggle"
                                 label="Sort By: "
-                                class="pt-8 pb-8"
+                                class="pt-2 pb-2"
                               />
-                            </p>
+
 
                             <v-row
                               class="mx-5 mt-5 d-none d-sm-flex"
@@ -1821,7 +1821,6 @@
                               :school="school"
                               :fields="fields"
                               :sizeOnly="true"
-                              :font-class="font-weight-bolder"
                             />
                           </v-card>
                         </v-col>

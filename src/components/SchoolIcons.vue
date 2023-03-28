@@ -11,7 +11,7 @@
             v-on="on"
             :style="{ 'background-image': 'url(' + $url(yearIcon) + ')' }"
           >
-            <span class=fontClass>{{ years | formatYearsLabel }}</span>
+            <span :class=fontClass>{{ years | formatYearsLabel }}</span>
           </li>
         </template>
         <div class="hover-tip">{{ tip }}</div>
