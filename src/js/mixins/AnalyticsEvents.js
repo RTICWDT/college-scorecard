@@ -15,11 +15,13 @@ export default {
                 href = evt.target.href;
             }
 
-            evt.preventDefault();
+            
 
             if (confirm("You are leaving the College Scorecard. \n\nThe U.S. Department of Education does not necessarily endorse the views expressed or the data and facts presented on this external site. \n\nLinks are provided by the institutions and are only updated about once a year. As such, over the course of the year, some links may break or websites may be taken offline.")) {
                 this.GATrackEvent('Outbound Links', href);
-                window.open(href);
+            }
+            else {
+                evt.preventDefault();
             }
         },
         transitionOutboundLink(event, url) {
