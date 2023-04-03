@@ -64,7 +64,7 @@
         </div>
         <div v-if="_.get(fos, fields.FOS_EARNINGS_FED_4YR)">
           <span class="display-2 navy-text font-weight-bold ">{{
-            _.get(fos, fields.FOS_EARNINGS_FED_4YR / 12) | numeral("$0,0")
+            _.get(fos, fields.FOS_EARNINGS_FED_4YR)  / 12 | numeral("$0,0")
           }}</span>
         </div>
         <div v-else class="mini-data-na text-center">
