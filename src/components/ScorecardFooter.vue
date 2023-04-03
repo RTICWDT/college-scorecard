@@ -64,8 +64,8 @@
                   href="https://github.com/RTICWDT/college-scorecard/releases"
                   target="_blank"
                   @click="
-                    trackOutboundLink(
-                      $event,
+                    transitionOutboundLink(
+                      $event
                     )
                   "
                   >{{ version }}
@@ -78,8 +78,8 @@
                   href="http://www2.ed.gov/notices/index.html?src=ft"
                   target="_blank"
                   @click="
-                    trackOutboundLink(
-                      $event,
+                    transitionOutboundLink(
+                      $event
                     )
                   "
                   >Notices<v-icon x-small class="pl-1" color="white">
@@ -93,7 +93,7 @@
               <small>
                 <a
                   href="http://www.ed.gov/"
-                  @click="trackOutboundLink($event)"
+                  @click="transitionOutboundLink($event)"
                   target="_blank"
                   >U.S. Department of Education<v-icon
                     x-small

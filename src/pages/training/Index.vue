@@ -71,12 +71,11 @@
                       If you need help taking the next step in your career, find
                       an
                       <a
-                        :href="$url('/school/transition/')"
+                        href="https://www.careeronestop.org/LocalHelp/AmericanJobCenters/american-job-centers.aspx"
                         target="_blank"
                         @click="
                           transitionOutboundLink(
-                            $event,
-                            'https://www.careeronestop.org/LocalHelp/AmericanJobCenters/american-job-centers.aspx'
+                            $event
                           )
                         "
                         >American Job Center<v-icon x-small class="pl-1">
@@ -85,12 +84,11 @@
                       >. In some states, Unemployment Insurance (UI) recipients
                       can attend school or training and continue to receive UI
                       benefits (<a
-                        :href="$url('/school/transition/')"
+                        href="https://www.dol.gov/general/topic/unemployment-insurance"
                         target="_blank"
                         @click="
                           transitionOutboundLink(
-                            $event,
-                            'https://www.dol.gov/general/topic/unemployment-insurance'
+                            $event
                           )
                         "
                         >learn more about UI benefits<v-icon
@@ -182,12 +180,11 @@
 
               <p class="home-callout-button-wrapper text-center">
                 <a
-                  :href="$url('/school/transition/')"
+                  href="https://trainingproviderresults.gov"
                   target="_blank"
                   @click="
                     transitionOutboundLink(
-                      $event,
-                      'https://trainingproviderresults.gov'
+                      $event
                     )
                   "
                   >TrainingProviderResults.gov<v-icon x-small class="pl-1">
@@ -223,12 +220,11 @@
                 higher education. In order to see if you qualify for a Pell
                 Grant, you must submit a FAFSA. Use the
                 <a
-                  :href="$url('/school/transition/')"
+                  href="https://studentaid.gov/aid-estimator/"
                   target="_blank"
                   @click="
                     transitionOutboundLink(
-                      $event,
-                      'https://studentaid.gov/aid-estimator/'
+                      $event
                     )
                   "
                 >
@@ -248,12 +244,11 @@
               >
                 <v-btn
                   color="secondary"
-                  :href="$url('/school/transition/')"
+                  href="https://studentaid.gov/h/apply-for-aid/fafsa"
                   target="_blank"
                   @click="
                     transitionOutboundLink(
-                      $event,
-                      'https://studentaid.gov/h/apply-for-aid/fafsa'
+                      $event
                     )
                   "
                   >Start Your FAFSA&reg; Application<v-icon

@@ -37,7 +37,7 @@ export default {
             //window.location = redirect;
           }
         },(error) => {
-          console.log(error);
+          //console.log(error);
           this.location.error = "Not Available";
           this.location.isLoading = false;
           if (redirect !== "") {

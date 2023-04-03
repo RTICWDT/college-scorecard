@@ -15,21 +15,13 @@ export default {
                 href = evt.target.href;
             }
 
-            
-
-            if (confirm("You are leaving the College Scorecard. \n\nThe U.S. Department of Education does not necessarily endorse the views expressed or the data and facts presented on this external site. \n\nLinks are provided by the institutions and are only updated about once a year. As such, over the course of the year, some links may break or websites may be taken offline.")) {
-                this.GATrackEvent('Outbound Links', href);
-            }
-            else {
-                evt.preventDefault();
-            }
         },
-        transitionOutboundLink(event, url) {
-            //this.$store.commit("setOutboundUrl", url)
-            event.preventDefault();
+        transitionOutboundLink(event) {
             if (confirm("You are leaving the College Scorecard. \n\nThe U.S. Department of Education does not necessarily endorse the views expressed or the data and facts presented on this external site. \n\nLinks are provided by the institutions and are only updated about once a year. As such, over the course of the year, some links may break or websites may be taken offline.")) {
                 this.trackOutboundLink(event);
-                window.location.replace(url);
+            }
+            else {
+                event.preventDefault();
             }
             
           },        
@@ -53,7 +45,7 @@ export default {
                     console.error('[ga] event error');
                 }
             } else {
-                console.log('GA Event: [' + category + ', ' + action + ', ' + label + ']');
+                //console.log('GA Event: [' + category + ', ' + action + ', ' + label + ']');
             }
         }
     }

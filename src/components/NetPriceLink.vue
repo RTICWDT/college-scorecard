@@ -2,8 +2,8 @@
   <v-btn
     color="secondary"
     target="_blank"
-    :href="$url('/school/transition/')"
-    @click="transitionOutboundLink($event, fixedUrl)"
+    href="fixedUrl"
+    @click="transitionOutboundLink($event)"
     v-if="url"
   >
     <v-icon small class="mx-1">fas fa-calculator</v-icon>

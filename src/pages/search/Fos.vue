@@ -249,11 +249,10 @@
                         program titles at a given school.
                         <a
                           target="_blank"
-                          :href="$url('/school/transition/')"
+                          href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56"
                           @click="
                             transitionOutboundLink(
-                              $event,
-                              'https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56'
+                              $event
                             )
                           "
                         >
@@ -582,7 +581,7 @@ export default {
       apiGet("/fos", query)
         .then((response) => {
           this.isLoading = false
-          console.log("loaded fos:", response.data)
+          //console.log("loaded fos:", response.data)
 
           this.results.schools = response.data.results
           this.results.meta = response.data.metadata
@@ -622,7 +621,7 @@ export default {
     },
 
     handleFieldOfStudySearch(params) {
-      console.log(params)
+      //console.log(params)
       this.input = { ...this.input, ...params }
       this.input = Object.fromEntries(
         Object.entries(this.input).filter(([_, v]) => v != null)

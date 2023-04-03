@@ -52,9 +52,9 @@
                     <p class="">
                       <a
                         target="_blank"
-                        :href="$url('/school/transition/')"
+                        :href="schoolUrl"
                         class="white--text"
-                        @click="transitionOutboundLink($event, schoolUrl)"
+                        @click="transitionOutboundLink($event)"
                         >{{ schoolUrlDisplay | formatUrlText
                         }}<v-icon x-small class="pl-1" color="white">
                           fas fa-external-link-alt

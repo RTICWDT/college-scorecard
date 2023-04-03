@@ -274,12 +274,11 @@
                   Search for apprenticeship jobs and programs on
                   <a
                     class="homeCallout-indent"
-                    :href="$url('/school/transition/')"
+                    href="https://www.apprenticeship.gov/apprenticeship-finder"
                     target="_blank"
                     @click="
                       transitionOutboundLink(
-                        $event,
-                        'https://www.apprenticeship.gov/apprenticeship-finder'
+                        $event
                       )
                     "
                   >
@@ -297,12 +296,11 @@
                   Use the
                   <a
                     class="homeCallout-indent"
-                    :href="$url('/school/transition/')"
+                    href="https://www.mynextmove.org"
                     target="_blank"
                     @click="
                       transitionOutboundLink(
-                        $event,
-                        'https://www.mynextmove.org'
+                        $event
                       )
                     "
                   >
@@ -318,12 +316,11 @@
                   rates, and more on
                   <a
                     class="homeCallout-indent"
-                    :href="$url('/school/transition/')"
+                    href="https://trainingproviderresults.gov"
                     target="_blank"
                     @click="
                       transitionOutboundLink(
-                        $event,
-                        'https://trainingproviderresults.gov'
+                        $event
                       )
                     "
                   >
@@ -341,12 +338,11 @@
                   Visit
                   <a
                     class="homeCallout-indent"
-                    :href="$url('/school/transition/')"
+                    href="https://careeronestop.org"
                     target="_blank"
                     @click="
                       transitionOutboundLink(
-                        $event,
-                        'https://careeronestop.org'
+                        $event
                       )
                     "
                   >
@@ -364,10 +360,10 @@
                   Explore the
                   <a
                     class="homeCallout-indent"
-                    :href="$url('/school/transition/')"
+                    href="https://www.bls.gov/ooh/"
                     target="_blank"
                     @click="
-                      transitionOutboundLink($event, 'https://www.bls.gov/ooh/')
+                      transitionOutboundLink($event)
                     "
                   >
                     Occupational Outlook Handbook (OOH)<v-icon
@@ -402,10 +398,10 @@
                   available at
 
                   <a
-                    :href="$url('/school/transition/')"
+                    href="https://studentaid.gov"
                     target="_blank"
                     @click="
-                      transitionOutboundLink($event, 'https://studentaid.gov')
+                      transitionOutboundLink($event)
                     "
                   >
                     StudentAid.gov<v-icon x-small class="pl-1" color="#007000">
@@ -420,12 +416,11 @@
                   can use
 
                   <a
-                    :href="$url('/school/transition/')"
+                    href="https://studentaid.gov/aid-estimator/"
                     target="_blank"
                     @click="
                       transitionOutboundLink(
-                        $event,
-                        'https://studentaid.gov/aid-estimator/'
+                        $
                       )
                     "
                   >
@@ -444,13 +439,12 @@
                 <p class="my-10">
                   <v-btn
                     color="secondary"
-                    :href="$url('/school/transition/')"
+                    href="https://studentaid.gov/h/apply-for-aid/fafsa"
                     target="_blank"
                     x-large
                     @click="
                       transitionOutboundLink(
-                        $event,
-                        'https://studentaid.gov/h/apply-for-aid/fafsa'
+                        $event
                       )
                     "
                     >Start Your FAFSA&reg; Application<v-icon
@@ -469,12 +463,11 @@
                   G.I. Bill benefits. Use the
 
                   <a
-                    :href="$url('/school/transition/')"
+                    href="https://www.vets.gov/gi-bill-comparison-tool"
                     target="_blank"
                     @click="
                       transitionOutboundLink(
-                        $event,
-                        'https://www.vets.gov/gi-bill-comparison-tool'
+                        $event
                       )
                     "
                   >

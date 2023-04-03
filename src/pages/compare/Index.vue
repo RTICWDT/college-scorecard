@@ -1111,12 +1111,11 @@
                           This is based on a standard 10-year payment plan,
                           other
                           <a
-                            :href="$url('/school/transition/')"
+                            href="https://studentaid.gov/loan-simulator"
                             target="_blank"
                             @click="
                               transitionOutboundLink(
-                                $event,
-                                'https://studentaid.gov/loan-simulator'
+                                $event
                               )
                             "
                             >payment options<v-icon

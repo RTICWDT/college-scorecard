@@ -14,12 +14,11 @@
                 form. Use
                 <!--prettyhtml-ignore-->
                 <a
-                  :href="$url('/school/transition/')"
+                  href="https://studentaid.gov/aid-estimator/"
                   target="_blank"
                   @click="
                     transitionOutboundLink(
-                      $event,
-                      'https://studentaid.gov/aid-estimator/'
+                      $event
                     )
                   "
                   >Federal Student Aid Estimator<v-icon
@@ -37,12 +36,11 @@
             <div class="my-4 ">
               <v-btn
                 color="secondary"
-                :href="$url('/school/transition/')"
+                href="https://studentaid.gov/h/apply-for-aid/fafsa"
                 target="_blank"
                 @click="
                   transitionOutboundLink(
-                    $event,
-                    'https://studentaid.gov/h/apply-for-aid/fafsa'
+                    $event
                   )
                 "
                 >Start Your FAFSA&reg; Application<v-icon
@@ -66,12 +64,11 @@
             Don't forget: Do fill out the FAFSA® form, but also look into other
             programs such as
             <a
-              :href="$url('/school/transition/')"
+              href="https://www.vets.gov/gi-bill-comparison-tool"
               target="_blank"
               @click="
                 transitionOutboundLink(
-                  $event,
-                  'https://www.vets.gov/gi-bill-comparison-tool'
+                  $event
                 )
               "
               >GI Bill Benefits<v-icon x-small color="#7BD88C" class="pl-1">
@@ -80,12 +77,11 @@
             >
             <p>
                 <a
-              :href="$url('/school/transition/')"
+              href="https://www.vets.gov/gi-bill-comparison-tool"
               target="_blank"
               @click="
                 transitionOutboundLink(
-                  $event,
-                  'https://www.vets.gov/gi-bill-comparison-tool'
+                  $event
                 )
               "
               ><v-img  :src="$url('/img/VA-Logo.svg')" style="max-width: 300px" alt="VA Logo" /></a></p>
