@@ -25,11 +25,11 @@
             <v-expansion-panels multiple v-model="panels">
               <v-expansion-panel>
                 <v-expansion-panel-header
-                  >February XX, 2022</v-expansion-panel-header
+                  >April 5, 2022</v-expansion-panel-header
                 >
                 <v-expansion-panel-content>
                   <p>
-                    On February XX, 2023, the Department updated the College Scorecard website with more recent data for metrics from 
+                    On April 5, 2023, the Department updated the College Scorecard website with more recent data for metrics from 
                     the National Student Loan Data System (NSLDS) and the Internal Revenue Service (IRS). The website was updated to 
                     add information on graduate-level fields of study offered at colleges to the Field of Study search and to refresh 
                     the overall design of the user interface. In addition, new data on Campus Diversity—including Race/Ethnicity for 
