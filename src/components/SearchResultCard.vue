@@ -1,4 +1,6 @@
 <style lang="scss">
+@import "~/sass/_variables.scss";
+
 .nameLink {
   text-decoration: none;
   line-height: 125%;
@@ -18,6 +20,15 @@
 .card-actions {
   position: absolute;
   bottom: 0;
+  width: 100%;
+  a {
+    border-color:#D8DFE8 !important;
+    color:black !important;
+  }
+  a:hover {
+    background:$primary-green;
+    color:#fff !important;
+  }
 }
 
 .moreDetails {
@@ -36,8 +47,14 @@
 
 .search-result-card {
   h3 {
-    font-size:24px;
+    font-size: 24px;
   }
+}
+
+.search-result-label {
+  font-size:13px;
+  text-transform: uppercase;
+  color:$black;
 }
 </style>
 
@@ -64,7 +81,9 @@
             class="float-right search-result-card-compare"
             :color="isSelected ? '#0075B2' : 'grey'"
             @click="$store.commit('toggleSchool', school)"
-            :class="isSelected ? '' : (compareSchoolsLength > 9 ? 'noCompareAllow' : '')"
+            :class="
+              isSelected ? '' : compareSchoolsLength > 9 ? 'noCompareAllow' : ''
+            "
             v-bind="attrs"
             v-on="on"
             aria-label="Add to compare"
@@ -75,7 +94,7 @@
         </template>
 
         <!--<span>Add School to compare</span>-->
-        <div class="hover-tip">{{compareHoverCountText}}</div>
+        <div class="hover-tip">{{ compareHoverCountText }}</div>
       </v-tooltip>
 
       <p class="overline mb-1">{{ city }}, {{ state }}</p>
@@ -85,16 +104,15 @@
       <!--<p class="body-2 mt-1">{{ undergraduates | separator }} undergrads</p> -->
 
       <v-row>
-        <v-col cols="12">
+        <v-col cols="12" class="my-4 mb-1">
           <small-school-icons :school="school" :fields="fields" size="small" />
         </v-col>
       </v-row>
-      <v-divider class="pb-3"/>
       <!-- <p class="overline mb-0 pt-3">Institutional Highlights:</p>-->
       <v-row class="v-flex align-center">
         <v-col class="pb-1">
           <!--prettyhtml-ignore-->
-          <span
+          <span class="search-result-label"
             >Graduation Rate&nbsp;<tooltip
               definition="graduation-rate"
               :version="completionRateFieldDefinition"
@@ -108,13 +126,13 @@
       <v-row class="v-flex align-center">
         <v-col class="pb-1">
           <!--prettyhtml-ignore-->
-          <span v-if="!isProgramReporter"
+          <span v-if="!isProgramReporter" class="search-result-label"
             >Average Annual Cost&nbsp;<tooltip
               definition="avg-cost"
               :isNegative="netPrice < 0"
           /></span>
           <!--prettyhtml-ignore-->
-          <span v-else
+          <span v-else class="search-result-label"
             >Average Annual Cost for Largest Program&nbsp;<tooltip
               definition="avg-program-cost"
               :isNegative="netPrice < 0"
@@ -128,7 +146,7 @@
       <v-row class="v-flex align-center">
         <v-col class="pb-1">
           <!--prettyhtml-ignore-->
-          <span
+          <span class="search-result-label"
             >Median Earnings&nbsp;<tooltip
               definition="institution-median-earnings"
               :isBranch="isBranch"
@@ -138,12 +156,17 @@
         <v-col class="text--black py-0">
           <h3 class="navy-text ma-0">{{ displayEarn }}</h3>
         </v-col>
-      </v-row>      
+      </v-row>
     </v-card-text>
     <v-card-actions class="card-actions">
-      <p class="px-1">
-        <a :href="$url(schoolLink)" class="moreDetails">View More Details &raquo;</a>
-      </p>
+      <v-btn
+        :href="$url(schoolLink)"
+        class="text-center"
+        outlined
+        color="black"
+        width="100%"
+        >View School</v-btn
+      >
     </v-card-actions>
   </v-card>
 </template>
@@ -162,7 +185,7 @@ export default {
   },
   props: {
     school: Object,
-    "schoolsCount": Number,    
+    schoolsCount: Number,
   },
   computed: {
     displayGradRate() {
@@ -176,16 +199,15 @@ export default {
       }
     },
     compareHoverCountText() {
-      if (this.$store.state.institutions.length > 9){
-        return "Maximum of 10 Schools reached";
-      }
-      else{
-        return "Add School to compare";
+      if (this.$store.state.institutions.length > 9) {
+        return "Maximum of 10 Schools reached"
+      } else {
+        return "Add School to compare"
       }
     },
     compareSchoolsLength() {
-      return this.$store.state.institutions.length;
-    },    
+      return this.$store.state.institutions.length
+    },
     displayEarn() {
       /*if (!this.earningsRange) {
         return "N/A"
@@ -205,9 +227,8 @@ export default {
         )
       }*/
       if (!this.medianEarnings) {
-        return "N/A";
-      }
-      else {
+        return "N/A"
+      } else {
         return this.$options.filters.numeral(this.medianEarnings, "$0a")
       }
     },

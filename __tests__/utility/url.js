@@ -16,5 +16,5 @@ if (branch === 'master') {
 if (module.parent) {
   module.exports = url;
 } else {
-  console.log(url);
+  //console.log(url);
 }

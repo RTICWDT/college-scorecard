@@ -10,6 +10,7 @@ export default {
             return fields;
         },
         id() {
+            console.log(this.school)
             if (!this.school) return null;
             return _.get(this.school, this.fields['ID']);
         },
@@ -25,6 +26,10 @@ export default {
             if (!this.school) return null;
             return _.get(this.school, this.fields['STATE'], 'N/A')
         },
+        zip() {
+            if (!this.school) return null;
+            return _.get(this.school, this.fields['ZIP_CODE'], 'N/A');
+        },        
         schoolUrlDisplay() {
             if (!this.school) return null;
             return _.get(this.school, this.fields['SCHOOL_URL'], 'ed.gov')
@@ -146,6 +151,7 @@ export default {
             if (!this.school) return null;
             let output = [];
             let re = _.get(this.school, this.fields["RACE_ETHNICITY"]);
+            let re_staff = _.get(this.school, this.fields["RACE_ETHNICITY_STAFF"]);
             let include = [
                 "aian",
                 "asian",
@@ -160,11 +166,12 @@ export default {
             for (let p = 0; p < include.length; p++) {
                 output.push({
                     label: this.site.data.race_ethnicity[include[p]],
-                    value: re[include[p]]
+                    value: re[include[p]],
+                    staff_value: re_staff[include[p]]
                 });
             }
 
-            return _.sortBy(output, ["value"]).reverse();
+            return _.sortBy(output, ["label"]);
         },
         retentionRate() {
             if (!this.school) return null;
@@ -272,6 +279,10 @@ export default {
             if (!this.school) return null;
             return _.get(this.school, this.fields['PELL_PERCENTAGE']);
         },
+        studentRatio() {
+            if (!this.school) return null;
+            return _.get(this.school, this.fields['STUDENT_RATIO']);
+        },          
         netPriceCalculatorUrl() {
             if (!this.school) return null;
             return _.get(this.school, this.fields['NET_PRICE_CALC_URL'], '#');
@@ -538,14 +549,14 @@ export default {
         fakeMedianEarnings() {
             var medians = {
                 1 : 
-                    { 0 : 27937,
-                    1 : 36834 },
+                    { 0 : 28664,
+                    1 : 38391 },
                 2 : 
-                    { 0 : 36041,
-                    1 : 36834 },
+                    { 0 : 37667,
+                    1 : 38391 },
                 3 : 
-                    { 0 : 47922,
-                    1 : 36834 },                                
+                    { 0 : 50477,
+                    1 : 38391 },                                
             }
 
             return medians;
@@ -553,28 +564,28 @@ export default {
         fakeAverageAnnualCosts() {
             var medians = {
                 1 : 
-                    { 0 : 15733,
-                    1 : 15951 },
+                    { 0 : 15769,
+                    1 : 15948 },
                 2 : 
-                    { 0 : 8816,
-                    1 : 15951 },
+                    { 0 : 8796,
+                    1 : 15948 },
                 3 : 
-                    { 0 : 19526,
-                    1 : 15951 },                                
+                    { 0 : 19509,
+                    1 : 15948 },                                
             }
             return medians;
         },      
         fakeGraduationRate() {
             var medians = {
                 1 : 
-                    { 0 : 0.6842,
-                    1 : 0.5875 },
+                    { 0 : 0.684,
+                    1 : 0.587 },
                 2 : 
-                    { 0 : 0.30295,
-                    1 : 0.5875 },
+                    { 0 : 0.3028,
+                    1 : 0.587 },
                 3 : 
-                    { 0 : 0.5698,
-                    1 : 0.5875 },                                
+                    { 0 : 0.5699,
+                    1 : 0.587 },                                
             }
             return medians;
         },        
@@ -632,7 +643,12 @@ export default {
         percentMoreThanHS() {
             if (!this.school) return null;
             return _.get(this.school, this.fields['EARNINGS_GT_HS'])            
-        }        
+        },
+        schoolDegreeList() {
+            if (!this.school) return null;
+            //return _.get(this.school, this.fields['EARNINGS_GT_HS']) 
+            return "Bachelor's, Master's and Doctoral Degrees, as well as Graduate/Professional Certificates"  
+        }      
     },
     methods: {
         orderByWithNullsAtEnd(pArray, pAttr, pReverse) {
@@ -760,6 +776,36 @@ export default {
                 key: 'bachelor',
                 title: "bachelor's Degree",
                 filterValue: 3,
+                items:[]
+            },
+            {
+                key: 'postbaccalaureate',
+                title: "post-baccalaureate Certificate",
+                filterValue: 4,
+                items:[]
+            },
+            {
+                key: 'master',
+                title: "master's Degree",
+                filterValue: 5,
+                items:[]
+            },
+            {
+                key: 'doctor',
+                title: "doctoral Degree",
+                filterValue: 6,
+                items:[]
+            },
+            {
+                key: 'firstprofessional',
+                title: "first Professional Degree",
+                filterValue: 7,
+                items:[]
+            },
+            {
+                key: 'graduatecertificate',
+                title: "graduate/Professional Certificate",
+                filterValue: 8,
                 items:[]
             }
         ]

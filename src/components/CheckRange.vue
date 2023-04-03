@@ -13,7 +13,7 @@
 
 <template>
   <div>
-    <p class="subhead-2" :id="generatedId">
+    <p class="subhead-2" :id="generatedId" v-if="legendTitle">
       <slot name="label">
         {{ legendTitle }}
       </slot>
@@ -46,7 +46,7 @@
               type="number"
               min="0"
               @input="handleInput"
-              solo
+              outlined
               dense
               :prefix="prefix"
               :suffix="appendText"
@@ -78,7 +78,7 @@ export default {
   props: {
     legendTitle: {
       type: String,
-      default: "Title",
+      default: null,
     },
     value: Number,
     enable: Boolean,

@@ -1,6 +1,6 @@
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 45">
   <title>two</title>
-  <circle cx="22.5" cy="22.5" r="22.5" style="fill: #666"/>
+  <circle cx="22.5" cy="22.5" r="22.5" style="fill: #102E52"/>
   <g style="isolation: isolate">
     <path d="M35.51,31.76v4.75h-19V32.73l9.72-9.18c2.23-2.12,2.62-3.42,2.62-4.64,0-2-1.36-3.13-4-3.13a6.17,6.17,0,0,0-5.22,2.52l-4.24-2.74c1.94-2.84,5.47-4.68,10-4.68,5.62,0,9.36,2.88,9.36,7.45,0,2.45-.68,4.68-4.21,8l-5.8,5.47Z" transform="translate(-2.4 -2.5)" style="fill: #fff"/>
   </g>

@@ -186,8 +186,8 @@
           <a
             style="word-wrap: break-word; font-size:14px;"
             target="_blank"
-            :href="$url('/school/transition/')"
-            @click="transitionOutboundLink($event, schoolUrl)"
+            :href=schoolUrl
+            @click="transitionOutboundLink($event)"
             >{{
               _.get(school, fields["SCHOOL_URL"], "ed.gov") | formatUrlText
             }}<v-icon

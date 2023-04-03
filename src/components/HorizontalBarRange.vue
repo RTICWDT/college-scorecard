@@ -48,7 +48,7 @@
         ref="median"
       >
         <span v-html="_median.label"></span>
-        <span class="arrow-left"></span>        
+        <span class="arrow-left"></span>
       </span>
 
       <v-tooltip top :disabled="!uppertip">
@@ -87,7 +87,7 @@
   $bar-width: 100px;
   $arrow-size: 7px;
 
-  background-color: $light-gray;
+  background-color: $bg-bar-chart;
   display: block;
   /*height: 30px;*/
   margin-bottom: 0;
@@ -96,7 +96,7 @@
   position: relative;
 
   .picc-range-bar {
-    background-color: $medium-blue;
+    background-color: $mid-light-blue;
     height: 100%;
     left: 0;
     position: absolute;
@@ -145,18 +145,17 @@
       border-right: none;
       span {
         padding-left: 0.25em;
-        font-size:18px !important;
-        font-family: "Montserrat", sans-serif !important;     
-        font-weight:bold;   
+        font-size: 18px !important;
+        font-weight: bold;
       }
     }
     &.picc-range-label-lower {
       span {
         padding-right: 0.25em;
-        
-        display:none;
+
+        display: none;
       }
-      display:none;
+      display: none;
       border-left: none !important;
     }
 
@@ -169,7 +168,6 @@
         bottom: 100%;
         top: auto;
         font-size: 12px;
-        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
       }
     }
 
@@ -178,11 +176,11 @@
       bottom: 0;
       height: $bar-width;
       position: absolute;
-      margin-top:0;
-      margin-bottom:0;
-      height:100%;
-      width:1px;
-      background-color:#000;  
+      margin-top: 0;
+      margin-bottom: 0;
+      height: 100%;
+      width: 1px;
+      background-color: #000;
       border-left: 1px solid #000;
       span {
         top: 35px !important;
@@ -191,23 +189,23 @@
       span:not(.arrow-left) {
         //margin-bottom: $bar-width + $arrow-size + 10;
         text-align: center;
-        color:#000;
+        color: #000;
         top: 44px !important;
-        margin-left:-3.75rem !important;
-        font-weight:400;
+        margin-left: -3.75rem !important;
+        font-weight: 400;
         font-size: 12px;
-        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
-        font-style:italic;
-        line-height: 14px;       
-
+        font-family: "Public Sans", "Helvetica Neue", Helvetica, arial,
+          sans-serif !important;
+        font-style: italic;
+        line-height: 14px;
       }
       span.arrow-left {
-        width: 0; 
-        height: 0; 
+        width: 0;
+        height: 0;
         border-left: $arrow-size solid transparent;
         border-bottom: $arrow-size solid black;
         border-right: $arrow-size solid transparent;
-        margin-left:-7px;
+        margin-left: -7px;
         margin-top: 0px;
       }
     }
@@ -321,9 +319,9 @@ export default {
       return styleLabel
     },
     _median() {
-      let styleLabel = this.styleLabel(this.median);
-      styleLabel.styles.display = this.median.show ? "block" : "none";
-      return styleLabel;
+      let styleLabel = this.styleLabel(this.median)
+      styleLabel.styles.display = this.median.show ? "block" : "none"
+      return styleLabel
     },
     _upper() {
       //return this.styleLabel(this.upper);
@@ -332,7 +330,7 @@ export default {
         ...styleLabel.styles,
         ...this.upper.styles,
       }
-      
+
       return styleLabel
     },
   },
@@ -348,8 +346,8 @@ export default {
 
       if (right < 80 && this.addExtraPadding) {
         //this.extraPad["padding-right"] = "60px"
-        var s = this._upper.styles.left.replace(/[0-9]+%\s?/g, '');
-        this._upper.styles.left = (s - 10) + '%';
+        var s = this._upper.styles.left.replace(/[0-9]+%\s?/g, "")
+        this._upper.styles.left = s - 10 + "%"
       }
     },
     scale(v) {
@@ -369,7 +367,7 @@ export default {
       )
       newObj.styles.right = right + "%"
       return newObj
-    },    
+    },
     styleLabel(obj, fixLabels = false) {
       let newObj = { ...obj }
       newObj.styles = {}
@@ -397,15 +395,13 @@ export default {
 
       if (left > 15) {
         //let s = left.replace(/[0-9]+%\s?/g, '');
-        if (obj.label.includes('$'))
-          newObj.styles.left = (left - 15) + '%';
-        else
-          newObj.styles.left = (left - 10) + '%';
-        newObj.styles.color = '#ffffff'
+        if (obj.label.includes("$")) newObj.styles.left = left - 15 + "%"
+        else newObj.styles.left = left - 10 + "%"
+        newObj.styles.color = "#ffffff"
       }
 
       return newObj
-    }, 
+    },
   },
 
   mounted() {

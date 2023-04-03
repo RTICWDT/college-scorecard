@@ -2,11 +2,12 @@
   <v-main>
     <data-navigation :current="$url('/data/changelog/')" />
 
-    <v-container>
+    <v-container class="px-0">
       <v-row>
-        <v-col cols="12" md="10" offset-md="1">
-          <v-card class="py-5 px-10 ma-5">
+        <v-col cols="12">
+          <v-card class="py-5 px-10 ma-5" flat>
             <h1 class="display-1 mb-2 font-weight-bold">Change Log</h1>
+            <hr />
             <p>
               This page includes a description and timeline for the changes that
               have been made to either the College Scorecard tool or to the
@@ -15,64 +16,127 @@
             </p>
             <v-row>
               <v-col class="text-right">
-                <v-btn primary @click="all" class="my-2 mr-2">Expand All</v-btn>
-                <v-btn primary @click="none" class="my-2">Close All</v-btn>
+                <v-btn color="" @click="all" class="my-2 mr-2"
+                  >Expand All</v-btn
+                >
+                <v-btn color="" @click="none" class="my-2">Close All</v-btn>
               </v-col>
             </v-row>
             <v-expansion-panels multiple v-model="panels">
+              <v-expansion-panel>
+                <v-expansion-panel-header
+                  >April 5, 2022</v-expansion-panel-header
+                >
+                <v-expansion-panel-content>
+                  <p>
+                    On April 5, 2023, the Department updated the College Scorecard website with more recent data for metrics from 
+                    the National Student Loan Data System (NSLDS) and the Internal Revenue Service (IRS). The website was updated to 
+                    add information on graduate-level fields of study offered at colleges to the Field of Study search and to refresh 
+                    the overall design of the user interface. In addition, new data on Campus Diversity—including Race/Ethnicity for 
+                    Full-Time staff and Student to Faculty ratio—were added to the individual institution profiles. 
+                  </p>
+                  <p>
+                    Specific data updates in this release include:
+                  </p>
+                  <ul>
+                    <li>
+                      Refreshed cumulative loan debt data metrics derived from NSLDS 
+                      at the institution-level and for individual fields of study.  
+                    </li>
+                    <li>
+                      Refreshed dollar-based repayment rates data metrics derived 
+                      from NSLDS at the institution-level. 
+                    </li>
+                    <li>
+                      Added borrower-based repayment rates measured 4 years after
+                       entry into repayment (both institution-level and field of study-level data). 
+                    </li>
+                    <li>
+                      Added median earnings measured 4 years after completion 
+                      of a credential (both institution-level and field of study-level data). 
+                    </li>
+                    <li>
+                      Added undergraduate student/faculty ratio and the metrics 
+                      describing the share of staff by race/ethnicity and by gender. 
+                    </li>
+                    <li>
+                      Updated data derived from Federal Student Aid sources to
+                      more recent values for the following data metrics:
+                      <ul>
+                        <li>Currently Operating Status Flag</li>
+                        <li>Heightened Cash Monitoring Flag</li>
+                        <li>Accrediting Agency Name and Code</li>
+                        <li>Title IV Approval Date</li>
+                        <li>Federal School Code</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </v-expansion-panel-content>
+              </v-expansion-panel>              
               <v-expansion-panel>
                 <v-expansion-panel-header
                   >September 14, 2022</v-expansion-panel-header
                 >
                 <v-expansion-panel-content>
                   <p>
-                    On September 14, 2022, the Department provided the following updates to the College Scorecard website/API:
+                    On September 14, 2022, the Department provided the following
+                    updates to the College Scorecard website/API:
                   </p>
                   <ul>
                     <li>
-                      Updates (more recent data values) derived from Federal Student Aid sources for the following data metrics: 
-                      Currently Operating Status Flag, Heightened Cash Monitoring Flag, Accrediting Agency Name and Code, Title IV 
-                      Approval Date, and Federal School Code. 
+                      Updates (more recent data values) derived from Federal
+                      Student Aid sources for the following data metrics:
+                      Currently Operating Status Flag, Heightened Cash
+                      Monitoring Flag, Accrediting Agency Name and Code, Title
+                      IV Approval Date, and Federal School Code.
                     </li>
                     <li>
-                      Updates derived from the Office of Postsecondary Education (OPE) eligibility matrix for data metrics 
-                      identifying Minority Serving Institutions.
+                      Updates derived from the Office of Postsecondary Education
+                      (OPE) eligibility matrix for data metrics identifying
+                      Minority Serving Institutions.
                     </li>
                     <li>
-                      Records were added to the institution-level data file for institutions that participate in the 
-                      Integrated Postsecondary Education Data System (IPEDS) but do not have an Office of Postsecondary 
-                      Education Identification number (OPEID).
+                      Records were added to the institution-level data file for
+                      institutions that participate in the Integrated
+                      Postsecondary Education Data System (IPEDS) but do not
+                      have an Office of Postsecondary Education Identification
+                      number (OPEID).
                     </li>
                     <li>
-                      Corrections were made to the Field of Study data to resolve incorrect information in an underlying 
-                      data source, resulting in removal of several rows from the data files.
+                      Corrections were made to the Field of Study data to
+                      resolve incorrect information in an underlying data
+                      source, resulting in removal of several rows from the data
+                      files.
                     </li>
                     <li>
-                      The 2020-21 OPEID/UNITID crosswalk was added to the data file download package.
+                      The 2020-21 OPEID/UNITID crosswalk was added to the data
+                      file download package.
                     </li>
                   </ul>
                 </v-expansion-panel-content>
-              </v-expansion-panel>                          
+              </v-expansion-panel>
               <v-expansion-panel>
-                <v-expansion-panel-header
-                  >May 2, 2022</v-expansion-panel-header
-                >
+                <v-expansion-panel-header>May 2, 2022</v-expansion-panel-header>
                 <v-expansion-panel-content>
                   <p>
-                    On May 2, 2022, the Department provided the following updates to the College Scorecard website/API:
+                    On May 2, 2022, the Department provided the following
+                    updates to the College Scorecard website/API:
                   </p>
                   <ul>
                     <li>
-                      Updates to all data metrics derived from IPEDS with more recent data values from a new data collection year. 
+                      Updates to all data metrics derived from IPEDS with more
+                      recent data values from a new data collection year.
                     </li>
                     <li>
-                      Updates (more recent data values) derived from Federal Student Aid sources for the following data metrics: 
-                      Cohort Default Rate, Currently Operating Status Flag, Heightened Cash Monitoring Flag, Accrediting Agency
-                      Name and Code, Title IV Approval Date, and Federal School Code.
+                      Updates (more recent data values) derived from Federal
+                      Student Aid sources for the following data metrics: Cohort
+                      Default Rate, Currently Operating Status Flag, Heightened
+                      Cash Monitoring Flag, Accrediting Agency Name and Code,
+                      Title IV Approval Date, and Federal School Code.
                     </li>
                   </ul>
                 </v-expansion-panel-content>
-              </v-expansion-panel>              
+              </v-expansion-panel>
               <v-expansion-panel>
                 <v-expansion-panel-header
                   >March 14, 2022</v-expansion-panel-header
@@ -261,13 +325,14 @@
                     problems with this revision of the API, please submit an
                     issue at
                     <a
-                      :href="
-                        $url(
-                          '/school/transition/'
+                      :href="$url('/school/transition/')"
+                      target="_blank"
+                      @click="
+                        transitionOutboundLink(
+                          $event,
+                          'http://github.com/rticwdt/college-scorecard/'
                         )
                       "
-                      target="_blank"
-                      @click="transitionOutboundLink($event, 'http://github.com/rticwdt/college-scorecard/')"
                       >http://github.com/rticwdt/college-scorecard/<i
                         aria-hidden="true"
                         class="v-icon notranslate pl-1 fas fa-external-link-alt theme--light"
@@ -1577,7 +1642,7 @@ export default {
   },
   methods: {
     all() {
-      this.panels = [...Array(27).keys()].map((k, i) => i)
+      this.panels = [...Array(28).keys()].map((k, i) => i)
     },
     // Reset the panel
     none() {
