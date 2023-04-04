@@ -263,7 +263,7 @@
                   <span>Alternative Pathways<br />to a Career</span>
                   <v-avatar color="#D1E9FF">
                     <img
-                      :src="$url('img/Pathways-Icon.png')"
+                      :src="$url('img/Pathway-Icon.svg')"
                       alt="Pathways Icon"
                       class="pa-2"
                     />
