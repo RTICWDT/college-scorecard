@@ -19,7 +19,7 @@
         >
         <v-card-title>{{ title }}</v-card-title>
         <v-card-text class="pb-5">
-          <div v-html="content"></div>
+          <div class="tooltip-text" v-html="content" @click="handleClicks"></div>
           <!-- <p v-if="limitedFoS">
             The data shown is for undergraduate fields of study (undergraduate
             certificates, associate's degrees, and bachelor's degrees) for which
@@ -71,9 +71,10 @@
 
 <script>
 import { SiteData } from "~/js/mixins/SiteData.js"
+import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 
 export default {
-  mixins: [SiteData],
+  mixins: [SiteData, AnalyticsEvents],
   props: {
     definition: String,
     color: {
@@ -113,6 +114,37 @@ export default {
     return {
       showDialog: false,
     }
+  },
+  methods: {
+    handleClicks(event) {
+      // ensure we use the link, in case the click has been received by a subelement
+      let { target } = event
+
+      console.log(target)
+
+      while (target && target.tagName !== "A") target = target.parentNode
+      // handle only links that occur inside the component and do not reference external resources
+      if (target && target.matches(".tooltip-text p a") && target.href) {
+        // some sanity checks taken from vue-router:
+        // https://github.com/vuejs/vue-router/blob/dev/src/components/link.js#L106
+        const {
+          altKey,
+          ctrlKey,
+          metaKey,
+          shiftKey,
+          button,
+          defaultPrevented,
+        } = event
+        // don't handle with control keys
+        if (metaKey || altKey || ctrlKey || shiftKey) return
+        // don't handle when preventDefault called
+        if (defaultPrevented) return
+        // don't handle right clicks
+        if (button !== undefined && button !== 0) return
+
+        this.transitionOutboundLink(event)
+      }
+    },
   },
   computed: {
     glossary() {
