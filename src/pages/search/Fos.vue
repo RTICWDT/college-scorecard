@@ -113,7 +113,20 @@
                 auto-submit
                 @search-query="handleFieldOfStudySearch"
               />
-            </v-navigation-drawer> </v-col
+            </v-navigation-drawer>            
+            ]<v-btn
+            v-scroll="onScroll"
+            v-show="btt"
+            fab
+            dark
+            fixed
+            bottom
+            right
+            color="primaryfos"
+            @click="toTop"
+          >
+            <v-icon>fas fa-arrow-up</v-icon>
+          </v-btn> </v-col
           ><v-col :cols="showSidebar ? 9 : 12" class="pa-10">
             <div v-if="!isLoading">
               <h2 class="mb-4">
@@ -496,6 +509,7 @@ export default {
         // Hold Default state of form data.
         formDefault: {},
       },
+      btt: false,
     }
   },
   created() {
@@ -673,6 +687,14 @@ export default {
       this.input.page = 0
       this.searchAPI()
     },
+    onScroll (e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset ||   e.target.scrollTop || 0
+      this.btt = top > 20
+    },
+    toTop () {
+      this.$vuetify.goTo(0)
+    }
   },
   metaInfo: {
     title: "Search Fields of Study",
