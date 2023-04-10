@@ -30,7 +30,7 @@ export default {
   },
   props: {
     location: {
-      type: Array,
+      type: Object,
       required: true,
     },
   },
