@@ -101,11 +101,11 @@
             </div>
             <v-navigation-drawer
               v-model="showSidebar"
-              :width="$vuetify.breakpoint.smAndDown ? '250' : 'auto'"
+              :width="$vuetify.breakpoint.smAndDown ? '100%' : 'auto'"
               class="searchSidebar elevation-0 pr-0"
               :absolute="$vuetify.breakpoint.smAndDown"
               :temporary="$vuetify.breakpoint.smAndDown"
-              :hide-overlay="$vuetify.breakpoint.smAndUp"
+              hide-overlay="false"
             >
               <!-- Search Fields of Study Component -->
               <search-fos-form
