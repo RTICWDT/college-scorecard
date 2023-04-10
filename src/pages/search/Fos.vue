@@ -6,6 +6,10 @@
   }
 }
 
+.container--fluid {
+  max-width: none !important;
+}
+
 .tab-card {
   border: none;
 }
@@ -88,6 +92,14 @@
       <v-container fluid class="pa-0">
         <v-row>
           <v-col cols="3" :class="{ 'd-none': !showSidebar }" class="pr-0">
+            <v-navigation-drawer
+              v-model="showSidebar"
+              :width="$vuetify.breakpoint.smAndDown ? '100%' : 'auto'"
+              class="searchSidebar elevation-0 pr-0"
+              :absolute="$vuetify.breakpoint.smAndDown"
+              :temporary="$vuetify.breakpoint.smAndDown"
+              hide-overlay="false"
+            >
             <div class="px-6 pt-6 white" style="border-right: 5px solid #DFE6F0;">
               <a
                 class="float-right close-filter"
@@ -98,15 +110,7 @@
               <h2>
                 More Filters
               </h2>
-            </div>
-            <v-navigation-drawer
-              v-model="showSidebar"
-              :width="$vuetify.breakpoint.smAndDown ? '100%' : 'auto'"
-              class="searchSidebar elevation-0 pr-0"
-              :absolute="$vuetify.breakpoint.smAndDown"
-              :temporary="$vuetify.breakpoint.smAndDown"
-              hide-overlay="false"
-            >
+            </div>            
               <!-- Search Fields of Study Component -->
               <search-fos-form
                 :url-parsed-params="urlParsedParams"
