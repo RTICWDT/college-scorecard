@@ -60,6 +60,9 @@
                       describing the share of staff by race/ethnicity and by gender. 
                     </li>
                     <li>
+                      Added distance education indiciator for the field of study metric
+                    </li>
+                    <li>
                       Updated data derived from Federal Student Aid sources to
                       more recent values for the following data metrics:
                       <ul>
