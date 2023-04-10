@@ -112,7 +112,20 @@
                 @search-query="handleInstitutionSearch"
                 :hideLocation="true"
               />
-            </v-navigation-drawer> </v-col
+            </v-navigation-drawer> 
+            <v-btn
+            v-scroll="onScroll"
+            v-show="btt"
+            fab
+            dark
+            fixed
+            bottom
+            right
+            color="primary"
+            @click="toTop"
+          >
+            <v-icon>fas fa-arrow-up</v-icon>
+          </v-btn></v-col
           ><v-col :cols="showSidebar ? 9 : 12" xl="10" class="pa-6 pa-sm-8`">
             <div id="search-result-container">
               <div class="search-result-container">
@@ -451,6 +464,7 @@ export default {
           acceptance: false,
         },
       },
+      btt: false,
     }
   },
   created() {
@@ -688,6 +702,14 @@ export default {
       this.input.page = 1
       this.searchAPI()
     },
+    onScroll (e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset ||   e.target.scrollTop || 0
+      this.btt = top > 20
+    },
+    toTop () {
+      this.$vuetify.goTo(0)
+    }  
   },
   metaInfo: {
     title: "Search Schools",

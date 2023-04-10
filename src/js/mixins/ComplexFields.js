@@ -164,13 +164,19 @@ export default {
                 "white"
             ];
             for (let p = 0; p < include.length; p++) {
+                var student_item = include[p];
+                var faculty_item = include[p];
+
+                if (include[p] == "non_resident_alien")
+                    faculty_item = "nonresident";
+
                 output.push({
                     label: this.site.data.race_ethnicity[include[p]],
-                    value: re[include[p]],
-                    staff_value: re_staff[include[p]]
+                    value: re[student_item],
+                    staff_value: re_staff[faculty_item]
                 });
             }
-
+            console.log(output)
             return _.sortBy(output, ["label"]);
         },
         retentionRate() {
@@ -549,14 +555,14 @@ export default {
         fakeMedianEarnings() {
             var medians = {
                 1 : 
-                    { 0 : 28664,
-                    1 : 38391 },
+                    { 0 : 28562,
+                    1 : 38436 },
                 2 : 
-                    { 0 : 37667,
-                    1 : 38391 },
+                    { 0 : 37834,
+                    1 : 38436 },
                 3 : 
-                    { 0 : 50477,
-                    1 : 38391 },                                
+                    { 0 : 50391,
+                    1 : 38436 },                                
             }
 
             return medians;
@@ -564,28 +570,28 @@ export default {
         fakeAverageAnnualCosts() {
             var medians = {
                 1 : 
-                    { 0 : 15769,
-                    1 : 15948 },
+                    { 0 : 16190,
+                    1 : 16030 },
                 2 : 
-                    { 0 : 8796,
-                    1 : 15948 },
+                    { 0 : 8528,
+                    1 : 16030 },
                 3 : 
-                    { 0 : 19509,
-                    1 : 15948 },                                
+                    { 0 : 18902,
+                    1 : 16030 },                                
             }
             return medians;
         },      
         fakeGraduationRate() {
             var medians = {
                 1 : 
-                    { 0 : 0.684,
-                    1 : 0.587 },
+                    { 0 : 0.6803,
+                    1 : 0.5937 },
                 2 : 
-                    { 0 : 0.3028,
-                    1 : 0.587 },
+                    { 0 : 0.3178,
+                    1 : 0.5937 },
                 3 : 
-                    { 0 : 0.5699,
-                    1 : 0.587 },                                
+                    { 0 : 0.5788,
+                    1 : 0.5937 },                                
             }
             return medians;
         },        
