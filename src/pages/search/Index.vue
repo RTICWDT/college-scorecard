@@ -91,7 +91,7 @@
               class="searchSidebar elevation-0 pr-0"
               :absolute="$vuetify.breakpoint.smAndDown"
               :temporary="$vuetify.breakpoint.smAndDown"
-              hide-overlay="false"
+              hide-overlay
             >
               <div class="pa-6">
                 <a
@@ -468,6 +468,7 @@ export default {
     }
   },
   created() {
+    this.showSidebar = window.innerWidth > 960 ? true : false
     // Copy default form input state.
     this.utility.formDefault = _.cloneDeep(this.input)
 
