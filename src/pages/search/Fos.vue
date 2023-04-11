@@ -117,6 +117,14 @@
                 auto-submit
                 @search-query="handleFieldOfStudySearch"
               />
+                  <v-btn
+                    type="submit"
+                    :class="$vuetify.breakpoint.smAndDown ? 'mx-4' : 'd-none'"
+                    color="secondary"
+                    large
+                    @click="showSidebar = !showSidebar"
+                    >Find Fields of Study</v-btn
+                  >
             </v-navigation-drawer>            
             ]<v-btn
             v-scroll="onScroll"
@@ -517,7 +525,7 @@ export default {
     }
   },
   created() {
-    this.showSidebar = window.innerWidth > 960 ? true : false
+    this.showSidebar = window.innerWidth > 960 ? true : false //this.$vuetify.breakpoint
     // Copy default form input state.
     this.utility.formDefault = _.cloneDeep(this.input)
     this.urlParsedParams = forms.parseURLParams()

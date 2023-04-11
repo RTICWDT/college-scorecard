@@ -111,7 +111,15 @@
                 display-all-filters
                 @search-query="handleInstitutionSearch"
                 :hideLocation="true"
-              />
+              />           
+              <v-btn
+                    type="submit"
+                    :class="$vuetify.breakpoint.smAndDown ? 'mx-4 mt-4' : 'd-none'"
+                    color="secondary"
+                    large
+                    @click="showSidebar = !showSidebar"
+                    >Find Schools</v-btn
+                  >              
             </v-navigation-drawer> 
             <v-btn
             v-scroll="onScroll"
