@@ -476,7 +476,6 @@ export default {
     }
   },
   created() {
-    this.showSidebar = window.innerWidth > 960 ? true : false
     // Copy default form input state.
     this.utility.formDefault = _.cloneDeep(this.input)
 
@@ -506,7 +505,9 @@ export default {
       this.handleInstitutionSearch(params)
     }, 1000)
   },
-
+  mounted() {
+    this.showSidebar = window.innerWidth > 960 ? true : false //this.$vuetify.breakpoint
+  },
   computed: {
     totalPages() {
       if (this.results.meta.per_page && this.results.meta.total) {

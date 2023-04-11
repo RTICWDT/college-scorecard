@@ -525,7 +525,6 @@ export default {
     }
   },
   created() {
-    this.showSidebar = window.innerWidth > 960 ? true : false //this.$vuetify.breakpoint
     // Copy default form input state.
     this.utility.formDefault = _.cloneDeep(this.input)
     this.urlParsedParams = forms.parseURLParams()
@@ -547,6 +546,9 @@ export default {
     this.debounceSearchUpdate = _.debounce(function() {
       this.searchAPI()
     }, 1000)
+  },
+  mounted() {
+    this.showSidebar = window.innerWidth > 960 ? true : false //this.$vuetify.breakpoint
   },
   computed: {
     selectedFoSLabel() {
