@@ -29,38 +29,39 @@
                 >
                 <v-expansion-panel-content>
                   <p>
-                    On April 5, 2023, the Department updated the College Scorecard website with more recent data for metrics from 
-                    the National Student Loan Data System (NSLDS) and the Internal Revenue Service (IRS). The website was updated to 
-                    add information on graduate-level fields of study offered at colleges to the Field of Study search and to refresh 
-                    the overall design of the user interface. In addition, new data on Campus Diversity—including Race/Ethnicity for 
-                    Full-Time staff and Student to Faculty ratio—were added to the individual institution profiles. 
+                    On April ##, 2023, the Department updated the College Scorecard website with more recent data for 
+                    metrics from the Integrated Postsecondary Education Data System (IPEDS), the National Student Loan 
+                    Data System (NSLDS) and the Internal Revenue Service (IRS). The website was updated to add 
+                    information on graduate-level fields of study offered at colleges to the Field of Study search and 
+                    to refresh the overall design of the user interface. In addition, new data on Campus Diversity—including 
+                    Race/Ethnicity for Full-Time staff and Student to Faculty ratio—were added to the individual institution 
+                    profiles. 
                   </p>
                   <p>
                     Specific data updates in this release include:
                   </p>
                   <ul>
                     <li>
-                      Refreshed cumulative loan debt data metrics derived from NSLDS 
-                      at the institution-level and for individual fields of study.  
+                      Updates to all data metrics derived from IPEDS with more recent data values from a new data collection year. 
                     </li>
                     <li>
-                      Refreshed dollar-based repayment rates data metrics derived 
-                      from NSLDS at the institution-level. 
+                      Refreshed cumulative loan debt data metrics derived from NSLDS at the institution-level and for individual 
+                      fields of study.   
                     </li>
                     <li>
-                      Added borrower-based repayment rates measured 4 years after
-                       entry into repayment (both institution-level and field of study-level data). 
+                      Refreshed dollar-based repayment rates data metrics derived from NSLDS at the institution-level. 
                     </li>
                     <li>
-                      Added median earnings measured 4 years after completion 
-                      of a credential (both institution-level and field of study-level data). 
+                      Added borrower-based repayment rates measured 4 years after entry into repayment (both institution-level 
+                      and field of study-level data).  
                     </li>
                     <li>
-                      Added undergraduate student/faculty ratio and the metrics 
-                      describing the share of staff by race/ethnicity and by gender. 
+                      Added median earnings measured 4 years after completion of a credential (both institution-level and 
+                      field of study-level data). 
                     </li>
-                    <li>
-                      Added distance education indiciator for the field of study metric
+                    <li>Added undergraduate student/faculty ratio and the metrics describing the share of staff by race/ethnicity and by gender.                       
+                    </li>
+                    <li>Added a distance education indicator to the field of study-level data. 
                     </li>
                     <li>
                       Updated data derived from Federal Student Aid sources to
@@ -71,6 +72,7 @@
                         <li>Accrediting Agency Name and Code</li>
                         <li>Title IV Approval Date</li>
                         <li>Federal School Code</li>
+                        <li>Cohort Default Rate</li>
                       </ul>
                     </li>
                   </ul>
