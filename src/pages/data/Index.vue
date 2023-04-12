@@ -14,7 +14,7 @@
             </p>
             <p class="pb-4">
               This data was
-              <strong>last updated April 5, 2023</strong>.
+              <strong>last updated April XX, 2023</strong>.
             </p>
 
             <h2 class="my-5">
