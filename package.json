@@ -1,7 +1,7 @@
 {
   "name": "college-scorecard",
   "private": true,
-  "version": "2.10.0",
+  "version": "3.0.0",
   "scripts": {
     "build": "gridsome build",
     "develop": "gridsome develop",

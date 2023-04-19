@@ -14,7 +14,7 @@
             </p>
             <p class="pb-4">
               This data was
-              <strong>last updated April XX, 2023</strong>.
+              <strong>last updated April 24, 2023</strong>.
             </p>
 
             <h2 class="my-5">
@@ -22,7 +22,7 @@
               <v-btn
                 class="ml-2"
                 color="secondary"
-                href="https://ed-public-download.app.cloud.gov/downloads/CollegeScorecard_Raw_Data_09012022.zip"
+                href="https://ed-public-download.app.cloud.gov/downloads/CollegeScorecard_Raw_Data_04192023.zip"
                 >Download
                 <v-icon right dark x-small>
                   fas fa-download
@@ -59,7 +59,7 @@
                   small
                   color="secondary"
                   class="ml-0 ml-sm-2"
-                  href="https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Institution_09012022.zip"
+                  href="https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Institution_04192023.zip"
                   >Download
                   <v-icon right dark x-small>
                     fas fa-download
@@ -73,7 +73,7 @@
                   small
                   class="ml-0 ml-sm-2"
                   color="secondary"
-                  href=" https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Field-of-Study_09012022.zip"
+                  href=" https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Field-of-Study_04192023.zip"
                   >Download
                   <v-icon right dark x-small>
                     fas fa-download
