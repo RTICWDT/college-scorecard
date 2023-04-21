@@ -530,6 +530,10 @@ h1 {
   border-radius: 5px 5px 0 0;
 }
 
+.v-avatar img {
+  border-radius:6px;
+}
+
 h2 span {
   font-weight:600 !important;
 }

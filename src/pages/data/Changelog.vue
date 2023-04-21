@@ -25,11 +25,11 @@
             <v-expansion-panels multiple v-model="panels">
               <v-expansion-panel>
                 <v-expansion-panel-header
-                  >April XX, 2022</v-expansion-panel-header
+                  >April 24, 2022</v-expansion-panel-header
                 >
                 <v-expansion-panel-content>
                   <p>
-                    On April ##, 2023, the Department updated the College Scorecard website with more recent data for 
+                    On April 24, 2023, the Department updated the College Scorecard website with more recent data for 
                     metrics from the Integrated Postsecondary Education Data System (IPEDS), the National Student Loan 
                     Data System (NSLDS) and the Internal Revenue Service (IRS). The website was updated to add 
                     information on graduate-level fields of study offered at colleges to the Field of Study search and 
