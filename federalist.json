@@ -1,7 +1,7 @@
 {
     "headers": [
       {
-        "/*.html": {
+        "/*": {
           "cache-control": "no-store"
         }
       },
