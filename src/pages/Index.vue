@@ -3,33 +3,33 @@
     <v-main>
       <!-- Top Splash and Search-->
       <div class="home-splash">
-        <v-container class="pt-0">
+        <v-container class="mb-n10 pt-sm-16 pt-5">
           <v-row>
             <!-- Header Info -->
-            <v-col cols="12">
-              <h1 class="white--text text-uppercase text-center">
-                Find the Right Fit.
+            <v-col cols="12" class="px-6 px-sm-3">
+              <h1 class="white--text">
+                Find the right fit
               </h1>
 
-              <p class="white--text text-center">
+              <p class="white--text">
                 Search and compare colleges: their fields of study, costs,
                 admissions, results, and more.
               </p>
             </v-col>
           </v-row>
 
-          <v-row class="px-md-6">
+          <v-row>
             <!-- Medium and Larger Tabs and Search Content -->
-            <v-col cols="12" class="d-none d-sm-flex pb-10">
+            <v-col cols="12" class="d-none d-sm-flex pb-0">
               <v-tabs
-                grow
-                background-color="rgba(0,0,0,0)"
+                background-color="transparent"
                 color="white"
                 slider-size="8"
                 slider-color="#74B3E8"
-                class="ma-0"
+                class="home-tabs ma-0"
                 show-arrows
                 v-model="desktopTabs"
+                @change="colorSlider"
               >
                 <v-tab
                   @click="GATrackEvent('Home Tab', 'Tab', 'Search Schools')"
@@ -53,10 +53,10 @@
                 >
                   Show Me Options
                 </v-tab>
-
+                <v-tabs-slider :color="sliderColor" />
                 <!-- Institution Search-->
                 <v-tab-item>
-                  <v-card class="pa-5 homepage-search-container">
+                  <v-card class="pa-5" flat>
                     <name-autocomplete
                       @school-name-selected="handleSchoolNameSelected"
                       :searchEmptyName="false"
@@ -67,6 +67,7 @@
                         text
                         small
                         @click="toggleCustomSearch = !toggleCustomSearch"
+                        class=" text-uppercase"
                       >
                         Custom Search
                         <v-icon v-if="toggleCustomSearch">mdi-menu-up</v-icon>
@@ -75,36 +76,68 @@
                     </div>
 
                     <div v-if="toggleCustomSearch">
-                      <search-form @search-query="directToSearch" />
+                      <search-form
+                        @search-query="directToSearch"
+                        :hideLocation="false"
+                      />
                     </div>
                   </v-card>
                 </v-tab-item>
 
                 <!-- Field Of Study Search-->
                 <v-tab-item>
-                  <v-card class="pa-5 homepage-search-container">
-                    <field-of-study-search
-                      @field-of-study-selected="handleFieldOfStudySelected"
-                    />
-
-                    <div class="mt-5 text-right">
-                      <v-btn
-                        text
-                        small
-                        role="link"
-                        @click="handleFoSMoreOptionsClick"
+                  <v-card class="pa-5 homepage-search-container" flat>
+                    <v-row>
+                      <v-col cols="12" sm="5">
+                        <label class="d-block mb-2" for="fosSearch"
+                          >Search Fields of Study</label
+                        >
+                        <field-of-study-search
+                          @field-of-study-selected="handleFieldOfStudySelected"
+                          :selected="input.cip4"
+                          id="fosSearch"
+                        />
+                      </v-col>
+                      <v-col cols="12" sm="4">
+                        <label class="d-block  mb-2" for="fosDegree"
+                          >Select Degree Type</label
+                        >
+                        <v-select
+                          :items="fosDegrees"
+                          item-text="label"
+                          item-value="value"
+                          outlined
+                          placeholder="Select one (required)"
+                          v-model="input.cip4_degree"
+                          hide-details
+                          id="fosDegree"
+                          color="fos-search-color"
+                        >
+                        </v-select>
+                      </v-col>
+                      <v-col col="1" sm="3" class="">
+                        <div class="d-none d-sm-block" style="height: 32px">
+                          &nbsp;
+                        </div>
+                        <v-btn
+                          @click="handleFormSubmit"
+                          width="100%"
+                          x-large
+                          color="secondary"
+                          :disabled="disableSearch"
+                        >
+                          Search
+                          <v-icon>mdi-menu-right</v-icon>
+                        </v-btn></v-col
                       >
-                        More Search Options
-                        <v-icon>mdi-menu-right</v-icon>
-                      </v-btn>
-                    </div>
+                    </v-row>
                   </v-card>
                 </v-tab-item>
 
                 <!-- Show Me Options-->
                 <v-tab-item>
-                  <v-card style="min-height: 300px" class="px-10 py-5">
-                    <p class="my-2 text-center">
+                  <v-card style="min-height: 300px" class="px-10 py-5" flat>
+                    <p class="my-5">
                       Select one or more options to create a list of schools
                       that fit your needs.
                     </p>
@@ -145,9 +178,50 @@
                   </v-expansion-panel-header>
 
                   <v-expansion-panel-content>
-                    <field-of-study-search
-                      @field-of-study-selected="handleFieldOfStudySelected"
-                    />
+                    <v-row>
+                      <v-col cols="12" sm="5">
+                        <label class="d-block mb-2" for="fosSearch"
+                          >Search Fields of Study</label
+                        >
+                        <field-of-study-search
+                          @field-of-study-selected="handleFieldOfStudySelected"
+                          :selected="input.cip4"
+                          id="fosSearch"
+                        />
+                      </v-col>
+                      <v-col cols="12" sm="4">
+                        <label class="d-block  mb-2" for="fosDegree"
+                          >Select Degree Type</label
+                        >
+                        <v-select
+                          :items="fosDegrees"
+                          item-text="label"
+                          item-value="value"
+                          outlined
+                          placeholder="Select one (required)"
+                          v-model="input.cip4_degree"
+                          hide-details
+                          id="fosDegree"
+                          color="fos-search-color"
+                        >
+                        </v-select>
+                      </v-col>
+                      <v-col col="12" sm="3" class="">
+                        <div class="d-none d-sm-block" style="height: 32px">
+                          &nbsp;
+                        </div>
+                        <v-btn
+                          @click="handleFormSubmit"
+                          width="100%"
+                          x-large
+                          color="secondary"
+                          :disabled="disableSearch"
+                        >
+                          Search
+                          <v-icon>mdi-menu-right</v-icon>
+                        </v-btn></v-col
+                      >
+                    </v-row>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
@@ -179,41 +253,34 @@
       </div>
 
       <!-- Bottom Content -->
-      <div id="home-content-container" class="mt-5 pa-md-6">
-        <v-container class="my-0">
-          <v-row class="mt-md-12 px-md-6">
+      <div class="home-links pt-sm-15 mb-15">
+        <v-container class="mt-8">
+          <v-row class="align-stretch">
             <!-- apprenticeships callout -->
-            <v-col class="homeCallout apprenticeships" cols="12" md="6" sm="12">
-              <div class="home-callout-container mr-md-3">
-                <div class="home-callout-top mb-12">
-                  <v-row align="center">
-                    <v-col cols="8">
-                      <h2 class="title mt-4 mt-md-0 ml-10">
-                        Alternative Pathways to a Career
-                      </h2>
-                    </v-col>
-                    <v-col cols="4">
-                      <div class="home-icon-wrapper  mr-10">
-                        <div class="home-icon">
-                          <img
-                            :src="$url('img/icon-pathways-blue.svg')"
-                            alt="Pathways Icon"
-                          />
-                        </div>
-                      </div>
-                    </v-col>
-                  </v-row>
-                </div>
-
-                <p class="mx-10">
+            <v-col cols="12" md="6" class="pr-sm-8">
+              <v-card flat class="pa-8">
+                <h2 class="display-2 d-flex justify-space-between align-center">
+                  <span>Alternative Pathways<br />to a Career</span>
+                  <v-avatar color="#D1E9FF">
+                    <img
+                      :src="$url('img/Pathway-Icon.svg')"
+                      alt="Pathways Icon"
+                      class="pa-2"
+                    />
+                  </v-avatar>
+                </h2>
+                <hr />
+                <p>
                   Search for apprenticeship jobs and programs on
                   <a
                     class="homeCallout-indent"
-                    :href="$url('/school/transition/')"
+                    href="https://www.apprenticeship.gov/apprenticeship-finder"
                     target="_blank"
-                    @click="transitionOutboundLink($event, 
-                            'https://www.apprenticeship.gov/apprenticeship-finder'
-                      )"
+                    @click="
+                      transitionOutboundLink(
+                        $event
+                      )
+                    "
                   >
                     apprenticeship.gov<v-icon
                       x-small
@@ -225,16 +292,17 @@
                   >.
                 </p>
                 <hr />
-                <p class="mx-10">
+                <p>
                   Use the
                   <a
                     class="homeCallout-indent"
-                    :href="
-                      $url(
-                        '/school/transition/')
-                    "
+                    href="https://www.mynextmove.org"
                     target="_blank"
-                    @click="transitionOutboundLink($event, 'https://www.mynextmove.org')"
+                    @click="
+                      transitionOutboundLink(
+                        $event
+                      )
+                    "
                   >
                     MyNextMove.org<v-icon x-small class="pl-1" color="#007000">
                       fas fa-external-link-alt
@@ -243,18 +311,18 @@
                   tool for career exploration and job analysis.
                 </p>
                 <hr />
-                <p class="mx-10">
+                <p>
                   Find training programs: compare completion rates, employment
                   rates, and more on
                   <a
                     class="homeCallout-indent"
-                    :href="
-                      $url(
-                        '/school/transition/'
-                          )
-                    "
+                    href="https://trainingproviderresults.gov"
                     target="_blank"
-                    @click="transitionOutboundLink($event, 'https://trainingproviderresults.gov')"
+                    @click="
+                      transitionOutboundLink(
+                        $event
+                      )
+                    "
                   >
                     TrainingProviderResults.gov<v-icon
                       x-small
@@ -266,17 +334,17 @@
                   >.
                 </p>
                 <hr />
-                <p class="mx-10">
+                <p>
                   Visit
                   <a
                     class="homeCallout-indent"
-                    :href="
-                      $url(
-                        '/school/transition/'
-                        )
-                    "
+                    href="https://careeronestop.org"
                     target="_blank"
-                    @click="transitionOutboundLink($event, 'https://careeronestop.org')"
+                    @click="
+                      transitionOutboundLink(
+                        $event
+                      )
+                    "
                   >
                     CareerOneStop.org<v-icon
                       x-small
@@ -288,17 +356,15 @@
                   >, your source for career exploration training and jobs.
                 </p>
                 <hr />
-                <p class="mx-10">
+                <p>
                   Explore the
                   <a
                     class="homeCallout-indent"
-                    :href="
-                      $url(
-                        '/school/transition/'
-                      )
-                    "
+                    href="https://www.bls.gov/ooh/"
                     target="_blank"
-                    @click="transitionOutboundLink($event, 'https://www.bls.gov/ooh/')"
+                    @click="
+                      transitionOutboundLink($event)
+                    "
                   >
                     Occupational Outlook Handbook (OOH)<v-icon
                       x-small
@@ -310,43 +376,33 @@
                   </a>
                   for detailed information about over 300 occupational profiles.
                 </p>
-              </div>
+              </v-card>
             </v-col>
 
             <!-- paying callout -->
-            <v-col class="homeCallout paying" cols="12" md="6" sm="12">
-              <div class="home-callout-container ml-md-3">
-                <div class="home-callout-top mb-12">
-                  <v-row align="center">
-                    <v-col cols="8">
-                      <h2 class="title mt-4 mt-md-0 ml-10">
-                        Learn More About Paying for College
-                      </h2>
-                    </v-col>
-                    <v-col cols="4">
-                      <div class="home-icon-wrapper mr-10">
-                        <div class="home-icon">
-                          <img
-                            :src="$url('img/icon-financial-aid.svg')"
-                            alt="Financial Aid Icon"
-                          />
-                        </div>
-                      </div>
-                    </v-col>
-                  </v-row>
-                </div>
-                <p class="mx-10">
+            <v-col cols="12" md="6" sm="12" class="pl-sm-8">
+              <v-card flat class="pa-8">
+                <h2 class="display-2 d-flex justify-space-between align-center">
+                  <span class="">Learn More About<br />Paying for College</span>
+                  <v-avatar color="#D1E9FF">
+                    <img
+                      :src="$url('img/icon-financial-aid-black.svg')"
+                      alt="Financial Aid Icon"
+                      class="pa-2"
+                    />
+                  </v-avatar>
+                </h2>
+                <hr />
+                <p>
                   You can learn more about the types of financial aid that are
                   available at
 
                   <a
-                    :href="
-                      $url(
-                        '/school/transition/'
-                      )
-                    "
+                    href="https://studentaid.gov"
                     target="_blank"
-                    @click="transitionOutboundLink($event, 'https://studentaid.gov')"
+                    @click="
+                      transitionOutboundLink($event)
+                    "
                   >
                     StudentAid.gov<v-icon x-small class="pl-1" color="#007000">
                       fas fa-external-link-alt
@@ -354,19 +410,19 @@
                   </a>
                 </p>
 
-                <p class="mx-10">
+                <p>
                   To receive financial aid, you must complete the Free
                   Application for Federal Student Aid (FAFSA&#174;) form. You
                   can use
 
                   <a
-                    :href="
-                      $url(
-                        '/school/transition/'
+                    href="https://studentaid.gov/aid-estimator/"
+                    target="_blank"
+                    @click="
+                      transitionOutboundLink(
+                        $
                       )
                     "
-                    target="_blank"
-                    @click="transitionOutboundLink($event, 'https://studentaid.gov/aid-estimator/')"
                   >
                     Federal Student Aid Estimator<v-icon
                       x-small
@@ -380,23 +436,20 @@
                   to see how much aid may be available to you.
                 </p>
 
-                <p
-                  class="text-center home-callout-button-wrapper mx-10 pb-3 pt-9"
-                >
+                <p class="my-10">
                   <v-btn
-                    rounded
                     color="secondary"
-                    :href="
-                      $url(
-                        '/school/transition/'
+                    href="https://studentaid.gov/h/apply-for-aid/fafsa"
+                    target="_blank"
+                    x-large
+                    @click="
+                      transitionOutboundLink(
+                        $event
                       )
                     "
-                    target="_blank"
-                    @click="transitionOutboundLink($event, 'https://studentaid.gov/h/apply-for-aid/fafsa')"
                     >Start Your FAFSA&reg; Application<v-icon
                       x-small
-                      color="white"
-                      class="pl-1 pb-1"
+                      class="pl-1"
                     >
                       fas fa-external-link-alt
                     </v-icon>
@@ -405,18 +458,18 @@
 
                 <hr />
 
-                <p class="mx-10">
+                <p>
                   Veterans are eligible for higher education funding through the
                   G.I. Bill benefits. Use the
 
                   <a
-                    :href="
-                      $url(
-                        '/school/transition/'
+                    href="https://www.vets.gov/gi-bill-comparison-tool"
+                    target="_blank"
+                    @click="
+                      transitionOutboundLink(
+                        $event
                       )
                     "
-                    target="_blank"
-                    @click="transitionOutboundLink($event, 'https://www.vets.gov/gi-bill-comparison-tool')"
                   >
                     GI Bill&reg; comparison tool<v-icon
                       x-small
@@ -430,7 +483,7 @@
                   to learn about education programs and compare benefits by
                   school.
                 </p>
-              </div>
+              </v-card>
             </v-col>
           </v-row>
         </v-container>
@@ -441,160 +494,52 @@
 
 <style lang="scss" scoped>
 @import "~/sass/_variables.scss";
+
+h1 {
+  font-size: 50px;
+  text-transform: none;
+}
+.v-card {
+  height: 100%;
+}
+.v-tabs .v-card {
+  border-top-left-radius: 0px;
+}
 .home-splash {
-  min-height: 380px;
-  padding-top: 1.5rem;
+  font-family: $base-font-family !important;
+  background-color: $bg-blue !important;
+}
+.home-links {
+  background-color: $bg-gray;
 }
 .v-tab {
   font-family: $header-font-family;
   font-size: 1rem;
-  font-weight: bold;
   color: #bbbbbb !important;
+  letter-spacing: normal;
+  font-weight:700;
 }
+
 .v-tab.v-tab--active {
   color: #ffffff !important;
 }
-.theme--light.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active) {
-  color: #ffffff !important;
-}
-
-.homeContent {
-  /*border-top: 20px*/
-  /*  solid*/
-  /*  #ffffff;*/
-  background-color: #b5d7f4;
-}
-
-#home-content-container {
-  height: auto;
-
-  @media (min-width: 960px) {
-    height: 900px;
-    background: linear-gradient(to bottom, #97cff5 70%, #0075b2 30%);
-  }
-}
-
-.home-callout-text {
-  width: 70%;
-}
-
-.home-callout-container {
-  margin-bottom: 80px;
-  height: 680px;
-  background-color: white;
-  box-shadow: 0px 3px 6px #00000029;
-
-  @media (min-width: 960px) {
-    margin-bottom: inherit;
-    height: 770px;
-  }
-}
-
-.home-callout-top {
-  background-color: #c4e4f9;
-  height: 120px;
-
-  h2 {
-    bottom: 50px;
-  }
-
-  @media (min-width: 960px) {
-    height: 160px;
-  }
-}
-
-.home-icon {
-  img {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 75%;
-
-    @media (min-width: 960px) {
-      width: unset;
-    }
-  }
-}
-
-.homepage-search-container {
-  min-height: 150px;
-}
-</style>
-<style lang="scss" scoped>
-@import "~/sass/_variables.scss";
-.homeCallout {
-  /*background-color: #ffffff;*/
-  a i:not(.fa-external-link-alt) {
-    color: $darker-green !important;
-  }
-  hr {
-    margin: 2rem 56px;
-    height: 1px;
-    border: none;
-    color: #9d9d9d;
-    background-color: #9d9d9d;
-  }
-  a.homeCallout-indent {
-    padding: 0rem 0rem;
-  }
-
-  h2 {
-    font-weight: bold !important;
-    /*color: #ffffff;*/
-    text-align: left;
-    padding: 1rem;
-    /*margin-bottom: 2rem !important;*/
-  }
-
-  h3 {
-    text-align: left;
-    margin-bottom: 0.5rem !important;
-  }
-
-  h3 {
-    text-align: left;
-    margin-bottom: 0.5rem !important;
-  }
-
-  p {
-    text-align: left;
-    padding: 0rem 1rem;
-  }
-}
-
-.sublink {
-  text-decoration: none;
-}
-
-.home-icon-wrapper {
-  position: relative;
-  margin: 0 auto;
-  width: 75px;
-  height: 75px;
-
-  @media (min-width: 960px) {
-    width: 133px;
-    height: 133px;
-  }
-}
-.home-callout-button-wrapper {
-  margin: unset;
-
-  @media (min-width: 960px) {
-    margin: 0 60px;
-  }
-}
-
 .home-mobile-search-title {
   font-size: 16px;
+}
+.v-tabs-slider {
+  border-radius: 5px 5px 0 0;
+}
+
+.v-avatar img {
+  border-radius:6px;
+}
+
+h2 span {
+  font-weight:600 !important;
 }
 </style>
 
 <script>
-import PayingForCollege from "~/components/PayingForCollege.vue"
 import CannedSearchContainer from "~/components/CannedSearchContainer.vue"
 import querystring from "querystring"
 import SearchForm from "~/components/SearchForm.vue"
@@ -603,11 +548,10 @@ import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 import FieldOfStudySearch from "~/components/FieldOfStudySearch.vue"
 import CompareDrawer from "~/components/CompareDrawer.vue"
 import CompareHeader from "~/components/CompareHeader.vue"
-
+import { formMappings } from "~/js/constants.js"
 export default {
   mixins: [AnalyticsEvents],
   components: {
-    "paying-for-college": PayingForCollege,
     "canned-search-container": CannedSearchContainer,
     "search-form": SearchForm,
     "name-autocomplete": NameAutocomplete,
@@ -620,9 +564,35 @@ export default {
       mobilePanels: 0,
       desktopTabs: 0,
       toggleCustomSearch: false,
+      sliderColor: "#7BD88C",
+      input: {
+        cip4: null,
+        cip4_degree: null,
+      },
     }
   },
+  computed: {
+    fosDegrees() {
+      return formMappings.fosDegrees
+    },
+    disableSearch() {
+      return this.input.cip4 === null || this.input.cip4_degree === null
+    },
+  },
   methods: {
+    colorSlider(num) {
+      switch (num) {
+        case 0:
+          this.sliderColor = "#7BD88C"
+          break
+        case 1:
+          this.sliderColor = "#FDB022"
+          break
+        default:
+          this.sliderColor = "#FFFFFF88"
+          break
+      }
+    },
     directToSearch(params) {
       // Generate URL based on params,
       let qs = querystring.stringify(params)
@@ -649,12 +619,14 @@ export default {
       }
     },
     handleFieldOfStudySelected(fieldOfStudy) {
-      this.$router.push(
-        "/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4)
-      )
+      this.input.cip4 = fieldOfStudy.cip4
     },
-    handleFoSMoreOptionsClick() {
-      this.$router.push("/search/?toggle=fos")
+    handleFormSubmit() {
+      this.$router.push(
+        `/search/fos?cip4=${encodeURIComponent(
+          this.input.cip4
+        )}&cip4_degree=${encodeURIComponent(this.input.cip4_degree)}`
+      )
     },
   },
   metaInfo: {

@@ -1,11 +1,12 @@
 <template>
   <v-main>
     <data-navigation :current="$url('/data/')" />
-    <v-container>
+    <v-container class="px-0">
       <v-row>
-        <v-col cols="12" md="10" offset-md="1">
-          <v-card class="py-5 px-10 ma-5">
+        <v-col cols="12">
+          <v-card class="py-5 px-10 ma-5" flat>
             <h2 class="display-1 mb-2 font-weight-bold">Download the Data</h2>
+            <hr />
             <p>
               Download the data that appear on the College Scorecard, as well as
               supporting data on student completion, debt and repayment,
@@ -13,14 +14,15 @@
             </p>
             <p class="pb-4">
               This data was
-              <strong>last updated September 14, 2022</strong>.
+              <strong>last updated April 24, 2023</strong>.
             </p>
 
             <h2 class="my-5">
               All Data Files
               <v-btn
-                class="ml-2 green-text"
-                href="https://ed-public-download.app.cloud.gov/downloads/CollegeScorecard_Raw_Data_09012022.zip"
+                class="ml-2"
+                color="secondary"
+                href="https://ed-public-download.app.cloud.gov/downloads/CollegeScorecard_Raw_Data_04192023.zip"
                 >Download
                 <v-icon right dark x-small>
                   fas fa-download
@@ -48,47 +50,57 @@
                 Department’s OPEID with an IPEDS UNITID for each institution.
               </li>
             </ul>
-            <h4 class="my-5">
-              Most Recent Institution-Level Data
-              <v-btn
-                small
-                class="ml-2"
-                href="https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Institution_09012022.zip"
-                >Download
-                <v-icon right dark x-small>
-                  fas fa-download
-                </v-icon></v-btn
-              >
-            </h4>
-            <h4 class="my-5">
-              Most Recent Data by Field of Study
-              <v-btn
-                small
-                class="ml-2 btnText"
-                href=" https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Field-of-Study_09012022.zip"
-                >Download
-                <v-icon right dark x-small>
-                  fas fa-download
-                </v-icon></v-btn
-              >
-            </h4>
+            <v-row>
+              <v-col>
+                <h4 class="my-5 d-inline-block">
+                  Most Recent Institution-Level Data
+                </h4>
+                <v-btn
+                  small
+                  color="secondary"
+                  class="ml-0 ml-sm-2"
+                  href="https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Institution_04192023.zip"
+                  >Download
+                  <v-icon right dark x-small>
+                    fas fa-download
+                  </v-icon></v-btn
+                > </v-col
+              ><v-col>
+                <h4 class="my-5 d-inline-block">
+                  Most Recent Data by Field of Study
+                </h4>
+                <v-btn
+                  small
+                  class="ml-0 ml-sm-2"
+                  color="secondary"
+                  href=" https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Field-of-Study_04192023.zip"
+                  >Download
+                  <v-icon right dark x-small>
+                    fas fa-download
+                  </v-icon></v-btn
+                >
+              </v-col></v-row
+            >
             <hr />
             <p class="mt-8">
-              <strong>Looking for help?</strong> Visit
+              <strong>Looking for help?</strong><br />
+              Visit
               <a
-                :href="
-                  $url(
-                    '/school/transition/'
+                :href="$url('/school/transition/')"
+                @click="
+                  transitionOutboundLink(
+                    $event,
+                    'http://opendata.stackexchange.com/questions/tagged/collegescorecard'
                   )
                 "
-                @click="transitionOutboundLink($event, 'http://opendata.stackexchange.com/questions/tagged/collegescorecard')"
                 target="_blank"
                 >StackExchange<v-icon x-small class="pl-1" color="#007000">
                   fas fa-external-link-alt
                 </v-icon>
               </a>
               or email the help desk at
-              <a href="mailto:scorecarddata@rti.org">scorecarddata@rti.org</a>.
+              <a href="mailto:scorecarddata@rti.org">scorecarddata@rti.org</a
+              >.<br class="d-none d-md-block" />
               For inquiries by members of the press, please contact
               <a href="mailto:press@ed.gov">press@ed.gov</a>.
             </p>

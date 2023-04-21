@@ -1,5 +1,5 @@
 <template>
-  <v-card id="compare-schools-content" class="pa-5" >
+  <v-card id="compare-schools-content" class="pa-5">
     <div>
       <span>
         Add up to 10 Schools and 10 Fields of Study to compare.
@@ -68,14 +68,14 @@
       <v-col cols="12" md="6">
         <div class="ml-n6 my-4">
           <div class="compare-drawer-section-header-wrapper ml-4">
-        <div
-          class="compare-icon-wrapper d-inline-block mr-2"
-          style="background: #83c38c;"
-        >
-          <v-icon style="margin-top:7px;" color="black"  size="24">
-            fas fa-university
-          </v-icon>
-        </div>
+            <div
+              class="compare-icon-wrapper d-inline-block mr-2"
+              style="background: #83c38c;"
+            >
+              <v-icon style="margin-top:7px;" color="black" size="24">
+                fas fa-university
+              </v-icon>
+            </div>
 
             <div class="compare-drawer-section-header compare-button-school">
               <h3 class="title">Compare Schools</h3>
@@ -105,7 +105,12 @@
 
           <!-- Medium and smaller button-->
           <div class="d-md-none mt-5 text-center">
-            <v-btn rounded color="secondary" @click="toggleDrawer()" :href="this.$url('/compare')" class="compare-button-school">
+            <v-btn
+              color="secondary"
+              @click="toggleDrawer()"
+              :href="this.$url('/compare')"
+              class="compare-button-school"
+            >
               Compare Schools
             </v-btn>
           </div>
@@ -115,14 +120,14 @@
       <v-col cols="12" md="6">
         <div class="compare-drawer-section-wrapper my-4">
           <div class="compare-drawer-section-header-wrapper ml-4">
-        <div
-          class="compare-icon-wrapper d-inline-block mr-2"
-          style="background: #fec005;"
-        >
-          <v-icon  style="margin-top:7px;" color="black"  size="24">
-            fas fa-award
-          </v-icon>
-        </div>
+            <div
+              class="compare-icon-wrapper d-inline-block mr-2"
+              style="background: #fec005;"
+            >
+              <v-icon style="margin-top:7px;" color="black" size="24">
+                fas fa-award
+              </v-icon>
+            </div>
 
             <div class="compare-drawer-section-header compare-button-fos">
               <h3 class="title">Compare Fields of Study</h3>
@@ -161,7 +166,6 @@
           <div class="d-md-none mt-5 text-center">
             <v-btn
               class="compare-button-fos"
-              rounded
               color="secondary"
               @click="toggleDrawer()"
               :href="this.$url('/compare/?toggle=fos')"
@@ -181,7 +185,12 @@
     >
       <v-row>
         <v-col cols="12" md="5" class="text-center d-none d-md-block my-2">
-          <v-btn rounded color="secondary" @click="toggleDrawer()" :href="this.$url('/compare')" class="compare-button-school">
+          <v-btn
+            color="secondary"
+            @click="toggleDrawer()"
+            :href="this.$url('/compare')"
+            class="compare-button-school"
+          >
             Compare Schools
           </v-btn>
         </v-col>
@@ -192,7 +201,6 @@
         >
           <v-btn
             class="compare-drawer-button compare-button-fos"
-            rounded
             color="secondary"
             @click="toggleDrawer()"
             :href="this.$url('/compare/?toggle=fos')"
@@ -203,7 +211,6 @@
       </v-row>
     </div>
   </v-card>
-
 </template>
 
 <style lang="scss" scoped>
@@ -257,18 +264,16 @@
   h4 {
     font-size: 13px;
     color: #000;
-    margin-top:3px;
-    font-weight:500;
+    margin-top: 3px;
+    font-weight: 500;
   }
   p {
     font-size: 13px;
     color: #000;
-    font-family: "Montserrat", "Helvetica Neue", Helvetica, arial, sans-serif !important;
-    font-weight:500;
+    font-weight: 500;
   }
 
   .fos-school-name-text {
-    font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
   }
   @media (min-width: 960px) {
     h4 {
@@ -278,11 +283,9 @@
     p {
       font-size: 12px;
       color: #000;
-      font-family: "Montserrat", "Helvetica Neue", Helvetica, arial, sans-serif !important;
     }
 
     .fos-school-name-text {
-      font-family: "Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif !important;
     }
   }
 }
@@ -331,9 +334,7 @@ export default {
     },
   },
   data() {
-    return {
-        
-    }
+    return {}
   },
   mounted() {
     this.$store.commit("toggleDrawer", false)
@@ -347,22 +348,22 @@ export default {
     },
     selectedSchools: {
       get() {
-        return _.map(this.$store.state.institutions, "schoolId");
+        return _.map(this.$store.state.institutions, "schoolId")
       },
       set(school) {
-        return school;
-      }
+        return school
+      },
     },
     selectedFieldsOfStudy: {
       get() {
         return _.map(this.$store.state.fos, (fieldOfStudy) => {
-            return this.generateFieldOfStudyString(fieldOfStudy)
+          return this.generateFieldOfStudyString(fieldOfStudy)
         })
       },
-      set(fieldOfStudy){
-        return fieldOfStudy;
-      }
-    }
+      set(fieldOfStudy) {
+        return fieldOfStudy
+      },
+    },
   },
 
   methods: {
@@ -398,8 +399,6 @@ export default {
       }
     },
   },
-  mounted() {
-
-  },
+  mounted() {},
 }
 </script>
