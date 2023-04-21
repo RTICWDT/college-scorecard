@@ -5,7 +5,7 @@
         v-if="definition"
         :definition="definition"
         :isCompare="true"
-        :isPell=config.showPellOnly
+        :isPell="config.showPellOnly"
       />
     </h2>
     <v-row v-if="this.$slots.default">

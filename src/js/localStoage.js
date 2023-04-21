@@ -39,8 +39,8 @@ export const LocalStorage = {
     let isSelected = this.isSelected(data,key);
     let selectedItems = this.selectAll(key);
 
-    console.log("Selected Items");
-    console.log(selectedItems);
+    //console.log("Selected Items");
+    //console.log(selectedItems);
 
     if (isSelected >= 0) {
       selectedItems.splice(isSelected, 1);

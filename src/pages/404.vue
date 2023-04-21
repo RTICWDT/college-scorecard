@@ -3,8 +3,9 @@
     <v-container>
       <v-row>
         <v-col cols="12" md="6" offset-md="3">
-          <v-card class="pa-5 text-center mt-10">
-            <h1 class="pb-3">Page Not Found</h1>
+          <v-card class="pa-5 mt-10">
+            <h1>Page Not Found</h1>
+            <hr />
             <p>
               We couldn't find the page you were looking for. Try searching
               again?

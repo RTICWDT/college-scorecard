@@ -1,39 +1,60 @@
 <template>
   <v-main>
-    <v-container class="mt-5">
+    <div id="school-sub-nav-header">
+      <v-container>
+        <v-row>
+          <v-col cols="6">
+            <v-btn
+              small
+              text
+              color="white"
+              id="referrer-link"
+              class="link-more"
+              @click="$router.back()"
+              >&laquo; Back</v-btn
+            >
+          </v-col>
+          <v-col cols="6" class="text-right">
+            <share
+              small
+              label="Share this Comparison"
+              :url="shareUrl"
+              :hide="hideShare"
+              show-copy
+              color="white"
+              text
+            />
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
+    <v-container class="mt-5 mb-10">
       <v-row>
-        <v-col cols="12" lg="9" class="school-left">
+        <v-col>
+          <v-card flat v-show="showShareUpdate" class="pa-5">
+            <div>
+              You are viewing a shared comparison.
+
+              <v-btn
+                small
+                color="secondary"
+                @click="handleCompareListSaveClick()"
+              >
+                Update Your List
+              </v-btn>
+            </div></v-card
+          >
+        </v-col> </v-row
+      ><v-row>
+        <v-col cols="12" class="school-left">
           <!-- Top Summary Container-->
-          <v-card class="pb-5 px-3">
+          <v-card class="pb-5 px-3" flat>
             <!--Page Header-->
-            <v-row class="csGreenBg">
-              <v-col cols="6">
-                <v-btn
-                  small
-                  color="white"
-                  text
-                  id="referrer-link"
-                  class="link-more"
-                  :href="referrerLink"
-                  >&laquo; Back</v-btn
-                >
-              </v-col>
-              <v-col cols="6" class="text-right">
-                <share
-                  small
-                  text
-                  color="white"
-                  label="Share this Comparison"
-                  :url="shareUrl"
-                  :hide="hideShare"
-                  show-copy
-                />
-              </v-col>
-            </v-row>
 
             <h1 class="my-5 mx-5">
-              Compare
+              Compare Schools and Fields of Study
             </h1>
+            <hr />
 
             <!-- Toggle Controls-->
             <div class="mx-md-4">
@@ -80,10 +101,12 @@
               >
                 <v-chip-group column>
                   <v-chip
-                    class="pa-4 ma-2"
+                    class="pa-4 my-2"
                     v-for="institution in responseCache.institution"
                     :key="institution.schoolId"
                     close
+                    label
+                    outlined
                     @click:close="
                       handleChipCloseClick(institution, 'compare-schools')
                     "
@@ -215,6 +238,8 @@
                     v-for="fieldOfStudy in responseCache.fieldsOfStudy"
                     :key="`${fieldOfStudy.id}${fieldOfStudy.code}`"
                     close
+                    label
+                    outlined
                     @click:close="
                       handleChipCloseClick(fieldOfStudy, 'compare-fos')
                     "
@@ -240,10 +265,12 @@
                 <!-- MD and larger chip layout -->
                 <v-chip-group class="d-none d-md-block" column>
                   <v-chip
-                    class="ma-2"
+                    class="my-2"
                     v-for="fieldOfStudy in responseCache.fieldsOfStudy"
                     :key="`${fieldOfStudy.id}${fieldOfStudy.code}`"
                     close
+                    label
+                    outlined
                     @click:close="
                       handleChipCloseClick(fieldOfStudy, 'compare-fos')
                     "
@@ -298,9 +325,11 @@
                             <horizontal-bar
                               v-if="
                                 slotProps.school &&
-                                  slotProps.school[fields.FOS_EARNINGS_FED]
+                                  slotProps.school[fields.FOS_EARNINGS_FED_4YR]
                               "
-                              :value="slotProps.school[fields.FOS_EARNINGS_FED]"
+                              :value="
+                                slotProps.school[fields.FOS_EARNINGS_FED_4YR]
+                              "
                               :min="0"
                               :max="150000"
                               color="#1874DC"
@@ -311,7 +340,7 @@
                             <div
                               v-if="
                                 slotProps.school &&
-                                  !slotProps.school[fields.FOS_EARNINGS_FED]
+                                  !slotProps.school[fields.FOS_EARNINGS_FED_4YR]
                               "
                               class="data-na"
                             >
@@ -323,10 +352,10 @@
                             <horizontal-bar
                               v-if="
                                 slotProps.school &&
-                                  slotProps.school[fields.FOS_EARNINGS_PELL]
+                                  slotProps.school[fields.FOS_EARNINGS_PELL_4YR]
                               "
                               :value="
-                                slotProps.school[fields.FOS_EARNINGS_PELL]
+                                slotProps.school[fields.FOS_EARNINGS_PELL_4YR]
                               "
                               :min="0"
                               :max="150000"
@@ -338,7 +367,9 @@
                             <div
                               v-if="
                                 slotProps.school &&
-                                  !slotProps.school[fields.FOS_EARNINGS_PELL]
+                                  !slotProps.school[
+                                    fields.FOS_EARNINGS_PELL_4YR
+                                  ]
                               "
                               class="data-na"
                             >
@@ -372,10 +403,11 @@
                             <horizontal-bar
                               v-if="
                                 slotProps.school &&
-                                  slotProps.school[fields.FOS_EARNINGS_FED]
+                                  slotProps.school[fields.FOS_EARNINGS_FED_4YR]
                               "
                               :value="
-                                slotProps.school[fields.FOS_EARNINGS_FED] / 12
+                                slotProps.school[fields.FOS_EARNINGS_FED_4YR] /
+                                  12
                               "
                               :min="0"
                               :max="30000"
@@ -387,7 +419,7 @@
                             <div
                               v-if="
                                 slotProps.school &&
-                                  !slotProps.school[fields.FOS_EARNINGS_FED]
+                                  !slotProps.school[fields.FOS_EARNINGS_FED_4YR]
                               "
                               class="data-na"
                             >
@@ -756,10 +788,10 @@
                       ]"
                       item-text="label"
                       item-value="value"
-                      label="Race/Ethnicity"
                       v-model="currentRaceEthnicity"
                       color="secondary"
-                      solo
+                      outlined
+                      hide-details
                       class="compare-select"
                     ></v-select>
                   </compare-section>
@@ -846,10 +878,9 @@
                       ]"
                       item-text="label"
                       item-value="value"
-                      label="What's your family income?"
                       v-model="currentIncomeFilter"
                       color="secondary"
-                      solo
+                      outlined
                       class="compare-select"
                     ></v-select>
                   </compare-section>
@@ -1080,13 +1111,13 @@
                           This is based on a standard 10-year payment plan,
                           other
                           <a
-                            :href="
-                              $url(
-                                '/school/transition/'
+                            href="https://studentaid.gov/loan-simulator"
+                            target="_blank"
+                            @click="
+                              transitionOutboundLink(
+                                $event
                               )
                             "
-                            target="_blank"
-                            @click="transitionOutboundLink($event, 'https://studentaid.gov/loan-simulator')"
                             >payment options<v-icon
                               x-small
                               class="pl-1"
@@ -1098,12 +1129,13 @@
                           are available, like income-driven repayment. An
                           <a
                             target="_blank"
-                            :href="
-                              $url(
-                                '/school/transition/'
+                            :href="$url('/school/transition/')"
+                            @click="
+                              transitionOutboundLink(
+                                $event,
+                                'https://studentaid.gov/manage-loans/repayment/plans/income-driven'
                               )
                             "
-                            @click="transitionOutboundLink($event, 'https://studentaid.gov/manage-loans/repayment/plans/income-driven')"
                             >income-driven repayment<v-icon
                               x-small
                               class="pl-1"
@@ -1193,10 +1225,9 @@
                         ]"
                         item-text="label"
                         item-value="value"
-                        label="Repayment Status"
                         v-model="currentRepaymentStatus"
                         color="secondary"
-                        solo
+                        outlined
                         class="compare-select"
                       ></v-select>
                     </template>
@@ -1347,7 +1378,7 @@
 
           <!-- Search Form Component -->
           <div v-show="!loading && showSearchForm">
-            <v-card class="pa-5 mb-2">
+            <v-card class="pa-5 mb-2 mt-5" flat>
               <div v-show="displayToggle === 'institutions'">
                 <h1 class="text-center py-3">
                   No schools selected to compare.
@@ -1355,11 +1386,11 @@
 
                 <div class="text-center py-4">
                   <v-btn
-                    rounded
                     color="secondary"
+                    large
                     :href="this.$url('/search?toggle=institutions')"
                   >
-                    search schools
+                    Search Schools
                   </v-btn>
                 </div>
 
@@ -1377,11 +1408,11 @@
 
                 <div class="text-center py-4">
                   <v-btn
-                    rounded
+                    large
                     color="secondary"
                     :href="this.$url('/search/?toggle=fos')"
                   >
-                    SEARCH FIELDS OF STUDY
+                    Search Fields of Study
                   </v-btn>
                 </div>
 
@@ -1394,79 +1425,18 @@
             </v-card>
           </div>
         </v-col>
-        <!-- End Left Content Area -->
-
-        <!-- Left Aside -->
-        <v-col lg="3" class="pt-0">
-          <v-card v-show="showShareUpdate" class="pa-5 mb-3">
-            <p>You are viewing a shared comparison.</p>
-
-            <v-btn
-              small
-              color="secondary"
-              rounded
-              @click="handleCompareListSaveClick()"
-            >
-              Update Your List
-            </v-btn>
-          </v-card>
-          <v-card outline v-bind:class="sidebarSearchClass" class="pa-4 mb-3">
-            <p class="searchForTitle mb-2">SEARCH FOR:</p>
-            <v-radio-group v-model="sidebarSearchToggle" column>
-              <v-radio value="school" color="#007000">
-                <template v-slot:label>
-                  <div
-                    v-bind:style="{
-                      'font-weight': sidebarRadioSchoolStyle,
-                      color: 'black',
-                    }"
-                  >
-                    School
-                  </div>
-                </template>
-              </v-radio>
-
-              <v-radio value="fos" color="#fdbf32">
-                <template v-slot:label>
-                  <div
-                    v-bind:style="{
-                      'font-weight': sidebarRadioFOSStyle,
-                      color: 'black',
-                    }"
-                  >
-                    Field of Study
-                  </div>
-                </template>
-              </v-radio>
-            </v-radio-group>
-
-            <name-autocomplete
-              v-if="sidebarSearchToggle === 'school'"
-              id="school-name-auto-complete"
-              @school-name-selected="handleSchoolNameSelected"
-              :searchEmptyName="false"
-            />
-
-            <field-of-study-search
-              v-if="sidebarSearchToggle === 'fos'"
-              id="school-fos-search"
-              @field-of-study-selected="handleFieldOfStudySelected"
-            />
-            <div></div>
-            <!--Due to CSS styling where last element in card copies border radius of parent element-->
-          </v-card>
-          <v-card class="pa-5 mt-0">
-            <paying-for-college />
-          </v-card>
-        </v-col>
       </v-row>
     </v-container>
+    <bottom-callouts />
   </v-main>
 </template>
 
 <style lang="scss" scoped>
 @import "~/sass/_variables";
 
+#school-sub-nav-header {
+  background-color: $bg-blue;
+}
 .fadeAway {
   display: none;
   transition-property: display;
@@ -1521,24 +1491,6 @@
   background-color: #83c38c !important;
 }
 
-.compare-toggle-fos-active {
-  background-color: $lighter-yellow;
-}
-
-.compare-fos-slider-gold {
-  background-color: $fos-accent-color;
-}
-
-.field-of-study-select-container {
-  border-radius: 4px !important;
-  border-left: 20px solid $fos-color-gold !important;
-}
-
-.institution-context-panel {
-  border-radius: 4px !important;
-  border-left: 20px solid $darker-green !important;
-}
-
 .compare-select .v-input__slot {
   align-items: center !important;
   justify-items: center !important;
@@ -1548,7 +1500,6 @@
 <script>
 import Tooltip from "~/components/Tooltip.vue"
 import Share from "~/components/Share.vue"
-import PayingForCollege from "~/components/PayingForCollege.vue"
 import CompareDrawer from "~/components/CompareDrawer.vue"
 import HorizontalBar from "~/components/HorizontalBar.vue"
 import HorizontalBarMedian from "~/components/HorizontalBarMedian.vue"
@@ -1574,13 +1525,13 @@ import {
 import ContextToggle from "~/components/ContextToggle.vue"
 import { mapGetters } from "vuex"
 import MedianToggle from "~/components/MedianToggle.vue"
+import BottomCallouts from "~/components/BottomCallouts.vue"
 
 export default {
   mixins: [ComplexFields, AnalyticsEvents, Router],
   components: {
     tooltip: Tooltip,
     share: Share,
-    "paying-for-college": PayingForCollege,
     "horizontal-bar": HorizontalBar,
     "compare-section": CompareSection,
     "compare-block": CompareBlock,
@@ -1591,6 +1542,7 @@ export default {
     "field-of-study-search": FieldOfStudySearch,
     "context-toggle": ContextToggle,
     "median-toggle": MedianToggle,
+    "bottom-callouts": BottomCallouts,
   },
   data() {
     return {
@@ -1662,7 +1614,7 @@ export default {
   computed: {
     shareUrl() {
       let origin = process.isClient ? window.location.origin : ""
-      const compareBaseURL = this.$url('/compare/?')
+      const compareBaseURL = this.$url("/compare/?")
 
       let paramArray = {
         // Institution
@@ -1697,15 +1649,7 @@ export default {
       //console.log(this.$url(compareBaseURL + this.prepareQueryString(paramArray)))
       return origin + compareBaseURL + this.prepareQueryString(paramArray)
     },
-    referrerLink() {
-      let referrer
-      if (process.isClient) {
-        referrer = document.referrer
-      } else {
-        referrer = null
-      }
-      return referrer || this.$url("/search")
-    },
+
     showSearchForm() {
       if (
         this.displayToggle === "institutions" &&
@@ -1854,10 +1798,10 @@ export default {
       // Data manipulation after the return.
       let params = {}
       params[this.fields.OPERATING] = 1
-      params[this.fields.OPEID + '__not'] = "null"
-      params[
+      //params[this.fields.OPEID + "__not"] = "null"
+      /*params[
         this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
-      ] = true
+      ] = true*/
       params[this.fields.SIZE + "__range"] = "0.."
       params[this.fields.PREDOMINANT_DEGREE + "__range"] = "1..3"
       params[this.fields.ID + "__range"] = "..999999"
@@ -1944,10 +1888,10 @@ export default {
       // TODO - Centralize Common params object
       let params = {}
       params[this.fields.OPERATING] = 1
-      params[this.fields.OPEID + '__not'] = "null"
+      /*params[this.fields.OPEID + "__not"] = "null"
       params[
         this.fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"
-      ] = true
+      ] = true*/
       params[this.fields.SIZE + "__range"] = "0.."
       params[this.fields.PREDOMINANT_DEGREE + "__range"] = "1..3"
       params[this.fields.ID + "__range"] = "..999999"

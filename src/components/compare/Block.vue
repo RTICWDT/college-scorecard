@@ -1,11 +1,99 @@
 <template>
   <div>
-    <h4 class="overline mb-6 mt-8 ml-4">{{ block_title }}</h4>
-     <div class="mx-sm-6 mx-2 compareBlockHeader" v-if="!isFieldOfStudy && config && config.medianToggle && config.type == 'average-annual-cost'" ><p class="median-value-text" >National {{config.medianToggle === 'group' ? block_title.replace('schools', 'Midpoint') : "Midpoint"}}: {{$options.filters.numeral(config.medianToggle === 'group' ? fakeAverageAnnualCosts[_.get(schools[0], fields['PREDOMINANT_DEGREE'])][0] : fakeAverageAnnualCosts[_.get(schools[0], fields['PREDOMINANT_DEGREE'])][1] ,'$0,0')}}</p></div>
-     <div class="mx-sm-6 mx-2 compareBlockHeader" v-if="!isFieldOfStudy && config && config.medianToggle && config.type == 'median-earnings'" ><p class="median-value-text" >National {{config.medianToggle === 'group' ? block_title.replace('schools', 'Midpoint') : "Midpoint"}}: {{$options.filters.numeral(config.medianToggle === 'group' ? fakeMedianEarnings[_.get(schools[0], fields['PREDOMINANT_DEGREE'])][0] : fakeMedianEarnings[_.get(schools[0], fields['PREDOMINANT_DEGREE'])][1] ,'$0,0')}}</p></div>
-     <div class="mx-sm-6 mx-2 compareBlockHeader" v-if="!isFieldOfStudy && config && config.medianToggle && config.type == 'graduation-rate' && !config.showPellOnly" ><p class="median-value-text" >National {{config.medianToggle === 'group' ? block_title.replace('schools', 'Midpoint') : "Midpoint"}}: {{$options.filters.numeral(config.medianToggle === 'group' ? fakeGraduationRate[_.get(schools[0], fields['PREDOMINANT_DEGREE'])][0] : fakeGraduationRate[_.get(schools[0], fields['PREDOMINANT_DEGREE'])][1] ,'0%')}}</p></div>
+    <h4 class="overline mb-3 mt-3 ml-4">{{ block_title }}</h4>
+    <div
+      class="mx-sm-6 mx-2 compareBlockHeader"
+      v-if="
+        !isFieldOfStudy &&
+          config &&
+          config.medianToggle &&
+          config.type == 'average-annual-cost'
+      "
+    >
+      <p class="median-value-text">
+        National
+        {{
+          config.medianToggle === "group"
+            ? block_title.replace("schools", "Midpoint")
+            : "Midpoint"
+        }}:
+        {{
+          $options.filters.numeral(
+            config.medianToggle === "group"
+              ? fakeAverageAnnualCosts[
+                  _.get(schools[0], fields["PREDOMINANT_DEGREE"])
+                ][0]
+              : fakeAverageAnnualCosts[
+                  _.get(schools[0], fields["PREDOMINANT_DEGREE"])
+                ][1],
+            "$0,0"
+          )
+        }}
+      </p>
+    </div>
+    <div
+      class="mx-sm-6 mx-2 compareBlockHeader"
+      v-if="
+        !isFieldOfStudy &&
+          config &&
+          config.medianToggle &&
+          config.type == 'median-earnings'
+      "
+    >
+      <p class="median-value-text">
+        National
+        {{
+          config.medianToggle === "group"
+            ? block_title.replace("schools", "Midpoint")
+            : "Midpoint"
+        }}:
+        {{
+          $options.filters.numeral(
+            config.medianToggle === "group"
+              ? fakeMedianEarnings[
+                  _.get(schools[0], fields["PREDOMINANT_DEGREE"])
+                ][0]
+              : fakeMedianEarnings[
+                  _.get(schools[0], fields["PREDOMINANT_DEGREE"])
+                ][1],
+            "$0,0"
+          )
+        }}
+      </p>
+    </div>
+    <div
+      class="mx-sm-6 mx-2 compareBlockHeader"
+      v-if="
+        !isFieldOfStudy &&
+          config &&
+          config.medianToggle &&
+          config.type == 'graduation-rate' &&
+          !config.showPellOnly
+      "
+    >
+      <p class="median-value-text">
+        National
+        {{
+          config.medianToggle === "group"
+            ? block_title.replace("schools", "Midpoint")
+            : "Midpoint"
+        }}:
+        {{
+          $options.filters.numeral(
+            config.medianToggle === "group"
+              ? fakeGraduationRate[
+                  _.get(schools[0], fields["PREDOMINANT_DEGREE"])
+                ][0]
+              : fakeGraduationRate[
+                  _.get(schools[0], fields["PREDOMINANT_DEGREE"])
+                ][1],
+            "0%"
+          )
+        }}
+      </p>
+    </div>
 
-      <div v-if="config && config.chart == 'RepaymentRate'">
+    <div v-if="config && config.chart == 'RepaymentRate'">
       <v-simple-table class="repayment-table">
         <caption class="sr-only">
           Repayment Rates
@@ -13,28 +101,28 @@
         <thead>
           <tr>
             <th>School</th>
-            <th>Percent {{repaymentCategory}}</th>
+            <th>Percent {{ repaymentCategory }}</th>
           </tr>
         </thead>
         <tbody>
-              <compare-table-row v-for="school in schools"
-                :key="school.id"
-                :school="school"
-                :config="config"
-                :currentHighlight="currentHighlight"
-                @update-highlight="$emit('update-highlight', $event)"
-              />
-          </tbody>
-        </v-simple-table>          
-      </div>          
+          <compare-table-row
+            v-for="school in schools"
+            :key="school.id"
+            :school="school"
+            :config="config"
+            :currentHighlight="currentHighlight"
+            @update-highlight="$emit('update-highlight', $event)"
+          />
+        </tbody>
+      </v-simple-table>
+    </div>
 
     <div
-    v-else
+      v-else
       v-for="school in schools"
       :key="school.id"
       class="ml-sm-6 ml-2 compareBlocks"
     >
-
       <div
         v-if="isFieldOfStudy"
         :class="{
@@ -45,13 +133,15 @@
             }`,
         }"
         @click="
-        currentHighlight != `fos-${school.unit_id}-${school.code}-${school['credential.level']}` ?
-          $emit(
-            'update-highlight',
-            `fos-${school.unit_id}-${school.code}-${school['credential.level']}`
-          ) : 
-          $emit(
-            'update-highlight', '')
+          currentHighlight !=
+          `fos-${school.unit_id}-${school.code}-${school['credential.level']}`
+            ? $emit(
+                'update-highlight',
+                `fos-${school.unit_id}-${school.code}-${
+                  school['credential.level']
+                }`
+              )
+            : $emit('update-highlight', '')
         "
       >
         <div class="pb-5 pb-md-1 px-md-5 px-1">
@@ -96,7 +186,6 @@
         </slot>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -110,26 +199,21 @@
   background-color: #faefd2 !important;
 }
 
-.compare-fos-metric-container {
-  margin: 0.8rem 0;
-}
-
 .median-value-text {
-  font-size:12px;
-  text-align:right;
-  font-style:italic;
-  padding-bottom:16px;
-  margin-bottom:0;
+  font-size: 12px;
+  text-align: right;
+  font-style: italic;
+  padding-bottom: 16px;
+  margin-bottom: 0;
 }
 
 .repayment-table td {
-  width:25%;
+  width: 25%;
 }
 
 .compareBlockHeader {
-  border-left:1px solid #666;
+  border-left: 1px solid #666;
 }
-
 </style>
 
 <script>
@@ -139,7 +223,7 @@ import { fields } from "~/js/constants"
 import ComplexFields from "~/js/mixins/ComplexFields.js"
 
 export default {
-  mixins: [ComplexFields],  
+  mixins: [ComplexFields],
   components: {
     "compare-row": CompareRow,
     "compare-table-row": CompareTableRow,
@@ -174,39 +258,39 @@ export default {
         case "4-year schools":
           return 3
           break
-      }      
+      }
     },
     schOne() {
-      return this.schools[0];
+      return this.schools[0]
     },
     repaymentCategory() {
-        switch (this.config.repaymentStatus) {
-          case "fullypaid": 
-            return "Paid In Full"
-            break
-          case "makingprogress": 
-            return"Making Progress"
-            break
-          case "noprogress": 
-            return"Not Making Progress"
-            break
-          case "deferment": 
-            return"Deferment"
-            break
-          case "delinquent": 
-            return"Delinquent"
-            break
-          case "default": 
-            return"Defaulted"
-            break
-          case "discharge": 
-            return"Discharged"
-            break
-          case "forbearance": 
-            return"Forbearance"
-            break
+      switch (this.config.repaymentStatus) {
+        case "fullypaid":
+          return "Paid In Full"
+          break
+        case "makingprogress":
+          return "Making Progress"
+          break
+        case "noprogress":
+          return "Not Making Progress"
+          break
+        case "deferment":
+          return "Deferment"
+          break
+        case "delinquent":
+          return "Delinquent"
+          break
+        case "default":
+          return "Defaulted"
+          break
+        case "discharge":
+          return "Discharged"
+          break
+        case "forbearance":
+          return "Forbearance"
+          break
       }
-    }
+    },
   },
 }
 </script>

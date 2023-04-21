@@ -1,218 +1,16 @@
-<style lang="scss">
-.search-form-dolflag-cb div .v-input__slot {
-      align-items: start;
-}
-  #fos-chip-container{
-    width: 100%;
-  }
-
-#fos-chip-container {
-  .v-chip {
-    height: auto;
-    white-space: normal;
-    width: 100%;
-  }
-  .v-chip .v-chip__content {
-    display: block;
-  }
-}
-
-#fos-search-form {
-  .subhead {
-    margin-top: 1rem !important;
-    margin-bottom: 0.3rem !important;
-    font-weight: 600;
-    font-family: "Montserrat", sans-serif !important;
-  }
-
-  label.subhead {
-    display: inline-block;
-  }
-}
-
-.fos-limited-data {
-  span {
-    font-size: 14px;
-  }
-}
-</style>
-
 <template>
-  <v-form class="py-2 px-5" id="fos-search-form">
-    <!-- Field Of Study Search and Chips -->
-    <div id="fos-search-and-chips">
-      <label class="subhead mb-2 mt-4" id="fields-label" for="fos-search">
-        Search by Fields of Study
-      </label>
-
-      <field-of-study-search
-        @field-of-study-selected="handleFieldOfStudySelected"
-        id="fos-search"
-        name="fos-search"
-        :disabled="cipSelectionLimitReached"
-      >
-      </field-of-study-search>
-
-      <p
-        v-if="cipSelectionLimitReached"
-        class="mb-0 mt-2 warning-orange text-center"
-      >
-        Limit of 5 reached
-      </p>
-
-      <div
-        id="fos-chip-container"
-        class="mt-2"
-        v-if="utility.cip4Cache.length > 0"
-      >
-        <field-of-study-detail-chip
-          v-for="fieldOfStudy in utility.cip4Cache"
-          :key="fieldOfStudy.cip4"
-          :field-of-study="fieldOfStudy"
-          :cip-six-items="findAllCip6fromCip4(fieldOfStudy.cip4)"
-          @chip-close="handleFieldOfStudyChipClose"
-        />
-      </div>
-    </div>
-
-    <!-- Credential Type -->
-    <div class="">
-      <label
-        class="subhead mb-2"
-        id="search-fos-cred-level"
-        for="search-fos-cred-level"
-      >
-        Credential Type
-      </label>
-
-      <v-checkbox
-        id="search-form-fos-degree-c"
-        name="search-fos-cred-level"
-        class="search-form-degree-cb my-0 py-0"
-        v-model="input.cip4_degree"
-        label="Certificate"
-        value="c"
-        color="secondary"
-        hide-details
-      ></v-checkbox>
-
-      <v-checkbox
-        id="search-form-fos-degree-a"
-        name="search-fos-cred-level"
-        class="search-form-degree-cb my-0 py-0"
-        v-model="input.cip4_degree"
-        label="Associate's Degree"
-        value="a"
-        color="secondary"
-        hide-details
-      ></v-checkbox>
-
-      <v-checkbox
-        id="search-form-fos-degree-b"
-        name="search-fos-cred-level"
-        class="search-form-degree-cb my-0 py-0"
-        v-model="input.cip4_degree"
-        label="Bachelor's Degree"
-        value="b"
-        color="secondary"
-        hide-details
-      ></v-checkbox>
-    </div>
-
-    <!-- Location -->
-    <div>
-      <label
-        class="subhead mb-2"
-        id="search-fos-location-select"
-        for="search-fos-location-select"
-      >
-        Location
-      </label>
-
-      <v-select
-        id="search-fos-location-select"
-        name="search-fos-location-select"
-        v-model="utility.location"
-        @change="handleLocationChange"
-        :items="['Near Me', 'ZIP Code', 'State']"
-        hide-details
-        class="mt-0 pt-0"
-        :placeholder="utility.location ? undefined : 'Select an option'"
-        clearable
-        color="secondary"
-      />
-
-      <div class="d-flex align-center" v-if="utility.location === 'ZIP Code'">
-        <v-text-field
-          id="search-form-zip-text"
-          v-model="input.zip"
-          label="ZIP Code"
-          hideDetails
-          class="mb-3 mr-3"
-          type="number"
-        ></v-text-field>
-
-        <v-text-field
-          v-model="input.distance"
-          :rules="[utility.rules.required, utility.rules.numerical]"
-          label="Distance in Miles"
-          :disabled="!input.zip"
-          hideDetails
-          class="mb-3"
-          type="number"
-          min="1"
-        ></v-text-field>
-      </div>
-
-      <div class="d-flex align-center" v-if="utility.location === 'Near Me'">
-        <v-icon
-          :color="locationButtonColor"
-          v-html="
-            location.isLoading ? 'fas fa-circle-notch fa-spin' : 'mdi-near-me'
-          "
-        ></v-icon>
-
-        <v-text-field
-          v-model="location.miles"
-          :rules="[utility.rules.required, utility.rules.numerical]"
-          label="Distance in Miles"
-          aria-label="Distance in Miles"
-          :disabled="!location.latLon"
-          hideDetails
-          class="mb-3"
-          type="number"
-        ></v-text-field>
-
-        <span v-show="location.error" class="overline">{{
-          location.error
-        }}</span>
-      </div>
-
-      <v-select
-        aria-label="State Select Menu"
-        v-model="input.state"
-        id="search-form-state"
-        :items="site.data.states"
-        item-text="name"
-        item-value="abbr"
-        multiple
-        chips
-        hide-details
-        :placeholder="input.state.length > 0 ? undefined : 'Select a state...'"
-        class="mt-0 pt-0"
-        color="secondary"
-        deletable-chips
-        v-if="utility.location == 'State'"
-      ></v-select>
-    </div>
-
+  <v-form class="px-5 pb-5 pt-3" id="fos-search-form">
+    <h3 class="my-4">Location</h3>
+    <location-institution-search
+      @search-query="handleLocationSelection"
+      :horizontal="false"
+      :initial_state="input.state"
+      :initial_zip="input.zip"
+      :initial_distance="input.distance"
+    />
     <!-- Salary After Completing -->
     <div>
-      <label
-        class="subhead mb-2"
-        id="search-fos-salary"
-        for="search-fos-salary"
-      >
+      <h3 class="my-4" id="search-fos-salary" for="search-fos-salary">
         Salary After Completing
 
         <v-btn
@@ -228,7 +26,7 @@
         >
           <v-icon>mdi mdi-close</v-icon>
         </v-btn>
-      </label>
+      </h3>
 
       <v-range-slider
         id="search-fos-salary"
@@ -238,9 +36,9 @@
         :min="utility.fieldOfStudySalary.min"
         hide-details
         class="align-center"
-        color="secondary"
+        color="primaryfos"
         track-color="dark-gray"
-        thumb-color="secondary"
+        thumb-color="primaryfos"
         thumb-label
         aria-label="Salary After Complete Range Slider"
       >
@@ -275,34 +73,11 @@
           ></v-text-field>
         </template>
       </v-range-slider>
-
-      <!-- Limited Data Alert -->
-      <v-alert
-        v-if="
-          input.fos_salary.join(',') !==
-            utility.formDefault.fos_salary.join(',')
-        "
-        type="warning"
-        color="#D16E00"
-        class="fos-limited-data mt-2 mb-2 pa-2"
-        colored-border
-        border="left"
-        dense
-        icon=' '
-      >
-        <div style="margin-top:1px;">
-          <span>Limited Data&nbsp;<tooltip definition="fos-limited-data" /></span>
-        </div>
-      </v-alert>
     </div>
 
     <!-- Median Total Debt -->
     <div class="mb-4">
-      <label
-        class="subhead mb-2"
-        id="search-fos-median-debt"
-        for="search-fos-median-debt"
-      >
+      <h3 class="my-4" id="search-fos-median-debt" for="search-fos-median-debt">
         Median Total Debt
 
         <v-btn
@@ -315,7 +90,7 @@
         >
           <v-icon>mdi mdi-close</v-icon>
         </v-btn>
-      </label>
+      </h3>
 
       <v-range-slider
         name="search-fos-median-debt"
@@ -324,9 +99,9 @@
         :min="utility.fieldOfStudyDebt.min"
         hide-details
         class="align-center"
-        color="secondary"
+        color="primaryfos"
         track-color="dark-gray"
-        thumb-color="secondary"
+        thumb-color="primaryfos"
         thumb-label
         aria-label="Median Total Debt Range Slider"
       >
@@ -361,32 +136,14 @@
           ></v-text-field>
         </template>
       </v-range-slider>
-
-      <!-- Limited Data Alert -->
-      <v-alert
-        v-if="
-          input.fos_debt.join(',') !== utility.formDefault.fos_debt.join(',')
-        "
-        type="warning"
-        color="#D16E00"
-        class="fos-limited-data mt-2 mb-2 pa-2"
-        colored-border
-        border="left"
-        dense
-        icon=' '
-      >
-        <div style="margin-top:1px;">
-          <span>Limited Data&nbsp;<tooltip definition="fos-limited-data" /></span>
-        </div>
-      </v-alert>
-
     </div>
 
     <!-- WIOA Programs -->
     <div class="">
-      <label class="subhead mb-2" id="search-fos-dolflag" for="search-fos-dolflag">
+      <h3 class="my-4" id="search-fos-dolflag" for="search-fos-dolflag">
         WIOA Programs&nbsp;
-      </label><tooltip definition="wioa-participants"/>
+        <tooltip definition="wioa-participants" />
+      </h3>
 
       <v-checkbox
         id="search-form-dolflag"
@@ -394,14 +151,21 @@
         class="search-form-dolflag-cb my-0 py-0"
         v-model="input.dolflag"
         label="Only show schools that have Department of Labor WIOA programs"
-        value="true"
         color="secondary"
         hide-details
+        true-value="true"
+        false-value="false"
       ></v-checkbox>
-    </div>    
-    
-    <v-btn type='submit' class="sr-only" color="secondary" rounded @click="$emit('search-query',cleanInput)">Find Schools</v-btn>
+    </div>
 
+    <v-btn
+      type="submit"
+      class="sr-only"
+      color="secondary"
+      large
+      @click="$emit('search-query', cleanInput)"
+      >Find Schools</v-btn
+    >
   </v-form>
 </template>
 
@@ -413,6 +177,8 @@ import Tooltip from "~/components/Tooltip.vue"
 import LocationCheck from "~/js/mixins/LocationCheck.js"
 import { SiteData } from "~/js/mixins/SiteData.js"
 import _ from "lodash"
+import LocationInstitutionSearch from "~/components/LocationInstitutionSearch.vue"
+import { megaMerge } from "~/js/forms.js"
 
 export default {
   mixins: [SiteData, LocationCheck],
@@ -426,28 +192,35 @@ export default {
     },
   },
   components: {
-    "field-autocomplete": FieldAutocomplete,
-    "field-of-study-search": FieldOfStudySearch,
-    "field-of-study-detail-chip": FieldOfStudyDetailChip,
-    tooltip: Tooltip,
+    FieldAutocomplete,
+    FieldOfStudySearch,
+    FieldOfStudyDetailChip,
+    Tooltip,
+    LocationInstitutionSearch,
   },
   data() {
     return {
       input: {
-        cip4: [],
-        cip4_degree: ["c", "a", "b"],
-        zip: "",
-        distance: 10,
-        lat: null,
-        long: null,
-        state: [],
         fos_salary: [0, 150],
         fos_debt: [0, 50],
-	dolflag: null
+        dolflag: null,
+        state: null,
+        zip: null,
+        distance: null,
+        lat: null,
+        long: null,
       },
       utility: {
-        formDefault: {},
-        location: null,
+        formDefault: {
+          fos_salary: [0, 150],
+          fos_debt: [0, 50],
+          dolflag: null,
+          state: null,
+          zip: null,
+          distance: 50,
+          lat: null,
+          long: null,
+        },
         rules: {
           required: (value) => !!value || "Required.",
           numerical: (value) => {
@@ -464,7 +237,6 @@ export default {
           max: 50,
         },
         initialized: false,
-        cip4Cache: [],
       },
     }
   },
@@ -472,18 +244,20 @@ export default {
     cleanInput() {
       let defaultValues = _.cloneDeep(this.utility.formDefault)
 
-      // Pick only values that are different from default state.
-      let groomedInput = _.pickBy(this.input, (value, key) => {
-        // If it does not exist in the default state object, remove.
+      let groomedInput = {}
+      for (const key in this.input) {
         if (!_.has(defaultValues, key)) {
-          return false
+          continue
         }
-
-        //If the input value is not equal to default, return value.
-        if (!_.isEqual(value, defaultValues[key]) || key === "cip4_degree") {
-          return value
+        if (
+          !_.isEqual(this.input[key], defaultValues[key]) ||
+          key === "cip4_degree"
+        ) {
+          groomedInput[key] = this.input[key]
+        } else {
+          groomedInput[key] = null
         }
-      })
+      }
 
       // Handle edge case for distance :(
       if (groomedInput.zip) {
@@ -509,16 +283,6 @@ export default {
 
       return groomedInput
     },
-    locationButtonColor() {
-      return this.location.latLon ? "primary" : ""
-    },
-    cipSelectionLimitReached() {
-      if (this.input.cip4.length >= 5) {
-        return true
-      }
-
-      return false
-    },
   },
   watch: {
     cleanInput: {
@@ -543,31 +307,6 @@ export default {
       },
       deep: true,
     },
-    "location.latLon": {
-      // Proccess Lat/Long object for url values.
-      handler(newValue, oldValue) {
-        if (
-          newValue != null &&
-          newValue.min_lat &&
-          newValue.max_lat &&
-          newValue.min_lat &&
-          newValue.max_lat
-        ) {
-          this.input.lat =
-            newValue.min_lat.toFixed(4) + ".." + newValue.max_lat.toFixed(4)
-          this.input.long =
-            newValue.min_lon.toFixed(4) + ".." + newValue.max_lon.toFixed(4)
-        }
-      },
-    },
-    "location.miles"() {
-      this.handleLocationCheck()
-    },
-    "utility.location"(newValue, oldValue) {
-      if (newValue === "Near Me" && oldValue !== "Near Me") {
-        this.handleLocationCheck()
-      }
-    },
   },
   created() {
     // Set default Form Object
@@ -591,17 +330,6 @@ export default {
     })
   },
   methods: {
-    handleLocationChange(e) {
-      // TODO - Check to see if values need to be reset.
-      this.input.zip = ""
-      this.input.state = []
-
-      this.input.lat = null
-      this.input.long = null
-
-      this.location.latLon = null
-      this.location.error = null
-    },
     mapInputFromProp() {
       // Merge import data object (used for v-models) with items passed from the URL
       _.mergeWith(this.input, this.urlParsedParams, function(
@@ -631,76 +359,24 @@ export default {
             break
         }
       })
-
-      // Validate and fill chips
-      if (this.input.cip4.length > 0) {
-        this.input.cip4.forEach((cip4Code) => {
-          let locatedCip4Field = this.locateCip4Field(cip4Code)
-
-          // Attempt to locate cip4 in site data;
-          if (locatedCip4Field) {
-            // console.log(locatedCip4Field);
-            this.utility.cip4Cache.push({
-              cip4: cip4Code,
-              field: locatedCip4Field,
-            })
-          } else {
-            // remove from input if not found;
-            this.input.cip4 = this.input.cip4.splice(
-              this.input.cip4.indexOf(cip4Code),
-              1
-            )
-          }
-        })
-      }
-
-      //Validate and fill range sliders
-      // if(this.input.fos_debt){
-      //
-      // }
-
-      if (this.input.lat && this.input.long) {
-        this.utility.location = "Near Me"
-        this.location.latLon = true
-      }
-
-      if (this.input.zip) {
-        this.utility.location = "ZIP Code"
-      }
-
-      if (!_.isEmpty(this.input.state)) {
-        this.utility.location = "State"
-      }
     },
-    handleFieldOfStudySelected(fieldOfStudy) {
-      this.input.cip4 = _.union(this.input.cip4, [fieldOfStudy.cip4])
-      this.utility.cip4Cache = _.unionBy(
-        this.utility.cip4Cache,
-        [fieldOfStudy],
-        "cip4"
-      )
-    },
-    handleFieldOfStudyChipClose(fieldOfStudy) {
-      //console.log(fieldOfStudy)
 
-      // Remove from arrays
-      this.input.cip4 = this.input.cip4.filter((cip4) => {
-        return Number(cip4) !== Number(fieldOfStudy.cip4)
-      })
-
-      this.utility.cip4Cache = this.utility.cip4Cache.filter((item) => {
-        return Number(item.cip4) !== Number(fieldOfStudy.cip4)
-      })
-    },
-    handleClearAllChips() {
-      this.input.cip4 = []
-      this.utility.cip4Cache = []
+    handleLocationSelection(params) {
+      this.input = { ...this.input, ...params }
+      //this.$emit("search-query", this.cleanInput)
     },
     resetFormDefault() {
+      // TODO - Create reset value method, pass desired fields to method, return default values from object.
       this.input = _.cloneDeep(this.utility.formDefault)
+      this.utility.enable = _.cloneDeep(this.utility.formDefault)
+      this.location.latLon = null
+      this.location.error = null
       this.utility.location = null
-      this.utility.cip4Cache = []
     },
+    handleLocationSelection(params) {
+      this.input = { ...this.input, ...params }
+      this.input.page = 1
+    },    
   },
 }
 </script>

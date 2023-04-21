@@ -183,23 +183,9 @@ const alias = {
 
   cip4_degree: function(query, value, key){
     var fosArray = [];
-
-    for(var i in value){
-      switch (value[i].toLowerCase()){
-        case 'c':
-          fosArray.push('1');
-          break;
-        case 'a':
-          fosArray.push('2');
-          break;
-        case 'b':
-          fosArray.push('3');
-          break;
-        default:
-          return;
-      }
+    for (var i in value) {
+      fosArray.push(value[i])
     }
-
     query[fields.FIELD_OF_STUDY_LENGTH] = fosArray.join(",");
     delete query[key];
   },
@@ -281,12 +267,12 @@ function dataExtend(obj, a, b) {
 
 export default {
   methods:{
-    prepareParams(params){
+    prepareParams(params) {
       let query = Object.assign({}, params);
 
       // only get open schools
       query[fields.OPERATING] = 1;
-      query[fields.OPEID + '__not'] = 'null';
+      //query[fields.OPEID + '__not'] = 'null';
       
       // ignore distance if no zip is provided
       if (query.distance && !query.zip) {
@@ -312,7 +298,7 @@ export default {
       */
       
       if (!query.degree) {
-        query[fields.DEGREE_OFFERED + '.assoc_or_bachelors_or_certificate'] = true;
+        //query[fields.DEGREE_OFFERED + '.assoc_or_bachelors_or_certificate'] = true;
       }
 
       for (var key in query) {
