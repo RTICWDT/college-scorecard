@@ -25,7 +25,7 @@
             <v-expansion-panels multiple v-model="panels">
               <v-expansion-panel>
                 <v-expansion-panel-header
-                  >April 25, 2022</v-expansion-panel-header
+                  >April 25, 2023</v-expansion-panel-header
                 >
                 <v-expansion-panel-content>
                   <p>
