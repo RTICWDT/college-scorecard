@@ -78,11 +78,11 @@
             <p class="mt-3">
               <strong>Looking for help?</strong> Visit
               <a
-                :href="$url('/school/transition/')"
+                href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
                 @click="
                   transitionOutboundLink(
                     $event,
-                    'http://opendata.stackexchange.com/questions/tagged/collegescorecard'
+                    
                   )
                 "
                 target="_blank"
@@ -108,10 +108,10 @@
               endpoint for querying all data is <strong>/v1/schools</strong>.
               Developers may register for an API key at
               <a
-                :href="$url('/school/transition/')"
+                href="https://api.data.gov/signup"
                 target="_blank"
                 @click="
-                  transitionOutboundLink($event, 'https://api.data.gov/signup')
+                  transitionOutboundLink($event)
                 "
                 >https://api.data.gov/signup<v-icon
                   x-small
@@ -232,12 +232,11 @@
             <p class="data-docs">
               For guidance on querying the API and extracting results, see the
               <a
-                :href="$url('/school/transition/')"
+                href="https://github.com/RTICWDT/open-data-maker/blob/master/API.md"
                 target="_blank"
                 @click="
                   transitionOutboundLink(
-                    $event,
-                    'https://github.com/RTICWDT/open-data-maker/blob/master/API.md'
+                    $event
                   )
                 "
                 >HTTP API documentation<v-icon

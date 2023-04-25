@@ -518,6 +518,7 @@ h1 {
   color: #bbbbbb !important;
   letter-spacing: normal;
   font-weight:700;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 .v-tab.v-tab--active {
