@@ -9,15 +9,55 @@
 .cell {
   min-height: 100px;
   margin-bottom: 10px;
+  @media screen and (max-width: 576px) {
+    min-height: auto;
+    margin-bottom: 0;
+  }
 }
 </style>
 <template>
   <v-row class="py-2">
     <!--School Info-->
     <v-col cols="12" md="3">
+      <div
+        class="d-block d-md-none text-right"
+        :key="`${institution.id}-${fos.title}`"
+      >
+        <!-- Compare on medium and above-->
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              class="search-fos-result-compare-button"
+              icon
+              @click="$store.commit('toggleFieldOfStudy', fos)"
+              :color="
+                selectedFieldOfStudyClass(fos) === 'result-card-selected'
+                  ? '#0075B2'
+                  : 'grey'
+              "
+              :class="
+                selectedFieldOfStudyClass(fos) === 'result-card-selected'
+                  ? ''
+                  : totalFieldOfStudyCount > 9
+                  ? 'noCompareAllow'
+                  : ''
+              "
+              v-bind="attrs"
+              v-on="on"
+            >
+              <v-icon>fa fa-check-circle</v-icon>
+              <span class="sr-only">Compare</span>
+            </v-btn>
+          </template>
+
+          <!--<span>Add Field of Study to compare</span>-->
+          <div class="hover-tip">{{ compareFOSHoverCountText }}</div>
+        </v-tooltip>
+      </div>
       <h2 class="">
         <a class="nameLink mb-2" :href="$url(dynamicLink)">{{ schoolName }}</a>
       </h2>
+
       <p class="">{{ city }}, {{ state }} {{ zip }}</p>
       <small-school-icons :school="school" :fields="fields" size="small" />
       <p v-if="underInvestigation == 1">
@@ -27,7 +67,7 @@
         </v-card>
       </p>
     </v-col>
-    <v-col cols="4" md="3">
+    <v-col cols="12" sm="6" md="3">
       <div class="cell">
         <div class="text-uppercase">
           Median Earnings
@@ -64,7 +104,7 @@
         </div>
         <div v-if="_.get(fos, fields.FOS_EARNINGS_FED_4YR)">
           <span class="display-2 navy-text font-weight-bold ">{{
-            _.get(fos, fields.FOS_EARNINGS_FED_4YR)  / 12 | numeral("$0,0")
+            (_.get(fos, fields.FOS_EARNINGS_FED_4YR) / 12) | numeral("$0,0")
           }}</span>
         </div>
         <div v-else class="mini-data-na text-center">
@@ -72,7 +112,7 @@
         </div>
       </div>
     </v-col>
-    <v-col cols="4" md="3">
+    <v-col cols="12" sm="6" md="3">
       <div class="cell">
         <div class="text-uppercase">
           Median Debt
@@ -124,7 +164,7 @@
         </div>
       </div>
     </v-col>
-    <v-col cols="3" md="2">
+    <v-col cols="12" sm="6" md="2">
       <div class="cell">
         <div class="text-uppercase  font-weight-bold">Graduates</div>
 
@@ -138,8 +178,11 @@
         </div>
       </div>
     </v-col>
-    <v-col cols="1" md="1">
-      <div class="text-right" :key="`${institution.id}-${fos.title}`">
+    <v-col cols="12" sm="6" md="1">
+      <div
+        class="d-none d-md-block text-right"
+        :key="`${institution.id}-${fos.title}`"
+      >
         <!-- Compare on medium and above-->
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">

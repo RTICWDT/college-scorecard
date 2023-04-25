@@ -39,7 +39,7 @@
                 color="white"
                 text
                 id="referrer-link"
-                class="link-more"
+                class="link-more d-none d-sm-block"
                 @click="$router.back()"
                 >&laquo; Back</v-btn
               >
@@ -125,9 +125,7 @@
               <div class="float-right">
                 <a
                   :href="generateMapLink(school)"
-                  @click="
-                    transitionOutboundLink($event)
-                  "
+                  @click="transitionOutboundLink($event)"
                   target="_blank"
                   >View on map<v-icon x-small class="pl-1" color="#007000">
                     fas fa-external-link-alt
@@ -494,10 +492,16 @@
 
                 <v-row>
                   <v-col class="text-right">
-                    <v-btn color="secondary" @click="all" class="my-2 mr-2 text-uppercase"
+                    <v-btn
+                      color="secondary"
+                      @click="all"
+                      class="my-2 mr-2 text-uppercase"
                       >Expand All</v-btn
                     >
-                    <v-btn color="secondary" @click="none" class="my-2 text-uppercase"
+                    <v-btn
+                      color="secondary"
+                      @click="none"
+                      class="my-2 text-uppercase"
                       >Close All</v-btn
                     >
                   </v-col>
@@ -528,35 +532,33 @@
                       id="fos-content"
                       class="px-0 pb-3 px-sm-5 pb-sm-5"
                     >
-                    <div style="background-color: pink;">
-                            <div class="mb-4 mx-n11">
-                              <field-of-study-select
-                                :cip-two-nested-cip-four="
-                                  fieldOfStudySelectItems
-                                "
-                                v-model="selectedFOS"
-                                @input-clear="handleFieldOfStudyClear"
-                                container-id="field-of-study-select-search-container2"
-                                result-id="field-of-study-select-search-result2"
-                              />
-                            </div>
-                          </div>
-                            <field-data-extended
-                              v-if="selectedFOSDetail"
-                              :fos="selectedFOSDetail"
-                              :fos-salary-select-items="fosSalarySelectItems"
-                              :fos-salary-select="fieldDataExtendedSalarySelect"
-                              @update-salary-select="
-                                fieldDataExtendedSalarySelect = $event
-                              "
-                              :fos-show-debt-prior-included.sync="
-                                fieldDataExtendedShowPrior
-                              "
-                              @update-debt-show-prior="
-                                fieldDataExtendedShowPrior = $event
-                              "
-                              :fields="fields"
-                            />
+                      <div style="background-color: pink;">
+                        <div class="mb-4 mx-n11">
+                          <field-of-study-select
+                            :cip-two-nested-cip-four="fieldOfStudySelectItems"
+                            v-model="selectedFOS"
+                            @input-clear="handleFieldOfStudyClear"
+                            container-id="field-of-study-select-search-container2"
+                            result-id="field-of-study-select-search-result2"
+                          />
+                        </div>
+                      </div>
+                      <field-data-extended
+                        v-if="selectedFOSDetail"
+                        :fos="selectedFOSDetail"
+                        :fos-salary-select-items="fosSalarySelectItems"
+                        :fos-salary-select="fieldDataExtendedSalarySelect"
+                        @update-salary-select="
+                          fieldDataExtendedSalarySelect = $event
+                        "
+                        :fos-show-debt-prior-included.sync="
+                          fieldDataExtendedShowPrior
+                        "
+                        @update-debt-show-prior="
+                          fieldDataExtendedShowPrior = $event
+                        "
+                        :fields="fields"
+                      />
                       <v-row
                         ><v-col>
                           <!-- Top Fields of Study -->
@@ -585,15 +587,13 @@
                               >
                             </p>
 
-
-                              <toggle
-                                :display-toggle="true"
-                                :control-tab="field_sort"
-                                @tab-change="handleToggle"
-                                label="Sort By: "
-                                class="pt-2 pb-2"
-                              />
-
+                            <toggle
+                              :display-toggle="true"
+                              :control-tab="field_sort"
+                              @tab-change="handleToggle"
+                              label="Sort By: "
+                              class="pt-2 pb-2"
+                            />
 
                             <v-row
                               class="mx-5 mt-5 d-none d-sm-flex"
@@ -722,10 +722,7 @@
                                 color="secondary"
                                 :href="this.$url(fieldsLink)"
                               >
-                                <span class="d-none d-sm-flex"
-                                  >See All Available Fields of Study
-                                </span>
-                                <span class="d-block d-sm-none">See All</span>
+                                See All Available Fields of Study
                               </v-btn>
                             </p>
                             <div class="pa-4 rounded yellow-warn mt-4 mb-8">
@@ -785,9 +782,10 @@
                                   this.$options.filters.yearsText(groupName) +
                                     ' Schools'
                                 "
-                                class="pt-8 pb-8"
+                                class="pt-8 pb-8 d-none d-lg-block"
                               />
                               <horizontal-bar-median
+                                class="pt-8 pt-lg-0"
                                 v-if="netPrice"
                                 :value="{
                                   label: this.$options.filters.numeral(
@@ -852,14 +850,16 @@
                                 />
                               </h2>
                               <h2 class="title my-3">
-                                <span class="font-weight-bold medium-light-blue-text">{{
-                                  programReporter[0].title
-                                }}</span>
+                                <span
+                                  class="font-weight-bold medium-light-blue-text"
+                                  >{{ programReporter[0].title }}</span
+                                >
                               </h2>
                               <h2 class="title my-3" v-if="netPrice">
-                                <span class="medium-light-blue-text font-weight-bold">{{
-                                  netPrice | numeral("$0,0")
-                                }}</span>
+                                <span
+                                  class="medium-light-blue-text font-weight-bold"
+                                  >{{ netPrice | numeral("$0,0") }}</span
+                                >
                                 <span
                                   v-if="
                                     programReporter[0].annualized ==
@@ -894,7 +894,7 @@
                                   this.$options.filters.yearsText(groupName) +
                                     ' Schools'
                                 "
-                                class="pt-8 pb-8"
+                                class="pt-8 pb-8 d-none d-lg-block"
                               />
                               <v-row>
                                 <v-col cols="2"></v-col>
@@ -1082,7 +1082,7 @@
                                   this.$options.filters.yearsText(groupName) +
                                     ' Schools'
                                 "
-                                class="pt-0 pb-8"
+                                class="pt-0 pb-8 d-none d-lg-block"
                               />
                             </v-expand-transition>
                             <horizontal-bar-median
@@ -1171,8 +1171,8 @@
                         <v-col cols="12" id="showPellOnlyOutcomes">
                           <v-card flat class="pa-4">
                             <v-row class="d-flex">
-                              <v-col cols="7" md="7" sm="12">
-                                <h2 class="mb-3">
+                              <v-col cols="12" md="7">
+                                <h2 class="mb-0">
                                   Outcomes 8 Years After Attending&nbsp;
                                   <tooltip
                                     definition="outcome-measures"
@@ -1181,16 +1181,15 @@
                                 </h2>
                               </v-col>
                               <v-col
-                                cols="5"
+                                cols="12"
                                 md="5"
-                                sm="12"
                                 class="d-flex justify-end"
                               >
                                 <v-checkbox
                                   v-model="showPellOnlyOutcomes"
                                   label="Show Pell Grant Recipients Only"
                                   color="secondary"
-                                  class="ml-auto"
+                                  class="ml-auto mt-0 pt-0"
                                 >
                                   <template v-slot:label>
                                     <span>
@@ -1492,11 +1491,7 @@
                                 <a
                                   href="https://studentaid.gov/loan-simulator"
                                   target="_blank"
-                                  @click="
-                                    transitionOutboundLink(
-                                      $event
-                                    )
-                                  "
+                                  @click="transitionOutboundLink($event)"
                                   >payment options<v-icon
                                     x-small
                                     class="pl-1"
@@ -1509,11 +1504,7 @@
                                 <a
                                   target="_blank"
                                   href="https://studentaid.gov/manage-loans/repayment/plans/income-driven"
-                                  @click="
-                                    transitionOutboundLink(
-                                      $event
-                                    )
-                                  "
+                                  @click="transitionOutboundLink($event)"
                                   >income-driven repayment<v-icon
                                     x-small
                                     class="pl-1"
@@ -1532,7 +1523,7 @@
                         <v-row>
                           <v-col
                             cols="12"
-                            sm="8"
+                            md="8"
                             v-if="aidLoanSelect === 'fed'"
                           >
                             <v-card class="pa-4 fill-height mt-4" flat>
@@ -1635,11 +1626,7 @@
                                   color="secondary"
                                   href="https://studentaid.gov/h/apply-for-aid/fafsa"
                                   target="_blank"
-                                  @click="
-                                    transitionOutboundLink(
-                                      $event
-                                    )
-                                  "
+                                  @click="transitionOutboundLink($event)"
                                   >Start My FAFSA&reg; Form<v-icon
                                     x-small
                                     color="white"
@@ -1672,7 +1659,7 @@
                       class="px-0 py-3 pa-sm-5"
                     >
                       <v-row class="mt-4">
-                        <v-col sm="7">
+                        <v-col lg="7">
                           <v-card flat class="pa-4">
                             <h2 class="pb-3">
                               Median Earnings&nbsp;<tooltip
@@ -1700,10 +1687,11 @@
                                 this.$options.filters.yearsText(groupName) +
                                   ' Schools'
                               "
-                              class="pt-12 pb-8"
+                              class="pt-12 pb-8 d-none d-lg-block"
                             />
 
                             <horizontal-bar-median
+                              class="pt-12 pt-lg-0"
                               v-if="medianEarnings"
                               :value="{
                                 label: this.$options.filters.numeral(
@@ -1757,7 +1745,7 @@
                             </div>
                           </v-card>
                         </v-col>
-                        <v-col sm="5">
+                        <v-col lg="5">
                           <v-card flat class="pa-4 mb-4 ">
                             <h2 class="mb-2">
                               Percentage Earning More Than a High School
@@ -1769,7 +1757,9 @@
                               class="d-flex align-end"
                               v-if="percentMoreThanHS"
                             >
-                              <h2 class="display-2 medium-light-blue-text font-weight-bold">
+                              <h2
+                                class="display-2 medium-light-blue-text font-weight-bold"
+                              >
                                 {{ percentMoreThanHS | numeral("0%") }}
                               </h2>
                               <span> &nbsp; of students</span>
@@ -1914,19 +1904,22 @@
                       <v-card class="pa-4 mt-4" flat>
                         <v-row>
                           <v-col cols="12">
-                            <div style="  display: flex;align-items: center;">
+                            <div style="">
                               <h2 class="mb-1 d-inline-block">
                                 Race/Ethnicity
                                 <tooltip definition="race-eth" />
                               </h2>
-                              <div
-                                style="background:#1874DC;margin-right:10px;height:10px;width:10px;display:inline-block;"
-                              ></div>
-                              Student Body
-                              <div
-                                style="background:#102E52;margin-left:10px;margin-right:10px;height:10px;width:10px;display:inline-block;"
-                              ></div>
-                              Full-Time Staff
+                              <div class="d-flex align-items-center">
+                                <div
+                                  style="background:#1874DC;margin-right:10px;height:10px;width:10px;display:inline-block;"
+                                ></div>
+                                Student Body
+                                <br />
+                                <div
+                                  style="background:#102E52;margin-left:10px;margin-right:10px;height:10px;width:10px;display:inline-block;"
+                                ></div>
+                                Full-Time Staff
+                              </div>
                             </div>
                           </v-col>
                           <v-col cols="12" md="6">
@@ -2242,7 +2235,7 @@
 }
 
 #fields-of-study.v-expansion-panel-header:before {
-  opacity:0 !important;
+  opacity: 0 !important;
 }
 
 .fos-profile-mini-summary-info {
@@ -2355,8 +2348,8 @@ span.arrow-left {
 }
 
 #field-of-study-select-search-container2 {
-  background-color:$fos-color-yellow;
-  padding-bottom:24px;
+  background-color: $fos-color-yellow;
+  padding-bottom: 24px;
 }
 </style>
 

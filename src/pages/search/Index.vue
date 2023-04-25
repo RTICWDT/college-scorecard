@@ -22,7 +22,13 @@
 
 <template>
   <div>
-    <v-main v-bind:style="{ 'padding-top': $vuetify.breakpoint.xsOnly ? '80px !important' : '105px !important' }">
+    <v-main
+      v-bind:style="{
+        'padding-top': $vuetify.breakpoint.xsOnly
+          ? '80px !important'
+          : '105px !important',
+      }"
+    >
       <v-card tile class="tab-card">
         <search-tabs :selected="0" />
       </v-card>
@@ -55,7 +61,10 @@
                 :dense="true"
               />
 
-              <div class="mx-1 mx-sm-3 mt-3 my-sm-0  search-label" id="location-label">
+              <div
+                class="mx-1 mx-sm-3 mt-3 my-sm-0  search-label"
+                id="location-label"
+              >
                 Location:
               </div>
               <location-institution-search
@@ -111,29 +120,29 @@
                 display-all-filters
                 @search-query="handleInstitutionSearch"
                 :hideLocation="true"
-              />           
+              />
               <v-btn
-                    type="submit"
-                    :class="$vuetify.breakpoint.smAndDown ? 'mx-4 mt-4' : 'd-none'"
-                    color="secondary"
-                    large
-                    @click="showSidebar = !showSidebar"
-                    >Find Schools</v-btn
-                  >              
-            </v-navigation-drawer> 
+                type="submit"
+                :class="$vuetify.breakpoint.smAndDown ? 'mx-4 mt-4' : 'd-none'"
+                color="secondary"
+                large
+                @click="showSidebar = !showSidebar"
+                >Find Schools</v-btn
+              >
+            </v-navigation-drawer>
             <v-btn
-            v-scroll="onScroll"
-            v-show="btt"
-            fab
-            dark
-            fixed
-            bottom
-            right
-            color="primary"
-            @click="toTop"
-          >
-            <v-icon>fas fa-arrow-up</v-icon>
-          </v-btn></v-col
+              v-scroll="onScroll"
+              v-show="btt"
+              fab
+              dark
+              fixed
+              bottom
+              right
+              color="primary"
+              @click="toTop"
+            >
+              <v-icon>fas fa-arrow-up</v-icon>
+            </v-btn></v-col
           ><v-col :cols="showSidebar ? 9 : 12" xl="10" class="pa-6 pa-sm-8`">
             <div id="search-result-container">
               <div class="search-result-container">
@@ -143,17 +152,17 @@
                   v-show="!isLoading"
                 >
                   <v-row class="">
-                    <v-col cols="12" sm="7" class="py-2 px-4">
+                    <v-col cols="12" sm="8" class="py-2 px-4">
                       <div id="search-result-info-count" class>
                         <p class="title mb-0">
                           {{ results.meta.total | separator }} Results
-
+                          <br class="d-block" />
                           <v-btn
                             id="search-button-clear"
                             @click="clearSearchForm"
                             small
                             outlined
-                            class=" d-sm-inline mr-3 searchbtn ml-2"
+                            class="mr-3 mb-1 mb-sm-0 searchbtn"
                             elevation="1"
                           >
                             <span>
@@ -163,6 +172,7 @@
                               Reset Filters
                             </span>
                           </v-btn>
+                          <br class="d-block d-sm-none" />
 
                           <v-menu offset-y>
                             <template v-slot:activator="{ on }">
@@ -171,11 +181,15 @@
                                 small
                                 v-on="on"
                                 outlined
-                                class="mr-3 searchbtn"
+                                class="mr-3 mb-1 mb-sm-0 searchbtn"
                                 elevation="1"
                               >
                                 <v-icon small class="mx-1">fas fa-sort</v-icon>
-                                Sort: {{ sorts.find(el => el.field === input.sort).type }}
+                                Sort:
+                                {{
+                                  sorts.find((el) => el.field === input.sort)
+                                    .type
+                                }}
                               </v-btn>
                             </template>
                             <v-list min-width="200">
@@ -197,7 +211,7 @@
                               </v-list-item-group>
                             </v-list>
                           </v-menu>
-
+                          <br class="d-block d-sm-none" />
                           <share
                             :url="encodeURI(shareUrl)"
                             label="Share"
@@ -205,6 +219,7 @@
                             show-copy
                             :hide="['email']"
                             color="#eff1f5"
+                            class="mr-3 mb-1 mb-sm-0 "
                           />
                         </p>
                       </div>
@@ -212,7 +227,7 @@
 
                     <v-col
                       cols="12"
-                      sm="5"
+                      sm="4"
                       class="py-1 px-1"
                       v-show="!isLoading && results.schools.length > 0"
                     >
@@ -411,7 +426,7 @@ export default {
   },
   data() {
     return {
-      showSidebar: true,
+      showSidebar: false,
       sidebar: { fixed: false, absolute: true },
       results: {
         schools: [],
@@ -480,6 +495,11 @@ export default {
     this.utility.formDefault = _.cloneDeep(this.input)
 
     this.urlParsedParams = this.parseURLParams()
+    if (this.$vuetify.breakpoint.smAndDown) {
+      this.showSidebar = false
+    } else {
+      this.showSidebar = true
+    }
     this.input = this.urlParsedParams
     // Add sort to state if it exists
     this.input.sort = this.urlParsedParams.sort
@@ -506,7 +526,7 @@ export default {
     }, 1000)
   },
   mounted() {
-    this.showSidebar = window.innerWidth > 960 ? true : false //this.$vuetify.breakpoint
+    //this.showSidebar = window.innerWidth > 960 ? true : false //this.$vuetify.breakpoint
   },
   computed: {
     totalPages() {
@@ -712,14 +732,14 @@ export default {
       this.input.page = 1
       this.searchAPI()
     },
-    onScroll (e) {
-      if (typeof window === 'undefined') return
-      const top = window.pageYOffset ||   e.target.scrollTop || 0
+    onScroll(e) {
+      if (typeof window === "undefined") return
+      const top = window.pageYOffset || e.target.scrollTop || 0
       this.btt = top > 20
     },
-    toTop () {
+    toTop() {
       this.$vuetify.goTo(0)
-    }  
+    },
   },
   metaInfo: {
     title: "Search Schools",
