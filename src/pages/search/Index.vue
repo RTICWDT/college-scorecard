@@ -22,7 +22,7 @@
 
 <template>
   <div>
-    <v-main v-bind:style="{ 'padding-top': $vuetify.breakpoint.xsOnly ? 80 : 105 }">
+    <v-main v-bind:style="{ 'padding-top': $vuetify.breakpoint.xsOnly ? '80px !important' : '105px !important' }">
       <v-card tile class="tab-card">
         <search-tabs :selected="0" />
       </v-card>
