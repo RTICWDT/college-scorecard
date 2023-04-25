@@ -1,11 +1,7 @@
 <template>
   <div id="search-can-query-items-wrapper">
     <v-row>
-      <v-col
-        md="6"
-        cols="12"
-        class="text-center canned-search-wrapper py-0 my-0"
-      >
+      <v-col md="6" cols="12" class=" canned-search-wrapper py-0 my-0">
         <canned-search-slider
           id="canned-search-near-me"
           label="Schools Near Me"
@@ -38,29 +34,29 @@
         <canned-search-slider
           id="canned-search-degree-c"
           label="I Want a Certificate"
-          :add-to-query="[{ cip4_degree: ['c'] }]"
+          :add-to-query="[{ cip4_degree: ['1'] }]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
 
         <canned-search-slider
           id="canned-search-degree-a"
           label="I Want an Associate's Degree"
-          :add-to-query="[{ cip4_degree: ['a'] }]"
+          :add-to-query="[{ cip4_degree: ['2'] }]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
 
         <canned-search-slider
           id="canned-search-degree-b"
           label="I Want a Bachelor's Degree"
-          :add-to-query="[{ cip4_degree: ['b'] }]"
+          :add-to-query="[{ cip4_degree: ['3'] }]"
           @canned-search-toggle="handleCannedToggle"
         ></canned-search-slider>
       </v-col>
-      <v-col cols="12" md="12" class="text-center mt-5">
+      <v-col cols="12" md="12" class=" mt-5">
         <v-btn
           id="canned-search-submit"
           color="secondary"
-          rounded
+          large
           @click="$emit('canned-search-submit', query)"
           >Find Schools</v-btn
         >

@@ -1,22 +1,25 @@
 <template>
   <div class="d-print-none">
     <div class="data-navigation">
-      <v-tabs
-        hide-slider
-        background-color="white"
-        v-model="dataTabs"
-        show-arrows
-        class="ml-10"
-      >
-        <v-tab :href="$url('/data/')" value="home">Data Home</v-tab>
-        <v-tab :href="$url('/data/documentation/')" value="documentation"
-          >Documentation</v-tab
+      <v-container class="py-0 pl-5">
+        <v-tabs
+          hide-slider
+          background-color="white"
+          v-model="dataTabs"
+          show-arrows
         >
-        <v-tab :href="$url('/data/changelog/')" value="changelog"
-          >Change Log</v-tab
-        >
-        <v-tab :href="$url('/data/glossary/')" value="glossary">Glossary</v-tab>
-      </v-tabs>
+          <v-tab class="data-tab" :href="$url('/data/')" value="home">Data Home</v-tab>
+          <v-tab class="data-tab" :href="$url('/data/documentation/')" value="documentation"
+            >Documentation</v-tab
+          >
+          <v-tab class="data-tab" :href="$url('/data/changelog/')" value="changelog"
+            >Change Log</v-tab
+          >
+          <v-tab class="data-tab" :href="$url('/data/glossary/')" value="glossary"
+            >Glossary</v-tab
+          >
+        </v-tabs>
+      </v-container>
     </div>
   </div>
 </template>
@@ -29,7 +32,7 @@
 }
 
 .v-tabs-bar .v-tab--active {
-  background-color: $darker-green !important;
+  background-color: var(--v-primary-base)!important;
   color: $white !important;
   font-weight: bold !important;
   a {

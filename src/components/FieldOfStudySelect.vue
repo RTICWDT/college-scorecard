@@ -24,10 +24,12 @@
       @click="handleSelectFocus"
       @click:append="handleSelectFocus"
       @click:clear="handleInputClear"
-      placeholder="Type to search"
+      placeholder="Enter a Field of Study"
       clearable
       outlined
       hide-details
+      prepend-inner-icon="fas fa-search"
+      class=" mx-11"
     >
       <template slot="append">
         <v-icon class="fos-search-text-icon" v-if="displayMenu"
@@ -122,6 +124,16 @@
 .field-of-study-search-item-body {
   padding-left: 20px;
   /*border: 1px solid black;*/
+}
+
+#field-of-study-select-search-text {
+  padding-left:20px;
+}
+
+#field-of-study-select-search-container2 {
+  fieldset {
+    background:white;
+  }
 }
 </style>
 

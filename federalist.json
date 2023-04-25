@@ -1,0 +1,14 @@
+{
+    "headers": [
+      {
+        "/*": {
+          "cache-control": "no-store"
+        }
+      },
+      {
+        "/*": {
+          "cache-control": "private"
+        }
+      }
+    ]
+}

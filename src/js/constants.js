@@ -80,6 +80,7 @@ export const fields = {
   PART_TIME_SHARE:      'latest.student.part_time_share',
   FEMALE_SHARE:         'latest.student.demographics.female_share',
   RACE_ETHNICITY:       'latest.student.demographics.race_ethnicity',
+  RACE_ETHNICITY_STAFF:       'latest.student.demographics.faculty.race_ethnicity',  
   AGE_ENTRY:            'latest.student.demographics.age_entry',
 
   TEST_REQUIREMENTS:    'latest.admissions.test_requirements',
@@ -145,6 +146,9 @@ export const fields = {
   FOS_EARNINGS_FED: 'earnings.highest.3_yr.overall_median_earnings',
   FOS_EARNINGS_PELL: 'earnings.highest.3_yr.pell_median_earnings',
 
+  FOS_EARNINGS_FED_4YR: 'earnings.4_yr.overall_median_earnings',
+  FOS_EARNINGS_PELL_4YR: 'earnings.4_yr.pell_median_earnings',
+
   // FOS_DEBT_MEDIAN: 'debt.test.federal.median_total_at',
   FOS_DEBT_MEDIAN: 'debt.staff_grad_plus.all.eval_inst.median',
   FOS_DEBT_MEDIAN_PRIOR: 'debt.staff_grad_plus.all.all_inst.median',
@@ -166,6 +170,9 @@ export const fields = {
   AVG_COST_MIDPOINT_PRED_DEGREE: 'latest.cost.avg_net_price.consumer.median_by_pred_degree',
   EARNINGS_MIDPOINT_ALL: 'latest.earnings.10_yrs_after_entry.consumer.overall_median',
   EARNINGS_MIDPOINT_PRED_DEGREE: 'latest.earnings.10_yrs_after_entry.consumer.median_by_pred_degree',
+
+  
+  STUDENT_RATIO: 'latest.student.demographics.student_faculty_ratio',
 
 
   //Location
@@ -202,7 +209,17 @@ export const formMappings = {
     a: '2',
     b: '3',
     c: '1'
-  }
+  },
+  fosDegrees: [
+    { 'value': '1', 'label': 'Undergraduate Certificate or Diploma' },
+    { 'value': '2', 'label': 'Associate\'s Degree' },
+    { 'value': '3', 'label': 'Bachelor\'s Degree' },
+    { 'value': '4', 'label': 'Post-baccalaureate Certificate' },
+    { 'value': '5', 'label': 'Master\'s Degree' },
+    { 'value': '6', 'label': 'Doctoral Degree' },
+    { 'value': '7', 'label': 'First Professional Degree' },
+    { 'value': '8', 'label': 'Graduate/Professional Certificate' }
+  ]
 };
 
 export const localStorageKeys = {
