@@ -368,6 +368,7 @@
             aria-labelledby="specialized-mission-label"
             dense
             outlined
+            style="z-index: 1000"
           ></v-select> </v-expansion-panel-content></v-expansion-panel
       ><v-expansion-panel
         ><v-expansion-panel-header
@@ -386,6 +387,7 @@
             aria-labelledby="religions-affiliation-label"
             dense
             outlined
+            style="z-index: 200"
           ></v-select>
         </v-expansion-panel-content> </v-expansion-panel
       ><v-expansion-panel>
