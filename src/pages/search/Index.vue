@@ -526,7 +526,7 @@ export default {
     }, 1000)
   },
   mounted() {
-    //this.showSidebar = window.innerWidth > 960 ? true : false //this.$vuetify.breakpoint
+    //this.showSidebar = window.innerWidth > 960 ? true : false //this.$vuetify.breakpointy
   },
   computed: {
     totalPages() {

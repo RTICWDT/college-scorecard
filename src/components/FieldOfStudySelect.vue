@@ -40,7 +40,7 @@
     </v-text-field>
 
     <v-card
-      class="field-of-study-select-search-result pa-2"
+      class="field-of-study-select-search-result pa-2 mx-11"
       :id="resultId"
       v-show="displayMenu"
     >

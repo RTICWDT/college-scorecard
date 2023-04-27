@@ -553,6 +553,11 @@ export default {
   },
   mounted() {
     //this.showSidebar = window.innerWidth > 960 ? true : false //this.$vuetify.breakpoint
+    if (this.$vuetify.breakpoint.smAndDown) {
+      this.showSidebar = false
+    } else {
+      this.showSidebar = true
+    }
   },
   computed: {
     selectedFoSLabel() {
