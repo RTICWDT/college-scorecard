@@ -393,11 +393,17 @@ export default {
       }
       newObj.styles.left = left + "%"
 
-      if (left > 15) {
+      if (85 < left) {
         //let s = left.replace(/[0-9]+%\s?/g, '');
-        if (obj.label.includes("$")) newObj.styles.left = left - 15 + "%"
-        else newObj.styles.left = left - 10 + "%"
-        newObj.styles.color = "#ffffff"
+        if (this.$vuetify.breakpoint.smAndDown) {
+          if (obj.label.includes("$")) newObj.styles.left = left - 32 + "%"
+          else newObj.styles.left = left - 15 + "%"
+        }
+        else {
+          if (obj.label.includes("$")) newObj.styles.left = left - 15 + "%"
+          else newObj.styles.left = left - 10 + "%"
+        }
+        //newObj.styles.color = "#ffffff"
       }
 
       return newObj
