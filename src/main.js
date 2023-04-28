@@ -183,11 +183,11 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   }) 
   head.meta.push({
     name: 'og:image',
-    content: 'https://collegescorecard.ed.gov/img/CS-Main-Tw@2x.png'
+    content: 'https://collegescorecard.ed.gov/img/CollegeScorecard-Blog-Image-updated.png'
   })   
   head.meta.push({
     name: 'twitter:image',
-    content: 'https://collegescorecard.ed.gov/img/CS-Main-Tw@2x.png'  
+    content: 'https://collegescorecard.ed.gov/img/CollegeScorecard-Blog-Image-updated.png'  
   })    
   
   head.script.push({

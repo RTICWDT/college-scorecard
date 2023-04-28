@@ -100,50 +100,57 @@
               :temporary="$vuetify.breakpoint.smAndDown"
               hide-overlay
             >
-            <div class="px-6 pt-6 white" style="border-right: 5px solid #DFE6F0;">
-              <a
-                class="float-right close-filter"
-                @click="showSidebar = !showSidebar"
+              <div
+                class="px-6 pt-6 white"
+                style="border-right: 5px solid #DFE6F0;"
               >
-                &lt; Close filters</a
-              >
-              <h2>
-                More Filters
-              </h2>
-            </div>            
+                <a
+                  class="float-right close-filter"
+                  @click="showSidebar = !showSidebar"
+                >
+                  &lt; Close filters</a
+                >
+                <h2>
+                  More Filters
+                </h2>
+              </div>
               <!-- Search Fields of Study Component -->
               <search-fos-form
                 :url-parsed-params="urlParsedParams"
                 auto-submit
                 @search-query="handleFieldOfStudySearch"
               />
-                  <v-btn
-                    type="submit"
-                    :class="$vuetify.breakpoint.smAndDown ? 'mx-4' : 'd-none'"
-                    color="secondary"
-                    large
-                    @click="showSidebar = !showSidebar"
-                    >Find Fields of Study</v-btn
-                  >
-            </v-navigation-drawer>            
+              <v-btn
+                type="submit"
+                :class="$vuetify.breakpoint.smAndDown ? 'mx-4' : 'd-none'"
+                color="secondary"
+                large
+                @click="showSidebar = !showSidebar"
+                >Find Fields of Study</v-btn
+              >
+            </v-navigation-drawer>
             ]<v-btn
-            v-scroll="onScroll"
-            v-show="btt"
-            fab
-            dark
-            fixed
-            bottom
-            right
-            color="primaryfos"
-            @click="toTop"
-          >
-            <v-icon>fas fa-arrow-up</v-icon>
-          </v-btn> </v-col
-          ><v-col :cols="showSidebar ? 9 : 12" class="pa-10">
+              v-scroll="onScroll"
+              v-show="btt"
+              fab
+              dark
+              fixed
+              bottom
+              right
+              color="primaryfos"
+              @click="toTop"
+            >
+              <v-icon>fas fa-arrow-up</v-icon>
+            </v-btn> </v-col
+          ><v-col :cols="showSidebar ? 9 : 12" class="pa-8">
             <div v-if="!isLoading">
               <h2 class="mb-4">
                 {{ selectedFoSLabel }}
-                <v-chip class="ml-2 font-weight-regular text-uppercase" color="#D8DFE8">{{ selectedFoSDegree }}</v-chip>
+                <v-chip
+                  class="ml-0 ml-sm-2 mt-2 mt-sm-0 font-weight-regular text-uppercase"
+                  color="#D8DFE8"
+                  >{{ selectedFoSDegree }}</v-chip
+                >
               </h2>
               <!-- <div v-if="showDescription">
                 A program that prepares individuals to practice the profession
@@ -183,13 +190,13 @@
                       <div id="search-result-info-count" class>
                         <p class="title mb-0">
                           {{ results.meta.total | separator }} Results
-
+                          <br />
                           <v-btn
                             id="search-button-clear"
                             @click="clearSearchForm"
                             small
                             outlined
-                            class=" d-sm-inline mr-3 searchbtn ml-2"
+                            class=" d-sm-inline mr-3 searchbtn"
                             elevation="1"
                           >
                             <span>
@@ -198,7 +205,7 @@
                               >
                               Reset Filters
                             </span>
-                          </v-btn>                          
+                          </v-btn>
 
                           <share
                             :url="encodeURI(shareUrl)"
@@ -275,11 +282,7 @@
                         <a
                           target="_blank"
                           href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56"
-                          @click="
-                            transitionOutboundLink(
-                              $event
-                            )
-                          "
+                          @click="transitionOutboundLink($event)"
                         >
                           Learn more about CIP<v-icon x-small class="pl-1">
                             fas fa-external-link-alt
@@ -337,7 +340,8 @@
                         >
                           <v-col
                             class="py-md-0 pl-5"
-                            cols="3"
+                            cols="12"
+                            sm="3"
                             v-for="sort in sorts"
                             :key="sort.type"
                           >
@@ -453,7 +457,7 @@ export default {
   data() {
     return {
       isLoading: true,
-      showSidebar: true,
+      showSidebar: false,
       sidebar: { fixed: false, absolute: true },
       results: {
         schools: [],
@@ -529,6 +533,12 @@ export default {
     this.utility.formDefault = _.cloneDeep(this.input)
     this.urlParsedParams = forms.parseURLParams()
 
+    if (this.$vuetify.breakpoint.smAndDown) {
+      this.showSidebar = false
+    } else {
+      this.showSidebar = true
+    }
+    
     // Add sort to state if it exists
     this.input.sort = this.urlParsedParams.sort
       ? this.urlParsedParams.sort
@@ -548,7 +558,12 @@ export default {
     }, 1000)
   },
   mounted() {
-    this.showSidebar = window.innerWidth > 960 ? true : false //this.$vuetify.breakpoint
+    //this.showSidebar = window.innerWidth > 960 ? true : false //this.$vuetify.breakpoint
+    if (this.$vuetify.breakpoint.smAndDown) {
+      this.showSidebar = false
+    } else {
+      this.showSidebar = true
+    }
   },
   computed: {
     selectedFoSLabel() {
@@ -619,6 +634,14 @@ export default {
           if (process.isClient) {
             this.shareUrl = window.location.href
           }
+
+          if (this.$vuetify.breakpoint.smAndDown) {
+          this.showSidebar = false
+        } else {
+          this.showSidebar = true
+        }
+
+    console.log(this.showSidebar)
         })
         .catch((error) => {
           this.isLoading = false
@@ -678,8 +701,8 @@ export default {
       this.$root.$emit("search-form-reset")
 
       /*this.$router.push(
-          "/search/fos-landing")   */   
-    },    
+          "/search/fos-landing")   */
+    },
     handleFieldOfStudySelected(fieldOfStudy) {
       this.input.page = 0
       this.input.cip4 = fieldOfStudy.cip4
@@ -702,14 +725,14 @@ export default {
       this.input.page = 0
       this.searchAPI()
     },
-    onScroll (e) {
-      if (typeof window === 'undefined') return
-      const top = window.pageYOffset ||   e.target.scrollTop || 0
+    onScroll(e) {
+      if (typeof window === "undefined") return
+      const top = window.pageYOffset || e.target.scrollTop || 0
       this.btt = top > 20
     },
-    toTop () {
+    toTop() {
       this.$vuetify.goTo(0)
-    }
+    },
   },
   metaInfo: {
     title: "Search Fields of Study",

@@ -25,7 +25,7 @@
             <v-expansion-panels multiple v-model="panels">
               <v-expansion-panel>
                 <v-expansion-panel-header
-                  >April 25, 2022</v-expansion-panel-header
+                  >April 25, 2023</v-expansion-panel-header
                 >
                 <v-expansion-panel-content>
                   <p>
@@ -330,12 +330,11 @@
                     problems with this revision of the API, please submit an
                     issue at
                     <a
-                      :href="$url('/school/transition/')"
+                      href="http://github.com/rticwdt/college-scorecard/"
                       target="_blank"
                       @click="
                         transitionOutboundLink(
-                          $event,
-                          'http://github.com/rticwdt/college-scorecard/'
+                          $event
                         )
                       "
                       >http://github.com/rticwdt/college-scorecard/<i
