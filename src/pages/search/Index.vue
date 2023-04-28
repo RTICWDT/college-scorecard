@@ -618,7 +618,9 @@ export default {
         ...params,
       })
 
-      history.replaceState(params, "search", qs)
+      if (process.isClient) {
+        history.replaceState(params, "search", qs)
+      }
 
       this.addURLToStorage(qs)
 

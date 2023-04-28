@@ -115,7 +115,6 @@
                 </h2>
               </div>
               <!-- Search Fields of Study Component -->
-              <!-- :auto-submit="$vuetify.breakpoint.smAndDown ? false : true"-->
               <search-fos-form
                 :url-parsed-params="urlParsedParams"
                 auto-submit
