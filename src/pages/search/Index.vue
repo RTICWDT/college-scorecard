@@ -126,6 +126,7 @@
                 :class="$vuetify.breakpoint.smAndDown ? 'mx-4 mt-4' : 'd-none'"
                 color="secondary"
                 large
+                v-show="false"
                 @click="showSidebar = !showSidebar"
                 >Find Schools</v-btn
               >
@@ -495,6 +496,7 @@ export default {
     this.utility.formDefault = _.cloneDeep(this.input)
 
     this.urlParsedParams = this.parseURLParams()
+
     if (this.$vuetify.breakpoint.smAndDown) {
       this.showSidebar = false
     } else {
@@ -627,6 +629,12 @@ export default {
 
           this.$emit("loading", false)
           this.shareUrl = window.location.href
+
+          if (this.$vuetify.breakpoint.smAndDown) {
+          this.showSidebar = false
+        } else {
+          this.showSidebar = true
+        }          
         })
         .catch((error) => {
           console.warn("Error fetching search.")

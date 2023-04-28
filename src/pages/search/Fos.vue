@@ -115,6 +115,7 @@
                 </h2>
               </div>
               <!-- Search Fields of Study Component -->
+              <!-- :auto-submit="$vuetify.breakpoint.smAndDown ? false : true"-->
               <search-fos-form
                 :url-parsed-params="urlParsedParams"
                 auto-submit
@@ -533,6 +534,12 @@ export default {
     this.utility.formDefault = _.cloneDeep(this.input)
     this.urlParsedParams = forms.parseURLParams()
 
+    if (this.$vuetify.breakpoint.smAndDown) {
+      this.showSidebar = false
+    } else {
+      this.showSidebar = true
+    }
+    
     // Add sort to state if it exists
     this.input.sort = this.urlParsedParams.sort
       ? this.urlParsedParams.sort
@@ -628,6 +635,14 @@ export default {
           if (process.isClient) {
             this.shareUrl = window.location.href
           }
+
+          if (this.$vuetify.breakpoint.smAndDown) {
+          this.showSidebar = false
+        } else {
+          this.showSidebar = true
+        }
+
+    console.log(this.showSidebar)
         })
         .catch((error) => {
           this.isLoading = false
