@@ -3,6 +3,7 @@
     <v-btn
       :text="!isSelected && !isFull"
       small
+      class="mr-2"
       color="white"
       @click="
         $store.commit('toggleSchool', {
