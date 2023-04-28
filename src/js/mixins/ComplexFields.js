@@ -664,8 +664,12 @@ export default {
 
             for (var l of degreeLevels)
             {
-                if (l == degreeLevels[degreeLevels.length - 1])
-                    degreesList += "and " + formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Degree", "")  + " Degrees"
+                if (l == degreeLevels[degreeLevels.length - 1]) {
+                    if (degreeLevels.length > 1)
+                        degreesList += "and " + formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Degree", "")  + " Degrees"
+                    else 
+                        degreesList += formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Degree", "")  + " Degrees"
+                }
                 else if (l == degreeLevels[degreeLevels.length - 2])
                     degreesList += formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Degree", " ")
                 else
@@ -674,8 +678,12 @@ export default {
 
             for (var l of certLevels)
             {
-                if (l == certLevels[certLevels.length - 1])
-                    certList += "and " + formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Certificate", "") + " Certificates"
+                if (l == certLevels[certLevels.length - 1]) {
+                    if (certLevels.length > 1)
+                        certList += "and " + formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Certificate", "") + " Certificates"
+                    else 
+                        certList += formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Certificate", "") + " Certificates"
+                }
                 else if (l == certLevels[certLevels.length - 2])
                     certList += formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Certificate", " ")
                 else
@@ -683,6 +691,9 @@ export default {
             }
 
             var ret = degreesList + ((degreesList && certList) ? " as well as " + certList : certList)
+
+            if (certLevels.length == 0 && degreeLevels.length == 0)
+                ret = "no Degrees or Certificates"
 
             return ret;
         }      
