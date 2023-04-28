@@ -1,6 +1,5 @@
 html {
   @media screen and (max-width: 500px) {
-    font-size: 13px !important;
   }
   body {
     overflow-x: hidden;
@@ -14,9 +13,6 @@ html {
 
   .v-pagination {
     justify-content: flex-end;
-    @media screen and (max-width: 600px) {
-      justify-content: space-between;
-    }
     button {
       box-shadow: 0px 1px 1px #0000001a !important;
       border: 1px solid $bg-gray;
@@ -218,60 +214,65 @@ html {
 }
 
 .theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state)
-    > .v-input__control
-    > .v-input__slot
-    fieldset {
-    color: #dfe6f0;
+  > .v-input__control
+  > .v-input__slot
+  fieldset {
+  color: #dfe6f0;
+}
+
+.theme--light.v-tabs
+  > .v-tabs-bar
+  .v-tab:not(.v-tab--active):not(.search-tab):not(.data-tab):not(.fos-sort-tab) {
+  color: #fff !important;
+  font-weight: lighter !important;
+  font-family: $base-font-family;
+}
+
+#fos-search-and-chips .v-icon.v-icon {
+  font-size: 18px;
+}
+
+#search-from-location-select,
+#institution-search-box {
+  color: $black;
+  font-size: 14px;
+}
+
+#search-from-location-select::placeholder,
+#institution-search-box::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: $black;
+  opacity: 1; /* Firefox */
+}
+
+#search-from-location-select:-ms-input-placeholder,
+#institution-search-box:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: $black;
+}
+
+#search-from-location-select::-ms-input-placeholder,
+#institution-search-box::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: $black;
+}
+
+.v-input--checkbox {
+  .v-icon.v-icon {
+    color: #dfe6f0 !important; //this seems wrong to me. too light.
   }
-
-
-  .theme--light.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active):not(.search-tab):not(.data-tab):not(.fos-sort-tab) {
-    color:#fff !important;
-    font-weight:lighter !important;
-    font-family: $base-font-family; 
+  .v-input__slot {
+    align-items: center;
+    margin-top: 5px;
   }
+}
 
-  #fos-search-and-chips .v-icon.v-icon {
-    font-size:18px;
-  }
+.mdi-checkbox-marked::before {
+  //v-checkbox checked
+  color: #000;
+}
 
-
-
-  #search-from-location-select,  #institution-search-box {
-    color: $black;
-    font-size: 14px;     
-  }
-
-  #search-from-location-select::placeholder, #institution-search-box::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: $black;
-    opacity: 1; /* Firefox */
-  }
-  
-  #search-from-location-select:-ms-input-placeholder, #institution-search-box:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: $black;
-  }
-  
-  #search-from-location-select::-ms-input-placeholder, #institution-search-box::-ms-input-placeholder  { /* Microsoft Edge */
-    color: $black;
-  }
-
-  .v-input--checkbox  {
-    .v-icon.v-icon {
-      color:#DFE6F0 !important; //this seems wrong to me. too light. 
-    }
-    .v-input__slot {
-      align-items: center;
-      margin-top:5px;
-    }
-  }
-
-  .mdi-checkbox-marked::before { //v-checkbox checked
-    color:#000;
-  }
-
-  .v-application .elevation-2 {
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.1), 
-    0 2px 2px 0 rgba(0, 0, 0, 0.07), 
+.v-application .elevation-2 {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.07),
     0 1px 5px 0 rgba(0, 0, 0, 0.06) !important;
-  }
-  
+}

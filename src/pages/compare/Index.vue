@@ -1129,11 +1129,10 @@
                           are available, like income-driven repayment. An
                           <a
                             target="_blank"
-                            :href="$url('/school/transition/')"
+                            href="https://studentaid.gov/manage-loans/repayment/plans/income-driven"
                             @click="
                               transitionOutboundLink(
-                                $event,
-                                'https://studentaid.gov/manage-loans/repayment/plans/income-driven'
+                                $event
                               )
                             "
                             >income-driven repayment<v-icon

@@ -368,6 +368,7 @@
             aria-labelledby="specialized-mission-label"
             dense
             outlined
+            style="z-index: 200"
           ></v-select> </v-expansion-panel-content></v-expansion-panel
       ><v-expansion-panel
         ><v-expansion-panel-header
@@ -386,6 +387,7 @@
             aria-labelledby="religions-affiliation-label"
             dense
             outlined
+            style="z-index: 200"
           ></v-select>
         </v-expansion-panel-content> </v-expansion-panel
       ><v-expansion-panel>
@@ -412,7 +414,6 @@
     </div>
     <v-btn
       type="submit"
-      v-show="autoSubmit"
       class="sr-only"
       color="secondary"
       large
@@ -530,8 +531,9 @@ export default {
   watch: {
     cleanInput: {
       handler(newValue, oldValue) {
+
         // On first load trigger query immediately, then debounce additional queries.
-        if (!this.autoSubmit) {
+        if (!this.autoSubmit || _.isEqual(newValue, oldValue)) {
           return
         }
 
@@ -698,6 +700,8 @@ export default {
       // Send new param object, reset page
       this.$emit("search-query", { ...this.cleanInput, page: 0 })
     }, 1000)
+
+    this.$emit("search-query", { ...this.cleanInput, page: 0 })
   },
   mounted() {
     this.$root.$on("search-form-reset", (e) => {

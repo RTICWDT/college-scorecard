@@ -1,4 +1,4 @@
-import { fields } from '../constants.js';
+import { fields, formMappings } from '../constants.js';
 import { SiteData } from './SiteData.js';
 import "~/js/filters.js"
 import _ from 'lodash';
@@ -652,8 +652,39 @@ export default {
         },
         schoolDegreeList() {
             if (!this.school) return null;
-            //return _.get(this.school, this.fields['EARNINGS_GT_HS']) 
-            return "Bachelor's, Master's and Doctoral Degrees, as well as Graduate/Professional Certificates"  
+            let programs = _.get(this.school, this.fields.FIELD_OF_STUDY);
+            let programLevels  = []
+            programLevels = programs.map(p => p.credential.level).filter((x, i, a) => a.indexOf(x) == i)
+
+            var degreeLevels = programLevels.filter((x, i, a) => [2,3,5,6,7].includes(x))
+            var certLevels = programLevels.filter((x, i, a) => [1,4,8].includes(x))
+
+            var degreesList = ""
+            var certList = ""
+
+            for (var l of degreeLevels)
+            {
+                if (l == degreeLevels[degreeLevels.length - 1])
+                    degreesList += "and " + formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Degree", "")  + " Degrees"
+                else if (l == degreeLevels[degreeLevels.length - 2])
+                    degreesList += formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Degree", " ")
+                else
+                    degreesList += formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Degree", ", ")
+            }
+
+            for (var l of certLevels)
+            {
+                if (l == certLevels[certLevels.length - 1])
+                    certList += "and " + formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Certificate", "") + " Certificates"
+                else if (l == certLevels[certLevels.length - 2])
+                    certList += formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Certificate", " ")
+                else
+                    certList += formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Certificate", ", ")
+            }
+
+            var ret = degreesList + ((degreesList && certList) ? " as well as " + certList : certList)
+
+            return ret;
         }      
     },
     methods: {

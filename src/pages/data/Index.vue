@@ -86,11 +86,10 @@
               <strong>Looking for help?</strong><br />
               Visit
               <a
-                :href="$url('/school/transition/')"
+                href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
                 @click="
                   transitionOutboundLink(
-                    $event,
-                    'http://opendata.stackexchange.com/questions/tagged/collegescorecard'
+                    $event
                   )
                 "
                 target="_blank"
