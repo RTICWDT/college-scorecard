@@ -127,10 +127,13 @@
 }
 
 #field-of-study-select-search-text {
-  padding-left:20px;
+  padding-left:10px;
 }
 
 #field-of-study-select-search-container2 {
+  .v-input__prepend-inner {
+    z-index:2;
+  }
   fieldset {
     background:white;
   }
