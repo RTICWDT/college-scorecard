@@ -56,6 +56,11 @@
   font-size: 1rem;
 }
 
+.v-card__title {
+  word-break:normal;
+  word-wrap:break-word;
+}
+
 .tool-tip-dialog-title {
   word-break: normal;
   word-wrap: break-word;
