@@ -2,12 +2,7 @@
     "headers": [
       {
         "/*": {
-          "cache-control": "no-store"
-        }
-      },
-      {
-        "/*": {
-          "cache-control": "private"
+          "cache-control": "private, no-store"
         }
       }
     ]
