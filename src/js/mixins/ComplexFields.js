@@ -669,7 +669,7 @@ export default {
                 var label = formMappings['fosDegrees'].find(e => e.value === level.toString())['label'].replace(" Degree", "");
                 if (level == degreeLevels[degreeLevels.length - 1]) {
                     if (degreeLevels.length > 1)
-                        degreesList += "and " +   + " Degrees"
+                        degreesList += " and " + label  + " Degrees"
                     else 
                         degreesList += label  + " Degrees"
                 }
@@ -686,7 +686,7 @@ export default {
                 if (level == certLevels[certLevels.length - 1]) {
                     
                     if (certLevels.length > 1)
-                        certList += "and " + label + " Certificates"
+                        certList += " and " + label + " Certificates"
                     else 
                         certList += label + " Certificates"
                 }
@@ -703,7 +703,7 @@ export default {
                 ugCertList = label
             }            
 
-            var ret = degreesList + ((degreesList && certList) ? " as well as " + certList : certList) + (degreesList || certList) ? " and " : "" + ugCertLabel
+            var ret = degreesList + ((degreesList && certList) ? " as well as " + certList : certList) + (((certList || degreesList) && ugCertList) ?  ", and " + ugCertList : ugCertList)
 
             if (certLevels.length == 0 && degreeLevels.length == 0)
                 ret = "no Degrees or Certificates"
