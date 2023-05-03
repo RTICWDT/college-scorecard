@@ -657,40 +657,53 @@ export default {
             programLevels = programs.map(p => p.credential.level).filter((x, i, a) => a.indexOf(x) == i)
 
             var degreeLevels = programLevels.filter((x, i, a) => [2,3,5,6,7].includes(x))
-            var certLevels = programLevels.filter((x, i, a) => [1,4,8].includes(x))
+            var certLevels = programLevels.filter((x, i, a) => [4,8].includes(x))
+            var ugCertLevels = programLevels.filter((x, i, a) => [1].includes(x))
 
             var degreesList = ""
-            var certList = ""
+            var certList = ""  
+            var ugCertList = ""
 
-            for (var l of degreeLevels)
+            for (var level of degreeLevels)
             {
-                if (l == degreeLevels[degreeLevels.length - 1]) {
+                var label = formMappings['fosDegrees'].find(e => e.value === level.toString())['label'].replace(" Degree", "");
+                if (level == degreeLevels[degreeLevels.length - 1]) {
                     if (degreeLevels.length > 1)
-                        degreesList += "and " + formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Degree", "")  + " Degrees"
+                        degreesList += " and " + label  + " Degrees"
                     else 
-                        degreesList += formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Degree", "")  + " Degrees"
+                        degreesList += label  + " Degrees"
                 }
-                else if (l == degreeLevels[degreeLevels.length - 2])
-                    degreesList += formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Degree", " ")
+                else if (level == degreeLevels[degreeLevels.length - 2])
+                    degreesList += label
                 else
-                    degreesList += formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Degree", ", ")
+                    degreesList += label + ", "
             }
 
-            for (var l of certLevels)
+            for (var level of certLevels)
             {
-                if (l == certLevels[certLevels.length - 1]) {
+                var label = formMappings['fosDegrees'].find(e => e.value === level.toString())['label'].replace(" Certificate", "")
+                
+                if (level == certLevels[certLevels.length - 1]) {
+                    
                     if (certLevels.length > 1)
-                        certList += "and " + formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Certificate", "") + " Certificates"
+                        certList += " and " + label + " Certificates"
                     else 
-                        certList += formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Certificate", "") + " Certificates"
+                        certList += label + " Certificates"
                 }
-                else if (l == certLevels[certLevels.length - 2])
-                    certList += formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Certificate", " ")
+                else if (level == certLevels[certLevels.length - 2])
+                    certList += label
                 else
-                    certList += formMappings['fosDegrees'].find(e => e.value === l.toString())['label']. replace(" Certificate", ", ")
+                    certList += label + ", "
             }
 
-            var ret = degreesList + ((degreesList && certList) ? " as well as " + certList : certList)
+            for (var level of ugCertLevels)
+            {
+                var label = formMappings['fosDegrees'].find(e => e.value === level.toString())['label']
+                
+                ugCertList = label
+            }            
+
+            var ret = degreesList + ((degreesList && certList) ? " as well as " + certList : certList) + (((certList || degreesList) && ugCertList) ?  ", and " + ugCertList : ugCertList)
 
             if (certLevels.length == 0 && degreeLevels.length == 0)
                 ret = "no Degrees or Certificates"
