@@ -136,7 +136,6 @@
   }
   fieldset {
     background:white;
-    opacity:1;
   }
 }
 </style>
