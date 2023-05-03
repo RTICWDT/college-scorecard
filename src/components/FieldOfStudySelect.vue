@@ -28,8 +28,8 @@
       clearable
       outlined
       hide-details
+      class="mx-11"
       prepend-inner-icon="fas fa-search"
-      class=" mx-11"
     >
       <template slot="append">
         <v-icon class="fos-search-text-icon" v-if="displayMenu"
@@ -127,10 +127,13 @@
 }
 
 #field-of-study-select-search-text {
-  padding-left:20px;
+  padding-left:10px;
 }
 
 #field-of-study-select-search-container2 {
+  .v-input__prepend-inner {
+    z-index:2;
+  }
   fieldset {
     background:white;
   }
