@@ -311,7 +311,10 @@ export default {
         return null
       } else {
         this.displayMenu = false
-        document.getElementById("field-of-study-select-search-text").blur()
+         if (document.getElementById("field-of-study-select-search-text")) {
+          document.getElementById("field-of-study-select-search-text").blur()
+         }
+        
       }
     })
   },
