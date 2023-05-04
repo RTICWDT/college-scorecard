@@ -200,6 +200,43 @@
                             </span>
                           </v-btn>
 
+                          <v-menu  v-if="$vuetify.breakpoint.smAndDown">
+                            <template v-slot:activator="{ on }">
+                              <v-btn
+                                id="search-button-sort"
+                                small
+                                v-on="on"
+                                outlined
+                                class="mr-3 mb-1 mb-sm-0 searchbtn"
+                                elevation="1"
+                              >
+
+                                Sort:
+                                {{
+                                  sorts.find((el) => el.field === input.sort.split(':')[0]).type + " " + sorts.find((el) => el.field === input.sort.split(':')[0]).direction
+                                }}
+                              </v-btn>
+                            </template>
+                            <v-list min-width="200">
+                              <v-list-item-group
+                                v-model="input.sort"
+                                color="primary"
+                                mandatory
+                              >
+                                <v-list-item
+                                  v-for="(item, index) in sorts"
+                                  :key="item.type"
+                                  @click="changeSort(item.type)"
+                                  :value="item.field"
+                                >
+                                  <v-list-item-title>{{
+                                    item.type
+                                  }}</v-list-item-title>
+                                </v-list-item>
+                              </v-list-item-group>
+                            </v-list>
+                          </v-menu>                          
+
                           <share
                             :url="encodeURI(shareUrl)"
                             label="Share"
@@ -337,6 +374,7 @@
                             sm="3"
                             v-for="sort in sorts"
                             :key="sort.type"
+                            v-if="!$vuetify.breakpoint.smAndDown"
                           >
                             <a
                               :class="{
@@ -364,6 +402,7 @@
                               ></i
                             ></a>
                           </v-col>
+
                         </v-row>
                         <!-- Fields of Study Results -->
                         <v-row>
@@ -483,20 +522,20 @@ export default {
         {
           type: "Earnings",
           field:
-            "latest.programs.cip_4_digit.earnings.4_yr.overall.median_earnings",
+            "fos_median_earnings",
           current: false,
           direction: "asc",
         },
         {
           type: "Debt",
           field:
-            "latest.programs.cip_4_digit.debt.staff_grad_plus.all.all_inst.median",
+            "fos_debt",
           current: false,
           direction: "asc",
         },
         {
           type: "Graduates",
-          field: "latest.programs.cip_4_digit.counts.ipeds_awards1",
+          field: "fos_graduates",
           current: false,
           direction: "asc",
         },
@@ -634,7 +673,6 @@ export default {
           this.showSidebar = true
         }
 
-    console.log(this.showSidebar)
         })
         .catch((error) => {
           this.isLoading = false
@@ -706,8 +744,10 @@ export default {
       this.debounceSearchUpdate()
     },
     changeSort(selected) {
+      
       this.sorts.map((itm) => {
         if (itm.type == selected) {
+          
           itm.current = true
           itm.direction = itm.direction == "asc" ? "desc" : "asc"
           this.input.sort = `${itm.field}:${itm.direction}`
