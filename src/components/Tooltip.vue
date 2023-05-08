@@ -7,7 +7,7 @@
       class="align-start ml-n2"
       aria-label="More Information"
     >
-      <v-icon x-small allow-overflow :color="color" dark
+      <v-icon x-small allow-overflow :color="color" dark class="tooltip-icon"
         >fas fa-info-circle</v-icon
       >
       <span class="sr-only">More Information</span>

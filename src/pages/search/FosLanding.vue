@@ -6,7 +6,7 @@
 
 <template>
   <div>
-    <v-main>
+    <v-main class="pt-sm-0">
       <div class="home-splash">
         <v-card tile class="tab-card">
           <search-tabs :selected="1" />

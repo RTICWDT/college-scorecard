@@ -258,7 +258,7 @@ html {
 }
 
 .v-input--checkbox {
-  .v-icon.v-icon {
+  .v-icon.v-icon:not(.tooltip-icon) {
     color: #dfe6f0 !important; //this seems wrong to me. too light.
   }
   .v-input__slot {
