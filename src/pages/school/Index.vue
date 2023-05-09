@@ -33,7 +33,7 @@
       <div id="school-sub-nav-header">
         <v-container>
           <v-row>
-            <v-col cols="3">
+            <v-col cols="1">
               <v-btn
                 small
                 color="white"
@@ -45,7 +45,7 @@
               >
             </v-col>
 
-            <v-col cols="9" class="text-right d-flex justify-end">
+            <v-col cols="11" class="text-right d-flex justify-sm-end justify-space-evenly">
               <add-to-compare :school="school" />
 
               <share
