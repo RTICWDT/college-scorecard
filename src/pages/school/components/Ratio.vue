@@ -22,7 +22,6 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   height: 200px;
   font-weight: 600;
   font-size: 28px;
