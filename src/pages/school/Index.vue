@@ -77,10 +77,18 @@
             </v-chip>
             <h1
               id="profile-institution-title"
-              class="display-3 font-weight-bold pa-0 mb-4"
+              class="small-display-3 font-weight-bold pa-0 mb-4"
+              v-if="$vuetify.breakpoint.smAndDown"
             >
               {{ schoolName }}
             </h1>
+            <h1
+              id="profile-institution-title"
+              class="display-3 font-weight-bold pa-0 mb-4"
+              v-else
+            >
+              {{ schoolName }}
+            </h1>            
             <div class="population my-1">
               <span class="font-weight-bold">{{
                 undergraduates | separator
@@ -1910,15 +1918,12 @@
                                 <tooltip definition="race-eth" />
                               </h2>
                               <div class="d-flex align-items-center">
-                                <div
-                                  style="background:#1874DC;margin-right:10px;height:10px;width:10px;display:inline-block;"
-                                ></div>
-                                Student Body
-                                <br />
-                                <div
-                                  style="background:#102E52;margin-left:10px;margin-right:10px;height:10px;width:10px;display:inline-block;"
-                                ></div>
-                                Full-Time Staff
+                                <div class="mt-4 d-inline-block float-left">
+                                  <div class="key-box medium-blue"></div>
+                                  Student Body
+                                  <div class="key-box ml-3 mid-dark-blue"></div>
+                                  Full-Time Staff
+                                </div>
                               </div>
                             </div>
                           </v-col>
@@ -2350,6 +2355,10 @@ span.arrow-left {
 #field-of-study-select-search-container2 {
   background-color: $fos-color-yellow;
   padding-bottom: 24px;
+}
+
+.small-display-3 {
+  font-size:2.6rem;
 }
 </style>
 
