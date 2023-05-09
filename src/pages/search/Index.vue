@@ -685,6 +685,7 @@ export default {
       )
     },
     resort(sort) {
+      console.log(sort)
       this.input.sort = sort
       var params = this.parseURLParams()
       params.sort = this.input.sort
