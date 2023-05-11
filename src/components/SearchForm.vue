@@ -94,7 +94,7 @@
             class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="Master's Degree"
-            value="4"
+            value="5"
             color="secondary"
             hide-details
           ></v-checkbox>
@@ -104,7 +104,7 @@
             class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="Post-baccalaureate Certificate"
-            value="5"
+            value="4"
             color="secondary"
             hide-details
           ></v-checkbox>
@@ -433,6 +433,7 @@ import { SiteData } from "~/js/mixins/SiteData.js"
 import LocationCheck from "~/js/mixins/LocationCheck.js"
 import Tooltip from "~/components/Tooltip.vue"
 import LocationInstitutionSearch from "~/components/LocationInstitutionSearch.vue"
+import { formMappings } from "~/js/constants.js"
 
 export default {
   mixins: [SiteData, LocationCheck],
@@ -554,6 +555,9 @@ export default {
     },
   },
   computed: {
+    fosDegrees() {
+      return formMappings.fosDegrees
+    },
     // Remove items that are not set
     cleanInput() {
       let defaultValues = _.cloneDeep(this.utility.formDefault)
