@@ -94,7 +94,7 @@
             class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="Master's Degree"
-            value="4"
+            value="5"
             color="secondary"
             hide-details
           ></v-checkbox>
@@ -104,7 +104,7 @@
             class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="Post-baccalaureate Certificate"
-            value="5"
+            value="4"
             color="secondary"
             hide-details
           ></v-checkbox>
