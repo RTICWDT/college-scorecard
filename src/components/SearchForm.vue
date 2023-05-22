@@ -37,7 +37,7 @@
 </style>
 
 <template>
-  <v-form>
+  <v-form novalidate="false">
     <v-expansion-panels
       accordion
       multiple
