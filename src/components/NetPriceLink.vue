@@ -2,7 +2,7 @@
   <v-btn
     color="secondary"
     target="_blank"
-    href="fixedUrl"
+    :href="fixedUrl"
     @click="transitionOutboundLink($event)"
     v-if="url"
   >
