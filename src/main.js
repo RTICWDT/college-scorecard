@@ -37,7 +37,9 @@ export default function (Vue, { router, head, isClient, appOptions }) {
 
   appOptions.vuetify = new Vuetify({
     theme: {
-      options: { customProperties: true},
+      options: { 
+        customProperties: true,
+        cspNonce: 'dQw4w9WgXcQ'}, 
       themes: {
         light: {
           primary: '#027A48',
