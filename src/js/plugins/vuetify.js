@@ -15,6 +15,7 @@ const vuetify = new Vuetify({
             error: '#b61d1c',
       },
     },
+    options: { cspNonce: 'dQw4w9WgXcQ' },
   },
 })
 
