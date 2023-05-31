@@ -9,7 +9,7 @@ module.exports = {
   plugins: [],
   pathPrefix: process.env.BASEURL || '/', //use for federalist
   chainWebpack (config) {
-    config.mode('development')
+    config.mode('production')
   }, 
   siteDescription: "Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs, graduation, and post-college earnings."
 }
