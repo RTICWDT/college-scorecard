@@ -1,4 +1,4 @@
-import { fields } from '../constants.js';
+import { fields, formMappings } from '../constants.js';
 import { SiteData } from './SiteData.js';
 import "~/js/filters.js"
 import _ from 'lodash';
@@ -10,6 +10,7 @@ export default {
             return fields;
         },
         id() {
+            console.log(this.school)
             if (!this.school) return null;
             return _.get(this.school, this.fields['ID']);
         },
@@ -25,6 +26,10 @@ export default {
             if (!this.school) return null;
             return _.get(this.school, this.fields['STATE'], 'N/A')
         },
+        zip() {
+            if (!this.school) return null;
+            return _.get(this.school, this.fields['ZIP_CODE'], 'N/A');
+        },        
         schoolUrlDisplay() {
             if (!this.school) return null;
             return _.get(this.school, this.fields['SCHOOL_URL'], 'ed.gov')
@@ -146,6 +151,7 @@ export default {
             if (!this.school) return null;
             let output = [];
             let re = _.get(this.school, this.fields["RACE_ETHNICITY"]);
+            let re_staff = _.get(this.school, this.fields["RACE_ETHNICITY_STAFF"]);
             let include = [
                 "aian",
                 "asian",
@@ -158,13 +164,20 @@ export default {
                 "white"
             ];
             for (let p = 0; p < include.length; p++) {
+                var student_item = include[p];
+                var faculty_item = include[p];
+
+                if (include[p] == "non_resident_alien")
+                    faculty_item = "nonresident";
+
                 output.push({
                     label: this.site.data.race_ethnicity[include[p]],
-                    value: re[include[p]]
+                    value: re[student_item],
+                    staff_value: re_staff[faculty_item]
                 });
             }
-
-            return _.sortBy(output, ["value"]).reverse();
+            console.log(output)
+            return _.sortBy(output, ["label"]);
         },
         retentionRate() {
             if (!this.school) return null;
@@ -272,6 +285,10 @@ export default {
             if (!this.school) return null;
             return _.get(this.school, this.fields['PELL_PERCENTAGE']);
         },
+        studentRatio() {
+            if (!this.school) return null;
+            return _.get(this.school, this.fields['STUDENT_RATIO']);
+        },          
         netPriceCalculatorUrl() {
             if (!this.school) return null;
             return _.get(this.school, this.fields['NET_PRICE_CALC_URL'], '#');
@@ -538,14 +555,14 @@ export default {
         fakeMedianEarnings() {
             var medians = {
                 1 : 
-                    { 0 : 27937,
-                    1 : 36834 },
+                    { 0 : 28562,
+                    1 : 38436 },
                 2 : 
-                    { 0 : 36041,
-                    1 : 36834 },
+                    { 0 : 37834,
+                    1 : 38436 },
                 3 : 
-                    { 0 : 47922,
-                    1 : 36834 },                                
+                    { 0 : 50391,
+                    1 : 38436 },                                
             }
 
             return medians;
@@ -553,28 +570,28 @@ export default {
         fakeAverageAnnualCosts() {
             var medians = {
                 1 : 
-                    { 0 : 15733,
-                    1 : 15951 },
+                    { 0 : 16190,
+                    1 : 16030 },
                 2 : 
-                    { 0 : 8816,
-                    1 : 15951 },
+                    { 0 : 8528,
+                    1 : 16030 },
                 3 : 
-                    { 0 : 19526,
-                    1 : 15951 },                                
+                    { 0 : 18902,
+                    1 : 16030 },                                
             }
             return medians;
         },      
         fakeGraduationRate() {
             var medians = {
                 1 : 
-                    { 0 : 0.6842,
-                    1 : 0.5875 },
+                    { 0 : 0.6803,
+                    1 : 0.5937 },
                 2 : 
-                    { 0 : 0.30295,
-                    1 : 0.5875 },
+                    { 0 : 0.3178,
+                    1 : 0.5937 },
                 3 : 
-                    { 0 : 0.5698,
-                    1 : 0.5875 },                                
+                    { 0 : 0.5788,
+                    1 : 0.5937 },                                
             }
             return medians;
         },        
@@ -632,7 +649,67 @@ export default {
         percentMoreThanHS() {
             if (!this.school) return null;
             return _.get(this.school, this.fields['EARNINGS_GT_HS'])            
-        }        
+        },
+        schoolDegreeList() {
+            if (!this.school) return null;
+            let programs = _.get(this.school, this.fields.FIELD_OF_STUDY);
+            let programLevels  = []
+            programLevels = programs.map(p => p.credential.level).filter((x, i, a) => a.indexOf(x) == i)
+
+            var degreeLevels = programLevels.filter((x, i, a) => [2,3,5,6,7].includes(x))
+            var certLevels = programLevels.filter((x, i, a) => [4,8].includes(x))
+            var ugCertLevels = programLevels.filter((x, i, a) => [1].includes(x))
+
+            var degreesList = ""
+            var certList = ""  
+            var ugCertList = ""
+
+            for (var level of degreeLevels)
+            {
+                var label = formMappings['fosDegrees'].find(e => e.value === level.toString())['label'].replace(" Degree", "");
+                if (level == degreeLevels[degreeLevels.length - 1]) {
+                    if (degreeLevels.length > 1)
+                        degreesList += " and " + label  + " Degrees"
+                    else 
+                        degreesList += label  + " Degrees"
+                }
+                else if (level == degreeLevels[degreeLevels.length - 2])
+                    degreesList += label
+                else
+                    degreesList += label + ", "
+            }
+
+            for (var level of certLevels)
+            {
+                var label = formMappings['fosDegrees'].find(e => e.value === level.toString())['label'].replace(" Certificate", "")
+                
+                if (level == certLevels[certLevels.length - 1]) {
+                    
+                    if (certLevels.length > 1)
+                        certList += " and " + label + " Certificates"
+                    else 
+                        certList += label + " Certificates"
+                }
+                else if (level == certLevels[certLevels.length - 2])
+                    certList += label
+                else
+                    certList += label + ", "
+            }
+
+            for (var level of ugCertLevels)
+            {
+                var label = formMappings['fosDegrees'].find(e => e.value === level.toString())['label']
+                
+                ugCertList = label
+            }            
+
+            var ret = degreesList + ((degreesList && certList) ? " as well as " + certList : certList) + (((certList || degreesList) && ugCertList) ?  ", and " + ugCertList : ugCertList)
+
+            if (certLevels.length == 0 && degreeLevels.length == 0)
+                ret = "no Degrees or Certificates"
+
+            return ret;
+        }      
     },
     methods: {
         orderByWithNullsAtEnd(pArray, pAttr, pReverse) {
@@ -760,6 +837,36 @@ export default {
                 key: 'bachelor',
                 title: "bachelor's Degree",
                 filterValue: 3,
+                items:[]
+            },
+            {
+                key: 'postbaccalaureate',
+                title: "post-baccalaureate Certificate",
+                filterValue: 4,
+                items:[]
+            },
+            {
+                key: 'master',
+                title: "master's Degree",
+                filterValue: 5,
+                items:[]
+            },
+            {
+                key: 'doctor',
+                title: "doctoral Degree",
+                filterValue: 6,
+                items:[]
+            },
+            {
+                key: 'firstprofessional',
+                title: "first Professional Degree",
+                filterValue: 7,
+                items:[]
+            },
+            {
+                key: 'graduatecertificate',
+                title: "graduate/Professional Certificate",
+                filterValue: 8,
                 items:[]
             }
         ]

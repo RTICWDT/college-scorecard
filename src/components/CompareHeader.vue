@@ -5,7 +5,7 @@
     @click="toggleDrawer()"
     v-show="currentSchoolCount > 0 || currentFieldOfStudyCount > 0"
   >
-    <div class="compare-header-text ml-8 mr-6 mb-1">
+    <div class="compare-header-text ml-8 mr-6 mb-1 d-none d-sm-inline">
       <v-icon class="mt-1" color="black" size="24"> </v-icon>
 
       Ready to Compare:

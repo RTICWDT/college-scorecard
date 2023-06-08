@@ -20,6 +20,10 @@ export default {
       type: String,
       default: "#333333",
     },
+    bgcolor: {
+      type: String,
+      default: "#EAEAEA"
+    },
     labels: {
       type: Boolean,
       default: false,
@@ -75,29 +79,35 @@ export default {
             display: this.labels,
             font: (context) => {
               if (this.labelFontSize != "18") {
-                return { 
-                  family: '"Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif',
-                  weight: 700,                  
-                  size: this.labelFontSize }
+                return {
+                  family:
+                    '"neue-haas-grotesk-display", "Helvetica Neue", Helvetica, arial, sans-serif',
+                  weight: 700,
+                  size: this.labelFontSize,
+                }
               } else {
                 if (context.chart.height < 20) {
-                  return { 
-                    family: '"Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif',
-                    weight: 700,                    
-                    size: 18 }
-                } else {
-                  return { 
-                    family: '"Public Sans", "Helvetica Neue", Helvetica, arial, sans-serif',
+                  return {
+                    family:
+                      '"neue-haas-grotesk-display", "Helvetica Neue", Helvetica, arial, sans-serif',
                     weight: 700,
-                    size: 18 }
+                    size: 18,
+                  }
+                } else {
+                  return {
+                    family:
+                      '"neue-haas-grotesk-display", "Helvetica Neue", Helvetica, arial, sans-serif',
+                    weight: 700,
+                    size: 18,
+                  }
                 }
               }
             },
             color: function(context) {
               let value = context.dataset.data[context.dataIndex]
               let max = context.chart.options.scales.xAxes[0].ticks.max
-              if (value > max / 10) {
-                return "#FFFFFF"
+              if (value > max - max / 10) {
+                //return "#FFFFFF"
               } else {
                 return "#000000"
               }
@@ -105,7 +115,7 @@ export default {
             align: function(context) {
               let value = context.dataset.data[context.dataIndex]
               let max = context.chart.options.scales.xAxes[0].ticks.max
-              if (value > max / 10) {
+              if (value > max - max / 10) {
                 return "start"
               } else {
                 return "end"
@@ -149,7 +159,7 @@ export default {
           },
           {
             data: [this.max],
-            backgroundColor: "#EAEAEA",
+            backgroundColor: this.bgcolor,
             barThickness: this.yBarThickness,
           },
         ],

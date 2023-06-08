@@ -7,7 +7,7 @@
       class="align-start ml-n2"
       aria-label="More Information"
     >
-      <v-icon x-small allow-overflow :color="color" dark
+      <v-icon x-small allow-overflow :color="color" dark class="tooltip-icon"
         >fas fa-info-circle</v-icon
       >
       <span class="sr-only">More Information</span>
@@ -17,9 +17,9 @@
         <v-btn @click="showDialog = false" icon class="float-right mt-3 mr-3"
           ><v-icon>fas fa-times-circle</v-icon></v-btn
         >
-        <v-card-title class="tool-tip-dialog-title">{{ title }}</v-card-title>
+        <v-card-title>{{ title }}</v-card-title>
         <v-card-text class="pb-5">
-          <div v-html="content"></div>
+          <div class="tooltip-text" v-html="content" @click="handleClicks"></div>
           <!-- <p v-if="limitedFoS">
             The data shown is for undergraduate fields of study (undergraduate
             certificates, associate's degrees, and bachelor's degrees) for which
@@ -35,11 +35,10 @@
             all of their locations.
           </p>
           <div v-if="info" v-html="info"></div>
-          <p class="text-center mt-3" v-if="hasGlossary">
+          <p class="mt-3" v-if="hasGlossary">
             <v-btn
               :href="$url('/data/glossary/#' + definition)"
               small
-              rounded
               color="secondary"
               class="px-4"
               target="_blank"
@@ -57,6 +56,11 @@
   font-size: 1rem;
 }
 
+.v-card__title {
+  word-break:normal;
+  word-wrap:break-word;
+}
+
 .tool-tip-dialog-title {
   word-break: normal;
   word-wrap: break-word;
@@ -72,14 +76,15 @@
 
 <script>
 import { SiteData } from "~/js/mixins/SiteData.js"
+import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 
 export default {
-  mixins: [SiteData],
+  mixins: [SiteData, AnalyticsEvents],
   props: {
     definition: String,
     color: {
       type: String,
-      default: "blue darken-3",
+      default: "darkgrey",
     },
     version: {
       type: String,
@@ -114,6 +119,37 @@ export default {
     return {
       showDialog: false,
     }
+  },
+  methods: {
+    handleClicks(event) {
+      // ensure we use the link, in case the click has been received by a subelement
+      let { target } = event
+
+      console.log(target)
+
+      while (target && target.tagName !== "A") target = target.parentNode
+      // handle only links that occur inside the component and do not reference external resources
+      if (target && target.matches(".tooltip-text p a") && target.href) {
+        // some sanity checks taken from vue-router:
+        // https://github.com/vuejs/vue-router/blob/dev/src/components/link.js#L106
+        const {
+          altKey,
+          ctrlKey,
+          metaKey,
+          shiftKey,
+          button,
+          defaultPrevented,
+        } = event
+        // don't handle with control keys
+        if (metaKey || altKey || ctrlKey || shiftKey) return
+        // don't handle when preventDefault called
+        if (defaultPrevented) return
+        // don't handle right clicks
+        if (button !== undefined && button !== 0) return
+
+        this.transitionOutboundLink(event)
+      }
+    },
   },
   computed: {
     glossary() {

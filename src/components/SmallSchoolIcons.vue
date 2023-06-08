@@ -80,7 +80,7 @@
     width: 55px;
     font-size: 0.7rem;
     margin-right: 5px;
-    color: $dark-gray;
+    color: $black;
 
     .school-key_figures-year {
       display: block;

@@ -11,7 +11,7 @@
             v-on="on"
             :style="{ 'background-image': 'url(' + $url(yearIcon) + ')' }"
           >
-            <span>{{ years | formatYearsLabel }}</span>
+            <span :class=fontClass>{{ years | formatYearsLabel }}</span>
           </li>
         </template>
         <div class="hover-tip">{{ tip }}</div>
@@ -37,9 +37,12 @@
             v-on="on"
             :style="{ 'background-image': 'url(' + $url(sizeIcon) + ')' }"
           >
-            <span>{{
+            <span v-if="!sizeOnly">{{
               _.get(school, fields["SIZE"], "-1") | sizeCategory
             }}</span>
+            <strong v-if="sizeOnly">{{
+              _.get(school, fields["SIZE"], "-1") | sizeCategory
+            }}</strong>            
           </li>
         </template>
         <div class="hover-tip">{{ sizeTip }}</div>
@@ -71,7 +74,7 @@
 
   li {
     display: inline-block;
-    font-weight: 600;
+    font-weight: normal;
     line-height: 1.1;
     min-height: $height;
     padding-top: ($height + 5px);
@@ -79,7 +82,7 @@
     vertical-align: top;
     width: 80px;
     margin-right: 5px;
-    color: $dark-gray;
+    color: $black;
 
     .school-key_figures-year {
       display: block;
@@ -125,6 +128,10 @@ export default {
       default: false,
       type: Boolean,
     },
+    fontClass: {
+      default: "",
+      type: String,
+    },    
   },
   computed: {
     years() {

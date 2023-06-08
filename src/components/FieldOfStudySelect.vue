@@ -24,10 +24,12 @@
       @click="handleSelectFocus"
       @click:append="handleSelectFocus"
       @click:clear="handleInputClear"
-      placeholder="Type to search"
+      placeholder="Enter a Field of Study"
       clearable
       outlined
       hide-details
+      prepend-inner-icon="fas fa-search"
+      class="mx-11"
     >
       <template slot="append">
         <v-icon class="fos-search-text-icon" v-if="displayMenu"
@@ -38,9 +40,10 @@
     </v-text-field>
 
     <v-card
-      class="field-of-study-select-search-result pa-2"
+      class="field-of-study-select-search-result pr-2 mx-11"
       :id="resultId"
       v-show="displayMenu"
+      max-width="92.5%"
     >
       <v-list v-show="displayFOS.length > 0">
         <v-list-group v-for="cip2 in displayFOS" :key="cip2.name">
@@ -96,6 +99,7 @@
   z-index: 8;
   border: 2px $fos-color-gold solid !important;
   border-top: none !important;
+  width:10%;
 
   .v-list-item__title {
     text-overflow: unset;
@@ -122,6 +126,19 @@
 .field-of-study-search-item-body {
   padding-left: 20px;
   /*border: 1px solid black;*/
+}
+
+#field-of-study-select-search-text {
+  padding-left:10px;
+}
+
+#field-of-study-select-search-container2 {
+  .v-input__prepend-inner {
+    z-index:2;
+  }
+  fieldset {
+    background:white;
+  }
 }
 </style>
 
@@ -296,7 +313,10 @@ export default {
         return null
       } else {
         this.displayMenu = false
-        document.getElementById("field-of-study-select-search-text").blur()
+         if (document.getElementById("field-of-study-select-search-text")) {
+          document.getElementById("field-of-study-select-search-text").blur()
+         }
+        
       }
     })
   },

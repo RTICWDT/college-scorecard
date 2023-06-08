@@ -80,6 +80,7 @@ export const fields = {
   PART_TIME_SHARE:      'latest.student.part_time_share',
   FEMALE_SHARE:         'latest.student.demographics.female_share',
   RACE_ETHNICITY:       'latest.student.demographics.race_ethnicity',
+  RACE_ETHNICITY_STAFF:       'latest.student.demographics.faculty.race_ethnicity',  
   AGE_ENTRY:            'latest.student.demographics.age_entry',
 
   TEST_REQUIREMENTS:    'latest.admissions.test_requirements',
@@ -132,18 +133,22 @@ export const fields = {
   // FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.earnings.median_earnings',
   // FIELD_OF_STUDY_DEBT:      'latest.programs.cip_4_digit.debt.median_debt',
 
-  FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.earnings.highest.3_yr.overall_median_earnings',
-  FIELD_OF_STUDY_DEBT:      'latest.programs.cip_4_digit.debt.staff_grad_plus.all.all_inst.median',
+  FIELD_OF_STUDY_EARNINGS:  'latest.programs.cip_4_digit.earnings.4_yr.overall_median_earnings',
+  FIELD_OF_STUDY_DEBT:      'latest.programs.cip_4_digit.debt.staff_grad_plus.all.eval_inst.median',
 
   // New Field Of Study Metrics
   // Full Paths
   FIELD_OF_STUDY_EARNINGS_FED: 'latest.programs.cip_4_digit.earnings.highest.3_yr.overall_median_earnings',
   FIELD_OF_STUDY_EARNINGS_PELL: 'latest.programs.cip_4_digit.earnings.highest.3_yr.pell_median_earnings',
 
+  FIELD_OF_STUDY_GRADUATES: 'latest.programs.cip_4_digit.counts.ipeds_awards2',
+
   // Relative Paths
-  FOS_GRAD_COUNT: 'counts.ipeds_awards2',
+  FOS_GRAD_COUNT: 'counts.ipeds_awards1',
   FOS_EARNINGS_FED: 'earnings.highest.3_yr.overall_median_earnings',
   FOS_EARNINGS_PELL: 'earnings.highest.3_yr.pell_median_earnings',
+  FOS_EARNINGS_FED_4YR: 'earnings.4_yr.overall_median_earnings',
+  FOS_EARNINGS_PELL_4YR: 'earnings.4_yr.pell_median_earnings',
 
   // FOS_DEBT_MEDIAN: 'debt.test.federal.median_total_at',
   FOS_DEBT_MEDIAN: 'debt.staff_grad_plus.all.eval_inst.median',
@@ -167,6 +172,9 @@ export const fields = {
   EARNINGS_MIDPOINT_ALL: 'latest.earnings.10_yrs_after_entry.consumer.overall_median',
   EARNINGS_MIDPOINT_PRED_DEGREE: 'latest.earnings.10_yrs_after_entry.consumer.median_by_pred_degree',
 
+  
+  STUDENT_RATIO: 'latest.student.demographics.student_faculty_ratio',
+
 
   //Location
   LATITUDE:                 'location.lat',
@@ -183,7 +191,10 @@ export const formMappings = {
     completion_rate:    fields.COMPLETION_RATE,
     alias:              fields.ALIAS,
     median_earnings:    fields.MEDIAN_EARNINGS,
-    threshold_earnings:  fields.EARNINGS_GT_HS
+    threshold_earnings:  fields.EARNINGS_GT_HS,
+    fos_median_earnings: fields.FIELD_OF_STUDY_EARNINGS,
+    fos_graduates: fields.FIELD_OF_STUDY_GRADUATES,
+    fos_debt: fields.FIELD_OF_STUDY_DEBT
   },
 
   control: {
@@ -202,7 +213,17 @@ export const formMappings = {
     a: '2',
     b: '3',
     c: '1'
-  }
+  },
+  fosDegrees: [
+    { 'value': '1', 'label': 'Undergraduate Certificate or Diploma' },
+    { 'value': '2', 'label': 'Associate\'s Degree' },
+    { 'value': '3', 'label': 'Bachelor\'s Degree' },
+    { 'value': '4', 'label': 'Post-baccalaureate Certificate' },
+    { 'value': '5', 'label': 'Master\'s Degree' },
+    { 'value': '6', 'label': 'Doctoral Degree' },
+    { 'value': '7', 'label': 'First Professional Degree' },
+    { 'value': '8', 'label': 'Graduate/Professional Certificate' }
+  ]
 };
 
 export const localStorageKeys = {

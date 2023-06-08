@@ -8,20 +8,13 @@
   }
 }
 
-.v-application .primary--text {
-  color: green !important;
-}
-
-.subhead-2 {
-  margin-top: 1rem !important;
-  margin-bottom: 0.3rem !important;
-  font-weight: 600;
-  font-family: "Montserrat", sans-serif !important;
-}
-
 .search-panel-header {
   background-color: #c5d3e1;
   border-radius: 0px !important;
+}
+
+.search-subhead {
+  color:#A8B0BA;
 }
 
 #search-form-sub-degree-container {
@@ -45,417 +38,385 @@
 
 <template>
   <v-form>
-    <!--    <div class="px-4 pt-2 pb-2" v-if="displayAllFilters">-->
-    <!--      <h4 class="subhead-2 font-weight-bold mb-2">Search by Name</h4>-->
-    <!--      <name-autocomplete-->
-    <!--        @school-name-selected="handleSchoolNameSelected"-->
-    <!--        :initial_school="input.search"-->
-    <!--      />-->
-    <!--    </div>-->
-
-    <div class="py-2 px-5">
-      <div class="" v-show="displayAllFilters">
-        <p class="subhead-2">Search by Name</p>
-        <name-autocomplete
-          @school-name-selected="handleSchoolNameSelected"
-          :initial_school="input.search"
-          @school-name-cleared="handleSchoolNameSelected"
-        />
-      </div>
-
-      <p class="subhead-2" id="location-label">Location</p>
-      <v-select
-        id="search-from-location-select"
-        v-model="utility.location"
-        @change="handleLocationChange"
-        :items="['Near Me', 'ZIP Code', 'State']"
-        hide-details
-        class="mb-3 mt-0 pt-0"
-        aria-labelledby="location-label"
-        :placeholder="utility.location ? undefined : 'Select an option'"
-        clearable
-         @keydown.enter="$event.preventDefault()"
-      />
-
-      <div class="d-flex align-center" v-if="utility.location === 'ZIP Code'">
-        <v-text-field
-          id="search-form-zip-text"
-          v-model="input.zip"
-          label="ZIP Code"
-          hideDetails
-          class="mb-3 mr-3"
-          type="number"
-          :rules="[utility.rules.zip]"
-          min="0"
-        ></v-text-field>
-        <v-text-field
-          v-model="input.distance"
-          :rules="[utility.rules.required, utility.rules.numerical]"
-          label="Distance in Miles"
-          :disabled="!input.zip"
-          hideDetails
-          class="mb-3"
-          type="number"
-          min="1"
-        ></v-text-field>
-      </div>
-
-      <div class="d-flex align-center" v-if="utility.location === 'Near Me'">
-        <v-icon
-          v-on="on"
-          :color="locationButtonColor"
-          v-html="
-            location.isLoading ? 'fas fa-circle-notch fa-spin' : 'mdi-near-me'
-          "
-        ></v-icon>
-
-        <v-text-field
-          v-model="location.miles"
-          :rules="[utility.rules.required, utility.rules.numerical]"
-          label="Distance in Miles"
-          :disabled="!location.latLon"
-          hideDetails
-          class="mb-3"
-          type="number"
-        ></v-text-field>
-
-        <span v-show="location.error" class="overline">{{
-          location.error
-        }}</span>
-      </div>
-
-      <v-select
-        v-model="input.state"
-        id="search-form-state"
-        :items="site.data.states"
-        item-text="name"
-        item-value="abbr"
-        multiple
-        chips
-        hide-details
-        :placeholder="input.state.length > 0 ? undefined : 'Select a state...'"
-        class="mt-0 pt-0"
-        color="secondary"
-        deletable-chips
-        v-show="utility.location == 'State'"
-        aria-label="Select a state"
-      ></v-select>
-
-      <!-- cip4 - Degree subfield -->
-      <p class="subhead-2" id="fields-label">Academic Fields</p>
-      <field-autocomplete v-model="input.cip4"></field-autocomplete>
+    <v-expansion-panels
+      accordion
+      multiple
+      style="border-radius: 0"
+      v-model="panels"
+      class="elevation-0"
+    >
+      <v-expansion-panel>
+        <v-expansion-panel-header>Academic Fields</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <field-autocomplete v-model="input.cip4"></field-autocomplete>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
 
       <!-- Credential Level -->
-      <p class="subhead-2">Degrees/Certificate</p>
-      <v-checkbox
-        id="search-form-fos-degree-c"
-        class="search-form-degree-cb my-0 py-0"
-        v-model="input.cip4_degree"
-        label="Certificate"
-        value="c"
-        color="secondary"
-        hide-details
-      ></v-checkbox>
+      <v-expansion-panel>
+        <v-expansion-panel-header>Degree Types</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <span class="search-subhead">Undergraduate</span>
+          <v-checkbox
+            id="search-form-fos-degree-c"
+            class="search-form-degree-cb my-0 py-0"
+            v-model="input.cip4_degree"
+            label="Certificate"
+            value="1"
+            color="secondary"
+            hide-details
+          ></v-checkbox>
 
-      <v-checkbox
-        id="search-form-fos-degree-a"
-        class="search-form-degree-cb my-0 py-0"
-        v-model="input.cip4_degree"
-        label="Associate's Degree"
-        value="a"
-        color="secondary"
-        hide-details
-      ></v-checkbox>
+          <v-checkbox
+            id="search-form-fos-degree-a"
+            class="search-form-degree-cb my-0 py-0"
+            v-model="input.cip4_degree"
+            label="Associate's Degree"
+            value="2"
+            color="secondary"
+            hide-details
+          ></v-checkbox>
 
-      <v-checkbox
-        id="search-form-fos-degree-b"
-        class="search-form-degree-cb my-0 py-0"
-        v-model="input.cip4_degree"
-        label="Bachelor's Degree"
-        value="b"
-        color="secondary"
-        hide-details
-      ></v-checkbox>
+          <v-checkbox
+            id="search-form-fos-degree-b"
+            class="search-form-degree-cb my-0 pt-0 pb-5"
+            v-model="input.cip4_degree"
+            label="Bachelor's Degree"
+            value="3"
+            color="secondary"
+            hide-details
+          ></v-checkbox> 
 
+
+          <span class="search-subhead pt-5">Graduate</span>
+          <v-checkbox
+            id="search-form-fos-degree-c"
+            class="search-form-degree-cb my-0 py-0"
+            v-model="input.cip4_degree"
+            label="Master's Degree"
+            value="5"
+            color="secondary"
+            hide-details
+          ></v-checkbox>
+
+          <v-checkbox
+            id="search-form-fos-degree-a"
+            class="search-form-degree-cb my-0 py-0"
+            v-model="input.cip4_degree"
+            label="Post-baccalaureate Certificate"
+            value="4"
+            color="secondary"
+            hide-details
+          ></v-checkbox>
+
+          <v-checkbox
+            id="search-form-fos-degree-b"
+            class="search-form-degree-cb my-0 py-0"
+            v-model="input.cip4_degree"
+            label="Doctoral Degree"
+            value="6"
+            color="secondary"
+            hide-details
+          ></v-checkbox>       
+          
+          <v-checkbox
+            id="search-form-fos-degree-a"
+            class="search-form-degree-cb my-0 py-0"
+            v-model="input.cip4_degree"
+            label="First Professional Degree"
+            value="7"
+            color="secondary"
+            hide-details
+          ></v-checkbox>
+
+          <v-checkbox
+            id="search-form-fos-degree-b"
+            class="search-form-degree-cb my-0 py-0"
+            v-model="input.cip4_degree"
+            label="Graduate/Professional Certificate"
+            value="8"
+            color="secondary"
+            hide-details
+          ></v-checkbox>            
+          </v-expansion-panel-content
+      ></v-expansion-panel>
+
+      <v-expansion-panel v-if="!hideLocation">
+        <v-expansion-panel-header>Location</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <location-institution-search
+            @search-query="handleLocationSelection"
+            :horizontal="false"
+          />
+        </v-expansion-panel-content>
+      </v-expansion-panel>
       <!-- Graduation Rate -->
-      <div>
-        <check-range
-          legend-title="Graduation Rate"
-          id="search-form-completion-rate"
-          v-model="input.completion_rate"
-          :enable="utility.enable.completion_rate"
-          @slider-toggle="utility.enable.completion_rate = $event"
-          :min="0"
-          :max="100"
-          :step="5"
-          appendText="%"
-          class="mt-5"
-          andUp
-        ></check-range>
-      </div>
+      <v-expansion-panel>
+        <v-expansion-panel-header> Graduation Rate</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <check-range
+            id="search-form-completion-rate"
+            v-model="input.completion_rate"
+            :enable="utility.enable.completion_rate"
+            @slider-toggle="utility.enable.completion_rate = $event"
+            :min="0"
+            :max="100"
+            :step="5"
+            appendText="%"
+            class="mt-5"
+            andUp
+          ></check-range>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
 
       <!-- Average Annual Cost -->
-      <div>
-        <check-range
-          legend-title="Average Annual Cost"
-          id="search-form-avg-net-price"
-          v-model="input.avg_net_price"
-          :enable="utility.enable.avg_net_price"
-          @slider-toggle="utility.enable.avg_net_price = $event"
-          :min="0"
-          :max="100"
-          :step="5"
-          appendText="k"
-        ></check-range>
-      </div>
+      <v-expansion-panel>
+        <v-expansion-panel-header>
+          Average Annual Cost </v-expansion-panel-header
+        ><v-expansion-panel-content>
+          <check-range
+            id="search-form-avg-net-price"
+            v-model="input.avg_net_price"
+            :enable="utility.enable.avg_net_price"
+            @slider-toggle="utility.enable.avg_net_price = $event"
+            :min="0"
+            :max="100"
+            :step="5"
+            appendText="k"
+          ></check-range>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+      <v-expansion-panel>
+        <v-expansion-panel-header> Test Scores</v-expansion-panel-header
+        ><v-expansion-panel-content>
+          <check-range
+            v-model="input.sat_math"
+            id="search-form-sat-math"
+            :enable="utility.enable.sat_math"
+            @slider-toggle="utility.enable.sat_math = $event"
+            :min="0"
+            :max="800"
+            :step="20"
+            legend-title="SAT Math"
+          >
+          </check-range>
 
-      <div v-show="!displayAllFilters" class="subhead-2">
-        WIOA Programs&nbsp;<tooltip definition="wioa-participants" />
-      </div>
-      <v-checkbox
-        id="search-form-dolflag"
-        class="search-form-dolflag-cb my-0 py-0"
-        v-model="input.dolflag"
-        label="Only show schools that have Department of Labor WIOA programs"
-        value="true"
-        color="secondary"
-        hide-details
-        v-show="!displayAllFilters"
-      ></v-checkbox>
-    </div>
+          <check-range
+            v-model="input.sat_read"
+            id="search-form-sat-read"
+            :enable="utility.enable.sat_read"
+            @slider-toggle="utility.enable.sat_read = $event"
+            :min="0"
+            :max="800"
+            :step="20"
+            legend-title="SAT Critical Reading"
+          >
+          </check-range>
 
-    <div v-show="displayAllFilters" class="px-5 extraFilters">
-      <check-range
-        v-model="input.sat_math"
-        id="search-form-sat-math"
-        :enable="utility.enable.sat_math"
-        @slider-toggle="utility.enable.sat_math = $event"
-        :min="0"
-        :max="800"
-        :step="20"
-      >
-        <template v-slot:label
-          >SAT Math</template
-        >
-      </check-range>
+          <check-range
+            v-model="input.act"
+            id="search-form-act"
+            :enable="utility.enable.act"
+            @slider-toggle="utility.enable.act = $event"
+            :min="0"
+            :max="36"
+            :step="1"
+            legend-title="ACT Score"
+          >
+          </check-range> </v-expansion-panel-content
+      ></v-expansion-panel>
+      <v-expansion-panel>
+        <v-expansion-panel-header>Acceptance Rate</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <check-range
+            v-model="input.acceptance"
+            id="search-form-acceptance"
+            :enable="utility.enable.acceptance"
+            @slider-toggle="utility.enable.acceptance = $event"
+            :min="0"
+            :max="100"
+            :step="5"
+            appendText="%"
+            andUp
+          >
+            <template v-slot:label
+              >Acceptance Rate</template
+            >
+          </check-range>
+        </v-expansion-panel-content></v-expansion-panel
+      ><v-expansion-panel>
+        <v-expansion-panel-header> Size</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <v-checkbox
+            id="search-form-size-small"
+            hide-details
+            v-model="input.size"
+            label="Small"
+            value="small"
+            color="secondary"
+            class="py-0 my-0"
+          ></v-checkbox>
 
-      <check-range
-        v-model="input.sat_read"
-        id="search-form-sat-read"
-        :enable="utility.enable.sat_read"
-        @slider-toggle="utility.enable.sat_read = $event"
-        :min="0"
-        :max="800"
-        :step="20"
-      >
-        <template v-slot:label
-          >SAT Critical Reading</template
-        >
-      </check-range>
+          <v-checkbox
+            id="search-form-size-medium"
+            hide-details
+            v-model="input.size"
+            label="Medium"
+            value="medium"
+            color="secondary"
+            class="py-0 my-0"
+          ></v-checkbox>
 
-      <check-range
-        v-model="input.act"
-        id="search-form-act"
-        :enable="utility.enable.act"
-        @slider-toggle="utility.enable.act = $event"
-        :min="0"
-        :max="36"
-        :step="1"
-      >
-        <template v-slot:label
-          >ACT Score</template
-        >
-      </check-range>
+          <v-checkbox
+            id="search-form-size-large"
+            hide-details
+            v-model="input.size"
+            label="Large"
+            value="large"
+            color="secondary"
+            class="py-0 my-0"
+          ></v-checkbox> </v-expansion-panel-content></v-expansion-panel
+      ><v-expansion-panel
+        ><v-expansion-panel-header>Type of School</v-expansion-panel-header
+        ><v-expansion-panel-content>
+          <div class="search-form-type-container">
+            <v-checkbox
+              id="search-form-type-public"
+              hide-details
+              v-model="input.control"
+              label="Public"
+              value="public"
+              color="secondary"
+              class="py-0 my-0"
+            ></v-checkbox>
 
-      <check-range
-        v-model="input.acceptance"
-        id="search-form-acceptance"
-        :enable="utility.enable.acceptance"
-        @slider-toggle="utility.enable.acceptance = $event"
-        :min="0"
-        :max="100"
-        :step="5"
-        appendText="%"
-        andUp
-      >
-        <template v-slot:label
-          >Acceptance Rate</template
-        >
-      </check-range>
+            <v-checkbox
+              id="search-form-type-private"
+              hide-details
+              v-model="input.control"
+              label="Private Nonprofit"
+              value="private"
+              color="secondary"
+              class="py-0 my-0"
+            ></v-checkbox>
 
-      <!-- <p class='overline'>School Characteristics</p> -->
+            <v-checkbox
+              id="search-form-type-profit"
+              hide-details
+              v-model="input.control"
+              label="Private For-Profit"
+              value="profit"
+              color="secondary"
+              class="py-0 my-0"
+            ></v-checkbox>
+          </div> </v-expansion-panel-content></v-expansion-panel
+      ><v-expansion-panel
+        ><v-expansion-panel-header>Urbanicity</v-expansion-panel-header
+        ><v-expansion-panel-content>
+          <v-checkbox
+            id="search-form-locale-city"
+            hide-details
+            v-model="input.locale"
+            label="City"
+            value="city"
+            color="secondary"
+            class="py-0 my-0"
+          ></v-checkbox>
 
-      <p class="subhead-2 mb-3">Size</p>
-      <div>
-        <v-checkbox
-          id="search-form-size-small"
-          hide-details
-          v-model="input.size"
-          label="Small"
-          value="small"
-          color="secondary"
-          class="py-0 my-0"
-        ></v-checkbox>
+          <v-checkbox
+            id="search-form-locale-suburban"
+            hide-details
+            v-model="input.locale"
+            label="Suburban"
+            value="suburban"
+            color="secondary"
+            class="py-0 my-0"
+          ></v-checkbox>
 
-        <v-checkbox
-          id="search-form-size-medium"
-          hide-details
-          v-model="input.size"
-          label="Medium"
-          value="medium"
-          color="secondary"
-          class="py-0 my-0"
-        ></v-checkbox>
+          <v-checkbox
+            id="search-form-locale-town"
+            hide-details
+            v-model="input.locale"
+            label="Town"
+            value="town"
+            color="secondary"
+            class="py-0 my-0"
+          ></v-checkbox>
 
-        <v-checkbox
-          id="search-form-size-large"
-          hide-details
-          v-model="input.size"
-          label="Large"
-          value="large"
-          color="secondary"
-          class="py-0 my-0"
-        ></v-checkbox>
-      </div>
-
-      <p class="subhead-2">Type of School</p>
-      <div class="search-form-type-container">
-        <v-checkbox
-          id="search-form-type-public"
-          hide-details
-          v-model="input.control"
-          label="Public"
-          value="public"
-          color="secondary"
-          class="py-0 my-0"
-        ></v-checkbox>
-
-        <v-checkbox
-          id="search-form-type-private"
-          hide-details
-          v-model="input.control"
-          label="Private Nonprofit"
-          value="private"
-          color="secondary"
-          class="py-0 my-0"
-        ></v-checkbox>
-
-        <v-checkbox
-          id="search-form-type-profit"
-          hide-details
-          v-model="input.control"
-          label="Private For-Profit"
-          value="profit"
-          color="secondary"
-          class="py-0 my-0"
-        ></v-checkbox>
-      </div>
-
-      <p class="subhead-2">Urbanicity</p>
-      <v-checkbox
-        id="search-form-locale-city"
-        hide-details
-        v-model="input.locale"
-        label="City"
-        value="city"
-        color="secondary"
-        class="py-0 my-0"
-      ></v-checkbox>
-
-      <v-checkbox
-        id="search-form-locale-suburban"
-        hide-details
-        v-model="input.locale"
-        label="Suburban"
-        value="suburban"
-        color="secondary"
-        class="py-0 my-0"
-      ></v-checkbox>
-
-      <v-checkbox
-        id="search-form-locale-town"
-        hide-details
-        v-model="input.locale"
-        label="Town"
-        value="town"
-        color="secondary"
-        class="py-0 my-0"
-      ></v-checkbox>
-
-      <v-checkbox
-        id="search-form-locale-rural"
-        hide-details
-        v-model="input.locale"
-        label="Rural"
-        value="rural"
-        color="secondary"
-        class="py-0 my-0"
-      ></v-checkbox>
-
-      <p class="subhead-2" id="specialized-mission-label">
-        Specialized Mission
-      </p>
-      <v-select
-        v-model="input.serving"
-        id="search-form-serving"
-        :items="cleanSpecializedMission"
-        item-text="value"
-        item-value="key"
-        placeholder="Select one..."
-        class="py-0 my-0"
-        color="secondary"
-        clearable
-        aria-labelledby="specialized-mission-label"
-      ></v-select>
-
-      <p class="subhead-2" id="religions-affiliation-label">
-        Religious Affiliation
-      </p>
-      <v-select
-        v-model="input.religious"
-        id="search-form-religous"
-        :items="site.data.religious_affiliations"
-        item-text="label"
-        item-value="value"
-        placeholder="Select one..."
-        class="py-0 my-0"
-        color="secondary"
-        clearable
-        aria-labelledby="religions-affiliation-label"
-      ></v-select>
-
-      <p class="subhead-2">
-        WIOA Programs&nbsp;<tooltip definition="wioa-participants" />
-      </p>
-      <v-checkbox
-        id="search-form-dolflag-2"
-        class="search-form-dolflag-cb my-0 py-0"
-        v-model="input.dolflag"
-        label="Only show schools that have Department of Labor WIOA programs"
-        value="true"
-        color="secondary"
-        hide-details
-      ></v-checkbox>
-    </div>
-
-    <div
-      id="search-submit-container"
-      class="pa-2 text-center"
-      v-show="!autoSubmit"
-    >
-      <v-btn
-        color="secondary"
-        rounded
-        @click="$emit('search-query', cleanInput)"
+          <v-checkbox
+            id="search-form-locale-rural"
+            hide-details
+            v-model="input.locale"
+            label="Rural"
+            value="rural"
+            color="secondary"
+            class="py-0 my-0"
+          ></v-checkbox> </v-expansion-panel-content></v-expansion-panel
+      ><v-expansion-panel
+        ><v-expansion-panel-header>Specialized Mission</v-expansion-panel-header
+        ><v-expansion-panel-content>
+          <v-select
+            v-model="input.serving"
+            id="search-form-serving"
+            :items="cleanSpecializedMission"
+            item-text="value"
+            item-value="key"
+            placeholder="Select one..."
+            class="py-0 my-0"
+            color="secondary"
+            clearable
+            aria-labelledby="specialized-mission-label"
+            dense
+            outlined
+            style="z-index: 200"
+          ></v-select> </v-expansion-panel-content></v-expansion-panel
+      ><v-expansion-panel
+        ><v-expansion-panel-header
+          >Religious Affiliation</v-expansion-panel-header
+        ><v-expansion-panel-content>
+          <v-select
+            v-model="input.religious"
+            id="search-form-religous"
+            :items="site.data.religious_affiliations"
+            item-text="label"
+            item-value="value"
+            placeholder="Select one..."
+            class="py-0 my-0"
+            color="secondary"
+            clearable
+            aria-labelledby="religions-affiliation-label"
+            dense
+            outlined
+            style="z-index: 200"
+          ></v-select>
+        </v-expansion-panel-content> </v-expansion-panel
+      ><v-expansion-panel>
+        <v-expansion-panel-header>
+          WIOA Programs&nbsp;<tooltip
+            definition="wioa-participants"
+          /> </v-expansion-panel-header
+        ><v-expansion-panel-content>
+          <v-checkbox
+            id="search-form-dolflag-2"
+            class="search-form-dolflag-cb my-0 py-0"
+            v-model="input.dolflag"
+            label="Only show schools that have Department of Labor WIOA programs"
+            value="true"
+            color="secondary"
+            hide-details
+          ></v-checkbox> </v-expansion-panel-content
+      ></v-expansion-panel>
+    </v-expansion-panels>
+    <div id="search-submit-container" class="py-5" v-show="!autoSubmit">
+      <v-btn color="secondary" large @click="$emit('search-query', cleanInput)"
         >Find Schools</v-btn
       >
     </div>
     <v-btn
       type="submit"
-      v-show="autoSubmit"
       class="sr-only"
       color="secondary"
-      rounded
+      large
       @click="$emit('search-query', cleanInput)"
       >Find Schools</v-btn
     >
@@ -471,6 +432,7 @@ import FieldAutocomplete from "~/components/FieldAutocomplete.vue"
 import { SiteData } from "~/js/mixins/SiteData.js"
 import LocationCheck from "~/js/mixins/LocationCheck.js"
 import Tooltip from "~/components/Tooltip.vue"
+import LocationInstitutionSearch from "~/components/LocationInstitutionSearch.vue"
 
 export default {
   mixins: [SiteData, LocationCheck],
@@ -490,15 +452,23 @@ export default {
       type: Boolean,
       default: false,
     },
+    hideLocation: {
+      type: Boolean,
+      default: true,
+    },
   },
   components: {
     "check-range": CheckRange,
     "name-autocomplete": NameAutocomplete,
     "field-autocomplete": FieldAutocomplete,
     tooltip: Tooltip,
+    LocationInstitutionSearch,
   },
+
   data() {
     return {
+      panels: [0, 1],
+
       input: {
         id: null,
         state: [],
@@ -534,7 +504,9 @@ export default {
             const pattern = /^\d+$/
             return pattern.test(value) || "Numerical"
           },
-          zip: (value) => /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(value) || 'Must be ZIP code format',
+          zip: (value) =>
+            /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(value) ||
+            "Must be ZIP code format",
         },
         // Hold Default state of form data.
         formDefault: {},
@@ -559,8 +531,9 @@ export default {
   watch: {
     cleanInput: {
       handler(newValue, oldValue) {
+
         // On first load trigger query immediately, then debounce additional queries.
-        if (!this.autoSubmit) {
+        if (!this.autoSubmit || _.isEqual(newValue, oldValue)) {
           return
         }
 
@@ -578,31 +551,6 @@ export default {
         this.mapInputFromProp()
       },
       deep: true,
-    },
-    "location.latLon": {
-      // Proccess Lat/Long object for url values.
-      handler(newValue, oldValue) {
-        if (
-          newValue != null &&
-          newValue.min_lat &&
-          newValue.max_lat &&
-          newValue.min_lat &&
-          newValue.max_lat
-        ) {
-          this.input.lat =
-            newValue.min_lat.toFixed(4) + ".." + newValue.max_lat.toFixed(4)
-          this.input.long =
-            newValue.min_lon.toFixed(4) + ".." + newValue.max_lon.toFixed(4)
-        }
-      },
-    },
-    "location.miles"() {
-      this.handleLocationCheck()
-    },
-    "utility.location"(newValue, oldValue) {
-      if (newValue === "Near Me" && oldValue !== "Near Me") {
-        this.handleLocationCheck()
-      }
     },
   },
   computed: {
@@ -632,6 +580,7 @@ export default {
         this.utility.enable.completion_rate
       ) {
         groomedInput.completion_rate = groomedInput.completion_rate / 100 + ".."
+        this.panels.push(2)
       } else {
         _.unset(groomedInput, "completion_rate") // TODO: CONST;
       }
@@ -642,6 +591,7 @@ export default {
         this.utility.enable.avg_net_price
       ) {
         groomedInput.avg_net_price = ".." + groomedInput.avg_net_price * 1000
+        this.panels.push(3)
       } else {
         _.unset(groomedInput, "avg_net_price") // TODO: CONST;
       }
@@ -652,6 +602,7 @@ export default {
         this.utility.enable.sat_math
       ) {
         groomedInput.sat_math = ".." + groomedInput.sat_math
+        this.panels.push(4)
       } else {
         _.unset(groomedInput, "sat_math") // TODO: CONST;
       }
@@ -662,12 +613,14 @@ export default {
         this.utility.enable.sat_read
       ) {
         groomedInput.sat_read = ".." + groomedInput.sat_read
+        this.panels.push(4)
       } else {
         _.unset(groomedInput, "sat_read") // TODO: CONST;
       }
 
       if (groomedInput.act && groomedInput.act > 0 && this.utility.enable.act) {
         groomedInput.act = ".." + groomedInput.act
+        this.panels.push(4)
       } else {
         _.unset(groomedInput, "act") // TODO: CONST;
       }
@@ -678,6 +631,7 @@ export default {
         this.utility.enable.acceptance
       ) {
         groomedInput.acceptance = groomedInput.acceptance / 100 + "..1"
+        this.panels.push(5)
       } else {
         _.unset(groomedInput, "acceptance") // TODO: CONST;
       }
@@ -689,6 +643,24 @@ export default {
         _.unset(groomedInput, "distance")
       }
 
+      if (groomedInput.size) {
+        this.panels.push(6)
+      }
+      if (groomedInput.control) {
+        this.panels.push(7)
+      }
+      if (groomedInput.locale) {
+        this.panels.push(8)
+      }
+      if (groomedInput.serving) {
+        this.panels.push(9)
+      }
+      if (groomedInput.religious) {
+        this.panels.push(10)
+      }
+      if (groomedInput.dolflag) {
+        this.panels.push(11)
+      }
       return groomedInput
     },
     // Generate a URI string of params for forwarding to search page.
@@ -728,6 +700,8 @@ export default {
       // Send new param object, reset page
       this.$emit("search-query", { ...this.cleanInput, page: 0 })
     }, 1000)
+
+    this.$emit("search-query", { ...this.cleanInput, page: 0 })
   },
   mounted() {
     this.$root.$on("search-form-reset", (e) => {
@@ -825,28 +799,9 @@ export default {
       this.location.error = null
       this.utility.location = null
     },
-    // Reset values for sub objects to default
-    handleLocationChange(e) {
-      // TODO - Check to see if values need to be reset.
-      this.input.zip = ""
-      this.input.state = []
-
-      this.input.lat = null
-      this.input.long = null
-
-      this.location.latLon = null
-      this.location.error = null
-    },
-    handleSchoolNameSelected(school) {
-      if (typeof school == "string") {
-        // this.input.name = school;
-        this.input.search = school
-        // this.input.id = null
-      } else {
-        // this.input.name = school['school.name'];
-        this.input.search = school["school.name"]
-        // this.input.id = school.id
-      }
+    handleLocationSelection(params) {
+      this.input = { ...this.input, ...params }
+      this.input.page = 1
     },
   },
 }

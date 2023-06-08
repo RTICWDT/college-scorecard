@@ -17,6 +17,9 @@
       clearable
       v-on:click:clear="clear"
       aria-labelledby="fields-label"
+      dense
+      outlined
+      style="z-index: 200"
     />
   </div>
 </template>

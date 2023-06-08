@@ -1,6 +1,5 @@
 html {
   @media screen and (max-width: 500px) {
-    font-size: 13px !important;
   }
   body {
     overflow-x: hidden;
@@ -10,20 +9,16 @@ html {
 
 .v-application {
   font-family: $base-font-family !important;
-  background-repeat: repeat !important;
-  background-color: #2c74ad !important;
-  //background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 200 200'%3E%3Cpolygon fill='%23266aa4' fill-opacity='0.50' points='100 0 0 100 100 100 100 200 200 100 200 0'/%3E%3C/svg%3E") !important;
-  background-image: url("data:image/svg+xml,%3Csvg width='84' height='48' viewBox='0 0 84 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h12v6H0V0zm28 8h12v6H28V8zm14-8h12v6H42V0zm14 0h12v6H56V0zm0 8h12v6H56V8zM42 8h12v6H42V8zm0 16h12v6H42v-6zm14-8h12v6H56v-6zm14 0h12v6H70v-6zm0-16h12v6H70V0zM28 32h12v6H28v-6zM14 16h12v6H14v-6zM0 24h12v6H0v-6zm0 8h12v6H0v-6zm14 0h12v6H14v-6zm14 8h12v6H28v-6zm-14 0h12v6H14v-6zm28 0h12v6H42v-6zm14-8h12v6H56v-6zm0-8h12v6H56v-6zm14 8h12v6H70v-6zm0 8h12v6H70v-6zM14 24h12v6H14v-6zm14-8h12v6H28v-6zM14 8h12v6H14V8zM0 8h12v6H0V8z' fill='%233d82b1' fill-opacity='0.24' fill-rule='evenodd'/%3E%3C/svg%3E") !important;
+  background-color: $bg-gray !important;
 
-  .v-btn--is-elevated {
-    //box-shadow: none !important;
-  }
   .v-pagination {
     justify-content: flex-end;
-  }
-
-  .v-pagination__item {
-    //box-shadow: none !important;
+    button {
+      box-shadow: 0px 1px 1px #0000001a !important;
+      border: 1px solid $bg-gray;
+      height: auto;
+      padding: 1px 4px;
+    }
   }
 
   h1,
@@ -45,35 +40,24 @@ html {
   body,
   p {
     font-family: $base-font-family !important;
+    max-width: 800px;
   }
-
+  li {
+    max-width: 800px;
+  }
   a {
-    color: $darker-green !important;
+    color: $darker-green;
   }
-
+  hr {
+    border: 1px solid #dfe6f0;
+    border-bottom-style: none;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
   @media (min-width: 1904px) {
     .container {
       max-width: 1300px;
     }
-  }
-  .v-btn.secondary:not(.share):not(.fos-button):not(.filter-button):not(.component-toggle-button):not(.searchFab) {
-    letter-spacing: normal;
-    height: 50px !important;
-    border-radius: 16px !important;
-    //border:2px solid white !important;
-    //border-color:#fff !important;
-    color: #fff !important;
-    padding: 0 10%;
-  }
-
-  .v-btn.transition-button {
-    letter-spacing: normal;
-    height: 50px !important;
-    border-radius: 16px !important;
-    //border:2px solid white !important;
-    //border-color:#fff !important;
-    color: #000 !important;
-    padding: 0 10%;
   }
 
   .title,
@@ -84,10 +68,14 @@ html {
   .subtitle-2 {
     font-family: $header-font-family !important;
   }
+  .v-btn {
+    letter-spacing: normal;
+    text-transform: none;
+    box-shadow: none;
+  }
 
   .searchForTitle {
     font-weight: 600;
-    font-family: "Montserrat", sans-serif !important;
   }
 
   .display-2 {
@@ -103,12 +91,12 @@ html {
   .v-expansion-panel-header {
     font-weight: 500;
     font-family: $header-font-family !important;
-    font-size: 1.1rem;
+    font-size: 18px;
     line-height: 140%;
   }
   .v-expansion-panel-content {
     .v-expansion-panel-header {
-      font-size: 0.9rem;
+      font-size: 18px;
       font-weight: normal;
       line-height: 140%;
     }
@@ -119,10 +107,9 @@ html {
   }
   .v-card {
     overflow-wrap: normal;
+    border: 1px solid #dfe6f0;
+    border-radius: 6px;
     //box-shadow: none !important;
-  }
-  .theme--light.v-card > .v-card__text {
-    color: rgba(0, 0, 0, 0.87) !important;
   }
   .v-bottom-sheet--inset {
     @media screen and (min-width: 1000px) {
@@ -144,6 +131,11 @@ html {
     line-height: 160% !important;
     letter-spacing: normal !important;
   }
+  .v-tabs-items {
+    background-color: transparent;
+    box-shadow: 0px 10px 16px #0000001a !important;
+    border-radius: 0px 6px 6px 6px;
+  }
 
   #context-toggle {
     // No slider animations on context toggle
@@ -164,8 +156,9 @@ html {
 
   .mobile-navigation-item {
     .v-list-item__title {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       color: black;
+      font-weight: bold;
     }
   }
 
@@ -215,4 +208,72 @@ html {
   .v-main {
     padding-top: 20px !important;
   }
+}
+
+.toggle-sidebar.v-btn--outlined {
+  border: 1px solid #d8dfe8 !important;
+}
+
+.theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state)
+  > .v-input__control
+  > .v-input__slot
+  fieldset {
+  color: #dfe6f0;
+}
+
+.theme--light.v-tabs
+  > .v-tabs-bar
+  .v-tab:not(.v-tab--active):not(.search-tab):not(.data-tab):not(.fos-sort-tab) {
+  color: #fff !important;
+  font-weight: lighter !important;
+  font-family: $base-font-family;
+}
+
+#fos-search-and-chips .v-icon.v-icon {
+  font-size: 18px;
+}
+
+#search-from-location-select,
+#institution-search-box {
+  color: $black;
+  font-size: 14px;
+}
+
+#search-from-location-select::placeholder,
+#institution-search-box::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: $black;
+  opacity: 1; /* Firefox */
+}
+
+#search-from-location-select:-ms-input-placeholder,
+#institution-search-box:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: $black;
+}
+
+#search-from-location-select::-ms-input-placeholder,
+#institution-search-box::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: $black;
+}
+
+.v-input--checkbox {
+  .v-icon.v-icon:not(.tooltip-icon) {
+    color: #dfe6f0 !important; //this seems wrong to me. too light.
+  }
+  .v-input__slot {
+    align-items: center;
+    margin-top: 5px;
+  }
+}
+
+.mdi-checkbox-marked::before {
+  //v-checkbox checked
+  color: #000;
+}
+
+.v-application .elevation-2 {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.07),
+    0 1px 5px 0 rgba(0, 0, 0, 0.06) !important;
 }

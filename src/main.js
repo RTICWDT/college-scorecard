@@ -4,6 +4,8 @@ import Vuetify from 'vuetify'
 import Vuex from 'vuex'
 
 import "~/sass/style.scss";
+import 'leaflet/dist/leaflet.css';
+
 import '~/js/plugins/chartjs.js';
 
 import vueNumeralFilterInstaller from 'vue-numeral-filter';
@@ -35,12 +37,16 @@ export default function (Vue, { router, head, isClient, appOptions }) {
 
   appOptions.vuetify = new Vuetify({
     theme: {
+      options: { customProperties: true},
       themes: {
         light: {
-          primary: '#2B6091',
-          secondary: '#216D0A',
+          primary: '#027A48',
+          secondary: '#027A48',
           accent: '#8c9eff',
-          error: '#b61d1c'
+          error: '#b61d1c',
+          primaryfos: '#fdb022',
+          tertiary: '#ebf0f3',
+          darkgrey: '#6c737c'
         },
       },
     },
@@ -153,7 +159,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   //Twitter and OpenGraph
   head.meta.push({
     'http-equiv':'Content-Security-Policy',
-    content: "default-src 'unsafe-inline' 'unsafe-eval' 'self' https://dap.digitalgov.gov https://static.hotjar.com https://www.google-analytics.com https://www.gstatic.com https://www.googletagmanager.com https://script.hotjar.com; img-src 'self' data: *.cloud.gov *.googleapis.com *.google-analytics.com; child-src 'none'; script-src-elem * 'unsafe-inline'; style-src-elem 'self' 'unsafe-inline'; connect-src https://api.data.gov https://www.google-analytics.com *.hotjar.com https://dap.digitalgov.gov https://stats.g.doubleclick.net *.hotjar.io 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; frame-src https://vars.hotjar.com https://www.google.com"
+    content: "default-src 'unsafe-inline' 'unsafe-eval' 'self' https://www.gstatic.com https//*.typekit.net https://dap.digitalgov.gov https://static.hotjar.com https://www.google-analytics.com https://www.gstatic.com https://www.googletagmanager.com https://script.hotjar.com; img-src 'self' *.googletagmanager.com data: https://*.basemaps.cartocdn.com/ *.cloud.gov *.googleapis.com *.google-analytics.com; child-src 'none'; script-src-elem * 'unsafe-inline'; style-src-elem  https://www.gstatic.com https://*.typekit.net/ https://fonts.googleapis.com 'self' 'unsafe-inline'; connect-src  https://api.data.gov https://www.google-analytics.com *.hotjar.com https://dap.digitalgov.gov https://stats.g.doubleclick.net *.hotjar.io 'self'; font-src https://fonts.gstatic.com https://use.typekit.net 'self'; style-src https://www.gstatic.com https://use.typekit.net 'self' 'unsafe-inline'; frame-src https://vars.hotjar.com https://www.google.com"
   })
   head.meta.push({
     name: 'og:type',
@@ -177,11 +183,11 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   }) 
   head.meta.push({
     name: 'og:image',
-    content: 'https://collegescorecard.ed.gov/img/Scorecard-Preview-2022.jpg'
+    content: 'https://collegescorecard.ed.gov/img/CollegeScorecard-Blog-Image-updated.png'
   })   
   head.meta.push({
     name: 'twitter:image',
-    content: 'https://collegescorecard.ed.gov/img/Scorecard-Preview-2022.jpg'  
+    content: 'https://collegescorecard.ed.gov/img/CollegeScorecard-Blog-Image-updated.png'  
   })    
   
   head.script.push({
