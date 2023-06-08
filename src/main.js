@@ -205,7 +205,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   })    
   head.script.push({
     type: 'text/javascript',
-    src: 'https://www.googletagmanager.com/gtag/js?id=UA-48605964-29',
+    src: 'https://www.googletagmanager.com/gtag/js?id=G-19BFKPWV7B',
     async: true,
   })    
 }
