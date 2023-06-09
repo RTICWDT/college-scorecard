@@ -14,6 +14,7 @@ export default {
             {
                 href = evt.target.href;
             }
+            this.GATrackEvent('external_link', href);
 
         },
         transitionOutboundLink(event) {
@@ -38,14 +39,10 @@ export default {
             this.GATrackEvent('Comparison', 'School IDs', list);
         },
         GATrackEvent(category, action, label = window.location.pathname) {
-            if (window.gtag) {
-                try {
-                    gtag('event', action, { 'event_category' : category, 'event_label' : label });
-                } catch (e) {
-                    console.error('[gtag] event error');
-                }
-            } else {
-                //console.log('GA Event: [' + category + ', ' + action + ', ' + label + ']');
+            try {
+                gtag('event', action, { 'event_category' : category, 'event_label' : label });
+            } catch (e) {
+                console.error('[gtag] event error');
             }
         }
     }
