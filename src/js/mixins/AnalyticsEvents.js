@@ -38,11 +38,11 @@ export default {
             this.GATrackEvent('Comparison', 'School IDs', list);
         },
         GATrackEvent(category, action, label = window.location.pathname) {
-            if (window.ga) {
+            if (window.gtag) {
                 try {
-                    ga('send', 'event', category, action, label);
+                    gtag('event', action, { 'event_category' : category, 'event_label' : label });
                 } catch (e) {
-                    console.error('[ga] event error');
+                    console.error('[gtag] event error');
                 }
             } else {
                 //console.log('GA Event: [' + category + ', ' + action + ', ' + label + ']');
