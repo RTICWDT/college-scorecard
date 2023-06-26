@@ -164,10 +164,27 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     content: `"default-src 'self' https://www.gstatic.com https//*.typekit.net https://dap.digitalgov.gov https://static.hotjar.com https://www.google-analytics.com https://www.gstatic.com https://www.googletagmanager.com https://script.hotjar.com; 
     img-src 'self' *.googletagmanager.com data: https://*.basemaps.cartocdn.com/ *.cloud.gov *.googleapis.com *.google-analytics.com; child-src 'none'; 
     script-src-elem *; 
-    style-src-elem 'sha256-IQtfqzo2VPwYVfG45njd1UW4FZvVifJwM9V5cBNhx04=' 'sha256-yQomDylAVvpeRdlKgfqevQZtrtkp244GCzedeISNu5s=' https://www.gstatic.com https://*.typekit.net/ https://fonts.googleapis.com 'self'; 
+    style-src-elem 
+    'unsafe-hashes' 
+      'sha256-IQtfqzo2VPwYVfG45njd1UW4FZvVifJwM9V5cBNhx04=' 
+      https://www.gstatic.com https://*.typekit.net/ https://fonts.googleapis.com 'self'; 
     connect-src  https://api.data.gov https://www.google-analytics.com *.hotjar.com https://dap.digitalgov.gov https://stats.g.doubleclick.net *.hotjar.io 'self' ws:; 
     font-src https://fonts.gstatic.com https://use.typekit.net 'self'; 
-    style-src https://www.gstatic.com https://use.typekit.net 'self'; 
+    style-src 
+    'unsafe-hashes'
+    'sha256-yQomDylAVvpeRdlKgfqevQZtrtkp244GCzedeISNu5s=' 
+    'sha256-vil6rwz9/3551namkTsVzfkGNkmRnO56lPD53U/pJbE='
+    'sha256-cgjVz+andACCIsfeXoiI1/ChFQDlCC4y99sX5rrYseM='
+    'sha256-TbrjG17MSiO8IKSlX/5IHYPweVR4+mHPUuUwZ7a5a2Y='
+    'sha256-uaE1UV3pZxXpavOfm/lrrxDNgEh6v+6g5hNCCp9X1bM='
+    'sha256-lNOe1Kn+4LzGOr+ToMkETF58zM5uGP6/a0dq4hZYPYw='
+    'sha256-uaE1UV3pZxXpavOfm/lrrxDNgEh6v+6g5hNCCp9X1bM='
+    'sha256-xC8juOyOcGVG0BdxV2vy4LlzWOZfFlsV82FV45f1hTY='
+    'sha256-hEgUMy467OqNfeKl/LTfR4/dPK2As3gne31r1nSBOEM='
+    'sha256-xC8juOyOcGVG0BdxV2vy4LlzWOZfFlsV82FV45f1hTY='
+    'sha256-6egcWvmQP5hRCmW3iDq1X7sXo3/AY4zjQJNgqpm0rAg='
+    'sha256-FDyPg8CqqIpPAfGVKx1YeKduyLs0ghNYWII21wL+7HM='
+     https://www.gstatic.com https://use.typekit.net 'self'; 
     frame-src https://vars.hotjar.com https://www.google.com"`
   })
   /*
