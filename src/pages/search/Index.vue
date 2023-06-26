@@ -724,6 +724,7 @@ export default {
     handlePaginationInput(page) {
       this.input.page = page
       this.searchAPI()
+      this.toTop()
     },
 
     handleDOLFlag() {
