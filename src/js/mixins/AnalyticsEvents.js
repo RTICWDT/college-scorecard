@@ -14,7 +14,7 @@ export default {
             {
                 href = evt.target.href;
             }
-            this.GATrackEvent('external_link', href);
+            this.GATrackEvent('External Link', href);
 
         },
         transitionOutboundLink(event) {
