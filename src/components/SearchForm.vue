@@ -37,7 +37,7 @@
 </style>
 
 <template>
-  <v-form>
+  <v-form novalidate="false">
     <v-expansion-panels
       accordion
       multiple
@@ -433,6 +433,7 @@ import { SiteData } from "~/js/mixins/SiteData.js"
 import LocationCheck from "~/js/mixins/LocationCheck.js"
 import Tooltip from "~/components/Tooltip.vue"
 import LocationInstitutionSearch from "~/components/LocationInstitutionSearch.vue"
+import { formMappings } from "~/js/constants.js"
 
 export default {
   mixins: [SiteData, LocationCheck],
@@ -554,6 +555,9 @@ export default {
     },
   },
   computed: {
+    fosDegrees() {
+      return formMappings.fosDegrees
+    },
     // Remove items that are not set
     cleanInput() {
       let defaultValues = _.cloneDeep(this.utility.formDefault)

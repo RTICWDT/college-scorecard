@@ -715,6 +715,7 @@ export default {
     },
     handlePaginationInput() {
       this.searchAPI()
+      this.toTop()
     },
     resort(sort) {
       this.input.page = 0
