@@ -170,6 +170,10 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   })
   */
   head.meta.push({
+    'http-equiv':'Cache-control',
+    content: "private, no-store"
+  })
+  head.meta.push({
     name: 'og:type',
     content: 'website'
   })   
