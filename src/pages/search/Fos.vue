@@ -367,7 +367,7 @@
                         <v-row
                           class="mb-2 py-4"
                           style="border-bottom:2px solid #eee"
-                        >
+                        > 
                           <v-col
                             class="py-md-0 pl-5"
                             cols="12"
@@ -383,6 +383,7 @@
                                 'selected-sort': sort.current,
                                 'unselected-sort': !sort.current,
                               }"
+                              href=""
                               @click="changeSort(sort.type)"
                               >{{ sort.type }}
                               <i
