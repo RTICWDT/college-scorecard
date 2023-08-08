@@ -22,6 +22,7 @@
       no-filter
       :dense="dense"
       id="institution-search-box"
+      persistent-placeholder
     >
       <!-- TODO - Add markup for alias match or highlighting -->
       <template slot="item" slot-scope="{ parent, item }">
