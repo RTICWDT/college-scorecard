@@ -3,10 +3,10 @@
     <v-combobox
       :items="items"
       :loading="isLoading"
+      label="Enter a school"
       v-model="search"
       search.sync="search"
       item-text="school.name"
-      placeholder="Enter a School"
       autocomplete="off"
       hide-details
       class="pt-0 mt-0"
@@ -22,7 +22,6 @@
       no-filter
       :dense="dense"
       id="institution-search-box"
-      persistent-placeholder
     >
       <!-- TODO - Add markup for alias match or highlighting -->
       <template slot="item" slot-scope="{ parent, item }">
