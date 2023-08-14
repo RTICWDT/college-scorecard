@@ -33,13 +33,13 @@
                     <v-icon x-small class="pr-1">
                       fas fa-download
                     </v-icon>
-                    Data Dictionary
+                    Data Dictionary (.xlsx, 703 KB)
                   </v-btn>
                 </v-col></v-row
               >
               <v-row>
                 <v-col>
-                  <h3>Technical Documentation</h3>
+                  <h2>Technical Documentation</h2>
                 </v-col>
               </v-row>
               <v-row class="my-0">
@@ -56,7 +56,7 @@
                     <v-icon x-small class="pr-1">
                       fas fa-file-pdf
                     </v-icon>
-                    Institution-Level Data Files
+                    Institution-Level Data Files (.pdf, 520 KB)
                   </v-btn>
                   <v-btn
                     color="secondary"
@@ -70,7 +70,7 @@
                     <v-icon x-small class="pr-1">
                       fas fa-file-pdf
                     </v-icon>
-                    Field of Study Data Files
+                    Field of Study Data Files (.pdf, 827 KB)
                   </v-btn>
                 </v-col></v-row
               >

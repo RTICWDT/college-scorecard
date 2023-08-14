@@ -60,7 +60,7 @@
                   color="secondary"
                   class="ml-0 ml-sm-2"
                   href="https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Institution_04192023.zip"
-                  >Download
+                  >Download (.zip, 23 MB)
                   <v-icon right dark x-small>
                     fas fa-download
                   </v-icon></v-btn
@@ -74,7 +74,7 @@
                   class="ml-0 ml-sm-2"
                   color="secondary"
                   href=" https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Field-of-Study_04192023.zip"
-                  >Download
+                  >Download (.zip, 17 MB)
                   <v-icon right dark x-small>
                     fas fa-download
                   </v-icon></v-btn

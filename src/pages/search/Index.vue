@@ -103,7 +103,7 @@
               hide-overlay
             >
               <div class="pa-6">
-                <a
+                <a href=""
                   class="float-right close-filter"
                   @click="showSidebar = !showSidebar"
                 >

@@ -104,7 +104,7 @@
                 class="px-6 pt-6 white"
                 style="border-right: 5px solid #DFE6F0;"
               >
-                <a
+                <a href=""
                   class="float-right close-filter"
                   @click="showSidebar = !showSidebar"
                 >
