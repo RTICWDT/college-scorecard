@@ -84,7 +84,7 @@
                   $event
                 )
               "
-              ><v-img  :src="$url('/img/VA-Logo.svg')" style="max-width: 300px" alt="VA Logo" /></a></p>
+              ><v-img  :src="$url('/img/VA-Logo.svg')" style="max-width: 300px" alt="VA Logo" width="300" height="67" contain /></a></p>
           </p>
         </v-card>
       </v-col>
