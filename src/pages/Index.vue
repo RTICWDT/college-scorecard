@@ -607,7 +607,7 @@ export default {
       // Direct to location.
       //window.location.href = this.$url(url)
       this.$router.push(url)
-    },
+    }, 
     handleSchoolNameSelected(school) {
       if (typeof school == "string") {
         this.$router.push("/search/?search=" + encodeURIComponent(school))
