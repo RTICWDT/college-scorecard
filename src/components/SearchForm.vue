@@ -1,4 +1,5 @@
 <style lang="scss" scoped>
+@import "~/sass/_variables";
 .search-form-dolflag-cb div .v-input__slot {
   align-items: start;
 }
@@ -14,7 +15,7 @@
 }
 
 .search-subhead {
-  color:#A8B0BA;
+  color:$darker-gray;
 }
 
 #search-form-sub-degree-container {
@@ -704,8 +705,10 @@ export default {
       // Send new param object, reset page
       this.$emit("search-query", { ...this.cleanInput, page: 0 })
     }, 1000)
-
-    this.$emit("search-query", { ...this.cleanInput, page: 0 })
+    if (this.autoSubmit)
+    {
+      this.$emit("search-query", { ...this.cleanInput, page: 0 })
+    }
   },
   mounted() {
     this.$root.$on("search-form-reset", (e) => {
