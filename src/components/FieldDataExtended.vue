@@ -21,7 +21,7 @@
                   :max="130000"
                   color="#1470ef"
                   :height="25"
-                  :labels="true"
+                  :labels="false"
                   type="currency"
                   class="mt-3"
                 ></horizontal-bar>
@@ -62,7 +62,7 @@
                   :max="100000"
                   color="#1470ef"
                   :height="25"
-                  :labels="true"
+                  :labels="false"
                   type="currency"
                   class="mt-3"
                 ></horizontal-bar>
