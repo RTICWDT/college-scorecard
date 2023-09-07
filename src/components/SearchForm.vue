@@ -705,8 +705,10 @@ export default {
       // Send new param object, reset page
       this.$emit("search-query", { ...this.cleanInput, page: 0 })
     }, 1000)
-
-    //this.$emit("search-query", { ...this.cleanInput, page: 0 })
+    if (this.autoSubmit)
+    {
+      this.$emit("search-query", { ...this.cleanInput, page: 0 })
+    }
   },
   mounted() {
     this.$root.$on("search-form-reset", (e) => {
