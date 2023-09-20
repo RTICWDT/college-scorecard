@@ -158,7 +158,7 @@
               color="secondary"
               href="/assets/CollegeScorecardDataDictionary.xlsx"
               class="button data-home-button mb-4"
-              >Download the Data Dictionary
+              >Download the Data Dictionary (.xlsx, 703 KB)
               <v-icon x-small class="pl-1" color="white">
                 fas fa-download
               </v-icon>

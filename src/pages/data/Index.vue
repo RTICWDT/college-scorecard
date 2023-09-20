@@ -23,7 +23,7 @@
                 class="ml-2"
                 color="secondary"
                 href="https://ed-public-download.app.cloud.gov/downloads/CollegeScorecard_Raw_Data_04192023.zip"
-                >Download
+                >Download (.zip, 435 MB)
                 <v-icon right dark x-small>
                   fas fa-download
                 </v-icon></v-btn
