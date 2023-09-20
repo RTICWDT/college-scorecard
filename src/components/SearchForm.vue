@@ -9,6 +9,11 @@
   }
 }
 
+.v-input--checkbox >>> .theme--light.v-label {
+  color: $search-options !important;
+
+}
+
 .search-panel-header {
   background-color: #c5d3e1;
   border-radius: 0px !important;
