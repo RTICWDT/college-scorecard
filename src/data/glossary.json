@@ -58,8 +58,8 @@
   },
   "parent-plus-avg-debt-all-schools": {
     "title": "Parent PLUS Loan Median Total Debt After Graduation for All Federal Loans",
-    "default": "<p>The median cumulative PLUS loan debt of parents who borrowed on behalf of an undergraduate student who graduated. This figure includes Parent PLUS loans originated at any school attended prior to award of a credential.</p>",
-    "glossary": "<p>The median Parent PLUS loan debt accumulated among parents borrowing on behalf of an undergraduate student at any school attended prior to award of a credential. For schools with multiple locations, this information is based on all of their locations.</p><p>Relevant variables:<br/>PLUS_DEBT_INST_COMP_MD_SUPP, 2019-20 and 2020-21 pooled award year cohort</p>",
+    "default": "<p>The median cumulative PLUS loan debt of parents who borrowed on behalf of an undergraduate student who graduated. This figure includes Parent PLUS loans origiFnated at any school attended prior to award of a credential.</p>",
+    "glossary": "<p>The median Parent PLUS loan debt accumulated among parents borrowing on behalf of an undergraduate student at any school attended prior to award of a credential. For schools with multiple locations, this information is based on all of their locations.</p><p>Relevant variables:<br/>PLUS_DEBT_ALL_COMP_MD_SUPP, 2019-20 and 2020-21 pooled award year cohort</p>",
     "branch": true
   },
   "parent-borrowing-rate": {
