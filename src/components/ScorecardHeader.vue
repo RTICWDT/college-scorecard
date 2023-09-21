@@ -124,6 +124,7 @@ header {
         flat
       >
         <div id="nav-site-title">
+          <a href="#main-content" class="sr-only">Skip to main content</a>
           <a :href="$url('/')"
             ><div class="logo">
               <img
@@ -304,6 +305,7 @@ header {
           </v-list-item-group>
         </v-list>
       </v-navigation-drawer>
+      <a id="main-content"></a>
     </div>
   </client-only>
 </template>
