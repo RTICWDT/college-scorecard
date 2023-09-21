@@ -9,6 +9,11 @@
   }
 }
 
+.v-input--checkbox >>> .theme--light.v-label {
+  color: $search-options !important;
+
+}
+
 .search-panel-header {
   background-color: #c5d3e1;
   border-radius: 0px !important;
@@ -91,7 +96,7 @@
 
           <span class="search-subhead pt-5">Graduate</span>
           <v-checkbox
-            id="search-form-fos-degree-c"
+            id="search-form-fos-degree-m"
             class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="Master's Degree"
@@ -101,7 +106,7 @@
           ></v-checkbox>
 
           <v-checkbox
-            id="search-form-fos-degree-a"
+            id="search-form-fos-degree-p"
             class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="Post-baccalaureate Certificate"
@@ -111,7 +116,7 @@
           ></v-checkbox>
 
           <v-checkbox
-            id="search-form-fos-degree-b"
+            id="search-form-fos-degree-d"
             class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="Doctoral Degree"
@@ -121,7 +126,7 @@
           ></v-checkbox>       
           
           <v-checkbox
-            id="search-form-fos-degree-a"
+            id="search-form-fos-degree-f"
             class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="First Professional Degree"
@@ -131,7 +136,7 @@
           ></v-checkbox>
 
           <v-checkbox
-            id="search-form-fos-degree-b"
+            id="search-form-fos-degree-g"
             class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="Graduate/Professional Certificate"

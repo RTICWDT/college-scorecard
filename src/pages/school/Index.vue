@@ -1081,7 +1081,7 @@
                             </v-checkbox>
                             <v-expand-transition>
                               <median-toggle
-                                v-show="!showPellOnlyGrad"
+                                v-if="!showPellOnlyGrad"
                                 :display-toggle="medianToggle"
                                 :control-tab="controlTab"
                                 @median-switch-click="handleMedianToggle"
