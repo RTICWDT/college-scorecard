@@ -30,14 +30,14 @@
               <v-card class="pa-5 homepage-search-container" flat>
                 <v-row>
                   <v-col cols="12" sm="5">
-                    <p>Search Fields of Study</p>
+                    <p>Search Fields of Study (Required)</p>
                     <field-of-study-search
                       @field-of-study-selected="handleFieldOfStudySelected"
                       :selected="input.cip4"
                     />
                   </v-col>
                   <v-col cols="12" sm="4">
-                    <p>Select Degree Type</p>
+                    <p>Select Degree Type (Required)</p>
                     <v-select
                       :items="fosDegrees"
                       item-text="label"

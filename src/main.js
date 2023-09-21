@@ -157,7 +157,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     name: 'MobileOptimized',
     content: '320'
   })   
-
+/*
   //Twitter and OpenGraph
   /*
   head.meta.push({
