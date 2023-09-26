@@ -115,6 +115,7 @@ header {
 <template>
   <client-only>
     <div class="d-print-none">
+      
       <v-app-bar
         app
         clipped-left
@@ -122,9 +123,10 @@ header {
         color="#102E52"
         class="pa-0 ma-0"
         flat
+        fixed
       >
+      <div class="show-on-focus-container"><div class="show-on-focus"><a href="#main-content" class="d-sr-only-focusable show-on-focus-content">Skip to main content</a></div></div>
         <div id="nav-site-title">
-          <a href="#main-content" class="sr-only">Skip to main content</a>
           <a :href="$url('/')"
             ><div class="logo">
               <img

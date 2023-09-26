@@ -152,3 +152,27 @@ a.close-filter {
 .tab-card {
   border: none;
 } 
+
+.show-on-focus-container {
+  padding: 1em;
+  margin: 0 auto; 
+  color: #112E51;
+  font-weight: 600;
+  width:100%;
+  top:0;
+  left:0;
+  right:0;
+  position:absolute;
+}
+
+.show-on-focus {
+  background:#fff;
+  width:fit-content;
+  width: -moz-fit-content;
+  margin: 0 auto; 
+}
+
+.show-on-focus-content {
+  background:#fff;
+  padding: .2em;
+}
