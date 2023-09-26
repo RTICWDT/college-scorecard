@@ -167,9 +167,6 @@ export default {
                 var student_item = include[p];
                 var faculty_item = include[p];
 
-                if (include[p] == "non_resident_alien")
-                    faculty_item = "nonresident";
-
                 output.push({
                     label: this.site.data.race_ethnicity[include[p]],
                     value: re[student_item],
