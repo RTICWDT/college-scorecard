@@ -25,6 +25,49 @@
             <v-expansion-panels multiple v-model="panels">
               <v-expansion-panel>
                 <v-expansion-panel-header
+                  >September XX, 2023</v-expansion-panel-header
+                >
+                <v-expansion-panel-content>
+                  <p>
+                    On September XX, 2023, the Department updated the College Scorecard downloadable data files and the API as indicated below.
+                  </p>
+                  <p>
+                    Specific data updates in this release include:
+                  </p>
+                  <ul>
+                    <li>
+                      More recent data values derived from Federal Student Aid sources for the following data metrics were included:
+                      <ul>
+                        <li>Currently Operating Status Flag</li>
+                        <li>Heightened Cash Monitoring Flag</li>
+                        <li>Accrediting Agency Name and Code</li>
+                        <li>Title IV Approval Date</li>
+                        <li>Federal School Code</li>
+                      </ul>
+                    </li>                    
+                    <li>
+                      Updates derived from the Office of Postsecondary Education (OPE) eligibility matrix for data metrics 
+                      identifying Minority Serving Institutions. 
+                    </li>
+                    <li>
+                      New institution-level data were added for the street address of the institution; the control of the 
+                      institution based on Federal Student Aid data; outcomes data for students that did not receive a Pell 
+                      Grant, and a pooled, suppressed version of the admission rate.  
+                    </li>
+                    <li>
+                      The developer-friendly names for two variables were changed to more closely match their description. They are:
+                      <ul>
+                        <li>GT_THRESHOLD_1YR changed from earnings.1_yrs_after_completion.overall_count_over_poverty_line to 
+                          earnings.1_yr_after_completion.overall_count_gt_hs_grad</li>
+                        <li>GT_THRESHOLD_4YR changed from earnings.4_yrs_after_completion.overall_count_over_poverty_line to 
+                          earnings.4_yr_after_completion.overall_count_gt_hs_grad</li>
+                      </ul>
+                    </li>                     
+                  </ul>
+                </v-expansion-panel-content>
+              </v-expansion-panel>              
+              <v-expansion-panel>
+                <v-expansion-panel-header
                   >April 25, 2023</v-expansion-panel-header
                 >
                 <v-expansion-panel-content>
@@ -1646,7 +1689,7 @@ export default {
   },
   methods: {
     all() {
-      this.panels = [...Array(28).keys()].map((k, i) => i)
+      this.panels = [...Array(29).keys()].map((k, i) => i)
     },
     // Reset the panel
     none() {
