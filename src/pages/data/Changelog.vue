@@ -56,12 +56,10 @@
                     </li>
                     <li>
                       The developer-friendly names for two variables were changed to more closely match their description. They are:
-                      <ul>
-                        <li>GT_THRESHOLD_1YR changed from earnings.1_yrs_after_completion.overall_count_over_poverty_line to 
-                          earnings.1_yr_after_completion.overall_count_gt_hs_grad</li>
-                        <li>GT_THRESHOLD_4YR changed from earnings.4_yrs_after_completion.overall_count_over_poverty_line to 
-                          earnings.4_yr_after_completion.overall_count_gt_hs_grad</li>
-                      </ul>
+                      •	A change to the developer-friendly name for one metric (GT_THRESHOLD_4YR) was made to harmonize the 
+                      developer-friendly name with the variable description. The new developer-friendly names is active immediately. 
+                      The old developer-friendly name will also point to this metric until the next data update, at which time it 
+                      will no longer be in service.
                     </li>                     
                   </ul>
                 </v-expansion-panel-content>
