@@ -91,7 +91,7 @@
                     <v-row>
                       <v-col cols="12" sm="5">
                         <label class="d-block mb-2" for="fosSearch"
-                          >Search Fields of Study</label
+                          >Search Fields of Study (required)</label
                         >
                         <field-of-study-search
                           @field-of-study-selected="handleFieldOfStudySelected"
@@ -101,7 +101,7 @@
                       </v-col>
                       <v-col cols="12" sm="4">
                         <label class="d-block  mb-2" for="fosDegree"
-                          >Select Degree Type</label
+                          >Select Degree Type (required)</label
                         >
                         <v-select
                           :items="fosDegrees"
