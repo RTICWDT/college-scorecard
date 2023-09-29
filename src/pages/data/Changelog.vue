@@ -29,7 +29,7 @@
                 >
                 <v-expansion-panel-content>
                   <p>
-                    On September XX, 2023, the Department updated the College Scorecard downloadable data files and the API as indicated below.
+                    On October 5, 2023, the Department updated the College Scorecard downloadable data files and the API as indicated below.
                   </p>
                   <p>
                     Specific data updates in this release include:
