@@ -395,15 +395,31 @@ export default {
 
       if (85 < left) {
         //let s = left.replace(/[0-9]+%\s?/g, '');
-        if (this.$vuetify.breakpoint.smAndDown) {
-          if (obj.label.includes("$")) newObj.styles.left = left - 32 + "%"
+        if (this.$vuetify.breakpoint.xlOnly) {
+          if (obj.label.includes("$")) newObj.styles.left = left - 15 + "%"
+          else newObj.styles.left = left - 15 + "%"
+        }        
+        else if (this.$vuetify.breakpoint.lgOnly) {
+          if (obj.label.includes("$")) newObj.styles.left = left - 20 + "%"
           else newObj.styles.left = left - 15 + "%"
         }
+        else if (this.$vuetify.breakpoint.mdOnly) {
+          if (obj.label.includes("$")) newObj.styles.left = left - 30 + "%"
+          else newObj.styles.left = left - 15 + "%"
+        }            
+        else if (this.$vuetify.breakpoint.smOnly) {
+          if (obj.label.includes("$")) newObj.styles.left = left - 35 + "%"
+          else newObj.styles.left = left - 15 + "%"
+        }
+        else if (this.$vuetify.breakpoint.xsOnly) {
+          if (obj.label.includes("$")) newObj.styles.left = left - 55 + "%"
+          else newObj.styles.left = left - 15 + "%"
+        }        
         else {
           if (obj.label.includes("$")) newObj.styles.left = left - 15 + "%"
           else newObj.styles.left = left - 10 + "%"
         }
-        //newObj.styles.color = "#ffffff"
+        newObj.styles.color = "#ffffff"
       }
 
       return newObj
