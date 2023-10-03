@@ -555,14 +555,14 @@ export default {
         fakeMedianEarnings() {
             var medians = {
                 1 : 
-                    { 0 : 28562,
-                    1 : 38436 },
+                    { 0 : 28589,
+                    1 : _.get(this.school, fields['EARNINGS_MIDPOINT_ALL']) },
                 2 : 
-                    { 0 : 37834,
-                    1 : 38436 },
+                    { 0 : 37840,
+                    1 : _.get(this.school, fields['EARNINGS_MIDPOINT_ALL']) },
                 3 : 
-                    { 0 : 50391,
-                    1 : 38436 },                                
+                    { 0 : 50482,
+                    1 : _.get(this.school, fields['EARNINGS_MIDPOINT_ALL']) },                                
             }
 
             return medians;
@@ -570,28 +570,28 @@ export default {
         fakeAverageAnnualCosts() {
             var medians = {
                 1 : 
-                    { 0 : 16190,
-                    1 : 16030 },
+                    { 0 : 16163,
+                    1 : _.get(this.school, fields['AVG_COST_MIDPOINT_ALL']) },
                 2 : 
-                    { 0 : 8528,
-                    1 : 16030 },
+                    { 0 : 8432,
+                    1 : _.get(this.school, fields['AVG_COST_MIDPOINT_ALL']) },
                 3 : 
                     { 0 : 18902,
-                    1 : 16030 },                                
+                    1 : _.get(this.school, fields['AVG_COST_MIDPOINT_ALL']) },                                
             }
             return medians;
         },      
         fakeGraduationRate() {
             var medians = {
                 1 : 
-                    { 0 : 0.6803,
-                    1 : 0.5937 },
+                    { 0 : 0.6804,
+                    1 : _.get(this.school, fields['COMPLETION_MIDPOINT_ALL']) },
                 2 : 
-                    { 0 : 0.3178,
-                    1 : 0.5937 },
+                    { 0 : 0.3158,
+                    1 : _.get(this.school, fields['COMPLETION_MIDPOINT_ALL']) },
                 3 : 
-                    { 0 : 0.5788,
-                    1 : 0.5937 },                                
+                    { 0 : 0.5789,
+                    1 : _.get(this.school, fields['COMPLETION_MIDPOINT_ALL']) },                                
             }
             return medians;
         },        
