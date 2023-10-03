@@ -397,27 +397,27 @@ export default {
         //let s = left.replace(/[0-9]+%\s?/g, '');
         if (this.$vuetify.breakpoint.xlOnly) {
           if (obj.label.includes("$")) newObj.styles.left = left - 15 + "%"
-          else newObj.styles.left = left - 15 + "%"
+          else newObj.styles.left = left - 10 + "%"
         }        
         else if (this.$vuetify.breakpoint.lgOnly) {
-          if (obj.label.includes("$")) newObj.styles.left = left - 20 + "%"
-          else newObj.styles.left = left - 15 + "%"
+          if (obj.label.includes("$")) newObj.styles.left = left - 15 + "%"
+          else newObj.styles.left = left - 10 + "%"
         }
         else if (this.$vuetify.breakpoint.mdOnly) {
-          if (obj.label.includes("$")) newObj.styles.left = left - 30 + "%"
+          if (obj.label.includes("$")) newObj.styles.left = left - 27 + "%"
           else newObj.styles.left = left - 15 + "%"
         }            
         else if (this.$vuetify.breakpoint.smOnly) {
-          if (obj.label.includes("$")) newObj.styles.left = left - 35 + "%"
-          else newObj.styles.left = left - 15 + "%"
+          if (obj.label.includes("$")) newObj.styles.left = left - 37 + "%"
+          else newObj.styles.left = left - 12 + "%"
         }
         else if (this.$vuetify.breakpoint.xsOnly) {
-          if (obj.label.includes("$")) newObj.styles.left = left - 55 + "%"
+          if (obj.label.includes("$")) newObj.styles.left = left - 57 + "%"
           else newObj.styles.left = left - 15 + "%"
         }        
         else {
           if (obj.label.includes("$")) newObj.styles.left = left - 15 + "%"
-          else newObj.styles.left = left - 10 + "%"
+          else newObj.styles.left = left - 15 + "%"
         }
         newObj.styles.color = "#ffffff"
       }
