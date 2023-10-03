@@ -391,6 +391,8 @@ export default {
         //newObj.label = ">" + this._max.label
         newObj.value = this._max.value
       }
+      if (left < 0)
+        left = 0        
       newObj.styles.left = left + "%"
 
       if (85 < left) {
