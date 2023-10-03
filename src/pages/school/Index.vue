@@ -1179,7 +1179,7 @@
                         <v-col cols="12" id="showPellOnlyOutcomes">
                           <v-card flat class="pa-4">
                             <v-row class="d-flex">
-                              <v-col cols="12" md="7">
+                              <v-col cols="12" md="12">
                                 <h2 class="mb-0">
                                   Outcomes 8 Years After Attending&nbsp;
                                   <tooltip
@@ -1187,17 +1187,11 @@
                                     :isPell="showPellOnlyOutcomes"
                                   />
                                 </h2>
-                              </v-col>
-                              <v-col
-                                cols="12"
-                                md="5"
-                                class="d-flex justify-end"
-                              >
                                 <v-checkbox
                                   v-model="showPellOnlyOutcomes"
                                   label="Show Pell Grant Recipients Only"
                                   color="secondary"
-                                  class="ml-auto mt-0 pt-0"
+                                  class="mt-0 pt-0"
                                 >
                                   <template v-slot:label>
                                     <span>
