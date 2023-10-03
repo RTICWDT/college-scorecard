@@ -1199,7 +1199,7 @@
                                     </span>
                                   </template>
                                 </v-checkbox>
-                              </v-col>
+                              </v-col>  
                             </v-row>
                             <sankey-buttons
                               v-on:update-sankey="currentSankey = $event"
