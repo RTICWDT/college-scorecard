@@ -43,7 +43,7 @@
                       item-text="label"
                       item-value="value"
                       outlined
-                      placeholder="Select one"
+                      placeholder="Select one (Required)"
                       v-model="input.cip4_degree"
                       hide-details
                       color="fos-search-color"
