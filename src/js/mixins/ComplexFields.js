@@ -556,13 +556,13 @@ export default {
             var medians = {
                 1 : 
                     { 0 : 28589,
-                    1 : _.get(this.school, fields['EARNINGS_MIDPOINT_ALL']) },
+                    1 : 38461 },
                 2 : 
                     { 0 : 37840,
-                    1 : _.get(this.school, fields['EARNINGS_MIDPOINT_ALL']) },
+                    1 : 38461 },
                 3 : 
                     { 0 : 50482,
-                    1 : _.get(this.school, fields['EARNINGS_MIDPOINT_ALL']) },                                
+                    1 : 38461 },                                
             }
 
             return medians;
@@ -571,13 +571,13 @@ export default {
             var medians = {
                 1 : 
                     { 0 : 16163,
-                    1 : _.get(this.school, fields['AVG_COST_MIDPOINT_ALL']) },
+                    1 : 16007 },
                 2 : 
                     { 0 : 8432,
-                    1 : _.get(this.school, fields['AVG_COST_MIDPOINT_ALL']) },
+                    1 : 16007 },
                 3 : 
                     { 0 : 18902,
-                    1 : _.get(this.school, fields['AVG_COST_MIDPOINT_ALL']) },                                
+                    1 : 16007 },                                
             }
             return medians;
         },      
@@ -585,13 +585,13 @@ export default {
             var medians = {
                 1 : 
                     { 0 : 0.6804,
-                    1 : _.get(this.school, fields['COMPLETION_MIDPOINT_ALL']) },
+                    1 : 0.5938 },
                 2 : 
                     { 0 : 0.3158,
-                    1 : _.get(this.school, fields['COMPLETION_MIDPOINT_ALL']) },
+                    1 : 0.5938 },
                 3 : 
                     { 0 : 0.5789,
-                    1 : _.get(this.school, fields['COMPLETION_MIDPOINT_ALL']) },                                
+                    1 : 0.5938 },                                
             }
             return medians;
         },        
