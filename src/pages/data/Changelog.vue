@@ -52,11 +52,10 @@
                     <li>
                       New institution-level data were added for the street address of the institution; the control of the 
                       institution based on Federal Student Aid data; outcomes data for students that did not receive a Pell 
-                      Grant, and a pooled, suppressed version of the admission rate.  
+                      Grant, and a suppressed version of the admission rate.  
                     </li>
                     <li>
-                      The developer-friendly names for two variables were changed to more closely match their description. They are:
-                      •	A change to the developer-friendly name for one metric (GT_THRESHOLD_4YR) was made to harmonize the 
+                      A change to the developer-friendly name for one metric (GT_THRESHOLD_4YR) was made to harmonize the 
                       developer-friendly name with the variable description. The new developer-friendly names is active immediately. 
                       The old developer-friendly name will also point to this metric until the next data update, at which time it 
                       will no longer be in service.
