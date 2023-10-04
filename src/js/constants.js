@@ -144,7 +144,7 @@ export const fields = {
   FIELD_OF_STUDY_GRADUATES: 'latest.programs.cip_4_digit.counts.ipeds_awards2',
 
   // Relative Paths
-  FOS_GRAD_COUNT: 'counts.ipeds_awards1',
+  FOS_GRAD_COUNT: 'counts.ipeds_awards2',
   FOS_EARNINGS_FED: 'earnings.highest.3_yr.overall_median_earnings',
   FOS_EARNINGS_PELL: 'earnings.highest.3_yr.pell_median_earnings',
   FOS_EARNINGS_FED_4YR: 'earnings.4_yr.overall_median_earnings',
