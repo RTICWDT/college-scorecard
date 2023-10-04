@@ -108,7 +108,7 @@
                           item-text="label"
                           item-value="value"
                           outlined
-                          placeholder="Select one (Required)"
+                          placeholder="Select one"
                           v-model="input.cip4_degree"
                           hide-details
                           id="fosDegree"
@@ -200,7 +200,7 @@
                           item-text="label"
                           item-value="value"
                           outlined
-                          placeholder="Select one (Required)"
+                          placeholder="Select one"
                           v-model="input.cip4_degree"
                           hide-details
                           id="fosDegree"
