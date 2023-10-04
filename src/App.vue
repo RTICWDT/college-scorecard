@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app tabindex="-1">
     <scorecard-header />
     <router-view :is-loading="isLoading" @loading="isLoading = $event" />
     <scorecard-footer />
@@ -43,7 +43,9 @@ export default {
     this.$store.commit("toggleDrawer", false)
     //this.$store.commit("setOutboundUrl", "")
   },    
-
+  updated() {
+    document.getElementById('app').focus()
+  },
   metaInfo() {
     return {
       title: this.$static.metadata.siteName,
