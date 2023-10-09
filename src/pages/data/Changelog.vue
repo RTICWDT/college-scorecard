@@ -25,11 +25,11 @@
             <v-expansion-panels multiple v-model="panels">
               <v-expansion-panel>
                 <v-expansion-panel-header
-                  >October 5, 2023</v-expansion-panel-header
+                  >October 10, 2023</v-expansion-panel-header
                 >
                 <v-expansion-panel-content>
                   <p>
-                    On October 5, 2023, the Department updated the College Scorecard downloadable data files and the API as indicated below.
+                    On October 10, 2023, the Department updated the College Scorecard downloadable data files and the API as indicated below.
                   </p>
                   <p>
                     Specific data updates in this release include:

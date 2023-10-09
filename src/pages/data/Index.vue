@@ -14,7 +14,7 @@
             </p>
             <p class="pb-4">
               This data was
-              <strong>last updated October 5, 2023</strong>.
+              <strong>last updated October 10, 2023</strong>.
             </p>
 
             <h2 class="my-5">
@@ -23,7 +23,7 @@
                 class="ml-2"
                 color="secondary"
                 href="https://ed-public-download.app.cloud.gov/downloads/CollegeScorecard_Raw_Data_09262023.zip"
-                >Download (.zip, 435 MB)
+                >Download (.zip, 436 MB)
                 <v-icon right dark x-small>
                   fas fa-download
                 </v-icon></v-btn
