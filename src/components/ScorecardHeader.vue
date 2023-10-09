@@ -115,6 +115,7 @@ header {
 <template>
   <client-only>
     <div class="d-print-none">
+      
       <v-app-bar
         app
         clipped-left
@@ -122,9 +123,10 @@ header {
         color="#102E52"
         class="pa-0 ma-0"
         flat
+        fixed
       >
+      <div class="show-on-focus-container"><div class="show-on-focus"><a @click="skipNav()" href="#" class="d-sr-only-focusable">Skip to main content</a></div></div>
         <div id="nav-site-title">
-          <a href="#main-content" class="sr-only">Skip to main content</a>
           <a :href="$url('/')"
             ><div class="logo">
               <img
@@ -375,6 +377,13 @@ export default {
     currentFieldOfStudyCount() {
       return this.$store.state.fos.length
     },
+    skipNav() {
+      var focusable = document.getElementsByTagName('main')[0].querySelectorAll('button, [href], input, [tabindex="0"]')
+      var first = focusable[0]
+      var last = focusable[focusable.length - 1]
+
+      first.focus()
+    }
   },
   created() {
     this.setActiveLink()
