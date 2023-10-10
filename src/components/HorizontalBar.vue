@@ -107,7 +107,7 @@ export default {
               let value = context.dataset.data[context.dataIndex]
               let max = context.chart.options.scales.xAxes[0].ticks.max
               if (value > max - max / 10) {
-                //return "#FFFFFF"
+                return "#FFFFFF"
               } else {
                 return "#000000"
               }
