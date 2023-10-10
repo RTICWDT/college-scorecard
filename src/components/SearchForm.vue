@@ -590,7 +590,7 @@ export default {
         this.utility.enable.completion_rate
       ) {
         groomedInput.completion_rate = groomedInput.completion_rate / 100 + ".."
-        this.panels.push(2)
+        this.panels.push(3)
       } else {
         _.unset(groomedInput, "completion_rate") // TODO: CONST;
       }
@@ -601,7 +601,7 @@ export default {
         this.utility.enable.avg_net_price
       ) {
         groomedInput.avg_net_price = ".." + groomedInput.avg_net_price * 1000
-        this.panels.push(3)
+        this.panels.push(4)
       } else {
         _.unset(groomedInput, "avg_net_price") // TODO: CONST;
       }
@@ -612,7 +612,7 @@ export default {
         this.utility.enable.sat_math
       ) {
         groomedInput.sat_math = ".." + groomedInput.sat_math
-        this.panels.push(4)
+        this.panels.push(5)
       } else {
         _.unset(groomedInput, "sat_math") // TODO: CONST;
       }
@@ -623,14 +623,14 @@ export default {
         this.utility.enable.sat_read
       ) {
         groomedInput.sat_read = ".." + groomedInput.sat_read
-        this.panels.push(4)
+        this.panels.push(5)
       } else {
         _.unset(groomedInput, "sat_read") // TODO: CONST;
       }
 
       if (groomedInput.act && groomedInput.act > 0 && this.utility.enable.act) {
         groomedInput.act = ".." + groomedInput.act
-        this.panels.push(4)
+        this.panels.push(5)
       } else {
         _.unset(groomedInput, "act") // TODO: CONST;
       }
@@ -641,7 +641,7 @@ export default {
         this.utility.enable.acceptance
       ) {
         groomedInput.acceptance = groomedInput.acceptance / 100 + "..1"
-        this.panels.push(5)
+        this.panels.push(6)
       } else {
         _.unset(groomedInput, "acceptance") // TODO: CONST;
       }
@@ -654,22 +654,22 @@ export default {
       }
 
       if (groomedInput.size) {
-        this.panels.push(6)
-      }
-      if (groomedInput.control) {
         this.panels.push(7)
       }
-      if (groomedInput.locale) {
+      if (groomedInput.control) {
         this.panels.push(8)
       }
-      if (groomedInput.serving) {
+      if (groomedInput.locale) {
         this.panels.push(9)
       }
-      if (groomedInput.religious) {
+      if (groomedInput.serving) {
         this.panels.push(10)
       }
-      if (groomedInput.dolflag) {
+      if (groomedInput.religious) {
         this.panels.push(11)
+      }
+      if (groomedInput.dolflag) {
+        this.panels.push(12)
       }
       return groomedInput
     },
