@@ -167,9 +167,6 @@ export default {
                 var student_item = include[p];
                 var faculty_item = include[p];
 
-                if (include[p] == "non_resident_alien")
-                    faculty_item = "nonresident";
-
                 output.push({
                     label: this.site.data.race_ethnicity[include[p]],
                     value: re[student_item],
@@ -555,14 +552,14 @@ export default {
         fakeMedianEarnings() {
             var medians = {
                 1 : 
-                    { 0 : 28562,
-                    1 : 38436 },
+                    { 0 : 28589,
+                    1 : 38461 },
                 2 : 
-                    { 0 : 37834,
-                    1 : 38436 },
+                    { 0 : 37840,
+                    1 : 38461 },
                 3 : 
-                    { 0 : 50391,
-                    1 : 38436 },                                
+                    { 0 : 50482,
+                    1 : 38461 },                                
             }
 
             return medians;
@@ -570,28 +567,28 @@ export default {
         fakeAverageAnnualCosts() {
             var medians = {
                 1 : 
-                    { 0 : 16190,
-                    1 : 16030 },
+                    { 0 : 16163,
+                    1 : 16007 },
                 2 : 
-                    { 0 : 8528,
-                    1 : 16030 },
+                    { 0 : 8432,
+                    1 : 16007 },
                 3 : 
                     { 0 : 18902,
-                    1 : 16030 },                                
+                    1 : 16007 },                                
             }
             return medians;
         },      
         fakeGraduationRate() {
             var medians = {
                 1 : 
-                    { 0 : 0.6803,
-                    1 : 0.5937 },
+                    { 0 : 0.6804,
+                    1 : 0.5938 },
                 2 : 
-                    { 0 : 0.3178,
-                    1 : 0.5937 },
+                    { 0 : 0.3158,
+                    1 : 0.5938 },
                 3 : 
-                    { 0 : 0.5788,
-                    1 : 0.5937 },                                
+                    { 0 : 0.5789,
+                    1 : 0.5938 },                                
             }
             return medians;
         },        
