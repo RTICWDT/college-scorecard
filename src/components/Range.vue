@@ -323,7 +323,7 @@ export default {
         left = 0
       newObj.styles.left = left + "%"
 
-      if (85 < left) {
+      if (85 < left && obj.label) {
         //let s = left.replace(/[0-9]+%\s?/g, '');
         if (this.$vuetify.breakpoint.xlOnly) {
           if (obj.label.includes("$")) newObj.styles.left = left - 15 + "%"
