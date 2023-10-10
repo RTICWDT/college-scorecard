@@ -319,38 +319,7 @@ export default {
         newObj.label = this._max.label;
         newObj.value = this._max.value;
       }
-      if (left < 0)
-        left = 0
       newObj.styles.left = left + "%"
-
-      if (85 < left && obj.label) {
-        //let s = left.replace(/[0-9]+%\s?/g, '');
-        if (this.$vuetify.breakpoint.xlOnly) {
-          if (obj.label.includes("$")) newObj.styles.left = left - 15 + "%"
-          else newObj.styles.left = left - 10 + "%"
-        }        
-        else if (this.$vuetify.breakpoint.lgOnly) {
-          if (obj.label.includes("$")) newObj.styles.left = left - 15 + "%"
-          else newObj.styles.left = left - 10 + "%"
-        }
-        else if (this.$vuetify.breakpoint.mdOnly) {
-          if (obj.label.includes("$")) newObj.styles.left = left - 27 + "%"
-          else newObj.styles.left = left - 15 + "%"
-        }            
-        else if (this.$vuetify.breakpoint.smOnly) {
-          if (obj.label.includes("$")) newObj.styles.left = left - 37 + "%"
-          else newObj.styles.left = left - 12 + "%"
-        }
-        else if (this.$vuetify.breakpoint.xsOnly) {
-          if (obj.label.includes("$")) newObj.styles.left = left - 57 + "%"
-          else newObj.styles.left = left - 15 + "%"
-        }        
-        else {
-          if (obj.label.includes("$")) newObj.styles.left = left - 15 + "%"
-          else newObj.styles.left = left - 15 + "%"
-        }
-        newObj.styles.color = "#ffffff"
-      }      
 
   
       return newObj
