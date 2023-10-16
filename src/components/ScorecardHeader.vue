@@ -1,5 +1,7 @@
 <style lang="scss" scoped>
 @import "~/sass/_variables";
+@import "~uswds-vue/dist/uswds-vue.css";
+
 header {
   z-index: 101 !important;
   .logo {
@@ -115,16 +117,18 @@ header {
 <template>
   <client-only>
     <div class="d-print-none">
-      
+      <div style="position:fixed; width:100%;">
+        <us-official-header variant="dark" style="position:relative;z-index:109 !important;"></us-official-header>
       <v-app-bar
         app
         clipped-left
-        :height="$vuetify.breakpoint.xsOnly ? 80 : 105"
+        :height="$vuetify.breakpoint.xsOnly ? 105 : 130"
         color="#102E52"
         class="pa-0 ma-0"
         flat
-        fixed
+        
       >
+
       <div class="show-on-focus-container"><div class="show-on-focus"><a @click="skipNav()" href="#" class="d-sr-only-focusable">Skip to main content</a></div></div>
         <div id="nav-site-title">
           <a :href="$url('/')"
@@ -238,7 +242,7 @@ header {
           </v-app-bar-nav-icon>
         </div>
       </v-app-bar>
-
+      </div>
       <!-- Mobile Navigation Drawer -->
       <v-navigation-drawer
         v-model="drawer"
