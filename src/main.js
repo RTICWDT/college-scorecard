@@ -18,9 +18,9 @@ import ScorecardFooter from '~/components/ScorecardFooter.vue';
 
 import VuexPersistence from 'vuex-persist'
 
-import 'bootstrap';
+//import 'bootstrap';
 
-import { UswdsVue } from 'uswds-vue';
+//import { UswdsVue } from 'uswds-vue';
 
 
 
@@ -30,7 +30,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   Vue.use(VueClipboard);
   Vue.use(Vuex)
   Vue.use(vueNumeralFilterInstaller, { locale: 'en' });
-  Vue.use(UswdsVue);
+  //Vue.use(UswdsVue);
   Vue.component('scorecard-header', ScorecardHeader);
   Vue.component('scorecard-footer', ScorecardFooter);
 
