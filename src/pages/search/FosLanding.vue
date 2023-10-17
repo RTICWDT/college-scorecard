@@ -11,7 +11,7 @@
         <v-card tile class="tab-card">
           <search-tabs :selected="1" />
         </v-card>
-        <v-container class="mb-n10 pt-sm-16 pt-5">
+        <v-container class="mb-n10 pt-5" style="padding-top:130px !important">
           <v-row>
             <v-col cols="12" class="px-6 px-sm-3">
               <h1 class="white--text">
@@ -124,7 +124,8 @@ h1 {
 }
 .home-links {
   background-color: $bg-gray;
-}.homepage-search-container {
+}
+.homepage-search-container {
   box-shadow: 0px 10px 16px #0000001a !important;
   border-radius: 0px 6px 6px 6px;
 }
