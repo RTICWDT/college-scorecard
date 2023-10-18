@@ -14,7 +14,7 @@ NDE6MTQrMDM6MDASj0NrAAAAAElFTkSuQmCC"></image></svg> An official website of the 
 
 <style lang="scss" scoped>
 .banner {
-  background-color: #c9c9c9;
+  background-color: #EFF1F5;
   z-index: 1000 !important;
   position: fixed;
   width: 100%;
@@ -27,7 +27,7 @@ NDE6MTQrMDM6MDASj0NrAAAAAElFTkSuQmCC"></image></svg> An official website of the 
       vertical-align: middle;
     }
     .usx-banner-toggle {
-      color: #adadad;
+      color: #0071BB;
       text-decoration: underline;
       cursor: pointer;
       .fa-chevron-down,
