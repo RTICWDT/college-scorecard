@@ -1249,6 +1249,8 @@
                       <div v-else>
                         <v-row>
                           <v-col cols="12" md="8">
+                            <p class="overline mb-1">Loan Type</p>
+
                             <v-select
                               :items="aidLoanSelectItems"
                               v-model="aidLoanSelect"

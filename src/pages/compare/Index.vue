@@ -1007,6 +1007,7 @@
                 </v-expansion-panel-header>
 
                 <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
+                  <p class="overline mb-1">Loan Type</p>
                   <v-select
                     class="mb-5 pt-0"
                     hide-details
