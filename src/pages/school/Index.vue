@@ -461,7 +461,7 @@
                               style: { height: '60px' },
                             }"
                             :max="{
-                              label: '$100,000',
+                              label: '$100,000+',
                               value: 100000,
                               style: { height: '60px' },
                             }"
@@ -1708,7 +1708,7 @@
                                 style: { height: '60px' },
                               }"
                               :max="{
-                                label: '$100,000',
+                                label: '$100,000+',
                                 value: 100000,
                                 style: { height: '60px' },
                               }"
