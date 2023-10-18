@@ -39,7 +39,7 @@ NDE6MTQrMDM6MDASj0NrAAAAAElFTkSuQmCC"></image></svg> An official website of the 
   }
   ::v-deep .usx-banner-info-container {
     padding: 10px 25px;
-    color: white;
+    color: black;
     @media (max-width: 960px) {
       display: block;
     }
