@@ -549,6 +549,27 @@ export default {
                     1 : _.get(this.school, fields['COMPLETION_MIDPOINT_ALL'])}
             return medians;
         },     
+        toggleGroupMedianEarnings() {
+            if (!this.schools) return null;
+            var medians = 
+                    { 0 : _.get(this.schools[0], fields['EARNINGS_MIDPOINT_PRED_DEGREE']),
+                     1 : _.get(this.schools[0], fields['EARNINGS_MIDPOINT_ALL'])}
+            return medians;
+        },
+        toggleGroupAverageAnnualCost() {
+            if (!this.schools) return null;
+            var medians = 
+                    { 0 : _.get(this.schools[0], fields['AVG_COST_MIDPOINT_PRED_DEGREE']),
+                    1 : _.get(this.schools[0], fields['AVG_COST_MIDPOINT_ALL'])}
+            return medians;
+        },      
+        toggleGroupGraduationRate() {
+            if (!this.schools) return null;
+            var medians = 
+                    { 0 : _.get(this.schools[0], fields['COMPLETION_MIDPOINT_PRED_DEGREE']),
+                    1 : _.get(this.schools[0], fields['COMPLETION_MIDPOINT_ALL'])}
+            return medians;
+        },             
         fakeMedianEarnings() {
             var medians = {
                 1 : 

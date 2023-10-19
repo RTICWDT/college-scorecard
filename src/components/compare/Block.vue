@@ -10,7 +10,7 @@
           config.type == 'average-annual-cost'
       "
     >
-      <p class="median-value-text">
+      <p class="median-value-text" ref="schools">
         National
         {{
           config.medianToggle === "group"
@@ -20,12 +20,8 @@
         {{
           $options.filters.numeral(
             config.medianToggle === "group"
-              ? fakeAverageAnnualCosts[
-                  _.get(schools[0], fields["PREDOMINANT_DEGREE"])
-                ][0]
-              : fakeAverageAnnualCosts[
-                  _.get(schools[0], fields["PREDOMINANT_DEGREE"])
-                ][1],
+              ? toggleGroupAverageAnnualCost[0]
+              : toggleGroupAverageAnnualCost[1],
             "$0,0"
           )
         }}
@@ -50,12 +46,8 @@
         {{
           $options.filters.numeral(
             config.medianToggle === "group"
-              ? fakeMedianEarnings[
-                  _.get(schools[0], fields["PREDOMINANT_DEGREE"])
-                ][0]
-              : fakeMedianEarnings[
-                  _.get(schools[0], fields["PREDOMINANT_DEGREE"])
-                ][1],
+              ? toggleGroupMedianEarnings[0]
+              : toggleGroupMedianEarnings[1],
             "$0,0"
           )
         }}
@@ -81,12 +73,8 @@
         {{
           $options.filters.numeral(
             config.medianToggle === "group"
-              ? fakeGraduationRate[
-                  _.get(schools[0], fields["PREDOMINANT_DEGREE"])
-                ][0]
-              : fakeGraduationRate[
-                  _.get(schools[0], fields["PREDOMINANT_DEGREE"])
-                ][1],
+              ? toggleGroupGraduationRate[0]
+              : toggleGroupGraduationRate[1],
             "0%"
           )
         }}
