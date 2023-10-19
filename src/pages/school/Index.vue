@@ -819,16 +819,12 @@
                                       this.medianToggle === 'group'
                                         ? Math.round(
                                             parseFloat(
-                                              fakeAverageAnnualCosts[
-                                                groupName
-                                              ][0]
+                                              toggleAverageAnnualCosts[0]
                                             )
                                           )
                                         : Math.round(
                                             parseFloat(
-                                              fakeAverageAnnualCosts[
-                                                groupName
-                                              ][1]
+                                              toggleAverageAnnualCosts[1]
                                             )
                                           ),
                                       '$0,0'
@@ -933,16 +929,12 @@
                                           this.medianToggle === 'group'
                                             ? Math.round(
                                                 parseFloat(
-                                                  fakeAverageAnnualCosts[
-                                                    groupName
-                                                  ][0]
+                                                  toggleAverageAnnualCosts[0]
                                                 )
                                               )
                                             : Math.round(
                                                 parseFloat(
-                                                  fakeAverageAnnualCosts[
-                                                    groupName
-                                                  ][1]
+                                                  toggleAverageAnnualCosts[1]
                                                 )
                                               ),
                                           '$0,0'
