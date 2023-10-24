@@ -20,8 +20,8 @@
         {{
           $options.filters.numeral(
             config.medianToggle === "group"
-              ? toggleGroupAverageAnnualCost[0]
-              : toggleGroupAverageAnnualCost[1],
+              ? toggleGroupAverageAnnualCosts[0]
+              : toggleGroupAverageAnnualCosts[1],
             "$0,0"
           )
         }}

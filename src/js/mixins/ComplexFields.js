@@ -535,7 +535,7 @@ export default {
                      1 : _.get(this.school, fields['EARNINGS_MIDPOINT_ALL'])}
             return medians;
         },
-        toggleAverageAnnualCost() {
+        toggleAverageAnnualCosts() {
             if (!this.school) return null;
             var medians = 
                     { 0 : _.get(this.school, fields['AVG_COST_MIDPOINT_PRED_DEGREE']),
@@ -556,7 +556,7 @@ export default {
                      1 : _.get(this.schools[0], fields['EARNINGS_MIDPOINT_ALL'])}
             return medians;
         },
-        toggleGroupAverageAnnualCost() {
+        toggleGroupAverageAnnualCosts() {
             if (!this.schools) return null;
             var medians = 
                     { 0 : _.get(this.schools[0], fields['AVG_COST_MIDPOINT_PRED_DEGREE']),
