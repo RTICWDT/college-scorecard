@@ -41,7 +41,7 @@
   background-color: #eff1f5 !important;
   width: 100%;
   #fos-sort-toggle {
-    #median-tab-inactive {
+    .median-tab-inactive {
       /*background-color: #eeeeee;*/
       border-bottom: none !important;
     }
@@ -59,7 +59,7 @@
     background-color: #707070;
   }
 
-  #median-tab-active {
+  .median-tab-active {
     span {
       font-weight: bold;
     }
