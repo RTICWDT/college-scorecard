@@ -3,7 +3,7 @@
 <div :class="labelPrefix ? 'median-toggle-container align-end flex' : 'align-end flex' ">
   <em v-if="!labelPrefix" class="d-flex  mr-2">Show Midpoint for:</em>
   <v-tabs
-    id="median-toggle"
+    class="median-toggle"
     :value="controlTab"
     :show-arrows="true"
     slider-size="8"
@@ -13,11 +13,11 @@
     :grow="fillSpace"
   >
     <v-tabs-slider
-      id="median-toggle-slider"
+      class="median-toggle-slider"
       :class="{ 'median-group-slider-green': controlTab === 1 }"
     />
 
-    <v-tab :id="tabID('group', controlTab)" :style="tabStyle">
+    <v-tab :class="tabID('group', controlTab)" :style="tabStyle">
       <slot name="tab-group">
         <span class="compare-tab-title">
           {{ labelPrefix }}{{groupName}}
@@ -40,7 +40,7 @@
 <style lang="scss" scoped>
 @import "~/sass/_variables";
 
-#median-toggle-slider {
+.median-toggle-slider {
   background-color: $institution-accent-color;
 
 }
@@ -50,8 +50,8 @@
 
 .median-toggle-container {
   border-bottom: 2px solid #dadada;
-  #median-toggle {
-    #median-tab-inactive {
+  .median-toggle {
+    .median-tab-inactive {
     /*background-color: #eeeeee;*/
     border-bottom: none !important;
   }
@@ -59,13 +59,13 @@
 }
 
 
-#median-toggle {
-  #median-tab-inactive {
+.median-toggle {
+  .median-tab-inactive {
     /*background-color: #eeeeee;*/
     border-bottom: 1px solid #707070;
   }
 
-  #median-tab-active {
+  .median-tab-active {
     span {
       font-weight: bold;
     }

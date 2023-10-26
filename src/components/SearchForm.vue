@@ -9,9 +9,8 @@
   }
 }
 
-.v-input--checkbox >>> .theme--light.v-label {
+.v-input--checkbox ::v-deep .theme--light.v-label {
   color: $search-options !important;
-
 }
 
 .search-panel-header {
@@ -20,7 +19,7 @@
 }
 
 .search-subhead {
-  color:$darker-gray;
+  color: $darker-gray;
 }
 
 #search-form-sub-degree-container {
@@ -91,8 +90,7 @@
             value="3"
             color="secondary"
             hide-details
-          ></v-checkbox> 
-
+          ></v-checkbox>
 
           <span class="search-subhead pt-5">Graduate</span>
           <v-checkbox
@@ -123,8 +121,8 @@
             value="6"
             color="secondary"
             hide-details
-          ></v-checkbox>       
-          
+          ></v-checkbox>
+
           <v-checkbox
             id="search-form-fos-degree-f"
             class="search-form-degree-cb my-0 py-0"
@@ -143,8 +141,7 @@
             value="8"
             color="secondary"
             hide-details
-          ></v-checkbox>            
-          </v-expansion-panel-content
+          ></v-checkbox> </v-expansion-panel-content
       ></v-expansion-panel>
 
       <v-expansion-panel v-if="!hideLocation">
@@ -538,7 +535,6 @@ export default {
   watch: {
     cleanInput: {
       handler(newValue, oldValue) {
-
         // On first load trigger query immediately, then debounce additional queries.
         if (!this.autoSubmit || _.isEqual(newValue, oldValue)) {
           return
@@ -710,8 +706,7 @@ export default {
       // Send new param object, reset page
       this.$emit("search-query", { ...this.cleanInput, page: 0 })
     }, 1000)
-    if (this.autoSubmit)
-    {
+    if (this.autoSubmit) {
       this.$emit("search-query", { ...this.cleanInput, page: 0 })
     }
   },

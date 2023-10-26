@@ -1,5 +1,6 @@
 <template>
   <v-app tabindex="-1">
+    
     <scorecard-header />
     <router-view :is-loading="isLoading" @loading="isLoading = $event" />
     <scorecard-footer />

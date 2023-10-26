@@ -3,7 +3,7 @@
     <v-main>
       <!-- Top Splash and Search-->
       <div class="home-splash">
-        <v-container class="mb-n10 pt-sm-16 pt-5">
+        <v-container class="mb-n10 pt-sm-10 pt-5">
           <v-row>
             <!-- Header Info -->
             <v-col cols="12" class="px-6 px-sm-3">
@@ -278,11 +278,7 @@
                     class="homeCallout-indent"
                     href="https://www.apprenticeship.gov/apprenticeship-finder"
                     target="_blank"
-                    @click="
-                      transitionOutboundLink(
-                        $event
-                      )
-                    "
+                    @click="transitionOutboundLink($event)"
                   >
                     apprenticeship.gov<v-icon
                       x-small
@@ -300,11 +296,7 @@
                     class="homeCallout-indent"
                     href="https://www.mynextmove.org"
                     target="_blank"
-                    @click="
-                      transitionOutboundLink(
-                        $event
-                      )
-                    "
+                    @click="transitionOutboundLink($event)"
                   >
                     MyNextMove.org<v-icon x-small class="pl-1" color="#007000">
                       fas fa-external-link-alt
@@ -320,11 +312,7 @@
                     class="homeCallout-indent"
                     href="https://trainingproviderresults.gov"
                     target="_blank"
-                    @click="
-                      transitionOutboundLink(
-                        $event
-                      )
-                    "
+                    @click="transitionOutboundLink($event)"
                   >
                     TrainingProviderResults.gov<v-icon
                       x-small
@@ -342,11 +330,7 @@
                     class="homeCallout-indent"
                     href="https://careeronestop.org"
                     target="_blank"
-                    @click="
-                      transitionOutboundLink(
-                        $event
-                      )
-                    "
+                    @click="transitionOutboundLink($event)"
                   >
                     CareerOneStop.org<v-icon
                       x-small
@@ -364,9 +348,7 @@
                     class="homeCallout-indent"
                     href="https://www.bls.gov/ooh/"
                     target="_blank"
-                    @click="
-                      transitionOutboundLink($event)
-                    "
+                    @click="transitionOutboundLink($event)"
                   >
                     Occupational Outlook Handbook (OOH)<v-icon
                       x-small
@@ -402,9 +384,7 @@
                   <a
                     href="https://studentaid.gov"
                     target="_blank"
-                    @click="
-                      transitionOutboundLink($event)
-                    "
+                    @click="transitionOutboundLink($event)"
                   >
                     StudentAid.gov<v-icon x-small class="pl-1" color="#007000">
                       fas fa-external-link-alt
@@ -420,11 +400,7 @@
                   <a
                     href="https://studentaid.gov/aid-estimator/"
                     target="_blank"
-                    @click="
-                      transitionOutboundLink(
-                        $
-                      )
-                    "
+                    @click="transitionOutboundLink($)"
                   >
                     Federal Student Aid Estimator<v-icon
                       x-small
@@ -444,11 +420,7 @@
                     href="https://studentaid.gov/h/apply-for-aid/fafsa"
                     target="_blank"
                     x-large
-                    @click="
-                      transitionOutboundLink(
-                        $event
-                      )
-                    "
+                    @click="transitionOutboundLink($event)"
                     >Start Your FAFSA&reg; Application<v-icon
                       x-small
                       class="pl-1"
@@ -467,11 +439,7 @@
                   <a
                     href="https://www.vets.gov/gi-bill-comparison-tool"
                     target="_blank"
-                    @click="
-                      transitionOutboundLink(
-                        $event
-                      )
-                    "
+                    @click="transitionOutboundLink($event)"
                   >
                     GI Bill&reg; comparison tool<v-icon
                       x-small
@@ -519,7 +487,7 @@ h1 {
   font-size: 1rem;
   color: #bbbbbb !important;
   letter-spacing: normal;
-  font-weight:700;
+  font-weight: 700;
   -webkit-font-smoothing: subpixel-antialiased;
 }
 
@@ -534,11 +502,11 @@ h1 {
 }
 
 .v-avatar img {
-  border-radius:6px;
+  border-radius: 6px;
 }
 
 h2 span {
-  font-weight:600 !important;
+  font-weight: 600 !important;
 }
 </style>
 
@@ -609,7 +577,7 @@ export default {
       // Direct to location.
       //window.location.href = this.$url(url)
       this.$router.push(url)
-    }, 
+    },
     handleSchoolNameSelected(school) {
       if (typeof school == "string") {
         this.$router.push("/search/?search=" + encodeURIComponent(school))
