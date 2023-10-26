@@ -1239,12 +1239,13 @@
                       <div v-else>
                         <v-row>
                           <v-col cols="12" md="8">
-                            <p class="overline mb-1">Loan Type</p>
+                            <p class="overline mb-1" id="loan-type-label">Loan Type</p>
 
                             <v-select
                               :items="aidLoanSelectItems"
                               v-model="aidLoanSelect"
                               color="secondary"
+                              aria-labelledby="loan-type-label"
                             />
                           </v-col>
 
