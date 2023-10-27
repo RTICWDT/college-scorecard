@@ -218,8 +218,8 @@
                             v-if="
                               completionRate &&
                                 (this.medianToggle === 'group'
-                                  ? fakeGraduationRate[groupName][0]
-                                  : fakeGraduationRate[groupName][1])
+                                  ? toggleGraduationRate[0]
+                                  : toggleGraduationRate[1])
                             "
                             >Midpoint for
                             {{
@@ -232,8 +232,8 @@
                             {{
                               this.$options.filters.numeral(
                                 this.medianToggle === "group"
-                                  ? fakeGraduationRate[groupName][0]
-                                  : fakeGraduationRate[groupName][1],
+                                  ? toggleGraduationRate[0]
+                                  : toggleGraduationRate[1],
                                 "0%"
                               )
                             }}</em
@@ -265,8 +265,8 @@
                                 ' Schools',
                               value:
                                 this.medianToggle === 'group'
-                                  ? fakeGraduationRate[groupName][0] * 100
-                                  : fakeGraduationRate[groupName][1] * 100,
+                                  ? toggleGraduationRate[0] * 100
+                                  : toggleGraduationRate[1] * 100,
                               style: { height: '60px' },
                             }"
                             color="#1570EF"
@@ -311,8 +311,8 @@
                             v-if="
                               netPrice &&
                                 (this.medianToggle === 'group'
-                                  ? fakeAverageAnnualCosts[groupName][0]
-                                  : fakeAverageAnnualCosts[groupName][1])
+                                  ? toggleAverageAnnualCosts[0]
+                                  : toggleAverageAnnualCosts[1])
                             "
                             >Midpoint for
                             {{
@@ -326,12 +326,12 @@
                                 this.medianToggle === "group"
                                   ? Math.round(
                                       parseFloat(
-                                        fakeAverageAnnualCosts[groupName][0]
+                                        toggleAverageAnnualCosts[0]
                                       )
                                     )
                                   : Math.round(
                                       parseFloat(
-                                        fakeAverageAnnualCosts[groupName][1]
+                                        toggleAverageAnnualCosts[1]
                                       )
                                     ),
                                 "$0,0"
@@ -367,8 +367,8 @@
                                 ' Schools',
                               value:
                                 this.medianToggle === 'group'
-                                  ? fakeAverageAnnualCosts[groupName][0]
-                                  : fakeAverageAnnualCosts[groupName][1],
+                                  ? toggleAverageAnnualCosts[0]
+                                  : toggleAverageAnnualCosts[1],
                               style: { height: '60px' },
                               show: true,
                             }"
@@ -418,8 +418,8 @@
                             v-if="
                               medianEarnings &&
                                 (this.medianToggle === 'group'
-                                  ? fakeMedianEarnings[groupName][0]
-                                  : fakeMedianEarnings[groupName][1])
+                                  ? toggleMedianEarnings[0]
+                                  : toggleMedianEarnings[1])
                             "
                             >Midpoint for
                             {{
@@ -433,12 +433,12 @@
                                 this.medianToggle === "group"
                                   ? Math.round(
                                       parseFloat(
-                                        fakeMedianEarnings[groupName][0]
+                                        toggleMedianEarnings[0]
                                       )
                                     )
                                   : Math.round(
                                       parseFloat(
-                                        fakeMedianEarnings[groupName][1]
+                                        toggleMedianEarnings[1]
                                       )
                                     ),
                                 "$0,0"
@@ -461,7 +461,7 @@
                               style: { height: '60px' },
                             }"
                             :max="{
-                              label: '$100,000',
+                              label: '$100,000+',
                               value: 100000,
                               style: { height: '60px' },
                             }"
@@ -474,8 +474,8 @@
                                 ' Schools',
                               value:
                                 this.medianToggle === 'group'
-                                  ? fakeMedianEarnings[groupName][0]
-                                  : fakeMedianEarnings[groupName][1],
+                                  ? toggleMedianEarnings[0]
+                                  : toggleMedianEarnings[1],
                               style: { height: '60px' },
                               show: true,
                             }"
@@ -819,24 +819,20 @@
                                       this.medianToggle === 'group'
                                         ? Math.round(
                                             parseFloat(
-                                              fakeAverageAnnualCosts[
-                                                groupName
-                                              ][0]
+                                              toggleAverageAnnualCosts[0]
                                             )
                                           )
                                         : Math.round(
                                             parseFloat(
-                                              fakeAverageAnnualCosts[
-                                                groupName
-                                              ][1]
+                                              toggleAverageAnnualCosts[1]
                                             )
                                           ),
                                       '$0,0'
                                     ),
                                   value:
                                     this.medianToggle === 'group'
-                                      ? fakeAverageAnnualCosts[groupName][0]
-                                      : fakeAverageAnnualCosts[groupName][1],
+                                      ? toggleAverageAnnualCosts[0]
+                                      : toggleAverageAnnualCosts[1],
                                   style: { height: '60px' },
                                   show: true,
                                 }"
@@ -933,26 +929,20 @@
                                           this.medianToggle === 'group'
                                             ? Math.round(
                                                 parseFloat(
-                                                  fakeAverageAnnualCosts[
-                                                    groupName
-                                                  ][0]
+                                                  toggleAverageAnnualCosts[0]
                                                 )
                                               )
                                             : Math.round(
                                                 parseFloat(
-                                                  fakeAverageAnnualCosts[
-                                                    groupName
-                                                  ][1]
+                                                  toggleAverageAnnualCosts[1]
                                                 )
                                               ),
                                           '$0,0'
                                         ),
                                       value:
                                         this.medianToggle === 'group'
-                                          ? fakeAverageAnnualCosts[groupName][0]
-                                          : fakeAverageAnnualCosts[
-                                              groupName
-                                            ][1],
+                                          ? toggleAverageAnnualCosts[0]
+                                          : toggleAverageAnnualCosts[1],
                                       style: { height: '60px' },
                                       show: true,
                                     }"
@@ -1129,14 +1119,14 @@
                                   'Midpoint: ' +
                                   this.$options.filters.numeral(
                                     this.medianToggle === 'group'
-                                      ? fakeGraduationRate[groupName][0]
-                                      : fakeGraduationRate[groupName][1],
+                                      ? toggleGraduationRate[0]
+                                      : toggleGraduationRate[1],
                                     '0%'
                                   ),
                                 value:
                                   this.medianToggle === 'group'
-                                    ? fakeGraduationRate[groupName][0] * 100
-                                    : fakeGraduationRate[groupName][1] * 100,
+                                    ? toggleGraduationRate[0] * 100
+                                    : toggleGraduationRate[1] * 100,
                                 style: { height: '60px' },
                                 show: !showPellOnlyGrad,
                               }"
@@ -1164,7 +1154,7 @@
                               :value="
                                 Math.round(parseFloat(retentionRate) * 100)
                               "
-                              chart-id="retention-chart"
+                              chart-id="retention-donut"
                               :height="150"
                               label="Retention Rate"
                             ></donut>
@@ -1249,10 +1239,13 @@
                       <div v-else>
                         <v-row>
                           <v-col cols="12" md="8">
+                            <p class="overline mb-1" id="loan-type-label">Loan Type</p>
+
                             <v-select
                               :items="aidLoanSelectItems"
                               v-model="aidLoanSelect"
                               color="secondary"
+                              aria-labelledby="loan-type-label"
                             />
                           </v-col>
 
@@ -1295,6 +1288,7 @@
                                     :value="studentsReceivingLoans * 100"
                                     :height="200"
                                     class="pb-3"
+                                    chart-id="loans-donut"
                                   >
                                   </donut>
                                   <div class="sr-only">
@@ -1708,7 +1702,7 @@
                                 style: { height: '60px' },
                               }"
                               :max="{
-                                label: '$100,000',
+                                label: '$100,000+',
                                 value: 100000,
                                 style: { height: '60px' },
                               }"
@@ -1719,20 +1713,20 @@
                                     this.medianToggle === 'group'
                                       ? Math.round(
                                           parseFloat(
-                                            fakeMedianEarnings[groupName][0]
+                                            toggleMedianEarnings[0]
                                           )
                                         )
                                       : Math.round(
                                           parseFloat(
-                                            fakeMedianEarnings[groupName][1]
+                                            toggleMedianEarnings[1]
                                           )
                                         ),
                                     '$0,0'
                                   ),
                                 value:
                                   this.medianToggle === 'group'
-                                    ? fakeMedianEarnings[groupName][0]
-                                    : fakeMedianEarnings[groupName][1],
+                                    ? toggleMedianEarnings[0]
+                                    : toggleMedianEarnings[1],
                                 style: { height: '60px' },
                                 show: true,
                               }"
@@ -1870,6 +1864,7 @@
                                 color="#1874DC"
                                 :value="socioEconomicDiversity * 100"
                                 :height="200"
+                                chart-id="diversity-donut"
                               ></donut>
                               <div class="sr-only">
                                 Socio-Economic Diversity:
@@ -1934,6 +1929,7 @@
                                 color="#1874DC"
                                 :height="25"
                                 :labels="true"
+                                chart-id=""
                               ></horizontal-bar>
                               <horizontal-bar
                                 :value="Math.round(item.staff_value * 100)"
@@ -1942,6 +1938,7 @@
                                 color="#102E52"
                                 :height="25"
                                 :labels="true"
+                                chart-id=""
                                 style="margin-top:2px;margin-bottom:15px;"
                               ></horizontal-bar>
                             </div>
@@ -1959,6 +1956,7 @@
                                 color="#1874DC"
                                 :height="25"
                                 :labels="true"
+                                chart-id=""
                               ></horizontal-bar>
                               <horizontal-bar
                                 :value="Math.round(item.staff_value * 100)"
@@ -1967,6 +1965,7 @@
                                 color="#102E52"
                                 :height="25"
                                 :labels="true"
+                                chart-id=""
                                 style="margin-top:2px;margin-bottom:15px;"
                               ></horizontal-bar>
                             </div>
@@ -2080,7 +2079,7 @@
                               <donut
                                 color="#1874DC"
                                 :value="acceptanceRateActual * 100"
-                                chart-id="acceptance-chart"
+                                chart-id="acceptance-donut"
                                 :height="200"
                                 label="Acceptance Rate"
                               ></donut>
@@ -2095,7 +2094,7 @@
                               <donut
                                 color="#1874DC"
                                 :value="100"
-                                chart-id="acceptance-chart"
+                                chart-id="acceptance-donut"
                                 :height="200"
                                 label="Acceptance Rate"
                               ></donut>

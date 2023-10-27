@@ -205,7 +205,7 @@
                         style: { height: '60px' },
                       },
                       max: {
-                        label: '$100,000',
+                        label: '$100,000+',
                         value: 100000,
                         style: { height: '60px' },
                       },
@@ -1007,11 +1007,13 @@
                 </v-expansion-panel-header>
 
                 <v-expansion-panel-content class="mt-5 mx-n4 mx-sm-5">
+                  <p class="overline mb-1" id="loan-type-label">Loan Type</p>
                   <v-select
                     class="mb-5 pt-0"
                     hide-details
                     :items="aidLoanSelectItems"
                     v-model="aidLoanSelect"
+                    aria-labelledby="loan-type-label"
                   />
 
                   <compare-section
@@ -1271,7 +1273,7 @@
                         style: { height: '60px' },
                       },
                       max: {
-                        label: '$100,000',
+                        label: '$100,000+',
                         value: 100000,
                         style: { height: '60px' },
                       },

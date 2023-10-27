@@ -25,8 +25,8 @@
     <v-main
       v-bind:style="{
         'padding-top': $vuetify.breakpoint.xsOnly
-          ? '80px !important'
-          : '105px !important',
+          ? '95px !important'
+          : '130px !important',
       }"
     >
       <v-card tile class="tab-card">
@@ -103,7 +103,8 @@
               hide-overlay
             >
               <div class="pa-6">
-                <a href=""
+                <a
+                  href=""
                   class="float-right close-filter"
                   @click="showSidebar = !showSidebar"
                 >
@@ -633,10 +634,10 @@ export default {
           this.shareUrl = window.location.href
 
           if (this.$vuetify.breakpoint.smAndDown) {
-          this.showSidebar = false
-        } else {
-          this.showSidebar = true
-        }          
+            this.showSidebar = false
+          } else {
+            this.showSidebar = true
+          }
         })
         .catch((error) => {
           console.warn("Error fetching search.")

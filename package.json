@@ -1,7 +1,7 @@
 {
   "name": "college-scorecard",
   "private": true,
-  "version": "3.1.0",
+  "version": "3.1.1",
   "scripts": {
     "build": "gridsome build",
     "develop": "gridsome develop",
@@ -12,6 +12,7 @@
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@mdi/font": "^5.9.55",
     "axios": "^0.21.2",
+    "bootstrap": "^5.3.2",
     "chart.js": "^2.9.4",
     "chartjs-plugin-datalabels": "^0.7.0",
     "google-charts": "^2.0.0",
@@ -19,6 +20,7 @@
     "numeral": "^2.0.6",
     "sass": "^1.51.0",
     "sass-loader": "^10.1.1",
+    "uswds-vue": "^0.1.51",
     "vue-chartjs": "^3.5.1",
     "vue-clipboard2": "^0.3.1",
     "vue-numeral-filter": "^2.0.0",

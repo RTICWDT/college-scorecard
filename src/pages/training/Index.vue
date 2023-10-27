@@ -2,7 +2,7 @@
   <div class="v-application-override">
     <div
       class="justify-center"
-      style="background:#fff;width:100%;padding-top:105px;"
+      style="background:#fff;width:100%;padding-top:130px;"
     >
       <v-container
         ><v-row class="ml-2">
@@ -73,11 +73,7 @@
                       <a
                         href="https://www.careeronestop.org/LocalHelp/AmericanJobCenters/american-job-centers.aspx"
                         target="_blank"
-                        @click="
-                          transitionOutboundLink(
-                            $event
-                          )
-                        "
+                        @click="transitionOutboundLink($event)"
                         >American Job Center<v-icon x-small class="pl-1">
                           fas fa-external-link-alt
                         </v-icon></a
@@ -86,11 +82,7 @@
                       benefits (<a
                         href="https://www.dol.gov/general/topic/unemployment-insurance"
                         target="_blank"
-                        @click="
-                          transitionOutboundLink(
-                            $event
-                          )
-                        "
+                        @click="transitionOutboundLink($event)"
                         >learn more about UI benefits<v-icon
                           x-small
                           class="pl-1"
@@ -182,11 +174,7 @@
                 <a
                   href="https://trainingproviderresults.gov"
                   target="_blank"
-                  @click="
-                    transitionOutboundLink(
-                      $event
-                    )
-                  "
+                  @click="transitionOutboundLink($event)"
                   >TrainingProviderResults.gov<v-icon x-small class="pl-1">
                     fas fa-external-link-alt
                   </v-icon>
@@ -222,11 +210,7 @@
                 <a
                   href="https://studentaid.gov/aid-estimator/"
                   target="_blank"
-                  @click="
-                    transitionOutboundLink(
-                      $event
-                    )
-                  "
+                  @click="transitionOutboundLink($event)"
                 >
                   Federal Student Aid Estimator<v-icon
                     x-small
@@ -246,11 +230,7 @@
                   color="secondary"
                   href="https://studentaid.gov/h/apply-for-aid/fafsa"
                   target="_blank"
-                  @click="
-                    transitionOutboundLink(
-                      $event
-                    )
-                  "
+                  @click="transitionOutboundLink($event)"
                   >Start Your FAFSA&reg; Application<v-icon
                     x-small
                     color="white"
