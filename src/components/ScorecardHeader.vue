@@ -127,7 +127,7 @@ header {
         >
           <div class="show-on-focus-container">
             <div class="show-on-focus">
-              <a @click="skipNav()" href="#" class="d-sr-only-focusable"
+              <a tabindex="1" @click="skipNav()" href="#" class="d-sr-only-focusable"
                 >Skip to main content</a
               >
             </div>
