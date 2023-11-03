@@ -21,6 +21,7 @@ export const fields = {
   OPERATING:            'school.operating',
 
   SIZE:                 'latest.student.size',
+  FOS_SIZE:             'student.size',
   ONLINE_ONLY:          'school.online_only',
   MAIN:                 'school.main_campus',
   BRANCHES:             'school.branches',

@@ -59,7 +59,7 @@
       </h2>
 
       <p class="">{{ city }}, {{ state }} {{ zip }}</p>
-      <small-school-icons :school="school" :fields="fields" size="small" />
+      <small-school-icons :school="school" :fields="fields" size="small" fos />
       <p v-if="underInvestigation == 1">
         <v-card color="error" class="px-2 py-1" flat>
           <strong class="white--text">Under ED Monitoring</strong>
@@ -290,6 +290,7 @@ export default {
   mounted() {
     // flatten the school to work with the computed fields.
     this.school = _.merge(this.fos.institution, this.fos.institution.school)
+    //console.log(this.school)
   },
 }
 </script>
