@@ -34,12 +34,12 @@
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <li
-            :class="_.get(school, fields['SIZE'], '-1') | sizeCategoryClass"
+            :class="_.get(school, sizeField, '-1') | sizeCategoryClass"
             v-on="on"
             :style="{ 'background-image': 'url(' + $url(sizeIcon) + ')' }"
           >
             <span>{{
-              _.get(school, fields["SIZE"], "-1") | sizeCategory
+              _.get(school, sizeField, "-1") | sizeCategory
             }}</span>
           </li>
         </template>
@@ -130,11 +130,15 @@ export default {
       default: false,
       type: Boolean,
     },
+    fos: Boolean
   },
   created() {},
   computed: {
     years() {
       return _.get(this.school, this.fields["PREDOMINANT_DEGREE"])
+    },
+    sizeField() {
+      return this.fos ? this.fields['FOS_SIZE'] : this.fields['SIZE']
     },
     tip() {
       switch (this.years) {
@@ -201,8 +205,8 @@ export default {
     },
     sizeIcon() {
       let icon = this.$options.filters.sizeCategoryClass(
-        _.get(this.school, this.fields["SIZE"])
-      )
+        _.get(this.school, this.sizeField)
+      ) 
       if (icon) {
         return "/img/school-icons/" + icon.substr(5) + ".svg"
       } else {

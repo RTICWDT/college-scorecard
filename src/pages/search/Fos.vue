@@ -582,12 +582,17 @@ export default {
       ? this.urlParsedParams.sort
       : this.defaultSort
 
+      this.input.page = this.urlParsedParams.page
+      ? parseInt(this.urlParsedParams.page)
+      : 0
+
     this.input.cip4 = this.urlParsedParams.cip4
     this.input.cip4_degree = this.urlParsedParams.cip4_degree
 
     if (!this.input.cip4 || !this.input.cip4_degree) {
       this.$router.push("/search/fos-landing")
     }
+
     this.searchAPI()
 
     // Create Debounce function for this page.
@@ -715,8 +720,9 @@ export default {
       this.input = Object.fromEntries(
         Object.entries(this.input).filter(([_, v]) => v != null)
       )
+      if (!this.input.page)
+        this.input.page = 0
 
-      this.input.page = 0
       this.searchAPI()
     },
     handlePaginationInput() {
