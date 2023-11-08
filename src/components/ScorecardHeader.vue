@@ -200,7 +200,7 @@ header {
                       @click="handleCompareIconClick"
                       aria-label="Show Compare Drawer"
                     >
-                      <v-icon color="#122E51">
+                      <v-icon color="black">
                         fas fa-university
                       </v-icon>
                     </v-btn>
