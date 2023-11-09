@@ -153,8 +153,8 @@
         label="Only show schools that have Department of Labor WIOA programs"
         color="secondary"
         hide-details
-        true-value="true"
-        false-value="false"
+        value="true"
+
       ></v-checkbox>
     </div>
 
@@ -214,7 +214,6 @@ export default {
         formDefault: {
           fos_salary: [0, 150],
           fos_debt: [0, 50],
-          dolflag: null,
           state: null,
           zip: null,
           distance: 50,
@@ -264,7 +263,7 @@ export default {
         groomedInput.distance = this.input.distance
       } else {
         _.unset(groomedInput, "distance")
-      }
+      }   
 
       // Format Sliders - Happens here to ensure if shows up in url in desired format
       if (groomedInput.fos_salary) {
@@ -351,7 +350,7 @@ export default {
                 return Number(value / 1000)
               }
             })
-            break
+            break         
           default:
             if (_.isArray(objVal) && _.isString(newObjValue)) {
               return [newObjValue]
