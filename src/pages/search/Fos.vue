@@ -593,8 +593,6 @@ export default {
       this.$router.push("/search/fos-landing")
     }
 
-    this.searchAPI()
-
     // Create Debounce function for this page.
     this.debounceSearchUpdate = _.debounce(function() {
       this.searchAPI()
@@ -737,9 +735,8 @@ export default {
     clearSearchForm() {
       this.input = {
         page: 1,
-        sort: this.defaultSort,
         cip4: this.urlParsedParams.cip4,
-        cip4_degree: this.urlParsedParams.cip4_degree,
+        cip4_degree: this.urlParsedParams.cip4_degree
       }
 
       this.$root.$emit("search-form-reset")
