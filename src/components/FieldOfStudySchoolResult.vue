@@ -78,7 +78,7 @@
     <p class="mb-1 font-weight-bold">{{ city }}, {{ state }} {{ zip }}</p>
     <v-row>
       <v-col cols="12">
-        <small-school-icons :school="school" :fields="fields" size="small" />
+        <small-school-icons :school="school" :fields="fields" size="small" fos />
       </v-col>
     </v-row>
   </v-col>

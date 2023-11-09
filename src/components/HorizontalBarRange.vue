@@ -346,8 +346,8 @@ export default {
 
       if (right < 80 && this.addExtraPadding) {
         //this.extraPad["padding-right"] = "60px"
-        var s = this._upper.styles.left.replace(/[0-9]+%\s?/g, "")
-        this._upper.styles.left = s - 10 + "%"
+        //var s = this._upper.styles.left.replace(/[0-9]+%\s?/g, "")
+        //this._upper.styles.left = s - 10 + "%"
       }
     },
     scale(v) {

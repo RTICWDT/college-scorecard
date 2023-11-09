@@ -298,7 +298,7 @@ export default {
       this.bar_styles.right = right + "%"
 
       if (right < 20 && this.addExtraPadding) {
-        this.extraPad["padding-right"] = "60px"
+        //this.extraPad["padding-right"] = "60px"
       }
     },
     scale(v) {

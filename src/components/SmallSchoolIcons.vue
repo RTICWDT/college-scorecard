@@ -7,7 +7,7 @@
         <template v-slot:activator="{ on }">
           <li
             :class="years | yearsClass"
-            v-if="!sizeOnly"
+            v-if="!sizeOnly && yearIcon != 'none'"
             v-on="on"
             :style="{ 'background-image': 'url(' + $url(yearIcon) + ')' }"
           >
@@ -18,14 +18,14 @@
       </v-tooltip>
       <li
         :class="_.get(school, fields['OWNERSHIP'], '-1') | controlClass"
-        v-if="!sizeOnly"
+        v-if="!sizeOnly && ownershipIcon != 'none'"
         :style="{ 'background-image': 'url(' + $url(ownershipIcon) + ')' }"
       >
         <span>{{ _.get(school, fields["OWNERSHIP"], "-1") | control }}</span>
       </li>
       <li
         :class="_.get(school, fields['LOCALE'], '-1') | localeClass"
-        v-if="!sizeOnly"
+        v-if="!sizeOnly && localeIcon != 'none'"
         :style="{ 'background-image': 'url(' + $url(localeIcon) + ')' }"
       >
         <span>{{ _.get(school, fields["LOCALE"], "-1") | locale }}</span>
@@ -33,13 +33,13 @@
 
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
-          <li
-            :class="_.get(school, fields['SIZE'], '-1') | sizeCategoryClass"
+          <li v-if="sizeIcon != 'none'"
+            :class="_.get(school, sizeField, '-1') | sizeCategoryClass"
             v-on="on"
             :style="{ 'background-image': 'url(' + $url(sizeIcon) + ')' }"
           >
             <span>{{
-              _.get(school, fields["SIZE"], "-1") | sizeCategory
+              _.get(school, sizeField, "-1") | sizeCategory
             }}</span>
           </li>
         </template>
@@ -130,11 +130,15 @@ export default {
       default: false,
       type: Boolean,
     },
+    fos: Boolean
   },
   created() {},
   computed: {
     years() {
       return _.get(this.school, this.fields["PREDOMINANT_DEGREE"])
+    },
+    sizeField() {
+      return this.fos ? this.fields['FOS_SIZE'] : this.fields['SIZE']
     },
     tip() {
       switch (this.years) {
@@ -193,7 +197,7 @@ export default {
       let icon = this.$options.filters.localeClass(
         _.get(this.school, this.fields["LOCALE"], "-1")
       )
-      if (icon) {
+      if (icon && icon != "unknown") {
         return "/img/school-icons/" + icon.substr(5) + ".svg"
       } else {
         return "none"
@@ -201,8 +205,8 @@ export default {
     },
     sizeIcon() {
       let icon = this.$options.filters.sizeCategoryClass(
-        _.get(this.school, this.fields["SIZE"])
-      )
+        _.get(this.school, this.sizeField)
+      ) 
       if (icon) {
         return "/img/school-icons/" + icon.substr(5) + ".svg"
       } else {
