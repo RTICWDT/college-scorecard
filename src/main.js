@@ -176,6 +176,10 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     content: "default-src 'self' https://www.gstatic.com https//*.typekit.net https://dap.digitalgov.gov https://static.hotjar.com https://www.google-analytics.com https://www.gstatic.com https://www.googletagmanager.com https://script.hotjar.com; img-src 'self' *.googletagmanager.com data: https://*.basemaps.cartocdn.com/ *.cloud.gov *.googleapis.com *.google-analytics.com; child-src 'none'; script-src-elem * 'unsafe-inline'; style-src-elem  https://www.gstatic.com https://*.typekit.net/ https://fonts.googleapis.com 'self' 'unsafe-inline'; connect-src  https://api.data.gov https://www.google-analytics.com *.hotjar.com https://dap.digitalgov.gov https://stats.g.doubleclick.net *.hotjar.io 'self'; font-src https://fonts.gstatic.com https://use.typekit.net 'self'; style-src https://www.gstatic.com https://use.typekit.net 'self' 'unsafe-inline'; frame-src https://vars.hotjar.com https://www.google.com"
   })
   */
+  head.meta.push({
+    name: 'viewport',
+    content: "width=device-width,initial-scale=1.0,user-scalable=no"
+  })
  
   head.meta.push({
     'http-equiv':'Cache-control',
