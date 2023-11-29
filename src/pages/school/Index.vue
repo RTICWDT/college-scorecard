@@ -2901,6 +2901,14 @@ export default {
         name: "twitter:title",
         content: "College Scorecard",
       },
+      {
+        name: 'description',
+        content: 'The school profile provides a wealth of data, including average cost, graduation rates, financial aid and debt, typical earnings of graduates, and more.'
+      },
+      {
+        name: 'keywords',
+        content: 'College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings, graduation rate, tuition cost, average annual cost, net price, median earnings, typical earnings, salary after completion, student outcomes, pell grant, loan payment, financial aid, federal loan, parent PLUS loan, repayment rate, repayment status, student faculty ratio, study body demographics, test scores, SAT, ACT, acceptance rate, FAFSA, GI Bill'
+      }      
     ],
   },
 }

@@ -767,6 +767,14 @@ export default {
         name: "twitter:title",
         content: "Search | College Scorecard",
       },
+      {
+        name: 'description',
+        content: 'Search colleges nationwide. Search for schools based on degree type, cost, school type, test scores, size, mission, afflication, and more.'
+      },
+      {
+        name: 'keywords',
+        content: 'College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings, tutition costs, graduation rates, median earnings, acceptance rate, school size, WIOA'
+      }
     ],
   },
 }

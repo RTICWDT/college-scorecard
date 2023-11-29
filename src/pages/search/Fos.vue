@@ -790,6 +790,14 @@ export default {
         name: "twitter:title",
         content: "Search | College Scorecard",
       },
+      {
+        name: 'description',
+        content: 'Search the fields of study offered at each school by degree type.  Fields of study are areas of academic concentration (e.g, major sor programs).'
+      },
+      {
+        name: 'keywords',
+        content: 'College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings; field of study, program, major, CIP, Classification of Instructional Programs, salary after completing, median total debt, WIOA'
+      }
     ],
   },
 }
