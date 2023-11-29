@@ -178,7 +178,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   */
   head.meta.push({
     name: 'viewport',
-    content: "width=device-width,initial-scale=1.0,maximum-scale=1"
+    content: "width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1"
   })
  
   head.meta.push({
