@@ -601,7 +601,7 @@ export default {
     },
   },
   metaInfo: {
-    title: "College Scorecard",
+    title: "Home",
     meta: [
       {
         name: 'description',
