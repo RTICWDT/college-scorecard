@@ -2816,6 +2816,9 @@ export default {
     var match = location.search.match(/^\?(\d+)(\b|-)/)
     var id = match ? match[1] : null
 
+    if (!id)
+      router.push('/')
+
     var params = {}
     params[this.fields.OPERATING] = 1
     params[this.fields.OPEID + "__not"] = "null"
