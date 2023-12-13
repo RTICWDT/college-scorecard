@@ -239,7 +239,7 @@
                           :length="totalPages"
                           :total-visible="7"
                           @input="handlePaginationInput"
-                          class="pr-0 mr-0 justify-end text-right"
+                          class="pr-0 mr-0 justify-end text-right ml-1"
                         ></v-pagination>
                       </div>
                     </v-col>
