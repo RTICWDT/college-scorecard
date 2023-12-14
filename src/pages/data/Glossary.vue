@@ -80,6 +80,16 @@ export default {
   },
   metaInfo: {
     title: "Glossary",
+    meta: [
+      {
+        name: 'description',
+        content: 'The glossary includes detailed description of every datapoint and relevant data variables on the College Scorecard.'
+      },
+      {
+        name: 'keywords',
+        content: 'College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings, IPEDS'
+      }
+    ],
   },
 }
 </script>

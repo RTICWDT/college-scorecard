@@ -2088,6 +2088,14 @@ export default {
         name: "twitter:title",
         content: "Compare | College Scorecard",
       },
+      {
+        name: 'description',
+        content: 'Compare colleges nationwide. Compare data on cost, graduation rate, student outcomes, potential earnings, financial aid and debt, test scores, and more.'
+      },
+      {
+        name: 'keywords',
+        content: 'College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings, graduation rate, tuition cost, average annual cost, net price, median earnings, typical earnings, salary after completion, student outcomes, pell grant, loan payment, financial aid, federal loan, parent PLUS loan, repayment rate, repayment status, study body demographics, test scores, SAT, ACT, acceptance rate'
+      }
     ],
   },
 }

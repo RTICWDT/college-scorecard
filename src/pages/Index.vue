@@ -601,7 +601,17 @@ export default {
     },
   },
   metaInfo: {
-    title: "College Scorecard",
+    title: "Home",
+    meta: [
+      {
+        name: 'description',
+        content: 'The U.S. Department of Education’s College Scorecard has the most reliable data on college costs, graduation rates, and post-college earnings.'
+      },
+      {
+        name: 'keywords',
+        content: 'College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings'
+      }
+    ],
   },
 }
 </script>
