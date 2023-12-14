@@ -18,6 +18,13 @@
 .tab-card {
   border: none;
 }
+
+.transparent {
+  bacgkround:transparent !important;
+}
+.bg-white {
+  background:white !important;
+}
 </style>
 
 <template>
@@ -97,12 +104,12 @@
             <v-navigation-drawer
               v-model="showSidebar"
               :width="$vuetify.breakpoint.smAndDown ? '100%' : 'auto'"
-              class="searchSidebar elevation-0 pr-0"
+              :class="[{transparent: $vuetify.breakpoint.smAndDown}, 'searchSidebar', 'elevation-0', 'pr-0']"
               :absolute="$vuetify.breakpoint.smAndDown"
               :temporary="$vuetify.breakpoint.smAndDown"
               hide-overlay
             >
-              <div class="pa-6">
+              <div class="pa-6 bg-white">
                 <a
                   href=""
                   class="float-right close-filter"
@@ -142,10 +149,12 @@
               right
               color="primary"
               @click="toTop"
+              style="z-index:1000"
             >
               <v-icon>fas fa-arrow-up</v-icon>
-            </v-btn></v-col
-          ><v-col :cols="showSidebar ? 9 : 12" xl="10" class="pa-6 pa-sm-8`">
+            </v-btn>
+            </v-col>
+            <v-col :cols="showSidebar ? 9 : 12" xl="10" class="pa-6 pa-sm-8`">
             <div id="search-result-container">
               <div class="search-result-container">
                 <!-- Search Result Info and controls -->
@@ -239,7 +248,7 @@
                           :length="totalPages"
                           :total-visible="7"
                           @input="handlePaginationInput"
-                          class="pr-0 mr-0 justify-end text-right"
+                          class="pr-0 mr-0 justify-end text-right ml-1"
                         ></v-pagination>
                       </div>
                     </v-col>
@@ -767,6 +776,14 @@ export default {
         name: "twitter:title",
         content: "Search | College Scorecard",
       },
+      {
+        name: 'description',
+        content: 'Search colleges nationwide. Search for schools based on degree type, cost, school type, test scores, size, mission, afflication, and more.'
+      },
+      {
+        name: 'keywords',
+        content: 'College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings, tutition costs, graduation rates, median earnings, acceptance rate, school size, WIOA'
+      }
     ],
   },
 }

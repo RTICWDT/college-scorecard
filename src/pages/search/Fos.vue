@@ -13,6 +13,12 @@
 .tab-card {
   border: none;
 }
+.transparent {
+  bacgkround:transparent !important;
+}
+.bg-white {
+  background:white !important;
+}
 </style>
 
 <template>
@@ -100,13 +106,13 @@
             <v-navigation-drawer
               v-model="showSidebar"
               :width="$vuetify.breakpoint.smAndDown ? '100%' : 'auto'"
-              class="searchSidebar elevation-0 pr-0"
+              :class="[{transparent: $vuetify.breakpoint.smAndDown}, 'searchSidebar', 'elevation-0', 'pr-0']"
               :absolute="$vuetify.breakpoint.smAndDown"
               :temporary="$vuetify.breakpoint.smAndDown"
               hide-overlay
             >
               <div
-                class="px-6 pt-6 white"
+                class="px-6 pt-6 bg-white"
                 style="border-right: 5px solid #DFE6F0;"
               >
                 <a href=""
@@ -137,6 +143,7 @@
               right
               color="primaryfos"
               @click="toTop"
+              style="z-index:1000"
             >
               <v-icon>fas fa-arrow-up</v-icon>
             </v-btn> </v-col
@@ -790,6 +797,14 @@ export default {
         name: "twitter:title",
         content: "Search | College Scorecard",
       },
+      {
+        name: 'description',
+        content: 'Search the fields of study offered at each school by degree type.  Fields of study are areas of academic concentration (e.g, major sor programs).'
+      },
+      {
+        name: 'keywords',
+        content: 'College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings; field of study, program, major, CIP, Classification of Instructional Programs, salary after completing, median total debt, WIOA'
+      }
     ],
   },
 }
