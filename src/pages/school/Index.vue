@@ -391,19 +391,19 @@
                       </v-card>
                       <v-card class="pa-4 mt-4" flat>
                         <div id="school-median-earnings" class="mb-4">
-                          <h2 class="mb-3" v-if="!isProgramReporter">
+                          <h2 class="mb-3">
                             <!--prettyhtml-ignore-->
                             Median Earnings
                             <tooltip definition="institution-median-earnings" />
                           </h2>
-                          <h2 v-else class="mb-3">
-                            <!--prettyhtml-ignore-->
+                          <!-- <h2 v-else class="mb-3">
+                            
                             Median Earnings for Largest Program
                             <tooltip
                               definition="institution-median-earnings"
                               :isNegative="medianEarnings < 0"
                             />
-                          </h2>
+                          </h2> -->
 
                           <h2
                             class="display-2 medium-light-blue-text font-weight-bold pb-3"
