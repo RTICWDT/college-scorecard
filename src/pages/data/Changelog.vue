@@ -1695,6 +1695,16 @@ export default {
   },
   metaInfo: {
     title: "Change Log",
+    meta: [
+      {
+        name: 'description',
+        content: 'The change log describes the changes that have been made to the College Scorecard or API over time.'
+      },
+      {
+        name: 'keywords',
+        content: 'College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings, IPEDS, API'
+      }
+    ],
   },
 }
 </script>

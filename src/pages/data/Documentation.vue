@@ -343,6 +343,16 @@ export default {
   },
   metaInfo: {
     title: "Documentation",
+    meta: [
+      {
+        name: 'description',
+        content: 'Technical documentation provides in-depth information about institution-level and field-of-study-level data files.'
+      },
+      {
+        name: 'keywords',
+        content: 'College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings, IPEDS, institution level data, field of study data, API, OPEID, IPEDS UNITID'
+      }
+    ],
   },
 }
 </script>

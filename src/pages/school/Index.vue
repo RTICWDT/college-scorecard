@@ -391,19 +391,19 @@
                       </v-card>
                       <v-card class="pa-4 mt-4" flat>
                         <div id="school-median-earnings" class="mb-4">
-                          <h2 class="mb-3" v-if="!isProgramReporter">
+                          <h2 class="mb-3">
                             <!--prettyhtml-ignore-->
                             Median Earnings
                             <tooltip definition="institution-median-earnings" />
                           </h2>
-                          <h2 v-else class="mb-3">
-                            <!--prettyhtml-ignore-->
+                          <!-- <h2 v-else class="mb-3">
+                            
                             Median Earnings for Largest Program
                             <tooltip
                               definition="institution-median-earnings"
                               :isNegative="medianEarnings < 0"
                             />
-                          </h2>
+                          </h2> -->
 
                           <h2
                             class="display-2 medium-light-blue-text font-weight-bold pb-3"
@@ -2816,6 +2816,9 @@ export default {
     var match = location.search.match(/^\?(\d+)(\b|-)/)
     var id = match ? match[1] : null
 
+    if (!id)
+      router.push('/')
+
     var params = {}
     params[this.fields.OPERATING] = 1
     params[this.fields.OPEID + "__not"] = "null"
@@ -2901,6 +2904,14 @@ export default {
         name: "twitter:title",
         content: "College Scorecard",
       },
+      {
+        name: 'description',
+        content: 'The school profile provides a wealth of data, including average cost, graduation rates, financial aid and debt, typical earnings of graduates, and more.'
+      },
+      {
+        name: 'keywords',
+        content: 'College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings, graduation rate, tuition cost, average annual cost, net price, median earnings, typical earnings, salary after completion, student outcomes, pell grant, loan payment, financial aid, federal loan, parent PLUS loan, repayment rate, repayment status, student faculty ratio, study body demographics, test scores, SAT, ACT, acceptance rate, FAFSA, GI Bill'
+      }      
     ],
   },
 }
