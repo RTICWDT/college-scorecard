@@ -6,7 +6,7 @@
     "build": "gridsome build",
     "develop": "gridsome develop",
     "explore": "gridsome explore",
-    "federalist": "gridsome build"
+    "federalist": "npm run build --openssl-legacy-provider"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
