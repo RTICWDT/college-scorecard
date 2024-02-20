@@ -97,6 +97,7 @@
                           @field-of-study-selected="handleFieldOfStudySelected"
                           :selected="input.cip4"
                           id="fosSearch"
+                          ariaRequired="true"
                         />
                       </v-col>
                       <v-col cols="12" sm="4">
@@ -113,6 +114,7 @@
                           hide-details
                           id="fosDegree"
                           color="fos-search-color"
+                          aria-required="true"
                         >
                         </v-select>
                       </v-col>

@@ -1,5 +1,9 @@
 <template>
-  <div id="search-can-query-items-wrapper">
+  <div id="search-can-query-items-wrapper"
+        role="checkbox"
+       class="group_checkbox"
+       aria-checked="mixed"
+       aria-controls="canned-search-near-me canned-search-most-get-in canned-search-most-grad canned-search-degree-c canned-search-degree-a canned-search-degree-b">
     <v-row>
       <v-col md="6" cols="12" class=" canned-search-wrapper py-0 my-0">
         <canned-search-slider

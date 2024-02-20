@@ -17,6 +17,8 @@
       prepend-inner-icon="fas fa-search"
       aria-label="Field of Study Search"
       :dense="dense"
+      required
+      aria-required="true"
     >
       <template v-slot:label>
         <slot name="label-pass-through"></slot>

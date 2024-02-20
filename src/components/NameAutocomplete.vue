@@ -22,6 +22,8 @@
       no-filter
       :dense="dense"
       id="institution-search-box"
+      aria-autocomplete="list"
+      aria-haspopup="listbox"
     >
       <!-- TODO - Add markup for alias match or highlighting -->
       <template slot="item" slot-scope="{ parent, item }">

@@ -34,6 +34,7 @@
                     <field-of-study-search
                       @field-of-study-selected="handleFieldOfStudySelected"
                       :selected="input.cip4"
+                      ariaRequired="true"
                     />
                   </v-col>
                   <v-col cols="12" sm="4">
@@ -47,6 +48,7 @@
                       v-model="input.cip4_degree"
                       hide-details
                       color="fos-search-color"
+                      aria-required="true"
                     >
                     </v-select>
                   </v-col>
