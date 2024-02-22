@@ -142,10 +142,10 @@
                   <v-card style="min-height: 300px" class="px-10 py-5" flat>
                     <fieldset>
                       <legend>
-                        <p class="my-5">
+                        <h3 class="my-5">
                         Select one or more options to create a list of schools
                         that fit your needs.
-                      </p>
+                        </h3>
                       </legend>
                       <canned-search-container
                         @canned-search-submit="directToSearch"
