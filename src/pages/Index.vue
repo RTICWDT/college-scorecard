@@ -97,6 +97,7 @@
                           @field-of-study-selected="handleFieldOfStudySelected"
                           :selected="input.cip4"
                           id="fosSearch"
+                          ariaRequired="true"
                         />
                       </v-col>
                       <v-col cols="12" sm="4">
@@ -113,6 +114,7 @@
                           hide-details
                           id="fosDegree"
                           color="fos-search-color"
+                          aria-required="true"
                         >
                         </v-select>
                       </v-col>
@@ -138,14 +140,9 @@
                 <!-- Show Me Options-->
                 <v-tab-item>
                   <v-card style="min-height: 300px" class="px-10 py-5" flat>
-                    <p class="my-5">
-                      Select one or more options to create a list of schools
-                      that fit your needs.
-                    </p>
-
-                    <canned-search-container
-                      @canned-search-submit="directToSearch"
-                    ></canned-search-container>
+                      <canned-search-container
+                        @canned-search-submit="directToSearch"
+                      ></canned-search-container>
                   </v-card>
                 </v-tab-item>
               </v-tabs>
@@ -238,10 +235,6 @@
                   </v-expansion-panel-header>
 
                   <v-expansion-panel-content>
-                    <p class="my-2">
-                      Select one or more options to create a list of schools
-                      that fit your needs.
-                    </p>
                     <canned-search-container
                       @canned-search-submit="directToSearch"
                       class="mx-5"
@@ -507,6 +500,10 @@ h1 {
 
 h2 span {
   font-weight: 600 !important;
+}
+
+fieldset {
+  border: 0;
 }
 </style>
 

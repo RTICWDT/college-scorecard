@@ -1,4 +1,6 @@
 <template>
+  <focus-trap v-model:active="$store.state.drawerOpen" :initial-focus="() => $refs.nameInput">
+  <modal-dialog>
   <v-card id="compare-schools-content" class="pa-5">
     <div>
       <span>
@@ -11,7 +13,7 @@
           <v-icon v-else>fas fa-plus-circle</v-icon>
         </v-btn> -->
 
-        <v-btn icon @click="toggleDrawer()">
+        <v-btn icon @click="toggleDrawer()" alt="Close Drawer" aria-required="true">
           <v-icon>fas fa-times-circle</v-icon>
         </v-btn>
       </div>
@@ -110,6 +112,8 @@
               @click="toggleDrawer()"
               :href="this.$url('/compare')"
               class="compare-button-school"
+              aria-label="Compare Schools"
+              type="button"
             >
               Compare Schools
             </v-btn>
@@ -169,6 +173,8 @@
               color="secondary"
               @click="toggleDrawer()"
               :href="this.$url('/compare/?toggle=fos')"
+              aria-label="Compare Fields of Study"
+              type="button"
             >
               Compare Fields of Study
             </v-btn>
@@ -190,6 +196,8 @@
             @click="toggleDrawer()"
             :href="this.$url('/compare')"
             class="compare-button-school"
+            aria-label="Compare Schools"
+            type="button"
           >
             Compare Schools
           </v-btn>
@@ -204,6 +212,8 @@
             color="secondary"
             @click="toggleDrawer()"
             :href="this.$url('/compare/?toggle=fos')"
+            aria-label="Compare Fields of Study"
+            type="button"
           >
             Compare Fields of Study
           </v-btn>
@@ -211,6 +221,8 @@
       </v-row>
     </div>
   </v-card>
+  </modal-dialog>
+  </focus-trap>
 </template>
 
 <style lang="scss" scoped>
