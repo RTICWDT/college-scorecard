@@ -1,5 +1,11 @@
 <template>
-  <div id="search-can-query-items-wrapper">
+  <div id="search-can-query-items-wrapper"
+        role="group"
+       class="group_checkbox"
+       aria-checked="mixed"
+       aria-labelledby="showOptions"
+       aria-controls="canned-search-near-me canned-search-most-get-in canned-search-most-grad canned-search-degree-c canned-search-degree-a canned-search-degree-b">
+       <p id="showOptions" class="my-5">Select one or more options to create a list of schools that fit your needs.</p>
     <v-row>
       <v-col md="6" cols="12" class=" canned-search-wrapper py-0 my-0">
         <canned-search-slider
