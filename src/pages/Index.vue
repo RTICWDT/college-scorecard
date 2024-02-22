@@ -140,17 +140,9 @@
                 <!-- Show Me Options-->
                 <v-tab-item>
                   <v-card style="min-height: 300px" class="px-10 py-5" flat>
-                    <fieldset>
-                      <legend>
-                        <h3 class="my-5">
-                        Select one or more options to create a list of schools
-                        that fit your needs.
-                        </h3>
-                      </legend>
                       <canned-search-container
                         @canned-search-submit="directToSearch"
                       ></canned-search-container>
-                    </fieldset>
                   </v-card>
                 </v-tab-item>
               </v-tabs>
@@ -243,10 +235,6 @@
                   </v-expansion-panel-header>
 
                   <v-expansion-panel-content>
-                    <p class="my-2">
-                      Select one or more options to create a list of schools
-                      that fit your needs.
-                    </p>
                     <canned-search-container
                       @canned-search-submit="directToSearch"
                       class="mx-5"

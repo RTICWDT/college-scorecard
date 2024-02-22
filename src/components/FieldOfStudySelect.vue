@@ -138,6 +138,7 @@
   }
   fieldset {
     background:white;
+    border:0;
   }
 }
 </style>
