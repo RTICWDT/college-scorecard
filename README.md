@@ -18,6 +18,7 @@ College Scorecard now uses Gridsome, a Vue.js poweredJamstack framework for buil
 ### 3. Launch the server
 - Copy `.env.example` to `.env`
 - Add values to `.env`
+- make sure you're on Node v16 via `nvm use 16.14.0` (you will need a different command if using a different node version manager)
 - `gridsome develop` to launch the College Scorecard website on a local development server
 
 ## Environment Variables
