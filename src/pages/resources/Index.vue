@@ -133,12 +133,12 @@
                   Educator <br/>
                   and Advisor <br/>
                   Resources <br />
-                  <img src="img/double-caret.svg" />
+                  <img :src="$url('img/double-caret.svg')" />
                 </h1>
               </div>
             </div>
-            <img src="img/resources-banner.svg" alt="Resources" class="d-none d-md-block" width="100%" />
-            <img src="img/resources-banner.svg" alt="Resources" class="d-block d-md-none banner-image-small" width="100%"/>
+            <img :src="$url('img/resources-banner.svg')" alt="Resources" class="d-none d-md-block" width="100%" />
+            <img :src="$url('img/resources-banner.svg')" alt="Resources" class="d-block d-md-none banner-image-small" width="100%"/>
           </v-col>
         </v-row>
       </v-container>
@@ -241,7 +241,7 @@
             <h4 class="mb-5">What's Included:</h4>
             <div class="d-flex">
               <div class="toolkit-icon">
-                <img src="img/icon-guide.svg" alt="Resources" />
+                <img :src="$url('img/icon-guide.svg')" alt="Guide" />
               </div>
               <div>
                 <p class="mb-0"><strong>Instructor Guide</strong></p>
@@ -251,7 +251,7 @@
             <Spacer :height="20" />
             <div class="d-flex">
               <div class="toolkit-icon">
-                <img src="img/icon-slides.svg" alt="Resources" />
+                <img :src="$url('img/icon-slides.svg')" alt="Slides" />
               </div>
               <div>
                 <p class="mb-0"><strong>Activity Slides</strong></p>
@@ -261,7 +261,7 @@
             <Spacer :height="20" />
             <div class="d-flex">
               <div class="toolkit-icon">
-                <img src="img/icon-docs.svg" alt="Resources" />
+                <img :src="$url('img/icon-docs.svg')" alt="Docs" />
               </div>
               <div>
                 <p class="mb-0"><strong>Resources</strong></p>
@@ -273,32 +273,32 @@
             <h4 class="mb-5 d-none d-md-block">Contents of the Zip File</h4>
             <div class="content-box">
               <h4 class="mb-5 d-block d-md-none">Contents of the Zip File</h4>
-              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-doc.svg" class="mr-1"/>Instructor_Guide.docx</a>
+              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Instructor_Guide.docx</a>
               <br />
-              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-ppt.svg" class="mr-1"/>Lesson-1_Introduction-to-College-Scorecard.pptx</a>
+              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" class="mr-1"/>Lesson-1_Introduction-to-College-Scorecard.pptx</a>
               <br />
-              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-doc.svg" class="mr-1"/>Lesson-1_Resource.docx</a>
+              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Lesson-1_Resource.docx</a>
               <br />
-              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-ppt.svg" class="mr-1"/>Lesson-2_School-Data.pptx</a>
+              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" class="mr-1"/>Lesson-2_School-Data.pptx</a>
               <br />
-              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-doc.svg" class="mr-1"/>Lesson-2_Resource.docx</a>
+              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Lesson-2_Resource.docx</a>
               <br />
-              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-ppt.svg" class="mr-1"/>Lesson-3_Field-of-Study.pptx</a>
+              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" class="mr-1"/>Lesson-3_Field-of-Study.pptx</a>
               <br />
-              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-doc.svg" class="mr-1"/>Lesson-3_Resource.docx</a>
+              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Lesson-3_Resource.docx</a>
               <br />
-              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-ppt.svg" class="mr-1"/>Lesson-4_Grasping-Financial-Commitments.pptx</a>
+              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" class="mr-1"/>Lesson-4_Grasping-Financial-Commitments.pptx</a>
               <br />
-              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-doc.svg" class="mr-1"/>Lesson-4_Resource.docx</a>
+              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Lesson-4_Resource.docx</a>
               <br />
-              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-ppt.svg" class="mr-1"/>Lesson-5_Drawing-Conclusions.pptx</a>
+              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" class="mr-1"/>Lesson-5_Drawing-Conclusions.pptx</a>
               <br />
-              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-doc.svg" class="mr-1"/>Lesson-5_Resource.docx</a>
+              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Lesson-5_Resource.docx</a>
               <br />
-              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-pdf.svg" class="mr-1"/>Using_the_College_Scorecard.pdf</a>
+              <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-pdf.svg')" class="mr-1"/>Using_the_College_Scorecard.pdf</a>
               <br />
               <hr>
-              <a href="#" target="_blank" rel="noreferrer" class="content-link mb-0"><img src="img/icon-google-drive.svg" class="mr-1" width="17px" height="17px"/>View on Google Drive</a>
+              <a href="#" target="_blank" rel="noreferrer" class="content-link mb-0"><img :src="$url('img/icon-google-drive.svg')" class="mr-1" width="17px" height="17px"/>View on Google Drive</a>
             </div>
           </v-col>
         </v-row>
@@ -351,7 +351,7 @@
               <h4 class="mb-5">What's Included:</h4>
               <div class="d-flex">
                 <div class="toolkit-icon">
-                  <img src="img/icon-guide.svg" alt="Resources" />
+                  <img :src="$url('img/icon-guide.svg')" alt="Resources" />
                 </div>
                 <div>
                   <p class="mb-0"><strong>Facilitation Guide</strong></p>
@@ -361,7 +361,7 @@
               <Spacer :height="20" />
               <div class="d-flex">
                 <div class="toolkit-icon">
-                  <img src="img/icon-slides.svg" alt="Resources" />
+                  <img :src="$url('img/icon-slides.svg')" alt="Resources" />
                 </div>
                 <div>
                   <p class="mb-0"><strong>Training Slides</strong></p>
@@ -371,7 +371,10 @@
               <Spacer :height="20" />
               <div class="d-flex">
                 <div class="toolkit-icon">
-                  <img src="img/icon-docs.svg" alt="Resources" />
+                  <img 
+                    :src="$url('img/icon-docs.svg')"
+                    alt="Resources" 
+                  />
                 </div>
                 <div>
                   <p class="mb-0"><strong>Handouts</strong></p>
@@ -383,24 +386,24 @@
               <h4 class="mb-5 d-none d-md-block">Contents of the Zip File</h4>
               <div class="content-box">
                 <h4 class="mb-5 d-block d-md-none">Contents of the Zip File</h4>
-                <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-doc.svg" class="mr-1"/>College_Scorecard_Facilitation_Guide.docx</a>
+                <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>College_Scorecard_Facilitation_Guide.docx</a>
                 <br />
-                <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-ppt.svg" class="mr-1"/>College_Scorecard_Training_Slides.pptx</a>
+                <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" class="mr-1"/>College_Scorecard_Training_Slides.pptx</a>
                 <br />
-                <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-doc.svg" class="mr-1"/>Handout_1_College Data Sources.docx</a>
+                <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Handout_1_College Data Sources.docx</a>
                 <br />
-                <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-doc.svg" class="mr-1"/>Handout_2_Student_Priorities.docx</a>
+                <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Handout_2_Student_Priorities.docx</a>
                 <br />
-                <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-doc.svg" class="mr-1"/>Handout_3_Scenario_Activity.docx</a>
+                <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Handout_3_Scenario_Activity.docx</a>
                 <br />
-                <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-doc.svg" class="mr-1"/>Handout_3_Scenario_Activity_Instructor_Guide.docx</a>
+                <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Handout_3_Scenario_Activity_Instructor_Guide.docx</a>
                 <br />
-                <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-pdf.svg" class="mr-1"/>Handout_4_Tips_for_Delivery.pdf</a>
+                <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-pdf.svg')" class="mr-1"/>Handout_4_Tips_for_Delivery.pdf</a>
                 <br />
-                <a href="#" target="_blank" rel="noreferrer" class="content-link"><img src="img/icon-pdf.svg" class="mr-1"/>Using_the_College_Scorecard.pdf</a>
+                <a href="#" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-pdf.svg')" class="mr-1"/>Using_the_College_Scorecard.pdf</a>
                 <br />
                 <hr>
-                <a href="#" target="_blank" rel="noreferrer" class="content-link mb-0"><img src="img/icon-google-drive.svg" class="mr-1" width="17px" height="17px"/>View on Google Drive</a>
+                <a href="#" target="_blank" rel="noreferrer" class="content-link mb-0"><img :src="$url('img/icon-google-drive.svg')" class="mr-1" width="17px" height="17px"/>View on Google Drive</a>
               </div>
             </v-col>
           </v-row>
