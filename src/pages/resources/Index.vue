@@ -241,7 +241,7 @@
             <h4 class="mb-5">What's Included:</h4>
             <div class="d-flex">
               <div class="toolkit-icon">
-                <img :src="$url('img/icon-guide.svg')" alt="Guide" />
+                <img :src="$url('img/icon-guide.svg')" alt="Instructor Guide" />
               </div>
               <div>
                 <p class="mb-0"><strong>Instructor Guide</strong></p>
@@ -251,7 +251,7 @@
             <Spacer :height="20" />
             <div class="d-flex">
               <div class="toolkit-icon">
-                <img :src="$url('img/icon-slides.svg')" alt="Slides" />
+                <img :src="$url('img/icon-slides.svg')" alt="Activity Slides" />
               </div>
               <div>
                 <p class="mb-0"><strong>Activity Slides</strong></p>
@@ -261,7 +261,7 @@
             <Spacer :height="20" />
             <div class="d-flex">
               <div class="toolkit-icon">
-                <img :src="$url('img/icon-docs.svg')" alt="Docs" />
+                <img :src="$url('img/icon-docs.svg')" alt="Resources" />
               </div>
               <div>
                 <p class="mb-0"><strong>Resources</strong></p>
@@ -351,7 +351,7 @@
               <h4 class="mb-5">What's Included:</h4>
               <div class="d-flex">
                 <div class="toolkit-icon">
-                  <img :src="$url('img/icon-guide.svg')" alt="Resources" />
+                  <img :src="$url('img/icon-guide.svg')" alt="Facilitation Guide" />
                 </div>
                 <div>
                   <p class="mb-0"><strong>Facilitation Guide</strong></p>
@@ -361,7 +361,7 @@
               <Spacer :height="20" />
               <div class="d-flex">
                 <div class="toolkit-icon">
-                  <img :src="$url('img/icon-slides.svg')" alt="Resources" />
+                  <img :src="$url('img/icon-slides.svg')" alt="Training Slides" />
                 </div>
                 <div>
                   <p class="mb-0"><strong>Training Slides</strong></p>
@@ -371,10 +371,7 @@
               <Spacer :height="20" />
               <div class="d-flex">
                 <div class="toolkit-icon">
-                  <img 
-                    :src="$url('img/icon-docs.svg')"
-                    alt="Resources" 
-                  />
+                  <img :src="$url('img/icon-docs.svg')" alt="Handouts" />
                 </div>
                 <div>
                   <p class="mb-0"><strong>Handouts</strong></p>
