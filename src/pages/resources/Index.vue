@@ -1,5 +1,16 @@
 <style lang="scss" scoped>
 @import "~/sass/_variables.scss";
+.splash-container {
+  margin-bottom: -80px;
+}
+.subsplash-container {
+  padding-top: 60px;
+}
+.banner-text-container {
+  position: relative;
+  width: 100%;
+}
+
 .banner-text-wrapper {
   top: 115px;
   width: 100%;
@@ -55,6 +66,18 @@
 
 .bg-gray {
   background: $bg-gray !important;
+}
+
+.text-black {
+  color: black;
+}
+
+.top-3 {
+  top: 3px;
+}
+
+.mw-270 {
+  min-width: 270px;
 }
 
 .content-box {
@@ -118,16 +141,21 @@
   margin-right: 1rem;
 }
 
+.anchor-tag {
+  position: relative;
+  bottom: 100px;
+}
+
 </style>
 
 <template>
   <v-main>
-    <div class="bg-gray" style="margin-bottom: -80px">
+    <div class="bg-gray splash-container">
       <v-container>
         <Spacer :height="30"/>
         <v-row class="mb-4">
           <v-col cols="12">
-            <div style="position: relative; width: 100%;">
+            <div class="banner-text-container">
               <div class="banner-text-wrapper">
                 <h1 class="text-center">
                   Educator <br/>
@@ -144,7 +172,7 @@
       </v-container>
     </div>
 
-    <div class="bg-white" style="padding-top: 60px;">
+    <div class="bg-white subsplash-container">
       <v-container>
         <Spacer :height="20" />
         <v-row>
@@ -157,12 +185,11 @@
               outlined
               @click="scrollToAnchor('educators-anchor')"
               >
-                <span style="color: black;">View the Educator Toolkit</span>
+                <span class="text-black">View the Educator Toolkit</span>
               <v-icon
                 x-small
                 color="black"
-                class="pl-2 pb-1 align-self-end"
-                style="top: 3px"
+                class="pl-2 pb-1 align-self-end top-3"
               >
                 fas fa-arrow-down
               </v-icon>
@@ -178,12 +205,11 @@
               outlined
               @click="scrollToAnchor('advisors-anchor')"
               >
-                <span style="color: black;">View the Advisor Toolkit</span>
+                <span class="text-black">View the Advisor Toolkit</span>
               <v-icon
                 x-small
                 color="black"
-                class="pl-2 pb-1 align-self-end"
-                style="top: 3px"
+                class="pl-2 pb-1 align-self-end top-3"
               >
                 fas fa-arrow-down
               </v-icon>
@@ -195,7 +221,7 @@
       </v-container>
     </div>
 
-    <div id="educators-anchor" style="position: relative; bottom: 100px" />
+    <div id="educators-anchor" class="anchor-tag" />
     <div class="bg-gray">
       <v-container>
         <Spacer />
@@ -211,7 +237,7 @@
               <div>
                 <p class="mb-1">Get the materials (.zip, 4 MB)</p>
                 <v-btn
-                  style="min-width: 270px"
+                  class="mw-270"
                   color="secondary"
                   href="https://studentaid.gov/h/apply-for-aid/fafsa"
                   target="_blank"
@@ -225,8 +251,7 @@
                   <v-icon
                     x-small
                     color="white"
-                    class="pl-2 pb-1 align-self-end"
-                    style="top: 3px"
+                    class="pl-2 pb-1 align-self-end top-3"
                   >
                     fas fa-download
                   </v-icon>
@@ -305,7 +330,7 @@
         <Spacer />
       </v-container>
 
-      <div id="advisors-anchor" style="position: relative; bottom: 100px" />
+      <div id="advisors-anchor" class="anchor-tag" />
       <div class="bg-white">
         <v-container>
           <Spacer />
@@ -321,7 +346,7 @@
                 <div>
                   <p class="mb-1">Get the full advisor toolkit (.zip, 2.5 MB)</p>
                   <v-btn
-                    style="min-width: 270px"
+                    class="mw-270"
                     color="secondary"
                     href="https://studentaid.gov/h/apply-for-aid/fafsa"
                     target="_blank"
@@ -335,8 +360,7 @@
                     <v-icon
                       x-small
                       color="white"
-                      class="pl-2 pb-1 align-self-end"
-                      style="top: 3px"
+                      class="pl-2 pb-1 align-self-end top-3"
                     >
                       fas fa-download
                     </v-icon>
