@@ -25,6 +25,46 @@
             <v-expansion-panels multiple v-model="panels">
               <v-expansion-panel>
                 <v-expansion-panel-header
+                  >April XX, 2024</v-expansion-panel-header
+                >
+                <v-expansion-panel-content>
+                  <p>
+                    On April XX, 2024, the Department updated the College Scorecard downloadable data files and the API as indicated below.
+                  </p>
+                  <p>
+                    Specific data updates in this release include:
+                  </p>
+                  <ul>
+                    <li>
+                      More recent data values derived from Federal Student Aid sources for the following data metrics were included:
+                      <ul>
+                        <li>Currently Operating Status Flag</li>
+                        <li>Heightened Cash Monitoring Flag</li>
+                        <li>Accrediting Agency Name and Code</li>
+                        <li>Title IV Approval Date</li>
+                        <li>Federal School Code</li>
+                      </ul>
+                    </li>                    
+                    <li>
+                      Updates derived from the Office of Postsecondary Education (OPE) eligibility matrix for data metrics 
+                      identifying Minority Serving Institutions. 
+                    </li>
+                    <li>
+                      New institution-level data were added for the street address of the institution; the control of the 
+                      institution based on Federal Student Aid data; outcomes data for students that did not receive a Pell 
+                      Grant, and a suppressed version of the admission rate.  
+                    </li>
+                    <li>
+                      A change to the developer-friendly name for one metric (GT_THRESHOLD_4YR) was made to harmonize the 
+                      developer-friendly name with the variable description. The new developer-friendly names is active immediately. 
+                      The old developer-friendly name will also point to this metric until the next data update, at which time it 
+                      will no longer be in service.
+                    </li>                     
+                  </ul>
+                </v-expansion-panel-content>
+              </v-expansion-panel>                
+              <v-expansion-panel>
+                <v-expansion-panel-header
                   >October 10, 2023</v-expansion-panel-header
                 >
                 <v-expansion-panel-content>
@@ -1686,7 +1726,7 @@ export default {
   },
   methods: {
     all() {
-      this.panels = [...Array(29).keys()].map((k, i) => i)
+      this.panels = [...Array(30).keys()].map((k, i) => i)
     },
     // Reset the panel
     none() {
