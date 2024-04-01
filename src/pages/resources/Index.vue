@@ -181,6 +181,7 @@
             <h2 class="mb-3">Toolkit for the Classroom</h2>
             <p class="subsplash-blurb">Equip your students with the knowledge and tools they need to navigate their post-secondary educational journey with confidence. This 5-activity series is designed to be picked up by counselors, teachers, or college access advisors and used directly with students.</p>
             <v-btn
+              class="d-block d-md-none"
               color="#027A48"
               outlined
               @click="scrollToAnchor('educators-anchor')"
@@ -201,6 +202,7 @@
             <h2 class="mb-3">Toolkit for College Access Advisors</h2>
             <p class="subsplash-blurb">Empower college access advisors with this pre-built College Scorecard professional development training. Follow our comprehensive toolkit to deliver meaningful training on the value of the College Scorecard as a resource for students.</p>
             <v-btn
+              class="d-block d-md-none"
               color="#027A48"
               outlined
               @click="scrollToAnchor('advisors-anchor')"
@@ -216,6 +218,42 @@
             </v-btn>
           </v-col>
           <v-col cols="0" md="1" />
+        </v-row>
+
+        <v-row class="d-none d-md-flex">
+          <v-col cols="12" md="5">
+            <v-btn
+              color="#027A48"
+              outlined
+              @click="scrollToAnchor('educators-anchor')"
+              >
+                <span class="text-black">View the Educator Toolkit</span>
+              <v-icon
+                x-small
+                color="black"
+                class="pl-2 pb-1 align-self-end top-3"
+              >
+                fas fa-arrow-down
+              </v-icon>
+            </v-btn>
+          </v-col>
+          <v-col cols="0" md="1" />
+          <v-col cols="12" md="5">
+            <v-btn
+              color="#027A48"
+              outlined
+              @click="scrollToAnchor('advisors-anchor')"
+              >
+                <span class="text-black">View the Advisor Toolkit</span>
+              <v-icon
+                x-small
+                color="black"
+                class="pl-2 pb-1 align-self-end top-3"
+              >
+                fas fa-arrow-down
+              </v-icon>
+            </v-btn>
+          </v-col>
         </v-row>
         <Spacer />
       </v-container>
