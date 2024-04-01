@@ -66,8 +66,8 @@ export const fields = {
 
   // AID_PERCENTAGE:       'latest.aid.ftft_federal_loan_rate',
   // PELL_PERCENTAGE:      'latest.aid.ftft_pell_grant_rate',
-  AID_PERCENTAGE:       'latest.aid.dcs_pell_grant_rate_pooled',
-  PELL_PERCENTAGE:      'latest.aid.dcs_federal_loan_rate_pooled',
+  AID_PERCENTAGE:       'latest.aid.dcs_federal_loan_rate_pooled',
+  PELL_PERCENTAGE:      'latest.aid.dcs_pell_grant_rate_pooled',
 
   MEDIAN_EARNINGS:      'latest.earnings.10_yrs_after_entry.median',
 
