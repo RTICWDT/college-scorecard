@@ -359,7 +359,7 @@
               <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%205_Handout-5.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Activity 5: Handout</a>
               <br />
               <hr>
-              <a href="#" target="_blank" rel="noreferrer" class="content-link mb-0"><img :src="$url('img/icon-google-drive.svg')" class="mr-1" width="17px" height="17px"/>View on Google Drive</a>
+              <a href="https://drive.google.com/drive/folders/1GVcbgjMrwGEw3RhJNnex0UpZBYMP4xpz?usp=sharing" target="_blank" rel="noreferrer" class="content-link mb-0"><img :src="$url('img/icon-google-drive.svg')" class="mr-1" width="17px" height="17px"/>View on Google Drive</a>
             </div>
           </v-col>
         </v-row>
@@ -464,7 +464,7 @@
                 <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/Using_the_College_Scorecard.pdf" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-pdf.svg')" class="mr-1"/>Using the College Scorecard</a>
                 <br />
                 <hr>
-                <a href="#" target="_blank" rel="noreferrer" class="content-link mb-0"><img :src="$url('img/icon-google-drive.svg')" class="mr-1" width="17px" height="17px"/>View on Google Drive</a>
+                <a href="https://drive.google.com/drive/folders/1p9KbEtwyB8HmNQ5dOfo04g8lwuXUnrmh?usp=sharing" target="_blank" rel="noreferrer" class="content-link mb-0"><img :src="$url('img/icon-google-drive.svg')" class="mr-1" width="17px" height="17px"/>View on Google Drive</a>
               </div>
             </v-col>
           </v-row>
