@@ -158,9 +158,9 @@
             <div class="banner-text-container">
               <div class="banner-text-wrapper">
                 <h1 class="text-center">
-                  Educator <br/>
-                  and Advisor <br/>
-                  Resources <br />
+                  <span class="d-block">Educator</span>
+                  <span class="d-block">and Advisor</span>
+                  <span class="d-block">Resources</span>
                   <img :src="$url('img/double-caret.svg')" alt="Scroll Down" />
                 </h1>
               </div>
