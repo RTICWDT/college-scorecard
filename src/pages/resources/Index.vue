@@ -161,7 +161,7 @@
                   Educator <br/>
                   and Advisor <br/>
                   Resources <br />
-                  <img :src="$url('img/double-caret.svg')" />
+                  <img :src="$url('img/double-caret.svg')" alt="Scroll Down" />
                 </h1>
               </div>
             </div>
@@ -336,27 +336,27 @@
             <h4 class="mb-5 d-none d-md-block">Contents of the Zip File</h4>
             <div class="content-box">
               <h4 class="mb-5 d-block d-md-none">Contents of the Zip File</h4>
-              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/College_Scorecard_Instructor_Guide.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Instructor Guide</a>
+              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/College_Scorecard_Instructor_Guide.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" alt="Document File" class="mr-1"/>Instructor Guide</a>
               <br />
-              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%201_Introduction-to-College-Scorecard.pptx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" class="mr-1"/>Activity 1: Introduction to College Scorecard</a>
+              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%201_Introduction-to-College-Scorecard.pptx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" alt="Powerpoint Presentation File" class="mr-1"/>Activity 1: Introduction to College Scorecard</a>
               <br />
-              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%201_Handout-1.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Activity 1: Handout</a>
+              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%201_Handout-1.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" alt="Document File" class="mr-1"/>Activity 1: Handout</a>
               <br />
-              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%202_Handout-2.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Activity 2: Handout</a>
+              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%202_Handout-2.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" alt="Document File" class="mr-1"/>Activity 2: Handout</a>
               <br />
-              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%202_School-Data.pptx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" class="mr-1"/>Activity 2: School Data</a>
+              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%202_School-Data.pptx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" alt="Powerpoint Presentation File" class="mr-1"/>Activity 2: School Data</a>
               <br />
-              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%203_Field-of-Study.pptx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" class="mr-1"/>Activity 3: Field of Study</a>
+              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%203_Field-of-Study.pptx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" alt="Powerpoint Presentation File" class="mr-1"/>Activity 3: Field of Study</a>
               <br />
-              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%203_Handout-3.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Activity 3: Handout</a>
+              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%203_Handout-3.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" alt="Document File" class="mr-1"/>Activity 3: Handout</a>
               <br />
-              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%204_Grasping-Financial-Commitments.pptx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" class="mr-1"/>Activity 4: Grasping Financial Commitments</a>
+              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%204_Grasping-Financial-Commitments.pptx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" alt="Powerpoint Presentation File" class="mr-1"/>Activity 4: Grasping Financial Commitments</a>
               <br />
-              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%204_Handout-4.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Activity 4: Handout</a>
+              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%204_Handout-4.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" alt="Document File" class="mr-1"/>Activity 4: Handout</a>
               <br />
-              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%205_Drawing-Conclusions.pptx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" class="mr-1"/>Activity 5: Drawing Conclusions</a>
+              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%205_Drawing-Conclusions.pptx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" alt="Powerpoint Presentation File" class="mr-1"/>Activity 5: Drawing Conclusions</a>
               <br />
-              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%205_Handout-5.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Activity 5: Handout</a>
+              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%205_Handout-5.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" alt="Document File" class="mr-1"/>Activity 5: Handout</a>
               <br />
               <hr>
               <a href="https://drive.google.com/drive/folders/1GVcbgjMrwGEw3RhJNnex0UpZBYMP4xpz?usp=sharing" target="_blank" rel="noreferrer" class="content-link mb-0"><img :src="$url('img/icon-google-drive.svg')" class="mr-1" width="17px" height="17px"/>View on Google Drive</a>
@@ -443,25 +443,25 @@
               <h4 class="mb-5 d-none d-md-block">Contents of the Zip File</h4>
               <div class="content-box">
                 <h4 class="mb-5 d-block d-md-none">Contents of the Zip File</h4>
-                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/College_Scorecard_Facilitation_Guide.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Facilitation Guide</a>
+                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/College_Scorecard_Facilitation_Guide.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" alt="Document File" class="mr-1"/>Facilitation Guide</a>
                 <br />
-                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/College_Scorecard_Training_Slides%20-%20Module%201.pptx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" class="mr-1"/>Training Slides: Module 1</a>
+                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/College_Scorecard_Training_Slides%20-%20Module%201.pptx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" alt="Powerpoint Presentation File" class="mr-1"/>Training Slides: Module 1</a>
                 <br />
-                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/Handout_1_Scorecard_Benefits.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Handout 1: College Scorecard Benefits</a>
+                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/Handout_1_Scorecard_Benefits.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" alt="Document File" class="mr-1"/>Handout 1: College Scorecard Benefits</a>
                 <br />
-                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/College_Scorecard_Training_Slides%20-%20Module%202.pptx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" class="mr-1"/>Training Slides:  Module 2</a>
+                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/College_Scorecard_Training_Slides%20-%20Module%202.pptx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" alt="Powerpoint Presentation File" class="mr-1"/>Training Slides:  Module 2</a>
                 <br />
-                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/Handout_2_Student_Priorities.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Handout 2:  Student Priorities</a>
+                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/Handout_2_Student_Priorities.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" alt="Document File" class="mr-1"/>Handout 2:  Student Priorities</a>
                 <br />
-                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/College_Scorecard_Training_Slides%20-%20Module%203.pptx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" class="mr-1"/>Training Slides - Module 3</a>
+                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/College_Scorecard_Training_Slides%20-%20Module%203.pptx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" alt="Powerpoint Presentation File" class="mr-1"/>Training Slides - Module 3</a>
                 <br />
-                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/Handout_3_Scenario_Activity.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Handout 3: Scenario Activity</a>
+                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/Handout_3_Scenario_Activity.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" alt="Document File" class="mr-1"/>Handout 3: Scenario Activity</a>
                 <br />
-                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/Handout_3_Scenario_Activity_Instructor_Guide.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" class="mr-1"/>Handout 3: Scenario Activity, Instructor Guide</a>
+                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/Handout_3_Scenario_Activity_Instructor_Guide.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" alt="Document File" class="mr-1"/>Handout 3: Scenario Activity, Instructor Guide</a>
                 <br />
-                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/Handout_4_Tips_for_Delivery.pdf" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-pdf.svg')" class="mr-1"/>Handout 4: Tips for Delivery</a>
+                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/Handout_4_Tips_for_Delivery.pdf" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-pdf.svg')" alt="PDF File" class="mr-1"/>Handout 4: Tips for Delivery</a>
                 <br />
-                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/Using_the_College_Scorecard.pdf" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-pdf.svg')" class="mr-1"/>Using the College Scorecard</a>
+                <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/advisors/Using_the_College_Scorecard.pdf" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-pdf.svg')" alt="PDF File" class="mr-1"/>Using the College Scorecard</a>
                 <br />
                 <hr>
                 <a href="https://drive.google.com/drive/folders/1p9KbEtwyB8HmNQ5dOfo04g8lwuXUnrmh?usp=sharing" target="_blank" rel="noreferrer" class="content-link mb-0"><img :src="$url('img/icon-google-drive.svg')" class="mr-1" width="17px" height="17px"/>View on Google Drive</a>
