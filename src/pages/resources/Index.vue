@@ -165,8 +165,8 @@
                 </h1>
               </div>
             </div>
-            <img :src="$url('img/resources-banner.svg')" alt="Resources" class="d-none d-md-block" width="100%" />
-            <img :src="$url('img/resources-banner.svg')" alt="Resources" class="d-block d-md-none banner-image-small" width="100%"/>
+            <img :src="$url('img/resources-banner.svg')" alt="" class="d-none d-md-block" width="100%" />
+            <img :src="$url('img/resources-banner.svg')" alt="" class="d-block d-md-none banner-image-small" width="100%"/>
           </v-col>
         </v-row>
       </v-container>
