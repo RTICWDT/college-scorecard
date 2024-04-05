@@ -391,10 +391,37 @@ export default {
       var focusable = document
         .getElementsByTagName("main")[0]
         .querySelectorAll('button, [href], input, [tabindex="0"]')
-      var first = focusable[0]
-      var last = focusable[focusable.length - 1]
 
-      first.focus()
+      let index = 0
+      let first
+
+      while (index < focusable.length) {
+        first = focusable[index]
+        let displayNone = getComputedStyle(first).display === "none"
+
+        if (displayNone) {
+          index++
+        } else {
+          break
+        }
+      }
+
+      if (first) {
+        first.focus()
+        const rect = first.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const scrollPosition = rect.top + window.scrollY - 500;
+
+        if (rect.top >= 0 && rect.bottom <= windowHeight) {
+          // Element is already fully visible, no need to scroll
+          return;
+        }
+
+        window.scrollTo({
+          top: scrollPosition,
+          behavior: 'smooth'
+        });
+      }
     },
   },
   created() {
