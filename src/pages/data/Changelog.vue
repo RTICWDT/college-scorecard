@@ -29,12 +29,30 @@
                 >
                 <v-expansion-panel-content>
                   <p>
-                    On April XX, 2024, the Department updated the College Scorecard downloadable data files and the API as indicated below.
+                    On April XX, 2024,  the Department updated the College Scorecard website with more recent data for metrics 
+                    from the National Student Loan Data System (NSLDS) and the Internal Revenue Service (IRS). The user interface 
+                    of the consumer site was updated to show additional institution-level data as well as midpoint values for select 
+                    metrics to help site visitors compare the institution’s value of the metric against national medians. In addition, 
+                    the user interface of the consumer site also added graduation rate by Pell Grant status and more information 
+                    about admissions test requirements.
                   </p>
                   <p>
                     Specific data updates in this release include:
                   </p>
                   <ul>
+                    <li>
+                      Refreshed cumulative loan debt data metrics derived from NSLDS at the institution-level and for individual fields of study. 
+                    </li>
+                    <li>
+                      Added borrower-based repayment rates measured 4 years after entry into repayment (both institution-level 
+                      and field of study-level data). 
+                    </li>
+                    <li>
+                      Added median earnings measured 4 years after completion of a credential (both institution-level and field of study-level data). 
+                    </li> 
+                    <li>
+                      Added undergraduate student/faculty ratio and the metrics describing the share of staff by race/ethnicity and by gender. 
+                    </li>                       
                     <li>
                       More recent data values derived from Federal Student Aid sources for the following data metrics were included:
                       <ul>
@@ -44,22 +62,7 @@
                         <li>Title IV Approval Date</li>
                         <li>Federal School Code</li>
                       </ul>
-                    </li>                    
-                    <li>
-                      Updates derived from the Office of Postsecondary Education (OPE) eligibility matrix for data metrics 
-                      identifying Minority Serving Institutions. 
-                    </li>
-                    <li>
-                      New institution-level data were added for the street address of the institution; the control of the 
-                      institution based on Federal Student Aid data; outcomes data for students that did not receive a Pell 
-                      Grant, and a suppressed version of the admission rate.  
-                    </li>
-                    <li>
-                      A change to the developer-friendly name for one metric (GT_THRESHOLD_4YR) was made to harmonize the 
-                      developer-friendly name with the variable description. The new developer-friendly names is active immediately. 
-                      The old developer-friendly name will also point to this metric until the next data update, at which time it 
-                      will no longer be in service.
-                    </li>                     
+                    </li>                                     
                   </ul>
                 </v-expansion-panel-content>
               </v-expansion-panel>                
