@@ -29,39 +29,44 @@
                 >
                 <v-expansion-panel-content>
                   <p>
-                    On April XX, 2024,  the Department updated the College Scorecard website with more recent data for metrics 
-                    from the National Student Loan Data System (NSLDS) and the Internal Revenue Service (IRS). The user interface 
-                    of the consumer site was updated to show additional institution-level data as well as midpoint values for select 
-                    metrics to help site visitors compare the institution’s value of the metric against national medians. In addition, 
-                    the user interface of the consumer site also added graduation rate by Pell Grant status and more information 
-                    about admissions test requirements.
+                    On April XX, 2024, the Department updated the College Scorecard website with more recent data for 
+                    metrics from the Integrated Postsecondary Education Data System (IPEDS) and from Federal Student 
+                    Aid sources. To reduce file sizes, some text values have also been abbreviated in all data files. 
+                    Also, the data documentation reports have been updated to include an appendix describing what changes 
+                    were made to the report when compared to the prior version.
                   </p>
                   <p>
                     Specific data updates in this release include:
                   </p>
                   <ul>
                     <li>
-                      Refreshed cumulative loan debt data metrics derived from NSLDS at the institution-level and for individual fields of study. 
+                      Updates to all data metrics derived from IPEDS with more recent data values from a new data collection year. 
                     </li>
                     <li>
-                      Added borrower-based repayment rates measured 4 years after entry into repayment (both institution-level 
-                      and field of study-level data). 
+                      Added percentages of degree/certificate-seeking undergraduate students awarded Pell Grants and Federal Student Loans.  
                     </li>
                     <li>
-                      Added median earnings measured 4 years after completion of a credential (both institution-level and field of study-level data). 
-                    </li> 
+                      Added median (50th percentile) SAT and ACT scores.
+                    </li>                    
                     <li>
-                      Added undergraduate student/faculty ratio and the metrics describing the share of staff by race/ethnicity and by gender. 
-                    </li>                       
-                    <li>
-                      More recent data values derived from Federal Student Aid sources for the following data metrics were included:
+                      Updated data derived from Federal Student Aid sources to more recent values for the following data metrics: 
                       <ul>
                         <li>Currently Operating Status Flag</li>
                         <li>Heightened Cash Monitoring Flag</li>
                         <li>Accrediting Agency Name and Code</li>
                         <li>Title IV Approval Date</li>
                         <li>Federal School Code</li>
+                        <li>Cohort Default Rate</li>
+                        <li>Minority-serving institution indicators</li>
+                        <li>Institutional control (Postsecondary Education Participants System version)</li>
                       </ul>
+                      <li>
+                        When values for a metric have been suppressed in accordance with the privacy protocol, 
+                        the text string has been changed from “PrivacySuppressed” to “PS”. 
+                      </li>
+                      <li>
+                        When values for a metric are not available, the associated text string has been changed from “NULL” to “NA”. 
+                      </li>
                     </li>                                     
                   </ul>
                 </v-expansion-panel-content>
@@ -1729,7 +1734,7 @@ export default {
   },
   methods: {
     all() {
-      this.panels = [...Array(30).keys()].map((k, i) => i)
+      this.panels = [...Array(31).keys()].map((k, i) => i)
     },
     // Reset the panel
     none() {
