@@ -29,7 +29,7 @@
                 >
                 <v-expansion-panel-content>
                   <p>
-                    On April XX, 2024, the Department updated the College Scorecard website with more recent data for 
+                    On May 6, 2024, the Department updated the College Scorecard website with more recent data for 
                     metrics from the Integrated Postsecondary Education Data System (IPEDS) and from Federal Student 
                     Aid sources. To reduce file sizes, some text values have also been abbreviated in all data files. 
                     Also, the data documentation reports have been updated to include an appendix describing what changes 
