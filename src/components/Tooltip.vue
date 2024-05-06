@@ -14,7 +14,7 @@
     </v-btn>
     <v-dialog max-width="500px" v-model="showDialog">
       <v-card>
-        <v-btn @click="showDialog = false" icon class="float-right mt-3 mr-3"
+        <v-btn @click="showDialog = false"  alt="Close More Information tooltip" aria-required="true" icon class="float-right mt-3 mr-3"
           ><v-icon>fas fa-times-circle</v-icon></v-btn
         >
         <v-card-title>{{ title }}</v-card-title>

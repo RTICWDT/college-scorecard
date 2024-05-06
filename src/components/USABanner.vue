@@ -9,9 +9,9 @@ oRwKGFw8Ulzc3IC64CIhKa1hES4uLQCkqxtECUS6FgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMC0w
 OC0xM1QwMzo0MToxNCswMzowMGPS+9cAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjAtMDgtMTNUMDM6
 NDE6MTQrMDM6MDASj0NrAAAAAElFTkSuQmCC"></image></svg> 
 
-<span v-if="$vuetify.breakpoint.mdAndUp"> An official website of the United States government <button @click="toggleInfo"><span tabindex="2" class="usx-banner-toggle"> Here’s how you know <i class="fas " :class="showInfo ? 'fa-chevron-up' : 'fa-chevron-down'"></i></span></button></span>
+<span v-if="$vuetify.breakpoint.mdAndUp"> An official website of the United States government <button @click="toggleInfo" alt="Here's how you know" aria-required="true"><span tabindex="2" class="usx-banner-toggle"> Here’s how you know <i class="fas " :class="showInfo ? 'fa-chevron-up' : 'fa-chevron-down'"></i></span></button></span>
 
-<button @click="toggleInfo"><span v-if="$vuetify.breakpoint.smAndDown"><span tabindex="2" class="">&nbsp;An official website of the United States government <i class="fas " :class="showInfo ? 'fa-chevron-up' : 'fa-chevron-down'"></i></span></span></button>
+<button @click="toggleInfo" alt="Here's how you know" aria-required="true"><span v-if="$vuetify.breakpoint.smAndDown"><span tabindex="2" class="">&nbsp;An official website of the United States government <i class="fas " :class="showInfo ? 'fa-chevron-up' : 'fa-chevron-down'"></i></span></span></button>
 
 </p>
 
