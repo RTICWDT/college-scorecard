@@ -2599,8 +2599,8 @@ export default {
       // Find the index
       // let findIndex = _.findIndex(this.allFieldsOfStudy)
     },
-    fieldOfStudySelectItems() {
-      if (!this.school || !this.allFieldsOfStudy) return {}
+    fieldOfStudySelectItems() {     
+      if (!this.school || !this.allFieldsOfStudy) return []
 
       return this.organizeFieldsOfStudy(this.allFieldsOfStudy, this.CIP2)
     },

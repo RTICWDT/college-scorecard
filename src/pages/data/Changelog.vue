@@ -25,6 +25,54 @@
             <v-expansion-panels multiple v-model="panels">
               <v-expansion-panel>
                 <v-expansion-panel-header
+                  >May 6, 2024</v-expansion-panel-header
+                >
+                <v-expansion-panel-content>
+                  <p>
+                    On May 6, 2024, the Department updated the College Scorecard website with more recent data for 
+                    metrics from the Integrated Postsecondary Education Data System (IPEDS) and from Federal Student 
+                    Aid sources. To reduce file sizes, some text values have also been abbreviated in all data files. 
+                    Also, the data documentation reports have been updated to include an appendix describing what changes 
+                    were made to the report when compared to the prior version.
+                  </p>
+                  <p>
+                    Specific data updates in this release include:
+                  </p>
+                  <ul>
+                    <li>
+                      Updates to all data metrics derived from IPEDS with more recent data values from a new data collection year. 
+                    </li>
+                    <li>
+                      Added percentages of degree/certificate-seeking undergraduate students awarded Pell Grants and Federal Student Loans.  
+                    </li>
+                    <li>
+                      Added median (50th percentile) SAT and ACT scores.
+                    </li>                    
+                    <li>
+                      Updated data derived from Federal Student Aid sources to more recent values for the following data metrics: 
+                      <ul>
+                        <li>Currently Operating Status Flag</li>
+                        <li>Heightened Cash Monitoring Flag</li>
+                        <li>Accrediting Agency Name and Code</li>
+                        <li>Title IV Approval Date</li>
+                        <li>Federal School Code</li>
+                        <li>Cohort Default Rate</li>
+                        <li>Minority-serving institution indicators</li>
+                        <li>Institutional control (Postsecondary Education Participants System version)</li>
+                      </ul>
+                      <li>
+                        When values for a metric have been suppressed in accordance with the privacy protocol, 
+                        the text string has been changed from “PrivacySuppressed” to “PS”. 
+                      </li>
+                      <li>
+                        When values for a metric are not available, the associated text string has been changed from “NULL” to “NA”. 
+                      </li>
+                    </li>                                     
+                  </ul>
+                </v-expansion-panel-content>
+              </v-expansion-panel>                
+              <v-expansion-panel>
+                <v-expansion-panel-header
                   >October 10, 2023</v-expansion-panel-header
                 >
                 <v-expansion-panel-content>
@@ -1686,7 +1734,7 @@ export default {
   },
   methods: {
     all() {
-      this.panels = [...Array(29).keys()].map((k, i) => i)
+      this.panels = [...Array(31).keys()].map((k, i) => i)
     },
     // Reset the panel
     none() {
