@@ -74,13 +74,13 @@
           <tooltip definition="fos-median-earnings" :isBranch="isBranch" />
         </div>
 
-        <div v-if="_.get(fos, fields.FOS_EARNINGS_FED_4YR)">
+        <div v-if="_.get(fos, fields.FOS_EARNINGS_FED_5YR)">
           <span class="display-2 navy-text font-weight-bold ">{{
-            _.get(fos, fields.FOS_EARNINGS_FED_4YR) | numeral("$0,0")
+            _.get(fos, fields.FOS_EARNINGS_FED_5YR) | numeral("$0,0")
           }}</span>
           <div style="max-width:160px;height:30px;">
             <horizontal-bar
-              :value="_.get(fos, fields.FOS_EARNINGS_FED_4YR)"
+              :value="_.get(fos, fields.FOS_EARNINGS_FED_5YR)"
               :min="0"
               :max="100000"
               :color="'#1874DC'"
@@ -102,9 +102,9 @@
           Monthly Earnings
           <tooltip definition="fos-monthly-earnings" :isBranch="isBranch" />
         </div>
-        <div v-if="_.get(fos, fields.FOS_EARNINGS_FED_4YR)">
+        <div v-if="_.get(fos, fields.FOS_EARNINGS_FED_5YR)">
           <span class="display-2 navy-text font-weight-bold ">{{
-            (_.get(fos, fields.FOS_EARNINGS_FED_4YR) / 12) | numeral("$0,0")
+            (_.get(fos, fields.FOS_EARNINGS_FED_5YR) / 12) | numeral("$0,0")
           }}</span>
         </div>
         <div v-else class="mini-data-na text-center">
