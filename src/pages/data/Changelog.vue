@@ -25,6 +25,26 @@
             <v-expansion-panels multiple v-model="panels">
               <v-expansion-panel>
                 <v-expansion-panel-header
+                  >June 14, 2024</v-expansion-panel-header
+                >
+                <v-expansion-panel-content>
+                  <p>
+                    On June 14, 2024, the Department updated the College Scorecard website with more recent data ffor 
+                    metrics from the Internal Revenue Service (IRS). 
+                  </p>
+                  <p>
+                    Specific data updates in this release include:
+                  </p>
+                  <ul>
+                    <li>Added entries for earnings 5 years after completion and for earnings metrics 7, 9, and 11 years after entry</li>
+                    <li>Updated entries with new values due to the earnings data refresh and added entries for earnings 5 years after completion and for earnings metrics 7, 9, and 11 years after entry</li>
+                    <li>Added entries for earnings 5 years after completion</li>
+                    <li>Updated entries with new values due to the earnings data refresh and added entries for earnings 5 years after completion</li>                       
+                  </ul>
+                </v-expansion-panel-content>
+              </v-expansion-panel>                             
+              <v-expansion-panel>
+                <v-expansion-panel-header
                   >May 6, 2024</v-expansion-panel-header
                 >
                 <v-expansion-panel-content>
