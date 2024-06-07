@@ -1,5 +1,5 @@
 <template>
-  <focus-trap v-model:active="$store.state.drawerOpen" :delay-initial-focus="true" :initial-focus="() => $refs.nameInput">
+  <focus-trap v-model:active="$store.state.drawerOpen" :delay-initial-focus="true" :initial-focus="() => $refs.nameInput" :tabbable-options="{displayCheck: 'legacy-full'}">
   <modal-dialog>
   <v-card id="compare-schools-content" class="pa-5">
     <div>
