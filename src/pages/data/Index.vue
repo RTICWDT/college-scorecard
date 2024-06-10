@@ -14,7 +14,7 @@
             </p>
             <p class="pb-4">
               This data was
-              <strong>last updated May 6, 2024</strong>.
+              <strong>last updated June 13, 2024</strong>.
             </p>
 
             <h2 class="my-5">
@@ -32,7 +32,7 @@
 
             <ul class="font-weight-regular">
               <li>
-                Institution-level data files for 1996-97 through 2021-22
+                Institution-level data files for 1996-97 through 2022-23
                 containing aggregate data for each institution. Includes
                 information on institutional characteristics, enrollment,
                 student aid, costs, and student outcomes.
@@ -46,7 +46,7 @@
                 graduation.
               </li>
               <li>
-                Crosswalk files for 2000-01 through 2020-21 that link the
+                Crosswalk files for 2000-01 through 2022-23 that link the
                 Department’s OPEID with an IPEDS UNITID for each institution.
               </li>
             </ul>
