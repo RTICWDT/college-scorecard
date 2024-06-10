@@ -29,7 +29,7 @@
                 >
                 <v-expansion-panel-content>
                   <p>
-                    On June 13, 2024, 2024, the Department updated the College Scorecard website and datafiles and
+                    On June 13, 2024, the Department updated the College Scorecard website and datafiles and
                   </p>
                   <ul>
                     <li>Updated annual data metrics with</li>
