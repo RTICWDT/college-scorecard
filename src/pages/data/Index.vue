@@ -22,8 +22,8 @@
               <v-btn
                 class="ml-2"
                 color="secondary"
-                href="https://ed-public-download.app.cloud.gov/downloads/College_Scorecard_Raw_Data_04082024.zip"
-                >Download (.zip, 436 MB)
+                href="https://ed-public-download.app.cloud.gov/downloads/College_Scorecard_Raw_Data_06102024.zip"
+                >Download (.zip, 390 MB)
                 <v-icon right dark x-small>
                   fas fa-download
                 </v-icon></v-btn
@@ -59,8 +59,8 @@
                   small
                   color="secondary"
                   class="ml-0 ml-sm-2"
-                  href="https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Institution_04082024.zip"
-                  >Download (.zip, 23 MB)
+                  href="https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Institution_06102024.zip"
+                  >Download (.zip, 22 MB)
                   <v-icon right dark x-small>
                     fas fa-download
                   </v-icon></v-btn
@@ -73,8 +73,8 @@
                   small
                   class="ml-0 ml-sm-2"
                   color="secondary"
-                  href=" https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Field-of-Study_04082024.zip"
-                  >Download (.zip, 17 MB)
+                  href=" https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Field-of-Study_06102024.zip"
+                  >Download (.zip, 13 MB)
                   <v-icon right dark x-small>
                     fas fa-download
                   </v-icon></v-btn
