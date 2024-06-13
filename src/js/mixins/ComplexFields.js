@@ -724,7 +724,7 @@ export default {
 
                 var ret = degreesList + ((degreesList && certList) ? " as well as " + certList : certList) + (((certList || degreesList) && ugCertList) ?  ", and " + ugCertList : ugCertList)
 
-                if (certLevels.length == 0 && degreeLevels.length == 0)
+                if (certLevels.length == 0 && degreeLevels.length == 0  && ugCertLevels.length == 0)
                     ret = "no Degrees or Certificates"
 
                 return ret;

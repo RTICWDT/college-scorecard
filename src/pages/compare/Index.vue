@@ -325,10 +325,10 @@
                             <horizontal-bar
                               v-if="
                                 slotProps.school &&
-                                  slotProps.school[fields.FOS_EARNINGS_FED_4YR]
+                                  slotProps.school[fields.FOS_EARNINGS_FED_5YR]
                               "
                               :value="
-                                slotProps.school[fields.FOS_EARNINGS_FED_4YR]
+                                slotProps.school[fields.FOS_EARNINGS_FED_5YR]
                               "
                               :min="0"
                               :max="150000"
@@ -340,7 +340,7 @@
                             <div
                               v-if="
                                 slotProps.school &&
-                                  !slotProps.school[fields.FOS_EARNINGS_FED_4YR]
+                                  !slotProps.school[fields.FOS_EARNINGS_FED_5YR]
                               "
                               class="data-na"
                             >
@@ -352,10 +352,10 @@
                             <horizontal-bar
                               v-if="
                                 slotProps.school &&
-                                  slotProps.school[fields.FOS_EARNINGS_PELL_4YR]
+                                  slotProps.school[fields.FOS_EARNINGS_PELL_5YR]
                               "
                               :value="
-                                slotProps.school[fields.FOS_EARNINGS_PELL_4YR]
+                                slotProps.school[fields.FOS_EARNINGS_PELL_5YR]
                               "
                               :min="0"
                               :max="150000"
@@ -368,7 +368,7 @@
                               v-if="
                                 slotProps.school &&
                                   !slotProps.school[
-                                    fields.FOS_EARNINGS_PELL_4YR
+                                    fields.FOS_EARNINGS_PELL_5YR
                                   ]
                               "
                               class="data-na"
@@ -403,10 +403,10 @@
                             <horizontal-bar
                               v-if="
                                 slotProps.school &&
-                                  slotProps.school[fields.FOS_EARNINGS_FED_4YR]
+                                  slotProps.school[fields.FOS_EARNINGS_FED_5YR]
                               "
                               :value="
-                                slotProps.school[fields.FOS_EARNINGS_FED_4YR] /
+                                slotProps.school[fields.FOS_EARNINGS_FED_5YR] /
                                   12
                               "
                               :min="0"
@@ -419,7 +419,7 @@
                             <div
                               v-if="
                                 slotProps.school &&
-                                  !slotProps.school[fields.FOS_EARNINGS_FED_4YR]
+                                  !slotProps.school[fields.FOS_EARNINGS_FED_5YR]
                               "
                               class="data-na"
                             >
