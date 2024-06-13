@@ -1,6 +1,5 @@
 <template>
-  <focus-trap v-model:active="$store.state.drawerOpen" :initial-focus="() => $refs.nameInput">
-  <modal-dialog>
+  <focus-trap :active="false" ref="focusTrap" :delay-initial-focus="true" :tabbable-options="{displayCheck: 'legacy-full'}" :initial-focus="() => $refs.closeButton">
   <v-card id="compare-schools-content" class="pa-5">
     <div>
       <span>
@@ -13,7 +12,7 @@
           <v-icon v-else>fas fa-plus-circle</v-icon>
         </v-btn> -->
 
-        <v-btn icon @click="toggleDrawer()" alt="Close Drawer" aria-required="true">
+        <v-btn icon @click="toggleDrawer()" alt="Close Drawer" aria-required="true" ref="closeButton">
           <v-icon>fas fa-times-circle</v-icon>
         </v-btn>
       </div>
@@ -221,7 +220,6 @@
       </v-row>
     </div>
   </v-card>
-  </modal-dialog>
   </focus-trap>
 </template>
 

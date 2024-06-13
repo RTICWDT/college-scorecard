@@ -25,6 +25,44 @@
             <v-expansion-panels multiple v-model="panels">
               <v-expansion-panel>
                 <v-expansion-panel-header
+                  >June 13, 2024</v-expansion-panel-header
+                >
+                <v-expansion-panel-content>
+                  <p>
+                    On June 13, 2024, the Department updated the College Scorecard website and datafiles and
+                  </p>
+                  <ul>
+                    <li>Updated annual data metrics with</li>
+                    <ul>
+                      <li>Refreshed institution-level earnings calculations for former students 6, 8, and 10 years 
+                      after starting school at the institution level.</li>
+                      <li>Refreshed institution and field of study earnings calculations for graduates 1 and 5 
+                        years after graduation (the 5-year calculation is new, previously the 4-year measurement 
+                        point was the furthest look back post-graduation).</li>
+                    </ul>
+                    <li>Restructured the data file to relabel previously published entry-cohort earnings calculations 
+                      released in 2022 and 2023 with the publication of a 
+                      <a
+                        @click="trackDownload('EarningsDataErrata.pdf')"
+                        :href="$url('/assets/EarningsDataErrata.pdf')"
+                        target="_blank"
+                        >data errata document
+                      </a>
+                       describing data quality 
+                      issues with those calculations.</li>
+                      <li>Updated data derived from Federal Student Aid sources to more recent values for the following data metrics:</li>
+                      <ul>
+                        <li>Currently Operating Status Flag</li>
+                        <li>Accrediting Agency Name and Code</li>
+                        <li>Title IV Approval Date</li>
+                        <li>Federal School Code</li>
+                        <li>Institutional control (Postsecondary Education Participants System version)</li>
+                      </ul>
+                  </ul>
+                </v-expansion-panel-content>
+              </v-expansion-panel>                             
+              <v-expansion-panel>
+                <v-expansion-panel-header
                   >May 6, 2024</v-expansion-panel-header
                 >
                 <v-expansion-panel-content>
