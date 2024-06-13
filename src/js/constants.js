@@ -150,6 +150,8 @@ export const fields = {
   FOS_EARNINGS_PELL: 'earnings.highest.3_yr.pell_median_earnings',
   FOS_EARNINGS_FED_4YR: 'earnings.4_yr.overall_median_earnings',
   FOS_EARNINGS_PELL_4YR: 'earnings.4_yr.pell_median_earnings',
+  FOS_EARNINGS_FED_5YR: 'earnings.5_yr.overall_median_earnings',
+  FOS_EARNINGS_PELL_5YR: 'earnings.5_yr.pell_median_earnings',
 
   // FOS_DEBT_MEDIAN: 'debt.test.federal.median_total_at',
   FOS_DEBT_MEDIAN: 'debt.staff_grad_plus.all.eval_inst.median',

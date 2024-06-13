@@ -127,10 +127,12 @@ export default function (Vue, { router, head, isClient, appOptions }) {
       toggleDrawer(state, value = null) {
       if (value != null) {
           state.drawerOpen = value
+          
         }
         else
         {
           state.drawerOpen = !state.drawerOpen;
+          
         }
       },
       clearForm(state) {

@@ -73,7 +73,29 @@
                     Field of Study Data Files (.pdf, 827 KB)
                   </v-btn>
                 </v-col></v-row
-              >
+              ><v-row>
+                <v-col>
+                  <h2>Data Errata</h2>
+                </v-col>
+              </v-row>
+              <v-row class="my-0">
+                <v-col>
+                  <v-btn
+                    color="secondary"
+                    @click="trackDownload('EarningsDataErrata.pdf')"
+                    :href="$url('/assets/EarningsDataErrata.pdf')"
+                    target="_blank"
+                    text
+                    outlined
+                    class="mb-3 mr-2"
+                  >
+                    <v-icon x-small class="pr-1">
+                      fas fa-file-pdf
+                    </v-icon>
+                    Cohort Alignment on Earnings Calculations (.pdf, 476 KB)
+                  </v-btn>
+                </v-col></v-row>
+
             </div>
             <p class="mt-3">
               <strong>Looking for help?</strong> Visit
