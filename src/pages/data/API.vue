@@ -485,7 +485,7 @@
             <p>
               The field of study data is included as an array of objects nested
               under a specified key. These objects may be queried just like any
-              other data. However, there is an additional parameters to add to
+              other data. However, there is an additional parameter to add to
               your API call to manage what is returned. By default, if
               specifying a search parameter, only objects of the array that
               match that parameter will be returned. You can pass
