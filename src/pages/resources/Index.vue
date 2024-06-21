@@ -342,9 +342,9 @@
               <br />
               <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%201_Handout-1.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" alt="Document File" class="mr-1"/>Activity 1: Handout</a>
               <br />
-              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%202_Handout-2.1.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" alt="Document File" class="mr-1"/>Activity 2: Handout 1</a>
-              <br />
               <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%202_School-Data.pptx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-ppt.svg')" alt="Powerpoint Presentation File" class="mr-1"/>Activity 2: School Data</a>
+              <br />
+              <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%202_Handout-2.1.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" alt="Document File" class="mr-1"/>Activity 2: Handout 1</a>
               <br />
               <a href="https://s3-us-gov-west-1.amazonaws.com/cg-ec6a94c9-8cbd-40f4-a108-2592a0549118/resources/students/Activity%202_Handout-2.2.docx" target="_blank" rel="noreferrer" class="content-link"><img :src="$url('img/icon-doc.svg')" alt="Document File" class="mr-1"/>Activity 2: Handout 2</a>
               <br />
