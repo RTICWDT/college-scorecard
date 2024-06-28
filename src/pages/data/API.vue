@@ -51,6 +51,60 @@
               </li>
             </ul>
             <h2 id="getting-started">Getting Started</h2>
+            <h3>What Data is Available</h3>
+
+            <p>
+              The College Scorecard data is composed of two related datasets.
+              The institution-level data represents the institution as a whole,
+              while the field of study data describes specific fields of study
+              at the institution. Details of the data available in the API can
+              be found in the
+              <a
+                @click="trackDownload('CollegeScorecardDataDictionary.xlsx')"
+                :href="$url('/assets/CollegeScorecardDataDictionary.xlsx')"
+                target="_blank"
+                >Data Dictionary</a
+              >. Additional context for the data elements can also be found in
+              the documentation reports for
+              <a
+                @click="trackDownload('InstitutionDataDocumentation.pdf')"
+                :href="$url('/assets/InstitutionDataDocumentation.pdf')"
+                target="_blank"
+                >institution-level data</a
+              >
+              and
+              <a
+                @click="trackDownload('FieldOfStudyDataDocumentation.pdf')"
+                :href="$url('/assets/FieldOfStudyDataDocumentation.pdf')"
+                target="_blank"
+                >field of study data</a
+              >.
+            </p>
+            <p>
+              Depending on the variable, data may not be present across all
+              years. The "cohort map" tabs in the
+              <a
+                @click="trackDownload('CollegeScorecardDataDictionary.xlsx')"
+                :href="$url('/assets/CollegeScorecardDataDictionary.xlsx')"
+                target="_blank"
+                >Data Dictionary</a
+              >
+              provide details about where you can expect to find data for a
+              particular variable and what group of students (i.e., what cohort)
+              it describes. The default for the API is provide the latest data
+              available for all variables (i.e., the
+              <code>latest</code> object). Since data are published at different
+              times during the year, the latest data available for each metric
+              may not come from the same year as other metrics. Data from
+              specific years can be accessed by specifying a year instead of the
+              <code>latest</code> object in your query. For example, the
+              earnings data object from 2018 would be accessed by specifying
+              <code>2018.earnings</code> instead of
+              <code>latest.earnings</code>. An advantage of using the
+              <code>latest</code> object is the data will automatically refresh
+              when new data is released.
+            </p>
+
             <h3 id="api-access-and-authentication">
               API Access and Authentication
             </h3>
@@ -219,7 +273,8 @@
               fields. Make sure the sort parameter is a field in the data set.
               For more information, please take a look at
               <a
-                href="https://collegescorecard.ed.gov/assets/CollegeScorecardDataDictionary.xlsx"
+                @click="trackDownload('CollegeScorecardDataDictionary.xlsx')"
+                href="/assets/CollegeScorecardDataDictionary.xlsx"
                 >data dictionary</a
               >. Sorting is only available on fields that have text populated in
               the <code>index</code> column of the respective data dictionary
