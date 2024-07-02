@@ -264,16 +264,21 @@
       <v-container>
         <Spacer />
         <v-row>
-          <v-col cols="12" md="8">
+          <v-col cols="12" md="8" class="pb-0">
             <p class="mb-2 h-tag tag-green">For Educators</p>
             <h2 class="mb-3">College Scorecard for the Classroom: Empowering Data-Driven Decision-Making</h2>
+          </v-col>
+          <Spacer />
+        </v-row>
+        <v-row class="mt-0">
+          <v-col cols="12" md="8">
             <p class="mb-0">Enable your students to confidently navigate the higher education decision process with essential knowledge and resources. This series of 5 activities is designed for counselors, teachers, or college access advisors to use directly with their students. These activities focus on comprehending College Scorecard data and providing students with the tools to make informed decisions regarding their higher education aspirations.</p>
           </v-col>
           <Spacer />
-          <v-col cols="12" md="4" class="get-materials align-self-end">
+          <v-col cols="12" md="4" class="get-materials align-self-start">
             <div class="d-flex download-wrapper">
               <div>
-                <p class="mb-1">Get the materials (.zip, 4 MB)</p>
+                <p class="mb-1">Get the materials (.zip, 3.6 MB)</p>
                 <v-btn
                   class="mw-270"
                   color="secondary"
@@ -298,6 +303,7 @@
             </div>
           </v-col>
         </v-row>
+
         <Spacer />
         <v-row>
           <v-col cols="12" md="6">
@@ -373,16 +379,21 @@
         <v-container>
           <Spacer />
           <v-row>
-            <v-col cols="12" md="8">
+            <v-col cols="12" md="8" class="pb-0">
               <p class="mb-2 h-tag tag-blue">For Advisors</p>
               <h2 class="mb-3">Professional Development Toolkit for College Access Advisors</h2>
+            </v-col>
+            <Spacer />
+          </v-row>
+          <v-row class="mt-0">
+            <v-col cols="12" md="8">
               <p>Welcome to our free, comprehensive toolkit designed to empower college access advisors to utilize everything College Scorecard has to offer. This 1-hour training session is tailored to meet professional development needs, equipping advisors with the skills to effectively train others on utilizing the College Scorecard. Whether you’re leading sessions with counselors, presenting at professional conferences, or engaging with events hosted by school districts or state agencies, this toolkit provides all the necessary resources to train others on how best to equip students toward making data-informed decisions about higher education.</p>
             </v-col>
             <Spacer />
-            <v-col cols="12" md="4" class="get-materials align-self-end">
+            <v-col cols="12" md="4" class="get-materials align-self-start">
               <div class="d-flex download-wrapper">
                 <div>
-                  <p class="mb-1">Get the full advisor toolkit (.zip, 2.5 MB)</p>
+                  <p class="mb-1">Get the full advisor toolkit (.zip, 4.4 MB)</p>
                   <v-btn
                     class="mw-270"
                     color="secondary"
