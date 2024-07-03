@@ -6,7 +6,40 @@ header {
   z-index: 9999;
   width: 100%;
   top: 0;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    width: 350px;
+    @media screen and (max-width: 600px) {
+      width: 300px;
+    }
+  }
 }
+
+nav {
+  ul {
+    list-style-type: none;
+
+    li {
+      padding: 0 12px;
+      position: relative;
+      
+      a {
+        text-decoration: none;
+        color: white;
+        padding-bottom: 10px;
+        cursor: pointer;
+
+        &.active {
+          font-weight: bold;
+          border-bottom: 3px solid #97cff5;
+        }
+      }
+    }
+  }
+}
+
 
 #skip-content-tab {
   position: absolute;
@@ -20,28 +53,6 @@ header {
 
   &:focus-within {
     opacity: 1;
-  }
-}
-
-nav {
-  ul {
-    list-style-type: none;
-
-    li {
-      padding: 0 12px;
-
-      a {
-        font-weight: bold;
-        text-decoration: none;
-        color: white;
-        padding-bottom: 10px;
-
-        &.active {
-          border-bottom: 3px solid #97cff5;
-        }
-      }
-
-    }
   }
 }
 </style>
@@ -64,7 +75,7 @@ nav {
               <img
                 :src="$url('/img/US-DOE-CollegeScorecard-Logo.svg')"
                 alt="US Department of Education College Scorecard"
-                width="350px"
+                class="logo"
               />  
             </div>
           </a>
@@ -80,39 +91,41 @@ nav {
                 </a>
               </li>
 
-              <li>
-                <a :href ="$url('/search')":class="{ 'active': activeLink === 'search' }">
-                  Search
-                </a>
-              </li>
+              <Subnav
+                label="Search"
+                :is-active="activeLink === 'search'"
+                :items="searchItems"
+              />
+
+              <Subnav
+                label="Compare"
+                :is-active="activeLink === 'compare'"
+                :items="compareItems"
+              />
 
               <li>
-                <a :href ="$url('/search')":class="{ 'active': activeLink === 'search' }">
-                  Compare
-                </a>
-              </li>
-
-              <li>
-                <a :href="$url('/search')" :class="{ 'active': activeLink === 'search' }">
+                <a :href="$url('/resources')" :class="{ 'active': activeLink === 'resources' }">
                   Resources
                 </a>
               </li>
 
-              <li>
-                <a :href="$url('/data')" :class="{ 'active': activeLink === 'data' }">
-                  About the Data
-                </a>
-              </li>
+              <Subnav
+                label="About the Data"
+                :is-active="activeLink === 'data'"
+                :items="dataItems"
+                :right-offset="'0.7rem'"
+              />
             </ul>
           </nav>
         </div>
 
         <!-- Mobile Nav Bar -->
-        <div id="mobile-nav-icon" class="d-md-none">
+        <div class="d-md-none">
           <v-app-bar-nav-icon
             class="float-right"
             @click="drawer = true"
             aria-label="Menu"
+            style="color: white;"
           >
           </v-app-bar-nav-icon>
         </div>
@@ -129,11 +142,18 @@ nav {
         color="white"
       >
         <v-list nav>
+          <v-list-item-group v-model="group1">
+            <v-list-item @click="mobileNavClick(`/`)">
+              <v-list-item-content>
+                <v-list-item-title>
+                  HELLO
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+
           <v-list-item-group v-model="group">
-            <v-list-item
-              class="mobile-navigation-item"
-              @click="mobileNavClick(`/`)"
-            >
+            <v-list-item @click="mobileNavClick(`/`)">
               <v-list-item-content>
                 <v-list-item-title>
                   Home
@@ -141,45 +161,41 @@ nav {
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item
-              class="mobile-navigation-item"
-              @click="mobileNavClick(`/data`)"
-            >
+            <v-list-item @click="mobileNavClick(`/data`)">
               <v-list-item-content>
-                <v-list-item-title class="mobile-navigation-item">
+                <v-list-item-title >
                   About the Data
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item
-              class="mobile-navigation-item"
-              @click="mobileNavClick(`/search`)"
-            >
+            <v-list-item @click="mobileNavClick(`/search`)">
               <v-list-item-content>
-                <v-list-item-title class="mobile-navigation-item">
-                  Search
+                <v-list-item-title >
+                  Search Instiutions
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item
-              class="mobile-navigation-item"
-              @click="mobileNavClick(`/compare/?toggle=institutions`)"
-            >
+            <v-list-item @click="mobileNavClick(`/search`)">
               <v-list-item-content>
-                <v-list-item-title class="mobile-navigation-item">
+                <v-list-item-title >
+                  Search Fields of Study
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item @click="mobileNavClick(`/compare/?toggle=institutions`)">
+              <v-list-item-content>
+                <v-list-item-title >
                   Compare Institutions
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item
-              class="mobile-navigation-item"
-              @click="mobileNavClick(`/compare/?toggle=fos`)"
-            >
+            <v-list-item @click="mobileNavClick(`/compare/?toggle=fos`)">
               <v-list-item-content>
-                <v-list-item-title class="mobile-navigation-item">
+                <v-list-item-title >
                   Compare Fields of Study
                 </v-list-item-title>
               </v-list-item-content>
@@ -193,13 +209,59 @@ nav {
 
 <script>
 import USABanner from "@/components/USABannerNew.vue"
+import Subnav from './Subnav.vue';
 export default {
-  components: { USABanner },
+  components: { 
+    USABanner,
+    Subnav,
+  },
   data() {
     return {
       drawer: false,
       group: false,
       activeLink: null,
+      compareItems: [
+        { 
+          label: 'Compare Institutions', 
+          action: '/compare/?toggle=institutions'
+        },
+        { 
+          label: 'Compare Fields of Study', 
+          action: '/compare/?toggle=fos'
+        }
+      ],
+      searchItems: [
+        { 
+          label: 'Search Schools', 
+          action: '/search'
+        },
+        { 
+          label: 'Search Fields of Study', 
+          action: '/search/fos-landing'
+        }
+      ],
+      dataItems: [
+        { 
+          label: 'Download the Data', 
+          action: '/data'
+        },
+        { 
+          label: 'Data Documentation', 
+          action: '/data/documentation'
+        },
+        { 
+          label: 'API Documentation', 
+          action: '/data/api'
+        },
+        { 
+          label: 'Change Log', 
+          action: '/data/changelog'
+        },
+        { 
+          label: 'Glossary', 
+          action: '/data/glossary'
+        },
+      ]
     }
   },
   mounted() {
