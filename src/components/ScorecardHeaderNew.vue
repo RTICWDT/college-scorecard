@@ -40,12 +40,25 @@ nav {
   }
 }
 
-nav.mobile {
-  display: none;
-  padding: 2rem;
-  @media screen and (max-width: 959px) {
-      display: block;
-    }
+.mobile-nav {
+  .nav-title {
+    padding-left: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .nav-item {
+    min-height: 25px;
+    height: 25px;
+  }
+
+  .nav-title-item {
+    font-weight: bold;
+    min-height: 25px;
+    height: 25px;
+    margin-bottom: 0px !important;
+  }
 }
 
 #skip-content-tab {
@@ -135,20 +148,13 @@ nav.mobile {
             aria-label="Menu"
             style="color: white;"
           >
-            <v-icon>{{ drawer ? '$close' : '$menu' }}</v-icon>
+            <v-icon>$menu</v-icon>
           </v-btn>
         </div>
       </div>
 
       <!-- Mobile Navigation Drawer -->
-      <nav class="mobile" v-show="drawer">
-        <div class="p-5">
-          CONTENT
-        </div>
-      </nav>
-
-      
-      <!-- <v-navigation-drawer
+      <v-navigation-drawer
         v-model="drawer"
         v-show="drawer"
         fixed
@@ -156,59 +162,156 @@ nav.mobile {
         disable-resize-watcher
         right
         color="white"
+        class="mobile-nav"
       >
         <v-list nav>
+          <div class="d-flex justify-end mb-5 mr-1">
+            <v-btn 
+              icon
+              @click="drawer = !drawer"
+              aria-label="Menu"
+              style="color: gray;"
+            >
+              <v-icon>$close</v-icon>
+            </v-btn>
+          </div>
+
           <v-list-item-group>
-            <v-list-item @click="mobileNavClick(`/`)">
+            <v-list-item @click="mobileNavClick(`/`)" class="nav-title-item">
               <v-list-item-content>
                 <v-list-item-title>
-                  Home
+                  <div class="d-flex justify-space-between">
+                    <span>Home</span>
+                    <v-icon>$next</v-icon>
+                  </div>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item @click="mobileNavClick(`/data`)">
+            <hr />
+            <p class="nav-title">Search</p>
+            
+            <v-list-item @click="mobileNavClick(`/search`)" class="nav-item">
               <v-list-item-content>
-                <v-list-item-title >
-                  About the Data
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>Search Schools</span>
+                    <v-icon>$next</v-icon>
+                  </div>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item @click="mobileNavClick(`/search`)">
+            <v-list-item @click="mobileNavClick(`/search/fos-landing`)" class="nav-item">
               <v-list-item-content>
-                <v-list-item-title >
-                  Search Instiutions
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>Search Fields of Study</span>
+                    <v-icon>$next</v-icon>
+                  </div>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item @click="mobileNavClick(`/search`)">
+            <hr />
+            <p class="nav-title">Compare</p>
+
+            <v-list-item @click="mobileNavClick(`/compare/?toggle=institutions`)" class="nav-item">
               <v-list-item-content>
-                <v-list-item-title >
-                  Search Fields of Study
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>Compare Schools</span>
+                    <v-icon>$next</v-icon>
+                  </div>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item @click="mobileNavClick(`/compare/?toggle=institutions`)">
+            <v-list-item @click="mobileNavClick(`/compare/?toggle=fos`)" class="nav-item">
               <v-list-item-content>
-                <v-list-item-title >
-                  Compare Institutions
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>Compare Fields of Study</span>
+                    <v-icon>$next</v-icon>
+                  </div>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item @click="mobileNavClick(`/compare/?toggle=fos`)">
+            <hr />
+
+            <v-list-item @click="mobileNavClick(`/resources`)" class="nav-title-item">
               <v-list-item-content>
-                <v-list-item-title >
-                  Compare Fields of Study
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>Resources</span>
+                    <v-icon>$next</v-icon>
+                  </div>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <hr />
+            <p class="nav-title">About the Data</p>
+
+            <v-list-item @click="mobileNavClick(`/data`)" class="nav-item">
+              <v-list-item-content>
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>Download the Data</span>
+                    <v-icon>$next</v-icon>
+                  </div>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item @click="mobileNavClick(`/data/documentation`)" class="nav-item">
+              <v-list-item-content>
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>Data Documentation</span>
+                    <v-icon>$next</v-icon>
+                  </div>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item @click="mobileNavClick(`/data/documentation#api`)" class="nav-item">
+              <v-list-item-content>
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>API Documentation</span>
+                    <v-icon>$next</v-icon>
+                  </div>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item @click="mobileNavClick(`/data/changelog`)" class="nav-item">
+              <v-list-item-content>
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>Change Log</span>
+                    <v-icon>$next</v-icon>
+                  </div>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item @click="mobileNavClick(`/data/glossary`)" class="nav-item">
+              <v-list-item-content>
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>Glossary</span>
+                    <v-icon>$next</v-icon>
+                  </div>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list-item-group>
         </v-list>
-      </v-navigation-drawer> -->
+      </v-navigation-drawer>
+
     </header>
   </client-only>
 </template>
@@ -256,7 +359,7 @@ export default {
         },
         { 
           label: 'API Documentation', 
-          action: '/data/api'
+          action: '/data/documentation#api'
         },
         { 
           label: 'Change Log', 
