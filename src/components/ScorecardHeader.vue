@@ -255,6 +255,7 @@ header {
         temporary
         disable-resize-watcher
         right
+        style="top: 21px;"
       >
         <v-list nav>
           <v-list-item-group v-model="group">

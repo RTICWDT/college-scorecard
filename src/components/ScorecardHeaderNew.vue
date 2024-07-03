@@ -40,6 +40,13 @@ nav {
   }
 }
 
+nav.mobile {
+  display: none;
+  padding: 2rem;
+  @media screen and (max-width: 959px) {
+      display: block;
+    }
+}
 
 #skip-content-tab {
   position: absolute;
@@ -121,18 +128,27 @@ nav {
 
         <!-- Mobile Nav Bar -->
         <div class="d-md-none">
-          <v-app-bar-nav-icon
+          <v-btn 
+            icon
             class="float-right"
-            @click="drawer = true"
+            @click="drawer = !drawer"
             aria-label="Menu"
             style="color: white;"
           >
-          </v-app-bar-nav-icon>
+            <v-icon>{{ drawer ? '$close' : '$menu' }}</v-icon>
+          </v-btn>
         </div>
       </div>
 
       <!-- Mobile Navigation Drawer -->
-      <v-navigation-drawer
+      <nav class="mobile" v-show="drawer">
+        <div class="p-5">
+          CONTENT
+        </div>
+      </nav>
+
+      
+      <!-- <v-navigation-drawer
         v-model="drawer"
         v-show="drawer"
         fixed
@@ -142,17 +158,7 @@ nav {
         color="white"
       >
         <v-list nav>
-          <v-list-item-group v-model="group1">
-            <v-list-item @click="mobileNavClick(`/`)">
-              <v-list-item-content>
-                <v-list-item-title>
-                  HELLO
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list-item-group>
-
-          <v-list-item-group v-model="group">
+          <v-list-item-group>
             <v-list-item @click="mobileNavClick(`/`)">
               <v-list-item-content>
                 <v-list-item-title>
@@ -202,7 +208,7 @@ nav {
             </v-list-item>
           </v-list-item-group>
         </v-list>
-      </v-navigation-drawer>
+      </v-navigation-drawer> -->
     </header>
   </client-only>
 </template>
@@ -218,7 +224,6 @@ export default {
   data() {
     return {
       drawer: false,
-      group: false,
       activeLink: null,
       compareItems: [
         { 
@@ -227,7 +232,7 @@ export default {
         },
         { 
           label: 'Compare Fields of Study', 
-          action: '/compare/?toggle=fos'
+          action: '/compare/?toggle=fos',
         }
       ],
       searchItems: [
@@ -287,6 +292,8 @@ export default {
         this.activeLink = "search"
       } else if (path.match(/compare/)) {
         this.activeLink = "compare"
+    } else if (path.match(/resources/)) {
+        this.activeLink = "resources"
       } else if (path.match(/data/)) {
         this.activeLink = "data"
       } else if (path.match(/school/)) {
