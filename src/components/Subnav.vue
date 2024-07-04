@@ -2,7 +2,6 @@
 li {
   padding: 0 12px;
   position: relative;
-  z-index: 100;
 
   a, span {
     text-decoration: none;
@@ -13,6 +12,7 @@ li {
     &.active {
       font-weight: bold;
       border-bottom: 3px solid #97cff5;
+      z-index: -100;
     }
 
     .icon {
@@ -24,8 +24,9 @@ li {
 
 .subnav {
   position: absolute;
+  z-index: 9999;
   background-color: white;
-  top: 32px;
+  top: 31px;
   padding: 5px;
   display: flex;
   flex-direction: column;
