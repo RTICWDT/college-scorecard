@@ -57,7 +57,7 @@ nav {
     font-weight: bold;
     min-height: 25px;
     height: 25px;
-    margin-bottom: 0px !important;
+    margin-bottom: -3px !important;
   }
 }
 
@@ -410,25 +410,6 @@ export default {
     mobileNavClick(urlString) {
       //window.location.href = this.$url(urlString)
       this.$router.push(urlString)
-    },
-    handleCompareIconClick(resourceType = "institution") {
-      this.$store.commit("toggleDrawer", true)
-    },
-    handleCompareLinkClick(urlString) {
-      if (
-        this.compareFieldsOfStudyCount == 0 &&
-        this.compareInstitutionsCount == 0
-      ) {
-        this.$store.commit("toggleDrawer", false)
-      } else {
-        this.$router.push(urlString)
-      }
-    },
-    currentSchoolCount() {
-      return this.$store.state.institutions.length
-    },
-    currentFieldOfStudyCount() {
-      return this.$store.state.fos.length
     },
     skipNav() {
       var focusable = document
