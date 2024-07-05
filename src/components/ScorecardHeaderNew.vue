@@ -51,6 +51,12 @@ nav {
   .nav-item {
     min-height: 25px;
     height: 25px;
+    padding-top: 5px;
+  }
+
+  .nav-caret {
+    position: relative;
+    bottom: 3px;
   }
 
   .nav-title-item {
@@ -58,6 +64,7 @@ nav {
     min-height: 25px;
     height: 25px;
     margin-bottom: -3px !important;
+    padding-top: 5px;
   }
 }
 
@@ -182,7 +189,7 @@ nav {
                 <v-list-item-title>
                   <div class="d-flex justify-space-between">
                     <span>Home</span>
-                    <v-icon>$next</v-icon>
+                    <v-icon class="nav-caret">$next</v-icon>
                   </div>
                 </v-list-item-title>
               </v-list-item-content>
@@ -196,7 +203,7 @@ nav {
                 <v-list-item-title>
                   <div class="d-flex justify-space-between">
                     <span>Search Schools</span>
-                    <v-icon>$next</v-icon>
+                    <v-icon class="nav-caret">$next</v-icon>
                   </div>
                 </v-list-item-title>
               </v-list-item-content>
@@ -207,7 +214,7 @@ nav {
                 <v-list-item-title>
                   <div class="d-flex justify-space-between">
                     <span>Search Fields of Study</span>
-                    <v-icon>$next</v-icon>
+                    <v-icon class="nav-caret">$next</v-icon>
                   </div>
                 </v-list-item-title>
               </v-list-item-content>
@@ -221,7 +228,7 @@ nav {
                 <v-list-item-title>
                   <div class="d-flex justify-space-between">
                     <span>Compare Schools</span>
-                    <v-icon>$next</v-icon>
+                    <v-icon class="nav-caret">$next</v-icon>
                   </div>
                 </v-list-item-title>
               </v-list-item-content>
@@ -232,7 +239,7 @@ nav {
                 <v-list-item-title>
                   <div class="d-flex justify-space-between">
                     <span>Compare Fields of Study</span>
-                    <v-icon>$next</v-icon>
+                    <v-icon class="nav-caret">$next</v-icon>
                   </div>
                 </v-list-item-title>
               </v-list-item-content>
@@ -245,7 +252,7 @@ nav {
                 <v-list-item-title>
                   <div class="d-flex justify-space-between">
                     <span>Resources</span>
-                    <v-icon>$next</v-icon>
+                    <v-icon class="nav-caret">$next</v-icon>
                   </div>
                 </v-list-item-title>
               </v-list-item-content>
@@ -259,7 +266,7 @@ nav {
                 <v-list-item-title>
                   <div class="d-flex justify-space-between">
                     <span>Download the Data</span>
-                    <v-icon>$next</v-icon>
+                    <v-icon class="nav-caret">$next</v-icon>
                   </div>
                 </v-list-item-title>
               </v-list-item-content>
@@ -270,7 +277,7 @@ nav {
                 <v-list-item-title>
                   <div class="d-flex justify-space-between">
                     <span>Data Documentation</span>
-                    <v-icon>$next</v-icon>
+                    <v-icon class="nav-caret">$next</v-icon>
                   </div>
                 </v-list-item-title>
               </v-list-item-content>
@@ -281,7 +288,7 @@ nav {
                 <v-list-item-title>
                   <div class="d-flex justify-space-between">
                     <span>API Documentation</span>
-                    <v-icon>$next</v-icon>
+                    <v-icon class="nav-caret">$next</v-icon>
                   </div>
                 </v-list-item-title>
               </v-list-item-content>
@@ -292,7 +299,7 @@ nav {
                 <v-list-item-title>
                   <div class="d-flex justify-space-between">
                     <span>Change Log</span>
-                    <v-icon>$next</v-icon>
+                    <v-icon class="nav-caret">$next</v-icon>
                   </div>
                 </v-list-item-title>
               </v-list-item-content>
@@ -303,7 +310,7 @@ nav {
                 <v-list-item-title>
                   <div class="d-flex justify-space-between">
                     <span>Glossary</span>
-                    <v-icon>$next</v-icon>
+                    <v-icon class="nav-caret">$next</v-icon>
                   </div>
                 </v-list-item-title>
               </v-list-item-content>
