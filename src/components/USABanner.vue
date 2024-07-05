@@ -25,7 +25,7 @@
       </p>
     </div>
 
-    <div class="w-100 position-relative" style="z-index: 99999;" v-show="showInfo">
+    <div class="w-100 position-relative" style="z-index: 1000;" v-show="showInfo">
       <div class="bg-white pt-4 pb-3 w-100 position-absolute">
         <v-row class="px-5">
           <v-col cols="12" md="6">

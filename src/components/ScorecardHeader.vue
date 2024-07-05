@@ -170,8 +170,9 @@ nav {
         right
         color="white"
         class="mobile-nav"
+        style="z-index: 1001 !important;"
       >
-        <v-list nav>
+        <v-list nav style="z-index: 1002 !important;">
           <div class="d-flex justify-end mb-5 mr-1">
             <v-btn 
               icon
