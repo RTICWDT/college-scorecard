@@ -337,7 +337,7 @@ export default {
       activeLink: null,
       compareItems: [
         { 
-          label: 'Compare Institutions', 
+          label: 'Compare Schools',
           action: '/compare/?toggle=institutions'
         },
         { 
