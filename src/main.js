@@ -13,7 +13,7 @@ import VueClipboard from 'vue-clipboard2';
 
 import _ from 'lodash';
 import { FocusTrap } from 'focus-trap-vue';
-import ScorecardHeaderNew from '~/components/ScorecardHeaderNew.vue';
+import ScorecardHeader from '~/components/ScorecardHeader.vue';
 import ScorecardFooter from '~/components/ScorecardFooter.vue';
 
 import VuexPersistence from 'vuex-persist'
@@ -32,7 +32,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   Vue.use(vueNumeralFilterInstaller, { locale: 'en' });
   //Vue.use(UswdsVue);
   Vue.component('focus-trap', FocusTrap);
-  Vue.component('scorecard-header', ScorecardHeaderNew);
+  Vue.component('scorecard-header', ScorecardHeader);
   Vue.component('scorecard-footer', ScorecardFooter);
 
     const vuexLocal = new VuexPersistence({

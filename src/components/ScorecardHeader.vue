@@ -324,7 +324,7 @@ nav {
 </template>
 
 <script>
-import USABanner from "@/components/USABannerNew.vue"
+import USABanner from "@/components/USABanner.vue"
 import Subnav from './Subnav.vue';
 export default {
   components: { 
