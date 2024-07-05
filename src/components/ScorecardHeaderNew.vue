@@ -272,7 +272,7 @@ nav {
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item @click="mobileNavClick(`/data/documentation`)" class="nav-item">
+            <v-list-item @click="mobileNavClick(`/data/data-documentation`)" class="nav-item">
               <v-list-item-content>
                 <v-list-item-title>
                   <div class="d-flex justify-space-between">
@@ -283,7 +283,7 @@ nav {
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item @click="mobileNavClick(`/data/documentation#api`)" class="nav-item">
+            <v-list-item @click="mobileNavClick(`/data/api-documentation`)" class="nav-item">
               <v-list-item-content>
                 <v-list-item-title>
                   <div class="d-flex justify-space-between">
@@ -362,11 +362,11 @@ export default {
         },
         { 
           label: 'Data Documentation', 
-          action: '/data/documentation'
+          action: '/data/data-documentation'
         },
         { 
           label: 'API Documentation', 
-          action: '/data/documentation#api'
+          action: '/data/api-documentation'
         },
         { 
           label: 'Change Log', 
