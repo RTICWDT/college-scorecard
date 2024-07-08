@@ -7,6 +7,15 @@
   .position-absolute { position: absolute; }
   .max-w-400 { max-width: 400px; }
   .min-w-50 { min-width: 50px; }
+  .hide-mobile {
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
+  }
+  .reveal-caret {
+    position: relative;
+    top: 1px;
+  }
 </style>
 
 <template>
@@ -18,7 +27,7 @@
           An official website of the United States government 
           <button tabindex="2" @click="toggleInfo" alt="Here's how you know" aria-required="true">
             <span style="color: #0071bb; text-decoration: underline;">
-              Here's how you know <i class="fas " :class="showInfo ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+              <span class="hide-mobile pr-1">Here's how you know</span> <i class="fas reveal-caret" :class="showInfo ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
             </span>
           </button>
         </span>
