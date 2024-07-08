@@ -28,13 +28,16 @@
                     :href="$url('/assets/CollegeScorecardDataDictionary.xlsx')"
                     target="_blank"
                     large
-                    class="my-3"
+                    class="mt-3 mb-1"
                   >
                     <v-icon x-small class="pr-1">
                       fas fa-download
                     </v-icon>
-                    Data Dictionary (.xlsx, 703 KB)
+                    Data Dictionary
                   </v-btn>
+                  <div style="font-size: 12px;">
+                    <span><em>(.xlsx, 703 KB)</em></span>
+                  </div>
                 </v-col></v-row
               >
               <v-row>
@@ -44,36 +47,48 @@
               </v-row>
               <v-row class="my-0">
                 <v-col>
-                  <v-btn
-                    color="secondary"
-                    @click="trackDownload('InstitutionDataDocumentation.pdf')"
-                    :href="$url('/assets/InstitutionDataDocumentation.pdf')"
-                    target="_blank"
-                    text
-                    outlined
-                    class="mb-3 mr-2"
-                  >
-                    <v-icon x-small class="pr-1">
-                      fas fa-file-pdf
-                    </v-icon>
-                    Institution-Level Data Files (.pdf, 520 KB)
-                  </v-btn>
-                  <v-btn
-                    color="secondary"
-                    @click="trackDownload('FieldOfStudyDataDocumentation.pdf')"
-                    :href="$url('/assets/FieldOfStudyDataDocumentation.pdf')"
-                    target="_blank"
-                    text
-                    outlined
-                    class="mb-3"
-                  >
-                    <v-icon x-small class="pr-1">
-                      fas fa-file-pdf
-                    </v-icon>
-                    Field of Study Data Files (.pdf, 827 KB)
-                  </v-btn>
-                </v-col></v-row
-              >
+                  <div>
+                    <v-btn
+                      color="secondary"
+                      @click="trackDownload('InstitutionDataDocumentation.pdf')"
+                      :href="$url('/assets/InstitutionDataDocumentation.pdf')"
+                      target="_blank"
+                      text
+                      outlined
+                      class="mb-1 mr-2"
+                    >
+                      <v-icon x-small class="pr-1">
+                        fas fa-file-pdf
+                      </v-icon>
+                      Institution-Level Data Files
+                    </v-btn>
+                    <div style="font-size: 12px;">
+                      <span><em>(.pdf, 520 KB)</em></span>
+                    </div>
+                  </div>
+                </v-col>
+                <v-col>
+                  <div>
+                    <v-btn
+                      color="secondary"
+                      @click="trackDownload('FieldOfStudyDataDocumentation.pdf')"
+                      :href="$url('/assets/FieldOfStudyDataDocumentation.pdf')"
+                      target="_blank"
+                      text
+                      outlined
+                      class="mb-1"
+                    >
+                      <v-icon x-small class="pr-1">
+                        fas fa-file-pdf
+                      </v-icon>
+                      Field of Study Data Files
+                    </v-btn>
+                    <div style="font-size: 12px;">
+                      <span><em>(.pdf, 827 KB)</em></span>
+                    </div>
+                  </div>
+                </v-col>
+              </v-row>
             </div>
             <p class="mt-3">
               <strong>Looking for help?</strong> Visit

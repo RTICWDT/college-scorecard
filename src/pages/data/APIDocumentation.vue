@@ -12,7 +12,7 @@
 
             <p>
               The College Scorecard API is a GET API that lives at
-              <strong>http://api.data.gov/ed/collegescorecard/</strong>. The
+              <strong style="word-break: break-all">http://api.data.gov/ed/collegescorecard/</strong>. The
               endpoint for querying all data is <strong>/v1/schools</strong>.
               Developers may register for an API key at
               <a
@@ -60,17 +60,22 @@
 
             <p>All variables are listed in the Data Dictionary.</p>
 
-            <v-btn
-              @click="trackDownload('CollegeScorecardDataDictionary.xlsx')"
-              large
-              color="secondary"
-              href="/assets/CollegeScorecardDataDictionary.xlsx"
-              class="button data-home-button mb-4"
-              >Download the Data Dictionary (.xlsx, 703 KB)
-              <v-icon x-small class="pl-1" color="white">
-                fas fa-download
-              </v-icon>
-            </v-btn>
+            <div class="mb-4">
+              <v-btn
+                @click="trackDownload('CollegeScorecardDataDictionary.xlsx')"
+                color="secondary"
+                href="/assets/CollegeScorecardDataDictionary.xlsx"
+                class="button data-home-button mb-1"
+                >
+                  Download the Data Dictionary
+                  <v-icon x-small class="pl-1" color="white">
+                    fas fa-download
+                  </v-icon>
+              </v-btn>
+              <div style="font-size: 12px;">
+                <span><em>(.xlsx, 703 KB)</em></span>
+              </div>
+            </div>
 
             <h3 id="api-key-signup">Register for an API key</h3>
             <p>
