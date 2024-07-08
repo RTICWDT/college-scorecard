@@ -28,7 +28,8 @@ Scenario Steps:
 
 </failure></testcase>
 <testcase classname="Ensure that all pages render and mount to window.:" name="Visit /data/home" time="2.952"/>
-<testcase classname="Ensure that all pages render and mount to window.:" name="Visit /data/documentation" time="2.932"/>
+<testcase classname="Ensure that all pages render and mount to window.:" name="Visit /data/data-documentation" time="2.932"/>
+<testcase classname="Ensure that all pages render and mount to window.:" name="Visit /data/api-documentation" time="2.932"/>
 <testcase classname="Ensure that all pages render and mount to window.:" name="Visit /data/changelog" time="3.035"/>
 <testcase classname="Ensure that all pages render and mount to window.:" name="Visit /data/glossary" time="2.948"/>
 <testcase classname="Ensure that all pages render and mount to window.:" name="Visit /compare" time="2.951"/>

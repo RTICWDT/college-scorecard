@@ -2,250 +2,163 @@
 @import "~/sass/_variables";
 
 header {
-  z-index: 101 !important;
+  position: sticky;
+  z-index: 9999;
+  width: 100%;
+  top: 0;
+
   .logo {
-    display: inline-block;
-    vertical-align: middle;
-
-    img {
-      height: 65px;
-
-      @media screen and (max-width: 600px) {
-        height: 50px !important;
-      }
+    display: flex;
+    align-items: center;
+    width: 350px;
+    @media screen and (max-width: 600px) {
+      width: 300px;
     }
   }
+}
 
-  #mobile-nav-icon {
-    width: 20%;
-    button {
-      color: white;
-    }
-  }
+nav {
+  ul {
+    list-style-type: none;
 
-  #nav-site-title {
-    width: 40%;
-
-    @media screen and (max-width: 960px) {
-      width: 80%;
-    }
-  }
-
-  #nav-main-navigation {
-    width: 60%;
-    color: white;
-    text-align: right;
-
-    ul {
-      list-style-type: none;
-
-      li {
-        display: inline;
-      }
-
-      li a {
+    li {
+      padding: 0 12px;
+      position: relative;
+      
+      a {
         text-decoration: none;
-        color: white !important;
-        font-size: 1rem;
-        margin-right: 40px;
-        letter-spacing: 0.235px;
-      }
-
-      li a.disabled {
-        cursor: default;
         color: white;
-      }
-
-      li a:hover:not(.nav-active),
-      a:focus:not(.nav-active) {
-        color: white;
-        text-decoration: none;
-        border-bottom: 3px solid #97cff5;
         padding-bottom: 10px;
-      }
+        cursor: pointer;
 
-      li .nav-active {
-        color: $nav-active-color !important;
-        text-decoration: none;
-        padding-bottom: 10px;
-        border-bottom: 3px solid #97cff5;
-        a {
+        &.active {
           font-weight: bold;
+          border-bottom: 3px solid #97cff5;
         }
       }
     }
+  }
+}
 
-    ul li a {
-      text-decoration: none;
-      color: white;
-    }
-
-    @media screen and (max-width: 960px) {
-      // Text Resize
-    }
+.mobile-nav {
+  .nav-title {
+    padding-left: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
   }
 
-  #nav-search-container {
-    border-radius: 50%;
-    background-color: #0075b2;
-    margin: 0 auto;
-    width: 50px;
-    height: 50px;
-    padding-top: 8px;
+  .nav-item {
+    min-height: 25px;
+    height: 25px;
+    padding-top: 5px;
   }
 
-  #mobile-navigation-container {
-    a {
-      text-decoration: none;
-      color: white !important;
-      font-size: 1.4rem;
-    }
-
-    a:hover,
-    a:focus {
-      color: white;
-    }
+  .nav-caret {
+    position: relative;
+    bottom: 3px;
   }
 
-  .nav-compare-icon {
-    vertical-align: middle;
+  .nav-title-item {
+    font-weight: bold;
+    min-height: 25px;
+    height: 25px;
+    margin-bottom: -3px !important;
+    padding-top: 5px;
+  }
+}
+
+#skip-content-tab {
+  position: absolute;
+  opacity: 0;
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 180px;
+  text-align: center;
+
+  &:focus-within {
+    opacity: 1;
   }
 }
 </style>
 
 <template>
   <client-only>
-    <div class="d-print-none">
-      <div>
-        <v-app-bar
-          app
-          clipped-left
-          :height="$vuetify.breakpoint.xsOnly ? 105 : 130"
-          color="#102E52"
-          class="pa-0 ma-0"
-          flat
-        >
-          <div class="show-on-focus-container">
-            <div class="show-on-focus">
-              <a tabindex="1" @click="skipNav()" href="#" class="d-sr-only-focusable"
-                >Skip to main content</a
-              >
-            </div>
-          </div>
-          <div id="nav-site-title" style="margin-top: 20px">
-            <a :href="$url('/')"
-              ><div class="logo">
-                <img
-                  :src="$url('/img/US-DOE-CollegeScorecard-Logo.svg')"
-                  alt="US Department of Education College Scorecard"
-                />
-              </div>
-            </a>
-          </div>
-
-          <!-- Medium and above navigation -->
-          <div id="nav-main-navigation" class="d-none d-md-block">
-            <nav>
-              <ul>
-                <li>
-                  <a
-                    :href="$url('/')"
-                    :class="{ 'nav-active': activeLink === '/' }"
-                    >Home</a
-                  >
-                </li>
-
-                <li>
-                  <a
-                    :href="$url('/data')"
-                    :class="{ 'nav-active': activeLink === 'data' }"
-                    >About the Data</a
-                  >
-                </li>
-
-                <li>
-                  <a
-                    :href="$url('/search')"
-                    :class="{ 'nav-active': activeLink === 'search' }"
-                    >Search</a
-                  >
-                </li>
-
-                <li style="display: inline-table">
-                  <a
-                    :class="{
-                      'nav-active': activeLink === 'compare',
-                      'pr-2 mr-5': true,
-                      disabled: disableCompare,
-                    }"
-                    aria-label="Navigate to compare page"
-                    @click="handleCompareLinkClick(`/compare`)"
-                    >Compare:</a
-                  >
-
-                  <!-- Institution Compare Button -->
-                  <v-badge
-                    class="nav-compare-icon mb-2 mr-3"
-                    bottom
-                    offset-x="14"
-                    offset-y="10"
-                    :content="currentSchoolCount()"
-                    :value="currentSchoolCount()"
-                    color="#E3EEF6"
-                  >
-                    <v-btn
-                      small
-                      fab
-                      color="#83C38C"
-                      @click="handleCompareIconClick"
-                      aria-label="Show Compare Drawer"
-                    >
-                      <v-icon color="black">
-                        fas fa-university
-                      </v-icon>
-                    </v-btn>
-                  </v-badge>
-
-                  <!-- FoS Compare Button -->
-                  <v-badge
-                    class="nav-compare-icon mb-2"
-                    bottom
-                    offset-x="14"
-                    offset-y="10"
-                    :content="currentFieldOfStudyCount()"
-                    :value="currentFieldOfStudyCount()"
-                    color="#E3EEF6"
-                  >
-                    <v-btn
-                      small
-                      fab
-                      color="#fdbf32"
-                      @click="handleCompareIconClick"
-                      aria-label="Show Compare Drawer"
-                    >
-                      <v-icon color="black">
-                        fas fa-award
-                      </v-icon>
-                    </v-btn>
-                  </v-badge>
-                </li>
-
-                <li></li>
-              </ul>
-            </nav>
-          </div>
-
-          <div id="mobile-nav-icon" class="d-md-none">
-            <v-app-bar-nav-icon
-              class="float-right"
-              @click="drawer = true"
-              aria-label="Menu"
-            >
-            </v-app-bar-nav-icon>
-          </div>
-        </v-app-bar>
-      </div>
+    <header class="d-print-none">
       <USABanner />
+    
+      <div id="skip-content-tab" style="background-color: white;">
+        <a tabindex="1" @click="skipNav()" href="#">
+          Skip to main content
+        </a>
+      </div>  
+
+      <div class="d-flex px-5 py-5" style="background-color: #102E52; align-items: center; justify-content: space-between;">
+        <div>
+          <a :href="$url('/')">
+            <div class="logo">
+              <img
+                :src="$url('/img/US-DOE-CollegeScorecard-Logo.svg')"
+                alt="US Department of Education College Scorecard"
+                class="logo"
+              />  
+            </div>
+          </a>
+        </div>
+
+        <!-- Medium and above navigation -->
+        <div class="d-none d-md-block">
+          <nav>
+            <ul class="d-flex text-white">
+              <li>
+                <a :href ="$url('/')":class="{ 'active': activeLink === '/' }">
+                  Home
+                </a>
+              </li>
+
+              <Subnav
+                label="Search"
+                :is-active="activeLink === 'search'"
+                :items="searchItems"
+              />
+
+              <Subnav
+                label="Compare"
+                :is-active="activeLink === 'compare'"
+                :items="compareItems"
+              />
+
+              <li>
+                <a :href="$url('/resources')" :class="{ 'active': activeLink === 'resources' }">
+                  Resources
+                </a>
+              </li>
+
+              <Subnav
+                label="About the Data"
+                :is-active="activeLink === 'data'"
+                :items="dataItems"
+                :right-offset="'0.7rem'"
+              />
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Mobile Nav Bar -->
+        <div class="d-md-none">
+          <v-btn 
+            icon
+            class="float-right"
+            @click="drawer = !drawer"
+            aria-label="Menu"
+            style="color: white;"
+          >
+            <v-icon>$menu</v-icon>
+          </v-btn>
+        </div>
+      </div>
 
       <!-- Mobile Navigation Drawer -->
       <v-navigation-drawer
@@ -255,80 +168,216 @@ header {
         temporary
         disable-resize-watcher
         right
+        color="white"
+        class="mobile-nav"
+        style="z-index: 1001 !important;"
       >
-        <v-list nav>
-          <v-list-item-group v-model="group">
-            <v-list-item
-              class="mobile-navigation-item"
-              @click="mobileNavClick(`/`)"
+        <v-list nav style="z-index: 1002 !important;">
+          <div class="d-flex justify-end mb-5 mr-1">
+            <v-btn 
+              icon
+              @click="drawer = !drawer"
+              aria-label="Menu"
+              style="color: gray;"
             >
+              <v-icon>$close</v-icon>
+            </v-btn>
+          </div>
+
+          <v-list-item-group>
+            <v-list-item @click="mobileNavClick(`/`)" class="nav-title-item">
               <v-list-item-content>
                 <v-list-item-title>
-                  Home
+                  <div class="d-flex justify-space-between">
+                    <span>Home</span>
+                    <v-icon class="nav-caret">$next</v-icon>
+                  </div>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item
-              class="mobile-navigation-item"
-              @click="mobileNavClick(`/data`)"
-            >
+            <hr />
+            <p class="nav-title">Search</p>
+            
+            <v-list-item @click="mobileNavClick(`/search`)" class="nav-item">
               <v-list-item-content>
-                <v-list-item-title class="mobile-navigation-item">
-                  About the Data
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>Search Schools</span>
+                    <v-icon class="nav-caret">$next</v-icon>
+                  </div>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item
-              class="mobile-navigation-item"
-              @click="mobileNavClick(`/search`)"
-            >
+            <v-list-item @click="mobileNavClick(`/search/fos-landing`)" class="nav-item">
               <v-list-item-content>
-                <v-list-item-title class="mobile-navigation-item">
-                  Search
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>Search Fields of Study</span>
+                    <v-icon class="nav-caret">$next</v-icon>
+                  </div>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item
-              class="mobile-navigation-item"
-              @click="mobileNavClick(`/compare/?toggle=institutions`)"
-            >
+            <hr />
+            <p class="nav-title">Compare</p>
+
+            <v-list-item @click="mobileNavClick(`/compare/?toggle=institutions`)" class="nav-item">
               <v-list-item-content>
-                <v-list-item-title class="mobile-navigation-item">
-                  Compare Institutions
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>Compare Schools</span>
+                    <v-icon class="nav-caret">$next</v-icon>
+                  </div>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item
-              class="mobile-navigation-item"
-              @click="mobileNavClick(`/compare/?toggle=fos`)"
-            >
+            <v-list-item @click="mobileNavClick(`/compare/?toggle=fos`)" class="nav-item">
               <v-list-item-content>
-                <v-list-item-title class="mobile-navigation-item">
-                  Compare Fields of Study
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>Compare Fields of Study</span>
+                    <v-icon class="nav-caret">$next</v-icon>
+                  </div>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <hr />
+
+            <v-list-item @click="mobileNavClick(`/resources`)" class="nav-title-item">
+              <v-list-item-content>
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>Resources</span>
+                    <v-icon class="nav-caret">$next</v-icon>
+                  </div>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <hr />
+            <p class="nav-title">About the Data</p>
+
+            <v-list-item @click="mobileNavClick(`/data`)" class="nav-item">
+              <v-list-item-content>
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>Download the Data</span>
+                    <v-icon class="nav-caret">$next</v-icon>
+                  </div>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item @click="mobileNavClick(`/data/data-documentation`)" class="nav-item">
+              <v-list-item-content>
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>Data Documentation</span>
+                    <v-icon class="nav-caret">$next</v-icon>
+                  </div>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item @click="mobileNavClick(`/data/api-documentation`)" class="nav-item">
+              <v-list-item-content>
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>API Documentation</span>
+                    <v-icon class="nav-caret">$next</v-icon>
+                  </div>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item @click="mobileNavClick(`/data/changelog`)" class="nav-item">
+              <v-list-item-content>
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>Change Log</span>
+                    <v-icon class="nav-caret">$next</v-icon>
+                  </div>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item @click="mobileNavClick(`/data/glossary`)" class="nav-item">
+              <v-list-item-content>
+                <v-list-item-title>
+                  <div class="d-flex justify-space-between">
+                    <span>Glossary</span>
+                    <v-icon class="nav-caret">$next</v-icon>
+                  </div>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list-item-group>
         </v-list>
       </v-navigation-drawer>
-      <a id="main-content"></a>
-    </div>
+
+    </header>
   </client-only>
 </template>
 
 <script>
 import USABanner from "@/components/USABanner.vue"
+import Subnav from './Subnav.vue';
 export default {
-  components: { USABanner },
+  components: { 
+    USABanner,
+    Subnav,
+  },
   data() {
     return {
       drawer: false,
-      group: false,
       activeLink: null,
+      compareItems: [
+        { 
+          label: 'Compare Schools',
+          action: '/compare/?toggle=institutions'
+        },
+        { 
+          label: 'Compare Fields of Study', 
+          action: '/compare/?toggle=fos',
+        }
+      ],
+      searchItems: [
+        { 
+          label: 'Search Schools', 
+          action: '/search'
+        },
+        { 
+          label: 'Search Fields of Study', 
+          action: '/search/fos-landing'
+        }
+      ],
+      dataItems: [
+        { 
+          label: 'Download the Data', 
+          action: '/data'
+        },
+        { 
+          label: 'Data Documentation', 
+          action: '/data/data-documentation'
+        },
+        { 
+          label: 'API Documentation', 
+          action: '/data/api-documentation'
+        },
+        { 
+          label: 'Change Log', 
+          action: '/data/changelog'
+        },
+        { 
+          label: 'Glossary', 
+          action: '/data/glossary'
+        },
+      ]
     }
   },
   mounted() {
@@ -354,6 +403,8 @@ export default {
         this.activeLink = "search"
       } else if (path.match(/compare/)) {
         this.activeLink = "compare"
+    } else if (path.match(/resources/)) {
+        this.activeLink = "resources"
       } else if (path.match(/data/)) {
         this.activeLink = "data"
       } else if (path.match(/school/)) {
@@ -367,25 +418,6 @@ export default {
     mobileNavClick(urlString) {
       //window.location.href = this.$url(urlString)
       this.$router.push(urlString)
-    },
-    handleCompareIconClick(resourceType = "institution") {
-      this.$store.commit("toggleDrawer", true)
-    },
-    handleCompareLinkClick(urlString) {
-      if (
-        this.compareFieldsOfStudyCount == 0 &&
-        this.compareInstitutionsCount == 0
-      ) {
-        this.$store.commit("toggleDrawer", false)
-      } else {
-        this.$router.push(urlString)
-      }
-    },
-    currentSchoolCount() {
-      return this.$store.state.institutions.length
-    },
-    currentFieldOfStudyCount() {
-      return this.$store.state.fos.length
     },
     skipNav() {
       var focusable = document

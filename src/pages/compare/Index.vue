@@ -1611,6 +1611,14 @@ export default {
       this.schools["Certificate schools"] = []
       this.queryFieldsOfStudy(this.locateFieldsOfStudy())
     },
+    '$route.query.toggle': {
+      handler(newValue, oldValue) {
+        if (newValue !== oldValue) {
+          this.handleDisplayToggleClick(newValue === 'fos' ? 1 : 0)
+        }
+      },
+      immediate: true // This will call the handler immediately upon component creation
+    }
   },
   computed: {
     shareUrl() {
