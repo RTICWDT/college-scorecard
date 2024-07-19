@@ -1,6 +1,6 @@
 <template>
   <v-main>
-    <data-navigation :current="$url('/data/data-documentation/')" />
+    <data-navigation :current="$url('/data/documentation/')" />
     <v-container class="px-0">
       <v-row>
         <v-col cols="12">
@@ -28,16 +28,13 @@
                     :href="$url('/assets/CollegeScorecardDataDictionary.xlsx')"
                     target="_blank"
                     large
-                    class="mt-3 mb-1"
+                    class="my-3"
                   >
                     <v-icon x-small class="pr-1">
                       fas fa-download
                     </v-icon>
-                    Data Dictionary
+                    Data Dictionary (.xlsx, 703 KB)
                   </v-btn>
-                  <div style="font-size: 12px;">
-                    <span><em>(.xlsx, 703 KB)</em></span>
-                  </div>
                 </v-col></v-row
               >
               <v-row>
@@ -47,59 +44,64 @@
               </v-row>
               <v-row class="my-0">
                 <v-col>
-                  <div>
-                    <v-btn
-                      color="secondary"
-                      @click="trackDownload('InstitutionDataDocumentation.pdf')"
-                      :href="$url('/assets/InstitutionDataDocumentation.pdf')"
-                      target="_blank"
-                      text
-                      outlined
-                      class="mb-1 mr-2"
-                    >
-                      <v-icon x-small class="pr-1">
-                        fas fa-file-pdf
-                      </v-icon>
-                      Institution-Level Data Files
-                    </v-btn>
-                    <div style="font-size: 12px;">
-                      <span><em>(.pdf, 520 KB)</em></span>
-                    </div>
-                  </div>
-                </v-col>
+                  <v-btn
+                    color="secondary"
+                    @click="trackDownload('InstitutionDataDocumentation.pdf')"
+                    :href="$url('/assets/InstitutionDataDocumentation.pdf')"
+                    target="_blank"
+                    text
+                    outlined
+                    class="mb-3 mr-2"
+                  >
+                    <v-icon x-small class="pr-1">
+                      fas fa-file-pdf
+                    </v-icon>
+                    Institution-Level Data Files (.pdf, 520 KB)
+                  </v-btn>
+                  <v-btn
+                    color="secondary"
+                    @click="trackDownload('FieldOfStudyDataDocumentation.pdf')"
+                    :href="$url('/assets/FieldOfStudyDataDocumentation.pdf')"
+                    target="_blank"
+                    text
+                    outlined
+                    class="mb-3"
+                  >
+                    <v-icon x-small class="pr-1">
+                      fas fa-file-pdf
+                    </v-icon>
+                    Field of Study Data Files (.pdf, 827 KB)
+                  </v-btn>
+                </v-col></v-row
+              ><v-row>
                 <v-col>
-                  <div>
-                    <v-btn
-                      color="secondary"
-                      @click="trackDownload('FieldOfStudyDataDocumentation.pdf')"
-                      :href="$url('/assets/FieldOfStudyDataDocumentation.pdf')"
-                      target="_blank"
-                      text
-                      outlined
-                      class="mb-1"
-                    >
-                      <v-icon x-small class="pr-1">
-                        fas fa-file-pdf
-                      </v-icon>
-                      Field of Study Data Files
-                    </v-btn>
-                    <div style="font-size: 12px;">
-                      <span><em>(.pdf, 827 KB)</em></span>
-                    </div>
-                  </div>
+                  <h2>Data Errata</h2>
                 </v-col>
               </v-row>
+              <v-row class="my-0">
+                <v-col>
+                  <v-btn
+                    color="secondary"
+                    @click="trackDownload('EarningsDataErrata.pdf')"
+                    :href="$url('/assets/EarningsDataErrata.pdf')"
+                    target="_blank"
+                    text
+                    outlined
+                    class="mb-3 mr-2"
+                  >
+                    <v-icon x-small class="pr-1">
+                      fas fa-file-pdf
+                    </v-icon>
+                    Cohort Alignment on Earnings Calculations (.pdf, 476 KB)
+                  </v-btn>
+                </v-col></v-row>
+
             </div>
             <p class="mt-3">
               <strong>Looking for help?</strong> Visit
               <a
                 href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
-                @click="
-                  transitionOutboundLink(
-                    $event,
-                    
-                  )
-                "
+                @click="transitionOutboundLink($event)"
                 target="_blank"
                 >StackExchange<v-icon x-small class="pl-1" color="#007000">
                   fas fa-external-link-alt
@@ -120,100 +122,25 @@
 <script>
 import DataNavigation from "~/components/DataNavigation.vue"
 import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
-import VueRecaptcha from "vue-recaptcha"
 
 export default {
   mixins: [AnalyticsEvents],
   components: {
     "data-navigation": DataNavigation,
-    VueRecaptcha,
-  },
-  data() {
-    return {
-      showCaptcha: true,
-      formSubmitted: false,
-    }
-  },
-  computed: {
-    recaptchaSiteKey() {
-      return process.env.GRIDSOME_RECAPTCHA_KEY
-    },
-  },
-  methods: {
-    onCaptchaVerify() {
-      this.showCaptcha = false
-      this.loadEmbeddedForm(this.addFormSubmitListener)
-    },
-    loadEmbeddedForm(callback = null) {
-      let apiUmbrella = document.createElement("script")
-      apiUmbrella.type = "text/javascript"
-      apiUmbrella.async = true
-      apiUmbrella.src =
-        "https://api.data.gov/static/javascripts/signup_embed.js"
-      ;(
-        document.getElementsByTagName("head")[0] ||
-        document.getElementsByTagName("body")[0]
-      ).appendChild(apiUmbrella)
-
-      if (callback) {
-        apiUmbrella.onload = () => callback()
-      }
-    },
-    addFormSubmitListener() {
-      let apiForm = document.querySelector("#apidatagov_signup_form")
-      apiForm.addEventListener("submit", () => {
-        // Listen for form submit and do whatever is needed
-        this.formSubmitted = true
-      })
-    },
-    addAria(id) {
-      let r = document.body.querySelector("#g-recaptcha-response")
-      if (id == 0 && r) r.setAttribute("aria-label", "ReCAPTCHA Response")
-      else {
-        let rs = "#g-recaptcha-response-" + id
-        r = document.body.querySelector(rs)
-        if (r) r.setAttribute("aria-label", "ReCAPTCHA Response")
-        if (id % 2 == 1) {
-          let iframes = document.body.querySelector("iframe")
-          for (let q = 0; q < iframes.length; q++) {
-            iframes[q].setAttribute("title", "ReCAPTCHA Frame")
-          }
-        }
-      }
-    },
-  },
-  mounted() {
-    // Ran into an issue with script timing on IE11, created errors. Adding a script here fixes the problem
-    let recaptchaScript = document.createElement("script")
-    recaptchaScript.setAttribute(
-      "src",
-      "https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit"
-    )
-    recaptchaScript.async = true
-    recaptchaScript.defer = true
-    document.head.appendChild(recaptchaScript)
-
-    window.apiUmbrellaSignupOptions = {
-      registrationSource: "college-scorecard",
-      apiKey: process.env.GRIDSOME_API_SIGNUP_KEY,
-      contactUrl: "scorecarddata@rti.org",
-      siteName: "College Scorecard",
-      emailFromName: "College Scorecard",
-      exampleApiUrl:
-        "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=[api_key]", // To ignore curly braces
-    }
   },
   metaInfo: {
     title: "Documentation",
     meta: [
       {
-        name: 'description',
-        content: 'Technical documentation provides in-depth information about institution-level and field-of-study-level data files.'
+        name: "description",
+        content:
+          "Technical documentation provides in-depth information about institution-level and field-of-study-level data files.",
       },
       {
-        name: 'keywords',
-        content: 'College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings, IPEDS, institution level data, field of study data, API, OPEID, IPEDS UNITID'
-      }
+        name: "keywords",
+        content:
+          "College Scorecard, Department of Education, ED, college search, higher education, college data, college selection, higher education data, college rankings, IPEDS, institution level data, field of study data, API, OPEID, IPEDS UNITID",
+      },
     ],
   },
 }
