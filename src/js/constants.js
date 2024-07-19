@@ -66,8 +66,8 @@ export const fields = {
 
   // AID_PERCENTAGE:       'latest.aid.ftft_federal_loan_rate',
   // PELL_PERCENTAGE:      'latest.aid.ftft_pell_grant_rate',
-  AID_PERCENTAGE:       'latest.aid.ftft_federal_loan_rate_pooled',
-  PELL_PERCENTAGE:      'latest.aid.ftft_pell_grant_rate_pooled',
+  AID_PERCENTAGE:       'latest.aid.dcs_federal_loan_rate_pooled',
+  PELL_PERCENTAGE:      'latest.aid.dcs_pell_grant_rate_pooled',
 
   MEDIAN_EARNINGS:      'latest.earnings.10_yrs_after_entry.median',
 
@@ -150,6 +150,8 @@ export const fields = {
   FOS_EARNINGS_PELL: 'earnings.highest.3_yr.pell_median_earnings',
   FOS_EARNINGS_FED_4YR: 'earnings.4_yr.overall_median_earnings',
   FOS_EARNINGS_PELL_4YR: 'earnings.4_yr.pell_median_earnings',
+  FOS_EARNINGS_FED_5YR: 'earnings.5_yr.overall_median_earnings',
+  FOS_EARNINGS_PELL_5YR: 'earnings.5_yr.pell_median_earnings',
 
   // FOS_DEBT_MEDIAN: 'debt.test.federal.median_total_at',
   FOS_DEBT_MEDIAN: 'debt.staff_grad_plus.all.eval_inst.median',

@@ -27,7 +27,7 @@
 }
 
 .v-tabs-bar .v-tab--active {
-  background-color: var(--v-primary-base)!important;
+  background-color: var(--v-primary-base) !important;
   color: $white !important;
   font-weight: bold !important;
   a {

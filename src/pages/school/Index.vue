@@ -2507,7 +2507,7 @@ export default {
           )
           fos[q].highest_earnings = _.get(
             fos[q],
-            this.fields["FOS_EARNINGS_FED_4YR"]
+            this.fields["FOS_EARNINGS_FED_5YR"]
           )
           fos[q].lowest_debt = _.get(fos[q], this.fields["FOS_DEBT_MEDIAN"])
           fos[q].hoist = fos[q][self.field_sort]
@@ -2599,8 +2599,8 @@ export default {
       // Find the index
       // let findIndex = _.findIndex(this.allFieldsOfStudy)
     },
-    fieldOfStudySelectItems() {
-      if (!this.school || !this.allFieldsOfStudy) return {}
+    fieldOfStudySelectItems() {     
+      if (!this.school || !this.allFieldsOfStudy) return []
 
       return this.organizeFieldsOfStudy(this.allFieldsOfStudy, this.CIP2)
     },

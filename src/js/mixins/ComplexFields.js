@@ -10,7 +10,7 @@ export default {
             return fields;
         },
         id() {
-            console.log(this.school)
+            //console.log(this.school)
             if (!this.school) return null;
             return _.get(this.school, this.fields['ID']);
         },
@@ -173,7 +173,7 @@ export default {
                     staff_value: re_staff[faculty_item]
                 });
             }
-            console.log(output)
+            //console.log(output)
             return _.sortBy(output, ["label"]);
         },
         retentionRate() {
@@ -672,61 +672,66 @@ export default {
             if (!this.school) return null;
             let programs = _.get(this.school, this.fields.FIELD_OF_STUDY);
             let programLevels  = []
-            programLevels = programs.map(p => p.credential.level).filter((x, i, a) => a.indexOf(x) == i)
+            if (programs) {
+                programLevels = programs.map(p => p.credential.level).filter((x, i, a) => a.indexOf(x) == i)
 
-            var degreeLevels = programLevels.filter((x, i, a) => [2,3,5,6,7].includes(x))
-            var certLevels = programLevels.filter((x, i, a) => [4,8].includes(x))
-            var ugCertLevels = programLevels.filter((x, i, a) => [1].includes(x))
+                var degreeLevels = programLevels.filter((x, i, a) => [2,3,5,6,7].includes(x))
+                var certLevels = programLevels.filter((x, i, a) => [4,8].includes(x))
+                var ugCertLevels = programLevels.filter((x, i, a) => [1].includes(x))
 
-            var degreesList = ""
-            var certList = ""  
-            var ugCertList = ""
+                var degreesList = ""
+                var certList = ""  
+                var ugCertList = ""
 
-            for (var level of degreeLevels)
-            {
-                var label = formMappings['fosDegrees'].find(e => e.value === level.toString())['label'].replace(" Degree", "");
-                if (level == degreeLevels[degreeLevels.length - 1]) {
-                    if (degreeLevels.length > 1)
-                        degreesList += " and " + label  + " Degrees"
-                    else 
-                        degreesList += label  + " Degrees"
+                for (var level of degreeLevels)
+                {
+                    var label = formMappings['fosDegrees'].find(e => e.value === level.toString())['label'].replace(" Degree", "");
+                    if (level == degreeLevels[degreeLevels.length - 1]) {
+                        if (degreeLevels.length > 1)
+                            degreesList += " and " + label  + " Degrees"
+                        else 
+                            degreesList += label  + " Degrees"
+                    }
+                    else if (level == degreeLevels[degreeLevels.length - 2])
+                        degreesList += label
+                    else
+                        degreesList += label + ", "
                 }
-                else if (level == degreeLevels[degreeLevels.length - 2])
-                    degreesList += label
-                else
-                    degreesList += label + ", "
-            }
 
-            for (var level of certLevels)
-            {
-                var label = formMappings['fosDegrees'].find(e => e.value === level.toString())['label'].replace(" Certificate", "")
-                
-                if (level == certLevels[certLevels.length - 1]) {
+                for (var level of certLevels)
+                {
+                    var label = formMappings['fosDegrees'].find(e => e.value === level.toString())['label'].replace(" Certificate", "")
                     
-                    if (certLevels.length > 1)
-                        certList += " and " + label + " Certificates"
-                    else 
-                        certList += label + " Certificates"
+                    if (level == certLevels[certLevels.length - 1]) {
+                        
+                        if (certLevels.length > 1)
+                            certList += " and " + label + " Certificates"
+                        else 
+                            certList += label + " Certificates"
+                    }
+                    else if (level == certLevels[certLevels.length - 2])
+                        certList += label
+                    else
+                        certList += label + ", "
                 }
-                else if (level == certLevels[certLevels.length - 2])
-                    certList += label
-                else
-                    certList += label + ", "
+
+                for (var level of ugCertLevels)
+                {
+                    var label = formMappings['fosDegrees'].find(e => e.value === level.toString())['label']
+                    
+                    ugCertList = label
+                }            
+
+                var ret = degreesList + ((degreesList && certList) ? " as well as " + certList : certList) + (((certList || degreesList) && ugCertList) ?  ", and " + ugCertList : ugCertList)
+
+                if (certLevels.length == 0 && degreeLevels.length == 0  && ugCertLevels.length == 0)
+                    ret = "no Degrees or Certificates"
+
+                return ret;
             }
-
-            for (var level of ugCertLevels)
-            {
-                var label = formMappings['fosDegrees'].find(e => e.value === level.toString())['label']
-                
-                ugCertList = label
-            }            
-
-            var ret = degreesList + ((degreesList && certList) ? " as well as " + certList : certList) + (((certList || degreesList) && ugCertList) ?  ", and " + ugCertList : ugCertList)
-
-            if (certLevels.length == 0 && degreeLevels.length == 0)
-                ret = "no Degrees or Certificates"
-
-            return ret;
+            else {
+                return "no Degrees or Certificates";
+            }
         }      
     },
     methods: {
