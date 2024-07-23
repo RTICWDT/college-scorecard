@@ -2,9 +2,12 @@ html {
   @media screen and (max-width: 500px) {
   }
   body {
-    overflow-x: hidden;
     width: 100%;
   }
+}
+
+.v-main {
+  overflow-x: hidden;
 }
 
 .v-application {

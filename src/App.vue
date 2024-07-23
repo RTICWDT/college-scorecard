@@ -56,10 +56,10 @@ export default {
           type: 'text/javascript',
           src:  this.$url('/js/picc-analytics.js'),          
         },
-        {
+        /*{
           type: 'text/javascript',
           src:  this.$url('/js/hotjar.js'),          
-        },
+        },*/
         {
           type: 'text/javascript',
           src:  this.$url('/js/gtag.js'),          

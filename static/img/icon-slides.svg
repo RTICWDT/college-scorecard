@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="68.282" height="55.555" viewBox="0 0 68.282 55.555">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_3161" data-name="Rectangle 3161" width="68.282" height="55.555" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Group_5913" data-name="Group 5913" transform="translate(0 0)">
+    <rect id="Rectangle_3159" data-name="Rectangle 3159" width="48.247" height="41.624" transform="translate(10.017 0.91)" fill="#027a48"/>
+    <g id="Group_5898" data-name="Group 5898" transform="translate(0 0)">
+      <g id="Group_5897" data-name="Group 5897" clip-path="url(#clip-path)">
+        <rect id="Rectangle_3160" data-name="Rectangle 3160" width="48.247" height="41.624" transform="translate(10.017 0.91)" fill="none" stroke="#10274e" stroke-width="2"/>
+      </g>
+    </g>
+    <rect id="Rectangle_3162" data-name="Rectangle 3162" width="57.355" height="41.624" transform="translate(5.464 7.111)" fill="#13b473"/>
+    <rect id="Rectangle_3163" data-name="Rectangle 3163" width="57.355" height="41.624" transform="translate(5.464 7.111)" fill="none" stroke="#10274e" stroke-width="2"/>
+    <rect id="Rectangle_3164" data-name="Rectangle 3164" width="66.462" height="41.624" transform="translate(0.91 13.02)" fill="#fff"/>
+    <g id="Group_5900" data-name="Group 5900" transform="translate(0 0)">
+      <g id="Group_5899" data-name="Group 5899" clip-path="url(#clip-path)">
+        <rect id="Rectangle_3165" data-name="Rectangle 3165" width="66.462" height="41.624" transform="translate(0.91 13.02)" fill="none" stroke="#10274e" stroke-width="2"/>
+        <path id="Path_3496" data-name="Path 3496" d="M64.267,41.517a7.908,7.908,0,0,0-7.912-7.905v7.905H48.45a7.908,7.908,0,0,0,15.817,0" transform="translate(-4.36 -3.025)" fill="#f8ab22"/>
+        <path id="Path_3497" data-name="Path 3497" d="M64.267,41.517a7.908,7.908,0,0,0-7.912-7.905v7.905H48.45a7.908,7.908,0,0,0,15.817,0Z" transform="translate(-4.36 -3.025)" fill="none" stroke="#10274e" stroke-width="2"/>
+        <path id="Path_3498" data-name="Path 3498" d="M53.256,38.418V30.513a7.907,7.907,0,0,0-7.905,7.905Z" transform="translate(-4.082 -2.746)" fill="#f8ab22"/>
+        <path id="Path_3499" data-name="Path 3499" d="M53.256,38.418V30.513a7.907,7.907,0,0,0-7.905,7.905Z" transform="translate(-4.082 -2.746)" fill="none" stroke="#10274e" stroke-width="2"/>
+        <line id="Line_402" data-name="Line 402" x2="25.808" transform="translate(8.333 31.819)" fill="none" stroke="#10274e" stroke-width="2"/>
+        <line id="Line_403" data-name="Line 403" x2="42.946" transform="translate(8.333 21.741)" fill="none" stroke="#10274e" stroke-width="2"/>
+        <line id="Line_404" data-name="Line 404" x2="25.808" transform="translate(8.333 38.194)" fill="none" stroke="#10274e" stroke-width="2"/>
+        <line id="Line_405" data-name="Line 405" x2="25.808" transform="translate(8.333 44.569)" fill="none" stroke="#10274e" stroke-width="2"/>
+      </g>
+    </g>
+  </g>
+</svg>

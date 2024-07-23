@@ -60,7 +60,6 @@
                     <name-autocomplete
                       @school-name-selected="handleSchoolNameSelected"
                       :searchEmptyName="false"
-                      v-if="$vuetify.breakpoint.mdAndUp"
                     />
 
                     <div class="mt-5 text-right">
