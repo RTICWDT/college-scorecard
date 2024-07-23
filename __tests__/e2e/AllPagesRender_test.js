@@ -46,8 +46,8 @@ Scenario('Visit /data/home', (I) => {
   I.see('Download the Data','h2');
 });
 
-Scenario('Visit /data/documentation', (I) => {
-  I.amOnPage('/data/documentation/');
+Scenario('Visit /data/data-documentation', (I) => {
+  I.amOnPage('/data/data-documentation/');
   // Check for Mounted
   I.seeElement('.v-application');
   // Check for page element.
