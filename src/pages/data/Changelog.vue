@@ -25,6 +25,18 @@
             <v-expansion-panels multiple v-model="panels">
               <v-expansion-panel>
                 <v-expansion-panel-header
+                  >July 24, 2024</v-expansion-panel-header
+                >
+                <v-expansion-panel-content>
+                  <p>
+                    On July 24, 2024, the Department updated the College Scorecard website navigation to allow all pages 
+                    to be accessed from the main navigation. This update also included a new <a :href="$url('/resources/')">Resources page</a>, 
+                    which provides toolkits for advisors and educators to use with their students to help them better utilize data from College Scorecard in their decision making process.
+                  </p>
+                </v-expansion-panel-content>
+              </v-expansion-panel>              
+              <v-expansion-panel>
+                <v-expansion-panel-header
                   >June 13, 2024</v-expansion-panel-header
                 >
                 <v-expansion-panel-content>
@@ -1772,7 +1784,7 @@ export default {
   },
   methods: {
     all() {
-      this.panels = [...Array(31).keys()].map((k, i) => i)
+      this.panels = [...Array(32).keys()].map((k, i) => i)
     },
     // Reset the panel
     none() {
