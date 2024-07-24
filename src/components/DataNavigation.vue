@@ -8,30 +8,11 @@
           v-model="dataTabs"
           show-arrows
         >
-          <v-tab class="data-tab" :href="$url('/data/')" value="home"
-            >Data Home</v-tab
-          >
-          <v-tab
-            class="data-tab"
-            :href="$url('/data/documentation/')"
-            value="documentation"
-            >Documentation</v-tab
-          >
-          <v-tab class="data-tab" :href="$url('/data/api/')" value="api"
-            >API</v-tab
-          >
-          <v-tab
-            class="data-tab"
-            :href="$url('/data/changelog/')"
-            value="changelog"
-            >Change Log</v-tab
-          >
-          <v-tab
-            class="data-tab"
-            :href="$url('/data/glossary/')"
-            value="glossary"
-            >Glossary</v-tab
-          >
+          <v-tab class="data-tab" :href="$url('/data/')" value="home">Download the Data</v-tab>
+          <v-tab class="data-tab" :href="$url('/data/data-documentation/')" value="documentation">Data Documentation</v-tab>
+          <v-tab class="data-tab" :href="$url('/data/api-documentation/')" value="documentation">API Documentation</v-tab>
+          <v-tab class="data-tab" :href="$url('/data/changelog/')" value="changelog">Change Log</v-tab>
+          <v-tab class="data-tab" :href="$url('/data/glossary/')" value="glossary">Glossary</v-tab>
         </v-tabs>
       </v-container>
     </div>

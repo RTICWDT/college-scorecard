@@ -1,7 +1,7 @@
 {
   "name": "college-scorecard",
   "private": true,
-  "version": "3.2.1",
+  "version": "3.2.3",
   "scripts": {
     "build": "gridsome build",
     "develop": "set NODE_OPTIONS=--openssl-legacy-provider && npm run develop_ssl",
