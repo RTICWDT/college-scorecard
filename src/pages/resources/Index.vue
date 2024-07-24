@@ -387,7 +387,7 @@
           </v-row>
           <v-row class="mt-0">
             <v-col cols="12" md="8">
-              <p>Welcome to our free, comprehensive toolkit designed to empower college access advisors to utilize everything College Scorecard has to offer. This 1-hour training session is tailored to meet professional development needs, equipping advisors with the skills to effectively train others on utilizing the College Scorecard. Whether you’re leading sessions with counselors, presenting at professional conferences, or engaging with events hosted by school districts or state agencies, this toolkit provides all the necessary resources to train others on how best to equip students toward making data-informed decisions about higher education.</p>
+              <p>Welcome to our free, comprehensive toolkit designed to empower college access advisors to utilize everything College Scorecard has to offer. The toolkit contains three training modules, each designed for a 1-hour session. The modules can be tailored to meet various professional development needs, equipping advisors with the skills to effectively train others on utilizing the College Scorecard. Whether you’re leading sessions with counselors, presenting at professional conferences, or engaging with events hosted by school districts or state agencies, this toolkit provides all the necessary resources to train others on how best to equip students toward making data-informed decisions about higher education.</p>
             </v-col>
             <Spacer />
             <v-col cols="12" md="4" class="get-materials align-self-start">
