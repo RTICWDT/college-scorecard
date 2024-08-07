@@ -33,19 +33,19 @@
       <div id="school-sub-nav-header">
         <v-container>
           <v-row>
-            <v-col cols="1">
+            <v-col class="text-right d-flex justify-sm-end justify-space-evenly">
               <v-btn
                 small
                 color="white"
                 text
                 id="referrer-link"
-                class="link-more d-none d-sm-block"
+                class="link-more pl-1 pr-2"
                 @click="$router.back()"
                 >&laquo; Back</v-btn
               >
-            </v-col>
 
-            <v-col cols="11" class="text-right d-flex justify-sm-end justify-space-evenly">
+              <div style="flex-grow: 3" />
+
               <add-to-compare :school="school" />
 
               <share
