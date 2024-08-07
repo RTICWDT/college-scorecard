@@ -2630,6 +2630,16 @@ export default {
     },
   },
   methods: {
+    // Add state to sessionStorage
+    storeState(school) {
+      var state = _.get(this.school, "school.state");
+      var previousState = window.sessionStorage.getItem('state');
+      
+      if (previousState !== state)
+        console.log('log ga event');
+      else
+        window.sessionStorage.setItem('state', state);
+    },
     // expand all panels
     all() {
       this.panels = [...Array(this.num_panels).keys()].map((k, i) => i)
@@ -2858,6 +2868,7 @@ export default {
         if (this.selectedFOS) {
           this.panelsFOS = [0]
         }
+        this.storeState();
       })
       .catch((response) => {
         this.error = true
