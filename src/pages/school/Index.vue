@@ -2631,14 +2631,21 @@ export default {
   },
   methods: {
     // Add state to sessionStorage
-    storeState(school) {
+    trackState(school) {
       var state = _.get(this.school, "school.state");
-      var previousState = window.sessionStorage.getItem('state');
-      
-      if (previousState !== state)
-        console.log('log ga event');
-      else
-        window.sessionStorage.setItem('state', state);
+      var previousStates = window.sessionStorage.getItem('states');
+      if (state) {
+        if (previousStates && !JSON.parse(previousStates).includes(state) ) {
+          var states = JSON.parse(previousStates);
+          this.trackMultipleStates(states);
+        }
+        else {
+          var states = [];
+        }
+        states.push(state);
+        window.sessionStorage.setItem('states', JSON.stringify(states));
+    }
+        
     },
     // expand all panels
     all() {
@@ -2868,7 +2875,7 @@ export default {
         if (this.selectedFOS) {
           this.panelsFOS = [0]
         }
-        this.storeState();
+        this.trackState();
       })
       .catch((response) => {
         this.error = true

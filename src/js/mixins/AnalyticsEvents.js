@@ -48,5 +48,8 @@ export default {
         trackNavigation(path) {
             this.GATrackEvent('Internal Link', path);
         },
+        trackMultipleStates(states) {
+            this.GATrackEvent('Multiple States', states);
+        }
     }
 }
