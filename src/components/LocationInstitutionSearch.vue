@@ -215,7 +215,7 @@ export default {
       this.location.error = null
 
       if (e == null) {
-        alert(e)
+        //console.log(e)
         utility.location = null
       }
 
