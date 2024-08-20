@@ -44,6 +44,12 @@ export default {
             } catch (e) {
                 console.error('[gtag] event error');
             }
+        },
+        trackNavigation(path) {
+            this.GATrackEvent('Internal Link', path);
+        },
+        trackMultipleStates(states) {
+            this.GATrackEvent('Multiple States', states);
         }
     }
 }

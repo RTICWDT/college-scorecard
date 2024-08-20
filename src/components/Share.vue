@@ -83,7 +83,7 @@ export default {
     items() {
       let shareOptions = [
         {
-          title: "Twitter",
+          title: "X (Twitter)",
           url:
             "https://twitter.com/intent/tweet?text=" + this.sentence + "&url=",
         },
