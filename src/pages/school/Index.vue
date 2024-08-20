@@ -2639,9 +2639,6 @@ export default {
           var states = JSON.parse(previousStates);
           this.trackMultipleStates(states);
         }
-        else {
-          var states = [];
-        }
         states.push(state);
         window.sessionStorage.setItem('states', JSON.stringify(states));
     }
