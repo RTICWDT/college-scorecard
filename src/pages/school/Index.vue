@@ -2634,13 +2634,11 @@ export default {
     trackState(school) {
       var state = _.get(this.school, "school.state");
       var previousStates = window.sessionStorage.getItem('states');
+      var states = [];
       if (state) {
         if (previousStates && !JSON.parse(previousStates).includes(state) ) {
           var states = JSON.parse(previousStates);
           this.trackMultipleStates(states);
-        }
-        else {
-          var states = [];
         }
         states.push(state);
         window.sessionStorage.setItem('states', JSON.stringify(states));
