@@ -77,7 +77,9 @@ li {
 </template>
 
 <script>
+import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 export default {
+  mixins: [AnalyticsEvents],
   name: 'Subnav',
   props: {
     label: {
@@ -145,6 +147,7 @@ export default {
       }, 0);
     },
     handleItemClick(action) {
+      AnalyticsEvents.methods.trackNavigation(action);
       return this.$router.push(action);
     }
   }
