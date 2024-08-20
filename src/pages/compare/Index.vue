@@ -1411,7 +1411,7 @@
                   <v-btn
                     large
                     color="secondary"
-                    :href="this.$url('/search/?toggle=fos')"
+                    :href="this.$url('/search/fos-landing')"
                   >
                     Search Fields of Study
                   </v-btn>
