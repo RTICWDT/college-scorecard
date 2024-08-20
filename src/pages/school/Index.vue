@@ -33,19 +33,19 @@
       <div id="school-sub-nav-header">
         <v-container>
           <v-row>
-            <v-col cols="1">
+            <v-col class="text-right d-flex justify-sm-end justify-space-evenly">
               <v-btn
                 small
                 color="white"
                 text
                 id="referrer-link"
-                class="link-more d-none d-sm-block"
+                class="link-more pl-1 pr-2"
                 @click="$router.back()"
                 >&laquo; Back</v-btn
               >
-            </v-col>
 
-            <v-col cols="11" class="text-right d-flex justify-sm-end justify-space-evenly">
+              <div style="flex-grow: 3" />
+
               <add-to-compare :school="school" />
 
               <share
@@ -2630,6 +2630,23 @@ export default {
     },
   },
   methods: {
+    // Add state to sessionStorage
+    trackState(school) {
+      var state = _.get(this.school, "school.state");
+      var previousStates = window.sessionStorage.getItem('states');
+      if (state) {
+        if (previousStates && !JSON.parse(previousStates).includes(state) ) {
+          var states = JSON.parse(previousStates);
+          this.trackMultipleStates(states);
+        }
+        else {
+          var states = [];
+        }
+        states.push(state);
+        window.sessionStorage.setItem('states', JSON.stringify(states));
+    }
+        
+    },
     // expand all panels
     all() {
       this.panels = [...Array(this.num_panels).keys()].map((k, i) => i)
@@ -2858,6 +2875,7 @@ export default {
         if (this.selectedFOS) {
           this.panelsFOS = [0]
         }
+        this.trackState();
       })
       .catch((response) => {
         this.error = true

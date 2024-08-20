@@ -113,7 +113,7 @@ nav {
           <nav>
             <ul class="d-flex text-white">
               <li>
-                <a :href ="$url('/')":class="{ 'active': activeLink === '/' }">
+                <a :href ="$url('/')":class="{ 'active': activeLink === '/' }" @click="trackNavigation('/')">
                   Home
                 </a>
               </li>
@@ -131,7 +131,7 @@ nav {
               />
 
               <li>
-                <a :href="$url('/resources')" :class="{ 'active': activeLink === 'resources' }">
+                <a :href="$url('/resources')" :class="{ 'active': activeLink === 'resources' }" @click="trackNavigation('/resources')">
                   Resources
                 </a>
               </li>
@@ -325,9 +325,11 @@ nav {
 </template>
 
 <script>
+import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
 import USABanner from "@/components/USABanner.vue"
 import Subnav from './Subnav.vue';
 export default {
+  mixins: [AnalyticsEvents],
   components: { 
     USABanner,
     Subnav,
@@ -416,7 +418,7 @@ export default {
       }
     },
     mobileNavClick(urlString) {
-      //window.location.href = this.$url(urlString)
+      AnalyticsEvents.methods.trackNavigation(urlString)
       this.$router.push(urlString)
     },
     skipNav() {
