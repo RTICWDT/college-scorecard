@@ -15,6 +15,7 @@
   .reveal-caret {
     position: relative;
     top: 1px;
+    color: #0071bb;
   }
 </style>
 
@@ -25,10 +26,15 @@
       <p class="mb-0 py-1" style="font-size: .75rem">
         <span> 
           An official website of the United States government 
-          <button tabindex="2" @click="toggleInfo" alt="Here's how you know" aria-required="true">
-            <span style="color: #0071bb; text-decoration: underline;">
-              <span class="hide-mobile pr-1">Here's how you know</span> <i class="fas reveal-caret" :class="showInfo ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+          <button 
+            @click="toggleInfo" 
+            aria-required="true" 
+            :alt="showInfo ? `Here's how you know (Show Less)` : `Here's how you know (Show More)`"
+          >
+            <span class="hide-mobile pr-1" style="color: #0071bb; text-decoration: underline;">
+              Here's how you know
             </span>
+            <i :class="['fas', showInfo ? 'fa-chevron-up' : 'fa-chevron-down', 'reveal-caret']"></i>
           </button>
         </span>
       </p>
