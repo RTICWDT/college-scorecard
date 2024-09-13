@@ -2637,12 +2637,16 @@ export default {
       if (state) {
         if (previousStates && !JSON.parse(previousStates).includes(state) ) {
           var states = JSON.parse(previousStates);
+          states.push(state);
           this.trackMultipleStates(states);
+        }
+        else if (previousStates) {
+          var states = JSON.parse(previousStates);
         }
         else {
           var states = [];
-        }
-        states.push(state);
+        }        
+        
         window.sessionStorage.setItem('states', JSON.stringify(states));
     }
         
