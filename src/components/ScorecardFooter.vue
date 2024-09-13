@@ -5,13 +5,12 @@
       inset
       app
       absolute
-      :height="$vuetify.breakpoint.smAndDown ? 300 : 250"
       color="#10274E"
     >
       <v-container class="py-8">
         <v-row>
           <v-col>
-            <ul class="d-md-flex justify-space-between  ma-0 pa-0">
+            <ul class="d-md-flex justify-space-between ma-0 pa-0">
               <li>
                 <a
                   :href="$url('/')"
@@ -108,6 +107,14 @@
           </div>
           </v-col>
         </v-row>
+          
+        <v-row>
+          <v-col>
+            <p class="footer-508">The College Scorecard website is currently not fully compliant with Section 508 of the Rehabilitation Act of 1973, as amended. The Department is currently remediating all non-compliant components. If you need assistance with this site, please contact <a class="inverse-underline" href="mailto:scorecarddata@rti.org" rel="noreferrer">scorecarddata@rti.org</a> for alternative means to interact with this website.</p>
+            <Spacer :height="20" />
+          </v-col>
+        </v-row>
+
       </v-container>
     </v-footer>
 
@@ -135,6 +142,23 @@ a {
   &:hover {
     text-decoration: underline;
   }
+
+  &.inverse-underline {
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+small {
+  font-size: 13px;
+}
+
+.footer-508 {
+  max-width: 1000px;
+  font-size: 13px;
+  line-height: 23px;
 }
 </style>
 
@@ -142,6 +166,7 @@ a {
 import CompareDrawer from "~/components/CompareDrawer.vue"
 import CompareHeader from "~/components/CompareHeader.vue"
 import AnalyticsEvents from "~/js/mixins/AnalyticsEvents.js"
+import Spacer from "./Spacer.vue";
 
 export default {
   mixins: [AnalyticsEvents],
