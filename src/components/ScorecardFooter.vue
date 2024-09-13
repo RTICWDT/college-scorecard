@@ -156,7 +156,7 @@ small {
 }
 
 .footer-508 {
-  max-width: 1000px;
+  max-width: 100%;
   font-size: 13px;
   line-height: 23px;
 }
