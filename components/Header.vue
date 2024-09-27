@@ -1,3 +1,88 @@
+<style lang="scss" scoped>
+header {
+  position: sticky;
+  z-index: 9999;
+  width: 100%;
+  top: 0;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    width: 350px;
+
+    @media screen and (max-width: 600px) {
+      width: 300px;
+    }
+  }
+}
+
+nav {
+  ul {
+    list-style-type: none;
+
+    li {
+      padding: 0 12px;
+      position: relative;
+
+      a {
+        text-decoration: none;
+        color: white;
+        padding-bottom: 10px;
+        cursor: pointer;
+
+        &.active {
+          font-weight: bold;
+          border-bottom: 3px solid #97cff5;
+        }
+      }
+    }
+  }
+}
+
+.mobile-nav {
+  .nav-title {
+    padding-left: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .nav-item {
+    min-height: 25px;
+    height: 25px;
+    padding-top: 5px;
+  }
+
+  .nav-caret {
+    position: relative;
+    bottom: 3px;
+  }
+
+  .nav-title-item {
+    font-weight: bold;
+    min-height: 25px;
+    height: 25px;
+    margin-bottom: -3px !important;
+    padding-top: 5px;
+  }
+}
+
+#skip-content-tab {
+  position: absolute;
+  opacity: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 180px;
+  text-align: center;
+
+  &:focus-within {
+    opacity: 1;
+  }
+}
+</style>
+
 <template>
   <div id="skip-content-tab" style="background-color: white;">
     <a tabindex="1" @click="skipNav" href="#">
@@ -5,7 +90,7 @@
     </a>
   </div>
 
-  <div class="d-flex px-5 py-4" style="background-color: #102E52; align-items: center; justify-content: space-between;">
+  <div class="d-flex px-3 py-4" style="background-color: #102E52; align-items: center; justify-content: space-between;">
     <div>
       <NuxtLink :to="'/'">
         <div class="logo">
@@ -16,44 +101,52 @@
     </div>
 
     <!-- Medium and above navigation -->
-    <div class="d-none d-md-block">
+    <div class="d-none d-lg-block">
       <nav>
-        <ul class="d-flex text-white">
+        <ul class="d-flex text-white mb-0">
           <li>
-            <NuxtLink :to="'/'" :class="{ 'active': activeLink === '/' }" @click="trackNavigation('/')">
+            <NuxtLink :to="'/'" :class="{ 'active': activeLink === '/' }" @click="navigateTo('/')">
               Home
             </NuxtLink>
           </li>
 
-          <Subnav label="Search" :is-active="activeLink === 'search'" :items="searchItems" />
+          <Subnav label="Search" :active="activeLink.match('search')" :items="searchItems" :onNavigate="navigateTo" />
 
-          <Subnav label="Compare" :is-active="activeLink === 'compare'" :items="compareItems" />
+          <Subnav label="Compare" :active="activeLink.match('compare')" :items="compareItems"
+            :onNavigate="navigateTo" />
 
           <li>
-            <NuxtLink :to="'/resources'" :class="{ 'active': activeLink === 'resources' }"
-              @click="trackNavigation('/resources')">
+            <NuxtLink :to="'/resources'" :class="{ 'active': activeLink.match('resources') }"
+              @click="navigateTo('/resources')">
               Resources
             </NuxtLink>
           </li>
 
-          <Subnav label="About the Data" :is-active="activeLink === 'data'" :items="dataItems"
+          <Subnav label="About the Data" :active="activeLink.match('data')" :items="dataItems" :onNavigate="navigateTo"
             :right-offset="'0.7rem'" />
         </ul>
       </nav>
     </div>
 
     <!-- Mobile Nav Bar -->
-    <div class="d-md-none">
-      <v-btn icon class="float-right" @click="drawer = !drawer" aria-label="Menu" style="color: white;">
+    <div class="d-lg-none">
+      <v-btn icon class="float-right" @click="drawer = !drawer" aria-label="Menu" style="color: white; background-color: transparent;">
         <v-icon>$menu</v-icon>
       </v-btn>
     </div>
   </div>
 
   <!-- Mobile Navigation Drawer -->
-  <v-navigation-drawer v-model="drawer" v-show="drawer" fixed temporary disable-resize-watcher right color="white"
-    class="mobile-nav" style="z-index: 1001 !important;">
-    <v-list nav style="z-index: 1002 !important;">
+  <v-navigation-drawer 
+    v-model="drawer" 
+    v-show="drawer" 
+    temporary
+    disable-resize-watcher
+    location="right"
+    color="white"
+    class="mobile-nav" 
+  >
+    <v-list nav>
       <div class="d-flex justify-end mb-5 mr-1">
         <v-btn icon @click="drawer = !drawer" aria-label="Menu" style="color: gray;">
           <v-icon>$close</v-icon>
@@ -198,13 +291,27 @@
 </template>
 
 <script setup>
+const router = useRouter()
+
 const drawer = ref(false)
 const trackNavigation = (link) => {
   return true
 }
 const mobileNavClick = (link) => {
+  trackNavigation(link)
+  activeLink.value = link
+  router.push(link)
+  drawer.value = false
   return true
 }
+
+const navigateTo = (link) => {
+  trackNavigation(link)
+  activeLink.value = link
+  return true
+}
+
+const activeLink = ref('/')
 
 const compareItems = [
   {
@@ -250,88 +357,3 @@ const dataItems = [
 ]
 
 </script>
-
-<style lang="scss" scoped>
-header {
-  position: sticky;
-  z-index: 9999;
-  width: 100%;
-  top: 0;
-
-  .logo {
-    display: flex;
-    align-items: center;
-    width: 350px;
-
-    @media screen and (max-width: 600px) {
-      width: 300px;
-    }
-  }
-}
-
-nav {
-  ul {
-    list-style-type: none;
-
-    li {
-      padding: 0 12px;
-      position: relative;
-
-      a {
-        text-decoration: none;
-        color: white;
-        padding-bottom: 10px;
-        cursor: pointer;
-
-        &.active {
-          font-weight: bold;
-          border-bottom: 3px solid #97cff5;
-        }
-      }
-    }
-  }
-}
-
-.mobile-nav {
-  .nav-title {
-    padding-left: 8px;
-    font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-
-  .nav-item {
-    min-height: 25px;
-    height: 25px;
-    padding-top: 5px;
-  }
-
-  .nav-caret {
-    position: relative;
-    bottom: 3px;
-  }
-
-  .nav-title-item {
-    font-weight: bold;
-    min-height: 25px;
-    height: 25px;
-    margin-bottom: -3px !important;
-    padding-top: 5px;
-  }
-}
-
-#skip-content-tab {
-  position: absolute;
-  opacity: 0;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  width: 180px;
-  text-align: center;
-
-  &:focus-within {
-    opacity: 1;
-  }
-}
-</style>

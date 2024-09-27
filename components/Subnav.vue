@@ -51,9 +51,10 @@ li a.active, li span.active {
     @keydown="handleKeyDown"
     @focus="showSubnav"
     @blur="handleBlur"
+
   >
     <span 
-      :class="{ 'active': isActive }"
+      :class="{ 'active': active }"
       tabindex="0"
       role="button"
       aria-haspopup="true"
@@ -72,6 +73,7 @@ li a.active, li span.active {
         @click="handleItemClick(item.action)"
         tabindex="0" 
         @blur="handleSubnavBlur"
+        @keydown="handleKeyDown"
         :data-route="item.action"
       >
         {{ item.label }}
@@ -89,7 +91,7 @@ const props = defineProps({
     type: String,
     required: true
   },
-  isActive: {
+  active: {
     type: Boolean,
     default: false
   },
@@ -101,6 +103,10 @@ const props = defineProps({
   rightOffset: {
     type: String,
     default: 'none'
+  },
+  onNavigate: {
+    type: Function,
+    required: true
   }
 })
 
@@ -116,10 +122,13 @@ const hideSubnav = () => {
 }
 
 const handleKeyDown = (event) => {
-  if (event.key === 'Enter' && event.target.tagName === 'A') {
+  if (event.key === 'Enter' && event.target.tagName === 'BUTTON') {
     const route = event.target.dataset.route
     if (route) {
-      return router.push(route)
+      hideSubnav()
+      props.onNavigate(route)
+      router.push(route)
+      return
     }
   }
 
@@ -147,6 +156,7 @@ const handleBlur = (event) => {
 const handleSubnavBlur = (event) => {
   setTimeout(() => {
     const li = event.target.closest('li')
+    if (!li) { return }
     if (!li.contains(document.activeElement)) {
       hideSubnav()
     }
@@ -156,6 +166,8 @@ const handleSubnavBlur = (event) => {
 const handleItemClick = (action) => {
   // You may want to implement your own analytics tracking here
   // or use a composable for analytics
+  hideSubnav()
+  props.onNavigate(action)
   router.push(action)
 }
 </script>
