@@ -1,0 +1,40 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt generate",
+    "preview": "npx serve .output/public"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.6.0",
+    "@mdi/font": "^7.4.47",
+    "@pinia/nuxt": "^0.5.4",
+    "@vue-leaflet/vue-leaflet": "^0.10.1",
+    "axios": "^1.7.7",
+    "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.4",
+    "chartjs-plugin-datalabels": "^2.2.0",
+    "focus-trap": "^7.6.0",
+    "focus-trap-vue": "^4.0.3",
+    "google-charts": "^2.0.0",
+    "numeral": "^2.0.6",
+    "nuxt": "^3.13.0",
+    "vue": "latest",
+    "vue-chartjs": "^5.3.1",
+    "vue-numeral-filter": "^2.2.0",
+    "vue-recaptcha": "^3.0.0-alpha.6",
+    "vue-router": "latest",
+    "vue-uswds": "^1.9.0"
+  },
+  "devDependencies": {
+    "sass": "^1.79.3",
+    "sass-loader": "^16.0.2",
+    "vite-plugin-vuetify": "^2.0.4",
+    "vuetify": "^3.7.2"
+  },
+  "overrides": {
+    "vue": "latest"
+  }
+}
