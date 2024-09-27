@@ -3,17 +3,14 @@
     <a tabindex="1" @click="skipNav" href="#">
       Skip to main content
     </a>
-  </div>  
+  </div>
 
   <div class="d-flex px-5 py-4" style="background-color: #102E52; align-items: center; justify-content: space-between;">
     <div>
       <NuxtLink :to="'/'">
         <div class="logo">
-          <img
-            :src="'/img/US-DOE-CollegeScorecard-Logo.svg'"
-            alt="US Department of Education College Scorecard"
-            class="logo"
-          />  
+          <img src="~/assets/images/US-DOE-CollegeScorecard-Logo.svg" alt="US Department of Education College Scorecard"
+            class="logo" />
         </div>
       </NuxtLink>
     </div>
@@ -28,68 +25,37 @@
             </NuxtLink>
           </li>
 
-          <Subnav
-            label="Search"
-            :is-active="activeLink === 'search'"
-            :items="searchItems"
-          />
+          <Subnav label="Search" :is-active="activeLink === 'search'" :items="searchItems" />
 
-          <Subnav
-            label="Compare"
-            :is-active="activeLink === 'compare'"
-            :items="compareItems"
-          />
+          <Subnav label="Compare" :is-active="activeLink === 'compare'" :items="compareItems" />
 
           <li>
-            <NuxtLink :to="'/resources'" :class="{ 'active': activeLink === 'resources' }" @click="trackNavigation('/resources')">
+            <NuxtLink :to="'/resources'" :class="{ 'active': activeLink === 'resources' }"
+              @click="trackNavigation('/resources')">
               Resources
             </NuxtLink>
           </li>
 
-          <Subnav
-            label="About the Data"
-            :is-active="activeLink === 'data'"
-            :items="dataItems"
-            :right-offset="'0.7rem'"
-          />
+          <Subnav label="About the Data" :is-active="activeLink === 'data'" :items="dataItems"
+            :right-offset="'0.7rem'" />
         </ul>
       </nav>
     </div>
 
     <!-- Mobile Nav Bar -->
     <div class="d-md-none">
-      <v-btn 
-        icon
-        class="float-right"
-        @click="drawer = !drawer"
-        aria-label="Menu"
-        style="color: white;"
-      >
+      <v-btn icon class="float-right" @click="drawer = !drawer" aria-label="Menu" style="color: white;">
         <v-icon>$menu</v-icon>
       </v-btn>
     </div>
   </div>
 
   <!-- Mobile Navigation Drawer -->
-  <v-navigation-drawer
-    v-model="drawer"
-    v-show="drawer"
-    fixed
-    temporary
-    disable-resize-watcher
-    right
-    color="white"
-    class="mobile-nav"
-    style="z-index: 1001 !important;"
-  >
+  <v-navigation-drawer v-model="drawer" v-show="drawer" fixed temporary disable-resize-watcher right color="white"
+    class="mobile-nav" style="z-index: 1001 !important;">
     <v-list nav style="z-index: 1002 !important;">
       <div class="d-flex justify-end mb-5 mr-1">
-        <v-btn 
-          icon
-          @click="drawer = !drawer"
-          aria-label="Menu"
-          style="color: gray;"
-        >
+        <v-btn icon @click="drawer = !drawer" aria-label="Menu" style="color: gray;">
           <v-icon>$close</v-icon>
         </v-btn>
       </div>
@@ -108,7 +74,7 @@
 
         <hr />
         <p class="nav-title">Search</p>
-        
+
         <v-list-item @click="mobileNavClick(`/search`)" class="nav-item">
           <v-list-item-content>
             <v-list-item-title>
@@ -239,10 +205,53 @@ const trackNavigation = (link) => {
 const mobileNavClick = (link) => {
   return true
 }
+
+const compareItems = [
+  {
+    label: 'Compare Schools',
+    action: '/compare/?toggle=institutions'
+  },
+  {
+    label: 'Compare Fields of Study',
+    action: '/compare/?toggle=fos',
+  }
+]
+const searchItems = [
+  {
+    label: 'Search Schools',
+    action: '/search'
+  },
+  {
+    label: 'Search Fields of Study',
+    action: '/search/fos-landing'
+  }
+]
+const dataItems = [
+  {
+    label: 'Download the Data',
+    action: '/data'
+  },
+  {
+    label: 'Data Documentation',
+    action: '/data/data-documentation'
+  },
+  {
+    label: 'API Documentation',
+    action: '/data/api-documentation'
+  },
+  {
+    label: 'Change Log',
+    action: '/data/changelog'
+  },
+  {
+    label: 'Glossary',
+    action: '/data/glossary'
+  }
+]
+
 </script>
 
 <style lang="scss" scoped>
-
 header {
   position: sticky;
   z-index: 9999;
@@ -253,6 +262,7 @@ header {
     display: flex;
     align-items: center;
     width: 350px;
+
     @media screen and (max-width: 600px) {
       width: 300px;
     }
@@ -266,7 +276,7 @@ nav {
     li {
       padding: 0 12px;
       position: relative;
-      
+
       a {
         text-decoration: none;
         color: white;
@@ -313,10 +323,10 @@ nav {
 #skip-content-tab {
   position: absolute;
   opacity: 0;
-  left: 0; 
-  right: 0; 
-  margin-left: auto; 
-  margin-right: auto; 
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
   width: 180px;
   text-align: center;
 

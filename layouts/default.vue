@@ -5,9 +5,8 @@
       <Header />
     </header>
     <div>
-      <p>HEADER</p>
       <slot />
-      <p>FOOTER</p>
     </div>
+    <Footer />
   </v-app>
 </template>
