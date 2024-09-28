@@ -67,11 +67,11 @@ li a.active, li span.active {
       <v-btn 
         v-for="(item, index) in items" 
         :key="index"
-        class="justify-start" 
-        text
+        class="justify-start text-black" 
+        variant="text"
         x-large
-        @click="handleItemClick(item.action)"
         tabindex="0" 
+        @click="handleItemClick(item.action)"
         @blur="handleSubnavBlur"
         @keydown="handleKeyDown"
         :data-route="item.action"

@@ -154,7 +154,7 @@ nav {
       </div>
 
       <v-list-item-group>
-        <v-list-item @click="mobileNavClick(`/`)" class="nav-title-item">
+        <v-list-item @click="mobileNavClick(`/`)" class="nav-title-item" tabindex="0">
           <v-list-item-content>
             <v-list-item-title>
               <div class="d-flex justify-space-between">
@@ -168,7 +168,7 @@ nav {
         <hr />
         <p class="nav-title">Search</p>
 
-        <v-list-item @click="mobileNavClick(`/search`)" class="nav-item">
+        <v-list-item @click="mobileNavClick(`/search`)" class="nav-item" tabindex="0">
           <v-list-item-content>
             <v-list-item-title>
               <div class="d-flex justify-space-between">
@@ -179,7 +179,7 @@ nav {
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item @click="mobileNavClick(`/search/fos-landing`)" class="nav-item">
+        <v-list-item @click="mobileNavClick(`/search/fos-landing`)" class="nav-item" tabindex="0">
           <v-list-item-content>
             <v-list-item-title>
               <div class="d-flex justify-space-between">
@@ -193,7 +193,7 @@ nav {
         <hr />
         <p class="nav-title">Compare</p>
 
-        <v-list-item @click="mobileNavClick(`/compare/?toggle=institutions`)" class="nav-item">
+        <v-list-item @click="mobileNavClick(`/compare/?toggle=institutions`)" class="nav-item" tabindex="0">
           <v-list-item-content>
             <v-list-item-title>
               <div class="d-flex justify-space-between">
@@ -204,7 +204,7 @@ nav {
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item @click="mobileNavClick(`/compare/?toggle=fos`)" class="nav-item">
+        <v-list-item @click="mobileNavClick(`/compare/?toggle=fos`)" class="nav-item" tabindex="0">
           <v-list-item-content>
             <v-list-item-title>
               <div class="d-flex justify-space-between">
@@ -217,7 +217,7 @@ nav {
 
         <hr />
 
-        <v-list-item @click="mobileNavClick(`/resources`)" class="nav-title-item">
+        <v-list-item @click="mobileNavClick(`/resources`)" class="nav-title-item" tabindex="0">
           <v-list-item-content>
             <v-list-item-title>
               <div class="d-flex justify-space-between">
@@ -231,7 +231,7 @@ nav {
         <hr />
         <p class="nav-title">About the Data</p>
 
-        <v-list-item @click="mobileNavClick(`/data`)" class="nav-item">
+        <v-list-item @click="mobileNavClick(`/data`)" class="nav-item" tabindex="0">
           <v-list-item-content>
             <v-list-item-title>
               <div class="d-flex justify-space-between">
@@ -242,7 +242,7 @@ nav {
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item @click="mobileNavClick(`/data/data-documentation`)" class="nav-item">
+        <v-list-item @click="mobileNavClick(`/data/data-documentation`)" class="nav-item" tabindex="0">
           <v-list-item-content>
             <v-list-item-title>
               <div class="d-flex justify-space-between">
@@ -253,7 +253,7 @@ nav {
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item @click="mobileNavClick(`/data/api-documentation`)" class="nav-item">
+        <v-list-item @click="mobileNavClick(`/data/api-documentation`)" class="nav-item" tabindex="0">
           <v-list-item-content>
             <v-list-item-title>
               <div class="d-flex justify-space-between">
@@ -264,7 +264,7 @@ nav {
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item @click="mobileNavClick(`/data/changelog`)" class="nav-item">
+        <v-list-item @click="mobileNavClick(`/data/changelog`)" class="nav-item" tabindex="0">
           <v-list-item-content>
             <v-list-item-title>
               <div class="d-flex justify-space-between">
@@ -275,7 +275,7 @@ nav {
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item @click="mobileNavClick(`/data/glossary`)" class="nav-item">
+        <v-list-item @click="mobileNavClick(`/data/glossary`)" class="nav-item" tabindex="0">
           <v-list-item-content>
             <v-list-item-title>
               <div class="d-flex justify-space-between">
