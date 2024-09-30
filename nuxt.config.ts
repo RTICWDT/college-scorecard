@@ -23,7 +23,6 @@ export default defineNuxtConfig({
     '@fortawesome/fontawesome-free/css/fontawesome.min.css',
     '@fortawesome/fontawesome-free/css/solid.min.css',
     '@fortawesome/fontawesome-free/css/regular.min.css',
-    "bootstrap/dist/css/bootstrap.min.css",
     '@/assets/scss/style.scss',
   ],
   vite: {
@@ -35,7 +34,7 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          // api: 'modern', // or 'modern'
+          additionalData: '@use "~/assets/scss/_variables.scss" as variables;\n@use "~/assets/scss/_breakpoints.scss" as *;\n',
           silenceDeprecations: ['legacy-js-api'],
         },
       },

@@ -1,5 +1,4 @@
 <style lang="scss" scoped>
-@use "@/assets/scss/_variables.scss" as variables;
 
 .splash-container {
   margin-bottom: -80px;
@@ -23,46 +22,50 @@
     font-weight: 700;
   }
 
-  img {
-    width: 37px;
-    position: relative;
-    top: 10px;
-  }
-
-  @media only screen and (max-width: 1903px) {
-    top: 95px;
-  }
-
-  @media only screen and (max-width: 1264px) {
-    top: 70px;
-    h1 {
-      font-size: 40px;
-    }
-    img {
-      width: 27px;
-    }
-  }
-
-  @media only screen and (max-width: 959px) {
-    top: 80px;
-    h1 {
-      font-size: 40px;
-    }
-    img {
-      width: 27px;
-    }
-  }
-
-  @media only screen and (max-width: 566px) {
+  @include xs {
     top: 45px;
     h1 {
       font-size: 25px;
     }
     img {
       width: 17px;
+    }
+  }
+
+  @include sm {
+    top: 70px;
+    h1 {
+      font-size: 40px;
+    }
+    img {
+      width: 27px;
       top: 5px;
     }
   }
+
+  @include md {
+    top: 65px;
+    h1 {
+      font-size: 40px;
+    }
+    img {
+      width: 27px;
+    }
+  }
+
+  @include lg {
+    top: 110px;
+    h1 {
+      font-size: 40px;
+    }
+    img {
+      width: 27px;
+    }
+  }
+}
+
+.banner-image-large {
+  max-height: 400px;
 }
 
 .banner-image-small {
@@ -70,8 +73,12 @@
   object-fit: cover;
   border-radius: 20px;
 
-  @media only screen and (max-width: 566px) {
+  @include xs {
     height: 182px;
+  }
+
+  @include sm {
+    height: 310px;
   }
 }
 
@@ -131,7 +138,7 @@
 
   .download-wrapper {
     justify-content: end;
-    @media only screen and (max-width: 959px) {
+    @include md {
       justify-content: start;
     }
   }
@@ -140,7 +147,7 @@
 .subsplash-blurb {
   min-height: 140px;
 
-  @media only screen and (max-width: 959px) {
+  @include md {
     min-height: 0px;
   }
 }
@@ -184,7 +191,7 @@
             <img
               src="~/assets/images/resources-banner.svg"
               alt=""
-              class="d-none d-md-block"
+              class="d-none d-md-block banner-image-large"
               width="100%"
             />
             <img
