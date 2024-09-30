@@ -110,9 +110,9 @@ nav {
             </NuxtLink>
           </li>
 
-          <Subnav label="Search" :active="activeLink.match('search')" :items="searchItems" :onNavigate="navigateTo" />
+          <LayoutSubnav label="Search" :active="activeLink.match('search')" :items="searchItems" :onNavigate="navigateTo" />
 
-          <Subnav label="Compare" :active="activeLink.match('compare')" :items="compareItems"
+          <LayoutSubnav label="Compare" :active="activeLink.match('compare')" :items="compareItems"
             :onNavigate="navigateTo" />
 
           <li>
@@ -122,7 +122,7 @@ nav {
             </NuxtLink>
           </li>
 
-          <Subnav label="About the Data" :active="activeLink.match('data')" :items="dataItems" :onNavigate="navigateTo"
+          <LayoutSubnav label="About the Data" :active="activeLink.match('data')" :items="dataItems" :onNavigate="navigateTo"
             :right-offset="'0.7rem'" />
         </ul>
       </nav>

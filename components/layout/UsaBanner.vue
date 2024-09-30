@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="bg-white w-100 py-0 px-0" style="z-index: 1000;" aria-label="Official government website">
     <div class="d-flex align-items-center px-3">
-      <USAFlag class="mx-2"/>
+      <LayoutUsaFlag class="mx-2"/>
       <p class="mb-0 py-1" style="font-size: .75rem">
         <span> 
           An official website of the United States government 
@@ -20,7 +20,7 @@
           <v-col md="6" sm="12">
             <div class="d-flex">
               <div class="mr-3 mt-3 min-w-50">
-                <USAGovIcon/>
+                <LayoutUsaGovIcon/>
               </div>
               <div class="max-w-400">
                 <p><strong>Official websites use .gov</strong><br> A <strong>.gov</strong> website belongs to an official government organization in the United States.</p>
@@ -31,7 +31,7 @@
           <v-col>
             <div class="d-flex">
               <div class="mr-3 mt-3 min-w-50">
-                <USALockIcon />
+                <LayoutUsaLockIcon />
               </div>
               <div class="max-w-400">
                 <p><strong>Secure .gov websites use HTTPS</strong><br> A <strong>lock</strong> (<i class="fas fa-lock"></i>) or <strong>https://</strong> means you've safely connected to the .gov website. Share sensitive information only on official, secure websites.</p>

@@ -63,6 +63,12 @@
     }
   }
 }
+.banner-image-wrapper {
+  @include xs { min-height: 30px; }
+  @include sm { min-height: 290px; }
+  @include md { min-height: 290px; }
+  @include lg { min-height: 420px; }
+}
 
 .banner-image-small {
   height: 310px;
@@ -184,18 +190,20 @@
                 </h1>
               </div>
             </div>
-            <img
-              src="~/assets/images/resources-banner.svg"
-              alt=""
-              class="d-none d-md-block banner-image-large"
-              width="100%"
-            />
-            <img
-              src="~/assets/images/resources-banner.svg"
-              alt=""
-              class="d-block d-md-none banner-image-small"
-              width="100%"
-            />
+            <div class="banner-image-wrapper">
+              <img
+                src="~/assets/images/resources-banner.svg"
+                alt=""
+                class="d-none d-md-block banner-image-large"
+                width="100%"
+              />
+              <img
+                src="~/assets/images/resources-banner.svg"
+                alt=""
+                class="d-block d-md-none banner-image-small"
+                width="100%"
+              />
+            </div>
           </v-col>
         </v-row>
       </v-container>

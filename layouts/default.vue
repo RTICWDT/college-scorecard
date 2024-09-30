@@ -1,12 +1,12 @@
 <template>
   <v-app>
     <header class="d-print-none">
-      <UsaBanner />
-      <Header />
+      <LayoutUsaBanner />
+      <LayoutHeader />
     </header>
     <div>
       <slot />
     </div>
-    <Footer />
+    <LayoutFooter />
   </v-app>
 </template>

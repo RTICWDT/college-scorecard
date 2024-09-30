@@ -27,8 +27,26 @@ npm run preview
 
 ## MIGRATION NOTES
 - `vuex` -> `pinia` store migration
+  - TODO: Learn how the vue store is used
 - `google-charts` is a 5-year-old library
 - `vue2-leaflet` -> `vue-leaflet` vue3 compatible
-- `override` in the old project, don't port them over
 - `vuetify3` migration
+  - asset pipeline looking good so far
+    - icons (both font awesome and vuetify)
+    - fonts
+    - grid layout using v-container, v-row, v-col
+    - 
+- 
 - error page handling in nuxt
+- We're going to try and only use vuetify, no bootstrap
+
+
+## CHECKLICK
+
+- [ ] API
+- [ ] Store
+- [ ] SEO / Meta tags
+- [ ] Favicons
+- [ ] 
+
+
