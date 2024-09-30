@@ -269,11 +269,14 @@ nav {
 
 <script setup>
 const router = useRouter()
+const route = useRoute();
+const activeLink = ref(route.path)
+const drawer = ref()
 
-const drawer = ref(false)
 const trackNavigation = (link) => {
   return true
 }
+
 const mobileNavClick = (link) => {
   trackNavigation(link)
   activeLink.value = link
@@ -287,8 +290,6 @@ const navigateTo = (link) => {
   activeLink.value = link
   return true
 }
-
-const activeLink = ref('/')
 
 const compareItems = [
   {
