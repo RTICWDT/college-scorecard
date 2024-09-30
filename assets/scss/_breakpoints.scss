@@ -8,7 +8,7 @@ $grid-breakpoints: (
 
 .v-container {
   @media (min-width: map-get($grid-breakpoints, 'lg')) {
-    max-width: 1200px;
+    max-width: 1300px;
   }
 }
 

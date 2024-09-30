@@ -54,18 +54,14 @@
   }
 
   @include lg {
-    top: 110px;
+    top: 105px;
     h1 {
-      font-size: 40px;
+      font-size: 50px;
     }
     img {
-      width: 27px;
+      width: 37px;
     }
   }
-}
-
-.banner-image-large {
-  max-height: 400px;
 }
 
 .banner-image-small {

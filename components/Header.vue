@@ -101,7 +101,7 @@ nav {
     </div>
 
     <!-- Medium and above navigation -->
-    <div class="d-none d-lg-block">
+    <div class="d-none d-md-block">
       <nav>
         <ul class="d-flex text-white mb-0">
           <li>
@@ -129,7 +129,7 @@ nav {
     </div>
 
     <!-- Mobile Nav Bar -->
-    <div class="d-lg-none">
+    <div class="d-md-none">
       <v-btn icon class="float-right" @click="drawer = !drawer" aria-label="Menu" style="color: white; background-color: transparent;">
         <v-icon icon="mdi:mdi-menu"></v-icon>
       </v-btn>
