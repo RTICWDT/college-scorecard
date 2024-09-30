@@ -1,27 +1,24 @@
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-import { aliases as mdiAliases, mdi } from 'vuetify/iconsets/mdi'
-import { aliases as faAliases, fa } from 'vuetify/iconsets/fa'
+import { mdi } from 'vuetify/iconsets/mdi'
+import { aliases, fa } from 'vuetify/iconsets/fa'
 
 export default defineNuxtPlugin((nuxtApp) => {
   const vuetify = createVuetify({
     components,
     directives,
     icons: {
-      defaultSet: 'mdi',
-      aliases: {
-        ...mdiAliases,
-        ...faAliases,
-      },
+      defaultSet: 'fa',
+      aliases,
       sets: {
-        mdi,
         fa,
+        mdi,
       },
     },
     display: {
       mobileBreakpoint: 'sm',
-      thresholds: {
+    thresholds: {
         xs: 0,
         sm: 340,
         md: 540,

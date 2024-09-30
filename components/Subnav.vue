@@ -61,7 +61,7 @@ li a.active, li span.active {
       :aria-expanded="isOpen"
     >
       {{ label }}
-      <v-icon class="icon">{{ isOpen ? 'mdi-menu-up' : 'mdi-menu-down' }}</v-icon>
+      <v-icon class="icon" :icon="isOpen ? 'mdi:mdi-menu-up' : 'mdi:mdi-menu-down'"></v-icon>
     </span>
     <div class="subnav" :style="{ right: rightOffset }" v-if="isOpen">
       <v-btn 
