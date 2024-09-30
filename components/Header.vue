@@ -131,7 +131,7 @@ nav {
     <!-- Mobile Nav Bar -->
     <div class="d-lg-none">
       <v-btn icon class="float-right" @click="drawer = !drawer" aria-label="Menu" style="color: white; background-color: transparent;">
-        <v-icon>$menu</v-icon>
+        <v-icon>mdi-menu</v-icon>
       </v-btn>
     </div>
   </div>
@@ -148,7 +148,7 @@ nav {
     <v-list nav>
       <div class="d-flex justify-end mb-5 mr-1">
         <v-btn icon @click="drawer = !drawer" aria-label="Menu" style="color: gray;">
-          <v-icon>$close</v-icon>
+          <v-icon>mdi-close</v-icon>
         </v-btn>
       </div>
 
@@ -157,7 +157,7 @@ nav {
           <v-list-item-title>
             <div class="d-flex justify-space-between">
               <span>Home</span>
-              <v-icon class="nav-caret">$next</v-icon>
+              <v-icon class="nav-caret">mdi-chevron-right</v-icon>
             </div>
           </v-list-item-title>
         </v-list-item>
@@ -169,7 +169,7 @@ nav {
           <v-list-item-title>
             <div class="d-flex justify-space-between">
               <span>Search Schools</span>
-              <v-icon class="nav-caret">$next</v-icon>
+              <v-icon class="nav-caret">mdi-chevron-right</v-icon>
             </div>
           </v-list-item-title>
         </v-list-item>
@@ -178,7 +178,7 @@ nav {
           <v-list-item-title>
             <div class="d-flex justify-space-between">
               <span>Search Fields of Study</span>
-              <v-icon class="nav-caret">$next</v-icon>
+              <v-icon class="nav-caret">mdi-chevron-right</v-icon>
             </div>
           </v-list-item-title>
         </v-list-item>
@@ -190,7 +190,7 @@ nav {
           <v-list-item-title>
             <div class="d-flex justify-space-between">
               <span>Compare Schools</span>
-              <v-icon class="nav-caret">$next</v-icon>
+              <v-icon class="nav-caret">mdi-chevron-right</v-icon>
             </div>
           </v-list-item-title>
         </v-list-item>
@@ -199,7 +199,7 @@ nav {
           <v-list-item-title>
             <div class="d-flex justify-space-between">
               <span>Compare Fields of Study</span>
-              <v-icon class="nav-caret">$next</v-icon>
+              <v-icon class="nav-caret">mdi-chevron-right</v-icon>
             </div>
           </v-list-item-title>
         </v-list-item>
@@ -210,7 +210,7 @@ nav {
           <v-list-item-title>
             <div class="d-flex justify-space-between">
               <span>Resources</span>
-              <v-icon class="nav-caret">$next</v-icon>
+              <v-icon class="nav-caret">mdi-chevron-right</v-icon>
             </div>
           </v-list-item-title>
         </v-list-item>
@@ -222,7 +222,7 @@ nav {
           <v-list-item-title>
             <div class="d-flex justify-space-between">
               <span>Download the Data</span>
-              <v-icon class="nav-caret">$next</v-icon>
+              <v-icon class="nav-caret">mdi-chevron-right</v-icon>
             </div>
           </v-list-item-title>
         </v-list-item>
@@ -231,7 +231,7 @@ nav {
           <v-list-item-title>
             <div class="d-flex justify-space-between">
               <span>Data Documentation</span>
-              <v-icon class="nav-caret">$next</v-icon>
+              <v-icon class="nav-caret">mdi-chevron-right</v-icon>
             </div>
           </v-list-item-title>
         </v-list-item>
@@ -240,7 +240,7 @@ nav {
           <v-list-item-title>
             <div class="d-flex justify-space-between">
               <span>API Documentation</span>
-              <v-icon class="nav-caret">$next</v-icon>
+              <v-icon class="nav-caret">mdi-chevron-right</v-icon>
             </div>
           </v-list-item-title>
         </v-list-item>
@@ -249,7 +249,7 @@ nav {
           <v-list-item-title>
             <div class="d-flex justify-space-between">
               <span>Change Log</span>
-              <v-icon class="nav-caret">$next</v-icon>
+              <v-icon class="nav-caret">mdi-chevron-right</v-icon>
             </div>
           </v-list-item-title>
         </v-list-item>
@@ -258,7 +258,7 @@ nav {
           <v-list-item-title>
             <div class="d-flex justify-space-between">
               <span>Glossary</span>
-              <v-icon class="nav-caret">$next</v-icon>
+              <v-icon class="nav-caret">mdi-chevron-right</v-icon>
             </div>
           </v-list-item-title>
         </v-list-item>
