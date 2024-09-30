@@ -139,12 +139,11 @@ nav {
   <!-- Mobile Navigation Drawer -->
   <v-navigation-drawer 
     v-model="drawer" 
-    v-show="drawer" 
     temporary
     disable-resize-watcher
     location="right"
     color="white"
-    class="mobile-nav" 
+    class="mobile-nav"
   >
     <v-list nav>
       <div class="d-flex justify-end mb-5 mr-1">
@@ -153,139 +152,117 @@ nav {
         </v-btn>
       </div>
 
-      <v-list-item-group>
+      <div>
         <v-list-item @click="mobileNavClick(`/`)" class="nav-title-item" tabindex="0">
-          <v-list-item-content>
-            <v-list-item-title>
-              <div class="d-flex justify-space-between">
-                <span>Home</span>
-                <v-icon class="nav-caret">$next</v-icon>
-              </div>
-            </v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>
+            <div class="d-flex justify-space-between">
+              <span>Home</span>
+              <v-icon class="nav-caret">$next</v-icon>
+            </div>
+          </v-list-item-title>
         </v-list-item>
 
         <hr />
         <p class="nav-title">Search</p>
 
         <v-list-item @click="mobileNavClick(`/search`)" class="nav-item" tabindex="0">
-          <v-list-item-content>
-            <v-list-item-title>
-              <div class="d-flex justify-space-between">
-                <span>Search Schools</span>
-                <v-icon class="nav-caret">$next</v-icon>
-              </div>
-            </v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>
+            <div class="d-flex justify-space-between">
+              <span>Search Schools</span>
+              <v-icon class="nav-caret">$next</v-icon>
+            </div>
+          </v-list-item-title>
         </v-list-item>
 
         <v-list-item @click="mobileNavClick(`/search/fos-landing`)" class="nav-item" tabindex="0">
-          <v-list-item-content>
-            <v-list-item-title>
-              <div class="d-flex justify-space-between">
-                <span>Search Fields of Study</span>
-                <v-icon class="nav-caret">$next</v-icon>
-              </div>
-            </v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>
+            <div class="d-flex justify-space-between">
+              <span>Search Fields of Study</span>
+              <v-icon class="nav-caret">$next</v-icon>
+            </div>
+          </v-list-item-title>
         </v-list-item>
 
         <hr />
         <p class="nav-title">Compare</p>
 
         <v-list-item @click="mobileNavClick(`/compare/?toggle=institutions`)" class="nav-item" tabindex="0">
-          <v-list-item-content>
-            <v-list-item-title>
-              <div class="d-flex justify-space-between">
-                <span>Compare Schools</span>
-                <v-icon class="nav-caret">$next</v-icon>
-              </div>
-            </v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>
+            <div class="d-flex justify-space-between">
+              <span>Compare Schools</span>
+              <v-icon class="nav-caret">$next</v-icon>
+            </div>
+          </v-list-item-title>
         </v-list-item>
 
         <v-list-item @click="mobileNavClick(`/compare/?toggle=fos`)" class="nav-item" tabindex="0">
-          <v-list-item-content>
-            <v-list-item-title>
-              <div class="d-flex justify-space-between">
-                <span>Compare Fields of Study</span>
-                <v-icon class="nav-caret">$next</v-icon>
-              </div>
-            </v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>
+            <div class="d-flex justify-space-between">
+              <span>Compare Fields of Study</span>
+              <v-icon class="nav-caret">$next</v-icon>
+            </div>
+          </v-list-item-title>
         </v-list-item>
 
         <hr />
 
         <v-list-item @click="mobileNavClick(`/resources`)" class="nav-title-item" tabindex="0">
-          <v-list-item-content>
-            <v-list-item-title>
-              <div class="d-flex justify-space-between">
-                <span>Resources</span>
-                <v-icon class="nav-caret">$next</v-icon>
-              </div>
-            </v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>
+            <div class="d-flex justify-space-between">
+              <span>Resources</span>
+              <v-icon class="nav-caret">$next</v-icon>
+            </div>
+          </v-list-item-title>
         </v-list-item>
 
         <hr />
         <p class="nav-title">About the Data</p>
 
         <v-list-item @click="mobileNavClick(`/data`)" class="nav-item" tabindex="0">
-          <v-list-item-content>
-            <v-list-item-title>
-              <div class="d-flex justify-space-between">
-                <span>Download the Data</span>
-                <v-icon class="nav-caret">$next</v-icon>
-              </div>
-            </v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>
+            <div class="d-flex justify-space-between">
+              <span>Download the Data</span>
+              <v-icon class="nav-caret">$next</v-icon>
+            </div>
+          </v-list-item-title>
         </v-list-item>
 
         <v-list-item @click="mobileNavClick(`/data/data-documentation`)" class="nav-item" tabindex="0">
-          <v-list-item-content>
-            <v-list-item-title>
-              <div class="d-flex justify-space-between">
-                <span>Data Documentation</span>
-                <v-icon class="nav-caret">$next</v-icon>
-              </div>
-            </v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>
+            <div class="d-flex justify-space-between">
+              <span>Data Documentation</span>
+              <v-icon class="nav-caret">$next</v-icon>
+            </div>
+          </v-list-item-title>
         </v-list-item>
 
         <v-list-item @click="mobileNavClick(`/data/api-documentation`)" class="nav-item" tabindex="0">
-          <v-list-item-content>
-            <v-list-item-title>
-              <div class="d-flex justify-space-between">
-                <span>API Documentation</span>
-                <v-icon class="nav-caret">$next</v-icon>
-              </div>
-            </v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>
+            <div class="d-flex justify-space-between">
+              <span>API Documentation</span>
+              <v-icon class="nav-caret">$next</v-icon>
+            </div>
+          </v-list-item-title>
         </v-list-item>
 
         <v-list-item @click="mobileNavClick(`/data/changelog`)" class="nav-item" tabindex="0">
-          <v-list-item-content>
-            <v-list-item-title>
-              <div class="d-flex justify-space-between">
-                <span>Change Log</span>
-                <v-icon class="nav-caret">$next</v-icon>
-              </div>
-            </v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>
+            <div class="d-flex justify-space-between">
+              <span>Change Log</span>
+              <v-icon class="nav-caret">$next</v-icon>
+            </div>
+          </v-list-item-title>
         </v-list-item>
 
         <v-list-item @click="mobileNavClick(`/data/glossary`)" class="nav-item" tabindex="0">
-          <v-list-item-content>
-            <v-list-item-title>
-              <div class="d-flex justify-space-between">
-                <span>Glossary</span>
-                <v-icon class="nav-caret">$next</v-icon>
-              </div>
-            </v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>
+            <div class="d-flex justify-space-between">
+              <span>Glossary</span>
+              <v-icon class="nav-caret">$next</v-icon>
+            </div>
+          </v-list-item-title>
         </v-list-item>
-      </v-list-item-group>
+      </div>
     </v-list>
   </v-navigation-drawer>
 </template>
