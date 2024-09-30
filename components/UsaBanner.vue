@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white w-100" style="z-index: 1000;" aria-label="Official government website">
+  <v-container fluid class="bg-white w-100 py-0 px-0" style="z-index: 1000;" aria-label="Official government website">
     <div class="d-flex align-items-center px-3">
       <USAFlag class="mx-2"/>
       <p class="mb-0 py-1" style="font-size: .75rem">
@@ -14,10 +14,10 @@
       </p>
     </div>
 
-    <div class="w-100 position-relative" style="z-index: 1000;" v-show="showInfo">
-      <div class="bg-white pt-4 pb-3 w-100 position-absolute">
-        <div class="row px-5">
-          <div class="col-12 col-md-6">
+    <v-container fluid class="w-100 position-relative py-0 px-0" style="z-index: 1000;" v-show="showInfo">
+      <div class="pt-4 pb-3 w-100 position-absolute" style="left: 12px; top:-4px;">
+        <v-row class="bg-white w-100 pb-3">
+          <v-col md="6" sm="12">
             <div class="d-flex">
               <div class="mr-3 mt-3 min-w-50">
                 <USAGovIcon/>
@@ -26,9 +26,9 @@
                 <p><strong>Official websites use .gov</strong><br> A <strong>.gov</strong> website belongs to an official government organization in the United States.</p>
               </div>
             </div>
-          </div>
+          </v-col>
 
-          <div class="col-12 col-md-6">
+          <v-col>
             <div class="d-flex">
               <div class="mr-3 mt-3 min-w-50">
                 <USALockIcon />
@@ -37,11 +37,11 @@
                 <p><strong>Secure .gov websites use HTTPS</strong><br> A <strong>lock</strong> (<i class="fas fa-lock"></i>) or <strong>https://</strong> means you've safely connected to the .gov website. Share sensitive information only on official, secure websites.</p>
               </div>
             </div>
-          </div>
-        </div>
+          </v-col>
+        </v-row>
       </div>
-    </div>
-  </div>
+    </v-container>
+  </v-container>
 </template>
 
 <script setup>
