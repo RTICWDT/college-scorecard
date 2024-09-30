@@ -76,9 +76,16 @@ nav {
   margin-right: auto;
   width: 180px;
   text-align: center;
+  padding: 5px;
 
   &:focus-within {
     opacity: 1;
+
+    a {
+      padding: 2px;
+      outline: 2px solid #0071bb;
+      outline-style: groove;
+    }
   }
 }
 </style>
@@ -110,7 +117,8 @@ nav {
             </NuxtLink>
           </li>
 
-          <LayoutSubnav label="Search" :active="activeLink.match('search')" :items="searchItems" :onNavigate="navigateTo" />
+          <LayoutSubnav label="Search" :active="activeLink.match('search')" :items="searchItems"
+            :onNavigate="navigateTo" />
 
           <LayoutSubnav label="Compare" :active="activeLink.match('compare')" :items="compareItems"
             :onNavigate="navigateTo" />
@@ -122,29 +130,24 @@ nav {
             </NuxtLink>
           </li>
 
-          <LayoutSubnav label="About the Data" :active="activeLink.match('data')" :items="dataItems" :onNavigate="navigateTo"
-            :right-offset="'0.7rem'" />
+          <LayoutSubnav label="About the Data" :active="activeLink.match('data')" :items="dataItems"
+            :onNavigate="navigateTo" :right-offset="'0.7rem'" />
         </ul>
       </nav>
     </div>
 
     <!-- Mobile Nav Bar -->
     <div class="d-md-none">
-      <v-btn icon class="float-right" @click="drawer = !drawer" aria-label="Menu" style="color: white; background-color: transparent;">
+      <v-btn icon class="float-right" @click="drawer = !drawer" aria-label="Menu"
+        style="color: white; background-color: transparent;">
         <v-icon icon="mdi:mdi-menu"></v-icon>
       </v-btn>
     </div>
   </div>
 
   <!-- Mobile Navigation Drawer -->
-  <v-navigation-drawer 
-    v-model="drawer" 
-    temporary
-    disable-resize-watcher
-    location="right"
-    color="white"
-    class="mobile-nav"
-  >
+  <v-navigation-drawer v-model="drawer" temporary disable-resize-watcher location="right" color="white"
+    class="mobile-nav">
     <v-list nav>
       <div class="d-flex justify-end mb-5 mr-1">
         <v-btn icon @click="drawer = !drawer" aria-label="Menu" style="color: gray;">
@@ -289,6 +292,38 @@ const navigateTo = (link) => {
   trackNavigation(link)
   activeLink.value = link
   return true
+}
+
+const skipNav = () => {
+  const mainContent = document.getElementById("mainContent");
+  if (mainContent) {
+    // Function to check if an element is visible
+    const isVisible = (elem) => {
+      if (!elem) return false;
+      const style = window.getComputedStyle(elem);
+      return style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0';
+    };
+
+    // Find the first visible focusable element
+    const firstVisibleFocusableElement = Array.from(
+      mainContent.querySelectorAll('a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])')
+    ).find(isVisible);
+
+    if (firstVisibleFocusableElement) {
+      firstVisibleFocusableElement.focus();
+      const rect = firstVisibleFocusableElement.getBoundingClientRect();
+
+      window.scrollTo({
+        top: rect.top + window.scrollY - 300,
+        behavior: 'smooth'
+      });
+
+    } else {
+      // If no visible focusable element is found, set focus to the main content itself
+      mainContent.setAttribute('tabindex', '-1');
+      mainContent.focus();
+    }
+  }
 }
 
 const compareItems = [

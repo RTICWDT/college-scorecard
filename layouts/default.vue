@@ -4,8 +4,8 @@
       <LayoutUsaBanner />
       <LayoutHeader />
     </header>
-    <div>
-      <slot />
+    <div id="mainContent">
+      <slot/>
     </div>
     <LayoutFooter />
   </v-app>

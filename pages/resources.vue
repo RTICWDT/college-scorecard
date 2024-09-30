@@ -224,6 +224,7 @@
               students.
             </p>
             <v-btn
+              id="firstFocus"
               class="d-block d-md-none"
               color="#027A48"
               variant="outlined"
