@@ -3,6 +3,12 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
   ssr: false,
+  runtimeConfig: {
+    apiKey: process.env.GRIDSOME_API_KEY,
+    public: {
+      apiUrl: process.env.GRIDSOME_API_URL
+    }
+  },
   build: {
     transpile: ['vuetify'],
   },

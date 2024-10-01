@@ -117,20 +117,20 @@ nav {
             </NuxtLink>
           </li>
 
-          <LayoutSubnav label="Search" :active="activeLink.match('search')" :items="searchItems"
+          <LayoutSubnav label="Search" :active="!!activeLink.match('search')" :items="searchItems"
             :onNavigate="navigateTo" />
 
-          <LayoutSubnav label="Compare" :active="activeLink.match('compare')" :items="compareItems"
+          <LayoutSubnav label="Compare" :active="!!activeLink.match('compare')" :items="compareItems"
             :onNavigate="navigateTo" />
 
           <li>
-            <NuxtLink :to="'/resources'" :class="{ 'active': activeLink.match('resources') }"
+            <NuxtLink :to="'/resources'" :class="{ 'active': !!activeLink.match('resources') }"
               @click="navigateTo('/resources')">
               Resources
             </NuxtLink>
           </li>
 
-          <LayoutSubnav label="About the Data" :active="activeLink.match('data')" :items="dataItems"
+          <LayoutSubnav label="About the Data" :active="!!activeLink.match('data')" :items="dataItems"
             :onNavigate="navigateTo" :right-offset="'0.7rem'" />
         </ul>
       </nav>
@@ -275,10 +275,7 @@ const router = useRouter()
 const route = useRoute();
 const activeLink = ref(route.path)
 const drawer = ref()
-
-const trackNavigation = (link) => {
-  return true
-}
+const { trackNavigation } = useAnalytics()
 
 const mobileNavClick = (link) => {
   trackNavigation(link)
