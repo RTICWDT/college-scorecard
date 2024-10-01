@@ -4,9 +4,9 @@
       <LayoutUsaBanner />
       <LayoutHeader />
     </header>
-    <div id="mainContent">
+    <v-main id="mainContent">
       <slot/>
-    </div>
+    </v-main>
     <LayoutFooter />
   </v-app>
 </template>

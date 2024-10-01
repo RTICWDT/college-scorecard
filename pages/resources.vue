@@ -174,7 +174,6 @@
 </style>
 
 <template>
-  <v-main>
     <div class="bg-gray splash-container">
       <v-container class="resources-container">
         <Spacer :height="30" />
@@ -816,7 +815,6 @@
         </v-container>
       </div>
     </div>
-  </v-main>
 </template>
 
 <script setup>
