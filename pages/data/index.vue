@@ -3,9 +3,9 @@
     <v-row>
       <v-col cols="12">
         <v-card class="py-5 px-10 ma-5" flat>
-          <h2 class="display-1 mb-2 font-weight-bold">Download the Data</h2>
+          <h2 class="text-h4 mb-2 font-weight-bold">Download the Data</h2>
           <hr />
-          <p>
+          <p class="mb-4">
             Download the data that appear on the College Scorecard, as well as
             supporting data on student completion, debt and repayment,
             earnings, and more.
@@ -17,15 +17,12 @@
 
           <h2 class="my-5">
             All Data Files
-            <v-btn
-              class="ml-2"
-              color="secondary"
-              href="https://ed-public-download.scorecard.network/downloads/College_Scorecard_Raw_Data_06102024.zip"
-              >Download (.zip, 390 MB)
-              <v-icon right dark x-small>
+            <v-btn class="ml-2" color="secondary"
+              href="https://ed-public-download.scorecard.network/downloads/College_Scorecard_Raw_Data_06102024.zip">Download
+              (.zip, 390 MB)
+              <v-icon right dark size="x-small" class="ml-2">
                 fas fa-download
-              </v-icon></v-btn
-            >
+              </v-icon></v-btn>
           </h2>
 
           <ul class="font-weight-regular">
@@ -53,47 +50,40 @@
               <h4 class="my-5 d-inline-block">
                 Most Recent Institution-Level Data
               </h4>
-              <v-btn
-                small
-                color="secondary"
-                class="ml-0 ml-sm-2"
-                href="https://ed-public-download.scorecard.network/downloads/Most-Recent-Cohorts-Institution_06102024.zip"
-                >Download (.zip, 22 MB)
-                <v-icon right dark x-small>
+              <v-btn size="small" color="secondary" class="ml-0 ml-sm-2"
+                href="https://ed-public-download.scorecard.network/downloads/Most-Recent-Cohorts-Institution_06102024.zip">Download
+                (.zip, 22 MB)
+                <v-icon right dark size="x-small" class="ml-2">
                   fas fa-download
-                </v-icon></v-btn
-              > </v-col
-            ><v-col>
+                </v-icon></v-btn>
+            </v-col><v-col>
               <h4 class="my-5 d-inline-block">
                 Most Recent Data by Field of Study
               </h4>
-              <v-btn
-                small
-                class="ml-0 ml-sm-2"
-                color="secondary"
-                href=" https://ed-public-download.scorecard.network/downloads/Most-Recent-Cohorts-Field-of-Study_06102024.zip"
-                >Download (.zip, 13 MB)
-                <v-icon right dark x-small>
+              <v-btn size="small" class="ml-0 ml-sm-2" color="secondary"
+                href=" https://ed-public-download.scorecard.network/downloads/Most-Recent-Cohorts-Field-of-Study_06102024.zip">Download
+                (.zip, 13 MB)
+                <v-icon right dark size="x-small" class="ml-2">
                   fas fa-download
-                </v-icon></v-btn
-              >
-            </v-col></v-row
-          >
+                </v-icon></v-btn>
+            </v-col></v-row>
           <hr />
           <p class="mt-8">
             <strong>Looking for help?</strong><br />
             Visit
-            <a
+            <a 
               href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
-              @click="transitionOutboundLink($event)"
+              @click="transitionOutboundLink($event)" 
               target="_blank"
-              >StackExchange<v-icon x-small class="pl-1" color="#007000">
+              class="mr-1"
+            >
+              StackExchange
+              <v-icon size="x-small" class="pl-2">
                 fas fa-external-link-alt
               </v-icon>
             </a>
-            or email the help desk at
-            <a href="mailto:scorecarddata@rti.org">scorecarddata@rti.org</a
-            >.<br class="d-none d-md-block" />
+             or email the help desk at
+            <a href="mailto:scorecarddata@rti.org">scorecarddata@rti.org</a>.<br class="d-none d-md-block" />
             For inquiries by members of the press, please contact
             <a href="mailto:press@ed.gov">press@ed.gov</a>.
           </p>
@@ -103,7 +93,9 @@
   </v-container>
 </template>
 
-<script>
+<script setup>
+const { transitionOutboundLink } = useAnalytics()
+
 useHead({
   title: "Data Home",
   meta: [
@@ -120,3 +112,9 @@ useHead({
   ],
 })
 </script>
+
+<style scoped lang="scss">
+li {
+  margin-left: 2rem;
+}
+</style>
