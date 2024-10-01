@@ -3,17 +3,22 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
   ssr: false,
+  compatibilityDate: '2024-04-03',
+  devtools: { enabled: true },
+
   runtimeConfig: {
     apiKey: process.env.GRIDSOME_API_KEY,
     public: {
-      apiUrl: process.env.GRIDSOME_API_URL
+      apiUrl: process.env.GRIDSOME_API_URL,
+      recaptcha: {
+        v2SiteKey: process.env.GRIDSOME_RECAPTCHA_KEY,
+      },
     }
   },
+
   build: {
     transpile: ['vuetify'],
   },
-  compatibilityDate: '2024-04-03',
-  devtools: { enabled: true },
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
@@ -21,7 +26,8 @@ export default defineNuxtConfig({
         config.plugins.push(vuetify({ autoImport: true }))
       })
     },
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    'vue-recaptcha/nuxt',
   ],
   css: [
     'vuetify/styles',
@@ -31,6 +37,7 @@ export default defineNuxtConfig({
     '@fortawesome/fontawesome-free/css/regular.min.css',
     '@/assets/scss/style.scss',
   ],
+
   vite: {
     vue: {
       template: {
