@@ -137,136 +137,140 @@ nav {
     </div>
 
     <!-- Mobile Nav Bar -->
-    <div class="d-md-none">
-      <v-btn icon class="float-right" @click="drawer = !drawer" aria-label="Menu"
-        style="color: white; background-color: transparent;">
-        <v-icon icon="mdi:mdi-menu"></v-icon>
-      </v-btn>
+    <div v-if="!mdAndUp">
+      <div class="d-md-none">
+        <v-btn icon class="float-right" @click="drawer = !drawer" aria-label="Menu"
+          style="color: white; background-color: transparent;">
+          <v-icon icon="mdi:mdi-menu"></v-icon>
+        </v-btn>
+      </div>
     </div>
   </div>
 
   <!-- Mobile Navigation Drawer -->
   <v-navigation-drawer v-model="drawer" temporary disable-resize-watcher location="right" color="white"
     class="mobile-nav">
-    <v-list nav>
-      <div class="d-flex justify-end mb-5 mr-1">
-        <v-btn icon @click="drawer = !drawer" aria-label="Menu" style="color: gray;">
-          <v-icon icon="mdi:mdi-close"></v-icon>
-        </v-btn>
-      </div>
+    <div v-if="drawer">
+      <v-list nav>
+          <div class="d-flex justify-end mb-5 mr-1">
+            <v-btn icon @click="drawer = !drawer" aria-label="Menu" style="color: gray;">
+              <v-icon icon="mdi:mdi-close"></v-icon>
+            </v-btn>
+          </div>
 
-      <div>
-        <v-list-item @click="mobileNavClick(`/`)" class="nav-title-item" tabindex="0">
-          <v-list-item-title>
-            <div class="d-flex justify-space-between">
-              <span>Home</span>
-              <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
-            </div>
-          </v-list-item-title>
-        </v-list-item>
+        <div>
+          <v-list-item @click="mobileNavClick(`/`)" class="nav-title-item" tabindex="0">
+            <v-list-item-title>
+              <div class="d-flex justify-space-between">
+                <span>Home</span>
+                <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
+              </div>
+            </v-list-item-title>
+          </v-list-item>
 
-        <hr />
-        <p class="nav-title">Search</p>
+          <hr />
+          <p class="nav-title">Search</p>
 
-        <v-list-item @click="mobileNavClick(`/search`)" class="nav-item" tabindex="0">
-          <v-list-item-title>
-            <div class="d-flex justify-space-between">
-              <span>Search Schools</span>
-              <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
-            </div>
-          </v-list-item-title>
-        </v-list-item>
+          <v-list-item @click="mobileNavClick(`/search`)" class="nav-item" tabindex="0">
+            <v-list-item-title>
+              <div class="d-flex justify-space-between">
+                <span>Search Schools</span>
+                <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
+              </div>
+            </v-list-item-title>
+          </v-list-item>
 
-        <v-list-item @click="mobileNavClick(`/search/fos-landing`)" class="nav-item" tabindex="0">
-          <v-list-item-title>
-            <div class="d-flex justify-space-between">
-              <span>Search Fields of Study</span>
-              <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
-            </div>
-          </v-list-item-title>
-        </v-list-item>
+          <v-list-item @click="mobileNavClick(`/search/fos-landing`)" class="nav-item" tabindex="0">
+            <v-list-item-title>
+              <div class="d-flex justify-space-between">
+                <span>Search Fields of Study</span>
+                <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
+              </div>
+            </v-list-item-title>
+          </v-list-item>
 
-        <hr />
-        <p class="nav-title">Compare</p>
+          <hr />
+          <p class="nav-title">Compare</p>
 
-        <v-list-item @click="mobileNavClick(`/compare/?toggle=institutions`)" class="nav-item" tabindex="0">
-          <v-list-item-title>
-            <div class="d-flex justify-space-between">
-              <span>Compare Schools</span>
-              <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
-            </div>
-          </v-list-item-title>
-        </v-list-item>
+          <v-list-item @click="mobileNavClick(`/compare/?toggle=institutions`)" class="nav-item" tabindex="0">
+            <v-list-item-title>
+              <div class="d-flex justify-space-between">
+                <span>Compare Schools</span>
+                <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
+              </div>
+            </v-list-item-title>
+          </v-list-item>
 
-        <v-list-item @click="mobileNavClick(`/compare/?toggle=fos`)" class="nav-item" tabindex="0">
-          <v-list-item-title>
-            <div class="d-flex justify-space-between">
-              <span>Compare Fields of Study</span>
-              <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
-            </div>
-          </v-list-item-title>
-        </v-list-item>
+          <v-list-item @click="mobileNavClick(`/compare/?toggle=fos`)" class="nav-item" tabindex="0">
+            <v-list-item-title>
+              <div class="d-flex justify-space-between">
+                <span>Compare Fields of Study</span>
+                <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
+              </div>
+            </v-list-item-title>
+          </v-list-item>
 
-        <hr />
+          <hr />
 
-        <v-list-item @click="mobileNavClick(`/resources`)" class="nav-title-item" tabindex="0">
-          <v-list-item-title>
-            <div class="d-flex justify-space-between">
-              <span>Resources</span>
-              <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
-            </div>
-          </v-list-item-title>
-        </v-list-item>
+          <v-list-item @click="mobileNavClick(`/resources`)" class="nav-title-item" tabindex="0">
+            <v-list-item-title>
+              <div class="d-flex justify-space-between">
+                <span>Resources</span>
+                <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
+              </div>
+            </v-list-item-title>
+          </v-list-item>
 
-        <hr />
-        <p class="nav-title">About the Data</p>
+          <hr />
+          <p class="nav-title">About the Data</p>
 
-        <v-list-item @click="mobileNavClick(`/data`)" class="nav-item" tabindex="0">
-          <v-list-item-title>
-            <div class="d-flex justify-space-between">
-              <span>Download the Data</span>
-              <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
-            </div>
-          </v-list-item-title>
-        </v-list-item>
+          <v-list-item @click="mobileNavClick(`/data`)" class="nav-item" tabindex="0">
+            <v-list-item-title>
+              <div class="d-flex justify-space-between">
+                <span>Download the Data</span>
+                <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
+              </div>
+            </v-list-item-title>
+          </v-list-item>
 
-        <v-list-item @click="mobileNavClick(`/data/data-documentation`)" class="nav-item" tabindex="0">
-          <v-list-item-title>
-            <div class="d-flex justify-space-between">
-              <span>Data Documentation</span>
-              <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
-            </div>
-          </v-list-item-title>
-        </v-list-item>
+          <v-list-item @click="mobileNavClick(`/data/data-documentation`)" class="nav-item" tabindex="0">
+            <v-list-item-title>
+              <div class="d-flex justify-space-between">
+                <span>Data Documentation</span>
+                <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
+              </div>
+            </v-list-item-title>
+          </v-list-item>
 
-        <v-list-item @click="mobileNavClick(`/data/api-documentation`)" class="nav-item" tabindex="0">
-          <v-list-item-title>
-            <div class="d-flex justify-space-between">
-              <span>API Documentation</span>
-              <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
-            </div>
-          </v-list-item-title>
-        </v-list-item>
+          <v-list-item @click="mobileNavClick(`/data/api-documentation`)" class="nav-item" tabindex="0">
+            <v-list-item-title>
+              <div class="d-flex justify-space-between">
+                <span>API Documentation</span>
+                <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
+              </div>
+            </v-list-item-title>
+          </v-list-item>
 
-        <v-list-item @click="mobileNavClick(`/data/changelog`)" class="nav-item" tabindex="0">
-          <v-list-item-title>
-            <div class="d-flex justify-space-between">
-              <span>Change Log</span>
-              <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
-            </div>
-          </v-list-item-title>
-        </v-list-item>
+          <v-list-item @click="mobileNavClick(`/data/changelog`)" class="nav-item" tabindex="0">
+            <v-list-item-title>
+              <div class="d-flex justify-space-between">
+                <span>Change Log</span>
+                <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
+              </div>
+            </v-list-item-title>
+          </v-list-item>
 
-        <v-list-item @click="mobileNavClick(`/data/glossary`)" class="nav-item" tabindex="0">
-          <v-list-item-title>
-            <div class="d-flex justify-space-between">
-              <span>Glossary</span>
-              <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
-            </div>
-          </v-list-item-title>
-        </v-list-item>
-      </div>
-    </v-list>
+          <v-list-item @click="mobileNavClick(`/data/glossary`)" class="nav-item" tabindex="0">
+            <v-list-item-title>
+              <div class="d-flex justify-space-between">
+                <span>Glossary</span>
+                <v-icon class="nav-caret" icon="mdi:mdi-chevron-right"></v-icon>
+              </div>
+            </v-list-item-title>
+          </v-list-item>
+        </div>
+      </v-list>
+    </div>
   </v-navigation-drawer>
 </template>
 
@@ -276,6 +280,9 @@ const route = useRoute();
 const activeLink = ref(route.path)
 const drawer = ref()
 const { trackNavigation } = useAnalytics()
+
+import { useDisplay } from 'vuetify';
+const { mdAndUp } = useDisplay()
 
 const mobileNavClick = (link) => {
   trackNavigation(link)
