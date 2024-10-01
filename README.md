@@ -40,13 +40,25 @@ npm run preview
 - error page handling in nuxt
 - We're going to try and only use vuetify, no bootstrap
 
-
-## CHECKLICK
+## CHECKLIST
 
 - [ ] API
 - [ ] Store
 - [ ] SEO / Meta tags
 - [ ] Favicons
-- [ ] 
+- [ ] Analytics
+- Pages:
+  - [ ] Home
+  - [ ] Search Schools
+  - [ ] View School
+  - [ ] Search Fields of Study
+  - [ ] Compare Schools
+  - [ ] Compare Fields of Study
+  - [x] Resources
+  - [ ] Data Download
+  - [ ] Data Documentation
+  - [ ] API Documentation
+  - [ ] Change Log
+  - [ ] Glossary
 
 
