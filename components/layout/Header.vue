@@ -295,8 +295,10 @@ const skipNav = () => {
   const mainContent = document.getElementById("mainContent");
   if (mainContent) {
     // Function to check if an element is visible
-    const isVisible = (elem) => {
+    const isTargetableCandidate = (elem) => {
       if (!elem) return false;
+      if (elem.classList.contains('navigation')) return false; // Skip Navigation tabs
+      
       const style = window.getComputedStyle(elem);
       return style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0';
     };
@@ -304,7 +306,7 @@ const skipNav = () => {
     // Find the first visible focusable element
     const firstVisibleFocusableElement = Array.from(
       mainContent.querySelectorAll('a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])')
-    ).find(isVisible);
+    ).find(isTargetableCandidate);
 
     if (firstVisibleFocusableElement) {
       firstVisibleFocusableElement.focus();
