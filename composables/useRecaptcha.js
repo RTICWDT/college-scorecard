@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useRuntimeConfig } from '#app'
 
-export const useRecaptcha = () => {
+export const useRecaptcha = (size = 'normal') => {
   const config = useRuntimeConfig()
   const siteKey = config.public.recaptchaKey
 
@@ -34,16 +34,15 @@ export const useRecaptcha = () => {
   }
 
   onMounted(() => {
-    if (process.client) {
-      loadRecaptchaScript()
-      window.onRecaptchaVerified = onRecaptchaVerified
-    }
+    loadRecaptchaScript()
+    window.onRecaptchaVerified = onRecaptchaVerified
   })
 
   return {
     siteKey,
     recaptchaLoaded,
     recaptchaToken,
-    setOnSuccess
+    setOnSuccess,
+    size
   }
 }

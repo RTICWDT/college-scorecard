@@ -91,7 +91,12 @@
                 First, please complete the security challenge below.
               </p>
 
-              <RecaptchaCheckbox ref="recaptchaRef" />
+              <div v-if="mdAndUp">
+                <RecaptchaCheckbox ref="recaptchaRef" size="normal" />
+              </div>
+              <div v-else>
+                <RecaptchaCheckbox ref="recaptchaRef" size="compact" />
+              </div>
             </div>
 
             <div>
@@ -503,6 +508,9 @@ const config = useRuntimeConfig()
 const formSubmitted = ref(false)
 const recaptchaRef = ref(null)
 const isVerified = ref(false)
+
+import { useDisplay } from 'vuetify';
+const { mdAndUp } = useDisplay()
 
 onMounted(() => {
   recaptchaRef.value.setOnSuccess((token) => {
