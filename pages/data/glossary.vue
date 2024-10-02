@@ -14,9 +14,9 @@
                   <h3 :id="entry.id" class="mt-4">{{ entry.title }}</h3>
                   <div
                     @click="handleClicks"
-                    class="glossary-text"
                     v-html="entry.glossary"
                     style="max-width: 800px"
+                    class="glossary-text-4f5ai"
                   />
                 </div>
               </div>
@@ -26,6 +26,33 @@
     </v-container>
   </v-main>
 </template>
+
+<style lang="scss">
+// the glossary doesn't inherit the styles of a scoped stylesheet here, hence these class-scoped overrides
+
+ div.glossary-text-4f5ai {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+ }
+
+ div.glossary-text-4f5ai > p {
+    margin-bottom: 1rem;
+  }
+
+  div.glossary-text-4f5ai > ul, div.glossary-text-4f5ai > li {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+
+    ul {
+      margin-left: 2rem;
+    }
+  }
+</style>
 
 <script setup>
 import Glossary from "~/assets/data/glossary.json"
@@ -51,7 +78,7 @@ const handleClicks = (event) => {
 
   while (target && target.tagName !== "A") target = target.parentNode
 
-  if (target && target.matches(".glossary-text a") && target.href) {
+  if (target && target.matches(".glossary-text-4f5ai a") && target.href) {
     const { altKey, ctrlKey, metaKey, shiftKey, button, defaultPrevented } = event
     
     if (metaKey || altKey || ctrlKey || shiftKey) return
