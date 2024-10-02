@@ -10,9 +10,8 @@ export default defineNuxtConfig({
     apiKey: process.env.GRIDSOME_API_KEY,
     public: {
       apiUrl: process.env.GRIDSOME_API_URL,
-      recaptcha: {
-        v2SiteKey: process.env.GRIDSOME_RECAPTCHA_KEY,
-      },
+      recaptchaKey: process.env.GRIDSOME_RECAPTCHA_KEY,
+      apiSignupKey: process.env.GRIDSOME_API_SIGNUP_KEY
     }
   },
 
@@ -27,8 +26,8 @@ export default defineNuxtConfig({
       })
     },
     '@pinia/nuxt',
-    'vue-recaptcha/nuxt',
   ],
+
   css: [
     'vuetify/styles',
     '@mdi/font/css/materialdesignicons.css',

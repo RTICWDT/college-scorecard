@@ -24,7 +24,6 @@
     "vue": "latest",
     "vue-chartjs": "^5.3.1",
     "vue-numeral-filter": "^2.2.0",
-    "vue-recaptcha": "^3.0.0-alpha.6",
     "vue-router": "latest",
     "vue-uswds": "^1.9.0"
   },

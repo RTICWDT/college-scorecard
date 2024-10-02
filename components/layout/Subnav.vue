@@ -42,6 +42,20 @@ li a.active, li span.active {
   text-decoration: none;
   color: inherit;
 }
+
+/* Fade transition */
+.fade-enter-active {
+  transition: opacity 0s;
+}
+
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>
 
 <template>
@@ -63,29 +77,28 @@ li a.active, li span.active {
       {{ label }}
       <v-icon class="icon" :icon="isOpen ? 'mdi:mdi-menu-up' : 'mdi:mdi-menu-down'"></v-icon>
     </span>
-    <div class="subnav" :style="{ right: rightOffset }" v-if="isOpen">
-      <v-btn 
-        v-for="(item, index) in items" 
-        :key="index"
-        class="justify-start text-black" 
-        variant="text"
-        x-large
-        tabindex="0" 
-        @click="handleItemClick(item.action)"
-        @blur="handleSubnavBlur"
-        @keydown="handleKeyDown"
-        :data-route="item.action"
-      >
-        {{ item.label }}
-    </v-btn>
-    </div>
+    <transition name="fade">
+      <div class="subnav" :style="{ right: rightOffset }" v-if="isOpen">
+        <v-btn 
+          v-for="(item, index) in items" 
+          :key="index"
+          class="justify-start text-black" 
+          variant="text"
+          x-large
+          tabindex="0" 
+          @click="handleItemClick(item.action)"
+          @blur="handleSubnavBlur"
+          @keydown="handleKeyDown"
+          :data-route="item.action"
+        >
+          {{ item.label }}
+        </v-btn>
+      </div>
+    </transition>
   </li>
 </template>
 
 <script setup>
-import { ref, defineProps } from 'vue'
-import { useRouter } from 'vue-router'
-
 const props = defineProps({
   label: {
     type: String,
@@ -164,8 +177,6 @@ const handleSubnavBlur = (event) => {
 }
 
 const handleItemClick = (action) => {
-  // You may want to implement your own analytics tracking here
-  // or use a composable for analytics
   hideSubnav()
   props.onNavigate(action)
   router.push(action)

@@ -86,33 +86,17 @@
               it is required for all API requests.
             </p>
 
-            <div>
-              <p>
+            <div class="mb-4">
+              <p v-if="!isVerified">
                 First, please complete the security challenge below.
-                <v-scroll-x-transition>
-                  <v-icon v-if="!showCaptcha" size="medium" color="success">
-                    mdi-check
-                  </v-icon>
-                </v-scroll-x-transition>
-              </p>
-              <p class="d-none d-sm-block">
-                <RecaptchaCheckbox :key="'light'" v-model="captchaResponse" :theme="'light'" />
-                <!-- <vue-recaptcha ref="recapcha" v-show="showCaptcha" :sitekey="recaptchaSiteKey" @verify="onCaptchaVerify"
-                  v-on:render="addAria">
-                </vue-recaptcha> -->
               </p>
 
-              <!-- Compact on XS -->
-              <p class="d-block d-sm-none">
-                <RecaptchaCheckbox v-model="captchaResponse" :theme="'light'" />
-                <!-- <vue-recaptcha ref="recapcha" v-show="showCaptcha" :sitekey="recaptchaSiteKey" @verify="onCaptchaVerify"
-                  size="compact" v-on:render="addAria">
-                </vue-recaptcha> -->
-              </p>
+              <RecaptchaCheckbox ref="recaptchaRef" />
             </div>
+
             <div>
               <v-fade-transition>
-                <p v-show="!showCaptcha">
+                <p v-show="isVerified">
                   Second, use the form below to complete the registration
                   process and receive your API key. The key will be emailed to
                   you.
@@ -125,8 +109,7 @@
               </v-fade-transition>
 
               <v-fade-transition>
-                <!-- Form Holder -->
-                <div v-show="!showCaptcha" id="apidatagov_signup" class="mb-2"></div>
+                <div v-show="isVerified" id="apidatagov_signup" class="mb-2"></div>
               </v-fade-transition>
             </div>
 
@@ -482,6 +465,7 @@ pre {
   border-radius: 0.5rem;
   overflow-x: scroll;
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 code {
@@ -515,44 +499,30 @@ p {
 
 <script setup>
 const { trackDownload, transitionOutboundLink } = useAnalytics()
-
-// Ran into an issue with script timing on IE11, created errors. Adding a script here fixes the problem
-// let recaptchaScript = document.createElement("script")
-// recaptchaScript.setAttribute(
-//   "src",
-//   "https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit"
-// )
-// recaptchaScript.async = true
-// recaptchaScript.defer = true
-// document.head.appendChild(recaptchaScript)
-
-// window.apiUmbrellaSignupOptions = {
-//   registrationSource: "college-scorecard",
-//   apiKey: process.env.GRIDSOME_API_SIGNUP_KEY,
-//   contactUrl: "scorecarddata@rti.org",
-//   siteName: "College Scorecard",
-//   emailFromName: "College Scorecard",
-//   exampleApiUrl:
-//     "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=[api_key]", // To ignore curly braces
-// }
-
-
-
-const showCaptcha = ref(true)
+const config = useRuntimeConfig()
 const formSubmitted = ref(false)
-const captchaResponse = ref()
+const recaptchaRef = ref(null)
+const isVerified = ref(false)
 
+onMounted(() => {
+  recaptchaRef.value.setOnSuccess((token) => {
+    console.log('reCAPTCHA verified with token:', token)
+    isVerified.value = true
+    loadEmbeddedForm()
+  })
 
-const recaptchaSiteKey = () => {
-  return process.env.GRIDSOME_RECAPTCHA_KEY
-}
+  window.apiUmbrellaSignupOptions = {
+    registrationSource: "college-scorecard",
+    apiKey: config.public.recaptchaKey,
+    contactUrl: "scorecarddata@rti.org",
+    siteName: "College Scorecard",
+    emailFromName: "College Scorecard",
+    exampleApiUrl:
+      "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=[api_key]", // To ignore curly braces
+  }
+})
 
-const onCaptchaVerify = () => {
-  this.showCaptcha = false
-  this.loadEmbeddedForm(this.addFormSubmitListener)
-}
-
-const loadEmbeddedForm = (callback = null) => {
+const loadEmbeddedForm = () => {
   let apiUmbrella = document.createElement("script")
   apiUmbrella.type = "text/javascript"
   apiUmbrella.async = true
@@ -564,30 +534,10 @@ const loadEmbeddedForm = (callback = null) => {
     ).appendChild(apiUmbrella)
 
   if (callback) {
-    apiUmbrella.onload = () => callback()
-  }
-}
-
-const addFormSubmitListener = () => {
-  let apiForm = document.querySelector("#apidatagov_signup_form")
-  apiForm.addEventListener("submit", () => {
-    // Listen for form submit and do whatever is needed
-    this.formSubmitted = true
-  })
-}
-
-const addAria = (id) => {
-  let r = document.body.querySelector("#g-recaptcha-response")
-  if (id == 0 && r) r.setAttribute("aria-label", "ReCAPTCHA Response")
-  else {
-    let rs = "#g-recaptcha-response-" + id
-    r = document.body.querySelector(rs)
-    if (r) r.setAttribute("aria-label", "ReCAPTCHA Response")
-    if (id % 2 == 1) {
-      let iframes = document.body.querySelector("iframe")
-      for (let q = 0; q < iframes.length; q++) {
-        iframes[q].setAttribute("title", "ReCAPTCHA Frame")
-      }
+    apiUmbrella.onload = () => {
+      document
+        .querySelector("#api_umbrella_signup_form")
+        .addEventListener("submit", () => formSubmitted.value = true)
     }
   }
 }
@@ -596,7 +546,6 @@ const scrollTo = (element) => {
     var topOfElement = document.querySelector(element).offsetTop + 60
     window.scroll({ top: topOfElement, behavior: "smooth" })
 }
-
 
 const responseFormatCode = `{
   "metadata": {
