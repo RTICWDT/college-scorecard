@@ -6,20 +6,13 @@
           <v-card class="py-5 px-10 ma-5" flat>
             <h1 class="text-h4 mb-2 font-weight-bold">Glossary</h1>
             <hr />
-              <div
-                v-for="entry in glossary"
-                :key="entry.id"
-              >
-                <div v-if="entry.glossary">
-                  <h3 :id="entry.id" class="mt-4">{{ entry.title }}</h3>
-                  <div
-                    @click="handleClicks"
-                    v-html="entry.glossary"
-                    style="max-width: 800px"
-                    class="glossary-text-4f5ai"
-                  />
-                </div>
+            <div v-for="entry in glossary" :key="entry.id">
+              <div v-if="entry.glossary">
+                <h3 :id="entry.id" class="mt-4">{{ entry.title }}</h3>
+                <div @click="handleClicks" v-html="entry.glossary" style="max-width: 800px"
+                  class="glossary-text-4f5ai" />
               </div>
+            </div>
           </v-card>
         </v-col>
       </v-row>
@@ -27,23 +20,22 @@
   </v-main>
 </template>
 
+<!-- the glossary doesn't inherit the styles of a scoped stylesheets, hence these class-scoped override -->
 <style lang="scss">
-// the glossary doesn't inherit the styles of a scoped stylesheet here, hence these class-scoped overrides
-
- div.glossary-text-4f5ai {
+div.glossary-text-4f5ai {
   font-size: 1rem;
   line-height: 1.5;
   margin-bottom: 1rem;
   margin-top: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #e0e0e0;
- }
 
- div.glossary-text-4f5ai > p {
+  p {
     margin-bottom: 1rem;
   }
 
-  div.glossary-text-4f5ai > ul, div.glossary-text-4f5ai > li {
+  ul,
+  li {
     margin-top: 1rem;
     margin-bottom: 1rem;
     margin-left: 2rem;
@@ -52,6 +44,7 @@
       margin-left: 2rem;
     }
   }
+}
 </style>
 
 <script setup>
@@ -80,7 +73,7 @@ const handleClicks = (event) => {
 
   if (target && target.matches(".glossary-text-4f5ai a") && target.href) {
     const { altKey, ctrlKey, metaKey, shiftKey, button, defaultPrevented } = event
-    
+
     if (metaKey || altKey || ctrlKey || shiftKey) return
     if (defaultPrevented) return
     if (button !== undefined && button !== 0) return
