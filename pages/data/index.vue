@@ -20,9 +20,8 @@
             <v-btn class="ml-2" color="secondary"
               href="https://ed-public-download.scorecard.network/downloads/College_Scorecard_Raw_Data_06102024.zip">Download
               (.zip, 390 MB)
-              <v-icon right dark size="x-small" class="ml-2">
-                fas fa-download
-              </v-icon></v-btn>
+              <v-icon right dark size="x-small" class="ml-2" icon="fa:fas fa-download"/>
+              </v-btn>
           </h2>
 
           <ul class="font-weight-regular">
@@ -53,9 +52,8 @@
               <v-btn size="small" color="secondary" class="ml-0 ml-sm-2"
                 href="https://ed-public-download.scorecard.network/downloads/Most-Recent-Cohorts-Institution_06102024.zip">Download
                 (.zip, 22 MB)
-                <v-icon right dark size="x-small" class="ml-2">
-                  fas fa-download
-                </v-icon></v-btn>
+                <v-icon right dark size="x-small" class="ml-2" icon="fa:fas fa-download"/>
+              </v-btn>
             </v-col><v-col>
               <h4 class="my-5 d-inline-block">
                 Most Recent Data by Field of Study
@@ -63,9 +61,7 @@
               <v-btn size="small" class="ml-0 ml-sm-2" color="secondary"
                 href=" https://ed-public-download.scorecard.network/downloads/Most-Recent-Cohorts-Field-of-Study_06102024.zip">Download
                 (.zip, 13 MB)
-                <v-icon right dark size="x-small" class="ml-2">
-                  fas fa-download
-                </v-icon></v-btn>
+                <v-icon right dark size="x-small" class="ml-2" icon="fa:fas fa-download"/></v-btn>
             </v-col></v-row>
           <hr />
           <p class="mt-8">

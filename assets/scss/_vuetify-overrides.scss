@@ -93,14 +93,14 @@ html {
     line-height: 32px !important;
   }
 
-  .v-expansion-panel-header {
+  .v-expansion-panel-title {
     font-weight: 500;
     font-family: $header-font-family !important;
     font-size: 18px;
     line-height: 140%;
   }
-  .v-expansion-panel-content {
-    .v-expansion-panel-header {
+  .v-expansion-panel-text {
+    .v-expansion-panel-title {
       font-size: 18px;
       font-weight: normal;
       line-height: 140%;

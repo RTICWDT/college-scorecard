@@ -234,9 +234,8 @@
                 size="x-small"
                 color="black"
                 class="pl-2 pb-1 align-self-end top-3"
-              >
-                fas fa-arrow-down
-              </v-icon>
+                icon="fa:fas fa-arrow-down"
+              />
             </v-btn>
           </v-col>
           <v-col cols="0" md="1" />
@@ -260,9 +259,8 @@
                 x-small
                 color="black"
                 class="pl-2 pb-1 align-self-end top-3"
-              >
-                fas fa-arrow-down
-              </v-icon>
+                icon="fa:fas fa-arrow-down"
+              />
             </v-btn>
           </v-col>
           <v-col cols="0" md="1" />
@@ -280,9 +278,8 @@
                 x-small
                 color="black"
                 class="pl-2 pb-1 align-self-end top-3"
-              >
-                fas fa-arrow-down
-              </v-icon>
+                icon="fa:fas fa-arrow-down"
+              />
             </v-btn>
           </v-col>
           <v-col cols="0" md="1" />
@@ -297,9 +294,8 @@
                 x-small
                 color="black"
                 class="pl-2 pb-1 align-self-end top-3"
-              >
-                fas fa-arrow-down
-              </v-icon>
+                icon="fa:fas fa-arrow-down"
+              />
             </v-btn>
           </v-col>
         </v-row>
@@ -350,9 +346,8 @@
                     x-small
                     color="white"
                     class="pl-2 pb-1 align-self-end top-3"
-                  >
-                    fas fa-download
-                  </v-icon>
+                    icon="fa:fas fa-download"
+                  />
                 </v-btn>
               </div>
             </div>
@@ -619,9 +614,8 @@
                       x-small
                       color="white"
                       class="pl-2 pb-1 align-self-end top-3"
-                    >
-                      fas fa-download
-                    </v-icon>
+                      icon="fa:fas fa-download"
+                    />
                   </v-btn>
                 </div>
               </div>
