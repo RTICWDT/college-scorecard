@@ -21,19 +21,20 @@
 
           <!-- Medium and Larger Tabs and Search Content -->
            <!--  -->
-          <v-col cols="12" class="d-none d-sm-block pb-0">
+          <v-col id="homeIndexSearch" cols="12" class="d-none d-sm-block pb-0">
             <v-tabs
               bg-color="transparent"
               color="white"
               v-model="desktopTabs"
-              @update:modelValue="colorSlider"
+              @update:model-value="colorSlider"
+              :slider-color="sliderColor"
             >
               <v-tab @click="GATrackEvent('Home Tab', 'Tab', 'Search Schools')">Search Schools</v-tab>
               <v-tab @click="GATrackEvent('Home Tab', 'Tab', 'Search Fields of Study')">Search Fields of Study</v-tab>
               <v-tab @click="GATrackEvent('Home Tab', 'Tab', 'Show Me Options')">Show Me Options</v-tab>
             </v-tabs>
 
-            <v-tabs-window v-model="desktopTabs">
+            <v-tabs-window v-model="desktopTabs" class="home-search-wrapper">
               <v-tabs-window-item>
                 <v-card class="pa-5" flat>
                   <!-- <name-autocomplete @school-name-selected="handleSchoolNameSelected" :searchEmptyName="false" /> -->
@@ -236,18 +237,53 @@
   </div>
 </template>
 
+<style lang="scss">
+#homeIndexSearch {
+  .v-tabs-window .v-card {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+
+  .v-tab {
+    font-family: variables.$header-font-family;
+    font-size: 1rem;
+    color: white;
+    letter-spacing: normal;
+    text-transform: uppercase;
+  }
+
+  .v-tab.v-tab--selected {
+    font-weight: 700;
+  }
+
+  .home-mobile-search-title {
+    font-size: 16px;
+  }
+
+  .tab-border-bottom {
+    height: 8px;
+  }
+
+  .v-tab__slider {
+    height: 8px !important;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  .v-avatar img {
+    border-radius: 6px;
+  }
+}
+</style>
+
 <style lang="scss" scoped>
 h1 {
   font-size: 50px;
   text-transform: none;
 }
 
-.v-card {
-  height: 100%;
-}
-
-.v-tabs .v-card {
-  border-top-left-radius: 0px;
+h2 span {
+  font-weight: 600 !important;
 }
 
 .home-splash {
@@ -259,33 +295,8 @@ h1 {
   background-color: variables.$bg-gray;
 }
 
-.v-tab {
-  font-family: variables.$header-font-family;
-  font-size: 1rem;
-  color: #bbbbbb !important;
-  letter-spacing: normal;
-  font-weight: 700;
-  -webkit-font-smoothing: subpixel-antialiased;
-}
-
-.v-tab.v-tab--active {
-  color: #ffffff !important;
-}
-
-.home-mobile-search-title {
-  font-size: 16px;
-}
-
-.v-tabs-slider {
-  border-radius: 5px 5px 0 0;
-}
-
-.v-avatar img {
-  border-radius: 6px;
-}
-
-h2 span {
-  font-weight: 600 !important;
+.home-search-wrapper {
+  box-shadow: 0 10px 16px rgba(0,0,0,.1019607843)!important;
 }
 
 fieldset {
@@ -328,6 +339,7 @@ const disableSearch = computed(() => input.value.cip4 === null || input.value.ci
 
 // Methods
 const colorSlider = (num) => {
+  console.log(num)
   switch (num) {
     case 0:
       sliderColor.value = "#7BD88C"
