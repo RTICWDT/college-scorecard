@@ -54,7 +54,7 @@
   }
 
   @include lg {
-    top: 105px;
+    top: 93px;
     h1 {
       font-size: 50px;
     }

@@ -21,26 +21,20 @@
 
           <!-- Medium and Larger Tabs and Search Content -->
            <!--  -->
-          <v-col cols="12" class="d-none d-sm-flex pb-0">
+          <v-col cols="12" class="d-none d-sm-block pb-0">
             <v-tabs
               bg-color="transparent"
               color="white"
               v-model="desktopTabs"
               @update:modelValue="colorSlider"
             >
-              <v-tab @click="GATrackEvent('Home Tab', 'Tab', 'Search Schools')">
-                Search Schools
-              </v-tab>
+              <v-tab @click="GATrackEvent('Home Tab', 'Tab', 'Search Schools')">Search Schools</v-tab>
+              <v-tab @click="GATrackEvent('Home Tab', 'Tab', 'Search Fields of Study')">Search Fields of Study</v-tab>
+              <v-tab @click="GATrackEvent('Home Tab', 'Tab', 'Show Me Options')">Show Me Options</v-tab>
+            </v-tabs>
 
-              <v-tab @click="GATrackEvent('Home Tab', 'Tab', 'Search Fields of Study')">
-                Search Fields of Study
-              </v-tab>
-
-              <v-tab @click="GATrackEvent('Home Tab', 'Tab', 'Show Me Options')">
-                Show Me Options
-              </v-tab>
-
-              <v-tab>
+            <v-tabs-window v-model="desktopTabs">
+              <v-tabs-window-item>
                 <v-card class="pa-5" flat>
                   <!-- <name-autocomplete @school-name-selected="handleSchoolNameSelected" :searchEmptyName="false" /> -->
 
@@ -55,9 +49,9 @@
                     <!-- <search-form @search-query="directToSearch" :hideLocation="false" /> -->
                   </div>
                 </v-card>
-              </v-tab>
+              </v-tabs-window-item>
 
-              <v-tab>
+              <v-tabs-window-item>
                 <v-card class="pa-5 homepage-search-container" flat>
                   <v-row>
                     <v-col cols="12" sm="5">
@@ -90,83 +84,21 @@
                     </v-col>
                   </v-row>
                 </v-card>
-              </v-tab>
+              </v-tabs-window-item>
 
-              <v-tab>
+              <v-tabs-window-item>
                 <v-card style="min-height: 300px" class="px-10 py-5" flat>
                   <!-- <canned-search-container @canned-search-submit="directToSearch"></canned-search-container> -->
                 </v-card>
-              </v-tab>
-            </v-tabs>
+              </v-tabs-window-item>
+            </v-tabs-window>
           </v-col>
 
 
           <!--  -->
           <!-- Mobile Expansion Panels and Search -->
           <!--  -->
-          <v-col cols="12" class="pa-5 d-block d-sm-none">
-            <v-expansion-panels class="mb-2" v-model="mobilePanels">
-              <!-- Mobile Institution Search -->
-              <v-expansion-panel>
-                <v-expansion-panel-header>
-                  <span class="home-mobile-search-title">Search Schools</span>
-                </v-expansion-panel-header>
 
-                <v-expansion-panel-content>
-                  <!-- <name-autocomplete @school-name-selected="handleSchoolNameSelected" :searchEmptyName="false" v-if="smAndDown" /> -->
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-expansion-panels>
-
-            <!-- Mobile FoS Search-->
-            <v-expansion-panels class="mb-2">
-              <v-expansion-panel>
-                <v-expansion-panel-header>
-                  <span class="home-mobile-search-title">Search Fields of Study</span>
-                </v-expansion-panel-header>
-
-                <v-expansion-panel-content>
-                  <v-row>
-                    <v-col cols="12" sm="5">
-                      <label class="d-block mb-2" for="fosSearch">Search Fields of Study</label>
-                      <!-- <div></div> -->
-                      <!-- <field-of-study-search @field-of-study-selected="handleFieldOfStudySelected" :selected="input.cip4" id="fosSearch" /> -->
-                    </v-col>
-                    <v-col cols="12" sm="4">
-                      <label class="d-block  mb-2" for="fosDegree">Select Degree Type</label>
-                      <v-select :items="fosDegrees" item-text="label" item-value="value" outlined
-                        placeholder="Select one" v-model="input.cip4_degree" hide-details id="fosDegree"
-                        color="fos-search-color">
-                      </v-select>
-                    </v-col>
-                    <v-col col="12" sm="3" class="">
-                      <div class="d-none d-sm-block" style="height: 32px">
-                        &nbsp;
-                      </div>
-                      <v-btn @click="handleFormSubmit" width="100%" x-large color="secondary" :disabled="disableSearch">
-                        Search
-                        <v-icon>mdi-menu-right</v-icon>
-                      </v-btn>
-                    </v-col>
-                  </v-row>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-expansion-panels>
-
-            <!-- Mobile Show me Options-->
-            <v-expansion-panels class="mb-2">
-              <v-expansion-panel>
-                <v-expansion-panel-header>
-                  <span class="home-mobile-search-title">Show Me Options</span>
-                </v-expansion-panel-header>
-
-                <v-expansion-panel-content>
-                  <div></div>
-                  <!-- <canned-search-container @canned-search-submit="directToSearch" class="mx-5"></canned-search-container> -->
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-expansion-panels>
-          </v-col>
         </v-row>
       </v-container>
     </div>
