@@ -92,9 +92,9 @@
                 href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
                 @click="transitionOutboundLink($event)"
                 target="_blank"
-                >StackExchange<v-icon x-small class="pl-1" color="#007000">
-                  fas fa-external-link-alt
-                </v-icon>
+              >
+                StackExchange
+                <v-icon size="x-small" class="ml-2 mr-1" color="#007000" icon="fa:fas fa-external-link-alt"/>
               </a>
               or email the help desk at
               <a href="mailto:scorecarddata@rti.org">scorecarddata@rti.org</a>.
