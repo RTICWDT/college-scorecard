@@ -24,12 +24,14 @@ export function useSiteData() {
     }
   })
 
-  const RELIGIOUS_AFFILIATIONS_BY_NUMBER = computed(() => 
+  console.log(site.value.data.religious_affiliations)
+
+  const RELIGIOUS_AFFILIATIONS_BY_NUMBER = computed(() => {
     site.value.data.religious_affiliations.reduce((object, value) => {
-      object[value.value] = value.label
+      object[value.value] = value.title
       return object
     }, {})
-  )
+})
 
   const CIP2 = computed(() => 
     site.value.data.cip_2_digit.reduce((object, value) => {

@@ -362,6 +362,7 @@ const colorSlider = (num) => {
 }
 
 const directToSearch = (params) => {
+  debugger
   // Generate URL based on params
   const qs = new URLSearchParams(params).toString()
   const url = "/search/?" + qs.replace(/&{2,}/g, "&").replace(/%3A/g, ":")

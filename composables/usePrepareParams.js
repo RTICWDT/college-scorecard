@@ -257,7 +257,7 @@ export const usePrepareParams = () => {
   const prepareParams = (params) => {
     let query = Object.assign({}, params);
 
-    console.log(query);
+    // console.log(query);
 
     // only get open schools
     query[fields.OPERATING] = 1;

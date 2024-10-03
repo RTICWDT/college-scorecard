@@ -2,19 +2,22 @@
   <div class="icon-placement">
     <v-btn
       @click.stop.prevent="showDialog = true"
-      icon
-      size="small"
-      class="align-start ml-n2"
+      icon="fa:fas fa-info-circle"
+      size="x-small"
       aria-label="More Information"
+      color="white"
     >
-      <v-icon size="x-small" :color="color" dark class="tooltip-icon">fas fa-info-circle</v-icon>
       <span class="sr-only">More Information</span>
+      <v-icon icon="fa:fas fa-info-circle"></v-icon>
     </v-btn>
+
     <v-dialog max-width="500px" v-model="showDialog">
-      <v-card>
-        <v-btn @click="showDialog = false" alt="Close More Information tooltip" aria-required="true" icon class="float-right mt-3 mr-3">
-          <v-icon>fas fa-times-circle</v-icon>
-        </v-btn>
+      <v-card class="px-3 py-3">
+        <div class="d-flex flex-row-reverse">
+          <v-btn @click="showDialog = false" alt="Close More Information tooltip" aria-required="true" icon="fa:fas fa-times-circle">
+            <v-icon icon="fa:fas fa-times-circle"></v-icon>
+          </v-btn>
+        </div>
         <v-card-title>{{ title }}</v-card-title>
         <v-card-text class="pb-5">
           <div class="tooltip-text" v-html="content" @click="handleClicks"></div>
@@ -27,13 +30,14 @@
           </p>
           <div v-if="info" v-html="info"></div>
           <p class="mt-3" v-if="hasGlossary">
-            <NuxtLink
-              :to="`/data/glossary/#${props.definition}`"
+            <v-btn
               size="small"
               color="secondary"
               class="px-4"
-              target="_blank"
-            >More Information</NuxtLink>
+              @click="navigateToGlossary"
+            >
+              More Information
+            </v-btn>
           </p>
         </v-card-text>
       </v-card>
@@ -98,6 +102,13 @@ const info = computed(() => entry.value.info && props.showInfo ? entry.value.inf
 const hasGlossary = computed(() => !!entry.value.glossary)
 const showBranch = computed(() => entry.value.branch && props.isBranch)
 const showCompare = computed(() => entry.value.branch && props.isCompare)
+
+const router = useRouter()
+
+const navigateToGlossary = () => {
+  const url = `/data/glossary/#${props.definition}`
+  router.push(url)
+}
 
 function handleClicks(event) {
   let { target } = event

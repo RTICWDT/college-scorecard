@@ -361,16 +361,15 @@
             v-model="input.serving"
             id="search-form-serving"
             :items="cleanSpecializedMission"
-            item-text="value"
+            item-title="value"
             item-value="key"
-            placeholder="Select one..."
-            class="py-0 my-0"
+            label="Select one"
+            class="py-0 pt-4 my-0"
             color="secondary"
             clearable
+            density="compact"
             aria-labelledby="specialized-mission-label"
-            dense
-            outlined
-            style="z-index: 200"
+            variant="outlined"
           ></v-select> </v-expansion-panel-text></v-expansion-panel
       ><v-expansion-panel
         ><v-expansion-panel-title
@@ -382,22 +381,22 @@
             :items="site.data.religious_affiliations"
             item-text="label"
             item-value="value"
-            placeholder="Select one..."
-            class="py-0 my-0"
+            label="Select one"
+            class="py-0 pt-4 my-0"
             color="secondary"
             clearable
             aria-labelledby="religions-affiliation-label"
-            dense
-            outlined
+            variant="outlined"
+            density="compact"
             style="z-index: 200"
           ></v-select>
         </v-expansion-panel-text> </v-expansion-panel
       ><v-expansion-panel>
         <v-expansion-panel-title>
-          WIOA Programs&nbsp;<tooltip
-            definition="wioa-participants"
-          /> </v-expansion-panel-title
-        ><v-expansion-panel-text>
+          WIOA Programs&nbsp;
+          <Tooltip definition="wioa-participants" /> 
+        </v-expansion-panel-title>
+        <v-expansion-panel-text>
           <v-checkbox
             id="search-form-dolflag-2"
             class="search-form-dolflag-cb my-0 py-0"
@@ -410,7 +409,7 @@
       ></v-expansion-panel>
     </v-expansion-panels>
     <div id="search-submit-container" class="py-5" v-show="!autoSubmit">
-      <v-btn color="secondary" large @click="$emit('search-query', cleanInput)"
+      <v-btn color="secondary" large @click="performSearch"
         >Find Schools</v-btn
       >
     </div>
@@ -419,16 +418,17 @@
       class="sr-only"
       color="secondary"
       large
-      @click="$emit('search-query', cleanInput)"
-      >Find Schools</v-btn
-    >
+      @click="performSearch"
+      >
+      Find Schools
+    </v-btn>
   </v-form>
 </template>
 
 <script setup>
-import querystring from "querystring"
-const { formMappings } = useConstants()
 const { location } = useLocationCheck()
+const emitSearch = defineEmits(["search-query"])
+const { site } = useSiteData()
 
 const props = defineProps({
   urlParsedParams: {
@@ -465,8 +465,8 @@ const formDefault = {
   size: [],
   name: "",
   control: [], // Type
-  serving: "",
-  religious: "",
+  serving: null,
+  religious: null,
   completion_rate: null,
   avg_net_price: null,
   urban: [],
@@ -483,7 +483,7 @@ const formDefault = {
   dolflag: null,
 }
 
-const input = reactive(formDefault)
+const input = reactive(useCloneDeep(formDefault))
 
 const utility = reactive({
   rules: {
@@ -496,7 +496,7 @@ const utility = reactive({
       /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(value) ||
       "Must be ZIP code format",
   },
-  formDefault: formDefault,
+  formDefault: useCloneDeep(formDefault),
   initialized: false,
   showMore: false,
   enableDefault: {},
@@ -511,17 +511,21 @@ const utility = reactive({
   location: null,
 })
 
-const fosDegrees = computed(() => {
-  return formMappings.fosDegrees
+const cleanSpecializedMission = computed(() => {
+  return useMap(site.value.data.special_designations, (value, title) => {
+    return {
+      title,
+      value,
+    }
+  })
 })
 
 const cleanInput = computed(() => {
-  let defaultValues = useCloneDeep(utility.formDefault)
   let groomedInput = usePickBy(input, (value, key) => {
-    if (!useHas(defaultValues, key)) {
+    if (!useHas(formDefault, key)) {
       return false
     }
-    if (!isEqual(value, defaultValues[key])) {
+    if (!isEqual(value, formDefault[key])) {
       return value
     }
   })
@@ -566,27 +570,9 @@ const cleanInput = computed(() => {
   return groomedInput
 })
 
-const searchURL = computed(() => {
-  let qs = querystring.stringify(cleaninput)
-  qs = "?" + qs
-    .replace(/^&+/, "")
-    .replace(/&{2,}/g, "&")
-    .replace(/%3A/g, ":")
-  return qs
-})
-
-const cleanSpecializedMission = computed(() => {
-  return useMap(site.value.data.special_designations, (value, key) => {
-    return {
-      key: key,
-      value: value,
-    }
-  })
-})
-
-const locationButtonColor = computed(() => {
-  return location.latLon ? "primary" : ""
-})
+const performSearch = () => {
+  emitSearch("search-query", cleanInput.value)
+}
 
 const mapInputFromProp = () => {
   // Reset form to default, Helps with processing canned search items.
@@ -649,13 +635,9 @@ const mapInputFromProp = () => {
   }
 }
 
-const processChangeEvent = () => {
-      // Implementation goes here
-    }
-
 const resetFormDefault = () => {
   // TODO - Create reset value method, pass desired fields to method, return default values from object.
-  Object.assign(input, formDefault)
+  Object.assign(input, useCloneDeep(formDefault))
   utility.enable = useCloneDeep(utility.formDefault)
   location.latLon = null
   location.error = null
@@ -663,7 +645,7 @@ const resetFormDefault = () => {
 }
 
 const handleLocationSelection = (params) => {
-  input = { ...input, ...params }
+  Object.assign(input, { ...input, ...params })
   input.page = 1
 }
 
@@ -674,11 +656,11 @@ mapInputFromProp()
 
 const debounceEmitSearchQuery = useDebounce(() => {
   // Send new param object, reset page
-  emit("search-query", { ...cleaninput, page: 0 })
+  emit("search-query", { ...cleaninput.value, page: 0 })
 }, 1000)
 
 if (props.autoSubmit) {
-  emit("search-query", { ...cleaninput, page: 0 })
+  emit("search-query", { ...cleaninput.value, page: 0 })
 }
 
 onMounted(() => {

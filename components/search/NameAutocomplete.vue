@@ -69,7 +69,6 @@ onMounted(() => {
   search.value = props.initialSchool
   
   nuxtApp.hook('search-form-reset', () => {
-    console.log("HOOK SEARCH FORM RESET")
     search.value = null
   })
 })
