@@ -37,7 +37,7 @@
             <v-tabs-window v-model="desktopTabs" class="home-search-wrapper">
               <v-tabs-window-item>
                 <v-card class="pa-5" flat>
-                  <!-- <name-autocomplete @school-name-selected="handleSchoolNameSelected" :searchEmptyName="false" /> -->
+                  <SearchNameAutocomplete @school-name-selected="handleSchoolNameSelected" :searchEmptyName="false" />
 
                   <div class="mt-5 text-right">
                     <v-btn variant="text" size="small" @click="toggleCustomSearch = !toggleCustomSearch" class="text-uppercase">
@@ -120,20 +120,27 @@
               <hr />
               <p>
                 Search for apprenticeship jobs and programs on
-                <a class="homeCallout-indent" href="https://www.apprenticeship.gov/apprenticeship-finder"
-                  target="_blank" @click="transitionOutboundLink($event)">
-                  apprenticeship.gov<v-icon x-small class="pl-1" color="#007000">
-                    fas fa-external-link-alt
-                  </v-icon> </a>.
+                <a
+                  class="homeCallout-indent"
+                  href="https://www.apprenticeship.gov/apprenticeship-finder"
+                  target="_blank"
+                  @click="transitionOutboundLink($event)"
+                >
+                  apprenticeship.gov
+                  <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
+                </a>
               </p>
               <hr />
               <p>
                 Use the
-                <a class="homeCallout-indent" href="https://www.mynextmove.org" target="_blank"
-                  @click="transitionOutboundLink($event)">
-                  MyNextMove.org<v-icon x-small class="pl-1" color="#007000">
-                    fas fa-external-link-alt
-                  </v-icon>
+                <a 
+                  class="homeCallout-indent"
+                  href="https://www.mynextmove.org"
+                  target="_blank"
+                  @click="transitionOutboundLink($event)"
+                >
+                  MyNextMove.org
+                  <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
                 </a>
                 tool for career exploration and job analysis.
               </p>
@@ -143,27 +150,26 @@
                 rates, and more on
                 <a class="homeCallout-indent" href="https://trainingproviderresults.gov" target="_blank"
                   @click="transitionOutboundLink($event)">
-                  TrainingProviderResults.gov<v-icon x-small class="pl-1" color="#007000">
-                    fas fa-external-link-alt
-                  </v-icon> </a>.
+                  TrainingProviderResults.gov
+                  <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
+                </a>.
               </p>
               <hr />
               <p>
                 Visit
                 <a class="homeCallout-indent" href="https://careeronestop.org" target="_blank"
                   @click="transitionOutboundLink($event)">
-                  CareerOneStop.org<v-icon x-small class="pl-1" color="#007000">
-                    fas fa-external-link-alt
-                  </v-icon> </a>, your source for career exploration training and jobs.
+                  CareerOneStop.org
+                  <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
+                </a>, your source for career exploration training and jobs.
               </p>
               <hr />
               <p>
                 Explore the
                 <a class="homeCallout-indent" href="https://www.bls.gov/ooh/" target="_blank"
                   @click="transitionOutboundLink($event)">
-                  Occupational Outlook Handbook (OOH)<v-icon x-small class="pl-1" color="#007000">
-                    fas fa-external-link-alt
-                  </v-icon>
+                  Occupational Outlook Handbook (OOH)
+                  <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
                 </a>
                 for detailed information about over 300 occupational profiles.
               </p>
@@ -185,9 +191,8 @@
                 available at
 
                 <a href="https://studentaid.gov" target="_blank" @click="transitionOutboundLink($event)">
-                  StudentAid.gov<v-icon x-small class="pl-1" color="#007000">
-                    fas fa-external-link-alt
-                  </v-icon>
+                  StudentAid.gov 
+                  <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
                 </a>
               </p>
 
@@ -197,19 +202,23 @@
                 can use
 
                 <a href="https://studentaid.gov/aid-estimator/" target="_blank" @click="transitionOutboundLink($)">
-                  Federal Student Aid Estimator<v-icon x-small class="pl-1" color="#007000">
-                    fas fa-external-link-alt
-                  </v-icon>
+                  Federal Student Aid aid-estimator
+                  <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
                 </a>
 
                 to see how much aid may be available to you.
               </p>
 
               <p class="my-10">
-                <v-btn color="secondary" href="https://studentaid.gov/h/apply-for-aid/fafsa" target="_blank" x-large
-                  @click="transitionOutboundLink($event)">Start Your FAFSA&reg; Application<v-icon x-small class="pl-1">
-                    fas fa-external-link-alt
-                  </v-icon>
+                <v-btn 
+                  color="secondary" 
+                  href="https://studentaid.gov/h/apply-for-aid/fafsa" 
+                  target="_blank" 
+                  size="large"
+                  @click="transitionOutboundLink($event)"
+                >
+                  Start Your FAFSA&reg; Application
+                  <v-icon size="normal" class="ml-1" color="#ffffff">mdi-open-in-new</v-icon>
                 </v-btn>
               </p>
 
@@ -221,9 +230,8 @@
 
                 <a href="https://www.vets.gov/gi-bill-comparison-tool" target="_blank"
                   @click="transitionOutboundLink($event)">
-                  GI Bill&reg; comparison tool<v-icon x-small class="pl-1" color="#007000">
-                    fas fa-external-link-alt
-                  </v-icon>
+                  GI Bill&reg; comparison tool
+                  <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
                 </a>
 
                 to learn about education programs and compare benefits by
@@ -306,7 +314,7 @@ fieldset {
 
 <script setup>
 import { useDisplay } from "vuetify";
-import { formMappings } from "~/utils/constants.js"
+const { formMappings } = useConstants()
 const { GATrackEvent, transitionOutboundLink, } = useAnalytics()
 const { smAndDown } = useDisplay()
 

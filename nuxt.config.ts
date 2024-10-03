@@ -7,8 +7,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   runtimeConfig: {
-    apiKey: process.env.GRIDSOME_API_KEY,
     public: {
+      apiKey: process.env.GRIDSOME_API_KEY,
       apiUrl: process.env.GRIDSOME_API_URL,
       recaptchaKey: process.env.GRIDSOME_RECAPTCHA_KEY,
       apiSignupKey: process.env.GRIDSOME_API_SIGNUP_KEY
@@ -26,6 +26,7 @@ export default defineNuxtConfig({
       })
     },
     '@pinia/nuxt',
+    'nuxt-lodash',
   ],
 
   css: [

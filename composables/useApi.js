@@ -11,7 +11,7 @@ export const useApi = () => {
     try {
       const response = await apiInstance.get(uri, {
         params: {
-          api_key: config.apiKey,
+          api_key: config.public.apiKey,
           ...params
         }
       });
