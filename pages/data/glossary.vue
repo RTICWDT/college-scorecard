@@ -48,8 +48,10 @@ div.glossary-text-4f5ai {
 </style>
 
 <script setup>
+const { transitionOutboundLink } = useAnalytics()
 import Glossary from "~/assets/data/glossary.json"
 const glossary = ref([])
+
 
 // Initialize glossary data
 for (const key in Glossary) {
@@ -61,10 +63,6 @@ for (const key in Glossary) {
 
 // Sort glossary by title
 glossary.value.sort((a, b) => a.title.localeCompare(b.title))
-
-for (const entry of glossary.value) {
-  console.log(entry.glossary)
-}
 
 const handleClicks = (event) => {
   let { target } = event
@@ -78,14 +76,12 @@ const handleClicks = (event) => {
     if (defaultPrevented) return
     if (button !== undefined && button !== 0) return
 
-    // Assuming transitionOutboundLink is defined elsewhere in your app
     transitionOutboundLink(event)
   }
 }
 
 onMounted(() => {
   if (window.location.hash) {
-    // You may need to implement a custom scrollTo function or use a library
     scrollTo(window.location.hash, { offset: 30 })
   }
 })
