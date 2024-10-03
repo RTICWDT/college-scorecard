@@ -47,7 +47,7 @@
                   </div>
 
                   <div v-if="toggleCustomSearch">
-                    <!-- <search-form @search-query="directToSearch" :hideLocation="false" /> -->
+                    <SearchForm @search-query="directToSearch" :hideLocation="false" />
                   </div>
                 </v-card>
               </v-tabs-window-item>

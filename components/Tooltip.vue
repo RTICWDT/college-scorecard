@@ -1,0 +1,136 @@
+<template>
+  <div class="icon-placement">
+    <v-btn
+      @click.stop.prevent="showDialog = true"
+      icon
+      size="small"
+      class="align-start ml-n2"
+      aria-label="More Information"
+    >
+      <v-icon size="x-small" :color="color" dark class="tooltip-icon">fas fa-info-circle</v-icon>
+      <span class="sr-only">More Information</span>
+    </v-btn>
+    <v-dialog max-width="500px" v-model="showDialog">
+      <v-card>
+        <v-btn @click="showDialog = false" alt="Close More Information tooltip" aria-required="true" icon class="float-right mt-3 mr-3">
+          <v-icon>fas fa-times-circle</v-icon>
+        </v-btn>
+        <v-card-title>{{ title }}</v-card-title>
+        <v-card-text class="pb-5">
+          <div class="tooltip-text" v-html="content" @click="handleClicks"></div>
+          <p v-if="showBranch">
+            This information is based on all locations of this school.
+          </p>
+          <p v-if="showCompare">
+            For schools with multiple locations, this information is based on
+            all of their locations.
+          </p>
+          <div v-if="info" v-html="info"></div>
+          <p class="mt-3" v-if="hasGlossary">
+            <NuxtLink
+              :to="`/data/glossary/#${props.definition}`"
+              size="small"
+              color="secondary"
+              class="px-4"
+              target="_blank"
+            >More Information</NuxtLink>
+          </p>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+  </div>
+</template>
+
+<script setup>
+const props = defineProps({
+  definition: String,
+  color: {
+    type: String,
+    default: "darkgrey",
+  },
+  version: {
+    type: String,
+    default: "default",
+  },
+  isBranch: {
+    type: Boolean,
+    default: false,
+  },
+  isCompare: {
+    type: Boolean,
+    default: false,
+  },
+  limitedFoS: {
+    type: String,
+    default: null,
+  },
+  showInfo: {
+    type: Boolean,
+    default: true,
+  },
+  isNegative: {
+    type: Boolean,
+    default: false,
+  },
+  isPell: {
+    type: Boolean,
+    default: false,
+  },
+})
+
+const { site } = useSiteData()
+const { transitionOutboundLink } = useAnalytics()
+
+const showDialog = ref(false)
+
+const glossary = computed(() => site.value.data.glossary)
+const entry = computed(() => glossary.value[props.definition])
+const title = computed(() => entry.value.title)
+const content = computed(() => {
+  if (props.isNegative && entry.value.negative) return entry.value.negative
+  if (props.isCompare && entry.value.compare) return entry.value.compare
+  if (props.isGraduate && entry.value.graduate) return entry.value.graduate
+  if (props.isPell && entry.value.pell) return entry.value.pell
+  if (props.isPell) return entry.value[props.version + "-pell"]
+  return entry.value[props.version]
+})
+const info = computed(() => entry.value.info && props.showInfo ? entry.value.info : false)
+const hasGlossary = computed(() => !!entry.value.glossary)
+const showBranch = computed(() => entry.value.branch && props.isBranch)
+const showCompare = computed(() => entry.value.branch && props.isCompare)
+
+function handleClicks(event) {
+  let { target } = event
+  while (target && target.tagName !== "A") target = target.parentNode
+  if (target && target.matches(".tooltip-text p a") && target.href) {
+    const { altKey, ctrlKey, metaKey, shiftKey, button, defaultPrevented } = event
+    if (metaKey || altKey || ctrlKey || shiftKey) return
+    if (defaultPrevented) return
+    if (button !== undefined && button !== 0) return
+    transitionOutboundLink(event)
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.csTooltip {
+  font-size: 1rem;
+}
+
+.v-card__title {
+  word-break: normal;
+  word-wrap: break-word;
+}
+
+.tool-tip-dialog-title {
+  word-break: normal;
+  word-wrap: break-word;
+  display: inline-block;
+  width: 450px;
+}
+
+.icon-placement {
+  width: 30px;
+  display: inline;
+}
+</style>

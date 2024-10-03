@@ -36,6 +36,7 @@ const alias = {
         query[fields.ID + '__range'] = '..999999';f
     }
   },
+
   // special designations: women/men only, minority groups
   serving: function(query, value, key) {
     var field = [fields.MINORITY_SERVING, value].join('.');
@@ -251,22 +252,12 @@ function empty(value) {
       || value === undefined
       || (Array.isArray(value) && empty(value[0]));
 }
-
-// TODO - Remove, Are we just copying objects?
-function dataExtend(obj, a, b) {
-  for (var i = 1, len = arguments.length; i < len; i++) {
-    var arg = arguments[i];
-    if (typeof arg === 'object') {
-      for (var key in arg) obj[key] = arg[key];
-    }
-  }
-  return obj;
-};
-
 export const usePrepareParams = () => {
 
   const prepareParams = (params) => {
     let query = Object.assign({}, params);
+
+    console.log(query);
 
     // only get open schools
     query[fields.OPERATING] = 1;

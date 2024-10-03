@@ -11,12 +11,11 @@
       item-title="school.name"
       autocomplete="off"
       hide-details
-      color="institution-search-color"
+      color="#007000"
       variant="outlined"
       prepend-inner-icon="fa:fas fa-search"
       hide-no-data
       @update:search="runSearch"
-      @update:model-value="goToSchool"
       aria-label="Name Search"
       aria-autocomplete="list"
       aria-haspopup="listbox"
@@ -24,11 +23,9 @@
       class="pt-0 mt-0"
     >
       <template v-slot:item="{ item, props }">
-        <v-list-item v-bind="props">
+        <v-list-item v-bind="props" @click="goToSchool">
           <v-list-item-title>
-            <span class="name-complete-school-name">
-              {{ item.raw["school.name"] }}
-            </span>
+            <span class="name-complete-school-name" />
           </v-list-item-title>
         </v-list-item>
       </template>
@@ -78,22 +75,17 @@ onMounted(() => {
 })
 
 const goToSchool = () => {
-  // items.value = []
-  // if (this.search.value) {
-  //   // emit('school-name-selected', search.value)
-  //   console.log("EMIT SCHOOL NAME SELECTED: " + search.value)
-  // } else if (this.searchEmptyName) {
-  //   // emit('school-name-selected', '')
-  //   console.log("EMIT SCHOOL NAME SELECTED: ")
-  // }
+  if (search.value) {
+    emit('school-name-selected', search.value)
+  }
 }
 
 const runSearch = useDebounce((newVal) => performSearch(newVal), 300);
 
 const performSearch = async (newVal) => {
-    if (!newVal) return;
+  if (!newVal) return;
 
-  isLoading.value = true;
+  isLoading.value = '#77b713';
   const query = {
     fields: [fields.ID, fields.NAME, fields.ALIAS, fields.SEARCH].join(","),
     per_page: 20,
