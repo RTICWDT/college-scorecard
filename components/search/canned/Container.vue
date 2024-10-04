@@ -4,10 +4,9 @@
     role="group"
     class="group_checkbox"
     aria-checked="mixed"
-    aria-labelledby="showOptions"
     aria-controls="canned-search-near-me canned-search-most-get-in canned-search-most-grad canned-search-degree-c canned-search-degree-a canned-search-degree-b"
   >
-    <p id="showOptions" class="my-5">
+    <p class="mb-5 mt-1">
       Select one or more options to create a list of schools that fit your needs.
     </p>
     <v-row>
