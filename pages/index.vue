@@ -55,13 +55,17 @@
 
               <v-tabs-window-item>
                 <v-card class="pa-5 homepage-search-container" flat>
+                  <v-row class="pb-0">
+                    <v-col class="pb-0" cols="12" sm="5"><label class="d-block mb-2" for="fosSearch">Search Fields of Study (Required)</label></v-col>
+                    <v-col class="pb-0" cols="12" sm="5"><label class="d-block mb-2" for="fosDegree">Select Degree Type (Required)</label></v-col>
+                  </v-row>
                   <v-row>
                     <v-col cols="12" sm="5">
-                      <label class="d-block mb-2" for="fosSearch">Search Fields of Study (Required)</label>
+                      
                       <SearchFieldOfStudy @field-of-study-selected="handleFieldOfStudySelected" :selected="input.cip4" id="fosSearch" ariaRequired="true" />
                     </v-col>
                     <v-col cols="12" sm="4">
-                      <label class="d-block mb-2" for="fosDegree">Select Degree Type (Required)</label>
+                      
                       <v-select
                         :items="fosDegrees"
                         item-title="label"
@@ -75,10 +79,8 @@
                         aria-required="true"
                       />
                     </v-col>
+
                     <v-col cols="1" sm="3" class="">
-                      <div class="d-none d-sm-block" style="height: 32px">
-                        &nbsp;
-                      </div>
                       <v-btn @click="handleFormSubmit" width="100%" size="x-large" color="secondary" :disabled="disableSearch">
                         Search
                         <v-icon>mdi-menu-right</v-icon>
