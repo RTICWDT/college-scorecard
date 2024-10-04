@@ -1,23 +1,21 @@
 <template>
-  <v-main>
-    <v-container class="px-0">
-      <v-row>
-        <v-col cols="12">
-          <v-card class="py-5 px-10 ma-5" flat>
-            <h1 class="text-h4 mb-2 font-weight-bold">Glossary</h1>
-            <hr />
-            <div v-for="entry in glossary" :key="entry.id">
-              <div v-if="entry.glossary">
-                <h3 :id="entry.id" class="mt-4">{{ entry.title }}</h3>
-                <div @click="handleClicks" v-html="entry.glossary" style="max-width: 800px"
-                  class="glossary-text-4f5ai" />
-              </div>
+  <v-container class="px-0">
+    <v-row>
+      <v-col cols="12">
+        <v-card class="py-5 px-10 ma-5" flat>
+          <h1 class="text-h4 mb-2 font-weight-bold">Glossary</h1>
+          <hr />
+          <div v-for="entry in glossary" :key="entry.id">
+            <div v-if="entry.glossary">
+              <h3 :id="entry.id" class="mt-4">{{ entry.title }}</h3>
+              <div @click="handleClicks" v-html="entry.glossary" style="max-width: 800px"
+                class="glossary-text-4f5ai" />
             </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-main>
+          </div>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <!-- the glossary doesn't inherit the styles of a scoped stylesheets, hence these class-scoped override -->

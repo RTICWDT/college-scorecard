@@ -18,7 +18,6 @@
           @canned-search-toggle="handleCannedToggle"
           :is-loading="location.isLoading"
         />
-
         <SearchCannedSlider
           id="canned-search-most-get-in"
           label="Most People Get In"
@@ -26,7 +25,6 @@
           @canned-search-toggle="handleCannedToggle"
           tip="Acceptance rate of 50% or higher"
         />
-
         <SearchCannedSlider
           id="canned-search-most-grad"
           label="Most People Graduate"
@@ -35,6 +33,7 @@
           tip="Graduation rate of 50% or higher"
         />
       </v-col>
+
       <v-col md="6" cols="12" class="text-center py-0 my-0">
         <SearchCannedSlider
           id="canned-search-degree-c"
@@ -42,14 +41,12 @@
           :add-to-query="[{ cip4_degree: ['1'] }]"
           @canned-search-toggle="handleCannedToggle"
         />
-
         <SearchCannedSlider
           id="canned-search-degree-a"
           label="I Want an Associate's Degree"
           :add-to-query="[{ cip4_degree: ['2'] }]"
           @canned-search-toggle="handleCannedToggle"
         />
-
         <SearchCannedSlider
           id="canned-search-degree-b"
           label="I Want a Bachelor's Degree"
@@ -57,6 +54,7 @@
           @canned-search-toggle="handleCannedToggle"
         />
       </v-col>
+
       <v-col cols="12" md="12">
         <v-btn
           color="secondary"
