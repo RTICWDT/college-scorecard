@@ -2,7 +2,6 @@
   <v-combobox
     v-model="selectedFoS"
     @update:model-value="handleFieldOfStudySelect"
-    @update:search="handleFieldOfStudySearchInput"
     :items="items"
     item-title="title"
     item-value="code"
@@ -20,7 +19,7 @@
     aria-required="true"
   >
     <template v-slot:item="{ item, props }">
-        <v-list-item v-bind="props">
+        <v-list-item v-bind="props" :max-width="smAndDown ? 300 : 400">
           <v-list-item-subtitle v-html="item.raw.cip4Title" />
         </v-list-item>
       </template>
@@ -28,6 +27,12 @@
 </template>
 
 <script setup>
+import { useDisplay } from "vuetify";
+const { smAndDown } = useDisplay()
+const { site, CIP4 } = useSiteData()
+const emit = defineEmits(['field-of-study-selected'])
+const items = computed(() => site.value.data.cip_6_digit)
+
 const props = defineProps({
   disabled: {
     type: Boolean,
@@ -42,12 +47,6 @@ const props = defineProps({
     default: null,
   },
 })
-
-const emit = defineEmits(['field-of-study-selected'])
-
-const { site, CIP4 } = useSiteData()
-
-const items = computed(() => site.value.data.cip_6_digit)
 
 const selectedFoS = computed(() => {
   if (!props.selected) return null
@@ -68,11 +67,6 @@ const handleFieldOfStudySelect = (selectedItem) => {
     cip4: selectedItem.code.slice(0, 4),
     field: locateCip4.field,
   })
-}
-
-const handleFieldOfStudySearchInput = (searchString) => {
-  // Implement search logic if needed
-  console.log(searchString)
 }
 </script>
 
