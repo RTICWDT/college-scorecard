@@ -5,8 +5,8 @@
       :items="items"
       :loading="isLoading"
       :search="search"
-      :return-object="true"
-      :no-filter="true"
+      return-object
+      no-filter
       label="Enter a school"
       item-title="school.name"
       autocomplete="off"

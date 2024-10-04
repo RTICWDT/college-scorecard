@@ -19,10 +19,9 @@
       <v-btn
         @click="handleLocationCheck"
         :class="[props.horizontal ? 'mr-2 ml-3' : 'my-3 mr-2']"
+        color="tertiary"
       >
-        <v-icon>
-          {{ location.isLoading ? 'fas fa-circle-notch fa-spin' : 'mdi-near-me' }}
-        </v-icon>
+        <v-icon :icon="location.isLoading ? 'fa:fas fa-circle-notch fa-spin' : 'mdi-near-me'" />
       </v-btn>
 
       <v-text-field
@@ -77,8 +76,8 @@
       v-model="input.state"
       id="search-form-state"
       :items="states"
-      item-title="name"
-      item-value="abbr"
+      item-title="title"
+      item-value="value"
       multiple
       chips
       hide-details
@@ -120,8 +119,9 @@ const props = defineProps({
 
 const emit = defineEmits(['search-query'])
 
-const { states } = useSiteData()
+const { site } = useSiteData()
 const { location, handleLocationCheck } = useLocationCheck()
+const states = site.value.data.states
 
 const utility = reactive({
   location: null,

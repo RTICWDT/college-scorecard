@@ -42,11 +42,12 @@
                   <div class="mt-5 text-right">
                     <v-btn variant="text" size="small" @click="toggleCustomSearch = !toggleCustomSearch" class="text-uppercase">
                       Custom Search
-                      <v-icon>{{ toggleCustomSearch ? 'mdi-menu-up' : 'mdi-menu-down' }}</v-icon>
+                      <v-icon :icon="toggleCustomSearch ? 'mdi-menu-up' : 'mdi-menu-down'"></v-icon>
                     </v-btn>
                   </div>
 
                   <div v-if="toggleCustomSearch">
+                    <Spacer :height="10" />
                     <SearchForm @search-query="directToSearch" :hideLocation="false" />
                   </div>
                 </v-card>
@@ -57,7 +58,7 @@
                   <v-row>
                     <v-col cols="12" sm="5">
                       <label class="d-block mb-2" for="fosSearch">Search Fields of Study (Required)</label>
-                      <!-- <field-of-study-search @field-of-study-selected="handleFieldOfStudySelected" :selected="input.cip4" id="fosSearch" ariaRequired="true" /> -->
+                      <SearchFieldOfStudy @field-of-study-selected="handleFieldOfStudySelected" :selected="input.cip4" id="fosSearch" ariaRequired="true" />
                     </v-col>
                     <v-col cols="12" sm="4">
                       <label class="d-block mb-2" for="fosDegree">Select Degree Type (Required)</label>
@@ -72,7 +73,7 @@
                         id="fosDegree"
                         color="fos-search-color"
                         aria-required="true"
-                      ></v-select>
+                      />
                     </v-col>
                     <v-col cols="1" sm="3" class="">
                       <div class="d-none d-sm-block" style="height: 32px">
@@ -89,7 +90,7 @@
 
               <v-tabs-window-item>
                 <v-card style="min-height: 300px" class="px-10 py-5" flat>
-                  <!-- <canned-search-container @canned-search-submit="directToSearch"></canned-search-container> -->
+                  <SearchCannedContainer @canned-search-submit="directToSearch" />
                 </v-card>
               </v-tabs-window-item>
             </v-tabs-window>
@@ -99,7 +100,90 @@
           <!--  -->
           <!-- Mobile Expansion Panels and Search -->
           <!--  -->
+          <v-col cols="12" class="pa-5 d-block d-sm-none">
+              <v-expansion-panels class="mb-2" v-model="mobilePanels">
+                <!-- Mobile Institution Search -->
+                <v-expansion-panel>
+                  <v-expansion-panel-title>
+                    <span class="home-mobile-search-title">Search Schools</span>
+                  </v-expansion-panel-title>
 
+                  <v-expansion-panel-text>
+                    <SearchNameAutocomplete
+                      @school-name-selected="handleSchoolNameSelected"
+                      :searchEmptyName="false"
+                      v-if="smAndDown"
+                    />
+                  </v-expansion-panel-text>
+                </v-expansion-panel>
+              </v-expansion-panels>
+
+              <!-- Mobile FoS Search-->
+              <v-expansion-panels class="mb-2">
+                <v-expansion-panel>
+                  <v-expansion-panel-title>
+                    <span class="home-mobile-search-title"
+                      >Search Fields of Study</span
+                    >
+                  </v-expansion-panel-title>
+
+                  <v-expansion-panel-text>
+                    <v-row>
+                      <v-col cols="12" sm="5">
+                        <label class="d-block mb-2" for="fosSearch">Search Fields of Study</label>
+                        <SearchFieldOfStudy
+                          @field-of-study-selected="handleFieldOfStudySelected"
+                          :selected="input.cip4"
+                          id="fosSearch"
+                        />
+                      </v-col>
+                      <v-col cols="12" sm="4">
+                        <label class="d-block  mb-2" for="fosDegree">Select Degree Type</label>
+                        <v-select
+                          :items="fosDegrees"
+                          item-title="label"
+                          item-value="value"
+                          variant="outlined"
+                          placeholder="Select one"
+                          v-model="input.cip4_degree"
+                          hide-details
+                          id="fosDegree"
+                          color="fos-search-color"
+                          aria-required="true"
+                        />
+                      </v-col>
+                      <v-col col="12" sm="3" class="">
+                        <div class="d-none d-sm-block" style="height: 32px">
+                          &nbsp;
+                        </div>
+                        <v-btn
+                          @click="handleFormSubmit"
+                          width="100%"
+                          size="x-large"
+                          color="secondary"
+                          :disabled="disableSearch"
+                        >
+                          Search
+                          <v-icon>mdi-menu-right</v-icon>
+                        </v-btn></v-col
+                      >
+                    </v-row>
+                  </v-expansion-panel-text>
+                </v-expansion-panel>
+              </v-expansion-panels>
+
+              <!-- Mobile Show me Options-->
+              <v-expansion-panels class="mb-2">
+                <v-expansion-panel>
+                  <v-expansion-panel-title>
+                    <span class="home-mobile-search-title">Show Me Options</span>
+                  </v-expansion-panel-title>
+                  <v-expansion-panel-text>
+                    <SearchCannedContainer @canned-search-submit="directToSearch" class="mx-5" />
+                  </v-expansion-panel-text>
+                </v-expansion-panel>
+              </v-expansion-panels>
+            </v-col>
         </v-row>
       </v-container>
     </div>
@@ -347,7 +431,6 @@ const disableSearch = computed(() => input.value.cip4 === null || input.value.ci
 
 // Methods
 const colorSlider = (num) => {
-  console.log(num)
   switch (num) {
     case 0:
       sliderColor.value = "#7BD88C"
@@ -362,7 +445,6 @@ const colorSlider = (num) => {
 }
 
 const directToSearch = (params) => {
-  debugger
   // Generate URL based on params
   const qs = new URLSearchParams(params).toString()
   const url = "/search/?" + qs.replace(/&{2,}/g, "&").replace(/%3A/g, ":")

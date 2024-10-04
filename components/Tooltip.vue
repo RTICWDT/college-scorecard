@@ -13,7 +13,7 @@
 
     <v-dialog max-width="500px" v-model="showDialog">
       <v-card class="px-3 py-3">
-        <div class="d-flex flex-row-reverse">
+        <div class="d-flex flex-row-reverse mb-n9">
           <v-btn @click="showDialog = false" alt="Close More Information tooltip" aria-required="true" icon="fa:fas fa-times-circle">
             <v-icon icon="fa:fas fa-times-circle"></v-icon>
           </v-btn>
@@ -33,7 +33,7 @@
             <v-btn
               size="small"
               color="secondary"
-              class="px-4"
+              class="px-4 mt-3"
               @click="navigateToGlossary"
             >
               More Information
@@ -124,24 +124,30 @@ function handleClicks(event) {
 </script>
 
 <style lang="scss" scoped>
-.csTooltip {
-  font-size: 1rem;
-}
+  .csTooltip {
+    font-size: 1rem;
+  }
 
-.v-card__title {
-  word-break: normal;
-  word-wrap: break-word;
-}
+  .v-card__title {
+    word-break: normal;
+    word-wrap: break-word;
+  }
 
-.tool-tip-dialog-title {
-  word-break: normal;
-  word-wrap: break-word;
-  display: inline-block;
-  width: 450px;
-}
+  .tool-tip-dialog-title {
+    word-break: normal;
+    word-wrap: break-word;
+    display: inline-block;
+    width: 450px;
+  }
 
-.icon-placement {
-  width: 30px;
-  display: inline;
-}
+  .icon-placement {
+    width: 30px;
+    display: inline;
+  }
+
+  .tooltip-text {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
 </style>

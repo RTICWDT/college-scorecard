@@ -514,7 +514,7 @@ const { mdAndUp } = useDisplay()
 
 onMounted(() => {
   recaptchaRef.value.setOnSuccess((token) => {
-    console.log('reCAPTCHA verified with token:', token)
+    // console.log('reCAPTCHA verified with token:', token)
     isVerified.value = true
     loadEmbeddedForm()
   })

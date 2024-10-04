@@ -1,42 +1,14 @@
 <style lang="scss" scoped>
-.search-form-dolflag-cb div .v-input__slot {
-  align-items: start;
-}
-.search-form-degree-wrapper {
-  .v-messages {
-    display: none;
-  }
-}
-
-.v-input--checkbox ::v-deep .theme--light.v-label {
-  color: variables.$search-options !important;
-}
-
-.search-panel-header {
-  background-color: #c5d3e1;
-  border-radius: 0px !important;
-}
-
 .search-subhead {
   color: variables.$darker-gray;
 }
 
-#search-form-sub-degree-container {
-  border-left: 1px solid black;
-}
-.extraFilters {
-  padding-bottom: 100px !important;
+.v-expansion-panel {
+  margin-top: 0px;
 }
 
-::v-deep .v-chip .v-chip__content {
-  word-wrap: break-word;
-  white-space: normal;
-  padding: 8px;
-  line-height: 100%;
-}
-
-::v-deep .v-chip.v-size--default {
-  height: 100%;
+.v-expansion-panel:not(:last-child) {
+  border-bottom: 1px solid variables.$light-gray;
 }
 </style>
 
@@ -48,6 +20,7 @@
       style="border-radius: 0"
       v-model="panels"
       class="elevation-0"
+      :rounded="false"
     >
       <v-expansion-panel>
         <v-expansion-panel-title>Academic Fields</v-expansion-panel-title>
@@ -62,86 +35,73 @@
         <v-expansion-panel-text>
           <span class="search-subhead">Undergraduate</span>
           <v-checkbox
+            density="compact"
             id="search-form-fos-degree-c"
-            class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="Certificate"
             value="1"
-            color="secondary"
             hide-details
-          ></v-checkbox>
-
+          />
           <v-checkbox
+            density="compact"
             id="search-form-fos-degree-a"
-            class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="Associate's Degree"
             value="2"
-            color="secondary"
             hide-details
-          ></v-checkbox>
-
+          />
           <v-checkbox
+            density="compact"
             id="search-form-fos-degree-b"
-            class="search-form-degree-cb my-0 pt-0 pb-5"
             v-model="input.cip4_degree"
             label="Bachelor's Degree"
             value="3"
-            color="secondary"
             hide-details
-          ></v-checkbox>
-
+          />
+          <Spacer :height="20"/>
           <span class="search-subhead pt-5">Graduate</span>
           <v-checkbox
+            density="compact"
             id="search-form-fos-degree-m"
-            class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="Master's Degree"
             value="5"
-            color="secondary"
             hide-details
-          ></v-checkbox>
-
+          />
           <v-checkbox
+            density="compact"
             id="search-form-fos-degree-p"
-            class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="Post-baccalaureate Certificate"
             value="4"
-            color="secondary"
             hide-details
-          ></v-checkbox>
-
+          />
           <v-checkbox
+            density="compact"
             id="search-form-fos-degree-d"
-            class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="Doctoral Degree"
             value="6"
-            color="secondary"
             hide-details
-          ></v-checkbox>
-
+          />
           <v-checkbox
+            density="compact"
             id="search-form-fos-degree-f"
-            class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="First Professional Degree"
             value="7"
-            color="secondary"
             hide-details
-          ></v-checkbox>
-
+          />
           <v-checkbox
+            density="compact"
             id="search-form-fos-degree-g"
-            class="search-form-degree-cb my-0 py-0"
             v-model="input.cip4_degree"
             label="Graduate/Professional Certificate"
             value="8"
-            color="secondary"
             hide-details
-          ></v-checkbox> </v-expansion-panel-text
-      ></v-expansion-panel>
+          /> 
+        </v-expansion-panel-text>
+      </v-expansion-panel>
 
       <v-expansion-panel v-if="!hideLocation">
         <v-expansion-panel-title>Location</v-expansion-panel-title>
@@ -152,6 +112,7 @@
           />
         </v-expansion-panel-text>
       </v-expansion-panel>
+
       <!-- Graduation Rate -->
       <v-expansion-panel>
         <v-expansion-panel-title> Graduation Rate</v-expansion-panel-title>
@@ -165,9 +126,8 @@
             :max="100"
             :step="5"
             appendText="%"
-            class="mt-5"
             andUp
-          ></SearchCheckRange>
+          />
         </v-expansion-panel-text>
       </v-expansion-panel>
 
@@ -185,9 +145,11 @@
             :max="100"
             :step="5"
             appendText="k"
-          ></SearchCheckRange>
+          />
         </v-expansion-panel-text>
       </v-expansion-panel>
+
+      <!-- Test Scores -->
       <v-expansion-panel>
         <v-expansion-panel-title> Test Scores</v-expansion-panel-title
         ><v-expansion-panel-text>
@@ -200,9 +162,7 @@
             :max="800"
             :step="20"
             legend-title="SAT Math"
-          >
-          </SearchCheckRange>
-
+          />
           <SearchCheckRange
             v-model="input.sat_read"
             id="search-form-sat-read"
@@ -212,9 +172,7 @@
             :max="800"
             :step="20"
             legend-title="SAT Critical Reading"
-          >
-          </SearchCheckRange>
-
+          />
           <SearchCheckRange
             v-model="input.act"
             id="search-form-act"
@@ -224,9 +182,11 @@
             :max="36"
             :step="1"
             legend-title="ACT Score"
-          >
-          </SearchCheckRange> </v-expansion-panel-text
-      ></v-expansion-panel>
+          />
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+
+      <!-- Acceptance Rate -->
       <v-expansion-panel>
         <v-expansion-panel-title>Acceptance Rate</v-expansion-panel-title>
         <v-expansion-panel-text>
@@ -241,15 +201,19 @@
             appendText="%"
             andUp
           >
-            <template v-slot:label
-              >Acceptance Rate</template
-            >
+            <template v-slot:label>
+              Acceptance Rate
+            </template>
           </SearchCheckRange>
-        </v-expansion-panel-text></v-expansion-panel
-      ><v-expansion-panel>
-        <v-expansion-panel-title> Size</v-expansion-panel-title>
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+      
+      <!-- Size -->
+      <v-expansion-panel>
+        <v-expansion-panel-title>Size</v-expansion-panel-title>
         <v-expansion-panel-text>
           <v-checkbox
+            density="compact"
             id="search-form-size-small"
             hide-details
             v-model="input.size"
@@ -257,9 +221,9 @@
             value="small"
             color="secondary"
             class="py-0 my-0"
-          ></v-checkbox>
-
+          />
           <v-checkbox
+            density="compact"
             id="search-form-size-medium"
             hide-details
             v-model="input.size"
@@ -267,9 +231,9 @@
             value="medium"
             color="secondary"
             class="py-0 my-0"
-          ></v-checkbox>
-
+          />
           <v-checkbox
+            density="compact"
             id="search-form-size-large"
             hide-details
             v-model="input.size"
@@ -277,12 +241,17 @@
             value="large"
             color="secondary"
             class="py-0 my-0"
-          ></v-checkbox> </v-expansion-panel-text></v-expansion-panel
-      ><v-expansion-panel
-        ><v-expansion-panel-title>Type of School</v-expansion-panel-title
-        ><v-expansion-panel-text>
+          />
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+
+      <!-- Type of School -->
+      <v-expansion-panel>
+        <v-expansion-panel-title>Type of School</v-expansion-panel-title>
+        <v-expansion-panel-text>
           <div class="search-form-type-container">
             <v-checkbox
+              density="compact"
               id="search-form-type-public"
               hide-details
               v-model="input.control"
@@ -290,9 +259,9 @@
               value="public"
               color="secondary"
               class="py-0 my-0"
-            ></v-checkbox>
-
+            />
             <v-checkbox
+              density="compact"
               id="search-form-type-private"
               hide-details
               v-model="input.control"
@@ -300,9 +269,9 @@
               value="private"
               color="secondary"
               class="py-0 my-0"
-            ></v-checkbox>
-
+            />
             <v-checkbox
+              density="compact"
               id="search-form-type-profit"
               hide-details
               v-model="input.control"
@@ -310,12 +279,17 @@
               value="profit"
               color="secondary"
               class="py-0 my-0"
-            ></v-checkbox>
-          </div> </v-expansion-panel-text></v-expansion-panel
-      ><v-expansion-panel
-        ><v-expansion-panel-title>Urbanicity</v-expansion-panel-title
-        ><v-expansion-panel-text>
+            />
+          </div> 
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+      
+      <!-- Urbanicity -->
+      <v-expansion-panel>
+        <v-expansion-panel-title>Urbanicity</v-expansion-panel-title>
+        <v-expansion-panel-text>
           <v-checkbox
+            density="compact"
             id="search-form-locale-city"
             hide-details
             v-model="input.locale"
@@ -323,9 +297,9 @@
             value="city"
             color="secondary"
             class="py-0 my-0"
-          ></v-checkbox>
-
+          />
           <v-checkbox
+            density="compact"
             id="search-form-locale-suburban"
             hide-details
             v-model="input.locale"
@@ -333,9 +307,9 @@
             value="suburban"
             color="secondary"
             class="py-0 my-0"
-          ></v-checkbox>
-
+          />
           <v-checkbox
+            density="compact"
             id="search-form-locale-town"
             hide-details
             v-model="input.locale"
@@ -343,9 +317,9 @@
             value="town"
             color="secondary"
             class="py-0 my-0"
-          ></v-checkbox>
-
+          />
           <v-checkbox
+            density="compact"
             id="search-form-locale-rural"
             hide-details
             v-model="input.locale"
@@ -353,10 +327,14 @@
             value="rural"
             color="secondary"
             class="py-0 my-0"
-          ></v-checkbox> </v-expansion-panel-text></v-expansion-panel
-      ><v-expansion-panel
-        ><v-expansion-panel-title>Specialized Mission</v-expansion-panel-title
-        ><v-expansion-panel-text>
+          />
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+
+      <!-- Specialized Mission -->
+      <v-expansion-panel>
+        <v-expansion-panel-title>Specialized Mission</v-expansion-panel-title>
+        <v-expansion-panel-text>
           <v-select
             v-model="input.serving"
             id="search-form-serving"
@@ -370,11 +348,14 @@
             density="compact"
             aria-labelledby="specialized-mission-label"
             variant="outlined"
-          ></v-select> </v-expansion-panel-text></v-expansion-panel
-      ><v-expansion-panel
-        ><v-expansion-panel-title
-          >Religious Affiliation</v-expansion-panel-title
-        ><v-expansion-panel-text>
+          />
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+      
+      <!-- Religious Affiliation -->
+      <v-expansion-panel>
+        <v-expansion-panel-title>Religious Affiliation</v-expansion-panel-title>
+        <v-expansion-panel-text>
           <v-select
             v-model="input.religious"
             id="search-form-religous"
@@ -389,37 +370,36 @@
             variant="outlined"
             density="compact"
             style="z-index: 200"
-          ></v-select>
-        </v-expansion-panel-text> </v-expansion-panel
-      ><v-expansion-panel>
+          />
+        </v-expansion-panel-text> 
+      </v-expansion-panel>
+      
+      <!-- WIOA Programs -->
+      <v-expansion-panel>
         <v-expansion-panel-title>
           WIOA Programs&nbsp;
           <Tooltip definition="wioa-participants" /> 
         </v-expansion-panel-title>
         <v-expansion-panel-text>
           <v-checkbox
-            id="search-form-dolflag-2"
-            class="search-form-dolflag-cb my-0 py-0"
+            density="compact"
             v-model="input.dolflag"
             label="Only show schools that have Department of Labor WIOA programs"
             value="true"
             color="secondary"
             hide-details
-          ></v-checkbox> </v-expansion-panel-text
-      ></v-expansion-panel>
+          /> 
+        </v-expansion-panel-text>
+      </v-expansion-panel>
     </v-expansion-panels>
+
     <div id="search-submit-container" class="py-5" v-show="!autoSubmit">
-      <v-btn color="secondary" large @click="performSearch"
-        >Find Schools</v-btn
-      >
+      <v-btn color="secondary" large @click="performSearch">
+        Find Schools
+      </v-btn>
     </div>
-    <v-btn
-      type="submit"
-      class="sr-only"
-      color="secondary"
-      large
-      @click="performSearch"
-      >
+
+    <v-btn type="submit" class="sr-only" color="secondary" large @click="performSearch">
       Find Schools
     </v-btn>
   </v-form>

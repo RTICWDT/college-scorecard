@@ -36,6 +36,12 @@ const navigateTo = (href) =>  {
 }
 
 const tab = ref(route.path)
+
+// a hack as Field of study has two pages for some reason?
+if (route.path === '/search/fos') {
+  tab.value = '/search/fos-landing'
+}
+
 watch(() => route.path, (newPath) => { tab.value = newPath })
 </script>
 
