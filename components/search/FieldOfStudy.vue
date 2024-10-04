@@ -20,20 +20,14 @@
     aria-required="true"
   >
     <template v-slot:item="{ item, props }">
-        <v-list-item v-bind="props" @click="goToSchool">
-          <v-list-item-title>
-            <span class="name-complete-school-name" />
-          </v-list-item-title>
-          <v-list-item-subtitle v-html="item.raw.cip4Title"></v-list-item-subtitle>
+        <v-list-item v-bind="props">
+          <v-list-item-subtitle v-html="item.raw.cip4Title" />
         </v-list-item>
       </template>
   </v-combobox>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useSiteData } from '~/composables/useSiteData'
-
 const props = defineProps({
   disabled: {
     type: Boolean,
