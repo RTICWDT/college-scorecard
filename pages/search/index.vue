@@ -143,7 +143,9 @@
         </v-btn>
       </v-col>
 
+      <!--  -->
       <!-- SEARCH RESULTS -->
+      <!--  -->
       <v-col :cols="showSidebar ? 9 : 12" xl="10" class="pa-6 pa-sm-8`">
         <div id="search-result-container">
           <div class="search-result-container">
@@ -215,7 +217,9 @@
                   </div>
                 </v-col>
 
+                <!--  -->
                 <!-- PAGINATION -->
+                <!--  -->
                 <v-col
                   cols="12"
                   sm="4"
@@ -236,7 +240,9 @@
             </v-card>
 
 
+            <!--  -->
             <!-- INSTITUTION INFORMATION -->
+            <!--  -->
             <div
               v-if="!isLoading && displayFlag"
               id="search-institutions-dolflag"
@@ -360,6 +366,7 @@ import { useDisplay } from "vuetify";
 const { smAndDown } = useDisplay()
 const { addURLToStorage } = useUrlHistory()
 const { prepareParams } = usePrepareParams()
+const { apiGet } = useApi()
 const { trackAnalyticsEvent } = useAnalytics()
 const { getSiteData } = useSiteData()
 const route = useRoute()
@@ -447,7 +454,14 @@ const parseURLParams = (url) => {
 }
 
 const generateQueryString = (params) => {
-  let qs = querystring.stringify(params)
+  const searchParams = new URLSearchParams();
+  for (const key in params) {
+    if (params[key] !== null && params[key] !== undefined) {
+      searchParams.append(key, params[key]);
+    }
+  }
+
+  let qs = searchParams.toString()
   return "?" + qs.replace(/^&+/, "").replace(/&{2,}/g, "&").replace(/%3A/g, ":")
 }
 
@@ -471,25 +485,24 @@ const searchAPI = async () => {
   query.all_programs_nested = true
 
   let qs = generateQueryString({ ...params })
-  if (process.client) {
-    history.replaceState(params, "search", qs)
-  }
+
+  router.push({ query: params })
   addURLToStorage(qs)
 
   try {
     const response = await apiGet("/schools", query)
-    results.schools = response.data.results
-    results.meta = response.data.metadata
+    results.schools = response.results
+    results.meta = response.metadata
     emit("loading", false)
     shareUrl.value = window.location.href
     showSidebar.value = !smAndDown
   } catch (error) {
-    console.warn("Error fetching search.")
+    console.warn("Error fetching search.", error)
     emit("loading", false)
     results.meta = {}
     results.schools = []
-    if (error.response?.data?.errors) {
-      showError(error.response.data.errors[0])
+    if (error.response?.errors) {
+      showError(error.response.errors[0])
     } else if (error.response?.status === 500) {
       showError("API 500 Error")
     }
