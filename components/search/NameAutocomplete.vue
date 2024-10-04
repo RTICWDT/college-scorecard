@@ -21,6 +21,8 @@
       aria-haspopup="listbox"
       id="institution-search-box"
       class="pt-0 mt-0"
+      :density="dense ? 'compact' : 'default'"
+      :max-width="horizontal ? 300 : undefined"
     >
       <template v-slot:item="{ item, props }">
         <v-list-item v-bind="props" @click="goToSchool">
@@ -59,6 +61,10 @@ const props = defineProps({
     default: true,
   },
   dense: {
+    type: Boolean,
+    default: false,
+  },
+  horizontal: {
     type: Boolean,
     default: false,
   },

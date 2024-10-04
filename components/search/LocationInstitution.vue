@@ -12,7 +12,9 @@
       aria-labelledby="location-label"
       :placeholder="utility.location ? undefined : 'Select an option'"
       clearable
+      min-width="200"
       @keydown.enter.prevent
+      :max-width="props.horizontal ? 300 : undefined"
     />
 
     <div class="d-flex align-center" v-if="utility.location === 'Near Me'">
@@ -35,13 +37,15 @@
         density="compact"
         :class="[props.horizontal ? 'mx-2' : 'my-3']"
         @update:modelValue="handleSearch"
-      ></v-text-field>
+      />
 
       <span
         v-show="location.error"
         class="overline"
         :class="[props.horizontal ? 'mx-3' : 'my-3 ml-2']"
-      >{{ location.error }}</span>
+      >
+        {{ location.error }}
+      </span>
     </div>
 
     <div class="d-flex align-center" v-if="utility.location === 'ZIP Code'">
@@ -57,7 +61,7 @@
         min="0"
         variant="outlined"
         @update:modelValue="handleSearch"
-      ></v-text-field>
+      />
       <v-text-field
         v-model="input.distance"
         :rules="[utility.rules.required, utility.rules.numerical]"
@@ -69,7 +73,7 @@
         density="compact"
         variant="outlined"
         @update:modelValue="handleSearch"
-      ></v-text-field>
+      />
     </div>
 
     <v-select
@@ -82,9 +86,7 @@
       chips
       hide-details
       :single-line="true"
-      :placeholder="
-        input.state && input.state.length > 0 ? undefined : 'Select a state...'
-      "
+      :placeholder="input.state && input.state.length > 0 ? undefined : 'Select a state...'"
       :class="[props.horizontal ? 'mx-3 mt-0  pt-0' : 'my-3']"
       color="secondary"
       closable-chips
@@ -93,7 +95,9 @@
       variant="outlined"
       density="compact"
       @update:modelValue="handleSearch"
-    ></v-select>
+      min-width="100"
+      :max-width="props.horizontal ? 300 : undefined"
+    />
   </div>
 </template>
 

@@ -11,10 +11,21 @@
 #search-institutions-dolflag {
   width: 100%;
 }
+
+.splash {
+  font-family: variables.$base-font-family !important;
+  background-color: variables.$bg-blue !important;
+  color: variables.$white !important;
+}
+
+.bg-white {
+  background-color: white;
+}
 </style>
 
 <template>
-  <div class="bg-blue">
+  <!-- SPLASH -->
+  <div class="splash">
     <v-container fluid>
       <v-row
         ><v-col class="pa-sm-10 pa-5">
@@ -27,46 +38,49 @@
       >
     </v-container>
   </div>
-  <v-container
-    fluid
-    class="white elevation-2"
-    style="z-index:50; position:relative"
-  >
-    <v-row>
-      <v-col>
-        <v-card flat class="white d-sm-flex align-center">
-          <div class="mx-1 mx-sm-3 search-label">School:</div>
-          <SearchNameAutocomplete
-            @school-name-selected="handleSchoolNameSelected"
-            :initial_school="input.search"
-            @school-name-cleared="handleSchoolNameSelected"
-            :dense="true"
-          />
 
-          <div
-            class="mx-1 mx-sm-3 mt-3 my-sm-0  search-label"
-            id="location-label"
-          >
+  <!-- SEARCH BAR -->
+  <v-container fluid class="elevation-2 bg-white" style="z-index: 50; position: relative;">
+    <v-row>
+      <v-col class="px-0 py-0">
+        <v-card flat class="white d-flex flex-column flex-md-row align-md-center border-none px-3 py-3">
+          <div class="search-label my-2 my-md-0 mr-0 mr-md-2">School:</div>
+
+          <div style="min-width: 200px">
+            <SearchNameAutocomplete
+              @school-name-selected="handleSchoolNameSelected"
+              :initial_school="input.search"
+              @school-name-cleared="handleSchoolNameSelected"
+              :dense="true"
+              :horizontal="!smAndDown"
+            />
+          </div>
+
+          <div class="search-label my-2 my-md-0 mx-0 mx-md-2" id="location-label">
             Location:
           </div>
-          <SearchLocationInstitution
-            @search-query="handleLocationSelection"
-            :initial_state="input.state"
-            :initial_zip="input.zip"
-            :initial_distance="input.distance"
-            :horizontal="true"
-          />
+
+          <div class="flex-grow-1 mr-0 mr-md-2">
+            <SearchLocationInstitution
+              @search-query="handleLocationSelection"
+              :initial_state="input.state"
+              :initial_zip="input.zip"
+              :initial_distance="input.distance"
+              :horizontal="!smAndDown"
+            />
+          </div>
+
           <v-btn
-            outlined
-            class="ml-sm-auto mx-sm-3 my-3 my-sm-0 float-right float-sm-none toggle-sidebar"
+            variant="outlined"
+            class="mt-3 mt-md-0"
             @click="showSidebar = !showSidebar"
           >
-            <v-icon small class="pr-1">fas fa-sliders-h</v-icon>
+            <v-icon size="small" class="pr-1" icon="fa:fas fa-sliders-h" />
             {{ showSidebar ? "Hide" : "Show" }} Filters
           </v-btn>
         </v-card>
-      </v-col></v-row
-    >
+      </v-col>
+    </v-row>
   </v-container>
 
 
@@ -342,7 +356,7 @@
 const route = useRoute()
 const router = useRouter()
 import { useDisplay } from "vuetify";
-const { smAndDown } = useDisplay()
+const { smAndDown, mdAndDown } = useDisplay()
 const { addURLToStorage } = useUrlHistory()
 const { prepareParams } = usePrepareParams()
 const { trackAnalyticsEvent } = useAnalytics()
