@@ -61,11 +61,9 @@
                   </v-row>
                   <v-row>
                     <v-col cols="12" sm="5">
-                      
                       <SearchFieldOfStudy @field-of-study-selected="handleFieldOfStudySelected" :selected="input.cip4" id="fosSearch" ariaRequired="true" />
                     </v-col>
                     <v-col cols="12" sm="4">
-                      
                       <v-select
                         :items="fosDegrees"
                         item-title="label"
@@ -98,7 +96,6 @@
             </v-tabs-window>
           </v-col>
 
-
           <!--  -->
           <!-- Mobile Expansion Panels and Search -->
           <!--  -->
@@ -124,9 +121,7 @@
               <v-expansion-panels class="mb-2">
                 <v-expansion-panel>
                   <v-expansion-panel-title>
-                    <span class="home-mobile-search-title"
-                      >Search Fields of Study</span
-                    >
+                    <span class="home-mobile-search-title">Search Fields of Study</span>
                   </v-expansion-panel-title>
 
                   <v-expansion-panel-text>
@@ -399,25 +394,15 @@ fieldset {
 </style>
 
 <script setup>
+// import CompareDrawer from "~/components/CompareDrawer.vue"
+// import CompareHeader from "~/components/CompareHeader.vue"
+
 import { useDisplay } from "vuetify";
 const { formMappings } = useConstants()
 const { GATrackEvent, transitionOutboundLink, } = useAnalytics()
 const { smAndDown } = useDisplay()
-
-// debugger
-
-// Import components
-// import CannedSearchContainer from "~/components/CannedSearchContainer.vue"
-// import SearchForm from "~/components/SearchForm.vue"
-// import NameAutocomplete from "~/components/NameAutocomplete.vue"
-// import FieldOfStudySearch from "~/components/FieldOfStudySearch.vue"
-// import CompareDrawer from "~/components/CompareDrawer.vue"
-// import CompareHeader from "~/components/CompareHeader.vue"
-
-// Router
 const router = useRouter()
 
-// Data
 const mobilePanels = ref(0)
 const desktopTabs = ref(0)
 const toggleCustomSearch = ref(false)

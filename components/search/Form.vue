@@ -629,21 +629,22 @@ const handleLocationSelection = (params) => {
   input.page = 1
 }
 
-utility.enableDefault = useCloneDeep(utility.enable)
-
-// Call mapInputFromProp
-mapInputFromProp()
-
-const debounceEmitSearchQuery = useDebounce(() => {
-  // Send new param object, reset page
-  emit("search-query", { ...cleaninput.value, page: 0 })
-}, 1000)
-
-if (props.autoSubmit) {
-  emit("search-query", { ...cleaninput.value, page: 0 })
-}
 
 onMounted(() => {
+  utility.enableDefault = useCloneDeep(utility.enable)
+
+  // Call mapInputFromProp
+  mapInputFromProp()
+
+  const debounceEmitSearchQuery = useDebounce(() => {
+    // Send new param object, reset page
+    emit("search-query", { ...cleaninput.value, page: 0 })
+  }, 1000)
+
+  // if (props.autoSubmit) {
+    // emit("search-query", { ...cleaninput.value, page: 0 })
+  // }
+
   window.addEventListener("search-form-reset", resetFormDefault)
 })
 
