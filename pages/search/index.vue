@@ -83,47 +83,50 @@
     </v-row>
   </v-container>
 
-
+  <!-- SEARCH CONTENT -->
   <v-container fluid class="pa-0">
     <v-row>
+
+      <!-- SEARCH SIDEBAR -->
       <v-col
         cols="3"
         xl="2"
         :class="{ 'd-none': !showSidebar }"
         class="pr-0"
       >
-      <v-navigation-drawer
-        v-model="showSidebar"
-        :width="smAndDown ? '100%' : 'auto'"
-        :location="smAndDown ? 'left' : undefined"
-        :temporary="smAndDown"
-      >
-        <div class="pa-6 d-flex">
-          <h2 class="flex-grow-1">More Filters</h2>
-          <a href="#"class="float-right close-filter"@click="showSidebar = !showSidebar">
-            <v-icon>mdi-chevron-left</v-icon>Close filters
-          </a>
-        </div>
-
-        <!-- Search Form Component -->
-        <SearchForm
-          :urlParsedParams="urlParsedParams"
-          auto-submit
-          display-all-filters
-          @search-query="handleInstitutionSearch"
-          :hideLocation="true"
-        />
-        <v-btn
-          type="submit"
-          :class="smAndDown ? 'mx-4 mt-4' : 'd-none'"
-          color="secondary"
-          size="large"
-          v-show="false"
-          @click="showSidebar = !showSidebar"
+        <v-navigation-drawer
+          v-model="showSidebar"
+          :width="smAndDown ? '100%' : 'auto'"
+          :location="smAndDown ? 'left' : undefined"
+          :temporary="smAndDown"
         >
-          Find Schools
-        </v-btn>
-      </v-navigation-drawer>
+          <div class="pa-6 d-flex">
+            <h2 class="flex-grow-1">More Filters</h2>
+            <a href="#"class="float-right close-filter"@click="showSidebar = !showSidebar">
+              <v-icon>mdi-chevron-left</v-icon>Close filters
+            </a>
+          </div>
+
+          <!-- Search Form Component -->
+          <SearchForm
+            :urlParsedParams="urlParsedParams"
+            auto-submit
+            display-all-filters
+            @search-query="handleInstitutionSearch"
+            :hideLocation="true"
+          />
+          <v-btn
+            type="submit"
+            :class="smAndDown ? 'mx-4 mt-4' : 'd-none'"
+            color="secondary"
+            size="large"
+            v-show="false"
+            @click="showSidebar = !showSidebar"
+          >
+            Find Schools
+          </v-btn>
+        </v-navigation-drawer>
+
         <v-btn
           v-scroll="onScroll"
           v-show="btt"
@@ -136,13 +139,16 @@
           @click="toTop"
           style="z-index:1000"
         >
-          <v-icon>fas fa-arrow-up</v-icon>
+          <v-icon icon="fa:fas fa-arrow-up"></v-icon>
         </v-btn>
-        </v-col>
-        <v-col :cols="showSidebar ? 9 : 12" xl="10" class="pa-6 pa-sm-8`">
+      </v-col>
+
+      <!-- SEARCH RESULTS -->
+      <v-col :cols="showSidebar ? 9 : 12" xl="10" class="pa-6 pa-sm-8`">
         <div id="search-result-container">
           <div class="search-result-container">
-            <!-- Search Result Info and controls -->
+
+            <!-- RESULTS CARD AND PAGINATION -->
             <v-card
               class="mt-2 mb-4 py-4 px-4 elevation-0 pageBar"
               v-show="!isLoading"
@@ -162,9 +168,7 @@
                         elevation="1"
                       >
                         <span>
-                          <v-icon small class="mr-1"
-                            >mdi-close-circle</v-icon
-                          >
+                          <v-icon small class="mr-1">mdi-close-circle</v-icon>
                           Reset Filters
                         </span>
                       </v-btn>
@@ -179,7 +183,7 @@
                             class="mr-3 mb-1 mb-sm-0 searchbtn"
                             elevation="1"
                           >
-                            <v-icon small class="mx-1" icon="fa:fas fa-sort"></v-icon>
+                            <v-icon small class="mx-1" icon="fa:fas fa-sort" />
                             Sort:
                             <!-- {{
                               sorts.find((el) => el.field === input.sort).type
@@ -211,6 +215,7 @@
                   </div>
                 </v-col>
 
+                <!-- PAGINATION -->
                 <v-col
                   cols="12"
                   sm="4"
@@ -230,7 +235,8 @@
               </v-row>
             </v-card>
 
-            <!-- Instituition Information -->
+
+            <!-- INSTITUTION INFORMATION -->
             <div
               v-if="!isLoading && displayFlag"
               id="search-institutions-dolflag"
@@ -243,22 +249,19 @@
                     close
                     label
                     @click:close="handleDOLFlag"
-                    ><span
-                      >Only show schools that have programs that qualify for
-                      the Department of Labor's WIOA program.<tooltip
-                        definition="wioa-participants"/></span
-                  ></v-chip>
+                  >
+                    <span>
+                      Only show schools that have programs that qualify for
+                      the Department of Labor's WIOA program.
+                      <Tooltip definition="wioa-participants"/>
+                    </span>
+                  </v-chip>
                 </v-col>
+
                 <v-col cols="12" sm="6" md="" class="">
                   <v-card outlined class="pa-3">
-                    Learn more about the Department of Labor's WIOA program
-                    at
-                    <a
-                      target="_blank"
-                      href="https://collegescorecard.ed.gov/training"
-                    >
-                      CollegeScorecard.ed.gov/training.
-                    </a>
+                    Learn more about the Department of Labor's WIOA program at 
+                    <a target="_blank" href="https://collegescorecard.ed.gov/training"> CollegeScorecard.ed.gov/training.</a>
                   </v-card>
                 </v-col>
               </v-row>
@@ -279,6 +282,7 @@
                     </p>
                     <SearchCannedContainer @canned-search-submit="handleCannedSearchClick" />
                   </v-card>
+                  <Spacer :height="30" />
                 </v-col>
               </v-row>
             </div>
@@ -290,9 +294,7 @@
                 <v-card class="py-4 px-4 pageBar elevation-0">
                   <h1 class="title">
                     Loading
-                    <v-icon color="#00365e"
-                      >fas fa-circle-notch fa-spin</v-icon
-                    >
+                    <v-icon color="#00365e" icon="fa:fas fa-circle-notch fa-spin"/>
                   </h1>
                 </v-card>
               </div>
@@ -344,6 +346,7 @@
                 </v-col>
               </v-row>
             </v-card>
+
           </div>
         </div>
       </v-col>
@@ -353,14 +356,14 @@
 
 
 <script setup>
-const route = useRoute()
-const router = useRouter()
 import { useDisplay } from "vuetify";
-const { smAndDown, mdAndDown } = useDisplay()
+const { smAndDown } = useDisplay()
 const { addURLToStorage } = useUrlHistory()
 const { prepareParams } = usePrepareParams()
 const { trackAnalyticsEvent } = useAnalytics()
 const { getSiteData } = useSiteData()
+const route = useRoute()
+const router = useRouter()
 
 const props = defineProps({
   pagePermalink: String,
