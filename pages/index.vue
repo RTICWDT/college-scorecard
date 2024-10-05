@@ -48,7 +48,7 @@
 
                   <div v-if="toggleCustomSearch">
                     <Spacer :height="10" />
-                    <SearchForm @search-query="directToSearch" :hideLocation="false" />
+                    <SearchForm @search-query="directToSearch" :hideLocation="false" :initiallyOpenPanelsByIndex="[0,1]" />
                   </div>
                 </v-card>
               </v-tabs-window-item>
@@ -90,6 +90,9 @@
 
               <v-tabs-window-item>
                 <v-card style="min-height: 300px" class="px-10 py-5" flat>
+                  <p class="mb-5 mt-1">
+                    Select one or more options to create a list of schools that fit your needs.
+                  </p>
                   <SearchCannedContainer @canned-search-submit="directToSearch" />
                 </v-card>
               </v-tabs-window-item>
@@ -267,7 +270,7 @@
                 </v-avatar>
               </h2>
               <hr />
-              <p>
+              <p class="mb-4">
                 You can learn more about the types of financial aid that are
                 available at
 

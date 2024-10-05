@@ -129,7 +129,7 @@
       <div class="bg-white" v-if="showSidebar">
         <div class="pa-6 d-flex elevation-3">
           <h2 class="flex-grow-1">More Filters</h2>
-          <a href="#"class="float-right close-filter"@click="showSidebar = !showSidebar">
+          <a href="#"class="float-right close-filter d-none d-md-block"@click="showSidebar = !showSidebar">
             <v-icon>mdi-chevron-left</v-icon>
             Close filters
           </a>
@@ -142,6 +142,7 @@
           display-all-filters
           @search-query="handleInstitutionSearch"
           :hideLocation="true"
+          :initiallyOpenPanelsByIndex="[0]"
         />
         <v-btn
           type="submit"
@@ -314,7 +315,7 @@
                     <v-col cols="12">
                       <v-card outlined class="pa-5">
                         <h3>Show Me Options</h3>
-                        <p>
+                        <p class="mb-8">
                           Select one or more options below to create a list of
                           schools that fit your needs.
                         </p>

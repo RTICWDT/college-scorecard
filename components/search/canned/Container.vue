@@ -6,9 +6,6 @@
     aria-checked="mixed"
     aria-controls="canned-search-near-me canned-search-most-get-in canned-search-most-grad canned-search-degree-c canned-search-degree-a canned-search-degree-b"
   >
-    <p class="mb-5 mt-1">
-      Select one or more options to create a list of schools that fit your needs.
-    </p>
     <v-row>
       <v-col md="6" cols="12" class="py-0 my-0">
         <SearchCannedSlider

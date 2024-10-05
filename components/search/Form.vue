@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
 .search-subhead {
-  color: variables.$darker-gray;
+  color: variables.$black;
 }
 
 .v-expansion-panel {
@@ -430,9 +430,13 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  initiallyOpenPanelsByIndex: {
+    type: Array,
+    default: () => [],
+  },
 })
 
-const panels = ref([0, 1])
+const panels = ref(props.initiallyOpenPanelsByIndex)
 
 const formDefault = {
   id: null,
