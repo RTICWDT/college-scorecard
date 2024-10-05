@@ -21,6 +21,7 @@
 .bg-white {
   background-color: white;
 }
+
 </style>
 
 <template>
@@ -43,7 +44,7 @@
   <v-container fluid class="elevation-2 bg-white" style="z-index: 50; position: relative;">
     <v-row>
       <v-col class="px-0 py-0">
-        <v-card flat class="white d-flex flex-column flex-md-row align-md-center border-none px-3 py-3">
+        <v-card flat class="white d-flex flex-column flex-md-row align-md-center border-none px-3 pb-2 pt-0 pt-md-2">
           <div class="search-label my-2 my-md-0 mr-0 mr-md-2">School:</div>
 
           <div style="min-width: 200px">
@@ -83,281 +84,283 @@
     </v-row>
   </v-container>
 
-  <!-- SEARCH CONTENT -->
-  <v-container fluid class="pa-0">
-    <v-row>
 
-      <!-- SEARCH SIDEBAR -->
-      <v-col
-        cols="3"
-        xl="2"
-        :class="{ 'd-none': !showSidebar }"
-        class="pr-0"
-      >
-        <v-navigation-drawer
-          v-model="showSidebar"
-          :width="smAndDown ? '100%' : 'auto'"
-          :location="smAndDown ? 'left' : undefined"
-          :temporary="smAndDown"
-        >
-          <div class="pa-6 d-flex">
-            <h2 class="flex-grow-1">More Filters</h2>
-            <a href="#"class="float-right close-filter"@click="showSidebar = !showSidebar">
-              <v-icon>mdi-chevron-left</v-icon>Close filters
-            </a>
-          </div>
+  <!-- the v-navigation-drawer doesn't want to behave so we need to devise a hand-rolled solution to the sidebar and main content layout -->
+  <div class="d-flex flex-row">
 
-          <!-- Search Form Component -->
-          <SearchForm
-            :urlParsedParams="urlParsedParams"
-            auto-submit
-            display-all-filters
-            @search-query="handleInstitutionSearch"
-            :hideLocation="true"
-          />
-          <v-btn
-            type="submit"
-            :class="smAndDown ? 'mx-4 mt-4' : 'd-none'"
-            color="secondary"
-            size="large"
-            v-show="false"
-            @click="showSidebar = !showSidebar"
-          >
-            Find Schools
-          </v-btn>
-        </v-navigation-drawer>
+    <!-- SIDEBAR -->
+    <div 
+      class="d-none d-md-block overflow-hidden sidebar-open sidebar-closed bg-white"
+      :style="{ maxWidth: showSidebar ? '390px' : '0px' }"
+      style="z-index: 0;"
+    >
+      <div>
+        <div class="pa-6 d-flex elevation-3">
+          <h2 class="flex-grow-1">More Filters</h2>
+          <a href="#"class="float-right close-filter"@click="showSidebar = !showSidebar">
+            <v-icon>mdi-chevron-left</v-icon>
+            Close filters
+          </a>
+        </div>
 
+        <!-- Search Form Component -->
+        <SearchForm
+          :urlParsedParams="urlParsedParams"
+          auto-submit
+          display-all-filters
+          @search-query="handleInstitutionSearch"
+          :hideLocation="true"
+        />
         <v-btn
-          v-scroll="onScroll"
-          v-show="btt"
-          fab
-          dark
-          fixed
-          bottom
-          right
-          color="primary"
-          @click="toTop"
-          style="z-index:1000"
+          type="submit"
+          :class="smAndDown ? 'mx-4 mt-4' : 'd-none'"
+          color="secondary"
+          size="large"
+          v-show="false"
+          @click="showSidebar = !showSidebar"
         >
-          <v-icon icon="fa:fas fa-arrow-up"></v-icon>
+          Find Schools
         </v-btn>
-      </v-col>
+      </div>
 
-      <!--  -->
-      <!-- SEARCH RESULTS -->
-      <!--  -->
-      <v-col :cols="showSidebar ? 9 : 12" xl="10" class="pa-6 pa-sm-8`">
-        <div id="search-result-container">
-          <div class="search-result-container">
+      <v-btn
+        v-scroll="onScroll"
+        v-show="btt"
+        style="position: fixed; bottom: 20px; right: 20px; z-index: 900000"
+        fab
+        dark
+        color="primary"
+        @click="toTop"
+        icon="fa:fas fa-arrow-up"
+      />
+    </div>
+    
+    <!-- MAIN -->
+    <div class="flex-grow-1">
+      <div fluid class="pa-0">
+        <div>
+          <div :cols="showSidebar ? 6 : 9" xl="10" class="px-4 py-2 pa-sm-8`">
+            <div id="search-result-container">
+              <div class="search-result-container">
 
-            <!-- RESULTS CARD AND PAGINATION -->
-            <v-card
-              class="mt-2 mb-4 py-4 px-4 elevation-0 pageBar"
-              v-show="!isLoading"
-            >
-              <v-row class="">
-                <v-col cols="12" sm="8" class="py-2 px-4">
-                  <div id="search-result-info-count" class>
-                    <p class="title mb-0">
-                      {{ results.meta.total }} Results
-                      <br class="d-block" />
-                      <v-btn
-                        id="search-button-clear"
-                        @click="clearSearchForm"
-                        small
-                        outlined
-                        class="mr-3 mb-1 mb-sm-0 searchbtn"
-                        elevation="1"
-                      >
-                        <span>
-                          <v-icon small class="mr-1">mdi-close-circle</v-icon>
-                          Reset Filters
-                        </span>
-                      </v-btn>
-                      <br class="d-block d-sm-none" />
-
-                      <v-menu offset-y>
-                        <template v-slot:activator="{ on }">
+                <!-- RESULTS CARD AND PAGINATION -->
+                <v-card
+                  class="mt-2 mb-4 py-4 px-4 elevation-0 pageBar"
+                  v-show="!isLoading"
+                >
+                  <v-row class="">
+                    <v-col cols="12" sm="8" class="py-2 px-4">
+                      <div id="search-result-info-count" class>
+                        <p class="title mb-0">
+                          {{ results.meta.total }} Results
+                          <br class="d-block" />
                           <v-btn
-                            id="search-button-sort"
+                            id="search-button-clear"
+                            @click="clearSearchForm"
                             small
                             outlined
                             class="mr-3 mb-1 mb-sm-0 searchbtn"
                             elevation="1"
                           >
-                            <v-icon small class="mx-1" icon="fa:fas fa-sort" />
-                            Sort:
-                            <!-- {{
-                              sorts.find((el) => el.field === input.sort).type
-                            }} -->
+                            <span>
+                              <v-icon small class="mr-1">mdi-close-circle</v-icon>
+                              Reset Filters
+                            </span>
                           </v-btn>
-                        </template>
-                        <v-list :min-width="200">
-                          <v-list-item
-                            v-for="(item, index) in sorts"
-                            :key="item.field"
-                            :value="item.field"
-                            @click="resort(item.field)"
-                          >
-                            <v-list-item-title>{{ item.type }}</v-list-item-title>
-                          </v-list-item>
-                        </v-list>
-                      </v-menu>
-                      <br class="d-block d-sm-none" />
-                      <!-- <share
-                        :url="encodeURI(shareUrl)"
-                        label="Share"
-                        small
-                        show-copy
-                        :hide="['email']"
-                        color="#eff1f5"
-                        class="mr-3 mb-1 mb-sm-0 "
-                      /> -->
-                    </p>
-                  </div>
-                </v-col>
+                          <br class="d-block d-sm-none" />
 
-                <!--  -->
-                <!-- PAGINATION -->
-                <!--  -->
-                <v-col
-                  cols="12"
-                  sm="4"
-                  class="py-1 px-1"
-                  v-show="!isLoading && results.schools.length > 0"
-                >
-                  <div class="d-block text-right">
-                    <v-pagination
-                      v-model="displayPage"
-                      :length="totalPages"
-                      :total-visible="7"
-                      @input="handlePaginationInput"
-                      class="pr-0 mr-0 justify-end text-right ml-1"
-                    ></v-pagination>
-                  </div>
-                </v-col>
-              </v-row>
-            </v-card>
+                          <v-menu offset-y>
+                            <template v-slot:activator="{ on }">
+                              <v-btn
+                                id="search-button-sort"
+                                small
+                                outlined
+                                class="mr-3 mb-1 mb-sm-0 searchbtn"
+                                elevation="1"
+                              >
+                                <v-icon small class="mx-1" icon="fa:fas fa-sort" />
+                                Sort:
+                                <!-- {{
+                                  sorts.find((el) => el.field === input.sort).type
+                                }} -->
+                              </v-btn>
+                            </template>
+                            <v-list :min-width="200">
+                              <v-list-item
+                                v-for="(item, index) in sorts"
+                                :key="item.field"
+                                :value="item.field"
+                                @click="resort(item.field)"
+                              >
+                                <v-list-item-title>{{ item.type }}</v-list-item-title>
+                              </v-list-item>
+                            </v-list>
+                          </v-menu>
+                          <br class="d-block d-sm-none" />
+                          <!-- <share
+                            :url="encodeURI(shareUrl)"
+                            label="Share"
+                            small
+                            show-copy
+                            :hide="['email']"
+                            color="#eff1f5"
+                            class="mr-3 mb-1 mb-sm-0 "
+                          /> -->
+                        </p>
+                      </div>
+                    </v-col>
 
-
-            <!--  -->
-            <!-- INSTITUTION INFORMATION -->
-            <!--  -->
-            <div
-              v-if="!isLoading && displayFlag"
-              id="search-institutions-dolflag"
-              class="my-2"
-            >
-              <v-row>
-                <v-col cols="12" sm="6" md="6" class="">
-                  <v-chip
-                    class="dolflag-chip pa-3"
-                    close
-                    label
-                    @click:close="handleDOLFlag"
-                  >
-                    <span>
-                      Only show schools that have programs that qualify for
-                      the Department of Labor's WIOA program.
-                      <Tooltip definition="wioa-participants"/>
-                    </span>
-                  </v-chip>
-                </v-col>
-
-                <v-col cols="12" sm="6" md="" class="">
-                  <v-card outlined class="pa-3">
-                    Learn more about the Department of Labor's WIOA program at 
-                    <a target="_blank" href="https://collegescorecard.ed.gov/training"> CollegeScorecard.ed.gov/training.</a>
-                  </v-card>
-                </v-col>
-              </v-row>
-            </div>
-
-            <!-- No Results/Canned Search/ -->
-            <div
-              id="search-can-query-container"
-              v-if="!isLoading && results.schools.length === 0"
-            >
-              <v-row>
-                <v-col cols="12">
-                  <v-card outlined class="pa-5">
-                    <h3>Show Me Options</h3>
-                    <p>
-                      Select one or more options below to create a list of
-                      schools that fit your needs.
-                    </p>
-                    <SearchCannedContainer @canned-search-submit="handleCannedSearchClick" />
-                  </v-card>
-                  <Spacer :height="30" />
-                </v-col>
-              </v-row>
-            </div>
-
-            <!-- Main Search Results -->
-            <div class="results-main-alert">
-              <!-- Loading -->
-              <div class="show-loading mt-2" v-show="isLoading">
-                <v-card class="py-4 px-4 pageBar elevation-0">
-                  <h1 class="title">
-                    Loading
-                    <v-icon color="#00365e" icon="fa:fas fa-circle-notch fa-spin"/>
-                  </h1>
+                    <!--  -->
+                    <!-- PAGINATION -->
+                    <!--  -->
+                    <v-col
+                      cols="12"
+                      sm="4"
+                      class="py-1 px-1"
+                      v-show="!isLoading && results.schools.length > 0"
+                    >
+                      <div class="d-block text-right">
+                        <v-pagination
+                          v-model="displayPage"
+                          :length="totalPages"
+                          :total-visible="7"
+                          @input="handlePaginationInput"
+                          class="pr-0 mr-0 justify-end text-right ml-1"
+                        ></v-pagination>
+                      </div>
+                    </v-col>
+                  </v-row>
                 </v-card>
-              </div>
 
-              <!-- Search Query Error-->
-              <div class="show-error" v-show="error">
-                <h1>Something went wrong:</h1>
-                <p class="error-message">{{ error }}</p>
-              </div>
 
-              <!-- Institution Results -->
-              <div class="search-result-cards-container" v-if="!isLoading">
-                <v-row>
-                  <v-col
-                    v-for="school in results.schools"
-                    :key="school.id"
-                    cols="12"
-                    xl="2"
-                    lg="3"
-                    md="4"
-                    sm="6"
-                    class="d-flex align-stretch"
-                  >
-                    <!-- <search-result-card :school="school" /> -->
-                  </v-col>
-                </v-row>
-              </div>
+                <!--  -->
+                <!-- INSTITUTION INFORMATION -->
+                <!--  -->
+                <div
+                  v-if="!isLoading && displayFlag"
+                  id="search-institutions-dolflag"
+                  class="my-2"
+                >
+                  <v-row>
+                    <v-col cols="12" sm="6" md="6" class="">
+                      <v-chip
+                        class="dolflag-chip pa-3"
+                        close
+                        label
+                        @click:close="handleDOLFlag"
+                      >
+                        <span>
+                          Only show schools that have programs that qualify for
+                          the Department of Labor's WIOA program.
+                          <Tooltip definition="wioa-participants"/>
+                        </span>
+                      </v-chip>
+                    </v-col>
 
-              <!-- Field of Study Results -->
-              <div class="search-result-cards-container" v-else></div>
-            </div>
+                    <v-col cols="12" sm="6" md="" class="">
+                      <v-card outlined class="pa-3">
+                        Learn more about the Department of Labor's WIOA program at 
+                        <a target="_blank" href="https://collegescorecard.ed.gov/training"> CollegeScorecard.ed.gov/training.</a>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </div>
 
-            <!-- Bottom Pagination -->
-            <v-card
-              class="mt-4 mb-2 py-1 px-4 pageBar elevation-0"
-              v-if="!isLoading && results.schools.length > 0"
-            >
-              <v-row>
-                <v-col cols="12" class="py-3 px-3">
-                  <div class="text-left text-sm-right">
-                    <v-pagination
-                      v-model="displayPage"
-                      :length="totalPages"
-                      :total-visible="7"
-                      @input="handlePaginationInput"
-                      class="pr-0 mr-0"
-                    ></v-pagination>
+                <!-- No Results/Canned Search/ -->
+                <div
+                  id="search-can-query-container"
+                  v-if="!isLoading && results.schools.length === 0"
+                >
+                  <v-row>
+                    <v-col cols="12">
+                      <v-card outlined class="pa-5">
+                        <h3>Show Me Options</h3>
+                        <p>
+                          Select one or more options below to create a list of
+                          schools that fit your needs.
+                        </p>
+                        <SearchCannedContainer @canned-search-submit="handleCannedSearchClick" />
+                      </v-card>
+                      <Spacer :height="30" />
+                    </v-col>
+                  </v-row>
+                </div>
+
+                <!-- Main Search Results -->
+                <div class="results-main-alert">
+                  <!-- Loading -->
+                  <div class="show-loading mt-2" v-show="isLoading">
+                    <v-card class="py-4 px-4 pageBar elevation-0">
+                      <h1 class="title">
+                        Loading
+                        <v-icon color="#00365e" icon="fa:fas fa-circle-notch fa-spin"/>
+                      </h1>
+                    </v-card>
                   </div>
-                </v-col>
-              </v-row>
-            </v-card>
 
+                  <!-- Search Query Error-->
+                  <div class="show-error" v-show="error">
+                    <h1>Something went wrong:</h1>
+                    <p class="error-message">{{ error }}</p>
+                  </div>
+
+                  <!-- Institution Results -->
+                  <div class="search-result-cards-container" v-if="!isLoading">
+                    <v-row>
+                      <v-col
+                        v-for="school in results.schools"
+                        :key="school.id"
+                        cols="12"
+                        xl="2"
+                        lg="3"
+                        md="4"
+                        sm="6"
+                        class="d-flex align-stretch"
+                      >
+                        <!-- <search-result-card :school="school" /> -->
+                      </v-col>
+                    </v-row>
+                  </div>
+
+                  <!-- Field of Study Results -->
+                  <div class="search-result-cards-container" v-else></div>
+                </div>
+
+                <!-- Bottom Pagination -->
+                <v-card
+                  class="mt-4 mb-2 py-1 px-4 pageBar elevation-0"
+                  v-if="!isLoading && results.schools.length > 0"
+                >
+                  <v-row>
+                    <v-col cols="12" class="py-3 px-3">
+                      <div class="text-left text-sm-right">
+                        <v-pagination
+                          v-model="displayPage"
+                          :length="totalPages"
+                          :total-visible="7"
+                          @input="handlePaginationInput"
+                          class="pr-0 mr-0"
+                        ></v-pagination>
+                      </div>
+                    </v-col>
+                  </v-row>
+                </v-card>
+
+              </div>
+            </div>
           </div>
         </div>
-      </v-col>
-    </v-row>
-  </v-container>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SEARCH CONTENT -->
+
+
+
+
+
 </template>
 
 
