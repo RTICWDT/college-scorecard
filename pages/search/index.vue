@@ -22,6 +22,31 @@
   background-color: white;
 }
 
+
+.sidebar-open {
+  max-width: 390px;
+}
+
+.sidebar-closed {
+  max-width: 0px;
+}
+
+.sidebar-mobile {
+  max-width: 100% !important;
+  z-index: 1000;
+}
+
+.sidebar-open-main {
+}
+.sidebar-closed-main {
+}
+.sidebar-mobile-main.sidebar-open-main {
+  display: none;
+}
+.sidebar-desktop-main {
+}
+
+
 </style>
 
 <template>
@@ -86,15 +111,18 @@
 
 
   <!-- the v-navigation-drawer doesn't want to behave so we need to devise a hand-rolled solution to the sidebar and main content layout -->
-  <div class="d-flex flex-row">
+  <div class="d-flex flex-row position-relative">
 
     <!-- SIDEBAR -->
     <div 
-      class="d-none d-md-block overflow-hidden sidebar-open sidebar-closed bg-white"
-      :style="{ maxWidth: showSidebar ? '390px' : '0px' }"
-      style="z-index: 0;"
+      :class="{
+        'sidebar-open': showSidebar,
+        'sidebar-closed': !showSidebar,
+        'sidebar-mobile': smAndDown,
+        'sidebar-desktop': !smAndDown
+      }"
     >
-      <div>
+      <div class="bg-white" v-if="showSidebar">
         <div class="pa-6 d-flex elevation-3">
           <h2 class="flex-grow-1">More Filters</h2>
           <a href="#"class="float-right close-filter"@click="showSidebar = !showSidebar">
@@ -122,21 +150,28 @@
           Find Schools
         </v-btn>
       </div>
-
-      <v-btn
-        v-scroll="onScroll"
-        v-show="btt"
-        style="position: fixed; bottom: 20px; right: 20px; z-index: 900000"
-        fab
-        dark
-        color="primary"
-        @click="toTop"
-        icon="fa:fas fa-arrow-up"
-      />
     </div>
+
+    <v-btn
+      v-scroll="onScroll"
+      v-show="btt"
+      style="position: fixed; bottom: 20px; right: 20px; z-index: 900000"
+      fab
+      dark
+      color="primary"
+      @click="toTop"
+      icon="fa:fas fa-arrow-up"
+    />
     
     <!-- MAIN -->
-    <div class="flex-grow-1">
+    <div 
+      class="flex-grow-1"       
+      :class="{
+        'sidebar-open-main': showSidebar,
+        'sidebar-closed-main': !showSidebar,
+        'sidebar-mobile-main': smAndDown,
+        'sidebar-desktop-main': !smAndDown
+      }">
       <div fluid class="pa-0">
         <div>
           <div :cols="showSidebar ? 6 : 9" xl="10" class="px-4 py-2 pa-sm-8`">
