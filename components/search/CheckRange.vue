@@ -52,6 +52,7 @@
               :prefix="prefix"
               :suffix="props.appendText"
               :aria-labelledby="generatedId"
+              :max-width="130"
             />
           </template>
         </v-slider>

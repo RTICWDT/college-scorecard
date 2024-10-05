@@ -23,6 +23,9 @@
 }
 
 
+.sidebar {
+}
+
 .sidebar-open {
   max-width: 390px;
 }
@@ -115,6 +118,7 @@
 
     <!-- SIDEBAR -->
     <div 
+      class="sidebar elevation-2"
       :class="{
         'sidebar-open': showSidebar,
         'sidebar-closed': !showSidebar,
