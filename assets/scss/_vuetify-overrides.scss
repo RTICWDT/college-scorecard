@@ -14,16 +14,19 @@ html {
   font-family: $base-font-family !important;
   background-color: $bg-gray !important;
   .v-pagination {
-    justify-content: flex-end;
     button {
-      box-shadow: 0px 1px 1px #0000001a !important;
-      border: 1px solid $bg-gray;
-      height: auto;
-      padding: 1px 4px;
+      height: 30px;
     }
-    @media only screen and (max-width:400px) {
-      margin-left:10px;
-    }
+    // justify-content: flex-end;
+    // button {
+    //   box-shadow: 0px 1px 1px #0000001a !important;
+    //   border: 1px solid $bg-gray;
+    //   height: auto;
+    //   padding: 1px 4px;
+    // }
+    // @media only screen and (max-width:400px) {
+    //   margin-left:10px;
+    // }
   }
 
   h1,
