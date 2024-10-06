@@ -105,25 +105,24 @@ const sizeTip = computed(() => {
 
 const yearIcon = computed(() => {
   const icon = yearsClass(years.value)
-  return icon ? `~/assets/images/school-icons/${icon.substr(5)}.svg` : 'none'
+  return icon ? `/school-icons/${icon.substring(5)}.svg` : 'none'
 })
 
 const ownershipIcon = computed(() => {
   const icon = controlClass(ownership.value)
-  return icon ? `~/assets/images/school-icons/${icon.substr(5)}.svg` : 'none'
+  return icon ? `/school-icons/${icon.substring(5)}.svg` : 'none'
 })
 
 const localeIcon = computed(() => {
   const icon = localeClass(schoolLocale.value)
-  return icon && icon !== 'unknown' ? `~/assets/images/school-icons/${icon.substr(5)}.svg` : 'none'
+  return icon && icon !== 'unknown' ? `/school-icons/${icon.substring(5)}.svg` : 'none'
 })
 
 const sizeIcon = computed(() => {
   const icon = sizeCategoryClass(schoolSize.value)
-  return icon ? `~/assets/images/school-icons/${icon.substr(5)}.svg` : 'none'
+  return icon ? `/school-icons/${icon.substring(5)}.svg` : 'none'
 })
 
-console.log(ownershipIcon.value)
 </script>
 
 <style lang="scss" scoped>

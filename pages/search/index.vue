@@ -27,10 +27,12 @@
 }
 
 .sidebar-open {
+  min-width: 390px;
   max-width: 390px;
 }
 
 .sidebar-closed {
+  min-width: 0px;
   max-width: 0px;
 }
 
@@ -118,7 +120,7 @@
 
     <!-- SIDEBAR -->
     <div 
-      class="sidebar elevation-2"
+      class="sidebar elevation-2 bg-white"
       :class="{
         'sidebar-open': showSidebar,
         'sidebar-closed': !showSidebar,
@@ -194,8 +196,8 @@
                 class="mt-2 mb-4 py-4 px-4 elevation-0 pageBar"
                 v-show="!isLoading"
               >
-                <v-row class="">
-                  <v-col cols="12" sm="8" class="py-2 px-4">
+                <div class="d-flex">
+                  <div cols="12" sm="8" class="py-2 px-4 flex-grow-1">
                     <div id="search-result-info-count" class>
                       <p class="title mb-0">
                         {{ results.meta.total }} Results
@@ -226,9 +228,9 @@
                             >
                               <v-icon small class="mx-1" icon="fa:fas fa-sort" />
                               Sort:
-                              <!-- {{
+                              {{
                                 sorts.find((el) => el.field === input.sort).type
-                              }} -->
+                              }}
                             </v-btn>
                           </template>
                           <v-list :min-width="200">
@@ -254,28 +256,20 @@
                         /> -->
                       </p>
                     </div>
-                  </v-col>
+                  </div>
 
                   <!--  -->
                   <!-- PAGINATION -->
                   <!--  -->
-                  <v-col
-                    cols="12"
-                    sm="4"
-                    class="py-1 px-1"
-                    v-show="!isLoading && results.schools.length > 0"
-                  >
-                    <div class="d-block text-right">
-                      <v-pagination
-                        v-model="displayPage"
-                        :length="totalPages"
-                        :total-visible="7"
-                        @input="handlePaginationInput"
-                        class="pr-0 mr-0 justify-end text-right ml-1"
-                      ></v-pagination>
-                    </div>
-                  </v-col>
-                </v-row>
+                  <div v-show="!isLoading && results.schools.length > 0">
+                    <v-pagination
+                      v-model="displayPage"
+                      :length="totalPages"
+                      :total-visible="2"
+                      @input="handlePaginationInput"
+                    />
+                  </div>
+                </div>
               </v-card>
 
 
@@ -357,10 +351,11 @@
                       v-for="school in results.schools"
                       :key="school.id"
                       cols="12"
-                      xl="2"
-                      lg="3"
-                      md="4"
+                      :xl="showSidebar ? 3 : 2"
+                      :lg="showSidebar ? 4 : 3"
+                      :md="showSidebar ? 6 : 4"
                       sm="6"
+                      xs="12"
                       class="d-flex align-stretch"
                     >
                       <SearchResultCard :school="school" />
@@ -377,19 +372,15 @@
                 class="mt-4 mb-2 py-1 px-4 pageBar elevation-0"
                 v-if="!isLoading && results.schools.length > 0"
               >
-                <v-row>
-                  <v-col cols="12" class="py-3 px-3">
-                    <div class="text-left text-sm-right">
+                <div class="d-flex flex-row-reverse">
                       <v-pagination
                         v-model="displayPage"
                         :length="totalPages"
-                        :total-visible="7"
+                        :total-visible="4"
                         @input="handlePaginationInput"
                         class="pr-0 mr-0"
-                      ></v-pagination>
-                    </div>
-                  </v-col>
-                </v-row>
+                      />
+                </div>
               </v-card>
 
             </div>

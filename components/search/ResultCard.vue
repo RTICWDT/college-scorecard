@@ -15,10 +15,8 @@
       <v-tooltip location="bottom">
         <template v-slot:activator="{ props }">
           <v-btn
-            text
             icon
             class="float-right search-result-card-compare"
-            :color="isSelected ? '#0075B2' : 'grey'"
             @click="store.toggleSchool(school)"
             :class="[
               isSelected ? '' : compareSchoolsLength > 9 ? 'noCompareAllow' : ''
@@ -26,7 +24,7 @@
             v-bind="props"
             aria-label="Add to compare"
           >
-            <v-icon>fa fa-check-circle</v-icon>
+            <v-icon :color="isSelected ? '#0075B2' : 'grey'" icon="fa:fa fa-check-circle"></v-icon>
             <span class="sr-only">Compare</span>
           </v-btn>
         </template>
