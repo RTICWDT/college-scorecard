@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { useLocalStorage } from '@vueuse/core'
 
-export const useStore = defineStore('web', {
+export const useStore = defineStore('default', {
   state: () => ({
     fos: useLocalStorage('fos', []),
     institutions: useLocalStorage('institutions', []),
@@ -25,6 +25,7 @@ export const useStore = defineStore('web', {
       }
       
       const index = this.institutions.findIndex(inst => inst.schoolId === entry.schoolId)
+
       if (index !== -1) {
         this.institutions.splice(index, 1)
       } else {
