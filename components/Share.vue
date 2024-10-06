@@ -1,0 +1,155 @@
+<template>
+  <div>
+    <v-menu location="bottom">
+      <template v-slot:activator="{ props }">
+        <v-btn
+          v-bind="props"
+          size="small"
+          :elevation="1"
+        >
+          <v-icon size="x-small" class="mr-2 share">mdi-share-variant</v-icon>
+          {{ label }}
+        </v-btn>
+      </template>
+      <v-list min-width="200">
+        <v-list-item
+          v-for="(item, index) in items"
+          :key="index"
+          @click="picked(item)"
+        >
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item v-if="showCopy" @click="copyURL">
+          <v-list-item-title>{{ copyText }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+
+    <v-dialog
+      v-model="showCopyNotify"
+      @update:modelValue="showCopyNotify = $event"
+      class="v-copy-notify"
+      :scrim="false"
+      max-width="180"
+      transition="fade-transition"
+    >
+      <v-card>
+        <v-btn
+          @click="showCopyNotify = false"
+          icon="mdi-close-circle"
+          class="float-right mt-3 mr-3"
+        ></v-btn>
+        <v-card-text class="pb-5 pt-5 text-center">
+          <div>Copied!</div>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.v-copy-notify {
+  overflow: hidden;
+}
+</style>
+
+<script setup>
+const props = defineProps({
+  url: { type: String, default: "" },
+  label: { type: String, default: "Share" },
+  small: { type: Boolean, default: false },
+  text: { type: Boolean, default: false },
+  fos: { type: Boolean, default: false },
+  color: { type: String, default: "secondary" },
+  hide: { type: Array, default: () => [] },
+  showCopy: { type: Boolean, default: false },
+  copyText: { type: String, default: "Copy URL to Clipboard" },
+})
+
+const showCopyNotify = ref(false)
+const copyStatus = ref('Copied!')
+const { trackShare } = useAnalytics()
+
+const items = computed(() => {
+  const shareOptions = [
+    {
+      title: "X (Twitter)",
+      url: `https://twitter.com/intent/tweet?text=${sentence.value}&url=`,
+    },
+    {
+      title: "Facebook",
+      url: "https://www.facebook.com/sharer/sharer.php?u=",
+    },
+    {
+      title: "Email",
+      url: `mailto:?subject=${sentence.value.slice(0, -1)}&body=I%20found%20this%20on%20collegescorecard.ed.gov.%20Take%20a%20look%3A%0A%0A`,
+    },
+    {
+      title: "LinkedIn",
+      url: "https://www.linkedin.com/sharing/share-offsite/?url=",
+    },
+  ]
+
+  return shareOptions.filter((option) => !props.hide.includes(option.title.toLowerCase()))
+})
+
+const sentence = computed(() => {
+  switch (props.label.toLowerCase()) {
+    case "share":
+      return "Take a look at this school search from the College Scorecard:"
+    case "share this comparison":
+      return "Take a look at this school comparison on the College Scorecard:"
+    case "share this school":
+      return "Take a look at this school on the College Scorecard:"
+    default:
+      return ""
+  }
+})
+
+function picked(item) {
+  trackShare(item.title)
+  window.open(item.url + encodeURIComponent(props.url), "_blank")
+}
+
+
+function copyURL() {
+  if (navigator.clipboard && window.isSecureContext) {
+    // For modern browsers in secure contexts
+    navigator.clipboard.writeText(props.url)
+      .then(() => {
+        copyStatus.value = 'Copied!'
+        showCopyNotification()
+      })
+      .catch(() => {
+        copyStatus.value = 'Failed to copy'
+        showCopyNotification()
+      })
+  } else {
+    // Fallback for older browsers or non-secure contexts
+    const textArea = document.createElement("textarea")
+    textArea.value = props.url
+    textArea.style.position = "fixed"
+    textArea.style.left = "-999999px"
+    textArea.style.top = "-999999px"
+    document.body.appendChild(textArea)
+    textArea.focus()
+    textArea.select()
+
+    try {
+      document.execCommand('copy')
+      copyStatus.value = 'Copied!'
+    } catch (err) {
+      copyStatus.value = 'Failed to copy'
+    }
+
+    document.body.removeChild(textArea)
+    showCopyNotification()
+  }
+}
+
+function showCopyNotification() {
+  showCopyNotify.value = true
+  setTimeout(() => (showCopyNotify.value = false), 3000)
+}
+</script>
