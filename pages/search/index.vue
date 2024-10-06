@@ -128,7 +128,7 @@
         'sidebar-desktop': !smAndDown
       }"
     >
-      <div class="bg-white" v-if="showSidebar">
+      <div class="bg-white" v-show="showSidebar">
         <div class="pa-6 d-flex elevation-3">
           <h2 class="flex-grow-1">More Filters</h2>
           <a href="#"class="float-right close-filter d-none d-md-block"@click="showSidebar = !showSidebar">
