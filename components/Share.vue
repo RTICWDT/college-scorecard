@@ -35,14 +35,14 @@
       transition="fade-transition"
     >
       <v-card>
-        <v-btn
-          @click="showCopyNotify = false"
-          icon="mdi-close-circle"
-          class="float-right mt-3 mr-3"
-        ></v-btn>
-        <v-card-text class="pb-5 pt-5 text-center">
-          <div>Copied!</div>
-        </v-card-text>
+        <div class="d-flex align-center pa-3">
+          <div class="mr-3 flex-grow-1">Copied!</div>
+            <v-btn
+              @click="showCopyNotify = false"
+              icon="mdi-close-circle"
+              size="small"
+            />
+        </div>
       </v-card>
     </v-dialog>
   </div>
