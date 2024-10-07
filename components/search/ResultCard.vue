@@ -122,7 +122,7 @@ const props = defineProps({
   schoolsCount: Number,
 })
 
-const store = useStore()
+const store = useCompareStore()
 
 
 const { 

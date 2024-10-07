@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { useLocalStorage } from '@vueuse/core'
 
-export const useStore = defineStore('default', {
+export const useCompareStore = defineStore('compare', {
   state: () => ({
     fos: useLocalStorage('fos', []),
     institutions: useLocalStorage('institutions', []),

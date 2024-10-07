@@ -51,6 +51,13 @@
 .sidebar-desktop-main {
 }
 
+.v-pagination-wrapper {
+  margin-left: auto;
+  @include xs { max-width: 320px; }
+  @include sm { max-width: 500px; }
+  @include md { max-width: 400px; }
+  @include lg { max-width: 500px; }
+}
 
 </style>
 
@@ -183,7 +190,7 @@
         <div>
           <div :cols="showSidebar ? 6 : 9" xl="10" class="px-4 py-2 pa-sm-8`">
             <div v-if="isLoading">
-              <v-card class="mt-2 mb-4 py-4 px-4 elevation-0 pageBar">
+              <v-card class="mt-2 mb-4 py-4 px-4 elevation-0">
                 <h3 class="title">
                   Loading
                   <v-icon size="z-small" color="#00365e" icon="fa:fas fa-circle-notch fa-spin" class="ml-2"/>
@@ -193,83 +200,84 @@
 
             <div v-else>
               <v-card
-                class="mt-2 mb-4 py-4 px-4 elevation-0 pageBar"
+                class="mt-2 mb-4 py-4 px-4 elevation-0"
                 v-show="!isLoading"
               >
-                <div class="d-flex">
-                  <div cols="12" sm="8" class="py-2 px-4 flex-grow-1">
-                    <div id="search-result-info-count" class>
-                      <p class="title mb-0">
-                        {{ results.meta.total }} Results
+                <v-container fluid class="d-flex pa-0">
+                  <v-row>
+                    <v-col cols="12" xs="12" sm="12" md="6" class="py-2 px-4">
+                      <div id="search-result-info-count" class>
+                        <p class="title mb-0">
+                          {{ results.meta.total }} Results
+                        </p>
+
                         <Spacer :height="10" />
-                        <v-btn
-                          id="search-button-clear"
-                          @click="clearSearchForm"
-                          small
-                          outlined
-                          class="mr-3 mb-1 mb-sm-0 searchbtn"
-                          elevation="1"
-                        >
-                          <span>
-                            <v-icon small class="mr-1">mdi-close-circle</v-icon>
-                            Reset Filters
-                          </span>
-                        </v-btn>
-                        <br class="d-block d-sm-none" />
 
-                        <v-menu offset-y>
-                          <template v-slot:activator="{ on }">
+                        <div class="d-flex flex-column flex-md-row">
+                          <div class="d-fle flex-column">
                             <v-btn
-                              id="search-button-sort"
-                              small
-                              outlined
-                              class="mr-3 mb-1 mb-sm-0 searchbtn"
-                              elevation="1"
+                              id="search-button-clear"
+                              @click="clearSearchForm"
+                              size="small"
+                              elevation="2"
+                              class="mr-3 mb-2"
                             >
-                              <v-icon small class="mx-1" icon="fa:fas fa-sort" />
-                              Sort:
-                              {{
-                                sorts.find((el) => el.field === input.sort).type
-                              }}
+                              <span>
+                                <v-icon small class="mr-1">mdi-close-circle</v-icon>
+                                Reset Filters
+                              </span>
                             </v-btn>
-                          </template>
-                          <v-list :min-width="200">
-                            <v-list-item
-                              v-for="(item, index) in sorts"
-                              :key="item.field"
-                              :value="item.field"
-                              @click="resort(item.field)"
-                            >
-                              <v-list-item-title>{{ item.type }}</v-list-item-title>
-                            </v-list-item>
-                          </v-list>
-                        </v-menu>
-                        <br class="d-block d-sm-none" />
-                        <!-- <share
-                          :url="encodeURI(shareUrl)"
-                          label="Share"
-                          small
-                          show-copy
-                          :hide="['email']"
-                          color="#eff1f5"
-                          class="mr-3 mb-1 mb-sm-0 "
-                        /> -->
-                      </p>
-                    </div>
-                  </div>
 
-                  <!--  -->
-                  <!-- PAGINATION -->
-                  <!--  -->
-                  <div v-show="!isLoading && results.schools.length > 0">
-                    <v-pagination
-                      v-model="displayPage"
-                      :length="totalPages"
-                      :total-visible="2"
-                      @input="handlePaginationInput"
-                    />
-                  </div>
-                </div>
+                            <v-menu offset-y>
+                              <template v-slot:activator="{ on }">
+                                <v-btn
+                                  id="search-button-sort"
+                                  size="small"
+                                  class="mr-3 mb-2 searchbtn"
+                                  elevation="2"
+                                >
+                                  <v-icon small class="mx-1" icon="fa:fas fa-sort" />
+                                  Sort:
+                                  {{
+                                    sorts.find((el) => el.field === input.sort).type
+                                  }}
+                                </v-btn>
+                              </template>
+                              <v-list :min-width="200">
+                                <v-list-item
+                                  v-for="(item, index) in sorts"
+                                  :key="item.field"
+                                  :value="item.field"
+                                  @click="resort(item.field)"
+                                >
+                                  <v-list-item-title>{{ item.type }}</v-list-item-title>
+                                </v-list-item>
+                              </v-list>
+                            </v-menu>
+                          </div>
+
+                          <Share
+                            :url="encodeURI(shareUrl)"
+                            label="Share"
+                            show-copy
+                            :hide="['email']"
+                          />
+                        </div>
+                      </div>
+                    </v-col>
+
+                    <!--  -->
+                    <!-- PAGINATION -->
+                    <!--  -->
+                    <v-col xs="12" sm="12" md="6" class="v-pagination-wrapper pr-0">
+                      <v-pagination 
+                        v-model="displayPage"
+                        :length="totalPages"
+                        @input="handlePaginationInput"
+                      />
+                    </v-col>
+                  </v-row>
+                </v-container>
               </v-card>
 
 
@@ -330,7 +338,7 @@
               <div class="results-main-alert">
                 <!-- Loading -->
                 <div class="show-loading mt-2" v-show="isLoading">
-                  <v-card class="py-4 px-4 pageBar elevation-0">
+                  <v-card class="py-4 px-4 elevation-0">
                     <h1 class="title">
                       Loading
                       <v-icon color="#00365e" icon="fa:fas fa-circle-notch fa-spin"/>
@@ -369,18 +377,20 @@
 
               <!-- Bottom Pagination -->
               <v-card
-                class="mt-4 mb-2 py-1 px-4 pageBar elevation-0"
+                class="mt-4 mb-2 py-1 px-4 elevation-0"
                 v-if="!isLoading && results.schools.length > 0"
               >
-                <div class="d-flex flex-row-reverse">
+                <v-container fluid>
+                  <v-row>
+                    <v-col cols="12" class="v-pagination-wrapper pa-0">
                       <v-pagination
                         v-model="displayPage"
                         :length="totalPages"
-                        :total-visible="4"
                         @input="handlePaginationInput"
-                        class="pr-0 mr-0"
                       />
-                </div>
+                    </v-col>
+                  </v-row>
+                </v-container>
               </v-card>
 
             </div>
