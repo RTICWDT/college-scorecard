@@ -29,6 +29,9 @@ export default defineNuxtPlugin((nuxtApp) => {
             primaryfos: '#fdb022',
             tertiary: '#ebf0f3',
             darkgrey: '#6c737c'
+          },
+          variables: {
+            'medium-emphasis-opacity': 1,
           }
         },
       },

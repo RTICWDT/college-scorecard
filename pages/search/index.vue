@@ -441,7 +441,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['loading', 'search-form-reset', 'reset-dol-flag'])
-const showSidebar = ref(true)
+const showSidebar = ref(!smAndDown.value)
 const isLoading = ref(true)
 
 const results = reactive({

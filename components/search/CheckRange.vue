@@ -34,6 +34,7 @@
                 class="pa-0 ma-0"
                 hide-details
                 :aria-labelledby="generatedId"
+                @keydown.enter.prevent
               />
             </div>
           </template>
@@ -53,6 +54,7 @@
               :suffix="props.appendText"
               :aria-labelledby="generatedId"
               :max-width="130"
+              @keydown.enter.prevent
             />
           </template>
         </v-slider>
@@ -69,7 +71,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  modelValue: Number,
+  modelValue: {
+    type: Number,
+    default: 0,
+  },
   enable: Boolean,
   min: Number,
   max: Number,
@@ -123,7 +128,7 @@ onMounted(() => {
     trackBackground.value = "grey"
   }
 
-  emit('update:modelValue', 0);
+  emit('update:modelValue', props.modelValue || 0);
 })
 
 function handleSliderInput(value) {
@@ -169,5 +174,9 @@ function handleEnable(e) {
 .appendedText {
   margin-top: 20px;
   padding: 0 5px;
+}
+
+:deep(.v-slider-track__background--opacity) {
+  opacity: 1;
 }
 </style>

@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
 .search-subhead {
-  color: variables.$black;
+  color: variables.$darker-gray;
 }
 
 .v-expansion-panel {
@@ -10,10 +10,14 @@
 .v-expansion-panel:not(:last-child) {
   border-bottom: 1px solid variables.$light-gray;
 }
+
+:deep(.v-input.option-checkbox) {
+  height: 30px;
+}
 </style>
 
 <template>
-  <v-form @submit="onFormSubmit">
+  <v-form>
     <v-expansion-panels
       accordion
       multiple
@@ -41,6 +45,8 @@
             label="Certificate"
             value="1"
             hide-details
+            class="option-checkbox"
+            @keydown.enter.prevent
           />
           <v-checkbox
             density="compact"
@@ -49,6 +55,8 @@
             label="Associate's Degree"
             value="2"
             hide-details
+            class="option-checkbox"
+            @keydown.enter.prevent
           />
           <v-checkbox
             density="compact"
@@ -57,6 +65,8 @@
             label="Bachelor's Degree"
             value="3"
             hide-details
+            class="option-checkbox"
+            @keydown.enter.prevent
           />
           <Spacer :height="20"/>
           <span class="search-subhead pt-5">Graduate</span>
@@ -67,6 +77,8 @@
             label="Master's Degree"
             value="5"
             hide-details
+            class="option-checkbox"
+            @keydown.enter.prevent
           />
           <v-checkbox
             density="compact"
@@ -75,6 +87,8 @@
             label="Post-baccalaureate Certificate"
             value="4"
             hide-details
+            class="option-checkbox"
+            @keydown.enter.prevent
           />
           <v-checkbox
             density="compact"
@@ -83,6 +97,8 @@
             label="Doctoral Degree"
             value="6"
             hide-details
+            class="option-checkbox"
+            @keydown.enter.prevent
           />
           <v-checkbox
             density="compact"
@@ -91,6 +107,8 @@
             label="First Professional Degree"
             value="7"
             hide-details
+            class="option-checkbox"
+            @keydown.enter.prevent
           />
           <v-checkbox
             density="compact"
@@ -99,7 +117,10 @@
             label="Graduate/Professional Certificate"
             value="8"
             hide-details
-          /> 
+            class="option-checkbox"
+            @keydown.enter.prevent
+          />
+          <Spacer :height="20"/>
         </v-expansion-panel-text>
       </v-expansion-panel>
 
@@ -221,6 +242,7 @@
             value="small"
             color="secondary"
             class="py-0 my-0"
+            @keydown.enter.prevent
           />
           <v-checkbox
             density="compact"
@@ -231,6 +253,7 @@
             value="medium"
             color="secondary"
             class="py-0 my-0"
+            @keydown.enter.prevent
           />
           <v-checkbox
             density="compact"
@@ -241,6 +264,7 @@
             value="large"
             color="secondary"
             class="py-0 my-0"
+            @keydown.enter.prevent
           />
         </v-expansion-panel-text>
       </v-expansion-panel>
@@ -259,6 +283,7 @@
               value="public"
               color="secondary"
               class="py-0 my-0"
+              @keydown.enter.prevent
             />
             <v-checkbox
               density="compact"
@@ -269,6 +294,7 @@
               value="private"
               color="secondary"
               class="py-0 my-0"
+              @keydown.enter.prevent
             />
             <v-checkbox
               density="compact"
@@ -279,6 +305,7 @@
               value="profit"
               color="secondary"
               class="py-0 my-0"
+              @keydown.enter.prevent
             />
           </div> 
         </v-expansion-panel-text>
@@ -297,6 +324,7 @@
             value="city"
             color="secondary"
             class="py-0 my-0"
+            @keydown.enter.prevent
           />
           <v-checkbox
             density="compact"
@@ -307,6 +335,7 @@
             value="suburban"
             color="secondary"
             class="py-0 my-0"
+            @keydown.enter.prevent
           />
           <v-checkbox
             density="compact"
@@ -317,6 +346,7 @@
             value="town"
             color="secondary"
             class="py-0 my-0"
+            @keydown.enter.prevent
           />
           <v-checkbox
             density="compact"
@@ -327,6 +357,7 @@
             value="rural"
             color="secondary"
             class="py-0 my-0"
+            @keydown.enter.prevent
           />
         </v-expansion-panel-text>
       </v-expansion-panel>
@@ -348,6 +379,7 @@
             density="compact"
             aria-labelledby="specialized-mission-label"
             variant="outlined"
+            @keydown.enter.prevent
           />
         </v-expansion-panel-text>
       </v-expansion-panel>
@@ -388,18 +420,19 @@
             value="true"
             color="secondary"
             hide-details
+            @keydown.enter.prevent
           /> 
         </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>
 
     <div id="search-submit-container" class="py-5" v-show="!autoSubmit">
-      <v-btn color="secondary" large @click="performSearch">
+      <v-btn color="secondary" size="large" @click="performSearch">
         Find Schools
       </v-btn>
     </div>
 
-    <v-btn type="submit" class="sr-only" color="secondary" large @click="performSearch">
+    <v-btn type="submit" class="sr-only" color="secondary" size="large" @click="performSearch">
       Find Schools
     </v-btn>
   </v-form>
@@ -407,7 +440,7 @@
 
 <script setup>
 const { location } = useLocationCheck()
-const emitSearch = defineEmits(["search-query"])
+const emit = defineEmits(["search-query", "submit-search"])
 const { site } = useSiteData()
 
 const props = defineProps({
@@ -514,15 +547,15 @@ const cleanInput = computed(() => {
     }
   })
 
+  // Completion rate
   if (
     groomedInput.completion_rate &&
     groomedInput.completion_rate > 0 &&
     utility.enable.completion_rate
   ) {
     groomedInput.completion_rate = groomedInput.completion_rate / 100 + ".."
-    panels.value.push(3)
   } else {
-    useUnset(groomedInput, "completion_rate")
+    useUnset(groomedInput, "completion_rate") // TODO: CONST;
   }
 
   if (
@@ -531,31 +564,66 @@ const cleanInput = computed(() => {
     utility.enable.avg_net_price
   ) {
     groomedInput.avg_net_price = ".." + groomedInput.avg_net_price * 1000
-    panels.value.push(4)
   } else {
-    useUnset(groomedInput, "avg_net_price")
+    useUnset(groomedInput, "avg_net_price") // TODO: CONST;
   }
 
-  // ... (similar logic for sat_math, sat_read, act, acceptance)
+  if (
+    groomedInput.sat_math &&
+    groomedInput.sat_math > 0 &&
+    utility.enable.sat_math
+  ) {
+    groomedInput.sat_math = ".." + groomedInput.sat_math
+  } else {
+    useUnset(groomedInput, "sat_math") // TODO: CONST;
+  }
 
+  if (
+    groomedInput.sat_read &&
+    groomedInput.sat_read > 0 &&
+    utility.enable.sat_read
+  ) {
+    groomedInput.sat_read = ".." + groomedInput.sat_read
+  } else {
+    useUnset(groomedInput, "sat_read") // TODO: CONST;
+  }
+
+  if (groomedInput.act && groomedInput.act > 0 && utility.enable.act) {
+    groomedInput.act = ".." + groomedInput.act
+    panels.value.push(5)
+  } else {
+    useUnset(groomedInput, "act") // TODO: CONST;
+  }
+
+  if (
+    groomedInput.acceptance &&
+    groomedInput.acceptance > 0 &&
+    utility.enable.acceptance
+  ) {
+    groomedInput.acceptance = groomedInput.acceptance / 100 + "..1"
+  } else {
+    useUnset(groomedInput, "acceptance") // TODO: CONST;
+  }
+
+  // Handle edgecase for distance :(
   if (groomedInput.zip) {
-    groomedInput.distance = input.distance
+    groomedInput.distance = this.input.distance
   } else {
     useUnset(groomedInput, "distance")
   }
 
-  if (groomedInput.size) panels.value.push(7)
-  if (groomedInput.control) panels.value.push(8)
-  if (groomedInput.locale) panels.value.push(9)
-  if (groomedInput.serving) panels.value.push(10)
-  if (groomedInput.religious) panels.value.push(11)
-  if (groomedInput.dolflag) panels.value.push(12)
+  if (groomedInput.size) {}
+  if (groomedInput.control) {}
+  if (groomedInput.locale) {}
+  if (groomedInput.serving) {}
+  if (groomedInput.religious) {}
+  if (groomedInput.dolflag) {}
 
   return groomedInput
 })
 
 const performSearch = () => {
-  emitSearch("search-query", cleanInput.value)
+  emit("search-submit", cleanInput.value)
 }
 
 const mapInputFromProp = () => {
@@ -619,11 +687,6 @@ const mapInputFromProp = () => {
   }
 }
 
-const onFormSubmit = (e) => {
-  e.preventDefault()
-  console.log("pressed enter")
-}
-
 const resetFormDefault = () => {
   // TODO - Create reset value method, pass desired fields to method, return default values from object.
   Object.assign(input, useCloneDeep(formDefault))
@@ -640,7 +703,7 @@ const handleLocationSelection = (params) => {
 
 const debounceEmitSearchQuery = useDebounce(() => {
     // Send new param object, reset page
-    emitSearch("search-query", { ...cleanInput.value, page: 0 })
+    emit("search-query", { ...cleanInput.value, page: 0 })
   }, 1000)
 
 onMounted(() => {
@@ -649,7 +712,7 @@ onMounted(() => {
   // Call mapInputFromProp
   mapInputFromProp()
   if (props.autoSubmit) {
-    emitSearch("search-query", { ...cleanInput.value, page: 0 })
+    emit("search-query", { ...cleanInput.value, page: 0 })
   }
 
   window.addEventListener("search-form-reset", resetFormDefault)
@@ -665,7 +728,7 @@ watch(cleanInput, (newValue, oldValue) => {
   if (utility.initialized) {
     debounceEmitSearchQuery()
   } else {
-    emitSearch("search-query", { ...newValue })
+    emit("search-query", { ...newValue })
     utility.initialized = true
   }
 }, { deep: true })

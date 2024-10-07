@@ -48,7 +48,7 @@
 
                   <div v-if="toggleCustomSearch">
                     <Spacer :height="10" />
-                    <SearchForm @search-query="directToSearch" :hideLocation="false" :initiallyOpenPanelsByIndex="[0,1]" />
+                    <SearchForm @search-submit="directToSearch" :hideLocation="false" :initiallyOpenPanelsByIndex="[0,1]" />
                   </div>
                 </v-card>
               </v-tabs-window-item>
@@ -435,6 +435,7 @@ const colorSlider = (num) => {
 }
 
 const directToSearch = (params) => {
+  console.log(params)
   // Generate URL based on params
   const qs = new URLSearchParams(params).toString()
   const url = "/search/?" + qs.replace(/&{2,}/g, "&").replace(/%3A/g, ":")
