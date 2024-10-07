@@ -29,6 +29,21 @@ export default defineNuxtConfig({
     'nuxt-lodash',
   ],
 
+  app: {
+    head: {
+      link: [
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap'
+        },
+        {
+          rel: 'stylesheet',
+          href: 'https://use.typekit.net/nmj8tls.css'
+        }
+      ]
+    }
+  },
+
   css: [
     'vuetify/styles',
     '@mdi/font/css/materialdesignicons.css',

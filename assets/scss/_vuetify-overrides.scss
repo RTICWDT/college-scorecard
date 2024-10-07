@@ -39,13 +39,6 @@ html {
     }
   }
   body,
-  p {
-    font-family: $base-font-family !important;
-    max-width: 800px;
-  }
-  li {
-    max-width: 800px;
-  }
   a {
     color: $darker-green;
   }
@@ -54,11 +47,6 @@ html {
     border-bottom-style: none;
     margin-top: 1rem;
     margin-bottom: 1rem;
-  }
-  @media (min-width: 1904px) {
-    .container {
-      max-width: 1300px;
-    }
   }
 
   .title,
@@ -75,10 +63,6 @@ html {
     box-shadow: none;
   }
 
-  .searchForTitle {
-    font-weight: 600;
-  }
-
   .display-2 {
     font-size: 28px !important;
     line-height: 32px !important;
@@ -88,6 +72,7 @@ html {
     font-size: 3rem !important;
     line-height: 32px !important;
   }
+
 
   .v-expansion-panel-title {
     font-weight: 500;
@@ -102,16 +87,20 @@ html {
       line-height: 140%;
     }
   }
+
+
   .v-data-table th {
     font-size: 1rem;
     font-family: $header-font-family !important;
   }
+
   .v-card {
     overflow-wrap: normal;
     border: 1px solid #dfe6f0;
     border-radius: 6px;
     //box-shadow: none !important;
   }
+
   .v-bottom-sheet--inset {
     @media screen and (min-width: 1000px) {
       max-width: 50% !important;
@@ -128,6 +117,7 @@ html {
     line-height: 160% !important;
     letter-spacing: normal !important;
   }
+
   .v-tabs-items {
     background-color: transparent;
     box-shadow: 0px 10px 16px #0000001a !important;

@@ -562,7 +562,7 @@ const buildQuery = (params) => {
 }
 
 const updateRouterAndStorage = (params, qs) => {
-  router.push({ query: params })
+  router.replace({ query: params })
   addURLToStorage(qs)
 }
 

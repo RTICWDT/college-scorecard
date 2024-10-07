@@ -13,7 +13,7 @@
 </style>
 
 <template>
-  <v-form>
+  <v-form @submit="onFormSubmit">
     <v-expansion-panels
       accordion
       multiple
@@ -617,6 +617,11 @@ const mapInputFromProp = () => {
     input.search = input.name
     input.name = ""
   }
+}
+
+const onFormSubmit = (e) => {
+  e.preventDefault()
+  console.log("pressed enter")
 }
 
 const resetFormDefault = () => {

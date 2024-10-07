@@ -73,7 +73,7 @@
                         v-model="input.cip4_degree"
                         hide-details
                         id="fosDegree"
-                        color="fos-search-color"
+                        color="#007000"
                         aria-required="true"
                       />
                     </v-col>
@@ -194,7 +194,7 @@
         <v-row class="align-stretch">
           <!-- apprenticeships callout -->
           <v-col cols="12" md="6" class="pr-sm-8">
-            <v-card flat class="pa-8">
+            <v-card flat class="pa-7">
               <h2 class="display-2 d-flex justify-space-between align-center">
                 <span>Alternative Pathways<br />to a Career</span>
                 <v-avatar color="#D1E9FF">
@@ -262,7 +262,7 @@
 
           <!-- paying callout -->
           <v-col cols="12" md="6" sm="12" class="pl-sm-8">
-            <v-card flat class="pa-8">
+            <v-card flat class="pa-7">
               <h2 class="display-2 d-flex justify-space-between align-center">
                 <span class="">Learn More About<br />Paying for College</span>
                 <v-avatar color="#D1E9FF">
