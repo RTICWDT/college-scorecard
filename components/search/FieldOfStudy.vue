@@ -11,7 +11,7 @@
     variant="outlined"
     hide-no-data
     hide-details
-    color="fos-search-color"
+    color="#007000"
     prepend-inner-icon="fa:fas fa-search"
     aria-label="Field of Study Search"
     :density="dense ? 'compact' : 'default'"
@@ -71,24 +71,5 @@ const handleFieldOfStudySelect = (selectedItem) => {
 </script>
 
 <style lang="scss">
-.v-application {
-  .primary--text {
-    color: green !important;
-  }
-  .fos-search-color--text {
-    color: var(--fos-color-gold) !important;
-  }
-}
 
-.fos-search-result-item-container {
-  width: 300px;
-
-  .v-list-item-title,
-  .v-list-item-subtitle {
-    text-overflow: unset;
-    overflow: unset;
-    white-space: unset;
-    overflow-wrap: break-word;
-  }
-}
 </style>

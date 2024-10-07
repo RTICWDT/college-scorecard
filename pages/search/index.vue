@@ -441,7 +441,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['loading', 'search-form-reset', 'reset-dol-flag'])
-const showSidebar = ref(true)
+const showSidebar = ref(!smAndDown.value)
 const isLoading = ref(true)
 
 const results = reactive({
@@ -562,7 +562,7 @@ const buildQuery = (params) => {
 }
 
 const updateRouterAndStorage = (params, qs) => {
-  router.push({ query: params })
+  router.replace({ query: params })
   addURLToStorage(qs)
 }
 
