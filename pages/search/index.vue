@@ -213,46 +213,48 @@
 
                         <Spacer :height="10" />
 
-                        <div class="d-flex">
-                          <v-btn
-                            id="search-button-clear"
-                            @click="clearSearchForm"
-                            size="small"
-                            elevation="2"
-                            class="mr-3"
-                          >
-                            <span>
-                              <v-icon small class="mr-1">mdi-close-circle</v-icon>
-                              Reset Filters
-                            </span>
-                          </v-btn>
+                        <div class="d-flex flex-column flex-md-row">
+                          <div class="d-fle flex-column">
+                            <v-btn
+                              id="search-button-clear"
+                              @click="clearSearchForm"
+                              size="small"
+                              elevation="2"
+                              class="mr-3 mb-2"
+                            >
+                              <span>
+                                <v-icon small class="mr-1">mdi-close-circle</v-icon>
+                                Reset Filters
+                              </span>
+                            </v-btn>
 
-                          <v-menu offset-y>
-                            <template v-slot:activator="{ on }">
-                              <v-btn
-                                id="search-button-sort"
-                                size="small"
-                                class="mr-3 searchbtn"
-                                elevation="2"
-                              >
-                                <v-icon small class="mx-1" icon="fa:fas fa-sort" />
-                                Sort:
-                                {{
-                                  sorts.find((el) => el.field === input.sort).type
-                                }}
-                              </v-btn>
-                            </template>
-                            <v-list :min-width="200">
-                              <v-list-item
-                                v-for="(item, index) in sorts"
-                                :key="item.field"
-                                :value="item.field"
-                                @click="resort(item.field)"
-                              >
-                                <v-list-item-title>{{ item.type }}</v-list-item-title>
-                              </v-list-item>
-                            </v-list>
-                          </v-menu>
+                            <v-menu offset-y>
+                              <template v-slot:activator="{ on }">
+                                <v-btn
+                                  id="search-button-sort"
+                                  size="small"
+                                  class="mr-3 mb-2 searchbtn"
+                                  elevation="2"
+                                >
+                                  <v-icon small class="mx-1" icon="fa:fas fa-sort" />
+                                  Sort:
+                                  {{
+                                    sorts.find((el) => el.field === input.sort).type
+                                  }}
+                                </v-btn>
+                              </template>
+                              <v-list :min-width="200">
+                                <v-list-item
+                                  v-for="(item, index) in sorts"
+                                  :key="item.field"
+                                  :value="item.field"
+                                  @click="resort(item.field)"
+                                >
+                                  <v-list-item-title>{{ item.type }}</v-list-item-title>
+                                </v-list-item>
+                              </v-list>
+                            </v-menu>
+                          </div>
 
                           <Share
                             :url="encodeURI(shareUrl)"
