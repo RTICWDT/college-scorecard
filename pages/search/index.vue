@@ -59,6 +59,10 @@
   @include lg { max-width: 500px; }
 }
 
+:deep(.v-pagination__list) {
+  justify-content: right;
+}
+
 </style>
 
 <template>
@@ -100,7 +104,7 @@
 
           <div class="flex-grow-1 mr-0 mr-md-2">
             <SearchLocationInstitution
-              @search-query="handleLocationSelection"
+              @search-update="handleLocationSelection"
               :initial_state="input.state"
               :initial_zip="input.zip"
               :initial_distance="input.distance"
@@ -149,7 +153,7 @@
           :urlParsedParams="urlParsedParams"
           auto-submit
           display-all-filters
-          @search-query="handleInstitutionSearch"
+          @search-update="handleInstitutionSearch"
           :hideLocation="true"
           :initiallyOpenPanelsByIndex="[0]"
         />
@@ -213,67 +217,64 @@
 
                         <Spacer :height="10" />
 
-                        <div class="d-flex flex-column flex-md-row">
-                          <div class="d-fle flex-column">
+                        <v-btn
+                          id="search-button-clear"
+                          @click="clearSearchForm"
+                          size="small"
+                          elevation="2"
+                          class="mr-3 mb-2"
+                        >
+                          <span>
+                            <v-icon small class="mr-1">mdi-close-circle</v-icon>
+                            Reset Filters
+                          </span>
+                        </v-btn>
+
+                        <v-menu offset-y>
+                          <template v-slot:activator="{ on }">
                             <v-btn
-                              id="search-button-clear"
-                              @click="clearSearchForm"
+                              id="search-button-sort"
                               size="small"
+                              class="mr-3 mb-2 searchbtn"
                               elevation="2"
-                              class="mr-3 mb-2"
                             >
-                              <span>
-                                <v-icon small class="mr-1">mdi-close-circle</v-icon>
-                                Reset Filters
-                              </span>
+                              <v-icon small class="mx-1" icon="fa:fas fa-sort" />
+                              Sort:
+                              {{
+                                sorts.find((el) => el.field === input.sort).type
+                              }}
                             </v-btn>
+                          </template>
+                          <v-list :min-width="200">
+                            <v-list-item
+                              v-for="(item, index) in sorts"
+                              :key="item.field"
+                              :value="item.field"
+                              @click="resort(item.field)"
+                            >
+                              <v-list-item-title>{{ item.type }}</v-list-item-title>
+                            </v-list-item>
+                          </v-list>
+                        </v-menu>
 
-                            <v-menu offset-y>
-                              <template v-slot:activator="{ on }">
-                                <v-btn
-                                  id="search-button-sort"
-                                  size="small"
-                                  class="mr-3 mb-2 searchbtn"
-                                  elevation="2"
-                                >
-                                  <v-icon small class="mx-1" icon="fa:fas fa-sort" />
-                                  Sort:
-                                  {{
-                                    sorts.find((el) => el.field === input.sort).type
-                                  }}
-                                </v-btn>
-                              </template>
-                              <v-list :min-width="200">
-                                <v-list-item
-                                  v-for="(item, index) in sorts"
-                                  :key="item.field"
-                                  :value="item.field"
-                                  @click="resort(item.field)"
-                                >
-                                  <v-list-item-title>{{ item.type }}</v-list-item-title>
-                                </v-list-item>
-                              </v-list>
-                            </v-menu>
-                          </div>
+                        <Share
+                          :url="encodeURI(shareUrl)"
+                          label="Share"
+                          show-copy
+                          :hide="['email']"
+                        />
 
-                          <Share
-                            :url="encodeURI(shareUrl)"
-                            label="Share"
-                            show-copy
-                            :hide="['email']"
-                          />
-                        </div>
                       </div>
                     </v-col>
 
                     <!--  -->
                     <!-- PAGINATION -->
                     <!--  -->
-                    <v-col xs="12" sm="12" md="6" class="v-pagination-wrapper pr-0">
+                    <v-col xs="12" sm="12" md="6" class="v-pagination-wrapper">
                       <v-pagination 
                         v-model="displayPage"
                         :length="totalPages"
-                        @input="handlePaginationInput"
+                        @update:model-value="handlePaginationInput"
                       />
                     </v-col>
                   </v-row>
@@ -386,7 +387,7 @@
                       <v-pagination
                         v-model="displayPage"
                         :length="totalPages"
-                        @input="handlePaginationInput"
+                        @update:model-value="handlePaginationInput"
                       />
                     </v-col>
                   </v-row>
@@ -418,13 +419,13 @@
 <script setup>
 import { useDisplay } from "vuetify";
 const { smAndDown } = useDisplay()
-const { addURLToStorage } = useUrlHistory()
 const { prepareParams } = usePrepareParams()
 const { apiGet } = useApi()
 const { trackAnalyticsEvent } = useAnalytics()
 const { getSiteData } = useSiteData()
 const route = useRoute()
 const router = useRouter()
+const { fields } = useConstants()
 
 const props = defineProps({
   pagePermalink: String,
@@ -443,6 +444,21 @@ const props = defineProps({
 const emit = defineEmits(['loading', 'search-form-reset', 'reset-dol-flag'])
 const showSidebar = ref(!smAndDown.value)
 const isLoading = ref(true)
+const urlParsedParams = ref({})
+const error = ref(null)
+const showCompare = ref(false)
+const shareUrl = ref(null)
+const displayFlag = ref(false)
+const displayPage = ref(1)
+const btt = ref(false)
+
+const sorts = [
+  { type: "Name", field: "name:asc" },
+  { type: "Annual Cost", field: "avg_net_price:asc" },
+  { type: "Graduation Rate", field: "completion_rate:desc" },
+  { type: "% Earning More Than a High School Grad", field: "threshold_earnings:desc" },
+]
+
 
 const results = reactive({
   schools: [],
@@ -453,8 +469,6 @@ const input = reactive({
   sort: null,
   page: 1,
 })
-
-const urlParsedParams = ref({})
 
 const utility = reactive({
   formDefault: {},
@@ -476,23 +490,8 @@ const utility = reactive({
   showMore: false,
 })
 
-const error = ref(null)
-const showCompare = ref(false)
-
-const sorts = [
-  { type: "Name", field: "name:asc" },
-  { type: "Annual Cost", field: "avg_net_price:asc" },
-  { type: "Graduation Rate", field: "completion_rate:desc" },
-  { type: "% Earning More Than a High School Grad", field: "threshold_earnings:desc" },
-]
-
-const shareUrl = ref(null)
-const fieldOfStudyTotalCountWithoutRangeFilters = ref(0)
-const displayFlag = ref(false)
-const displayPage = ref(1)
-const btt = ref(false)
-
 // Computed properties
+// 
 const totalPages = computed(() => {
   if (results.meta.per_page && results.meta.total) {
     return Math.ceil(results.meta.total / results.meta.per_page)
@@ -500,9 +499,28 @@ const totalPages = computed(() => {
 })
 
 // Methods
+const searchAPI = async () => {
+  try {
+    isLoading.value = true
+    error.value = null
+
+    const params = prepareSearchParams()
+    const query = buildQuery(params)
+    const qs = generateQueryString(params)
+
+    router.replace({ query: params })
+
+    const response = await apiGet("/schools", query)
+    isLoading.value = false
+    handleSuccessfulResponse(response)
+  } catch (err) {
+    handleError(err)
+  }
+}
+
 const parseURLParams = (url) => {
-  if (!url && process.client) {
-    url = location.search.substr(1)
+  if (!url) {
+    url = location.search.substring(1)
   }
   return route.query;
 }
@@ -519,29 +537,6 @@ const generateQueryString = (params) => {
   return "?" + qs.replace(/^&+/, "").replace(/&{2,}/g, "&").replace(/%3A/g, ":")
 }
 
-const searchAPI = async () => {
-  try {
-    emit("loading", true)
-    isLoading.value = true
-    error.value = null
-
-    const params = prepareSearchParams()
-    const query = buildQuery(params)
-    const qs = generateQueryString(params)
-
-    updateRouterAndStorage(params, qs)
-
-    const response = await apiGet("/schools", query)
-    isLoading.value = false
-    handleSuccessfulResponse(response)
-  } catch (err) {
-    handleError(err)
-  } finally {
-    emit("loading", false)
-    
-  }
-}
-
 const prepareSearchParams = () => {
   const cleanedInput = Object.fromEntries(Object.entries(input).filter(([_, v]) => v != null))
   return {
@@ -554,16 +549,30 @@ const prepareSearchParams = () => {
 const buildQuery = (params) => {
   const query = prepareParams(params)
   query.fields = [
-    // Add your fields here
+    fields.ID,
+    fields.NAME,
+    fields.CITY,
+    fields.STATE,
+    fields.SIZE,
+    fields.BRANCHES,
+    fields.LOCALE,
+    fields.OWNERSHIP, // to get "public" or "private"
+    fields.PREDOMINANT_DEGREE, // to get the "four_year" or "lt_four_year" bit
+    fields.PROGRAM_REPORTER_OFFERED, // program-reporter offered programs / flag
+    fields.NET_PRICE, // get all of the net price values
+    fields.COMPLETION_RATE, // completion rate
+    fields.MEDIAN_EARNINGS, // this has no sub-fields
+    fields.EARNINGS_GT_25K, // not sure if we need this, but let's get it anyway
+    fields.UNDER_INVESTIGATION, // under investigation flag
+    fields.COMPLETION_OM, // new completion rates
+    fields.COMPLETION_150_4, // new completion rates
+    fields.COMPLETION_150_LT4, // new completion rates
+    fields.FIELD_OF_STUDY,
   ].join(",")
+
   query.all_programs_nested = true
   delete query.toggle
   return query
-}
-
-const updateRouterAndStorage = (params, qs) => {
-  router.replace({ query: params })
-  addURLToStorage(qs)
 }
 
 const handleSuccessfulResponse = (response) => {
@@ -661,7 +670,7 @@ onMounted(() => {
 
 // Debounced function
 const debounceSearchUpdate = useDebounce((params) => {
-  handleInstitutionSearch(params)
+  // handleInstitutionSearch(params)
 }, 1000)
 
 useHead({

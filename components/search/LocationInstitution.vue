@@ -121,7 +121,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['search-query'])
+const emit = defineEmits(['search-update'])
 
 const { site } = useSiteData()
 const { location, handleLocationCheck } = useLocationCheck()
@@ -184,11 +184,11 @@ watch(() => location.latLon, (newValue) => {
     input.long =
       newValue.min_lon.toFixed(4) + ".." + newValue.max_lon.toFixed(4)
   }
-  emit("search-query", input)
+  emit("search-update", input)
 })
 
 watch(() => location.miles, () => {
-  emit("search-query", input)
+  emit("search-update", input)
 })
 
 watch(() => utility.location, (newValue, oldValue) => {
@@ -213,7 +213,7 @@ function handleLocationChange(e) {
     utility.location = null
   }
 
-  emit("search-query", input)
+  emit("search-update", input)
 }
 
 function resetFormDefault() {
@@ -225,6 +225,6 @@ function handleSearch() {
     Object.entries(input).filter(([_, v]) => v != null)
   )
 
-  emit("search-query", o)
+  emit("search-update", o)
 }
 </script>

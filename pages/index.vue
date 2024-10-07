@@ -435,12 +435,17 @@ const colorSlider = (num) => {
 }
 
 const directToSearch = (params) => {
-  console.log(params)
-  // Generate URL based on params
-  const qs = new URLSearchParams(params).toString()
-  const url = "/search/?" + qs.replace(/&{2,}/g, "&").replace(/%3A/g, ":")
+  const queryString = Object.entries(params)
+    .flatMap(([key, value]) => {
+      if (Array.isArray(value)) {
+        return value.map(v => `${encodeURIComponent(key)}=${encodeURIComponent(v)}`);
+      }
+      return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+    })
+    .join('&');
 
-  // Direct to location
+  const url = "/search/?" + queryString.replace(/&{2,}/g, "&").replace(/%3A/g, ":")
+
   router.push(url)
 }
 

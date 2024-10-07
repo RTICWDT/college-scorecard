@@ -124,7 +124,6 @@ const props = defineProps({
 
 const store = useCompareStore()
 
-
 const { 
   completionRateOverall,
   netPrice,

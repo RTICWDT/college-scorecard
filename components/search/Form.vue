@@ -128,7 +128,7 @@
         <v-expansion-panel-title>Location</v-expansion-panel-title>
         <v-expansion-panel-text>
           <SearchLocationInstitution
-            @search-query="handleLocationSelection"
+            @search-update="handleLocationSelection"
             :horizontal="false"
           />
         </v-expansion-panel-text>
@@ -440,7 +440,7 @@
 
 <script setup>
 const { location } = useLocationCheck()
-const emit = defineEmits(["search-query", "submit-search"])
+const emit = defineEmits(["search-update", "search-submit"])
 const { site } = useSiteData()
 
 const props = defineProps({
@@ -703,18 +703,12 @@ const handleLocationSelection = (params) => {
 
 const debounceEmitSearchQuery = useDebounce(() => {
     // Send new param object, reset page
-    emit("search-query", { ...cleanInput.value, page: 0 })
+    emit("search-update", { ...cleanInput.value, page: 0 })
   }, 1000)
 
 onMounted(() => {
   utility.enableDefault = useCloneDeep(utility.enable)
-
-  // Call mapInputFromProp
   mapInputFromProp()
-  if (props.autoSubmit) {
-    emit("search-query", { ...cleanInput.value, page: 0 })
-  }
-
   window.addEventListener("search-form-reset", resetFormDefault)
 })
 
@@ -728,7 +722,7 @@ watch(cleanInput, (newValue, oldValue) => {
   if (utility.initialized) {
     debounceEmitSearchQuery()
   } else {
-    emit("search-query", { ...newValue })
+    emit("search-update", { ...newValue })
     utility.initialized = true
   }
 }, { deep: true })
