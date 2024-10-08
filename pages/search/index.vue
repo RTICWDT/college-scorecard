@@ -369,7 +369,7 @@
                       xs="12"
                       class="d-flex align-stretch"
                     >
-                      <SearchResultCard :school="school" />
+                      <SearchResultCard :school="school" :isLoading="isLoading" />
                     </v-col>
                   </v-row>
                 </div>

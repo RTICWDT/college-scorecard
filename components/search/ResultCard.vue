@@ -2,7 +2,7 @@
   <v-card
     class="search-result-card mx-auto elevation-0"
     outlined
-    :class="{ 'result-card-selected': isSelected }"
+    :class="{ 'result-card-selected': isSelected, 'loading': isLoading }"
   >
     <v-card-text class="pa-3" style="flex-grow:1">
       <p class="mt-1 mb-2" v-if="underInvestigation == 1">
@@ -120,6 +120,7 @@ import numeral from 'numeral'
 const props = defineProps({
   school: Object,
   schoolsCount: Number,
+  isLoading: Boolean,
 })
 
 const store = useCompareStore()
@@ -169,6 +170,9 @@ const isSelected = computed(() =>
 </script>
 
 <style lang="scss" scoped>
+.loading {
+  opacity: 0.4;
+}
 .nameLink {
   text-decoration: none;
   line-height: 125%;
