@@ -56,7 +56,7 @@
   @include xs { max-width: 320px; }
   @include sm { max-width: 500px; }
   @include md { max-width: 400px; }
-  @include lg { max-width: 500px; }
+  @include lg { max-width: 700px; }
 }
 
 :deep(.v-pagination__list) {
@@ -210,74 +210,85 @@
               >
                 <v-container fluid class="d-flex pa-0">
                   <v-row>
-                    <v-col cols="12" xs="12" sm="12" md="6" class="py-2 px-4">
+                    <v-col cols="12" class="py-2 px-4">
                       <div id="search-result-info-count" class>
                         <p class="title mb-0">
                           {{ results.meta.total }} Results
                         </p>
+                      </div>
 
                         <Spacer :height="10" />
 
-                        <v-btn
-                          id="search-button-clear"
-                          @click="clearSearchForm"
-                          size="small"
-                          elevation="2"
-                          class="mr-3 mb-2"
-                        >
-                          <span>
-                            <v-icon small class="mr-1">mdi-close-circle</v-icon>
-                            Reset Filters
-                          </span>
-                        </v-btn>
+                      <v-row>
+                        <v-col xs="12" sm="8" :md="showSidebar ? 7 : 6" class="d-flex">
+                          <!-- RESET FILTERS -->
+                          <v-btn
+                            id="search-button-clear"
+                            @click="clearSearchForm"
+                            size="small"
+                            elevation="2"
+                            class="mr-3 mb-2"
+                          >
+                            <span>
+                              <v-icon small class="mr-1">mdi-close-circle</v-icon>
+                              Reset{{ smAndDown ? '' : " Filters" }}
+                            </span>
+                          </v-btn>
 
-                        <v-menu offset-y>
-                          <template v-slot:activator="{ props }">
-                            <v-btn
-                              id="search-button-sort"
-                              size="small"
-                              class="mr-3 mb-2 searchbtn"
-                              elevation="2"
-                              v-bind="props"
-                            >
-                              <v-icon small class="mx-1" icon="fa:fas fa-sort" />
-                              Sort:
-                              {{
-                                sorts.find((el) => el.field === input.sort).type
-                              }}
-                            </v-btn>
-                          </template>
-                          <v-list :min-width="200">
-                            <v-list-item
-                              v-for="(item, index) in sorts"
-                              :key="item.field"
-                              :value="item.field"
-                              @click="resort(item.field)"
-                            >
-                              <v-list-item-title>{{ item.type }}</v-list-item-title>
-                            </v-list-item>
-                          </v-list>
-                        </v-menu>
+                          <!-- SORT -->
+                         
+                          <v-menu offset-y>
+                            <template v-slot:activator="{ props }">
+                              <v-btn
+                                id="search-button-sort"
+                                size="small"
+                                class="mr-3 mb-2 searchbtn"
+                                elevation="2"
+                                v-bind="props"
+                              >
+                                <v-icon small class="mx-1" icon="fa:fas fa-sort" />
+                                Sort{{ smAndDown ? '' : " :" }}
+                                {{
+                                  smAndDown
+                                    ? ""
+                                    : sorts.find((el) => el.field === input.sort).type.split(" ")[0]
+                                }}
+                              </v-btn>
+                            </template>
+                            <v-list :min-width="200">
+                              <v-list-item
+                                v-for="(item, index) in sorts"
+                                :key="item.field"
+                                :value="item.field"
+                                @click="resort(item.field)"
+                              >
+                                <v-list-item-title>{{ item.type }}</v-list-item-title>
+                              </v-list-item>
+                            </v-list>
+                          </v-menu>
 
-                        <Share
-                          :url="encodeURI(shareUrl)"
-                          label="Share"
-                          show-copy
-                          :hide="['email']"
-                        />
+                          <!-- SHARE -->
+                          <Share
+                            :url="encodeURI(shareUrl)"
+                            label="Share"
+                            show-copy
+                            :hide="['email']"
+                          />
+                        </v-col>
 
-                      </div>
-                    </v-col>
+                        <v-col xs="12" sm="4" cols="12" :md="showSidebar ? 5 : 6" style="position: relative; bottom: 5px;">
+                          <!-- PAGINATION -->
+                          <v-pagination 
+                            v-model="displayPage"
+                            :length="totalPages"
+                            :total-visible="smAndDown ? 2 : null"
+                            @update:model-value="handlePaginationInput"
+                          />
+                        </v-col>
+                      </v-row>
 
-                    <!--  -->
-                    <!-- PAGINATION -->
-                    <!--  -->
-                    <v-col xs="12" sm="12" md="6" class="v-pagination-wrapper">
-                      <v-pagination 
-                        v-model="displayPage"
-                        :length="totalPages"
-                        @update:model-value="handlePaginationInput"
-                      />
+
+
                     </v-col>
                   </v-row>
                 </v-container>
