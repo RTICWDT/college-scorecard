@@ -224,7 +224,7 @@
                             @click="clearSearchForm"
                             size="small"
                             elevation="2"
-                            class="mr-3 mb-2"
+                            class="mr-1 mb-2"
                           >
                             <span>
                               <v-icon small class="mr-1">mdi-close-circle</v-icon>
@@ -233,13 +233,12 @@
                           </v-btn>
 
                           <!-- SORT -->
-                         
                           <v-menu offset-y>
                             <template v-slot:activator="{ props }">
                               <v-btn
                                 id="search-button-sort"
                                 size="small"
-                                class="mr-3 mb-2 searchbtn"
+                                class="mr-1 mb-2 searchbtn"
                                 elevation="2"
                                 v-bind="props"
                               >

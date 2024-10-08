@@ -5,7 +5,8 @@
     :items="items"
     item-title="cip4Title"
     item-value="code"
-    label="Type to search"
+    :label="dense ? '' : 'Type to search'"
+    :placeholder="dense ? 'Type to search' : 'Search for a field of study'"
     return-object
     autocomplete="off"
     variant="outlined"
@@ -17,6 +18,7 @@
     :density="dense ? 'compact' : 'default'"
     required
     aria-required="true"
+    min-width="220"
   >
     <template v-slot:item="{ item, props }">
         <v-list-item v-bind="props" :max-width="smAndDown ? 300 : 400">

@@ -201,13 +201,41 @@
                             @click="clearSearchForm"
                             size="small"
                             elevation="2"
-                            class="mr-3 mb-2"
+                            class="mr-1 mb-2"
                           >
                             <span>
                               <v-icon small class="mr-1">mdi-close-circle</v-icon>
                               Reset{{ smAndDown ? '' : " Filters" }}
                             </span>
                           </v-btn>
+
+                          <!-- SORT -->
+                          <v-menu offset-y v-if="smAndDown">
+                            <template v-slot:activator="{ props }">
+                              <v-btn
+                                id="search-button-sort"
+                                size="small"
+                                class="mr-1 mb-2 searchbtn"
+                                elevation="2"
+                                v-bind="props"
+                              >
+                                <v-icon small class="mr-1 ml-n1" icon="fa:fas fa-sort" />
+                                {{
+                                  sorts.find((el) => el.field === input.sort.split(':')[0]).type + " " + sorts.find((el) => el.field === input.sort.split(':')[0]).direction
+                                }}
+                              </v-btn>
+                            </template>
+                            <v-list :min-width="200">
+                              <v-list-item
+                                v-for="(item, index) in sorts"
+                                :key="item.field"
+                                :value="item.field"
+                                @click="resort(item.field)"
+                              >
+                                <v-list-item-title>{{ item.type }}</v-list-item-title>
+                              </v-list-item>
+                            </v-list>
+                          </v-menu>
 
                           <!-- SHARE -->
                           <Share
@@ -243,7 +271,7 @@
 
               <!-- Field Of Study CIP 4 Information -->
               <div>
-                <v-row>
+                <v-row style="margin-top: -15px;">
                   <v-col
                     cols="12"
                     v-if="!isLoading && input.dolflag == 'true'"
@@ -273,9 +301,10 @@
                     </v-alert>
                   </v-col>
                 </v-row>
+
                 <v-row>
                   <v-col cols="12">
-                    <v-alert class="pl-5">
+                    <v-alert color="white" class="pl-5">
                       <strong>Note:</strong> Field of Study titles are based
                       on the US Department of Education's Classification of
                       Instructional Programs (CIP) and may not match the
@@ -292,6 +321,7 @@
                     </v-alert>
                   </v-col>
                 </v-row>
+
               </div>
 
 
@@ -683,28 +713,31 @@ const parseURLParams = (url) => {
 }
 
 onMounted(() => {
-  showSidebar.value = !smAndDown
 
-  // Copy default form input state.
-  utility.formDefault = useCloneDeep(input)
-  urlParsedParams.value = parseURLParams()
-
-  // Add sort to state if it exists
-  input.sort = urlParsedParams.value.sort
-    ? urlParsedParams.value.sort
-    : defaultSort
-
-    input.page = urlParsedParams.value.page
-    ? parseInt(urlParsedParams.value.page)
-    : 0
-
-  input.cip4 = urlParsedParams.value.cip4
-  input.cip4_degree = urlParsedParams.value.cip4_degree
-
-  if (!input.cip4 || !input.cip4_degree) {
-    router.push("/search/fos-landing")
-  }
 })
+
+showSidebar.value = !smAndDown
+
+// Copy default form input state.
+utility.formDefault = useCloneDeep(input)
+urlParsedParams.value = parseURLParams()
+
+// Add sort to state if it exists
+input.sort = urlParsedParams.value.sort
+  ? urlParsedParams.value.sort
+  : defaultSort.value
+
+
+input.page = urlParsedParams.value.page
+? parseInt(urlParsedParams.value.page)
+: 0
+
+input.cip4 = urlParsedParams.value.cip4
+input.cip4_degree = urlParsedParams.value.cip4_degree
+
+if (!input.cip4 || !input.cip4_degree) {
+  router.push("/search/fos-landing")
+}
 
 const debounceSearchUpdate = useDebounce(function() {
   searchAPI()
