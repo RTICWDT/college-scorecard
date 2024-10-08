@@ -156,6 +156,7 @@
           @search-update="handleInstitutionSearch"
           :hideLocation="true"
           :initiallyOpenPanelsByIndex="[0]"
+          :submittable="false"
         />
         <v-btn
           type="submit"

@@ -41,6 +41,7 @@
               @click="showCopyNotify = false"
               icon="mdi-close-circle"
               size="small"
+              elevation="0"
             />
         </div>
       </v-card>

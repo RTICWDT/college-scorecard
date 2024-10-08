@@ -14,7 +14,7 @@
     <v-dialog max-width="500px" v-model="showDialog">
       <v-card class="px-3 py-3">
         <div class="d-flex flex-row-reverse mb-n9">
-          <v-btn @click="showDialog = false" alt="Close More Information tooltip" aria-required="true" icon="fa:fas fa-times-circle">
+          <v-btn @click="showDialog = false" alt="Close More Information tooltip" aria-required="true" icon="fa:fas fa-times-circle" elevation="0">
             <v-icon icon="fa:fas fa-times-circle"></v-icon>
           </v-btn>
         </div>

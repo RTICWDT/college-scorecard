@@ -426,38 +426,26 @@
       </v-expansion-panel>
     </v-expansion-panels>
 
-    <div id="search-submit-container" class="py-5" v-show="!autoSubmit">
-      <v-btn color="secondary" size="large" @click="performSearch">
+    <div id="search-submit-container" class="py-5" v-show="submittable">
+      <v-btn color="secondary" size="large" @click="onSubmit">
         Find Schools
       </v-btn>
     </div>
 
-    <v-btn type="submit" class="sr-only" color="secondary" size="large" @click="performSearch">
+    <v-btn type="submit" class="sr-only" color="secondary" size="large" @click="onSubmit">
       Find Schools
     </v-btn>
   </v-form>
 </template>
 
 <script setup>
+const { site } = useSiteData()
 const { location } = useLocationCheck()
 const emit = defineEmits(["search-update", "search-submit"])
-const { site } = useSiteData()
 
 const props = defineProps({
   urlParsedParams: {
     type: Object,
-  },
-  autoSubmit: {
-    type: Boolean,
-    default: false,
-  },
-  displayAllFilters: {
-    type: Boolean,
-    default: false,
-  },
-  condenseSliders: {
-    type: Boolean,
-    default: false,
   },
   hideLocation: {
     type: Boolean,
@@ -467,9 +455,11 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  submittable: {
+    type: Boolean,
+    default: true,
+  },
 })
-
-const panels = ref(props.initiallyOpenPanelsByIndex)
 
 const formDefault = {
   id: null,
@@ -500,23 +490,9 @@ const formDefault = {
   dolflag: null,
 }
 
-const input = reactive(useCloneDeep(formDefault))
-
 const utility = reactive({
-  rules: {
-    required: (value) => !!value || "Required.",
-    numerical: (value) => {
-      const pattern = /^\d+$/
-      return pattern.test(value) || "Numerical"
-    },
-    zip: (value) =>
-      /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(value) ||
-      "Must be ZIP code format",
-  },
   formDefault: useCloneDeep(formDefault),
-  initialized: false,
-  showMore: false,
-  enableDefault: {},
+  location: null,
   enable: {
     completion_rate: false,
     avg_net_price: false,
@@ -525,8 +501,10 @@ const utility = reactive({
     act: false,
     acceptance: false,
   },
-  location: null,
 })
+
+const panels = ref(props.initiallyOpenPanelsByIndex)
+const input = reactive(useCloneDeep(formDefault))
 
 const cleanSpecializedMission = computed(() => {
   return useMap(site.value.data.special_designations, (value, title) => {
@@ -537,8 +515,8 @@ const cleanSpecializedMission = computed(() => {
   })
 })
 
-const cleanInput = computed(() => {
-  let groomedInput = usePickBy(input, (value, key) => {
+const groomedInput = computed(() => {
+  let inputToGroom = usePickBy(input, (value, key) => {
     if (!useHas(formDefault, key)) {
       return false
     }
@@ -549,81 +527,81 @@ const cleanInput = computed(() => {
 
   // Completion rate
   if (
-    groomedInput.completion_rate &&
-    groomedInput.completion_rate > 0 &&
+    inputToGroom.completion_rate &&
+    inputToGroom.completion_rate > 0 &&
     utility.enable.completion_rate
   ) {
-    groomedInput.completion_rate = groomedInput.completion_rate / 100 + ".."
+    inputToGroom.completion_rate = inputToGroom.completion_rate / 100 + ".."
   } else {
-    useUnset(groomedInput, "completion_rate") // TODO: CONST;
+    useUnset(inputToGroom, "completion_rate")
   }
 
   if (
-    groomedInput.avg_net_price &&
-    groomedInput.avg_net_price > 0 &&
+    inputToGroom.avg_net_price &&
+    inputToGroom.avg_net_price > 0 &&
     utility.enable.avg_net_price
   ) {
-    groomedInput.avg_net_price = ".." + groomedInput.avg_net_price * 1000
+    inputToGroom.avg_net_price = ".." + inputToGroom.avg_net_price * 1000
   } else {
-    useUnset(groomedInput, "avg_net_price") // TODO: CONST;
+    useUnset(inputToGroom, "avg_net_price")
   }
 
   if (
-    groomedInput.sat_math &&
-    groomedInput.sat_math > 0 &&
+    inputToGroom.sat_math &&
+    inputToGroom.sat_math > 0 &&
     utility.enable.sat_math
   ) {
-    groomedInput.sat_math = ".." + groomedInput.sat_math
+    inputToGroom.sat_math = ".." + inputToGroom.sat_math
   } else {
-    useUnset(groomedInput, "sat_math") // TODO: CONST;
+    useUnset(inputToGroom, "sat_math")
   }
 
   if (
-    groomedInput.sat_read &&
-    groomedInput.sat_read > 0 &&
+    inputToGroom.sat_read &&
+    inputToGroom.sat_read > 0 &&
     utility.enable.sat_read
   ) {
-    groomedInput.sat_read = ".." + groomedInput.sat_read
+    inputToGroom.sat_read = ".." + inputToGroom.sat_read
   } else {
-    useUnset(groomedInput, "sat_read") // TODO: CONST;
+    useUnset(inputToGroom, "sat_read")
   }
 
-  if (groomedInput.act && groomedInput.act > 0 && utility.enable.act) {
-    groomedInput.act = ".." + groomedInput.act
+  if (inputToGroom.act && inputToGroom.act > 0 && utility.enable.act) {
+    inputToGroom.act = ".." + inputToGroom.act
     panels.value.push(5)
   } else {
-    useUnset(groomedInput, "act") // TODO: CONST;
+    useUnset(inputToGroom, "act")
   }
 
   if (
-    groomedInput.acceptance &&
-    groomedInput.acceptance > 0 &&
+    inputToGroom.acceptance &&
+    inputToGroom.acceptance > 0 &&
     utility.enable.acceptance
   ) {
-    groomedInput.acceptance = groomedInput.acceptance / 100 + "..1"
+    inputToGroom.acceptance = inputToGroom.acceptance / 100 + "..1"
   } else {
-    useUnset(groomedInput, "acceptance") // TODO: CONST;
+    useUnset(inputToGroom, "acceptance")
   }
 
   // Handle edgecase for distance :(
-  if (groomedInput.zip) {
-    groomedInput.distance = this.input.distance
+  if (inputToGroom.zip) {
+    inputToGroom.distance = this.input.distance
   } else {
-    useUnset(groomedInput, "distance")
+    useUnset(inputToGroom, "distance")
   }
 
-  if (groomedInput.size) {}
-  if (groomedInput.control) {}
-  if (groomedInput.locale) {}
-  if (groomedInput.serving) {}
-  if (groomedInput.religious) {}
-  if (groomedInput.dolflag) {}
+  if (inputToGroom.size) {}
+  if (inputToGroom.control) {}
+  if (inputToGroom.locale) {}
+  if (inputToGroom.serving) {}
+  if (inputToGroom.religious) {}
+  if (inputToGroom.dolflag) {}
 
-  return groomedInput
+  return inputToGroom
 })
 
-const performSearch = () => {
-  emit("search-submit", cleanInput.value)
+const onSubmit = () => {
+  emit("search-submit", groomedInput.value)
 }
 
 const mapInputFromProp = () => {
@@ -701,34 +679,24 @@ const handleLocationSelection = (params) => {
   input.page = 1
 }
 
-const debounceEmitSearchQuery = useDebounce(() => {
-    // Send new param object, reset page
-    emit("search-update", { ...cleanInput.value, page: 0 })
-  }, 1000)
-
+// On Mount
 onMounted(() => {
-  utility.enableDefault = useCloneDeep(utility.enable)
   mapInputFromProp()
   window.addEventListener("search-form-reset", resetFormDefault)
 })
 
-// Watch for changes in cleanInput
-watch(cleanInput, (newValue, oldValue) => {
-  // On first load trigger query immediately, then debounce additional queries.
-  if (!props.autoSubmit || isEqual(newValue, oldValue)) {
-    return
-  }
+// On Change
+const debounceEmitSearchQuery = useDebounce(() => {
+  emit("search-update", { ...groomedInput.value, page: 0 })
+}, 500)
 
-  if (utility.initialized) {
-    debounceEmitSearchQuery()
-  } else {
-    emit("search-update", { ...newValue })
-    utility.initialized = true
-  }
+
+watch(groomedInput, (newValue, oldValue) => {
+  if (isEqual(newValue, oldValue)) { return }
+
+  debounceEmitSearchQuery()
 }, { deep: true })
 
-// Watch for changes in urlParsedParams prop
-watch(() => props.urlParsedParams, (newValue, oldValue) => {
-  mapInputFromProp()
-}, { deep: true })
+
+
 </script>
