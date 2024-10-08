@@ -278,7 +278,7 @@
                           <v-pagination 
                             v-model="displayPage"
                             :length="totalPages"
-                            :total-visible="smAndDown ? 2 : null"
+                            :total-visible="paginatorPageCount"
                             @update:model-value="handlePaginationInput"
                           />
                         </v-col>
@@ -387,6 +387,7 @@
                         v-model="displayPage"
                         :length="totalPages"
                         @update:model-value="handlePaginationInput"
+                        :total-visible="paginatorPageCount"
                       />
                     </v-col>
                   </v-row>
@@ -415,7 +416,7 @@
 
 <script setup>
 import { useDisplay } from "vuetify";
-const { smAndDown } = useDisplay()
+const { smAndDown, lgAndUp, md } = useDisplay()
 const { prepareParams } = usePrepareParams()
 const { apiGet } = useApi()
 const { trackAnalyticsEvent } = useAnalytics()
@@ -472,6 +473,22 @@ const totalPages = computed(() => {
   if (results.meta.per_page && results.meta.total) {
     return Math.ceil(results.meta.total / results.meta.per_page)
   }
+})
+
+const paginatorPageCount = computed(() => {
+  if (smAndDown.value) { 
+    return 2
+  }
+
+  if (md.value) {
+    if (showSidebar.value) {
+      return 1
+    }
+    return 4
+  }
+
+  if (lgAndUp.value) { return 5 }
+  return null
 })
 
 // Methods

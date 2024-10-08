@@ -16,9 +16,8 @@
         <template v-slot:activator="{ props }">
           <v-btn
             icon
-            v-show="!isLoading"
             class="float-right search-result-card-compare"
-            @click="store.toggleSchool(school)"
+            @click="!isLoading ? store.toggleSchool(school) : () => {}"
             :class="[
               isSelected ? '' : compareSchoolsLength > 9 ? 'noCompareAllow' : ''
             ]"
