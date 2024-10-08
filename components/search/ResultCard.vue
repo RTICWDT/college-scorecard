@@ -12,7 +12,7 @@
         </v-card>
       </p>
 
-      <v-tooltip location="bottom">
+      <v-tooltip :disabled="isLoading" location="bottom">
         <template v-slot:activator="{ props }">
           <v-btn
             icon
@@ -28,7 +28,7 @@
             <span class="sr-only">Compare</span>
           </v-btn>
         </template>
-        <div class="hover-tip">{{ compareHoverCountText }}</div>
+        <div class="hover-tip">{{ isSelected ? 'Remove School to compare' : compareHoverCountText }}</div>
       </v-tooltip>
 
       <p class="text-overline mb-1">{{ city }}, {{ state }}</p>
