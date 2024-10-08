@@ -35,12 +35,13 @@ const navigateTo = (href) =>  {
   trackNavigation(href)
 }
 
-const tab = ref(route.path)
+const tab = computed(() => {
+  if (route.path.match('/search/fos')) {
+    return '/search/fos-landing'
+  }
 
-// a hack as Field of study has two pages for some reason?
-if (route.path === '/search/fos') {
-  tab.value = '/search/fos-landing'
-}
+  return route.path
+})
 
 watch(() => route.path, (newPath) => { tab.value = newPath })
 </script>
