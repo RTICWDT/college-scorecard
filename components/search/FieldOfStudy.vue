@@ -3,7 +3,7 @@
     v-model="selectedFoS"
     @update:model-value="handleFieldOfStudySelect"
     :items="items"
-    item-title="title"
+    item-title="cip4Title"
     item-value="code"
     label="Type to search"
     return-object
@@ -20,7 +20,7 @@
   >
     <template v-slot:item="{ item, props }">
         <v-list-item v-bind="props" :max-width="smAndDown ? 300 : 400">
-          <v-list-item-subtitle v-html="item.raw.cip4Title" />
+          <v-list-item-subtitle v-html="item.raw.title"></v-list-item-subtitle>
         </v-list-item>
       </template>
   </v-combobox>

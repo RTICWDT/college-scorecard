@@ -173,7 +173,7 @@
 
     <v-btn
       v-scroll="onScroll"
-      v-show="btt"
+      v-show="showScroll"
       style="position: fixed; bottom: 20px; right: 20px; z-index: 900000"
       fab
       dark
@@ -403,14 +403,6 @@
       </div>
     </div>
   </div>
-
-
-  <!-- SEARCH CONTENT -->
-
-
-
-
-
 </template>
 
 
@@ -420,7 +412,7 @@ const { smAndDown, lgAndUp, md } = useDisplay()
 const { prepareParams } = usePrepareParams()
 const { apiGet } = useApi()
 const { trackAnalyticsEvent } = useAnalytics()
-const { getSiteData } = useSiteData()
+const { site } = useSiteData()
 const route = useRoute()
 const router = useRouter()
 const { fields } = useConstants()
@@ -448,7 +440,7 @@ const showCompare = ref(false)
 const shareUrl = ref(null)
 const displayFlag = ref(false)
 const displayPage = ref(1)
-const btt = ref(false)
+const showScroll = ref(false)
 
 const sorts = ref([
   { type: "Name", field: "name:asc" },
@@ -641,7 +633,7 @@ const handleSchoolNameSelected = (school) => {
 const onScroll = (e) => {
   if (typeof window === "undefined") return
   const top = window.pageYOffset || e.target.scrollTop || 0
-  btt.value = top > 20
+  showScroll.value = top > 20
 }
 
 const toTop = () => {
