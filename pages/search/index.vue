@@ -195,7 +195,7 @@
         <div>
           <div :cols="showSidebar ? 6 : 9" xl="10" class="px-4 py-2 pa-sm-8`">
             <div v-if="isLoading">
-              <v-card class="mt-2 mb-4 py-4 px-4 elevation-0">
+              <v-card class="mt-2 mb-4 py-4 px-4 elevation-0 d-flex align-center" style="min-height: 98px;">
                 <h3 class="title">
                   Loading
                   <v-icon size="z-small" color="#00365e" icon="fa:fas fa-circle-notch fa-spin" class="ml-2"/>
@@ -204,10 +204,7 @@
             </div>
 
             <div v-else>
-              <v-card
-                class="mt-2 mb-4 py-4 px-4 elevation-0"
-                v-show="!isLoading"
-              >
+              <v-card class="mt-2 mb-4 py-4 px-4 elevation-0">
                 <v-container fluid class="d-flex pa-0">
                   <v-row>
                     <v-col cols="12" class="py-2 px-4">
@@ -293,6 +290,7 @@
                   </v-row>
                 </v-container>
               </v-card>
+            </div>
 
 
               <!--  -->
@@ -350,15 +348,6 @@
 
               <!-- Main Search Results -->
               <div class="results-main-alert">
-                <!-- Loading -->
-                <div class="show-loading mt-2" v-show="isLoading">
-                  <v-card class="py-4 px-4 elevation-0">
-                    <h1 class="title">
-                      Loading
-                      <v-icon color="#00365e" icon="fa:fas fa-circle-notch fa-spin"/>
-                    </h1>
-                  </v-card>
-                </div>
 
                 <!-- Search Query Error-->
                 <div class="show-error" v-show="error">
@@ -367,7 +356,7 @@
                 </div>
 
                 <!-- Institution Results -->
-                <div class="search-result-cards-container" v-if="!isLoading">
+                <div class="search-result-cards-container">
                   <v-row>
                     <v-col
                       v-for="school in results.schools"
@@ -384,9 +373,6 @@
                     </v-col>
                   </v-row>
                 </div>
-
-                <!-- Field of Study Results -->
-                <div class="search-result-cards-container" v-else></div>
               </div>
 
               <!-- Bottom Pagination -->
@@ -406,8 +392,6 @@
                   </v-row>
                 </v-container>
               </v-card>
-
-            </div>
 
 
             <!-- RESULTS CARD AND PAGINATION -->
