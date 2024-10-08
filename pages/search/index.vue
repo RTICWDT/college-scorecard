@@ -231,12 +231,13 @@
                         </v-btn>
 
                         <v-menu offset-y>
-                          <template v-slot:activator="{ on }">
+                          <template v-slot:activator="{ props }">
                             <v-btn
                               id="search-button-sort"
                               size="small"
                               class="mr-3 mb-2 searchbtn"
                               elevation="2"
+                              v-bind="props"
                             >
                               <v-icon small class="mx-1" icon="fa:fas fa-sort" />
                               Sort:
@@ -452,13 +453,12 @@ const displayFlag = ref(false)
 const displayPage = ref(1)
 const btt = ref(false)
 
-const sorts = [
+const sorts = ref([
   { type: "Name", field: "name:asc" },
   { type: "Annual Cost", field: "avg_net_price:asc" },
   { type: "Graduation Rate", field: "completion_rate:desc" },
   { type: "% Earning More Than a High School Grad", field: "threshold_earnings:desc" },
-]
-
+])
 
 const results = reactive({
   schools: [],
@@ -468,26 +468,6 @@ const results = reactive({
 const input = reactive({
   sort: null,
   page: 1,
-})
-
-const utility = reactive({
-  formDefault: {},
-  initialized: false,
-  sortFAB: null,
-  previousParams: {},
-  rules: {
-    required: (value) => !!value || "Required.",
-    numerical: (value) => /^\d+$/.test(value) || "Numerical",
-  },
-  enable: {
-    completion_rate: false,
-    avg_net_price: false,
-    sat_math: false,
-    sat_read: false,
-    act: false,
-    acceptance: false,
-  },
-  showMore: false,
 })
 
 // Computed properties
@@ -506,7 +486,6 @@ const searchAPI = async () => {
 
     const params = prepareSearchParams()
     const query = buildQuery(params)
-    const qs = generateQueryString(params)
 
     router.replace({ query: params })
 
@@ -657,7 +636,6 @@ const toTop = () => {
 }
 
 onMounted(() => {
-  utility.formDefault = useCloneDeep(input)
   urlParsedParams.value = parseURLParams()
 
   input.sort = urlParsedParams.value.sort || props.defaultSort
