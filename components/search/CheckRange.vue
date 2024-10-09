@@ -107,7 +107,7 @@ const prefix = computed(() => {
 })
 
 const generatedId = computed(() => {
-  return "component-" + Math.random().toString(36).substr(2, 9) + "-label"
+  return "component-" + Math.random().toString(36).substring(2, 9) + "-label"
 })
 
 watch(() => props.modelValue, (newValue) => {
@@ -139,11 +139,16 @@ function handleSliderInput(value) {
     handleEnable(enableSlider.value);
   }
 
-  if (roundedValue != 0) {
     textFieldValue.value = roundedValue;
     sliderValue.value = roundedValue; // Update slider value to rounded value
+
+    // auto disable checkmark if rounded value is 0
+    if (roundedValue == 0) {
+      enableSlider.value = false;
+      handleEnable(enableSlider.value);
+    }
+
     emit('update:modelValue', roundedValue);
-  }
 }
 
 function handleTextFieldInput(value) {

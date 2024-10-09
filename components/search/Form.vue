@@ -684,7 +684,6 @@ const handleLocationSelection = (params) => {
 
 const autoOpenActivePanels = () => {
   Object.keys(groomedInput.value).forEach((key) => {
-    console.log(key)
     switch (key) {
       case 'cip4': panels.value.push(0); break;
       case 'cip4_degree': panels.value.push(1); break;
@@ -701,12 +700,8 @@ const autoOpenActivePanels = () => {
       case 'religious': panels.value.push(10); break;
       case 'dolflag': panels.value.push(11); break;
     }
-
-    if (key === "cip4")
-    if (key === "serving") { panels.value.push(9) }
   })
 }
-
 
 // we run outside of mounted so panels are set before the form is rendered
 mapInputFromQuery()
