@@ -34,11 +34,10 @@
         :min="utility.fieldOfStudySalary.min"
         hide-details
         class="align-center"
-        color="primary"
         track-color="grey-darken-1"
-        thumb-color="primary"
+        color="#fdb022"
+        thumb-color="#fdb022"
         thumb-label
-        
       >
         <template #prepend>
           <v-text-field
@@ -94,9 +93,9 @@
         :min="utility.fieldOfStudyDebt.min"
         hide-details
         class="align-center"
-        color="primary"
         track-color="grey-darken-1"
-        thumb-color="primary"
+        color="#fdb022"
+        thumb-color="#fdb022"
         thumb-label
       >
         <template #prepend>
