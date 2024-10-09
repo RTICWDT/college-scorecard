@@ -38,6 +38,7 @@
         <v-expansion-panel-title>Degree Types</v-expansion-panel-title>
         <v-expansion-panel-text>
           <span class="search-subhead">Undergraduate</span>
+          <Spacer :height="10"/>
           <v-checkbox
             density="compact"
             id="search-form-fos-degree-c"
@@ -70,6 +71,7 @@
           />
           <Spacer :height="20"/>
           <span class="search-subhead pt-5">Graduate</span>
+          <Spacer :height="10"/>
           <v-checkbox
             density="compact"
             id="search-form-fos-degree-m"
@@ -370,8 +372,8 @@
             v-model="input.serving"
             id="search-form-serving"
             :items="cleanSpecializedMission"
-            item-title="value"
-            item-value="key"
+            item-title="title"
+            item-value="value"
             label="Select one"
             class="py-0 pt-4 my-0"
             color="secondary"
@@ -508,7 +510,7 @@ const panels = ref(props.initiallyOpenPanelsByIndex)
 const input = reactive(useCloneDeep(formDefault))
 
 const cleanSpecializedMission = computed(() => {
-  return useMap(site.value.data.special_designations, (value, title) => {
+  return useMap(site.value.data.special_designations, (title, value) => {
     return {
       title,
       value,
@@ -586,7 +588,7 @@ const groomedInput = computed(() => {
 
   // Handle edgecase for distance :(
   if (inputToGroom.zip) {
-    inputToGroom.distance = this.input.distance
+    inputToGroom.distance = input.distance
   } else {
     useUnset(inputToGroom, "distance")
   }
@@ -668,7 +670,6 @@ const mapInputFromQuery = () => {
 }
 
 const resetForm = () => {
-  // TODO - Create reset value method, pass desired fields to method, return default values from object.
   Object.assign(input, useCloneDeep(formDefault))
   utility.enable = useCloneDeep(utility.formDefault)
   location.latLon = null
@@ -681,14 +682,42 @@ const handleLocationSelection = (params) => {
   input.page = 1
 }
 
+const autoOpenActivePanels = () => {
+  Object.keys(groomedInput.value).forEach((key) => {
+    console.log(key)
+    switch (key) {
+      case 'cip4': panels.value.push(0); break;
+      case 'cip4_degree': panels.value.push(1); break;
+      case 'completion_rate': panels.value.push(2); break;
+      case 'avg_net_price': panels.value.push(3); break;
+      case 'sat_math': panels.value.push(4); break;
+      case 'sat_read': panels.value.push(4); break;
+      case 'act': panels.value.push(4); break;
+      case 'acceptance': panels.value.push(5); break;
+      case 'size': panels.value.push(6); break;
+      case 'control': panels.value.push(7); break;
+      case 'locale': panels.value.push(8); break;
+      case 'serving': panels.value.push(9); break;
+      case 'religious': panels.value.push(10); break;
+      case 'dolflag': panels.value.push(11); break;
+    }
+
+    if (key === "cip4")
+    if (key === "serving") { panels.value.push(9) }
+  })
+}
+
+
+// we run outside of mounted so panels are set before the form is rendered
+mapInputFromQuery()
+autoOpenActivePanels()
+
 onMounted(() => {
-  mapInputFromQuery()
-  emit("search-update", { page: 0 })
+  emit("search-update", { ...groomedInput.value, page: 0 })
 })
 
 watch(groomedInput, (newValue, oldValue) => {
   if (isEqual(newValue, oldValue)) { return }
-
   emit("search-update", { ...groomedInput.value, page: 0 })
 }, { deep: true })
 

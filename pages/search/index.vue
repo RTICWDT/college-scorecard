@@ -93,7 +93,7 @@
               ref="searchSchoolRef"
               @school-name-selected="handleSchoolSelection"
               @school-name-cleared="handleSchoolSelection"
-              :initial_school="input.search"
+              :initial-school="route.query.search"
               :dense="true"
               :horizontal="!smAndDown"
             />
@@ -107,9 +107,9 @@
             <SearchLocationInstitution
               ref="searchLocationRef"
               @search-update="handleLocationSelection"
-              :initial_state="input.state"
-              :initial_zip="input.zip"
-              :initial_distance="input.distance"
+              :initial-state="route.query.state"
+              :initial-zip="route.query.zip"
+              :initial-distance="route.query.distance"
               :horizontal="!smAndDown"
             />
           </div>
@@ -157,7 +157,6 @@
           :urlParsedParams="urlParsedParams"
           display-all-filters
           :hideLocation="true"
-          :initiallyOpenPanelsByIndex="[0]"
           :submittable="false"
         />
         <v-btn
@@ -632,8 +631,13 @@ const handleFormSearch = (params) => {
       delete updateParams[key]
     }
   })
-
+  
   Object.assign(input, { ...updateParams, page: 1 })
+
+  if (params.zip || params.state || params.distance || params.lat || params.long) {
+    return handleLocationSelection(params)
+  }
+
   debounceSearch(params)
 }
 
@@ -712,7 +716,7 @@ const debounceSearch = useDebounce(() => {
 
 const onScroll = (e) => {
   if (typeof window === "undefined") return
-  const top = window.pageYOffset || e.target.scrollTop || 0
+  const top = window.scrollY || e.target.scrollTop || 0
   showScroll.value = top > 20
 }
 

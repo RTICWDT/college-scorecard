@@ -32,6 +32,7 @@ export default defineNuxtPlugin((nuxtApp) => {
           },
           variables: {
             'medium-emphasis-opacity': 1,
+            'input-control-height': '30px',
           }
         },
       },

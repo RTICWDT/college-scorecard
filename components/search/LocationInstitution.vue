@@ -103,15 +103,15 @@
 
 <script setup>
 const props = defineProps({
-  initial_state: {
+  initialState: {
     type: [String, Array],
     default: null,
   },
-  initial_zip: {
+  initialZip: {
     type: String,
     default: null,
   },
-  initial_distance: {
+  initialDistance: {
     type: String,
     default: null,
   },
@@ -150,26 +150,18 @@ const input = reactive({
 })
 
 // Initialize data based on props
-if (props.initial_state) {
+if (props.initialState) {
   utility.location = "State"
-  input.state = props.initial_state
-} else if (props.initial_zip) {
+  input.state = props.initialState
+} else if (props.initialZip) {
   utility.location = "ZIP Code"
-  input.zip = props.initial_zip
-  input.distance = props.initial_distance
+  input.zip = props.initialZip
+  input.distance = props.initialDistance
 }
 
-watch(() => props.initial_state, (newValue) => {
-  input.state = newValue
-})
-
-watch(() => props.initial_zip, (newValue) => {
-  input.zip = newValue
-})
-
-watch(() => props.initial_distance, (newValue) => {
-  input.distance = newValue
-})
+watch(() => props.initialState, (newValue) => input.state = newValue)
+watch(() => props.initialZip, (newValue) => input.zip = newValue)
+watch(() => props.initialDistance, (newValue) => input.distance = newValue)
 
 watch(() => location.latLon, (newValue) => {
   if (
@@ -243,7 +235,4 @@ function handleSearch() {
 defineExpose({
   resetForm,
 })
-
-
-
 </script>
