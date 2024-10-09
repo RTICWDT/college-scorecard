@@ -706,13 +706,13 @@ const handleFormReset = () => {
 // ON LOAD, DEBOUNCER, AND HELPERS
 // 
 //
+onMounted(() => {
+  debounceSearch()
+})
+
 const debounceSearch = useDebounce((params) => {
   searchAPI()
-}, 1000)
-
-onMounted(() => {
-  searchAPI()
-})
+}, 300)
 
 const onScroll = (e) => {
   if (typeof window === "undefined") return
