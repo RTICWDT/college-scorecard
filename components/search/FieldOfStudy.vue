@@ -62,7 +62,6 @@ const handleFieldOfStudySelect = (selectedItem) => {
   }
 
   const locateCip4 = CIP4.value.find(element => element.cip4.replace(/\./g, '') === selectedItem.code.slice(0, 4))
-
   if (!locateCip4 || !locateCip4.field) return null
 
   emit('field-of-study-selected', {

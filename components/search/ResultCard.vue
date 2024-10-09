@@ -18,9 +18,7 @@
             icon
             class="float-right search-result-card-compare"
             @click="!isLoading ? store.toggleSchool(school) : () => {}"
-            :class="[
-              isSelected ? '' : compareSchoolsLength > 9 ? 'noCompareAllow' : ''
-            ]"
+            :class="[isSelected ? '' : compareSchoolsLength > 9 ? 'noCompareAllow' : '']"
             v-bind="props"
             aria-label="Add to compare"
           >
@@ -165,9 +163,7 @@ const displayAvgCost = computed(() => {
   return numeral(netPrice.value).format('$0a')
 })
 
-const isSelected = computed(() => 
-  store.institutions.find(({ schoolId }) => schoolId == props.school.id) != undefined
-)
+const isSelected = computed(() => store.institutions.find(({ schoolId }) => schoolId == props.school.id) != undefined);
 </script>
 
 <style lang="scss" scoped>

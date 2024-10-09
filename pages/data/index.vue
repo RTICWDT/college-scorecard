@@ -75,7 +75,7 @@
             >
               StackExchange
               <v-icon size="x-small" class="pl-2">
-                fas fa-external-link-alt
+                mdi-open-in-new
               </v-icon>
             </a>
              or email the help desk at

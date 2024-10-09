@@ -154,7 +154,6 @@
         <SearchForm
           ref="searchFormRef"
           @search-update="handleFormSearch" 
-          :urlParsedParams="urlParsedParams"
           display-all-filters
           :hideLocation="true"
           :submittable="false"
@@ -434,11 +433,10 @@ const props = defineProps({
 const emit = defineEmits(['search-form-reset'])
 const showSidebar = ref(!smAndDown.value)
 const isLoading = ref(true)
-const urlParsedParams = ref(route.query)
 const error = ref(null)
 const showCompare = ref(false)
 const shareUrl = ref(null)
-const displayFlag = ref(urlParsedParams.value.dolflag === "true")
+const displayFlag = ref(route.query.dolflag === "true")
 const displayPage = ref(1)
 const showScroll = ref(false)
 
@@ -459,8 +457,8 @@ const results = reactive({
 })
 
 const input = reactive({
-  sort: urlParsedParams.sort || props.defaultSort,
-  page: urlParsedParams.page ? Number(urlParsedParams.page) + 1 : 1,
+  sort: route.query.sort || props.defaultSort,
+  page: route.query.page ? Number(route.query.page) + 1 : 1,
 })
 
 // Computed properties

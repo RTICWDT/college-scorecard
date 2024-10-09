@@ -1,27 +1,35 @@
 <template>
-  <v-form class="px-5 pb-5 pt-3 bg-white" id="fos-search-form" @submit.prevent="handleSubmit">
+  <v-form class="px-5 pb-5 pt-3 bg-white" @submit.prevent="handleSubmit">
     <h3 class="my-4">Location</h3>
     <SearchLocationInstitution
+      ref="searchLocationRef"
       @search-update="handleLocationSelection"
       :horizontal="false"
       :initial_state="input.state"
       :initial_zip="input.zip"
       :initial_distance="input.distance"
     />
+
+    <Spacer :height="20" />
+
     <!-- Salary After Completing -->
     <div>
       <h3 class="my-4" id="search-fos-salary">
         Salary After Completing
         <v-btn
-          v-if="input.fos_salary.join(',') !== utility.formDefault.fos_salary.join(',')"
-          @click="input.fos_salary = [...utility.formDefault.fos_salary]"
-          icon="mdi-close"
+          icon
+          :readonly="fosSalaryIsDefault"
+          @click="input.fos_salary = [...formDefault.fos_salary]"
           aria-label="Clear Salary After Complete Input"
-        ></v-btn>
+          class="ml-1"
+        >
+          <v-icon :color="fosSalaryIsDefault ? '#00000022' : 'black'">mdi-close</v-icon>
+        </v-btn>
       </h3>
 
       <v-range-slider
         v-model="input.fos_salary"
+        @update:model-value="updateSalarySlider"
         :max="utility.fieldOfStudySalary.max"
         :min="utility.fieldOfStudySalary.min"
         hide-details
@@ -30,50 +38,58 @@
         track-color="grey-darken-1"
         thumb-color="primary"
         thumb-label
+        
       >
-        <template v-slot:prepend>
+        <template #prepend>
           <v-text-field
             v-model="input.fos_salary[0]"
             hide-details
-            single-line
             type="number"
-            style="width: 60px"
+            style="width: 100px"
             density="compact"
+            variant="outlined"
             prefix="$"
             suffix="k"
             @update:model-value="updateSalaryMin"
-          ></v-text-field>
+          />
         </template>
-        <template v-slot:append>
+        <template #append>
           <v-text-field
             v-model="input.fos_salary[1]"
             hide-details
             single-line
             type="number"
-            style="width: 60px"
+            style="width: 100px"
             density="compact"
+            variant="outlined"
             prefix="$"
             suffix="k"
             @update:model-value="updateSalaryMax"
-          ></v-text-field>
+          />
         </template>
       </v-range-slider>
     </div>
 
+    <Spacer :height="20" />
+
     <!-- Median Total Debt -->
     <div class="mb-4">
-      <h3 class="my-4" id="search-fos-median-debt">
+      <h3 class="my-4">
         Median Total Debt
         <v-btn
-          v-if="input.fos_debt.join(',') !== utility.formDefault.fos_debt.join(',')"
-          @click="input.fos_debt = [...utility.formDefault.fos_debt]"
+          :readonly="fosDebtIsDefault"
+          @click="input.fos_debt = [...formDefault.fos_debt]"
           icon="mdi-close"
           aria-label="Clear Median Total Debt Input"
-        ></v-btn>
+          class="ml-1"
+        >
+          <v-icon :color="fosDebtIsDefault ? '#00000022' : 'black'">mdi-close</v-icon>
+        </v-btn>
       </h3>
 
       <v-range-slider
         v-model="input.fos_debt"
+        @update:model-value="updateMedianDebtSlider"
         :max="utility.fieldOfStudyDebt.max"
         :min="utility.fieldOfStudyDebt.min"
         hide-details
@@ -83,27 +99,29 @@
         thumb-color="primary"
         thumb-label
       >
-        <template v-slot:prepend>
+        <template #prepend>
           <v-text-field
             v-model="input.fos_debt[0]"
             hide-details
             single-line
             type="number"
-            style="width: 60px"
+            style="width: 100px"
             density="compact"
+            variant="outlined"
             prefix="$"
             suffix="k"
             @update:model-value="updateDebtMin"
           ></v-text-field>
         </template>
-        <template v-slot:append>
+        <template #append>
           <v-text-field
             v-model="input.fos_debt[1]"
             hide-details
             single-line
             type="number"
-            style="width: 60px"
+            style="width: 100px"
             density="compact"
+            variant="outlined"
             prefix="$"
             suffix="k"
             @update:model-value="updateDebtMax"
@@ -111,6 +129,8 @@
         </template>
       </v-range-slider>
     </div>
+
+    <Spacer :height="10" />
 
     <!-- WIOA Programs -->
     <div>
@@ -132,45 +152,31 @@
       class="sr-only"
       color="secondary"
       size="large"
-    >Find Schools</v-btn>
+    >
+      Find Schools
+    </v-btn>
+
+    <Spacer :height="10" />
   </v-form>
 </template>
 
 <script setup>
-const props = defineProps({
-  urlParsedParams: {
-    type: Object,
-    default: () => ({})
-  },
-  autoSubmit: {
-    type: Boolean,
-    default: false
-  }
-})
+const route = useRoute()
+const emit = defineEmits(['search-update', 'update:modelValue'])
+const searchLocationRef = ref(null)
 
-const emit = defineEmits(['search-update'])
-
-const input = ref({
+const formDefault = ref({
   fos_salary: [0, 150],
   fos_debt: [0, 50],
-  dolflag: null,
   state: null,
   zip: null,
-  distance: null,
+  distance: 50,
   lat: null,
   long: null,
+  dolflag: false,
 })
 
 const utility = ref({
-  formDefault: {
-    fos_salary: [0, 150],
-    fos_debt: [0, 50],
-    state: null,
-    zip: null,
-    distance: 50,
-    lat: null,
-    long: null,
-  },
   rules: {
     required: (value) => !!value || "Required.",
     numerical: (value) => {
@@ -186,43 +192,49 @@ const utility = ref({
     min: 0,
     max: 50,
   },
-  initialized: false,
 })
 
-// Computed
-const cleanInput = computed(() => {
-  const defaultValues = useCloneDeep(utility.value.formDefault)
-  const groomedInput = {}
+const input = reactive(useCloneDeep(formDefault.value))
 
-  for (const key in input.value) {
+// Computed
+const fosSalaryIsDefault = computed(() => input.fos_salary.join(',') === formDefault.value.fos_salary.join(','))
+const fosDebtIsDefault = computed(() => input.fos_debt.join(',') === formDefault.value.fos_debt.join(','))
+
+
+const groomedInput = computed(() => {
+  const defaultValues = useCloneDeep(formDefault.value)
+  const inputToGroom = {}
+
+  for (const key in input) {
+    
     if (!(key in defaultValues)) continue
-    if (!isEqual(input.value[key], defaultValues[key]) || key === "cip4_degree") {
-      groomedInput[key] = input.value[key]
+    if (!isEqual(input[key], defaultValues[key]) || key === "cip4_degree") {
+      inputToGroom[key] = input[key]
     } else {
-      groomedInput[key] = null
+      inputToGroom[key] = null
     }
   }
 
-  if (groomedInput.zip) {
-    groomedInput.distance = input.value.distance
+  if (inputToGroom.zip || (inputToGroom.lat && inputToGroom.long)) {
+    inputToGroom.distance = input.distance
   } else {
-    delete groomedInput.distance
+    delete inputToGroom.distance
   }
 
-  if (groomedInput.fos_salary) {
-    groomedInput.fos_salary = `${groomedInput.fos_salary[0] * 1000}..${groomedInput.fos_salary[1] * 1000}`
+  if (inputToGroom.fos_salary) {
+    inputToGroom.fos_salary = `${inputToGroom.fos_salary[0] * 1000}..${inputToGroom.fos_salary[1] * 1000}`
   }
 
-  if (groomedInput.fos_debt) {
-    groomedInput.fos_debt = `${groomedInput.fos_debt[0] * 1000}..${groomedInput.fos_debt[1] * 1000}`
+  if (inputToGroom.fos_debt) {
+    inputToGroom.fos_debt = `${inputToGroom.fos_debt[0] * 1000}..${inputToGroom.fos_debt[1] * 1000}`
   }
 
-  return groomedInput
+  return inputToGroom
 })
 
 // Methods
-const mapInputFromProp = () => {
-  useMergeWith(input.value, props.urlParsedParams, (objVal, newObjValue, key) => {
+const mapInputFromQuery = () => {
+  useMergeWith(input, route.query, (objVal, newObjValue, key) => {
     switch (key) {
       case "fos_debt":
       case "fos_salary":
@@ -237,49 +249,53 @@ const mapInputFromProp = () => {
 }
 
 const handleLocationSelection = (params) => {
-  input.value = { ...input.value, ...params, page: 1 }
+  Object.assign(input, { ...input, ...params, page: 1 })
 }
 
 const resetForm = () => {
-  input.value = useCloneDeep(utility.value.formDefault)
-  // Add any additional reset logic here
+  searchLocationRef.value.resetForm()
+  Object.assign(input, useCloneDeep(formDefault.value))
+}
+
+const updateSalarySlider = (value) => {
+  input.fos_salary = [Math.round(value[0]), Math.round(value[1])]
+}
+
+const updateMedianDebtSlider = (value) => {
+  input.fos_debt = [Math.round(value[0]), Math.round(value[1])] 
 }
 
 const updateSalaryMin = (value) => {
-  input.value.fos_salary[0] = Number(value)
+  input.fos_salary[0] = Number(value).toFixed(1)
 }
 
 const updateSalaryMax = (value) => {
-  input.value.fos_salary[1] = Number(value)
+  console.log(value)
+  input.fos_salary[1] = Number(value)
 }
 
 const updateDebtMin = (value) => {
-  input.value.fos_debt[0] = Number(value)
+  input.fos_debt[0] = Number(value)
 }
 
 const updateDebtMax = (value) => {
-  input.value.fos_debt[1] = Number(value)
+  input.fos_debt[1] = Number(value)
 }
 
 const handleSubmit = () => {
-  emit('search-update', cleanInput.value)
+  emit('search-submit', groomedInput.value)
 }
 
-// Watchers
-watch(cleanInput, (newValue) => {
-  emit('search-update', { ...newValue })
-}, { deep: true })
+mapInputFromQuery()
 
-watch(() => props.urlParsedParams, () => {
-  mapInputFromProp()
+watch(groomedInput, (newValue, oldValue) => {
+  if (isEqual(newValue, oldValue)) { return }
+  emit("search-update", { ...groomedInput.value, page: 1 })
 }, { deep: true })
 
 // Lifecycle hooks
 onMounted(() => {
-  utility.value.formDefault = useCloneDeep(input.value)
-  mapInputFromProp()
-  // You may need to implement a global event bus or use provide/inject for this
-  // this.$root.$on('search-form-reset', resetFormDefault)
+  emit("search-update", { ...groomedInput.value, page: 1 })
 })
 
 defineExpose({

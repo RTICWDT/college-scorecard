@@ -37,6 +37,7 @@
 
 .sidebar-mobile {
   max-width: 100% !important;
+  flex-grow: 1;
   z-index: 1000;
 }
 
@@ -55,6 +56,21 @@
 :deep(.v-pagination__list) {
   justify-content: right;
 }
+
+.fosResultsSortBar {
+  a {
+    opacity: 1;
+    transition: opacity 0.3s;
+  }
+}
+
+.fosResultsSortBar.loading {
+  a {
+    opacity: 0.3;
+  }
+}
+
+
 
 </style>
 
@@ -81,7 +97,13 @@
           <div class="search-label my-2 my-md-0 mr-0 mr-md-2">Field of Study:</div>
 
           <div style="min-width: 200px">
-            <SearchFieldOfStudy @field-of-study-selected="handleFieldOfStudySelected" :selected="input.cip4" id="fosSearch" ariaRequired="true" dense />
+            <SearchFieldOfStudy
+              @field-of-study-selected="handleFieldOfStudySelected"
+              :selected="input.cip4"
+              id="fosSearch"
+              ariaRequired="true"
+              dense
+            />
           </div>
 
           <div class="search-label my-2 my-md-0 mx-0 mx-md-2" id="location-label">
@@ -143,9 +165,8 @@
         </div>
 
         <!-- Search Form Component -->
-        <!--  -->
         <SearchFieldOfStudyForm
-          :url-parsed-params="urlParsedParams"
+          ref="searchFormRef"
           @search-update="handleFormSearch"
         />
       </div>
@@ -174,8 +195,19 @@
       <div fluid class="pa-0">
         <div>
           <div :cols="showSidebar ? 6 : 9" xl="10" class="px-4 py-2 pa-sm-8`">
+            <h2 class="my-4 pl-2">
+              {{ selectedFoSLabel }}
+              <v-chip
+                class="ml-0 ml-sm-2 mt-2 mt-sm-0 font-weight-regular text-uppercase position-relative"
+                style="bottom: 3px;"
+                color="#000000"
+              >
+                {{ selectedFoSDegree }}
+              </v-chip>
+            </h2>
+
             <div v-if="isLoading">
-              <v-card class="mt-2 mb-4 py-4 px-4 elevation-0 d-flex align-center" style="min-height: 98px;">
+              <v-card class="mt-2 mb-2 py-4 px-4 elevation-0 d-flex align-center" style="min-height: 98px;">
                 <h3 class="title">
                   Loading
                   <v-icon size="z-small" color="#00365e" icon="fa:fas fa-circle-notch fa-spin" class="ml-2"/>
@@ -184,7 +216,7 @@
             </div>
 
             <div v-else>
-              <v-card class="mt-2 mb-4 py-4 px-4 elevation-0">
+              <v-card class="mb-2 py-4 px-4 elevation-0">
                 <v-container fluid class="d-flex pa-0">
                   <v-row>
                     <v-col cols="12" class="py-2 px-4">
@@ -201,7 +233,7 @@
                           <!-- RESET FILTERS -->
                           <v-btn
                             id="search-button-clear"
-                            @click="clearSearchForm"
+                            @click="handleFormReset"
                             size="small"
                             elevation="2"
                             class="mr-1 mb-2"
@@ -224,7 +256,13 @@
                               >
                                 <v-icon small class="mr-1 ml-n1" icon="fa:fas fa-sort" />
                                 {{
-                                  sorts.find((el) => el.field === input.sort.split(':')[0]).type + " " + sorts.find((el) => el.field === input.sort.split(':')[0]).direction
+                                  (() => {
+                                    const sortField = input.sort.split(':')[0];
+                                    const sortInfo = sorts.find((el) => el.field === sortField);
+                                    return sortInfo 
+                                      ? `${sortInfo.type} ${sortInfo.direction}`
+                                      : '';
+                                  })()
                                 }}
                               </v-btn>
                             </template>
@@ -266,43 +304,12 @@
               </v-card>
             </div>
 
-
               <!--  -->
               <!-- FOS INFORMATION -->
               <!--  -->
+
               <!-- Field Of Study CIP 4 Information -->
               <div>
-                <v-row style="margin-top: -15px;">
-                  <v-col
-                    cols="12"
-                    v-if="!isLoading && input.dolflag == 'true'"
-                    class="pl-5"
-                  >
-                    <v-alert
-                      color="primary"
-                      border="left"
-                      colored-border
-                      class="mb-0"
-                    >
-                      <span
-                        >Only show schools that have programs that qualify for
-                        the Department of Labor's WIOA program.<tooltip
-                          definition="wioa-participants"
-                        />
-                        <br />
-                        Learn more about the Department of Labor's WIOA
-                        program at
-                        <a
-                          target="_blank"
-                          href="https://collegescorecard.ed.gov/training"
-                        >
-                          CollegeScorecard.ed.gov/training.
-                        </a>
-                      </span>
-                    </v-alert>
-                  </v-col>
-                </v-row>
-
                 <v-row>
                   <v-col cols="12">
                     <v-alert color="white" class="pl-5">
@@ -315,20 +322,39 @@
                         href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56"
                         @click="transitionOutboundLink($event)"
                       >
-                        Learn more about CIP<v-icon x-small class="pl-1">
-                          fas fa-external-link-alt
-                        </v-icon>
+                        Learn more about CIP
+                        <v-icon size="x-small">mdi-open-in-new</v-icon>
                       </a>
                     </v-alert>
                   </v-col>
                 </v-row>
 
+                <v-row>
+                  <v-col cols="12"class="pt-0"v-if="input.dolflag">
+                    <v-alert
+                      border="start"
+                      color="white"
+                      border-color="primary"
+                      class="mb-0"
+                    >
+                      <span
+                        >Only show schools that have programs that qualify for
+                        the Department of Labor's WIOA program.
+                        <tooltip definition="wioa-participants" />
+                        <br />
+                        Learn more about the Department of Labor's WIOA
+                        program at
+                        <a target="_blank" href="https://collegescorecard.ed.gov/training">CollegeScorecard.ed.gov/training</a>.
+                      </span>
+                    </v-alert>
+                  </v-col>
+                </v-row>
               </div>
 
               <!-- No Results/Canned Search/ -->
               <div
                 id="search-can-query-container"
-                v-if="!isLoading && results.schools.length === 0"
+                v-if="!isLoading && results.fieldsOfStudy.length === 0"
               >
                 <v-row>
                   <v-col cols="12">
@@ -348,10 +374,10 @@
                   <p class="error-message">{{ error }}</p>
                 </div>
 
-                <!-- Institution Results -->
+                <!-- Field of Study Results -->
                 <div
                   class="search-result-cards-container"
-                  v-if="!isLoading && results.schools.length > 0"
+                  v-if="results.fieldsOfStudy.length > 0"
                 >
                   <v-card class="mx-auto pa-0 mt-3" style="width:100%" outlined>
                     <v-card-text>
@@ -360,12 +386,14 @@
                         style="border-bottom:2px solid #eee"
                       > 
                         <v-col
-                          class="py-md-0 pl-5"
+                          class="fosResultsSortBar py-md-0 pl-5"
+                          :class="isLoading && 'loading'"
                           cols="12"
                           sm="3"
                           v-for="sort in sorts"
                           :key="sort.type"
                           v-if="!smAndDown"
+                          
                         >
                           <a
                             :class="{
@@ -376,38 +404,33 @@
                             }"
                             href=""
                             @click="(e) => changeSort(e, sort.type)"
-                            >{{ sort.type }}
+                          >
+                            {{ sort.type }}
                             <i
                               class="fa"
                               :class="[
                                 { 'fa-sort': sort.current == false },
-                                {
-                                  'fa-sort-up':
-                                    sort.current && sort.direction == 'desc',
-                                },
-                                {
-                                  'fa-sort-down':
-                                    sort.current && sort.direction == 'asc',
-                                },
+                                { 'fa-sort-up': sort.current && sort.direction == 'desc' },
+                                { 'fa-sort-down': sort.current && sort.direction == 'asc' },
                               ]"
                               aria-hidden="true"
-                            ></i
-                          ></a>
+                            />
+                          </a>
                         </v-col>
-
                       </v-row>
+
                       <!-- Fields of Study Results -->
                       <v-row>
                         <v-col
-                          v-for="school in results.schools"
-                          :key="school.id"
+                          v-for="fieldOfStudy in results.fieldsOfStudy"
+                          :key="fieldOfStudy.unit_id"
                           cols="12"
                           lg="12"
                           md="12"
                           sm="12"
                           class="d-flex align-stretch data-row pl-5"
                         >
-                          <SearchFieldOfStudyResultCard :fos="school" />
+                          <SearchFieldOfStudyResultCard :fos="fieldOfStudy" :isLoading="isLoading" />
                         </v-col>
                       </v-row>
                     </v-card-text>
@@ -415,14 +438,12 @@
                 </div>
 
                 <!-- Bottom Pagination -->
-                <v-card
-                  class="mt-4 mb-2 py-1 px-4 elevation-0"
-                  v-if="!isLoading && results.schools.length > 0"
-                >
+                <v-card class="mt-4 mb-2 py-1 px-4 elevation-0">
                   <v-container fluid>
                     <v-row>
                       <v-col cols="12" class="v-pagination-wrapper pa-0">
                         <v-pagination
+                          v-if="!isLoading && results.fieldsOfStudy.length > 0"
                           v-model="displayPage"
                           :length="totalPages"
                           @update:model-value="handlePaginationInput"
@@ -453,23 +474,26 @@ const route = useRoute()
 const isLoading = ref(false)
 const showSidebar = ref(false)
 const error = ref(null)
-const urlParsedParams = ref(null)
+const displayPage = ref(1)
 const showScroll = ref(false)
 const defaultSort =  ref("name:asc")
 const shareUrl = ref(null)
 const emit = defineEmits(["search-form-reset", "loading"])
 
+const searchFormRef = ref(null)
+
+
 const results = reactive({
-  schools: [],
+  fieldsOfStudy: [],
   meta: { total: 0 },
 })
 
 const input = reactive({
-  sort: null,
-  page: 1,
-  cip4: null,
-  cip4_degree: null,
-  dolflag: false,
+  sort: route.query.sort || defaultSort.value,
+  page: route.query.page || 1,
+  cip4: route.query.cip4 || null,
+  cip4_degree: route.query.cip4_degree || null,
+  dolflag: route.query.dolflag || false,
 })
 
 const sorts = ref([
@@ -501,23 +525,7 @@ const sorts = ref([
   },
 ])
 
-const utility = reactive({
-  rules: {
-    required: (value) => !!value || "Required.",
-    numerical: (value) => {
-      const pattern = /^\d+$/
-      return pattern.test(value) || "Numerical"
-    },
-    zip: (value) =>
-      /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(value) ||
-      "Must be ZIP code format",
-  },
-  formDefault: {},
-})
-
 // COMPUTED
-
-// Computed properties
 const paginatorPageCount = computed(() => {
   if (smAndDown.value) { 
     return 2
@@ -536,9 +544,9 @@ const paginatorPageCount = computed(() => {
 
 const selectedFoSLabel = computed(() => {
   if (input.cip4) {
-    return _.find(site.value.data.cip_4_digit, [
+    return useFind(site.value.data.cip_4_digit, [
       "label",
-      input.cip4.substr(0, 2) + "." + input.cip4.substr(2),
+      input.cip4.substring(0, 2) + "." + input.cip4.substring(2),
     ])["value"].replace(".", "")
   } else {
     return ""
@@ -565,12 +573,7 @@ const totalPages = computed(() => {
 
 const fosDegrees = computed(() => formMappings.fosDegrees)
 
-const displayPage = computed({
-  get: () => input.page + 1,
-  set: (newValue) => {
-    input.page = newValue - 1
-  }
-})
+
 
 // METHODS
 
@@ -585,19 +588,18 @@ const searchAPI = async () => {
 
     router.replace(route.path + url)
 
-    console.log("WE HERE", query)
     const response = await apiGet("/fos", query)
 
     isLoading.value = false
-    results.schools = response.results
+    results.fieldsOfStudy = response.results
     results.meta = response.metadata
     shareUrl.value = window.location.href
   } catch (err) {
     isLoading.value = false
-    console.warn("Error fetching search.")
+    console.warn("Error fetching search.", err)
 
     results.meta = { total: 0 }
-    results.schools = []
+    results.fieldsOfStudy = []
 
     if (err.message === "Request aborted") {
       // Do nothing for aborted requests
@@ -614,7 +616,7 @@ const prepareSearchParams = () => {
   return {
     ...cleanedInput,
     page: input.page ? input.page - 1 : 0,
-    sort: input.sort || props.defaultSort
+    sort: input.sort || defaultSort.value
   }
 }
 
@@ -635,7 +637,7 @@ const handlePaginationInput = (page) => {
 }
     
 const resort = (sort) => {
-  input.page = 0
+  input.page = 1
   input.sort = sort
   searchAPI()
 }
@@ -643,28 +645,11 @@ const resort = (sort) => {
 const clearSearchForm = () => {
   input = {
     page: 1,
-    cip4: urlParsedParams.value.cip4,
-    cip4_degree: urlParsedParams.value.cip4_degree
+    cip4: route.query.cip4,
+    cip4_degree: route.query.cip4_degree
   }
 
   emit("search-form-reset")
-}
-
-const handleFormSearch = (params) => {
-  Object.assign(input, { ...input, ...params });
-  if (!input.page) { input.page = 0 }
-  debounceSearchUpdate()
-}
-
-const handleFieldOfStudySelected = (fieldOfStudy) => {
-  input.page = 0
-  input.cip4 = fieldOfStudy.cip4
-  debounceSearchUpdate()
-}
-
-const handleDegreeSelected = () => {
-  input.page = 0
-  debounceSearchUpdate()
 }
     
 const changeSort = (event, selected) => {
@@ -681,7 +666,7 @@ const changeSort = (event, selected) => {
   })
 
   input.page = 0
-  debounceSearchUpdate()
+  debounceSearch()
 }
 
 const onScroll = (e) => {
@@ -706,44 +691,60 @@ const generateQueryString = (params) => {
   return "?" + qs.replace(/^&+/, "").replace(/&{2,}/g, "&").replace(/%3A/g, ":")
 }
 
-const parseURLParams = (url) => {
-  if (!url) {
-    url = location.search.substring(1)
+const handleFormSearch = (params) => {
+  const updateParams = {
+    fos_debt: params.fos_debt,
+    fos_salary: params.fos_salary,
+    lat: params.lat,
+    long: params.long,
+    zip: params.zip,
+    state: params.state,
+    distance: params.distance,
+    dolflag: params.dolflag,
   }
-  return route.query;
+
+  Object.keys(updateParams).forEach(key => {
+    if (updateParams[key] === null || updateParams[key] === undefined) {
+      delete input[key]
+      delete updateParams[key]
+    }
+
+    let array = isArray(updateParams[key])
+    if (array && updateParams[key].length === 0) {
+      delete input[key]
+      delete updateParams[key]
+    } 
+  })
+  
+  Object.assign(input, { ...updateParams, page: 1 })
+  debounceSearch()
+}
+
+const handleFieldOfStudySelected = (fieldOfStudy) => {
+  input.page = 1
+  input.cip4 = fieldOfStudy.cip4
+  debounceSearch()
+}
+
+const handleDegreeSelected = (degree) => {
+  input.page = 1
+  input.cip4_degree = degree
+  debounceSearch()
+}
+
+const handleFormReset = () => {
+  searchFormRef.value.resetForm()
+  input.sort = defaultSort.value
+  input.page = 1
 }
 
 onMounted(() => {
-  // Copy default form input state.
-  utility.formDefault = useCloneDeep(input)
-  urlParsedParams.value = parseURLParams()
-
-  // Add sort to state if it exists
-  input.sort = urlParsedParams.value.sort
-    ? urlParsedParams.value.sort
-    : defaultSort.value
-
-
-  input.page = urlParsedParams.value.page
-  ? parseInt(urlParsedParams.value.page)
-  : 0
-
-  input.cip4 = urlParsedParams.value.cip4
-  input.cip4_degree = urlParsedParams.value.cip4_degree
-
-  if (!input.cip4 || !input.cip4_degree) {
-    return router.push("/search/fos-landing")
-  }
-
-  debounceSearchUpdate()
   showSidebar.value = !smAndDown.value
 })
 
-const debounceSearchUpdate = useDebounce(function() {
+const debounceSearch = useDebounce(function() {
   searchAPI()
 }, 1000)
-
-
 
 useHead({
   title: "Search Fields of Study",

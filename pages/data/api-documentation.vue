@@ -449,7 +449,7 @@
               <a href="http://opendata.stackexchange.com/questions/tagged/collegescorecard"
                 @click="transitionOutboundLink($event)" target="_blank">StackExchange<v-icon size="x-small" class="pl-1"
                   color="#007000">
-                  fas fa-external-link-alt
+                  mdi-open-in-new
                 </v-icon>
               </a>
               or email the help desk at
