@@ -90,9 +90,10 @@
 
           <div style="min-width: 200px">
             <SearchNameAutocomplete
-              @school-name-selected="handleSchoolNameSelected"
+              ref="searchSchoolRef"
+              @school-name-selected="handleSchoolSelection"
+              @school-name-cleared="handleSchoolSelection"
               :initial_school="input.search"
-              @school-name-cleared="handleSchoolNameSelected"
               :dense="true"
               :horizontal="!smAndDown"
             />
@@ -104,6 +105,7 @@
 
           <div class="flex-grow-1 mr-0 mr-md-2">
             <SearchLocationInstitution
+              ref="searchLocationRef"
               @search-update="handleLocationSelection"
               :initial_state="input.state"
               :initial_zip="input.zip"
@@ -150,10 +152,10 @@
 
         <!-- Search Form Component -->
         <SearchForm
+          ref="searchFormRef"
+          @search-update="handleFormSearch" 
           :urlParsedParams="urlParsedParams"
-          auto-submit
           display-all-filters
-          @search-update="handleInstitutionSearch"
           :hideLocation="true"
           :initiallyOpenPanelsByIndex="[0]"
           :submittable="false"
@@ -221,7 +223,7 @@
                           <!-- RESET FILTERS -->
                           <v-btn
                             id="search-button-clear"
-                            @click="clearSearchForm"
+                            @click="handleFormReset"
                             size="small"
                             elevation="2"
                             class="mr-1 mb-2"
@@ -256,7 +258,7 @@
                                 v-for="(item, index) in sorts"
                                 :key="item.field"
                                 :value="item.field"
-                                @click="resort(item.field)"
+                                @click="handleSort(item.field)"
                               >
                                 <v-list-item-title>{{ item.type }}</v-list-item-title>
                               </v-list-item>
@@ -278,7 +280,7 @@
                             v-model="displayPage"
                             :length="totalPages"
                             :total-visible="paginatorPageCount"
-                            @update:model-value="handlePaginationInput"
+                            @update:model-value="handlePagination"
                           />
                         </v-col>
                       </v-row>
@@ -338,7 +340,7 @@
                         Select one or more options below to create a list of
                         schools that fit your needs.
                       </p>
-                      <SearchCannedContainer @canned-search-submit="handleCannedSearchClick" />
+                      <SearchCannedContainer @canned-search-submit="handleCannedSearch" />
                     </v-card>
                     <Spacer :height="30" />
                   </v-col>
@@ -385,7 +387,7 @@
                       <v-pagination
                         v-model="displayPage"
                         :length="totalPages"
-                        @update:model-value="handlePaginationInput"
+                        @update:model-value="handlePagination"
                         :total-visible="paginatorPageCount"
                       />
                     </v-col>
@@ -430,16 +432,20 @@ const props = defineProps({
   compareFieldsOfStudy: Array,
 })
 
-const emit = defineEmits(['loading', 'search-form-reset', 'reset-dol-flag'])
+const emit = defineEmits(['search-form-reset'])
 const showSidebar = ref(!smAndDown.value)
 const isLoading = ref(true)
-const urlParsedParams = ref({})
+const urlParsedParams = ref(route.query)
 const error = ref(null)
 const showCompare = ref(false)
 const shareUrl = ref(null)
-const displayFlag = ref(false)
+const displayFlag = ref(urlParsedParams.value.dolflag === "true")
 const displayPage = ref(1)
 const showScroll = ref(false)
+
+const searchFormRef = ref(null)
+const searchSchoolRef = ref(null)
+const searchLocationRef = ref(null)
 
 const sorts = ref([
   { type: "Name", field: "name:asc" },
@@ -454,8 +460,8 @@ const results = reactive({
 })
 
 const input = reactive({
-  sort: null,
-  page: 1,
+  sort: urlParsedParams.sort || props.defaultSort,
+  page: urlParsedParams.page ? Number(urlParsedParams.page) + 1 : 1,
 })
 
 // Computed properties
@@ -483,15 +489,17 @@ const paginatorPageCount = computed(() => {
 })
 
 // Methods
+//
 const searchAPI = async () => {
   try {
     isLoading.value = true
     error.value = null
 
-    const params = prepareSearchParams()
-    const query = buildQuery(params)
+    let params = prepareSearchParams()
+    let query = buildQuery(params)
+    let url = generateQueryString(params)
 
-    router.replace({ query: params })
+    router.replace(route.path + url)
 
     const response = await apiGet("/schools", query)
     isLoading.value = false
@@ -501,11 +509,8 @@ const searchAPI = async () => {
   }
 }
 
-const parseURLParams = (url) => {
-  if (!url) {
-    url = location.search.substring(1)
-  }
-  return route.query;
+const pruneParams = (params) => {
+
 }
 
 const generateQueryString = (params) => {
@@ -522,11 +527,31 @@ const generateQueryString = (params) => {
 
 const prepareSearchParams = () => {
   const cleanedInput = Object.fromEntries(Object.entries(input).filter(([_, v]) => v != null))
-  return {
+  let params = {
     ...cleanedInput,
     page: input.page ? input.page - 1 : 0,
     sort: input.sort || props.defaultSort
   }
+
+  if (params.state) {
+    if (Object.keys(params.state).length === 0) {
+      delete params.state
+    }
+  }
+
+  if (params.size) {
+    if (Object.keys(params.size).length === 0) {
+      delete params.size
+    }
+  }
+
+  if (params.distance) {
+    if ((!params.lat && !params.long) && !params.zip) {
+      delete params.distance
+    }
+  }
+
+  return params
 }
 
 const buildQuery = (params) => {
@@ -581,53 +606,121 @@ const showError = (errorMessage) => {
   error.value = typeof errorMessage === 'string' ? errorMessage : "There was an unexpected API error."
 }
 
-const resort = (sort) => {
-  input.sort = sort
-  const params = parseURLParams()
-  params.sort = input.sort
-  debounceSearchUpdate(params)
+const handleDOLFlag = () => {
+  debounceSearch()
 }
 
-const clearSearchForm = () => {
-  Object.assign(input, { page: 1, sort: props.defaultSort })
-  urlParsedParams.value = {}
-  emit("search-form-reset")
+// SEARCH EVENT HANDLERS
+//
+//
+
+const handleFormSearch = (params) => {
+  const updateParams ={
+    id: params.id,
+    major: params.major,
+    size: params.size,
+    name: params.name,
+    control: params.control,
+    serving: params.serving,
+    religious: params.religious,
+    completion_rate: params.completion_rate,
+    avg_net_price: params.avg_net_price,
+    urban: params.urban,
+    cip4: params.cip4,
+    cip4_degree: params.cip4_degree,
+    act: params.act,
+    sat_math: params.sat_math,
+    sat_read: params.sat_read,
+    acceptance: params.acceptance,
+    locale: params.locale,
+    search: params.search,
+    dolflag: params.dolflag,
+  }
+
+  Object.keys(updateParams).forEach(key => {
+    if (updateParams[key] === null || updateParams[key] === undefined) {
+      delete input[key]
+      delete updateParams[key]
+    }
+  })
+
+  Object.assign(input, { ...updateParams, page: 1 })
+  debounceSearch(params)
 }
 
-const handleInstitutionSearch = (params) => {
-  Object.assign(input, { ...params, page: 1 })
-  searchAPI()
-}
-
-const handleCannedSearchClick = (cannedSearchData) => {
-  Object.assign(input, { ...cannedSearchData, page: 1 })
-  searchAPI()
-  urlParsedParams.value = parseURLParams()
+const handleSchoolSelection = (school) => {
+  input.search = typeof school === "string" ? school : school["school.name"]
+  input.page = 1
+  debounceSearch()
 }
 
 const handleLocationSelection = (params) => {
-  Object.assign(input, { ...params, page: 1 })
-  searchAPI()
+  const updateParams = {
+    state: params.state,
+    zip: params.zip,
+    distance: params.distance,
+    lat: params.lat,
+    long: params.long,
+  }
+
+  Object.keys(updateParams).forEach(key => {
+    if (updateParams[key] === null || updateParams[key] === undefined) {
+      delete input[key]
+      delete updateParams[key]
+    }
+  })
+
+  Object.assign(input, { ...updateParams, page: 1 })
+  debounceSearch()
 }
 
-const handlePaginationInput = (page) => {
+const handleCannedSearch = (params) => {
+  const updateParams = {
+    state: params.acceptance,
+    cip4_degree: params.cip4_degree,
+    completion_rate: params.completion_rate,
+    lat: params.lat,
+    long: params.long,
+  }
+
+  Object.keys(updateParams).forEach(key => {
+    if (updateParams[key] === null || updateParams[key] === undefined) {
+      delete input[key]
+      delete updateParams[key]
+    }
+  })
+
+  Object.assign(input, { ...updateParams, page: 1 })
+  debounceSearch()
+}
+
+const handlePagination = (page) => {
   input.page = page
   searchAPI()
   toTop()
 }
 
-const handleDOLFlag = () => {
-  urlParsedParams.value = parseURLParams()
-  delete urlParsedParams.value.dolflag
-  debounceSearchUpdate(urlParsedParams.value)
-  emit("reset-dol-flag")
+const handleSort = (sort) => {
+  input.sort = sort
+  debounceSearch()
 }
 
-const handleSchoolNameSelected = (school) => {
-  input.search = typeof school === "string" ? school : school["school.name"]
+const handleFormReset = () => {
+  Object.keys(input).forEach((key) => delete input[key])
+  input.sort = props.defaultSort
   input.page = 1
-  searchAPI()
+  searchFormRef.value.resetForm()
+  searchLocationRef.value.resetForm()
+  searchSchoolRef.value.resetForm()
 }
+
+const debounceSearch = useDebounce((params) => {
+  searchAPI()
+}, 1000)
+
+onMounted(() => {
+  searchAPI()
+})
 
 const onScroll = (e) => {
   if (typeof window === "undefined") return
@@ -638,22 +731,6 @@ const onScroll = (e) => {
 const toTop = () => {
   window.scrollTo({ top: 0, behavior: "smooth" })
 }
-
-onMounted(() => {
-  urlParsedParams.value = parseURLParams()
-
-  input.sort = urlParsedParams.value.sort || props.defaultSort
-  input.page = urlParsedParams.value.page ? Number(urlParsedParams.value.page) + 1 : 1
-
-  displayFlag.value = urlParsedParams.value.dolflag === "true"
-
-  searchAPI()
-})
-
-// Debounced function
-const debounceSearchUpdate = useDebounce((params) => {
-  // handleInstitutionSearch(params)
-}, 1000)
 
 useHead({
   title: "Search Schools",

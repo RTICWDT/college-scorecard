@@ -240,7 +240,7 @@ const handleLocationSelection = (params) => {
   input.value = { ...input.value, ...params, page: 1 }
 }
 
-const resetFormDefault = () => {
+const resetForm = () => {
   input.value = useCloneDeep(utility.value.formDefault)
   // Add any additional reset logic here
 }
@@ -267,13 +267,7 @@ const handleSubmit = () => {
 
 // Watchers
 watch(cleanInput, (newValue) => {
-  if (!props.autoSubmit) return
-  if (utility.value.initialized) {
-    debouncedEmitSearchQuery()
-  } else {
-    emit('search-update', { ...newValue })
-    utility.value.initialized = true
-  }
+  emit('search-update', { ...newValue })
 }, { deep: true })
 
 watch(() => props.urlParsedParams, () => {
@@ -288,11 +282,7 @@ onMounted(() => {
   // this.$root.$on('search-form-reset', resetFormDefault)
 })
 
-// Debounced function
-const debouncedEmitSearchQuery = useDebounce(() => {
-  emit('search-update', {
-    ...cleanInput.value,
-    page: 0,
-  })
-}, 1000)
+defineExpose({
+  resetForm
+})
 </script>

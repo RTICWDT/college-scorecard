@@ -138,5 +138,11 @@ const performSearch = async (newVal) => {
   }
 }
 
+defineExpose({
+  resetForm: () => {
+    search.value = null
+  },
+})
+
 
 </script>

@@ -197,10 +197,6 @@ watch(() => utility.location, (newValue, oldValue) => {
   }
 })
 
-onMounted(() => {
-  window.addEventListener("search-form-reset", resetFormDefault)
-})
-
 function handleLocationChange(e) {
   input.zip = null
   input.state = []
@@ -212,12 +208,18 @@ function handleLocationChange(e) {
   if (e == null) {
     utility.location = null
   }
-
+  
   emit("search-update", input)
 }
 
-function resetFormDefault() {
+function resetForm() {
   utility.location = null
+  input.zip = null
+  input.state = []
+  input.lat = null
+  input.long = null
+  location.latLon = null
+  location.error = null
 }
 
 function handleSearch() {
@@ -225,6 +227,23 @@ function handleSearch() {
     Object.entries(input).filter(([_, v]) => v != null)
   )
 
+  if (input.zip) {
+    if (!input.distance) {
+      return
+    }
+
+    if (utility.rules.zip(input.zip) === "Must be ZIP code format") {
+      return
+    }
+  }
+
   emit("search-update", o)
 }
+
+defineExpose({
+  resetForm,
+})
+
+
+
 </script>

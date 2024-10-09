@@ -146,7 +146,7 @@
         <!--  -->
         <SearchFieldOfStudyForm
           :url-parsed-params="urlParsedParams"
-          @search-query="handleFieldOfStudySearch"
+          @search-update="handleFormSearch"
         />
       </div>
     </div>
@@ -585,6 +585,7 @@ const searchAPI = async () => {
 
     router.replace(route.path + url)
 
+    console.log("WE HERE", query)
     const response = await apiGet("/fos", query)
 
     isLoading.value = false
@@ -627,19 +628,8 @@ const showError = (error) => {
   }
 }
 
-const handleFieldOfStudySearch = (params) => {
-  //console.log(params)
-  Object.assign(input, { ...input, ...params });
-  input = Object.fromEntries(
-    Object.entries(input).filter(([_, v]) => v != null)
-  )
-  if (!input.page)
-    input.page = 0
-
-  searchAPI()
-}
-
-const handlePaginationInput = () => {
+const handlePaginationInput = (page) => {
+  input.page = page
   searchAPI()
   toTop()
 }
@@ -658,6 +648,12 @@ const clearSearchForm = () => {
   }
 
   emit("search-form-reset")
+}
+
+const handleFormSearch = (params) => {
+  Object.assign(input, { ...input, ...params });
+  if (!input.page) { input.page = 0 }
+  debounceSearchUpdate()
 }
 
 const handleFieldOfStudySelected = (fieldOfStudy) => {
@@ -685,7 +681,7 @@ const changeSort = (event, selected) => {
   })
 
   input.page = 0
-  searchAPI()
+  debounceSearchUpdate()
 }
 
 const onScroll = (e) => {

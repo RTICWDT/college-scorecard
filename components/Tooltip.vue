@@ -5,7 +5,7 @@
       icon="fa:fas fa-info-circle"
       size="x-small"
       aria-label="More Information"
-      color="white"
+      color="transparent"
     >
       <span class="sr-only">More Information</span>
       <v-icon icon="fa:fas fa-info-circle"></v-icon>

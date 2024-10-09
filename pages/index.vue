@@ -435,18 +435,7 @@ const colorSlider = (num) => {
 }
 
 const directToSearch = (params) => {
-  const queryString = Object.entries(params)
-    .flatMap(([key, value]) => {
-      if (Array.isArray(value)) {
-        return value.map(v => `${encodeURIComponent(key)}=${encodeURIComponent(v)}`);
-      }
-      return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
-    })
-    .join('&');
-
-  const url = "/search/?" + queryString.replace(/&{2,}/g, "&").replace(/%3A/g, ":")
-
-  router.push(url)
+  router.push({ name: 'search', query: params })
 }
 
 const handleSchoolNameSelected = (school) => {

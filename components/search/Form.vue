@@ -459,6 +459,10 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  onSearchFormReset: {
+    type: Function,
+    default: () => {},
+  },
 })
 
 const formDefault = {
@@ -604,12 +608,13 @@ const onSubmit = () => {
   emit("search-submit", groomedInput.value)
 }
 
-const mapInputFromProp = () => {
+const route = useRoute()
+
+const mapInputFromQuery = () => {
   // Reset form to default, Helps with processing canned search items.
-  resetFormDefault()
 
   // TODO - Refactor this method. Maybe add switch.
-  useMergeWith(input, props.urlParsedParams, function(
+  useMergeWith(input, route.query, function(
     objVal,
     newObjValue,
     key
@@ -665,7 +670,7 @@ const mapInputFromProp = () => {
   }
 }
 
-const resetFormDefault = () => {
+const resetForm = () => {
   // TODO - Create reset value method, pass desired fields to method, return default values from object.
   Object.assign(input, useCloneDeep(formDefault))
   utility.enable = useCloneDeep(utility.formDefault)
@@ -679,11 +684,7 @@ const handleLocationSelection = (params) => {
   input.page = 1
 }
 
-// On Mount
-onMounted(() => {
-  mapInputFromProp()
-  window.addEventListener("search-form-reset", resetFormDefault)
-})
+onMounted(() => mapInputFromQuery())
 
 // On Change
 const debounceEmitSearchQuery = useDebounce(() => {
@@ -698,5 +699,7 @@ watch(groomedInput, (newValue, oldValue) => {
 }, { deep: true })
 
 
-
+defineExpose({
+  resetForm
+})
 </script>
