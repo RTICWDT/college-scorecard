@@ -1,4 +1,3 @@
-// utils/filters.js
 import _ from 'lodash'
 
 export const capitalize = (value) => {

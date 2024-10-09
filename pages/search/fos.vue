@@ -22,7 +22,6 @@
   background-color: white;
 }
 
-
 .sidebar {
 }
 
@@ -91,12 +90,13 @@
 
           <div class="flex-grow-1 mr-0 mr-md-2">
             <v-select
+              v-model="input.cip4_degree"
+              @update:model-value="handleDegreeSelected"
               :items="fosDegrees"
               item-title="label"
               item-value="value"
               variant="outlined"
               placeholder="Select one"
-              v-model="input.cip4_degree"
               hide-details
               id="fosDegree"
               color="#007000"
@@ -144,7 +144,10 @@
 
         <!-- Search Form Component -->
         <!--  -->
-
+        <SearchFieldOfStudyForm
+          :url-parsed-params="urlParsedParams"
+          @search-query="handleFieldOfStudySearch"
+        />
       </div>
     </div>
 
@@ -267,8 +270,6 @@
               <!--  -->
               <!-- FOS INFORMATION -->
               <!--  -->
-
-
               <!-- Field Of Study CIP 4 Information -->
               <div>
                 <v-row style="margin-top: -15px;">
@@ -324,7 +325,6 @@
 
               </div>
 
-
               <!-- No Results/Canned Search/ -->
               <div
                 id="search-can-query-container"
@@ -353,7 +353,7 @@
                   class="search-result-cards-container"
                   v-if="!isLoading && results.schools.length > 0"
                 >
-                  <v-card class="mx-auto pa-0 " style="width:100%" outlined>
+                  <v-card class="mx-auto pa-0 mt-3" style="width:100%" outlined>
                     <v-card-text>
                       <v-row
                         class="mb-2 py-4"
@@ -365,7 +365,7 @@
                           sm="3"
                           v-for="sort in sorts"
                           :key="sort.type"
-                          v-if="!$vuetify.breakpoint.smAndDown"
+                          v-if="!smAndDown"
                         >
                           <a
                             :class="{
@@ -375,7 +375,7 @@
                               'unselected-sort': !sort.current,
                             }"
                             href=""
-                            @click="changeSort(sort.type)"
+                            @click="(e) => changeSort(e, sort.type)"
                             >{{ sort.type }}
                             <i
                               class="fa"
@@ -407,35 +407,31 @@
                           sm="12"
                           class="d-flex align-stretch data-row pl-5"
                         >
-                          <!-- <fos-result-card :fos="school" /> -->
+                          <SearchFieldOfStudyResultCard :fos="school" />
                         </v-col>
                       </v-row>
                     </v-card-text>
                   </v-card>
                 </div>
 
-              <!-- Bottom Pagination -->
-              <v-card
-                class="mt-4 mb-2 py-1 px-4 elevation-0"
-                v-if="!isLoading && results.schools.length > 0"
-              >
-                <v-container fluid>
-                  <v-row>
-                    <v-col cols="12" class="v-pagination-wrapper pa-0">
-                      <v-pagination
-                        v-model="displayPage"
-                        :length="totalPages"
-                        @update:model-value="handlePaginationInput"
-                        :total-visible="paginatorPageCount"
-                      />
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card>
-
-
-            <!-- RESULTS CARD AND PAGINATION -->
-            
+                <!-- Bottom Pagination -->
+                <v-card
+                  class="mt-4 mb-2 py-1 px-4 elevation-0"
+                  v-if="!isLoading && results.schools.length > 0"
+                >
+                  <v-container fluid>
+                    <v-row>
+                      <v-col cols="12" class="v-pagination-wrapper pa-0">
+                        <v-pagination
+                          v-model="displayPage"
+                          :length="totalPages"
+                          @update:model-value="handlePaginationInput"
+                          :total-visible="paginatorPageCount"
+                        />
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card>
 
           </div>
         </div>
@@ -578,22 +574,22 @@ const displayPage = computed({
 
 // METHODS
 
-const searchAPI = async (input) => {
+const searchAPI = async () => {
   try {
-    let params = { ...input }
     isLoading.value = true
     error.value = null
-    params.sort = params.sort || defaultSort.value
 
+    let params = prepareSearchParams()
     let query = prepareParams(params)
-    await router.replace({ query: params })
+    let url = generateQueryString(params)
+
+    router.replace(route.path + url)
 
     const response = await apiGet("/fos", query)
-    
-    isLoading.value = false
-    results.schools = response.data.results
-    results.meta = response.data.metadata
 
+    isLoading.value = false
+    results.schools = response.results
+    results.meta = response.metadata
     shareUrl.value = window.location.href
   } catch (err) {
     isLoading.value = false
@@ -612,8 +608,16 @@ const searchAPI = async (input) => {
   }
 }
 
+const prepareSearchParams = () => {
+  const cleanedInput = Object.fromEntries(Object.entries(input).filter(([_, v]) => v != null))
+  return {
+    ...cleanedInput,
+    page: input.page ? input.page - 1 : 0,
+    sort: input.sort || props.defaultSort
+  }
+}
+
 const showError = (error) => {
-  // TODO: Loop through multiple error messages if needed.
   console.error("error:", error)
 
   if (error.message) {
@@ -667,8 +671,9 @@ const handleDegreeSelected = () => {
   debounceSearchUpdate()
 }
     
-const changeSort = (selected) => {
-  
+const changeSort = (event, selected) => {
+  event.preventDefault()
+
   sorts.value.map((itm) => {
     if (itm.type == selected) {
       itm.current = true
@@ -696,7 +701,7 @@ const toTop = () => {
 const generateQueryString = (params) => {
   const searchParams = new URLSearchParams();
   for (const key in params) {
-    if (params[key] !== null && params[key] !== undefined) {
+    if (params[key] !== null && params[key] !== undefined && params[key] !== false) {
       searchParams.append(key, params[key]);
     }
   }
@@ -713,31 +718,30 @@ const parseURLParams = (url) => {
 }
 
 onMounted(() => {
+  // Copy default form input state.
+  utility.formDefault = useCloneDeep(input)
+  urlParsedParams.value = parseURLParams()
 
+  // Add sort to state if it exists
+  input.sort = urlParsedParams.value.sort
+    ? urlParsedParams.value.sort
+    : defaultSort.value
+
+
+  input.page = urlParsedParams.value.page
+  ? parseInt(urlParsedParams.value.page)
+  : 0
+
+  input.cip4 = urlParsedParams.value.cip4
+  input.cip4_degree = urlParsedParams.value.cip4_degree
+
+  if (!input.cip4 || !input.cip4_degree) {
+    return router.push("/search/fos-landing")
+  }
+
+  debounceSearchUpdate()
+  showSidebar.value = !smAndDown.value
 })
-
-showSidebar.value = !smAndDown
-
-// Copy default form input state.
-utility.formDefault = useCloneDeep(input)
-urlParsedParams.value = parseURLParams()
-
-// Add sort to state if it exists
-input.sort = urlParsedParams.value.sort
-  ? urlParsedParams.value.sort
-  : defaultSort.value
-
-
-input.page = urlParsedParams.value.page
-? parseInt(urlParsedParams.value.page)
-: 0
-
-input.cip4 = urlParsedParams.value.cip4
-input.cip4_degree = urlParsedParams.value.cip4_degree
-
-if (!input.cip4 || !input.cip4_degree) {
-  router.push("/search/fos-landing")
-}
 
 const debounceSearchUpdate = useDebounce(function() {
   searchAPI()
