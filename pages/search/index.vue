@@ -498,20 +498,32 @@ const searchAPI = async () => {
     let params = prepareSearchParams()
     let query = buildQuery(params)
     let url = generateQueryString(params)
-
     router.replace(route.path + url)
 
     const response = await apiGet("/schools", query)
+
     isLoading.value = false
-    handleSuccessfulResponse(response)
+    results.schools = response.results
+    results.meta = response.metadata
+    shareUrl.value = window.location.href
+    displayFlag.value = input.dolflag === "true"
   } catch (err) {
-    handleError(err)
+    console.warn("Error fetching search.", error)
+    results.meta = {}
+    results.schools = []
+    if (error.response?.errors) {
+      showError(error.response.errors[0])
+    } else if (error.response?.status === 500) {
+      showError("API 500 Error")
+    }
   }
 }
 
-const pruneParams = (params) => {
-
+const showError = (errorMessage) => {
+  console.error("error:", errorMessage)
+  error.value = typeof errorMessage === 'string' ? errorMessage : "There was an unexpected API error."
 }
+
 
 const generateQueryString = (params) => {
   const searchParams = new URLSearchParams();
@@ -583,28 +595,6 @@ const buildQuery = (params) => {
   return query
 }
 
-const handleSuccessfulResponse = (response) => {
-  results.schools = response.results
-  results.meta = response.metadata
-  shareUrl.value = window.location.href
-  displayFlag.value = input.dolflag === "true"
-}
-
-const handleError = (error) => {
-  console.warn("Error fetching search.", error)
-  results.meta = {}
-  results.schools = []
-  if (error.response?.errors) {
-    showError(error.response.errors[0])
-  } else if (error.response?.status === 500) {
-    showError("API 500 Error")
-  }
-}
-
-const showError = (errorMessage) => {
-  console.error("error:", errorMessage)
-  error.value = typeof errorMessage === 'string' ? errorMessage : "There was an unexpected API error."
-}
 
 const handleDOLFlag = () => {
   debounceSearch()
@@ -613,7 +603,6 @@ const handleDOLFlag = () => {
 // SEARCH EVENT HANDLERS
 //
 //
-
 const handleFormSearch = (params) => {
   const updateParams ={
     id: params.id,
@@ -714,6 +703,9 @@ const handleFormReset = () => {
   searchSchoolRef.value.resetForm()
 }
 
+// ON LOAD, DEBOUNCER, AND HELPERS
+// 
+//
 const debounceSearch = useDebounce((params) => {
   searchAPI()
 }, 1000)
