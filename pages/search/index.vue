@@ -706,11 +706,7 @@ const handleFormReset = () => {
 // ON LOAD, DEBOUNCER, AND HELPERS
 // 
 //
-onMounted(() => {
-  debounceSearch()
-})
-
-const debounceSearch = useDebounce((params) => {
+const debounceSearch = useDebounce(() => {
   searchAPI()
 }, 300)
 

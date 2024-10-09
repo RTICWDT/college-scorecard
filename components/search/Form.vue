@@ -444,9 +444,6 @@ const { location } = useLocationCheck()
 const emit = defineEmits(["search-update", "search-submit"])
 
 const props = defineProps({
-  urlParsedParams: {
-    type: Object,
-  },
   hideLocation: {
     type: Boolean,
     default: true,
@@ -684,20 +681,16 @@ const handleLocationSelection = (params) => {
   input.page = 1
 }
 
-onMounted(() => mapInputFromQuery())
-
-// On Change
-const debounceEmitSearchQuery = useDebounce(() => {
-  emit("search-update", { ...groomedInput.value, page: 0 })
-}, 500)
-
+onMounted(() => {
+  mapInputFromQuery()
+  emit("search-update", { page: 0 })
+})
 
 watch(groomedInput, (newValue, oldValue) => {
   if (isEqual(newValue, oldValue)) { return }
 
-  debounceEmitSearchQuery()
+  emit("search-update", { ...groomedInput.value, page: 0 })
 }, { deep: true })
-
 
 defineExpose({
   resetForm
