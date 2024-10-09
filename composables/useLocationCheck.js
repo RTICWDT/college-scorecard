@@ -14,13 +14,6 @@ export function useLocationCheck() {
   function handleLocationCheck(redirect = "") {
     location.isLoading = true
     location.error = null
-    const locationOptions = {
-      timeout: 5000,
-      ...(window.msCrypto && {
-        enableHighAccuracy: false,
-        maximumAge: 50000
-      })
-    }
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -46,7 +39,11 @@ export function useLocationCheck() {
             router.push(redirect)
           }
         },
-        locationOptions
+        {
+          timeout: 15000,
+          enableHighAccuracy: true,
+          maximumAge: 0,
+        }
       )
     } else {
       location.isLoading = false

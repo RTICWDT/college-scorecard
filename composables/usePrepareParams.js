@@ -263,9 +263,9 @@ export const usePrepareParams = () => {
     query[fields.OPERATING] = 1;
     //query[fields.OPEID + '__not'] = 'null';
     
-    // ignore distance if no zip is provided
-    if (query.distance && !query.zip) {
-      console.warn('distance provided without zip; ignoring', query);
+    // ignore distance if no zip or no lat/long is provided
+    if (query.distance && !query.zip && !query.lat && !query.long) {
+      console.warn('distance provided without zip or lat/long; ignoring', query);
       delete query.distance;
     }
     

@@ -19,7 +19,7 @@
 
     <div class="d-flex align-center" v-if="utility.location === 'Near Me'">
       <v-btn
-        @click="handleLocationCheck"
+        @click="!location.latLon ? handleLocationCheck : () => {}"
         :class="[props.horizontal ? 'mr-2 ml-3' : 'my-3 mr-2']"
         color="tertiary"
       >
@@ -27,7 +27,7 @@
       </v-btn>
 
       <v-text-field
-        v-model="location.miles"
+        v-model="input.distance"
         :rules="[utility.rules.required, utility.rules.numerical]"
         label="Distance in Miles"
         :disabled="!location.latLon"
@@ -179,10 +179,6 @@ watch(() => location.latLon, (newValue) => {
   emit("search-update", input)
 })
 
-watch(() => location.miles, () => {
-  emit("search-update", input)
-})
-
 watch(() => utility.location, (newValue, oldValue) => {
   if (newValue === "Near Me" && oldValue !== "Near Me") {
     handleLocationCheck()
@@ -225,6 +221,12 @@ function handleSearch() {
     }
 
     if (utility.rules.zip(input.zip) === "Must be ZIP code format") {
+      return
+    }
+  }
+
+  if (input.lat && input.long) {
+    if (!input.distance) {
       return
     }
   }
