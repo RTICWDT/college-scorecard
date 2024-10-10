@@ -31,6 +31,7 @@
         :rules="[utility.rules.required, utility.rules.numerical]"
         label="Distance in Miles"
         :disabled="!location.latLon"
+        :readonly="!input.lat && !input.long"
         hide-details
         type="number"
         variant="outlined"
@@ -197,7 +198,7 @@ function handleLocationChange(e) {
     utility.location = null
   }
   
-  emit("search-update", input)
+  // emit("search-update", input)
 }
 
 function resetForm() {
