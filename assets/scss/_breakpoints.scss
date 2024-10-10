@@ -34,8 +34,20 @@ $grid-breakpoints: (
   }
 }
 
+@mixin mdAndUp {
+  @media (min-width: map-get($grid-breakpoints, 'md')) {
+    @content;
+  }
+}
+
 @mixin lg {
   @media (min-width: map-get($grid-breakpoints, 'lg')) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: map-get($grid-breakpoints, 'xl')) {
     @content;
   }
 }
