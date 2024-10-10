@@ -23,13 +23,14 @@ h1 {
 
 <template>
   <div class="home-splash">
-    <v-container class="mb-n10 pt-5" style="padding-top:130px !important">
+    <v-container class="mb-n10 pt-5 pt-sm-10">
       <v-row>
         <v-col cols="12" class="px-6 px-sm-3">
-          <h1 class="text-white">
+          <h1 style="color: white">
             Search Fields of Study
           </h1>
-          <p class="text-white pb-3">
+
+          <p style="color: white">
             Search and compare the fields of study offered at each college
             by degree type.
           </p>
