@@ -4,7 +4,7 @@
       <v-tooltip location="bottom" v-if="!sizeOnly && yearIcon !== 'none'">
         <template v-slot:activator="{ props }">
           <li :class="yearsClass(years)" v-bind="props">
-            <img :src="yearIcon" alt="" class="schoolIcon" height="30" />
+            <img :src="yearIcon" alt="" class="schoolIcon" :height="imgSize" />
             <span>{{ formatYearsLabel(years) }}</span>
           </li>
         </template>
@@ -12,19 +12,19 @@
       </v-tooltip>
 
       <li v-if="!sizeOnly && ownershipIcon !== 'none'" :class="controlClass(ownership)">
-        <img :src="ownershipIcon" alt="" class="schoolIcon" height="30" />
+        <img :src="ownershipIcon" alt="" class="schoolIcon" :height="imgSize" />
         <span>{{ control(ownership) }}</span>
       </li>
 
       <li v-if="!sizeOnly && localeIcon !== 'none'" :class="localeClass(schoolLocale)">
-        <img :src="localeIcon" alt="" class="schoolIcon" height="30" />
+        <img :src="localeIcon" alt="" class="schoolIcon" :height="imgSize" />
         <span>{{ locale(schoolLocale) }}</span>
       </li>
 
       <v-tooltip location="bottom" v-if="sizeIcon !== 'none'">
         <template v-slot:activator="{ props }">
           <li :class="sizeCategoryClass(schoolSize)" v-bind="props">
-            <img :src="sizeIcon" alt="" class="schoolIcon" height="30" />
+            <img :src="sizeIcon" alt="" class="schoolIcon" :height="imgSize" />
             <span>{{ sizeCategory(schoolSize) }}</span>
           </li>
         </template>
@@ -63,6 +63,18 @@ const props = defineProps({
   sizeOnly: {
     default: false,
     type: Boolean
+  },
+  imgSize: {
+    default: 30,
+    type: Number
+  },
+  fontSize: {
+    default: 0.7,
+    type: Number
+  },
+  fontWeight: {
+    default: 600,
+    type: Number
   },
   fos: Boolean
 })
@@ -117,7 +129,7 @@ const sizeIcon = computed(() => {
 <style lang="scss" scoped>
 
 .schoolIcon {
-  font-size: 1.1rem;
+  font-size: v-bind(fontSize) + 'rem';
 }
 
 .school-key-figures {
@@ -143,12 +155,12 @@ const sizeIcon = computed(() => {
 
   li {
     list-style-type: none;
-    font-weight: 600;
+    font-weight: v-bind(fontWeight);
     line-height: 1.1;
     min-height: $height;
     vertical-align: top;
     width: 55px;
-    font-size: 0.7rem;
+    font-size: v-bind(fontSize) + 'rem';
     color: variables.$black;
     text-align: center;
 

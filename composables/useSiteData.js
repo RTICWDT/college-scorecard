@@ -25,7 +25,7 @@ export function useSiteData() {
   })
 
   const RELIGIOUS_AFFILIATIONS_BY_NUMBER = computed(() => {
-    site.value.data.religious_affiliations.reduce((object, value) => {
+    return site.value.data.religious_affiliations.reduce((object, value) => {
       object[value.value] = value.title
       return object
     }, {})

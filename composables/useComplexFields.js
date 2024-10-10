@@ -3,7 +3,7 @@ import _ from "lodash";
 
 export function useComplexFields(schoolProp) {
   const { $url } = useNuxtApp();
-  const { site } = useSiteData();
+  const { site, RELIGIOUS_AFFILIATIONS_BY_NUMBER } = useSiteData();
   const { fields, formMappings } = useConstants();
   const school = ref(schoolProp);
 
@@ -135,8 +135,8 @@ export function useComplexFields(schoolProp) {
     }
   
     const religious = useGet(school.value, fields.RELIGIOUS)
-    if (religious in RELIGIOUS_AFFILIATIONS_BY_NUMBER) {
-      designations.push(RELIGIOUS_AFFILIATIONS_BY_NUMBER[religious])
+    if (religious in RELIGIOUS_AFFILIATIONS_BY_NUMBER.value) {
+      designations.push(RELIGIOUS_AFFILIATIONS_BY_NUMBER.value[religious])
     }
   
     const minorityServing = useGet(school.value, fields.MINORITY_SERVING)
@@ -147,6 +147,7 @@ export function useComplexFields(schoolProp) {
         }
       }
     }
+
     return designations
   })
   

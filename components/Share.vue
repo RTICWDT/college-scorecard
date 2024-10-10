@@ -7,7 +7,7 @@
           size="small"
           :elevation="1"
         >
-          <v-icon size="x-small" class="mr-2 share">mdi-share-variant</v-icon>
+          <v-icon size="default" class="mr-1 share">mdi-share</v-icon>
           {{ label }}
         </v-btn>
       </template>

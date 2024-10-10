@@ -1,6 +1,6 @@
 <template>
   <v-combobox
-    v-model="selectedFoS"
+    v-model="selectedValue"
     @update:model-value="handleFieldOfStudySelect"
     :items="items"
     item-title="cip4Title"
@@ -21,15 +21,17 @@
     min-width="220"
   >
     <template v-slot:item="{ item, props }">
-        <v-list-item v-bind="props" :max-width="smAndDown ? 300 : 400">
-          <v-list-item-subtitle v-html="item.raw.title"></v-list-item-subtitle>
-        </v-list-item>
-      </template>
+      <v-list-item v-bind="props" :max-width="smAndDown ? 300 : 400">
+        <v-list-item-subtitle v-html="item.raw.title"></v-list-item-subtitle>
+      </v-list-item>
+    </template>
   </v-combobox>
 </template>
 
 <script setup>
-import { useDisplay } from "vuetify";
+import { ref, computed, watch } from 'vue'
+import { useDisplay } from "vuetify"
+
 const { smAndDown } = useDisplay()
 const { site, CIP4 } = useSiteData()
 const emit = defineEmits(['field-of-study-selected'])
@@ -50,10 +52,16 @@ const props = defineProps({
   },
 })
 
-const selectedFoS = computed(() => {
-  if (!props.selected) return null
-  return CIP4.value.find(itm => props.selected === itm.cip4.replace('.', ''))?.field ?? null
-})
+const selectedValue = ref(null)
+
+watch(() => props.selected, (newValue) => {
+  if (!newValue) {
+    selectedValue.value = null
+  } else {
+    const found = CIP4.value.find(itm => newValue === itm.cip4.replace('.', ''))
+    selectedValue.value = found ? { code: found.cip4.replace('.', ''), cip4Title: found.field } : null
+  }
+}, { immediate: true })
 
 const handleFieldOfStudySelect = (selectedItem) => {
   if (!selectedItem || typeof selectedItem.code !== 'string' || selectedItem.code.length !== 6) {
@@ -70,7 +78,3 @@ const handleFieldOfStudySelect = (selectedItem) => {
   })
 }
 </script>
-
-<style lang="scss">
-
-</style>
