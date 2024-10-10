@@ -287,15 +287,14 @@ const handleSubmit = () => {
 
 mapInputFromQuery()
 
+onMounted(() => {
+  emit("search-update", { ...groomedInput.value, page: 1 })
+})
+
 watch(groomedInput, (newValue, oldValue) => {
   if (isEqual(newValue, oldValue)) { return }
   emit("search-update", { ...groomedInput.value, page: 1 })
 }, { deep: true })
-
-// Lifecycle hooks
-onMounted(() => {
-  emit("search-update", { ...groomedInput.value, page: 1 })
-})
 
 defineExpose({
   resetForm

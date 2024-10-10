@@ -69,9 +69,6 @@
     opacity: 0.3;
   }
 }
-
-
-
 </style>
 
 <template>
@@ -200,7 +197,7 @@
               <v-chip
                 class="ml-0 ml-sm-2 mt-2 mt-sm-0 font-weight-regular text-uppercase position-relative"
                 style="bottom: 3px;"
-                color="#000000"
+                color="black"
               >
                 {{ selectedFoSDegree }}
               </v-chip>
@@ -471,8 +468,8 @@ const { formMappings } = useConstants();
 const { apiGet } = useApi()
 const router = useRouter()
 const route = useRoute()
-const isLoading = ref(false)
-const showSidebar = ref(false)
+const isLoading = ref(true)
+const showSidebar = ref(!smAndDown.value)
 const error = ref(null)
 const displayPage = ref(1)
 const showScroll = ref(false)
@@ -527,14 +524,10 @@ const sorts = ref([
 
 // COMPUTED
 const paginatorPageCount = computed(() => {
-  if (smAndDown.value) { 
-    return 2
-  }
+  if (smAndDown.value) { return 2 }
 
   if (md.value) {
-    if (showSidebar.value) {
-      return 1
-    }
+    if (showSidebar.value) { return 1 }
     return 4
   }
 
@@ -574,9 +567,7 @@ const totalPages = computed(() => {
 const fosDegrees = computed(() => formMappings.fosDegrees)
 
 
-
 // METHODS
-
 const searchAPI = async () => {
   try {
     isLoading.value = true
@@ -640,16 +631,6 @@ const resort = (sort) => {
   input.page = 1
   input.sort = sort
   searchAPI()
-}
-
-const clearSearchForm = () => {
-  input = {
-    page: 1,
-    cip4: route.query.cip4,
-    cip4_degree: route.query.cip4_degree
-  }
-
-  emit("search-form-reset")
 }
     
 const changeSort = (event, selected) => {
@@ -738,13 +719,9 @@ const handleFormReset = () => {
   input.page = 1
 }
 
-onMounted(() => {
-  showSidebar.value = !smAndDown.value
-})
-
 const debounceSearch = useDebounce(function() {
   searchAPI()
-}, 1000)
+}, 300)
 
 useHead({
   title: "Search Fields of Study",
