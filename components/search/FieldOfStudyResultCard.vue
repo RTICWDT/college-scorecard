@@ -1,36 +1,30 @@
 <template>
   <v-row class="py-2 results-card" :class="isLoading && 'loading'">
-    <!-- School Info -->
-    <v-col cols="12" md="3">
-
-      <!-- MOBILE CHECKMARK -->
-      <div
-        class="d-block d-md-none text-right"
-        :key="`${institution.id}-${fos.title}`"
-      >
-        <!-- Compare on medium and above -->
-        <v-tooltip :disabled="isLoading" location="bottom">
-          <template v-slot:activator="{ props }">
-            <v-btn
-              v-bind="props"
-              @click="!isLoading ? store.toggleFieldOfStudy(fos) : () => {}"
-              :class="isSelected ? '' : totalFieldOfStudyCount > 9 ? 'noCompareAllow' : ''"
-              icon
-            >
-              <v-icon :color="isSelected ? '#0075B2' : 'grey'" icon="fa:fa fa-check-circle"></v-icon>
-              <span class="sr-only">Compare</span>
-            </v-btn>
-          </template>
-          <div class="hover-tip">{{ compareFOSHoverCountText }}</div>
-        </v-tooltip>
+    <!-- COLUMN 1 -->
+    <v-col cols="12" md="4">
+      <div class='d-flex align-center'>
+        <h2 class='flex-grow-1'>
+          <NuxtLink class="nameLink mb-2" :to="dynamicLink">{{ schoolName }}</NuxtLink>
+        </h2>
+        <div :key="`${institution.id}-${fos.title}`">
+          <v-tooltip :disabled="isLoading" location="right">
+            <template v-slot:activator="{ props }">
+              <v-btn
+                v-bind="props"
+                @click="!isLoading ? store.toggleFieldOfStudy(fos) : () => {}"
+                :class="isSelected ? '' : totalFieldOfStudyCount > 9 ? 'noCompareAllow' : ''"
+                icon
+              >
+                <v-icon :color="isSelected ? '#0075B2' : 'grey'" icon="fa:fa fa-check-circle"></v-icon>
+                <span class="sr-only">Compare</span>
+              </v-btn>
+            </template>
+            <div class="hover-tip">{{ isSelected ? 'Remove Field of Study to Compare' : compareFOSHoverCountText }}</div>
+          </v-tooltip>
+        </div>
       </div>
 
-      <h2>
-        <NuxtLink class="nameLink mb-2" :to="dynamicLink">{{ schoolName }}</NuxtLink>
-      </h2>
-
       <p>{{ city }}, {{ state }} {{ zip }}</p>
-
       <SmallSchoolIcons :school="school" :fields="fields" size="small" fos />
 
       <p v-if="underInvestigation === 1">
@@ -39,19 +33,19 @@
           <tooltip definition="hcm2" color="#FFFFFF" class="ml-2" />
         </v-card>
       </p>
-
     </v-col>
 
-
+    <!-- COLUMN 2 -->
     <v-col cols="12" sm="6" md="3">
       <div class="cell">
-        <div class="text-uppercase">
-          Median Earnings
+        <div class="text-uppercase d-flex align-center">
+          <span class='mb-2'>Median Earnings</span>
           <tooltip :definition="'fos-median-earnings'" :is-branch="isBranch" />
         </div>
-        <div v-if="fos[fields.FOS_EARNINGS_FED_5YR]">
-          <span class="display-2 text-navy font-weight-bold">
-            {{ numeral(fos[fields.FOS_EARNINGS_FED_5YR], "$0,0") }}
+
+        <div v-if="medianEarnings">
+          <span class="display-2 text-navy font-weight-bold" :class="showSidebar && 'callout-text'">
+            {{ numeral(medianEarnings).format("$0,0") }}
           </span>
           <div style="max-width: 160px; height: 30px">
             <!-- <horizontal-bar
@@ -71,15 +65,17 @@
         <div v-else class="mini-data-na text-center">Data Not Available</div>
       </div>
 
-
       <div class="cell">
-        <div class="text-uppercase">
-          Monthly Earnings
+        <div class="text-uppercase d-flex align-center">
+          <span class='mb-2'>Monthly Earnings</span>
           <tooltip :definition="'fos-monthly-earnings'" :is-branch="isBranch" />
         </div>
-        <div v-if="fos[fields.FOS_EARNINGS_FED_5YR]">
-          <span class="display-2 text-navy font-weight-bold">
-            {{ numeral(fos[fields.FOS_EARNINGS_FED_5YR] / 12, "$0,0") }}
+
+
+
+        <div v-if="medianEarnings">
+          <span class="display-2 text-navy font-weight-bold" :class="showSidebar && 'callout-text'">
+            {{ numeral(medianEarnings / 12).format("$0,0") }}
           </span>
         </div>
         <div v-else class="mini-data-na text-center">Data Not Available</div>
@@ -87,20 +83,22 @@
 
     </v-col>
 
-
+    <!-- COLUMN 3 -->
     <v-col cols="12" sm="6" md="3">
       <div class="cell">
-        <div class="text-uppercase">
-          Median Debt
+        <div class="text-uppercase d-flex align-center">
+          <span class='mb-2'>Median Debt</span>
           <tooltip
             :definition="'fos-median-debt'"
             :is-branch="isBranch"
             class="ml-1"
           />
         </div>
-        <div v-if="fos[fields.FOS_DEBT_MEDIAN]">
-          <span class="display-2 text-navy font-weight-bold">
-            {{ numeral(fos[fields.FOS_DEBT_MEDIAN], "$0,0") }}
+
+        <div v-if="medianDebt">
+          <span class="display-2 text-navy font-weight-bold" :class="showSidebar && 'callout-text'">
+            {{ numeral(medianDebt).format("$0,0") }}
+
           </span>
           <div style="max-width: 160px; height: 30px">
             <!-- <horizontal-bar
@@ -119,64 +117,45 @@
         </div>
         <div v-else class="mini-data-na text-center">Data Not Available</div>
       </div>
+
       <div class="cell">
-        <div class="text-uppercase">
-          Monthly Loan Payment
+        <div class="text-uppercase d-flex align-center">
+          <span class='mb-2'>Monthly Loan Payment</span>
           <tooltip
             :definition="'fos-monthly-debt-payment'"
             :is-branch="isBranch"
             class="ml-1"
           />
         </div>
-        <div v-if="fos[fields.FOS_DEBT_MONTHLY]">
-          <span class="display-2 text-navy font-weight-bold">
-            {{ numeral(fos[fields.FOS_DEBT_MONTHLY], "$0,0") }}
+        <div v-if="medianDebtMonthly">
+          <span class="display-2 text-navy font-weight-bold" :class="showSidebar && 'callout-text'">
+            {{ numeral(medianDebtMonthly).format("$0,0") }}
           </span>
         </div>
         <div v-else class="mini-data-na text-center">Data Not Available</div>
       </div>
+
     </v-col>
 
 
     <v-col cols="12" sm="6" md="2">
       <div class="cell">
-        <div class="text-uppercase font-weight-bold">Graduates</div>
-        <div v-if="fos[fields.FOS_GRAD_COUNT]">
-          <span class="display-2 text-navy font-weight-bold">
-            {{ numeral(fos[fields.FOS_GRAD_COUNT], "0,0") }}
+        <div class="text-uppercase d-flex align-center">
+          <span class='mb-2'>Graduates</span>
+          <!-- Mock icon to match other cells -->
+          <div class="d-inline-block" style="width: 32px; height: 32px;" /> 
+        </div>
+        <div v-if="gradCount">
+          <span class="display-2 text-navy font-weight-bold" :class="showSidebar && 'callout-text'">
+            {{ numeral(gradCount).format("0,0") }}
           </span>
         </div>
         <div v-else class="mini-data-na text-center">Data Not Available</div>
       </div>
     </v-col>
-
-
-    <v-col cols="12" sm="6" md="1">
-      <div
-        class="d-none d-md-block text-right"
-        :key="`${institution.id}-${fos.title}`"
-      >
-        <!-- Compare on medium and above -->
-        <v-tooltip :disabled="isLoading" location="bottom">
-          <template v-slot:activator="{ props }">
-            <v-btn
-              icon
-              @click="!isLoading ? store.toggleFieldOfStudy(fos) : () => {}"
-              :class="[isSelected ? '': totalFieldOfStudyCount > 9? 'noCompareAllow': '']"
-              v-bind="props"
-              aria-label="Add to compare"
-            >
-              <v-icon :color="isSelected ? '#0075B2' : 'grey'" icon="fa:fa fa-check-circle"></v-icon>
-              <span class="sr-only">Compare</span>
-            </v-btn>
-          </template>
-          <div class="hover-tip">{{ compareFOSHoverCountText }}</div>
-        </v-tooltip>
-      </div>
-    </v-col>
-
-
   </v-row>
+
+
 </template>
 
 <script setup>
@@ -190,6 +169,10 @@ const props = defineProps({
     required: true,
   },
   isLoading: {
+    type: Boolean,
+    default: false,
+  },
+  showSidebar: {
     type: Boolean,
     default: false,
   },
@@ -223,11 +206,37 @@ const dynamicLink = computed(() => {
     props.fos.credential.level <= 3 ? schoolLink.value : fieldsLink.value;
   return `${baseLink}&fos_code=${props.fos.code}&fos_credential=${props.fos.credential.level}`;
 });
+
+const getNested = (obj, path) => {
+  return path.split('.').reduce((current, key) => {
+    return current && current[key] !== undefined ? current[key] : undefined;
+  }, obj);
+};
+
+const medianEarnings = computed(() => getNested(props.fos, fields.FOS_EARNINGS_FED_5YR))
+const medianDebt = computed(() => getNested(props.fos, fields.FOS_DEBT_MEDIAN))
+const medianDebtMonthly = computed(() => getNested(props.fos, fields.FOS_DEBT_MONTHLY))
+const gradCount = computed(() => getNested(props.fos, fields.FOS_GRAD_COUNT))
+
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.callout-text {
+  @include md {
+    font-size: 1rem !important;
+  }
+}
+
 .loading {
   opacity: 0.4;
+}
+
+.nameLink {
+  text-decoration: none;
+  line-height: 125%;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .results-card {

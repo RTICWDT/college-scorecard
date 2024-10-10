@@ -376,7 +376,7 @@
                   class="search-result-cards-container"
                   v-if="results.fieldsOfStudy.length > 0"
                 >
-                  <v-card class="mx-auto pa-0 mt-3" style="width:100%" outlined>
+                  <v-card class="mt-3">
                     <v-card-text>
                       <v-row
                         class="mb-2 py-4"
@@ -386,9 +386,9 @@
                           class="fosResultsSortBar py-md-0 pl-5"
                           :class="isLoading && 'loading'"
                           cols="12"
-                          sm="3"
                           v-for="sort in sorts"
                           :key="sort.type"
+                          :sm="sort.type === 'School Name' ? 4 : sort.type === 'Graduates' ? 2 : 3"
                           v-if="!smAndDown"
                           
                         >
@@ -422,12 +422,9 @@
                           v-for="fieldOfStudy in results.fieldsOfStudy"
                           :key="fieldOfStudy.unit_id"
                           cols="12"
-                          lg="12"
-                          md="12"
-                          sm="12"
-                          class="d-flex align-stretch data-row pl-5"
+                          class="pl-5 position-relative"
                         >
-                          <SearchFieldOfStudyResultCard :fos="fieldOfStudy" :isLoading="isLoading" />
+                          <SearchFieldOfStudyResultCard :fos="fieldOfStudy" :isLoading="isLoading" :showSidebar="showSidebar" />
                         </v-col>
                       </v-row>
                     </v-card-text>

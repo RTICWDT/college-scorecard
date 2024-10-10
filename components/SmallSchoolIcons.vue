@@ -1,42 +1,30 @@
 <template>
-  <div>
-    <ul class="school-key_figures key-figures mx-0 my-3 pa-0 d-flex justify-space-around">
+  <div class="school-key-figures-container">
+    <ul class="school-key-figures">
       <v-tooltip location="bottom" v-if="!sizeOnly && yearIcon !== 'none'">
         <template v-slot:activator="{ props }">
-          <li
-            :class="yearsClass(years)"
-            v-bind="props"
-            :style="{ 'background-image': `url(${yearIcon})` }"
-          >
+          <li :class="yearsClass(years)" v-bind="props">
+            <img :src="yearIcon" alt="" class="schoolIcon" height="30" />
             <span>{{ formatYearsLabel(years) }}</span>
           </li>
         </template>
         <div class="hover-tip">{{ tip }}</div>
       </v-tooltip>
 
-      <li
-        v-if="!sizeOnly && ownershipIcon !== 'none'"
-        :class="controlClass(ownership)"
-        :style="{ 'background-image': `url(${ownershipIcon})` }"
-      >
+      <li v-if="!sizeOnly && ownershipIcon !== 'none'" :class="controlClass(ownership)">
+        <img :src="ownershipIcon" alt="" class="schoolIcon" height="30" />
         <span>{{ control(ownership) }}</span>
       </li>
 
-      <li
-        v-if="!sizeOnly && localeIcon !== 'none'"
-        :class="localeClass(schoolLocale)"
-        :style="{ 'background-image': `url(${localeIcon})` }"
-      >
+      <li v-if="!sizeOnly && localeIcon !== 'none'" :class="localeClass(schoolLocale)">
+        <img :src="localeIcon" alt="" class="schoolIcon" height="30" />
         <span>{{ locale(schoolLocale) }}</span>
       </li>
 
       <v-tooltip location="bottom" v-if="sizeIcon !== 'none'">
         <template v-slot:activator="{ props }">
-          <li
-            :class="sizeCategoryClass(schoolSize)"
-            v-bind="props"
-            :style="{ 'background-image': `url(${sizeIcon})` }"
-          >
+          <li :class="sizeCategoryClass(schoolSize)" v-bind="props">
+            <img :src="sizeIcon" alt="" class="schoolIcon" height="30" />
             <span>{{ sizeCategory(schoolSize) }}</span>
           </li>
         </template>
@@ -45,6 +33,7 @@
     </ul>
   </div>
 </template>
+
 
 <script setup>
 import {
@@ -127,14 +116,22 @@ const sizeIcon = computed(() => {
 
 <style lang="scss" scoped>
 
-.school-key_figures-year {
+.schoolIcon {
   font-size: 1.1rem;
 }
 
-.school-key_figures {
+.school-key-figures {
   $height: 20px;
-  margin-top: variables.$base-padding;
   $list: rural, town, suburban, city, small, medium, large, public, private, profit, two, four, certificate;
+  position: relative;
+  right: 10px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
+  gap: 10px;
+  padding: 0;
+  margin: 20px 0 0 0;
+  list-style-type: none;
 
   @each $icon in $list {
     .icon-#{$icon} {
@@ -149,29 +146,26 @@ const sizeIcon = computed(() => {
     font-weight: 600;
     line-height: 1.1;
     min-height: $height;
-    padding-top: ($height + 10px);
-    text-align: center;
     vertical-align: top;
     width: 55px;
     font-size: 0.7rem;
-    margin-right: 5px;
     color: variables.$black;
+    text-align: center;
 
-    .school-key_figures-year {
+    img {
+      margin: 0 auto;
+    }
+
+    .schoolIcon {
       display: block;
       font-weight: variables.$weight-bold;
-      margin-top: -25px;
       padding-bottom: 6px;
-
-      &:empty {
-        margin-top: -15px;
-      }
     }
 
     &.certificate {
       margin-right: 20px;
 
-      .school-key_figures-year {
+      .schoolIcon {
         margin-top: -50px;
 
         &:before {
