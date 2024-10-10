@@ -1,5 +1,5 @@
 <template>
-  <div style="max-height: 15px;">
+  <div :style="{ height: `${props.height}px`, width: '100%' }">
     <Bar
       v-if="chartData"
       id="horizontal-bar"
@@ -24,6 +24,7 @@ const props = defineProps({
   type: { type: String, default: "percent" },
   yBarThickness: { type: Number, default: 35 },
   labelFontSize: { type: Number, default: 18 },
+  height: { type: Number, default: 15 },
 })
 
 const chartData = ref(null)

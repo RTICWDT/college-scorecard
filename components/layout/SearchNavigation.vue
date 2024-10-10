@@ -3,7 +3,7 @@
     <div class="data-navigation">
       <v-container fluid class="py-0">
         <v-tabs
-          v-model="tab"  
+          v-model="activeTab"  
           background-color="white"
           hide-slider
           show-arrows
@@ -43,7 +43,27 @@ const tab = computed(() => {
   return route.path
 })
 
-watch(() => route.path, (newPath) => { tab.value = newPath })
+const getTabFromRoute = (path) => {
+  if (path.match('/search/fos')) {
+    return '/search/fos-landing'
+  }
+  return path
+}
+
+const activeTab = ref(getTabFromRoute(route.path))
+
+// Watch for route changes and update activeTab accordingly
+watch(() => route.path, (newPath) => {
+  activeTab.value = getTabFromRoute(newPath)
+})
+
+// Watch for activeTab changes and navigate if necessary
+watch(activeTab, (newTab) => {
+  if (newTab !== getTabFromRoute(route.path)) {
+    navigateTo(newTab)
+  }
+})
+
 </script>
 
 <style scoped lang="scss">
