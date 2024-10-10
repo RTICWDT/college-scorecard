@@ -240,7 +240,7 @@
                               ).format("0%")
                             }}</em
                           >
-                          <!-- <vertical-bar-median
+                          <ChartVerticalBarMedian
                             v-if="completionRate"
                             :value="{
                               label: '',
@@ -277,7 +277,7 @@
                             :label-font-size="16"
                             :labels="true"
                             class="mb-4"
-                          ></vertical-bar-median> -->
+                          />
                           <div v-else class="data-na">Data Not Available</div>
                         </div>
                       </v-card>
@@ -338,7 +338,7 @@
                             }}</em
                           >
 
-                          <!-- <horizontal-bar-median
+                          <ChartHorizontalBarMedian
                             v-if="netPrice"
                             :value="{
                               label: numeral(
@@ -383,7 +383,7 @@
                             :labels="true"
                             class="pt-3"
                             style="height:100px"
-                          /> -->
+                          />
                           <div class="data-na" v-else>Data Not Available</div>
                         </div>
                       </v-card>
@@ -436,7 +436,7 @@
                             }}
                           </em>
 
-                          <!-- <horizontal-bar-median
+                          <ChartHorizontalBarMedian
                             v-if="medianEarnings"
                             :value="{
                               label: numeral(
@@ -478,7 +478,7 @@
                             :labels="true"
                             class="pt-3"
                             style="height:100px"
-                          /> -->
+                          />
                           <div class="data-na" v-else>Data Not Available</div>
                         </div>
                       </v-card>
