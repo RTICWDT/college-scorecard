@@ -475,6 +475,8 @@
 </template>
 
 <script setup>
+
+
 import { useDisplay } from 'vuetify';
 const { smAndDown, lgAndUp, md } = useDisplay()
 const { prepareParams } = usePrepareParams()
@@ -491,9 +493,13 @@ const showScroll = ref(false)
 const defaultSort =  ref("name:asc")
 const shareUrl = ref(null)
 const emit = defineEmits(["search-form-reset", "loading"])
-
 const searchFormRef = ref(null)
 
+// this runs pre-render and allows us to redirect
+// to fos-landing if we don't have the necessary parameters
+definePageMeta({
+  middleware: 'fos'
+})
 
 const results = reactive({
   fieldsOfStudy: [],
