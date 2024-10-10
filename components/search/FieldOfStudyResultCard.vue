@@ -48,17 +48,17 @@
             {{ numeral(medianEarnings).format("$0,0") }}
           </span>
           <div style="max-width: 160px; height: 30px">
-            <!-- <horizontal-bar
-              :value="fos[fields.FOS_EARNINGS_FED_5YR]"
-              :min="0"
-              :max="100000"
+            <ChartHorizontalBar
+              :value="medianEarnings"
               color="#1874DC"
               bgcolor="#DFE6F0"
               :height="25"
               type="currency"
               :labels="false"
               :y-bar-thickness="10"
-            /> -->
+              :max="100_000"
+              :min="0"
+            />
             <span>0k</span><span class="float-right">100k</span>
           </div>
         </div>
@@ -101,17 +101,17 @@
 
           </span>
           <div style="max-width: 160px; height: 30px">
-            <!-- <horizontal-bar
-              :value="fos[fields.FOS_DEBT_MEDIAN]"
-              :min="0"
-              :max="100000"
+            <ChartHorizontalBar
+              :value="medianDebt"
               color="#1874DC"
               bgcolor="#DFE6F0"
               :height="25"
               type="currency"
               :labels="false"
               :y-bar-thickness="10"
-            /> -->
+              :max="100_000"
+              :min="0"
+            />
             <span>0k</span><span class="float-right">100k</span>
           </div>
         </div>
@@ -219,7 +219,6 @@ const medianEarnings = computed(() => getNested(props.fos, fields.FOS_EARNINGS_F
 const medianDebt = computed(() => getNested(props.fos, fields.FOS_DEBT_MEDIAN))
 const medianDebtMonthly = computed(() => getNested(props.fos, fields.FOS_DEBT_MONTHLY))
 const gradCount = computed(() => getNested(props.fos, fields.FOS_GRAD_COUNT))
-
 </script>
 
 <style lang="scss" scoped>

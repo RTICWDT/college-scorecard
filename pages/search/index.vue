@@ -266,6 +266,7 @@
                             :key="item.field"
                             :value="item.field"
                             @click="handleSort(item.field)"
+                            :active="item.field === input.sort"
                           >
                             <v-list-item-title>{{ item.type }}</v-list-item-title>
                           </v-list-item>
@@ -350,34 +351,29 @@
                 </v-row>
               </div>
 
-              <!-- Main Search Results -->
-              <div class="results-main-alert">
-
-                <!-- Search Query Error-->
-                <div class="show-error" v-show="error">
-                  <h1>Something went wrong:</h1>
-                  <p class="error-message">{{ error }}</p>
-                </div>
-
-                <!-- Institution Results -->
-                <div class="search-result-cards-container">
-                  <v-row>
-                    <v-col
-                      v-for="school in results.schools"
-                      :key="school.id"
-                      cols="12"
-                      :xl="showSidebar ? 3 : 2"
-                      :lg="showSidebar ? 4 : 3"
-                      :md="showSidebar ? 6 : 4"
-                      sm="6"
-                      xs="12"
-                      class="d-flex align-stretch"
-                    >
-                      <SearchResultCard :school="school" :isLoading="isLoading" />
-                    </v-col>
-                  </v-row>
-                </div>
+              <!-- Search Query Error-->
+              <div class="show-error" v-if="error">
+                <h1>Something went wrong:</h1>
+                <p class="error-message">{{ error }}</p>
               </div>
+
+              <!-- Institution Results -->
+              <v-row class="mt-0">
+                <v-col
+                  v-for="school in results.schools"
+                  :key="school.id"
+                  cols="12"
+                  :xl="showSidebar ? 3 : 2"
+                  :lg="showSidebar ? 4 : 3"
+                  :md="showSidebar ? 6 : 4"
+                  sm="6"
+                  xs="12"
+                  class="d-flex align-stretch"
+                >
+                  <SearchResultCard :school="school" :isLoading="isLoading" />
+                </v-col>
+              </v-row>
+
 
               <!-- Bottom Pagination -->
               <v-card
