@@ -230,98 +230,93 @@
             </div>
           </div>
 
+          <v-card class="mt-2 mb-2 px-4 elevation-0 d-flex align-center py-3 py-md-0 resultsNavCard">
+            <div v-if="isLoading">
+              <h3 class="title" style="font-size: 1.5rem;">
+                Loading
+                <v-icon size="z-small" color="#00365e" icon="fa:fas fa-circle-notch fa-spin" class="ml-2"/>
+              </h3>
+            </div>
 
-
-
-            <v-card class="mt-2 mb-2 px-4 elevation-0 d-flex align-center py-3 py-md-0 resultsNavCard"">
-              <div v-if="isLoading">
-                <h3 class="title" style="font-size: 1.5rem;">
-                  Loading
-                  <v-icon size="z-small" color="#00365e" icon="fa:fas fa-circle-notch fa-spin" class="ml-2"/>
-                </h3>
-              </div>
-
-              <div v-else class="w-100 h-100">
-
-                <div class="d-flex flex-column align-start justify-space-between">
-                  <div id="search-result-info-count">
-                    <p class="title mb-0" style="font-size: 1.5rem;">
-                      {{ results.meta.total }} Results
-                    </p>
-                  </div>
-
-                  <Spacer :height="10" />
-
-                  <div class="d-flex flex-column flex-md-row align-start align-md-center w-100">
-                    <div class="d-flex flex-grow-1">
-                      <!-- RESET FILTERS -->
-                      <v-btn
-                        id="search-button-clear"
-                        @click="handleFormReset"
-                        size="small"
-                        elevation="4"
-                        class="mr-1 mb-2"
-                      >
-                        <span>
-                          <v-icon small class="mr-1">mdi-close-circle</v-icon>
-                          Reset{{ smAndDown ? '' : " Filters" }}
-                        </span>
-                      </v-btn>
-
-                      <!-- SORT -->
-                      <v-menu offset-y v-if="smAndDown">
-                        <template v-slot:activator="{ props }">
-                          <v-btn
-                            id="search-button-sort"
-                            size="small"
-                            class="mr-1 mb-2 searchbtn"
-                            elevation="2"
-                            v-bind="props"
-                          >
-                            <v-icon small class="mr-1 ml-n1" icon="fa:fas fa-sort" />
-                            {{
-                              (() => {
-                                const sortField = input.sort.split(':')[0];
-                                const sortInfo = sorts.find((el) => el.field === sortField);
-                                return sortInfo 
-                                  ? `${sortInfo.type} ${sortInfo.direction}`
-                                  : '';
-                              })()
-                            }}
-                          </v-btn>
-                        </template>
-                        <v-list :min-width="200">
-                          <v-list-item
-                            v-for="(item, index) in sorts"
-                            :key="item.field"
-                            :value="item.field"
-                            @click="resort(item.field)"
-                          >
-                            <v-list-item-title>{{ item.type }}</v-list-item-title>
-                          </v-list-item>
-                        </v-list>
-                      </v-menu>
-
-                      <!-- SHARE -->
-                      <Share
-                        :url="encodeURI(shareUrl)"
-                        label="Share"
-                        show-copy
-                        :hide="['email']"
-                      />
-                    </div>
-
-                    <v-pagination 
-                      v-model="displayPage"
-                      :length="totalPages"
-                      :total-visible="paginatorPageCount"
-                      @update:model-value="handlePaginationInput"
-                    />
-                  </div>
+            <div v-else class="w-100 h-100">
+              <div class="d-flex flex-column align-start justify-space-between">
+                <div id="search-result-info-count">
+                  <p class="title mb-0" style="font-size: 1.5rem;">
+                    {{ results.meta.total }} Results
+                  </p>
                 </div>
 
+                <Spacer :height="10" />
+
+                <div class="d-flex flex-column flex-md-row align-start align-md-center w-100">
+                  <div class="d-flex flex-grow-1">
+                    <!-- RESET FILTERS -->
+                    <v-btn
+                      id="search-button-clear"
+                      @click="handleFormReset"
+                      size="small"
+                      elevation="4"
+                      class="mr-1 mb-2"
+                    >
+                      <span>
+                        <v-icon small class="mr-1">mdi-close-circle</v-icon>
+                        Reset{{ smAndDown ? '' : " Filters" }}
+                      </span>
+                    </v-btn>
+
+                    <!-- SORT -->
+                    <v-menu offset-y v-if="smAndDown">
+                      <template v-slot:activator="{ props }">
+                        <v-btn
+                          id="search-button-sort"
+                          size="small"
+                          class="mr-1 mb-2 searchbtn"
+                          elevation="2"
+                          v-bind="props"
+                        >
+                          <v-icon small class="mr-1 ml-n1" icon="fa:fas fa-sort" />
+                          {{
+                            (() => {
+                              const sortField = input.sort.split(':')[0];
+                              const sortInfo = sorts.find((el) => el.field === sortField);
+                              return sortInfo 
+                                ? `${sortInfo.type} ${sortInfo.direction}`
+                                : '';
+                            })()
+                          }}
+                        </v-btn>
+                      </template>
+                      <v-list :min-width="200">
+                        <v-list-item
+                          v-for="(item, index) in sorts"
+                          :key="item.field"
+                          :value="item.field"
+                          @click="resort(item.field)"
+                        >
+                          <v-list-item-title>{{ item.type }}</v-list-item-title>
+                        </v-list-item>
+                      </v-list>
+                    </v-menu>
+
+                    <!-- SHARE -->
+                    <Share
+                      :url="encodeURI(shareUrl)"
+                      label="Share"
+                      show-copy
+                      :hide="['email']"
+                    />
+                  </div>
+
+                  <v-pagination 
+                    v-model="displayPage"
+                    :length="totalPages"
+                    :total-visible="paginatorPageCount"
+                    @update:model-value="handlePaginationInput"
+                  />
+                </div>
               </div>
-            </v-card>
+            </div>
+          </v-card>
               
 
               <!--  -->
