@@ -206,16 +206,19 @@
       <div fluid class="pa-0">
         <div>
           <div :cols="showSidebar ? 6 : 9" xl="10" class="px-4 py-2 pa-sm-8`">
-            <h2 class="my-4 pl-2">
-              {{ selectedFoSLabel }}
+          <div class='d-flex flex-md-row flex-column align-md-center align-start mb-md-0 mb-5'>
+            <div>
+              <h2 class="my-4 pl-2"><span class="mr-3">{{ selectedFoSLabel }}</span></h2>
+            </div>
+            <div>
               <v-chip
-                class="ml-0 ml-sm-2 mt-2 mt-sm-0 font-weight-regular text-uppercase position-relative"
-                style="bottom: 3px;"
+                class="font-weight-bold text-uppercase"
                 color="black"
               >
                 {{ selectedFoSDegree }}
               </v-chip>
-            </h2>
+            </div>
+          </div>
 
             <div v-if="isLoading">
               <v-card class="mt-2 mb-2 py-4 px-4 elevation-0 d-flex align-center" style="min-height: 98px;">
