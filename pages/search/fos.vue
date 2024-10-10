@@ -28,6 +28,11 @@
 .sidebar-open {
   min-width: 390px;
   max-width: 390px;
+
+  @include md {
+    min-width: 340px;
+    max-width: 340px;
+  }
 }
 
 .sidebar-closed {
@@ -67,6 +72,15 @@
 .fosResultsSortBar.loading {
   a {
     opacity: 0.3;
+  }
+}
+
+
+.searchHeaderCompact {
+  @include md {
+    position: relative;
+    // left: -15px;
+    padding-right: 20px;
   }
 }
 </style>
@@ -380,6 +394,7 @@
                     <v-card-text>
                       <v-row
                         class="mb-2 py-4"
+                        :class="showSidebar && 'searchHeaderCompact'"
                         style="border-bottom:2px solid #eee"
                       > 
                         <v-col
@@ -389,30 +404,25 @@
                           v-for="sort in sorts"
                           :key="sort.type"
                           :sm="sort.type === 'School Name' ? 4 : sort.type === 'Graduates' ? 2 : 3"
-                          v-if="!smAndDown"
-                          
+                          v-if="!smAndDown"  
                         >
-                          <a
-                            :class="{
-                              'font-weight-bold': sort.current,
-                              'text-decoration-underline': sort.current,
-                              'selected-sort': sort.current,
-                              'unselected-sort': !sort.current,
-                            }"
-                            href=""
+                          <v-btn
                             @click="(e) => changeSort(e, sort.type)"
+                            :active="sort.current"
+                            :color="!sort.current && 'blue'"
+                            variant="text"
+                            class="position"
+                            density="compact"
                           >
                             {{ sort.type }}
-                            <i
-                              class="fa"
-                              :class="[
-                                { 'fa-sort': sort.current == false },
-                                { 'fa-sort-up': sort.current && sort.direction == 'desc' },
-                                { 'fa-sort-down': sort.current && sort.direction == 'asc' },
-                              ]"
-                              aria-hidden="true"
-                            />
-                          </a>
+                            <v-icon size="large" aria-hidden>
+                              {{
+                                (() => {
+                                  return sort.current ? (sort.direction === 'asc' ? 'mdi:mdi-menu-up' : 'mdi:mdi-menu-down') : 'mdi:mdi-menu-swap';
+                                })()
+                              }}
+                            </v-icon>
+                          </v-btn>
                         </v-col>
                       </v-row>
 
@@ -425,6 +435,11 @@
                           class="pl-5 position-relative"
                         >
                           <SearchFieldOfStudyResultCard :fos="fieldOfStudy" :isLoading="isLoading" :showSidebar="showSidebar" />
+                          <v-row>
+                            <v-col class='py-0'>
+                              <hr />
+                            </v-col>
+                          </v-row>
                         </v-col>
                       </v-row>
                     </v-card-text>

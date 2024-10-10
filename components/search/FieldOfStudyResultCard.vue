@@ -141,7 +141,9 @@
     <v-col cols="12" sm="6" md="2">
       <div class="cell">
         <div class="text-uppercase d-flex align-center">
-          <span class='mb-2'>Graduates</span>
+          <div class='mb-2'>
+            <span class="position-relative">Graduates</span>
+          </div>
           <!-- Mock icon to match other cells -->
           <div class="d-inline-block" style="width: 32px; height: 32px;" /> 
         </div>
