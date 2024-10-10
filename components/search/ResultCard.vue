@@ -16,7 +16,8 @@
         <template v-slot:activator="{ props }">
           <v-btn
             icon
-            class="float-right search-result-card-compare"
+            class="float-right position-relative search-result-card-compare"
+            style="bottom: 8px;"
             @click="!isLoading ? store.toggleSchool(school) : () => {}"
             :class="[isSelected ? '' : compareSchoolsLength > 9 ? 'noCompareAllow' : '']"
             v-bind="props"
@@ -26,7 +27,7 @@
             <span class="sr-only">Compare</span>
           </v-btn>
         </template>
-        <div class="hover-tip">{{ isSelected ? 'Remove School to compare' : compareHoverCountText }}</div>
+        <div class="hover-tip">{{ isSelected ? 'Added to compare' : compareHoverCountText }}</div>
       </v-tooltip>
 
       <p class="text-overline mb-1">{{ city }}, {{ state }}</p>

@@ -19,7 +19,7 @@
                 <span class="sr-only">Compare</span>
               </v-btn>
             </template>
-            <div class="hover-tip">{{ isSelected ? 'Remove Field of Study to Compare' : compareFOSHoverCountText }}</div>
+            <div class="hover-tip">{{ isSelected ? 'Added to Compare' : compareFOSHoverCountText }}</div>
           </v-tooltip>
         </div>
       </div>
