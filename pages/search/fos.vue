@@ -412,7 +412,7 @@
                           <v-btn
                             @click="(e) => changeSort(e, sort.type)"
                             :active="sort.current"
-                            :color="!sort.current && 'blue'"
+                            :color="!sort.current ? 'blue' : 'gray'"
                             variant="text"
                             class="position"
                             density="compact"
