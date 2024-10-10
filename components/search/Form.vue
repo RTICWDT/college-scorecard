@@ -609,11 +609,11 @@ const onSubmit = () => {
 
 const route = useRoute()
 
-const mapInputFromQuery = () => {
+const mapInputFromQuery = (override) => {
   // Reset form to default, Helps with processing canned search items.
 
   // TODO - Refactor this method. Maybe add switch.
-  useMergeWith(input, route.query, function(
+  useMergeWith(input, override || route.query, function(
     objVal,
     newObjValue,
     key
@@ -682,7 +682,11 @@ const handleLocationSelection = (params) => {
   input.page = 1
 }
 
-const autoOpenActivePanels = () => {
+const autoOpenActivePanels = (reset) => {
+  if (reset) {
+    panels.value = []
+  }
+
   Object.keys(groomedInput.value).forEach((key) => {
     switch (key) {
       case 'cip4': panels.value.push(0); break;
@@ -717,6 +721,8 @@ watch(groomedInput, (newValue, oldValue) => {
 }, { deep: true })
 
 defineExpose({
-  resetForm
+  resetForm,
+  mapInputFromQuery,
+  autoOpenActivePanels,
 })
 </script>

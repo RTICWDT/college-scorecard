@@ -669,22 +669,22 @@ const handleLocationSelection = (params) => {
 }
 
 const handleCannedSearch = (params) => {
-  const updateParams = {
-    state: params.acceptance,
-    cip4_degree: params.cip4_degree,
-    completion_rate: params.completion_rate,
-    lat: params.lat,
-    long: params.long,
-  }
 
-  Object.keys(updateParams).forEach(key => {
-    if (updateParams[key] === null || updateParams[key] === undefined) {
-      delete input[key]
-      delete updateParams[key]
-    }
-  })
+  Object.keys(input).forEach((key) => delete input[key])
+  searchFormRef.value.resetForm()
+  searchLocationRef.value.resetForm()
+  searchSchoolRef.value.resetForm()
 
-  Object.assign(input, { ...updateParams, page: 1 })
+  if (params.state) input.state = params.state
+  if (params.cip4_degree) input.cip4_degree = params.cip4_degree
+  if (params.completion_rate) input.completion_rate = params.completion_rate
+  if (params.lat) input.lat = params.lat
+  if (params.long) input.long = params.long
+  input.page = 1
+  input.sort = props.defaultSort
+
+  searchFormRef.value.mapInputFromQuery(input)
+  searchFormRef.value.autoOpenActivePanels(true)
   debounceSearch()
 }
 

@@ -269,7 +269,6 @@ const updateSalaryMin = (value) => {
 }
 
 const updateSalaryMax = (value) => {
-  console.log(value)
   input.fos_salary[1] = Number(value)
 }
 
