@@ -149,14 +149,16 @@
             />
           </div>
 
-          <v-btn
-            variant="outlined"
-            class="mt-3 mt-md-0"
-            @click="showSidebar = !showSidebar"
-          >
-            <v-icon size="small" class="pr-1" icon="fa:fas fa-sliders-h" />
-            {{ showSidebar ? "Hide" : "Show" }} Filters
-          </v-btn>
+          <div class="d-flex flex-row-reverse mt-1 mt-md-0">
+            <v-btn
+              variant="outlined"
+              class="mt-3 mt-md-0"
+              @click="showSidebar = !showSidebar"
+            >
+              <v-icon size="small" class="pr-1" icon="fa:fas fa-sliders-h" />
+              {{ showSidebar ? "Hide" : "Show" }} Filters
+            </v-btn>
+          </div>
         </v-card>
       </v-col>
     </v-row>
