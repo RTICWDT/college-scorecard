@@ -16,17 +16,21 @@ export default defineNuxtConfig({
   },
 
   build: {
-    transpile: ['vuetify'],
+    transpile: ['vuetify', 'leaflet', '@vue-leaflet/vue-leaflet'],
   },
+
   modules: [
+    '@pinia/nuxt',
+    'nuxt-lodash',
+    '@nuxtjs/leaflet',
+    // todo: this method of loading vuetify makes nuxt angry, and causes npx nuxi commands
+    // to fail. so lets swap this out with a more up-to-date method once we figure out how.
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
         // @ts-expect-error
         config.plugins.push(vuetify({ autoImport: true }))
       })
     },
-    '@pinia/nuxt',
-    'nuxt-lodash',
   ],
 
   app: {
@@ -68,4 +72,5 @@ export default defineNuxtConfig({
       },
     },
   },
+
 })

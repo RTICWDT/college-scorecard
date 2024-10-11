@@ -113,8 +113,7 @@
           <!-- Map -->
           <v-col cols="12" md="6" offset-md="1">
             <div class="school-map mx-auto" v-if="school">
-              <!-- <Map :location="school.location" /> -->
-               <div style="background-color: red; height: 300px; width: 100%;" />
+               <Map :location="school.location" />
             </div>
             <div class="location mt-4">
               <div class="float-left">
@@ -291,24 +290,6 @@ const aidShowMonthlyPaymentWithPrior = ref(false)
 const sidebarSearchToggle = ref("school")
 
 const hadLoaded = ref(false)
-
-const fos_tabs = ref([
-  {
-    group: "ipeds_award_count",
-    active: true,
-    groupName: "Largest Size",
-  },
-  {
-    group: "highest_earnings",
-    active: false,
-    groupName: "Highest Earnings",
-  },
-  {
-    group: "lowest_debt",
-    active: false,
-    groupName: "Lowest Debt",
-  },
-])
 
 // COMPUTED
 // 
