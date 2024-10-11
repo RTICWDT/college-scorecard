@@ -47,11 +47,10 @@
               <SchoolAddToCompare :school="school" />
 
               <Share
-                small
                 variant="outlined"
                 color="white"
                 :elevation="0"
-                label="Share this School"
+                label="Share this School Search"
                 :url="shareLink"
                 show-copy
                 :hide="['email']"

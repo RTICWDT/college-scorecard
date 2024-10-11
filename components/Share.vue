@@ -64,7 +64,7 @@ const props = defineProps({
   text: { type: Boolean, default: false },
   fos: { type: Boolean, default: false },
   color: { type: String, default: "secondary" },
-  variant: { type: String, default: "" },
+  variant: { type: String, default: "small" },
   elevation: { type: Number, default: 1 },
   hide: { type: Array, default: () => [] },
   showCopy: { type: Boolean, default: false },

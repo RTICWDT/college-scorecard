@@ -17,7 +17,7 @@ export const useApi = () => {
       });
       return response.data;
     } catch (error) {
-      console.error('API Get Error:', error);
+      console.error('API Get Error:', error, uri, params);
       throw error;
     }
   };

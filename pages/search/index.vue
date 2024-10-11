@@ -153,8 +153,8 @@
       }"
     >
       <div class="bg-white" v-show="showSidebar">
-        <div class="pa-6 d-flex elevation-3">
-          <h2 class="flex-grow-1">More Filters</h2>
+        <div class="pa-sm-0 pa-md-6 d-flex elevation-3">
+          <h2 v-if="!smAndDown" class="flex-grow-1">More Filters</h2>
           <a href="#"class="float-right close-filter d-none d-md-block"@click="showSidebar = !showSidebar">
             <v-icon>mdi-chevron-left</v-icon>
             Close filters
@@ -232,7 +232,7 @@
                         id="search-button-clear"
                         @click="handleFormReset"
                         size="small"
-                        elevation="2"
+                        elevation="3"
                         class="mr-1 mb-2"
                       >
                         <span>
@@ -248,7 +248,7 @@
                             id="search-button-sort"
                             size="small"
                             class="mr-1 mb-2 searchbtn"
-                            elevation="2"
+                            elevation="3"
                             v-bind="props"
                           >
                             <v-icon small class="mx-1" icon="fa:fas fa-sort" />
@@ -273,13 +273,16 @@
                         </v-list>
                       </v-menu>
 
-
                       <!-- SHARE -->
                       <Share
                         :url="encodeURI(shareUrl)"
                         label="Share"
-                        show-copy
+                        small
+                        variant="text"
+                        color="black"
+                        :elevation="3"
                         :hide="['email']"
+                        showCopy
                       />
                     </div>
 
@@ -376,23 +379,28 @@
 
 
               <!-- Bottom Pagination -->
-              <v-card
-                class="mt-4 mb-2 py-1 px-4 elevation-0"
-                v-if="!isLoading && results.schools.length > 0"
-              >
-                <v-container fluid>
-                  <v-row>
-                    <v-col cols="12" class="v-pagination-wrapper pa-0">
-                      <v-pagination
-                        v-model="displayPage"
-                        :length="totalPages"
-                        @update:model-value="handlePagination"
-                        :total-visible="paginatorPageCount"
-                      />
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card>
+              <div v-if="results.schools.length > 0">
+                <Spacer :height="20" />
+                <v-card class="mb-2 py-1 px-4 elevation-0" >
+                  <v-container fluid>
+                    <v-row>
+                      <v-col cols="12" class="v-pagination-wrapper pa-1" style="min-height: 50px;">
+                        
+                        <v-pagination
+                          v-if="!isLoading"                      
+                          v-model="displayPage"
+                          :length="totalPages"
+                          @update:model-value="handlePagination"
+                          :total-visible="paginatorPageCount"
+                        />
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card>
+              </div>
+              <div v-else-if="isLoading">
+                <Spacer :height="1200" />
+              </div>
 
 
             <!-- RESULTS CARD AND PAGINATION -->

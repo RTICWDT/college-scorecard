@@ -53,7 +53,7 @@
       <v-text-field
         id="search-form-zip-text"
         v-model="input.zip"
-        label="ZIP Code"
+        placeholder="ZIP Code"
         hide-details
         :class="[props.horizontal ? 'mx-3' : 'my-3 mr-2']"
         type="number"

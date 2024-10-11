@@ -223,7 +223,8 @@ const gradCount = computed(() => getNestedField(props.fos, fields.FOS_GRAD_COUNT
 }
 
 .loading {
-  opacity: 0.4;
+  opacity: 0.6;
+  filter: blur(1px);
 }
 
 .nameLink {

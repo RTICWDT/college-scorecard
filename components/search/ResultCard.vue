@@ -169,7 +169,8 @@ const isSelected = computed(() => store.institutions.find(({ schoolId }) => scho
 
 <style lang="scss" scoped>
 .loading {
-  opacity: 0.4;
+  opacity: 0.6;
+  filter: blur(1px);
 }
 .nameLink {
   text-decoration: none;

@@ -304,7 +304,9 @@
                     <Share
                       :url="encodeURI(shareUrl)"
                       label="Share"
-                      show-copy
+                      variant="text"
+                      color="black"
+                      :elevation="3"
                       :hide="['email']"
                     />
                   </div>
@@ -452,13 +454,16 @@
                   </v-card>
                 </div>
 
-                <!-- Bottom Pagination -->
-                <v-card class="mt-4 mb-2 py-1 px-4 elevation-0">
+              <!-- Bottom Pagination -->
+              <div v-if="results.fieldsOfStudy.length > 0">
+                <Spacer :height="20" />
+                <v-card class="mb-2 py-1 px-4 elevation-0" >
                   <v-container fluid>
                     <v-row>
-                      <v-col cols="12" class="v-pagination-wrapper pa-0">
+                      <v-col cols="12" class="v-pagination-wrapper pa-1" style="min-height: 50px;">
+                        
                         <v-pagination
-                          v-if="!isLoading && results.fieldsOfStudy.length > 0"
+                          v-if="!isLoading"                      
                           v-model="displayPage"
                           :length="totalPages"
                           @update:model-value="handlePaginationInput"
@@ -468,6 +473,10 @@
                     </v-row>
                   </v-container>
                 </v-card>
+              </div>
+              <div v-else-if="isLoading">
+                <Spacer :height="700" />
+              </div>
 
           </div>
         </div>
@@ -590,7 +599,6 @@ const totalPages = computed(() => {
 
 const fosDegrees = computed(() => formMappings.fosDegrees)
 
-
 // METHODS
 const searchAPI = async () => {
   try {
@@ -600,6 +608,11 @@ const searchAPI = async () => {
     let params = prepareSearchParams()
     let query = prepareParams(params)
     let url = generateQueryString(params)
+
+    console.log("SEARCHING API WITH: ", input)
+    console.log("QUERY: ", query)
+    console.log("URL: ", url)
+
 
     router.replace(route.path + url)
 
@@ -637,11 +650,10 @@ const prepareSearchParams = () => {
 
 const showError = (error) => {
   console.error("error:", error)
-
   if (error.message) {
     error.value = error.message
   } else {
-    error.value = "There was an unexpected API error."
+    console.log(error)
   }
 }
 
