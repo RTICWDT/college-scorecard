@@ -10,6 +10,10 @@ $grid-breakpoints: (
   @media (min-width: map-get($grid-breakpoints, 'lg')) {
     max-width: 1185px;
   }
+
+  @media (min-width: map-get($grid-breakpoints, 'xl')) {
+    max-width: 1300px;
+  }
 }
 
 .v-container.v-container--fluid {
