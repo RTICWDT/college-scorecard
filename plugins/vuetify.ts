@@ -28,7 +28,8 @@ export default defineNuxtPlugin((nuxtApp) => {
             error: '#b61d1c',
             primaryfos: '#fdb022',
             tertiary: '#ebf0f3',
-            darkgrey: '#6c737c'
+            darkgrey: '#6c737c',
+            navyblue: '#026aa2'
           },
           variables: {
             'medium-emphasis-opacity': 1,

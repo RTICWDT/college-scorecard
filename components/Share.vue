@@ -5,7 +5,9 @@
         <v-btn
           v-bind="props"
           size="small"
-          :elevation="1"
+          :elevation="elevation"
+          :color="color"
+          :variant="variant"
         >
           <v-icon size="default" class="mr-1 share">mdi-share</v-icon>
           {{ label }}
@@ -62,6 +64,8 @@ const props = defineProps({
   text: { type: Boolean, default: false },
   fos: { type: Boolean, default: false },
   color: { type: String, default: "secondary" },
+  variant: { type: String, default: "" },
+  elevation: { type: Number, default: 1 },
   hide: { type: Array, default: () => [] },
   showCopy: { type: Boolean, default: false },
   copyText: { type: String, default: "Copy URL to Clipboard" },

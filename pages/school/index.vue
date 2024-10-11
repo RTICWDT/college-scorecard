@@ -33,27 +33,28 @@
 
       <!--Top Control Row-->
       <div id="school-sub-nav-header">
-        <v-container>
+        <v-container class="pt-5 pb-6">
           <v-row>
-            <v-col class="text-right d-flex justify-sm-end justify-space-evenly">
+            <v-col class="pa-0 text-right d-flex align-center justify-sm-end justify-space-evenly">
               <v-btn
                 small
-                color="white"
+                color="navyblue"
                 text
                 id="referrer-link"
                 class="link-more pl-1 pr-2"
                 @click="$router.back()"
-                >&laquo; Back</v-btn
               >
+                &laquo; Back
+              </v-btn>
 
               <div class="flex-grow-1" />
-
-              <!-- <add-to-compare :school="school" /> -->
+              <SchoolAddToCompare :school="school" />
 
               <Share
                 small
-                text
+                variant="outlined"
                 color="white"
+                :elevation="0"
                 label="Share this School"
                 :url="shareLink"
                 show-copy
@@ -65,8 +66,9 @@
       </div>
 
       <!-- Institution Summary Container-->
-      <v-container>
+      <v-container class="pb-10">
         <v-row class="pt-5">
+
           <!-- School Information and Icons-->
           <v-col cols="12" md="5">
             <v-chip v-if="underInvestigation == 1" color="error" label>
@@ -112,29 +114,24 @@
 
           <!-- Map -->
           <v-col cols="12" md="6" offset-md="1">
-            <div class="school-map mx-auto" v-if="school">
-               <Map :location="school.location" />
-            </div>
-            <div class="location mt-4">
-              <div class="float-left">
-                <!-- <location-icon class="location-icon pt-1" target="_blank" /> -->
-                <span class="ml-2">{{ city }}</span
-                >,
-                <span>{{ state }}</span>
-                <span class="ml-2">{{ zip }}</span>
+            <Map :location="school.location" />
+
+            <div class="d-flex mt-4">
+              <div class="flex-grow-1">
+                <v-icon size="small">mdi-map-marker</v-icon>
+                <span class="ml-2">{{ city }}</span>, <span>{{ state }}</span> <span class="ml-2">{{ zip }}</span>
               </div>
-              <div class="float-right">
-                <a
-                  :href="generateMapLink(school)"
-                  @click="transitionOutboundLink($event)"
-                  target="_blank"
-                >
-                  View on map
-                  <v-icon x-small class="pl-1" color="#007000">fas fa-external-link-alt</v-icon>
-                </a>
-              </div>
+              <a
+                :href="generateMapLink(school)"
+                @click="transitionOutboundLink($event)"
+                target="_blank"
+              >
+                View on map
+                <v-icon size="x-small" class="pl-1" color="#007000">mdi-open-in-new</v-icon>
+              </a>
             </div>
           </v-col>
+
         </v-row>
 
         <!-- Special Designations -->
@@ -156,7 +153,7 @@
             </div>
           </v-col>
         </v-row>
-        <Spacer :height="10" />
+
       </v-container> 
 
       <!-- SCHOOL BODY -->
@@ -168,18 +165,10 @@
 
               <v-row>
                 <v-col class="text-right">
-                  <v-btn
-                    color="secondary"
-                    @click="expandAllPanels"
-                    class="my-2 mr-2 text-uppercase"
-                  >
+                  <v-btn class="my-2 mr-2 text-uppercase" color="primary" @click="expandAllPanels">
                     Expand All
                   </v-btn>
-                  <v-btn
-                    color="secondary"
-                    @click="closeAllPanels"
-                    class="my-2 text-uppercase"
-                  >
+                  <v-btn  class="my-2 text-uppercase" color="primary" @click="closeAllPanels">
                     Close All
                   </v-btn>
                 </v-col>
