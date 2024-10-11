@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col cols="12" class="pb-0 pt-5">
+    <v-col cols="12" sm="12" class="pb-0 pt-5">
       <MedianToggle
         :display-toggle="medianToggle"
         @median-switch-click="handleMedianToggle"
@@ -338,3 +338,10 @@ const handleMedianToggle = (toggleValue) => {
   medianToggle.value = toggleValue === 0 ? "group" : "all"
 }
 </script>
+
+<style lang="scss" scoped>
+#school-completion-rate-bar {
+  margin-bottom: 55px;
+  padding-top: 0px !important;
+}
+</style>

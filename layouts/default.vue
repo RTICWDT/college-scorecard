@@ -5,7 +5,7 @@
       <LayoutHeader />
     </header>
     <v-main id="mainContent">
-      <slot/>
+      <slot />
     </v-main>
     <LayoutFooter />
   </v-app>

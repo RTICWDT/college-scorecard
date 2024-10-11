@@ -1,16 +1,12 @@
 <template>
-  <v-container class="mt-5" v-if="!school.id && !error">
-    <v-row>
-        <v-col cols="12" lg="12" class="">
-          <div class="show-loading">
-            <h1 class="title text-center mt-15">
-              <v-icon color="#00365e" icon="fa:fas fa-circle-notch fa-spin"/>
-              Loading
-            </h1>
-          </div>
-        </v-col>
-      </v-row>
-  </v-container>
+  <div class="d-flex w-100 h-100 align-center justify-content-center" v-if="!school.id && !error">
+    <div class="show-loading w-100">
+      <h1 class="title text-center mt-15">
+        <v-icon size="x-small" class="mr-2 position-relative" style="bottom: 2px;" color="#00365e" icon="fa:fas fa-circle-notch fa-spin"/>
+        Loading
+      </h1>
+    </div>
+  </div>
 
   <v-container class="mt-5" v-else-if="error">
     <v-row>
@@ -196,9 +192,9 @@
           </v-row>
         </v-container>
       </div>
-  </div>
 
-  <LayoutFooterCTA />
+      <LayoutFooterCTA />
+  </div>
 </template>
 
 <script setup>
@@ -586,11 +582,6 @@ useHead({
     display: inline;
     vertical-align: middle;
   }
-}
-
-#school-completion-rate-bar {
-  margin-bottom: 55px;
-  padding-top: 0px !important;
 }
 
 #school-salary-after-complete {

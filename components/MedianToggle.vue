@@ -10,25 +10,17 @@
       :style="tabContainerStyle"
       :grow="fillSpace"
     >
-      <v-tab
-        :value="0"
-        :class="tabID('group', localControlTab)"
-        :style="tabStyle"
-      >
+      <v-tab :value="0">
         <slot name="tab-group">
-          <span class="compare-tab-title">
+          <span class="compare-tab-title px-5">
             {{ labelPrefix }}{{ groupName }}
           </span>
         </slot>
       </v-tab>
 
-      <v-tab
-        :value="1"
-        :class="tabID('all', localControlTab)"
-        :style="tabStyle"
-      >
+      <v-tab :value="1">
         <slot name="tab-all">
-          <span class="compare-tab-title">
+          <span class="compare-tab-title px-5">
             {{ labelPrefix }}All Schools
           </span>
         </slot>
@@ -54,13 +46,13 @@ const props = defineProps({
   tabContainerStyle: {
     type: Object,
     default: () => ({
-      width: "64%",
+      width: "100%",
     }),
   },
   tabStyle: {
     type: Object,
     default: () => ({
-      width: "32%",
+      width: "100%",
     }),
   },
   fillSpace: {
@@ -87,8 +79,6 @@ const tabID = (context, controlTab) => {
 </script>
 
 <style lang="scss" scoped>
-@use 'vuetify/styles' as vuetify;
-
 .median-toggle-container {
   border-bottom: 2px solid #dadada;
   .median-toggle {
@@ -131,5 +121,9 @@ const tabID = (context, controlTab) => {
   letter-spacing: normal !important;
   color: black !important;
   text-transform: none !important;
+}
+
+.compare-tab-title {
+  font-size: 14px;
 }
 </style>
