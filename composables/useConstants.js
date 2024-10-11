@@ -236,10 +236,17 @@ export function useConstants() {
     SEARCH_URL_KEY: 'search-url'
   };
 
+  const getNestedField = (obj, path) => {
+    return path.split('.').reduce((current, key) => {
+      return current && current[key] !== undefined ? current[key] : undefined;
+    }, obj);
+  };
+
 
   return {
     fields,
     formMappings,
-    localStorageKeys
+    localStorageKeys,
+    getNestedField,
   }
 }

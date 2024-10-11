@@ -1,25 +1,26 @@
 <template>
   <div style="background-color: pink;">
     <div class="mb-4 mx-n11">
-      <!-- <field-of-study-select
+      <SchoolPanelFieldOfStudySelect
         :cip-two-nested-cip-four="fieldOfStudySelectItems"
-        v-model="selectedFOS"
+        v-model="selectedFieldOfStudy"
+        @update:model-value="handleFieldOfStudySelect"
         @input-clear="handleFieldOfStudyClear"
         container-id="field-of-study-select-search-container2"
         result-id="field-of-study-select-search-result2"
-      /> -->
+      />
     </div>
   </div>
-    <!-- <field-data-extended
-      v-if="selectedFOSDetail"
-      :fos="selectedFOSDetail"
+    <ChartFieldDataExtended
+      v-if="selectedFieldOfStudyDetail"
+      :fos="selectedFieldOfStudyDetail"
       :fos-salary-select-items="fosSalarySelectItems"
       :fos-salary-select="fieldDataExtendedSalarySelect"
       @update-salary-select="fieldDataExtendedSalarySelect = $event"
       :fos-show-debt-prior-included.sync="fieldDataExtendedShowPrior"
       @update-debt-show-prior="fieldDataExtendedShowPrior = $event"
       :fields="fields"
-    /> -->
+    />
   <v-row
     ><v-col>
       <!-- Top Fields of Study -->
@@ -136,26 +137,16 @@
               </div>
             </v-expansion-panel-title>
             <v-expansion-panel-text>
-              <!-- <field-data-extended
+              <ChartFieldDataExtended
                 :fos="fos"
-                :fos-salary-select="
-                  fieldDataExtendedSalarySelect
-                "
-                :fos-salary-select-items="
-                  fosSalarySelectItems
-                "
-                @update-salary-select="
-                  fieldDataExtendedSalarySelect = $event
-                "
-                :fos-show-debt-prior-included.sync="
-                  fieldDataExtendedShowPrior
-                "
-                @update-debt-show-prior="
-                  fieldDataExtendedShowPrior = $event
-                "
+                :fos-salary-select="fieldDataExtendedSalarySelect"
+                :fos-salary-select-items="fosSalarySelectItems"
+                @update-salary-select="fieldDataExtendedSalarySelect = $event"
+                :fos-show-debt-prior-included.sync="fieldDataExtendedShowPrior"
+                @update-debt-show-prior="fieldDataExtendedShowPrior = $event"
                 :fields="fields"
                 class="mt-5"
-              /> -->
+              />
             </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -198,20 +189,22 @@
 
 <script setup>
 import numeral from 'numeral'
+import {
+  formatFieldOfStudyTitle,
+  formatCip2Title,
+} from '~/utils/filters'
+
+const route = useRoute()
+
 const props = defineProps({
   school: {
     type: Object,
     required: true,
   },
-  selectedFieldOfStudy: {
-    type: Object,
-    required: true,
-  },
-  fieldOfStudySelectItems: {
-    type: Array,
-    required: true,
-  },
 })
+
+const emit = defineEmits(['update:selectedFieldOfStudy']);
+const selectedFieldOfStudy = reactive({ text: "", value: null })
 
 const {
   fields
@@ -224,11 +217,22 @@ const {
   schoolName,
 } = useComplexFields(props.school)
 
+const {
+  CIP2
+} = useSiteData()
+
 const hoistCurrency = ref(false)
 const hoistGroupData = ref("numer of graduates")
 const hoistGroupText = ref("largest")
 const hoistCount = ref(0)
 const fieldSort = ref("ipeds_award_count")
+
+const fieldDataExtendedSalarySelect = ref("aid")
+const fieldDataExtendedShowPrior = ref(false)
+const fosSalarySelectItems = ref([
+  { text: "Financial Aid Recipients", value: "aid" },
+  { text: "Pell Grant Recipients", value: "pell" },
+])
 
 const fieldsOfStudy = computed(() => {
   let fos = allFieldsOfStudy.value
@@ -261,6 +265,11 @@ const fieldsOfStudy = computed(() => {
   return fos
 })
 
+const fieldOfStudySelectItems = computed(() => {     
+  if (!props.school || !allFieldsOfStudy.value) return []
+  return organizeFieldsOfStudy(allFieldsOfStudy.value, CIP2)
+})
+
 const currentHoist = computed(() => {
   let sort = fieldSort.value
   switch (sort) {
@@ -283,7 +292,6 @@ const currentHoist = computed(() => {
   }
 })
 
-
 const fosUndergradCount = computed(() => {
   if (!allFieldsOfStudy.value || allFieldsOfStudy.value.length === 0) {
     return 0
@@ -294,29 +302,34 @@ const fosUndergradCount = computed(() => {
   }).length
 })
 
-const selectedFOSDetail = computed(() => {
+const selectedFieldOfStudyDetail = computed(() => {
+  if (typeof selectedFieldOfStudy.value === 'object' && selectedFieldOfStudy.value !== null) {
+    if (Object.keys(selectedFieldOfStudy.value).length === 0) {
+      return null
+    }
+  }
+
   if (
-    props.selectedFieldOfStudy.value === "" ||
-    props.selectedFieldOfStudy.value === {} ||
-    props.selectedFieldOfStudy.value === null
+    selectedFieldOfStudy.value === "" ||
+    selectedFieldOfStudy.value === null
   ) {
     return null
   }
 
   let locatedFOS = locateFOSObject(
     allFieldsOfStudy.value,
-    props.selectedFieldOfStudy.value.code,
-    props.selectedFieldOfStudy.value.credential.level
+    selectedFieldOfStudy.value.code,
+    selectedFieldOfStudy.value.credential.level
   )
 
   return {
-    title: props.selectedFieldOfStudy.value.text,
+    title: selectedFieldOfStudy.value.text,
     ...locatedFOS,
   }
 })
 
 const handleFieldOfStudyClear = () => {
-  props.selectedFieldOfStudy.value = null
+  selectedFieldOfStudy.value = null
 }
 
 const handleToggle = (toggleValue) => {
@@ -328,6 +341,84 @@ const locateFOSObject = (elements, code, credentialLevel) => {
     return fos.code === code && fos.credential.level === credentialLevel
   })
 }
+
+const mapFOSFromURL = () => {
+  let params = route.query
+  if (
+    typeof params.fos_code === "undefined" &&
+    /^\d{3,4}$/.test(params.fos_code) === false
+  ) {
+    return null
+  }
+
+  if (
+    typeof params.fos_credential === "undefined" &&
+    /^\d{1}$/.test(params.fos_credential) === false
+  ) {
+    return null
+  }
+
+  let locatedFOS = useFind(allFieldsOfStudy.value, (fos) => {
+    return (
+      fos.code == params.fos_code &&
+      fos.credential.level == params.fos_credential
+    )
+  })
+
+  return locatedFOS ? formatFOS(locatedFOS) : null
+}
+
+const organizeFieldsOfStudy = (availableFieldsOfStudy4, allCip2, filter = null) => {
+  let processedPrograms = {}
+
+  availableFieldsOfStudy4.forEach((program) => {
+    if (program.credential.level === 3) {
+      program.credential.title = "Bachelor's Degree"
+    }
+
+    let twodigit = program.code.substr(0, 2)
+    if (
+      useIncludes([1, 2, 3], program.credential.level) &&
+      !processedPrograms[allCip2[twodigit]]
+    ) {
+      processedPrograms[allCip2[twodigit]] = []
+    }
+
+    if (useIncludes([1, 2, 3], program.credential.level)) {
+      processedPrograms[allCip2[twodigit]].push(formatFOS(program))
+    }
+  })
+
+  let sorted = []
+  for (var cip2 in processedPrograms) {
+    sorted.push({
+      name: formatCip2Title(cip2),
+      fields: useSortBy(processedPrograms[cip2], ["title"]),
+    })
+  }
+
+  return useSortBy(sorted, ["name"])
+}
+
+const formatFOS = (fosObject) => {
+  return {
+    text: `${formatFieldOfStudyTitle(fosObject.title)} - ${fosObject.credential.title}`,
+    value: `${fosObject.code}.${fosObject.credential.level}`,
+    code: fosObject.code,
+    credential: {
+      level: fosObject.credential.level,
+    },
+  }
+}
+
+const handleFieldOfStudySelect = (event) => {
+  selectedFieldOfStudy.value = event
+}
+
+onMounted(() => {
+  selectedFieldOfStudy.value = mapFOSFromURL()
+  // fetch field of study from route.query
+})
 
 </script>
 

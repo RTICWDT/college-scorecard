@@ -162,7 +162,7 @@
 
 <script setup>
 import numeral from "numeral";
-const { fields } = useConstants();
+const { fields, getNestedField } = useConstants();
 const store = useCompareStore();
 
 const props = defineProps({
@@ -209,16 +209,10 @@ const dynamicLink = computed(() => {
   return `${baseLink}&fos_code=${props.fos.code}&fos_credential=${props.fos.credential.level}`;
 });
 
-const getNested = (obj, path) => {
-  return path.split('.').reduce((current, key) => {
-    return current && current[key] !== undefined ? current[key] : undefined;
-  }, obj);
-};
-
-const medianEarnings = computed(() => getNested(props.fos, fields.FOS_EARNINGS_FED_5YR))
-const medianDebt = computed(() => getNested(props.fos, fields.FOS_DEBT_MEDIAN))
-const medianDebtMonthly = computed(() => getNested(props.fos, fields.FOS_DEBT_MONTHLY))
-const gradCount = computed(() => getNested(props.fos, fields.FOS_GRAD_COUNT))
+const medianEarnings = computed(() => getNestedField(props.fos, fields.FOS_EARNINGS_FED_5YR))
+const medianDebt = computed(() => getNestedField(props.fos, fields.FOS_DEBT_MEDIAN))
+const medianDebtMonthly = computed(() => getNestedField(props.fos, fields.FOS_DEBT_MONTHLY))
+const gradCount = computed(() => getNestedField(props.fos, fields.FOS_GRAD_COUNT))
 </script>
 
 <style lang="scss" scoped>

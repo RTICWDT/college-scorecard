@@ -198,18 +198,9 @@
                   </v-expansion-panel-title>
 
                   <v-expansion-panel-text id="fos-content" class="px-0 pb-3 px-sm-5 pb-sm-5">
-                    <SchoolPanelFieldOfStudyProfile 
-                      :school="school" 
-                      :selected-field-of-study="selectedFOS" 
-                      :field-of-study-select-items="fieldOfStudySelectItems"
-                    />
+                    <SchoolPanelFieldOfStudyProfile :school="school" />
                   </v-expansion-panel-text>
                 </v-expansion-panel>
-
-
-
-
-
 
               </v-expansion-panels>
 
@@ -228,6 +219,7 @@ import { useDisplay } from 'vuetify';
 import {
   formatUrlText,
   yearsText,
+  formatFieldOfStudyTitle,
 } from '~/utils/filters'
 
 const route = useRoute()
@@ -286,15 +278,7 @@ const showGradOnly = ref(false)
 const showPellOnlyGrad = ref(false)
 const showPellOnlyOutcomes = ref(false)
 
-const selectedFOS = reactive({
-  text: "",
-})
-
-const fosSalarySelect = ref("aid")
-const fosSalarySelectItems = ref([
-  { text: "Financial Aid Recipients", value: "aid" },
-  { text: "Pell Grant Recipients", value: "pell" },
-])
+const selectedFOS = reactive({ text: "" })
 
 const fosShowDebtAtPrior = ref(false)
 const fosShowDebtAtPriorPanel = ref(false)
@@ -307,8 +291,6 @@ const aidLoanSelectItems = ref([
 const aidShowMedianDebtWithPrior = ref(false)
 const aidShowMonthlyPaymentWithPrior = ref(false)
 const sidebarSearchToggle = ref("school")
-const fieldDataExtendedSalarySelect = ref("aid")
-const fieldDataExtendedShowPrior = ref(false)
 
 const hadLoaded = ref(false)
 
@@ -349,11 +331,6 @@ const shareLink = computed(() => {
 
 const groupName = computed(() => {
   return useGet(school.value, fields["PREDOMINANT_DEGREE"])
-})
-
-const fieldOfStudySelectItems = computed(() => {     
-  if (!school.value || !allFieldsOfStudy.value) return []
-  return organizeFieldsOfStudy(allFieldsOfStudy.value, CIP2)
 })
 
 const gradSubgroup = computed(() => {
@@ -407,73 +384,7 @@ const generateMapLink = (school) => {
   return googleMapsBaseURL + qs
 }
 
-const organizeFieldsOfStudy = (availableFieldsOfStudy4, allCip2, filter = null) => {
-  let processedPrograms = {}
 
-  availableFieldsOfStudy4.forEach((program) => {
-    if (program.credential.level === 3) {
-      program.credential.title = "Bachelor's Degree"
-    }
-
-    let twodigit = program.code.substr(0, 2)
-    if (
-      useIncludes([1, 2, 3], program.credential.level) &&
-      !processedPrograms[allCip2[twodigit]]
-    ) {
-      processedPrograms[allCip2[twodigit]] = []
-    }
-
-    if (useIncludes([1, 2, 3], program.credential.level)) {
-      processedPrograms[allCip2[twodigit]].push(formatFOS(program))
-    }
-  })
-
-  let sorted = []
-  for (var cip2 in processedPrograms) {
-    sorted.push({
-      name: formatCip2Title(cip2),
-      fields: useSortBy(processedPrograms[cip2], ["title"]),
-    })
-  }
-
-  return useSortBy(sorted, ["name"])
-}
-
-const formatFOS = (fosObject) => {
-  return {
-    text: `${formatFieldOfStudyTitle(fosObject.title)} - ${fosObject.credential.title}`,
-    value: `${fosObject.code}.${fosObject.credential.level}`,
-    code: fosObject.code,
-    credential: {
-      level: fosObject.credential.level,
-    },
-  }
-}
-
-const mapFOSFromURL = (params, elements) => {
-  if (
-    typeof params.fos_code === "undefined" &&
-    /^\d{3,4}$/.test(params.fos_code) === false
-  ) {
-    return null
-  }
-
-  if (
-    typeof params.fos_credential === "undefined" &&
-    /^\d{1}$/.test(params.fos_credential) === false
-  ) {
-    return null
-  }
-
-  let locatedFOS = useFind(allFieldsOfStudy.value, (fos) => {
-    return (
-      fos.code == params.fos_code &&
-      fos.credential.level == params.fos_credential
-    )
-  })
-
-  return locatedFOS ? formatFOS(locatedFOS) : null
-}
 
 onMounted(async () => {  
   try {
@@ -495,13 +406,9 @@ onMounted(async () => {
     
     school.value = firstSchoolFound
 
-    // selectedFOS is reactive, so value is referring to a reference to an arbitrary object
-    // as opposed to a vue ref value. annoying!
-    selectedFOS.value = mapFOSFromURL(route.query, fieldOfStudySelectItems)
-
-    if (selectedFOS.value) {
-      panelsFOS.value = [0]
-    }
+    // if (selectedFOS.value) {
+    //   panelsFOS.value = [0]
+    // }
     trackState()
   } catch (error) {
     console.log(error)
