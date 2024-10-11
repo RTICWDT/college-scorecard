@@ -3,8 +3,8 @@
     <v-text-field
       id="field-of-study-select-search-text"
       aria-label="Field Of Study Select"
-      :v-model="setInputValue(modelValue)"
-      @update:model-value="filterObject"
+      v-model="searchText"
+      @update:modelValue="filterObject"
       @change="handleChange"
       @focus="handleSelectFocus"
       @click="handleSelectFocus"
@@ -14,7 +14,7 @@
       clearable
       variant="outlined"
       hide-details
-      prepend-inner-icon="fas fa-search"
+      prepend-inner-icon="fa:fas fa-search"
       class="mx-11"
     >
       <template #append>
@@ -82,10 +82,17 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue', 'input-clear'])
-
 const displayFOS = ref([])
 const displayMenu = ref(false)
-const inputValue = ref('')
+const searchText = ref('')
+
+watch(() => props.modelValue, (newVal) => {
+  if (newVal && typeof newVal === 'object' && newVal.text) {
+    searchText.value = newVal.text
+  } else {
+    searchText.value = ''
+  }
+}, { immediate: true })
 
 watch(displayMenu, (newVal) => {
   if (newVal) {
@@ -99,14 +106,6 @@ watch(displayMenu, (newVal) => {
   }
 })
 
-const setInputValue = (value) => {
-  console.log(value)
-  if (value && typeof value === 'object' && value.text) {
-    return value.text
-  }
-  return ''
-}
-
 const handleChange = (event) => {
   if (event && typeof event === "object" && typeof event.level !== "undefined") {
     emit('update:modelValue', event)
@@ -115,13 +114,16 @@ const handleChange = (event) => {
 }
 
 const handleInputClear = (e) => {
+  searchText.value = ''
   displayFOS.value = useCloneDeep(props.cipTwoNestedCipFour)
+  emit('update:modelValue', null)
   emit('input-clear', e)
 }
 
 const handleFieldOfStudySelectClick = (cip4) => {
   displayFOS.value = useCloneDeep(props.cipTwoNestedCipFour)
   displayMenu.value = false
+  searchText.value = cip4.text
   emit('update:modelValue', cip4)
 }
 

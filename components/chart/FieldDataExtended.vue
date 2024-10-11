@@ -243,8 +243,6 @@ const medianDebtMonthly = computed(() => getNestedField(props.fos, fields.FOS_DE
 const medianDebtMonthlyPrior = computed(() => getNestedField(props.fos, fields.FOS_DEBT_MONTHLY_PRIOR))
 const gradCount = computed(() => getNestedField(props.fos, fields.FOS_GRAD_COUNT))
 
-console.log(medianPrior.value)
-
 const checked = computed({
   get: () => props.fosShowDebtPriorIncluded,
   set: (value) => emit('update-debt-show-prior', value),

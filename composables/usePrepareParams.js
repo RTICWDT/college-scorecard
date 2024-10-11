@@ -145,9 +145,7 @@ const alias = {
     delete query[key];
   },
   // fieldOfStudySalary: function(query, value, key){
-  //   console.log("YAAY");
   //   query[fields.FIELD_OF_STUDY_EARNINGS + '__range'] = value.join('...');
-  //   console.log(query);
   //   delete query[key];
   // },
 
@@ -256,8 +254,6 @@ export const usePrepareParams = () => {
 
   const prepareParams = (params) => {
     let query = Object.assign({}, params);
-
-    // console.log(query);
 
     // only get open schools
     query[fields.OPERATING] = 1;

@@ -241,9 +241,7 @@ const {
   specialDesignations,
 } = useComplexFields(school)
 
-const {
-  CIP2
-} = useSiteData()
+
 
 const {
   trackAccordion
@@ -411,8 +409,8 @@ onMounted(async () => {
     // }
     trackState()
   } catch (error) {
-    console.log(error)
     error.value = true
+    console.warn(error)
     console.warn("No School found for ID: " + schoolId.value)
   }
 })

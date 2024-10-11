@@ -267,7 +267,7 @@ const fieldsOfStudy = computed(() => {
 
 const fieldOfStudySelectItems = computed(() => {     
   if (!props.school || !allFieldsOfStudy.value) return []
-  return organizeFieldsOfStudy(allFieldsOfStudy.value, CIP2)
+  return organizeFieldsOfStudy(allFieldsOfStudy.value, CIP2.value)
 })
 
 const currentHoist = computed(() => {
@@ -368,7 +368,7 @@ const mapFOSFromURL = () => {
   return locatedFOS ? formatFOS(locatedFOS) : null
 }
 
-const organizeFieldsOfStudy = (availableFieldsOfStudy4, allCip2, filter = null) => {
+const organizeFieldsOfStudy = (availableFieldsOfStudy4, allCip2) => {
   let processedPrograms = {}
 
   availableFieldsOfStudy4.forEach((program) => {
