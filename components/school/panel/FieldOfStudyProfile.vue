@@ -49,13 +49,13 @@
           >
         </p>
 
-        <!-- <toggle
+        <SchoolPanelFieldOfStudyToggle
           :display-toggle="true"
           :control-tab="fieldSort"
           @tab-change="handleToggle"
           label="Sort By: "
           class="pt-2 pb-2"
-        /> -->
+        />
 
         <v-row
           class="mx-5 mt-5 d-none d-sm-flex"
@@ -226,6 +226,23 @@ const hoistGroupData = ref("numer of graduates")
 const hoistGroupText = ref("largest")
 const hoistCount = ref(0)
 const fieldSort = ref("ipeds_award_count")
+const fieldTabs = [
+  {
+    group: "ipeds_award_count",
+    active: true,
+    groupName: "Largest Size",
+  },
+  {
+    group: "highest_earnings",
+    active: false,
+    groupName: "Highest Earnings",
+  },
+  {
+    group: "lowest_debt",
+    active: false,
+    groupName: "Lowest Debt",
+  },
+]
 
 const fieldDataExtendedSalarySelect = ref("aid")
 const fieldDataExtendedShowPrior = ref(false)
@@ -333,7 +350,11 @@ const handleFieldOfStudyClear = () => {
 }
 
 const handleToggle = (toggleValue) => {
-  fieldSort.value = fos_tabs.value[toggleValue].group
+  fieldTabs.forEach((tab) => {
+    if (tab.group === toggleValue) {
+       return fieldSort.value = tab.group
+    }
+  })
 }
 
 const locateFOSObject = (elements, code, credentialLevel) => {
