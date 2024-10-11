@@ -583,7 +583,7 @@ export function useComplexFields(schoolProp) {
     let ugCertList = ""
   
     for (let level of degreeLevels) {
-      let label = formMappings.value['fosDegrees'].find(e => e.value === level.toString())['label'].replace(" Degree", "")
+      let label = formMappings['fosDegrees'].find(e => e.value === level.toString())['label'].replace(" Degree", "")
       if (level == degreeLevels[degreeLevels.length - 1]) {
         degreesList += degreeLevels.length > 1 ? ` and ${label} Degrees` : `${label} Degrees`
       } else if (level == degreeLevels[degreeLevels.length - 2]) {
@@ -594,7 +594,7 @@ export function useComplexFields(schoolProp) {
     }
   
     for (let level of certLevels) {
-      let label = formMappings.value['fosDegrees'].find(e => e.value === level.toString())['label'].replace(" Certificate", "")
+      let label = formMappings['fosDegrees'].find(e => e.value === level.toString())['label'].replace(" Certificate", "")
       if (level == certLevels[certLevels.length - 1]) {
         certList += certLevels.length > 1 ? ` and ${label} Certificates` : `${label} Certificates`
       } else if (level == certLevels[certLevels.length - 2]) {
@@ -605,7 +605,7 @@ export function useComplexFields(schoolProp) {
     }
   
     for (let level of ugCertLevels) {
-      let label = formMappings.value['fosDegrees'].find(e => e.value === level.toString())['label']
+      let label = formMappings['fosDegrees'].find(e => e.value === level.toString())['label']
       ugCertList = label
     }
   

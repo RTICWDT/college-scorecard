@@ -166,10 +166,57 @@
           <v-row>
             <v-col cols="12">
               <SchoolInstitutionSummary :school="school" />
+
+              <v-row>
+                <v-col class="text-right">
+                  <v-btn
+                    color="secondary"
+                    @click="expandAllPanels"
+                    class="my-2 mr-2 text-uppercase"
+                  >
+                    Expand All
+                  </v-btn>
+                  <v-btn
+                    color="secondary"
+                    @click="closeAllPanels"
+                    class="my-2 text-uppercase"
+                  >
+                    Close All
+                  </v-btn>
+                </v-col>
+              </v-row>
+
+              <v-expansion-panels multiple focusable v-model="panelsFOS">
+                
+                <!-- Field of Study Panel -->
+                <v-expansion-panel class="fos-profile-panel" elevation="0">
+                  <v-expansion-panel-title id="fields-of-study" @click="trackAccordion('Fields of Study')">
+                    <span>Fields of Study</span>
+                    <span class="field-o f-study-select-icon ml-2" style="width: 35px;height: 35px;">
+                      <v-icon size="20" icon="fa:fas fa-award" />
+                    </span>
+                  </v-expansion-panel-title>
+
+                  <v-expansion-panel-text id="fos-content" class="px-0 pb-3 px-sm-5 pb-sm-5">
+                    <SchoolPanelFieldOfStudyProfile 
+                      :school="school" 
+                      :selected-field-of-study="selectedFOS" 
+                      :field-of-study-select-items="fieldOfStudySelectItems"
+                    />
+                  </v-expansion-panel-text>
+                </v-expansion-panel>
+
+
+
+
+
+
+              </v-expansion-panels>
+
             </v-col>
           </v-row>
         </v-container>
-      </div>       
+      </div>
   </div>
 
   <LayoutFooterCTA />
@@ -200,20 +247,15 @@ const {
   state,
   zip,
   specialDesignations,
-
-
-
-
-  medianEarnings,
-  completionRateFieldDefinition,
-  completionRate,
-  isProgramReporter,
-  netPrice,
-  toggleGraduationRate,
-  toggleAverageAnnualCosts,
-  toggleMedianEarnings,
 } = useComplexFields(school)
 
+const {
+  CIP2
+} = useSiteData()
+
+const {
+  trackAccordion
+} = useAnalytics()
 
 
 definePageMeta({ 
@@ -227,11 +269,7 @@ definePageMeta({
 const panels = ref([])
 const panelsFOS = ref([])
 const num_panels = ref(7)
-const field_sort = ref("ipeds_award_count")
-const hoistCurrency = ref(false)
-const hoistGroupData = ref("numer of graduates")
-const hoistGroupText = ref("largest")
-const hoistCount = ref(0)
+
 const error = ref(false)
 
 const currentSankey = reactive({
@@ -305,10 +343,6 @@ const metaTagsTitle = computed(() => {
   return school.value ? useGet(school.value, "school.name") + " | College Scorecard" : "College Scorecard"
 })
 
-const referer = computed(() => {
-  return document.referrer || "/search/"
-})
-
 const shareLink = computed(() => {
   return encodeURI(window.location.href) || null
 })
@@ -317,126 +351,14 @@ const groupName = computed(() => {
   return useGet(school.value, fields["PREDOMINANT_DEGREE"])
 })
 
-const fieldsOfStudy = computed(() => {
-  let fos = allFieldsOfStudy.value
-  if (!fos) {
-    return []
-  } else if (fos.length) {
-    for (let q = 0; q < fos.length; q++) {
-      fos[q].ipeds_award_count = useGet(fos[q], fields["FOS_GRAD_COUNT"])
-      fos[q].highest_earnings = useGet(fos[q], fields["FOS_EARNINGS_FED_5YR"])
-      fos[q].lowest_debt = useGet(fos[q], fields["FOS_DEBT_MEDIAN"])
-      fos[q].hoist = fos[q][field_sort.value]
-    }
-    fos = fos.filter((field) => field.credential.level <= 3 && field.hoist)
-
-    fos = useSortBy(fos, [
-      function(o) {
-        return o[field_sort.value]
-      },
-    ])
-    if (["ipeds_award_count", "highest_earnings"].indexOf(field_sort.value) >= 0) {
-      fos.reverse()
-    }
-    // Note: This might need to be handled differently as it's mutating state
-    // hoistCount.value = fos.length
-    fos = fos.slice(0, 5)
-  } else {
-    fos = [fos]
-  }
-  return fos
-})
-
-const currentHoist = computed(() => {
-  let sort = field_sort.value
-  switch (sort) {
-    case "ipeds_award_count":
-      // Note: These might need to be handled differently as they're mutating state
-      // hoistCurrency.value = false
-      // hoistGroupText.value = "largest"
-      // hoistGroupData.value = "number of graduates"
-      return "Graduates"
-    case "highest_earnings":
-      // hoistCurrency.value = true
-      // hoistGroupText.value = "highest earning"
-      // hoistGroupData.value = "earnings"
-      return "Median Earnings"
-    case "lowest_debt":
-      // hoistCurrency.value = true
-      // hoistGroupText.value = "with the least amount of debt"
-      // hoistGroupData.value = "debt"
-      return "Median Debt"
-  }
-})
-
-const searchURL = computed(() => {
-  let qs = returnURLFromStorage()
-  if (qs) {
-    return "/search/" + qs // Note: $url might need to be handled differently
-  } else {
-    return "/search/" // Note: $url might need to be handled differently
-  }
-})
-
-const fosUndergradCount = computed(() => {
-  if (!allFieldsOfStudy.value || allFieldsOfStudy.value.length === 0) {
-    return 0
-  }
-
-  return allFieldsOfStudy.value.filter((fos) => {
-    return fos.credential.level <= 3
-  }).length
-})
-
-const selectedFOSDetail = computed(() => {
-  if (
-    selectedFOS.value === "" ||
-    // selectedFOS.value === {} ||
-    selectedFOS.value === null
-  ) {
-    return null
-  }
-
-  let locatedFOS = locateFOSObject(
-    allFieldsOfStudy.value,
-    selectedFOS.value.code,
-    selectedFOS.value.credential.level
-  )
-
-  return {
-    title: selectedFOS.value.text,
-    ...locatedFOS,
-  }
-})
-
 const fieldOfStudySelectItems = computed(() => {     
   if (!school.value || !allFieldsOfStudy.value) return []
-
   return organizeFieldsOfStudy(allFieldsOfStudy.value, CIP2)
 })
 
 const gradSubgroup = computed(() => {
   return showGradOnly.value ? "ugcomp" : "ug"
 })
-
-const sidebarSearchClass = computed(() => {
-  return sidebarSearchToggle.value === "fos" 
-    ? "field-of-study-select-container"
-    : "institution-context-panel"
-})
-
-const sidebarRadioSchoolStyle = computed(() => {
-  return sidebarSearchToggle.value === "fos" ? "normal" : "bold"
-})
-
-const sidebarRadioFOSStyle = computed(() => {
-  return sidebarSearchToggle.value === "fos" ? "bold" : "normal"
-})
-
-
-
-
-
 
 // METHODS
 // 
@@ -454,12 +376,12 @@ const trackState = (school) => {
   }
 }
 
-const all = () => {
+const expandAllPanels = () => {
   panels.value = [...Array(num_panels.value).keys()].map((k, i) => i)
   panelsFOS.value = [0]
 }
 
-const none = () => {
+const closeAllPanels = () => {
   panels.value = []
   panelsFOS.value = []
 }
@@ -528,12 +450,6 @@ const formatFOS = (fosObject) => {
   }
 }
 
-const locateFOSObject = (elements, code, credentialLevel) => {
-  return useFind(elements, (fos) => {
-    return fos.code === code && fos.credential.level === credentialLevel
-  })
-}
-
 const mapFOSFromURL = (params, elements) => {
   if (
     typeof params.fos_code === "undefined" &&
@@ -559,78 +475,7 @@ const mapFOSFromURL = (params, elements) => {
   return locatedFOS ? formatFOS(locatedFOS) : null
 }
 
-// const generateQueryString = (params) => {
-//   let qs = querystring.stringify(params)
-//   return (
-//     "?" +
-//     qs
-//       .replace(/^&+/, "")
-//       .replace(/&{2,}/g, "&")
-//       .replace(/%3A/g, ":")
-//   )
-// }
-
-const generateCompareFieldOfStudy = (fosObject) => {
-  return {
-    id: fosObject.unit_id,
-    code: fosObject.code,
-    credentialLevel: fosObject.credential.level,
-    credentialTitle: fosObject.credential.title,
-    institutionName: fosObject.school.name,
-    fosTitle: fosObject.title,
-  }
-}
-
-const handleExtendedFieldSelect = (event) => {
-  // Implementation
-}
-
-const handleFieldOfStudyClear = () => {
-  selectedFOS.value = null
-}
-
-const handleFieldOfStudySelected = (fieldOfStudy) => {
-  router.push(
-    "/search/?toggle=fos&cip4=" + encodeURIComponent(fieldOfStudy.cip4)
-  )
-}
-
-const checkTipUpperStyle = (upperValue, maxValue, upperStyleTipOverride) => {
-  let additionalPaddingStyles = upperStyleTipOverride
-
-  if (Number(upperValue) >= maxValue * 0.85) {
-    additionalPaddingStyles.left = "-3.1rem"
-  }
-
-  return additionalPaddingStyles
-}
-
-const checkUpperStyle = (value, maxValue, upperStyleOverride) => {
-  let additionalPaddingStyles = upperStyleOverride
-
-  if (Number(value) >= maxValue * 0.97) {
-    additionalPaddingStyles.left = "97%"
-  }
-
-  return additionalPaddingStyles
-}
-
-const handleToggle = (toggleValue) => {
-  field_sort.value = fos_tabs.value[toggleValue].group
-}
-
 onMounted(async () => {  
-  // const params = {
-  //   [fields.OPERATING]: 1,
-  //   [fields.OPEID + "__not"]: "null",
-  //   [fields.DEGREE_OFFERED + ".assoc_or_bachelors_or_certificate"]: true,
-  //   [fields.SIZE + "__range"]: "1..",
-  //   [fields.PREDOMINANT_DEGREE + "__range"]: "1..3",
-  //   [fields.ID + "__range"]: "..999999",
-  //   fields: "latest,school,id,location",
-  //   keys_nested: true
-  // }
-
   try {
     const response = await apiGet("/schools/", { id: schoolId.value })
     const metadata = response.metadata
@@ -650,6 +495,8 @@ onMounted(async () => {
     
     school.value = firstSchoolFound
 
+    // selectedFOS is reactive, so value is referring to a reference to an arbitrary object
+    // as opposed to a vue ref value. annoying!
     selectedFOS.value = mapFOSFromURL(route.query, fieldOfStudySelectItems)
 
     if (selectedFOS.value) {
@@ -791,11 +638,11 @@ useHead({
   }
 }
 
-#fields-of-study.v-expansion-panel-header {
+#fields-of-study.v-expansion-panel-title {
   background-color: variables.$fos-color-yellow !important;
 }
 
-#fields-of-study.v-expansion-panel-header:before {
+#fields-of-study.v-expansion-panel-title:before {
   opacity: 0 !important;
 }
 
