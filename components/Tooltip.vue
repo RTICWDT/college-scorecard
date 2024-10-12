@@ -13,13 +13,21 @@
 
     <v-dialog max-width="500px" v-model="showDialog">
       <v-card class="px-3 py-3">
-        <div class="d-flex flex-row-reverse mb-n9">
-          <v-btn @click="showDialog = false" alt="Close More Information tooltip" aria-required="true" icon="fa:fas fa-times-circle" elevation="0">
-            <v-icon icon="fa:fas fa-times-circle"></v-icon>
-          </v-btn>
+
+        <div class="d-flex">
+          <v-card-title class="px-4">{{ title }}</v-card-title>
+          <div class="flex-grow-1" />
+          <v-btn 
+            @click="showDialog = false" 
+            alt="Close More Information tooltip" 
+            aria-required="true" 
+            icon="fa:fas fa-times-circle" 
+            elevation="0"
+            color="tertiary"
+          />
         </div>
-        <v-card-title>{{ title }}</v-card-title>
-        <v-card-text class="pb-5">
+
+        <v-card-text class="pb-5 px-5">
           <div class="tooltip-text" v-html="content" @click="handleClicks"></div>
           <p v-if="showBranch">
             This information is based on all locations of this school.
@@ -40,6 +48,7 @@
             </v-btn>
           </p>
         </v-card-text>
+
       </v-card>
     </v-dialog>
   </div>
@@ -141,7 +150,7 @@ function handleClicks(event) {
   }
 
   .icon-placement {
-    width: 30px;
+    width: 20px;
     display: inline;
   }
 
