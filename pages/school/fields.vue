@@ -1,18 +1,421 @@
 <template>
-  <div>
-    <h1 class="navy-text">FIELDS</h1>
-    <p v-if="schoolId">School ID: {{ schoolId }}</p>
-    <p v-else>No school ID provided</p>
-  </div>
+  <v-main>
+    <div class="school-heading">
+      <div class="bg-white">
+        <v-container>
+          <v-row class="meta-nv">
+            <v-col>
+              <v-btn
+                variant="text"
+                size="small"
+                id="referrer-link"
+                class="link-more"
+                @click="$router.back()"
+              >&laquo; Back</v-btn>
+            </v-col>
+            <v-col class="text-right d-flex">
+              <Share
+                :url="shareLink"
+                label="Share these Fields of Study"
+                small
+                variant="text"
+                color="black"
+                :elevation="3"
+                :hide="['email']"
+                showCopy
+                class="flex-grow-1"
+              />
+              <v-btn :href="schoolLink" text size="small"
+                >School Profile &raquo;</v-btn
+              >
+            </v-col>
+          </v-row>
+        </v-container>
+      </div>
+      <v-container class="mt-10">
+        <v-row>
+          <v-col class="school-lef mb-n10">
+            <div class="show-loaded" id="school">
+              <!-- School Header Info -->
+              <v-row>
+                <v-col cols="12" md="6" class="white--text">
+                  <div v-if="school.id">
+                    <p class="mb-3 text-uppercase">
+                      All Fields of Study Offered at
+                    </p>
+                    <h1 class="text-h4 mb-3 font-weight-bold">
+                      {{ useGet(school, fields["NAME"], "School Name") }}
+                    </h1>
+                    <p class="mb-0">
+                      <strong>{{ numeral(undergraduates).format() }}</strong>
+                      undergraduate students
+                    </p>
+                    <p class="">
+                      <a
+                        target="_blank"
+                        :href="schoolUrl"
+                        class="white--text"
+                        @click="transitionOutboundLink($event)"
+                        >{{ schoolUrlDisplay }}
+                        <v-icon size="x-small" class="pl-1" color="white">
+                          fas fa-external-link-alt
+                        </v-icon>
+                      </a>
+                    </p>
+                    <p
+                      class="mb-10"
+                      v-if="useGet(school, fields['UNDER_INVESTIGATION']) == 1"
+                    >
+                      <v-chip color="error" label>
+                        <strong>Under ED Monitoring</strong>
+                        <tooltip
+                          definition="hcm2"
+                          color="#FFFFFF"
+                          class="ml-2"
+                          :isBranch="isBranch"
+                        />
+                      </v-chip>
+                    </p>
+                  </div>
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-card class="pa-5">
+                    <h2 class="mb-6 d-inline-block">
+                      Filter Fields of Study Offered
+                    </h2>
+                    <v-avatar color="#fec005" size="40" class="ml-3">
+                      <v-icon color="black">
+                        fas fa-award
+                      </v-icon>
+                    </v-avatar>
+                    <v-text-field
+                      outlined
+                      label="Search Fields of Study"
+                      v-model="currentTextFilter"
+                      clearable
+                      hide-details="auto"
+                      class="mb-4"
+                    ></v-text-field>
+                    <v-select
+                      id="school-field-fos-degree"
+                      outlined
+                      :items="filters"
+                      item-title="label"
+                      item-value="value"
+                      v-model="currentFilter"
+                      label="Search Degree Type"
+                      color="primary"
+                      clearable
+                      hide-details="auto"
+                    ></v-select>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
+    <v-container class="my-10">
+      <div v-if="!school.id" class="show-loading">
+        <h1 class="text-h6 text-center my-15">
+          <v-icon color="#00365e">fas fa-circle-notch fa-spin</v-icon>
+          Loading
+        </h1>
+      </div>
+
+      <v-row v-else>
+        <v-col>
+          <v-alert
+            v-if="currentFilter === 4"
+            border="start"
+            density="compact"
+            color="#D16E00"
+            elevation="2"
+          >
+            No data on the number of graduates are displayed because of
+            definitional differences with other data sources. Fields of study on
+            this page include undergraduate-level programs that may be
+            classified as undergraduate certificates in other data sources.
+          </v-alert>
+
+          <v-alert
+            v-if="currentFilter === 8"
+            border="start"
+            density="compact"
+            color="#D16E00"
+            elevation="2"
+          >
+            Fields of study on this page include graduate-level programs that
+            may be labeled "postbaccalaureate certificates" in other data
+            sources.
+          </v-alert>
+          <h2 class="mb-4">{{ totalCount }} Results</h2>
+          <!-- Fields of Study -->
+          <v-expansion-panels
+            v-if="!isEmpty(processedPrograms)"
+            v-model="panels"
+            multiple
+          >
+            <v-expansion-panel
+              v-for="(prog, index) in processedPrograms"
+              :key="index"
+              class=""
+            >
+              <v-expansion-panel-title>{{
+                useStartCase(useToLower(prog.name).slice(0, -1))
+              }}</v-expansion-panel-title>
+              <v-expansion-panel-text>
+                <v-expansion-panels v-model="subpanel">
+                  <v-expansion-panel
+                    v-for="fos in prog.fields"
+                    :key="fos.code + '-' + fos.credential.level"
+                  >
+                    <v-expansion-panel-title>
+                      <span class="school-fields-fos-degree-title"
+                        >{{ fos.title.replace(/\.$/, "") }} -
+                        {{ fos.credential.title }}</span
+                      >
+                    </v-expansion-panel-title>
+                    <v-expansion-panel-text class="pa-0 ma-0">
+                      <ChartFieldDataExtended
+                        :fos="fos"
+                        :fos-salary-select-items="fosSalarySelectItems"
+                        :fos-salary-select="fieldDataExtendedSalarySelect"
+                        @update-salary-select="
+                          fieldDataExtendedSalarySelect = $event
+                        "
+                        :fos-show-debt-prior-included.sync="
+                          fieldDataExtendedShowPrior
+                        "
+                        @update-debt-show-prior="
+                          fieldDataExtendedShowPrior = $event
+                        "
+                        :fields="fields"
+                      />
+                    </v-expansion-panel-text>
+                  </v-expansion-panel>
+                </v-expansion-panels>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+          </v-expansion-panels>
+
+          <v-card v-else color="pa-5">
+            <p class="ma-0 text-center">
+              This institution does not offer any fields of study with this
+              degree.
+            </p>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+    <LayoutFooterCTA />
+  </v-main>
 </template>
 
+<style lang="scss">
+.school-heading {
+  background-color: variables.$bg-blue;
+}
+.v-expansion-panel-title--active {
+  background-color: variables.$bg-yellow;
+  & + .v-expansion-panel-text {
+    background-color: variables.$bg-yellow;
+    .v-expansion-panel-title--active {
+      background-color: white;
+      & + .v-expansion-panel-text {
+        background-color: white;
+      }
+    }
+  }
+}
+</style>
+
 <script setup>
-import { useRoute } from 'vue-router'
+import numeral from 'numeral'
+import { formatFieldOfStudyTitle } from '~/utils/filters'
 
 const route = useRoute()
-const schoolId = computed(() => {
-  // Get the first key of the query object
-  const key = Object.keys(route.query)[0]
-  return key ? key : null
+const router = useRouter()
+const { fields, formMappings } = useConstants()
+const { apiGet } = useApi()
+const { CIP2 } = useSiteData()
+
+const school = ref({})
+const panels = ref([])
+const num_panels = ref(0)
+const subpanel = ref(null)
+
+const programs = ref([])
+
+const currentFilter = ref(0)
+const currentTextFilter = ref('')
+const fieldDataExtendedSalarySelect = ref('aid')
+const fieldDataExtendedShowPrior = ref(false)
+const fosSalarySelectItems = ref([
+  { text: 'Financial Aid Recipients', value: 'aid' },
+  { text: 'Pell Grant Recipients', value: 'pell' },
+])
+const totalCount = ref(0)
+
+const {
+  allFieldsOfStudy,
+  schoolLink,
+  undergraduates,
+  schoolUrl,
+  schoolUrlDisplay,
+} = useComplexFields(school.value)
+
+const processedPrograms = computed(() => {
+  let programs = useGet(school.value, 'latest.programs.cip_4_digit')
+  if (!programs) return null
+
+  let pp = {}
+
+  programs.forEach((program) => {
+    if (program.credential.level == 3) {
+      program.credential.title = "Bachelor's Degree"
+    }
+    if (
+      (!currentFilter.value ||
+        currentFilter.value == program.credential.level) &&
+      (!currentTextFilter.value ||
+        program.title.match(new RegExp(currentTextFilter.value, 'ig')))
+    ) {
+      let twodigit = program.code.substr(0, 2)
+      if (!pp[CIP2.value[twodigit]]) {
+        pp[CIP2.value[twodigit]] = []
+      }
+      pp[CIP2.value[twodigit]].push(program)
+    }
+  })
+
+  totalCount.value = 0
+  num_panels.value = 0
+  let sorted = []
+  for (var cipTwo in pp) {
+    sorted.push({
+      name: cipTwo,
+      fields: useSortBy(pp[cipTwo], ['title']),
+    })
+    totalCount.value += pp[cipTwo].length
+    num_panels.value++
+  }
+
+  if (currentTextFilter.value || currentFilter.value) {
+    panels.value = [...Array(num_panels.value).keys()].map((k, i) => i)
+  } else {
+    panels.value = []
+  }
+  return useSortBy(sorted, ['name'])
+})
+
+const shareLink = computed(() => {
+  return encodeURI(window.location.href) || null
+})
+
+const filters = computed(() => {
+  return formMappings.fosDegrees
+})
+
+const fieldOfStudySelectItems = computed(() => {     
+  if (!props.school || !allFieldsOfStudy.value) return []
+  return organizeFieldsOfStudy(allFieldsOfStudy.value, CIP2.value)
+})
+
+const organizeFieldsOfStudy = (availableFieldsOfStudy4, allCip2) => {
+  let processedPrograms = {}
+
+  availableFieldsOfStudy4.forEach((program) => {
+    if (program.credential.level === 3) {
+      program.credential.title = "Bachelor's Degree"
+    }
+
+    let twodigit = program.code.substr(0, 2)
+    if (
+      useIncludes([1, 2, 3], program.credential.level) &&
+      !processedPrograms[allCip2[twodigit]]
+    ) {
+      processedPrograms[allCip2[twodigit]] = []
+    }
+
+    if (useIncludes([1, 2, 3], program.credential.level)) {
+      processedPrograms[allCip2[twodigit]].push(formatFOS(program))
+    }
+  })
+
+  let sorted = []
+  for (var cip2 in processedPrograms) {
+    sorted.push({
+      name: formatCip2Title(cip2),
+      fields: useSortBy(processedPrograms[cip2], ["title"]),
+    })
+  }
+
+  return useSortBy(sorted, ["name"])
+}
+
+const mapFOSFromURL = () => {
+  let params = route.query
+  if (
+    typeof params.fos_code === "undefined" &&
+    /^\d{3,4}$/.test(params.fos_code) === false
+  ) {
+    return null
+  }
+
+  if (
+    typeof params.fos_credential === "undefined" &&
+    /^\d{1}$/.test(params.fos_credential) === false
+  ) {
+    return null
+  }
+
+  let locatedFOS = useFind(allFieldsOfStudy.value, (fos) => {
+    return (
+      fos.code == params.fos_code &&
+      fos.credential.level == params.fos_credential
+    )
+  })
+
+  return locatedFOS ? formatFOS(locatedFOS) : null
+}
+
+const formatFOS = (fosObject) => {
+  return {
+    text: `${formatFieldOfStudyTitle(fosObject.title)} - ${fosObject.credential.title}`,
+    value: `${fosObject.code}.${fosObject.credential.level}`,
+    code: fosObject.code,
+    credential: {
+      level: fosObject.credential.level,
+    },
+  }
+}
+
+onMounted(async () => {
+  const urlParams = route.query
+  const schoolId = Object.keys(urlParams)[0]
+
+  const selectedFOS = mapFOSFromURL(urlParams, fieldOfStudySelectItems)
+
+  try {
+    const response = await apiGet("/schools/", { id: schoolId })
+
+    if (response.metadata.total > 1) {
+      console.warn('More than one school found for ID: "' + schoolId + '"')
+      return null
+    }
+
+    school.value = response.results[0]
+    document.title = useGet(school.value, 'school.name') + ' | College Scorecard'
+
+    if (selectedFOS) {
+      currentFilter.value = selectedFOS.credential
+      currentTextFilter.value = selectedFOS.code
+      subpanel.value = 0
+    }
+  } catch (error) {
+    console.warn('No School found for ID: ' + schoolId)
+  }
 })
 </script>

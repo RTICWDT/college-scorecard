@@ -32,7 +32,7 @@ export default defineNuxtPlugin((nuxtApp) => {
             navyblue: '#026aa2',
             lightyellow: '#fffaeb',
             yellow: '#fdbf32',
-            warning: '##fff3cf',
+            warning: '#fff3cf',
           },
           variables: {
             'medium-emphasis-opacity': 1,

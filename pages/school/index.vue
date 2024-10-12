@@ -86,6 +86,7 @@
             <h1
               id="profile-institution-title"
               class="display-3 font-weight-bold pa-0 mb-4"
+              style="line-height: 48px !important;"
               v-else
             >
               {{ schoolName }}

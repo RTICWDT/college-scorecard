@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --port 3000",
     "build": "nuxt generate",
     "preview": "npx serve .output/public"
   },
