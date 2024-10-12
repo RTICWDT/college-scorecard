@@ -1,0 +1,92 @@
+<template>
+  <div>
+    <div class="circle-container">
+      <div class="bg-circle"></div>
+      <div class="circle light">{{ props.value }}</div>
+      :
+      <div class="circle dark">1</div>
+    </div>
+    <div class="mt-4 d-inline-block float-left">
+      <div class="key-box medium-blue"></div>
+      Full-Time Students
+      <div class="key-box ml-3 mid-dark-blue"></div>
+      Full-Time Staff
+    </div>
+  </div>
+</template>
+
+<script setup>
+const props = defineProps({
+  value: {
+    type: Number,
+    default: 0
+  }
+})
+
+const tabID = (context, controlTab) => {
+  if (context === "institutions") {
+    return controlTab === 0
+      ? "compare-toggle-school-active"
+      : "compare-tab-inactive"
+  } else if (context === "fos") {
+    return controlTab === 1
+      ? "compare-toggle-fos-active"
+      : "compare-tab-inactive"
+  }
+}
+
+// If you need to perform actions after the component is mounted, use onMounted
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  // Uncomment if you still need this functionality
+  // const prevElement = document.querySelector('#context-toggle .v-slide-group .v-slide-group__prev')
+  // const nextElement = document.querySelector('#context-toggle .v-slide-group .v-slide-group__next')
+  // if (prevElement) prevElement.remove()
+  // if (nextElement) nextElement.remove()
+})
+</script>
+
+<style lang="scss" scoped>
+.circle-container {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-weight: 600;
+  font-size: 28px;
+}
+
+.bg-circle {
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  border-radius: 50%;
+  z-index: 1;
+  border: 2px solid #ededed;
+}
+
+.circle {
+  border-radius: 50%;
+  background-color: blue;
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  height: 5em;
+  width: 5em;
+  color: variables.$white;
+  z-index: 2;
+}
+
+.light {
+  background: variables.$medium-blue;
+  border: 0.1875em solid variables.$medium-blue;
+}
+
+.dark {
+  background: variables.$medium-dark-blue;
+  border: 0.1875em solid variables.$medium-dark-blue;
+}
+</style>

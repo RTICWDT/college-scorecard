@@ -135,14 +135,11 @@ const sizeIcon = computed(() => {
 .school-key-figures {
   $height: 20px;
   $list: rural, town, suburban, city, small, medium, large, public, private, profit, two, four, certificate;
-  position: relative;
-  right: 10px;
 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
   gap: 10px;
   padding: 0;
-  margin: 20px 0 0 0;
   list-style-type: none;
 
   @each $icon in $list {

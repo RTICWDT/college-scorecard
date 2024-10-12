@@ -169,9 +169,8 @@
                 </v-col>
               </v-row>
 
+              <!-- Field of Study Panel -->
               <v-expansion-panels multiple focusable v-model="panelsFOS">
-                
-                <!-- Field of Study Panel -->
                 <v-expansion-panel class="fos-profile-panel" elevation="0">
                   <v-expansion-panel-title id="fields-of-study" @click="trackAccordion('Fields of Study')">
                     <span>Fields of Study</span>
@@ -181,11 +180,87 @@
                   </v-expansion-panel-title>
 
                   <v-expansion-panel-text id="fos-content" class="px-0 pb-3 px-sm-5 pb-sm-5">
-                    <SchoolPanelFieldOfStudyProfile :school="school" />
+                    <SchoolPanelFieldOfStudy :school="school" />
+                  </v-expansion-panel-text>
+                </v-expansion-panel>
+              </v-expansion-panels>
+
+
+
+              <v-expansion-panels multiple focusable v-model="panels">
+                  
+                <!-- Costs -->
+                <v-expansion-panel>
+                  <v-expansion-panel-title @click="trackAccordion('Costs')">
+                    Costs
+                  </v-expansion-panel-title>
+
+                  <v-expansion-panel-text>
+                    <SchoolPanelCosts :school="school" />
                   </v-expansion-panel-text>
                 </v-expansion-panel>
 
-              </v-expansion-panels>
+                <!-- Graduation & Retention -->
+                <v-expansion-panel>
+                  <v-expansion-panel-title @click="trackAccordion('Graduation &amp; Retention')">
+                    Graduation &amp; Retention
+                  </v-expansion-panel-title>
+
+                  <v-expansion-panel-text>
+                    <SchoolPanelGraduationRetention :school="school" />
+                  </v-expansion-panel-text>
+                </v-expansion-panel>
+
+
+                <!-- Financial Aid & Debt -->
+                <v-expansion-panel>
+                  <v-expansion-panel-title @click="trackAccordion('Financial Aid &amp; Debt')">
+                    Financial Aid &amp; Debt
+                  </v-expansion-panel-title>
+
+                  <v-expansion-panel-text>
+                    <SchoolPanelFinancialAid :school="school" />
+                  </v-expansion-panel-text>
+                </v-expansion-panel>
+
+                <!-- Typical Earnings -->
+                <v-expansion-panel>
+                  <v-expansion-panel-title @click="trackAccordion('Typical Earnings')">
+                    Typical Earnings
+                  </v-expansion-panel-title>
+
+                  <v-expansion-panel-text>
+                    <SchoolPanelTypicalEarnings :school="school" />
+                  </v-expansion-panel-text>
+                </v-expansion-panel>
+
+                <!-- Campus Diversity -->
+                <v-expansion-panel>
+                  <v-expansion-panel-title @click="trackAccordion('Campus Diversity')">
+                    Campus Diversity
+                  </v-expansion-panel-title>
+
+                  <v-expansion-panel-text>
+                    <SchoolPanelCampusDiversity :school="school" />
+                  </v-expansion-panel-text>
+                </v-expansion-panel>
+
+
+                <!-- Test Scores -->
+                <v-expansion-panel>
+                  <v-expansion-panel-title @click="trackAccordion('Test Scores and Acceptance')">
+                    Test Scores and Acceptance
+                  </v-expansion-panel-title>
+
+                  <v-expansion-panel-text>
+                    <SchoolPanelTestScores :school="school" />
+                  </v-expansion-panel-text>
+                </v-expansion-panel>
+
+
+
+
+                </v-expansion-panels>
 
             </v-col>
           </v-row>
@@ -199,11 +274,7 @@
 <script setup>
 import numeral from 'numeral'
 import { useDisplay } from 'vuetify';
-import {
-  formatUrlText,
-  yearsText,
-  formatFieldOfStudyTitle,
-} from '~/utils/filters'
+import { formatUrlText } from '~/utils/filters'
 
 const route = useRoute()
 const { fields } = useConstants()
@@ -245,33 +316,11 @@ const num_panels = ref(7)
 
 const error = ref(false)
 
-const currentSankey = reactive({
-  enroll: "enroll_both",
-  study: "study_both",
-})
 
 const currentRepayment = reactive({
   enroll: "enroll_both",
   study: "study_both",
 })
-
-const showGradOnly = ref(false)
-const showPellOnlyGrad = ref(false)
-const showPellOnlyOutcomes = ref(false)
-
-const selectedFOS = reactive({ text: "" })
-
-const fosShowDebtAtPrior = ref(false)
-const fosShowDebtAtPriorPanel = ref(false)
-const aidLoanSelect = ref("fed")
-const aidLoanSelectItems = ref([
-  { text: "Federal Student Loans", value: "fed" },
-  { text: "Parent PLUS Loans", value: "plus" },
-])
-
-const aidShowMedianDebtWithPrior = ref(false)
-const aidShowMonthlyPaymentWithPrior = ref(false)
-const sidebarSearchToggle = ref("school")
 
 const hadLoaded = ref(false)
 
@@ -290,10 +339,6 @@ const metaTagsTitle = computed(() => {
 
 const shareLink = computed(() => {
   return encodeURI(window.location.href) || null
-})
-
-const groupName = computed(() => {
-  return useGet(school.value, fields["PREDOMINANT_DEGREE"])
 })
 
 const gradSubgroup = computed(() => {

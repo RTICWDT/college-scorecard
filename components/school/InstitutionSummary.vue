@@ -3,7 +3,6 @@
     <v-col cols="12" sm="12" class="pb-0 pt-5">
       <MedianToggle
         :display-toggle="medianToggle"
-        @median-switch-click="handleMedianToggle"
         @median-tab-change="handleMedianToggle"
         :group-name="yearsText(groupName) + ' Schools'"
         label-prefix="Midpoint for "

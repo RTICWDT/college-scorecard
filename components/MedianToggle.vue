@@ -1,6 +1,8 @@
 <template>
-  <div :class="labelPrefix ? 'median-toggle-container align-end d-flex' : 'align-end d-flex'">
+  <div>
     <em v-if="!labelPrefix" class="d-flex mr-2">Show Midpoint for:</em>
+  </div>
+  <div :class="labelPrefix ? 'median-toggle-container align-end d-flex' : 'align-end d-flex'">
     <v-tabs
       v-model="localControlTab"
       class="median-toggle"

@@ -15,7 +15,6 @@
     "@pinia/nuxt": "^0.5.4",
     "axios": "^1.7.7",
     "chart.js": "^4.4.4",
-    "chartjs-plugin-datalabels": "^2.2.0",
     "focus-trap": "^7.6.0",
     "focus-trap-vue": "^4.0.3",
     "google-charts": "^2.0.0",

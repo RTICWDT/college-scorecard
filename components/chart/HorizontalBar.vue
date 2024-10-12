@@ -5,6 +5,7 @@
       id="horizontal-bar"
       :options="chartOptions"
       :data="chartData"
+      :plugins="plugins"
     />
   </div>
 </template>
@@ -48,6 +49,52 @@ const formatter = (value, context) => {
   }
 }
 
+const dataLabelsPlugin = {
+  id: 'dataLabels',
+  afterDraw: (chart) => {
+    const ctx = chart.ctx;
+    const datasets = chart.data.datasets;
+    const meta = chart.getDatasetMeta(0);
+
+    ctx.save();
+    ctx.font = `bold ${props.labelFontSize}px "neue-haas-grotesk-display", Helvetica, arial, sans-serif`;
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = props.labelColor;
+
+    datasets[0].data.forEach((value, index) => {
+      const element = meta.data[index];
+      const { x, y } = element;
+      
+      let formattedValue;
+      if (props.type === "percent") {
+        formattedValue = `${Math.round(value)}%`;
+      } else if (props.type === "currency") {
+        formattedValue = Number(value)
+          .toLocaleString("en-US", {
+            style: "currency",
+            currency: "USD",
+          })
+          .slice(0, -3);
+      } else {
+        formattedValue = value.toString();
+      }
+
+        if (value > props.max - (props.max / 10)) {
+          ctx.textAlign = 'right';
+          ctx.fillStyle = '#ffffff'
+          ctx.fillText(formattedValue, x - 5, y);
+        } else {
+          ctx.textAlign = 'left';
+          ctx.fillStyle = props.labelColor;
+          ctx.fillText(formattedValue, x + 5, y);
+        }
+    });
+    ctx.restore();
+  }
+};
+
+const plugins = computed(() => props.labels ? [dataLabelsPlugin] : [])
+
 const chartOptions = computed(() => ({
   indexAxis: 'y',
   responsive: true,
@@ -68,7 +115,7 @@ const chartOptions = computed(() => ({
       font: {
         size: props.labelFontSize
       }
-    }
+    },
   },
   scales: {
     y: {
@@ -82,11 +129,8 @@ const chartOptions = computed(() => ({
         display: false
       },
       ticks: {
-        display: props.labels,
+        display: false,
         color: props.labelColor,
-        font: {
-          size: props.labelFontSize
-        }
       }
     },
     x: {
@@ -94,6 +138,14 @@ const chartOptions = computed(() => ({
       grid: {
         display: false
       }
+    }
+  },
+  layout: {
+    padding: {
+      left: -10,
+      right: 0,
+      top: 0,
+      bottom: 0
     }
   }
 }))
