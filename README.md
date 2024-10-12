@@ -25,26 +25,11 @@ Locally preview production build:
 npm run preview
 ```
 
-## TODO
-- ~~`vuex` -> `pinia` store migration~~
-- `google-charts` is a 5-year-old library used only for the sankey. lets use a different visualization (preferably from ChartJS)
-- ~~`vue2-leaflet` -> `vue-leaflet` vue3 compatible~~
-- `vuetify3` migration
-  - ~~icons (both font awesome and vuetify)~~
-  - fonts
-  - ~~grid layout using v-container, v-row, v-col~~
-  - ~~- no bootstrap~~
-
-- error page handling in nuxt
-- optimizing the search behavior on the app. consider storing the last done search to skip an API hit on returning. 
-
-
-
-## MIGRATION NOTES
+## Migration Notes
 
 - nuxt needs to be at version 3.13.1 right now as 3.13.2 introduces a regression that breaks the nuxt-leaflet module. when 3.14 comes along we can upgrade, as it was confirmed a [fix is coming](https://github.com/nuxt-modules/leaflet/issues/80#issuecomment-2376746166)
 
-## CHECKLIST
+## Migration Checklist
 
 - [x] API
 - [x] Store
@@ -82,6 +67,7 @@ npm run preview
   - [ ] Transition Away Notice
   - [ ] Compare Drawer
   - [ ] Tooltip Styling
+  - [ ] Google Charts Sankey Replacement
   
 - QA Pass
   - [ ] Links / Downloads
@@ -93,3 +79,10 @@ npm run preview
   - [ ] SEO / Metatags
   - [ ] Analytics Events
   - [ ] Share Functionality
+  - [ ] Fonts
+
+- Nice-to-have
+  - [ ] Search Optimization / Refactor
+  - [ ] Compare store composable interface
+  - [ ] design color consistency check & stylesheet
+  - [ ] 
