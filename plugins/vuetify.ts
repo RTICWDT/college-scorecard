@@ -29,7 +29,10 @@ export default defineNuxtPlugin((nuxtApp) => {
             primaryfos: '#fdb022',
             tertiary: '#ebf0f3',
             darkgrey: '#6c737c',
-            navyblue: '#026aa2'
+            navyblue: '#026aa2',
+            lightyellow: '#fffaeb',
+            yellow: '#fdbf32',
+            warning: '##fff3cf',
           },
           variables: {
             'medium-emphasis-opacity': 1,

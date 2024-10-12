@@ -1,15 +1,13 @@
 <template>
   <div class="pa-4 rounded-lg fos-sort-toggle-container">
+    <span v-if="!labelPrefix" class="d-flex text-subtitle-2">{{ label }}</span>
     <div class="align-center d-flex">
-      <span v-if="!labelPrefix" class="d-flex mr-2">{{ label }}</span>
       <v-tabs
         id="fos-sort-toggle"
         :show-arrows="true"
         @update:modelValue="$emit('tab-change', $event)"
         :height="tabsHeight"
         :style="tabContainerStyle"
-        :grow="fillSpace"
-        :fixed="true"
       >
         <v-tab
           v-for="tab in tabs"
@@ -54,11 +52,11 @@ const props = defineProps({
   },
   tabContainerStyle: {
     type: Object,
-    default: () => ({ width: "64%" }),
+    default: () => ({ width: "100%" }),
   },
   tabStyle: {
     type: Object,
-    default: () => ({ width: "32%" }),
+    default: () => ({ width: "33%" }),
   },
   fillSpace: {
     type: Boolean,
@@ -79,66 +77,8 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.flex {
-  display: flex;
-}
-
 .fos-sort-toggle-container {
   background-color: #eff1f5 !important;
-  width: 100%;
-  #fos-sort-toggle {
-    :deep(.median-tab-inactive) {
-      border-bottom: none !important;
-    }
-  }
 }
 
-#fos-sort-toggle {
-  :deep(.v-tab--selected) {
-    background-color: #fff;
-    border-radius: 10px;
-  }
-  #fos-sort-tab-inactive {
-    border: 1px solid #707070;
-    background-color: #707070;
-  }
-
-  .median-tab-active {
-    span {
-      font-weight: bold;
-    }
-  }
-
-  :deep(.v-tab) {
-    text-transform: none !important;
-    background: #eff1f5;
-
-    span {
-      color: #000;
-      letter-spacing: normal !important;
-      font-size: 16px;
-    }
-  }
-
-  :deep(.v-tab--selected) {
-    font-weight: bold;
-  }
-  :hover {
-    background: #fff !important;
-  }
-}
-
-:deep(.v-tabs-bar) {
-  height: 30px !important;
-}
-
-:deep(.v-slide-group__prev) {
-  display: none !important;
-}
-
-.median-tab-title {
-  letter-spacing: normal !important;
-  color: black !important;
-  text-transform: none !important;
-}
 </style>

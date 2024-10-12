@@ -28,7 +28,7 @@
   <div v-else>
 
       <!--Top Control Row-->
-      <div id="school-sub-nav-header">
+      <div class="bg-navyblue">
         <v-container class="pt-5 pb-6">
           <v-row>
             <v-col class="pa-0 text-right d-flex align-center justify-sm-end justify-space-evenly">
@@ -160,10 +160,10 @@
 
               <v-row>
                 <v-col class="text-right">
-                  <v-btn class="my-2 mr-2 text-uppercase" color="primary" @click="expandAllPanels">
+                  <v-btn class="my-4 mr-2 text-uppercase" color="primary" @click="expandAllPanels">
                     Expand All
                   </v-btn>
-                  <v-btn  class="my-2 text-uppercase" color="primary" @click="closeAllPanels">
+                  <v-btn  class="my-4 text-uppercase" color="primary" @click="closeAllPanels">
                     Close All
                   </v-btn>
                 </v-col>
@@ -171,24 +171,26 @@
 
               <!-- Field of Study Panel -->
               <v-expansion-panels multiple focusable v-model="panelsFOS">
-                <v-expansion-panel class="fos-profile-panel" elevation="0">
-                  <v-expansion-panel-title id="fields-of-study" @click="trackAccordion('Fields of Study')">
+                <v-expansion-panel class="fos-profile-panel" elevation="2">
+                  <v-expansion-panel-title id="fields-of-study" @click="trackAccordion('Fields of Study')" class="field-of-study-title bg-lightyellow">
                     <span>Fields of Study</span>
-                    <span class="field-o f-study-select-icon ml-2" style="width: 35px;height: 35px;">
-                      <v-icon size="20" icon="fa:fas fa-award" />
-                    </span>
+                    <v-btn
+                      size="x-small"
+                      icon="fa:fas fa-award"
+                      class="bg-yellow ml-2"
+                      :readonly="true"
+                    />
                   </v-expansion-panel-title>
 
-                  <v-expansion-panel-text id="fos-content" class="px-0 pb-3 px-sm-5 pb-sm-5">
+                  <v-expansion-panel-text class="field-of-study-text ">
                     <SchoolPanelFieldOfStudy :school="school" />
                   </v-expansion-panel-text>
                 </v-expansion-panel>
               </v-expansion-panels>
 
-
+              <Spacer :height="20" />
 
               <v-expansion-panels multiple focusable v-model="panels">
-                  
                 <!-- Costs -->
                 <v-expansion-panel>
                   <v-expansion-panel-title @click="trackAccordion('Costs')">
@@ -256,12 +258,9 @@
                     <SchoolPanelTestScores :school="school" />
                   </v-expansion-panel-text>
                 </v-expansion-panel>
+              </v-expansion-panels>
 
-
-
-
-                </v-expansion-panels>
-
+              <Spacer :height="60" />
             </v-col>
           </v-row>
         </v-container>
@@ -280,10 +279,10 @@ const route = useRoute()
 const { fields } = useConstants()
 const { apiGet } = useApi()
 const { smAndDown } = useDisplay()
-const { transitionOutboundLink } = useAnalytics()
+const { transitionOutboundLink, trackAccordion } = useAnalytics()
+
 const school = ref({})
 const {
-  allFieldsOfStudy,
   underInvestigation,
   schoolName,
   schoolUrl,
@@ -294,13 +293,6 @@ const {
   zip,
   specialDesignations,
 } = useComplexFields(school)
-
-
-
-const {
-  trackAccordion
-} = useAnalytics()
-
 
 definePageMeta({ 
   middleware: 'school'
@@ -313,16 +305,8 @@ definePageMeta({
 const panels = ref([])
 const panelsFOS = ref([])
 const num_panels = ref(7)
-
 const error = ref(false)
 
-
-const currentRepayment = reactive({
-  enroll: "enroll_both",
-  study: "study_both",
-})
-
-const hadLoaded = ref(false)
 
 // COMPUTED
 // 
@@ -339,10 +323,6 @@ const metaTagsTitle = computed(() => {
 
 const shareLink = computed(() => {
   return encodeURI(window.location.href) || null
-})
-
-const gradSubgroup = computed(() => {
-  return showGradOnly.value ? "ugcomp" : "ug"
 })
 
 // METHODS
@@ -391,8 +371,6 @@ const generateMapLink = (school) => {
   let qs = ""
   return googleMapsBaseURL + qs
 }
-
-
 
 onMounted(async () => {  
   try {
@@ -452,225 +430,18 @@ useHead({
 
 
 <style lang="scss" scoped>
-
-#school-sub-nav-header {
-  background-color: variables.$bg-blue;
-}
-.yellow-warn {
-  background: #fff3cf;
-}
-.leaflet-bottom {
-  z-index: 100 !important;
-}
-
-.profile-fos-include-prior-debt {
-  font-size: 12px;
-
-  @media (min-width: 960px) {
-    font-size: 16px;
+.field-of-study-text {
+  :deep(.v-expansion-panel-text__wrapper) {
+    padding: 0;
   }
 }
-
-#fields-of-study.v-expansion-panel-header
-  > :not(.v-expansion-panel-header__icon) {
-  flex: none;
-}
-
-.compare-selected-text {
-  background-color: variables.$light-blue !important;
-}
-
-#profile-institution-title {
-  line-height: 100% !important;
-  color: #10274e;
-}
-
-.field-of-study-select-container {
-  border-radius: 4px !important;
-  border-left: 20px solid variables.$fos-color-gold !important;
-}
-
-.field-of-study-select-container-header {
-  border-radius: 5px 5px 0px 0px !important;
-}
-
-.institution-context-panel {
-  border-radius: 4px !important;
-  border-left: 20px solid variables.$darker-green !important;
-}
-
-#field-of-study-select-header {
-  h2 {
-    margin-top: 7px;
-    margin-left: 6px;
-    font-size: 1.35rem;
-    display: inline-block;
-    vertical-align: top;
-    text-transform: uppercase;
+.field-of-study-title {
+  &:hover, &:focus {
+    outline: 1px solid #cecece;
   }
 
-  @media (min-width: 960px) {
-    h2 {
-      margin-top: 12px;
-      margin-left: 10px;
-    }
+  :deep(.v-expansion-panel-title__overlay) {
+    opacity: 0 !important;
   }
-
-  #field-of-study-select-icon {
-    height: 34px;
-    width: 34px;
-    background: variables.$fos-color-gold;
-    border-radius: 50%;
-    display: inline-block;
-    color: black;
-    text-align: center;
-
-    i {
-      font-size: 24px;
-      margin-top: 5px;
-    }
-
-    @media (min-width: 960px) {
-      width: 50px;
-      height: 50px;
-
-      i {
-        font-size: 35px;
-        margin-top: 8px;
-      }
-    }
-  }
-}
-
-.fos-profile-panel {
-  width: 100%;
-  //border-left: 10px solid variables.$fos-color-gold;
-  margin-bottom: 20px;
-
-  @media (min-width: 960px) {
-    font-size: 16px;
-    //border-left: 20px solid variables.$fos-color-gold;
-  }
-}
-
-#fields-of-study.v-expansion-panel-title {
-  background-color: variables.$fos-color-yellow !important;
-}
-
-#fields-of-study.v-expansion-panel-title:before {
-  opacity: 0 !important;
-}
-
-.fos-profile-mini-summary-info {
-  width: 100%;
-  /*background-color: #eaeaea;*/
-  border-left: 10px solid variables.$fos-color-gold;
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  -webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  -moz-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  /*<!--box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);-->*/
-  border-top: 1px solid #eaeaea;
-  border-right: 1px solid #eaeaea;
-  border-bottom: 1px solid #eaeaea;
-}
-
-.institution-profile-panel {
-  width: 100%;
-  //border-left: 10px solid variables.$institution-accent-color;
-
-  @media (min-width: 960px) {
-    font-size: 16px;
-    //border-left: 20px solid variables.$institution-accent-color;
-  }
-}
-
-.field-of-study-select-icon {
-  width: 50px;
-  height: 50px;
-  background: variables.$fos-color-gold;
-  border-radius: 50%;
-  color: black;
-  text-align: center;
-  display: inline-block !important;
-  flex: none !important;
-  z-index: 8; // Above highlight for active expansion panel
-  i {
-    font-size: 35px;
-    margin-top: 8px;
-  }
-}
-
-#fos-number-grads {
-  h2,
-  h3 {
-    display: inline-block;
-    vertical-align: middle;
-  }
-}
-
-.fos-sub-title-header:not(.top-fos-sub-title-header) {
-  background-color: #e5e5e5;
-
-  h3 {
-    font-weight: 500;
-  }
-}
-
-.fos-small-data-bold {
-  font-size: 1.5rem !important;
-  font-weight: bold;
-}
-
-.fos-profile-mini {
-  h3 {
-    display: inline;
-    vertical-align: middle;
-  }
-}
-
-#school-salary-after-complete {
-  margin-bottom: 55px;
-}
-
-#profile-field-of-study-summary-metric-container {
-  /*height: 320px;*/
-  padding-top: 20px !important;
-}
-
-#profile-field-of-study-summary-metric-empty {
-  /*height: 320px;*/
-  height: auto;
-}
-
-#showGradOnly,
-#showPellOnlyGrad,
-#showPellOnlyOutcomes {
-  .v-messages {
-    display: none;
-  }
-}
-
-span.arrow-left {
-  $arrow-size: 7px;
-  width: 0;
-  height: 0;
-  border-top: $arrow-size solid transparent;
-  border-bottom: $arrow-size solid transparent;
-  border-right: $arrow-size solid black;
-  margin-top: 0;
-}
-
-.location-icon {
-  height: 20px;
-  width: 20px;
-}
-
-#field-of-study-select-search-container2 {
-  background-color: variables.$fos-color-yellow;
-  padding-bottom: 24px;
-}
-
-.small-display-3 {
-  font-size:2.6rem;
 }
 </style>

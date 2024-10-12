@@ -16,6 +16,7 @@
       hide-details
       prepend-inner-icon="fa:fas fa-search"
       class="mx-11"
+      bg-color="white"
     >
       <template #append>
         <v-icon class="fos-search-text-icon">

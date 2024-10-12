@@ -1,5 +1,6 @@
 <template>
-  <div style="background-color: pink;">
+  <div class="bg-lightyellow field-of-study-search">
+    <Spacer :height="15" />
     <div class="mb-4 mx-n11">
       <SchoolPanelFieldOfStudySelect
         :cip-two-nested-cip-four="fieldOfStudySelectItems"
@@ -11,6 +12,8 @@
       />
     </div>
   </div>
+
+  <div class="px-11 pb-11">
     <ChartFieldDataExtended
       v-if="selectedFieldOfStudyDetail"
       :fos="selectedFieldOfStudyDetail"
@@ -21,170 +24,171 @@
       @update-debt-show-prior="fieldDataExtendedShowPrior = $event"
       :fields="fields"
     />
-  <v-row
-    ><v-col>
-      <!-- Top Fields of Study -->
-      <v-card flat class="pa-4">
-        <h2 class="mb-3">
-          Top Fields of Study at {{ schoolName }}
-          <tooltip definition="field-of-study" />
-        </h2>
+    <v-row>
+      <v-col>
+        <!-- Top Fields of Study -->
+        <v-card flat class="pa-4">
+          <h2 class="mb-3">
+            Top Fields of Study at {{ schoolName }}
+            <tooltip definition="field-of-study" />
+          </h2>
 
-        <p class="my-3" v-if="fieldsOfStudy.length">
-          Out of
-          {{ numeral(fosUndergradCount).format() }} undergraduate
-          {{ fosUndergradCount == 1 ? "field" : "fields" }}
-          of study at {{ schoolName }}, the
-          {{
-            fieldsOfStudy.length < 10
-              ? fieldsOfStudy.length
-              : 10
-          }}
-          {{ hoistGroupText }} are shown below. ({{
-            hoistCount
-          }}
-          had relevant data on {{ hoistGroupData }}.)
-          <a :href="fieldsLink"
-            >See All Fields of Study &raquo;</a
-          >
-        </p>
-
-        <SchoolPanelFieldOfStudyToggle
-          :display-toggle="true"
-          :control-tab="fieldSort"
-          @tab-change="handleToggle"
-          label="Sort By: "
-          class="pt-2 pb-2"
-        />
-
-        <v-row
-          class="mx-5 mt-5 d-none d-sm-flex"
-          v-if="fieldsOfStudy.length"
-        >
-          <v-col
-            cols="12"
-            sm="8"
-            class="ma-0 px-2 pt-0 pb-3 font-weight-bold"
-            >Field of Study</v-col
-          >
-          <v-col
-            cols="12"
-            sm="4"
-            class="ma-0 pa-0 font-weight-bold"
-            >{{ currentHoist }}</v-col
-          >
-        </v-row>
-
-        <v-row
-          class="mx-0 mt-5 d-block d-sm-none"
-          v-if="fieldsOfStudy.length"
-        >
-          <v-col
-            cols="12"
-            class="ma-0 px-2 py-2 font-weight-bold"
-            >Field of Study ({{ currentHoist }})</v-col
-          >
-        </v-row>
-
-        <v-expansion-panels
-          class="my-3"
-          v-if="fieldsOfStudy.length"
-        >
-          <v-expansion-panel
-            v-for="fos in fieldsOfStudy"
-            :key="fos.code + '-' + fos.credential.level"
-          >
-            <v-expansion-panel-title
-              class="py-0 pl-2 pl-sm-4"
+          <p class="my-3" v-if="fieldsOfStudy.length">
+            Out of
+            {{ numeral(fosUndergradCount).format() }} undergraduate
+            {{ fosUndergradCount == 1 ? "field" : "fields" }}
+            of study at {{ schoolName }}, the
+            {{
+              fieldsOfStudy.length < 10
+                ? fieldsOfStudy.length
+                : 10
+            }}
+            {{ hoistGroupText }} are shown below. ({{
+              hoistCount
+            }}
+            had relevant data on {{ hoistGroupData }}.)
+            <a :href="fieldsLink"
+              >See All Fields of Study &raquo;</a
             >
-              <v-row
-                no-gutters
-                class="my-0 d-none d-sm-flex"
-                align="center"
-              >
-                <v-col cols="12" sm="8" class="pa-2"
-                  >{{ fos.title.slice(0, -1) }} -
-                  {{ fos.credential.title }}</v-col
-                >
-                <v-col
-                  v-if="hoistCurrency"
-                  cols="12"
-                  class="medium-light-blue-text px-5 font-weight-bold"
-                  sm="4"
-                  >{{ numeral(fos.hoist).format("$0,0") }}</v-col
-                >
-                <v-col
-                  v-else
-                  cols="12"
-                  class="medium-light-blue-text px-5 font-weight-bold"
-                  sm="4"
-                  >{{ numeral(fos.hoist).format() }}</v-col
-                >
-              </v-row>
-              <div class="d-block d-sm-none my-2 mx-1 pl-0">
-                {{ fos.title.slice(0, -1) }} -
-                {{ fos.credential.title }}
-                <span
-                  v-if="hoistCurrency"
-                  class="medium-light-blue-text font-weight-bold"
-                  >({{ numeral(fos.hoist).format("$0,0") }})</span
-                >
-                <span
-                  v-else
-                  class="medium-light-blue-text font-weight-bold"
-                  >({{ numeral(selectedFieldOfStudy.hoist).format() }})</span
-                >
-              </div>
-            </v-expansion-panel-title>
-            <v-expansion-panel-text>
-              <ChartFieldDataExtended
-                :fos="fos"
-                :fos-salary-select="fieldDataExtendedSalarySelect"
-                :fos-salary-select-items="fosSalarySelectItems"
-                @update-salary-select="fieldDataExtendedSalarySelect = $event"
-                :fos-show-debt-prior-included.sync="fieldDataExtendedShowPrior"
-                @update-debt-show-prior="fieldDataExtendedShowPrior = $event"
-                :fields="fields"
-                class="mt-5"
-              />
-            </v-expansion-panel-text>
-          </v-expansion-panel>
-        </v-expansion-panels>
+          </p>
 
-        <div v-else>
-          <v-alert type="info" class="mt-3"
-            >There are no fields of study with data
-            available for {{ currentHoist }}.</v-alert
+          <SchoolPanelFieldOfStudyToggle
+            :display-toggle="true"
+            :control-tab="fieldSort"
+            @tab-change="handleToggle"
+            label="Sort By: "
+            class="pt-2 pb-2"
+          />
+
+          <v-row
+            class="mx-5 mt-5 d-none d-sm-flex"
+            v-if="fieldsOfStudy.length"
           >
-        </div>
-      </v-card></v-col
-    ></v-row
-  >
-  <v-row>
-    <v-col cols="12">
-      <v-card flat class="pa-4 fill-height">
-        <h2 class="mb-3">
-          Awards Offered
-        </h2>
-        <p>
-          {{ schoolName }} awards {{ schoolDegreeList }}.
-        </p>
-        <p class="text-left my-8">
-          <v-btn
-            color="secondary"
-            :href="fieldsLink"
+            <v-col
+              cols="12"
+              sm="8"
+              class="ma-0 px-2 pt-0 pb-3 font-weight-bold"
+              >Field of Study</v-col
+            >
+            <v-col
+              cols="12"
+              sm="4"
+              class="ma-0 pa-0 font-weight-bold"
+              >{{ currentHoist }}</v-col
+            >
+          </v-row>
+
+          <v-row
+            class="mx-0 mt-5 d-block d-sm-none"
+            v-if="fieldsOfStudy.length"
           >
-            See All Available Fields of Study
-          </v-btn>
-        </p>
-        <div class="pa-4 rounded yellow-warn mt-4 mb-8">
-          <strong>Note: </strong>These data were collected
-          from undergraduate students who received federal
-          financial aid.
-        </div>
-      </v-card>
-    </v-col>
-  </v-row>
+            <v-col
+              cols="12"
+              class="ma-0 px-2 py-2 font-weight-bold"
+              >Field of Study ({{ currentHoist }})</v-col
+            >
+          </v-row>
+
+          <v-expansion-panels
+            class="my-3"
+            v-if="fieldsOfStudy.length"
+          >
+            <v-expansion-panel
+              v-for="fos in fieldsOfStudy"
+              :key="fos.code + '-' + fos.credential.level"
+            >
+              <v-expansion-panel-title
+                class="py-0 pl-2 pl-sm-4"
+              >
+                <v-row
+                  no-gutters
+                  class="my-0 d-none d-sm-flex"
+                  align="center"
+                >
+                  <v-col cols="12" sm="8" class="pa-2"
+                    >{{ fos.title.slice(0, -1) }} -
+                    {{ fos.credential.title }}</v-col
+                  >
+                  <v-col
+                    v-if="hoistCurrency"
+                    cols="12"
+                    class="medium-light-blue-text px-5 font-weight-bold"
+                    sm="4"
+                    >{{ numeral(fos.hoist).format("$0,0") }}</v-col
+                  >
+                  <v-col
+                    v-else
+                    cols="12"
+                    class="medium-light-blue-text px-5 font-weight-bold"
+                    sm="4"
+                    >{{ numeral(fos.hoist).format() }}</v-col
+                  >
+                </v-row>
+                <div class="d-block d-sm-none my-2 mx-1 pl-0">
+                  {{ fos.title.slice(0, -1) }} -
+                  {{ fos.credential.title }}
+                  <span
+                    v-if="hoistCurrency"
+                    class="medium-light-blue-text font-weight-bold"
+                    >({{ numeral(fos.hoist).format("$0,0") }})</span
+                  >
+                  <span
+                    v-else
+                    class="medium-light-blue-text font-weight-bold"
+                    >({{ numeral(selectedFieldOfStudy.hoist).format() }})</span
+                  >
+                </div>
+              </v-expansion-panel-title>
+              <v-expansion-panel-text>
+                <ChartFieldDataExtended
+                  :fos="fos"
+                  :fos-salary-select="fieldDataExtendedSalarySelect"
+                  :fos-salary-select-items="fosSalarySelectItems"
+                  @update-salary-select="fieldDataExtendedSalarySelect = $event"
+                  :fos-show-debt-prior-included.sync="fieldDataExtendedShowPrior"
+                  @update-debt-show-prior="fieldDataExtendedShowPrior = $event"
+                  :fields="fields"
+                  class="mt-5"
+                />
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+          </v-expansion-panels>
+
+          <div v-else>
+            <v-alert type="info" class="mt-3"
+              >There are no fields of study with data
+              available for {{ currentHoist }}.</v-alert
+            >
+          </div>
+        </v-card></v-col
+      ></v-row
+    >
+    <v-row>
+      <v-col cols="12">
+        <v-card flat class="pa-4 fill-height">
+          <h2 class="mb-3">
+            Awards Offered
+          </h2>
+          <p>
+            {{ schoolName }} awards {{ schoolDegreeList }}.
+          </p>
+          <p class="text-left my-8">
+            <v-btn
+              color="secondary"
+              :href="fieldsLink"
+            >
+              See All Available Fields of Study
+            </v-btn>
+          </p>
+          <div class="pa-4 rounded bg-warning mt-4 mb-8">
+            <strong>Note: </strong>These data were collected
+            from undergraduate students who received federal
+            financial aid.
+          </div>
+        </v-card>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script setup>
@@ -444,5 +448,8 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-
+.field-of-study-search {
+  padding: 8px 24px 16px;
+  margin-bottom: 20px;
+}
 </style>

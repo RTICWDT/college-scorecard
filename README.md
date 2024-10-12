@@ -44,7 +44,6 @@ npm run preview
 
 - nuxt needs to be at version 3.13.1 right now as 3.13.2 introduces a regression that breaks the nuxt-leaflet module. when 3.14 comes along we can upgrade, as it was confirmed a [fix is coming](https://github.com/nuxt-modules/leaflet/issues/80#issuecomment-2376746166)
 
-
 ## CHECKLIST
 
 - [ ] API
