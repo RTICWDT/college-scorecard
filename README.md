@@ -1,4 +1,4 @@
-The [College Scorecard](https://github.com/rti-international/scorecard-website) using [Nuxt 3](https://nuxt.com/docs/getting-started/introduction).
+The [College Scorecard](https://github.com/rti-international/scorecard-website) transition project away from the [Gridsome Project](https://github.com/rti-international/scorecard-website)
 
 The transition includes:
 + Vue2 to [Vue3](https://vuejs.org/)
