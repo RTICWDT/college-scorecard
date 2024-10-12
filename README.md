@@ -1,4 +1,11 @@
-An attempt at recreating the [College Scorecard](https://github.com/rti-international/scorecard-website) using [Nuxt 3](https://nuxt.com/docs/getting-started/introduction).
+The [College Scorecard](https://github.com/rti-international/scorecard-website) using [Nuxt 3](https://nuxt.com/docs/getting-started/introduction).
+
+The transition includes:
++ Vue2 to [Vue3](https://vuejs.org/)
++ Vuetify2 to [Vuetify3](https://vuetifyjs.com/en/introduction/why-vuetify/#what-is-vuetify3f)
++ Gridsome to [Nuxt3](https://nuxt.com/)
++ Options API to [Composition API](https://vuejs.org/guide/extras/composition-api-faq.html#why-composition-api)
++ Vuex to [Pinia](https://pinia.vuejs.org/)
 
 ## Setup
 Make sure to install the dependencies:
@@ -85,4 +92,4 @@ npm run preview
   - [ ] Search Optimization / Refactor
   - [ ] Compare store composable interface
   - [ ] design color consistency check & stylesheet
-  - [ ] 
+  - [ ] Typescript?
