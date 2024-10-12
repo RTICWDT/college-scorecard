@@ -46,23 +46,50 @@ npm run preview
 
 ## CHECKLIST
 
-- [ ] API
-- [ ] Store
+- [x] API
+- [x] Store
 - [ ] SEO / Meta tags
 - [ ] Favicons
 - [ ] Analytics
-- Pages:
-  - [ ] Home
-  - [ ] Search Schools
-  - [ ] View School
-  - [ ] Search Fields of Study
+- [x] ChartJS Integration
+- [x] Leaflet Integration
+- [x] Vuetify Integration
+- [x] SCSS Integration
+
+- Layout
+  - [x] Header
+  - [x] Footer
+  - [x] Data Subnav
+  - [x] Search Subnav
+
+- Pages (first pass):
+  - [x] Home
+  - [x] Search Schools
+  - [x] View School
+  - [ ] View Field of Study
+  - [x] Search Fields of Study
   - [ ] Compare Schools
   - [ ] Compare Fields of Study
   - [x] Resources
-  - [ ] Data Download
-  - [ ] Data Documentation
-  - [ ] API Documentation
-  - [ ] Change Log
-  - [ ] Glossary
+  - [x] Data Download
+  - [x] Data Documentation
+  - [x] API Documentation
+  - [x] Change Log
+  - [x] Glossary
+  - [ ] Compare Drawer
 
-
+- Components
+  - [ ] Transition Away Notice
+  - [ ] Compare Drawer
+  - [ ] Tooltip Styling
+  
+- QA Pass
+  - [ ] Links / Downloads
+  - [ ] Images
+  - [ ] Routing
+  - [ ] 404
+  - [ ] Error Handling
+  - [ ] Design Pass
+  - [ ] SEO / Metatags
+  - [ ] Analytics Events
+  - [ ] Share Functionality

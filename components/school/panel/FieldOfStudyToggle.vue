@@ -66,14 +66,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['tab-change', 'update:modelValue'])
-
-const selected = ref(null)
-const active = ref(null)
-
-onMounted(() => {
-  // Note: Direct DOM manipulation is not recommended in Vue 3
-  // Consider using refs or other Vue 3 methods if this functionality is still needed
-})
 </script>
 
 <style lang="scss" scoped>
