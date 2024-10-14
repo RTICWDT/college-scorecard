@@ -1,8 +1,5 @@
-// composables/useSchool.js
-import _ from "lodash";
-
 export function useComplexFields(schoolProp) {
-  const { $url } = useNuxtApp();
+  // const { $url } = useNuxtApp();
   const { site, RELIGIOUS_AFFILIATIONS_BY_NUMBER } = useSiteData();
   const { fields, formMappings } = useConstants();
   const school = ref(schoolProp);

@@ -379,8 +379,6 @@ const {
   repaymentRates
 } = useComplexFields(props.school)
 
-console.log(repaymentRates.value)
-
 const showGradOnly = ref(false)
 const aidShowMedianDebtWithPrior = ref(false)
 const aidLoanSelect = ref("fed")

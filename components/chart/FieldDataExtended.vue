@@ -235,7 +235,6 @@ const props = defineProps({
 })
 
 const isBranch = computed(() => props.fos.school.main_campus === 0)
-
 const medianEarnings = computed(() => getNestedField(props.fos, fields.FOS_EARNINGS_FED_5YR))
 const medianDebt = computed(() => getNestedField(props.fos, fields.FOS_DEBT_MEDIAN))
 const medianPrior = computed(() => getNestedField(props.fos, fields.FOS_DEBT_MEDIAN_PRIOR))
@@ -258,6 +257,7 @@ const isSelectedFieldOfStudy = computed(() => {
 })
 
 const toggleFieldOfStudy = () => {
+  console.log(store.fos)
   store.toggleFieldOfStudy(props.fos)
 }
 </script>

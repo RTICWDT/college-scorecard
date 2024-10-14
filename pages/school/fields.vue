@@ -25,9 +25,7 @@
                 showCopy
                 class="flex-grow-1"
               />
-              <v-btn :href="schoolLink" text size="small"
-                >School Profile &raquo;</v-btn
-              >
+              <v-btn :href="schoolLink" variant="text" color="black" size="small">School Profile &raquo;</v-btn>
             </v-col>
           </v-row>
         </v-container>
@@ -38,7 +36,7 @@
             <div class="show-loaded" id="school">
               <!-- School Header Info -->
               <v-row>
-                <v-col cols="12" md="6" class="white--text">
+                <v-col cols="12" md="6" class="text-white">
                   <div v-if="school.id">
                     <p class="mb-3 text-uppercase">
                       All Fields of Study Offered at
@@ -54,12 +52,11 @@
                       <a
                         target="_blank"
                         :href="schoolUrl"
-                        class="white--text"
+                        class="text-white"
                         @click="transitionOutboundLink($event)"
-                        >{{ schoolUrlDisplay }}
-                        <v-icon size="x-small" class="pl-1" color="white">
-                          fas fa-external-link-alt
-                        </v-icon>
+                      >
+                        {{ schoolUrlDisplay }}
+                        <v-icon size="x-small" class="pl-1" color="white" icon="fa:fas fa-external-link-alt" />
                       </a>
                     </p>
                     <p
@@ -68,7 +65,7 @@
                     >
                       <v-chip color="error" label>
                         <strong>Under ED Monitoring</strong>
-                        <tooltip
+                        <Tooltip
                           definition="hcm2"
                           color="#FFFFFF"
                           class="ml-2"
@@ -78,27 +75,26 @@
                     </p>
                   </div>
                 </v-col>
+
                 <v-col cols="12" md="6">
                   <v-card class="pa-5">
                     <h2 class="mb-6 d-inline-block">
                       Filter Fields of Study Offered
                     </h2>
                     <v-avatar color="#fec005" size="40" class="ml-3">
-                      <v-icon color="black">
-                        fas fa-award
-                      </v-icon>
+                      <v-icon color="black" icon="fa:fas fa-award" />
                     </v-avatar>
                     <v-text-field
-                      outlined
+                      variant="outlined"
                       label="Search Fields of Study"
                       v-model="currentTextFilter"
                       clearable
                       hide-details="auto"
                       class="mb-4"
-                    ></v-text-field>
+                    />
                     <v-select
                       id="school-field-fos-degree"
-                      outlined
+                      variant="outlined"
                       :items="filters"
                       item-title="label"
                       item-value="value"
@@ -116,6 +112,7 @@
         </v-row>
       </v-container>
     </div>
+
     <v-container class="my-10">
       <div v-if="!school.id" class="show-loading">
         <h1 class="text-h6 text-center my-15">
@@ -150,53 +147,50 @@
             may be labeled "postbaccalaureate certificates" in other data
             sources.
           </v-alert>
+
           <h2 class="mb-4">{{ totalCount }} Results</h2>
-          <!-- Fields of Study -->
           <v-expansion-panels
             v-if="!isEmpty(processedPrograms)"
             v-model="panels"
             multiple
           >
             <v-expansion-panel
-              v-for="(prog, index) in processedPrograms"
+              v-for="(program, index) in processedPrograms"
               :key="index"
               class=""
             >
-              <v-expansion-panel-title>{{
-                useStartCase(useToLower(prog.name).slice(0, -1))
-              }}</v-expansion-panel-title>
+              <v-expansion-panel-title>
+                {{ useStartCase(useToLower(program.name).slice(0, -1)) }}
+              </v-expansion-panel-title>
+
               <v-expansion-panel-text>
                 <v-expansion-panels v-model="subpanel">
                   <v-expansion-panel
-                    v-for="fos in prog.fields"
+                    v-for="fos in program.fields"
                     :key="fos.code + '-' + fos.credential.level"
                   >
                     <v-expansion-panel-title>
-                      <span class="school-fields-fos-degree-title"
-                        >{{ fos.title.replace(/\.$/, "") }} -
-                        {{ fos.credential.title }}</span
-                      >
+                      <span class="school-fields-fos-degree-title">
+                        {{ fos.title.replace(/\.$/, "") }} - {{ fos.credential.title }}
+                      </span>
                     </v-expansion-panel-title>
+
                     <v-expansion-panel-text class="pa-0 ma-0">
                       <ChartFieldDataExtended
                         :fos="fos"
                         :fos-salary-select-items="fosSalarySelectItems"
                         :fos-salary-select="fieldDataExtendedSalarySelect"
-                        @update-salary-select="
-                          fieldDataExtendedSalarySelect = $event
-                        "
-                        :fos-show-debt-prior-included.sync="
-                          fieldDataExtendedShowPrior
-                        "
-                        @update-debt-show-prior="
-                          fieldDataExtendedShowPrior = $event
-                        "
+                        @update-salary-select="fieldDataExtendedSalarySelect = $event"
+                        :fos-show-debt-prior-included.sync="fieldDataExtendedShowPrior"
+                        @update-debt-show-prior="fieldDataExtendedShowPrior = $event"
                         :fields="fields"
                       />
                     </v-expansion-panel-text>
+
                   </v-expansion-panel>
                 </v-expansion-panels>
               </v-expansion-panel-text>
+
             </v-expansion-panel>
           </v-expansion-panels>
 
@@ -246,9 +240,7 @@ const panels = ref([])
 const num_panels = ref(0)
 const subpanel = ref(null)
 
-const programs = ref([])
-
-const currentFilter = ref(0)
+const currentFilter = ref()
 const currentTextFilter = ref('')
 const fieldDataExtendedSalarySelect = ref('aid')
 const fieldDataExtendedShowPrior = ref(false)
@@ -264,25 +256,23 @@ const {
   undergraduates,
   schoolUrl,
   schoolUrlDisplay,
-} = useComplexFields(school.value)
+} = useComplexFields(school)
 
 const processedPrograms = computed(() => {
-  let programs = useGet(school.value, 'latest.programs.cip_4_digit')
+  const programs = useGet(school.value, 'latest.programs.cip_4_digit')
   if (!programs) return null
 
-  let pp = {}
+  const pp = {}
 
   programs.forEach((program) => {
     if (program.credential.level == 3) {
       program.credential.title = "Bachelor's Degree"
     }
     if (
-      (!currentFilter.value ||
-        currentFilter.value == program.credential.level) &&
-      (!currentTextFilter.value ||
-        program.title.match(new RegExp(currentTextFilter.value, 'ig')))
+      (!currentFilter.value || currentFilter.value == program.credential.level) &&
+      (!currentTextFilter.value || program.title.match(new RegExp(currentTextFilter.value, 'ig')))
     ) {
-      let twodigit = program.code.substr(0, 2)
+      const twodigit = program.code.substr(0, 2)
       if (!pp[CIP2.value[twodigit]]) {
         pp[CIP2.value[twodigit]] = []
       }
@@ -290,25 +280,26 @@ const processedPrograms = computed(() => {
     }
   })
 
-  totalCount.value = 0
-  num_panels.value = 0
-  let sorted = []
-  for (var cipTwo in pp) {
-    sorted.push({
-      name: cipTwo,
-      fields: useSortBy(pp[cipTwo], ['title']),
-    })
-    totalCount.value += pp[cipTwo].length
-    num_panels.value++
-  }
+  const sorted = Object.entries(pp).map(([cipTwo, fields]) => ({
+    name: cipTwo,
+    fields: useSortBy(fields, ['title']),
+  }))
+
+  return useSortBy(sorted, ['name'])
+})
+
+watch(processedPrograms, (newValue) => {
+  if (!newValue) return
+
+  totalCount.value = newValue.reduce((sum, category) => sum + category.fields.length, 0)
+  num_panels.value = newValue.length
 
   if (currentTextFilter.value || currentFilter.value) {
     panels.value = [...Array(num_panels.value).keys()].map((k, i) => i)
   } else {
     panels.value = []
   }
-  return useSortBy(sorted, ['name'])
-})
+}, { immediate: true })
 
 const shareLink = computed(() => {
   return encodeURI(window.location.href) || null
@@ -324,7 +315,7 @@ const fieldOfStudySelectItems = computed(() => {
 })
 
 const organizeFieldsOfStudy = (availableFieldsOfStudy4, allCip2) => {
-  let processedPrograms = {}
+  let pp = {}
 
   availableFieldsOfStudy4.forEach((program) => {
     if (program.credential.level === 3) {
@@ -334,21 +325,21 @@ const organizeFieldsOfStudy = (availableFieldsOfStudy4, allCip2) => {
     let twodigit = program.code.substr(0, 2)
     if (
       useIncludes([1, 2, 3], program.credential.level) &&
-      !processedPrograms[allCip2[twodigit]]
+      !pp[allCip2[twodigit]]
     ) {
-      processedPrograms[allCip2[twodigit]] = []
+      pp[allCip2[twodigit]] = []
     }
 
     if (useIncludes([1, 2, 3], program.credential.level)) {
-      processedPrograms[allCip2[twodigit]].push(formatFOS(program))
+      pp[allCip2[twodigit]].push(formatFOS(program))
     }
   })
 
   let sorted = []
-  for (var cip2 in processedPrograms) {
+  for (var cip2 in pp) {
     sorted.push({
       name: formatCip2Title(cip2),
-      fields: useSortBy(processedPrograms[cip2], ["title"]),
+      fields: useSortBy(pp[cip2], ["title"]),
     })
   }
 
