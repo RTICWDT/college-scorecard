@@ -184,15 +184,24 @@ const school = ref(useMerge(props.fos.institution, props.fos.institution.school)
 const isSelected = computed(() =>  store.fos.find((fos) => fos.id === props.fos.unit_id));
 
 const {
-  zip,
-  city,
-  state,
-  schoolName,
-  schoolLink,
-  fieldsLink,
-  isBranch,
-  underInvestigation,
-} = useComplexFields(school);
+  zip: zipMethod,
+  city: cityMethod,
+  state: stateMethod,
+  schoolName: schoolNameMethod,
+  schoolLink: schoolLinkMethod,
+  underInvestigation: underInvestigationMethod,
+  fieldsLink: fieldsLinkMethod,
+  isBranch: isBranchMethod,
+} = useComplexFieldMethods()
+
+const isBranch = computed(() => isBranchMethod(props.school))
+const fieldsLink = computed(() => fieldsLinkMethod(props.school))
+const zip = computed(() => zipMethod(props.school))
+const city = computed(() => cityMethod(props.school))
+const state = computed(() => stateMethod(props.school))
+const schoolName = computed(() => schoolNameMethod(props.school))
+const schoolLink = computed(() => schoolLinkMethod(props.school))
+const underInvestigation = computed(() => underInvestigationMethod(props.school))
 
 const institution = computed(() => props.fos.institution);
 const totalFieldOfStudyCount = computed(() => store.fos.length);

@@ -210,20 +210,20 @@ const props = defineProps({
 const emit = defineEmits(['update:selectedFieldOfStudy']);
 const selectedFieldOfStudy = reactive({ text: "", value: null })
 
-const {
-  fields
-} = useConstants()
+const { fields } = useConstants()
+const { CIP2 } = useSiteData()
 
 const {
-  allFieldsOfStudy,
-  fieldsLink,
-  schoolDegreeList,
-  schoolName,
-} = useComplexFields(props.school)
+  allFieldsOfStudy: allFieldsOfStudyMethod,
+  fieldsLink: fieldsLinkMethod,
+  schoolDegreeList: schoolDegreeListMethod,
+  schoolName: schoolNameMethod,
+} = useComplexFieldMethods()
 
-const {
-  CIP2
-} = useSiteData()
+const allFieldsOfStudy = computed(() => allFieldsOfStudyMethod(props.school) )
+const fieldsLink = computed(() => fieldsLinkMethod(props.school))
+const schoolDegreeList = computed(() => schoolDegreeListMethod(props.school))
+const schoolName = computed(() => schoolNameMethod(props.school))
 
 const hoistCurrency = ref(false)
 const hoistGroupData = ref("numer of graduates")

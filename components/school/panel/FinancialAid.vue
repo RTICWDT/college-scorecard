@@ -365,19 +365,32 @@ const props = defineProps({
 })
 
 const {
-  aidFlag,
-  studentsReceivingLoans,
-  estimatedParentBorrowedText,
-  isBranch,
-  fieldsLink,
-  federalDebt,
-  parentPlusDebt,
-  parentPlusDebtAll,
-  monthlyLoanPayment,
-  parentPlusPayment,
-  parentPlusPaymentAll,
-  repaymentRates
-} = useComplexFields(props.school)
+  aidFlag: aidFlagMethod,
+  studentsReceivingLoans: studentsReceivingLoansMethod,
+  estimatedParentBorrowedText: estimatedParentBorrowedTextMethod,
+  isBranch: isBranchMethod,
+  fieldsLink: fieldsLinkMethod,
+  federalDebt: federalDebtMethod,
+  parentPlusDebt: parentPlusDebtMethod,
+  parentPlusDebtAll: parentPlusDebtAllMethod,
+  monthlyLoanPayment: monthlyLoanPaymentMethod,
+  parentPlusPayment: parentPlusPaymentMethod,
+  parentPlusPaymentAll: parentPlusPaymentAllMethod,
+  repaymentRates: repaymentRatesMethod,
+} = useComplexFieldMethods()
+
+const aidFlag = computed(() => aidFlagMethod(props.school))
+const studentsReceivingLoans = computed(() => studentsReceivingLoansMethod(props.school))
+const estimatedParentBorrowedText = computed(() => estimatedParentBorrowedTextMethod(props.school))
+const isBranch = computed(() => isBranchMethod(props.school))
+const fieldsLink = computed(() => fieldsLinkMethod(props.school))
+const federalDebt = computed(() => federalDebtMethod(props.school))
+const parentPlusDebt = computed(() => parentPlusDebtMethod(props.school))
+const parentPlusDebtAll = computed(() => parentPlusDebtAllMethod(props.school))
+const monthlyLoanPayment = computed(() => monthlyLoanPaymentMethod(props.school))
+const parentPlusPayment = computed(() => parentPlusPaymentMethod(props.school))
+const parentPlusPaymentAll = computed(() => parentPlusPaymentAllMethod(props.school))
+const repaymentRates = computed(() => repaymentRatesMethod(props.school))
 
 const showGradOnly = ref(false)
 const aidShowMedianDebtWithPrior = ref(false)

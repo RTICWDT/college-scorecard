@@ -4,35 +4,31 @@
   </div>
 
   <div v-else-if="institutions.all.length === 0">
-    No Schools found.
+      No Schools found.
+    </div>
+
+  <div v-else>
+
+  <div class="grid-container">
+    <v-card v-for="institution in institutions.all" class="pa-4 d-flex align-center">
+      <div class="mr-3 content">
+        <p class="text-body-2">{{ institution.school.name }}</p>
+      </div>
+      <div class="flex-grow-1" />
+      <v-btn
+        class="remove-btn"
+        color="primary"
+        icon="mdi-close"
+        size="x-small"
+        @click="() => { console.log('remove') }"
+      />
+    </v-card>
   </div>
 
-  <v-container>
-    <v-row>
-      <v-col
-        v-for="institution in institutions.all"
-        :key="institution.id"
-        cols="12"
-        sm="6"
-        md="4"
-        lg="3"
-      >
-        <v-card class="pa-4 d-flex align-center">
-          <div class="mr-3">
-            <p>{{ institution.school.name }}</p>
-          </div>
-          <div class="flex-grow-1" />
-          <v-btn
-            color="primary"
-            icon="mdi-close"
-            size="x-small"
-            @click="() => { console.log('remove') }"
-          />
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+    <hr />
+    <CompareSchoolsOverview :institutions="institutions" />
 
+  </div>
 </template>
 
 <script setup>
@@ -45,9 +41,10 @@ const { trackCompareList } = useAnalytics()
 const loading = ref(false)
 const institutions = ref({
   all: [],
-  "Certificate schools": [],
-  "2-year schools": [],
-  "4-year schools": [],
+  schoolsCertificate: [],
+  schools2Year: [],
+  schools4Year: [],
+
 })
 
 onMounted(() => {
@@ -68,13 +65,13 @@ const querySchools = async () => {
       const degree = useGet(institution, fields["PREDOMINANT_DEGREE"])
       switch (degree) {
         case 1:
-          institutions.value["Certificate schools"].push(institution)
+          institutions.value.schoolsCertificate.push(institution)
           break
         case 2:
-          institutions.value["2-year schools"].push(institution)
+          institutions.value.schools2Year.push(institution)
           break
         case 3:
-          institutions.value["4-year schools"].push(institution)
+          institutions.value.schools4Year.push(institution)
           break
       }
     })
@@ -87,5 +84,23 @@ const querySchools = async () => {
 </script>
 
 <style lang="scss" scoped>
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
 
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.remove-btn {
+  align-self: center;
+}
 </style>

@@ -235,7 +235,7 @@ const { fields, formMappings } = useConstants()
 const { apiGet } = useApi()
 const { CIP2 } = useSiteData()
 
-const school = ref({})
+const school = reactive({})
 const panels = ref([])
 const num_panels = ref(0)
 const subpanel = ref(null)
@@ -251,15 +251,22 @@ const fosSalarySelectItems = ref([
 const totalCount = ref(0)
 
 const {
-  allFieldsOfStudy,
-  schoolLink,
-  undergraduates,
-  schoolUrl,
-  schoolUrlDisplay,
-} = useComplexFields(school)
+  allFieldsOfStudy: allFieldsOfStudyMethod,
+  schoolLink: schoolLinkMethod,
+  undergraduates: undergraduatesMethod,
+  schoolUrl: schoolUrlMethod,
+  schoolUrlDisplay: schoolUrlDisplayMethod,
+} = useComplexFieldMethods()
+
+// Computed properties
+const allFieldsOfStudy = computed(() => allFieldsOfStudyMethod(school))
+const schoolLink = computed(() => schoolLinkMethod(school))
+const undergraduates = computed(() => undergraduatesMethod(school))
+const schoolUrl = computed(() => schoolUrlMethod(school))
+const schoolUrlDisplay = computed(() => schoolUrlDisplayMethod(school))
 
 const processedPrograms = computed(() => {
-  const programs = useGet(school.value, 'latest.programs.cip_4_digit')
+  const programs = useGet(school, 'latest.programs.cip_4_digit')
   if (!programs) return null
 
   const pp = {}
@@ -397,8 +404,8 @@ onMounted(async () => {
       return null
     }
 
-    school.value = response.results[0]
-    document.title = useGet(school.value, 'school.name') + ' | College Scorecard'
+    Object.assign(school, response.results[0])
+    document.title = useGet(school, 'school.name') + ' | College Scorecard'
 
     if (selectedFOS) {
       currentFilter.value = selectedFOS.credential

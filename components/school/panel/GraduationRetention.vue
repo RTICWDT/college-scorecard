@@ -60,8 +60,8 @@
             :median="{
               label:
                 'Midpoint: ' +
-                numeral(medianToggle === 'group' ? toggleGraduationRate[0] : toggleGraduationRate[1]).format('0%'),
-              value: medianToggle === 'group' ? toggleGraduationRate[0] * 100 : toggleGraduationRate[1] * 100,
+                numeral(medianToggle === 'group' ? computedToggleGraduationRate[0] : computedToggleGraduationRate[1]).format('0%'),
+              value: medianToggle === 'group' ? computedToggleGraduationRate[0] * 100 : computedToggleGraduationRate[1] * 100,
               style: { height: '60px' },
               show: !showPellOnlyGrad,
             }"
@@ -152,15 +152,20 @@ const props = defineProps({
 })
 
 const {
-  completionRate,
-  completionRatePell,
-  retentionRate,
-  completionRateFieldDefinition,
-  toggleGraduationRate
-} = useComplexFields(props.school)
+  completionRate: completionRateMethod,
+  completionRatePell: completionRatePellMethod,
+  retentionRate: retentionRateMethod,
+  completionRateFieldDefinition: completionRateFieldDefinitionMethod,
+  toggleGraduationRate: toggleGraduationRateMethod,
+} = useComplexFieldMethods()
+
+const completionRate = computed(() => completionRateMethod(props.school))
+const completionRatePell = computed(() => completionRatePellMethod(props.school))
+const retentionRate = computed(() => retentionRateMethod(props.school))
+const completionRateFieldDefinition = computed(() => completionRateFieldDefinitionMethod(props.school))
+const computedToggleGraduationRate = computed(() => toggleGraduationRateMethod(props.school))
 
 const { fields } = useConstants()
-
 
 // Reactive state
 const showPellOnlyGrad = ref(false)

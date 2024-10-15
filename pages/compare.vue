@@ -66,7 +66,7 @@
                 <v-tab>
                   <slot name="tab-school">
                     <h3 class="compare-tab-title">
-                      Schools
+                      Schools ({{ store.institutions.length }})
                     </h3>
                   </slot>
                 </v-tab>
@@ -74,7 +74,7 @@
                 <v-tab>
                   <slot name="tab-fos">
                     <h3 class="compare-tab-title pb-1">
-                      Fields of Study
+                      Fields of Study ({{ store.fos.length }})
                     </h3>
                   </slot>
                 </v-tab>

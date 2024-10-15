@@ -7,39 +7,33 @@
     No Fields of Study found.
   </div>
 
-  <v-container>
-    <v-row>
-      <v-col
-        v-for="fieldOfStudy in fieldsOfStudy"
-        :key="`${fieldOfStudy.id}${fieldOfStudy.code}`"
-        cols="12"
-        sm="6"
-        md="4"
-        lg="3"
-      >
-        <v-card class="pa-4 d-flex align-center">
-          <div>
-            <h4 class="text-body-2">
-              {{ formatFieldOfStudyTitle(fieldOfStudy.title) }}
-            </h4>
-            <span class="fos-uppercase-credential-title">
-              {{ formatFieldOfStudyCredentialTitle(fieldOfStudy["credential.title"]) }}
-            </span>
-            <br />
-            <span class="text-caption">
-              {{ fieldOfStudy["school.name"] }}
-            </span>
-          </div>
-          <v-btn
-            color="primary"
-            icon="mdi-close"
-            size="x-small"
-            @click="() => { console.log('remove') }"
-          />
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+  <div class="grid-container">
+    <v-card 
+      class="grid-item pa-4 mr-4 align-center"
+      v-for="fieldOfStudy in fieldsOfStudy"
+      :key="`${fieldOfStudy.id}${fieldOfStudy.code}`"
+    >
+      <div class="content">
+        <h4 class="text-body-2">
+          {{ formatFieldOfStudyTitle(fieldOfStudy.title) }}
+        </h4>
+        <span class="fos-uppercase-credential-title">
+          {{ formatFieldOfStudyCredentialTitle(fieldOfStudy["credential.title"]) }}
+        </span>
+        <br />
+        <span class="text-caption">
+          {{ fieldOfStudy["school.name"] }}
+        </span>
+      </div>
+      <v-btn
+        color="primary"
+        icon="mdi-close"
+        size="x-small"
+        @click="() => { console.log('remove') }"
+        class="remove-btn"
+      />
+    </v-card>
+  </div>
 
 </template>
 
@@ -109,6 +103,23 @@ const queryFieldsOfStudy = async () => {
 </script>
 
 <style lang="scss" scoped>
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
 
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
+.content {
+  flex-grow: 1;
+}
+
+.remove-btn {
+  align-self: flex-end;
+}
 </style>

@@ -219,7 +219,7 @@
               class="display-2 medium-light-blue-text font-weight-bold pb-3"
               v-if="medianEarnings"
             >
-              {{ medianEarnings | numeral(medianEarnings).format("$0,0") }}
+              {{ numeral(medianEarnings).format("$0,0") }}
             </h2>
             <div class="data-na pb-3" v-else>
               Data Not Available
@@ -318,16 +318,26 @@ const props = defineProps({
 })
 
 const {
-  groupName,
-  medianEarnings,
-  completionRateFieldDefinition,
-  completionRate,
-  isProgramReporter,
-  netPrice,
-  toggleGraduationRate,
-  toggleAverageAnnualCosts,
-  toggleMedianEarnings,
-} = useComplexFields(props.school)
+  groupName: groupNameMethod,
+  medianEarnings: medianEarningsMethod,
+  completionRateFieldDefinition: completionRateFieldDefinitionMethod,
+  completionRate: completionRateMethod,
+  isProgramReporter: isProgramReporterMethod,
+  netPrice: netPriceMethod,
+  toggleGraduationRate: toggleGraduationRateMethod,
+  toggleAverageAnnualCosts: toggleAverageAnnualCostsMethod,
+  toggleMedianEarnings: toggleMedianEarningsMethod,
+} = useComplexFieldMethods()
+
+const groupName = computed(() => groupNameMethod(props.school))
+const medianEarnings = computed(() => medianEarningsMethod(props.school))
+const completionRateFieldDefinition = computed(() => completionRateFieldDefinitionMethod(props.school))
+const completionRate = computed(() => completionRateMethod(props.school))
+const isProgramReporter = computed(() => isProgramReporterMethod(props.school))
+const netPrice = computed(() => netPriceMethod(props.school))
+const toggleGraduationRate = computed(() => toggleGraduationRateMethod(props.school))
+const toggleAverageAnnualCosts = computed(() => toggleAverageAnnualCostsMethod(props.school))
+const toggleMedianEarnings = computed(() => toggleMedianEarningsMethod(props.school))
 
 const medianToggle = ref("group")
 const controlTab = ref(0)

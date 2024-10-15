@@ -137,14 +137,22 @@ const props = defineProps({
 })
 
 const {
-  standardizedTestText,
-  standardizedTestValue,
-  satReading,
-  satMath,
-  act,
-  openAdmissions,
-  acceptanceRateActual,
-} = useComplexFields(props.school)
+  standardizedTestText: standardizedTestTextMethod,
+  standardizedTestValue: standardizedTestValueMethod,
+  satReading: satReadingMethod,
+  satMath: satMathMethod,
+  act: actMethod,
+  openAdmissions: openAdmissionsMethod,
+  acceptanceRateActual: acceptanceRateActualMethod,
+} = useComplexFieldMethods()
+
+const standardizedTestText = computed(() => standardizedTestTextMethod(props.school))
+const standardizedTestValue = computed(() => standardizedTestValueMethod(props.school))
+const satReading = computed(() => satReadingMethod(props.school))
+const satMath = computed(() => satMathMethod(props.school))
+const act = computed(() => actMethod(props.school))
+const openAdmissions = computed(() => openAdmissionsMethod(props.school))
+const acceptanceRateActual = computed(() => acceptanceRateActualMethod(props.school))
 </script>
 
 <style lang="scss">

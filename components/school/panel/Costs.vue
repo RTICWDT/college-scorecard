@@ -80,14 +80,14 @@
             />
           </h2>
           <h2 class="text-h6 my-3">
-            <span class="font-weight-bold medium-light-blue-text">{{ programReporter[0].title }}</span>
+            <span class="font-weight-bold medium-light-blue-text">{{ programReporter(school)[0].title }}</span>
           </h2>
           <h2 v-if="netPrice" class="text-h6 my-3">
             <span class="medium-light-blue-text font-weight-bold">
               {{ numeral(netPrice).format("$0,0") }}
             </span>
-            <span v-if="programReporter[0].annualized == programReporter[0].full_program">
-              for a {{ programReporter[0].avg_month_completion }}-month program
+            <span v-if="programReporter(school)[0].annualized == programReporter(school)[0].full_program">
+              for a {{ programReporter(school)[0].avg_month_completion }}-month program
             </span>
             <span v-else class="costDescription">
               per year on average
@@ -108,7 +108,7 @@
               :display-toggle="medianToggle"
               :control-tab="controlTab"
               @median-tab-change="handleMedianToggle"
-              :group-name="$filters.yearsText(groupName) + ' Schools'"
+              :group-name="yearsText(groupName) + ' Schools'"
             />
           </div>
           <v-row>
@@ -251,12 +251,20 @@ const props = defineProps({
 })
 
 const {
-  isProgramReporter,
-  netPrice,
-  income,
-  netPriceCalculatorUrl,
-  toggleAverageAnnualCosts,
-} = useComplexFields(props.school)
+  isProgramReporter: isProgramReporterMethod,
+  netPrice: netPriceMethod,
+  income: incomeMethod,
+  netPriceCalculatorUrl: netPriceCalculatorUrlMethod,
+  toggleAverageAnnualCosts: toggleAverageAnnualCostsMethod,
+  groupName: groupNameMethod,
+} = useComplexFieldMethods()
+
+const isProgramReporter = computed(() => isProgramReporterMethod(props.school))
+const income = computed(() => incomeMethod(props.school))
+const toggleAverageAnnualCosts = computed(() => toggleAverageAnnualCostsMethod(props.school))
+const netPriceCalculatorUrl = computed(() => netPriceCalculatorUrlMethod(props.school))
+const netPrice = computed(() => netPriceMethod(props.school))
+const groupName = computed(() => groupNameMethod(props.school))
 
 const { fields } = useConstants()
 
@@ -269,10 +277,6 @@ const fixedUrl = computed(() => {
   if (netPriceCalculatorUrl.value == "#") return false
   else if (netPriceCalculatorUrl.value.match(/^http/)) return netPriceCalculatorUrl.value
   else return "http://" + netPriceCalculatorUrl.value
-})
-
-const groupName = computed(() => {
-  return useGet(props.school.value, fields["PREDOMINANT_DEGREE"])
 })
 
 </script>

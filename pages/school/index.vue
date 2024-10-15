@@ -37,7 +37,7 @@
                 color="navyblue"
                 id="referrer-link"
                 class="link-more pl-1 pr-2"
-                @click="$router.back()"
+                @click="router.back()"
               >
                 &laquo; Back
               </v-btn>
@@ -281,18 +281,30 @@ const { apiGet } = useApi()
 const { smAndDown } = useDisplay()
 const { transitionOutboundLink, trackAccordion } = useAnalytics()
 
-const school = ref({})
+const school = reactive({})
+
 const {
-  underInvestigation,
-  schoolName,
-  schoolUrl,
-  schoolUrlDisplay,
-  undergraduates,
-  city,
-  state,
-  zip,
-  specialDesignations,
-} = useComplexFields(school)
+  underInvestigation: underInvestigationMethod,
+  schoolName: schoolNameMethod,
+  schoolUrl: schoolUrlMethod,
+  schoolUrlDisplay: schoolUrlDisplayMethod,
+  undergraduates: undergraduatesMethod,
+  city: cityMethod,
+  state: stateMethod,
+  zip: zipMethod,
+  specialDesignations: specialDesignationsMethod,
+} = useComplexFieldMethods()
+
+// Computed properties
+const underInvestigation = computed(() => underInvestigationMethod(school))
+const schoolName = computed(() => schoolNameMethod(school))
+const schoolUrl = computed(() => schoolUrlMethod(school))
+const schoolUrlDisplay = computed(() => schoolUrlDisplayMethod(school))
+const undergraduates = computed(() => undergraduatesMethod(school))
+const city = computed(() => cityMethod(school))
+const state = computed(() => stateMethod(school))
+const zip = computed(() => zipMethod(school))
+const specialDesignations = computed(() => specialDesignationsMethod(school))
 
 definePageMeta({ 
   middleware: 'school'
@@ -318,7 +330,7 @@ const schoolId = computed(() => {
 })
 
 const metaTagsTitle = computed(() => {
-  return school.value ? useGet(school.value, "school.name") + " | College Scorecard" : "College Scorecard"
+  return school ? useGet(school, "school.name") + " | College Scorecard" : "College Scorecard"
 })
 
 const shareLink = computed(() => {
@@ -390,7 +402,7 @@ onMounted(async () => {
       return null
     }
     
-    school.value = firstSchoolFound
+    Object.assign(school, firstSchoolFound)
 
     // if (selectedFOS.value) {
     //   panelsFOS.value = [0]

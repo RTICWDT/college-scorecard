@@ -125,19 +125,32 @@ const props = defineProps({
 
 const store = useCompareStore()
 
-const { 
-  completionRateOverall,
-  netPrice,
-  medianEarnings,
-  isProgramReporter,
-  isBranch,
-  completionRateFieldDefinition,
-  underInvestigation,
-  city,
-  state,
-  schoolName,
-  schoolLink,
-} = useComplexFields(props.school)
+const {
+  completionRateOverall: completionRateOverallMethod,
+  netPrice: netPriceMethod,
+  medianEarnings: medianEarningsMethod,
+  isProgramReporter: isProgramReporterMethod,
+  isBranch: isBranchMethod,
+  completionRateFieldDefinition: completionRateFieldDefinitionMethod,
+  underInvestigation: underInvestigationMethod,
+  city: cityMethod,
+  state: stateMethod,
+  schoolName: schoolNameMethod,
+  schoolLink: schoolLinkMethod,
+} = useComplexFieldMethods()
+
+// Computed properties
+const completionRateOverall = computed(() => completionRateOverallMethod(props.school))
+const netPrice = computed(() => netPriceMethod(props.school))
+const medianEarnings = computed(() => medianEarningsMethod(props.school))
+const isProgramReporter = computed(() => isProgramReporterMethod(props.school))
+const isBranch = computed(() => isBranchMethod(props.school))
+const completionRateFieldDefinition = computed(() => completionRateFieldDefinitionMethod(props.school))
+const underInvestigation = computed(() => underInvestigationMethod(props.school))
+const city = computed(() => cityMethod(props.school))
+const state = computed(() => stateMethod(props.school))
+const schoolName = computed(() => schoolNameMethod(props.school))
+const schoolLink = computed(() => schoolLinkMethod(props.school))
 
 const { fields } = useConstants() 
 

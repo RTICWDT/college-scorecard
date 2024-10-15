@@ -186,14 +186,23 @@ const props = defineProps({
 })
 
 const {
-  undergraduates,
-  fullTimeEnrollment,
-  partTimeEnrollment,
-  aidFlag,
-  socioEconomicDiversity,
-  studentRatio,
-  raceEthnicity,
-} = useComplexFields(props.school)
+  undergraduates: undergraduatesMethod,
+  fullTimeEnrollment: fullTimeEnrollmentMethod,
+  partTimeEnrollment: partTimeEnrollmentMethod,
+  aidFlag: aidFlagMethod,
+  socioEconomicDiversity: socioEconomicDiversityMethod,
+  studentRatio: studentRatioMethod,
+  raceEthnicity: raceEthnicityMethod,
+} = useComplexFieldMethods()
+
+// Computed properties
+const undergraduates = computed(() => undergraduatesMethod(props.school))
+const fullTimeEnrollment = computed(() => fullTimeEnrollmentMethod(props.school))
+const partTimeEnrollment = computed(() => partTimeEnrollmentMethod(props.school))
+const aidFlag = computed(() => aidFlagMethod(props.school))
+const socioEconomicDiversity = computed(() => socioEconomicDiversityMethod(props.school))
+const studentRatio = computed(() => studentRatioMethod(props.school))
+const raceEthnicity = computed(() => raceEthnicityMethod(props.school))
 
 const { fields } = useConstants()
 </script>

@@ -124,13 +124,20 @@
   })
 
   const {
-    isBranch,
-    groupName,
-    medianEarnings,
-    toggleMedianEarnings,
-    percentMoreThanHS,
-    fieldsLink,
-  } = useComplexFields(props.school)
+    isBranch: isBranchMethod,
+    groupName: groupNameMethod,
+    medianEarnings: medianEarningsMethod,
+    toggleMedianEarnings: toggleMedianEarningsMethod,
+    percentMoreThanHS: percentMoreThanHSMethod,
+    fieldsLink: fieldsLinkMethod,
+  } = useComplexFieldMethods()
+
+  const isBranch = computed(() => isBranchMethod(props.school))
+  const groupName = computed(() => groupNameMethod(props.school))
+  const medianEarnings = computed(() => medianEarningsMethod(props.school))
+  const toggleMedianEarnings = computed(() => toggleMedianEarningsMethod(props.school))
+  const percentMoreThanHS = computed(() => percentMoreThanHSMethod(props.school))
+  const fieldsLink = computed(() => fieldsLinkMethod(props.school))
 
   const medianToggle = ref('group')
   const handleMedianToggle = (toggleValue) => {
