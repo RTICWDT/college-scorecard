@@ -24,7 +24,7 @@
         </div>
       </div>
 
-      <p>{{ city }}, {{ state }} {{ zip }}</p>
+      <p class="mb-5">{{ city }}, {{ state }} {{ zip }}</p>
       <SmallSchoolIcons :school="school" :fields="fields" size="small" fos />
 
       <p v-if="underInvestigation === 1">
@@ -194,14 +194,15 @@ const {
   isBranch: isBranchMethod,
 } = useComplexFieldMethods()
 
-const isBranch = computed(() => isBranchMethod(props.school))
-const fieldsLink = computed(() => fieldsLinkMethod(props.school))
-const zip = computed(() => zipMethod(props.school))
-const city = computed(() => cityMethod(props.school))
-const state = computed(() => stateMethod(props.school))
-const schoolName = computed(() => schoolNameMethod(props.school))
-const schoolLink = computed(() => schoolLinkMethod(props.school))
-const underInvestigation = computed(() => underInvestigationMethod(props.school))
+
+const isBranch = computed(() => isBranchMethod(school.value))
+const fieldsLink = computed(() => fieldsLinkMethod(school.value))
+const zip = computed(() => zipMethod(school.value))
+const city = computed(() => cityMethod(school.value))
+const state = computed(() => stateMethod(school.value))
+const schoolName = computed(() => schoolNameMethod(school.value))
+const schoolLink = computed(() => schoolLinkMethod(school.value))
+const underInvestigation = computed(() => underInvestigationMethod(school.value))
 
 const institution = computed(() => props.fos.institution);
 const totalFieldOfStudyCount = computed(() => store.fos.length);
