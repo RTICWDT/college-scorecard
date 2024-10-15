@@ -30,9 +30,11 @@ export default defineNuxtPlugin((nuxtApp) => {
             tertiary: '#ebf0f3',
             darkgrey: '#6c737c',
             navyblue: '#026aa2',
+            darkblue: '#102E52',
             lightyellow: '#fffaeb',
             yellow: '#fdbf32',
             warning: '#fff3cf',
+            
           },
           variables: {
             'medium-emphasis-opacity': 1,

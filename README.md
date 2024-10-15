@@ -36,6 +36,18 @@ npm run preview
 
 - nuxt needs to be at version 3.13.1 right now as 3.13.2 introduces a regression that breaks the nuxt-leaflet module. when 3.14 comes along we can upgrade, as it was confirmed a [fix is coming](https://github.com/nuxt-modules/leaflet/issues/80#issuecomment-2376746166)
 
+## Compare Notes
+
+
+1. check parameters -- load schools and fields of study from this list first
+2. if no parameters -- load from compare store
+
+3. if parameters loaded in && they don't match store values: alert user to them viewing a shared comparison and ask them to update the store (aka 'their list')
+
+
+
+
+
 ## Migration Checklist
 
 - [x] API

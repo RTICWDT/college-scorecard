@@ -33,9 +33,8 @@
           <v-row>
             <v-col class="pa-0 text-right d-flex align-center justify-sm-end justify-space-evenly">
               <v-btn
-                small
+                size="small"
                 color="navyblue"
-                text
                 id="referrer-link"
                 class="link-more pl-1 pr-2"
                 @click="$router.back()"
