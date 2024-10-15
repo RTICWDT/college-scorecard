@@ -83,21 +83,23 @@
 
 
             <!--Loader-->
-            <div v-show="loading" class="show-loading ma-4">
+            <!-- <div v-show="loading" class="show-loading ma-4">
               <div class="pa-5">
                 <h1 class="title">
                   Loading
                   <v-icon color="darkblue" class="ml-2" size="x-small" icon="fa:fas fa-circle-notch fa-spin"/>
                 </h1>
               </div>
-            </div>
+            </div> -->
 
 
-            <div v-show="isComparingSchools">
+            <div v-show="isComparingSchools" class="px-4">
+              <Spacer :height="20" />
               <CompareSchools />
             </div>
 
-            <div v-show="isComparingFieldsOfStudy">
+            <div v-show="isComparingFieldsOfStudy" class="px-4">
+              <Spacer :height="20" />
               <CompareFieldsOfStudy />
             </div>
         </v-card>
@@ -136,8 +138,8 @@ const { trackCompareList } = useAnalytics()
 const toggleFields = ['institutions', 'fos']
 const compareToggle = ref(Math.max(toggleFields.indexOf(route.query.toggle), 0))
 
-const schools = ref([])
-const fieldsOfStudy = ref([])
+// const schools = ref([])
+// const fieldsOfStudy = ref([])
 
 const isComparingSchools = computed(() => route.query.toggle === 'institutions')
 const isComparingFieldsOfStudy = computed(() => route.query.toggle === 'fos')
@@ -147,49 +149,6 @@ const handleCompareToggle = (value) => {
   compareToggle.value = value
   router.replace({ query: { toggle } })
 }
-
-onMounted(() => {
-
-  
-  // let schoolParams = route.query.institutions || store.institutions.map(school => school.schoolId)
-  // let fieldOfStudyParams = route.query.fos || store.fieldsOfStudy.map(fos => fos.id)
-
-  // debugger
-
-  let params = {}
-  params[fields.OPERATING] = 1
-  params[fields.SIZE + "__range"] = "0.."
-  params[fields.PREDOMINANT_DEGREE + "__range"] = "1..3"
-  params[fields.ID + "__range"] = "..999999"
-  params["fields"] = "latest,school,id,location"
-  params["keys_nested"] = true
-  params["all_programs"] = true
-
-  // let schoolArray = []
-  // let paramArray = []
-
-  // if (passedSchools.value.length > 0) {
-  //   passedSchools.value.forEach(id => {
-  //     if (parseInt(id)) {
-  //       schoolArray.push(parseInt(id))
-  //       paramArray.push({ id: parseInt(id) })
-  //     }
-  //   })
-  // } else {
-  //   compareSchools.value.forEach(school => {
-  //     let id = +school.schoolId || +school
-  //     schoolArray.push(id)
-  //     paramArray.push({ id: id })
-  //   })
-  //   modifyUrl()
-  // }
-
-  // console.log(params)
-
-})
-
-
-
 
 
 
