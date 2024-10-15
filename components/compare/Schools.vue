@@ -20,7 +20,7 @@
         color="primary"
         icon="mdi-close"
         size="x-small"
-        @click="() => { console.log('remove') }"
+        @click="removeSchool(institution)"
       />
     </v-card>
   </div>
@@ -39,7 +39,7 @@ const { apiGetAll } = useApi()
 const { fields } = useConstants()
 const { trackCompareList } = useAnalytics()
 const loading = ref(false)
-const institutions = ref({
+const institutions = reactive({
   all: [],
   schoolsCertificate: [],
   schools2Year: [],
@@ -59,19 +59,19 @@ const querySchools = async () => {
     loading.value = true
     const responses = await apiGetAll("/schools/", paramArray)
     
-    institutions.value.all = responses.map(response => response.results[0]).filter(Boolean)
+    institutions.all = responses.map(response => response.results[0]).filter(Boolean)
 
-    institutions.value.all.forEach((institution) => {
+    institutions.all.forEach((institution) => {
       const degree = useGet(institution, fields["PREDOMINANT_DEGREE"])
       switch (degree) {
         case 1:
-          institutions.value.schoolsCertificate.push(institution)
+          institutions.schoolsCertificate.push(institution)
           break
         case 2:
-          institutions.value.schools2Year.push(institution)
+          institutions.schools2Year.push(institution)
           break
         case 3:
-          institutions.value.schools4Year.push(institution)
+          institutions.schools4Year.push(institution)
           break
       }
     })
@@ -80,6 +80,17 @@ const querySchools = async () => {
   } finally {
     loading.value = false
   }
+}
+
+const removeSchool = (school) => {
+  Object.assign(institutions, {
+    all: institutions.all.filter((institution) => institution.id !== school.id),
+    schoolsCertificate: institutions.schoolsCertificate.filter((institution) => institution.id !== school.id),
+    schools2Year: institutions.schools2Year.filter((institution) => institution.id !== school.id),
+    schools4Year: institutions.schools4Year.filter((institution) => institution.id !== school.id),
+  })
+
+  store.removeSchool(school)
 }
 </script>
 

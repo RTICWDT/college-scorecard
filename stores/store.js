@@ -35,6 +35,14 @@ export const useCompareStore = defineStore('compare', {
       }
     },
 
+    removeSchool(obj) {
+      const index = this.institutions.findIndex(inst => inst.schoolId === (obj.schoolId || obj.id))
+      
+      if (index !== -1) {
+        this.institutions.splice(index, 1)
+      }
+    },
+
     toggleFieldOfStudy(obj) {
       let entry;
       if (obj.fosTitle) {
