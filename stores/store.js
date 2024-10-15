@@ -63,6 +63,16 @@ export const useCompareStore = defineStore('compare', {
       }
     },
 
+    removeFieldOfStudy(obj) {
+      const index = this.fos.findIndex(fos => 
+        fos.code === obj.code && fos.id === obj.id && fos.credentialLevel === obj.credentialLevel
+      )
+      
+      if (index !== -1) {
+        this.fos.splice(index, 1)
+      }
+    },
+
     toggleDrawer(value = null) {
       if (value != null) {
         this.drawerOpen = value

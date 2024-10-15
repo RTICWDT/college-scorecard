@@ -257,7 +257,6 @@ const isSelectedFieldOfStudy = computed(() => {
 })
 
 const toggleFieldOfStudy = () => {
-  console.log(store.fos)
   store.toggleFieldOfStudy(props.fos)
 }
 </script>

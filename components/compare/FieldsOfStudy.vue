@@ -9,29 +9,33 @@
 
   <div class="grid-container">
     <v-card 
-      class="grid-item pa-4 mr-4 align-center"
+      class="grid-item pa-4 mr-4"
       v-for="fieldOfStudy in fieldsOfStudy"
       :key="`${fieldOfStudy.id}${fieldOfStudy.code}`"
     >
-      <div class="content">
-        <h4 class="text-body-2">
-          {{ formatFieldOfStudyTitle(fieldOfStudy.title) }}
-        </h4>
-        <span class="fos-uppercase-credential-title">
-          {{ formatFieldOfStudyCredentialTitle(fieldOfStudy["credential.title"]) }}
-        </span>
-        <br />
-        <span class="text-caption">
-          {{ fieldOfStudy["school.name"] }}
-        </span>
+      <div class="content d-flex">
+        <div>
+          <h4 class="text-body-2">
+            {{ formatFieldOfStudyTitle(fieldOfStudy.title) }}
+          </h4>
+          <span class="fos-uppercase-credential-title">
+            {{ formatFieldOfStudyCredentialTitle(fieldOfStudy.credential.title) }}
+          </span>
+          <br />
+          <span class="text-caption">
+            {{ fieldOfStudy.school.name }}
+          </span>
+        </div>
+        <div class="flex-grow-1" />
+        <v-btn
+          color="primary"
+          icon="mdi-close"
+          size="x-small"
+          @click="removeFieldOfStudy(fieldOfStudy)"
+          class="remove-btn ml-4"
+        />
       </div>
-      <v-btn
-        color="primary"
-        icon="mdi-close"
-        size="x-small"
-        @click="() => { console.log('remove') }"
-        class="remove-btn"
-      />
+
     </v-card>
   </div>
 
@@ -45,7 +49,7 @@ const { apiGetAll } = useApi()
 const { fields } = useConstants()
 const loading = ref(false)
 const fieldsOfStudy = ref([])
-import { formatFieldOfStudyTitle, formatFieldOfStudyCredentialTitle } from '#imports';
+import { formatFieldOfStudyTitle, formatFieldOfStudyCredentialTitle, unflattenObject } from '#imports';
 
 onMounted(() => {
   queryFieldsOfStudy()
@@ -86,10 +90,13 @@ const queryFieldsOfStudy = async () => {
 
     fieldsOfStudy.value = responses.map(function(response) {
       if (response.results[0]) {
-        return response.results[0]["latest.programs.cip_4_digit"][0]
+        const obj = response.results[0]["latest.programs.cip_4_digit"][0]
+        const unflattened = unflattenObject(obj)
+        unflattened.id = obj.unit_id
+        unflattened.credentialLevel = unflattened.credential.level
+        return unflattened
       }
     })
-
 
     // responseCache.value.fieldsOfStudy = responses
     //   .map(response => response.data.results[0]?.["latest.programs.cip_4_digit"][0])
@@ -99,6 +106,14 @@ const queryFieldsOfStudy = async () => {
   } finally {
     loading.value = false
   }
+}
+
+const removeFieldOfStudy = (fieldOfStudy) => {
+  fieldsOfStudy.value = fieldsOfStudy.value.filter((fos) => {
+    return fos.id !== fieldOfStudy.id || fos.code !== fieldOfStudy.code || fos.credential.level !== fieldOfStudy.credential.level
+  })
+
+  store.removeFieldOfStudy(fieldOfStudy)
 }
 </script>
 
@@ -120,6 +135,6 @@ const queryFieldsOfStudy = async () => {
 }
 
 .remove-btn {
-  align-self: flex-end;
+  align-self: center;
 }
 </style>
