@@ -15,9 +15,10 @@
     <CompareSchoolsDataSection :institutions="institutions">
       <template #byline="{ groupName, institution }">
         <p class="text-caption text-right">
-          <em>National {{ medianToggle === 'group' ? groupName : '' }} Midpoint: {{ numeral(netPriceGroupMidpoint(institution)).format('$0,0') }}</em>
+          <em>National {{ medianToggle === 'group' ? groupName : '' }} Midpoint: {{ numeral(netPriceMidpoint(institution)).format('$0,0') || "N/A" }}</em>
         </p>
       </template>
+
       <template #data="{ institution }">
         <ChartHorizontalBarMedian
           v-if="netPrice(institution)"
@@ -47,13 +48,41 @@
     </CompareSchoolsDataSection>
   </div>
 
-  <h2>Graduation Rate</h2>
+  <h2 class="mb-5">Graduation Rate</h2>
+
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
+      <template #byline="{ groupName, institution }">
+        <p class="text-caption text-right">
+          <em>National {{ medianToggle === 'group' ? groupName : '' }} Midpoint: {{ numeral(completionRateMidpoint(institution)).format('0%') || "N/A" }}</em>
+        </p>
+      </template>
+
       <template #data="{ institution }">
-        <div class="institution-card">
-          {{ completionRate(institution) }}
-        </div>
+        <ChartHorizontalBarMedian
+          v-if="completionRate(institution)"
+          :value="{
+            label: numeral(completionRate(institution)).format('0%'),
+            value: completionRate(institution),
+          }"
+          :min="{
+            label: '0%',
+            value: 0,
+            style: { height: '60px' },
+          }"
+          :max="{
+            label: '100%',
+            value: 1,
+            style: { height: '60px' },
+          }"
+          :median="{
+            label: 'Midpoint',
+            value: completionRateMidpoint(institution),
+            style: { height: '60px' },
+            show: true,
+          }"
+        />
+        <div class="data-na" v-else>Data Not Available</div>
       </template>
     </CompareSchoolsDataSection>
   </div>
@@ -62,10 +91,13 @@
 
   <div class="px-0 px-md-5">
     <CompareSchoolsDataSection :institutions="institutions">
-      <template #data="{ institution }">
-        <div>
-          {{ institution.school.name }}
-        </div>
+      <template #byline="{ groupName, institution }">
+        <p class="text-caption text-right">
+          <em>National {{ medianToggle === 'group' ? groupName : '' }} Midpoint: {{ numeral(medianEarningsMidpoint(institution)).format('$0,0') || "N/A" }}</em>
+        </p>
+      </template>
+
+      <template #data="{ institution }">      
         <ChartHorizontalBarMedian
           v-if="medianEarnings(institution)"
           :value="{
@@ -78,7 +110,7 @@
             style: { height: '60px' },
           }"
           :max="{
-            label: '$100,000+',
+            label: '$100,000',
             value: 100000,
             style: { height: '60px' },
           }"
@@ -88,16 +120,6 @@
             style: { height: '60px' },
             show: true,
           }"
-          :upperTipStyleOverride="{
-            display: 'none',
-          }"
-          color="#00365e"
-          :height="500"
-          :y-bar-thickness="50"
-          :label-font-size="24"
-          :labels="true"
-          class="pt-3"
-          style="height:100px"
         />
       </template>
     </CompareSchoolsDataSection>
@@ -106,15 +128,20 @@
 
 <script setup>
 import numeral from 'numeral'
-const { netPrice, medianEarnings, completionRate, toggleMedianEarnings, toggleAverageAnnualCosts } = useComplexFieldMethods()
+const {
+  netPrice,
+  medianEarnings,
+  completionRate,
+  toggleMedianEarnings,
+  toggleAverageAnnualCosts,
+  toggleGraduationRate
+} = useComplexFieldMethods()
 const { fields } = useConstants()
 const props = defineProps({
   institutions: Object,
 });
 
 const medianToggle = ref('group')
-
-
 const handleMedianToggle = (toggleValue) => {
   medianToggle.value = toggleValue === 0 ? "group" : "all"
 }
@@ -129,10 +156,10 @@ const netPriceMidpoint = (institution) => {
   return medianToggle.value === 'group' ? netPrice[0] : netPrice[1]
 }
 
-const netPriceGroupMidpoint = (institution) => {
-  return medianToggle.value === 'group' ?  useGet(institution, fields['AVG_COST_MIDPOINT_PRED_DEGREE']) :  useGet(institution, fields['AVG_COST_MIDPOINT_ALL'])
+const completionRateMidpoint = (institution) => {
+  const completionRate = toggleGraduationRate(institution)
+  return medianToggle.value === 'group' ? completionRate[0] : completionRate[1]
 }
-
 </script>
 
 <style lang="scss" scoped>
