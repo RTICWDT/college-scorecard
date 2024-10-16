@@ -207,7 +207,7 @@
   </v-main>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .school-heading {
   background-color: variables.$bg-blue;
 }

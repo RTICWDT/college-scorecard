@@ -179,23 +179,23 @@ const styleValueLabel = (obj, fixLabels = false) => {
 
   if (85 < left && obj.label) {
     if (breakpoint.value === 'xl') {
-      if (obj.label.includes("$")) newObj.styles.left = left - 15 + "%";
+      if (obj.label.includes("$")) newObj.styles.left = left - 9 + "%";
       else newObj.styles.left = left - 10 + "%";
     }
     else if (breakpoint.value === 'lg') {
-      if (obj.label.includes("$")) newObj.styles.left = left - 15 + "%";
+      if (obj.label.includes("$")) newObj.styles.left = left - 10 + "%";
       else newObj.styles.left = left - 10 + "%";
     }
     else if (breakpoint.value === 'md') {
-      if (obj.label.includes("$")) newObj.styles.left = left - 27 + "%";
+      if (obj.label.includes("$")) newObj.styles.left = left - 13 + "%";
       else newObj.styles.left = left - 15 + "%";
     }
     else if (breakpoint.value === 'sm') {
-      if (obj.label.includes("$")) newObj.styles.left = left - 37 + "%";
+      if (obj.label.includes("$")) newObj.styles.left = left - 21 + "%";
       else newObj.styles.left = left - 12 + "%";
     }
     else if (breakpoint.value === 'xs') {
-      if (obj.label.includes("$")) newObj.styles.left = left - 57 + "%";
+      if (obj.label.includes("$")) newObj.styles.left = left - 40 + "%";
       else newObj.styles.left = left - 15 + "%";
     }
     else {

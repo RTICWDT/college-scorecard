@@ -19,7 +19,7 @@
 </template>
 
 <!-- the glossary doesn't inherit the styles of a scoped stylesheets, hence these class-scoped override -->
-<style lang="scss">
+<style lang="scss" scoped>
 div.glossary-text-4f5ai {
   font-size: 1rem;
   line-height: 1.5;

@@ -66,7 +66,7 @@ watch(activeTab, (newTab) => {
 
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .tab-border-bottom {
   position: absolute;
   width: 100%;

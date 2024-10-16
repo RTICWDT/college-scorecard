@@ -207,7 +207,7 @@ const raceEthnicity = computed(() => raceEthnicityMethod(props.school))
 const { fields } = useConstants()
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .medium-light-blue-text {
   // color: variables.$medium-blue;
 }

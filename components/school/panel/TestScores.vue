@@ -155,7 +155,7 @@ const openAdmissions = computed(() => openAdmissionsMethod(props.school))
 const acceptanceRateActual = computed(() => acceptanceRateActualMethod(props.school))
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .data-na {
   // color: variables.$gray-500;
 }

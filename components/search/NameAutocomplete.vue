@@ -35,7 +35,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-application .institution-search-color--text {
   color: variables.$darker-green !important;
 }

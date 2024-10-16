@@ -329,7 +329,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #homeIndexSearch {
   .v-tabs-window .v-card {
     border-top-left-radius: 0px;

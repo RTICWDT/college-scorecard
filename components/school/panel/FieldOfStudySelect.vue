@@ -189,7 +189,7 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .field-of-study-select-search-container {
   .v-field--variant-outlined .v-field__outline {
     color: var(--fos-color-gold) !important;
