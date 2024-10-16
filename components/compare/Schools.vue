@@ -25,7 +25,7 @@
     </v-card>
   </div>
 
-    <hr />
+    <hr class="my-8"/>
     <CompareSchoolsOverview :institutions="institutions" />
 
   </div>

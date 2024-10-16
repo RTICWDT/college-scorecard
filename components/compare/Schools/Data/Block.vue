@@ -1,6 +1,10 @@
 <template>
   <div v-if="institutions.length > 0">
-    <h4 class="text-overline">{{ title }}</h4>
+    <div class="d-flex">
+      <h4 class="text-overline">{{ title }}</h4>
+      <div class="flex-grow-1" />
+      <slot name="byline" :groupName="titleShorthand()" :institution="institutions[0]"></slot> 
+    </div>
     <div class="py-3">
       <div 
         v-for="institution in institutions" 
@@ -9,7 +13,7 @@
         @click="(event) => toggleHighlight(event, institution)"
       >
         <NuxtLink class="font-weight-bold text-body-2" :to="schoolLink(institution)">
-          {{ institution.title }} - {{ institution.school.name }}
+          {{ institution.school.name }}
         </NuxtLink>
         <Spacer :height="10" />
         <slot name="data" :institution="institution"></slot>
@@ -26,11 +30,14 @@ const props = defineProps({
   title: String,
 });
 
+const titleShorthand = () => {
+  return props.title.split(' ')[0]
+}
+
 const toggleHighlight = (event, institution) => {
   if (event.target.href) { return }
   store.highlightedInstitution === institution ? store.highlightedInstitution = null : store.highlightedInstitution = institution
 }
-
 </script>
 
 <style scoped lang="scss">
