@@ -7,7 +7,7 @@
       <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarMedian
-            v-if="medianEarnings(fos)"
+            :shouldRender="medianEarnings(fos)"
             :value="{
               label: numeral(medianEarnings(fos)).format('$0,0'),
               value: medianEarnings(fos),
@@ -27,7 +27,6 @@
             :label-font-size="24"
             :labels="true"
           />
-          <div class="data-na" v-else>Data Not Available</div>
         </template>
       </CompareFieldsOfStudyDataSection>
     </div>
@@ -37,7 +36,7 @@
       <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarMedian
-            v-if="monthlyEarnings(fos)"
+            :shouldRender="monthlyEarnings(fos)"
             :value="{
               label: numeral(monthlyEarnings(fos)).format('$0,0'),
               value: monthlyEarnings(fos),
@@ -57,7 +56,6 @@
             :label-font-size="24"
             :labels="true"
           />
-          <div class="data-na" v-else>Data Not Available</div>
         </template>
       </CompareFieldsOfStudyDataSection>
     </div>

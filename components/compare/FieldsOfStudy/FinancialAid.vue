@@ -25,7 +25,7 @@
       <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarMedian
-            v-if="medianTotalDebt(fos)"
+            :shouldRender="medianTotalDebt(fos)"
             :value="{
               label: numeral(medianTotalDebt(fos)).format('$0,0'),
               value: medianTotalDebt(fos),
@@ -45,13 +45,10 @@
             :label-font-size="24"
             :labels="true"
           />
-          <div class="data-na" v-else>Data Not Available</div>
         </template>
       </CompareFieldsOfStudyDataSection>
     </div>
   </div>
-
-
 
   <div class="px-0 px-md-5">
     <h3 class="mb-3">Monthly Loan Payment</h3>
@@ -77,7 +74,7 @@
       <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarMedian
-            v-if="medianTotalMonthlyDebt(fos)"
+            :shouldRender="medianTotalMonthlyDebt(fos)"
             :value="{
               label: numeral(medianTotalMonthlyDebt(fos)).format('$0,0'),
               value: medianTotalMonthlyDebt(fos),
@@ -97,7 +94,6 @@
             :label-font-size="24"
             :labels="true"
           />
-          <div class="data-na" v-else>Data Not Available</div>
         </template>
       </CompareFieldsOfStudyDataSection>
     </div>

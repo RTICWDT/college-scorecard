@@ -6,7 +6,7 @@
       <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarMedian
-            v-if="gradCount(fos)"
+            :shouldRender="gradCount(fos)"
             :value="{
               label: numeral(gradCount(fos)).format(),
               value: gradCount(fos),
@@ -26,7 +26,6 @@
             :label-font-size="24"
             :labels="true"
           />
-          <div class="data-na" v-else>Data Not Available</div>
         </template>
       </CompareFieldsOfStudyDataSection>
     </div>

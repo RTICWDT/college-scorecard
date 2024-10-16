@@ -7,7 +7,7 @@
   />
 
   <h2 class="mb-1 mt-7">Average Annual Cost</h2>
-  <p style="max-width: 800px">Cost includes tuition, living costs, books and supplies, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
+  <p class="mb-5" style="max-width: 800px">Cost includes tuition, living costs, books and supplies, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
 
   <Spacer :height="20" />
 
@@ -21,7 +21,7 @@
 
       <template #data="{ institution }">
         <ChartHorizontalBarMedian
-          v-if="netPrice(institution)"
+          :shouldRender="netPrice(institution)"
           :value="{
             label: numeral(netPrice(institution)).format('$0,0'),
             value: netPrice(institution),
@@ -43,7 +43,6 @@
             show: true,
           }"
         />
-        <div class="data-na" v-else>Data Not Available</div>
       </template>
     </CompareSchoolsDataSection>
   </div>
@@ -60,7 +59,7 @@
 
       <template #data="{ institution }">
         <ChartHorizontalBarMedian
-          v-if="completionRate(institution)"
+          :shouldRender="completionRate(institution)"
           :value="{
             label: numeral(completionRate(institution)).format('0%'),
             value: completionRate(institution),
@@ -82,7 +81,6 @@
             show: true,
           }"
         />
-        <div class="data-na" v-else>Data Not Available</div>
       </template>
     </CompareSchoolsDataSection>
   </div>

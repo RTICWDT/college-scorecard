@@ -28,7 +28,7 @@
   </div>
 
 
-  <v-container class="mt-5 mb-10">
+  <v-container class="mt-5 mb-0">
     <v-row>
       <v-col>
         <v-card flat v-show="showShareUpdate" class="pa-5">
@@ -93,6 +93,9 @@
       </v-col>
     </v-row>
   </v-container>
+
+  <!-- The accordion contents of Compare Schools is rendered here via the vue Teleport component -->
+  <v-container id="teleport-accordion-container" />
 
   <LayoutFooterCTA />
 </template>

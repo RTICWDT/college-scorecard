@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="value">
+    <div v-if="shouldRender">
       <ChartHorizontalBarRange
         :lower="{ value: 0, label: '0' }"
         :upper="value"
@@ -21,6 +21,9 @@
 
 <script setup>
 const props = defineProps({
+  shouldRender: {
+    default: true,
+  },
   min: {
     type: Object,
     default: () => ({ value: 0, label: "$0" }),

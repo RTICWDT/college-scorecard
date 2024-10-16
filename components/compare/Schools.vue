@@ -4,29 +4,111 @@
   </div>
 
   <div v-else-if="institutions.all.length === 0">
-      No Schools found.
-    </div>
+    No Schools found.
+  </div>
 
   <div v-else>
 
-  <div class="grid-container">
-    <v-card v-for="institution in institutions.all" class="pa-4 d-flex align-center">
-      <div class="mr-3 content">
-        <p class="text-body-2">{{ institution.school.name }}</p>
-      </div>
-      <div class="flex-grow-1" />
-      <v-btn
-        class="remove-btn"
-        color="primary"
-        icon="mdi-close"
-        size="x-small"
-        @click="removeSchool(institution)"
-      />
-    </v-card>
-  </div>
+    <div class="grid-container">
+      <v-card v-for="institution in institutions.all" class="pa-4 d-flex align-center">
+        <div class="mr-3 content">
+          <p class="text-body-2">{{ institution.school.name }}</p>
+        </div>
+        <div class="flex-grow-1" />
+        <v-btn
+          class="remove-btn"
+          color="primary"
+          icon="mdi-close"
+          size="x-small"
+          @click="removeSchool(institution)"
+        />
+      </v-card>
+    </div>
 
     <hr class="my-8"/>
     <CompareSchoolsOverview :institutions="institutions" />
+
+
+    <Teleport to="#teleport-accordion-container">
+      <v-row>
+        <v-col class="text-right">
+          <v-btn class="my-4 mr-2 text-uppercase" color="primary" @click="expandAllPanels">
+            Expand All
+          </v-btn>
+          <v-btn  class="my-4 text-uppercase" color="primary" @click="closeAllPanels">
+            Close All
+          </v-btn>
+        </v-col>
+      </v-row>
+
+      <v-expansion-panels multiple focusable v-model="panels">
+        <!-- College Information -->
+        <v-expansion-panel>
+          <v-expansion-panel-title @click="trackAccordion('College Information')">
+            College Information
+          </v-expansion-panel-title>
+
+          <v-expansion-panel-text>
+            <CompareSchoolsCollegeInformation :institutions="institutions" />
+          </v-expansion-panel-text>
+        </v-expansion-panel>
+
+        <!-- Costs -->
+        <v-expansion-panel>
+          <v-expansion-panel-title @click="trackAccordion('Costs')">
+            Costs
+          </v-expansion-panel-title>
+
+          <v-expansion-panel-text>
+            <CompareSchoolsCosts :institutions="institutions" />
+          </v-expansion-panel-text>
+        </v-expansion-panel>
+
+        <!-- Graduation & Retention -->
+        <v-expansion-panel>
+          <v-expansion-panel-title @click="trackAccordion('Graduation & Retention')">
+            Graduation & Retention
+          </v-expansion-panel-title>
+
+          <v-expansion-panel-text>
+            <CompareSchoolsGreaduationAndRetention :institutions="institutions" />
+          </v-expansion-panel-text>
+        </v-expansion-panel>
+
+        <!-- Financial Debt -->
+        <v-expansion-panel>
+          <v-expansion-panel-title @click="trackAccordion('Financial Aid & Debt')">
+            Financial Aid & Debt
+          </v-expansion-panel-title>
+
+          <v-expansion-panel-text>
+            <CompareSchoolsFinancialAid :institutions="institutions" />
+          </v-expansion-panel-text>
+        </v-expansion-panel>
+
+        <!-- Typical Earning -->
+        <v-expansion-panel>
+          <v-expansion-panel-title @click="trackAccordion('Typical Earning')">
+            Typical Earning
+          </v-expansion-panel-title>
+
+          <v-expansion-panel-text>
+            <CompareSchoolsTypicalEarnings :institutions="institutions" />
+          </v-expansion-panel-text>
+        </v-expansion-panel>
+
+        <!-- Test Scores & Acceptance -->
+        <v-expansion-panel>
+          <v-expansion-panel-title @click="trackAccordion('Test Scores & Acceptance')">
+            Test Scores & Acceptance
+          </v-expansion-panel-title>
+
+          <v-expansion-panel-text>
+            <CompareSchoolsTestScores :institutions="institutions" />
+          </v-expansion-panel-text>
+        </v-expansion-panel>
+      </v-expansion-panels>
+    </Teleport>
 
   </div>
 </template>
@@ -37,15 +119,26 @@ const route = useRoute()
 const store = useCompareStore()
 const { apiGetAll } = useApi()
 const { fields } = useConstants()
-const { trackCompareList } = useAnalytics()
+const { trackCompareList, trackAccordion } = useAnalytics()
 const loading = ref(false)
 const institutions = reactive({
   all: [],
   schoolsCertificate: [],
   schools2Year: [],
   schools4Year: [],
-
 })
+
+const panels = ref([])
+const totalPanels = ref(6)
+
+const expandAllPanels = () => {
+  panels.value = [...Array(totalPanels.value).keys()].map((k, i) => i)
+}
+
+const closeAllPanels = () => {
+  panels.value = []
+}
+
 
 onMounted(() => {
   querySchools()
