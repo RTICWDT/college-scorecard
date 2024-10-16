@@ -1,7 +1,7 @@
 <template>
   <h2 class="mb-5">Financial Aid</h2>
 
-  <div class="pl-0 pl-md-5">
+  <div class="px-0 px-md-5">
     <h3 class="mb-3">Median Total Debt After Graduation</h3>
 
     <div class="d-flex">
@@ -21,7 +21,7 @@
       </v-checkbox>
     </div>
 
-    <div class="pl-0 pl-md-5 pb-10">
+    <div class="px-0 px-md-5 pb-10">
       <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarMedian
@@ -53,7 +53,7 @@
 
 
 
-  <div class="pl-0 pl-md-5">
+  <div class="px-0 px-md-5">
     <h3 class="mb-3">Monthly Loan Payment  </h3>
 
     <div class="d-flex">
@@ -73,7 +73,7 @@
       </v-checkbox>
     </div>
 
-    <div class="pl-0 pl-md-5 pb-10">
+    <div class="px-0 px-md-5 pb-10">
       <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarMedian

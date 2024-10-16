@@ -178,31 +178,9 @@ const styleValueLabel = (obj, fixLabels = false) => {
   newObj.styles.left = left + "%";
 
   if (85 < left && obj.label) {
-    if (breakpoint.value === 'xl') {
-      if (obj.label.includes("$")) newObj.styles.left = left - 9 + "%";
-      else newObj.styles.left = left - 10 + "%";
-    }
-    else if (breakpoint.value === 'lg') {
-      if (obj.label.includes("$")) newObj.styles.left = left - 10 + "%";
-      else newObj.styles.left = left - 10 + "%";
-    }
-    else if (breakpoint.value === 'md') {
-      if (obj.label.includes("$")) newObj.styles.left = left - 13 + "%";
-      else newObj.styles.left = left - 15 + "%";
-    }
-    else if (breakpoint.value === 'sm') {
-      if (obj.label.includes("$")) newObj.styles.left = left - 21 + "%";
-      else newObj.styles.left = left - 12 + "%";
-    }
-    else if (breakpoint.value === 'xs') {
-      if (obj.label.includes("$")) newObj.styles.left = left - 40 + "%";
-      else newObj.styles.left = left - 15 + "%";
-    }
-    else {
-      if (obj.label.includes("$")) newObj.styles.left = left - 15 + "%";
-      else newObj.styles.left = left - 15 + "%";
-    }
-    newObj.styles.color = "#ffffff";
+    let offset = 40 + obj.label.split('').length * 7
+    newObj.styles['transform'] = `translateX(-${offset}px)`;
+    newObj.styles.color = '#FFFFFF'
   }
 
   return newObj;
