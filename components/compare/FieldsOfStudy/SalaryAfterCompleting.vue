@@ -1,9 +1,9 @@
 <template>
   <h2 class="mb-5">Salary After Completing</h2>
 
-  <div class="pl-5">
+  <div class="pl-0 pl-md-5">
     <h3 class="mb-3">Median Earnings</h3>
-    <div class="pl-5 pb-10">
+    <div class="pl-0 pl-md-5 pb-10">
       <CompareFieldsOfStudyDataDisplay :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarMedian
@@ -33,7 +33,7 @@
     </div>
 
     <h3 class="mb-3">Monthly Earnings</h3>
-    <div class="pl-5">
+    <div class="pl-0 pl-md-5">
       <CompareFieldsOfStudyDataDisplay :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarMedian

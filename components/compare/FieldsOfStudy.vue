@@ -3,7 +3,7 @@
     Loading...
   </div>
 
-  <div v-else-if="fieldsOfStudy.length === 0">
+  <div v-else-if="fieldsOfStudy.all.length === 0">
     No Fields of Study found.
   </div>
 

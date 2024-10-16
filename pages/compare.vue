@@ -34,7 +34,6 @@
         <v-card flat v-show="showShareUpdate" class="pa-5">
           <div>
             You are viewing a shared comparison.
-
             <v-btn
               small
               color="secondary"
@@ -81,18 +80,6 @@
               </v-tabs>
             </div>
 
-
-            <!--Loader-->
-            <!-- <div v-show="loading" class="show-loading ma-4">
-              <div class="pa-5">
-                <h1 class="title">
-                  Loading
-                  <v-icon color="darkblue" class="ml-2" size="x-small" icon="fa:fas fa-circle-notch fa-spin"/>
-                </h1>
-              </div>
-            </div> -->
-
-
             <div v-show="isComparingSchools" class="px-4">
               <Spacer :height="20" />
               <CompareSchools />
@@ -122,7 +109,6 @@ router.push(cleanedPath)
 
 // field of study param
 // &fos={fieldOfStudyId}.{fieldOfStudyCode}.{credentialLevel}
-
 
 const store = useCompareStore()
 const { apiGetAll } = useApi()

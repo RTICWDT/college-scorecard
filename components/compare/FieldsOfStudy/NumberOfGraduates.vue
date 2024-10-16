@@ -1,8 +1,8 @@
 <template>
   <h2 class="mb-5">Number Of Graduates</h2>
 
-  <div class="pl-5">
-    <div class="pl-5 pb-10">
+  <div class="pl-0 pl-md-5">
+    <div class="pl-0 pl-md-5 pb-10">
       <CompareFieldsOfStudyDataDisplay :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarMedian
