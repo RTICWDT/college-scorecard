@@ -64,7 +64,7 @@
 
 
 <script setup>
-const { toDollar } = useNumeral();
+const { toDollar } = useNumberFormatter();
 const { fields, getNestedField } = useConstants();
 
 const medianEarnings = (fieldOfStudy) => {

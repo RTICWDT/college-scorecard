@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-const { toNumber } = useNumeral()
+const { toNumber } = useNumberFormatter()
 const { fields, getNestedField } = useConstants()
 const props = defineProps({
   fieldsOfStudy: Object,

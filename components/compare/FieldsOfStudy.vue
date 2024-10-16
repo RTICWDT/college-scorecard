@@ -84,7 +84,7 @@ const queryFieldsOfStudy = async () => {
   if (routeFieldsOfStudy) {
     store.fos = routeFieldsOfStudy.map((fos) => {
       const [id, code, credentialLevel] = fos.split(".")
-      console.log("id, code, credentialLevel", id, code, credentialLevel)
+      // console.log("id, code, credentialLevel", id, code, credentialLevel)
       return {
         id: +id,
         code: +code,

@@ -609,10 +609,9 @@ const searchAPI = async () => {
     let query = prepareParams(params)
     let url = generateQueryString(params)
 
-    console.log("SEARCHING API WITH: ", input)
-    console.log("QUERY: ", query)
-    console.log("URL: ", url)
-
+    // console.log("SEARCHING API WITH: ", input)
+    // console.log("QUERY: ", query)
+    // console.log("URL: ", url)
 
     router.replace(route.path + url)
 

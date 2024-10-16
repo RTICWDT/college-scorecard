@@ -241,7 +241,7 @@
 
 <script setup>
 import { yearsText } from '~/utils/filters'
-const { toDollar } = useNumeral()
+const { toDollar } = useNumberFormatter()
 
 const props = defineProps({
   school: {
@@ -278,9 +278,6 @@ const fixedUrl = computed(() => {
   else if (netPriceCalculatorUrl.value.match(/^http/)) return netPriceCalculatorUrl.value
   else return "http://" + netPriceCalculatorUrl.value
 })
-
-
-console.log(netPrice.value)
 </script>
 
 

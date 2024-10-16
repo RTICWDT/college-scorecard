@@ -1,6 +1,6 @@
 import numeral from 'numeral'
 
-export function useNumeral() {
+export function useNumberFormatter() {
   return {
     toDollar: (value) => numeral(value).format('$0,0'),
     toK: (value) => numeral(value).format('$0a'),

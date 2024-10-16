@@ -125,7 +125,7 @@
 </template>
 
 <script setup>
-const { toDollar, toPercent } = useNumeral()
+const { toDollar, toPercent } = useNumberFormatter()
 const {
   netPrice,
   medianEarnings,

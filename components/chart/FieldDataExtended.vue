@@ -214,7 +214,7 @@
 </template>
 
 <script setup>
-const { toDollar } = useNumeral()
+const { toDollar } = useNumberFormatter()
 const store = useCompareStore()
 const { fields, getNestedField } = useConstants()
 const emit = defineEmits(['update-debt-show-prior'])

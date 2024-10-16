@@ -114,7 +114,7 @@
 
 <script setup>
   import { yearsText } from '~/utils/filters'
-  const { toDollar, toPercent } = useNumeral()
+  const { toDollar, toPercent } = useNumberFormatter()
   const props = defineProps({
     school: {
       type: Object,

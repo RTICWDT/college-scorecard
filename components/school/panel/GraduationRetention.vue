@@ -141,7 +141,7 @@
 </template>
 
 <script setup>
-const { toPercent } = useNumeral()
+const { toPercent } = useNumberFormatter()
 import { yearsText } from '~/utils/filters'
 
 const props = defineProps({

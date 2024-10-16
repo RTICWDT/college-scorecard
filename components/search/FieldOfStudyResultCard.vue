@@ -161,7 +161,7 @@
 </template>
 
 <script setup>
-const { toDollar, toNumber } = useNumeral();
+const { toDollar, toNumber } = useNumberFormatter();
 const { fields, getNestedField } = useConstants();
 const store = useCompareStore();
 

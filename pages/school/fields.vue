@@ -226,7 +226,7 @@
 </style>
 
 <script setup>
-const { toNumber } = useNumeral()
+const { toNumber } = useNumberFormatter()
 import { formatFieldOfStudyTitle } from '~/utils/filters'
 
 const route = useRoute()

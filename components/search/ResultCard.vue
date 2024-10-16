@@ -115,7 +115,7 @@
 </template>
 
 <script setup>
-const { toPercent, toK } = useNumeral()
+const { toPercent, toK } = useNumberFormatter()
 
 const props = defineProps({
   school: Object,

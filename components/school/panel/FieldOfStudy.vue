@@ -192,7 +192,7 @@
 </template>
 
 <script setup>
-const { toDollar, toNumber } = useNumeral()
+const { toDollar, toNumber } = useNumberFormatter()
 
 import {
   formatFieldOfStudyTitle,

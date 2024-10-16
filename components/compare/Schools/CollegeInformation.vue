@@ -54,7 +54,7 @@
 
 <script setup>
 const props = defineProps({ institutions: Object });
-const { toPercent } = useNumeral()
+const { toPercent } = useNumberFormatter()
 
 const {
   fullTimeEnrollment,

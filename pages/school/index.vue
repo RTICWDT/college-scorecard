@@ -279,7 +279,7 @@ const { fields } = useConstants()
 const { apiGet } = useApi()
 const { smAndDown } = useDisplay()
 const { transitionOutboundLink, trackAccordion } = useAnalytics()
-const { toNumber } = useNumeral()
+const { toNumber } = useNumberFormatter()
 
 const school = reactive({})
 

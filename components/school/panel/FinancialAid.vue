@@ -355,7 +355,7 @@
 <script setup>
 const { transitionOutboundLink } = useAnalytics()
 const { site } = useSiteData()
-const { toDollar, toPercent } = useNumeral()
+const { toDollar, toPercent } = useNumberFormatter()
 
 const props = defineProps({
   school: {
