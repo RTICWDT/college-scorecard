@@ -14,7 +14,7 @@
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #byline="{ groupName, institution }">
-        <p class="text-caption">
+        <p class="text-caption text-right">
           <em>National {{ medianToggle === 'group' ? groupName : '' }} Midpoint: {{ numeral(netPriceGroupMidpoint(institution)).format('$0,0') }}</em>
         </p>
       </template>
