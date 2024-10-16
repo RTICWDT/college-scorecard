@@ -22,7 +22,7 @@
     </div>
 
     <div class="pl-0 pl-md-5 pb-10">
-      <CompareFieldsOfStudyDataDisplay :fieldsOfStudy="fieldsOfStudy">
+      <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarMedian
             v-if="medianTotalDebt(fos)"
@@ -47,7 +47,7 @@
           />
           <div class="data-na" v-else>Data Not Available</div>
         </template>
-      </CompareFieldsOfStudyDataDisplay>
+      </CompareFieldsOfStudyDataSection>
     </div>
   </div>
 
@@ -74,7 +74,7 @@
     </div>
 
     <div class="pl-0 pl-md-5 pb-10">
-      <CompareFieldsOfStudyDataDisplay :fieldsOfStudy="fieldsOfStudy">
+      <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarMedian
             v-if="medianTotalMonthlyDebt(fos)"
@@ -99,7 +99,7 @@
           />
           <div class="data-na" v-else>Data Not Available</div>
         </template>
-      </CompareFieldsOfStudyDataDisplay>
+      </CompareFieldsOfStudyDataSection>
     </div>
   </div>
 </template>

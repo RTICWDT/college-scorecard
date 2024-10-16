@@ -8,7 +8,7 @@
         :class="{ 'bg-warning': store.highlightedFos === fos }" 
         @click="(event) => toggleHighlight(event, fos)"
       >
-        <NuxtLink class="font-weight-bold text-body-2" :to="schoolLink(fos)">
+        <NuxtLink class="font-weight-bold text-body-2" :to="fosSchoolLink(fos)">
           {{ fos.title }} - {{ fos.school.name }}
         </NuxtLink>
         <Spacer :height="10" />
@@ -20,15 +20,24 @@
 
 <script setup>
 const store = useCompareStore();
+const { schoolLink } = useComplexFieldMethods()
+const { fields } = useConstants()
 const props = defineProps({
   fieldsOfStudy: Array,
   title: String,
 });
 
-const schoolLink = (fos) => {
-  // debugger
-  return "/"
-}
+const fosSchoolLink = computed(() => (fos) => {
+  return schoolLink({
+    [fields['ID']]: fos.id,
+    [fields['NAME']]: fos.school.name,
+  })
+})
+
+// const schoolLink = (fos) => {
+//   debugger
+//   return `/school/?${fos.schoolId}`
+// }
 
 const toggleHighlight = (event, fos) => {
   if (event.target.href) { return }

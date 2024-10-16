@@ -56,7 +56,7 @@ export const useCompareStore = defineStore('compare', {
           fosTitle: obj.title,
           id: obj.unit_id,
           institutionName: obj.school.name,
-          credentialLevel: obj.credential.level
+          credentialLevel: obj.credential.level,
         }
       }
       

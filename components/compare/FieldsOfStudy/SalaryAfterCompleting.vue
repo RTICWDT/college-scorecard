@@ -4,7 +4,7 @@
   <div class="pl-0 pl-md-5">
     <h3 class="mb-3">Median Earnings</h3>
     <div class="pl-0 pl-md-5 pb-10">
-      <CompareFieldsOfStudyDataDisplay :fieldsOfStudy="fieldsOfStudy">
+      <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarMedian
             v-if="medianEarnings(fos)"
@@ -29,12 +29,12 @@
           />
           <div class="data-na" v-else>Data Not Available</div>
         </template>
-      </CompareFieldsOfStudyDataDisplay>
+      </CompareFieldsOfStudyDataSection>
     </div>
 
     <h3 class="mb-3">Monthly Earnings</h3>
     <div class="pl-0 pl-md-5">
-      <CompareFieldsOfStudyDataDisplay :fieldsOfStudy="fieldsOfStudy">
+      <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
           <ChartHorizontalBarMedian
             v-if="monthlyEarnings(fos)"
@@ -59,7 +59,7 @@
           />
           <div class="data-na" v-else>Data Not Available</div>
         </template>
-      </CompareFieldsOfStudyDataDisplay>
+      </CompareFieldsOfStudyDataSection>
     </div>
   </div>
 </template>
@@ -83,11 +83,6 @@ const monthlyEarnings = (fieldOfStudy) => {
 const props = defineProps({
   fieldsOfStudy: Object,
 });
-
-// const {
-//   medianEarnings
-// } = useComplexFieldMethods()
-
 </script>
 
 <style lang="scss" scoped>
