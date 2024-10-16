@@ -34,8 +34,8 @@
 </template>
 
 <script setup>
-const { fields, getNestedField } = useConstants()
 import numeral from 'numeral';
+const { fields, getNestedField } = useConstants()
 const props = defineProps({
   fieldsOfStudy: Object,
 });

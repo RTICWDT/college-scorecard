@@ -9,7 +9,7 @@ export const useCompareStore = defineStore('compare', {
     clearForm: false,
     outboundUrl: null,
     highlightedFos: null,
-    highlightedSchool: null,
+    highlightedInstitution: null,
   }),
 
   getters: {

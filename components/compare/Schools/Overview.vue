@@ -6,25 +6,25 @@
 
   <Spacer :height="20" />
 
-  <CompareSchoolsDataDisplay :institutions="institutions">
+  <CompareSchoolsDataSection :institutions="institutions">
     <template #data="{ institution }">
       <div class="institution-card">
         {{ netPrice(institution) }}
       </div>
     </template>
-  </CompareSchoolsDataDisplay>
+  </CompareSchoolsDataSection>
 
   <h2>Graduation Rate</h2>
-  <CompareSchoolsDataDisplay :institutions="institutions">
+  <CompareSchoolsDataSection :institutions="institutions">
     <template #data="{ institution }">
       <div class="institution-card">
         {{ completionRate(institution) }}
       </div>
     </template>
-  </CompareSchoolsDataDisplay>
+  </CompareSchoolsDataSection>
 
   <h2>Median Earnings</h2>
-  <CompareSchoolsDataDisplay :institutions="institutions">
+  <CompareSchoolsDataSection :institutions="institutions">
     <template #data="{ institution }">
       <div>
         {{ institution.school.name }}
@@ -66,7 +66,7 @@
         style="height:100px"
       />
     </template>
-  </CompareSchoolsDataDisplay>
+  </CompareSchoolsDataSection>
 </template>
 
 <script setup>

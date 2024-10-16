@@ -34,11 +34,6 @@ const fosSchoolLink = computed(() => (fos) => {
   })
 })
 
-// const schoolLink = (fos) => {
-//   debugger
-//   return `/school/?${fos.schoolId}`
-// }
-
 const toggleHighlight = (event, fos) => {
   if (event.target.href) { return }
   store.highlightedFos === fos ? store.highlightedFos = null : store.highlightedFos = fos

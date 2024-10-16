@@ -54,7 +54,7 @@
 
 
   <div class="px-0 px-md-5">
-    <h3 class="mb-3">Monthly Loan Payment  </h3>
+    <h3 class="mb-3">Monthly Loan Payment</h3>
 
     <div class="d-flex">
       <v-checkbox
@@ -115,19 +115,11 @@ const includeDebtBorrowed = ref(false)
 const includeDebtBorrowedMonthly = ref(false)
 
 const medianTotalDebt = computed(() => (fos) => {
-  if (includeDebtBorrowed.value) {
-    return medianPrior(fos)
-  } else {
-    return medianDebt(fos)
-  }
+  return includeDebtBorrowed.value ? medianPrior(fos) : medianDebt(fos)
 })
 
 const medianTotalMonthlyDebt = computed(() => (fos) => {
-  if (includeDebtBorrowedMonthly.value) {
-    return medianDebtMonthlyPrior(fos)
-  } else {
-    return medianDebtMonthly(fos)
-  }
+  return includeDebtBorrowedMonthly.value ? medianDebtMonthlyPrior(fos) : medianDebtMonthly(fos)
 })
 
 const medianDebt = (fos) => getNestedField(fos, fields.FOS_DEBT_MEDIAN)
