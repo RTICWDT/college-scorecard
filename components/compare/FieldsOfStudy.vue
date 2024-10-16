@@ -7,49 +7,68 @@
     No Fields of Study found.
   </div>
 
-  <div class="grid-container">
-    <v-card 
-      class="grid-item pa-4 mr-4"
-      v-for="fieldOfStudy in fieldsOfStudy"
-      :key="`${fieldOfStudy.id}${fieldOfStudy.code}`"
-    >
-      <div class="content d-flex">
-        <div>
-          <h4 class="text-body-2">
-            {{ formatFieldOfStudyTitle(fieldOfStudy.title) }}
-          </h4>
-          <span class="fos-uppercase-credential-title">
-            {{ formatFieldOfStudyCredentialTitle(fieldOfStudy.credential.title) }}
-          </span>
-          <br />
-          <span class="text-caption">
-            {{ fieldOfStudy.school.name }}
-          </span>
+  <div v-else>
+
+    <div class="grid-container">
+      <v-card 
+        class="grid-item pa-4 mr-4"
+        v-for="fieldOfStudy in fieldsOfStudy.all"
+        :key="`${fieldOfStudy.id}${fieldOfStudy.code}`"
+      >
+        <div class="content d-flex">
+          <div>
+            <h4 class="text-body-2">
+              {{ formatFieldOfStudyTitle(fieldOfStudy.title) }}
+            </h4>
+            <span class="fos-uppercase-credential-title">
+              {{ formatFieldOfStudyCredentialTitle(fieldOfStudy.credential.title) }}
+            </span>
+            <br />
+            <span class="text-caption">
+              {{ fieldOfStudy.school.name }}
+            </span>
+          </div>
+          <div class="flex-grow-1" />
+          <v-btn
+            color="primary"
+            icon="mdi-close"
+            size="x-small"
+            @click="removeFieldOfStudy(fieldOfStudy)"
+            class="remove-btn ml-4"
+          />
         </div>
-        <div class="flex-grow-1" />
-        <v-btn
-          color="primary"
-          icon="mdi-close"
-          size="x-small"
-          @click="removeFieldOfStudy(fieldOfStudy)"
-          class="remove-btn ml-4"
-        />
-      </div>
 
-    </v-card>
+      </v-card>
+    </div>
+
+    <hr class="my-10"/>
+    <CompareFieldsOfStudySalaryAfterCompleting :fieldsOfStudy="fieldsOfStudy" />
+    <hr class="my-10"/>
+
   </div>
-
 </template>
 
 <script setup>
+import { formatFieldOfStudyTitle, formatFieldOfStudyCredentialTitle, unflattenObject } from '#imports';
 const router = useRouter()
 const route = useRoute()
 const store = useCompareStore()
 const { apiGetAll } = useApi()
 const { fields } = useConstants()
 const loading = ref(false)
-const fieldsOfStudy = ref([])
-import { formatFieldOfStudyTitle, formatFieldOfStudyCredentialTitle, unflattenObject } from '#imports';
+const fieldsOfStudy = reactive({
+  all: [],
+  undergrad: [],
+  associates: [],
+  bachelors: [],
+  baccalaureate: [],
+  masters: [],
+  doctorate: [],
+  professionalDegree: [],
+  professionalCertificate: [],
+})
+
+
 
 onMounted(() => {
   queryFieldsOfStudy()
@@ -88,7 +107,7 @@ const queryFieldsOfStudy = async () => {
     loading.value = true
     const responses = await apiGetAll("/schools/", paramArray)
 
-    fieldsOfStudy.value = responses.map(function(response) {
+    const fosResults = responses.map(function(response) {
       if (response.results[0]) {
         const obj = response.results[0]["latest.programs.cip_4_digit"][0]
         const unflattened = unflattenObject(obj)
@@ -96,11 +115,10 @@ const queryFieldsOfStudy = async () => {
         unflattened.credentialLevel = unflattened.credential.level
         return unflattened
       }
-    })
+    }).filter(Boolean)
 
-    // responseCache.value.fieldsOfStudy = responses
-    //   .map(response => response.data.results[0]?.["latest.programs.cip_4_digit"][0])
-    //   .filter(Boolean)
+    setFieldsOfStudy(fosResults)
+
   } catch (error) {
     console.error("Issue locating Fields of Study for compare...", error)
   } finally {
@@ -109,11 +127,23 @@ const queryFieldsOfStudy = async () => {
 }
 
 const removeFieldOfStudy = (fieldOfStudy) => {
-  fieldsOfStudy.value = fieldsOfStudy.value.filter((fos) => {
-    return fos.id !== fieldOfStudy.id || fos.code !== fieldOfStudy.code || fos.credential.level !== fieldOfStudy.credential.level
-  })
-
+  const newFos = fieldsOfStudy.all.filter((fos) => fos.id !== fieldOfStudy.id)
+  setFieldsOfStudy(newFos)
   store.removeFieldOfStudy(fieldOfStudy)
+}
+
+const setFieldsOfStudy = (fosResults) => {
+  Object.assign(fieldsOfStudy, {
+      all: fosResults,
+      undergrad: fosResults.filter((fos) => fos.credential.level === 1),
+      associates: fosResults.filter((fos) => fos.credential.level === 2),
+      bachelors: fosResults.filter((fos) => fos.credential.level === 3),
+      baccalaureate: fosResults.filter((fos) => fos.credential.level === 4),
+      masters: fosResults.filter((fos) => fos.credential.level === 5),
+      doctorate: fosResults.filter((fos) => fos.credential.level === 6),
+      professionalDegree: fosResults.filter((fos) => fos.credential.level === 7),
+      professionalCertificate: fosResults.filter((fos) => fos.credential.level === 8),
+    })
 }
 </script>
 

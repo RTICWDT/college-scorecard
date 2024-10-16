@@ -20,9 +20,6 @@
 </template>
 
 <script setup>
-import _ from 'lodash';
-const nuxtApp = useNuxtApp();
-
 const props = defineProps({
   min: {
     type: Object,
@@ -76,22 +73,4 @@ const props = defineProps({
     default: () => ({}),
   },
 });
-
-const _lower = computed(() => ({
-  value: useGet(props.min, props.variable),
-  label: nuxtApp.$filters.numeral(
-    useGet(props.min, props.variable),
-    "$0,0"
-  ),
-  styles: props.lowerStyleOverride,
-}));
-
-const _upper = computed(() => ({
-  value: useGet(props.max, props.variable),
-  label: nuxtApp.$filters.numeral(
-    useGet(props.max, props.variable),
-    "$0,0"
-  ),
-  styles: props.upperStyleOverride,
-}));
 </script>

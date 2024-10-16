@@ -279,6 +279,8 @@ const fixedUrl = computed(() => {
   else return "http://" + netPriceCalculatorUrl.value
 })
 
+
+console.log(netPrice.value)
 </script>
 
 

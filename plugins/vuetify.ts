@@ -34,6 +34,7 @@ export default defineNuxtPlugin((nuxtApp) => {
             lightyellow: '#fffaeb',
             yellow: '#fdbf32',
             warning: '#fff3cf',
+            black: '#000000',
             
           },
           variables: {
