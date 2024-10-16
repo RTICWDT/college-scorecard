@@ -105,15 +105,9 @@
         </v-card>
       </v-col>
     </v-row>
-    
-
   </v-container>
-  
 
-
-
-
-
+  <LayoutFooterCTA />
 </template>
 
 <script setup>

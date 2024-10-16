@@ -8,6 +8,8 @@ export const useCompareStore = defineStore('compare', {
     drawerOpen: useLocalStorage('drawerOpen', false),
     clearForm: false,
     outboundUrl: null,
+    highlightedFos: null,
+    highlightedSchool: null,
   }),
 
   getters: {

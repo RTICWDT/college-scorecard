@@ -44,6 +44,9 @@
     <hr class="my-10"/>
     <CompareFieldsOfStudySalaryAfterCompleting :fieldsOfStudy="fieldsOfStudy" />
     <hr class="my-10"/>
+    <CompareFieldsOfStudyFinancialAid :fieldsOfStudy="fieldsOfStudy" />
+    <hr class="my-10"/>
+    <CompareFieldsOfStudyNumberOfGraduates :fieldsOfStudy="fieldsOfStudy" />
 
   </div>
 </template>
