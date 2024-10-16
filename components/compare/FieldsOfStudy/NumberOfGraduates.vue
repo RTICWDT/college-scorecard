@@ -8,7 +8,7 @@
           <ChartHorizontalBarMedian
             :shouldRender="gradCount(fos)"
             :value="{
-              label: numeral(gradCount(fos)).format(),
+              label: toNumber(gradCount(fos)),
               value: gradCount(fos),
             }"
             :min="{
@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import numeral from 'numeral';
+const { toNumber } = useNumeral()
 const { fields, getNestedField } = useConstants()
 const props = defineProps({
   fieldsOfStudy: Object,

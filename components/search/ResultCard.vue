@@ -115,7 +115,7 @@
 </template>
 
 <script setup>
-import numeral from 'numeral'
+const { toPercent, toK } = useNumeral()
 
 const props = defineProps({
   school: Object,
@@ -156,7 +156,7 @@ const { fields } = useConstants()
 
 const displayGradRate = computed(() => {
   if (!completionRateOverall.value) return 'N/A'
-  return numeral(parseFloat(completionRateOverall.value)).format('0.%')
+  return toPercent(parseFloat(completionRateOverall.value))
 })
 
 const compareHoverCountText = computed(() => {
@@ -169,12 +169,12 @@ const compareSchoolsLength = computed(() => store.institutions.length)
 
 const displayEarn = computed(() => {
   if (!medianEarnings.value) return 'N/A'
-  return numeral(medianEarnings.value).format('$0a')
+  return toK(medianEarnings.value)
 })
 
 const displayAvgCost = computed(() => {
   if (!netPrice.value) return 'N/A'
-  return numeral(netPrice.value).format('$0a')
+  return toK(netPrice.value)
 })
 
 const isSelected = computed(() => store.institutions.find(({ schoolId }) => schoolId == props.school.id) != undefined);

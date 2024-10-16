@@ -27,7 +27,7 @@
           <ChartHorizontalBarMedian
             :shouldRender="medianTotalDebt(fos)"
             :value="{
-              label: numeral(medianTotalDebt(fos)).format('$0,0'),
+              label: toDollar(medianTotalDebt(fos)),
               value: medianTotalDebt(fos),
             }"
             :min="{
@@ -76,7 +76,7 @@
           <ChartHorizontalBarMedian
             :shouldRender="medianTotalMonthlyDebt(fos)"
             :value="{
-              label: numeral(medianTotalMonthlyDebt(fos)).format('$0,0'),
+              label: toDollar(medianTotalMonthlyDebt(fos)),
               value: medianTotalMonthlyDebt(fos),
             }"
             :min="{
@@ -101,7 +101,7 @@
 </template>
 
 <script setup>
-import numeral from 'numeral';
+const { toDollar } = useNumeral()
 const { fields, getNestedField } = useConstants()
 const props = defineProps({
   fieldsOfStudy: Object,

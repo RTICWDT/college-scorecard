@@ -91,7 +91,7 @@
               {{ schoolName }}
             </h1>            
             <div class="population my-1">
-              <span class="font-weight-bold">{{ numeral(undergraduates).format() }}</span>
+              <span class="font-weight-bold">{{ toNumber(undergraduates) }}</span>
               undergraduate students
             </div>
             <div class="school-url my-1">
@@ -271,7 +271,6 @@
 </template>
 
 <script setup>
-import numeral from 'numeral'
 import { useDisplay } from 'vuetify';
 import { formatUrlText } from '~/utils/filters'
 
@@ -280,6 +279,7 @@ const { fields } = useConstants()
 const { apiGet } = useApi()
 const { smAndDown } = useDisplay()
 const { transitionOutboundLink, trackAccordion } = useAnalytics()
+const { toNumber } = useNumeral()
 
 const school = reactive({})
 

@@ -11,7 +11,7 @@
             v-if="netPrice"
             class="text-h4 medium-light-blue-text font-weight-bold mb-3"
           >
-            {{ numeral(netPrice).format("$0,0") }}
+            {{ toDollar(netPrice) }}
           </h2>
           <div v-else class="data-na">
             Data Not Available
@@ -34,7 +34,7 @@
             class="pt-8 pt-lg-0"
             v-if="netPrice"
             :value="{
-              label: numeral(netPrice).format('$0,0'),
+              label: toDollar(netPrice),
               value: netPrice,
             }"
             :min="{
@@ -50,11 +50,11 @@
             :median="{
               label:
                 'Midpoint: ' +
-                numeral(
+                toDollar(
                   medianToggle === 'group'
                     ? Math.round(parseFloat(toggleAverageAnnualCosts[0]))
                     : Math.round(parseFloat(toggleAverageAnnualCosts[1])),
-                ).format('$0,0'),
+                ),
               value:
                 medianToggle === 'group'
                   ? toggleAverageAnnualCosts[0]
@@ -84,7 +84,7 @@
           </h2>
           <h2 v-if="netPrice" class="text-h6 my-3">
             <span class="medium-light-blue-text font-weight-bold">
-              {{ numeral(netPrice).format("$0,0") }}
+              {{ toDollar(netPrice) }}
             </span>
             <span v-if="programReporter(school)[0].annualized == programReporter(school)[0].full_program">
               for a {{ programReporter(school)[0].avg_month_completion }}-month program
@@ -117,7 +117,7 @@
               <ChartHorizontalBarMedian
                 v-if="netPrice"
                 :value="{
-                  label: numeral(netPrice).format('$0,0'),
+                  label: toDollar(netPrice),
                   value: netPrice,
                 }"
                 :min="{
@@ -133,11 +133,11 @@
                 :median="{
                   label:
                     'Midpoint: ' +
-                    numeral(
+                    toDollar(
                       medianToggle === 'group'
                         ? Math.round(parseFloat(toggleAverageAnnualCosts[0]))
                         : Math.round(parseFloat(toggleAverageAnnualCosts[1]))
-                    ).format('$0,0'),
+                    ),
                   value:
                     medianToggle === 'group'
                       ? toggleAverageAnnualCosts[0]
@@ -184,35 +184,35 @@
             <tr>
               <td>$0-$30,000</td>
               <td v-if="income['0-30000']">
-                {{ numeral(income["0-30000"]).format("$0,0") }}
+                {{ toDollar(income["0-30000"]) }}
               </td>
               <td v-else>--</td>
             </tr>
             <tr>
               <td>$30,001-$48,000</td>
               <td v-if="income['30001-48000']">
-                {{ numeral(income["30001-48000"]).format("$0,0") }}
+                {{ toDollar(income["30001-48000"]) }}
               </td>
               <td v-else>--</td>
             </tr>
             <tr>
               <td>$48,001-$75,000</td>
               <td v-if="income['48001-75000']">
-                {{ numeral(income["48001-75000"]).format("$0,0") }}
+                {{ toDollar(income["48001-75000"]) }}
               </td>
               <td v-else>--</td>
             </tr>
             <tr>
               <td>$75,001-$110,000</td>
               <td v-if="income['75001-110000']">
-                {{ numeral(income["75001-110000"]).format("$0,0") }}
+                {{ toDollar(income["75001-110000"]) }}
               </td>
               <td v-else>--</td>
             </tr>
             <tr>
               <td>$110,001+</td>
               <td v-if="income['110001-plus']">
-                {{ numeral(income["110001-plus"]).format("$0,0") }}
+                {{ toDollar(income["110001-plus"]) }}
               </td>
               <td v-else>--</td>
             </tr>
@@ -240,8 +240,8 @@
 </template>
 
 <script setup>
-import numeral from 'numeral'
 import { yearsText } from '~/utils/filters'
+const { toDollar } = useNumeral()
 
 const props = defineProps({
   school: {

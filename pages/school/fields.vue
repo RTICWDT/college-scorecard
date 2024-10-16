@@ -45,7 +45,7 @@
                       {{ useGet(school, fields["NAME"], "School Name") }}
                     </h1>
                     <p class="mb-0">
-                      <strong>{{ numeral(undergraduates).format() }}</strong>
+                      <strong>{{ toNumber(undergraduates) }}</strong>
                       undergraduate students
                     </p>
                     <p class="">
@@ -226,7 +226,7 @@
 </style>
 
 <script setup>
-import numeral from 'numeral'
+const { toNumber } = useNumeral()
 import { formatFieldOfStudyTitle } from '~/utils/filters'
 
 const route = useRoute()

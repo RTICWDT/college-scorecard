@@ -15,7 +15,7 @@
     <CompareSchoolsDataSection :institutions="institutions">
       <template #byline="{ groupName, institution }">
         <p class="text-caption text-right">
-          <em>National {{ medianToggle === 'group' ? groupName : '' }} Midpoint: {{ numeral(netPriceMidpoint(institution)).format('$0,0') || "N/A" }}</em>
+          <em>National {{ medianToggle === 'group' ? groupName : '' }} Midpoint: {{ toDollar(netPriceMidpoint(institution)) || "N/A" }}</em>
         </p>
       </template>
 
@@ -23,7 +23,7 @@
         <ChartHorizontalBarMedian
           :shouldRender="netPrice(institution)"
           :value="{
-            label: numeral(netPrice(institution)).format('$0,0'),
+            label: toDollar(netPrice(institution)),
             value: netPrice(institution),
           }"
           :min="{
@@ -53,7 +53,7 @@
     <CompareSchoolsDataSection :institutions="institutions">
       <template #byline="{ groupName, institution }">
         <p class="text-caption text-right">
-          <em>National {{ medianToggle === 'group' ? groupName : '' }} Midpoint: {{ numeral(completionRateMidpoint(institution)).format('0%') || "N/A" }}</em>
+          <em>National {{ medianToggle === 'group' ? groupName : '' }} Midpoint: {{ toPercent(completionRateMidpoint(institution)) || "N/A" }}</em>
         </p>
       </template>
 
@@ -61,7 +61,7 @@
         <ChartHorizontalBarMedian
           :shouldRender="completionRate(institution)"
           :value="{
-            label: numeral(completionRate(institution)).format('0%'),
+            label: toPercent(completionRate(institution)),
             value: completionRate(institution),
           }"
           :min="{
@@ -91,7 +91,7 @@
     <CompareSchoolsDataSection :institutions="institutions">
       <template #byline="{ groupName, institution }">
         <p class="text-caption text-right">
-          <em>National {{ medianToggle === 'group' ? groupName : '' }} Midpoint: {{ numeral(medianEarningsMidpoint(institution)).format('$0,0') || "N/A" }}</em>
+          <em>National {{ medianToggle === 'group' ? groupName : '' }} Midpoint: {{ toDollar(medianEarningsMidpoint(institution)) || "N/A" }}</em>
         </p>
       </template>
 
@@ -99,7 +99,7 @@
         <ChartHorizontalBarMedian
           v-if="medianEarnings(institution)"
           :value="{
-            label: numeral(medianEarnings(institution)).format('$0,0'),
+            label: toDollar(medianEarnings(institution)),
             value: medianEarnings(institution),
           }"
           :min="{
@@ -125,7 +125,7 @@
 </template>
 
 <script setup>
-import numeral from 'numeral'
+const { toDollar, toPercent } = useNumeral()
 const {
   netPrice,
   medianEarnings,

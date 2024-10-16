@@ -9,7 +9,7 @@
           <ChartHorizontalBarMedian
             :shouldRender="medianEarnings(fos)"
             :value="{
-              label: numeral(medianEarnings(fos)).format('$0,0'),
+              label: toDollar(medianEarnings(fos)),
               value: medianEarnings(fos),
             }"
             :min="{
@@ -38,7 +38,7 @@
           <ChartHorizontalBarMedian
             :shouldRender="monthlyEarnings(fos)"
             :value="{
-              label: numeral(monthlyEarnings(fos)).format('$0,0'),
+              label: toDollar(monthlyEarnings(fos)),
               value: monthlyEarnings(fos),
             }"
             :min="{
@@ -64,7 +64,7 @@
 
 
 <script setup>
-import numeral from 'numeral';
+const { toDollar } = useNumeral();
 const { fields, getNestedField } = useConstants();
 
 const medianEarnings = (fieldOfStudy) => {

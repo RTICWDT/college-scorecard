@@ -35,7 +35,7 @@
 
           <p class="my-3" v-if="fieldsOfStudy.length">
             Out of
-            {{ numeral(fosUndergradCount).format() }} undergraduate
+            {{ toNumber(fosUndergradCount) }} undergraduate
             {{ fosUndergradCount == 1 ? "field" : "fields" }}
             of study at {{ schoolName }}, the
             {{
@@ -114,14 +114,14 @@
                     cols="12"
                     class="medium-light-blue-text px-5 font-weight-bold"
                     sm="4"
-                    >{{ numeral(fos.hoist).format("$0,0") }}</v-col
+                    >{{ toDollar(fos.hoist) }}</v-col
                   >
                   <v-col
                     v-else
                     cols="12"
                     class="medium-light-blue-text px-5 font-weight-bold"
                     sm="4"
-                    >{{ numeral(fos.hoist).format() }}</v-col
+                    >{{ toNumber(fos.hoist) }}</v-col
                   >
                 </v-row>
                 <div class="d-block d-sm-none my-2 mx-1 pl-0">
@@ -130,12 +130,12 @@
                   <span
                     v-if="hoistCurrency"
                     class="medium-light-blue-text font-weight-bold"
-                    >({{ numeral(fos.hoist).format("$0,0") }})</span
+                    >({{ toDollar(fos.hoist) }})</span
                   >
                   <span
                     v-else
                     class="medium-light-blue-text font-weight-bold"
-                    >({{ numeral(selectedFieldOfStudy.hoist).format() }})</span
+                    >({{ toNumber(selectedFieldOfStudy.hoist) }})</span
                   >
                 </div>
               </v-expansion-panel-title>
@@ -192,7 +192,8 @@
 </template>
 
 <script setup>
-import numeral from 'numeral'
+const { toDollar, toNumber } = useNumeral()
+
 import {
   formatFieldOfStudyTitle,
   formatCip2Title,

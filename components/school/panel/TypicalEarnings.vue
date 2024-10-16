@@ -12,7 +12,7 @@
           v-if="medianEarnings"
           class="text-h4 medium-light-blue-text font-weight-bold mb-3"
         >
-          {{ numeral(medianEarnings).format("$0,0") }}
+          {{ toDollar(medianEarnings) }}
         </h2>
         <p class="mb-0">
           The median earnings of former students who
@@ -31,7 +31,7 @@
           v-if="medianEarnings"
           class="pt-12 pt-lg-0"
           :value="{
-            label: numeral(medianEarnings).format('$0,0'),
+            label: toDollar(medianEarnings),
             value: medianEarnings,
           }"
           :min="{
@@ -47,11 +47,11 @@
           :median="{
             label:
               'Midpoint: ' +
-              numeral(
+              toDollar(
                 medianToggle === 'group'
                   ? Math.round(parseFloat(toggleMedianEarnings[0]))
                   : Math.round(parseFloat(toggleMedianEarnings[1])),
-              ).format('$0,0'),
+              ),
             value:
               medianToggle === 'group'
                 ? toggleMedianEarnings[0]
@@ -85,7 +85,7 @@
           <h2
             class="text-h4 medium-light-blue-text font-weight-bold"
           >
-            {{ numeral(percentMoreThanHS).format("0%") }}
+            {{ toPercent(percentMoreThanHS) }}
           </h2>
           <span>&nbsp;of students</span>
         </div>
@@ -113,9 +113,8 @@
 </template>
 
 <script setup>
-  import numeral from 'numeral'
   import { yearsText } from '~/utils/filters'
-
+  const { toDollar, toPercent } = useNumeral()
   const props = defineProps({
     school: {
       type: Object,

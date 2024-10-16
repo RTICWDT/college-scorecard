@@ -31,7 +31,7 @@
               class="display-2 medium-light-blue-text font-weight-bold pb-3"
               v-if="completionRate"
             >
-              {{ numeral(completionRate).format("0%") }}
+              {{ toPercent(completionRate) }}
             </h2>
             <div class="data-na pb-3" v-else>
               Data Not Available
@@ -52,11 +52,11 @@
               }}
               Schools:
               {{
-                numeral(
+                toPercent(
                   medianToggle === "group"
                     ? toggleGraduationRate[0]
                     : toggleGraduationRate[1],
-                ).format("0%")
+                )
               }}</em
             >
             <ChartVerticalBarMedian
@@ -122,7 +122,7 @@
               class="display-2 medium-light-blue-text font-weight-bold pb-3"
               v-if="netPrice"
             >
-              {{ numeral(netPrice).format("$0,0") }}
+              {{ toDollar(netPrice) }}
             </h2>
             <div class="data-na pb-3" v-else>
               Data Not Available
@@ -142,7 +142,7 @@
               }}
               Schools:
               {{
-                numeral(
+                toDollar(
                   medianToggle === "group"
                     ? Math.round(
                         parseFloat(
@@ -154,16 +154,14 @@
                           toggleAverageAnnualCosts[1]
                         )
                       )
-                ).format("$0,0")
+                )
               }}</em
             >
 
             <ChartHorizontalBarMedian
               v-if="netPrice"
               :value="{
-                label: numeral(
-                  netPrice,
-                ).format('$0,0'),
+                label: toDollar(netPrice),
                 value: netPrice,
               }"
               :min="{
@@ -219,7 +217,7 @@
               class="display-2 medium-light-blue-text font-weight-bold pb-3"
               v-if="medianEarnings"
             >
-              {{ numeral(medianEarnings).format("$0,0") }}
+              {{ toDollar(medianEarnings) }}
             </h2>
             <div class="data-na pb-3" v-else>
               Data Not Available
@@ -240,7 +238,7 @@
               }}
               Schools:
               {{
-                numeral(
+                toDollar(
                   medianToggle === "group"
                     ? Math.round(
                         parseFloat(
@@ -252,16 +250,16 @@
                           toggleMedianEarnings[1]
                         )
                       ),
-                ).format("$0,0")
+                )
               }}
             </em>
 
             <ChartHorizontalBarMedian
               v-if="medianEarnings"
               :value="{
-                label: numeral(
+                label: toDollar(
                   medianEarnings,
-                ).format('$0,0'),
+                ),
                 value: medianEarnings,
               }"
               :min="{
@@ -308,7 +306,8 @@
 </template>
 
 <script setup>
-import numeral from 'numeral'
+const { toPercent, toDollar } = useNumeral()
+import { yearsText } from "@/utils/filters"
 
 const props = defineProps({
   school: {

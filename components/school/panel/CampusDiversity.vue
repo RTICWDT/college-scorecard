@@ -15,7 +15,7 @@
       <v-col cols="12" sm="6" md="3">
         <v-card flat class="pa-4 text-center fill-height">
           <h2 class="text-h4 medium-light-blue-text font-weight-bold">
-            {{ numeral(undergraduates).format() }}
+            {{ toNumber(undergraduates) }}
           </h2>
           <strong>Undergraduate<br />Students</strong>
         </v-card>
@@ -23,7 +23,7 @@
       <v-col cols="12" sm="6" md="3">
         <v-card flat class="pa-4 text-center fill-height">
           <h2 class="text-h4 medium-light-blue-text font-weight-bold">
-            {{ numeral(fullTimeEnrollment).format("0%") }}
+            {{ toPercent(fullTimeEnrollment) }}
           </h2>
           <strong>
             Full-time<br />Students
@@ -34,7 +34,7 @@
       <v-col cols="12" sm="6" md="3">
         <v-card flat class="pa-4 text-center fill-height">
           <h2 class="text-h4 medium-light-blue-text font-weight-bold">
-            {{ numeral(partTimeEnrollment).format("0%") }}
+            {{ toPercent(partTimeEnrollment) }}
           </h2>
           <strong>Part-time<br />Students</strong>
         </v-card>
@@ -176,7 +176,7 @@
 </template>
 
 <script setup>
-import numeral from 'numeral'
+const { toNumber, toPercent } = useNumeral()
 
 const props = defineProps({
   school: {

@@ -145,7 +145,7 @@
               class="text-h4 medium-light-blue-text font-weight-bold pb-5 pt-3"
               v-if="federalDebt && aidLoanSelect !== 'plus'"
             >
-              {{ numeral(federalDebt).format("$0,0") }}
+              {{ toDollar(federalDebt) }}
             </h2>
 
             <h2
@@ -156,7 +156,7 @@
                 !aidShowMedianDebtWithPrior
               "
             >
-              {{ numeral(parentPlusDebt).format("$0,0") }}
+              {{ toDollar(parentPlusDebt) }}
             </h2>
 
             <h2
@@ -167,7 +167,7 @@
                 aidShowMedianDebtWithPrior
               "
             >
-              {{ numeral(parentPlusDebtAll).format("$0,0") }}
+              {{ toDollar(parentPlusDebtAll) }}
             </h2>
 
             <div class="data-na" v-else>
@@ -206,7 +206,7 @@
 
             <div v-if="monthlyLoanPayment && aidLoanSelect === 'fed'">
               <h2 class="text-h4 medium-light-blue-text font-weight-bold pb-3">
-                {{ numeral(monthlyLoanPayment).format("$0,0") }}
+                {{ toDollar(monthlyLoanPayment) }}
               </h2>
             </div>
             <div v-else-if="aidLoanSelect === 'fed'" class="data-na pb-3">
@@ -216,12 +216,12 @@
             <div v-else-if="aidLoanSelect === 'plus'">
               <div v-if="parentPlusPayment && !aidShowMedianDebtWithPrior">
                 <h2 class="text-h4 medium-light-blue-text font-weight-bold">
-                  {{ numeral(Math.round(parseFloat(parentPlusPayment))).format("$0,0") }}
+                  {{ toDollar(Math.round(parseFloat(parentPlusPayment))) }}
                 </h2>
               </div>
               <div v-else-if="parentPlusPaymentAll && aidShowMedianDebtWithPrior">
                 <h2 class="text-h4 medium-light-blue-text font-weight-bold">
-                  {{ numeral(Math.round(parseFloat(parentPlusPaymentAll))).format("$0,0") }}
+                  {{ toDollar(Math.round(parseFloat(parentPlusPaymentAll))) }}
                 </h2>
               </div>
               <div v-else class="mini-data-na text-center">
@@ -314,7 +314,7 @@
                     >
                       <td>{{ rate.label }}</td>
                       <td v-if="rate.value">
-                        {{ numeral(rate.value).format("0%") }}
+                        {{ toPercent(rate.value) }}
                       </td>
                       <td v-else>--</td>
                     </tr>
@@ -353,9 +353,9 @@
 </template>
 
 <script setup>
-import numeral from "numeral"
 const { transitionOutboundLink } = useAnalytics()
 const { site } = useSiteData()
+const { toDollar, toPercent } = useNumeral()
 
 const props = defineProps({
   school: {

@@ -11,7 +11,7 @@
             <div>
               <div v-if="medianEarnings">
                 <span class="text-h4 text-primary font-weight-bold">
-                  {{ numeral(medianEarnings).format("$0,0") }}
+                  {{ toDollar(medianEarnings) }}
                 </span>
 
                 <ChartHorizontalBar
@@ -52,7 +52,7 @@
             <div v-if="!fosShowDebtPriorIncluded">
               <div v-if="medianDebt">
                 <span class="text-h4 text-primary font-weight-bold">
-                  {{ numeral(medianDebt).format("$0,0") }}
+                  {{ toDollar(medianDebt) }}
                 </span>
 
                 <ChartHorizontalBar
@@ -77,7 +77,7 @@
             <div v-else>
               <div v-if="medianPrior">
                 <span class="text-h4 text-primary font-weight-bold">
-                  {{ numeral(medianPrior).format("$0,0") }}
+                  {{ toDollar(medianPrior) }}
                 </span>
                 <ChartHorizontalBar
                   v-if="medianPrior"
@@ -110,7 +110,7 @@
             <div>
               <div v-if="medianEarnings">
                 <span class="text-h4 text-primary font-weight-bold">
-                  {{ numeral(medianEarnings / 12).format("$0,0") }}
+                  {{ toDollar(medianEarnings / 12) }}
                 </span>
               </div>
 
@@ -140,7 +140,7 @@
             <div v-if="!fosShowDebtPriorIncluded">
               <div v-if="medianDebtMonthly">
                 <span class="text-h4 text-primary font-weight-bold">
-                  {{ numeral(medianDebtMonthly).format("$0,0") }}
+                  {{ toDollar(medianDebtMonthly) }}
                 </span>
               </div>
 
@@ -152,7 +152,7 @@
             <div v-else>
               <div v-if="medianDebtMonthlyPrior">
                 <span class="text-h4 text-primary font-weight-bold">
-                  {{ numeral(medianDebtMonthlyPrior).format("$0,0") }}
+                  {{ toDollar(medianDebtMonthlyPrior) }}
                 </span>
               </div>
 
@@ -214,7 +214,7 @@
 </template>
 
 <script setup>
-import numeral from 'numeral'
+const { toDollar } = useNumeral()
 const store = useCompareStore()
 const { fields, getNestedField } = useConstants()
 const emit = defineEmits(['update-debt-show-prior'])

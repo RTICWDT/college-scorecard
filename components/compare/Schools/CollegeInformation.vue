@@ -3,7 +3,23 @@
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
-        hi
+        <ChartHorizontalBarMedian
+          :shouldRender="fullTimeEnrollment(institution)"
+          :value="{
+            label: toPercent(fullTimeEnrollment(institution)),
+            value: fullTimeEnrollment(institution),
+          }"
+          :min="{
+            label: '0%',
+            value: 0,
+            style: { height: '60px' },
+          }"
+          :max="{
+            label: '100%',
+            value: 1,
+            style: { height: '60px' },
+          }"
+        />
       </template>
     </CompareSchoolsDataSection>
   </div>
@@ -38,6 +54,12 @@
 
 <script setup>
 const props = defineProps({ institutions: Object });
+const { toPercent } = useNumeral()
+
+const {
+  fullTimeEnrollment,
+} = useComplexFieldMethods()
+
 </script>
 
 <style lang="scss" scoped>

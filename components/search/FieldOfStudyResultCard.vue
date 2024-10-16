@@ -45,7 +45,7 @@
 
         <div v-if="medianEarnings">
           <span class="display-2 text-navy font-weight-bold" :class="showSidebar && 'callout-text'">
-            {{ numeral(medianEarnings).format("$0,0") }}
+            {{ toDollar(medianEarnings) }}
           </span>
           <div style="max-width: 160px; height: 30px">
             <ChartHorizontalBar
@@ -75,7 +75,7 @@
 
         <div v-if="medianEarnings">
           <span class="display-2 text-navy font-weight-bold" :class="showSidebar && 'callout-text'">
-            {{ numeral(medianEarnings / 12).format("$0,0") }}
+            {{ toDollar(medianEarnings / 12) }}
           </span>
         </div>
         <div v-else class="mini-data-na text-center">Data Not Available</div>
@@ -97,7 +97,7 @@
 
         <div v-if="medianDebt">
           <span class="display-2 text-navy font-weight-bold" :class="showSidebar && 'callout-text'">
-            {{ numeral(medianDebt).format("$0,0") }}
+            {{ toDollar(medianDebt) }}
 
           </span>
           <div style="max-width: 160px; height: 30px">
@@ -129,7 +129,7 @@
         </div>
         <div v-if="medianDebtMonthly">
           <span class="display-2 text-navy font-weight-bold" :class="showSidebar && 'callout-text'">
-            {{ numeral(medianDebtMonthly).format("$0,0") }}
+            {{ toDollar(medianDebtMonthly) }}
           </span>
         </div>
         <div v-else class="mini-data-na text-center">Data Not Available</div>
@@ -149,7 +149,7 @@
         </div>
         <div v-if="gradCount">
           <span class="display-2 text-navy font-weight-bold" :class="showSidebar && 'callout-text'">
-            {{ numeral(gradCount).format("0,0") }}
+            {{ toNumber(gradCount) }}
           </span>
         </div>
         <div v-else class="mini-data-na text-center">Data Not Available</div>
@@ -161,7 +161,7 @@
 </template>
 
 <script setup>
-import numeral from "numeral";
+const { toDollar, toNumber } = useNumeral();
 const { fields, getNestedField } = useConstants();
 const store = useCompareStore();
 

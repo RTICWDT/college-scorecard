@@ -60,7 +60,7 @@
             :median="{
               label:
                 'Midpoint: ' +
-                numeral(medianToggle === 'group' ? computedToggleGraduationRate[0] : computedToggleGraduationRate[1]).format('0%'),
+                toPercent(medianToggle === 'group' ? computedToggleGraduationRate[0] : computedToggleGraduationRate[1]),
               value: medianToggle === 'group' ? computedToggleGraduationRate[0] * 100 : computedToggleGraduationRate[1] * 100,
               style: { height: '60px' },
               show: !showPellOnlyGrad,
@@ -141,7 +141,7 @@
 </template>
 
 <script setup>
-import numeral from 'numeral'
+const { toPercent } = useNumeral()
 import { yearsText } from '~/utils/filters'
 
 const props = defineProps({
