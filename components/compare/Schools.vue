@@ -1,14 +1,32 @@
 <template>
-  <div v-if="loading">
-    Loading...
+  <div v-if="loading || institutions.all.length === 0" style="height: 500px" class="d-flex align-center justify-center">
+    <div v-if="loading">
+      Loading...
+    </div>
+
+    <div v-else-if="institutions.all.length === 0" class="position-relative" style="bottom: 30px;">
+      <h3 class="text-h4 font-weight-bold text-center mt-4">No schools selected to compare.</h3>
+      <div class="text-center mt-8">
+        <NuxtLink to="/search">
+          <v-btn
+            color="secondary"
+            size="large"
+          >
+            Search Schools
+          </v-btn>
+        </NuxtLink>
+      </div>
+      <p class="text-center mt-8">
+        Try searching for schools and clicking the
+        <v-btn icon tabindex="-1">
+          <v-icon icon="fa:fa fa-check-circle" class="mx-1" color="grey" />
+        </v-btn>
+        to add a school for comparison
+      </p>
+    </div>
   </div>
 
-  <div v-else-if="institutions.all.length === 0">
-    No Schools selected.
-  </div>
-
-  <div v-else>
-
+  <div v-if="!loading && institutions.all.length > 0">
     <div class="grid-container">
       <v-card v-for="institution in institutions.all" class="pa-4 d-flex align-center">
         <div class="mr-3 content">

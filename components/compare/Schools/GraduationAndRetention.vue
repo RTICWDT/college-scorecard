@@ -1,4 +1,5 @@
 <template>
+
   <MedianToggle
     v-if="showMedian"
     :display-toggle="medianToggle"
@@ -83,7 +84,7 @@
 
   <h2 class="mb-5 mt-7">Outcomes 8 Years After Attending</h2>
   <v-checkbox
-    v-model="showPellOnly"
+    v-model="showPellOnlyOutcomes"
     label="Show Pell Grant Recipients Only"
     color="secondary"
   >
@@ -118,6 +119,7 @@ const {
 } = useComplexFieldMethods()
 
 const showPellOnly = ref(false)
+const showPellOnlyOutcomes = ref(false)
 
 const contextualCompletionRate = computed(() => (institution) => {
   return showPellOnly.value ? completionRatePell(institution) : completionRate(institution)

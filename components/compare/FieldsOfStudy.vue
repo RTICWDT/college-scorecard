@@ -1,14 +1,32 @@
 <template>
-  <div v-if="loading">
-    Loading...
+  <div v-if="loading || fieldsOfStudy.all.length === 0" style="height: 500px" class="d-flex align-center justify-center">
+    <div v-if="loading">
+      Loading...
+    </div>
+
+    <div v-else-if="fieldsOfStudy.all.length === 0" class="position-relative" style="bottom: 30px;">
+      <h3 class="text-h4 font-weight-bold text-center mt-4">No fields of study selected to compare.</h3>
+      <div class="text-center mt-8">
+        <NuxtLink to="/search/fos-landing">
+          <v-btn
+            color="secondary"
+            size="large"
+          >
+            Search Fields of Study
+          </v-btn>
+        </NuxtLink>
+      </div>
+      <p class="text-center mt-8">
+        Try searching for fields of study and clicking the
+        <v-btn icon tabindex="-1">
+          <v-icon icon="fa:fa fa-check-circle" class="mx-1" color="grey" />
+        </v-btn>
+        to add a a field of study for comparison
+      </p>
+    </div>
   </div>
 
-  <div v-else-if="fieldsOfStudy.all.length === 0">
-    No Fields of Study found.
-  </div>
-
-  <div v-else>
-
+  <div v-if="!loading && fieldsOfStudy.all.length > 0">
     <div class="grid-container">
       <v-card 
         class="grid-item pa-4 mr-4"
@@ -87,11 +105,10 @@ const queryFieldsOfStudy = async () => {
     const routeFieldsOfStudy = Array.isArray(route.query.fos) ? route.query.fos : [route.query.fos].filter(Boolean);
     params = routeFieldsOfStudy.map((fos) => {
       const [id, code, credentialLevel] = fos.split(".")
-      // console.log("id, code, credentialLevel", id, code, credentialLevel)
       return {
         unit_id: Number(id),
         code: Number(code),
-        credential: { level:  Number(credentialLevel) },
+        credential: { level: Number(credentialLevel) },
       }
     })
   } else {
@@ -103,7 +120,6 @@ const queryFieldsOfStudy = async () => {
     [fields.ID]: fieldOfStudy.unit_id,
     [fields.FIELD_OF_STUDY_CODE]: fieldOfStudy.code,
     [fields.FIELD_OF_STUDY_LENGTH]: fieldOfStudy.credential.level,
-
     [fields.OPERATING]: 1,
     [fields.SIZE + "__range"]: "0..",
     [fields.PREDOMINANT_DEGREE + "__range"]: "1..3",
