@@ -32,6 +32,12 @@ $grid-breakpoints: (
   }
 }
 
+@mixin smAndUp {
+  @media (min-width: map-get($grid-breakpoints, 'sm')) {
+    @content;
+  }
+}
+
 @mixin md {
   @media (min-width: map-get($grid-breakpoints, 'md')) and (max-width: map-get($grid-breakpoints, 'lg') - 1) {
     @content;

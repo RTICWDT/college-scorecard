@@ -1,33 +1,29 @@
 <template>
   <div class="d-print-none">
-    <v-footer
+    <div
       class="d-block pa-md-4 text-white"
       app
       absolute
-      :height="$vuetify.display.smAndDown ? 300 : 250"
-      color="#10274E"
+      style="background-color: #10274E; z-index: 900;"
     >
       <v-container class="py-8">
         <v-row>
           <v-col>
             <ul class="d-md-flex justify-space-between ma-0 pa-0">
               <li>
-                <NuxtLink
-                  to="/"
-                  :class="{ 'nav-active': activeLink === '/' }"
-                >Home</NuxtLink>
+                <NuxtLink to="/" :class="{ 'nav-active': activeLink === '/' }">
+                  Home
+                </NuxtLink>
               </li>
               <li>
-                <NuxtLink
-                  to="/data"
-                  :class="{ 'nav-active': activeLink === 'data' }"
-                >About the Data</NuxtLink>
+                <NuxtLink to="/data" :class="{ 'nav-active': activeLink === 'data' }">
+                  About the Data
+                </NuxtLink>
               </li>
               <li>
-                <NuxtLink
-                  to="/search"
-                  :class="{ 'nav-active': activeLink === 'search' }"
-                >Search</NuxtLink>
+                <NuxtLink to="/search" :class="{ 'nav-active': activeLink === 'search' }">
+                  Search
+                </NuxtLink>
               </li>
               <li>
                 <NuxtLink
@@ -35,7 +31,9 @@
                   to="/compare"
                   aria-label="Navigate to compare page"
                   @click="handleCompareLinkClick('/compare')"
-                >Compare</NuxtLink>
+                >
+                  Compare
+                </NuxtLink>
               </li>
               <li></li>
             </ul>
@@ -91,24 +89,11 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-footer>
-
-    <!-- <ClientOnly>
-      <CompareHeader app />
-      <v-bottom-sheet
-        v-model="drawerOpen"
-        inset
-      >
-        <CompareDrawer :show-info-text="false" />
-      </v-bottom-sheet>
-    </ClientOnly> -->
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-@use "sass:map";
-@use "vuetify/settings";
-
 li {
   list-style-type: none;
 }
@@ -117,24 +102,16 @@ a {
   &:hover {
     text-decoration: underline;
   }
+  color: white;
 }
 </style>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useDisplay } from 'vuetify'
 
 const route = useRoute()
 const activeLink = ref(null)
-
-
-//TODO: Drawer implementation
-// import CompareDrawer from '~/components/CompareDrawer.vue'
-// import CompareHeader from '~/components/CompareHeader.vue'
-// const drawerOpen = computed({
-//   get: () => store.state.drawerOpen,
-//   set: (value) => store.commit('setDrawerOpen', value)
-// })
+const { smAndDown } = useDisplay()
 
 const version = ref('3.0.3') // TODO: implement a way to get the version
 

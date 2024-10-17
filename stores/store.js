@@ -57,7 +57,9 @@ export const useCompareStore = defineStore('compare', {
       return {
         code: obj.code,
         unit_id: obj.unit_id,
-        credential: { level: obj.credential.level },
+        credential: { level: obj.credential.level, title: obj.credential.title },
+        school: { name: obj.school.name },
+        title: obj.title,
       }
     },
 
@@ -104,7 +106,8 @@ export const useCompareStore = defineStore('compare', {
     },
 
     clearForm() {
-      this.clearForm = true
+      this.fos = []
+      this.institutions = []
     },
 
     setOutboundUrl(value = null) {

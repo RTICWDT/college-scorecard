@@ -150,8 +150,7 @@ nav {
   <Spacer :height="100" />
 
   <!-- Mobile Navigation Drawer -->
-  <v-navigation-drawer v-model="drawer" temporary disable-resize-watcher location="right" color="white"
-    class="mobile-nav">
+  <v-navigation-drawer v-model="drawer" temporary disable-resize-watcher location="right" color="white" class="mobile-nav">
     <div v-if="drawer">
       <v-list nav>
           <div class="d-flex justify-end mb-5 mr-1">
