@@ -109,6 +109,7 @@
         </v-expansion-panel>
       </v-expansion-panels>
     </Teleport>
+
   </div>
 </template>
 
@@ -123,13 +124,17 @@ const closeAllPanels = () => {
   panels.value = []
 }
 
-
 const router = useRouter()
 const route = useRoute()
 const store = useCompareStore()
 const { apiGetAll } = useApi()
 const { fields } = useConstants()
 const { trackCompareList, trackAccordion } = useAnalytics()
+
+const props = defineProps({
+  isViewingSharedComparison: Boolean,
+})
+
 const loading = ref(false)
 const institutions = reactive({
   all: [],
@@ -140,10 +145,6 @@ const institutions = reactive({
 
 onMounted(() => {
   querySchools()
-})
-
-const props = defineProps({
-  isViewingSharedComparison: Boolean,
 })
 
 const querySchools = async () => {
@@ -190,19 +191,19 @@ const querySchools = async () => {
   }
 }
 
-const setInstitutions = (institutions) => {
-  institutions.all = schools
+const removeSchool = (school) => {
+  const newSchools = institutions.all.filter((institution) => institution.id !== school.id)
+  groupSchools(newSchools)
+  store.removeSchool(school)
 }
 
-const removeSchool = (school) => {
+const groupSchools = (schools) => {
   Object.assign(institutions, {
-    all: institutions.all.filter((institution) => institution.id !== school.id),
-    schoolsCertificate: institutions.schoolsCertificate.filter((institution) => institution.id !== school.id),
-    schools2Year: institutions.schools2Year.filter((institution) => institution.id !== school.id),
-    schools4Year: institutions.schools4Year.filter((institution) => institution.id !== school.id),
+    all: schools,
+    schoolsCertificate: schools.filter((school) => school.school.degrees_awarded.predominant === 1),
+    schools2Year: schools.filter((school) => school.school.degrees_awarded.predominant === 2),
+    schools4Year: schools.filter((school) => school.school.degrees_awarded.predominant === 3),
   })
-
-  store.removeSchool(school)
 }
 </script>
 
