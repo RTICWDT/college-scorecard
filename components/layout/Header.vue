@@ -91,7 +91,7 @@ nav {
 </style>
 
 <template>
-  <div id="skip-content-tab" style="background-color: white;">
+  <div id="skip-content-tab" style="background-color: white; z-index: 99999;">
     <a tabindex="1" @click="skipNav" href="#">
       Skip to main content
     </a>

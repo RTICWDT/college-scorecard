@@ -19,7 +19,7 @@
               size="small"
               @click="showDrawer = !showDrawer"
               icon="mdi-close"
-              tabindex="0"
+              :tabindex="showDrawer ? 0 : -1"
             />
           </v-col>
         </v-row>
@@ -42,20 +42,20 @@
               </div>
               <div v-for="institution in store.institutions">
                 <div class="d-flex align-center mb-5">
-                  <v-btn icon="fa: fa-solid fa-trash-can" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeSchool(institution)"/>
+                  <v-btn icon="fa: fa-solid fa-trash-can" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeSchool(institution)" :tabindex="showDrawer ? 0 : -1"/>
                   <p class="text-body-2"><strong>{{ institution.school.name }}</strong></p>
                 </div>
               </div>
             </div>
             <div class="flex-grow-1"></div>
             <div class="d-flex justify-center bg-white pt-3">
-              <NuxtLink v-if="noSchoolsSelected" to="/search">
-                <v-btn color="primary">
+              <NuxtLink v-if="noSchoolsSelected" to="/search" :tabindex="-1">
+                <v-btn color="primary"  :tabindex="showDrawer ? 0 : -1">
                   Search Schools
                 </v-btn>
               </NuxtLink>
-              <NuxtLink v-else to="/compare?toggle=institutions">
-                <v-btn  color="primary">
+              <NuxtLink v-else to="/compare?toggle=institutions" :tabindex="-1">
+                <v-btn color="primary" :tabindex="showDrawer ? 0 : -1">
                   Compare {{ store.institutions.length }} School{{ oneSchoolSelected ? '' : 's' }}
                 </v-btn>
               </NuxtLink>
@@ -79,7 +79,7 @@
               </v-card>
               <div v-for="fos in store.fos">
                 <div class="d-flex align-center mb-5">
-                  <v-btn icon="fa: fa-solid fa-trash-can" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeFieldOfStudy(fos)"/>
+                  <v-btn icon="fa: fa-solid fa-trash-can" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeFieldOfStudy(fos)" :tabindex="showDrawer ? 0 : -1"/>
                   <div>
                     <p class="text-body-2"><strong>{{ fos.title }}</strong></p>
                     <p class="text-caption text-uppercase">{{ fos.credential.title }}</p>
@@ -90,13 +90,13 @@
             </div>
             <div class="flex-grow-1"></div>
             <div class="d-flex justify-center bg-white pt-3">
-              <NuxtLink v-if="noFosSelected" to="/search/fos-landing">
-                <v-btn v-if="noFosSelected" color="primary">
+              <NuxtLink v-if="noFosSelected" to="/search/fos-landing" :tabindex="-1">
+                <v-btn v-if="noFosSelected" color="primary" :tabindex="showDrawer ? 0 : -1">
                   Search Fields of Study
                 </v-btn>
               </NuxtLink>
-              <NuxtLink v-else to="/compare?toggle=fos">
-                <v-btn color="primary">
+              <NuxtLink v-else to="/compare?toggle=fos" :tabindex="-1">
+                <v-btn color="primary" :tabindex="showDrawer ? 0 : -1">
                   Compare {{ store.fos.length }} Field{{ oneFosSelected ? '': 's' }} of Study
                 </v-btn>
               </NuxtLink>
@@ -106,6 +106,8 @@
 
       </v-container>
     </v-navigation-drawer>
+
+
 
     <!-- DRAWER RAIL -->
     <div class="position-fixed w-100 rail" :class="{ 'visible': !showDrawer && showRail }">
