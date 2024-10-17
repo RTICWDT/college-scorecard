@@ -49,7 +49,7 @@
     </CompareSchoolsDataSection>
   </div>
 
-  <h2 class="mb-5">Socio-Evonomic Diversity</h2>
+  <h2 class="mb-5">Socio-Economic Diversity</h2>
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">

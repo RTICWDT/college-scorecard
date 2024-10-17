@@ -28,7 +28,6 @@
     <hr class="my-8"/>
     <CompareSchoolsOverview :institutions="institutions" />
 
-
     <Teleport to="#teleport-accordion-container">
       <v-row>
         <v-col class="text-right">
@@ -109,7 +108,6 @@
         </v-expansion-panel>
       </v-expansion-panels>
     </Teleport>
-
   </div>
 </template>
 
