@@ -25,9 +25,8 @@
         </v-row>
 
         <v-row>
-
           <v-col class="border-e d-flex flex-column" cols="12" sm="6">
-            <div class="d-flex align-center mb-3">
+            <div class="d-flex align-center mb-5">
               <v-btn
                 size="small"
                 icon="fa:fas fa-university"
@@ -38,20 +37,33 @@
             </div>
 
             <div class="items-list">
+              <div v-if="maxSchoolsReached">
+                Maximum of 10 Schools Selected
+              </div>
               <div v-for="institution in store.institutions">
-                <p>{{ institution.school.name }}</p>
+                <div class="d-flex align-center mb-5">
+                  <v-btn icon="fa: fa-solid fa-trash-can" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeSchool(institution)"/>
+                  <p class="text-body-2"><strong>{{ institution.school.name }}</strong></p>
+                </div>
               </div>
             </div>
             <div class="flex-grow-1"></div>
-            <div class="d-flex justify-center bg-white">
-              <v-btn color="primary">
-                Compare Schools
-              </v-btn>
+            <div class="d-flex justify-center bg-white pt-3">
+              <NuxtLink v-if="noSchoolsSelected" to="/search">
+                <v-btn color="primary">
+                  Search Schools
+                </v-btn>
+              </NuxtLink>
+              <NuxtLink v-else to="/compare?toggle=institutions">
+                <v-btn  color="primary">
+                  Compare {{ store.institutions.length }} School{{ oneSchoolSelected ? '' : 's' }}
+                </v-btn>
+              </NuxtLink>
             </div>
           </v-col>
 
           <v-col class="d-flex flex-column" cols="12" sm="6">
-            <div class="d-flex align-center mb-3">
+            <div class="d-flex align-center mb-5">
               <v-btn
                 size="small"
                 icon="fa:fas fa-award"
@@ -62,27 +74,41 @@
             </div>
 
             <div class="items-list">
+              <v-card v-if="maxFosReached" class="pa-2 mb-5 bg-lightyellow font-weight-bold">
+                Maximum of 10 Fields of Study selected
+              </v-card>
               <div v-for="fos in store.fos">
-                <p>{{ fos.title }}</p>
-                <p>{{ fos.credential.title }}</p>
-                <p>{{ fos.school.name }}</p>
+                <div class="d-flex align-center mb-5">
+                  <v-btn icon="fa: fa-solid fa-trash-can" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeFieldOfStudy(fos)"/>
+                  <div>
+                    <p class="text-body-2"><strong>{{ fos.title }}</strong></p>
+                    <p class="text-caption text-uppercase">{{ fos.credential.title }}</p>
+                    <p class="text-caption">{{ fos.school.name }}</p>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="flex-grow-1"></div>
-            <div class="d-flex justify-center bg-white">
-              <v-btn color="primary">
-                Compare Fields of Study
-              </v-btn>
+            <div class="d-flex justify-center bg-white pt-3">
+              <NuxtLink v-if="noFosSelected" to="/search/fos-landing">
+                <v-btn v-if="noFosSelected" color="primary">
+                  Search Fields of Study
+                </v-btn>
+              </NuxtLink>
+              <NuxtLink v-else to="/compare?toggle=fos">
+                <v-btn color="primary">
+                  Compare {{ store.fos.length }} Field{{ oneFosSelected ? '': 's' }} of Study
+                </v-btn>
+              </NuxtLink>
             </div>
           </v-col>
-
         </v-row>
 
       </v-container>
     </v-navigation-drawer>
 
     <!-- DRAWER RAIL -->
-    <div class="position-fixed w-100 rail" :class="{ 'visible': !showDrawer && showRail}" style="z-index: 1001;">
+    <div class="position-fixed w-100 rail" :class="{ 'visible': !showDrawer && showRail }">
       <div class="d-flex justify-center">
         <div class='flex-grow-1 toggle-content-border'>
           <v-btn
@@ -101,20 +127,28 @@
                   <div class="d-flex align-center mr-5">
                     <v-btn
                       size="x-small"
-                      icon="fa:fas fa-university"
-                      class="bg-schoolgreen mx-2"
+                      :icon="maxSchoolsReached ? 'fa:fas fa-exclamation-circle' : 'fa:fas fa-award'"
+                      class="mx-2"
+                      :class="{ 'bg-schoolgreen': !maxSchoolsReached, 'bg-error': maxSchoolsReached }"
                       :readonly="true"
                     />
-                    <p>{{ store.institutions.length }} School{{ store.institutions.length === 1 ? '' : 's' }}</p>
+                    <p>{{ store.institutions.length }} School{{ oneSchoolSelected ? '' : 's' }}</p>
+                    <v-tooltip v-if="maxSchoolsReached" activator="parent" location="top">
+                      Maximum of 10 Schools Reached
+                    </v-tooltip>
                   </div>
                   <div class="d-flex align-center">
                     <v-btn
                       size="x-small"
-                      icon="fa:fas fa-award"
-                      class="bg-yellow mx-2"
+                      :icon="maxFosReached ? 'fa:fas fa-exclamation-circle' : 'fa:fas fa-award'"
+                      class="mx-2"
+                      :class="{ 'bg-yellow': !maxFosReached, 'bg-error': maxFosReached }"
                       :readonly="true"
                     />
-                    <p>{{ store.fos.length }} Field{{ store.fos.length === 1 ? '' : 's' }} of Study</p>
+                    <p>{{ store.fos.length }} Field{{ oneFosSelected ? '' : 's' }} of Study</p>
+                    <v-tooltip v-if="maxFosReached" activator="parent" location="top">
+                      Maximum of 10 Fields of Study Reached
+                    </v-tooltip>
                   </div>
                 </v-col>
               </v-row>
@@ -136,6 +170,15 @@ const onComparePage = computed(() => route.fullPath.includes('compare'))
 const showRail = ref(hasItemsToCompare.value && !onComparePage.value)
 
 
+const maxSchoolsReached = computed(() => store.institutions.length === 10)
+const oneSchoolSelected = computed(() => store.institutions.length === 1)
+const maxFosReached = computed(() => store.fos.length === 10)
+const oneFosSelected = computed(() => store.fos.length === 1)
+
+const noSchoolsSelected = computed(() => store.institutions.length === 0)
+const noFosSelected = computed(() => store.fos.length === 0)
+
+
 watch(() => route.fullPath, () => {
   console.log(route.fullPath)
   if (route.fullPath.includes('compare')) {
@@ -146,8 +189,8 @@ watch(() => route.fullPath, () => {
   }
 })
 
-watch(() => store.fos.length, () => { showRail.value = hasItemsToCompare.value })
-watch(() => store.institutions.length, () => { showRail.value = hasItemsToCompare.value })
+watch(() => store.fos.length, () => { showRail.value = hasItemsToCompare.value && !onComparePage.value })
+watch(() => store.institutions.length, () => { showRail.value = hasItemsToCompare.value && !onComparePage.value })
 </script>
 
 <style scoped lang="scss">
@@ -210,6 +253,7 @@ watch(() => store.institutions.length, () => { showRail.value = hasItemsToCompar
 .rail {
   transition: bottom 0.3s;
   bottom: -55px;
+  z-index: 1001;
 
   &.visible {
     bottom: 0px;
@@ -221,6 +265,7 @@ watch(() => store.institutions.length, () => { showRail.value = hasItemsToCompar
     max-height: 400px;
     min-height: 400px;
     overflow-y: scroll;
+
   }
 }
 </style>
