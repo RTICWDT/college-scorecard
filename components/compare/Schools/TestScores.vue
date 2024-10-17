@@ -7,7 +7,7 @@
     <div class="px-0 px-md-5 mb-5">
       <CompareSchoolsDataSection :institutions="institutions">
         <template #data="{ institution }">
-          <Range
+          <ChartRange
             v-if="satReading(institution).available"
             :lower="{
               value: satReading(institution).lower,
@@ -36,7 +36,7 @@
     <div class="px-0 px-md-5 mb-5">
       <CompareSchoolsDataSection :institutions="institutions">
         <template #data="{ institution }">
-          <Range
+          <ChartRange
             v-if="satMath(institution).available"
             :lower="{
               value: satMath(institution).lower,
@@ -65,7 +65,7 @@
     <div class="px-0 px-md-5 mb-5">
       <CompareSchoolsDataSection :institutions="institutions">
         <template #data="{ institution }">
-          <Range
+          <ChartRange
             v-if="act(institution).available"
             :lower="{
               value: act(institution).lower,
