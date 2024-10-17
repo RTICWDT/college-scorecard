@@ -157,8 +157,6 @@ const handleCompareToggle = (value) => {
   router.replace({ query: newQuery })
 }
 
-
-
 const isViewingSharedComparison = computed(() => !!route.query.s || !!route.query.fos)
 
 const schoolCount = computed(() => {
@@ -201,6 +199,13 @@ const updateStoreToMatchSharedComparison = () => {
 
 const sharedComparisonIsLoading = computed(() => {
   return Array.isArray(store.temporaryFos) && Array.isArray(store.temporaryInstitutions)
+})
+
+onBeforeRouteLeave(() => {
+  if (isViewingSharedComparison.value) {
+    store.temporaryFos = null
+    store.temporaryInstitutions = null
+  }
 })
 
 useHead({
