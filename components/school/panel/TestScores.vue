@@ -19,7 +19,7 @@
           <h3 class="text-h5 font-weight-bold mb-2">SAT</h3>
 
           <h4 class="text-overline">Critical Reading</h4>
-          <Range
+          <ChartRange
             v-if="satReading.available"
             :lower="{
               value: satReading.lower,
@@ -42,7 +42,7 @@
           <p v-else class="data-na">Data Not Available</p>
 
           <h4 class="text-overline">Math</h4>
-          <Range
+          <ChartRange
             v-if="satMath.available"
             :lower="{
               value: satMath.lower,
@@ -67,7 +67,7 @@
           <Spacer :height="15"/>
           <h3 class="text-h5 font-weight-bold mb-2">ACT</h3>
 
-          <Range
+          <ChartRange
             v-if="act.available"
             :lower="{ value: act.lower, label: act.lower }"
             :upper="{ value: act.upper, label: act.upper }"
