@@ -181,7 +181,7 @@ const querySchools = async () => {
     })
 
     if (props.isViewingSharedComparison) {
-      store.temporaryInstitutions = institutions.all
+      store.temporaryInstitutions = institutions.all.map((institution) => store.schoolParams(institution))
     }
   } catch (error) {
     console.error("Issue locating schools for compare...", error)

@@ -194,7 +194,6 @@ const {
   isBranch: isBranchMethod,
 } = useComplexFieldMethods()
 
-
 const isBranch = computed(() => isBranchMethod(school.value))
 const fieldsLink = computed(() => fieldsLinkMethod(school.value))
 const zip = computed(() => zipMethod(school.value))

@@ -152,7 +152,7 @@ const groupFieldsOfStudy = (fosResults) => {
   })
 
   if (props.isViewingSharedComparison) {
-    store.temporaryFos = fieldsOfStudy.all
+    store.temporaryFos = fieldsOfStudy.all.map((fos) => store.fieldOfStudyParams(fos))
   }
 }
 </script>

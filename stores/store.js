@@ -21,14 +21,18 @@ export const useCompareStore = defineStore('compare', {
   },
 
   actions: {
+    schoolParams(obj) {
+      return {
+        id: obj.id,
+        school: { name: obj['school.name'] },
+      }
+    },
+
     addSchool(obj) {
       this.institutions = this.institutions || []
 
       if (this.institutions.length < 10) {
-        this.institutions.push({
-          id: obj.id,
-          school: { name: obj['school.name'] },
-        })
+        this.institutions.push(this.schoolParams(obj))
       }
     },
 
@@ -49,15 +53,19 @@ export const useCompareStore = defineStore('compare', {
       }
     },
 
+    fieldOfStudyParams(obj) {
+      return {
+        code: obj.code,
+        unit_id: obj.unit_id,
+        credential: { level: obj.credential.level },
+      }
+    },
+
     addFieldOfStudy(obj) {
       this.fos = this.fos || []
 
       if (this.fos.length < 10) {
-        this.fos.push({
-          code: obj.code,
-          unit_id: obj.unit_id,
-          credential: { level: obj.credential.level },
-        })
+        this.fos.push(this.fieldOfStudyParams(obj))
       }
     },
 
@@ -71,7 +79,7 @@ export const useCompareStore = defineStore('compare', {
       if (index !== -1) {
         this.fos.splice(index, 1)
       } else {
-        addFieldOfStudy(obj)
+        this.addFieldOfStudy(obj)
       }
     },
 
