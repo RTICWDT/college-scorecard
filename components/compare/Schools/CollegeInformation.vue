@@ -28,23 +28,25 @@
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
-        <div class="d-flex flex-column flex-md-row py-5">
-          <div class="flex-grow-1">
-            <SmallSchoolIcons :school="institution" :fields="fields" />
-          </div>
-          <div class="d-block d-md-flex flex-grow-1">
-            <div class="my-5 my-md-0 text-center flex-grow-1">
-              <h2 class="">{{ toNumber(undergraduates(institution)) }}</h2>
-              <p>undergraduates</p>
-            </div>
-            <div class="text-center flex-grow-1">
+        <v-container class="pa-0 pt-3">
+          <v-row class="pa-0">
+            <v-col cols="12" sm="12" md="6">
+              <SmallSchoolIcons :school="institution" :fields="fields" />
+            </v-col>
+            <v-col cols="12" sm="12" md="3" class="pa-0 pl-5 pl-md-0">
+              <div class="my-2 flex-grow-1 text-left text-md-center">
+                <h2 class="d-inline-block d-md-block">{{ toNumber(undergraduates(institution)) }}</h2>
+                <p class="d-inline-block d-md-block ml-2 ml-md-0">undergraduates</p>
+              </div>
+            </v-col>
+            <v-col cols="12" sm="12" md="3"  class="pa-0 pl-5 pl-md-0 pb-7 text-left text-md-center">
               <a :href="schoolUrl(institution)" target="_blank">
                 {{ formatUrlText(schoolUrl(institution)) }}
                 <v-icon size="x-small">mdi-open-in-new</v-icon>
               </a>
-            </div>
-          </div>
-        </div>
+            </v-col>
+          </v-row>
+        </v-container>
       </template>
     </CompareSchoolsDataSection>
   </div>
