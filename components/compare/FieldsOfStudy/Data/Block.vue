@@ -44,5 +44,6 @@ const toggleHighlight = (event, fos) => {
 <style scoped lang="scss">
 .result-card {
   border-left: 1px solid #666;
+  min-height: 125px;
 }
 </style>

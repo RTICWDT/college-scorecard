@@ -6,7 +6,11 @@
       <slot name="byline" :groupName="titleShorthand()" :institution="institutions[0]"></slot> 
     </div>
     <div class="py-3">
-      <div 
+      <div v-if="hasSlot('override')">
+        <slot name="override" :institutions="institutions"></slot>
+      </div>
+      <div
+        v-else
         v-for="institution in institutions" 
         class="pl-5 ml-2 result-card" 
         :class="{ 'bg-warning': store.highlightedInstitution === institution }" 
@@ -24,6 +28,8 @@
 
 <script setup>
 const store = useCompareStore();
+const slots = useSlots();
+const hasSlot = (name) => !!slots[name]
 const { schoolLink } = useComplexFieldMethods()
 const props = defineProps({
   institutions: Array,
@@ -43,5 +49,6 @@ const toggleHighlight = (event, institution) => {
 <style scoped lang="scss">
 .result-card {
   border-left: 1px solid #666;
+  min-height: 125px;
 }
 </style>

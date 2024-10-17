@@ -71,7 +71,7 @@
           </v-expansion-panel-title>
 
           <v-expansion-panel-text>
-            <CompareSchoolsGreaduationAndRetention :institutions="institutions" />
+            <CompareSchoolsGraduationAndRetention :institutions="institutions" />
           </v-expansion-panel-text>
         </v-expansion-panel>
 
