@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="bg-white w-100 py-0 px-0" style="z-index: 1000;" aria-label="Official government website">
+  <v-container fluid class="bg-white w-100 py-0 px-0 position-fixed" style="z-index: 900;" aria-label="Official government website">
     <div class="d-flex align-items-center px-3">
       <LayoutUsaFlag class="mx-2"/>
       <p class="mb-0 py-1" style="font-size: .75rem">
@@ -42,6 +42,7 @@
       </div>
     </v-container>
   </v-container>
+  <Spacer :height="26"/>
 </template>
 
 <script setup>
