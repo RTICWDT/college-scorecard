@@ -194,8 +194,8 @@ const updateStoreToMatchSharedComparison = () => {
   store.institutions = []
   store.temporaryInstitutions.forEach((institution) => store.addSchool(institution))
 
-  store.temporaryFos = []
-  store.temporaryInstitutions = []
+  store.temporaryFos = null
+  store.temporaryInstitutions = null
   router.replace(`/compare/?toggle=${route.query.toggle}`)
 }
 
