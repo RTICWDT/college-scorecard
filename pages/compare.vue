@@ -102,9 +102,33 @@
 </template>
 
 <script setup>
+const store = useCompareStore()
 const router = useRouter()
 const route = useRoute()
-const shareUrl = computed(() => window.location.href)
+const shareUrl = computed(() => {
+  if (route.query.fos || route.query.s) {
+    window.location.href
+  }
+
+  if (store.institutions.length === 0 && store.fos.length === 0) {
+    return window.location.href
+  }
+
+  // query hacking for share parameters
+  let params = { toggle: route.query.toggle, fos: '', s: '' }
+
+  if (store.institutions.length > 0) {
+    let ids = store.institutions.map((institution) => institution.id)
+    params.s = `&s=${ids.join('&s=')}`
+  }
+
+  if (store.fos.length > 0) {
+    let ids = store.fos.map((fos) => `${fos.unit_id}.${fos.code}.${fos.credential.level}`)
+    params.fos = `&fos=${ids.join('&fos=')}`
+  }
+
+  return `${window.location.origin}${window.location.pathname}?toggle=${route.query.toggle}${params.s}${params.fos}`
+})
 
 // hacking og routes to match new router conventions, such that we can easily pull query params
 const cleanedPath = route.fullPath.replace(/%26/g, '&').replace(/%3D/g, '=')
@@ -113,7 +137,7 @@ router.push(cleanedPath)
 // school param  // &s={schoolId}
 // field of study param // &fos={schoolID}.{fieldOfStudyCode}.{credentialLevel}
 
-const store = useCompareStore()
+
 const toggleFields = ['institutions', 'fos']
 const compareToggle = ref(Math.max(toggleFields.indexOf(route.query.toggle), 0))
 const isComparingSchools = computed(() => route.query.toggle === 'institutions')
@@ -132,6 +156,8 @@ const handleCompareToggle = (value) => {
   const newQuery = { ...route.query, toggle}
   router.replace({ query: newQuery })
 }
+
+
 
 const isViewingSharedComparison = computed(() => !!route.query.s || !!route.query.fos)
 
@@ -162,8 +188,12 @@ const fieldOfStudyCount = computed(() => {
 });
 
 const updateStoreToMatchSharedComparison = () => {
-  store.fos = store.temporaryFos
-  store.institutions = store.temporaryInstitutions
+  store.fos = []
+  store.temporaryFos.forEach((fos) => store.addFieldOfStudy(fos))
+
+  store.institutions = []
+  store.temporaryInstitutions.forEach((institution) => store.addSchool(institution))
+
   store.temporaryFos = []
   store.temporaryInstitutions = []
   router.replace(`/compare/?toggle=${route.query.toggle}`)

@@ -21,15 +21,24 @@ export const useCompareStore = defineStore('compare', {
   },
 
   actions: {
-    toggleSchool(obj) {
-      const index = this.institutions.findIndex(inst => inst.id === obj.id)
+    addSchool(obj) {
+      this.institutions = this.institutions || []
 
+      if (this.institutions.length < 10) {
+        this.institutions.push({
+          id: obj.id,
+          school: { name: obj['school.name'] },
+        })
+      }
+    },
+
+    toggleSchool(obj) {
+      this.institutions = this.institutions || []
+      const index = this.institutions.findIndex(inst => inst.id === obj.id)
       if (index !== -1) {
         this.institutions.splice(index, 1)
       } else {
-        if (this.institutions.length < 10) {
-          this.institutions.push(obj)
-        }
+        this.addSchool(obj)
       }
     },
 
@@ -37,6 +46,18 @@ export const useCompareStore = defineStore('compare', {
       const index = this.institutions.findIndex(inst => inst.id === obj.id)
       if (index !== -1) {
         this.institutions.splice(index, 1)
+      }
+    },
+
+    addFieldOfStudy(obj) {
+      this.fos = this.fos || []
+
+      if (this.fos.length < 10) {
+        this.fos.push({
+          code: obj.code,
+          unit_id: obj.unit_id,
+          credential: { level: obj.credential.level },
+        })
       }
     },
 
@@ -50,9 +71,7 @@ export const useCompareStore = defineStore('compare', {
       if (index !== -1) {
         this.fos.splice(index, 1)
       } else {
-        if (this.fos.length < 10) {
-          this.fos.push(obj)
-        }
+        addFieldOfStudy(obj)
       }
     },
 
