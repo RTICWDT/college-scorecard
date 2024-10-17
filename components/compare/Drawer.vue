@@ -40,7 +40,11 @@
               <div v-if="maxSchoolsReached">
                 Maximum of 10 Schools Selected
               </div>
-              <div v-for="institution in store.institutions">
+
+              <div v-if="noSchoolsSelected">
+                <p class="text-body-2 pl-3 font-weight-bold">No Schools Selected</p>
+              </div>
+              <div v-else v-for="institution in store.institutions">
                 <div class="d-flex align-center mb-5">
                   <v-btn icon="fa: fa-solid fa-trash-can" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeSchool(institution)" :tabindex="showDrawer ? 0 : -1"/>
                   <p class="text-body-2"><strong>{{ institution.school.name }}</strong></p>
@@ -77,7 +81,11 @@
               <v-card v-if="maxFosReached" class="pa-2 mb-5 bg-lightyellow font-weight-bold">
                 Maximum of 10 Fields of Study selected
               </v-card>
-              <div v-for="fos in store.fos">
+
+              <div v-if="noFosSelected">
+                <p class="text-body-2 pl-3 font-weight-bold">No Fields of Study Selected</p>
+              </div>
+              <div v-else v-for="fos in store.fos">
                 <div class="d-flex align-center mb-5">
                   <v-btn icon="fa: fa-solid fa-trash-can" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeFieldOfStudy(fos)" :tabindex="showDrawer ? 0 : -1"/>
                   <div>
