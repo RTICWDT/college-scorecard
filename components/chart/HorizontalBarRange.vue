@@ -177,7 +177,7 @@ const styleValueLabel = (obj, fixLabels = false) => {
   if (left < 0) left = 0;
   newObj.styles.left = left + "%";
 
-  if (85 < left && obj.label) {
+  if (50 < left && obj.label) {
     let offset = 40 + obj.label.split('').length * 7
     newObj.styles['transform'] = `translateX(-${offset}px)`;
     newObj.styles.color = '#FFFFFF'

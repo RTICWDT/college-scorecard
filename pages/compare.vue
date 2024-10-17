@@ -28,9 +28,9 @@
   </div>
 
   <v-container class="mt-5 mb-0">
-    <v-row>
+    <v-row v-show="isViewingSharedComparison">
       <v-col>
-        <v-card flat v-show="showShareUpdate" class="pa-5">
+        <v-card flat  class="pa-5">
           <div>
             You are viewing a shared comparison.
             <v-btn
@@ -120,11 +120,18 @@ const compareToggle = ref(Math.max(toggleFields.indexOf(route.query.toggle), 0))
 const isComparingSchools = computed(() => route.query.toggle === 'institutions')
 const isComparingFieldsOfStudy = computed(() => route.query.toggle === 'fos')
 
+const shareUrl = computed(() => {
+  const toggle = toggleFields[compareToggle.value]
+  return `${window.location.origin}${window.location.pathname}?toggle=${toggle}`
+})
+
 const handleCompareToggle = (value) => {
   const toggle = toggleFields[value]
   compareToggle.value = value
   router.replace({ query: { toggle } })
 }
+
+const isViewingSharedComparison = computed(() => false) 
 
 useHead({
   title: 'Compare',
