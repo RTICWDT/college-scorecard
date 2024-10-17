@@ -181,7 +181,7 @@ const props = defineProps({
 });
 
 const school = ref(useMerge(props.fos.institution, props.fos.institution.school));
-const isSelected = computed(() =>  store.fos.find((fos) => fos.id === props.fos.unit_id));
+const isSelected = computed(() =>  store.fos.find((fos) => fos.unit_id === props.fos.unit_id));
 
 const {
   zip: zipMethod,

@@ -4,7 +4,7 @@
       size="small"
       class="mr-2"
       :color="isSelected || isFull ? 'white' : '#0075B2'"
-      @click="store.toggleSchool({ schoolId: school.id, schoolName: school.school.name })"
+      @click="store.toggleSchool(school)"
       :readonly="isFull" 
     >
       <template #prepend>
@@ -29,6 +29,6 @@
     school: { type: Object },
   });
   
-  const isSelected = computed(() => store.institutions.find(({ schoolId }) => schoolId == props.school.id))
+  const isSelected = computed(() => store.institutions.find(({ id }) => id == props.school.id))
   const isFull = computed(() => store.institutions.length >= 10)
 </script>

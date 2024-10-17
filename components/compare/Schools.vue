@@ -4,7 +4,7 @@
   </div>
 
   <div v-else-if="institutions.all.length === 0">
-    No Schools found.
+    No Schools selected.
   </div>
 
   <div v-else>
@@ -16,6 +16,7 @@
         </div>
         <div class="flex-grow-1" />
         <v-btn
+          :disabled="!!isViewingSharedComparison"
           class="remove-btn"
           color="primary"
           icon="mdi-close"
@@ -112,6 +113,17 @@
 </template>
 
 <script setup>
+const panels = ref([])
+const totalPanels = ref(6)
+const expandAllPanels = () => {
+  panels.value = [...Array(totalPanels.value).keys()].map((k, i) => i)
+}
+
+const closeAllPanels = () => {
+  panels.value = []
+}
+
+
 const router = useRouter()
 const route = useRoute()
 const store = useCompareStore()
@@ -126,25 +138,26 @@ const institutions = reactive({
   schools4Year: [],
 })
 
-const panels = ref([])
-const totalPanels = ref(6)
-
-const expandAllPanels = () => {
-  panels.value = [...Array(totalPanels.value).keys()].map((k, i) => i)
-}
-
-const closeAllPanels = () => {
-  panels.value = []
-}
-
-
 onMounted(() => {
   querySchools()
 })
 
+const props = defineProps({
+  isViewingSharedComparison: Boolean,
+})
+
 const querySchools = async () => {
-  const paramArray = store.institutions.map((institution) => ({ id: institution.schoolId }))
-  trackCompareList(store.institutions.map((institution) => { institution.schoolId }).join(";"))
+  let paramArray
+
+  if (props.isViewingSharedComparison) {
+    let params = route.query.s
+    params = Array.isArray(params) ? params : [params].filter(Boolean);
+    paramArray = params.map((id) => ({ id: Number(id) }))
+  } else {
+    paramArray = store.institutions.map((institution) => ({ id: institution.id }))
+  }
+  
+  trackCompareList(paramArray.map((institution) => institution.id).join(";"))
 
   try {
     loading.value = true
@@ -166,11 +179,19 @@ const querySchools = async () => {
           break
       }
     })
+
+    if (props.isViewingSharedComparison) {
+      store.temporaryInstitutions = institutions.all
+    }
   } catch (error) {
     console.error("Issue locating schools for compare...", error)
   } finally {
     loading.value = false
   }
+}
+
+const setInstitutions = (institutions) => {
+  institutions.all = schools
 }
 
 const removeSchool = (school) => {

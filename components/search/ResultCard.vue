@@ -177,7 +177,7 @@ const displayAvgCost = computed(() => {
   return toK(netPrice.value)
 })
 
-const isSelected = computed(() => store.institutions.find(({ schoolId }) => schoolId == props.school.id) != undefined);
+const isSelected = computed(() => store.institutions.find(({ id }) => id == props.school.id) != undefined);
 </script>
 
 <style lang="scss" scoped>

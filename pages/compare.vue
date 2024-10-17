@@ -27,18 +27,19 @@
     </v-container>
   </div>
 
-  <v-container class="mt-5 mb-0">
+  <v-container class="mt-2 mb-0">
     <v-row v-show="isViewingSharedComparison">
       <v-col>
-        <v-card flat  class="pa-5">
-          <div>
-            You are viewing a shared comparison.
+        <v-card flat class="pa-4">
+          <div class="d-flex flex-column flex-sm-row">
+            <p class="pr-3 pb-3 pb-sm-0">You are viewing a shared comparison.</p>
             <v-btn
-              small
+              size="small"
               color="secondary"
-              @click="handleCompareListSaveClick()"
+              @click="updateStoreToMatchSharedComparison"
+              :disabled="!sharedComparisonIsLoading"
             >
-              Update Your List
+              Update Your List to Match
             </v-btn>
           </div></v-card
         >
@@ -64,7 +65,7 @@
                 <v-tab>
                   <slot name="tab-school">
                     <h3 class="compare-tab-title">
-                      Schools ({{ store.institutions.length }})
+                      Schools ({{ schoolCount }})
                     </h3>
                   </slot>
                 </v-tab>
@@ -72,7 +73,7 @@
                 <v-tab>
                   <slot name="tab-fos">
                     <h3 class="compare-tab-title pb-1">
-                      Fields of Study ({{ store.fos.length }})
+                      Fields of Study ({{ fieldOfStudyCount }})
                     </h3>
                   </slot>
                 </v-tab>
@@ -81,12 +82,12 @@
 
             <div v-show="isComparingSchools" class="px-4">
               <Spacer :height="20" />
-              <CompareSchools />
+              <CompareSchools :isViewingSharedComparison="isViewingSharedComparison" />
             </div>
 
             <div v-show="isComparingFieldsOfStudy" class="px-4">
               <Spacer :height="20" />
-              <CompareFieldsOfStudy />
+              <CompareFieldsOfStudy :isViewingSharedComparison="isViewingSharedComparison" />
             </div>
         </v-card>
       </v-col>
@@ -103,16 +104,14 @@
 <script setup>
 const router = useRouter()
 const route = useRoute()
+const shareUrl = computed(() => window.location.href)
 
 // hacking og routes to match new router conventions, such that we can easily pull query params
 const cleanedPath = route.fullPath.replace(/%26/g, '&').replace(/%3D/g, '=')
 router.push(cleanedPath)
 
-// school param 
-// &s={schoolId}
-
-// field of study param
-// &fos={fieldOfStudyId}.{fieldOfStudyCode}.{credentialLevel}
+// school param  // &s={schoolId}
+// field of study param // &fos={schoolID}.{fieldOfStudyCode}.{credentialLevel}
 
 const store = useCompareStore()
 const toggleFields = ['institutions', 'fos']
@@ -120,18 +119,59 @@ const compareToggle = ref(Math.max(toggleFields.indexOf(route.query.toggle), 0))
 const isComparingSchools = computed(() => route.query.toggle === 'institutions')
 const isComparingFieldsOfStudy = computed(() => route.query.toggle === 'fos')
 
-const shareUrl = computed(() => {
-  const toggle = toggleFields[compareToggle.value]
-  return `${window.location.origin}${window.location.pathname}?toggle=${toggle}`
-})
+watch(() => route.query.toggle, (newToggle) => {
+  if (newToggle === 'institutions') {
+    compareToggle.value = 0
+  } else if (newToggle === 'fos') {
+    compareToggle.value = 1
+  }
+}, { immediate: true })
 
 const handleCompareToggle = (value) => {
   const toggle = toggleFields[value]
-  compareToggle.value = value
-  router.replace({ query: { toggle } })
+  const newQuery = { ...route.query, toggle}
+  router.replace({ query: newQuery })
 }
 
-const isViewingSharedComparison = computed(() => false) 
+const isViewingSharedComparison = computed(() => !!route.query.s || !!route.query.fos)
+
+const schoolCount = computed(() => {
+  if (store.temporaryInstitutions) {
+    return store.temporaryInstitutions.length;
+  } else if (isViewingSharedComparison.value) {
+    const sharedSchools = route.query.s;
+    if (!sharedSchools) { return 0; }
+    if (sharedSchools && typeof sharedSchools === 'string') { return 1; } 
+    return sharedSchools.length;
+  } else {
+    return store.institutions.length;
+  }
+});
+
+const fieldOfStudyCount = computed(() => {
+  if (store.temporaryFos) {
+    return store.temporaryFos.length;
+  } else if (isViewingSharedComparison.value) {
+    const sharedFos = route.query.fos;
+    if (!sharedFos) { return 0; }
+    if (sharedFos && typeof sharedFos === 'string') { return 1; }
+    return sharedFos.length;
+  } else {
+    return store.fos.length;
+  }
+});
+
+const updateStoreToMatchSharedComparison = () => {
+  store.fos = store.temporaryFos
+  store.institutions = store.temporaryInstitutions
+  store.temporaryFos = []
+  store.temporaryInstitutions = []
+  router.replace(`/compare/?toggle=${route.query.toggle}`)
+}
+
+const sharedComparisonIsLoading = computed(() => {
+  return Array.isArray(store.temporaryFos) && Array.isArray(store.temporaryInstitutions)
+})
 
 useHead({
   title: 'Compare',

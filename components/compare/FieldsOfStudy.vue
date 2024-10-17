@@ -30,6 +30,7 @@
           </div>
           <div class="flex-grow-1" />
           <v-btn
+            :disabled="!!isViewingSharedComparison"
             color="primary"
             icon="mdi-close"
             size="x-small"
@@ -71,39 +72,42 @@ const fieldsOfStudy = reactive({
   professionalCertificate: [],
 })
 
-
-
 onMounted(() => {
   queryFieldsOfStudy()
 })
 
-const queryFieldsOfStudy = async () => {
-  // if we have URL params for fields of study, use them and update the store to match
-  const routeFieldsOfStudy = route.query.fos
+const props = defineProps({
+  isViewingSharedComparison: Boolean,
+})
 
-  if (routeFieldsOfStudy) {
-    store.fos = routeFieldsOfStudy.map((fos) => {
+const queryFieldsOfStudy = async () => {
+  let params
+
+  if (props.isViewingSharedComparison) {
+    const routeFieldsOfStudy = Array.isArray(route.query.fos) ? route.query.fos : [route.query.fos].filter(Boolean);
+    params = routeFieldsOfStudy.map((fos) => {
       const [id, code, credentialLevel] = fos.split(".")
       // console.log("id, code, credentialLevel", id, code, credentialLevel)
       return {
-        id: +id,
-        code: +code,
-        credentialLevel: +credentialLevel,
+        unit_id: Number(id),
+        code: Number(code),
+        credential: { level:  Number(credentialLevel) },
       }
-    })    
+    })
+  } else {
+    params = store.fos
   }
   
-  let params = {}
-  params[fields.OPERATING] = 1
-  params[fields.SIZE + "__range"] = "0.."
-  params[fields.PREDOMINANT_DEGREE + "__range"] = "1..3"
-  params[fields.ID + "__range"] = "..999999"
-
-  const paramArray = store.fos.map((fieldOfStudy) => ({
-    ...params,
-    [fields.ID]: fieldOfStudy.id,
+  const paramArray = params.map((fieldOfStudy) => ({
+    [fields.ID + "__range"]: "..999999",
+    [fields.ID]: fieldOfStudy.unit_id,
     [fields.FIELD_OF_STUDY_CODE]: fieldOfStudy.code,
-    [fields.FIELD_OF_STUDY_LENGTH]: fieldOfStudy.credentialLevel,
+    [fields.FIELD_OF_STUDY_LENGTH]: fieldOfStudy.credential.level,
+
+    [fields.OPERATING]: 1,
+    [fields.SIZE + "__range"]: "0..",
+    [fields.PREDOMINANT_DEGREE + "__range"]: "1..3",
+    url: `${fieldOfStudy.unit_id}.${fieldOfStudy.code}.${fieldOfStudy.credential.level}`
   }))
 
   try {
@@ -120,8 +124,7 @@ const queryFieldsOfStudy = async () => {
       }
     }).filter(Boolean)
 
-    setFieldsOfStudy(fosResults)
-
+    groupFieldsOfStudy(fosResults)
   } catch (error) {
     console.error("Issue locating Fields of Study for compare...", error)
   } finally {
@@ -131,22 +134,26 @@ const queryFieldsOfStudy = async () => {
 
 const removeFieldOfStudy = (fieldOfStudy) => {
   const newFos = fieldsOfStudy.all.filter((fos) => fos.id !== fieldOfStudy.id)
-  setFieldsOfStudy(newFos)
+  groupFieldsOfStudy(newFos)
   store.removeFieldOfStudy(fieldOfStudy)
 }
 
-const setFieldsOfStudy = (fosResults) => {
+const groupFieldsOfStudy = (fosResults) => {
   Object.assign(fieldsOfStudy, {
-      all: fosResults,
-      undergrad: fosResults.filter((fos) => fos.credential.level === 1),
-      associates: fosResults.filter((fos) => fos.credential.level === 2),
-      bachelors: fosResults.filter((fos) => fos.credential.level === 3),
-      baccalaureate: fosResults.filter((fos) => fos.credential.level === 4),
-      masters: fosResults.filter((fos) => fos.credential.level === 5),
-      doctorate: fosResults.filter((fos) => fos.credential.level === 6),
-      professionalDegree: fosResults.filter((fos) => fos.credential.level === 7),
-      professionalCertificate: fosResults.filter((fos) => fos.credential.level === 8),
-    })
+    all: fosResults,
+    undergrad: fosResults.filter((fos) => fos.credential.level === 1),
+    associates: fosResults.filter((fos) => fos.credential.level === 2),
+    bachelors: fosResults.filter((fos) => fos.credential.level === 3),
+    baccalaureate: fosResults.filter((fos) => fos.credential.level === 4),
+    masters: fosResults.filter((fos) => fos.credential.level === 5),
+    doctorate: fosResults.filter((fos) => fos.credential.level === 6),
+    professionalDegree: fosResults.filter((fos) => fos.credential.level === 7),
+    professionalCertificate: fosResults.filter((fos) => fos.credential.level === 8),
+  })
+
+  if (props.isViewingSharedComparison) {
+    store.temporaryFos = fieldsOfStudy.all
+  }
 }
 </script>
 
