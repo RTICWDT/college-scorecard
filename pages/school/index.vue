@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex w-100 h-100 align-center justify-content-center" v-if="!school.id && !error">
+  <div class="d-flex w-100 h-100 align-center justify-content-center" v-if="loading || (!school.id && !error)">
     <div class="show-loading w-100">
       <h1 class="title text-center mt-15">
         <v-icon size="x-small" class="mr-2 position-relative" style="bottom: 2px;" color="#00365e" icon="fa:fas fa-circle-notch fa-spin"/>
@@ -37,7 +37,7 @@
                 color="navyblue"
                 id="referrer-link"
                 class="link-more pl-1 pr-2"
-                @click="router.back()"
+                @click="$router.back()"
               >
                 &laquo; Back
               </v-btn>
@@ -384,9 +384,12 @@ const generateMapLink = (school) => {
   return googleMapsBaseURL + qs
 }
 
-onMounted(async () => {  
+const loading = ref(false)
+const findSchool = async () => {
   try {
+    loading.value = true
     const response = await apiGet("/schools/", { id: schoolId.value })
+    loading.value = false
     const metadata = response.metadata
     const results = response.results
     const firstSchoolFound = results[0]
@@ -413,6 +416,16 @@ onMounted(async () => {
     console.warn(error)
     console.warn("No School found for ID: " + schoolId.value)
   }
+}
+
+onMounted(() => {  
+  findSchool()
+})
+
+// reload on route change
+watch(() => route.fullPath , (newPath) => {
+  const id = schoolId.value
+  findSchool()
 })
 
 useHead({

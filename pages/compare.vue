@@ -8,7 +8,7 @@
             color="navyblue"
             id="referrer-link"
             class="link-more"
-            @click="router.back()"
+            @click="$router.back()"
             >&laquo; Back</v-btn
           >
           <div class="flex-grow-1" />

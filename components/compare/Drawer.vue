@@ -24,6 +24,8 @@
         </v-row>
 
         <v-row>
+
+          <!-- SCHOOLS -->
           <v-col class="border-e d-flex flex-column" cols="12" sm="6">
             <div class="d-flex align-center mb-5">
               <v-btn
@@ -46,7 +48,7 @@
               <div v-else v-for="institution in store.institutions">
                 <div class="d-flex align-center mb-5">
                   <v-btn icon="fa: fa-solid fa-trash-can" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeSchool(institution)" :tabindex="showDrawer ? 0 : -1"/>
-                  <p class="text-body-2"><strong>{{ institution.school.name }}</strong></p>
+                  <NuxtLink :to="schoolLink(institution)" class="text-body-2"><strong>{{ institution.school.name }}</strong></NuxtLink>
                 </div>
               </div>
             </div>
@@ -65,6 +67,8 @@
             </div>
           </v-col>
 
+
+          <!-- FOS -->
           <v-col class="d-flex flex-column" cols="12" sm="6">
             <div class="d-flex align-center mb-5">
               <v-btn
@@ -88,7 +92,7 @@
                 <div class="d-flex align-center mb-5">
                   <v-btn icon="fa: fa-solid fa-trash-can" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeFieldOfStudy(fos)" :tabindex="showDrawer ? 0 : -1"/>
                   <div>
-                    <p class="text-body-2"><strong>{{ fos.title }}</strong></p>
+                    <NuxtLink :to="fosLink(fos)" class="text-body-2"><strong>{{ fos.title }}</strong></NuxtLink>
                     <p class="text-caption text-uppercase">{{ fos.credential.title }}</p>
                     <p class="text-caption">{{ fos.school.name }}</p>
                   </div>
@@ -186,7 +190,18 @@ const oneFosSelected = computed(() => store.fos.length === 1)
 
 const noSchoolsSelected = computed(() => store.institutions.length === 0)
 const noFosSelected = computed(() => store.fos.length === 0)
+const { schoolLink, fieldsLink } = useComplexFieldMethods()
 
+const fosLink = computed(() => (fos) => {
+  // this is unfortunate
+  const groomed = {
+    id: fos.unit_id,
+    'school.name': fos.school.name,
+  }
+
+  const baseLink = fos.credential.level <= 3 ? schoolLink(groomed) : fieldsLink(groomed)
+  return `${baseLink}&fos_code=${fos.code}&fos_credential=${fos.credential.level}`
+});
 
 watch(() => route.fullPath, () => {
   if (route.fullPath.includes('compare')) {

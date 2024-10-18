@@ -72,20 +72,20 @@ npm run preview
   - [x] View School
   - [ ] View Field of Study
   - [x] Search Fields of Study
-  - [ ] Compare Schools
-  - [ ] Compare Fields of Study
+  - [x] Compare Schools
+  - [x] Compare Fields of Study
   - [x] Resources
   - [x] Data Download
   - [x] Data Documentation
   - [x] API Documentation
   - [x] Change Log
   - [x] Glossary
-  - [ ] Compare Drawer
+  - [x] Compare Drawer
 
 - Components
   - [ ] Transition Away Notice
-  - [ ] Compare Drawer
-  - [ ] Tooltip Styling
+  - [x] Compare Drawer
+  - [x] Tooltip Styling
   - [ ] Google Charts Sankey Replacement
   
 - QA Pass
@@ -102,6 +102,11 @@ npm run preview
 
 - Nice-to-have
   - [ ] Search Optimization / Refactor
-  - [ ] Compare store composable interface
+  - [x] Compare store composable interface
   - [ ] design color consistency check & stylesheet
   - [ ] Typescript?
+
+- Bugs
+  - [ ] /school params need to set the state of the page properly
+  - [x]link from compare drawer to field of study needs to function
+  - 
