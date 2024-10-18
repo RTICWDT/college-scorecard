@@ -23,6 +23,7 @@
       class="pt-0 mt-0"
       :density="dense ? 'compact' : 'default'"
       :max-width="horizontal ? 300 : undefined"
+      @keydown.enter="handleSubmit"
     >
       <template v-slot:item="{ item, props }">
         <v-list-item v-bind="props" @click="goToSchool">
@@ -46,7 +47,7 @@ const { prepareParams } = usePrepareParams()
 const { fields } = useConstants()
 const { apiGet } = useApi()
 
-const emit = defineEmits(['school-name-selected'])
+const emit = defineEmits(['school-name-selected', 'submit'])
 const items = ref([]);
 const isLoading = ref(false);
 const search = ref(null);
@@ -85,7 +86,18 @@ const goToSchool = () => {
   }
 }
 
-const runSearch = useDebounce((newVal) => performSearch(newVal), 300);
+const handleSubmit = () => {
+  emit('submit', search.value)
+}
+
+const runSearch = useDebounce((newVal) => {
+  if (newVal === '') {
+    items.value = [];
+    return emit('submit', newVal)
+  }
+
+  performSearch(newVal)
+}, 300);
 
 const performSearch = async (newVal) => {
   if (!newVal) return;

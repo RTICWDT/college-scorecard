@@ -98,10 +98,11 @@
           <div class="search-label my-2 my-md-0 mr-0 mr-md-2">School:</div>
 
           <div style="min-width: 200px">
-            <SearchNameAutocomplete
+            <SearchSchoolAutocomplete
               ref="searchSchoolRef"
               @school-name-selected="handleSchoolSelection"
               @school-name-cleared="handleSchoolSelection"
+              @submit="handleSchoolSelection"
               :initial-school="route.query.search"
               :dense="true"
               :horizontal="!smAndDown"
@@ -675,7 +676,6 @@ const handleLocationSelection = (params) => {
 }
 
 const handleCannedSearch = (params) => {
-
   Object.keys(input).forEach((key) => delete input[key])
   searchFormRef.value.resetForm()
   searchLocationRef.value.resetForm()

@@ -15,7 +15,7 @@
             <v-card class="pa-5" elevation="0">
               <h2>Something went wrong</h2>
               <p>Try searching for a school by name:</p>
-              <SearchNameAutocomplete
+              <SearchSchoolAutocomplete
                 @school-name-selected="handleSchoolNameSelected"
                 :searchEmptyName="false"
               />

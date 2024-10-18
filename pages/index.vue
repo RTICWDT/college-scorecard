@@ -37,7 +37,7 @@
             <v-tabs-window v-model="desktopTabs" class="home-search-wrapper">
               <v-tabs-window-item>
                 <v-card class="pa-5" flat>
-                  <SearchNameAutocomplete @school-name-selected="handleSchoolNameSelected" :searchEmptyName="false" />
+                  <SearchSchoolAutocomplete @school-name-selected="handleSchoolNameSelected" :searchEmptyName="false" />
 
                   <div class="mt-5 text-right">
                     <v-btn variant="text" size="small" @click="toggleCustomSearch = !toggleCustomSearch" class="text-uppercase">
@@ -111,7 +111,7 @@
                   </v-expansion-panel-title>
 
                   <v-expansion-panel-text>
-                    <SearchNameAutocomplete
+                    <SearchSchoolAutocomplete
                       @school-name-selected="handleSchoolNameSelected"
                       :searchEmptyName="false"
                       v-if="smAndDown"
