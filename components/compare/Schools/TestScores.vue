@@ -1,9 +1,9 @@
 <template>
-  <h2 class="mb-1 mt-7">Test Scores</h2>
+  <CompareHTooltip title="Test Scores" definition="test-scores" :h="2" class="mb-1 mt-7" />
   <p class="mb-5" style="max-width: 800px">Students who were admitted and enrolled typically had standardized test scores in these ranges.</p>
 
-  <div class="px-0 px-md-5">
-    <h3 class="mb-5">SAT Reading</h3>
+  <div class="">
+    <h2 class="mb-5">SAT Reading</h2>
     <div class="px-0 px-md-5 mb-5">
       <CompareSchoolsDataSection :institutions="institutions">
         <template #data="{ institution }">
@@ -32,7 +32,7 @@
       </CompareSchoolsDataSection>
     </div>
 
-    <h3 class="mb-5">SAT Math</h3>
+    <h2 class="mb-5">SAT Math</h2>
     <div class="px-0 px-md-5 mb-5">
       <CompareSchoolsDataSection :institutions="institutions">
         <template #data="{ institution }">
@@ -61,7 +61,7 @@
       </CompareSchoolsDataSection>
     </div>
 
-    <h3 class="mb-5">ACT</h3>
+    <h2 class="mb-5">ACT</h2>
     <div class="px-0 px-md-5 mb-5">
       <CompareSchoolsDataSection :institutions="institutions">
         <template #data="{ institution }">

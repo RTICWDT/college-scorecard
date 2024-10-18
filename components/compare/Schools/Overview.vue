@@ -18,7 +18,7 @@
     </Toggle>
   </div>
 
-  <h2 class="mb-1 mt-7">Average Annual Cost</h2>
+  <CompareHTooltip title="Average Annual Cost" definition="avg-cost" :h="2" class="mb-1 mt-7" />
   <p class="mb-5" style="max-width: 800px">Cost includes tuition, living costs, books and supplies, and fees minus the average grants and scholarships for federal financial aid recipients.</p>
 
   <Spacer :height="20" />
@@ -59,8 +59,7 @@
     </CompareSchoolsDataSection>
   </div>
 
-  <h2 class="mb-5">Graduation Rate</h2>
-
+  <CompareHTooltip title="Graduation Rate" definition="graduation-rate" :h="2" class="mb-5" />
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #byline="{ groupName, institution }">
@@ -97,8 +96,7 @@
     </CompareSchoolsDataSection>
   </div>
 
-  <h2 class="mb-5">Median Earnings</h2>
-
+  <CompareHTooltip title="Median Earnings" definition="institution-median-earnings" :h="2" class="mb-5" />
   <div class="px-0 px-md-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #byline="{ groupName, institution }">

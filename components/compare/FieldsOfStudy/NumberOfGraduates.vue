@@ -1,5 +1,5 @@
 <template>
-  <h2 class="mb-5">Number Of Graduates</h2>
+  <CompareHTooltip class="mb-3" title="Number Of Graduates" definition="fos-number-of-graduates" :h="2" />
 
   <div class="px-0 px-md-5">
     <div class="px-0 px-md-5 pb-10">

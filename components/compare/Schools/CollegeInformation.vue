@@ -1,5 +1,5 @@
 <template>
-  <h2 class="mb-5 mt-7">Full Time Enrollment</h2>
+  <CompareHTooltip title="Full Time Enrollment" definition="full-time" :h="2" class="mb-5 mt-7" />
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
@@ -51,7 +51,7 @@
     </CompareSchoolsDataSection>
   </div>
 
-  <h2 class="mb-5">Socio-Economic Diversity</h2>
+  <CompareHTooltip title="Socio-Economic Diversity" definition="socio-eco" :h="2" class="mb-5" />
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
@@ -76,7 +76,7 @@
     </CompareSchoolsDataSection>
   </div>
 
-  <h2 class="mb-5">Race/Ethnicity</h2>
+  <CompareHTooltip title="Race/Ethnicity" definition="race-eth" :h="2" class="mb-5" />
   <div class="px-0 px-md-5 mb-5">
     <v-select
       :items="raceEthnicitySelection"

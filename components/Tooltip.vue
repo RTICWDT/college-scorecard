@@ -15,7 +15,7 @@
       <v-card class="px-3 py-3">
 
         <div class="d-flex">
-          <v-card-title class="px-4">{{ title }}</v-card-title>
+          <div class="text-h6 pl-4 pt-2">{{ title }}</div>
           <div class="flex-grow-1" />
           <v-btn 
             @click="showDialog = false" 
@@ -36,7 +36,7 @@
             For schools with multiple locations, this information is based on
             all of their locations.
           </p>
-          <div v-if="info" v-html="info"></div>
+          <div class="text-body-2 mt-5" v-if="info" v-html="info"></div>
           <p class="mt-3" v-if="hasGlossary">
             <v-btn
               size="small"
@@ -157,6 +157,21 @@ function handleClicks(event) {
   .tooltip-text {
     font-size: 14px;
     line-height: 1.5;
+  }
+
+  :deep(a) {
+    color: green;
+    margin-right: 5px;
+  }
+
+  .title-wrapper {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+
+  a {
+    color: green !important;
   }
 
 </style>
