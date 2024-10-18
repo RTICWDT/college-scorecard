@@ -58,7 +58,7 @@
               :options="compareToggleOptions"
               backgroundColor="white"
               height="70"
-              :border-thickness="8"
+              border-thickness="8px"
             />
 
             <div v-show="isComparingSchools" class="px-4">

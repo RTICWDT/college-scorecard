@@ -25,12 +25,24 @@
           </v-checkbox>
           <v-expand-transition>
             <div v-if="!showPellOnlyGrad" class="d-none d-lg-block">
-              <div class="pt-0 pb-8">
-                <MedianToggle
-                  :display-toggle="medianToggle"
-                  @median-tab-change="handleMedianToggle"
-                  :group-name="yearsText(groupName) + ' Schools'"
-                />
+              <p><em>Show Midpoint For:</em></p>
+              <div style="max-width: 600px;">
+                <Toggle
+                  v-model="medianToggle"
+                  :options="[
+                    { label: `${yearsText(school)} Schools`, value: 'group', color: '#007000', activeColor: 'transparent' },
+                    { label: 'All Schools', value: 'all', color: '#007000', activeColor: '#transparent' },
+                  ]"
+                  backgroundColor="white"
+                  borderThickness="5px"
+                  :height="50"
+                >
+                  <template #default="{ label }">
+                    <span class="compare-tab-title px-5 text-black">
+                      {{ label }}
+                    </span>
+                  </template>
+                </Toggle>
               </div>
             </div>
           </v-expand-transition>

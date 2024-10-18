@@ -1,15 +1,22 @@
 <template>
-  <v-row>
-    <v-col cols="12" sm="12" class="pb-0 pt-5">
-      <MedianToggle
-        :display-toggle="medianToggle"
-        @median-tab-change="handleMedianToggle"
-        :group-name="yearsText(groupName) + ' Schools'"
-        label-prefix="Midpoint for "
-        :tab-style="{ width: '32%' }"
-      />
-    </v-col>
-  </v-row>
+  <div style="max-width: 600px;">
+    <Toggle
+      v-model="medianToggle"
+      :options="[
+        { label: 'Midpoint for School Type', value: 'group', color: '#007000', activeColor: 'transparent' },
+        { label: 'Midpoint for All Schools', value: 'all', color: '#007000', activeColor: '#transparent' },
+      ]"
+      backgroundColor="white"
+      borderThickness="5px"
+      :height="50"
+    >
+      <template #default="{ label }">
+        <span class="compare-tab-title px-5 text-black">
+          {{ label }}
+        </span>
+      </template>
+    </Toggle>
+  </div>
 
   <div class="mb-5" elevation="0">
     <v-row class="mt-3">
@@ -337,14 +344,7 @@ const netPrice = computed(() => netPriceMethod(props.school))
 const toggleGraduationRate = computed(() => toggleGraduationRateMethod(props.school))
 const toggleAverageAnnualCosts = computed(() => toggleAverageAnnualCostsMethod(props.school))
 const toggleMedianEarnings = computed(() => toggleMedianEarningsMethod(props.school))
-
 const medianToggle = ref("group")
-const controlTab = ref(0)
-
-const handleMedianToggle = (toggleValue) => {
-  controlTab.value = toggleValue
-  medianToggle.value = toggleValue === 0 ? "group" : "all"
-}
 </script>
 
 <style lang="scss" scoped>

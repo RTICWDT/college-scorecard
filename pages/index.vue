@@ -356,10 +356,10 @@
     height: 8px;
   }
 
-  .v-tab__slider {
+  :deep(.v-tab__slider) {
     height: 8px !important;
     border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-top-right-radius: 5px;    
   }
 
   .v-avatar img {

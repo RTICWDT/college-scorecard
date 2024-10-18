@@ -14,18 +14,30 @@
         >
           {{ toDollar(medianEarnings) }}
         </h2>
-        <p class="mb-0">
+        <p class="mb-2">
           The median earnings of former students who
           received federal financial aid at 10 years after
           entering the school.
         </p>
-        <div class="pt-12 pb-8 d-none d-lg-block">
-          <MedianToggle
-            :display-toggle="medianToggle"
-            @median-tab-change="handleMedianToggle"
-            :group-name="yearsText(groupName) + ' Schools'"
-          />
+        <div style="max-width: 500px;">
+          <Toggle
+            v-model="medianToggle"
+            :options="[
+              { label: `${yearsText(school)} Schools`, value: 'group', color: '#007000', activeColor: 'transparent' },
+              { label: 'All Schools', value: 'all', color: '#007000', activeColor: '#transparent' },
+            ]"
+            backgroundColor="white"
+            borderThickness="5px"
+            :height="50"
+          >
+            <template #default="{ label }">
+              <span class="compare-tab-title px-5 text-black">
+                {{ label }}
+              </span>
+            </template>
+          </Toggle>
         </div>
+        <Spacer :height="20" />
 
         <ChartHorizontalBarMedian
           v-if="medianEarnings"

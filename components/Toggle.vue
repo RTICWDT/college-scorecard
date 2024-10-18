@@ -2,7 +2,7 @@
   <v-card elevation="0" :border="0" :style="{ borderRadius: 0, width: '100%', backgroundColor }">
     <v-tabs
       v-model="localModelValue"
-      :hide-slider="true"
+      :show-arrows="true"
       :style="{
         borderRadius: 0,
         borderBottom: '1px solid #dadada',
@@ -17,7 +17,6 @@
         :value="option.value"
         :class="{ 'custom-border': localModelValue === option.value }"
         :style="{
-          borderBottomWidth: `${borderThickness}px`,
           color: option.color,
           backgroundColor: localModelValue === option.value ? option.activeColor : 'transparent',
           borderRadius: 0,
@@ -27,9 +26,11 @@
           lineHeight: `${height}px`,
         }"
       >
-        <strong class="display-1" style="color: black; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-          {{ option.label }}
-        </strong>
+        <slot :label="option.label" :index="index" :isActive="localModelValue === option.value">
+          <strong class="display-1" style="color: black; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            {{ option.label }}
+          </strong>
+        </slot>
       </v-tab>
     </v-tabs>
   </v-card>
@@ -63,8 +64,8 @@ const props = defineProps({
     default: 48,
   },
   borderThickness: {
-    type: Number,
-    default: 4,
+    type: [Number, String],
+    default: "4px",
   },
 });
 
@@ -86,4 +87,8 @@ watch(() => props.modelValue, (newValue) => {
   border-bottom-style: solid;
   border-bottom-color: currentColor;
 }
+
+:deep(.v-tab__slider) {
+    height: v-bind(borderThickness) !important;
+  }
 </style>

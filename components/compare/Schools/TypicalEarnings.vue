@@ -1,10 +1,22 @@
 <template>
-  <MedianToggle
-    :display-toggle="medianToggle"
-    @median-tab-change="handleMedianToggle"
-    group-name="School Type"
-    label-prefix="Midpoint for "
-  />
+  <div style="max-width: 600px;">
+    <Toggle
+      v-model="medianToggle"
+      :options="[
+        { label: 'Midpoint for School Type', value: 'group', color: '#007000', activeColor: 'transparent' },
+        { label: 'Midpoint for All Schools', value: 'all', color: '#007000', activeColor: '#transparent' },
+      ]"
+      backgroundColor="white"
+      borderThickness="5px"
+      :height="50"
+    >
+      <template #default="{ label }">
+        <span class="compare-tab-title px-5 text-black">
+          {{ label }}
+        </span>
+      </template>
+    </Toggle>
+  </div>
 
   <h2 class="mb-1 mt-7">Median Earnings</h2>
   <p class="mb-5" style="max-width: 800px">The median earnings of former students who received federal financial aid at 10 years after entering the school.</p>
@@ -72,11 +84,7 @@
 <script setup>
 const props = defineProps({ institutions: Object });
 const { toDollar, toPercent } = useNumberFormatter()
-
 const medianToggle = ref('group')
-const handleMedianToggle = (toggleValue) => {
-  medianToggle.value = toggleValue === 0 ? "group" : "all"
-}
 
 const {
   medianEarnings,

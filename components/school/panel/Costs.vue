@@ -24,11 +24,26 @@
           </p>
 
           <div class="d-none d-lg-block mt-3 pt-8 pb-8">
-            <MedianToggle
-              :display-toggle="medianToggle"
-              @median-tab-change="handleMedianToggle"
-              :group-name="yearsText(groupName) + ' Schools'"
-            />
+            <p><em>Show Midpoint For:</em></p>
+            <div style="max-width: 600px;">
+              <Toggle
+                v-model="medianToggle"
+                :options="[
+                  { label: `${yearsText(school)} Schools`, value: 'group', color: '#007000', activeColor: 'transparent' },
+                  { label: 'All Schools', value: 'all', color: '#007000', activeColor: '#transparent' },
+                ]"
+                backgroundColor="white"
+                borderThickness="5px"
+                :height="50"
+              >
+                <template #default="{ label }">
+                  <span class="compare-tab-title px-5 text-black">
+                    {{ label }}
+                  </span>
+                </template>
+              </Toggle>
+            </div>
+
           </div>
           <ChartHorizontalBarMedian
             class="pt-8 pt-lg-0"
@@ -104,12 +119,24 @@
           </p>
 
           <div class="pt-8 pb-8 d-none d-lg-block">
-            <MedianToggle
-              :display-toggle="medianToggle"
-              :control-tab="controlTab"
-              @median-tab-change="handleMedianToggle"
-              :group-name="yearsText(groupName) + ' Schools'"
-            />
+            <div style="max-width: 500px;">
+              <Toggle
+                v-model="medianToggle"
+                :options="[
+                  { label: `${yearsText(groupName)} Schools`, value: 'group', color: '#007000', activeColor: 'transparent' },
+                  { label: 'All Schools', value: 'all', color: '#007000', activeColor: '#transparent' },
+                ]"
+                backgroundColor="white"
+                borderThickness="5px"
+                :height="50"
+              >
+                <template #default="{ label }">
+                  <span class="compare-tab-title px-5 text-black">
+                    {{ label }}
+                  </span>
+                </template>
+              </Toggle>
+            </div>
           </div>
           <v-row>
             <v-col cols="2"></v-col>
@@ -266,12 +293,7 @@ const netPriceCalculatorUrl = computed(() => netPriceCalculatorUrlMethod(props.s
 const netPrice = computed(() => netPriceMethod(props.school))
 const groupName = computed(() => groupNameMethod(props.school))
 
-const { fields } = useConstants()
-
 const medianToggle = ref('group')
-const handleMedianToggle = (toggleValue) => {
-  medianToggle.value = toggleValue === 0 ? "group" : "all"
-}
 
 const fixedUrl = computed(() => {
   if (netPriceCalculatorUrl.value == "#") return false
