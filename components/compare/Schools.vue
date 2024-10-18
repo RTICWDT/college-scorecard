@@ -1,7 +1,7 @@
 <template>
   <div v-if="loading || institutions.all.length === 0" style="height: 500px" class="d-flex align-center justify-center">
     <div v-if="loading">
-      Loading...
+      <strong class="mr-1">Loading</strong> <v-icon icon="fa:fas fa-circle-notch fa-spin" size="small" />
     </div>
 
     <div v-else-if="institutions.all.length === 0" class="position-relative" style="bottom: 30px;">
