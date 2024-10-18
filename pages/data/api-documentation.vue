@@ -17,25 +17,25 @@
             </p>
             <ul>
               <li>
-                <a @click="scrollTo('#getting-started')" href="#">Getting Started</a>
+                <a @click="scrollToAnchor('getting-started')" href="#">Getting Started</a>
               </li>
               <li>
-                <a @click="scrollTo('#basic-usage')" href="#">Basic Usage</a>
+                <a @click="scrollToAnchor('basic-usage')" href="#">Basic Usage</a>
               </li>
               <li>
-                <a @click="scrollTo('#response-format')" href="#">Response Format</a>
+                <a @click="scrollToAnchor('response-format')" href="#">Response Format</a>
               </li>
               <li>
-                <a @click="scrollTo('#error-handling')" href="#">Error Handling</a>
+                <a @click="scrollToAnchor('error-handling')" href="#">Error Handling</a>
               </li>
               <li>
-                <a @click="scrollTo('#field-parameters')" href="#">Field Parameters</a>
+                <a @click="scrollToAnchor('field-parameters')" href="#">Field Parameters</a>
               </li>
               <li>
-                <a @click="scrollTo('#advanced-usage')" href="#">Advanced Usage</a>
+                <a @click="scrollToAnchor('advanced-usage')" href="#">Advanced Usage</a>
               </li>
               <li>
-                <a @click="scrollTo('#rate-limits')" href="#">Rate Limits</a>
+                <a @click="scrollToAnchor('rate-limits')" href="#">Rate Limits</a>
               </li>
             </ul>
             <h2 id="getting-started">Getting Started</h2>
@@ -549,10 +549,7 @@ const loadEmbeddedForm = () => {
   }
 }
 
-const scrollTo = (element) => {
-    var topOfElement = document.querySelector(element).offsetTop + 60
-    window.scroll({ top: topOfElement, behavior: "smooth" })
-}
+const { scrollToAnchor } = useScroll()
 
 const responseFormatCode = `{
   "metadata": {
