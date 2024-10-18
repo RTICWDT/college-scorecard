@@ -1,12 +1,11 @@
 <template>
-  <div>
     <!-- DRAWER CONTENT -->
     <v-navigation-drawer
       v-model="showDrawer"
       location="bottom"
       temporary
       height="auto"
-      class="drawer pa-5"
+      class="drawer pa-5 wrapper"
       elevation="0"
     >
       <v-container class="drawer-content elevation-10">
@@ -37,7 +36,7 @@
             </div>
 
             <div class="items-list">
-              <div v-if="maxSchoolsReached">
+              <div v-if="maxSchoolsReached" class="pa-2 mb-5 bg-lightyellow font-weight-bold">
                 Maximum of 10 Schools Selected
               </div>
 
@@ -52,7 +51,7 @@
               </div>
             </div>
             <div class="flex-grow-1"></div>
-            <div class="d-flex justify-center bg-white pt-3">
+            <div class="d-flex justify-center bg-white pt-3 border-t">
               <NuxtLink v-if="noSchoolsSelected" to="/search" :tabindex="-1">
                 <v-btn color="primary"  :tabindex="showDrawer ? 0 : -1">
                   Search Schools
@@ -118,28 +117,29 @@
 
 
     <!-- DRAWER RAIL -->
-    <div class="position-fixed w-100 rail" :class="{ 'visible': !showDrawer && showRail }">
+    <div class="position-fixed w-100 rail wrapper" :class="{ 'visible': !showDrawer && showRail }">
       <div class="d-flex justify-center">
-        <div class='flex-grow-1 toggle-content-border'>
+
+        <div class='flex-grow-1 toggle-content'>
           <v-btn
-            class="toggle-content-wrapper w-100" 
+            class="button w-100" 
             @click="showDrawer = !showDrawer" 
             tabindex="0" 
             :disabled="showDrawer"
             block
           >
-            <v-container class="toggle-content py-2">
-              <v-row no-gutters align="center">
+            <v-container class="inner-button py-2">
+              <v-row>
                 <v-col class="text-left d-flex pl-0 pl-sm-4 align-center">
                   <div class="d-none d-sm-block mr-5">
                     <p class="font-weight-bold">Ready to Compare:</p>
                   </div>
                   <div class="d-flex align-center mr-5">
                     <v-btn
-                      size="x-small"
                       :icon="maxSchoolsReached ? 'fa:fas fa-exclamation-circle' : 'fa:fas fa-award'"
-                      class="mx-2"
                       :class="{ 'bg-schoolgreen': !maxSchoolsReached, 'bg-error': maxSchoolsReached }"
+                      size="x-small"
+                      class="mx-2"
                       :readonly="true"
                     />
                     <p>{{ store.institutions.length }} School{{ oneSchoolSelected ? '' : 's' }}</p>
@@ -149,10 +149,10 @@
                   </div>
                   <div class="d-flex align-center">
                     <v-btn
-                      size="x-small"
                       :icon="maxFosReached ? 'fa:fas fa-exclamation-circle' : 'fa:fas fa-award'"
-                      class="mx-2"
                       :class="{ 'bg-yellow': !maxFosReached, 'bg-error': maxFosReached }"
+                      size="x-small"
+                      class="mx-2"
                       :readonly="true"
                     />
                     <p>{{ store.fos.length }} Field{{ oneFosSelected ? '' : 's' }} of Study</p>
@@ -165,9 +165,9 @@
             </v-container>
           </v-btn>
         </div>
+
       </div>
     </div>
-  </div>
 </template>
 
 <script setup>
@@ -178,7 +178,6 @@ const showDrawer = ref(false)
 const hasItemsToCompare = computed(() => store.institutions.length > 0 || store.fos.length > 0)
 const onComparePage = computed(() => route.fullPath.includes('compare'))
 const showRail = ref(hasItemsToCompare.value && !onComparePage.value)
-
 
 const maxSchoolsReached = computed(() => store.institutions.length === 10)
 const oneSchoolSelected = computed(() => store.institutions.length === 1)
@@ -203,31 +202,23 @@ watch(() => store.institutions.length, () => { showRail.value = hasItemsToCompar
 </script>
 
 <style scoped lang="scss">
-.toggle-content-border {
+.wrapper {
   max-width: 900px;
-  background-color: #000;
-
-  @include mdAndUp {
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-  }
+  left: 50%;
+  transform: translateX(-50%);
 }
-
-.toggle-content-wrapper {
-  background-color: transparent;
-  color: white;
-  z-index: 1000;
-  cursor: pointer;
-  height: 55px;
-  padding-left: 0;
-  padding-right: 0;
-  font-size: 16px;
-}
-
 .drawer {
   background-color: transparent;
   border-top: none;
   padding: 0 !important;
+  max-width: 900px;
+
+  @media (min-width: 900px) {
+    position: fixed;
+    // left: 20% !important;
+    // assuming 900px width, calc the center with only using left
+    left: calc(50% - 450px) !important;
+  }
 }
 
 .drawer-content {
@@ -245,19 +236,15 @@ watch(() => store.institutions.length, () => { showRail.value = hasItemsToCompar
   
 }
 
-.toggle-content {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  background-color: black;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
+.items-list {
+  @include smAndUp {
+    max-height: 400px;
+    min-height: 400px;
+    overflow-y: scroll;
+
+  }
 }
 
-:deep(.v-btn__content) {
-  width: 100%;
-  justify-content: flex-start;
-}
 
 .rail {
   transition: bottom 0.3s;
@@ -267,14 +254,39 @@ watch(() => store.institutions.length, () => { showRail.value = hasItemsToCompar
   &.visible {
     bottom: 0px;
   }
-}
 
-.items-list {
-  @include smAndUp {
-    max-height: 400px;
-    min-height: 400px;
-    overflow-y: scroll;
+  .toggle-content {
+    max-width: 900px;
+    background-color: #000;
 
+    @include mdAndUp {
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+    }
+
+    .button {
+      background-color: transparent;
+      color: white;
+      z-index: 1000;
+      cursor: pointer;
+      height: 55px;
+      padding-left: 0;
+      padding-right: 0;
+      font-size: 16px;
+
+      &:deep(.v-btn__content) {
+        width: 100%;
+      }
+
+      .inner-button {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        background-color: black;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+      }
+    }
   }
 }
 </style>
