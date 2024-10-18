@@ -190,7 +190,6 @@ const noFosSelected = computed(() => store.fos.length === 0)
 
 
 watch(() => route.fullPath, () => {
-  console.log(route.fullPath)
   if (route.fullPath.includes('compare')) {
     showRail.value = false
     showDrawer.value = false

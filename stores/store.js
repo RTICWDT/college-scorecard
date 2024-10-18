@@ -24,7 +24,7 @@ export const useCompareStore = defineStore('compare', {
     schoolParams(obj) {
       return {
         id: obj.id,
-        school: { name: obj['school.name'] },
+        school: { name: obj.school ? obj.school.name : obj['school.name'] },
       }
     },
 
