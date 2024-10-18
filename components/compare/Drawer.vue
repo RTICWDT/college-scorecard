@@ -47,7 +47,11 @@
               </div>
               <div v-else v-for="institution in store.institutions">
                 <div class="d-flex align-center mb-5">
-                  <v-btn icon="fa: fa-solid fa-trash-can" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeSchool(institution)" :tabindex="showDrawer ? 0 : -1"/>
+                  <v-tooltip location="start" text="Remove School">
+                    <template v-slot:activator="{ props }">
+                      <v-btn v-bind="props" icon="fa: fa-solid fa-trash-can" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeSchool(institution)" :tabindex="showDrawer ? 0 : -1"/>
+                    </template>
+                  </v-tooltip>
                   <NuxtLink :to="schoolLink(institution)" class="text-body-2"><strong>{{ institution.school.name }}</strong></NuxtLink>
                 </div>
               </div>
@@ -90,7 +94,11 @@
               </div>
               <div v-else v-for="fos in store.fos">
                 <div class="d-flex align-center mb-5">
-                  <v-btn icon="fa: fa-solid fa-trash-can" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeFieldOfStudy(fos)" :tabindex="showDrawer ? 0 : -1"/>
+                  <v-tooltip location="start" text="Remove Field of Study">
+                    <template v-slot:activator="{ props }">
+                      <v-btn v-bind="props" icon="fa: fa-solid fa-trash-can" color="error" size="x-small" class="mr-3 ml-1" @click="store.removeFieldOfStudy(fos)" :tabindex="showDrawer ? 0 : -1"/>
+                    </template>
+                  </v-tooltip>
                   <div>
                     <NuxtLink :to="fosLink(fos)" class="text-body-2"><strong>{{ fos.title }}</strong></NuxtLink>
                     <p class="text-caption text-uppercase">{{ fos.credential.title }}</p>

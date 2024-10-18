@@ -47,14 +47,19 @@
             </span>
           </div>
           <div class="flex-grow-1" />
-          <v-btn
-            :disabled="!!isViewingSharedComparison"
-            color="primary"
-            icon="mdi-close"
-            size="x-small"
-            @click="removeFieldOfStudy(fieldOfStudy)"
-            class="remove-btn ml-4"
-          />
+          <v-tooltip text="Remove Field of Study">
+            <template v-slot:activator="{ props }">
+              <v-btn
+                v-bind="props"
+                :disabled="!!isViewingSharedComparison"
+                color="error"
+                icon="fa:fa-solid fa-trash-can"
+                size="x-small"
+                @click="removeFieldOfStudy(fieldOfStudy)"
+                class="remove-btn ml-4"
+              />
+            </template>
+          </v-tooltip>
         </div>
 
       </v-card>

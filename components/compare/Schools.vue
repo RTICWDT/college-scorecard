@@ -33,14 +33,23 @@
           <p class="text-body-2">{{ institution.school.name }}</p>
         </div>
         <div class="flex-grow-1" />
-        <v-btn
-          :disabled="!!isViewingSharedComparison"
-          class="remove-btn"
-          color="primary"
-          icon="mdi-close"
-          size="x-small"
-          @click="removeSchool(institution)"
-        />
+
+        <v-tooltip text="Remove School">
+          <template v-slot:activator="{ props }">
+            <v-btn
+              v-bind="props"
+              :disabled="!!isViewingSharedComparison"
+              class="remove-btn"
+              color="error"
+              icon="fa:fa-solid fa-trash-can"
+              size="x-small"
+              @click="removeSchool(institution)"
+            />
+          </template>
+        </v-tooltip>
+
+
+
       </v-card>
     </div>
 
