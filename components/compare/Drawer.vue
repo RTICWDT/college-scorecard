@@ -57,7 +57,7 @@
               </div>
             </div>
             <div class="flex-grow-1"></div>
-            <div class="d-flex justify-center bg-white pt-3 border-t">
+            <div class="d-flex justify-start justify-sm-center bg-white pt-3 pb-10 pb-sm-0" :class="{ 'border-b': xs }">
               <NuxtLink v-if="noSchoolsSelected" to="/search" :tabindex="-1">
                 <v-btn color="primary"  :tabindex="showDrawer ? 0 : -1">
                   Search Schools
@@ -69,8 +69,8 @@
                 </v-btn>
               </NuxtLink>
             </div>
-          </v-col>
 
+          </v-col>
 
           <!-- FOS -->
           <v-col class="d-flex flex-column" cols="12" sm="6">
@@ -108,7 +108,7 @@
               </div>
             </div>
             <div class="flex-grow-1"></div>
-            <div class="d-flex justify-center bg-white pt-3">
+            <div class="d-flex justify-start justify-sm-center bg-white pt-3">
               <NuxtLink v-if="noFosSelected" to="/search/fos-landing" :tabindex="-1">
                 <v-btn v-if="noFosSelected" color="primary" :tabindex="showDrawer ? 0 : -1">
                   Search Fields of Study
@@ -183,6 +183,8 @@
 </template>
 
 <script setup>
+import { useDisplay } from 'vuetify';
+const { xs } = useDisplay()
 const store = useCompareStore()
 const route = useRoute()
 
