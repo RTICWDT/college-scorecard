@@ -52,33 +52,14 @@
             <h1 class="my-5 mx-5">Compare Schools and Fields of Study</h1>
             <hr />
 
-            <div class="mx-md-4">
-              <v-tabs
-                :model-value="compareToggle"
-                :show-arrows="true"
-                slider-size="8"
-                @update:modelValue="handleCompareToggle"
-                :height="70"
-                :style="{ width: '100%' }"
-                :grow="true"
-              >
-                <v-tab>
-                  <slot name="tab-school">
-                    <h3 class="compare-tab-title">
-                      Schools ({{ schoolCount }})
-                    </h3>
-                  </slot>
-                </v-tab>
-
-                <v-tab>
-                  <slot name="tab-fos">
-                    <h3 class="compare-tab-title pb-1">
-                      Fields of Study ({{ fieldOfStudyCount }})
-                    </h3>
-                  </slot>
-                </v-tab>
-              </v-tabs>
-            </div>
+            <Toggle
+              v-model="compareToggle"
+              @update:modelValue="handleCompareToggle"
+              :options="compareToggleOptions"
+              backgroundColor="white"
+              height="70"
+              :border-thickness="8"
+            />
 
             <div v-show="isComparingSchools" class="px-4">
               <Spacer :height="20" />
@@ -139,21 +120,17 @@ router.push(cleanedPath)
 
 
 const toggleFields = ['institutions', 'fos']
-const compareToggle = ref(Math.max(toggleFields.indexOf(route.query.toggle), 0))
+const compareToggle = ref(route.query.toggle)
 const isComparingSchools = computed(() => route.query.toggle === 'institutions')
 const isComparingFieldsOfStudy = computed(() => route.query.toggle === 'fos')
 
-watch(() => route.query.toggle, (newToggle) => {
-  if (newToggle === 'institutions') {
-    compareToggle.value = 0
-  } else if (newToggle === 'fos') {
-    compareToggle.value = 1
-  }
-}, { immediate: true })
+const compareToggleOptions = computed(() => [
+  { label: `SCHOOLS (${schoolCount.value})`, value: 'institutions', color: '#007000', activeColor: '#00700024' },
+  { label: `FIELDS OF STUDY (${fieldOfStudyCount.value})`, value: 'fos', color: '#fdb022', activeColor: '#fdb02224' },
+])
 
 const handleCompareToggle = (value) => {
-  const toggle = toggleFields[value]
-  const newQuery = { ...route.query, toggle}
+  const newQuery = { ...route.query, toggle: value}
   router.replace({ query: newQuery })
 }
 
