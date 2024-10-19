@@ -61,7 +61,7 @@
               border-thickness="8px"
             >
               <template #label="{ label }">
-                <strong class="display-1" style="color: black; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 16px;">
+                <strong class="display-1 compare-toggle" style="color: black; font-size: 16px;">
                   {{ label }}
                 </strong>
               </template>
@@ -87,6 +87,14 @@
   <Spacer :height="40" />
   <LayoutFooterCTA />
 </template>
+
+<style scope lang="scss">
+.compare-toggle {
+  @include xs {
+    font-size: 14px !important;
+  }
+}
+</style>
 
 <script setup>
 const store = useCompareStore()

@@ -2,7 +2,7 @@
   <v-card elevation="0" :border="0" :style="{ borderRadius: 0, width: '100%', backgroundColor }">
     <v-tabs
       v-model="localModelValue"
-      :show-arrows="true"
+      center-active
       :style="{
         borderRadius: 0,
         borderBottom: '1px solid #dadada',
@@ -27,7 +27,7 @@
         }"
       >
         <slot name="label" :label="option.label" :index="index" :isActive="localModelValue === option.value">
-          <strong :style="{ color: 'black', fontWeight: localModelValue === option.value ? 800 : 400 }">
+          <strong class="toggle" :style="{ color: 'black', fontWeight: localModelValue === option.value ? 800 : 400 }">
             {{ option.label }}
           </strong>
         </slot>
@@ -80,13 +80,17 @@ watch(() => props.modelValue, (newValue) => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .custom-border {
   border-bottom-style: solid;
   border-bottom-color: currentColor;
 }
 
 :deep(.v-tab__slider) {
-    height: v-bind(borderThickness) !important;
-  }
+  height: v-bind(borderThickness) !important;
+}
+
+:deep(.v-tab) {
+  white-space: normal !important;
+}
 </style>
