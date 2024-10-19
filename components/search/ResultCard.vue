@@ -8,7 +8,7 @@
       <p class="mt-1 mb-2" v-if="underInvestigation == 1">
         <v-card color="error" class="px-2 py-1" flat>
           <strong class="white--text">Under ED Monitoring</strong>
-          <tooltip definition="hcm2" color="#FFFFFF" class="ml-2" />
+          <TooltipModal definition="hcm2" color="#FFFFFF" class="ml-2" />
         </v-card>
       </p>
 
@@ -45,7 +45,7 @@
         <v-col class="pb-1">
           <span class="search-result-label">
             Graduation Rate&nbsp;
-            <tooltip
+            <TooltipModal
               definition="graduation-rate"
               :version="completionRateFieldDefinition"
             />
@@ -62,14 +62,14 @@
         <v-col class="pb-1">
           <span v-if="!isProgramReporter" class="search-result-label">
             Average Annual Cost&nbsp;
-            <tooltip
+            <TooltipModal
               definition="avg-cost"
               :isNegative="netPrice < 0"
             />
           </span>
           <span v-else class="search-result-label">
             Average Annual Cost for Largest Program&nbsp;
-            <tooltip
+            <TooltipModal
               definition="avg-program-cost"
               :isNegative="netPrice < 0"
             />
@@ -86,7 +86,7 @@
         <v-col class="pb-1">
           <span class="search-result-label">
             Median Earnings&nbsp;
-            <tooltip
+            <TooltipModal
               definition="institution-median-earnings"
               :isBranch="isBranch"
             />

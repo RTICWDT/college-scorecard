@@ -45,7 +45,7 @@
             <template #label>
               <span>
                 Include debt borrowed at any prior
-                institutions&nbsp;<Tooltip
+                institutions&nbsp;<TooltipModal
                   definition="include-debt-prior-inst"
                   class="pt-2 pl-2"
                 />
@@ -59,7 +59,7 @@
             <div v-if="aidLoanSelect === 'fed'">
               <h2 class="mb-3">
                 Students Receiving Federal Loans
-                <Tooltip definition="student-aid" />
+                <TooltipModal definition="student-aid" />
               </h2>
               <div v-if="studentsReceivingLoans != null">
                 <div class="d-flex align-center justify-center">
@@ -89,7 +89,7 @@
             <div v-else>
               <h2 class="mb-3">
                 Parent Borrowing Rate
-                <Tooltip definition="parent-borrowing-rate" />
+                <TooltipModal definition="parent-borrowing-rate" />
               </h2>
               <h2
                 v-if="estimatedParentBorrowedText"
@@ -113,13 +113,13 @@
           <v-card flat class="pa-4">
             <h2 class="mb-3">
               Median Total Debt After Graduation
-              <Tooltip
+              <TooltipModal
                 v-if="aidLoanSelect === 'fed'"
                 definition="avg-debt"
                 :isBranch="isBranch"
                 :limitedFoS="fieldsLink"
               />
-              <Tooltip
+              <TooltipModal
                 v-else-if="
                   aidLoanSelect === 'plus' &&
                   !aidShowMedianDebtWithPrior
@@ -127,7 +127,7 @@
                 definition="parent-plus-avg-debt"
                 :isBranch="isBranch"
               />
-              <Tooltip
+              <TooltipModal
                 v-else-if="
                   aidLoanSelect === 'plus' &&
                   aidShowMedianDebtWithPrior
@@ -177,14 +177,14 @@
           <v-card flat class="pa-4 mt-4">
             <h2 class="mb-3 mt-3">
               Typical Monthly Loan Payment
-              <Tooltip
+              <TooltipModal
                 v-if="aidLoanSelect === 'fed'"
                 definition="avg-loan-payment"
                 :isBranch="isBranch"
                 :limitedFoS="fieldsLink"
                 style="padding-left:2px;"
               />
-              <Tooltip
+              <TooltipModal
                 v-else-if="
                   aidLoanSelect === 'plus' &&
                   !aidShowMedianDebtWithPrior
@@ -193,7 +193,7 @@
                 :isBranch="isBranch"
                 style="padding-left:2px;"
               />
-              <Tooltip
+              <TooltipModal
                 v-else-if="
                   aidLoanSelect === 'plus' &&
                   aidShowMedianDebtWithPrior
@@ -254,13 +254,13 @@
             <v-row>
               <v-col cols="12" md="12" id="showGradOnly">
                 <h2 class="mb-3" v-if="showGradOnly">
-                  Repayment Rate&nbsp;<Tooltip
+                  Repayment Rate&nbsp;<TooltipModal
                     definition="repayment-rate"
                     :isBranch="isBranch"
                   />
                 </h2>
                 <h2 class="mb-3" v-else>
-                  Repayment Rate&nbsp;<Tooltip
+                  Repayment Rate&nbsp;<TooltipModal
                     definition="repayment-rate-completers"
                     :isBranch="isBranch"
                   />

@@ -328,7 +328,7 @@
                       <span>
                         Only show schools that have programs that qualify for
                         the Department of Labor's WIOA program.
-                        <Tooltip definition="wioa-participants"/>
+                        <TooltipModal definition="wioa-participants"/>
                       </span>
                     </v-chip>
                   </v-col>

@@ -65,7 +65,7 @@
                     >
                       <v-chip color="error" label>
                         <strong>Under ED Monitoring</strong>
-                        <Tooltip
+                        <TooltipModal
                           definition="hcm2"
                           color="#FFFFFF"
                           class="ml-2"

@@ -4,7 +4,7 @@
       <v-card flat class="pa-4">
         <h2 class="mb-4">
           Test Scores
-          <Tooltip definition="test-scores" />
+          <TooltipModal definition="test-scores" />
         </h2>
         <p>{{ standardizedTestText }}</p>
         <div
@@ -83,7 +83,7 @@
       <v-card class="pa-4 fill-height" flat>
         <h2 class="mb-4">
           Acceptance Rate
-          <Tooltip definition="acceptance-rate" />
+          <TooltipModal definition="acceptance-rate" />
         </h2>
         <div
           v-if="

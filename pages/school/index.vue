@@ -68,7 +68,7 @@
             <v-chip v-if="underInvestigation == 1" color="error" label>
               <strong>Under ED Monitoring</strong>
               &nbsp;
-              <tooltip
+              <TooltipModal
                 definition="hcm2"
                 color="#FFFFFF"
                 class="ml-2"

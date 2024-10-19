@@ -30,7 +30,7 @@
       <p v-if="underInvestigation === 1">
         <v-card color="error" class="px-2 py-1" variant="flat">
           <strong class="text-white">Under ED Monitoring</strong>
-          <tooltip definition="hcm2" color="#FFFFFF" class="ml-2" />
+          <TooltipModal definition="hcm2" color="#FFFFFF" class="ml-2" />
         </v-card>
       </p>
     </v-col>
@@ -40,7 +40,7 @@
       <div class="cell">
         <div class="text-uppercase d-flex align-center">
           <span class='mb-2'>Median Earnings</span>
-          <tooltip :definition="'fos-median-earnings'" :is-branch="isBranch" />
+          <TooltipModal :definition="'fos-median-earnings'" :is-branch="isBranch" />
         </div>
 
         <div v-if="medianEarnings">
@@ -68,7 +68,7 @@
       <div class="cell">
         <div class="text-uppercase d-flex align-center">
           <span class='mb-2'>Monthly Earnings</span>
-          <tooltip :definition="'fos-monthly-earnings'" :is-branch="isBranch" />
+          <TooltipModal :definition="'fos-monthly-earnings'" :is-branch="isBranch" />
         </div>
 
 
@@ -88,7 +88,7 @@
       <div class="cell">
         <div class="text-uppercase d-flex align-center">
           <span class='mb-2'>Median Debt</span>
-          <tooltip
+          <TooltipModal
             :definition="'fos-median-debt'"
             :is-branch="isBranch"
             class="ml-1"
@@ -121,7 +121,7 @@
       <div class="cell">
         <div class="text-uppercase d-flex align-center">
           <span class='mb-2'>Monthly Loan Payment</span>
-          <tooltip
+          <TooltipModal
             :definition="'fos-monthly-debt-payment'"
             :is-branch="isBranch"
             class="ml-1"

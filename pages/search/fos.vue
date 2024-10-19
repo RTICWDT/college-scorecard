@@ -361,7 +361,7 @@
                       <span
                         >Only show schools that have programs that qualify for
                         the Department of Labor's WIOA program.
-                        <tooltip definition="wioa-participants" />
+                        <TooltipModal definition="wioa-participants" />
                         <br />
                         Learn more about the Department of Labor's WIOA
                         program at

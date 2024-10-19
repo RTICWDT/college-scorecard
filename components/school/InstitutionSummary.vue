@@ -29,7 +29,7 @@
           >
             <h2 class="mb-3">
               Graduation Rate&nbsp;
-              <Tooltip
+              <TooltipModal
                 definition="graduation-rate"
                 :version="completionRateFieldDefinition"
               />
@@ -115,11 +115,11 @@
           <div id="school-avg-cost" class="mb-4">
             <h2 class="mb-3" v-if="!isProgramReporter">
               Average Annual Cost
-              <tooltip definition="avg-cost" />
+              <TooltipModal definition="avg-cost" />
             </h2>
             <h2 v-else class="mb-3">
               Average Annual Cost for Largest Program
-              <tooltip
+              <TooltipModal
                 definition="avg-program-cost"
                 :isNegative="netPrice < 0"
               />
@@ -217,7 +217,7 @@
           <div id="school-median-earnings" class="mb-4">
             <h2 class="mb-3">
               Median Earnings
-              <tooltip definition="institution-median-earnings" />
+              <TooltipModal definition="institution-median-earnings" />
             </h2>
 
             <h2

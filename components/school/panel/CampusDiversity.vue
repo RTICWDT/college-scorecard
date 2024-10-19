@@ -27,7 +27,7 @@
           </h2>
           <strong>
             Full-time<br />Students
-            <Tooltip definition="full-time" />
+            <TooltipModal definition="full-time" />
           </strong>
         </v-card>
       </v-col>
@@ -45,7 +45,7 @@
         <v-card flat class="pa-4 fill-height">
           <h2 class="mb-3">
             Socio-Economic Diversity
-            <tooltip definition="socio-eco" />
+            <TooltipModal definition="socio-eco" />
           </h2>
           <p class="mb-2">
             The percentage of students who received an
@@ -102,7 +102,7 @@
           <div>
             <h2 class="mb-1 d-inline-block">
               Race/Ethnicity
-              <Tooltip definition="race-eth" />
+              <TooltipModal definition="race-eth" />
             </h2>
             <div class="d-flex align-items-center">
               <div class="mt-4 d-inline-block float-left">

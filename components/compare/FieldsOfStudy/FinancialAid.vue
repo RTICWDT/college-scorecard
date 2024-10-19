@@ -15,7 +15,7 @@
           <span class="profile-fos-include-prior-debt">
             Include debt borrowed at any prior
             institutions&nbsp;
-            <tooltip definition="include-debt-prior-inst" />
+            <TooltipModal definition="include-debt-prior-inst" />
           </span>
         </template>
       </v-checkbox>
@@ -64,7 +64,7 @@
           <span class="profile-fos-include-prior-debt">
             Include debt borrowed at any prior
             institutions&nbsp;
-            <tooltip definition="include-debt-prior-inst" />
+            <TooltipModal definition="include-debt-prior-inst" />
           </span>
         </template>
       </v-checkbox>

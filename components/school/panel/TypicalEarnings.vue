@@ -3,7 +3,7 @@
     <v-col cols="12" lg="7">
       <v-card flat class="pa-4">
         <h2 class="pb-3">
-          Median Earnings&nbsp;<Tooltip
+          Median Earnings&nbsp;<TooltipModal
             definition="institution-median-earnings"
             :isBranch="isBranch"
           />
@@ -86,7 +86,7 @@
       <v-card flat class="pa-4 mb-4">
         <h2 class="mb-2">
           Percentage Earning More Than a High School
-          Graduate&nbsp;<Tooltip
+          Graduate&nbsp;<TooltipModal
             definition="threshold-earnings"
           />
         </h2>
@@ -108,7 +108,7 @@
       <v-card flat class="pa-4">
         <h2>
           Earnings After Completing Field of
-          Study&nbsp;<Tooltip
+          Study&nbsp;<TooltipModal
             definition="fos-median-earnings"
           />
         </h2>

@@ -412,7 +412,7 @@
       <v-expansion-panel>
         <v-expansion-panel-title>
           WIOA Programs&nbsp;
-          <Tooltip definition="wioa-participants" /> 
+          <TooltipModal definition="wioa-participants" /> 
         </v-expansion-panel-title>
         <v-expansion-panel-text>
           <v-checkbox

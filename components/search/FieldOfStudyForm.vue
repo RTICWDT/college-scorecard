@@ -135,7 +135,7 @@
     <div>
       <h3 class="my-4" id="search-fos-dolflag">
         WIOA Programs
-        <tooltip definition="wioa-participants" />
+        <TooltipModal definition="wioa-participants" />
       </h3>
 
       <v-checkbox

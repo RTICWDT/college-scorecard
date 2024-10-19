@@ -5,7 +5,7 @@
         <div v-if="!isProgramReporter">
           <h2 class="mb-3">
             Average Annual Cost&nbsp;
-            <Tooltip definition="avg-cost" />
+            <TooltipModal definition="avg-cost" />
           </h2>
           <h2
             v-if="netPrice"
@@ -89,7 +89,7 @@
         <div v-else>
           <h2 class="mb-3">
             Average Annual Cost for Largest Program
-            <Tooltip
+            <TooltipModal
               definition="avg-program-cost"
               :isNegative="netPrice < 0"
             />

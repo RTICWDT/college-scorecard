@@ -5,7 +5,7 @@
         <v-card flat class="pa-4 fill-height">
           <h2 class="mb-3">
             Graduation Rate&nbsp;
-            <Tooltip
+            <TooltipModal
               definition="graduation-rate"
               :version="completionRateFieldDefinition"
               :isPell="showPellOnlyGrad"
@@ -93,7 +93,7 @@
         <v-card flat class="pa-4 fill-height">
           <h2 class="mb-12">
             Students Who Return After Their First Year&nbsp;
-            <Tooltip definition="retention-rate" />
+            <TooltipModal definition="retention-rate" />
           </h2>
           <div v-if="retentionRate" class="d-flex align-center justify-center">
             <div style="height: 185px; width: 185px">
@@ -117,7 +117,7 @@
             <v-col cols="12" md="12">
               <h2 class="mb-0">
                 Outcomes 8 Years After Attending&nbsp;
-                <Tooltip
+                <TooltipModal
                   definition="outcome-measures"
                   :isPell="showPellOnlyOutcomes"
                 />

@@ -30,7 +30,7 @@
         <v-card flat class="pa-4">
           <h2 class="mb-3">
             Top Fields of Study at {{ schoolName }}
-            <tooltip definition="field-of-study" />
+            <TooltipModal definition="field-of-study" />
           </h2>
 
           <p class="my-3" v-if="fieldsOfStudy.length">

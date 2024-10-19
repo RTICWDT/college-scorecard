@@ -6,7 +6,7 @@
           <v-card flat class="pa-5 fill-height">
             <h3>
               Median Earnings&nbsp;
-              <Tooltip definition="fos-median-earnings" :isBranch="isBranch" />
+              <TooltipModal definition="fos-median-earnings" :isBranch="isBranch" />
             </h3>
             <div>
               <div v-if="medianEarnings">
@@ -38,12 +38,12 @@
           <v-card flat class="pa-5 fill-height">
             <h3>
               Median Total Debt After Graduation&nbsp;
-              <Tooltip
+              <TooltipModal
                 v-if="!fosShowDebtPriorIncluded"
                 definition="fos-median-debt"
                 :isBranch="isBranch"
               />
-              <Tooltip
+              <TooltipModal
                 v-else
                 definition="fos-median-debt-all-schools"
                 :isBranch="isBranch"
@@ -105,7 +105,7 @@
           <v-card flat class="pa-5 fill-height">
             <h3>
               Monthly Earnings&nbsp;
-              <Tooltip definition="fos-monthly-earnings" :isBranch="isBranch" />
+              <TooltipModal definition="fos-monthly-earnings" :isBranch="isBranch" />
             </h3>
             <div>
               <div v-if="medianEarnings">
@@ -124,13 +124,13 @@
           <v-card flat class="pa-5 fill-height">
             <h3>
               Monthly Loan Payment&nbsp;
-              <Tooltip
+              <TooltipModal
                 v-if="!fosShowDebtPriorIncluded"
                 definition="fos-monthly-debt-payment"
                 :isBranch="isBranch"
                 :version="[5, 6, 7, 8].includes(fos.credential.level) ? 'graduate' : 'default'"
               />
-              <Tooltip
+              <TooltipModal
                 v-else
                 definition="fos-monthly-debt-payment-all-schools"
                 :isBranch="isBranch"
@@ -167,7 +167,7 @@
           <v-card flat class="pa-5 fill-height">
             <h3>
               Number of Graduates&nbsp;
-              <Tooltip definition="fos-number-of-graduates" />
+              <TooltipModal definition="fos-number-of-graduates" />
             </h3>
 
             <div v-if="gradCount != null">
@@ -194,7 +194,7 @@
             <template #label>
               <span class="profile-fos-include-prior-debt">
                 Include debt borrowed at any prior institutions&nbsp;
-                <Tooltip definition="include-debt-prior-inst" />
+                <TooltipModal definition="include-debt-prior-inst" />
               </span>
             </template>
           </v-checkbox>
