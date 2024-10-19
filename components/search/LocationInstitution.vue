@@ -114,7 +114,7 @@ const props = defineProps({
   },
   initialDistance: {
     type: String,
-    default: null,
+    default: "50",
   },
   horizontal: {
     type: Boolean,
@@ -145,7 +145,7 @@ const utility = reactive({
 const input = reactive({
   state: [],
   zip: null,
-  distance: null,
+  distance: 50,
   lat: null,
   long: null,
 })
@@ -157,7 +157,7 @@ if (props.initialState) {
 } else if (props.initialZip) {
   utility.location = "ZIP Code"
   input.zip = props.initialZip
-  input.distance = props.initialDistance
+  input.distance = props.initialDistance || 50
 }
 
 watch(() => props.initialState, (newValue) => input.state = newValue)
@@ -182,6 +182,7 @@ watch(() => location.latLon, (newValue) => {
 
 watch(() => utility.location, (newValue, oldValue) => {
   if (newValue === "Near Me" && oldValue !== "Near Me") {
+    input.distance = 50
     handleLocationCheck()
   }
 })
@@ -234,6 +235,22 @@ function handleSearch() {
 
   emit("search-update", o)
 }
+
+
+// auto-populate form on mount is location is available
+const route = useRoute()
+onMounted(() => {
+  if (route.query.lat && route.query.long) {
+    utility.location = "Near Me"
+    input.distance = route.query.distance || 50
+    location.latLon = {
+      min_lat: parseFloat(route.query.lat),
+      max_lat: parseFloat(route.query.lat),
+      min_lon: parseFloat(route.query.long),
+      max_lon: parseFloat(route.query.long),
+    }
+  }
+})
 
 defineExpose({
   resetForm,
