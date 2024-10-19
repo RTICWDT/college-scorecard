@@ -72,10 +72,6 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import { useDisplay } from 'vuetify';
-const { name: breakpoint } = useDisplay();
-
 const props = defineProps({
   min: {
     type: Object,

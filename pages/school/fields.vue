@@ -16,14 +16,14 @@
             <v-col class="text-right d-flex">
               <Share
                 :url="shareLink"
-                label="Share these Fields of Study"
+                :label="smAndDown ? 'Share' : 'Share these Fields of Study'"
                 small
                 variant="text"
                 color="black"
                 :elevation="3"
                 :hide="['email']"
                 showCopy
-                class="flex-grow-1"
+                class="flex-grow-1 mr-2"
               />
               <v-btn :href="schoolLink" variant="text" color="black" size="small">School Profile &raquo;</v-btn>
             </v-col>
@@ -228,8 +228,9 @@
 </style>
 
 <script setup>
-const { toNumber } = useNumberFormatter()
 import { formatFieldOfStudyTitle } from '~/utils/filters'
+const { toNumber } = useNumberFormatter()
+const { smAndDown } = useBreakpoints()
 
 const route = useRoute()
 const router = useRouter()

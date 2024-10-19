@@ -107,11 +107,9 @@ a {
 </style>
 
 <script setup>
-import { useDisplay } from 'vuetify'
-
 const route = useRoute()
 const activeLink = ref(null)
-const { smAndDown } = useDisplay()
+const { smAndDown } = useBreakpoints()
 
 const version = ref('3.0.3') // TODO: implement a way to get the version
 

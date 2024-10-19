@@ -32,7 +32,7 @@
 import { ref, computed, watch } from 'vue'
 import { useDisplay } from "vuetify"
 
-const { smAndDown } = useDisplay()
+const { smAndDown } = useBreakpoints()
 const { site, CIP4 } = useSiteData()
 const emit = defineEmits(['field-of-study-selected'])
 const items = computed(() => site.value.data.cip_6_digit)

@@ -271,13 +271,12 @@
 </template>
 
 <script setup>
-import { useDisplay } from 'vuetify';
 import { formatUrlText } from '~/utils/filters'
 
 const route = useRoute()
 const { fields } = useConstants()
 const { apiGet } = useApi()
-const { smAndDown } = useDisplay()
+const { smAndDown } = useBreakpoints()
 const { transitionOutboundLink, trackAccordion } = useAnalytics()
 const { toNumber } = useNumberFormatter()
 

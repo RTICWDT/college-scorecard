@@ -508,9 +508,7 @@ const config = useRuntimeConfig()
 const formSubmitted = ref(false)
 const recaptchaRef = ref(null)
 const isVerified = ref(false)
-
-import { useDisplay } from 'vuetify';
-const { mdAndUp } = useDisplay()
+const { mdAndUp } = useBreakpoints()
 
 onMounted(() => {
   recaptchaRef.value.setOnSuccess((token) => {

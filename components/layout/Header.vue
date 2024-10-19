@@ -281,9 +281,7 @@ const route = useRoute();
 const activeLink = ref(route.path)
 const drawer = ref()
 const { trackNavigation } = useAnalytics()
-
-import { useDisplay } from 'vuetify';
-const { mdAndUp } = useDisplay()
+const { mdAndUp } = useBreakpoints()
 
 const mobileNavClick = (link) => {
   trackNavigation(link)

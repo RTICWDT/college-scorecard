@@ -487,10 +487,7 @@
 </template>
 
 <script setup>
-
-
-import { useDisplay } from 'vuetify';
-const { smAndDown, lgAndUp, md } = useDisplay()
+const { smAndDown, lgAndUp, md } = useBreakpoints()
 const { prepareParams } = usePrepareParams()
 const { site } = useSiteData()
 const { formMappings } = useConstants();

@@ -30,6 +30,11 @@
   min-width: 390px;
   max-width: 390px;
 
+  @include md {
+    min-width: 300px;
+    max-width: 300px;
+  }
+
   @include xl {
     min-width: 600px;
     max-width: 600px;
@@ -417,7 +422,7 @@
 
 <script setup>
 import { useDisplay } from "vuetify";
-const { smAndDown, lgAndUp, md } = useDisplay()
+const { smAndDown, lgAndUp, md } = useBreakpoints()
 const { prepareParams } = usePrepareParams()
 const { apiGet } = useApi()
 const { trackAnalyticsEvent } = useAnalytics()

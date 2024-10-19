@@ -183,8 +183,7 @@
 </template>
 
 <script setup>
-import { useDisplay } from 'vuetify';
-const { xs } = useDisplay()
+const { xs } = useBreakpoints()
 const store = useCompareStore()
 const route = useRoute()
 

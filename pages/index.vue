@@ -403,7 +403,7 @@ fieldset {
 import { useDisplay } from "vuetify";
 const { formMappings } = useConstants()
 const { GATrackEvent, transitionOutboundLink, } = useAnalytics()
-const { smAndDown } = useDisplay()
+const { smAndDown } = useBreakpoints()
 const router = useRouter()
 
 const mobilePanels = ref(0)
