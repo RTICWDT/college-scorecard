@@ -28,7 +28,7 @@
 
   <div v-if="!loading && institutions.all.length > 0">
     <div class="grid-container">
-      <v-card v-for="institution in institutions.all" class="pa-4 d-flex align-center">
+      <v-card v-for="institution in institutions.all" class="pa-4 d-flex align-center" :rounded="false" elevation="0">
         <div class="mr-3 content">
           <p class="text-body-2">{{ institution.school.name }}</p>
         </div>

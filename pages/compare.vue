@@ -49,7 +49,7 @@
     <v-row>
       <v-col>
         <v-card class="pb-5 px-3" variant="flat">
-            <h1 class="my-5 mx-5">Compare Schools and Fields of Study</h1>
+            <h1 class="my-5 mx-5 header-1">Compare Schools and Fields of Study</h1>
             <hr />
 
             <Toggle

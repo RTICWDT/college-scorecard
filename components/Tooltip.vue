@@ -11,7 +11,7 @@
       <v-icon icon="fa:fas fa-info-circle"></v-icon>
     </v-btn>
 
-    <v-dialog max-width="500px" v-model="showDialog">
+    <v-dialog max-width="500px" v-model="showDialog" scroll-strategy="close">
       <v-card class="px-3 py-3">
 
         <div class="d-flex">
