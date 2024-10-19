@@ -316,6 +316,8 @@
                     :length="totalPages"
                     :total-visible="paginatorPageCount"
                     @update:model-value="handlePaginationInput"
+                    active-color="primary"
+                    variant="flat"
                   />
                 </div>
               </div>
@@ -468,6 +470,8 @@
                           :length="totalPages"
                           @update:model-value="handlePaginationInput"
                           :total-visible="paginatorPageCount"
+                          active-color="primary"
+                          variant="flat"
                         />
                       </v-col>
                     </v-row>
