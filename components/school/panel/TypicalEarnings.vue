@@ -125,7 +125,7 @@
 </template>
 
 <script setup>
-  import { yearsText } from '~/utils/filters'
+  const { yearsText } = useFilters()
   const { toDollar, toPercent } = useNumberFormatter()
   const props = defineProps({
     school: {

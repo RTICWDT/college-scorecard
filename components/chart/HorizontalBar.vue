@@ -11,7 +11,6 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
 import { Bar } from 'vue-chartjs'
 
 const props = defineProps({

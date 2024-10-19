@@ -271,8 +271,7 @@
 </template>
 
 <script setup>
-import { formatUrlText } from '~/utils/filters'
-
+const { formatUrlText } = useFilters()
 const route = useRoute()
 const { fields } = useConstants()
 const { apiGet } = useApi()

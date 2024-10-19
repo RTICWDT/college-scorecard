@@ -397,10 +397,6 @@ fieldset {
 </style>
 
 <script setup>
-// import CompareDrawer from "~/components/CompareDrawer.vue"
-// import CompareHeader from "~/components/CompareHeader.vue"
-
-import { useDisplay } from "vuetify";
 const { formMappings } = useConstants()
 const { GATrackEvent, transitionOutboundLink, } = useAnalytics()
 const { smAndDown } = useBreakpoints()

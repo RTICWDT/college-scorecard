@@ -194,10 +194,10 @@
 <script setup>
 const { toDollar, toNumber } = useNumberFormatter()
 
-import {
+const {
   formatFieldOfStudyTitle,
   formatCip2Title,
-} from '~/utils/filters'
+} = useFilters()
 
 const route = useRoute()
 const router = useRouter()

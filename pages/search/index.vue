@@ -427,7 +427,6 @@
 <script setup>
 const route = useRoute()
 const router = useRouter()
-import { useDisplay } from "vuetify";
 const { smAndDown, lgAndUp, md } = useBreakpoints()
 const { prepareParams } = usePrepareParams()
 const { apiGet } = useApi()

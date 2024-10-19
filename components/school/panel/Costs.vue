@@ -267,7 +267,7 @@
 </template>
 
 <script setup>
-import { yearsText } from '~/utils/filters'
+const { yearsText } = useFilters()
 const { toDollar } = useNumberFormatter()
 
 const props = defineProps({

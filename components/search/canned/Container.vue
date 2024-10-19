@@ -66,7 +66,6 @@
 </template>
 
 <script setup>
-import { useLocationCheck } from '~/composables/useLocationCheck'
 const emit = defineEmits(['canned-search-submit'])
 const query = ref({})
 const { location, handleLocationCheck } = useLocationCheck()

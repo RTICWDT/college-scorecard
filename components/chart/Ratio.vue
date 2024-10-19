@@ -35,9 +35,6 @@ const tabID = (context, controlTab) => {
   }
 }
 
-// If you need to perform actions after the component is mounted, use onMounted
-import { onMounted } from 'vue'
-
 onMounted(() => {
   // Uncomment if you still need this functionality
   // const prevElement = document.querySelector('#context-toggle .v-slide-group .v-slide-group__prev')

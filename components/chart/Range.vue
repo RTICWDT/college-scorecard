@@ -71,8 +71,6 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-
 const props = defineProps({
   min: {
     type: Object,

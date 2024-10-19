@@ -29,9 +29,6 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
-import { useDisplay } from "vuetify"
-
 const { smAndDown } = useBreakpoints()
 const { site, CIP4 } = useSiteData()
 const emit = defineEmits(['field-of-study-selected'])

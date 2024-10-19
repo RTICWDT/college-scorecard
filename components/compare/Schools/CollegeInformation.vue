@@ -113,7 +113,7 @@
 const props = defineProps({ institutions: Object });
 const { toNumber, toPercent } = useNumberFormatter()
 const { fields } = useConstants()
-import { formatUrlText } from '~/utils/filters'
+const { formatUrlText } = useFilters()
 
 const {
   fullTimeEnrollment,

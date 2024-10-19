@@ -36,7 +36,7 @@
 
 
 <script setup>
-import {
+const {
   yearsClass,
   formatYearsLabel,
   controlClass,
@@ -45,7 +45,7 @@ import {
   locale,
   sizeCategoryClass,
   sizeCategory
-} from '~/utils/filters'
+} = useFilters()
 
 const props = defineProps({
   school: {

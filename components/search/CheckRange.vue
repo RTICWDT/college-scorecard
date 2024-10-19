@@ -64,8 +64,6 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue'
-
 const props = defineProps({
   legendTitle: {
     type: String,

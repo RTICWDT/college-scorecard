@@ -228,7 +228,7 @@
 </style>
 
 <script setup>
-import { formatFieldOfStudyTitle } from '~/utils/filters'
+const { formatFieldOfStudyTitle } = useFilters()
 const { toNumber } = useNumberFormatter()
 const { smAndDown } = useBreakpoints()
 

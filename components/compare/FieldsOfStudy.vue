@@ -78,7 +78,7 @@
 </template>
 
 <script setup>
-import { formatFieldOfStudyTitle, formatFieldOfStudyCredentialTitle, unflattenObject } from '#imports';
+const { formatFieldOfStudyTitle, formatFieldOfStudyCredentialTitle, unflattenObject } = useFilters();
 const router = useRouter()
 const route = useRoute()
 const store = useCompareStore()
