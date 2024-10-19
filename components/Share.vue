@@ -28,25 +28,21 @@
       </v-list>
     </v-menu>
 
-    <v-dialog
+    <v-tooltip
       v-model="showCopyNotify"
-      @update:modelValue="showCopyNotify = $event"
-      class="v-copy-notify"
-      :scrim="false"
-      max-width="180"
+      location="top"
       transition="fade-transition"
     >
-      <v-card>
-        <div class="d-flex align-center pa-3">
-          <div class="mr-3 flex-grow-1">Copied!</div>
-            <v-btn
-              @click="showCopyNotify = false"
-              icon="mdi-close-circle"
-              size="small"
-            />
-        </div>
-      </v-card>
-    </v-dialog>
+    <template v-slot:activator="{ props }">
+      <div v-bind="props" class="position-relative" style="bottom: 25px;">
+        <!-- This div acts as an anchor for the tooltip -->
+        <!-- You might want to bind this to your copy button or the copied content -->
+      </div>
+    </template>
+    <div>URL Copied!</div>
+  </v-tooltip>
+
+
   </div>
 </template>
 
@@ -154,6 +150,6 @@ function copyURL() {
 
 function showCopyNotification() {
   showCopyNotify.value = true
-  setTimeout(() => (showCopyNotify.value = false), 3000)
+  setTimeout(() => (showCopyNotify.value = false), 1500)
 }
 </script>

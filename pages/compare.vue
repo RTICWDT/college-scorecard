@@ -59,7 +59,13 @@
               backgroundColor="white"
               height="70"
               border-thickness="8px"
-            />
+            >
+              <template #label="{ label }">
+                <strong class="display-1" style="color: black; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 16px;">
+                  {{ label }}
+                </strong>
+              </template>
+            </Toggle>
 
             <div v-show="isComparingSchools" class="px-4">
               <Spacer :height="20" />

@@ -26,8 +26,8 @@
           lineHeight: `${height}px`,
         }"
       >
-        <slot :label="option.label" :index="index" :isActive="localModelValue === option.value">
-          <strong class="display-1" style="color: black; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        <slot name="label" :label="option.label" :index="index" :isActive="localModelValue === option.value">
+          <strong :style="{ color: 'black', fontWeight: localModelValue === option.value ? 800 : 400 }">
             {{ option.label }}
           </strong>
         </slot>

@@ -21,9 +21,10 @@
             @click="showDialog = false" 
             alt="Close More Information tooltip" 
             aria-required="true" 
-            icon="fa:fas fa-times-circle" 
+            icon="mdi:mdi-close"
             elevation="0"
             color="tertiary"
+            class="ml-5"
           />
         </div>
 
