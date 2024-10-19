@@ -42,9 +42,7 @@
             </ul>
             <li>Restructured the data file to relabel previously published entry-cohort earnings calculations
               released in 2022 and 2023 with the publication of a
-              <a @click="trackDownload('EarningsDataErrata.pdf')" href="~/assets/files/EarningsDataErrata.pdf"
-                target="_blank">data errata document
-              </a>
+              <a @click="trackDownload('EarningsDataErrata.pdf')" href="/files/EarningsDataErrata.pdf" target="_blank">data errata document</a>
               describing data quality
               issues with those calculations.
             </li>
