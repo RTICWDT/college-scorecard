@@ -2,7 +2,7 @@
   <h2 class="mb-5">Salary After Completing</h2>
 
   <div class="px-0 px-md-5">
-    <CompareHTooltip class="mb-3" title="Median Earnings" definition="fos-median-earnings" />
+    <CompareTooltipHeader class="mb-3" title="Median Earnings" definition="fos-median-earnings" />
     <div class="px-0 px-md-5 pb-10">
       <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">
@@ -31,7 +31,7 @@
       </CompareFieldsOfStudyDataSection>
     </div>
 
-    <CompareHTooltip class="mb-3" title="Monthly Earnings" definition="fos-monthly-earnings" />
+    <CompareTooltipHeader class="mb-3" title="Monthly Earnings" definition="fos-monthly-earnings" />
     <div class="px-0 px-md-5">
       <CompareFieldsOfStudyDataSection :fieldsOfStudy="fieldsOfStudy">
         <template #data="{ fos }">

@@ -11,7 +11,7 @@
   />
 
   <div v-if="isFedLoan">
-    <CompareHTooltip title="Students Receiving Federal Loans" definition="student-aid" :h="2" class="mb-5 mt-7" />
+    <CompareTooltipHeader title="Students Receiving Federal Loans" definition="student-aid" :h="2" class="mb-5 mt-7" />
     <div class="px-0 px-md-5 mb-5">
       <CompareSchoolsDataSection :institutions="institutions">
         <template #data="{ institution }">
@@ -38,7 +38,7 @@
   </div>
 
   <div v-if="isPlusLoan">
-    <CompareHTooltip title="Estimated percent of student who had a parent who borrowed" definition="parent-borrowing-rate" :h="2" class="mb-5 mt-7" />
+    <CompareTooltipHeader title="Estimated percent of student who had a parent who borrowed" definition="parent-borrowing-rate" :h="2" class="mb-5 mt-7" />
     <div class="px-0 px-md-5 mb-5">
       <CompareSchoolsDataSection :institutions="institutions">
         <template #data="{ institution }">
@@ -48,7 +48,7 @@
     </div>
   </div>
 
-  <CompareHTooltip title="Median Total Debt After Graduation" :definition="isPlusLoan ? 'parent-plus-avg-debt' : 'avg-debt'" :h="2" class="mb-1 mt-7" />
+  <CompareTooltipHeader title="Median Total Debt After Graduation" :definition="isPlusLoan ? 'parent-plus-avg-debt' : 'avg-debt'" :h="2" class="mb-1 mt-7" />
   <p class="mb-5">The typical total debt for undergraduate borrowers who complete college.</p>
 
   <v-checkbox
@@ -92,7 +92,7 @@
 
 
   <h2 class="mb-1 mt-7"></h2>
-  <CompareHTooltip title="Typical Monthly Loan Payment" :definition="isPlusLoan ? 'parent-plus-avg-loan-payment' : 'avg-loan-payment'" :h="2" class="mb-1 mt-7" />
+  <CompareTooltipHeader title="Typical Monthly Loan Payment" :definition="isPlusLoan ? 'parent-plus-avg-loan-payment' : 'avg-loan-payment'" :h="2" class="mb-1 mt-7" />
 
   <p class="mb-5" style="max-width: 800px">
     This is based on a standard 10-year payment plan, other
@@ -151,7 +151,7 @@
   </div>
 
   <div v-if="isFedLoan">
-    <CompareHTooltip title="Repayment Rate" definition="repayment-rate" :h="2" class="mb-1 mt-7" />
+    <CompareTooltipHeader title="Repayment Rate" definition="repayment-rate" :h="2" class="mb-1 mt-7" />
     <p class="mb-5" style="max-width: 800px">Percentage of borrowers in each category 2 years after entering repayment. For category definitions, please see the <NuxtLink to="/data/glossary">glossary</NuxtLink>.</p>
 
     <v-checkbox

@@ -2,7 +2,7 @@
   <h2 class="mb-5">Financial Aid</h2>
 
   <div class="px-0 px-md-5">
-    <CompareHTooltip class="mb-3" title="Median Total Debt After Graduation" definition="fos-median-debt" />
+    <CompareTooltipHeader class="mb-3" title="Median Total Debt After Graduation" definition="fos-median-debt" />
 
     <div class="d-flex">
       <v-checkbox
@@ -51,7 +51,7 @@
   </div>
 
   <div class="px-0 px-md-5">
-    <CompareHTooltip class="mb-3" title="Monthly Loan Payment" definition="fos-monthly-debt-payment" />
+    <CompareTooltipHeader class="mb-3" title="Monthly Loan Payment" definition="fos-monthly-debt-payment" />
 
     <div class="d-flex">
       <v-checkbox

@@ -18,7 +18,7 @@
     </Toggle>
   </div>
 
-  <CompareHTooltip title="Median Earnings" definition="institution-median-earnings" :h="2" class="mb-1 mt-7" />
+  <CompareTooltipHeader title="Median Earnings" definition="institution-median-earnings" :h="2" class="mb-1 mt-7" />
   <p class="mb-5" style="max-width: 800px">The median earnings of former students who received federal financial aid at 10 years after entering the school.</p>
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
@@ -55,7 +55,7 @@
     </CompareSchoolsDataSection>
   </div>
 
-  <CompareHTooltip title="Percentage Earning More Than a High School Graduate" definition="threshold-earnings" :h="2" class="mb-5" />
+  <CompareTooltipHeader title="Percentage Earning More Than a High School Graduate" definition="threshold-earnings" :h="2" class="mb-5" />
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">

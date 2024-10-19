@@ -1,5 +1,5 @@
 <template>
-  <CompareHTooltip title="Test Scores" definition="test-scores" :h="2" class="mb-1 mt-7" />
+  <CompareTooltipHeader title="Test Scores" definition="test-scores" :h="2" class="mb-1 mt-7" />
   <p class="mb-5" style="max-width: 800px">Students who were admitted and enrolled typically had standardized test scores in these ranges.</p>
 
   <div class="">

@@ -19,7 +19,7 @@
     </Toggle>
   </div>
 
-  <CompareHTooltip title="Graduation Rate" definition="graduation-rate" :h="2" class="mb-5 mt-7" />
+  <CompareTooltipHeader title="Graduation Rate" definition="graduation-rate" :h="2" class="mb-5 mt-7" />
   <v-checkbox
     v-model="showPellOnly"
     label="Show Pell Grant Recipients Only"
@@ -68,7 +68,7 @@
     </CompareSchoolsDataSection>
   </div>
 
-  <CompareHTooltip title="Students Who Return After Their First Year" definition="retention-rate" :h="2" class="mb-5 mt-7" />
+  <CompareTooltipHeader title="Students Who Return After Their First Year" definition="retention-rate" :h="2" class="mb-5 mt-7" />
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #data="{ institution }">
@@ -93,7 +93,7 @@
     </CompareSchoolsDataSection>
   </div>
 
-  <CompareHTooltip title="Outcomes 8 Years After Attending" definition="outcome-measures" :h="2" class="mb-5 mt-7" :pell="showPellOnlyOutcomes" />
+  <CompareTooltipHeader title="Outcomes 8 Years After Attending" definition="outcome-measures" :h="2" class="mb-5 mt-7" :pell="showPellOnlyOutcomes" />
   <v-checkbox
     v-model="showPellOnlyOutcomes"
     label="Show Pell Grant Recipients Only"

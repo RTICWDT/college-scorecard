@@ -18,7 +18,7 @@
     </Toggle>
   </div>
 
-  <CompareHTooltip title="Average Annual Cost" definition="avg-cost" :h="2" class="mb-5 mt-7" />
+  <CompareTooltipHeader title="Average Annual Cost" definition="avg-cost" :h="2" class="mb-5 mt-7" />
   <div class="px-0 px-md-5 mb-5">
     <CompareSchoolsDataSection :institutions="institutions">
       <template #byline="{ groupName, institution }">
