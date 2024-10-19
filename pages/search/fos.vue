@@ -351,21 +351,17 @@
                 </v-row>
 
                 <v-row>
-                  <v-col cols="12"class="pt-0"v-if="input.dolflag">
+                  <v-col cols="12" class="pt-0" v-if="input.dolflag">
                     <v-alert
                       border="start"
                       color="white"
                       border-color="primary"
                       class="mb-0"
                     >
-                      <span
-                        >Only show schools that have programs that qualify for
+                      <span>
+                        Only show schools that have programs that qualify for
                         the Department of Labor's WIOA program.
                         <TooltipModal definition="wioa-participants" />
-                        <br />
-                        Learn more about the Department of Labor's WIOA
-                        program at
-                        <a target="_blank" href="https://collegescorecard.ed.gov/training">CollegeScorecard.ed.gov/training</a>.
                       </span>
                     </v-alert>
                   </v-col>

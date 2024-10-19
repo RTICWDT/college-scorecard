@@ -11,7 +11,7 @@
       item-title="school.name"
       autocomplete="off"
       hide-details
-      color="#007000"
+      color="primary"
       variant="outlined"
       prepend-inner-icon="fa:fas fa-search"
       hide-no-data

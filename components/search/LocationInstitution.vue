@@ -15,6 +15,7 @@
       min-width="200"
       @keydown.enter.prevent
       :max-width="props.horizontal ? 300 : undefined"
+      color="primary"
     />
 
     <div class="d-flex align-center" v-if="utility.location === 'Near Me'">
@@ -38,6 +39,7 @@
         density="compact"
         :class="[props.horizontal ? 'mx-2' : 'my-3']"
         @update:modelValue="handleSearch"
+        color="primary"
       />
 
       <span
@@ -62,6 +64,7 @@
         min="0"
         variant="outlined"
         @update:modelValue="handleSearch"
+        color="primary"
       />
       <v-text-field
         v-model="input.distance"
@@ -74,6 +77,7 @@
         density="compact"
         variant="outlined"
         @update:modelValue="handleSearch"
+        color="primary"
       />
     </div>
 
@@ -89,7 +93,7 @@
       :single-line="true"
       :placeholder="input.state && input.state.length > 0 ? undefined : 'Select a state...'"
       :class="[props.horizontal ? 'mx-3 mt-0  pt-0' : 'my-3']"
-      color="secondary"
+      color="primary"
       closable-chips
       v-show="utility.location == 'State'"
       aria-label="Select a state"
@@ -114,7 +118,7 @@ const props = defineProps({
   },
   initialDistance: {
     type: String,
-    default: "50",
+    default: null,
   },
   horizontal: {
     type: Boolean,
@@ -145,7 +149,7 @@ const utility = reactive({
 const input = reactive({
   state: [],
   zip: null,
-  distance: 50,
+  distance: 0,
   lat: null,
   long: null,
 })
@@ -157,7 +161,7 @@ if (props.initialState) {
 } else if (props.initialZip) {
   utility.location = "ZIP Code"
   input.zip = props.initialZip
-  input.distance = props.initialDistance || 50
+  input.distance = props.initialDistance
 }
 
 watch(() => props.initialState, (newValue) => input.state = newValue)
@@ -242,7 +246,7 @@ const route = useRoute()
 onMounted(() => {
   if (route.query.lat && route.query.long) {
     utility.location = "Near Me"
-    input.distance = route.query.distance || 50
+    input.distance = route.query.distance
     location.latLon = {
       min_lat: parseFloat(route.query.lat),
       max_lat: parseFloat(route.query.lat),

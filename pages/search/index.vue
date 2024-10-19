@@ -315,29 +315,22 @@
               <div
                 v-if="!isLoading && displayFlag"
                 id="search-institutions-dolflag"
-                class="my-2"
+                class="mt-2"
               >
                 <v-row>
-                  <v-col cols="12" sm="6" md="6" class="">
-                    <v-chip
-                      class="dolflag-chip pa-3"
-                      close
-                      label
-                      @click:close="handleDOLFlag"
+                  <v-col cols="12" class="pt-4" v-if="input.dolflag">
+                    <v-alert
+                      border="start"
+                      color="white"
+                      border-color="primary"
+                      class="mb-0"
                     >
                       <span>
                         Only show schools that have programs that qualify for
                         the Department of Labor's WIOA program.
-                        <TooltipModal definition="wioa-participants"/>
+                        <TooltipModal definition="wioa-participants" />
                       </span>
-                    </v-chip>
-                  </v-col>
-
-                  <v-col cols="12" sm="6" md="" class="">
-                    <v-card outlined class="pa-3">
-                      Learn more about the Department of Labor's WIOA program at 
-                      <a target="_blank" href="https://collegescorecard.ed.gov/training"> CollegeScorecard.ed.gov/training.</a>
-                    </v-card>
+                    </v-alert>
                   </v-col>
                 </v-row>
               </div>
@@ -379,7 +372,7 @@
                   :md="showSidebar ? 6 : 4"
                   sm="6"
                   xs="12"
-                  class="d-flex align-stretch"
+                  class="d-flex align-stretch pb-0 pr-0"
                 >
                   <SearchResultCard :school="school" :isLoading="isLoading" />
                 </v-col>
