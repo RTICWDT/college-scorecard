@@ -156,7 +156,7 @@
               @click="showSidebar = !showSidebar"
             >
               <v-icon size="small" class="pr-1" icon="fa:fas fa-sliders-h" />
-              {{ showSidebar ? "Hide" : "Show" }} Filters
+              {{ showSidebar ? "Hide" : "Show" }} {{ smAndDown ? 'More' : '' }} Filters
             </v-btn>
           </div>
         </v-card>
@@ -179,8 +179,8 @@
       }"
     >
       <div class="bg-white" v-show="showSidebar">
-        <div class="pa-6 d-flex elevation-3">
-          <h2 class="flex-grow-1">More Filters</h2>
+        <div class="pa-1 pa-md-6 d-flex elevation-3">
+          <h2 class="flex-grow-1 d-none d-md-block">More Filters</h2>
           <a href="#"class="float-right close-filter d-none d-md-block"@click="showSidebar = !showSidebar">
             <v-icon>mdi-chevron-left</v-icon>
             Close filters

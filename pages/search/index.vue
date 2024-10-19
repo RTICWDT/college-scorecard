@@ -136,7 +136,7 @@
               @click="showSidebar = !showSidebar"
             >
               <v-icon size="small" class="pr-1" icon="fa:fas fa-sliders-h" />
-              {{ showSidebar ? "Hide" : "Show" }} Filters
+              {{ showSidebar ? "Hide" : "Show" }} {{ smAndDown ? 'More' : '' }} Filters
             </v-btn>
           </div>
         </v-card>
