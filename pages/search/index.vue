@@ -122,7 +122,7 @@
             <SearchLocationInstitution
               ref="searchLocationRef"
               @search-update="handleLocationSelection"
-              :initial-state="route.query.state"
+              :initial-state="route.query.state ? route.query.state.split(',') : []"
               :initial-zip="route.query.zip"
               :initial-distance="route.query.distance"
               :horizontal="!smAndDown"
@@ -421,15 +421,19 @@
 
 
 <script setup>
+const route = useRoute()
+const router = useRouter()
 import { useDisplay } from "vuetify";
 const { smAndDown, lgAndUp, md } = useBreakpoints()
 const { prepareParams } = usePrepareParams()
 const { apiGet } = useApi()
 const { trackAnalyticsEvent } = useAnalytics()
 const { site } = useSiteData()
-const route = useRoute()
-const router = useRouter()
 const { fields } = useConstants()
+
+definePageMeta({ 
+  middleware: 'school-search',
+})
 
 const props = defineProps({
   pagePermalink: String,

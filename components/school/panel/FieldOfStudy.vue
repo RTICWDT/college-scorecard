@@ -437,7 +437,6 @@ const handleFieldOfStudySelect = (event) => {
 }
 
 watch(() => selectedFieldOfStudy.value, (newValue) => {
-  console.log(newValue)
   router.replace({
     query: {
       ...route.query,

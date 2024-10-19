@@ -126,7 +126,7 @@ const emit = defineEmits(['search-update'])
 
 const { site } = useSiteData()
 const { location, handleLocationCheck } = useLocationCheck()
-const states = site.value.data.states
+const states = ref(site.value.data.states)
 
 const utility = reactive({
   location: null,

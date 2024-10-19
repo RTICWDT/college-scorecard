@@ -611,9 +611,11 @@ const route = useRoute()
 
 const mapInputFromQuery = (override) => {
   // Reset form to default, Helps with processing canned search items.
+  let query = useCloneDeep(route.query)
+  if (query.state) query.state = query.state.split(",")
 
   // TODO - Refactor this method. Maybe add switch.
-  useMergeWith(input, override || route.query, function(
+  useMergeWith(input, override || query, function(
     objVal,
     newObjValue,
     key

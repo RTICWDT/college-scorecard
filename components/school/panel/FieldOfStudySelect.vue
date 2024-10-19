@@ -88,7 +88,6 @@ const displayMenu = ref(false)
 const searchText = ref('')
 
 watch(() => props.modelValue, (newVal) => {
-  console.log(newVal)
   if (newVal && typeof newVal === 'object' && newVal.text) {
     searchText.value = newVal.text
   } else {
