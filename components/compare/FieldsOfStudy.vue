@@ -67,7 +67,7 @@
       </v-card>
     </div>
 
-    <hr class="my-10"/>
+    <hr class="mt-5 mb-6"/>
     <CompareFieldsOfStudySalaryAfterCompleting :fieldsOfStudy="fieldsOfStudy" />
     <hr class="my-10"/>
     <CompareFieldsOfStudyFinancialAid :fieldsOfStudy="fieldsOfStudy" />

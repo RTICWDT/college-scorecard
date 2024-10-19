@@ -47,13 +47,10 @@
             />
           </template>
         </v-tooltip>
-
-
-
       </v-card>
     </div>
 
-    <hr class="my-8"/>
+    <hr class="mt-5 mb-4"/>
     <CompareSchoolsOverview :institutions="institutions" />
 
     <Teleport to="#teleport-accordion-container">

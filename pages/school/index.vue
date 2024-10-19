@@ -337,7 +337,11 @@ const metaTagsTitle = computed(() => {
 })
 
 const shareLink = computed(() => {
-  return encodeURI(window.location.href) || null
+  const currentPath = route.fullPath
+  const url = useRequestURL()
+  const fullUrl = `${url.origin}${currentPath}`
+
+  return encodeURI(fullUrl) || null
 })
 
 // METHODS
