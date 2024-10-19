@@ -295,8 +295,8 @@
                     <v-pagination
                       v-model="displayPage"
                       :length="totalPages"
-                      :total-visible="paginatorPageCount"
                       @update:model-value="handlePagination"
+                      :total-visible="paginatorPageCount"
                       active-color="primary"
                       variant="flat"
                     />
@@ -484,13 +484,15 @@ const input = reactive({
   page: route.query.page ? Number(route.query.page) + 1 : 1,
 })
 
+
+const totalPages = ref(0)
+watch(() => results.meta, (meta) => {
+  totalPages.value = Math.ceil(results.meta.total / results.meta.per_page)
+})
+
+
 // Computed properties
 // 
-const totalPages = computed(() => {
-  if (results.meta.per_page && results.meta.total) {
-    return Math.ceil(results.meta.total / results.meta.per_page)
-  }
-})
 
 const paginatorPageCount = computed(() => {
   if (smAndDown.value) { 
@@ -521,7 +523,6 @@ const searchAPI = async () => {
     router.replace(route.path + url)
 
     const response = await apiGet("/schools", query)
-
     isLoading.value = false
     results.schools = response.results
     results.meta = response.metadata
@@ -697,8 +698,10 @@ const handleCannedSearch = (params) => {
   if (params.state) input.state = params.state
   if (params.cip4_degree) input.cip4_degree = params.cip4_degree
   if (params.completion_rate) input.completion_rate = params.completion_rate
+  if (params.acceptance) input.acceptance = params.acceptance
   if (params.lat) input.lat = params.lat
   if (params.long) input.long = params.long
+
   input.page = 1
   input.sort = props.defaultSort
 

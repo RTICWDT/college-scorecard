@@ -591,11 +591,9 @@ const selectedFoSDegree = computed(() => {
   }
 })
 
-const totalPages = computed(() => {
-  if (results.meta.per_page && results.meta.total) {
-    let totalPages = results.meta.total / results.meta.per_page
-    return Math.ceil(totalPages)
-  }
+const totalPages = ref(0)
+watch(() => results.meta, (meta) => {
+  totalPages.value = Math.ceil(results.meta.total / results.meta.per_page)
 })
 
 const fosDegrees = computed(() => formMappings.fosDegrees)
