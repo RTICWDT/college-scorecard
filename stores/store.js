@@ -85,6 +85,14 @@ export const useCompareStore = defineStore('compare', {
       }
     },
 
+    findFieldOfStudy(obj) {
+      return this.fos.find(fos => (
+        fos.code === obj.code &&
+        fos.unit_id === obj.unit_id &&
+        fos.credential.level === obj.credential.level
+      ))
+    },
+
     removeFieldOfStudy(obj) {
       const index = this.fos.findIndex(fos => (
         fos.code === obj.code &&

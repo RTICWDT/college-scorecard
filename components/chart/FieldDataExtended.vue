@@ -203,8 +203,9 @@
           <v-btn
             @click="toggleFieldOfStudy"
             :class="{ 'bg-secondary': isSelectedFieldOfStudy }"
+            :color="store.findFieldOfStudy(fos) ? 'primary' : 'tertiary'"
           >
-            Compare
+            {{ store.findFieldOfStudy(fos) ? 'Added to Compare' : 'Compare' }}
             <v-icon small class="ml-1">mdi-check-circle</v-icon>
           </v-btn>
         </v-col>

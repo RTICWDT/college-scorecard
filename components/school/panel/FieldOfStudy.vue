@@ -200,6 +200,7 @@ import {
 } from '~/utils/filters'
 
 const route = useRoute()
+const router = useRouter()
 
 const props = defineProps({
   school: {
@@ -207,12 +208,6 @@ const props = defineProps({
     required: true,
   },
 })
-
-const emit = defineEmits(['update:selectedFieldOfStudy']);
-const selectedFieldOfStudy = reactive({ text: "", value: null })
-
-const { fields } = useConstants()
-const { CIP2 } = useSiteData()
 
 const {
   allFieldsOfStudy: allFieldsOfStudyMethod,
@@ -225,6 +220,41 @@ const allFieldsOfStudy = computed(() => allFieldsOfStudyMethod(props.school) )
 const fieldsLink = computed(() => fieldsLinkMethod(props.school))
 const schoolDegreeList = computed(() => schoolDegreeListMethod(props.school))
 const schoolName = computed(() => schoolNameMethod(props.school))
+
+const emit = defineEmits(['update:selectedFieldOfStudy']);
+
+
+const formatFOS = (fosObject) => {
+  return {
+    text: `${formatFieldOfStudyTitle(fosObject.title)} - ${fosObject.credential.title}`,
+    value: fosObject,
+    code: fosObject.code,
+    credential: {
+      level: fosObject.credential.level,
+    },
+  }
+}
+
+const mapFOSFromURL = () => {
+  const defaultOption = { text: "", value: null };
+
+  if (!route.query.fos_code || !route.query.fos_credential) {
+    return defaultOption;
+  }
+
+  let locatedFOS = useFind(allFieldsOfStudy.value, (fos) => {
+    return (
+      fos.code == route.query.fos_code &&
+      fos.credential.level == route.query.fos_credential
+    )
+  })
+
+  return locatedFOS ? formatFOS(locatedFOS) : null
+}
+
+const selectedFieldOfStudy = reactive(mapFOSFromURL())
+const { fields } = useConstants()
+const { CIP2 } = useSiteData()
 
 const hoistCurrency = ref(false)
 const hoistGroupData = ref("numer of graduates")
@@ -345,7 +375,7 @@ const selectedFieldOfStudyDetail = computed(() => {
   )
 
   return {
-    title: selectedFieldOfStudy.value.text,
+    title: selectedFieldOfStudy.text,
     ...locatedFOS,
   }
 })
@@ -368,31 +398,7 @@ const locateFOSObject = (elements, code, credentialLevel) => {
   })
 }
 
-const mapFOSFromURL = () => {
-  let params = route.query
-  if (
-    typeof params.fos_code === "undefined" &&
-    /^\d{3,4}$/.test(params.fos_code) === false
-  ) {
-    return null
-  }
 
-  if (
-    typeof params.fos_credential === "undefined" &&
-    /^\d{1}$/.test(params.fos_credential) === false
-  ) {
-    return null
-  }
-
-  let locatedFOS = useFind(allFieldsOfStudy.value, (fos) => {
-    return (
-      fos.code == params.fos_code &&
-      fos.credential.level == params.fos_credential
-    )
-  })
-
-  return locatedFOS ? formatFOS(locatedFOS) : null
-}
 
 const organizeFieldsOfStudy = (availableFieldsOfStudy4, allCip2) => {
   let processedPrograms = {}
@@ -426,24 +432,19 @@ const organizeFieldsOfStudy = (availableFieldsOfStudy4, allCip2) => {
   return useSortBy(sorted, ["name"])
 }
 
-const formatFOS = (fosObject) => {
-  return {
-    text: `${formatFieldOfStudyTitle(fosObject.title)} - ${fosObject.credential.title}`,
-    value: `${fosObject.code}.${fosObject.credential.level}`,
-    code: fosObject.code,
-    credential: {
-      level: fosObject.credential.level,
-    },
-  }
-}
-
 const handleFieldOfStudySelect = (event) => {
   selectedFieldOfStudy.value = event
 }
 
-onMounted(() => {
-  selectedFieldOfStudy.value = mapFOSFromURL()
-  // fetch field of study from route.query
+watch(() => selectedFieldOfStudy.value, (newValue) => {
+  console.log(newValue)
+  router.replace({
+    query: {
+      ...route.query,
+      fos_code: newValue.code,
+      fos_credential: newValue.credential.level,
+    },
+  })
 })
 
 </script>

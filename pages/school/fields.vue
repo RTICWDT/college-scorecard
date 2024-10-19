@@ -95,15 +95,15 @@
                     <v-select
                       id="school-field-fos-degree"
                       variant="outlined"
-                      :items="filters"
-                      item-title="label"
-                      item-value="value"
                       v-model="currentFilter"
+                      :items="filters"
+                      item-title="title"
+                      item-value="value"
                       label="Search Degree Type"
                       color="primary"
                       clearable
                       hide-details="auto"
-                    ></v-select>
+                    />
                   </v-card>
                 </v-col>
               </v-row>
@@ -129,6 +129,7 @@
             density="compact"
             color="#D16E00"
             elevation="2"
+            class="mb-4"
           >
             No data on the number of graduates are displayed because of
             definitional differences with other data sources. Fields of study on
@@ -142,6 +143,7 @@
             density="compact"
             color="#D16E00"
             elevation="2"
+            class="mb-4"
           >
             Fields of study on this page include graduate-level programs that
             may be labeled "postbaccalaureate certificates" in other data
@@ -240,7 +242,7 @@ const panels = ref([])
 const num_panels = ref(0)
 const subpanel = ref(null)
 
-const currentFilter = ref()
+const currentFilter = ref(null)
 const currentTextFilter = ref('')
 const fieldDataExtendedSalarySelect = ref('aid')
 const fieldDataExtendedShowPrior = ref(false)
@@ -276,7 +278,7 @@ const processedPrograms = computed(() => {
       program.credential.title = "Bachelor's Degree"
     }
     if (
-      (!currentFilter.value || currentFilter.value == program.credential.level) &&
+      (!currentFilter.value || currentFilter.value === program.credential.level) &&
       (!currentTextFilter.value || program.title.match(new RegExp(currentTextFilter.value, 'ig')))
     ) {
       const twodigit = program.code.substr(0, 2)
@@ -313,8 +315,11 @@ const shareLink = computed(() => {
 })
 
 const filters = computed(() => {
-  return formMappings.fosDegrees
-})
+  return formMappings.fosDegrees.map(degree => ({
+    title: degree.label,
+    value: Number(degree.value)
+  }));
+});
 
 const fieldOfStudySelectItems = computed(() => {     
   if (!props.school || !allFieldsOfStudy.value) return []
@@ -355,19 +360,7 @@ const organizeFieldsOfStudy = (availableFieldsOfStudy4, allCip2) => {
 
 const mapFOSFromURL = () => {
   let params = route.query
-  if (
-    typeof params.fos_code === "undefined" &&
-    /^\d{3,4}$/.test(params.fos_code) === false
-  ) {
-    return null
-  }
-
-  if (
-    typeof params.fos_credential === "undefined" &&
-    /^\d{1}$/.test(params.fos_credential) === false
-  ) {
-    return null
-  }
+  if (!params.fos_code || !params.fos_credential) return null
 
   let locatedFOS = useFind(allFieldsOfStudy.value, (fos) => {
     return (
@@ -382,10 +375,12 @@ const mapFOSFromURL = () => {
 const formatFOS = (fosObject) => {
   return {
     text: `${formatFieldOfStudyTitle(fosObject.title)} - ${fosObject.credential.title}`,
+    title: fosObject.title.replace(/\.$/, ""),
     value: `${fosObject.code}.${fosObject.credential.level}`,
     code: fosObject.code,
     credential: {
       level: fosObject.credential.level,
+      title: fosObject.credential.title,
     },
   }
 }
@@ -393,8 +388,6 @@ const formatFOS = (fosObject) => {
 onMounted(async () => {
   const urlParams = route.query
   const schoolId = Object.keys(urlParams)[0]
-
-  const selectedFOS = mapFOSFromURL(urlParams, fieldOfStudySelectItems)
 
   try {
     const response = await apiGet("/schools/", { id: schoolId })
@@ -407,9 +400,10 @@ onMounted(async () => {
     Object.assign(school, response.results[0])
     document.title = useGet(school, 'school.name') + ' | College Scorecard'
 
+    const selectedFOS = mapFOSFromURL(urlParams, fieldOfStudySelectItems)
     if (selectedFOS) {
-      currentFilter.value = selectedFOS.credential
-      currentTextFilter.value = selectedFOS.code
+      currentFilter.value = parseInt(selectedFOS.credential.level, 10);
+      currentTextFilter.value = selectedFOS.title
       subpanel.value = 0
     }
   } catch (error) {

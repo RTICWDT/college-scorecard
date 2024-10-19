@@ -319,6 +319,11 @@ const panelsFOS = ref([])
 const num_panels = ref(7)
 const error = ref(false)
 
+onMounted(() => {
+  if (route.query.fos_code && route.query.fos_credential) {
+    panelsFOS.value = [0]
+  }
+})
 
 // COMPUTED
 // 
@@ -425,7 +430,9 @@ onMounted(() => {
 // reload on route change
 watch(() => route.fullPath , (newPath) => {
   const id = schoolId.value
-  findSchool()
+  if (Object.keys(route.query)[0] !== id) {
+    findSchool()
+  }
 })
 
 useHead({
