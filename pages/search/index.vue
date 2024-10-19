@@ -31,8 +31,8 @@
   max-width: 390px;
 
   @include md {
-    min-width: 300px;
-    max-width: 300px;
+    min-width: 330px;
+    max-width: 330px;
   }
 
   @include xl {
