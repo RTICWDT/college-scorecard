@@ -3,7 +3,6 @@
     v-model="selectedValue"
     @update:model-value="handleFieldOfStudySelect"
     :items="items"
-    item-title="cip4Title"
     item-value="code"
     :label="dense ? '' : 'Type to search'"
     :placeholder="dense ? 'Type to search' : 'Search for a field of study'"
@@ -12,7 +11,7 @@
     variant="outlined"
     hide-no-data
     hide-details
-    color="#007000"
+    color="primaryfos"
     prepend-inner-icon="fa:fas fa-search"
     aria-label="Field of Study Search"
     :density="dense ? 'compact' : 'default'"
@@ -21,12 +20,18 @@
     min-width="220"
   >
     <template v-slot:item="{ item, props }">
-      <v-list-item v-bind="props" :max-width="smAndDown ? 300 : 400">
-        <v-list-item-subtitle v-html="item.raw.title"></v-list-item-subtitle>
+      <v-list-item v-bind="props">
+        <v-list-item-subtitle class="subtitle" v-html="item.raw.cip4Title" />
       </v-list-item>
     </template>
   </v-combobox>
 </template>
+
+<style scoped lang="scss">
+.subtitle {
+  color: variables.$mid-dark-gray;
+}
+</style>
 
 <script setup>
 const { smAndDown } = useBreakpoints()
@@ -56,8 +61,10 @@ watch(() => props.selected, (newValue) => {
     selectedValue.value = null
   } else {
     const found = CIP4.value.find(itm => newValue === itm.cip4.replace('.', ''))
-    selectedValue.value = found ? { code: found.cip4.replace('.', ''), cip4Title: found.field } : null
+    selectedValue.value = found ? { code: found.cip4.replace('.', ''), cip4Title: found.field, title: found.field } : null
   }
+
+  console.log('selectedValue', selectedValue.value)
 }, { immediate: true })
 
 const handleFieldOfStudySelect = (selectedItem) => {
