@@ -70,7 +70,7 @@ npm run preview
   - [x] Home
   - [x] Search Schools
   - [x] View School
-  - [ ] View Field of Study
+  - [x] View Field of Study
   - [x] Search Fields of Study
   - [x] Compare Schools
   - [x] Compare Fields of Study
