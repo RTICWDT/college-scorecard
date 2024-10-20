@@ -83,7 +83,7 @@
 
   <!-- The accordion contents of Compare Schools is rendered here via the vue Teleport component -->
   <!-- This isn't the best way to use teleports, but it solves the problem for this particular case -->
-  <v-container v-show="isComparingSchools" id="teleport-accordion-container" />
+  <v-container v-show="isComparingSchools && schoolCount > 0" id="teleport-accordion-container" />
   <Spacer :height="40" />
   <LayoutFooterCTA />
 </template>
