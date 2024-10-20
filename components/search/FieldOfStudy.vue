@@ -21,10 +21,12 @@
     hide-no-data
     hide-details
     aria-required="true"
+    aria-haspopup="listbox"
     required
+    :list-props="{ tag: 'ul' }"
   >
     <template v-slot:item="{ item, props }">
-      <v-list-item v-bind="props">
+      <v-list-item tag='li' role="option" v-bind="props">
         <v-list-item-subtitle class="subtitle" v-html="item.raw.cip4Title" />
       </v-list-item>
     </template>
