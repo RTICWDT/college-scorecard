@@ -7,15 +7,7 @@
 
     <v-container>
       <v-row>
-        <Toggle
-          v-model="selectedOption"
-          :options="[
-            { label: 'SCHOOLS', value: 'low', color: '#007000', activeColor: '#00700024' },
-            { label: 'FIELDS OF STUDY', value: 'medium', color: '#fdb022', activeColor: '#fdb02224' },
-          ]"
-          backgroundColor="white"
-          :height="100"
-        />
+        <SearchFOSNew />
       </v-row>
     </v-container>
 
@@ -26,7 +18,9 @@
 
 <script setup>
 const selectedOption = ref(null);
+const { site } = useSiteData()
 </script>
 
 <style scoped lang="scss">
 </style>
+
