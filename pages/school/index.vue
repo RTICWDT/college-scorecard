@@ -340,7 +340,6 @@ const shareLink = computed(() => {
   const currentPath = route.fullPath
   const url = useRequestURL()
   const fullUrl = `${url.origin}${currentPath}`
-
   return encodeURI(fullUrl) || null
 })
 
@@ -381,15 +380,14 @@ const handleSchoolNameSelected = (school) => {
 }
 
 const generateMapLink = (school) => {
-  let googleMapsBaseURL = "https://www.google.com/maps/search/?"
-  let params = {
+  const googleMapsBaseURL = "https://www.google.com/maps/search/?";
+  const params = {
     api: 1,
-    query: school.location.lat + "," + school.location.lon
-  }
-  // let qs = querystring.stringify(params)
-  let qs = ""
-  return googleMapsBaseURL + qs
-}
+    query: `${school.location.lat},${school.location.lon}`
+  };
+  const qs = new URLSearchParams(params).toString();
+  return googleMapsBaseURL + qs;
+};
 
 const loading = ref(false)
 const findSchool = async () => {

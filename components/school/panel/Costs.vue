@@ -269,6 +269,7 @@
 <script setup>
 const { yearsText } = useFilters()
 const { toDollar } = useNumberFormatter()
+const { transitionOutboundLink } = useAnalytics()
 
 const props = defineProps({
   school: {

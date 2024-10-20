@@ -372,7 +372,7 @@
                   :md="showSidebar ? 6 : 4"
                   sm="6"
                   xs="12"
-                  class="d-flex align-stretch pb-0 pr-0"
+                  class="d-flex align-stretch"
                 >
                   <SearchResultCard :school="school" :isLoading="isLoading" />
                 </v-col>
