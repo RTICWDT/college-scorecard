@@ -46,7 +46,8 @@ h1 {
             </v-row>
             <v-row>
               <v-col cols="12" sm="5">
-                <SearchFieldOfStudy @field-of-study-selected="handleFieldOfStudySelected" :selected="input.cip4" id="fosSearch" ariaRequired="true" />
+                <SearchFieldOfStudy v-model="input.cip4" />
+                
               </v-col>
               <v-col cols="12" sm="4">
                 <v-select
@@ -117,23 +118,16 @@ h1 {
 const { formMappings } = useConstants()
 const router = useRouter()
 
-const input = ref({
-  cip4: null,
+const input = reactive({
+  cip4: { code: null, title: null },
   cip4_degree: null,
 })
 
 const fosDegrees = computed(() => formMappings.fosDegrees)
-
-const disableSearch = computed(() => 
-  input.value.cip4 === null || input.value.cip4_degree === null
-)
-
-const handleFieldOfStudySelected = (fieldOfStudy) => {
-  input.value.cip4 = fieldOfStudy.cip4
-}
+const disableSearch = computed(() => !input.cip4?.code || !input.cip4_degree)
 
 const handleFormSubmit = () => {
-  router.push(`/search/fos?cip4=${encodeURIComponent(input.value.cip4)}&cip4_degree=${encodeURIComponent(input.value.cip4_degree)}`)
+  router.push(`/search/fos?cip4=${encodeURIComponent(input.cip4.code)}&cip4_degree=${encodeURIComponent(input.cip4_degree)}`)
 }
 
 useHead({

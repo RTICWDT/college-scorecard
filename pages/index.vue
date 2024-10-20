@@ -61,7 +61,7 @@
                   </v-row>
                   <v-row>
                     <v-col cols="12" sm="5">
-                      <SearchFieldOfStudy @field-of-study-selected="handleFieldOfStudySelected" :selected="input.cip4" id="fosSearch" ariaRequired="true" />
+                      <SearchFieldOfStudy v-model="input.cip4" />
                     </v-col>
                     <v-col cols="12" sm="4">
                       <v-select
@@ -406,14 +406,14 @@ const mobilePanels = ref(0)
 const desktopTabs = ref(0)
 const toggleCustomSearch = ref(false)
 const sliderColor = ref("#7BD88C")
-const input = ref({
-  cip4: null,
-  cip4_degree: null,
-})
+// const input = ref({
+//   cip4: null,
+//   cip4_degree: null,
+// })
 
 // Computed
-const fosDegrees = computed(() => formMappings.fosDegrees)
-const disableSearch = computed(() => input.value.cip4 === null || input.value.cip4_degree === null)
+// const fosDegrees = computed(() => formMappings.fosDegrees)
+// const disableSearch = computed(() => input.value.cip4 === null || input.value.cip4_degree === null)
 
 // Methods
 const colorSlider = (num) => {
@@ -442,14 +442,16 @@ const handleSchoolNameSelected = (school) => {
   }
 }
 
-const handleFieldOfStudySelected = (fieldOfStudy) => {
-  input.value.cip4 = fieldOfStudy.cip4
-}
+const input = reactive({
+  cip4: { code: null, title: null },
+  cip4_degree: null,
+})
+
+const fosDegrees = computed(() => formMappings.fosDegrees)
+const disableSearch = computed(() => !input.cip4?.code || !input.cip4_degree)
 
 const handleFormSubmit = () => {
-  router.push(
-    `/search/fos?cip4=${encodeURIComponent(input.value.cip4)}&cip4_degree=${encodeURIComponent(input.value.cip4_degree)}`
-  )
+  router.push(`/search/fos?cip4=${encodeURIComponent(input.cip4.code)}&cip4_degree=${encodeURIComponent(input.cip4_degree)}`)
 }
 
 // Meta

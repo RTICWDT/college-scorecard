@@ -119,11 +119,8 @@
 
           <div style="min-width: 200px">
             <SearchFieldOfStudy
-              @field-of-study-selected="handleFieldOfStudySelected"
-              :selected="input.cip4"
-              id="fosSearch"
-              ariaRequired="true"
-              dense
+              v-model="fosSearch.cip4"
+              :dense="true"
             />
           </div>
 
@@ -302,12 +299,13 @@
 
                     <!-- SHARE -->
                     <Share
-                      :url="encodeURI(shareUrl)"
+                      :url="shareLink"
                       label="Share"
                       variant="text"
                       color="black"
                       :elevation="3"
                       :hide="['email']"
+                      show-copy
                     />
                   </div>
 
@@ -518,7 +516,7 @@ const results = reactive({
 const input = reactive({
   sort: route.query.sort || defaultSort.value,
   page: route.query.page || 1,
-  cip4: route.query.cip4 || null,
+  cip4: route.query.cip4.substring(0,4) || null,
   cip4_degree: route.query.cip4_degree || null,
   dolflag: route.query.dolflag || false,
 })
@@ -569,7 +567,7 @@ const selectedFoSLabel = computed(() => {
   if (input.cip4) {
     return useFind(site.value.data.cip_4_digit, [
       "label",
-      input.cip4.substring(0, 2) + "." + input.cip4.substring(2),
+      input.cip4.substring(0, 2) + "." + input.cip4.substring(2,4),
     ])["value"].replace(".", "")
   } else {
     return ""
@@ -731,11 +729,32 @@ const handleFormSearch = (params) => {
   debounceSearch()
 }
 
-const handleFieldOfStudySelected = (fieldOfStudy) => {
-  input.page = 1
-  input.cip4 = fieldOfStudy.cip4
-  debounceSearch()
-}
+const fosSearch = reactive({
+  cip4: (() => {
+    const item = site.value.data.cip_6_digit.find((item) => {
+      if (route.query.cip4.length === 4) {
+        return item.code.substring(0,4) === route.query.cip4
+      }
+
+      return item.code === route.query.cip4
+    })
+
+    if (item) { 
+      item.code = item.code.substring(0, 4)
+    }
+    
+    return item
+  })(),
+})
+
+watch(fosSearch, (newValue, oldValue) => {
+  if (fosSearch.cip4?.code) {
+    fosSearch.cip4.code = fosSearch.cip4.code.substring(0, 4)
+    input.page = 1
+    input.cip4 = fosSearch.cip4.code
+    debounceSearch()
+  }
+})
 
 const handleDegreeSelected = (degree) => {
   input.page = 1
@@ -752,6 +771,13 @@ const handleFormReset = () => {
 const debounceSearch = useDebounce(function() {
   searchAPI()
 }, 300)
+
+const shareLink = computed(() => {
+  const currentPath = route.fullPath
+  const url = useRequestURL()
+  const fullUrl = `${url.origin}${currentPath}`
+  return encodeURI(fullUrl) || null
+})
 
 useHead({
   title: "Search Fields of Study",
