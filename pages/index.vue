@@ -443,7 +443,7 @@ const handleSchoolNameSelected = (school) => {
 }
 
 const input = reactive({
-  cip4: { code: null, title: null },
+  cip4: null,
   cip4_degree: null,
 })
 

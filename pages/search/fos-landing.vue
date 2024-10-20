@@ -47,7 +47,6 @@ h1 {
             <v-row>
               <v-col cols="12" sm="5">
                 <SearchFieldOfStudy v-model="input.cip4" />
-                
               </v-col>
               <v-col cols="12" sm="4">
                 <v-select
@@ -63,7 +62,6 @@ h1 {
                   aria-required="true"
                 />
               </v-col>
-
               <v-col cols="1" sm="3" class="">
                 <v-btn @click="handleFormSubmit" width="100%" size="x-large" color="secondary" :disabled="disableSearch">
                   Search
@@ -119,7 +117,7 @@ const { formMappings } = useConstants()
 const router = useRouter()
 
 const input = reactive({
-  cip4: { code: null, title: null },
+  cip4: null,
   cip4_degree: null,
 })
 
