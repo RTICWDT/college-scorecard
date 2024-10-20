@@ -3,7 +3,7 @@
     <!-- COLUMN 1 -->
     <v-col cols="12" md="4">
       <div class='d-flex align-center'>
-        <h2 class='flex-grow-1'>
+        <h2 class=''>
           <NuxtLink class="nameLink mb-2" :to="dynamicLink">{{ schoolName }}</NuxtLink>
         </h2>
         <div :key="`${institution.id}-${fos.title}`">
