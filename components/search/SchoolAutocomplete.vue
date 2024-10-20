@@ -24,9 +24,10 @@
       :density="dense ? 'compact' : 'default'"
       :max-width="horizontal ? 300 : undefined"
       @keydown.enter="handleSubmit"
+      :list-props="{ tag: 'ul' }"
     >
-      <template v-slot:item="{ item, props }">
-        <v-list-item v-bind="props" @click="goToSchool">
+      <template #item="{ item, props }">
+        <v-list-item tag='li' role="option" v-bind="props" @click="goToSchool">
           <v-list-item-title>
             <span class="name-complete-school-name" />
           </v-list-item-title>
