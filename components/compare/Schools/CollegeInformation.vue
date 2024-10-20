@@ -39,7 +39,7 @@
                 <p class="d-inline-block d-md-block ml-2 ml-md-0">undergraduates</p>
               </div>
             </v-col>
-            <v-col cols="12" sm="12" md="3"  class="pa-0 pl-5 pl-md-0 pb-7 text-left text-md-center">
+            <v-col cols="12" sm="12" md="3"  class="pa-0 pl-5 pl-md-0 pb-7 text-left text-md-center d-flex align-center">
               <a :href="schoolUrl(institution)" target="_blank">
                 {{ formatUrlText(schoolUrl(institution)) }}
                 <v-icon size="x-small">mdi-open-in-new</v-icon>

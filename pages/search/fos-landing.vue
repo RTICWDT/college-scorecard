@@ -46,7 +46,6 @@ h1 {
             </v-row>
             <v-row>
               <v-col cols="12" sm="5">
-                <!-- <SearchFieldOfStudy @field-of-study-selected="handleFieldOfStudySelected" :selected="input.cip4" id="fosSearch" ariaRequired="true" /> -->
                 <SearchFieldOfStudy v-model="input.cip4" />
                 
               </v-col>
