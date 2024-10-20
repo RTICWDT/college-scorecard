@@ -89,7 +89,7 @@
               </v-tabs-window-item>
 
               <v-tabs-window-item>
-                <v-card style="min-height: 300px" class="px-10 py-5" flat>
+                <v-card class="px-10 pt-5 pb-8" flat>
                   <p class="mb-5 mt-1">
                     Select one or more options to create a list of schools that fit your needs.
                   </p>

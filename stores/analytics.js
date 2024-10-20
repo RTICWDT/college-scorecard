@@ -29,7 +29,10 @@ export const useAnalytics = defineStore('analytics', {
             return console.info(`[gtag] event - Category: ${category}, Action: ${action}, Label: ${label || window.location.pathname}`);
           }
 
-          this.gtag('event', action, { 'event_category': category, 'event_label': label || window.location.pathname })
+          this.gtag('event', action, {
+            event_category: category,
+            event_label: label || window.location.pathname
+          })
         }
       } catch (e) {
         console.error('[gtag] event error', e)

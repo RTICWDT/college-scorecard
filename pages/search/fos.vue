@@ -402,6 +402,7 @@
                         class="mb-2 py-4"
                         :class="showSidebar && 'searchHeaderCompact'"
                         style="border-bottom:2px solid #eee"
+                        v-if="!smAndDown"
                       > 
                         <v-col
                           class="fosResultsSortBar py-md-0 pl-5"
@@ -410,7 +411,6 @@
                           v-for="sort in sorts"
                           :key="sort.type"
                           :sm="sort.type === 'School Name' ? 4 : sort.type === 'Graduates' ? 2 : 3"
-                          v-if="!smAndDown"  
                         >
                           <v-btn
                             @click="(e) => changeSort(e, sort.type)"
