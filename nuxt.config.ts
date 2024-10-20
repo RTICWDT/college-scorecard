@@ -23,7 +23,8 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'nuxt-lodash',
     '@nuxtjs/leaflet',
-    // todo: this method of loading vuetify makes nuxt angry, and causes npx nuxi commands
+    'nuxt-gtag',
+      // todo: this method of loading vuetify makes nuxt angry, and causes npx nuxi commands
     // to fail. so lets swap this out with a more up-to-date method once we figure out how.
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
@@ -32,6 +33,11 @@ export default defineNuxtConfig({
       })
     },
   ],
+
+  gtag: {
+    enabled: process.env.NODE_ENV === 'production',
+    id: 'G-19BFKPWV7B',
+  },
 
   app: {
     head: {

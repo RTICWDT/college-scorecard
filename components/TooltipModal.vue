@@ -93,7 +93,7 @@ const props = defineProps({
 })
 
 const { site } = useSiteData()
-const { transitionOutboundLink } = useAnalytics()
+const analytics = useAnalytics()
 
 const showDialog = ref(false)
 
@@ -128,7 +128,7 @@ function handleClicks(event) {
     if (metaKey || altKey || ctrlKey || shiftKey) return
     if (defaultPrevented) return
     if (button !== undefined && button !== 0) return
-    transitionOutboundLink(event)
+    analytics.transitionOutboundLink(event)
   }
 }
 </script>

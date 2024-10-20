@@ -232,12 +232,12 @@
             <p class="mt-3 mb-0 pb-15">
               This is based on a standard 10-year payment
               plan, other
-              <a href="https://studentaid.gov/loan-simulator" target="_blank" @click="transitionOutboundLink">
+              <a href="https://studentaid.gov/loan-simulator" target="_blank" @click="analytics.transitionOutboundLink">
                 payment options
                 <v-icon size="x-small" class="pl-1" color="#007000">mdi-open-in-new</v-icon>
               </a>
               are available, like income-driven repayment. An
-              <a target="_blank" href="https://studentaid.gov/manage-loans/repayment/plans/income-driven" @click="transitionOutboundLink">
+              <a target="_blank" href="https://studentaid.gov/manage-loans/repayment/plans/income-driven" @click="analytics.transitionOutboundLink">
                 income-driven repayment
                 <v-icon size="x-small" class="pl-1" color="#007000">mdi-open-in-new</v-icon>
               </a>
@@ -338,7 +338,7 @@
                 color="secondary"
                 href="https://studentaid.gov/h/apply-for-aid/fafsa"
                 target="_blank"
-                @click="transitionOutboundLink"
+                @click="analytics.transitionOutboundLink"
                 class="mt-5 mb-1"
               >
                 Start My FAFSA&reg; Form
@@ -353,7 +353,7 @@
 </template>
 
 <script setup>
-const { transitionOutboundLink } = useAnalytics()
+const analytics = useAnalytics()
 const { site } = useSiteData()
 const { toDollar, toPercent } = useNumberFormatter()
 

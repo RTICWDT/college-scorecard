@@ -423,7 +423,6 @@ const router = useRouter()
 const { smAndDown, lgAndUp, md } = useBreakpoints()
 const { prepareParams } = usePrepareParams()
 const { apiGet } = useApi()
-const { trackAnalyticsEvent } = useAnalytics()
 const { site } = useSiteData()
 const { fields } = useConstants()
 

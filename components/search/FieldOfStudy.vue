@@ -63,8 +63,6 @@ watch(() => props.selected, (newValue) => {
     const found = CIP4.value.find(itm => newValue === itm.cip4.replace('.', ''))
     selectedValue.value = found ? { code: found.cip4.replace('.', ''), cip4Title: found.field, title: found.field } : null
   }
-
-  console.log('selectedValue', selectedValue.value)
 }, { immediate: true })
 
 const handleFieldOfStudySelect = (selectedItem) => {

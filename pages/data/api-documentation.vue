@@ -40,16 +40,16 @@
         while the field of study data describes specific fields of study
         at the institution. Details of the data available in the API can
         be found in the
-        <a @click="trackDownload('CollegeScorecardDataDictionary.xlsx')" href="/files/CollegeScorecardDataDictionary.xlsx" target="_blank">Data Dictionary</a>.
+        <a @click="analytics.trackDownload('CollegeScorecardDataDictionary.xlsx')" href="/files/CollegeScorecardDataDictionary.xlsx" target="_blank">Data Dictionary</a>.
         Additional context for the data elements can also be found in the documentation reports for
-        <a @click="trackDownload('InstitutionDataDocumentation.pdf')" href="/files/InstitutionDataDocumentation.pdf" target="_blank">institution-level data</a>
+        <a @click="analytics.trackDownload('InstitutionDataDocumentation.pdf')" href="/files/InstitutionDataDocumentation.pdf" target="_blank">institution-level data</a>
         and
-        <a @click="trackDownload('FieldOfStudyDataDocumentation.pdf')" href="/files/FieldOfStudyDataDocumentation.pdf" target="_blank">field of study data</a>.
+        <a @click="analytics.trackDownload('FieldOfStudyDataDocumentation.pdf')" href="/files/FieldOfStudyDataDocumentation.pdf" target="_blank">field of study data</a>.
       </p>
       <p>
         Depending on the variable, data may not be present across all
         years. The "cohort map" tabs in the
-        <a @click="trackDownload('CollegeScorecardDataDictionary.xlsx')" href="/files/CollegeScorecardDataDictionary.xlsx" target="_blank">Data Dictionary</a>
+        <a @click="analytics.trackDownload('CollegeScorecardDataDictionary.xlsx')" href="/files/CollegeScorecardDataDictionary.xlsx" target="_blank">Data Dictionary</a>
         provide details about where you can expect to find data for a
         particular variable and what group of students (i.e., what cohort)
         it describes. The default for the API is provide the latest data
@@ -184,7 +184,7 @@
         <strong>Note:</strong> Sorting is only available on specific
         fields. Make sure the sort parameter is a field in the data set.
         For more information, please take a look at
-        <a @click="trackDownload('CollegeScorecardDataDictionary.xlsx')" href="/files/CollegeScorecardDataDictionary.xlsx">data dictionary</a>. Sorting is only available on
+        <a @click="analytics.trackDownload('CollegeScorecardDataDictionary.xlsx')" href="/files/CollegeScorecardDataDictionary.xlsx">data dictionary</a>. Sorting is only available on
         fields that have text populated in
         the <code>index</code> column of the respective data dictionary
         tabs.
@@ -249,7 +249,7 @@
         records that only contain those three fields.
       </p>
 
-      <v-btn @click="trackDownload('CollegeScorecardDataDictionary.xlsx')" size="large" color="secondary" href="/files/CollegeScorecardDataDictionary.xlsx" class="button data-home-button mb-4">Download the Data
+      <v-btn @click="analytics.trackDownload('CollegeScorecardDataDictionary.xlsx')" size="large" color="secondary" href="/files/CollegeScorecardDataDictionary.xlsx" class="button data-home-button mb-4">Download the Data
         Dictionary (.xlsx, 703 KB)
         <v-icon size="x-small" class="pl-1 ml-2" color="white">
           fas fa-download
@@ -473,7 +473,7 @@ p {
 </style>
 
 <script setup>
-const { trackDownload } = useAnalytics()
+const analytics = useAnalytics()
 const config = useRuntimeConfig()
 const formSubmitted = ref(false)
 const recaptchaRef = ref(null)

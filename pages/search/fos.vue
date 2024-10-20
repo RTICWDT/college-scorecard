@@ -341,7 +341,7 @@
                       <a
                         target="_blank"
                         href="https://nces.ed.gov/ipeds/cipcode/Default.aspx?y=56"
-                        @click="transitionOutboundLink($event)"
+                        @click="analytics.transitionOutboundLink($event)"
                       >
                         Learn more about CIP
                         <v-icon size="x-small">mdi-open-in-new</v-icon>

@@ -50,7 +50,7 @@
                   <a
                     href="https://github.com/RTICWDT/college-scorecard/releases"
                     target="_blank"
-                    @click="transitionOutboundLink"
+                    @click="analytics.transitionOutboundLink"
                   >
                     {{ version }}
                     <v-icon size="x-small" color="white" class="pl-1">
@@ -61,7 +61,7 @@
                   <a
                     href="http://www2.ed.gov/notices/index.html?src=ft"
                     target="_blank"
-                    @click="transitionOutboundLink"
+                    @click="analytics.transitionOutboundLink"
                   >
                     Notices
                     <v-icon size="x-small" color="white" class="pl-1">
@@ -75,7 +75,7 @@
                 <small>
                   <a
                     href="http://www.ed.gov/"
-                    @click="transitionOutboundLink"
+                    @click="analytics.transitionOutboundLink"
                     target="_blank"
                   >
                     U.S. Department of Education
@@ -131,11 +131,7 @@ const setActiveLink = () => {
 }
 
 const handleCompareLinkClick = (path) => {
-  // Implement your compare link click logic here
-}
 
-const transitionOutboundLink = (event) => {
-  // Implement your outbound link transition logic here
 }
 
 watch(route, setActiveLink)

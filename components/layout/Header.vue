@@ -280,11 +280,11 @@ const router = useRouter()
 const route = useRoute();
 const activeLink = ref(route.path)
 const drawer = ref()
-const { trackNavigation } = useAnalytics()
+const analytics = useAnalytics()
 const { mdAndUp } = useBreakpoints()
 
 const mobileNavClick = (link) => {
-  trackNavigation(link)
+  analytics.trackNavigation(link)
   activeLink.value = link
   router.push(link)
   drawer.value = false
@@ -292,7 +292,7 @@ const mobileNavClick = (link) => {
 }
 
 const navigateTo = (link) => {
-  trackNavigation(link)
+  analytics.trackNavigation(link)
   activeLink.value = link
   return true
 }

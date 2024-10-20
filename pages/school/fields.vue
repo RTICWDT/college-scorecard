@@ -53,7 +53,7 @@
                         target="_blank"
                         :href="schoolUrl"
                         class="text-white"
-                        @click="transitionOutboundLink($event)"
+                        @click="analytics.transitionOutboundLink($event)"
                       >
                         {{ schoolUrlDisplay }}
                         <v-icon size="x-small" class="pl-1" color="white" icon="fa:fas fa-external-link-alt" />

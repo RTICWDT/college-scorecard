@@ -28,11 +28,11 @@
 <script setup>
 const router = useRouter()
 const route = useRoute();
-const { trackNavigation } = useAnalytics()
+const analytics = useAnalytics()
 
 const navigateTo = (href) =>  {
   router.push(href)
-  trackNavigation(href)
+  analytics.trackNavigation(href)
 }
 
 const tab = computed(() => {

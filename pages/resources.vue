@@ -339,7 +339,7 @@
                   color="secondary"
                   href="https://ed-public-download.scorecard.network/resources/College_Scorecard_Student_Toolkit.zip"
                   target="_blank"
-                  @click="transitionOutboundLink($event)"
+                  @click="analytics.transitionOutboundLink($event)"
                 >
                   Download Activities
                   <v-icon
@@ -607,7 +607,7 @@
                     color="secondary"
                     href="https://ed-public-download.scorecard.network/resources/College_Scorecard_Counselor_and_Advisor_Toolkit.zip"
                     target="_blank"
-                    @click="transitionOutboundLink($event)"
+                    @click="analytics.transitionOutboundLink($event)"
                   >
                     Download Advisor Toolkit
                     <v-icon

@@ -15,7 +15,7 @@
                   <a
                     href="https://studentaid.gov/aid-estimator/"
                     target="_blank"
-                    @click="transitionOutboundLink($event)"
+                    @click="analytics.transitionOutboundLink($event)"
                   >
                     Federal Student Aid Estimator
                     <v-icon size="x-small" color="#007000" class="pl-1">
@@ -31,7 +31,7 @@
                   color="secondary"
                   href="https://studentaid.gov/h/apply-for-aid/fafsa"
                   target="_blank"
-                  @click="transitionOutboundLink($event)"
+                  @click="analytics.transitionOutboundLink($event)"
                 >
                   Start Your FAFSA&reg; Application
                   <v-icon
@@ -56,7 +56,7 @@
               <a
                 href="https://www.vets.gov/gi-bill-comparison-tool"
                 target="_blank"
-                @click="transitionOutboundLink($event)"
+                @click="analytics.transitionOutboundLink($event)"
               >
                 GI Bill Benefits
                 <v-icon size="x-small" color="#7BD88C" class="pl-1">
@@ -68,7 +68,7 @@
               <a
                 href="https://www.vets.gov/gi-bill-comparison-tool"
                 target="_blank"
-                @click="transitionOutboundLink($event)"
+                @click="analytics.transitionOutboundLink($event)"
               >
                 <img
                   src="~/assets/images/VA-Logo.svg"
@@ -88,7 +88,7 @@
 </template>
 
 <script setup>
-const { transitionOutboundLink } = useAnalytics();
+const analytics = useAnalytics();
 </script>
 
 <style lang="scss" scoped>

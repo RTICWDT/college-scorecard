@@ -98,7 +98,7 @@
               <a
                 target="_blank"
                 :href="schoolUrl"
-                @click="transitionOutboundLink($event)"
+                @click="analytics.transitionOutboundLink($event)"
               >
               {{  formatUrlText(schoolUrlDisplay) }}
               <v-icon size="x-small" class="pl-1" color="#007000">mdi-open-in-new</v-icon>
@@ -118,7 +118,7 @@
               </div>
               <a
                 :href="generateMapLink(school)"
-                @click="transitionOutboundLink($event)"
+                @click="analytics.transitionOutboundLink($event)"
                 target="_blank"
               >
                 View on map
@@ -172,7 +172,7 @@
               <!-- Field of Study Panel -->
               <v-expansion-panels multiple focusable v-model="panelsFOS">
                 <v-expansion-panel class="fos-profile-panel" elevation="2">
-                  <v-expansion-panel-title id="fields-of-study" @click="trackAccordion('Fields of Study')" class="field-of-study-title bg-lightyellow">
+                  <v-expansion-panel-title id="fields-of-study" @click="analytics.trackAccordion('Fields of Study')" class="field-of-study-title bg-lightyellow">
                     <span>Fields of Study</span>
                     <v-btn
                       size="x-small"
@@ -193,7 +193,7 @@
               <v-expansion-panels multiple focusable v-model="panels">
                 <!-- Costs -->
                 <v-expansion-panel>
-                  <v-expansion-panel-title @click="trackAccordion('Costs')">
+                  <v-expansion-panel-title @click="analytics.trackAccordion('Costs')">
                     Costs
                   </v-expansion-panel-title>
 
@@ -204,7 +204,7 @@
 
                 <!-- Graduation & Retention -->
                 <v-expansion-panel>
-                  <v-expansion-panel-title @click="trackAccordion('Graduation &amp; Retention')">
+                  <v-expansion-panel-title @click="analytics.trackAccordion('Graduation &amp; Retention')">
                     Graduation &amp; Retention
                   </v-expansion-panel-title>
 
@@ -216,7 +216,7 @@
 
                 <!-- Financial Aid & Debt -->
                 <v-expansion-panel>
-                  <v-expansion-panel-title @click="trackAccordion('Financial Aid &amp; Debt')">
+                  <v-expansion-panel-title @click="analytics.trackAccordion('Financial Aid &amp; Debt')">
                     Financial Aid &amp; Debt
                   </v-expansion-panel-title>
 
@@ -227,7 +227,7 @@
 
                 <!-- Typical Earnings -->
                 <v-expansion-panel>
-                  <v-expansion-panel-title @click="trackAccordion('Typical Earnings')">
+                  <v-expansion-panel-title @click="analytics.trackAccordion('Typical Earnings')">
                     Typical Earnings
                   </v-expansion-panel-title>
 
@@ -238,7 +238,7 @@
 
                 <!-- Campus Diversity -->
                 <v-expansion-panel>
-                  <v-expansion-panel-title @click="trackAccordion('Campus Diversity')">
+                  <v-expansion-panel-title @click="analytics.trackAccordion('Campus Diversity')">
                     Campus Diversity
                   </v-expansion-panel-title>
 
@@ -250,7 +250,7 @@
 
                 <!-- Test Scores -->
                 <v-expansion-panel>
-                  <v-expansion-panel-title @click="trackAccordion('Test Scores and Acceptance')">
+                  <v-expansion-panel-title @click="analytics.trackAccordion('Test Scores and Acceptance')">
                     Test Scores and Acceptance
                   </v-expansion-panel-title>
 
@@ -276,7 +276,7 @@ const route = useRoute()
 const { fields } = useConstants()
 const { apiGet } = useApi()
 const { smAndDown } = useBreakpoints()
-const { transitionOutboundLink, trackAccordion } = useAnalytics()
+const analytics = useAnalytics()
 const { toNumber } = useNumberFormatter()
 
 const school = reactive({})

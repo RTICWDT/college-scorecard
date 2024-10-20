@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-const { transitionOutboundLink } = useAnalytics()
+const analytics = useAnalytics()
 import Glossary from "~/assets/data/glossary.json"
 const glossary = ref([])
 
@@ -37,7 +37,7 @@ const handleClicks = (event) => {
     if (defaultPrevented) return
     if (button !== undefined && button !== 0) return
 
-    transitionOutboundLink(event)
+    analytics.transitionOutboundLink(event)
   }
 }
 

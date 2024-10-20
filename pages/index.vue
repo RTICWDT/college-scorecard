@@ -29,9 +29,9 @@
               @update:model-value="colorSlider"
               :slider-color="sliderColor"
             >
-              <v-tab @click="GATrackEvent('Home Tab', 'Tab', 'Search Schools')">Search Schools</v-tab>
-              <v-tab @click="GATrackEvent('Home Tab', 'Tab', 'Search Fields of Study')">Search Fields of Study</v-tab>
-              <v-tab @click="GATrackEvent('Home Tab', 'Tab', 'Show Me Options')">Show Me Options</v-tab>
+              <v-tab @click="analytics.GATrackEvent('Home Tab', 'Tab', 'Search Schools')">Search Schools</v-tab>
+              <v-tab @click="analytics.GATrackEvent('Home Tab', 'Tab', 'Search Fields of Study')">Search Fields of Study</v-tab>
+              <v-tab @click="analytics.GATrackEvent('Home Tab', 'Tab', 'Show Me Options')">Show Me Options</v-tab>
             </v-tabs>
 
             <v-tabs-window v-model="desktopTabs" class="home-search-wrapper">
@@ -208,7 +208,7 @@
                   class="homeCallout-indent"
                   href="https://www.apprenticeship.gov/apprenticeship-finder"
                   target="_blank"
-                  @click="transitionOutboundLink($event)"
+                  @click="analytics.transitionOutboundLink($event)"
                 >
                   apprenticeship.gov
                   <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
@@ -221,7 +221,7 @@
                   class="homeCallout-indent"
                   href="https://www.mynextmove.org"
                   target="_blank"
-                  @click="transitionOutboundLink($event)"
+                  @click="analytics.transitionOutboundLink($event)"
                 >
                   MyNextMove.org
                   <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
@@ -233,7 +233,7 @@
                 Find training programs: compare completion rates, employment
                 rates, and more on
                 <a class="homeCallout-indent" href="https://trainingproviderresults.gov" target="_blank"
-                  @click="transitionOutboundLink($event)">
+                  @click="analytics.transitionOutboundLink($event)">
                   TrainingProviderResults.gov
                   <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
                 </a>.
@@ -242,7 +242,7 @@
               <p>
                 Visit
                 <a class="homeCallout-indent" href="https://careeronestop.org" target="_blank"
-                  @click="transitionOutboundLink($event)">
+                  @click="analytics.transitionOutboundLink($event)">
                   CareerOneStop.org
                   <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
                 </a>, your source for career exploration training and jobs.
@@ -251,7 +251,7 @@
               <p>
                 Explore the
                 <a class="homeCallout-indent" href="https://www.bls.gov/ooh/" target="_blank"
-                  @click="transitionOutboundLink($event)">
+                  @click="analytics.transitionOutboundLink($event)">
                   Occupational Outlook Handbook (OOH)
                   <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
                 </a>
@@ -274,7 +274,7 @@
                 You can learn more about the types of financial aid that are
                 available at
 
-                <a href="https://studentaid.gov" target="_blank" @click="transitionOutboundLink($event)">
+                <a href="https://studentaid.gov" target="_blank" @click="analytics.transitionOutboundLink($event)">
                   StudentAid.gov 
                   <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
                 </a>
@@ -285,7 +285,7 @@
                 Application for Federal Student Aid (FAFSA&#174;) form. You
                 can use
 
-                <a href="https://studentaid.gov/aid-estimator/" target="_blank" @click="transitionOutboundLink($)">
+                <a href="https://studentaid.gov/aid-estimator/" target="_blank" @click="analytics.transitionOutboundLink($)">
                   Federal Student Aid aid-estimator
                   <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
                 </a>
@@ -299,7 +299,7 @@
                   href="https://studentaid.gov/h/apply-for-aid/fafsa" 
                   target="_blank" 
                   size="large"
-                  @click="transitionOutboundLink($event)"
+                  @click="analytics.transitionOutboundLink($event)"
                 >
                   Start Your FAFSA&reg; Application
                   <v-icon size="normal" class="ml-1" color="#ffffff">mdi-open-in-new</v-icon>
@@ -313,7 +313,7 @@
                 G.I. Bill benefits. Use the
 
                 <a href="https://www.vets.gov/gi-bill-comparison-tool" target="_blank"
-                  @click="transitionOutboundLink($event)">
+                  @click="analytics.transitionOutboundLink($event)">
                   GI Bill&reg; comparison tool
                   <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
                 </a>
@@ -398,7 +398,7 @@ fieldset {
 
 <script setup>
 const { formMappings } = useConstants()
-const { GATrackEvent, transitionOutboundLink, } = useAnalytics()
+const analytics = useAnalytics()
 const { smAndDown } = useBreakpoints()
 const router = useRouter()
 

@@ -42,7 +42,7 @@
             </ul>
             <li>Restructured the data file to relabel previously published entry-cohort earnings calculations
               released in 2022 and 2023 with the publication of a
-              <a @click="trackDownload('EarningsDataErrata.pdf')" href="/files/EarningsDataErrata.pdf" target="_blank">data errata document</a>
+              <a @click="analytics.trackDownload('EarningsDataErrata.pdf')" href="/files/EarningsDataErrata.pdf" target="_blank">data errata document</a>
               describing data quality
               issues with those calculations.
             </li>
@@ -455,7 +455,7 @@
             problems with this revision of the API, please submit an
             issue at
             <a href="http://github.com/rticwdt/college-scorecard/" target="_blank" @click="
-              transitionOutboundLink(
+              analytics.transitionOutboundLink(
                 $event
               )
               ">http://github.com/rticwdt/college-scorecard/<i aria-hidden="true"
@@ -1021,7 +1021,7 @@
                   Removal of Percentage Earning above High School
                   Graduate given caveats described in the
                   <a @click="
-                    trackDownload('InstitutionDataDocumentation.pdf')
+                    analytics.trackDownload('InstitutionDataDocumentation.pdf')
                     " :href="'/assets/InstitutionDataDocumentation.pdf'" target="_blank">Documentation
                     Report</a>. As this was the default sort of the search results,
                   the default sort was updated to be Salary After
@@ -1629,7 +1629,7 @@
           <p class="footnote">
             <sup>3</sup> The Eligibility Matrix is available at
             <a @click="
-              trackDownload(
+              analytics.trackDownload(
                 'http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls'
               )
               " href="http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls"
@@ -1713,7 +1713,7 @@
 </style>
 
 <script setup>
-const { trackDownload, transitionOutboundLink } = useAnalytics()
+const analytics = useAnalytics()
 
 const panels = ref([])
 const openAll = () => {

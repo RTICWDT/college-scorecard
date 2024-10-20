@@ -69,7 +69,7 @@ const props = defineProps({
 
 const showCopyNotify = ref(false)
 const copyStatus = ref('Copied!')
-const { trackShare } = useAnalytics()
+const analytics = useAnalytics()
 
 const items = computed(() => {
   const shareOptions = [
@@ -108,7 +108,7 @@ const sentence = computed(() => {
 })
 
 function picked(item) {
-  trackShare(item.title)
+  analytics.trackShare(item.title)
   window.open(item.url + encodeURIComponent(props.url), "_blank")
 }
 

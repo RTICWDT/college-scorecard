@@ -13,7 +13,7 @@
         <v-col>
           <v-btn
             color="secondary"
-            @click="trackDownload('CollegeScorecardDataDictionary.xlsx')"
+            @click="analytics.trackDownload('CollegeScorecardDataDictionary.xlsx')"
             href='/files/CollegeScorecardDataDictionary.xlsx'
             target="_blank"
             size="large"
@@ -33,7 +33,7 @@
         <v-col>
           <v-btn
             variant="outlined"
-            @click="trackDownload('InstitutionDataDocumentation.pdf')"
+            @click="analytics.trackDownload('InstitutionDataDocumentation.pdf')"
             href='/files/InstitutionDataDocumentation.pdf'
             target="_blank"
             text
@@ -45,7 +45,7 @@
           </v-btn>
           <v-btn
             variant="outlined"
-            @click="trackDownload('FieldOfStudyDataDocumentation.pdf')"
+            @click="analytics.trackDownload('FieldOfStudyDataDocumentation.pdf')"
             href='/files/FieldOfStudyDataDocumentation.pdf'
             target="_blank"
             text
@@ -66,7 +66,7 @@
         <v-col>
           <v-btn
             variant="outlined"
-            @click="trackDownload('EarningsDataErrata.pdf')"
+            @click="analytics.trackDownload('EarningsDataErrata.pdf')"
             href="/files/EarningsDataErrata.pdf"
             target="_blank"
             text
@@ -84,7 +84,7 @@
 </template>
 
 <script setup>
-const { trackDownload } = useAnalytics()
+const analytics = useAnalytics()
 
 useHead({
   title: "Documentation",

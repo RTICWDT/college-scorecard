@@ -96,13 +96,13 @@
 
   <p class="mb-5" style="max-width: 800px">
     This is based on a standard 10-year payment plan, other
-    <a href="https://studentaid.gov/loan-simulator" target="_blank" @click="transitionOutboundLink($event)">
+    <a href="https://studentaid.gov/loan-simulator" target="_blank" @click="analytics.transitionOutboundLink($event)">
       payment options
       <v-icon size="x-small">mdi-open-in-new</v-icon>
     </a>
     are available,
     like income-driven repayment. An 
-    <a href="https://studentaid.gov/manage-loans/repayment/plans/income-driven" target="_blank" @click="transitionOutboundLink($event)">
+    <a href="https://studentaid.gov/manage-loans/repayment/plans/income-driven" target="_blank" @click="analytics.transitionOutboundLink($event)">
       income-driven repayment plan
       <v-icon size="x-small">mdi-open-in-new</v-icon>
     </a>
@@ -197,7 +197,7 @@
 <script setup>
 const props = defineProps({ institutions: Object });
 const { toDollar, toPercent } = useNumberFormatter()
-const { transitionOutboundLink } = useAnalytics()
+const analytics = useAnalytics()
 const fedLoan = "fed"
 const plusLoan = "plus"
 const aidLoanSelection = [

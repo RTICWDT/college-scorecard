@@ -250,7 +250,7 @@
             color="secondary"
             target="_blank"
             :href="fixedUrl"
-            @click="transitionOutboundLink($event)"
+            @click="analytics.transitionOutboundLink($event)"
             v-if="netPriceCalculatorUrl"
             prepend-icon="fa:fas fa-calculator"
           >
@@ -269,7 +269,7 @@
 <script setup>
 const { yearsText } = useFilters()
 const { toDollar } = useNumberFormatter()
-const { transitionOutboundLink } = useAnalytics()
+const analytics = useAnalytics()
 
 const props = defineProps({
   school: {

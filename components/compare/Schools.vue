@@ -68,7 +68,7 @@
       <v-expansion-panels multiple focusable v-model="panels">
         <!-- College Information -->
         <v-expansion-panel>
-          <v-expansion-panel-title @click="trackAccordion('College Information')">
+          <v-expansion-panel-title @click="analytics.trackAccordion('College Information')">
             College Information
           </v-expansion-panel-title>
 
@@ -79,7 +79,7 @@
 
         <!-- Costs -->
         <v-expansion-panel>
-          <v-expansion-panel-title @click="trackAccordion('Costs')">
+          <v-expansion-panel-title @click="analytics.trackAccordion('Costs')">
             Costs
           </v-expansion-panel-title>
 
@@ -90,7 +90,7 @@
 
         <!-- Graduation & Retention -->
         <v-expansion-panel>
-          <v-expansion-panel-title @click="trackAccordion('Graduation & Retention')">
+          <v-expansion-panel-title @click="analytics.trackAccordion('Graduation & Retention')">
             Graduation & Retention
           </v-expansion-panel-title>
 
@@ -101,7 +101,7 @@
 
         <!-- Financial Debt -->
         <v-expansion-panel>
-          <v-expansion-panel-title @click="trackAccordion('Financial Aid & Debt')">
+          <v-expansion-panel-title @click="analytics.trackAccordion('Financial Aid & Debt')">
             Financial Aid & Debt
           </v-expansion-panel-title>
 
@@ -112,7 +112,7 @@
 
         <!-- Typical Earning -->
         <v-expansion-panel>
-          <v-expansion-panel-title @click="trackAccordion('Typical Earning')">
+          <v-expansion-panel-title @click="analytics.trackAccordion('Typical Earning')">
             Typical Earning
           </v-expansion-panel-title>
 
@@ -123,7 +123,7 @@
 
         <!-- Test Scores & Acceptance -->
         <v-expansion-panel>
-          <v-expansion-panel-title @click="trackAccordion('Test Scores & Acceptance')">
+          <v-expansion-panel-title @click="analytics.trackAccordion('Test Scores & Acceptance')">
             Test Scores & Acceptance
           </v-expansion-panel-title>
 
@@ -153,7 +153,7 @@ const route = useRoute()
 const store = useCompareStore()
 const { apiGetAll } = useApi()
 const { fields } = useConstants()
-const { trackCompareList, trackAccordion } = useAnalytics()
+const analytics = useAnalytics()
 
 const props = defineProps({
   isViewingSharedComparison: Boolean,
@@ -182,7 +182,7 @@ const querySchools = async () => {
     paramArray = store.institutions.map((institution) => ({ id: institution.id }))
   }
   
-  trackCompareList(paramArray.map((institution) => institution.id).join(";"))
+  analytics.trackCompareList(paramArray.map((institution) => institution.id).join(";"))
 
   try {
     loading.value = true
