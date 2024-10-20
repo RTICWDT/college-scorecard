@@ -2,8 +2,14 @@ import { defineStore } from 'pinia'
 
 function initializeGtag() {
   const { gtag, initialize } = useGtag()
-  initialize()
-  return gtag
+
+  try {
+    initialize()
+    return gtag
+  } catch (e) {
+    console.error('[gtag] error', e)
+    return null
+  }
 }
 
 export const useAnalytics = defineStore('analytics', {
