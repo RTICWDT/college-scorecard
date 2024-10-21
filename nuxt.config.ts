@@ -1,6 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-console.log("Building for", process.env.PRODUCTION ? "production" : process.env.STAGING ? "staging" : "development")
 
 export default defineNuxtConfig({
   ssr: false,
@@ -12,9 +11,22 @@ export default defineNuxtConfig({
       apiKey: process.env.GRIDSOME_API_KEY,
       apiUrl: process.env.GRIDSOME_API_URL,
       recaptchaKey: process.env.GRIDSOME_RECAPTCHA_KEY,
-      apiSignupKey: process.env.GRIDSOME_API_SIGNUP_KEY
+      apiSignupKey: process.env.GRIDSOME_API_SIGNUP_KEY,
     }
   },
+
+  ignore: [
+    "**/*.stories.{js,cts,mts,ts,jsx,tsx}",
+    "**/*.{spec,test}.{js,cts,mts,ts,jsx,tsx}",
+    "**/*.d.{cts,mts,ts}",
+    "**/.{pnpm-store,vercel,netlify,output,git,cache,data}",
+    ".nuxt/analyze",
+    ".nuxt",
+    "**/-*.*",
+
+    // Dev-only test page
+    process.env.DEV ? "" : "**/test.*", 
+  ].filter(Boolean),
 
   build: {
     transpile: ['vuetify', 'leaflet', '@vue-leaflet/vue-leaflet'],
@@ -34,7 +46,7 @@ export default defineNuxtConfig({
   ],
 
   gtag: {
-    enabled: !!process.env.PRODUCTION,
+    enabled: process.env.NODE_ENV === 'production',
     id: 'G-19BFKPWV7B',
   },
 
