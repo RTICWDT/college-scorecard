@@ -19,7 +19,7 @@
                   >
                     Federal Student Aid Estimator
                     <v-icon size="x-small" color="#007000" class="pl-1">
-                      fas fa-external-link-alt
+                      mdi-open-in-new
                     </v-icon>
                   </a>
                   to see how much aid may be available to you.

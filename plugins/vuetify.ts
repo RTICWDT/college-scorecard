@@ -36,7 +36,6 @@ export default defineNuxtPlugin((nuxtApp) => {
             warning: '#fff3cf',
             black: '#000000',
             schoolgreen: 'rgb(131, 195, 140)',
-            gray: '#999999',
           },  
           variables: {
             'medium-emphasis-opacity': 1,
