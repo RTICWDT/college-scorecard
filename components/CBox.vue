@@ -470,7 +470,6 @@ const onWindowResize = () => {
 }
 
 const onScroll = () => {
-  console.log('scroll', isOpen.value)
   if (isOpen.value) {
     // Force update of listbox position
     isOpen.value = false
