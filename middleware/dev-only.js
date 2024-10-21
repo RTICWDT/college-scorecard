@@ -1,5 +1,5 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-  if (process.env.NODE_ENV === 'production') {
+  if (!process.env.DEVELOPMENT) {
     return navigateTo('/')
   }
 })

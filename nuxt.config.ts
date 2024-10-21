@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+console.log("Building for", process.env.PRODUCTION ? "production" : process.env.STAGING ? "staging" : "development")
 
 export default defineNuxtConfig({
   ssr: false,
@@ -24,8 +25,6 @@ export default defineNuxtConfig({
     'nuxt-lodash',
     '@nuxtjs/leaflet',
     'nuxt-gtag',
-      // todo: this method of loading vuetify makes nuxt angry, and causes npx nuxi commands
-    // to fail. so lets swap this out with a more up-to-date method once we figure out how.
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
         // @ts-expect-error
@@ -35,7 +34,7 @@ export default defineNuxtConfig({
   ],
 
   gtag: {
-    enabled: process.env.NODE_ENV === 'production',
+    enabled: !!process.env.PRODUCTION,
     id: 'G-19BFKPWV7B',
   },
 
@@ -64,4 +63,7 @@ export default defineNuxtConfig({
     },
   },
 
+  app: {
+    baseURL: process.env.BRANCH_NAME ? `/${process.env.BRANCH_NAME}/` : '/',
+  },
 })
