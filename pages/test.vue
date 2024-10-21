@@ -1,14 +1,13 @@
 <template>
   <div class="d-flex flex-column align-center justify-center h-100 w-100">
     <h1 class="navy-text">Test</h1>
-
     <v-container>
-
       <v-row>  
         <div class="combobox combobox-list">
           <label for="cb1-input">Select Field of Study</label>
           <div class="group">
             <div class="input-wrapper">
+              <v-icon width="20" height="20" color="primaryfos">mdi-magnify</v-icon>
               <input
                 id="cb1-input"
                 ref="comboboxNode"
@@ -26,6 +25,7 @@
                 @focus="onComboboxFocus"
                 @blur="onComboboxBlur"
                 @click="onComboboxClick"
+                placeholder="Type to search"
               >
               <button
                 id="cb1-button"
@@ -63,7 +63,7 @@
               @click="onOptionClick(option)"
               @mouseover="onOptionMouseover(option)"
               @mouseout="onOptionMouseout"
-              class="pa-2"
+              class="pl-3 py-2"
               :class="{ selected: option.title === filter.value }"
             >
               <p class="text-body-1"><strong>{{ option.text }}</strong></p>
@@ -101,13 +101,6 @@ const filteredOptions = computed(() => {
   const filtered = allOptions.value.filter(option => 
     option.text.toLowerCase().startsWith(filter.value.toLowerCase()) || option.subtitle.toLowerCase().startsWith(filter.value.toLowerCase())
   )
-
-  // sort filtered by option.subtitle
-  // return filtered.sort((a, b) => {
-  //   if (a.subtitle < b.subtitle) return -1
-  //   if (a.subtitle > b.subtitle) return 1
-  //   return 0
-  // })
 
   return filtered;
 })
@@ -304,7 +297,7 @@ const onListboxMouseover = () => {
 
 const onListboxMouseout = () => {
   hasHover.value = false
-  setTimeout(close, 300)
+  setTimeout(close, 1)
 }
 
 const onOptionClick = (option) => {
@@ -320,7 +313,7 @@ const onOptionMouseover = (option) => {
 
 const onOptionMouseout = () => {
   hasHover.value = false
-  setTimeout(close, 300)
+  setTimeout(close, 1)
 }
 
 const open = () => {
@@ -418,11 +411,15 @@ const getPreviousOption = (currentOption) => {
 const isOptionInView = (option) => {
   const optionNode = document.getElementById(option.id)
   const bounding = optionNode.getBoundingClientRect()
+
+  const listboxBounds = listboxNode.value.getBoundingClientRect()
+
+
   return (
-    bounding.top >= 0 &&
-    bounding.left >= 0 &&
-    bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-    bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+    bounding.top >= listboxBounds.top &&
+    bounding.left >= listboxBounds.left &&
+    bounding.bottom <= listboxBounds.bottom &&
+    bounding.right <= listboxBounds.right
   )
 }
 
@@ -436,7 +433,7 @@ const onBackgroundMouseDown = (event) => {
       !buttonNode.value.contains(event.target)) {
     comboboxHasVisualFocus.value = false
     removeVisualFocusAll()
-    setTimeout(() => close(true), 300)
+    setTimeout(() => close(true), 1)
   }
 }
 
@@ -488,6 +485,10 @@ onUnmounted(() => {
 }
 
 .combobox input {
+  cursor: text;
+}
+
+.combobox input {
   border: none;
   outline: none;
   font-size: 87.5%;
@@ -533,7 +534,7 @@ ul[role="listbox"] {
 ul[role="listbox"] li[role="option"] {
   margin: 0;
   display: block;
-  padding-left: 3px;
+  padding-left: 5px;
   padding-top: 2px;
   padding-bottom: 2px;
 }
@@ -541,10 +542,15 @@ ul[role="listbox"] li[role="option"] {
 /* focus and hover styling */
 
 .combobox .group.focus,
-.combobox .group:hover {
-  padding: 2px;
-  border: 2px solid currentcolor;
-  border-radius: 4px;
+.combobox .input-wrapper:hover {
+  border-color: black;
+}
+
+.combobox .input-wrapper {
+  outline: 2px solid transparent;
+  border: 1px solid gray;
+  transition: border-color 0.1s, outline-color 0.1s;
+  cursor: text;
 }
 
 .combobox .group.focus polygon,
@@ -580,7 +586,7 @@ ul[role="listbox"] li[role="option"] {
   padding: 1rem;
 }
 
-li {
+li { 
   .selected {
     background-color: yellow;
   }
