@@ -20,4 +20,14 @@ const selectedItem = ref()
 const options = ref(site.value.data.cip_6_digit.map((item) => {
   return { id: item.code, text: item.title, subtitle: item.cip4Title }
 }))
+
+useHead({
+  title: 'Test',
+  meta: [
+    {
+      name: 'description',
+      content: 'Test page',
+    },
+  ],
+})
 </script>
