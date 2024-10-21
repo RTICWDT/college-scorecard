@@ -52,8 +52,8 @@ npm run preview
 
 - [x] API
 - [x] Store
-- [ ] SEO / Meta tags
-- [ ] Favicons
+- [x] SEO / Meta tags
+- [x] Favicons
 - [ ] Analytics
 - [x] ChartJS Integration
 - [x] Leaflet Integration
@@ -83,21 +83,21 @@ npm run preview
   - [x] Compare Drawer
 
 - Components
-  - [ ] Transition Away Notice
+  - [x] Transition Away Notice
   - [x] Compare Drawer
   - [x] Tooltip Styling
   - [ ] Google Charts Sankey Replacement
   
 - QA Pass
-  - [ ] Links / Downloads
-  - [ ] Images
-  - [ ] Routing
-  - [ ] 404
+  - [x] Links / Downloads
+  - [x] Images
+  - [x] Routing
+  - [x] 404
   - [ ] Error Handling
   - [ ] Design Pass
-  - [ ] SEO / Metatags
+  - [x] SEO / Metatags
   - [ ] Analytics Events
-  - [ ] Share Functionality
+  - [x] Share Functionality
   - [ ] Fonts
 
 - Nice-to-have
@@ -107,6 +107,6 @@ npm run preview
   - [ ] Typescript?
 
 - Bugs
-  - [ ] /school params need to set the state of the page properly
+  - [x] /school params need to set the state of the page properly
   - [x]link from compare drawer to field of study needs to function
   - 
