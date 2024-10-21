@@ -43,36 +43,6 @@ export default defineNuxtConfig({
   app: {
     head: {
       titleTemplate: '%s | College Scorecard',
-      meta: [
-        { name: 'HandheldFriendly', content: 'True' },
-        { name: 'MobileOptimized', content: '390' },
-        { name: "google-site-verification", content: "joZQgj-M8GQ05V29ojfVsbsNk44SRgGqJfws9tBcnPU" },
-        { name: "google-site-verification", content: "V-KEdRwSWd6GSLEWRBddZy6B5yLCs6vkRRflrImQiKE" },
-        { name: "viewport", content: "width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1" },
-        { 'http-equiv': "Cache-control", content: "private, no-store" },
-        { name: "og:type", content: "website" },
-        { name: "twitter:card", content: "summary_large_image" },
-        { name: "og:description", content: "Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs,graduation, and post-college earnings." },
-        { name: "twitter:description", content: "Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs,graduation, and post-college earnings." },
-        { name: "description", content: "Find the college that’s the best fit for you! The U.S. Department of Education’s College Scorecard has the most reliable data on college costs,graduation, and post-college earnings." },
-        { name: "og:image", content: "https://collegescorecard.ed.gov/img/CollegeScorecard-Blog-Image-updated.png" },
-        { name: "twitter:image", content: "https://collegescorecard.ed.gov/img/CollegeScorecard-Blog-Image-updated.png" },
-      ],
-      link: [
-        {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap'
-        },
-        {
-          rel: 'stylesheet',
-          href: 'https://use.typekit.net/nmj8tls.css'
-        }
-      ],
-      script: [
-        { id: "_fed_an_ua_tag", src: "https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js" },
-        { type: "text/javascript", src: "https://www.googletagmanager.com/gtag/js?id=UA-48605964-29", async: true },
-        { type: "text/javascript", src: "https://www.googletagmanager.com/gtag/js?id=UA-48605964-29", async: true },
-      ]
     }
   },
 
