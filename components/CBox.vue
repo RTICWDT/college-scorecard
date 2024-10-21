@@ -1,8 +1,8 @@
 <template>
   <div class="combobox combobox-list w-100">
-    <div class="group">
-      <div class="input-wrapper">
-        <v-icon width="20" height="20" color="primaryfos">mdi-magnify</v-icon>
+    <div class="group" ref="groupNode">
+      <div class="input-wrapper" :class="{ 'active': comboboxHasVisualFocus, 'options-visible': isOpen }">
+        <v-icon width="20" height="20" class="icon">mdi-magnify</v-icon>
         <input
           id="cb1-input"
           ref="comboboxNode"
@@ -32,44 +32,47 @@
           @click="onButtonClick"
         >
           <svg width="18" height="16" aria-hidden="true" focusable="false" style="forced-color-adjust: auto">
-            <polygon class="arrow" stroke-width="0" fill-opacity="0.75" fill="currentcolor" points="3,6 15,6 9,14"></polygon>
+            <polygon class="arrow" stroke-width="0" fill-opacity="0.75" fill="#888" points="3,6 15,6 9,14"></polygon>
           </svg>
         </button>
       </div>
     </div>
 
-    <ul
-      id="cb1-listbox"
-      ref="listboxNode"
-      role="listbox"
-      aria-label="States"
-      :class="{ 'focus': listboxHasVisualFocus }"
-      class="elevation-4"
-      :style="{ display: isOpen ? 'block' : 'none' }"
-      @mouseover="onListboxMouseover"
-      @mouseout="onListboxMouseout"
-    >
-      <li
-        v-for="option in filteredOptions"
-        :key="option.id"
-        :id="option.id"
-        role="option"
-        :aria-selected="option === selectedOption"
-        @click="onOptionClick(option)"
-        @mouseover="onOptionMouseover(option)"
-        @mouseout="onOptionMouseout"
-        class="pl-3 py-2 pr-3"
-        :class="{ selected: option.title === filter.value }"
+    <Teleport to="body">
+      <ul
+        id="cb1-listbox"
+        ref="listboxNode"
+        role="listbox"
+        aria-label="States"
+        :class="{ 'focus': listboxHasVisualFocus, 'selected': listboxHasVisualFocus }"
+        class="elevation-4"
+        :style="listboxStyle"
+        @mouseover="onListboxMouseover"
+        @mouseout="onListboxMouseout"
       >
-        <p class="text-body-1"><strong>{{ option.text }}</strong></p>
-        <p class="text-body-2 text-gray">{{ option.subtitle }}</p>
-      </li>
-    </ul>
+        <li
+          v-for="option in filteredOptions"
+          :key="option.id"
+          :id="option.id"
+          role="option"
+          :aria-selected="option === selectedOption"
+          @click="onOptionClick(option)"
+          @mouseover="onOptionMouseover(option)"
+          @mouseout="onOptionMouseout"
+          class="pl-3 py-2 pr-3"
+          :class="{ selected: option.title === filter.value }"
+        >
+          <p class="text-body-1">{{ option.text }}</p>
+          <p class="text-body-2 text-gray">{{ option.subtitle }}</p>
+        </li>
+      </ul>
+    </Teleport>
   </div>
 </template>
 
 <script setup>
 const comboboxNode = ref(null)
+const groupNode = ref(null)
 const buttonNode = ref(null)
 const listboxNode = ref(null)
 const filter = ref('')
@@ -109,6 +112,20 @@ const lastOption = computed(() => filteredOptions.value[filteredOptions.value.le
 
 const autocomplete = 'list' // Can be 'none', 'list', or 'both'
 
+// Add this computed property for listbox positioning
+const listboxStyle = computed(() => {
+  if (!isOpen.value || !comboboxNode.value || !groupNode.value) return { display: 'none' }
+  const rect = groupNode.value.getBoundingClientRect()
+
+  return {
+    position: 'fixed',
+    top: `${rect.bottom}px`,
+    left: `${rect.left + window.scrollX + 5}px`,
+    width: `${rect.width - 8}px`,
+    display: 'block'
+  }
+})
+
 const onComboboxInput = (event) => {
   filter.value = event.target.value
   if (filter.value.length > 0) {
@@ -134,10 +151,7 @@ const onComboboxKeyDown = (event) => {
       close(true)
       setVisualFocusCombobox()
       flag = true
-
-      debugger
       emit('selected', selectedOption.value)
-
       break
     case 'ArrowDown':
       if (filteredOptions.value.length > 0) {
@@ -324,6 +338,8 @@ const open = () => {
   isOpen.value = true
   comboboxNode.value.setAttribute('aria-expanded', 'true')
   buttonNode.value.setAttribute('aria-expanded', 'true')
+  // Remove this line:
+  // comboboxNode.value.parentNode.classList.add('focus')
 }
 
 const close = (force = false) => {
@@ -332,7 +348,8 @@ const close = (force = false) => {
     comboboxNode.value.setAttribute('aria-expanded', 'false')
     buttonNode.value.setAttribute('aria-expanded', 'false')
     setActiveDescendant(null)
-    comboboxNode.value.parentNode.classList.add('focus')
+    // Remove this line:
+    // comboboxNode.value.parentNode.classList.add('focus')
   }
 }
 
@@ -442,12 +459,41 @@ const onBackgroundMouseDown = (event) => {
   }
 }
 
+const onWindowResize = () => {
+  if (isOpen.value) {
+    // Force update of listbox position
+    isOpen.value = false
+    nextTick(() => {
+      isOpen.value = true
+    })
+  }
+}
+
+const onScroll = () => {
+  console.log('scroll', isOpen.value)
+  if (isOpen.value) {
+    // Force update of listbox position
+    isOpen.value = false
+    nextTick(() => {
+      isOpen.value = true
+    })
+  }
+}
+
 onMounted(() => {
   document.addEventListener('mousedown', onBackgroundMouseDown, true)
+  window.addEventListener('resize', onWindowResize)
+
+  // Add this event listener for scroll events
+  window.addEventListener('scroll', onScroll)
 })
 
 onUnmounted(() => {
   document.removeEventListener('mousedown', onBackgroundMouseDown, true)
+  window.removeEventListener('resize', onWindowResize)
+
+  // Remove this event listener for scroll events
+  window.removeEventListener('scroll', onScroll)
 })
 </script>
 
@@ -522,7 +568,7 @@ ul[role="listbox"] {
   position: absolute;
   z-index: 1000000;
   left: 4px;
-  top: 64px;
+  top: 66px;
   list-style: none;
   background-color: white;
   display: none;
@@ -581,6 +627,7 @@ ul[role="listbox"] li[role="option"] {
   padding-bottom: 0;
   /* border-top: 2px solid currentcolor; */
   /* border-bottom: 2px solid currentcolor; */
+
 }
 
 
@@ -599,5 +646,45 @@ li {
   .selected {
     background-color: yellow;
   }
+}
+
+
+.combobox .input-wrapper {
+  transition: border-color 0.15s ease, outline-color 0.15s ease;
+  outline: 2px solid transparent;
+}
+
+.combobox .input-wrapper:focus-within,
+.combobox .input-wrapper.active {
+  border-color: #fdb022; /* Darker yellow border for contrast */
+  outline-color: #fdb022;
+}
+
+/* Add this class to the input-wrapper when options are being viewed */
+.combobox .input-wrapper.options-visible {
+  border-color: #fdb022;
+  outline-color: #fdb022;
+}
+
+/* Style for the v-icon */
+.combobox .input-wrapper .icon {
+  color: gray; /* Default color */
+  transition: color 0.15s ease;
+}
+
+/* Change icon color when input is focused or options are visible */
+.combobox .input-wrapper:focus-within .icon,
+.combobox .input-wrapper.active .icon,
+.combobox .input-wrapper.options-visible .icon {
+  color: #fdb022; /* Match the border color */
+}
+
+#cb1-listbox {
+  position: fixed;
+  z-index: 1000000;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  max-height: 250px;
+  overflow-y: auto;
 }
 </style>

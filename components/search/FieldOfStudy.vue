@@ -1,5 +1,5 @@
 <template>
-  <CBox :items="items" v-model="selectedItem" />
+  <CBox :items="options" v-model="selectedItem" />
 </template>
 
 <style scoped lang="scss">
@@ -17,7 +17,9 @@ const props = defineProps({
 })
 
 const { site } = useSiteData()
-const items = site.value.data.cip_6_digit
+const options = ref(site.value.data.cip_6_digit.map((item) => {
+  return { id: item.code, text: item.title, subtitle: item.cip4Title }
+}))
 const selectedItem = ref()
 </script>
 
