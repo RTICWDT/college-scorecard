@@ -503,7 +503,6 @@ onUnmounted(() => {
 }
 .combobox-list {
   position: relative;
-  z-index: 1000000;
 }
 
 .combobox .group {
@@ -572,7 +571,7 @@ ul[role="listbox"] {
   background-color: white;
   display: none;
   box-sizing: border-box;
-  max-height: 250px;
+  max-height: 350px;
   overflow: scroll;
   overflow-x: hidden;
   font-size: 87.5%;
@@ -626,6 +625,7 @@ ul[role="listbox"] li[role="option"] {
   padding-bottom: 0;
   /* border-top: 2px solid currentcolor; */
   /* border-bottom: 2px solid currentcolor; */
+  outline: 1px solid #fdb022;
 
 }
 
@@ -683,7 +683,7 @@ li {
   z-index: 1000000;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  max-height: 250px;
+  max-height: 450px;
   overflow-y: auto;
 }
 </style>
