@@ -55,7 +55,7 @@
                 v-bind="props"
                 :disabled="!!isViewingSharedComparison"
                 color="error"
-                icon="fa:fa-solid fa-trash-can"
+                icon="mdi-close"
                 size="x-small"
                 @click="removeFieldOfStudy(fieldOfStudy)"
                 class="remove-btn ml-4"

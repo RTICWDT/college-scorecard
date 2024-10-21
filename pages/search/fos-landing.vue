@@ -23,7 +23,7 @@ h1 {
 
 <template>
   <div class="home-splash">
-    <v-container class="mb-n10 pt-5 pt-sm-10">
+    <v-container class="mb-n10 pt-5 pt-10">
       <v-row>
         <v-col cols="12" class="px-6 px-sm-3">
           <h1 style="color: white">
@@ -76,7 +76,7 @@ h1 {
   </div>
 
   <!-- Bottom Content -->
-  <div class="home-links pt-sm-15 mb-sm-15">
+  <div class="home-links pt-15 mb-sm-15">
     <v-container class="mt-8">
       <v-row class="align-stretch">
         <v-col cols="12" md="6" class="pr-sm-8 pt-8 pt-sm-0">

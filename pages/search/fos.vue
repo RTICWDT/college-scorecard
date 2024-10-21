@@ -485,7 +485,7 @@
 </template>
 
 <script setup>
-const { smAndDown, lgAndUp, md } = useBreakpoints()
+const { smAndDown, lgAndUp, md, xs } = useBreakpoints()
 const { prepareParams } = usePrepareParams()
 const { site } = useSiteData()
 const { formMappings } = useConstants();
@@ -552,6 +552,7 @@ const sorts = ref([
 
 // COMPUTED
 const paginatorPageCount = computed(() => {
+  if (xs.value) { return 1 }
   if (smAndDown.value) { return 2 }
 
   if (md.value) {

@@ -10,8 +10,16 @@ header {
     align-items: center;
     width: 350px;
 
-    @media screen and (max-width: 600px) {
+    @include md {
+      width: 350px;
+    }
+
+    @include sm {
       width: 300px;
+    }
+
+    @include xs {
+      width: 245px;
     }
   }
 }
@@ -80,6 +88,7 @@ nav {
 
   &:focus-within {
     opacity: 1;
+    z-index: 999999;
 
     a {
       padding: 2px;
@@ -91,7 +100,7 @@ nav {
 </style>
 
 <template>
-  <div id="skip-content-tab" style="background-color: white; z-index: 99999;">
+  <div id="skip-content-tab" style="background-color: white;">
     <a tabindex="1" @click="skipNav" href="#">
       Skip to main content
     </a>
