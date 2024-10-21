@@ -3,9 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxt dev --port 3000",
-    "build": "nuxt generate",
-    "preview": "npx serve .output/public"
+    "dev": "npx nuxi dev --dotenv .env --port 3000",
+    "build": "npx nuxi generate --dotenv .env",
+    "preview": "npx serve .output/public",
+    "deploy": "NODE_ENV=production npx nuxi generate --dotenv .env.staging && aws --profile scorecard s3 sync .output/public/ s3://scorecard-development-9d7y2giuzkhar2vn94xb --exclude '*.DS_Store' && aws --profile scorecard cloudfront create-invalidation --distribution-idE2PKIP6XK74A9G --paths '/*'"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
