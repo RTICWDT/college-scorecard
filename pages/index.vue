@@ -131,11 +131,7 @@
                     <v-row>
                       <v-col cols="12" sm="5">
                         <label class="d-block mb-2" for="fosSearch">Search Fields of Study</label>
-                        <SearchFieldOfStudy
-                          @field-of-study-selected="handleFieldOfStudySelected"
-                          :selected="input.cip4"
-                          id="fosSearch"
-                        />
+                        <SearchFieldOfStudy v-model="input.cip4" />
                       </v-col>
                       <v-col cols="12" sm="4">
                         <label class="d-block  mb-2" for="fosDegree">Select Degree Type</label>

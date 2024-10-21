@@ -420,7 +420,7 @@
 <script setup>
 const route = useRoute()
 const router = useRouter()
-const { smAndDown, lgAndUp, md } = useBreakpoints()
+const { smAndDown, lgAndUp, md, xs } = useBreakpoints()
 const { prepareParams } = usePrepareParams()
 const { apiGet } = useApi()
 const { site } = useSiteData()
@@ -486,6 +486,7 @@ watch(() => results.meta, (meta) => {
 // 
 
 const paginatorPageCount = computed(() => {
+  if (xs.value) { return 1 }
   if (smAndDown.value) { 
     return 2
   }
