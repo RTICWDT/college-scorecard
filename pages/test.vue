@@ -10,6 +10,9 @@
 </template>
 
 <script setup>
+definePageMeta({
+  middleware: 'dev-only',
+})
 </script>
 
 <style scoped lang="scss">
