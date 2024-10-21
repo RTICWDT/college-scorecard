@@ -97,20 +97,82 @@ const props = defineProps({
 const emit = defineEmits(['selected'])
 
 const allOptions = ref(props.items)
-
-const filteredOptions = computed(() => {
-  if (!filter.value) return allOptions.value
-  const filtered = allOptions.value.filter(option => 
-    option.text.toLowerCase().match(filter.value.toLowerCase()) || option.subtitle.toLowerCase().match(filter.value.toLowerCase())
-  )
-
-  return filtered;
-})
-
 const firstOption = computed(() => filteredOptions.value[0] || null)
 const lastOption = computed(() => filteredOptions.value[filteredOptions.value.length - 1] || null)
-
 const autocomplete = 'list' // Can be 'none', 'list', or 'both'
+
+
+
+// SEARCH ALGO
+const cleanString = (str) => {
+  return str.replace(/[^a-zA-Z\s]/g, '').trim();
+}
+
+function calculateStringSimilarity(str1, str2) {
+  // Skip empty strings
+  if (!str1 || !str2) return 0;
+  // Exact match
+  if (str1 === str2) return 1;
+  // Contains as substring
+  if (str1.includes(str2) || str2.includes(str1)) return 0.8;
+  // Calculate Levenshtein distance
+  const matrix = Array(str2.length + 1).fill().map(() => Array(str1.length + 1).fill(0));
+  
+  for (let i = 0; i <= str1.length; i++) matrix[0][i] = i;
+  for (let j = 0; j <= str2.length; j++) matrix[j][0] = j;
+  
+  for (let j = 1; j <= str2.length; j++) {
+    for (let i = 1; i <= str1.length; i++) {
+      const cost = str1[i - 1] === str2[j - 1] ? 0 : 1;
+      matrix[j][i] = Math.min(
+        matrix[j][i - 1] + 1,
+        matrix[j - 1][i] + 1,
+        matrix[j - 1][i - 1] + cost
+      );
+    }
+  }
+  
+  const maxLength = Math.max(str1.length, str2.length);
+  const distance = matrix[str2.length][str1.length];
+  return 1 - (distance / maxLength);
+}
+
+const filteredOptions = computed(() => {
+  if (!filter.value) return allOptions.value;
+
+  const cleanedFilter = cleanString(filter.value).toLowerCase();
+  if (!cleanedFilter) return allOptions.value;
+  
+  const threshold = 0.6;
+  
+  const searchTerms = cleanedFilter
+    .split(/\s+/)
+    .map(term => cleanString(term).toLowerCase())
+    .filter(term => term.length > 0);
+  
+  return allOptions.value
+    .map(option => {
+      const cleanText = cleanString(option.text).toLowerCase();
+      const cleanSubtitle = cleanString(option.subtitle).toLowerCase();
+
+      const textScores = searchTerms.map(term => calculateStringSimilarity(cleanText, term));
+      const subtitleScores = searchTerms.map(term => calculateStringSimilarity(cleanSubtitle, term));
+      
+      const bestTextScore = Math.max(...textScores);
+      const bestSubtitleScore = Math.max(...subtitleScores);
+      
+      const score = Math.max(bestTextScore * 1.2, bestSubtitleScore);
+      
+      return {
+        ...option,
+        score
+      };
+    })
+    .filter(option => option.score > threshold)
+    .sort((a, b) => b.score - a.score);
+});
+
+
 
 // Add this computed property for listbox positioning
 const listboxStyle = computed(() => {
