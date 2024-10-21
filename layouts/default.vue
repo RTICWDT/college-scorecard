@@ -16,6 +16,7 @@
 
 <script setup>
 useHead({
+  titleTemplate: '%s | College Scorecard',
   htmlAttrs: {
     lang: 'en'
   },

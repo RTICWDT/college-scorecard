@@ -40,12 +40,6 @@ export default defineNuxtConfig({
     id: 'G-19BFKPWV7B',
   },
 
-  app: {
-    head: {
-      titleTemplate: '%s | College Scorecard',
-    }
-  },
-
   css: [
     'vuetify/styles',
     '@mdi/font/css/materialdesignicons.css',
