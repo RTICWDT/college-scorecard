@@ -1,6 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
+const isDevBuild = process.env.NODE_ENV === 'development' || process.env.DEV
+
 export default defineNuxtConfig({
   ssr: false,
   compatibilityDate: '2024-04-03',
@@ -25,7 +27,7 @@ export default defineNuxtConfig({
     "**/-*.*",
 
     // Dev-only test page
-    process.env.DEV ? "" : "**/test.*", 
+    isDevBuild ? "" : "**/test.*", 
   ].filter(Boolean),
 
   build: {

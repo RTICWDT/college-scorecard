@@ -101,7 +101,7 @@ const allOptions = ref(props.items)
 const filteredOptions = computed(() => {
   if (!filter.value) return allOptions.value
   const filtered = allOptions.value.filter(option => 
-    option.text.toLowerCase().startsWith(filter.value.toLowerCase()) || option.subtitle.toLowerCase().startsWith(filter.value.toLowerCase())
+    option.text.toLowerCase().match(filter.value.toLowerCase()) || option.subtitle.toLowerCase().match(filter.value.toLowerCase())
   )
 
   return filtered;
