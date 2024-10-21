@@ -44,7 +44,6 @@ export default defineNuxtConfig({
     head: {
       titleTemplate: '%s | College Scorecard',
       meta: [
-        csp(),
         { name: 'HandheldFriendly', content: 'True' },
         { name: 'MobileOptimized', content: '390' },
         { name: "google-site-verification", content: "joZQgj-M8GQ05V29ojfVsbsNk44SRgGqJfws9tBcnPU" },
