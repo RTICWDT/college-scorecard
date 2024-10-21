@@ -3,7 +3,7 @@
     <v-container>
       <v-row class="align-stretch">
         <v-col cols="12" md="6" class="my-md-10">
-          <v-card variant="outlined" class="pa-5 fill-height bg-gray">
+          <v-card variant="outlined" class="pa-5 fill-height bg-white elevation-1">
             <div>
               <h2>Start Your FAFSA&reg; Application</h2>
               <hr />
