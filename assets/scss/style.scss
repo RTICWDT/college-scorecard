@@ -1,13 +1,12 @@
 // unfortunately scss functions are breaking on build, so I have to dupe css here
 // todo: fix scss functions on build
-$gray-100: '#EAEEF5';
-$gray-200: '#DFE6F0';
-$gray-400: '#C3C9D3';
-$gray-700: '#6C737C';
-$primary-green: '#00700';
-$primary-blue: '#10274E';
-$secondary-blue: '#1570EF';
-
+$gray-100: #EAEEF5;
+$gray-200: #DFE6F0;
+$gray-400: #C3C9D3;
+$gray-700: #6C737C;
+$primary-green: #007000;
+$primary-blue: #10274E;
+$secondary-blue: #1570EF;
 
 .v-application {
   // VUETIFY OVERRIDES
