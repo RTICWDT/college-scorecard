@@ -13,7 +13,7 @@
         v-else
         v-for="institution in institutions" 
         class="pl-5 ml-2 result-card" 
-        :class="{ 'bg-warning': store.highlightedInstitution === institution }" 
+        :class="{ 'bg-yellow-600': store.highlightedInstitution === institution }" 
         @click="(event) => toggleHighlight(event, institution)"
       >
         <NuxtLink class="font-weight-bold text-body-2" :to="schoolLink(institution)">

@@ -62,7 +62,7 @@
           class="pl-3 py-2 pr-3"
         >
           <p class="text-body-1">{{ option.text }}</p>
-          <p class="text-body-2 text-darkgrey">{{ option.subtitle }}</p>
+          <p class="text-body-2 text-gray-700">{{ option.subtitle }}</p>
         </li>
       </ul>
     </Teleport>
@@ -696,11 +696,6 @@ ul[role="listbox"] li[role="option"] {
   border-color: black;
 }
 
-.input-wrapper.focus {
-    // border-color: #fdb022 !important;
-    // outline-color: #fdb022 !important;
-}
-
 .combobox .input-wrapper {
   outline: 1px solid transparent;
   border: 1px solid gray;
@@ -722,12 +717,12 @@ ul[role="listbox"] li[role="option"] {
 
 [role="listbox"].focus [role="option"][aria-selected="true"],
 [role="listbox"] [role="option"]:hover {
-  background-color: #fdb02211;
+  background-color: theme-color('primary-yellow', 0.05);
   padding-top: 0;
   padding-bottom: 0;
   /* border-top: 2px solid currentcolor; */
   /* border-bottom: 2px solid currentcolor; */
-  outline: 1px solid #fdb022;
+  outline: 1px solid theme-color('primary-yellow');
 
 }
 
@@ -750,14 +745,14 @@ ul[role="listbox"] li[role="option"] {
 
 .combobox .input-wrapper:focus-within,
 .combobox .input-wrapper.active {
-  border-color: #fdb022; /* Darker yellow border for contrast */
-  outline-color: #fdb022;
+  border-color: theme-color('primary-yellow'); /* Darker yellow border for contrast */
+  outline-color: theme-color('primary-yellow');
 }
 
 /* Add this class to the input-wrapper when options are being viewed */
 .combobox .input-wrapper.options-visible {
-  border-color: #fdb022;
-  outline-color: #fdb022;
+  border-color: theme-color('primary-yellow');
+  outline-color: theme-color('primary-yellow');
 }
 
 /* Style for the v-icon */
@@ -770,7 +765,7 @@ ul[role="listbox"] li[role="option"] {
 .combobox .input-wrapper:focus-within .icon,
 .combobox .input-wrapper.active .icon,
 .combobox .input-wrapper.options-visible .icon {
-  color: #fdb022; /* Match the border color */
+  color: theme-color('primary-yellow'); /* Match the border color */
 }
 
 #cb1-listbox {

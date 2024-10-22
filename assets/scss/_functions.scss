@@ -1,0 +1,3 @@
+@function theme-color($color-name, $opacity: 1) {
+  @return rgba(var(--v-theme-#{$color-name}), $opacity);
+}

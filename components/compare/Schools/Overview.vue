@@ -3,8 +3,8 @@
     <Toggle
       v-model="medianToggle"
       :options="[
-        { label: 'Midpoint for School Type', value: 'group', color: '#007000', activeColor: 'transparent' },
-        { label: 'Midpoint for All Schools', value: 'all', color: '#007000', activeColor: '#transparent' },
+        { label: 'Midpoint for School Type', value: 'group', color: color('primary-green'), activeColor: 'transparent' },
+        { label: 'Midpoint for All Schools', value: 'all', color: color('primary-green'), activeColor: '#transparent' },
       ]"
       backgroundColor="white"
       borderThickness="5px"
@@ -136,6 +136,7 @@
 
 <script setup>
 const { toDollar, toPercent } = useNumberFormatter()
+const { color } = useVuetify()
 const {
   netPrice,
   medianEarnings,

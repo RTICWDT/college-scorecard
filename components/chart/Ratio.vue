@@ -65,18 +65,18 @@ const tabID = (context, controlTab) => {
   margin: 0 5px;
   height: 5em;
   width: 5em;
-  color: variables.$white;
+  color: white;
   z-index: 2;
 }
 
 .light {
-  background: variables.$medium-blue;
-  border: 0.1875em solid variables.$medium-blue;
+  background: theme-color('secondary-blue');
+  border: 0.1875em solid theme-color('secondary-blue');
 }
 
 .dark {
-  background: variables.$medium-dark-blue;
-  border: 0.1875em solid variables.$medium-dark-blue;
+  background: theme-color('primary-blue');
+  border: 0.1875em solid theme-color('primary-blue');
 }
 
 .key-box {
@@ -87,10 +87,10 @@ const tabID = (context, controlTab) => {
 }
 
 .mid-dark-blue {
-  background-color: variables.$medium-dark-blue;
+  background-color: theme-color('primary-blue');
 }
 
 .medium-blue {
-  background-color: variables.$medium-blue;
+  background-color: theme-color('secondary-blue');
 }
 </style>

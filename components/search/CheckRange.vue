@@ -18,7 +18,7 @@
           :max="props.max"
           :color="trackColor"
           :track-color="trackBackground"
-          thumb-color="secondary"
+          thumb-color="secondary-green"
           :aria-labelledby="generatedId"
           :aria-label="generatedId"
           thumb-label
@@ -30,7 +30,7 @@
                 v-model="enableSlider"
                 :id="`${props.id}-check`"
                 @update:modelValue="handleEnable"
-                color="secondary"
+                color="secondary-green"
                 class="pa-0 ma-0"
                 hide-details
                 :aria-labelledby="generatedId"
@@ -120,9 +120,9 @@ watch(() => props.enable, (newValue) => {
 onMounted(() => {
   if (props.andUp) {
     trackColor.value = "grey"
-    trackBackground.value = "secondary"
+    trackBackground.value = "secondary-green"
   } else {
-    trackColor.value = "secondary"
+    trackColor.value = "secondary-green"
     trackBackground.value = "grey"
   }
 

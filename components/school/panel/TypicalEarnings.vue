@@ -23,8 +23,8 @@
           <Toggle
             v-model="medianToggle"
             :options="[
-              { label: `${yearsText(school)} Schools`, value: 'group', color: '#007000', activeColor: 'transparent' },
-              { label: 'All Schools', value: 'all', color: '#007000', activeColor: '#transparent' },
+              { label: `${yearsText(school)} Schools`, value: 'group', color: color('primary-green'), activeColor: 'transparent' },
+              { label: 'All Schools', value: 'all', color: color('primary-green'), activeColor: '#transparent' },
             ]"
             backgroundColor="white"
             borderThickness="5px"
@@ -71,7 +71,6 @@
             style: { height: '60px' },
             show: true,
           }"
-          color="#00365e"
           :height="500"
           :y-bar-thickness="50"
           :label-font-size="24"
@@ -127,6 +126,7 @@
 <script setup>
   const { yearsText } = useFilters()
   const { toDollar, toPercent } = useNumberFormatter()
+  const { color } = useVuetify()
   const props = defineProps({
     school: {
       type: Object,

@@ -88,13 +88,13 @@ watch(activeTab, (newTab) => {
 
     &.school {
       .tab-border-bottom {
-        background-color: variables.$school-green;
+        background-color: theme-color('tertiary-green');
       }
     }
 
     &.fos {
       .tab-border-bottom {
-        background-color: variables.$fos-orange;
+        background-color: theme-color('primary-yellow');
       }
     }
   }

@@ -53,23 +53,9 @@ const props = defineProps({
       height: "35px",
     }),
   },
-  lowerStyleOverride: {
-    type: Object,
-    default: () => ({
-      height: "22px",
-      "border-left": "3px solid #00365e",
-    }),
-  },
   lowerTipStyleOverride: {
     type: Object,
     default: () => ({}),
-  },
-  upperStyleOverride: {
-    type: Object,
-    default: () => ({
-      height: "22px",
-      "border-right": "3px solid #00365e",
-    }),
   },
   upperTipStyleOverride: {
     type: Object,

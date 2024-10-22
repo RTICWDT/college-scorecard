@@ -2,7 +2,7 @@
   <div class="d-flex w-100 h-100 align-center justify-content-center" v-if="loading || (!school.id && !error)">
     <div class="show-loading w-100">
       <h1 class="title text-center mt-15">
-        <v-icon size="x-small" class="mr-2 position-relative" style="bottom: 2px;" color="#00365e" icon="fa:fas fa-circle-notch fa-spin"/>
+        <v-icon size="x-small" class="mr-2 position-relative" style="bottom: 2px;" color="primary-blue" icon="fa:fas fa-circle-notch fa-spin"/>
         Loading
       </h1>
     </div>
@@ -28,13 +28,13 @@
   <div v-else>
 
       <!--Top Control Row-->
-      <div class="bg-navyblue">
+      <div class="bg-primary-aqua">
         <v-container class="pt-5 pb-6">
           <v-row>
             <v-col class="pa-0 text-right d-flex align-center justify-sm-end justify-space-evenly">
               <v-btn
                 size="small"
-                color="navyblue"
+                color="primary-aqua"
                 id="referrer-link"
                 class="link-more pl-1 pr-2"
                 @click="$router.back()"
@@ -70,7 +70,7 @@
               &nbsp;
               <TooltipModal
                 definition="hcm2"
-                color="#FFFFFF"
+                color="white"
                 class="ml-2"
                 :isBranch="isBranch"
               />
@@ -78,7 +78,7 @@
             <h1
               id="profile-institution-title"
               class="small-display-3 font-weight-bold pa-0 mb-4"
-              v-if="smAndDown"
+              v-if="breakpoints.smAndDown.value"
             >
               {{ schoolName }}
             </h1>
@@ -101,7 +101,7 @@
                 @click="analytics.transitionOutboundLink($event)"
               >
               {{  formatUrlText(schoolUrlDisplay) }}
-              <v-icon size="x-small" class="pl-1" color="#007000">mdi-open-in-new</v-icon>
+              <v-icon size="x-small" class="pl-1" color="primary-green">mdi-open-in-new</v-icon>
               </a>
             </div>
             <SmallSchoolIcons :school="school" :fields="fields" class="my-md-8 my-4" :imgSize="40" :font-size="1.5" :font-weight="400"/>
@@ -122,7 +122,7 @@
                 target="_blank"
               >
                 View on map
-                <v-icon size="x-small" class="pl-1" color="#007000">mdi-open-in-new</v-icon>
+                <v-icon size="x-small" class="pl-1" color="primary-green">mdi-open-in-new</v-icon>
               </a>
             </div>
           </v-col>
@@ -160,10 +160,10 @@
 
               <v-row>
                 <v-col class="text-right">
-                  <v-btn class="my-4 mr-2 text-uppercase" color="primary" @click="expandAllPanels">
+                  <v-btn class="my-4 mr-2 text-uppercase" color="primary-green" @click="expandAllPanels">
                     Expand All
                   </v-btn>
-                  <v-btn  class="my-4 text-uppercase" color="primary" @click="closeAllPanels">
+                  <v-btn  class="my-4 text-uppercase" color="primary-green" @click="closeAllPanels">
                     Close All
                   </v-btn>
                 </v-col>
@@ -172,12 +172,12 @@
               <!-- Field of Study Panel -->
               <v-expansion-panels multiple focusable v-model="panelsFOS">
                 <v-expansion-panel class="fos-profile-panel" elevation="2">
-                  <v-expansion-panel-title id="fields-of-study" @click="analytics.trackAccordion('Fields of Study')" class="field-of-study-title bg-lightyellow">
+                  <v-expansion-panel-title id="fields-of-study" @click="analytics.trackAccordion('Fields of Study')" class="field-of-study-title bg-tertiary-yellow">
                     <span>Fields of Study</span>
                     <v-btn
                       size="x-small"
                       icon="fa:fas fa-award"
-                      class="bg-yellow ml-2"
+                      class="bg-primary-yellow ml-2"
                       :readonly="true"
                     />
                   </v-expansion-panel-title>
@@ -275,7 +275,7 @@ const { formatUrlText } = useFilters()
 const route = useRoute()
 const { fields } = useConstants()
 const { apiGet } = useApi()
-const { smAndDown } = useBreakpoints()
+const { breakpoints } = useVuetify()
 const analytics = useAnalytics()
 const { toNumber } = useNumberFormatter()
 

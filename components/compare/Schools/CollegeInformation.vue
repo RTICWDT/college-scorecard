@@ -81,7 +81,7 @@
     <v-select
       :items="raceEthnicitySelection"
       v-model="currentRaceEthnicity"
-      color="secondary"
+      color="secondary-green"
       variant="outlined"
     />
 

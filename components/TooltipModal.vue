@@ -23,7 +23,7 @@
             aria-required="true" 
             icon="mdi:mdi-close"
             elevation="0"
-            color="tertiary"
+            color="secondary-gray"
             class="ml-5"
           />
         </div>
@@ -41,7 +41,7 @@
           <p class="mt-3" v-if="hasGlossary">
             <v-btn
               size="small"
-              color="secondary"
+              color="secondary-green"
               class="px-4 mt-3"
               @click="navigateToGlossary"
             >
@@ -60,7 +60,7 @@ const props = defineProps({
   definition: String,
   color: {
     type: String,
-    default: "darkgrey",
+    default: "gray-700",
   },
   version: {
     type: String,

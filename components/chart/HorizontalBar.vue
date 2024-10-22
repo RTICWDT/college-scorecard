@@ -17,10 +17,10 @@ const props = defineProps({
   value: { type: Number, default: 50 },
   min: { type: Number, default: 0 },
   max: { type: Number, default: 100 },
-  color: { type: String, default: "#333333" },
-  bgcolor: { type: String, default: "#EAEAEA" },
+  color: { type: String, default: "gray-400" },
+  bgcolor: { type: String, default: "gray-100" },
   labels: { type: Boolean, default: false },
-  labelColor: { type: String, default: "#333333" },
+  labelColor: { type: String, default: "primary-blue" },
   type: { type: String, default: "percent" },
   yBarThickness: { type: Number, default: 35 },
   labelFontSize: { type: Number, default: 18 },
@@ -58,7 +58,7 @@ const dataLabelsPlugin = {
     ctx.save();
     ctx.font = `bold ${props.labelFontSize}px "neue-haas-grotesk-display", Helvetica, arial, sans-serif`;
     ctx.textBaseline = 'middle';
-    ctx.fillStyle = props.labelColor;
+    ctx.fillStyle = color(props.labelColor);
 
     datasets[0].data.forEach((value, index) => {
       const element = meta.data[index];
@@ -149,18 +149,19 @@ const chartOptions = computed(() => ({
   }
 }))
 
+const { color } = useVuetify()
 onMounted(() => {
   chartData.value = {
     labels: [""],
     datasets: [
       {
         data: [props.value],
-        backgroundColor: props.color,
+        backgroundColor: color(props.color),
         barThickness: props.yBarThickness,
       },
       {
         data: [props.max],
-        backgroundColor: props.bgcolor,
+        backgroundColor: color(props.bgcolor),
         barThickness: props.yBarThickness,
       },
     ]

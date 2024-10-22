@@ -3,8 +3,8 @@
     <Toggle
       v-model="medianToggle"
       :options="[
-        { label: 'Midpoint for School Type', value: 'group', color: '#007000', activeColor: 'transparent' },
-        { label: 'Midpoint for All Schools', value: 'all', color: '#007000', activeColor: '#transparent' },
+        { label: 'Midpoint for School Type', value: 'group', color: color('primary-green'), activeColor: 'transparent' },
+        { label: 'Midpoint for All Schools', value: 'all', color: color('primary-green'), activeColor: 'transparent' },
       ]"
       backgroundColor="white"
       borderThickness="5px"
@@ -64,7 +64,7 @@
       v-model="currentIncomeFilter"
       item-text="label"
       item-value="value"
-      color="secondary"
+      color="secondary-green"
       variant="outlined"
       class="compare-select"
     ></v-select>
@@ -96,6 +96,7 @@
 const props = defineProps({ institutions: Object });
 const { toDollar } = useNumberFormatter()
 const medianToggle = ref('group')
+const { color } = useVuetify()
 
 const {
   netPrice,

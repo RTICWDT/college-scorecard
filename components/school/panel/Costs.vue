@@ -29,8 +29,8 @@
               <Toggle
                 v-model="medianToggle"
                 :options="[
-                  { label: `${yearsText(school)} Schools`, value: 'group', color: '#007000', activeColor: 'transparent' },
-                  { label: 'All Schools', value: 'all', color: '#007000', activeColor: '#transparent' },
+                  { label: `${yearsText(school)} Schools`, value: 'group', color: color('primary-green'), activeColor: 'transparent' },
+                  { label: 'All Schools', value: 'all', color: color('primary-green'), activeColor: '#transparent' },
                 ]"
                 backgroundColor="white"
                 borderThickness="5px"
@@ -77,7 +77,6 @@
               style: { height: '60px' },
               show: true,
             }"
-            color="#00365e"
             :y-bar-thickness="50"
             :label-font-size="24"
             :labels="true"
@@ -123,8 +122,8 @@
               <Toggle
                 v-model="medianToggle"
                 :options="[
-                  { label: `${yearsText(groupName)} Schools`, value: 'group', color: '#007000', activeColor: 'transparent' },
-                  { label: 'All Schools', value: 'all', color: '#007000', activeColor: '#transparent' },
+                  { label: `${yearsText(groupName)} Schools`, value: 'group', color: color('primary-green'), activeColor: 'transparent' },
+                  { label: 'All Schools', value: 'all', color: color('primary-green'), activeColor: '#transparent' },
                 ]"
                 backgroundColor="white"
                 borderThickness="5px"
@@ -172,7 +171,6 @@
                   style: { height: '60px' },
                   show: true,
                 }"
-                color="#00365e"
                 :height="500"
                 :y-bar-thickness="50"
                 :label-font-size="24"
@@ -247,7 +245,7 @@
         </v-table>
         <div>
           <v-btn
-            color="secondary"
+            color="secondary-green"
             target="_blank"
             :href="fixedUrl"
             @click="analytics.transitionOutboundLink($event)"
@@ -270,6 +268,7 @@
 const { yearsText } = useFilters()
 const { toDollar } = useNumberFormatter()
 const analytics = useAnalytics()
+const { color } = useVuetify()
 
 const props = defineProps({
   school: {

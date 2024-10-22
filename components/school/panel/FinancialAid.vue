@@ -29,7 +29,7 @@
           <v-select
             :items="aidLoanSelectItems"
             v-model="aidLoanSelect"
-            color="secondary"
+            color="secondary-green"
             aria-labelledby="loan-type-label"
           />
         </v-col>
@@ -38,7 +38,7 @@
           <v-checkbox
             v-model="aidShowMedianDebtWithPrior"
             label="Include debt borrowed at prior institutions"
-            color="secondary"
+            color="secondary-green"
             class="shrink"
             hide-details
           >
@@ -65,7 +65,7 @@
                 <div class="d-flex align-center justify-center">
                   <div style="height: 200px; width: 200px">
                     <ChartDonut
-                      color="#1874DC"
+                      color="secondary-blue"
                       :value="studentsReceivingLoans * 100"
                       class="pb-3"
                       chart-id="loans-donut"
@@ -234,12 +234,12 @@
               plan, other
               <a href="https://studentaid.gov/loan-simulator" target="_blank" @click="analytics.transitionOutboundLink">
                 payment options
-                <v-icon size="x-small" class="pl-1" color="#007000">mdi-open-in-new</v-icon>
+                <v-icon size="x-small" class="pl-1" color="primary-green">mdi-open-in-new</v-icon>
               </a>
               are available, like income-driven repayment. An
               <a target="_blank" href="https://studentaid.gov/manage-loans/repayment/plans/income-driven" @click="analytics.transitionOutboundLink">
                 income-driven repayment
-                <v-icon size="x-small" class="pl-1" color="#007000">mdi-open-in-new</v-icon>
+                <v-icon size="x-small" class="pl-1" color="primary-green">mdi-open-in-new</v-icon>
               </a>
               plan sets your monthly student loan payment at
               an amount that is intended to be affordable
@@ -284,7 +284,7 @@
                 <v-checkbox
                   v-model="showGradOnly"
                   label="Only show data for those who graduated"
-                  color="secondary"
+                  color="secondary-green"
                   class="mt-0"
                 >
                   <template #label>
@@ -335,7 +335,7 @@
             </p>
             <div class="d-flex justify-center">
               <v-btn
-                color="secondary"
+                color="secondary-green"
                 href="https://studentaid.gov/h/apply-for-aid/fafsa"
                 target="_blank"
                 @click="analytics.transitionOutboundLink"

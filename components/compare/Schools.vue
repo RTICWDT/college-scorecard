@@ -9,7 +9,7 @@
       <div class="text-center mt-8">
         <NuxtLink to="/search">
           <v-btn
-            color="secondary"
+            color="secondary-green"
             size="large"
           >
             Search Schools
@@ -56,10 +56,10 @@
     <Teleport to="#teleport-accordion-container">
       <v-row>
         <v-col class="text-right">
-          <v-btn class="my-4 mr-2 text-uppercase" color="primary" @click="expandAllPanels">
+          <v-btn class="my-4 mr-2 text-uppercase" color="primary-green" @click="expandAllPanels">
             Expand All
           </v-btn>
-          <v-btn  class="my-4 text-uppercase" color="primary" @click="closeAllPanels">
+          <v-btn  class="my-4 text-uppercase" color="primary-green" @click="closeAllPanels">
             Close All
           </v-btn>
         </v-col>

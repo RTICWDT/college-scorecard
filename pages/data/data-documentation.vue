@@ -12,7 +12,7 @@
       <v-row>
         <v-col>
           <v-btn
-            color="secondary"
+            color="secondary-green"
             @click="analytics.trackDownload('CollegeScorecardDataDictionary.xlsx')"
             href='/files/CollegeScorecardDataDictionary.xlsx'
             target="_blank"

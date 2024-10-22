@@ -15,14 +15,14 @@
       min-width="200"
       @keydown.enter.prevent
       :max-width="props.horizontal ? 300 : undefined"
-      color="primary"
+      color="primary-green"
     />
 
     <div class="d-flex align-center" v-if="utility.location === 'Near Me'">
       <v-btn
         @click="!location.latLon ? handleLocationCheck : () => {}"
         :class="[props.horizontal ? 'mr-2 ml-3' : 'my-3 mr-2']"
-        color="tertiary"
+        color="secondary-gray"
       >
         <v-icon :icon="location.isLoading ? 'fa:fas fa-circle-notch fa-spin' : 'mdi-near-me'" />
       </v-btn>
@@ -39,7 +39,7 @@
         density="compact"
         :class="[props.horizontal ? 'mx-2' : 'my-3']"
         @update:modelValue="handleSearch"
-        color="primary"
+        color="primary-green"
       />
 
       <span
@@ -64,7 +64,7 @@
         min="0"
         variant="outlined"
         @update:modelValue="handleSearch"
-        color="primary"
+        color="primary-green"
       />
       <v-text-field
         v-model="input.distance"
@@ -77,7 +77,7 @@
         density="compact"
         variant="outlined"
         @update:modelValue="handleSearch"
-        color="primary"
+        color="primary-green"
       />
     </div>
 
@@ -93,7 +93,7 @@
       :single-line="true"
       :placeholder="input.state && input.state.length > 0 ? undefined : 'Select a state...'"
       :class="[props.horizontal ? 'mx-3 mt-0  pt-0' : 'my-3']"
-      color="primary"
+      color="primary-green"
       closable-chips
       v-show="utility.location == 'State'"
       aria-label="Select a state"

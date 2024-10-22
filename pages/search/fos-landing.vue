@@ -7,10 +7,10 @@ h1 {
   height: 100%;
 }
 .home-splash {
-  background-color: variables.$bg-blue !important;
+  background-color: theme-color('primary-aqua') !important;
 }
 .home-links {
-  background-color: variables.$bg-gray;
+  background-color: theme-color('gray-100');
 }
 .homepage-search-container {
   box-shadow: 0px 10px 16px #0000001a !important;
@@ -58,12 +58,12 @@ h1 {
                   v-model="input.cip4_degree"
                   hide-details
                   id="fosDegree"
-                  color="#007000"
+                  color="primary-green"
                   aria-required="true"
                 />
               </v-col>
               <v-col cols="1" sm="3" class="">
-                <v-btn @click="handleFormSubmit" width="100%" size="x-large" color="secondary" :disabled="disableSearch">
+                <v-btn @click="handleFormSubmit" width="100%" size="x-large" color="secondary-green" :disabled="disableSearch">
                   Search
                   <v-icon>mdi-menu-right</v-icon>
                 </v-btn>

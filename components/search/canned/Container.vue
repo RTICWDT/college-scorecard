@@ -53,7 +53,7 @@
 
       <v-col cols="12" md="12">
         <v-btn
-          color="secondary"
+          color="secondary-green"
           size="large"
           @click="$emit('canned-search-submit', query)"
         >

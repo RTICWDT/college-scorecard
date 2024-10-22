@@ -59,7 +59,7 @@
             <div class='d-flex justify-center'>
               <div style="height: 250px; width: 250px;">
                 <ChartDonut
-                  color="#1874DC"
+                  color="secondary-blue"
                   :value="socioEconomicDiversity * 100"
                   :height="200"
                   chart-id="diversity-donut"
@@ -125,7 +125,7 @@
               :value="Math.round(item.value * 100)"
               :min="0"
               :max="100"
-              color="#1874DC"
+              color="secondary-blue"
               :height="30"
               :label-font-size="18"
               :labels="true"
@@ -134,7 +134,7 @@
               :value="Math.round(item.staff_value * 100)"
               :min="0"
               :max="100"
-              color="#102E52"
+              color="primary-blue"
               :height="30"
               :label-font-size="18"
               class="mt-1 mb-4"
@@ -153,7 +153,7 @@
               :value="Math.round(item.value * 100)"
               :min="0"
               :max="100"
-              color="#1874DC"
+              color="secondary-blue"
               :height="30"
               :label-font-size="18"
               :labels="true"
@@ -162,7 +162,7 @@
               :value="Math.round(item.staff_value * 100)"
               :min="0"
               :max="100"
-              color="#102E52"
+              color="primary-blue"
               :height="30"
               :label-font-size="18"
               class="mt-1 mb-4"
@@ -209,11 +209,11 @@ const { fields } = useConstants()
 
 <style lang="scss" scoped>
 .medium-light-blue-text {
-  // color: variables.$medium-blue;
+  color: theme-color('secondary-blue');
 }
 
 .medium-blue {
-  // background-color: variables.$medium-blue;
+  background-color: theme-color('secondary-blue');
 }
 
 .key-box {
@@ -227,6 +227,5 @@ const { fields } = useConstants()
 .data-na {
   text-align: center;
   font-style: italic;
-  // color: variables.$gray-500;
 }
 </style>

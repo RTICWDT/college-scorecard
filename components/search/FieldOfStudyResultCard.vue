@@ -30,7 +30,7 @@
       <p v-if="underInvestigation === 1">
         <v-card color="error" class="px-2 py-1" variant="flat">
           <strong class="text-white">Under ED Monitoring</strong>
-          <TooltipModal definition="hcm2" color="#FFFFFF" class="ml-2" />
+          <TooltipModal definition="hcm2" color="white" class="ml-2" />
         </v-card>
       </p>
     </v-col>
@@ -50,8 +50,8 @@
           <div style="max-width: 160px; height: 30px">
             <ChartHorizontalBar
               :value="medianEarnings"
-              color="#1874DC"
-              bgcolor="#DFE6F0"
+              color="secondary-blue"
+              bgcolor="gray-200"
               :height="15"
               type="currency"
               :labels="false"
@@ -103,8 +103,8 @@
           <div style="max-width: 160px; height: 30px">
             <ChartHorizontalBar
               :value="medianDebt"
-              color="#1874DC"
-              bgcolor="#DFE6F0"
+              color="secondary-blue"
+              bgcolor="gray-200"
               :height="15"
               type="currency"
               :labels="false"

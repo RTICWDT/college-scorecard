@@ -59,7 +59,7 @@ const props = defineProps({
   small: { type: Boolean, default: false },
   text: { type: Boolean, default: false },
   fos: { type: Boolean, default: false },
-  color: { type: String, default: "secondary" },
+  color: { type: String, default: "secondary-green" },
   variant: { type: String, default: "small" },
   elevation: { type: Number, default: 1 },
   hide: { type: Array, default: () => [] },

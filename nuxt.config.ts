@@ -70,7 +70,7 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "~/assets/scss/_variables.scss" as variables;\n@use "~/assets/scss/_breakpoints.scss" as *;\n',
+          additionalData: '@use "~/assets/scss/_breakpoints.scss" as *;\n@import "@/assets/scss/_functions.scss"; @import "~/assets/scss/_variables.scss";',
           silenceDeprecations: ['legacy-js-api'],
         },
       },

@@ -14,7 +14,7 @@
             <p>Add up to 10 Schools and 10 Fields of Study to compare.</p>
             <v-btn
               class="ml-auto"
-              color="tertiary"
+              color="secondary-gray"
               size="small"
               @click="showDrawer = !showDrawer"
               icon="mdi-close"
@@ -31,14 +31,14 @@
               <v-btn
                 size="small"
                 icon="fa:fas fa-university"
-                class="bg-schoolgreen mr-2"
+                class="bg-tertiary-green mr-2"
                 :readonly="true"
               />
               <h3>Compare Schools</h3>
             </div>
 
             <div class="items-list">
-              <div v-if="maxSchoolsReached" class="pa-2 mb-5 bg-lightyellow font-weight-bold">
+              <div v-if="maxSchoolsReached" class="pa-2 mb-5 bg-tertiary-yellow font-weight-bold">
                 Maximum of 10 Schools Selected
               </div>
 
@@ -57,14 +57,14 @@
               </div>
             </div>
             <div class="flex-grow-1"></div>
-            <div class="d-flex justify-start justify-sm-center bg-white pt-3 pb-10 pb-sm-0" :class="{ 'border-b': xs }">
+            <div class="d-flex justify-start justify-sm-center bg-white pt-3 pb-10 pb-sm-0" :class="{ 'border-b': breakpoints.xs.value }">
               <NuxtLink v-if="noSchoolsSelected" to="/search" :tabindex="-1">
-                <v-btn color="primary"  :tabindex="showDrawer ? 0 : -1">
+                <v-btn color="primary-green"  :tabindex="showDrawer ? 0 : -1">
                   Search Schools
                 </v-btn>
               </NuxtLink>
               <NuxtLink v-else to="/compare?toggle=institutions" :tabindex="-1">
-                <v-btn color="primary" :tabindex="showDrawer ? 0 : -1">
+                <v-btn color="primary-green" :tabindex="showDrawer ? 0 : -1">
                   Compare {{ store.institutions.length }} School{{ oneSchoolSelected ? '' : 's' }}
                 </v-btn>
               </NuxtLink>
@@ -78,14 +78,14 @@
               <v-btn
                 size="small"
                 icon="fa:fas fa-award"
-                class="bg-yellow mr-2"
+                class="bg-primary-yellow mr-2"
                 :readonly="true"
               />
               <h3>Compare Fields of Study</h3>
             </div>
 
             <div class="items-list">
-              <v-card v-if="maxFosReached" class="pa-2 mb-5 bg-lightyellow font-weight-bold">
+              <v-card v-if="maxFosReached" class="pa-2 mb-5 bg-tertiary-yellow font-weight-bold">
                 Maximum of 10 Fields of Study selected
               </v-card>
 
@@ -110,12 +110,12 @@
             <div class="flex-grow-1"></div>
             <div class="d-flex justify-start justify-sm-center bg-white pt-3">
               <NuxtLink v-if="noFosSelected" to="/search/fos-landing" :tabindex="-1">
-                <v-btn v-if="noFosSelected" color="primary" :tabindex="showDrawer ? 0 : -1">
+                <v-btn v-if="noFosSelected" color="primary-green" :tabindex="showDrawer ? 0 : -1">
                   Search Fields of Study
                 </v-btn>
               </NuxtLink>
               <NuxtLink v-else to="/compare?toggle=fos" :tabindex="-1">
-                <v-btn color="primary" :tabindex="showDrawer ? 0 : -1">
+                <v-btn color="primary-green" :tabindex="showDrawer ? 0 : -1">
                   Compare {{ store.fos.length }} Field{{ oneFosSelected ? '': 's' }} of Study
                 </v-btn>
               </NuxtLink>
@@ -148,8 +148,8 @@
                   </div>
                   <div class="d-flex align-center mr-5">
                     <v-btn
-                      :icon="maxSchoolsReached ? 'fa:fas fa-exclamation-circle' : 'fa:fas fa-award'"
-                      :class="{ 'bg-schoolgreen': !maxSchoolsReached, 'bg-error': maxSchoolsReached }"
+                      :icon="maxSchoolsReached ? 'fa:fas fa-exclamation-circle' : 'fa:fas fa-university'"
+                      :class="{ 'bg-tertiary-green': !maxSchoolsReached, 'bg-error': maxSchoolsReached }"
                       size="x-small"
                       class="mx-2"
                       :readonly="true"
@@ -162,7 +162,7 @@
                   <div class="d-flex align-center">
                     <v-btn
                       :icon="maxFosReached ? 'fa:fas fa-exclamation-circle' : 'fa:fas fa-award'"
-                      :class="{ 'bg-yellow': !maxFosReached, 'bg-error': maxFosReached }"
+                      :class="{ 'bg-primary-yellow': !maxFosReached, 'bg-error': maxFosReached }"
                       size="x-small"
                       class="mx-2"
                       :readonly="true"
@@ -183,7 +183,7 @@
 </template>
 
 <script setup>
-const { xs } = useBreakpoints()
+const { breakpoints } = useVuetify()
 const store = useCompareStore()
 const route = useRoute()
 

@@ -18,7 +18,7 @@
                     @click="analytics.transitionOutboundLink($event)"
                   >
                     Federal Student Aid Estimator
-                    <v-icon size="x-small" color="#007000" class="pl-1">
+                    <v-icon size="x-small" color="primary-green" class="pl-1">
                       mdi-open-in-new
                     </v-icon>
                   </a>
@@ -28,7 +28,7 @@
 
               <div class="my-4">
                 <v-btn
-                  color="secondary"
+                  color="secondary-green"
                   href="https://studentaid.gov/h/apply-for-aid/fafsa"
                   target="_blank"
                   @click="analytics.transitionOutboundLink($event)"
@@ -59,7 +59,7 @@
                 @click="analytics.transitionOutboundLink($event)"
               >
                 GI Bill Benefits
-                <v-icon size="x-small" color="#7BD88C" class="pl-1">
+                <v-icon size="x-small" color="tertiary-green" class="pl-1">
                   fas fa-external-link-alt
                 </v-icon>
               </a>
@@ -93,18 +93,18 @@ const analytics = useAnalytics();
 
 <style lang="scss" scoped>
 .va-block {
-  background-color: #102E52;
-  color: #FFFFFF;
+  background-color: theme-color('primary-blue');
+  color: white;
   a {
-    color: #7BD88C;
+    color: theme-color('tertiary-green');
   }
 }
 
 .bg-gray {
-  background: variables.$bg-gray;
+  background: theme-color('gray-100');
 }
 
 .bottom-panel {
-  background-color: variables.$light-gray;
+  background-color: theme-color('gray-400');
 }
 </style>

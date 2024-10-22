@@ -13,9 +13,8 @@
 }
 
 .splash {
-  font-family: variables.$base-font-family !important;
-  background-color: variables.$bg-blue !important;
-  color: variables.$white !important;
+  background-color: theme-color('primary-aqua') !important;
+  color: white !important;
 }
 
 .bg-white {
@@ -110,7 +109,7 @@
               @submit="handleSchoolSelection"
               :initial-school="route.query.search"
               :dense="true"
-              :horizontal="!smAndDown"
+              :horizontal="!breakpoints.smAndDown.value"
             />
           </div>
 
@@ -125,7 +124,7 @@
               :initial-state="route.query.state ? route.query.state.split(',') : []"
               :initial-zip="route.query.zip"
               :initial-distance="route.query.distance"
-              :horizontal="!smAndDown"
+              :horizontal="!breakpoints.smAndDown.value"
             />
           </div>
 
@@ -136,7 +135,7 @@
               @click="showSidebar = !showSidebar"
             >
               <v-icon size="small" class="pr-1" icon="fa:fas fa-sliders-h" />
-              {{ showSidebar ? "Hide" : "Show" }} {{ smAndDown ? 'More' : '' }} Filters
+              {{ showSidebar ? "Hide" : "Show" }} {{ breakpoints.smAndDown.value ? 'More' : '' }} Filters
             </v-btn>
           </div>
         </v-card>
@@ -154,13 +153,13 @@
       :class="{
         'sidebar-open': showSidebar,
         'sidebar-closed': !showSidebar,
-        'sidebar-mobile': smAndDown,
-        'sidebar-desktop': !smAndDown
+        'sidebar-mobile': breakpoints.smAndDown.value,
+        'sidebar-desktop': !breakpoints.smAndDown.value
       }"
     >
       <div class="bg-white" v-show="showSidebar">
         <div class="pa-sm-0 pa-md-6 d-flex elevation-3">
-          <h2 v-if="!smAndDown" class="flex-grow-1">More Filters</h2>
+          <h2 v-if="!breakpoints.smAndDown.value" class="flex-grow-1">More Filters</h2>
           <a href="#"class="float-right close-filter d-none d-md-block"@click="showSidebar = !showSidebar">
             <v-icon>mdi-chevron-left</v-icon>
             Close filters
@@ -177,8 +176,8 @@
         />
         <v-btn
           type="submit"
-          :class="smAndDown ? 'mx-4 mt-4' : 'd-none'"
-          color="secondary"
+          :class="breakpoints.smAndDown.value ? 'mx-4 mt-4' : 'd-none'"
+          color="secondary-green"
           size="large"
           v-show="false"
           @click="showSidebar = !showSidebar"
@@ -194,7 +193,7 @@
       style="position: fixed; bottom: 20px; right: 20px; z-index: 900000"
       fab
       dark
-      color="primary"
+      color="primary-green"
       @click="toTop"
       icon="fa:fas fa-arrow-up"
     />
@@ -205,8 +204,8 @@
       :class="{
         'sidebar-open-main': showSidebar,
         'sidebar-closed-main': !showSidebar,
-        'sidebar-mobile-main': smAndDown,
-        'sidebar-desktop-main': !smAndDown
+        'sidebar-mobile-main': breakpoints.smAndDown.value,
+        'sidebar-desktop-main': !breakpoints.smAndDown.value
       }">
       <div fluid class="pa-0">
         <div>
@@ -216,7 +215,7 @@
               <div v-if="isLoading">
                   <h3 class="title">
                     Loading
-                    <v-icon size="z-small" color="#00365e" icon="fa:fas fa-circle-notch fa-spin" class="ml-2"/>
+                    <v-icon size="z-small" color="primary-blue" icon="fa:fas fa-circle-notch fa-spin" class="ml-2"/>
                   </h3>
               </div>
 
@@ -292,7 +291,7 @@
                       :length="totalPages"
                       @update:model-value="handlePagination"
                       :total-visible="paginatorPageCount"
-                      active-color="primary"
+                      active-color="primary-green"
                       variant="flat"
                     />
                   </div>
@@ -317,7 +316,7 @@
                     <v-alert
                       border="start"
                       color="white"
-                      border-color="primary"
+                      border-color="primary-green"
                       class="mb-0"
                     >
                       <span>
@@ -388,7 +387,7 @@
                           :length="totalPages"
                           @update:model-value="handlePagination"
                           :total-visible="paginatorPageCount"
-                          active-color="primary"
+                          active-color="primary-green"
                           variant="flat"
                         />
                       </v-col>
@@ -415,10 +414,9 @@
 <script setup>
 const route = useRoute()
 const router = useRouter()
-const { smAndDown, lgAndUp, md, xs } = useBreakpoints()
+const { breakpoints } = useVuetify()
 const { prepareParams } = usePrepareParams()
 const { apiGet } = useApi()
-const { site } = useSiteData()
 const { fields } = useConstants()
 
 definePageMeta({ 
@@ -440,7 +438,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['search-form-reset'])
-const showSidebar = ref(!smAndDown.value)
+const showSidebar = ref(!breakpoints.smAndDown.value)
 const isLoading = ref(true)
 const error = ref(null)
 const showCompare = ref(false)
@@ -481,19 +479,19 @@ watch(() => results.meta, (meta) => {
 // 
 
 const paginatorPageCount = computed(() => {
-  if (xs.value) { return 1 }
-  if (smAndDown.value) { 
+  if (breakpoints.xs.value) { return 1 }
+  if (breakpoints.smAndDown.value) { 
     return 2
   }
 
-  if (md.value) {
+  if (breakpoints.md.value) {
     if (showSidebar.value) {
       return 1
     }
     return 4
   }
 
-  if (lgAndUp.value) { return 5 }
+  if (breakpoints.lgAndUp.value) { return 5 }
   return null
 })
 

@@ -1,5 +1,6 @@
 @import "_variables.scss";
 @import "_breakpoints.scss";
+@import "_functions.scss";
 
 .v-application {
   // VUETIFY OVERRIDES
@@ -12,7 +13,7 @@
   .v-pagination {
     button {
       box-shadow: 0px 1px 1px #0000001a !important;
-      border: 1px solid $bg-gray;
+      border: 1px solid theme-color('gray-100');
       height: auto;
       padding: 1px 4px;
     }
@@ -27,18 +28,18 @@
 
   .v-card {
     overflow-wrap: normal;
-    border: 1px solid #dfe6f0;
+    border: 1px solid theme-color('gray-200');
     border-radius: 6px;
   }
 
   .v-chip__close {
-    color: $darker-green !important;
+    color: theme-color('primary-green') !important;
   }
 
 
   // GENERAL OVERRIDES
   font-family: $base-font-family !important;
-  background-color: $bg-gray !important;
+  background-color: theme-color('gray-100') !important;
 
   h1, h2, h3, h4, h5, h6 {
     font-family: $header-font-family !important;
@@ -46,11 +47,11 @@
   }
 
   body, a {
-    color: $darker-green;
+    color: theme-color('primary-green');
   }
 
   hr {
-    border: 1px solid #dfe6f0;
+    border: 1px solid theme-color('gray-200');
     border-bottom-style: none;
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -96,34 +97,34 @@
   }
   
   .navy-text {
-    color: $dark-blue;
+    color: theme-color('primary-blue');
   }
   
   .medium-light-blue-text {
-    color: $mid-light-blue;
+    color: theme-color('secondary-blue');
   }
   
   .data-na {
     padding: 0.5rem;
-    border: 1px dashed $light-gray;
-    color: $dark-gray;
+    border: 1px dashed theme-color('gray-400');
+    color: theme-color('gray-700');
     text-align: center;
     margin: 0.8rem 0;
   }
   
   .mini-data-na {
     padding: 0.5rem;
-    color: $dark-gray;
+    color: theme-color('gray-700');
     font-size: 0.85rem;
-    border: 1px dashed $light-gray;
+    border: 1px dashed theme-color('gray-400');
   }
   
   a.close-filter {
-    color: #6c737c !important;
+    color: theme-color("gray-700") !important;
     font-size:14px;
   
     &:active, &:hover {
-      color: #6c737c;
+      color: theme-color("gray-700");
     }
   }
   

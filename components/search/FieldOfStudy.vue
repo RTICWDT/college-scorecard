@@ -9,7 +9,7 @@
     filter-mode="union"
 
     prepend-inner-icon="mdi-magnify"
-    color="primaryfos"
+    color="primary-yellow"
     variant="outlined"
     min-width="220"
 
@@ -35,7 +35,7 @@
 
 <style scoped lang="scss">
 .subtitle {
-  color: variables.$mid-dark-gray;
+  color: theme-color('gray-600');
 }
 </style>
 

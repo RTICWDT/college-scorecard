@@ -19,7 +19,7 @@ const handleError = () => clearError({ redirect: '/' })
 
       <h1 class="text-h2 mb-5">{{ is404 ? 'Page Not Found' : 'Something went wrong.' }}</h1>
       <p v-if="is404" class="mb-5">Sorry, the page you are looking for no longer exists.</p>
-      <v-btn color="primary" @click="handleError">Return to Home</v-btn>
+      <v-btn color="primary-green" @click="handleError">Return to Home</v-btn>
 
     </div>
   </NuxtLayout>

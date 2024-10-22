@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-navyblue">
+  <div class="bg-primary-aqua">
     <v-container class="pt-5 pb-6">
       <v-row>
         <v-col class="pa-0 text-right d-flex align-center justify-sm-end justify-space-evenly">
           <v-btn
             size="small"
-            color="navyblue"
+            color="primary-aqua"
             id="referrer-link"
             class="link-more"
             @click="$router.back()"
@@ -35,7 +35,7 @@
             <p class="pr-3 pb-3 pb-sm-0">You are viewing a shared comparison.</p>
             <v-btn
               size="small"
-              color="secondary"
+              color="secondary-green"
               @click="updateStoreToMatchSharedComparison"
               :disabled="!sharedComparisonIsLoading"
             >
@@ -97,6 +97,7 @@
 </style>
 
 <script setup>
+const { color } = useVuetify()
 const store = useCompareStore()
 const router = useRouter()
 const route = useRoute()
@@ -139,8 +140,8 @@ const isComparingSchools = computed(() => route.query.toggle === 'institutions')
 const isComparingFieldsOfStudy = computed(() => route.query.toggle === 'fos')
 
 const compareToggleOptions = computed(() => [
-  { label: `SCHOOLS (${schoolCount.value})`, value: 'institutions', color: '#007000', activeColor: '#00700024' },
-  { label: `FIELDS OF STUDY (${fieldOfStudyCount.value})`, value: 'fos', color: '#fdb022', activeColor: '#fdb02224' },
+  { label: `SCHOOLS (${schoolCount.value})`, value: 'institutions', color: color('primary-green'), activeColor: color('primary-green', 0.1) },
+  { label: `FIELDS OF STUDY (${fieldOfStudyCount.value})`, value: 'fos', color: color('primary-yellow'), activeColor: color('primary-yellow', 0.1) },
 ])
 
 const handleCompareToggle = (value) => {

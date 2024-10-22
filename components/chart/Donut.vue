@@ -38,7 +38,7 @@ const centerTextPlugin = {
     ctx.font = '600 28px "neue-haas-grotesk-display", Helvetica, arial, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillStyle = '#00365e';
+    ctx.fillStyle = color('primary-blue');
 
     // Access the value from the first dataset
     const value = chart.data.datasets[0].data[0];
@@ -66,12 +66,13 @@ const options = ref({
   },
 })
 
+const { color } = useVuetify()
 const chartData = computed(() => ({
   labels: ['value', ''],
   datasets: [
     {
-      backgroundColor: [props.color, '#eaeaea'],
-      hoverBackgroundColor: [props.color, '#eaeaea'],
+      backgroundColor: [props.color, color('gray-100')],
+      hoverBackgroundColor: [props.color, color('gray-100')],
       data: [props.value, 100 - props.value],
       borderWidth: 0,
       borderColor: 'white',
@@ -86,9 +87,3 @@ const chartData = computed(() => ({
   ]
 }))
 </script>
-
-<style lang="scss" scoped>
-.v-card {
-  // background-color: variables.$card-background-color;
-}
-</style>

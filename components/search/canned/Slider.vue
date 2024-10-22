@@ -3,7 +3,7 @@
     :label="label"
     inset
     base-color="#c1c1c1"
-    color="#007000"
+    color="primary-green"
     @update:model-value="handleChange"
     hide-details
     :loading="isLoading"

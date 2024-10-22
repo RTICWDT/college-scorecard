@@ -106,7 +106,7 @@ nav {
     </a>
   </div>
 
-  <div class="d-flex px-3 py-4 position-fixed w-100" style="background-color: #102E52; align-items: center; justify-content: space-between; height: 100px; z-index: 800;">
+  <div class="d-flex px-3 py-4 position-fixed w-100 bg-primary-blue" style="align-items: center; justify-content: space-between; height: 100px; z-index: 800;">
     <div>
       <NuxtLink :to="'/'">
         <div class="logo">
@@ -146,7 +146,7 @@ nav {
     </div>
 
     <!-- Mobile Nav Bar -->
-    <div v-if="!mdAndUp">
+    <div v-if="!breakpoints.mdAndUp.value">
       <div class="d-md-none">
         <v-btn icon class="float-right" @click="drawer = !drawer" aria-label="Menu"
           style="color: white; background-color: transparent;">
@@ -290,7 +290,7 @@ const route = useRoute();
 const activeLink = ref(route.path)
 const drawer = ref()
 const analytics = useAnalytics()
-const { mdAndUp } = useBreakpoints()
+const { breakpoints } = useVuetify()
 
 const mobileNavClick = (link) => {
   analytics.trackNavigation(link)

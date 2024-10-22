@@ -16,7 +16,7 @@
             <v-col class="text-right d-flex">
               <Share
                 :url="shareLink"
-                :label="smAndDown ? 'Share' : 'Share these Fields of Study'"
+                :label="breakpoints.smAndDown.value ? 'Share' : 'Share these Fields of Study'"
                 small
                 variant="text"
                 color="black"
@@ -67,7 +67,7 @@
                         <strong>Under ED Monitoring</strong>
                         <TooltipModal
                           definition="hcm2"
-                          color="#FFFFFF"
+                          color="white"
                           class="ml-2"
                           :isBranch="isBranch"
                         />
@@ -100,7 +100,7 @@
                       item-title="title"
                       item-value="value"
                       label="Search Degree Type"
-                      color="primary"
+                      color="primary-green"
                       clearable
                       hide-details="auto"
                     />
@@ -116,7 +116,7 @@
     <v-container class="my-10">
       <div v-if="!school.id" class="show-loading">
         <h1 class="text-h6 text-center my-15">
-          <v-icon color="#00365e">fas fa-circle-notch fa-spin</v-icon>
+          <v-icon color="primary-blue">fas fa-circle-notch fa-spin</v-icon>
           Loading
         </h1>
       </div>
@@ -124,10 +124,10 @@
       <v-row v-else>
         <v-col>
           <v-alert
-            v-if="currentFilter === 4"
+            v-if="true || currentFilter === 4"
             border="start"
             density="compact"
-            color="#D16E00"
+            color="yellow-600"
             elevation="2"
             class="mb-4"
           >
@@ -141,7 +141,7 @@
             v-if="currentFilter === 8"
             border="start"
             density="compact"
-            color="#D16E00"
+            color="yellow-600"
             elevation="2"
             class="mb-4"
           >
@@ -211,12 +211,12 @@
 
 <style lang="scss" scoped>
 .school-heading {
-  background-color: variables.$bg-blue;
+  background-color: theme-color('primary-aqua');
 }
 .v-expansion-panel-title--active {
-  background-color: variables.$bg-yellow;
+  background-color: theme-color('yellow-500');
   & + .v-expansion-panel-text {
-    background-color: variables.$bg-yellow;
+    background-color: theme-color('yellow-500');
     .v-expansion-panel-title--active {
       background-color: white;
       & + .v-expansion-panel-text {
@@ -230,7 +230,7 @@
 <script setup>
 const { formatFieldOfStudyTitle } = useFilters()
 const { toNumber } = useNumberFormatter()
-const { smAndDown } = useBreakpoints()
+const { breakpoints } = useVuetify()
 
 const route = useRoute()
 const router = useRouter()

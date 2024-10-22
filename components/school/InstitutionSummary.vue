@@ -3,8 +3,8 @@
     <Toggle
       v-model="medianToggle"
       :options="[
-        { label: 'Midpoint for School Type', value: 'group', color: '#007000', activeColor: 'transparent' },
-        { label: 'Midpoint for All Schools', value: 'all', color: '#007000', activeColor: '#transparent' },
+        { label: 'Midpoint for School Type', value: 'group', color: color('primary-green'), activeColor: 'transparent' },
+        { label: 'Midpoint for All Schools', value: 'all', color: color('primary-green'), activeColor: '#transparent' },
       ]"
       backgroundColor="white"
       borderThickness="5px"
@@ -97,7 +97,6 @@
                     : toggleGraduationRate[1] * 100,
                 style: { height: '60px' },
               }"
-              color="#1570EF"
               :height="500"
               :y-bar-thickness="50"
               :label-font-size="16"
@@ -201,7 +200,6 @@
               :rangeChartStyle="{
                 height: '35px',
               }"
-              color="#00365e"
               :height="500"
               :y-bar-thickness="50"
               :label-font-size="24"
@@ -296,7 +294,6 @@
               :upperTipStyleOverride="{
                 display: 'none',
               }"
-              color="#00365e"
               :height="500"
               :y-bar-thickness="50"
               :label-font-size="24"
@@ -315,6 +312,7 @@
 <script setup>
 const { toPercent, toDollar } = useNumberFormatter()
 const { yearsText } = useFilters()
+const { color } = useVuetify()
 
 const props = defineProps({
   school: {

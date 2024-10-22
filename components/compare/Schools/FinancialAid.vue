@@ -7,7 +7,7 @@
     v-model="aidLoanSelect"
     aria-labelledby="loan-type-label"
     variant="outlined"
-    color="secondary"
+    color="secondary-green"
   />
 
   <div v-if="isFedLoan">
@@ -166,7 +166,7 @@
       v-model="repaymentRateSelect"
       item-text="label"
       item-value="value"
-      color="secondary"
+      color="secondary-green"
       variant="outlined"
     />
 

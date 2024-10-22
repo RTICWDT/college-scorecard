@@ -1634,7 +1634,7 @@
               )
               " href="http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls"
               target="_blank">http://www2.ed.gov/about/offices/list/ope/idues/em2016.xls<v-icon x-small
-                class="pl-1" color="#007000">
+                class="pl-1" color="primary-green">
                 mdi-open-in-new
               </v-icon></a>. For the purpose of the indicators included in Scorecard,
             some of these programs were combined (and others were not

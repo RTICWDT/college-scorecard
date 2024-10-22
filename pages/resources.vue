@@ -89,7 +89,7 @@
 }
 
 .bg-gray {
-  background: variables.$bg-gray !important;
+  background: theme-color('gray-100') !important;
 }
 
 .text-black {
@@ -105,7 +105,7 @@
 }
 
 .content-box {
-  border: 1px solid #dfe6f0;
+  border: 1px solid theme-color('gray-200');
   border-radius: 10px;
   background-color: white;
   padding: 2rem;
@@ -125,11 +125,11 @@
   font-weight: 100;
 
   &.tag-green {
-    color: #027a48;
+    color: theme-color('primary-green');
   }
 
   &.tag-blue {
-    color: #1570ef;
+    color: theme-color('secondary-blue');
   }
 }
 
@@ -225,7 +225,7 @@
             <v-btn
               id="firstFocus"
               class="d-block d-md-none"
-              color="#027A48"
+              color="primary-green"
               variant="outlined"
               @click="scrollToAnchor('educators-anchor')"
             >
@@ -250,7 +250,7 @@
             </p>
             <v-btn
               class="d-block d-md-none"
-              color="#027A48"
+              color="primary-green"
               variant="outlined"
               @click="scrollToAnchor('advisors-anchor')"
             >
@@ -269,7 +269,7 @@
         <v-row class="d-none d-md-flex">
           <v-col cols="12" md="5">
             <v-btn
-              color="#027A48"
+              color="primary-green"
               variant="outlined"
               @click="scrollToAnchor('educators-anchor')"
             >
@@ -285,7 +285,7 @@
           <v-col cols="0" md="1" />
           <v-col cols="12" md="5">
             <v-btn
-              color="#027A48"
+              color="primary-green"
               variant="outlined"
               @click="scrollToAnchor('advisors-anchor')"
             >
@@ -336,7 +336,7 @@
                 <p class="mb-1">Get the materials (.zip, 3.6 MB)</p>
                 <v-btn
                   class="mw-270"
-                  color="secondary"
+                  color="secondary-green"
                   href="https://ed-public-download.scorecard.network/resources/College_Scorecard_Student_Toolkit.zip"
                   target="_blank"
                   @click="analytics.transitionOutboundLink($event)"
@@ -604,7 +604,7 @@
                   </p>
                   <v-btn
                     class="mw-270"
-                    color="secondary"
+                    color="secondary-green"
                     href="https://ed-public-download.scorecard.network/resources/College_Scorecard_Counselor_and_Advisor_Toolkit.zip"
                     target="_blank"
                     @click="analytics.transitionOutboundLink($event)"

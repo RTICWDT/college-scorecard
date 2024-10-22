@@ -14,7 +14,7 @@
           <v-checkbox
             v-model="showPellOnlyGrad"
             label="Show Pell Grant Recipients Only"
-            color="secondary"
+            color="secondary-green"
             class="mt-0"
           >
             <template #label>
@@ -30,8 +30,8 @@
                 <Toggle
                   v-model="medianToggle"
                   :options="[
-                    { label: `${yearsText(school)} Schools`, value: 'group', color: '#007000', activeColor: 'transparent' },
-                    { label: 'All Schools', value: 'all', color: '#007000', activeColor: '#transparent' },
+                    { label: `${yearsText(school)} Schools`, value: 'group', color: color('primary-green'), activeColor: 'transparent' },
+                    { label: 'All Schools', value: 'all', color: color('primary-green'), activeColor: '#transparent' },
                   ]"
                   backgroundColor="white"
                   borderThickness="5px"
@@ -77,7 +77,6 @@
               style: { height: '60px' },
               show: !showPellOnlyGrad,
             }"
-            color="#00365e"
             :height="500"
             :y-bar-thickness="50"
             :label-font-size="24"
@@ -98,7 +97,7 @@
           <div v-if="retentionRate" class="d-flex align-center justify-center">
             <div style="height: 185px; width: 185px">
               <ChartDonut
-                color="#1874DC"
+                color="secondary-blue"
                 :value="Math.round(parseFloat(retentionRate) * 100)"
                 label="Retention Rate"
               />
@@ -125,7 +124,7 @@
               <v-checkbox
                 v-model="showPellOnlyOutcomes"
                 label="Show Pell Grant Recipients Only"
-                color="secondary"
+                color="secondary-green"
                 class="mt-0 pt-0"
               >
                 <template #label>
@@ -155,6 +154,7 @@
 <script setup>
 const { toPercent } = useNumberFormatter()
 const { yearsText } = useFilters()
+const { color } = useVuetify()
 
 const props = defineProps({
   school: {
@@ -200,11 +200,3 @@ const handleMedianToggle = (toggleValue) => {
   medianToggle.value = toggleValue === 0 ? "group" : "all"
 }
 </script>
-
-<style lang="scss" scoped>
-.data-na {
-  // color: variables.$data-na-color;
-}
-
-// Add any other necessary styles here
-</style>

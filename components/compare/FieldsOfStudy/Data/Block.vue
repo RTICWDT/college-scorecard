@@ -5,7 +5,7 @@
       <div 
         v-for="fos in fieldsOfStudy" 
         class="pl-5 ml-2 result-card" 
-        :class="{ 'bg-warning': store.highlightedFos === fos }" 
+        :class="{ 'bg-yellow-600': store.highlightedFos === fos }" 
         @click="(event) => toggleHighlight(event, fos)"
       >
         <NuxtLink class="font-weight-bold text-body-2" :to="fosSchoolLink(fos)">

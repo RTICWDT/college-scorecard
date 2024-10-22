@@ -9,7 +9,7 @@
       <div class="text-center mt-8">
         <NuxtLink to="/search/fos-landing">
           <v-btn
-            color="secondary"
+            color="secondary-green"
             size="large"
           >
             Search Fields of Study

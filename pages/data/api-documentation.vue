@@ -79,7 +79,7 @@
           First, please complete the security challenge below.
         </p>
 
-        <div v-if="mdAndUp">
+        <div v-if="breakpoints.mdAndUp.value">
           <RecaptchaCheckbox ref="recaptchaRef" size="normal" />
         </div>
         <div v-else>
@@ -249,7 +249,7 @@
         records that only contain those three fields.
       </p>
 
-      <v-btn @click="analytics.trackDownload('CollegeScorecardDataDictionary.xlsx')" size="large" color="secondary" href="/files/CollegeScorecardDataDictionary.xlsx" class="button data-home-button mb-4">Download the Data
+      <v-btn @click="analytics.trackDownload('CollegeScorecardDataDictionary.xlsx')" size="large" color="secondary-green" href="/files/CollegeScorecardDataDictionary.xlsx" class="button data-home-button mb-4">Download the Data
         Dictionary (.xlsx, 703 KB)
         <v-icon size="x-small" class="pl-1 ml-2" color="white">
           fas fa-download
@@ -435,7 +435,7 @@
 
 <style scoped lang="scss">
 pre {
-  background-color: variables.$lighter-gray;
+  background-color: theme-color('gray-50');
   padding: 1rem;
   border-radius: 0.5rem;
   overflow-x: scroll;
@@ -445,7 +445,7 @@ pre {
 
 code {
   word-wrap: break-all;
-  background-color: variables.$lighter-gray;
+  background-color: theme-color('gray-50');
   font-size: 0.8rem;
 }
 
@@ -478,7 +478,7 @@ const config = useRuntimeConfig()
 const formSubmitted = ref(false)
 const recaptchaRef = ref(null)
 const isVerified = ref(false)
-const { mdAndUp } = useBreakpoints()
+const { breakpoints } = useVuetify()
 
 onMounted(() => {
   recaptchaRef.value.setOnSuccess((token) => {

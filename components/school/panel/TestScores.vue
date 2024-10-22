@@ -93,7 +93,7 @@
         >
           <div class="d-flex justify-center">
             <ChartDonut
-              color="#1874DC"
+              color="secondary-blue"
               :value="acceptanceRateActual * 100"
               label="Acceptance Rate"
               size="108px"
@@ -107,7 +107,7 @@
         <div v-else-if="openAdmissions == 1">
           <div class="d-flex justify-center">
             <ChartDonut
-              color="#1874DC"
+              color="secondary-blue"
               :value="100"
               label="Acceptance Rate"
               size="108px"
@@ -154,9 +154,3 @@ const act = computed(() => actMethod(props.school))
 const openAdmissions = computed(() => openAdmissionsMethod(props.school))
 const acceptanceRateActual = computed(() => acceptanceRateActualMethod(props.school))
 </script>
-
-<style lang="scss" scoped>
-.data-na {
-  // color: variables.$gray-500;
-}
-</style>

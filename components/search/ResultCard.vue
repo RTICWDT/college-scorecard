@@ -8,7 +8,7 @@
       <p class="mt-1 mb-2" v-if="underInvestigation == 1">
         <v-card color="error" class="px-2 py-1" flat>
           <strong class="white--text">Under ED Monitoring</strong>
-          <TooltipModal definition="hcm2" color="#FFFFFF" class="ml-2" />
+          <TooltipModal definition="hcm2" color="white" class="ml-2" />
         </v-card>
       </p>
 
@@ -194,7 +194,7 @@ const isSelected = computed(() => store.institutions.find(({ id }) => id == prop
 }
 
 .search-result-card {
-  border: 4px solid #ffffff !important;
+  border: 4px solid white !important;
   width: 100%;
   position: relative;
   padding-bottom: 60px;
@@ -216,7 +216,7 @@ const isSelected = computed(() => store.institutions.find(({ id }) => id == prop
     border-color: #D8DFE8 !important;
     color: black !important;
     &:hover {
-      background: variables.$primary-green;
+      background: theme-color('secondary-green');
       color: #fff !important;
     }
   }
@@ -238,6 +238,6 @@ const isSelected = computed(() => store.institutions.find(({ id }) => id == prop
 .search-result-label {
   font-size: 13px;
   text-transform: uppercase;
-  color: variables.$black;
+  color: black;
 }
 </style>

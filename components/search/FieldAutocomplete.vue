@@ -12,7 +12,7 @@
     @update:modelValue="change"
     hide-details
     class="pt-0 mt-0"
-    color="secondary"
+    color="secondary-green"
     clearable
     @click:clear="clear"
     aria-labelledby="fields-label"

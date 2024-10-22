@@ -4,8 +4,8 @@
     <Toggle
       v-model="medianToggle"
       :options="[
-        { label: 'Midpoint for School Type', value: 'group', color: '#007000', activeColor: 'transparent' },
-        { label: 'Midpoint for All Schools', value: 'all', color: '#007000', activeColor: '#transparent' },
+        { label: 'Midpoint for School Type', value: 'group', color: color('primary-green'), activeColor: 'transparent' },
+        { label: 'Midpoint for All Schools', value: 'all', color: color('primary-green'), activeColor: '#transparent' },
       ]"
       backgroundColor="white"
       borderThickness="5px"
@@ -23,7 +23,7 @@
   <v-checkbox
     v-model="showPellOnly"
     label="Show Pell Grant Recipients Only"
-    color="secondary"
+    color="secondary-green"
   >
     <template v-slot:label>
         Show Pell Grant Recipients Only
@@ -97,7 +97,7 @@
   <v-checkbox
     v-model="showPellOnlyOutcomes"
     label="Show Pell Grant Recipients Only"
-    color="secondary"
+    color="secondary-green"
   >
     <template v-slot:label>
         Show Pell Grant Recipients Only
@@ -118,6 +118,7 @@ const props = defineProps({ institutions: Object });
 const { toPercent } = useNumberFormatter()
 const medianToggle = ref('group')
 const showMedian = computed(() => !showPellOnly.value)
+const { color } = useVuetify()
 
 const {
   completionRate,

@@ -1,10 +1,10 @@
 <template>
-  <v-container fluid class="bg-white w-100 py-0 px-0 position-fixed" style="z-index: 900;" aria-label="Official government website">
+  <v-container fluid class="bg-gray-100 w-100 py-0 px-0 position-fixed" style="z-index: 900;" aria-label="Official government website">
     <div class="d-flex align-items-center px-3">
       <LayoutUsaFlag class="mx-2"/>
       <p class="mb-0 py-1" style="font-size: .75rem">
         <span> 
-          {{ xs ? 'An official website of the US government' : 'An official website of the United States government'}}
+          {{ breakpoints.xs.value ? 'An official website of the US government' : 'An official website of the United States government'}}
           <button tabindex="2" @click="toggleInfo" alt="Here's how you know" aria-required="true">
             <span style="color: #0071bb; text-decoration: underline;">
               <span class="hide-mobile pr-1">Here's how you know</span><i class="fas reveal-caret" :class="showInfo ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
@@ -16,7 +16,7 @@
 
     <v-container fluid class="w-100 position-relative py-0 px-0" style="z-index: 1000;" v-show="showInfo">
       <div class="pt-4 pb-3 w-100 position-absolute" style="left: 12px; top:-4px;">
-        <v-row class="bg-white w-100 pb-3">
+        <v-row class="bg-gray-100 w-100 pb-3">
           <v-col md="6" sm="12">
             <div class="d-flex">
               <div class="mr-3 mt-3 min-w-50">
@@ -47,7 +47,7 @@
 
 <script setup>
 const showInfo = ref(false)
-const { xs } = useBreakpoints()
+const { breakpoints } = useVuetify()
 
 const toggleInfo = () => {
   showInfo.value = !showInfo.value
@@ -55,7 +55,6 @@ const toggleInfo = () => {
 </script>
 
 <style scoped>
-.bg-white { background-color: #eff1f5; }
 .align-items-center { align-items: center; }
 .justify-space-between { justify-content: space-between; }
 .w-100 { width: 100%; }

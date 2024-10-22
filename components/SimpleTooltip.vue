@@ -1,6 +1,6 @@
 <template>
   <span>
-    <v-tooltip :text="text" location="top" max-width="600" theme="primary">
+    <v-tooltip :text="text" location="top" max-width="600" theme="primary-green">
       <template v-slot:activator="{ props }">
         <v-icon
           v-bind="props"

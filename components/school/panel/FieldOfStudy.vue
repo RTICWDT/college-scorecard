@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-lightyellow field-of-study-search">
+  <div class="bg-tertiary-yellow field-of-study-search">
     <Spacer :height="15" />
     <div class="mb-4 mx-n11">
       <SchoolPanelFieldOfStudySelect
@@ -174,13 +174,13 @@
           </p>
           <p class="text-left my-8">
             <v-btn
-              color="secondary"
+              color="secondary-green"
               :href="fieldsLink"
             >
               See All Available Fields of Study
             </v-btn>
           </p>
-          <div class="pa-4 rounded bg-warning mt-4 mb-8">
+          <div class="pa-4 rounded bg-yellow-800 mt-4 mb-8">
             <strong>Note: </strong>These data were collected
             from undergraduate students who received federal
             financial aid.

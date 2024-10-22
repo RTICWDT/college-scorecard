@@ -202,7 +202,7 @@ onMounted(() => {
   $bar-width: 100px;
   $arrow-size: 7px;
 
-  background-color: variables.$bg-bar-chart;
+  background-color: theme-color('gray-200');
   display: block;
   height: 320px;
   margin-bottom: 0;
@@ -211,7 +211,7 @@ onMounted(() => {
   position: relative;
 
   .picc-range-bar {
-    background-color: variables.$mid-light-blue;
+    background-color: theme-color('secondary-blue');
     width: 100%;
     left: 0;
     position: absolute;

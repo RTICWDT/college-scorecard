@@ -21,7 +21,6 @@
               value: 1000,
               style: { height: '60px' },
             }"
-            color="#00365e"
             :y-bar-thickness="50"
             :label-font-size="24"
             :labels="true"

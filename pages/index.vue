@@ -5,15 +5,9 @@
       <v-container class="mb-n10 pt-sm-10 pt-5">
         <v-row>
           <!-- Header Info -->
-          <v-col cols="12" class="px-6 px-sm-3">
-            <h1 style="color: white">
-              Find the right fit
-            </h1>
-
-            <p style="color: white">
-              Search and compare colleges: their fields of study, costs,
-              admissions, results, and more.
-            </p>
+          <v-col cols="12" class="px-6 px-sm-3 text-white">
+            <h1>Find the right fit</h1>
+            <p>Search and compare colleges: their fields of study, costs, admissions, results, and more.</p>
           </v-col>
         </v-row>
 
@@ -73,13 +67,13 @@
                         v-model="input.cip4_degree"
                         hide-details
                         id="fosDegree"
-                        color="#007000"
+                        color="primary-green"
                         aria-required="true"
                       />
                     </v-col>
 
                     <v-col cols="1" sm="3" class="">
-                      <v-btn @click="handleFormSubmit" width="100%" size="x-large" color="secondary" :disabled="disableSearch">
+                      <v-btn @click="handleFormSubmit" width="100%" size="x-large" color="secondary-green" :disabled="disableSearch">
                         Search
                         <v-icon>mdi-menu-right</v-icon>
                       </v-btn>
@@ -114,7 +108,7 @@
                     <SearchSchoolAutocomplete
                       @school-name-selected="handleSchoolNameSelected"
                       :searchEmptyName="false"
-                      v-if="smAndDown"
+                      v-if="breakpoints.smAndDown.value"
                     />
                   </v-expansion-panel-text>
                 </v-expansion-panel>
@@ -156,7 +150,7 @@
                           @click="handleFormSubmit"
                           width="100%"
                           size="x-large"
-                          color="secondary"
+                          color="secondary-green"
                           :disabled="disableSearch"
                         >
                           Search
@@ -207,7 +201,7 @@
                   @click="analytics.transitionOutboundLink($event)"
                 >
                   apprenticeship.gov
-                  <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
+                  <v-icon size="x-small" color="primary-green">mdi-open-in-new</v-icon>
                 </a>
               </p>
               <hr />
@@ -220,7 +214,7 @@
                   @click="analytics.transitionOutboundLink($event)"
                 >
                   MyNextMove.org
-                  <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
+                  <v-icon size="x-small" color="primary-green">mdi-open-in-new</v-icon>
                 </a>
                 tool for career exploration and job analysis.
               </p>
@@ -231,7 +225,7 @@
                 <a class="homeCallout-indent" href="https://trainingproviderresults.gov" target="_blank"
                   @click="analytics.transitionOutboundLink($event)">
                   TrainingProviderResults.gov
-                  <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
+                  <v-icon size="x-small" color="primary-green">mdi-open-in-new</v-icon>
                 </a>.
               </p>
               <hr />
@@ -240,7 +234,7 @@
                 <a class="homeCallout-indent" href="https://careeronestop.org" target="_blank"
                   @click="analytics.transitionOutboundLink($event)">
                   CareerOneStop.org
-                  <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
+                  <v-icon size="x-small" color="primary-green">mdi-open-in-new</v-icon>
                 </a>, your source for career exploration training and jobs.
               </p>
               <hr />
@@ -249,7 +243,7 @@
                 <a class="homeCallout-indent" href="https://www.bls.gov/ooh/" target="_blank"
                   @click="analytics.transitionOutboundLink($event)">
                   Occupational Outlook Handbook (OOH)
-                  <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
+                  <v-icon size="x-small" color="primary-green">mdi-open-in-new</v-icon>
                 </a>
                 for detailed information about over 300 occupational profiles.
               </p>
@@ -272,7 +266,7 @@
 
                 <a href="https://studentaid.gov" target="_blank" @click="analytics.transitionOutboundLink($event)">
                   StudentAid.gov 
-                  <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
+                  <v-icon size="x-small" color="primary-green">mdi-open-in-new</v-icon>
                 </a>
               </p>
 
@@ -283,7 +277,7 @@
 
                 <a href="https://studentaid.gov/aid-estimator/" target="_blank" @click="analytics.transitionOutboundLink($)">
                   Federal Student Aid aid-estimator
-                  <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
+                  <v-icon size="x-small" color="primary-green">mdi-open-in-new</v-icon>
                 </a>
 
                 to see how much aid may be available to you.
@@ -291,14 +285,14 @@
 
               <p class="my-10">
                 <v-btn 
-                  color="secondary" 
+                  color="secondary-green" 
                   href="https://studentaid.gov/h/apply-for-aid/fafsa" 
                   target="_blank" 
                   size="large"
                   @click="analytics.transitionOutboundLink($event)"
                 >
                   Start Your FAFSA&reg; Application
-                  <v-icon size="normal" class="ml-1" color="#ffffff">mdi-open-in-new</v-icon>
+                  <v-icon size="normal" class="ml-1" color="white">mdi-open-in-new</v-icon>
                 </v-btn>
               </p>
 
@@ -311,7 +305,7 @@
                 <a href="https://www.vets.gov/gi-bill-comparison-tool" target="_blank"
                   @click="analytics.transitionOutboundLink($event)">
                   GI Bill&reg; comparison tool
-                  <v-icon size="x-small" color="#007000">mdi-open-in-new</v-icon>
+                  <v-icon size="x-small" color="primary-green">mdi-open-in-new</v-icon>
                 </a>
 
                 to learn about education programs and compare benefits by
@@ -333,7 +327,7 @@
   }
 
   .v-tab {
-    font-family: variables.$header-font-family;
+    font-family: $header-font-family;
     font-size: 1rem;
     color: white;
     letter-spacing: normal;
@@ -375,12 +369,11 @@ h2 span {
 }
 
 .home-splash {
-  font-family: variables.$base-font-family !important;
-  background-color: variables.$bg-blue !important;
+  background-color: theme-color('primary-aqua') !important;
 }
 
 .home-links {
-  background-color: variables.$bg-gray;
+  background-color: theme-color('gray-100');
 }
 
 .home-search-wrapper {
@@ -395,13 +388,14 @@ fieldset {
 <script setup>
 const { formMappings } = useConstants()
 const analytics = useAnalytics()
-const { smAndDown } = useBreakpoints()
+const { breakpoints } = useVuetify()
 const router = useRouter()
+const { color } = useVuetify()
 
 const mobilePanels = ref(0)
 const desktopTabs = ref(0)
 const toggleCustomSearch = ref(false)
-const sliderColor = ref("#7BD88C")
+const sliderColor = ref(color('tertiary-green'))
 // const input = ref({
 //   cip4: null,
 //   cip4_degree: null,
@@ -415,13 +409,13 @@ const sliderColor = ref("#7BD88C")
 const colorSlider = (num) => {
   switch (num) {
     case 0:
-      sliderColor.value = "#7BD88C"
+      sliderColor.value = "tertiary-green"
       break
     case 1:
-      sliderColor.value = "#FDB022"
+      sliderColor.value = "primary-yellow"
       break
     default:
-      sliderColor.value = "#FFFFFF88"
+      sliderColor.value = "gray-200"
       break
   }
 }

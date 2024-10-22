@@ -109,7 +109,6 @@ a {
 <script setup>
 const route = useRoute()
 const activeLink = ref(null)
-const { smAndDown } = useBreakpoints()
 
 const version = ref('3.0.3') // TODO: implement a way to get the version
 

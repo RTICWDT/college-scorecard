@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
 .search-subhead {
-  color: variables.$darker-gray;
+  color: theme-color('gray-700');
 }
 
 .v-expansion-panel {
@@ -8,7 +8,11 @@
 }
 
 .v-expansion-panel:not(:last-child) {
-  border-bottom: 1px solid variables.$light-gray;
+  border-bottom: 1px solid theme-color('gray-100');
+}
+
+.v-expansion-panel__shadow {
+  box-shadow: none;
 }
 
 :deep(.v-input.option-checkbox) {
@@ -242,7 +246,7 @@
             v-model="input.size"
             label="Small"
             value="small"
-            color="secondary"
+            color="secondary-green"
             class="py-0 my-0"
             @keydown.enter.prevent
           />
@@ -253,7 +257,7 @@
             v-model="input.size"
             label="Medium"
             value="medium"
-            color="secondary"
+            color="secondary-green"
             class="py-0 my-0"
             @keydown.enter.prevent
           />
@@ -264,7 +268,7 @@
             v-model="input.size"
             label="Large"
             value="large"
-            color="secondary"
+            color="secondary-green"
             class="py-0 my-0"
             @keydown.enter.prevent
           />
@@ -283,7 +287,7 @@
               v-model="input.control"
               label="Public"
               value="public"
-              color="secondary"
+              color="secondary-green"
               class="py-0 my-0"
               @keydown.enter.prevent
             />
@@ -294,7 +298,7 @@
               v-model="input.control"
               label="Private Nonprofit"
               value="private"
-              color="secondary"
+              color="secondary-green"
               class="py-0 my-0"
               @keydown.enter.prevent
             />
@@ -305,7 +309,7 @@
               v-model="input.control"
               label="Private For-Profit"
               value="profit"
-              color="secondary"
+              color="secondary-green"
               class="py-0 my-0"
               @keydown.enter.prevent
             />
@@ -324,7 +328,7 @@
             v-model="input.locale"
             label="City"
             value="city"
-            color="secondary"
+            color="secondary-green"
             class="py-0 my-0"
             @keydown.enter.prevent
           />
@@ -335,7 +339,7 @@
             v-model="input.locale"
             label="Suburban"
             value="suburban"
-            color="secondary"
+            color="secondary-green"
             class="py-0 my-0"
             @keydown.enter.prevent
           />
@@ -346,7 +350,7 @@
             v-model="input.locale"
             label="Town"
             value="town"
-            color="secondary"
+            color="secondary-green"
             class="py-0 my-0"
             @keydown.enter.prevent
           />
@@ -357,7 +361,7 @@
             v-model="input.locale"
             label="Rural"
             value="rural"
-            color="secondary"
+            color="secondary-green"
             class="py-0 my-0"
             @keydown.enter.prevent
           />
@@ -376,7 +380,7 @@
             item-value="value"
             label="Select one"
             class="py-0 pt-4 my-0"
-            color="secondary"
+            color="secondary-green"
             clearable
             density="compact"
             aria-labelledby="specialized-mission-label"
@@ -398,7 +402,7 @@
             item-value="value"
             label="Select one"
             class="py-0 pt-4 my-0"
-            color="secondary"
+            color="secondary-green"
             clearable
             aria-labelledby="religions-affiliation-label"
             variant="outlined"
@@ -420,7 +424,7 @@
             v-model="input.dolflag"
             label="Only show schools that have Department of Labor WIOA programs"
             value="true"
-            color="secondary"
+            color="secondary-green"
             hide-details
             @keydown.enter.prevent
           /> 
@@ -429,12 +433,12 @@
     </v-expansion-panels>
 
     <div id="search-submit-container" class="py-5" v-show="submittable">
-      <v-btn color="secondary" size="large" @click="onSubmit">
+      <v-btn color="secondary-green" size="large" @click="onSubmit">
         Find Schools
       </v-btn>
     </div>
 
-    <v-btn type="submit" class="sr-only" color="secondary" size="large" @click="onSubmit">
+    <v-btn type="submit" class="sr-only" color="secondary-green" size="large" @click="onSubmit">
       Find Schools
     </v-btn>
   </v-form>

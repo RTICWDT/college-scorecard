@@ -11,7 +11,7 @@
       item-title="school.name"
       autocomplete="off"
       hide-details
-      color="primary"
+      color="primary-green"
       variant="outlined"
       prepend-inner-icon="fa:fas fa-search"
       hide-no-data
@@ -36,12 +36,6 @@
     </v-combobox>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.v-application .institution-search-color--text {
-  color: variables.$darker-green !important;
-}
-</style>
 
 <script setup>
 const { prepareParams } = usePrepareParams()
@@ -103,7 +97,7 @@ const runSearch = useDebounce((newVal) => {
 const performSearch = async (newVal) => {
   if (!newVal) return;
 
-  isLoading.value = '#77b713';
+  isLoading.value = true;
   const query = {
     fields: [fields.ID, fields.NAME, fields.ALIAS, fields.SEARCH].join(","),
     per_page: 20,

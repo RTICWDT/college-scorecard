@@ -158,7 +158,7 @@ const sizeIcon = computed(() => {
     vertical-align: top;
     width: 55px;
     font-size: v-bind(fontSize) + 'rem';
-    color: variables.$black;
+    color: black;
     text-align: center;
 
     img {

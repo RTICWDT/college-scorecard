@@ -35,8 +35,8 @@
         hide-details
         class="align-center"
         track-color="grey-darken-1"
-        color="#fdb022"
-        thumb-color="#fdb022"
+        color="primary-yellow"
+        thumb-color="primary-yellow"
         thumb-label
       >
         <template #prepend>
@@ -94,8 +94,8 @@
         hide-details
         class="align-center"
         track-color="grey-darken-1"
-        color="#fdb022"
-        thumb-color="#fdb022"
+        color="primary-yellow"
+        thumb-color="primary-yellow"
         thumb-label
       >
         <template #prepend>
@@ -141,7 +141,7 @@
       <v-checkbox
         v-model="input.dolflag"
         label="Only show schools that have Department of Labor WIOA programs"
-        color="secondary"
+        color="secondary-green"
         hide-details
       ></v-checkbox>
     </div>
@@ -149,7 +149,7 @@
     <v-btn
       type="submit"
       class="sr-only"
-      color="secondary"
+      color="secondary-green"
       size="large"
     >
       Find Schools
