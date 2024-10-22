@@ -70,13 +70,13 @@ const tabID = (context, controlTab) => {
 }
 
 .light {
-  background: theme-color('secondary-blue');
-  border: 0.1875em solid theme-color('secondary-blue');
+  background: use-theme('secondary-blue');
+  border: 0.1875em solid use-theme('secondary-blue');
 }
 
 .dark {
-  background: theme-color('primary-blue');
-  border: 0.1875em solid theme-color('primary-blue');
+  background: use-theme('primary-blue');
+  border: 0.1875em solid use-theme('primary-blue');
 }
 
 .key-box {
@@ -87,10 +87,10 @@ const tabID = (context, controlTab) => {
 }
 
 .mid-dark-blue {
-  background-color: theme-color('primary-blue');
+  background-color: use-theme('primary-blue');
 }
 
 .medium-blue {
-  background-color: theme-color('secondary-blue');
+  background-color: use-theme('secondary-blue');
 }
 </style>

@@ -93,18 +93,18 @@ const analytics = useAnalytics();
 
 <style lang="scss" scoped>
 .va-block {
-  background-color: theme-color('primary-blue');
+  background-color: use-theme('primary-blue');
   color: white;
   a {
-    color: theme-color('tertiary-green');
+    color: use-theme('tertiary-green');
   }
 }
 
 .bg-gray {
-  background: theme-color('gray-100');
+  background: use-theme('gray-100');
 }
 
 .bottom-panel {
-  background-color: theme-color('gray-400');
+  background-color: use-theme('gray-400');
 }
 </style>

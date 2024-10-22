@@ -211,12 +211,12 @@
 
 <style lang="scss" scoped>
 .school-heading {
-  background-color: theme-color('primary-aqua');
+  background-color: use-theme('primary-aqua');
 }
 .v-expansion-panel-title--active {
-  background-color: theme-color('yellow-500');
+  background-color: use-theme('yellow-500');
   & + .v-expansion-panel-text {
-    background-color: theme-color('yellow-500');
+    background-color: use-theme('yellow-500');
     .v-expansion-panel-title--active {
       background-color: white;
       & + .v-expansion-panel-text {

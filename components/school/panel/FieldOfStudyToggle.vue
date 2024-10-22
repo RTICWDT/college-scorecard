@@ -70,7 +70,7 @@ const emit = defineEmits(['tab-change', 'update:modelValue'])
 
 <style lang="scss" scoped>
 .fos-sort-toggle-container {
-  background-color: theme-color('gray-100') !important;
+  background-color: use-theme('gray-100') !important;
 }
 
 </style>

@@ -192,7 +192,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .field-of-study-select-search-container {
   .v-field--variant-outlined .v-field__outline {
-    color: theme-color('yellow-600') !important;
+    color: use-theme('yellow-600') !important;
     border-width: 2px;
   }
 }
@@ -202,7 +202,7 @@ onMounted(() => {
   max-height: 400px;
   overflow-y: auto;
   z-index: 8;
-  border: 2px theme-color('yellow-600') solid !important;
+  border: 2px use-theme('yellow-600') solid !important;
   border-top: none !important;
   width: 10%;
 
@@ -222,7 +222,7 @@ onMounted(() => {
 }
 
 .fos-search-text-icon {
-  color: theme-color('yellow-800') !important;
+  color: use-theme('yellow-800') !important;
 }
 
 .field-of-study-search-item-title {

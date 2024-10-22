@@ -204,7 +204,7 @@ onMounted(() => {
   $label-margin: $label-offset + $label-height;
   $label-width: 10em;
 
-  background-color: theme-color('gray-400');
+  background-color: use-theme('gray-400');
   display: block;
   margin-bottom: 0;
   margin-top: 0;
@@ -254,12 +254,12 @@ onMounted(() => {
     &.picc-range-label-middle,
     &.picc-range-label-lower,
     &.picc-range-label-upper {
-      border-left: 3px solid theme-color('secondary-blue');
+      border-left: 3px solid use-theme('secondary-blue');
     }
 
     &.picc-range-label-upper {
       border-left: none;
-      border-right: 3px solid theme-color('secondary-blue');
+      border-right: 3px solid use-theme('secondary-blue');
       span {
         padding-left: 0.25em;
       }

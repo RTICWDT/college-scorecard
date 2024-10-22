@@ -242,7 +242,7 @@ onMounted(() => {
   $bar-width: 100px;
   $arrow-size: 7px;
 
-  background-color: theme-color('gray-200');
+  background-color: use-theme('gray-200');
   display: block;
   margin-bottom: 0;
   margin-top: 0;
@@ -250,7 +250,7 @@ onMounted(() => {
   position: relative;
 
   .picc-range-bar {
-    background-color: theme-color('secondary-blue');
+    background-color: use-theme('secondary-blue');
     height: 100%;
     left: 0;
     position: absolute;

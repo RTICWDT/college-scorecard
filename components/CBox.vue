@@ -717,12 +717,12 @@ ul[role="listbox"] li[role="option"] {
 
 [role="listbox"].focus [role="option"][aria-selected="true"],
 [role="listbox"] [role="option"]:hover {
-  background-color: theme-color('primary-yellow', 0.05);
+  background-color: use-theme('primary-yellow', 0.05);
   padding-top: 0;
   padding-bottom: 0;
   /* border-top: 2px solid currentcolor; */
   /* border-bottom: 2px solid currentcolor; */
-  outline: 1px solid theme-color('primary-yellow');
+  outline: 1px solid use-theme('primary-yellow');
 
 }
 
@@ -745,14 +745,14 @@ ul[role="listbox"] li[role="option"] {
 
 .combobox .input-wrapper:focus-within,
 .combobox .input-wrapper.active {
-  border-color: theme-color('primary-yellow'); /* Darker yellow border for contrast */
-  outline-color: theme-color('primary-yellow');
+  border-color: use-theme('primary-yellow'); /* Darker yellow border for contrast */
+  outline-color: use-theme('primary-yellow');
 }
 
 /* Add this class to the input-wrapper when options are being viewed */
 .combobox .input-wrapper.options-visible {
-  border-color: theme-color('primary-yellow');
-  outline-color: theme-color('primary-yellow');
+  border-color: use-theme('primary-yellow');
+  outline-color: use-theme('primary-yellow');
 }
 
 /* Style for the v-icon */
@@ -765,7 +765,7 @@ ul[role="listbox"] li[role="option"] {
 .combobox .input-wrapper:focus-within .icon,
 .combobox .input-wrapper.active .icon,
 .combobox .input-wrapper.options-visible .icon {
-  color: theme-color('primary-yellow'); /* Match the border color */
+  color: use-theme('primary-yellow'); /* Match the border color */
 }
 
 #cb1-listbox {

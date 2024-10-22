@@ -13,7 +13,7 @@
 }
 
 .splash {
-  background-color: theme-color('primary-aqua') !important;
+  background-color: use-theme('primary-aqua') !important;
   color: white !important;
 }
 

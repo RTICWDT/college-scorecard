@@ -7,10 +7,10 @@ h1 {
   height: 100%;
 }
 .home-splash {
-  background-color: theme-color('primary-aqua') !important;
+  background-color: use-theme('primary-aqua') !important;
 }
 .home-links {
-  background-color: theme-color('gray-100');
+  background-color: use-theme('gray-100');
 }
 .homepage-search-container {
   box-shadow: 0px 10px 16px #0000001a !important;

@@ -58,7 +58,6 @@ export default defineNuxtConfig({
     '@fortawesome/fontawesome-free/css/fontawesome.min.css',
     '@fortawesome/fontawesome-free/css/solid.min.css',
     '@fortawesome/fontawesome-free/css/regular.min.css',
-    '@/assets/scss/style.scss',
   ],
 
   vite: {
@@ -70,7 +69,11 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "~/assets/scss/_breakpoints.scss" as *;\n@import "@/assets/scss/_functions.scss"; @import "~/assets/scss/_variables.scss";',
+          additionalData: `
+            @use "~/assets/scss/_breakpoints.scss" as *;
+            @import "@/assets/scss/_functions.scss";
+            @import "~/assets/scss/_variables.scss";
+          `,
           silenceDeprecations: ['legacy-js-api'],
         },
       },

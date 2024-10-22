@@ -89,7 +89,7 @@
 }
 
 .bg-gray {
-  background: theme-color('gray-100') !important;
+  background: use-theme('gray-100') !important;
 }
 
 .text-black {
@@ -105,7 +105,7 @@
 }
 
 .content-box {
-  border: 1px solid theme-color('gray-200');
+  border: 1px solid use-theme('gray-200');
   border-radius: 10px;
   background-color: white;
   padding: 2rem;
@@ -125,11 +125,11 @@
   font-weight: 100;
 
   &.tag-green {
-    color: theme-color('primary-green');
+    color: use-theme('primary-green');
   }
 
   &.tag-blue {
-    color: theme-color('secondary-blue');
+    color: use-theme('secondary-blue');
   }
 }
 

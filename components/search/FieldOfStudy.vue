@@ -35,7 +35,7 @@
 
 <style scoped lang="scss">
 .subtitle {
-  color: theme-color('gray-600');
+  color: use-theme('gray-600');
 }
 </style>
 

@@ -369,11 +369,11 @@ h2 span {
 }
 
 .home-splash {
-  background-color: theme-color('primary-aqua') !important;
+  background-color: use-theme('primary-aqua') !important;
 }
 
 .home-links {
-  background-color: theme-color('gray-100');
+  background-color: use-theme('gray-100');
 }
 
 .home-search-wrapper {

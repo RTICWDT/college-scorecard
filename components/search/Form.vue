@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
 .search-subhead {
-  color: theme-color('gray-700');
+  color: use-theme('gray-700');
 }
 
 .v-expansion-panel {
@@ -8,7 +8,7 @@
 }
 
 .v-expansion-panel:not(:last-child) {
-  border-bottom: 1px solid theme-color('gray-100');
+  border-bottom: 1px solid use-theme('gray-100');
 }
 
 .v-expansion-panel__shadow {

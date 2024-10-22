@@ -209,11 +209,11 @@ const { fields } = useConstants()
 
 <style lang="scss" scoped>
 .medium-light-blue-text {
-  color: theme-color('secondary-blue');
+  color: use-theme('secondary-blue');
 }
 
 .medium-blue {
-  background-color: theme-color('secondary-blue');
+  background-color: use-theme('secondary-blue');
 }
 
 .key-box {

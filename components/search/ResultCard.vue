@@ -216,7 +216,7 @@ const isSelected = computed(() => store.institutions.find(({ id }) => id == prop
     border-color: #D8DFE8 !important;
     color: black !important;
     &:hover {
-      background: theme-color('secondary-green');
+      background: use-theme('secondary-green');
       color: #fff !important;
     }
   }

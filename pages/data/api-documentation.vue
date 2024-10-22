@@ -435,7 +435,7 @@
 
 <style scoped lang="scss">
 pre {
-  background-color: theme-color('gray-50');
+  background-color: use-theme('gray-50');
   padding: 1rem;
   border-radius: 0.5rem;
   overflow-x: scroll;
@@ -445,7 +445,7 @@ pre {
 
 code {
   word-wrap: break-all;
-  background-color: theme-color('gray-50');
+  background-color: use-theme('gray-50');
   font-size: 0.8rem;
 }
 

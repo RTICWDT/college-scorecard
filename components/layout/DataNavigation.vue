@@ -40,7 +40,7 @@ watch(() => route.path, (newPath) => { tab.value = newPath })
   transition: background-color 0.3s, color 0.3s;
 
   &.v-tab--selected {
-    background-color: theme-color('secondary-green');
+    background-color: use-theme('secondary-green');
     color: white;
     font-weight: bold;
   }
