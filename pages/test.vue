@@ -2,10 +2,10 @@
   <div class="d-flex flex-column align-center justify-center h-100 w-100">
     <!-- <h1 class="navy-text">Test</h1> -->
     <v-container>
-      <Spacer :height="500" />
+      <Spacer :height="100" />
       <v-row>  
         <CBox :items="options" v-model="selectedItem" />
-        <Spacer :height="1000" />
+        <Spacer :height="700" />
       </v-row>
     </v-container>
   </div>

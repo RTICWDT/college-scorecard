@@ -52,7 +52,7 @@
       >
         <li
           v-for="option in filteredOptions"
-          :key="option.id"
+          :key="`${option.id}.${option.title}.${option.subtitle}`"
           :id="option.id"
           role="option"
           :aria-selected="option === selectedOption"
@@ -60,7 +60,6 @@
           @mouseover="onOptionMouseover(option)"
           @mouseout="onOptionMouseout"
           class="pl-3 py-2 pr-3"
-          :class="{ selected: option.title === filter.value }"
         >
           <p class="text-body-1">{{ option.text }}</p>
           <p class="text-body-2 text-gray">{{ option.subtitle }}</p>
@@ -99,7 +98,7 @@ const emit = defineEmits(['selected'])
 const allOptions = ref(props.items)
 const firstOption = computed(() => filteredOptions.value[0] || null)
 const lastOption = computed(() => filteredOptions.value[filteredOptions.value.length - 1] || null)
-const autocomplete = 'list' // Can be 'none', 'list', or 'both'
+const autocomplete = 'list'
 
 
 
@@ -143,15 +142,17 @@ const filteredOptions = computed(() => {
   const cleanedFilter = cleanString(filter.value).toLowerCase();
   if (!cleanedFilter) return allOptions.value;
   
-  const threshold = 0.6;
+  const threshold = 0.5;
   
   const searchTerms = cleanedFilter
     .split(/\s+/)
     .map(term => cleanString(term).toLowerCase())
     .filter(term => term.length > 0);
   
-  return allOptions.value
-    .map(option => {
+  // Calculate scores in a separate array
+  const scoredOptions = allOptions.value.map(option => ({
+    option,
+    score: (() => {
       const cleanText = cleanString(option.text).toLowerCase();
       const cleanSubtitle = cleanString(option.subtitle).toLowerCase();
 
@@ -161,18 +162,19 @@ const filteredOptions = computed(() => {
       const bestTextScore = Math.max(...textScores);
       const bestSubtitleScore = Math.max(...subtitleScores);
       
-      const score = Math.max(bestTextScore * 1.2, bestSubtitleScore);
-      
-      return {
-        ...option,
-        score
-      };
-    })
-    .filter(option => option.score > threshold)
-    .sort((a, b) => b.score - a.score);
+      return Math.max(bestTextScore * 1.5, bestSubtitleScore);
+    })()
+  }));
+  
+  // Filter and sort based on scores, but return original objects
+  const filtered = scoredOptions
+    .filter(item => item.score > threshold)
+    .sort((a, b) => b.score - a.score)
+    .map(item => item.option);
+
+  if (!filtered.length) return allOptions.value;
+  return filtered;
 });
-
-
 
 // Add this computed property for listbox positioning
 const listboxStyle = computed(() => {
@@ -221,7 +223,7 @@ const onComboboxKeyDown = (event) => {
           open()
         } else {
           open()
-          if (listboxHasVisualFocus.value || (autocomplete === 'both' && filteredOptions.value.length > 1)) {
+          if (listboxHasVisualFocus.value) {
             setOption(getNextOption(selectedOption.value), true)
             setVisualFocusListbox()
           } else {
@@ -306,36 +308,30 @@ const onComboboxKeyUp = (event) => {
     case 'ArrowRight':
     case 'Home':
     case 'End':
-      if (autocomplete === 'both') {
-        filter.value = comboboxNode.value.value
-      } else {
-        selectedOption.value = null
-      }
+      selectedOption.value = null
       setVisualFocusCombobox()
       break
     default:
       if (isPrintableCharacter(char)) {
+        console.log('char:', char)
         setVisualFocusCombobox()
-        if (autocomplete !== 'none') {
-          const option = filteredOptions.value[0]
-          if (option) {
-            if (isOpen.value === false && comboboxNode.value.value.length) {
-              open()
-            }
-            if (option.text.toLowerCase().startsWith(comboboxNode.value.value.toLowerCase())) {
-              selectedOption.value = option
-              if (autocomplete === 'both' || listboxHasVisualFocus.value) {
-                setOption(option)
-              }
-            } else {
-              selectedOption.value = null
+        const option = filteredOptions.value[0]
+
+        if (option) {
+          if (isOpen.value === false && comboboxNode.value.value.length) {
+            open()
+          }
+          if (option.text.toLowerCase().startsWith(comboboxNode.value.value.toLowerCase())) {
+            selectedOption.value = option
+            if (listboxHasVisualFocus.value) {
+              setOption(option)
             }
           } else {
-            close()
             selectedOption.value = null
           }
-        } else if (comboboxNode.value.value.length) {
-          open()
+        } else {
+          close()
+          selectedOption.value = null
         }
       }
       break
@@ -425,13 +421,12 @@ const setOption = (option, flag = false) => {
   if (option) {
     selectedOption.value = option
     setActiveDescendant(option)
-    if (autocomplete === 'both') {
-      comboboxNode.value.value = option.text
-      if (flag) {
-        comboboxNode.value.setSelectionRange(option.text.length, option.text.length)
-      } else {
-        comboboxNode.value.setSelectionRange(filter.value.length, option.text.length)
-      }
+
+    comboboxNode.value.value = option.text
+    if (flag) {
+      comboboxNode.value.setSelectionRange(option.text.length, option.text.length)
+    } else {
+      comboboxNode.value.setSelectionRange(filter.value.length, option.text.length)
     }
   }
 }
@@ -702,13 +697,6 @@ ul[role="listbox"] li[role="option"] {
   align-items: center;
   padding: 1rem;
 }
-
-li { 
-  .selected {
-    background-color: yellow;
-  }
-}
-
 
 .combobox .input-wrapper {
   transition: border-color 0.15s ease, outline-color 0.15s ease;
