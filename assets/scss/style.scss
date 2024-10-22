@@ -1,3 +1,14 @@
+// unfortunately scss functions are breaking on build, so I have to dupe css here
+// todo: fix scss functions on build
+$gray-100: '#EAEEF5';
+$gray-200: '#DFE6F0';
+$gray-400: '#C3C9D3';
+$gray-700: '#6C737C';
+$primary-green: '#00700';
+$primary-blue: '#10274E';
+$secondary-blue: '#1570EF';
+
+
 .v-application {
   // VUETIFY OVERRIDES
   .v-btn {
@@ -9,7 +20,7 @@
   .v-pagination {
     button {
       box-shadow: 0px 1px 1px #0000001a !important;
-      border: 1px solid use-theme('gray-100');
+      border: 1px solid $gray-100;
       height: auto;
       padding: 1px 4px;
     }
@@ -24,18 +35,18 @@
 
   .v-card {
     overflow-wrap: normal;
-    border: 1px solid use-theme('gray-200');
+    border: 1px solid $gray-200;
     border-radius: 6px;
   }
 
   .v-chip__close {
-    color: use-theme('primary-green') !important;
+    color: $primary-green !important;
   }
 
 
   // GENERAL OVERRIDES
   font-family: $base-font-family !important;
-  background-color: use-theme('gray-100') !important;
+  background-color: $gray-100 !important;
 
   h1, h2, h3, h4, h5, h6 {
     font-family: $header-font-family !important;
@@ -43,11 +54,11 @@
   }
 
   body, a {
-    color: use-theme('primary-green');
+    color: $primary-green;
   }
 
   hr {
-    border: 1px solid use-theme('gray-200');
+    border: 1px solid $gray-200;
     border-bottom-style: none;
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -93,34 +104,34 @@
   }
   
   .navy-text {
-    color: use-theme('primary-blue');
+    color: $primary-blue;
   }
   
   .medium-light-blue-text {
-    color: use-theme('secondary-blue');
+    color: $secondary-blue;
   }
   
   .data-na {
     padding: 0.5rem;
-    border: 1px dashed use-theme('gray-400');
-    color: use-theme('gray-700');
+    border: 1px dashed $gray-400;
+    color: $gray-700;
     text-align: center;
     margin: 0.8rem 0;
   }
   
   .mini-data-na {
     padding: 0.5rem;
-    color: use-theme('gray-700');
+    color: $gray-700;
     font-size: 0.85rem;
-    border: 1px dashed use-theme('gray-400');
+    border: 1px dashed $gray-400;
   }
   
   a.close-filter {
-    color: use-theme("gray-700") !important;
+    color: $gray-700 !important;
     font-size:14px;
   
     &:active, &:hover {
-      color: use-theme("gray-700");
+      color: $gray-700;
     }
   }
   
