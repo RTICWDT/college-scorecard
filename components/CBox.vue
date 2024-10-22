@@ -62,7 +62,7 @@
           class="pl-3 py-2 pr-3"
         >
           <p class="text-body-1">{{ option.text }}</p>
-          <p class="text-body-2 text-gray">{{ option.subtitle }}</p>
+          <p class="text-body-2 text-darkgrey">{{ option.subtitle }}</p>
         </li>
       </ul>
     </Teleport>
