@@ -597,7 +597,6 @@ onUnmounted(() => {
 
 .combobox .group {
   display: flex;
-  padding: 4px;
   cursor: pointer;
   align-items: center;
 }
@@ -690,7 +689,7 @@ ul[role="listbox"] li[role="option"] {
 }
 
 .combobox .input-wrapper {
-  outline: 2px solid transparent;
+  outline: 1px solid transparent;
   border: 1px solid gray;
   transition: border-color 0.1s, outline-color 0.1s;
   cursor: text;

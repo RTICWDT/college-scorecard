@@ -3,7 +3,8 @@
     <!-- <h1 class="navy-text">Test</h1> -->
     <v-container>
       <Spacer :height="100" />
-      <v-row>  
+      <v-row>
+        <p class="mb-2">Search Field of Study</p>
         <CBox :items="options" v-model="selectedItem" />
         <Spacer :height="700" />
       </v-row>
