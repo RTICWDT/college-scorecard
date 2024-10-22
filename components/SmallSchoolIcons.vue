@@ -167,7 +167,7 @@ const sizeIcon = computed(() => {
 
     .schoolIcon {
       display: block;
-      font-weight: variables.$weight-bold;
+      font-weight: 700;
       padding-bottom: 6px;
     }
 

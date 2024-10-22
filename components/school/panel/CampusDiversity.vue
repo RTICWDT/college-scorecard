@@ -216,10 +216,6 @@ const { fields } = useConstants()
   // background-color: variables.$medium-blue;
 }
 
-.mid-dark-blue {
-  // background-color: variables.$mid-dark-blue;
-}
-
 .key-box {
   display: inline-block;
   width: 20px;

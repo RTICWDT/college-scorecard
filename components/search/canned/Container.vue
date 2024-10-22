@@ -1,6 +1,5 @@
 <template>
   <div
-    id="search-can-query-items-wrapper"
     role="group"
     class="group_checkbox"
     aria-checked="mixed"

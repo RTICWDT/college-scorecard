@@ -248,7 +248,7 @@
                 <Spacer :height="10" />
 
                 <div class="d-flex flex-column flex-md-row align-start align-md-center w-100">
-                  <div class="d-flex flex-grow-1">
+                  <div class="d-flex flex-column flex-sm-row pb-4 pb-sm-0 flex-grow-1">
                     <!-- RESET FILTERS -->
                     <v-btn
                       id="search-button-clear"
@@ -259,7 +259,7 @@
                     >
                       <span>
                         <v-icon small class="mr-1">mdi-close-circle</v-icon>
-                        Reset{{ smAndDown ? '' : " Filters" }}
+                        Reset Filters
                       </span>
                     </v-btn>
 
@@ -269,7 +269,7 @@
                         <v-btn
                           id="search-button-sort"
                           size="small"
-                          class="mr-1 mb-2 searchbtn"
+                          class="mr-1 mb-2"
                           elevation="2"
                           v-bind="props"
                         >

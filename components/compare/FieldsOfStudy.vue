@@ -200,4 +200,10 @@ const groupFieldsOfStudy = (fosResults) => {
 .remove-btn {
   align-self: center;
 }
+
+.fos-uppercase-credential-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+}
 </style>

@@ -7,7 +7,7 @@
       aria-label="More Information"
       color="transparent"
     >
-      <span class="sr-only">More Information</span>
+      <span class="d-none">More Information</span>
       <v-icon icon="fa:fas fa-info-circle"></v-icon>
     </v-btn>
 

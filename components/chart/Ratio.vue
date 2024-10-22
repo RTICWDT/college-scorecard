@@ -34,14 +34,6 @@ const tabID = (context, controlTab) => {
       : "compare-tab-inactive"
   }
 }
-
-onMounted(() => {
-  // Uncomment if you still need this functionality
-  // const prevElement = document.querySelector('#context-toggle .v-slide-group .v-slide-group__prev')
-  // const nextElement = document.querySelector('#context-toggle .v-slide-group .v-slide-group__next')
-  // if (prevElement) prevElement.remove()
-  // if (nextElement) nextElement.remove()
-})
 </script>
 
 <style lang="scss" scoped>
@@ -85,5 +77,20 @@ onMounted(() => {
 .dark {
   background: variables.$medium-dark-blue;
   border: 0.1875em solid variables.$medium-dark-blue;
+}
+
+.key-box {
+  margin-right: 10px;
+  height: 10px;
+  width: 10px;
+  display: inline-block;
+}
+
+.mid-dark-blue {
+  background-color: variables.$medium-dark-blue;
+}
+
+.medium-blue {
+  background-color: variables.$medium-blue;
 }
 </style>
