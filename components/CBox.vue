@@ -110,11 +110,32 @@ const cleanString = (str) => {
 function calculateStringSimilarity(str1, str2) {
   // Skip empty strings
   if (!str1 || !str2) return 0;
+  
   // Exact match
   if (str1 === str2) return 1;
-  // Contains as substring
-  if (str1.includes(str2) || str2.includes(str1)) return 0.8;
-  // Calculate Levenshtein distance
+  
+  // Word boundary match (e.g., "physics" as a complete word)
+  const wordBoundaryRegex = new RegExp(`\\b${str2}\\b`, 'i');
+  if (wordBoundaryRegex.test(str1)) return 0.95;
+  
+  // Start of word match (e.g., "physics" at start of word)
+  const startOfWordRegex = new RegExp(`\\b${str2}`, 'i');
+  if (startOfWordRegex.test(str1)) return 0.9;
+  
+  // Contains as exact substring (case-insensitive)
+  if (str1.toLowerCase().includes(str2.toLowerCase())) {
+    // Prefer matches closer to the start of the string
+    const position = str1.toLowerCase().indexOf(str2.toLowerCase());
+    const positionPenalty = position / str1.length * 0.1; // Small penalty for later positions
+    return 0.8 - positionPenalty;
+  }
+  
+  // If str2 contains str1, it's a less relevant match
+  if (str2.toLowerCase().includes(str1.toLowerCase())) {
+    return 0.6;
+  }
+  
+  // Calculate Levenshtein distance for fuzzy matching
   const matrix = Array(str2.length + 1).fill().map(() => Array(str1.length + 1).fill(0));
   
   for (let i = 0; i <= str1.length; i++) matrix[0][i] = i;
@@ -122,18 +143,22 @@ function calculateStringSimilarity(str1, str2) {
   
   for (let j = 1; j <= str2.length; j++) {
     for (let i = 1; i <= str1.length; i++) {
-      const cost = str1[i - 1] === str2[j - 1] ? 0 : 1;
+      const cost = str1[i - 1].toLowerCase() === str2[j - 1].toLowerCase() ? 0 : 1;
       matrix[j][i] = Math.min(
-        matrix[j][i - 1] + 1,
-        matrix[j - 1][i] + 1,
-        matrix[j - 1][i - 1] + cost
+        matrix[j][i - 1] + 1,      // deletion
+        matrix[j - 1][i] + 1,      // insertion
+        matrix[j - 1][i - 1] + cost // substitution
       );
     }
   }
   
+  // Calculate similarity score with length penalty
   const maxLength = Math.max(str1.length, str2.length);
   const distance = matrix[str2.length][str1.length];
-  return 1 - (distance / maxLength);
+  const lengthDifference = Math.abs(str1.length - str2.length);
+  const lengthPenalty = lengthDifference / maxLength * 0.1; // Penalty for length difference
+  
+  return Math.max(0, (1 - (distance / maxLength)) - lengthPenalty);
 }
 
 const filteredOptions = computed(() => {
@@ -156,13 +181,21 @@ const filteredOptions = computed(() => {
       const cleanText = cleanString(option.text).toLowerCase();
       const cleanSubtitle = cleanString(option.subtitle).toLowerCase();
 
+      // Calculate scores for each search term
       const textScores = searchTerms.map(term => calculateStringSimilarity(cleanText, term));
       const subtitleScores = searchTerms.map(term => calculateStringSimilarity(cleanSubtitle, term));
       
+      // Get the best match score for each field
       const bestTextScore = Math.max(...textScores);
       const bestSubtitleScore = Math.max(...subtitleScores);
       
-      return Math.max(bestTextScore * 1.5, bestSubtitleScore);
+      const weights = {
+        text: 0.7,       // Primary text carries 70% of the weight
+        subtitle: 0.3    // Subtitle carries 30% of the weight
+      };
+
+      // Noramlized return
+      return (bestTextScore * weights.text) + (bestSubtitleScore * weights.subtitle);
     })()
   }));
   
